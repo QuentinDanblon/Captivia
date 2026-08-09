@@ -3,29 +3,31 @@ import {
   UnauthorizedException,
   ConflictException,
   BadRequestException,
+  Logger,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
 import * as nodemailer from 'nodemailer';
 import { PrismaService } from '../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
+import { isOperatorEmail } from '../common/operators';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 
-/** Email(s) de l’opérateur : accès complet sans abonnement (comparaison insensible à la casse). */
-const OPERATOR_EMAILS = (process.env.OPERATOR_EMAILS || process.env.OPERATOR_EMAIL || '')
-  .split(',')
-  .map((e) => e.trim().toLowerCase())
-  .filter(Boolean);
-
+/**
+ * Premium effectif : abonnement actif OU email d'opérateur (OPERATOR_EMAILS,
+ * comparaison insensible à la casse — logique centralisée dans common/operators.ts).
+ */
 function effectivePremium(user: { email: string; isPremium: boolean }): boolean {
   if (user.isPremium) return true;
-  const email = (user.email || '').trim().toLowerCase();
-  return OPERATOR_EMAILS.some((op) => op === email);
+  return isOperatorEmail(user.email);
 }
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
@@ -46,14 +48,26 @@ export class AuthService {
     // Hash password
     const passwordHash = await bcrypt.hash(password, 10);
 
-    // Create user
-    const user = await this.prisma.user.create({
-      data: {
-        email,
-        passwordHash,
-        locale: locale || 'fr',
-      },
-    });
+    // Create user (P2002 = email déjà pris en cas de course entre deux
+    // inscriptions simultanées : le findUnique ci-dessus ne suffit pas)
+    let user;
+    try {
+      user = await this.prisma.user.create({
+        data: {
+          email,
+          passwordHash,
+          locale: locale || 'fr',
+        },
+      });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw new ConflictException('Email already registered');
+      }
+      throw error;
+    }
 
     // Generate JWT
     const payload = { sub: user.id, email: user.email };
@@ -211,7 +225,10 @@ export class AuthService {
         html: `<p>Bonjour,</p><p>Cliquez sur le lien suivant pour réinitialiser votre mot de passe :</p><p><a href="${resetLink}">${resetLink}</a></p><p>Ce lien expire dans 1 heure.</p><p>L'équipe Captivia</p>`,
       });
     } else {
-      console.log('[Captivia] Password reset link (no SMTP configured):', resetLink);
+      // A NE PAS FAIRE EN PROD - le lien doit passer par email (fallback dev sans SMTP).
+      this.logger.warn(
+        `[PASSWORD_RESET] Lien de réinitialisation (MAIL_HOST non configuré) : ${resetLink}`,
+      );
     }
   }
 }

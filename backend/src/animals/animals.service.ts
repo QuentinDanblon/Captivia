@@ -1,10 +1,20 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+  BadRequestException,
+} from '@nestjs/common';
 import { randomBytes } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAnimalDto, UpdateAnimalDto } from './dto/animal.dto';
 import { ensureAnimalOwnership } from '../common/helpers/ownership.helper';
 
 const FREE_ANIMAL_LIMIT = 1;
+
+/** Sous-ensemble de PrismaService/transaction exposant animal.findUnique (parenté). */
+type AnimalDelegate = { animal: { findUnique: (args: { where: { id: string } }) => Promise<{ userId: string; sex: string | null } | null> } };
+
+const PARENT_SELECT = { id: true, name: true, sex: true, photos: true } as const;
 
 @Injectable()
 export class AnimalsService {
@@ -27,6 +37,28 @@ export class AnimalsService {
         );
       }
 
+      // Module F — validation parenté (existence, même propriétaire, sexe)
+      if (createAnimalDto.fatherId !== undefined && createAnimalDto.fatherId !== null) {
+        await this.validateParent(
+          tx,
+          createAnimalDto.fatherId,
+          userId,
+          null,
+          'male',
+          'father',
+        );
+      }
+      if (createAnimalDto.motherId !== undefined && createAnimalDto.motherId !== null) {
+        await this.validateParent(
+          tx,
+          createAnimalDto.motherId,
+          userId,
+          null,
+          'female',
+          'mother',
+        );
+      }
+
       return tx.animal.create({
         data: {
           userId,
@@ -38,6 +70,13 @@ export class AnimalsService {
           sex: createAnimalDto.sex || null,
           photos: createAnimalDto.photos || [],
           notes: createAnimalDto.notes || null,
+          fatherId: createAnimalDto.fatherId ?? null,
+          motherId: createAnimalDto.motherId ?? null,
+          groupName: createAnimalDto.groupName ?? null,
+        },
+        include: {
+          father: { select: PARENT_SELECT },
+          mother: { select: PARENT_SELECT },
         },
       });
     });
@@ -51,6 +90,8 @@ export class AnimalsService {
           where: { active: true },
           orderBy: { createdAt: 'desc' },
         },
+        father: { select: PARENT_SELECT },
+        mother: { select: PARENT_SELECT },
         _count: {
           select: {
             routines: true,
@@ -73,6 +114,8 @@ export class AnimalsService {
           orderBy: { doneAt: 'desc' },
           take: 50,
         },
+        father: { select: PARENT_SELECT },
+        mother: { select: PARENT_SELECT },
       },
     });
 
@@ -97,6 +140,9 @@ export class AnimalsService {
       sex: string | null;
       photos: string[];
       notes: string | null;
+      fatherId: string | null;
+      motherId: string | null;
+      groupName: string | null;
     }> = {};
 
     if (updateAnimalDto.speciesId !== undefined) {
@@ -120,10 +166,104 @@ export class AnimalsService {
       updateData.notes = updateAnimalDto.notes;
     }
 
+    // Module F — parenté : validation avant écriture (null = effacer le lien)
+    if (updateAnimalDto.fatherId !== undefined) {
+      if (updateAnimalDto.fatherId !== null) {
+        await this.validateParent(
+          this.prisma,
+          updateAnimalDto.fatherId,
+          userId,
+          id,
+          'male',
+          'father',
+        );
+      }
+      updateData.fatherId = updateAnimalDto.fatherId;
+    }
+    if (updateAnimalDto.motherId !== undefined) {
+      if (updateAnimalDto.motherId !== null) {
+        await this.validateParent(
+          this.prisma,
+          updateAnimalDto.motherId,
+          userId,
+          id,
+          'female',
+          'mother',
+        );
+      }
+      updateData.motherId = updateAnimalDto.motherId;
+    }
+    if (updateAnimalDto.groupName !== undefined) {
+      updateData.groupName = updateAnimalDto.groupName ?? null;
+    }
+
     return this.prisma.animal.update({
       where: { id },
       data: updateData,
+      include: {
+        father: { select: PARENT_SELECT },
+        mother: { select: PARENT_SELECT },
+      },
     });
+  }
+
+  /** Module F — portée : animaux dont fatherId ou motherId == id. */
+  async getOffspring(id: string, userId: string) {
+    await ensureAnimalOwnership(this.prisma, id, userId);
+
+    return this.prisma.animal.findMany({
+      where: { userId, OR: [{ fatherId: id }, { motherId: id }] },
+      select: {
+        id: true,
+        name: true,
+        sex: true,
+        birthDate: true,
+        photos: true,
+        fatherId: true,
+        motherId: true,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  /**
+   * Module F — valide un parent potentiel :
+   * - ne doit pas être l'animal lui-même (400)
+   * - doit exister ET appartenir au même utilisateur (400)
+   * - cohérence de sexe : père → male, mère → female (400 si sexe connu et
+   *   différent ; 'unknown' / null accepté)
+   */
+  private async validateParent(
+    prisma: AnimalDelegate,
+    parentId: string,
+    ownerId: string,
+    animalId: string | null,
+    expectedSex: 'male' | 'female',
+    role: 'father' | 'mother',
+  ): Promise<void> {
+    if (animalId !== null && parentId === animalId) {
+      throw new BadRequestException('An animal cannot be its own parent');
+    }
+
+    const parent = await prisma.animal.findUnique({
+      where: { id: parentId },
+    });
+
+    if (!parent || parent.userId !== ownerId) {
+      throw new BadRequestException('Parent must belong to the same owner');
+    }
+
+    if (
+      parent.sex &&
+      parent.sex !== 'unknown' &&
+      parent.sex !== expectedSex
+    ) {
+      throw new BadRequestException(
+        role === 'father'
+          ? 'Father must be a male animal'
+          : 'Mother must be a female animal',
+      );
+    }
   }
 
   async remove(id: string, userId: string) {

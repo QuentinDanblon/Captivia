@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { SpeciesController } from './species.controller';
 import { SpeciesService } from './species.service';
 import { SpeciesProfileService } from './species-profile.service';
+import { AdvancedSearchController } from './advanced-search.controller';
+import { AdvancedSearchService } from './advanced-search.service';
+import { DataValidatorService } from '../external/data-validator';
 import { WikipediaService } from '../external/wikipedia/wikipedia.service';
 import { WikidataService } from '../external/wikidata/wikidata.service';
 import { CacheModule } from '../cache/cache.module';
@@ -14,8 +17,16 @@ import { PrismaModule } from '../prisma/prisma.module';
 
 @Module({
   imports: [CacheModule, TransformerModule, FilterModule, ExternalModule, GatewayModule, PrismaModule],
-  controllers: [SpeciesController],
-  providers: [SpeciesService, SpeciesProfileService, WikipediaService, WikidataService, RateLimitGuard],
+  controllers: [SpeciesController, AdvancedSearchController],
+  providers: [
+    SpeciesService,
+    SpeciesProfileService,
+    WikipediaService,
+    WikidataService,
+    RateLimitGuard,
+    AdvancedSearchService,
+    DataValidatorService,
+  ],
   exports: [SpeciesService, SpeciesProfileService],
 })
 export class SpeciesModule {}

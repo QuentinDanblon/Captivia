@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
 
@@ -18,6 +18,7 @@ interface SpeciesPlusResponse {
 
 @Injectable()
 export class SpeciesPlusService {
+  private readonly logger = new Logger(SpeciesPlusService.name);
   private readonly baseUrl = 'https://api.speciesplus.net/api/v1';
   private readonly apiToken = process.env.SPECIESPLUS_API_TOKEN || '';
   private readonly cachePrefix = 'speciesplus:';

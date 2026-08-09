@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
 
@@ -17,6 +17,7 @@ interface PetFoodProduct {
 
 @Injectable()
 export class OpenPetFoodFactsService {
+  private readonly logger = new Logger(OpenPetFoodFactsService.name);
   private readonly baseUrl = 'https://world.openpetfoodfacts.org/api/v2';
   private readonly cachePrefix = 'opff:';
 

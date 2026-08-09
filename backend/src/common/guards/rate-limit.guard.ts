@@ -1,9 +1,18 @@
-import { Injectable, CanActivate, ExecutionContext, Logger } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { ThrottlerModuleOptions } from '@nestjs/throttler';
-import { Request, Response } from 'express';
-import { RateLimiterRedis, RateLimiterMemory } from 'rate-limiter-flexible';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  Logger,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
+import {
+  RateLimiterRedis,
+  RateLimiterMemory,
+  RateLimiterRes,
+} from 'rate-limiter-flexible';
 import Redis from 'ioredis';
+import { Request, Response } from 'express';
 
 /** Same consume result shape for Redis and Memory limiters */
 interface RateLimitResult {
@@ -18,7 +27,7 @@ interface RateLimitResult {
 class RedisRateLimiter {
   private limiter: RateLimiterRedis;
 
-  constructor() {
+  constructor(points: number, duration: number) {
     const redis = new Redis({
       host: process.env.REDIS_HOST || 'localhost',
       port: parseInt(process.env.REDIS_PORT || '6379', 10),
@@ -29,8 +38,8 @@ class RedisRateLimiter {
     this.limiter = new RateLimiterRedis({
       storeClient: redis,
       keyPrefix: 'rate-limit',
-      points: 100,
-      duration: 60,
+      points,
+      duration,
     });
   }
 
@@ -45,11 +54,11 @@ class RedisRateLimiter {
 class MemoryRateLimiter {
   private limiter: RateLimiterMemory;
 
-  constructor() {
+  constructor(points: number, duration: number) {
     this.limiter = new RateLimiterMemory({
       keyPrefix: 'rate-limit',
-      points: 100,
-      duration: 60,
+      points,
+      duration,
     });
   }
 
@@ -59,56 +68,106 @@ class MemoryRateLimiter {
 }
 
 /**
- * Custom rate limiting guard with IP-based tracking.
+ * Base rate limiting guard with IP-based tracking.
  * Uses Redis when REDIS_ENABLED=true, otherwise in-memory (no Redis connection).
  */
-@Injectable()
-export class RateLimitGuard implements CanActivate {
-  private readonly logger = new Logger(RateLimitGuard.name);
-  private readonly rateLimiter: RedisRateLimiter | MemoryRateLimiter =
-    process.env.REDIS_ENABLED === 'true' ? new RedisRateLimiter() : new MemoryRateLimiter();
+abstract class BaseRateLimitGuard implements CanActivate {
+  private readonly logger = new Logger('RateLimitGuard');
+  private readonly rateLimiter: RedisRateLimiter | MemoryRateLimiter;
+
+  protected constructor(
+    protected readonly points: number,
+    protected readonly duration: number,
+  ) {
+    this.rateLimiter =
+      process.env.REDIS_ENABLED === 'true'
+        ? new RedisRateLimiter(points, duration)
+        : new MemoryRateLimiter(points, duration);
+  }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    const request = context.switchToHttp().getRequest<Request>();
+    const response = context.switchToHttp().getResponse<Response>();
+
+    const ip = this.getClientIp(request);
+
     try {
-      const request = context.switchToHttp().getRequest<Request>();
-      const response = context.switchToHttp().getResponse<Response>();
-
-      const ip = this.getClientIp(request);
-
       // Consume rate limit tokens
       const result = await this.rateLimiter.consume(ip);
 
       // Add rate limit headers
-      response.setHeader('X-RateLimit-Limit', '100');
-      response.setHeader('X-RateLimit-Remaining', result.remainingPoints.toString());
-      response.setHeader('X-RateLimit-Reset', Math.ceil((Date.now() + result.msBeforeNext) / 1000));
+      response.setHeader('X-RateLimit-Limit', String(this.points));
+      response.setHeader(
+        'X-RateLimit-Remaining',
+        String(result.remainingPoints),
+      );
+      response.setHeader(
+        'X-RateLimit-Reset',
+        Math.ceil((Date.now() + result.msBeforeNext) / 1000).toString(),
+      );
 
       return true;
     } catch (error) {
-      this.logger.warn(`Rate limit exceeded for IP: ${error}`);
-      throw error;
+      // Dépassement de limite : renvoyer une vraie 429 avec Retry-After
+      // (au lieu de laisser l'erreur brute du limiter remonter en 500).
+      const msBeforeNext =
+        error instanceof RateLimiterRes
+          ? error.msBeforeNext
+          : this.duration * 1000;
+      const retryAfter = Math.max(1, Math.ceil(msBeforeNext / 1000));
+
+      this.logger.warn(
+        `Rate limit exceeded for IP ${ip} (${this.points}/${this.duration}s) — Retry-After: ${retryAfter}s`,
+      );
+
+      response.setHeader('Retry-After', String(retryAfter));
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.TOO_MANY_REQUESTS,
+          message: 'Trop de requêtes. Veuillez réessayer plus tard.',
+          retryAfter,
+        },
+        HttpStatus.TOO_MANY_REQUESTS,
+      );
     }
   }
 
   /**
-   * Get client IP from request
+   * Get client IP from request.
+   *
+   * Utilise request.ip, qui respecte le réglage Express 'trust proxy' défini dans main.ts :
+   *  - sans proxy : adresse socket directe (remoteAddress) ;
+   *  - derrière un proxy de confiance (TRUST_PROXY=true) : Express extrait la vraie IP client
+   *    depuis X-Forwarded-For (entrée la plus à droite, ajoutée par le proxy — non spoofable).
+   * On ne lit JAMAIS directement le header X-Forwarded-For fourni par le client :
+   * un attaquant pourrait le forger pour contourner la limite.
    */
   private getClientIp(request: Request): string {
-    // Check for forwarded headers
-    const forwarded = request.headers['x-forwarded-for'] as string | string[] | undefined;
-    if (forwarded) {
-      const ipArray = Array.isArray(forwarded) ? forwarded : [forwarded];
-      return ipArray[0].trim();
-    }
+    const ip =
+      request.ip ||
+      request.socket?.remoteAddress ||
+      request.connection?.remoteAddress;
+    return ip || 'unknown';
+  }
+}
 
-    // Check for proxy headers
-    const realIp = request.headers['x-real-ip'] as string | string[] | undefined;
-    if (realIp) {
-      const ip = Array.isArray(realIp) ? realIp[0] : realIp;
-      return ip;
-    }
+/**
+ * Rate limiting par défaut : 100 requêtes / 60 s par IP.
+ */
+@Injectable()
+export class RateLimitGuard extends BaseRateLimitGuard {
+  constructor() {
+    super(100, 60);
+  }
+}
 
-    // Fallback to direct IP
-    return request.socket?.remoteAddress || request.connection?.remoteAddress || 'unknown';
+/**
+ * Rate limiting strict pour les routes sensibles (auth : login, register, forgot-password) :
+ * 10 requêtes / 60 s par IP.
+ */
+@Injectable()
+export class AuthRateLimitGuard extends BaseRateLimitGuard {
+  constructor() {
+    super(10, 60);
   }
 }

@@ -35,7 +35,7 @@ export function LanguageSelector() {
     <select
       value={locale}
       onChange={(e) => handleChange(e.target.value)}
-      className="px-2 sm:px-3 py-1.5 sm:py-2 border rounded-md bg-white dark:bg-gray-800 text-xs sm:text-sm min-w-0 max-w-[120px] sm:max-w-none"
+      className="captivia-language-select"
       aria-label={t('language')}
     >
       {locales.map((loc) => (

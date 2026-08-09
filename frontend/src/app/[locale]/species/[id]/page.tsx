@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { api } from '@/lib/api';
+import { api, type SpeciesReproduction } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
 import * as Tabs from '@radix-ui/react-tabs';
 import Link from 'next/link';
@@ -188,6 +188,7 @@ export default function SpeciesDetailPage({
   const [legislation, setLegislation] = useState<LegislationData | null>(null);
   const [equipment, setEquipment] = useState<EquipmentData | null>(null);
   const [food, setFood] = useState<FoodProduct[]>([]);
+  const [reproduction, setReproduction] = useState<SpeciesReproduction | null>(null);
   const [loading, setLoading] = useState(true);
   const [foodLoading, setFoodLoading] = useState(false);
   const [foodError, setFoodError] = useState<string | null>(null);
@@ -206,18 +207,20 @@ export default function SpeciesDetailPage({
     const fetchData = async () => {
       setError(null);
       try {
-        const [speciesData, healthData, legislationData, equipmentData] =
+        const [speciesData, healthData, legislationData, equipmentData, reproductionData] =
           await Promise.all([
             api.getSpecies(resolvedParams.id),
             api.getSpeciesHealth(resolvedParams.id, undefined, resolvedParams.locale).catch(() => null),
             api.getSpeciesLegislation(resolvedParams.id).catch(() => null),
             api.getRecommendedEquipment(parseInt(resolvedParams.id)).catch(() => null),
+            api.getSpeciesReproduction(resolvedParams.id).catch(() => null),
           ]);
 
         setSpecies(speciesData as any);
         setHealth(healthData as HealthData | null);
         setLegislation(legislationData as LegislationData | null);
         setEquipment(equipmentData as EquipmentData | null);
+        setReproduction(reproductionData as SpeciesReproduction | null);
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
         if (message === 'Species not found' || message.includes('not found')) {
@@ -270,6 +273,30 @@ export default function SpeciesDetailPage({
       permit_required: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
     };
     return colors[status || ''] || 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
+  };
+
+  const getBreedingDifficultyLabel = (difficulty?: string | null): string => {
+    if (!difficulty) return '-';
+    const labels: Record<string, string> = {
+      easy: t('species.reproduction.easy'),
+      moderate: t('species.reproduction.moderate'),
+      advanced: t('species.reproduction.advanced'),
+    };
+    return labels[difficulty] || difficulty;
+  };
+
+  const hasReproductionData = (r: SpeciesReproduction | null): boolean => {
+    if (!r) return false;
+    return !!(
+      r.season ||
+      r.gestationDays != null ||
+      r.incubationDays != null ||
+      r.litterSizeMin != null ||
+      r.litterSizeMax != null ||
+      r.sexualMaturityMonths != null ||
+      r.breedingDifficulty ||
+      r.notes
+    );
   };
 
   const handleAddToMyAnimals = () => {
@@ -605,6 +632,83 @@ export default function SpeciesDetailPage({
                         Compatibilité
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.behavior.compatibility}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Reproduction (Module B) - affiché uniquement si données disponibles */}
+            {hasReproductionData(reproduction) && (
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 text-gray-800 dark:text-white">
+                  {t('species.reproduction.title')}
+                </h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {reproduction!.season && (
+                    <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+                      <h3 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-2">
+                        {t('species.reproduction.season')}
+                      </h3>
+                      <p className="text-gray-700 dark:text-gray-300">{reproduction!.season}</p>
+                    </div>
+                  )}
+                  {reproduction!.gestationDays != null && (
+                    <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                      <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
+                        {t('species.reproduction.gestationDays')}
+                      </h3>
+                      <p className="text-gray-700 dark:text-gray-300">{reproduction!.gestationDays}</p>
+                    </div>
+                  )}
+                  {reproduction!.incubationDays != null && (
+                    <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                      <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
+                        {t('species.reproduction.incubationDays')}
+                      </h3>
+                      <p className="text-gray-700 dark:text-gray-300">{reproduction!.incubationDays}</p>
+                    </div>
+                  )}
+                  {(reproduction!.litterSizeMin != null || reproduction!.litterSizeMax != null) && (
+                    <div className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                      <h3 className="font-semibold text-orange-800 dark:text-orange-200 mb-2">
+                        {t('species.reproduction.litterSize')}
+                      </h3>
+                      <p className="text-gray-700 dark:text-gray-300">
+                        {reproduction!.litterSizeMin != null ? reproduction!.litterSizeMin : '?'}
+                        {reproduction!.litterSizeMax != null &&
+                        reproduction!.litterSizeMax !== reproduction!.litterSizeMin
+                          ? ` - ${reproduction!.litterSizeMax}`
+                          : ''}
+                      </p>
+                    </div>
+                  )}
+                  {reproduction!.sexualMaturityMonths != null && (
+                    <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                      <h3 className="font-semibold text-purple-800 dark:text-purple-200 mb-2">
+                        {t('species.reproduction.sexualMaturity')}
+                      </h3>
+                      <p className="text-gray-700 dark:text-gray-300">
+                        {reproduction!.sexualMaturityMonths} {t('species.reproduction.months')}
+                      </p>
+                    </div>
+                  )}
+                  {reproduction!.breedingDifficulty && (
+                    <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
+                      <h3 className="font-semibold text-red-800 dark:text-red-200 mb-2">
+                        {t('species.reproduction.difficulty')}
+                      </h3>
+                      <p className="text-gray-700 dark:text-gray-300">
+                        {getBreedingDifficultyLabel(reproduction!.breedingDifficulty)}
+                      </p>
+                    </div>
+                  )}
+                  {reproduction!.notes && (
+                    <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg md:col-span-2 lg:col-span-3">
+                      <h3 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
+                        {t('species.reproduction.notes')}
+                      </h3>
+                      <p className="text-gray-700 dark:text-gray-300">{reproduction!.notes}</p>
                     </div>
                   )}
                 </div>

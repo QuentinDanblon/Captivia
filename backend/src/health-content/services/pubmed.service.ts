@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
 
@@ -14,6 +14,7 @@ interface PubMedArticle {
 
 @Injectable()
 export class PubmedService {
+  private readonly logger = new Logger(PubmedService.name);
   private readonly baseUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils';
   private readonly cachePrefix = 'pubmed:';
 

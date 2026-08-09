@@ -80,40 +80,63 @@ frontend/
 
 ## 🚀 Démarrage Rapide
 
-### Prérequis
-- Node.js 18+
-- PostgreSQL 14+
-- Redis (optionnel)
+### Option recommandée : Docker Compose
 
-### Installation
+Docker Desktop est la seule dépendance. La même commande fonctionne sur Windows, macOS et Linux :
 
 ```bash
 # 1. Cloner le repo
 git clone <repo-url>
 cd Captivia
 
-# 2. Backend setup
-cd backend
-cp .env.example .env
-# Éditer .env avec DATABASE_URL et JWT_SECRET
-npx prisma generate
-npx prisma migrate dev --name init
-npm install
-npm run start:dev
+# 2. Créer la configuration locale
+# macOS/Linux : cp .env.example .env
+# Windows     : copy .env.example .env
 
-# 3. Frontend setup (nouveau terminal)
-cd ../frontend
-npm install
-echo "NEXT_PUBLIC_API_URL=http://localhost:3000" > .env.local
-npm run dev:local
+# 3. Construire et démarrer PostgreSQL, les migrations, le backend et le frontend
+docker compose up --build -d
 ```
 
-**URLs:**
-- Backend: http://localhost:3000
-- Frontend: http://localhost:3001
-- API Docs: http://localhost:3000/api (Swagger)
+**URLs Docker :**
+- Frontend : http://localhost:3000
+- Backend : http://localhost:3001
+- Healthcheck : http://localhost:3001/health
 
-Voir [DEPLOYMENT.md](DEPLOYMENT.md) pour guide détaillé.
+Commandes utiles :
+
+```bash
+docker compose ps
+docker compose logs -f backend
+# Après l'ajout de nouvelles migrations :
+docker compose run --rm migrate
+docker compose down
+# Supprime aussi les données PostgreSQL :
+docker compose down -v
+```
+
+### Installation native (facultative)
+
+Pour développer sans Docker :
+
+```bash
+# Backend
+cd backend
+cp .env.example .env
+npm install
+npx prisma generate
+npx prisma migrate dev
+npm run start:dev
+
+# Frontend, dans un autre terminal
+cd ../frontend
+npm install
+npm run dev
+```
+
+**URLs natives :** frontend `http://localhost:3000`, backend `http://localhost:3001`.
+
+Voir la section [📦 Déploiement Docker](#-déploiement-docker) pour les ports personnalisés et les variables d'environnement.
+
 
 ---
 
@@ -241,7 +264,7 @@ Voir [prisma/schema.prisma](backend/prisma/schema.prisma)
 - `/users/me/push-subscriptions` - Push (3 endpoints)
 - `/users/me/notification-preferences` - Préférences (2 endpoints)
 
-Voir la doc Swagger: `http://localhost:3000/api`
+Voir l'endpoint de santé : `http://localhost:3001/health`
 
 ---
 
@@ -269,37 +292,170 @@ Voir [TESTING_CHECKLIST.md](TESTING_CHECKLIST.md) pour la liste complète des te
 **Tests rapides:**
 ```bash
 # Health check
-curl http://localhost:3000/monitoring/health
+curl http://localhost:3001/health
 
 # Search species
-curl "http://localhost:3000/species/search?q=boa"
+curl "http://localhost:3001/species/search?q=boa"
 
 # Register user
-curl -X POST http://localhost:3000/auth/register \
+curl -X POST http://localhost:3001/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"test@captivia.com","password":"password123"}'
 
 # Search food
-curl "http://localhost:3000/food/search?q=dog+food"
+curl "http://localhost:3001/food/search?q=dog+food"
 ```
 
 ---
 
-## 📦 Déploiement
+## 💾 Backup & Restauration
 
-### Production
+Scripts de sauvegarde / restauration de la base PostgreSQL (`captivia`) — dumps gzip + rotation automatique.
 
-**Backend:**
-- Heroku, Railway, ou VPS
-- PostgreSQL managed (Supabase, Neon)
-- Redis Cloud (optionnel)
+### Sauvegarde
 
-**Frontend:**
-- Vercel (recommandé pour Next.js)
-- Netlify
-- CloudFlare Pages
+```bash
+./scripts/backup-db.sh
+```
 
-**Mobile:**
+- Produit `backups/captivia-YYYYMMDD-HHMMSS.sql.gz` (dump PostgreSQL compressé).
+- Utilise `docker compose exec postgres pg_dump` si la stack tourne, sinon `pg_dump` local avec `DATABASE_URL` fournie explicitement.
+- Rotation : seuls les **14** dumps les plus récents sont conservés (`KEEP=14` dans le script).
+- Cron (quotidien à 2 h) :
+
+```cron
+0 2 * * * cd /chemin/vers/captivia && ./scripts/backup-db.sh >> backups/backup.log 2>&1
+```
+
+### Restauration
+
+```bash
+# (recommandé) base propre avant restauration :
+docker compose exec -T postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
+# puis :
+./scripts/restore-db.sh backups/captivia-20260809-020000.sql.gz
+```
+
+⚠️ La restauration écrase les données actuelles — une confirmation interactive est demandée.
+
+### Test de restauration recommandé
+
+Un backup jamais testé n'est pas un backup : vérifiez régulièrement qu'un dump est restaurable, par exemple dans une base jetable :
+
+```bash
+docker compose exec -T postgres createdb -U "$POSTGRES_USER" captivia_restore_test
+gunzip -c backups/captivia-<date>.sql.gz | docker compose exec -T postgres psql -U "$POSTGRES_USER" -d captivia_restore_test
+docker compose exec -T postgres psql -U "$POSTGRES_USER" -d captivia_restore_test -c "SELECT count(*) FROM information_schema.tables;"
+docker compose exec -T postgres dropdb -U "$POSTGRES_USER" captivia_restore_test
+```
+
+---
+
+## 📦 Déploiement Docker
+
+### Stack complète Windows / macOS / Linux
+
+La stack Docker contient les services nécessaires :
+
+1. PostgreSQL avec volume persistant ;
+2. Redis persistant, disponible si le cache Redis est activé ;
+3. job Prisma `migrate` exécuté avant le backend ;
+4. backend NestJS compilé en image de production ;
+5. frontend Next.js compilé en mode `standalone`.
+
+Aucun Node.js, PostgreSQL ou Prisma n'est requis sur la machine hôte. Seul Docker Desktop est nécessaire.
+
+```bash
+# Configuration locale à la racine du projet
+cp .env.example .env              # macOS/Linux
+# Windows : copy .env.example .env
+
+# Build et démarrage complet
+docker compose up --build -d
+
+# État des services
+docker compose ps
+
+# Logs
+docker compose logs -f backend frontend
+```
+
+**URLs par défaut :**
+
+| Service | URL |
+|---|---|
+| Frontend | `http://localhost:3000` |
+| Backend | `http://localhost:3001` |
+| Healthcheck | `http://localhost:3001/health` |
+
+Le job `migrate` s'exécute automatiquement avant le backend. Après l'ajout d'une nouvelle migration :
+
+```bash
+docker compose run --rm migrate
+```
+
+Pour arrêter la stack sans supprimer les données :
+
+```bash
+docker compose down
+```
+
+Pour repartir avec une base PostgreSQL vide :
+
+```bash
+docker compose down -v
+```
+
+### Ports personnalisés
+
+Les ports sont configurables dans le `.env` racine :
+
+```dotenv
+POSTGRES_PORT=5432
+BACKEND_PORT=3001
+FRONTEND_PORT=3000
+NEXT_PUBLIC_API_URL=http://localhost:3001
+CORS_ORIGIN=http://localhost:3000,http://127.0.0.1:3000
+FRONTEND_URL=http://localhost:3000
+```
+
+`NEXT_PUBLIC_API_URL` est intégré au bundle navigateur lors du build : il doit être une URL accessible depuis le navigateur (`localhost` ou l'adresse LAN), jamais `http://backend:3001`.
+
+### Secrets et intégrations
+
+- `JWT_SECRET` doit être remplacé par une valeur aléatoire d'au moins 32 caractères avant toute mise en production.
+- Les variables optionnelles (`SPECIESPLUS_*`, `AMAZON_*`, `VAPID_*`, SMTP, Sentry) peuvent être ajoutées au `.env` racine ; Compose les transmet au backend.
+- Aucun fichier `.env` n'est copié dans les images Docker.
+- La base PostgreSQL est stockée dans le volume Docker `captivia_pgdata`.
+
+### Vérification manuelle
+
+```bash
+curl http://localhost:3001/health
+# → {"status":"ok","timestamp":"..."}
+
+curl -I http://localhost:3000/
+```
+
+Vérification de bout en bout (recherche d'espèce → fiche) avec un navigateur headless :
+
+```bash
+cd frontend && node e2e-docker-check.js
+```
+
+Ce script vérifie que le frontend Docker joint bien le backend (absence de bannière
+« Backend non connecté ») et qu'une recherche renvoie des suggestions.
+
+> **Piège connu** : si le frontend affiche « Backend non connecté » alors que
+> `curl http://localhost:3001/health` répond, vérifier la CSP dans
+> `frontend/next.config.ts` — `connect-src` doit autoriser le backend local
+> (`http://localhost:3001`). C'est le premier endroit à regarder quand l'UI
+> perd le backend sans raison réseau apparente.
+
+Les images sont multi-stage : l'image backend runtime ne contient ni sources TypeScript ni CLI de développement, et l'image frontend utilise le serveur Next.js standalone.
+
+### Mobile
+
 - Google Play Store (Android)
 - Apple App Store (iOS)
 

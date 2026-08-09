@@ -1,0 +1,15 @@
+# Dépendances / artefacts locaux
+node_modules
+dist
+coverage
+*.log
+
+# Secrets : jamais dans l'image (injectés par la plateforme au runtime)
+.env*
+
+# Tests et sources de dev
+test
+
+# VCS
+.git
+.gitignore

@@ -18,7 +18,9 @@ import {
 } from '@nestjs/swagger';
 import { HealthContentService } from './health-content.service';
 import { HealthQueryDto } from './dto/health-query.dto';
+import { CreateHealthContentDto } from './dto/health-content.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { OperatorGuard } from '../common/guards/operator.guard';
 
 @ApiTags('health')
 @Controller('species/:speciesId/health')
@@ -47,7 +49,7 @@ export class HealthContentController {
   }
 
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, OperatorGuard)
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Create or update health content (admin only)',
@@ -58,13 +60,13 @@ export class HealthContentController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async createOrUpdateHealthContent(
     @Param('speciesId', ParseIntPipe) speciesId: number,
-    @Body() body: { locale: string; diseases: any; sources: any },
+    @Body() body: CreateHealthContentDto,
   ) {
     return this.healthContentService.createOrUpdateHealthContent(
       speciesId,
       body.locale,
       body.diseases,
-      body.sources,
+      body.sources ?? [],
     );
   }
 }

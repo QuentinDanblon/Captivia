@@ -43,7 +43,21 @@ export class SpeciesController {
   @ApiResponse({ status: 200, description: 'Species found' })
   @ApiResponse({ status: 404, description: 'Invalid query' })
   async search(@Query() searchDto: SearchSpeciesDto) {
-    if (!searchDto.q || searchDto.q.trim().length === 0) {
+    // La recherche peut se faire par texte OU par filtre(s) seul(s) (ex. catégorie
+    // depuis la page d'accueil). 400 uniquement si aucun critère n'est fourni.
+    const hasQuery = !!searchDto.q?.trim();
+    const hasFilters = !!(
+      searchDto.kingdom ||
+      searchDto.phylum ||
+      searchDto.class ||
+      searchDto.order ||
+      searchDto.family ||
+      searchDto.genus ||
+      searchDto.rank ||
+      searchDto.iucnStatus ||
+      searchDto.country
+    );
+    if (!hasQuery && !hasFilters) {
       throw new BadRequestException('Query parameter is required');
     }
 
@@ -62,7 +76,7 @@ export class SpeciesController {
     };
 
     const results = await this.speciesService.searchSpecies(
-      searchDto.q,
+      searchDto.q || '',
       searchDto.limit || 20,
       searchDto.offset || 0,
       Object.fromEntries(
@@ -142,6 +156,26 @@ export class SpeciesController {
         );
       }
       throw new InternalServerErrorException('Failed to fetch IUCN status');
+    }
+  }
+
+  @Get(':id/reproduction')
+  @ApiOperation({ summary: 'Get reproduction factsheet for a species' })
+  @ApiParam({ name: 'id', description: 'Species ID' })
+  @ApiResponse({ status: 200, description: 'Reproduction factsheet' })
+  @ApiResponse({ status: 404, description: 'Reproduction data not available for this species' })
+  async getReproduction(@Param() getSpeciesDto: GetSpeciesDto) {
+    try {
+      return await this.speciesService.getReproduction(getSpeciesDto.id);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException(
+          'Reproduction data not available for this species',
+        );
+      }
+      throw new InternalServerErrorException(
+        'Failed to fetch reproduction data',
+      );
     }
   }
 

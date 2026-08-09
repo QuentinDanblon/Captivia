@@ -3,23 +3,54 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useAuth } from '@/contexts/AuthContext';
-import { api } from '@/lib/api';
+import { api, type SearchSpeciesFilters } from '@/lib/api';
 import { getTaxonomyLabel } from '@/lib/taxonomy';
+import { ArrowRight, Bird, Bug, CircleDot, Fish, Leaf, Rabbit, Search, Sparkles, Turtle } from 'lucide-react';
 import Link from 'next/link';
+
+const animalTypes = [
+  { label: 'Reptile', value: 'Reptilia', icon: Turtle, tone: 'mint' },
+  { label: 'Oiseau', value: 'Aves', icon: Bird, tone: 'sky' },
+  { label: 'Mammifère', value: 'Mammalia', icon: Rabbit, tone: 'peach' },
+  { label: 'Amphibien', value: 'Amphibia', icon: CircleDot, tone: 'lime' },
+  { label: 'Poisson', value: 'Actinopterygii', icon: Fish, tone: 'blue' },
+  { label: 'Insecte', value: 'Insecta', icon: Bug, tone: 'amber' },
+];
+
+interface SpeciesSearchResult {
+  key: number;
+  scientificName: string;
+  canonicalName?: string;
+  vernacularNames?: string[];
+  class?: string;
+  order?: string;
+  family?: string;
+  rank?: string;
+  iucnStatus?: string;
+}
+
+function isSpeciesSearchResult(value: unknown): value is SpeciesSearchResult {
+  if (typeof value !== 'object' || value === null) return false;
+  const candidate = value as Record<string, unknown>;
+  return typeof candidate.key === 'number' && typeof candidate.scientificName === 'string';
+}
+
+function normalizeSpeciesResults(results: unknown[] | undefined): SpeciesSearchResult[] {
+  return (results ?? []).filter(isSpeciesSearchResult);
+}
 
 export default function Home() {
   const t = useTranslations();
   const { user } = useAuth();
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<SpeciesSearchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [selectedTypeFilter, setSelectedTypeFilter] = useState<string | null>(null);
-  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<SpeciesSearchResult[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
   const [suggestionsTimeout, setSuggestionsTimeout] = useState<NodeJS.Timeout | null>(null);
-  const [showGallery, setShowGallery] = useState(false);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,15 +60,14 @@ export default function Home() {
     setLoading(true);
     setSearchError(null);
     try {
-      // Use a generic query for filter-only searches
       const searchQuery = query.trim() || 'animal';
-      const filters: any = {};
+      const filters: SearchSpeciesFilters = {};
       if (selectedTypeFilter) {
         filters.class = selectedTypeFilter;
       }
-      
+
       const data = await api.searchSpecies(searchQuery, 20, 0, filters);
-      setResults(data.results || []);
+      setResults(normalizeSpeciesResults(data.results));
     } catch (error) {
       console.error('Search error:', error);
       setResults([]);
@@ -54,21 +84,19 @@ export default function Home() {
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setQuery(value);
-    
-    // Clear previous timeout
+
     if (suggestionsTimeout) {
       clearTimeout(suggestionsTimeout);
     }
-    
+
     if (value.trim().length > 2) {
       setSuggestionsLoading(true);
       setShowSuggestions(true);
-      
-      // Debounce suggestions search
+
       const timeout = setTimeout(async () => {
         try {
           const data = await api.searchSpecies(value, 8, 0);
-          setSuggestions(data.results || []);
+          setSuggestions(normalizeSpeciesResults(data.results));
           setSuggestionsLoading(false);
         } catch (error) {
           console.error('Suggestions error:', error);
@@ -76,7 +104,7 @@ export default function Home() {
           setSuggestionsLoading(false);
         }
       }, 300);
-      
+
       setSuggestionsTimeout(timeout);
     } else {
       setSuggestions([]);
@@ -84,7 +112,7 @@ export default function Home() {
     }
   };
 
-  const handleSuggestionClick = (species: any) => {
+  const handleSuggestionClick = () => {
     setShowSuggestions(false);
     setSuggestions([]);
     setResults([]);
@@ -93,27 +121,23 @@ export default function Home() {
   const handleTypeFilter = async (classValue: string) => {
     const newFilter = selectedTypeFilter === classValue ? null : classValue;
     setSelectedTypeFilter(newFilter);
-    setShowGallery(!!newFilter);
 
-    // Auto-search when toggling filter
     setLoading(true);
     setSearchError(null);
     try {
       const searchQuery = query.trim() || 'animal';
-      const filters: any = {};
+      const filters: SearchSpeciesFilters = {};
       if (newFilter) {
         filters.class = newFilter;
       }
-      
+
       const data = await api.searchSpecies(searchQuery, 20, 0, filters);
-      setResults(data.results || []);
+      setResults(normalizeSpeciesResults(data.results));
     } catch (error) {
       console.error('Search error:', error);
       setResults([]);
       setSearchError(
-        error instanceof Error
-          ? error.message
-          : 'Le serveur de recherche est indisponible.'
+        error instanceof Error ? error.message : 'Le serveur de recherche est indisponible.'
       );
     } finally {
       setLoading(false);
@@ -121,213 +145,217 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-200">
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 min-w-0">
-        {/* Hero */}
-        <div className="text-center mb-10 sm:mb-14">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-emerald-700 dark:text-emerald-400 mb-4 sm:mb-5 tracking-tight">
-            {t('common.appName')}
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 px-2 max-w-2xl mx-auto leading-relaxed">
-            {t('home.subtitle')}
-          </p>
-        </div>
+    <div className="captivia-home">
+      <div className="captivia-home-glow captivia-home-glow-one" aria-hidden="true" />
+      <div className="captivia-home-glow captivia-home-glow-two" aria-hidden="true" />
 
-        {/* Search Bar */}
-        <div className="w-full max-w-2xl mx-auto mb-10 sm:mb-14 relative">
-          <form onSubmit={handleSearch} className="relative">
-            <input
-              type="text"
-              value={query}
-              onChange={handleQueryChange}
-              placeholder={t('home.searchPlaceholder')}
-              className="w-full px-5 sm:px-6 py-4 sm:py-5 text-base sm:text-lg rounded-2xl border-2 border-emerald-300 dark:border-emerald-600 bg-white dark:bg-gray-800 shadow-lg shadow-emerald-500/10 focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/20 transition-all duration-200"
-              aria-label={t('home.searchPlaceholder')}
-            />
-            <button
-              type="submit"
-              className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl text-sm sm:text-base font-medium transition-all duration-200"
-            >
-              {t('common.search')}
-            </button>
-          </form>
-
-          {/* Suggestions Dropdown */}
-          {showSuggestions && suggestions.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-3 bg-white dark:bg-gray-800 rounded-2xl shadow-xl shadow-black/5 z-50 max-h-96 overflow-y-auto border border-gray-100 dark:border-gray-700">
-              {suggestionsLoading && (
-                <div className="p-5 text-center text-gray-500">
-                  {t('common.loading')}...
-                </div>
-              )}
-              {!suggestionsLoading && suggestions.map((species: any) => (
-                <Link
-                  key={species.key}
-                  href={`/species/${species.key}`}
-                  onClick={() => handleSuggestionClick(species)}
-                  className="block px-5 sm:px-6 py-4 sm:py-4 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 border-b border-gray-100 dark:border-gray-700 last:border-b-0 transition-colors duration-150"
-                >
-                  <h3 className="font-semibold text-gray-800 dark:text-white mb-1">
-                    {species.vernacularNames && species.vernacularNames.length > 0
-                      ? species.vernacularNames[0]
-                      : species.canonicalName || species.scientificName}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-1">
-                    {species.scientificName}
-                  </p>
-                  {species.class && (
-                    <p className="text-xs text-emerald-600 dark:text-emerald-400">
-                      {getTaxonomyLabel(species.class)}
-                    </p>
-                  )}
-                </Link>
-              ))}
+      <main className="captivia-container">
+        <section className="captivia-hero" aria-labelledby="captivia-hero-title">
+          <div className="captivia-hero-copy">
+            <div className="captivia-eyebrow">
+              <span className="captivia-eyebrow-mark"><Sparkles size={13} strokeWidth={2.6} /></span>
+              <span>GUIDE DE LA FAUNE</span>
             </div>
-          )}
-        </div>
+            <h1 id="captivia-hero-title" className="captivia-hero-title">
+              <span className="captivia-title-brand">{t('common.appName')}</span>
+              <span className="captivia-title-line">Connaître le vivant.</span>
+            </h1>
+            <p className="captivia-hero-description">{t('home.subtitle')}</p>
+            <div className="captivia-hero-signals" aria-label="Les piliers de Captivia">
+              <span><i aria-hidden="true" /> Explorer</span>
+              <span><i aria-hidden="true" /> Comprendre</span>
+              <span><i aria-hidden="true" /> Prendre soin</span>
+            </div>
+          </div>
 
-        {/* Filtres par type — 2 colonnes, toute la place sous la barre de recherche */}
-        <div className="w-full max-w-7xl mx-auto mb-12 sm:mb-16">
-          <div className="flex items-center justify-between mb-5">
-            <p className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300">
-              Filtrer par type d&apos;animal
-            </p>
+          <div className="captivia-explorer-card">
+            <div className="captivia-explorer-topline">
+              <div>
+                <span className="captivia-card-kicker">EXPLORER</span>
+                <h2>Une espèce en tête&nbsp;?</h2>
+              </div>
+              <span className="captivia-explorer-icon" aria-hidden="true"><Search size={21} strokeWidth={2.1} /></span>
+            </div>
+
+            <form onSubmit={handleSearch} className="captivia-search-form">
+              <div className="captivia-search-field">
+                <Search size={20} strokeWidth={2.1} aria-hidden="true" />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={handleQueryChange}
+                  placeholder={t('home.searchPlaceholder')}
+                  aria-label={t('home.searchPlaceholder')}
+                />
+              </div>
+              <button type="submit" className="captivia-search-button">
+                <span>{t('common.search')}</span>
+                <ArrowRight size={18} strokeWidth={2.4} aria-hidden="true" />
+              </button>
+            </form>
+
+            <div className="captivia-explorer-footer">
+              <span><Leaf size={15} aria-hidden="true" /> Profils d&apos;espèces</span>
+              <span>Recherche instantanée</span>
+            </div>
+
+            {showSuggestions && (
+              <div className="captivia-suggestions" role="listbox">
+                {suggestionsLoading && (
+                  <div className="captivia-suggestion-loading">{t('common.loading')}...</div>
+                )}
+                {!suggestionsLoading && suggestions.length === 0 && (
+                  <div className="captivia-suggestion-loading">Aucun résultat</div>
+                )}
+                {!suggestionsLoading && suggestions.map((species) => (
+                  <Link
+                    key={species.key}
+                    href={`/species/${species.key}`}
+                    onClick={handleSuggestionClick}
+                    className="captivia-suggestion"
+                    role="option"
+                  >
+                    <span className="captivia-suggestion-icon" aria-hidden="true"><Leaf size={16} /></span>
+                    <span className="captivia-suggestion-copy">
+                      <strong>
+                        {species.vernacularNames && species.vernacularNames.length > 0
+                          ? species.vernacularNames[0]
+                          : species.canonicalName || species.scientificName}
+                      </strong>
+                      <small>{species.scientificName}</small>
+                    </span>
+                    {species.class && <span className="captivia-suggestion-tag">{getTaxonomyLabel(species.class)}</span>}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="captivia-discovery" aria-labelledby="captivia-discovery-title">
+          <div className="captivia-section-heading">
+            <div>
+              <span className="captivia-card-kicker">DÉCOUVRIR</span>
+              <h2 id="captivia-discovery-title">Filtrer par type d&apos;animal</h2>
+            </div>
             {selectedTypeFilter && (
               <button
+                type="button"
                 onClick={() => {
                   setSelectedTypeFilter(null);
-                  setShowGallery(false);
                   setResults([]);
                 }}
-                className="text-sm text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:underline font-medium flex-shrink-0 transition-colors duration-200"
+                className="captivia-reset-button"
               >
                 Réinitialiser
               </button>
             )}
           </div>
-          <div className="grid grid-cols-2 gap-4 sm:gap-6">
-            {[
-              { label: 'Reptile', value: 'Reptilia', icon: '🦎' },
-              { label: 'Oiseau', value: 'Aves', icon: '🦜' },
-              { label: 'Mammifère', value: 'Mammalia', icon: '🐰' },
-              { label: 'Amphibien', value: 'Amphibia', icon: '🐸' },
-              { label: 'Poisson', value: 'Actinopterygii', icon: '🐠' },
-              { label: 'Insecte', value: 'Insecta', icon: '🦗' },
-            ].map((type) => (
-              <button
-                key={type.value}
-                onClick={() => handleTypeFilter(type.value)}
-                className={`rounded-3xl border-2 min-h-[140px] sm:min-h-[180px] flex flex-col items-center justify-center gap-3 sm:gap-4 p-6 sm:p-8 transition-all duration-200 ease-out ${
-                  selectedTypeFilter === type.value
-                    ? 'bg-emerald-600 border-emerald-600 text-white shadow-xl shadow-emerald-500/25 scale-[1.02]'
-                    : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-emerald-400 dark:hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:scale-[1.01] active:scale-[0.99] shadow-md hover:shadow-lg'
-                }`}
-              >
-                <span className="text-5xl sm:text-7xl select-none" aria-hidden>{type.icon}</span>
-                <span className="text-lg sm:text-xl font-semibold text-center leading-tight">{type.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
 
-        {/* Loading */}
+          <div className="captivia-category-grid">
+            {animalTypes.map((type) => {
+              const Icon = type.icon;
+              const isSelected = selectedTypeFilter === type.value;
+              return (
+                <button
+                  key={type.value}
+                  type="button"
+                  onClick={() => handleTypeFilter(type.value)}
+                  aria-pressed={isSelected}
+                  className={`captivia-category-card${isSelected ? ' is-selected' : ''}`}
+                >
+                  <span className={`captivia-category-icon tone-${type.tone}`} aria-hidden="true">
+                    <Icon size={29} strokeWidth={1.9} />
+                  </span>
+                  <span className="captivia-category-label">{type.label}</span>
+                  <span className="captivia-category-arrow" aria-hidden="true"><ArrowRight size={18} strokeWidth={2.2} /></span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
         {loading && (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent"></div>
-            <p className="mt-4 text-gray-600 dark:text-gray-300">
-              {t('common.loading')}
-            </p>
+          <div className="captivia-status" role="status" aria-live="polite">
+            <span className="captivia-spinner" aria-hidden="true" />
+            <p>{t('common.loading')}</p>
           </div>
         )}
 
-        {/* Search error (e.g. backend not running) */}
         {searchError && !loading && (
-          <div className="max-w-2xl mx-auto mb-8 p-5 rounded-2xl bg-amber-50 dark:bg-amber-900/20 border-2 border-amber-200 dark:border-amber-800">
-            <p className="text-sm sm:text-base text-amber-800 dark:text-amber-200 text-center">
-              {searchError}
-            </p>
+          <div className="captivia-error" role="alert">
+            <p>{searchError}</p>
           </div>
         )}
 
-        {/* Results */}
         {results.length > 0 && (
-          <div className="grid gap-5 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {results.map((species: any) => (
-              <Link
-                key={species.key}
-                href={`/species/${species.key}`}
-                className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl hover:scale-[1.01] transition-all duration-200 cursor-pointer border border-gray-100 dark:border-gray-700"
-                data-testid="species-result"
-              >
-                <div className="p-5 sm:p-6">
-                  {/* Common name as main title */}
-                  <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-2">
+          <section className="captivia-results" aria-labelledby="captivia-results-title">
+            <div className="captivia-results-heading">
+              <div>
+                <span className="captivia-card-kicker">RÉSULTATS</span>
+                <h2 id="captivia-results-title">Espèces trouvées</h2>
+              </div>
+              <span className="captivia-results-count">{results.length} profils</span>
+            </div>
+            <div className="captivia-results-grid">
+              {results.map((species) => (
+                <Link
+                  key={species.key}
+                  href={`/species/${species.key}`}
+                  className="captivia-result-card"
+                  data-testid="species-result"
+                >
+                  <div className="captivia-result-card-top">
+                    <span className="captivia-result-badge"><Leaf size={13} aria-hidden="true" /> Profil</span>
+                    <span className="captivia-result-arrow" aria-hidden="true"><ArrowRight size={17} strokeWidth={2.3} /></span>
+                  </div>
+                  <h3>
                     {species.vernacularNames && species.vernacularNames.length > 0
                       ? species.vernacularNames[0]
                       : species.canonicalName || species.scientificName}
-                  </h2>
-                  {/* Scientific name as subtitle */}
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
-                    {species.scientificName}
-                  </p>
-                  {/* Taxonomy info in common terms */}
+                  </h3>
+                  <p className="captivia-result-scientific">{species.scientificName}</p>
                   {(species.class || species.order || species.family) && (
-                    <p className="text-xs text-gray-600 dark:text-gray-300 mb-3">
+                    <p className="captivia-result-taxonomy">
                       {species.class && <span>{getTaxonomyLabel(species.class)}</span>}
-                      {species.class && species.order && <span> • </span>}
+                      {species.class && species.order && <span> · </span>}
                       {species.order && <span>{species.order}</span>}
-                      {(species.class || species.order) && species.family && <span> • </span>}
+                      {(species.class || species.order) && species.family && <span> · </span>}
                       {species.family && <span>{species.family}</span>}
                     </p>
                   )}
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 rounded-full text-xs sm:text-sm">
-                      {species.rank}
-                    </span>
-                    {species.iucnStatus && (
-                      <span className="px-3 py-1 bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 rounded-full text-xs sm:text-sm">
-                        {species.iucnStatus}
-                      </span>
-                    )}
+                  <div className="captivia-result-tags">
+                    <span>{species.rank}</span>
+                    {species.iucnStatus && <span className="is-warm">{species.iucnStatus}</span>}
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                </Link>
+              ))}
+            </div>
+          </section>
         )}
 
-        {/* Footer - liens utiles */}
-        <footer className="mt-14 sm:mt-20 pt-8 sm:pt-10 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex flex-wrap justify-center gap-5 sm:gap-6 text-sm text-gray-600 dark:text-gray-400 px-2">
-            <Link href="/transparency" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150">
-              {t('footer.transparency')}
-            </Link>
-            <Link href="/magasin" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150">
-              {t('common.shop')}
-            </Link>
-            <Link href="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150">
-              {t('common.home')}
-            </Link>
+        <footer className="captivia-footer">
+          <div className="captivia-footer-brand">
+            <span className="captivia-brand-mark" aria-hidden="true"><Leaf size={16} strokeWidth={2.4} /></span>
+            <span>{t('common.appName')}</span>
+          </div>
+          <div className="captivia-footer-links">
+            <Link href="/transparency">{t('footer.transparency')}</Link>
+            <Link href="/magasin">{t('common.shop')}</Link>
+            <Link href="/">{t('common.home')}</Link>
             {user ? (
               <>
-                <Link href="/mes-animaux" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150">
-                  {t('common.myAnimals')}
-                </Link>
-                <Link href="/parametres" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150">
-                  {t('common.settings')}
-                </Link>
+                <Link href="/mes-animaux">{t('common.myAnimals')}</Link>
+                <Link href="/parametres">{t('common.settings')}</Link>
               </>
             ) : (
               <>
-                <Link href="/login" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150">
-                  {t('common.login')}
-                </Link>
-                <Link href="/register" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors duration-150">
-                  {t('common.register')}
-                </Link>
+                <Link href="/login">{t('common.login')}</Link>
+                <Link href="/register">{t('common.register')}</Link>
               </>
             )}
           </div>
+          <span className="captivia-footer-note">Prendre soin, simplement.</span>
         </footer>
       </main>
     </div>

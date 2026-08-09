@@ -1,8 +1,3 @@
-import { CacheService } from '../src/cache/cache.service';
-import { GbifService } from '../src/external/gbif.service';
-import { SpeciesTransformerService } from '../src/transformers/species-transformer.service';
-import { SpeciesFilterService } from '../src/filters/species-filter.service';
-
 export const mockCacheService = {
   get: jest.fn(),
   set: jest.fn(),

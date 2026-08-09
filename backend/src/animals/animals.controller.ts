@@ -66,6 +66,21 @@ export class AnimalsController {
     return this.animalsService.getOrCreatePublicLink(id, req.user.id, baseUrl);
   }
 
+  @Get(':id/offspring')
+  @ApiOperation({
+    summary: 'Get offspring of an animal',
+    description:
+      "List animals whose father or mother is this animal (Module F — portée)",
+  })
+  @ApiParam({ name: 'id', description: 'Animal ID (parent)' })
+  @ApiResponse({ status: 200, description: 'Offspring list' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  @ApiResponse({ status: 403, description: 'Not your animal' })
+  @ApiResponse({ status: 404, description: 'Animal not found' })
+  async getOffspring(@Request() req, @Param('id') id: string) {
+    return this.animalsService.getOffspring(id, req.user.id);
+  }
+
   @Get(':id')
   @ApiOperation({
     summary: 'Get an animal by ID',

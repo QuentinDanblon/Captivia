@@ -1,4 +1,16 @@
-import { Controller, Get, Patch, Delete, Param, Body, Query, UseGuards, Request } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Patch,
+  Query,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { GradeService } from './grade.service';
@@ -34,15 +46,22 @@ export class GradeController {
     @Body() body: { status: 'done' | 'skipped' },
   ) {
     if (!body?.status || !['done', 'skipped'].includes(body.status)) {
-      return { error: 'status must be done or skipped' };
+      throw new BadRequestException('status must be done or skipped');
     }
-    return this.gradeService.setEventStatus(req.user.id, id, body.status);
+    const result = await this.gradeService.setEventStatus(req.user.id, id, body.status);
+    if (!result) {
+      throw new NotFoundException('Notification event not found');
+    }
+    return result;
   }
 
   @Delete('notification-events/:id')
   @ApiOperation({ summary: 'Delete a reminder for the day' })
   async deleteEvent(@Request() req: { user: { id: string } }, @Param('id') id: string) {
     const deleted = await this.gradeService.deleteEvent(req.user.id, id);
+    if (!deleted) {
+      throw new NotFoundException('Notification event not found');
+    }
     return { deleted };
   }
 }

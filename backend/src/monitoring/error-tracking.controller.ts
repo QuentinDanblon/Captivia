@@ -2,10 +2,11 @@ import { Controller, Get, Delete, Query, Param, UseGuards, HttpCode, HttpStatus 
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ErrorTrackingService } from './error-tracking.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { OperatorGuard } from '../common/guards/operator.guard';
 
 @ApiTags('error-tracking')
 @Controller('errors')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, OperatorGuard)
 export class ErrorTrackingController {
   constructor(private readonly errorTrackingService: ErrorTrackingService) {}
 

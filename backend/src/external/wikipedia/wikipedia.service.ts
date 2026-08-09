@@ -9,11 +9,23 @@ import axios, { AxiosInstance } from 'axios';
 export class WikipediaService {
   private readonly logger = new Logger(WikipediaService.name);
   private readonly wikipediaApi: AxiosInstance;
+  private readonly wikipediaSearchApi: AxiosInstance;
   private readonly wikipediaBaseUrl = 'https://en.wikipedia.org/api/rest_v1';
 
   constructor() {
     this.wikipediaApi = axios.create({
       baseURL: this.wikipediaBaseUrl,
+      headers: {
+        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
+      },
+      timeout: 10000,
+    });
+
+    this.wikipediaSearchApi = axios.create({
+      baseURL: 'https://en.wikipedia.org/w/api.php',
+      headers: {
+        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
+      },
       timeout: 10000,
     });
   }
@@ -21,13 +33,16 @@ export class WikipediaService {
   /**
    * Search Wikipedia for a species by name
    * @param query Search query string
-   * @returns Search results from Wikipedia
+   * @returns Best matching article from Wikipedia
    */
   async searchSpecies(query: string) {
     try {
-      const response = await this.wikipediaApi.get('/page/summary', {
+      const response = await this.wikipediaSearchApi.get('', {
         params: {
-          titles: query,
+          action: 'query',
+          list: 'search',
+          srsearch: query,
+          srlimit: 5,
           format: 'json',
         },
       });
@@ -49,12 +64,7 @@ export class WikipediaService {
    */
   async getArticle(title: string) {
     try {
-      const response = await this.wikipediaApi.get('/page/summary', {
-        params: {
-          titles: title,
-          format: 'json',
-        },
-      });
+      const response = await this.wikipediaApi.get(`/page/summary/${encodeURIComponent(title)}`);
 
       if (!response.data) {
         return null;
@@ -77,24 +87,32 @@ export class WikipediaService {
    */
   async getExtract(title: string) {
     try {
-      const response = await this.wikipediaApi.get('/page/extracts', {
+      const response = await this.wikipediaSearchApi.get('', {
         params: {
+          action: 'query',
+          prop: 'extracts',
           titles: title,
-          format: 'json',
           exintro: true,
           explaintext: true,
           redirects: true,
+          format: 'json',
         },
       });
 
-      if (!response.data || !response.data.extract) {
+      const pages = response.data?.query?.pages;
+      if (!pages) {
+        return null;
+      }
+
+      const page = pages[Object.keys(pages)[0]];
+      if (!page || !page.extract) {
         return null;
       }
 
       return {
-        extract: response.data.extract,
-        title: response.data.title,
-        pageid: response.data.pageid,
+        extract: page.extract,
+        title: page.title,
+        pageid: page.pageid,
         source: 'wikipedia',
       };
     } catch (error) {
@@ -113,22 +131,24 @@ export class WikipediaService {
    */
   async getPage(title: string) {
     try {
-      const response = await this.wikipediaApi.get('/page/plain', {
+      const response = await this.wikipediaSearchApi.get('', {
         params: {
-          titles: title,
-          format: 'json',
+          action: 'parse',
+          page: title,
+          prop: 'text',
           redirects: true,
+          format: 'json',
         },
       });
 
-      if (!response.data || !response.data['*']) {
+      if (!response.data || !response.data.parse || !response.data.parse.text) {
         return null;
       }
 
       return {
-        content: response.data['*'],
-        title: response.data.title,
-        pageid: response.data.pageid,
+        content: response.data.parse.text['*'],
+        title: response.data.parse.title,
+        pageid: response.data.parse.pageid,
         source: 'wikipedia',
       };
     } catch (error) {
@@ -202,18 +222,20 @@ export class WikipediaService {
   }
 
   /**
-   * Transform Wikipedia search result
+   * Transform Wikipedia search result (top match)
    */
   private transformSearchResult(data: any) {
-    if (!data || data.error) {
+    if (!data || !data.query || !Array.isArray(data.query.search) || data.query.search.length === 0) {
       return null;
     }
 
+    const result = data.query.search[0];
+
     return {
-      title: data.title,
-      pageid: data.pageid,
-      thumbnail: data.thumbnail?.source,
-      extract: data.extract,
+      title: result.title,
+      pageid: result.pageid,
+      thumbnail: undefined,
+      extract: result.snippet ? result.snippet.replace(/<[^>]*>/g, '') : undefined,
       source: 'wikipedia',
       timestamp: new Date(),
     };

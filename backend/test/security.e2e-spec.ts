@@ -30,6 +30,12 @@ describe('Security Tests', () => {
         transform: true,
       }),
     );
+    // CORS comme dans main.ts (les tests bootent AppModule sans passer par bootstrap)
+    app.enableCors({
+      origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+      credentials: false,
+    });
     await app.init();
     
     prisma = app.get(PrismaService);
@@ -57,7 +63,7 @@ describe('Security Tests', () => {
       .post('/users/me/animals')
       .set('Authorization', `Bearer ${user1Token}`)
       .send({
-        speciesId: 123,
+        speciesId: 5221172,
         name: 'Security Test Animal',
       });
     
@@ -184,7 +190,7 @@ describe('Security Tests', () => {
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${user2Token}`)
         .send({
-          speciesId: 456,
+          speciesId: 5221172,
           name: 'Test Animal',
           unknownField: 'should be removed',
           isPremium: true, // Should not bypass premium check
@@ -203,7 +209,7 @@ describe('Security Tests', () => {
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${user2Token}`)
         .send({
-          speciesId: 789,
+          speciesId: 5221172,
           name: 'Second Animal',
         })
         .expect(403);
@@ -218,20 +224,24 @@ describe('Security Tests', () => {
     });
 
     it('should handle SQL injection in ID parameter', () => {
+      // DTO durci : id doit être numérique strict → 400 (validation, plus 404)
       return request(app.getHttpServer())
         .get("/species/1' OR '1'='1")
-        .expect(404); // Should treat as invalid ID
+        .expect(400);
     });
   });
 
   describe('CORS', () => {
-    it('should include CORS headers', async () => {
+    it('should include CORS headers for allowed origin', async () => {
       const response = await request(app.getHttpServer())
         .get('/health')
+        .set('Origin', 'http://localhost:3000')
         .expect(200);
 
       // CORS headers should be present
-      expect(response.headers['access-control-allow-origin']).toBeDefined();
+      expect(response.headers['access-control-allow-origin']).toBe(
+        'http://localhost:3000',
+      );
     });
   });
 

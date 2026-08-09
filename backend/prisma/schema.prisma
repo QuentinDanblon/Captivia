@@ -22,8 +22,8 @@ model User {
   isPremium    Boolean  @default(false)
   points       Int      @default(0)   // Points pour le système de grade
   grade        String   @default("bronze") // bronze | silver | gold | platinum | diamond
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime @updatedAt @db.Timestamptz(3)
 
   // Relations
   animals                 Animal[]
@@ -31,20 +31,17 @@ model User {
   notificationPreferences NotificationPreference[]
   notificationEvents      NotificationEvent[]
   passwordResetTokens     PasswordResetToken[]
-
-  @@index([email])
 }
 
 model PasswordResetToken {
   id        String   @id @default(uuid())
   userId    String
   token     String   @unique
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+  expiresAt DateTime @db.Timestamptz(3)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([token])
   @@index([userId])
   @@index([expiresAt])
 }
@@ -58,23 +55,41 @@ model Animal {
   userId     String
   speciesId  Int // GBIF key
   name       String
-  birthDate  DateTime?
+  birthDate  DateTime? @db.Timestamptz(3)
   sex        String?
   photos     String[] // URLs
   notes      String?
   publicSlug String?   @unique // slug pour page publique / QR (Premium)
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  // Module F — parenté & groupement (éleveurs)
+  fatherId  String? // FK -> Animal.id (père, SetNull à la suppression)
+  motherId  String? // FK -> Animal.id (mère, SetNull à la suppression)
+  groupName String? // Enclos / groupe libre (max 100 chars, CHECK SQL)
+  createdAt  DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt  DateTime  @updatedAt @db.Timestamptz(3)
 
   // Relations
-  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
-  routines       Routine[]
-  history        ActionLog[]
-  healthRecords  AnimalHealthRecord[]
+  user               User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  speciesProfile     SpeciesProfile       @relation(fields: [speciesId], references: [speciesId], onDelete: Restrict)
+  routines           Routine[]
+  history            ActionLog[]
+  healthRecords      AnimalHealthRecord[]
+  medications        Medication[]
+  vetAppointments    VetAppointment[]
+  measurements       AnimalMeasurement[]
+  vaccinations       Vaccination[]
+  breedingRecords    BreedingRecord[]
+  notificationEvents NotificationEvent[]
+  // Module F — auto-relations parenté
+  father         Animal?  @relation("Father", fields: [fatherId], references: [id], onDelete: SetNull)
+  mother         Animal?  @relation("Mother", fields: [motherId], references: [id], onDelete: SetNull)
+  childrenFather Animal[] @relation("Father")
+  childrenMother Animal[] @relation("Mother")
 
   @@index([userId])
   @@index([speciesId])
-  @@index([publicSlug])
+  @@index([fatherId])
+  @@index([motherId])
+  @@index([groupName])
 }
 
 // Carnet de santé : vaccin, opération, nourriture spécifique, antécédant médical, intervention chirurgicale
@@ -83,11 +98,11 @@ model AnimalHealthRecord {
   animalId  String
   type      String   // vaccine | surgery | specific_food | medical_history
   title     String   // ex. "Vaccin rage", "Stérilisation"
-  date      DateTime // date de l'événement
+  date      DateTime @db.Timestamptz(3) // date de l'événement
   notes     String?  // description libre
   details   Json?    // infos complémentaires (vétérinaire, prochain rappel, etc.)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
 
   animal Animal @relation(fields: [animalId], references: [id], onDelete: Cascade)
 
@@ -103,14 +118,137 @@ model Routine {
   frequency String // daily, weekly, custom
   schedule  Json // horaires, saison, paramètres personnalisés
   active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  // Relations
+  animal             Animal               @relation(fields: [animalId], references: [id], onDelete: Cascade)
+  notificationEvents NotificationEvent[]
+
+  @@index([animalId])
+  @@index([active])
+  @@index([animalId, active])
+}
+
+// Module A — Rappels de médicaments (Premium)
+model Medication {
+  id            String    @id @default(uuid())
+  animalId      String
+  name          String
+  dose          String
+  unit          String?
+  frequency     String // daily | every_x_hours | weekly
+  intervalHours Int?      // requis si frequency = every_x_hours
+  startDate     DateTime  @db.Timestamptz(3)
+  endDate       DateTime? @db.Timestamptz(3)
+  notes         String?
+  active        Boolean   @default(true)
+  createdAt     DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime  @updatedAt @db.Timestamptz(3)
+
+  // Relations
+  animal             Animal               @relation(fields: [animalId], references: [id], onDelete: Cascade)
+  notificationEvents NotificationEvent[]
+
+  @@index([animalId])
+  @@index([animalId, active])
+}
+
+// Module A — Rendez-vous vétérinaires (Premium)
+model VetAppointment {
+  id           String    @id @default(uuid())
+  animalId     String
+  vetName      String
+  reason       String?
+  date         DateTime  @db.Timestamptz(3)
+  location     String?
+  notes        String?
+  status       String    @default("scheduled") // scheduled | done | cancelled
+  reminderDays Int[]     @default([7, 1]) // jours avant le RDV pour les rappels (J-N)
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime  @updatedAt @db.Timestamptz(3)
+
+  // Relations
+  animal             Animal               @relation(fields: [animalId], references: [id], onDelete: Cascade)
+  notificationEvents NotificationEvent[]
+
+  @@index([animalId])
+  @@index([animalId, status])
+}
+
+// Module C — Mesures poids/taille (carnet de santé enrichi, Premium)
+model AnimalMeasurement {
+  id         String   @id @default(uuid())
+  animalId   String
+  weightKg   Float? // kg (optionnel si heightCm renseigné)
+  heightCm   Float? // cm (optionnel si weightKg renseigné)
+  measuredAt DateTime @db.Timestamptz(3)
+  notes      String?
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @db.Timestamptz(3)
 
   // Relations
   animal Animal @relation(fields: [animalId], references: [id], onDelete: Cascade)
 
   @@index([animalId])
-  @@index([active])
+  @@index([animalId, measuredAt])
+}
+
+// Module C — Vaccinations structurées avec rappel de rappel (Premium)
+model Vaccination {
+  id          String    @id @default(uuid())
+  animalId    String
+  name        String    // ex. 'Rage'
+  date        DateTime  @db.Timestamptz(3) // date du vaccin
+  nextDueDate DateTime? @db.Timestamptz(3) // date du prochain rappel (génère un événement de rappel)
+  batchNumber String?   // n° de lot
+  vetName     String?   // vétérinaire ayant administré
+  notes       String?
+  createdAt   DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime  @updatedAt @db.Timestamptz(3)
+
+  // Relations
+  animal             Animal               @relation(fields: [animalId], references: [id], onDelete: Cascade)
+  notificationEvents NotificationEvent[]
+
+  @@index([animalId])
+}
+
+// Module D — Modèles de routines par défaut par espèce (proposés à la création d'un animal)
+// Pas de FK : cohérence par speciesId (GBIF key), comme les autres tables Species*.
+model SpeciesRoutineTemplate {
+  id        String   @id @default(uuid())
+  speciesId Int // GBIF key
+  type      String // nourrissage, entretien, uvb, controle
+  name      String?
+  frequency String // daily, weekly, monthly, once, hourly, custom, every_2_days, every_3_days
+  schedule  Json // format frontend : { time: "08:00", recurrence: "daily", ... }
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  @@unique([speciesId, type, order])
+  @@index([speciesId])
+}
+
+// Module B — Suivi de reproduction par animal (Premium)
+model BreedingRecord {
+  id             String   @id @default(uuid())
+  animalId       String
+  eventType      String   // heat | mating | pregnancy | birth | weaning
+  date           DateTime @db.Timestamptz(3) // date de l'événement
+  partnerName    String?  // nom / identifiant du partenaire
+  offspringCount Int?     // nombre de petits (requis si eventType = birth)
+  notes          String?
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @db.Timestamptz(3)
+
+  // Relations
+  animal Animal @relation(fields: [animalId], references: [id], onDelete: Cascade)
+
+  @@index([animalId])
+  @@index([animalId, date])
 }
 
 model ActionLog {
@@ -118,13 +256,14 @@ model ActionLog {
   animalId String
   type     String
   note     String?
-  doneAt   DateTime @default(now())
+  doneAt   DateTime @default(now()) @db.Timestamptz(3)
 
   // Relations
   animal Animal @relation(fields: [animalId], references: [id], onDelete: Cascade)
 
   @@index([animalId])
   @@index([doneAt])
+  @@index([animalId, doneAt])
 }
 
 // ============================================
@@ -136,12 +275,13 @@ model PushSubscription {
   userId    String
   endpoint  String   @unique
   keys      Json // { p256dh, auth }
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
 
   // Relations
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+  @@index([userId, endpoint])
 }
 
 model NotificationPreference {
@@ -152,8 +292,8 @@ model NotificationPreference {
   schedule         Json // { start: "08:00", end: "22:00" } (fenêtre globale)
   snooze           Int      @default(15) // minutes
   deliveryChannel  String   @default("push") // "push" | "email" | "both" — téléphone (push) et/ou email
-  createdAt        DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt        DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime @updatedAt @db.Timestamptz(3)
 
   // Relations
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -165,21 +305,33 @@ model NotificationEvent {
   userId         String
   type           String   // ex: "Nourrissage", "Bain"
   label          String?  // libellé affiché
-  scheduledAt    DateTime
+  scheduledAt    DateTime @db.Timestamptz(3)
   status         String   @default("pending") // pending | done | skipped
   pointsAwarded  Int      @default(0) // 100 si done
   routineId      String?  // optionnel : lien vers une routine (animal)
+  medicationId   String?  // optionnel : lien vers un rappel de médicament (Module A)
+  appointmentId  String?  // optionnel : lien vers un RDV vétérinaire (Module A)
+  vaccinationId  String?  // optionnel : lien vers un rappel vaccin (Module C)
   animalId       String?  // optionnel : animal concerné
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @db.Timestamptz(3)
 
   // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  routine      Routine?       @relation(fields: [routineId], references: [id], onDelete: SetNull)
+  medication   Medication?    @relation(fields: [medicationId], references: [id], onDelete: SetNull)
+  appointment  VetAppointment? @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+  vaccination  Vaccination?   @relation(fields: [vaccinationId], references: [id], onDelete: SetNull)
+  animal       Animal?        @relation(fields: [animalId], references: [id], onDelete: SetNull)
 
   @@index([userId])
   @@index([scheduledAt])
   @@index([userId, scheduledAt])
   @@index([routineId])
+  @@index([medicationId])
+  @@index([appointmentId])
+  @@index([vaccinationId])
+  @@index([userId, status, scheduledAt])
 }
 
 // ============================================
@@ -199,10 +351,12 @@ model SpeciesProfile {
   subcategory         String?   // Sous-catégorie (ex: "Carnivore, Félidé", "Serpent constricteur")
   domesticationType   String    // Type de domestication (domestique, semi-domestique, NAC)
   description         String?   // Description courte (max 500 chars)
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
+  createdAt           DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt           DateTime  @updatedAt @db.Timestamptz(3)
 
-  @@index([speciesId])
+  // Relations
+  animals Animal[]
+
   @@index([category])
   @@index([domesticationType])
 }
@@ -216,8 +370,8 @@ model SpeciesFeeding {
   foodsToAvoid       Json     // Array of { name, reason } ex: [{ name: "Avocat", reason: "Toxique pour cette espèce" }]
   mealFrequency      String   // "daily", "every_2_days", "weekly", "variable", etc.
   specificNeeds      String?  // Besoins spécifiques en protéines, vitamines, calcium, etc. (max 500 chars)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  createdAt          DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime @updatedAt @db.Timestamptz(3)
 
   @@unique([speciesId, locale])
   @@index([speciesId])
@@ -238,8 +392,8 @@ model SpeciesHabitat {
   activityEnrichment   String   // Niveau d'activité et enrichissement nécessaire (max 500 chars)
   hygieneNotes         String?  // Notes sur l'entretien et l'hygiène (max 500 chars)
   costEstimate         String   // "faible", "moyen", "élevé"
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  createdAt            DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt            DateTime @updatedAt @db.Timestamptz(3)
 
   @@unique([speciesId, locale])
   @@index([speciesId])
@@ -255,8 +409,8 @@ model SpeciesBehavior {
   difficultyLevel              String   // "débutant", "intermédiaire", "expert"
   compatibilityWithChildren    String?  // Description de la compatibilité avec enfants (max 500 chars)
   compatibilityWithOtherAnimals String? // Description de la compatibilité avec autres animaux (max 500 chars)
-  createdAt                    DateTime @default(now())
-  updatedAt                    DateTime @updatedAt
+  createdAt                    DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt                    DateTime @updatedAt @db.Timestamptz(3)
 
   @@unique([speciesId, locale])
   @@index([speciesId])
@@ -269,8 +423,8 @@ model SpeciesHealthContent {
   locale      String   @default("fr")
   diseases    Json // Array of { name, symptoms, prevention, whenToConsult }
   sources     Json // Array of { type: 'pubmed'|'lafebervet'|'ivis', url, title }
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
   @@unique([speciesId, locale])
   @@index([speciesId])
@@ -283,12 +437,32 @@ model SpeciesLegislation {
   status      String // allowed, prohibited, permit_required
   details     Json // { citesAppendix, euAnnex, permits, restrictions }
   sources     String[] // URLs to official sources
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
   @@unique([speciesId, country])
   @@index([speciesId])
   @@index([country])
+}
+
+// Module B — Fiche reproduction par espèce (contenu éditorial, rempli par le Module E)
+model SpeciesReproduction {
+  id                   String   @id @default(uuid())
+  speciesId            Int      // GBIF key
+  locale               String   @default("fr")
+  season               String?  // saison de reproduction (ex: "printemps")
+  gestationDays        Int?     // durée de gestation (jours)
+  incubationDays       Int?     // durée d'incubation (jours)
+  litterSizeMin        Int?     // taille de portée min
+  litterSizeMax        Int?     // taille de portée max
+  sexualMaturityMonths Int?     // maturité sexuelle (mois)
+  breedingDifficulty   String?  // facile | modere | avance
+  notes                String?  // notes complémentaires
+  createdAt            DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt            DateTime @updatedAt @db.Timestamptz(3)
+
+  @@unique([speciesId, locale])
+  @@index([speciesId])
 }
 
 model RecommendedEquipment {
@@ -299,8 +473,8 @@ model RecommendedEquipment {
   size        String? // small, medium, large (for animals)
   searchTerms String[] // Keywords for Amazon/product search
   order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
   @@index([speciesId])
   @@index([category])
@@ -315,8 +489,10 @@ model AffiliateStore {
   categories  String[] // Catégories d'espèces: mammifère, reptile, oiseau, poisson, amphibien, insecte, arachnide
   types       String[] // Types d'offre: alimentation, materiel, general
   order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
   @@index([categories])
+  @@index([categories], type: Gin, map: "AffiliateStore_categories_gin_idx")
+  @@index([types], type: Gin, map: "AffiliateStore_types_gin_idx")
 }

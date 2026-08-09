@@ -21,10 +21,16 @@ import { FoodModule } from './food/food.module';
 import { EquipmentModule } from './equipment/equipment.module';
 import { AnimalsModule } from './animals/animals.module';
 import { RoutinesModule } from './routines/routines.module';
+import { MedicationsModule } from './medications/medications.module';
+import { VetAppointmentsModule } from './vet-appointments/vet-appointments.module';
+import { AnimalMeasurementsModule } from './animal-measurements/animal-measurements.module';
+import { VaccinationsModule } from './vaccinations/vaccinations.module';
+import { BreedingModule } from './breeding/breeding.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { GradeModule } from './grade/grade.module';
 import { AffiliateModule } from './affiliate/affiliate.module';
 import { SubscriptionModule } from './subscription/subscription.module';
+import { SpeciesRoutinesModule } from './species-routines/species-routines.module';
 
 const redisEnabled = process.env.REDIS_ENABLED === 'true';
 
@@ -68,7 +74,13 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     AffiliateModule,
     AnimalsModule,
     SubscriptionModule,
+    SpeciesRoutinesModule,
     RoutinesModule,
+    MedicationsModule,
+    VetAppointmentsModule,
+    AnimalMeasurementsModule,
+    VaccinationsModule,
+    BreedingModule,
     NotificationsModule,
     GradeModule,
     CacheModule.registerAsync(),

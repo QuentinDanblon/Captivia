@@ -1,8 +1,23 @@
-import { Controller, Get, Post, Body, Param, Query, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  UseGuards,
+  HttpCode,
+  HttpStatus,
+  BadRequestException,
+  NotFoundException,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiQuery, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { ApiGatewayService } from './api-gateway.service';
 import { RateLimitGuard } from '../common/guards/rate-limit.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { WikipediaData, WikidataData } from '../transformers/data-transformer.interface';
+
+const VALID_SOURCES = ['gbif', 'wikipedia', 'wikidata'];
 
 /**
  * API Gateway Controller - Multi-source species data endpoints
@@ -30,8 +45,16 @@ export class ApiGatewayController {
     @Query('query') query: string,
     @Query('sources') sources: string = 'gbif,wikipedia,wikidata',
   ) {
-    const sourceArray = sources.split(',') as ('gbif' | 'wikipedia' | 'wikidata')[];
-    return this.apiGatewayService.getEnrichedSpecies(query, sourceArray);
+    if (!query || !query.trim()) {
+      throw new BadRequestException('Query parameter is required');
+    }
+    const sourceArray = sources.split(',');
+    for (const source of sourceArray) {
+      if (!VALID_SOURCES.includes(source)) {
+        throw new BadRequestException(`Invalid source: ${source}`);
+      }
+    }
+    return this.apiGatewayService.getEnrichedSpecies(query, sourceArray as ('gbif' | 'wikipedia' | 'wikidata')[]);
   }
 
   /**
@@ -44,7 +67,12 @@ export class ApiGatewayController {
   @ApiResponse({ status: 200, description: 'Complete species information' })
   @ApiResponse({ status: 404, description: 'Species not found' })
   async getCompleteSpecies(@Param('speciesKey') speciesKey: string) {
-    return this.apiGatewayService.getCompleteSpecies(speciesKey);
+    this.validateSpeciesKey(speciesKey);
+    const result = await this.apiGatewayService.getCompleteSpecies(speciesKey);
+    if (!result || result.sources.length === 0) {
+      throw new NotFoundException('Species not found');
+    }
+    return result;
   }
 
   /**
@@ -65,8 +93,13 @@ export class ApiGatewayController {
     @Query('limit') limit: string = '20',
     @Query('sources') sources: string = 'gbif',
   ) {
-    const sourceArray = sources.split(',') as ('gbif' | 'wikipedia' | 'wikidata')[];
-    return this.apiGatewayService.searchSpecies(query, parseInt(limit), sourceArray);
+    const sourceArray = sources.split(',');
+    for (const source of sourceArray) {
+      if (!VALID_SOURCES.includes(source)) {
+        throw new BadRequestException(`Invalid source: ${source}`);
+      }
+    }
+    return this.apiGatewayService.searchSpecies(query, parseInt(limit), sourceArray as ('gbif' | 'wikipedia' | 'wikidata')[]);
   }
 
   /**
@@ -79,7 +112,12 @@ export class ApiGatewayController {
   @ApiResponse({ status: 200, description: 'Conservation status data' })
   @ApiResponse({ status: 404, description: 'Species not found' })
   async getConservationStatus(@Param('speciesKey') speciesKey: string) {
-    return this.apiGatewayService.getConservationStatus(speciesKey);
+    this.validateSpeciesKey(speciesKey);
+    const result = await this.apiGatewayService.getConservationStatus(speciesKey);
+    if (!result || Object.values(result).every((value) => value === null)) {
+      throw new NotFoundException('Species not found');
+    }
+    return result;
   }
 
   /**
@@ -92,7 +130,12 @@ export class ApiGatewayController {
   @ApiResponse({ status: 200, description: 'Classification data' })
   @ApiResponse({ status: 404, description: 'Species not found' })
   async getClassification(@Param('speciesKey') speciesKey: string) {
-    return this.apiGatewayService.getClassification(speciesKey);
+    this.validateSpeciesKey(speciesKey);
+    const result = await this.apiGatewayService.getClassification(speciesKey);
+    if (!result || Object.values(result).every((value) => value === null)) {
+      throw new NotFoundException('Species not found');
+    }
+    return result;
   }
 
   /**
@@ -105,7 +148,12 @@ export class ApiGatewayController {
   @ApiResponse({ status: 200, description: 'Distribution data' })
   @ApiResponse({ status: 404, description: 'Species not found' })
   async getDistributions(@Param('speciesKey') speciesKey: string) {
-    return this.apiGatewayService.getDistributions(speciesKey);
+    this.validateSpeciesKey(speciesKey);
+    const result = await this.apiGatewayService.getDistributions(speciesKey);
+    if (!result || Object.values(result).every((value) => value === null)) {
+      throw new NotFoundException('Species not found');
+    }
+    return result;
   }
 
   /**
@@ -118,7 +166,12 @@ export class ApiGatewayController {
   @ApiResponse({ status: 200, description: 'Media data' })
   @ApiResponse({ status: 404, description: 'Species not found' })
   async getMedia(@Param('speciesKey') speciesKey: string) {
-    return this.apiGatewayService.getMedia(speciesKey);
+    this.validateSpeciesKey(speciesKey);
+    const result = await this.apiGatewayService.getMedia(speciesKey);
+    if (!result || Object.values(result).every((value) => value === null)) {
+      throw new NotFoundException('Species not found');
+    }
+    return result;
   }
 
   /**
@@ -155,8 +208,11 @@ export class ApiGatewayController {
    */
   @Post('clear-cache/:speciesKey')
   @HttpCode(HttpStatus.OK)
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Clear cache for a species' })
   @ApiResponse({ status: 200, description: 'Cache cleared' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
   async clearCache(@Param('speciesKey') speciesKey: string) {
     await this.apiGatewayService.clearSpeciesCache(speciesKey);
     return { message: 'Cache cleared successfully' };
@@ -193,5 +249,15 @@ export class ApiGatewayController {
   @ApiResponse({ status: 200, description: 'Service health status' })
   async checkServiceHealth(@Param('service') service: 'gbif' | 'wikipedia' | 'wikidata') {
     return this.apiGatewayService.checkServiceHealth(service);
+  }
+
+  /**
+   * Validate that a species key is numeric
+   * @param speciesKey Species key to validate
+   */
+  private validateSpeciesKey(speciesKey: string): void {
+    if (!/^\d+$/.test(speciesKey)) {
+      throw new BadRequestException('speciesKey must be numeric');
+    }
   }
 }

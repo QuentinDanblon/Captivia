@@ -35,7 +35,20 @@ describe('AnimalsService', () => {
     updatedAt: new Date(),
   };
 
+  // Transaction context used by create() (prisma.$transaction(async (tx) => ...))
+  const mockTx = {
+    user: {
+      findUnique: jest.fn(),
+    },
+    animal: {
+      create: jest.fn(),
+    },
+  };
+
   const mockPrismaService = {
+    $transaction: jest.fn((callback: (tx: typeof mockTx) => unknown) =>
+      callback(mockTx),
+    ),
     user: {
       findUnique: jest.fn(),
     },
@@ -81,26 +94,27 @@ describe('AnimalsService', () => {
     };
 
     it('should create first animal for free user', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue({
+      mockTx.user.findUnique.mockResolvedValue({
         ...mockUser,
         _count: { animals: 0 },
       });
-      mockPrismaService.animal.create.mockResolvedValue(mockAnimal);
+      mockTx.animal.create.mockResolvedValue(mockAnimal);
 
       const result = await service.create(mockUserId, createDto);
 
       expect(result).toEqual(mockAnimal);
-      expect(mockPrismaService.animal.create).toHaveBeenCalledWith({
+      expect(mockTx.animal.create).toHaveBeenCalledWith({
         data: expect.objectContaining({
           userId: mockUserId,
           speciesId: createDto.speciesId,
           name: createDto.name,
         }),
+        include: expect.any(Object),
       });
     });
 
     it('should throw ForbiddenException when free user tries to create second animal', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue({
+      mockTx.user.findUnique.mockResolvedValue({
         ...mockUser,
         isPremium: false,
         _count: { animals: 1 },
@@ -115,21 +129,21 @@ describe('AnimalsService', () => {
     });
 
     it('should allow premium user to create unlimited animals', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue({
+      mockTx.user.findUnique.mockResolvedValue({
         ...mockUser,
         isPremium: true,
         _count: { animals: 5 },
       });
-      mockPrismaService.animal.create.mockResolvedValue(mockAnimal);
+      mockTx.animal.create.mockResolvedValue(mockAnimal);
 
       const result = await service.create(mockUserId, createDto);
 
       expect(result).toEqual(mockAnimal);
-      expect(mockPrismaService.animal.create).toHaveBeenCalled();
+      expect(mockTx.animal.create).toHaveBeenCalled();
     });
 
     it('should throw NotFoundException if user not found', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue(null);
+      mockTx.user.findUnique.mockResolvedValue(null);
 
       await expect(service.create(mockUserId, createDto)).rejects.toThrow(
         NotFoundException,
@@ -142,21 +156,22 @@ describe('AnimalsService', () => {
         name: 'Rex',
       };
 
-      mockPrismaService.user.findUnique.mockResolvedValue({
+      mockTx.user.findUnique.mockResolvedValue({
         ...mockUser,
         _count: { animals: 0 },
       });
-      mockPrismaService.animal.create.mockResolvedValue(mockAnimal);
+      mockTx.animal.create.mockResolvedValue(mockAnimal);
 
       await service.create(mockUserId, minimalDto);
 
-      expect(mockPrismaService.animal.create).toHaveBeenCalledWith({
+      expect(mockTx.animal.create).toHaveBeenCalledWith({
         data: expect.objectContaining({
           birthDate: null,
           sex: null,
           photos: [],
           notes: null,
         }),
+        include: expect.any(Object),
       });
     });
   });
@@ -230,7 +245,7 @@ describe('AnimalsService', () => {
         ForbiddenException,
       );
       await expect(service.findOne(mockAnimalId, mockUserId)).rejects.toThrow(
-        'You do not own this animal',
+        'Access denied',
       );
     });
   });
@@ -254,6 +269,7 @@ describe('AnimalsService', () => {
       expect(mockPrismaService.animal.update).toHaveBeenCalledWith({
         where: { id: mockAnimalId },
         data: expect.objectContaining(updateDto),
+        include: expect.any(Object),
       });
     });
 
@@ -285,6 +301,10 @@ describe('AnimalsService', () => {
       expect(mockPrismaService.animal.update).toHaveBeenCalledWith({
         where: { id: mockAnimalId },
         data: { name: 'New Name' },
+        include: {
+          father: expect.any(Object),
+          mother: expect.any(Object),
+        },
       });
     });
   });

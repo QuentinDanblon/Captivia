@@ -104,10 +104,7 @@ describe('SpeciesController', () => {
         rank: 'SPECIES',
       };
 
-      mockSpeciesService.getSpecies.mockResolvedValue({
-        data: mockSpecies,
-        source: 'gbif',
-      });
+      mockSpeciesService.getSpecies.mockResolvedValue(mockSpecies);
 
       const result = await controller.getSpecies({ id: '1' });
 

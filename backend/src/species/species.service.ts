@@ -285,6 +285,27 @@ export class SpeciesService {
     }
   }
 
+  /**
+   * Fiche reproduction d'une espèce (Module B). Retourne 404 propre si aucune
+   * ligne SpeciesReproduction n'existe pour ce speciesId (le contenu éditorial
+   * est rempli par le Module E).
+   */
+  async getReproduction(id: string) {
+    if (!/^[1-9]\d*$/.test(id)) {
+      throw new NotFoundException(
+        'Reproduction data not available for this species',
+      );
+    }
+    const speciesId = Number(id);
+    const record = await this.speciesProfileService.getReproduction(speciesId);
+    if (!record) {
+      throw new NotFoundException(
+        'Reproduction data not available for this species',
+      );
+    }
+    return record;
+  }
+
   async getDistributions(id: string) {
     this.logger.log(`Getting distributions for species: ${id}`);
 

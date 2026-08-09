@@ -40,18 +40,23 @@ export default function MagasinPage() {
   const t = useTranslations();
   const [stores, setStores] = useState<AffiliateStore[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
+    setError(null);
     api
       .getAffiliateStores(selectedCategory || undefined, undefined)
       .then((data) => {
         if (!cancelled) setStores(Array.isArray(data) ? data : []);
       })
-      .catch(() => {
-        if (!cancelled) setStores([]);
+      .catch((err) => {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : t('common.error'));
+          setStores([]);
+        }
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -93,6 +98,10 @@ export default function MagasinPage() {
         {loading ? (
           <div className="flex items-center justify-center py-16">
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent" />
+          </div>
+        ) : error ? (
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl shadow-lg p-8 text-center text-red-600 dark:text-red-400">
+            {t('common.error')} : {error}
           </div>
         ) : stores.length === 0 ? (
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center text-gray-500 dark:text-gray-400">

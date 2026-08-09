@@ -21,7 +21,14 @@ export class AdvancedSearchController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche avancée d\'espèces avec filtres' })
   @ApiResponse({ status: 200, description: 'Résultats de recherche' })
-  async advancedSearch(@Query() dto: AdvancedSearchDto) {
+  async advancedSearch(@Query() params: any) {
+    const dto: AdvancedSearchDto = {
+      ...params,
+      query: params.query ?? params.q,
+      limit: params.limit ? Number(params.limit) : undefined,
+      offset: params.offset ? Number(params.offset) : undefined,
+      minOccurrences: params.minOccurrences ? Number(params.minOccurrences) : undefined,
+    };
     return this.advancedSearchService.advancedSearch(dto);
   }
 
@@ -54,7 +61,7 @@ export class AdvancedSearchController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche par filtres contextuels' })
   @ApiResponse({ status: 200, description: 'Résultats de recherche' })
-  async searchByFilters(@Query() dto: SpeciesFilterDto) {
+  async searchByFilters(@Query() dto: any) {
     return this.advancedSearchService.searchByFilters(dto);
   }
 

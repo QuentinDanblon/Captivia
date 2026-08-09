@@ -110,7 +110,7 @@ describe('Edge Cases Tests', () => {
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${token}`)
         .send({
-          speciesId: 123,
+          speciesId: 5221172,
           name: "L'Animal de José & María",
         })
         .expect(201);
@@ -151,14 +151,15 @@ describe('Edge Cases Tests', () => {
       const token = response.body.accessToken;
       const longName = 'A'.repeat(1000);
       
+      // Durci : MaxLength(100) sur name → rejet 400 (plus d'acceptation silencieuse)
       await request(app.getHttpServer())
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${token}`)
         .send({
-          speciesId: 123,
+          speciesId: 5221172,
           name: longName,
         })
-        .expect(201); // Should accept or truncate
+        .expect(400);
     });
   });
 
@@ -226,9 +227,12 @@ describe('Edge Cases Tests', () => {
     });
 
     it('should handle missing Content-Type header', async () => {
+      // Email unique → indépendant de l'état de la DB (les runs précédents
+      // laissent des utilisateurs résiduels)
+      const uniqueEmail = `no-content-type-${Date.now()}@captivia.com`;
       await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ email: 'test@example.com', password: 'password123' })
+        .send({ email: uniqueEmail, password: 'password123' })
         .expect((res) => {
           expect([201, 400, 415]).toContain(res.status);
         });
@@ -270,7 +274,7 @@ describe('Edge Cases Tests', () => {
       const animalResponse = await request(app.getHttpServer())
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${token}`)
-        .send({ speciesId: 123, name: 'Cascade Test' });
+        .send({ speciesId: 5221172, name: 'Cascade Test' });
       
       const animalId = animalResponse.body.id;
       
@@ -303,14 +307,16 @@ describe('Edge Cases Tests', () => {
   describe('Pagination Edge Cases', () => {
     it('should handle offset beyond available results', () => {
       return request(app.getHttpServer())
-        .get('/species/search?q=boa&offset=100000')
+        .get('/species/search?q=gecko&offset=100000')
         .expect(200);
-    });
+    }, 30000);
 
     it('should handle pagination at exact boundary', () => {
+      // q=gecko : profil seed local (1 résultat) ; offset 20 dépasse → fallback GBIF.
+      // Timeout 30s car le fallback GBIF peut être lent (réseau).
       return request(app.getHttpServer())
-        .get('/species/search?q=boa&limit=20&offset=20')
+        .get('/species/search?q=gecko&limit=20&offset=20')
         .expect(200);
-    });
+    }, 30000);
   });
 });

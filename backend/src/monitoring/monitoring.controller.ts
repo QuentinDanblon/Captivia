@@ -2,10 +2,11 @@ import { Controller, Get, Delete, UseGuards, HttpCode, HttpStatus } from '@nestj
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { MetricsService } from './metrics.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { OperatorGuard } from '../common/guards/operator.guard';
 
 @ApiTags('monitoring')
 @Controller('monitoring')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, OperatorGuard)
 export class MonitoringController {
   constructor(private readonly metricsService: MetricsService) {}
 

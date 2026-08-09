@@ -2,10 +2,11 @@ import { Controller, Get, Post, Delete, Query, UseGuards, HttpCode, HttpStatus }
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { DatabaseOptimizationService } from './database-optimization.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { OperatorGuard } from '../common/guards/operator.guard';
 
 @ApiTags('database')
 @Controller('database')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, OperatorGuard)
 export class DatabaseOptimizationController {
   constructor(private readonly optimizationService: DatabaseOptimizationService) {}
 

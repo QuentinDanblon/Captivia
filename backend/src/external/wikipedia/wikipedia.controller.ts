@@ -1,7 +1,7 @@
 import {
   Controller,
   Get,
-  Param,
+  Query,
   NotFoundException,
   InternalServerErrorException,
   UseGuards,
@@ -10,7 +10,7 @@ import { RateLimitGuard } from '../../common/guards/rate-limit.guard';
 import {
   ApiTags,
   ApiOperation,
-  ApiParam,
+  ApiQuery,
   ApiResponse,
 } from '@nestjs/swagger';
 import { WikipediaService } from './wikipedia.service';
@@ -24,12 +24,12 @@ export class WikipediaController {
 
   @Get('search')
   @ApiOperation({ summary: 'Search Wikipedia for a species' })
-  @ApiParam({ name: 'q', description: 'Search query' })
+  @ApiQuery({ name: 'q', description: 'Search query' })
   @ApiResponse({ status: 200, description: 'Search results' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async search(@Param() params: { q: string }) {
+  async search(@Query('q') q: string) {
     try {
-      return await this.wikipediaService.searchSpecies(params.q);
+      return await this.wikipediaService.searchSpecies(q);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;
@@ -40,12 +40,12 @@ export class WikipediaController {
 
   @Get('article')
   @ApiOperation({ summary: 'Get Wikipedia article for a species' })
-  @ApiParam({ name: 'title', description: 'Article title' })
+  @ApiQuery({ name: 'title', description: 'Article title' })
   @ApiResponse({ status: 200, description: 'Article data' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getArticle(@Param() params: { title: string }) {
+  async getArticle(@Query('title') title: string) {
     try {
-      return await this.wikipediaService.getArticle(params.title);
+      return await this.wikipediaService.getArticle(title);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;
@@ -56,12 +56,12 @@ export class WikipediaController {
 
   @Get('extract')
   @ApiOperation({ summary: 'Get Wikipedia extract for a species' })
-  @ApiParam({ name: 'title', description: 'Article title' })
+  @ApiQuery({ name: 'title', description: 'Article title' })
   @ApiResponse({ status: 200, description: 'Extract text' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getExtract(@Param() params: { title: string }) {
+  async getExtract(@Query('title') title: string) {
     try {
-      return await this.wikipediaService.getExtract(params.title);
+      return await this.wikipediaService.getExtract(title);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;
@@ -72,12 +72,12 @@ export class WikipediaController {
 
   @Get('page')
   @ApiOperation({ summary: 'Get full Wikipedia page for a species' })
-  @ApiParam({ name: 'title', description: 'Article title' })
+  @ApiQuery({ name: 'title', description: 'Article title' })
   @ApiResponse({ status: 200, description: 'Full page content' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getPage(@Param() params: { title: string }) {
+  async getPage(@Query('title') title: string) {
     try {
-      return await this.wikipediaService.getPage(params.title);
+      return await this.wikipediaService.getPage(title);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;

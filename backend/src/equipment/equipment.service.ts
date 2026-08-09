@@ -1,4 +1,5 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { AmazonPAService } from './services/amazon-pa.service';
 
@@ -161,9 +162,21 @@ export class EquipmentService {
   }
 
   async deleteRecommendation(id: string) {
-    return this.prisma.recommendedEquipment.delete({
-      where: { id },
-    });
+    try {
+      return await this.prisma.recommendedEquipment.delete({
+        where: { id },
+      });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        throw new NotFoundException(
+          `Equipment recommendation ${id} not found`,
+        );
+      }
+      throw error;
+    }
   }
 
   async getCategories(): Promise<string[]> {

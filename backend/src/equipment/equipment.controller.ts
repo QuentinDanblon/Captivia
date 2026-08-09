@@ -25,6 +25,7 @@ import {
   AmazonSearchDto,
 } from './dto/equipment.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { OperatorGuard } from '../common/guards/operator.guard';
 
 @ApiTags('equipment')
 @Controller('equipment')
@@ -72,7 +73,7 @@ export class EquipmentController {
   }
 
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, OperatorGuard)
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Create equipment recommendation (admin only)',
@@ -85,7 +86,7 @@ export class EquipmentController {
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, OperatorGuard)
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Update equipment recommendation (admin only)',
@@ -102,7 +103,7 @@ export class EquipmentController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, OperatorGuard)
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Delete equipment recommendation (admin only)',

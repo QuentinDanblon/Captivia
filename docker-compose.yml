@@ -1,27 +1,153 @@
-# PostgreSQL pour Captivia (backend)
-# Lancer avec : docker-compose up -d (ou docker compose up -d avec Docker Desktop récent)
-# Puis créer la DB si besoin : docker-compose exec postgres psql -U user -d captivia -c "SELECT 1"
-# Vérifier le statut : docker-compose ps
-# Arrêter : docker-compose down
-version: '3.8'
+# Captivia - stack complète portable Docker Desktop (Windows / macOS / Linux)
+#
+# Première utilisation :
+#   cp .env.example .env       # macOS/Linux
+#   copy .env.example .env     # Windows PowerShell/cmd
+#   docker compose up --build -d
+#
+# Services : postgres + redis -> migrate (job Prisma) -> backend -> frontend
 
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: captivia-postgres
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: captivia
+      POSTGRES_USER: "${POSTGRES_USER:-user}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-password}"
+      POSTGRES_DB: "${POSTGRES_DB:-captivia}"
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - captivia_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d captivia"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-user} -d $${POSTGRES_DB:-captivia}"]
       interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 10
+      start_period: 5s
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - captivia_redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  # Job court : applique toutes les migrations Prisma avant le backend.
+  # Il garde les devDependencies dans le stage Docker `migrate`, donc le CLI Prisma
+  # est disponible sans installer quoi que ce soit sur la machine hôte.
+  migrate:
+    build:
+      context: ./backend
+      target: migrate
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: "${DOCKER_DATABASE_URL:-postgresql://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@postgres:5432/${POSTGRES_DB:-captivia}?schema=public}"
+    command: ["npx", "prisma", "migrate", "deploy"]
+    restart: "no"
+
+  backend:
+    build:
+      context: ./backend
+      target: runtime
+    ports:
+      - "${BACKEND_PORT:-3001}:3001"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      HOST: 0.0.0.0
+      DATABASE_URL: "${DOCKER_DATABASE_URL:-postgresql://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@postgres:5432/${POSTGRES_DB:-captivia}?schema=public}"
+      JWT_SECRET: "${JWT_SECRET:-dev-only-change-me-captivia-docker-secret-32-chars}"
+      CORS_ORIGIN: "${CORS_ORIGIN:-http://localhost:3000,http://127.0.0.1:3000}"
+      FRONTEND_URL: "${FRONTEND_URL:-http://localhost:3000}"
+      TRUST_PROXY: "${TRUST_PROXY:-false}"
+      CACHE_TYPE: "${CACHE_TYPE:-memory}"
+      REDIS_ENABLED: "${REDIS_ENABLED:-false}"
+      LOG_LEVEL: "${LOG_LEVEL:-info}"
+      LOG_FORMAT: "${LOG_FORMAT:-json}"
+      SENTRY_DSN: "${SENTRY_DSN:-}"
+      WIKIPEDIA_API_BASE_URL: "${WIKIPEDIA_API_BASE_URL:-https://en.wikipedia.org/api/rest_v1}"
+      WIKIPEDIA_RATE_LIMIT: "${WIKIPEDIA_RATE_LIMIT:-100}"
+      WIKIPEDIA_RATE_WINDOW: "${WIKIPEDIA_RATE_WINDOW:-60000}"
+      WIKIDATA_API_BASE_URL: "${WIKIDATA_API_BASE_URL:-https://query.wikidata.org/sparql}"
+      WIKIDATA_RATE_LIMIT: "${WIKIDATA_RATE_LIMIT:-100}"
+      WIKIDATA_RATE_WINDOW: "${WIKIDATA_RATE_WINDOW:-60000}"
+      CACHE_TTL_SPECIES: "${CACHE_TTL_SPECIES:-86400}"
+      CACHE_TTL_MEDIA: "${CACHE_TTL_MEDIA:-3600}"
+      CACHE_TTL_DISTRIBUTIONS: "${CACHE_TTL_DISTRIBUTIONS:-86400}"
+      CACHE_TTL_VERNACULAR: "${CACHE_TTL_VERNACULAR:-43200}"
+      CACHE_TTL_METRICS: "${CACHE_TTL_METRICS:-604800}"
+      CACHE_TTL_SEARCH: "${CACHE_TTL_SEARCH:-3600}"
+      CACHE_TTL: "${CACHE_TTL:-3600}"
+      REDIS_HOST: "${REDIS_HOST:-redis}"
+      REDIS_PORT: "${REDIS_PORT:-6379}"
+      REDIS_PASSWORD: "${REDIS_PASSWORD:-}"
+      REDIS_DB: "${REDIS_DB:-0}"
+      MEMCACHED_HOST: "${MEMCACHED_HOST:-memcached}"
+      MEMCACHED_PORT: "${MEMCACHED_PORT:-11211}"
+      API_RATE_LIMIT_ENABLED: "${API_RATE_LIMIT_ENABLED:-true}"
+      API_RATE_LIMIT_TTL: "${API_RATE_LIMIT_TTL:-3600}"
+      OPERATOR_EMAILS: "${OPERATOR_EMAILS:-}"
+      OPERATOR_EMAIL: "${OPERATOR_EMAIL:-}"
+      SPECIESPLUS_API_TOKEN: "${SPECIESPLUS_API_TOKEN:-}"
+      AMAZON_ACCESS_KEY: "${AMAZON_ACCESS_KEY:-}"
+      AMAZON_SECRET_KEY: "${AMAZON_SECRET_KEY:-}"
+      AMAZON_AFFILIATE_TAG: "${AMAZON_AFFILIATE_TAG:-}"
+      AMAZON_MARKETPLACE: "${AMAZON_MARKETPLACE:-www.amazon.com}"
+      VAPID_PUBLIC_KEY: "${VAPID_PUBLIC_KEY:-}"
+      VAPID_PRIVATE_KEY: "${VAPID_PRIVATE_KEY:-}"
+      VAPID_SUBJECT: "${VAPID_SUBJECT:-mailto:contact@captivia.com}"
+      MAIL_HOST: "${MAIL_HOST:-}"
+      MAIL_PORT: "${MAIL_PORT:-587}"
+      MAIL_SECURE: "${MAIL_SECURE:-false}"
+      MAIL_USER: "${MAIL_USER:-}"
+      MAIL_PASS: "${MAIL_PASS:-}"
+      MAIL_FROM: "${MAIL_FROM:-}"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3001/health >/dev/null || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Cette URL est embarquée dans le bundle navigateur : elle doit être
+        # accessible depuis le navigateur, donc localhost et non `backend`.
+        NEXT_PUBLIC_API_URL: "${NEXT_PUBLIC_API_URL:-http://localhost:3001}"
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/ >/dev/null || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
 
 volumes:
   captivia_pgdata:
+  captivia_redisdata:

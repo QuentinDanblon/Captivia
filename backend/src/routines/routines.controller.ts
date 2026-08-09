@@ -10,6 +10,7 @@ import {
   UseGuards,
   Request,
   ParseIntPipe,
+  BadRequestException,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -171,7 +172,10 @@ export class HistoryController {
     @Param('animalId') animalId: string,
     @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
   ) {
-    return this.routinesService.getHistory(req.user.id, animalId, limit || 100);
+    if (limit !== undefined && (limit < 1 || limit > 100)) {
+      throw new BadRequestException('limit must be between 1 and 100');
+    }
+    return this.routinesService.getHistory(req.user.id, animalId, limit ?? 100);
   }
 
   @Delete(':logId')

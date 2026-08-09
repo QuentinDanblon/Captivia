@@ -17,7 +17,9 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { LegislationService } from './legislation.service';
+import { CreateLegislationDto } from './dto/legislation.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { OperatorGuard } from '../common/guards/operator.guard';
 
 @ApiTags('legislation')
 @Controller('species/:speciesId/legislation')
@@ -45,7 +47,7 @@ export class LegislationController {
   }
 
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, OperatorGuard)
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Create or update legislation content (admin only)',
@@ -56,20 +58,14 @@ export class LegislationController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async createOrUpdateLegislation(
     @Param('speciesId', ParseIntPipe) speciesId: number,
-    @Body()
-    body: {
-      country: string;
-      status: string;
-      details: any;
-      sources: string[];
-    },
+    @Body() body: CreateLegislationDto,
   ) {
     return this.legislationService.createOrUpdateLegislation(
       speciesId,
       body.country,
       body.status,
-      body.details,
-      body.sources,
+      body.details ?? {},
+      body.sources ?? [],
     );
   }
 }

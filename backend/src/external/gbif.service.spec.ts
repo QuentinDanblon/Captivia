@@ -327,58 +327,82 @@ describe('GbifService', () => {
 
   describe('fetchWithBackoff', () => {
     it('should retry on rate limit error', async () => {
-      const axiosModule = require('axios');
-      axiosModule.isAxiosError.mockReturnValue(true);
+      jest.useFakeTimers();
+      try {
+        const axiosModule = require('axios');
+        axiosModule.isAxiosError.mockReturnValue(true);
 
-      const error1 = {
-        response: {
-          status: 429,
-        },
-      };
+        const error1 = {
+          response: {
+            status: 429,
+          },
+        };
 
-      const error2 = {
-        response: {
-          status: 429,
-        },
-      };
+        const error2 = {
+          response: {
+            status: 429,
+          },
+        };
 
-      const successResponse = {
-        data: { key: 1 },
-      };
+        const successResponse = {
+          data: { key: 1 },
+        };
 
-      mockAxios.get
-        .mockRejectedValueOnce(error1)
-        .mockRejectedValueOnce(error2)
-        .mockResolvedValueOnce(successResponse);
+        mockAxios.get
+          .mockRejectedValueOnce(error1)
+          .mockRejectedValueOnce(error2)
+          .mockResolvedValueOnce(successResponse);
 
-      const result = await service.searchSpecies('test', 20, 0);
+        const promise = service.searchSpecies('test', 20, 0);
+        await jest.advanceTimersByTimeAsync(30000);
+        const result = await promise;
 
-      expect(result).toEqual(successResponse.data);
-      expect(mockAxios.get).toHaveBeenCalledTimes(3);
+        expect(result).toEqual(successResponse.data);
+        expect(mockAxios.get).toHaveBeenCalledTimes(3);
+      } finally {
+        jest.useRealTimers();
+      }
     });
 
     it('should throw error after all retries fail', async () => {
-      const error = Object.assign(new Error('Request failed'), {
-        response: { status: 500 },
-      });
-      mockAxios.get.mockRejectedValue(error);
+      jest.useFakeTimers();
+      try {
+        const error = Object.assign(new Error('Request failed'), {
+          response: { status: 500 },
+        });
+        mockAxios.get.mockRejectedValue(error);
 
-      await expect(service.searchSpecies('test', 20, 0)).rejects.toMatchObject({
-        response: { status: 500 },
-      });
-      expect(mockAxios.get).toHaveBeenCalledTimes(3);
+        const promise = service.searchSpecies('test', 20, 0);
+        const assertion = expect(promise).rejects.toMatchObject({
+          response: { status: 500 },
+        });
+        await jest.advanceTimersByTimeAsync(30000);
+        await assertion;
+        // DEFAULT_RETRY_CONFIG.maxRetries = 5
+        expect(mockAxios.get).toHaveBeenCalledTimes(5);
+      } finally {
+        jest.useRealTimers();
+      }
     });
 
     it('should not retry on non-retryable errors', async () => {
-      const error = Object.assign(new Error('Not found'), {
-        response: { status: 404 },
-      });
-      mockAxios.get.mockRejectedValue(error);
+      jest.useFakeTimers();
+      try {
+        const error = Object.assign(new Error('Not found'), {
+          response: { status: 404 },
+        });
+        mockAxios.get.mockRejectedValue(error);
 
-      await expect(service.searchSpecies('test', 20, 0)).rejects.toMatchObject({
-        response: { status: 404 },
-      });
-      expect(mockAxios.get).toHaveBeenCalledTimes(3);
+        const promise = service.searchSpecies('test', 20, 0);
+        const assertion = expect(promise).rejects.toMatchObject({
+          response: { status: 404 },
+        });
+        await jest.advanceTimersByTimeAsync(30000);
+        await assertion;
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
+      } finally {
+        jest.useRealTimers();
+      }
     });
   });
 });

@@ -61,6 +61,93 @@ const ROUTINE_TYPE_LABELS: Record<string, string> = {
   controle: 'Santé',
 };
 
+/** Mapping des noms de jours (format seed) vers getDay() JS : 0=dimanche … 6=samedi */
+const DAY_NAME_TO_INDEX: Record<string, number> = {
+  sunday: 0,
+  monday: 1,
+  tuesday: 2,
+  wednesday: 3,
+  thursday: 4,
+  friday: 5,
+  saturday: 6,
+};
+
+interface NormalizedSchedule {
+  time?: string;
+  recurrence?: string;
+  date?: string;
+  weekDay?: number;
+  dayOfMonth?: number;
+  intervalHours?: number;
+  days?: number[];
+}
+
+/**
+ * Normalise les formats de schedule rencontrés dans le codebase :
+ * - frontend (routines + prefs) : { time: '08:00', recurrence: 'daily', weekDay?, dayOfMonth?, date?, intervalHours? }
+ * - seed :                        { days: ['tuesday','friday'], time: '19:00' }
+ * - ancien format scheduler :     { hour: 8, day: 2, date: 15, hours: [8, 20] }
+ */
+function normalizeSchedule(raw: unknown): NormalizedSchedule {
+  const s = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
+
+  let time: string | undefined = typeof s.time === 'string' ? s.time : undefined;
+  if (!time && typeof s.hour === 'number') time = `${s.hour}:00`;
+  if (!time && Array.isArray(s.hours) && typeof s.hours[0] === 'number') time = `${s.hours[0]}:00`;
+
+  const weekDay: number | undefined =
+    typeof s.weekDay === 'number' ? s.weekDay : typeof s.day === 'number' ? s.day : undefined;
+
+  let days: number[] | undefined;
+  if (Array.isArray(s.days)) {
+    days = s.days
+      .map((d) => (typeof d === 'number' ? d : DAY_NAME_TO_INDEX[String(d).toLowerCase()]))
+      .filter((d): d is number => typeof d === 'number');
+  }
+
+  return {
+    time,
+    recurrence: typeof s.recurrence === 'string' ? s.recurrence : undefined,
+    date: typeof s.date === 'string' ? s.date : s.date != null ? String(s.date) : undefined,
+    weekDay,
+    dayOfMonth: typeof s.dayOfMonth === 'number' ? s.dayOfMonth : undefined,
+    intervalHours: typeof s.intervalHours === 'number' ? s.intervalHours : undefined,
+    days: days && days.length > 0 ? days : undefined,
+  };
+}
+
+/** Vérifie si la récurrence d'un schedule correspond au jour demandé. */
+function matchesSchedule(
+  sch: NormalizedSchedule,
+  todayStr: string,
+  dayOfWeek: number,
+  dayOfMonth: number,
+  daysSinceEpoch: number,
+): boolean {
+  const rec = sch.recurrence || 'daily';
+  if (rec === 'once') {
+    if (!sch.date || sch.date !== todayStr) return false;
+  } else if (rec === 'weekly') {
+    if (sch.days && sch.days.length > 0) {
+      // Format seed : plusieurs jours par semaine (ex: ['tuesday','friday'])
+      if (!sch.days.includes(dayOfWeek)) return false;
+    } else {
+      const wanted = sch.weekDay ?? 0;
+      if (dayOfWeek !== wanted) return false;
+    }
+  } else if (rec === 'monthly') {
+    const wanted = sch.dayOfMonth ?? 1;
+    if (dayOfMonth !== wanted) return false;
+  } else if (rec === 'every_2_days') {
+    if (daysSinceEpoch % 2 !== 0) return false;
+  } else if (rec === 'every_3_days') {
+    if (daysSinceEpoch % 3 !== 0) return false;
+  } else if (rec === 'custom') {
+    return false;
+  }
+  return true;
+}
+
 @Injectable()
 export class GradeService {
   constructor(
@@ -129,36 +216,29 @@ export class GradeService {
       const prefs = await this.prisma.notificationPreference.findUnique({
         where: { userId },
       });
-      if (prefs?.types && typeof prefs.types === 'object' && prefs.typeSchedules && typeof prefs.typeSchedules === 'object') {
+      if (prefs?.types && typeof prefs.types === 'object') {
         const types = prefs.types as Record<string, boolean>;
-        const schedules = prefs.typeSchedules as Record<
-          string,
-          { time?: string; recurrence?: string; date?: string; weekDay?: number; dayOfMonth?: number; intervalHours?: number }
-        >;
+        const rawSchedules =
+          prefs.typeSchedules && typeof prefs.typeSchedules === 'object'
+            ? (prefs.typeSchedules as Record<string, unknown>)
+            : {};
+        const globalStart =
+          prefs.schedule &&
+          typeof prefs.schedule === 'object' &&
+          typeof (prefs.schedule as { start?: unknown }).start === 'string'
+            ? (prefs.schedule as { start: string }).start
+            : '08:00';
 
         for (const [type, enabled] of Object.entries(types)) {
           if (!enabled) continue;
-          const sch = schedules[type];
-          if (!sch?.time) continue;
+          const sch = normalizeSchedule(rawSchedules[type]);
+          const time = sch.time ?? globalStart;
           const rec = sch.recurrence || 'daily';
-
-          if (rec === 'once') {
-            if (sch.date !== todayStr) continue;
-          } else if (rec === 'weekly') {
-            const wanted = sch.weekDay ?? 0;
-            if (dayOfWeek !== wanted) continue;
-          } else if (rec === 'monthly') {
-            const wanted = sch.dayOfMonth ?? 1;
-            if (dayOfMonth !== wanted) continue;
-          } else if (rec === 'every_2_days') {
-            if (daysSinceEpoch % 2 !== 0) continue;
-          } else if (rec === 'every_3_days') {
-            if (daysSinceEpoch % 3 !== 0) continue;
-          }
+          if (!matchesSchedule({ ...sch, time, recurrence: rec }, todayStr, dayOfWeek, dayOfMonth, daysSinceEpoch)) continue;
 
           if (rec === 'hourly') {
             const interval = Math.max(1, Math.min(24, sch.intervalHours ?? 2));
-            const [startH] = (sch.time || '08:00').split(':').map(Number);
+            const [startH] = (time || '08:00').split(':').map(Number);
             for (let hour = startH; hour < 24; hour += interval) {
               const scheduledAt = new Date(date);
               scheduledAt.setUTCHours(hour, 0, 0, 0);
@@ -174,7 +254,7 @@ export class GradeService {
               events = [...events, created];
             }
           } else {
-            const [h, m] = (sch.time || '08:00').split(':').map(Number);
+            const [h, m] = (time || '08:00').split(':').map(Number);
             const scheduledAt = new Date(date);
             scheduledAt.setUTCHours(h, m || 0, 0, 0);
             const created = await this.prisma.notificationEvent.create({
@@ -189,30 +269,17 @@ export class GradeService {
             events = [...events, created];
           }
         }
+      }
 
-      // Événements depuis les routines (associées aux animaux)
+      // Événements depuis les routines (associées aux animaux) — TOUJOURS générés,
+      // même sans préférences de notification configurées.
       const activeRoutines = await this.routinesService.getActiveRoutines(userId);
       for (const routine of activeRoutines) {
-        const sch = (routine.schedule as { time?: string; recurrence?: string; date?: string; weekDay?: number; dayOfMonth?: number; intervalHours?: number }) || {};
-        const time = sch.time || (routine as any).schedule?.time;
+        const sch = normalizeSchedule(routine.schedule);
+        const time = sch.time;
         if (!time) continue;
         const rec = sch.recurrence || routine.frequency || 'daily';
-
-        if (rec === 'once') {
-          if (sch.date !== todayStr) continue;
-        } else if (rec === 'weekly') {
-          const wanted = sch.weekDay ?? 0;
-          if (dayOfWeek !== wanted) continue;
-        } else if (rec === 'monthly') {
-          const wanted = sch.dayOfMonth ?? 1;
-          if (dayOfMonth !== wanted) continue;
-        } else if (rec === 'every_2_days') {
-          if (daysSinceEpoch % 2 !== 0) continue;
-        } else if (rec === 'every_3_days') {
-          if (daysSinceEpoch % 3 !== 0) continue;
-        } else if (rec === 'custom') {
-          continue;
-        }
+        if (!matchesSchedule({ ...sch, time, recurrence: rec }, todayStr, dayOfWeek, dayOfMonth, daysSinceEpoch)) continue;
 
           const typeLabel = routine.name || ROUTINE_TYPE_LABELS[routine.type] || routine.type;
           const animal = (routine as any).animal;
@@ -255,7 +322,124 @@ export class GradeService {
           }
       }
 
+      // Clés anti-doublon : type + refId + scheduledAt, pour les événements créés
+      // dans cette passe (la journée était vide, seuls les doublons intra-passe
+      // sont possibles, ex. rappel J-0 + événement du jour du RDV).
+      const createdKeys = new Set<string>();
+
+      // Module A — Événements depuis les médicaments actifs (Premium)
+      const activeMedications = await this.prisma.medication.findMany({
+        where: { active: true, animal: { userId } },
+      });
+      for (const med of activeMedications) {
+        const startDay = med.startDate.toISOString().slice(0, 10);
+        const endDay = med.endDate ? med.endDate.toISOString().slice(0, 10) : null;
+        if (startDay > todayStr) continue;
+        if (endDay && endDay < todayStr) continue;
+
+        const scheduledAt = new Date(date);
+        scheduledAt.setUTCHours(8, 0, 0, 0);
+        const key = `medication:${med.id}:${scheduledAt.getTime()}`;
+        if (createdKeys.has(key)) continue;
+        createdKeys.add(key);
+        const created = await this.prisma.notificationEvent.create({
+          data: {
+            userId,
+            type: 'medication',
+            label: `💊 ${med.name} (${med.dose})`,
+            scheduledAt,
+            status: 'pending',
+            pointsAwarded: 0,
+            medicationId: med.id,
+            animalId: med.animalId,
+          },
+        });
+        events = [...events, created];
       }
+
+      // Module A — Événements depuis les RDV vétérinaires (Premium)
+      const scheduledAppointments = await this.prisma.vetAppointment.findMany({
+        where: { status: 'scheduled', animal: { userId } },
+      });
+      for (const appt of scheduledAppointments) {
+        const apptDay = appt.date.toISOString().slice(0, 10);
+        const scheduledAt = new Date(date);
+        scheduledAt.setUTCHours(8, 0, 0, 0);
+
+        // Événement du jour du RDV
+        if (apptDay === todayStr) {
+          const key = `vet_appointment:${appt.id}:${scheduledAt.getTime()}`;
+          if (!createdKeys.has(key)) {
+            createdKeys.add(key);
+            const created = await this.prisma.notificationEvent.create({
+              data: {
+                userId,
+                type: 'vet_appointment',
+                label: `🏥 RDV ${appt.vetName}`,
+                scheduledAt,
+                status: 'pending',
+                pointsAwarded: 0,
+                appointmentId: appt.id,
+                animalId: appt.animalId,
+              },
+            });
+            events = [...events, created];
+          }
+        }
+
+        // Rappels J-N (reminderDays jours avant le RDV)
+        for (const n of appt.reminderDays ?? []) {
+          const reminderDate = new Date(appt.date);
+          reminderDate.setUTCDate(reminderDate.getUTCDate() - n);
+          if (reminderDate.toISOString().slice(0, 10) !== todayStr) continue;
+          const key = `vet_appointment:${appt.id}:${scheduledAt.getTime()}`;
+          if (createdKeys.has(key)) continue; // ex. rappel J-0 déjà couvert par l'événement du jour
+          createdKeys.add(key);
+          const created = await this.prisma.notificationEvent.create({
+            data: {
+              userId,
+              type: 'vet_appointment',
+              label: `🔔 ${appt.vetName} (J-${n})`,
+              scheduledAt,
+              status: 'pending',
+              pointsAwarded: 0,
+              appointmentId: appt.id,
+              animalId: appt.animalId,
+            },
+          });
+          events = [...events, created];
+        }
+      }
+
+      // Module C — Événements de rappel vaccin (Premium) : un rappel est créé le
+      // jour où nextDueDate == aujourd'hui (anti-doublon par type+vaccinationId+scheduledAt)
+      const vaccinations = await this.prisma.vaccination.findMany({
+        where: { animal: { userId } },
+      });
+      for (const vac of vaccinations) {
+        if (!vac.nextDueDate) continue;
+        if (vac.nextDueDate.toISOString().slice(0, 10) !== todayStr) continue;
+
+        const scheduledAt = new Date(date);
+        scheduledAt.setUTCHours(8, 0, 0, 0);
+        const key = `vaccination:${vac.id}:${scheduledAt.getTime()}`;
+        if (createdKeys.has(key)) continue;
+        createdKeys.add(key);
+        const created = await this.prisma.notificationEvent.create({
+          data: {
+            userId,
+            type: 'vaccination',
+            label: `💉 Rappel vaccin ${vac.name}`,
+            scheduledAt,
+            status: 'pending',
+            pointsAwarded: 0,
+            vaccinationId: vac.id,
+            animalId: vac.animalId,
+          },
+        });
+        events = [...events, created];
+      }
+
       events.sort((a, b) => a.scheduledAt.getTime() - b.scheduledAt.getTime());
     }
 
@@ -267,6 +451,9 @@ export class GradeService {
       status: e.status,
       pointsAwarded: e.pointsAwarded,
       routineId: e.routineId ?? undefined,
+      medicationId: e.medicationId ?? undefined,
+      appointmentId: e.appointmentId ?? undefined,
+      vaccinationId: e.vaccinationId ?? undefined,
     }));
   }
 
@@ -312,6 +499,9 @@ export class GradeService {
             status: updated.status,
             pointsAwarded: updated.pointsAwarded,
             routineId: updated.routineId ?? undefined,
+            medicationId: updated.medicationId ?? undefined,
+            appointmentId: updated.appointmentId ?? undefined,
+            vaccinationId: updated.vaccinationId ?? undefined,
           }
         : null,
       grade,

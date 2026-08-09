@@ -10,12 +10,16 @@ export class WikidataService {
   private readonly logger = new Logger(WikidataService.name);
   private readonly wikidataApi: AxiosInstance;
   private readonly wikidataQueryApi: AxiosInstance;
+  private readonly wikidataSearchApi: AxiosInstance;
   private readonly wikidataBaseUrl = 'https://www.wikidata.org/wiki/Special:EntityData';
   private readonly wikidataQueryUrl = 'https://query.wikidata.org/sparql';
 
   constructor() {
     this.wikidataApi = axios.create({
       baseURL: this.wikidataBaseUrl,
+      headers: {
+        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
+      },
       timeout: 10000,
     });
 
@@ -24,30 +28,40 @@ export class WikidataService {
       timeout: 10000,
       headers: {
         Accept: 'application/json',
+        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
+      },
+    });
+
+    this.wikidataSearchApi = axios.create({
+      baseURL: 'https://www.wikidata.org/w/api.php',
+      timeout: 10000,
+      headers: {
+        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
       },
     });
   }
 
   /**
-   * Search Wikidata for a species by name using SPARQL query
+   * Search Wikidata for a species by name using the entity search API
    * @param query Search query string
-   * @returns SPARQL query results
+   * @returns Search results from Wikidata
    */
   async searchSpecies(query: string) {
     try {
-      const sparqlQuery = this.buildSearchQuery(query);
-
-      const response = await this.wikidataQueryApi.get('', {
+      const response = await this.wikidataSearchApi.get('', {
         params: {
-          query: sparqlQuery,
+          action: 'wbsearchentities',
+          search: query,
+          language: 'en',
           format: 'json',
+          limit: 10,
         },
       });
 
       return this.transformSearchResults(response.data);
     } catch (error) {
       this.logger.error('Wikidata search failed', error);
-      throw error;
+      return { results: [], source: 'wikidata' };
     }
   }
 
@@ -127,10 +141,11 @@ export class WikidataService {
    * @returns Conservation status data
    */
   async getConservationStatus(qid: string) {
+    if (!qid) return null;
     try {
       const sparqlQuery = `
         SELECT ?iucnStatus ?citesStatus ?berneStatus ?cmsStatus ?statusDescription WHERE {
-          ?item wdt:${qid} .
+          VALUES ?item { wd:${qid} } .
           OPTIONAL { ?item wdt:P141 ?iucnStatus } .
           OPTIONAL { ?item wdt:P727 ?citesStatus } .
           OPTIONAL { ?item wdt:P726 ?berneStatus } .
@@ -168,10 +183,11 @@ export class WikidataService {
    * @returns Classification data
    */
   async getClassification(qid: string) {
+    if (!qid) return null;
     try {
       const sparqlQuery = `
         SELECT ?item ?family ?genus ?order ?phylum ?class ?kingdom ?scientificName ?commonName ?image WHERE {
-          ?item wdt:${qid} .
+          VALUES ?item { wd:${qid} } .
           OPTIONAL { ?item wdt:P734 ?genus } .
           OPTIONAL { ?item wdt:P735 ?family } .
           OPTIONAL { ?item wdt:P105 ?order } .
@@ -213,10 +229,11 @@ export class WikidataService {
    * @returns Description data
    */
   async getDescriptions(qid: string) {
+    if (!qid) return null;
     try {
       const sparqlQuery = `
         SELECT ?description ?shortDescription ?alias WHERE {
-          ?item wdt:${qid} .
+          VALUES ?item { wd:${qid} } .
           OPTIONAL { ?item wdt:P1476 ?description } .
           OPTIONAL { ?item wdt:P1813 ?shortDescription } .
           OPTIONAL { ?item wdt:P1814 ?alias } .
@@ -252,10 +269,11 @@ export class WikidataService {
    * @returns Image data
    */
   async getImages(qid: string) {
+    if (!qid) return null;
     try {
       const sparqlQuery = `
         SELECT ?image ?license ?caption WHERE {
-          ?item wdt:${qid} .
+          VALUES ?item { wd:${qid} } .
           OPTIONAL { ?item wdt:P18 ?image } .
           OPTIONAL { ?item wdt:P6216 ?license } .
           OPTIONAL { ?item wdt:P4032 ?caption } .
@@ -291,10 +309,11 @@ export class WikidataService {
    * @returns Related species data
    */
   async getRelatedSpecies(qid: string) {
+    if (!qid) return null;
     try {
       const sparqlQuery = `
         SELECT ?related ?relatedLabel ?relatedDescription WHERE {
-          ?item wdt:${qid} .
+          VALUES ?item { wd:${qid} } .
           ?related wdt:P31 wd:Q16521 .
           ?related wdt:P727 ?family .
           ?item wdt:P727 ?family .
@@ -353,46 +372,21 @@ export class WikidataService {
   }
 
   /**
-   * Build SPARQL search query
-   */
-  private buildSearchQuery(query: string): string {
-    const escapedQuery = query.replace(/'/g, "\\'");
-    return `
-      SELECT ?item ?itemLabel ?itemDescription ?scientificName ?commonName ?image ?taxonRank WHERE {
-        {
-          ?item wdt:P225 "${escapedQuery}" .
-        } UNION {
-          ?item wdt:P1843 "${escapedQuery}" .
-        } UNION {
-          ?item wdt:P225 ?scientificName .
-          FILTER(LCASE(?scientificName) = LCASE("${escapedQuery}"))
-        }
-        OPTIONAL { ?item wdt:P1843 ?commonName } .
-        OPTIONAL { ?item wdt:P18 ?image } .
-        OPTIONAL { ?item wdt:P105 ?taxonRank } .
-        SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
-      }
-      LIMIT 10
-    `;
-  }
-
-  /**
-   * Transform Wikidata search results
+   * Transform Wikidata entity search results
    */
   private transformSearchResults(data: any) {
-    if (!data.results || !data.results.bindings) {
+    if (!data || !Array.isArray(data.search)) {
       return { results: [], source: 'wikidata' };
     }
 
     return {
-      results: data.results.bindings.map((binding: any) => ({
-        item: binding.item?.value,
-        itemLabel: binding.itemLabel?.value,
-        itemDescription: binding.itemDescription?.value,
-        scientificName: binding.scientificName?.value,
-        commonName: binding.commonName?.value,
-        image: binding.image?.value,
-        taxonRank: binding.taxonRank?.value,
+      results: data.search.map((item: any) => ({
+        item: item.concepturi || `https://www.wikidata.org/wiki/${item.id}`,
+        id: item.id,
+        itemLabel: item.label,
+        itemDescription: item.description,
+        aliases: item.aliases,
+        match: item.match,
         source: 'wikidata',
       })),
       source: 'wikidata',

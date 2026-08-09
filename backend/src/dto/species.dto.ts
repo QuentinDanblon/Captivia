@@ -7,14 +7,27 @@ import {
   IsString,
   IsArray,
   IsEnum,
-  IsBoolean,
+  Matches,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
+/** Statuts IUCN Red List (valeurs officielles) */
+export enum IucnStatus {
+  EX = 'EX',
+  EW = 'EW',
+  CR = 'CR',
+  EN = 'EN',
+  VU = 'VU',
+  NT = 'NT',
+  LC = 'LC',
+  DD = 'DD',
+  NE = 'NE',
+}
+
 export class SearchSpeciesDto {
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  q: string;
+  q?: string;
 
   @IsOptional()
   @Type(() => Number)
@@ -58,8 +71,8 @@ export class SearchSpeciesDto {
   rank?: string;
 
   @IsOptional()
-  @IsString()
-  iucnStatus?: string;
+  @IsEnum(IucnStatus)
+  iucnStatus?: IucnStatus;
 
   @IsOptional()
   @IsString()
@@ -74,6 +87,11 @@ export class SearchSpeciesDto {
 export class GetSpeciesDto {
   @IsNotEmpty()
   @IsString()
+  // Numérique strict (ID GBIF positif, sans zéros en tête ni '0') :
+  // centralise ici la regex qui n'était appliquée que sur une seule route.
+  @Matches(/^[1-9]\d*$/, {
+    message: 'id must be a positive numeric string',
+  })
   id: string;
 }
 

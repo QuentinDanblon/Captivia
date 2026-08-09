@@ -1,7 +1,7 @@
 import {
   Controller,
   Get,
-  Param,
+  Query,
   NotFoundException,
   InternalServerErrorException,
   UseGuards,
@@ -10,7 +10,7 @@ import { RateLimitGuard } from '../../common/guards/rate-limit.guard';
 import {
   ApiTags,
   ApiOperation,
-  ApiParam,
+  ApiQuery,
   ApiResponse,
 } from '@nestjs/swagger';
 import { WikidataService } from './wikidata.service';
@@ -24,12 +24,12 @@ export class WikidataController {
 
   @Get('search')
   @ApiOperation({ summary: 'Search Wikidata for a species' })
-  @ApiParam({ name: 'q', description: 'Search query' })
+  @ApiQuery({ name: 'q', description: 'Search query' })
   @ApiResponse({ status: 200, description: 'Search results' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async search(@Param() params: { q: string }) {
+  async search(@Query('q') q: string) {
     try {
-      return await this.wikidataService.searchSpecies(params.q);
+      return await this.wikidataService.searchSpecies(q);
     } catch (error) {
       throw new InternalServerErrorException('Failed to search Wikidata');
     }
@@ -37,12 +37,12 @@ export class WikidataController {
 
   @Get('entity')
   @ApiOperation({ summary: 'Get Wikidata entity by QID' })
-  @ApiParam({ name: 'qid', description: 'Wikidata QID' })
+  @ApiQuery({ name: 'qid', description: 'Wikidata QID' })
   @ApiResponse({ status: 200, description: 'Entity data' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getEntity(@Param() params: { qid: string }) {
+  async getEntity(@Query('qid') qid: string) {
     try {
-      return await this.wikidataService.getEntity(params.qid);
+      return await this.wikidataService.getEntity(qid);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;
@@ -53,13 +53,13 @@ export class WikidataController {
 
   @Get('species')
   @ApiOperation({ summary: 'Get species info by scientific name' })
-  @ApiParam({ name: 'scientificName', description: 'Scientific name' })
+  @ApiQuery({ name: 'scientificName', description: 'Scientific name' })
   @ApiResponse({ status: 200, description: 'Species data' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getSpecies(@Param() params: { scientificName: string }) {
+  async getSpecies(@Query('scientificName') scientificName: string) {
     try {
       return await this.wikidataService.getSpeciesByScientificName(
-        params.scientificName,
+        scientificName,
       );
     } catch (error) {
       if (error instanceof NotFoundException) {
@@ -71,10 +71,10 @@ export class WikidataController {
 
   @Get('conservation')
   @ApiOperation({ summary: 'Get conservation status for a species' })
-  @ApiParam({ name: 'qid', description: 'Wikidata QID' })
+  @ApiQuery({ name: 'qid', description: 'Wikidata QID' })
   @ApiResponse({ status: 200, description: 'Conservation status' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getConservationStatus(@Param() conservationDto: ConservationStatusDto) {
+  async getConservationStatus(@Query() conservationDto: ConservationStatusDto) {
     try {
       return await this.wikidataService.getConservationStatus(
         conservationDto.qid,
@@ -91,12 +91,12 @@ export class WikidataController {
 
   @Get('classification')
   @ApiOperation({ summary: 'Get classification data for a species' })
-  @ApiParam({ name: 'qid', description: 'Wikidata QID' })
+  @ApiQuery({ name: 'qid', description: 'Wikidata QID' })
   @ApiResponse({ status: 200, description: 'Classification data' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getClassification(@Param() params: { qid: string }) {
+  async getClassification(@Query('qid') qid: string) {
     try {
-      return await this.wikidataService.getClassification(params.qid);
+      return await this.wikidataService.getClassification(qid);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;
@@ -107,12 +107,12 @@ export class WikidataController {
 
   @Get('descriptions')
   @ApiOperation({ summary: 'Get descriptions for a species' })
-  @ApiParam({ name: 'qid', description: 'Wikidata QID' })
+  @ApiQuery({ name: 'qid', description: 'Wikidata QID' })
   @ApiResponse({ status: 200, description: 'Description data' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getDescriptions(@Param() params: { qid: string }) {
+  async getDescriptions(@Query('qid') qid: string) {
     try {
-      return await this.wikidataService.getDescriptions(params.qid);
+      return await this.wikidataService.getDescriptions(qid);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;
@@ -123,12 +123,12 @@ export class WikidataController {
 
   @Get('images')
   @ApiOperation({ summary: 'Get images for a species' })
-  @ApiParam({ name: 'qid', description: 'Wikidata QID' })
+  @ApiQuery({ name: 'qid', description: 'Wikidata QID' })
   @ApiResponse({ status: 200, description: 'Image data' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getImages(@Param() params: { qid: string }) {
+  async getImages(@Query('qid') qid: string) {
     try {
-      return await this.wikidataService.getImages(params.qid);
+      return await this.wikidataService.getImages(qid);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;
@@ -139,12 +139,12 @@ export class WikidataController {
 
   @Get('related')
   @ApiOperation({ summary: 'Get related species for a species' })
-  @ApiParam({ name: 'qid', description: 'Wikidata QID' })
+  @ApiQuery({ name: 'qid', description: 'Wikidata QID' })
   @ApiResponse({ status: 200, description: 'Related species' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getRelatedSpecies(@Param() params: { qid: string }) {
+  async getRelatedSpecies(@Query('qid') qid: string) {
     try {
-      return await this.wikidataService.getRelatedSpecies(params.qid);
+      return await this.wikidataService.getRelatedSpecies(qid);
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;

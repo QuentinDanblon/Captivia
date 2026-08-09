@@ -180,24 +180,9 @@ export default function NotificationsPreferencesPage() {
     setSubscribed(permission === 'granted');
   };
 
-  const requestPermission = async () => {
-    if (!('Notification' in window)) {
-      alert('Notifications not supported in this browser');
-      return;
-    }
-
-    try {
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') {
-        setSubscribed(true);
-        
-        // In production, register service worker and send subscription to backend
-        console.log('Notification permission granted');
-      }
-    } catch (error) {
-      console.error('Error requesting notification permission:', error);
-    }
-  };
+  // Push web non implémenté côté backend : le bouton d'autorisation est désactivé
+  // (« bientôt disponible ») — la fonction requestPermission a été retirée pour
+  // ne pas promettre une fonctionnalité inexistante.
 
   const handleSave = async () => {
     const authToken = (token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null))?.trim();
@@ -529,12 +514,18 @@ export default function NotificationsPreferencesPage() {
               {t('notifications.enable')}
             </h2>
             {!subscribed ? (
-              <button
-                onClick={requestPermission}
-                className="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
-              >
-                Autoriser les notifications
-              </button>
+              <div>
+                <button
+                  disabled
+                  title={t('notifications.comingSoon')}
+                  className="px-6 py-3 bg-gray-300 text-gray-500 dark:bg-gray-600 dark:text-gray-400 rounded-lg cursor-not-allowed"
+                >
+                  Autoriser les notifications
+                </button>
+                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                  {t('notifications.comingSoon')}
+                </p>
+              </div>
             ) : (
               <div className="flex items-center gap-3 text-green-600">
                 <svg
@@ -880,12 +871,10 @@ export default function NotificationsPreferencesPage() {
                 max="120"
                 step="5"
                 value={preferences.snooze ?? 15}
-                onChange={(e) =>
-                  setPreferences((prev: any) => ({
-                    ...prev,
-                    snooze: parseInt(e.target.value),
-                  }))
-                }
+                onChange={(e) => {
+                  const snooze = parseInt(e.target.value);
+                  autoSavePreferences({ ...preferences, snooze });
+                }}
                 className="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white"
               />
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">

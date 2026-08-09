@@ -115,10 +115,10 @@ describe('API E2E Tests', () => {
   });
 
   describe('Error Handling', () => {
-    it('/species/:id with non-numeric id should return 404', () => {
+    it('/species/:id with non-numeric id should return 400 (DTO validation)', () => {
       return request(app.getHttpServer())
         .get('/species/invalid-path')
-        .expect(404);
+        .expect(400);
     });
 
     it('/invalid-endpoint should return 404', () => {
@@ -207,7 +207,7 @@ describe('API E2E Tests', () => {
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${authToken}`)
         .send({
-          speciesId: 123,
+          speciesId: 5221172, // gecko léopard (seed local)
           name: 'Test Animal',
           sex: 'male',
         })
@@ -215,7 +215,7 @@ describe('API E2E Tests', () => {
 
       expect(response.body).toHaveProperty('id');
       expect(response.body).toHaveProperty('name', 'Test Animal');
-      expect(response.body).toHaveProperty('speciesId', 123);
+      expect(response.body).toHaveProperty('speciesId', 5221172);
       
       animalId = response.body.id;
     });
@@ -225,7 +225,7 @@ describe('API E2E Tests', () => {
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${authToken}`)
         .send({
-          speciesId: 456,
+          speciesId: 5221172,
           name: 'Second Animal',
         })
         .expect(403);

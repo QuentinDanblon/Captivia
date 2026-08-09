@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CacheService } from '../../cache/cache.service';
 
 // Note: In production, you would use 'amazon-paapi' or similar library
@@ -18,6 +18,7 @@ interface AmazonProduct {
 
 @Injectable()
 export class AmazonPAService {
+  private readonly logger = new Logger(AmazonPAService.name);
   private readonly cachePrefix = 'amazon:';
   private readonly affiliateTag = process.env.AMAZON_AFFILIATE_TAG || '';
   private readonly accessKey = process.env.AMAZON_ACCESS_KEY || '';

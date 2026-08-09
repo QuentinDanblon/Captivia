@@ -75,6 +75,106 @@ export interface SearchSpeciesFilters {
   country?: string;
 }
 
+export interface Medication {
+  id: string;
+  name: string;
+  dose: string;
+  unit?: string | null;
+  frequency: 'daily' | 'every_x_hours' | 'weekly';
+  intervalHours?: number | null;
+  startDate: string;
+  endDate?: string | null;
+  notes?: string | null;
+  active: boolean;
+}
+
+export interface VetAppointment {
+  id: string;
+  vetName: string;
+  reason?: string | null;
+  date: string;
+  location?: string | null;
+  notes?: string | null;
+  status: 'scheduled' | 'done' | 'cancelled';
+  reminderDays: number[];
+}
+
+export interface AnimalMeasurement {
+  id: string;
+  weightKg?: number | null;
+  heightCm?: number | null;
+  measuredAt: string;
+  notes?: string | null;
+}
+
+export interface Vaccination {
+  id: string;
+  name: string;
+  date: string;
+  nextDueDate?: string | null;
+  batchNumber?: string | null;
+  vetName?: string | null;
+  notes?: string | null;
+}
+
+export interface BreedingRecord {
+  id: string;
+  eventType: 'heat' | 'mating' | 'pregnancy' | 'birth' | 'weaning';
+  date: string;
+  partnerName?: string | null;
+  offspringCount?: number | null;
+  notes?: string | null;
+}
+
+export interface SpeciesReproduction {
+  id: string;
+  speciesId: number;
+  season?: string | null;
+  gestationDays?: number | null;
+  incubationDays?: number | null;
+  litterSizeMin?: number | null;
+  litterSizeMax?: number | null;
+  sexualMaturityMonths?: number | null;
+  breedingDifficulty?: string | null;
+  notes?: string | null;
+}
+
+/** Référence parente d'un animal (père/mère) renvoyée par le backend (module F). */
+export interface AnimalParent {
+  id: string;
+  name: string;
+  sex?: string;
+  photos?: string[];
+}
+
+/** Animal du user (module F : parenté + groupe/enclos). */
+export interface Animal {
+  id: string;
+  name: string;
+  speciesId: number;
+  birthDate?: string;
+  sex?: string;
+  photos?: string[];
+  notes?: string;
+  publicSlug?: string;
+  fatherId?: string | null;
+  motherId?: string | null;
+  groupName?: string | null;
+  father?: AnimalParent | null;
+  mother?: AnimalParent | null;
+}
+
+/** Routine par défaut proposée pour une espèce (module D). */
+export interface SpeciesRoutineTemplate {
+  id: string;
+  speciesId: number;
+  type: string;
+  name?: string | null;
+  frequency: string;
+  schedule: Record<string, unknown> | null;
+  order: number;
+}
+
 export const api = {
   // Species endpoints
   searchSpecies: async (
@@ -117,7 +217,7 @@ export const api = {
         (err.message === 'Failed to fetch' || err.message === 'Load failed');
       if (isNetworkError) {
         throw new Error(
-          'Le serveur de recherche est indisponible. Vérifiez que le backend est démarré (port 3000).'
+          'Le serveur de recherche est indisponible. Vérifiez que le backend est démarré (port 3001).'
         );
       }
       throw err;
@@ -301,6 +401,27 @@ export const api = {
     return data;
   },
 
+  // Descendants (petits) d'un animal (module F)
+  getOffspring: async (animalId: string, token: string): Promise<Animal[]> => {
+    const response = await safeFetch(
+      `${API_URL}/users/me/animals/${animalId}/offspring`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const message =
+        (data as { message?: string })?.message ||
+        response.statusText ||
+        `Erreur ${response.status}`;
+      throw new Error(message);
+    }
+    return Array.isArray(data) ? (data as Animal[]) : [];
+  },
+
   // Grade & notification events
   getGrade: async (token: string) => {
     const response = await safeFetch(`${getApiBase()}/users/me/grade`, {
@@ -375,6 +496,28 @@ export const api = {
       }
     );
     return response.json();
+  },
+
+  getRoutineTemplates: async (animalId: string, token: string) => {
+    const response = await safeFetch(
+      `${API_URL}/users/me/animals/${animalId}/routine-templates`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    // 404 = aucune routine par défaut pour cette espèce → liste vide
+    if (response.status === 404) return [];
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const message =
+        (data as { message?: string })?.message ||
+        response.statusText ||
+        `Erreur ${response.status}`;
+      throw new Error(message);
+    }
+    return Array.isArray(data) ? (data as SpeciesRoutineTemplate[]) : [];
   },
 
   createRoutine: async (animalId: string, data: any, token: string) => {
@@ -502,6 +645,409 @@ export const api = {
       throw new Error((data as { message?: string })?.message || response.statusText);
     }
     return response.json().catch(() => ({}));
+  },
+
+  // Medications (traitements médicaux)
+  getMedications: async (animalId: string, token: string) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/medications`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
+    return Array.isArray(data) ? data : [];
+  },
+
+  createMedication: async (
+    animalId: string,
+    data: Partial<Medication>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/medications`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  updateMedication: async (
+    animalId: string,
+    medicationId: string,
+    data: Partial<Medication>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/medications/${medicationId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  deleteMedication: async (
+    animalId: string,
+    medicationId: string,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/medications/${medicationId}`,
+      {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error((data as { message?: string })?.message || response.statusText);
+    }
+    return response.json().catch(() => ({}));
+  },
+
+  // Vet appointments (rendez-vous vétérinaires)
+  getVetAppointments: async (animalId: string, token: string) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/vet-appointments`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
+    return Array.isArray(data) ? data : [];
+  },
+
+  createVetAppointment: async (
+    animalId: string,
+    data: Partial<VetAppointment>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/vet-appointments`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  updateVetAppointment: async (
+    animalId: string,
+    appointmentId: string,
+    data: Partial<VetAppointment>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  deleteVetAppointment: async (
+    animalId: string,
+    appointmentId: string,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
+      {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error((data as { message?: string })?.message || response.statusText);
+    }
+    return response.json().catch(() => ({}));
+  },
+
+  // Measurements (poids & mesures)
+  getMeasurements: async (animalId: string, token: string) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/measurements`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
+    return Array.isArray(data) ? data : [];
+  },
+
+  createMeasurement: async (
+    animalId: string,
+    data: Partial<AnimalMeasurement>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/measurements`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  updateMeasurement: async (
+    animalId: string,
+    measurementId: string,
+    data: Partial<AnimalMeasurement>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/measurements/${measurementId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  deleteMeasurement: async (
+    animalId: string,
+    measurementId: string,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/measurements/${measurementId}`,
+      {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error((data as { message?: string })?.message || response.statusText);
+    }
+    return response.json().catch(() => ({}));
+  },
+
+  // Vaccinations
+  getVaccinations: async (animalId: string, token: string) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/vaccinations`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
+    return Array.isArray(data) ? data : [];
+  },
+
+  createVaccination: async (
+    animalId: string,
+    data: Partial<Vaccination>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/vaccinations`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  updateVaccination: async (
+    animalId: string,
+    vaccinationId: string,
+    data: Partial<Vaccination>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/vaccinations/${vaccinationId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  deleteVaccination: async (
+    animalId: string,
+    vaccinationId: string,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/vaccinations/${vaccinationId}`,
+      {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error((data as { message?: string })?.message || response.statusText);
+    }
+    return response.json().catch(() => ({}));
+  },
+
+  // Breeding records (suivi de reproduction)
+  getBreedingRecords: async (animalId: string, token: string) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/breeding-records`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
+    return Array.isArray(data) ? data : [];
+  },
+
+  createBreedingRecord: async (
+    animalId: string,
+    data: Partial<BreedingRecord>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/breeding-records`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  updateBreedingRecord: async (
+    animalId: string,
+    recordId: string,
+    data: Partial<BreedingRecord>,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/breeding-records/${recordId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    const resData = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
+    return resData;
+  },
+
+  deleteBreedingRecord: async (
+    animalId: string,
+    recordId: string,
+    token: string
+  ) => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/breeding-records/${recordId}`,
+      {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error((data as { message?: string })?.message || response.statusText);
+    }
+    return response.json().catch(() => ({}));
+  },
+
+  // Reproduction de l'espèce (public)
+  getSpeciesReproduction: async (speciesId: string): Promise<SpeciesReproduction | null> => {
+    const response = await safeFetch(`${API_URL}/species/${speciesId}/reproduction`);
+    if (response.status === 404) return null;
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error((data as { message?: string })?.message || response.statusText);
+    }
+    if (!data || typeof data !== 'object' || Object.keys(data as object).length === 0) return null;
+    return data as SpeciesReproduction;
+  },
+
+  // Carnet de santé (export)
+  exportCarnet: async (animalId: string, token: string): Promise<string> => {
+    const response = await safeFetch(
+      `${getApiBase()}/users/me/animals/${animalId}/carnet/export`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error((data as { message?: string })?.message || response.statusText);
+    }
+    const blob = await response.blob();
+    return URL.createObjectURL(blob);
   },
 
   // History endpoints

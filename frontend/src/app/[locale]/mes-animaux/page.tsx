@@ -1,21 +1,14 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { api } from '@/lib/api';
+import { api, type Animal as ApiAnimal, type SpeciesRoutineTemplate } from '@/lib/api';
 import Link from 'next/link';
 
-interface Animal {
-  id: string;
-  name: string;
-  speciesId: number;
+interface Animal extends ApiAnimal {
   speciesName?: string;
-  birthDate?: string;
-  sex?: string;
-  notes?: string;
-  photos?: string[];
   _count?: {
     routines: number;
     history: number;
@@ -29,9 +22,11 @@ interface SpeciesResult {
   vernacularName?: string;
 }
 
-export default function MyAnimalsPage() {
+function MyAnimalsPageContent() {
   const t = useTranslations();
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { user, token, isLoading: authLoading, logout } = useAuth();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,6 +43,13 @@ export default function MyAnimalsPage() {
   const [formSubmitting, setFormSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
   const [toast, setToast] = useState<string | null>(null);
+
+  // Routines recommandées pour l'espèce (module D) — affichées après création
+  const [newAnimalId, setNewAnimalId] = useState<string | null>(null);
+  const [routineTemplates, setRoutineTemplates] = useState<SpeciesRoutineTemplate[]>([]);
+  const [checkedTemplateIds, setCheckedTemplateIds] = useState<Set<string>>(new Set());
+  const [templatesAdding, setTemplatesAdding] = useState(false);
+  const [templatesError, setTemplatesError] = useState('');
 
   // Change photo directly on card
   const [photoAnimalId, setPhotoAnimalId] = useState<string | null>(null);
@@ -178,6 +180,10 @@ export default function MyAnimalsPage() {
     setFormProfilePhotoUrl('');
     setSpeciesQuery('');
     setFormError('');
+    setNewAnimalId(null);
+    setRoutineTemplates([]);
+    setCheckedTemplateIds(new Set());
+    setTemplatesError('');
   };
 
   const openAddModal = (preselectedSpeciesId?: number, preselectedSpeciesName?: string) => {
@@ -190,11 +196,28 @@ export default function MyAnimalsPage() {
     setShowAddModal(true);
   };
 
+  // Open the add-animal modal automatically when arriving with ?addSpecies=...&speciesName=...
+  // (from the "Ajouter à Mes animaux" button on the species page), then clean the URL
+  // so a refresh doesn't re-open the modal.
+  useEffect(() => {
+    if (authLoading || !user) return;
+    const addSpecies = searchParams.get('addSpecies');
+    const speciesName = searchParams.get('speciesName');
+    if (addSpecies && speciesName) {
+      const speciesId = parseInt(addSpecies, 10);
+      if (!Number.isNaN(speciesId)) {
+        openAddModal(speciesId, speciesName);
+        router.replace(pathname, { scroll: false });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, user, authLoading, pathname]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formName.trim()) {
-      setFormError(t('auth.emailRequired').replace('email', 'nom'));
+      setFormError(t('animals.nameRequired'));
       return;
     }
     
@@ -216,11 +239,27 @@ export default function MyAnimalsPage() {
         photos: formProfilePhotoUrl.trim() ? [formProfilePhotoUrl.trim()] : [],
       };
 
-      await api.createAnimal(animalData, token!);
+      const created = await api.createAnimal(animalData, token!);
+      fetchAnimals();
       setToast(`${formName} ${t('animals.animalAdded')}`);
+      // Module D : proposer les routines par défaut de l'espèce
+      const createdId = (created as { id?: string })?.id;
+      if (createdId && token) {
+        try {
+          const templates = await api.getRoutineTemplates(createdId, token);
+          if (templates.length > 0) {
+            setNewAnimalId(createdId);
+            setRoutineTemplates(templates);
+            setCheckedTemplateIds(new Set(templates.map((tpl) => tpl.id)));
+            return; // la modale reste ouverte sur le panneau des routines
+          }
+        } catch (err) {
+          // Backend sans module D (404/erreur) : on ferme la modale normalement
+          console.error('Error fetching routine templates:', err);
+        }
+      }
       setShowAddModal(false);
       resetForm();
-      fetchAnimals();
     } catch (error) {
       const msg = (error instanceof Error ? error.message : String(error)).toLowerCase();
       if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('forbidden') || msg.includes('403') || msg.includes('401')) {
@@ -236,6 +275,98 @@ export default function MyAnimalsPage() {
   };
 
   const canAddAnimal = user?.isPremium || animals.length < 1;
+
+  // ---- Routines recommandées (module D) ----
+  const getTemplateTypeLabel = (type: string): string => {
+    const labels: Record<string, string> = {
+      nourrissage: t('routines.types.feeding'),
+      nettoyage: t('routines.types.cleaning'),
+      uvb: t('routines.types.uvb'),
+      controle: t('routines.types.health'),
+      entretien: t('routines.types.cleaning'),
+    };
+    return labels[type] || type;
+  };
+
+  const getTemplateFrequencyLabel = (frequency: string): string => {
+    const labels: Record<string, string> = {
+      daily: t('routines.frequencies.daily'),
+      every_2_days: t('routines.frequencies.every_2_days'),
+      every_3_days: t('routines.frequencies.every_3_days'),
+      weekly: t('routines.frequencies.weekly'),
+      monthly: t('routines.frequencies.monthly'),
+      once: t('routines.frequencies.once'),
+      hourly: t('routines.frequencies.hourly'),
+      custom: t('routines.frequencies.custom'),
+    };
+    return labels[frequency] || frequency;
+  };
+
+  const handleToggleTemplate = (id: string) => {
+    setCheckedTemplateIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
+
+  const handleToggleAllTemplates = () => {
+    setCheckedTemplateIds((prev) =>
+      prev.size === routineTemplates.length && routineTemplates.length > 0
+        ? new Set()
+        : new Set(routineTemplates.map((tpl) => tpl.id))
+    );
+  };
+
+  const handleAddRoutineTemplates = async () => {
+    if (!newAnimalId || !token || templatesAdding) return;
+    const selected = routineTemplates.filter((tpl) => checkedTemplateIds.has(tpl.id));
+    if (selected.length === 0) {
+      setShowAddModal(false);
+      resetForm();
+      return;
+    }
+    setTemplatesAdding(true);
+    setTemplatesError('');
+    try {
+      await Promise.all(
+        selected.map((tpl) =>
+          api.createRoutine(
+            newAnimalId,
+            {
+              type: tpl.type,
+              frequency: tpl.frequency,
+              schedule: tpl.schedule ?? {},
+              name: tpl.name || undefined,
+              active: true,
+            },
+            token
+          )
+        )
+      );
+      setToast(
+        `${selected.length} ${t('animals.routines').toLowerCase()} ${t('animals.routineTemplates.added')}`
+      );
+      setShowAddModal(false);
+      resetForm();
+      fetchAnimals();
+    } catch (error) {
+      const msg = (error instanceof Error ? error.message : String(error)).toLowerCase();
+      if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('forbidden') || msg.includes('403') || msg.includes('401')) {
+        logout();
+        router.push('/login');
+        return;
+      }
+      console.error('Error adding routine templates:', error);
+      setTemplatesError(error instanceof Error ? error.message : t('animals.errorAdding'));
+    } finally {
+      setTemplatesAdding(false);
+    }
+  };
 
   if (authLoading || loading) {
     return (
@@ -360,7 +491,33 @@ export default function MyAnimalsPage() {
                   <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
                     {animal.speciesName || `Species ID: ${animal.speciesId}`}
                   </p>
+                  {(animal.father?.name || animal.mother?.name) && (
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+                      {animal.father?.name && (
+                        <span>
+                          {t(
+                            `animals.family.${animal.sex === 'female' ? 'daughterOf' : animal.sex === 'unknown' ? 'childOf' : 'sonOf'}`,
+                            { name: animal.father.name }
+                          )}
+                        </span>
+                      )}
+                      {animal.father?.name && animal.mother?.name && <span> · </span>}
+                      {animal.mother?.name && (
+                        <span>
+                          {t(
+                            `animals.family.${animal.sex === 'female' ? 'daughterOf' : animal.sex === 'unknown' ? 'childOf' : 'sonOf'}`,
+                            { name: animal.mother.name }
+                          )}
+                        </span>
+                      )}
+                    </p>
+                  )}
                   <div className="flex gap-2 flex-wrap">
+                    {animal.groupName && (
+                      <span className="px-3 py-1 bg-teal-100 dark:bg-teal-900 text-teal-800 dark:text-teal-200 rounded-full text-xs">
+                        {t('animals.family.group')}: {animal.groupName}
+                      </span>
+                    )}
                     {animal._count?.routines !== undefined && animal._count.routines > 0 && (
                       <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 rounded-full text-xs">
                         {animal._count.routines} {t('animals.routines')}
@@ -396,6 +553,107 @@ export default function MyAnimalsPage() {
       {showAddModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 md:p-8 max-w-sm md:max-w-2xl w-full max-h-[90vh] overflow-y-auto my-auto">
+            {newAnimalId && routineTemplates.length > 0 ? (
+              /* Étape 2 : routines recommandées pour l'espèce (module D) */
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800 dark:text-white">
+                  {t('animals.routineTemplates.title')}
+                </h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  {t('animals.routineTemplates.suggested')}
+                </p>
+
+                <div className="flex items-center justify-between mb-3">
+                  <button
+                    type="button"
+                    onClick={handleToggleAllTemplates}
+                    className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
+                  >
+                    {t('animals.routineTemplates.selectAll')}
+                  </button>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {checkedTemplateIds.size}/{routineTemplates.length}
+                  </span>
+                </div>
+
+                <div className="space-y-2 mb-4">
+                  {routineTemplates.map((tpl) => {
+                    const checked = checkedTemplateIds.has(tpl.id);
+                    const time = (tpl.schedule as { time?: string } | null)?.time;
+                    return (
+                      <label
+                        key={tpl.id}
+                        className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${
+                          checked
+                            ? 'border-emerald-300 bg-emerald-50 dark:bg-emerald-900/20'
+                            : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => handleToggleTemplate(tpl.id)}
+                          className="mt-1 w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500"
+                        />
+                        <span className="min-w-0">
+                          <span className="block font-medium text-gray-800 dark:text-white">
+                            {tpl.name || getTemplateTypeLabel(tpl.type)}
+                          </span>
+                          {tpl.name && (
+                            <span className="block text-sm text-gray-500 dark:text-gray-400">
+                              {getTemplateTypeLabel(tpl.type)}
+                            </span>
+                          )}
+                          <span className="block text-sm text-gray-500 dark:text-gray-400">
+                            {getTemplateFrequencyLabel(tpl.frequency)}
+                            {time ? ` · ${time}` : ''}
+                          </span>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+                {templatesError && (
+                  <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm">
+                    {templatesError}
+                  </div>
+                )}
+
+                <div className="flex gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={handleAddRoutineTemplates}
+                    disabled={templatesAdding || checkedTemplateIds.size === 0}
+                    className={`flex-1 px-4 py-3 rounded-lg font-medium transition-colors ${
+                      templatesAdding || checkedTemplateIds.size === 0
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'bg-emerald-600 text-white hover:bg-emerald-700'
+                    }`}
+                  >
+                    {templatesAdding ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+                        {t('common.loading')}
+                      </span>
+                    ) : (
+                      t('animals.routineTemplates.addSelected')
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowAddModal(false);
+                      resetForm();
+                    }}
+                    className="flex-1 px-4 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                  >
+                    {t('common.cancel')}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <>
             <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800 dark:text-white">
               {t('animals.addAnimal')}
             </h2>
@@ -595,9 +853,20 @@ export default function MyAnimalsPage() {
                 </button>
               </div>
             </form>
+              </>
+            )}
           </div>
         </div>
       )}
     </div>
+  );
+}
+
+// useSearchParams() requires a Suspense boundary in Next.js 16 (CSR bailout otherwise)
+export default function MyAnimalsPage() {
+  return (
+    <Suspense fallback={null}>
+      <MyAnimalsPageContent />
+    </Suspense>
   );
 }

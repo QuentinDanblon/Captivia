@@ -78,11 +78,17 @@ export class OpenDataService {
   private readonly wikipediaApi = axios.create({
     baseURL: 'https://fr.wikipedia.org/api/rest_v1',
     timeout: 10000,
+    headers: {
+      'User-Agent': 'Captivia/1.0 (https://captivia.com)',
+    },
   });
 
   private readonly wikidataApi = axios.create({
     baseURL: 'https://www.wikidata.org/w/api.php',
     timeout: 10000,
+    headers: {
+      'User-Agent': 'Captivia/1.0 (https://captivia.com)',
+    },
     params: {
       action: 'wbgetentities',
       format: 'json',

@@ -119,6 +119,29 @@ export class SpeciesProfileService {
     };
   }
 
+  /**
+   * Fiche reproduction éditoriale (Module B) : ligne SpeciesReproduction pour
+   * speciesId, locale 'fr' en priorité, fallback sur n'importe quelle autre
+   * locale si la fiche fr n'existe pas encore.
+   */
+  async getReproduction(speciesId: number): Promise<any> {
+    const fr = await this.prisma.speciesReproduction.findUnique({
+      where: {
+        speciesId_locale: {
+          speciesId,
+          locale: 'fr',
+        },
+      },
+    });
+    if (fr) {
+      return fr;
+    }
+    return this.prisma.speciesReproduction.findFirst({
+      where: { speciesId },
+      orderBy: { locale: 'asc' },
+    });
+  }
+
   private transformProfileToSearchResult(profile: any): any {
     return {
       key: profile.speciesId,

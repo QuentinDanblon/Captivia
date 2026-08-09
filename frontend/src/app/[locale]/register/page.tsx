@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
@@ -38,26 +38,21 @@ export default function RegisterPage() {
       } else {
         setError(response.message || 'Registration failed');
       }
-    } catch (err: any) {
-      setError(err.message || 'Registration failed');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Registration failed');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-teal-100 dark:from-gray-900 dark:to-gray-800 p-4">
-      <div className="w-full max-w-sm md:max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 lg:p-10">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white">
-          {t('auth.registerTitle')}
-        </h1>
+    <div className="captivia-auth-page">
+      <div className="captivia-auth-card">
+        <h1 className="captivia-auth-title">{t('auth.registerTitle')}</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-5 w-full">
-          <div className="w-full">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >
+        <form onSubmit={handleSubmit} className="captivia-auth-form">
+          <div className="captivia-auth-field">
+            <label htmlFor="email" className="captivia-auth-label">
               {t('auth.emailLabel')}
             </label>
             <input
@@ -67,15 +62,12 @@ export default function RegisterPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+              className="captivia-auth-input"
             />
           </div>
 
-          <div className="w-full">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >
+          <div className="captivia-auth-field">
+            <label htmlFor="password" className="captivia-auth-label">
               {t('auth.passwordLabel')}
             </label>
             <input
@@ -86,18 +78,13 @@ export default function RegisterPage() {
               required
               minLength={8}
               autoComplete="new-password"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+              className="captivia-auth-input"
             />
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-              {t('auth.passwordMin')}
-            </p>
+            <p className="captivia-auth-hint">{t('auth.passwordMin')}</p>
           </div>
 
-          <div className="w-full">
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >
+          <div className="captivia-auth-field">
+            <label htmlFor="confirmPassword" className="captivia-auth-label">
               {t('auth.confirmPasswordLabel')}
             </label>
             <input
@@ -108,39 +95,29 @@ export default function RegisterPage() {
               required
               minLength={8}
               autoComplete="new-password"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+              className="captivia-auth-input"
             />
           </div>
 
           {error && (
-            <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-              <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+            <div className="captivia-auth-feedback is-error" role="alert">
+              <p>{error}</p>
             </div>
           )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
+          <button type="submit" disabled={loading} className="captivia-auth-submit">
             {loading ? t('common.loading') : t('auth.registerButton')}
           </button>
         </form>
 
-        <div className="mt-6 text-center">
-          <p className="text-gray-600 dark:text-gray-400">
+        <div className="captivia-auth-links">
+          <p>
             {t('auth.hasAccount')}{' '}
-            <Link
-              href="/login"
-              className="text-emerald-600 hover:text-emerald-700 font-semibold"
-            >
+            <Link href="/login" className="captivia-auth-secondary-link">
               {t('auth.loginButton')}
             </Link>
           </p>
-        </div>
-
-        <div className="mt-3 sm:mt-4 text-center">
-          <Link href="/" className="text-gray-500 hover:text-gray-700 text-sm sm:text-base touch-manipulation">
+          <Link href="/" className="captivia-auth-back-link">
             {t('common.back')} {t('common.home')}
           </Link>
         </div>

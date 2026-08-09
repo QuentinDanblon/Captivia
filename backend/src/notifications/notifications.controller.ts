@@ -16,6 +16,8 @@ import {
 } from '@nestjs/swagger';
 import { NotificationsService } from './notifications.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { PushSubscriptionDto, UnsubscribePushDto } from './dto/push-subscription.dto';
+import { UpdateNotificationPreferencesDto } from './dto/notification-preferences.dto';
 
 @ApiTags('notifications')
 @Controller('users/me')
@@ -33,9 +35,9 @@ export class NotificationsController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async subscribe(
     @Request() req,
-    @Body() body: { endpoint: string; keys: { p256dh: string; auth: string } },
+    @Body() dto: PushSubscriptionDto,
   ) {
-    return this.notificationsService.subscribeToPush(req.user.id, body);
+    return this.notificationsService.subscribeToPush(req.user.id, dto);
   }
 
   @Delete('push-subscriptions')
@@ -45,10 +47,10 @@ export class NotificationsController {
   })
   @ApiResponse({ status: 200, description: 'Subscription removed' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async unsubscribe(@Request() req, @Body() body: { endpoint: string }) {
+  async unsubscribe(@Request() req, @Body() dto: UnsubscribePushDto) {
     return this.notificationsService.unsubscribeFromPush(
       req.user.id,
-      body.endpoint,
+      dto.endpoint,
     );
   }
 
@@ -83,18 +85,11 @@ export class NotificationsController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async updatePreferences(
     @Request() req,
-    @Body()
-    body: {
-      types?: any;
-      typeSchedules?: Record<string, { time: string; recurrence: string; date?: string }>;
-      schedule?: any;
-      snooze?: number;
-      deliveryChannel?: 'push' | 'email' | 'both';
-    },
+    @Body() dto: UpdateNotificationPreferencesDto,
   ) {
     return this.notificationsService.updateNotificationPreferences(
       req.user.id,
-      body,
+      dto,
     );
   }
 

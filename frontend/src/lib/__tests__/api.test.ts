@@ -3,64 +3,64 @@ import { api } from '../api';
 // Mock fetch
 global.fetch = jest.fn();
 
+const fetchMock = () => global.fetch as jest.Mock;
+
+/** Vérifie que le premier argument du dernier appel fetch contient la sous-chaîne attendue. */
+const expectFetchUrl = (substring: string) => {
+  const [url] = fetchMock().mock.calls.at(-1) ?? [];
+  expect(String(url)).toContain(substring);
+};
+
 describe('API Client', () => {
   beforeEach(() => {
-    (global.fetch as jest.Mock).mockClear();
+    fetchMock().mockClear();
   });
 
   describe('Species endpoints', () => {
     it('searchSpecies should call correct endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ results: [], total: 0 }),
       });
 
       await api.searchSpecies('boa', 20, 0);
 
-      expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/species/search?q=boa&limit=20&offset=0'),
-      );
+      expectFetchUrl('/species/search?q=boa&limit=20&offset=0');
     });
 
     it('getSpecies should call correct endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ id: 123, name: 'Test Species' }),
       });
 
       await api.getSpecies('123');
 
-      expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/species/123'),
-      );
+      expectFetchUrl('/species/123');
     });
 
     it('getVernacularNames should call correct endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
-        json: async () => ([]),
+        json: async () => [],
       });
 
       await api.getVernacularNames('123');
 
-      expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/species/123/vernacular'),
-      );
+      expectFetchUrl('/species/123/vernacular');
     });
   });
 
   describe('Health endpoints', () => {
     it('getSpeciesHealth should call correct endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ speciesId: 123, editorial: null }),
       });
 
       await api.getSpeciesHealth('123', 'respiratory', 'fr');
 
-      expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/species/123/health?disease=respiratory&locale=fr'),
-      );
+      expectFetchUrl('/species/123/health?disease=respiratory&locale=fr');
     });
   });
 
@@ -68,9 +68,9 @@ describe('API Client', () => {
     const mockToken = 'test-token-123';
 
     it('getMyAnimals should include Authorization header', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
-        json: async () => ([]),
+        json: async () => [],
       });
 
       await api.getMyAnimals(mockToken);
@@ -86,7 +86,7 @@ describe('API Client', () => {
     });
 
     it('createAnimal should POST with correct data', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ id: 'animal-123' }),
       });
@@ -113,7 +113,7 @@ describe('API Client', () => {
     });
 
     it('updateAnimal should PATCH with correct data', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ id: 'animal-123' }),
       });
@@ -132,7 +132,7 @@ describe('API Client', () => {
     });
 
     it('deleteAnimal should DELETE with auth header', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({}),
       });
@@ -155,9 +155,9 @@ describe('API Client', () => {
     const mockToken = 'test-token-123';
 
     it('getAnimalRoutines should call correct endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
-        json: async () => ([]),
+        json: async () => [],
       });
 
       await api.getAnimalRoutines('animal-123', mockToken);
@@ -173,7 +173,7 @@ describe('API Client', () => {
     });
 
     it('createRoutine should POST with correct data', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ id: 'routine-123' }),
       });
@@ -198,7 +198,7 @@ describe('API Client', () => {
 
   describe('Auth endpoints', () => {
     it('register should POST registration data', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ accessToken: 'token', user: {} }),
       });
@@ -219,7 +219,7 @@ describe('API Client', () => {
     });
 
     it('login should POST login credentials', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ accessToken: 'token', user: {} }),
       });
@@ -239,7 +239,7 @@ describe('API Client', () => {
     });
 
     it('getProfile should include Authorization header', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ id: 'user-123' }),
       });
@@ -259,7 +259,7 @@ describe('API Client', () => {
 
   describe('Error handling', () => {
     it('should throw error when response is not ok', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: false,
         status: 404,
         statusText: 'Not Found',
@@ -271,31 +271,27 @@ describe('API Client', () => {
 
   describe('Food endpoints', () => {
     it('searchFood should call correct endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ products: [] }),
       });
 
       await api.searchFood('dog food', 'wet');
 
-      expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/food/search?q=dog'),
-      );
+      expectFetchUrl('/food/search?q=dog');
     });
   });
 
   describe('Equipment endpoints', () => {
     it('getRecommendedEquipment should call correct endpoint', async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
+      fetchMock().mockResolvedValue({
         ok: true,
         json: async () => ({ recommendations: [] }),
       });
 
       await api.getRecommendedEquipment(123, 'terrarium', 'large');
 
-      expect(global.fetch).toHaveBeenCalledWith(
-        expect.stringContaining('/equipment?speciesId=123&category=terrarium&size=large'),
-      );
+      expectFetchUrl('/equipment?speciesId=123&category=terrarium&size=large');
     });
   });
 });
