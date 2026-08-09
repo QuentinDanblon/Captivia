@@ -1,0 +1,170 @@
+{
+  "espece": "Dindon",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "subcategory": "Galliforme",
+  "feeding": {
+    "dietType": "omnivore",
+    "recommendedFoods": [
+      {
+        "name": "Granulés ponte",
+        "frequency": "quotidienne",
+        "notes": "Ration complète pour poules pondeuses"
+      },
+      {
+        "name": "Graines",
+        "frequency": "quotidienne",
+        "notes": "Maïs concassé, blé (énergie)"
+      },
+      {
+        "name": "Verdure et restes de cuisine",
+        "frequency": "quotidienne",
+        "notes": "Épluchures, salade, insectes du jardin"
+      },
+      {
+        "name": "Coquilles d’huître broyées",
+        "frequency": "quotidienne",
+        "notes": "Calcium pour la coquille des œufs"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Avocat",
+        "reason": "Persine toxique"
+      },
+      {
+        "name": "Chocolat",
+        "reason": "Théobromine toxique"
+      },
+      {
+        "name": "Oignons crus en excès",
+        "reason": "Anémie"
+      }
+    ],
+    "mealFrequency": "daily",
+    "specificNeeds": "Calcium indispensable pour les pondeuses, eau propre, protéines, grit pour la digestion.",
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — guide poule"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/oiseaux",
+        "title": "VCA Hospitals — soins des volailles"
+      }
+    ]
+  },
+  "habitat": {
+    "habitatType": "enclos",
+    "tempMin": -5,
+    "tempMax": 32,
+    "humidityMin": null,
+    "humidityMax": null,
+    "minSpaceSize": "Poulailler 1m²/poule + parcours extérieur herbeux",
+    "lightNeeds": "Lumière naturelle (14h pour maintenir la ponte)",
+    "activityEnrichment": "Parcours herbeux, bain de poussière, perchoirs",
+    "hygieneNotes": "Nettoyage hebdomadaire du poulailler, litière propre, lutte anti-parasites",
+    "costEstimate": "faible",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Poule",
+        "title": "Wikipédia — page de référence (poule)"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Animal grégaire avec hiérarchie stricte (picorage). Curieuse, active, apprécie gratter et picorer.",
+    "sociability": "grégaire",
+    "difficultyLevel": "débutant",
+    "compatibilityWithChildren": "Idéale pour les enfants (observation, ramassage des œufs).",
+    "compatibilityWithOtherAnimals": "Coexiste avec canards, oies et autres volailles.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Poule",
+        "title": "Wikipédia — page de référence (poule)"
+      }
+    ]
+  },
+  "health": {
+    "diseases": [
+      {
+        "name": "Coccidiose",
+        "symptoms": "Diarrhée, abattement, baisse de ponte",
+        "prevention": "Litière sèche et propre, hygiène du poulailler",
+        "whenToConsult": "Dès diarrhée"
+      },
+      {
+        "name": "Maladies respiratoires",
+        "symptoms": "Éternuements, écoulements, toux",
+        "prevention": "Bonne ventilation, éviter courants d’air",
+        "whenToConsult": "Dès signes respiratoires"
+      },
+      {
+        "name": "Parasites externes (poux rouges)",
+        "symptoms": "Démangeaisons, plumes abîmées, baisse de ponte",
+        "prevention": "Inspection régulière, traitement du poulailler",
+        "whenToConsult": "Dès démangeaisons visibles"
+      },
+      {
+        "name": "Prolapsus de l’oviducte",
+        "symptoms": "Organe visible sous le cloaque",
+        "prevention": "Éviter surpoids, œufs trop gros",
+        "whenToConsult": "URGENCE"
+      }
+    ],
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/oiseaux",
+        "title": "VCA Hospitals — santé des volailles"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — santé de la poule"
+      }
+    ]
+  },
+  "legislation": {
+    "country": "FR",
+    "status": "allowed",
+    "details": {
+      "citesAppendix": null,
+      "euAnnex": null,
+      "permits": [],
+      "restrictions": [
+        "Déclaration en mairie au-delà de 50 volailles",
+        "Règlement sanitaire départemental (proximité habitations)"
+      ]
+    },
+    "sources": [
+      {
+        "type": "official",
+        "url": "https://www.legifrance.gouv.fr",
+        "title": "Légifrance — élevage de volailles"
+      }
+    ]
+  },
+  "reproduction": {
+    "season": "printemps-été",
+    "gestationDays": null,
+    "incubationDays": 21,
+    "litterSizeMin": 6,
+    "litterSizeMax": 12,
+    "sexualMaturityMonths": 5,
+    "breedingDifficulty": "facile",
+    "notes": "Incubation 21 jours. Une poule peut couver 8 à 12 œufs.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Poule",
+        "title": "Wikipédia — page de référence (poule)"
+      }
+    ]
+  },
+  "especeKey": "dindon"
+}

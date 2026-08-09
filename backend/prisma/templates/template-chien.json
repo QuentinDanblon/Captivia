@@ -1,0 +1,185 @@
+{
+  "espece": "Chien",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "subcategory": "Chien",
+  "feeding": {
+    "dietType": "carnivore",
+    "recommendedFoods": [
+      {
+        "name": "Croquettes premium pour chien",
+        "frequency": "quotidienne",
+        "notes": "2 repas/jour, adaptées à la taille et au poids de la race"
+      },
+      {
+        "name": "Pâtée humide complète",
+        "frequency": "quotidienne",
+        "notes": "Peut compléter les croquettes (max 25 % de la ration)"
+      },
+      {
+        "name": "Viande maigre cuite",
+        "frequency": "hebdomadaire",
+        "notes": "Poulet ou bœuf, sans sel ni épices"
+      },
+      {
+        "name": "Légumes cuits",
+        "frequency": "hebdomadaire",
+        "notes": "Carotte, courgette, haricots verts"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Chocolat",
+        "reason": "Théobromine toxique pour les chiens"
+      },
+      {
+        "name": "Raisins et raisins secs",
+        "reason": "Insuffisance rénale aiguë possible"
+      },
+      {
+        "name": "Oignons et ail",
+        "reason": "Destruction des globules rouges (anémie)"
+      },
+      {
+        "name": "Xylitol (chewing-gums)",
+        "reason": "Hypoglycémie sévère et insuffisance hépatique"
+      }
+    ],
+    "mealFrequency": "daily",
+    "specificNeeds": "Protéines animales en tête d'ingrédients, oméga-3 pour la peau et le pelage, calcium/phosphore équilibré. Adapter la taille des croquettes à la mâchoire (grandes races vs races toy) et la ration au poids adulte.",
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://www.royalcanin.com/fr/fr/chiens",
+        "title": "Royal Canin — guide alimentation chien"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/chiens",
+        "title": "VCA Hospitals — soins du chien"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — guide chien"
+      }
+    ]
+  },
+  "habitat": {
+    "habitatType": "libre",
+    "tempMin": 15,
+    "tempMax": 28,
+    "humidityMin": null,
+    "humidityMax": null,
+    "minSpaceSize": "Vie en intérieur avec accès extérieur sécurisé ou sorties quotidiennes",
+    "lightNeeds": "Lumière naturelle, ne pas exposer au soleil prolongé (coup de chaleur)",
+    "activityEnrichment": "2 promenades quotidiennes minimum, jeux de rapport, jouets d’occupation, socialisation",
+    "hygieneNotes": "Brossage 2x/semaine (quotidien pour poils longs), bain 1x/mois, nettoyage des oreilles et des dents",
+    "costEstimate": "moyen",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Chien",
+        "title": "Wikipédia — page de référence (chien)"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com",
+        "title": "VCA Hospitals — santé chien"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Animal social, loyal et très attaché à son groupe humain. Besoin de routine, de présence et de dépense physique quotidienne.",
+    "sociability": "semi-grégaire",
+    "difficultyLevel": "intermédiaire",
+    "compatibilityWithChildren": "Bon compagnon pour enfants si socialisé tôt et si les interactions sont encadrées.",
+    "compatibilityWithOtherAnimals": "Coexiste avec d’autres chiens et chats si bien socialisé dès le jeune âge.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Chien",
+        "title": "Wikipédia — page de référence (chien)"
+      }
+    ]
+  },
+  "health": {
+    "diseases": [
+      {
+        "name": "Dysplasie de la hanche",
+        "symptoms": "Boiterie, difficulté à se lever, douleur à la palpation",
+        "prevention": "Croissance contrôlée, éviter le surpoids, dépistage radiographique",
+        "whenToConsult": "Dès boiterie persistante"
+      },
+      {
+        "name": "Otite",
+        "symptoms": "Grattage des oreilles, tête penchée, odeur, rougeur",
+        "prevention": "Nettoyage régulier des oreilles, séchage après le bain",
+        "whenToConsult": "Dès rougeur, odeur ou grattage intense"
+      },
+      {
+        "name": "Torsion de l’estomac",
+        "symptoms": "Abdomen gonflé, agitation, tentatives de vomissement infructueuses",
+        "prevention": "Repas fractionnés, pas d’exercice après le repas",
+        "whenToConsult": "URGENCE VÉTÉRINAIRE immédiate"
+      },
+      {
+        "name": "Parvovirose (jeunes chiens)",
+        "symptoms": "Vomissements, diarrhée hémorragique, abattement",
+        "prevention": "Vaccination obligatoire du chiot",
+        "whenToConsult": "Dès les premiers symptômes"
+      }
+    ],
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/chiens",
+        "title": "VCA Hospitals — maladies du chien"
+      },
+      {
+        "type": "vet",
+        "url": "https://www.petmd.com/dogs",
+        "title": "PetMD — santé canine"
+      }
+    ]
+  },
+  "legislation": {
+    "country": "FR",
+    "status": "allowed",
+    "details": {
+      "citesAppendix": null,
+      "euAnnex": null,
+      "permits": [],
+      "restrictions": [
+        "Identification par puce électronique obligatoire",
+        "Vaccination antirabique pour les déplacements",
+        "Passeport européen pour voyage"
+      ]
+    },
+    "sources": [
+      {
+        "type": "official",
+        "url": "https://www.legifrance.gouv.fr",
+        "title": "Légifrance — identification des carnivores domestiques"
+      }
+    ]
+  },
+  "reproduction": {
+    "season": "toute l'année",
+    "gestationDays": 63,
+    "incubationDays": null,
+    "litterSizeMin": 4,
+    "litterSizeMax": 9,
+    "sexualMaturityMonths": 12,
+    "breedingDifficulty": "facile",
+    "notes": "2 portées maximum par an recommandées. Âge idéal de première saillie : 2-4 ans selon la race.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Chien",
+        "title": "Wikipédia — page de référence (chien)"
+      }
+    ]
+  },
+  "especeKey": "chien"
+}

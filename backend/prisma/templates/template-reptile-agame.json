@@ -1,0 +1,159 @@
+{
+  "espece": "Agame barbu / Scinque",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "subcategory": "Agamidé",
+  "feeding": {
+    "dietType": "insectivore",
+    "recommendedFoods": [
+      {
+        "name": "Insectes vivants",
+        "frequency": "quotidienne",
+        "notes": "Grillons, criquets saupoudrés de calcium"
+      },
+      {
+        "name": "Vers de farine",
+        "frequency": "hebdomadaire",
+        "notes": "En complément (gras)"
+      },
+      {
+        "name": "Poudre vitaminée",
+        "frequency": "quotidienne",
+        "notes": "Calcium + D3"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Insectes sauvages",
+        "reason": "Pesticides et parasites"
+      },
+      {
+        "name": "Laitue",
+        "reason": "Peu nutritive"
+      }
+    ],
+    "mealFrequency": "daily",
+    "specificNeeds": "Insectes saupoudrés de calcium/D3, UVB pour les espèces diurnes, eau fraîche.",
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — guide gecko"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/reptiles",
+        "title": "VCA Hospitals — soins des reptiles"
+      }
+    ]
+  },
+  "habitat": {
+    "habitatType": "terrarium",
+    "tempMin": 24,
+    "tempMax": 30,
+    "humidityMin": 40,
+    "humidityMax": 60,
+    "minSpaceSize": "Terrarium 60x45x45cm pour un adulte",
+    "lightNeeds": "UVB 10h/jour (diurnes), cycle jour/nuit",
+    "activityEnrichment": "Cachettes, branches, plantes, parois à escalader",
+    "hygieneNotes": "Pulvérisation quotidienne, nettoyage hebdomadaire",
+    "costEstimate": "moyen",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Gecko_l%C3%A9opard",
+        "title": "Wikipédia — page de référence (gecko)"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Lézard nocturne ou diurne selon espèce, territorial, observateur. Manipulation douce et limitée.",
+    "sociability": "solitaire",
+    "difficultyLevel": "débutant",
+    "compatibilityWithChildren": "Observation intéressante, manipulation délicate.",
+    "compatibilityWithOtherAnimals": "Vie en solitaire recommandée (mâles territoriaux).",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Gecko_l%C3%A9opard",
+        "title": "Wikipédia — page de référence (gecko)"
+      }
+    ]
+  },
+  "health": {
+    "diseases": [
+      {
+        "name": "MBD (maladie osseuse métabolique)",
+        "symptoms": "Déformations, faiblesse, fractures",
+        "prevention": "Calcium + UVB obligatoires",
+        "whenToConsult": "Dès faiblesse ou déformation"
+      },
+      {
+        "name": "Parasitisme",
+        "symptoms": "Amaigrissement, diarrhée",
+        "prevention": "Quarantaine, selles contrôlées",
+        "whenToConsult": "Dès amaigrissement"
+      },
+      {
+        "name": "Problèmes de mue",
+        "symptoms": "Mue incomplète, résidus sur les doigts",
+        "prevention": "Hygrométrie correcte",
+        "whenToConsult": "Si mue bloquée"
+      }
+    ],
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/reptiles",
+        "title": "VCA Hospitals — santé des reptiles"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — santé du gecko"
+      }
+    ]
+  },
+  "legislation": {
+    "country": "FR",
+    "status": "permit_required",
+    "details": {
+      "citesAppendix": null,
+      "euAnnex": null,
+      "permits": [],
+      "restrictions": [
+        "Vérifier l’Arrêté du 21/11/1997 (espèces non domestiques)"
+      ]
+    },
+    "sources": [
+      {
+        "type": "official",
+        "url": "https://www.legifrance.gouv.fr",
+        "title": "Légifrance — Arrêté du 21 novembre 1997"
+      },
+      {
+        "type": "official",
+        "url": "https://inpn.mnhn.fr",
+        "title": "INPN — espèces réglementées"
+      }
+    ]
+  },
+  "reproduction": {
+    "season": "printemps",
+    "gestationDays": null,
+    "incubationDays": 60,
+    "litterSizeMin": 2,
+    "litterSizeMax": 2,
+    "sexualMaturityMonths": 12,
+    "breedingDifficulty": "modere",
+    "notes": "Ponte de 2 œufs, incubation ~60 jours selon température.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Gecko_l%C3%A9opard",
+        "title": "Wikipédia — page de référence (gecko)"
+      }
+    ]
+  },
+  "especeKey": "reptile-agame"
+}

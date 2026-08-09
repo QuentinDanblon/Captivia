@@ -1,0 +1,152 @@
+{
+  "espece": "Poisson d’aquarium",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "subcategory": "Poisson tropical d’eau douce",
+  "feeding": {
+    "dietType": "omnivore",
+    "recommendedFoods": [
+      {
+        "name": "Flocons ou granulés de qualité",
+        "frequency": "quotidienne",
+        "notes": "Ration de base, 2x/jour en petites quantités"
+      },
+      {
+        "name": "Artémias et daphnies congelés",
+        "frequency": "hebdomadaire",
+        "notes": "Protéines vivantes congelées"
+      },
+      {
+        "name": "Légumes blanchis",
+        "frequency": "hebdomadaire",
+        "notes": "Courgette, épinard (herbivores)"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Suralimentation",
+        "reason": "Pollution de l’eau et obésité — jamais plus de 2 min de nourriture"
+      },
+      {
+        "name": "Pain",
+        "reason": "Indigeste et polluant"
+      }
+    ],
+    "mealFrequency": "daily",
+    "specificNeeds": "Nourriture adaptée à la taille de bouche, varier flocons/congelés, jeûne 1 jour/semaine.",
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — guide aquarium"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/poissons",
+        "title": "VCA Hospitals — soins des poissons"
+      }
+    ]
+  },
+  "habitat": {
+    "habitatType": "aquarium",
+    "tempMin": 22,
+    "tempMax": 28,
+    "humidityMin": null,
+    "humidityMax": null,
+    "minSpaceSize": "Aquarium 60L minimum (selon espèce), 100L+ recommandé",
+    "lightNeeds": "Éclairage 8-10h/jour (cycle jour/nuit)",
+    "activityEnrichment": "Plantes, racines, cachettes, zone de nage libre, banc de 6+",
+    "hygieneNotes": "Changement d’eau 25% hebdo, filtration, tests de l’eau (nitrites, pH)",
+    "costEstimate": "moyen",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Poisson_rouge",
+        "title": "Wikipédia — page de référence (poisson)"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Comportement varié selon espèce : bancs (tétras), territoriaux (bettas), paisibles (corydoras).",
+    "sociability": "grégaire",
+    "difficultyLevel": "débutant",
+    "compatibilityWithChildren": "Observation éducative, entretien encadré.",
+    "compatibilityWithOtherAnimals": "Choisir des espèces compatibles (pas de prédateurs avec les petits).",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Poisson_rouge",
+        "title": "Wikipédia — page de référence (poisson)"
+      }
+    ]
+  },
+  "health": {
+    "diseases": [
+      {
+        "name": "Ichtyophthiriose (points blancs)",
+        "symptoms": "Petits points blancs sur le corps",
+        "prevention": "Quarantaine des nouveaux poissons, eau stable",
+        "whenToConsult": "Dès l’apparition des points"
+      },
+      {
+        "name": "Pourriture des nageoires",
+        "symptoms": "Nageoires effilochées, bord blanc",
+        "prevention": "Eau propre, éviter le stress",
+        "whenToConsult": "Dès lésions"
+      },
+      {
+        "name": "Troubles de la vessie natatoire",
+        "symptoms": "Poisson qui coule ou flotte anormalement",
+        "prevention": "Alimentation adaptée, jeûne",
+        "whenToConsult": "Si persiste après jeûne"
+      }
+    ],
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/poissons",
+        "title": "VCA Hospitals — santé des poissons"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — santé aquarium"
+      }
+    ]
+  },
+  "legislation": {
+    "country": "FR",
+    "status": "allowed",
+    "details": {
+      "citesAppendix": null,
+      "euAnnex": null,
+      "permits": [],
+      "restrictions": []
+    },
+    "sources": [
+      {
+        "type": "official",
+        "url": "https://www.legifrance.gouv.fr",
+        "title": "Légifrance — animaux de compagnie"
+      }
+    ]
+  },
+  "reproduction": {
+    "season": "toute l'année",
+    "gestationDays": null,
+    "incubationDays": 3,
+    "litterSizeMin": 20,
+    "litterSizeMax": 300,
+    "sexualMaturityMonths": 3,
+    "breedingDifficulty": "modere",
+    "notes": "Ponte ou viviparité selon l’espèce (guppys vivipares).",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Poisson_rouge",
+        "title": "Wikipédia — page de référence (poisson)"
+      }
+    ]
+  },
+  "especeKey": "poisson-nac"
+}

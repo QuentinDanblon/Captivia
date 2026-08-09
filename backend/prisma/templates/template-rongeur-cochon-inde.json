@@ -1,0 +1,181 @@
+{
+  "espece": "Cochon d’Inde",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "subcategory": "Rongeur",
+  "feeding": {
+    "dietType": "herbivore",
+    "recommendedFoods": [
+      {
+        "name": "Foin à volonté",
+        "frequency": "quotidienne",
+        "notes": "80 % de la ration — foin de fléole ou de prairie, essentiel pour les dents et le transit"
+      },
+      {
+        "name": "Granulés lapin",
+        "frequency": "quotidienne",
+        "notes": "Quantité limitée (1 c. à soupe / kg de poids)"
+      },
+      {
+        "name": "Légumes frais",
+        "frequency": "quotidienne",
+        "notes": "Endive, feuilles de carotte, persil, basilic"
+      },
+      {
+        "name": "Eau fraîche",
+        "frequency": "quotidienne",
+        "notes": "Biberon ou gamelle lourde, changée chaque jour"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Céréales et pain",
+        "reason": "Troubles digestifs et obésité"
+      },
+      {
+        "name": "Laitue",
+        "reason": "Fermentation et diarrhées"
+      },
+      {
+        "name": "Avocat",
+        "reason": "Toxique"
+      },
+      {
+        "name": "Chocolat et sucreries",
+        "reason": "Toxiques et obésogènes"
+      }
+    ],
+    "mealFrequency": "daily",
+    "specificNeeds": "Foin à volonté (80 %), dents à croissance continue (usure par le foin), eau fraîche, granulés dosés, légumes variés.",
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://www.royalcanin.com/fr/fr/lapins",
+        "title": "Royal Canin — guide alimentation lapin"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — guide lapin"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/rongeurs",
+        "title": "VCA Hospitals — soins des rongeurs"
+      }
+    ]
+  },
+  "habitat": {
+    "habitatType": "cage",
+    "tempMin": 15,
+    "tempMax": 25,
+    "humidityMin": null,
+    "humidityMax": null,
+    "minSpaceSize": "Cage 120x60cm minimum + sorties quotidiennes de 2-3h",
+    "lightNeeds": "Lumière naturelle, éviter le soleil direct",
+    "activityEnrichment": "Sorties quotidiennes, jouets à ronger, tunnels, cachettes",
+    "hygieneNotes": "Litière changée 2x/semaine, brossage hebdomadaire, nettoyage de la cage",
+    "costEstimate": "faible",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Lapin_domestique",
+        "title": "Wikipédia — page de référence (lapin)"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com",
+        "title": "VCA Hospitals — lapin"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Animal social, curieux et joueur. Communique par des bonds, des grognements et le « binkying » (saut de joie).",
+    "sociability": "grégaire",
+    "difficultyLevel": "débutant",
+    "compatibilityWithChildren": "Bon compagnon si manipulé avec douceur (dos fragile).",
+    "compatibilityWithOtherAnimals": "Vivre en binôme de lapins recommandé (stérilisés).",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Lapin_domestique",
+        "title": "Wikipédia — page de référence (lapin)"
+      }
+    ]
+  },
+  "health": {
+    "diseases": [
+      {
+        "name": "Stase digestive",
+        "symptoms": "Arrêt du transit, perte d’appétit, petites crottes",
+        "prevention": "Foin à volonté, hydratation, réduction du stress",
+        "whenToConsult": "URGENCE — tout arrêt du transit"
+      },
+      {
+        "name": "Malocclusion dentaire",
+        "symptoms": "Bavage, perte d’appétit, dents trop longues",
+        "prevention": "Foin à volonté (usure naturelle), contrôle dentaire régulier",
+        "whenToConsult": "Dès bavage ou refus de manger"
+      },
+      {
+        "name": "Myxomatose",
+        "symptoms": "Œdèmes des paupières et des lèvres, fièvre",
+        "prevention": "Vaccination annuelle obligatoire",
+        "whenToConsult": "Dès les premiers œdèmes"
+      },
+      {
+        "name": "VHD (maladie hémorragique virale)",
+        "symptoms": "Mort subite, saignements",
+        "prevention": "Vaccination annuelle",
+        "whenToConsult": "Urgence — prévention par la vaccination"
+      }
+    ],
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/rongeurs",
+        "title": "VCA Hospitals — lapin santé"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — santé du lapin"
+      }
+    ]
+  },
+  "legislation": {
+    "country": "FR",
+    "status": "allowed",
+    "details": {
+      "citesAppendix": null,
+      "euAnnex": null,
+      "permits": [],
+      "restrictions": []
+    },
+    "sources": [
+      {
+        "type": "official",
+        "url": "https://www.legifrance.gouv.fr",
+        "title": "Légifrance — animaux de compagnie"
+      }
+    ]
+  },
+  "reproduction": {
+    "season": "toute l'année",
+    "gestationDays": 31,
+    "incubationDays": null,
+    "litterSizeMin": 4,
+    "litterSizeMax": 10,
+    "sexualMaturityMonths": 4,
+    "breedingDifficulty": "facile",
+    "notes": "Stérilisation fortement recommandée (femelles : risque de cancer utérin très élevé).",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Lapin_domestique",
+        "title": "Wikipédia — page de référence (lapin)"
+      }
+    ]
+  },
+  "especeKey": "rongeur-cochon-inde"
+}

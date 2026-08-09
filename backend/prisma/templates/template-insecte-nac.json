@@ -1,0 +1,159 @@
+{
+  "espece": "Insecte NAC",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "subcategory": "Insecte",
+  "feeding": {
+    "dietType": "insectivore",
+    "recommendedFoods": [
+      {
+        "name": "Criquets et grillons vivants",
+        "frequency": "hebdomadaire",
+        "notes": "Adultes : 1-2 proies par semaine"
+      },
+      {
+        "name": "Blattes",
+        "frequency": "hebdomadaire",
+        "notes": "Alternative nutritive"
+      },
+      {
+        "name": "Vers de farine",
+        "frequency": "hebdomadaire",
+        "notes": "Occasionnel (gras)"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Proies sauvages",
+        "reason": "Pesticides et parasites"
+      },
+      {
+        "name": "Proies trop grosses",
+        "reason": "Blessures et stress"
+      }
+    ],
+    "mealFrequency": "weekly",
+    "specificNeeds": "Proies vivantes adaptées à la taille, coupelle d’eau peu profonde, jeûne avant mue.",
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — guide mygale"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/reptiles",
+        "title": "VCA Hospitals — soins des arachnides"
+      }
+    ]
+  },
+  "habitat": {
+    "habitatType": "terrarium",
+    "tempMin": 24,
+    "tempMax": 28,
+    "humidityMin": 60,
+    "humidityMax": 75,
+    "minSpaceSize": "Terrarium 30x30x30cm (terricoles), 30x30x40cm (arboricoles)",
+    "lightNeeds": "Lumière naturelle faible, éviter le soleil direct",
+    "activityEnrichment": "Substrat profond (terricoles), écorces (arboricoles), cachettes, coupelle d’eau",
+    "hygieneNotes": "Substrat humidifié, nettoyage ponctuel, manipulation évitée",
+    "costEstimate": "faible",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Mygale",
+        "title": "Wikipédia — page de référence (mygale)"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Solitaire, territoriale, discrète. Manipulation fortement déconseillée (morsure venimeuse).",
+    "sociability": "solitaire",
+    "difficultyLevel": "intermédiaire",
+    "compatibilityWithChildren": "Observation uniquement, jamais de manipulation.",
+    "compatibilityWithOtherAnimals": "Toujours en solitaire.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Mygale",
+        "title": "Wikipédia — page de référence (mygale)"
+      }
+    ]
+  },
+  "health": {
+    "diseases": [
+      {
+        "name": "Mue difficile",
+        "symptoms": "Mue bloquée, pattes coincées",
+        "prevention": "Hygrométrie correcte",
+        "whenToConsult": "Si mue bloquée"
+      },
+      {
+        "name": "Déshydratation",
+        "symptoms": "Abdomen ridé, léthargie",
+        "prevention": "Coupelle d’eau, substrat humide",
+        "whenToConsult": "Dès léthargie"
+      },
+      {
+        "name": "Parasites",
+        "symptoms": "Petits points sur le corps",
+        "prevention": "Proies d’élevage uniquement",
+        "whenToConsult": "Si infestation"
+      }
+    ],
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/reptiles",
+        "title": "VCA Hospitals — santé des arachnides"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — santé mygale"
+      }
+    ]
+  },
+  "legislation": {
+    "country": "FR",
+    "status": "permit_required",
+    "details": {
+      "citesAppendix": "II (Brachypelma)",
+      "euAnnex": "B",
+      "permits": [
+        "Certificat CITES (Brachypelma smithi)"
+      ],
+      "restrictions": []
+    },
+    "sources": [
+      {
+        "type": "official",
+        "url": "https://www.legifrance.gouv.fr",
+        "title": "Légifrance — Arrêté du 21 novembre 1997"
+      },
+      {
+        "type": "official",
+        "url": "https://inpn.mnhn.fr",
+        "title": "INPN — espèces réglementées"
+      }
+    ]
+  },
+  "reproduction": {
+    "season": "printemps",
+    "gestationDays": null,
+    "incubationDays": 90,
+    "litterSizeMin": 50,
+    "litterSizeMax": 500,
+    "sexualMaturityMonths": 24,
+    "breedingDifficulty": "avance",
+    "notes": "Cocons de 50 à 500 œufs selon l’espèce.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Mygale",
+        "title": "Wikipédia — page de référence (mygale)"
+      }
+    ]
+  },
+  "especeKey": "insecte-nac"
+}

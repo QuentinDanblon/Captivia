@@ -344,13 +344,14 @@ model NotificationEvent {
 
 model SpeciesProfile {
   id                  String    @id @default(uuid())
-  speciesId           Int       @unique // GBIF key
-  commonNameFr        String    // Nom commun français (ex: "Chat", "Python royal")
-  scientificName      String    // Nom scientifique (ex: "Felis catus")
+  speciesId           Int       @unique // GBIF key (ou ID artificiel ≥ 2 000 000 001 pour les races)
+  commonNameFr        String    // Nom commun français (ex: "Chat", "Python royal", "Berger allemand")
+  scientificName      String    // Nom scientifique (ex: "Felis catus", "Canis lupus familiaris")
   category            String    // Catégorie principale (mammifère, reptile, amphibien, oiseau, poisson, insecte, arachnide)
-  subcategory         String?   // Sous-catégorie (ex: "Carnivore, Félidé", "Serpent constricteur")
+  subcategory         String?   // Sous-catégorie (ex: "Carnivore, Félidé", "Serpent constricteur", "Chien de berger")
   domesticationType   String    // Type de domestication (domestique, semi-domestique, NAC)
   description         String?   // Description courte (max 500 chars)
+  sourceUrl           String?   // URL de la source de la description (Wikipedia FR ou guide spécialisé)
   createdAt           DateTime  @default(now()) @db.Timestamptz(3)
   updatedAt           DateTime  @updatedAt @db.Timestamptz(3)
 
@@ -363,13 +364,14 @@ model SpeciesProfile {
 
 model SpeciesFeeding {
   id                 String   @id @default(uuid())
-  speciesId          Int      // GBIF key
+  speciesId          Int      // GBIF key (ou ID artificiel ≥ 2 000 000 001 pour les races)
   locale             String   @default("fr")
   dietType           String   // herbivore, carnivore, omnivore, insectivore, etc.
   recommendedFoods   Json     // Array of { name, frequency, notes } ex: [{ name: "Laitue", frequency: "quotidien", notes: "Aliment principal" }]
   foodsToAvoid       Json     // Array of { name, reason } ex: [{ name: "Avocat", reason: "Toxique pour cette espèce" }]
   mealFrequency      String   // "daily", "every_2_days", "weekly", "variable", etc.
   specificNeeds      String?  // Besoins spécifiques en protéines, vitamines, calcium, etc. (max 500 chars)
+  sources            Json?    // Array of { type: 'vet'|'guide'|'manufacturer'|'wikipedia', url, title } — traçabilité
   createdAt          DateTime @default(now()) @db.Timestamptz(3)
   updatedAt          DateTime @updatedAt @db.Timestamptz(3)
 
@@ -380,7 +382,7 @@ model SpeciesFeeding {
 
 model SpeciesHabitat {
   id                   String   @id @default(uuid())
-  speciesId            Int      // GBIF key
+  speciesId            Int      // GBIF key (ou ID artificiel ≥ 2 000 000 001 pour les races)
   locale               String   @default("fr")
   habitatType          String   // "cage", "terrarium", "aquarium", "enclos", "libre", etc.
   tempMin              Float    // Température minimale (Celsius)
@@ -392,6 +394,7 @@ model SpeciesHabitat {
   activityEnrichment   String   // Niveau d'activité et enrichissement nécessaire (max 500 chars)
   hygieneNotes         String?  // Notes sur l'entretien et l'hygiène (max 500 chars)
   costEstimate         String   // "faible", "moyen", "élevé"
+  sources              Json?    // Array of { type, url, title } — traçabilité
   createdAt            DateTime @default(now()) @db.Timestamptz(3)
   updatedAt            DateTime @updatedAt @db.Timestamptz(3)
 
@@ -402,13 +405,14 @@ model SpeciesHabitat {
 
 model SpeciesBehavior {
   id                           String   @id @default(uuid())
-  speciesId                    Int      // GBIF key
+  speciesId                    Int      // GBIF key (ou ID artificiel ≥ 2 000 000 001 pour les races)
   locale                       String   @default("fr")
   generalBehavior              String   // Description générale du comportement (max 500 chars)
   sociability                  String   // "solitaire", "grégaire", "semi-grégaire"
   difficultyLevel              String   // "débutant", "intermédiaire", "expert"
   compatibilityWithChildren    String?  // Description de la compatibilité avec enfants (max 500 chars)
   compatibilityWithOtherAnimals String? // Description de la compatibilité avec autres animaux (max 500 chars)
+  sources                      Json?    // Array of { type, url, title } — traçabilité
   createdAt                    DateTime @default(now()) @db.Timestamptz(3)
   updatedAt                    DateTime @updatedAt @db.Timestamptz(3)
 
@@ -448,7 +452,7 @@ model SpeciesLegislation {
 // Module B — Fiche reproduction par espèce (contenu éditorial, rempli par le Module E)
 model SpeciesReproduction {
   id                   String   @id @default(uuid())
-  speciesId            Int      // GBIF key
+  speciesId            Int      // GBIF key (ou ID artificiel ≥ 2 000 000 001 pour les races)
   locale               String   @default("fr")
   season               String?  // saison de reproduction (ex: "printemps")
   gestationDays        Int?     // durée de gestation (jours)
@@ -458,6 +462,7 @@ model SpeciesReproduction {
   sexualMaturityMonths Int?     // maturité sexuelle (mois)
   breedingDifficulty   String?  // facile | modere | avance
   notes                String?  // notes complémentaires
+  sources              Json?    // Array of { type, url, title } — traçabilité
   createdAt            DateTime @default(now()) @db.Timestamptz(3)
   updatedAt            DateTime @updatedAt @db.Timestamptz(3)
 

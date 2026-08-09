@@ -1,0 +1,171 @@
+{
+  "espece": "Canari / petit passereau",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "subcategory": "Fringillidé",
+  "feeding": {
+    "dietType": "granivore",
+    "recommendedFoods": [
+      {
+        "name": "Mélange graines perruches",
+        "frequency": "quotidienne",
+        "notes": "Millet, avoine, alpiste — base de la ration"
+      },
+      {
+        "name": "Granulés extrudés",
+        "frequency": "quotidienne",
+        "notes": "Complément équilibré en vitamines"
+      },
+      {
+        "name": "Fruits et légumes frais",
+        "frequency": "quotidienne",
+        "notes": "Pomme, carotte, brocoli, épinard"
+      },
+      {
+        "name": "Os de seiche",
+        "frequency": "quotidienne",
+        "notes": "Calcium"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Avocat",
+        "reason": "Toxique (persine)"
+      },
+      {
+        "name": "Chocolat",
+        "reason": "Toxique (théobromine)"
+      },
+      {
+        "name": "Oignons et ail",
+        "reason": "Toxiques"
+      },
+      {
+        "name": "Caféine et alcool",
+        "reason": "Toxiques"
+      }
+    ],
+    "mealFrequency": "daily",
+    "specificNeeds": "Graines + granulés, fruits/légumes frais quotidiens, calcium, eau propre changée chaque jour.",
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — guide perruche"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/oiseaux",
+        "title": "VCA Hospitals — soins des oiseaux"
+      }
+    ]
+  },
+  "habitat": {
+    "habitatType": "cage",
+    "tempMin": 18,
+    "tempMax": 26,
+    "humidityMin": null,
+    "humidityMax": null,
+    "minSpaceSize": "Cage 60x40x80cm minimum (2x l’envergure), volière idéale",
+    "lightNeeds": "Lumière naturelle, 12h jour/nuit, UVB bénéfique",
+    "activityEnrichment": "Perchoirs variés, jouets à mâcher, miroir, sorties quotidiennes",
+    "hygieneNotes": "Nettoyage hebdomadaire, coupure des griffes, bain",
+    "costEstimate": "faible",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Perruche_ondul%C3%A9e",
+        "title": "Wikipédia — page de référence (perruche)"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Oiseau social, intelligent et très joueur. Peut apprendre à parler (calopsitte, perruche).",
+    "sociability": "grégaire",
+    "difficultyLevel": "débutant",
+    "compatibilityWithChildren": "Bon compagnon sous supervision.",
+    "compatibilityWithOtherAnimals": "Vivre en couple ou petit groupe recommandé.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Perruche_ondul%C3%A9e",
+        "title": "Wikipédia — page de référence (perruche)"
+      }
+    ]
+  },
+  "health": {
+    "diseases": [
+      {
+        "name": "Psittacose",
+        "symptoms": "Éternuements, écoulements, abattement",
+        "prevention": "Hygiène, quarantaine des nouveaux oiseaux",
+        "whenToConsult": "Dès signes respiratoires (zoonose)"
+      },
+      {
+        "name": "Acariens",
+        "symptoms": "Démangeaisons, plumes abîmées",
+        "prevention": "Hygiène de la cage",
+        "whenToConsult": "Dès grattage intense"
+      },
+      {
+        "name": "Problèmes digestifs",
+        "symptoms": "Diarrhée, vomissements",
+        "prevention": "Alimentation propre et variée",
+        "whenToConsult": "Dès diarrhée"
+      },
+      {
+        "name": "Plumage (picage)",
+        "symptoms": "Plumes arrachées, zones déplumées",
+        "prevention": "Enrichissement, réduction du stress",
+        "whenToConsult": "Si le picage persiste"
+      }
+    ],
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/oiseaux",
+        "title": "VCA Hospitals — santé des oiseaux"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — santé de la perruche"
+      }
+    ]
+  },
+  "legislation": {
+    "country": "FR",
+    "status": "allowed",
+    "details": {
+      "citesAppendix": null,
+      "euAnnex": null,
+      "permits": [],
+      "restrictions": []
+    },
+    "sources": [
+      {
+        "type": "official",
+        "url": "https://www.legifrance.gouv.fr",
+        "title": "Légifrance — détention d’oiseaux"
+      }
+    ]
+  },
+  "reproduction": {
+    "season": "printemps-été",
+    "gestationDays": null,
+    "incubationDays": 18,
+    "litterSizeMin": 3,
+    "litterSizeMax": 8,
+    "sexualMaturityMonths": 6,
+    "breedingDifficulty": "modere",
+    "notes": "Incubation 18 jours, nichoir obligatoire.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Perruche_ondul%C3%A9e",
+        "title": "Wikipédia — page de référence (perruche)"
+      }
+    ]
+  },
+  "especeKey": "oiseau-canari"
+}

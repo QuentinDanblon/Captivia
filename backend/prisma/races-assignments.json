@@ -1,0 +1,2786 @@
+[
+ {
+  "class": "mammifère",
+  "fr": "Berger allemand",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000001,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Labrador Retriever",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000002,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Golden Retriever",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000003,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bulldog français",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000004,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bouledogue anglais",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000005,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Beagle",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000006,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Caniche",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000007,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Rottweiler",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000008,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Yorkshire Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000009,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Boxer",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000010,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Husky sibérien",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000011,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Dobermann",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000012,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Chihuahua",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000013,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Carlin",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000014,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Shih Tzu",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000015,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Border Collie",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000016,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cocker Spaniel anglais",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000017,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Dalmatien",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000018,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Dogue allemand",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000019,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Épagneul breton",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000020,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Jack Russell Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000021,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Whippet",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000022,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lévrier afghan",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000023,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bichon maltais",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000024,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Berger australien",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000025,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Berger belge malinois",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000026,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bouvier bernois",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000027,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bull Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000028,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cairn Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000029,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cavalier King Charles",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000030,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Chow-chow",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000031,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Colley",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000032,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Corgi gallois",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000033,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Coton de Tuléar",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000034,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Dogue de Bordeaux",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000035,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Fox Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000036,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lévrier whippet italien",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000037,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Mastiff",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000038,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Papillon",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000039,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Pékinois",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000040,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Pinscher nain",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000041,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Pitbull (American Staffordshire)",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000042,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Pomsky",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000043,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Poodle toy",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000044,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Shiba Inu",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000045,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Schnauzer nain",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000046,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Schnauzer géant",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000047,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Setter irlandais",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000048,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Setter anglais",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000049,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Shar Pei",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000050,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Spitz nain",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000051,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Staffordshire Bull Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000052,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Teckel",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000053,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Terrier écossais",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000054,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Terrier tibétain",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000055,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "West Highland White Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000056,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Akita Inu",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000057,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Alaskan Malamute",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000058,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "American Pit Bull Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000059,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Basset Hound",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000060,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Berger blanc suisse",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000061,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Berger des Pyrénées",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000062,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bichon frisé",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000063,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bloodhound",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000064,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Braque allemand",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000065,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Braque de Weimar",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000066,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bullmastiff",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000067,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Caniche royal",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000068,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Chien de berger des Shetland",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000069,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Chien d’eau portugais",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000070,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Chien de montagne des Pyrénées",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000071,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Dogue argentin",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000072,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Épagneul cocker américain",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000073,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Épagneul king Charles",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000074,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Flat-Coated Retriever",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000075,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Galgo espagnol",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000076,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Greyhound",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000077,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Keeshond",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000078,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Kuvasz",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000079,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lagotto Romagnolo",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000080,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Leonberg",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000081,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lhassa Apso",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000082,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Malamute",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000083,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Mudi",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000084,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Néerlandais",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000085,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Norfolk Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000086,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Norvégien",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000087,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Otterhound",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000088,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Parson Russell Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000089,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Petit brabançon",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000090,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Petit chien lion",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000091,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Phalène",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000092,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Pudelpointer",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000093,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Rhodesian Ridgeback",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000094,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Saluki",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000095,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Samoyède",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000096,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Schapendoes",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000097,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Schipperke",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000098,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Silky Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000099,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Skye Terrier",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000100,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Sloughi",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000101,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Springer Spaniel anglais",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000102,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Sussex Spaniel",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000103,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Terre-Neuve",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000104,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Tosa",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000105,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Vizsla",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000106,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Weimaraner",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000107,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Whippet italien",
+  "sci": "Canis lupus familiaris",
+  "breed_of": "Chien",
+  "speciesId": 2000000108,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Européen",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000109,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Persan",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000110,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Maine Coon",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000111,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Siamois",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000112,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bengal",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000113,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "British Shorthair",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000114,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Scottish Fold",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000115,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Sphynx",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000116,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Abyssin",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000117,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Sacré de Birmanie",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000118,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Chartreux",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000119,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Devon Rex",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000120,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Exotic Shorthair",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000121,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Himalayen",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000122,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Korat",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000123,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Manx",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000124,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Norvégien (Skogkatt)",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000125,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Ocicat",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000126,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Oriental",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000127,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Ragdoll",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000128,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Russian Blue",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000129,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Savannah",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000130,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Sibérien",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000131,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Somali",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000132,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Tonkinois",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000133,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Turc de Van",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000134,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Angora turc",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000135,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Bombay",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000136,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Burmese",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000137,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Ceylan",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000138,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Chausie",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000139,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cornish Rex",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000140,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Égyptien mau",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000141,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Khao Manee",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000142,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "LaPerm",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000143,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Munchkin",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000144,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Nebelung",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000145,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Peterbald",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000146,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Selkirk Rex",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000147,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Singapura",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000148,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Snowshoe",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000149,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Toyger",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000150,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Turc",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000151,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Ussuri",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000152,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "York Chocolat",
+  "sci": "Felis catus",
+  "breed_of": "Chat",
+  "speciesId": 2000000153,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin nain bélier",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000154,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin bélier français",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000155,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin nain",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000156,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin angora",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000157,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin rex",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000158,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin géant des Flandres",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000159,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin hollandais",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000160,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin lop",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000161,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin papillon",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000162,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin tête de lion",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000163,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin hermine",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000164,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin polonais",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000165,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin russe",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000166,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin satin",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000167,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin tacheté anglais",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000168,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin zibeline",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000169,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin argenté de Champagne",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000170,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin fauve de Bourgogne",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000171,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin géant papillon",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000172,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lapin Chinchilla",
+  "sci": "Oryctolagus cuniculus",
+  "breed_of": "Lapin domestique",
+  "speciesId": 2000000173,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cochon d’Inde abyssinien",
+  "sci": "Cavia porcellus",
+  "breed_of": "Cochon d’Inde",
+  "speciesId": 2000000174,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cochon d’Inde péruvien",
+  "sci": "Cavia porcellus",
+  "breed_of": "Cochon d’Inde",
+  "speciesId": 2000000175,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cochon d’Inde sheltie",
+  "sci": "Cavia porcellus",
+  "breed_of": "Cochon d’Inde",
+  "speciesId": 2000000176,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cochon d’Inde teddy",
+  "sci": "Cavia porcellus",
+  "breed_of": "Cochon d’Inde",
+  "speciesId": 2000000177,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cochon d’Inde texel",
+  "sci": "Cavia porcellus",
+  "breed_of": "Cochon d’Inde",
+  "speciesId": 2000000178,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cochon d’Inde skinny",
+  "sci": "Cavia porcellus",
+  "breed_of": "Cochon d’Inde",
+  "speciesId": 2000000179,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Hamster doré",
+  "sci": "Mesocricetus auratus",
+  "breed_of": "Hamster",
+  "speciesId": 5289046,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Hamster russe",
+  "sci": "Phodopus sungorus",
+  "breed_of": "Hamster",
+  "speciesId": 104054378,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Hamster de Campbell",
+  "sci": "Phodopus campbelli",
+  "breed_of": "Hamster",
+  "speciesId": 2437847,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Hamster Roborovski",
+  "sci": "Phodopus roborovskii",
+  "breed_of": "Hamster",
+  "speciesId": 104054375,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Hamster chinois",
+  "sci": "Cricetulus griseus",
+  "breed_of": "Hamster",
+  "speciesId": 2000000180,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Rat domestique",
+  "sci": "Rattus norvegicus",
+  "breed_of": "Rat",
+  "speciesId": 5289003,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Souris domestique",
+  "sci": "Mus musculus",
+  "breed_of": "Souris",
+  "speciesId": 2000000181,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Gerbille de Mongolie",
+  "sci": "Meriones unguiculatus",
+  "breed_of": "Gerbille",
+  "speciesId": 2000000182,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Chinchilla",
+  "sci": "Chinchilla lanigera",
+  "breed_of": "Chinchilla",
+  "speciesId": 5285159,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Octodon",
+  "sci": "Octodon degus",
+  "breed_of": "Octodon",
+  "speciesId": 2000000183,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Écureuil de Corée",
+  "sci": "Tamias sibiricus",
+  "breed_of": "Écureuil",
+  "speciesId": 104053321,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Hérisson africain",
+  "sci": "Atelerix albiventris",
+  "breed_of": "Hérisson",
+  "speciesId": 2437140,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Furet",
+  "sci": "Mustela putorius furo",
+  "breed_of": "Furet",
+  "speciesId": 2000000184,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Phalanger volant",
+  "sci": "Petaurus breviceps",
+  "breed_of": "Phalanger",
+  "speciesId": 104072356,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cochon nain",
+  "sci": "Sus scrofa domesticus",
+  "breed_of": "Cochon",
+  "speciesId": 9104700,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Chèvre naine",
+  "sci": "Capra aegagrus hircus",
+  "breed_of": "Chèvre",
+  "speciesId": 166400276,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Alpaga",
+  "sci": "Vicugna pacos",
+  "breed_of": "Alpaga",
+  "speciesId": 5289389,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Lama",
+  "sci": "Lama glama",
+  "breed_of": "Lama",
+  "speciesId": 5220190,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Âne nain",
+  "sci": "Equus asinus",
+  "breed_of": "Âne",
+  "speciesId": 2000000185,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Poney Shetland",
+  "sci": "Equus ferus caballus",
+  "breed_of": "Cheval",
+  "speciesId": 2000000186,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Cheval miniature",
+  "sci": "Equus ferus caballus",
+  "breed_of": "Cheval",
+  "speciesId": 2000000187,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Mouton nain",
+  "sci": "Ovis aries",
+  "breed_of": "Mouton",
+  "speciesId": 2000000188,
+  "status": "new"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Vache miniature",
+  "sci": "Bos taurus",
+  "breed_of": "Vache",
+  "speciesId": 2441022,
+  "status": "existing"
+ },
+ {
+  "class": "mammifère",
+  "fr": "Gerboise",
+  "sci": "Jaculus jaculus",
+  "breed_of": "Gerboise",
+  "speciesId": 2000000189,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Perruche ondulée",
+  "sci": "Melopsittacus undulatus",
+  "breed_of": "Perruche",
+  "speciesId": 5347054,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Calopsitte élégante",
+  "sci": "Nymphicus hollandicus",
+  "breed_of": "Calopsitte",
+  "speciesId": 2000000190,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Perroquet gris du Gabon",
+  "sci": "Psittacus erithacus",
+  "breed_of": "Perroquet",
+  "speciesId": 2000000191,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Amazone à front bleu",
+  "sci": "Amazona aestiva",
+  "breed_of": "Amazone",
+  "speciesId": 2479662,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Ara ararauna",
+  "sci": "Ara ararauna",
+  "breed_of": "Ara",
+  "speciesId": 5959231,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Ara macao",
+  "sci": "Ara macao",
+  "breed_of": "Ara",
+  "speciesId": 5959227,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Ara hyacinthe",
+  "sci": "Anodorhynchus hyacinthinus",
+  "breed_of": "Ara",
+  "speciesId": 2000000192,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Conure à joues vertes",
+  "sci": "Pyrrhura molinae",
+  "breed_of": "Conure",
+  "speciesId": 2479804,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Conure soleil",
+  "sci": "Aratinga solstitialis",
+  "breed_of": "Conure",
+  "speciesId": 2479158,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Inséparable rosegorge",
+  "sci": "Agapornis roseicollis",
+  "breed_of": "Inséparable",
+  "speciesId": 2000000193,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Inséparable Fischer",
+  "sci": "Agapornis fischeri",
+  "breed_of": "Inséparable",
+  "speciesId": 2000000194,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Perroquet youyou",
+  "sci": "Poicephalus senegalus",
+  "breed_of": "Perroquet",
+  "speciesId": 2479964,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Éclectus",
+  "sci": "Eclectus roratus",
+  "breed_of": "Perroquet",
+  "speciesId": 2480075,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Loriquet arc-en-ciel",
+  "sci": "Trichoglossus moluccanus",
+  "breed_of": "Loriquet",
+  "speciesId": 2000000195,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Cacatoès rosalbin",
+  "sci": "Eolophus roseicapilla",
+  "breed_of": "Cacatoès",
+  "speciesId": 2479598,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Canari",
+  "sci": "Serinus canaria",
+  "breed_of": "Canari",
+  "speciesId": 5307065,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Diamant mandarin",
+  "sci": "Taeniopygia guttata",
+  "breed_of": "Diamant",
+  "speciesId": 5307210,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Moineau du Japon",
+  "sci": "Lonchura striata domestica",
+  "breed_of": "Moineau",
+  "speciesId": 177688379,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Bengali",
+  "sci": "Lonchura striata",
+  "breed_of": "Bengali",
+  "speciesId": 2000000196,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Padda de Java",
+  "sci": "Padda oryzivora",
+  "breed_of": "Padda",
+  "speciesId": 4845776,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Chardonneret",
+  "sci": "Carduelis carduelis",
+  "breed_of": "Chardonneret",
+  "speciesId": 2000000197,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Bouvreuil",
+  "sci": "Pyrrhula pyrrhula",
+  "breed_of": "Bouvreuil",
+  "speciesId": 2000000198,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Perruche à collier",
+  "sci": "Psittacula krameri",
+  "breed_of": "Perruche",
+  "speciesId": 2479226,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Perruche Alexandre",
+  "sci": "Psittacula eupatria",
+  "breed_of": "Perruche",
+  "speciesId": 2000000199,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Perruche de Bourke",
+  "sci": "Neopsephotus bourkii",
+  "breed_of": "Perruche",
+  "speciesId": 2479795,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Perruche turquoisine",
+  "sci": "Neophema pulchella",
+  "breed_of": "Perruche",
+  "speciesId": 2479509,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Perruche omnicolore",
+  "sci": "Platycercus eximius",
+  "breed_of": "Perruche",
+  "speciesId": 2000000200,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Ara noble",
+  "sci": "Diopsittaca nobilis",
+  "breed_of": "Ara",
+  "speciesId": 2479365,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Aratinga jandaya",
+  "sci": "Aratinga jandaya",
+  "breed_of": "Conure",
+  "speciesId": 2000000201,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Caïque à tête noire",
+  "sci": "Pionites melanocephalus",
+  "breed_of": "Caïque",
+  "speciesId": 2000000202,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Pionus à tête bleue",
+  "sci": "Pionus menstruus",
+  "breed_of": "Pionus",
+  "speciesId": 2000000203,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Toui été",
+  "sci": "Forpus passerinus",
+  "breed_of": "Toui",
+  "speciesId": 2000000204,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Toui à lunettes",
+  "sci": "Forpus conspicillatus",
+  "breed_of": "Toui",
+  "speciesId": 2000000205,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Astrild ondulé",
+  "sci": "Estrilda astrild",
+  "breed_of": "Astrild",
+  "speciesId": 2000000206,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Capucin damier",
+  "sci": "Lonchura punctulata",
+  "breed_of": "Capucin",
+  "speciesId": 104119019,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Colombe diamant",
+  "sci": "Geopelia cuneata",
+  "breed_of": "Colombe",
+  "speciesId": 2495494,
+  "status": "existing"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Tourterelle à collier",
+  "sci": "Streptopelia risoria",
+  "breed_of": "Tourterelle",
+  "speciesId": 2000000207,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Poule soie",
+  "sci": "Gallus gallus domesticus",
+  "breed_of": "Poule",
+  "speciesId": 2000000208,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Poule Brahma",
+  "sci": "Gallus gallus domesticus",
+  "breed_of": "Poule",
+  "speciesId": 2000000209,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Poule Sussex",
+  "sci": "Gallus gallus domesticus",
+  "breed_of": "Poule",
+  "speciesId": 2000000210,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Poule Wyandotte",
+  "sci": "Gallus gallus domesticus",
+  "breed_of": "Poule",
+  "speciesId": 2000000211,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Poule Leghorn",
+  "sci": "Gallus gallus domesticus",
+  "breed_of": "Poule",
+  "speciesId": 2000000212,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Poule Orpington",
+  "sci": "Gallus gallus domesticus",
+  "breed_of": "Poule",
+  "speciesId": 2000000213,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Canard de Barbarie",
+  "sci": "Cairina moschata",
+  "breed_of": "Canard",
+  "speciesId": 2000000214,
+  "status": "new"
+ },
+ {
+  "class": "oiseau",
+  "fr": "Oie de Toulouse",
+  "sci": "Anser anser domesticus",
+  "breed_of": "Oie",
+  "speciesId": 2000000215,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Gecko léopard",
+  "sci": "Eublepharis macularius",
+  "breed_of": "Gecko",
+  "speciesId": 5221172,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Gecko à crête",
+  "sci": "Correlophus ciliatus",
+  "breed_of": "Gecko",
+  "speciesId": 104073224,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Gecko diurne de Madagascar",
+  "sci": "Phelsuma madagascariensis",
+  "breed_of": "Gecko",
+  "speciesId": 104076815,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Caméléon casqué",
+  "sci": "Chamaeleo calyptratus",
+  "breed_of": "Caméléon",
+  "speciesId": 5218993,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Caméléon panthère",
+  "sci": "Furcifer pardalis",
+  "breed_of": "Caméléon",
+  "speciesId": 104092709,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Iguane vert",
+  "sci": "Iguana iguana",
+  "breed_of": "Iguane",
+  "speciesId": 5220648,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Anolis vert",
+  "sci": "Anolis carolinensis",
+  "breed_of": "Anolis",
+  "speciesId": 2000000216,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Agame barbu",
+  "sci": "Pogona vitticeps",
+  "breed_of": "Agame",
+  "speciesId": 2465641,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Scinque à langue bleue",
+  "sci": "Tiliqua scincoides",
+  "breed_of": "Scinque",
+  "speciesId": 5221098,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tégou argentin",
+  "sci": "Salvator merianae",
+  "breed_of": "Tégou",
+  "speciesId": 2000000217,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Varan d’eau",
+  "sci": "Varanus salvator",
+  "breed_of": "Varan",
+  "speciesId": 2000000218,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Python royal",
+  "sci": "Python regius",
+  "breed_of": "Python",
+  "speciesId": 7587934,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Python réticulé",
+  "sci": "Malayopython reticulatus",
+  "breed_of": "Python",
+  "speciesId": 9260388,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Boa constricteur",
+  "sci": "Boa constrictor",
+  "breed_of": "Boa",
+  "speciesId": 2000000219,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Boa émeraude",
+  "sci": "Corallus caninus",
+  "breed_of": "Boa",
+  "speciesId": 2464991,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Serpent des blés",
+  "sci": "Pantherophis guttatus",
+  "breed_of": "Serpent",
+  "speciesId": 2455644,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Serpent roi",
+  "sci": "Lampropeltis getula",
+  "breed_of": "Serpent",
+  "speciesId": 2000000220,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Serpent ratier",
+  "sci": "Elaphe obsoleta",
+  "breed_of": "Serpent",
+  "speciesId": 2000000221,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Couleuvre à nez plat",
+  "sci": "Heterodon nasicus",
+  "breed_of": "Serpent",
+  "speciesId": 5223725,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Python vert",
+  "sci": "Morelia viridis",
+  "breed_of": "Python",
+  "speciesId": 104101845,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Boa arc-en-ciel",
+  "sci": "Epicrates cenchria",
+  "breed_of": "Boa",
+  "speciesId": 2465228,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tortue grecque",
+  "sci": "Testudo graeca",
+  "breed_of": "Tortue",
+  "speciesId": 2441461,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tortue Hermann",
+  "sci": "Testudo hermanni",
+  "breed_of": "Tortue",
+  "speciesId": 2000000222,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tortue sulcata",
+  "sci": "Centrochelys sulcata",
+  "breed_of": "Tortue",
+  "speciesId": 2441533,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tortue léopard",
+  "sci": "Stigmochelys pardalis",
+  "breed_of": "Tortue",
+  "speciesId": 104105288,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tortue à oreilles rouges",
+  "sci": "Trachemys scripta elegans",
+  "breed_of": "Tortue",
+  "speciesId": 551789,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tortue de Floride",
+  "sci": "Trachemys scripta",
+  "breed_of": "Tortue",
+  "speciesId": 2000000223,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tortue peinte",
+  "sci": "Chrysemys picta",
+  "breed_of": "Tortue",
+  "speciesId": 2000000224,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tortue musquée",
+  "sci": "Sternotherus odoratus",
+  "breed_of": "Tortue",
+  "speciesId": 104105673,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Tortue boîte",
+  "sci": "Terrapene carolina",
+  "breed_of": "Tortue",
+  "speciesId": 2000000225,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Gecko tokay",
+  "sci": "Gekko gecko",
+  "breed_of": "Gecko",
+  "speciesId": 2447367,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Lézard à collerette",
+  "sci": "Chlamydosaurus kingii",
+  "breed_of": "Lézard",
+  "speciesId": 2466087,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Varan de Savane",
+  "sci": "Varanus exanthematicus",
+  "breed_of": "Varan",
+  "speciesId": 2000000226,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Python de Seba",
+  "sci": "Python sebae",
+  "breed_of": "Python",
+  "speciesId": 2465346,
+  "status": "existing"
+ },
+ {
+  "class": "reptile",
+  "fr": "Crotale (serpent à sonnette)",
+  "sci": "Crotalus atrox",
+  "breed_of": "Serpent",
+  "speciesId": 2000000227,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Mamba noir",
+  "sci": "Dendroaspis polylepis",
+  "breed_of": "Serpent",
+  "speciesId": 2000000228,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Cobra royal",
+  "sci": "Ophiophagus hannah",
+  "breed_of": "Serpent",
+  "speciesId": 2000000229,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Vipère",
+  "sci": "Vipera berus",
+  "breed_of": "Serpent",
+  "speciesId": 2000000230,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Anaconda vert",
+  "sci": "Eunectes murinus",
+  "breed_of": "Boa",
+  "speciesId": 2000000231,
+  "status": "new"
+ },
+ {
+  "class": "reptile",
+  "fr": "Caméléon de Jackson",
+  "sci": "Trioceros jacksonii",
+  "breed_of": "Caméléon",
+  "speciesId": 8371864,
+  "status": "existing"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Axolotl",
+  "sci": "Ambystoma mexicanum",
+  "breed_of": "Axolotl",
+  "speciesId": 2000000232,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Grenouille à griffes",
+  "sci": "Xenopus laevis",
+  "breed_of": "Grenouille",
+  "speciesId": 2000000233,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Rainette arboricole",
+  "sci": "Hyla arborea",
+  "breed_of": "Rainette",
+  "speciesId": 2000000234,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Rainette verte",
+  "sci": "Litoria caerulea",
+  "breed_of": "Rainette",
+  "speciesId": 2000000235,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Dendrobate",
+  "sci": "Dendrobates tinctorius",
+  "breed_of": "Dendrobate",
+  "speciesId": 2000000236,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Dendrobate bleu",
+  "sci": "Dendrobates azureus",
+  "breed_of": "Dendrobate",
+  "speciesId": 5218025,
+  "status": "existing"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Triton",
+  "sci": "Triturus vulgaris",
+  "breed_of": "Triton",
+  "speciesId": 2000000237,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Salamandre",
+  "sci": "Salamandra salamandra",
+  "breed_of": "Salamandre",
+  "speciesId": 2000000238,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Grenouille taureau",
+  "sci": "Lithobates catesbeianus",
+  "breed_of": "Grenouille",
+  "speciesId": 5209234,
+  "status": "existing"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Crapaud",
+  "sci": "Bufo bufo",
+  "breed_of": "Crapaud",
+  "speciesId": 2000000239,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Xénope",
+  "sci": "Xenopus tropicalis",
+  "breed_of": "Xénope",
+  "speciesId": 2000000240,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Hylidé",
+  "sci": "Hyla cinerea",
+  "breed_of": "Rainette",
+  "speciesId": 2000000241,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Pacman (Ceratophrys)",
+  "sci": "Ceratophrys ornata",
+  "breed_of": "Grenouille",
+  "speciesId": 2000000242,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Grenouille tomato",
+  "sci": "Dyscophus antongilii",
+  "breed_of": "Grenouille",
+  "speciesId": 2000000243,
+  "status": "new"
+ },
+ {
+  "class": "amphibien",
+  "fr": "Triton crêté",
+  "sci": "Triturus cristatus",
+  "breed_of": "Triton",
+  "speciesId": 2431885,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Guppy",
+  "sci": "Poecilia reticulata",
+  "breed_of": "Guppy",
+  "speciesId": 5300156,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Néon bleu",
+  "sci": "Paracheirodon innesi",
+  "breed_of": "Tétra",
+  "speciesId": 2000000244,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Néon noir",
+  "sci": "Hyphessobrycon herbertaxelrodi",
+  "breed_of": "Tétra",
+  "speciesId": 103975114,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Molly",
+  "sci": "Poecilia sphenops",
+  "breed_of": "Molly",
+  "speciesId": 2000000245,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Platy",
+  "sci": "Xiphophorus maculatus",
+  "breed_of": "Platy",
+  "speciesId": 103944455,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Xipho",
+  "sci": "Xiphophorus hellerii",
+  "breed_of": "Xipho",
+  "speciesId": 103944444,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Combattant (Betta)",
+  "sci": "Betta splendens",
+  "breed_of": "Betta",
+  "speciesId": 2000000246,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Poisson rouge",
+  "sci": "Carassius auratus",
+  "breed_of": "Poisson rouge",
+  "speciesId": 5210786,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Poisson rouge fantail",
+  "sci": "Carassius auratus",
+  "breed_of": "Poisson rouge",
+  "speciesId": 2000000247,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Poisson rouge oranda",
+  "sci": "Carassius auratus",
+  "breed_of": "Poisson rouge",
+  "speciesId": 2000000248,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Poisson rouge ryukin",
+  "sci": "Carassius auratus",
+  "breed_of": "Poisson rouge",
+  "speciesId": 2000000249,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Poisson rouge black moor",
+  "sci": "Carassius auratus",
+  "breed_of": "Poisson rouge",
+  "speciesId": 2000000250,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Corydoras",
+  "sci": "Corydoras paleatus",
+  "breed_of": "Corydoras",
+  "speciesId": 2000000251,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Otocinclus",
+  "sci": "Otocinclus affinis",
+  "breed_of": "Otocinclus",
+  "speciesId": 103980449,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Ancistrus",
+  "sci": "Ancistrus cirrhosus",
+  "breed_of": "Ancistrus",
+  "speciesId": 5961447,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Scalaire",
+  "sci": "Pterophyllum scalare",
+  "breed_of": "Scalaire",
+  "speciesId": 5208518,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Discus",
+  "sci": "Symphysodon aequifasciatus",
+  "breed_of": "Discus",
+  "speciesId": 103952588,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Ramirezi",
+  "sci": "Mikrogeophagus ramirezi",
+  "breed_of": "Ramirezi",
+  "speciesId": 2000000252,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Apistogramma",
+  "sci": "Apistogramma agassizii",
+  "breed_of": "Apistogramma",
+  "speciesId": 2000000253,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Tétra cardinal",
+  "sci": "Paracheirodon axelrodi",
+  "breed_of": "Tétra",
+  "speciesId": 2000000254,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Tétra citron",
+  "sci": "Hyphessobrycon pulchripinnis",
+  "breed_of": "Tétra",
+  "speciesId": 2354601,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Tétra cuivré",
+  "sci": "Hasemania nana",
+  "breed_of": "Tétra",
+  "speciesId": 2000000255,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Barbus cerise",
+  "sci": "Puntius titteya",
+  "breed_of": "Barbus",
+  "speciesId": 2000000256,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Barbus de Sumatra",
+  "sci": "Puntigrus tetrazona",
+  "breed_of": "Barbus",
+  "speciesId": 2000000257,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Danio zébré",
+  "sci": "Danio rerio",
+  "breed_of": "Danio",
+  "speciesId": 103996835,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Danio perlé",
+  "sci": "Danio margaritatus",
+  "breed_of": "Danio",
+  "speciesId": 2000000258,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Rasbora arlequin",
+  "sci": "Trigonostigma heteromorpha",
+  "breed_of": "Rasbora",
+  "speciesId": 2000000259,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Gourami bleu",
+  "sci": "Trichopodus trichopterus",
+  "breed_of": "Gourami",
+  "speciesId": 5211167,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Gourami nain",
+  "sci": "Trichogaster lalius",
+  "breed_of": "Gourami",
+  "speciesId": 115383748,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Gourami perlé",
+  "sci": "Trichopodus leerii",
+  "breed_of": "Gourami",
+  "speciesId": 7623402,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Guppy endler",
+  "sci": "Poecilia wingei",
+  "breed_of": "Guppy",
+  "speciesId": 2000000260,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Platy variatus",
+  "sci": "Xiphophorus variatus",
+  "breed_of": "Platy",
+  "speciesId": 2000000261,
+  "status": "new"
+ },
+ {
+  "class": "poisson",
+  "fr": "Molly voile",
+  "sci": "Poecilia latipinna",
+  "breed_of": "Molly",
+  "speciesId": 103944040,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Cichlidé perroquet",
+  "sci": "Amphilophus citrinellus × vieja",
+  "breed_of": "Cichlidé",
+  "speciesId": 2370102,
+  "status": "existing"
+ },
+ {
+  "class": "poisson",
+  "fr": "Kribensis",
+  "sci": "Pelvicachromis pulcher",
+  "breed_of": "Cichlidé",
+  "speciesId": 2000000262,
+  "status": "new"
+ },
+ {
+  "class": "arachnide",
+  "fr": "Mygale rose",
+  "sci": "Grammostola rosea",
+  "breed_of": "Mygale",
+  "speciesId": 2000000263,
+  "status": "new"
+ },
+ {
+  "class": "arachnide",
+  "fr": "Mygale mexicaine",
+  "sci": "Brachypelma smithi",
+  "breed_of": "Mygale",
+  "speciesId": 2000000264,
+  "status": "new"
+ },
+ {
+  "class": "arachnide",
+  "fr": "Mygale tigre",
+  "sci": "Psalmopoeus irminia",
+  "breed_of": "Mygale",
+  "speciesId": 2000000265,
+  "status": "new"
+ },
+ {
+  "class": "arachnide",
+  "fr": "Scorpion empereur",
+  "sci": "Pandinus imperator",
+  "breed_of": "Scorpion",
+  "speciesId": 5299876,
+  "status": "existing"
+ },
+ {
+  "class": "arachnide",
+  "fr": "Scorpion à queue jaune",
+  "sci": "Androctonus australis",
+  "breed_of": "Scorpion",
+  "speciesId": 104232579,
+  "status": "existing"
+ },
+ {
+  "class": "insecte",
+  "fr": "Phasme bâton",
+  "sci": "Carausius morosus",
+  "breed_of": "Phasme",
+  "speciesId": 5296756,
+  "status": "existing"
+ },
+ {
+  "class": "insecte",
+  "fr": "Mante religieuse",
+  "sci": "Mantis religiosa",
+  "breed_of": "Mante",
+  "speciesId": 5296821,
+  "status": "existing"
+ },
+ {
+  "class": "insecte",
+  "fr": "Blatte de Madagascar",
+  "sci": "Gromphadorhina portentosa",
+  "breed_of": "Blatte",
+  "speciesId": 5296482,
+  "status": "existing"
+ },
+ {
+  "class": "insecte",
+  "fr": "Escargot géant africain",
+  "sci": "Achatina fulica",
+  "breed_of": "Escargot",
+  "speciesId": 10928934,
+  "status": "existing"
+ },
+ {
+  "class": "insecte",
+  "fr": "Crevette Red Cherry",
+  "sci": "Neocaridina davidi",
+  "breed_of": "Crevette",
+  "speciesId": 11689892,
+  "status": "existing"
+ }
+]

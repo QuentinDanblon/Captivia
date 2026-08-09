@@ -1,0 +1,170 @@
+{
+  "espece": "Cheval",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "subcategory": "Équidé",
+  "feeding": {
+    "dietType": "herbivore",
+    "recommendedFoods": [
+      {
+        "name": "Foin de prairie",
+        "frequency": "quotidienne",
+        "notes": "1,5-2 % du poids vif par jour"
+      },
+      {
+        "name": "Herbe de pâture",
+        "frequency": "quotidienne",
+        "notes": "Selon la disponibilité et la saison"
+      },
+      {
+        "name": "Céréales ou granulés",
+        "frequency": "quotidienne",
+        "notes": "Adaptés au travail fourni"
+      },
+      {
+        "name": "Pierre à sel",
+        "frequency": "quotidienne",
+        "notes": "Accès libre"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Chocolat",
+        "reason": "Théobromine toxique"
+      },
+      {
+        "name": "Pain moisi",
+        "reason": "Toxique (ergotisme)"
+      },
+      {
+        "name": "Choux et crucifères en excès",
+        "reason": "Météorisation"
+      }
+    ],
+    "mealFrequency": "daily",
+    "specificNeeds": "Fourrage à volonté, eau propre abondante, minéraux (sel, calcium), adapter les céréales à l’effort.",
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — guide cheval"
+      },
+      {
+        "type": "vet",
+        "url": "https://www.royalcanin.com/fr/fr/chevaux",
+        "title": "Royal Canin — nutrition équine"
+      }
+    ]
+  },
+  "habitat": {
+    "habitatType": "enclos",
+    "tempMin": -5,
+    "tempMax": 30,
+    "humidityMin": null,
+    "humidityMax": null,
+    "minSpaceSize": "Box 9m² minimum + paddock ou pré",
+    "lightNeeds": "Lumière naturelle, abri contre intempéries",
+    "activityEnrichment": "Travail régulier, sorties au pré, sociabilisation avec congénères",
+    "hygieneNotes": "Pansage quotidien, parage toutes les 6-8 semaines, vermifugation régulière",
+    "costEstimate": "élevé",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Cheval",
+        "title": "Wikipédia — page de référence (cheval)"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Animal grégaire, sensible et très réactif. Mémoire excellente, besoin de confiance et de régularité.",
+    "sociability": "grégaire",
+    "difficultyLevel": "expert",
+    "compatibilityWithChildren": "Certaines races (poneys) adaptées aux enfants, toujours sous supervision.",
+    "compatibilityWithOtherAnimals": "Vie en troupeau naturelle, cohabitation avec ânes et bovins possible.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Cheval",
+        "title": "Wikipédia — page de référence (cheval)"
+      }
+    ]
+  },
+  "health": {
+    "diseases": [
+      {
+        "name": "Coliques",
+        "symptoms": "Agitation, coups de pied au ventre, refus de manger",
+        "prevention": "Ration régulière, eau propre, vermifugation",
+        "whenToConsult": "URGENCE — tout signe de colique"
+      },
+      {
+        "name": "Fourbure",
+        "symptoms": "Boiterie, posture en appui arrière",
+        "prevention": "Contrôle du poids, éviter les excès de céréales",
+        "whenToConsult": "Dès boiterie"
+      },
+      {
+        "name": "Myopathie",
+        "symptoms": "Raideur, sueurs, urines foncées",
+        "prevention": "Travail progressif, électrolytes",
+        "whenToConsult": "Dès raideur après effort"
+      },
+      {
+        "name": "Parasitisme",
+        "symptoms": "Amaigrissement, poil terne",
+        "prevention": "Vermifugation ciblée 2-4x/an",
+        "whenToConsult": "Lors des contrôles coprologiques"
+      }
+    ],
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/chevaux",
+        "title": "VCA Hospitals — santé équine"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — santé du cheval"
+      }
+    ]
+  },
+  "legislation": {
+    "country": "FR",
+    "status": "allowed",
+    "details": {
+      "citesAppendix": null,
+      "euAnnex": null,
+      "permits": [],
+      "restrictions": [
+        "Identification obligatoire (SIRE)",
+        "Passeport équidé obligatoire"
+      ]
+    },
+    "sources": [
+      {
+        "type": "official",
+        "url": "https://www.legifrance.gouv.fr",
+        "title": "Légifrance — identification des équidés"
+      }
+    ]
+  },
+  "reproduction": {
+    "season": "printemps-été",
+    "gestationDays": 340,
+    "incubationDays": null,
+    "litterSizeMin": 1,
+    "litterSizeMax": 1,
+    "sexualMaturityMonths": 36,
+    "breedingDifficulty": "avance",
+    "notes": "Gestation de 11 mois, un poulain par naissance. Reproduction réservée à des éleveurs expérimentés.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Cheval",
+        "title": "Wikipédia — page de référence (cheval)"
+      }
+    ]
+  },
+  "especeKey": "cheval"
+}

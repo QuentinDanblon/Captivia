@@ -1,0 +1,179 @@
+{
+  "espece": "Chat",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "subcategory": "Chat",
+  "feeding": {
+    "dietType": "carnivore strict",
+    "recommendedFoods": [
+      {
+        "name": "Croquettes premium pour chat",
+        "frequency": "quotidienne",
+        "notes": "Riches en protéines animales, pauvres en céréales"
+      },
+      {
+        "name": "Pâtée humide",
+        "frequency": "quotidienne",
+        "notes": "Contribue à l’hydratation (insuffisance rénale fréquente)"
+      },
+      {
+        "name": "Viande maigre cuite",
+        "frequency": "hebdomadaire",
+        "notes": "Poulet ou dinde, sans sel"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Chocolat",
+        "reason": "Théobromine toxique"
+      },
+      {
+        "name": "Oignons et ail",
+        "reason": "Anémie hémolytique"
+      },
+      {
+        "name": "Lait de vache",
+        "reason": "Intolérance au lactose fréquente"
+      },
+      {
+        "name": "Raisins",
+        "reason": "Insuffisance rénale"
+      }
+    ],
+    "mealFrequency": "daily",
+    "specificNeeds": "Carnivore strict : taurine OBLIGATOIRE (déficience cardiaque et oculaire sinon), eau fraîche en abondance, repas fractionnés.",
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://www.royalcanin.com/fr/fr/chats",
+        "title": "Royal Canin — guide alimentation chat"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/chats",
+        "title": "VCA Hospitals — soins du chat"
+      },
+      {
+        "type": "vet",
+        "url": "https://wamiz.com",
+        "title": "Wamiz — guide chat"
+      }
+    ]
+  },
+  "habitat": {
+    "habitatType": "libre",
+    "tempMin": 15,
+    "tempMax": 28,
+    "humidityMin": null,
+    "humidityMax": null,
+    "minSpaceSize": "Intérieur sécurisé (filets aux fenêtres) ou accès extérieur surveillé",
+    "lightNeeds": "Lumière naturelle, zones ombragées",
+    "activityEnrichment": "Arbre à chat, jouets de chasse, griffoirs, cachettes, interactions quotidiennes",
+    "hygieneNotes": "Litière nettoyée quotidiennement, brossage hebdomadaire (quotidien pour poils longs)",
+    "costEstimate": "moyen",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Chat",
+        "title": "Wikipédia — page de référence (chat)"
+      },
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com",
+        "title": "VCA Hospitals — santé chat"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Animal territorial et indépendant mais très attaché à son environnement et à ses humains. Comportement de chasseur marqué.",
+    "sociability": "solitaire",
+    "difficultyLevel": "débutant",
+    "compatibilityWithChildren": "Bon compagnon si respecté et manipulé avec douceur dès le jeune âge.",
+    "compatibilityWithOtherAnimals": "Coexiste avec chiens et autres chats si introductions progressives.",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Chat",
+        "title": "Wikipédia — page de référence (chat)"
+      }
+    ]
+  },
+  "health": {
+    "diseases": [
+      {
+        "name": "Insuffisance rénale chronique",
+        "symptoms": "Soif excessive, amaigrissement, vomissements",
+        "prevention": "Alimentation adaptée, hydratation, bilan sanguin annuel après 8 ans",
+        "whenToConsult": "Dès soif excessive ou amaigrissement"
+      },
+      {
+        "name": "Hyperthyroïdie",
+        "symptoms": "Perte de poids malgré un bon appétit, agitation",
+        "prevention": "Surveillance du poids, bilan thyroïdien chez le senior",
+        "whenToConsult": "Dès perte de poids inexpliquée"
+      },
+      {
+        "name": "Cystite idiopathique",
+        "symptoms": "Mictions fréquentes et douloureuses, sang dans les urines",
+        "prevention": "Eau en abondance, litière propre, réduction du stress",
+        "whenToConsult": "Dès difficultés à uriner (urgence)"
+      },
+      {
+        "name": "PIF (péritonite infectieuse féline)",
+        "symptoms": "Fièvre, abattement, épanchement abdominal",
+        "prevention": "Limiter le stress, environnement sain",
+        "whenToConsult": "Dès fièvre persistante"
+      }
+    ],
+    "sources": [
+      {
+        "type": "vet",
+        "url": "https://vcahospitals.com/fr/chats",
+        "title": "VCA Hospitals — maladies du chat"
+      },
+      {
+        "type": "vet",
+        "url": "https://www.petmd.com/cats",
+        "title": "PetMD — santé féline"
+      }
+    ]
+  },
+  "legislation": {
+    "country": "FR",
+    "status": "allowed",
+    "details": {
+      "citesAppendix": null,
+      "euAnnex": null,
+      "permits": [],
+      "restrictions": [
+        "Identification par puce électronique obligatoire",
+        "Vaccination antirabique pour les déplacements"
+      ]
+    },
+    "sources": [
+      {
+        "type": "official",
+        "url": "https://www.legifrance.gouv.fr",
+        "title": "Légifrance — identification des carnivores domestiques"
+      }
+    ]
+  },
+  "reproduction": {
+    "season": "toute l'année",
+    "gestationDays": 65,
+    "incubationDays": null,
+    "litterSizeMin": 2,
+    "litterSizeMax": 6,
+    "sexualMaturityMonths": 6,
+    "breedingDifficulty": "facile",
+    "notes": "Stérilisation recommandée (prévention des portées non désirées et de certains cancers).",
+    "sources": [
+      {
+        "type": "wikipedia",
+        "url": "https://fr.wikipedia.org/wiki/Chat",
+        "title": "Wikipédia — page de référence (chat)"
+      }
+    ]
+  },
+  "especeKey": "chat"
+}
