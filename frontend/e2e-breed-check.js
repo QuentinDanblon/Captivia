@@ -1,4 +1,7 @@
 // Test fiche Labrador Retriever complète + clic onglet Alimentation.
+// Script Node autonome (pas un module du projet) : require() est le mécanisme
+// CJS natif, la règle TS no-require-imports ne s'applique pas ici.
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { chromium } = require('playwright');
 
 (async () => {
