@@ -408,9 +408,11 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     const SPECIES_WITH_FR = 99001001;
     const SPECIES_WITH_FALLBACK = 99001002;
 
-    it('GET espèces sans fiche → 404 propre (message clair)', async () => {
+    it('GET espèce inexistante → 404 propre (message clair)', async () => {
+      // 5221172 (Gecko léopard) possède désormais une fiche reproduction complète
+      // (pipeline races 2026-08-09) — le 404 doit être testé sur un ID inconnu.
       const res = await request(app.getHttpServer())
-        .get('/species/5221172/reproduction')
+        .get('/species/999999999/reproduction')
         .expect(404);
       expect(res.body.message).toContain('Reproduction data not available');
     });
