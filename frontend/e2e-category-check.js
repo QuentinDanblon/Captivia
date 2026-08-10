@@ -1,4 +1,7 @@
 // Test : clic sur catégorie -> toutes les fiches de la catégorie + Voir plus.
+// Script Node autonome (pas un module du projet) : require() est le mécanisme
+// CJS natif, la règle TS no-require-imports ne s'applique pas ici.
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { chromium } = require('playwright');
 
 (async () => {
@@ -15,7 +18,6 @@ const { chromium } = require('playwright');
   await reptileCard.click();
   await page.waitForTimeout(3000);
 
-  const count = await page.locator('div[role="listbox"]').count();
   const results = await page.locator('[data-testid="species-result"]').count();
   const countText = await page.locator('.captivia-results-count').textContent().catch(() => '');
   console.log('RÉSULTATS affichés:', results, '| compteur:', countText.trim());
