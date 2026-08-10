@@ -210,7 +210,7 @@ export const api = {
           `Erreur ${response.status}`;
         throw new Error(message);
       }
-      return data as { results?: unknown[] };
+      return data as { results?: unknown[]; total?: number; source?: string };
     } catch (err) {
       const isNetworkError =
         err instanceof TypeError &&

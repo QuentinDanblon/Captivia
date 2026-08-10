@@ -51,26 +51,33 @@ export default function Home() {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [suggestionsLoading, setSuggestionsLoading] = useState(false);
   const [suggestionsTimeout, setSuggestionsTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [offset, setOffset] = useState(0);
+  const [totalResults, setTotalResults] = useState(0);
+  const PAGE_SIZE = 24;
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!query.trim() && !selectedTypeFilter) return;
+  const runSearch = async (nextOffset: number, nextFilter: string | null = selectedTypeFilter) => {
     setShowSuggestions(false);
-
     setLoading(true);
     setSearchError(null);
     try {
-      const searchQuery = query.trim() || 'animal';
+      // Requête vide + filtre = parcourir TOUTE la catégorie depuis les profils
+      const searchQuery = query.trim() || '';
       const filters: SearchSpeciesFilters = {};
-      if (selectedTypeFilter) {
-        filters.class = selectedTypeFilter;
+      if (nextFilter) {
+        filters.class = nextFilter;
       }
 
-      const data = await api.searchSpecies(searchQuery, 20, 0, filters);
-      setResults(normalizeSpeciesResults(data.results));
+      const data = await api.searchSpecies(searchQuery, PAGE_SIZE, nextOffset, filters);
+      const normalized = normalizeSpeciesResults(data.results);
+      setResults((prev) =>
+        nextOffset === 0 ? normalized : [...prev, ...normalized]
+      );
+      setTotalResults(data.total ?? normalized.length);
+      setOffset(nextOffset);
     } catch (error) {
       console.error('Search error:', error);
       setResults([]);
+      setTotalResults(0);
       setSearchError(
         error instanceof Error
           ? error.message
@@ -79,6 +86,12 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!query.trim() && !selectedTypeFilter) return;
+    await runSearch(0);
   };
 
   const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,25 +135,14 @@ export default function Home() {
     const newFilter = selectedTypeFilter === classValue ? null : classValue;
     setSelectedTypeFilter(newFilter);
 
-    setLoading(true);
-    setSearchError(null);
-    try {
-      const searchQuery = query.trim() || 'animal';
-      const filters: SearchSpeciesFilters = {};
-      if (newFilter) {
-        filters.class = newFilter;
-      }
-
-      const data = await api.searchSpecies(searchQuery, 20, 0, filters);
-      setResults(normalizeSpeciesResults(data.results));
-    } catch (error) {
-      console.error('Search error:', error);
+    if (newFilter) {
+      // Clic sur une catégorie = parcourir TOUTES les fiches de cette catégorie
+      setQuery('');
+      await runSearch(0, newFilter);
+    } else {
       setResults([]);
-      setSearchError(
-        error instanceof Error ? error.message : 'Le serveur de recherche est indisponible.'
-      );
-    } finally {
-      setLoading(false);
+      setTotalResults(0);
+      setOffset(0);
     }
   };
 
@@ -295,7 +297,9 @@ export default function Home() {
                 <span className="captivia-card-kicker">RÉSULTATS</span>
                 <h2 id="captivia-results-title">Espèces trouvées</h2>
               </div>
-              <span className="captivia-results-count">{results.length} profils</span>
+              <span className="captivia-results-count">
+                {totalResults > 0 ? `${totalResults} profils` : `${results.length} profils`}
+              </span>
             </div>
             <div className="captivia-results-grid">
               {results.map((species) => (
@@ -331,6 +335,18 @@ export default function Home() {
                 </Link>
               ))}
             </div>
+            {offset + results.length < totalResults && (
+              <div className="captivia-results-more">
+                <button
+                  type="button"
+                  onClick={() => runSearch(offset + PAGE_SIZE)}
+                  disabled={loading}
+                  className="captivia-load-more"
+                >
+                  {loading ? t('common.loading') : 'Voir plus'}
+                </button>
+              </div>
+            )}
           </section>
         )}
 

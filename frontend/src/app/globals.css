@@ -1125,6 +1125,35 @@ textarea {
   font-style: italic;
 }
 
+.captivia-results-more {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-5);
+}
+
+.captivia-load-more {
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-forest);
+  background: var(--color-cream);
+  border: 1.5px solid var(--color-moss);
+  border-radius: 999px;
+  padding: 0.7rem 1.6rem;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.captivia-load-more:hover:not(:disabled) {
+  background: var(--color-moss);
+  color: var(--color-cream);
+  transform: translateY(-1px);
+}
+
+.captivia-load-more:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 @media (max-width: 1050px) {
   .captivia-header-inner,
   .captivia-container {
