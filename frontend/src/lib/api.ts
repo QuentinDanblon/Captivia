@@ -1,32 +1,10 @@
-/** URL du backend (port 3001 par défaut, Next.js sur 3000) */
-const DEFAULT_API = 'http://localhost:3001';
-const BACKEND_PORT = '3001';
-
-function getApiBase(): string {
-  // Depuis un autre appareil (ex. téléphone sur le même Wi‑Fi), utiliser la même IP que le frontend
-  if (typeof window !== 'undefined') {
-    const host = window.location.hostname;
-    if (host !== 'localhost' && host !== '127.0.0.1') {
-      return `http://${host}:${BACKEND_PORT}`;
-    }
-  }
-  const raw = process.env.NEXT_PUBLIC_API_URL || DEFAULT_API;
-  const base = (typeof raw === 'string' ? raw : '').trim() || DEFAULT_API;
-  if (!/^https?:\/\//i.test(base)) return DEFAULT_API;
-  try {
-    new URL(base);
-    return base;
-  } catch {
-    return DEFAULT_API;
-  }
-}
-const API_URL = getApiBase();
+import { API_URL } from './config';
 
 const NETWORK_ERROR_MESSAGES = ['Failed to fetch', 'Load failed', 'NetworkError when attempting to fetch resource'];
 
 /** Message renvoyé quand le backend n’est pas joignable (à utiliser pour afficher une bannière au lieu de faire planter l’app). */
 export const BACKEND_UNAVAILABLE_MESSAGE =
-  'Backend non connecté. En local, lancez-le avec : cd backend && npm run start:dev (port 3001).';
+  'Le service est momentanément indisponible. Veuillez réessayer dans quelques instants.';
 
 function isNetworkError(err: unknown): boolean {
   return err instanceof TypeError && NETWORK_ERROR_MESSAGES.some((m) => (err as Error).message?.includes(m));
@@ -216,9 +194,7 @@ export const api = {
         err instanceof TypeError &&
         (err.message === 'Failed to fetch' || err.message === 'Load failed');
       if (isNetworkError) {
-        throw new Error(
-          'Le serveur de recherche est indisponible. Vérifiez que le backend est démarré (port 3001).'
-        );
+        throw new Error(BACKEND_UNAVAILABLE_MESSAGE);
       }
       throw err;
     }
@@ -424,7 +400,7 @@ export const api = {
 
   // Grade & notification events
   getGrade: async (token: string) => {
-    const response = await safeFetch(`${getApiBase()}/users/me/grade`, {
+    const response = await safeFetch(`${API_URL}/users/me/grade`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.json();
@@ -435,7 +411,7 @@ export const api = {
     if (date) params.set('date', date);
     if (refresh) params.set('refresh', 'true');
     const qs = params.toString();
-    const url = `${getApiBase()}/users/me/notification-events${qs ? `?${qs}` : ''}`;
+    const url = `${API_URL}/users/me/notification-events${qs ? `?${qs}` : ''}`;
     const response = await safeFetch(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -447,7 +423,7 @@ export const api = {
     status: 'done' | 'skipped',
     token: string
   ) => {
-    const url = `${getApiBase()}/users/me/notification-events/${eventId}`;
+    const url = `${API_URL}/users/me/notification-events/${eventId}`;
     const response = await safeFetch(
       url,
       {
@@ -468,7 +444,7 @@ export const api = {
     const id = String(eventId ?? '').trim();
     if (!id) throw new Error('ID du rappel invalide');
     const response = await safeFetch(
-      `${getApiBase()}/users/me/notification-events/${id}`,
+      `${API_URL}/users/me/notification-events/${id}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${authToken}` },
@@ -479,7 +455,7 @@ export const api = {
       const message =
         (data as { message?: string })?.message ||
         (response.status === 404 ? 'Rappel introuvable.' : response.statusText) ||
-        'Erreur lors de la suppression. Vérifiez que le backend est démarré (port 3001).';
+        'Erreur lors de la suppression du rappel. Veuillez réessayer.';
       throw new Error(message);
     }
     return data as { deleted?: boolean };
@@ -650,7 +626,7 @@ export const api = {
   // Medications (traitements médicaux)
   getMedications: async (animalId: string, token: string) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/medications`,
+      `${API_URL}/users/me/animals/${animalId}/medications`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -666,7 +642,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/medications`,
+      `${API_URL}/users/me/animals/${animalId}/medications`,
       {
         method: 'POST',
         headers: {
@@ -688,7 +664,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/medications/${medicationId}`,
+      `${API_URL}/users/me/animals/${animalId}/medications/${medicationId}`,
       {
         method: 'PATCH',
         headers: {
@@ -709,7 +685,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/medications/${medicationId}`,
+      `${API_URL}/users/me/animals/${animalId}/medications/${medicationId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -725,7 +701,7 @@ export const api = {
   // Vet appointments (rendez-vous vétérinaires)
   getVetAppointments: async (animalId: string, token: string) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/vet-appointments`,
+      `${API_URL}/users/me/animals/${animalId}/vet-appointments`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -741,7 +717,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/vet-appointments`,
+      `${API_URL}/users/me/animals/${animalId}/vet-appointments`,
       {
         method: 'POST',
         headers: {
@@ -763,7 +739,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
+      `${API_URL}/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
       {
         method: 'PATCH',
         headers: {
@@ -784,7 +760,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
+      `${API_URL}/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -800,7 +776,7 @@ export const api = {
   // Measurements (poids & mesures)
   getMeasurements: async (animalId: string, token: string) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/measurements`,
+      `${API_URL}/users/me/animals/${animalId}/measurements`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -816,7 +792,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/measurements`,
+      `${API_URL}/users/me/animals/${animalId}/measurements`,
       {
         method: 'POST',
         headers: {
@@ -838,7 +814,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/measurements/${measurementId}`,
+      `${API_URL}/users/me/animals/${animalId}/measurements/${measurementId}`,
       {
         method: 'PATCH',
         headers: {
@@ -859,7 +835,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/measurements/${measurementId}`,
+      `${API_URL}/users/me/animals/${animalId}/measurements/${measurementId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -875,7 +851,7 @@ export const api = {
   // Vaccinations
   getVaccinations: async (animalId: string, token: string) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/vaccinations`,
+      `${API_URL}/users/me/animals/${animalId}/vaccinations`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -891,7 +867,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/vaccinations`,
+      `${API_URL}/users/me/animals/${animalId}/vaccinations`,
       {
         method: 'POST',
         headers: {
@@ -913,7 +889,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/vaccinations/${vaccinationId}`,
+      `${API_URL}/users/me/animals/${animalId}/vaccinations/${vaccinationId}`,
       {
         method: 'PATCH',
         headers: {
@@ -934,7 +910,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/vaccinations/${vaccinationId}`,
+      `${API_URL}/users/me/animals/${animalId}/vaccinations/${vaccinationId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -950,7 +926,7 @@ export const api = {
   // Breeding records (suivi de reproduction)
   getBreedingRecords: async (animalId: string, token: string) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/breeding-records`,
+      `${API_URL}/users/me/animals/${animalId}/breeding-records`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -966,7 +942,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/breeding-records`,
+      `${API_URL}/users/me/animals/${animalId}/breeding-records`,
       {
         method: 'POST',
         headers: {
@@ -988,7 +964,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/breeding-records/${recordId}`,
+      `${API_URL}/users/me/animals/${animalId}/breeding-records/${recordId}`,
       {
         method: 'PATCH',
         headers: {
@@ -1009,7 +985,7 @@ export const api = {
     token: string
   ) => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/breeding-records/${recordId}`,
+      `${API_URL}/users/me/animals/${animalId}/breeding-records/${recordId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -1037,7 +1013,7 @@ export const api = {
   // Carnet de santé (export)
   exportCarnet: async (animalId: string, token: string): Promise<string> => {
     const response = await safeFetch(
-      `${getApiBase()}/users/me/animals/${animalId}/carnet/export`,
+      `${API_URL}/users/me/animals/${animalId}/carnet/export`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

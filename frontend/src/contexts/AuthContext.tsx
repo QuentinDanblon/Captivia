@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { API_URL } from '@/lib/config';
 
 interface User {
   id: string;
@@ -27,7 +28,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const refreshProfile = useCallback(async (storedToken: string) => {
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
       const res = await fetch(`${API_URL}/auth/me`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       });

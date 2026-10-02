@@ -3,9 +3,43 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
+const isProd = process.env.NODE_ENV === 'production';
+
+/**
+ * Origine du backend, calculée au build à partir de NEXT_PUBLIC_API_URL (la même
+ * valeur est inlinée dans le bundle navigateur par src/lib/config.ts).
+ */
+function apiOrigin(): string | null {
+  const raw = (process.env.NEXT_PUBLIC_API_URL || '').trim();
+  if (!raw) return null;
+  try {
+    const { protocol, origin } = new URL(raw);
+    return protocol === 'http:' || protocol === 'https:' ? origin : null;
+  } catch {
+    return null;
+  }
+}
+
+const API_ORIGIN = apiOrigin();
+if (isProd && !API_ORIGIN) {
+  console.warn(
+    '[next.config] NEXT_PUBLIC_API_URL est absent ou invalide : la CSP (connect-src) ' +
+      "n'autorisera pas le backend. Définissez-le avant `next build`.",
+  );
+}
+
+const connectSrc = [
+  "'self'",
+  ...(API_ORIGIN ? [API_ORIGIN] : []),
+  // Backend local / LAN (développement uniquement, jamais en production).
+  ...(isProd ? [] : ['http://localhost:3001', 'http://127.0.0.1:3001', 'http://*:3001']),
+].join(' ');
+
 const nextConfig: NextConfig = {
   output: 'standalone',
   reactCompiler: true,
+  // Aucun composant next/image n'est utilisé : on évite l'optimiseur (sharp, remotePatterns).
+  images: { unoptimized: true },
   async headers() {
     return [
       {
@@ -22,16 +56,16 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             // 'unsafe-inline' est requis par Next pour les styles inline et les
             // scripts de preload en production. À durcir (nonces) en P2.
-            // connect-src autorise le backend local (dev/Docker sur 3001) et le
-            // backend HTTPS de production ; sans cela, l'UI affiche
-            // « Backend non connecté » alors que le réseau fonctionne.
+            // connect-src : 'self' + origine de NEXT_PUBLIC_API_URL (calculée au build) ;
+            // localhost:3001 n'est ajouté qu'en développement.
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https:",
               "font-src 'self' data:",
-              "connect-src 'self' https: http://localhost:3001 http://127.0.0.1:3001",
+              `connect-src ${connectSrc}`,
+              "object-src 'none'",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

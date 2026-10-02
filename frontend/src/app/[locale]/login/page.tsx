@@ -18,7 +18,8 @@ export default function LoginPage() {
   const [mobileLink, setMobileLink] = useState<string | null>(null);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    // Lien « test sur téléphone » : outil de développement uniquement.
+    if (process.env.NODE_ENV !== 'development' || typeof window === 'undefined') return;
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     if (!isLocal) return;
     fetch('/api/mobile-link')
@@ -111,7 +112,7 @@ export default function LoginPage() {
           </Link>
         </div>
 
-        {mobileLink && (
+        {process.env.NODE_ENV === 'development' && mobileLink && (
           <div className="captivia-auth-mobile-link">
             <strong>Lien pour tester sur votre téléphone (même Wi‑Fi)</strong>
             <a href={mobileLink} target="_blank" rel="noopener noreferrer">

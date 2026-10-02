@@ -55,10 +55,9 @@ const SUGGESTED_NOTIFICATION_TYPES = [
   'Humidité',
 ] as const;
 
-const getApiBase = () =>
-  typeof process !== 'undefined' && process.env.NEXT_PUBLIC_API_URL
-    ? process.env.NEXT_PUBLIC_API_URL
-    : 'http://localhost:3001';
+import { API_URL } from '@/lib/config';
+
+const getApiBase = () => API_URL;
 
 export default function NotificationsPreferencesPage() {
   const t = useTranslations();
