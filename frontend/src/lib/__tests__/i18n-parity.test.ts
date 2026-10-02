@@ -47,6 +47,9 @@ const ALLOWED_EVERYWHERE = new Set([
   '29,99 €',
   'CC BY-SA 4.0',
   'GBIF.org',
+  // Noms de stores (W6-08)
+  'App Store',
+  'Google Play',
 ]);
 
 const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {

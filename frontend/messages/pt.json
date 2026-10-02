@@ -718,7 +718,19 @@
     "title": "Assinatura Premium",
     "yearly": "Anual",
     "yearlyEquivalent": "≈ 2,50 € / mês",
-    "yearlyDiscount": "−17%"
+    "yearlyDiscount": "−17%",
+    "inAppOnly": "Assinatura disponível no aplicativo móvel Captivia",
+    "inAppOnlyHint": "Baixe o aplicativo na App Store ou no Google Play para assinar. O site não oferece nenhum pagamento.",
+    "statusTitle": "Sua assinatura",
+    "sourceLabel": "Assinada via",
+    "sourceAPPLE": "App Store",
+    "sourceGOOGLE": "Google Play",
+    "sourceMANUAL": "Ativada pela equipe Captivia",
+    "renewsOn": "Renovação automática em {date}",
+    "endsOn": "Acesso Premium até {date}",
+    "billingIssue": "Problema de pagamento: atualize sua forma de pagamento na loja.",
+    "expired": "Sua assinatura expirou.",
+    "manage": "Gerenciar minha assinatura"
   },
   "legal": {
     "englishFallback": "A versão em inglês prevalece enquanto aguardamos a tradução.",

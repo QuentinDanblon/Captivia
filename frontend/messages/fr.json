@@ -725,7 +725,19 @@
     "title": "Abonnement Premium",
     "yearly": "Annuel",
     "yearlyEquivalent": "≈ 2,50 € / mois",
-    "yearlyDiscount": "−17 %"
+    "yearlyDiscount": "−17 %",
+    "inAppOnly": "Abonnement disponible dans l'application mobile Captivia",
+    "inAppOnlyHint": "Téléchargez l'application sur l'App Store ou Google Play pour vous abonner. Aucun paiement n'est proposé sur le site.",
+    "statusTitle": "Votre abonnement",
+    "sourceLabel": "Souscrit via",
+    "sourceAPPLE": "App Store",
+    "sourceGOOGLE": "Google Play",
+    "sourceMANUAL": "Activation par l'équipe Captivia",
+    "renewsOn": "Renouvellement automatique le {date}",
+    "endsOn": "Accès Premium jusqu'au {date}",
+    "billingIssue": "Problème de paiement : mettez à jour votre moyen de paiement dans le store.",
+    "expired": "Votre abonnement a expiré.",
+    "manage": "Gérer mon abonnement"
   },
   "transparency": {
     "affiliateIndependence": "Les recommandations de matériel et d'alimentation dépendent des besoins de l'espèce, pas du montant des commissions.",

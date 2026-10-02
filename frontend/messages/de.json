@@ -718,7 +718,19 @@
     "title": "Premium-Abo",
     "yearly": "Jährlich",
     "yearlyEquivalent": "≈ 2,50 € / Monat",
-    "yearlyDiscount": "−17 %"
+    "yearlyDiscount": "−17 %",
+    "inAppOnly": "Abonnement in der Captivia-App verfügbar",
+    "inAppOnlyHint": "Lade die App im App Store oder bei Google Play herunter, um ein Abonnement abzuschließen. Auf der Website wird keine Zahlung angeboten.",
+    "statusTitle": "Dein Abonnement",
+    "sourceLabel": "Abgeschlossen über",
+    "sourceAPPLE": "App Store",
+    "sourceGOOGLE": "Google Play",
+    "sourceMANUAL": "Vom Captivia-Team aktiviert",
+    "renewsOn": "Automatische Verlängerung am {date}",
+    "endsOn": "Premium-Zugang bis {date}",
+    "billingIssue": "Zahlungsproblem: Bitte aktualisiere deine Zahlungsmethode im Store.",
+    "expired": "Dein Abonnement ist abgelaufen.",
+    "manage": "Abonnement verwalten"
   },
   "legal": {
     "englishFallback": "Bis zur Übersetzung ist die englische Fassung maßgeblich.",

@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ForbiddenException, NotFoundException } from '@nestjs/common';
 import { AnimalsService } from './animals.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { EntitlementService } from '../entitlement/entitlement.service';
 import { CreateAnimalDto, UpdateAnimalDto } from './dto/animal.dto';
 
 describe('AnimalsService', () => {
@@ -40,6 +41,8 @@ describe('AnimalsService', () => {
     $queryRaw: jest.fn().mockResolvedValue([{ id: 'user-id-123' }]),
     user: {
       findUnique: jest.fn(),
+      // EntitlementService.isPremium (W6-08) : aucun abonnement store dans ces tests.
+      findFirst: jest.fn().mockResolvedValue(null),
     },
     animal: {
       create: jest.fn(),
@@ -67,6 +70,7 @@ describe('AnimalsService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AnimalsService,
+        EntitlementService,
         {
           provide: PrismaService,
           useValue: mockPrismaService,

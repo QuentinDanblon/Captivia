@@ -35,6 +35,7 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { GradeModule } from './grade/grade.module';
 import { AffiliateModule } from './affiliate/affiliate.module';
 import { SubscriptionModule } from './subscription/subscription.module';
+import { EntitlementModule } from './entitlement/entitlement.module';
 import { SpeciesRoutinesModule } from './species-routines/species-routines.module';
 import { AccountModule } from './account/account.module';
 
@@ -75,6 +76,7 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     EquipmentModule,
     AffiliateModule,
     AnimalsModule,
+    EntitlementModule,
     SubscriptionModule,
     SpeciesRoutinesModule,
     RoutinesModule,

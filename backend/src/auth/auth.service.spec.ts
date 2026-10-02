@@ -37,7 +37,8 @@ describe('AuthService', () => {
   let service: AuthService;
   let mailService: MailService;
   const serviceLogger = () => (service as unknown as { logger: Logger }).logger;
-  const mailLogger = () => (mailService as unknown as { logger: Logger }).logger;
+  const mailLogger = () =>
+    (mailService as unknown as { logger: Logger }).logger;
 
   const mockUser = {
     id: 'user-id-123',
@@ -248,9 +249,11 @@ describe('AuthService', () => {
 
       await service.login({ ...loginDto, email: ' TEST@Captivia.com ' });
 
-      expect(mockPrismaService.user.findUnique).toHaveBeenCalledWith({
-        where: { email: 'test@captivia.com' },
-      });
+      expect(mockPrismaService.user.findUnique).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: { email: 'test@captivia.com' },
+        }),
+      );
     });
 
     it('unknown user: still runs bcrypt.compare against a dummy hash, then 401', async () => {

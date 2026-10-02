@@ -46,11 +46,13 @@ export class AdminSubscriptionController {
   })
   @ApiResponse({
     status: 200,
-    description: 'Premium activé — retourne le nouveau statut : { isPremium, plan? }',
+    description:
+      'Premium activé — retourne le nouveau statut : { isPremium, plan? }',
   })
   @ApiResponse({
     status: 400,
-    description: "L'email fourni dans le body ne correspond pas au compte cible",
+    description:
+      "L'email fourni dans le body ne correspond pas au compte cible",
   })
   @ApiNotFoundResponse({ description: 'Utilisateur cible introuvable' })
   activate(
@@ -68,7 +70,8 @@ export class AdminSubscriptionController {
   })
   @ApiResponse({
     status: 200,
-    description: 'Premium désactivé — retourne le nouveau statut : { isPremium, plan? }',
+    description:
+      'Premium désactivé — retourne le nouveau statut : { isPremium, plan? }',
   })
   @ApiNotFoundResponse({ description: 'Utilisateur cible introuvable' })
   deactivate(@Param('userId') userId: string) {
