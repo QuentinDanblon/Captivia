@@ -1,0 +1,54 @@
+[
+  {
+    "speciesId": 2339870,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: pastilles '3x par semaine' -> frequence reguliere ; legumes (courgette, pois) ajoutes (fishprofiles, sims) ; 'viandes et poissons crus' retire",
+      "habitat.temp 24-27 -> 24-26 (sims 24-27, fishprofiles 22-26)",
+      "habitat: 'courant modere a fort' -> eau bien oxygenee (Wikipedia)",
+      "behavior: cohabitation reecrite (ne pas associer a des especes timides, fishprofiles) ; 'peut causer des blessures' retire",
+      "reproduction.notes: methode (temperature, baisse du niveau d'eau, eau fraiche) selon fishprofiles"
+    ],
+    "removed": [
+      "habitat.minSpaceSize '450 L' (non confirme)",
+      "legislation source https://www.legifrance.gouv.fr/ (page d'accueil generique) ; remplacee par Wikipedia (IUCN LC, pas de CITES)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2342606,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: aliments congeles '3-4x par semaine' -> 2 fois par semaine (aquariadise)",
+      "behavior: 'actif surtout a la nuit' retire (non confirme)",
+      "reproduction.litterSizeMax 100 -> 200 (Wikipedia: jusqu'a 200 oeufs)",
+      "reproduction.notes: 'femelle corps plus epais' retire ; sac vitellin 2-3 jours (aquariadise)",
+      "health: 'nitrates <50 ppm', 'pH 6-7' retires des textes (Wikipedia pH 6-8)"
+    ],
+    "removed": [
+      "source https://forum.aquariumcoop.com/tags/barbels (403) ; health garde aquariadise (barbillons sensibles)",
+      "reproduction.litterSizeMin 20, sexualMaturityMonths 5 ('quelques mois' seulement), season",
+      "legislation source legifrance.gouv.fr (page generique), remplacee par Wikipedia"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2342679,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "behavior/habitat: 'diurne' -> surtout nocturne (aquariadise: primarily nocturnal) ; 'plus tolerant a la lumiere' retire",
+      "feeding: aliments congeles '3-4x par semaine' -> 1 fois par semaine (Wikipedia/aquariadise: riches en proteines)",
+      "habitat.temp 22-29 -> 24-28 (aquariadise 75-82 F ; gensou jusqu'a 28 C)",
+      "habitat.minSpaceSize 75 L -> ~95 L (25 gallons) pour 4-6 individus (aquariadise)",
+      "behavior: 'excellent avec discus' retire ; cohabitation tetras/cichlides nains (Wikipedia)",
+      "reproduction.notes: baisse de temperature 3-4 C -> 3-5 C avec changement d'eau 50-70 % (gensou)"
+    ],
+    "removed": [
+      "sources fishkeeper.co.uk/databank/sterbas-cory- (404), thinkfish.co.uk (403), planetcatfish (403), forum.aquariumcoop barbels (403)",
+      "habitat: 'dH 2-25' (non confirme)",
+      "reproduction.season octobre-avril, sexualMaturityMonths 6 (aquariadise: plusieurs annees)",
+      "legislation source legifrance (generique), remplacee par Wikipedia"
+    ],
+    "confidence": "medium"
+  }
+]
