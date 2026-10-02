@@ -16,11 +16,15 @@
 #     transaction est annulée et la base reste dans son état d'origine ;
 #   - le paramètre ?schema=… (Prisma) est retiré de l'URL, les autres paramètres sont conservés
 #     (sslmode=require…) ;
-#   - l'URL contient le mot de passe : elle n'est JAMAIS affichée ;
+#   - l'URL contient le mot de passe : elle n'est JAMAIS affichée, et le mot de passe est
+#     transmis à pg_restore par PGPASSWORD, jamais dans --dbname (ligne de commande visible
+#     par tous via ps) ;
+#   - umask 077 : aucun fichier temporaire lisible par d'autres utilisateurs ;
 #   - pg_restore doit être de version >= celle du pg_dump qui a produit le dump (PostgreSQL 17
 #     dans le workflow de sauvegarde), sinon « unsupported version in file header ».
 
 set -euo pipefail
+umask 077
 
 DUMP="${1:-}"
 if [ -z "$DUMP" ]; then
@@ -54,6 +58,13 @@ if [ "$confirm" != "oui" ]; then
 fi
 
 CLEAN_URL="$(strip_schema_param "$DATABASE_URL")"
+# Mot de passe par l'environnement (PGPASSWORD), jamais en argument de commande.
+URL_PASSWORD="$(db_url_password "$CLEAN_URL")"
+if [ -n "$URL_PASSWORD" ]; then
+  export PGPASSWORD="$URL_PASSWORD"
+fi
+unset URL_PASSWORD
+CLEAN_URL="$(strip_url_password "$CLEAN_URL")"
 
 echo "🐘 Restauration via pg_restore (--clean --if-exists --no-owner --single-transaction --exit-on-error)…"
 pg_restore --clean --if-exists --no-owner --single-transaction --exit-on-error \

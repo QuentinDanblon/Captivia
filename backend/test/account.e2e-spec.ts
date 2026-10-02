@@ -263,12 +263,55 @@ describe('Account E2E — suppression et export RGPD', () => {
       expect(body.notificationEvents).toHaveLength(1);
       expect(body.pushSubscriptions).toHaveLength(1);
 
+      // Revue de sécurité, constat 10 : export complété (format v2).
+      expect(body.exportVersion).toBe(2);
+      expect(body.profile).toHaveProperty('emailVerifiedAt', null);
+      expect(body.profile.timezone).toBe('Europe/Paris');
+      expect(body.pushSubscriptionsActive).toBe(1);
+      expect(body.calendarFeed).toEqual({ enabled: false });
+      // Sessions : métadonnées seulement (inscription = 1 session), jamais l'empreinte du jeton.
+      expect(body.sessions.length).toBeGreaterThanOrEqual(1);
+      for (const s of body.sessions) {
+        expect(Object.keys(s).sort()).toEqual([
+          'createdAt',
+          'expiresAt',
+          'revokedAt',
+          'userAgent',
+        ]);
+      }
+      const hashes = await prisma.refreshToken.findMany({
+        where: { userId: acc.userId },
+        select: { tokenHash: true },
+      });
+      expect(hashes.length).toBeGreaterThanOrEqual(1);
+
       // Aucun secret dans l'export.
       const raw = JSON.stringify(body);
       expect(raw).not.toContain('passwordHash');
+      expect(raw).not.toContain('tokenHash');
+      expect(raw).not.toContain('calendarToken');
+      for (const { tokenHash } of hashes) expect(raw).not.toContain(tokenHash);
       expect(raw).not.toContain('SECRET-P256DH');
       expect(raw).not.toContain('SECRET-AUTH');
       expect(raw).not.toContain('reset-token-');
+
+      // Flux calendrier activé : l'export l'indique, sans jamais contenir le jeton (ni son hash).
+      const gen = await request(app.getHttpServer())
+        .post('/users/me/agenda/calendar-token')
+        .set('Authorization', `Bearer ${acc.token}`)
+        .expect(201);
+      const again = await request(app.getHttpServer())
+        .get('/users/me/export')
+        .set('Authorization', `Bearer ${acc.token}`)
+        .expect(200);
+      expect(again.body.calendarFeed).toEqual({ enabled: true });
+      const stored = await prisma.user.findUniqueOrThrow({
+        where: { id: acc.userId },
+        select: { calendarToken: true },
+      });
+      const raw2 = JSON.stringify(again.body);
+      expect(raw2).not.toContain(gen.body.token as string);
+      expect(raw2).not.toContain(stored.calendarToken as string);
     });
 
     it("n'exporte que les données de l'utilisateur authentifié", async () => {

@@ -46,6 +46,60 @@ strip_schema_param() {
   fi
 }
 
+# url_decode TEXTE
+#   Décode les séquences %XX (mot de passe encodé dans une URL). Les « \ » littéraux sont
+#   protégés avant l'interprétation de printf '%b'.
+url_decode() {
+  local s="${1//\\/\\\\}"
+  printf '%b' "${s//%/\\x}"
+}
+
+# db_url_password URL
+#   Écrit sur stdout le mot de passe (décodé) contenu dans l'URL, ou rien s'il n'y en a pas.
+#   À passer à libpq via PGPASSWORD : un mot de passe en argument de commande (--dbname=URL)
+#   est lisible par tous les utilisateurs de la machine (ps, /proc/<pid>/cmdline).
+db_url_password() {
+  case "$1" in
+    *://*) ;;
+    *) return 0 ;;
+  esac
+  local rest="${1#*://}"
+  local authority="${rest%%[/?]*}"
+  case "$authority" in
+    *@*) ;;
+    *) return 0 ;;
+  esac
+  local userinfo="${authority%@*}"
+  case "$userinfo" in
+    *:*) url_decode "${userinfo#*:}" ;;
+  esac
+}
+
+# strip_url_password URL
+#   Écrit sur stdout l'URL sans le mot de passe (utilisateur, hôte, base et paramètres conservés).
+strip_url_password() {
+  local url="$1"
+  case "$url" in
+    *://*) ;;
+    *)
+      printf '%s' "$url"
+      return 0
+      ;;
+  esac
+  local scheme="${url%%://*}"
+  local rest="${url#*://}"
+  local authority="${rest%%[/?]*}"
+  local tail="${rest:${#authority}}"
+  case "$authority" in
+    *@*)
+      local userinfo="${authority%@*}"
+      local hostport="${authority##*@}"
+      authority="${userinfo%%:*}@${hostport}"
+      ;;
+  esac
+  printf '%s://%s%s' "$scheme" "$authority" "$tail"
+}
+
 # refuse_pooled_url URL
 #   Sort en erreur (sans afficher l'URL) si l'hôte est un pooler Neon (« -pooler ») :
 #   pg_dump / pg_restore exigent l'URL DIRECTE (PgBouncer en mode transaction ne convient pas).

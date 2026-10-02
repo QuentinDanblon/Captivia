@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-  # Déclenchement manuel : indispensable pour atteindre le job « e2e-backend » (réservé à workflow_dispatch).
+  # Déclenchement manuel : relance toute la CI à la demande.
   workflow_dispatch:
 
 # Principe du moindre privilège : aucun job n'a besoin d'écrire dans le dépôt.
@@ -58,6 +58,20 @@ jobs:
       - name: Migrate
         working-directory: backend
         run: npx prisma migrate deploy && npx prisma db seed
+      # Les e2e backend (test/*.e2e-spec.ts, Postgres ci-dessus) tournent DANS ce job, sur
+      # pull_request et push : la config Jest (roots src + test) les inclut dans `npm test`.
+      # Garde : échec si elle venait à les exclure (ils ne tourneraient alors plus nulle part).
+      - name: Garde — e2e backend inclus dans npm test
+        working-directory: backend
+        run: |
+          listed="$(npx jest --listTests)"
+          for spec in auth-session-race auth-refresh-tokens push-ssrf agenda account email-verification; do
+            if ! grep -q "test/${spec}.e2e-spec.ts$" <<<"$listed"; then
+              echo "::error::test/${spec}.e2e-spec.ts n'est pas exécuté par npm test"
+              exit 1
+            fi
+          done
+          echo "$(grep -c 'e2e-spec.ts$' <<<"$listed") suites e2e incluses."
       - name: Tests (unitaires + e2e)
         working-directory: backend
         run: npm test -- --runInBand
@@ -245,42 +259,3 @@ jobs:
             frontend/playwright-report
             frontend/test-results
           retention-days: 7
-
-  # Atteignable uniquement via « Run workflow » (workflow_dispatch) : e2e backend (Jest + Postgres).
-  e2e-backend:
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    if: github.event_name == 'workflow_dispatch'
-    services:
-      postgres:
-        image: postgres:15-alpine
-        env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: captivia
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U user -d captivia"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 10
-    env:
-      DATABASE_URL: postgresql://user:password@localhost:5432/captivia?schema=public
-      JWT_SECRET: ci-test-secret-at-least-16-chars-long
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: backend/package-lock.json
-      - name: Install backend
-        working-directory: backend
-        run: npm ci
-      - name: Migrate + seed
-        working-directory: backend
-        run: npx prisma migrate deploy && npx prisma db seed && npm run seed:dev
-      - name: E2E
-        working-directory: backend
-        run: npm run test:e2e -- --runInBand
