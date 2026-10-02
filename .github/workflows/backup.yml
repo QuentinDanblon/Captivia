@@ -1,0 +1,53 @@
+name: Database Backup
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Dimanche 03:17 UTC
+    - cron: '17 3 * * 0'
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    name: Backup PostgreSQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Backup database
+        if: secrets.NEON_DATABASE_URL_DIRECT != ''
+        env:
+          DATABASE_URL: ${{ secrets.NEON_DATABASE_URL_DIRECT }}
+        run: |
+          bash -n scripts/backup-db.sh
+          ./scripts/backup-db.sh
+
+      - name: Encrypt backup with age
+        if: secrets.NEON_DATABASE_URL_DIRECT != '' && secrets.BACKUP_AGE_RECIPIENT != ''
+        run: |
+          # Install age
+          curl -sL https://github.com/FiloSottile/age/releases/download/v1.1.1/age-v1.1.1-linux-amd64.tar.gz | tar xz -C /tmp
+          export PATH="/tmp/age:$PATH"
+
+          # Find the latest dump and encrypt
+          LATEST_DUMP=$(ls -1t backups/captivia-*.dump 2>/dev/null | head -1)
+          if [ -n "$LATEST_DUMP" ]; then
+            age -r "${{ secrets.BACKUP_AGE_RECIPIENT }}" -o "${LATEST_DUMP}.age" "$LATEST_DUMP"
+            rm -f "$LATEST_DUMP"
+          fi
+
+      - name: Upload backup artifact
+        if: secrets.NEON_DATABASE_URL_DIRECT != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: database-backup
+          path: backups/captivia-*.dump.age
+          retention-days: 30
+
+      - name: Backup skipped
+        if: secrets.NEON_DATABASE_URL_DIRECT == ''
+        run: echo "NEON_DATABASE_URL_DIRECT not configured, backup skipped."
