@@ -1,227 +1,279 @@
-import { Injectable, Logger } from '@nestjs/common';
-// import { Cron, CronExpression } from '@nestjs/schedule';
+import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Cron } from '@nestjs/schedule';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { NotificationsService } from './notifications.service';
-import { RoutinesService } from '../routines/routines.service';
+import { GradeService } from '../grade/grade.service';
+import { MailService } from '../mail/mail.service';
+import { PUSH_SENDER, PushSender } from './push-sender';
 
+/** Clé du verrou consultatif Postgres du job de rappels (constante arbitraire, propre au job). */
+export const REMINDERS_LOCK_KEY = 4_731_202_610;
+/** Un rappel est envoyé s'il est dû depuis moins de 10 min (rattrapage d'un tick manqué). */
+export const REMINDER_WINDOW_MS = 10 * 60 * 1000;
+/** Bornes par exécution (anti-emballement). */
+export const MAX_DISPATCH_PER_RUN = 1000;
+export const MAX_GENERATIONS_PER_RUN = 300;
+const USER_PAGE_SIZE = 500;
+const DEFAULT_TIMEZONE = 'Europe/Paris';
+
+export type DeliveryChannel = 'email' | 'push' | 'both';
+
+export interface ReminderRunResult {
+  locked: boolean;
+  generated: number;
+  due: number;
+  emailed: number;
+  pushed: number;
+  failed: number;
+}
+
+/** `YYYY-MM-DD` de `now` dans le fuseau IANA donné (repli Europe/Paris si invalide). */
+export function localDay(
+  now: Date,
+  timezone: string | null | undefined,
+): string {
+  const fmt = (tz: string) =>
+    new Intl.DateTimeFormat('en-CA', {
+      timeZone: tz,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(now);
+  try {
+    return fmt(timezone || DEFAULT_TIMEZONE);
+  } catch {
+    return fmt(DEFAULT_TIMEZONE);
+  }
+}
+
+export function normalizeChannel(value: unknown): DeliveryChannel {
+  return value === 'email' || value === 'both' ? value : 'push';
+}
+
+/**
+ * Scheduler unifié des rappels (W3-02) : routines, médicaments, vaccins, RDV vétérinaires.
+ *
+ * Toutes les 5 minutes :
+ *  1. verrou consultatif Postgres (une seule instance travaille) ;
+ *  2. génère les NotificationEvent de « la journée en cours » (fuseau `User.timezone`) via
+ *     `GradeService.getOrCreateTodayEvents` (idempotent : index unique userId+sourceKey+scheduledAt) ;
+ *  3. envoie les événements `pending` dus dans (now − 10 min ; now] et pas encore notifiés,
+ *     selon `deliveryChannel` (email / push / both), après avoir posé `notifiedAt` de façon
+ *     atomique (`updateMany … where notifiedAt IS NULL`) : jamais de doublon.
+ */
 @Injectable()
 export class NotificationsSchedulerService {
   private readonly logger = new Logger(NotificationsSchedulerService.name);
+  /** userId → jour local déjà généré par cette instance (évite de régénérer à chaque tick). */
+  private readonly generatedDay = new Map<string, string>();
 
   constructor(
     private readonly prisma: PrismaService,
-    private readonly notificationsService: NotificationsService,
-    private readonly routinesService: RoutinesService,
+    private readonly gradeService: GradeService,
+    private readonly mailService: MailService,
+    @Inject(PUSH_SENDER) private readonly pushSender: PushSender,
   ) {}
 
-  // Uncomment when @nestjs/schedule is installed:
-  // @Cron(CronExpression.EVERY_HOUR)
-  async checkRoutinesAndSendNotifications() {
-    this.logger.log('Checking routines for notifications...');
-
-    try {
-      // Get all users
-      const users = await this.prisma.user.findMany({
-        select: { id: true },
-      });
-
-      for (const user of users) {
-        await this.processUserRoutines(user.id);
-      }
-
-      this.logger.log('Routine notifications check completed');
-    } catch (error) {
-      this.logger.error('Error in routine notifications:', error);
-    }
-  }
-
-  private async processUserRoutines(userId: string) {
-    // Get all active routines for user
-    const routines = await this.routinesService.getActiveRoutines(userId);
-
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentDay = now.getDay();
-
-    for (const routine of routines) {
-      const shouldNotify = await this.shouldSendNotification(
-        routine,
-        currentHour,
-        currentDay,
-      );
-
-      if (shouldNotify) {
-        const canNotify = await this.notificationsService.checkIfShouldNotify(
-          userId,
-          routine.type,
-        );
-
-        if (canNotify) {
-          await this.sendRoutineNotification(userId, routine);
-        }
-      }
-    }
-  }
-
-  /** Mapping des noms de jours (format seed) vers getDay() JS : 0=dimanche … 6=samedi */
-  private static readonly DAY_NAME_TO_INDEX: Record<string, number> = {
-    sunday: 0,
-    monday: 1,
-    tuesday: 2,
-    wednesday: 3,
-    thursday: 4,
-    friday: 5,
-    saturday: 6,
-  };
-
-  /**
-   * Normalise les formats de schedule rencontrés :
-   * - frontend : { time: '08:00', recurrence: 'daily', weekDay?, dayOfMonth?, date?, intervalHours? }
-   * - seed :     { days: ['tuesday','friday'], time: '19:00' }
-   * - ancien :   { hour: 8, day: 2, date: 15, hours: [8, 20] }
-   */
-  private normalizeSchedule(schedule: any): {
-    hour?: number;
-    hours?: number[];
-    days?: number[];
-    weekDay?: number;
-    date?: string | number;
-    dayOfMonth?: number;
-    intervalHours?: number;
-    recurrence?: string;
-  } {
-    const s = schedule && typeof schedule === 'object' ? schedule : {};
-
-    let hour: number | undefined;
-    if (typeof s.time === 'string' && s.time.includes(':')) {
-      hour = Number(s.time.split(':')[0]);
-    } else if (typeof s.hour === 'number') {
-      hour = s.hour;
-    }
-
-    let hours: number[] | undefined;
-    if (Array.isArray(s.hours)) {
-      hours = s.hours.map(Number).filter((n: number) => !Number.isNaN(n));
-    }
-
-    let days: number[] | undefined;
-    if (Array.isArray(s.days)) {
-      const mapped = s.days
-        .map((d: unknown) =>
-          typeof d === 'number'
-            ? d
-            : NotificationsSchedulerService.DAY_NAME_TO_INDEX[String(d).toLowerCase()],
-        )
-        .filter((d: unknown): d is number => typeof d === 'number');
-      days = mapped.length > 0 ? mapped : undefined;
-    }
-
-    const weekDay =
-      typeof s.weekDay === 'number' ? s.weekDay : typeof s.day === 'number' ? s.day : undefined;
-    const dayOfMonth = typeof s.dayOfMonth === 'number' ? s.dayOfMonth : undefined;
-    const intervalHours = typeof s.intervalHours === 'number' ? s.intervalHours : undefined;
-    const recurrence = typeof s.recurrence === 'string' ? s.recurrence : undefined;
-
-    return { hour, hours, days, weekDay, date: s.date, dayOfMonth, intervalHours, recurrence };
-  }
-
-  private shouldSendNotification(
-    routine: any,
-    currentHour: number,
-    currentDay: number,
-  ): boolean {
-    const schedule = this.normalizeSchedule(routine.schedule);
-    // La récurrence peut être portée par le schedule (frontend) ou par la routine (seed/ancien)
-    const frequency = schedule.recurrence ?? routine.frequency;
-
-    switch (frequency) {
-      case 'daily':
-        // Check if hour matches
-        return schedule.hour !== undefined && schedule.hour === currentHour;
-
-      case 'weekly':
-        // Check if day and hour match
-        if (schedule.hour !== undefined && schedule.hour !== currentHour) return false;
-        if (schedule.days && schedule.days.length > 0) {
-          // Format seed : plusieurs jours par semaine (ex: ['tuesday','friday'])
-          return schedule.days.includes(currentDay);
-        }
-        return schedule.weekDay !== undefined && schedule.weekDay === currentDay;
-
-      case 'monthly':
-        // Check if date and hour match
-        if (schedule.hour !== undefined && schedule.hour !== currentHour) return false;
-        const currentDate = new Date().getDate();
-        if (schedule.date !== undefined && Number(schedule.date) === currentDate) return true;
-        return schedule.dayOfMonth !== undefined && schedule.dayOfMonth === currentDate;
-
-      case 'once':
-        // Ne notifie que le jour précisé (YYYY-MM-DD) à l'heure donnée
-        if (schedule.date === undefined || schedule.hour === undefined) return false;
-        {
-          const todayStr = new Date().toISOString().slice(0, 10);
-          const dateStr = String(schedule.date).slice(0, 10);
-          return dateStr === todayStr && schedule.hour === currentHour;
-        }
-
-      case 'every_2_days':
-        if (schedule.hour !== undefined && schedule.hour !== currentHour) return false;
-        return Math.floor(Date.now() / 86400000) % 2 === 0;
-
-      case 'every_3_days':
-        if (schedule.hour !== undefined && schedule.hour !== currentHour) return false;
-        return Math.floor(Date.now() / 86400000) % 3 === 0;
-
-      case 'hourly':
-        if (schedule.hours && schedule.hours.length > 0) {
-          return schedule.hours.includes(currentHour);
-        }
-        if (schedule.hour !== undefined) {
-          const interval = Math.max(1, Math.min(24, schedule.intervalHours ?? 2));
-          return (
-            currentHour >= schedule.hour && (currentHour - schedule.hour) % interval === 0
-          );
-        }
-        return false;
-
-      case 'custom':
-        // Custom logic based on schedule
-        return !!(schedule.hours && schedule.hours.includes(currentHour));
-
-      default:
-        return false;
-    }
-  }
-
-  private async sendRoutineNotification(userId: string, routine: any) {
-    const typeLabels: Record<string, string> = {
-      nourrissage: 'Nourrissage',
-      entretien: 'Entretien',
-      uvb: 'Contrôle UVB',
-      controle: 'Contrôle santé',
-    };
-
-    const payload = {
-      title: `Rappel: ${typeLabels[routine.type] || routine.type}`,
-      body: `Il est temps de ${typeLabels[routine.type]?.toLowerCase()} pour ${routine.animal.name}`,
-      icon: '/icon.png',
-      data: {
-        animalId: routine.animal.id,
-        routineId: routine.id,
-        type: routine.type,
-      },
-    };
-
-    await this.notificationsService.sendNotification(userId, payload);
-
-    this.logger.log(
-      `Sent ${routine.type} notification for animal ${routine.animal.name}`,
+  get enabled(): boolean {
+    return (
+      process.env.NODE_ENV !== 'test' &&
+      process.env.REMINDERS_ENABLED !== 'false'
     );
   }
 
-  // Manual trigger for testing
-  async triggerNotificationCheck() {
-    await this.checkRoutinesAndSendNotifications();
-    return { success: true, message: 'Notification check triggered' };
+  @Cron('*/5 * * * *', { name: 'reminders' })
+  async handleCron(): Promise<void> {
+    if (!this.enabled) return;
+    try {
+      const res = await this.runOnce();
+      if (res.locked && res.due > 0) {
+        this.logger.log(
+          `Rappels : ${res.due} dus, ${res.emailed} e-mails, ${res.pushed} push, ${res.failed} échecs.`,
+        );
+      }
+    } catch (error) {
+      this.logger.error(
+        `Job de rappels en échec : ${error instanceof Error ? error.message : 'erreur inconnue'}`,
+      );
+    }
+  }
+
+  /**
+   * Une exécution du job. Le verrou est `pg_try_advisory_xact_lock` pris dans une transaction
+   * interactive : avec PgBouncer en mode transaction (Neon pooled), un verrou de SESSION
+   * (`pg_try_advisory_lock`) pourrait être pris et relâché sur des connexions serveur
+   * différentes. Le verrou de transaction est libéré automatiquement en fin de transaction,
+   * y compris en cas de crash.
+   */
+  async runOnce(now: Date = new Date()): Promise<ReminderRunResult> {
+    const empty: ReminderRunResult = {
+      locked: false,
+      generated: 0,
+      due: 0,
+      emailed: 0,
+      pushed: 0,
+      failed: 0,
+    };
+    return this.prisma.$transaction(
+      async (tx) => {
+        const rows = await tx.$queryRaw<{ locked: boolean }[]>(
+          Prisma.sql`SELECT pg_try_advisory_xact_lock(${REMINDERS_LOCK_KEY}::bigint) AS locked`,
+        );
+        if (!rows[0]?.locked) {
+          this.logger.debug('Verrou de rappels détenu par une autre instance.');
+          return empty;
+        }
+        const generated = await this.generateTodayEvents(now);
+        const dispatched = await this.dispatchDue(now);
+        return { ...dispatched, locked: true, generated };
+      },
+      { maxWait: 10_000, timeout: 4 * 60 * 1000 },
+    );
+  }
+
+  /** Génère (au plus une fois par jour local et par instance) les événements des utilisateurs actifs. */
+  private async generateTodayEvents(now: Date): Promise<number> {
+    let generated = 0;
+    let cursor: string | undefined;
+    for (;;) {
+      const users = await this.prisma.user.findMany({
+        where: {
+          OR: [
+            { notificationPreferences: { some: {} } },
+            {
+              animals: {
+                some: {
+                  OR: [
+                    { routines: { some: { active: true } } },
+                    { medications: { some: { active: true } } },
+                    { vetAppointments: { some: { status: 'scheduled' } } },
+                    { vaccinations: { some: { nextDueDate: { not: null } } } },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+        select: { id: true, timezone: true },
+        orderBy: { id: 'asc' },
+        take: USER_PAGE_SIZE,
+        ...(cursor ? { cursor: { id: cursor }, skip: 1 } : {}),
+      });
+      for (const user of users) {
+        if (generated >= MAX_GENERATIONS_PER_RUN) return generated;
+        const day = localDay(now, user.timezone);
+        if (this.generatedDay.get(user.id) === day) continue;
+        try {
+          await this.gradeService.getOrCreateTodayEvents(user.id, day);
+          this.generatedDay.set(user.id, day);
+          generated++;
+        } catch (error) {
+          this.logger.warn(
+            `Génération des rappels impossible pour ${user.id} : ${error instanceof Error ? error.message : 'erreur inconnue'}`,
+          );
+        }
+      }
+      if (users.length < USER_PAGE_SIZE) return generated;
+      cursor = users[users.length - 1].id;
+    }
+  }
+
+  private async dispatchDue(
+    now: Date,
+  ): Promise<Omit<ReminderRunResult, 'locked' | 'generated'>> {
+    const due = await this.prisma.notificationEvent.findMany({
+      where: {
+        status: 'pending',
+        notifiedAt: null,
+        scheduledAt: {
+          gt: new Date(now.getTime() - REMINDER_WINDOW_MS),
+          lte: now,
+        },
+      },
+      orderBy: { scheduledAt: 'asc' },
+      take: MAX_DISPATCH_PER_RUN,
+      select: {
+        id: true,
+        type: true,
+        label: true,
+        scheduledAt: true,
+        userId: true,
+        animalId: true,
+        animal: { select: { name: true } },
+        user: {
+          select: {
+            email: true,
+            locale: true,
+            timezone: true,
+            notificationPreferences: {
+              select: { deliveryChannel: true },
+              take: 1,
+            },
+          },
+        },
+      },
+    });
+
+    const result = { due: due.length, emailed: 0, pushed: 0, failed: 0 };
+    const appUrl = (process.env.FRONTEND_URL || '').replace(/\/+$/, '') || null;
+
+    for (const ev of due) {
+      // Réservation atomique : seule l'exécution qui fait passer notifiedAt de NULL à `now`
+      // envoie le rappel (pas de doublon, même si deux exécutions se chevauchaient).
+      const claimed = await this.prisma.notificationEvent.updateMany({
+        where: { id: ev.id, notifiedAt: null, status: 'pending' },
+        data: { notifiedAt: now },
+      });
+      if (claimed.count !== 1) continue;
+
+      const channel = normalizeChannel(
+        ev.user.notificationPreferences[0]?.deliveryChannel,
+      );
+      const label = ev.label || ev.type;
+      let delivered = false;
+
+      if (channel === 'email' || channel === 'both') {
+        const res = await this.mailService.sendCareReminder(
+          ev.user.email,
+          ev.user.locale,
+          {
+            label,
+            animalName: ev.animal?.name,
+            scheduledAt: ev.scheduledAt,
+            timezone: ev.user.timezone,
+            appUrl,
+          },
+        );
+        if (res.sent) {
+          delivered = true;
+          result.emailed++;
+        }
+      }
+
+      if (channel === 'push' || channel === 'both') {
+        const ok = await this.pushSender
+          .sendToUser(ev.userId, {
+            title: label,
+            body: ev.animal?.name ?? label,
+            data: { eventId: ev.id, type: ev.type, animalId: ev.animalId },
+          })
+          .catch(() => false);
+        if (ok) {
+          delivered = true;
+          result.pushed++;
+        }
+      }
+
+      if (!delivered) {
+        // Aucun canal n'a abouti : on libère la réservation pour retenter au prochain tick
+        // (tant que l'événement reste dans la fenêtre de 10 min).
+        result.failed++;
+        await this.prisma.notificationEvent.updateMany({
+          where: { id: ev.id, notifiedAt: now },
+          data: { notifiedAt: null },
+        });
+      }
+    }
+    return result;
   }
 }
