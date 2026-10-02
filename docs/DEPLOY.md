@@ -62,14 +62,14 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
      ```
      Le mode pooled est indispensable sur Render : Prisma ouvre plusieurs connexions et Neon limite les connexions directes. `pgbouncer=true` désactive les requêtes préparées incompatibles avec le mode transaction de PgBouncer.
    - Facultatifs : `SENTRY_DSN`, `MAIL_HOST` (+ autres `MAIL_*`).
-3. Vérifier `CORS_ORIGIN`, `FRONTEND_URL` et `PUBLIC_WEB_URL` dans `render.yaml` : ils valent `https://captivia.netlify.app`. Si le nom du site Netlify est différent, corriger le fichier et committer.
+3. Vérifier `CORS_ORIGIN`, `FRONTEND_URL` et `PUBLIC_WEB_URL` dans `render.yaml` : ils valent `https://captivia-app.netlify.app`. Si le nom du site Netlify est différent, corriger le fichier et committer.
 4. Le déploiement est piloté par `autoDeployTrigger: checksPass` : aucun Deploy Hook n'est nécessaire. Dans *Settings* du service, vérifier que le déclencheur est bien « After CI checks pass ».
 5. Noter l'URL du service (`https://captivia-api.onrender.com`) et la saisir dans la variable GitHub `API_URL` (§3.2).
 
 ### 3.4 Netlify (frontend)
 1. *Add new project → Import an existing project → GitHub* → choisir le dépôt. Le `netlify.toml` est détecté (base `frontend`, commande `npm run build`, Node 22). Nom du site : `captivia` s'il est libre (supprimer l'ancien site homonyme sur l'ancien compte pour libérer le nom).
 2. *Site configuration → Environment variables* : créer `NEXT_PUBLIC_API_URL` = URL de l'API Render, avec une valeur pour les contextes **Production** et **Deploy Previews**. Cette variable est lue **au build** : après modification, relancer un déploiement.
-3. Activer les **Deploy Previews** (par défaut pour les PR). L'origine d'une preview (`https://deploy-preview-N--captivia.netlify.app`) n'est pas dans `CORS_ORIGIN` : les appels API des previews échoueront tant que l'API de staging (DEP-05) n'autorise pas ce motif, ou que l'origine n'est pas ajoutée à la main.
+3. Activer les **Deploy Previews** (par défaut pour les PR). L'origine d'une preview (`https://deploy-preview-N--captivia-app.netlify.app`) n'est pas dans `CORS_ORIGIN` : les appels API des previews échoueront tant que l'API de staging (DEP-05) n'autorise pas ce motif, ou que l'origine n'est pas ajoutée à la main.
 4. Les workflows GitHub ne déploient plus le front : `NETLIFY_AUTH_TOKEN` et `NETLIFY_SITE_ID` ne sont plus nécessaires.
 
 ### 3.5 Protection de `main`
@@ -112,7 +112,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 
 1. Fusionner la branche sur `main` (ou pousser). Observer *Actions → CI* : `test-backend`, `build-frontend`, `docker-build`, `quality`, puis `migrate-production`.
 2. Une fois `migrate-production` vert, Render lance le build Docker (3 à 6 min) puis démarre l'API. Vérifier `https://<api>/health` (réponse 200). Le premier démarrage après une veille prend 30 à 60 s.
-3. Netlify construit le site en parallèle. Ouvrir `https://captivia.netlify.app/fr`.
+3. Netlify construit le site en parallèle. Ouvrir `https://captivia-app.netlify.app/fr`.
 4. **Seed du catalogue** (une seule fois, idempotent) : *Actions → « Seed production » → Run workflow*. Il applique `prisma migrate deploy` puis `prisma db seed` (espèces, races, magasins affiliés).
 5. Contrôles : recherche d'espèce, inscription d'un compte de test, ajout d'un animal. Vérifier dans les logs Render l'absence d'erreur CORS ou de connexion à la base.
 6. Créer un monitor **UptimeRobot** gratuit (HTTP, toutes les 5 min) sur `<API_URL>/health` : il garde l'API Render éveillée et alerte par e-mail en cas de panne. Ne PAS planifier `keep-warm.yml` : le dépôt étant privé, un cron toutes les 10 min (~4 300 min/mois) épuiserait le quota gratuit de 2 000 min de GitHub Actions et bloquerait la CI.

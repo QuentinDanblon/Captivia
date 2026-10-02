@@ -6,7 +6,7 @@ Procédures d'exploitation de Captivia : supervision, incidents, restauration, r
 
 | Brique | Rôle | Adresse |
 |---|---|---|
-| Netlify | Frontend Next.js (`frontend/`) | `https://captivia.netlify.app` (`NEXT_PUBLIC_SITE_URL` dans `netlify.toml`) |
+| Netlify | Frontend Next.js (`frontend/`) | `https://captivia-app.netlify.app` (`NEXT_PUBLIC_SITE_URL` dans `netlify.toml`) |
 | Render (offre Free, Francfort) | API NestJS, service `captivia-api` | `https://captivia-api.onrender.com` (nom du service dans `render.yaml` ; l'URL exacte est affichée dans le Dashboard Render) |
 | Neon (offre Free) | PostgreSQL | URL pooled dans Render (`DATABASE_URL`), URL directe dans le secret GitHub `NEON_DATABASE_URL_DIRECT` |
 
@@ -60,7 +60,7 @@ curl -sS -m 90 "$API/health"
 curl -sS -m 90 -i "$API/health/ready"
 
 # Site
-curl -sS -o /dev/null -w '%{http_code}\n' https://captivia.netlify.app/fr
+curl -sS -o /dev/null -w '%{http_code}\n' https://captivia-app.netlify.app/fr
 ```
 
 Le champ `version` de `/health` indique le SHA du commit déployé (`dev` si la variable n'est pas définie).
@@ -102,7 +102,7 @@ Le champ `version` de `/health` indique le SHA du commit déployé (`dev` si la 
 - Netlify → *Deploys* : le dernier build est-il vert ? Consulter son journal.
 - Sentry (si `NEXT_PUBLIC_SENTRY_DSN` est défini) : issues frontend récentes.
 - Appels API vers la mauvaise URL : `NEXT_PUBLIC_API_URL` est intégrée au bundle **au build** ; après modification dans Netlify, relancer un déploiement.
-- Erreurs CORS : l'origine du site doit figurer dans `CORS_ORIGIN` côté Render. Les origines des deploy previews (`https://deploy-preview-N--captivia.netlify.app`) n'y sont pas (voir `netlify.toml`).
+- Erreurs CORS : l'origine du site doit figurer dans `CORS_ORIGIN` côté Render. Les origines des deploy previews (`https://deploy-preview-N--captivia-app.netlify.app`) n'y sont pas (voir `netlify.toml`).
 - Redéployer : Netlify → *Deploys* → *Trigger deploy* → *Clear cache and deploy site*.
 
 ### 2.4 Rollback Render (API)
@@ -378,9 +378,9 @@ Aucune valeur secrète n'est notée ici. Sources : `render.yaml`, `netlify.toml`
 | `HOST` | `0.0.0.0` | |
 | `DATABASE_URL` | à saisir dans le Dashboard (`sync: false`) | URL Neon **pooled** (`-pooler`, `sslmode=require&pgbouncer=true&connect_timeout=15`) ; obligatoire |
 | `JWT_SECRET` | généré par Render (`generateValue: true`) | ≥ 32 caractères, valeurs d'exemple refusées |
-| `CORS_ORIGIN` | `https://captivia.netlify.app` | Obligatoire en production |
-| `FRONTEND_URL` | `https://captivia.netlify.app` | Obligatoire en production, https |
-| `PUBLIC_WEB_URL` | `https://captivia.netlify.app` | Facultative, URL valide |
+| `CORS_ORIGIN` | `https://captivia-app.netlify.app` | Obligatoire en production |
+| `FRONTEND_URL` | `https://captivia-app.netlify.app` | Obligatoire en production, https |
+| `PUBLIC_WEB_URL` | `https://captivia-app.netlify.app` | Facultative, URL valide |
 | `TRUST_PROXY` | `true` | |
 | `CACHE_TYPE` | `memory` | `memory`, `redis` ou `memcached` |
 | `REDIS_ENABLED` | `false` | |
@@ -401,7 +401,7 @@ Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `RED
 
 | Variable | Origine | Remarque |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | `netlify.toml` (`https://captivia.netlify.app`) | |
+| `NEXT_PUBLIC_SITE_URL` | `netlify.toml` (`https://captivia-app.netlify.app`) | |
 | `NODE_VERSION`, `NEXT_TELEMETRY_DISABLED` | `netlify.toml` | |
 | `NEXT_PUBLIC_API_URL` | Netlify → *Site configuration* → *Environment variables* | URL de l'API Render ; lue au build |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify → *Environment variables* | Facultative ; lue au build |

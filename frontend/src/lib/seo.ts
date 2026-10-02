@@ -10,7 +10,7 @@ import { hasLocale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '../../i18n/routing';
 
-export const DEFAULT_SITE_URL = 'https://captivia.netlify.app';
+export const DEFAULT_SITE_URL = 'https://captivia-app.netlify.app';
 export const SITE_NAME = 'Captivia';
 
 /** Locale OpenGraph (langue_PAYS) pour chaque locale de l'application. */

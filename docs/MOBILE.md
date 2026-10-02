@@ -123,7 +123,7 @@ rechargement du shell local). Pour une navigation instantanée, utiliser les hel
 Ajouter les origines de la WebView à `CORS_ORIGIN` (Render), séparées par des virgules :
 
 ```
-CORS_ORIGIN=https://captivia.netlify.app,capacitor://localhost,https://localhost
+CORS_ORIGIN=https://captivia-app.netlify.app,capacitor://localhost,https://localhost
 ```
 
 - iOS : `capacitor://localhost` (`server.iosScheme`) ;

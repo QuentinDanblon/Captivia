@@ -10,7 +10,7 @@
 
 [build.environment]
   # URL publique du site (canonical, hreflang, sitemap). À remplacer par le domaine définitif.
-  NEXT_PUBLIC_SITE_URL = "https://captivia.netlify.app"
+  NEXT_PUBLIC_SITE_URL = "https://captivia-app.netlify.app"
   NODE_VERSION = "22"
   NEXT_TELEMETRY_DISABLED = "1"
 
@@ -23,7 +23,7 @@
 # [context.deploy-preview.environment]
 #   NEXT_PUBLIC_API_URL = "https://captivia-api-staging.onrender.com"
 #
-# Attention : l'origine d'une preview (https://deploy-preview-N--captivia.netlify.app)
+# Attention : l'origine d'une preview (https://deploy-preview-N--captivia-app.netlify.app)
 # doit aussi être autorisée par CORS_ORIGIN côté API pour que les appels réussissent.
 
 # Fichiers statiques de Next.js : le nom contient un hash du contenu, donc cache longue
