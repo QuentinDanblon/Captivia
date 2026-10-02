@@ -5,13 +5,16 @@
  * Usage (depuis backend/) :
  *   npm run reset-password -- <email> <nouveau_mot_de_passe>
  * Exemple :
- *   npm run reset-password -- amaurybaptistecole@gmail.com Captivia2025
+ *   npm run reset-password -- dev@example.com <nouveau_mot_de_passe>
  */
 import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 
 async function main() {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('seed-dev interdit en production');
+  }
   const email = process.argv[2];
   const newPassword = process.argv[3];
 
