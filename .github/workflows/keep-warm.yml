@@ -1,0 +1,23 @@
+name: Keep API warm
+
+# L'offre gratuite Render met l'API en veille après 15 min sans trafic
+# (réveil ~30-60 s). Un ping toutes les 10 min la garde active ; une seule
+# instance 24/7 consomme ~744 h, sous le quota gratuit de 750 h/mois.
+# Désactivez ce workflow si vous passez sur une offre payante.
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    if: vars.API_URL != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - env:
+          API_URL: ${{ vars.API_URL }}
+        run: curl -fsS --max-time 90 "$API_URL/health" > /dev/null || true

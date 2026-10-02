@@ -1,0 +1,11 @@
+# Netlify — frontend Next.js Captivia (monorepo : l'app est dans frontend/).
+# Le runtime Next.js de Netlify (OpenNext) est détecté automatiquement.
+# Les déploiements de production passent par .github/workflows/deploy.yml.
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"

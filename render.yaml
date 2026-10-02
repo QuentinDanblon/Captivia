@@ -1,0 +1,45 @@
+# Render Blueprint — API NestJS Captivia (offre gratuite, région Francfort).
+# Création : Render Dashboard → New → Blueprint → ce dépôt. Voir docs/DEPLOY.md.
+#
+# autoDeploy est désactivé : le workflow GitHub « Deploy » applique d'abord les
+# migrations Prisma sur Neon, puis déclenche le déploiement via le Deploy Hook.
+services:
+  - type: web
+    name: captivia-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      # URL « pooled » Neon (…-pooler…?sslmode=require&pgbouncer=true) — à saisir dans le Dashboard.
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://captivia.netlify.app
+      - key: FRONTEND_URL
+        value: https://captivia.netlify.app
+      - key: TRUST_PROXY
+        value: "true"
+      - key: CACHE_TYPE
+        value: memory
+      - key: REDIS_ENABLED
+        value: "false"
+      - key: LOG_LEVEL
+        value: info
+      # Facultatifs — à renseigner dans le Dashboard quand disponibles.
+      - key: SENTRY_DSN
+        sync: false
+      - key: MAIL_HOST
+        sync: false
+      - key: OPERATOR_EMAILS
+        sync: false
