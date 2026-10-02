@@ -20,7 +20,7 @@
   --captivia-surface: rgba(255, 255, 255, 0.82);
   --captivia-surface-solid: #ffffff;
   --captivia-ink: #14252b;
-  --captivia-muted: #6b7a7d;
+  --captivia-muted: #566669;
   --captivia-border: #dce7df;
   --captivia-border-strong: #bfd2c6;
   --captivia-accent: #0aa678;
@@ -340,7 +340,7 @@ textarea {
 
 .captivia-nav-link:hover,
 .captivia-nav-link.is-active {
-  color: var(--captivia-accent);
+  color: var(--captivia-accent-dark);
 }
 
 .captivia-nav-link.is-active {
@@ -390,7 +390,7 @@ textarea {
 
 .captivia-login-link:hover,
 .captivia-logout-button:hover {
-  color: var(--captivia-accent);
+  color: var(--captivia-accent-dark);
   background: var(--captivia-soft);
 }
 
@@ -512,7 +512,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--captivia-accent);
+  color: var(--captivia-accent-dark);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -1142,7 +1142,7 @@ textarea {
 }
 
 .captivia-footer-links a:hover {
-  color: var(--captivia-accent);
+  color: var(--captivia-accent-dark);
 }
 
 .captivia-footer-note {
@@ -1314,7 +1314,7 @@ textarea {
   .captivia-mobile-link.is-active,
   .captivia-mobile-login:hover,
   .captivia-mobile-user:hover {
-    color: var(--captivia-accent);
+    color: var(--captivia-accent-dark);
     background: var(--captivia-soft);
   }
 

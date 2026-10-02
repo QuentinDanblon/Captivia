@@ -6,6 +6,7 @@ import { languageNames } from '@/components/LanguageSelector';
 import { Link, useRouter, usePathname } from '@/i18n/navigation';
 import type { Locale } from '../../../../../i18n/routing';
 import { useAuth } from '@/contexts/AuthContext';
+import Modal from '@/components/ui/Modal';
 import { api } from '@/lib/api';
 import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '@/lib/config';
 import {
@@ -24,51 +25,14 @@ interface DeleteAccountModalProps {
   loading: boolean;
 }
 
-/** Modale de confirmation accessible : role=alertdialog, focus piégé, Échap pour fermer. */
+/** Confirmation destructive : ui/Modal en variante alertdialog (focus piégé, Échap, focus rendu). */
 function DeleteAccountModal({ onClose, onConfirm, error, loading }: DeleteAccountModalProps) {
   const t = useTranslations();
   const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState('');
-  const dialogRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const titleId = useId();
-  const descId = useId();
   const inputId = useId();
   const errorId = useId();
-
-  useEffect(() => {
-    const previouslyFocused = document.activeElement as HTMLElement | null;
-    inputRef.current?.focus();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      previouslyFocused?.focus?.();
-    };
-  }, []);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Escape' && !loading) {
-      e.stopPropagation();
-      onClose();
-      return;
-    }
-    if (e.key === 'Tab' && dialogRef.current) {
-      const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), input:not([disabled])',
-      );
-      if (focusables.length === 0) return;
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,70 +47,60 @@ function DeleteAccountModal({ onClose, onConfirm, error, loading }: DeleteAccoun
   const shownError = localError || error;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget && !loading) onClose();
-      }}
-      onKeyDown={handleKeyDown}
+    <Modal
+      open
+      onClose={onClose}
+      variant="alertdialog"
+      size="md"
+      title={t('account.modalTitle')}
+      description={t('account.modalWarning')}
+      dismissible={!loading}
+      hideCloseButton
+      initialFocusRef={inputRef}
+      titleClassName="text-lg font-bold text-gray-800 dark:text-white mb-2"
     >
-      <div
-        ref={dialogRef}
-        role="alertdialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        aria-describedby={descId}
-        className="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6"
-      >
-        <h2 id={titleId} className="text-lg font-bold text-gray-800 dark:text-white mb-2">
-          {t('account.modalTitle')}
-        </h2>
-        <p id={descId} className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          {t('account.modalWarning')}
-        </p>
-        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-          <div>
-            <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              {t('account.modalPasswordLabel')}
-            </label>
-            <input
-              id={inputId}
-              ref={inputRef}
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-              aria-invalid={shownError ? true : undefined}
-              aria-describedby={shownError ? errorId : undefined}
-              disabled={loading}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white"
-            />
-          </div>
-          {shownError && (
-            <p id={errorId} role="alert" className="text-red-600 dark:text-red-400 text-sm">
-              {shownError}
-            </p>
-          )}
-          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
-            <button
-              type="button"
-              onClick={onClose}
-              disabled={loading}
-              className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
-            >
-              {t('common.cancel')}
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
-            >
-              {loading ? t('account.modalDeleting') : t('account.modalConfirm')}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        <div>
+          <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            {t('account.modalPasswordLabel')}
+          </label>
+          <input
+            id={inputId}
+            ref={inputRef}
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            aria-invalid={shownError ? true : undefined}
+            aria-describedby={shownError ? errorId : undefined}
+            disabled={loading}
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white"
+          />
+        </div>
+        {shownError && (
+          <p id={errorId} role="alert" className="text-red-600 dark:text-red-400 text-sm">
+            {shownError}
+          </p>
+        )}
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={loading}
+            className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
+          >
+            {t('common.cancel')}
+          </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
+          >
+            {loading ? t('account.modalDeleting') : t('account.modalConfirm')}
+          </button>
+        </div>
+      </form>
+    </Modal>
   );
 }
 
