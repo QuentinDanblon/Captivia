@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Param, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Query, Param, NotFoundException } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -8,6 +8,7 @@ import {
 } from '@nestjs/swagger';
 import { OpenPetFoodFactsService } from './services/openpetfoodfacts.service';
 import { FoodSearchDto } from './dto/food-search.dto';
+import { isValidBarcode } from '../external/http-safety';
 
 @ApiTags('food')
 @Controller('food')
@@ -50,6 +51,9 @@ export class FoodController {
   @ApiResponse({ status: 200, description: 'Product found' })
   @ApiResponse({ status: 404, description: 'Product not found' })
   async getProduct(@Param('barcode') barcode: string): Promise<unknown> {
+    if (!isValidBarcode(barcode)) {
+      throw new BadRequestException('barcode must be 8 to 14 digits');
+    }
     const product = await this.openPetFoodFactsService.getProduct(barcode);
 
     if (!product) {

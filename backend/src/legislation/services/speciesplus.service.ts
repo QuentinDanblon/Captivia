@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
+import { EXTERNAL_REQUEST_DEFAULTS, describeHttpError } from '../../external/http-safety';
 
 interface SpeciesPlusResponse {
   id: number;
@@ -42,6 +43,7 @@ export class SpeciesPlusService {
         headers: {
           'X-Authentication-Token': this.apiToken,
         },
+        ...EXTERNAL_REQUEST_DEFAULTS,
       });
 
       const data = response.data?.taxon_concepts || [];
@@ -51,7 +53,7 @@ export class SpeciesPlusService {
 
       return data;
     } catch (error) {
-      console.error('Species+ search error:', error);
+      this.logger.error(`Species+ search error: ${describeHttpError(error)}`);
       return [];
     }
   }
@@ -72,6 +74,7 @@ export class SpeciesPlusService {
           headers: {
             'X-Authentication-Token': this.apiToken,
           },
+          ...EXTERNAL_REQUEST_DEFAULTS,
         },
       );
 
@@ -84,7 +87,7 @@ export class SpeciesPlusService {
 
       return data;
     } catch (error) {
-      console.error('Species+ taxon details error:', error);
+      this.logger.error(`Species+ taxon details error: ${describeHttpError(error)}`);
       return null;
     }
   }
@@ -105,6 +108,7 @@ export class SpeciesPlusService {
           headers: {
             'X-Authentication-Token': this.apiToken,
           },
+          ...EXTERNAL_REQUEST_DEFAULTS,
         },
       );
 
@@ -115,7 +119,7 @@ export class SpeciesPlusService {
 
       return data;
     } catch (error) {
-      console.error('Species+ CITES legislation error:', error);
+      this.logger.error(`Species+ CITES legislation error: ${describeHttpError(error)}`);
       return [];
     }
   }
@@ -136,6 +140,7 @@ export class SpeciesPlusService {
           headers: {
             'X-Authentication-Token': this.apiToken,
           },
+          ...EXTERNAL_REQUEST_DEFAULTS,
         },
       );
 
@@ -146,7 +151,7 @@ export class SpeciesPlusService {
 
       return data;
     } catch (error) {
-      console.error('Species+ EU legislation error:', error);
+      this.logger.error(`Species+ EU legislation error: ${describeHttpError(error)}`);
       return [];
     }
   }
@@ -167,6 +172,7 @@ export class SpeciesPlusService {
           headers: {
             'X-Authentication-Token': this.apiToken,
           },
+          ...EXTERNAL_REQUEST_DEFAULTS,
         },
       );
 
@@ -177,7 +183,7 @@ export class SpeciesPlusService {
 
       return data;
     } catch (error) {
-      console.error('Species+ distributions error:', error);
+      this.logger.error(`Species+ distributions error: ${describeHttpError(error)}`);
       return [];
     }
   }

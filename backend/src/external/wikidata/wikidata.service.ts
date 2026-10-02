@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
+import { isValidQid } from '../http-safety';
 
 /**
  * Wikidata API Service for fetching species information from Wikidata
@@ -71,6 +72,7 @@ export class WikidataService {
    * @returns Entity data
    */
   async getEntity(qid: string) {
+    if (!isValidQid(qid)) return null;
     try {
       const response = await this.wikidataApi.get(`/${qid}.json`);
 
@@ -141,7 +143,8 @@ export class WikidataService {
    * @returns Conservation status data
    */
   async getConservationStatus(qid: string) {
-    if (!qid) return null;
+    // qid interpolé dans la requête SPARQL : format strict Q\d+ (anti-injection)
+    if (!isValidQid(qid)) return null;
     try {
       const sparqlQuery = `
         SELECT ?iucnStatus ?citesStatus ?berneStatus ?cmsStatus ?statusDescription WHERE {
@@ -183,7 +186,8 @@ export class WikidataService {
    * @returns Classification data
    */
   async getClassification(qid: string) {
-    if (!qid) return null;
+    // qid interpolé dans la requête SPARQL : format strict Q\d+ (anti-injection)
+    if (!isValidQid(qid)) return null;
     try {
       const sparqlQuery = `
         SELECT ?item ?family ?genus ?order ?phylum ?class ?kingdom ?scientificName ?commonName ?image WHERE {
@@ -229,7 +233,8 @@ export class WikidataService {
    * @returns Description data
    */
   async getDescriptions(qid: string) {
-    if (!qid) return null;
+    // qid interpolé dans la requête SPARQL : format strict Q\d+ (anti-injection)
+    if (!isValidQid(qid)) return null;
     try {
       const sparqlQuery = `
         SELECT ?description ?shortDescription ?alias WHERE {
@@ -269,7 +274,8 @@ export class WikidataService {
    * @returns Image data
    */
   async getImages(qid: string) {
-    if (!qid) return null;
+    // qid interpolé dans la requête SPARQL : format strict Q\d+ (anti-injection)
+    if (!isValidQid(qid)) return null;
     try {
       const sparqlQuery = `
         SELECT ?image ?license ?caption WHERE {
@@ -309,7 +315,8 @@ export class WikidataService {
    * @returns Related species data
    */
   async getRelatedSpecies(qid: string) {
-    if (!qid) return null;
+    // qid interpolé dans la requête SPARQL : format strict Q\d+ (anti-injection)
+    if (!isValidQid(qid)) return null;
     try {
       const sparqlQuery = `
         SELECT ?related ?relatedLabel ?relatedDescription WHERE {

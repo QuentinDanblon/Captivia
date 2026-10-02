@@ -42,7 +42,7 @@ export class AmazonPAService {
 
     // TODO: Implement actual Amazon PA API call
     // For now, return mock data structure
-    console.warn(
+    this.logger.warn(
       'Amazon PA API not configured. Set AMAZON_ACCESS_KEY, AMAZON_SECRET_KEY, and AMAZON_AFFILIATE_TAG in .env',
     );
 
@@ -100,7 +100,7 @@ export class AmazonPAService {
     }
 
     // TODO: Implement GetItems API call
-    console.warn('Amazon PA API not configured');
+    this.logger.warn('Amazon PA API not configured');
 
     return null;
   }

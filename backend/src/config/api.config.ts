@@ -32,7 +32,7 @@ export class ApiConfigService {
       100,
     );
     const window = this.configService.get<number>(
-      'WIKIDATA_RATE_WINDOW',
+      'WIKIPEDIA_RATE_WINDOW',
       60000,
     );
     return { limit, window };
@@ -86,12 +86,5 @@ export class ApiConfigService {
    */
   getLogLevel(): string {
     return this.configService.get<string>('LOG_LEVEL', 'info');
-  }
-
-  /**
-   * Get log format configuration
-   */
-  getLogFormat(): string {
-    return this.configService.get<string>('LOG_FORMAT', 'json');
   }
 }
