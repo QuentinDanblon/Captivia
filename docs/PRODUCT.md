@@ -25,8 +25,8 @@
 
 Passage invité → compte **sans perte de données** (l'animal et son carnet sont rattachés au nouveau compte).
 
-### Décision à confirmer (D-16)
-Aujourd'hui le carnet de santé détaillé (soins, mesures, vaccins) est réservé au Premium dans l'API. Proposition alignée sur la promesse « on y consigne tout » : **le carnet complet est disponible pour l'animal unique de l'invité et du compte gratuit** ; le Premium débloque **plusieurs animaux** (+ éventuels extras : export avancé, partage vétérinaire, stockage photo étendu). À valider par le propriétaire.
+### Décision D-16 (validée par le propriétaire le 2026-10-02)
+Aujourd'hui le carnet de santé détaillé (soins, mesures, vaccins) est réservé au Premium dans l'API. Proposition alignée sur la promesse « on y consigne tout » : **le carnet complet est disponible pour l'animal unique de l'invité et du compte gratuit** ; le Premium débloque **plusieurs animaux** (+ éventuels extras : export avancé, partage vétérinaire, stockage photo étendu). Validé.
 
 ## Réseau social (volet à venir) — exigences à prévoir dès maintenant
 - Publications (photos d'animaux), questions, commentaires, réactions ; profils publics minimalistes (pseudo, avatar, animaux montrés volontairement).
