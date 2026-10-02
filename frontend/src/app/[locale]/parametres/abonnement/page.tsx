@@ -85,10 +85,10 @@ export default function AbonnementPage() {
             </button>
           </div>
           <div className="rounded-2xl border-2 border-emerald-500 dark:border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10 p-6 flex flex-col relative">
-            <span className="absolute top-4 right-4 text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-200 dark:bg-emerald-800 px-2 py-0.5 rounded">−17 %</span>
+            <span className="absolute top-4 right-4 text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-200 dark:bg-emerald-800 px-2 py-0.5 rounded">{t('subscription.yearlyDiscount')}</span>
             <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-1">{t('subscription.yearly')}</h2>
             <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">{t('subscription.priceYearly')}<span className="text-base font-normal text-gray-500 dark:text-gray-400">{t('subscription.perYear')}</span></p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">≈ 2,50 € / mois</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">{t('subscription.yearlyEquivalent')}</p>
             <button type="button" onClick={() => handleSubscribe('yearly')} disabled={!!status?.isPremium || submitting !== null} className="mt-auto w-full py-3 px-4 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
               {submitting === 'yearly' ? t('common.loading') : t('subscription.chooseYearly')}
             </button>

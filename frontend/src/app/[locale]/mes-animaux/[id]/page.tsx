@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import { countryName } from '@/lib/country';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, type Animal, type Medication, type VetAppointment, type AnimalMeasurement, type Vaccination, type BreedingRecord, type SpeciesRoutineTemplate } from '@/lib/api';
@@ -184,6 +185,7 @@ export default function AnimalDetailPage({
   params: Promise<{ locale: string; id: string }>;
 }) {
   const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
   const { user, token, isLoading: authLoading, logout } = useAuth();
   const [resolvedParams, setResolvedParams] = useState<{
@@ -411,7 +413,7 @@ export default function AnimalDetailPage({
       // Fetch animal details
       const animalData = await api.getAnimal(resolvedParams.id, token);
       if (animalData.statusCode === 404 || animalData.error) {
-        setError('Animal not found');
+        setError(t('animals.notFound'));
         setLoading(false);
         return;
       }
@@ -604,7 +606,7 @@ export default function AnimalDetailPage({
         return;
       }
       console.error('Error fetching animal:', error);
-      setError('Error loading animal data');
+      setError(t('animals.errorLoadingAnimal'));
     } finally {
       setLoading(false);
     }
@@ -648,7 +650,7 @@ export default function AnimalDetailPage({
   const formatDate = (dateString?: string): string => {
     if (!dateString) return '-';
     try {
-      return new Date(dateString).toLocaleDateString();
+      return new Date(dateString).toLocaleDateString(locale);
     } catch {
       return dateString;
     }
@@ -663,7 +665,7 @@ export default function AnimalDetailPage({
       router.push('/mes-animaux');
     } catch (err) {
       console.error('Error deleting animal:', err);
-      setError(t('animals.errorDeleting') || 'Erreur lors de la suppression');
+      setError(t('animals.errorDeleting'));
       setShowDeleteConfirm(false);
       setIsDeleting(false);
     }
@@ -792,8 +794,8 @@ export default function AnimalDetailPage({
       console.error('Error saving routine:', err);
       setRoutineError(
         editingRoutineId
-          ? (t('animals.errorUpdatingRoutine') || 'Erreur lors de la modification')
-          : (t('animals.errorCreatingRoutine') || 'Erreur lors de la création')
+          ? t('animals.errorUpdatingRoutine')
+          : t('animals.errorCreatingRoutine')
       );
     } finally {
       setIsCreatingRoutine(false);
@@ -825,7 +827,7 @@ export default function AnimalDetailPage({
       setHistory(Array.isArray(historyData) ? historyData : []);
     } catch (err) {
       console.error('Error loading history:', err);
-      setHistoryError(t('animals.errorLoadingHistory') || 'Erreur lors du chargement');
+      setHistoryError(t('animals.errorLoadingHistory'));
     } finally {
       setIsLoadingHistory(false);
     }
@@ -940,7 +942,7 @@ export default function AnimalDetailPage({
   const formatDateTime = (dateString?: string): string => {
     if (!dateString) return '-';
     try {
-      return new Date(dateString).toLocaleString(undefined, {
+      return new Date(dateString).toLocaleString(locale, {
         dateStyle: 'medium',
         timeStyle: 'short',
       });
@@ -1143,11 +1145,11 @@ export default function AnimalDetailPage({
       const weightNum = measurementWeight.trim() === '' ? undefined : Number(measurementWeight);
       const heightNum = measurementHeight.trim() === '' ? undefined : Number(measurementHeight);
       if (measurementWeight.trim() !== '' && Number.isNaN(weightNum)) {
-        setMeasurementFormError(t('animals.measurements.weightInvalid') || 'Poids invalide');
+        setMeasurementFormError(t('animals.measurements.weightInvalid'));
         return;
       }
       if (measurementHeight.trim() !== '' && Number.isNaN(heightNum)) {
-        setMeasurementFormError(t('animals.measurements.heightInvalid') || 'Taille invalide');
+        setMeasurementFormError(t('animals.measurements.heightInvalid'));
         return;
       }
       const payload = {
@@ -1539,7 +1541,7 @@ export default function AnimalDetailPage({
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">
-            {error || 'Animal not found'}
+            {error || t('animals.notFound')}
           </p>
           <Link
             href="/mes-animaux"
@@ -1767,10 +1769,10 @@ export default function AnimalDetailPage({
                     </div>
                   ) : (
                     <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                      <li>Maintenez un environnement adapté (température, humidité)</li>
-                      <li>Suivez un programme d&apos;alimentation régulier</li>
-                      <li>Vérifiez les équipements (UVB, chauffage) régulièrement</li>
-                      <li>Surveillez les signes de maladie</li>
+                      <li>{t('animals.defaultCareTips.environment')}</li>
+                      <li>{t('animals.defaultCareTips.feeding')}</li>
+                      <li>{t('animals.defaultCareTips.equipment')}</li>
+                      <li>{t('animals.defaultCareTips.illness')}</li>
                     </ul>
                   )}
                   
@@ -1871,14 +1873,14 @@ export default function AnimalDetailPage({
                             )}
                             {disease.whenToConsult && (
                               <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                                <strong>Quand consulter:</strong> {disease.whenToConsult}
+                                <strong>{t('species.whenToConsult')} :</strong> {disease.whenToConsult}
                               </p>
                             )}
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <p className="text-gray-500 dark:text-gray-400">{t('common.noData') || 'Aucune donnée'}</p>
+                      <p className="text-gray-500 dark:text-gray-400">{t('common.noData')}</p>
                     )}
                   </div>
                 )}
@@ -1891,25 +1893,25 @@ export default function AnimalDetailPage({
                         <div key={item.country} className="p-4 rounded-xl bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600">
                           <div className="flex items-center gap-2 mb-2">
                             <span className="font-semibold text-gray-800 dark:text-white">
-                              {item.country === 'FR' ? 'France' : item.country === 'US' ? 'États-Unis' : item.country === 'BE' ? 'Belgique' : item.country}
+                              {countryName(item.country, locale)}
                             </span>
                             <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
                               item.status === 'allowed' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
                               item.status === 'prohibited' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
                               'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
                             }`}>
-                              {item.status === 'allowed' ? (t('species.allowed') || 'Autorisé') : item.status === 'prohibited' ? (t('species.prohibited') || 'Interdit') : (t('species.permitRequired') || 'Permis requis')}
+                              {item.status === 'allowed' ? t('species.allowed') : item.status === 'prohibited' ? t('species.prohibited') : t('species.permitRequired')}
                             </span>
                           </div>
                           {item.details?.citesAppendix && (
-                            <p className="text-sm text-gray-700 dark:text-gray-300"><strong>CITES:</strong> Annexe {item.details.citesAppendix}</p>
+                            <p className="text-sm text-gray-700 dark:text-gray-300"><strong>CITES:</strong> {t('species.annex', { value: item.details.citesAppendix })}</p>
                           )}
                           {item.details?.euAnnex && (
-                            <p className="text-sm text-gray-700 dark:text-gray-300"><strong>UE Annexe:</strong> {item.details.euAnnex}</p>
+                            <p className="text-sm text-gray-700 dark:text-gray-300"><strong>{t('species.euAnnexLabel')}</strong> {item.details.euAnnex}</p>
                           )}
                           {item.details?.permits && item.details.permits.length > 0 && (
                             <div className="text-sm mt-1">
-                              <strong>Permis requis:</strong>
+                              <strong>{t('species.permits')} :</strong>
                               <ul className="list-disc list-inside mt-0.5">
                                 {item.details.permits.map((permit: string, idx: number) => (
                                   <li key={idx}>{permit}</li>
@@ -1919,7 +1921,7 @@ export default function AnimalDetailPage({
                           )}
                           {item.details?.restrictions && item.details.restrictions.length > 0 && (
                             <div className="text-sm mt-1">
-                              <strong>Restrictions:</strong>
+                              <strong>{t('species.restrictions')} :</strong>
                               <ul className="list-disc list-inside mt-0.5">
                                 {item.details.restrictions.map((restriction: string, idx: number) => (
                                   <li key={idx}>{restriction}</li>
@@ -1929,7 +1931,7 @@ export default function AnimalDetailPage({
                           )}
                           {item.sources && item.sources.length > 0 && (
                             <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-600">
-                              <p className="text-xs font-medium text-gray-500 dark:text-gray-400">Sources</p>
+                              <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{t('species.sources')}</p>
                               {item.sources.slice(0, 2).map((src: string, idx: number) => (
                                 <a key={idx} href={src.startsWith('http') ? src : '#'} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-600 hover:underline break-all block">{src}</a>
                               ))}
@@ -1938,7 +1940,7 @@ export default function AnimalDetailPage({
                         </div>
                       ))
                     ) : (
-                      <p className="text-gray-500 dark:text-gray-400">{t('species.noLegalData') || t('common.noData') || 'Aucune donnée législation'}</p>
+                      <p className="text-gray-500 dark:text-gray-400">{t('species.noLegalData')}</p>
                     )}
                   </div>
                 )}
@@ -1959,7 +1961,7 @@ export default function AnimalDetailPage({
                         ))}
                       </div>
                     ) : (
-                      <p className="text-gray-500 dark:text-gray-400">{t('common.noData') || 'Aucune donnée'}</p>
+                      <p className="text-gray-500 dark:text-gray-400">{t('common.noData')}</p>
                     )}
                   </div>
                 )}
@@ -1984,7 +1986,7 @@ export default function AnimalDetailPage({
                         ))}
                       </div>
                     ) : (
-                      <p className="text-gray-500 dark:text-gray-400">{t('common.noData') || 'Aucune donnée'}</p>
+                      <p className="text-gray-500 dark:text-gray-400">{t('common.noData')}</p>
                     )}
                   </div>
                 )}
@@ -2257,7 +2259,7 @@ export default function AnimalDetailPage({
                           )}
                           {!routine.active && (
                             <span className="px-2 py-1 bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 text-xs rounded-full">
-                              En pause
+                              {t('routines.paused')}
                             </span>
                           )}
                           <button
@@ -2277,7 +2279,7 @@ export default function AnimalDetailPage({
                               toggleActive();
                             }}
                             className="p-1.5 text-gray-500 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
-                            title="Basculer actif/pause"
+                            title={t('routines.toggleActive')}
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -3019,7 +3021,7 @@ export default function AnimalDetailPage({
                   type="text"
                   value={routineName}
                   onChange={(e) => setRoutineName(e.target.value)}
-                  placeholder="ex. Nourriture du matin"
+                  placeholder={t('routines.namePlaceholder')}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                 />
               </div>
@@ -3737,7 +3739,7 @@ export default function AnimalDetailPage({
                         type="text"
                         value={medicationUnit}
                         onChange={(e) => setMedicationUnit(e.target.value)}
-                        placeholder="ml / mg / gouttes…"
+                        placeholder={t('animals.medicationUnitPlaceholder')}
                         className="w-full rounded-xl border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 text-base text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
                         autoComplete="off"
                       />
@@ -4607,7 +4609,7 @@ export default function AnimalDetailPage({
               </div>
             ) : history.length === 0 ? (
               <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                {t('animals.noHistory') || 'Aucun historique'}
+                {t('animals.noHistory')}
               </div>
             ) : (
               <div className="space-y-3">
@@ -4621,7 +4623,7 @@ export default function AnimalDetailPage({
                         {entry.type}
                       </h3>
                       <span className="text-xs text-gray-500 dark:text-gray-400">
-                        {new Date(entry.doneAt).toLocaleDateString()} {new Date(entry.doneAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        {new Date(entry.doneAt).toLocaleDateString(locale)} {new Date(entry.doneAt).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' })}
                       </span>
                     </div>
                     {entry.note && (
@@ -4664,7 +4666,7 @@ export default function AnimalDetailPage({
               {t('animals.deleteAnimal')}
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              {t('common.confirmDelete') || `Êtes-vous sûr de vouloir supprimer ${animal?.name} ? Cette action est irréversible.`}
+              {t('common.confirmDelete')}
             </p>
             <div className="flex gap-3">
               <button

@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import { locales, type Locale } from '../../i18n/routing';
 
-const languageNames: Record<Locale, string> = {
+export const languageNames: Record<Locale, string> = {
   fr: 'Français',
   en: 'English',
   es: 'Español',

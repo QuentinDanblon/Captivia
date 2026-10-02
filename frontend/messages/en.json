@@ -256,7 +256,18 @@
       "title": "Vet appointments",
       "vetName": "Veterinarian"
     },
-    "viewHistory": "View history"
+    "viewHistory": "View history",
+    "weightChartLabel": "Weight chart",
+    "notFound": "Animal not found",
+    "errorLoadingAnimal": "Error loading animal data",
+    "defaultCareTips": {
+      "environment": "Maintain a suitable environment (temperature, humidity)",
+      "feeding": "Follow a regular feeding schedule",
+      "equipment": "Check the equipment (UVB, heating) regularly",
+      "illness": "Watch for signs of illness"
+    },
+    "medicationUnitPlaceholder": "ml / mg / drops…",
+    "speciesRequired": "Please select a species"
   },
   "attribution": {
     "wikipediaPrefix": "Source:",
@@ -297,7 +308,8 @@
     "resetPasswordMismatch": "The two passwords do not match.",
     "resetPasswordSubmit": "Reset password",
     "resetPasswordSuccess": "Password updated. Redirecting to login…",
-    "resetPasswordTitle": "New password"
+    "resetPasswordTitle": "New password",
+    "registerError": "Registration failed"
   },
   "common": {
     "account": "Account",
@@ -334,7 +346,12 @@
     "search": "Search",
     "settings": "Settings",
     "shop": "Shop",
-    "species": "Species"
+    "species": "Species",
+    "reset": "Reset",
+    "loadMore": "Show more",
+    "retry": "Try again",
+    "unexpectedError": "Unexpected error",
+    "sessionExpired": "Session expired. Please sign in again."
   },
   "disclaimers": {
     "affiliate": "Affiliate link",
@@ -401,7 +418,42 @@
     "searchPlaceholder": "Search for a species...",
     "skipToContent": "Skip to content",
     "subtitle": "Discover and care for your animals",
-    "title": "The Wildlife Guide"
+    "title": "The Wildlife Guide",
+    "searchUnavailable": "The search server is unavailable. Start the backend or try again later.",
+    "eyebrow": "WILDLIFE GUIDE",
+    "heroLine": "Know the living world.",
+    "pillarsLabel": "The pillars of Captivia",
+    "pillarExplore": "Explore",
+    "pillarUnderstand": "Understand",
+    "pillarCare": "Care",
+    "explorerKicker": "EXPLORE",
+    "explorerTitle": "A species in mind?",
+    "speciesProfiles": "Species profiles",
+    "instantSearch": "Instant search",
+    "noResults": "No results",
+    "discoverKicker": "DISCOVER",
+    "resultsKicker": "RESULTS",
+    "resultsTitle": "Species found",
+    "profileCount": "{count, plural, one {# profile} other {# profiles}}",
+    "profileBadge": "Profile",
+    "taxonomy": {
+      "Reptilia": "Reptile",
+      "Aves": "Bird",
+      "Mammalia": "Mammal",
+      "Amphibia": "Amphibian",
+      "Actinopterygii": "Fish",
+      "Insecta": "Insect",
+      "Arachnida": "Arachnid",
+      "Gastropoda": "Gastropod",
+      "Bivalvia": "Bivalve",
+      "Cephalopoda": "Cephalopod",
+      "Crustacea": "Crustacean",
+      "Animalia": "Animal",
+      "Plantae": "Plant",
+      "Fungi": "Fungus",
+      "Bacteria": "Bacterium",
+      "Archaea": "Archaeon"
+    }
   },
   "legal": {
     "englishFallback": "The English version is authoritative pending translation.",
@@ -467,7 +519,22 @@
     "weekDay3": "Wednesday",
     "weekDay4": "Thursday",
     "weekDay5": "Friday",
-    "weekDay6": "Saturday"
+    "weekDay6": "Saturday",
+    "saveError": "Error while saving",
+    "notificationsEnabled": "Notifications enabled",
+    "snoozeHint": "Snooze duration in minutes (5-120)",
+    "suggested": {
+      "feeding": "Feeding",
+      "cleaning": "Cleaning",
+      "uvb": "UVB / lighting",
+      "health": "Health",
+      "vet": "Vet reminder",
+      "shedding": "Shedding",
+      "weighing": "Weighing",
+      "bath": "Bath",
+      "temperature": "Temperature",
+      "humidity": "Humidity"
+    }
   },
   "premiumLock": {
     "goPremium": "View Premium subscription",
@@ -511,7 +578,10 @@
       "feeding": "Feeding",
       "health": "Health check",
       "uvb": "UVB"
-    }
+    },
+    "paused": "Paused",
+    "toggleActive": "Toggle active/paused",
+    "namePlaceholder": "e.g. Morning meal"
   },
   "settings": {
     "account": "Account",
@@ -579,7 +649,45 @@
     "status": "Status",
     "symptoms": "Symptoms",
     "viewFullGuide": "View full guide",
-    "whenToConsult": "When to consult"
+    "whenToConsult": "When to consult",
+    "noPartnerStores": "No partner store for this category at the moment. See the Store tab from the home page.",
+    "profileLabel": "Profile",
+    "commonNameFr": "Common name (FR):",
+    "category": "Category:",
+    "subcategory": "Subcategory:",
+    "domesticationType": "Domestication type:",
+    "kingdom": "Kingdom:",
+    "phylum": "Phylum:",
+    "class": "Class:",
+    "order": "Order:",
+    "family": "Family:",
+    "genus": "Genus:",
+    "habitatEditorial": "Editorial habitat",
+    "habitatType": "Habitat type",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "spaceRequirements": "Space required",
+    "lighting": "Lighting",
+    "enrichment": "Enrichment",
+    "behavior": "Behavior",
+    "generalBehavior": "General behavior",
+    "sociability": "Sociability",
+    "difficultyLevel": "Difficulty level",
+    "compatibility": "Compatibility",
+    "biome": "Biome",
+    "defaultBiome": "Tropical / Subtropical",
+    "environmentDataMissing": "Environmental data to be completed",
+    "sources": "Sources",
+    "feedingTitle": "Diet suited to the species",
+    "dietType": "Diet type",
+    "mealFrequency": "Meal frequency",
+    "recommendedFoods": "Recommended foods",
+    "foodsToAvoid": "Foods to avoid",
+    "specificNeeds": "Specific needs",
+    "foodReferenceNote": "The recommendations above (species database) remain the reference.",
+    "unnamedProduct": "Unnamed product",
+    "annex": "Annex {value}",
+    "euAnnexLabel": "EU Annex:"
   },
   "store": {
     "allCategories": "All types",
@@ -615,7 +723,9 @@
     "subscribeSuccess": "Subscription activated. You now have access to all Premium features.",
     "subtitle": "Unlock all Captivia benefits",
     "title": "Premium subscription",
-    "yearly": "Yearly"
+    "yearly": "Yearly",
+    "yearlyEquivalent": "≈ €2.50 / month",
+    "yearlyDiscount": "−17%"
   },
   "transparency": {
     "affiliateIndependence": "Equipment and food recommendations depend on the needs of the species, not on commission rates.",

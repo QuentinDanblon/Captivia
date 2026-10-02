@@ -3,17 +3,16 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { api, type SearchSpeciesFilters } from '@/lib/api';
-import { getTaxonomyLabel } from '@/lib/taxonomy';
 import { ArrowRight, Bird, Bug, CircleDot, Fish, Leaf, Rabbit, Search, Sparkles, Turtle } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 
 const animalTypes = [
-  { label: 'Reptile', value: 'Reptilia', icon: Turtle, tone: 'mint' },
-  { label: 'Oiseau', value: 'Aves', icon: Bird, tone: 'sky' },
-  { label: 'Mammifère', value: 'Mammalia', icon: Rabbit, tone: 'peach' },
-  { label: 'Amphibien', value: 'Amphibia', icon: CircleDot, tone: 'lime' },
-  { label: 'Poisson', value: 'Actinopterygii', icon: Fish, tone: 'blue' },
-  { label: 'Insecte', value: 'Insecta', icon: Bug, tone: 'amber' },
+  { value: 'Reptilia', icon: Turtle, tone: 'mint' },
+  { value: 'Aves', icon: Bird, tone: 'sky' },
+  { value: 'Mammalia', icon: Rabbit, tone: 'peach' },
+  { value: 'Amphibia', icon: CircleDot, tone: 'lime' },
+  { value: 'Actinopterygii', icon: Fish, tone: 'blue' },
+  { value: 'Insecta', icon: Bug, tone: 'amber' },
 ];
 
 interface SpeciesSearchResult {
@@ -40,6 +39,11 @@ function normalizeSpeciesResults(results: unknown[] | undefined): SpeciesSearchR
 
 export default function Home() {
   const t = useTranslations();
+  const taxonomyLabel = (value?: string): string => {
+    if (!value) return '-';
+    const key = `home.taxonomy.${value}`;
+    return t.has(key) ? t(key) : value;
+  };
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SpeciesSearchResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -79,7 +83,7 @@ export default function Home() {
       setSearchError(
         error instanceof Error
           ? error.message
-          : 'Le serveur de recherche est indisponible. Démarrez le backend ou réessayez plus tard.'
+          : t('home.searchUnavailable')
       );
     } finally {
       setLoading(false);
@@ -154,25 +158,25 @@ export default function Home() {
           <div className="captivia-hero-copy">
             <div className="captivia-eyebrow">
               <span className="captivia-eyebrow-mark"><Sparkles size={13} strokeWidth={2.6} /></span>
-              <span>GUIDE DE LA FAUNE</span>
+              <span>{t('home.eyebrow')}</span>
             </div>
             <h1 id="captivia-hero-title" className="captivia-hero-title">
               <span className="captivia-title-brand">{t('common.appName')}</span>
-              <span className="captivia-title-line">Connaître le vivant.</span>
+              <span className="captivia-title-line">{t('home.heroLine')}</span>
             </h1>
             <p className="captivia-hero-description">{t('home.subtitle')}</p>
-            <div className="captivia-hero-signals" aria-label="Les piliers de Captivia">
-              <span><i aria-hidden="true" /> Explorer</span>
-              <span><i aria-hidden="true" /> Comprendre</span>
-              <span><i aria-hidden="true" /> Prendre soin</span>
+            <div className="captivia-hero-signals" aria-label={t('home.pillarsLabel')}>
+              <span><i aria-hidden="true" /> {t('home.pillarExplore')}</span>
+              <span><i aria-hidden="true" /> {t('home.pillarUnderstand')}</span>
+              <span><i aria-hidden="true" /> {t('home.pillarCare')}</span>
             </div>
           </div>
 
           <div className="captivia-explorer-card">
             <div className="captivia-explorer-topline">
               <div>
-                <span className="captivia-card-kicker">EXPLORER</span>
-                <h2>Une espèce en tête&nbsp;?</h2>
+                <span className="captivia-card-kicker">{t('home.explorerKicker')}</span>
+                <h2>{t('home.explorerTitle')}</h2>
               </div>
               <span className="captivia-explorer-icon" aria-hidden="true"><Search size={21} strokeWidth={2.1} /></span>
             </div>
@@ -195,17 +199,17 @@ export default function Home() {
             </form>
 
             <div className="captivia-explorer-footer">
-              <span><Leaf size={15} aria-hidden="true" /> Profils d&apos;espèces</span>
-              <span>Recherche instantanée</span>
+              <span><Leaf size={15} aria-hidden="true" /> {t('home.speciesProfiles')}</span>
+              <span>{t('home.instantSearch')}</span>
             </div>
 
             {showSuggestions && (
               <div className="captivia-suggestions" role="listbox">
                 {suggestionsLoading && (
-                  <div className="captivia-suggestion-loading">{t('common.loading')}...</div>
+                  <div className="captivia-suggestion-loading">{t('common.loading')}</div>
                 )}
                 {!suggestionsLoading && suggestions.length === 0 && (
-                  <div className="captivia-suggestion-loading">Aucun résultat</div>
+                  <div className="captivia-suggestion-loading">{t('home.noResults')}</div>
                 )}
                 {!suggestionsLoading && suggestions.map((species) => (
                   <Link
@@ -224,7 +228,7 @@ export default function Home() {
                       </strong>
                       <small>{species.scientificName}</small>
                     </span>
-                    {species.class && <span className="captivia-suggestion-tag">{getTaxonomyLabel(species.class)}</span>}
+                    {species.class && <span className="captivia-suggestion-tag">{taxonomyLabel(species.class)}</span>}
                   </Link>
                 ))}
               </div>
@@ -235,8 +239,8 @@ export default function Home() {
         <section className="captivia-discovery" aria-labelledby="captivia-discovery-title">
           <div className="captivia-section-heading">
             <div>
-              <span className="captivia-card-kicker">DÉCOUVRIR</span>
-              <h2 id="captivia-discovery-title">Filtrer par type d&apos;animal</h2>
+              <span className="captivia-card-kicker">{t('home.discoverKicker')}</span>
+              <h2 id="captivia-discovery-title">{t('store.filterByCategory')}</h2>
             </div>
             {selectedTypeFilter && (
               <button
@@ -247,7 +251,7 @@ export default function Home() {
                 }}
                 className="captivia-reset-button"
               >
-                Réinitialiser
+                {t('common.reset')}
               </button>
             )}
           </div>
@@ -267,7 +271,7 @@ export default function Home() {
                   <span className={`captivia-category-icon tone-${type.tone}`} aria-hidden="true">
                     <Icon size={29} strokeWidth={1.9} />
                   </span>
-                  <span className="captivia-category-label">{type.label}</span>
+                  <span className="captivia-category-label">{taxonomyLabel(type.value)}</span>
                   <span className="captivia-category-arrow" aria-hidden="true"><ArrowRight size={18} strokeWidth={2.2} /></span>
                 </button>
               );
@@ -292,11 +296,11 @@ export default function Home() {
           <section className="captivia-results" aria-labelledby="captivia-results-title">
             <div className="captivia-results-heading">
               <div>
-                <span className="captivia-card-kicker">RÉSULTATS</span>
-                <h2 id="captivia-results-title">Espèces trouvées</h2>
+                <span className="captivia-card-kicker">{t('home.resultsKicker')}</span>
+                <h2 id="captivia-results-title">{t('home.resultsTitle')}</h2>
               </div>
               <span className="captivia-results-count">
-                {totalResults > 0 ? `${totalResults} profils` : `${results.length} profils`}
+                {t('home.profileCount', { count: totalResults > 0 ? totalResults : results.length })}
               </span>
             </div>
             <div className="captivia-results-grid">
@@ -308,7 +312,7 @@ export default function Home() {
                   data-testid="species-result"
                 >
                   <div className="captivia-result-card-top">
-                    <span className="captivia-result-badge"><Leaf size={13} aria-hidden="true" /> Profil</span>
+                    <span className="captivia-result-badge"><Leaf size={13} aria-hidden="true" /> {t('home.profileBadge')}</span>
                     <span className="captivia-result-arrow" aria-hidden="true"><ArrowRight size={17} strokeWidth={2.3} /></span>
                   </div>
                   <h3>
@@ -319,7 +323,7 @@ export default function Home() {
                   <p className="captivia-result-scientific">{species.scientificName}</p>
                   {(species.class || species.order || species.family) && (
                     <p className="captivia-result-taxonomy">
-                      {species.class && <span>{getTaxonomyLabel(species.class)}</span>}
+                      {species.class && <span>{taxonomyLabel(species.class)}</span>}
                       {species.class && species.order && <span> · </span>}
                       {species.order && <span>{species.order}</span>}
                       {(species.class || species.order) && species.family && <span> · </span>}
@@ -341,7 +345,7 @@ export default function Home() {
                   disabled={loading}
                   className="captivia-load-more"
                 >
-                  {loading ? t('common.loading') : 'Voir plus'}
+                  {loading ? t('common.loading') : t('common.loadMore')}
                 </button>
               </div>
             )}

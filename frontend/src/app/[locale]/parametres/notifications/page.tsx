@@ -71,19 +71,24 @@ const RECURRENCE_OPTIONS: { value: RecurrenceKind; labelKey: string }[] = [
   { value: 'once', labelKey: 'notifications.recurrenceOnce' },
 ];
 
-/** Sujets suggérés pour guider l'utilisateur (il peut aussi créer les siens) */
-const SUGGESTED_NOTIFICATION_TYPES = [
-  'Nourrissage',
-  'Nettoyage',
-  'UVB / éclairage',
-  'Santé',
-  'Rappel vétérinaire',
-  'Mue',
-  'Pondération',
-  'Bain',
-  'Température',
-  'Humidité',
-] as const;
+/**
+ * Sujets suggérés pour guider l'utilisateur (il peut aussi créer les siens).
+ * Les clés ci-dessous sont les identifiants stockés côté API (inchangés) ;
+ * seul l'affichage est traduit via notifications.suggested.<id>.
+ */
+const SUGGESTED_TYPE_LABEL_IDS: Record<string, string> = {
+  'Nourrissage': 'feeding',
+  'Nettoyage': 'cleaning',
+  'UVB / éclairage': 'uvb',
+  'Santé': 'health',
+  'Rappel vétérinaire': 'vet',
+  'Mue': 'shedding',
+  'Pondération': 'weighing',
+  'Bain': 'bath',
+  'Température': 'temperature',
+  'Humidité': 'humidity',
+};
+const SUGGESTED_NOTIFICATION_TYPES = Object.keys(SUGGESTED_TYPE_LABEL_IDS);
 
 import { API_URL } from '@/lib/config';
 
@@ -91,6 +96,10 @@ const getApiBase = () => API_URL;
 
 export default function NotificationsPreferencesPage() {
   const t = useTranslations();
+  const typeLabel = (type: string): string => {
+    const id = SUGGESTED_TYPE_LABEL_IDS[type];
+    return id ? t(`notifications.suggested.${id}`) : type;
+  };
   const router = useRouter();
   const { user, token, logout, isLoading: authLoading } = useAuth();
   const [preferences, setPreferences] = useState<NotificationPreferences | null>(null);
@@ -189,7 +198,7 @@ export default function NotificationsPreferencesPage() {
         },
       );
       if (response.status === 401) {
-        setSaveMessage('Session expirée. Veuillez vous reconnecter.');
+        setSaveMessage(t('common.sessionExpired'));
         return;
       }
       const data = await response.json();
@@ -217,7 +226,7 @@ export default function NotificationsPreferencesPage() {
   const handleSave = async () => {
     const authToken = (token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null))?.trim();
     if (!authToken || !preferences) {
-      if (!authToken) setSaveMessage('Session expirée. Veuillez vous reconnecter.');
+      if (!authToken) setSaveMessage(t('common.sessionExpired'));
       return;
     }
 
@@ -247,16 +256,16 @@ export default function NotificationsPreferencesPage() {
       const data = await response.json().catch(() => ({}));
 
       if (response.ok) {
-        setSaveMessage('Préférences enregistrées ✓');
+        setSaveMessage(`${t('notifications.saved')} ✓`);
         setTimeout(() => setSaveMessage(null), 3000);
       } else if (response.status === 401) {
-        setSaveMessage('Session expirée. Veuillez vous reconnecter.');
+        setSaveMessage(t('common.sessionExpired'));
       } else {
-        setSaveMessage((data as { message?: string }).message || 'Erreur lors de la sauvegarde');
+        setSaveMessage((data as { message?: string }).message || t('notifications.saveError'));
       }
     } catch (error) {
       console.error('Error saving preferences:', error);
-      setSaveMessage('Erreur lors de la sauvegarde');
+      setSaveMessage(t('notifications.saveError'));
     } finally {
       setSaving(false);
     }
@@ -305,16 +314,16 @@ export default function NotificationsPreferencesPage() {
 
       const data = await response.json().catch(() => ({}));
       if (response.ok) {
-        setSaveMessage('Préférences enregistrées ✓');
+        setSaveMessage(`${t('notifications.saved')} ✓`);
         setTimeout(() => setSaveMessage(null), 3000);
       } else if (response.status === 401) {
-        setSaveMessage('Session expirée. Veuillez vous reconnecter.');
+        setSaveMessage(t('common.sessionExpired'));
       } else {
-        setSaveMessage((data as { message?: string }).message || 'Erreur lors de l’enregistrement');
+        setSaveMessage((data as { message?: string }).message || t('notifications.saveError'));
       }
     } catch (error) {
       console.error('Error saving preferences:', error);
-      setSaveMessage('Erreur lors de l’enregistrement');
+      setSaveMessage(t('notifications.saveError'));
     }
   };
 
@@ -571,7 +580,7 @@ export default function NotificationsPreferencesPage() {
                     d="M5 13l4 4L19 7"
                   />
                 </svg>
-                <span>Notifications activées</span>
+                <span>{t('notifications.notificationsEnabled')}</span>
               </div>
             )}
           </div>
@@ -640,7 +649,7 @@ export default function NotificationsPreferencesPage() {
                       onClick={() => addType(label)}
                       className="px-3 py-1.5 text-sm rounded-lg border border-emerald-500 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
                     >
-                      + {label}
+                      + {typeLabel(label)}
                     </button>
                   ))}
                   {SUGGESTED_NOTIFICATION_TYPES.every(
@@ -702,7 +711,7 @@ export default function NotificationsPreferencesPage() {
                           ) : (
                             <>
                               <span className="flex-1 min-w-0 font-medium text-gray-800 dark:text-gray-200 truncate">
-                                {type}
+                                {typeLabel(type)}
                               </span>
                               <button
                                 type="button"
@@ -908,7 +917,7 @@ export default function NotificationsPreferencesPage() {
                 className="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white"
               />
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                Durée du report en minutes (5-120)
+                {t('notifications.snoozeHint')}
               </p>
             </div>
           )}

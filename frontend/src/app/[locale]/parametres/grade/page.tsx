@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Link } from '@/i18n/navigation';
@@ -45,6 +45,7 @@ type NotificationEvent = {
 
 export default function GradePage() {
   const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
   const { user, token, isLoading: authLoading } = useAuth();
   const [grade, setGrade] = useState<GradeData | null>(DEFAULT_GRADE);
@@ -112,11 +113,11 @@ export default function GradePage() {
       if (res?.deleted !== false) {
         setEvents((prev) => prev.filter((e) => e.id !== eventId));
       } else {
-        setGradeError(t('grade.deleteError') || 'Impossible de supprimer le rappel.');
+        setGradeError(t('grade.deleteError'));
       }
     } catch (e) {
       console.error(e);
-      setGradeError(e instanceof Error ? e.message : (t('grade.deleteError') || 'Impossible de supprimer le rappel.'));
+      setGradeError(e instanceof Error ? e.message : (t('grade.deleteError')));
     } finally {
       setDeletingId(null);
     }
@@ -278,7 +279,7 @@ export default function GradePage() {
                       {ev.label || ev.type}
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {new Date(ev.scheduledAt).toLocaleTimeString(undefined, {
+                      {new Date(ev.scheduledAt).toLocaleTimeString(locale, {
                         hour: '2-digit',
                         minute: '2-digit',
                       })}
