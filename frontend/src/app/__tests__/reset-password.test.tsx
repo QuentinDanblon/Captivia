@@ -7,13 +7,14 @@ jest.mock('@/lib/api', () => ({
 
 let mockQuery = 'token=SECRET-TOKEN';
 jest.mock('next/navigation', () => ({
-  useRouter: () => ({ push: jest.fn() }),
   useSearchParams: () => new URLSearchParams(mockQuery),
 }));
 
-jest.mock('next/link', () => ({
+// La page utilise la navigation localisée de next-intl (ESM, non chargeable sous jest).
+jest.mock('@/i18n/navigation', () => ({
   __esModule: true,
-  default: ({ href, children }: { href: string; children: React.ReactNode }) => <a href={href}>{children}</a>,
+  useRouter: () => ({ push: jest.fn(), replace: jest.fn() }),
+  Link: ({ href, children }: { href: string; children: React.ReactNode }) => <a href={href}>{children}</a>,
 }));
 
 import ResetPasswordPage from '../[locale]/reset-password/page';
