@@ -639,5 +639,22 @@
     "openDataMore": "Ver fuentes y licencias",
     "openDataTitle": "Datos abiertos",
     "title": "Transparencia y afiliación"
+  },
+  "seo": {
+    "accountDeletionDescription": "Cómo eliminar tu cuenta de Captivia y tus datos personales, desde la aplicación o por correo electrónico.",
+    "accountDeletionTitle": "Eliminar tu cuenta",
+    "animalsTitle": "Mis animales",
+    "defaultTitle": "Captivia – La guía de la fauna",
+    "description": "Captivia acompaña cada día a los propietarios de mascotas y animales exóticos: fichas de especies con fuentes, salud, alimentación, hábitat y seguimiento de tus animales.",
+    "forgotPasswordTitle": "Contraseña olvidada",
+    "loginTitle": "Iniciar sesión",
+    "registerTitle": "Crear una cuenta",
+    "resetPasswordTitle": "Restablecer la contraseña",
+    "settingsTitle": "Ajustes",
+    "speciesDescription": "{name}: ficha práctica completa sobre hábitat, alimentación, comportamiento, salud y legislación.",
+    "speciesFallbackDescription": "Ficha práctica de una especie: hábitat, alimentación, comportamiento, salud y legislación.",
+    "speciesTitle": "Ficha de especie",
+    "storeDescription": "Material, alimentación y accesorios recomendados según las necesidades de cada especie, con enlaces de afiliación claramente indicados.",
+    "storeTitle": "Tienda"
   }
 }

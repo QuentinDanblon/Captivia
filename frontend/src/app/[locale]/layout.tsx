@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '../../../i18n/routing';
+import { buildPageMetadata, getSiteUrl, SITE_NAME } from '@/lib/seo';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { AppHeader } from '@/components/AppHeader';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -20,11 +21,29 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Captivia – Le guide de la faune',
-  description:
-    'Plateforme complète, pédagogique et bienveillante qui accompagne les propriétaires d\'animaux domestiques et NAC au quotidien',
-};
+/**
+ * Métadonnées par défaut (= accueil) traduites. Les segments publics les affinent via leur propre
+ * `generateMetadata` (titre + canonical + hreflang) ; le template ajoute « · Captivia » aux titres.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) return {};
+  const t = await getTranslations({ locale, namespace: 'seo' });
+  const base = buildPageMetadata({ locale, path: '', description: t('description') });
+
+  return {
+    ...base,
+    metadataBase: new URL(getSiteUrl()),
+    title: { default: t('defaultTitle'), template: `%s · ${SITE_NAME}` },
+    applicationName: SITE_NAME,
+    openGraph: { ...base.openGraph, title: t('defaultTitle') },
+    twitter: { ...base.twitter, title: t('defaultTitle') },
+  };
+}
 
 export const viewport: Viewport = {
   width: 'device-width',

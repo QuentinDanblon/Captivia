@@ -639,5 +639,22 @@
     "openDataMore": "See sources and licences",
     "openDataTitle": "Open data",
     "title": "Transparency and affiliation"
+  },
+  "seo": {
+    "accountDeletionDescription": "How to delete your Captivia account and personal data, in the app or by email.",
+    "accountDeletionTitle": "Delete your account",
+    "animalsTitle": "My animals",
+    "defaultTitle": "Captivia – The animal care guide",
+    "description": "Captivia supports owners of pets and exotic animals every day: sourced species guides, health, feeding, housing and tracking of your animals.",
+    "forgotPasswordTitle": "Forgot password",
+    "loginTitle": "Log in",
+    "registerTitle": "Sign up",
+    "resetPasswordTitle": "Reset password",
+    "settingsTitle": "Settings",
+    "speciesDescription": "{name}: a complete practical guide to habitat, feeding, behaviour, health and legislation.",
+    "speciesFallbackDescription": "A practical species guide: habitat, feeding, behaviour, health and legislation.",
+    "speciesTitle": "Species guide",
+    "storeDescription": "Equipment, food and accessories recommended for the needs of each species, with clearly labelled affiliate links.",
+    "storeTitle": "Store"
   }
 }
