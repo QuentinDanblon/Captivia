@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { effectivePremium } from '../common/operators';
 
 export type SubscriptionPlan = 'monthly' | 'yearly';
 
@@ -19,14 +20,15 @@ export class SubscriptionService {
   async getStatus(userId: string): Promise<SubscriptionStatus> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      select: { isPremium: true },
+      select: { isPremium: true, role: true },
     });
     if (!user) {
       throw new NotFoundException('User not found');
     }
+    const isPremium = effectivePremium(user);
     return {
-      isPremium: user.isPremium,
-      ...(user.isPremium && { plan: 'monthly' as SubscriptionPlan }), // default display; could store plan in DB later
+      isPremium,
+      ...(isPremium && { plan: 'monthly' as SubscriptionPlan }), // default display; could store plan in DB later
     };
   }
 

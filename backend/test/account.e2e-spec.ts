@@ -239,6 +239,9 @@ describe('Account E2E — suppression et export RGPD', () => {
       const body = res.body;
       expect(body.profile.email).toBe(acc.email);
       expect(body.profile.id).toBe(acc.userId);
+      expect(body.profile.role).toBe('USER');
+      expect(body.profile.termsAcceptedAt).toEqual(expect.any(String));
+      expect(body.profile.termsVersion).toEqual(expect.any(String));
       expect(body.gamification).toEqual({ points: 0, grade: 'bronze' });
 
       expect(body.animals).toHaveLength(1);
