@@ -6,7 +6,7 @@ import CarnetPrintView from '@/app/[locale]/mes-animaux/[id]/carnet/CarnetPrintV
 
 function CarnetFromQuery() {
   const id = useSearchParams().get('id') ?? '';
-  return <CarnetPrintView id={id} />;
+  return <CarnetPrintView key={id} id={id} />;
 }
 
 /** App mobile : /<locale>/mes-animaux/carnet?id=<id> rend le carnet web /<locale>/mes-animaux/<id>/carnet. */

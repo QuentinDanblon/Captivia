@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Sauvegarde temporaire de scripts/build-mobile.mjs (fichiers web écartés le temps du build).
+    "mobile/.build-stash/**",
   ]),
 ]);
 
