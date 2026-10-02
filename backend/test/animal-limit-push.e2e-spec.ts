@@ -24,6 +24,8 @@ describe('Free animal limit and push subscriptions (W1-08)', () => {
       .send({
         email: `w108-${label}-${stamp}@captivia.com`,
         password: 'password123',
+        acceptTerms: true,
+        ageConfirmed: true,
       })
       .expect(201);
     const u = {

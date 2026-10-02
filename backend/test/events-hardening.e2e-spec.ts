@@ -57,6 +57,8 @@ describe('Notification events hardening (W0-07)', () => {
       .send({
         email: `evt-hardening-${stamp}@captivia.com`,
         password: 'password123',
+        acceptTerms: true,
+        ageConfirmed: true,
       })
       .expect(201);
     token = reg.body.accessToken;
