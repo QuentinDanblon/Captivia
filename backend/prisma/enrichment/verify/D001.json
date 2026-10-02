@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000004,
+    "status": "verified",
+    "note": "Tout confirmé (croisement XIXe, 35 cm, 10-16 kg, tête massive, caractère); dernière phrase non sourcée (musculature) remplacée."
+  },
+  {
+    "speciesId": 2000000005,
+    "status": "corrected",
+    "note": "Combat chien-taureau XIIIe, tête massive, mâchoire prognathe, caractère confirmés; 'combattant redouté' et gabarit non sourcé retirés."
+  },
+  {
+    "speciesId": 2000000009,
+    "status": "corrected",
+    "note": "Couleur corrigée (bleu acier/feu, pas bleu-gris/fauve); 'tendance à aboyer' remplacé par 'bon chien d'alerte' (source)."
+  },
+  {
+    "speciesId": 2000000021,
+    "status": "corrected",
+    "note": "Origine, taille, poids, usage confirmés; 'robuste' et 'intelligence remarquable' non sourcés retirés."
+  },
+  {
+    "speciesId": 2000000022,
+    "status": "corrected",
+    "note": "'Développé au XIXe siècle par ouvriers et mineurs' contredit/non sourcé (page: 15e s. Angleterre, croisements greyhound/bedlington/lévrier italien); tailles/poids par sexe corrigés."
+  },
+  {
+    "speciesId": 2000000026,
+    "status": "corrected",
+    "note": "'Musculature sèche et élégante' non sourcé retiré; poids et usages ajoutés depuis la page."
+  },
+  {
+    "speciesId": 2000000030,
+    "status": "corrected",
+    "note": "'Issu d'épagneuls nains anciens' non confirmé retiré; 1924/1945, tailles, caractère confirmés."
+  },
+  {
+    "speciesId": 2000000033,
+    "status": "corrected",
+    "note": "'Ancêtres Spitz' non sourcé retiré; 'vigilant' remplacé par caractère de la page."
+  },
+  {
+    "speciesId": 2000000036,
+    "status": "corrected",
+    "note": "'Mâchoire puissante', 'agilité', 'affectueux' non sourcés retirés; origine, croisements, usage, caractère confirmés."
+  },
+  {
+    "speciesId": 2000000037,
+    "status": "corrected",
+    "note": "Nom italien 'Piccolo Levriero' non vérifié retiré; 'affectueux' non confirmé (page sans caractère); popularité noblesse ajoutée."
+  },
+  {
+    "speciesId": 2000000042,
+    "status": "corrected",
+    "note": "'Loyauté envers propriétaires responsables' non sourcé retiré; agressivité intra-spécifique ajoutée (source)."
+  },
+  {
+    "speciesId": 2000000043,
+    "status": "corrected",
+    "note": "'Élégant' non sourcé retiré; non-reconnaissance et formats ajoutés depuis la page."
+  },
+  {
+    "speciesId": 2000000044,
+    "status": "verified",
+    "note": "Barbet, France/Allemagne, 24-28 cm, caractère confirmés sur la page Caniche."
+  },
+  {
+    "speciesId": 2000000046,
+    "status": "verified",
+    "note": "Origine, poids, taille, moustaches/sourcils, caractère confirmés; 'traits remarquables' reformulé."
+  },
+  {
+    "speciesId": 2000000051,
+    "status": "verified",
+    "note": "Origine, taille, queue, caractère, reine Victoria confirmés."
+  }
+]

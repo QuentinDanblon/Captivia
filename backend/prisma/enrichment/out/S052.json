@@ -5,20 +5,20 @@
       "dietType": "herbivore",
       "recommendedFoods": [
         {
-          "name": "Graminées et herbes fraîches",
+          "name": "Graminées et herbes fraîches, foin tendre",
           "frequency": "quotidienne",
-          "notes": "Base naturelle de l'alimentation"
+          "notes": "Base de l'alimentation"
         },
         {
-          "name": "Feuillage varié, racines, fruits",
+          "name": "Feuillage d'arbustes, racines, bourgeons, fruits",
           "frequency": "quotidienne",
-          "notes": "Suppléments nutritifs naturels"
+          "notes": "Compléments naturels du régime"
         }
       ],
       "foodsToAvoid": [
         {
-          "name": "Plantes toxiques (taxus, rhododendron)",
-          "reason": "Toxicité mortelle pour les marsuppiaux"
+          "name": "Plantes toxiques (if, rhododendron)",
+          "reason": "Toxiques pour de nombreux herbivores"
         },
         {
           "name": "Grains traités chimiquement",
@@ -26,45 +26,55 @@
         }
       ],
       "mealFrequency": "daily",
-      "specificNeeds": "Herbes variées riches en fibres, accès à pâturage naturel, cellulose pour digestion ruminale",
+      "specificNeeds": "Herbivore (herbes, feuilles d'arbustes, foin tendre, racines, écorces, bourgeons, fruits) ; l'eau provient en grande partie de la végétation",
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Wallaby",
-          "title": "Wallaby — Wikipédia"
+          "url": "https://fr.wikipedia.org/wiki/Wallaby_de_Bennett",
+          "title": "Wallaby de Bennett - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red-necked_wallaby",
+          "title": "Red-necked wallaby - Wikipedia"
         }
       ]
     },
     "habitat": {
       "habitatType": "enclos",
-      "tempMin": 10,
-      "tempMax": 25,
+      "tempMin": null,
+      "tempMax": null,
       "humidityMin": null,
       "humidityMax": null,
-      "minSpaceSize": "Enclos 500m² minimum, terrain accidenté avec refuge",
+      "minSpaceSize": "Au minimum 300 m² de terrain arboré par individu, avec zones d'ombre pour le repos et clôture de 1,8 m",
       "lightNeeds": "Lumière naturelle optimale, protection solaire en été extrême",
-      "activityEnrichment": "Parcours avec sauts, zones boisées, terriers naturels",
+      "activityEnrichment": "Parcours avec sauts, zones boisées, zones ombragées pour le repos",
       "hygieneNotes": "Nettoyage des zones de repos, drainage adéquat du terrain",
       "costEstimate": "élevé",
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Wallaby",
-          "title": "Wallaby — Wikipédia"
+          "url": "https://fr.wikipedia.org/wiki/Wallaby_de_Bennett",
+          "title": "Wallaby de Bennett - Wikipédia"
         }
       ]
     },
     "behavior": {
-      "generalBehavior": "Marsupial actif, excellent sauteur (1.5m hauteur, 7m longueur), grégaire en petits groupes, agressif en période de rut",
+      "generalBehavior": "Marsupial vivant en groupes non hiérarchisés (10 à 30 individus selon Wikipédia FR) ; mâles très agressifs entre eux ; actif tôt le matin et en fin d'après-midi, au repos aux heures chaudes",
       "sociability": "grégaire",
       "difficultyLevel": "expert",
       "compatibilityWithChildren": "Non recommandé, risques de morsure et coup de patte",
-      "compatibilityWithOtherAnimals": "Cohabitation avec congénères sous supervision, agressivité mâle importante",
+      "compatibilityWithOtherAnimals": "Vie en groupe familial ; forte agressivité entre mâles",
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Wallaby",
-          "title": "Wallaby — Wikipédia"
+          "url": "https://fr.wikipedia.org/wiki/Wallaby_de_Bennett",
+          "title": "Wallaby de Bennett - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red-necked_wallaby",
+          "title": "Red-necked wallaby - Wikipedia"
         }
       ]
     },
@@ -81,19 +91,13 @@
           "symptoms": "Perte de poids progressive, pelage terne, troubles digestifs",
           "prevention": "Traitement antiparasitaire préventif, hygiène de l'enclos",
           "whenToConsult": "À suspicion de parasites ou perte poids anormale"
-        },
-        {
-          "name": "Myopie infectieuse",
-          "symptoms": "Occlusion oculaire, écoulements, rougeur",
-          "prevention": "Protéger des courants d'air, hygiène optimale",
-          "whenToConsult": "À premier signe d'infection oculaire"
         }
       ],
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Wallaby",
-          "title": "Wallaby — Wikipédia"
+          "url": "https://fr.wikipedia.org/wiki/Wallaby_de_Bennett",
+          "title": "Wallaby de Bennett - Wikipédia"
         }
       ]
     },
@@ -103,31 +107,40 @@
       "details": {
         "citesAppendix": null,
         "euAnnex": null,
-        "permits": ["Arrêté du 21 novembre 1997"],
-        "restrictions": ["Espèce exotique, détention contrôlée"]
+        "permits": [
+          "Autorisation préfectorale avant l'achat"
+        ],
+        "restrictions": [
+          "Espèce ni classée nuisible ni protégée en France"
+        ]
       },
       "sources": [
         {
-          "type": "official",
-          "url": "https://www.legifrance.gouv.fr",
-          "title": "Legifrance — Arrêté du 21 novembre 1997"
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Wallaby_de_Bennett",
+          "title": "Wallaby de Bennett - Wikipédia"
         }
       ]
     },
     "reproduction": {
-      "season": "toute l'année",
+      "season": "toute l'année (population continentale ; fin d'été en Tasmanie)",
       "gestationDays": 35,
       "incubationDays": null,
       "litterSizeMin": 1,
       "litterSizeMax": 1,
-      "sexualMaturityMonths": 12,
+      "sexualMaturityMonths": null,
       "breedingDifficulty": "avance",
-      "notes": "Marsupial, jeune élevé en poche, une portée par an généralement",
+      "notes": "Un seul petit à la fois ; gestation de 35 jours ; séjour en poche d'environ 5 mois selon Wikipédia FR (environ 280 jours selon Wikipedia EN)",
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Wallaby",
-          "title": "Wallaby — Wikipédia"
+          "url": "https://fr.wikipedia.org/wiki/Wallaby_de_Bennett",
+          "title": "Wallaby de Bennett - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red-necked_wallaby",
+          "title": "Red-necked wallaby - Wikipedia"
         }
       ]
     }
@@ -138,14 +151,14 @@
       "dietType": "omnivore",
       "recommendedFoods": [
         {
-          "name": "Grains variés (maïs, blé, orge)",
+          "name": "Grains (maïs, blé, orge) ou aliment complet pour dindes",
           "frequency": "quotidienne",
-          "notes": "Aliment de base"
+          "notes": "Les rations commerciales reposent sur le maïs et le tourteau de soja, additionnés de vitamines et minéraux"
         },
         {
-          "name": "Insectes, vers, vers de terre",
+          "name": "Insectes, vers de terre",
           "frequency": "2-3 fois par semaine",
-          "notes": "Protéines animales essentielles"
+          "notes": "Complément facultatif"
         }
       ],
       "foodsToAvoid": [
@@ -159,45 +172,45 @@
         }
       ],
       "mealFrequency": "daily",
-      "specificNeeds": "Grains équilibrés, minéraux, calcium pour la production œuf, protéines animales régulières",
+      "specificNeeds": "Aliment équilibré avec vitamines et minéraux ; calcium pour la ponte",
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Dinde",
-          "title": "Dinde — Wikipédia"
+          "url": "https://en.wikipedia.org/wiki/Domestic_turkey",
+          "title": "Domestic turkey - Wikipedia"
         }
       ]
     },
     "habitat": {
       "habitatType": "enclos",
-      "tempMin": 10,
-      "tempMax": 25,
+      "tempMin": null,
+      "tempMax": null,
       "humidityMin": null,
       "humidityMax": null,
-      "minSpaceSize": "Enclos 50m² minimum avec abri couvert",
-      "lightNeeds": "Lumière naturelle 14-16h/jour, nuits tranquilles pour reproduction",
+      "minSpaceSize": "Enclos spacieux avec abri couvert",
+      "lightNeeds": "Lumière naturelle, abri calme la nuit",
       "activityEnrichment": "Zone de fouille, bain de sable, perchoirs élevés, parcours varié",
       "hygieneNotes": "Nettoyage régulier abri, litière sèche, protection contre prédateurs",
       "costEstimate": "moyen",
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Dinde",
-          "title": "Dinde — Wikipédia"
+          "url": "https://en.wikipedia.org/wiki/Domestic_turkey",
+          "title": "Domestic turkey - Wikipedia"
         }
       ]
     },
     "behavior": {
-      "generalBehavior": "Oiseau domestique lourd, peu volant, grégaire, mâle très territorial et agressif en reproduction",
+      "generalBehavior": "Oiseau domestique très social, qui supporte mal l'isolement ; semi-incapable de voler (les jeunes volent et perchent plus volontiers) ; très vocal ; les mâles s'affrontent et leur agressivité augmente avec l'âge",
       "sociability": "grégaire",
       "difficultyLevel": "débutant",
-      "compatibilityWithChildren": "Bon avec enfants sous supervision, attention au mâle en rut",
-      "compatibilityWithOtherAnimals": "Peut cohabiter avec autres volailles, territorial entre mâles",
+      "compatibilityWithChildren": "Bon avec les enfants sous supervision ; attention aux mâles adultes (agressivité croissante avec l'âge)",
+      "compatibilityWithOtherAnimals": "Très sociable avec ses congénères mais peut attaquer des dindons inconnus, parfois mortellement ; mâles agressifs entre eux",
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Dinde",
-          "title": "Dinde — Wikipédia"
+          "url": "https://en.wikipedia.org/wiki/Domestic_turkey",
+          "title": "Domestic turkey - Wikipedia"
         }
       ]
     },
@@ -226,7 +239,7 @@
         {
           "type": "wikipedia",
           "url": "https://fr.wikipedia.org/wiki/Dinde",
-          "title": "Dinde — Wikipédia"
+          "title": "Dinde - Wikipédia"
         }
       ]
     },
@@ -241,26 +254,26 @@
       },
       "sources": [
         {
-          "type": "official",
-          "url": "https://www.legifrance.gouv.fr",
-          "title": "Legifrance"
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dinde",
+          "title": "Dinde - Wikipédia"
         }
       ]
     },
     "reproduction": {
-      "season": "printemps-été",
+      "season": null,
       "gestationDays": null,
-      "incubationDays": 28,
-      "litterSizeMin": 8,
-      "litterSizeMax": 15,
-      "sexualMaturityMonths": 5,
-      "breedingDifficulty": "facile",
-      "notes": "Ponte saisonnière, incubation naturelle ou artificielle, plusieurs portées par saison",
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Les dindons commerciaux de type Broad-Breasted White ne peuvent pas féconder naturellement les femelles sans les blesser (insémination artificielle nécessaire)",
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Dinde",
-          "title": "Dinde — Wikipédia"
+          "url": "https://en.wikipedia.org/wiki/Domestic_turkey",
+          "title": "Domestic turkey - Wikipedia"
         }
       ]
     }
@@ -271,14 +284,14 @@
       "dietType": "omnivore",
       "recommendedFoods": [
         {
-          "name": "Végétation aquatique et graminées",
+          "name": "Végétation aquatique, herbes et graines",
           "frequency": "quotidienne",
-          "notes": "Base naturelle, herbivore obligatoire"
+          "notes": "Base du régime, complété de nourriture animale"
         },
         {
-          "name": "Invertébrés aquatiques, poissons, graines",
+          "name": "Invertébrés aquatiques, vers, insectes",
           "frequency": "quotidienne",
-          "notes": "Aliments supplémentaires variés"
+          "notes": "Apport animal naturel (têtards, poissons à l'état sauvage)"
         }
       ],
       "foodsToAvoid": [
@@ -292,23 +305,28 @@
         }
       ],
       "mealFrequency": "daily",
-      "specificNeeds": "Alimentation naturelle en eau, plantes aquatiques, insectes, minéraux calcium pour coquilles",
+      "specificNeeds": "Omnivore : herbes, graines, vers, insectes, têtards, poissons ; part de nourriture animale plus élevée chez la femelle en ponte",
       "sources": [
         {
           "type": "wikipedia",
           "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
-          "title": "Canard colvert — Wikipédia"
+          "title": "Canard colvert - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mallard",
+          "title": "Mallard - Wikipedia"
         }
       ]
     },
     "habitat": {
       "habitatType": "enclos",
-      "tempMin": 5,
-      "tempMax": 25,
+      "tempMin": null,
+      "tempMax": null,
       "humidityMin": null,
       "humidityMax": null,
-      "minSpaceSize": "Point d'eau 100L minimum, enclos 30m² avec zone herbeuse",
-      "lightNeeds": "Lumière naturelle 12-14h/jour pour reproduction",
+      "minSpaceSize": "Point d'eau permettant la nage et enclos avec zone herbeuse",
+      "lightNeeds": "Lumière naturelle",
       "activityEnrichment": "Nage libre, zones de fouille, végétation aquatique, refuge sombre",
       "hygieneNotes": "Eau changée régulièrement, abri sec et bien ventilé, litière fraîche",
       "costEstimate": "faible",
@@ -316,21 +334,26 @@
         {
           "type": "wikipedia",
           "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
-          "title": "Canard colvert — Wikipédia"
+          "title": "Canard colvert - Wikipédia"
         }
       ]
     },
     "behavior": {
-      "generalBehavior": "Oiseau aquatique, grégaire, bon nageur et volant, mâle territorial en reproduction",
+      "generalBehavior": "Oiseau aquatique très grégaire hors saison de reproduction, bon voilier ; le canard le moins farouche, qui s'adapte bien à la vie urbaine",
       "sociability": "grégaire",
       "difficultyLevel": "débutant",
       "compatibilityWithChildren": "Bon avec enfants sous supervision, vigilance à la morsure/pinçure",
-      "compatibilityWithOtherAnimals": "Cohabitation avec autres anatidés possible, marginal avec mâles",
+      "compatibilityWithOtherAnimals": "Cohabitation avec d'autres anatidés possible",
       "sources": [
         {
           "type": "wikipedia",
           "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
-          "title": "Canard colvert — Wikipédia"
+          "title": "Canard colvert - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mallard",
+          "title": "Mallard - Wikipedia"
         }
       ]
     },
@@ -359,7 +382,12 @@
         {
           "type": "wikipedia",
           "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
-          "title": "Canard colvert — Wikipédia"
+          "title": "Canard colvert - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mallard",
+          "title": "Mallard - Wikipedia"
         }
       ]
     },
@@ -374,26 +402,31 @@
       },
       "sources": [
         {
-          "type": "official",
-          "url": "https://www.legifrance.gouv.fr",
-          "title": "Legifrance"
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mallard",
+          "title": "Mallard - Wikipedia"
         }
       ]
     },
     "reproduction": {
-      "season": "printemps",
+      "season": "février-juillet (selon la latitude)",
       "gestationDays": null,
       "incubationDays": 28,
       "litterSizeMin": 8,
       "litterSizeMax": 12,
-      "sexualMaturityMonths": 3,
+      "sexualMaturityMonths": 12,
       "breedingDifficulty": "facile",
-      "notes": "Pont saisonnière au printemps, incubation naturelle, cantons très précoces",
+      "notes": "Ponte de 8 à 12 oeufs (jusqu'à 15), incubation d'environ 28 jours ; canetons nidifuges, capables de nager dès l'éclosion ; reproduction possible dès l'année suivante",
       "sources": [
         {
           "type": "wikipedia",
           "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
-          "title": "Canard colvert — Wikipédia"
+          "title": "Canard colvert - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mallard",
+          "title": "Mallard - Wikipedia"
         }
       ]
     }

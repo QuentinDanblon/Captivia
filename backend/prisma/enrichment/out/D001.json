@@ -1,77 +1,77 @@
 [
   {
     "speciesId": 2000000004,
-    "description": "Le bouledogue français est un petit chien issu du croisement entre le bulldog anglais et des ratiers parisiens au XIXe siècle. Mesurant environ 35 cm et pesant 10-16 kg, il se distingue par sa tête massive et son museau aplati. Sociable et joueur, il demande une activité régulière pour maintenir sa musculature.",
+    "description": "Le bouledogue français est un petit chien issu, au XIXe siècle, du croisement entre des bulldogs anglais importés en France par des ouvriers britanniques et des ratiers parisiens. Mesurant environ 35 cm pour 10 à 16 kg, il se reconnaît à sa tête massive et à son museau aplati. Sociable, gai et joueur, c'est un compagnon amical et fidèle.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Bulldog_français"
   },
   {
     "speciesId": 2000000005,
-    "description": "Le bouledogue anglais est originaire de Grande-Bretagne, développé à partir du sport du combat entre chien et taureau au XIIIe siècle. De taille trapue et puissante, il possède une tête massive et une mâchoire caractéristique. Autrefois combattant redouté, il est devenu un compagnon calme et affectueux, très loyal envers sa famille.",
+    "description": "Le bouledogue anglais est une race britannique dont l'apparition a été favorisée par le combat entre chien et taureau, sport apparu au XIIIe siècle. Trapu et court sur pattes, il a un poitrail imposant, une tête massive et une mâchoire prognathe. Aujourd'hui chien de compagnie, il est plutôt calme, affectueux et très loyal.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Bouledogue_anglais"
   },
   {
     "speciesId": 2000000009,
-    "description": "Le Yorkshire Terrier provient du comté anglais du même nom, développé au XIXe siècle. C'est un petit chien compact pesant au maximum 3,2 kg, reconnaissable à son pelage long et soyeux bleu-gris et fauve. Malgré sa taille réduite, il conserve un tempérament énergique avec un instinct de chasseur et une tendance à aboyer.",
+    "description": "Le Yorkshire Terrier est originaire du comté de Yorkshire, en Angleterre, où il a été développé au XIXe siècle. C'est un petit chien pesant au maximum 3,2 kg, au poil long, soyeux et lisse, bleu acier sur le corps et feu sur la tête, la poitrine et les pattes. Vif, affectueux et joueur, il garde un instinct de chasseur et fait un bon chien d'alerte.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Yorkshire_Terrier"
   },
   {
     "speciesId": 2000000021,
-    "description": "Le Jack Russell Terrier doit son nom au pasteur anglais John Russell, qui a développé cette race au XIXe siècle pour la chasse au renard. Mesurant 25-30 cm et pesant 5-10 kg, ce petit chien robuste se caractérise par une grande vivacité, de l'audace et une intelligence remarquable.",
+    "description": "Le Jack Russell Terrier doit son nom au pasteur anglais John Russell (1795-1883), qui l'a créé dans le Devon au XIXe siècle pour la chasse au renard sous terre. Il mesure 25 à 30 cm au garrot pour 5 à 10 kg. Vif, éveillé et actif, il est hardi et sans peur, avec un fort instinct de chasseur.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Jack_Russell_Terrier"
   },
   {
     "speciesId": 2000000022,
-    "description": "Le Whippet est un lévrier de petite taille originaire d'Angleterre, développé au XIXe siècle par des ouvriers et mineurs. Élégant et athlétique, mesurant 47-51 cm et pesant 12-15 kg, il se distingue par sa douceur et son affection. Remarquablement rapide, il peut atteindre plus de 55 km/h.",
+    "description": "Le whippet est un lévrier de petite taille issu en Angleterre de croisements entre greyhounds, bedlington terriers et petits lévriers italiens. Il mesure 44 à 51 cm pour 10 à 15 kg selon le sexe et sert à la course et au coursing. Doux, sensible et très affectueux envers son maître, il peut dépasser 55 km/h.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Lévrier_whippet"
   },
   {
     "speciesId": 2000000026,
-    "description": "Le Malinois est originaire de Belgique, spécifiquement de la ville de Malines. C'est un chien de taille moyenne mesurant environ 62 cm au garrot avec une musculature sèche et élégante. Doué d'une grande vivacité et d'une intelligence remarquable, il fait un excellent candidat pour les missions militaires et policières.",
+    "description": "Le Malinois est un chien de berger belge originaire de la ville de Malines, en Belgique. De taille moyenne (environ 62 cm pour les mâles, 25 à 30 kg), il a un tempérament vif et alerte. Intelligent et très apte à l'apprentissage, il est utilisé pour le troupeau, la police et l'armée.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Malinois_(chien)"
   },
   {
     "speciesId": 2000000030,
-    "description": "Le Cavalier King Charles est un petit chien anglais issu d'épagneuls nains anciens, reconnu officiellement comme race en 1945. De taille modeste mesurant 25-35 cm et pesant 5,4-8 kg, il se caractérise par une grande douceur et affection envers ses maîtres, associées à un caractère joueur et sociable.",
+    "description": "Le Cavalier King Charles est une race anglaise apparue en 1924 et reconnue officiellement en 1945. Il mesure 25 à 35 cm pour 5,4 à 8 kg. Gai, très doux, affectueux et joueur, c'est un chien de compagnie sociable qui aime être avec ses maîtres.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Cavalier_King_Charles"
   },
   {
     "speciesId": 2000000033,
-    "description": "Le Welsh Corgi Pembroke est une petite race galloise dont les origines remontent au Xe siècle, possédant des ancêtres Spitz. C'est un chien compact pesant 10-12 kg pour une taille de 25-30 cm. Doté d'un tempérament vif et intelligent, il se montre affectueux et vigilant, héritage de son passé de conducteur de troupeaux.",
+    "description": "Le Welsh Corgi Pembroke est une petite race galloise dont les origines remontent au Xe siècle, employée pour conduire et garder les bovins, poneys et oies des fermes. Il mesure 25 à 30 cm pour 10 à 12 kg. Vif, intelligent, joyeux et très attaché à l'humain, il est énergique.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Welsh_Corgi_Pembroke"
   },
   {
     "speciesId": 2000000036,
-    "description": "Originaire d'Angleterre au XVIIe siècle, le fox-terrier a été développé pour la chasse au renard par croisement entre beagles, foxhounds et teckels. De petite taille mais robuste, il possède une mâchoire puissante et une grande agilité. Son tempérament vif et intelligent le rend joueur et affectueux avec les enfants.",
+    "description": "Originaire d'Angleterre au XVIIe siècle, le fox-terrier (à poil lisse ou à poil dur) aurait été créé par croisement entre beagles, foxhounds et teckels pour la chasse au renard, assez petit pour aller le chercher dans sa tanière. De taille moyenne, il est vif, intelligent et adaptable. Joueur, il est protecteur envers les enfants.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Fox_Terrier"
   },
   {
     "speciesId": 2000000037,
-    "description": "Le Piccolo Levriero Italiano est une ancienne race italienne, le plus petit des lévriers, pesant au maximum 5 kg et mesurant 32-38 cm. Initialement élevé pour chasser le lièvre et le lapin, ce chien élancé possède des pattes longues et fines lui permettant d'atteindre des vitesses impressionnantes. Aujourd'hui, il demeure surtout un compagnon affectueux.",
+    "description": "Le lévrier italien est une race ancienne, le plus petit des lévriers : il mesure 32 à 38 cm pour 5 kg au maximum. Initialement élevé pour chasser le lièvre et le lapin, il peut atteindre 60 km/h. Apprécié des nobles européens, il est aujourd'hui surtout un chien de compagnie.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Italian_Greyhound"
   },
   {
     "speciesId": 2000000042,
-    "description": "L'American Staffordshire Terrier descend de variétés de bull-and-terrier britanniques arrivées en Amérique dès 1850. De taille moyenne et musclée, mesurant 46-48 cm et pesant 18-32 kg, il est réputé confiant, intelligent et bienveillant. Il se distingue par son courage légendaire et sa grande loyauté envers ses propriétaires responsables.",
+    "description": "L'American Staffordshire Terrier descend de chiens de type bull-and-terrier britanniques arrivés aux États-Unis vers 1850. Chien de taille moyenne, musclé et trapu, il mesure 43 à 48 cm pour 18 à 32 kg. Décrit comme confiant, intelligent et de bonne nature, il a un courage proverbial, mais une agressivité envers les autres chiens peut apparaître.",
     "sourceUrl": "https://en.wikipedia.org/wiki/American_Staffordshire_Terrier"
   },
   {
     "speciesId": 2000000043,
-    "description": "Le Pomsky est issu d'un croisement entre le Husky sibérien et le Spitz nain, phénomène apparu sur les réseaux sociaux à partir de 2011. Ce petit chien élégant mesure jusqu'à 45 cm et pèse au maximum 15 kg. Sûr de lui et sociable, il se distingue par son tempérament affectueux et joyeux.",
+    "description": "Le Pomsky est un croisement entre le husky sibérien et le spitz nain, devenu un phénomène des réseaux sociaux aux États-Unis vers 2011. Il n'est pas reconnu officiellement comme race et existe en trois formats, jusqu'à 45 cm et 15 kg pour le standard. Il est décrit comme sociable, affectueux et joyeux.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Pomsky"
   },
   {
     "speciesId": 2000000044,
-    "description": "Le Caniche Toy descend du Barbet et provient de France ou d'Allemagne. C'est un chien de très petite taille mesurant 24-28 cm au garrot. Intelligent et affectueux, il se montre joyeux et curieux, tout en s'adaptant facilement à la vie domestique et montrant une grande polyvalence.",
+    "description": "Le Caniche Toy descend du Barbet et son pays d'origine est la France (FCI) ou l'Allemagne selon les standards. C'est un chien de très petite taille, de 24 à 28 cm au garrot. Intelligent, joyeux, curieux et affectueux, il s'adapte bien à différents modes de vie.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Caniche"
   },
   {
     "speciesId": 2000000046,
-    "description": "Le Schnauzer nain est une petite race canine originaire d'Allemagne. Ces chiens compacts pèsent 5-8 kg pour une hauteur de 30-35 cm. Ils se distinguent par leur tempérament amical et leurs traits caractéristiques remarquables, notamment leurs moustaches et sourcils distinctifs qui leur donnent une allure unique.",
+    "description": "Le schnauzer nain est une petite race canine originaire d'Allemagne. Compact, il pèse 5 à 8 kg pour 30 à 35 cm et possède un poil dur ainsi que des moustaches et sourcils caractéristiques. Il est décrit comme amical.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Schnauzer_nain"
   },
   {
     "speciesId": 2000000051,
-    "description": "Le Spitz nain est une race miniature originaire d'Allemagne, précisément de la région de Poméranie. Il se distingue par sa petite taille de 20-30 cm et son tempérament vif et attentif, avec une fourrure épaisse et une queue caractéristique enroulée sur le dos. Adopté par l'aristocratie, il est devenu populaire en Angleterre sous le règne de la Reine Victoria.",
+    "description": "Le spitz nain est une race miniature originaire d'Allemagne, de la région de Poméranie. Il mesure 20 à 30 cm, avec un pelage dense et une queue qui s'enroule sur le dos. Vif, attentif et très attaché à son maître, il a été adopté par l'aristocratie et popularisé en Angleterre par la reine Victoria au XIXe siècle.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Spitz_nain"
   }
 ]

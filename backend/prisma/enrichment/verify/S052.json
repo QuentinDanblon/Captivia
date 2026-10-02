@@ -1,0 +1,16 @@
+[
+ {"speciesId": 9589697, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["habitat.minSpaceSize 500 m2 -> 300 m2 par individu + cloture 1,8 m (Wikipedia FR Wallaby de Bennett)","legislation: 'Arrete 1997' et 'espece exotique' remplaces par ce que dit Wikipedia FR (ni nuisible ni protegee, autorisation prefectorale avant achat) ; source Legifrance racine retiree","behavior: groupes de 10-30 individus non hierarchises, males agressifs entre eux, activite aube/crepuscule (Wikipedia FR) ; chiffres de saut retires","feeding.specificNeeds: 'digestion ruminale' et plantes 'mortelles pour les marsupiaux' reformules","reproduction: gestation 35 j confirmee, 1 petit ; poche ~5 mois (FR) / ~280 j (EN) ; 'une portee par an' retire ; saison nuancee (Tasmanie)","sources: page generique Wallaby remplacee par la page de l'espece"],
+  "removed": ["health: 'Myopie infectieuse' (maladie inexistante)","habitat.tempMin/tempMax 10-25 (non confirmes) ; 'terriers naturels'","reproduction.sexualMaturityMonths 12 (non confirme)"],
+  "confidence": "medium"},
+ {"speciesId": 9606290, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["behavior: reecrit selon Wikipedia EN (tres social, agressivite croissante des males, semi-incapable de voler, attaque les dindons inconnus)","feeding: rations commerciales mais/soja (Wikipedia EN) ; 'proteines animales essentielles' retire","legislation: 'allowed' conserve (Wikipedia FR : espece domestique d'elevage/basse-cour) ; source Legifrance racine remplacee","health: grippe aviaire H5N1 et salmonelles confirmees (Wikipedia FR) ; coccidiose generique conservee"],
+  "removed": ["reproduction : incubation 28 j, 8-15 oeufs, maturite 5 mois, saison, 'plusieurs portees' (non confirmes par les pages consultees) ; breedingDifficulty 'facile' (les dindons commerciaux ne se reproduisent pas naturellement)","habitat.tempMin/tempMax, 50 m2, 14-16 h de lumiere"],
+  "confidence": "low",
+  "notes": "Les pages Wikipedia FR/EN de la dinde ne donnent presque aucune donnee d'alimentation ni de reproduction."},
+ {"speciesId": 9761484, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["feeding: 'herbivore obligatoire' faux -> omnivore (Wikipedia FR/EN)","behavior: 'male territorial en reproduction' retire ; tres gregaire hors reproduction, peu farouche (Wikipedia FR)","reproduction: 8-12 oeufs (jusqu'a 15) et incubation ~28 j confirmes ; maturite 3 mois -> 12 mois (FR : l'annee suivante ; EN : ~14 mois) ; saison fevrier-juillet (FR) ; notes illisibles reecrites","legislation: source Legifrance racine remplacee par Wikipedia EN (colvert et canards domestiques = meme espece)"],
+  "removed": ["habitat.tempMin/tempMax 5-25, 100 L, 30 m2, 12-14 h de lumiere (non confirmes)","behavior: 'marginal avec males'"],
+  "confidence": "medium",
+  "notes": "Statut legal 'allowed' non confirme explicitement par une source (le colvert sauvage est une espece chassee en France ; classee 'domestique' par l'entree) : a relire si le statut legal est affiche."}
+]

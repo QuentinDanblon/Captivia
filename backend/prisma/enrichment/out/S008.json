@@ -5,14 +5,14 @@
       "dietType": "carnivore",
       "recommendedFoods": [
         {
-          "name": "Insectes aquatiques vivants (larves de moustique, daphnies)",
-          "frequency": "daily",
-          "notes": "Nourriture naturelle préférée, capturée à la surface"
+          "name": "Insectes vivants (grillons, petits vers de farine, mouches)",
+          "frequency": "quotidienne",
+          "notes": "Nourriture naturelle capturée à la surface; l'espèce accepte rarement les aliments préparés (Wikipedia)"
         },
         {
-          "name": "Petits poissons vivants (alevins, jeunes néons)",
-          "frequency": "2-3 times per week",
-          "notes": "Préférer les petites proies adaptées à la taille du poisson"
+          "name": "Aliments vivants ou congelés (vers de sang, artémia, crevette)",
+          "frequency": "hebdomadaire",
+          "notes": "Peuvent être acceptés après habituation, toujours distribués en surface (Seriously Fish, Aquariadise)"
         }
       ],
       "foodsToAvoid": [
@@ -26,7 +26,7 @@
         }
       ],
       "mealFrequency": "daily",
-      "specificNeeds": "Prédateur de surface avec bouche dirigée vers le haut. Nécessite de la nourriture vivante pour stimuler l'instinct naturel de chasse. Éviter les aliments qui coulent.",
+      "specificNeeds": "Prédateur de surface (bouche dirigée vers le haut) qui se nourrit principalement d'insectes aquatiques et de petits poissons (Wikipedia); il ne mange qu'en surface. Éviter les aliments coulants.",
       "sources": [
         {
           "type": "wikipedia",
@@ -46,10 +46,10 @@
       "tempMax": 27,
       "humidityMin": null,
       "humidityMax": null,
-      "minSpaceSize": "80 litres pour un individu, 120+ pour un couple",
-      "lightNeeds": "Éclairage modéré à faible, mimicking natural shaded environment",
+      "minSpaceSize": "Environ 80 L minimum (base 90 × 30 cm) : la surface compte plus que la profondeur (Seriously Fish)",
+      "lightNeeds": "Éclairage modéré à faible; plantes flottantes pour la couverture",
       "activityEnrichment": "Végétation dense ou en surplomb pour la couverture. Filtration douce essentielle, sans courant fort qui gênerait l'alimentation de surface",
-      "hygieneNotes": "pH 6.0-7.2, dureté 5-15 dGH. Surface large préférée à la profondeur. Couvercle sécurisé obligatoire car le poisson saute jusqu'à 2 mètres",
+      "hygieneNotes": "pH 6,0-7,5 (Seriously Fish), eau calme. Couvercle hermétique obligatoire : espèce très bonne sauteuse.",
       "costEstimate": "moyen",
       "sources": [
         {
@@ -65,11 +65,11 @@
       ]
     },
     "behavior": {
-      "generalBehavior": "Poisson de surface carnivore avec capacité de saut remarquable grâce à ses nageoires pectorales élargies. S'alimente près de la surface en chassant des insectes et petits poissons. Peut sauter jusqu'à 2 mètres au-dessus de l'eau pour éviter les prédateurs ou capturer des proies aériennes.",
+      "generalBehavior": "Poisson de surface carnivore, très bon sauteur grâce à ses grandes nageoires pectorales : peut s'élancer hors de l'eau pour capturer des proies ou fuir. Chasse des insectes et de petits poissons à la surface et reste souvent immobile sous la végétation.",
       "sociability": "solitaire",
       "difficultyLevel": "intermédiaire",
-      "compatibilityWithChildren": "Non adapté aux enfants, nécessite une manipulation délicate et un setup précis",
-      "compatibilityWithOtherAnimals": "Agressif envers les congénères. Ne peut être maintenu que solitaire. Cohabitation possible avec d'autres espèces de même taille mais surveillance requise.",
+      "compatibilityWithChildren": "Poisson d'observation; demande une installation précise (couvercle hermétique, eau calme).",
+      "compatibilityWithOtherAnimals": "Peut être agressif envers ses congénères et d'autres poissons (Wikipedia); mange les petits poissons. À garder seul ou avec précaution, sous surveillance.",
       "sources": [
         {
           "type": "wikipedia",
@@ -92,10 +92,10 @@
           "whenToConsult": "Dès observation de déchirures ou dégénérescence des nageoires"
         },
         {
-          "name": "Parasites externes (isopodes, copépodes)",
-          "symptoms": "Comportement anormal, frottement contre décoration, perte d'appétit, points blancs sur la peau",
-          "prevention": "Éviter l'introduction de poissons ou plantes non inspectés, quarantaine des nouveaux ajouts",
-          "whenToConsult": "Lors de changements comportementaux ou visibilité de parasites"
+          "name": "Infections fongiques",
+          "symptoms": "Filaments blanchâtres d'aspect cotonneux sur le corps ou les nageoires",
+          "prevention": "Excellente qualité d'eau, couvercle adapté pour éviter les blessures liées aux sauts",
+          "whenToConsult": "Dès l'apparition de filaments cotonneux; traitement par changements d'eau et bains/produits adaptés"
         },
         {
           "name": "Stress et immunodéficience",
@@ -117,32 +117,16 @@
         }
       ]
     },
-    "legislation": {
-      "country": "FR",
-      "status": "allowed",
-      "details": {
-        "citesAppendix": null,
-        "euAnnex": null,
-        "permits": [],
-        "restrictions": []
-      },
-      "sources": [
-        {
-          "type": "official",
-          "url": "https://www.legifrance.gouv.fr/",
-          "title": "Legifrance - Droit français"
-        }
-      ]
-    },
+    "legislation": null,
     "reproduction": {
       "season": "toute l'année",
       "gestationDays": null,
-      "incubationDays": 7,
+      "incubationDays": null,
       "litterSizeMin": 100,
-      "litterSizeMax": 100,
+      "litterSizeMax": null,
       "sexualMaturityMonths": null,
       "breedingDifficulty": "avance",
-      "notes": "Le couple fraie à la surface en déposant plus de 100 œufs par jour. Favoriser la reproduction en eau douce et acide (pH 6.0-6.5), température 25-26°C. Abaissement du niveau d'eau suivi d'un remplissage lent peut initier le frai. Oeufs flottants, éclosion en environ 7 jours.",
+      "notes": "Fécondation interne; le couple dépose à la surface des œufs flottants (plus de 100 œufs par jour selon Seriously Fish). Éclosion en 3-4 jours (Seriously Fish) à environ 7 jours (Wikipedia). L'élevage des alevins est très difficile (nauplies d'artémia, qualité d'eau).",
       "sources": [
         {
           "type": "wikipedia",
@@ -163,28 +147,28 @@
       "dietType": "carnivore",
       "recommendedFoods": [
         {
-          "name": "Insectes vivants (grillons, sauterelles, vers à soie)",
-          "frequency": "daily",
-          "notes": "Prédateur insectivore naturel, préfère les proies vivantes"
+          "name": "Insectes vivants (grillons, petits insectes terrestres)",
+          "frequency": "quotidienne",
+          "notes": "Dans la nature : insectes et petits invertébrés terrestres (Wikipedia)"
         },
         {
-          "name": "Invertébrés (larves d'insectes, petits arthropodes)",
-          "frequency": "daily",
-          "notes": "Contrairement au Crapaud américain (American toad), le Crapaud de Fowler ne consomme pas les vers de terre"
+          "name": "Petits invertébrés terrestres (larves d'insectes, petits arthropodes)",
+          "frequency": "quotidienne",
+          "notes": "Adapter la taille des proies à celle du crapaud"
         }
       ],
       "foodsToAvoid": [
         {
           "name": "Vers de terre",
-          "reason": "Espèce insectivore qui ne consomme pas les vers de terre, contrairement à Bufo americanus"
+          "reason": "Dans la nature, l'espèce évite les vers de terre (Wikipedia)"
         },
         {
-          "name": "Invertébrés trop gros ou toxiques",
-          "reason": "Risque d'étouffement ou d'empoisonnement"
+          "name": "Proies trop grosses",
+          "reason": "Proies surdimensionnées : risque d'étouffement"
         }
       ],
       "mealFrequency": "daily",
-      "specificNeeds": "Prédateur spécialisé en insectes terrestres. Nécessite une variété d'invertébrés vivants pour maintenir la santé.",
+      "specificNeeds": "Prédateur d'insectes et de petits invertébrés terrestres; proposer des proies variées.",
       "sources": [
         {
           "type": "guide",
@@ -192,22 +176,22 @@
           "title": "Le crapaud de Fowler - Ontario.ca"
         },
         {
-          "type": "vet",
-          "url": "https://www.naherp.com/viewrecord.php?r_id=3847",
-          "title": "Fowler's Toad Care - North American Herpetology"
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fowler%27s_toad",
+          "title": "Wikipedia: Fowler's toad"
         }
       ]
     },
     "habitat": {
       "habitatType": "enclos",
-      "tempMin": 21,
-      "tempMax": 24,
-      "humidityMin": 50,
-      "humidityMax": 80,
-      "minSpaceSize": "Terrarium 60x40 cm minimum pour un individu",
-      "lightNeeds": "Lumière naturelle préférée. Éviter l'exposition directe au soleil prolongée",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Espèce nocturne : prévoir des cachettes; éviter l'exposition directe prolongée au soleil.",
       "activityEnrichment": "Substrat de sable fin ou terreau pour permettre l'enfouissement naturel. Cachettes et végétation pour réduire le stress. Activité principalement nocturne.",
-      "hygieneNotes": "Peau perméable : eau déchlorée obligatoire pour les bains et substrat. Mains propres lors de la manipulation. Hibernation hivernale souterraine à moins 1 mètre environ (en conditions naturelles). En captivité, maintenir la température entre 21-24°C.",
+      "hygieneNotes": "Peau perméable : eau déchlorée. Les glandes cutanées sécrètent des toxines (bufadiénolides) : se laver les mains après toute manipulation (Wikipedia).",
       "costEstimate": "faible",
       "sources": [
         {
@@ -216,18 +200,18 @@
           "title": "Le crapaud de Fowler - Ontario.ca"
         },
         {
-          "type": "guide",
-          "url": "https://www.naherp.com/viewrecord.php?r_id=3847",
-          "title": "Fowler's Toad Care - NAHERP"
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fowler%27s_toad",
+          "title": "Wikipedia: Fowler's toad"
         }
       ]
     },
     "behavior": {
-      "generalBehavior": "Crapaud strictement nocturne, passe la journée enfoui sous le sable ou terreau. Émerge la nuit pour chasser les insectes. Produit un cri distinctif qui ressemble à un bêlement désolé, surtout pendant la saison de reproduction.",
+      "generalBehavior": "Crapaud nocturne qui s'enfouit dans le sable ou la terre pendant les périodes chaudes et sèches et l'hiver. Les mâles émettent un chant pour attirer les femelles à la saison de reproduction.",
       "sociability": "solitaire",
       "difficultyLevel": "intermédiaire",
-      "compatibilityWithChildren": "Débutant avec supervision. Crapaud robuste mais manipulation délicate pour ne pas endommager la peau",
-      "compatibilityWithOtherAnimals": "Solitaire, préférant l'isolement. Non compatible avec d'autres espèces.",
+      "compatibilityWithChildren": "Manipulation déconseillée : la peau sécrète des toxines; supervision d'un adulte et lavage des mains.",
+      "compatibilityWithOtherAnimals": "Généralement gardé seul.",
       "sources": [
         {
           "type": "guide",
@@ -275,32 +259,16 @@
         }
       ]
     },
-    "legislation": {
-      "country": "FR",
-      "status": "allowed",
-      "details": {
-        "citesAppendix": null,
-        "euAnnex": null,
-        "permits": [],
-        "restrictions": []
-      },
-      "sources": [
-        {
-          "type": "official",
-          "url": "https://www.legifrance.gouv.fr/",
-          "title": "Legifrance - Droit français"
-        }
-      ]
-    },
+    "legislation": null,
     "reproduction": {
-      "season": "printemps-été",
+      "season": "printemps (pic en mai-juin)",
       "gestationDays": null,
-      "incubationDays": 5,
-      "litterSizeMin": 7000,
+      "incubationDays": null,
+      "litterSizeMin": null,
       "litterSizeMax": 10000,
-      "sexualMaturityMonths": 12,
+      "sexualMaturityMonths": null,
       "breedingDifficulty": "avance",
-      "notes": "Reproduction aquatique, principalement mai-juin. Amplexus suivi de ponte de 7000 à 10000 œufs en cordons gélatineux. Éclosion en 2-7 jours. Développement des têtards : 30-40 jours. Métamorphose en une saison, mais certains individus peuvent prendre jusqu'à 3 ans pour atteindre la maturité sexuelle.",
+      "notes": "Reproduction aquatique dans des eaux peu profondes (mares, marais), surtout en mai-juin. Après l'amplexus, une femelle peut pondre jusqu'à 7 000 à 10 000 œufs. Éclosion en 2 à 7 jours (environ 7 jours selon Ontario.ca); les têtards se métamorphosent après 40 à 60 jours. La maturité sexuelle est atteinte entre une saison et trois ans.",
       "sources": [
         {
           "type": "guide",
@@ -322,13 +290,13 @@
       "recommendedFoods": [
         {
           "name": "Grillons vivants (de taille appropriée)",
-          "frequency": "3-4 times per week",
-          "notes": "Âge 3-4 semaines : grillons poussin ou œuf. Augmenter la taille à mesure que la grenouille grandit."
+          "frequency": "tous les 3-4 jours",
+          "notes": "Jeunes (3-4 semaines) : plusieurs petits grillons ou une souris rose tous les 3-4 jours (Reptiles Magazine). Plusieurs petites proies valent mieux qu'une grosse."
         },
         {
-          "name": "Petites souris roses (pinky mice) pour adultes",
-          "frequency": "every 2 weeks",
-          "notes": "Adultes : 1 souris toutes les 2 semaines environ. Prédateur ambush vorace."
+          "name": "Petites souris (adultes), avec modération",
+          "frequency": "toutes les 2 semaines",
+          "notes": "Reptiles Magazine : environ une fois toutes les deux semaines pour un adulte; Exo Terra : adultes nourris tous les 3-4 jours (insectes, occasionnellement souris)"
         }
       ],
       "foodsToAvoid": [
@@ -337,12 +305,12 @@
           "reason": "Risque d'étouffement ou de rupture d'estomac"
         },
         {
-          "name": "Insectes et petites proies trop fréquemment",
-          "reason": "Les adultes sont des prédateurs puissants nécessitant moins de nourriture"
+          "name": "Alimentation principalement à base de souris",
+          "reason": "Surcharge graisseuse pouvant conduire à la cécité et à la mort (Wikipedia)"
         }
       ],
-      "mealFrequency": "every_2_days",
-      "specificNeeds": "Prédateur ambush redoutable. Régime riche en protéines. Adultes se nourrissent moins fréquemment mais avec des proies plus grandes. Risque d'obésité avec alimentation excessive.",
+      "mealFrequency": "every_3_to_4_days",
+      "specificNeeds": "Prédateur à l'affût et vorace. Les adultes mangent moins souvent que les jeunes; saupoudrer les insectes de calcium et de vitamines (Lafeber, Exo Terra). Risque d'obésité en cas de suralimentation.",
       "sources": [
         {
           "type": "guide",
@@ -362,10 +330,10 @@
       "tempMax": 28,
       "humidityMin": 65,
       "humidityMax": 80,
-      "minSpaceSize": "15-20 litres minimum pour une femelle adulte (terrarium horizontal 45x45 cm)",
+      "minSpaceSize": "Environ 57-76 L (15-20 gallons US, terrarium horizontal) pour un adulte selon Reptiles Magazine; Exo Terra : 45 × 45 × 45 cm. Un espace modeste est préférable pour que la grenouille atteigne ses proies.",
       "lightNeeds": "Faible à modéré. Lumière à spectre complet pour l'absorption du calcium. Éviter la radiance thermique directe qui dessèche l'environnement.",
-      "activityEnrichment": "Substrat humide (8-10 cm de fibre de coco + sphaigne), repos prolongé. Hideout pour se blottir et s'enterrer. Bassin d'eau peu profond pour trempage.",
-      "hygieneNotes": "Peau perméable : eau déchlorée obligatoire. Substrat humide à 60-80% (poignée essorée libère l'eau sans goutter). Nettoyage régulier du bassin. Mains propres pour les manipulations rares.",
+      "activityEnrichment": "Substrat humide permettant de s'enterrer (la grenouille y reste enfouie la majeure partie du temps), cachette. Peu d'eau suffit (environ 1,3 cm de profondeur selon Reptiles Magazine).",
+      "hygieneNotes": "Substrat humide mais pas détrempé. Eau déchlorée. Température nocturne légèrement plus basse (18-24°C selon les sources). Éviter les sources de chaleur rayonnante qui dessèchent l'air.",
       "costEstimate": "faible",
       "sources": [
         {
@@ -384,7 +352,7 @@
       "generalBehavior": "Grenouille sédentaire et ambush vorace. S'enterre dans le substrat humide en laissant visible que ses yeux. Prédateur opportuniste qui ingère tout ce qui bouge à sa portée, y compris d'autres grenouilles. Peu active, elle passe la majeure partie du temps enfouie.",
       "sociability": "solitaire",
       "difficultyLevel": "débutant",
-      "compatibilityWithChildren": "Adapté aux débutants avec supervision minimale. Pas dangereuse pour l'humain, robuste.",
+      "compatibilityWithChildren": "Peu active, adaptée aux débutants, mais peut mordre douloureusement : manipulation à éviter.",
       "compatibilityWithOtherAnimals": "Solitaire stricte. Jambivore : dévorera toute autre grenouille ou petit animal.",
       "sources": [
         {
@@ -433,32 +401,16 @@
         }
       ]
     },
-    "legislation": {
-      "country": "FR",
-      "status": "allowed",
-      "details": {
-        "citesAppendix": null,
-        "euAnnex": null,
-        "permits": [],
-        "restrictions": []
-      },
-      "sources": [
-        {
-          "type": "official",
-          "url": "https://www.legifrance.gouv.fr/",
-          "title": "Legifrance - Droit français"
-        }
-      ]
-    },
+    "legislation": null,
     "reproduction": {
-      "season": "printemps-été",
+      "season": null,
       "gestationDays": null,
-      "incubationDays": 12,
-      "litterSizeMin": 100,
-      "litterSizeMax": 1000,
-      "sexualMaturityMonths": 24,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 2000,
+      "sexualMaturityMonths": 18,
       "breedingDifficulty": "modere",
-      "notes": "Reproduction saisonnière annuelle, printemps-été. Reproduction aquatique en réaction à la pluie (>55 mm en 5 jours) et humidité relative élevée (~99%). Environ 2 événements reproducteurs explosifs par saison. Œufs pondus en corps d'eau temporaires (mares, flaques). Éclosion en ~12 jours. Développement larvaire (têtard) puis métamorphose progressive. Maturité sexuelle vers 24 mois.",
+      "notes": "Les femelles pondent environ 2 000 œufs dans l'eau et les têtards éclosent en moins de deux semaines (Wikipedia). Maturité sexuelle à 18-24 mois; les mâles chantent et développent des callosités nuptiales sur les pouces (Lafeber). Humidité d'environ 90 % en période d'accouplement (Exo Terra).",
       "sources": [
         {
           "type": "guide",
@@ -469,6 +421,11 @@
           "type": "guide",
           "url": "https://lafeber.com/vet/basic-information-for-ornate-horned-frog/",
           "title": "Ornate Horned Frog - LaFeber Vet"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ceratophrys_ornata",
+          "title": "Wikipedia: Ceratophrys ornata"
         }
       ]
     }

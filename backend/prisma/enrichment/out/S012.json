@@ -7,31 +7,31 @@
         {
           "name": "Poissons (truite, anguille, épinoche)",
           "frequency": "quotidienne",
-          "notes": "Constituent 50-90% de l'alimentation naturelle selon les régions et saisons"
+          "notes": "Base du régime : l'espèce est majoritairement piscivore"
         },
         {
-          "name": "Amphibiens et crustacés (écrevisses)",
+          "name": "Amphibiens, crustacés (écrevisses), mollusques",
           "frequency": "régulière",
-          "notes": "Complément naturel du régime carnivore aquatique"
+          "notes": "Compléments naturels ; petits mammifères, oiseaux et insectes occasionnels"
         }
       ],
       "foodsToAvoid": [
         {
           "name": "Aliments transformés ou salés",
-          "reason": "Risque de toxicité et inadéquation nutritionnelle pour carnivore aquatique"
+          "reason": "Inadéquation nutritionnelle pour un carnivore aquatique"
         },
         {
-          "name": "Poissons traités ou contaminés",
-          "reason": "Risque de parasites et maladies transmissibles"
+          "name": "Poissons contaminés",
+          "reason": "Risque de parasites ; la loutre concentre les polluants de la chaîne alimentaire"
         }
       ],
       "mealFrequency": "daily",
-      "specificNeeds": "Ration quotidienne environ 800g. Protéines animales complètes, adaptation aux proies disponibles selon saison et écosystème aquatique.",
+      "specificNeeds": "Un adulte absorbe environ 1 kg de nourriture par jour ; le régime s'adapte aux proies disponibles selon la saison.",
       "sources": [
         {
           "type": "official",
-          "url": "https://www.auvergne-rhone-alpes.developpement-durable.gouv.fr/IMG/pdf/regime_alimentaire_pra_loutre_catiche_productions.pdf",
-          "title": "Régime alimentaire loutre - Gouvernement Auvergne-Rhône-Alpes"
+          "url": "https://www.grand-est.developpement-durable.gouv.fr/IMG/pdf/Fiche_espece_loutre_cle012a9f.pdf",
+          "title": "Fiche espèce Loutre d'Eurasie - Grand Est"
         },
         {
           "type": "guide",
@@ -41,129 +41,121 @@
       ]
     },
     "habitat": {
-      "habitatType": "aquarium",
-      "tempMin": 5,
-      "tempMax": 25,
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
       "humidityMin": null,
       "humidityMax": null,
-      "minSpaceSize": "Milieu aquatique naturel de grande taille (rivière, lac, étang) avec accès à terre pour abris diurnes",
-      "lightNeeds": "Cycles naturels jour/nuit, active crépusculaire et nocturne",
-      "activityEnrichment": "Zones de repos couverte par végétation dense, accès à l'eau pour nage et chasse, terriers ou grottes naturelles",
-      "hygieneNotes": "Eau courante ou bien renouvelée, zones de repos sèches et protégées, nettoyage régulier des zones de défécation",
+      "minSpaceSize": "Milieu aquatique naturel de grande taille (rivière, lac, étang) avec accès à la terre pour les gîtes diurnes",
+      "lightNeeds": "Cycles naturels jour/nuit, mœurs essentiellement nocturnes",
+      "activityEnrichment": "Zones de repos couvertes par une végétation dense, accès à l'eau pour nager et chasser",
+      "hygieneNotes": "Eau propre et bien renouvelée, zones de repos sèches et tranquilles, nettoyage régulier des zones de défécation",
       "costEstimate": "élevé",
       "sources": [
         {
           "type": "official",
           "url": "https://www.grand-est.developpement-durable.gouv.fr/IMG/pdf/Fiche_espece_loutre_cle012a9f.pdf",
-          "title": "Fiche espèce Loutre - Gouvernement Grand Est"
+          "title": "Fiche espèce Loutre d'Eurasie - Grand Est"
         },
         {
-          "type": "guide",
-          "url": "https://www.sfepm.org/sites/default/files/inline-files/FicheLoutreEurope_0.pdf",
-          "title": "Fiche Loutre d'Europe - SFEPM"
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/European_otter",
+          "title": "Wikipedia - Eurasian otter"
         }
       ]
     },
     "behavior": {
-      "generalBehavior": "Carnivore aquatique solitaire et territorial, plus sociale que ne l'indiquait la littérature classique. Capable de partager les sites de repos diurnes et de cohabitation avec congénères en contexte non-reproducteur.",
+      "generalBehavior": "Carnivore aquatique solitaire et fortement territorial, essentiellement nocturne. Elle marque son territoire avec ses épreintes.",
       "sociability": "solitaire",
       "difficultyLevel": "expert",
       "compatibilityWithChildren": "Dangereux : animal sauvage protégé, non domestique",
-      "compatibilityWithOtherAnimals": "Faible avec autres espèces ; intrasexuel territorial mais peut partager espace avec autres loutres en conditions spéciales",
+      "compatibilityWithOtherAnimals": "Territoriale, défendue surtout contre les individus du même sexe ; ne convient pas à la cohabitation",
       "sources": [
         {
-          "type": "wikipedia",
-          "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10143350/",
-          "title": "Sociospatial organization of Eurasian otter (Lutra lutra)"
+          "type": "official",
+          "url": "https://www.grand-est.developpement-durable.gouv.fr/IMG/pdf/Fiche_espece_loutre_cle012a9f.pdf",
+          "title": "Fiche espèce Loutre d'Eurasie - Grand Est"
         },
         {
-          "type": "guide",
-          "url": "https://iucnosgbull.org/Volume7/Hancox_1992.pdf",
-          "title": "IUCN/SSC Otter Specialist Group Bulletin"
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/European_otter",
+          "title": "Wikipedia - Eurasian otter"
         }
       ]
     },
     "health": {
       "diseases": [
         {
-          "name": "Parasitose (nématodes Aonchotheca putorii)",
-          "symptoms": "Gastrite, ulcères peptiques, perte d'appétit, troubles digestifs",
-          "prevention": "Traitement de l'eau douce, inspection régulière des proies, déparasitage préventif",
+          "name": "Parasitoses digestives (nématodes)",
+          "symptoms": "Perte d'appétit, troubles digestifs, amaigrissement",
+          "prevention": "Qualité de l'eau, inspection des proies, déparasitage vétérinaire",
           "whenToConsult": "À tout signe de difficultés digestives ou perte d'appétit persistante"
         },
         {
           "name": "Parasitose biliaire (Metorchis albidus)",
-          "symptoms": "Pathologie vésicule biliaire, ictère, troubles hépatiques",
-          "prevention": "Qualité de l'eau, hygiène des zones de repos, surveillance du bien-être général",
+          "symptoms": "Atteinte de la vésicule biliaire, troubles hépatiques",
+          "prevention": "Qualité de l'eau, contrôle de l'alimentation en poissons",
           "whenToConsult": "Dès symptômes de jaunisse ou comportement anormal"
-        },
-        {
-          "name": "Urolithiase (calculs urinaires)",
-          "symptoms": "Difficulté à uriner, sang dans les urines, douleur abdominale",
-          "prevention": "Hygiène de l'eau, alimentation variée équilibrée, eau régulièrement renouvelée",
-          "whenToConsult": "Immédiatement si difficultés mictionnelles ou hématurie"
         }
       ],
       "sources": [
         {
           "type": "vet",
-          "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10143350/",
-          "title": "Chewing Lice and Parasites in Eurasian Otter Populations - NCBI"
+          "url": "https://research.lstmed.ac.uk/en/publications/distribution-of-eurasian-otter-biliary-parasites-pseudamphistomum-2/",
+          "title": "Distribution of Eurasian otter biliary parasites"
         },
         {
-          "type": "official",
-          "url": "https://research.lstmed.ac.uk/en/publications/distribution-of-eurasian-otter-biliary-parasites-pseudamphistomum-2/",
-          "title": "Distribution of Eurasian otter biliary parasites - Liverpool School of Tropical Medicine"
+          "type": "vet",
+          "url": "https://public-pages-files-2025.frontiersin.org/journals/mammal-science/articles/10.3389/fmamm.2025.1673488/text",
+          "title": "Parasitic diseases of Lutrinae - systematic review (Frontiers in Mammal Science)"
         }
       ]
     },
     "legislation": {
       "country": "FR",
-      "status": "prohibited",
+      "status": "permit_required",
       "details": {
         "citesAppendix": "I",
-        "euAnnex": "IV",
+        "euAnnex": "II et IV (Directive Habitats 92/43/CEE)",
         "permits": [],
         "restrictions": [
-          "Espèce protégée depuis la Loi du 10 juillet 1976",
-          "Chasse interdite depuis 1972",
-          "CITES Annexe I : commerce international interdit sauf fins scientifiques non commerciales",
-          "Directive Habitats 92/43/CE Annexe IV : protection stricte",
-          "Bern Convention Annexe II"
+          "CITES Annexe I",
+          "Directive Habitats annexes II et IV, Convention de Berne annexe II",
+          "Espèce protégée en France (arrêté ministériel du 17 avril 1981, article 1)"
         ]
       },
       "sources": [
         {
           "type": "official",
-          "url": "https://www.ifaw.org/fr/news/victoire-pour-la-conservation-a-la-cites-certaines-especes-vulnerables-de-loutres-beneficient-du-plus-haut-niveau-de-protection-contre-leur-exploitation-commerciale",
-          "title": "CITES - Protection des loutres vulnérables"
+          "url": "https://www.grand-est.developpement-durable.gouv.fr/IMG/pdf/Fiche_espece_loutre_cle012a9f.pdf",
+          "title": "Fiche espèce Loutre d'Eurasie - Grand Est (statuts réglementaires)"
         },
         {
-          "type": "official",
-          "url": "https://cites.org",
-          "title": "Convention on International Trade in Endangered Species (CITES)"
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/European_otter",
+          "title": "Wikipedia - Eurasian otter (CITES Appendix I)"
         }
       ]
     },
     "reproduction": {
-      "season": "toute l'année",
+      "season": null,
       "gestationDays": 62,
       "incubationDays": null,
-      "litterSizeMin": 2,
+      "litterSizeMin": 1,
       "litterSizeMax": 4,
       "sexualMaturityMonths": 21,
       "breedingDifficulty": "avance",
-      "notes": "Breeders non-saisonniers. Système d'accouplement polygyne (mâles chevauchent 1-3 femelles). Mâles sans rôle parental direct. Reproduction en captivité extrêmement difficile due à territorialité complexe et espacements requis pour adaptation à vie amphibie.",
+      "notes": "Gestation de 60 à 64 jours, portée généralement de 2 loutrons (1 à 4). Maturité sexuelle à 18-24 mois. Les jeunes sont sevrés vers 8 mois et restent dépendants de la mère environ 13 mois. Le couple ne vit ensemble que quelques semaines lors du rut.",
       "sources": [
         {
-          "type": "guide",
-          "url": "https://iucnosgbull.org/Volume7/Hancox_1992.pdf",
-          "title": "Otter breeding difficulties in captivity - IUCN/SSC Bulletin"
+          "type": "official",
+          "url": "https://www.grand-est.developpement-durable.gouv.fr/IMG/pdf/Fiche_espece_loutre_cle012a9f.pdf",
+          "title": "Fiche espèce Loutre d'Eurasie - Grand Est"
         },
         {
           "type": "wikipedia",
-          "url": "https://public-pages-files-2025.frontiersin.org/journals/mammal-science/articles/10.3389/fmamm.2025.1673488/text",
-          "title": "Eurasian otter reproduction and behavior - Frontiers in Mammal Science"
+          "url": "https://en.wikipedia.org/wiki/European_otter",
+          "title": "Wikipedia - Eurasian otter"
         }
       ]
     }
@@ -176,26 +168,22 @@
         {
           "name": "Coléoptères et lépidoptères (insectes)",
           "frequency": "quotidienne",
-          "notes": "Principale source de nourriture en nature, 5-8 heures de recherche alimentaire par jour"
+          "notes": "Principale source de nourriture en nature ; recherche alimentaire de 5 à 8 heures par jour"
         },
         {
-          "name": "Petits reptiles, amphibiens, petits mammifères et œufs",
+          "name": "Autres invertébrés, lézards, serpents, scorpions, petits mammifères, œufs",
           "frequency": "régulière",
-          "notes": "Complément alimentaire naturel riche en protéines"
+          "notes": "Compléments alimentaires naturels riches en protéines"
         }
       ],
       "foodsToAvoid": [
         {
-          "name": "Insectes toxiques ou venimeux",
-          "reason": "Risque d'empoisonnement malgré immunité naturelle au venin"
-        },
-        {
           "name": "Aliments salés ou transformés",
-          "reason": "Inadéquation nutritionnelle pour insectivore naturel"
+          "reason": "Inadéquation nutritionnelle pour un insectivore"
         }
       ],
       "mealFrequency": "daily",
-      "specificNeeds": "Régime essentiellement insectivore avec variété de proies vivantes. En environnement aride, consomme aussi bulbes et tubercules pour l'hydratation.",
+      "specificNeeds": "Régime essentiellement insectivore avec variété de proies. Consomme aussi des végétaux pour ses besoins en eau.",
       "sources": [
         {
           "type": "wikipedia",
@@ -211,34 +199,34 @@
     },
     "habitat": {
       "habitatType": "enclos",
-      "tempMin": 15,
-      "tempMax": 28,
+      "tempMin": null,
+      "tempMax": null,
       "humidityMin": null,
       "humidityMax": null,
-      "minSpaceSize": "Enclos semi-aride ou savane rocailleuse, préférant terrains rocheux calcaires avec faible végétation",
-      "lightNeeds": "Diurne, activité forte pendant le jour, cycles naturels jour/nuit",
-      "activityEnrichment": "Zones de terrier/abri, enrichissement avec rochers et zones rocailleuses pour creusage naturel, stimulation sociale en groupe",
-      "hygieneNotes": "Hygiène naturelle, zones de défécation régulièrement nettoyées, eau propre accessible régulièrement",
+      "minSpaceSize": "Milieu d'origine : régions arides ouvertes, herbes courtes et arbustes, sol rocailleux souvent calcaire",
+      "lightNeeds": "Espèce diurne, cycles naturels jour/nuit",
+      "activityEnrichment": "Zones de terrier et d'abri, rochers et substrat à creuser, stimulation sociale en groupe",
+      "hygieneNotes": "Zones de défécation nettoyées régulièrement, eau propre accessible",
       "costEstimate": "moyen",
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://fr.wikipedia.org/wiki/Suricate",
-          "title": "Suricate - Wikipedia"
+          "url": "https://en.wikipedia.org/wiki/Meerkat",
+          "title": "Meerkat - Wikipedia"
         },
         {
           "type": "wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Meerkat",
-          "title": "Meerkat - Wikipedia"
+          "url": "https://fr.wikipedia.org/wiki/Suricate",
+          "title": "Suricate - Wikipedia"
         }
       ]
     },
     "behavior": {
-      "generalBehavior": "Hautement social et coopératif, vivant en groupes de 20-50 individus avec structures hiérarchiques complexes. Femelle dominante contrôle strictement la reproduction. Sophistication de 30 types de vocalisation pour communication sociale.",
+      "generalBehavior": "Très social, vit en groupes de 2 à 30 individus (jusqu'à 50 selon certaines sources) avec une hiérarchie de dominance ; seuls les dominants se reproduisent en général. Nombreuses vocalisations, dont des cris d'alarme spécifiques selon le prédateur.",
       "sociability": "grégaire",
-      "difficultyLevel": "débutant",
-      "compatibilityWithChildren": "Bon avec enfants si socialisé tôt, animal très tolérant et curieux",
-      "compatibilityWithOtherAnimals": "Excellente compatibilité au sein du groupe de suricates, potentiel agressif envers autres espèces de petits carnivores",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillé : animal non domestique décrit comme agressif, à l'odeur forte, pouvant transmettre la rage",
+      "compatibilityWithOtherAnimals": "Compatible au sein de son groupe ; ne pas faire cohabiter avec d'autres espèces",
       "sources": [
         {
           "type": "wikipedia",
@@ -255,64 +243,47 @@
     "health": {
       "diseases": [
         {
-          "name": "Tuberculose (TB - Mycobacterium tuberculosis)",
-          "symptoms": "Toux, dyspnée, perte de poids, faiblesse générale, signes respiratoires",
-          "prevention": "Température contrôlée, éviter stress thermique élevé, hygiène de l'enclos, isolement des animaux malades",
+          "name": "Tuberculose",
+          "symptoms": "Toux, difficultés respiratoires, perte de poids, faiblesse générale",
+          "prevention": "Hygiène de l'enclos, isolement des animaux malades, quarantaine des nouveaux arrivants",
           "whenToConsult": "À tout symptôme respiratoire ou toux persistante"
         },
         {
-          "name": "Rage (potentiel rarement actualisé)",
+          "name": "Rage",
           "symptoms": "Comportement agressif anormal, salivation excessive, paralysie progressive",
-          "prevention": "Vaccination préventive si risque élevé, éviter contact avec animaux sauvages infectés",
+          "prevention": "Éviter tout contact avec des animaux sauvages infectés ; avis vétérinaire sur la vaccination",
           "whenToConsult": "Immédiatement après exposition potentielle ou comportement agressif anormal"
         },
         {
-          "name": "Parasitose générale",
-          "symptoms": "Lethargie, perte d'appétit, troubles digestifs, pelage terne",
-          "prevention": "Déparasitage préventif régulier, hygiène de l'enclos, nourriture inspecté",
+          "name": "Parasitoses",
+          "symptoms": "Léthargie, perte d'appétit, troubles digestifs, pelage terne",
+          "prevention": "Déparasitage préventif vétérinaire, hygiène de l'enclos",
           "whenToConsult": "Lors de changement de comportement alimentaire ou d'apparence"
         }
       ],
       "sources": [
         {
           "type": "wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Meerkat",
-          "title": "Meerkat health - Wikipedia"
-        }
-      ]
-    },
-    "legislation": {
-      "country": "FR",
-      "status": "permit_required",
-      "details": {
-        "citesAppendix": null,
-        "euAnnex": null,
-        "permits": [
-          "Arrêté du 21 novembre 1997 - NAC à détention autorisée sur demande de certificat de détention"
-        ],
-        "restrictions": [
-          "Non CITES (Least Concern - IUCN)",
-          "Stable population naturelle",
-          "Détention légale en France comme NAC avec formalités administratives"
-        ]
-      },
-      "sources": [
+          "url": "https://fr.wikipedia.org/wiki/Suricate",
+          "title": "Suricate - Wikipedia (rage, tuberculose)"
+        },
         {
           "type": "wikipedia",
           "url": "https://en.wikipedia.org/wiki/Meerkat",
-          "title": "Meerkat - Wikipedia (IUCN status)"
+          "title": "Meerkat - Wikipedia"
         }
       ]
     },
+    "legislation": null,
     "reproduction": {
       "season": "toute l'année",
       "gestationDays": 65,
       "incubationDays": null,
       "litterSizeMin": 2,
       "litterSizeMax": 7,
-      "sexualMaturityMonths": 12,
-      "breedingDifficulty": "facile",
-      "notes": "Femelle dominante contrôle reproduction, mais autres femelles peuvent reproduire en années productives. Jusqu'à 4 portées par an possible. Pups sevrés à 12 semaines, indépendants. Adaptation excellente à captivité avec reproduction facile.",
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": null,
+      "notes": "Gestation de 60 à 70 jours, jusqu'à quatre portées par an pour la femelle dominante, qui contrôle la reproduction du groupe. Maturité sexuelle entre 1 et 3 ans selon les sources.",
       "sources": [
         {
           "type": "wikipedia",
@@ -322,7 +293,7 @@
         {
           "type": "wikipedia",
           "url": "https://en.wikipedia.org/wiki/Meerkat",
-          "title": "Meerkat reproduction - Wikipedia"
+          "title": "Meerkat - Wikipedia"
         }
       ]
     }
@@ -333,28 +304,24 @@
       "dietType": "carnivore",
       "recommendedFoods": [
         {
-          "name": "Petits rongeurs et insectes",
+          "name": "Rongeurs et insectes",
           "frequency": "quotidienne",
-          "notes": "Principale proie naturelle, adaptée à opportuniste carnivore"
+          "notes": "Proies naturelles de ce carnivore opportuniste"
         },
         {
           "name": "Poissons, amphibiens, reptiles et œufs",
           "frequency": "régulière",
-          "notes": "Complément naturel, technique particulière de casser les œufs contre rocher"
+          "notes": "Compléments naturels ; consomme aussi des fruits"
         }
       ],
       "foodsToAvoid": [
         {
           "name": "Aliments salés ou transformés",
-          "reason": "Inadéquation pour carnivore opportuniste"
-        },
-        {
-          "name": "Fruits très sucrés en excès",
-          "reason": "Bien que frugivore secondaire, excès peut causer déséquilibre nutritionnel"
+          "reason": "Inadéquation pour un carnivore opportuniste"
         }
       ],
       "mealFrequency": "daily",
-      "specificNeeds": "Carnivore opportuniste avec complément frugivore. Adaptation à variété large de proies selon disponibilité de l'habitat.",
+      "specificNeeds": "Carnivore opportuniste adapté à une large variété de proies selon l'habitat ; résistant au venin de nombreux serpents.",
       "sources": [
         {
           "type": "wikipedia",
@@ -365,29 +332,29 @@
     },
     "habitat": {
       "habitatType": "enclos",
-      "tempMin": 10,
-      "tempMax": 32,
+      "tempMin": null,
+      "tempMax": null,
       "humidityMin": null,
       "humidityMax": null,
-      "minSpaceSize": "Habitat humide ou semi-humide, préférant zones marécageuses/paludéennes près cours d'eau, rivières, lacs avec végétation dense",
-      "lightNeeds": "Diurne, active pendant le jour",
-      "activityEnrichment": "Accès à l'eau (étangs, bassins), zones rocheuses pour technique de cassage d'œufs, abris naturels, stimulation terrestraire",
-      "hygieneNotes": "Zones humides bien entretenues, accès à l'eau propre, zones de repos sèches, nettoyage régulier",
+      "minSpaceSize": "Milieu d'origine : zones marécageuses près des cours d'eau, rivières et lacs, avec végétation dense ; évite les déserts",
+      "lightNeeds": "Espèce diurne",
+      "activityEnrichment": "Accès à l'eau, végétation dense, abris naturels",
+      "hygieneNotes": "Accès à l'eau propre, zones de repos sèches, nettoyage régulier",
       "costEstimate": "moyen",
       "sources": [
         {
           "type": "wikipedia",
           "url": "https://en.wikipedia.org/wiki/Egyptian_mongoose",
-          "title": "Egyptian Mongoose habitat - Wikipedia"
+          "title": "Egyptian Mongoose - Wikipedia"
         }
       ]
     },
     "behavior": {
-      "generalBehavior": "Territorial et diurne. Peut être observé en individu solitaire, pairs ou petits groupes jusqu'à 5 individus. Mâles territoriaux cohabitant avec plusieurs femelles.",
+      "generalBehavior": "Diurne. Peut être solitaire, en couple ou en petits groupes (jusqu'à 5 individus). Les mâles sont territoriaux et partagent leur domaine avec plusieurs femelles.",
       "sociability": "semi-grégaire",
       "difficultyLevel": "intermédiaire",
-      "compatibilityWithChildren": "Modéré - animal sauvage, nécessite surveillance avec enfants",
-      "compatibilityWithOtherAnimals": "Potentiel prédateur pour petits animaux, cohabitation difficile avec autres espèces",
+      "compatibilityWithChildren": "Animal sauvage : surveillance stricte avec des enfants",
+      "compatibilityWithOtherAnimals": "Prédateur de petits animaux : cohabitation difficile avec d'autres espèces",
       "sources": [
         {
           "type": "wikipedia",
@@ -399,47 +366,18 @@
     "health": {
       "diseases": [
         {
-          "name": "Leishmaniose viscérale (potentielle)",
-          "symptoms": "Perte de poids, faiblesse, splénomégalie, anémie",
-          "prevention": "Prévention des piqûres de phlébotomes, hygiène de l'enclos, zones sans eaux stagnantes",
-          "whenToConsult": "À tout signe de perte de poids anormale ou faiblesse"
-        },
-        {
-          "name": "Parasitose générale",
+          "name": "Parasitoses",
           "symptoms": "Pelage terne, perte d'appétit, troubles digestifs",
-          "prevention": "Déparasitage préventif régulier, inspection des proies vivantes",
+          "prevention": "Déparasitage préventif vétérinaire, inspection des proies vivantes",
           "whenToConsult": "Lors de changement de comportement ou d'apparence"
         },
         {
-          "name": "Infections bactériennes ou fongiques",
+          "name": "Infections bactériennes ou fongiques de la peau",
           "symptoms": "Plaies infectées, alopécie localisée, démangeaisons anormales",
-          "prevention": "Hygiène des zones de repos, inspection régulière de la peau, traitement des plaies",
-          "whenToConsult": "À apparition de lésions cutanées ou signes d'infection"
+          "prevention": "Hygiène des zones de repos, inspection régulière de la peau, soin des plaies",
+          "whenToConsult": "À l'apparition de lésions cutanées ou de signes d'infection"
         }
       ],
-      "sources": [
-        {
-          "type": "wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Egyptian_mongoose",
-          "title": "Egyptian Mongoose health - Wikipedia"
-        }
-      ]
-    },
-    "legislation": {
-      "country": "FR",
-      "status": "permit_required",
-      "details": {
-        "citesAppendix": null,
-        "euAnnex": "V",
-        "permits": [
-          "Bern Convention Appendix III",
-          "EU Habitats Directive Annex V - protection régionale"
-        ],
-        "restrictions": [
-          "Protection régionale européenne, non CITES Annexe I/II",
-          "Arrêté du 21 novembre 1997 - détention soumise à formalités administratives de NAC"
-        ]
-      },
       "sources": [
         {
           "type": "wikipedia",
@@ -448,20 +386,21 @@
         }
       ]
     },
+    "legislation": null,
     "reproduction": {
-      "season": "saisonnier",
+      "season": "naissances de mi-avril à mi-août",
       "gestationDays": 77,
       "incubationDays": null,
       "litterSizeMin": 2,
       "litterSizeMax": 3,
       "sexualMaturityMonths": 24,
       "breedingDifficulty": "modere",
-      "notes": "Reproduction saisonnière printanière (février-juin). Femelles produisent 2-3 petits après 11 semaines de gestation. Petits dépendants jusqu'à 1 an. Mâles territoriaux. Reproduction modérément difficile en captivité, nécessite conditions naturelles de saison.",
+      "notes": "Gestation d'environ 11 semaines, 2 à 3 petits. Les jeunes restent dépendants de la femelle jusqu'à un an ou plus. Maturité sexuelle vers 2 ans chez les individus captifs.",
       "sources": [
         {
           "type": "wikipedia",
           "url": "https://en.wikipedia.org/wiki/Egyptian_mongoose",
-          "title": "Egyptian Mongoose reproduction - Wikipedia"
+          "title": "Egyptian Mongoose - Wikipedia"
         }
       ]
     }

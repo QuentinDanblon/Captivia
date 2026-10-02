@@ -1,0 +1,67 @@
+[
+  {
+    "speciesId": 2402307,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding.recommendedFoods: larves de moustique/daphnies et petits poissons vivants remplacés par insectes et aliments vivants/congelés (seriouslyfish, aquariadise, Wikipedia); fréquences en anglais normalisées",
+      "habitat: '120+ L pour un couple' retiré (espèce à garder seule); 'dGH 5-15' retiré; 'saute jusqu'à 2 m' -> très bonne sauteuse; pH 6,0-7,2 -> 6,0-7,5 (seriouslyfish)",
+      "behavior.generalBehavior: 'saute jusqu'à 2 mètres' retiré (chiffre non fiable: sources 1,8 m à 'plusieurs mètres'); compatibilités reformulées (Wikipedia)",
+      "health: 'parasites externes (isopodes, copépodes)' non confirmé -> remplacé par infections fongiques (aquariadise: fin rot et mycoses liés à la qualité d'eau et aux blessures de saut)",
+      "reproduction: incubationDays 7 -> null (3-4 j seriouslyfish vs ~7 j Wikipedia), litterSize 100-100 -> min 100/max null; 'pH 6.0-6.5, abaissement du niveau d'eau' retiré (non confirmé)"
+    ],
+    "removed": [
+      "legislation (source legifrance.gouv.fr = page d'accueil générique, aucune mention de l'espèce; statut non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2422905,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: comparaison au crapaud américain retirée; 'toxiques' retiré; ontario.ca ne donne pas de régime, Wikipedia ajoutée",
+      "behavior: 'strictement nocturne... bêlement désolé' reformulé; compatibilité enfants: 'robuste' retiré (toxines cutanées, Wikipedia)",
+      "reproduction: incubationDays 5 -> null (2-7 j Wikipedia, ~7 j ontario.ca); litterSizeMin 7000 -> null (Wikipedia: 'up to 7 000-10 000'); sexualMaturityMonths 12 -> null (1 saison à 3 ans); têtards 30-40 j -> 40-60 j (ontario.ca); 'cordons gélatineux' retiré"
+    ],
+    "removed": [
+      "source https://www.naherp.com/viewrecord.php?r_id=3847 (403)",
+      "habitat: tempMin/Max 21-24, humidité 50-80, terrarium 60x40 -> null (non confirmés: sources ne décrivent que l'habitat naturel); 'hibernation à 1 m' retiré; source naherp (403)",
+      "legislation (source legifrance.gouv.fr = page d'accueil générique, aucune mention de l'espèce; statut non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2424454,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: fréquences en anglais normalisées; 'adultes toutes les 2 semaines' nuancé (Exo Terra: 3-4 jours); 'insectes trop fréquemment' remplacé par risque alimentation à base de souris (Wikipedia: cécité)",
+      "habitat.minSpaceSize: '15-20 litres' (gallons convertis à tort en litres) -> 57-76 L; '8-10 cm fibre de coco + sphaigne' et 'humidité 60-80%' retirés (non confirmés)",
+      "behavior.compatibilityWithChildren: 'pas dangereuse' retiré (Wikipedia: morsures douloureuses)",
+      "reproduction: litter 100-1000 -> max 2000 (Wikipedia ~2000), min null; maturité 24 -> 18 (lafeber 18-24 mois); incubation 12 j -> null (<2 semaines); 'pluie >55 mm / 2 événements' retirés; saison null (non confirmée)"
+    ],
+    "removed": [
+      "legislation (source legifrance.gouv.fr = page d'accueil générique, aucune mention de l'espèce; statut non confirmé)"
+    ],
+    "confidence": "medium"
+  }
+]
