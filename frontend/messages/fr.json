@@ -639,5 +639,22 @@
     "openDataMore": "Voir les sources et licences",
     "openDataTitle": "Des données ouvertes",
     "title": "Transparence et affiliation"
+  },
+  "seo": {
+    "accountDeletionDescription": "Comment supprimer votre compte Captivia et vos données personnelles, dans l'application ou par e-mail.",
+    "accountDeletionTitle": "Suppression de compte",
+    "animalsTitle": "Mes animaux",
+    "defaultTitle": "Captivia – Le guide de la faune",
+    "description": "Captivia accompagne les propriétaires d'animaux domestiques et de NAC au quotidien : fiches espèces sourcées, santé, alimentation, habitat et suivi de vos animaux.",
+    "forgotPasswordTitle": "Mot de passe oublié",
+    "loginTitle": "Connexion",
+    "registerTitle": "Inscription",
+    "resetPasswordTitle": "Réinitialisation du mot de passe",
+    "settingsTitle": "Paramètres",
+    "speciesDescription": "{name} : fiche pratique complète sur l'habitat, l'alimentation, le comportement, la santé et la législation.",
+    "speciesFallbackDescription": "Fiche pratique d'une espèce : habitat, alimentation, comportement, santé et législation.",
+    "speciesTitle": "Fiche espèce",
+    "storeDescription": "Matériel, alimentation et accessoires recommandés selon les besoins de chaque espèce, avec des liens d'affiliation clairement signalés.",
+    "storeTitle": "Magasin"
   }
 }

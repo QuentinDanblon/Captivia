@@ -21,7 +21,7 @@ export function getLegalContent(locale: string): LegalContent {
 export function legalMetadata(locale: string, key: LegalDocKey): Metadata {
   const doc = getLegalContent(locale)[key];
   return {
-    title: `${doc.title} – ${LEGAL.serviceName}`,
+    title: doc.title,
     description: doc.description,
   };
 }
