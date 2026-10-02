@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { api, type Animal } from '@/lib/api';
+import { localDayKey } from '@/lib/dates';
+import { isPremiumLocked } from './sectionErrors';
 
 interface Props {
   animal: Animal;
@@ -21,15 +23,14 @@ export default function CarnetExportSection({ animal, token, onToast }: Props) {
       const blobUrl = await api.exportCarnet(animal.id, token);
       const a = document.createElement('a');
       a.href = blobUrl;
-      a.download = `carnet-${animal.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `carnet-${animal.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${localDayKey(new Date())}.json`;
       document.body.appendChild(a);
       a.click();
       a.remove();
       onToast(t('animals.carnet.exportSuccess'));
     } catch (err) {
       console.error('Error exporting carnet:', err);
-      const msg = err instanceof Error ? err.message : 'Erreur';
-      if (msg.toLowerCase().includes('forbidden') || msg.toLowerCase().includes('403') || msg.toLowerCase().includes('premium')) {
+      if (isPremiumLocked(err)) {
         onToast(t('animals.carnet.premiumRequired'));
       } else {
         onToast(t('animals.carnet.exportError'));

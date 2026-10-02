@@ -268,7 +268,14 @@
       "illness": "Esteja atento a sinais de doença"
     },
     "medicationUnitPlaceholder": "ml / mg / gotas…",
-    "speciesRequired": "Selecione uma espécie"
+    "speciesRequired": "Selecione uma espécie",
+    "sectionErrors": {
+      "loadFailed": "Não foi possível carregar estes dados. Tenta novamente mais tarde.",
+      "saveFailed": "Não foi possível guardar. Tenta novamente.",
+      "invalid": "Algumas informações são inválidas. Verifica o formulário.",
+      "notFound": "Este elemento já não existe. Recarrega a página.",
+      "unavailable": "O serviço está temporariamente indisponível. Tenta novamente dentro de instantes."
+    }
   },
   "attribution": {
     "wikipediaPrefix": "Fonte:",
@@ -334,7 +341,10 @@
     "status": "Estado",
     "healthTitle": "Descrição",
     "contacts": "Veterinários e contactos",
-    "noContacts": "Nenhum contacto registado."
+    "noContacts": "Nenhum contacto registado.",
+    "share": "Partilhar a caderneta",
+    "shareHint": "A caderneta é enviada como ficheiro HTML, que qualquer navegador abre e imprime: ideal para o teu veterinário.",
+    "shareError": "Não foi possível partilhar a caderneta. Tenta novamente."
   },
   "common": {
     "account": "Conta",

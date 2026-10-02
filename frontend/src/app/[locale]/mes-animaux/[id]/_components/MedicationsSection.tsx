@@ -5,7 +5,9 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { api, type Animal, type Medication } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
+import { isPremiumLocked, sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
+import { localDayKey } from '@/lib/dates';
 
 interface Props {
   animal: Animal;
@@ -54,7 +56,7 @@ export default function MedicationsSection({ animal, token, medications, loading
     setMedicationUnit('');
     setMedicationFrequency('daily');
     setMedicationIntervalHours(8);
-    setMedicationStartDate(new Date().toISOString().slice(0, 10));
+    setMedicationStartDate(localDayKey(new Date()));
     setMedicationEndDate('');
     setMedicationNotes('');
     setMedicationFormError('');
@@ -85,12 +87,11 @@ export default function MedicationsSection({ animal, token, medications, loading
       await onRefresh();
     } catch (err) {
       console.error('Error saving medication:', err);
-      const msg = err instanceof Error ? err.message : 'Erreur';
-      if (msg.toLowerCase().includes('forbidden') || msg.toLowerCase().includes('403') || msg.toLowerCase().includes('premium')) {
+      if (isPremiumLocked(err)) {
         onLocked();
         setShowMedicationModal(false);
       } else {
-        setMedicationFormError(msg);
+        setMedicationFormError(t(sectionErrorKey(err)));
       }
     } finally {
       setMedicationSubmitting(false);

@@ -90,7 +90,9 @@ const SUGGESTED_TYPE_LABEL_IDS: Record<string, string> = {
 };
 const SUGGESTED_NOTIFICATION_TYPES = Object.keys(SUGGESTED_TYPE_LABEL_IDS);
 
+import { authFetch } from '@/lib/api';
 import { API_URL } from '@/lib/config';
+import { localDayKey } from '@/lib/dates';
 import {
   fetchVapidPublicKey,
   resolvePushStatus,
@@ -202,7 +204,7 @@ export default function NotificationsPreferencesPage() {
     if (!authToken) return;
 
     try {
-      const response = await fetch(
+      const response = await authFetch(
         `${getApiBase()}/users/me/notification-preferences`,
         {
           headers: { Authorization: `Bearer ${authToken}` },
@@ -224,7 +226,7 @@ export default function NotificationsPreferencesPage() {
   const checkSubscription = async () => {
     const key = await fetchVapidPublicKey();
     setPushKey(key);
-    setPushStatus(await resolvePushStatus(key));
+    setPushStatus(await resolvePushStatus(key, authTokenOrNull()));
   };
 
   const authTokenOrNull = () =>
@@ -291,7 +293,7 @@ export default function NotificationsPreferencesPage() {
     };
 
     try {
-      const response = await fetch(
+      const response = await authFetch(
         `${getApiBase()}/users/me/notification-preferences`,
         {
           method: 'PATCH',
@@ -350,7 +352,7 @@ export default function NotificationsPreferencesPage() {
     };
 
     try {
-      const response = await fetch(
+      const response = await authFetch(
         `${getApiBase()}/users/me/notification-preferences`,
         {
           method: 'PATCH',
@@ -862,7 +864,7 @@ export default function NotificationsPreferencesPage() {
                                   const rec = e.target.value as RecurrenceKind;
                                   updateTypeSchedule(type, {
                                     recurrence: rec,
-                                    date: rec === 'once' ? schedule.date ?? new Date().toISOString().slice(0, 10) : undefined,
+                                    date: rec === 'once' ? schedule.date ?? localDayKey(new Date()) : undefined,
                                     weekDay: rec === 'weekly' ? (schedule.weekDay ?? new Date().getDay()) : undefined,
                                     dayOfMonth: rec === 'monthly' ? (schedule.dayOfMonth ?? new Date().getDate()) : undefined,
                                     intervalHours: rec === 'hourly' ? (schedule.intervalHours ?? 2) : undefined,
@@ -884,7 +886,7 @@ export default function NotificationsPreferencesPage() {
                                 </span>
                                 <input
                                   type="date"
-                                  value={schedule.date ?? new Date().toISOString().slice(0, 10)}
+                                  value={schedule.date ?? localDayKey(new Date())}
                                   onChange={(e) => updateTypeSchedule(type, { date: e.target.value })}
                                   className="px-2 py-1.5 border rounded-lg dark:bg-gray-700 dark:text-white text-sm"
                                 />

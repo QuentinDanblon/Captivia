@@ -14,7 +14,7 @@ type Status = 'verifying' | 'success' | 'invalid' | 'missing';
 function VerifyEmailContent() {
   const t = useTranslations('emailVerification');
   const searchParams = useSearchParams();
-  const { user, setUser } = useAuth();
+  const { user, token: authToken, setUser } = useAuth();
   // Le token est gardé en state puis retiré de l'URL (historique, Referer, Sentry).
   const [token] = useState<string | null>(() => searchParams.get('token'));
   const [status, setStatus] = useState<Status>(token ? 'verifying' : 'missing');
@@ -43,12 +43,22 @@ function VerifyEmailContent() {
   }, [token]);
 
   useEffect(() => {
-    if (status === 'success' && user && user.emailVerified !== true) {
-      const next = { ...user, emailVerified: true };
-      setUser(next);
-      writeStorage(USER_KEY, JSON.stringify(next));
-    }
-  }, [status, user, setUser]);
+    // Le lien peut concerner un AUTRE compte que celui connecté ici : on recharge le profil au
+    // lieu de forcer `emailVerified` (le backend fait foi).
+    if (status !== 'success' || !authToken) return;
+    let cancelled = false;
+    api
+      .getProfile(authToken)
+      .then((fresh: unknown) => {
+        if (cancelled || !fresh || typeof fresh !== 'object' || Array.isArray(fresh)) return;
+        setUser(fresh as NonNullable<typeof user>);
+        writeStorage(USER_KEY, JSON.stringify(fresh));
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [status, authToken, setUser]);
 
   const message =
     status === 'verifying'

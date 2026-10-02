@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { animalCarnetPath, animalDetailPath } from '@/lib/platform';
-import { api, type Animal as ApiAnimal, type SpeciesRoutineTemplate } from '@/lib/api';
+import { api, ApiError, type Animal as ApiAnimal, type SpeciesRoutineTemplate } from '@/lib/api';
 import { Link } from '@/i18n/navigation';
 import Modal from '@/components/ui/Modal';
 
@@ -30,7 +30,7 @@ function MyAnimalsPageContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { user, token, isLoading: authLoading, logout } = useAuth();
+  const { user, token, isLoading: authLoading } = useAuth();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -148,12 +148,10 @@ function MyAnimalsPageContent() {
       await fetchAnimals();
       setToast(t('animals.animalUpdated'));
     } catch (err) {
-      const msg = (err instanceof Error ? err.message : String(err)).toLowerCase();
-      if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('forbidden') || msg.includes('403') || msg.includes('401')) {
-        logout();
-        router.push('/login');
-        return;
-      }
+      // Session perdue : lib/api a déjà tenté le refresh et émis `auth:logout` si elle est
+      // révoquée (la page redirige alors). Jamais de logout() ici : ni sur 403, ni sur un
+      // échec passager du backend.
+      if (err instanceof ApiError && err.status === 401) return;
       console.error('Error updating photo:', err);
       setToast(t('animals.errorAdding'));
     } finally {
@@ -269,12 +267,10 @@ function MyAnimalsPageContent() {
       setShowAddModal(false);
       resetForm();
     } catch (error) {
-      const msg = (error instanceof Error ? error.message : String(error)).toLowerCase();
-      if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('forbidden') || msg.includes('403') || msg.includes('401')) {
-        logout();
-        router.push('/login');
-        return;
-      }
+      // Session perdue : lib/api a déjà tenté le refresh et émis `auth:logout` si elle est
+      // révoquée (la page redirige alors). Jamais de logout() ici : ni sur 403, ni sur un
+      // échec passager du backend.
+      if (error instanceof ApiError && error.status === 401) return;
       console.error('Error creating animal:', error);
       setFormError(error instanceof Error ? error.message : t('animals.errorAdding'));
     } finally {
@@ -363,12 +359,10 @@ function MyAnimalsPageContent() {
       resetForm();
       fetchAnimals();
     } catch (error) {
-      const msg = (error instanceof Error ? error.message : String(error)).toLowerCase();
-      if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('forbidden') || msg.includes('403') || msg.includes('401')) {
-        logout();
-        router.push('/login');
-        return;
-      }
+      // Session perdue : lib/api a déjà tenté le refresh et émis `auth:logout` si elle est
+      // révoquée (la page redirige alors). Jamais de logout() ici : ni sur 403, ni sur un
+      // échec passager du backend.
+      if (error instanceof ApiError && error.status === 401) return;
       console.error('Error adding routine templates:', error);
       setTemplatesError(error instanceof Error ? error.message : t('animals.errorAdding'));
     } finally {
@@ -458,10 +452,12 @@ function MyAnimalsPageContent() {
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {animals.map((animal) => (
-              <Link
+              // Carte en <article> : le nom porte un lien étiré (after:absolute inset-0) qui rend toute
+              // la carte cliquable ; les boutons (photo) et le lien « carnet » sont des frères en
+              // relative z-10, jamais imbriqués dans un lien (HTML invalide, clics ambigus).
+              <article
                 key={animal.id}
-                href={animalDetailPath(animal.id)}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow block"
+                className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow block"
               >
                 <div className="relative aspect-video bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-4xl font-bold overflow-hidden group">
                   {photoUploading && photoAnimalId === animal.id ? (
@@ -482,7 +478,7 @@ function MyAnimalsPageContent() {
                       <button
                         type="button"
                         onClick={(e) => handleCardPhotoClick(e, animal.id)}
-                        className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 [@media(hover:none)]:inset-auto [@media(hover:none)]:bottom-2 [@media(hover:none)]:right-2 text-white text-sm font-medium"
+                        className="absolute inset-0 z-10 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 [@media(hover:none)]:inset-auto [@media(hover:none)]:bottom-2 [@media(hover:none)]:right-2 text-white text-sm font-medium"
                         title={t('animals.changePhoto')}
                       >
                         <span className="px-3 py-1.5 bg-white/90 text-gray-800 rounded-lg">
@@ -494,7 +490,12 @@ function MyAnimalsPageContent() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
-                    {animal.name}
+                    <Link
+                      href={animalDetailPath(animal.id)}
+                      className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-emerald-500 focus-visible:after:rounded-xl"
+                    >
+                      {animal.name}
+                    </Link>
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
                     {animal.speciesName || `Species ID: ${animal.speciesId}`}
@@ -537,19 +538,14 @@ function MyAnimalsPageContent() {
                       </span>
                     )}
                   </div>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      router.push(animalCarnetPath(animal.id));
-                    }}
-                    className="mt-4 text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:underline"
+                  <Link
+                    href={animalCarnetPath(animal.id)}
+                    className="relative z-10 mt-4 inline-block text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:underline"
                   >
                     {t('carnetPrint.title')}
-                  </button>
+                  </Link>
                 </div>
-              </Link>
+              </article>
             ))}
             </div>
           </>

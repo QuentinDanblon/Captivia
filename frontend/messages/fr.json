@@ -268,7 +268,14 @@
       "illness": "Surveillez les signes de maladie"
     },
     "medicationUnitPlaceholder": "ml / mg / gouttes…",
-    "speciesRequired": "Veuillez sélectionner une espèce"
+    "speciesRequired": "Veuillez sélectionner une espèce",
+    "sectionErrors": {
+      "loadFailed": "Impossible de charger ces données. Réessayez plus tard.",
+      "saveFailed": "L'enregistrement a échoué. Réessayez.",
+      "invalid": "Certaines informations sont invalides. Vérifiez le formulaire.",
+      "notFound": "Cet élément n'existe plus. Rechargez la page.",
+      "unavailable": "Le service est momentanément indisponible. Réessayez dans quelques instants."
+    }
   },
   "attribution": {
     "wikipediaPrefix": "Source :",
@@ -334,7 +341,10 @@
     "status": "Statut",
     "healthTitle": "Intitulé",
     "contacts": "Vétérinaires et contacts",
-    "noContacts": "Aucun contact enregistré."
+    "noContacts": "Aucun contact enregistré.",
+    "share": "Partager le carnet",
+    "shareHint": "Le carnet est envoyé sous forme de fichier HTML, lisible et imprimable dans n'importe quel navigateur : idéal pour votre vétérinaire.",
+    "shareError": "Le partage du carnet a échoué. Réessayez."
   },
   "common": {
     "account": "Compte",

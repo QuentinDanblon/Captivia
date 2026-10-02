@@ -3,11 +3,13 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { API_URL } from '@/lib/config';
 import { isNative, tokenStorage } from '@/lib/platform';
+import { ApiError, api } from '@/lib/api';
 import {
   REFRESH_TOKEN_KEY,
   TOKEN_KEY,
   TOKEN_REFRESHED_EVENT,
   USER_KEY,
+  isJwtExpired,
   readStorage,
   refreshAccessToken,
   removeStorage,
@@ -74,23 +76,6 @@ function parseStoredUser(raw: string): User | null {
   return null;
 }
 
-/**
- * Lit la claim `exp` (secondes) d'un JWT sans vérifier la signature (le backend reste l'autorité).
- * Un jeton illisible ou sans `exp` n'est PAS considéré comme expiré.
- */
-function isJwtExpired(token: string): boolean {
-  try {
-    const payload = token.split('.')[1];
-    if (!payload) return false;
-    const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
-    const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4);
-    const claims = JSON.parse(atob(padded)) as { exp?: unknown };
-    return typeof claims.exp === 'number' && claims.exp * 1000 <= Date.now();
-  } catch {
-    return false;
-  }
-}
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -111,14 +96,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           fetch(`${API_URL}/auth/me`, { headers: { Authorization: `Bearer ${t}` } });
         let res = await fetchMe(storedToken);
         // W1-01 : access token expiré → une tentative de rafraîchissement avant de déconnecter.
-        if (res.status === 401 && allowRefresh && readStorage(REFRESH_TOKEN_KEY)) {
-          const refreshed = await refreshAccessToken(storedToken);
+        // Un jeton repris d'un autre onglet (`reused`) puis refusé déclenche un vrai refresh, une fois.
+        let force = false;
+        for (let attempt = 0; attempt < 2; attempt++) {
+          if (res.status !== 401 || !allowRefresh || !readStorage(REFRESH_TOKEN_KEY)) break;
+          const refreshed = await refreshAccessToken(storedToken, { force });
           if (!refreshed.ok && !refreshed.revoked) return;
-          if (refreshed.ok) {
-            storedToken = refreshed.accessToken;
-            setToken(storedToken);
-            res = await fetchMe(storedToken);
-          }
+          if (!refreshed.ok) break;
+          storedToken = refreshed.accessToken;
+          setToken(storedToken);
+          res = await fetchMe(storedToken);
+          if (!refreshed.reused) break;
+          force = true;
         }
         // Session révoquée / expirée côté serveur. Surtout pas sur 403 ni sur erreur réseau.
         if (res.status === 401) {
@@ -221,6 +210,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener(TOKEN_REFRESHED_EVENT, onRefreshed);
   }, []);
 
+  useEffect(() => {
+    // Synchronisation entre onglets : rotation (nouveau jeton) ou déconnexion (clé vidée) faite
+    // dans un autre onglet. `storage` n'est jamais émis dans l'onglet qui a écrit.
+    const onStorage = (event: StorageEvent) => {
+      // `key === null` : localStorage.clear() dans un autre onglet.
+      if (event.key !== null && event.key !== TOKEN_KEY) return;
+      const next = event.key === null ? null : event.newValue;
+      if (next) {
+        setToken(next);
+      } else {
+        setToken(null);
+        setUser(null);
+      }
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
   const login = (newToken: string, newUser: User, newRefreshToken?: string) => {
     setToken(newToken);
     setUser(newUser);
@@ -250,13 +257,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logoutAll = async () => {
     const current = readStorage(TOKEN_KEY) ?? token;
     if (current) {
-      const res = await fetch(`${API_URL}/auth/logout-all`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${current}` },
-      });
-      // 401 : la session était déjà révoquée → on vide quand même la session locale.
-      if (!res.ok && res.status !== 401) {
-        throw new Error(`HTTP ${res.status}`);
+      // Libère d'abord l'abonnement push de ce navigateur, tant que la session est valide.
+      await unsubscribeFromPush(current).catch(() => false);
+      // Le refresh token est lu AVANT l'appel : un refresh révoqué le retire du stockage.
+      const refreshToken = readStorage(REFRESH_TOKEN_KEY);
+      try {
+        // Via safeFetch : access token expiré → refresh puis rejeu (sinon rien n'était révoqué).
+        await api.logoutAll(readStorage(TOKEN_KEY) ?? current);
+      } catch (err) {
+        if (err instanceof ApiError && err.status === 401) {
+          // Session déjà perdue côté serveur : on révoque au moins celle de cet appareil et on
+          // signale l'échec (les autres appareils n'ont pas pu être déconnectés).
+          revokeRefreshToken(refreshToken);
+          clearSession();
+        }
+        throw err;
       }
     }
     clearSession();

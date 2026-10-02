@@ -29,6 +29,17 @@ jest.mock('@/contexts/AuthContext', () => ({ useAuth: () => mockAuth }));
 
 jest.mock('next/navigation', () => ({ useParams: () => ({ id: 'animal-1' }) }));
 
+let mockNative = false;
+jest.mock('@/lib/platform', () => ({
+  ...jest.requireActual('@/lib/platform'),
+  isNative: () => mockNative,
+}));
+const shareCarnetFile = jest.fn();
+jest.mock('@/lib/carnet-share', () => ({
+  ...jest.requireActual('@/lib/carnet-share'),
+  shareCarnetFile: (...args: unknown[]) => shareCarnetFile(...args),
+}));
+
 import CarnetPrintPage from '../[locale]/mes-animaux/[id]/carnet/page';
 
 const FUTURE = '2099-01-01T00:00:00.000Z';
@@ -160,6 +171,52 @@ describe('carnet imprimable', () => {
     expect(css).toContain('size:A4');
     expect(css).toContain('@media print');
     print.mockRestore();
+  });
+
+  describe('app native (revue frontend, constat 8)', () => {
+    beforeEach(() => {
+      mockNative = true;
+      shareCarnetFile.mockReset().mockResolvedValue(undefined);
+    });
+    afterEach(() => {
+      mockNative = false;
+    });
+
+    it('remplace « Imprimer » par « Partager le carnet » : fichier HTML autonome partagé', async () => {
+      const print = jest.spyOn(window, 'print').mockImplementation(() => {});
+      render(<CarnetPrintPage />);
+
+      const button = await screen.findByRole('button', { name: 'carnetPrint.share' });
+      expect(screen.queryByRole('button', { name: 'carnetPrint.print' })).not.toBeInTheDocument();
+      expect(screen.getByText('carnetPrint.shareHint')).toBeInTheDocument();
+      fireEvent.click(button);
+
+      await waitFor(() => expect(shareCarnetFile).toHaveBeenCalledTimes(1));
+      const arg = shareCarnetFile.mock.calls[0][0] as { fileName: string; html: string; title: string };
+      expect(arg.fileName).toMatch(/^carnet-rango-\d{4}-\d{2}-\d{2}\.html$/);
+      expect(arg.title).toBe('carnetPrint.title - Rango');
+      expect(arg.html).toContain('<!doctype html>');
+      expect(arg.html).toContain('size:A4');
+      expect(arg.html).toContain('250268500123456');
+      expect(print).not.toHaveBeenCalled();
+      print.mockRestore();
+    });
+
+    it('échec du partage : message d’erreur ; fermeture de la feuille : silencieux', async () => {
+      jest.spyOn(console, 'error').mockImplementation(() => {});
+      shareCarnetFile.mockRejectedValueOnce(new Error('Share canceled'));
+      render(<CarnetPrintPage />);
+      const button = await screen.findByRole('button', { name: 'carnetPrint.share' });
+
+      fireEvent.click(button);
+      await waitFor(() => expect(button).not.toBeDisabled());
+      expect(screen.queryByText('carnetPrint.shareError')).not.toBeInTheDocument();
+
+      shareCarnetFile.mockRejectedValueOnce(new Error('disk full'));
+      fireEvent.click(button);
+      expect(await screen.findByText('carnetPrint.shareError')).toBeInTheDocument();
+      (console.error as jest.Mock).mockRestore();
+    });
   });
 
   it('affiche des états vides lisibles sans données', async () => {

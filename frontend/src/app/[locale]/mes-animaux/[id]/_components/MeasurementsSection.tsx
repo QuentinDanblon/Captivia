@@ -5,8 +5,10 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { api, type Animal, type AnimalMeasurement } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
+import { isPremiumLocked, sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
 import WeightChart from '@/components/WeightChart';
+import { localDayKey } from '@/lib/dates';
 
 interface Props {
   animal: Animal;
@@ -25,7 +27,7 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
   const { formatDate } = useFormatters();
   const [showMeasurementModal, setShowMeasurementModal] = useState(false);
   const [editingMeasurementId, setEditingMeasurementId] = useState<string | null>(null);
-  const [measurementDate, setMeasurementDate] = useState(new Date().toISOString().slice(0, 10));
+  const [measurementDate, setMeasurementDate] = useState(localDayKey(new Date()));
   const [measurementWeight, setMeasurementWeight] = useState('');
   const [measurementHeight, setMeasurementHeight] = useState('');
   const [measurementNotes, setMeasurementNotes] = useState('');
@@ -38,7 +40,7 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
   const openMeasurementModalForCreate = () => {
     if (!user?.isPremium || measurementsLocked) return;
     setEditingMeasurementId(null);
-    setMeasurementDate(new Date().toISOString().slice(0, 10));
+    setMeasurementDate(localDayKey(new Date()));
     setMeasurementWeight('');
     setMeasurementHeight('');
     setMeasurementNotes('');
@@ -49,7 +51,7 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
   const openMeasurementModalForEdit = (measurement: AnimalMeasurement) => {
     if (!user?.isPremium || measurementsLocked) return;
     setEditingMeasurementId(measurement.id);
-    setMeasurementDate(measurement.measuredAt ? measurement.measuredAt.slice(0, 10) : new Date().toISOString().slice(0, 10));
+    setMeasurementDate(measurement.measuredAt ? measurement.measuredAt.slice(0, 10) : localDayKey(new Date()));
     setMeasurementWeight(typeof measurement.weightKg === 'number' ? String(measurement.weightKg) : '');
     setMeasurementHeight(typeof measurement.heightCm === 'number' ? String(measurement.heightCm) : '');
     setMeasurementNotes(measurement.notes || '');
@@ -90,12 +92,11 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
       await onRefresh();
     } catch (err) {
       console.error('Error saving measurement:', err);
-      const msg = err instanceof Error ? err.message : 'Erreur';
-      if (msg.toLowerCase().includes('forbidden') || msg.toLowerCase().includes('403') || msg.toLowerCase().includes('premium')) {
+      if (isPremiumLocked(err)) {
         onLocked();
         setShowMeasurementModal(false);
       } else {
-        setMeasurementFormError(msg);
+        setMeasurementFormError(t(sectionErrorKey(err)));
       }
     } finally {
       setMeasurementSubmitting(false);

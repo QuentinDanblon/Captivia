@@ -18,7 +18,6 @@
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -27,6 +26,11 @@ const OUT = path.join(ROOT, 'out');
 const OVERLAY_DIR = path.join(ROOT, 'mobile', 'app');
 const APP_DIR = path.join(ROOT, 'src', 'app');
 const JOURNAL = path.join(ROOT, 'mobile', '.build-journal.json');
+/**
+ * Sauvegarde des fichiers écartés : dans le dépôt (gitignoré), pas dans os.tmpdir() que le
+ * système peut purger pendant un long build ou entre un kill -9 et la reprise.
+ */
+const STASH = path.join(ROOT, 'mobile', '.build-stash');
 
 /** Fichiers web écartés le temps du build mobile (chemins relatifs à frontend/). */
 const EXCLUDED = [
@@ -84,20 +88,38 @@ function restore() {
       dir = path.dirname(dir);
     }
   }
+  const stash = journal.stash ?? STASH;
+  const missing = [];
   for (const rel of journal.moved) {
-    const backup = path.join(journal.stash, rel);
-    if (!fs.existsSync(backup)) continue;
-    fs.mkdirSync(path.dirname(path.join(ROOT, rel)), { recursive: true });
-    fs.cpSync(backup, path.join(ROOT, rel), { recursive: true });
+    const backup = path.join(stash, rel);
+    const target = path.join(ROOT, rel);
+    if (!fs.existsSync(backup)) {
+      // Déjà restauré (reprise après un arrêt en fin de restauration) : rien à faire.
+      if (!fs.existsSync(target)) missing.push(rel);
+      continue;
+    }
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.cpSync(backup, target, { recursive: true });
   }
-  fs.rmSync(journal.stash, { recursive: true, force: true });
+  if (missing.length > 0) {
+    // Échec bruyant : le journal et la sauvegarde restent en place pour une reprise manuelle.
+    throw new Error(
+      `[build:mobile] restauration impossible, sauvegarde absente pour : ${missing.join(', ')} ` +
+        `(sauvegarde attendue dans ${path.relative(ROOT, stash)} ; récupérez ces fichiers avec git avant de relancer)`,
+    );
+  }
+  // Journal d'abord : une sauvegarde orpheline (sans journal) est sans risque et purgée au build suivant.
   fs.rmSync(JOURNAL, { force: true });
+  fs.rmSync(stash, { recursive: true, force: true });
   log('arborescence web restaurée');
   return true;
 }
 
 function prepare() {
-  const stash = fs.mkdtempSync(path.join(os.tmpdir(), 'captivia-mobile-'));
+  // Sans journal, une sauvegarde restante vient d'une restauration terminée : on la purge.
+  fs.rmSync(STASH, { recursive: true, force: true });
+  fs.mkdirSync(STASH, { recursive: true });
+  const stash = STASH;
   const journal = { stash, moved: [], added: [] };
   writeJournal(journal);
 

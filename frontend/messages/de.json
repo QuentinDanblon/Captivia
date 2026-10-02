@@ -268,7 +268,14 @@
       "illness": "Achte auf Anzeichen von Krankheit"
     },
     "medicationUnitPlaceholder": "ml / mg / Tropfen…",
-    "speciesRequired": "Bitte wähle eine Art aus"
+    "speciesRequired": "Bitte wähle eine Art aus",
+    "sectionErrors": {
+      "loadFailed": "Diese Daten konnten nicht geladen werden. Bitte versuche es später erneut.",
+      "saveFailed": "Speichern fehlgeschlagen. Bitte versuche es erneut.",
+      "invalid": "Einige Angaben sind ungültig. Bitte überprüfe das Formular.",
+      "notFound": "Dieser Eintrag existiert nicht mehr. Bitte lade die Seite neu.",
+      "unavailable": "Der Dienst ist vorübergehend nicht verfügbar. Bitte versuche es gleich noch einmal."
+    }
   },
   "attribution": {
     "wikipediaPrefix": "Quelle:",
@@ -334,7 +341,10 @@
     "status": "Status",
     "healthTitle": "Bezeichnung",
     "contacts": "Tierärzte und Kontakte",
-    "noContacts": "Keine Kontakte gespeichert."
+    "noContacts": "Keine Kontakte gespeichert.",
+    "share": "Gesundheitsakte teilen",
+    "shareHint": "Die Gesundheitsakte wird als HTML-Datei gesendet, die jeder Browser öffnen und drucken kann: ideal für deine Tierarztpraxis.",
+    "shareError": "Die Gesundheitsakte konnte nicht geteilt werden. Bitte versuche es erneut."
   },
   "common": {
     "account": "Konto",

@@ -268,7 +268,14 @@
       "illness": "Watch for signs of illness"
     },
     "medicationUnitPlaceholder": "ml / mg / drops…",
-    "speciesRequired": "Please select a species"
+    "speciesRequired": "Please select a species",
+    "sectionErrors": {
+      "loadFailed": "Could not load this data. Please try again later.",
+      "saveFailed": "Saving failed. Please try again.",
+      "invalid": "Some information is invalid. Please check the form.",
+      "notFound": "This item no longer exists. Please reload the page.",
+      "unavailable": "The service is temporarily unavailable. Please try again in a moment."
+    }
   },
   "attribution": {
     "wikipediaPrefix": "Source:",
@@ -334,7 +341,10 @@
     "status": "Status",
     "healthTitle": "Description",
     "contacts": "Vets and contacts",
-    "noContacts": "No contacts recorded."
+    "noContacts": "No contacts recorded.",
+    "share": "Share the record",
+    "shareHint": "The record is sent as an HTML file that any browser can open and print: ideal for your vet.",
+    "shareError": "Sharing the record failed. Please try again."
   },
   "common": {
     "account": "Account",

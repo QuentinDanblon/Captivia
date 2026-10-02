@@ -5,7 +5,9 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { api, type Animal, type Vaccination } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
+import { isPremiumLocked, sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
+import { localDayKey } from '@/lib/dates';
 
 interface Props {
   animal: Animal;
@@ -40,7 +42,7 @@ export default function VaccinationsSection({ animal, token, vaccinations, loadi
     if (!user?.isPremium || vaccinationsLocked) return;
     setEditingVaccinationId(null);
     setVaccinationName('');
-    setVaccinationDate(new Date().toISOString().slice(0, 10));
+    setVaccinationDate(localDayKey(new Date()));
     setVaccinationNextDue('');
     setVaccinationBatch('');
     setVaccinationVet('');
@@ -87,12 +89,11 @@ export default function VaccinationsSection({ animal, token, vaccinations, loadi
       await onRefresh();
     } catch (err) {
       console.error('Error saving vaccination:', err);
-      const msg = err instanceof Error ? err.message : 'Erreur';
-      if (msg.toLowerCase().includes('forbidden') || msg.toLowerCase().includes('403') || msg.toLowerCase().includes('premium')) {
+      if (isPremiumLocked(err)) {
         onLocked();
         setShowVaccinationModal(false);
       } else {
-        setVaccinationFormError(msg);
+        setVaccinationFormError(t(sectionErrorKey(err)));
       }
     } finally {
       setVaccinationSubmitting(false);

@@ -1,5 +1,6 @@
 # Journal de reprise de scripts/build-mobile.mjs
 .build-journal.json
+.build-stash/
 # Projets natifs générés par `npx cap add` : versionnés plus tard (W6-03+), hors artefacts de build
 android/app/build/
 android/.gradle/

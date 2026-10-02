@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useAuth } from '@/contexts/AuthContext';
 import { Link, useRouter } from '@/i18n/navigation';
@@ -11,7 +11,9 @@ import {
   sortByDateDesc,
   type CarnetExport,
 } from '@/lib/carnet';
-import { animalDetailPath } from '@/lib/platform';
+import { buildCarnetHtml, carnetFileName, isShareCancelled, shareCarnetFile } from '@/lib/carnet-share';
+import { localDayKey } from '@/lib/dates';
+import { animalDetailPath, isNative } from '@/lib/platform';
 import { CARNET_CSS } from './print-styles';
 
 type Status = 'loading' | 'ready' | 'premium' | 'notFound' | 'error';
@@ -23,6 +25,10 @@ interface SpeciesInfo {
 }
 
 const EMPTY = '—';
+
+const noopSubscribe = () => () => {};
+/** `isNative()` lu après l'hydratation (le HTML exporté est celui du web). */
+const useIsNative = () => useSyncExternalStore(noopSubscribe, isNative, () => false);
 
 function Section({
   title,
@@ -78,6 +84,10 @@ export default function CarnetPrintView({ id }: { id: string }) {
   const [status, setStatus] = useState<Status>('loading');
   const [carnet, setCarnet] = useState<CarnetExport | null>(null);
   const [species, setSpecies] = useState<SpeciesInfo | null>(null);
+  const native = useIsNative();
+  const sheetRef = useRef<HTMLElement>(null);
+  const [sharing, setSharing] = useState(false);
+  const [shareError, setShareError] = useState(false);
 
   useEffect(() => {
     if (authLoading) return;
@@ -178,6 +188,29 @@ export default function CarnetPrintView({ id }: { id: string }) {
         ? t('animals.vetAppointments.statusCancelled')
         : t('animals.vetAppointments.statusScheduled');
 
+  // App native : `window.print()` est inopérant dans la WebView → fichier HTML autonome partagé.
+  const handleShare = async () => {
+    const sheet = sheetRef.current;
+    if (!sheet || !carnet) return;
+    const title = `${t('carnetPrint.title')} - ${carnet.animal.name}`;
+    setSharing(true);
+    setShareError(false);
+    try {
+      await shareCarnetFile({
+        fileName: carnetFileName(carnet.animal.name, localDayKey(new Date())),
+        html: buildCarnetHtml({ lang: locale, title, css: CARNET_CSS, bodyHtml: sheet.outerHTML }),
+        title,
+      });
+    } catch (err) {
+      if (!isShareCancelled(err)) {
+        console.error('Error sharing carnet:', err);
+        setShareError(true);
+      }
+    } finally {
+      setSharing(false);
+    }
+  };
+
   const backHref = animalDetailPath(id ?? '');
   const backButton = (
     <Link href={backHref} className="carnet-btn">
@@ -201,17 +234,34 @@ export default function CarnetPrintView({ id }: { id: string }) {
       <>
         <div className="carnet-toolbar carnet-noprint">
           {backButton}
-          <button
-            type="button"
-            className="carnet-btn carnet-btn-primary"
-            onClick={() => window.print()}
-          >
-            {t('carnetPrint.print')}
-          </button>
-          <p className="carnet-hint">{t('carnetPrint.printHint')}</p>
+          {native ? (
+            <button
+              type="button"
+              className="carnet-btn carnet-btn-primary"
+              onClick={handleShare}
+              disabled={sharing}
+              aria-busy={sharing}
+            >
+              {t('carnetPrint.share')}
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="carnet-btn carnet-btn-primary"
+              onClick={() => window.print()}
+            >
+              {t('carnetPrint.print')}
+            </button>
+          )}
+          <p className="carnet-hint">{t(native ? 'carnetPrint.shareHint' : 'carnetPrint.printHint')}</p>
+          {shareError && (
+            <p className="carnet-hint carnet-status-error" role="alert">
+              {t('carnetPrint.shareError')}
+            </p>
+          )}
         </div>
 
-        <article className="carnet-sheet">
+        <article className="carnet-sheet" ref={sheetRef}>
           <header className="carnet-header">
             <div className="carnet-brand">Captivia</div>
             <div className="carnet-header-meta">

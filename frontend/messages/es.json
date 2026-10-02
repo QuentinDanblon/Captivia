@@ -268,7 +268,14 @@
       "illness": "Vigila los signos de enfermedad"
     },
     "medicationUnitPlaceholder": "ml / mg / gotas…",
-    "speciesRequired": "Selecciona una especie"
+    "speciesRequired": "Selecciona una especie",
+    "sectionErrors": {
+      "loadFailed": "No se pudieron cargar estos datos. Inténtalo de nuevo más tarde.",
+      "saveFailed": "No se pudo guardar. Inténtalo de nuevo.",
+      "invalid": "Algunos datos no son válidos. Revisa el formulario.",
+      "notFound": "Este elemento ya no existe. Recarga la página.",
+      "unavailable": "El servicio no está disponible temporalmente. Inténtalo de nuevo en unos instantes."
+    }
   },
   "attribution": {
     "wikipediaPrefix": "Fuente:",
@@ -334,7 +341,10 @@
     "status": "Estado",
     "healthTitle": "Descripción",
     "contacts": "Veterinarios y contactos",
-    "noContacts": "Ningún contacto registrado."
+    "noContacts": "Ningún contacto registrado.",
+    "share": "Compartir la cartilla",
+    "shareHint": "La cartilla se envía como archivo HTML, que cualquier navegador puede abrir e imprimir: ideal para tu veterinario.",
+    "shareError": "No se pudo compartir la cartilla. Inténtalo de nuevo."
   },
   "common": {
     "account": "Cuenta",
