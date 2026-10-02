@@ -66,6 +66,18 @@ export function normalizeChannel(value: unknown): DeliveryChannel {
 }
 
 /**
+ * Canal réellement utilisé : un compte sans adresse e-mail (invité) reçoit ses rappels en push
+ * (et en notifications locales côté app), jamais par e-mail — « email » / « both » → « push ».
+ */
+export function effectiveChannel(
+  value: unknown,
+  email: string | null | undefined,
+): DeliveryChannel {
+  const channel = normalizeChannel(value);
+  return email ? channel : 'push';
+}
+
+/**
  * Scheduler unifié des rappels (W3-02) : routines, médicaments, vaccins, RDV vétérinaires.
  *
  * Toutes les 5 minutes :
@@ -309,16 +321,18 @@ export class NotificationsSchedulerService {
     ev: DueReminder,
     appUrl: string | null,
   ): Promise<{ emailed: boolean; pushed: boolean }> {
-    const channel = normalizeChannel(
+    const recipient = ev.user.email;
+    const channel = effectiveChannel(
       ev.user.notificationPreferences[0]?.deliveryChannel,
+      recipient,
     );
     const label = ev.label || ev.type;
     let emailed = false;
     let pushed = false;
 
-    if (channel === 'email' || channel === 'both') {
+    if (recipient && (channel === 'email' || channel === 'both')) {
       emailed = await this.mailService
-        .sendCareReminder(ev.user.email, ev.user.locale, {
+        .sendCareReminder(recipient, ev.user.locale, {
           label,
           animalName: ev.animal?.name,
           scheduledAt: ev.scheduledAt,

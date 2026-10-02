@@ -153,6 +153,21 @@ describe('envValidationSchema', () => {
     });
   });
 
+  describe('GUEST_RETENTION_DAYS (mode invité)', () => {
+    it('vaut 90 par défaut et accepte un entier de 1 à 3650', () => {
+      expect(validate(baseProd).value.GUEST_RETENTION_DAYS).toBe(90);
+      expect(
+        validate({ ...baseProd, GUEST_RETENTION_DAYS: '30' }).value
+          .GUEST_RETENTION_DAYS,
+      ).toBe(30);
+    });
+
+    it.each(['0', '-1', '1.5', 'abc', '4000'])('refuse %s', (value) => {
+      const { error } = validate({ ...baseProd, GUEST_RETENTION_DAYS: value });
+      expect(error?.message).toContain('GUEST_RETENTION_DAYS');
+    });
+  });
+
   describe('isExampleJwtSecret', () => {
     it("détecte les valeurs d'exemple et laisse passer un vrai secret", () => {
       expect(isExampleJwtSecret('dev-only-anything')).toBe(true);

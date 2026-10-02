@@ -21,6 +21,8 @@ import type {
   SpeciesFoodProduct,
 } from './_components/types';
 import { speciesPath } from '@/lib/platform';
+import { isGuestUser } from '@/lib/guest';
+import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
 
 // W4-07 — chaque section (et sa/ses modale(s)) est un chunk séparé, chargé à la demande.
 // L'état des formulaires vit dans ces composants ; la page ne garde que les données partagées.
@@ -643,7 +645,12 @@ export default function AnimalDetailPage({
           {/* Sidebar - Carnet de santé + Routines */}
           <div className="space-y-6">
             <HealthRecordsSection animal={animal} token={token} healthRecords={healthRecords} onRefresh={fetchAnimalData} />
-            <ShareQrSection animal={animal} token={token} locale={resolvedParams.locale} />
+            {/* Invité : la page publique (QR) demande un compte — action retirée, raison expliquée. */}
+            {isGuestUser(user) ? (
+              <GuestFeatureNote>{t('guest.publicLinkNote')}</GuestFeatureNote>
+            ) : (
+              <ShareQrSection animal={animal} token={token} locale={resolvedParams.locale} />
+            )}
             <RoutinesSection animal={animal} token={token} routines={routines} onRefresh={fetchAnimalData} onToast={setToast} />
             <MedicationsSection
               animal={animal}

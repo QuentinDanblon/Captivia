@@ -145,13 +145,13 @@ describe('Account E2E — suppression et export RGPD', () => {
         .expect(200);
     });
 
-    it('mot de passe absent → 400', async () => {
+    it('mot de passe absent → 401 (facultatif seulement pour un invité)', async () => {
       const acc = await registerUser('nopw');
       await request(app.getHttpServer())
         .delete('/users/me')
         .set('Authorization', `Bearer ${acc.token}`)
         .send({})
-        .expect(400);
+        .expect(401);
     });
 
     it('suppression OK → 204, JWT invalide (401) et plus aucune ligne liée', async () => {
@@ -264,7 +264,7 @@ describe('Account E2E — suppression et export RGPD', () => {
       expect(body.pushSubscriptions).toHaveLength(1);
 
       // Revue de sécurité, constat 10 : export complété (format v2).
-      expect(body.exportVersion).toBe(2);
+      expect(body.exportVersion).toBe(3);
       expect(body.profile).toHaveProperty('emailVerifiedAt', null);
       expect(body.profile.timezone).toBe('Europe/Paris');
       expect(body.pushSubscriptionsActive).toBe(1);

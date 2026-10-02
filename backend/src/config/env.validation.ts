@@ -109,5 +109,9 @@ export const envValidationSchema = Joi.object({
     otherwise: Joi.string().allow('').optional(),
   }),
   REVENUECAT_ENTITLEMENT_ID: Joi.string().trim().default('premium'),
+  /** Mode invité : jours d'inactivité avant purge d'un invité non converti (défaut 90). */
+  GUEST_RETENTION_DAYS: Joi.number().integer().min(1).max(3650).default(90),
+  /** Mode invité : "false" désactive la purge planifiée des invités inactifs. */
+  GUEST_PURGE_ENABLED: Joi.string().valid('true', 'false').default('true'),
   GOOGLE_PLAY_PACKAGE_NAME: Joi.string().allow('').optional(),
 });

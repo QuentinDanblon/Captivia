@@ -2,6 +2,7 @@
 import {
   ArgumentsHost,
   BadRequestException,
+  ForbiddenException,
   InternalServerErrorException,
   Logger,
   NotFoundException,
@@ -86,6 +87,28 @@ describe('HttpExceptionFilter', () => {
         path: '/animals/1',
       }),
     );
+  });
+
+  it("transmet le code machine (GUEST_ACCOUNT) et l'action, sans autre champ du corps", () => {
+    const { host, json } = buildHost('/users/me/agenda/calendar-token');
+    new HttpExceptionFilter().catch(
+      new ForbiddenException({
+        statusCode: 403,
+        code: 'GUEST_ACCOUNT',
+        action: 'calendar_feed',
+        message: 'Create an account',
+        internal: 'secret',
+      }),
+      host,
+    );
+    const body = json.mock.calls[0][0];
+    expect(body).toMatchObject({
+      statusCode: 403,
+      code: 'GUEST_ACCOUNT',
+      action: 'calendar_feed',
+      message: 'Create an account',
+    });
+    expect(body.internal).toBeUndefined();
   });
 
   it("gère une valeur levée qui n'est pas une Error", () => {

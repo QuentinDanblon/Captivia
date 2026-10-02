@@ -74,6 +74,10 @@ services:
         sync: false
       - key: GOOGLE_PLAY_PACKAGE_NAME
         sync: false
+      # Mode invité : jours d'inactivité avant purge d'un invité non converti (défaut 90,
+      # docs/RUNBOOK.md). Laisser vide pour garder le défaut.
+      - key: GUEST_RETENTION_DAYS
+        sync: false
       - key: SENTRY_TRACES_SAMPLE_RATE
         sync: false
       - key: MAIL_HOST

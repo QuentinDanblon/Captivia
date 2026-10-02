@@ -16,6 +16,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { GuestForbidden, NoGuestGuard } from '../common/guest';
 import { SubscriptionService } from './subscription.service';
 import { SubscribeDto } from './dto/subscribe.dto';
 
@@ -43,6 +44,9 @@ export class SubscriptionController {
   }
 
   @Post()
+  // Mode invité : acheter un abonnement exige d'abord un compte (403 GUEST_ACCOUNT).
+  @UseGuards(NoGuestGuard)
+  @GuestForbidden('subscription')
   @ApiOperation({
     summary:
       'Subscribe — DÉSACTIVÉ sur le web : l’abonnement se souscrit uniquement dans l’application mobile (achats intégrés App Store / Google Play). Retourne 501.',

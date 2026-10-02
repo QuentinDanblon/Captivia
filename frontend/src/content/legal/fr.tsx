@@ -291,6 +291,11 @@ export function buildFrContent(locale: string): LegalContent {
                 suppression du compte ; les sauvegardes automatiques de la base sont écrasées selon leur cycle de
                 rétention (30 jours au plus).
               </li>
+              <li>
+                Utilisation sans compte (invité) : votre animal et son carnet sont conservés jusqu&apos;à la création
+                d&apos;un compte, leur suppression, ou après 90 jours sans utilisation de l&apos;application ; ils sont
+                alors effacés.
+              </li>
               <li>Jeton de réinitialisation du mot de passe : une heure au plus, puis il devient inutilisable.</li>
               <li>Jeton de connexion conservé dans votre navigateur : valable 7 jours, effacé à la déconnexion.</li>
               <li>Journaux techniques et de sécurité (dont l&apos;adresse IP) : 12 mois au plus.</li>

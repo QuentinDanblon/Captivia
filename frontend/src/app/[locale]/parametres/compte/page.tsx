@@ -15,18 +15,22 @@ import {
   downloadBlob,
   exportMyData,
 } from '@/lib/account-api';
+import { isGuestUser } from '@/lib/guest';
+import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
 
 const SUPPORTED_LOCALES = ['fr', 'en', 'es', 'de', 'it', 'pt'];
 
 interface DeleteAccountModalProps {
   onClose: () => void;
   onConfirm: (password: string) => Promise<void>;
+  /** Invité : aucun mot de passe à saisir (le compte n'en a pas). */
+  guest?: boolean;
   error: string;
   loading: boolean;
 }
 
 /** Confirmation destructive : ui/Modal en variante alertdialog (focus piégé, Échap, focus rendu). */
-function DeleteAccountModal({ onClose, onConfirm, error, loading }: DeleteAccountModalProps) {
+function DeleteAccountModal({ onClose, onConfirm, error, loading, guest = false }: DeleteAccountModalProps) {
   const t = useTranslations();
   const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState('');
@@ -36,7 +40,7 @@ function DeleteAccountModal({ onClose, onConfirm, error, loading }: DeleteAccoun
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!password) {
+    if (!password && !guest) {
       setLocalError(t('account.modalPasswordRequired'));
       return;
     }
@@ -56,10 +60,13 @@ function DeleteAccountModal({ onClose, onConfirm, error, loading }: DeleteAccoun
       description={t('account.modalWarning')}
       dismissible={!loading}
       hideCloseButton
-      initialFocusRef={inputRef}
+      initialFocusRef={guest ? undefined : inputRef}
       titleClassName="text-lg font-bold text-gray-800 dark:text-white mb-2"
     >
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        {guest ? (
+          <p className="text-sm text-gray-600 dark:text-gray-400">{t('guest.deleteGuestHint')}</p>
+        ) : (
         <div>
           <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             {t('account.modalPasswordLabel')}
@@ -77,6 +84,7 @@ function DeleteAccountModal({ onClose, onConfirm, error, loading }: DeleteAccoun
             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white"
           />
         </div>
+        )}
         {shownError && (
           <p id={errorId} role="alert" className="text-red-600 dark:text-red-400 text-sm">
             {shownError}
@@ -128,6 +136,8 @@ export default function ComptePage() {
   const [deleteError, setDeleteError] = useState('');
   // Évite la redirection vers /login quand la déconnexion suit une suppression de compte.
   const [accountDeleted, setAccountDeleted] = useState(false);
+  // Session invité : ni mot de passe, ni déconnexion (elle ferait perdre l'accès aux données).
+  const guest = isGuestUser(user);
 
   useEffect(() => {
     if (!authLoading && !user && !accountDeleted) {
@@ -234,7 +244,7 @@ export default function ComptePage() {
     setDeleteError('');
     setDeleteLoading(true);
     try {
-      await deleteMyAccount(token, password);
+      await deleteMyAccount(token, guest ? undefined : password);
       setAccountDeleted(true);
       logout();
       router.replace('/');
@@ -307,7 +317,7 @@ export default function ComptePage() {
               {t('common.email')}
             </label>
             <p className="text-lg text-gray-800 dark:text-white">
-              {user?.email}
+              {user?.email ?? t('guest.accountNoEmail')}
             </p>
           </div>
 
@@ -342,7 +352,10 @@ export default function ComptePage() {
 
           <hr className="border-gray-200 dark:border-gray-700" />
 
-          {/* Password section — visible only when connected */}
+          {/* Password section — visible only when connected (un invité n'a pas de mot de passe) */}
+          {guest ? (
+            <GuestFeatureNote>{t('guest.passwordNote')}</GuestFeatureNote>
+          ) : (
           <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
               {t('common.password')}
@@ -439,10 +452,12 @@ export default function ComptePage() {
               </form>
             )}
           </div>
+          )}
 
+          {/* Appareils connectés (W1-01) — pas pour un invité : tout déconnecter perdrait ses données. */}
+          {!guest && (<>
           <hr className="border-gray-200 dark:border-gray-700" />
 
-          {/* Appareils connectés (W1-01) */}
           <section aria-labelledby="sessions-title">
             <h3 id="sessions-title" className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
               {t('sessions.title')}
@@ -467,6 +482,7 @@ export default function ComptePage() {
               </p>
             )}
           </section>
+          </>)}
 
           <hr className="border-gray-200 dark:border-gray-700" />
 
@@ -525,7 +541,8 @@ export default function ComptePage() {
 
           <hr className="border-gray-200 dark:border-gray-700" />
 
-          {/* Logout */}
+          {/* Logout (pas pour un invité : la session est son seul accès à ses données) */}
+          {!guest && (
           <div>
             <button
               onClick={logout}
@@ -534,6 +551,7 @@ export default function ComptePage() {
               {t('common.logout')}
             </button>
           </div>
+          )}
         </div>
       </div>
 
@@ -543,6 +561,7 @@ export default function ComptePage() {
           onConfirm={handleDeleteAccount}
           error={deleteError}
           loading={deleteLoading}
+          guest={guest}
         />
       )}
     </div>

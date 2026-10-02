@@ -6,6 +6,7 @@ import { BookOpen, CalendarDays, CircleUserRound, LogOut, MessagesSquare, PawPri
 import { Link, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { BrandMark } from '@/components/ui/BrandMark';
+import { GUEST_UPGRADE_PATH } from '@/lib/guest';
 
 export interface AppDestination {
   href: string;
@@ -57,10 +58,14 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
   const { user, isLoading, logout } = useAuth();
   const items = destinations.slice(0, 5);
   const initials = user?.email?.slice(0, 2).toUpperCase() || '··';
+  // Session invité (sans e-mail) : même emplacement que sans session, mais l'invitation mène à la
+  // conversion sans perte de données, et aucune déconnexion n'est proposée (elle les perdrait).
+  const guestSession = user?.isGuest === true;
+  const createAccountHref = guestSession ? GUEST_UPGRADE_PATH : '/register';
 
-  const account = isLoading ? null : user ? (
+  const account = isLoading ? null : user && !guestSession ? (
     <div className="app-shell__account" data-state="user">
-      <Link href="/parametres" className="app-shell__profile" title={user.email}>
+      <Link href="/parametres" className="app-shell__profile" title={user.email ?? undefined}>
         <span className="site-account__initials" aria-hidden="true">
           {initials}
         </span>
@@ -74,7 +79,7 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
     <div className="app-shell__account" data-state="guest">
       <p className="app-shell__guest">
         <span className="app-shell__guest-label">{t('nav.guest')}</span>
-        <Link href="/register" className="app-shell__guest-cta">
+        <Link href={createAccountHref} className="app-shell__guest-cta">
           {t('nav.createAccount')}
         </Link>
       </p>
@@ -132,8 +137,8 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
           <BrandMark className="site-brand__mark" />
           <span className="site-brand__name">{t('common.appName')}</span>
         </Link>
-        {!isLoading && !user ? (
-          <Link href="/register" className="app-shell__guest-cta">
+        {!isLoading && (!user || guestSession) ? (
+          <Link href={createAccountHref} className="app-shell__guest-cta">
             {t('nav.createAccount')}
           </Link>
         ) : null}

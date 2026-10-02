@@ -24,8 +24,17 @@ enum UserRole {
 model User {
   id           String   @id @default(uuid())
   /// Toujours normalisé (trim + minuscules) — CHECK SQL "User_email_normalized_check".
-  email        String   @unique
-  passwordHash String
+  /// NULL uniquement pour un compte invité (`isGuest`) : CHECK SQL "User_guest_credentials_check".
+  email        String?  @unique
+  /// NULL uniquement pour un compte invité (aucun mot de passe : connexion par refresh token seul).
+  passwordHash String?
+  /// Compte invité (mode « Essayer sans compte ») : ni e-mail ni mot de passe, 1 animal, pas de
+  /// lien public / flux ICS / achat / publication. Converti en compte (même ligne, mêmes données)
+  /// par POST /auth/upgrade ; purgé après GUEST_RETENTION_DAYS d'inactivité.
+  isGuest      Boolean  @default(false)
+  /// Dernière activité connue (création, rotation de refresh token, requête authentifiée —
+  /// au plus une écriture par jour). Sert à la purge des invités inactifs.
+  lastActiveAt DateTime @default(now()) @db.Timestamptz(3)
   locale       String   @default("fr")
   /// Fuseau IANA (ex. "Europe/Paris") : sert au scheduler de rappels pour la « journée en cours » (W3-02).
   timezone     String   @default("Europe/Paris")
@@ -56,6 +65,9 @@ model User {
   emailVerificationTokens EmailVerificationToken[]
   subscriptions           Subscription[]
   paymentEvents           PaymentEvent[]
+
+  /// Purge des invités inactifs (GuestPurgeService).
+  @@index([isGuest, lastActiveAt])
 }
 
 // ============================================

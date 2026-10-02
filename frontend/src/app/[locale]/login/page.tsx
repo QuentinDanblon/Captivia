@@ -6,11 +6,16 @@ import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
 import { Link } from '@/i18n/navigation';
+import { GUEST_UPGRADE_PATH, isGuestUser } from '@/lib/guest';
+import { useStartGuest } from '@/components/guest/useStartGuest';
+import { Alert, Button, buttonClasses } from '@/components/ui';
 
 export default function LoginPage() {
   const t = useTranslations();
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+  const tGuest = useTranslations('guest');
+  const { start: startGuest, starting: guestStarting, error: guestError } = useStartGuest();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -53,6 +58,20 @@ export default function LoginPage() {
     <div className="captivia-auth-page">
       <div className="captivia-auth-card">
         <h1 className="captivia-auth-title">{t('auth.loginTitle')}</h1>
+
+        {/* Invité : se connecter ouvre un AUTRE compte (aucune fusion) ; la conversion est proposée. */}
+        {isGuestUser(user) && (
+          <Alert
+            severity="warning"
+            className="mb-4"
+            title={tGuest('loginGuestWarning')}
+            action={
+              <Link href={GUEST_UPGRADE_PATH} className={buttonClasses({ variant: 'secondary', size: 'sm' })}>
+                {tGuest('loginGuestUpgrade')}
+              </Link>
+            }
+          />
+        )}
 
         <form onSubmit={handleSubmit} className="captivia-auth-form">
           <div className="captivia-auth-field">
@@ -100,6 +119,28 @@ export default function LoginPage() {
           </button>
         </form>
 
+        {/* Sans session : l'app s'utilise aussi sans compte (1 animal, carnet complet). */}
+        {!user && (
+          <div className="mt-4 grid gap-2">
+            <Button
+              variant="secondary"
+              size="lg"
+              fullWidth
+              loading={guestStarting}
+              onClick={async () => {
+                if (await startGuest()) router.push('/mes-animaux');
+              }}
+            >
+              {guestStarting ? tGuest('entryStarting') : tGuest('entryTry')}
+            </Button>
+            {guestError && (
+              <div className="captivia-auth-feedback is-error" role="alert">
+                <p>{guestError}</p>
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="captivia-auth-links">
           <p>
             {t('auth.noAccount')}{' '}
@@ -107,6 +148,7 @@ export default function LoginPage() {
               {t('auth.registerButton')}
             </Link>
           </p>
+
           <Link href="/" className="captivia-auth-back-link">
             {t('common.back')} {t('common.home')}
           </Link>

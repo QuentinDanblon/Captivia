@@ -324,7 +324,18 @@ Voir §3.4.
 
 ### 6.4 Comptes inactifs
 
-Aucune purge automatique des comptes inactifs n'existe dans le code. Une durée de conservation reste à décider (et à inscrire dans la politique de confidentialité). La suppression de compte est une action de l'utilisateur dans l'application.
+**Comptes (avec e-mail)** : aucune purge automatique. Une durée de conservation reste à décider (et à inscrire dans la politique de confidentialité). La suppression de compte est une action de l'utilisateur dans l'application.
+
+**Invités (mode « Essayer sans compte »)** : purge automatique.
+
+- Un invité est un `User` avec `isGuest = true`, sans e-mail ni mot de passe (`POST /auth/guest`). `POST /auth/upgrade` le convertit en compte : même ligne, données conservées, `isGuest = false`.
+- `GuestPurgeService` (tous les jours à 03:17 UTC, verrou consultatif `4731202611`) supprime en cascade (animaux, carnet, rappels, sessions, abonnements push) les invités dont `lastActiveAt` date de plus de `GUEST_RETENTION_DAYS` jours (**défaut 90**, entier 1-3650). Un invité titulaire d'un abonnement store n'est jamais purgé automatiquement (cas anormal : l'achat exige un compte).
+- `lastActiveAt` est mis à jour à la création, à chaque rotation de refresh token et à la première requête authentifiée de chaque heure. Le refresh token d'un invité vit au moins `GUEST_RETENTION_DAYS` jours (sinon il perdrait l'accès à ses données avant la purge).
+- Variables Render : `GUEST_RETENTION_DAYS` (facultative, `sync: false`) ; `GUEST_PURGE_ENABLED=false` suspend la purge (incident, enquête).
+- Contrôle : `SELECT count(*) FILTER (WHERE "isGuest") AS invites, count(*) FILTER (WHERE "isGuest" AND "lastActiveAt" < now() - interval '90 days') AS a_purger FROM "User";`
+- Création d'invités limitée à 5 par heure et par IP (`GuestCreationRateLimitGuard`). Une hausse anormale du nombre d'invités se voit avec la requête ci-dessus ; la purge borne leur durée de vie.
+
+Registre des traitements (à reporter dans `docs/legal/registre-traitements.md` quand il existera, cf. W2-08) : traitement « mode invité » — données : animaux et carnet saisis, jetons de session (empreintes), agent utilisateur, abonnements push ; aucune donnée d'identification directe ; base légale : exécution du service demandé ; conservation : jusqu'à la conversion en compte, la suppression par l'utilisateur ou `GUEST_RETENTION_DAYS` jours d'inactivité.
 
 ---
 

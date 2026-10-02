@@ -32,6 +32,34 @@ export const ACCESS_TOKEN_TTL = '30m';
 /** Durée de validité d'un refresh token (W1-01) : 30 jours, renouvelée à chaque rotation. */
 export const REFRESH_TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
+/** Durée de conservation par défaut d'un compte invité inactif (jours) : cf. GUEST_RETENTION_DAYS. */
+export const DEFAULT_GUEST_RETENTION_DAYS = 90;
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * Durée (jours) après laquelle un invité sans activité est purgé (GuestPurgeService).
+ * Variable GUEST_RETENTION_DAYS (validée par Joi : entier 1-3650), défaut 90.
+ */
+export function guestRetentionDays(): number {
+  const raw = Number.parseInt(process.env.GUEST_RETENTION_DAYS ?? '', 10);
+  return Number.isInteger(raw) && raw >= 1 ? raw : DEFAULT_GUEST_RETENTION_DAYS;
+}
+
+/**
+ * Durée de validité d'un refresh token. Un invité n'a ni e-mail ni mot de passe : s'il perd sa
+ * session il perd ses données. Son jeton vit donc au moins jusqu'à la purge (rétention invité),
+ * renouvelé à chaque rotation comme pour les comptes.
+ */
+export function refreshTokenTtlMs(isGuest: boolean): number {
+  return isGuest
+    ? Math.max(REFRESH_TOKEN_TTL_MS, guestRetentionDays() * DAY_MS)
+    : REFRESH_TOKEN_TTL_MS;
+}
+
+/** Intervalle minimal entre deux écritures de `User.lastActiveAt` pour un même compte. */
+export const LAST_ACTIVE_TOUCH_INTERVAL_MS = 60 * 60 * 1000;
+
 /** Durée de validité d'un lien de vérification d'e-mail (W2-04) : 24 h. */
 export const EMAIL_VERIFICATION_TTL_MS = 24 * 60 * 60 * 1000;
 

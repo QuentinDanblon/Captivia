@@ -3,6 +3,7 @@ import {
   UnauthorizedException,
   ConflictException,
   BadRequestException,
+  ForbiddenException,
   HttpException,
   HttpStatus,
   Logger,
@@ -21,6 +22,8 @@ import {
 } from '../common/operators';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { CreateGuestDto, UpgradeGuestDto } from './dto/guest.dto';
+import { GuestAccountException } from '../common/guest';
 import {
   BCRYPT_ROUNDS,
   CURRENT_TERMS_VERSION,
@@ -28,9 +31,10 @@ import {
   EMAIL_VERIFICATION_RESEND_COOLDOWN_MS,
   EMAIL_VERIFICATION_SEND_WINDOW_MS,
   EMAIL_VERIFICATION_TTL_MS,
+  LAST_ACTIVE_TOUCH_INTERVAL_MS,
   PASSWORD_RESET_TTL_MS,
-  REFRESH_TOKEN_TTL_MS,
   normalizeEmail,
+  refreshTokenTtlMs,
 } from './auth.constants';
 
 /** Paire de jetons renvoyée par login / register / refresh / change-password (W1-01). */
@@ -47,7 +51,8 @@ export interface SessionContext {
 /** Contenu signé des access tokens. */
 export interface JwtPayload {
   sub: string;
-  email: string;
+  /** null pour un compte invité (aucune adresse). Jamais utilisé pour l'autorisation. */
+  email: string | null;
   /** Copie de User.tokenVersion au moment de l'émission (absent = 0 pour les tokens émis avant W1-01). */
   tokenVersion?: number;
 }
@@ -94,6 +99,7 @@ type LockedUser = Pick<
   | 'tokenVersion'
   | 'passwordHash'
   | 'emailVerifiedAt'
+  | 'isGuest'
 >;
 
 /**
@@ -110,7 +116,7 @@ async function lockUserRow(
   userId: string,
 ): Promise<LockedUser | null> {
   const rows = await tx.$queryRaw<LockedUser[]>(
-    Prisma.sql`SELECT "id", "email", "locale", "tokenVersion", "passwordHash", "emailVerifiedAt"
+    Prisma.sql`SELECT "id", "email", "locale", "tokenVersion", "passwordHash", "emailVerifiedAt", "isGuest"
                FROM "User" WHERE "id" = ${userId} FOR UPDATE`,
   );
   return rows[0] ?? null;
@@ -211,11 +217,127 @@ export class AuthService implements OnModuleInit {
       user?.passwordHash ?? DUMMY_PASSWORD_HASH,
     );
 
-    if (!user || !isPasswordValid) {
+    // Un invité n'a ni e-mail ni mot de passe : jamais authentifié par cette route.
+    if (!user || user.isGuest || !user.passwordHash || !isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
     return this.buildAuthResponse(user, context);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Mode invité (« Essayer sans compte »)
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Crée un compte invité (`isGuest`, sans e-mail ni mot de passe) et ouvre sa session : même
+   * paire de jetons que les comptes normaux (access token + refresh token rotatif). Le refresh
+   * token d'un invité vit jusqu'à la purge (cf. `refreshTokenTtlMs`). Aucun e-mail n'est envoyé.
+   */
+  async createGuest(dto: CreateGuestDto = {}, context: SessionContext = {}) {
+    const user = await this.prisma.user.create({
+      data: {
+        isGuest: true,
+        email: null,
+        passwordHash: null,
+        locale: dto.locale || 'fr',
+        lastActiveAt: new Date(),
+      },
+    });
+    return this.buildAuthResponse(user, context);
+  }
+
+  /**
+   * Convertit l'invité authentifié en compte : MÊME ligne `User` (animaux, carnet, rappels,
+   * abonnements push restent rattachés), e-mail + mot de passe + consentement CGU enregistrés,
+   * e-mail de vérification envoyé. Les jetons de l'invité sont révoqués (tokenVersion++, refresh
+   * tokens) et une nouvelle paire est renvoyée. E-mail déjà pris : 409, sans fusion de comptes.
+   */
+  async upgradeGuest(
+    userId: string,
+    dto: UpgradeGuestDto,
+    context: SessionContext = {},
+  ) {
+    const email = normalizeEmail(dto.email);
+    const passwordHash = await bcrypt.hash(dto.password, BCRYPT_ROUNDS);
+    const conflict = () => new ConflictException('Email already registered');
+
+    let user: User;
+    try {
+      user = await this.prisma.$transaction(async (tx) => {
+        const locked = await lockUserRow(tx, userId);
+        if (!locked) throw new UnauthorizedException();
+        if (!locked.isGuest) {
+          throw new ForbiddenException({
+            statusCode: 403,
+            code: 'NOT_A_GUEST',
+            message: 'This account is already registered.',
+          });
+        }
+        const taken = await tx.user.findUnique({
+          where: { email },
+          select: { id: true },
+        });
+        if (taken) throw conflict();
+
+        const now = new Date();
+        await tx.refreshToken.updateMany({
+          where: { userId, revokedAt: null },
+          data: { revokedAt: now },
+        });
+        return tx.user.update({
+          where: { id: userId },
+          data: {
+            email,
+            passwordHash,
+            isGuest: false,
+            ...(dto.locale ? { locale: dto.locale } : {}),
+            termsAcceptedAt: now,
+            termsVersion: CURRENT_TERMS_VERSION,
+            emailVerifiedAt: null,
+            lastActiveAt: now,
+            // Invalide les access tokens de l'invité encore en circulation.
+            tokenVersion: { increment: 1 },
+          },
+        });
+      });
+    } catch (error) {
+      // Course avec une inscription simultanée sur la même adresse (index unique).
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2002'
+      ) {
+        throw conflict();
+      }
+      throw error;
+    }
+
+    this.logger.log(`Invité converti en compte (userId=${user.id})`);
+    void this.issueEmailVerification(user).catch(() => undefined);
+    return this.buildAuthResponse(user, context);
+  }
+
+  /**
+   * Met à jour `lastActiveAt` (au plus une écriture par `LAST_ACTIVE_TOUCH_INTERVAL_MS`), sans
+   * attendre ni échouer : sert à la purge des invités inactifs.
+   */
+  private touchLastActive(userId: string, lastActiveAt?: Date | null): void {
+    const now = Date.now();
+    if (
+      lastActiveAt &&
+      now - lastActiveAt.getTime() < LAST_ACTIVE_TOUCH_INTERVAL_MS
+    ) {
+      return;
+    }
+    void this.prisma.user
+      .updateMany({
+        where: {
+          id: userId,
+          lastActiveAt: { lt: new Date(now - LAST_ACTIVE_TOUCH_INTERVAL_MS) },
+        },
+        data: { lastActiveAt: new Date(now) },
+      })
+      .catch(() => undefined);
   }
 
   /**
@@ -234,9 +356,11 @@ export class AuthService implements OnModuleInit {
       return null;
     }
 
+    this.touchLastActive(user.id, user.lastActiveAt);
     return {
       id: user.id,
       email: user.email,
+      isGuest: user.isGuest,
       locale: user.locale,
       role: user.role,
       isPremium: effectivePremium(user),
@@ -250,9 +374,10 @@ export class AuthService implements OnModuleInit {
     const user = await this.prisma.user.findUnique({
       where: { email },
     });
-    if (!user) {
+    if (!user || !user.email) {
       return { message: RESET_REQUESTED_MESSAGE };
     }
+    const to = user.email;
 
     const token = crypto.randomBytes(32).toString('hex');
     const expiresAt = new Date(Date.now() + PASSWORD_RESET_TTL_MS);
@@ -274,7 +399,7 @@ export class AuthService implements OnModuleInit {
 
     // Envoi non bloquant : la réponse (et son temps) ne doit pas révéler
     // l'existence du compte ni l'état du serveur SMTP.
-    void this.sendPasswordResetEmail(user.email, user.locale, resetLink);
+    void this.sendPasswordResetEmail(to, user.locale, resetLink);
 
     return { message: RESET_REQUESTED_MESSAGE };
   }
@@ -336,6 +461,9 @@ export class AuthService implements OnModuleInit {
     if (!user) {
       throw new UnauthorizedException('Utilisateur introuvable');
     }
+    if (user.isGuest || !user.passwordHash) {
+      throw new GuestAccountException('password');
+    }
     const isValid = await bcrypt.compare(currentPassword, user.passwordHash);
     if (!isValid) {
       throw new UnauthorizedException('Mot de passe actuel incorrect');
@@ -387,7 +515,7 @@ export class AuthService implements OnModuleInit {
    * (nouvelle famille de rotation).
    */
   private async issueTokenPair(
-    user: Pick<User, 'id' | 'email' | 'tokenVersion'>,
+    user: Pick<User, 'id' | 'email' | 'tokenVersion' | 'isGuest'>,
     context: SessionContext,
     familyId: string = crypto.randomUUID(),
   ): Promise<TokenPair> {
@@ -403,7 +531,7 @@ export class AuthService implements OnModuleInit {
           userId: user.id,
           tokenHash: hashOpaqueToken(refreshToken),
           familyId,
-          expiresAt: new Date(now + REFRESH_TOKEN_TTL_MS),
+          expiresAt: new Date(now + refreshTokenTtlMs(user.isGuest)),
           userAgent: this.truncateUserAgent(context.userAgent),
           // Un jeton émis avec une version déjà périmée (logout-all concurrent) est refusé au refresh.
           tokenVersion: user.tokenVersion,
@@ -479,7 +607,9 @@ export class AuthService implements OnModuleInit {
             userId: user.id,
             tokenHash: hashOpaqueToken(newToken),
             familyId: record.familyId,
-            expiresAt: new Date(now.getTime() + REFRESH_TOKEN_TTL_MS),
+            expiresAt: new Date(
+              now.getTime() + refreshTokenTtlMs(user.isGuest),
+            ),
             userAgent: this.truncateUserAgent(context.userAgent),
             tokenVersion: user.tokenVersion,
           },
@@ -496,6 +626,7 @@ export class AuthService implements OnModuleInit {
     if (outcome.status !== 'ok') throw invalid();
 
     this.purgeExpiredRefreshTokens(owner.userId);
+    this.touchLastActive(owner.userId);
     return {
       accessToken: this.signAccessToken(outcome.user),
       refreshToken: newToken,
@@ -602,6 +733,7 @@ export class AuthService implements OnModuleInit {
   private async issueEmailVerification(
     user: Pick<User, 'id' | 'email' | 'locale'>,
   ): Promise<void> {
+    if (!user.email) return; // invité : aucune adresse à vérifier
     const token = await this.prisma.$transaction(async (tx) =>
       // Compte supprimé entre-temps : rien à envoyer.
       (await lockUserRow(tx, user.id))
@@ -615,6 +747,7 @@ export class AuthService implements OnModuleInit {
     user: Pick<User, 'email' | 'locale'>,
     token: string,
   ): Promise<void> {
+    if (!user.email) return;
     const link = `${frontendBaseUrl()}/verifier-email?token=${token}`;
     try {
       const res = await this.mailService.sendEmailVerification(
@@ -676,6 +809,9 @@ export class AuthService implements OnModuleInit {
     const outcome = await this.prisma.$transaction(async (tx) => {
       const user = await lockUserRow(tx, userId);
       if (!user) throw new UnauthorizedException();
+      if (user.isGuest || !user.email) {
+        throw new GuestAccountException('email_verification');
+      }
       if (user.emailVerifiedAt) return { alreadyVerified: true as const };
 
       const now = new Date();
@@ -752,6 +888,7 @@ export class AuthService implements OnModuleInit {
       user: {
         id: user.id,
         email: user.email,
+        isGuest: user.isGuest,
         locale: user.locale,
         role: user.role,
         isPremium: effectivePremium(user),

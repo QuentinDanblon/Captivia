@@ -74,7 +74,7 @@ describe('Auth — refresh concurrent vs révocation (course, constat 1)', () =>
       },
     });
     const login = await auth.login({
-      email: user.email,
+      email: user.email!,
       password: PASSWORD_A,
     });
     const attackerFamily = (

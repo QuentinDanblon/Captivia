@@ -19,7 +19,13 @@ import { unsubscribeFromPush } from '@/lib/web-push';
 
 interface User {
   id: string;
-  email: string;
+  /** null pour un invité (mode « Essayer sans compte », cf. `isGuest`). */
+  email: string | null;
+  /**
+   * Mode invité : session sans e-mail ni mot de passe (POST /auth/guest), mêmes jetons que les
+   * comptes. Perdre cette session = perdre l'accès aux données : jamais de déconnexion implicite.
+   */
+  isGuest?: boolean;
   locale: string;
   isPremium: boolean;
   /** W2-04 : adresse e-mail vérifiée (absent dans les anciens caches = inconnu). */

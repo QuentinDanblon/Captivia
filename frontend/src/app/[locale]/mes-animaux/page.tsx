@@ -9,6 +9,10 @@ import { animalCarnetPath, animalDetailPath } from '@/lib/platform';
 import { api, ApiError, type Animal as ApiAnimal, type SpeciesRoutineTemplate } from '@/lib/api';
 import { Link } from '@/i18n/navigation';
 import Modal from '@/components/ui/Modal';
+import { GuestEntry } from '@/components/guest/GuestEntry';
+import { GuestSaveBanner } from '@/components/guest/GuestSaveBanner';
+import { AddAnimalLockedSlot } from '@/components/guest/AddAnimalLockedSlot';
+import { ANIMAL_LIMIT_CODE, isGuestUser } from '@/lib/guest';
 
 interface Animal extends ApiAnimal {
   speciesName?: string;
@@ -64,12 +68,6 @@ function MyAnimalsPageContent() {
   const [speciesResults, setSpeciesResults] = useState<SpeciesResult[]>([]);
   const [speciesSearching, setSpeciesSearching] = useState(false);
   const [showSpeciesDropdown, setShowSpeciesDropdown] = useState(false);
-
-  useEffect(() => {
-    if (!authLoading && !user) {
-      router.push('/login');
-    }
-  }, [user, authLoading, router]);
 
   useEffect(() => {
     if (user && token) {
@@ -267,6 +265,11 @@ function MyAnimalsPageContent() {
       setShowAddModal(false);
       resetForm();
     } catch (error) {
+      // Limite d'animaux (invité / compte gratuit) : explication, jamais de déconnexion.
+      if (error instanceof ApiError && error.code === ANIMAL_LIMIT_CODE) {
+        setFormError(isGuestUser(user) ? t('guest.lockedValueGuest') : t('guest.lockedValueFree'));
+        return;
+      }
       // Session perdue : lib/api a déjà tenté le refresh et émis `auth:logout` si elle est
       // révoquée (la page redirige alors). Jamais de logout() ici : ni sur 403, ni sur un
       // échec passager du backend.
@@ -278,7 +281,9 @@ function MyAnimalsPageContent() {
     }
   };
 
-  const canAddAnimal = user?.isPremium || animals.length < 1;
+  // Plusieurs animaux = compte + Premium : un invité reste à 1 animal (D-16).
+  const guest = isGuestUser(user);
+  const canAddAnimal = (!guest && user?.isPremium) || animals.length < 1;
 
   // ---- Routines recommandées (module D) ----
   const getTemplateTypeLabel = (type: string): string => {
@@ -370,6 +375,11 @@ function MyAnimalsPageContent() {
     }
   };
 
+  // Sans session : « Essayer sans compte » ou connexion (plus de redirection vers /login).
+  if (!authLoading && !user) {
+    return <GuestEntry />;
+  }
+
   if (authLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
@@ -393,21 +403,20 @@ function MyAnimalsPageContent() {
       )}
 
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-w-0">
+        <GuestSaveBanner animalName={animals[0]?.name} className="mb-6" />
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
             {t('animals.myAnimals')}
           </h1>
-          <button
-            onClick={() => openAddModal()}
-            disabled={!canAddAnimal}
-            className={`w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg transition-colors shrink-0 ${
-              canAddAnimal 
-                ? 'bg-emerald-600 text-white hover:bg-emerald-700' 
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-          >
-            + {t('animals.addAnimal')}
-          </button>
+          {/* Limite atteinte : l'emplacement verrouillé remplace le bouton (dans la grille). */}
+          {canAddAnimal && (
+            <button
+              onClick={() => openAddModal()}
+              className="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg transition-colors shrink-0 bg-emerald-600 text-white hover:bg-emerald-700"
+            >
+              + {t('animals.addAnimal')}
+            </button>
+          )}
         </div>
 
         {animals.length === 0 ? (
@@ -547,20 +556,10 @@ function MyAnimalsPageContent() {
                 </div>
               </article>
             ))}
+            {/* « Ajouter un animal » verrouillé : invité → compte, gratuit → Premium. */}
+            {!canAddAnimal && <AddAnimalLockedSlot isGuest={guest} />}
             </div>
           </>
-        )}
-
-        {/* Premium limit warning */}
-        {!user?.isPremium && animals.length >= 1 && (
-          <div className="mt-8 p-6 bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 rounded-lg">
-            <h3 className="text-lg font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
-              {t('animals.premiumRequired')}
-            </h3>
-            <p className="text-yellow-700 dark:text-yellow-300">
-              {t('animals.premiumMessage')}
-            </p>
-          </div>
         )}
       </div>
 

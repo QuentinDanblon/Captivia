@@ -78,4 +78,18 @@ describe('AppShell', () => {
     ctas.forEach((cta) => expect(cta).toHaveAttribute('href', '/register'));
     expect(screen.queryByRole('button', { name: 'common.logout' })).not.toBeInTheDocument();
   });
+
+  it('session invité (sans e-mail) : « Invité · Créer un compte » vers la conversion, jamais de déconnexion', () => {
+    mockedAuth.mockReturnValue({
+      user: { id: 'g1', email: null, isGuest: true, locale: 'fr', isPremium: false },
+      isLoading: false,
+      logout,
+    });
+    render(<AppShell>…</AppShell>);
+    expect(screen.getByText('nav.guest')).toBeInTheDocument();
+    const ctas = screen.getAllByRole('link', { name: 'nav.createAccount' });
+    expect(ctas.length).toBeGreaterThanOrEqual(2); // rail + barre haute
+    ctas.forEach((cta) => expect(cta).toHaveAttribute('href', '/sauvegarder'));
+    expect(screen.queryByRole('button', { name: 'common.logout' })).not.toBeInTheDocument();
+  });
 });

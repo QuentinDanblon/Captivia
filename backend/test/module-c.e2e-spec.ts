@@ -369,38 +369,50 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
   });
 
   // ============================================================
-  // 4. Guards — premium requis + ownership
+  // 4. Guards — ownership (D-16 : plus de Premium requis pour le carnet)
   // ============================================================
-  describe('4. Guards premium & ownership', () => {
+  describe('4. Guards ownership (carnet sans Premium, D-16)', () => {
     let premiumToken: string;
     let animalId: string;
     let freeToken: string;
 
-    it('compte non-premium → 403 sur measurements, vaccinations et export', async () => {
+    it('D-16 : compte gratuit → measurements, vaccinations et export de SON animal accessibles', async () => {
       const acc = await registerPremium(makeEmail('owner-c'));
       premiumToken = acc.token;
       animalId = await createAnimal(premiumToken, 'Guard C Gecko');
 
       const free = await createUser(makeEmail('free-c'), false);
       freeToken = free.token;
+      const freeAnimalId = await createAnimal(freeToken, 'Free C Gecko');
 
+      await request(app.getHttpServer())
+        .get(`/users/me/animals/${freeAnimalId}/measurements`)
+        .set('Authorization', `Bearer ${freeToken}`)
+        .expect(200);
+      await request(app.getHttpServer())
+        .post(`/users/me/animals/${freeAnimalId}/measurements`)
+        .set('Authorization', `Bearer ${freeToken}`)
+        .send({ weightKg: 1, measuredAt: todayStr() })
+        .expect(201);
+      await request(app.getHttpServer())
+        .get(`/users/me/animals/${freeAnimalId}/vaccinations`)
+        .set('Authorization', `Bearer ${freeToken}`)
+        .expect(200);
+      await request(app.getHttpServer())
+        .post(`/users/me/animals/${freeAnimalId}/vaccinations`)
+        .set('Authorization', `Bearer ${freeToken}`)
+        .send({ name: 'Rage', date: todayStr() })
+        .expect(201);
+      await request(app.getHttpServer())
+        .get(`/users/me/animals/${freeAnimalId}/carnet/export`)
+        .set('Authorization', `Bearer ${freeToken}`)
+        .expect(200);
+    });
+
+    it('compte gratuit → 403 sur le carnet d’un animal d’autrui (ownership)', async () => {
       await request(app.getHttpServer())
         .get(`/users/me/animals/${animalId}/measurements`)
         .set('Authorization', `Bearer ${freeToken}`)
-        .expect(403);
-      await request(app.getHttpServer())
-        .post(`/users/me/animals/${animalId}/measurements`)
-        .set('Authorization', `Bearer ${freeToken}`)
-        .send({ weightKg: 1, measuredAt: todayStr() })
-        .expect(403);
-      await request(app.getHttpServer())
-        .get(`/users/me/animals/${animalId}/vaccinations`)
-        .set('Authorization', `Bearer ${freeToken}`)
-        .expect(403);
-      await request(app.getHttpServer())
-        .post(`/users/me/animals/${animalId}/vaccinations`)
-        .set('Authorization', `Bearer ${freeToken}`)
-        .send({ name: 'Rage', date: todayStr() })
         .expect(403);
       await request(app.getHttpServer())
         .get(`/users/me/animals/${animalId}/carnet/export`)

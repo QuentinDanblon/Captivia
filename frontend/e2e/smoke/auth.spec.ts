@@ -89,10 +89,16 @@ test.describe('Connexion', () => {
     expect(api.callsTo('POST', '/auth/login')[0].body).toMatchObject({ email: 'smoke@captivia.test' });
   });
 
-  test('route protégée : Mes animaux sans session renvoie vers la connexion', async ({ page }) => {
+  test('Mes animaux sans session : essai sans compte ou connexion', async ({ page, api }) => {
     await page.goto('/mes-animaux');
 
+    await expect(page).toHaveURL(/\/mes-animaux$/);
+    await expect(page.getByRole('button', { name: 'Essayer sans compte' })).toBeVisible();
+    await page.getByRole('link', { name: "J'ai déjà un compte" }).click();
     await expect(page).toHaveURL(/\/login$/);
     await expect(page.getByRole('heading', { level: 1, name: 'Connexion' })).toBeVisible();
+    // La connexion propose aussi l'essai sans compte.
+    await expect(page.getByRole('button', { name: 'Essayer sans compte' })).toBeVisible();
+    expect(api.callsTo('POST', '/auth/guest')).toHaveLength(0);
   });
 });

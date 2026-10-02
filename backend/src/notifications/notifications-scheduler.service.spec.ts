@@ -10,6 +10,7 @@ import {
   DISPATCH_CONCURRENCY,
   NotificationsSchedulerService,
   REMINDERS_LOCK_KEY,
+  effectiveChannel,
   localDay,
   normalizeChannel,
 } from './notifications-scheduler.service';
@@ -28,6 +29,12 @@ describe('reminder helpers', () => {
     expect(normalizeChannel('both')).toBe('both');
     expect(normalizeChannel('sms')).toBe('push');
     expect(normalizeChannel(undefined)).toBe('push');
+  });
+
+  it('falls back to push for an account without e-mail (guest)', () => {
+    expect(effectiveChannel('email', null)).toBe('push');
+    expect(effectiveChannel('both', null)).toBe('push');
+    expect(effectiveChannel('both', 'a@b.c')).toBe('both');
   });
 });
 
@@ -131,7 +138,7 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
     });
   }
 
-  const mailsTo = (email: string) =>
+  const mailsTo = (email: string | null) =>
     sendCareReminder.mock.calls.filter((c) => c[0] === email);
 
   it('does nothing when another instance holds the advisory lock', async () => {
@@ -194,6 +201,27 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
     const second = await scheduler.runOnce(new Date(NOW.getTime() + 60_000));
     expect(second.locked).toBe(true);
     expect(mailsTo(user.email)).toHaveLength(1);
+  });
+
+  it('guest (no e-mail) with channel "both": push only, never an e-mail', async () => {
+    const guest = await prisma.user.create({
+      data: { isGuest: true, email: null, passwordHash: null },
+    });
+    userIds.push(guest.id);
+    await prisma.notificationPreference.create({
+      data: {
+        userId: guest.id,
+        types: {},
+        schedule: { start: '00:00', end: '23:59' },
+        deliveryChannel: 'both',
+      },
+    });
+    await createDueEvent(guest.id);
+
+    await scheduler.runOnce(NOW);
+
+    expect(mailsTo(null)).toHaveLength(0);
+    expect(pushesTo(guest.id)).toHaveLength(1);
   });
 
   it('push-only channel: no e-mail, one push', async () => {

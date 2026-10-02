@@ -19,7 +19,8 @@ export function EmailVerificationBanner() {
   const [state, setState] = useState<SendState>('idle');
   const [dismissed, setDismissed] = useState(false);
 
-  if (!user || user.emailVerified !== false || dismissed) return null;
+  // Invité : aucune adresse à vérifier (l'invitation à créer un compte est portée ailleurs).
+  if (!user || user.isGuest || user.emailVerified !== false || dismissed) return null;
   if (pathname?.startsWith('/verifier-email')) return null;
 
   const resend = async () => {

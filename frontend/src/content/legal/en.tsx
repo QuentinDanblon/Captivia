@@ -281,6 +281,10 @@ export function buildEnContent(locale: string): LegalContent {
                 is deleted; automatic database backups are overwritten according to their retention cycle (30 days at
                 most).
               </li>
+              <li>
+                Use without an account (guest): your animal and its health record are kept until you create an
+                account, delete them, or after 90 days without using the app; they are then erased.
+              </li>
               <li>Password reset token: one hour at most, after which it can no longer be used.</li>
               <li>Login token stored in your browser: valid for 7 days, erased on logout.</li>
               <li>Technical and security logs (including IP address): 12 months at most.</li>

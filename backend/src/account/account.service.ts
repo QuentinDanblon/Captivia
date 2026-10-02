@@ -10,8 +10,9 @@ const bcrypt = bcryptjs as unknown as {
 /**
  * Version du format d'export (à incrémenter si la structure change).
  * v2 : emailVerifiedAt, sessions, état du flux calendrier, nombre d'abonnements push actifs.
+ * v3 : profile.isGuest et profile.lastActiveAt (mode invité ; `email` vaut null pour un invité).
  */
-export const EXPORT_FORMAT_VERSION = 2;
+export const EXPORT_FORMAT_VERSION = 3;
 
 @Injectable()
 export class AccountService {
@@ -30,17 +31,26 @@ export class AccountService {
    * transaction, rendent l'opération indépendante de ces cascades (défense en
    * profondeur) et atomique : tout ou rien.
    */
-  async deleteAccount(userId: string, password: string): Promise<void> {
+  async deleteAccount(
+    userId: string,
+    password: string | undefined,
+  ): Promise<void> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      select: { id: true, passwordHash: true },
+      select: { id: true, passwordHash: true, isGuest: true },
     });
     if (!user) {
       throw new UnauthorizedException('Utilisateur introuvable');
     }
-    const valid = await bcrypt.compare(password, user.passwordHash);
-    if (!valid) {
-      throw new UnauthorizedException('Mot de passe incorrect');
+    // Compte invité : aucun mot de passe à re-vérifier, l'access token suffit.
+    if (!user.isGuest) {
+      const valid =
+        typeof password === 'string' &&
+        user.passwordHash !== null &&
+        (await bcrypt.compare(password, user.passwordHash));
+      if (!valid) {
+        throw new UnauthorizedException('Mot de passe incorrect');
+      }
     }
 
     await this.prisma.$transaction(async (tx) => {
@@ -76,6 +86,8 @@ export class AccountService {
       select: {
         id: true,
         email: true,
+        isGuest: true,
+        lastActiveAt: true,
         locale: true,
         role: true,
         isPremium: true,

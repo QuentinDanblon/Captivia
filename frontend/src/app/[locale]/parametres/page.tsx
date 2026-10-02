@@ -1,21 +1,17 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { Link } from '@/i18n/navigation';
+import { GuestEntry } from '@/components/guest/GuestEntry';
+import { GuestSaveBanner } from '@/components/guest/GuestSaveBanner';
 
 export default function ParametresPage() {
   const t = useTranslations();
-  const router = useRouter();
-  const { user, isLoading: authLoading, logout } = useAuth();
+  const { user, isLoading: authLoading } = useAuth();
 
-  useEffect(() => {
-    if (!authLoading && !user) {
-      router.push('/login');
-    }
-  }, [user, authLoading, router]);
+  // Sans session : « Essayer sans compte » ou connexion (plus de redirection vers /login).
+  if (!authLoading && !user) return <GuestEntry />;
 
   if (authLoading) {
     return (
@@ -36,6 +32,9 @@ export default function ParametresPage() {
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white mb-6 sm:mb-8">
           {t('settings.title')}
         </h1>
+
+        {/* Invité : l'invitation à créer un compte (sans perte) est le premier réglage. */}
+        <GuestSaveBanner dismissible={false} className="mb-6" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {/* Compte card */}
