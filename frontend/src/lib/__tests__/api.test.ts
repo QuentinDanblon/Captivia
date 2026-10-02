@@ -1,4 +1,4 @@
-import { api } from '../api';
+import { api, ApiError, isBackendUnavailable, BACKEND_UNAVAILABLE_MESSAGE } from '../api';
 
 // Mock fetch
 global.fetch = jest.fn();
@@ -292,6 +292,114 @@ describe('API Client', () => {
       await api.getRecommendedEquipment(123, 'terrarium', 'large');
 
       expectFetchUrl('/equipment?speciesId=123&category=terrarium&size=large');
+    });
+  });
+
+  describe('request() : erreurs HTTP, timeout et session', () => {
+    const jsonResponse = (status: number, body: unknown, statusText = '') => ({
+      ok: status >= 200 && status < 300,
+      status,
+      statusText,
+      json: async () => body,
+    });
+    let logoutListener: jest.Mock;
+
+    beforeEach(() => {
+      logoutListener = jest.fn();
+      window.addEventListener('auth:logout', logoutListener);
+    });
+    afterEach(() => {
+      window.removeEventListener('auth:logout', logoutListener);
+    });
+
+    it('lève ApiError avec status et message du backend sur une réponse non OK', async () => {
+      fetchMock().mockResolvedValue(jsonResponse(404, { message: 'Espèce introuvable' }, 'Not Found'));
+
+      const err = await api.getSpecies('999').catch((e) => e);
+
+      expect(err).toBeInstanceOf(ApiError);
+      expect(err.status).toBe(404);
+      expect(err.message).toBe('Espèce introuvable');
+    });
+
+    it('concatène les messages de validation (tableau) et retombe sur statusText', async () => {
+      fetchMock().mockResolvedValueOnce(jsonResponse(400, { message: ['nom requis', 'sexe invalide'] }));
+      await expect(api.getSpecies('1')).rejects.toThrow('nom requis ; sexe invalide');
+
+      fetchMock().mockResolvedValueOnce({ ok: false, status: 500, statusText: 'Internal Server Error', json: async () => ({}) });
+      await expect(api.getSpecies('1')).rejects.toMatchObject({ status: 500, message: 'Internal Server Error' });
+    });
+
+    it('migre les anciens return response.json() : une 500 sur un appel authentifié lève désormais', async () => {
+      fetchMock().mockResolvedValue(jsonResponse(500, { message: 'boom' }));
+      await expect(api.getMyAnimals('tok')).rejects.toMatchObject({ status: 500, message: 'boom' });
+      await expect(api.getGrade('tok')).rejects.toBeInstanceOf(ApiError);
+    });
+
+    it('transmet un AbortSignal de timeout (15 s) à fetch', async () => {
+      fetchMock().mockResolvedValue(jsonResponse(200, {}));
+      await api.getSpecies('1');
+      const [, init] = fetchMock().mock.calls.at(-1);
+      expect(init.signal).toBeDefined();
+      expect(typeof init.signal.aborted).toBe('boolean');
+    });
+
+    it('traduit un timeout en erreur « backend indisponible »', async () => {
+      const timeout = new Error('The operation timed out.');
+      timeout.name = 'TimeoutError';
+      fetchMock().mockRejectedValue(timeout);
+
+      const err = await api.getSpecies('1').catch((e) => e);
+
+      expect(isBackendUnavailable(err)).toBe(true);
+    });
+
+    it('un échec réseau reste détectable par isBackendUnavailable avec un message neutre', async () => {
+      fetchMock().mockRejectedValue(new TypeError('Failed to fetch'));
+
+      const err = await api.getSpecies('1').catch((e) => e);
+
+      expect(isBackendUnavailable(err)).toBe(true);
+      expect(err.message).toBe(BACKEND_UNAVAILABLE_MESSAGE);
+      expect(BACKEND_UNAVAILABLE_MESSAGE).not.toMatch(/3001|npm|backend &&/i);
+    });
+
+    it('émet auth:logout sur un 401 d\'une requête authentifiée', async () => {
+      fetchMock().mockResolvedValue(jsonResponse(401, { message: 'Unauthorized' }));
+
+      await expect(api.getMyAnimals('expired')).rejects.toMatchObject({ status: 401 });
+
+      expect(logoutListener).toHaveBeenCalledTimes(1);
+    });
+
+    it("n'émet JAMAIS auth:logout sur un 403 (premium requis)", async () => {
+      fetchMock().mockResolvedValue(jsonResponse(403, { message: 'Premium requis' }));
+
+      await expect(api.getMyAnimals('tok')).rejects.toMatchObject({ status: 403 });
+
+      expect(logoutListener).not.toHaveBeenCalled();
+    });
+
+    it("n'émet pas auth:logout sur un 401 de connexion (identifiants invalides, pas de jeton)", async () => {
+      fetchMock().mockResolvedValue(jsonResponse(401, { message: 'Invalid credentials' }));
+
+      await expect(api.login('a@b.c', 'bad')).rejects.toThrow('Invalid credentials');
+
+      expect(logoutListener).not.toHaveBeenCalled();
+    });
+
+    it("n'émet pas auth:logout quand changePassword répond 401 (mot de passe actuel incorrect)", async () => {
+      fetchMock().mockResolvedValue(jsonResponse(401, { message: 'Mot de passe actuel incorrect' }));
+
+      await expect(api.changePassword('tok', 'old', 'new')).rejects.toThrow('Mot de passe actuel incorrect');
+
+      expect(logoutListener).not.toHaveBeenCalled();
+    });
+
+    it('getRoutineTemplates renvoie [] sur 404', async () => {
+      fetchMock().mockResolvedValue(jsonResponse(404, { message: 'none' }));
+
+      await expect(api.getRoutineTemplates('a1', 'tok')).resolves.toEqual([]);
     });
   });
 });

@@ -331,6 +331,15 @@
     "health": "Diese Informationen ersetzen keinen tierärztlichen Rat. Im Zweifelsfall immer einen Fachmann konsultieren.",
     "legal": "Hinweisende Informationen. Bitte lokale Vorschriften prüfen."
   },
+  "errors": {
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundDescription": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "errorTitle": "Etwas ist schiefgelaufen",
+    "errorDescription": "Es ist ein unerwartetes Problem aufgetreten. Versuchen Sie es erneut; falls es weiterhin besteht, kehren Sie zur Startseite zurück.",
+    "retry": "Erneut versuchen",
+    "backHome": "Zurück zur Startseite",
+    "reference": "Referenz: {digest}"
+  },
   "footer": {
     "about": "Über uns",
     "contact": "Kontakt",

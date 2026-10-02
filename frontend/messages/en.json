@@ -331,6 +331,15 @@
     "health": "This information does not replace veterinary advice. Always consult a professional if in doubt.",
     "legal": "Indicative information. Always verify current local regulations."
   },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you are looking for doesn't exist or has been moved.",
+    "errorTitle": "Something went wrong",
+    "errorDescription": "An unexpected problem occurred. You can try again; if it persists, go back to the home page.",
+    "retry": "Try again",
+    "backHome": "Back to home",
+    "reference": "Reference: {digest}"
+  },
   "footer": {
     "about": "About",
     "accountDeletion": "Delete my account",
