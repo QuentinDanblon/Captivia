@@ -1,33 +1,16 @@
 import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UpdateNotificationPreferencesDto } from './dto/notification-preferences.dto';
-
-// Note: web-push library would be imported here in production
-// import * as webPush from 'web-push';
-
-interface PushPayload {
-  title: string;
-  body: string;
-  icon?: string;
-  data?: any;
-}
+import { PushReminderPayload, WebPushSender } from './push-sender';
 
 @Injectable()
 export class NotificationsService {
   private readonly logger = new Logger(NotificationsService.name);
 
-  constructor(private readonly prisma: PrismaService) {
-    // In production, configure web-push:
-    // const vapidKeys = {
-    //   publicKey: process.env.VAPID_PUBLIC_KEY,
-    //   privateKey: process.env.VAPID_PRIVATE_KEY,
-    // };
-    // webPush.setVapidDetails(
-    //   'mailto:contact@captivia.com',
-    //   vapidKeys.publicKey,
-    //   vapidKeys.privateKey,
-    // );
-  }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly pushSender: WebPushSender,
+  ) {}
 
   async subscribeToPush(
     userId: string,
@@ -96,29 +79,13 @@ export class NotificationsService {
     });
   }
 
-  async sendNotification(userId: string, payload: PushPayload) {
-    const subscriptions = await this.getUserSubscriptions(userId);
-
-    const results = await Promise.allSettled(
-      subscriptions.map(async (sub) => {
-        // In production, use web-push:
-        // await webPush.sendNotification(
-        //   {
-        //     endpoint: sub.endpoint,
-        //     keys: sub.keys as any,
-        //   },
-        //   JSON.stringify(payload),
-        // );
-
-        console.log(`[PUSH] Would send to ${sub.endpoint}:`, payload);
-        return { success: true };
-      }),
+  /** Envoi immédiat vers tous les appareils de l'utilisateur (notification de test). */
+  async sendNotification(userId: string, payload: PushReminderPayload) {
+    const { sent, failed, removed } = await this.pushSender.deliver(
+      userId,
+      payload,
     );
-
-    return {
-      sent: results.filter((r) => r.status === 'fulfilled').length,
-      failed: results.filter((r) => r.status === 'rejected').length,
-    };
+    return { sent, failed: failed + removed, removed };
   }
 
   async getNotificationPreferences(userId: string) {

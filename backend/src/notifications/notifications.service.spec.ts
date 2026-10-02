@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ForbiddenException } from '@nestjs/common';
 import { NotificationsService } from './notifications.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { WebPushSender } from './push-sender';
 
 describe('NotificationsService', () => {
   let service: NotificationsService;
@@ -53,6 +54,8 @@ describe('NotificationsService', () => {
     },
   };
 
+  const mockPushSender = { deliver: jest.fn() };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -61,6 +64,7 @@ describe('NotificationsService', () => {
           provide: PrismaService,
           useValue: mockPrismaService,
         },
+        { provide: WebPushSender, useValue: mockPushSender },
       ],
     }).compile();
 
@@ -199,40 +203,33 @@ describe('NotificationsService', () => {
   });
 
   describe('sendNotification', () => {
-    it('should send notification to all user subscriptions', async () => {
-      mockPrismaService.pushSubscription.findMany.mockResolvedValue([
-        mockSubscription,
-      ]);
-
-      const payload = {
-        title: 'Test Notification',
-        body: 'Test message',
-      };
+    it('delegates to the push sender and reports the counts', async () => {
+      mockPushSender.deliver.mockResolvedValue({
+        sent: 2,
+        failed: 1,
+        removed: 1,
+      });
+      const payload = { title: 'Test Notification', body: 'Test message' };
 
       const result = await service.sendNotification(mockUserId, payload);
 
-      expect(result).toEqual({
-        sent: 1,
-        failed: 0,
-      });
+      expect(mockPushSender.deliver).toHaveBeenCalledWith(mockUserId, payload);
+      expect(result).toEqual({ sent: 2, failed: 2, removed: 1 });
     });
 
-    it('should handle multiple subscriptions', async () => {
-      mockPrismaService.pushSubscription.findMany.mockResolvedValue([
-        mockSubscription,
-        { ...mockSubscription, id: 'sub-2' },
-        { ...mockSubscription, id: 'sub-3' },
-      ]);
+    it('reports nothing sent when push is disabled', async () => {
+      mockPushSender.deliver.mockResolvedValue({
+        sent: 0,
+        failed: 0,
+        removed: 0,
+      });
 
-      const payload = {
-        title: 'Test',
-        body: 'Message',
-      };
+      const result = await service.sendNotification(mockUserId, {
+        title: 'T',
+        body: 'B',
+      });
 
-      const result = await service.sendNotification(mockUserId, payload);
-
-      expect(result.sent).toEqual(3);
-      expect(result.failed).toEqual(0);
+      expect(result).toEqual({ sent: 0, failed: 0, removed: 0 });
     });
   });
 

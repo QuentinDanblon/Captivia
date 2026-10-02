@@ -52,6 +52,15 @@ services:
       # Facultatifs — à renseigner dans le Dashboard quand disponibles.
       - key: SENTRY_DSN
         sync: false
+      # Web Push (W3-03) : `npm run vapid:generate` (backend/) génère la paire de clés.
+      # Sans clés, le push est désactivé (no-op journalisé). La clé publique est servie au
+      # navigateur par GET /notifications/vapid-public-key (pas de variable côté Netlify).
+      - key: VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_SUBJECT
+        sync: false
       # Achats intégrés (W6-08, docs/PAYMENTS.md) : IAP_ENABLED=true rend
       # REVENUECAT_WEBHOOK_SECRET obligatoire (≥ 32 caractères) au démarrage.
       - key: IAP_ENABLED

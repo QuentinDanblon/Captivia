@@ -201,6 +201,8 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
     expect(mailsTo(user.email)).toHaveLength(0);
     expect(pushesTo(user.id)).toHaveLength(1);
     expect(pushesTo(user.id)[0][1].data?.eventId).toBe(ev.id);
+    // locale transmise au service worker pour le préfixe d'URL du clic
+    expect(pushesTo(user.id)[0][1].data?.locale).toBe('fr');
     const after = await prisma.notificationEvent.findUnique({
       where: { id: ev.id },
     });

@@ -3,18 +3,19 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { NotificationsController } from './notifications.controller';
 import { NotificationsService } from './notifications.service';
 import { NotificationsSchedulerService } from './notifications-scheduler.service';
-import { NoopPushSender, PUSH_SENDER } from './push-sender';
+import { PUSH_SENDER, WebPushSender } from './push-sender';
+import { VapidController } from './vapid.controller';
 import { GradeModule } from '../grade/grade.module';
 import { MailModule } from '../mail/mail.module';
 
 @Module({
   imports: [ScheduleModule.forRoot(), GradeModule, MailModule],
-  controllers: [NotificationsController],
+  controllers: [NotificationsController, VapidController],
   providers: [
     NotificationsService,
     NotificationsSchedulerService,
-    // TODO(W3-03) : brancher l'implémentation web-push réelle.
-    { provide: PUSH_SENDER, useClass: NoopPushSender },
+    WebPushSender,
+    { provide: PUSH_SENDER, useExisting: WebPushSender },
   ],
   exports: [NotificationsService, NotificationsSchedulerService],
 })

@@ -104,7 +104,7 @@ export class NotificationsController {
     return this.notificationsService.sendNotification(req.user.id, {
       title: 'Test Captivia',
       body: 'Ceci est une notification de test',
-      icon: '/icon.png',
+      icon: '/icons/icon-192.png',
     });
   }
 }
