@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { API_URL } from '@/lib/config';
+import { isNative, tokenStorage } from '@/lib/platform';
 
 interface User {
   id: string;
@@ -26,10 +27,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const TOKEN_KEY = 'token';
 const USER_KEY = 'user';
 
-/** Accès localStorage tolérant (mode privé, stockage bloqué, valeur corrompue). */
+/**
+ * Accès tolérant (mode privé, stockage bloqué, valeur corrompue) au stockage de session :
+ * localStorage sur le web, Preferences + miroir localStorage sur natif (src/lib/platform.ts).
+ */
 function readStorage(key: string): string | null {
   try {
-    return localStorage.getItem(key);
+    return tokenStorage.getItem(key);
   } catch {
     return null;
   }
@@ -37,7 +41,7 @@ function readStorage(key: string): string | null {
 
 function writeStorage(key: string, value: string) {
   try {
-    localStorage.setItem(key, value);
+    tokenStorage.setItem(key, value);
   } catch {
     // Stockage indisponible : la session reste valable en mémoire pour l'onglet courant.
   }
@@ -45,8 +49,8 @@ function writeStorage(key: string, value: string) {
 
 function clearStoredSession() {
   try {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(USER_KEY);
+    tokenStorage.removeItem(TOKEN_KEY);
+    tokenStorage.removeItem(USER_KEY);
   } catch {
     // ignoré
   }
@@ -85,6 +89,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [nativeHydrated, setNativeHydrated] = useState(false);
 
   const clearSession = useCallback(() => {
     setToken(null);
@@ -118,6 +123,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
+    // Natif : la session persistée (Preferences) est recopiée dans localStorage avant la lecture.
+    if (isNative() && !nativeHydrated) {
+      let cancelled = false;
+      tokenStorage.hydrate([TOKEN_KEY, USER_KEY]).finally(() => {
+        if (!cancelled) setNativeHydrated(true);
+      });
+      return () => {
+        cancelled = true;
+      };
+    }
+
     const storedToken = readStorage(TOKEN_KEY);
     const storedUserRaw = readStorage(USER_KEY);
 
@@ -142,7 +158,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     setIsLoading(false);
-  }, [refreshProfile]);
+  }, [refreshProfile, nativeHydrated]);
 
   useEffect(() => {
     // Émis par lib/api.ts sur une réponse 401 authentifiée (jamais sur 403).

@@ -1,0 +1,103 @@
+# Build mobile (W6-02 / W6-03, D-11) : export statique Next.js + `npx cap sync`, SANS signature.
+# Déclenchement manuel uniquement. Signature et publication (bundleRelease, fastlane beta) : W6-12.
+# Voir docs/MOBILE.md.
+name: Mobile
+
+on:
+  workflow_dispatch:
+    inputs:
+      api_url:
+        description: "NEXT_PUBLIC_API_URL inliné dans l'app"
+        required: true
+        default: https://captivia-api.onrender.com
+      ios:
+        description: 'Synchroniser aussi le projet iOS (runner macOS)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mobile-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: frontend
+    env:
+      NEXT_PUBLIC_API_URL: ${{ inputs.api_url }}
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install
+        run: npm ci
+      - name: Tests
+        run: npm test -- --ci
+      - name: Export statique (out/)
+        run: npm run build:mobile
+      - name: Arborescence web restaurée
+        run: git diff --exit-code -- src i18n && test -z "$(git status --porcelain -- src)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mobile-web-bundle
+          path: frontend/out
+          retention-days: 7
+
+  android:
+    needs: export
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: mobile-web-bundle
+          path: frontend/out
+      - name: Projet Android (créé s'il n'est pas encore versionné)
+        run: test -d mobile/android || npx cap add android
+      - name: cap sync android
+        run: npx cap sync android
+
+  ios:
+    if: ${{ inputs.ios }}
+    needs: export
+    runs-on: macos-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: mobile-web-bundle
+          path: frontend/out
+      - name: Projet iOS (créé s'il n'est pas encore versionné)
+        run: test -d mobile/ios || npx cap add ios
+      - name: cap sync ios
+        run: npx cap sync ios

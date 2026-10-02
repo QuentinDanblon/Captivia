@@ -7,8 +7,9 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale: 'fr',
   
-  // Use 'as-needed' to only add locale prefix when not using default locale
-  localePrefix: 'as-needed',
+  // Web : 'as-needed' (pas de préfixe pour la locale par défaut, le middleware réécrit).
+  // App mobile (export statique, sans middleware — W6-02) : 'always', chaque page vit sous /<locale>/.
+  localePrefix: process.env.NEXT_PUBLIC_MOBILE_BUILD === '1' ? 'always' : 'as-needed',
 });
 
 export type Locale = (typeof routing.locales)[number];
