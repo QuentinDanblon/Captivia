@@ -1,7 +1,7 @@
 [
  {
   "speciesId": 2000000700,
-  "description": "Le Dexter est une race bovine irlandaise originaire du comté de Kerry au XVIIIe siècle. Ces petits bovins mesurent environ 102-112 cm pour les mâles et pèsent en moyenne 325 kg. Ils se caractérisent par leurs pattes courtes, leur robe généralement noire, rouge ou bringée, et leur robustesse remarquable.",
+  "description": "Le Dexter est une race bovine originaire du comté de Kerry, dans le sud-ouest de l'Irlande, apparue au XVIIIe siècle. C'est un petit bovin aux pattes courtes : les taureaux mesurent généralement 102 à 112 cm au garrot et les vaches pèsent environ 325 kg. Sa robe est le plus souvent noire, parfois rouge ou dun. C'est une race mixte, élevée pour le lait et la viande.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Dexter_cattle"
  },
  {
@@ -21,7 +21,7 @@
  },
  {
   "speciesId": 2000000704,
-  "description": "La race Kostroma est une race bovine russe développée au XXe siècle dans l'Oblast de Kostroma. Elle provient du croisement de bétail local avec des races suisses, allemandes et écossaises. Ces bovins, de taille moyenne, sont reconnus pour leur excellente production laitière de 3900-5000 kg par lactation.",
+  "description": "La race Kostroma est une race bovine russe développée dans la première moitié du XXe siècle dans l'oblast de Kostroma, en Haute-Volga. Elle est issue du croisement de bovins locaux améliorés avec des taureaux Brown Swiss, Allgäu et Ayrshire. Elle est reconnue pour sa production laitière, typiquement de 3 900 à 5 000 kg de lait par lactation.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Kostroma_cattle"
  },
  {
@@ -31,7 +31,7 @@
  },
  {
   "speciesId": 2000000706,
-  "description": "Les bovins Alatau sont une race originaire de la République socialiste soviétique du Kazakhstan, nommée d'après les montagnes Alatau. Cette race est utilisée à la fois pour la production de viande et de lait. C'est une race polyvalente adaptée aux régions montagneuses d'Asie centrale.",
+  "description": "Les bovins Alatau sont une race originaire de la République socialiste soviétique du Kazakhstan, nommée d'après les montagnes Alatau. C'est une race mixte, utilisée à la fois pour la production de viande et de lait.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Alatau_cattle"
  },
  {
@@ -51,27 +51,27 @@
  },
  {
   "speciesId": 2000000980,
-  "description": "La race American Landrace est un porc américain blanc avec un long corps, une laine fine, un long museau et des oreilles lourdes tombantes. Elle provient de la Danish Landrace, importée aux États-Unis en 1934. Cette race se distingue par sa structure allongée et maigre, avec 16 ou 17 côtes.",
+  "description": "L'American Landrace est une race porcine américaine blanche, au corps long, au poil fin, au long museau et aux oreilles lourdes et tombantes. Elle descend du Landrace danois, dont des sujets ont été importés aux États-Unis en 1934. Elle compte 16 ou 17 côtes.",
   "sourceUrl": "https://en.wikipedia.org/wiki/American_Landrace_pig"
  },
  {
   "speciesId": 2000000981,
-  "description": "Le Hampshire est une race américaine de porc originaire du comté de Hampshire en Angleterre, importée aux États-Unis entre 1820 et 1830. Cette race se caractérise par un corps noir avec une bande blanche sur les épaules s'étendant jusqu'aux pattes avant. Les Hampshire sont réputés pour être musclés, croître rapidement et produire une viande de qualité.",
+  "description": "Le Hampshire est une race porcine américaine issue de porcs à selle importés du comté de Hampshire (Angleterre) aux États-Unis dès les années 1820. Il a un corps noir avec une bande blanche sur les épaules descendant sur les pattes avant, et des oreilles dressées. Musclé et à croissance rapide, il fournit une carcasse de bonne qualité.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Hampshire_pig"
  },
  {
   "speciesId": 2000000982,
-  "description": "L'Angeln Saddleback est une race rare de porc originaire de la région d'Angeln (Allemagne) créée en croisant une Landrace locale avec le Wessex Saddleback. Elle se distingue par sa couleur noire avec une bande blanche caractéristique autour du corps. Bien qu'établie en 1937, cette lignée est devenue quasi-extinc due aux préférences de marché.",
+  "description": "L'Angeln Saddleback est une race porcine rare originaire de la région d'Angeln (Allemagne), élevée surtout au Schleswig-Holstein, obtenue en croisant un Landrace local noir et blanc avec le Wessex Saddleback. C'est un grand porc noir aux oreilles tombantes, avec une ceinture blanche autour du corps au niveau des pattes avant. Établie comme race distincte en 1937, elle est devenue presque éteinte, le marché se détournant de sa viande grasse.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Angeln_Saddleback"
  },
  {
   "speciesId": 2000000983,
-  "description": "Le Large Black est une race porcine britannique créée à la fin du XIXe siècle par la fusion des populations de porcs noirs du Devonshire, Cornouailles, Essex, Suffolk et Kent. Cette race est entièrement noire, hardy, docile et prolific. Bien qu'autrefois prospère, elle est devenue une race en voie de disparition après la Seconde Guerre mondiale.",
+  "description": "Le Large Black est une race porcine britannique créée à la fin du XIXe siècle par la fusion des populations de porcs noirs du Devon et de Cornouailles avec celles de l'Essex, du Suffolk et du Kent. C'est le seul porc britannique entièrement noir ; il est rustique, docile et prolifique, fourrage bien et convient à l'élevage extensif. Sa population a fortement diminué après la Seconde Guerre mondiale et la race reste menacée.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Large_Black_pig"
  },
  {
   "speciesId": 2000000984,
-  "description": "Le Husumer est une race rare de porc originaire d'Allemagne, particulièrement documentée depuis le XIXe siècle dans la région de Husum en Schleswig-Holstein. C'est un porc rouge avec une ceinture ou selle blanche qui inclut les membres antérieurs et la tête. Cette race distinctive symbolise la résistance culturelle danoise.",
+  "description": "Le Husumer (Rotbunte Husumer) est une race porcine rare, originaire de la région de Husum (Schleswig-Holstein, Allemagne), où ce type de porc est documenté depuis la fin du XIXe siècle. C'est un porc rouge avec une ceinture ou selle blanche incluant les membres antérieurs ; la tête, le cou et l'arrière-train restent rouges. Variante de couleur de l'Angeln Saddleback, il aurait, selon la légende, été sélectionné par des éleveurs séparatistes danois pour évoquer la croix nordique.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Husumer_pig"
  }
 ]

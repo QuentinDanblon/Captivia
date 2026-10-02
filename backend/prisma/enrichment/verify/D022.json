@@ -1,0 +1,77 @@
+[
+ {
+  "speciesId": 2000001000,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000001001,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000001002,
+  "status": "corrected",
+  "note": "Robe : 'noire' -> noire ou blanche ; taches blanches sur queue/pattes"
+ },
+ {
+  "speciesId": 2000001003,
+  "status": "corrected",
+  "note": "272 kg = verrats (pas toute la race) ; truies 227 kg ajouté"
+ },
+ {
+  "speciesId": 2000001004,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000001005,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000001006,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000001007,
+  "status": "corrected",
+  "note": "Reformulation précise (explorateurs espagnols, taille/poids en unités métriques)"
+ },
+ {
+  "speciesId": 2000001008,
+  "status": "corrected",
+  "note": "'se reproduisent bien en élevage extensif' non confirmé -> 'conviennent à l'élevage extensif' ; traits (croissance, tempérament doux) ajoutés selon la page"
+ },
+ {
+  "speciesId": 2000001009,
+  "status": "corrected",
+  "note": "Moyenne de 14 porcelets ajoutée ; oreilles précisées"
+ },
+ {
+  "speciesId": 2000001010,
+  "status": "corrected",
+  "note": "'robuste' non confirmé (la source dit grand et élancé) ; 'lard' -> bacon et jambon"
+ },
+ {
+  "speciesId": 2000001011,
+  "status": "removed",
+  "note": "Déjà null (aucune source) ; laissé à null"
+ },
+ {
+  "speciesId": 2000001012,
+  "status": "corrected",
+  "note": "Le croisement avec le Landrace allemand ne concerne que la variante blanche (selon la source)"
+ },
+ {
+  "speciesId": 2000001013,
+  "status": "removed",
+  "note": "Page en.wikipedia 'Landrace' = article générique sur les landraces (plantes et animaux), ne décrit pas la race porcine Landrace ; la description affirmait en outre un 'véritable landrace' que la page nuance -> null"
+ },
+ {
+  "speciesId": 2000001115,
+  "status": "removed",
+  "note": "Déjà null (aucune source) ; laissé à null"
+ }
+]

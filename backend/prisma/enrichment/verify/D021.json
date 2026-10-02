@@ -1,0 +1,77 @@
+[
+ {
+  "speciesId": 2000000985,
+  "status": "corrected",
+  "note": "'oreilles tombantes' ne vaut que pour les premiers sujets (non confirmé pour la race actuelle), supprimé ; '39 États' = herd-book 1906, précisé"
+ },
+ {
+  "speciesId": 2000000986,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000000987,
+  "status": "removed",
+  "note": "Page fr.wikipedia 'Berkshire' = comté anglais, pas la race porcine ; description vide de contenu vérifiable -> null"
+ },
+ {
+  "speciesId": 2000000988,
+  "status": "removed",
+  "note": "Déjà null (aucune source) ; laissé à null"
+ },
+ {
+  "speciesId": 2000000989,
+  "status": "corrected",
+  "note": "Précisé landrace d'Hispaniola ; usages d'épargne élargis selon la source ; 'éradication' -> 'extermination' (terme de la source)"
+ },
+ {
+  "speciesId": 2000000990,
+  "status": "corrected",
+  "note": "Robe : 'noire avec des taches blanches' -> noire avec extrémités blanches (museau, queue, pieds)"
+ },
+ {
+  "speciesId": 2000000991,
+  "status": "removed",
+  "note": "Déjà null (aucune source) ; laissé à null"
+ },
+ {
+  "speciesId": 2000000992,
+  "status": "removed",
+  "note": "Page en.wikipedia 'Danish_Landrace' = page d'homonymie (porc/chèvre/mouton), pas la race ; description vide -> null"
+ },
+ {
+  "speciesId": 2000000993,
+  "status": "corrected",
+  "note": "Précision : landraces (et non races) ; apparence = Landrace danois"
+ },
+ {
+  "speciesId": 2000000994,
+  "status": "removed",
+  "note": "Déjà null (aucune source) ; laissé à null"
+ },
+ {
+  "speciesId": 2000000995,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000000996,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000000997,
+  "status": "removed",
+  "note": "Déjà null (aucune source) ; laissé à null"
+ },
+ {
+  "speciesId": 2000000998,
+  "status": "corrected",
+  "note": "Attribution du statut 2018 au Livestock Conservancy ; taille ajoutée"
+ },
+ {
+  "speciesId": 2000000999,
+  "status": "corrected",
+  "note": "'développée en Union soviétique' et 'bien adaptée aux conditions ukrainiennes' non présents dans la source (article court), supprimés"
+ }
+]

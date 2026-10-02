@@ -1,7 +1,7 @@
 [
  {
   "speciesId": 2000000985,
-  "description": "Le Yorkshire américain est une race porcine de grande taille originaire des États-Unis, dérivée de porcs britanniques Large White importés à partir de 1830. Ces porcs se caractérisent par leur robe blanche et de grandes oreilles tombantes. La race s'est établie rapidement au Minnesota et en Ohio avant de se propager dans trente-neuf États américains.",
+  "description": "Le Yorkshire américain est une race porcine de grande taille, issue de porcs Large White (Yorkshire) britanniques importés du Royaume-Uni ou du Canada à partir de 1830 environ. Les premiers sujets étaient grands et blancs. Ils se sont rapidement implantés au Minnesota et dans l'Ohio, et le herd-book de 1906 recensait des animaux de trente-neuf États.",
   "sourceUrl": "https://en.wikipedia.org/wiki/American_Yorkshire_pig"
  },
  {
@@ -11,8 +11,8 @@
  },
  {
   "speciesId": 2000000987,
-  "description": "Le Berkshire est une race de porcs originaire du comté du Berkshire en Angleterre, situé dans le sud du pays à l'ouest de Londres. Cette race porcine réputée est bien établie comme race d'élevage.",
-  "sourceUrl": "https://fr.wikipedia.org/wiki/Berkshire"
+  "description": null,
+  "sourceUrl": null
  },
  {
   "speciesId": 2000000988,
@@ -21,12 +21,12 @@
  },
  {
   "speciesId": 2000000989,
-  "description": "Le porc créole est une race locale originaire d'Haïti, bien adaptée aux conditions environnementales locales. Ces porcs robustes servaient de compte d'épargne aux paysans haïtiens, vendus en cas d'urgence médicale ou de célébrations. Une campagne d'éradication dans les années 1980 a décimé cette population.",
+  "description": "Le porc créole est une race locale (landrace) autochtone d'Hispaniola, décrite ici pour Haïti, bien adaptée aux conditions locales comme à l'alimentation disponible. Il servait de « compte d'épargne » aux paysans haïtiens, vendu ou abattu pour payer mariages, urgences médicales, scolarité, semences ou cérémonies vaudou. Une campagne d'extermination dans les années 1980 a décimé cette population.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Creole_pig"
  },
  {
   "speciesId": 2000000990,
-  "description": "Le Poland China est une race américaine originaire du comté de Warren en Ohio, créée par croisement de porcs chinois avec des races européennes comme le Berkshire. Cette race se caractérise par sa grande taille, pesant environ 240 kg pour les femelles et 290 kg pour les mâles, avec une coloration noire et des taches blanches.",
+  "description": "Le Poland China est une race porcine américaine, née dans le comté de Warren (Ohio) à partir de porcs de type chinois croisés avec des races européennes, dont le Berkshire. C'est l'une des races les plus lourdes : environ 290 kg pour les mâles et 240 kg pour les femelles. Sa robe est généralement noire, avec des extrémités blanches (museau, queue et pieds).",
   "sourceUrl": "https://en.wikipedia.org/wiki/Poland_China"
  },
  {
@@ -36,12 +36,12 @@
  },
  {
   "speciesId": 2000000992,
-  "description": "Le Danish Landrace est une race porcine originaire du Danemark. Les détails spécifiques sur ses caractéristiques physiques et son utilisation en élevage varient selon les sources, mais c'est une race importante pour la production porcine européenne.",
-  "sourceUrl": "https://en.wikipedia.org/wiki/Danish_Landrace"
+  "description": null,
+  "sourceUrl": null
  },
  {
   "speciesId": 2000000993,
-  "description": "La race estonienne Estonian Bacon est une race de porc à viande originaire d'Estonie. Elle a été développée à partir d'une lignée locale en la croisant avec des races allemandes, danoises et suédoises. Son apparence ressemble à celle de la race danoise.",
+  "description": "L'Estonian Bacon est une race porcine à viande (type bacon) originaire d'Estonie. Elle a été développée à partir d'un landrace local croisé avec des landraces allemands, danois et suédois. Son apparence ressemble à celle du Landrace danois.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Estonian_Bacon_pig"
  },
  {
@@ -66,12 +66,12 @@
  },
  {
   "speciesId": 2000000998,
-  "description": "La race Meishan est une race chinoise originaire de la province du Jiangsu, caractérisée par ses grandes oreilles tombantes et sa peau noire et ridée. Elle est particulièrement notable pour ses larges portées de 15 à 22 porcelets. En 2018, la race a été déclarée en danger critique d'extinction à l'échelle mondiale.",
+  "description": "Le Meishan est une race porcine chinoise de petite à moyenne taille, originaire de la province du Jiangsu. Elle se reconnaît à ses grandes oreilles tombantes et à sa peau noire ridée. Elle est surtout connue pour ses grandes portées de 15 à 22 porcelets. En 2018, le Livestock Conservancy l'a déclarée en danger critique d'extinction à l'échelle mondiale.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Meishan_pig"
  },
  {
   "speciesId": 2000000999,
-  "description": "Le Myrhorod est une race de porc originaire d'Ukraine, développée en Union soviétique avec une orientation vers la production de lard. Cette race porcine traditionnelle est bien adaptée aux conditions environnementales ukrainiennes.",
+  "description": "Le Myrhorod (ou Mirgorod) est une race porcine ukrainienne de type lard, c'est-à-dire orientée vers la production de lard.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Myrhorod_pig"
  }
 ]

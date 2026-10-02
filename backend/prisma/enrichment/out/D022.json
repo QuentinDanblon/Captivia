@@ -11,12 +11,12 @@
  },
  {
   "speciesId": 2000001002,
-  "description": "Le Chato Murciano est une race de porc domestique originaire de Murcia, en Espagne, caractérisée par son museau court. Présentant généralement une robe noire avec parfois des taches blanches, ce porc est réputé pour la production de bacon et de viande maigre. La race s'adapte bien au climat chaud et sec du sud espagnol.",
+  "description": "Le Chato Murciano est une race de porc domestique originaire de Murcie, en Espagne, caractérisée par son museau court et sa petite tête. Sa robe est noire ou blanche, certains sujets portant des taches blanches (queue, pattes). Il est élevé principalement pour le bacon et la viande maigre, et s'adapte bien au climat chaud et sec du sud de l'Espagne.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Chato_Murciano"
  },
  {
   "speciesId": 2000001003,
-  "description": "Le Gloucestershire Old Spots est une race porcine anglaise originaire du comté de Gloucestershire, présentant une robe blanche avec des taches noires. Ces porcs de grande taille pèsent jusqu'à 272 kg et se distinguent par leur tempérament docile et leur intelligence. Ils excellent comme mères éleveuses et s'adaptent bien à l'élevage en pâturage.",
+  "description": "Le Gloucestershire Old Spots est une race porcine anglaise, nommée d'après le comté de Gloucestershire, à robe blanche tachetée de noir. Les verrats atteignent environ 272 kg et les truies 227 kg. La race est connue pour sa docilité, son intelligence, sa prolificité et sa rusticité ; ses truies, très bonnes mères, élèvent de grandes portées au pâturage.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Gloucestershire_Old_Spots"
  },
  {
@@ -36,22 +36,22 @@
  },
  {
   "speciesId": 2000001007,
-  "description": "Le porc d'Ossabaw Island provient d'une population de porcs sauvages sur l'île d'Ossabaw en Géorgie. Ces animaux descendent de porcs espagnols introduits au 16e siècle. Pesant moins de 200 livres, ils se caractérisent par leur petite taille et leur rusticité remarquable.",
+  "description": "Le porc d'Ossabaw Island descend d'une population de porcs férals de l'île d'Ossabaw, en Géorgie (États-Unis), issue de porcs lâchés par des explorateurs espagnols au XVIe siècle. Petit (moins de 51 cm de haut) et pesant moins de 90 kg, il est rustique et très bon fouilleur, utile en élevage extensif.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Ossabaw_Island_Hog"
  },
  {
   "speciesId": 2000001008,
-  "description": "Le Red Wattle Hog est une race porcine originaire des États-Unis, caractérisée par sa couleur rouge distinctive et ses tassels caractéristiques. Ces porcs pèsent typiquement entre 360 et 450 kg et sont réputés pour leur rusticité et leur bonne capacité maternelle. Ils se reproduisent bien en élevage extensif.",
+  "description": "Le Red Wattle Hog est une race porcine originaire des États-Unis, nommée pour sa robe rouge et ses pendeloques (« wattles » ou « tassels ») caractéristiques. Ces porcs pèsent typiquement de 360 à 450 kg ; ils grandissent vite, fouillent bien et sont rustiques, au tempérament doux et résistants aux maladies. Ils sont réputés pour leurs qualités maternelles et conviennent à l'élevage extensif.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Red_Wattle_hog"
  },
  {
   "speciesId": 2000001009,
-  "description": "Le porc Taihu est une race domestique originaire de la région du Lac Tai dans la vallée du Yangtsé inférieur en Chine. De grande taille, ce porc affiche une robe noire avec un front largement étendu et le visage fortement ridé. Elle se distingue par son taux de reproduction élevé avec des portées atteignant vingt porcelets.",
+  "description": "Le porc Taihu est une race domestique originaire de la région du lac Tai, dans la vallée du bas Yangtsé en Chine. Grand, noir, avec une grosse tête au front large, des oreilles larges et repliées et le visage fortement ridé, il se distingue par son taux de reproduction élevé : jusqu'à vingt porcelets par portée, quatorze en moyenne.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Taihu_pig"
  },
  {
   "speciesId": 2000001010,
-  "description": "Le Wessex Saddleback est une race porcine originaire du West Country en Angleterre, particulièrement du Wessex. Animal de grande taille et robuste, ce porc affiche une robe noire avec une bande blanche s'étendant du poitrail sur l'épaule. Traditionnellement adapté au pâturage en forêt, il était élevé pour la qualité de son lard et de son jambon.",
+  "description": "Le Wessex Saddleback est une race porcine originaire du West Country en Angleterre (Wessex), notamment du Wiltshire et de la New Forest. C'est un grand animal élancé, noir, avec une bande blanche allant d'une patte avant à l'autre en passant sur les épaules, comme une selle. Adapté à la recherche de nourriture en forêt, il a traditionnellement été élevé comme porc à bacon et à jambon.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Wessex_Saddleback"
  },
  {
@@ -61,13 +61,13 @@
  },
  {
   "speciesId": 2000001012,
-  "description": "Le Göttingen Minipig est une race créée dans les années 1960 à l'Université de Göttingen en Allemagne. Cette race a été développée par croisement de petits porcs vietnamiens avec la lignée Minnesota Miniature et le Landrace allemand. Elle est principalement utilisée pour la recherche biomédicale en raison de ses similitudes physiologiques avec les humains.",
+  "description": "Le Göttingen Minipig est un porc miniature élevé au début des années 1960 à l'Université de Göttingen, en Allemagne. Il est issu de petits porcs vietnamiens croisés avec le Minnesota Miniature, une variante blanche ayant été obtenue par croisement avec le Landrace allemand. Il est surtout utilisé en recherche médicale en raison de ses similitudes biochimiques, anatomiques et physiologiques avec l'humain.",
   "sourceUrl": "https://en.wikipedia.org/wiki/Minipig"
  },
  {
   "speciesId": 2000001013,
-  "description": "La race Landrace porcine est originaire du Danemark et représente une véritable race domestique développée par adaptation locale. Le Landrace danois, établi en tant que race en 1896, est l'ancêtre principal du Landrace américain. Cette race s'est propagée internationalement, influençant d'autres variantes suédoises et britanniques.",
-  "sourceUrl": "https://en.wikipedia.org/wiki/Landrace"
+  "description": null,
+  "sourceUrl": null
  },
  {
   "speciesId": 2000001115,
