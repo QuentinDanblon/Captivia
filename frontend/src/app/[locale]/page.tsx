@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { api, type SearchSpeciesFilters } from '@/lib/api';
 import { ArrowRight, Bird, Bug, CircleDot, Fish, Leaf, Rabbit, Search, Sparkles, Turtle } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
+import { speciesPath } from '@/lib/platform';
 
 const animalTypes = [
   { value: 'Reptilia', icon: Turtle, tone: 'mint' },
@@ -214,7 +215,7 @@ export default function Home() {
                 {!suggestionsLoading && suggestions.map((species) => (
                   <Link
                     key={species.key}
-                    href={`/species/${species.key}`}
+                    href={speciesPath(species.key)}
                     onClick={handleSuggestionClick}
                     className="captivia-suggestion"
                     role="option"
@@ -307,7 +308,7 @@ export default function Home() {
               {results.map((species) => (
                 <Link
                   key={species.key}
-                  href={`/species/${species.key}`}
+                  href={speciesPath(species.key)}
                   className="captivia-result-card"
                   data-testid="species-result"
                 >

@@ -20,6 +20,7 @@ import type {
   SpeciesEquipmentData,
   SpeciesFoodProduct,
 } from './_components/types';
+import { speciesPath } from '@/lib/platform';
 
 // W4-07 — chaque section (et sa/ses modale(s)) est un chunk séparé, chargé à la demande.
 // L'état des formulaires vit dans ces composants ; la page ne garde que les données partagées.
@@ -469,7 +470,7 @@ export default function AnimalDetailPage({
                 <h1 className="text-2xl sm:text-3xl font-bold mb-2">{animal.name}</h1>
                 {species && (
                   <Link 
-                    href={`/species/${animal.speciesId}`}
+                    href={speciesPath(animal.speciesId)}
                     className="text-lg opacity-90 hover:opacity-100 hover:underline"
                   >
                     {species.canonicalName || species.scientificName}
@@ -563,7 +564,7 @@ export default function AnimalDetailPage({
                   )}
                   
                   <Link
-                    href={`/species/${animal.speciesId}`}
+                    href={speciesPath(animal.speciesId)}
                     className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium mt-4"
                   >
                     {t('species.viewFullGuide')}

@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import type { Animal } from '@/lib/api';
+import { animalDetailPath } from '@/lib/platform';
 
 /** Famille & groupe (module F) : parents, groupe et petits. */
 export default function FamilySection({ animal, offspring }: { animal: Animal; offspring: Animal[] }) {
@@ -17,7 +18,7 @@ export default function FamilySection({ animal, offspring }: { animal: Animal; o
         <div className="flex flex-wrap gap-3">
           {animal.father && (
             <Link
-              href={`/mes-animaux/${animal.father.id}`}
+              href={animalDetailPath(animal.father.id)}
               className="flex items-center gap-2 rounded-xl border-2 border-gray-200 dark:border-gray-600 px-3 py-2 hover:border-emerald-500 transition-colors"
             >
               {animal.father.photos?.[0] ? (
@@ -34,7 +35,7 @@ export default function FamilySection({ animal, offspring }: { animal: Animal; o
           )}
           {animal.mother && (
             <Link
-              href={`/mes-animaux/${animal.mother.id}`}
+              href={animalDetailPath(animal.mother.id)}
               className="flex items-center gap-2 rounded-xl border-2 border-gray-200 dark:border-gray-600 px-3 py-2 hover:border-emerald-500 transition-colors"
             >
               {animal.mother.photos?.[0] ? (
@@ -64,7 +65,7 @@ export default function FamilySection({ animal, offspring }: { animal: Animal; o
               {offspring.map((kid) => (
                 <Link
                   key={kid.id}
-                  href={`/mes-animaux/${kid.id}`}
+                  href={animalDetailPath(kid.id)}
                   className="flex items-center gap-2 rounded-xl border-2 border-gray-200 dark:border-gray-600 px-3 py-2 hover:border-emerald-500 transition-colors"
                 >
                   {kid.photos?.[0] ? (

@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { animalCarnetPath, animalDetailPath } from '@/lib/platform';
 import { api, type Animal as ApiAnimal, type SpeciesRoutineTemplate } from '@/lib/api';
 import { Link } from '@/i18n/navigation';
 import Modal from '@/components/ui/Modal';
@@ -459,7 +460,7 @@ function MyAnimalsPageContent() {
             {animals.map((animal) => (
               <Link
                 key={animal.id}
-                href={`/mes-animaux/${animal.id}`}
+                href={animalDetailPath(animal.id)}
                 className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow block"
               >
                 <div className="relative aspect-video bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-4xl font-bold overflow-hidden group">
@@ -541,7 +542,7 @@ function MyAnimalsPageContent() {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      router.push(`/mes-animaux/${animal.id}/carnet`);
+                      router.push(animalCarnetPath(animal.id));
                     }}
                     className="mt-4 text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:underline"
                   >

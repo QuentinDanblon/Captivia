@@ -118,6 +118,11 @@ export function animalDetailPath(id: string | number): string {
   return IS_MOBILE_BUILD ? `/mes-animaux/detail?id=${enc(String(id))}` : `/mes-animaux/${enc(String(id))}`;
 }
 
+/** Carnet imprimable : `/mes-animaux/<id>/carnet` (web) ou `/mes-animaux/carnet?id=<id>` (app). */
+export function animalCarnetPath(id: string | number): string {
+  return IS_MOBILE_BUILD ? `/mes-animaux/carnet?id=${enc(String(id))}` : `/mes-animaux/${enc(String(id))}/carnet`;
+}
+
 /** Fiche espèce : `/species/<id>` (web) ou `/species?id=<id>` (app). */
 export function speciesPath(id: string | number): string {
   return IS_MOBILE_BUILD ? `/species?id=${enc(String(id))}` : `/species/${enc(String(id))}`;
