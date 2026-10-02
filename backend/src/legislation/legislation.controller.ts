@@ -19,7 +19,7 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { LegislationService } from './legislation.service';
-import { CreateLegislationDto } from './dto/legislation.dto';
+import { CreateLegislationDto, LegislationQueryDto } from './dto/legislation.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { OperatorGuard } from '../common/guards/operator.guard';
 
@@ -43,9 +43,9 @@ export class LegislationController {
   @ApiResponse({ status: 200, description: 'Legislation information retrieved' })
   async getSpeciesLegislation(
     @Param('speciesId', ParseIntPipe) speciesId: number,
-    @Query('country') country?: string,
+    @Query() query: LegislationQueryDto,
   ) {
-    return this.legislationService.getSpeciesLegislation(speciesId, country);
+    return this.legislationService.getSpeciesLegislation(speciesId, query.country, query);
   }
 
   @Post()

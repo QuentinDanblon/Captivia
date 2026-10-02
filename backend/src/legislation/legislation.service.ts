@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import {
+  PaginationQueryDto,
+  toPage,
+} from '../common/dto/pagination-query.dto';
 import { SpeciesPlusService } from './services/speciesplus.service';
 
 @Injectable()
@@ -9,7 +13,7 @@ export class LegislationService {
     private readonly speciesPlusService: SpeciesPlusService,
   ) {}
 
-  async getSpeciesLegislation(speciesId: number, country?: string) {
+  async getSpeciesLegislation(speciesId: number, country?: string, page?: PaginationQueryDto) {
     // Try to get editorial content from database
     let legislations: Awaited<ReturnType<typeof this.prisma.speciesLegislation.findUnique>>[];
 
@@ -26,6 +30,8 @@ export class LegislationService {
     } else {
       const items = await this.prisma.speciesLegislation.findMany({
         where: { speciesId },
+        orderBy: [{ country: 'asc' }, { id: 'asc' }],
+        ...toPage(page),
       });
       legislations = items;
     }

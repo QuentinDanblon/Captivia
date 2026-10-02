@@ -5,6 +5,11 @@ import {
   CreateAnimalMeasurementDto,
   UpdateAnimalMeasurementDto,
 } from './dto/measurement.dto';
+import {
+  PaginationQueryDto,
+  toPage,
+} from '../common/dto/pagination-query.dto';
+
 
 @Injectable()
 export class AnimalMeasurementsService {
@@ -13,11 +18,12 @@ export class AnimalMeasurementsService {
     private readonly animalsService: AnimalsService,
   ) {}
 
-  async findAll(animalId: string, userId: string) {
+  async findAll(animalId: string, userId: string, page?: PaginationQueryDto) {
     await this.animalsService.findOne(animalId, userId);
     return this.prisma.animalMeasurement.findMany({
       where: { animalId },
-      orderBy: { measuredAt: 'desc' },
+      orderBy: [{ measuredAt: 'desc' }, { id: 'asc' }],
+      ...toPage(page),
     });
   }
 

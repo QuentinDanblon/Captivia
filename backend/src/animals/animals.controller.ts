@@ -23,6 +23,7 @@ import { AnimalsService } from './animals.service';
 import { CreateAnimalDto, UpdateAnimalDto } from './dto/animal.dto';
 import { UpdatePublicLinkDto } from './dto/public-link.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @ApiTags('animals')
 @Controller('users/me/animals')
@@ -54,8 +55,8 @@ export class AnimalsController {
   })
   @ApiResponse({ status: 200, description: 'Animals list' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async findAll(@Request() req) {
-    return this.animalsService.findAll(req.user.id);
+  async findAll(@Request() req, @Query() page: PaginationQueryDto) {
+    return this.animalsService.findAll(req.user.id, page);
   }
 
   @Get(':id/public-link')
@@ -125,8 +126,12 @@ export class AnimalsController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
-  async getOffspring(@Request() req, @Param('id') id: string) {
-    return this.animalsService.getOffspring(id, req.user.id);
+  async getOffspring(
+    @Request() req,
+    @Param('id') id: string,
+    @Query() page: PaginationQueryDto,
+  ) {
+    return this.animalsService.getOffspring(id, req.user.id, page);
   }
 
   @Get(':id')

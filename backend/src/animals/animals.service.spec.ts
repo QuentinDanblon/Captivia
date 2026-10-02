@@ -217,7 +217,9 @@ describe('AnimalsService', () => {
           routines: expect.any(Object),
           _count: expect.any(Object),
         }),
-        orderBy: { createdAt: 'desc' },
+        orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
+        take: 100,
+        skip: 0,
       });
     });
 

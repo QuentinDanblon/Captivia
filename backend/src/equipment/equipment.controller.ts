@@ -61,6 +61,7 @@ export class EquipmentController {
       query.speciesId,
       query.category,
       query.size,
+      query,
     );
   }
 

@@ -5,6 +5,7 @@ import {
   IsObject,
   IsIn,
   MinLength,
+  MaxLength,
 } from 'class-validator';
 
 const routineTypes = ['nourrissage', 'entretien', 'uvb', 'controle'] as const;
@@ -23,6 +24,7 @@ export class CreateRoutineDto {
   @IsOptional()
   @IsString()
   @MinLength(1)
+  @MaxLength(100)
   name?: string;
 
   @IsString()
@@ -45,6 +47,7 @@ export class UpdateRoutineDto {
   @IsOptional()
   @IsString()
   @MinLength(1)
+  @MaxLength(100)
   name?: string;
 
   @IsOptional()
@@ -69,9 +72,11 @@ export class UpdateRoutineDto {
 export class CreateActionLogDto {
   @IsString()
   @MinLength(1)
+  @MaxLength(50)
   type: string;
 
   @IsOptional()
   @IsString()
+  @MaxLength(1000)
   note?: string;
 }

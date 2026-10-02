@@ -13,6 +13,7 @@ import {
 } from 'class-validator';
 import { Type, Transform } from 'class-transformer';
 import { IsValidDate } from './is-valid-date.decorator';
+import { IsPhotoSource } from './is-photo-source.decorator';
 
 export class CreateAnimalDto {
   @IsInt()
@@ -40,8 +41,8 @@ export class CreateAnimalDto {
 
   @IsOptional()
   @IsArray()
-  @ArrayMaxSize(10)
-  @IsString({ each: true })
+  @ArrayMaxSize(20)
+  @IsPhotoSource()
   photos?: string[];
 
   @IsOptional()
@@ -95,8 +96,8 @@ export class UpdateAnimalDto {
 
   @IsOptional()
   @IsArray()
-  @ArrayMaxSize(10)
-  @IsString({ each: true })
+  @ArrayMaxSize(20)
+  @IsPhotoSource()
   photos?: string[];
 
   @IsOptional()
