@@ -725,7 +725,19 @@
     "title": "Premium subscription",
     "yearly": "Yearly",
     "yearlyEquivalent": "≈ €2.50 / month",
-    "yearlyDiscount": "−17%"
+    "yearlyDiscount": "−17%",
+    "inAppOnly": "Subscription available in the Captivia mobile app",
+    "inAppOnlyHint": "Download the app from the App Store or Google Play to subscribe. No payment is offered on the website.",
+    "statusTitle": "Your subscription",
+    "sourceLabel": "Subscribed via",
+    "sourceAPPLE": "App Store",
+    "sourceGOOGLE": "Google Play",
+    "sourceMANUAL": "Activated by the Captivia team",
+    "renewsOn": "Renews automatically on {date}",
+    "endsOn": "Premium access until {date}",
+    "billingIssue": "Payment issue: please update your payment method in the store.",
+    "expired": "Your subscription has expired.",
+    "manage": "Manage my subscription"
   },
   "transparency": {
     "affiliateIndependence": "Equipment and food recommendations depend on the needs of the species, not on commission rates.",

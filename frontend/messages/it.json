@@ -718,7 +718,19 @@
     "title": "Abbonamento Premium",
     "yearly": "Annuale",
     "yearlyEquivalent": "≈ 2,50 € / mese",
-    "yearlyDiscount": "−17%"
+    "yearlyDiscount": "−17%",
+    "inAppOnly": "Abbonamento disponibile nell'app mobile Captivia",
+    "inAppOnlyHint": "Scarica l'app dall'App Store o da Google Play per abbonarti. Sul sito non è previsto alcun pagamento.",
+    "statusTitle": "Il tuo abbonamento",
+    "sourceLabel": "Sottoscritto tramite",
+    "sourceAPPLE": "App Store",
+    "sourceGOOGLE": "Google Play",
+    "sourceMANUAL": "Attivato dal team Captivia",
+    "renewsOn": "Rinnovo automatico il {date}",
+    "endsOn": "Accesso Premium fino al {date}",
+    "billingIssue": "Problema di pagamento: aggiorna il metodo di pagamento nello store.",
+    "expired": "Il tuo abbonamento è scaduto.",
+    "manage": "Gestisci il mio abbonamento"
   },
   "legal": {
     "englishFallback": "In attesa della traduzione, fa fede la versione inglese.",

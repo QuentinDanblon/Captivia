@@ -718,7 +718,19 @@
     "title": "Suscripción Premium",
     "yearly": "Anual",
     "yearlyEquivalent": "≈ 2,50 € / mes",
-    "yearlyDiscount": "−17 %"
+    "yearlyDiscount": "−17 %",
+    "inAppOnly": "Suscripción disponible en la aplicación móvil Captivia",
+    "inAppOnlyHint": "Descarga la aplicación en App Store o Google Play para suscribirte. El sitio web no ofrece ningún pago.",
+    "statusTitle": "Tu suscripción",
+    "sourceLabel": "Suscrito a través de",
+    "sourceAPPLE": "App Store",
+    "sourceGOOGLE": "Google Play",
+    "sourceMANUAL": "Activada por el equipo de Captivia",
+    "renewsOn": "Renovación automática el {date}",
+    "endsOn": "Acceso Premium hasta el {date}",
+    "billingIssue": "Problema de pago: actualiza tu método de pago en la tienda.",
+    "expired": "Tu suscripción ha caducado.",
+    "manage": "Gestionar mi suscripción"
   },
   "legal": {
     "englishFallback": "La versión en inglés es la que da fe mientras se realiza la traducción.",

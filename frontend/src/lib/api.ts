@@ -249,6 +249,20 @@ export interface SpeciesRoutineTemplate {
   order: number;
 }
 
+/** GET /users/me/subscription (W6-08) — abonnement via App Store / Google Play (RevenueCat). */
+export interface SubscriptionStatusView {
+  premium: boolean;
+  /** Compatibilité avec l'ancien format. */
+  isPremium: boolean;
+  plan?: 'monthly' | 'yearly';
+  source?: 'APPLE' | 'GOOGLE' | 'MANUAL' | null;
+  status?: 'ACTIVE' | 'IN_GRACE_PERIOD' | 'CANCELLED' | 'EXPIRED' | 'BILLING_ISSUE' | 'REFUNDED' | null;
+  productId?: string | null;
+  currentPeriodEnd?: string | null;
+  willRenew?: boolean;
+  manageUrl?: string | null;
+}
+
 export const api = {
   // Species endpoints
   searchSpecies: async (
@@ -1095,11 +1109,12 @@ export const api = {
 
   // Subscription (Premium)
   getSubscription: async (token: string) => {
-    return request<{ isPremium: boolean; plan?: 'monthly' | 'yearly' }>(`${API_URL}/users/me/subscription`, {
+    return request<SubscriptionStatusView>(`${API_URL}/users/me/subscription`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   },
 
+  /** Toujours 501 : l'abonnement se souscrit uniquement dans l'application mobile (W6-08). */
   subscribe: async (plan: 'monthly' | 'yearly', token: string) => {
     return request<{ isPremium: boolean; plan: string }>(`${API_URL}/users/me/subscription`, {
       method: 'POST',
