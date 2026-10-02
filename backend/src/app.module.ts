@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RedisModule } from '@nestjs-modules/ioredis';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { envValidationSchema } from './config/env.validation';
+import { GLOBAL_THROTTLE } from './config/throttle.config';
 import { SpeciesModule } from './species/species.module';
 import { HealthModule } from './health/health.module';
 import { CommonModule } from './common/common.module';
@@ -41,6 +44,8 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
       validationSchema: envValidationSchema,
       validationOptions: { allowUnknown: true, abortEarly: false },
     }),
+    // Rate limiting global par IP (120 req/min) ; durci par @Throttle sur les routes à API externes.
+    ThrottlerModule.forRoot({ throttlers: [GLOBAL_THROTTLE] }),
     ...(redisEnabled
       ? [
           RedisModule.forRootAsync({
@@ -85,5 +90,6 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     CommonModule,
     ...(redisEnabled ? [MonitoringModule, AnalyticsModule, DatabaseOptimizationModule] : []),
   ],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}

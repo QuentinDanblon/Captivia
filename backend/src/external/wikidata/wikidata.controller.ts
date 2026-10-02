@@ -1,3 +1,5 @@
+import { Throttle } from '@nestjs/throttler';
+import { EXTERNAL_API_THROTTLE } from '../../config/throttle.config';
 import {
   Controller,
   Get,
@@ -28,6 +30,7 @@ import { GetWikidataDto, ConservationStatusDto } from '../../dto/species.dto';
 @UseGuards(RateLimitGuard)
 @ApiTags('wikidata')
 @Controller('wikidata')
+@Throttle(EXTERNAL_API_THROTTLE)
 export class WikidataController {
   constructor(private readonly wikidataService: WikidataService) {}
 

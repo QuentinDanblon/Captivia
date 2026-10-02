@@ -1,11 +1,40 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { createHash } from 'crypto';
 import { getCacheTTL, getDefaultCacheTTL } from './cache.config';
 
+/** Nombre maximal d'entrées en mémoire (éviction LRU au-delà). */
+export const CACHE_MAX_ENTRIES = 5000;
+/** Les clés plus longues sont remplacées par leur empreinte SHA-1. */
+export const CACHE_MAX_KEY_LENGTH = 200;
+
+interface CacheEntry {
+  data: unknown;
+  /** Date d'expiration absolue (ms epoch), calculée à l'écriture. */
+  expiresAt: number;
+}
+
+/**
+ * Clé effectivement stockée : les clés > 200 caractères (ex. recherches libres)
+ * sont hachées pour borner la mémoire consommée par les clés.
+ */
+export function normalizeCacheKey(key: string): string {
+  if (key.length <= CACHE_MAX_KEY_LENGTH) return key;
+  return `sha1:${createHash('sha1').update(key).digest('hex')}`;
+}
+
+/**
+ * Cache mémoire LRU borné.
+ * - au plus CACHE_MAX_ENTRIES entrées : la moins récemment utilisée est évincée ;
+ * - `expiresAt` est calculé une fois à l'écriture (le TTL ne dépend plus de la lecture) ;
+ * - `set(key, data, ttlSeconds)` : le TTL personnalisé est exprimé en SECONDES
+ *   (même unité que Redis/Memcached et que CACHE_TTL_*) ; à défaut, TTL selon le préfixe de la clé.
+ */
 @Injectable()
 export class CacheService {
   private readonly logger = new Logger(CacheService.name);
-  private cache = new Map<string, { data: unknown; timestamp: number }>();
+  /** Map ordonnée par récence d'usage : première clé = la moins récemment utilisée. */
+  private cache = new Map<string, CacheEntry>();
   private readonly defaultTtl: number;
 
   constructor(private configService: ConfigService) {
@@ -14,40 +43,57 @@ export class CacheService {
   }
 
   get(key: string): unknown {
-    const item = this.cache.get(key);
+    const storeKey = normalizeCacheKey(key);
+    const item = this.cache.get(storeKey);
     if (!item) {
-      this.logger.debug(`Cache miss for key: ${key}`);
+      this.logger.debug(`Cache miss for key: ${storeKey}`);
       return null;
     }
 
-    const age = Date.now() - item.timestamp;
-    const ttl = getCacheTTL(key) * 1000;
-    if (age > ttl) {
-      this.logger.debug(`Cache expired for key: ${key} (TTL: ${ttl / 1000}s)`);
-      this.cache.delete(key);
+    if (item.expiresAt <= Date.now()) {
+      this.logger.debug(`Cache expired for key: ${storeKey}`);
+      this.cache.delete(storeKey);
       return null;
     }
 
-    this.logger.debug(
-      `Cache hit for key: ${key} (age: ${Math.round(age / 1000)}s, TTL: ${ttl / 1000}s)`,
-    );
+    // LRU : l'entrée consultée devient la plus récente.
+    this.cache.delete(storeKey);
+    this.cache.set(storeKey, item);
+
+    this.logger.debug(`Cache hit for key: ${storeKey}`);
     return item.data;
   }
 
+  /**
+   * @param customTtl TTL en SECONDES (optionnel). Ignoré s'il n'est pas un nombre fini > 0 ;
+   *                  à défaut, le TTL dépend du préfixe de la clé (cache.config.ts).
+   */
   set(key: string, data: unknown, customTtl?: number): void {
-    const ttl = customTtl || getCacheTTL(key) * 1000;
-    this.cache.set(key, { data, timestamp: Date.now() });
-    this.logger.debug(`Cache set for key: ${key} (TTL: ${ttl / 1000}s)`);
+    const storeKey = normalizeCacheKey(key);
+    const ttlSeconds =
+      typeof customTtl === 'number' && Number.isFinite(customTtl) && customTtl > 0
+        ? customTtl
+        : getCacheTTL(key);
+
+    // Réécriture : repositionne la clé en fin de Map (la plus récente).
+    this.cache.delete(storeKey);
+    this.cache.set(storeKey, { data, expiresAt: Date.now() + ttlSeconds * 1000 });
+
+    while (this.cache.size > CACHE_MAX_ENTRIES) {
+      const oldest = this.cache.keys().next().value;
+      if (oldest === undefined) break;
+      this.cache.delete(oldest);
+    }
+    this.logger.debug(`Cache set for key: ${storeKey} (TTL: ${ttlSeconds}s)`);
   }
 
   has(key: string): boolean {
-    const item = this.cache.get(key);
+    const storeKey = normalizeCacheKey(key);
+    const item = this.cache.get(storeKey);
     if (!item) return false;
 
-    const age = Date.now() - item.timestamp;
-    const ttl = getCacheTTL(key) * 1000;
-    if (age > ttl) {
-      this.cache.delete(key);
+    if (item.expiresAt <= Date.now()) {
+      this.cache.delete(storeKey);
       return false;
     }
 
@@ -61,8 +107,9 @@ export class CacheService {
   }
 
   clearKey(key: string): void {
-    if (this.cache.delete(key)) {
-      this.logger.debug(`Cache key cleared: ${key}`);
+    const storeKey = normalizeCacheKey(key);
+    if (this.cache.delete(storeKey)) {
+      this.logger.debug(`Cache key cleared: ${storeKey}`);
     }
   }
 
@@ -70,9 +117,10 @@ export class CacheService {
     return this.cache.size;
   }
 
-  getCacheStats(): { size: number; ttl: number; defaultTtl: number; ttlConfig: Record<string, number> } {
+  getCacheStats(): { size: number; maxEntries: number; ttl: number; defaultTtl: number; ttlConfig: Record<string, number> } {
     return {
       size: this.cache.size,
+      maxEntries: CACHE_MAX_ENTRIES,
       ttl: this.defaultTtl / 1000,
       defaultTtl: this.defaultTtl / 1000,
       ttlConfig: {

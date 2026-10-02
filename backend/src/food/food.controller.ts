@@ -1,3 +1,5 @@
+import { Throttle } from '@nestjs/throttler';
+import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
 import { BadRequestException, Controller, Get, Query, Param, NotFoundException } from '@nestjs/common';
 import {
   ApiTags,
@@ -12,6 +14,7 @@ import { isValidBarcode } from '../external/http-safety';
 
 @ApiTags('food')
 @Controller('food')
+@Throttle(EXTERNAL_API_THROTTLE)
 export class FoodController {
   constructor(
     private readonly openPetFoodFactsService: OpenPetFoodFactsService,
