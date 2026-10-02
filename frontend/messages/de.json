@@ -276,9 +276,15 @@
   },
   "footer": {
     "about": "Über uns",
+    "accountDeletion": "Konto löschen",
+    "amazonAssociate": "Als Amazon-Partner verdient Captivia an qualifizierten Verkäufen.",
     "contact": "Kontakt",
+    "legalNotice": "Impressum",
+    "navLabel": "Rechtliche Informationen",
     "privacy": "Datenschutz",
-    "terms": "Bedingungen",
+    "sources": "Quellen und Lizenzen",
+    "tagline": "Pflege, ganz einfach.",
+    "terms": "Nutzungsbedingungen",
     "transparency": "Transparenz & Affiliate"
   },
   "grade": {
@@ -315,6 +321,13 @@
     "searchPlaceholder": "Art suchen...",
     "subtitle": "Entdecke und pflege deine Tiere",
     "title": "Der Tierführer"
+  },
+  "legal": {
+    "englishFallback": "Bis zur Übersetzung ist die englische Fassung maßgeblich.",
+    "lastUpdated": "Zuletzt aktualisiert: {date}",
+    "pendingInfo": "Einige Angaben zum Anbieter fehlen noch; sie sind mit „À COMPLÉTER“ (zu ergänzen) gekennzeichnet.",
+    "reviewWarning": "Dokument muss noch von einer juristischen Fachperson geprüft werden",
+    "tableOfContents": "Inhalt"
   },
   "notifications": {
     "addCustom": "Ajouter un sujet",

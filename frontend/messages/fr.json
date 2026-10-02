@@ -276,9 +276,15 @@
   },
   "footer": {
     "about": "À propos",
+    "accountDeletion": "Supprimer mon compte",
+    "amazonAssociate": "En tant que Partenaire Amazon, Captivia réalise un bénéfice sur les achats remplissant les conditions requises.",
     "contact": "Contact",
+    "legalNotice": "Mentions légales",
+    "navLabel": "Informations légales",
     "privacy": "Confidentialité",
-    "terms": "Conditions",
+    "sources": "Sources et licences",
+    "tagline": "Prendre soin, simplement.",
+    "terms": "Conditions d'utilisation",
     "transparency": "Transparence & affiliation"
   },
   "grade": {
@@ -315,6 +321,13 @@
     "searchPlaceholder": "Rechercher une espèce...",
     "subtitle": "Découvrez et prenez soin de vos animaux",
     "title": "Le Guide de la Faune"
+  },
+  "legal": {
+    "englishFallback": "Version anglaise faisant foi en attendant la traduction.",
+    "lastUpdated": "Dernière mise à jour : {date}",
+    "pendingInfo": "Certaines informations sur l'éditeur restent à compléter ; elles sont signalées par la mention « À COMPLÉTER ».",
+    "reviewWarning": "Document à faire valider par un professionnel du droit",
+    "tableOfContents": "Sommaire"
   },
   "notifications": {
     "addCustom": "Ajouter un sujet",

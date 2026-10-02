@@ -276,9 +276,15 @@
   },
   "footer": {
     "about": "Chi siamo",
+    "accountDeletion": "Elimina il mio account",
+    "amazonAssociate": "In qualità di Affiliato Amazon, Captivia riceve un guadagno dagli acquisti idonei.",
     "contact": "Contatti",
+    "legalNotice": "Note legali",
+    "navLabel": "Informazioni legali",
     "privacy": "Privacy",
-    "terms": "Termini",
+    "sources": "Fonti e licenze",
+    "tagline": "Prendersi cura, semplicemente.",
+    "terms": "Termini di utilizzo",
     "transparency": "Trasparenza e affiliazione"
   },
   "grade": {
@@ -315,6 +321,13 @@
     "searchPlaceholder": "Cerca una specie...",
     "subtitle": "Scopri e prenditi cura dei tuoi animali",
     "title": "La Guida della Fauna"
+  },
+  "legal": {
+    "englishFallback": "In attesa della traduzione, fa fede la versione inglese.",
+    "lastUpdated": "Ultimo aggiornamento: {date}",
+    "pendingInfo": "Alcune informazioni sull'editore sono ancora da completare; sono contrassegnate con «À COMPLÉTER» (da completare).",
+    "reviewWarning": "Documento da far convalidare da un professionista legale",
+    "tableOfContents": "Indice"
   },
   "notifications": {
     "addCustom": "Ajouter un sujet",

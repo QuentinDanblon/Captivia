@@ -276,9 +276,15 @@
   },
   "footer": {
     "about": "About",
+    "accountDeletion": "Delete my account",
+    "amazonAssociate": "As an Amazon Associate, Captivia earns from qualifying purchases.",
     "contact": "Contact",
+    "legalNotice": "Legal notice",
+    "navLabel": "Legal information",
     "privacy": "Privacy",
-    "terms": "Terms",
+    "sources": "Sources and licences",
+    "tagline": "Caring, made simple.",
+    "terms": "Terms of use",
     "transparency": "Transparency & affiliation"
   },
   "grade": {
@@ -315,6 +321,13 @@
     "searchPlaceholder": "Search for a species...",
     "subtitle": "Discover and care for your animals",
     "title": "The Wildlife Guide"
+  },
+  "legal": {
+    "englishFallback": "The English version is authoritative pending translation.",
+    "lastUpdated": "Last updated: {date}",
+    "pendingInfo": "Some publisher details are still missing; they are marked “À COMPLÉTER” (to be completed).",
+    "reviewWarning": "Document to be reviewed by a legal professional",
+    "tableOfContents": "Contents"
   },
   "notifications": {
     "addCustom": "Add topic",

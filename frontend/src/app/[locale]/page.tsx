@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { useAuth } from '@/contexts/AuthContext';
 import { api, type SearchSpeciesFilters } from '@/lib/api';
 import { getTaxonomyLabel } from '@/lib/taxonomy';
 import { ArrowRight, Bird, Bug, CircleDot, Fish, Leaf, Rabbit, Search, Sparkles, Turtle } from 'lucide-react';
@@ -41,7 +40,6 @@ function normalizeSpeciesResults(results: unknown[] | undefined): SpeciesSearchR
 
 export default function Home() {
   const t = useTranslations();
-  const { user } = useAuth();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SpeciesSearchResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -151,7 +149,7 @@ export default function Home() {
       <div className="captivia-home-glow captivia-home-glow-one" aria-hidden="true" />
       <div className="captivia-home-glow captivia-home-glow-two" aria-hidden="true" />
 
-      <main className="captivia-container">
+      <div className="captivia-container">
         <section className="captivia-hero" aria-labelledby="captivia-hero-title">
           <div className="captivia-hero-copy">
             <div className="captivia-eyebrow">
@@ -350,30 +348,7 @@ export default function Home() {
           </section>
         )}
 
-        <footer className="captivia-footer">
-          <div className="captivia-footer-brand">
-            <span className="captivia-brand-mark" aria-hidden="true"><Leaf size={16} strokeWidth={2.4} /></span>
-            <span>{t('common.appName')}</span>
-          </div>
-          <div className="captivia-footer-links">
-            <Link href="/transparency">{t('footer.transparency')}</Link>
-            <Link href="/magasin">{t('common.shop')}</Link>
-            <Link href="/">{t('common.home')}</Link>
-            {user ? (
-              <>
-                <Link href="/mes-animaux">{t('common.myAnimals')}</Link>
-                <Link href="/parametres">{t('common.settings')}</Link>
-              </>
-            ) : (
-              <>
-                <Link href="/login">{t('common.login')}</Link>
-                <Link href="/register">{t('common.register')}</Link>
-              </>
-            )}
-          </div>
-          <span className="captivia-footer-note">Prendre soin, simplement.</span>
-        </footer>
-      </main>
+      </div>
     </div>
   );
 }
