@@ -74,7 +74,61 @@ interface FoodProduct {
   image_url?: string;
   brands?: string;
   categories?: string;
-  nutriments?: Record<string, any>;
+  nutriments?: Record<string, unknown>;
+}
+
+interface SpeciesFoodEntry {
+  name?: string;
+  frequency?: string;
+  notes?: string;
+  reason?: string;
+}
+
+/** Fiche espèce telle que renvoyée par GET /species/:id (champs utilisés par cette page) */
+interface SpeciesData {
+  scientificName: string;
+  canonicalName?: string;
+  rank?: string;
+  iucnStatus?: string;
+  kingdom?: string;
+  phylum?: string;
+  class?: string;
+  order?: string;
+  family?: string;
+  genus?: string;
+  distribution?: string | string[];
+  biome?: string;
+  profile?: {
+    commonNameFr?: string;
+    scientificName?: string;
+    category?: string;
+    subcategory?: string;
+    domesticationType?: string;
+    description?: string;
+  };
+  habitat?: {
+    habitatType?: string;
+    temperature?: string;
+    humidity?: string;
+    spaceRequirements?: string;
+    lighting?: string;
+    enrichment?: string;
+  };
+  behavior?: {
+    generalBehavior?: string;
+    sociability?: string;
+    difficulty?: string;
+    compatibility?: string;
+  };
+  feeding?: {
+    dietType?: string;
+    mealFrequency?: string;
+    feedingFrequency?: string;
+    recommendedFoods?: SpeciesFoodEntry[] | string;
+    foodsToAvoid?: SpeciesFoodEntry[] | string;
+    avoidedFoods?: SpeciesFoodEntry[] | string;
+    specificNeeds?: string;
+  };
 }
 
 /** Returns a valid URL string for href, or '#' to avoid "The string did not match the expected pattern" */
@@ -101,23 +155,22 @@ interface StoreItem {
 
 function MagasinTabContent({ category }: { category?: string | null }) {
   const t = useTranslations();
-  const [stores, setStores] = useState<StoreItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Résultat chargé, associé à la catégorie demandée : `loading` est dérivé (pas de setState synchrone dans l'effet)
+  const [result, setResult] = useState<{ category: string | null; stores: StoreItem[] } | null>(null);
+  const requestedCategory = category ?? null;
+  const loading = result === null || result.category !== requestedCategory;
+  const stores = result?.stores ?? [];
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
     api
       .getAffiliateStores(category || undefined, undefined)
       .then((data) => {
         const list = Array.isArray(data) ? data : [];
-        if (!cancelled) setStores(list);
+        if (!cancelled) setResult({ category: category ?? null, stores: list });
       })
       .catch(() => {
-        if (!cancelled) setStores([]);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) setResult({ category: category ?? null, stores: [] });
       });
     return () => {
       cancelled = true;
@@ -183,7 +236,7 @@ export default function SpeciesDetailPage({
     locale: string;
     id: string;
   } | null>(null);
-  const [species, setSpecies] = useState<any>(null);
+  const [species, setSpecies] = useState<SpeciesData | null>(null);
   const [health, setHealth] = useState<HealthData | null>(null);
   const [legislation, setLegislation] = useState<LegislationData | null>(null);
   const [equipment, setEquipment] = useState<EquipmentData | null>(null);
@@ -216,7 +269,7 @@ export default function SpeciesDetailPage({
             api.getSpeciesReproduction(resolvedParams.id).catch(() => null),
           ]);
 
-        setSpecies(speciesData as any);
+        setSpecies(speciesData as SpeciesData);
         setHealth(healthData as HealthData | null);
         setLegislation(legislationData as LegislationData | null);
         setEquipment(equipmentData as EquipmentData | null);
@@ -304,6 +357,7 @@ export default function SpeciesDetailPage({
       router.push('/login');
       return;
     }
+    if (!species) return;
     // Navigate to mes-animaux with species pre-selected
     const speciesName = species.canonicalName || species.scientificName;
     router.push(`/mes-animaux?addSpecies=${resolvedParams?.id}&speciesName=${encodeURIComponent(speciesName)}`);
@@ -546,7 +600,7 @@ export default function SpeciesDetailPage({
                   {species.habitat.habitatType && (
                     <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
                       <h3 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-2">
-                        Type d'habitat
+                        Type d&apos;habitat
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.habitat.habitatType}</p>
                     </div>
@@ -1010,13 +1064,13 @@ export default function SpeciesDetailPage({
                       <p className="text-gray-700 dark:text-gray-300">{species.feeding.dietType}</p>
                     </div>
                   )}
-                  {(species.feeding.mealFrequency || (species.feeding as any).feedingFrequency) && (
+                  {(species.feeding.mealFrequency || species.feeding.feedingFrequency) && (
                     <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                       <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
                         Fréquence des repas
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">
-                        {species.feeding.mealFrequency || (species.feeding as any).feedingFrequency}
+                        {species.feeding.mealFrequency || species.feeding.feedingFrequency}
                       </p>
                     </div>
                   )}
@@ -1043,7 +1097,7 @@ export default function SpeciesDetailPage({
                   );
                 })()}
                 {(() => {
-                  const avoid = species.feeding.foodsToAvoid ?? (species.feeding as any).avoidedFoods;
+                  const avoid = species.feeding.foodsToAvoid ?? species.feeding.avoidedFoods;
                   if (!avoid) return null;
                   const list = Array.isArray(avoid)
                     ? avoid.map((a: { name?: string; reason?: string }) =>
