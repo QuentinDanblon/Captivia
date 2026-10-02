@@ -1079,13 +1079,19 @@ export const api = {
   },
 
   // Auth endpoints
-  register: async (email: string, password: string, locale = 'fr') => {
+  // consent : obligatoire côté backend (W2-03) — CGU/confidentialité + âge ≥ 15 ans
+  register: async (
+    email: string,
+    password: string,
+    locale = 'fr',
+    consent?: { acceptTerms: boolean; ageConfirmed: boolean },
+  ) => {
     const response = await safeFetch(`${API_URL}/auth/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password, locale }),
+      body: JSON.stringify({ email, password, locale, ...consent }),
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {

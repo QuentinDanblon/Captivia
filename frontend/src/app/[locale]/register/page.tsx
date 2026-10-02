@@ -7,6 +7,20 @@ import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
 import Link from 'next/link';
 
+const consentRowStyle: React.CSSProperties = {
+  display: 'flex',
+  alignItems: 'flex-start',
+  gap: 10,
+  fontSize: '0.8rem',
+  lineHeight: 1.5,
+  cursor: 'pointer',
+};
+
+const checkboxStyle: React.CSSProperties = {
+  marginTop: 3,
+  flexShrink: 0,
+};
+
 export default function RegisterPage() {
   const t = useTranslations();
   const locale = useLocale();
@@ -15,6 +29,8 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -23,14 +39,22 @@ export default function RegisterPage() {
     setError('');
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError(t('auth.resetPasswordMismatch'));
+      return;
+    }
+
+    if (!acceptTerms || !ageConfirmed) {
+      setError(t('auth.consentRequired'));
       return;
     }
 
     setLoading(true);
 
     try {
-      const response = await api.register(email, password, locale);
+      const response = await api.register(email, password, locale, {
+        acceptTerms,
+        ageConfirmed,
+      });
 
       if (response.accessToken && response.user) {
         login(response.accessToken, response.user);
@@ -76,7 +100,8 @@ export default function RegisterPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              minLength={8}
+              minLength={10}
+              maxLength={128}
               autoComplete="new-password"
               className="captivia-auth-input"
             />
@@ -93,10 +118,54 @@ export default function RegisterPage() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              minLength={8}
+              minLength={10}
+              maxLength={128}
               autoComplete="new-password"
               className="captivia-auth-input"
             />
+          </div>
+
+          <div className="captivia-auth-field" style={{ display: 'grid', gap: 10 }}>
+            <label htmlFor="acceptTerms" className="captivia-auth-hint" style={consentRowStyle}>
+              <input
+                type="checkbox"
+                id="acceptTerms"
+                checked={acceptTerms}
+                onChange={(e) => setAcceptTerms(e.target.checked)}
+                required
+                style={checkboxStyle}
+              />
+              <span>
+                {t.rich('auth.acceptTermsLabel', {
+                  terms: (chunks) => (
+                    <Link href="/cgu" target="_blank" rel="noopener noreferrer" className="captivia-auth-inline-link">
+                      {chunks}
+                    </Link>
+                  ),
+                  privacy: (chunks) => (
+                    <Link
+                      href="/confidentialite"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="captivia-auth-inline-link"
+                    >
+                      {chunks}
+                    </Link>
+                  ),
+                })}
+              </span>
+            </label>
+            <label htmlFor="ageConfirmed" className="captivia-auth-hint" style={consentRowStyle}>
+              <input
+                type="checkbox"
+                id="ageConfirmed"
+                checked={ageConfirmed}
+                onChange={(e) => setAgeConfirmed(e.target.checked)}
+                required
+                style={checkboxStyle}
+              />
+              <span>{t('auth.ageConfirmLabel')}</span>
+            </label>
           </div>
 
           {error && (
