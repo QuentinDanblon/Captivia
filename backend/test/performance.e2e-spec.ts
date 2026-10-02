@@ -184,6 +184,8 @@ describe('Performance Tests', () => {
         .send({
           email: testEmail,
           password: 'password123',
+          acceptTerms: true,
+          ageConfirmed: true,
         });
       const duration = Date.now() - start;
       

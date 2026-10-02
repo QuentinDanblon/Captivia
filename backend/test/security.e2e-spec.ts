@@ -46,14 +46,14 @@ describe('Security Tests', () => {
     
     const user1Response = await request(app.getHttpServer())
       .post('/auth/register')
-      .send({ email: user1Email, password: 'password123' });
+      .send({ email: user1Email, password: 'password123', acceptTerms: true, ageConfirmed: true });
     
     user1Token = user1Response.body.accessToken;
     user1Id = user1Response.body.user.id;
     
     const user2Response = await request(app.getHttpServer())
       .post('/auth/register')
-      .send({ email: user2Email, password: 'password123' });
+      .send({ email: user2Email, password: 'password123', acceptTerms: true, ageConfirmed: true });
     
     user2Token = user2Response.body.accessToken;
     user2Id = user2Response.body.user.id;
@@ -150,6 +150,8 @@ describe('Security Tests', () => {
         .send({
           email: 'not-an-email',
           password: 'password123',
+          acceptTerms: true,
+          ageConfirmed: true,
         })
         .expect(400);
     });
@@ -160,6 +162,8 @@ describe('Security Tests', () => {
         .send({
           email: 'test@captivia.com',
           password: 'short',
+          acceptTerms: true,
+          ageConfirmed: true,
         })
         .expect(400);
     });
@@ -276,6 +280,8 @@ describe('Security Tests', () => {
         .send({
           email: testEmail,
           password: password,
+          acceptTerms: true,
+          ageConfirmed: true,
         })
         .expect(201);
 

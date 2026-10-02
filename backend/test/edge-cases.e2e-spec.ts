@@ -57,7 +57,7 @@ describe('Edge Cases Tests', () => {
       const testEmail = `edge-test-${Date.now()}@captivia.com`;
       const response = await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ email: testEmail, password: 'password123' });
+        .send({ email: testEmail, password: 'password123', acceptTerms: true, ageConfirmed: true });
       
       const token = response.body.accessToken;
       
@@ -71,7 +71,7 @@ describe('Edge Cases Tests', () => {
       const testEmail = `empty-list-${Date.now()}@captivia.com`;
       const response = await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ email: testEmail, password: 'password123' });
+        .send({ email: testEmail, password: 'password123', acceptTerms: true, ageConfirmed: true });
       
       const token = response.body.accessToken;
       
@@ -102,7 +102,7 @@ describe('Edge Cases Tests', () => {
       const testEmail = `special-char-${Date.now()}@captivia.com`;
       const response = await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ email: testEmail, password: 'password123' });
+        .send({ email: testEmail, password: 'password123', acceptTerms: true, ageConfirmed: true });
       
       const token = response.body.accessToken;
       
@@ -146,7 +146,7 @@ describe('Edge Cases Tests', () => {
       const testEmail = `long-name-${Date.now()}@captivia.com`;
       const response = await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ email: testEmail, password: 'password123' });
+        .send({ email: testEmail, password: 'password123', acceptTerms: true, ageConfirmed: true });
       
       const token = response.body.accessToken;
       const longName = 'A'.repeat(1000);
@@ -166,7 +166,7 @@ describe('Edge Cases Tests', () => {
   describe('Concurrent Operations', () => {
     it('should handle double form submission', async () => {
       const testEmail = `double-submit-${Date.now()}@captivia.com`;
-      const userData = { email: testEmail, password: 'password123' };
+      const userData = { email: testEmail, password: 'password123', acceptTerms: true, ageConfirmed: true };
       
       const [response1, response2] = await Promise.all([
         request(app.getHttpServer())
@@ -232,7 +232,7 @@ describe('Edge Cases Tests', () => {
       const uniqueEmail = `no-content-type-${Date.now()}@captivia.com`;
       await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ email: uniqueEmail, password: 'password123' })
+        .send({ email: uniqueEmail, password: 'password123', acceptTerms: true, ageConfirmed: true })
         .expect((res) => {
           expect([201, 400, 415]).toContain(res.status);
         });
@@ -241,7 +241,7 @@ describe('Edge Cases Tests', () => {
     it('should handle array instead of object', async () => {
       await request(app.getHttpServer())
         .post('/auth/register')
-        .send([{ email: 'test@example.com', password: 'password123' }])
+        .send([{ email: 'test@example.com', password: 'password123', acceptTerms: true, ageConfirmed: true }])
         .expect(400);
     });
   });
@@ -251,7 +251,7 @@ describe('Edge Cases Tests', () => {
       const testEmail = `cleanup-test-${Date.now()}@captivia.com`;
       const response = await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ email: testEmail, password: 'password123' });
+        .send({ email: testEmail, password: 'password123', acceptTerms: true, ageConfirmed: true });
       
       const token = response.body.accessToken;
       
@@ -265,7 +265,7 @@ describe('Edge Cases Tests', () => {
       const testEmail = `cascade-${Date.now()}@captivia.com`;
       const userResponse = await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ email: testEmail, password: 'password123' });
+        .send({ email: testEmail, password: 'password123', acceptTerms: true, ageConfirmed: true });
       
       const token = userResponse.body.accessToken;
       const userId = userResponse.body.user.id;

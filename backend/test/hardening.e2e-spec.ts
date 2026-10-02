@@ -12,7 +12,7 @@ jest.setTimeout(60000);
 
 const PASSWORD = 'Hardening123!';
 
-/** Email jetable unique (jamais opérateur : OPERATOR_EMAILS ne le contient pas). */
+/** Email jetable unique (jamais opérateur : rôle USER par défaut). */
 function makeEmail(tag: string): string {
   return `hardening-${tag}-${Date.now()}-${Math.floor(Math.random() * 1000)}@captivia.local`;
 }
@@ -26,7 +26,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
   async function registerUser(email: string): Promise<{ email: string; token: string; userId: string }> {
     const res = await request(app.getHttpServer())
       .post('/auth/register')
-      .send({ email, password: PASSWORD, locale: 'fr' })
+      .send({ email, password: PASSWORD, locale: 'fr', acceptTerms: true, ageConfirmed: true })
       .expect(201);
     createdEmails.push(email);
     return {
@@ -92,7 +92,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
     });
 
     it('POST /admin/users/:id/premium avec token non-opérateur → 403', () => {
-      // Le compte jetable n'est PAS dans OPERATOR_EMAILS (env local) → 403
+      // Le compte jetable a le rôle USER (défaut) → 403
       return request(app.getHttpServer())
         .post(`/admin/users/${userId}/premium`)
         .set('Authorization', `Bearer ${token}`)
