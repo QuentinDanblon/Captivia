@@ -23,6 +23,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "reset-password": "ts-node -r tsconfig-paths/register scripts/reset-dev-password.ts",
+    "operator:set": "ts-node -r tsconfig-paths/register scripts/set-operator.ts",
     "import:fr-be": "ts-node prisma/import-fr-be-databases.ts",
     "seed:prod": "ts-node prisma/seed-prod.ts",
     "seed:dev": "ts-node prisma/seed-dev.ts",
