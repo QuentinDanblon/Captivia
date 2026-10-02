@@ -49,11 +49,12 @@ const ALLOWED_EVERYWHERE = new Set([
 
 const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {
   en: new Set([
+    'Reptiles',
     'Active', 'Bronze', 'Classification', 'Contact', 'Date', 'Description', 'Distribution',
     'Dose', 'Email', 'Grade', 'Habitat', 'Identification', 'Notes', 'Notifications',
     'Photos', 'Points', 'Restrictions', 'Routines', 'Type', 'Vaccinations',
   ]),
-  es: new Set(['Email']),
+  es: new Set(['Email', 'Reptiles']),
   de: new Set(['Bronze', 'Diamant', 'Profil']),
   it: new Set(['Dose', 'Email', 'Facile', 'Habitat']),
   pt: new Set(['Bronze', 'Dose', 'Email', 'Habitat', 'ex. Rango', 'ou']),
