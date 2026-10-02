@@ -10,7 +10,10 @@
 #   - pg_dump --format=custom --no-owner depuis DATABASE_URL (URL Neon DIRECTE, sans « -pooler ») ;
 #   - le paramètre ?schema=… (ajouté par Prisma, refusé par libpq) est retiré de l'URL ;
 #     les autres paramètres (sslmode=require, channel_binding…) sont conservés ;
-#   - l'URL contient le mot de passe : elle n'est JAMAIS affichée ;
+#   - l'URL contient le mot de passe : elle n'est JAMAIS affichée, et le mot de passe est
+#     transmis à pg_dump par PGPASSWORD (environnement du processus, lisible par son seul
+#     propriétaire) et non dans --dbname (ligne de commande visible par tous via ps) ;
+#   - umask 077 : le dossier backups/ et les dumps ne sont lisibles que par leur propriétaire ;
 #   - le dump n'est PAS chiffré par ce script : le workflow .github/workflows/backup.yml le
 #     chiffre avec age avant tout envoi. Ne jamais stocker un dump en clair hors de la machine.
 #
@@ -20,6 +23,8 @@
 # Restauration : scripts/restore-db.sh (voir docs/RUNBOOK.md §3).
 
 set -euo pipefail
+# Fichiers et dossiers créés lisibles par le seul propriétaire (dump = toute la base en clair).
+umask 077
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -37,6 +42,8 @@ fi
 refuse_pooled_url "$DATABASE_URL"
 
 mkdir -p "$BACKUP_DIR"
+# Dossier préexistant (créé avant umask 077) : on resserre aussi ses droits.
+chmod 700 "$BACKUP_DIR"
 
 OUT="$BACKUP_DIR/captivia-$(date +%Y%m%d-%H%M%S).dump"
 TEMP_DUMP="$OUT.tmp"
@@ -45,6 +52,13 @@ TEMP_DUMP="$OUT.tmp"
 trap 'rm -f "$TEMP_DUMP"' EXIT
 
 CLEAN_URL="$(strip_schema_param "$DATABASE_URL")"
+# Mot de passe par l'environnement (PGPASSWORD), jamais en argument de commande.
+URL_PASSWORD="$(db_url_password "$CLEAN_URL")"
+if [ -n "$URL_PASSWORD" ]; then
+  export PGPASSWORD="$URL_PASSWORD"
+fi
+unset URL_PASSWORD
+CLEAN_URL="$(strip_url_password "$CLEAN_URL")"
 
 echo "🗄️  Sauvegarde de la base → $OUT"
 echo "🐘 pg_dump en format custom (--no-owner), client : $(pg_dump --version)"

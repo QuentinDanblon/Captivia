@@ -884,7 +884,8 @@
     "logoutAllDescription": "Déconnecte Captivia de tous vos appareils (téléphones, navigateurs), y compris celui-ci. Utile en cas de perte d'un appareil.",
     "logoutAllButton": "Se déconnecter de tous les appareils",
     "logoutAllLoading": "Déconnexion…",
-    "logoutAllError": "La déconnexion de tous les appareils a échoué. Réessayez."
+    "logoutAllError": "La déconnexion de tous les appareils a échoué. Réessayez.",
+    "accessRevokedNotice": "Le lien d’abonnement à l’Agenda des soins et les notifications push sont aussi désactivés : régénérez le lien depuis l’Agenda des soins et réactivez les notifications."
   },
   "emailVerification": {
     "bannerText": "Vérifiez votre adresse e-mail : un lien de confirmation vous a été envoyé.",

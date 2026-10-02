@@ -10,7 +10,10 @@ export interface AgendaItem {
   id: string;
   /** Instant ISO 8601 (UTC). Pour un élément `allDay`, minuit UTC du jour concerné. */
   date: string;
-  /** Jour `YYYY-MM-DD` (UTC) de l'instant `date`. */
+  /**
+   * Jour `YYYY-MM-DD` LOCAL (fuseau `User.timezone`) de l'instant `date` ; pour un élément
+   * `allDay`, la date calendaire de l'échéance.
+   */
   day: string;
   /** Vrai pour une échéance sans heure (rappel de vaccin). */
   allDay: boolean;

@@ -218,6 +218,68 @@ describe('Auth E2E — vérification d’e-mail (W2-04)', () => {
       expect(sentLinks).toHaveLength(0);
     });
 
+    it('renvoi plafonné à 5 envois par 24 h et par compte (inscription comprise), en plus du délai de 60 s', async () => {
+      const email = emailFor('cap');
+      const reg = await register(email).expect(201);
+      const access = body(reg).accessToken;
+      await waitForLink(email);
+      const resend = () =>
+        request(server())
+          .post('/auth/resend-verification')
+          .set('Authorization', `Bearer ${access}`);
+      /** Vieillit tous les envois du compte (sortie du délai de 60 s, pas de la fenêtre de 24 h). */
+      const age = (ms: number) =>
+        prisma.$executeRaw`UPDATE "EmailVerificationToken" SET "createdAt" = "createdAt" - (${ms}::int * interval '1 millisecond') WHERE "userId" = (SELECT "id" FROM "User" WHERE "email" = ${email})`;
+
+      // Inscription = envoi n° 1 ; renvois n° 2 à 5 acceptés (un par « minute »).
+      for (let i = 2; i <= 5; i++) {
+        await age(2 * 60_000);
+        await resend().expect(200);
+      }
+      await age(2 * 60_000);
+      sentLinks = [];
+      const capped = await resend().expect(429);
+      const retryAfter = (capped.body as { retryAfter?: number }).retryAfter;
+      expect(typeof retryAfter).toBe('number');
+      // Le plus ancien envoi sort de la fenêtre dans ~24 h − 8 min.
+      expect(retryAfter).toBeGreaterThan(23 * 3600);
+      expect(sentLinks).toHaveLength(0);
+      // Seul le dernier lien reste valide ; les précédents (journal des envois) sont expirés.
+      const rows = await prisma.emailVerificationToken.findMany({
+        where: { user: { email } },
+      });
+      expect(rows).toHaveLength(5);
+      expect(rows.filter((r) => r.expiresAt > new Date())).toHaveLength(1);
+
+      // 24 h plus tard, l'envoi le plus ancien sort de la fenêtre : un nouvel envoi est permis.
+      await age(24 * 3600_000 - 7 * 60_000);
+      await resend().expect(200);
+    });
+
+    it('renvois simultanés : un seul passe (contrôle et écriture sous verrou)', async () => {
+      const email = emailFor('cap-race');
+      const reg = await register(email).expect(201);
+      const access = body(reg).accessToken;
+      await waitForLink(email);
+      await prisma.emailVerificationToken.updateMany({
+        where: { user: { email } },
+        data: { createdAt: new Date(Date.now() - 2 * 60_000) },
+      });
+      const results = await Promise.all(
+        [1, 2, 3, 4].map(() =>
+          request(server())
+            .post('/auth/resend-verification')
+            .set('Authorization', `Bearer ${access}`),
+        ),
+      );
+      expect(results.map((r) => r.status).sort()).toEqual([200, 429, 429, 429]);
+      expect(
+        await prisma.emailVerificationToken.count({
+          where: { user: { email } },
+        }),
+      ).toBe(2);
+    });
+
     it('activer le lien public d’un animal exige un e-mail vérifié', async () => {
       const email = emailFor('public');
       const reg = await register(email).expect(201);

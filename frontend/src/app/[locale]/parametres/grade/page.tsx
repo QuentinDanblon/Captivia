@@ -71,10 +71,12 @@ export default function GradePage() {
     if (!token) return;
     setLoading(true);
     try {
-      const today = new Date().toISOString().slice(0, 10);
+      // Sans `date` : le backend prend « aujourd'hui » dans le fuseau du compte (User.timezone),
+      // comme le scheduler de rappels et l'agenda. L'ancienne date UTC du navigateur désignait
+      // la veille entre minuit et 2 h à Paris.
       const [gradeRes, eventsRes] = await Promise.all([
         api.getGrade(token),
-        api.getNotificationEvents(token, today, true),
+        api.getNotificationEvents(token, undefined, true),
       ]);
       setGrade(gradeRes?.points != null ? gradeRes : null);
       setEvents(Array.isArray(eventsRes) ? eventsRes : []);

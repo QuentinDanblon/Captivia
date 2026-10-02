@@ -884,7 +884,8 @@
     "logoutAllDescription": "Cierra la sesión de Captivia en todos tus dispositivos (teléfonos, navegadores), incluido este. Útil si pierdes un dispositivo.",
     "logoutAllButton": "Cerrar sesión en todos los dispositivos",
     "logoutAllLoading": "Cerrando sesión…",
-    "logoutAllError": "No se pudo cerrar la sesión en todos los dispositivos. Inténtalo de nuevo."
+    "logoutAllError": "No se pudo cerrar la sesión en todos los dispositivos. Inténtalo de nuevo.",
+    "accessRevokedNotice": "El enlace de suscripción a la Agenda de cuidados y las notificaciones push también se desactivan: vuelve a generar el enlace desde la Agenda de cuidados y reactiva las notificaciones."
   },
   "emailVerification": {
     "bannerText": "Verifica tu correo electrónico: te hemos enviado un enlace de confirmación.",

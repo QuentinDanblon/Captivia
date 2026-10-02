@@ -24,7 +24,9 @@ import { LoginDto } from './dto/login.dto';
 import {
   BCRYPT_ROUNDS,
   CURRENT_TERMS_VERSION,
+  EMAIL_VERIFICATION_MAX_SENDS,
   EMAIL_VERIFICATION_RESEND_COOLDOWN_MS,
+  EMAIL_VERIFICATION_SEND_WINDOW_MS,
   EMAIL_VERIFICATION_TTL_MS,
   PASSWORD_RESET_TTL_MS,
   REFRESH_TOKEN_TTL_MS,
@@ -82,6 +84,52 @@ function frontendBaseUrl(): string {
 }
 
 const INVALID_REFRESH_MESSAGE = 'Session expirée. Veuillez vous reconnecter.';
+
+/** Colonnes de User relues sous verrou (SELECT … FOR UPDATE). */
+type LockedUser = Pick<
+  User,
+  | 'id'
+  | 'email'
+  | 'locale'
+  | 'tokenVersion'
+  | 'passwordHash'
+  | 'emailVerifiedAt'
+>;
+
+/**
+ * Verrouille la ligne User jusqu'à la fin de la transaction interactive `tx`.
+ *
+ * Toutes les opérations qui créent ou révoquent des refresh tokens d'un compte (refresh, logout,
+ * logout-all, changement et reset du mot de passe) commencent par ce verrou : elles sont donc
+ * sérialisées. En READ COMMITTED, chaque instruction exécutée après l'obtention du verrou voit
+ * les écritures validées par la transaction qui le détenait : un jeton inséré par une rotation
+ * concurrente ne peut plus échapper à l'`updateMany` d'une révocation (revue de sécurité, constat 1).
+ */
+async function lockUserRow(
+  tx: Prisma.TransactionClient,
+  userId: string,
+): Promise<LockedUser | null> {
+  const rows = await tx.$queryRaw<LockedUser[]>(
+    Prisma.sql`SELECT "id", "email", "locale", "tokenVersion", "passwordHash", "emailVerifiedAt"
+               FROM "User" WHERE "id" = ${userId} FOR UPDATE`,
+  );
+  return rows[0] ?? null;
+}
+
+type RefreshOutcome =
+  | { status: 'ok'; user: LockedUser }
+  | { status: 'invalid' }
+  | { status: 'revoked'; reason: string; count: number };
+
+const tooManyVerificationEmails = (message: string, retryAfterMs: number) =>
+  new HttpException(
+    {
+      statusCode: HttpStatus.TOO_MANY_REQUESTS,
+      message,
+      retryAfter: Math.max(1, Math.ceil(retryAfterMs / 1000)),
+    },
+    HttpStatus.TOO_MANY_REQUESTS,
+  );
 
 @Injectable()
 export class AuthService implements OnModuleInit {
@@ -251,6 +299,8 @@ export class AuthService implements OnModuleInit {
     const passwordHash = await bcrypt.hash(newPassword, BCRYPT_ROUNDS);
 
     await this.prisma.$transaction(async (tx) => {
+      // Verrou User d'abord : sérialisé avec tout refresh concurrent de ce compte.
+      if (!(await lockUserRow(tx, record.userId))) throw invalid();
       // Consommation atomique : si deux requêtes utilisent le même token en
       // parallèle, une seule supprime la ligne et applique le changement.
       const consumed = await tx.passwordResetToken.deleteMany({
@@ -259,18 +309,10 @@ export class AuthService implements OnModuleInit {
       if (consumed.count !== 1) {
         throw invalid();
       }
-      await tx.user.update({
-        where: { id: record.userId },
-        // tokenVersion++ : toutes les sessions existantes sont révoquées
-        data: { passwordHash, tokenVersion: { increment: 1 } },
-      });
+      // tokenVersion++ et révocation de TOUS les accès (sessions, flux calendrier, push).
+      await this.revokeEveryAccess(tx, record.userId, { passwordHash });
       await tx.passwordResetToken.deleteMany({
         where: { userId: record.userId },
-      });
-      // W1-01 : les refresh tokens existants sont révoqués avec les access tokens.
-      await tx.refreshToken.updateMany({
-        where: { userId: record.userId, revokedAt: null },
-        data: { revokedAt: new Date() },
       });
     });
 
@@ -300,19 +342,40 @@ export class AuthService implements OnModuleInit {
     }
     const passwordHash = await bcrypt.hash(newPassword, BCRYPT_ROUNDS);
     const updated = await this.prisma.$transaction(async (tx) => {
-      await tx.refreshToken.updateMany({
-        where: { userId, revokedAt: null },
-        data: { revokedAt: new Date() },
-      });
-      return tx.user.update({
-        where: { id: userId },
-        data: { passwordHash, tokenVersion: { increment: 1 } },
-      });
+      const locked = await lockUserRow(tx, userId);
+      if (!locked) throw new UnauthorizedException('Utilisateur introuvable');
+      // Mot de passe modifié entre la vérification bcrypt et le verrou (requête concurrente) :
+      // le mot de passe « actuel » vérifié n'est plus le bon.
+      if (locked.passwordHash !== user.passwordHash) {
+        throw new UnauthorizedException('Mot de passe actuel incorrect');
+      }
+      return this.revokeEveryAccess(tx, userId, { passwordHash });
     });
     return {
       message: 'Mot de passe mis à jour.',
       ...(await this.issueTokenPair(updated, context)),
     };
+  }
+
+  /**
+   * Révoque tous les accès d'un compte, dans la transaction `tx` qui DOIT détenir le verrou User
+   * (`lockUserRow`) : tokenVersion++ (access tokens), refresh tokens, lien du flux calendrier
+   * et abonnements push (accès persistants qui survivaient à un reset / logout-all).
+   */
+  private async revokeEveryAccess(
+    tx: Prisma.TransactionClient,
+    userId: string,
+    data: Prisma.UserUpdateInput = {},
+  ): Promise<User> {
+    await tx.refreshToken.updateMany({
+      where: { userId, revokedAt: null },
+      data: { revokedAt: new Date() },
+    });
+    await tx.pushSubscription.deleteMany({ where: { userId } });
+    return tx.user.update({
+      where: { id: userId },
+      data: { ...data, tokenVersion: { increment: 1 }, calendarToken: null },
+    });
   }
 
   // ---------------------------------------------------------------------------
@@ -342,6 +405,8 @@ export class AuthService implements OnModuleInit {
           familyId,
           expiresAt: new Date(now + REFRESH_TOKEN_TTL_MS),
           userAgent: this.truncateUserAgent(context.userAgent),
+          // Un jeton émis avec une version déjà périmée (logout-all concurrent) est refusé au refresh.
+          tokenVersion: user.tokenVersion,
         },
       }),
     ]);
@@ -352,102 +417,141 @@ export class AuthService implements OnModuleInit {
    * Rotation : le refresh token présenté est consommé et remplacé. Présenter un
    * token déjà roté (vol probable) révoque toute la famille (toutes les rotations
    * de cette session).
+   *
+   * Toute la décision est prise SOUS le verrou de la ligne User (`lockUserRow`) : une rotation
+   * ne peut pas s'intercaler dans une révocation (logout, logout-all, changement / reset du mot
+   * de passe). Un jeton dont la `tokenVersion` diffère de celle du compte est refusé (défense en
+   * profondeur) et sa famille révoquée.
    */
   async refresh(
     rawRefreshToken: string,
     context: SessionContext = {},
   ): Promise<TokenPair> {
     const invalid = () => new UnauthorizedException(INVALID_REFRESH_MESSAGE);
-    const record = await this.prisma.refreshToken.findUnique({
-      where: { tokenHash: hashOpaqueToken(rawRefreshToken) },
-      include: { user: true },
+    const tokenHash = hashOpaqueToken(rawRefreshToken);
+    const owner = await this.prisma.refreshToken.findUnique({
+      where: { tokenHash },
+      select: { userId: true },
     });
-    if (!record) throw invalid();
-
-    if (record.replacedById) {
-      await this.revokeFamily(record.familyId, 'réutilisation détectée');
-      throw invalid();
-    }
-    if (record.revokedAt || record.expiresAt.getTime() <= Date.now()) {
-      throw invalid();
-    }
+    if (!owner) throw invalid();
 
     const newToken = generateOpaqueToken();
     const newId = crypto.randomUUID();
-    const now = new Date();
-    const rotated = await this.prisma.$transaction(async (tx) => {
-      // Consommation atomique : deux rotations concurrentes du même token → une seule gagne.
-      const claimed = await tx.refreshToken.updateMany({
-        where: {
-          id: record.id,
-          revokedAt: null,
-          replacedById: null,
-          expiresAt: { gt: now },
-        },
-        data: { revokedAt: now, replacedById: newId },
-      });
-      if (claimed.count !== 1) return false;
-      await tx.refreshToken.create({
-        data: {
-          id: newId,
-          userId: record.userId,
-          tokenHash: hashOpaqueToken(newToken),
-          familyId: record.familyId,
-          expiresAt: new Date(now.getTime() + REFRESH_TOKEN_TTL_MS),
-          userAgent: this.truncateUserAgent(context.userAgent),
-        },
-      });
-      return true;
-    });
-    if (!rotated) {
-      await this.revokeFamily(record.familyId, 'rotation concurrente');
-      throw invalid();
-    }
+    const outcome = await this.prisma.$transaction(
+      async (tx): Promise<RefreshOutcome> => {
+        const user = await lockUserRow(tx, owner.userId);
+        if (!user) return { status: 'invalid' };
+        // Relu sous le verrou : une rotation ou une révocation a pu aboutir pendant l'attente.
+        const record = await tx.refreshToken.findUnique({
+          where: { tokenHash },
+        });
+        if (!record) return { status: 'invalid' };
+        const now = new Date();
+        const revokeFamily = async (
+          reason: string,
+        ): Promise<RefreshOutcome> => {
+          const res = await tx.refreshToken.updateMany({
+            where: { familyId: record.familyId, revokedAt: null },
+            data: { revokedAt: now },
+          });
+          return { status: 'revoked', reason, count: res.count };
+        };
 
+        if (record.replacedById) return revokeFamily('réutilisation détectée');
+        if (record.revokedAt || record.expiresAt.getTime() <= now.getTime()) {
+          return { status: 'invalid' };
+        }
+        if (
+          record.tokenVersion !== null &&
+          record.tokenVersion !== user.tokenVersion
+        ) {
+          return revokeFamily('version de jeton périmée');
+        }
+
+        const claimed = await tx.refreshToken.updateMany({
+          where: { id: record.id, revokedAt: null, replacedById: null },
+          data: { revokedAt: now, replacedById: newId },
+        });
+        if (claimed.count !== 1) return { status: 'invalid' };
+        await tx.refreshToken.create({
+          data: {
+            id: newId,
+            userId: user.id,
+            tokenHash: hashOpaqueToken(newToken),
+            familyId: record.familyId,
+            expiresAt: new Date(now.getTime() + REFRESH_TOKEN_TTL_MS),
+            userAgent: this.truncateUserAgent(context.userAgent),
+            tokenVersion: user.tokenVersion,
+          },
+        });
+        return { status: 'ok', user };
+      },
+    );
+
+    if (outcome.status === 'revoked') {
+      this.logger.warn(
+        `[REFRESH] Famille de session révoquée (${outcome.reason}) : ${outcome.count} token(s).`,
+      );
+    }
+    if (outcome.status !== 'ok') throw invalid();
+
+    this.purgeExpiredRefreshTokens(owner.userId);
     return {
-      accessToken: this.signAccessToken(record.user),
+      accessToken: this.signAccessToken(outcome.user),
       refreshToken: newToken,
     };
   }
 
-  /** Révoque la session (famille) du refresh token présenté. Idempotent, ne révèle rien. */
-  async logout(rawRefreshToken: string): Promise<{ message: string }> {
+  /**
+   * Purge best effort des refresh tokens expirés du compte (la table grossissait sans limite :
+   * une ligne par rotation). Lancée sans attendre : hors du chemin critique du refresh, et un
+   * échec est sans conséquence. Une purge globale est prévue dans un autre chantier.
+   */
+  private purgeExpiredRefreshTokens(userId: string): void {
+    void this.prisma.refreshToken
+      .deleteMany({ where: { userId, expiresAt: { lt: new Date() } } })
+      .catch(() => undefined);
+  }
+
+  /**
+   * Révoque la session (famille) du refresh token présenté. Idempotent, ne révèle rien.
+   * `endpoint` (facultatif) : abonnement push de cet appareil, supprimé s'il appartient au compte.
+   */
+  async logout(
+    rawRefreshToken: string,
+    endpoint?: string,
+  ): Promise<{ message: string }> {
     const record = await this.prisma.refreshToken.findUnique({
       where: { tokenHash: hashOpaqueToken(rawRefreshToken) },
-      select: { familyId: true },
+      select: { familyId: true, userId: true },
     });
     if (record) {
-      await this.prisma.refreshToken.updateMany({
-        where: { familyId: record.familyId, revokedAt: null },
-        data: { revokedAt: new Date() },
+      await this.prisma.$transaction(async (tx) => {
+        await lockUserRow(tx, record.userId);
+        await tx.refreshToken.updateMany({
+          where: { familyId: record.familyId, revokedAt: null },
+          data: { revokedAt: new Date() },
+        });
+        if (endpoint) {
+          await tx.pushSubscription.deleteMany({
+            where: { userId: record.userId, endpoint },
+          });
+        }
       });
     }
     return { message: 'Déconnecté.' };
   }
 
-  /** « Se déconnecter de tous les appareils » : refresh tokens révoqués + tokenVersion++. */
+  /**
+   * « Se déconnecter de tous les appareils » : tokenVersion++, refresh tokens révoqués, lien du
+   * flux calendrier désactivé et abonnements push supprimés.
+   */
   async logoutAll(userId: string): Promise<{ message: string }> {
-    await this.prisma.$transaction([
-      this.prisma.refreshToken.updateMany({
-        where: { userId, revokedAt: null },
-        data: { revokedAt: new Date() },
-      }),
-      this.prisma.user.update({
-        where: { id: userId },
-        data: { tokenVersion: { increment: 1 } },
-      }),
-    ]);
-    return { message: 'Toutes les sessions ont été déconnectées.' };
-  }
-
-  private async revokeFamily(familyId: string, reason: string): Promise<void> {
-    const res = await this.prisma.refreshToken.updateMany({
-      where: { familyId, revokedAt: null },
-      data: { revokedAt: new Date() },
+    await this.prisma.$transaction(async (tx) => {
+      if (!(await lockUserRow(tx, userId))) return;
+      await this.revokeEveryAccess(tx, userId);
     });
-    this.logger.warn(
-      `[REFRESH] Famille de session révoquée (${reason}) : ${res.count} token(s).`,
-    );
+    return { message: 'Toutes les sessions ont été déconnectées.' };
   }
 
   private truncateUserAgent(ua?: string | null): string | null {
@@ -459,26 +563,58 @@ export class AuthService implements OnModuleInit {
   // W2-04 — vérification d'e-mail
   // ---------------------------------------------------------------------------
 
-  /** Crée un token de vérification (24 h, haché) et envoie l'e-mail. */
+  /**
+   * Crée un lien de vérification (24 h, haché) dans `tx`, qui doit détenir le verrou User.
+   *
+   * Un seul lien VALIDE par compte : les précédents sont invalidés (`expiresAt` = maintenant) mais
+   * conservés jusqu'à 24 h, comme journal des envois (plafond par fenêtre glissante, constat 8).
+   */
+  private async createEmailVerificationToken(
+    tx: Prisma.TransactionClient,
+    userId: string,
+    now: Date,
+  ): Promise<string> {
+    const token = generateOpaqueToken();
+    await tx.emailVerificationToken.updateMany({
+      where: { userId, expiresAt: { gt: now } },
+      data: { expiresAt: now },
+    });
+    // Purge opportuniste (tous comptes) des lignes sorties de la fenêtre d'envoi (donc expirées).
+    await tx.emailVerificationToken.deleteMany({
+      where: {
+        createdAt: {
+          lt: new Date(now.getTime() - EMAIL_VERIFICATION_SEND_WINDOW_MS),
+        },
+      },
+    });
+    await tx.emailVerificationToken.create({
+      data: {
+        userId,
+        tokenHash: hashOpaqueToken(token),
+        expiresAt: new Date(now.getTime() + EMAIL_VERIFICATION_TTL_MS),
+        createdAt: now,
+      },
+    });
+    return token;
+  }
+
+  /** Crée un token de vérification (24 h, haché) et envoie l'e-mail (inscription). */
   private async issueEmailVerification(
     user: Pick<User, 'id' | 'email' | 'locale'>,
   ): Promise<void> {
-    const token = generateOpaqueToken();
-    await this.prisma.$transaction([
-      // Un seul lien actif par compte + purge opportuniste des tokens expirés
-      this.prisma.emailVerificationToken.deleteMany({
-        where: {
-          OR: [{ userId: user.id }, { expiresAt: { lt: new Date() } }],
-        },
-      }),
-      this.prisma.emailVerificationToken.create({
-        data: {
-          userId: user.id,
-          tokenHash: hashOpaqueToken(token),
-          expiresAt: new Date(Date.now() + EMAIL_VERIFICATION_TTL_MS),
-        },
-      }),
-    ]);
+    const token = await this.prisma.$transaction(async (tx) =>
+      // Compte supprimé entre-temps : rien à envoyer.
+      (await lockUserRow(tx, user.id))
+        ? this.createEmailVerificationToken(tx, user.id, new Date())
+        : null,
+    );
+    if (token) await this.sendVerificationLink(user, token);
+  }
+
+  private async sendVerificationLink(
+    user: Pick<User, 'email' | 'locale'>,
+    token: string,
+  ): Promise<void> {
     const link = `${frontendBaseUrl()}/verifier-email?token=${token}`;
     try {
       const res = await this.mailService.sendEmailVerification(
@@ -528,51 +664,66 @@ export class AuthService implements OnModuleInit {
     return { message: 'Adresse e-mail vérifiée.', emailVerified: true };
   }
 
-  /** Renvoi du lien (utilisateur connecté), limité à un envoi par minute et par compte. */
+  /**
+   * Renvoi du lien (utilisateur connecté) : au plus un envoi par minute ET
+   * `EMAIL_VERIFICATION_MAX_SENDS` envois par 24 h glissantes et par compte (inscription comprise).
+   * Contrôle et écriture dans une même transaction, sous le verrou de la ligne User : deux
+   * requêtes simultanées ne peuvent pas dépasser le plafond.
+   */
   async resendEmailVerification(
     userId: string,
   ): Promise<{ message: string; alreadyVerified: boolean }> {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
-      select: { id: true, email: true, locale: true, emailVerifiedAt: true },
+    const outcome = await this.prisma.$transaction(async (tx) => {
+      const user = await lockUserRow(tx, userId);
+      if (!user) throw new UnauthorizedException();
+      if (user.emailVerifiedAt) return { alreadyVerified: true as const };
+
+      const now = new Date();
+      const sends = await tx.emailVerificationToken.findMany({
+        where: {
+          userId,
+          createdAt: {
+            gt: new Date(now.getTime() - EMAIL_VERIFICATION_SEND_WINDOW_MS),
+          },
+        },
+        select: { createdAt: true },
+        orderBy: { createdAt: 'asc' },
+      });
+      const last = sends[sends.length - 1];
+      if (
+        last &&
+        last.createdAt.getTime() + EMAIL_VERIFICATION_RESEND_COOLDOWN_MS >
+          now.getTime()
+      ) {
+        throw tooManyVerificationEmails(
+          'Un e-mail de vérification vient d’être envoyé. Réessayez dans un instant.',
+          last.createdAt.getTime() +
+            EMAIL_VERIFICATION_RESEND_COOLDOWN_MS -
+            now.getTime(),
+        );
+      }
+      if (sends.length >= EMAIL_VERIFICATION_MAX_SENDS) {
+        // Le plus ancien envoi « compté » sort de la fenêtre de 24 h à cette échéance.
+        const oldestCounted =
+          sends[sends.length - EMAIL_VERIFICATION_MAX_SENDS];
+        throw tooManyVerificationEmails(
+          'Trop d’e-mails de vérification envoyés pour ce compte. Réessayez plus tard.',
+          oldestCounted.createdAt.getTime() +
+            EMAIL_VERIFICATION_SEND_WINDOW_MS -
+            now.getTime(),
+        );
+      }
+      const token = await this.createEmailVerificationToken(tx, userId, now);
+      return { alreadyVerified: false as const, user, token };
     });
-    if (!user) throw new UnauthorizedException();
-    if (user.emailVerifiedAt) {
+
+    if (outcome.alreadyVerified) {
       return {
         message: 'Adresse e-mail déjà vérifiée.',
         alreadyVerified: true,
       };
     }
-    const recent = await this.prisma.emailVerificationToken.findFirst({
-      where: {
-        userId,
-        createdAt: {
-          gt: new Date(Date.now() - EMAIL_VERIFICATION_RESEND_COOLDOWN_MS),
-        },
-      },
-      select: { createdAt: true },
-    });
-    if (recent) {
-      const retryAfter = Math.max(
-        1,
-        Math.ceil(
-          (recent.createdAt.getTime() +
-            EMAIL_VERIFICATION_RESEND_COOLDOWN_MS -
-            Date.now()) /
-            1000,
-        ),
-      );
-      throw new HttpException(
-        {
-          statusCode: HttpStatus.TOO_MANY_REQUESTS,
-          message:
-            'Un e-mail de vérification vient d’être envoyé. Réessayez dans un instant.',
-          retryAfter,
-        },
-        HttpStatus.TOO_MANY_REQUESTS,
-      );
-    }
-    await this.issueEmailVerification(user);
+    await this.sendVerificationLink(outcome.user, outcome.token);
     return {
       message: 'E-mail de vérification envoyé.',
       alreadyVerified: false,

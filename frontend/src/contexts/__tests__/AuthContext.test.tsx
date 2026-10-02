@@ -1,5 +1,11 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
 import { AuthProvider, useAuth } from '../AuthContext';
+import { unsubscribeFromPush } from '@/lib/web-push';
+
+jest.mock('@/lib/web-push', () => ({
+  unsubscribeFromPush: jest.fn(() => Promise.resolve(true)),
+}));
+const unsubscribeMock = unsubscribeFromPush as jest.Mock;
 
 describe('AuthContext', () => {
   beforeEach(() => {
@@ -293,6 +299,28 @@ describe('AuthContext', () => {
       const call = fetchMock().mock.calls.find(([url]) => String(url).includes('/auth/logout'));
       expect(call).toBeDefined();
       expect(JSON.parse(String((call![1] as RequestInit).body))).toEqual({ refreshToken: 'refresh-1' });
+    });
+
+    it('logout libère l’abonnement push de ce navigateur (best effort, sans bloquer la déconnexion)', () => {
+      unsubscribeMock.mockClear();
+      // Un désabonnement qui ne répond jamais ne doit pas retarder la déconnexion.
+      unsubscribeMock.mockReturnValueOnce(new Promise(() => undefined));
+      const { result } = renderHook(() => useAuth(), { wrapper });
+      act(() => result.current.login('access-1', user, 'refresh-1'));
+
+      act(() => result.current.logout());
+
+      expect(unsubscribeMock).toHaveBeenCalledTimes(1);
+      expect(unsubscribeMock).toHaveBeenCalledWith('access-1');
+      expect(result.current.user).toBeNull();
+      expect(localStorage.getItem('token')).toBeNull();
+    });
+
+    it('logout sans session : aucun désabonnement tenté', () => {
+      unsubscribeMock.mockClear();
+      const { result } = renderHook(() => useAuth(), { wrapper });
+      act(() => result.current.logout());
+      expect(unsubscribeMock).not.toHaveBeenCalled();
     });
 
     it('W1-01 : JWT expiré + refresh token → rotation au démarrage au lieu de déconnecter', async () => {

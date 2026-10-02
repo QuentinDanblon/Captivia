@@ -1,11 +1,13 @@
-import { Test } from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
 import { PrismaModule } from '../prisma/prisma.module';
 import { PrismaService } from '../prisma/prisma.service';
 import { GradeModule } from '../grade/grade.module';
+import { GradeService } from '../grade/grade.service';
 import { MailModule } from '../mail/mail.module';
 import { MailService } from '../mail/mail.service';
 import {
+  DISPATCH_CONCURRENCY,
   NotificationsSchedulerService,
   REMINDERS_LOCK_KEY,
   localDay,
@@ -33,6 +35,7 @@ describe('reminder helpers', () => {
 const describeDb = process.env.DATABASE_URL ? describe : describe.skip;
 
 describeDb('NotificationsSchedulerService (Prisma réel)', () => {
+  let moduleRef: TestingModule;
   let prisma: PrismaService;
   let scheduler: NotificationsSchedulerService;
   let mail: MailService;
@@ -50,7 +53,7 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
   const NOW = new Date('2031-03-10T08:03:00Z');
 
   beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
+    moduleRef = await Test.createTestingModule({
       imports: [PrismaModule, GradeModule, MailModule],
       providers: [
         NotificationsSchedulerService,
@@ -76,9 +79,10 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
     // Événements générés pour les comptes de seed à la date fictive du test.
     await prisma.notificationEvent.deleteMany({
       where: {
+        // Jour local du 10 mars 2031 dans tous les fuseaux (de UTC+14 à UTC-12).
         scheduledAt: {
-          gte: new Date('2031-03-10T00:00:00Z'),
-          lt: new Date('2031-03-11T00:00:00Z'),
+          gte: new Date('2031-03-09T00:00:00Z'),
+          lt: new Date('2031-03-12T00:00:00Z'),
         },
       },
     });
@@ -272,23 +276,127 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
         animalId: animal.id,
         type: 'nourrissage',
         frequency: 'daily',
-        schedule: { time: '08:00', recurrence: 'daily' },
+        // Heure LOCALE (Paris, heure d'hiver UTC+1) : 09:00 → 08:00Z.
+        schedule: { time: '09:00', recurrence: 'daily' },
+      },
+    });
+    // Même instant UTC pour un utilisateur de New York (heure d'été depuis le 9 mars 2031, UTC-4).
+    const ny = await createUser('email', { timezone: 'America/New_York' });
+    const nyAnimal = await prisma.animal.create({
+      data: { userId: ny.id, speciesId: species.speciesId, name: 'Milo' },
+    });
+    await prisma.routine.create({
+      data: {
+        animalId: nyAnimal.id,
+        type: 'nourrissage',
+        frequency: 'daily',
+        schedule: { time: '04:00', recurrence: 'daily' },
       },
     });
 
     const res = await scheduler.runOnce(NOW);
-    expect(res.generated).toBeGreaterThanOrEqual(1);
+    expect(res.generated).toBeGreaterThanOrEqual(2);
 
-    const events = await prisma.notificationEvent.findMany({
-      where: { userId: user.id },
-    });
-    expect(events).toHaveLength(1);
-    expect(events[0].scheduledAt.toISOString()).toBe(
-      '2031-03-10T08:00:00.000Z',
-    );
-    expect(events[0].notifiedAt).not.toBeNull();
-    expect(mailsTo(user.email)).toHaveLength(1);
+    for (const u of [user, ny]) {
+      const events = await prisma.notificationEvent.findMany({
+        where: { userId: u.id },
+      });
+      expect(events).toHaveLength(1);
+      expect(events[0].scheduledAt.toISOString()).toBe(
+        '2031-03-10T08:00:00.000Z',
+      );
+      expect(events[0].notifiedAt).not.toBeNull();
+      expect(mailsTo(u.email)).toHaveLength(1);
+    }
     expect(mailsTo(user.email)[0][2]).toMatchObject({ animalName: 'Rex' });
+  });
+
+  it('sends OUTSIDE the advisory-lock transaction: a slow push service no longer holds the lock', async () => {
+    const user = await createUser('push');
+    const ev = await createDueEvent(user.id);
+    let lockFreeDuringSend: boolean | undefined;
+    sendToUser.mockImplementation(async (userId) => {
+      if (userId === user.id) {
+        // Pendant l'envoi, une autre instance doit pouvoir prendre le verrou.
+        lockFreeDuringSend = await prisma.$transaction(async (tx) => {
+          const rows = await tx.$queryRawUnsafe<{ locked: boolean }[]>(
+            `SELECT pg_try_advisory_xact_lock(${REMINDERS_LOCK_KEY}::bigint) AS locked`,
+          );
+          return rows[0]?.locked === true;
+        });
+      }
+      return true;
+    });
+
+    const res = await scheduler.runOnce(NOW);
+
+    expect(res.locked).toBe(true);
+    expect(lockFreeDuringSend).toBe(true);
+    const after = await prisma.notificationEvent.findUnique({
+      where: { id: ev.id },
+    });
+    expect(after?.notifiedAt?.getTime()).toBe(NOW.getTime());
+  });
+
+  it(`sends in bounded batches (≤ ${DISPATCH_CONCURRENCY} in flight), each reminder exactly once, even with an overlapping run`, async () => {
+    const user = await createUser('push');
+    const events = await Promise.all(
+      Array.from({ length: 25 }, () => createDueEvent(user.id)),
+    );
+    let inFlight = 0;
+    let maxInFlight = 0;
+    let overlapping: Promise<unknown> | undefined;
+    // Seconde instance (même base) : elle obtient le verrou pendant les envois de la première,
+    // mais ne doit rien renvoyer (les rappels sont déjà réservés).
+    const other = new NotificationsSchedulerService(
+      prisma,
+      moduleRef.get(GradeService),
+      mail,
+      push,
+    );
+    sendToUser.mockImplementation(async (userId) => {
+      if (userId !== user.id) return true;
+      inFlight++;
+      maxInFlight = Math.max(maxInFlight, inFlight);
+      overlapping ??= other.runOnce(new Date(NOW.getTime() + 1_000));
+      await new Promise((r) => setTimeout(r, 20));
+      inFlight--;
+      return true;
+    });
+
+    const res = await scheduler.runOnce(NOW);
+    const second = (await overlapping) as { locked: boolean };
+
+    expect(second.locked).toBe(true);
+    expect(maxInFlight).toBeGreaterThan(1);
+    expect(maxInFlight).toBeLessThanOrEqual(DISPATCH_CONCURRENCY);
+    expect(res.pushed).toBe(25);
+    const sentIds = pushesTo(user.id).map((c) => c[1].data?.eventId);
+    expect(sentIds).toHaveLength(25);
+    expect(new Set(sentIds).size).toBe(25);
+    expect(new Set(sentIds)).toEqual(new Set(events.map((e) => e.id)));
+  });
+
+  it('a throwing channel does not stop the batch; the failed reminder is released for a retry', async () => {
+    const user = await createUser('email');
+    const okUser = await createUser('email');
+    const failing = await createDueEvent(user.id);
+    const ok = await createDueEvent(okUser.id);
+    sendCareReminder.mockImplementation((to: string) =>
+      to === user.email
+        ? Promise.reject(new Error('SMTP down'))
+        : Promise.resolve({ sent: true, simulated: true, attempts: 1 }),
+    );
+
+    const res = await scheduler.runOnce(NOW);
+
+    expect(res.failed).toBeGreaterThanOrEqual(1);
+    const rows = await prisma.notificationEvent.findMany({
+      where: { id: { in: [failing.id, ok.id] } },
+    });
+    const byId = new Map(rows.map((r) => [r.id, r.notifiedAt]));
+    expect(byId.get(failing.id)).toBeNull();
+    expect(byId.get(ok.id)).not.toBeNull();
   });
 
   it('is disabled in tests and when REMINDERS_ENABLED=false', async () => {

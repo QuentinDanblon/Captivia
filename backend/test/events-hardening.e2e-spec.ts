@@ -63,6 +63,12 @@ describe('Notification events hardening (W0-07)', () => {
       .expect(201);
     token = reg.body.accessToken;
     userId = reg.body.user.id;
+    // Jours et heures interprétés dans le fuseau de l'utilisateur : UTC ici, pour que `today`
+    // (jour UTC) soit aussi son jour local quelle que soit l'heure d'exécution.
+    await prisma.user.update({
+      where: { id: userId },
+      data: { timezone: 'UTC' },
+    });
 
     const animal = await request(app.getHttpServer())
       .post('/users/me/animals')

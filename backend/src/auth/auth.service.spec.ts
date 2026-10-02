@@ -75,9 +75,16 @@ describe('AuthService', () => {
     emailVerificationToken: {
       findUnique: jest.fn(),
       findFirst: jest.fn(),
+      findMany: jest.fn(),
       create: jest.fn(),
+      updateMany: jest.fn(),
       deleteMany: jest.fn(),
     },
+    pushSubscription: {
+      deleteMany: jest.fn(),
+    },
+    // Verrou de la ligne User (SELECT … FOR UPDATE)
+    $queryRaw: jest.fn(),
     $transaction: jest.fn(),
   };
 
@@ -98,6 +105,7 @@ describe('AuthService', () => {
     service = module.get<AuthService>(AuthService);
     mailService = module.get<MailService>(MailService);
     jest.clearAllMocks();
+    mockPrismaService.$queryRaw.mockResolvedValue([mockUser]);
     // $transaction : tableau d'opérations OU callback interactif
     mockPrismaService.$transaction.mockImplementation((arg: unknown) =>
       typeof arg === 'function'
@@ -479,10 +487,19 @@ describe('AuthService', () => {
       ).toHaveBeenCalledWith({
         where: { tokenHash: hashResetToken(token) },
       });
+      // Verrou User, puis révocation de tous les accès (sessions, calendrier, push).
+      expect(mockPrismaService.$queryRaw).toHaveBeenCalled();
       expect(mockPrismaService.user.update).toHaveBeenCalledWith({
         where: { id: mockUser.id },
-        data: { passwordHash: 'new-hash', tokenVersion: { increment: 1 } },
+        data: {
+          passwordHash: 'new-hash',
+          tokenVersion: { increment: 1 },
+          calendarToken: null,
+        },
       });
+      expect(
+        mockPrismaService.pushSubscription.deleteMany,
+      ).toHaveBeenCalledWith({ where: { userId: mockUser.id } });
     });
 
     it('resetPassword rejects an expired or already-consumed token', async () => {
@@ -521,7 +538,11 @@ describe('AuthService', () => {
 
       expect(mockPrismaService.user.update).toHaveBeenCalledWith({
         where: { id: mockUser.id },
-        data: { passwordHash: 'new-hash', tokenVersion: { increment: 1 } },
+        data: {
+          passwordHash: 'new-hash',
+          tokenVersion: { increment: 1 },
+          calendarToken: null,
+        },
       });
       expect(mockJwtService.sign).toHaveBeenCalledWith(
         expect.objectContaining({ tokenVersion: 1 }),
@@ -533,6 +554,21 @@ describe('AuthService', () => {
         where: { userId: mockUser.id, revokedAt: null },
         data: { revokedAt: expect.any(Date) },
       });
+    });
+
+    it('refuses when the password changed between the bcrypt check and the row lock', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
+      mockPrismaService.$queryRaw.mockResolvedValue([
+        { ...mockUser, passwordHash: 'changed-concurrently' },
+      ]);
+      bcryptMock.compare.mockResolvedValue(true);
+      bcryptMock.hash.mockResolvedValue('new-hash');
+
+      await expect(
+        service.changePassword(mockUser.id, 'old', 'newPassword123'),
+      ).rejects.toThrow(UnauthorizedException);
+      expect(mockPrismaService.user.update).not.toHaveBeenCalled();
+      expect(mockPrismaService.refreshToken.updateMany).not.toHaveBeenCalled();
     });
   });
 });

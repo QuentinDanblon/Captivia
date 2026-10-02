@@ -16,7 +16,10 @@ import {
 } from '@nestjs/swagger';
 import { NotificationsService } from './notifications.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { PushSubscriptionDto, UnsubscribePushDto } from './dto/push-subscription.dto';
+import {
+  PushSubscriptionDto,
+  UnsubscribePushDto,
+} from './dto/push-subscription.dto';
 import { UpdateNotificationPreferencesDto } from './dto/notification-preferences.dto';
 
 @ApiTags('notifications')
@@ -33,10 +36,7 @@ export class NotificationsController {
   })
   @ApiResponse({ status: 201, description: 'Subscription created' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async subscribe(
-    @Request() req,
-    @Body() dto: PushSubscriptionDto,
-  ) {
+  async subscribe(@Request() req, @Body() dto: PushSubscriptionDto) {
     return this.notificationsService.subscribeToPush(req.user.id, dto);
   }
 
@@ -96,9 +96,10 @@ export class NotificationsController {
   @Post('test-notification')
   @ApiOperation({
     summary: 'Send test notification',
-    description: 'Send a test push notification to current user',
+    description:
+      'Send a test push notification to current user. Returns only { sent: boolean } (true if at least one device was reached).',
   })
-  @ApiResponse({ status: 200, description: 'Test notification sent' })
+  @ApiResponse({ status: 201, description: '{ sent: boolean }' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async sendTestNotification(@Request() req) {
     return this.notificationsService.sendNotification(req.user.id, {

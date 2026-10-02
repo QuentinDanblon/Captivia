@@ -7,8 +7,11 @@ const bcrypt = bcryptjs as unknown as {
   compare(plain: string, hash: string): Promise<boolean>;
 };
 
-/** Version du format d'export (à incrémenter si la structure change). */
-export const EXPORT_FORMAT_VERSION = 1;
+/**
+ * Version du format d'export (à incrémenter si la structure change).
+ * v2 : emailVerifiedAt, sessions, état du flux calendrier, nombre d'abonnements push actifs.
+ */
+export const EXPORT_FORMAT_VERSION = 2;
 
 @Injectable()
 export class AccountService {
@@ -64,7 +67,8 @@ export class AccountService {
 
   /**
    * Export complet des données de l'utilisateur (RGPD art. 20), gratuit pour tous.
-   * Exclut passwordHash, tokens de réinitialisation et clés cryptographiques push.
+   * Exclut passwordHash, tokens de réinitialisation, empreintes des refresh tokens, jeton du flux
+   * calendrier (seul son état actif / inactif est exporté) et clés cryptographiques push.
    */
   async exportData(userId: string) {
     const user = await this.prisma.user.findUnique({
@@ -77,6 +81,10 @@ export class AccountService {
         isPremium: true,
         termsAcceptedAt: true,
         termsVersion: true,
+        emailVerifiedAt: true,
+        timezone: true,
+        // Jamais le jeton (même haché) : seulement l'état du flux, dérivé ci-dessous.
+        calendarToken: true,
         points: true,
         grade: true,
         createdAt: true,
@@ -100,6 +108,16 @@ export class AccountService {
           // `keys` (p256dh/auth) sont des secrets techniques, non exportés.
           select: { id: true, endpoint: true, createdAt: true },
         },
+        // Sessions (refresh tokens) : métadonnées seulement, JAMAIS l'empreinte du jeton.
+        refreshTokens: {
+          orderBy: { createdAt: 'asc' },
+          select: {
+            userAgent: true,
+            createdAt: true,
+            expiresAt: true,
+            revokedAt: true,
+          },
+        },
       },
     });
     if (!user) {
@@ -111,6 +129,8 @@ export class AccountService {
       notificationPreferences,
       notificationEvents,
       pushSubscriptions,
+      refreshTokens,
+      calendarToken,
       points,
       grade,
       ...profile
@@ -121,6 +141,9 @@ export class AccountService {
       exportedAt: new Date().toISOString(),
       profile,
       gamification: { points, grade },
+      sessions: refreshTokens,
+      calendarFeed: { enabled: calendarToken !== null },
+      pushSubscriptionsActive: pushSubscriptions.length,
       animals: animals.map(({ history, ...animal }) => ({
         ...animal,
         actionLogs: history,

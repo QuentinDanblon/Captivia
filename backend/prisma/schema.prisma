@@ -141,6 +141,10 @@ model RefreshToken {
   /// Token émis en remplacement lors de la rotation (null = token courant de la famille).
   replacedById String?
   userAgent    String?
+  /// Copie de User.tokenVersion à l'émission : un refresh est refusé si elle diffère de la
+  /// version courante (révocation par logout-all / changement ou reset du mot de passe).
+  /// NULL = jeton émis avant cette colonne (pas de contrôle ; remplacé à la rotation suivante).
+  tokenVersion Int?
   createdAt    DateTime  @default(now()) @db.Timestamptz(3)
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

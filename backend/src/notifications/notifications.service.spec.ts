@@ -1,6 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ForbiddenException } from '@nestjs/common';
-import { NotificationsService } from './notifications.service';
+import { BadRequestException, ForbiddenException } from '@nestjs/common';
+import {
+  MAX_PUSH_SUBSCRIPTIONS_PER_USER,
+  NotificationsService,
+} from './notifications.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { WebPushSender } from './push-sender';
 
@@ -12,7 +15,7 @@ describe('NotificationsService', () => {
   const mockSubscription = {
     id: 'sub-id-456',
     userId: mockUserId,
-    endpoint: 'https://push.example.com/endpoint',
+    endpoint: 'https://fcm.googleapis.com/fcm/send/endpoint',
     keys: {
       p256dh: 'test-key',
       auth: 'test-auth',
@@ -46,12 +49,16 @@ describe('NotificationsService', () => {
       findFirst: jest.fn(),
       findMany: jest.fn(),
       delete: jest.fn(),
+      deleteMany: jest.fn(),
     },
     notificationPreference: {
       findUnique: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
     },
+    // Verrou User (SELECT … FOR UPDATE) + transaction interactive : le callback reçoit le mock.
+    $queryRaw: jest.fn(),
+    $transaction: jest.fn(),
   };
 
   const mockPushSender = { deliver: jest.fn() };
@@ -72,6 +79,11 @@ describe('NotificationsService', () => {
     prismaService = module.get<PrismaService>(PrismaService);
 
     jest.clearAllMocks();
+    mockPrismaService.$queryRaw.mockResolvedValue([{ '?column?': 1 }]);
+    mockPrismaService.pushSubscription.findMany.mockResolvedValue([]);
+    mockPrismaService.$transaction.mockImplementation(
+      (fn: (tx: typeof mockPrismaService) => unknown) => fn(mockPrismaService),
+    );
   });
 
   it('should be defined', () => {
@@ -80,7 +92,7 @@ describe('NotificationsService', () => {
 
   describe('subscribeToPush', () => {
     const subscriptionData = {
-      endpoint: 'https://push.example.com/endpoint',
+      endpoint: 'https://fcm.googleapis.com/fcm/send/endpoint',
       keys: {
         p256dh: 'test-key',
         auth: 'test-auth',
@@ -151,6 +163,50 @@ describe('NotificationsService', () => {
       ).rejects.toThrow(ForbiddenException);
       expect(mockPrismaService.pushSubscription.update).not.toHaveBeenCalled();
     });
+
+    it.each([
+      'https://127.0.0.1:8443/internal',
+      'https://169.254.169.254/latest/meta-data',
+      'https://push.example.com/endpoint',
+      'https://fcm.googleapis.com:8443/fcm/send/x',
+      'http://fcm.googleapis.com/fcm/send/x',
+    ])(
+      'refuses (400) a non-allowed push endpoint, without touching the DB: %s',
+      async (endpoint) => {
+        await expect(
+          service.subscribeToPush(mockUserId, {
+            ...subscriptionData,
+            endpoint,
+          }),
+        ).rejects.toThrow(BadRequestException);
+        expect(mockPrismaService.$transaction).not.toHaveBeenCalled();
+        expect(
+          mockPrismaService.pushSubscription.create,
+        ).not.toHaveBeenCalled();
+      },
+    );
+
+    it(`caps subscriptions at ${MAX_PUSH_SUBSCRIPTIONS_PER_USER} per user: the oldest are replaced`, async () => {
+      mockPrismaService.pushSubscription.findUnique.mockResolvedValue(null);
+      mockPrismaService.pushSubscription.findMany.mockResolvedValue(
+        Array.from({ length: MAX_PUSH_SUBSCRIPTIONS_PER_USER + 1 }, (_, i) => ({
+          id: `old-${i}`,
+        })),
+      );
+      mockPrismaService.pushSubscription.create.mockResolvedValue(
+        mockSubscription,
+      );
+
+      await service.subscribeToPush(mockUserId, subscriptionData);
+
+      expect(mockPrismaService.$queryRaw).toHaveBeenCalled(); // verrou User
+      expect(
+        mockPrismaService.pushSubscription.deleteMany,
+      ).toHaveBeenCalledWith({
+        where: { id: { in: ['old-0', 'old-1'] } },
+      });
+      expect(mockPrismaService.pushSubscription.create).toHaveBeenCalled();
+    });
   });
 
   describe('unsubscribeFromPush', () => {
@@ -203,7 +259,7 @@ describe('NotificationsService', () => {
   });
 
   describe('sendNotification', () => {
-    it('delegates to the push sender and reports the counts', async () => {
+    it('delegates to the push sender and only reports whether one send succeeded (no oracle)', async () => {
       mockPushSender.deliver.mockResolvedValue({
         sent: 2,
         failed: 1,
@@ -214,7 +270,20 @@ describe('NotificationsService', () => {
       const result = await service.sendNotification(mockUserId, payload);
 
       expect(mockPushSender.deliver).toHaveBeenCalledWith(mockUserId, payload);
-      expect(result).toEqual({ sent: 2, failed: 2, removed: 1 });
+      expect(result).toEqual({ sent: true });
+    });
+
+    it('hides failures and purges behind a single false', async () => {
+      mockPushSender.deliver.mockResolvedValue({
+        sent: 0,
+        failed: 3,
+        removed: 2,
+      });
+      const result = await service.sendNotification(mockUserId, {
+        title: 'T',
+        body: 'B',
+      });
+      expect(result).toEqual({ sent: false });
     });
 
     it('reports nothing sent when push is disabled', async () => {
@@ -229,7 +298,7 @@ describe('NotificationsService', () => {
         body: 'B',
       });
 
-      expect(result).toEqual({ sent: 0, failed: 0, removed: 0 });
+      expect(result).toEqual({ sent: false });
     });
   });
 

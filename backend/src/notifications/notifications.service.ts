@@ -1,7 +1,16 @@
-import { ForbiddenException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UpdateNotificationPreferencesDto } from './dto/notification-preferences.dto';
 import { PushReminderPayload, WebPushSender } from './push-sender';
+import { isAllowedPushEndpoint } from './push-endpoint';
+
+/** Nombre maximal d'abonnements push par compte : au-delà, le plus ancien est remplacé. */
+export const MAX_PUSH_SUBSCRIPTIONS_PER_USER = 10;
 
 @Injectable()
 export class NotificationsService {
@@ -24,26 +33,47 @@ export class NotificationsService {
       new ForbiddenException(
         'This push endpoint is registered to another account',
       );
-
-    // L'endpoint est unique globalement : un abonnement appartenant à un autre compte
-    // ne doit jamais être écrasé ni « volé » (403).
-    const existing = await this.prisma.pushSubscription.findUnique({
-      where: { endpoint },
-    });
-    if (existing) {
-      if (existing.userId !== userId) throw forbidden();
-      return this.prisma.pushSubscription.update({
-        where: { id: existing.id },
-        data: { keys },
-      });
+    // Défense en profondeur : le DTO l'a déjà vérifié (liste blanche des services push).
+    if (!isAllowedPushEndpoint(endpoint)) {
+      throw new BadRequestException(
+        'endpoint must be an https URL of a supported Web Push service',
+      );
     }
 
     try {
-      return await this.prisma.pushSubscription.create({
-        data: { userId, endpoint, keys },
+      return await this.prisma.$transaction(async (tx) => {
+        // Verrou User : le plafond d'abonnements tient même sous inscriptions concurrentes.
+        await tx.$queryRaw`SELECT 1 FROM "User" WHERE "id" = ${userId} FOR UPDATE`;
+        // L'endpoint est unique globalement : un abonnement appartenant à un autre compte
+        // ne doit jamais être écrasé ni « volé » (403).
+        const existing = await tx.pushSubscription.findUnique({
+          where: { endpoint },
+        });
+        if (existing) {
+          if (existing.userId !== userId) throw forbidden();
+          return tx.pushSubscription.update({
+            where: { id: existing.id },
+            data: { keys },
+          });
+        }
+        // Plafond par compte : les abonnements les plus anciens sont remplacés.
+        const current = await tx.pushSubscription.findMany({
+          where: { userId },
+          orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+          select: { id: true },
+        });
+        const excess = current.length - (MAX_PUSH_SUBSCRIPTIONS_PER_USER - 1);
+        if (excess > 0) {
+          await tx.pushSubscription.deleteMany({
+            where: { id: { in: current.slice(0, excess).map((c) => c.id) } },
+          });
+        }
+        return tx.pushSubscription.create({
+          data: { userId, endpoint, keys },
+        });
       });
     } catch (e) {
-      // Création concurrente du même endpoint (P2002) : on relit pour décider.
+      // Création concurrente du même endpoint par un autre compte (P2002) : on relit pour décider.
       if ((e as { code?: string })?.code !== 'P2002') throw e;
       const again = await this.prisma.pushSubscription.findUnique({
         where: { endpoint },
@@ -79,13 +109,17 @@ export class NotificationsService {
     });
   }
 
-  /** Envoi immédiat vers tous les appareils de l'utilisateur (notification de test). */
-  async sendNotification(userId: string, payload: PushReminderPayload) {
-    const { sent, failed, removed } = await this.pushSender.deliver(
-      userId,
-      payload,
-    );
-    return { sent, failed: failed + removed, removed };
+  /**
+   * Envoi immédiat vers tous les appareils de l'utilisateur (notification de test).
+   * Ne renvoie QUE « au moins un envoi a réussi » : le détail (échecs, purges) servait d'oracle
+   * pour sonder des adresses (revue de sécurité, constat 2).
+   */
+  async sendNotification(
+    userId: string,
+    payload: PushReminderPayload,
+  ): Promise<{ sent: boolean }> {
+    const { sent } = await this.pushSender.deliver(userId, payload);
+    return { sent: sent > 0 };
   }
 
   async getNotificationPreferences(userId: string) {

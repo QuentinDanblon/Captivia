@@ -37,3 +37,7 @@ export const EMAIL_VERIFICATION_TTL_MS = 24 * 60 * 60 * 1000;
 
 /** Délai minimal entre deux envois d'e-mail de vérification pour un même compte (W2-04). */
 export const EMAIL_VERIFICATION_RESEND_COOLDOWN_MS = 60 * 1000;
+
+/** Plafond d'envois d'e-mails de vérification par compte sur une fenêtre glissante (revue de sécurité). */
+export const EMAIL_VERIFICATION_MAX_SENDS = 5;
+export const EMAIL_VERIFICATION_SEND_WINDOW_MS = 24 * 60 * 60 * 1000;

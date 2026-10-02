@@ -7,6 +7,10 @@ import {
   MaxLength,
   ValidateNested,
 } from 'class-validator';
+import {
+  IsAllowedPushEndpoint,
+  PUSH_ENDPOINT_MAX_LENGTH,
+} from '../push-endpoint';
 
 export class PushSubscriptionKeysDto {
   @IsString()
@@ -21,11 +25,13 @@ export class PushSubscriptionKeysDto {
 }
 
 export class PushSubscriptionDto {
-  // Les services Web Push sont toujours en https (refuse http:, javascript:, data:, etc.)
+  // Les services Web Push sont toujours en https (refuse http:, javascript:, data:, etc.), et
+  // seuls les services connus sont acceptés (anti-SSRF : jamais d'adresse interne ni de port exotique).
   @IsString()
   @IsNotEmpty()
-  @MaxLength(500)
+  @MaxLength(PUSH_ENDPOINT_MAX_LENGTH)
   @IsUrl({ protocols: ['https'], require_protocol: true })
+  @IsAllowedPushEndpoint()
   endpoint: string;
 
   @IsObject()
@@ -37,6 +43,6 @@ export class PushSubscriptionDto {
 export class UnsubscribePushDto {
   @IsString()
   @IsNotEmpty()
-  @MaxLength(500)
+  @MaxLength(PUSH_ENDPOINT_MAX_LENGTH)
   endpoint: string;
 }

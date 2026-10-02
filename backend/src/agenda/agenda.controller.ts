@@ -37,7 +37,8 @@ export class AgendaController {
   @ApiQuery({
     name: 'from',
     required: false,
-    description: "YYYY-MM-DD (défaut : aujourd'hui)",
+    description:
+      "YYYY-MM-DD, jour local du fuseau du compte (défaut : aujourd'hui)",
   })
   @ApiQuery({
     name: 'to',

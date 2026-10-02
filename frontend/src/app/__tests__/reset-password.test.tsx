@@ -39,6 +39,8 @@ describe('reset-password page', () => {
     fireEvent.submit(container.querySelector('form')!);
 
     await waitFor(() => expect(resetPassword).toHaveBeenCalledWith('SECRET-TOKEN', 'a-valid-password-1'));
+    // Le reset révoque aussi le lien calendrier et le push : l'utilisateur en est informé.
+    expect(await screen.findByText('sessions.accessRevokedNotice')).toBeInTheDocument();
   });
 
   it('refuse un mot de passe de moins de 10 caractères', async () => {
