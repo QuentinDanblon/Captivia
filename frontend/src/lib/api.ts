@@ -139,8 +139,10 @@ async function rawFetch(url: string, init: RequestInit | undefined, timeoutMs: n
 
 /**
  * fetch + timeout + gestion des sessions (W1-01) : sur un 401 d'une requête authentifiée,
- * tente UNE fois `/auth/refresh` (partagé entre requêtes concurrentes) puis rejoue la requête
- * avec le nouveau jeton ; à défaut, émet `auth:logout`.
+ * tente `/auth/refresh` (partagé entre requêtes concurrentes) puis rejoue la requête avec le
+ * nouveau jeton. Si le jeton rejoué venait d'un autre onglet (`reused`) et qu'il est refusé à son
+ * tour, un vrai refresh est tenté, une seule fois. Session révoquée → `auth:logout` ; refresh en
+ * échec passager (réseau, 5xx) → `BACKEND_UNAVAILABLE_MESSAGE`, sans déconnexion.
  */
 async function safeFetch(url: string, init?: RequestInit, options: RequestOptions = {}): Promise<Response> {
   const { timeoutMs = REQUEST_TIMEOUT_MS, logoutOn401 } = options;
@@ -153,14 +155,31 @@ async function safeFetch(url: string, init?: RequestInit, options: RequestOption
     notifyUnauthorized();
     return response;
   }
-  const refreshed = await refreshAccessToken(failedToken);
-  if (!refreshed.ok) {
-    if (refreshed.revoked) notifyUnauthorized();
-    return response;
+  let refreshed = await refreshAccessToken(failedToken);
+  if (!refreshed.ok) return refreshFailed(refreshed.revoked, response);
+  let retried = await rawFetch(url, withBearer(init, refreshed.accessToken), timeoutMs);
+  if (retried.status === 401 && refreshed.reused) {
+    refreshed = await refreshAccessToken(refreshed.accessToken, { force: true });
+    if (!refreshed.ok) return refreshFailed(refreshed.revoked, retried);
+    retried = await rawFetch(url, withBearer(init, refreshed.accessToken), timeoutMs);
   }
-  const retried = await rawFetch(url, withBearer(init, refreshed.accessToken), timeoutMs);
   if (retried.status === 401) notifyUnauthorized();
   return retried;
+}
+
+function refreshFailed(revoked: boolean, response: Response): Response {
+  if (!revoked) throw new Error(BACKEND_UNAVAILABLE_MESSAGE);
+  notifyUnauthorized();
+  return response;
+}
+
+/**
+ * `fetch` authentifié avec timeout, rafraîchissement du jeton puis rejeu sur 401 (voir
+ * `safeFetch`). À utiliser pour tout appel `Authorization: Bearer …` hors de l'objet `api`.
+ * Lève `BACKEND_UNAVAILABLE_MESSAGE` si le backend est injoignable.
+ */
+export function authFetch(url: string, init?: RequestInit, options?: RequestOptions): Promise<Response> {
+  return safeFetch(url, init, options);
 }
 
 async function readJson(response: Response): Promise<unknown> {

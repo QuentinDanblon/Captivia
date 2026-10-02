@@ -3,7 +3,11 @@
  * (période, filtres, regroupement par jour). Fichier indépendant de lib/api.ts.
  */
 
+import { authFetch } from './api';
 import { API_URL } from './config';
+import { localDayKey } from './dates';
+
+export { localDayKey };
 
 export type AgendaItemType = 'routine' | 'medication' | 'vaccination' | 'vet_appointment';
 export type AgendaItemStatus = 'pending' | 'done' | 'skipped' | 'cancelled';
@@ -46,21 +50,19 @@ export class AgendaApiError extends Error {
   }
 }
 
-const REQUEST_TIMEOUT_MS = 15_000;
-
+/**
+ * Appel authentifié via `authFetch` (lib/api) : 401 → refresh puis rejeu ; la déconnexion n'est
+ * émise que si la session est révoquée (jamais sur un échec passager).
+ */
 async function agendaFetch<T>(path: string, token: string, init: RequestInit = {}): Promise<T> {
   let res: Response;
   try {
-    res = await fetch(`${API_URL}${path}`, {
+    res = await authFetch(`${API_URL}${path}`, {
       ...init,
       headers: { ...(init.headers ?? {}), Authorization: `Bearer ${token}` },
-      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
   } catch {
     throw new AgendaApiError('network', 0);
-  }
-  if (res.status === 401 && typeof window !== 'undefined') {
-    window.dispatchEvent(new Event('auth:logout'));
   }
   if (!res.ok) throw new AgendaApiError(`HTTP ${res.status}`, res.status);
   return (await res.json()) as T;
@@ -91,13 +93,6 @@ export function buildFeedUrl(feedPath: string): string {
 // ---------------------------------------------------------------------------
 // Utilitaires purs
 // ---------------------------------------------------------------------------
-
-const pad = (n: number): string => String(n).padStart(2, '0');
-
-/** `YYYY-MM-DD` du jour LOCAL de `date` (le navigateur de l'utilisateur fait foi). */
-export function localDayKey(date: Date): string {
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-}
 
 /** Période [aujourd'hui local ; aujourd'hui + days − 1] au format attendu par l'API (≤ 92 jours). */
 export function rangeFromToday(days: number, now: Date = new Date()): { from: string; to: string } {

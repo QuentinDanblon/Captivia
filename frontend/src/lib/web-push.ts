@@ -7,6 +7,7 @@
  * le service worker n'est enregistré qu'à la première activation par l'utilisateur
  * (la permission est demandée sur un clic, jamais automatiquement).
  */
+import { authFetch } from '@/lib/api';
 import { API_URL } from '@/lib/config';
 
 export const SERVICE_WORKER_URL = '/sw.js';
@@ -93,7 +94,8 @@ async function sendToBackend(
   body: unknown,
 ): Promise<boolean> {
   try {
-    const res = await fetch(`${API_URL}/users/me/push-subscriptions`, {
+    // authFetch : jeton expiré → refresh puis rejeu (W1-01).
+    const res = await authFetch(`${API_URL}/users/me/push-subscriptions`, {
       method,
       headers: {
         'Content-Type': 'application/json',
@@ -108,16 +110,42 @@ async function sendToBackend(
 }
 
 /**
+ * true si l'endpoint figure parmi les abonnements du compte connecté, false s'il n'y figure pas
+ * (abonnement laissé par un autre compte sur ce navigateur), null si la liste est indisponible.
+ */
+async function isEndpointOwned(token: string, endpoint: string): Promise<boolean | null> {
+  try {
+    const res = await authFetch(`${API_URL}/users/me/push-subscriptions`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) return null;
+    const list = (await res.json()) as unknown;
+    if (!Array.isArray(list)) return null;
+    return list.some((s) => (s as { endpoint?: unknown } | null)?.endpoint === endpoint);
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Détermine l'état initial affiché sur la page : support, clé serveur, permission, abonnement.
  * `publicKey` est celle déjà récupérée par l'appelant (null = push non configuré côté serveur).
+ * Avec `token`, l'abonnement du navigateur n'est « subscribed » que s'il appartient au compte
+ * connecté (sinon il peut s'agir de celui d'un autre compte utilisé sur ce navigateur).
  */
-export async function resolvePushStatus(publicKey: string | null): Promise<PushStatus> {
+export async function resolvePushStatus(
+  publicKey: string | null,
+  token?: string | null,
+): Promise<PushStatus> {
   if (!isWebPushSupported()) return 'unsupported';
   if (!publicKey) return 'unavailable';
   if (Notification.permission === 'denied') return 'denied';
   if (Notification.permission === 'granted') {
     const sub = await getCurrentSubscription();
-    if (sub && sameKey(sub, publicKey)) return 'subscribed';
+    if (sub && sameKey(sub, publicKey)) {
+      if (token && (await isEndpointOwned(token, sub.endpoint)) === false) return 'unsubscribed';
+      return 'subscribed';
+    }
   }
   return 'unsubscribed';
 }

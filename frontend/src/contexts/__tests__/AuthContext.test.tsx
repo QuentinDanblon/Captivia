@@ -359,3 +359,121 @@ describe('AuthContext', () => {
     });
   });
 });
+
+/** Non-régression de la revue frontend : cas D et constats 2, 3, 4. */
+describe('AuthContext — revue frontend', () => {
+  const user = { id: 'u1', email: 'a@b.c', locale: 'fr', isPremium: false };
+  const fetchMock = () => global.fetch as jest.Mock;
+  const json = (status: number, body: unknown) => ({
+    ok: status >= 200 && status < 300,
+    status,
+    statusText: '',
+    json: async () => body,
+  });
+  const wrapper = ({ children }: { children: React.ReactNode }) => <AuthProvider>{children}</AuthProvider>;
+
+  beforeEach(() => {
+    localStorage.clear();
+    fetchMock().mockReset();
+    unsubscribeMock.mockClear();
+  });
+
+  it('D. logoutAll avec access token expiré : refresh, rejeu, toutes les sessions révoquées', async () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    act(() => result.current.login('T1-expired', user, 'refresh-1'));
+    const calls: Array<[string, RequestInit | undefined]> = [];
+    fetchMock().mockImplementation(async (url: string, init?: RequestInit) => {
+      calls.push([url, init]);
+      if (url.includes('/auth/refresh')) return json(200, { accessToken: 'T2', refreshToken: 'refresh-2' });
+      const authz = (init?.headers as Record<string, string> | undefined)?.Authorization;
+      return authz === 'Bearer T2' ? json(200, { message: 'ok' }) : json(401, { message: 'Unauthorized' });
+    });
+
+    await act(async () => {
+      await result.current.logoutAll();
+    });
+
+    const logoutAllCalls = calls.filter(([u]) => u.includes('/auth/logout-all'));
+    expect(logoutAllCalls).toHaveLength(2);
+    expect((logoutAllCalls[1][1]?.headers as Record<string, string>).Authorization).toBe('Bearer T2');
+    expect(result.current.token).toBeNull();
+    expect(localStorage.getItem('refreshToken')).toBeNull();
+  });
+
+  it('D bis. logoutAll : 401 persistant → révoque le refresh token de cet appareil et lève une erreur', async () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    act(() => result.current.login('T1-expired', user, 'refresh-1'));
+    const calls: Array<[string, RequestInit | undefined]> = [];
+    fetchMock().mockImplementation(async (url: string, init?: RequestInit) => {
+      calls.push([url, init]);
+      return json(401, { message: 'Unauthorized' });
+    });
+
+    let error: unknown;
+    await act(async () => {
+      error = await result.current.logoutAll().catch((e) => e);
+    });
+
+    expect(error).toBeInstanceOf(Error);
+    const revoke = calls.find(([u]) => u.endsWith('/auth/logout'));
+    expect(revoke).toBeDefined();
+    expect(JSON.parse(String(revoke![1]?.body))).toEqual({ refreshToken: 'refresh-1' });
+    await waitFor(() => expect(result.current.token).toBeNull());
+  });
+
+  it('logoutAll : erreur serveur → lève, la session locale est conservée', async () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    act(() => result.current.login('T1', user, 'refresh-1'));
+    fetchMock().mockResolvedValue(json(500, { message: 'boom' }));
+
+    let error: unknown;
+    await act(async () => {
+      error = await result.current.logoutAll().catch((e) => e);
+    });
+
+    expect(error).toBeInstanceOf(Error);
+    expect(result.current.token).toBe('T1');
+  });
+
+  it('constat 4. logoutAll libère d’abord l’abonnement push de ce navigateur', async () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    act(() => result.current.login('T1', user, 'refresh-1'));
+    const order: string[] = [];
+    unsubscribeMock.mockImplementationOnce(async () => {
+      order.push('push');
+      return true;
+    });
+    fetchMock().mockImplementation(async (url: string) => {
+      order.push(url.includes('/auth/logout-all') ? 'logout-all' : url);
+      return json(200, {});
+    });
+
+    await act(async () => {
+      await result.current.logoutAll();
+    });
+
+    expect(unsubscribeMock).toHaveBeenCalledWith('T1');
+    expect(order).toEqual(['push', 'logout-all']);
+  });
+
+  it('constat 2. événement storage : nouveau jeton adopté, jeton vidé → déconnexion locale', () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    act(() => result.current.login('T1', user, 'refresh-1'));
+
+    act(() => {
+      window.dispatchEvent(new StorageEvent('storage', { key: 'token', oldValue: 'T1', newValue: 'T2' }));
+    });
+    expect(result.current.token).toBe('T2');
+
+    act(() => {
+      window.dispatchEvent(new StorageEvent('storage', { key: 'other', newValue: null }));
+    });
+    expect(result.current.token).toBe('T2');
+
+    act(() => {
+      window.dispatchEvent(new StorageEvent('storage', { key: 'token', oldValue: 'T2', newValue: null }));
+    });
+    expect(result.current.token).toBeNull();
+    expect(result.current.user).toBeNull();
+  });
+});

@@ -3,7 +3,9 @@
  * de compte (art. 17). Fichier volontairement indépendant de lib/api.ts.
  */
 
+import { authFetch } from './api';
 import { API_URL } from './config';
+import { localDayKey } from './dates';
 
 /** Même timeout que lib/api.ts (non exporté de ce fichier). */
 const REQUEST_TIMEOUT_MS = 15_000;
@@ -43,7 +45,8 @@ export async function exportMyData(
 ): Promise<{ blob: Blob; filename: string }> {
   let res: Response;
   try {
-    res = await timedFetch(`${API_URL}/users/me/export`, {
+    // Export : un 401 est bien une session expirée → refresh puis rejeu (W1-01).
+    res = await authFetch(`${API_URL}/users/me/export`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   } catch {
@@ -53,7 +56,7 @@ export async function exportMyData(
     throw new AccountApiError(await readErrorMessage(res), res.status);
   }
   const blob = await res.blob();
-  const date = new Date().toISOString().slice(0, 10);
+  const date = localDayKey(new Date());
   return { blob, filename: `captivia-export-${date}.json` };
 }
 

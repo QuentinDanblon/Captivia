@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { api, type Animal, type Medication, type VetAppointment, type AnimalMeasurement, type Vaccination, type BreedingRecord } from '@/lib/api';
+import { api, ApiError, type Animal, type Medication, type VetAppointment, type AnimalMeasurement, type Vaccination, type BreedingRecord } from '@/lib/api';
 import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
 import { Link } from '@/i18n/navigation';
 import FamilySection from './_components/FamilySection';
@@ -57,6 +57,11 @@ const CarnetExportSection = dynamic(() => import('./_components/CarnetExportSect
 // Modale d'édition : montée (donc téléchargée) uniquement à l'ouverture.
 const EditAnimalModal = dynamic(() => import('./_components/EditAnimalModal'));
 
+/** 401 après refresh : la session est perdue (lib/api a déjà émis `auth:logout` si révoquée). */
+const isSessionExpired = (err: unknown) => err instanceof ApiError && err.status === 401;
+/** 403 : section réservée au Premium. */
+const isForbidden = (err: unknown) => err instanceof ApiError && err.status === 403;
+
 export default function AnimalDetailPage({
   params,
 }: {
@@ -65,7 +70,7 @@ export default function AnimalDetailPage({
   const t = useTranslations();
   const router = useRouter();
   const { formatDate } = useFormatters();
-  const { user, token, isLoading: authLoading, logout } = useAuth();
+  const { user, token, isLoading: authLoading } = useAuth();
   const [resolvedParams, setResolvedParams] = useState<{
     locale: string;
     id: string;
@@ -131,12 +136,38 @@ export default function AnimalDetailPage({
     return () => clearTimeout(timer);
   }, [toast]);
 
+  // Garde « cancelled » : chaque chargement porte un numéro ; un chargement dépassé (autre animal,
+  // rechargement plus récent, démontage) n'écrit plus dans l'état de la fiche.
+  const loadRef = useRef({ seq: 0, animalId: null as string | null });
+  useEffect(() => {
+    const load = loadRef.current;
+    return () => {
+      load.seq++;
+    };
+  }, []);
+
   const fetchAnimalData = async () => {
     if (!token || !resolvedParams) return;
+    const load = loadRef.current;
+    const seq = ++load.seq;
+    const cancelled = () => seq !== load.seq;
+
+    // Autre animal : on ne garde rien de la fiche précédente (espèce, conseils, matériel…).
+    if (load.animalId !== resolvedParams.id) {
+      load.animalId = resolvedParams.id;
+      setAnimal(null);
+      setSpecies(null);
+      setSpeciesHealth(null);
+      setSpeciesLegislation(null);
+      setSpeciesEquipment(null);
+      setSpeciesFood([]);
+      setError(null);
+    }
 
     try {
       // Fetch animal details
       const animalData = await api.getAnimal(resolvedParams.id, token);
+      if (cancelled()) return;
       if (animalData.statusCode === 404 || animalData.error) {
         setError(t('animals.notFound'));
         setLoading(false);
@@ -147,29 +178,39 @@ export default function AnimalDetailPage({
       // Fetch species info
       try {
         const speciesData = await api.getSpecies(animalData.speciesId.toString()) as Species;
+        if (cancelled()) return;
         setSpecies(speciesData);
-        
+
         // Fetch species health info
         try {
           const healthData = await api.getSpeciesHealth(animalData.speciesId, undefined, resolvedParams.locale);
+          if (cancelled()) return;
           setSpeciesHealth(healthData as SpeciesHealthData);
         } catch (e) {
+          if (cancelled()) return;
+          setSpeciesHealth(null);
           console.error('Error fetching species health:', e);
         }
 
         // Fetch species legislation info (API returns { editorial: [{ country, status, details, sources }] })
         try {
           const legislationData = await api.getSpeciesLegislation(String(animalData.speciesId));
+          if (cancelled()) return;
           setSpeciesLegislation(legislationData as SpeciesLegislationData);
         } catch (e) {
+          if (cancelled()) return;
+          setSpeciesLegislation(null);
           console.error('Error fetching species legislation:', e);
         }
 
         // Fetch species equipment recommendations
         try {
           const equipmentData = await api.getRecommendedEquipment(animalData.speciesId);
+          if (cancelled()) return;
           setSpeciesEquipment(equipmentData as SpeciesEquipmentData);
         } catch (e) {
+          if (cancelled()) return;
+          setSpeciesEquipment(null);
           console.error('Error fetching species equipment:', e);
         }
 
@@ -177,17 +218,27 @@ export default function AnimalDetailPage({
         try {
           const speciesName = speciesData.canonicalName || speciesData.scientificName;
           const foodData = await api.getFoodBySpecies(speciesName) as { products?: SpeciesFoodProduct[] };
+          if (cancelled()) return;
           setSpeciesFood(foodData.products || []);
         } catch (e) {
+          if (cancelled()) return;
+          setSpeciesFood([]);
           console.error('Error fetching species food:', e);
         }
       } catch (e) {
+        if (cancelled()) return;
+        setSpecies(null);
+        setSpeciesHealth(null);
+        setSpeciesLegislation(null);
+        setSpeciesEquipment(null);
+        setSpeciesFood([]);
         console.error('Error fetching species:', e);
       }
 
       // Fetch routines
       try {
         const routinesData = await api.getAnimalRoutines(resolvedParams.id, token);
+        if (cancelled()) return;
         setRoutines(Array.isArray(routinesData) ? routinesData : []);
       } catch (e) {
         console.error('Error fetching routines:', e);
@@ -196,144 +247,132 @@ export default function AnimalDetailPage({
       // Fetch offspring (petits) — module F
       try {
         const kids = await api.getOffspring(resolvedParams.id, token);
+        if (cancelled()) return;
         setOffspring(Array.isArray(kids) ? kids : []);
       } catch (e) {
         console.error('Error fetching offspring:', e);
       }
 
+      // Session expirée : lib/api a déjà tenté le refresh et, si la session est révoquée, émis
+      // `auth:logout` (AuthContext vide la session, la page redirige). Jamais de logout() ici :
+      // un échec passager (BACKEND_UNAVAILABLE) ne doit pas révoquer la session.
+      // 403 = fonctionnalité Premium verrouillée.
+
       // Fetch medications (traitements)
       try {
         const meds = await api.getMedications(resolvedParams.id, token);
+        if (cancelled()) return;
         setMedications(Array.isArray(meds) ? meds : []);
         setMedicationsError('');
         setMedicationsLocked(false);
       } catch (e) {
+        if (cancelled()) return;
         console.error('Error fetching medications:', e);
-        const msg = (e instanceof Error ? e.message : String(e)).toLowerCase();
-        if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('401')) {
-          logout();
-          router.push('/login');
-          return;
-        }
-        if (msg.includes('forbidden') || msg.includes('403') || msg.includes('premium')) {
+        if (isSessionExpired(e)) return;
+        if (isForbidden(e)) {
           setMedicationsLocked(true);
         } else {
-          setMedicationsError(e instanceof Error ? e.message : String(e));
+          setMedicationsError(t('animals.sectionErrors.loadFailed'));
         }
       } finally {
-        setMedicationsLoading(false);
+        if (!cancelled()) setMedicationsLoading(false);
       }
 
       // Fetch vet appointments (RDV vétérinaires)
       try {
         const vets = await api.getVetAppointments(resolvedParams.id, token);
+        if (cancelled()) return;
         setVetAppointments(Array.isArray(vets) ? vets : []);
         setVetAppointmentsError('');
       } catch (e) {
+        if (cancelled()) return;
         console.error('Error fetching vet appointments:', e);
-        const msg = (e instanceof Error ? e.message : String(e)).toLowerCase();
-        if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('401')) {
-          logout();
-          router.push('/login');
-          return;
-        }
-        setVetAppointmentsError(e instanceof Error ? e.message : String(e));
+        if (isSessionExpired(e)) return;
+        setVetAppointmentsError(t('animals.sectionErrors.loadFailed'));
       } finally {
-        setVetAppointmentsLoading(false);
+        if (!cancelled()) setVetAppointmentsLoading(false);
       }
 
       // Fetch health records (carnet de santé)
       try {
         const records = await api.getAnimalHealthRecords(resolvedParams.id, token);
+        if (cancelled()) return;
         setHealthRecords(Array.isArray(records) ? records : []);
       } catch {
+        if (cancelled()) return;
         setHealthRecords([]);
       }
 
       // Fetch measurements (poids & mesures)
       try {
         const measures = await api.getMeasurements(resolvedParams.id, token);
+        if (cancelled()) return;
         setMeasurements(Array.isArray(measures) ? measures : []);
         setMeasurementsError('');
         setMeasurementsLocked(false);
       } catch (e) {
+        if (cancelled()) return;
         console.error('Error fetching measurements:', e);
-        const msg = (e instanceof Error ? e.message : String(e)).toLowerCase();
-        if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('401')) {
-          logout();
-          router.push('/login');
-          return;
-        }
-        if (msg.includes('forbidden') || msg.includes('403') || msg.includes('premium')) {
+        if (isSessionExpired(e)) return;
+        if (isForbidden(e)) {
           setMeasurementsLocked(true);
         } else {
-          setMeasurementsError(e instanceof Error ? e.message : String(e));
+          setMeasurementsError(t('animals.sectionErrors.loadFailed'));
         }
       } finally {
-        setMeasurementsLoading(false);
+        if (!cancelled()) setMeasurementsLoading(false);
       }
 
       // Fetch vaccinations
       try {
         const vacs = await api.getVaccinations(resolvedParams.id, token);
+        if (cancelled()) return;
         setVaccinations(Array.isArray(vacs) ? vacs : []);
         setVaccinationsError('');
         setVaccinationsLocked(false);
       } catch (e) {
+        if (cancelled()) return;
         console.error('Error fetching vaccinations:', e);
-        const msg = (e instanceof Error ? e.message : String(e)).toLowerCase();
-        if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('401')) {
-          logout();
-          router.push('/login');
-          return;
-        }
-        if (msg.includes('forbidden') || msg.includes('403') || msg.includes('premium')) {
+        if (isSessionExpired(e)) return;
+        if (isForbidden(e)) {
           setVaccinationsLocked(true);
         } else {
-          setVaccinationsError(e instanceof Error ? e.message : String(e));
+          setVaccinationsError(t('animals.sectionErrors.loadFailed'));
         }
       } finally {
-        setVaccinationsLoading(false);
+        if (!cancelled()) setVaccinationsLoading(false);
       }
 
       // Fetch breeding records (reproduction)
       try {
         const recs = await api.getBreedingRecords(resolvedParams.id, token);
+        if (cancelled()) return;
         setBreedingRecords(Array.isArray(recs) ? recs : []);
         setBreedingError('');
         setBreedingLocked(false);
       } catch (e) {
+        if (cancelled()) return;
         console.error('Error fetching breeding records:', e);
-        const msg = (e instanceof Error ? e.message : String(e)).toLowerCase();
-        if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('401')) {
-          logout();
-          router.push('/login');
-          return;
-        }
-        if (msg.includes('forbidden') || msg.includes('403') || msg.includes('premium')) {
+        if (isSessionExpired(e)) return;
+        if (isForbidden(e)) {
           setBreedingLocked(true);
-        } else if (msg.includes('not found') || msg.includes('404')) {
+        } else if (e instanceof ApiError && e.status === 404) {
           // Module non encore déployé côté backend : traiter comme liste vide
           setBreedingRecords([]);
           setBreedingError('');
         } else {
-          setBreedingError(e instanceof Error ? e.message : String(e));
+          setBreedingError(t('animals.sectionErrors.loadFailed'));
         }
       } finally {
-        setBreedingLoading(false);
+        if (!cancelled()) setBreedingLoading(false);
       }
     } catch (error) {
-      const msg = (error instanceof Error ? error.message : String(error)).toLowerCase();
-      const isAuthError = msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('forbidden') || msg.includes('403') || msg.includes('401');
-      if (isAuthError) {
-        logout();
-        router.push('/login');
-        return;
-      }
+      if (cancelled()) return;
+      if (isSessionExpired(error)) return;
       console.error('Error fetching animal:', error);
       setError(t('animals.errorLoadingAnimal'));
     } finally {
-      setLoading(false);
+      if (!cancelled()) setLoading(false);
     }
   };
 

@@ -153,6 +153,38 @@ describe('resolvePushStatus', () => {
     );
     await expect(resolvePushStatus(PUBLIC_KEY)).resolves.toBe('unsubscribed');
   });
+
+  it('avec jeton : subscribed seulement si l’endpoint appartient au compte connecté', async () => {
+    const env = setup('granted');
+    env.state.current = makeSubscription('https://push.example.com/a');
+    fetchMock.mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => [{ endpoint: 'https://push.example.com/a' }],
+    });
+    await expect(resolvePushStatus(PUBLIC_KEY, 'tok')).resolves.toBe('subscribed');
+    const [url, init] = fetchMock.mock.calls[0];
+    expect(url).toBe(`${API_URL}/users/me/push-subscriptions`);
+    expect(init.headers.Authorization).toBe('Bearer tok');
+  });
+
+  it('avec jeton : abonnement d’un autre compte sur ce navigateur → unsubscribed', async () => {
+    const env = setup('granted');
+    env.state.current = makeSubscription('https://push.example.com/a');
+    fetchMock.mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: async () => [{ endpoint: 'https://push.example.com/other' }],
+    });
+    await expect(resolvePushStatus(PUBLIC_KEY, 'tok')).resolves.toBe('unsubscribed');
+  });
+
+  it('avec jeton : liste indisponible → on garde subscribed (état du navigateur)', async () => {
+    const env = setup('granted');
+    env.state.current = makeSubscription('https://push.example.com/a');
+    fetchMock.mockResolvedValue({ ok: false, status: 500, json: async () => ({}) });
+    await expect(resolvePushStatus(PUBLIC_KEY, 'tok')).resolves.toBe('subscribed');
+  });
 });
 
 describe('subscribeToPush', () => {

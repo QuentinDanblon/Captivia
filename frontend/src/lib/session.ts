@@ -48,17 +48,52 @@ export function removeStorage(key: string) {
 }
 
 export type RefreshResult =
-  | { ok: true; accessToken: string }
+  /**
+   * `reused` : jeton déjà renouvelé par un autre onglet / une autre requête, renvoyé sans appeler
+   * le backend. S'il est refusé à son tour, l'appelant force un vrai refresh (`force`).
+   */
+  | { ok: true; accessToken: string; reused?: boolean }
   /** `revoked` : la session est définitivement perdue (pas de refresh token, 400/401). */
   | { ok: false; revoked: boolean };
 
+/**
+ * Lit la claim `exp` (secondes) d'un JWT sans vérifier la signature (le backend reste l'autorité).
+ * Un jeton illisible ou sans `exp` n'est PAS considéré comme expiré.
+ */
+export function isJwtExpired(token: string, now: number = Date.now()): boolean {
+  try {
+    const payload = token.split('.')[1];
+    if (!payload) return false;
+    const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+    const padded = base64 + '='.repeat((4 - (base64.length % 4)) % 4);
+    const claims = JSON.parse(atob(padded)) as { exp?: unknown };
+    return typeof claims.exp === 'number' && claims.exp * 1000 <= now;
+  } catch {
+    return false;
+  }
+}
+
+function emitRefreshed(accessToken: string) {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent(TOKEN_REFRESHED_EVENT, { detail: { accessToken } }));
+  }
+}
+
 let inFlight: Promise<RefreshResult> | null = null;
 
-async function doRefresh(failedAccessToken?: string): Promise<RefreshResult> {
-  // Un autre onglet (ou une requête plus rapide) a déjà renouvelé la session : on la réutilise.
+async function doRefresh(failedAccessToken?: string, force = false): Promise<RefreshResult> {
+  // Un autre onglet (ou une requête plus rapide) a déjà renouvelé la session : on la réutilise,
+  // sauf si ce jeton est lui-même expiré (sinon le rejeu échouerait et déconnecterait à tort).
   const current = readStorage(TOKEN_KEY);
-  if (failedAccessToken && current && current !== failedAccessToken) {
-    return { ok: true, accessToken: current };
+  if (
+    !force &&
+    failedAccessToken &&
+    current &&
+    current !== failedAccessToken &&
+    !isJwtExpired(current)
+  ) {
+    emitRefreshed(current);
+    return { ok: true, accessToken: current, reused: true };
   }
   const refreshToken = readStorage(REFRESH_TOKEN_KEY);
   if (!refreshToken) return { ok: false, revoked: true };
@@ -91,24 +126,28 @@ async function doRefresh(failedAccessToken?: string): Promise<RefreshResult> {
   if (typeof data.accessToken !== 'string' || typeof data.refreshToken !== 'string') {
     return { ok: false, revoked: false };
   }
+  // Déconnexion (ou autre compte) pendant la requête : la session effacée ne doit pas renaître.
+  if (readStorage(REFRESH_TOKEN_KEY) !== refreshToken) {
+    return { ok: false, revoked: false };
+  }
   writeStorage(TOKEN_KEY, data.accessToken);
   writeStorage(REFRESH_TOKEN_KEY, data.refreshToken);
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(
-      new CustomEvent(TOKEN_REFRESHED_EVENT, { detail: { accessToken: data.accessToken } }),
-    );
-  }
+  emitRefreshed(data.accessToken);
   return { ok: true, accessToken: data.accessToken };
 }
 
 /**
  * Renouvelle l'access token avec le refresh token stocké (rotation). Les appels concurrents
  * partagent la même requête. `failedAccessToken` : jeton refusé par l'API (s'il a déjà été
- * remplacé entre-temps, le nouveau est renvoyé sans appeler le backend).
+ * remplacé entre-temps par un jeton non expiré, celui-ci est renvoyé sans appeler le backend).
+ * `force` : ignore ce raccourci (le jeton réutilisé vient d'être refusé à son tour).
  */
-export function refreshAccessToken(failedAccessToken?: string): Promise<RefreshResult> {
+export function refreshAccessToken(
+  failedAccessToken?: string,
+  options: { force?: boolean } = {},
+): Promise<RefreshResult> {
   if (inFlight) return inFlight;
-  const run = () => doRefresh(failedAccessToken);
+  const run = () => doRefresh(failedAccessToken, options.force === true);
   const locks =
     typeof navigator !== 'undefined'
       ? (navigator as Navigator & { locks?: LockManager }).locks

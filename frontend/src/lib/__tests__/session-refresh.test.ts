@@ -1,4 +1,4 @@
-import { api } from '../api';
+import { api, BACKEND_UNAVAILABLE_MESSAGE } from '../api';
 import { REFRESH_TOKEN_KEY, TOKEN_KEY, TOKEN_REFRESHED_EVENT } from '../session';
 
 global.fetch = jest.fn();
@@ -128,7 +128,8 @@ describe('lib/api — refresh token sur 401', () => {
       .mockResolvedValueOnce(jsonResponse(401, {}))
       .mockRejectedValueOnce(new TypeError('Failed to fetch'));
 
-    await expect(api.getMyAnimals('old-access')).rejects.toMatchObject({ status: 401 });
+    // Échec passager : « service indisponible », jamais un faux 401 (qui déconnecterait).
+    await expect(api.getMyAnimals('old-access')).rejects.toThrow(BACKEND_UNAVAILABLE_MESSAGE);
 
     expect(logoutListener).not.toHaveBeenCalled();
     expect(localStorage.getItem(REFRESH_TOKEN_KEY)).toBe('refresh-1');
