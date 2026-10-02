@@ -351,7 +351,8 @@
     "loadMore": "Mehr anzeigen",
     "retry": "Erneut versuchen",
     "unexpectedError": "Unerwarteter Fehler",
-    "sessionExpired": "Sitzung abgelaufen. Bitte melde dich erneut an."
+    "sessionExpired": "Sitzung abgelaufen. Bitte melde dich erneut an.",
+    "agenda": "Pflegekalender"
   },
   "disclaimers": {
     "affiliate": "Affiliate-Link",
@@ -784,6 +785,64 @@
     "speciesFallbackDescription": "Praktisches Artenporträt: Lebensraum, Ernährung, Verhalten, Gesundheit und Rechtslage.",
     "speciesTitle": "Artenporträt",
     "storeDescription": "Ausstattung, Futter und Zubehör, empfohlen nach den Bedürfnissen jeder Art, mit klar gekennzeichneten Affiliate-Links.",
-    "storeTitle": "Shop"
+    "storeTitle": "Shop",
+    "agendaTitle": "Pflegekalender"
+  },
+  "agenda": {
+    "title": "Pflegekalender",
+    "subtitle": "Alle anstehenden Pflegetermine Ihrer Tiere an einem Ort: Routinen, Medikamente, Impfungen und Tierarzttermine.",
+    "loading": "Kalender wird geladen...",
+    "error": "Der Kalender konnte nicht geladen werden.",
+    "retry": "Erneut versuchen",
+    "rangeLabel": "Zeitraum",
+    "range7": "7 Tage",
+    "range30": "30 Tage",
+    "range90": "3 Monate",
+    "filtersLabel": "Kalender filtern",
+    "animalFilter": "Tier",
+    "allAnimals": "Alle Tiere",
+    "typeFilter": "Art der Pflege",
+    "allTypes": "Alle Arten",
+    "resetFilters": "Filter zurücksetzen",
+    "today": "Heute",
+    "allDay": "Ganztägig",
+    "listLabel": "Anstehende Pflege nach Tag",
+    "count": "{count, plural, one {# Eintrag angezeigt} other {# Einträge angezeigt}}",
+    "truncated": "Zu viele Einträge in diesem Zeitraum: Die Liste ist gekürzt. Wählen Sie einen kürzeren Zeitraum.",
+    "emptyTitle": "Keine anstehende Pflege",
+    "emptyHint": "Fügen Sie Ihren Tieren Routinen, Medikamente, Impfungen oder Tierarzttermine hinzu, um sie hier zu sehen.",
+    "emptyAction": "Meine Tiere ansehen",
+    "noMatch": "Keine Pflege entspricht diesen Filtern.",
+    "types": {
+      "routine": "Pflegeroutine",
+      "medication": "Medikament",
+      "vaccination": "Impferinnerung",
+      "vet_appointment": "Tierarzttermin"
+    },
+    "status": {
+      "pending": "Offen",
+      "done": "Erledigt",
+      "skipped": "Übersprungen",
+      "cancelled": "Abgesagt"
+    },
+    "sub": {
+      "title": "Externer Kalender",
+      "description": "Abonnieren Sie Ihre Pflegetermine in Google Kalender, Apple Kalender oder Outlook über einen persönlichen Link (nur lesend, automatisch aktualisiert).",
+      "button": "In meinem Kalender abonnieren",
+      "regenerate": "Link neu erzeugen",
+      "revoke": "Link deaktivieren",
+      "regenerateConfirm": "Der alte Link funktioniert dann nicht mehr. Link neu erzeugen?",
+      "confirmYes": "Ja, neu erzeugen",
+      "confirmNo": "Abbrechen",
+      "copied": "Link kopiert. Fügen Sie ihn in Ihrem Kalender ein („Kalender per URL hinzufügen“).",
+      "copyFailed": "Automatisches Kopieren nicht möglich: Kopieren Sie den Link unten.",
+      "regenerated": "Neuer Link erzeugt und kopiert. Der alte Link ist deaktiviert.",
+      "revoked": "Link deaktiviert: Kein Kalender kann Ihre Pflegetermine mehr lesen.",
+      "active": "Ein Abo-Link ist aktiv.",
+      "inactive": "Kein aktiver Abo-Link.",
+      "urlLabel": "Abo-Link (geheim halten)",
+      "secret": "Jeder mit diesem Link kann Ihre Pflegetermine sehen. Erzeugen Sie ihn neu, falls er bekannt wurde.",
+      "error": "Vorgang derzeit nicht möglich. Bitte erneut versuchen."
+    }
   }
 }
