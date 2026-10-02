@@ -28,11 +28,7 @@ test.describe('Mes animaux', () => {
     await expect(page).toHaveURL(/\/mes-animaux\/animal-e2e-1$/);
   });
 
-  test('ajout d’un animal : formulaire, envoi à l’API puis affichage dans la liste', async ({ page, api }, testInfo) => {
-    // BUG UI connu : sous 768 px la modale (`max-w-sm w-full`) s'écrase à ~66 px de large, le
-    // formulaire est inutilisable. À réactiver quand les largeurs `max-w-*` des modales seront corrigées.
-    test.fixme(testInfo.project.name === 'smoke-mobile', 'modale « Ajouter un animal » écrasée en mobile');
-
+  test('ajout d’un animal : formulaire, envoi à l’API puis affichage dans la liste', async ({ page, api }) => {
     await page.goto('/mes-animaux');
     await expect(page.getByRole('heading', { name: 'Aucun animal ajouté' })).toBeVisible();
 
