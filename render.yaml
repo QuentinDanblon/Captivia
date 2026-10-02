@@ -54,5 +54,7 @@ services:
         sync: false
       - key: MAIL_HOST
         sync: false
-      - key: OPERATOR_EMAILS
-        sync: false
+      # Les opérateurs ne sont plus définis par variable d'environnement (W0-01) :
+      # promouvoir un compte existant depuis un poste de dev :
+      #   cd backend && DATABASE_URL=<URL Neon directe> npm run operator:set -- <email>
+      # (l'image runtime ne contient ni ts-node ni scripts/, donc pas depuis Render Shell).
