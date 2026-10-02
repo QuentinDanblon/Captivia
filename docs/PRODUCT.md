@@ -37,3 +37,6 @@ Aujourd'hui le carnet de santé détaillé (soins, mesures, vaccins) est réserv
 
 ## Ton
 Précis, chaleureux sans mièvrerie, factuel : des chiffres plutôt que des adjectifs (« 3 soins aujourd'hui », « dernière pesée il y a 12 jours »). Pas de superlatifs creux ni de jargon technique visible.
+
+### Règle d'écriture (propriétaire, 2026-10-02)
+Les textes affichés (landing, app, stores) doivent être **naturels, chaleureux, un peu marketing** — jamais la reformulation des consignes internes. Aucun mot de ce document ou des briefs (« promesse », « piliers », « entonnoir », « derrière la connexion », « carnet de terrain »…) ne doit apparaître tel quel à l'écran. Chaque titre doit donner envie plutôt que décrire la section ; test : « une marque grand public l'écrirait-elle sur sa page d'accueil ? ».
