@@ -1,6 +1,6 @@
 # Captivia — Guide de déploiement (Netlify + Render + Neon)
 
-Ce guide décrit la mise en ligne gratuite de Captivia avec **build automatique relié à GitHub** (tâches DEP-01 et DEP-08 du `docs/PLAN-PRODUCTION.md`, §5). Les incidents et la rotation des secrets seront traités dans `docs/RUNBOOK.md`.
+Ce guide décrit la mise en ligne gratuite de Captivia avec **build automatique relié à GitHub** (tâches DEP-01 et DEP-08 du `docs/PLAN-PRODUCTION.md`, §5). Les incidents, la rotation des secrets et la restauration des sauvegardes sont traités dans `docs/RUNBOOK.md`.
 
 ## 1. Architecture
 
@@ -45,7 +45,8 @@ Dépôt → *Settings → Secrets and variables → Actions* :
 
 | Type | Nom | Valeur | Usage |
 |---|---|---|---|
-| Secret | `NEON_DATABASE_URL_DIRECT` | URL Neon **directe** | Jobs `migrate-production` et « Seed production » |
+| Secret | `NEON_DATABASE_URL_DIRECT` | URL Neon **directe** | Jobs `migrate-production`, « Seed production » et « Database Backup » |
+| Secret | `BACKUP_AGE_RECIPIENT` | clé **publique** age (`age1…`) | Chiffrement des sauvegardes (workflow « Database Backup », voir `docs/RUNBOOK.md` §3) |
 | Variable | `API_URL` | ex. `https://captivia-api.onrender.com` | `keep-warm.yml` (manuel) |
 
 Puis *Settings → Environments → New environment* : **`production`** (les jobs de migration et de seed y sont rattachés). Option : ajouter des « Required reviewers » ; dans ce cas la migration attend une approbation manuelle, et Render attend donc aussi (le check reste « en attente »).
@@ -102,6 +103,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
 | `NEON_DATABASE_URL_DIRECT` | GitHub Secrets | Neon **directe** | Oui |
+| `BACKUP_AGE_RECIPIENT` | GitHub Secrets | clé publique age (`age1…`) | Pour « Database Backup » (sans lui, aucune sauvegarde) |
 | `API_URL` | GitHub Variables | URL de l'API Render | Pour `keep-warm.yml` (diagnostic manuel) |
 
 (*) D'autres tâches du plan (vague 0 et 1, durcissement de la configuration) rendent `CORS_ORIGIN` et `FRONTEND_URL` **obligatoires en production** : l'API pourra refuser de démarrer si elles sont absentes. Elles sont déjà fournies par `render.yaml` ; ne pas les supprimer du Blueprint ni du Dashboard.
@@ -127,7 +129,7 @@ Toujours commencer par **identifier si la base a changé** : un rollback de code
 - *Expand* (déploiement N) : ajouter colonnes/tables nullables ou avec valeur par défaut, nouveaux index ; ne rien supprimer ni renommer ; l'API N écrit dans l'ancien et le nouveau schéma si nécessaire.
 - *Contract* (déploiement N+1, après stabilisation) : supprimer les colonnes et tables devenues inutiles, durcir les contraintes (`NOT NULL`).
 - Renommer = ajouter la nouvelle colonne, copier les données, basculer le code, supprimer l'ancienne dans une livraison ultérieure.
-- Ainsi, le rollback Render vers N-1 reste sûr après une migration « expand ». En cas de migration destructive erronée : restaurer depuis la branche Neon / l'historique PITR (voir DEP-03 et le futur `docs/RUNBOOK.md`).
+- Ainsi, le rollback Render vers N-1 reste sûr après une migration « expand ». En cas de migration destructive erronée : restaurer depuis la branche Neon / l'historique PITR (voir DEP-03 et `docs/RUNBOOK.md` §3).
 
 Un déploiement dont le check `migrate-production` échoue n'est **pas** déployé par Render (checks non verts) : corriger la migration et repousser.
 
