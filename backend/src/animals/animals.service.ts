@@ -388,6 +388,19 @@ export class AnimalsService {
         'Premium subscription required to share a public page for your animal.',
       );
     }
+    // W2-04 : publier une page publique exige une adresse e-mail vérifiée.
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { emailVerifiedAt: true },
+    });
+    if (!user?.emailVerifiedAt) {
+      throw new ForbiddenException({
+        statusCode: 403,
+        code: 'EMAIL_NOT_VERIFIED',
+        message:
+          'Verify your email address before sharing a public page for your animal.',
+      });
+    }
   }
 
   private async readPublicLinkState(

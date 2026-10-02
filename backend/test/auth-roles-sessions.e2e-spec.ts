@@ -160,6 +160,18 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
         .expect(200);
       expect(sub.body).toMatchObject({ isPremium: true, plan: 'monthly' });
 
+      // W2-04 : sans e-mail vérifié, le rôle OPERATOR n'ouvre pas les routes opérateur.
+      const denied = await request(server())
+        .post(`/admin/users/${opId}/premium`)
+        .set('Authorization', `Bearer ${opToken}`)
+        .send({})
+        .expect(403);
+      expect(denied.body).toMatchObject({ code: 'EMAIL_NOT_VERIFIED' });
+
+      await prisma.user.update({
+        where: { id: opId },
+        data: { emailVerifiedAt: new Date() },
+      });
       await request(server())
         .post(`/admin/users/${opId}/premium`)
         .set('Authorization', `Bearer ${opToken}`)

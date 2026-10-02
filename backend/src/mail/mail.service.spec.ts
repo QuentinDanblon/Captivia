@@ -3,6 +3,7 @@ import { MAIL_MAX_ATTEMPTS, MailService } from './mail.service';
 import {
   escapeHtml,
   renderCareReminder,
+  renderEmailVerification,
   renderPasswordReset,
   resolveMailLocale,
 } from './mail.templates';
@@ -36,6 +37,23 @@ describe('mail templates', () => {
 
     const en = renderPasswordReset('es', link);
     expect(en.subject).toBe('Reset your Captivia password');
+    expect(en.html).toContain('lang="en"');
+  });
+
+  it('renders the email verification (W2-04) in French and English', () => {
+    const link = 'https://app.example/verifier-email?token=abc&x=1';
+    const fr = renderEmailVerification('fr-FR', link);
+    expect(fr.subject).toBe('Confirmez votre adresse e-mail Captivia');
+    expect(fr.text).toContain(link);
+    expect(fr.text).toContain('24 heures');
+    expect(fr.html).toContain(
+      'href="https://app.example/verifier-email?token=abc&amp;x=1"',
+    );
+    expect(fr.html).toContain('lang="fr"');
+
+    const en = renderEmailVerification('pt', link);
+    expect(en.subject).toBe('Confirm your Captivia email address');
+    expect(en.text).toContain('24 hours');
     expect(en.html).toContain('lang="en"');
   });
 

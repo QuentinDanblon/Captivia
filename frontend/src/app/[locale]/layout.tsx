@@ -7,6 +7,7 @@ import { routing } from '../../../i18n/routing';
 import { buildPageMetadata, getSiteUrl, SITE_NAME } from '@/lib/seo';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { AppHeader } from '@/components/AppHeader';
+import { EmailVerificationBanner } from '@/components/EmailVerificationBanner';
 import { SiteFooter } from '@/components/SiteFooter';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import '../globals.css';
@@ -78,6 +79,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             <AppHeader />
+            <EmailVerificationBanner />
             <main id="main-content" tabIndex={-1} className="flex-1 w-full">
               <ErrorBoundary>
                 {children}
