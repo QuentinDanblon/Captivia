@@ -9,6 +9,11 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateAnimalDto, UpdateAnimalDto } from './dto/animal.dto';
 import { ensureAnimalOwnership } from '../common/helpers/ownership.helper';
 import { effectivePremium } from '../common/operators';
+import {
+  PaginationQueryDto,
+  toPage,
+} from '../common/dto/pagination-query.dto';
+
 
 const FREE_ANIMAL_LIMIT = 1;
 
@@ -154,7 +159,7 @@ export class AnimalsService {
     });
   }
 
-  async findAll(userId: string) {
+  async findAll(userId: string, page?: PaginationQueryDto) {
     return this.prisma.animal.findMany({
       where: { userId },
       include: {
@@ -171,7 +176,8 @@ export class AnimalsService {
           },
         },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
+      ...toPage(page),
     });
   }
 
@@ -280,7 +286,7 @@ export class AnimalsService {
   }
 
   /** Module F — portée : animaux dont fatherId ou motherId == id. */
-  async getOffspring(id: string, userId: string) {
+  async getOffspring(id: string, userId: string, page?: PaginationQueryDto) {
     await ensureAnimalOwnership(this.prisma, id, userId);
 
     return this.prisma.animal.findMany({
@@ -294,7 +300,8 @@ export class AnimalsService {
         fatherId: true,
         motherId: true,
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
+      ...toPage(page),
     });
   }
 

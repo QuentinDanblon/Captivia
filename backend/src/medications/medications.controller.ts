@@ -9,11 +9,13 @@ import {
   UseGuards,
   Req,
   ForbiddenException,
+  Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { MedicationsService } from './medications.service';
 import { CreateMedicationDto, UpdateMedicationDto } from './dto/medication.dto';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @ApiTags('animals')
 @Controller('users/me/animals/:animalId/medications')
@@ -33,9 +35,13 @@ export class MedicationsController {
   @Get()
   @ApiOperation({ summary: 'List medications for an animal (sorted by startDate desc)' })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
-  async findAll(@Req() req: { user: { id: string; isPremium?: boolean } }, @Param('animalId') animalId: string) {
+  async findAll(
+    @Req() req: { user: { id: string; isPremium?: boolean } },
+    @Param('animalId') animalId: string,
+    @Query() page: PaginationQueryDto,
+  ) {
     this.ensurePremium(req);
-    return this.medicationsService.findAll(animalId, req.user.id);
+    return this.medicationsService.findAll(animalId, req.user.id, page);
   }
 
   @Post()

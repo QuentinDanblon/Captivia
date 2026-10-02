@@ -175,7 +175,9 @@ describe('RoutinesService', () => {
       expect(result).toEqual(routines);
       expect(mockPrismaService.routine.findMany).toHaveBeenCalledWith({
         where: { animalId: mockAnimalId },
-        orderBy: { createdAt: 'desc' },
+        orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
+        take: 100,
+        skip: 0,
       });
     });
 
@@ -330,8 +332,9 @@ describe('RoutinesService', () => {
       expect(result).toEqual(logs);
       expect(mockPrismaService.actionLog.findMany).toHaveBeenCalledWith({
         where: { animalId: mockAnimalId },
-        orderBy: { doneAt: 'desc' },
+        orderBy: [{ doneAt: 'desc' }, { id: 'asc' }],
         take: 100,
+        skip: 0,
       });
     });
 
