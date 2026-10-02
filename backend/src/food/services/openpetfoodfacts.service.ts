@@ -1,6 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
+import {
+  EXTERNAL_REQUEST_DEFAULTS,
+  describeHttpError,
+  isValidBarcode,
+} from '../../external/http-safety';
 
 interface PetFoodProduct {
   code: string;
@@ -210,7 +215,7 @@ export class OpenPetFoodFactsService {
 
       const response = await axios.get(
         'https://world.openpetfoodfacts.org/cgi/search.pl',
-        { params },
+        { params, ...EXTERNAL_REQUEST_DEFAULTS },
       );
 
       const result = {
@@ -224,12 +229,19 @@ export class OpenPetFoodFactsService {
 
       return result;
     } catch (error) {
-      console.error('Open Pet Food Facts search error:', error);
+      this.logger.error(
+        `Open Pet Food Facts search error: ${describeHttpError(error)}`,
+      );
       return { products: [], count: 0, page: 1 };
     }
   }
 
   async getProduct(barcode: string): Promise<PetFoodProduct | null> {
+    // Le barcode est interpolé dans l'URL : on n'accepte que 8 à 14 chiffres.
+    if (!isValidBarcode(barcode)) {
+      return null;
+    }
+
     const cacheKey = `${this.cachePrefix}product:${barcode}`;
     
     // Check cache
@@ -239,15 +251,13 @@ export class OpenPetFoodFactsService {
     }
 
     try {
-      const response = await axios.get(
-        `${this.baseUrl}/product/${barcode}`,
-        {
-          params: {
-            fields:
-              'code,product_name,brands,categories,image_url,ingredients_text,nutrition_grades,allergens,labels,quantity',
-          },
+      const response = await axios.get(`${this.baseUrl}/product/${barcode}`, {
+        params: {
+          fields:
+            'code,product_name,brands,categories,image_url,ingredients_text,nutrition_grades,allergens,labels,quantity',
         },
-      );
+        ...EXTERNAL_REQUEST_DEFAULTS,
+      });
 
       if (response.data.status === 1 && response.data.product) {
         const product = response.data.product;
@@ -260,7 +270,9 @@ export class OpenPetFoodFactsService {
 
       return null;
     } catch (error) {
-      console.error('Open Pet Food Facts product fetch error:', error);
+      this.logger.error(
+        `Open Pet Food Facts product fetch error: ${describeHttpError(error)}`,
+      );
       return null;
     }
   }
@@ -298,6 +310,7 @@ export class OpenPetFoodFactsService {
     try {
       const response = await axios.get(
         'https://world.openpetfoodfacts.org/categories.json',
+        { ...EXTERNAL_REQUEST_DEFAULTS },
       );
 
       const categories =
@@ -308,7 +321,9 @@ export class OpenPetFoodFactsService {
 
       return categories;
     } catch (error) {
-      console.error('Open Pet Food Facts categories error:', error);
+      this.logger.error(
+        `Open Pet Food Facts categories error: ${describeHttpError(error)}`,
+      );
       return [];
     }
   }

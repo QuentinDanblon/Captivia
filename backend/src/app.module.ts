@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RedisModule } from '@nestjs-modules/ioredis';
-import * as Joi from 'joi';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { envValidationSchema } from './config/env.validation';
+import { GLOBAL_THROTTLE } from './config/throttle.config';
 import { SpeciesModule } from './species/species.module';
 import { HealthModule } from './health/health.module';
 import { CommonModule } from './common/common.module';
@@ -39,17 +42,11 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      validationSchema: Joi.object({
-        DATABASE_URL: Joi.string().required(),
-        JWT_SECRET: Joi.string().min(16).required(),
-        PORT: Joi.number().default(3001),
-        CACHE_TYPE: Joi.string().valid('memory', 'redis', 'memcached').default('memory'),
-        REDIS_ENABLED: Joi.string().valid('true', 'false').default('false'),
-        REDIS_HOST: Joi.string().default('localhost'),
-        REDIS_PORT: Joi.number().default(6379),
-      }),
+      validationSchema: envValidationSchema,
       validationOptions: { allowUnknown: true, abortEarly: false },
     }),
+    // Rate limiting global par IP (120 req/min) ; durci par @Throttle sur les routes à API externes.
+    ThrottlerModule.forRoot({ throttlers: [GLOBAL_THROTTLE] }),
     ...(redisEnabled
       ? [
           RedisModule.forRootAsync({
@@ -95,5 +92,6 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     CommonModule,
     ...(redisEnabled ? [MonitoringModule, AnalyticsModule, DatabaseOptimizationModule] : []),
   ],
+  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })
 export class AppModule {}

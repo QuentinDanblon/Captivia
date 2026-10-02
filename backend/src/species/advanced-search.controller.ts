@@ -3,6 +3,8 @@
  * Source: plans/resource-improvement-plan.md
  */
 
+import { Throttle } from '@nestjs/throttler';
+import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
 import { Controller, Get, Query, HttpCode, HttpStatus, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { AdvancedSearchService } from './advanced-search.service';
@@ -11,6 +13,7 @@ import { SpeciesFilterDto } from '../dto/advanced-search.dto';
 
 @ApiTags('Species')
 @Controller('species')
+@Throttle(EXTERNAL_API_THROTTLE)
 export class AdvancedSearchController {
   constructor(private readonly advancedSearchService: AdvancedSearchService) {}
 

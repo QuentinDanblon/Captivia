@@ -1,3 +1,5 @@
+import { Throttle } from '@nestjs/throttler';
+import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
 import {
   Controller,
   Get,
@@ -72,6 +74,7 @@ export class LegislationController {
 
 @ApiTags('speciesplus')
 @Controller('speciesplus')
+@Throttle(EXTERNAL_API_THROTTLE)
 export class SpeciesPlusController {
   constructor(private readonly legislationService: LegislationService) {}
 

@@ -16,6 +16,7 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { PrismaService } from './prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
+import { resolveTrustProxy } from './config/trust-proxy';
 
 /**
  * Niveaux de log actifs selon LOG_LEVEL (debug|log|warn|error, défaut : log).
@@ -105,7 +106,9 @@ async function bootstrap() {
   // Trust proxy: à activer UNIQUEMENT derrière un reverse proxy de confiance (nginx, traefik…).
   // Avec 'trust proxy' actif, Express extrait la vraie IP client depuis X-Forwarded-For
   // (entrée ajoutée par le proxy, non spoofable). Sans proxy, request.ip = adresse socket.
-  app.set('trust proxy', process.env.TRUST_PROXY === 'true' ? 1 : false);
+  // TRUST_PROXY : 'true' (= 1 saut), un entier N (nombre de proxies de confiance devant l'app),
+  // ou absent/'false' (désactivé).
+  app.set('trust proxy', resolveTrustProxy(process.env.TRUST_PROXY));
 
   // Headers de sécurité (HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy…)
   app.use(helmet());
@@ -157,10 +160,10 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const port = process.env.PORT || 3001;
-  // '::' = écoute IPv6 + IPv4 (dual-stack) : indispensable car les navigateurs
-  // résolvent souvent localhost en ::1 (IPv6) ; avec '0.0.0.0' (IPv4 seul),
-  // le frontend (qui écoute en dual-stack) joignait l'API en IPv6 -> échec.
-  const host = process.env.HOST || '::';
+  // Défaut '0.0.0.0' (IPv4) : fonctionne partout, y compris les conteneurs sans IPv6
+  // (où '::' fait planter le listen). Pour du dual-stack en dev local (localhost -> ::1),
+  // définir HOST=::.
+  const host = process.env.HOST || '0.0.0.0';
   const cacheTtl = parseInt(configService.get<string>('CACHE_TTL') || '3600', 10);
 
   await app.listen(port, host);

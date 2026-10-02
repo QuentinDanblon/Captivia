@@ -1,6 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
+import {
+  EXTERNAL_REQUEST_DEFAULTS,
+  describeHttpError,
+} from '../../external/http-safety';
 
 interface PubMedArticle {
   pmid: string;
@@ -43,7 +47,10 @@ export class PubmedService {
         usehistory: 'y',
       };
 
-      const searchResponse = await axios.get(searchUrl, { params: searchParams });
+      const searchResponse = await axios.get(searchUrl, {
+        params: searchParams,
+        ...EXTERNAL_REQUEST_DEFAULTS,
+      });
       const pmids = searchResponse.data.esearchresult?.idlist || [];
 
       if (pmids.length === 0) {
@@ -58,7 +65,10 @@ export class PubmedService {
         retmode: 'json',
       };
 
-      const fetchResponse = await axios.get(fetchUrl, { params: fetchParams });
+      const fetchResponse = await axios.get(fetchUrl, {
+        params: fetchParams,
+        ...EXTERNAL_REQUEST_DEFAULTS,
+      });
       const articles: PubMedArticle[] = [];
 
       for (const pmid of pmids) {
@@ -80,7 +90,7 @@ export class PubmedService {
 
       return articles;
     } catch (error) {
-      console.error('PubMed search error:', error);
+      this.logger.error(`PubMed search error: ${describeHttpError(error)}`);
       return [];
     }
   }
@@ -102,7 +112,10 @@ export class PubmedService {
         retmode: 'xml',
       };
 
-      const response = await axios.get(fetchUrl, { params });
+      const response = await axios.get(fetchUrl, {
+        params,
+        ...EXTERNAL_REQUEST_DEFAULTS,
+      });
       
       // Basic XML parsing (in production, use a proper XML parser)
       const abstractMatch = response.data.match(
@@ -117,7 +130,9 @@ export class PubmedService {
 
       return abstract;
     } catch (error) {
-      console.error('PubMed abstract fetch error:', error);
+      this.logger.error(
+        `PubMed abstract fetch error: ${describeHttpError(error)}`,
+      );
       return null;
     }
   }

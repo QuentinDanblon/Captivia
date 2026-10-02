@@ -43,4 +43,9 @@ COPY --from=runtime-deps --chown=nestjs:nodejs /app/dist ./dist
 USER nestjs
 EXPOSE 3001
 
+# Liveness : le process répond sur son port effectif (PORT peut être surchargé à l'exécution,
+# p. ex. par Render). La sonde de disponibilité (base de données) est /health/ready.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+  CMD wget -qO- http://127.0.0.1:${PORT}/health >/dev/null || exit 1
+
 CMD ["node", "dist/src/main.js"]
