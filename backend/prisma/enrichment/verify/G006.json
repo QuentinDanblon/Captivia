@@ -1,0 +1,114 @@
+[
+ {
+  "speciesId": 5216933,
+  "evidence": []
+ },
+ {
+  "speciesId": 5217160,
+  "evidence": [
+   {
+    "field": "health.diseases[0].name",
+    "value": "Chytridiomycose",
+    "quote": "Chytridiomycosis, an infectious disease of amphibians, has been reported in common toads in Spain and the United Kingdom and may affect some populations.",
+    "url": "https://en.wikipedia.org/wiki/European_toad"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "mue excessive, épaississement de la peau",
+    "quote": "Excessive shedding of skin is seen in most frog species affected by B. dendrobatidis.",
+    "url": "https://en.wikipedia.org/wiki/Chytridiomycosis",
+    "note": "page générale sur les amphibiens, pas spécifique au crapaud commun"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "épaississement de la peau",
+    "quote": "The most typical symptom of chytridiomycosis is thickening of skin, which promptly leads to the death of the infected individuals.",
+    "url": "https://en.wikipedia.org/wiki/Chytridiomycosis"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "léthargie",
+    "quote": "Individuals infected are also commonly found in a lethargic state, characterized by slow movements, and refuse to move when stimulated.",
+    "url": "https://en.wikipedia.org/wiki/Chytridiomycosis"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "rougeur, convulsions, perte du réflexe de redressement",
+    "quote": "Other common signs are reddening of the skin, convulsions, and a loss of righting reflex.",
+    "url": "https://en.wikipedia.org/wiki/Chytridiomycosis"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "avis vétérinaire",
+    "quote": "Treatment is not always 100% successful and not all amphibians tolerate treatment very well, therefore chytridiomycosis should always be treated with the advice of a veterinarian.",
+    "url": "https://en.wikipedia.org/wiki/Chytridiomycosis"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Lucilia bufonivora",
+    "quote": "The fly lays its eggs on the toad's skin, and when they hatch, the larvae crawl into the toad's nostrils and eat its flesh from inside, with lethal consequences.",
+    "url": "https://en.wikipedia.org/wiki/European_toad"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Rhabdias bufonis",
+    "quote": "Juveniles are often parasitised by the lung nematode Rhabdias bufonis. This slows growth rates and reduces stamina and fitness.",
+    "url": "https://en.wikipedia.org/wiki/European_toad"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "anorexie, mortalité",
+    "quote": "Their parasite-induced anorexia caused a decrease in food intake and some died.",
+    "url": "https://en.wikipedia.org/wiki/European_toad"
+   }
+  ]
+ },
+ {
+  "speciesId": 5217264,
+  "evidence": []
+ },
+ {
+  "speciesId": 5218022,
+  "evidence": []
+ },
+ {
+  "speciesId": 5219362,
+  "evidence": []
+ },
+ {
+  "speciesId": 5219888,
+  "evidence": []
+ },
+ {
+  "speciesId": 5220136,
+  "evidence": []
+ },
+ {
+  "speciesId": 5220266,
+  "evidence": []
+ },
+ {
+  "speciesId": 5225659,
+  "evidence": []
+ },
+ {
+  "speciesId": 5226308,
+  "evidence": []
+ },
+ {
+  "speciesId": 5227370,
+  "evidence": []
+ },
+ {
+  "speciesId": 5228034,
+  "evidence": []
+ },
+ {
+  "speciesId": 5229044,
+  "evidence": []
+ },
+ {
+  "speciesId": 5285167,
+  "evidence": []
+ }
+]

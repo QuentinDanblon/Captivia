@@ -1,0 +1,83 @@
+[
+  {
+    "speciesId": 2468542,
+    "evidence": []
+  },
+  {
+    "speciesId": 2469188,
+    "evidence": []
+  },
+  {
+    "speciesId": 2470656,
+    "evidence": []
+  },
+  {
+    "speciesId": 2470685,
+    "evidence": []
+  },
+  {
+    "speciesId": 2470711,
+    "evidence": []
+  },
+  {
+    "speciesId": 2470729,
+    "evidence": []
+  },
+  {
+    "speciesId": 2470854,
+    "evidence": []
+  },
+  {
+    "speciesId": 2474162,
+    "evidence": []
+  },
+  {
+    "speciesId": 2476004,
+    "evidence": [
+      {
+        "field": "reproduction.litterSizeMin",
+        "value": 1,
+        "quote": "1 ou 2 œufs",
+        "url": "https://fr.wikipedia.org/wiki/Calao_rhinocéros"
+      },
+      {
+        "field": "reproduction.litterSizeMax",
+        "value": 2,
+        "quote": "1 ou 2 œufs",
+        "url": "https://fr.wikipedia.org/wiki/Calao_rhinocéros"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "incubation 37 à 46 jours",
+        "quote": "37 à 46 jours",
+        "url": "https://fr.wikipedia.org/wiki/Calao_rhinocéros"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "femelle emmurée",
+        "quote": "emmurée dans son nid pendant toute l'incubation et l'élevage des oisillons",
+        "url": "https://fr.wikipedia.org/wiki/Calao_rhinocéros"
+      }
+    ]
+  },
+  {
+    "speciesId": 2478765,
+    "evidence": []
+  },
+  {
+    "speciesId": 2479505,
+    "evidence": []
+  },
+  {
+    "speciesId": 2479694,
+    "evidence": []
+  },
+  {
+    "speciesId": 2479870,
+    "evidence": []
+  },
+  {
+    "speciesId": 2479888,
+    "evidence": []
+  }
+]

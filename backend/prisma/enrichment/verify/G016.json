@@ -1,0 +1,564 @@
+[
+ {
+  "speciesId": 2000001127,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine : race de poule indienne, Dhar et Jhabua (Madhya Pradesh)",
+    "quote": "is an Indian breed of chicken. They originated from Dhar and Jhabua, Madhya Pradesh.",
+    "url": "https://en.wikipedia.org/wiki/Kadaknath"
+   },
+   {
+    "field": "description",
+    "value": "autre nom : Kali Masi",
+    "quote": "Kadaknath, also called Kali Masi",
+    "url": "https://en.wikipedia.org/wiki/Kadaknath"
+   },
+   {
+    "field": "description",
+    "value": "poids : coqs 1,8–2 kg, poules 1,2–1,5 kg",
+    "quote": "The roosters weigh 1.8–2 kg (4.0–4.4 lb) and the hens 1.2–1.5 kg (2.6–3.3 lb).",
+    "url": "https://en.wikipedia.org/wiki/Kadaknath"
+   },
+   {
+    "field": "description",
+    "value": "couleur : gris-noir, plumage doré à reflets verdâtres, chair/os/sang noirs",
+    "quote": "Kadaknath birds are grey-black all over and have gold plumage with greenish iridescence.",
+    "url": "https://en.wikipedia.org/wiki/Kadaknath"
+   },
+   {
+    "field": "description",
+    "value": "chair, os, sang et organes noirs",
+    "quote": "even the meat, bones, blood and organs have black colouration.",
+    "url": "https://en.wikipedia.org/wiki/Kadaknath"
+   },
+   {
+    "field": "description",
+    "value": "usage : double usage œufs/viande",
+    "quote": "Dual-purpose breed: eggs, meat",
+    "url": "https://en.wikipedia.org/wiki/Kadaknath"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001128,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race japonaise de poule à chant long",
+    "quote": "The Tōmaru (唐丸) is a Japanese breed of long-crowing chicken.",
+    "url": "https://en.wikipedia.org/wiki/Tomaru"
+   },
+   {
+    "field": "description",
+    "value": "chant d'environ 25 secondes",
+    "quote": "The crow may be sustained for some 25 seconds.",
+    "url": "https://en.wikipedia.org/wiki/Tomaru"
+   },
+   {
+    "field": "description",
+    "value": "origine supposée : Chine, dynastie Tang",
+    "quote": "The Tōmaru is thought to have originated in China at the time of the Tang dynasty",
+    "url": "https://en.wikipedia.org/wiki/Tomaru"
+   },
+   {
+    "field": "description",
+    "value": "plumage noir à reflets verdâtres",
+    "quote": "The Tōmaru has only one colour, black with a greenish sheen.",
+    "url": "https://en.wikipedia.org/wiki/Tomaru"
+   },
+   {
+    "field": "description",
+    "value": "corps large et compact, poitrine pleine",
+    "quote": "The body is broad and compact with a full breast.",
+    "url": "https://en.wikipedia.org/wiki/Tomaru"
+   },
+   {
+    "field": "description",
+    "value": "poids coq 3,3 kg",
+    "quote": "Male: 3.3 kg",
+    "url": "https://en.wikipedia.org/wiki/Tomaru"
+   },
+   {
+    "field": "description",
+    "value": "poids poule 2,1 kg",
+    "quote": "Female: 2.1 kg",
+    "url": "https://en.wikipedia.org/wiki/Tomaru"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001130,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine : Sidenreng Rappang, Sulawesi du Sud, Indonésie",
+    "quote": "is a breed of chicken originating from the area of Sidenreng Rappang in South Sulawesi, Indonesia.",
+    "url": "https://en.wikipedia.org/wiki/Ayam_Ketawa"
+   },
+   {
+    "field": "description",
+    "value": "race à chant long appréciée pour la clarté et la longueur du chant",
+    "quote": "It is one of several breeds of long-crowing chicken prized for the clarity and unusual length of their crows.",
+    "url": "https://en.wikipedia.org/wiki/Ayam_Ketawa"
+   },
+   {
+    "field": "description",
+    "value": "chant du coq semblable à un rire humain",
+    "quote": "The crow of Ayam Ketawa cocks has an unusual similarity to a human laugh.",
+    "url": "https://en.wikipedia.org/wiki/Ayam_Ketawa"
+   },
+   {
+    "field": "description",
+    "value": "poids coq 2–3 kg",
+    "quote": "Male: 2–3 kg",
+    "url": "https://en.wikipedia.org/wiki/Ayam_Ketawa"
+   },
+   {
+    "field": "description",
+    "value": "poids poule 1–2 kg",
+    "quote": "Female: 1–2 kg",
+    "url": "https://en.wikipedia.org/wiki/Ayam_Ketawa"
+   },
+   {
+    "field": "description",
+    "value": "concours du chant le plus parfait",
+    "quote": "they compete in contests for the most perfect crow",
+    "url": "https://en.wikipedia.org/wiki/Ayam_Ketawa"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001154,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine : Normandie, nom de la ville de Duclair",
+    "quote": "Le Canard de Duclair est un canard originaire de Normandie qui porte le nom de la ville de Duclair.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Duclair"
+   },
+   {
+    "field": "description",
+    "value": "recette du canard au sang",
+    "quote": "Il est à l'origine de la recette du canard au sang",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Duclair"
+   },
+   {
+    "field": "description",
+    "value": "plumage noir à bavette blanche",
+    "quote": "Il est généralement de couleur noire, et se caractérise par une bavette blanche, commençant à la naissance du cou et s'élargissant sur la poitrine",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Duclair"
+   },
+   {
+    "field": "description",
+    "value": "variété grise (dite bleue)",
+    "quote": "Une variété de couleur grise (au plumage dit bleu) a été sélectionnée par la suite.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Duclair"
+   },
+   {
+    "field": "description",
+    "value": "poids mâle 3 kg, cane 2,5 kg",
+    "quote": "Le mâle atteint une masse d'environ 3 kg et la cane 2,5 kg.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Duclair"
+   },
+   {
+    "field": "description",
+    "value": "chair moins grasse",
+    "quote": "Sa chair est moins grasse que celle de ses congénères.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Duclair"
+   },
+   {
+    "field": "description",
+    "value": "rare, plan de sauvegarde",
+    "quote": "Devenue rare, elle fait aujourd'hui l'objet d'un plan de sauvegarde",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Duclair"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001155,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race de canard domestique au plumage panaché variable",
+    "quote": "The Ancona is a breed of domestic duck, characterised by an unusual and variable broken-colored plumage pattern.",
+    "url": "https://en.wikipedia.org/wiki/Ancona_duck"
+   },
+   {
+    "field": "description",
+    "value": "origine incertaine Royaume-Uni / États-Unis",
+    "quote": "It is not clear whether it originated in the United Kingdom or in the United States.",
+    "url": "https://en.wikipedia.org/wiki/Ancona_duck"
+   },
+   {
+    "field": "description",
+    "value": "taille moyenne, 2,3–2,9 kg",
+    "quote": "The Ancona is of medium size, and weighs about 2.3–2.9 kg (5–6.5 lb).",
+    "url": "https://en.wikipedia.org/wiki/Ancona_duck"
+   },
+   {
+    "field": "description",
+    "value": "taches irrégulières sur fond blanc",
+    "quote": "The plumage is broken-colored, with irregular patches of color on a white ground.",
+    "url": "https://en.wikipedia.org/wiki/Ancona_duck"
+   },
+   {
+    "field": "description",
+    "value": "rusticité, bonne fourrageuse, adaptable",
+    "quote": "It forages well, is hardy, and is capable of adapting to different environmental conditions.",
+    "url": "https://en.wikipedia.org/wiki/Ancona_duck"
+   },
+   {
+    "field": "description",
+    "value": "ponte 210–280 œufs/an",
+    "quote": "The Ancona is a good layer, producing some 210–280 eggs per year",
+    "url": "https://en.wikipedia.org/wiki/Ancona_duck"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001156,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine : îles Shetland, nord de l'Écosse",
+    "quote": "Le canard de Shetland est une race de canard domestique originaire des îles Shetland au nord de l'Écosse.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Shetland"
+   },
+   {
+    "field": "description",
+    "value": "petit canard fermier robuste, noir à bavette blanche",
+    "quote": "Le canard de Shetland est un petit canard fermier robuste",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Shetland"
+   },
+   {
+    "field": "description",
+    "value": "noir avec une bavette blanche",
+    "quote": "Il est noir avec une bavette blanche.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Shetland"
+   },
+   {
+    "field": "description",
+    "value": "bec bleuâtre",
+    "quote": "Sa caractéristique propre est d'avoir un bec bleuâtre.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Shetland"
+   },
+   {
+    "field": "description",
+    "value": "poids : mâle ≤ 2 kg, cane 1,8 kg",
+    "quote": "Il ne dépasse guère les 2 kg pour le mâle et 1,8 kg pour la cane.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Shetland"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001157,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race britannique de canard domestique",
+    "quote": "The Welsh Harlequin is a British breed of domestic duck.",
+    "url": "https://en.wikipedia.org/wiki/Welsh_Harlequin"
+   },
+   {
+    "field": "description",
+    "value": "sélection depuis 1949 dans le Hertfordshire par Leslie Bonnet, mutations de Khaki Campbell",
+    "quote": "It was bred from 1949 in Hertfordshire by Leslie Bonnet from two colour mutations he found in his flock of Khaki Campbells",
+    "url": "https://en.wikipedia.org/wiki/Welsh_Harlequin"
+   },
+   {
+    "field": "description",
+    "value": "poids idéal femelles 2,0–2,3 kg, mâles 2,3–2,5 kg",
+    "quote": "body weights are ideally in the range 2.0–2.3 kg for ducks and 2.3–2.5 kg for drakes",
+    "url": "https://en.wikipedia.org/wiki/Welsh_Harlequin"
+   },
+   {
+    "field": "description",
+    "value": "plumage de la femelle : colvert fortement givré de blanc",
+    "quote": "their plumage is similar to a mallard but heavily frosted with white.",
+    "url": "https://en.wikipedia.org/wiki/Welsh_Harlequin"
+   },
+   {
+    "field": "description",
+    "value": "ponte annuelle très variable selon les sources",
+    "quote": "The number of eggs laid per year is variously given as 80,",
+    "url": "https://en.wikipedia.org/wiki/Welsh_Harlequin"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001159,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race indonésienne de canard domestique de Hulu Sungai Nord",
+    "quote": "The Alabio duck (Indonesian: Itik Alabio) is an Indonesian breed of domestic duck from North Hulu Sungai Regency.",
+    "url": "https://en.wikipedia.org/wiki/Alabio_duck"
+   },
+   {
+    "field": "description",
+    "value": "croisement canards locaux x Pékin",
+    "quote": "the duck is a result of crossbreeding between local regional ducks and Pekins.",
+    "url": "https://en.wikipedia.org/wiki/Alabio_duck"
+   },
+   {
+    "field": "description",
+    "value": "apprécié pour la ponte et la viande",
+    "quote": "it is a popular choice for farmers due to their great egg laying attributes as well as their large bodies which offers plenty of meat.",
+    "url": "https://en.wikipedia.org/wiki/Alabio_duck"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001160,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "originaire des États-Unis malgré son nom",
+    "quote": "The name Australian Spotted is something of a misnomer, as the Australian Spotted duck is one of the few breeds of domesticated ducks that originated in the United States.",
+    "url": "https://en.wikipedia.org/wiki/Australian_Spotted"
+   },
+   {
+    "field": "description",
+    "value": "développée en Pennsylvanie par Kriner et Mason par croisements",
+    "quote": "John C. Kriner and Stanley Mason of Pennsylvania developed this breed by allowing Calls, mallards, pintails, and various Australian wild ducks to crossbreed for several years before selecting the desired specimens.",
+    "url": "https://en.wikipedia.org/wiki/Australian_Spotted"
+   },
+   {
+    "field": "description",
+    "value": "première exposition en 1928",
+    "quote": "The first exhibit of the Australian Spotted began in 1928.",
+    "url": "https://en.wikipedia.org/wiki/Australian_Spotted"
+   },
+   {
+    "field": "description",
+    "value": "trois variétés de couleur",
+    "quote": "There are three different color varieties of the Australian spotted: green heads, blue heads and silver heads.",
+    "url": "https://en.wikipedia.org/wiki/Australian_Spotted"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001161,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine mal connue, existence prolongée à Majorque, domestication ces 200 dernières années",
+    "quote": "L'únic fet constatable és la seva ja prolongada existència a Mallorca, que sembla tenir els fonaments en la domesticació d'aquestes aus dins els darrers 200 anys",
+    "url": "https://ca.wikipedia.org/wiki/%C3%80nnera_mallorquina"
+   },
+   {
+    "field": "description",
+    "value": "taille moyenne, ~3 kg mâles, ~2,5 kg femelles",
+    "quote": "L'ànnera mallorquina és de grandària mitjana, amb un pes aproximat als tres quilos, els mascles, i dos quilos i mig, les femelles.",
+    "url": "https://ca.wikipedia.org/wiki/%C3%80nnera_mallorquina"
+   },
+   {
+    "field": "description",
+    "value": "fort dimorphisme sexuel du plumage",
+    "quote": "Té un marcat dimorfisme sexual que es manifesta principalment en el plomatge.",
+    "url": "https://ca.wikipedia.org/wiki/%C3%80nnera_mallorquina"
+   },
+   {
+    "field": "description",
+    "value": "animal de basse-cour peu spécialisé, consommation propre",
+    "quote": "L'ànnera mallorquina és un animal típicament casolà, poc especialitzat a escala productiva, que s'explota generalment en petits nuclis i es manté majoritàriament per a consum propi",
+    "url": "https://ca.wikipedia.org/wiki/%C3%80nnera_mallorquina"
+   },
+   {
+    "field": "description",
+    "value": "femelles bonnes mères, couvent bien",
+    "quote": "En general, les femelles són bones mares i coven bé.",
+    "url": "https://ca.wikipedia.org/wiki/%C3%80nnera_mallorquina"
+   },
+   {
+    "field": "description",
+    "value": "incubation 27–28 jours",
+    "quote": "La duració de la incubació és de 27-28 dies.",
+    "url": "https://ca.wikipedia.org/wiki/%C3%80nnera_mallorquina"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001162,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race européenne de canard domestique (Deutsche Pekingente)",
+    "quote": "The German Pekin, German: Deutsche Pekingente, is a European breed of domestic duck.",
+    "url": "https://en.wikipedia.org/wiki/German_Pekin"
+   },
+   {
+    "field": "description",
+    "value": "sélectionné en Europe à partir d'oiseaux de Chine et du Japon",
+    "quote": "It was bred in Europe from birds originating in China and Japan",
+    "url": "https://en.wikipedia.org/wiki/German_Pekin"
+   },
+   {
+    "field": "description",
+    "value": "plumage blanc crème à teinte jaunâtre",
+    "quote": "the plumage is creamy white with a yellowish tinge.",
+    "url": "https://en.wikipedia.org/wiki/German_Pekin"
+   },
+   {
+    "field": "description",
+    "value": "bec court et orange",
+    "quote": "The beak is short and orange-coloured.",
+    "url": "https://en.wikipedia.org/wiki/German_Pekin"
+   },
+   {
+    "field": "description",
+    "value": "corps large et lourd, presque vertical",
+    "quote": "The body is broad and heavy, and is held almost vertical.",
+    "url": "https://en.wikipedia.org/wiki/German_Pekin"
+   },
+   {
+    "field": "description",
+    "value": "poids en Allemagne : mâles ~3,5 kg, femelles ~3 kg",
+    "quote": "while in Germany drakes weigh approximately 3.5 kg and ducks about 3 kg.",
+    "url": "https://en.wikipedia.org/wiki/German_Pekin"
+   },
+   {
+    "field": "description",
+    "value": "destiné à la viande",
+    "quote": "The Pekin was intended to be a table bird, reared for its meat.",
+    "url": "https://en.wikipedia.org/wiki/German_Pekin"
+   },
+   {
+    "field": "description",
+    "value": "en Allemagne, oiseau d'exposition",
+    "quote": "In Germany it has not been kept for agricultural production since about the time of the Second World War, and is primarily a show bird.",
+    "url": "https://en.wikipedia.org/wiki/German_Pekin"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001163,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race suédoise de canard domestique",
+    "quote": "is Swedish breed of domestic duck.",
+    "url": "https://en.wikipedia.org/wiki/Blekinge_duck"
+   },
+   {
+    "field": "description",
+    "value": "plus ancienne race suédoise, redécouverte en 1994 dans l'archipel de Blekinge",
+    "quote": "It is the oldest Swedish duck breed and was rediscovered in 1994 in the Blekinge archipelago, after having been thought extinct.",
+    "url": "https://en.wikipedia.org/wiki/Blekinge_duck"
+   },
+   {
+    "field": "description",
+    "value": "ressemble à un colvert plus grand et plus pâle",
+    "quote": "The Blekinge duck resembles a larger and paler variant of the wild mallard.",
+    "url": "https://en.wikipedia.org/wiki/Blekinge_duck"
+   },
+   {
+    "field": "description",
+    "value": "collier blanc fréquent",
+    "quote": "A white neck ring is commonly present, varying in size between individuals.",
+    "url": "https://en.wikipedia.org/wiki/Blekinge_duck"
+   },
+   {
+    "field": "description",
+    "value": "poids femelles 2–2,5 kg, mâles 2,5–3,5 kg",
+    "quote": "Females weigh around 2–2.5 kilograms (4.4–5.5 lb) and males 2.5–3.5 kilograms (5.5–7.7 lb).",
+    "url": "https://en.wikipedia.org/wiki/Blekinge_duck"
+   },
+   {
+    "field": "description",
+    "value": "ponte 60–100 œufs/an",
+    "quote": "The breed typically lays 60–100 eggs per year",
+    "url": "https://en.wikipedia.org/wiki/Blekinge_duck"
+   },
+   {
+    "field": "description",
+    "value": "30–50 % des femelles couvent, incubation ~28 jours",
+    "quote": "Roughly 30–50% of females will brood if provided with a quiet nesting place, incubating their eggs for about 28 days until hatching.",
+    "url": "https://en.wikipedia.org/wiki/Blekinge_duck"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001164,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race rare et ancienne de canard domestique originaire de Belgique",
+    "quote": "Le canard de Termonde est une race rare et ancienne de canard domestique originaire de Belgique.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Termonde"
+   },
+   {
+    "field": "description",
+    "value": "canard de chair, solide et rustique au port relevé",
+    "quote": "Le canard de Termonde est un canard de chair, solide et rustique au port relevé.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Termonde"
+   },
+   {
+    "field": "description",
+    "value": "plumage bleu cendré à grand plastron blanc, variété noire à bavette blanche",
+    "quote": "Son plumage habituel est bleu cendré avec un grand plastron blanc; il existe aussi une variété noire à bavette blanche",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Termonde"
+   },
+   {
+    "field": "description",
+    "value": "poids mâle 3,5 kg, cane 3 kg",
+    "quote": "Le mâle peut atteindre 3,5 kg et la cane 3 kg.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Termonde"
+   },
+   {
+    "field": "description",
+    "value": "très bonne couveuse",
+    "quote": "La cane est également une très bonne couveuse.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_de_Termonde"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001165,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "canard domestique originaire du Nord de la France",
+    "quote": "Le canard d'Estaires est un canard domestique originaire du Nord de la France",
+    "url": "https://fr.wikipedia.org/wiki/Canard_d%27Estaires"
+   },
+   {
+    "field": "description",
+    "value": "sélectionné à Estaires, au bord de la Lys, à partir de canards locaux et du Pékin américain",
+    "quote": "Cette race a été sélectionnée dans la région d'Estaires",
+    "url": "https://fr.wikipedia.org/wiki/Canard_d%27Estaires"
+   },
+   {
+    "field": "description",
+    "value": "croisement avec le canard de Pékin américain",
+    "quote": "à partir de canards locaux et du canard de Pékin américain",
+    "url": "https://fr.wikipedia.org/wiki/Canard_d%27Estaires"
+   },
+   {
+    "field": "description",
+    "value": "rare, jamais très développé hors de sa région",
+    "quote": "Il n'a jamais eu un grand développement en dehors de sa région d'origine, et est devenu plutôt rare de nos jours",
+    "url": "https://fr.wikipedia.org/wiki/Canard_d%27Estaires"
+   },
+   {
+    "field": "description",
+    "value": "environ 2,2 kg",
+    "quote": "il est moins gros (environ 2,2 kg)",
+    "url": "https://fr.wikipedia.org/wiki/Canard_d%27Estaires"
+   },
+   {
+    "field": "description",
+    "value": "plumage blanc rustique et précoce, chair relativement fine",
+    "quote": "C'est un canard au plumage blanc fort rustique et précoce, à la chair relativement fine.",
+    "url": "https://fr.wikipedia.org/wiki/Canard_d%27Estaires"
+   },
+   {
+    "field": "description",
+    "value": "très bonne pondeuse, excellente couveuse",
+    "quote": "Sa cane est une très bonne pondeuse et une excellente couveuse",
+    "url": "https://fr.wikipedia.org/wiki/Canard_d%27Estaires"
+   }
+  ]
+ }
+]

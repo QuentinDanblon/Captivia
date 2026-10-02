@@ -1,0 +1,72 @@
+[
+ {
+  "speciesId": 2000000699,
+  "description": "La vänekor est une race bovine suédoise originaire de la province de Västergötland, au sud-ouest de la Suède, où le bétail a été élevé en autarcie autour du village de Väne-Ryr. Elle porte une robe pie rouge à taches bien délimitées ou mouchetée. La vache pèse 525 kg et le taureau 775 kg ; la race est appréciée pour sa docilité, sa fertilité et son adaptation à différents climats.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Vänekor"
+ },
+ {
+  "speciesId": 2000000705,
+  "description": "Le Kazakh Whiteheaded est une race bovine à viande mise au point entre 1930 et 1950 dans des fermes d'État de la république kazakhe et de la basse Volga, en croisant des Hereford avec du bétail local kazakh et kalmouk. Il ressemble au Hereford par la robe et la conformation tout en alliant la rusticité des races locales. Les mâles pèsent en moyenne 820 kg et les femelles 550 kg.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Kazakh_Whiteheaded"
+ },
+ {
+  "speciesId": 2000000708,
+  "description": "Le Japanese Brown est une petite race bovine japonaise à viande, développée dans le sud du Japon, dans la préfecture de Kōchi (île de Shikoku) et celle de Kumamoto (île de Kyūshū). Les animaux de Kōchi sont brun-rouge, ceux de Kumamoto brun clair. C'est l'une des quatre races japonaises dites wagyū.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Japanese_Brown"
+ },
+ {
+  "speciesId": 2000000987,
+  "description": "Le Berkshire est une race porcine issue d'une population très ancienne du Berkshire, à l'ouest de Londres. De taille moyenne, il est noir, sauf le bout des pattes, la queue et une tache sur la tête. Apte à la production de viande de qualité, il est inadapté à la production industrielle.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Berkshire_(race_porcine)"
+ },
+ {
+  "speciesId": 2000000988,
+  "description": "Le porc de Breïtovo est une race à viande de forte constitution et de taille moyenne, sélectionnée dans la première moitié du XXe siècle dans la région de Breïtovo et officiellement reconnue en 1948. Blanc, rarement pie noir, il a une tête large et de grandes oreilles retombant sur les yeux. Le verrat pèse en moyenne 297 kg et la truie 236 kg.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Porc_de_Breïtovo"
+ },
+ {
+  "speciesId": 2000000991,
+  "description": "Le porc de Sibérie du Nord est une race résistante et robuste sélectionnée dans l'oblast de Novossibirsk par le zoogénéticien O.I. Simon. Blanc, de constitution harmonieuse et de taille moyenne, il a le groin renflé, les oreilles dressées et le dos droit et large. Le verrat pèse en moyenne 312 kg et la truie 238 kg.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Porc_de_Sibérie_du_Nord"
+ },
+ {
+  "speciesId": 2000000992,
+  "description": "Le Danish Landrace est une race porcine danoise de taille moyenne à grande, blanche, au corps long, au poil fin, au long groin et aux grandes oreilles tombantes. À partir de 1865 environ, des reproducteurs britanniques Large White (Yorkshire) ont été importés et croisés avec les animaux locaux pour approvisionner le commerce du bacon. Les mâles pèsent environ 325 kg et les femelles 225 kg.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Danish_Landrace_pig"
+ },
+ {
+  "speciesId": 2000000994,
+  "description": "Le grice est une race de cochons domestiques originaire des Shetland, aujourd'hui disparue. C'était un cochon de petite taille, très agressif et muni de petites défenses, élevé pour sa viande.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Grice"
+ },
+ {
+  "speciesId": 2000000997,
+  "description": "Le porc de Livny est une grande race blanche issue de porcs locaux croisés avec des Large White, Berkshire et Poland China. Un verrat de trente-six mois atteint en moyenne 295 kg et une truie 237 kg. Il est sélectionné pour la qualité de sa viande, ses performances graisseuses et sa prolificité.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Porc_de_Livny"
+ },
+ {
+  "speciesId": 2000001011,
+  "description": "Le porc de Krškopolje (ou porc à ceinture noire) est une race porcine autochtone de Slovénie, noire et de taille moyenne, reconnaissable à sa ceinture continue blanche à rose passant sur les épaules et les antérieurs. Son berceau se situe dans le sud-est de la Basse-Carniole, surtout dans la plaine de Krško-Brežice. En moyenne, les verrats pèsent 280 kg et les truies 230 kg ; la race est largement utilisée pour la production de viande.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Krškopolje_pig"
+ },
+ {
+  "speciesId": 2000001013,
+  "description": "Le terme Landrace désigne un groupe de races porcines domestiques standardisées ; la race d'origine de ce nom était le Landrace danois, dont les autres sont dérivées par développement et croisement. Le Landrace danois est né du cheptel porcin local, non pedigree et à reproduction libre, du Danemark. Les races modernes ne sont pas elles-mêmes des races locales (landraces), mais des races formelles maintenues par sélection.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Landrace_pig"
+ },
+ {
+  "speciesId": 2000001115,
+  "description": "La hollandaise huppée est une race de poule domestique originaire des Pays-Bas, où elle est connue depuis plus de cinq siècles. Le coq pèse 2 à 2,5 kg et la poule 1,5 à 2 kg. Volaille de type fermier et ornementale, elle est fréquemment rencontrée dans les expositions en France ; sa huppe est blanche dans la plupart des variétés (noire, blanche, bleu liseré, coucou...).",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Hollandaise_huppée"
+ },
+ {
+  "speciesId": 2000001117,
+  "description": "La dominicaine est une race de poule originaire des États-Unis, dans la région de la Nouvelle-Angleterre, introduite en Europe vers 1890. C'est une volaille au tempérament vif, de grandeur moyenne, robuste et rustique, élevée pour ses œufs et sa chair. Le coq pèse 2 à 2,5 kg et la poule 1,8 à 2,3 kg ; son plumage est uniquement coucou.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Dominicaine_(race_de_poule)"
+ },
+ {
+  "speciesId": 2000001121,
+  "description": "La Leghorn, dont la version moderne est aussi appelée italienne, est une des races de poule domestique les plus répandues dans le monde. Elle descend d'anciennes races vivant en Toscane ou en Italie centrale. Vive et alerte, elle aime parcourir de grands espaces à la recherche de nourriture et pond énormément (en moyenne 280 œufs par an).",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Leghorn"
+ }
+]

@@ -1,0 +1,157 @@
+[
+ {
+  "speciesId": 2482492,
+  "habitat": null
+ },
+ {
+  "speciesId": 2490384,
+  "habitat": null
+ },
+ {
+  "speciesId": 2491538,
+  "habitat": null
+ },
+ {
+  "speciesId": 2493661,
+  "habitat": null,
+  "reproduction": null
+ },
+ {
+  "speciesId": 2493720,
+  "habitat": null
+ },
+ {
+  "speciesId": 2495134,
+  "feeding": null,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 10,
+   "tempMax": 30,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Vastes enclos ouverts (la source ne donne pas de surface chiffrée).",
+   "lightNeeds": "Oiseau diurne : il cherche sa nourriture pendant la journée.",
+   "activityEnrichment": "Garder les émeus dans de vastes enclos pour éviter les problèmes de pattes et de digestion liés à l'inactivité.",
+   "hygieneNotes": null,
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Emu",
+     "title": "Emu - Wikipedia"
+    },
+    {
+     "type": "wikipedia",
+     "url": "https://fr.wikipedia.org/wiki/%C3%89meu_d%27Australie",
+     "title": "Émeu d'Australie - Wikipédia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2495150,
+  "habitat": null
+ },
+ {
+  "speciesId": 2498343,
+  "habitat": null
+ },
+ {
+  "speciesId": 2498387,
+  "habitat": null,
+  "behavior": null
+ },
+ {
+  "speciesId": 2498388,
+  "habitat": null
+ },
+ {
+  "speciesId": 4263039,
+  "habitat": null
+ },
+ {
+  "speciesId": 5170451,
+  "feeding": null,
+  "habitat": null,
+  "health": null
+ },
+ {
+  "speciesId": 5202178,
+  "behavior": {
+   "generalBehavior": "Poisson de fond nocturne. Jeune, il est plutôt calme et s'entend avec la plupart des poissons de taille similaire ; adulte, il peut devenir agressif et territorial, même envers sa propre espèce. Il passe la journée caché.",
+   "sociability": "solitaire",
+   "difficultyLevel": "intermédiaire",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": "Jeune, il s'entend bien avec la plupart des poissons de taille similaire ; adulte, il préfère rester seul et peut attaquer d'autres poissons. Choisir des compagnons de taille comparable occupant d'autres niveaux de l'eau.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.aquariumsource.com/common-pleco/",
+     "title": "Common Pleco - Aquarium Source"
+    },
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Hypostomus_plecostomus",
+     "title": "Hypostomus plecostomus - Wikipedia"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Ich (maladie des points blancs)",
+     "symptoms": "Petits points blancs sur tout le corps ; maladie très contagieuse, généralement causée par le stress.",
+     "prevention": "Maintenir de bonnes conditions d'eau et effectuer des changements d'eau de 30 % chaque semaine.",
+     "whenToConsult": "Dès qu'une maladie se déclare : mettre le poisson en quarantaine et commencer le traitement immédiatement ; le pléco peut être sensible aux médicaments à base de cuivre, donc prudence."
+    },
+    {
+     "name": "Hydropisie (dropsy)",
+     "symptoms": "Forme de ballonnement : le corps se gonfle de liquide, ce qui gêne la nage.",
+     "prevention": "Maintenir de bonnes conditions d'eau et effectuer des changements d'eau de 30 % chaque semaine.",
+     "whenToConsult": "Dès qu'une maladie se déclare : mettre le poisson en quarantaine et commencer le traitement immédiatement ; le pléco peut être sensible aux médicaments à base de cuivre, donc prudence."
+    },
+    {
+     "name": "Infections bactériennes ou fongiques",
+     "symptoms": "Elles accompagnent généralement d'autres maladies.",
+     "prevention": "Elles sont généralement causées par de mauvaises conditions d'eau ; effectuer des changements d'eau de 30 % chaque semaine.",
+     "whenToConsult": "Dès qu'une maladie se déclare : mettre le poisson en quarantaine et commencer le traitement immédiatement."
+    }
+   ],
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.aquariumsource.com/common-pleco/",
+     "title": "Common Pleco - Aquarium Source"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": "avance",
+   "notes": "Le mâle nettoie une grotte et invite la femelle, qui pond sur la paroi ; le mâle garde les œufs jusqu'à l'éclosion, en quelques jours. La reproduction en captivité est décrite comme extrêmement difficile.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.aquariumsource.com/common-pleco/",
+     "title": "Common Pleco - Aquarium Source"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.fishbase.se/summary/Hypostomus-plecostomus.html",
+     "title": "Hypostomus plecostomus - FishBase"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5216573,
+  "habitat": null,
+  "behavior": null,
+  "health": null
+ }
+]

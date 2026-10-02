@@ -1,0 +1,72 @@
+[
+ {
+  "speciesId": 2000000165,
+  "description": "Le Polonais, aussi appelé Hermine ou Hermelin, est une race de lapin domestique de petite taille. Ses origines sont confuses : il serait issu de petits lapins importés de Pologne. Son poids ne doit pas excéder 1,5 kg (idéalement entre 1 kg et 1,35 kg) et sa robe est toujours blanche. Il est élevé comme animal de compagnie.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Hermine_(lapin)"
+ },
+ {
+  "speciesId": 2000000166,
+  "description": "Le lapin Russe serait originaire de Chine et aurait été transporté en Russie, puis en Pologne et ailleurs en Europe. Il pèse environ 2,25 kg, sans excéder 2,70 kg, avec une carrure légèrement trapue. Son pelage est blanc pur et dense, avec les yeux rouges et des extrémités colorées (oreilles, pattes, museau). Il est utilisé comme animal de compagnie.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Russe_(lapin)"
+ },
+ {
+  "speciesId": 2000000167,
+  "description": "Le Satin est une race de lapin domestique apparue aux États-Unis dans les années 1930 à la suite d'une mutation génétique. Il pèse de 2,5 à 3,5 kg et se caractérise par un pelage particulièrement soyeux et brillant.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Satin_(lapin)"
+ },
+ {
+  "speciesId": 2000000169,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000177,
+  "description": "Le Teddy est une variété de cochon d'Inde issue d'une mutation, au poil court, rêche, très dense et élastique, qui se dresse sur tout le corps. Son pelage de longueur modérée lui donne l'allure d'une peluche. Il existe en version « plush » (poil plus doux) et « harsh » (poil plus rêche).",
+  "sourceUrl": "https://en.wikipedia.org/wiki/List_of_guinea_pig_breeds"
+ },
+ {
+  "speciesId": 2000000188,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000196,
+  "description": "Descendant domestique du munia à croupion blanc (Lonchura striata, white-rumped munia), le Bengalese finch (ou society finch) est élevé dans le monde entier comme oiseau de compagnie et comme organisme modèle en biologie. L'espèce sauvage, native d'Asie tropicale continentale, mesure environ 10 à 11 cm, a le dessus et la poitrine bruns, le croupion blanc, et vit en groupes en se nourrissant surtout de graines.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/White-rumped_munia"
+ },
+ {
+  "speciesId": 2000000207,
+  "description": "La Tourterelle rieuse africaine est le principal ancêtre de la tourterelle domestique élevée en captivité depuis l'Antiquité. Espèce sauvage originaire d'Afrique, elle ressemble à l'oiseau sauvage observé aujourd'hui en Europe (pourtant une espèce différente) : toutes deux portent un collier noir sur la nuque, mais la tourterelle rieuse est un peu plus petite, avec un plumage plus clair, d'un beige sable.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Tourterelle_rieuse"
+ },
+ {
+  "speciesId": 2000000258,
+  "description": "Le Danio perlé (Danio margaritatus) est un petit poisson d'eau douce originaire du Myanmar et du nord de la Thaïlande (bassin de la Salouen). Trapu, au museau nettement émoussé, il mesure 2 à 2,5 cm (longueur standard), parfois jusqu'à 3 cm, et son corps est parsemé de petits points nacrés. En aquarium, un groupe de six individus, moitié mâles, moitié femelles, se comporte naturellement dans un petit bac.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Celestial_pearl_danio"
+ },
+ {
+  "speciesId": 2000000576,
+  "description": "Le petit papillon, ou tacheté tchèque, est une race de lapin domestique sélectionnée au début du XXe siècle par Jan Vaclav Kalal. En France, la race a été reconnue en 1984 sous le nom de petit papillon.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Petit_papillon"
+ },
+ {
+  "speciesId": 2000000577,
+  "description": "Le Blue of Sint-Niklaas est une race de lapin flamande produite au XIXe siècle près de Sint-Niklaas pour alimenter l'industrie locale de la fourrure. Nettement plus lourde que la Van Beveren, race apparentée de la même région, elle peut atteindre 12 lb (5,4 kg) et rappelle le Géant des Flandres ; seule la variété bleue est admise par le standard. Avec le déclin du commerce des peaux, la race a failli disparaître.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Blue_of_Sint-Niklaas"
+ },
+ {
+  "speciesId": 2000000578,
+  "description": "La Fée de Marbourg (Marburger Feh) est une petite race de lapin d'environ 2,75 kg, de couleur bleu clair avec un voile brunâtre. Elle a été sélectionnée à partir de 1912 par l'éleveuse Sandemann à Marburg et reconnue en Allemagne en 1916. Son nom évoque la ville de l'éleveuse et la ressemblance recherchée de sa fourrure avec celle de l'écureuil de Sibérie (« Feh »).",
+  "sourceUrl": "https://de.wikipedia.org/wiki/Marburger_Feh"
+ },
+ {
+  "speciesId": 2000000579,
+  "description": "Le Miniature Lop est une race de lapin domestique reconnue par le British Rabbit Council (BRC). Descendant des premiers lapins béliers nains développés aux Pays-Bas dans les années 1970, il a été obtenu par sélection des plus petits sujets et reconnu par le BRC en 1994, pour un poids maximal de 1,6 kg. Sa durée de vie attendue est de 7 à 14 ans, jusqu'à 18 ans avec de bons soins.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Miniature_Lop"
+ },
+ {
+  "speciesId": 2000000580,
+  "description": "Le Teddyzwerg (Teddy nain) est une race naine de lapin à poil long, dont l'adulte pèse entre 800 et 1 700 g. On suppose que, comme toutes les races à poil long, il descend de croisements avec le lapin angora. Il se distingue des autres petits lapins à poil long par son pelage doux, conservé à l'âge adulte. Race très récente, elle n'est élevée que par des amateurs comme animal de compagnie.",
+  "sourceUrl": "https://de.wikipedia.org/wiki/Teddykaninchen"
+ }
+]

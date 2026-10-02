@@ -1,0 +1,176 @@
+[
+ {
+  "speciesId": 5285942,
+  "evidence": []
+ },
+ {
+  "speciesId": 5289145,
+  "evidence": []
+ },
+ {
+  "speciesId": 5296842,
+  "evidence": []
+ },
+ {
+  "speciesId": 5301256,
+  "evidence": []
+ },
+ {
+  "speciesId": 5784980,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "hibernation 4 mois dans la vase",
+    "quote": "Elle hiberne durant les quatre mois d'hiver, elle s'envase dans les fonds de mares, ruisseau, frayères, étangs, etc.",
+    "url": "https://fr.wikipedia.org/wiki/Pelophylax_kl._esculentus"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "début novembre à fin février",
+    "quote": "généralement vers début novembre jusqu'à fin février ou début mars",
+    "url": "https://fr.wikipedia.org/wiki/Pelophylax_kl._esculentus"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "survie sans se nourrir",
+    "quote": "en ralentissant leur métabolisme au minimum nécessaire et grâce aux réserves d'énergie accumulées pendant l'été et l'automne, les individus hibernant peuvent survivre de très longues périodes sans se nourrir",
+    "url": "https://fr.wikipedia.org/wiki/Pelophylax_kl._esculentus"
+   }
+  ]
+ },
+ {
+  "speciesId": 5786666,
+  "evidence": []
+ },
+ {
+  "speciesId": 5959092,
+  "evidence": []
+ },
+ {
+  "speciesId": 5959230,
+  "evidence": []
+ },
+ {
+  "speciesId": 7387949,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "grimpeur",
+    "quote": "These rat snakes are excellent climbers and spend a significant amount of their time in trees.",
+    "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "réaction à la menace",
+    "quote": "When startled, they may freeze and wrinkle themselves into a series of kinks. If they feel further threatened, they may flee quickly or tail vibrate",
+    "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "captifs plus dociles",
+    "quote": "Opinions vary on the western rat snake's disposition, but captive-bred individuals are reported to be more docile than their wild counterparts.",
+    "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus"
+   }
+  ]
+ },
+ {
+  "speciesId": 7572096,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "aquarium",
+    "quote": "aquarium with a length of at least 76 cm (30 in)",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 18,
+    "quote": "temperature range of 64–72 °F (18–22 °C)",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 22,
+    "quote": "temperature range of 64–72 °F (18–22 °C)",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "76 cm",
+    "quote": "aquarium with a length of at least 76 cm (30 in)",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "pH 6-8",
+    "quote": "pH of 6 to 8",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "5-19 dGH",
+    "quote": "water hardness of 5-19 dGH",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "ponte tôt le matin",
+    "quote": "Spawning usually occurs in the early morning, and lasts several hours",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "plusieurs centaines d'oeufs",
+    "quote": "resulting in several hundred eggs",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "éclosion 24-36 h",
+    "quote": "The young hatch in 24 to 36 hours, depending on water temperature",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "maturité 63,5 mm",
+    "quote": "They are mature at 63.5 mm (2.50 in)",
+    "url": "https://en.wikipedia.org/wiki/Rosy_barb"
+   }
+  ]
+ },
+ {
+  "speciesId": 8170369,
+  "evidence": []
+ },
+ {
+  "speciesId": 8583926,
+  "evidence": []
+ },
+ {
+  "speciesId": 8909809,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "méfiante, craintive, active aux heures chaudes",
+    "quote": "Plutôt méfiante et craintive, la cistude est surtout active aux heures les plus chaudes de la journée.",
+    "url": "https://fr.wikipedia.org/wiki/Cistude_d'Europe"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "très farouche, plonge",
+    "quote": "La cistude est un animal très discret, très farouche, et plonge au moindre bruit.",
+    "url": "https://fr.wikipedia.org/wiki/Cistude_d'Europe"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "hibernation dans la vase",
+    "quote": "À l'automne, la cistude s'enfouit dans la vase qui la protège du gel, pour redevenir active au printemps.",
+    "url": "https://fr.wikipedia.org/wiki/Cistude_d'Europe"
+   }
+  ]
+ },
+ {
+  "speciesId": 8953936,
+  "evidence": []
+ }
+]

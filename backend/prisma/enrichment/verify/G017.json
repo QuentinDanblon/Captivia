@@ -1,0 +1,473 @@
+[
+  {
+    "speciesId": 2000001166,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "origine : partie vendéenne du marais poitevin",
+        "quote": "Le canard de Vouillé est une race de canard domestique originaire de la partie vendéenne du marais poitevin.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Vouillé"
+      },
+      {
+        "field": "description",
+        "value": "masse : 1,1 kg (mâle), 900 g (cane)",
+        "quote": "Masse du canard : 1,1 kg ; de la cane : 900 g.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Vouillé"
+      },
+      {
+        "field": "description",
+        "value": "plumage serré à plastron blanc",
+        "quote": "Plumage serré à plastron blanc.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Vouillé"
+      },
+      {
+        "field": "description",
+        "value": "deux variétés : noir bronzé, bleu bronzé",
+        "quote": "deux variétés : noir bronzé, bleu bronzé",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Vouillé"
+      },
+      {
+        "field": "description",
+        "value": "rustique, élevage facile",
+        "quote": "C'est un canard rustique à l'élevage facile",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Vouillé"
+      },
+      {
+        "field": "description",
+        "value": "bruyant",
+        "quote": "C'est un oiseau bruyant.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Vouillé"
+      },
+      {
+        "field": "description",
+        "value": "usage : appelant pour la chasse",
+        "quote": "Surtout appelant (pour la chasse)",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Vouillé"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001167,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "race récente originaire d'Allemagne",
+        "quote": "Le canard de Gimbsheim est une race récente de canard domestique originaire d'Allemagne.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Gimbsheim"
+      },
+      {
+        "field": "description",
+        "value": "sélection 1958-1963 en Allemagne",
+        "quote": "Le canard de Gimbsheim a été sélectionné en Allemagne entre 1958 et 1963",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Gimbsheim"
+      },
+      {
+        "field": "description",
+        "value": "souches : orpington, pékin américain, canard de Saxe",
+        "quote": "à partir de l'orpington, du pékin américain et du canard de Saxe.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Gimbsheim"
+      },
+      {
+        "field": "description",
+        "value": "poids : mâle 3 kg, cane 2,5 kg",
+        "quote": "Le mâle peut atteindre 3 kg et la cane 2,5 kg.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Gimbsheim"
+      },
+      {
+        "field": "description",
+        "value": "plumage bleu = gris foncé",
+        "quote": "Le coloris de son plumage est dit « bleu » c'est-à-dire gris foncé, plus foncé pour la tête chez le mâle.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Gimbsheim"
+      },
+      {
+        "field": "description",
+        "value": "ponte : 150 œufs/an, 70 g",
+        "quote": "Celle-ci peut pondre 150 œufs (de couleur jaunâtre à vert pâle) par an, de 70 grammes en moyenne.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_Gimbsheim"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001168,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "origine : vallée de la Semois, Belgique ; petit canard blanc",
+        "quote": "Le canard de la Semois est une race de petit canard domestique au plumage blanc originaire de la vallée de la Semois, en Belgique.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_la_Semois"
+      },
+      {
+        "field": "description",
+        "value": "poids : 1,25 à 1,5 kg",
+        "quote": "petit canard (1,25 à 1,5 kg)",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_la_Semois"
+      },
+      {
+        "field": "description",
+        "value": "plumage blanc, parfois petite huppe",
+        "quote": "toujours uniformément blanc avec parfois une petite huppe",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_la_Semois"
+      },
+      {
+        "field": "description",
+        "value": "cane bonne pondeuse, couveuse, éleveuse ; utilisée pour oiseaux d'ornement",
+        "quote": "La cane est bonne pondeuse (parfois dix œufs par ponte), bonne couveuse et bonne éleveuse, à tel point qu'elle est utilisée aussi comme couveuse et éleveuse d'oiseaux d'ornement.",
+        "url": "https://fr.wikipedia.org/wiki/Canard_de_la_Semois"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001169,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "origine : Pays basque français ; conquête romaine",
+        "quote": "Le Kriaxera /kriaʃeɾa/ est un canard originaire du Pays basque français dont l'origine remonterait à la conquête romaine.",
+        "url": "https://fr.wikipedia.org/wiki/Kriaxera"
+      },
+      {
+        "field": "description",
+        "value": "poids de la cane : 3 kg",
+        "quote": "La cane atteint 3 kg.",
+        "url": "https://fr.wikipedia.org/wiki/Kriaxera"
+      },
+      {
+        "field": "description",
+        "value": "plumage sombre, plumes irisées bleu et vert",
+        "quote": "Son plumage est sombre, agrémenté de plumes irisées de bleu et de vert",
+        "url": "https://fr.wikipedia.org/wiki/Kriaxera"
+      },
+      {
+        "field": "description",
+        "value": "rustique, plein air",
+        "quote": "C'est une race rustique pouvant vivre en plein air, sur des terrains herbeux drainés de ruisselets.",
+        "url": "https://fr.wikipedia.org/wiki/Kriaxera"
+      },
+      {
+        "field": "description",
+        "value": "usage : mâles gavage/confits, femelles viande",
+        "quote": "On réserve généralement les mâles au gavage ou aux confits alors que les femelles sont consommées pour leur viande",
+        "url": "https://fr.wikipedia.org/wiki/Kriaxera"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001170,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "race belge, commune de Forest, 1890",
+        "quote": "The Forest duck is a Belgian breed of domestic duck originating in the commune of Forest sometime in 1890.",
+        "url": "https://en.wikipedia.org/wiki/Forest_duck"
+      },
+      {
+        "field": "description",
+        "value": "créée par Herman Bertrand pour ses qualités d'œufs et de viande",
+        "quote": "Created in Forest by Herman Bertrand, the duck was created to have good egg and meat quality.",
+        "url": "https://en.wikipedia.org/wiki/Forest_duck"
+      },
+      {
+        "field": "description",
+        "value": "présumée éteinte après la 2e guerre, relancée dans les années 1960",
+        "quote": "After the second world war the duck was presumed to be extinct until a group of breeders ultimately brought its breed back to life sometime in the 1960s.",
+        "url": "https://en.wikipedia.org/wiki/Forest_duck"
+      },
+      {
+        "field": "description",
+        "value": "FAO 2007 : critique",
+        "quote": "As of 2007, the duck was classified as 'critical' by the FAO, meaning it is critically endangered.",
+        "url": "https://en.wikipedia.org/wiki/Forest_duck"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001171,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "race britannique de canard nain ; créée dans les années 1940 par Reginald Appleyard à partir du Silver Appleyard",
+        "quote": "The Silver Bantam is a British breed of bantam duck, It was bred in the 1940s by Reginald Appleyard from his Silver Appleyard.",
+        "url": "https://en.wikipedia.org/wiki/Silver_Bantam"
+      },
+      {
+        "field": "description",
+        "value": "nom Silver Bantam à la standardisation au Royaume-Uni en 1997",
+        "quote": "the duck received very little interest until its standardization in the United Kingdom year 1997 where it received the new name of 'Silver Bantam'.",
+        "url": "https://en.wikipedia.org/wiki/Silver_Bantam"
+      },
+      {
+        "field": "description",
+        "value": "poids du mâle : 0,9 kg",
+        "quote": "Male: 0.9 kg (2.0 lb)",
+        "url": "https://en.wikipedia.org/wiki/Silver_Bantam"
+      },
+      {
+        "field": "description",
+        "value": "poids de la femelle : 0,8 kg",
+        "quote": "Female: 0.8 kg (1.8 lb)",
+        "url": "https://en.wikipedia.org/wiki/Silver_Bantam"
+      },
+      {
+        "field": "description",
+        "value": "docile et facile à gérer",
+        "quote": "The duck is also known to be tame and easy to manage.",
+        "url": "https://en.wikipedia.org/wiki/Silver_Bantam"
+      },
+      {
+        "field": "description",
+        "value": "ponte : 60 à 160 petits œufs par an",
+        "quote": "Females can lay in between 60 and 160 small eggs every year.",
+        "url": "https://en.wikipedia.org/wiki/Silver_Bantam"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001173,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "nom alternatif Eshing Nganu ; canard indigène du Manipur (Inde)",
+        "quote": "Meitei Nganu (ꯃꯩꯇꯩ ꯉꯥꯅꯨ), also known as Eshing Nganu (ꯏꯁꯤꯡ ꯉꯥꯅꯨ), is an indigenous Manipuri duck breed from the Indian state of Manipur.",
+        "url": "https://en.wikipedia.org/wiki/Meitei_Nganu"
+      },
+      {
+        "field": "description",
+        "value": "élevée traditionnellement par les Manipuris",
+        "quote": "It is traditionally reared by local Manipuri people and is part of the region's native animal genetic resources.",
+        "url": "https://en.wikipedia.org/wiki/Meitei_Nganu"
+      },
+      {
+        "field": "description",
+        "value": "enregistrée par l'ICAR-NBAGR comme race distincte",
+        "quote": "The Meitei Nganu was officially registered as a distinct indigenous duck breed by the Indian Council of Agricultural Research – National Bureau of Animal Genetic Resources (ICAR-NBAGR), Karnal, Haryana.",
+        "url": "https://en.wikipedia.org/wiki/Meitei_Nganu"
+      },
+      {
+        "field": "description",
+        "value": "approbation le 12 novembre 2025 à New Delhi",
+        "quote": "The registration was approved by the Breed Registration Committee at its 13th meeting held on 12 November 2025 in New Delhi.",
+        "url": "https://en.wikipedia.org/wiki/Meitei_Nganu"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001265,
+    "evidence": []
+  },
+  {
+    "speciesId": 2000001266,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "race turque de pigeon de fantaisie issue de sélection",
+        "quote": "The Dönek is a Turkish breed of fancy pigeon developed over many years of selective breeding.",
+        "url": "https://en.wikipedia.org/wiki/Donek"
+      },
+      {
+        "field": "description",
+        "value": "nom d'origine turque : « tourner et retomber du ciel »",
+        "quote": "The name Donek is of Turkish origin and means 'turning and dropping down from the sky'.",
+        "url": "https://en.wikipedia.org/wiki/Donek"
+      },
+      {
+        "field": "description",
+        "value": "acrobaties aériennes (plongeon en spirale), race de performance",
+        "quote": "The breed is known for its aerial acrobatics (spiral diving) and as such is more of a performance breed rather than a purely fancy variety.",
+        "url": "https://en.wikipedia.org/wiki/Donek"
+      },
+      {
+        "field": "description",
+        "value": "retour en spirale au pigeonnier",
+        "quote": "Their aerial spiraling return when called back to the loft makes a spectacular sight.",
+        "url": "https://en.wikipedia.org/wiki/Donek"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001267,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "race de pigeon de fantaisie issue de sélection",
+        "quote": "The Helmet is a breed of fancy pigeon developed over many years of selective breeding.",
+        "url": "https://en.wikipedia.org/wiki/Helmet_pigeon"
+      },
+      {
+        "field": "description",
+        "value": "mentionné depuis le début du XVe siècle, origine probable en Allemagne",
+        "quote": "Helmet pigeons have been referenced since the early 15th century and appear to have origins in Germany.",
+        "url": "https://en.wikipedia.org/wiki/Helmet_pigeon"
+      },
+      {
+        "field": "description",
+        "value": "variétés : face moyenne, face courte, tête lisse, huppée",
+        "quote": "The breed has medium-faced, short-faced, plain-headed and crested varieties.",
+        "url": "https://en.wikipedia.org/wiki/Helmet_pigeon"
+      },
+      {
+        "field": "description",
+        "value": "coloris : bleu, noir, rouge, jaune",
+        "quote": "It comes in several colors including: Blue, Black, Red, and Yellow.",
+        "url": "https://en.wikipedia.org/wiki/Helmet_pigeon"
+      },
+      {
+        "field": "description",
+        "value": "variétés modernes affinées dans la seconde moitié du XXe siècle",
+        "quote": "The modern varieties were refined in the latter 20th century.",
+        "url": "https://en.wikipedia.org/wiki/Helmet_pigeon"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001268,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "noms alternatifs ; élevé en Iran pour des concours de vol de performance et d'endurance",
+        "quote": "The Iranian Highflying Tumbler pigeon also known as 'Persian Highflying Tumbler' in Europe and 'Tehrani' in Iran is a breed of domestic pigeon bred in Iran for performance and endurance flying competitions.",
+        "url": "https://en.wikipedia.org/wiki/Iranian_Highflying_Tumbler"
+      },
+      {
+        "field": "description",
+        "value": "vol à très haute altitude, parfois hors de vue",
+        "quote": "They fly at a very high altitude and at times out of sight.",
+        "url": "https://en.wikipedia.org/wiki/Iranian_Highflying_Tumbler"
+      },
+      {
+        "field": "description",
+        "value": "endurance : 8 à 12 heures de vol",
+        "quote": "and have been reported to fly as long as 8 to 12 hours",
+        "url": "https://en.wikipedia.org/wiki/Iranian_Highflying_Tumbler"
+      },
+      {
+        "field": "description",
+        "value": "battement d'ailes plus lent",
+        "quote": "with a slower wing beat than most flying breeds of pigeons",
+        "url": "https://en.wikipedia.org/wiki/Iranian_Highflying_Tumbler"
+      },
+      {
+        "field": "description",
+        "value": "motifs et coloris variés, tête lisse ou huppée",
+        "quote": "The Persian Highflying Tumbler comes in various patterns and colors both in plain headed or crested.",
+        "url": "https://en.wikipedia.org/wiki/Iranian_Highflying_Tumbler"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001269,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "race de pigeon domestique issue de sélection",
+        "quote": "The Parlor Roller is a breed of domesticated pigeon developed over many years of selective breeding.",
+        "url": "https://en.wikipedia.org/wiki/Parlor_Roller"
+      },
+      {
+        "field": "description",
+        "value": "origine : Écosse (infobox)",
+        "quote": "Scotland",
+        "url": "https://en.wikipedia.org/wiki/Parlor_Roller"
+      },
+      {
+        "field": "description",
+        "value": "connu pour ses culbutes au sol",
+        "quote": "The breed is known for its unique performance of turning somersaults on the ground.",
+        "url": "https://en.wikipedia.org/wiki/Parlor_Roller"
+      },
+      {
+        "field": "description",
+        "value": "adultes semblant sans capacité de vol",
+        "quote": "Although adult parlor rollers seem to lack the capability of flight",
+        "url": "https://en.wikipedia.org/wiki/Parlor_Roller"
+      },
+      {
+        "field": "description",
+        "value": "concours fondés sur la distance parcourue au sol",
+        "quote": "because parlor roller competitions are based almost solely on the distance that the animal rolls on the ground",
+        "url": "https://en.wikipedia.org/wiki/Parlor_Roller"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001270,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "race de pigeon domestique originaire de Thuringe (Allemagne)",
+        "quote": "Le pigeon hirondelle de Thuringe est une race de pigeon domestique originaire de Thuringe en Allemagne.",
+        "url": "https://fr.wikipedia.org/wiki/Hirondelle_de_Thuringe"
+      },
+      {
+        "field": "description",
+        "value": "fixée au XIXe siècle",
+        "quote": "Cette race a été fixée au cours du XIXe siècle.",
+        "url": "https://fr.wikipedia.org/wiki/Hirondelle_de_Thuringe"
+      },
+      {
+        "field": "description",
+        "value": "forme de colombe puissante",
+        "quote": "L'hirondelle de Thuringe ressemble par sa forme à une colombe puissante",
+        "url": "https://fr.wikipedia.org/wiki/Hirondelle_de_Thuringe"
+      },
+      {
+        "field": "description",
+        "value": "huppe facultative",
+        "quote": "Elle peut porter une huppe ou non.",
+        "url": "https://fr.wikipedia.org/wiki/Hirondelle_de_Thuringe"
+      },
+      {
+        "field": "description",
+        "value": "26 coloris, corps toujours blanc",
+        "quote": "Cette race reconnaît vingt-six coloris différents, pour les ailes et le crâne, le corps étant toujours blanc, ainsi que les cuisses.",
+        "url": "https://fr.wikipedia.org/wiki/Hirondelle_de_Thuringe"
+      },
+      {
+        "field": "description",
+        "value": "répandue en Europe pour ses qualités de vol et ses couleurs",
+        "quote": "Elle est très répandue en Europe chez les éleveurs grâce à ses qualités de vol et surtout grâce à la beauté de ses couleurs",
+        "url": "https://fr.wikipedia.org/wiki/Hirondelle_de_Thuringe"
+      },
+      {
+        "field": "description",
+        "value": "classée parmi les pigeons de couleur",
+        "quote": "Elle est classée dans les pigeons de couleur.",
+        "url": "https://fr.wikipedia.org/wiki/Hirondelle_de_Thuringe"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000001272,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "race croate de dinde",
+        "quote": "Zagorski puran je hrvatska pasmina purana.",
+        "url": "https://hr.wikipedia.org/wiki/Zagorski_puran"
+      },
+      {
+        "field": "description",
+        "value": "arrivée depuis l'Italie au XVIe siècle",
+        "quote": "Prve jedinke zagorskih purana su u hrvatske krajeve došle iz Italije u 16. stoljeću.",
+        "url": "https://hr.wikipedia.org/wiki/Zagorski_puran"
+      },
+      {
+        "field": "description",
+        "value": "exportation vers le marché européen depuis la fin du XIXe siècle",
+        "quote": "Od konca 19. stoljeća purane se izvozi iz Hrvatskog zagorja na europsko tržište.",
+        "url": "https://hr.wikipedia.org/wiki/Zagorski_puran"
+      },
+      {
+        "field": "description",
+        "value": "liste des races indigènes protégées de Croatie depuis 1998",
+        "quote": "Od 1998. godine je na popisu izvornih i zaštićenih pasmina Republike Hrvatske.",
+        "url": "https://hr.wikipedia.org/wiki/Zagorski_puran"
+      },
+      {
+        "field": "description",
+        "value": "inscription en 2000 au registre mondial FAO",
+        "quote": "Godine 2000. upisan je u svetski registar pasmina domaćih životinja koja se vodi pri FAO-u.",
+        "url": "https://hr.wikipedia.org/wiki/Zagorski_puran"
+      }
+    ]
+  }
+]

@@ -1,0 +1,327 @@
+[
+  {
+    "speciesId": 2439965,
+    "evidence": []
+  },
+  {
+    "speciesId": 2440891,
+    "evidence": [
+      {
+        "field": "reproduction.gestationDays",
+        "value": 370,
+        "quote": "The gestation period is about 370 days.",
+        "url": "https://animaldiversity.org/accounts/Equus_asinus/"
+      },
+      {
+        "field": "reproduction.season",
+        "value": "mars à septembre",
+        "quote": "Females are polyestrous and ovulate monthly from March through September.",
+        "url": "https://animaldiversity.org/accounts/Equus_asinus/"
+      },
+      {
+        "field": "reproduction.litterSizeMin",
+        "value": 1,
+        "quote": "Females have one foal at a time but, on rare occasions, they can have twins.",
+        "url": "https://animaldiversity.org/accounts/Equus_asinus/"
+      },
+      {
+        "field": "reproduction.litterSizeMax",
+        "value": 2,
+        "quote": "Females have one foal at a time but, on rare occasions, they can have twins.",
+        "url": "https://animaldiversity.org/accounts/Equus_asinus/"
+      },
+      {
+        "field": "reproduction.sexualMaturityMonths",
+        "value": 24,
+        "quote": "Donkeys reach sexual maturation at 2 years old",
+        "url": "https://education.nsw.gov.au/teaching-and-learning/animals-in-schools/animals-in-schools-species/donkeys/donkeys-introduction"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "maturité",
+        "quote": "Male donkeys do not reach sexual maturity until about 2 years of age but some can reach it as early as 9 months old. Some females are sexually mature at about 1.5 years of age but most females begin breeding around 2 years of age.",
+        "url": "https://animaldiversity.org/accounts/Equus_asinus/"
+      }
+    ]
+  },
+  {
+    "speciesId": 2440954,
+    "evidence": []
+  },
+  {
+    "speciesId": 2441108,
+    "evidence": []
+  },
+  {
+    "speciesId": 2441110,
+    "evidence": []
+  },
+  {
+    "speciesId": 2441454,
+    "evidence": [
+      {
+        "field": "habitat.habitatType",
+        "value": "terrarium",
+        "quote": "The vivarium should be at least 860mm (34\") in length for a juvenile and 1150mm (46\") for an adult.",
+        "url": "https://www.reptilecentre.com/info-hermanns-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 15,
+        "quote": "At night, they are fine with lower heats such as 15-21°C or 60-70°F.",
+        "url": "https://en.wikipedia.org/wiki/Hermann%27s_tortoise"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 35,
+        "quote": "It requires a heat lamp set at around 26-35°C or 80-90°F to provide a basking area.",
+        "url": "https://en.wikipedia.org/wiki/Hermann%27s_tortoise"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "860 mm juvénile / 1150 mm adulte",
+        "quote": "The vivarium should be at least 860mm (34\") in length for a juvenile and 1150mm (46\") for an adult.",
+        "url": "https://www.reptilecentre.com/info-hermanns-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "table 900 mm",
+        "quote": "The table should be at least 900mm (35\") long.",
+        "url": "https://www.reptilecentre.com/info-hermanns-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "UVB Zone 3",
+        "quote": "A fluorescent UVB tube should be used inside the vivarium with a reflector so no UVB is wasted. The tube should be at least Ferguson Zone 3 (10-12% UVB) for desert species.",
+        "url": "https://www.reptilecentre.com/info-hermanns-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "10-12 h",
+        "quote": "Basking bulbs should be on for 10- 12 hours per day and must be controlled by a dimming thermostat.",
+        "url": "https://www.reptilecentre.com/info-hermanns-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "substrat sec",
+        "quote": "Hermann's tortoises should always be kept on a dry substrate so not to increase the humidity inside their enclosure too much. We keep our tortoises either on beech woodchips or ProRep's Tortoise Life substrate.",
+        "url": "https://www.reptilecentre.com/info-hermanns-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "nuit",
+        "quote": "At night tortoises require a drop in temperature and darkness. They can drop to room temperature, so all heating and lighting equipment should be turned off.",
+        "url": "https://www.reptilecentre.com/info-hermanns-tortoise-care-sheet"
+      }
+    ]
+  },
+  {
+    "speciesId": 2441502,
+    "evidence": [
+      {
+        "field": "habitat.habitatType",
+        "value": "enclos",
+        "quote": "Adult marginated tortoises require a spacious enclosure, typically 6–8 feet (1.8–2.4 m) in length and approximately 4 feet (1.2 m) in width, to allow for adequate movement, exercise, and foraging behavior.",
+        "url": "https://en.wikipedia.org/wiki/Marginated_tortoise"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 21,
+        "quote": "The cooler end is generally maintained between 70–78°F (21–26°C), while the warmer end ranges from 80–85°F (27–29°C)",
+        "url": "https://en.wikipedia.org/wiki/Marginated_tortoise"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 29,
+        "quote": "The cooler end is generally maintained between 70–78°F (21–26°C), while the warmer end ranges from 80–85°F (27–29°C)",
+        "url": "https://en.wikipedia.org/wiki/Marginated_tortoise"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "1,8-2,4 m x 1,2 m",
+        "quote": "Adult marginated tortoises require a spacious enclosure, typically 6–8 feet (1.8–2.4 m) in length and approximately 4 feet (1.2 m) in width, to allow for adequate movement, exercise, and foraging behavior.",
+        "url": "https://en.wikipedia.org/wiki/Marginated_tortoise"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "UVB",
+        "quote": "Ultraviolet B (UVB) lighting is necessary in indoor enclosures to support vitamin D₃ synthesis and calcium metabolism. Access to natural sunlight is also beneficial when conditions permit.",
+        "url": "https://en.wikipedia.org/wiki/Marginated_tortoise"
+      }
+    ]
+  },
+  {
+    "speciesId": 2443074,
+    "evidence": []
+  },
+  {
+    "speciesId": 2446584,
+    "evidence": [
+      {
+        "field": "habitat.habitatType",
+        "value": "terrarium",
+        "quote": "A single adult leachianus can be housed in an upright screen enclosure no smaller than 18 by 18 by 24 inches tall (larger would be even better)",
+        "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 21,
+        "quote": "and can drop into the low 70s at night",
+        "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 28,
+        "quote": "Daytime ambient temperatures should range between the upper 70s and lower 80s Fahrenheit",
+        "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": 50,
+        "quote": "The humidity level should be between 50 and 75 percent; use a hygrometer to keep track",
+        "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": 75,
+        "quote": "The humidity level should be between 50 and 75 percent; use a hygrometer to keep track",
+        "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "18x18x24 in",
+        "quote": "A single adult leachianus can be housed in an upright screen enclosure no smaller than 18 by 18 by 24 inches tall (larger would be even better)",
+        "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "nocturne, pas d'éclairage requis",
+        "quote": "New Caledonian giant geckos are nocturnal and do not require lighting, although UVB lights can be used to simulate day and nighttime rhythms",
+        "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "substrat",
+        "quote": "Substrate can consist of a high-grade mulch or peat-based potting soil",
+        "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "brumisation 3-4x/semaine",
+        "quote": "Mist the enclosure three to four times a week to maintain humidity, either by hand or using a commercial misting system",
+        "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/"
+      }
+    ]
+  },
+  {
+    "speciesId": 2448847,
+    "evidence": []
+  },
+  {
+    "speciesId": 2455676,
+    "evidence": []
+  },
+  {
+    "speciesId": 2457884,
+    "evidence": []
+  },
+  {
+    "speciesId": 2466939,
+    "evidence": [
+      {
+        "field": "habitat.habitatType",
+        "value": "terrarium",
+        "quote": "A basking light should be installed in the tank and a temperature of 90–95 °F (32–35 °C) must be maintained.",
+        "url": "https://en.wikipedia.org/wiki/Green_anole"
+      },
+      {
+        "field": "habitat.habitatType",
+        "value": "terrarium",
+        "quote": "Vertically oriented terrariums are preferable, as taller enclosures better accommodate the arboreal green anole's needs.",
+        "url": "https://reptilesmagazine.com/green-anole-care-sheet/"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 21,
+        "quote": "Night temperature should be maintained at 70–75 °F (21–24 °C).",
+        "url": "https://en.wikipedia.org/wiki/Green_anole"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 35,
+        "quote": "A basking light should be installed in the tank and a temperature of 90–95 °F (32–35 °C) must be maintained.",
+        "url": "https://en.wikipedia.org/wiki/Green_anole"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": 60,
+        "quote": "Humidity level should be kept at 60-70%.",
+        "url": "https://en.wikipedia.org/wiki/Green_anole"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": 70,
+        "quote": "Humidity level should be kept at 60-70%.",
+        "url": "https://en.wikipedia.org/wiki/Green_anole"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "terrarium vertical; petit terrarium reptiles (< 8 pouces)",
+        "quote": "These lizards can be easily kept in a small, reptile-specific enclosure sold in every pet store as they rarely grow more than 8 inches.",
+        "url": "https://en.wikipedia.org/wiki/Green_anole"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "terrarium vertical",
+        "quote": "Vertically oriented terrariums are preferable, as taller enclosures better accommodate the arboreal green anole's needs.",
+        "url": "https://reptilesmagazine.com/green-anole-care-sheet/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "couvert végétal vertical",
+        "quote": "Vertically oriented vegetative cover is an absolute necessity; acrylic vines, plastic plants that adhere to the tank walls by way of suction cups and other such cover are highly recommended.",
+        "url": "https://reptilesmagazine.com/green-anole-care-sheet/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "brumisation",
+        "quote": "all green anoles will drink water misted onto the leaves and walls of their terrarium.",
+        "url": "https://reptilesmagazine.com/green-anole-care-sheet/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "substrat",
+        "quote": "Substrates to avoid are oily or resinous or scented substrates, such as pine shavings, wood shavings, or scented paper towels.",
+        "url": "https://reptilesmagazine.com/green-anole-care-sheet/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "substrat",
+        "quote": "A substrate should not be harmful for their skin. Substrate can be made using coconut coir, moss, reptile soil, etc., which is natural and also helps maintain moisture and temperature.",
+        "url": "https://en.wikipedia.org/wiki/Green_anole"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "UV 8 h/jour",
+        "quote": "eight hours of full-spectrum UV lighting per day is recommended.",
+        "url": "https://reptilesmagazine.com/green-anole-care-sheet/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "UVB 5.0; lumière naturelle",
+        "quote": "Natural light is best for reptiles, but a UVB light can be installed in the terrarium. A 5.0 UVB light would be a good option.",
+        "url": "https://en.wikipedia.org/wiki/Green_anole"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "spot de bain de soleil",
+        "quote": "A basking light should be installed in the tank and a temperature of 90–95 °F (32–35 °C) must be maintained.",
+        "url": "https://en.wikipedia.org/wiki/Green_anole"
+      }
+    ]
+  },
+  {
+    "speciesId": 2468095,
+    "evidence": []
+  }
+]

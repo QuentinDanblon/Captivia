@@ -1,0 +1,196 @@
+[
+  {
+    "speciesId": 1025719,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Un mâle et une femelle gardés ensemble peuvent se reproduire sans intervention particulière : si les animaux sont en bonne santé et les conditions bonnes, cela se fait naturellement.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.reptilecentre.com/info-giant-african-millipede-care-sheet",
+          "title": "Giant African Millipede Care Sheet"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 1406471,
+    "reproduction": null
+  },
+  {
+    "speciesId": 1415423,
+    "habitat": null,
+    "behavior": {
+      "generalBehavior": "Les phyllies (famille des Phylliidae, non spécifique à l'espèce) imitent l'apparence de feuilles, si précisément que les prédateurs ne parviennent souvent pas à les distinguer de vraies feuilles ; en marchant, elles se balancent d'avant en arrière, imitant une feuille agitée par le vent.",
+      "sociability": null,
+      "difficultyLevel": null,
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Phylliidae",
+          "title": "Phylliidae - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Phyllium philippinicum est devenu très répandu en élevage grâce à la facilité de sa reproduction. Données de la famille des Phylliidae (non spécifiques à l'espèce) : reproduction parthénogénétique possible ; selon l'espèce, chaque femelle pond entre 100 et 300 œufs, à raison d'un à trois par semaine ; éclosion après 4 à 8 mois ; développement jusqu'à l'adulte de 4 à 8 mois selon l'espèce et le sexe (4 mues pour les mâles, 6 pour les femelles).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Phylliidae",
+          "title": "Phylliidae - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2153441,
+    "habitat": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Données du genre Brachypelma (non spécifiques à B. auratum) : les femelles produisent un cocon avant la mue ; en milieu naturel, les femelles atteignent la maturité en 9 à 10 ans et peuvent ensuite vivre environ 10 ans ; les mâles mettent 7 à 8 ans et meurent généralement dans l'année qui suit.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma",
+          "title": "Brachypelma - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2153949,
+    "feeding": null
+  },
+  {
+    "speciesId": 2339870,
+    "reproduction": null
+  },
+  {
+    "speciesId": 2354003,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Un couple se reproduit souvent sans stimulation particulière dans un grand aquarium bien planté. En bac de ponte (couple transféré le soir), la ponte est attendue le lendemain matin ; les œufs sont émis en petit nombre à la fois sur plusieurs heures, éclosent en 24 à 36 heures et les alevins nagent librement 4 à 5 jours plus tard. Les adultes mangent volontiers leur ponte : les retirer dès que les œufs sont repérés.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/",
+          "title": "Nematobrycon palmeri (Emperor Tetra) - Seriously Fish"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emperor_tetra",
+          "title": "Emperor tetra - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2354646,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Pondeur libre dispersant ses œufs, sans soins parentaux. En bonne condition, les adultes pondent souvent et, dans un aquarium mature, quelques alevins peuvent apparaître sans intervention. Premier aliment des alevins : paramécies ou aliment sec propriétaire de granulométrie très fine (5 à 50 microns).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/hyphessobrycon-megalopterus/",
+          "title": "Black Phantom Tetra (Megalamphodus megalopterus) - Seriously Fish"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2371275,
+    "behavior": {
+      "generalBehavior": "Le mâle est très territorial ; les femelles aussi peuvent l'être, pas seulement lors des soins aux jeunes. Pondeur sur substrat, il dépose ses œufs dans des crevasses ou cavités du décor ; la femelle s'occupe seule des œufs et des alevins pendant que le mâle garde le territoire, et dans un petit aquarium le mâle peut devoir être retiré car elle peut devenir hyper-agressive.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": null,
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "À garder avec des compagnons paisibles comme les tétras. Si l'on tente la reproduction en aquarium communautaire, éviter les poissons nageant vite qui pillent les alevins. Les individus d'élevage conviennent à l'aquarium communautaire ; les individus sauvages se maintiennent seuls ou avec de petits poissons « dither » (Nannostomus) et ne devraient idéalement pas être mélangés à d'autres Apistogramma.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Apistogramma_cacatuoides",
+          "title": "Apistogramma cacatuoides - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/apistogramma-cacatuoides/",
+          "title": "Apistogramma cacatuoides (Cockatoo Cichlid) - Seriously Fish"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2422905,
+    "habitat": null
+  },
+  {
+    "speciesId": 2424454,
+    "feeding": null
+  },
+  {
+    "speciesId": 2424499,
+    "feeding": null,
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 8,
+      "tempMax": 17.5,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Telmatobius_culeus",
+          "title": "Telmatobius culeus - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2427573,
+    "habitat": null
+  },
+  {
+    "speciesId": 2429295,
+    "habitat": null
+  }
+]

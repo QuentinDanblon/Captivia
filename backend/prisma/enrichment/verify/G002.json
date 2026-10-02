@@ -1,0 +1,131 @@
+[
+  {
+    "speciesId": 2431776,
+    "evidence": [
+      {
+        "field": "reproduction.litterSizeMax",
+        "value": 70,
+        "quote": "Selon l'âge, la taille corporelle et les conditions d'alimentation de la femelle, des portées de seulement quelques salamandres jusqu'à 70 individus sont ainsi mises au monde, avec une moyenne de 30 larves.",
+        "url": "https://fr.wikipedia.org/wiki/Salamandre_tachet%C3%A9e"
+      },
+      {
+        "field": "reproduction.sexualMaturityMonths (notes: 2 à 4 ans, non converti en champ numérique)",
+        "value": null,
+        "quote": "La salamandre tachetée atteint la maturité sexuelle en 2 à 4 ans.",
+        "url": "https://fr.wikipedia.org/wiki/Salamandre_tachet%C3%A9e"
+      },
+      {
+        "field": "reproduction.season",
+        "value": "avril à septembre, pic en juillet",
+        "quote": "La période d'accouplement dure d'avril à septembre avec un pic d'activité en juillet.",
+        "url": "https://fr.wikipedia.org/wiki/Salamandre_tachet%C3%A9e"
+      },
+      {
+        "field": "reproduction.notes (gestation)",
+        "value": "plusieurs mois",
+        "quote": "La femelle porte les embryons pendant plusieurs mois dans la partie terminale de l'oviducte communément appelée utérus.",
+        "url": "https://fr.wikipedia.org/wiki/Salamandre_tachet%C3%A9e"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 18.3,
+        "quote": "Fire salamanders require a near constant air temperature of 65°F.",
+        "url": "https://www.reptilecentre.com/pages/info-fire-salamander-care-sheet"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 21.1,
+        "quote": "as long as the temperatures do not exceed 70°F.",
+        "url": "https://www.reptilecentre.com/pages/info-fire-salamander-care-sheet"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "450/600/300 mm",
+        "quote": "The fire salamander's vivarium should be at least 450mm in length while they are young, 600mm when they are older and 300mm in height.",
+        "url": "https://www.reptilecentre.com/pages/info-fire-salamander-care-sheet"
+      },
+      {
+        "field": "habitat.habitatType",
+        "value": "terrarium",
+        "quote": "The terrarium has a mesh lid, which will reduce the strength of UVB being put into the enclosure so we would recommend a wide covering of 5% UVB or a smaller covering of 6-7% UVB.",
+        "url": "https://www.reptilecentre.com/pages/info-fire-salamander-care-sheet"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "UVB toujours fournis",
+        "quote": "UVB lighting used to be considered an optional extra, but we now know a lot more about the species and their natural habitat and understand that it should always be provided.",
+        "url": "https://www.reptilecentre.com/pages/info-fire-salamander-care-sheet"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "",
+        "quote": "Natural wood ornaments look very effective and also provide further perches for the salamanders.",
+        "url": "https://www.reptilecentre.com/pages/info-fire-salamander-care-sheet"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "",
+        "quote": "Some areas can be raised up above the water level as long as they remain moist.",
+        "url": "https://www.reptilecentre.com/pages/info-fire-salamander-care-sheet"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "",
+        "quote": "We recommend a spot clean as often as possible (every day)",
+        "url": "https://www.reptilecentre.com/pages/info-fire-salamander-care-sheet"
+      }
+    ]
+  },
+  {
+    "speciesId": 2431886,
+    "evidence": []
+  },
+  {
+    "speciesId": 2433573,
+    "evidence": []
+  },
+  {
+    "speciesId": 2433753,
+    "evidence": []
+  },
+  {
+    "speciesId": 2434126,
+    "evidence": []
+  },
+  {
+    "speciesId": 2434255,
+    "evidence": []
+  },
+  {
+    "speciesId": 2434615,
+    "evidence": []
+  },
+  {
+    "speciesId": 2434982,
+    "evidence": []
+  },
+  {
+    "speciesId": 2435172,
+    "evidence": []
+  },
+  {
+    "speciesId": 2436412,
+    "evidence": []
+  },
+  {
+    "speciesId": 2436469,
+    "evidence": []
+  },
+  {
+    "speciesId": 2436484,
+    "evidence": []
+  },
+  {
+    "speciesId": 2437577,
+    "evidence": []
+  },
+  {
+    "speciesId": 2437619,
+    "evidence": []
+  }
+]

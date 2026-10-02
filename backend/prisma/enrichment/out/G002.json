@@ -1,0 +1,94 @@
+[
+  {
+    "speciesId": 2431776,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 18.3,
+      "tempMax": 21.1,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Vivarium d'au moins 450 mm de long pour les jeunes, 600 mm pour les adultes, et 300 mm de haut.",
+      "lightNeeds": "UVB à fournir systématiquement ; avec un couvercle grillagé qui réduit les UVB, le guide recommande une large couverture à 5 % UVB ou une couverture plus réduite à 6-7 % UVB.",
+      "activityEnrichment": "Bois naturels décoratifs offrant des perchoirs ; certaines zones peuvent être surélevées au-dessus du niveau de l'eau, à condition de rester humides.",
+      "hygieneNotes": "Nettoyage localisé le plus souvent possible (idéalement chaque jour).",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.reptilecentre.com/pages/info-fire-salamander-care-sheet",
+          "title": "Fire Salamander Care Sheet - Reptile Centre"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "Accouplement d'avril à septembre, avec un pic d'activité en juillet",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 70,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "La femelle porte les embryons plusieurs mois dans l'utérus et met au monde des larves. Selon l'âge, la taille et l'alimentation de la femelle, les portées vont de quelques individus jusqu'à 70, avec une moyenne de 30 larves. Maturité sexuelle atteinte en 2 à 4 ans.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Salamandre_tachet%C3%A9e",
+          "title": "Salamandra salamandra — Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2431886,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 2433573,
+    "habitat": null
+  },
+  {
+    "speciesId": 2433753,
+    "habitat": null
+  },
+  {
+    "speciesId": 2434126,
+    "habitat": null
+  },
+  {
+    "speciesId": 2434255,
+    "habitat": null
+  },
+  {
+    "speciesId": 2434615,
+    "habitat": null
+  },
+  {
+    "speciesId": 2434982,
+    "habitat": null
+  },
+  {
+    "speciesId": 2435172,
+    "habitat": null
+  },
+  {
+    "speciesId": 2436412,
+    "habitat": null
+  },
+  {
+    "speciesId": 2436469,
+    "habitat": null
+  },
+  {
+    "speciesId": 2436484,
+    "habitat": null
+  },
+  {
+    "speciesId": 2437577,
+    "habitat": null
+  },
+  {
+    "speciesId": 2437619,
+    "habitat": null
+  }
+]

@@ -1,0 +1,360 @@
+[
+ {
+  "speciesId": 9032472,
+  "evidence": []
+ },
+ {
+  "speciesId": 9198359,
+  "evidence": []
+ },
+ {
+  "speciesId": 9268496,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "liquide malodorant",
+    "quote": "When it feels threatened, this turtle will emit an offensive-smelling fluid from its musk glands.",
+    "url": "https://en.wikipedia.org/wiki/Eastern_long-necked_turtle"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "carnivore",
+    "quote": "The eastern long-necked turtle is carnivorous, eating a variety of animals.",
+    "url": "https://en.wikipedia.org/wiki/Eastern_long-necked_turtle"
+   }
+  ]
+ },
+ {
+  "speciesId": 9451184,
+  "evidence": []
+ },
+ {
+  "speciesId": 9589697,
+  "evidence": []
+ },
+ {
+  "speciesId": 9606290,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 18,
+    "quote": "Ambient temperatures for adult domestic turkeys are usually maintained between 18 and 21 °C (64 and 70 °F).",
+    "url": "https://en.wikipedia.org/wiki/Domesticated_turkey"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 21,
+    "quote": "Ambient temperatures for adult domestic turkeys are usually maintained between 18 and 21 °C (64 and 70 °F).",
+    "url": "https://en.wikipedia.org/wiki/Domesticated_turkey"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "enclos",
+    "quote": "Les animaux sont élevés au sol dans des bâtiments de type industriel",
+    "url": "https://fr.wikipedia.org/wiki/Dinde_domestique"
+   },
+   {
+    "field": "reproduction.incubationDays",
+    "value": 28,
+    "quote": "After 28 days of incubation, the hatched poults are sexed and delivered to the grow-out farms",
+    "url": "https://en.wikipedia.org/wiki/Domesticated_turkey"
+   }
+  ]
+ },
+ {
+  "speciesId": 9761484,
+  "evidence": []
+ },
+ {
+  "speciesId": 9799308,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 21,
+    "quote": "Temperatures between 70 °F and 85 °F are adequate for kingsnakes in captivity.",
+    "url": "https://en.wikipedia.org/wiki/Lampropeltis_californiae"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 32,
+    "quote": "To accomplish the required basking temperature of 85°F- 90°F, we use one 40w basking light in a 3ft enclosure.",
+    "url": "https://www.reptilecentre.com/info-kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "terrarium",
+    "quote": "The kingsnake's vivarium should be at least 860mm (34\") in length",
+    "url": "https://www.reptilecentre.com/info-kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "860 mm",
+    "quote": "The kingsnake's vivarium should be at least 860mm (34\") in length",
+    "url": "https://www.reptilecentre.com/info-kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB",
+    "quote": "A 5% T8 UVB tube, 2-5% T5 UVB tube or more powerful but smaller unit should be sufficient",
+    "url": "https://www.reptilecentre.com/info-kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "substrat sec",
+    "quote": "Kingsnakes should be kept on a dry substrate to avoid humidity building up in the enclosure.",
+    "url": "https://www.reptilecentre.com/info-kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "bac à eau",
+    "quote": "A water bowl large enough for the snake to get in to should be provided on the cool end",
+    "url": "https://www.reptilecentre.com/info-kingsnake-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 103899345,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "aquarium",
+    "quote": "Banded archerfish should be kept in an aquarium with a volume of at least 45 to 55 US gallons (170 to 210 L; 37 to 46 imp gal), though a greater volume is preferred.",
+    "url": "https://en.wikipedia.org/wiki/Banded_archerfish"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 25,
+    "quote": "Banded archerfish need warm water, usually between 25 and 30 °C (77 and 86 °F).",
+    "url": "https://en.wikipedia.org/wiki/Banded_archerfish"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 30,
+    "quote": "Banded archerfish need warm water, usually between 25 and 30 °C (77 and 86 °F).",
+    "url": "https://en.wikipedia.org/wiki/Banded_archerfish"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "170-210 L",
+    "quote": "Banded archerfish should be kept in an aquarium with a volume of at least 45 to 55 US gallons (170 to 210 L; 37 to 46 imp gal), though a greater volume is preferred.",
+    "url": "https://en.wikipedia.org/wiki/Banded_archerfish"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "profondeur 20-30 cm",
+    "quote": "It should be at least 20 to 30 centimetres (7.9 to 11.8 in) deep.",
+    "url": "https://en.wikipedia.org/wiki/Banded_archerfish"
+   },
+   {
+    "field": "reproduction.litterSizeMin",
+    "value": 20000,
+    "quote": "Archerfish lay 20,000 to 150,000 eggs at a time.",
+    "url": "https://en.wikipedia.org/wiki/Banded_archerfish"
+   },
+   {
+    "field": "reproduction.litterSizeMax",
+    "value": 150000,
+    "quote": "Archerfish lay 20,000 to 150,000 eggs at a time.",
+    "url": "https://en.wikipedia.org/wiki/Banded_archerfish"
+   },
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "avance",
+    "quote": "Banded archerfish rarely breed in captivity.",
+    "url": "https://en.wikipedia.org/wiki/Banded_archerfish"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "maturité vers 10 cm",
+    "quote": "Banded archerfish first begin to breed when they are about 10 centimetres (3.9 in) long.",
+    "url": "https://en.wikipedia.org/wiki/Banded_archerfish"
+   }
+  ]
+ },
+ {
+  "speciesId": 103951502,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "aquarium",
+    "quote": "a pair of convicts should be kept in a 20-gallon aquarium or larger",
+    "url": "https://en.wikipedia.org/wiki/Convict_cichlid"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 26,
+    "quote": "The daily water temperature ranged from 26–29 °C (79–84 °F)",
+    "url": "https://en.wikipedia.org/wiki/Convict_cichlid"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 29,
+    "quote": "The daily water temperature ranged from 26–29 °C (79–84 °F)",
+    "url": "https://en.wikipedia.org/wiki/Convict_cichlid"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "20 gallons US",
+    "quote": "a pair of convicts should be kept in a 20-gallon aquarium or larger",
+    "url": "https://en.wikipedia.org/wiki/Convict_cichlid"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "roches et grottes artificielles",
+    "quote": "The aquarium should be decorated to mimic the natural environment and include rocks and artificial caves for breeding",
+    "url": "https://en.wikipedia.org/wiki/Convict_cichlid"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "filtration externe",
+    "quote": "Due to the species' tendency to dig, external filtration is superior to undergravel filter systems",
+    "url": "https://en.wikipedia.org/wiki/Convict_cichlid"
+   }
+  ]
+ },
+ {
+  "speciesId": 103952549,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "aquarium",
+    "quote": "A dim light and dark substrate will bring out the colors of the Jack Dempsey.",
+    "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_(fish)"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 22,
+    "quote": "temperature range of 22–30 °C (72–86 °F)",
+    "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_(fish)"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 30,
+    "quote": "temperature range of 22–30 °C (72–86 °F)",
+    "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_(fish)"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "lumière tamisée, substrat sombre",
+    "quote": "A dim light and dark substrate will bring out the colors of the Jack Dempsey.",
+    "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_(fish)"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "pH 6-7, 9-20 dGH",
+    "quote": "pH of 6–7",
+    "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_(fish)"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "9-20 dGH",
+    "quote": "water hardness of 9–20 dGH",
+    "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_(fish)"
+   }
+  ]
+ },
+ {
+  "speciesId": 103953586,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "aquarium",
+    "quote": "The ram cichlid is popular in the tropical freshwater community aquarium.",
+    "url": "https://en.wikipedia.org/wiki/Mikrogeophagus_ramirezi"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 25.5,
+    "quote": "warm (25.5–29.5 °C (77.9–85.1 °F))",
+    "url": "https://en.wikipedia.org/wiki/Mikrogeophagus_ramirezi"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 29.5,
+    "quote": "warm (25.5–29.5 °C (77.9–85.1 °F))",
+    "url": "https://en.wikipedia.org/wiki/Mikrogeophagus_ramirezi"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "pH 5,2 à 6,7",
+    "quote": "acidic (pH 5.2-6.7)",
+    "url": "https://en.wikipedia.org/wiki/Mikrogeophagus_ramirezi"
+   }
+  ]
+ },
+ {
+  "speciesId": 103973942,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "aquarium",
+    "quote": "Un bac d'au minimum 80 cm de long (100 ou 120 cm conseillé)",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 24,
+    "quote": "Une température entre 24 et 28 °C sera idéale.",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 28,
+    "quote": "Une température entre 24 et 28 °C sera idéale.",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "80 cm",
+    "quote": "Un bac d'au minimum 80 cm de long (100 ou 120 cm conseillé)",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "pH 6-7",
+    "quote": "le pH doit être compris entre 6 et 7",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "2-10 dGH",
+    "quote": "La dureté devra être comprise entre 2°d GH et 10°d GH",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "reproduction.litterSizeMin",
+    "value": 70,
+    "quote": "Une ponte donne entre 70 et 250 petits",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "reproduction.litterSizeMax",
+    "value": 250,
+    "quote": "Une ponte donne entre 70 et 250 petits",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "ponte le matin",
+    "quote": "La ponte a lieu le matin après une parade. Le couple fraie au-dessus des plantes",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "éclosion 24 h, nage libre 5 j",
+    "quote": "L'éclosion a lieu en 24 heures, et la nage libre en 5 jours",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "difficulté délicate",
+    "quote": "Difficulté: délicat",
+    "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi"
+   }
+  ]
+ },
+ {
+  "speciesId": 103997157,
+  "evidence": []
+ }
+]

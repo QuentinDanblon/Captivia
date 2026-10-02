@@ -1,0 +1,166 @@
+[
+  {
+    "speciesId": 2439965,
+    "habitat": null
+  },
+  {
+    "speciesId": 2440891,
+    "habitat": null,
+    "reproduction": {
+      "season": "Femelles polyoestrales : ovulation mensuelle de mars à septembre",
+      "gestationDays": 370,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": null,
+      "notes": "Gestation d'environ 370 jours (12 mois selon d'autres sources). Une ânesse met bas un seul ânon à la fois, les jumeaux étant rares. Les mâles atteignent la maturité sexuelle vers 2 ans, certains dès 9 mois ; la plupart des femelles commencent à se reproduire vers 2 ans.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Equus_asinus/",
+          "title": "Equus asinus - Animal Diversity Web"
+        },
+        {
+          "type": "official",
+          "url": "https://education.nsw.gov.au/teaching-and-learning/animals-in-schools/animals-in-schools-species/donkeys/donkeys-introduction",
+          "title": "Donkeys – introduction - NSW Department of Education"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2440954,
+    "habitat": null
+  },
+  {
+    "speciesId": 2441108,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 2441110,
+    "habitat": null
+  },
+  {
+    "speciesId": 2441454,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 15,
+      "tempMax": 35,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Vivarium d'au moins 860 mm de long pour un juvénile et 1150 mm pour un adulte ; table à tortue d'au moins 900 mm de long.",
+      "lightNeeds": "Tube UVB fluorescent dans le vivarium avec réflecteur (au moins Ferguson Zone 3, 10-12 % d'UVB pour les espèces désertiques) ; lampe de chauffage allumée 10 à 12 h par jour, avec thermostat.",
+      "activityEnrichment": null,
+      "hygieneNotes": "Garder la tortue sur un substrat sec (copeaux de hêtre ou substrat spécial tortue) pour ne pas augmenter l'humidité de l'enclos ; éteindre chauffage et éclairage la nuit.",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hermann%27s_tortoise",
+          "title": "Hermann's tortoise - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.reptilecentre.com/info-hermanns-tortoise-care-sheet",
+          "title": "Hermanns Tortoise Care Sheet - Reptile Centre"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2441502,
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 21,
+      "tempMax": 29,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Enclos spacieux d'environ 6 à 8 pieds (1,8 à 2,4 m) de long sur environ 4 pieds (1,2 m) de large pour un adulte.",
+      "lightNeeds": "UVB nécessaires dans les enclos intérieurs (synthèse de la vitamine D3 et métabolisme du calcium) ; accès à la lumière naturelle bénéfique quand les conditions le permettent.",
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Marginated_tortoise",
+          "title": "Marginated tortoise - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2443074,
+    "habitat": null
+  },
+  {
+    "speciesId": 2446584,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 21,
+      "tempMax": 28,
+      "humidityMin": 50,
+      "humidityMax": 75,
+      "minSpaceSize": "Enclos grillagé vertical d'au moins 18 x 18 x 24 pouces de haut pour un adulte seul (plus grand si possible).",
+      "lightNeeds": "Espèce nocturne : pas d'éclairage nécessaire ; des UVB peuvent servir à simuler le rythme jour/nuit.",
+      "activityEnrichment": null,
+      "hygieneNotes": "Substrat en paillis de qualité ou terreau à base de tourbe ; brumiser l'enclos trois à quatre fois par semaine pour maintenir l'humidité (hygromètre conseillé).",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/new-caledonian-giant-gecko-care-sheet/",
+          "title": "New Caledonian Giant Gecko Care Sheet - Reptiles Magazine"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2448847,
+    "habitat": null
+  },
+  {
+    "speciesId": 2455676,
+    "feeding": null,
+    "habitat": null
+  },
+  {
+    "speciesId": 2457884,
+    "habitat": null
+  },
+  {
+    "speciesId": 2466939,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 21,
+      "tempMax": 35,
+      "humidityMin": 60,
+      "humidityMax": 70,
+      "minSpaceSize": "Terrarium orienté à la verticale (plus haut que large) ; un petit terrarium spécial reptiles suffit car l'espèce dépasse rarement 8 pouces de long.",
+      "lightNeeds": "Lumière naturelle idéale ; huit heures par jour d'éclairage UV à spectre complet recommandées (tube UVB 5.0 possible), avec un spot de bain de soleil.",
+      "activityEnrichment": "Couvert végétal vertical indispensable (lianes en acrylique, plantes en plastique fixées aux parois par ventouses) pour cette espèce arboricole.",
+      "hygieneNotes": "Brumiser les feuilles et parois du terrarium (les anoles boivent l'eau brumisée) ; substrat non nocif pour la peau (terreau non traité, écorce, litière de feuilles) ; éviter les substrats résineux, parfumés ou à base de pin.",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Green_anole",
+          "title": "Green anole - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/green-anole-care-sheet/",
+          "title": "Green Anole Care Sheet - Reptiles Magazine"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2468095,
+    "feeding": null,
+    "habitat": null,
+    "health": null
+  }
+]

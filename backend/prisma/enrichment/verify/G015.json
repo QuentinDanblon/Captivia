@@ -1,0 +1,432 @@
+[
+ {
+  "speciesId": 2000000699,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race bovine suédoise",
+    "quote": "La **vänekor** est une race bovine [suédoise](https://fr.wikipedia.org/wiki/Suède \"Suède\").",
+    "url": "https://fr.wikipedia.org/wiki/Vänekor"
+   },
+   {
+    "field": "description",
+    "value": "origine",
+    "quote": "Elle vient de la province de Västergötland au sud-ouest de la Suède où du bétail a été élevé en autarcie autour du village de Väne-Ryr.",
+    "url": "https://fr.wikipedia.org/wiki/Vänekor"
+   },
+   {
+    "field": "description",
+    "value": "robe",
+    "quote": "Elle porte une robe pie rouge à taches bien délimitées ou mouchetée.",
+    "url": "https://fr.wikipedia.org/wiki/Vänekor"
+   },
+   {
+    "field": "description",
+    "value": "poids",
+    "quote": "la vache pèse 525 kg, le taureau 775 kg.",
+    "url": "https://fr.wikipedia.org/wiki/Vänekor"
+   },
+   {
+    "field": "description",
+    "value": "caractère",
+    "quote": "Elle est appréciée pour sa docilité, sa fertilité et ses facultés d'adaptation aux différents climats.",
+    "url": "https://fr.wikipedia.org/wiki/Vänekor"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000705,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "développée entre 1930 et 1950 par croisement Hereford x bétail local kazakh et kalmouk",
+    "quote": "The breed was developed between 1930 and 1950 on state farms in the Kazakh republic and the Lower Volga by crossing Hereford cattle with local Kazakh and Kalmyk stock.",
+    "url": "https://en.wikipedia.org/wiki/Kazakh_Whiteheaded"
+   },
+   {
+    "field": "description",
+    "value": "ressemble au Hereford, rusticité",
+    "quote": "The breed resembles the Hereford in colour and conformation while incorporating the hardiness of the local breeds.",
+    "url": "https://en.wikipedia.org/wiki/Kazakh_Whiteheaded"
+   },
+   {
+    "field": "description",
+    "value": "race à viande (infobox)",
+    "quote": "Use: meat",
+    "url": "https://en.wikipedia.org/wiki/Kazakh_Whiteheaded"
+   },
+   {
+    "field": "description",
+    "value": "mâle 820 kg",
+    "quote": "Male: average 820 kg",
+    "url": "https://en.wikipedia.org/wiki/Kazakh_Whiteheaded"
+   },
+   {
+    "field": "description",
+    "value": "femelle 550 kg",
+    "quote": "Female: average 550 kg",
+    "url": "https://en.wikipedia.org/wiki/Kazakh_Whiteheaded"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000708,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine",
+    "quote": "The Japanese Brown developed in southern Japan, in Kōchi Prefecture on Shikoku island, and in Kumamoto Prefecture on Kyushu island.",
+    "url": "https://en.wikipedia.org/wiki/Japanese_Brown"
+   },
+   {
+    "field": "description",
+    "value": "petite race à viande",
+    "quote": "a Japanese breed of small beef cattle",
+    "url": "https://en.wikipedia.org/wiki/Japanese_Brown"
+   },
+   {
+    "field": "description",
+    "value": "couleurs",
+    "quote": "Japanese Brown cattle in Kōchi Prefecture are reddish-brown, while those in Kumamoto Prefecture are light brown.",
+    "url": "https://en.wikipedia.org/wiki/Japanese_Brown"
+   },
+   {
+    "field": "description",
+    "value": "wagyu",
+    "quote": "one of the four Japanese breeds known as wagyu",
+    "url": "https://en.wikipedia.org/wiki/Japanese_Brown"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000987,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine",
+    "quote": "Cette race est issue d'une population très ancienne du Berkshire, à l'ouest de Londres.",
+    "url": "https://fr.wikipedia.org/wiki/Berkshire_(race_porcine)"
+   },
+   {
+    "field": "description",
+    "value": "taille moyenne",
+    "quote": "C'est une race de taille moyenne.",
+    "url": "https://fr.wikipedia.org/wiki/Berkshire_(race_porcine)"
+   },
+   {
+    "field": "description",
+    "value": "robe",
+    "quote": "Il est noir, sauf le bout des pattes, la queue et une tache sur la tête.",
+    "url": "https://fr.wikipedia.org/wiki/Berkshire_(race_porcine)"
+   },
+   {
+    "field": "description",
+    "value": "usage",
+    "quote": "C'est une race apte à la production de viande de qualité, mais inadaptée à la production industrielle.",
+    "url": "https://fr.wikipedia.org/wiki/Berkshire_(race_porcine)"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000988,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine",
+    "quote": "Une race de porc est sélectionnée dans la première moitié du XXe siècle dans la région de Breïtovo",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Breïtovo"
+   },
+   {
+    "field": "description",
+    "value": "reconnaissance 1948",
+    "quote": "Elle est officiellement reconnue en 1948",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Breïtovo"
+   },
+   {
+    "field": "description",
+    "value": "poids",
+    "quote": "Le verrat pèse 297 kg en moyenne (parfois jusqu'à 320 kg), la truie 236 kg",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Breïtovo"
+   },
+   {
+    "field": "description",
+    "value": "robe/tête",
+    "quote": "Sa couleur est blanche, rarement pie noir. Sa tête est large, renflée, avec de grandes oreilles retombant sur les yeux",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Breïtovo"
+   },
+   {
+    "field": "description",
+    "value": "usage",
+    "quote": "C'est une race à viande de forte constitution et de taille moyenne",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Breïtovo"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000991,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine",
+    "quote": "C'est dans l'oblast de Novossibirsk qu'un zoogénéticien du nom d'O.I. Simon sélectionne une race résistante et robuste de porc",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Sibérie_du_Nord"
+   },
+   {
+    "field": "description",
+    "value": "poids",
+    "quote": "Le verrat pèse en moyenne 312 kg et la truie, 238 kg.",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Sibérie_du_Nord"
+   },
+   {
+    "field": "description",
+    "value": "apparence",
+    "quote": "Ce cochon de couleur blanche est de constitution harmonieuse et de taille moyenne. Son groin est renflé et ses oreilles dressées, sa tête courte et rugueuse. Il a le dos droit et large, les crins denses et longs",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Sibérie_du_Nord"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000992,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race porcine danoise, taille, couleur, morphologie",
+    "quote": "The Danish Landrace, Danish: Dansk Landrace, is a Danish breed of domestic pig. It is of medium to large size, white in colour with a long body, fine hair, a long snout and heavy drooping ears.",
+    "url": "https://en.wikipedia.org/wiki/Danish_Landrace_pig"
+   },
+   {
+    "field": "description",
+    "value": "origine (croisement Large White, bacon)",
+    "quote": "From about 1865, and particularly between 1879 and 1896, breeding stock of the British Large White or Yorkshire breed was imported and cross-bred with local animals to supply the bacon trade.",
+    "url": "https://en.wikipedia.org/wiki/Danish_Landrace_pig"
+   },
+   {
+    "field": "description",
+    "value": "poids mâle (infobox)",
+    "quote": "Male: 325 kg",
+    "url": "https://en.wikipedia.org/wiki/Danish_Landrace_pig"
+   },
+   {
+    "field": "description",
+    "value": "poids femelle (infobox)",
+    "quote": "Female: 225 kg",
+    "url": "https://en.wikipedia.org/wiki/Danish_Landrace_pig"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000994,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine",
+    "quote": "Le grice est une race de cochons domestiques originaire des Shetland",
+    "url": "https://fr.wikipedia.org/wiki/Grice"
+   },
+   {
+    "field": "description",
+    "value": "taille",
+    "quote": "C'était un cochon de petite taille, très agressif avec des petites défenses",
+    "url": "https://fr.wikipedia.org/wiki/Grice"
+   },
+   {
+    "field": "description",
+    "value": "éteinte",
+    "quote": "aujourd'hui disparue",
+    "url": "https://fr.wikipedia.org/wiki/Grice"
+   },
+   {
+    "field": "description",
+    "value": "usage (infobox)",
+    "quote": "viande",
+    "url": "https://fr.wikipedia.org/wiki/Grice"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000997,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine",
+    "quote": "une grande race blanche de porc issue de porcs locaux avec des croisements de races large white, berkshire et poland china",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Livny"
+   },
+   {
+    "field": "description",
+    "value": "poids",
+    "quote": "Un verrat de trente-six mois atteint en moyenne 295 kg (179 cm) et une truie 237 kg (163 cm).",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Livny"
+   },
+   {
+    "field": "description",
+    "value": "sélection",
+    "quote": "Elle est sélectionnée pour la qualité de sa viande, ses performances graisseuses et sa prolificité.",
+    "url": "https://fr.wikipedia.org/wiki/Porc_de_Livny"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001011,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race autochtone de Slovénie, viande",
+    "quote": "Krškopolje pig or Black-belted pig (Slovene: Krškopoljski prašič) is an autochthonous breed of pig, originating in Slovenia.",
+    "url": "https://en.wikipedia.org/wiki/Krškopolje_pig"
+   },
+   {
+    "field": "description",
+    "value": "viande",
+    "quote": "The easily recognizable blackish Krškopolje pig, widely used for meat production, is well known for its continuous pink belt, running across animal's shoulders and forelimbs.",
+    "url": "https://en.wikipedia.org/wiki/Krškopolje_pig"
+   },
+   {
+    "field": "description",
+    "value": "robe, taille moyenne",
+    "quote": "The Krškopolje is a breed of black middle-sized pigs, easily recognizable because of their continuous white to pink belt, running across animal's shoulders and forelimbs – the so-called saddle.",
+    "url": "https://en.wikipedia.org/wiki/Krškopolje_pig"
+   },
+   {
+    "field": "description",
+    "value": "berceau",
+    "quote": "The breed's area of origin are southeastern parts of Lower Carniola, especially Krško-Brežiško field, but also the foothills of Žumberak Mountains.",
+    "url": "https://en.wikipedia.org/wiki/Krškopolje_pig"
+   },
+   {
+    "field": "description",
+    "value": "poids",
+    "quote": "On average boars weigh 280 kg and sows 230 kg.",
+    "url": "https://en.wikipedia.org/wiki/Krškopolje_pig"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001013,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "groupe de races standardisées, race d'origine = Landrace danois",
+    "quote": "The term Landrace pig, or Landrace swine, refers to any of a group of standardized breeds of domestic pig, and in this context, the word \"Landrace\" is typically capitalized. The original breed by this name was the Danish Landrace pig, from which the others were derived through development and crossbreeding.",
+    "url": "https://en.wikipedia.org/wiki/Landrace_pig"
+   },
+   {
+    "field": "description",
+    "value": "souche de base locale",
+    "quote": "The breed was so named because the foundation stock of the Danish Landrace were specimens from the local, free-breeding, non-pedigreed stock of swine, i.e., the regional landrace native to Denmark.",
+    "url": "https://en.wikipedia.org/wiki/Landrace_pig"
+   },
+   {
+    "field": "description",
+    "value": "races modernes",
+    "quote": "The modern breeds are not themselves landraces, since they are formal breeds maintained through selective breeding rather than natural selection.",
+    "url": "https://en.wikipedia.org/wiki/Landrace_pig"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001115,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race de poule originaire des Pays-Bas",
+    "quote": "La poule hollandaise huppée est une race de poule domestique originaire des Pays-Bas.",
+    "url": "https://fr.wikipedia.org/wiki/Hollandaise_huppée"
+   },
+   {
+    "field": "description",
+    "value": "ancienneté",
+    "quote": "C'est une race originaire des Pays-Bas, où elle est connue depuis plus de cinq siècles.",
+    "url": "https://fr.wikipedia.org/wiki/Hollandaise_huppée"
+   },
+   {
+    "field": "description",
+    "value": "poids",
+    "quote": "Coq : 2 à 2,5 kg - Poule : 1,5 à 2 kg",
+    "url": "https://fr.wikipedia.org/wiki/Hollandaise_huppée"
+   },
+   {
+    "field": "description",
+    "value": "variétés/huppe",
+    "quote": "Noir à huppe blanche, blanc à huppe blanche, bleu liseré à huppe blanche, chamois liseré blanc à huppe blanche, coucou à huppe blanche, noir caillouté blanc à huppe blanche, fauve à huppe blanche, rouge à huppe blanche, kaki à huppe blanche, dun à huppe blanche, blanc à huppe noire",
+    "url": "https://fr.wikipedia.org/wiki/Hollandaise_huppée"
+   },
+   {
+    "field": "description",
+    "value": "usage",
+    "quote": "C'est une volaille de type fermier, ornementale, fréquemment rencontrée dans les expositions en France",
+    "url": "https://fr.wikipedia.org/wiki/Hollandaise_huppée"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001117,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "origine",
+    "quote": "Originaire des États-Unis dans la région de la Nouvelle-Angleterre, elle fut introduite en Europe vers 1890.",
+    "url": "https://fr.wikipedia.org/wiki/Dominicaine_(race_de_poule)"
+   },
+   {
+    "field": "description",
+    "value": "caractère",
+    "quote": "une volaille au tempérament vif, de grandeur moyenne, robuste et rustique",
+    "url": "https://fr.wikipedia.org/wiki/Dominicaine_(race_de_poule)"
+   },
+   {
+    "field": "description",
+    "value": "usage",
+    "quote": "on l'élève pour ses œufs et sa chair",
+    "url": "https://fr.wikipedia.org/wiki/Dominicaine_(race_de_poule)"
+   },
+   {
+    "field": "description",
+    "value": "poids",
+    "quote": "Coq : 2 à 2,5 kg ; Poule : 1,8 à 2,3 kg",
+    "url": "https://fr.wikipedia.org/wiki/Dominicaine_(race_de_poule)"
+   },
+   {
+    "field": "description",
+    "value": "plumage",
+    "quote": "uniquement coucou",
+    "url": "https://fr.wikipedia.org/wiki/Dominicaine_(race_de_poule)"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001121,
+  "evidence": [
+   {
+    "field": "description",
+    "value": "race de poule très répandue",
+    "quote": "La Leghorn est une des races de poule domestique les plus répandues à travers le monde",
+    "url": "https://fr.wikipedia.org/wiki/Leghorn"
+   },
+   {
+    "field": "description",
+    "value": "origine",
+    "quote": "Les Leghorns proviennent d'anciennes races vivant en Toscane ou en Italie centrale.",
+    "url": "https://fr.wikipedia.org/wiki/Leghorn"
+   },
+   {
+    "field": "description",
+    "value": "nom italienne (titre de section)",
+    "quote": "La Leghorn moderne ou italienne",
+    "url": "https://fr.wikipedia.org/wiki/Leghorn"
+   },
+   {
+    "field": "description",
+    "value": "caractère",
+    "quote": "Vive et alerte, elle aime parcourir de grands espaces à la recherche de nourriture.",
+    "url": "https://fr.wikipedia.org/wiki/Leghorn"
+   },
+   {
+    "field": "description",
+    "value": "ponte",
+    "quote": "Très grande pondeuse d'œufs (en moyenne 280 par an)",
+    "url": "https://fr.wikipedia.org/wiki/Leghorn"
+   }
+  ]
+ }
+]
