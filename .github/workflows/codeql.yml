@@ -76,4 +76,4 @@ jobs:
         with:
           name: codeql-sarif
           path: sarif-results
-          retention-days: 14"
+          retention-days: 14
