@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Logger,
 } from '@nestjs/common';
+import * as Sentry from '@sentry/nestjs';
 import { Request, Response } from 'express';
 
 @Catch()
@@ -36,10 +37,17 @@ export class HttpExceptionFilter implements ExceptionFilter {
       const path = (request.originalUrl ?? request.url ?? '').split('?')[0];
       const detail =
         exception instanceof Error ? exception.message : String(exception);
+      const reqId = (request as Request & { id?: unknown }).id;
       this.logger.error(
-        `${request.method} ${path} -> ${status}: ${detail}`,
+        `${request.method} ${path} -> ${status}: ${detail}${reqId ? ` (reqId=${String(reqId)})` : ''}`,
         exception instanceof Error ? exception.stack : undefined,
       );
+      // Remontée à Sentry des erreurs serveur (>= 500 ou non-HTTP) si initialisé.
+      if (Sentry.isInitialized()) {
+        Sentry.captureException(exception, {
+          tags: reqId ? { request_id: String(reqId) } : undefined,
+        });
+      }
     }
 
     response.status(status).json({

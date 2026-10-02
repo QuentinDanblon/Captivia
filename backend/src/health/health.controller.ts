@@ -1,6 +1,7 @@
 import { Controller, Get, ServiceUnavailableException } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { SkipThrottle } from '@nestjs/throttler';
+import { getRelease } from '../config/release';
 import { PrismaService } from '../prisma/prisma.service';
 
 /** Délai maximal accordé au `SELECT 1` de la sonde de disponibilité (ms). */
@@ -20,6 +21,7 @@ export class HealthController {
   check() {
     return {
       status: 'ok',
+      version: getRelease() ?? 'dev',
       timestamp: new Date().toISOString(),
     };
   }
