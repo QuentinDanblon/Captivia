@@ -8,12 +8,67 @@ import { api, type Animal, type Medication, type VetAppointment, type AnimalMeas
 import WeightChart from '@/components/WeightChart';
 import Link from 'next/link';
 
+interface RoutineSchedule {
+  time?: string;
+  recurrence?: string;
+  date?: string;
+  weekDay?: number;
+  dayOfMonth?: number;
+  intervalHours?: number;
+}
+
+interface HistoryEntry {
+  id: string;
+  type: string;
+  doneAt: string;
+  note?: string | null;
+}
+
+interface SpeciesDisease {
+  name: string;
+  symptoms?: string;
+  prevention?: string;
+  whenToConsult?: string;
+}
+
+interface SpeciesHealthData {
+  editorial?: { diseases?: SpeciesDisease[] };
+}
+
+interface SpeciesLegislationItem {
+  country: string;
+  status: string;
+  details?: { citesAppendix?: string | null; euAnnex?: string | null; permits?: string[]; restrictions?: string[] };
+  sources?: string[];
+}
+
+interface SpeciesLegislationData {
+  editorial?: SpeciesLegislationItem[];
+}
+
+interface EquipmentRecommendation {
+  label: string;
+  category?: string;
+  size?: string;
+}
+
+interface SpeciesEquipmentData {
+  recommendations?: EquipmentRecommendation[];
+}
+
+interface SpeciesFoodProduct {
+  product_name?: string;
+  name?: string;
+  brands?: string;
+  categories?: string;
+}
+
 interface Routine {
   id: string;
   name?: string;
   type: string;
   frequency: string;
-  schedule: any;
+  schedule: RoutineSchedule;
   active: boolean;
 }
 
@@ -164,13 +219,13 @@ export default function AnimalDetailPage({
   const [showRoutineTemplates, setShowRoutineTemplates] = useState(false);
   const [routineTemplatesLoading, setRoutineTemplatesLoading] = useState(false);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
-  const [history, setHistory] = useState<any[]>([]);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [isLoadingHistory, setIsLoadingHistory] = useState(false);
   const [historyError, setHistoryError] = useState('');
-  const [speciesHealth, setSpeciesHealth] = useState<any>(null);
-  const [speciesLegislation, setSpeciesLegislation] = useState<any>(null);
-  const [speciesEquipment, setSpeciesEquipment] = useState<any>(null);
-  const [speciesFood, setSpeciesFood] = useState<any[]>([]);
+  const [speciesHealth, setSpeciesHealth] = useState<SpeciesHealthData | null>(null);
+  const [speciesLegislation, setSpeciesLegislation] = useState<SpeciesLegislationData | null>(null);
+  const [speciesEquipment, setSpeciesEquipment] = useState<SpeciesEquipmentData | null>(null);
+  const [speciesFood, setSpeciesFood] = useState<SpeciesFoodProduct[]>([]);
   const [activeTab, setActiveTab] = useState('health');
   const [healthRecords, setHealthRecords] = useState<HealthRecord[]>([]);
   const [showHealthModal, setShowHealthModal] = useState(false);
@@ -370,7 +425,7 @@ export default function AnimalDetailPage({
         // Fetch species health info
         try {
           const healthData = await api.getSpeciesHealth(animalData.speciesId, undefined, resolvedParams.locale);
-          setSpeciesHealth(healthData);
+          setSpeciesHealth(healthData as SpeciesHealthData);
         } catch (e) {
           console.error('Error fetching species health:', e);
         }
@@ -378,7 +433,7 @@ export default function AnimalDetailPage({
         // Fetch species legislation info (API returns { editorial: [{ country, status, details, sources }] })
         try {
           const legislationData = await api.getSpeciesLegislation(String(animalData.speciesId));
-          setSpeciesLegislation(legislationData);
+          setSpeciesLegislation(legislationData as SpeciesLegislationData);
         } catch (e) {
           console.error('Error fetching species legislation:', e);
         }
@@ -386,7 +441,7 @@ export default function AnimalDetailPage({
         // Fetch species equipment recommendations
         try {
           const equipmentData = await api.getRecommendedEquipment(animalData.speciesId);
-          setSpeciesEquipment(equipmentData);
+          setSpeciesEquipment(equipmentData as SpeciesEquipmentData);
         } catch (e) {
           console.error('Error fetching species equipment:', e);
         }
@@ -394,7 +449,7 @@ export default function AnimalDetailPage({
         // Fetch species food recommendations
         try {
           const speciesName = speciesData.canonicalName || speciesData.scientificName;
-          const foodData = await api.getFoodBySpecies(speciesName) as { products?: any[] };
+          const foodData = await api.getFoodBySpecies(speciesName) as { products?: SpeciesFoodProduct[] };
           setSpeciesFood(foodData.products || []);
         } catch (e) {
           console.error('Error fetching species food:', e);
@@ -784,7 +839,7 @@ export default function AnimalDetailPage({
   };
 
   const getHealthRecordTypeName = (type: string): string => {
-    const key = `animals.healthRecordTypes.${type}` as any;
+    const key = `animals.healthRecordTypes.${type}` as Parameters<typeof t>[0];
     const translated = t(key);
     return translated !== key ? translated : type;
   };
@@ -1690,7 +1745,7 @@ export default function AnimalDetailPage({
                           {t('species.commonDiseases')}
                         </h3>
                         <ul className="space-y-2">
-                          {speciesHealth.editorial.diseases.map((disease: any, idx: number) => (
+                          {speciesHealth.editorial.diseases.map((disease, idx: number) => (
                             <li key={idx} className="text-sm text-gray-700 dark:text-gray-300">
                               <strong>{disease.name}</strong>
                               {disease.symptoms && ` - ${disease.symptoms}`}
@@ -1713,7 +1768,7 @@ export default function AnimalDetailPage({
                   ) : (
                     <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
                       <li>Maintenez un environnement adapté (température, humidité)</li>
-                      <li>Suivez un programme d'alimentation régulier</li>
+                      <li>Suivez un programme d&apos;alimentation régulier</li>
                       <li>Vérifiez les équipements (UVB, chauffage) régulièrement</li>
                       <li>Surveillez les signes de maladie</li>
                     </ul>
@@ -1801,7 +1856,7 @@ export default function AnimalDetailPage({
                   <div className="space-y-4">
                     {speciesHealth?.editorial?.diseases && speciesHealth.editorial.diseases.length > 0 ? (
                       <div className="space-y-4">
-                        {speciesHealth.editorial.diseases.map((disease: any, idx: number) => (
+                        {speciesHealth.editorial.diseases.map((disease, idx: number) => (
                           <div key={idx}>
                             <h3 className="font-semibold text-gray-800 dark:text-white">{disease.name}</h3>
                             {disease.symptoms && (
@@ -1832,7 +1887,7 @@ export default function AnimalDetailPage({
                 {activeTab === 'legislation' && (
                   <div className="space-y-4">
                     {speciesLegislation?.editorial && speciesLegislation.editorial.length > 0 ? (
-                      speciesLegislation.editorial.map((item: { country: string; status: string; details?: { citesAppendix?: string | null; euAnnex?: string | null; permits?: string[]; restrictions?: string[] }; sources?: string[] }) => (
+                      speciesLegislation.editorial.map((item) => (
                         <div key={item.country} className="p-4 rounded-xl bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600">
                           <div className="flex items-center gap-2 mb-2">
                             <span className="font-semibold text-gray-800 dark:text-white">
@@ -1893,7 +1948,7 @@ export default function AnimalDetailPage({
                   <div className="space-y-3">
                     {speciesEquipment?.recommendations && speciesEquipment.recommendations.length > 0 ? (
                       <div className="space-y-3">
-                        {speciesEquipment.recommendations.map((equipment: any, idx: number) => (
+                        {speciesEquipment.recommendations.map((equipment, idx: number) => (
                           <div key={idx} className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                             <p className="font-semibold text-gray-800 dark:text-white">{equipment.label}</p>
                             <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -1914,7 +1969,7 @@ export default function AnimalDetailPage({
                   <div className="space-y-3">
                     {speciesFood && speciesFood.length > 0 ? (
                       <div className="space-y-3">
-                        {speciesFood.slice(0, 5).map((food: any, idx: number) => (
+                        {speciesFood.slice(0, 5).map((food, idx: number) => (
                           <div key={idx} className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                             <p className="font-semibold text-gray-800 dark:text-white">
                               {food.product_name || food.name}
@@ -3050,7 +3105,7 @@ export default function AnimalDetailPage({
                     className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:bg-gray-700 dark:text-white"
                   >
                     {[0, 1, 2, 3, 4, 5, 6].map((d) => (
-                      <option key={d} value={d}>{t(`notifications.weekDay${d}` as any)}</option>
+                      <option key={d} value={d}>{t(`notifications.weekDay${d}` as Parameters<typeof t>[0])}</option>
                     ))}
                   </select>
                 </div>
@@ -4556,7 +4611,7 @@ export default function AnimalDetailPage({
               </div>
             ) : (
               <div className="space-y-3">
-                {history.map((entry: any) => (
+                {history.map((entry) => (
                   <div
                     key={entry.id}
                     className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-700/50"

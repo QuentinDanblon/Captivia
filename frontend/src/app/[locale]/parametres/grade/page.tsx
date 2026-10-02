@@ -124,7 +124,7 @@ export default function GradePage() {
 
   const displayGrade = grade ?? DEFAULT_GRADE;
   const gradeLabelKey = displayGrade.grade ? `grade.${displayGrade.grade}` : '';
-  const gradeLabel = gradeLabelKey ? t(gradeLabelKey as any) : displayGrade.grade;
+  const gradeLabel = gradeLabelKey ? t(gradeLabelKey as Parameters<typeof t>[0]) : displayGrade.grade;
 
   /** Couleur de la barre selon le pourcentage acquis (0→rouge/ambre, 50→jaune, 75→vert clair, 100→vert) */
   const progressBarColor = (pct: number) => {
@@ -211,7 +211,7 @@ export default function GradePage() {
               <>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
                   {displayGrade.points} / {displayGrade.points - displayGrade.pointsInCurrent + displayGrade.pointsNeededForNext}{' '}
-                  {t('grade.points')} → {t(`grade.${displayGrade.nextGrade}` as any)}
+                  {t('grade.points')} → {t(`grade.${displayGrade.nextGrade}` as Parameters<typeof t>[0])}
                 </p>
                 <div
                   className="w-full h-6 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600"
@@ -235,7 +235,7 @@ export default function GradePage() {
             ) : (
               <>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                  {displayGrade.points} {t('grade.points')} — {t(`grade.${displayGrade.grade}` as any)} max
+                  {displayGrade.points} {t('grade.points')} — {t(`grade.${displayGrade.grade}` as Parameters<typeof t>[0])} max
                 </p>
                 <div
                   className="w-full h-6 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600"

@@ -1,4 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { useLocale } from 'next-intl';
+import { useRouter, usePathname } from 'next/navigation';
 import { LanguageSelector } from '../LanguageSelector';
 
 // Mock next-intl/routing (ESM) so i18n/routing can load
@@ -55,8 +57,7 @@ describe('LanguageSelector', () => {
 
   it('should call router.push when language changes', () => {
     const mockPush = jest.fn();
-    const mockUseRouter = require('next/navigation').useRouter;
-    mockUseRouter.mockReturnValue({ push: mockPush });
+    jest.mocked(useRouter).mockReturnValue({ push: mockPush } as unknown as ReturnType<typeof useRouter>);
     
     render(<LanguageSelector />);
     
@@ -68,11 +69,9 @@ describe('LanguageSelector', () => {
 
   it('should handle locale change from fr to en', () => {
     const mockPush = jest.fn();
-    const mockUseRouter = require('next/navigation').useRouter;
-    mockUseRouter.mockReturnValue({ push: mockPush });
+    jest.mocked(useRouter).mockReturnValue({ push: mockPush } as unknown as ReturnType<typeof useRouter>);
     
-    const mockUsePathname = require('next/navigation').usePathname;
-    mockUsePathname.mockReturnValue('/mes-animaux');
+    jest.mocked(usePathname).mockReturnValue('/mes-animaux');
     
     render(<LanguageSelector />);
     
@@ -84,14 +83,11 @@ describe('LanguageSelector', () => {
 
   it('should remove locale prefix when changing to fr (default locale)', () => {
     const mockPush = jest.fn();
-    const mockUseRouter = require('next/navigation').useRouter;
-    mockUseRouter.mockReturnValue({ push: mockPush });
+    jest.mocked(useRouter).mockReturnValue({ push: mockPush } as unknown as ReturnType<typeof useRouter>);
     
-    const mockUseLocale = require('next-intl').useLocale;
-    mockUseLocale.mockReturnValue('en');
+    jest.mocked(useLocale).mockReturnValue('en');
     
-    const mockUsePathname = require('next/navigation').usePathname;
-    mockUsePathname.mockReturnValue('/en/species/123');
+    jest.mocked(usePathname).mockReturnValue('/en/species/123');
     
     render(<LanguageSelector />);
     
@@ -103,11 +99,9 @@ describe('LanguageSelector', () => {
 
   it('should preserve pathname structure when changing language', () => {
     const mockPush = jest.fn();
-    const mockUseRouter = require('next/navigation').useRouter;
-    mockUseRouter.mockReturnValue({ push: mockPush });
+    jest.mocked(useRouter).mockReturnValue({ push: mockPush } as unknown as ReturnType<typeof useRouter>);
     
-    const mockUsePathname = require('next/navigation').usePathname;
-    mockUsePathname.mockReturnValue('/fr/species/123');
+    jest.mocked(usePathname).mockReturnValue('/fr/species/123');
     
     render(<LanguageSelector />);
     
