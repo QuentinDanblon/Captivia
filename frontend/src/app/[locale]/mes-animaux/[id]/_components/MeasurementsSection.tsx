@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { api, type Animal, type AnimalMeasurement } from '@/lib/api';
-import { useAuth } from '@/contexts/AuthContext';
 import { useFormatters } from './useFormatters';
 import WeightChart from '@/components/WeightChart';
 
@@ -21,7 +20,6 @@ interface Props {
 
 export default function MeasurementsSection({ animal, token, measurements, loading: measurementsLoading, error: measurementsError, locked: measurementsLocked, onLocked, onRefresh }: Props) {
   const t = useTranslations();
-  const { user } = useAuth();
   const { formatDate } = useFormatters();
   const [showMeasurementModal, setShowMeasurementModal] = useState(false);
   const [editingMeasurementId, setEditingMeasurementId] = useState<string | null>(null);
@@ -36,7 +34,8 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
   const [measurementDeletingId, setMeasurementDeletingId] = useState<string | null>(null);
 
   const openMeasurementModalForCreate = () => {
-    if (!user?.isPremium || measurementsLocked) return;
+    // D-16 : carnet complet sans Premium (seul un refus de l'API verrouille la section).
+    if (measurementsLocked) return;
     setEditingMeasurementId(null);
     setMeasurementDate(new Date().toISOString().slice(0, 10));
     setMeasurementWeight('');
@@ -47,7 +46,8 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
   };
 
   const openMeasurementModalForEdit = (measurement: AnimalMeasurement) => {
-    if (!user?.isPremium || measurementsLocked) return;
+    // D-16 : carnet complet sans Premium (seul un refus de l'API verrouille la section).
+    if (measurementsLocked) return;
     setEditingMeasurementId(measurement.id);
     setMeasurementDate(measurement.measuredAt ? measurement.measuredAt.slice(0, 10) : new Date().toISOString().slice(0, 10));
     setMeasurementWeight(typeof measurement.weightKg === 'number' ? String(measurement.weightKg) : '');

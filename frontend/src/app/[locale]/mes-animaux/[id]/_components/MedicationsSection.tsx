@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { api, type Animal, type Medication } from '@/lib/api';
-import { useAuth } from '@/contexts/AuthContext';
 import { useFormatters } from './useFormatters';
 
 interface Props {
@@ -20,7 +19,6 @@ interface Props {
 
 export default function MedicationsSection({ animal, token, medications, loading: medicationsLoading, error: medicationsError, locked: medicationsLocked, onLocked, onRefresh }: Props) {
   const t = useTranslations();
-  const { user } = useAuth();
   const { formatDate } = useFormatters();
   const [showMedicationModal, setShowMedicationModal] = useState(false);
   const [medicationName, setMedicationName] = useState('');
@@ -48,7 +46,8 @@ export default function MedicationsSection({ animal, token, medications, loading
   };
 
   const openMedicationModalForCreate = () => {
-    if (!user?.isPremium || medicationsLocked) return;
+    // D-16 : carnet complet sans Premium (seul un refus de l'API verrouille la section).
+    if (medicationsLocked) return;
     setMedicationName('');
     setMedicationDose('');
     setMedicationUnit('');

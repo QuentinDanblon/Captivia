@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { api, type Animal, type Vaccination } from '@/lib/api';
-import { useAuth } from '@/contexts/AuthContext';
 import { useFormatters } from './useFormatters';
 
 interface Props {
@@ -20,7 +19,6 @@ interface Props {
 
 export default function VaccinationsSection({ animal, token, vaccinations, loading: vaccinationsLoading, error: vaccinationsError, locked: vaccinationsLocked, onLocked, onRefresh }: Props) {
   const t = useTranslations();
-  const { user } = useAuth();
   const { formatDate } = useFormatters();
   const [showVaccinationModal, setShowVaccinationModal] = useState(false);
   const [editingVaccinationId, setEditingVaccinationId] = useState<string | null>(null);
@@ -37,7 +35,8 @@ export default function VaccinationsSection({ animal, token, vaccinations, loadi
   const [vaccinationDeletingId, setVaccinationDeletingId] = useState<string | null>(null);
 
   const openVaccinationModalForCreate = () => {
-    if (!user?.isPremium || vaccinationsLocked) return;
+    // D-16 : carnet complet sans Premium (seul un refus de l'API verrouille la section).
+    if (vaccinationsLocked) return;
     setEditingVaccinationId(null);
     setVaccinationName('');
     setVaccinationDate(new Date().toISOString().slice(0, 10));
@@ -50,7 +49,8 @@ export default function VaccinationsSection({ animal, token, vaccinations, loadi
   };
 
   const openVaccinationModalForEdit = (vaccination: Vaccination) => {
-    if (!user?.isPremium || vaccinationsLocked) return;
+    // D-16 : carnet complet sans Premium (seul un refus de l'API verrouille la section).
+    if (vaccinationsLocked) return;
     setEditingVaccinationId(vaccination.id);
     setVaccinationName(vaccination.name || '');
     setVaccinationDate(vaccination.date ? vaccination.date.slice(0, 10) : '');
