@@ -1,0 +1,27 @@
+{
+  "total": 2,
+  "source": "fixture",
+  "results": [
+    {
+      "key": 2435099,
+      "scientificName": "Boa constrictor Linnaeus, 1758",
+      "canonicalName": "Boa constrictor",
+      "vernacularNames": ["Boa constricteur"],
+      "class": "Reptilia",
+      "order": "Squamata",
+      "family": "Boidae",
+      "rank": "SPECIES",
+      "iucnStatus": "LC"
+    },
+    {
+      "key": 2435100,
+      "scientificName": "Boa imperator Daudin, 1803",
+      "canonicalName": "Boa imperator",
+      "vernacularNames": ["Boa impérial"],
+      "class": "Reptilia",
+      "order": "Squamata",
+      "family": "Boidae",
+      "rank": "SPECIES"
+    }
+  ]
+}
