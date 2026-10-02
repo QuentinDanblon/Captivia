@@ -42,6 +42,27 @@ describe('envValidationSchema', () => {
       expect(error?.message).toContain('JWT_SECRET');
     });
 
+    it('IAP_ENABLED=true exige REVENUECAT_WEBHOOK_SECRET (≥ 32) ; sinon facultatif (W6-08)', () => {
+      expect(validate(baseProd).error).toBeUndefined();
+      expect(
+        validate({ ...baseProd, IAP_ENABLED: 'true' }).error?.message,
+      ).toContain('REVENUECAT_WEBHOOK_SECRET');
+      expect(
+        validate({
+          ...baseProd,
+          IAP_ENABLED: 'true',
+          REVENUECAT_WEBHOOK_SECRET: 'short',
+        }).error?.message,
+      ).toContain('REVENUECAT_WEBHOOK_SECRET');
+      expect(
+        validate({
+          ...baseProd,
+          IAP_ENABLED: 'true',
+          REVENUECAT_WEBHOOK_SECRET: STRONG_SECRET,
+        }).error,
+      ).toBeUndefined();
+    });
+
     it('accepte un JWT_SECRET de 32 caractères', () => {
       const { error } = validate({ ...baseProd, JWT_SECRET: 'a1'.repeat(16) });
       expect(error).toBeUndefined();

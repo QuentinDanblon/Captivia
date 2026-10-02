@@ -14,6 +14,7 @@ import { MailService } from '../mail/mail.service';
 import { Prisma, User } from '@prisma/client';
 import {
   effectivePremium,
+  entitledSubscriptionsSelect,
   hasLegacyOperatorEmailsEnv,
 } from '../common/operators';
 import { RegisterDto } from './dto/register.dto';
@@ -116,6 +117,7 @@ export class AuthService implements OnModuleInit {
 
     const user = await this.prisma.user.findUnique({
       where: { email },
+      include: { subscriptions: entitledSubscriptionsSelect() },
     });
 
     // Toujours exécuter un bcrypt.compare (hash factice si compte inconnu) :
@@ -140,6 +142,8 @@ export class AuthService implements OnModuleInit {
   async validateUser(userId: string, tokenVersion = 0) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
+      // Abonnements store non échus (W6-08) : premium calculé sans requête supplémentaire.
+      include: { subscriptions: entitledSubscriptionsSelect() },
     });
 
     if (!user || user.tokenVersion !== tokenVersion) {
@@ -273,7 +277,11 @@ export class AuthService implements OnModuleInit {
     return this.jwtService.sign(payload);
   }
 
-  private buildAuthResponse(user: User) {
+  private buildAuthResponse(
+    user: User & {
+      subscriptions?: { status: string; currentPeriodEnd: Date | null }[];
+    },
+  ) {
     return {
       accessToken: this.signAccessToken(user),
       user: {

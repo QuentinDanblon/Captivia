@@ -47,6 +47,77 @@ model User {
   notificationPreferences NotificationPreference[]
   notificationEvents      NotificationEvent[]
   passwordResetTokens     PasswordResetToken[]
+  subscriptions           Subscription[]
+  paymentEvents           PaymentEvent[]
+}
+
+// ============================================
+// Achats intégrés (W6-08) — App Store / Google Play via RevenueCat
+// ============================================
+
+enum SubscriptionSource {
+  APPLE
+  GOOGLE
+  MANUAL
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  IN_GRACE_PERIOD
+  CANCELLED
+  EXPIRED
+  BILLING_ISSUE
+  REFUNDED
+}
+
+enum SubscriptionEnvironment {
+  SANDBOX
+  PRODUCTION
+}
+
+/// Abonnement store (une ligne par achat d'origine). Donne accès au premium tant que
+/// status ∈ {ACTIVE, IN_GRACE_PERIOD, CANCELLED} ET currentPeriodEnd > maintenant.
+model Subscription {
+  id                    String                  @id @default(uuid())
+  userId                String
+  source                SubscriptionSource
+  productId             String
+  entitlement           String                  @default("premium")
+  status                SubscriptionStatus
+  /// Identifiant de l'achat d'origine chez le store (stable entre renouvellements).
+  originalTransactionId String
+  currentPeriodEnd      DateTime?               @db.Timestamptz(3)
+  willRenew             Boolean                 @default(false)
+  environment           SubscriptionEnvironment @default(PRODUCTION)
+  lastEventId           String?
+  /// event_timestamp_ms du dernier événement appliqué : les événements plus anciens sont ignorés.
+  lastEventAt           DateTime?               @db.Timestamptz(3)
+  createdAt             DateTime                @default(now()) @db.Timestamptz(3)
+  updatedAt             DateTime                @updatedAt @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([source, originalTransactionId])
+  @@index([userId, status, currentPeriodEnd])
+}
+
+/// Journal des notifications de paiement reçues (idempotence par eventId).
+/// userId passe à NULL à la suppression du compte (le payload ne contient pas d'e-mail).
+model PaymentEvent {
+  id         String   @id @default(uuid())
+  provider   String
+  eventId    String   @unique
+  type       String
+  userId     String?
+  /// applied | duplicate | ignored_stale | ignored_unknown_user | ignored_entitlement | ignored_store | ignored_type
+  outcome    String   @default("applied")
+  payload    Json
+  receivedAt DateTime @default(now()) @db.Timestamptz(3)
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([receivedAt])
 }
 
 model PasswordResetToken {

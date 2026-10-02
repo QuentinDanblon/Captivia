@@ -8,12 +8,12 @@ import { randomBytes } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAnimalDto, UpdateAnimalDto } from './dto/animal.dto';
 import { ensureAnimalOwnership } from '../common/helpers/ownership.helper';
-import { effectivePremium } from '../common/operators';
 import {
-  PaginationQueryDto,
-  toPage,
-} from '../common/dto/pagination-query.dto';
-
+  effectivePremium,
+  entitledSubscriptionsSelect,
+} from '../common/operators';
+import { EntitlementService } from '../entitlement/entitlement.service';
+import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 
 const FREE_ANIMAL_LIMIT = 1;
 
@@ -37,7 +37,7 @@ export interface PublicLinkState {
   url: string | null;
 }
 
-/** Premium effectif : abonnement actif OU rôle opérateur (source unique : common/operators). */
+/** Premium effectif : rôle opérateur, activation manuelle ou abonnement store non échu (common/operators). */
 export const isEffectivelyPremium = effectivePremium;
 
 /** URL de base publique, construite côté serveur uniquement (jamais depuis le client). */
@@ -76,7 +76,10 @@ const PARENT_SELECT = {
 
 @Injectable()
 export class AnimalsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly entitlement: EntitlementService,
+  ) {}
 
   async create(userId: string, createAnimalDto: CreateAnimalDto) {
     return this.prisma.$transaction(async (tx) => {
@@ -100,8 +103,10 @@ export class AnimalsService {
       }
 
       if (
+        user._count.animals >= FREE_ANIMAL_LIMIT &&
         !isEffectivelyPremium(user) &&
-        user._count.animals >= FREE_ANIMAL_LIMIT
+        // Abonnement store (W6-08) : requête unique dans la transaction verrouillée.
+        !(await this.entitlement.isPremium(userId, tx))
       ) {
         throw new ForbiddenException(
           'Free users can only have 1 animal. Upgrade to premium for unlimited animals.',
@@ -378,11 +383,7 @@ export class AnimalsService {
   }
 
   private async assertPremium(userId: string): Promise<void> {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
-      select: { isPremium: true, role: true },
-    });
-    if (!user || !isEffectivelyPremium(user)) {
+    if (!(await this.entitlement.isPremium(userId))) {
       throw new ForbiddenException(
         'Premium subscription required to share a public page for your animal.',
       );
@@ -496,7 +497,13 @@ export class AnimalsService {
         birthDate: true,
         photos: true,
         publicShowHealth: true,
-        user: { select: { isPremium: true, role: true } },
+        user: {
+          select: {
+            isPremium: true,
+            role: true,
+            subscriptions: entitledSubscriptionsSelect(),
+          },
+        },
         speciesProfile: {
           select: { commonNameFr: true, scientificName: true },
         },

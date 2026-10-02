@@ -52,6 +52,16 @@ services:
       # Facultatifs — à renseigner dans le Dashboard quand disponibles.
       - key: SENTRY_DSN
         sync: false
+      # Achats intégrés (W6-08, docs/PAYMENTS.md) : IAP_ENABLED=true rend
+      # REVENUECAT_WEBHOOK_SECRET obligatoire (≥ 32 caractères) au démarrage.
+      - key: IAP_ENABLED
+        sync: false
+      - key: REVENUECAT_WEBHOOK_SECRET
+        sync: false
+      - key: REVENUECAT_ENTITLEMENT_ID
+        sync: false
+      - key: GOOGLE_PLAY_PACKAGE_NAME
+        sync: false
       - key: SENTRY_TRACES_SAMPLE_RATE
         sync: false
       - key: MAIL_HOST

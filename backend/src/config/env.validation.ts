@@ -97,4 +97,17 @@ export const envValidationSchema = Joi.object({
   REDIS_ENABLED: Joi.string().valid('true', 'false').default('false'),
   REDIS_HOST: Joi.string().default('localhost'),
   REDIS_PORT: Joi.number().default(6379),
+  /** Achats intégrés (W6-08) : active l'exigence du secret webhook RevenueCat en production. */
+  IAP_ENABLED: Joi.string().valid('true', 'false').default('false'),
+  REVENUECAT_WEBHOOK_SECRET: Joi.when('NODE_ENV', {
+    is: isProduction,
+    then: Joi.when('IAP_ENABLED', {
+      is: 'true',
+      then: Joi.string().trim().min(32).required(),
+      otherwise: Joi.string().allow('').optional(),
+    }),
+    otherwise: Joi.string().allow('').optional(),
+  }),
+  REVENUECAT_ENTITLEMENT_ID: Joi.string().trim().default('premium'),
+  GOOGLE_PLAY_PACKAGE_NAME: Joi.string().allow('').optional(),
 });
