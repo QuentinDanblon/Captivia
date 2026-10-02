@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { api } from '@/lib/api';
-import Link from 'next/link';
-import { localizedPath } from '@/lib/legal';
+import { Link } from '@/i18n/navigation';
 
 interface AffiliateStore {
   id: string;
@@ -40,7 +39,6 @@ function safeHref(url: string): string {
 
 export default function MagasinPage() {
   const t = useTranslations();
-  const locale = useLocale();
   const [stores, setStores] = useState<AffiliateStore[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -167,7 +165,7 @@ export default function MagasinPage() {
           <p className="text-sm text-amber-800 dark:text-amber-200 mt-1">
             {t('store.disclaimer')}
           </p>
-          <Link href={localizedPath(locale, '/transparency')} className="text-sm text-emerald-700 dark:text-emerald-300 underline-offset-2 hover:underline mt-2 inline-block">
+          <Link href="/transparency" className="text-sm text-emerald-700 dark:text-emerald-300 underline-offset-2 hover:underline mt-2 inline-block">
             {t('footer.transparency')}
           </Link>
         </div>

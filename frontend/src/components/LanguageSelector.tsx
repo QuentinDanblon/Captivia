@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/navigation';
 import { locales, type Locale } from '../../i18n/routing';
 
 const languageNames: Record<Locale, string> = {
@@ -20,15 +20,10 @@ export function LanguageSelector() {
   const pathname = usePathname();
 
   const handleChange = (newLocale: string) => {
-    // Remove current locale from pathname if present
-    const pathWithoutLocale = pathname.replace(/^\/(fr|en|es|de|it|pt)/, '');
-    
-    // Navigate to new locale
-    const newPath = newLocale === 'fr' 
-      ? pathWithoutLocale || '/'
-      : `/${newLocale}${pathWithoutLocale || '/'}`;
-    
-    router.push(newPath);
+    // La navigation next-intl gère le préfixe de locale (as-needed) et met à jour
+    // le cookie NEXT_LOCALE ; on conserve la query string courante.
+    const search = typeof window !== 'undefined' ? window.location.search : '';
+    router.replace(`${pathname}${search}`, { locale: newLocale as Locale });
   };
 
   return (

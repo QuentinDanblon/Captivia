@@ -6,9 +6,9 @@ jest.mock('@sentry/nextjs', () => ({
 }));
 
 // next-intl est mocké globalement (jest.setup.ts) : t(key) renvoie la clé ; on ajoute useLocale.
-jest.mock('next/link', () => ({
+jest.mock('@/i18n/navigation', () => ({
   __esModule: true,
-  default: ({ href, children, ...rest }: { href: string; children: React.ReactNode }) => (
+  Link: ({ href, children, ...rest }: { href: string; children: React.ReactNode }) => (
     <a href={href} {...rest}>
       {children}
     </a>
@@ -24,12 +24,12 @@ describe('pages d\'erreur', () => {
     captureException.mockClear();
   });
 
-  it('not-found : titre, description et lien vers l\'accueil de la locale', () => {
+  it('not-found : titre, description et lien vers l\'accueil (le Link next-intl ajoute la locale)', () => {
     render(<LocaleNotFound />);
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('notFoundTitle');
     expect(screen.getByText('notFoundDescription')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'backHome' })).toHaveAttribute('href', '/fr');
+    expect(screen.getByRole('link', { name: 'backHome' })).toHaveAttribute('href', '/');
   });
 
   it('error : affiche un message traduit sans fuite du message technique, et réessaie', async () => {

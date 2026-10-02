@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { api, type SearchSpeciesFilters } from '@/lib/api';
 import { getTaxonomyLabel } from '@/lib/taxonomy';
 import { ArrowRight, Bird, Bug, CircleDot, Fish, Leaf, Rabbit, Search, Sparkles, Turtle } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 const animalTypes = [
   { label: 'Reptile', value: 'Reptilia', icon: Turtle, tone: 'mint' },

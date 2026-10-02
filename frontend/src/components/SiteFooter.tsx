@@ -1,12 +1,12 @@
-import Link from 'next/link';
-import { getLocale, getTranslations } from 'next-intl/server';
-import { LEGAL, LEGAL_ROUTES, contactMailto, localizedPath } from '@/lib/legal';
+import { Link } from '@/i18n/navigation';
+import { getTranslations } from 'next-intl/server';
+import { LEGAL, LEGAL_ROUTES, contactMailto } from '@/lib/legal';
 
 /** Pied de page global (Server Component) : liens légaux et mention d'affiliation Amazon. */
 export async function SiteFooter() {
-  const locale = await getLocale();
   const t = await getTranslations('footer');
-  const href = (path: string) => localizedPath(locale, path);
+  // Le Link next-intl ajoute lui-même le préfixe de locale.
+  const href = (path: string) => path;
   const mailto = contactMailto();
 
   const links: { label: string; path: string }[] = [

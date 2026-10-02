@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
-import { LEGAL, LEGAL_ROUTES, contactMailto, localizedPath } from '@/lib/legal';
+import { LEGAL, LEGAL_ROUTES, contactMailto } from '@/lib/legal';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -30,7 +30,8 @@ export default async function TransparencyPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'transparency' });
   const tFooter = await getTranslations({ locale, namespace: 'footer' });
-  const href = (path: string) => localizedPath(locale, path);
+  // Le Link next-intl ajoute lui-même le préfixe de locale.
+  const href = (path: string) => path;
   const mailto = contactMailto();
   const settingsLink = (chunks: ReactNode) => (
     <Link href={href(LEGAL_ROUTES.accountSettings)} className={linkClass}>

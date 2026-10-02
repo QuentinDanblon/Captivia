@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { ArrowRight, Home, Leaf, LogIn, LogOut, Menu, PawPrint, Settings2, ShoppingBag, X } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 export function AppHeader() {
   const t = useTranslations();

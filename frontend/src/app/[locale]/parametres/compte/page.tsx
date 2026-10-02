@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef, useId } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { Link, useRouter, usePathname } from '@/i18n/navigation';
+import type { Locale } from '../../../../../i18n/routing';
 import { useAuth } from '@/contexts/AuthContext';
-import Link from 'next/link';
 import { api } from '@/lib/api';
 import {
   AccountApiError,
@@ -193,20 +193,9 @@ export default function ComptePage() {
   const handleLocaleChange = (newLocale: string) => {
     setSelectedLocale(newLocale);
     
-    // Navigate to new locale path
-    const currentLocaleMatch = pathname.match(/^\/([a-z]{2})\//);
-    const currentLocale = currentLocaleMatch ? currentLocaleMatch[1] : 'fr';
-    
-    if (newLocale === 'fr') {
-      // French is default, remove locale prefix
-      const newPath = pathname.replace(`/${currentLocale}/`, '/');
-      router.push(newPath);
-    } else {
-      const newPath = currentLocale === 'fr' 
-        ? `/${newLocale}${pathname}`
-        : pathname.replace(`/${currentLocale}/`, `/${newLocale}/`);
-      router.push(newPath);
-    }
+    // La navigation next-intl gère le préfixe de locale ; on conserve la query string.
+    const search = typeof window !== 'undefined' ? window.location.search : '';
+    router.replace(`${pathname}${search}`, { locale: newLocale as Locale });
     
     setToast(t('common.languageSaved'));
   };

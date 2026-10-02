@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 export default function LoginPage() {
   const t = useTranslations();

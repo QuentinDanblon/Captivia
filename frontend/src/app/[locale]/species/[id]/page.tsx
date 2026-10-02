@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 import { api, type SpeciesReproduction } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
 import * as Tabs from '@radix-ui/react-tabs';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link } from '@/i18n/navigation';
+import { useRouter } from '@/i18n/navigation';
 
 interface Disease {
   name: string;
