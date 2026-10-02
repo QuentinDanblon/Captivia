@@ -15,26 +15,103 @@ export function isBackendUnavailable(err: unknown): boolean {
   return err instanceof Error && err.message === BACKEND_UNAVAILABLE_MESSAGE;
 }
 
-async function safeFetch(url: string, init?: RequestInit): Promise<Response> {
+/** Délai maximal d'une requête vers l'API (le navigateur n'en impose pas de raisonnable). */
+const REQUEST_TIMEOUT_MS = 15_000;
+
+/** Erreur HTTP renvoyée par l'API : `status` permet aux appelants de distinguer 401 / 403 / 404… */
+export class ApiError extends Error {
+  readonly status: number;
+
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+  }
+}
+
+export interface RequestOptions {
+  /** Délai maximal en ms (15 s par défaut). */
+  timeoutMs?: number;
+  /**
+   * Émettre `auth:logout` sur une réponse 401. Par défaut : uniquement si la requête porte un
+   * en-tête Authorization. À désactiver pour les endpoints où 401 signifie autre chose qu'une
+   * session expirée (ex. mot de passe actuel incorrect). Jamais déclenché sur 403.
+   */
+  logoutOn401?: boolean;
+}
+
+function timeoutSignal(ms: number): AbortSignal {
+  if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
+    return AbortSignal.timeout(ms);
+  }
+  const controller = new AbortController();
+  setTimeout(() => controller.abort(), ms);
+  return controller.signal;
+}
+
+function hasAuthorization(init?: RequestInit): boolean {
+  const headers = init?.headers;
+  if (!headers) return false;
+  if (typeof Headers !== 'undefined' && headers instanceof Headers) return headers.has('Authorization');
+  if (Array.isArray(headers)) return headers.some(([k]) => k.toLowerCase() === 'authorization');
+  return Object.keys(headers).some((k) => k.toLowerCase() === 'authorization');
+}
+
+function isTimeoutError(err: unknown): boolean {
+  const name = typeof err === 'object' && err !== null ? (err as { name?: string }).name : undefined;
+  return name === 'TimeoutError' || name === 'AbortError';
+}
+
+/** Session expirée / invalide : AuthContext écoute cet événement et vide la session. */
+function notifyUnauthorized() {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event('auth:logout'));
+  }
+}
+
+async function safeFetch(url: string, init?: RequestInit, options: RequestOptions = {}): Promise<Response> {
+  const { timeoutMs = REQUEST_TIMEOUT_MS, logoutOn401 } = options;
+  let response: Response;
   try {
-    return await fetch(url, init);
+    response = await fetch(url, { ...init, signal: init?.signal ?? timeoutSignal(timeoutMs) });
   } catch (err) {
-    if (isNetworkError(err)) {
+    if (isNetworkError(err) || isTimeoutError(err)) {
       throw new Error(BACKEND_UNAVAILABLE_MESSAGE);
     }
     throw err;
   }
+  if (response.status === 401 && (logoutOn401 ?? hasAuthorization(init))) {
+    notifyUnauthorized();
+  }
+  return response;
 }
 
-async function fetchJson<T>(url: string): Promise<T> {
-  const response = await safeFetch(url);
-  const data = await response.json().catch(() => ({}));
+async function readJson(response: Response): Promise<unknown> {
+  try {
+    return await response.json();
+  } catch {
+    return {};
+  }
+}
+
+function errorMessage(data: unknown, response: Response): string {
+  const raw = (data as { message?: unknown } | null)?.message;
+  if (Array.isArray(raw) && raw.length > 0) return raw.map(String).join(' ; ');
+  if (typeof raw === 'string' && raw) return raw;
+  return response.statusText || `Erreur ${response.status}`;
+}
+
+/**
+ * Point d'entrée unique des appels JSON : vérifie `res.ok`, applique le timeout de 15 s, lève
+ * `ApiError {status, message}` et signale les sessions expirées (401 authentifié -> `auth:logout`).
+ * Un corps vide ou non JSON sur une réponse OK donne `{}`.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- conserve les signatures exportées (réponses non typées)
+async function request<T = any>(url: string, init?: RequestInit, options?: RequestOptions): Promise<T> {
+  const response = await safeFetch(url, init, options);
+  const data = await readJson(response);
   if (!response.ok) {
-    const message =
-      (data as { message?: string })?.message ||
-      response.statusText ||
-      `Erreur ${response.status}`;
-    throw new Error(message);
+    throw new ApiError(response.status, errorMessage(data, response));
   }
   return data as T;
 }
@@ -176,58 +253,37 @@ export const api = {
       if (filters.iucnStatus) params.set('iucnStatus', filters.iucnStatus);
       if (filters.country) params.set('country', filters.country);
     }
-    try {
-      const response = await safeFetch(
-        `${API_URL}/species/search?${params.toString()}`
-      );
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        const message =
-          (data as { message?: string })?.message ||
-          response.statusText ||
-          `Erreur ${response.status}`;
-        throw new Error(message);
-      }
-      return data as { results?: unknown[]; total?: number; source?: string };
-    } catch (err) {
-      const isNetworkError =
-        err instanceof TypeError &&
-        (err.message === 'Failed to fetch' || err.message === 'Load failed');
-      if (isNetworkError) {
-        throw new Error(BACKEND_UNAVAILABLE_MESSAGE);
-      }
-      throw err;
-    }
+    return request<{ results?: unknown[]; total?: number; source?: string }>(
+      `${API_URL}/species/search?${params.toString()}`
+    );
   },
 
   getSpecies: async (id: string) => {
-    return fetchJson(`${API_URL}/species/${id}`);
+    return request(`${API_URL}/species/${id}`);
   },
 
   getVernacularNames: async (id: string) => {
-    return fetchJson(`${API_URL}/species/${id}/vernacular`);
+    return request(`${API_URL}/species/${id}/vernacular`);
   },
 
   getIucn: async (id: string) => {
-    return fetchJson(`${API_URL}/species/${id}/iucn`);
+    return request(`${API_URL}/species/${id}/iucn`);
   },
 
   getDistributions: async (id: string) => {
-    return fetchJson(`${API_URL}/species/${id}/distributions`);
+    return request(`${API_URL}/species/${id}/distributions`);
   },
 
   getMedia: async (id: string) => {
-    return fetchJson(`${API_URL}/species/${id}/media`);
+    return request(`${API_URL}/species/${id}/media`);
   },
 
   getMetrics: async (id: string) => {
-    const response = await safeFetch(`${API_URL}/species/${id}/metrics`);
-    return response.json();
+    return request(`${API_URL}/species/${id}/metrics`);
   },
 
   countOccurrences: async (id: string) => {
-    const response = await safeFetch(`${API_URL}/species/${id}/occurrences/count`);
-    return response.json();
+    return request(`${API_URL}/species/${id}/occurrences/count`);
   },
 
   // Health endpoints
@@ -235,13 +291,13 @@ export const api = {
     const params = new URLSearchParams();
     if (disease) params.set('disease', disease);
     params.set('locale', locale);
-    return fetchJson(`${API_URL}/species/${id}/health?${params.toString()}`);
+    return request(`${API_URL}/species/${id}/health?${params.toString()}`);
   },
 
   // Legislation endpoints
   getSpeciesLegislation: async (id: string, country?: string) => {
     const params = country ? `?country=${country}` : '';
-    return fetchJson(`${API_URL}/species/${id}/legislation${params}`);
+    return request(`${API_URL}/species/${id}/legislation${params}`);
   },
 
   // Food endpoints
@@ -250,13 +306,13 @@ export const api = {
     params.set('q', query);
     if (category) params.set('category', category);
     if (species) params.set('species', species);
-    return fetchJson(`${API_URL}/food/search?${params.toString()}`);
+    return request(`${API_URL}/food/search?${params.toString()}`);
   },
 
   getFoodBySpecies: async (species: string, type?: string) => {
     const encoded = encodeURIComponent(species);
     const params = type ? `?type=${type}` : '';
-    return fetchJson(`${API_URL}/food/species/${encoded}${params}`);
+    return request(`${API_URL}/food/species/${encoded}${params}`);
   },
 
   // Equipment endpoints
@@ -269,7 +325,7 @@ export const api = {
     if (speciesId) params.set('speciesId', speciesId.toString());
     if (category) params.set('category', category);
     if (size) params.set('size', size);
-    return fetchJson(`${API_URL}/equipment?${params.toString()}`);
+    return request(`${API_URL}/equipment?${params.toString()}`);
   },
 
   // Magasins / liens d'affiliation (par catégorie d'espèce)
@@ -278,7 +334,7 @@ export const api = {
     if (category) params.set('category', category);
     if (type) params.set('type', type);
     const qs = params.toString();
-    return fetchJson<{ id: string; name: string; url: string; description?: string; categories: string[]; types: string[] }[]>(
+    return request<{ id: string; name: string; url: string; description?: string; categories: string[]; types: string[] }[]>(
       `${API_URL}/affiliate-stores${qs ? `?${qs}` : ''}`
     );
   },
@@ -288,39 +344,29 @@ export const api = {
     params.set('q', query);
     if (category) params.set('category', category);
     params.set('limit', limit.toString());
-    return fetchJson(`${API_URL}/amazon/search?${params.toString()}`);
+    return request(`${API_URL}/amazon/search?${params.toString()}`);
   },
 
   // Animals endpoints
   getMyAnimals: async (token: string) => {
-    const response = await safeFetch(`${API_URL}/users/me/animals`, {
+    return request(`${API_URL}/users/me/animals`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.json();
   },
 
   getAnimal: async (id: string, token: string) => {
     const url = `${API_URL}/users/me/animals/${id}`;
-    const response = await safeFetch(url, {
+    return request(url, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const message =
-        (data as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`;
-      throw new Error(message);
-    }
-    return data;
   },
 
   createAnimal: async (data: any, token: string) => {
-    const response = await safeFetch(`${API_URL}/users/me/animals`, {
+    return request(`${API_URL}/users/me/animals`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -328,19 +374,10 @@ export const api = {
       },
       body: JSON.stringify(data),
     });
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const message =
-        (resData as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`;
-      throw new Error(message);
-    }
-    return resData;
   },
 
   updateAnimal: async (id: string, data: any, token: string) => {
-    const response = await safeFetch(`${API_URL}/users/me/animals/${id}`, {
+    return request(`${API_URL}/users/me/animals/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -348,38 +385,20 @@ export const api = {
       },
       body: JSON.stringify(data),
     });
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const message =
-        (resData as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`;
-      throw new Error(message);
-    }
-    return resData;
   },
 
   deleteAnimal: async (id: string, token: string) => {
-    const response = await safeFetch(`${API_URL}/users/me/animals/${id}`, {
+    return request(`${API_URL}/users/me/animals/${id}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const message =
-        (data as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`;
-      throw new Error(message);
-    }
-    return data;
   },
 
   // Descendants (petits) d'un animal (module F)
   getOffspring: async (animalId: string, token: string): Promise<Animal[]> => {
-    const response = await safeFetch(
+    const data = await request(
       `${API_URL}/users/me/animals/${animalId}/offspring`,
       {
         headers: {
@@ -387,23 +406,14 @@ export const api = {
         },
       }
     );
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const message =
-        (data as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`;
-      throw new Error(message);
-    }
     return Array.isArray(data) ? (data as Animal[]) : [];
   },
 
   // Grade & notification events
   getGrade: async (token: string) => {
-    const response = await safeFetch(`${API_URL}/users/me/grade`, {
+    return request(`${API_URL}/users/me/grade`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return response.json();
   },
 
   getNotificationEvents: async (token: string, date?: string, refresh = false) => {
@@ -412,10 +422,9 @@ export const api = {
     if (refresh) params.set('refresh', 'true');
     const qs = params.toString();
     const url = `${API_URL}/users/me/notification-events${qs ? `?${qs}` : ''}`;
-    const response = await safeFetch(url, {
+    return request(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    return response.json();
   },
 
   setNotificationEventStatus: async (
@@ -424,7 +433,7 @@ export const api = {
     token: string
   ) => {
     const url = `${API_URL}/users/me/notification-events/${eventId}`;
-    const response = await safeFetch(
+    return request(
       url,
       {
         method: 'PATCH',
@@ -435,7 +444,6 @@ export const api = {
         body: JSON.stringify({ status }),
       }
     );
-    return response.json();
   },
 
   deleteNotificationEvent: async (eventId: string, token: string) => {
@@ -443,27 +451,25 @@ export const api = {
     if (!authToken) throw new Error('Non connecté');
     const id = String(eventId ?? '').trim();
     if (!id) throw new Error('ID du rappel invalide');
-    const response = await safeFetch(
-      `${API_URL}/users/me/notification-events/${id}`,
-      {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${authToken}` },
+    try {
+      return await request<{ deleted?: boolean }>(
+        `${API_URL}/users/me/notification-events/${id}`,
+        {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${authToken}` },
+        }
+      );
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 404) {
+        throw new ApiError(404, 'Rappel introuvable.');
       }
-    );
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const message =
-        (data as { message?: string })?.message ||
-        (response.status === 404 ? 'Rappel introuvable.' : response.statusText) ||
-        'Erreur lors de la suppression du rappel. Veuillez réessayer.';
-      throw new Error(message);
+      throw err;
     }
-    return data as { deleted?: boolean };
   },
 
   // Routines endpoints
   getAnimalRoutines: async (animalId: string, token: string) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/routines`,
       {
         headers: {
@@ -471,33 +477,28 @@ export const api = {
         },
       }
     );
-    return response.json();
   },
 
   getRoutineTemplates: async (animalId: string, token: string) => {
-    const response = await safeFetch(
-      `${API_URL}/users/me/animals/${animalId}/routine-templates`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    // 404 = aucune routine par défaut pour cette espèce → liste vide
-    if (response.status === 404) return [];
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const message =
-        (data as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`;
-      throw new Error(message);
+    try {
+      const data = await request(
+        `${API_URL}/users/me/animals/${animalId}/routine-templates`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return Array.isArray(data) ? (data as SpeciesRoutineTemplate[]) : [];
+    } catch (err) {
+      // 404 = aucune routine par défaut pour cette espèce → liste vide
+      if (err instanceof ApiError && err.status === 404) return [];
+      throw err;
     }
-    return Array.isArray(data) ? (data as SpeciesRoutineTemplate[]) : [];
   },
 
   createRoutine: async (animalId: string, data: any, token: string) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/routines`,
       {
         method: 'POST',
@@ -508,7 +509,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    return response.json();
   },
 
   updateRoutine: async (
@@ -517,7 +517,7 @@ export const api = {
     data: any,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/routines/${routineId}`,
       {
         method: 'PATCH',
@@ -528,7 +528,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    return response.json();
   },
 
   deleteRoutine: async (
@@ -536,7 +535,7 @@ export const api = {
     routineId: string,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/routines/${routineId}`,
       {
         method: 'DELETE',
@@ -545,19 +544,16 @@ export const api = {
         },
       }
     );
-    return response.json();
   },
 
   // Health records (carnet de santé)
   getAnimalHealthRecords: async (animalId: string, token: string) => {
-    const response = await safeFetch(
+    const data = await request(
       `${API_URL}/users/me/animals/${animalId}/health-records`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
     return Array.isArray(data) ? data : [];
   },
 
@@ -566,7 +562,7 @@ export const api = {
     data: { type: string; title: string; date: string; notes?: string; details?: object },
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/health-records`,
       {
         method: 'POST',
@@ -577,9 +573,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   updateAnimalHealthRecord: async (
@@ -588,7 +581,7 @@ export const api = {
     data: { type?: string; title?: string; date?: string; notes?: string; details?: object },
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/health-records/${recordId}`,
       {
         method: 'PATCH',
@@ -599,9 +592,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   deleteAnimalHealthRecord: async (
@@ -609,18 +599,13 @@ export const api = {
     recordId: string,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/health-records/${recordId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      throw new Error((data as { message?: string })?.message || response.statusText);
-    }
-    return response.json().catch(() => ({}));
   },
 
   // Medications (traitements médicaux)
@@ -641,7 +626,7 @@ export const api = {
     data: Partial<Medication>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/medications`,
       {
         method: 'POST',
@@ -652,9 +637,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   updateMedication: async (
@@ -663,7 +645,7 @@ export const api = {
     data: Partial<Medication>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/medications/${medicationId}`,
       {
         method: 'PATCH',
@@ -674,9 +656,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   deleteMedication: async (
@@ -684,18 +663,13 @@ export const api = {
     medicationId: string,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/medications/${medicationId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      throw new Error((data as { message?: string })?.message || response.statusText);
-    }
-    return response.json().catch(() => ({}));
   },
 
   // Vet appointments (rendez-vous vétérinaires)
@@ -716,7 +690,7 @@ export const api = {
     data: Partial<VetAppointment>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/vet-appointments`,
       {
         method: 'POST',
@@ -727,9 +701,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   updateVetAppointment: async (
@@ -738,7 +709,7 @@ export const api = {
     data: Partial<VetAppointment>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
       {
         method: 'PATCH',
@@ -749,9 +720,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   deleteVetAppointment: async (
@@ -759,18 +727,13 @@ export const api = {
     appointmentId: string,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      throw new Error((data as { message?: string })?.message || response.statusText);
-    }
-    return response.json().catch(() => ({}));
   },
 
   // Measurements (poids & mesures)
@@ -791,7 +754,7 @@ export const api = {
     data: Partial<AnimalMeasurement>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/measurements`,
       {
         method: 'POST',
@@ -802,9 +765,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   updateMeasurement: async (
@@ -813,7 +773,7 @@ export const api = {
     data: Partial<AnimalMeasurement>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/measurements/${measurementId}`,
       {
         method: 'PATCH',
@@ -824,9 +784,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   deleteMeasurement: async (
@@ -834,18 +791,13 @@ export const api = {
     measurementId: string,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/measurements/${measurementId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      throw new Error((data as { message?: string })?.message || response.statusText);
-    }
-    return response.json().catch(() => ({}));
   },
 
   // Vaccinations
@@ -866,7 +818,7 @@ export const api = {
     data: Partial<Vaccination>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/vaccinations`,
       {
         method: 'POST',
@@ -877,9 +829,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   updateVaccination: async (
@@ -888,7 +837,7 @@ export const api = {
     data: Partial<Vaccination>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/vaccinations/${vaccinationId}`,
       {
         method: 'PATCH',
@@ -899,9 +848,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   deleteVaccination: async (
@@ -909,18 +855,13 @@ export const api = {
     vaccinationId: string,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/vaccinations/${vaccinationId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      throw new Error((data as { message?: string })?.message || response.statusText);
-    }
-    return response.json().catch(() => ({}));
   },
 
   // Breeding records (suivi de reproduction)
@@ -941,7 +882,7 @@ export const api = {
     data: Partial<BreedingRecord>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/breeding-records`,
       {
         method: 'POST',
@@ -952,9 +893,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   updateBreedingRecord: async (
@@ -963,7 +901,7 @@ export const api = {
     data: Partial<BreedingRecord>,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/breeding-records/${recordId}`,
       {
         method: 'PATCH',
@@ -974,9 +912,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    const resData = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((resData as { message?: string })?.message || response.statusText);
-    return resData;
   },
 
   deleteBreedingRecord: async (
@@ -984,27 +919,23 @@ export const api = {
     recordId: string,
     token: string
   ) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/breeding-records/${recordId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      throw new Error((data as { message?: string })?.message || response.statusText);
-    }
-    return response.json().catch(() => ({}));
   },
 
   // Reproduction de l'espèce (public)
   getSpeciesReproduction: async (speciesId: string): Promise<SpeciesReproduction | null> => {
-    const response = await safeFetch(`${API_URL}/species/${speciesId}/reproduction`);
-    if (response.status === 404) return null;
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      throw new Error((data as { message?: string })?.message || response.statusText);
+    let data: unknown;
+    try {
+      data = await request(`${API_URL}/species/${speciesId}/reproduction`);
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 404) return null;
+      throw err;
     }
     if (!data || typeof data !== 'object' || Object.keys(data as object).length === 0) return null;
     return data as SpeciesReproduction;
@@ -1012,15 +943,17 @@ export const api = {
 
   // Carnet de santé (export)
   exportCarnet: async (animalId: string, token: string): Promise<string> => {
+    // Export potentiellement volumineux : délai plus large que les appels JSON.
     const response = await safeFetch(
       `${API_URL}/users/me/animals/${animalId}/carnet/export`,
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
+      { timeoutMs: 60_000 }
     );
     if (!response.ok) {
-      const data = await response.json().catch(() => ({}));
-      throw new Error((data as { message?: string })?.message || response.statusText);
+      const data = await readJson(response);
+      throw new ApiError(response.status, errorMessage(data, response));
     }
     const blob = await response.blob();
     return URL.createObjectURL(blob);
@@ -1028,7 +961,7 @@ export const api = {
 
   // History endpoints
   getAnimalHistory: async (animalId: string, token: string, limit = 100) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/history?limit=${limit}`,
       {
         headers: {
@@ -1036,11 +969,10 @@ export const api = {
         },
       }
     );
-    return response.json();
   },
 
   logAction: async (animalId: string, data: any, token: string) => {
-    const response = await safeFetch(
+    return request(
       `${API_URL}/users/me/animals/${animalId}/history`,
       {
         method: 'POST',
@@ -1051,7 +983,6 @@ export const api = {
         body: JSON.stringify(data),
       }
     );
-    return response.json();
   },
 
   // Auth endpoints
@@ -1094,29 +1025,19 @@ export const api = {
   },
 
   forgotPassword: async (email: string) => {
-    const response = await safeFetch(`${API_URL}/auth/forgot-password`, {
+    return request<{ message: string }>(`${API_URL}/auth/forgot-password`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
     });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      throw new Error((data as any)?.message || response.statusText || 'Erreur');
-    }
-    return data as { message: string };
   },
 
   resetPassword: async (token: string, newPassword: string) => {
-    const response = await safeFetch(`${API_URL}/auth/reset-password`, {
+    return request<{ message: string }>(`${API_URL}/auth/reset-password`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token, newPassword }),
     });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      throw new Error((data as any)?.message || response.statusText || 'Erreur');
-    }
-    return data as { message: string };
   },
 
   changePassword: async (
@@ -1124,42 +1045,38 @@ export const api = {
     currentPassword: string,
     newPassword: string
   ) => {
-    const response = await safeFetch(`${API_URL}/auth/change-password`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+    return request<{ message: string }>(
+      `${API_URL}/auth/change-password`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ currentPassword, newPassword }),
       },
-      body: JSON.stringify({ currentPassword, newPassword }),
-    });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      throw new Error((data as any)?.message || response.statusText || 'Erreur');
-    }
-    return data as { message: string };
+      // 401 = « mot de passe actuel incorrect » : ce n'est pas une session expirée.
+      { logoutOn401: false }
+    );
   },
 
   getProfile: async (token: string) => {
-    const response = await safeFetch(`${API_URL}/auth/me`, {
+    return request(`${API_URL}/auth/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.json();
   },
 
   // Subscription (Premium)
   getSubscription: async (token: string) => {
-    const response = await safeFetch(`${API_URL}/users/me/subscription`, {
+    return request<{ isPremium: boolean; plan?: 'monthly' | 'yearly' }>(`${API_URL}/users/me/subscription`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
-    return data as { isPremium: boolean; plan?: 'monthly' | 'yearly' };
   },
 
   subscribe: async (plan: 'monthly' | 'yearly', token: string) => {
-    const response = await safeFetch(`${API_URL}/users/me/subscription`, {
+    return request<{ isPremium: boolean; plan: string }>(`${API_URL}/users/me/subscription`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1167,27 +1084,18 @@ export const api = {
       },
       body: JSON.stringify({ plan }),
     });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
-    return data as { isPremium: boolean; plan: string };
   },
 
   getAnimalPublicLink: async (animalId: string, token: string, baseUrl?: string) => {
     const qs = baseUrl ? `?baseUrl=${encodeURIComponent(baseUrl)}` : '';
-    const response = await safeFetch(
+    return request<{ slug: string; url: string }>(
       `${API_URL}/users/me/animals/${animalId}/public-link${qs}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
-    return data as { slug: string; url: string };
   },
 
   getPublicAnimal: async (slug: string) => {
-    const response = await safeFetch(`${API_URL}/public/animal/${encodeURIComponent(slug)}`);
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
-    return data as {
+    return request<{
       id: string;
       name: string;
       speciesId: number;
@@ -1196,6 +1104,6 @@ export const api = {
       photos: string[];
       notes?: string;
       healthRecords: Array<{ id: string; type: string; title: string; date: string; notes?: string; details?: object }>;
-    };
+    }>(`${API_URL}/public/animal/${encodeURIComponent(slug)}`);
   },
 };
