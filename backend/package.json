@@ -27,6 +27,7 @@
     "reset-password": "ts-node -r tsconfig-paths/register scripts/reset-dev-password.ts",
     "operator:set": "ts-node -r tsconfig-paths/register scripts/set-operator.ts",
     "import:fr-be": "ts-node prisma/import-fr-be-databases.ts",
+    "vapid:generate": "ts-node scripts/generate-vapid.ts",
     "seed:prod": "ts-node prisma/seed-prod.ts",
     "seed:breeds": "ts-node prisma/import-breeds.ts",
     "seed:dev": "ts-node prisma/seed-dev.ts",
@@ -63,7 +64,8 @@
     "pino-http": "^11.0.0",
     "rate-limiter-flexible": "^9.0.1",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "web-push": "^3.6.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -78,6 +80,7 @@
     "@types/node": "^22.10.7",
     "@types/nodemailer": "^8.0.2",
     "@types/supertest": "^6.0.2",
+    "@types/web-push": "^3.6.4",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.2",

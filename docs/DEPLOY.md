@@ -97,7 +97,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `MAIL_HOST`, `MAIL_PORT`, `MAIL_USER`, `MAIL_PASS`, `MAIL_FROM` | Render | Brevo | Oui dès W3-01 |
 | `SENTRY_DSN` | Render | projet Sentry UE | Recommandé |
 | `OPERATOR_EMAILS` | Render | remplacé par `User.role` (W0-01) | — |
-| `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Render (+ clé publique côté Netlify) | générées | Dès W3-03 |
+| `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Render (`sync: false` ; clé publique servie par `GET /notifications/vapid-public-key`, rien côté Netlify) | `npm run vapid:generate` (backend/) | Dès W3-03 |
 | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | Render | Stripe | Dès W3-04 |
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |

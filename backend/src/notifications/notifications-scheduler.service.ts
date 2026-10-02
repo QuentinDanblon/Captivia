@@ -255,7 +255,13 @@ export class NotificationsSchedulerService {
           .sendToUser(ev.userId, {
             title: label,
             body: ev.animal?.name ?? label,
-            data: { eventId: ev.id, type: ev.type, animalId: ev.animalId },
+            data: {
+              eventId: ev.id,
+              type: ev.type,
+              animalId: ev.animalId,
+              // Préfixe de locale pour l'URL ouverte au clic (sw.js : notificationclick).
+              locale: ev.user.locale,
+            },
           })
           .catch(() => false);
         if (ok) {
