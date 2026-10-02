@@ -26,6 +26,9 @@ const config: Config = {
   ],
   moduleDirectories: ['node_modules', '<rootDir>/'],
   testPathIgnorePatterns: ['/node_modules/', '/.next/', '/e2e/'],
+  // Évite les warnings « jest-haste-map: duplicate manual mock / Haste module naming
+  // collision » causés par les package.json copiés dans .next/ après un build.
+  modulePathIgnorePatterns: ['<rootDir>/.next/'],
   transformIgnorePatterns: [
     'node_modules/(?!(next-intl)/)',
   ],
