@@ -32,6 +32,26 @@
 
 ---
 
+## Avancement — sprint du 2026-10-02 (11 agents en parallèle, fusionnés sur `claude/zen-mendel-xq6nkb`)
+
+**Vérifications d'intégration** (après fusion de toutes les branches, base PostgreSQL vierge) :
+- `prisma migrate deploy` : 9/9 migrations. `migrate diff` : aucun drift. Seed de production OK (0 magasin factice, 0 espèce rejetée).
+- Backend : build et `tsc` OK, **660/660 tests (43 suites)**.
+- Frontend : `tsc` OK, **ESLint 0 erreur**, **76/76 tests** (dont parité i18n), build de production OK.
+- `npm audit --omit=dev` : **0 vulnérabilité** (racine, backend, frontend).
+
+| Statut | Tâches |
+|---|---|
+| ✅ Fait | W0-01 (rôle `User.role`, emails normalisés, CLI `operator:set`), W0-02, W0-03, W0-05, W0-06, W0-07, W0-08, W1-06, W1-08, W2-01, W2-05, W2-07, W2-03 (backend + inscription), W4-02 (sauf `loading.tsx`, incompatible avec une vraie 404), DEP-01, DEP-08, WH-01, WH-02, WH-04, WH-05, BE-10 |
+| 🟡 Partiel | W0-04 (reste : `MAIL_HOST` obligatoire après W3-01), W1-01 (`tokenVersion` sans refresh token), W1-02 (`login`/`register` hors `request()`), W1-03 (reste : pino JSON, `instrument.ts`, release Sentry), W1-04 (reste : circuit breaker, retry GBIF), W1-07 (front : 0 erreur ; back : 2 000+ erreurs de lint historiques), W2-02 (pages rédigées FR/EN : **marqueurs `[À COMPLÉTER]` dans `frontend/src/lib/legal.ts`** + relecture juriste), W4-03 (valeurs traduites ; textes en dur restants dans les pages), W4-05 (skip link, menu modal, contrastes partiels), W5-01 (sociabilité corrigée ; import des races à intégrer) |
+| ⏳ À faire | W1-05, W1-09, W2-04, W2-06, W2-08, Vague 3 (e-mails, scheduler, push, Stripe), W4-01, W4-04, W4-06 à W4-09, Vague 5 (contenu), **Vague 6 (mobile)**, DEP-02 à DEP-07, DEP-09/10, WH-03, WH-06, WH-07 |
+
+**Changements de contrat à connaître avant le premier déploiement :**
+- Après la migration `20261002100000_auth_roles_sessions`, **aucun compte n'est opérateur** : lancer `npm run operator:set -- <email>` (depuis un poste de dev avec l'URL Neon directe).
+- `/auth/register` exige `acceptTerms: true` et `ageConfirmed: true` ; mots de passe de 10 à 128 caractères.
+- En production, l'API **refuse de démarrer** sans `JWT_SECRET` (≥ 32 caractères, non-exemple), `CORS_ORIGIN` et `FRONTEND_URL` (https). `docker compose` exige `JWT_SECRET` et `POSTGRES_PASSWORD`.
+- Le lien public d'un animal est désormais en opt-in (les liens existants restent actifs, sans les données de santé).
+
 ## 1. Conventions d'exécution
 
 ### 1.1 Priorités et efforts
