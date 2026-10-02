@@ -154,6 +154,12 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
         .expect(200);
       expect(me.body).toMatchObject({ role: 'OPERATOR', isPremium: true });
 
+      const sub = await request(server())
+        .get('/users/me/subscription')
+        .set('Authorization', `Bearer ${opToken}`)
+        .expect(200);
+      expect(sub.body).toMatchObject({ isPremium: true, plan: 'monthly' });
+
       await request(server())
         .post(`/admin/users/${opId}/premium`)
         .set('Authorization', `Bearer ${opToken}`)

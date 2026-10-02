@@ -886,7 +886,7 @@ export const api = {
   // Breeding records (suivi de reproduction)
   getBreedingRecords: async (animalId: string, token: string) => {
     const response = await safeFetch(
-      `${API_URL}/users/me/animals/${animalId}/breeding-records`,
+      `${API_URL}/users/me/animals/${animalId}/breeding`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -902,7 +902,7 @@ export const api = {
     token: string
   ) => {
     return request(
-      `${API_URL}/users/me/animals/${animalId}/breeding-records`,
+      `${API_URL}/users/me/animals/${animalId}/breeding`,
       {
         method: 'POST',
         headers: {
@@ -921,7 +921,7 @@ export const api = {
     token: string
   ) => {
     return request(
-      `${API_URL}/users/me/animals/${animalId}/breeding-records/${recordId}`,
+      `${API_URL}/users/me/animals/${animalId}/breeding/${recordId}`,
       {
         method: 'PATCH',
         headers: {
@@ -939,7 +939,7 @@ export const api = {
     token: string
   ) => {
     return request(
-      `${API_URL}/users/me/animals/${animalId}/breeding-records/${recordId}`,
+      `${API_URL}/users/me/animals/${animalId}/breeding/${recordId}`,
       {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -1070,7 +1070,7 @@ export const api = {
     currentPassword: string,
     newPassword: string
   ) => {
-    return request<{ message: string }>(
+    return request<{ message: string; accessToken: string }>(
       `${API_URL}/auth/change-password`,
       {
         method: 'POST',

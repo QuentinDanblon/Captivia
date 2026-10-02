@@ -3,7 +3,18 @@
  * de compte (art. 17). Fichier volontairement indépendant de lib/api.ts.
  */
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+import { API_URL } from './config';
+
+/** Même timeout que lib/api.ts (non exporté de ce fichier). */
+const REQUEST_TIMEOUT_MS = 15_000;
+
+/**
+ * fetch avec timeout. Volontairement sans `auth:logout` : sur DELETE /users/me, un 401 signifie
+ * « mot de passe incorrect », pas « session expirée ».
+ */
+function timedFetch(url: string, init: RequestInit): Promise<Response> {
+  return fetch(url, { ...init, signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
+}
 
 export class AccountApiError extends Error {
   readonly status: number;
@@ -32,7 +43,7 @@ export async function exportMyData(
 ): Promise<{ blob: Blob; filename: string }> {
   let res: Response;
   try {
-    res = await fetch(`${API_URL}/users/me/export`, {
+    res = await timedFetch(`${API_URL}/users/me/export`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   } catch {
@@ -68,7 +79,7 @@ export async function deleteMyAccount(
 ): Promise<void> {
   let res: Response;
   try {
-    res = await fetch(`${API_URL}/users/me`, {
+    res = await timedFetch(`${API_URL}/users/me`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,

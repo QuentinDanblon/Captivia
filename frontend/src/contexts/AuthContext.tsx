@@ -14,6 +14,8 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (token: string, user: User) => void;
+  /** Remplace uniquement le jeton de session (ex. nouveau jeton après changement de mot de passe). */
+  updateToken: (token: string) => void;
   logout: () => void;
   isLoading: boolean;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
@@ -155,12 +157,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     writeStorage(USER_KEY, JSON.stringify(newUser));
   };
 
+  const updateToken = (newToken: string) => {
+    setToken(newToken);
+    writeStorage(TOKEN_KEY, newToken);
+  };
+
   const logout = () => {
     clearSession();
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, isLoading, setUser }}>
+    <AuthContext.Provider value={{ user, token, login, updateToken, logout, isLoading, setUser }}>
       {children}
     </AuthContext.Provider>
   );

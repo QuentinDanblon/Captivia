@@ -58,3 +58,7 @@ export const API_URL: string = resolveApiUrl({
   envUrl: process.env.NEXT_PUBLIC_API_URL,
   hostname: typeof window !== 'undefined' ? window.location.hostname : undefined,
 });
+
+/** Longueur du mot de passe : alignée sur la validation backend (inscription, reset, changement). */
+export const PASSWORD_MIN_LENGTH = 10;
+export const PASSWORD_MAX_LENGTH = 128;

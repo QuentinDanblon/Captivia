@@ -39,6 +39,23 @@ describe('AuthContext', () => {
     expect(localStorage.getItem('user')).toEqual(JSON.stringify(mockUser));
   });
 
+  it("updateToken remplace le jeton (state + localStorage) sans toucher à l'utilisateur", () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    const mockUser = { id: 'u1', email: 'a@b.c', locale: 'fr', isPremium: false };
+
+    act(() => {
+      result.current.login('old-token', mockUser);
+    });
+    act(() => {
+      result.current.updateToken('new-token');
+    });
+
+    expect(result.current.token).toBe('new-token');
+    expect(result.current.user).toEqual(mockUser);
+    expect(localStorage.getItem('token')).toBe('new-token');
+    expect(localStorage.getItem('user')).toBe(JSON.stringify(mockUser));
+  });
+
   it('should logout and clear data', () => {
     const { result } = renderHook(() => useAuth(), { wrapper });
 

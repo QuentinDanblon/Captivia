@@ -564,12 +564,13 @@ export class GradeService {
       if (!ev) return false;
 
       // Seules les routines (ev.routineId) donnent des points. Les notifications seules n'en donnent pas.
-      // Pas de points pour un événement futur (au-delà de 24 h : tolérance de fuseau horaire),
-      // sinon on pourrait « faire » à l'avance les routines des 12 prochains mois.
-      const notInFuture =
-        ev.scheduledAt.getTime() <= Date.now() + 24 * 3600 * 1000;
+      // Pas de points hors de la fenêtre [maintenant − 24 h ; maintenant + 24 h] (tolérance de fuseau) :
+      // ni pour le futur (« faire » à l'avance les routines des 12 prochains mois), ni pour un
+      // événement antidaté (farming). Le passage à « done » reste permis, sans points.
+      const delta = ev.scheduledAt.getTime() - Date.now();
+      const inPointsWindow = Math.abs(delta) <= 24 * 3600 * 1000;
       const pointsToAdd =
-        status === 'done' && ev.routineId && notInFuture
+        status === 'done' && ev.routineId && inPointsWindow
           ? POINTS_PER_ROUTINE_DONE
           : 0;
 
