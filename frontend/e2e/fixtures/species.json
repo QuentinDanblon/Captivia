@@ -1,0 +1,28 @@
+{
+  "key": 2435099,
+  "scientificName": "Boa constrictor Linnaeus, 1758",
+  "canonicalName": "Boa constrictor",
+  "rank": "SPECIES",
+  "iucnStatus": "LC",
+  "kingdom": "Animalia",
+  "phylum": "Chordata",
+  "class": "Reptilia",
+  "order": "Squamata",
+  "family": "Boidae",
+  "genus": "Boa",
+  "profile": {
+    "speciesId": 2435099,
+    "sourceUrl": null,
+    "commonNameFr": "Boa constricteur",
+    "scientificName": "Boa constrictor",
+    "category": "reptile",
+    "subcategory": "serpent",
+    "domesticationType": "non domestique",
+    "description": "Grand serpent constricteur d'Amérique centrale et du Sud."
+  },
+  "habitat": {
+    "habitatType": "Terrarium",
+    "temperature": "28-32 °C",
+    "humidity": "60-70 %"
+  }
+}
