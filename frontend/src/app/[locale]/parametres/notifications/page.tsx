@@ -26,6 +26,36 @@ export type TypeSchedule = {
   intervalHours?: number; // 1-24 si recurrence === 'hourly'
 };
 
+/** Forme brute (non fiable) d'un horaire renvoyé par l'API */
+interface RawTypeSchedule {
+  time?: unknown;
+  recurrence?: unknown;
+  date?: unknown;
+  weekDay?: unknown;
+  dayOfMonth?: unknown;
+  intervalHours?: unknown;
+}
+
+/** Forme brute (non fiable) des préférences renvoyées par l'API */
+interface RawPreferences {
+  types?: Record<string, unknown>;
+  typeSchedules?: Record<string, unknown>;
+  schedule?: unknown;
+  snooze?: unknown;
+  deliveryChannel?: unknown;
+  [key: string]: unknown;
+}
+
+/** Préférences de notification telles que gérées par la page */
+interface NotificationPreferences {
+  types?: Record<string, boolean>;
+  typeSchedules?: Record<string, TypeSchedule>;
+  schedule?: { start: string; end: string };
+  snooze?: number;
+  deliveryChannel?: string;
+  [key: string]: unknown;
+}
+
 const DEFAULT_TYPE_SCHEDULE: TypeSchedule = {
   time: '08:00',
   recurrence: 'daily',
@@ -64,7 +94,7 @@ export default function NotificationsPreferencesPage() {
   const t = useTranslations();
   const router = useRouter();
   const { user, token, logout, isLoading: authLoading } = useAuth();
-  const [preferences, setPreferences] = useState<any>(null);
+  const [preferences, setPreferences] = useState<NotificationPreferences | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [subscribed, setSubscribed] = useState(false);
@@ -99,15 +129,16 @@ export default function NotificationsPreferencesPage() {
     sante: 'Santé',
   };
 
-  const normalizePreferences = (data: any) => {
-    if (!data || typeof data !== 'object') return null;
-    let types = data.types && typeof data.types === 'object' ? data.types : {};
+  const normalizePreferences = (raw: unknown): NotificationPreferences | null => {
+    if (!raw || typeof raw !== 'object') return null;
+    const data = raw as RawPreferences;
+    const types = data.types && typeof data.types === 'object' ? data.types : {};
     const normalized: Record<string, boolean> = {};
     for (const [key, value] of Object.entries(types)) {
       const label = LEGACY_TYPE_KEYS[key] ?? key;
       normalized[label] = value as boolean;
     }
-    let typeSchedules =
+    const typeSchedules =
       data.typeSchedules && typeof data.typeSchedules === 'object' ? data.typeSchedules : {};
     const normalizedSchedules: Record<string, TypeSchedule> = {};
     const validRecurrence = (r: string): RecurrenceKind => {
@@ -115,9 +146,9 @@ export default function NotificationsPreferencesPage() {
       return allowed.includes(r as RecurrenceKind) ? (r as RecurrenceKind) : 'daily';
     };
     for (const [key, val] of Object.entries(typeSchedules)) {
-      const v = val as any;
+      const v = val as RawTypeSchedule | null;
       if (v && typeof v === 'object' && typeof v.time === 'string') {
-        const rec = validRecurrence(v.recurrence);
+        const rec = validRecurrence(String(v.recurrence));
         normalizedSchedules[key] = {
           time: v.time || '08:00',
           recurrence: rec,
@@ -141,7 +172,7 @@ export default function NotificationsPreferencesPage() {
       ...data,
       types: normalized,
       typeSchedules: normalizedSchedules,
-      schedule: data.schedule && typeof data.schedule === 'object' ? data.schedule : defaultSchedule,
+      schedule: data.schedule && typeof data.schedule === 'object' ? (data.schedule as { start: string; end: string }) : defaultSchedule,
       snooze: typeof data.snooze === 'number' ? data.snooze : 15,
       deliveryChannel,
     };
@@ -232,7 +263,7 @@ export default function NotificationsPreferencesPage() {
     }
   };
 
-  const autoSavePreferences = (newPreferences: any) => {
+  const autoSavePreferences = (newPreferences: NotificationPreferences) => {
     setPreferences(newPreferences);
     
     // Clear previous timeout
@@ -248,7 +279,7 @@ export default function NotificationsPreferencesPage() {
     setAutoSaveTimeout(timeout);
   };
 
-  const handleSavePreferencesBackend = async (prefsToSave: any) => {
+  const handleSavePreferencesBackend = async (prefsToSave: NotificationPreferences) => {
     const authToken = (token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null))?.trim();
     if (!authToken) return;
 
@@ -460,9 +491,9 @@ export default function NotificationsPreferencesPage() {
                         <div>
                           <p className="font-medium text-gray-800 dark:text-white">{type}</p>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {t('notifications.time')} {schedule.time} · {t(recurrenceLabel as any)}
+                            {t('notifications.time')} {schedule.time} · {t(recurrenceLabel as Parameters<typeof t>[0])}
                             {schedule.recurrence === 'weekly' && schedule.weekDay != null && (
-                              <> · {t(`notifications.weekDay${schedule.weekDay}` as any)}</>
+                              <> · {t(`notifications.weekDay${schedule.weekDay}` as Parameters<typeof t>[0])}</>
                             )}
                             {schedule.recurrence === 'once' && schedule.date && (
                               <> · {schedule.date}</>
@@ -561,7 +592,7 @@ export default function NotificationsPreferencesPage() {
                     key={channel}
                     type="button"
                     onClick={() => {
-                      setPreferences((p: any) => (p ? { ...p, deliveryChannel: channel } : p));
+                      setPreferences((p) => (p ? { ...p, deliveryChannel: channel } : p));
                       if (autoSaveTimeout) {
                         clearTimeout(autoSaveTimeout);
                         setAutoSaveTimeout(null);
@@ -747,7 +778,7 @@ export default function NotificationsPreferencesPage() {
                               >
                                 {RECURRENCE_OPTIONS.map((opt) => (
                                   <option key={opt.value} value={opt.value}>
-                                    {t(opt.labelKey as any)}
+                                    {t(opt.labelKey as Parameters<typeof t>[0])}
                                   </option>
                                 ))}
                               </select>
@@ -777,7 +808,7 @@ export default function NotificationsPreferencesPage() {
                                 >
                                   {[0, 1, 2, 3, 4, 5, 6].map((d) => (
                                     <option key={d} value={d}>
-                                      {t(`notifications.weekDay${d}` as any)}
+                                      {t(`notifications.weekDay${d}` as Parameters<typeof t>[0])}
                                     </option>
                                   ))}
                                 </select>
