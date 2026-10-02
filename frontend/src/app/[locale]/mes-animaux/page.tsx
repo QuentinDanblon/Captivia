@@ -530,6 +530,17 @@ function MyAnimalsPageContent() {
                       </span>
                     )}
                   </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      router.push(`/mes-animaux/${animal.id}/carnet`);
+                    }}
+                    className="mt-4 text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:underline"
+                  >
+                    {t('carnetPrint.title')}
+                  </button>
                 </div>
               </Link>
             ))}

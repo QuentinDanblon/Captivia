@@ -1,4 +1,5 @@
 import { API_URL } from './config';
+import type { CarnetExport } from './carnet';
 
 const NETWORK_ERROR_MESSAGES = ['Failed to fetch', 'Load failed', 'NetworkError when attempting to fetch resource'];
 
@@ -990,6 +991,15 @@ export const api = {
     }
     const blob = await response.blob();
     return URL.createObjectURL(blob);
+  },
+
+  /** Carnet de santé (JSON) pour la mise en page imprimable (Premium : 403 sinon). */
+  getCarnetExport: async (animalId: string, token: string): Promise<CarnetExport> => {
+    return request<CarnetExport>(
+      `${API_URL}/users/me/animals/${animalId}/carnet/export`,
+      { headers: { Authorization: `Bearer ${token}` } },
+      { timeoutMs: 60_000 }
+    );
   },
 
   // History endpoints
