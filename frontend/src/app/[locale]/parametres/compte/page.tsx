@@ -1,13 +1,152 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useId } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 import { api } from '@/lib/api';
+import {
+  AccountApiError,
+  deleteMyAccount,
+  downloadBlob,
+  exportMyData,
+} from '@/lib/account-api';
 
 const SUPPORTED_LOCALES = ['fr', 'en', 'es', 'de', 'it', 'pt'];
+
+interface DeleteAccountModalProps {
+  onClose: () => void;
+  onConfirm: (password: string) => Promise<void>;
+  error: string;
+  loading: boolean;
+}
+
+/** Modale de confirmation accessible : role=alertdialog, focus piégé, Échap pour fermer. */
+function DeleteAccountModal({ onClose, onConfirm, error, loading }: DeleteAccountModalProps) {
+  const t = useTranslations();
+  const [password, setPassword] = useState('');
+  const [localError, setLocalError] = useState('');
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const titleId = useId();
+  const descId = useId();
+  const inputId = useId();
+  const errorId = useId();
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    inputRef.current?.focus();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      previouslyFocused?.focus?.();
+    };
+  }, []);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape' && !loading) {
+      e.stopPropagation();
+      onClose();
+      return;
+    }
+    if (e.key === 'Tab' && dialogRef.current) {
+      const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), input:not([disabled])',
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!password) {
+      setLocalError(t('account.modalPasswordRequired'));
+      return;
+    }
+    setLocalError('');
+    await onConfirm(password);
+  };
+
+  const shownError = localError || error;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget && !loading) onClose();
+      }}
+      onKeyDown={handleKeyDown}
+    >
+      <div
+        ref={dialogRef}
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descId}
+        className="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6"
+      >
+        <h2 id={titleId} className="text-lg font-bold text-gray-800 dark:text-white mb-2">
+          {t('account.modalTitle')}
+        </h2>
+        <p id={descId} className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          {t('account.modalWarning')}
+        </p>
+        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+          <div>
+            <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              {t('account.modalPasswordLabel')}
+            </label>
+            <input
+              id={inputId}
+              ref={inputRef}
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+              aria-invalid={shownError ? true : undefined}
+              aria-describedby={shownError ? errorId : undefined}
+              disabled={loading}
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 dark:bg-gray-700 dark:text-white"
+            />
+          </div>
+          {shownError && (
+            <p id={errorId} role="alert" className="text-red-600 dark:text-red-400 text-sm">
+              {shownError}
+            </p>
+          )}
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3">
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={loading}
+              className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
+            >
+              {t('common.cancel')}
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
+            >
+              {loading ? t('account.modalDeleting') : t('account.modalConfirm')}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
 
 export default function ComptePage() {
   const t = useTranslations();
@@ -23,12 +162,19 @@ export default function ComptePage() {
   const [passwordError, setPasswordError] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState(false);
   const [passwordLoading, setPasswordLoading] = useState(false);
+  const [exportLoading, setExportLoading] = useState(false);
+  const [exportError, setExportError] = useState('');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteError, setDeleteError] = useState('');
+  // Évite la redirection vers /login quand la déconnexion suit une suppression de compte.
+  const [accountDeleted, setAccountDeleted] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && !user) {
+    if (!authLoading && !user && !accountDeleted) {
       router.push('/login');
     }
-  }, [user, authLoading, router]);
+  }, [user, authLoading, router, accountDeleted]);
 
   useEffect(() => {
     if (user?.locale) {
@@ -96,10 +242,46 @@ export default function ComptePage() {
       setConfirmPassword('');
       setShowPasswordForm(false);
       setToast(t('common.passwordChanged'));
-    } catch (err: any) {
-      setPasswordError(err.message || t('profile.changePasswordError'));
+    } catch (err: unknown) {
+      setPasswordError(
+        (err instanceof Error && err.message) || t('profile.changePasswordError'),
+      );
     } finally {
       setPasswordLoading(false);
+    }
+  };
+
+  const handleExport = async () => {
+    if (!token) return;
+    setExportError('');
+    setExportLoading(true);
+    try {
+      const { blob, filename } = await exportMyData(token);
+      downloadBlob(blob, filename);
+      setToast(t('account.exportSuccess'));
+    } catch {
+      setExportError(t('account.exportError'));
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
+  const handleDeleteAccount = async (password: string) => {
+    if (!token) return;
+    setDeleteError('');
+    setDeleteLoading(true);
+    try {
+      await deleteMyAccount(token, password);
+      setAccountDeleted(true);
+      logout();
+      router.replace('/');
+    } catch (err) {
+      setDeleteError(
+        err instanceof AccountApiError && err.status === 401
+          ? t('account.modalWrongPassword')
+          : t('account.modalError'),
+      );
+      setDeleteLoading(false);
     }
   };
 
@@ -296,6 +478,61 @@ export default function ComptePage() {
 
           <hr className="border-gray-200 dark:border-gray-700" />
 
+          {/* Mes données (RGPD) */}
+          <section aria-labelledby="my-data-title" className="space-y-6">
+            <div>
+              <h3 id="my-data-title" className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+                {t('account.sectionTitle')}
+              </h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                {t('account.sectionIntro')}
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-medium text-gray-800 dark:text-white mb-1">
+                {t('account.exportTitle')}
+              </h4>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+                {t('account.exportDescription')}
+              </p>
+              <button
+                type="button"
+                onClick={handleExport}
+                disabled={exportLoading || !token}
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
+              >
+                {exportLoading ? t('account.exportLoading') : t('account.exportButton')}
+              </button>
+              {exportError && (
+                <p role="alert" className="text-red-600 dark:text-red-400 text-sm mt-2">
+                  {exportError}
+                </p>
+              )}
+            </div>
+
+            <div className="rounded-lg border border-red-200 dark:border-red-900/50 p-4">
+              <h4 className="font-medium text-red-700 dark:text-red-400 mb-1">
+                {t('account.deleteTitle')}
+              </h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                {t('account.deleteDescription')}
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setDeleteError('');
+                  setShowDeleteModal(true);
+                }}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                {t('account.deleteButton')}
+              </button>
+            </div>
+          </section>
+
+          <hr className="border-gray-200 dark:border-gray-700" />
+
           {/* Logout */}
           <div>
             <button
@@ -307,6 +544,15 @@ export default function ComptePage() {
           </div>
         </div>
       </div>
+
+      {showDeleteModal && (
+        <DeleteAccountModal
+          onClose={() => setShowDeleteModal(false)}
+          onConfirm={handleDeleteAccount}
+          error={deleteError}
+          loading={deleteLoading}
+        />
+      )}
     </div>
   );
 }
