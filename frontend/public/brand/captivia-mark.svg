@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Captivia">
+  <rect width="1024" height="1024" fill="#0aa678"/>
+  <!-- Feuille stylisée -->
+  <path d="M512 232C712 292 788 468 740 640C700 780 584 832 512 792C440 832 324 780 284 640C236 468 312 292 512 232Z" fill="#ffffff"/>
+  <!-- Nervures -->
+  <path d="M512 330V790" stroke="#0aa678" stroke-width="34" stroke-linecap="round" fill="none"/>
+  <path d="M512 520C456 508 410 470 384 420M512 620C450 608 400 568 372 516M512 520C568 508 614 470 640 420M512 620C574 608 624 568 652 516" stroke="#0aa678" stroke-width="26" stroke-linecap="round" fill="none"/>
+  <!-- Pastille accent -->
+  <circle cx="742" cy="282" r="48" fill="#e7a64b"/>
+</svg>

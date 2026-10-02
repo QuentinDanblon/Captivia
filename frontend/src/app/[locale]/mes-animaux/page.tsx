@@ -474,7 +474,7 @@ function MyAnimalsPageContent() {
                       <button
                         type="button"
                         onClick={(e) => handleCardPhotoClick(e, animal.id)}
-                        className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors opacity-0 group-hover:opacity-100 text-white text-sm font-medium"
+                        className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 [@media(hover:none)]:inset-auto [@media(hover:none)]:bottom-2 [@media(hover:none)]:right-2 text-white text-sm font-medium"
                         title={t('animals.changePhoto')}
                       >
                         <span className="px-3 py-1.5 bg-white/90 text-gray-800 rounded-lg">
