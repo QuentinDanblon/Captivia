@@ -1,12 +1,12 @@
 [
   {
     "speciesId": 2000000126,
-    "description": "L'Ocicat est une race féline créée en 1964 résultant du croisement entre l'Abyssin, le Siamois et l'Oriental. Il se distingue par son pelage tacheté rappelant celui de l'ocelot, sa musculature athlétique et ses yeux expressifs. D'un tempérament très social et affectueux, il est souvent décrit comme un « chat-chien » pour son attachement et sa tendance à suivre son propriétaire.",
+    "description": "L'Ocicat est une race de chat créée en 1964 aux États-Unis par croisement entre abyssins, siamois, orientaux, mau égyptiens et american shorthair. Il se distingue par sa robe fauve tachetée rappelant celle de l'ocelot et son aspect athlétique. Sociable, affectueux et très actif, il est parfois qualifié de « chat-chien ».",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Ocicat"
   },
   {
     "speciesId": 2000000127,
-    "description": "L'Oriental est une race féline élancée et musclée originaire de Thaïlande, caractérisée par un poil court qui accentue son élégance et l'absence de motif colorpoint contrairement au Siamois. Il se distingue par sa nature affectueuse et son tempérament très communicatif, avec un vocabulaire vocal étonnamment étendu. Ce compagnon sociable s'adapte bien aux environnements familiaux et apprécie la compagnie humaine.",
+    "description": "L'Oriental est une race de chat originaire de Thaïlande, d'où il a été importé en 1850. Longiligne, svelte et musclé, à poil court, il correspond à la variété non pointée du Siamois, avec toutes les autres couleurs de robe. Vif, affectueux et intelligent, il possède un vocabulaire vocal très étendu ; sociable, il est considéré comme un chat idéal pour une famille.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Oriental_(chat)"
   },
   {
@@ -16,7 +16,7 @@
   },
   {
     "speciesId": 2000000129,
-    "description": "Le Russian Blue est une race féline originaire de Russie, probable du port d'Arkhangelsk. Il se distingue par son pelage court et dense d'un bleu-gris pâle aux reflets argentés et ses yeux verts émeraude. Intelligent et réservé par nature, ce chat est calme mais peut devenir joueur et athlétique, particulièrement apprécié pour son adaptabilité et sa mémoire exceptionnelle.",
+    "description": "Le Russian Blue est une race féline sélectionnée à partir d'une population naturelle qui serait originaire du port d'Arkhangelsk, en Russie. Il se distingue par son pelage court, dense et d'un bleu-gris pâle aux reflets argentés, et ses yeux vert émeraude. Intelligent, plutôt calme et réservé avec les étrangers, il est aussi athlétique et dispose d'une excellente mémoire ; il préfère les habitudes régulières au changement.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Russian_Blue"
   },
   {
@@ -26,27 +26,27 @@
   },
   {
     "speciesId": 2000000131,
-    "description": "Le Sibérien est une grande race féline russe caractérisée par sa robe à poils mi-longs très soyeuse et sa silhouette arrondie. Il est réputé pour être très sociable, intelligent et affectueux, souvent décrit comme un « chat-chien » pour son attachement à son maître. Remarquablement, c'est la race de chat la plus hypoallergénique car elle produit peu de protéines allergisantes.",
+    "description": "Le Sibérien est une race de chat originaire de Russie, de grande taille, à la robe mi-longue et à la silhouette arrondie « en tonneau ». Très sociable, intelligent et affectueux, très attaché à son maître, il est parfois appelé « chat-chien ». Il est qualifié de race de chat la plus hypoallergénique, car il produit naturellement peu de protéine allergisante Fel d 1.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Sib%C3%A9rien_(chat)"
   },
   {
     "speciesId": 2000000132,
-    "description": "Le Somali est une variété à poils longs de l'Abyssin originaire des États-Unis. Il se caractérise par son corps élancé, sa tête triangulaire, ses grands yeux en amande et ses oreilles finement touffues. Intelligent et joueur, ce félin affectueux s'adapte bien à la vie en intérieur et appréciera la compagnie de sa famille.",
+    "description": "Le Somali est une race de chat originaire des États-Unis, variété à poils mi-longs de l'Abyssin. De type foreign à la musculature bien développée, il a une tête en triangle adouci, des yeux en amande brillants et expressifs et de grandes oreilles à plumets. Réputé intelligent, très joueur et affectueux, il s'accommoderait bien de la vie en intérieur.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Somali_(chat)"
   },
   {
     "speciesId": 2000000133,
-    "description": "Le Tonkinois est une race féline résultant du croisement entre le Siamois et le Burmese, combinant les meilleures caractéristiques des deux races. De type semi-foreign, compact et musclé, il se distingue par ses yeux aquamarine (variété mink) et sa personnalité équilibrée. Plus actif que le Burmese mais moins exclusif que le Siamois, il demande beaucoup de stimulation mentale et physique.",
+    "description": "Le Tonkinois est une race de chat issue initialement du croisement entre un Siamois et un Burmese. De type semi-foreign, c'est-à-dire compact et musclé, il a les yeux couleur aigue-marine dans la variété mink. Plus actif et plus présent que le Burmese, moins exclusif et moins bavard que le Siamois, c'est un chat très intelligent et câlin qui a un grand besoin de se dépenser.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Tonkinois_(chat)"
   },
   {
     "speciesId": 2000000134,
-    "description": "Le Turc de Van est une race féline rare originaire de la région du lac de Van en Turquie, où elle a vécu pendant des millénaires. Ce chat de grande taille (jusqu'à 9 kg) se distingue par sa fourrure mi-longue douce avec un pelage blanc caractéristique et des marques roux ou colorées sur la tête et la queue. Exceptionnellement intelligent et energique, il aime l'eau et se montre très fidèle à son propriétaire.",
+    "description": "Le Turc de Van est une race rare et naturelle, originaire de la région du lac de Van, dans l'est de la Turquie. De grande taille, les mâles peuvent atteindre 9 kg et les femelles pèsent environ la moitié. Sa fourrure mi-longue est douce comme du cachemire, classiquement blanche avec des marques roux sur la tête et la queue. Très intelligent, assez énergique et attiré par l'eau, il suit volontiers son propriétaire partout.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Turc_de_Van"
   },
   {
     "speciesId": 2000000135,
-    "description": "L'Angora Turc est une race féline originaire de Turquie, connue depuis plus de 2 000 ans. Il se caractérise par sa robe à poils mi-longs très soyeuse et sans sous-poils, ainsi qu'une silhouette élancée et gracieuse. Particulièrement apprécié au XVIIIe siècle par l'aristocratie européenne, ce chat intelligent et joueur reste peu connu aujourd'hui malgré ses grandes qualités esthétiques et son tempérament affectueux.",
+    "description": "L'Angora Turc est une race de chat originaire de Turquie, connue en Orient depuis plus de 2 000 ans. Il se caractérise par une robe à poils mi-longs très soyeuse et sans sous-poil, ainsi qu'une silhouette fine et élancée. Décrit en Europe au XVIIe siècle, il y a été très apprécié de l'aristocratie ; c'est un chat très joueur, aujourd'hui encore peu connu.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Angora_turc"
   },
   {
@@ -56,22 +56,22 @@
   },
   {
     "speciesId": 2000000137,
-    "description": "Le Burmese est une race féline originaire de Birmanie (Myanmar), développée à partir des années 1930 aux États-Unis et en Grande-Bretagne. Il se distingue par son corps compact et musclé, son pelage court et brillant généralement brun foncé, avec deux standards distincts : le type américain plus trapu et le type européen plus élancé. Exceptionnellement social et ludique, il montre une forte dépendance affective envers ses propriétaires.",
+    "description": "Le Burmese est une race de chat originaire de Birmanie (Myanmar), développée par sélection aux États-Unis et en Grande-Bretagne à partir des années 1930. Il est musclé, avec un pelage très court, fin et brillant, de couleur brun foncé à l'origine. Deux standards distincts existent : le type américain, plus trapu, et le type britannique/européen, plus élancé. Très tourné vers les humains et joueur, il supporte mal d'être laissé seul longtemps.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Burmese_cat"
   },
   {
     "speciesId": 2000000138,
-    "description": "Le Ceylan est une race féline de taille moyenne originaire du Sri Lanka, découverte en 1984 par un vétérinaire italien. Il se caractérise par son pelage court et soyeux avec un motif ticked tabby distinctif, des anneaux sur la queue et des marques tabby caractéristiques sur la tête. Sociable et adaptable à la vie en appartement, il fait facilement confiance à ses propriétaires.",
+    "description": "Le Ceylan est une race de chat de taille moyenne originaire du Sri Lanka, découverte en 1984 par l'Italien Paolo Pellegatta. Il se caractérise par un pelage court et soyeux uniquement tiqueté (ticked tabby), avec des anneaux sur la queue et des marques tabby typiques sur la tête. Sociable, il s'adapte bien à la vie en appartement et donne facilement sa confiance à ses propriétaires.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Ceylan_(chat)"
   },
   {
     "speciesId": 2000000139,
-    "description": "Le Chausie est une race féline originaire des États-Unis. Issu du croisement entre le chat domestique et d'autres félins sauvages ou domestiques, il présente une morphologie élancée et athlétique. Cette race active et intelligente requiert beaucoup d'exercice et de stimulation mentale pour s'épanouir pleinement.",
-    "sourceUrl": null
+    "description": "Le Chausie est une race de chat originaire des États-Unis, issue de l'hybridation entre un Chaus (chat des marais) et un chat domestique. Il a une silhouette longue et rectangulaire, avec une musculature puissante. Il serait un chat actif et très intelligent.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chausie"
   },
   {
     "speciesId": 2000000140,
-    "description": "Le Cornish Rex est une race féline originaire de Grande-Bretagne, créée à partir d'une mutation spontanée découverte en Cornouailles dans les années 1950. De type oriental, il possède un corps long et fin avec le dos arqué, caractérisé par un pelage très court, ondulé et doux unique. Sociable et affectueux, il déteste la solitude et s'attache fortement à son maître, idéal pour la vie en appartement.",
+    "description": "Le Cornish Rex est une race de chat originaire de Grande-Bretagne, issue d'une mutation spontanée : son fondateur, un mâle nommé Kallibunker, a été trouvé au début des années 1950 en Cornouailles. De type oriental, il a un corps long et fin au dos arqué, et une robe très courte, douce et ondulée. Très sociable, affectueux et attaché à son maître, il déteste la solitude et s'adapterait très facilement à la vie d'appartement.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Cornish_Rex"
   }
 ]

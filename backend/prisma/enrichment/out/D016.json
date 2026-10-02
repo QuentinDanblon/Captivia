@@ -61,12 +61,12 @@
   },
   {
     "speciesId": 2000000574,
-    "description": "Le lapin Néo-Zélandais est une race développée en Californie à partir de lapins probablement importés de Nouvelle-Zélande. Ces lapins de taille moyenne à grande pesant 4,5 à 5,5 kg se distinguent par un physique musclé, des oreilles droites et un pelage dense qui reprend sa position naturelle après brossage. Originellement sélectionnés pour la viande et la fourrure, ils restent les lapins les plus couramment utilisés pour la production commerciale et l'expérimentation en laboratoire.",
+    "description": "Poids corrigé : 4,5-5,4 kg pour les femelles (mâles 9-11 lb) ; retiré « taille moyenne à grande » et « pelage dense » (non confirmés) ; « uniquement originellement viande et fourrure » reformulé d'après la page ; variété rouge (originelle) ajoutée. Page = lapin Néo-Zélandais en général, variété rouge mentionnée.",
     "sourceUrl": "https://en.wikipedia.org/wiki/New_Zealand_rabbit"
   },
   {
     "speciesId": 2000000575,
-    "description": "Le lapin tête de lion est une race naine caractérisée par une touffe de poils plus longs autour de la tête rappelant la crinière d'un lion. Bien que reconnu officiellement par les organismes britanniques et américains, cette race n'a pas de statut officiel en France en raison de la difficulté à stabiliser génétiquement ce trait distinctif. Ces petits lapins affectueux et délicats nécessitent des soins attentifs et une alimentation basée sur le foin et les légumes frais.",
+    "description": "« reconnu officiellement » -> « ont établi un standard de race » (page) ; « n'a pas de statut officiel en France » précisé (associations d'éleveurs) ; reformulé alimentation (foin, eau, végétaux frais) ; « délicats » retiré au profit de « besoin d'attention et de soins ».",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Lapin_t%C3%AAte_de_lion"
   },
   {
