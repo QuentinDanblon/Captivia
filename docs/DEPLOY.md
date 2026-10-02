@@ -99,7 +99,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `SENTRY_DSN` | Render | projet Sentry UE | Recommandé |
 | `OPERATOR_EMAILS` | Render | remplacé par `User.role` (W0-01) | — |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Render (`sync: false` ; clé publique servie par `GET /notifications/vapid-public-key`, rien côté Netlify) | `npm run vapid:generate` (backend/) | Dès W3-03 |
-| `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | Render | Stripe | Dès W3-04 |
+| `IAP_ENABLED`, `REVENUECAT_WEBHOOK_SECRET`, `REVENUECAT_ENTITLEMENT_ID`, `GOOGLE_PLAY_PACKAGE_NAME` | Render (`sync: false`) | RevenueCat (achats in-app, pas de Stripe — voir `docs/PAYMENTS.md`) | Dès la publication sur les stores |
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
 | `NEON_DATABASE_URL_DIRECT` | GitHub Secrets | Neon **directe** | Oui |

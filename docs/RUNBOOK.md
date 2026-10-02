@@ -253,6 +253,13 @@ Puis vérifier `/health/ready` et relancer *Database Backup* à la main.
 
 Voir §3.5.
 
+### 4.5 Clés Web Push (VAPID)
+
+1. Générer une nouvelle paire : `cd backend && npm run vapid:generate`.
+2. Render → *Environment* : remplacer `VAPID_PUBLIC_KEY` et `VAPID_PRIVATE_KEY` (et `VAPID_SUBJECT` si besoin), puis enregistrer (redéploiement).
+3. Rien à changer côté Netlify : le navigateur lit la clé publique via `GET /notifications/vapid-public-key`.
+4. Conséquence : les abonnements push existants deviennent invalides. Les envois vers ces abonnements échouent (404/410) et l'API les purge ; chaque utilisateur doit réactiver les notifications dans *Paramètres → Notifications*.
+
 ---
 
 ## 5. Opérateurs (rôle `OPERATOR`)
@@ -382,6 +389,7 @@ Aucune valeur secrète n'est notée ici. Sources : `render.yaml`, `netlify.toml`
 | `GOOGLE_PLAY_PACKAGE_NAME` | Dashboard (`sync: false`) | Lien « Gérer mon abonnement » Google Play |
 | `MAIL_HOST`, `MAIL_PORT`, `MAIL_SECURE`, `MAIL_USER`, `MAIL_PASS`, `MAIL_FROM` | Dashboard (`sync: false`) | SMTP ; sans `MAIL_HOST`, aucun e-mail n'est envoyé |
 | `REMINDERS_ENABLED` | Dashboard (`sync: false`) | `false` désactive le scheduler de rappels |
+| `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Dashboard (`sync: false`) | Web Push ; sans elles, l'envoi push est désactivé (journalisé) |
 
 Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `REDIS_HOST` (défaut `localhost`), `REDIS_PORT` (défaut 6379).
 
