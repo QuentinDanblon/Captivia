@@ -32,25 +32,33 @@
 
 ---
 
-## Avancement — sprint du 2026-10-02 (11 agents en parallèle, fusionnés sur `claude/zen-mendel-xq6nkb`)
+## Avancement — sprint du 2026-10-02 (3 vagues, 20 agents + 1 revue Opus, tout fusionné sur `claude/zen-mendel-xq6nkb`)
 
-**Vérifications d'intégration** (après fusion de toutes les branches, base PostgreSQL vierge) :
-- `prisma migrate deploy` : 9/9 migrations. `migrate diff` : aucun drift. Seed de production OK (0 magasin factice, 0 espèce rejetée).
-- Backend : build et `tsc` OK, **660/660 tests (43 suites)**.
-- Frontend : `tsc` OK, **ESLint 0 erreur**, **76/76 tests** (dont parité i18n), build de production OK.
-- `npm audit --omit=dev` : **0 vulnérabilité** (racine, backend, frontend).
+**Vérifications d'intégration finales** (toutes les branches fusionnées, PostgreSQL vierge) :
+- `prisma migrate deploy` : 10 migrations OK, `migrate diff` : aucun drift ; seed de production idempotent → **1 595 profils** (299 espèces + 1 296 races), 0 magasin factice.
+- Backend : `tsc` et build OK, **699/699 tests (48 suites)**.
+- Frontend : `tsc` OK, **ESLint 0 erreur**, **87/87 tests (9 suites)** dont parité i18n, build de production OK.
+- `npm audit --omit=dev` : **0 vulnérabilité** (racine, backend, frontend). `docker compose config` et workflows YAML valides.
+- Revue de code Opus (effort élevé) sur le diff cumulé : 11 constats, **tous corrigés** (migration CI après tous les checks, anti-antidatage des points, token après changement de mot de passe, scrub Sentry du token de reset, export RGPD complet, statut premium opérateur, chemins `breeding`, dédup de migration sans perte, ping hors GitHub Actions car dépôt privé).
 
 | Statut | Tâches |
 |---|---|
-| ✅ Fait | W0-01 (rôle `User.role`, emails normalisés, CLI `operator:set`), W0-02, W0-03, W0-05, W0-06, W0-07, W0-08, W1-06, W1-08, W2-01, W2-05, W2-07, W2-03 (backend + inscription), W4-02 (sauf `loading.tsx`, incompatible avec une vraie 404), DEP-01, DEP-08, WH-01, WH-02, WH-04, WH-05, BE-10 |
-| 🟡 Partiel | W0-04 (reste : `MAIL_HOST` obligatoire après W3-01), W1-01 (`tokenVersion` sans refresh token), W1-02 (`login`/`register` hors `request()`), W1-03 (reste : pino JSON, `instrument.ts`, release Sentry), W1-04 (reste : circuit breaker, retry GBIF), W1-07 (front : 0 erreur ; back : 2 000+ erreurs de lint historiques), W2-02 (pages rédigées FR/EN : **marqueurs `[À COMPLÉTER]` dans `frontend/src/lib/legal.ts`** + relecture juriste), W4-03 (valeurs traduites ; textes en dur restants dans les pages), W4-05 (skip link, menu modal, contrastes partiels), W5-01 (sociabilité corrigée ; import des races à intégrer) |
-| ⏳ À faire | W1-05, W1-09, W2-04, W2-06, W2-08, Vague 3 (e-mails, scheduler, push, Stripe), W4-01, W4-04, W4-06 à W4-09, Vague 5 (contenu), **Vague 6 (mobile)**, DEP-02 à DEP-07, DEP-09/10, WH-03, WH-06, WH-07 |
+| ✅ Fait | **V0** : W0-01, W0-02, W0-03, W0-05, W0-06, W0-07, W0-08 · **V1** : W1-03 (pino JSON expurgé, request-id, Sentry `instrument.ts` + release, `/health/ready`, version), W1-05, W1-06, W1-08 · **V2** : W2-01, W2-03, W2-05, W2-06, W2-07 · **V3** : W3-01 (MailService fr/en), W3-02 (cron 5 min, verrou transactionnel, `notifiedAt`, `User.timezone`) · **V4** : W4-01, W4-02, W4-04, W4-06 · **V5** : W5-01 · **V7** : DEP-01, DEP-08 · **WH** : 01, 02, 03, 04, 05 |
+| 🟡 Partiel | W0-04 (rendre `MAIL_HOST` obligatoire en prod dès le choix du prestataire), W1-01 (`tokenVersion` sans refresh token), W1-02 (`login`/`register` hors `request()`), W1-04 (circuit breaker, retry GBIF), W1-07 (backend : ~2 000 erreurs de lint historiques, job non bloquant), W2-02 (pages FR/EN rédigées — **marqueurs `[À COMPLÉTER]` dans `frontend/src/lib/legal.ts`** + relecture juriste), W4-03 (restes mineurs listés dans le commit), W4-05 (modales manuelles à migrer vers Radix, contrastes `--captivia-muted`) |
+| ⏳ À faire | W1-09, W2-04 (vérification d'e-mail), W2-08, W3-03 (Web Push : brancher `PushSender`), W3-04 (Stripe — ou laisser l'offre masquée, D-04), W3-05, W4-07, W4-08, W4-09, W5-02 à W5-04, **Vague 6 (mobile)**, DEP-02 à DEP-07, DEP-09/10, WH-06, WH-07 |
+
+**Points d'attention relevés pendant le sprint (à traiter) :**
+- `grade.service` : heures des événements posées en UTC sans fuseau, et `every_2_days`/`every_3_days` encore calculés sur la parité epoch (lié à W3-02).
+- Listes API bornées à 100 éléments par défaut (W1-05) : le frontend ne pagine pas encore → au-delà de 100 animaux/entrées, prévoir la pagination UI.
+- `SpeciesProfile.sourceUrl` pointe vers Wikidata (CC0) : le bloc d'attribution Wikipédia ne s'affiche que pour une URL wikipedia.org ; vérifier l'origine réelle des extraits (W2-06).
+- Logo et icônes **provisoires** (`frontend/public/brand/`, décision D-15) ; pas encore d'image OpenGraph.
 
 **Changements de contrat à connaître avant le premier déploiement :**
-- Après la migration `20261002100000_auth_roles_sessions`, **aucun compte n'est opérateur** : lancer `npm run operator:set -- <email>` (depuis un poste de dev avec l'URL Neon directe).
-- `/auth/register` exige `acceptTerms: true` et `ageConfirmed: true` ; mots de passe de 10 à 128 caractères.
-- En production, l'API **refuse de démarrer** sans `JWT_SECRET` (≥ 32 caractères, non-exemple), `CORS_ORIGIN` et `FRONTEND_URL` (https). `docker compose` exige `JWT_SECRET` et `POSTGRES_PASSWORD`.
-- Le lien public d'un animal est désormais en opt-in (les liens existants restent actifs, sans les données de santé).
+- Après la migration `20261002100000_auth_roles_sessions`, **aucun compte n'est opérateur** : `cd backend && DATABASE_URL=<URL Neon directe> npm run operator:set -- <email>` (depuis un poste de dev ; l'image runtime n'a pas les scripts).
+- `/auth/register` exige `acceptTerms: true` et `ageConfirmed: true` ; mots de passe de 10 à 128 caractères ; `change-password` renvoie un nouvel `accessToken`.
+- En production, l'API **refuse de démarrer** sans `JWT_SECRET` (≥ 32 caractères, non-exemple), `CORS_ORIGIN` et `FRONTEND_URL` (https). Variables nouvelles : `PUBLIC_WEB_URL`, `MAIL_*`, `REMINDERS_ENABLED`, `SENTRY_TRACES_SAMPLE_RATE` (backend) ; `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SENTRY_DSN` (frontend). Voir `docs/DEPLOY.md`.
+- Le lien public d'un animal est en opt-in (les liens existants restent actifs, sans données de santé).
+- Maintien en éveil de l'API Render : monitor **UptimeRobot** (le dépôt étant privé, pas de cron GitHub Actions).
 
 ## 1. Conventions d'exécution
 
