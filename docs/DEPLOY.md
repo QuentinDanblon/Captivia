@@ -46,7 +46,7 @@ Dépôt → *Settings → Secrets and variables → Actions* :
 | Type | Nom | Valeur | Usage |
 |---|---|---|---|
 | Secret | `NEON_DATABASE_URL_DIRECT` | URL Neon **directe** | Jobs `migrate-production` et « Seed production » |
-| Variable | `API_URL` | ex. `https://captivia-api.onrender.com` | `keep-warm.yml` |
+| Variable | `API_URL` | ex. `https://captivia-api.onrender.com` | `keep-warm.yml` (manuel) |
 
 Puis *Settings → Environments → New environment* : **`production`** (les jobs de migration et de seed y sont rattachés). Option : ajouter des « Required reviewers » ; dans ce cas la migration attend une approbation manuelle, et Render attend donc aussi (le check reste « en attente »).
 
@@ -102,7 +102,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
 | `NEON_DATABASE_URL_DIRECT` | GitHub Secrets | Neon **directe** | Oui |
-| `API_URL` | GitHub Variables | URL de l'API Render | Pour `keep-warm.yml` |
+| `API_URL` | GitHub Variables | URL de l'API Render | Pour `keep-warm.yml` (diagnostic manuel) |
 
 (*) D'autres tâches du plan (vague 0 et 1, durcissement de la configuration) rendent `CORS_ORIGIN` et `FRONTEND_URL` **obligatoires en production** : l'API pourra refuser de démarrer si elles sont absentes. Elles sont déjà fournies par `render.yaml` ; ne pas les supprimer du Blueprint ni du Dashboard.
 
@@ -113,7 +113,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 3. Netlify construit le site en parallèle. Ouvrir `https://captivia.netlify.app/fr`.
 4. **Seed du catalogue** (une seule fois, idempotent) : *Actions → « Seed production » → Run workflow*. Il applique `prisma migrate deploy` puis `prisma db seed` (espèces, races, magasins affiliés).
 5. Contrôles : recherche d'espèce, inscription d'un compte de test, ajout d'un animal. Vérifier dans les logs Render l'absence d'erreur CORS ou de connexion à la base.
-6. Activer le workflow `keep-warm.yml` (il ne tourne que si la variable `API_URL` est définie).
+6. Créer un monitor **UptimeRobot** gratuit (HTTP, toutes les 5 min) sur `<API_URL>/health` : il garde l'API Render éveillée et alerte par e-mail en cas de panne. Ne PAS planifier `keep-warm.yml` : le dépôt étant privé, un cron toutes les 10 min (~4 300 min/mois) épuiserait le quota gratuit de 2 000 min de GitHub Actions et bloquerait la CI.
 
 ## 7. Retour arrière (rollback)
 
@@ -135,17 +135,17 @@ Un déploiement dont le check `migrate-production` échoue n'est **pas** déploy
 
 | Service | Limites à connaître |
 |---|---|
-| **Render Free** | Mise en veille après 15 min sans trafic (réveil 30–60 s) ; 750 h d'instance par mois (le ping `keep-warm.yml` consomme ≈ 744 h) ; 512 Mo de RAM, 0,1 CPU ; pas de commande *pre-deploy* (d'où les migrations côté GitHub Actions) ; système de fichiers éphémère ; builds plus lents. |
+| **Render Free** | Mise en veille après 15 min sans trafic (réveil 30–60 s) ; 750 h d'instance par mois (un ping UptimeRobot toutes les 5 min la garde éveillée ≈ 744 h) ; 512 Mo de RAM, 0,1 CPU ; pas de commande *pre-deploy* (d'où les migrations côté GitHub Actions) ; système de fichiers éphémère ; builds plus lents. |
 | **Neon Free** | Stockage et heures de calcul plafonnés par projet ; calcul suspendu après quelques minutes d'inactivité (réveil ≈ 1 s) ; historique de restauration (PITR) très court ; nombre de connexions limité (d'où le pooler). |
 | **Netlify** | Quotas mensuels de builds, de bande passante et de fonctions (modèle à crédits) ; les previews de PR consomment des builds. |
-| **GitHub Actions** | Minutes mensuelles limitées en dépôt privé ; `keep-warm.yml` (toutes les 10 min) consomme peu mais s'additionne à la CI. |
+| **GitHub Actions** | 2 000 min/mois en dépôt privé : la CI complète en consomme ~10-15 par push ; aucun cron planifié (le ping est confié à UptimeRobot). |
 
 Les chiffres exacts évoluent : les vérifier sur les pages de tarifs de chaque fournisseur.
 
 ## 9. Quand passer en payant
 
 Passer en payant **dès qu'il y a des utilisateurs réels** ou que l'un de ces signaux apparaît :
-- Render Free : latence de réveil visible, quota de 750 h dépassé, 512 Mo insuffisants (erreurs OOM) → **Render Starter** (pas de veille, commande *pre-deploy* `npx prisma migrate deploy` possible, ce qui permettra de supprimer `migrate-production`). Désactiver alors `keep-warm.yml`.
+- Render Free : latence de réveil visible, quota de 750 h dépassé, 512 Mo insuffisants (erreurs OOM) → **Render Starter** (pas de veille, commande *pre-deploy* `npx prisma migrate deploy` possible, ce qui permettra de supprimer `migrate-production`). Supprimer alors le monitor de réveil (garder la supervision).
 - Neon Free : stockage ou heures de calcul proches du plafond, besoin d'un PITR plus long (RPO du plan : 24 h) → **Neon Launch**.
 - Netlify : builds ou bande passante épuisés en cours de mois → plan Pro.
 - Obligations légales et d'exploitation (sauvegardes, SLA, journaux) : voir DEP-03 (sauvegardes) et la checklist go-live du plan §7.

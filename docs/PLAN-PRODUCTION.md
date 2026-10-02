@@ -293,7 +293,7 @@ GitHub ─ push main ─► CI (tests + migrate) ─ checks verts ─► Render 
 ```
 
 **Limites de l'offre gratuite (à accepter) :**
-- Render Free met l'API en veille après 15 min sans trafic. Le workflow `keep-warm.yml` la garde éveillée (≈ 744 h, sous le quota de 750 h/mois). Instance de 512 Mo, pas de commande pre-deploy.
+- Render Free met l'API en veille après 15 min sans trafic. Un monitor UptimeRobot gratuit (toutes les 5 min) la garde éveillée (≈ 744 h, sous le quota de 750 h/mois) ; pas de cron GitHub Actions (dépôt privé : quota de 2 000 min/mois). Instance de 512 Mo, pas de commande pre-deploy.
 - Neon Free : stockage et heures de calcul limités, le calcul se met en veille (réveil ≈ 1 s), historique PITR court.
 - Netlify Starter : quotas de builds et de bande passante mensuels.
 
@@ -303,7 +303,7 @@ GitHub ─ push main ─► CI (tests + migrate) ─ checks verts ─► Render 
 - `render.yaml` : Blueprint du service `captivia-api` (Docker, Francfort, `/health`, `JWT_SECRET` généré, variables listées).
 - `netlify.toml` : base `frontend/`, Node 22, runtime Next.js détecté automatiquement.
 - `.github/workflows/deploy.yml` : après un CI vert sur `main`, enchaîne migrations Neon, deploy hook Render, `netlify deploy --prod`, puis un smoke test. Seed manuel en option.
-- `.github/workflows/keep-warm.yml` : ping de `/health` toutes les 10 min.
+- `.github/workflows/keep-warm.yml` : ping manuel de `/health` (diagnostic) ; le maintien en éveil passe par UptimeRobot.
 
 ### 5.3 Adaptation au « build automatique relié à GitHub » (DEP-01)
 1. **Netlify** relié au dépôt : base `frontend`, commande `npm run build`, previews de PR activées. `NEXT_PUBLIC_API_URL` dans Site configuration → Environment variables (contextes production et deploy-preview).

@@ -19,7 +19,9 @@ SET "sourceKey" = COALESCE(
   'medication:' || "medicationId",
   'appointment:' || "appointmentId",
   'vaccination:' || "vaccinationId",
-  'pref:' || "type"
+  -- Sans source (ex. routine supprimée) : un événement déjà traité garde une clé
+  -- unique pour ne jamais perdre d'historique ; seuls les « pending » sont dédoublonnés.
+  CASE WHEN "status" = 'pending' THEN 'pref:' || "type" ELSE 'legacy:' || "id" END
 );
 
 -- Dédoublonnage AVANT la création de l'index unique : on garde en priorité

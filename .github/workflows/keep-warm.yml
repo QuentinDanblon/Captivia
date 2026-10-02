@@ -1,13 +1,14 @@
 name: Keep API warm
 
-# L'offre gratuite Render met l'API en veille après 15 min sans trafic
-# (réveil ~30-60 s). Un ping toutes les 10 min la garde active ; une seule
-# instance 24/7 consomme ~744 h, sous le quota gratuit de 750 h/mois.
-# Désactivez ce workflow si vous passez sur une offre payante.
+# L'offre gratuite Render met l'API en veille après 15 min sans trafic (réveil ~30-60 s).
+#
+# ⚠️ Le dépôt est PRIVÉ : un cron GitHub Actions toutes les 10 min consommerait ~4 300 min/mois,
+# au-delà des 2 000 min gratuites, et bloquerait toute la CI (y compris les migrations).
+# → Utiliser plutôt un pinger externe gratuit : UptimeRobot (monitor HTTP toutes les 5 min sur
+#   <API_URL>/health), qui sert en même temps de supervision (DEP-04). Voir docs/DEPLOY.md.
+# Ce workflow reste disponible en déclenchement manuel (diagnostic).
 
 on:
-  schedule:
-    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 permissions: {}
@@ -20,4 +21,4 @@ jobs:
     steps:
       - env:
           API_URL: ${{ vars.API_URL }}
-        run: curl -fsS --max-time 90 "$API_URL/health" > /dev/null || true
+        run: curl -fsS --max-time 90 "$API_URL/health"

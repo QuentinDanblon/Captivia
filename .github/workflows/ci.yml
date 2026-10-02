@@ -165,7 +165,9 @@ jobs:
   # Sans ce secret, le job est ignoré proprement (avertissement, pas d'échec).
   migrate-production:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [test-backend, build-frontend]
+    # Migrer seulement si TOUT ce qui conditionne le déploiement Render est vert,
+    # sinon la base serait migrée sans que la nouvelle API soit déployée.
+    needs: [test-backend, build-frontend, docker-build, quality]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: production
