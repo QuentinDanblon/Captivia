@@ -1,8 +1,14 @@
 # Render Blueprint — API NestJS Captivia (offre gratuite, région Francfort).
 # Création : Render Dashboard → New → Blueprint → ce dépôt. Voir docs/DEPLOY.md.
 #
-# autoDeploy est désactivé : le workflow GitHub « Deploy » applique d'abord les
-# migrations Prisma sur Neon, puis déclenche le déploiement via le Deploy Hook.
+# Pipeline à build automatique (DEP-01) : le service est relié à GitHub et se
+# redéploie tout seul après un push sur la branche principale.
+#   autoDeployTrigger: checksPass → Render attend que TOUS les checks GitHub du
+#   commit soient verts (tests, build, et le job « migrate-production » de
+#   .github/workflows/ci.yml qui applique les migrations Prisma sur Neon), puis
+#   déploie. (Valeurs possibles : off | commit | checksPass ; ce champ remplace
+#   l'ancien booléen autoDeploy, déprécié.)
+#   Les anciens Deploy Hooks ne sont plus utilisés.
 services:
   - type: web
     name: captivia-api
@@ -13,20 +19,27 @@ services:
     dockerContext: .
     dockerfilePath: ./Dockerfile
     healthCheckPath: /health
-    autoDeploy: false
+    autoDeployTrigger: checksPass
     envVars:
       - key: NODE_ENV
         value: production
       - key: HOST
         value: 0.0.0.0
-      # URL « pooled » Neon (…-pooler…?sslmode=require&pgbouncer=true) — à saisir dans le Dashboard.
+      # URL « pooled » Neon (host « -pooler ») à saisir dans le Dashboard :
+      #   postgresql://USER:PASS@ep-xxx-pooler.eu-central-1.aws.neon.tech/captivia?sslmode=require&pgbouncer=true&connect_timeout=15
+      # (les migrations, elles, utilisent l'URL directe via le secret GitHub NEON_DATABASE_URL_DIRECT).
       - key: DATABASE_URL
         sync: false
       - key: JWT_SECRET
         generateValue: true
+      # Origines autorisées (CORS) et URL publique du site. À ajuster si le nom du site
+      # Netlify diffère de « captivia ». Obligatoires en production (voir docs/DEPLOY.md).
       - key: CORS_ORIGIN
         value: https://captivia.netlify.app
       - key: FRONTEND_URL
+        value: https://captivia.netlify.app
+      # URL publique du site web, utilisée pour les liens des e-mails et des pages publiques.
+      - key: PUBLIC_WEB_URL
         value: https://captivia.netlify.app
       - key: TRUST_PROXY
         value: "true"

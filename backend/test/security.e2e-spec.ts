@@ -1,13 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
-import { AppModule } from '../src/app.module';
-import { CacheModule } from '../src/cache/cache.module';
-import { TestCacheModule } from './test-cache.module';
+import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
+import { createTestApp } from './utils/create-app';
 import { PrismaService } from '../src/prisma/prisma.service';
 
 describe('Security Tests', () => {
   let app: INestApplication;
+  let url: string;
   let prisma: PrismaService;
   let user1Token: string;
   let user2Token: string;
@@ -16,42 +14,24 @@ describe('Security Tests', () => {
   let user1AnimalId: string;
 
   beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    })
-      .overrideModule(CacheModule)
-      .useModule(TestCacheModule)
-      .compile();
+    // Serveur à l'écoute sur un port éphémère, configuré comme main.ts
+    // (ValidationPipe, filtre, CORS, helmet) — cf. test/utils/create-app.ts (BE-10).
+    ({ app, url } = await createTestApp({ offlineGbif: true }));
 
-    app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-        transform: true,
-      }),
-    );
-    // CORS comme dans main.ts (les tests bootent AppModule sans passer par bootstrap)
-    app.enableCors({
-      origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-      credentials: false,
-    });
-    await app.init();
-    
     prisma = app.get(PrismaService);
 
     // Create two test users
     const user1Email = `security-test-1-${Date.now()}@captivia.com`;
     const user2Email = `security-test-2-${Date.now()}@captivia.com`;
     
-    const user1Response = await request(app.getHttpServer())
+    const user1Response = await request(url)
       .post('/auth/register')
       .send({ email: user1Email, password: 'password123' });
     
     user1Token = user1Response.body.accessToken;
     user1Id = user1Response.body.user.id;
     
-    const user2Response = await request(app.getHttpServer())
+    const user2Response = await request(url)
       .post('/auth/register')
       .send({ email: user2Email, password: 'password123' });
     
@@ -59,7 +39,7 @@ describe('Security Tests', () => {
     user2Id = user2Response.body.user.id;
 
     // Create an animal for user1
-    const animalResponse = await request(app.getHttpServer())
+    const animalResponse = await request(url)
       .post('/users/me/animals')
       .set('Authorization', `Bearer ${user1Token}`)
       .send({
@@ -85,27 +65,27 @@ describe('Security Tests', () => {
 
   describe('JWT Authentication', () => {
     it('should reject requests without token', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .get('/users/me/animals')
         .expect(401);
     });
 
     it('should reject requests with invalid token', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .get('/users/me/animals')
         .set('Authorization', 'Bearer invalid-token')
         .expect(401);
     });
 
     it('should reject requests with malformed token', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .get('/users/me/animals')
         .set('Authorization', 'InvalidFormat')
         .expect(401);
     });
 
     it('should accept requests with valid token', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .get('/users/me/animals')
         .set('Authorization', `Bearer ${user1Token}`)
         .expect(200);
@@ -114,21 +94,21 @@ describe('Security Tests', () => {
 
   describe('Ownership Checks - Animals', () => {
     it('should allow user to access their own animal', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .get(`/users/me/animals/${user1AnimalId}`)
         .set('Authorization', `Bearer ${user1Token}`)
         .expect(200);
     });
 
     it('should prevent user from accessing another user\'s animal', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .get(`/users/me/animals/${user1AnimalId}`)
         .set('Authorization', `Bearer ${user2Token}`)
         .expect(403);
     });
 
     it('should prevent user from updating another user\'s animal', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .patch(`/users/me/animals/${user1AnimalId}`)
         .set('Authorization', `Bearer ${user2Token}`)
         .send({ name: 'Hacked Name' })
@@ -136,7 +116,7 @@ describe('Security Tests', () => {
     });
 
     it('should prevent user from deleting another user\'s animal', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .delete(`/users/me/animals/${user1AnimalId}`)
         .set('Authorization', `Bearer ${user2Token}`)
         .expect(403);
@@ -145,7 +125,7 @@ describe('Security Tests', () => {
 
   describe('Input Validation', () => {
     it('should reject registration with invalid email', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .post('/auth/register')
         .send({
           email: 'not-an-email',
@@ -155,7 +135,7 @@ describe('Security Tests', () => {
     });
 
     it('should reject registration with short password', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .post('/auth/register')
         .send({
           email: 'test@captivia.com',
@@ -165,7 +145,7 @@ describe('Security Tests', () => {
     });
 
     it('should reject animal creation with missing required fields', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${user1Token}`)
         .send({
@@ -175,7 +155,7 @@ describe('Security Tests', () => {
     });
 
     it('should reject animal creation with invalid data types', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${user1Token}`)
         .send({
@@ -185,27 +165,36 @@ describe('Security Tests', () => {
         .expect(400);
     });
 
-    it('should strip unknown fields (whitelist)', async () => {
-      const response = await request(app.getHttpServer())
+    it('should reject unknown fields (whitelist + forbidNonWhitelisted, comme main.ts)', async () => {
+      const response = await request(url)
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${user2Token}`)
         .send({
           speciesId: 5221172,
           name: 'Test Animal',
-          unknownField: 'should be removed',
+          unknownField: 'should be rejected',
           isPremium: true, // Should not bypass premium check
         })
-        .expect(201);
+        .expect(400);
 
-      expect(response.body).not.toHaveProperty('unknownField');
+      expect(JSON.stringify(response.body)).toContain('unknownField');
     });
   });
 
   describe('Premium Limit Enforcement', () => {
     it('should enforce premium limit for free users', async () => {
-      // User2 already created one animal in previous test
-      // Try to create a second one
-      await request(app.getHttpServer())
+      // Test autonome (ne dépend plus d'un test précédent) : le premier animal
+      // est accepté, le second dépasse la limite de l'offre gratuite.
+      await request(url)
+        .post('/users/me/animals')
+        .set('Authorization', `Bearer ${user2Token}`)
+        .send({
+          speciesId: 5221172,
+          name: 'First Animal',
+        })
+        .expect(201);
+
+      await request(url)
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${user2Token}`)
         .send({
@@ -218,14 +207,14 @@ describe('Security Tests', () => {
 
   describe('SQL Injection Protection', () => {
     it('should handle SQL injection attempts in search', () => {
-      return request(app.getHttpServer())
+      return request(url)
         .get("/species/search?q='; DROP TABLE users; --")
         .expect(200); // Should not cause SQL error, Prisma protects
     });
 
     it('should handle SQL injection in ID parameter', () => {
       // DTO durci : id doit être numérique strict → 400 (validation, plus 404)
-      return request(app.getHttpServer())
+      return request(url)
         .get("/species/1' OR '1'='1")
         .expect(400);
     });
@@ -233,7 +222,7 @@ describe('Security Tests', () => {
 
   describe('CORS', () => {
     it('should include CORS headers for allowed origin', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(url)
         .get('/health')
         .set('Origin', 'http://localhost:3000')
         .expect(200);
@@ -251,7 +240,7 @@ describe('Security Tests', () => {
       
       for (let i = 0; i < 10; i++) {
         requests.push(
-          request(app.getHttpServer())
+          request(url)
             .get('/species/search?q=test')
         );
       }
@@ -271,7 +260,7 @@ describe('Security Tests', () => {
       const testEmail = `pwd-test-${Date.now()}@captivia.com`;
       const password = 'test-password-123';
       
-      await request(app.getHttpServer())
+      await request(url)
         .post('/auth/register')
         .send({
           email: testEmail,
@@ -297,7 +286,7 @@ describe('Security Tests', () => {
 
   describe('Data Exposure', () => {
     it('should not expose password hash in API responses', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(url)
         .get('/auth/me')
         .set('Authorization', `Bearer ${user1Token}`)
         .expect(200);
@@ -307,7 +296,7 @@ describe('Security Tests', () => {
     });
 
     it('should not expose other users\' data', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(url)
         .get('/users/me/animals')
         .set('Authorization', `Bearer ${user1Token}`)
         .expect(200);
