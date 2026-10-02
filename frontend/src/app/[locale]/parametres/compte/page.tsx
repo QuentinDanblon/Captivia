@@ -152,7 +152,7 @@ export default function ComptePage() {
   const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
-  const { user, token, isLoading: authLoading, logout } = useAuth();
+  const { user, token, isLoading: authLoading, logout, updateToken } = useAuth();
   const [toast, setToast] = useState<string | null>(null);
   const [selectedLocale, setSelectedLocale] = useState('fr');
   const [showPasswordForm, setShowPasswordForm] = useState(false);
@@ -235,7 +235,9 @@ export default function ComptePage() {
 
     setPasswordLoading(true);
     try {
-      await api.changePassword(token, currentPassword, newPassword);
+      // Le backend incrémente tokenVersion : l'ancien jeton est révoqué, on adopte le nouveau.
+      const res = await api.changePassword(token, currentPassword, newPassword);
+      if (res?.accessToken) updateToken(res.accessToken);
       setPasswordSuccess(true);
       setCurrentPassword('');
       setNewPassword('');

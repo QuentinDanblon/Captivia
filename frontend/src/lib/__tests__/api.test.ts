@@ -396,6 +396,30 @@ describe('API Client', () => {
       expect(logoutListener).not.toHaveBeenCalled();
     });
 
+    it('changePassword renvoie le nouveau accessToken', async () => {
+      fetchMock().mockResolvedValue(jsonResponse(200, { message: 'ok', accessToken: 'new.jwt' }));
+
+      await expect(api.changePassword('tok', 'old', 'newpassword1')).resolves.toEqual({
+        message: 'ok',
+        accessToken: 'new.jwt',
+      });
+    });
+
+    it('les méthodes breeding appellent /users/me/animals/:id/breeding (chemin du backend)', async () => {
+      fetchMock().mockResolvedValue(jsonResponse(200, []));
+      await api.getBreedingRecords('a1', 'tok');
+      expect(String(fetchMock().mock.calls.at(-1)?.[0])).toMatch(/\/users\/me\/animals\/a1\/breeding$/);
+
+      await api.createBreedingRecord('a1', {}, 'tok');
+      expect(String(fetchMock().mock.calls.at(-1)?.[0])).toMatch(/\/animals\/a1\/breeding$/);
+
+      await api.updateBreedingRecord('a1', 'r1', {}, 'tok');
+      expect(String(fetchMock().mock.calls.at(-1)?.[0])).toMatch(/\/animals\/a1\/breeding\/r1$/);
+
+      await api.deleteBreedingRecord('a1', 'r1', 'tok');
+      expect(String(fetchMock().mock.calls.at(-1)?.[0])).toMatch(/\/animals\/a1\/breeding\/r1$/);
+    });
+
     it('getRoutineTemplates renvoie [] sur 404', async () => {
       fetchMock().mockResolvedValue(jsonResponse(404, { message: 'none' }));
 
