@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend Captivia
 
-## Getting Started
+Interface utilisateur de la plateforme Captivia — gestion participative du patrimoine génétique animal.
 
-First, run the development server:
+## Stack technique
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework** : Next.js 16 avec App Router
+- **Internationalisation** : next-intl 4.8.1 — 6 langues (FR par défaut, EN, ES, DE, IT, PT) avec préfixe `as-needed`
+- **Styles** : Tailwind CSS 4
+- **Composants UI** : Radix UI (@radix-ui/react-dialog, @radix-ui/react-tabs)
+- **Icônes** : lucide-react
+- **Client HTTP** : axios
+- **Monitoring** : Sentry optionnel via @sentry/nextjs
+- **Tests** : Jest + Playwright (e2e)
+- **Lint** : ESLint bloquant en CI
+- **Node.js** : ≥22
+
+## Arborescence
+
+```
+frontend/
+├── src/
+│   ├── app/[locale]/        # Routes par langue (parametres/, animal-public/, etc.)
+│   ├── components/          # Composants React réutilisables
+│   ├── lib/
+│   │   ├── config.ts        # Configuration (URL d'API, etc.)
+│   │   ├── api.ts           # Fonctions d'appel API
+│   │   ├── legal.ts         # Données légales à compléter
+│   │   └── seo.ts           # Métadonnées SEO
+│   └── content/legal/       # Pages légales statiques
+├── messages/                # Fichiers de traduction (de.json, en.json, es.json, fr.json, it.json, pt.json)
+├── i18n/
+│   ├── routing.ts           # Configuration next-intl (locales, défaut, préfixe)
+│   └── request.ts           # Context API i18n
+├── e2e/                     # Tests Playwright
+├── public/                  # Assets statiques
+└── scripts/                 # Scripts utilitaires
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Variables d'environnement (`.env.local`)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Obligatoire | Production | Exemple |
+|---|---|---|---|
+| `NEXT_PUBLIC_API_URL` | ✓ | ✓ | `https://api.captivia.local` |
+| `NEXT_PUBLIC_SITE_URL` |  | ✓ | `https://captivia.local` |
+| `NEXT_PUBLIC_SENTRY_DSN` |  |  | `https://...@sentry.io/...` |
 
-## Learn More
+### Fichiers clés
 
-To learn more about Next.js, take a look at the following resources:
+- **`src/lib/config.ts`** : Configuration frontale (origine API, site URL)
+- **`src/lib/api.ts`** : Appels API centralisés
+- **`src/i18n/navigation.ts`** : Helpers de navigation multilingue
+- **`src/lib/legal.ts`** : Mentions légales, RGPD, etc. — **À compléter**
+- **`messages/*.json`** : Texte UI par langue (6 fichiers)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts npm
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run dev              # Développement (port 3000)
+npm run build           # Build production
+npm run start           # Serveur production
+npm run lint            # ESLint (bloquant)
+npm run test            # Jest
+npm run test:modals     # E2E Playwright (dialogues)
+```
 
-## Deploy on Vercel
+## Conventions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Texte UI
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Tous les textes utilisateur résident dans **`messages/{fr,en,es,de,it,pt}.json`** — vérifier la parité entre 6 fichiers. Pas de texte codé en dur.
+
+### Navigation
+
+Utiliser `@/i18n/navigation` pour les liens multilingues.
+
+### Code
+
+- Pas de `any` TypeScript (lint bloquant)
+- ESLint obligatoire (`npm run lint` doit passer en CI)
+- Tests Jest pour la logique métier
+
+## Déploiement
+
+Voir **[`../docs/DEPLOY.md`](../docs/DEPLOY.md)** pour déploiement Netlify, variables d'environnement de production et hôte personnalisé.
+
+---
+
+*Documentation générée pour Captivia — version frontend 0.1.0*
