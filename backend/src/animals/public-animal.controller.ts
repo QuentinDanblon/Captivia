@@ -1,47 +1,29 @@
-import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
-import { PrismaService } from '../prisma/prisma.service';
+import type { Response } from 'express';
+import { AnimalsService } from './animals.service';
+import { RateLimitGuard } from '../common/guards/rate-limit.guard';
 
 @ApiTags('public')
 @Controller('public/animal')
+@UseGuards(RateLimitGuard)
 export class PublicAnimalController {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly animalsService: AnimalsService) {}
 
   @Get(':slug')
   @ApiOperation({
-    summary: 'Get public animal profile by slug (for QR code scan). No auth.',
+    summary:
+      'Get the public profile of an animal by slug (QR scan). No auth. Opt-in by the owner; whitelist of fields only.',
   })
   @ApiParam({ name: 'slug', description: 'Public slug of the animal' })
-  async getBySlug(@Param('slug') slug: string) {
-    const animal = await this.prisma.animal.findFirst({
-      where: { publicSlug: slug },
-      include: {
-        healthRecords: {
-          orderBy: { date: 'desc' },
-        },
-      },
-    });
-
-    if (!animal) {
-      throw new NotFoundException('Animal not found');
-    }
-
-    return {
-      id: animal.id,
-      name: animal.name,
-      speciesId: animal.speciesId,
-      birthDate: animal.birthDate,
-      sex: animal.sex,
-      photos: animal.photos,
-      notes: animal.notes,
-      healthRecords: animal.healthRecords.map((r) => ({
-        id: r.id,
-        type: r.type,
-        title: r.title,
-        date: r.date,
-        notes: r.notes,
-        details: r.details,
-      })),
-    };
+  async getBySlug(
+    @Param('slug') slug: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    // Posés avant tout (y compris pour les 404) : pas d'indexation, pas de cache
+    // (la révocation du lien doit être immédiate).
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+    res.setHeader('Cache-Control', 'no-store');
+    return this.animalsService.getPublicProfile(slug);
   }
 }

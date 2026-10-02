@@ -37,6 +37,25 @@ export function isBackendUnavailable(err: unknown): boolean {
   return err instanceof Error && err.message === BACKEND_UNAVAILABLE_MESSAGE;
 }
 
+/** W0-06 — état du partage public (QR) d'un animal ; `url` est construite par le backend. */
+export interface PublicLinkState {
+  enabled: boolean;
+  showHealth: boolean;
+  slug: string | null;
+  url: string | null;
+}
+
+/** W0-06 — profil public (liste blanche renvoyée par GET /public/animal/:slug). */
+export interface PublicAnimalProfile {
+  name: string;
+  species: { commonName: string; scientificName: string } | null;
+  sex: string | null;
+  birthYear: number | null;
+  photo: string | null;
+  /** Présent uniquement si le propriétaire a activé « Afficher les vaccins ». */
+  vaccinations?: Array<{ name: string; date: string }>;
+}
+
 async function safeFetch(url: string, init?: RequestInit): Promise<Response> {
   try {
     return await fetch(url, init);
@@ -1196,30 +1215,57 @@ export const api = {
     return data as { isPremium: boolean; plan: string };
   },
 
-  getAnimalPublicLink: async (animalId: string, token: string, baseUrl?: string) => {
-    const qs = baseUrl ? `?baseUrl=${encodeURIComponent(baseUrl)}` : '';
+  /** État du partage public d'un animal. L'URL est construite par le backend (W0-06). */
+  getAnimalPublicLink: async (animalId: string, token: string, locale?: string): Promise<PublicLinkState> => {
+    const qs = locale ? `?locale=${encodeURIComponent(locale)}` : '';
     const response = await safeFetch(
       `${API_URL}/users/me/animals/${animalId}/public-link${qs}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
-    return data as { slug: string; url: string };
+    return data as PublicLinkState;
   },
 
-  getPublicAnimal: async (slug: string) => {
-    const response = await safeFetch(`${API_URL}/public/animal/${encodeURIComponent(slug)}`);
+  updateAnimalPublicLink: async (
+    animalId: string,
+    token: string,
+    body: { enabled?: boolean; showHealth?: boolean },
+    locale?: string,
+  ): Promise<PublicLinkState> => {
+    const qs = locale ? `?locale=${encodeURIComponent(locale)}` : '';
+    const response = await safeFetch(
+      `${API_URL}/users/me/animals/${animalId}/public-link${qs}`,
+      {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify(body),
+      }
+    );
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
-    return data as {
-      id: string;
-      name: string;
-      speciesId: number;
-      birthDate?: string;
-      sex?: string;
-      photos: string[];
-      notes?: string;
-      healthRecords: Array<{ id: string; type: string; title: string; date: string; notes?: string; details?: object }>;
-    };
+    return data as PublicLinkState;
+  },
+
+  regenerateAnimalPublicLink: async (animalId: string, token: string, locale?: string): Promise<PublicLinkState> => {
+    const qs = locale ? `?locale=${encodeURIComponent(locale)}` : '';
+    const response = await safeFetch(
+      `${API_URL}/users/me/animals/${animalId}/public-link/regenerate${qs}`,
+      { method: 'POST', headers: { Authorization: `Bearer ${token}` } }
+    );
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
+    return data as PublicLinkState;
+  },
+
+  getPublicAnimal: async (slug: string): Promise<PublicAnimalProfile> => {
+    const response = await safeFetch(`${API_URL}/public/animal/${encodeURIComponent(slug)}`);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const err = new Error((data as { message?: string })?.message || response.statusText) as Error & { status?: number };
+      err.status = response.status;
+      throw err;
+    }
+    return data as PublicAnimalProfile;
   },
 };

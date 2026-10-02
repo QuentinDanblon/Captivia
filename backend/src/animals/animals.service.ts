@@ -8,13 +8,74 @@ import { randomBytes } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAnimalDto, UpdateAnimalDto } from './dto/animal.dto';
 import { ensureAnimalOwnership } from '../common/helpers/ownership.helper';
+import { isOperatorEmail } from '../common/operators';
 
 const FREE_ANIMAL_LIMIT = 1;
 
-/** Sous-ensemble de PrismaService/transaction exposant animal.findUnique (parenté). */
-type AnimalDelegate = { animal: { findUnique: (args: { where: { id: string } }) => Promise<{ userId: string; sex: string | null } | null> } };
+/** Locales supportées pour construire l'URL publique (liste blanche, défaut : fr). */
+export const PUBLIC_LINK_LOCALES = [
+  'fr',
+  'en',
+  'es',
+  'de',
+  'it',
+  'pt',
+] as const;
 
-const PARENT_SELECT = { id: true, name: true, sex: true, photos: true } as const;
+/** Slug public : base64url, 10 à 64 caractères (les anciens slugs font 16 caractères alphanumériques). */
+export const PUBLIC_SLUG_PATTERN = /^[A-Za-z0-9_-]{10,64}$/;
+
+export interface PublicLinkState {
+  enabled: boolean;
+  showHealth: boolean;
+  slug: string | null;
+  url: string | null;
+}
+
+/**
+ * Premium effectif (miroir de AuthService.effectivePremium, qui n'est pas exporté) :
+ * abonnement actif OU opérateur. À remplacer par l'export partagé quand il existera.
+ */
+export function isEffectivelyPremium(user: {
+  email: string;
+  isPremium: boolean;
+}): boolean {
+  return user.isPremium || isOperatorEmail(user.email);
+}
+
+/** URL de base publique, construite côté serveur uniquement (jamais depuis le client). */
+function publicWebBaseUrl(): string {
+  const raw =
+    (process.env.PUBLIC_WEB_URL || process.env.FRONTEND_URL || '').trim() ||
+    'http://localhost:3000';
+  return raw.replace(/\/+$/, '');
+}
+
+function normalizePublicLocale(locale?: string): string {
+  const l = (locale || '').trim().toLowerCase();
+  return (PUBLIC_LINK_LOCALES as readonly string[]).includes(l) ? l : 'fr';
+}
+
+function generatePublicSlug(): string {
+  // 18 octets aléatoires = 144 bits, 24 caractères base64url
+  return randomBytes(18).toString('base64url');
+}
+
+/** Sous-ensemble de PrismaService/transaction exposant animal.findUnique (parenté). */
+type AnimalDelegate = {
+  animal: {
+    findUnique: (args: {
+      where: { id: string };
+    }) => Promise<{ userId: string; sex: string | null } | null>;
+  };
+};
+
+const PARENT_SELECT = {
+  id: true,
+  name: true,
+  sex: true,
+  photos: true,
+} as const;
 
 @Injectable()
 export class AnimalsService {
@@ -22,6 +83,16 @@ export class AnimalsService {
 
   async create(userId: string, createAnimalDto: CreateAnimalDto) {
     return this.prisma.$transaction(async (tx) => {
+      // Verrou de ligne sur l'utilisateur : sérialise les créations concurrentes du même
+      // compte, pour que la limite « 1 animal gratuit » ne puisse pas être contournée
+      // par des requêtes parallèles (lecture du compteur + insertion non atomiques).
+      const locked = await tx.$queryRaw<{ id: string }[]>`
+        SELECT "id" FROM "User" WHERE "id" = ${userId} FOR UPDATE
+      `;
+      if (!locked || locked.length === 0) {
+        throw new NotFoundException('User not found');
+      }
+
       const user = await tx.user.findUnique({
         where: { id: userId },
         include: { _count: { select: { animals: true } } },
@@ -31,14 +102,20 @@ export class AnimalsService {
         throw new NotFoundException('User not found');
       }
 
-      if (!user.isPremium && user._count.animals >= FREE_ANIMAL_LIMIT) {
+      if (
+        !isEffectivelyPremium(user) &&
+        user._count.animals >= FREE_ANIMAL_LIMIT
+      ) {
         throw new ForbiddenException(
           'Free users can only have 1 animal. Upgrade to premium for unlimited animals.',
         );
       }
 
       // Module F — validation parenté (existence, même propriétaire, sexe)
-      if (createAnimalDto.fatherId !== undefined && createAnimalDto.fatherId !== null) {
+      if (
+        createAnimalDto.fatherId !== undefined &&
+        createAnimalDto.fatherId !== null
+      ) {
         await this.validateParent(
           tx,
           createAnimalDto.fatherId,
@@ -48,7 +125,10 @@ export class AnimalsService {
           'father',
         );
       }
-      if (createAnimalDto.motherId !== undefined && createAnimalDto.motherId !== null) {
+      if (
+        createAnimalDto.motherId !== undefined &&
+        createAnimalDto.motherId !== null
+      ) {
         await this.validateParent(
           tx,
           createAnimalDto.motherId,
@@ -253,11 +333,7 @@ export class AnimalsService {
       throw new BadRequestException('Parent must belong to the same owner');
     }
 
-    if (
-      parent.sex &&
-      parent.sex !== 'unknown' &&
-      parent.sex !== expectedSex
-    ) {
+    if (parent.sex && parent.sex !== 'unknown' && parent.sex !== expectedSex) {
       throw new BadRequestException(
         role === 'father'
           ? 'Father must be a male animal'
@@ -280,41 +356,206 @@ export class AnimalsService {
     });
   }
 
-  /** Get or create public link for QR (Premium only). Returns { slug, url } (url uses placeholder; frontend builds final URL). */
-  async getOrCreatePublicLink(
-    animalId: string,
-    userId: string,
-    baseUrl?: string,
-  ): Promise<{ slug: string; url: string }> {
+  private buildPublicUrl(slug: string, locale?: string): string {
+    return `${publicWebBaseUrl()}/${normalizePublicLocale(locale)}/animal-public/${slug}`;
+  }
+
+  private toPublicLinkState(
+    animal: {
+      publicEnabled: boolean;
+      publicShowHealth: boolean;
+      publicSlug: string | null;
+    },
+    locale?: string,
+  ): PublicLinkState {
+    return {
+      enabled: animal.publicEnabled,
+      showHealth: animal.publicShowHealth,
+      slug: animal.publicSlug,
+      url: animal.publicSlug
+        ? this.buildPublicUrl(animal.publicSlug, locale)
+        : null,
+    };
+  }
+
+  private async assertPremium(userId: string): Promise<void> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      select: { isPremium: true },
+      select: { email: true, isPremium: true },
     });
-    if (!user?.isPremium) {
-      throw new ForbiddenException('Premium subscription required to generate QR code for your animal.');
+    if (!user || !isEffectivelyPremium(user)) {
+      throw new ForbiddenException(
+        'Premium subscription required to share a public page for your animal.',
+      );
+    }
+  }
+
+  private async readPublicLinkState(
+    animalId: string,
+    locale?: string,
+  ): Promise<PublicLinkState> {
+    const fresh = await this.prisma.animal.findUnique({
+      where: { id: animalId },
+      select: { publicEnabled: true, publicShowHealth: true, publicSlug: true },
+    });
+    if (!fresh) throw new NotFoundException('Animal not found');
+    return this.toPublicLinkState(fresh, locale);
+  }
+
+  /** État du lien public (sans effet de bord : ne crée jamais de slug). */
+  async getPublicLink(
+    animalId: string,
+    userId: string,
+    locale?: string,
+  ): Promise<PublicLinkState> {
+    const animal = await ensureAnimalOwnership(this.prisma, animalId, userId);
+    return this.toPublicLinkState(animal, locale);
+  }
+
+  /**
+   * Active / désactive le partage public et/ou l'affichage des vaccins.
+   * Activer exige le premium ; désactiver est toujours possible.
+   * Le slug est créé à la première activation. L'URL est construite côté serveur.
+   */
+  async updatePublicLink(
+    animalId: string,
+    userId: string,
+    input: { enabled?: boolean; showHealth?: boolean },
+    locale?: string,
+  ): Promise<PublicLinkState> {
+    const animal = await ensureAnimalOwnership(this.prisma, animalId, userId);
+
+    if (input.enabled === true) {
+      await this.assertPremium(userId);
     }
 
-    await this.findOne(animalId, userId);
+    const data: { publicEnabled?: boolean; publicShowHealth?: boolean } = {};
+    if (input.enabled !== undefined) data.publicEnabled = input.enabled;
+    if (input.showHealth !== undefined)
+      data.publicShowHealth = input.showHealth;
 
-    const animal = await this.prisma.animal.findUnique({
-      where: { id: animalId },
-      select: { publicSlug: true },
-    });
-    if (!animal) {
+    if (Object.keys(data).length > 0) {
+      await this.prisma.animal.update({ where: { id: animalId }, data });
+    }
+
+    // Slug créé à la première activation (updateMany conditionnel : pas d'écrasement concurrent)
+    if (input.enabled === true && !animal.publicSlug) {
+      await this.assignNewSlug(animalId, false);
+    }
+
+    return this.readPublicLinkState(animalId, locale);
+  }
+
+  /** Génère un nouveau slug : l'ancien lien (QR imprimé) cesse immédiatement de fonctionner. */
+  async regeneratePublicLink(
+    animalId: string,
+    userId: string,
+    locale?: string,
+  ): Promise<PublicLinkState> {
+    await ensureAnimalOwnership(this.prisma, animalId, userId);
+    await this.assertPremium(userId);
+    await this.assignNewSlug(animalId, true);
+    return this.readPublicLinkState(animalId, locale);
+  }
+
+  private async assignNewSlug(
+    animalId: string,
+    replaceExisting: boolean,
+  ): Promise<void> {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        await this.prisma.animal.updateMany({
+          where: replaceExisting
+            ? { id: animalId }
+            : { id: animalId, publicSlug: null },
+          data: { publicSlug: generatePublicSlug() },
+        });
+        return;
+      } catch (e) {
+        // Collision d'unicité (probabilité négligeable) : on retente avec un autre slug
+        if ((e as { code?: string })?.code !== 'P2002' || attempt === 2)
+          throw e;
+      }
+    }
+  }
+
+  /**
+   * Profil public (QR) — LISTE BLANCHE stricte. Jamais d'id interne, de notes, de details,
+   * d'identité du propriétaire. 404 si le lien est inexistant, désactivé ou si le premium
+   * du propriétaire a expiré.
+   */
+  async getPublicProfile(slug: string) {
+    if (!PUBLIC_SLUG_PATTERN.test(slug)) {
       throw new NotFoundException('Animal not found');
     }
 
-    let slug = animal.publicSlug;
-    if (!slug) {
-      slug = randomBytes(12).toString('base64url').replace(/[-_]/g, 'x').slice(0, 16);
-      await this.prisma.animal.update({
-        where: { id: animalId },
-        data: { publicSlug: slug },
-      });
+    const animal = await this.prisma.animal.findFirst({
+      where: { publicSlug: slug, publicEnabled: true },
+      select: {
+        name: true,
+        sex: true,
+        birthDate: true,
+        photos: true,
+        publicShowHealth: true,
+        user: { select: { email: true, isPremium: true } },
+        speciesProfile: {
+          select: { commonNameFr: true, scientificName: true },
+        },
+        vaccinations: {
+          select: { name: true, date: true },
+          orderBy: { date: 'desc' },
+          take: 50,
+        },
+        healthRecords: {
+          where: { type: 'vaccine' },
+          select: { title: true, date: true },
+          orderBy: { date: 'desc' },
+          take: 50,
+        },
+      },
+    });
+
+    if (!animal || !isEffectivelyPremium(animal.user)) {
+      throw new NotFoundException('Animal not found');
     }
 
-    const base = (baseUrl || '').trim() || 'https://captivia.app';
-    const url = `${base.replace(/\/$/, '')}/animal-public/${slug}`;
-    return { slug, url };
+    const result: {
+      name: string;
+      species: { commonName: string; scientificName: string } | null;
+      sex: string | null;
+      birthYear: number | null;
+      photo: string | null;
+      vaccinations?: { name: string; date: Date }[];
+    } = {
+      name: animal.name,
+      species: animal.speciesProfile
+        ? {
+            commonName: animal.speciesProfile.commonNameFr,
+            scientificName: animal.speciesProfile.scientificName,
+          }
+        : null,
+      sex: animal.sex,
+      birthYear: animal.birthDate ? animal.birthDate.getUTCFullYear() : null,
+      photo: animal.photos?.[0] ?? null,
+    };
+
+    if (animal.publicShowHealth) {
+      const merged = [
+        ...animal.vaccinations.map((v) => ({ name: v.name, date: v.date })),
+        ...animal.healthRecords.map((r) => ({ name: r.title, date: r.date })),
+      ];
+      // Dédoublonnage nom + jour (un vaccin saisi dans les deux carnets)
+      const seen = new Set<string>();
+      result.vaccinations = merged
+        .sort((a, b) => b.date.getTime() - a.date.getTime())
+        .filter((v) => {
+          const key = `${v.name.trim().toLowerCase()}|${v.date.toISOString().slice(0, 10)}`;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+    }
+
+    return result;
   }
 }
