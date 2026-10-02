@@ -28,6 +28,7 @@
     "operator:set": "ts-node -r tsconfig-paths/register scripts/set-operator.ts",
     "import:fr-be": "ts-node prisma/import-fr-be-databases.ts",
     "seed:prod": "ts-node prisma/seed-prod.ts",
+    "seed:breeds": "ts-node prisma/import-breeds.ts",
     "seed:dev": "ts-node prisma/seed-dev.ts",
     "migrate:deploy": "prisma migrate deploy"
   },

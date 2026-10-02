@@ -84,6 +84,22 @@ interface SpeciesFoodEntry {
   reason?: string;
 }
 
+/** Vrai pour une URL Wikipédia (http/https) : seules ces sources exigent l'attribution CC BY-SA. */
+function isWikipediaUrl(url?: string | null): boolean {
+  if (!url) return false;
+  try {
+    const u = new URL(url);
+    return (u.protocol === 'https:' || u.protocol === 'http:') && /(^|\.)wikipedia\.org$/.test(u.hostname);
+  } catch {
+    return false;
+  }
+}
+
+/** Les speciesId ≥ 2 000 000 001 sont des races artificielles, absentes de GBIF. */
+function isGbifKey(speciesId?: number): boolean {
+  return typeof speciesId === 'number' && speciesId > 0 && speciesId < 2_000_000_001;
+}
+
 /** Fiche espèce telle que renvoyée par GET /species/:id (champs utilisés par cette page) */
 interface SpeciesData {
   scientificName: string;
@@ -99,6 +115,8 @@ interface SpeciesData {
   distribution?: string | string[];
   biome?: string;
   profile?: {
+    speciesId?: number;
+    sourceUrl?: string | null;
     commonNameFr?: string;
     scientificName?: string;
     category?: string;
@@ -552,6 +570,38 @@ export default function SpeciesDetailPage({
                       Description
                     </h3>
                     <p className="text-gray-700 dark:text-gray-300">{species.profile.description}</p>
+                  </div>
+                )}
+                {/* Attributions (licences des données — W2-06) */}
+                {(isWikipediaUrl(species.profile.sourceUrl) || isGbifKey(species.profile.speciesId)) && (
+                  <div className="mt-3 space-y-1 text-xs text-gray-500 dark:text-gray-400">
+                    {isWikipediaUrl(species.profile.sourceUrl) && (
+                      <p>
+                        {t('attribution.wikipediaPrefix')}{' '}
+                        <a
+                          href={species.profile.sourceUrl as string}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline hover:text-emerald-600 dark:hover:text-emerald-400"
+                        >
+                          {t('attribution.wikipediaName')}
+                        </a>{' '}
+                        — {t('attribution.license')}
+                      </p>
+                    )}
+                    {isGbifKey(species.profile.speciesId) && (
+                      <p>
+                        {t('attribution.gbifPrefix')}{' '}
+                        <a
+                          href={`https://www.gbif.org/species/${species.profile.speciesId}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline hover:text-emerald-600 dark:hover:text-emerald-400"
+                        >
+                          {t('attribution.gbifName')}
+                        </a>
+                      </p>
+                    )}
                   </div>
                 )}
               </div>

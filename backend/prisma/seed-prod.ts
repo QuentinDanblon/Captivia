@@ -1,4 +1,5 @@
 import { Prisma, PrismaClient } from '@prisma/client';
+import { importBreedsBulk } from './breeds-bulk';
 
 // ============================================
 // SEED PROD — Données éditoriales uniquement
@@ -394,10 +395,26 @@ export async function main() {
     select: { speciesId: true, category: true },
   });
 
+  // Existant en base : on n'upsert que les modèles absents ou modifiés
+  // (évite ~5 000 allers-retours inutiles à chaque relance du seed).
+  const existingTemplates = await prisma.speciesRoutineTemplate.findMany();
+  const existingByKey = new Map(existingTemplates.map((t) => [`${t.speciesId}|${t.type}|${t.order}`, t]));
+
   let routineTemplateCount = 0;
   for (const profile of speciesProfiles) {
     const templates = getRoutineTemplatesForCategory(profile.category);
     for (const tpl of templates) {
+      routineTemplateCount++;
+      const current = existingByKey.get(`${profile.speciesId}|${tpl.type}|${tpl.order}`);
+      if (
+        current &&
+        current.active &&
+        current.name === (tpl.name ?? null) &&
+        current.frequency === tpl.frequency &&
+        JSON.stringify(current.schedule) === JSON.stringify(tpl.schedule)
+      ) {
+        continue;
+      }
       await prisma.speciesRoutineTemplate.upsert({
         where: {
           speciesId_type_order: {
@@ -422,7 +439,6 @@ export async function main() {
           active: true,
         },
       });
-      routineTemplateCount++;
     }
   }
   console.log(`✅ Seeded ${routineTemplateCount} species routine templates (${speciesProfiles.length} espèces)`);
@@ -791,6 +807,18 @@ export async function main() {
   }
 
   console.log(`✅ Upserted ${affiliateStores.length} affiliate stores (magasins)`);
+
+  // ============================================
+  // Races (breeds-data.json) — W5-01
+  // ============================================
+  // createMany skipDuplicates par lots : idempotent, n'écrase aucune fiche existante.
+  console.log('🐕 Seeding breeds (breeds-data.json, createMany skipDuplicates)...');
+  const breeds = await importBreedsBulk(prisma);
+  console.log(`✅ Breeds: ${breeds.valid}/${breeds.total} valides, ${breeds.profilesCreated} nouveaux profils`);
+  if (breeds.errors.length) {
+    for (const e of breeds.errors.slice(0, 20)) console.error('  ❌', e);
+    throw new Error(`Import des races : ${breeds.errors.length} fiche(s) invalide(s)`);
+  }
 
   console.log('\n🎉 PROD seed completed successfully!');
 }

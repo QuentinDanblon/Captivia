@@ -258,6 +258,13 @@
     },
     "viewHistory": "View history"
   },
+  "attribution": {
+    "wikipediaPrefix": "Source:",
+    "wikipediaName": "Wikipedia",
+    "license": "CC BY-SA 4.0",
+    "gbifPrefix": "Occurrence data:",
+    "gbifName": "GBIF.org"
+  },
   "auth": {
     "acceptTermsLabel": "I accept the <terms>terms of use</terms> and the <privacy>privacy policy</privacy>",
     "ageConfirmLabel": "I confirm that I am 15 years of age or older",
