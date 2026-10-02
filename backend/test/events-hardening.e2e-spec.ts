@@ -168,8 +168,13 @@ describe('Notification events hardening (W0-07)', () => {
   });
 
   describe('notification-events query', () => {
-    it('validates date (ISO day within ±1 year) and refresh', async () => {
+    it('validates date (ISO day within [D-1; D+366]) and refresh', async () => {
       await getEvents('?date=1999-01-01').expect(400);
+      const daysAgo = (n: number) =>
+        new Date(Date.now() - n * 86400000).toISOString().slice(0, 10);
+      await getEvents(`?date=${daysAgo(10)}`).expect(400);
+      await getEvents(`?date=${daysAgo(366)}`).expect(400);
+      await getEvents(`?date=${daysAgo(1)}`).expect(200);
       await getEvents('?date=2999-01-01').expect(400);
       await getEvents('?date=2026-02-31').expect(400);
       await getEvents('?date=not-a-date').expect(400);
@@ -352,6 +357,31 @@ describe('Notification events hardening (W0-07)', () => {
       );
       expect(regenerated.status).toBe('pending');
       expect(regenerated.id).not.toBe(pendingId);
+    });
+
+    it('lets a backdated event (3 days ago) be marked done without points', async () => {
+      const created = await prisma.notificationEvent.create({
+        data: {
+          userId,
+          type: 'Nourrissage',
+          label: 'Backdated',
+          scheduledAt: new Date(Date.now() - 3 * 86400000),
+          routineId,
+          animalId,
+        },
+      });
+      const before = (await prisma.user.findUnique({ where: { id: userId } }))!
+        .points;
+      const res = await request(app.getHttpServer())
+        .patch(`/users/me/notification-events/${created.id}`)
+        .set(auth())
+        .send({ status: 'done' })
+        .expect(200);
+      expect(res.body.event.status).toBe('done');
+      expect(res.body.event.pointsAwarded).toBe(0);
+      expect(
+        (await prisma.user.findUnique({ where: { id: userId } }))!.points,
+      ).toBe(before);
     });
 
     it('does not credit points for an event more than a day in the future', async () => {
