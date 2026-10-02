@@ -2,38 +2,22 @@
 // pour instrumenter http, express, etc. Sans SENTRY_DSN : aucun effet (pas d'init, pas de réseau).
 import 'dotenv/config';
 import * as Sentry from '@sentry/nestjs';
-import type { ErrorEvent } from '@sentry/nestjs';
 import { getRelease } from './config/release';
+import { buildSentryOptions, tracesRateFromEnv } from './sentry-scrub';
 
-const SENSITIVE_HEADERS = ['authorization', 'cookie', 'set-cookie', 'x-api-key'];
-
-/** Retire des événements Sentry les données personnelles (e-mail, jetons, cookies). */
-export function scrubEvent(event: ErrorEvent): ErrorEvent {
-  if (event.user) {
-    delete event.user.email;
-    delete event.user.ip_address;
-  }
-  if (event.request) {
-    delete event.request.cookies;
-    const headers = event.request.headers;
-    if (headers) {
-      for (const key of Object.keys(headers)) {
-        if (SENSITIVE_HEADERS.includes(key.toLowerCase())) delete headers[key];
-      }
-    }
-  }
-  return event;
-}
-
-const rate = Number.parseFloat(process.env.SENTRY_TRACES_SAMPLE_RATE ?? '');
+// Nettoyage (jetons, mots de passe, codes) des erreurs, transactions, spans et fils d'Ariane,
+// et exclusion du flux iCalendar de l'échantillonnage : voir sentry-scrub.ts.
+export { scrubEvent } from './sentry-scrub';
 
 if (process.env.SENTRY_DSN) {
-  Sentry.init({
-    dsn: process.env.SENTRY_DSN,
-    environment: process.env.NODE_ENV || 'development',
-    release: getRelease(),
-    tracesSampleRate: Number.isFinite(rate) && rate >= 0 && rate <= 1 ? rate : 0.1,
-    sendDefaultPii: false,
-    beforeSend: scrubEvent,
-  });
+  Sentry.init(
+    buildSentryOptions({
+      dsn: process.env.SENTRY_DSN,
+      environment: process.env.NODE_ENV || 'development',
+      release: getRelease(),
+      tracesSampleRate: tracesRateFromEnv(
+        process.env.SENTRY_TRACES_SAMPLE_RATE,
+      ),
+    }),
+  );
 }
