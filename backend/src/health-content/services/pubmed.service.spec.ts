@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import axios from 'axios';
 import { Logger } from '@nestjs/common';
 import { PubmedService } from './pubmed.service';
@@ -29,11 +30,13 @@ describe('PubmedService (résilience)', () => {
 
     expect(mockedGet).toHaveBeenCalledTimes(3);
     for (const call of mockedGet.mock.calls) {
-      expect(call[1]).toEqual(expect.objectContaining({ timeout: 8000, maxRedirects: 0 }));
+      expect(call[1]).toEqual(
+        expect.objectContaining({ timeout: 8000, maxRedirects: 0 }),
+      );
     }
   });
 
-  it('logge message + statut seulement en cas d\'échec', async () => {
+  it("logge message + statut seulement en cas d'échec", async () => {
     const err = Object.assign(new Error('timeout of 8000ms exceeded'), {
       config: { headers: { Authorization: 'leak' } },
     });
@@ -46,6 +49,8 @@ describe('PubmedService (résilience)', () => {
 
     expect(errorSpy).toHaveBeenCalledTimes(2);
     expect(JSON.stringify(errorSpy.mock.calls)).not.toContain('leak');
-    expect(String(errorSpy.mock.calls[0][0])).toContain('timeout of 8000ms exceeded');
+    expect(String(errorSpy.mock.calls[0][0])).toContain(
+      'timeout of 8000ms exceeded',
+    );
   });
 });

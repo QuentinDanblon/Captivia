@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import 'reflect-metadata';
 import { AdvancedSearchController } from '../species/advanced-search.controller';
 import { AmazonController } from '../equipment/equipment.controller';
@@ -8,7 +9,10 @@ import { PubMedController } from '../health-content/health-content.controller';
 import { SpeciesPlusController } from '../legislation/legislation.controller';
 import { OperatorGuard } from '../common/guards/operator.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { EXTERNAL_API_THROTTLE, EXTERNAL_API_THROTTLE_LIMIT, GLOBAL_THROTTLE } from './throttle.config';
+import {
+  EXTERNAL_API_THROTTLE_LIMIT,
+  GLOBAL_THROTTLE,
+} from './throttle.config';
 
 describe('throttle.config', () => {
   it('limites relevées en test, strictes sinon (120 global / 20 API externes)', () => {
@@ -25,7 +29,9 @@ describe('throttle.config', () => {
       await jest.isolateModulesAsync(async () => {
         const prod = await import('./throttle.config');
         expect(prod.GLOBAL_THROTTLE).toEqual({ ttl: 60_000, limit: 120 });
-        expect(prod.EXTERNAL_API_THROTTLE).toEqual({ default: { ttl: 60_000, limit: 20 } });
+        expect(prod.EXTERNAL_API_THROTTLE).toEqual({
+          default: { ttl: 60_000, limit: 20 },
+        });
       });
     } finally {
       process.env.NODE_ENV = previous;
@@ -41,12 +47,19 @@ describe('throttle.config', () => {
     ['OpenDataController', OpenDataController],
     ['AdvancedSearchController', AdvancedSearchController],
   ])('%s porte un @Throttle strict', (_name, controller) => {
-    expect(Reflect.getMetadata('THROTTLER:LIMITdefault', controller)).toBe(EXTERNAL_API_THROTTLE_LIMIT);
-    expect(Reflect.getMetadata('THROTTLER:TTLdefault', controller)).toBe(60_000);
+    expect(Reflect.getMetadata('THROTTLER:LIMITdefault', controller)).toBe(
+      EXTERNAL_API_THROTTLE_LIMIT,
+    );
+    expect(Reflect.getMetadata('THROTTLER:TTLdefault', controller)).toBe(
+      60_000,
+    );
   });
 
   it('POST /gateway/clear-cache/* exige JwtAuthGuard puis OperatorGuard', () => {
-    const guards = Reflect.getMetadata('__guards__', ApiGatewayController.prototype.clearCache) as unknown[];
+    const guards = Reflect.getMetadata(
+      '__guards__',
+      ApiGatewayController.prototype.clearCache,
+    ) as unknown[];
     expect(guards).toEqual([JwtAuthGuard, OperatorGuard]);
   });
 });

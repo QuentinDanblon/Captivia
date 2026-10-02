@@ -24,7 +24,8 @@ describe('RateLimitGuard', () => {
 
   it('utilise un préfixe de clé distinct pour chaque type de guard', () => {
     const prefixOf = (guard: unknown): string =>
-      (guard as { rateLimiter: { limiter: { keyPrefix: string } } }).rateLimiter.limiter.keyPrefix;
+      (guard as { rateLimiter: { limiter: { keyPrefix: string } } }).rateLimiter
+        .limiter.keyPrefix;
 
     const defaultPrefix = prefixOf(new RateLimitGuard());
     const authPrefix = prefixOf(new AuthRateLimitGuard());
@@ -40,9 +41,13 @@ describe('RateLimitGuard', () => {
     for (let i = 0; i < 10; i++) {
       await expect(guard.canActivate(contextFor(ip))).resolves.toBe(true);
     }
-    await expect(guard.canActivate(contextFor(ip))).rejects.toBeInstanceOf(HttpException);
+    await expect(guard.canActivate(contextFor(ip))).rejects.toBeInstanceOf(
+      HttpException,
+    );
     // Une autre IP n'est pas affectée
-    await expect(guard.canActivate(contextFor('203.0.113.8'))).resolves.toBe(true);
+    await expect(guard.canActivate(contextFor('203.0.113.8'))).resolves.toBe(
+      true,
+    );
   });
 
   it('un guard 100/min ne partage pas le compteur du guard 10/min', async () => {
@@ -50,7 +55,9 @@ describe('RateLimitGuard', () => {
     const lenient = new RateLimitGuard();
     const ip = '203.0.113.9';
     for (let i = 0; i < 10; i++) await strict.canActivate(contextFor(ip));
-    await expect(strict.canActivate(contextFor(ip))).rejects.toBeInstanceOf(HttpException);
+    await expect(strict.canActivate(contextFor(ip))).rejects.toBeInstanceOf(
+      HttpException,
+    );
     await expect(lenient.canActivate(contextFor(ip))).resolves.toBe(true);
   });
 });

@@ -28,10 +28,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     // Les erreurs serveur (>= 500) et toute exception non-HTTP sont journalisées avec leur
     // stack : sans cela, un 500 est invisible côté serveur. La stack n'est JAMAIS renvoyée
     // au client (la réponse ci-dessous ne contient que statut, message générique, chemin).
-    if (status >= HttpStatus.INTERNAL_SERVER_ERROR || !(exception instanceof HttpException)) {
+    if (
+      status >= HttpStatus.INTERNAL_SERVER_ERROR ||
+      !(exception instanceof HttpException)
+    ) {
       // Chemin sans query string (peut contenir des tokens) ni corps de requête.
       const path = (request.originalUrl ?? request.url ?? '').split('?')[0];
-      const detail = exception instanceof Error ? exception.message : String(exception);
+      const detail =
+        exception instanceof Error ? exception.message : String(exception);
       this.logger.error(
         `${request.method} ${path} -> ${status}: ${detail}`,
         exception instanceof Error ? exception.stack : undefined,

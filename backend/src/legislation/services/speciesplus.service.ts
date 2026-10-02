@@ -1,7 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
-import { EXTERNAL_REQUEST_DEFAULTS, describeHttpError } from '../../external/http-safety';
+import {
+  EXTERNAL_REQUEST_DEFAULTS,
+  describeHttpError,
+} from '../../external/http-safety';
 
 interface SpeciesPlusResponse {
   id: number;
@@ -87,7 +90,9 @@ export class SpeciesPlusService {
 
       return data;
     } catch (error) {
-      this.logger.error(`Species+ taxon details error: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Species+ taxon details error: ${describeHttpError(error)}`,
+      );
       return null;
     }
   }
@@ -119,7 +124,9 @@ export class SpeciesPlusService {
 
       return data;
     } catch (error) {
-      this.logger.error(`Species+ CITES legislation error: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Species+ CITES legislation error: ${describeHttpError(error)}`,
+      );
       return [];
     }
   }
@@ -151,7 +158,9 @@ export class SpeciesPlusService {
 
       return data;
     } catch (error) {
-      this.logger.error(`Species+ EU legislation error: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Species+ EU legislation error: ${describeHttpError(error)}`,
+      );
       return [];
     }
   }
@@ -183,7 +192,9 @@ export class SpeciesPlusService {
 
       return data;
     } catch (error) {
-      this.logger.error(`Species+ distributions error: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Species+ distributions error: ${describeHttpError(error)}`,
+      );
       return [];
     }
   }

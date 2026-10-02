@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import { resolveTrustProxy } from './trust-proxy';
 
 describe('resolveTrustProxy', () => {
@@ -13,6 +14,6 @@ describe('resolveTrustProxy', () => {
     ['1', 1],
     ['2', 2],
   ])('%p -> %p', (raw, expected) => {
-    expect(resolveTrustProxy(raw as string | undefined)).toBe(expected);
+    expect(resolveTrustProxy(raw)).toBe(expected);
   });
 });

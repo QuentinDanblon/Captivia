@@ -1,7 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
-import { EXTERNAL_REQUEST_DEFAULTS, describeHttpError } from '../../external/http-safety';
+import {
+  EXTERNAL_REQUEST_DEFAULTS,
+  describeHttpError,
+} from '../../external/http-safety';
 
 interface PubMedArticle {
   pmid: string;
@@ -127,7 +130,9 @@ export class PubmedService {
 
       return abstract;
     } catch (error) {
-      this.logger.error(`PubMed abstract fetch error: ${describeHttpError(error)}`);
+      this.logger.error(
+        `PubMed abstract fetch error: ${describeHttpError(error)}`,
+      );
       return null;
     }
   }

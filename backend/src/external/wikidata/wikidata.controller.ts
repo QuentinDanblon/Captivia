@@ -22,7 +22,9 @@ import { isValidQid } from '../http-safety';
 /** Le QID est interpolé dans des requêtes SPARQL / URLs : format strict Q\d+. */
 function assertValidQid(qid: unknown): void {
   if (!isValidQid(qid)) {
-    throw new BadRequestException('qid must match Q followed by digits (e.g. Q140)');
+    throw new BadRequestException(
+      'qid must match Q followed by digits (e.g. Q140)',
+    );
   }
 }
 import { GetWikidataDto, ConservationStatusDto } from '../../dto/species.dto';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import axios from 'axios';
 import { WikidataService } from './wikidata.service';
 
@@ -7,11 +8,22 @@ describe('WikidataService (validation du QID)', () => {
   const get = jest.fn();
 
   beforeEach(() => {
-    get.mockReset().mockResolvedValue({ data: { results: { bindings: [] }, entities: {} } });
+    get
+      .mockReset()
+      .mockResolvedValue({ data: { results: { bindings: [] }, entities: {} } });
     (axios.create as jest.Mock).mockReturnValue({ get });
   });
 
-  const invalid = ['', 'q1', 'Q', 'P31', '12', 'Q1} . ?s ?p ?o } #', 'Q1\nDROP', '../Q1'];
+  const invalid = [
+    '',
+    'q1',
+    'Q',
+    'P31',
+    '12',
+    'Q1} . ?s ?p ?o } #',
+    'Q1\nDROP',
+    '../Q1',
+  ];
 
   it.each(invalid)('refuse le QID %p sans aucun appel réseau', async (qid) => {
     const service = new WikidataService();

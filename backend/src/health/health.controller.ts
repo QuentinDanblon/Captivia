@@ -36,7 +36,12 @@ export class HealthController {
         this.prisma.$queryRaw`SELECT 1`,
         new Promise<never>((_, reject) => {
           timer = setTimeout(
-            () => reject(new Error(`database timeout after ${READINESS_DB_TIMEOUT_MS}ms`)),
+            () =>
+              reject(
+                new Error(
+                  `database timeout after ${READINESS_DB_TIMEOUT_MS}ms`,
+                ),
+              ),
             READINESS_DB_TIMEOUT_MS,
           );
         }),

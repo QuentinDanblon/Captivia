@@ -10,7 +10,10 @@ export async function mapWithConcurrency<T, R>(
   fn: (item: T, index: number) => Promise<R>,
 ): Promise<R[]> {
   const results = new Array<R>(items.length);
-  const workerCount = Math.max(1, Math.min(Math.floor(concurrency) || 1, items.length));
+  const workerCount = Math.max(
+    1,
+    Math.min(Math.floor(concurrency) || 1, items.length),
+  );
   let next = 0;
 
   async function worker(): Promise<void> {

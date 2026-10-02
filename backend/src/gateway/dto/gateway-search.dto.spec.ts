@@ -31,7 +31,9 @@ describe('GatewaySearchDto', () => {
 
   it('accepte 100 caractères et refuse 101', () => {
     expect(validate({ query: 'x'.repeat(100) }).errors).toHaveLength(0);
-    expect(validate({ query: 'x'.repeat(101) }).errors.length).toBeGreaterThan(0);
+    expect(validate({ query: 'x'.repeat(101) }).errors.length).toBeGreaterThan(
+      0,
+    );
   });
 
   it('refuse une requête absente', () => {

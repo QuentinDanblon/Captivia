@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import { INestApplication } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test } from '@nestjs/testing';
@@ -15,7 +16,9 @@ describe('HealthController', () => {
     queryRaw.mockReset();
     const moduleRef = await Test.createTestingModule({
       // Throttler très strict (1 req/min) : prouve que /health n'est jamais limité.
-      imports: [ThrottlerModule.forRoot({ throttlers: [{ ttl: 60_000, limit: 1 }] })],
+      imports: [
+        ThrottlerModule.forRoot({ throttlers: [{ ttl: 60_000, limit: 1 }] }),
+      ],
       controllers: [HealthController],
       providers: [
         { provide: PrismaService, useValue: { $queryRaw: queryRaw } },
@@ -42,14 +45,20 @@ describe('HealthController', () => {
 
   it('GET /health/ready : 200 quand la base répond', async () => {
     queryRaw.mockResolvedValue([{ '?column?': 1 }]);
-    const res = await request(app.getHttpServer()).get('/health/ready').expect(200);
+    const res = await request(app.getHttpServer())
+      .get('/health/ready')
+      .expect(200);
     expect(res.body).toMatchObject({ status: 'ok', database: 'up' });
     expect(queryRaw).toHaveBeenCalledTimes(1);
   });
 
-  it('GET /health/ready : 503 quand la base est injoignable (sans fuite du message d\'erreur)', async () => {
-    queryRaw.mockRejectedValue(new Error('connect ECONNREFUSED postgres://user:secret@db:5432'));
-    const res = await request(app.getHttpServer()).get('/health/ready').expect(503);
+  it("GET /health/ready : 503 quand la base est injoignable (sans fuite du message d'erreur)", async () => {
+    queryRaw.mockRejectedValue(
+      new Error('connect ECONNREFUSED postgres://user:secret@db:5432'),
+    );
+    const res = await request(app.getHttpServer())
+      .get('/health/ready')
+      .expect(503);
     expect(JSON.stringify(res.body)).not.toContain('secret');
   });
 

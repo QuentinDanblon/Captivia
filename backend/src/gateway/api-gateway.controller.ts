@@ -11,7 +11,13 @@ import {
   BadRequestException,
   NotFoundException,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiQuery, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 import { ApiGatewayService } from './api-gateway.service';
 import { Throttle } from '@nestjs/throttler';
 import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
@@ -20,7 +26,10 @@ import { OperatorGuard } from '../common/guards/operator.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { isValidQid } from '../external/http-safety';
 import { GatewayEnrichedDto, GatewaySearchDto } from './dto/gateway-search.dto';
-import { WikipediaData, WikidataData } from '../transformers/data-transformer.interface';
+import {
+  WikipediaData,
+  WikidataData,
+} from '../transformers/data-transformer.interface';
 
 const VALID_SOURCES = ['gbif', 'wikipedia', 'wikidata'];
 
@@ -43,13 +52,25 @@ export class ApiGatewayController {
    */
   @Get('enriched')
   @ApiOperation({ summary: 'Get enriched species data from multiple sources' })
-  @ApiQuery({ name: 'query', required: true, description: 'Search query or species key (2 à 100 caractères)' })
-  @ApiQuery({ name: 'sources', required: false, description: 'Comma-separated sources (gbif,wikipedia,wikidata)', example: 'gbif,wikipedia,wikidata' })
+  @ApiQuery({
+    name: 'query',
+    required: true,
+    description: 'Search query or species key (2 à 100 caractères)',
+  })
+  @ApiQuery({
+    name: 'sources',
+    required: false,
+    description: 'Comma-separated sources (gbif,wikipedia,wikidata)',
+    example: 'gbif,wikipedia,wikidata',
+  })
   @ApiResponse({ status: 200, description: 'Enriched species data' })
   @ApiResponse({ status: 400, description: 'Bad request' })
   @ApiResponse({ status: 429, description: 'Rate limit exceeded' })
   async getEnrichedSpecies(@Query() dto: GatewayEnrichedDto) {
-    const sourceArray = this.parseSources(dto.sources, 'gbif,wikipedia,wikidata');
+    const sourceArray = this.parseSources(
+      dto.sources,
+      'gbif,wikipedia,wikidata',
+    );
     return this.apiGatewayService.getEnrichedSpecies(dto.query, sourceArray);
   }
 
@@ -80,14 +101,32 @@ export class ApiGatewayController {
    */
   @Get('search')
   @ApiOperation({ summary: 'Search species with multi-source enrichment' })
-  @ApiQuery({ name: 'query', required: true, description: 'Search query (2 à 100 caractères)' })
-  @ApiQuery({ name: 'limit', required: false, description: 'Result limit (1 à 20)', example: 10 })
-  @ApiQuery({ name: 'sources', required: false, description: 'Comma-separated sources', example: 'gbif' })
+  @ApiQuery({
+    name: 'query',
+    required: true,
+    description: 'Search query (2 à 100 caractères)',
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Result limit (1 à 20)',
+    example: 10,
+  })
+  @ApiQuery({
+    name: 'sources',
+    required: false,
+    description: 'Comma-separated sources',
+    example: 'gbif',
+  })
   @ApiResponse({ status: 200, description: 'Search results' })
   @ApiResponse({ status: 400, description: 'Invalid query or limit' })
   async searchSpecies(@Query() dto: GatewaySearchDto) {
     const sourceArray = this.parseSources(dto.sources, 'gbif');
-    return this.apiGatewayService.searchSpecies(dto.query, dto.limit, sourceArray);
+    return this.apiGatewayService.searchSpecies(
+      dto.query,
+      dto.limit,
+      sourceArray,
+    );
   }
 
   /**
@@ -101,7 +140,8 @@ export class ApiGatewayController {
   @ApiResponse({ status: 404, description: 'Species not found' })
   async getConservationStatus(@Param('speciesKey') speciesKey: string) {
     this.validateSpeciesKey(speciesKey);
-    const result = await this.apiGatewayService.getConservationStatus(speciesKey);
+    const result =
+      await this.apiGatewayService.getConservationStatus(speciesKey);
     if (!result || Object.values(result).every((value) => value === null)) {
       throw new NotFoundException('Species not found');
     }
@@ -169,7 +209,11 @@ export class ApiGatewayController {
    */
   @Get('wikipedia/article')
   @ApiOperation({ summary: 'Get Wikipedia article by title' })
-  @ApiQuery({ name: 'title', required: true, description: 'Wikipedia article title' })
+  @ApiQuery({
+    name: 'title',
+    required: true,
+    description: 'Wikipedia article title',
+  })
   @ApiResponse({ status: 200, description: 'Wikipedia article data' })
   @ApiResponse({ status: 404, description: 'Article not found' })
   async getWikipediaArticle(@Query('title') title: string) {
@@ -187,7 +231,9 @@ export class ApiGatewayController {
   @ApiResponse({ status: 404, description: 'Entity not found' })
   async getWikidataEntity(@Param('qid') qid: string) {
     if (!isValidQid(qid)) {
-      throw new BadRequestException('qid must match Q followed by digits (e.g. Q140)');
+      throw new BadRequestException(
+        'qid must match Q followed by digits (e.g. Q140)',
+      );
     }
     return this.apiGatewayService.getWikidataEntity(qid);
   }
@@ -201,7 +247,9 @@ export class ApiGatewayController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard, OperatorGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Clear cache for a species (opérateurs uniquement)' })
+  @ApiOperation({
+    summary: 'Clear cache for a species (opérateurs uniquement)',
+  })
   @ApiResponse({ status: 200, description: 'Cache cleared' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Réservé aux opérateurs' })
@@ -240,14 +288,19 @@ export class ApiGatewayController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Check individual service health' })
   @ApiResponse({ status: 200, description: 'Service health status' })
-  async checkServiceHealth(@Param('service') service: 'gbif' | 'wikipedia' | 'wikidata') {
+  async checkServiceHealth(
+    @Param('service') service: 'gbif' | 'wikipedia' | 'wikidata',
+  ) {
     return this.apiGatewayService.checkServiceHealth(service);
   }
 
   /**
    * Parse et valide la liste de sources (séparées par des virgules)
    */
-  private parseSources(raw: string | undefined, fallback: string): ('gbif' | 'wikipedia' | 'wikidata')[] {
+  private parseSources(
+    raw: string | undefined,
+    fallback: string,
+  ): ('gbif' | 'wikipedia' | 'wikidata')[] {
     const sourceArray = (raw || fallback).split(',');
     for (const source of sourceArray) {
       if (!VALID_SOURCES.includes(source)) {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import {
   ArgumentsHost,
   BadRequestException,
@@ -14,7 +15,10 @@ function buildHost(url = '/animals?token=secret') {
   const response = { status };
   const request = { method: 'GET', url, originalUrl: url };
   const host = {
-    switchToHttp: () => ({ getResponse: () => response, getRequest: () => request }),
+    switchToHttp: () => ({
+      getResponse: () => response,
+      getRequest: () => request,
+    }),
   } as unknown as ArgumentsHost;
   return { host, status, json };
 }
@@ -23,7 +27,9 @@ describe('HttpExceptionFilter', () => {
   let errorSpy: jest.SpyInstance;
 
   beforeEach(() => {
-    errorSpy = jest.spyOn(Logger.prototype, 'error').mockImplementation(() => undefined);
+    errorSpy = jest
+      .spyOn(Logger.prototype, 'error')
+      .mockImplementation(() => undefined);
   });
   afterEach(() => jest.restoreAllMocks());
 
@@ -53,26 +59,42 @@ describe('HttpExceptionFilter', () => {
     expect(status).toHaveBeenCalledWith(503);
 
     errorSpy.mockClear();
-    new HttpExceptionFilter().catch(new InternalServerErrorException('oops'), buildHost().host);
+    new HttpExceptionFilter().catch(
+      new InternalServerErrorException('oops'),
+      buildHost().host,
+    );
     expect(errorSpy).toHaveBeenCalledTimes(1);
   });
 
   it('ne logge pas les erreurs client (4xx) et conserve le format de réponse', () => {
     const { host, status, json } = buildHost('/animals/1');
-    new HttpExceptionFilter().catch(new NotFoundException('Animal not found'), host);
-    new HttpExceptionFilter().catch(new BadRequestException('bad'), buildHost().host);
+    new HttpExceptionFilter().catch(
+      new NotFoundException('Animal not found'),
+      host,
+    );
+    new HttpExceptionFilter().catch(
+      new BadRequestException('bad'),
+      buildHost().host,
+    );
 
     expect(errorSpy).not.toHaveBeenCalled();
     expect(status).toHaveBeenCalledWith(404);
     expect(json).toHaveBeenCalledWith(
-      expect.objectContaining({ statusCode: 404, message: 'Animal not found', path: '/animals/1' }),
+      expect.objectContaining({
+        statusCode: 404,
+        message: 'Animal not found',
+        path: '/animals/1',
+      }),
     );
   });
 
-  it('gère une valeur levée qui n\'est pas une Error', () => {
+  it("gère une valeur levée qui n'est pas une Error", () => {
     const { host, status } = buildHost();
     new HttpExceptionFilter().catch('just a string', host);
     expect(status).toHaveBeenCalledWith(500);
-    expect(errorSpy).toHaveBeenCalledWith(expect.stringContaining('just a string'), undefined);
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('just a string'),
+      undefined,
+    );
   });
 });

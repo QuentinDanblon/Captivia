@@ -50,7 +50,8 @@ export function describeHttpError(error: unknown): string {
       response?: { status?: unknown };
       status?: unknown;
     };
-    const message = typeof err.message === 'string' ? err.message : 'unknown error';
+    const message =
+      typeof err.message === 'string' ? err.message : 'unknown error';
     const status = err.response?.status ?? err.status;
     return typeof status === 'number' ? `${message} (HTTP ${status})` : message;
   }

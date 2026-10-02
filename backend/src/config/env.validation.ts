@@ -31,7 +31,8 @@ const jwtSecretInProduction = Joi.string()
   .messages({
     'captivia.exampleSecret':
       '"JWT_SECRET" ne doit pas être une valeur d\'exemple (générez-en un : openssl rand -base64 48)',
-    'string.min': '"JWT_SECRET" doit faire au moins 32 caractères en production',
+    'string.min':
+      '"JWT_SECRET" doit faire au moins 32 caractères en production',
   });
 
 /** https obligatoire ; http toléré uniquement vers le loopback (stack Docker locale). */
@@ -41,7 +42,9 @@ const frontendUrlInProduction = Joi.string()
   .custom((value: string, helpers) => {
     try {
       const url = new URL(value);
-      const loopback = ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname);
+      const loopback = ['localhost', '127.0.0.1', '[::1]'].includes(
+        url.hostname,
+      );
       if (url.protocol === 'https:' || (url.protocol === 'http:' && loopback)) {
         return value;
       }
@@ -60,7 +63,9 @@ const frontendUrlInProduction = Joi.string()
  * - en production : secrets forts et configuration réseau explicite obligatoires.
  */
 export const envValidationSchema = Joi.object({
-  NODE_ENV: Joi.string().valid('development', 'production', 'test').default('development'),
+  NODE_ENV: Joi.string()
+    .valid('development', 'production', 'test')
+    .default('development'),
   DATABASE_URL: Joi.string().required(),
   JWT_SECRET: Joi.when('NODE_ENV', {
     is: isProduction,
@@ -70,7 +75,10 @@ export const envValidationSchema = Joi.object({
   PORT: Joi.number().default(3001),
   HOST: Joi.string().optional(),
   TRUST_PROXY: Joi.alternatives()
-    .try(Joi.string().valid('true', 'false'), Joi.number().integer().min(0).max(10))
+    .try(
+      Joi.string().valid('true', 'false'),
+      Joi.number().integer().min(0).max(10),
+    )
     .optional(),
   CORS_ORIGIN: Joi.when('NODE_ENV', {
     is: isProduction,
@@ -83,7 +91,9 @@ export const envValidationSchema = Joi.object({
     otherwise: Joi.string().allow('').optional(),
   }),
   PUBLIC_WEB_URL: Joi.string().uri().allow('').optional(),
-  CACHE_TYPE: Joi.string().valid('memory', 'redis', 'memcached').default('memory'),
+  CACHE_TYPE: Joi.string()
+    .valid('memory', 'redis', 'memcached')
+    .default('memory'),
   REDIS_ENABLED: Joi.string().valid('true', 'false').default('false'),
   REDIS_HOST: Joi.string().default('localhost'),
   REDIS_PORT: Joi.number().default(6379),

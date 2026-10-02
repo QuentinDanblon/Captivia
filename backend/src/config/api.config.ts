@@ -27,10 +27,7 @@ export class ApiConfigService {
    * Get Wikipedia rate limit configuration
    */
   getWikipediaRateLimit(): { limit: number; window: number } {
-    const limit = this.configService.get<number>(
-      'WIKIPEDIA_RATE_LIMIT',
-      100,
-    );
+    const limit = this.configService.get<number>('WIKIPEDIA_RATE_LIMIT', 100);
     const window = this.configService.get<number>(
       'WIKIPEDIA_RATE_WINDOW',
       60000,
@@ -54,10 +51,7 @@ export class ApiConfigService {
    * Get Wikidata rate limit configuration
    */
   getWikidataRateLimit(): { limit: number; window: number } {
-    const limit = this.configService.get<number>(
-      'WIKIDATA_RATE_LIMIT',
-      100,
-    );
+    const limit = this.configService.get<number>('WIKIDATA_RATE_LIMIT', 100);
     const window = this.configService.get<number>(
       'WIKIDATA_RATE_WINDOW',
       60000,
@@ -73,10 +67,7 @@ export class ApiConfigService {
     ttl: number;
   } {
     return {
-      enabled: this.configService.get<boolean>(
-        'API_RATE_LIMIT_ENABLED',
-        true,
-      ),
+      enabled: this.configService.get<boolean>('API_RATE_LIMIT_ENABLED', true),
       ttl: this.configService.get<number>('API_RATE_LIMIT_TTL', 3600),
     };
   }

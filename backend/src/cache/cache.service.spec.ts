@@ -55,10 +55,10 @@ describe('CacheService', () => {
     it('should return null for expired key', () => {
       const testData = { key: 'value' };
       service.set('test-key', testData);
-      
+
       // Fait expirer l'entrée (TTL par défaut 24 h) en avançant l'horloge
       jest.spyOn(Date, 'now').mockReturnValue(Date.now() + 500000 * 1000);
-      
+
       const result = service.get('test-key');
       expect(result).toBeNull();
     });
@@ -66,10 +66,10 @@ describe('CacheService', () => {
     it('should return null for expired key when checking has()', () => {
       const testData = { key: 'value' };
       service.set('test-key', testData);
-      
+
       // Fait expirer l'entrée (TTL par défaut 24 h) en avançant l'horloge
       jest.spyOn(Date, 'now').mockReturnValue(Date.now() + 500000 * 1000);
-      
+
       const result = service.has('test-key');
       expect(result).toBe(false);
     });
@@ -79,7 +79,7 @@ describe('CacheService', () => {
     it('should store data with key', () => {
       const testData = { key: 'value' };
       service.set('test-key', testData);
-      
+
       const result = service.get('test-key');
       expect(result).toEqual(testData);
     });
@@ -87,10 +87,10 @@ describe('CacheService', () => {
     it('should update existing key', () => {
       const testData1 = { key: 'value1' };
       const testData2 = { key: 'value2' };
-      
+
       service.set('test-key', testData1);
       service.set('test-key', testData2);
-      
+
       const result = service.get('test-key');
       expect(result).toEqual(testData2);
     });
@@ -110,9 +110,9 @@ describe('CacheService', () => {
 
     it('should return false for expired key', () => {
       service.set('test-key', { key: 'value' });
-      
+
       jest.spyOn(Date, 'now').mockReturnValue(Date.now() + 500000 * 1000);
-      
+
       const result = service.has('test-key');
       expect(result).toBe(false);
     });
@@ -123,11 +123,11 @@ describe('CacheService', () => {
       service.set('key1', { key: 'value1' });
       service.set('key2', { key: 'value2' });
       service.set('key3', { key: 'value3' });
-      
+
       expect(service.getCacheSize()).toBe(3);
-      
+
       service.clear();
-      
+
       expect(service.getCacheSize()).toBe(0);
       expect(service.get('key1')).toBeNull();
       expect(service.get('key2')).toBeNull();
@@ -140,9 +140,9 @@ describe('CacheService', () => {
       service.set('key1', { key: 'value1' });
       service.set('key2', { key: 'value2' });
       service.set('key3', { key: 'value3' });
-      
+
       service.clearKey('key2');
-      
+
       expect(service.getCacheSize()).toBe(2);
       expect(service.get('key1')).toEqual({ key: 'value1' });
       expect(service.get('key2')).toBeNull();
@@ -151,9 +151,9 @@ describe('CacheService', () => {
 
     it('should do nothing for non-existent key', () => {
       service.set('key1', { key: 'value1' });
-      
+
       service.clearKey('nonexistent');
-      
+
       expect(service.getCacheSize()).toBe(1);
       expect(service.get('key1')).toEqual({ key: 'value1' });
     });
@@ -168,7 +168,7 @@ describe('CacheService', () => {
       service.set('key1', { key: 'value1' });
       service.set('key2', { key: 'value2' });
       service.set('key3', { key: 'value3' });
-      
+
       expect(service.getCacheSize()).toBe(3);
     });
   });
@@ -176,7 +176,7 @@ describe('CacheService', () => {
   describe('getCacheStats', () => {
     it('should return cache statistics', () => {
       const stats = service.getCacheStats();
-      
+
       expect(stats).toHaveProperty('size');
       expect(stats).toHaveProperty('ttl');
       expect(stats).toHaveProperty('defaultTtl');
@@ -197,10 +197,10 @@ describe('CacheService', () => {
           return null;
         }),
       };
-      
+
       const testService = new CacheService(mockConfig as any);
       const stats = testService.getCacheStats();
-      
+
       // Default TTL should be 86400 seconds (24 hours) from CACHE_CONFIG.species
       expect(stats.ttl).toBe(86400);
       expect(stats.defaultTtl).toBe(86400);
@@ -238,18 +238,21 @@ describe('CacheService', () => {
       expect(service.get('media:1')).toBe('v');
     });
 
-    it.each([0, -5, NaN, undefined])('ignore un customTtl invalide (%p) et applique le TTL par défaut', (ttl) => {
-      const start = 1_000_000_000_000;
-      const now = jest.spyOn(Date, 'now').mockReturnValue(start);
-      service.set('media:2', 'v', ttl as number | undefined);
+    it.each([0, -5, NaN, undefined])(
+      'ignore un customTtl invalide (%p) et applique le TTL par défaut',
+      (ttl) => {
+        const start = 1_000_000_000_000;
+        const now = jest.spyOn(Date, 'now').mockReturnValue(start);
+        service.set('media:2', 'v', ttl);
 
-      now.mockReturnValue(start + 3_599_000);
-      expect(service.get('media:2')).toBe('v');
-      now.mockReturnValue(start + 3_601_000);
-      expect(service.get('media:2')).toBeNull();
-    });
+        now.mockReturnValue(start + 3_599_000);
+        expect(service.get('media:2')).toBe('v');
+        now.mockReturnValue(start + 3_601_000);
+        expect(service.get('media:2')).toBeNull();
+      },
+    );
 
-    it('expiresAt est fixé à l\'écriture : lire ne prolonge pas la vie de l\'entrée', () => {
+    it("expiresAt est fixé à l'écriture : lire ne prolonge pas la vie de l'entrée", () => {
       const start = 1_000_000_000_000;
       const now = jest.spyOn(Date, 'now').mockReturnValue(start);
       service.set('k', 'v', 10);
@@ -270,10 +273,12 @@ describe('CacheService', () => {
       expect(service.get('k0')).toBeNull();
       expect(service.get('k9')).toBeNull();
       expect(service.get('k10')).toBe(10);
-      expect(service.get(`k${CACHE_MAX_ENTRIES + 9}`)).toBe(CACHE_MAX_ENTRIES + 9);
+      expect(service.get(`k${CACHE_MAX_ENTRIES + 9}`)).toBe(
+        CACHE_MAX_ENTRIES + 9,
+      );
     });
 
-    it('une lecture protège l\'entrée de l\'éviction (LRU)', () => {
+    it("une lecture protège l'entrée de l'éviction (LRU)", () => {
       for (let i = 0; i < CACHE_MAX_ENTRIES; i++) {
         service.set(`k${i}`, i);
       }
@@ -298,7 +303,8 @@ describe('CacheService', () => {
       const longKey = 'search:' + 'x'.repeat(500);
       service.set(longKey, 'v');
 
-      const storedKeys = Array.from((service as any).cache.keys() as Iterable<string>);
+      const internal = service as unknown as { cache: Map<string, unknown> };
+      const storedKeys = Array.from(internal.cache.keys());
       expect(storedKeys).toHaveLength(1);
       expect(storedKeys[0]).toBe(normalizeCacheKey(longKey));
       expect(storedKeys[0].length).toBeLessThanOrEqual(CACHE_MAX_KEY_LENGTH);
@@ -324,7 +330,9 @@ describe('CacheService', () => {
 
     it('ne modifie pas les clés courtes', () => {
       expect(normalizeCacheKey('species:1')).toBe('species:1');
-      expect(normalizeCacheKey('a'.repeat(CACHE_MAX_KEY_LENGTH))).toBe('a'.repeat(CACHE_MAX_KEY_LENGTH));
+      expect(normalizeCacheKey('a'.repeat(CACHE_MAX_KEY_LENGTH))).toBe(
+        'a'.repeat(CACHE_MAX_KEY_LENGTH),
+      );
     });
   });
 });

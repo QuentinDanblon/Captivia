@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import { envValidationSchema, isExampleJwtSecret } from './env.validation';
 
 const STRONG_SECRET = 'k3Jf9sLq2Zx8Vb7Nm1Pw4Rt6Yu0Io5Ae3Dg7Hh9Jk2L';
 
 function validate(env: Record<string, unknown>) {
-  return envValidationSchema.validate(env, { allowUnknown: true, abortEarly: false });
+  return envValidationSchema.validate(env, {
+    allowUnknown: true,
+    abortEarly: false,
+  });
 }
 
 const baseProd = {
@@ -27,7 +31,7 @@ describe('envValidationSchema', () => {
       'dev-only-' + 'x'.repeat(40),
       'change-me-' + 'x'.repeat(40),
       'CHANGE-ME-' + 'x'.repeat(40),
-    ])('refuse le secret d\'exemple %s', (secret) => {
+    ])("refuse le secret d'exemple %s", (secret) => {
       const { error } = validate({ ...baseProd, JWT_SECRET: secret });
       expect(error).toBeDefined();
       expect(error!.message).toContain('JWT_SECRET');
@@ -53,42 +57,66 @@ describe('envValidationSchema', () => {
     });
 
     it('exige FRONTEND_URL en https (http toléré seulement sur loopback)', () => {
-      expect(validate({ ...baseProd, FRONTEND_URL: 'http://captivia.example' }).error?.message).toContain(
-        'FRONTEND_URL',
-      );
-      expect(validate({ ...baseProd, FRONTEND_URL: 'not a url' }).error?.message).toContain('FRONTEND_URL');
-      expect(validate({ ...baseProd, FRONTEND_URL: 'http://localhost:3000' }).error).toBeUndefined();
+      expect(
+        validate({ ...baseProd, FRONTEND_URL: 'http://captivia.example' }).error
+          ?.message,
+      ).toContain('FRONTEND_URL');
+      expect(
+        validate({ ...baseProd, FRONTEND_URL: 'not a url' }).error?.message,
+      ).toContain('FRONTEND_URL');
+      expect(
+        validate({ ...baseProd, FRONTEND_URL: 'http://localhost:3000' }).error,
+      ).toBeUndefined();
     });
 
     it('PUBLIC_WEB_URL est optionnel mais doit être une URI', () => {
-      expect(validate({ ...baseProd, PUBLIC_WEB_URL: 'https://captivia.example' }).error).toBeUndefined();
-      expect(validate({ ...baseProd, PUBLIC_WEB_URL: 'nope' }).error?.message).toContain('PUBLIC_WEB_URL');
+      expect(
+        validate({ ...baseProd, PUBLIC_WEB_URL: 'https://captivia.example' })
+          .error,
+      ).toBeUndefined();
+      expect(
+        validate({ ...baseProd, PUBLIC_WEB_URL: 'nope' }).error?.message,
+      ).toContain('PUBLIC_WEB_URL');
     });
   });
 
   describe('hors production', () => {
-    it.each(['development', 'test', undefined])('accepte les valeurs d\'exemple (NODE_ENV=%s)', (nodeEnv) => {
-      const { error } = validate({
-        NODE_ENV: nodeEnv,
-        DATABASE_URL: 'postgresql://u:p@localhost:5432/db',
-        JWT_SECRET: 'dev-only-change-me-captivia-docker-secret-32-chars',
-      });
-      expect(error).toBeUndefined();
-    });
+    it.each(['development', 'test', undefined])(
+      "accepte les valeurs d'exemple (NODE_ENV=%s)",
+      (nodeEnv) => {
+        const { error } = validate({
+          NODE_ENV: nodeEnv,
+          DATABASE_URL: 'postgresql://u:p@localhost:5432/db',
+          JWT_SECRET: 'dev-only-change-me-captivia-docker-secret-32-chars',
+        });
+        expect(error).toBeUndefined();
+      },
+    );
 
     it('conserve le minimum de 16 caractères', () => {
       const env = { DATABASE_URL: 'postgresql://u:p@localhost:5432/db' };
-      expect(validate({ ...env, JWT_SECRET: 'a'.repeat(15) }).error?.message).toContain('JWT_SECRET');
-      expect(validate({ ...env, JWT_SECRET: 'a'.repeat(16) }).error).toBeUndefined();
+      expect(
+        validate({ ...env, JWT_SECRET: 'a'.repeat(15) }).error?.message,
+      ).toContain('JWT_SECRET');
+      expect(
+        validate({ ...env, JWT_SECRET: 'a'.repeat(16) }).error,
+      ).toBeUndefined();
     });
 
     it('applique NODE_ENV=development par défaut', () => {
-      const { value } = validate({ DATABASE_URL: 'x', JWT_SECRET: 'a'.repeat(16) });
+      const { value } = validate({
+        DATABASE_URL: 'x',
+        JWT_SECRET: 'a'.repeat(16),
+      });
       expect(value.NODE_ENV).toBe('development');
     });
 
     it('refuse un NODE_ENV inconnu', () => {
-      const { error } = validate({ NODE_ENV: 'prod', DATABASE_URL: 'x', JWT_SECRET: 'a'.repeat(16) });
+      const { error } = validate({
+        NODE_ENV: 'prod',
+        DATABASE_URL: 'x',
+        JWT_SECRET: 'a'.repeat(16),
+      });
       expect(error?.message).toContain('NODE_ENV');
     });
   });
@@ -105,7 +133,7 @@ describe('envValidationSchema', () => {
   });
 
   describe('isExampleJwtSecret', () => {
-    it('détecte les valeurs d\'exemple et laisse passer un vrai secret', () => {
+    it("détecte les valeurs d'exemple et laisse passer un vrai secret", () => {
       expect(isExampleJwtSecret('dev-only-anything')).toBe(true);
       expect(isExampleJwtSecret('change-me-anything')).toBe(true);
       expect(isExampleJwtSecret(STRONG_SECRET)).toBe(false);

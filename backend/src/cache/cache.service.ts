@@ -71,18 +71,23 @@ export class CacheService {
   set(key: string, data: unknown, customTtl?: number): void {
     const storeKey = normalizeCacheKey(key);
     const ttlSeconds =
-      typeof customTtl === 'number' && Number.isFinite(customTtl) && customTtl > 0
+      typeof customTtl === 'number' &&
+      Number.isFinite(customTtl) &&
+      customTtl > 0
         ? customTtl
         : getCacheTTL(key);
 
     // Réécriture : repositionne la clé en fin de Map (la plus récente).
     this.cache.delete(storeKey);
-    this.cache.set(storeKey, { data, expiresAt: Date.now() + ttlSeconds * 1000 });
+    this.cache.set(storeKey, {
+      data,
+      expiresAt: Date.now() + ttlSeconds * 1000,
+    });
 
     while (this.cache.size > CACHE_MAX_ENTRIES) {
-      const oldest = this.cache.keys().next().value;
-      if (oldest === undefined) break;
-      this.cache.delete(oldest);
+      const oldest = this.cache.keys().next();
+      if (oldest.done) break;
+      this.cache.delete(oldest.value);
     }
     this.logger.debug(`Cache set for key: ${storeKey} (TTL: ${ttlSeconds}s)`);
   }
@@ -117,7 +122,13 @@ export class CacheService {
     return this.cache.size;
   }
 
-  getCacheStats(): { size: number; maxEntries: number; ttl: number; defaultTtl: number; ttlConfig: Record<string, number> } {
+  getCacheStats(): {
+    size: number;
+    maxEntries: number;
+    ttl: number;
+    defaultTtl: number;
+    ttlConfig: Record<string, number>;
+  } {
     return {
       size: this.cache.size,
       maxEntries: CACHE_MAX_ENTRIES,

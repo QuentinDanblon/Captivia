@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import axios from 'axios';
 import { Logger } from '@nestjs/common';
 import { SpeciesPlusService } from './speciesplus.service';
@@ -28,15 +29,20 @@ describe('SpeciesPlusService (résilience et fuite de token)', () => {
 
     expect(mockedGet).toHaveBeenCalledTimes(5);
     for (const call of mockedGet.mock.calls) {
-      expect(call[1]).toEqual(expect.objectContaining({ timeout: 8000, maxRedirects: 0 }));
+      expect(call[1]).toEqual(
+        expect.objectContaining({ timeout: 8000, maxRedirects: 0 }),
+      );
     }
   });
 
   it('ne logge jamais le header X-Authentication-Token (message + statut seulement)', async () => {
-    const axiosError = Object.assign(new Error('Request failed with status code 401'), {
-      response: { status: 401 },
-      config: { headers: { 'X-Authentication-Token': 'super-secret-token' } },
-    });
+    const axiosError = Object.assign(
+      new Error('Request failed with status code 401'),
+      {
+        response: { status: 401 },
+        config: { headers: { 'X-Authentication-Token': 'super-secret-token' } },
+      },
+    );
     mockedGet.mockRejectedValue(axiosError);
     const errorSpy = jest.spyOn(Logger.prototype, 'error');
     const service = buildService();
@@ -52,6 +58,8 @@ describe('SpeciesPlusService (résilience et fuite de token)', () => {
       expect(call).toHaveLength(1);
       expect(String(call[0])).toContain('(HTTP 401)');
     }
-    expect(JSON.stringify(errorSpy.mock.calls)).not.toContain('super-secret-token');
+    expect(JSON.stringify(errorSpy.mock.calls)).not.toContain(
+      'super-secret-token',
+    );
   });
 });
