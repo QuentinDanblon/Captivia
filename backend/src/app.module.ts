@@ -31,6 +31,7 @@ import { GradeModule } from './grade/grade.module';
 import { AffiliateModule } from './affiliate/affiliate.module';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { SpeciesRoutinesModule } from './species-routines/species-routines.module';
+import { AccountModule } from './account/account.module';
 
 const redisEnabled = process.env.REDIS_ENABLED === 'true';
 
@@ -83,6 +84,7 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     BreedingModule,
     NotificationsModule,
     GradeModule,
+    AccountModule,
     CacheModule.registerAsync(),
     TransformerModule,
     FilterModule,
