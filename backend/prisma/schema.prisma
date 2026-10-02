@@ -36,6 +36,8 @@ model User {
   /// Consentement CGU + politique de confidentialité à l'inscription (W2-03)
   termsAcceptedAt DateTime? @db.Timestamptz(3)
   termsVersion    String?
+  /// Date de vérification de l'adresse e-mail (W2-04) ; null = non vérifiée.
+  emailVerifiedAt DateTime? @db.Timestamptz(3)
   points       Int      @default(0)   // Points pour le système de grade
   grade        String   @default("bronze") // bronze | silver | gold | platinum | diamond
   createdAt    DateTime @default(now()) @db.Timestamptz(3)
@@ -47,6 +49,8 @@ model User {
   notificationPreferences NotificationPreference[]
   notificationEvents      NotificationEvent[]
   passwordResetTokens     PasswordResetToken[]
+  refreshTokens           RefreshToken[]
+  emailVerificationTokens EmailVerificationToken[]
   subscriptions           Subscription[]
   paymentEvents           PaymentEvent[]
 }
@@ -118,6 +122,43 @@ model PaymentEvent {
 
   @@index([userId])
   @@index([receivedAt])
+}
+
+/// Refresh token opaque (W1-01) : seul sha256(token) est stocké. Rotation à chaque
+/// /auth/refresh ; la réutilisation d'un token déjà roté révoque toute la famille.
+model RefreshToken {
+  id           String    @id @default(uuid())
+  userId       String
+  /// sha256(token) en hexadécimal : le token en clair n'est jamais stocké.
+  tokenHash    String    @unique
+  /// Identifiant de la chaîne de rotation (une famille = une session / un appareil).
+  familyId     String
+  expiresAt    DateTime  @db.Timestamptz(3)
+  revokedAt    DateTime? @db.Timestamptz(3)
+  /// Token émis en remplacement lors de la rotation (null = token courant de la famille).
+  replacedById String?
+  userAgent    String?
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([familyId])
+  @@index([expiresAt])
+}
+
+/// Token de vérification d'e-mail (W2-04), haché (sha256), valable 24 h.
+model EmailVerificationToken {
+  id        String   @id @default(uuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime @db.Timestamptz(3)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
 }
 
 model PasswordResetToken {

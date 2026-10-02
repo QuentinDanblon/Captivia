@@ -37,7 +37,7 @@ export default function LoginPage() {
       const response = await api.login(email, password);
 
       if (response.accessToken && response.user) {
-        login(response.accessToken, response.user);
+        login(response.accessToken, response.user, response.refreshToken);
         router.push('/mes-animaux');
       } else {
         setError(t('auth.invalidCredentials'));

@@ -784,6 +784,30 @@
     "speciesFallbackDescription": "Ficha práctica de una especie: hábitat, alimentación, comportamiento, salud y legislación.",
     "speciesTitle": "Ficha de especie",
     "storeDescription": "Material, alimentación y accesorios recomendados según las necesidades de cada especie, con enlaces de afiliación claramente indicados.",
-    "storeTitle": "Tienda"
+    "storeTitle": "Tienda",
+    "verifyEmailTitle": "Verificación del correo electrónico"
+  },
+  "sessions": {
+    "title": "Dispositivos conectados",
+    "logoutAllDescription": "Cierra la sesión de Captivia en todos tus dispositivos (teléfonos, navegadores), incluido este. Útil si pierdes un dispositivo.",
+    "logoutAllButton": "Cerrar sesión en todos los dispositivos",
+    "logoutAllLoading": "Cerrando sesión…",
+    "logoutAllError": "No se pudo cerrar la sesión en todos los dispositivos. Inténtalo de nuevo."
+  },
+  "emailVerification": {
+    "bannerText": "Verifica tu correo electrónico: te hemos enviado un enlace de confirmación.",
+    "bannerResend": "Reenviar enlace",
+    "bannerSending": "Enviando…",
+    "bannerSent": "Correo enviado. Revisa también la carpeta de spam.",
+    "bannerTooSoon": "Se acaba de enviar un correo. Inténtalo de nuevo en un minuto.",
+    "bannerError": "El envío ha fallado. Inténtalo más tarde.",
+    "bannerDismiss": "Ocultar",
+    "pageTitle": "Verificación de tu correo electrónico",
+    "verifying": "Verificando…",
+    "success": "Tu correo electrónico está verificado. ¡Gracias!",
+    "invalid": "Este enlace de verificación no es válido o ha caducado. Inicia sesión para recibir uno nuevo.",
+    "missingToken": "Enlace de verificación incompleto.",
+    "goToApp": "Ir a mis animales",
+    "goToLogin": "Iniciar sesión"
   }
 }

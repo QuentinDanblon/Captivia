@@ -5,7 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { JWT_ALGORITHM } from './auth.constants';
+import { ACCESS_TOKEN_TTL, JWT_ALGORITHM } from './auth.constants';
 import { MailModule } from '../mail/mail.module';
 
 @Module({
@@ -20,7 +20,10 @@ import { MailModule } from '../mail/mail.module';
         }
         return {
           secret,
-          signOptions: { expiresIn: '7d', algorithm: JWT_ALGORITHM },
+          signOptions: {
+            expiresIn: ACCESS_TOKEN_TTL,
+            algorithm: JWT_ALGORITHM,
+          },
           verifyOptions: { algorithms: [JWT_ALGORITHM] },
         };
       },

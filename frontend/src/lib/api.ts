@@ -1,4 +1,5 @@
 import { API_URL } from './config';
+import { refreshAccessToken } from './session';
 
 const NETWORK_ERROR_MESSAGES = ['Failed to fetch', 'Load failed', 'NetworkError when attempting to fetch resource'];
 
@@ -88,21 +89,77 @@ function notifyUnauthorized() {
   }
 }
 
-async function safeFetch(url: string, init?: RequestInit, options: RequestOptions = {}): Promise<Response> {
-  const { timeoutMs = REQUEST_TIMEOUT_MS, logoutOn401 } = options;
-  let response: Response;
+/** Jeton Bearer porté par la requête (pour savoir s'il a déjà été remplacé). */
+function bearerOf(init?: RequestInit): string | undefined {
+  const headers = init?.headers;
+  if (!headers) return undefined;
+  let value: string | null | undefined;
+  if (typeof Headers !== 'undefined' && headers instanceof Headers) value = headers.get('Authorization');
+  else if (Array.isArray(headers)) value = headers.find(([k]) => k.toLowerCase() === 'authorization')?.[1];
+  else {
+    const key = Object.keys(headers).find((k) => k.toLowerCase() === 'authorization');
+    value = key ? (headers as Record<string, string>)[key] : undefined;
+  }
+  return value?.replace(/^Bearer\s+/i, '') || undefined;
+}
+
+/** Copie de `init` avec un nouvel en-tête Authorization (rejeu après rafraîchissement). */
+function withBearer(init: RequestInit | undefined, token: string): RequestInit {
+  const value = `Bearer ${token}`;
+  const headers = init?.headers;
+  let next: HeadersInit;
+  if (typeof Headers !== 'undefined' && headers instanceof Headers) {
+    const copy = new Headers(headers);
+    copy.set('Authorization', value);
+    next = copy;
+  } else if (Array.isArray(headers)) {
+    next = [...headers.filter(([k]) => k.toLowerCase() !== 'authorization'), ['Authorization', value]];
+  } else {
+    const copy: Record<string, string> = {};
+    for (const [k, v] of Object.entries(headers ?? {})) {
+      if (k.toLowerCase() !== 'authorization') copy[k] = v as string;
+    }
+    copy.Authorization = value;
+    next = copy;
+  }
+  return { ...init, headers: next };
+}
+
+async function rawFetch(url: string, init: RequestInit | undefined, timeoutMs: number): Promise<Response> {
   try {
-    response = await fetch(url, { ...init, signal: init?.signal ?? timeoutSignal(timeoutMs) });
+    return await fetch(url, { ...init, signal: init?.signal ?? timeoutSignal(timeoutMs) });
   } catch (err) {
     if (isNetworkError(err) || isTimeoutError(err)) {
       throw new Error(BACKEND_UNAVAILABLE_MESSAGE);
     }
     throw err;
   }
-  if (response.status === 401 && (logoutOn401 ?? hasAuthorization(init))) {
-    notifyUnauthorized();
+}
+
+/**
+ * fetch + timeout + gestion des sessions (W1-01) : sur un 401 d'une requête authentifiée,
+ * tente UNE fois `/auth/refresh` (partagé entre requêtes concurrentes) puis rejoue la requête
+ * avec le nouveau jeton ; à défaut, émet `auth:logout`.
+ */
+async function safeFetch(url: string, init?: RequestInit, options: RequestOptions = {}): Promise<Response> {
+  const { timeoutMs = REQUEST_TIMEOUT_MS, logoutOn401 } = options;
+  const response = await rawFetch(url, init, timeoutMs);
+  if (response.status !== 401 || !(logoutOn401 ?? hasAuthorization(init))) {
+    return response;
   }
-  return response;
+  const failedToken = bearerOf(init);
+  if (!failedToken) {
+    notifyUnauthorized();
+    return response;
+  }
+  const refreshed = await refreshAccessToken(failedToken);
+  if (!refreshed.ok) {
+    if (refreshed.revoked) notifyUnauthorized();
+    return response;
+  }
+  const retried = await rawFetch(url, withBearer(init, refreshed.accessToken), timeoutMs);
+  if (retried.status === 401) notifyUnauthorized();
+  return retried;
 }
 
 async function readJson(response: Response): Promise<unknown> {
@@ -1084,7 +1141,7 @@ export const api = {
     currentPassword: string,
     newPassword: string
   ) => {
-    return request<{ message: string; accessToken: string }>(
+    return request<{ message: string; accessToken: string; refreshToken?: string }>(
       `${API_URL}/auth/change-password`,
       {
         method: 'POST',
@@ -1096,6 +1153,49 @@ export const api = {
       },
       // 401 = « mot de passe actuel incorrect » : ce n'est pas une session expirée.
       { logoutOn401: false }
+    );
+  },
+
+  /** Renouvelle la paire de jetons (rotation). Préférer `refreshAccessToken` (lib/session). */
+  refreshSession: async (refreshToken: string) => {
+    return request<{ accessToken: string; refreshToken: string }>(`${API_URL}/auth/refresh`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refreshToken }),
+    });
+  },
+
+  /** Révoque la session courante (famille du refresh token). Idempotent. */
+  logout: async (refreshToken: string) => {
+    return request<{ message: string }>(`${API_URL}/auth/logout`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refreshToken }),
+    });
+  },
+
+  /** « Se déconnecter de tous les appareils ». */
+  logoutAll: async (token: string) => {
+    return request<{ message: string }>(`${API_URL}/auth/logout-all`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
+
+  /** W2-04 — valide le lien reçu par e-mail. */
+  verifyEmail: async (token: string) => {
+    return request<{ message: string; emailVerified: boolean }>(`${API_URL}/auth/verify-email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token }),
+    });
+  },
+
+  /** W2-04 — renvoie l'e-mail de vérification (429 si demandé il y a moins d'une minute). */
+  resendVerification: async (token: string) => {
+    return request<{ message: string; alreadyVerified: boolean }>(
+      `${API_URL}/auth/resend-verification`,
+      { method: 'POST', headers: { Authorization: `Bearer ${token}` } },
     );
   },
 

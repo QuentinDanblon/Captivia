@@ -784,6 +784,30 @@
     "speciesFallbackDescription": "Fiche pratique d'une espèce : habitat, alimentation, comportement, santé et législation.",
     "speciesTitle": "Fiche espèce",
     "storeDescription": "Matériel, alimentation et accessoires recommandés selon les besoins de chaque espèce, avec des liens d'affiliation clairement signalés.",
-    "storeTitle": "Magasin"
+    "storeTitle": "Magasin",
+    "verifyEmailTitle": "Vérification de l'adresse e-mail"
+  },
+  "sessions": {
+    "title": "Appareils connectés",
+    "logoutAllDescription": "Déconnecte Captivia de tous vos appareils (téléphones, navigateurs), y compris celui-ci. Utile en cas de perte d'un appareil.",
+    "logoutAllButton": "Se déconnecter de tous les appareils",
+    "logoutAllLoading": "Déconnexion…",
+    "logoutAllError": "La déconnexion de tous les appareils a échoué. Réessayez."
+  },
+  "emailVerification": {
+    "bannerText": "Vérifiez votre adresse e-mail : un lien de confirmation vous a été envoyé.",
+    "bannerResend": "Renvoyer le lien",
+    "bannerSending": "Envoi…",
+    "bannerSent": "E-mail envoyé. Pensez à vérifier vos courriers indésirables.",
+    "bannerTooSoon": "Un e-mail vient d’être envoyé. Réessayez dans une minute.",
+    "bannerError": "L'envoi a échoué. Réessayez plus tard.",
+    "bannerDismiss": "Masquer",
+    "pageTitle": "Vérification de votre adresse e-mail",
+    "verifying": "Vérification en cours…",
+    "success": "Votre adresse e-mail est vérifiée. Merci !",
+    "invalid": "Ce lien de vérification est invalide ou a expiré. Connectez-vous pour en recevoir un nouveau.",
+    "missingToken": "Lien de vérification incomplet.",
+    "goToApp": "Aller à mes animaux",
+    "goToLogin": "Se connecter"
   }
 }

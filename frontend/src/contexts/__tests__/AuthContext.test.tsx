@@ -282,5 +282,52 @@ describe('AuthContext', () => {
       await waitFor(() => expect(result.current.user?.isPremium).toBe(true));
       expect(JSON.parse(localStorage.getItem('user') as string)).toEqual(fresh);
     });
+
+    it('W1-01 : login stocke le refresh token, logout le révoque côté serveur et le purge', async () => {
+      const { result } = renderHook(() => useAuth(), { wrapper });
+      act(() => result.current.login('access-1', user, 'refresh-1'));
+      expect(localStorage.getItem('refreshToken')).toBe('refresh-1');
+
+      act(() => result.current.logout());
+      expect(localStorage.getItem('refreshToken')).toBeNull();
+      const call = fetchMock().mock.calls.find(([url]) => String(url).includes('/auth/logout'));
+      expect(call).toBeDefined();
+      expect(JSON.parse(String((call![1] as RequestInit).body))).toEqual({ refreshToken: 'refresh-1' });
+    });
+
+    it('W1-01 : JWT expiré + refresh token → rotation au démarrage au lieu de déconnecter', async () => {
+      const fresh = makeJwt(nowSec() + 1800);
+      localStorage.setItem('token', makeJwt(nowSec() - 10));
+      localStorage.setItem('refreshToken', 'refresh-1');
+      localStorage.setItem('user', JSON.stringify(user));
+      fetchMock().mockImplementation(async (url: string) =>
+        String(url).includes('/auth/refresh')
+          ? { ok: true, status: 200, json: async () => ({ accessToken: fresh, refreshToken: 'refresh-2' }) }
+          : { ok: true, status: 200, json: async () => user },
+      );
+
+      const { result } = renderHook(() => useAuth(), { wrapper });
+      await waitFor(() => expect(result.current.isLoading).toBe(false));
+
+      expect(result.current.token).toBe(fresh);
+      expect(result.current.user).toEqual(user);
+      expect(localStorage.getItem('refreshToken')).toBe('refresh-2');
+    });
+
+    it('W1-01 : logoutAll appelle /auth/logout-all puis vide la session', async () => {
+      const { result } = renderHook(() => useAuth(), { wrapper });
+      act(() => result.current.login('access-1', user, 'refresh-1'));
+      fetchMock().mockResolvedValue({ ok: true, status: 200, json: async () => ({}) });
+
+      await act(async () => {
+        await result.current.logoutAll();
+      });
+
+      const call = fetchMock().mock.calls.find(([url]) => String(url).includes('/auth/logout-all'));
+      expect((call![1] as RequestInit).headers).toEqual({ Authorization: 'Bearer access-1' });
+      expect(result.current.user).toBeNull();
+      expect(localStorage.getItem('token')).toBeNull();
+      expect(localStorage.getItem('refreshToken')).toBeNull();
+    });
   });
 });

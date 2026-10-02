@@ -155,7 +155,9 @@ export default function ComptePage() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const { user, token, isLoading: authLoading, logout, updateToken } = useAuth();
+  const { user, token, isLoading: authLoading, logout, logoutAll, updateToken } = useAuth();
+  const [logoutAllLoading, setLogoutAllLoading] = useState(false);
+  const [logoutAllError, setLogoutAllError] = useState('');
   const [toast, setToast] = useState<string | null>(null);
   const [selectedLocale, setSelectedLocale] = useState('fr');
   const [showPasswordForm, setShowPasswordForm] = useState(false);
@@ -229,7 +231,7 @@ export default function ComptePage() {
     try {
       // Le backend incrémente tokenVersion : l'ancien jeton est révoqué, on adopte le nouveau.
       const res = await api.changePassword(token, currentPassword, newPassword);
-      if (res?.accessToken) updateToken(res.accessToken);
+      if (res?.accessToken) updateToken(res.accessToken, res.refreshToken);
       setPasswordSuccess(true);
       setCurrentPassword('');
       setNewPassword('');
@@ -257,6 +259,19 @@ export default function ComptePage() {
       setExportError(t('account.exportError'));
     } finally {
       setExportLoading(false);
+    }
+  };
+
+  // W1-01 : révoque toutes les sessions (tous appareils, y compris celui-ci).
+  const handleLogoutAll = async () => {
+    setLogoutAllError('');
+    setLogoutAllLoading(true);
+    try {
+      await logoutAll();
+      router.replace('/login');
+    } catch {
+      setLogoutAllError(t('sessions.logoutAllError'));
+      setLogoutAllLoading(false);
     }
   };
 
@@ -470,6 +485,31 @@ export default function ComptePage() {
               </form>
             )}
           </div>
+
+          <hr className="border-gray-200 dark:border-gray-700" />
+
+          {/* Appareils connectés (W1-01) */}
+          <section aria-labelledby="sessions-title">
+            <h3 id="sessions-title" className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
+              {t('sessions.title')}
+            </h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+              {t('sessions.logoutAllDescription')}
+            </p>
+            <button
+              type="button"
+              onClick={handleLogoutAll}
+              disabled={logoutAllLoading}
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-60"
+            >
+              {logoutAllLoading ? t('sessions.logoutAllLoading') : t('sessions.logoutAllButton')}
+            </button>
+            {logoutAllError && (
+              <p role="alert" className="mt-2 text-sm text-red-600 dark:text-red-400">
+                {logoutAllError}
+              </p>
+            )}
+          </section>
 
           <hr className="border-gray-200 dark:border-gray-700" />
 

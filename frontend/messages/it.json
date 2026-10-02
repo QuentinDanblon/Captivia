@@ -784,6 +784,30 @@
     "speciesFallbackDescription": "Scheda pratica di una specie: habitat, alimentazione, comportamento, salute e normativa.",
     "speciesTitle": "Scheda della specie",
     "storeDescription": "Attrezzatura, alimenti e accessori consigliati in base alle esigenze di ogni specie, con link di affiliazione chiaramente indicati.",
-    "storeTitle": "Negozio"
+    "storeTitle": "Negozio",
+    "verifyEmailTitle": "Verifica dell'indirizzo e-mail"
+  },
+  "sessions": {
+    "title": "Dispositivi connessi",
+    "logoutAllDescription": "Disconnette Captivia da tutti i tuoi dispositivi (telefoni, browser), compreso questo. Utile se perdi un dispositivo.",
+    "logoutAllButton": "Disconnetti da tutti i dispositivi",
+    "logoutAllLoading": "Disconnessione…",
+    "logoutAllError": "La disconnessione da tutti i dispositivi non è riuscita. Riprova."
+  },
+  "emailVerification": {
+    "bannerText": "Verifica il tuo indirizzo e-mail: ti abbiamo inviato un link di conferma.",
+    "bannerResend": "Invia di nuovo il link",
+    "bannerSending": "Invio…",
+    "bannerSent": "E-mail inviata. Controlla anche la cartella spam.",
+    "bannerTooSoon": "È appena stata inviata un’e-mail. Riprova tra un minuto.",
+    "bannerError": "Invio non riuscito. Riprova più tardi.",
+    "bannerDismiss": "Nascondi",
+    "pageTitle": "Verifica del tuo indirizzo e-mail",
+    "verifying": "Verifica in corso…",
+    "success": "Il tuo indirizzo e-mail è verificato. Grazie!",
+    "invalid": "Questo link di verifica non è valido o è scaduto. Accedi per riceverne uno nuovo.",
+    "missingToken": "Link di verifica incompleto.",
+    "goToApp": "Vai ai miei animali",
+    "goToLogin": "Accedi"
   }
 }

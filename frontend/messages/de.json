@@ -784,6 +784,30 @@
     "speciesFallbackDescription": "Praktisches Artenporträt: Lebensraum, Ernährung, Verhalten, Gesundheit und Rechtslage.",
     "speciesTitle": "Artenporträt",
     "storeDescription": "Ausstattung, Futter und Zubehör, empfohlen nach den Bedürfnissen jeder Art, mit klar gekennzeichneten Affiliate-Links.",
-    "storeTitle": "Shop"
+    "storeTitle": "Shop",
+    "verifyEmailTitle": "Bestätigung der E-Mail-Adresse"
+  },
+  "sessions": {
+    "title": "Verbundene Geräte",
+    "logoutAllDescription": "Meldet Captivia auf allen deinen Geräten (Telefone, Browser) ab, auch auf diesem. Nützlich, wenn du ein Gerät verlierst.",
+    "logoutAllButton": "Von allen Geräten abmelden",
+    "logoutAllLoading": "Abmeldung…",
+    "logoutAllError": "Die Abmeldung von allen Geräten ist fehlgeschlagen. Bitte versuche es erneut."
+  },
+  "emailVerification": {
+    "bannerText": "Bitte bestätige deine E-Mail-Adresse: Wir haben dir einen Bestätigungslink gesendet.",
+    "bannerResend": "Link erneut senden",
+    "bannerSending": "Wird gesendet…",
+    "bannerSent": "E-Mail gesendet. Prüfe auch deinen Spam-Ordner.",
+    "bannerTooSoon": "Gerade wurde eine E-Mail gesendet. Versuche es in einer Minute erneut.",
+    "bannerError": "Senden fehlgeschlagen. Bitte versuche es später erneut.",
+    "bannerDismiss": "Ausblenden",
+    "pageTitle": "Bestätigung deiner E-Mail-Adresse",
+    "verifying": "Wird überprüft…",
+    "success": "Deine E-Mail-Adresse ist bestätigt. Danke!",
+    "invalid": "Dieser Bestätigungslink ist ungültig oder abgelaufen. Melde dich an, um einen neuen zu erhalten.",
+    "missingToken": "Unvollständiger Bestätigungslink.",
+    "goToApp": "Zu meinen Tieren",
+    "goToLogin": "Anmelden"
   }
 }

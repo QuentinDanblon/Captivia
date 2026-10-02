@@ -5,6 +5,7 @@ import {
   CareReminderData,
   RenderedMail,
   renderCareReminder,
+  renderEmailVerification,
   renderPasswordReset,
 } from './mail.templates';
 
@@ -100,6 +101,14 @@ export class MailService {
     resetLink: string,
   ): Promise<MailResult> {
     return this.send({ to, ...renderPasswordReset(locale, resetLink) });
+  }
+
+  sendEmailVerification(
+    to: string,
+    locale: string | null | undefined,
+    verifyLink: string,
+  ): Promise<MailResult> {
+    return this.send({ to, ...renderEmailVerification(locale, verifyLink) });
   }
 
   sendCareReminder(

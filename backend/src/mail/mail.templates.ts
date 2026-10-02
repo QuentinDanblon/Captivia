@@ -109,6 +109,57 @@ export function renderPasswordReset(
   };
 }
 
+const VERIFY_TEXT: Record<
+  MailLocale,
+  {
+    subject: string;
+    hello: string;
+    intro: string;
+    expiry: string;
+    ignore: string;
+    sign: string;
+  }
+> = {
+  fr: {
+    subject: 'Confirmez votre adresse e-mail Captivia',
+    hello: 'Bonjour,',
+    intro:
+      'Bienvenue sur Captivia ! Cliquez sur le lien suivant pour confirmer votre adresse e-mail :',
+    expiry: 'Ce lien expire dans 24 heures.',
+    ignore: "Si vous n'avez pas créé de compte Captivia, ignorez cet e-mail.",
+    sign: "L'équipe Captivia",
+  },
+  en: {
+    subject: 'Confirm your Captivia email address',
+    hello: 'Hello,',
+    intro:
+      'Welcome to Captivia! Click the following link to confirm your email address:',
+    expiry: 'This link expires in 24 hours.',
+    ignore:
+      "If you didn't create a Captivia account, you can ignore this email.",
+    sign: 'The Captivia team',
+  },
+};
+
+/** E-mail de vérification d'adresse (W2-04). */
+export function renderEmailVerification(
+  locale: string | null | undefined,
+  verifyLink: string,
+): RenderedMail {
+  const lang = resolveMailLocale(locale);
+  const t = VERIFY_TEXT[lang];
+  const link = escapeHtml(verifyLink);
+  return {
+    subject: t.subject,
+    text: `${t.hello}\n\n${t.intro}\n${verifyLink}\n\n${t.expiry}\n${t.ignore}\n\n${t.sign}`,
+    html: layout(
+      lang,
+      `<p>${t.hello}</p><p>${t.intro}</p><p><a href="${link}">${link}</a></p>` +
+        `<p>${t.expiry}<br>${t.ignore}</p><p>${t.sign}</p>`,
+    ),
+  };
+}
+
 const REMINDER_TEXT: Record<
   MailLocale,
   {
