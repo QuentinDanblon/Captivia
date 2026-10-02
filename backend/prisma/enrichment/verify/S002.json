@@ -1,0 +1,64 @@
+[
+  {
+    "speciesId": 2153441,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation.status: permit_required -> allowed (CITES II confirmee par Wikipedia ; detention en France sans permis ; commerce international controle)",
+      "legislation.permits: 'Permission prefectorale ... Arrete du 21 novembre 1997' (invente) retire ; remplace par permis CITES pour commerce international",
+      "behavior: 'vit partiellement en arboricole' (faux, Brachypelma terrestre) retire",
+      "health: acariens reformules (arachnoboards: souvent inoffensifs) ; DKS prevention reecrite selon tomsbigspiders (causes suspectees, pas de cure)",
+      "reproduction.notes: 'frappe requise apres accouplement' (incoherent) retire ; incubation 25-30 j -> 6-8 semaines (source generique tarantulaforum)"
+    ],
+    "removed": [
+      "legislation.euAnnex B (non confirme par Wikipedia)",
+      "habitat.tempMin/Max 20-28, humidity 40-60, minSpaceSize 30x20x20 / substrat 5-8 cm (non confirmes)",
+      "reproduction.litterSizeMin/Max 50-300, sexualMaturityMonths 48, season, breedingDifficulty (non confirmes)",
+      "source https://cites.org/sites/default/files/fra/com/ac/31/Documents/F-AC31-41-04.pdf (403)",
+      "source giantspiders dans feeding, arachnoboards difficult-to-breed dans reproduction (sans donnees pertinentes)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2153712,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: '4-5 grillons par mois, espaces 1-2 semaines' -> adulte 1 repas toutes les 2-3 semaines, 1-5 insectes (dubiaroaches, Tarantula Collective)",
+      "habitat.tempMin/Max 21-27 -> 20-26 (Tarantula Collective 20-23, vetverified 22-26)",
+      "habitat.humidity 55-65 -> 40-60 (dubiaroaches 40-55, vetverified 50-60)",
+      "habitat.minSpaceSize 25x25x25 -> au moins 50x25x25 cm (dubiaroaches 20x10x10 in, Tarantula Collective 3-5x envergure)",
+      "behavior.children: 'moderement manipulable' -> manipulation a eviter, chute potentiellement fatale (vetverified)",
+      "health.DKS: prevention/traitement reecrits selon tomsbigspiders ; 'refus alimentaire >6 mois' -> jeune normal de semaines/mois (Wikipedia)",
+      "reproduction.litter 75-300 -> 50-200 (Wikipedia ; autre fiche 100-500)",
+      "reproduction.incubation 25-30 j -> 6-12 semaines (sources)",
+      "reproduction.season 'toute l'annee' -> deux periodes d'accouplement par an (Wikipedia)"
+    ],
+    "removed": [
+      "legislation.euAnnex B (non confirme) et 'Arrete 21/11/1997 / declaration prefectorale' (invente)",
+      "source cites.unia.es (PDF illisible, non verifiable)",
+      "reproduction.sexualMaturityMonths 36 (sources contradictoires: 3-4 ans a 8-12 ans), 'moins difficile que Brachypelma' (non source)",
+      "feeding: 'aliments decongeles de mauvaise qualite' (non source)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2153949,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.mealFrequency every_2_days -> variable ; adulte 1 repas toutes les 2-3 semaines, juvenile 7-10 j (Tarantula Collective)",
+      "feeding: 'mangeuse d'oiseaux' et petits vertebres recommandes retires (Wikipedia: gros insectes, rares amphibiens/reptiles)",
+      "habitat.tempMin/Max 20-26 -> 20-24 (Tarantula Collective)",
+      "habitat.minSpaceSize 60x40x40 -> 3 a 5x l'envergure ; substrat 10-15 cm -> moitie du terrarium (Tarantula Collective)",
+      "behavior: 'adulte en 2 ans' retire ; docile/hardie, ne tisse pas de toile (Wikipedia)",
+      "reproduction.litter 100-500 -> 600 a plus de 1000 oeufs (Tarantula Collective)",
+      "reproduction: incubation 25-30 j -> 6-8 semaines ; maturite 24 mois -> males 2-3 ans, femelles 3-4 ans (notes)",
+      "health: 'nematodes' retire, 'humidite 70-80%' retiree"
+    ],
+    "removed": [
+      "legislation (section entiere: CITES II/Annexe B non confirmes, source Wikipedia 'Chilean rose tarantula' concerne une autre espece, PDF unia illisible)",
+      "habitat.humidityMin/Max 70-80 (non confirme)",
+      "sources pangovet (redirection 301), rvc.ac.uk, bantam.earth (non verifies), arachnoboards difficult-to-breed",
+      "reproduction.incubationDays/sexualMaturityMonths (valeurs uniques non fiables)"
+    ],
+    "confidence": "medium"
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "speciesId": 1025719,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.minSpaceSize: 30x30 cm (40x40 recommande) -> au moins 30 cm de long et 30 cm de haut (reptilecentre)",
+      "feeding: ajout chou frise (reptilecentre), retrait 'riche en mineraux' non source",
+      "behavior: reformule (docile, spirale + secretion irritante, Wikipedia)",
+      "reproduction.notes: reecrit selon arachnoboards (oeufs dans le frass, feuilles de feuillus, peu de derangement)",
+      "habitat.hygieneNotes: 'substrat change tous les 4 semaines' -> renouvellement regulier"
+    ],
+    "removed": [
+      "habitat.humidityMin/Max 70-90 (non confirme)",
+      "health: 'humidite 70-90%' retire du texte deshydratation",
+      "source reptilecentre dans health (la fiche ne traite pas des maladies)",
+      "legislation (section entiere: source cites.org F055 non pertinente, statut non confirme)",
+      "reproduction.incubationDays 14, litterSizeMin/Max 5-25, sexualMaturityMonths 12, season (non confirmes)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 1406471,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.minSpaceSize: 20x30 cm -> au moins 20 cm de long et 30 cm de haut, verre (reptilecentre) ; raison 'regulation thermique' supprimee",
+      "behavior: 'cannibalisme tres frequent, meme entre jeunes' -> cannibalisme documente (Wikipedia)",
+      "feeding: raison 'suffocation' remplacee par risque de blessure",
+      "health.parasites: 'corps mou', 'tentative de noyade' reformules selon a-z-animals"
+    ],
+    "removed": [
+      "source mantidforum.net (403) dans feeding/behavior/reproduction",
+      "habitat.humidityMin/Max 60-80 (non confirme)",
+      "behavior: 'longevite 5-9 mois' (non confirme, reptilecentre indique ~1 an)",
+      "legislation (source cites.org PC23 = comite des plantes, non pertinente)",
+      "reproduction: incubationDays 40, litter 25-50, maturite 3 mois, tailles 3/7 cm, season, breedingDifficulty (aucune source ouverte)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 1415423,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: plantes hotes -> ronce, rosier, aubepine, goyavier (Phasmid Study Group) ; retrait feuilles de chene/framboisier/murier non confirmes",
+      "reproduction: tailles femelle ~80 mm / male ~55 mm (PSG) au lieu de 8 cm / 5 cm",
+      "reproduction: parthenogenese retiree (PSG indique reproduction sexuee)",
+      "health: 'Metarhizium phasmatodeae' -> 'infections fongiques' generique"
+    ],
+    "removed": [
+      "habitat.tempMin/Max 22-26 et humidity 70-80 (non confirmes)",
+      "behavior.sociability 'solitaire' et compatibilityWithOtherAnimals (cannibalisme invente)",
+      "source NCBI PMC11076836 (etude generale sur phasmes, pas cette espece)",
+      "legislation (aucune source valide: cites.org PC23 non pertinente)",
+      "reproduction: incubationDays 120, litter 10-50, maturite 4 mois, season, breedingDifficulty (non confirmes ; maturite 4 mois probablement fausse)"
+    ],
+    "confidence": "medium"
+  }
+]
