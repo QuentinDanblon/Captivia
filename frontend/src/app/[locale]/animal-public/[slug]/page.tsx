@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { api, type PublicAnimalProfile } from '@/lib/api';
 import { Link } from '@/i18n/navigation';
 
@@ -11,6 +11,7 @@ export default function AnimalPublicPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const t = useTranslations();
+  const locale = useLocale();
   const [slug, setSlug] = useState<string | null>(null);
   const [data, setData] = useState<PublicAnimalProfile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -38,7 +39,7 @@ export default function AnimalPublicPage({
   const formatDate = (dateString?: string) => {
     if (!dateString) return '-';
     try {
-      return new Date(dateString).toLocaleDateString();
+      return new Date(dateString).toLocaleDateString(locale);
     } catch {
       return dateString;
     }

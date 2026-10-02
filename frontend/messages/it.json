@@ -256,7 +256,18 @@
       "title": "Appuntamenti veterinari",
       "vetName": "Veterinario"
     },
-    "viewHistory": "Vedi cronologia"
+    "viewHistory": "Vedi cronologia",
+    "weightChartLabel": "Grafico del peso",
+    "notFound": "Animale non trovato",
+    "errorLoadingAnimal": "Errore durante il caricamento dei dati dell'animale",
+    "defaultCareTips": {
+      "environment": "Mantieni un ambiente adatto (temperatura, umidità)",
+      "feeding": "Segui un programma di alimentazione regolare",
+      "equipment": "Controlla regolarmente le attrezzature (UVB, riscaldamento)",
+      "illness": "Fai attenzione ai segni di malattia"
+    },
+    "medicationUnitPlaceholder": "ml / mg / gocce…",
+    "speciesRequired": "Seleziona una specie"
   },
   "attribution": {
     "wikipediaPrefix": "Fonte:",
@@ -297,7 +308,8 @@
     "resetPasswordTitle": "Nuova password",
     "acceptTermsLabel": "Accetto le <terms>condizioni d'uso</terms> e la <privacy>politica sulla privacy</privacy>",
     "ageConfirmLabel": "Confermo di avere almeno 15 anni",
-    "consentRequired": "Per creare un account devi accettare le condizioni d'uso e confermare di avere almeno 15 anni."
+    "consentRequired": "Per creare un account devi accettare le condizioni d'uso e confermare di avere almeno 15 anni.",
+    "registerError": "Registrazione non riuscita"
   },
   "common": {
     "account": "Account",
@@ -334,7 +346,12 @@
     "search": "Cerca",
     "settings": "Impostazioni",
     "shop": "Negozio",
-    "species": "Specie"
+    "species": "Specie",
+    "reset": "Reimposta",
+    "loadMore": "Mostra altro",
+    "retry": "Riprova",
+    "unexpectedError": "Errore imprevisto",
+    "sessionExpired": "Sessione scaduta. Accedi di nuovo."
   },
   "disclaimers": {
     "affiliate": "Link affiliato",
@@ -401,7 +418,42 @@
     "mainNavigation": "Navigazione principale",
     "mobileNavigation": "Navigazione mobile",
     "openMenu": "Apri il menu",
-    "skipToContent": "Vai al contenuto"
+    "skipToContent": "Vai al contenuto",
+    "searchUnavailable": "Il server di ricerca non è disponibile. Avvia il backend o riprova più tardi.",
+    "eyebrow": "GUIDA ALLA FAUNA",
+    "heroLine": "Conoscere il vivente.",
+    "pillarsLabel": "I pilastri di Captivia",
+    "pillarExplore": "Esplorare",
+    "pillarUnderstand": "Capire",
+    "pillarCare": "Prendersi cura",
+    "explorerKicker": "ESPLORA",
+    "explorerTitle": "Hai una specie in mente?",
+    "speciesProfiles": "Schede delle specie",
+    "instantSearch": "Ricerca istantanea",
+    "noResults": "Nessun risultato",
+    "discoverKicker": "SCOPRI",
+    "resultsKicker": "RISULTATI",
+    "resultsTitle": "Specie trovate",
+    "profileCount": "{count, plural, one {# scheda} other {# schede}}",
+    "profileBadge": "Scheda",
+    "taxonomy": {
+      "Reptilia": "Rettile",
+      "Aves": "Uccello",
+      "Mammalia": "Mammifero",
+      "Amphibia": "Anfibio",
+      "Actinopterygii": "Pesce",
+      "Insecta": "Insetto",
+      "Arachnida": "Aracnide",
+      "Gastropoda": "Gasteropode",
+      "Bivalvia": "Bivalve",
+      "Cephalopoda": "Cefalopode",
+      "Crustacea": "Crostaceo",
+      "Animalia": "Animale",
+      "Plantae": "Pianta",
+      "Fungi": "Fungo",
+      "Bacteria": "Batterio",
+      "Archaea": "Archeobatterio"
+    }
   },
   "notifications": {
     "addCustom": "Aggiungi un argomento",
@@ -460,7 +512,22 @@
     "weekDay3": "Mercoledì",
     "weekDay4": "Giovedì",
     "weekDay5": "Venerdì",
-    "weekDay6": "Sabato"
+    "weekDay6": "Sabato",
+    "saveError": "Errore durante il salvataggio",
+    "notificationsEnabled": "Notifiche attivate",
+    "snoozeHint": "Durata del rinvio in minuti (5-120)",
+    "suggested": {
+      "feeding": "Alimentazione",
+      "cleaning": "Pulizia",
+      "uvb": "UVB / illuminazione",
+      "health": "Salute",
+      "vet": "Promemoria veterinario",
+      "shedding": "Muta",
+      "weighing": "Pesatura",
+      "bath": "Bagno",
+      "temperature": "Temperatura",
+      "humidity": "Umidità"
+    }
   },
   "premiumLock": {
     "goPremium": "Scopri l'abbonamento Premium",
@@ -504,7 +571,10 @@
       "feeding": "Alimentazione",
       "health": "Controllo salute",
       "uvb": "UVB"
-    }
+    },
+    "paused": "In pausa",
+    "toggleActive": "Attiva/metti in pausa",
+    "namePlaceholder": "es. Pasto del mattino"
   },
   "settings": {
     "account": "Account",
@@ -572,7 +642,45 @@
     "status": "Stato",
     "symptoms": "Sintomi",
     "viewFullGuide": "Vedi guida completa",
-    "whenToConsult": "Quando consultare"
+    "whenToConsult": "Quando consultare",
+    "noPartnerStores": "Al momento non ci sono negozi partner per questa categoria. Consulta la scheda Negozio dalla home.",
+    "profileLabel": "Profilo",
+    "commonNameFr": "Nome comune (FR):",
+    "category": "Categoria:",
+    "subcategory": "Sottocategoria:",
+    "domesticationType": "Tipo di domesticazione:",
+    "kingdom": "Regno:",
+    "phylum": "Phylum:",
+    "class": "Classe:",
+    "order": "Ordine:",
+    "family": "Famiglia:",
+    "genus": "Genere:",
+    "habitatEditorial": "Habitat editoriale",
+    "habitatType": "Tipo di habitat",
+    "temperature": "Temperatura",
+    "humidity": "Umidità",
+    "spaceRequirements": "Spazio richiesto",
+    "lighting": "Illuminazione",
+    "enrichment": "Arricchimento ambientale",
+    "behavior": "Comportamento",
+    "generalBehavior": "Comportamento generale",
+    "sociability": "Socialità",
+    "difficultyLevel": "Livello di difficoltà",
+    "compatibility": "Compatibilità",
+    "biome": "Bioma",
+    "defaultBiome": "Tropicale / Subtropicale",
+    "environmentDataMissing": "Dati ambientali da completare",
+    "sources": "Fonti",
+    "feedingTitle": "Alimentazione adatta alla specie",
+    "dietType": "Tipo di dieta",
+    "mealFrequency": "Frequenza dei pasti",
+    "recommendedFoods": "Alimenti consigliati",
+    "foodsToAvoid": "Alimenti da evitare",
+    "specificNeeds": "Esigenze specifiche",
+    "foodReferenceNote": "Le raccomandazioni qui sopra (database della specie) restano il riferimento.",
+    "unnamedProduct": "Prodotto senza nome",
+    "annex": "Allegato {value}",
+    "euAnnexLabel": "Allegato UE:"
   },
   "store": {
     "allCategories": "Tutti i tipi",
@@ -608,7 +716,9 @@
     "subscribeSuccess": "Abbonamento attivato. Ora hai accesso a tutte le funzionalità Premium.",
     "subtitle": "Sblocca tutti i vantaggi di Captivia",
     "title": "Abbonamento Premium",
-    "yearly": "Annuale"
+    "yearly": "Annuale",
+    "yearlyEquivalent": "≈ 2,50 € / mese",
+    "yearlyDiscount": "−17%"
   },
   "legal": {
     "englishFallback": "In attesa della traduzione, fa fede la versione inglese.",

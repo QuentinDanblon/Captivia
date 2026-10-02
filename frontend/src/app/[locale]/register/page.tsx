@@ -60,10 +60,10 @@ export default function RegisterPage() {
         login(response.accessToken, response.user);
         router.push('/mes-animaux');
       } else {
-        setError(response.message || 'Registration failed');
+        setError(response.message || t('auth.registerError'));
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Registration failed');
+      setError(err instanceof Error ? err.message : t('auth.registerError'));
     } finally {
       setLoading(false);
     }

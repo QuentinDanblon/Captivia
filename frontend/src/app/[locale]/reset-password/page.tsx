@@ -150,10 +150,11 @@ function ResetPasswordForm() {
 }
 
 export default function ResetPasswordPage() {
+  const t = useTranslations();
   return (
     <Suspense fallback={
       <div className="captivia-auth-page">
-        <p className="captivia-auth-description">Chargement...</p>
+        <p className="captivia-auth-description">{t('common.loading')}</p>
       </div>
     }>
       <ResetPasswordForm />

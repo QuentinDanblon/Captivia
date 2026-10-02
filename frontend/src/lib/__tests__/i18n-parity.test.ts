@@ -55,11 +55,15 @@ const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {
     'Active', 'Bronze', 'Classification', 'Contact', 'Date', 'Description', 'Distribution',
     'Dose', 'Email', 'Grade', 'Habitat', 'Identification', 'Notes', 'Notifications',
     'Photos', 'Points', 'Restrictions', 'Routines', 'Type', 'Vaccinations',
+    'Reptile', 'Bivalve', 'Animal', 'Biome', 'Sources', 'Tropical / Subtropical',
   ]),
-  es: new Set(['Email', 'Reptiles']),
+  es: new Set(['Email', 'Reptiles', 'Animal', 'Tropical / Subtropical']),
   de: new Set(['Bronze', 'Diamant', 'Profil']),
-  it: new Set(['Dose', 'Email', 'Facile', 'Habitat']),
-  pt: new Set(['Bronze', 'Dose', 'Email', 'Habitat', 'ex. Rango', 'ou', 'Wikipédia']),
+  it: new Set(['Dose', 'Email', 'Facile', 'Habitat', 'Bivalve']),
+  pt: new Set([
+    'Bronze', 'Dose', 'Email', 'Habitat', 'ex. Rango', 'ou', 'Wikipédia',
+    'Bivalve', 'Animal', 'Tropical / Subtropical',
+  ]),
 };
 
 /** Extrait les noms d'arguments ICU (récursivement dans plural/select) et les balises. */

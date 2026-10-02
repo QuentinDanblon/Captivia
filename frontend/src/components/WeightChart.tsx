@@ -1,5 +1,7 @@
 'use client';
 
+import { useLocale, useTranslations } from 'next-intl';
+
 interface WeightChartProps {
   measurements: Array<{
     measuredAt: string;
@@ -13,6 +15,8 @@ interface WeightChartProps {
  * échelle automatique min/max des poids.
  */
 export default function WeightChart({ measurements }: WeightChartProps) {
+  const t = useTranslations();
+  const locale = useLocale();
   const points = measurements
     .filter((m) => typeof m.weightKg === 'number' && !!m.measuredAt)
     .sort(
@@ -56,7 +60,7 @@ export default function WeightChart({ measurements }: WeightChartProps) {
       viewBox={`0 0 ${W} ${H}`}
       className="w-full h-auto"
       role="img"
-      aria-label="Courbe de poids"
+      aria-label={t('animals.weightChartLabel')}
     >
       {/* Grille horizontale + labels (kg) */}
       {ticks.map((t) => (
@@ -104,7 +108,7 @@ export default function WeightChart({ measurements }: WeightChartProps) {
               fontSize={10}
               className="fill-gray-400 dark:fill-gray-500"
             >
-              {new Date(p.measuredAt).toLocaleDateString(undefined, { day: '2-digit', month: '2-digit' })}
+              {new Date(p.measuredAt).toLocaleDateString(locale, { day: '2-digit', month: '2-digit' })}
             </text>
           )}
         </g>

@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef, useId } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import { languageNames } from '@/components/LanguageSelector';
 import { Link, useRouter, usePathname } from '@/i18n/navigation';
 import type { Locale } from '../../../../../i18n/routing';
 import { useAuth } from '@/contexts/AuthContext';
@@ -151,6 +152,7 @@ function DeleteAccountModal({ onClose, onConfirm, error, loading }: DeleteAccoun
 
 export default function ComptePage() {
   const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const { user, token, isLoading: authLoading, logout, updateToken } = useAuth();
@@ -280,7 +282,7 @@ export default function ComptePage() {
   const formatDate = (dateString?: string): string => {
     if (!dateString) return '-';
     try {
-      return new Date(dateString).toLocaleDateString('fr-FR', {
+      return new Date(dateString).toLocaleDateString(locale, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -361,12 +363,11 @@ export default function ComptePage() {
               onChange={(e) => handleLocaleChange(e.target.value)}
               className="w-full max-w-xs px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 dark:bg-gray-700 dark:text-white"
             >
-              <option value="fr">Francais</option>
-              <option value="en">English</option>
-              <option value="es">Espanol</option>
-              <option value="de">Deutsch</option>
-              <option value="it">Italiano</option>
-              <option value="pt">Portugues</option>
+              {(Object.keys(languageNames) as Array<keyof typeof languageNames>).map((code) => (
+                <option key={code} value={code}>
+                  {languageNames[code]}
+                </option>
+              ))}
             </select>
           </div>
 

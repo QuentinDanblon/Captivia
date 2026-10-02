@@ -223,7 +223,7 @@ function MyAnimalsPageContent() {
     }
     
     if (!formSpeciesId) {
-      setFormError('Veuillez sélectionner une espèce');
+      setFormError(t('animals.speciesRequired'));
       return;
     }
 
