@@ -5,10 +5,8 @@ import * as Sentry from '@sentry/nextjs';
  * Initialisé UNIQUEMENT si un DSN est présent (NEXT_PUBLIC_SENTRY_DSN ou SENTRY_DSN).
  * Sans DSN : aucun impact (retour immédiat, pas d'appel réseau).
  *
- * NB : le bundling côté client (@sentry/nextjs via withSentryConfig dans
- * next.config.ts) n'est PAS branché — next.config.ts est hors périmètre.
- * Seul le runtime serveur est donc couvert pour l'instant ; pour la couverture
- * navigateur, prévoir @sentry/react + <Sentry.ErrorBoundary> dans le layout.
+ * Côté navigateur : voir src/instrumentation-client.ts. `withSentryConfig`
+ * (tunnel, sourcemaps) n'est pas branché dans next.config.ts : voir W1-03.
  */
 export function register() {
   const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN || process.env.SENTRY_DSN;
@@ -20,3 +18,6 @@ export function register() {
     tracesSampleRate: 0.1,
   });
 }
+
+/** Remonte à Sentry les erreurs de rendu serveur (Server Components, route handlers, proxy). */
+export const onRequestError = Sentry.captureRequestError;

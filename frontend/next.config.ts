@@ -28,9 +28,24 @@ if (isProd && !API_ORIGIN) {
   );
 }
 
+/** Origine d'ingestion Sentry (DSN navigateur), autorisée en connect-src seulement si un DSN est défini. */
+function sentryOrigin(): string | null {
+  const dsn = (process.env.NEXT_PUBLIC_SENTRY_DSN || '').trim();
+  if (!dsn) return null;
+  try {
+    const { protocol, origin } = new URL(dsn);
+    return protocol === 'https:' ? origin : null;
+  } catch {
+    return null;
+  }
+}
+
+const SENTRY_ORIGIN = sentryOrigin();
+
 const connectSrc = [
   "'self'",
   ...(API_ORIGIN ? [API_ORIGIN] : []),
+  ...(SENTRY_ORIGIN ? [SENTRY_ORIGIN] : []),
   // Backend local / LAN (développement uniquement, jamais en production).
   ...(isProd ? [] : ['http://localhost:3001', 'http://127.0.0.1:3001', 'http://*:3001']),
 ].join(' ');

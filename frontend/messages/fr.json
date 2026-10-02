@@ -274,6 +274,15 @@
     "health": "Ces informations ne remplacent pas un avis vétérinaire. Consultez toujours un professionnel en cas de doute.",
     "legal": "Informations indicatives. Vérifiez toujours la réglementation locale en vigueur."
   },
+  "errors": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundDescription": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "errorTitle": "Une erreur est survenue",
+    "errorDescription": "Un problème inattendu s'est produit. Vous pouvez réessayer ; si le problème persiste, revenez à l'accueil.",
+    "retry": "Réessayer",
+    "backHome": "Retour à l'accueil",
+    "reference": "Référence : {digest}"
+  },
   "footer": {
     "about": "À propos",
     "contact": "Contact",

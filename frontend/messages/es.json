@@ -274,6 +274,15 @@
     "health": "Esta información no reemplaza el consejo veterinario. Siempre consulta a un profesional en caso de duda.",
     "legal": "Información indicativa. Siempre verifica la normativa local vigente."
   },
+  "errors": {
+    "notFoundTitle": "Página no encontrada",
+    "notFoundDescription": "La página que buscas no existe o ha sido movida.",
+    "errorTitle": "Algo salió mal",
+    "errorDescription": "Se ha producido un problema inesperado. Puedes intentarlo de nuevo; si persiste, vuelve al inicio.",
+    "retry": "Reintentar",
+    "backHome": "Volver al inicio",
+    "reference": "Referencia: {digest}"
+  },
   "footer": {
     "about": "Acerca de",
     "contact": "Contacto",
