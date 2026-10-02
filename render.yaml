@@ -52,6 +52,8 @@ services:
       # Facultatifs — à renseigner dans le Dashboard quand disponibles.
       - key: SENTRY_DSN
         sync: false
+      - key: SENTRY_TRACES_SAMPLE_RATE
+        sync: false
       - key: MAIL_HOST
         sync: false
       # Les opérateurs ne sont plus définis par variable d'environnement (W0-01) :

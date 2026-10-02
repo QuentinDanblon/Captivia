@@ -6,6 +6,8 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { envValidationSchema } from './config/env.validation';
 import { GLOBAL_THROTTLE } from './config/throttle.config';
 import { SpeciesModule } from './species/species.module';
+import { LoggerModule } from 'nestjs-pino';
+import { buildLoggerParams } from './common/logging/logger.config';
 import { HealthModule } from './health/health.module';
 import { CommonModule } from './common/common.module';
 import { CacheModule } from './cache/cache.module';
@@ -45,6 +47,8 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
       validationSchema: envValidationSchema,
       validationOptions: { allowUnknown: true, abortEarly: false },
     }),
+    // Logs structurés pino (JSON en production, pino-pretty en dev), request-id, redaction.
+    LoggerModule.forRoot(buildLoggerParams()),
     // Rate limiting global par IP (120 req/min) ; durci par @Throttle sur les routes à API externes.
     ThrottlerModule.forRoot({ throttlers: [GLOBAL_THROTTLE] }),
     ...(redisEnabled

@@ -39,6 +39,7 @@ describe('HealthController', () => {
   it('GET /health : liveness inchangé, sans toucher à la base', async () => {
     const res = await request(app.getHttpServer()).get('/health').expect(200);
     expect(res.body.status).toBe('ok');
+    expect(typeof res.body.version).toBe('string');
     expect(typeof res.body.timestamp).toBe('string');
     expect(queryRaw).not.toHaveBeenCalled();
   });
