@@ -21,7 +21,7 @@
   },
   {
     "speciesId": 2000000115,
-    "description": "Le Scottish Fold est originaire d'Écosse, découvert en 1961 avec le premier specimen connu, Susie, une chatte vivant dans une ferme au nord de Dundee. C'est un chat de taille moyenne avec un corps massif et musclé, caractérisé par une tête large et très arrondie. Son tempérament est calme et plutôt silencieux, tout en étant très joueur et appréciant la compagnie de ses congénères.",
+    "description": "Le Scottish Fold est originaire d'Écosse : le premier spécimen connu de chat aux oreilles pliées, Susie, une chatte vivant dans une ferme au nord de Dundee, a été découvert en 1961. C'est un chat de taille moyenne à grande, au corps large, musclé et massif mais tout en rondeur, avec une tête large et très arrondie. Son tempérament est décrit comme calme et plutôt silencieux, mais très joueur, et il apprécie la compagnie de ses semblables.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Scottish_Fold"
   },
   {
@@ -31,22 +31,22 @@
   },
   {
     "speciesId": 2000000117,
-    "description": "Le chat Abyssin provient du Royaume-Uni, bien que des études génétiques suggèrent des origines en Asie du Sud-Est et en Europe. C'est un félin de taille moyenne pesant environ 4,5 kg. Son tempérament est très social et demandeur d'attention, avec une personnalité ludique souvent comparée aux clowns du royaume félin.",
+    "description": "L'Abyssin est une race de chat développée au Royaume-Uni, avec des références remontant au moins aux années 1890 ; des études génétiques indiquent que des chats d'Asie et d'Europe ont servi à la créer. De taille moyenne, il pèse en moyenne 4,5 kg. Très sociable et demandeur d'attention, ludique, il est parfois surnommé le « clown du monde félin ».",
     "sourceUrl": "https://en.wikipedia.org/wiki/Abyssinian_cat"
   },
   {
     "speciesId": 2000000118,
-    "description": "Le Sacré de Birmanie est une race française apparue dans les années 1920, probablement issue du croisement entre un siamois ganté et un persan. Ce chat de taille moyenne à grande possède une fourrure mi-longue soyeuse avec un patron colorpoint caractéristique et des gants blancs aux pattes. Affectueux et doux, il se distingue par son calme relatif et sa sociabilité.",
+    "description": "Le Sacré de Birmanie est une race de chat dont l'origine la plus souvent envisagée est française, dans les années 1920, d'un accouplement fortuit entre un siamois ganté de blanc et un persan. De taille moyenne, il possède une fourrure mi-longue avec un patron colorpoint comme le Siamois, mais des pattes d'un blanc pur, en forme de gants. Affectueux et doux, calme et à la voix douce, il est sociable et s'adapte bien à la vie en famille.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Sacré_de_Birmanie"
   },
   {
     "speciesId": 2000000119,
-    "description": "Le Chartreux est une race de chat originaire du Proche-Orient, probablement de Syrie ou de Turquie, ramené en France lors des Croisades. C'est un chat de taille moyenne à grande au corps robuste et musclé, caractérisé par son pelage bleu dense et ses yeux or à cuivre. Son tempérament enjoué et fidèle le qualifie de chat-chien : peu miauleur, très sociable et aimant suivre son maître.",
+    "description": "Le Chartreux est une race de chat originaire du Proche-Orient, probablement de Syrie, qui aurait été ramenée en France au temps des croisades. C'est un chat de taille moyenne à grande au corps musclé et robuste, au pelage court et fourni entièrement bleu et aux yeux or à cuivre. Enjoué, très sociable et fidèle, il est qualifié de « chat-chien » : peu miauleur, il aime suivre son maître de pièce en pièce.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Chartreux_(chat)"
   },
   {
     "speciesId": 2000000120,
-    "description": "Le Devon Rex est originaire du Royaume-Uni, où un chaton à fourrure bouclée a été découvert près de Buckfastleigh en 1960. De taille moyenne avec une silhouette gracieuse, il se distingue par sa petite tête triangulaire, ses grandes oreilles et son pelage court et frisé. Actif et joueur, le Devon Rex se montre très proche de ses maîtres, demandant beaucoup d'attention et se comportant parfois comme un chien.",
+    "description": "Le Devon Rex est une race originaire du Royaume-Uni, où un chaton à la fourrure bouclée a été recueilli près de Buckfastleigh, dans le Devon, en 1960. De taille moyenne, au corps ferme, musclé et gracieux, il a une tête conique aux pommettes hautes, de larges oreilles et une robe courte et frisée. Joueur, espiègle et très proche des humains, il réclame beaucoup d'attention et se comporte parfois comme un chien.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Devon_Rex"
   },
   {
@@ -56,12 +56,12 @@
   },
   {
     "speciesId": 2000000122,
-    "description": "L'Himalayen est une race féline originaire des États-Unis, créée par croisement entre des Siamois et des Persans entre 1947 et 1957. De silhouette cobby (trapue et massive), avec un poil long et une robe colorpoint, ce chat arbore des yeux bleus caractéristiques. Son tempérament se définit comme calme et doux, bien que son héritage siamois le rende légèrement plus actif que le persan classique.",
+    "description": "L'Himalayen est une race de chat originaire des États-Unis, issue de croisements entre Siamois et Persans à partir de 1947. De silhouette cobby, il a un poil long avec sous-poil abondant, une robe colourpoint et des yeux bleus. Calme et doux, il serait toutefois un peu plus actif que son cousin le Persan, du fait de son héritage siamois.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Himalayen"
   },
   {
     "speciesId": 2000000123,
-    "description": "Le Korat est une race de chat naturelle originaire de Thaïlande, décrite dans le Tamra Maew (1350-1767) comme un chat porte-bonheur. Ce félin de petite taille, pesant 2,5 à 4,5 kg, se distingue par sa robe bleue et ses yeux verts caractéristiques. Son tempérament est fidèle et joueur, comparable à celui du siamois, avec une forte attachement à son propriétaire et un amour du jeu.",
+    "description": "Le Korat est une race naturelle ancienne originaire de Thaïlande, citée parmi les chats porte-bonheur dans le Tamra Maew (rédigé entre 1350 et 1767). Ce chat, qui pèse de 2,5 à 4,5 kg, se distingue par sa robe bleue et ses yeux verts. Son caractère est souvent décrit comme proche de celui du Siamois : très fidèle, fortement attaché à son propriétaire et gardant un vif intérêt pour le jeu toute sa vie.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Korat_(chat)"
   },
   {

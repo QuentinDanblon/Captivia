@@ -1,0 +1,58 @@
+[
+  {
+    "speciesId": 2429038,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.humidityMin: 50 -> 80 (Josh's Frogs / Colorado EAH : 80-100 %, 50 % toléré brièvement)",
+      "habitat.minSpaceSize: 40 L -> 20 L minimum, ~150 L recommandé (Josh's Frogs)",
+      "behavior: 'non toxique en captivité' retiré ; mâles territoriaux en saison de reproduction (Wikipedia)",
+      "feeding: 'vitamines A et D3' -> supplément vitamino-minéral ; vitamine A 2x/mois conservée (Colorado EAH)",
+      "health.prevention: 'calcium 5-6 fois/semaine' retiré (non confirmé)"
+    ],
+    "removed": [
+      "legislation entière (CITES II / UE B, 'certificat de capacité', 'vente interdite en animalerie', 'déclaration DSV' : non confirmés ; source cites.org AC28 en 403) -> null",
+      "reproduction.litterSizeMin/Max 15-30 et sexualMaturityMonths 12 (non confirmés) -> null",
+      "source cites.org E-AC28-21-01-Annex7.pdf (403)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2429135,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.frequency: quotidienne -> 3 à 4 fois par semaine (Reptiles Magazine) ; mealFrequency daily -> every_2_days",
+      "feeding: 'acariens oribatides' -> collemboles ; 'Drosophila indispensable pour la toxicité' et 'fourmis Formicina essentielles' retirés (toxicité d'origine acariens/fourmis en nature uniquement, Wikipedia)",
+      "feeding/behavior: taille 18-24/18-26 mm -> 17-22 mm (Wikipedia)",
+      "habitat.tempMin/Max: 24-28 -> 20-29 (Reptiles Magazine : 68-85 °F)",
+      "habitat.minSpaceSize: 30 L -> 10 gallons (~38 L) pour un couple (Reptiles Magazine)",
+      "reproduction.litterSize: 4-6 -> 3-5 (Wikipedia)",
+      "reproduction.notes: 'têtards portés 30-40 jours' retiré (transport vers l'eau après ~10 jours) ; 'sélection du mâle le plus proche' retiré"
+    ],
+    "removed": [
+      "legislation entière (CITES II / UE B / certificat de capacité / interdiction de vente : non confirmés) -> null",
+      "reproduction.season et sexualMaturityMonths (non confirmés) -> null",
+      "source cites.org AC28 (403) ; source training.joshsfrogs.com (domaine inexistant)",
+      "behavior 'deux femelles incompatibles' (non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2429295,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.minSpaceSize: 30-40 L -> 75 x 30 x 35 cm minimum (Reptiles Magazine)",
+      "taille 19-26 mm -> 24-26 mm (Wikipedia)",
+      "reproduction.litterSizeMax: 25 -> 40 (Wikipedia : 40 oeufs max)",
+      "behavior: 'mimétisme grappe d'oeufs' retiré ; 'un seul mâle par terrarium' (Gone Froggin)",
+      "health: 'ascomycète, chytride' -> chytridiomycose ; humidité 90-100 % retirée",
+      "reproduction.notes: 'mâle garde 15 jours' -> garde 24 h/24 sans durée précise ; 'très peu de reproduction réussie' -> reproduction complexe, larves délicates"
+    ],
+    "removed": [
+      "legislation entière (CITES II / UE B / préfecture / certificat de capacité : non confirmés, Centrolenidae non cité) -> null",
+      "habitat.tempMin 20, humidityMin/Max 80-100 (non confirmés) -> null ; tempMax 27 conservé (Reptiles Magazine)",
+      "reproduction.incubationDays 15, litterSizeMin 10, sexualMaturityMonths 18 (non confirmés) -> null",
+      "feeding 'acariens', 'insectes > 2-3 mm', 'vision excellente' (non confirmés)"
+    ],
+    "confidence": "medium"
+  }
+]

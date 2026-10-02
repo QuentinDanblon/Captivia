@@ -1,0 +1,66 @@
+[
+  {
+    "speciesId": 2424499,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.dietType: insectivore aquatique -> carnivore aquatique (amphipodes, escargots, poissons, têtards ; Wikipedia EN)",
+      "legislation.status: prohibited -> permit_required (CITES I confirmé par Wikipedia, mais aucune source ne dit 'interdit' pour la détention)",
+      "reproduction.litterSizeMin: 100 -> 80 (Wikipedia : 80-500 oeufs)",
+      "reproduction.sexualMaturityMonths: 24 -> 36 (Wikipedia : ~3 ans)",
+      "reproduction.season: 'toute l'année en captivité' -> une fois par an, en été (ADW)",
+      "behavior.compatibilityWithOtherAnimals: 'stress en présence de congénères' remplacé par cannibalisme documenté (Wikipedia)",
+      "health: 'pH neutre' retiré (lac alcalin)"
+    ],
+    "removed": [
+      "source https://www.pierrewildlife.com/?p=42452 (404)",
+      "source https://www.inaturalist.org/journal/turtle04 (403, non vérifiable)",
+      "source https://cites.org/.../F-CoP17-Prop-40.pdf (403, non vérifiable)",
+      "feeding.foodsToAvoid 'Proies de grande taille' (contredit : les adultes mangent des poissons jusqu'à 10 cm)",
+      "feeding.frequency / mealFrequency (non confirmés) -> null",
+      "habitat.minSpaceSize '300 litres' (non confirmé) -> null",
+      "health 'Parasitose (bactéries et parasites multiples)' (item incohérent)",
+      "legislation.euAnnex (non confirmé) -> null ; restriction 'sauf fins scientifiques' retirée",
+      "source citizen-conservation PDF (illisible via fetch, remplacée par Wikipedia/ADW pour les chiffres)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2427573,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.incubationDays: 60 -> 14 (Wikipedia EN : éclosion en 10-14 jours ; 60 j était faux)",
+      "reproduction.season: avril-juin -> mars-juin (Wikipedia FR)",
+      "reproduction.notes: chiffres 'hivernation 3-4 mois', 'grappes (4-10)', 'têtards 2-4 mois' retirés ; métamorphose ~3 mois (Wikipedia EN)",
+      "health: 'helminthes (13 espèces identifiées)' -> 'helminthes' sans chiffre (non confirmé)",
+      "legislation: 'permis préfectoral possible pour détention' retiré ; protection nationale + annexe IV + Berne II confirmés (fiche Natura 2000 Sarthe)",
+      "behavior.compatibilityWithChildren: 'bon avec enfants' -> manipulation déconseillée"
+    ],
+    "removed": [
+      "source vetverified.com (page sur Hyla cinerea, pas H. arborea)",
+      "source infofauna.ch PDF (503)",
+      "source inpn.mnhn.fr cd_nom/287 (403)",
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmés) -> null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2427694,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.tempMin: 20 -> 22 (gensou.sg : 22-30 °C)",
+      "habitat.humidityMax: 80 -> 70 (gensou.sg : 60-70 %)",
+      "habitat.minSpaceSize: 18x18x24 pouces pour 2-4 adultes -> 60x45x60 cm pour 1 adulte (gensou.sg)",
+      "behavior.compatibilityWithOtherAnimals: cohabitation 'tolérante' -> peut manger de plus petites grenouilles (Wikipedia EN)",
+      "reproduction.incubationDays: 42 -> null (42 j = durée de développement des têtards, pas l'incubation)",
+      "health: prévention alignée sur 22-30 °C / 60-70 % ; ranavirus 'Bohle iridovirus' retiré faute de source ; ajout maladie osseuse métabolique (gensou.sg)"
+    ],
+    "removed": [
+      "source frogforum.net (503)",
+      "source agriculture.gov.au ranavirus PDF (403)",
+      "source inpn cd_nom/701827 (503)",
+      "legislation (statut 'allowed' non confirmé par une source) -> null",
+      "reproduction.sexualMaturityMonths 36 (non confirmé) -> null"
+    ],
+    "confidence": "medium"
+  }
+]
