@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000592,
+    "status": "removed",
+    "note": "Carmagnola Grey : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000593,
+    "status": "corrected",
+    "note": "'résurgence comme race de patrimoine' remplacé par les faits de la page (Critical 2005 → Threatened 2012) ; précisé Pasadena."
+  },
+  {
+    "speciesId": 2000000594,
+    "status": "verified",
+    "note": "BRC oui, ARBA non, fourrure dense soyeuse sable clair avec mouchetures/ombrages bleu ardoise, race rare : confirmé par la page."
+  },
+  {
+    "speciesId": 2000000595,
+    "status": "removed",
+    "note": "Brazilian Domestic Rabbit : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000596,
+    "status": "verified",
+    "note": "Années 1940, Flemish Giant (lignées américaines), jusqu'à 7 kg, plus grande race britannique, couleurs blanc/sable/opale/gris/bleu/noir : confirmé."
+  },
+  {
+    "speciesId": 2000000597,
+    "status": "removed",
+    "note": "Cashmere Lop : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000598,
+    "status": "corrected",
+    "note": "'originaire d'Allemagne' non confirmé, retiré ; 1,32 m / 24 kg sont des records individuels (pas la taille typique), reformulé."
+  },
+  {
+    "speciesId": 2000000599,
+    "status": "removed",
+    "note": "Enderby Island Rabbit : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000600,
+    "status": "corrected",
+    "note": "'petite race' non confirmé, retiré ; ratio os-chair précisé (~65 % viande) ; poids 4-6 livres acceptés."
+  },
+  {
+    "speciesId": 2000000601,
+    "status": "corrected",
+    "note": "Poids corrigés (♂ 4-5 kg → 4,1-5 kg ; ♀ 4,5-5,5 kg → 4,5-5,4 kg) ; 'ressemblant au renard argenté' non confirmé, retiré ; statut ALBC 'menacée' ajouté."
+  },
+  {
+    "speciesId": 2000000602,
+    "status": "corrected",
+    "note": "Poids 3-3,8 kg → 6,5-8,5 lb (≈2,9-3,9 kg) ; 'américaine' et 'appréciés pour les expositions' non confirmés, retirés ; origine précisée (sang noir et feu)."
+  },
+  {
+    "speciesId": 2000000603,
+    "status": "removed",
+    "note": "Swedish Hare : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000604,
+    "status": "removed",
+    "note": "Czech Black Guard Haired Rabbit : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000605,
+    "status": "removed",
+    "note": "Petit Bélier : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000606,
+    "status": "removed",
+    "note": "Hulstlander : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  }
+]

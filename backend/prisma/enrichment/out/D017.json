@@ -26,7 +26,7 @@
   },
   {
     "speciesId": 2000000582,
-    "description": "Le Californien, développé en Californie à partir de 1923 par croisements entre lapins Nouvelle-Zélande blanc, Chinchilla et Himalayens, est la deuxième race carnée la plus populaire au monde. Ce lapin pèse entre 3,4 et 4,8 kg avec un pelage dense. Il se distingue par sa productivité exceptionnelle : grandes portées de 8-12 lapereaux atteignant le poids commercial en 8-12 semaines, et un excellent rapport viande-os.",
+    "description": "Le Californien est une race développée à partir de 1923 à Lynwood (Californie) par George S. West, à partir de lapins Nouvelle-Zélande blanc, Chinchilla standard et Himalayen. C'est la deuxième race de lapin de chair la plus répandue au monde après le Nouvelle-Zélande. Il porte un pelage dense et pèse jusqu'à 4,8 kg (maximum ARBA). Ses portées comptent 8 à 12 lapereaux, qui atteignent 4 à 5 livres en 8 à 12 semaines.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Californian_rabbit"
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "speciesId": 2000000584,
-    "description": "Le Tan est une petite race anglaise d'origine ancienne (années 1800), pesant 2-3 kg. Il se distingue par son corps compact et arqué, et ses marquages uniques en quatre variétés de couleurs : noir, bleu, chocolat et lilas. Apprécié pour l'exposition et comme animal de compagnie, le Tan possède un tempérament actif et une apparence frappante.",
+    "description": "Le Tan est une race de lapin anglaise, présentée en exposition depuis la fin des années 1800. Son corps est maigre, compact, court et profond (race pleinement arquée) et il pèse environ 1,8 à 2,7 kg (4 à 6 livres). Il est reconnu en quatre variétés de couleur aux marquages identiques : noir, bleu, chocolat et lilas. C'est un lapin très actif, qui demande de l'exercice et des manipulations régulières.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Tan_rabbit"
   },
   {
@@ -46,17 +46,17 @@
   },
   {
     "speciesId": 2000000586,
-    "description": "Le Czech Red est une race tchèque reconnue officieusement en 1959, développée dès 1940. Pesant 2,5-3,2 kg, il présente une robe grise ou brun-rougeâtre avec un corps semi-arqué chez le mâle et une morphologie commerciale chez la femelle. Environ 150 animaux sont officiellement enregistrés dans les programmes d'élevage.",
+    "description": "Le Czech Red est une race tchèque sélectionnée à partir de 1940 (Theodor Svoboda, Modřany) et reconnue en 1959. Il pèse environ 2,5 à 3,2 kg et sa robe est grise ou brun-rougeâtre. Le mâle a un corps semi-arqué, la femelle une morphologie commerciale. Environ 150 animaux sont officiellement enregistrés.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Czech_Red_rabbit"
   },
   {
     "speciesId": 2000000587,
-    "description": "Le Havana est originaire des Pays-Bas depuis 1898, petite race pesant 2-2,9 kg. Il se distingue par cinq variantes de couleur reconnues : chocolat, lilas, noir, bleu et panachée. Cette race a servi de base génétique à plusieurs autres variétés, notamment la Fée de Marbourg et la Gris Perle de Hal.",
+    "description": "Le Havana est un lapin apparu aux Pays-Bas en 1898, pesant environ 2,0 à 2,9 kg. L'ARBA le reconnaît en cinq types de couleur : chocolat, lilas, noir, bleu et panaché. La race est à l'origine de plusieurs autres, notamment la Fée de Marbourg, la Perlfee et la Gris Perle de Hal.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Havana_rabbit"
   },
   {
     "speciesId": 2000000588,
-    "description": "L'American Sable provient de Californie, développée en 1924 à partir de croisements de lapins Chinchilla. Ce lapin de taille moyenne pèse 3,2-4,5 kg avec un pelage sombre aux extrémités (tête, pattes, oreilles, dos) s'éclaircissant vers le corps. Docile et sociable, il apprécie la compagnie tout en restant indépendant.",
+    "description": "L'American Sable est une race née à San Gabriel (Californie) en 1924, issue de lapins de couleur apparus chez des Chinchilla de race pure appartenant à Otto Brock. Il pèse 3,2 à 4,5 kg. La tête, les pattes, les oreilles, le dos et le dessus de la queue sont sépia foncé, s'éclaircissant en brun clair sur le corps, comme un chat siamois. Docile et sociable avec ses congénères, il apprécie la compagnie de son maître, mais à sa façon.",
     "sourceUrl": "https://en.wikipedia.org/wiki/American_Sable_rabbit"
   },
   {

@@ -2,76 +2,76 @@
   {
     "speciesId": 2000000448,
     "status": "corrected",
-    "note": "Le Colley est un chien de berger d'origine britannique, fixé en Écosse vers la fin du XIXe siècle. Il mesure 56-61 cm au garrot pour les mâles et 51-56 cm pour les femelles, et pèse 20 à 32 kg. Son pelage long et dense existe en trois colorations principales : sable, tricolore et bleu merle. Chien intelligent, doux, affectueux et patient, il n'est ni craintif ni agressif."
+    "note": "Corrigé : « originaire d'Angleterre » (faux/contradictoire) -> origine britannique, fixé en Écosse ; taille 51-61 cm -> 56-61 mâles / 51-56 femelles ; retiré « instincts de berger marqués » et « liens profonds avec sa famille » (non confirmés) ; « breed » supprimé."
   },
   {
     "speciesId": 2000000449,
     "status": "corrected",
-    "note": "Le terme Cocker Spaniel désigne deux races distinctes, l'anglaise et l'américaine, élevées à l'origine comme chiens de chasse au Royaume-Uni (le nom vient de la chasse à la bécasse). L'anglais mesure 38-43 cm pour 12-15 kg ; l'américain est plus petit. Leur robe, mi-longue à longue et soyeuse, existe en noir, fauve, rouge, bicolore et d'autres combinaisons. Chiens d'arme, ils sont décrits comme amicaux et affectueux."
+    "note": "« deux variétés » -> « deux races distinctes » (page) ; retiré « intelligents » (non confirmé) ; origine « Angleterre » -> Royaume-Uni (page) ; chiffres 38-43 cm / 12-15 kg (anglais) confirmés."
   },
   {
     "speciesId": 2000000450,
     "status": "corrected",
-    "note": "Le Fox-terrier regroupe deux races de terriers distinctes, le fox-terrier à poil lisse et le fox-terrier à poil dur, toutes deux originaires d'Angleterre au XIXe siècle. Le poil lisse mesure 36-39 cm au garrot pour 6,8-8,6 kg. Leur robe est majoritairement blanche avec des marques colorées, et leur tête est longue et en forme de coin. Élevés pour débusquer le renard de son terrier, ils ont connu un grand succès au Westminster Kennel Club Dog Show."
+    "note": "Les chiffres 36-39 cm / 6,8-8,6 kg ne concernent que le poil lisse (précisé) ; « intelligents », « énergiques » retirés ; « chasser le renard » -> « débusquer le renard de son terrier » ; « expositions internationales » -> Westminster (page) ; « mostly white / markings » traduit."
   },
   {
     "speciesId": 2000000495,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000496,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000497,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000498,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000499,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000500,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000501,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000502,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000503,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000504,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000505,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   },
   {
     "speciesId": 2000000506,
     "status": "removed",
-    "note": "description déjà null, rien à vérifier"
+    "note": "Aucune description (déjà null) : non-animal ou entrée sans contenu, rien à vérifier."
   }
 ]

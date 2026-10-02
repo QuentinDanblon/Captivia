@@ -1,7 +1,7 @@
 [
   {
     "speciesId": 2000000141,
-    "description": "L'Égyptien Mau est une rare race féline originaire d'Égypte, développée en 1953 en Italie après qu'une princesse ait obtenu un chat de l'ambassadeur égyptien. Cette race se distingue par son pelage tacheté naturel unique et sa musculature athlétique avec des pattes arrière plus longues que les avant. Ses yeux grands et ronds d'un vert clair particulier lui confèrent une apparence équilibrée entre la compacité du Birman et l'élégance du Siamois.",
+    "description": "L'Égyptien Mau est une race rare de chat de taille petite à moyenne, originaire d'Égypte ; en 1953, en Italie, la princesse Natalie Troubetzkoy en a obtenu un auprès de l'ambassadeur d'Égypte, ce qui a lancé la race. C'est l'une des rares races naturellement tachetées. Musclé, avec des pattes arrière plus longues que celles de devant, il a de grands yeux ronds vert clair et un équilibre entre la compacité du Burmese et l'élégance fine du Siamois.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Egyptian_Mau"
   },
   {
@@ -21,12 +21,12 @@
   },
   {
     "speciesId": 2000000145,
-    "description": "Le Nebelung est une race féline russe représentant la variante à poils longs du Russian Blue, partageant les mêmes caractéristiques génétiques. Il se caractérise par son élégance, sa musculature gracieuse, son pelage bleu distinctif et ses yeux verts frappants. Vif, espiègle, affectueux et intelligent, il préfère les environnements calmes mais participe activement à la vie familiale tout en restant réservé avec les étrangers.",
+    "description": "Le Nebelung est la variété à poils longs du Russian Blue ; sa lignée américaine est issue des chats Siegfried (1984) et Brunhilde (1985). Il a une silhouette élégante et musclée, une robe bleue et des yeux verts. Décrit comme vif, espiègle, affectueux et intelligent, il préfère un foyer calme, reste distant avec les étrangers mais participe activement à la vie de famille.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Nebelung"
   },
   {
     "speciesId": 2000000146,
-    "description": "Le Peterbald est une race féline originaire de Russie, créée en 1994 à Saint-Pétersbourg par croisement entre un Donskoy et un Oriental à poil court. Il se distingue par son corps longiligne, sa tête triangulaire et ses grandes oreilles, avec une peau glabre, veloutée ou couverte d'un poil court selon la variété. Tempéré et pacifique, ce chat est énergique, curieux et sociable, mais supporte mal la solitude et a besoin de beaucoup d'attention.",
+    "description": "Le Peterbald est une jeune race originaire de Russie, créée en 1994 à Saint-Pétersbourg par croisement expérimental entre un Donskoy et une femelle Oriental à poil court. Il a un corps long, une tête triangulaire et de grandes oreilles, avec un pelage nu, velours ou brush (poil court frisé) selon la variété. Tempéré et pacifique, mais énergique et curieux, il supporterait mal la solitude.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Peterbald"
   },
   {
@@ -36,17 +36,17 @@
   },
   {
     "speciesId": 2000000148,
-    "description": "Le Singapura est une race féline considérée comme la plus petite au monde, pesant entre 2 et 4 kg. Il se caractérise par son distinctive pelage « brown ticked tabby » et ses yeux amande. Actif, curieux et joueur, ce félin affectueux préfère la vie en intérieur, particulièrement dans les environnements chauds, et s'adapte bien au style de vie domestique.",
+    "description": "Le Singapura est considéré comme la plus petite race de chat au monde : une femelle adulte pèse en moyenne 1,8 kg et un mâle 2,7 kg. Il a un pelage court ticked tabby et de grands yeux en amande par rapport à sa tête ronde. Actif, curieux, joueur et affectueux, il recherche le contact humain, n'aime pas le froid et s'adapte bien à la vie en appartement.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Singapura"
   },
   {
     "speciesId": 2000000149,
-    "description": "Le Snowshoe est une race féline originaire des États-Unis, créée dans les années 1960 à Philadelphie par Dorothy Hinds-Daugherty. C'est un croisement entre un Siamois et un American Shorthair bicolore, conçu pour obtenir des chats aux pieds blancs caractéristiques. De taille moyenne et musclé, ce félin allie l'élégance du Siamois à la robustesse du chat birmane avec des yeux bleus distinctifs.",
+    "description": "Le Snowshoe est une race de chat originaire des États-Unis, créée dans les années 1960 à Philadelphie par Dorothy Hinds-Daugherty, qui a croisé des Siamois avec un American Shorthair bicolore. C'est un chat de taille moyenne, musclé et agile, aux pattes blanches et aux yeux toujours bleus. Il allie le côté massif du Sacré de Birmanie à l'élégance du Siamois.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Snowshoe"
   },
   {
     "speciesId": 2000000150,
-    "description": "Le Toyger est une race féline originaire des États-Unis, développée dans les années 1980 par Judy Sudgen. Ce chat est caractérisé par son physique visant à ressembler le plus possible à celui d'un tigre miniature. Possédant une tête moyenne et arrondie, des yeux petits et ronds et une robe brun tabby mackerel avec des rayures distinctes, il est sociable, joueur et apprécie la compagnie humaine.",
+    "description": "Le Toyger est une race de chat originaire des États-Unis, développée à partir du début des années 1980 par Judy Sudgen, avec un physique visant à ressembler le plus possible à un tigre miniature. Tous ses contours sont arrondis, ses yeux sont petits à moyens et arrondis, et seule la couleur brown mackerel tabby est autorisée, avec des rayures épaisses. Il est décrit comme sociable et aimant la compagnie humaine.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Toyger"
   },
   {
@@ -61,17 +61,17 @@
   },
   {
     "speciesId": 2000000153,
-    "description": "Le York Chocolat est une race féline originaire des États-Unis, née accidentellement en 1985 dans l'État de New York. Elle se distingue par sa robe à poils courts ou mi-longs de couleur chocolat riche et ses grands yeux ovales de teinte or ou vert. Pesant entre 4 et 8 kilogrammes selon le sexe, le York Chocolat possède une fourrure douce et soyeuse. La race est décrite comme gaie, énergique et joueuse, formant des liens forts avec la famille.",
+    "description": "Le York Chocolat est une race de chat originaire des États-Unis, née accidentellement en 1985 dans l'État de New York. Il se distingue par sa robe à poils courts ou mi-longs de couleur chocolat et ses grands yeux ovales or ou verts. Les mâles pèsent de 6 à 8 kg et les femelles de 4 à 5 kg. Il est décrit comme gai, énergique et joueur, et se lierait d'amitié avec toute la famille.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/York_Chocolat"
   },
   {
     "speciesId": 2000000154,
-    "description": "Le Lapin Nain Bélier est une race miniature de lapin domestique caractérisée par ses oreilles tombantes distinctives. Originaire des Pays-Bas, il résulte du croisement entre le bélier français et le bélier anglais, créé en 1949. Ces animaux sont réputés pour leur tempérament doux et docile, se laissant facilement manipuler et câliner, d'où leur surnom de « lapins-peluches ».",
+    "description": "Le Lapin Nain Bélier est une variété naine de lapin domestique, caractérisée par ses oreilles tombantes et un poids de 1,4 à 1,8 kg. Il a été sélectionné en 1949 par l'éleveur néerlandais Adrian De Cock, à partir du lapin nain et du bélier français. Comme toutes les sortes de béliers, il est réputé pour son caractère doux, se laissant facilement porter et cajoler ; on le surnomme parfois « lapin-peluche ».",
     "sourceUrl": "https://fr.wikipedia.org/wiki/B%C3%A9lier_(lapin)"
   },
   {
     "speciesId": 2000000155,
-    "description": "Le Lapin Bélier Français est une race de lapin domestique se caractérisant par ses oreilles pendantes distinctives. Ces oreilles donnent à la tête une apparence particulière et nécessitent un entretien régulier. Comme tous les lapins béliers, cette race offre un tempérament doux et docile, facilement manipulable et affectueux auprès de ses propriétaires.",
-    "sourceUrl": "https://en.wikipedia.org/wiki/Lop_rabbit"
+    "description": "Le Lapin Bélier Français est une race de lapin domestique développée en France au XIXe siècle, vers 1850, comme lapin de chair. Race géante de plus de 4,5 kg, il porte des oreilles tombantes d'environ 42 cm. Il est décrit comme calme et détendu, et préfère vivre avec un congénère plutôt que seul.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/B%C3%A9lier_fran%C3%A7ais"
   }
 ]
