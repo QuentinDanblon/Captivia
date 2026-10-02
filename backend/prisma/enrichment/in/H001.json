@@ -1,0 +1,131 @@
+[
+ {
+  "speciesId": 2422905,
+  "commonNameFr": "Crapaud de Fowler",
+  "scientificName": "Anaxyrus fowleri",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2424454,
+  "commonNameFr": "Grenouille cornue",
+  "scientificName": "Ceratophrys ornata",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 2424499,
+  "commonNameFr": "Grenouille du lac Titicaca",
+  "scientificName": "Telmatobius culeus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2427573,
+  "commonNameFr": "Rainette à doigts de cuivre",
+  "scientificName": "Hyla arborea",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2429295,
+  "commonNameFr": "Grenouille de Verre",
+  "scientificName": "Hyalinobatrachium valerioi",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2431776,
+  "commonNameFr": "Salamandre tachetée",
+  "scientificName": "Salamandra salamandra",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2431886,
+  "commonNameFr": "Triton marbré",
+  "scientificName": "Triturus marmoratus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5216573,
+  "commonNameFr": "Grenouille tomate",
+  "scientificName": "Dyscophus antongilii",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior",
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5216933,
+  "commonNameFr": "Crapaud buffle",
+  "scientificName": "Rhinella marina",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5217160,
+  "commonNameFr": "Crapaud commun",
+  "scientificName": "Bufo bufo",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5217264,
+  "commonNameFr": "Grenouille arboricole géante",
+  "scientificName": "Rhacophorus maximus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior",
+   "health",
+   "reproduction",
+   "habitat"
+  ]
+ }
+]

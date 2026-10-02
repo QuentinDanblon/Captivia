@@ -1,0 +1,140 @@
+[
+ {
+  "speciesId": 5218022,
+  "commonNameFr": "Dendrobate à ventre tacheté",
+  "scientificName": "Dendrobates auratus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5784980,
+  "commonNameFr": "Grenouille verte",
+  "scientificName": "Pelophylax kl. esculentus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104013399,
+  "commonNameFr": "Grenouille cornue de Cranwell",
+  "scientificName": "Ceratophrys cranwelli",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "reproduction",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104015330,
+  "commonNameFr": "Dendrobate à tapirer",
+  "scientificName": "Dendrobates tinctorius",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104020622,
+  "commonNameFr": "Rainette aux yeux rouges",
+  "scientificName": "Agalychnis callidryas",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104040409,
+  "commonNameFr": "Xénope lisse",
+  "scientificName": "Xenopus laevis",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "behavior",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104040736,
+  "commonNameFr": "Crapaud à ventre de feu",
+  "scientificName": "Bombina orientalis",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104041498,
+  "commonNameFr": "Salamandre de Taiwan",
+  "scientificName": "Hynobius formosanus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "behavior",
+   "reproduction",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104044141,
+  "commonNameFr": "Triton alpestre",
+  "scientificName": "Ichthyosaura alpestris",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "behavior",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 165617687,
+  "commonNameFr": "Salamandre géante du Japon",
+  "scientificName": "Andrias japonicus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "behavior",
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2153441,
+  "commonNameFr": "Tarentule mexicaine à genoux oranges",
+  "scientificName": "Brachypelma auratum",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction",
+   "habitat"
+  ]
+ }
+]

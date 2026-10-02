@@ -1,0 +1,134 @@
+[
+ {
+  "speciesId": 2153949,
+  "commonNameFr": "Tarentule saumonée",
+  "scientificName": "Lasiodora parahybana",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 5170451,
+  "commonNameFr": "Tarentule Goliath",
+  "scientificName": "Theraphosa blondi",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104221549,
+  "commonNameFr": "Tarentule à pattes roses",
+  "scientificName": "Avicularia avicularia",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104221620,
+  "commonNameFr": "Tarentule mexicaine à genoux rouges",
+  "scientificName": "Brachypelma smithi",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104232708,
+  "commonNameFr": "Scorpion des Pyrénées",
+  "scientificName": "Buthus occitanus",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "behavior",
+   "health",
+   "reproduction",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 156315727,
+  "commonNameFr": "Tarentule de Cobalt",
+  "scientificName": "Cyriopagopus lividus",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "health",
+   "reproduction",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 1025719,
+  "commonNameFr": "Mille-pattes géant",
+  "scientificName": "Archispirostreptus gigas",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 1406471,
+  "commonNameFr": "Mante orchidée",
+  "scientificName": "Hymenopus coronatus",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 1415423,
+  "commonNameFr": "Phasme feuille",
+  "scientificName": "Phyllium philippinicum",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior",
+   "reproduction",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5296842,
+  "commonNameFr": "Bâton du Diable (Phasme)",
+  "scientificName": "Phryganistis chlorophaea",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104247531,
+  "commonNameFr": "Bernard-l'ermite terrestre",
+  "scientificName": "Coenobita clypeatus",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ }
+]

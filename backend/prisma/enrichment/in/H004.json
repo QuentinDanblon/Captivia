@@ -1,0 +1,127 @@
+[
+ {
+  "speciesId": 104260760,
+  "commonNameFr": "Crevette Amano",
+  "scientificName": "Caridina multidentata",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104276062,
+  "commonNameFr": "Cloporte géant",
+  "scientificName": "Porcellio laevis",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 165504395,
+  "commonNameFr": "Escargot de Bourgogne",
+  "scientificName": "Helix pomatia",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior",
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2441108,
+  "commonNameFr": "Bœuf musqué",
+  "scientificName": "Ovibos moschatus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5219362,
+  "commonNameFr": "Genette",
+  "scientificName": "Genetta genetta",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 5285167,
+  "commonNameFr": "Viscache des Andes",
+  "scientificName": "Lagidium viscacia",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5285942,
+  "commonNameFr": "Oryctérope du Cap",
+  "scientificName": "Orycteropus afer",
+  "category": "mammifère",
+  "domesticationType": "semi-domestique",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5289145,
+  "commonNameFr": "Écureuil Volant de Corée",
+  "scientificName": "Pteromyidae",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104048045,
+  "commonNameFr": "Ouistiti",
+  "scientificName": "Callithrix jacchus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 104052770,
+  "commonNameFr": "Écureuil volant",
+  "scientificName": "Pteromys volans",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 104052822,
+  "commonNameFr": "Écureuil gris",
+  "scientificName": "Sciurus carolinensis",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ }
+]

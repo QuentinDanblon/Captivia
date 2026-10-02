@@ -1,0 +1,117 @@
+[
+ {
+  "speciesId": 2000000169,
+  "commonNameFr": "Lapin Zibeline",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000188,
+  "commonNameFr": "Mouton Nain",
+  "scientificName": "Ovis aries",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2493661,
+  "commonNameFr": "Astrild à pointe",
+  "scientificName": "Estrilda caerulescens",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2495134,
+  "commonNameFr": "Émeu",
+  "scientificName": "Dromaius novaehollandiae",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 2498387,
+  "commonNameFr": "Canard carolin",
+  "scientificName": "Aix sponsa",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 5959092,
+  "commonNameFr": "Grand-duc d'Europe",
+  "scientificName": "Bubo bubo",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 104128782,
+  "commonNameFr": "Rossignol du Japon",
+  "scientificName": "Leiothrix lutea",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 308455619,
+  "commonNameFr": "Oie domestique",
+  "scientificName": "Anser anser domesticus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 2000001265,
+  "commonNameFr": "Chistopolian High-flying Pigeon",
+  "scientificName": "Chistopolian High-flying Pigeon",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2339870,
+  "commonNameFr": "Pleco royal",
+  "scientificName": "Panaque nigrolineatus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2354003,
+  "commonNameFr": "Tétra empereur",
+  "scientificName": "Nematobrycon palmeri",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ }
+]

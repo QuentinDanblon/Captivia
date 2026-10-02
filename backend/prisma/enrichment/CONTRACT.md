@@ -61,3 +61,13 @@ Mêmes règles et même schéma que les lots S (champs `missing` + `description`
 - `habitat.tempMin`/`tempMax` sont obligatoires en base : ne remplis l'habitat que si une source donne une plage de température adaptée à l'élevage/la captivité (ou au milieu de vie pour un poisson). Sinon `habitat: null`.
 - Écris AUSSI `verify/<LOT>.json` : `[{"speciesId":…, "evidence":[{"field":"reproduction.gestationDays","value":63,"quote":"…citation exacte…","url":"https://…"}, …]}]`.
 - Pas de section `legislation` (réservée à une relecture juridique).
+
+## Lots « H » (deuxième passe de comblement, rédacteurs Sonnet) — mêmes règles que G
+
+Mêmes règles, même schéma et même preuve que les lots G (citation exacte obligatoire, `verify/<LOT>.json`, pas de `legislation`). Différences :
+- Les lots H ne contiennent que les sections réellement manquantes ; `habitat` n'est demandé que pour les ectothermes (reptiles, amphibiens, poissons, insectes, arachnides), pour lesquels les fiches d'élevage donnent des températures.
+- **Sources à essayer en priorité** (WebFetch) : fiches d'élevage spécialisées — reptilecentre.com (care sheets), reptilesmagazine.com, exo-terra.com (care guides), seriouslyfish.com, fishbase.se, caudata.org, arachnoboards.com / tarantula care sheets, lafeber.com (oiseaux), vcahospitals.com et merckvetmanual.com (santé), animaldiversity.org (reproduction, comportement), Wikipédia FR/EN.
+- `health` : `diseases` = au moins 3 maladies **documentées pour l'espèce ou son groupe immédiat** (ex. « chytridiomycose » chez les amphibiens, « maladie osseuse métabolique » chez les reptiles insectivores), chacune appuyée par une citation ; les sous-champs non cités restent `null`.
+- `feeding` : `foodsToAvoid` doit contenir au moins 2 éléments cités (une consigne d'élevage citée telle quelle compte, ex. « ne pas nourrir avec des proies sauvages »). Sinon `feeding: null`.
+- **Isolation** : travaille UNIQUEMENT dans `scratchpad/<ton-lot-en-minuscules>/` (ex. `scratchpad/h003/`). Ne lance jamais un script situé ailleurs, n'écris aucun fichier directement dans `scratchpad/`.
+- Avant de terminer, lance le contrôle mécanique : `python3 /home/user/Captivia/backend/prisma/enrichment/check_quotes.py <LOT>` (env `QUOTECHECK_DIR=<ton dossier>/qc`). Toute citation `fail` doit être corrigée (recopiée depuis la page) ou retirée avec le champ qu'elle appuie.

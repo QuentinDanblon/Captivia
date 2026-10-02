@@ -1,0 +1,124 @@
+[
+ {
+  "speciesId": 104093507,
+  "commonNameFr": "Couleuvre de Vigneau",
+  "scientificName": "Coronella girondica",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104094514,
+  "commonNameFr": "Couleuvre verte",
+  "scientificName": "Opheodrys aestivus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104101618,
+  "commonNameFr": "Serpent des sables",
+  "scientificName": "Eryx johnii",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104101654,
+  "commonNameFr": "Boa de l'île Ronde",
+  "scientificName": "Casarea dussumieri",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104101859,
+  "commonNameFr": "Python molure",
+  "scientificName": "Python bivittatus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104104828,
+  "commonNameFr": "Tortue radiée",
+  "scientificName": "Astrochelys radiata",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104105088,
+  "commonNameFr": "Tortue étoilée",
+  "scientificName": "Geochelone elegans",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104106412,
+  "commonNameFr": "Alligator d'Amérique",
+  "scientificName": "Alligator mississippiensis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 144096299,
+  "commonNameFr": "Basilic vert",
+  "scientificName": "Basiliscus plumifrons",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 156256182,
+  "commonNameFr": "Scinque à cou rouge",
+  "scientificName": "Cryptoblepharus virgatus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "behavior",
+   "health",
+   "reproduction",
+   "habitat"
+  ]
+ }
+]

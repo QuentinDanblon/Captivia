@@ -1,0 +1,133 @@
+[
+ {
+  "speciesId": 7387949,
+  "commonNameFr": "Couleuvre ratière",
+  "scientificName": "Elaphe obsoleta",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "behavior",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 8170369,
+  "commonNameFr": "Serpent roi de Californie",
+  "scientificName": "Lampropeltis californiae",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 8583926,
+  "commonNameFr": "Anole de Cuba",
+  "scientificName": "Anolis equestris",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 8909809,
+  "commonNameFr": "Tortue palustre",
+  "scientificName": "Emys orbicularis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "behavior",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 8953936,
+  "commonNameFr": "Caïman à lunettes",
+  "scientificName": "Caiman crocodilus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 9032472,
+  "commonNameFr": "Scinque de Schneider",
+  "scientificName": "Eumeces schneideri",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "reproduction",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 9268496,
+  "commonNameFr": "Tortue à cou serpent",
+  "scientificName": "Chelodina longicollis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 9799308,
+  "commonNameFr": "Couleuvre royale",
+  "scientificName": "Lampropeltis getula",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104076753,
+  "commonNameFr": "Gecko géant de Madagascar",
+  "scientificName": "Phelsuma grandis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104085484,
+  "commonNameFr": "Téju rouge",
+  "scientificName": "Salvator rufescens",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104087619,
+  "commonNameFr": "Iguane des Petites Antilles",
+  "scientificName": "Iguana delicatissima",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior",
+   "health",
+   "reproduction"
+  ]
+ }
+]
