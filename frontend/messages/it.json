@@ -268,7 +268,14 @@
       "illness": "Fai attenzione ai segni di malattia"
     },
     "medicationUnitPlaceholder": "ml / mg / gocce…",
-    "speciesRequired": "Seleziona una specie"
+    "speciesRequired": "Seleziona una specie",
+    "sectionErrors": {
+      "loadFailed": "Impossibile caricare questi dati. Riprova più tardi.",
+      "saveFailed": "Salvataggio non riuscito. Riprova.",
+      "invalid": "Alcuni dati non sono validi. Controlla il modulo.",
+      "notFound": "Questo elemento non esiste più. Ricarica la pagina.",
+      "unavailable": "Il servizio è momentaneamente non disponibile. Riprova tra qualche istante."
+    }
   },
   "attribution": {
     "wikipediaPrefix": "Fonte:",
@@ -334,7 +341,10 @@
     "status": "Stato",
     "healthTitle": "Descrizione",
     "contacts": "Veterinari e contatti",
-    "noContacts": "Nessun contatto registrato."
+    "noContacts": "Nessun contatto registrato.",
+    "share": "Condividi il libretto",
+    "shareHint": "Il libretto viene inviato come file HTML, apribile e stampabile con qualsiasi browser: ideale per il tuo veterinario.",
+    "shareError": "Condivisione del libretto non riuscita. Riprova."
   },
   "common": {
     "account": "Account",

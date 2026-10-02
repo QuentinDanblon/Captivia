@@ -5,7 +5,9 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { api, type Animal, type BreedingRecord } from '@/lib/api';
 import { useAuth } from '@/contexts/AuthContext';
+import { isPremiumLocked, sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
+import { localDayKey } from '@/lib/dates';
 
 interface Props {
   animal: Animal;
@@ -25,7 +27,7 @@ export default function BreedingSection({ animal, token, breedingRecords, loadin
   const [showBreedingModal, setShowBreedingModal] = useState(false);
   const [editingBreedingId, setEditingBreedingId] = useState<string | null>(null);
   const [breedingEventType, setBreedingEventType] = useState<BreedingRecord['eventType']>('heat');
-  const [breedingDate, setBreedingDate] = useState(new Date().toISOString().slice(0, 10));
+  const [breedingDate, setBreedingDate] = useState(localDayKey(new Date()));
   const [breedingPartnerName, setBreedingPartnerName] = useState('');
   const [breedingOffspringCount, setBreedingOffspringCount] = useState('');
   const [breedingNotes, setBreedingNotes] = useState('');
@@ -50,7 +52,7 @@ export default function BreedingSection({ animal, token, breedingRecords, loadin
     if (!user?.isPremium || breedingLocked) return;
     setEditingBreedingId(null);
     setBreedingEventType('heat');
-    setBreedingDate(new Date().toISOString().slice(0, 10));
+    setBreedingDate(localDayKey(new Date()));
     setBreedingPartnerName('');
     setBreedingOffspringCount('');
     setBreedingNotes('');
@@ -94,12 +96,11 @@ export default function BreedingSection({ animal, token, breedingRecords, loadin
       await onRefresh();
     } catch (err) {
       console.error('Error saving breeding record:', err);
-      const msg = err instanceof Error ? err.message : 'Erreur';
-      if (msg.toLowerCase().includes('forbidden') || msg.toLowerCase().includes('403') || msg.toLowerCase().includes('premium')) {
+      if (isPremiumLocked(err)) {
         onLocked();
         setShowBreedingModal(false);
       } else {
-        setBreedingFormError(msg);
+        setBreedingFormError(t(sectionErrorKey(err)));
       }
     } finally {
       setBreedingSubmitting(false);

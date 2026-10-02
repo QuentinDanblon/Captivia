@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { api, type Animal } from '@/lib/api';
+import { sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
 import type { HealthRecord } from './types';
+import { localDayKey } from '@/lib/dates';
 
 interface Props {
   animal: Animal;
@@ -20,7 +22,7 @@ export default function HealthRecordsSection({ animal, token, healthRecords, onR
   const [editingHealthId, setEditingHealthId] = useState<string | null>(null);
   const [healthFormType, setHealthFormType] = useState<string>('vaccine');
   const [healthFormTitle, setHealthFormTitle] = useState('');
-  const [healthFormDate, setHealthFormDate] = useState(new Date().toISOString().slice(0, 10));
+  const [healthFormDate, setHealthFormDate] = useState(localDayKey(new Date()));
   const [healthFormNotes, setHealthFormNotes] = useState('');
   const [healthError, setHealthError] = useState('');
   const [healthSubmitting, setHealthSubmitting] = useState(false);
@@ -38,7 +40,7 @@ export default function HealthRecordsSection({ animal, token, healthRecords, onR
     setEditingHealthId(null);
     setHealthFormType('vaccine');
     setHealthFormTitle('');
-    setHealthFormDate(new Date().toISOString().slice(0, 10));
+    setHealthFormDate(localDayKey(new Date()));
     setHealthFormNotes('');
     setHealthError('');
     setShowHealthModal(true);
@@ -48,7 +50,7 @@ export default function HealthRecordsSection({ animal, token, healthRecords, onR
     setEditingHealthId(record.id);
     setHealthFormType(record.type);
     setHealthFormTitle(record.title);
-    setHealthFormDate(record.date ? record.date.slice(0, 10) : new Date().toISOString().slice(0, 10));
+    setHealthFormDate(record.date ? record.date.slice(0, 10) : localDayKey(new Date()));
     setHealthFormNotes(record.notes || '');
     setHealthError('');
     setShowHealthModal(true);
@@ -88,7 +90,7 @@ export default function HealthRecordsSection({ animal, token, healthRecords, onR
       await onRefresh();
     } catch (err) {
       console.error('Error saving health record:', err);
-      setHealthError(err instanceof Error ? err.message : 'Erreur');
+      setHealthError(t(sectionErrorKey(err)));
     } finally {
       setHealthSubmitting(false);
     }

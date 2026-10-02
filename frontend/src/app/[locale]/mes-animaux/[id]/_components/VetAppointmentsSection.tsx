@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { api, type Animal, type VetAppointment } from '@/lib/api';
+import { sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
 
 interface Props {
@@ -77,7 +78,7 @@ export default function VetAppointmentsSection({ animal, token, vetAppointments,
       await onRefresh();
     } catch (err) {
       console.error('Error saving vet appointment:', err);
-      setVetFormError(err instanceof Error ? err.message : 'Erreur');
+      setVetFormError(t(sectionErrorKey(err)));
     } finally {
       setVetSubmitting(false);
     }
