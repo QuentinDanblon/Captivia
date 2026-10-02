@@ -1,7 +1,5 @@
 # 🦎 Captivia - Le Guide de la Faune
 
-> ⚠️ **Dernière mise à jour**: 1er février 2026 - Tous les bugs structurels et visuels ont été corrigés. Voir [FIXES_APPLIED.md](./FIXES_APPLIED.md) pour les détails.
-
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat&logo=nestjs&logoColor=white)](https://nestjs.com/)
 [![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
@@ -287,8 +285,6 @@ SCORE GLOBAL: 100% ✅
 
 ## 🧪 Tests
 
-Voir [TESTING_CHECKLIST.md](TESTING_CHECKLIST.md) pour la liste complète des tests.
-
 **Tests rapides:**
 ```bash
 # Health check
@@ -459,8 +455,6 @@ Les images sont multi-stage : l'image backend runtime ne contient ni sources Typ
 - Google Play Store (Android)
 - Apple App Store (iOS)
 
-Voir [CAPACITOR_SETUP.md](CAPACITOR_SETUP.md) pour wrapper mobile.
-
 ---
 
 ## 🔒 Sécurité
@@ -493,18 +487,19 @@ Private - © 2026 Captivia
 
 ---
 
-## 🎉 Statut du Projet
+## 📊 Statut
 
-**✅ Production Ready!**
+Voir [docs/PLAN-PRODUCTION.md](docs/PLAN-PRODUCTION.md) pour le statut complet du projet, la roadmap, et les étapes de production.
 
-Toutes les fonctionnalités principales sont implémentées et testées. Le projet est prêt pour le déploiement en production.
+---
 
-**Prochaines étapes suggérées:**
-1. Installer web-push et @nestjs/schedule pour notifications push temps réel
-2. Configurer credentials Amazon PA API pour affiliation active
-3. Obtenir token Species+ pour données législatives complètes
-4. Créer contenu éditorial (santé, législation par espèce)
-5. Build wrapper Capacitor pour Android/iOS
+## 📦 Déploiement
+
+Pour les instructions de déploiement, les configurations de serveur et les environnements, consultez [docs/DEPLOY.md](docs/DEPLOY.md).
+
+**Configurations disponibles :**
+- `netlify.toml` — Configuration pour Netlify (frontend)
+- `render.yaml` — Configuration pour Render (backend)
 
 ---
 

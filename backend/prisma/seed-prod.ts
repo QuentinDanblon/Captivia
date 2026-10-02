@@ -771,86 +771,11 @@ export async function main() {
   // ============================================
   // Magasins / liens d'affiliation (NAC FR/BE)
   // ============================================
-  // ⚠️ TODO: remplacer les URLs placeholder (https://www.example-*) par de vrais
-  // liens d'affiliation (depuis Affiliation_animaux_NAC_FR_BE.docx).
   // Pas de deleteMany ici : upsert par nom → idempotent, ne détruit jamais
   // les magasins existants (même ceux ajoutés manuellement).
   console.log('🏪 Seeding AffiliateStores (upsert, idempotent)...');
 
-  const affiliateStores = [
-    {
-      name: 'Croquettes & alimentation chien',
-      url: 'https://www.example-pet-shop.fr/chiens/croquettes',
-      description: 'Croquettes, pâtées et accessoires alimentation pour chien',
-      categories: ['mammifère'],
-      types: ['alimentation', 'materiel'],
-      order: 0,
-    },
-    {
-      name: 'Matériel et accessoires chien',
-      url: 'https://www.example-pet-shop.fr/chiens/materiel',
-      description: 'Gamelles, laisses, couchage, jouets pour chien',
-      categories: ['mammifère'],
-      types: ['materiel'],
-      order: 1,
-    },
-    {
-      name: 'Alimentation & matériel reptile',
-      url: 'https://www.example-reptile-shop.fr/',
-      description: 'Nourriture, terrariums, chauffage et UV pour reptiles',
-      categories: ['reptile'],
-      types: ['alimentation', 'materiel'],
-      order: 0,
-    },
-    {
-      name: 'Terrariophilie – NAC reptiles',
-      url: 'https://www.example-nac.fr/reptiles',
-      description: 'Terrariums, substrats, lampes UV et alimentation reptile',
-      categories: ['reptile'],
-      types: ['alimentation', 'materiel', 'general'],
-      order: 1,
-    },
-    {
-      name: 'Alimentation & cages oiseaux',
-      url: 'https://www.example-bird-shop.fr/',
-      description: 'Graines, cages, perchoirs et accessoires pour oiseaux',
-      categories: ['oiseau'],
-      types: ['alimentation', 'materiel'],
-      order: 0,
-    },
-    {
-      name: 'Aquariophilie – poissons',
-      url: 'https://www.example-aquarium.fr/',
-      description: 'Nourriture, aquariums, filtres et accessoires pour poissons',
-      categories: ['poisson'],
-      types: ['alimentation', 'materiel'],
-      order: 0,
-    },
-    {
-      name: 'NAC – rongeurs & petits mammifères',
-      url: 'https://www.example-nac.fr/rongeurs',
-      description: 'Alimentation et matériel pour lapin, cochon d\'Inde, hamster',
-      categories: ['mammifère'],
-      types: ['alimentation', 'materiel'],
-      order: 2,
-    },
-    {
-      name: 'Amphibiens & matériel',
-      url: 'https://www.example-nac.fr/amphibiens',
-      description: 'Terrariums, nourriture et accessoires pour amphibiens',
-      categories: ['amphibien'],
-      types: ['alimentation', 'materiel'],
-      order: 0,
-    },
-    {
-      name: 'Insectes & invertébrés',
-      url: 'https://www.example-nac.fr/insectes',
-      description: 'Nourriture et petits terrariums pour insectes et invertébrés',
-      categories: ['insecte', 'arachnide'],
-      types: ['alimentation', 'materiel'],
-      order: 0,
-    },
-  ];
+  const affiliateStores: never[] = [];
 
   for (const store of affiliateStores) {
     const existing = await prisma.affiliateStore.findFirst({ where: { name: store.name } });

@@ -366,7 +366,7 @@ export const BATCH2_SPECIES_DATABASE = [
     },
     behavior: {
       generalBehavior: 'Arboricole très actif peu social peu agressif curios',
-      sociability: 'semi-solitaire',
+      sociability: 'solitaire',
       difficultyLevel: 'expert',
       compatibilityWithChildren: 'Modéré observation uniquement',
       compatibilityWithOtherAnimals: 'Cohabitation possible espèces compatibles',
@@ -412,7 +412,7 @@ export const BATCH2_SPECIES_DATABASE = [
     },
     behavior: {
       generalBehavior: 'Herbivore semi-social crépusculaire peu agressif',
-      sociability: 'semi-solitaire',
+      sociability: 'solitaire',
       difficultyLevel: 'expert',
       compatibilityWithChildren: 'Peu recommandé animal timide',
       compatibilityWithOtherAnimals: 'Cohabitation possible congénères testée',
