@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserRole } from '@prisma/client';
 import { AuthService, hashResetToken } from './auth.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { MailService } from '../mail/mail.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { CURRENT_TERMS_VERSION } from './auth.constants';
@@ -34,7 +35,9 @@ function firstCallData(fn: jest.Mock): Record<string, unknown> {
 
 describe('AuthService', () => {
   let service: AuthService;
+  let mailService: MailService;
   const serviceLogger = () => (service as unknown as { logger: Logger }).logger;
+  const mailLogger = () => (mailService as unknown as { logger: Logger }).logger;
 
   const mockUser = {
     id: 'user-id-123',
@@ -74,10 +77,12 @@ describe('AuthService', () => {
         AuthService,
         { provide: PrismaService, useValue: mockPrismaService },
         { provide: JwtService, useValue: mockJwtService },
+        MailService,
       ],
     }).compile();
 
     service = module.get<AuthService>(AuthService);
+    mailService = module.get<MailService>(MailService);
     jest.clearAllMocks();
     // $transaction : tableau d'opérations OU callback interactif
     mockPrismaService.$transaction.mockImplementation((arg: unknown) =>
@@ -356,9 +361,12 @@ describe('AuthService', () => {
       const log = jest
         .spyOn(serviceLogger(), 'log')
         .mockImplementation(() => {});
+      const mailDebug = jest
+        .spyOn(mailLogger(), 'debug')
+        .mockImplementation(() => {});
 
       await service.requestPasswordReset('TEST@captivia.com');
-      await new Promise((r) => setImmediate(r));
+      await new Promise((r) => setTimeout(r, 20));
 
       const data = firstCallData(mockPrismaService.passwordResetToken.create);
       expect(data).not.toHaveProperty('token');
@@ -368,6 +376,7 @@ describe('AuthService', () => {
         ...warn.mock.calls,
         ...error.mock.calls,
         ...log.mock.calls,
+        ...mailDebug.mock.calls,
       ]
         .flat()
         .join(' ');
@@ -379,14 +388,14 @@ describe('AuthService', () => {
       process.env.NODE_ENV = 'development';
       delete process.env.FRONTEND_URL;
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
-      const warn = jest
-        .spyOn(serviceLogger(), 'warn')
+      const debug = jest
+        .spyOn(mailLogger(), 'debug')
         .mockImplementation(() => {});
 
       await service.requestPasswordReset('test@captivia.com');
-      await new Promise((r) => setImmediate(r));
+      await new Promise((r) => setTimeout(r, 20));
 
-      const message = warn.mock.calls.flat().join(' ');
+      const message = debug.mock.calls.flat().join(' ');
       const match = message.match(
         /http:\/\/localhost:3000\/reset-password\?token=([a-f0-9]{64})/,
       );
@@ -396,6 +405,27 @@ describe('AuthService', () => {
       ).tokenHash;
       expect(stored).toBe(hashResetToken(match![1]));
       expect(stored).not.toBe(match![1]);
+    });
+
+    it('sends the reset e-mail through MailService in the user locale; a mail failure keeps the generic answer', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue({
+        ...mockUser,
+        locale: 'en',
+      });
+      jest.spyOn(serviceLogger(), 'error').mockImplementation(() => {});
+      const send = jest
+        .spyOn(mailService, 'sendPasswordReset')
+        .mockRejectedValue(new Error('boom'));
+
+      const res = await service.requestPasswordReset('test@captivia.com');
+      await new Promise((r) => setTimeout(r, 20));
+
+      expect(res.message).toMatch(/Si un compte existe/);
+      expect(send).toHaveBeenCalledWith(
+        mockUser.email,
+        'en',
+        expect.stringMatching(/\/reset-password\?token=[a-f0-9]{64}$/),
+      );
     });
 
     it('unknown email: generic answer, nothing created', async () => {

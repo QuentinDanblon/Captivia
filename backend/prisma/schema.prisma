@@ -27,6 +27,8 @@ model User {
   email        String   @unique
   passwordHash String
   locale       String   @default("fr")
+  /// Fuseau IANA (ex. "Europe/Paris") : sert au scheduler de rappels pour la « journée en cours » (W3-02).
+  timezone     String   @default("Europe/Paris")
   isPremium    Boolean  @default(false)
   role         UserRole @default(USER)
   /// Incrémenté à chaque reset / changement de mot de passe : invalide les JWT émis avant.
@@ -334,6 +336,8 @@ model NotificationEvent {
   // W0-07 — clé d'idempotence : "routine:<id>" | "medication:<id>" | "appointment:<id>" | "vaccination:<id>" | "pref:<type>".
   // Nullable : les anciens créateurs d'événements sans clé ne sont pas dédupliqués (NULL distincts en SQL).
   sourceKey      String?
+  /// W3-02 — posé atomiquement par le scheduler quand le rappel a été envoyé (anti-doublon).
+  notifiedAt     DateTime? @db.Timestamptz(3)
   createdAt      DateTime @default(now()) @db.Timestamptz(3)
   updatedAt      DateTime @updatedAt @db.Timestamptz(3)
 

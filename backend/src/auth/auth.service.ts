@@ -9,8 +9,8 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
-import * as nodemailer from 'nodemailer';
 import { PrismaService } from '../prisma/prisma.service';
+import { MailService } from '../mail/mail.service';
 import { Prisma, User } from '@prisma/client';
 import {
   effectivePremium,
@@ -56,6 +56,7 @@ export class AuthService implements OnModuleInit {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
+    private readonly mailService: MailService,
   ) {}
 
   onModuleInit(): void {
@@ -184,7 +185,7 @@ export class AuthService implements OnModuleInit {
 
     // Envoi non bloquant : la réponse (et son temps) ne doit pas révéler
     // l'existence du compte ni l'état du serveur SMTP.
-    void this.sendPasswordResetEmail(user.email, resetLink);
+    void this.sendPasswordResetEmail(user.email, user.locale, resetLink);
 
     return { message: RESET_REQUESTED_MESSAGE };
   }
@@ -286,47 +287,29 @@ export class AuthService implements OnModuleInit {
     };
   }
 
-  /** N'échoue jamais : toute erreur SMTP est journalisée sans le lien. */
+  /**
+   * N'échoue jamais : MailService journalise les erreurs sans le contenu du message, et ne
+   * journalise le message simulé (MAIL_HOST absent) qu'au niveau debug hors production.
+   */
   private async sendPasswordResetEmail(
     to: string,
+    locale: string,
     resetLink: string,
   ): Promise<void> {
-    const host = process.env.MAIL_HOST;
-    if (!host) {
-      if (process.env.NODE_ENV === 'production') {
+    try {
+      const res = await this.mailService.sendPasswordReset(
+        to,
+        locale,
+        resetLink,
+      );
+      if (!res.sent) {
         this.logger.error(
-          '[PASSWORD_RESET] MAIL_HOST non configuré : email de réinitialisation non envoyé.',
-        );
-      } else {
-        // Fallback de développement uniquement (jamais en production).
-        this.logger.warn(
-          `[PASSWORD_RESET] (dev, MAIL_HOST non configuré) Lien de réinitialisation : ${resetLink}`,
+          "[PASSWORD_RESET] Échec d'envoi de l'email de réinitialisation.",
         );
       }
-      return;
-    }
-
-    try {
-      const transporter = nodemailer.createTransport({
-        host,
-        port: parseInt(process.env.MAIL_PORT || '587', 10),
-        secure: process.env.MAIL_SECURE === 'true',
-        auth: process.env.MAIL_USER
-          ? { user: process.env.MAIL_USER, pass: process.env.MAIL_PASS }
-          : undefined,
-      });
-      await transporter.sendMail({
-        from: process.env.MAIL_FROM || 'Captivia <noreply@captivia.com>',
-        to,
-        subject: 'Réinitialisation de votre mot de passe Captivia',
-        text: `Bonjour,\n\nCliquez sur le lien suivant pour réinitialiser votre mot de passe :\n${resetLink}\n\nCe lien expire dans 1 heure.\n\nL'équipe Captivia`,
-        html: `<p>Bonjour,</p><p>Cliquez sur le lien suivant pour réinitialiser votre mot de passe :</p><p><a href="${resetLink}">${resetLink}</a></p><p>Ce lien expire dans 1 heure.</p><p>L'équipe Captivia</p>`,
-      });
-    } catch (error) {
+    } catch {
       this.logger.error(
-        `[PASSWORD_RESET] Échec d'envoi de l'email de réinitialisation : ${
-          error instanceof Error ? error.message : 'erreur inconnue'
-        }`,
+        "[PASSWORD_RESET] Échec d'envoi de l'email de réinitialisation.",
       );
     }
   }
