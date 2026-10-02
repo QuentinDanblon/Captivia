@@ -1,6 +1,6 @@
 # Captivia — Plan de mise en production « 10/10 » (web · Android · iOS)
 
-> Établi le 2026-10-02 sur `claude/zen-mendel-xq6nkb` (HEAD `a850f15` + pipeline de déploiement).
+> Établi le 2026-10-02 sur `claude/zen-mendel-xq6nkb` (HEAD `a850f15` + pipeline de déploiement). Avancement à jour ci-dessous (HEAD `d27ca0c`).
 > Source : 6 audits parallèles réalisés le même jour (sécurité, backend/données, frontend, mobile, infra/légal, hygiène), qui **remplacent** `AUDIT-2026-08-09.md` et `RAPPORT-FINAL-2026-08-09.md`. Ces deux rapports affirmaient « 0 vulnérabilité » et « production ready » : c'est faux aujourd'hui (voir §2).
 
 ---
@@ -31,6 +31,28 @@
 - **Jalon 2 : Stores v1.1 (Android + iOS).** Vague 6. Environ 4 à 6 semaines de développement, plus 2 semaines de tests et relecture des stores. Les comptes développeurs (délais administratifs) sont à lancer **dès J1**.
 
 ---
+
+## Avancement — vague « niveau complet » (soir du 2026-10-02, 9 agents fonctionnels + 17 lots de contenu)
+
+**Fusionné sur `claude/zen-mendel-xq6nkb` et vérifié sur base vierge** (HEAD `d27ca0c`) :
+- Backend : migrations + seed OK, `migrate diff` sans drift, `tsc`/build OK, **777/777 tests (56 suites)**, `npm audit` 0 vulnérabilité.
+- Frontend : `tsc` OK, ESLint 0 erreur, **167/167 tests jest (17 suites)**, build web OK, `build:mobile` OK, **E2E smoke 94/94 sans retry** (chromium + Mobile Chrome, API mockée), `npm audit` 0.
+
+| Tâche | Livré |
+|---|---|
+| W1-01 ✅ | Refresh tokens opaques rotatifs (familles, détection de réutilisation), access token 30 min, `logout` / `logout-all`, refresh automatique côté client (`src/lib/session.ts`). |
+| W2-04 ✅ | Vérification d'e-mail (jeton haché, renvoi limité), bandeau, page `verifier-email` ; rôle opérateur et lien public réservés aux comptes vérifiés. |
+| W3-03 ✅ | Web Push réel (VAPID, `web-push`, purge 404/410, clé publique servie par l'API, `sw.js`). |
+| W4-05 ✅ | Modales `ui/Modal` (Radix) : focus, Échap, retour du focus ; contrastes `--captivia-muted` ≥ 4,5:1. |
+| W4-07 ✅ | Page animal découpée (4 699 → 719 lignes, sections chargées à la demande, −16 % de JS initial), compression des photos. |
+| W4-09 ✅ | E2E Playwright déterministes (API mockée, axe), job smoke bloquant en CI ; correctif du retour EN → FR du sélecteur de langue. |
+| W6-02/03/04 ✅ (socle) | Export statique `build:mobile`, Capacitor 7, routes à query, stockage des jetons via Preferences, `openExternal`, workflow `mobile.yml` (manuel). Projets natifs non générés (`cap add` à faire). |
+| Nouveau ✅ | **Agenda des soins** multi-animaux + abonnement calendrier **ICS** par jeton révocable. **Carnet de santé imprimable** (web) / accessible dans l'app. |
+| DEP-03 ✅ | Sauvegarde hebdomadaire chiffrée (`age`, pg_dump 17, artefact 30 j), scripts de sauvegarde/restauration, `docs/RUNBOOK.md`. |
+| DEP-07 ✅ | release-please (manifeste backend/frontend). |
+| W5-02 ✅ | Lots G (Sonnet) avec preuve par citation, **672 citations contrôlées mécaniquement** contre les pages sources (`enrichment/check_quotes.py`) ; base : 1 340 fiches complètes sur 1 510. Lots H (120 fiches) préparés. |
+
+**Restent ouverts** : W1-04, W1-07 (lint backend), W1-09, W2-02 (textes légaux `[À COMPLÉTER]` + juriste), W2-08, W3-05, W4-03, W4-08, W5-03, W5-04, W6-05 à W6-14, DEP-02, DEP-04 à DEP-06, DEP-09/10 ; relecture humaine législation/santé ; mise en ligne sur les nouveaux comptes Neon/Render/Netlify.
 
 ## Avancement — sprint du 2026-10-02 (3 vagues, 20 agents + 1 revue Opus, tout fusionné sur `claude/zen-mendel-xq6nkb`)
 
