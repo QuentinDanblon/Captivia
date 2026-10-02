@@ -1,5 +1,13 @@
 name: Database Backup
 
+# Sauvegarde hebdomadaire de la base Neon : pg_dump (format custom) chiffré avec age, déposé
+# en artefact GitHub (conservé 30 jours). Procédure de restauration : docs/RUNBOOK.md §3.
+#
+# Secrets requis (Settings → Secrets and variables → Actions) :
+#   NEON_DATABASE_URL_DIRECT  URL Neon DIRECTE (sans « -pooler »)
+#   BACKUP_AGE_RECIPIENT      clé PUBLIQUE age (age1…) ; la clé privée reste hors du dépôt
+# Si l'un des deux manque, aucune sauvegarde n'est faite : on n'envoie jamais un dump non chiffré.
+
 on:
   workflow_dispatch:
   schedule:
@@ -9,45 +17,92 @@ on:
 permissions:
   contents: read
 
+# Jamais deux sauvegardes en parallèle, et jamais d'annulation d'une sauvegarde en cours.
+concurrency:
+  group: backup
+  cancel-in-progress: false
+
 jobs:
   backup:
     name: Backup PostgreSQL
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    env:
+      DB_URL: ${{ secrets.NEON_DATABASE_URL_DIRECT }}
+      AGE_RECIPIENT: ${{ secrets.BACKUP_AGE_RECIPIENT }}
+      # Le client pg_dump doit être de version >= celle du serveur Neon (PostgreSQL 17 par défaut).
+      # À augmenter si le projet Neon passe à une version majeure supérieure.
+      PG_VERSION: '17'
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Backup database
-        if: secrets.NEON_DATABASE_URL_DIRECT != ''
-        env:
-          DATABASE_URL: ${{ secrets.NEON_DATABASE_URL_DIRECT }}
+      # Le contexte « secrets » n'est pas disponible dans « if: » : on le lit via l'env du job.
+      - name: Vérifier la configuration des secrets
+        id: config
         run: |
-          bash -n scripts/backup-db.sh
-          ./scripts/backup-db.sh
-
-      - name: Encrypt backup with age
-        if: secrets.NEON_DATABASE_URL_DIRECT != '' && secrets.BACKUP_AGE_RECIPIENT != ''
-        run: |
-          # Install age
-          curl -sL https://github.com/FiloSottile/age/releases/download/v1.1.1/age-v1.1.1-linux-amd64.tar.gz | tar xz -C /tmp
-          export PATH="/tmp/age:$PATH"
-
-          # Find the latest dump and encrypt
-          LATEST_DUMP=$(ls -1t backups/captivia-*.dump 2>/dev/null | head -1)
-          if [ -n "$LATEST_DUMP" ]; then
-            age -r "${{ secrets.BACKUP_AGE_RECIPIENT }}" -o "${LATEST_DUMP}.age" "$LATEST_DUMP"
-            rm -f "$LATEST_DUMP"
+          missing=""
+          [ -n "$DB_URL" ] || missing="$missing NEON_DATABASE_URL_DIRECT"
+          [ -n "$AGE_RECIPIENT" ] || missing="$missing BACKUP_AGE_RECIPIENT"
+          if [ -z "$missing" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "missing=${missing# }" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Upload backup artifact
-        if: secrets.NEON_DATABASE_URL_DIRECT != ''
+      - name: Sauvegarde ignorée (secrets manquants)
+        if: steps.config.outputs.enabled != 'true'
+        env:
+          MISSING: ${{ steps.config.outputs.missing }}
+        run: |
+          echo "::notice title=Sauvegarde ignorée::Secret(s) absent(s) : ${MISSING}. Les deux secrets NEON_DATABASE_URL_DIRECT et BACKUP_AGE_RECIPIENT sont requis ; aucun dump non chiffré n'est jamais produit ni envoyé (voir docs/RUNBOOK.md §3)."
+
+      - name: Checkout
+        if: steps.config.outputs.enabled == 'true'
+        uses: actions/checkout@v4
+
+      # Dépôt officiel PGDG (clé : https://www.postgresql.org/media/keys/ACCC4CF8.asc), car le
+      # pg_dump fourni par ubuntu-latest peut être plus ancien que le serveur Neon.
+      - name: Installer postgresql-client et age
+        if: steps.config.outputs.enabled == 'true'
+        run: |
+          sudo install -d /usr/share/postgresql-common/pgdg
+          sudo curl -fsSL -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc \
+            https://www.postgresql.org/media/keys/ACCC4CF8.asc
+          codename="$(. /etc/os-release && echo "$VERSION_CODENAME")"
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt ${codename}-pgdg main" \
+            | sudo tee /etc/apt/sources.list.d/pgdg.list >/dev/null
+          sudo apt-get update
+          sudo apt-get install -y "postgresql-client-${PG_VERSION}" age
+          echo "/usr/lib/postgresql/${PG_VERSION}/bin" >> "$GITHUB_PATH"
+
+      - name: Dump de la base
+        if: steps.config.outputs.enabled == 'true'
+        run: |
+          pg_dump --version
+          DATABASE_URL="$DB_URL" bash scripts/backup-db.sh
+
+      - name: Chiffrer le dump avec age
+        if: steps.config.outputs.enabled == 'true'
+        run: |
+          shopt -s nullglob
+          dumps=(backups/captivia-*.dump)
+          if [ "${#dumps[@]}" -ne 1 ]; then
+            echo "::error::Un seul dump attendu dans backups/, trouvé : ${#dumps[@]}."
+            exit 1
+          fi
+          age -r "$AGE_RECIPIENT" -o "${dumps[0]}.age" "${dumps[0]}"
+          test -s "${dumps[0]}.age"
+          # Le dump en clair ne doit pas rester sur le disque ni être envoyé.
+          rm -f "${dumps[0]}"
+          ls -l backups
+
+      - name: Envoyer la sauvegarde chiffrée (artefact)
+        if: steps.config.outputs.enabled == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: database-backup
+          name: database-backup-${{ github.run_id }}
           path: backups/captivia-*.dump.age
+          if-no-files-found: error
           retention-days: 30
-
-      - name: Backup skipped
-        if: secrets.NEON_DATABASE_URL_DIRECT == ''
-        run: echo "NEON_DATABASE_URL_DIRECT not configured, backup skipped."

@@ -306,33 +306,27 @@ curl "http://localhost:3001/food/search?q=dog+food"
 
 ## 💾 Backup & Restauration
 
-Scripts de sauvegarde / restauration de la base PostgreSQL (`captivia`) — dumps gzip + rotation automatique.
+Scripts de sauvegarde / restauration de la base PostgreSQL : dump au format custom de `pg_dump` (déjà compressé), vérifié par `pg_restore --list`, rotation automatique. En production (Neon), la sauvegarde est faite par le workflow `.github/workflows/backup.yml` (chiffrée avec age) : voir [`docs/RUNBOOK.md`](docs/RUNBOOK.md) §3.
 
 ### Sauvegarde
 
 ```bash
-./scripts/backup-db.sh
+DATABASE_URL='postgresql://user:<mot de passe>@127.0.0.1:5432/captivia' bash scripts/backup-db.sh
 ```
 
-- Produit `backups/captivia-YYYYMMDD-HHMMSS.sql.gz` (dump PostgreSQL compressé).
-- Utilise `docker compose exec postgres pg_dump` si la stack tourne, sinon `pg_dump` local avec `DATABASE_URL` fournie explicitement.
+- Produit `backups/captivia-YYYYMMDD-HHMMSS.dump` (dossier ignoré par git).
+- Nécessite `pg_dump` et `pg_restore` en local, de version supérieure ou égale à celle du serveur, et `DATABASE_URL` (l'URL n'est jamais affichée). Le paramètre `?schema=…` ajouté par Prisma est retiré automatiquement ; les autres (`sslmode`…) sont conservés.
 - Rotation : seuls les **14** dumps les plus récents sont conservés (`KEEP=14` dans le script).
-- Cron (quotidien à 2 h) :
-
-```cron
-0 2 * * * cd /chemin/vers/captivia && ./scripts/backup-db.sh >> backups/backup.log 2>&1
-```
+- Le dump n'est pas chiffré : ne pas le conserver en clair hors de la machine.
 
 ### Restauration
 
 ```bash
-# (recommandé) base propre avant restauration :
-docker compose exec -T postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
-# puis :
-./scripts/restore-db.sh backups/captivia-20260809-020000.sql.gz
+DATABASE_URL='postgresql://user:<mot de passe>@127.0.0.1:5432/captivia' \
+  bash scripts/restore-db.sh backups/captivia-20261002-020000.dump
 ```
 
-⚠️ La restauration écrase les données actuelles — une confirmation interactive est demandée.
+⚠️ La restauration remplace les données de la base ciblée (confirmation « oui » demandée ; la cible est affichée sans identifiants). Elle est atomique (`--single-transaction --exit-on-error`) : à la première erreur, la base reste inchangée. Les objets absents du dump ne sont pas supprimés ; pour repartir d'une base vide, exécuter d'abord `psql "$DATABASE_URL" -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public;'`.
 
 ### Test de restauration recommandé
 
@@ -340,7 +334,8 @@ Un backup jamais testé n'est pas un backup : vérifiez régulièrement qu'un du
 
 ```bash
 docker compose exec -T postgres createdb -U "$POSTGRES_USER" captivia_restore_test
-gunzip -c backups/captivia-<date>.sql.gz | docker compose exec -T postgres psql -U "$POSTGRES_USER" -d captivia_restore_test
+DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@127.0.0.1:5432/captivia_restore_test" \
+  bash scripts/restore-db.sh backups/captivia-<date>.dump
 docker compose exec -T postgres psql -U "$POSTGRES_USER" -d captivia_restore_test -c "SELECT count(*) FROM information_schema.tables;"
 docker compose exec -T postgres dropdb -U "$POSTGRES_USER" captivia_restore_test
 ```
