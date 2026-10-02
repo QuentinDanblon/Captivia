@@ -19,9 +19,10 @@ test.describe('Mes animaux', () => {
     const card = page.getByRole('link', { name: /Kaa/ });
     await expect(card).toBeVisible();
     await expect(card).toContainText('Boa constrictor');
-    // Compte gratuit : un seul animal, l'ajout est désactivé et l'avertissement premium affiché.
-    await expect(page.getByRole('button', { name: /Ajouter un animal/ })).toBeDisabled();
-    await expect(page.getByRole('heading', { level: 3, name: 'Premium requis' })).toBeVisible();
+    // Compte gratuit : un seul animal ; l'ajout est remplacé par l'emplacement verrouillé (Premium).
+    await expect(page.getByRole('button', { name: /Ajouter un animal/ })).toHaveCount(0);
+    await expect(page.getByText('Ajouter un deuxième animal')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Découvrir Premium' })).toHaveAttribute('href', /\/parametres\/abonnement$/);
 
     // Le titre (et non le centre de la vignette, couvert par le bouton « changer la photo »).
     await card.getByRole('heading', { name: 'Kaa' }).click();

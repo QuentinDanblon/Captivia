@@ -6,6 +6,8 @@ import { useRouter } from '@/i18n/navigation';
 import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, type SubscriptionStatusView } from '@/lib/api';
+import { isGuestUser } from '@/lib/guest';
+import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
 
 /**
  * W6-08 — L'abonnement Premium se souscrit uniquement dans l'application mobile
@@ -97,7 +99,12 @@ export default function AbonnementPage() {
           <li className="flex items-start gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">✓</span>{t('subscription.benefitQR')}</li>
         </ul>
 
-        {!premium && (
+        {/* Invité : l'achat exige d'abord un compte (l'API répond 403 GUEST_ACCOUNT). */}
+        {!premium && isGuestUser(user) && (
+          <GuestFeatureNote>{t('guest.subscriptionNote')}</GuestFeatureNote>
+        )}
+
+        {!premium && !isGuestUser(user) && (
           <div className="rounded-2xl border-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10 p-6" role="note">
             <p className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{t('subscription.inAppOnly')}</p>
             <p className="text-gray-600 dark:text-gray-400 mb-4">{t('subscription.inAppOnlyHint')}</p>

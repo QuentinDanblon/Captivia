@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { isGuestUser } from '@/lib/guest';
 import { Link } from '@/i18n/navigation';
 
 /** Fréquences de répétition */
@@ -685,6 +686,9 @@ export default function NotificationsPreferencesPage() {
                   <button
                     key={channel}
                     type="button"
+                    // Invité : aucune adresse, rappels par notification seulement (explication ci-dessous).
+                    disabled={channel !== 'push' && isGuestUser(user)}
+                    aria-describedby={channel !== 'push' && isGuestUser(user) ? 'delivery-guest-note' : undefined}
                     onClick={() => {
                       setPreferences((p) => (p ? { ...p, deliveryChannel: channel } : p));
                       if (autoSaveTimeout) {
@@ -705,6 +709,11 @@ export default function NotificationsPreferencesPage() {
                   </button>
                 ))}
               </div>
+              {isGuestUser(user) && (
+                <p id="delivery-guest-note" className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+                  {t('guest.emailChannelNote')}
+                </p>
+              )}
             </div>
           )}
 

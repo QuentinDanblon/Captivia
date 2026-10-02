@@ -14,6 +14,21 @@ export const API_ORIGIN = 'http://127.0.0.1:4010';
 /** Mot de passe accepté par la connexion et la suppression de compte simulées. */
 export const VALID_PASSWORD = 'Password123!';
 
+/** Mode invité simulé : jetons émis par POST /auth/guest et POST /auth/upgrade. */
+export const GUEST_TOKEN = 'e2e-guest-token';
+export const UPGRADED_TOKEN = 'e2e-upgrade-token';
+/** Adresse déjà associée à un compte : POST /auth/upgrade répond 409. */
+export const TAKEN_EMAIL = 'pris@captivia.test';
+
+export const GUEST_USER = {
+  id: 'guest-e2e-1',
+  email: null,
+  isGuest: true,
+  locale: 'fr',
+  isPremium: false,
+  emailVerified: false,
+};
+
 const FIXTURES_DIR = path.join(__dirname, '..', 'fixtures');
 
 export function fixture<T = unknown>(name: string): T {
@@ -44,6 +59,8 @@ export interface MockApi {
   unmocked: string[];
   /** Requêtes reçues pour `METHOD /chemin` (le chemin exclut la query string). */
   callsTo: (method: string, pathname: string) => RecordedCall[];
+  /** Profil de l'invité converti par POST /auth/upgrade (null avant). */
+  upgradedUser: Record<string, unknown> | null;
 }
 
 const CORS_HEADERS = {
@@ -69,6 +86,7 @@ export async function installMockApi(page: Page): Promise<MockApi> {
     animals: [],
     calls: [],
     unmocked: [],
+    upgradedUser: null,
     callsTo: (method, pathname) => api.calls.filter((c) => c.method === method && c.path === pathname),
   };
   const user = fixture<Record<string, unknown>>('user');
@@ -91,8 +109,13 @@ export async function installMockApi(page: Page): Promise<MockApi> {
     }
     api.calls.push({ method, path: pathname, query: url.searchParams, headers: request.headers(), body });
 
-    const authorized = (request.headers()['authorization'] ?? '').startsWith('Bearer ');
+    const authorization = request.headers()['authorization'] ?? '';
+    const authorized = authorization.startsWith('Bearer ');
+    const bearer = authorization.replace(/^Bearer\s+/, '');
     const unauthorized = () => json(route, 401, { statusCode: 401, message: 'Unauthorized' });
+    /** Profil de la session portée par la requête (invité, invité converti, ou compte du fixture). */
+    const sessionUser = (): Record<string, unknown> =>
+      bearer === GUEST_TOKEN ? GUEST_USER : bearer === UPGRADED_TOKEN && api.upgradedUser ? api.upgradedUser : user;
 
     // --- Espèces (public) ---
     if (method === 'GET' && pathname === '/species/search') {
@@ -127,7 +150,21 @@ export async function installMockApi(page: Page): Promise<MockApi> {
       }
       return json(route, 200, { accessToken: 'e2e-login-token', user: { ...user, email } });
     }
-    if (method === 'GET' && pathname === '/auth/me') return authorized ? json(route, 200, user) : unauthorized();
+    if (method === 'GET' && pathname === '/auth/me') return authorized ? json(route, 200, sessionUser()) : unauthorized();
+
+    // --- Mode invité ---
+    if (method === 'POST' && pathname === '/auth/guest') {
+      return json(route, 201, { accessToken: GUEST_TOKEN, refreshToken: 'e2e-guest-refresh', user: GUEST_USER });
+    }
+    if (method === 'POST' && pathname === '/auth/upgrade') {
+      if (bearer !== GUEST_TOKEN) return json(route, 403, { statusCode: 403, code: 'NOT_A_GUEST', message: 'Not a guest' });
+      const { email } = (body ?? {}) as { email?: string };
+      if (email === TAKEN_EMAIL) {
+        return json(route, 409, { statusCode: 409, message: 'Email already registered' });
+      }
+      api.upgradedUser = { ...GUEST_USER, email: email ?? null, isGuest: false };
+      return json(route, 201, { accessToken: UPGRADED_TOKEN, refreshToken: 'e2e-upgrade-refresh', user: api.upgradedUser });
+    }
 
     // --- Animaux de l'utilisateur ---
     if (pathname.startsWith('/users/me') && !authorized) return unauthorized();
@@ -135,6 +172,11 @@ export async function installMockApi(page: Page): Promise<MockApi> {
     if (pathname === '/users/me/animals') {
       if (method === 'GET') return json(route, 200, api.animals);
       if (method === 'POST') {
+        // Limite de l'offre (D-16) : 1 animal pour un invité ou un compte sans Premium.
+        const current = sessionUser();
+        if (api.animals.length >= 1 && (current.isGuest === true || current.isPremium !== true)) {
+          return json(route, 403, { statusCode: 403, code: 'ANIMAL_LIMIT', message: 'Free users can only have 1 animal.' });
+        }
         const data = (body ?? {}) as Record<string, unknown>;
         const created = {
           photos: [],
@@ -194,6 +236,25 @@ export async function signIn(page: Page): Promise<void> {
       if (localStorage.getItem('__e2e_signed_in')) return;
       localStorage.setItem('__e2e_signed_in', '1');
       localStorage.setItem('token', s.token);
+      localStorage.setItem('user', s.user);
+    } catch {
+      // stockage indisponible : le test échouera de façon explicite
+    }
+  }, session);
+}
+
+/**
+ * Ouvre une session INVITÉ (comme après « Essayer sans compte ») : jetons de POST /auth/guest
+ * posés avant le premier script de la page, une seule fois par contexte.
+ */
+export async function signInAsGuest(page: Page): Promise<void> {
+  const session = { token: GUEST_TOKEN, refreshToken: 'e2e-guest-refresh', user: JSON.stringify(GUEST_USER) };
+  await page.addInitScript((s) => {
+    try {
+      if (localStorage.getItem('__e2e_signed_in')) return;
+      localStorage.setItem('__e2e_signed_in', '1');
+      localStorage.setItem('token', s.token);
+      localStorage.setItem('refreshToken', s.refreshToken);
       localStorage.setItem('user', s.user);
     } catch {
       // stockage indisponible : le test échouera de façon explicite

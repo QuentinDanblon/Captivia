@@ -3,8 +3,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { CalendarDays, CalendarPlus, Link2Off, Pill, RefreshCw, Stethoscope, Syringe, Repeat } from 'lucide-react';
-import { Link, useRouter } from '@/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { isGuestUser } from '@/lib/guest';
+import { GuestEntry } from '@/components/guest/GuestEntry';
+import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
 import {
   AGENDA_TYPES,
   buildFeedUrl,
@@ -73,7 +76,7 @@ function dayKeyToDate(day: string): Date {
 export default function AgendaPage() {
   const t = useTranslations('agenda');
   const locale = useLocale();
-  const router = useRouter();
+  const tGuest = useTranslations('guest');
   const { user, token, isLoading: authLoading } = useAuth();
 
   const [days, setDays] = useState<number>(30);
@@ -88,10 +91,6 @@ export default function AgendaPage() {
   const [confirmRegenerate, setConfirmRegenerate] = useState(false);
   const [feedBusy, setFeedBusy] = useState(false);
   const [feedMessage, setFeedMessage] = useState<{ text: string; error: boolean } | null>(null);
-
-  useEffect(() => {
-    if (!authLoading && !user) router.push('/login');
-  }, [authLoading, user, router]);
 
   const load = useCallback(async () => {
     if (!token) return;
@@ -112,7 +111,8 @@ export default function AgendaPage() {
   }, [load]);
 
   useEffect(() => {
-    if (!token) return;
+    // Invité : pas de flux iCalendar (réservé aux comptes), rien à interroger.
+    if (!token || isGuestUser(user)) return;
     let cancelled = false;
     getCalendarTokenStatus(token)
       .then((s) => {
@@ -124,7 +124,7 @@ export default function AgendaPage() {
     return () => {
       cancelled = true;
     };
-  }, [token, user?.id]);
+  }, [token, user]);
 
   const dayFormat = useMemo(
     () => new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
@@ -194,6 +194,9 @@ export default function AgendaPage() {
     }
   };
 
+  // Sans session : « Essayer sans compte » ou connexion (plus de redirection vers /login).
+  if (!authLoading && !user) return <GuestEntry />;
+
   if (authLoading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
@@ -220,7 +223,10 @@ export default function AgendaPage() {
           <p className="mt-2 text-gray-600 dark:text-gray-300">{t('subtitle')}</p>
         </header>
 
-        {/* Abonnement calendrier externe */}
+        {/* Abonnement calendrier externe — réservé aux comptes : expliqué à l'invité. */}
+        {isGuestUser(user) ? (
+          <GuestFeatureNote className="mb-6">{tGuest('calendarNote')}</GuestFeatureNote>
+        ) : (
         <section
           aria-labelledby="agenda-sub-title"
           className="mb-6 rounded-xl border border-gray-200 bg-white p-4 sm:p-5 dark:border-gray-700 dark:bg-gray-800"
@@ -321,6 +327,7 @@ export default function AgendaPage() {
             {feedMessage?.text}
           </p>
         </section>
+        )}
 
         {/* Période et filtres */}
         <div role="group" aria-label={t('filtersLabel')} className="mb-6 grid gap-4 sm:grid-cols-3">

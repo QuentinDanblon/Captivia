@@ -40,5 +40,14 @@ export const test = base.extend<{ api: MockApi }>({
 });
 
 export { expect };
-export { signIn, VALID_PASSWORD, fixture, type MockAnimal } from './mock-api';
+export {
+  signIn,
+  signInAsGuest,
+  VALID_PASSWORD,
+  GUEST_TOKEN,
+  UPGRADED_TOKEN,
+  TAKEN_EMAIL,
+  fixture,
+  type MockAnimal,
+} from './mock-api';
 export { runAxe } from './axe';

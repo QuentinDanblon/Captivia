@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
 import { Link } from '@/i18n/navigation';
+import { GUEST_UPGRADE_PATH, isGuestUser } from '@/lib/guest';
 
 const consentRowStyle: React.CSSProperties = {
   display: 'flex',
@@ -25,7 +26,7 @@ export default function RegisterPage() {
   const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -33,6 +34,11 @@ export default function RegisterPage() {
   const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Session invité : créer un compte = convertir l'invité (données conservées), pas en ouvrir un autre.
+  useEffect(() => {
+    if (isGuestUser(user)) router.replace(GUEST_UPGRADE_PATH);
+  }, [user, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

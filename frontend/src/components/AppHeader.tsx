@@ -7,6 +7,7 @@ import { Link, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { BrandMark } from '@/components/ui/BrandMark';
+import { GUEST_UPGRADE_PATH } from '@/lib/guest';
 
 type NavItem = {
   href: string;
@@ -108,6 +109,9 @@ export function AppHeader() {
   const settingsActive = startsWithSegment(pathname, '/parametres');
   const initials = user?.email?.slice(0, 2).toUpperCase() || '··';
   const authState = user ? 'user' : 'guest';
+  // Session invité : pas de déconnexion (elle ferait perdre l'accès aux données), mais l'invitation
+  // à créer un compte, qui conserve l'animal et son carnet.
+  const guestSession = user?.isGuest === true;
 
   return (
     <>
@@ -144,7 +148,7 @@ export function AppHeader() {
                   <Link
                     href="/parametres"
                     className="site-account site-header__auth"
-                    title={user.email}
+                    title={user.email ?? t('nav.guest')}
                     aria-current={settingsActive ? 'page' : undefined}
                   >
                     <span className="site-account__initials" aria-hidden="true">
@@ -152,9 +156,15 @@ export function AppHeader() {
                     </span>
                     <span className="site-account__label">{t('common.settings')}</span>
                   </Link>
-                  <button type="button" onClick={logout} className="site-header__quiet site-header__nav-only">
-                    {t('common.logout')}
-                  </button>
+                  {guestSession ? (
+                    <Link href={GUEST_UPGRADE_PATH} className="site-header__cta site-header__nav-only">
+                      {t('nav.createAccount')}
+                    </Link>
+                  ) : (
+                    <button type="button" onClick={logout} className="site-header__quiet site-header__nav-only">
+                      {t('common.logout')}
+                    </button>
+                  )}
                 </>
               ) : (
                 <>
@@ -222,7 +232,14 @@ export function AppHeader() {
 
               {!authLoading && (
                 <div className="site-menu__account">
-                  {user ? (
+                  {guestSession ? (
+                    <>
+                      <p className="site-menu__email m-0">{t('nav.guest')}</p>
+                      <Link href={GUEST_UPGRADE_PATH} className="site-header__cta" onClick={closeMenu}>
+                        {t('nav.createAccount')}
+                      </Link>
+                    </>
+                  ) : user ? (
                     <>
                       <p className="site-menu__email m-0">{user.email}</p>
                       <button

@@ -76,6 +76,20 @@ describe('AppHeader', () => {
     expect(screen.queryByRole('link', { name: 'common.login' })).not.toBeInTheDocument();
   });
 
+  it('session invité : Mes animaux, « Créer un compte » vers la conversion, pas de déconnexion', () => {
+    mockedAuth.mockReturnValue({
+      user: { id: 'g1', email: null, isGuest: true, locale: 'fr', isPremium: false },
+      isLoading: false,
+      logout,
+    });
+    render(<AppHeader />);
+    const nav = screen.getByRole('navigation', { name: 'home.mainNavigation' });
+    expect(within(nav).getByRole('link', { name: 'common.myAnimals' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'nav.createAccount' })).toHaveAttribute('href', '/sauvegarder');
+    expect(screen.getByRole('link', { name: 'common.settings' })).toHaveAttribute('title', 'nav.guest');
+    expect(screen.queryByRole('button', { name: 'common.logout' })).not.toBeInTheDocument();
+  });
+
   it('page active : aria-current sur la rubrique (y compris ses sous-pages)', () => {
     asUser();
     mockedPathname.mockReturnValue('/mes-animaux/animal-1');

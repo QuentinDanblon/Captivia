@@ -8,6 +8,7 @@ import { buildPageMetadata, getSiteUrl, SITE_NAME } from '@/lib/seo';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { AppHeader } from '@/components/AppHeader';
 import { EmailVerificationBanner } from '@/components/EmailVerificationBanner';
+import { NativeWelcome } from '@/components/guest/NativeWelcome';
 import { SiteFooter } from '@/components/SiteFooter';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import '../globals.css';
@@ -107,6 +108,8 @@ export default async function LocaleLayout({
               </ErrorBoundary>
             </main>
             <SiteFooter />
+            {/* App mobile : premier lancement sans session → essai sans compte proposé. */}
+            <NativeWelcome />
           </AuthProvider>
         </NextIntlClientProvider>
       </body>

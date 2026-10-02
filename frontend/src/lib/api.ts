@@ -42,11 +42,14 @@ const REQUEST_TIMEOUT_MS = 15_000;
 /** Erreur HTTP renvoyée par l'API : `status` permet aux appelants de distinguer 401 / 403 / 404… */
 export class ApiError extends Error {
   readonly status: number;
+  /** Code machine renvoyé par l'API (ex. `GUEST_ACCOUNT`, `ANIMAL_LIMIT`, `EMAIL_NOT_VERIFIED`). */
+  readonly code?: string;
 
-  constructor(status: number, message: string) {
+  constructor(status: number, message: string, code?: string) {
     super(message);
     this.name = 'ApiError';
     this.status = status;
+    if (code) this.code = code;
   }
 }
 
@@ -188,7 +191,8 @@ async function request<T = any>(url: string, init?: RequestInit, options?: Reque
   const response = await safeFetch(url, init, options);
   const data = await readJson(response);
   if (!response.ok) {
-    throw new ApiError(response.status, errorMessage(data, response));
+    const code = (data as { code?: unknown } | null)?.code;
+    throw new ApiError(response.status, errorMessage(data, response), typeof code === 'string' ? code : undefined);
   }
   return data as T;
 }

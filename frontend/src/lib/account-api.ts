@@ -75,7 +75,8 @@ export function downloadBlob(blob: Blob, filename: string): void {
  */
 export async function deleteMyAccount(
   token: string,
-  password: string,
+  /** Absent pour un compte invité (aucun mot de passe : le jeton suffit). */
+  password?: string,
 ): Promise<void> {
   let res: Response;
   try {
@@ -85,7 +86,7 @@ export async function deleteMyAccount(
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ password }),
+      body: JSON.stringify(password === undefined ? {} : { password }),
     });
   } catch {
     throw new AccountApiError('network', 0);
