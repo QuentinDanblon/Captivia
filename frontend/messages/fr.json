@@ -198,6 +198,7 @@
     "notes": "Notes",
     "notesHelp": "Notes libres : caractère, particularités, rappels…",
     "notesPlaceholder": "Notes sur votre animal...",
+    "photoTooLarge": "La photo dépasse 10 Mo. Choisissez une image plus légère.",
     "photos": "Photos",
     "premiumMessage": "Vous avez atteint la limite gratuite de 1 animal. Passez à Premium pour un nombre illimité d'animaux et des fonctionnalités avancées.",
     "premiumRequired": "Premium requis",
