@@ -376,7 +376,8 @@
     "loadMore": "Voir plus",
     "retry": "Réessayer",
     "unexpectedError": "Erreur inattendue",
-    "sessionExpired": "Session expirée. Veuillez vous reconnecter."
+    "sessionExpired": "Session expirée. Veuillez vous reconnecter.",
+    "agenda": "Agenda des soins"
   },
   "disclaimers": {
     "affiliate": "Lien affilié",
@@ -817,6 +818,64 @@
     "speciesFallbackDescription": "Fiche pratique d'une espèce : habitat, alimentation, comportement, santé et législation.",
     "speciesTitle": "Fiche espèce",
     "storeDescription": "Matériel, alimentation et accessoires recommandés selon les besoins de chaque espèce, avec des liens d'affiliation clairement signalés.",
-    "storeTitle": "Magasin"
+    "storeTitle": "Magasin",
+    "agendaTitle": "Agenda des soins"
+  },
+  "agenda": {
+    "title": "Agenda des soins",
+    "subtitle": "Tous les soins à venir de vos animaux au même endroit : routines, médicaments, vaccins et rendez-vous vétérinaires.",
+    "loading": "Chargement de l'agenda...",
+    "error": "Impossible de charger l'agenda.",
+    "retry": "Réessayer",
+    "rangeLabel": "Période",
+    "range7": "7 jours",
+    "range30": "30 jours",
+    "range90": "3 mois",
+    "filtersLabel": "Filtrer l'agenda",
+    "animalFilter": "Animal",
+    "allAnimals": "Tous les animaux",
+    "typeFilter": "Type de soin",
+    "allTypes": "Tous les types",
+    "resetFilters": "Réinitialiser les filtres",
+    "today": "Aujourd'hui",
+    "allDay": "Toute la journée",
+    "listLabel": "Soins à venir par jour",
+    "count": "{count, plural, one {# soin affiché} other {# soins affichés}}",
+    "truncated": "Trop de soins sur cette période : la liste est tronquée. Choisissez une période plus courte.",
+    "emptyTitle": "Aucun soin à venir",
+    "emptyHint": "Ajoutez des routines, des médicaments, des vaccins ou des rendez-vous vétérinaires à vos animaux pour les voir ici.",
+    "emptyAction": "Voir mes animaux",
+    "noMatch": "Aucun soin ne correspond à ces filtres.",
+    "types": {
+      "routine": "Routine de soin",
+      "medication": "Médicament",
+      "vaccination": "Rappel de vaccin",
+      "vet_appointment": "Rendez-vous vétérinaire"
+    },
+    "status": {
+      "pending": "À faire",
+      "done": "Fait",
+      "skipped": "Passé",
+      "cancelled": "Annulé"
+    },
+    "sub": {
+      "title": "Calendrier externe",
+      "description": "Abonnez Google Agenda, Apple Calendrier ou Outlook à vos soins grâce à un lien personnel (lecture seule, mis à jour automatiquement).",
+      "button": "S'abonner dans mon calendrier",
+      "regenerate": "Régénérer le lien",
+      "revoke": "Désactiver le lien",
+      "regenerateConfirm": "L'ancien lien cessera de fonctionner. Régénérer le lien ?",
+      "confirmYes": "Oui, régénérer",
+      "confirmNo": "Annuler",
+      "copied": "Lien copié. Collez-le dans votre calendrier (« Ajouter un calendrier à partir d'une URL »).",
+      "copyFailed": "Copie automatique impossible : copiez le lien ci-dessous.",
+      "regenerated": "Nouveau lien généré et copié. L'ancien lien est désactivé.",
+      "revoked": "Lien désactivé : plus aucun calendrier ne peut lire vos soins.",
+      "active": "Un lien d'abonnement est actif.",
+      "inactive": "Aucun lien d'abonnement actif.",
+      "urlLabel": "Lien d'abonnement (à garder secret)",
+      "secret": "Toute personne disposant de ce lien peut voir vos soins. Régénérez-le s'il a fuité.",
+      "error": "Opération impossible pour le moment. Réessayez."
+    }
   }
 }

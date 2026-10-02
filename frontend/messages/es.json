@@ -376,7 +376,8 @@
     "loadMore": "Ver más",
     "retry": "Reintentar",
     "unexpectedError": "Error inesperado",
-    "sessionExpired": "Sesión caducada. Vuelve a iniciar sesión."
+    "sessionExpired": "Sesión caducada. Vuelve a iniciar sesión.",
+    "agenda": "Agenda de cuidados"
   },
   "disclaimers": {
     "affiliate": "Enlace de afiliado",
@@ -817,6 +818,64 @@
     "speciesFallbackDescription": "Ficha práctica de una especie: hábitat, alimentación, comportamiento, salud y legislación.",
     "speciesTitle": "Ficha de especie",
     "storeDescription": "Material, alimentación y accesorios recomendados según las necesidades de cada especie, con enlaces de afiliación claramente indicados.",
-    "storeTitle": "Tienda"
+    "storeTitle": "Tienda",
+    "agendaTitle": "Agenda de cuidados"
+  },
+  "agenda": {
+    "title": "Agenda de cuidados",
+    "subtitle": "Todos los próximos cuidados de tus animales en un solo lugar: rutinas, medicamentos, vacunas y citas veterinarias.",
+    "loading": "Cargando la agenda...",
+    "error": "No se pudo cargar la agenda.",
+    "retry": "Reintentar",
+    "rangeLabel": "Periodo",
+    "range7": "7 días",
+    "range30": "30 días",
+    "range90": "3 meses",
+    "filtersLabel": "Filtrar la agenda",
+    "animalFilter": "Animal",
+    "allAnimals": "Todos los animales",
+    "typeFilter": "Tipo de cuidado",
+    "allTypes": "Todos los tipos",
+    "resetFilters": "Restablecer filtros",
+    "today": "Hoy",
+    "allDay": "Todo el día",
+    "listLabel": "Próximos cuidados por día",
+    "count": "{count, plural, one {# cuidado mostrado} other {# cuidados mostrados}}",
+    "truncated": "Demasiados cuidados en este periodo: la lista está truncada. Elige un periodo más corto.",
+    "emptyTitle": "Ningún cuidado próximo",
+    "emptyHint": "Añade rutinas, medicamentos, vacunas o citas veterinarias a tus animales para verlos aquí.",
+    "emptyAction": "Ver mis animales",
+    "noMatch": "Ningún cuidado coincide con estos filtros.",
+    "types": {
+      "routine": "Rutina de cuidado",
+      "medication": "Medicamento",
+      "vaccination": "Recordatorio de vacuna",
+      "vet_appointment": "Cita veterinaria"
+    },
+    "status": {
+      "pending": "Pendiente",
+      "done": "Hecho",
+      "skipped": "Omitido",
+      "cancelled": "Cancelado"
+    },
+    "sub": {
+      "title": "Calendario externo",
+      "description": "Suscribe Google Calendar, Calendario de Apple u Outlook a tus cuidados con un enlace personal (solo lectura, actualizado automáticamente).",
+      "button": "Suscribirme en mi calendario",
+      "regenerate": "Regenerar el enlace",
+      "revoke": "Desactivar el enlace",
+      "regenerateConfirm": "El enlace anterior dejará de funcionar. ¿Regenerar el enlace?",
+      "confirmYes": "Sí, regenerar",
+      "confirmNo": "Cancelar",
+      "copied": "Enlace copiado. Pégalo en tu calendario («Añadir calendario desde URL»).",
+      "copyFailed": "No se pudo copiar automáticamente: copia el enlace de abajo.",
+      "regenerated": "Nuevo enlace generado y copiado. El anterior está desactivado.",
+      "revoked": "Enlace desactivado: ningún calendario puede leer tus cuidados.",
+      "active": "Hay un enlace de suscripción activo.",
+      "inactive": "Ningún enlace de suscripción activo.",
+      "urlLabel": "Enlace de suscripción (mantenlo en secreto)",
+      "secret": "Quien tenga este enlace puede ver tus cuidados. Regéneralo si se ha filtrado.",
+      "error": "Operación no disponible ahora. Inténtalo de nuevo."
+    }
   }
 }

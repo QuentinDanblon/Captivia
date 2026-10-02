@@ -376,7 +376,8 @@
     "loadMore": "Mostra altro",
     "retry": "Riprova",
     "unexpectedError": "Errore imprevisto",
-    "sessionExpired": "Sessione scaduta. Accedi di nuovo."
+    "sessionExpired": "Sessione scaduta. Accedi di nuovo.",
+    "agenda": "Agenda delle cure"
   },
   "disclaimers": {
     "affiliate": "Link affiliato",
@@ -817,6 +818,64 @@
     "speciesFallbackDescription": "Scheda pratica di una specie: habitat, alimentazione, comportamento, salute e normativa.",
     "speciesTitle": "Scheda della specie",
     "storeDescription": "Attrezzatura, alimenti e accessori consigliati in base alle esigenze di ogni specie, con link di affiliazione chiaramente indicati.",
-    "storeTitle": "Negozio"
+    "storeTitle": "Negozio",
+    "agendaTitle": "Agenda delle cure"
+  },
+  "agenda": {
+    "title": "Agenda delle cure",
+    "subtitle": "Tutte le prossime cure dei tuoi animali in un unico posto: routine, farmaci, vaccini e appuntamenti veterinari.",
+    "loading": "Caricamento dell'agenda...",
+    "error": "Impossibile caricare l'agenda.",
+    "retry": "Riprova",
+    "rangeLabel": "Periodo",
+    "range7": "7 giorni",
+    "range30": "30 giorni",
+    "range90": "3 mesi",
+    "filtersLabel": "Filtra l'agenda",
+    "animalFilter": "Animale",
+    "allAnimals": "Tutti gli animali",
+    "typeFilter": "Tipo di cura",
+    "allTypes": "Tutti i tipi",
+    "resetFilters": "Reimposta i filtri",
+    "today": "Oggi",
+    "allDay": "Tutto il giorno",
+    "listLabel": "Prossime cure per giorno",
+    "count": "{count, plural, one {# cura mostrata} other {# cure mostrate}}",
+    "truncated": "Troppe cure in questo periodo: l'elenco è troncato. Scegli un periodo più breve.",
+    "emptyTitle": "Nessuna cura in programma",
+    "emptyHint": "Aggiungi routine, farmaci, vaccini o appuntamenti veterinari ai tuoi animali per vederli qui.",
+    "emptyAction": "Vedi i miei animali",
+    "noMatch": "Nessuna cura corrisponde a questi filtri.",
+    "types": {
+      "routine": "Routine di cura",
+      "medication": "Farmaco",
+      "vaccination": "Richiamo vaccino",
+      "vet_appointment": "Appuntamento veterinario"
+    },
+    "status": {
+      "pending": "Da fare",
+      "done": "Fatto",
+      "skipped": "Saltato",
+      "cancelled": "Annullato"
+    },
+    "sub": {
+      "title": "Calendario esterno",
+      "description": "Iscrivi Google Calendar, Calendario Apple o Outlook alle tue cure con un link personale (sola lettura, aggiornato automaticamente).",
+      "button": "Iscriviti nel mio calendario",
+      "regenerate": "Rigenera il link",
+      "revoke": "Disattiva il link",
+      "regenerateConfirm": "Il vecchio link smetterà di funzionare. Rigenerare il link?",
+      "confirmYes": "Sì, rigenera",
+      "confirmNo": "Annulla",
+      "copied": "Link copiato. Incollalo nel tuo calendario («Aggiungi calendario da URL»).",
+      "copyFailed": "Copia automatica non riuscita: copia il link qui sotto.",
+      "regenerated": "Nuovo link generato e copiato. Il vecchio link è disattivato.",
+      "revoked": "Link disattivato: nessun calendario può più leggere le tue cure.",
+      "active": "Un link di iscrizione è attivo.",
+      "inactive": "Nessun link di iscrizione attivo.",
+      "urlLabel": "Link di iscrizione (tienilo segreto)",
+      "secret": "Chiunque abbia questo link può vedere le tue cure. Rigeneralo se è stato diffuso.",
+      "error": "Operazione non disponibile al momento. Riprova."
+    }
   }
 }

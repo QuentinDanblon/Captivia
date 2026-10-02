@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { LanguageSelector } from '@/components/LanguageSelector';
-import { ArrowRight, Home, Leaf, LogIn, LogOut, Menu, PawPrint, Settings2, ShoppingBag, X } from 'lucide-react';
+import { ArrowRight, CalendarDays, Home, Leaf, LogIn, LogOut, Menu, PawPrint, Settings2, ShoppingBag, X } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 
 export function AppHeader() {
@@ -105,6 +105,14 @@ export function AppHeader() {
                 <span>{t('common.myAnimals')}</span>
               </Link>
               <Link
+                href="/agenda"
+                className={navLinkClass(pathname?.includes('/agenda') ?? false)}
+                aria-current={pathname?.includes('/agenda') ? 'page' : undefined}
+              >
+                <CalendarDays size={16} strokeWidth={2.2} aria-hidden="true" />
+                <span>{t('common.agenda')}</span>
+              </Link>
+              <Link
                 href="/parametres"
                 className={navLinkClass(pathname?.includes('/parametres') ?? false)}
                 aria-current={pathname?.includes('/parametres') ? 'page' : undefined}
@@ -198,6 +206,14 @@ export function AppHeader() {
                 >
                   <PawPrint size={17} aria-hidden="true" />
                   <span>{t('common.myAnimals')}</span>
+                </Link>
+                <Link
+                  href="/agenda"
+                  className={mobileLinkClass(pathname?.includes('/agenda') ?? false)}
+                  onClick={closeMobileMenu}
+                >
+                  <CalendarDays size={17} aria-hidden="true" />
+                  <span>{t('common.agenda')}</span>
                 </Link>
                 <Link
                   href="/parametres"
