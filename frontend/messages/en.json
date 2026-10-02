@@ -198,6 +198,7 @@
     "notes": "Notes",
     "notesHelp": "Free-form notes: temperament, specifics, reminders…",
     "notesPlaceholder": "Notes about your animal...",
+    "photoTooLarge": "The photo is larger than 10 MB. Please choose a smaller image.",
     "photos": "Photos",
     "premiumMessage": "You have reached the free limit of 1 animal. Upgrade to Premium for unlimited animals and advanced features.",
     "premiumRequired": "Premium required",
