@@ -1,12 +1,15 @@
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
 import { LEGAL, LEGAL_ROUTES, contactMailto } from '@/lib/legal';
+import { BrandMark } from '@/components/ui/BrandMark';
 
-/** Pied de page global (Server Component) : liens légaux et mention d'affiliation Amazon. */
+/**
+ * Pied de page global (Server Component) : colophon du carnet — marque et une ligne de
+ * description, liens légaux en colonnes, mention d'affiliation Amazon et copyright en mono.
+ */
 export async function SiteFooter() {
   const t = await getTranslations('footer');
-  // Le Link next-intl ajoute lui-même le préfixe de locale.
-  const href = (path: string) => path;
+  const tc = await getTranslations('common');
   const mailto = contactMailto();
 
   const links: { label: string; path: string }[] = [
@@ -18,39 +21,50 @@ export async function SiteFooter() {
     { label: t('accountDeletion'), path: LEGAL_ROUTES.accountDeletion },
   ];
 
-  const linkClass =
-    'rounded text-gray-700 underline-offset-2 hover:text-emerald-800 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 dark:text-gray-200 dark:hover:text-emerald-300';
-
   return (
-    <footer className="w-full border-t border-gray-200 bg-white text-sm text-gray-700 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200">
-      <div className="mx-auto w-full max-w-6xl space-y-4 px-4 py-8 sm:px-6">
-        <nav aria-label={t('navLabel')}>
-          <ul className="flex flex-wrap gap-x-5 gap-y-2">
-            {links.map((link) => (
-              <li key={link.path}>
-                <Link href={href(link.path)} className={linkClass}>
-                  {link.label}
-                </Link>
+    <footer className="site-footer noprint">
+      <div className="cv-container">
+        <div className="site-footer__top">
+          <div className="site-footer__brand">
+            {/* Le Link next-intl ajoute lui-même le préfixe de locale. */}
+            <Link href="/" className="site-brand">
+              <BrandMark className="site-brand__mark" />
+              <span className="site-brand__name">{tc('appName')}</span>
+            </Link>
+            <p className="site-footer__description">{t('description')}</p>
+          </div>
+
+          <nav aria-labelledby="site-footer-legal">
+            <h2 id="site-footer-legal" className="site-footer__heading">
+              {t('navLabel')}
+            </h2>
+            <ul className="site-footer__links">
+              {links.map((link) => (
+                <li key={link.path}>
+                  <Link href={link.path}>{link.label}</Link>
+                </li>
+              ))}
+              <li>
+                {mailto ? (
+                  <a href={mailto}>{t('contact')}</a>
+                ) : (
+                  <Link href={LEGAL_ROUTES.legalNotice}>{t('contact')}</Link>
+                )}
               </li>
-            ))}
-            <li>
-              {mailto ? (
-                <a href={mailto} className={linkClass}>
-                  {t('contact')}
-                </a>
-              ) : (
-                <Link href={href(LEGAL_ROUTES.legalNotice)} className={linkClass}>
-                  {t('contact')}
-                </Link>
-              )}
-            </li>
-          </ul>
-        </nav>
-        <p className="text-gray-600 dark:text-gray-300">{t('amazonAssociate')}</p>
-        <p className="text-gray-600 dark:text-gray-300">
-          © {new Date().getFullYear()} {LEGAL.serviceName} · {t('tagline')}
-        </p>
+            </ul>
+          </nav>
+        </div>
+
+        <div className="site-footer__colophon">
+          <p>{t('amazonAssociate')}</p>
+          <p className="site-footer__legal">
+            © {new Date().getFullYear()} {LEGAL.serviceName} · {t('tagline')}
+          </p>
+        </div>
       </div>
     </footer>
   );
 }
+
+/** Pied de page de la couche marketing (landing, pages légales). L'app n'en a pas. */
+export { SiteFooter as MarketingFooter };

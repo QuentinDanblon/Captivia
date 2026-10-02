@@ -42,30 +42,33 @@ export function EmailVerificationBanner() {
           ? t('bannerError')
           : null;
 
+  // `noprint` : le bandeau ne sort jamais à l'impression (carnet de santé imprimable).
   return (
-    <div
-      role="status"
-      className="w-full bg-amber-50 dark:bg-amber-900/30 border-b border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-100"
-    >
-      <div className="max-w-5xl mx-auto px-4 py-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-        <p className="flex-1 min-w-0">{feedback ?? t('bannerText')}</p>
-        {state !== 'sent' && (
+    <div role="status" className="noprint w-full border-b border-line bg-warn-soft text-ink">
+      <div className="cv-container flex flex-wrap items-center gap-x-4 py-1 text-ui">
+        <p className="m-0 min-w-0 flex-1 py-2">
+          <span aria-hidden="true" className="mr-2 inline-block size-2 rounded-full bg-warn align-middle" />
+          {feedback ?? t('bannerText')}
+        </p>
+        <div className="flex items-center gap-1">
+          {state !== 'sent' && (
+            <button
+              type="button"
+              onClick={resend}
+              disabled={state === 'sending'}
+              className="min-h-11 rounded-control px-2 font-medium text-ink underline decoration-1 underline-offset-[0.18em] transition-colors hover:bg-sunken disabled:opacity-60"
+            >
+              {state === 'sending' ? t('bannerSending') : t('bannerResend')}
+            </button>
+          )}
           <button
             type="button"
-            onClick={resend}
-            disabled={state === 'sending'}
-            className="font-medium underline hover:no-underline disabled:opacity-60"
+            onClick={() => setDismissed(true)}
+            className="min-h-11 rounded-control px-2 text-ink-2 transition-colors hover:bg-sunken hover:text-ink"
           >
-            {state === 'sending' ? t('bannerSending') : t('bannerResend')}
+            {t('bannerDismiss')}
           </button>
-        )}
-        <button
-          type="button"
-          onClick={() => setDismissed(true)}
-          className="text-amber-700 dark:text-amber-300 hover:underline"
-        >
-          {t('bannerDismiss')}
-        </button>
+        </div>
       </div>
     </div>
   );

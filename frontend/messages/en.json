@@ -404,7 +404,18 @@
     "sources": "Sources and licences",
     "tagline": "Caring, made simple.",
     "terms": "Terms of use",
-    "transparency": "Transparency & affiliation"
+    "transparency": "Transparency & affiliation",
+    "description": "Your animals' health record, care reminders and sourced species profiles, in one place."
+  },
+  "nav": {
+    "species": "Species",
+    "agenda": "Schedule",
+    "transparency": "Transparency",
+    "account": "Account",
+    "guest": "Guest",
+    "createAccount": "Create an account",
+    "community": "Community",
+    "soon": "Soon"
   },
   "grade": {
     "bronze": "Bronze",

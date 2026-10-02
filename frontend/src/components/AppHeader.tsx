@@ -2,35 +2,57 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { usePathname } from '@/i18n/navigation';
+import { Menu, X } from 'lucide-react';
+import { Link, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { LanguageSelector } from '@/components/LanguageSelector';
-import { ArrowRight, CalendarDays, Home, Leaf, LogIn, LogOut, Menu, PawPrint, Settings2, ShoppingBag, X } from 'lucide-react';
-import { Link } from '@/i18n/navigation';
+import { BrandMark } from '@/components/ui/BrandMark';
 
+type NavItem = {
+  href: string;
+  label: string;
+  /** Rubrique active : la page courante appartient à cette entrée. */
+  isActive: (path: string) => boolean;
+};
+
+const startsWithSegment = (path: string, segment: string) =>
+  path === segment || path.startsWith(`${segment}/`);
+
+/**
+ * En-tête du site (« carnet de terrain ») : papier plein, filet fin, page active soulignée
+ * sur le filet. Trois états selon la largeur — mesurés de 320 à 1920 px dans les 6 langues :
+ *  - < 640 px : marque · langue · menu ;
+ *  - 640 px → seuil : + actions de compte (initiales, ou Connexion / S'inscrire) ;
+ *  - ≥ seuil (invité 1024 px, connecté 1200 px) : navigation complète, sans menu.
+ * Un seul sélecteur de langue est rendu, quelle que soit la largeur.
+ */
 export function AppHeader() {
   const t = useTranslations();
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '/';
   const { user, isLoading: authLoading, logout } = useAuth();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  const closeMobileMenu = () => setMobileMenuOpen(false);
+  const closeMenu = () => setMenuOpen(false);
 
-  // Menu mobile modal : focus sur le premier lien à l'ouverture, Échap pour fermer
-  // (focus rendu au bouton), Tab confiné au menu et à son bouton d'ouverture.
+  // Menu en feuille modale : focus sur la première entrée, Échap ferme (focus rendu au bouton),
+  // Tab confiné au menu et à son bouton, défilement de la page bloqué.
   useEffect(() => {
-    if (!mobileMenuOpen) return;
-    const menu = mobileMenuRef.current;
+    if (!menuOpen) return;
+    const menu = menuRef.current;
     const focusables = () =>
       Array.from(menu?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), select') ?? []);
     focusables()[0]?.focus();
 
+    const root = document.documentElement;
+    const previousOverflow = root.style.overflow;
+    root.style.overflow = 'hidden';
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault();
-        setMobileMenuOpen(false);
+        setMenuOpen(false);
         menuButtonRef.current?.focus();
         return;
       }
@@ -52,224 +74,187 @@ export function AppHeader() {
       }
     };
     document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
-  }, [mobileMenuOpen]);
-  const isHome = pathname === '/' || /^\/[a-z]{2}\/?$/.test(pathname ?? '');
-  const userInitials = user?.email?.slice(0, 2).toUpperCase() || 'C';
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      root.style.overflow = previousOverflow;
+    };
+  }, [menuOpen]);
 
-  const navLinkClass = (active: boolean) => `captivia-nav-link${active ? ' is-active' : ''}`;
-  const mobileLinkClass = (active: boolean) => `captivia-mobile-link${active ? ' is-active' : ''}`;
+  const isHome = pathname === '/' || /^\/[a-z]{2}\/?$/.test(pathname);
+  const items: NavItem[] = [
+    {
+      href: '/',
+      label: t('nav.species'),
+      isActive: (p) => isHome || startsWithSegment(p, '/species'),
+    },
+    { href: '/magasin', label: t('common.shop'), isActive: (p) => startsWithSegment(p, '/magasin') },
+    ...(user
+      ? [
+          {
+            href: '/mes-animaux',
+            label: t('common.myAnimals'),
+            isActive: (p: string) => startsWithSegment(p, '/mes-animaux'),
+          },
+          { href: '/agenda', label: t('nav.agenda'), isActive: (p: string) => startsWithSegment(p, '/agenda') },
+        ]
+      : []),
+    {
+      href: '/transparency',
+      label: t('nav.transparency'),
+      isActive: (p) => startsWithSegment(p, '/transparency'),
+    },
+  ];
+
+  const settingsActive = startsWithSegment(pathname, '/parametres');
+  const initials = user?.email?.slice(0, 2).toUpperCase() || '··';
+  const authState = user ? 'user' : 'guest';
 
   return (
     <>
-    <a
-      href="#main-content"
-      className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:font-semibold focus:text-emerald-800 focus:shadow-lg focus:outline focus:outline-2 focus:outline-emerald-700"
-    >
-      {t('home.skipToContent')}
-    </a>
-    <header className="captivia-header">
-      <div className="captivia-header-inner">
-        <Link href="/" className="captivia-brand" onClick={closeMobileMenu}>
-          <span className="captivia-brand-mark" aria-hidden="true">
-            <Leaf size={19} strokeWidth={2.4} />
-          </span>
-          <span>{t('common.appName')}</span>
-        </Link>
-
-        <nav className="captivia-desktop-nav" aria-label={t('home.mainNavigation')}>
-          <Link
-            href="/"
-            className={navLinkClass(isHome)}
-            aria-current={isHome ? 'page' : undefined}
-          >
-            <Home size={16} strokeWidth={2.2} aria-hidden="true" />
-            <span>{t('common.home')}</span>
+      <a href="#main-content" className="skip-link">
+        {t('home.skipToContent')}
+      </a>
+      <header className="site-header noprint" data-auth={authState}>
+        <div className="cv-container site-header__bar">
+          <Link href="/" className="site-brand" onClick={closeMenu}>
+            <BrandMark className="site-brand__mark" />
+            <span className="site-brand__name">{t('common.appName')}</span>
           </Link>
-          <Link
-            href="/magasin"
-            className={navLinkClass(pathname?.includes('/magasin') ?? false)}
-            aria-current={pathname?.includes('/magasin') ? 'page' : undefined}
-          >
-            <ShoppingBag size={16} strokeWidth={2.2} aria-hidden="true" />
-            <span>{t('common.shop')}</span>
-          </Link>
-          {user && (
-            <>
-              <Link
-                href="/mes-animaux"
-                className={navLinkClass(pathname?.includes('/mes-animaux') ?? false)}
-                aria-current={pathname?.includes('/mes-animaux') ? 'page' : undefined}
-              >
-                <PawPrint size={16} strokeWidth={2.2} aria-hidden="true" />
-                <span>{t('common.myAnimals')}</span>
-              </Link>
-              <Link
-                href="/agenda"
-                className={navLinkClass(pathname?.includes('/agenda') ?? false)}
-                aria-current={pathname?.includes('/agenda') ? 'page' : undefined}
-              >
-                <CalendarDays size={16} strokeWidth={2.2} aria-hidden="true" />
-                <span>{t('common.agenda')}</span>
-              </Link>
-              <Link
-                href="/parametres"
-                className={navLinkClass(pathname?.includes('/parametres') ?? false)}
-                aria-current={pathname?.includes('/parametres') ? 'page' : undefined}
-              >
-                <Settings2 size={16} strokeWidth={2.2} aria-hidden="true" />
-                <span>{t('common.settings')}</span>
-              </Link>
-            </>
-          )}
-          <Link
-            href="/transparency"
-            className={navLinkClass(pathname?.includes('/transparency') ?? false)}
-            aria-current={pathname?.includes('/transparency') ? 'page' : undefined}
-          >
-            <span>{t('footer.transparency')}</span>
-          </Link>
-        </nav>
 
-        <div className="captivia-header-actions">
-          <LanguageSelector />
-          {!authLoading &&
-            (user ? (
-              <div className="captivia-authenticated-actions">
-                <Link href="/parametres" className="captivia-user-chip" title={user.email}>
-                  <span className="captivia-user-avatar" aria-hidden="true">{userInitials}</span>
-                  <span className="captivia-user-email">{user.email}</span>
-                </Link>
-                <button type="button" onClick={logout} className="captivia-logout-button">
-                  <LogOut size={16} strokeWidth={2.2} aria-hidden="true" />
-                  <span>{t('common.logout')}</span>
-                </button>
-              </div>
-            ) : (
-              <div className="captivia-guest-actions">
-                <Link href="/login" className="captivia-login-link">
-                  <LogIn size={16} strokeWidth={2.2} aria-hidden="true" />
-                  <span>{t('common.login')}</span>
-                </Link>
-                <Link href="/register" className="captivia-register-button">
-                  <span>{t('common.register')}</span>
-                  <ArrowRight size={16} strokeWidth={2.4} aria-hidden="true" />
-                </Link>
-              </div>
-            ))}
-        </div>
-
-        <div className="captivia-mobile-actions">
-          <LanguageSelector />
-          <button
-            ref={menuButtonRef}
-            type="button"
-            onClick={() => setMobileMenuOpen((open) => !open)}
-            className="captivia-menu-button"
-            aria-label={mobileMenuOpen ? t('home.closeMenu') : t('home.openMenu')}
-            aria-expanded={mobileMenuOpen}
-            aria-controls="captivia-mobile-navigation"
-          >
-            {mobileMenuOpen ? <X size={21} aria-hidden="true" /> : <Menu size={21} aria-hidden="true" />}
-          </button>
-        </div>
-      </div>
-
-      {mobileMenuOpen && (
-        <div
-          id="captivia-mobile-navigation"
-          ref={mobileMenuRef}
-          className="captivia-mobile-menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label={t('home.mobileNavigation')}
-        >
-          <nav className="captivia-mobile-nav" aria-label={t('home.mobileNavigation')}>
-            <Link href="/" className={mobileLinkClass(isHome)} onClick={closeMobileMenu}>
-              <Home size={17} aria-hidden="true" />
-              <span>{t('common.home')}</span>
-            </Link>
-            <Link
-              href="/magasin"
-              className={mobileLinkClass(pathname?.includes('/magasin') ?? false)}
-              onClick={closeMobileMenu}
-            >
-              <ShoppingBag size={17} aria-hidden="true" />
-              <span>{t('common.shop')}</span>
-            </Link>
-            {user && (
-              <>
-                <Link
-                  href="/mes-animaux"
-                  className={mobileLinkClass(pathname?.includes('/mes-animaux') ?? false)}
-                  onClick={closeMobileMenu}
-                >
-                  <PawPrint size={17} aria-hidden="true" />
-                  <span>{t('common.myAnimals')}</span>
-                </Link>
-                <Link
-                  href="/agenda"
-                  className={mobileLinkClass(pathname?.includes('/agenda') ?? false)}
-                  onClick={closeMobileMenu}
-                >
-                  <CalendarDays size={17} aria-hidden="true" />
-                  <span>{t('common.agenda')}</span>
-                </Link>
-                <Link
-                  href="/parametres"
-                  className={mobileLinkClass(pathname?.includes('/parametres') ?? false)}
-                  onClick={closeMobileMenu}
-                >
-                  <Settings2 size={17} aria-hidden="true" />
-                  <span>{t('common.settings')}</span>
-                </Link>
-              </>
-            )}
-            <Link
-              href="/transparency"
-              className={mobileLinkClass(pathname?.includes('/transparency') ?? false)}
-              onClick={closeMobileMenu}
-            >
-              <span>{t('footer.transparency')}</span>
-            </Link>
-
-            <div className="captivia-mobile-auth">
-              {!authLoading &&
-                (user ? (
-                  <>
-                    <Link href="/parametres" className="captivia-mobile-user" onClick={closeMobileMenu}>
-                      <span className="captivia-user-avatar" aria-hidden="true">{userInitials}</span>
-                      <span className="truncate">{user.email}</span>
+          <nav className="site-nav" aria-label={t('home.mainNavigation')}>
+            <ul className="site-nav__list">
+              {items.map((item) => {
+                const active = item.isActive(pathname);
+                return (
+                  <li key={item.href}>
+                    <Link href={item.href} className="site-nav__link" aria-current={active ? 'page' : undefined}>
+                      {item.label}
                     </Link>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        logout();
-                        closeMobileMenu();
-                      }}
-                      className="captivia-mobile-logout"
-                    >
-                      <LogOut size={17} aria-hidden="true" />
-                      <span>{t('common.logout')}</span>
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link href="/login" className="captivia-mobile-login" onClick={closeMobileMenu}>
-                      <LogIn size={17} aria-hidden="true" />
-                      <span>{t('common.login')}</span>
-                    </Link>
-                    <Link href="/register" className="captivia-mobile-register" onClick={closeMobileMenu}>
-                      <span>{t('common.register')}</span>
-                      <ArrowRight size={17} aria-hidden="true" />
-                    </Link>
-                  </>
-                ))}
-            </div>
+                  </li>
+                );
+              })}
+            </ul>
           </nav>
+
+          <div className="site-header__tools">
+            <LanguageSelector />
+            {!authLoading &&
+              (user ? (
+                <>
+                  <Link
+                    href="/parametres"
+                    className="site-account site-header__auth"
+                    title={user.email}
+                    aria-current={settingsActive ? 'page' : undefined}
+                  >
+                    <span className="site-account__initials" aria-hidden="true">
+                      {initials}
+                    </span>
+                    <span className="site-account__label">{t('common.settings')}</span>
+                  </Link>
+                  <button type="button" onClick={logout} className="site-header__quiet site-header__nav-only">
+                    {t('common.logout')}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" className="site-header__quiet site-header__auth">
+                    {t('common.login')}
+                  </Link>
+                  <Link href="/register" className="site-header__cta site-header__auth">
+                    {t('common.register')}
+                  </Link>
+                </>
+              ))}
+            <button
+              ref={menuButtonRef}
+              type="button"
+              onClick={() => setMenuOpen((open) => !open)}
+              className="site-menu-button"
+              aria-label={menuOpen ? t('home.closeMenu') : t('home.openMenu')}
+              aria-expanded={menuOpen}
+              aria-controls="site-menu"
+            >
+              {menuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+            </button>
+          </div>
         </div>
-      )}
-    </header>
+
+        {menuOpen && (
+          <div
+            id="site-menu"
+            ref={menuRef}
+            className="site-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label={t('home.mobileNavigation')}
+          >
+            <nav className="cv-container" aria-label={t('home.mobileNavigation')}>
+              <ul className="site-menu__list">
+                {items.map((item) => {
+                  const active = item.isActive(pathname);
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="site-menu__link"
+                        aria-current={active ? 'page' : undefined}
+                        onClick={closeMenu}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+                {user && (
+                  <li>
+                    <Link
+                      href="/parametres"
+                      className="site-menu__link"
+                      aria-current={settingsActive ? 'page' : undefined}
+                      onClick={closeMenu}
+                    >
+                      {t('common.settings')}
+                    </Link>
+                  </li>
+                )}
+              </ul>
+
+              {!authLoading && (
+                <div className="site-menu__account">
+                  {user ? (
+                    <>
+                      <p className="site-menu__email m-0">{user.email}</p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          logout();
+                          closeMenu();
+                        }}
+                        className="site-header__quiet"
+                      >
+                        {t('common.logout')}
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link href="/login" className="site-header__quiet" onClick={closeMenu}>
+                        {t('common.login')}
+                      </Link>
+                      <Link href="/register" className="site-header__cta" onClick={closeMenu}>
+                        {t('common.register')}
+                      </Link>
+                    </>
+                  )}
+                </div>
+              )}
+            </nav>
+          </div>
+        )}
+      </header>
     </>
   );
 }
+
+/** En-tête de la couche marketing (landing, pages légales). L'app utilise `AppShell`. */
+export { AppHeader as MarketingHeader };

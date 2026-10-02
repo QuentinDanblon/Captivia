@@ -58,8 +58,8 @@ export default function Modal({
   hideCloseButton = false,
   initialFocusRef,
   className = '',
-  titleClassName = 'text-lg font-semibold mb-4 text-gray-900 dark:text-white',
-  descriptionClassName = 'text-sm text-gray-600 dark:text-gray-300 mb-4',
+  titleClassName = 'm-0 mb-4 pr-10 font-display text-h3 font-semibold text-ink',
+  descriptionClassName = 'm-0 mb-4 text-body text-ink-2',
 }: ModalProps) {
   const t = useTranslations('common');
   const isAlert = variant === 'alertdialog';
@@ -74,7 +74,7 @@ export default function Modal({
   return (
     <Dialog.Root open={open} onOpenChange={(v) => !v && dismissible && onClose()}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 animate-in fade-in" />
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-scrim motion-safe:animate-[cv-fade-in_150ms_ease-out]" />
         <Dialog.Content
           role={isAlert ? 'alertdialog' : 'dialog'}
           // Sans description, on neutralise aria-describedby pour éviter un lien vers un id inexistant.
@@ -99,9 +99,9 @@ export default function Modal({
           }}
           className={`
             fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50
-            w-[calc(100%-2rem)] ${SIZE_CLASSES[size]} max-h-[90vh] overflow-y-auto
-            bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6
-            animate-in fade-in zoom-in-95
+            w-[calc(100%-2rem)] ${SIZE_CLASSES[size]} max-h-[90dvh] overflow-y-auto overscroll-contain
+            rounded-card border border-line bg-surface p-6 text-ink shadow-overlay
+            pb-[max(1.5rem,env(safe-area-inset-bottom))] motion-safe:animate-[cv-rise_180ms_cubic-bezier(0.2,0.6,0.2,1)]
             ${className}
           `.trim()}
         >
@@ -115,7 +115,7 @@ export default function Modal({
               <button
                 type="button"
                 disabled={!dismissible}
-                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 disabled:opacity-50"
+                className="absolute top-3 right-3 inline-flex size-11 items-center justify-center rounded-control text-ink-2 transition-colors hover:bg-sunken hover:text-ink disabled:opacity-50"
                 aria-label={t('close')}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">

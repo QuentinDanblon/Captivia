@@ -404,7 +404,18 @@
     "legalNotice": "Aviso legal",
     "navLabel": "Informações legais",
     "sources": "Fontes e licenças",
-    "tagline": "Cuidar, simplesmente."
+    "tagline": "Cuidar, simplesmente.",
+    "description": "A caderneta de saúde, os lembretes de cuidados e as fichas de espécies com fontes dos seus animais, num só lugar."
+  },
+  "nav": {
+    "species": "Espécies",
+    "agenda": "Calendário",
+    "transparency": "Transparência",
+    "account": "Conta",
+    "guest": "Convidado",
+    "createAccount": "Criar conta",
+    "community": "Comunidade",
+    "soon": "Em breve"
   },
   "grade": {
     "bronze": "Bronze",

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
@@ -12,14 +12,33 @@ import { SiteFooter } from '@/components/SiteFooter';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import '../globals.css';
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
+/*
+ * Polices auto-hébergées au build par next/font (aucune requête vers Google à l'exécution :
+ * compatible avec l'export statique mobile et la CSP `font-src 'self'`). Voir docs/DESIGN.md.
+ *  - Fraunces : titres et noms latins (variable : opsz automatique, SOFT réglé en CSS).
+ *  - IBM Plex Sans : interface et texte courant (variable, graisses 400-600 utilisées).
+ *  - IBM Plex Mono : mesures, doses, dates, n° de puce (chiffres tabulaires).
+ */
+const fraunces = Fraunces({
+  variable: '--font-fraunces',
+  subsets: ['latin', 'latin-ext'],
+  style: ['normal', 'italic'],
+  axes: ['opsz', 'SOFT'],
+  display: 'swap',
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-jetbrains-mono',
-  subsets: ['latin'],
+const plexSans = IBM_Plex_Sans({
+  variable: '--font-plex-sans',
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: '--font-plex-mono',
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500'],
+  display: 'swap',
+  preload: false,
 });
 
 /**
@@ -50,7 +69,11 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#0aa678',
+  // Couleur de la barre du navigateur = papier de l'en-tête (clair / sombre).
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f6f3ec' },
+    { media: '(prefers-color-scheme: dark)', color: '#121714' },
+  ],
   viewportFit: 'cover',
 };
 
@@ -72,10 +95,8 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col w-full`}
-      >
+    <html lang={locale} className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}>
+      <body className="min-h-screen flex flex-col w-full bg-paper text-ink font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             <AppHeader />
