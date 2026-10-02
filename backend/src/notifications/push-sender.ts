@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import * as webPush from 'web-push';
 import { PrismaService } from '../prisma/prisma.service';
 import { readVapidConfig, VapidConfig } from './vapid.config';
+import { isAllowedPushEndpoint } from './push-endpoint';
 
 export type PushUrgency = 'very-low' | 'low' | 'normal' | 'high';
 
@@ -35,8 +36,8 @@ export interface PushDeliveryResult {
 
 /** Un rappel périmé n'a plus d'intérêt : 1 h de rétention max chez le service push. */
 export const DEFAULT_PUSH_TTL_SECONDS = 60 * 60;
-/** Évite qu'un service push lent bloque le cron de rappels. */
-const PUSH_REQUEST_TIMEOUT_MS = 10_000;
+/** Évite qu'un service push lent (ou un trou noir) bloque le cron de rappels. */
+export const PUSH_REQUEST_TIMEOUT_MS = 5_000;
 const DEFAULT_ICON = '/icons/icon-192.png';
 
 /** Codes HTTP renvoyés quand l'abonnement n'existe plus (désinstallation, permission retirée). */
@@ -44,6 +45,20 @@ const GONE_STATUS_CODES = new Set([404, 410]);
 
 const isNonEmptyString = (v: unknown): v is string =>
   typeof v === 'string' && v.length > 0;
+
+/**
+ * Échéance globale d'un envoi : le `timeout` de web-push est un délai d'INACTIVITÉ de la socket ;
+ * un service qui distille des octets pourrait le contourner. Au-delà de `ms`, l'envoi est compté
+ * en échec (la socket sera détruite par son propre délai d'inactivité).
+ */
+function withDeadline<T>(promise: Promise<T>, ms: number): Promise<T> {
+  let timer: NodeJS.Timeout | undefined;
+  const deadline = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`Push timeout (${ms} ms)`)), ms);
+    timer.unref?.();
+  });
+  return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
+}
 
 /**
  * Implémentation Web Push (VAPID, bibliothèque `web-push`).
@@ -117,24 +132,38 @@ export class WebPushSender implements PushSender {
 
     await Promise.all(
       subscriptions.map(async (sub) => {
+        // Revérifié à chaque envoi : une ligne enregistrée avant la liste blanche (ou insérée
+        // autrement que par l'API) ne doit jamais faire appeler une adresse arbitraire (SSRF).
+        if (!isAllowedPushEndpoint(sub.endpoint)) {
+          this.logger.warn(
+            `Abonnement push ${sub.id} ignoré : service push non autorisé.`,
+          );
+          result.failed++;
+          return;
+        }
         const keys = sub.keys as { p256dh?: unknown; auth?: unknown } | null;
         if (
           !keys ||
           !isNonEmptyString(keys.p256dh) ||
           !isNonEmptyString(keys.auth)
         ) {
-          this.logger.warn(`Abonnement push ${sub.id} ignoré : clés invalides.`);
+          this.logger.warn(
+            `Abonnement push ${sub.id} ignoré : clés invalides.`,
+          );
           result.failed++;
           return;
         }
         try {
-          await webPush.sendNotification(
-            {
-              endpoint: sub.endpoint,
-              keys: { p256dh: keys.p256dh, auth: keys.auth },
-            },
-            body,
-            options,
+          await withDeadline(
+            webPush.sendNotification(
+              {
+                endpoint: sub.endpoint,
+                keys: { p256dh: keys.p256dh, auth: keys.auth },
+              },
+              body,
+              options,
+            ),
+            PUSH_REQUEST_TIMEOUT_MS,
           );
           result.sent++;
         } catch (error) {

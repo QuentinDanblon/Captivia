@@ -1,6 +1,10 @@
 import * as webPush from 'web-push';
 import { PrismaService } from '../prisma/prisma.service';
-import { DEFAULT_PUSH_TTL_SECONDS, WebPushSender } from './push-sender';
+import {
+  DEFAULT_PUSH_TTL_SECONDS,
+  PUSH_REQUEST_TIMEOUT_MS,
+  WebPushSender,
+} from './push-sender';
 import { DEFAULT_VAPID_SUBJECT, readVapidConfig } from './vapid.config';
 
 jest.mock('web-push', () => ({
@@ -16,7 +20,7 @@ const KEYS = { publicKey: 'pub-key', privateKey: 'priv-key' };
 const sub = (id: string, extra: Record<string, unknown> = {}) => ({
   id,
   userId: 'u1',
-  endpoint: `https://push.example.com/${id}`,
+  endpoint: `https://fcm.googleapis.com/fcm/send/${id}`,
   keys: { p256dh: `p256dh-${id}`, auth: `auth-${id}` },
   ...extra,
 });
@@ -152,7 +156,7 @@ describe('WebPushSender', () => {
       expect(sendNotification).toHaveBeenCalledTimes(2);
       const [pushSub, body, options] = sendNotification.mock.calls[0];
       expect(pushSub).toEqual({
-        endpoint: 'https://push.example.com/a',
+        endpoint: 'https://fcm.googleapis.com/fcm/send/a',
         keys: { p256dh: 'p256dh-a', auth: 'auth-a' },
       });
       expect(JSON.parse(body)).toMatchObject({
@@ -283,6 +287,56 @@ describe('WebPushSender', () => {
       await expect(
         sender.deliver('u1', { title: 'T', body: 'B' }),
       ).resolves.toEqual({ sent: 0, failed: 0, removed: 1 });
+    });
+
+    it('re-checks the allowlist before sending: never calls an internal or unknown endpoint (SSRF)', async () => {
+      withKeys();
+      findMany.mockResolvedValue([
+        sub('internal', { endpoint: 'https://127.0.0.1:8443/admin' }),
+        sub('meta', { endpoint: 'https://169.254.169.254/latest' }),
+        sub('port', { endpoint: 'https://fcm.googleapis.com:444/x' }),
+        sub('other', { endpoint: 'https://push.example.com/x' }),
+        sub('ok'),
+      ]);
+      const sender = new WebPushSender(prisma);
+
+      const res = await sender.deliver('u1', { title: 'T', body: 'B' });
+
+      expect(res).toEqual({ sent: 1, failed: 4, removed: 0 });
+      expect(sendNotification).toHaveBeenCalledTimes(1);
+      expect(sendNotification.mock.calls[0][0].endpoint).toBe(
+        'https://fcm.googleapis.com/fcm/send/ok',
+      );
+      // Une ligne refusée n'est pas supprimée (la liste blanche peut évoluer).
+      expect(deleteMany).not.toHaveBeenCalled();
+    });
+
+    it(`uses a ${PUSH_REQUEST_TIMEOUT_MS} ms socket timeout and a hard deadline (a black hole cannot block the cron)`, async () => {
+      jest.useFakeTimers();
+      try {
+        withKeys();
+        findMany.mockResolvedValue([sub('slow'), sub('fast')]);
+        sendNotification.mockImplementation((s: { endpoint: string }) =>
+          s.endpoint.endsWith('/slow')
+            ? new Promise(() => undefined) // ne répond jamais
+            : Promise.resolve({ statusCode: 201 }),
+        );
+        const sender = new WebPushSender(prisma);
+
+        const pending = sender.deliver('u1', { title: 'T', body: 'B' });
+        await jest.advanceTimersByTimeAsync(PUSH_REQUEST_TIMEOUT_MS + 1);
+        await expect(pending).resolves.toEqual({
+          sent: 1,
+          failed: 1,
+          removed: 0,
+        });
+        expect(sendNotification.mock.calls[0][2].timeout).toBe(
+          PUSH_REQUEST_TIMEOUT_MS,
+        );
+        expect(PUSH_REQUEST_TIMEOUT_MS).toBe(5_000);
+      } finally {
+        jest.useRealTimers();
+      }
     });
   });
 });

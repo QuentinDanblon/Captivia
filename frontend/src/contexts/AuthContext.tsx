@@ -13,6 +13,7 @@ import {
   removeStorage,
   writeStorage,
 } from '@/lib/session';
+import { unsubscribeFromPush } from '@/lib/web-push';
 
 interface User {
   id: string;
@@ -236,6 +237,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = () => {
+    // Libère l'abonnement push de CE navigateur (serveur puis navigateur), en best effort et
+    // sans attendre : sinon les rappels du compte continuaient d'arriver après la déconnexion.
+    const accessToken = readStorage(TOKEN_KEY) ?? token;
+    if (accessToken) {
+      void unsubscribeFromPush(accessToken).catch(() => false);
+    }
     revokeRefreshToken(readStorage(REFRESH_TOKEN_KEY));
     clearSession();
   };

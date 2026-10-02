@@ -101,7 +101,7 @@ describe('Free animal limit and push subscriptions (W1-08)', () => {
 
   describe('push subscriptions', () => {
     const endpoint = () =>
-      `https://push.example.com/send/${stamp}-${Math.random().toString(36).slice(2)}`;
+      `https://fcm.googleapis.com/fcm/send/${stamp}-${Math.random().toString(36).slice(2)}`;
     const keys = { p256dh: 'BKey-p256dh', auth: 'auth-secret' };
     let owner: { token: string; id: string };
     let other: { token: string; id: string };
