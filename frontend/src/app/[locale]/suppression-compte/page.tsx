@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { LEGAL } from '@/lib/legal';
 
 // Contact unique défini dans lib/legal.ts (à compléter par le propriétaire).

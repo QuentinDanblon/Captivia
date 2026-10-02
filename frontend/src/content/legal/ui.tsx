@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import Link from 'next/link';
-import { isLegalMarker, localizedPath } from '@/lib/legal';
+import { Link } from '@/i18n/navigation';
+import { isLegalMarker } from '@/lib/legal';
 
 /** Briques de mise en forme partagées par les contenus légaux FR et EN. */
 
@@ -60,7 +60,7 @@ export function A({ href, children }: { href: string; children: ReactNode }) {
 /** Lien interne, préfixé par la locale courante. */
 export function ILink({ locale, href, children }: { locale: string; href: string; children: ReactNode }) {
   return (
-    <Link href={localizedPath(locale, href)} className={linkClass}>
+    <Link href={href} locale={locale} className={linkClass}>
       {children}
     </Link>
   );

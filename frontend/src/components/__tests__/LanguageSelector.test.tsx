@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/navigation';
 import { LanguageSelector } from '../LanguageSelector';
 
 // Mock next-intl/routing (ESM) so i18n/routing can load
@@ -17,9 +17,9 @@ jest.mock('next-intl', () => ({
   useTranslations: jest.fn(() => (key: string) => key),
 }));
 
-jest.mock('next/navigation', () => ({
+jest.mock('@/i18n/navigation', () => ({
   useRouter: jest.fn(() => ({
-    push: jest.fn(),
+    replace: jest.fn(),
   })),
   usePathname: jest.fn(() => '/'),
 }));
@@ -55,59 +55,43 @@ describe('LanguageSelector', () => {
     });
   });
 
-  it('should call router.push when language changes', () => {
-    const mockPush = jest.fn();
-    jest.mocked(useRouter).mockReturnValue({ push: mockPush } as unknown as ReturnType<typeof useRouter>);
-    
+  beforeEach(() => {
+    jest.mocked(useLocale).mockReturnValue('fr');
+    jest.mocked(usePathname).mockReturnValue('/');
+  });
+
+  function setup(locale: string, pathname: string) {
+    const replace = jest.fn();
+    jest.mocked(useRouter).mockReturnValue({ replace } as unknown as ReturnType<typeof useRouter>);
+    jest.mocked(useLocale).mockReturnValue(locale);
+    jest.mocked(usePathname).mockReturnValue(pathname);
     render(<LanguageSelector />);
-    
-    const select = screen.getByRole('combobox');
+    return { replace, select: screen.getByRole('combobox') };
+  }
+
+  it('calls router.replace(pathname, { locale }) when the language changes', () => {
+    const { replace, select } = setup('fr', '/');
     fireEvent.change(select, { target: { value: 'en' } });
-    
-    expect(mockPush).toHaveBeenCalledWith('/en/');
+    expect(replace).toHaveBeenCalledWith('/', { locale: 'en' });
   });
 
-  it('should handle locale change from fr to en', () => {
-    const mockPush = jest.fn();
-    jest.mocked(useRouter).mockReturnValue({ push: mockPush } as unknown as ReturnType<typeof useRouter>);
-    
-    jest.mocked(usePathname).mockReturnValue('/mes-animaux');
-    
-    render(<LanguageSelector />);
-    
-    const select = screen.getByRole('combobox');
-    fireEvent.change(select, { target: { value: 'en' } });
-    
-    expect(mockPush).toHaveBeenCalledWith('/en/mes-animaux');
-  });
-
-  it('should remove locale prefix when changing to fr (default locale)', () => {
-    const mockPush = jest.fn();
-    jest.mocked(useRouter).mockReturnValue({ push: mockPush } as unknown as ReturnType<typeof useRouter>);
-    
-    jest.mocked(useLocale).mockReturnValue('en');
-    
-    jest.mocked(usePathname).mockReturnValue('/en/species/123');
-    
-    render(<LanguageSelector />);
-    
-    const select = screen.getByRole('combobox');
-    fireEvent.change(select, { target: { value: 'fr' } });
-    
-    expect(mockPush).toHaveBeenCalledWith('/species/123');
-  });
-
-  it('should preserve pathname structure when changing language', () => {
-    const mockPush = jest.fn();
-    jest.mocked(useRouter).mockReturnValue({ push: mockPush } as unknown as ReturnType<typeof useRouter>);
-    
-    jest.mocked(usePathname).mockReturnValue('/fr/species/123');
-    
-    render(<LanguageSelector />);
-    
-    const select = screen.getByRole('combobox');
+  it('keeps the current pathname when switching locale', () => {
+    const { replace, select } = setup('fr', '/mes-animaux');
     fireEvent.change(select, { target: { value: 'es' } });
-    
-    expect(mockPush).toHaveBeenCalledWith('/es/species/123');
+    expect(replace).toHaveBeenCalledWith('/mes-animaux', { locale: 'es' });
+  });
+
+  it('switches back to fr from en (default locale) via replace(pathname, { locale: "fr" })', () => {
+    const { replace, select } = setup('en', '/species/123');
+    fireEvent.change(select, { target: { value: 'fr' } });
+    expect(replace).toHaveBeenCalledWith('/species/123', { locale: 'fr' });
+  });
+
+  it('preserves the query string', () => {
+    window.history.pushState({}, '', '/mes-animaux?filter=cats');
+    const { replace, select } = setup('en', '/mes-animaux');
+    fireEvent.change(select, { target: { value: 'fr' } });
+    expect(replace).toHaveBeenCalledWith('/mes-animaux?filter=cats', { locale: 'fr' });
+    window.history.pushState({}, '', '/');
   });
 });

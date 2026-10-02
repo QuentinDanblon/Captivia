@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, type Animal as ApiAnimal, type SpeciesRoutineTemplate } from '@/lib/api';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 interface Animal extends ApiAnimal {
   speciesName?: string;

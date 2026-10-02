@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, type Animal, type Medication, type VetAppointment, type AnimalMeasurement, type Vaccination, type BreedingRecord, type SpeciesRoutineTemplate } from '@/lib/api';
 import WeightChart from '@/components/WeightChart';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 
 interface RoutineSchedule {
   time?: string;

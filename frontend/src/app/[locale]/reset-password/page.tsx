@@ -2,8 +2,9 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { api } from '@/lib/api';
 
 function ResetPasswordForm() {

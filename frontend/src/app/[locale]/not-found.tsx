@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 /**
  * 404 Captivia, rendue dans le layout [locale] (en-tête, traductions).
@@ -9,7 +9,6 @@ import { useLocale, useTranslations } from 'next-intl';
  */
 export default function LocaleNotFound() {
   const t = useTranslations('errors');
-  const locale = useLocale();
 
   return (
     <section
@@ -27,7 +26,7 @@ export default function LocaleNotFound() {
       </h1>
       <p className="mt-3 max-w-md text-base text-[var(--captivia-muted)]">{t('notFoundDescription')}</p>
       <Link
-        href={`/${locale}`}
+        href="/"
         className="mt-8 inline-flex items-center justify-center rounded-xl bg-[#067256] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#055a44] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#067256]"
       >
         {t('backHome')}

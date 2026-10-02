@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect } from 'react';
-import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 /**
  * Erreur de rendu d'un segment de route (rendue dans le layout [locale]).
@@ -16,7 +16,6 @@ export default function LocaleError({
   reset: () => void;
 }) {
   const t = useTranslations('errors');
-  const locale = useLocale();
 
   useEffect(() => {
     // Chargé à la demande : @sentry/nextjs ne pèse pas sur les pages sans erreur.
@@ -48,7 +47,7 @@ export default function LocaleError({
           {t('retry')}
         </button>
         <Link
-          href={`/${locale}`}
+          href="/"
           className="inline-flex items-center justify-center rounded-xl border border-[var(--captivia-border-strong)] px-6 py-3 text-sm font-semibold text-[var(--captivia-ink)] transition-colors hover:bg-[var(--captivia-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#067256]"
         >
           {t('backHome')}
