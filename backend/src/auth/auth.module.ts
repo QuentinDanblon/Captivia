@@ -5,6 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { GuestPurgeService } from './guest-purge.service';
 import { ACCESS_TOKEN_TTL, JWT_ALGORITHM } from './auth.constants';
 import { MailModule } from '../mail/mail.module';
 
@@ -31,7 +32,7 @@ import { MailModule } from '../mail/mail.module';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
-  exports: [AuthService],
+  providers: [AuthService, JwtStrategy, GuestPurgeService],
+  exports: [AuthService, GuestPurgeService],
 })
 export class AuthModule {}

@@ -178,3 +178,20 @@ export class AuthRateLimitGuard extends BaseRateLimitGuard {
     super('auth', 10, 60);
   }
 }
+
+/** Créations de comptes invités autorisées par IP et par heure (POST /auth/guest). */
+export const GUEST_CREATION_LIMIT = 5;
+export const GUEST_CREATION_WINDOW_SECONDS = 60 * 60;
+
+/**
+ * Création de comptes invités (POST /auth/guest) : 5 par heure et par IP. Route anonyme qui
+ * écrit en base : la limite empêche la création massive de comptes. Pas de captcha côté client
+ * aujourd'hui ; une session invité existante est réutilisée par l'app (aucune création à
+ * chaque lancement), et les invités inactifs sont purgés (GUEST_RETENTION_DAYS).
+ */
+@Injectable()
+export class GuestCreationRateLimitGuard extends BaseRateLimitGuard {
+  constructor() {
+    super('guest', GUEST_CREATION_LIMIT, GUEST_CREATION_WINDOW_SECONDS);
+  }
+}

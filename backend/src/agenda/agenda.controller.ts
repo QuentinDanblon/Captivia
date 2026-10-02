@@ -18,6 +18,7 @@ import {
 } from '@nestjs/swagger';
 import type { Response } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { GuestForbidden, NoGuestGuard } from '../common/guest';
 import { AgendaService } from './agenda.service';
 import { AgendaFeedQueryDto, AgendaQueryDto } from './dto/agenda-query.dto';
 
@@ -95,7 +96,9 @@ export class AgendaController {
 
   @Post('agenda/calendar-token')
   @HttpCode(201)
-  @UseGuards(JwtAuthGuard)
+  // Mode invité : s'abonner au flux ICS exige un compte (403 GUEST_ACCOUNT).
+  @UseGuards(JwtAuthGuard, NoGuestGuard)
+  @GuestForbidden('calendar_feed')
   @ApiBearerAuth()
   @ApiOperation({
     summary: '(Re)génère le jeton du flux iCalendar',

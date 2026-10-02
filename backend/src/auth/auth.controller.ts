@@ -27,7 +27,12 @@ import {
   VerifyEmailDto,
 } from './dto/refresh-token.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { AuthRateLimitGuard } from '../common/guards/rate-limit.guard';
+import {
+  AuthRateLimitGuard,
+  GuestCreationRateLimitGuard,
+} from '../common/guards/rate-limit.guard';
+import { CreateGuestDto, UpgradeGuestDto } from './dto/guest.dto';
+import { GuestForbidden, NoGuestGuard } from '../common/guest';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -44,6 +49,49 @@ export class AuthController {
     @Headers('user-agent') userAgent?: string,
   ) {
     return this.authService.register(registerDto, { userAgent });
+  }
+
+  @Post('guest')
+  // Création anonyme : limite stricte par IP (anti-création massive de comptes).
+  @UseGuards(GuestCreationRateLimitGuard)
+  @ApiOperation({
+    summary:
+      'Start a guest session (« Essayer sans compte ») : creates a guest account without e-mail or password and returns {accessToken, refreshToken, user}',
+  })
+  @ApiResponse({ status: 201, description: 'Guest account created' })
+  @ApiResponse({
+    status: 429,
+    description: 'Too many guest accounts from this IP',
+  })
+  async guest(
+    @Body() dto: CreateGuestDto,
+    @Headers('user-agent') userAgent?: string,
+  ) {
+    return this.authService.createGuest(dto, { userAgent });
+  }
+
+  @Post('upgrade')
+  @UseGuards(AuthRateLimitGuard, JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary:
+      'Convert the authenticated guest into an account (same user, data kept): e-mail, password, terms and age, like /auth/register. Returns a new token pair.',
+  })
+  @ApiResponse({ status: 201, description: 'Account created from the guest' })
+  @ApiResponse({
+    status: 403,
+    description: 'Not a guest account (NOT_A_GUEST)',
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'Email already registered (no merge)',
+  })
+  async upgrade(
+    @Request() req: { user: { id: string } },
+    @Body() dto: UpgradeGuestDto,
+    @Headers('user-agent') userAgent?: string,
+  ) {
+    return this.authService.upgradeGuest(req.user.id, dto, { userAgent });
   }
 
   @Post('login')
@@ -115,7 +163,8 @@ export class AuthController {
 
   @Post('resend-verification')
   @HttpCode(HttpStatus.OK)
-  @UseGuards(AuthRateLimitGuard, JwtAuthGuard)
+  @UseGuards(AuthRateLimitGuard, JwtAuthGuard, NoGuestGuard)
+  @GuestForbidden('email_verification')
   @ApiBearerAuth()
   @ApiOperation({
     summary:
@@ -147,7 +196,8 @@ export class AuthController {
 
   @Post('change-password')
   @HttpCode(HttpStatus.OK)
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, NoGuestGuard)
+  @GuestForbidden('password')
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Change password (authenticated user)' })
   @ApiResponse({ status: 200, description: 'Password updated' })

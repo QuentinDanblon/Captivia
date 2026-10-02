@@ -20,10 +20,21 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
     let message = 'Internal server error';
+    // Code machine facultatif (ex. GUEST_ACCOUNT, EMAIL_NOT_VERIFIED) et action associée :
+    // transmis tels quels pour que le client adapte son message (jamais de détail interne).
+    let code: string | undefined;
+    let action: string | undefined;
 
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       message = exception.message;
+      const body = exception.getResponse();
+      if (body && typeof body === 'object') {
+        const { code: c, action: a } = body as Record<string, unknown>;
+        if (typeof c === 'string' && /^[A-Z][A-Z0-9_]{0,63}$/.test(c)) code = c;
+        if (typeof a === 'string' && /^[a-z][a-z0-9_]{0,63}$/.test(a))
+          action = a;
+      }
     }
 
     // Les erreurs serveur (>= 500) et toute exception non-HTTP sont journalisées avec leur
@@ -53,6 +64,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     response.status(status).json({
       statusCode: status,
       message,
+      ...(code ? { code } : {}),
+      ...(action ? { action } : {}),
       timestamp: new Date().toISOString(),
       path: request.url,
     });

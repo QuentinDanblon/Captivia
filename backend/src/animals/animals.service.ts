@@ -14,8 +14,16 @@ import {
 } from '../common/operators';
 import { EntitlementService } from '../entitlement/entitlement.service';
 import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
+import { ensureNotGuest } from '../common/guest';
 
-const FREE_ANIMAL_LIMIT = 1;
+/**
+ * D-16 : le carnet de santé est complet pour tous ; la seule limite de l'offre gratuite est le
+ * nombre d'animaux. Invité et compte gratuit : 1 animal ; Premium (compte + abonnement) : plusieurs.
+ */
+export const FREE_ANIMAL_LIMIT = 1;
+
+/** Code de la 403 « limite d'animaux atteinte » (le client propose compte et/ou Premium). */
+export const ANIMAL_LIMIT_CODE = 'ANIMAL_LIMIT';
 
 /** Locales supportées pour construire l'URL publique (liste blanche, défaut : fr). */
 export const PUBLIC_LINK_LOCALES = [
@@ -102,15 +110,21 @@ export class AnimalsService {
         throw new NotFoundException('User not found');
       }
 
+      // Plusieurs animaux = compte ET Premium : un invité reste à 1 animal quoi qu'il arrive.
       if (
         user._count.animals >= FREE_ANIMAL_LIMIT &&
-        !isEffectivelyPremium(user) &&
-        // Abonnement store (W6-08) : requête unique dans la transaction verrouillée.
-        !(await this.entitlement.isPremium(userId, tx))
+        (user.isGuest ||
+          (!isEffectivelyPremium(user) &&
+            // Abonnement store (W6-08) : requête unique dans la transaction verrouillée.
+            !(await this.entitlement.isPremium(userId, tx))))
       ) {
-        throw new ForbiddenException(
-          'Free users can only have 1 animal. Upgrade to premium for unlimited animals.',
-        );
+        throw new ForbiddenException({
+          statusCode: 403,
+          code: ANIMAL_LIMIT_CODE,
+          message: user.isGuest
+            ? 'Free users can only have 1 animal. Create an account, then subscribe to Premium for more animals.'
+            : 'Free users can only have 1 animal. Upgrade to premium for unlimited animals.',
+        });
       }
 
       // Module F — validation parenté (existence, même propriétaire, sexe)
@@ -383,6 +397,12 @@ export class AnimalsService {
   }
 
   private async assertPremium(userId: string): Promise<void> {
+    // Mode invité : publier une page publique exige un compte (403 GUEST_ACCOUNT, avant tout).
+    const account = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { isGuest: true },
+    });
+    ensureNotGuest(account, 'public_link');
     if (!(await this.entitlement.isPremium(userId))) {
       throw new ForbiddenException(
         'Premium subscription required to share a public page for your animal.',

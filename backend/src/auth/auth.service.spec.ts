@@ -51,6 +51,8 @@ describe('AuthService', () => {
     termsAcceptedAt: new Date(),
     termsVersion: CURRENT_TERMS_VERSION,
     emailVerifiedAt: null as Date | null,
+    isGuest: false,
+    lastActiveAt: new Date(),
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -60,6 +62,7 @@ describe('AuthService', () => {
       findUnique: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
+      updateMany: jest.fn().mockResolvedValue({ count: 1 }),
     },
     passwordResetToken: {
       findUnique: jest.fn(),
@@ -140,6 +143,7 @@ describe('AuthService', () => {
         user: {
           id: mockUser.id,
           email: mockUser.email,
+          isGuest: false,
           locale: mockUser.locale,
           role: UserRole.USER,
           isPremium: mockUser.isPremium,
@@ -259,6 +263,7 @@ describe('AuthService', () => {
         user: {
           id: mockUser.id,
           email: mockUser.email,
+          isGuest: false,
           locale: mockUser.locale,
           role: UserRole.USER,
           isPremium: mockUser.isPremium,
@@ -329,6 +334,7 @@ describe('AuthService', () => {
       expect(result).toEqual({
         id: mockUser.id,
         email: mockUser.email,
+        isGuest: false,
         locale: mockUser.locale,
         role: UserRole.USER,
         isPremium: mockUser.isPremium,
