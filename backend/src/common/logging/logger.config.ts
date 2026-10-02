@@ -26,6 +26,16 @@ export function genReqId(req: IncomingMessage, res: ServerResponse): string {
   return id;
 }
 
+/**
+ * Masque la valeur du paramètre `token` d'une URL (jeton du flux iCalendar « Agenda des soins » :
+ * un secret transporté en query string ne doit pas finir dans les logs d'accès).
+ */
+export function redactTokenInUrl(url: unknown): unknown {
+  return typeof url === 'string'
+    ? url.replace(/([?&]token=)[^&#]*/gi, '$1[REDACTED]')
+    : url;
+}
+
 export function buildLoggerParams(): Params {
   const env = process.env.NODE_ENV;
   const production = env === 'production';
@@ -33,7 +43,22 @@ export function buildLoggerParams(): Params {
     pinoHttp: {
       level: env === 'test' ? 'silent' : resolvePinoLevel(),
       genReqId,
-      customProps: (req) => ({ reqId: (req as IncomingMessage & { id?: string }).id }),
+      serializers: {
+        // Reçoit la requête déjà sérialisée par pino-std-serializers (wrapRequestSerializer).
+        req: (serialized: Record<string, unknown>) => ({
+          ...serialized,
+          url: redactTokenInUrl(serialized.url),
+          query:
+            serialized.query &&
+            typeof serialized.query === 'object' &&
+            'token' in serialized.query
+              ? { ...serialized.query, token: '[REDACTED]' }
+              : serialized.query,
+        }),
+      },
+      customProps: (req) => ({
+        reqId: (req as IncomingMessage & { id?: string }).id,
+      }),
       redact: {
         paths: [
           'req.headers.authorization',

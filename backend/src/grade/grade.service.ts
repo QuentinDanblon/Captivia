@@ -81,7 +81,7 @@ const DAY_NAME_TO_INDEX: Record<string, number> = {
   saturday: 6,
 };
 
-interface NormalizedSchedule {
+export interface NormalizedSchedule {
   time?: string;
   recurrence?: string;
   date?: string;
@@ -170,7 +170,7 @@ export function normalizeSchedule(raw: unknown): NormalizedSchedule {
 }
 
 /** Vérifie si la récurrence d'un schedule correspond au jour demandé. */
-function matchesSchedule(
+export function matchesSchedule(
   sch: NormalizedSchedule,
   todayStr: string,
   dayOfWeek: number,
@@ -199,6 +199,34 @@ function matchesSchedule(
     return false;
   }
   return true;
+}
+
+/**
+ * Occurrences d'un schedule pour la journée (UTC) de `date` : 1 événement, ou une grille horaire
+ * (≤ 24) si `hourly`. Partagé avec l'Agenda des soins : la vue « à venir » reste strictement
+ * identique aux rappels réellement générés.
+ */
+export function scheduleOccurrences(
+  sch: NormalizedSchedule,
+  rec: string,
+  time: string | undefined,
+  date: Date,
+): Date[] {
+  if (rec === 'hourly') {
+    const interval = Math.max(1, Math.min(24, sch.intervalHours ?? 2));
+    const [startH] = parseTime(time);
+    const out: Date[] = [];
+    for (let hour = startH; hour < 24; hour += interval) {
+      const at = new Date(date);
+      at.setUTCHours(hour, 0, 0, 0);
+      out.push(at);
+    }
+    return out;
+  }
+  const [h, m] = parseTime(time);
+  const at = new Date(date);
+  at.setUTCHours(h, m, 0, 0);
+  return [at];
 }
 
 /** Événement à créer (avant insertion groupée). `sourceKey` = clé d'idempotence (unique par user + date). */
@@ -245,21 +273,7 @@ export class GradeService {
     time: string | undefined,
     date: Date,
   ): Date[] {
-    if (rec === 'hourly') {
-      const interval = Math.max(1, Math.min(24, sch.intervalHours ?? 2));
-      const [startH] = parseTime(time);
-      const out: Date[] = [];
-      for (let hour = startH; hour < 24; hour += interval) {
-        const at = new Date(date);
-        at.setUTCHours(hour, 0, 0, 0);
-        out.push(at);
-      }
-      return out;
-    }
-    const [h, m] = parseTime(time);
-    const at = new Date(date);
-    at.setUTCHours(h, m, 0, 0);
-    return [at];
+    return scheduleOccurrences(sch, rec, time, date);
   }
 
   async getOrCreateTodayEvents(
