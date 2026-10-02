@@ -47,6 +47,22 @@
     "notes": "Notizen",
     "type": "Typ"
   },
+  "publicLink": {
+    "enableLabel": "Öffentlicher Link aktiv",
+    "enableHelp": "Wer den QR-Code scannt, sieht Name, Art, Geschlecht, Geburtsjahr und Foto deines Tieres. Deine Notizen werden nie geteilt.",
+    "showHealthLabel": "Impfungen anzeigen",
+    "showHealthHelp": "Zeigt Name und Datum der Impfungen auf der öffentlichen Seite an (ohne Notizen oder Details).",
+    "regenerate": "Link neu erzeugen",
+    "regenerateConfirm": "Der alte Link und bereits gedruckte QR-Codes funktionieren sofort nicht mehr. Fortfahren?",
+    "premiumRequired": "Das öffentliche Teilen ist Premium-Konten vorbehalten.",
+    "updateError": "Der öffentliche Link konnte nicht aktualisiert werden.",
+    "disabledHint": "Aktiviere den öffentlichen Link, um einen QR-Code zu erhalten.",
+    "pageNotFound": "Diese Seite ist nicht verfügbar oder der Link wurde deaktiviert.",
+    "bornIn": "Geboren {year}",
+    "vaccinations": "Impfungen",
+    "noVaccinations": "Keine Impfungen erfasst",
+    "readOnly": "öffentliche Seite (nur Lesezugriff)"
+  },
   "animals": {
     "addAnimal": "Tier hinzufügen",
     "addFirstAnimal": "Füge dein erstes Tier hinzu",

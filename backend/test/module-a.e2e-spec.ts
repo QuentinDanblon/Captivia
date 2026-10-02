@@ -530,8 +530,11 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
+      // W0-07 : refresh ne supprime que les événements `pending` ; l'événement déjà
+      // traité (done, ci-dessus) est conservé et ne doit pas être recréé.
       const medEvents = res.body.filter(
-        (e: { type: string }) => e.type === 'medication',
+        (e: { type: string; status: string }) =>
+          e.type === 'medication' && e.status === 'pending',
       );
       expect(medEvents.length).toBe(0);
     });

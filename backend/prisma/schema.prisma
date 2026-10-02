@@ -60,6 +60,9 @@ model Animal {
   photos     String[] // URLs
   notes      String?
   publicSlug String?   @unique // slug pour page publique / QR (Premium)
+  // W0-06 — partage public (QR) en opt-in : désactivé par défaut, révocable (regénération du slug)
+  publicEnabled    Boolean @default(false)
+  publicShowHealth Boolean @default(false) // affiche les vaccinations (nom + date) sur la page publique
   // Module F — parenté & groupement (éleveurs)
   fatherId  String? // FK -> Animal.id (père, SetNull à la suppression)
   motherId  String? // FK -> Animal.id (mère, SetNull à la suppression)
@@ -313,6 +316,9 @@ model NotificationEvent {
   appointmentId  String?  // optionnel : lien vers un RDV vétérinaire (Module A)
   vaccinationId  String?  // optionnel : lien vers un rappel vaccin (Module C)
   animalId       String?  // optionnel : animal concerné
+  // W0-07 — clé d'idempotence : "routine:<id>" | "medication:<id>" | "appointment:<id>" | "vaccination:<id>" | "pref:<type>".
+  // Nullable : les anciens créateurs d'événements sans clé ne sont pas dédupliqués (NULL distincts en SQL).
+  sourceKey      String?
   createdAt      DateTime @default(now()) @db.Timestamptz(3)
   updatedAt      DateTime @updatedAt @db.Timestamptz(3)
 
@@ -332,6 +338,7 @@ model NotificationEvent {
   @@index([appointmentId])
   @@index([vaccinationId])
   @@index([userId, status, scheduledAt])
+  @@unique([userId, sourceKey, scheduledAt])
 }
 
 // ============================================

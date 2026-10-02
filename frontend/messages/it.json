@@ -47,6 +47,22 @@
     "notes": "Note",
     "type": "Tipo"
   },
+  "publicLink": {
+    "enableLabel": "Link pubblico attivo",
+    "enableHelp": "Chiunque scansioni il codice QR vede nome, specie, sesso, anno di nascita e foto del tuo animale. Le tue note non vengono mai condivise.",
+    "showHealthLabel": "Mostra le vaccinazioni",
+    "showHealthHelp": "Aggiunge nome e data delle vaccinazioni alla pagina pubblica (senza note né dettagli).",
+    "regenerate": "Rigenera il link",
+    "regenerateConfirm": "Il vecchio link e i codici QR già stampati smetteranno subito di funzionare. Continuare?",
+    "premiumRequired": "La condivisione pubblica è riservata agli account Premium.",
+    "updateError": "Impossibile aggiornare il link pubblico.",
+    "disabledHint": "Attiva il link pubblico per ottenere un codice QR.",
+    "pageNotFound": "Questa pagina non è disponibile o il link è stato disattivato.",
+    "bornIn": "Nato/a nel {year}",
+    "vaccinations": "Vaccinazioni",
+    "noVaccinations": "Nessuna vaccinazione registrata",
+    "readOnly": "pagina pubblica (sola lettura)"
+  },
   "animals": {
     "addAnimal": "Aggiungi animale",
     "addFirstAnimal": "Aggiungi il tuo primo animale per iniziare",

@@ -47,6 +47,22 @@
     "notes": "Notas",
     "type": "Tipo"
   },
+  "publicLink": {
+    "enableLabel": "Link público ativo",
+    "enableHelp": "Quem ler o código QR vê o nome, a espécie, o sexo, o ano de nascimento e a foto do seu animal. As suas notas nunca são partilhadas.",
+    "showHealthLabel": "Mostrar as vacinas",
+    "showHealthHelp": "Adiciona o nome e a data das vacinas à página pública (sem notas nem detalhes).",
+    "regenerate": "Regenerar o link",
+    "regenerateConfirm": "O link antigo e os códigos QR já impressos deixam de funcionar imediatamente. Continuar?",
+    "premiumRequired": "A partilha pública está reservada a contas Premium.",
+    "updateError": "Não foi possível atualizar o link público.",
+    "disabledHint": "Ative o link público para obter um código QR.",
+    "pageNotFound": "Esta página não está disponível ou o link foi desativado.",
+    "bornIn": "Nascido/a em {year}",
+    "vaccinations": "Vacinas",
+    "noVaccinations": "Nenhuma vacina registada",
+    "readOnly": "página pública (só de leitura)"
+  },
   "animals": {
     "addAnimal": "Adicionar animal",
     "addFirstAnimal": "Adicione seu primeiro animal para começar",

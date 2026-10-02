@@ -524,8 +524,11 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
         .get(`/users/me/notification-events?date=${todayStr()}&refresh=1`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
+      // W0-07 : refresh ne supprime que les événements `pending` ; l'événement déjà
+      // traité (done, ci-dessus) est conservé et ne doit pas être recréé.
       const vacEvents = res.body.filter(
-        (e: { type: string }) => e.type === 'vaccination',
+        (e: { type: string; status: string }) =>
+          e.type === 'vaccination' && e.status === 'pending',
       );
       expect(vacEvents.length).toBe(0);
     });

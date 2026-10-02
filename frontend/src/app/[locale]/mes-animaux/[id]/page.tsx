@@ -205,6 +205,10 @@ export default function AnimalDetailPage({
   const [qrUrl, setQrUrl] = useState('');
   const [qrLoading, setQrLoading] = useState(false);
   const [qrError, setQrError] = useState('');
+  // W0-06 — partage public (QR) en opt-in ; l'URL est construite par le backend
+  const [publicLink, setPublicLink] = useState<Awaited<ReturnType<typeof api.getAnimalPublicLink>> | null>(null);
+  const [publicLinkBusy, setPublicLinkBusy] = useState(false);
+  const [publicLinkError, setPublicLinkError] = useState('');
   // Traitements médicaux
   const [medications, setMedications] = useState<Medication[]>([]);
   const [medicationsLoading, setMedicationsLoading] = useState(true);
@@ -1380,16 +1384,76 @@ export default function AnimalDetailPage({
     }
   };
 
+  // W0-06 — charge l'état du partage public (désactivé par défaut)
+  const publicLinkAnimalId = animal?.id;
+  const publicLinkLocale = resolvedParams?.locale;
+  useEffect(() => {
+    if (!publicLinkAnimalId || !token || !publicLinkLocale) return;
+    let cancelled = false;
+    api
+      .getAnimalPublicLink(publicLinkAnimalId, token, publicLinkLocale)
+      .then((state) => {
+        if (!cancelled) setPublicLink(state);
+      })
+      .catch(() => {
+        if (!cancelled) setPublicLink(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [publicLinkAnimalId, token, publicLinkLocale]);
+
+  const updatePublicLink = async (body: { enabled?: boolean; showHealth?: boolean }) => {
+    if (!animal || !token || !resolvedParams?.locale || publicLinkBusy) return;
+    setPublicLinkBusy(true);
+    setPublicLinkError('');
+    try {
+      const state = await api.updateAnimalPublicLink(animal.id, token, body, resolvedParams.locale);
+      setPublicLink(state);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message.toLowerCase() : '';
+      setPublicLinkError(
+        msg.includes('premium') || msg.includes('403') || msg.includes('forbidden')
+          ? t('publicLink.premiumRequired')
+          : t('publicLink.updateError'),
+      );
+    } finally {
+      setPublicLinkBusy(false);
+    }
+  };
+
+  const regeneratePublicLink = async () => {
+    if (!animal || !token || !resolvedParams?.locale || publicLinkBusy) return;
+    if (typeof window !== 'undefined' && !window.confirm(t('publicLink.regenerateConfirm'))) return;
+    setPublicLinkBusy(true);
+    setPublicLinkError('');
+    try {
+      const state = await api.regenerateAnimalPublicLink(animal.id, token, resolvedParams.locale);
+      setPublicLink(state);
+      setQrDataUrl('');
+      setQrUrl('');
+    } catch (e) {
+      const msg = e instanceof Error ? e.message.toLowerCase() : '';
+      setPublicLinkError(
+        msg.includes('premium') || msg.includes('403') || msg.includes('forbidden')
+          ? t('publicLink.premiumRequired')
+          : t('publicLink.updateError'),
+      );
+    } finally {
+      setPublicLinkBusy(false);
+    }
+  };
+
   const handleOpenQR = async () => {
-    if (!animal || !token || !resolvedParams?.locale) return;
+    // L'URL du QR est celle renvoyée par l'API (jamais window.location.origin)
+    if (!animal || !publicLink?.enabled || !publicLink.url) return;
     setQrLoading(true);
     setShowQRModal(true);
     setQrDataUrl('');
     setQrUrl('');
     setQrError('');
     try {
-      const baseUrl = typeof window !== 'undefined' ? `${window.location.origin}/${resolvedParams.locale}` : '';
-      const { url } = await api.getAnimalPublicLink(animal.id, token, baseUrl);
+      const url = publicLink.url;
       const QRCodeModule = await import('qrcode');
       const dataUrl = await QRCodeModule.default.toDataURL(url, { width: 280, margin: 2 });
       setQrDataUrl(dataUrl);
@@ -1967,10 +2031,67 @@ export default function AnimalDetailPage({
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                 {t('premiumLock.qrCodeHelp')}
               </p>
+              {/* W0-06 — partage public en opt-in (désactivé par défaut) */}
+              <div className="mb-4 space-y-3">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    role="switch"
+                    className="mt-1 h-5 w-5 accent-emerald-600"
+                    checked={!!publicLink?.enabled}
+                    disabled={publicLinkBusy || !publicLink}
+                    onChange={(e) => updatePublicLink({ enabled: e.target.checked })}
+                  />
+                  <span>
+                    <span className="block text-sm font-medium text-gray-800 dark:text-white">
+                      {t('publicLink.enableLabel')}
+                    </span>
+                    <span className="block text-xs text-gray-500 dark:text-gray-400">
+                      {t('publicLink.enableHelp')}
+                    </span>
+                  </span>
+                </label>
+                {publicLink?.enabled && (
+                  <>
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        role="switch"
+                        className="mt-1 h-5 w-5 accent-emerald-600"
+                        checked={publicLink.showHealth}
+                        disabled={publicLinkBusy}
+                        onChange={(e) => updatePublicLink({ showHealth: e.target.checked })}
+                      />
+                      <span>
+                        <span className="block text-sm font-medium text-gray-800 dark:text-white">
+                          {t('publicLink.showHealthLabel')}
+                        </span>
+                        <span className="block text-xs text-gray-500 dark:text-gray-400">
+                          {t('publicLink.showHealthHelp')}
+                        </span>
+                      </span>
+                    </label>
+                    <button
+                      type="button"
+                      onClick={regeneratePublicLink}
+                      disabled={publicLinkBusy}
+                      className="w-full py-2 px-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-70"
+                    >
+                      {t('publicLink.regenerate')}
+                    </button>
+                  </>
+                )}
+                {!publicLink?.enabled && (
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('publicLink.disabledHint')}</p>
+                )}
+                {publicLinkError && (
+                  <p role="alert" className="text-sm text-red-600 dark:text-red-400">{publicLinkError}</p>
+                )}
+              </div>
               <button
                 type="button"
                 onClick={handleOpenQR}
-                disabled={qrLoading}
+                disabled={qrLoading || !publicLink?.enabled}
                 className="w-full py-3 px-4 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-700 disabled:opacity-70 transition-colors flex items-center justify-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

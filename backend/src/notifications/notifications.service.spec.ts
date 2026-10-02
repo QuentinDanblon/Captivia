@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { ForbiddenException } from '@nestjs/common';
 import { NotificationsService } from './notifications.service';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -38,7 +39,9 @@ describe('NotificationsService', () => {
 
   const mockPrismaService = {
     pushSubscription: {
-      upsert: jest.fn(),
+      findUnique: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
       findFirst: jest.fn(),
       findMany: jest.fn(),
       delete: jest.fn(),
@@ -72,33 +75,77 @@ describe('NotificationsService', () => {
   });
 
   describe('subscribeToPush', () => {
-    it('should create or update push subscription', async () => {
-      const subscriptionData = {
-        endpoint: 'https://push.example.com/endpoint',
-        keys: {
-          p256dh: 'test-key',
-          auth: 'test-auth',
-        },
-      };
+    const subscriptionData = {
+      endpoint: 'https://push.example.com/endpoint',
+      keys: {
+        p256dh: 'test-key',
+        auth: 'test-auth',
+      },
+    };
 
-      mockPrismaService.pushSubscription.upsert.mockResolvedValue(
+    it('should create a new push subscription', async () => {
+      mockPrismaService.pushSubscription.findUnique.mockResolvedValue(null);
+      mockPrismaService.pushSubscription.create.mockResolvedValue(
         mockSubscription,
       );
 
-      const result = await service.subscribeToPush(mockUserId, subscriptionData);
+      const result = await service.subscribeToPush(
+        mockUserId,
+        subscriptionData,
+      );
 
       expect(result).toEqual(mockSubscription);
-      expect(mockPrismaService.pushSubscription.upsert).toHaveBeenCalledWith({
-        where: { endpoint: subscriptionData.endpoint },
-        create: {
+      expect(mockPrismaService.pushSubscription.create).toHaveBeenCalledWith({
+        data: {
           userId: mockUserId,
           endpoint: subscriptionData.endpoint,
           keys: subscriptionData.keys,
         },
-        update: {
-          keys: subscriptionData.keys,
-        },
       });
+    });
+
+    it('should update the keys of the owner own subscription', async () => {
+      mockPrismaService.pushSubscription.findUnique.mockResolvedValue(
+        mockSubscription,
+      );
+      mockPrismaService.pushSubscription.update.mockResolvedValue(
+        mockSubscription,
+      );
+
+      await service.subscribeToPush(mockUserId, subscriptionData);
+
+      expect(mockPrismaService.pushSubscription.update).toHaveBeenCalledWith({
+        where: { id: mockSubscription.id },
+        data: { keys: subscriptionData.keys },
+      });
+      expect(mockPrismaService.pushSubscription.create).not.toHaveBeenCalled();
+    });
+
+    it('should refuse (403) an endpoint that belongs to another user', async () => {
+      mockPrismaService.pushSubscription.findUnique.mockResolvedValue({
+        ...mockSubscription,
+        userId: 'someone-else',
+      });
+
+      await expect(
+        service.subscribeToPush(mockUserId, subscriptionData),
+      ).rejects.toThrow(ForbiddenException);
+      expect(mockPrismaService.pushSubscription.update).not.toHaveBeenCalled();
+      expect(mockPrismaService.pushSubscription.create).not.toHaveBeenCalled();
+    });
+
+    it('should refuse (403) when a concurrent creation by another user wins', async () => {
+      mockPrismaService.pushSubscription.findUnique
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce({ ...mockSubscription, userId: 'someone-else' });
+      mockPrismaService.pushSubscription.create.mockRejectedValue({
+        code: 'P2002',
+      });
+
+      await expect(
+        service.subscribeToPush(mockUserId, subscriptionData),
+      ).rejects.toThrow(ForbiddenException);
+      expect(mockPrismaService.pushSubscription.update).not.toHaveBeenCalled();
     });
   });
 
@@ -211,25 +258,25 @@ describe('NotificationsService', () => {
       const result = await service.getNotificationPreferences(mockUserId);
 
       expect(result).toEqual(mockPreferences);
-      expect(mockPrismaService.notificationPreference.create).toHaveBeenCalledWith(
-        {
-          data: {
-            userId: mockUserId,
-            types: {
-              nourrissage: true,
-              nettoyage: true,
-              uvb: true,
-              sante: true,
-            },
-            schedule: {
-              start: '08:00',
-              end: '22:00',
-            },
-            snooze: 15,
-            deliveryChannel: 'push',
+      expect(
+        mockPrismaService.notificationPreference.create,
+      ).toHaveBeenCalledWith({
+        data: {
+          userId: mockUserId,
+          types: {
+            nourrissage: true,
+            nettoyage: true,
+            uvb: true,
+            sante: true,
           },
+          schedule: {
+            start: '08:00',
+            end: '22:00',
+          },
+          snooze: 15,
+          deliveryChannel: 'push',
         },
-      );
+      });
     });
   });
 
@@ -251,12 +298,12 @@ describe('NotificationsService', () => {
       );
 
       expect(result.snooze).toEqual(30);
-      expect(mockPrismaService.notificationPreference.update).toHaveBeenCalledWith(
-        {
-          where: { id: mockPreferences.id },
-          data: updateData,
-        },
-      );
+      expect(
+        mockPrismaService.notificationPreference.update,
+      ).toHaveBeenCalledWith({
+        where: { id: mockPreferences.id },
+        data: updateData,
+      });
     });
 
     it('should create preferences if not exist before updating', async () => {
@@ -272,7 +319,9 @@ describe('NotificationsService', () => {
 
       await service.updateNotificationPreferences(mockUserId, { snooze: 20 });
 
-      expect(mockPrismaService.notificationPreference.create).toHaveBeenCalled();
+      expect(
+        mockPrismaService.notificationPreference.create,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -329,6 +378,24 @@ describe('NotificationsService', () => {
       expect(result).toBe(false);
 
       jest.useRealTimers();
+    });
+
+    it('should not throw when schedule or types are null (no time restriction)', async () => {
+      mockPrismaService.notificationPreference.findUnique.mockResolvedValue({
+        ...mockPreferences,
+        schedule: null,
+      });
+      await expect(
+        service.checkIfShouldNotify(mockUserId, 'nourrissage'),
+      ).resolves.toBe(true);
+
+      mockPrismaService.notificationPreference.findUnique.mockResolvedValue({
+        ...mockPreferences,
+        types: null,
+      });
+      await expect(
+        service.checkIfShouldNotify(mockUserId, 'nourrissage'),
+      ).resolves.toBe(false);
     });
 
     it('should return false if outside time window (after end)', async () => {

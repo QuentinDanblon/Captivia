@@ -47,6 +47,22 @@
     "notes": "Notes",
     "type": "Type"
   },
+  "publicLink": {
+    "enableLabel": "Public link enabled",
+    "enableHelp": "Anyone who scans the QR code sees your animal's name, species, sex, birth year and photo. Your notes are never shared.",
+    "showHealthLabel": "Show vaccinations",
+    "showHealthHelp": "Adds the name and date of vaccinations to the public page (no notes or details).",
+    "regenerate": "Regenerate link",
+    "regenerateConfirm": "The old link and any QR codes already printed will stop working immediately. Continue?",
+    "premiumRequired": "Public sharing is reserved for Premium accounts.",
+    "updateError": "Could not update the public link.",
+    "disabledHint": "Enable the public link to get a QR code.",
+    "pageNotFound": "This page is not available or the link has been disabled.",
+    "bornIn": "Born in {year}",
+    "vaccinations": "Vaccinations",
+    "noVaccinations": "No vaccinations recorded",
+    "readOnly": "public page (read-only)"
+  },
   "animals": {
     "addAnimal": "Add animal",
     "addFirstAnimal": "Add your first animal to get started",
