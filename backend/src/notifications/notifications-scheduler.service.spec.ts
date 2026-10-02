@@ -79,9 +79,10 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
     // Événements générés pour les comptes de seed à la date fictive du test.
     await prisma.notificationEvent.deleteMany({
       where: {
+        // Jour local du 10 mars 2031 dans tous les fuseaux (de UTC+14 à UTC-12).
         scheduledAt: {
-          gte: new Date('2031-03-10T00:00:00Z'),
-          lt: new Date('2031-03-11T00:00:00Z'),
+          gte: new Date('2031-03-09T00:00:00Z'),
+          lt: new Date('2031-03-12T00:00:00Z'),
         },
       },
     });
@@ -275,22 +276,38 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
         animalId: animal.id,
         type: 'nourrissage',
         frequency: 'daily',
-        schedule: { time: '08:00', recurrence: 'daily' },
+        // Heure LOCALE (Paris, heure d'hiver UTC+1) : 09:00 → 08:00Z.
+        schedule: { time: '09:00', recurrence: 'daily' },
+      },
+    });
+    // Même instant UTC pour un utilisateur de New York (heure d'été depuis le 9 mars 2031, UTC-4).
+    const ny = await createUser('email', { timezone: 'America/New_York' });
+    const nyAnimal = await prisma.animal.create({
+      data: { userId: ny.id, speciesId: species.speciesId, name: 'Milo' },
+    });
+    await prisma.routine.create({
+      data: {
+        animalId: nyAnimal.id,
+        type: 'nourrissage',
+        frequency: 'daily',
+        schedule: { time: '04:00', recurrence: 'daily' },
       },
     });
 
     const res = await scheduler.runOnce(NOW);
-    expect(res.generated).toBeGreaterThanOrEqual(1);
+    expect(res.generated).toBeGreaterThanOrEqual(2);
 
-    const events = await prisma.notificationEvent.findMany({
-      where: { userId: user.id },
-    });
-    expect(events).toHaveLength(1);
-    expect(events[0].scheduledAt.toISOString()).toBe(
-      '2031-03-10T08:00:00.000Z',
-    );
-    expect(events[0].notifiedAt).not.toBeNull();
-    expect(mailsTo(user.email)).toHaveLength(1);
+    for (const u of [user, ny]) {
+      const events = await prisma.notificationEvent.findMany({
+        where: { userId: u.id },
+      });
+      expect(events).toHaveLength(1);
+      expect(events[0].scheduledAt.toISOString()).toBe(
+        '2031-03-10T08:00:00.000Z',
+      );
+      expect(events[0].notifiedAt).not.toBeNull();
+      expect(mailsTo(u.email)).toHaveLength(1);
+    }
     expect(mailsTo(user.email)[0][2]).toMatchObject({ animalName: 'Rex' });
   });
 

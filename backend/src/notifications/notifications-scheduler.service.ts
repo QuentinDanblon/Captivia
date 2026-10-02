@@ -5,6 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { GradeService } from '../grade/grade.service';
 import { MailService } from '../mail/mail.service';
 import { PUSH_SENDER, PushSender } from './push-sender';
+import { localDay } from '../common/timezone';
 
 /** Clé du verrou consultatif Postgres du job de rappels (constante arbitraire, propre au job). */
 export const REMINDERS_LOCK_KEY = 4_731_202_610;
@@ -19,7 +20,6 @@ export const MAX_GENERATIONS_PER_RUN = 300;
  */
 export const DISPATCH_CONCURRENCY = 10;
 const USER_PAGE_SIZE = 500;
-const DEFAULT_TIMEZONE = 'Europe/Paris';
 
 export type DeliveryChannel = 'email' | 'push' | 'both';
 
@@ -59,23 +59,7 @@ type DueReminder = Prisma.NotificationEventGetPayload<{
 }>;
 
 /** `YYYY-MM-DD` de `now` dans le fuseau IANA donné (repli Europe/Paris si invalide). */
-export function localDay(
-  now: Date,
-  timezone: string | null | undefined,
-): string {
-  const fmt = (tz: string) =>
-    new Intl.DateTimeFormat('en-CA', {
-      timeZone: tz,
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    }).format(now);
-  try {
-    return fmt(timezone || DEFAULT_TIMEZONE);
-  } catch {
-    return fmt(DEFAULT_TIMEZONE);
-  }
-}
+export { localDay };
 
 export function normalizeChannel(value: unknown): DeliveryChannel {
   return value === 'email' || value === 'both' ? value : 'push';

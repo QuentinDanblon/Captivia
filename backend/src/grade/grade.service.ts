@@ -2,12 +2,25 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { RoutinesService } from '../routines/routines.service';
+import {
+  addDays,
+  dayNumber,
+  dayOfMonthOf,
+  localDay,
+  localDayBounds,
+  makeLocalTimeResolver,
+  resolveTimeZone,
+  weekdayOf,
+} from '../common/timezone';
 
 /** Seules les routines (rappels liés à une routine) donnent des points. 2 pts par routine effectuée. */
 const POINTS_PER_ROUTINE_DONE = 2;
 
 /** Plafond défensif d'événements générés par jour et par utilisateur (anti-DoS, W0-07). */
 export const MAX_EVENTS_PER_DAY = 200;
+
+/** Heure LOCALE des rappels « du jour » (médicament, RDV vétérinaire, vaccin). */
+export const REMINDER_ANCHOR_HOUR = 8;
 
 const GRADE_THRESHOLDS: { grade: string; minPoints: number }[] = [
   { grade: 'bronze', minPoints: 0 },
@@ -169,18 +182,30 @@ export function normalizeSchedule(raw: unknown): NormalizedSchedule {
   };
 }
 
-/** Vérifie si la récurrence d'un schedule correspond au jour demandé. */
+/** Période (jours) des récurrences « tous les N jours ». */
+const EVERY_N_DAYS: Record<string, number> = {
+  every_2_days: 2,
+  every_3_days: 3,
+};
+
+/**
+ * Vérifie si la récurrence d'un schedule correspond au jour calendaire LOCAL `day` (YYYY-MM-DD).
+ *
+ * `every_2_days` / `every_3_days` : comptés à partir du jour d'ancrage `sch.date` (s'il est fourni)
+ * ou `anchorDay` (jour local de création de la routine / des préférences), et non plus selon la
+ * parité du nombre de jours depuis l'epoch : la première occurrence tombe le jour de départ, et
+ * le rythme ne dépend ni du fuseau ni de l'instant de calcul. Avant l'ancrage : aucune occurrence.
+ */
 export function matchesSchedule(
   sch: NormalizedSchedule,
-  todayStr: string,
-  dayOfWeek: number,
-  dayOfMonth: number,
-  daysSinceEpoch: number,
+  day: string,
+  anchorDay?: string,
 ): boolean {
   const rec = sch.recurrence || 'daily';
   if (rec === 'once') {
-    if (!sch.date || sch.date !== todayStr) return false;
+    if (!sch.date || sch.date !== day) return false;
   } else if (rec === 'weekly') {
+    const dayOfWeek = weekdayOf(day);
     if (sch.days && sch.days.length > 0) {
       // Format seed : plusieurs jours par semaine (ex: ['tuesday','friday'])
       if (!sch.days.includes(dayOfWeek)) return false;
@@ -190,43 +215,54 @@ export function matchesSchedule(
     }
   } else if (rec === 'monthly') {
     const wanted = sch.dayOfMonth ?? 1;
-    if (dayOfMonth !== wanted) return false;
-  } else if (rec === 'every_2_days') {
-    if (daysSinceEpoch % 2 !== 0) return false;
-  } else if (rec === 'every_3_days') {
-    if (daysSinceEpoch % 3 !== 0) return false;
+    if (dayOfMonthOf(day) !== wanted) return false;
+  } else if (EVERY_N_DAYS[rec]) {
+    const period = EVERY_N_DAYS[rec];
+    const anchor = sch.date ?? anchorDay;
+    const diff = anchor ? dayNumber(day) - dayNumber(anchor) : dayNumber(day); // sans ancrage (ancien appelant) : repli sur l'epoch
+    if (diff < 0 || diff % period !== 0) return false;
   } else if (rec === 'custom') {
     return false;
   }
   return true;
 }
 
+/** Convertit une heure murale d'un jour local en instant UTC (cf. common/timezone). */
+export type LocalTimeResolver = (
+  day: string,
+  hour: number,
+  minute: number,
+) => Date;
+
 /**
- * Occurrences d'un schedule pour la journée (UTC) de `date` : 1 événement, ou une grille horaire
- * (≤ 24) si `hourly`. Partagé avec l'Agenda des soins : la vue « à venir » reste strictement
- * identique aux rappels réellement générés.
+ * Occurrences d'un schedule pour le jour LOCAL `day` : 1 événement, ou une grille horaire (≤ 24)
+ * si `hourly`. Les heures (« 08:00 ») sont des heures murales du fuseau de l'utilisateur,
+ * converties en instants UTC par `resolve` (changements d'heure compris ; doublons retirés,
+ * ex. 02:00 et 03:00 le jour du passage à l'heure d'été). Partagé avec l'Agenda des soins : la
+ * vue « à venir » reste strictement identique aux rappels réellement générés.
  */
 export function scheduleOccurrences(
   sch: NormalizedSchedule,
   rec: string,
   time: string | undefined,
-  date: Date,
+  day: string,
+  resolve: LocalTimeResolver,
 ): Date[] {
   if (rec === 'hourly') {
     const interval = Math.max(1, Math.min(24, sch.intervalHours ?? 2));
     const [startH] = parseTime(time);
     const out: Date[] = [];
+    const seen = new Set<number>();
     for (let hour = startH; hour < 24; hour += interval) {
-      const at = new Date(date);
-      at.setUTCHours(hour, 0, 0, 0);
+      const at = resolve(day, hour, 0);
+      if (seen.has(at.getTime())) continue;
+      seen.add(at.getTime());
       out.push(at);
     }
     return out;
   }
   const [h, m] = parseTime(time);
-  const at = new Date(date);
-  at.setUTCHours(h, m, 0, 0);
-  return [at];
+  return [resolve(day, h, m)];
 }
 
 /** Événement à créer (avant insertion groupée). `sourceKey` = clé d'idempotence (unique par user + date). */
@@ -266,16 +302,20 @@ export class GradeService {
     };
   }
 
-  /** Occurrences d'un schedule pour la journée : 1 événement, ou une grille horaire (≤ 24) si `hourly`. */
-  private occurrences(
-    sch: NormalizedSchedule,
-    rec: string,
-    time: string | undefined,
-    date: Date,
-  ): Date[] {
-    return scheduleOccurrences(sch, rec, time, date);
+  /** Fuseau IANA de l'utilisateur (repli Europe/Paris). */
+  private async userTimeZone(userId: string): Promise<string> {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: { timezone: true },
+    });
+    return resolveTimeZone(user?.timezone);
   }
 
+  /**
+   * Événements du jour LOCAL `dateStr` (défaut : aujourd'hui dans le fuseau de l'utilisateur),
+   * générés s'ils n'existent pas encore. Les bornes du jour sont celles du jour local (instants
+   * UTC de minuit à minuit dans `User.timezone`), comme pour le scheduler et l'agenda.
+   */
   async getOrCreateTodayEvents(
     userId: string,
     dateStr?: string,
@@ -290,11 +330,9 @@ export class GradeService {
       pointsAwarded: number;
     }[]
   > {
-    const date = dateStr ? new Date(dateStr + 'T12:00:00Z') : new Date();
-    const start = new Date(date);
-    start.setUTCHours(0, 0, 0, 0);
-    const end = new Date(date);
-    end.setUTCHours(23, 59, 59, 999);
+    const timeZone = await this.userTimeZone(userId);
+    const day = dateStr ?? localDay(new Date(), timeZone);
+    const { start, end } = localDayBounds(day, timeZone);
     const dayWhere = { userId, scheduledAt: { gte: start, lte: end } };
 
     let events = await this.prisma.notificationEvent.findMany({
@@ -318,7 +356,11 @@ export class GradeService {
       const budget = Math.max(0, MAX_EVENTS_PER_DAY - kept);
 
       if (budget > 0) {
-        const candidates = await this.buildCandidateEvents(userId, date);
+        const candidates = await this.buildCandidateEvents(
+          userId,
+          day,
+          timeZone,
+        );
         if (candidates.length > 0) {
           await this.prisma.notificationEvent.createMany({
             data: candidates.slice(0, budget),
@@ -351,18 +393,16 @@ export class GradeService {
   }
 
   /**
-   * Construit (sans écrire) la liste des événements du jour : préférences, routines,
+   * Construit (sans écrire) la liste des événements du jour local `day` : préférences, routines,
    * médicaments, RDV vétérinaires, rappels de vaccin. Dédoublonnée par (sourceKey, scheduledAt)
-   * et plafonnée à MAX_EVENTS_PER_DAY.
+   * et plafonnée à MAX_EVENTS_PER_DAY. Heures murales converties dans `timeZone`.
    */
   private async buildCandidateEvents(
     userId: string,
-    date: Date,
+    day: string,
+    timeZone: string,
   ): Promise<NewEvent[]> {
-    const todayStr = date.toISOString().slice(0, 10);
-    const dayOfWeek = date.getUTCDay();
-    const dayOfMonth = date.getUTCDate();
-    const daysSinceEpoch = Math.floor(date.getTime() / 86400000);
+    const resolve = makeLocalTimeResolver(timeZone);
 
     const out: NewEvent[] = [];
     const seen = new Set<string>();
@@ -373,11 +413,8 @@ export class GradeService {
       seen.add(key);
       out.push(ev);
     };
-    const at8 = (): Date => {
-      const d = new Date(date);
-      d.setUTCHours(8, 0, 0, 0);
-      return d;
-    };
+    /** Rappels « du jour » (médicament, RDV, vaccin) : 08:00 heure locale. */
+    const at8 = (): Date => resolve(day, REMINDER_ANCHOR_HOUR, 0);
 
     const prefs = await this.prisma.notificationPreference.findUnique({
       where: { userId },
@@ -400,6 +437,7 @@ export class GradeService {
           : undefined;
       const globalStart =
         rawStart && SCHEDULE_TIME_REGEX.test(rawStart) ? rawStart : '08:00';
+      const prefsAnchor = localDay(prefs.createdAt, timeZone);
 
       for (const [type, enabled] of Object.entries(types).slice(0, 100)) {
         if (!enabled) continue;
@@ -407,17 +445,17 @@ export class GradeService {
         const time = sch.time ?? globalStart;
         const rec = sch.recurrence || 'daily';
         if (
-          !matchesSchedule(
-            { ...sch, time, recurrence: rec },
-            todayStr,
-            dayOfWeek,
-            dayOfMonth,
-            daysSinceEpoch,
-          )
+          !matchesSchedule({ ...sch, time, recurrence: rec }, day, prefsAnchor)
         )
           continue;
 
-        for (const scheduledAt of this.occurrences(sch, rec, time, date)) {
+        for (const scheduledAt of scheduleOccurrences(
+          sch,
+          rec,
+          time,
+          day,
+          resolve,
+        )) {
           push({
             userId,
             type,
@@ -441,17 +479,21 @@ export class GradeService {
       if (
         !matchesSchedule(
           { ...sch, time, recurrence: rec },
-          todayStr,
-          dayOfWeek,
-          dayOfMonth,
-          daysSinceEpoch,
+          day,
+          localDay(routine.createdAt, timeZone),
         )
       )
         continue;
 
       const typeLabel =
         routine.name || ROUTINE_TYPE_LABELS[routine.type] || routine.type;
-      for (const scheduledAt of this.occurrences(sch, rec, time, date)) {
+      for (const scheduledAt of scheduleOccurrences(
+        sch,
+        rec,
+        time,
+        day,
+        resolve,
+      )) {
         push({
           userId,
           type: routine.type,
@@ -465,7 +507,8 @@ export class GradeService {
       }
     }
 
-    // Module A — Événements depuis les médicaments actifs (Premium)
+    // Module A — Événements depuis les médicaments actifs (Premium). startDate / endDate sont des
+    // dates calendaires (saisies sans heure, stockées à minuit UTC).
     const activeMedications = await this.prisma.medication.findMany({
       where: { active: true, animal: { userId } },
       take: MAX_EVENTS_PER_DAY,
@@ -475,8 +518,8 @@ export class GradeService {
       const endDay = med.endDate
         ? med.endDate.toISOString().slice(0, 10)
         : null;
-      if (startDay > todayStr) continue;
-      if (endDay && endDay < todayStr) continue;
+      if (startDay > day) continue;
+      if (endDay && endDay < day) continue;
 
       push({
         userId,
@@ -491,16 +534,17 @@ export class GradeService {
       });
     }
 
-    // Module A — Événements depuis les RDV vétérinaires (Premium)
+    // Module A — Événements depuis les RDV vétérinaires (Premium). `date` est un instant : son
+    // jour est le jour LOCAL de l'utilisateur.
     const scheduledAppointments = await this.prisma.vetAppointment.findMany({
       where: { status: 'scheduled', animal: { userId } },
       take: MAX_EVENTS_PER_DAY,
     });
     for (const appt of scheduledAppointments) {
-      const apptDay = appt.date.toISOString().slice(0, 10);
+      const apptDay = localDay(appt.date, timeZone);
 
       // Événement du jour du RDV
-      if (apptDay === todayStr) {
+      if (apptDay === day) {
         push({
           userId,
           type: 'vet_appointment',
@@ -517,9 +561,7 @@ export class GradeService {
       // Rappels J-N (reminderDays jours avant le RDV). Un rappel J-0 est déjà couvert par
       // l'événement du jour (même clé + même heure → dédoublonné par `push`).
       for (const n of (appt.reminderDays ?? []).slice(0, 10)) {
-        const reminderDate = new Date(appt.date);
-        reminderDate.setUTCDate(reminderDate.getUTCDate() - n);
-        if (reminderDate.toISOString().slice(0, 10) !== todayStr) continue;
+        if (addDays(apptDay, -n) !== day) continue;
         push({
           userId,
           type: 'vet_appointment',
@@ -535,14 +577,14 @@ export class GradeService {
     }
 
     // Module C — Événements de rappel vaccin (Premium) : un rappel est créé le
-    // jour où nextDueDate == aujourd'hui
+    // jour où nextDueDate (date calendaire) == aujourd'hui (jour local)
     const vaccinations = await this.prisma.vaccination.findMany({
       where: { animal: { userId }, nextDueDate: { not: null } },
       take: MAX_EVENTS_PER_DAY * 2,
     });
     for (const vac of vaccinations) {
       if (!vac.nextDueDate) continue;
-      if (vac.nextDueDate.toISOString().slice(0, 10) !== todayStr) continue;
+      if (vac.nextDueDate.toISOString().slice(0, 10) !== day) continue;
 
       push({
         userId,

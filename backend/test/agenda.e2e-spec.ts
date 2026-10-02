@@ -55,6 +55,12 @@ describe('Agenda des soins E2E', () => {
 
     ({ token: tokenA, id: userA } = await register('a'));
     ({ token: tokenB, id: userB } = await register('b'));
+    // Ces scénarios raisonnent en jours et heures UTC : fuseau UTC (le défaut est Europe/Paris,
+    // couvert plus bas). Sinon, entre 22 h et minuit UTC, « aujourd'hui » diffère d'un jour.
+    await prisma.user.updateMany({
+      where: { id: { in: [userA, userB] } },
+      data: { timezone: 'UTC' },
+    });
 
     const rex = await prisma.animal.create({
       data: { userId: userA, speciesId: SPECIES_ID, name: 'Rex' },
@@ -464,5 +470,295 @@ describe('Agenda des soins E2E', () => {
     await prisma.user.delete({ where: { id } });
     userIds.splice(userIds.indexOf(id), 1);
     expect(await prisma.user.count({ where: { id } })).toBe(0);
+  });
+
+  /** Heure murale « HH:mm » et jour « YYYY-MM-DD » d'un instant à Paris (Intl, indépendant du code testé). */
+  const paris = (iso: string) => {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Europe/Paris',
+      hourCycle: 'h23',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    }).formatToParts(new Date(iso));
+    const get = (t: string) => parts.find((p) => p.type === t)?.value;
+    return {
+      day: `${get('year')}-${get('month')}-${get('day')}`,
+      time: `${get('hour')}:${get('minute')}`,
+    };
+  };
+  /** VEVENT du flux ICS → { summary, start (ISO) } (DTSTART UTC uniquement). */
+  const icsEvents = (ics: string) =>
+    ics
+      .replace(/\r\n /g, '')
+      .split('BEGIN:VEVENT')
+      .slice(1)
+      .map((block) => {
+        const summary = /\r\nSUMMARY:([^\r\n]*)/.exec(block)?.[1] ?? '';
+        const m =
+          /\r\nDTSTART:(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z/.exec(
+            block,
+          );
+        return {
+          summary,
+          start: m
+            ? `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}.000Z`
+            : null,
+        };
+      });
+
+  describe('fuseau horaire : heures locales de l’utilisateur (constat 4)', () => {
+    let tokenP: string;
+    let userP: string;
+    let matinId: string;
+    let soirId: string;
+
+    beforeAll(async () => {
+      ({ token: tokenP, id: userP } = await register('paris'));
+      // Fuseau par défaut d'un nouveau compte : Europe/Paris.
+      const u = await prisma.user.findUniqueOrThrow({ where: { id: userP } });
+      expect(u.timezone).toBe('Europe/Paris');
+      const animal = await prisma.animal.create({
+        data: { userId: userP, speciesId: SPECIES_ID, name: 'Rex' },
+      });
+      const createdAt = new Date('2026-01-01T12:00:00Z');
+      matinId = (
+        await prisma.routine.create({
+          data: {
+            animalId: animal.id,
+            name: 'Matin',
+            type: 'nourrissage',
+            frequency: 'daily',
+            schedule: { time: '08:00', recurrence: 'daily' },
+            createdAt,
+          },
+        })
+      ).id;
+      soirId = (
+        await prisma.routine.create({
+          data: {
+            animalId: animal.id,
+            name: 'Soir',
+            type: 'uvb',
+            frequency: 'daily',
+            schedule: { time: '23:30', recurrence: 'daily' },
+            createdAt,
+          },
+        })
+      ).id;
+    });
+
+    const itemsOf = async (from: string, to: string, sourceId: string) =>
+      (
+        (
+          await get(`/users/me/agenda?from=${from}&to=${to}`, tokenP).expect(
+            200,
+          )
+        ).body.items as { sourceId: string; date: string; day: string }[]
+      ).filter((i) => i.sourceId === sourceId);
+
+    it('« 08:00 » à Paris = 06:00Z en été et 07:00Z en hiver ; « 23:30 » reste sur le jour J local', async () => {
+      expect(await itemsOf('2026-07-15', '2026-07-15', matinId)).toEqual([
+        expect.objectContaining({
+          date: '2026-07-15T06:00:00.000Z',
+          day: '2026-07-15',
+        }),
+      ]);
+      expect(await itemsOf('2026-01-15', '2026-01-15', matinId)).toEqual([
+        expect.objectContaining({
+          date: '2026-01-15T07:00:00.000Z',
+          day: '2026-01-15',
+        }),
+      ]);
+      // 23:30 à Paris = 21:30Z (été) / 22:30Z (hiver) : même jour local, jamais le lendemain.
+      expect(await itemsOf('2026-07-15', '2026-07-15', soirId)).toEqual([
+        expect.objectContaining({
+          date: '2026-07-15T21:30:00.000Z',
+          day: '2026-07-15',
+        }),
+      ]);
+      expect(await itemsOf('2026-01-15', '2026-01-15', soirId)).toEqual([
+        expect.objectContaining({
+          date: '2026-01-15T22:30:00.000Z',
+          day: '2026-01-15',
+        }),
+      ]);
+    });
+
+    it('semaine du passage à l’heure d’été (dimanche 29 mars 2026) : toujours 08:00 heure de Paris', async () => {
+      const items = await itemsOf('2026-03-26', '2026-04-01', matinId);
+      expect(items.map((i) => i.date)).toEqual([
+        '2026-03-26T07:00:00.000Z',
+        '2026-03-27T07:00:00.000Z',
+        '2026-03-28T07:00:00.000Z',
+        '2026-03-29T06:00:00.000Z',
+        '2026-03-30T06:00:00.000Z',
+        '2026-03-31T06:00:00.000Z',
+        '2026-04-01T06:00:00.000Z',
+      ]);
+      for (const i of items)
+        expect(paris(i.date)).toEqual({ day: i.day, time: '08:00' });
+      // Et le passage à l'heure d'hiver (25 octobre 2026).
+      const autumn = await itemsOf('2026-10-24', '2026-10-26', soirId);
+      expect(autumn.map((i) => i.date)).toEqual([
+        '2026-10-24T21:30:00.000Z',
+        '2026-10-25T22:30:00.000Z',
+        '2026-10-26T22:30:00.000Z',
+      ]);
+    });
+
+    it('rappels générés (scheduler) et agenda alignés : mêmes instants, statut repris', async () => {
+      const tomorrow = paris(
+        new Date(Date.now() + 86_400_000).toISOString(),
+      ).day;
+      const events = (
+        await get(
+          `/users/me/notification-events?date=${tomorrow}`,
+          tokenP,
+        ).expect(200)
+      ).body as { id: string; routineId?: string; scheduledAt: string }[];
+      const agenda = [
+        ...(await itemsOf(tomorrow, tomorrow, matinId)),
+        ...(await itemsOf(tomorrow, tomorrow, soirId)),
+      ];
+      expect(agenda).toHaveLength(2);
+      expect(new Set(events.map((e) => e.scheduledAt))).toEqual(
+        new Set(agenda.map((i) => i.date)),
+      );
+      for (const e of events) expect(paris(e.scheduledAt).day).toBe(tomorrow);
+
+      const matin = events.find((e) => e.routineId === matinId)!;
+      await request(url)
+        .patch(`/users/me/notification-events/${matin.id}`)
+        .set(auth(tokenP))
+        .send({ status: 'skipped' })
+        .expect(200);
+      const after = await get(
+        `/users/me/agenda?from=${tomorrow}&to=${tomorrow}`,
+        tokenP,
+      ).expect(200);
+      expect(
+        (after.body.items as { sourceId: string; status: string }[]).find(
+          (i) => i.sourceId === matinId,
+        )?.status,
+      ).toBe('skipped');
+    });
+
+    it('flux ICS : DTSTART en UTC correspondant à 08:00 heure de Paris', async () => {
+      const res = await request(url)
+        .post('/users/me/agenda/calendar-token')
+        .set(auth(tokenP))
+        .expect(201);
+      const ics = (await request(url).get(res.body.feedPath).expect(200)).text;
+      const matins = icsEvents(ics).filter((e) =>
+        e.summary.startsWith('Matin - Rex'),
+      );
+      expect(matins.length).toBeGreaterThanOrEqual(90);
+      for (const e of matins) expect(paris(e.start!).time).toBe('08:00');
+      const soirs = icsEvents(ics).filter((e) =>
+        e.summary.startsWith('Soir - Rex'),
+      );
+      for (const e of soirs) expect(paris(e.start!).time).toBe('23:30');
+    });
+  });
+
+  describe('les routines fréquentes n’évincent plus les autres sources (constat 5)', () => {
+    let tokenQ: string;
+    let userQ: string;
+
+    beforeAll(async () => {
+      ({ token: tokenQ, id: userQ } = await register('buffer'));
+      await prisma.user.update({
+        where: { id: userQ },
+        data: { timezone: 'UTC' },
+      });
+      const animal = await prisma.animal.create({
+        data: { userId: userQ, speciesId: SPECIES_ID, name: 'Brume' },
+      });
+      // 5 routines horaires : 5 × 24 × 92 = 11 040 occurrences (> 2 500 et > l'ancien tampon de 10 000).
+      for (let i = 0; i < 5; i++) {
+        await prisma.routine.create({
+          data: {
+            animalId: animal.id,
+            name: `Brumisation ${i}`,
+            type: 'entretien',
+            frequency: 'hourly',
+            schedule: { time: '00:00', recurrence: 'hourly', intervalHours: 1 },
+            createdAt: new Date('2026-01-01T00:00:00Z'),
+          },
+        });
+      }
+      await prisma.vetAppointment.create({
+        data: {
+          animalId: animal.id,
+          vetName: 'Dr Proche',
+          date: at(dayOffset(1), '09:00'),
+        },
+      });
+      await prisma.vetAppointment.create({
+        data: {
+          animalId: animal.id,
+          vetName: 'Dr Lointain',
+          date: at(dayOffset(80), '15:00'),
+        },
+      });
+      await prisma.vaccination.create({
+        data: {
+          animalId: animal.id,
+          name: 'Vaccin-Lointain',
+          date: at(dayOffset(-300), '00:00'),
+          nextDueDate: at(dayOffset(70), '00:00'),
+        },
+      });
+      await prisma.medication.create({
+        data: {
+          animalId: animal.id,
+          name: 'Medoc-Quotidien',
+          dose: '1',
+          frequency: 'daily',
+          startDate: at(dayOffset(0), '00:00'),
+          endDate: at(dayOffset(91), '00:00'),
+        },
+      });
+    });
+
+    it('JSON sur 92 jours : RDV, vaccin et médicament présents malgré 11 040 occurrences de routines', async () => {
+      const res = await get(
+        `/users/me/agenda?from=${dayOffset(0)}&to=${dayOffset(91)}`,
+        tokenQ,
+      ).expect(200);
+      const items = res.body.items as {
+        type: string;
+        title: string;
+        date: string;
+      }[];
+      expect(res.body.truncated).toBe(true);
+      expect(items.length).toBeLessThanOrEqual(2500);
+      const titles = new Set(items.map((i) => i.title));
+      expect(titles.has('Dr Proche')).toBe(true);
+      expect(titles.has('Dr Lointain')).toBe(true);
+      expect(titles.has('Vaccin-Lointain')).toBe(true);
+      expect(items.filter((i) => i.type === 'medication')).toHaveLength(92);
+      expect(items.filter((i) => i.type === 'routine').length).toBeGreaterThan(
+        0,
+      );
+      // Toujours trié par date.
+      const dates = items.map((i) => i.date);
+      expect([...dates].sort()).toEqual(dates);
+    });
+
+    it('flux ICS : RDV (proche et lointain) et vaccin présents', async () => {
+      const res = await request(url)
+        .post('/users/me/agenda/calendar-token')
+        .set(auth(tokenQ))
+        .expect(201);
+      const ics = (await request(url).get(res.body.feedPath).expect(200)).text;
+      const summaries = icsEvents(ics).map((e) => e.summary);
+      expect(summaries.some((s) => s.includes('Dr Proche'))).toBe(true);
+      expect(summaries.some((s) => s.includes('Dr Lointain'))).toBe(true);
+      expect(summaries.some((s) => s.includes('Vaccin-Lointain'))).toBe(true);
+    });
   });
 });

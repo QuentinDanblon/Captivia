@@ -14,7 +14,10 @@ export interface AgendaItem {
   id: string;
   /** Instant ISO 8601 (UTC). */
   date: string;
-  /** Jour YYYY-MM-DD (UTC) de `date` ; sert de jour d'affichage des échéances « journée entière ». */
+  /**
+   * Jour YYYY-MM-DD dans le fuseau du compte (`User.timezone`) ; sert de jour d'affichage des
+   * échéances « journée entière » (date calendaire).
+   */
   day: string;
   allDay: boolean;
   type: AgendaItemType;
