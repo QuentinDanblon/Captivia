@@ -88,6 +88,15 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Service worker Web Push (W3-03) : toujours revalidé pour qu'une mise à jour soit
+        // détectée sans attendre l'expiration d'un cache.
+        source: '/sw.js',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' },
+          { key: 'Service-Worker-Allowed', value: '/' },
+        ],
+      },
     ];
   },
 };

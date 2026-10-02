@@ -91,6 +91,13 @@ const SUGGESTED_TYPE_LABEL_IDS: Record<string, string> = {
 const SUGGESTED_NOTIFICATION_TYPES = Object.keys(SUGGESTED_TYPE_LABEL_IDS);
 
 import { API_URL } from '@/lib/config';
+import {
+  fetchVapidPublicKey,
+  resolvePushStatus,
+  subscribeToPush,
+  unsubscribeFromPush,
+  type PushStatus,
+} from '@/lib/web-push';
 
 const getApiBase = () => API_URL;
 
@@ -105,7 +112,11 @@ export default function NotificationsPreferencesPage() {
   const [preferences, setPreferences] = useState<NotificationPreferences | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
+  /** État du Web Push de CE navigateur (null = en cours de détection). */
+  const [pushStatus, setPushStatus] = useState<PushStatus | null>(null);
+  const [pushKey, setPushKey] = useState<string | null>(null);
+  const [pushBusy, setPushBusy] = useState(false);
+  const [pushError, setPushError] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout | null>(null);
   /** Nouveau sujet en cours de saisie (personnalisation) */
@@ -211,17 +222,56 @@ export default function NotificationsPreferencesPage() {
   };
 
   const checkSubscription = async () => {
-    if (!('Notification' in window)) {
-      return;
-    }
-
-    const permission = Notification.permission;
-    setSubscribed(permission === 'granted');
+    const key = await fetchVapidPublicKey();
+    setPushKey(key);
+    setPushStatus(await resolvePushStatus(key));
   };
 
-  // Push web non implémenté côté backend : le bouton d'autorisation est désactivé
-  // (« bientôt disponible ») — la fonction requestPermission a été retirée pour
-  // ne pas promettre une fonctionnalité inexistante.
+  const authTokenOrNull = () =>
+    (token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null))?.trim() || null;
+
+  /** Appelé directement par le clic : la permission du navigateur n'est demandée qu'ici. */
+  const enablePush = async () => {
+    const authToken = authTokenOrNull();
+    if (!authToken) {
+      setSaveMessage(t('common.sessionExpired'));
+      return;
+    }
+    setPushBusy(true);
+    setPushError(false);
+    const result = await subscribeToPush(authToken, pushKey);
+    setPushBusy(false);
+    switch (result.status) {
+      case 'subscribed':
+        setPushStatus('subscribed');
+        break;
+      case 'denied':
+        setPushStatus('denied');
+        break;
+      case 'unavailable':
+      case 'unsupported':
+        setPushStatus(result.status);
+        break;
+      case 'dismissed':
+        break; // fenêtre de permission fermée sans choix : on reste sur le bouton
+      default:
+        setPushError(true);
+    }
+  };
+
+  const disablePush = async () => {
+    const authToken = authTokenOrNull();
+    if (!authToken) {
+      setSaveMessage(t('common.sessionExpired'));
+      return;
+    }
+    setPushBusy(true);
+    setPushError(false);
+    const ok = await unsubscribeFromPush(authToken);
+    setPushBusy(false);
+    if (ok) setPushStatus('unsubscribed');
+    else setPushError(true);
+  };
 
   const handleSave = async () => {
     const authToken = (token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null))?.trim();
@@ -552,36 +602,72 @@ export default function NotificationsPreferencesPage() {
             <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
               {t('notifications.enable')}
             </h2>
-            {!subscribed ? (
+            {pushStatus === null && (
+              <p className="text-sm text-gray-500 dark:text-gray-400">…</p>
+            )}
+            {pushStatus === 'unsupported' && (
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                {t('notifications.pushUnsupported')}
+              </p>
+            )}
+            {pushStatus === 'unavailable' && (
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                {t('notifications.pushUnavailable')}
+              </p>
+            )}
+            {pushStatus === 'denied' && (
+              <p className="text-sm text-amber-700 dark:text-amber-400">
+                {t('notifications.pushBlocked')}
+              </p>
+            )}
+            {pushStatus === 'unsubscribed' && (
               <div>
-                <button
-                  disabled
-                  title={t('notifications.comingSoon')}
-                  className="px-6 py-3 bg-gray-300 text-gray-500 dark:bg-gray-600 dark:text-gray-400 rounded-lg cursor-not-allowed"
-                >
-                  Autoriser les notifications
-                </button>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                  {t('notifications.comingSoon')}
+                <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
+                  {t('notifications.enableBrowser')}
                 </p>
-              </div>
-            ) : (
-              <div className="flex items-center gap-3 text-green-600">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <button
+                  type="button"
+                  onClick={enablePush}
+                  disabled={pushBusy}
+                  className="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <span>{t('notifications.notificationsEnabled')}</span>
+                  {pushBusy ? t('notifications.enabling') : t('notifications.enableButton')}
+                </button>
               </div>
+            )}
+            {pushStatus === 'subscribed' && (
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3 text-green-600">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  <span>{t('notifications.notificationsEnabled')}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={disablePush}
+                  disabled={pushBusy}
+                  className="px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {pushBusy ? t('notifications.disabling') : t('notifications.disableButton')}
+                </button>
+              </div>
+            )}
+            {pushError && (
+              <p role="alert" className="mt-3 text-sm text-red-600 dark:text-red-400">
+                {t('notifications.pushError')}
+              </p>
             )}
           </div>
 
