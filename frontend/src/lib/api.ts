@@ -384,7 +384,7 @@ export const api = {
     });
   },
 
-  createAnimal: async (data: any, token: string) => {
+  createAnimal: async (data: object, token: string) => {
     return request(`${API_URL}/users/me/animals`, {
       method: 'POST',
       headers: {
@@ -395,7 +395,7 @@ export const api = {
     });
   },
 
-  updateAnimal: async (id: string, data: any, token: string) => {
+  updateAnimal: async (id: string, data: object, token: string) => {
     return request(`${API_URL}/users/me/animals/${id}`, {
       method: 'PATCH',
       headers: {
@@ -516,7 +516,7 @@ export const api = {
     }
   },
 
-  createRoutine: async (animalId: string, data: any, token: string) => {
+  createRoutine: async (animalId: string, data: object, token: string) => {
     return request(
       `${API_URL}/users/me/animals/${animalId}/routines`,
       {
@@ -533,7 +533,7 @@ export const api = {
   updateRoutine: async (
     animalId: string,
     routineId: string,
-    data: any,
+    data: object,
     token: string
   ) => {
     return request(
@@ -990,7 +990,7 @@ export const api = {
     );
   },
 
-  logAction: async (animalId: string, data: any, token: string) => {
+  logAction: async (animalId: string, data: object, token: string) => {
     return request(
       `${API_URL}/users/me/animals/${animalId}/history`,
       {
@@ -1016,7 +1016,7 @@ export const api = {
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
       throw new Error(
-        (data as any)?.message ||
+        (data as { message?: string })?.message ||
         response.statusText ||
         `Erreur ${response.status}`
       );
@@ -1035,7 +1035,7 @@ export const api = {
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
       throw new Error(
-        (data as any)?.message ||
+        (data as { message?: string })?.message ||
         response.statusText ||
         `Erreur ${response.status}`
       );

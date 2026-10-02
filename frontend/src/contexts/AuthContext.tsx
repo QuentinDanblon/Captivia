@@ -127,6 +127,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       } else if (isJwtExpired(storedToken)) {
         clearStoredSession();
       } else {
+        // Hydratation depuis localStorage : uniquement après le montage (indisponible côté serveur,
+        // un initialiseur d'état provoquerait un écart d'hydratation SSR/client).
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setToken(storedToken);
         setUser(storedUser);
         refreshProfile(storedToken);
