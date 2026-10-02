@@ -45,6 +45,8 @@ const ALLOWED_EVERYWHERE = new Set([
   '+100 pts',
   '5,99 €',
   '29,99 €',
+  'CC BY-SA 4.0',
+  'GBIF.org',
 ]);
 
 const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {
@@ -57,7 +59,7 @@ const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {
   es: new Set(['Email', 'Reptiles']),
   de: new Set(['Bronze', 'Diamant', 'Profil']),
   it: new Set(['Dose', 'Email', 'Facile', 'Habitat']),
-  pt: new Set(['Bronze', 'Dose', 'Email', 'Habitat', 'ex. Rango', 'ou']),
+  pt: new Set(['Bronze', 'Dose', 'Email', 'Habitat', 'ex. Rango', 'ou', 'Wikipédia']),
 };
 
 /** Extrait les noms d'arguments ICU (récursivement dans plural/select) et les balises. */

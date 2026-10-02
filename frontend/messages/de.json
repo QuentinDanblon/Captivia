@@ -258,6 +258,13 @@
     },
     "viewHistory": "Verlauf anzeigen"
   },
+  "attribution": {
+    "wikipediaPrefix": "Quelle:",
+    "wikipediaName": "Wikipedia",
+    "license": "CC BY-SA 4.0",
+    "gbifPrefix": "Vorkommensdaten:",
+    "gbifName": "GBIF.org"
+  },
   "auth": {
     "backToLogin": "Zurück zur Anmeldung",
     "confirmPasswordLabel": "Passwort bestätigen",
