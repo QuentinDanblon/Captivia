@@ -16,9 +16,15 @@ test.describe('Mes animaux', () => {
     api.animals = [{ ...fixture<MockAnimal>('animal'), speciesName: 'Boa constrictor' }];
     await page.goto('/mes-animaux');
 
-    const card = page.getByRole('link', { name: /Kaa/ });
+    // Carte en <article> : lien étiré sur le nom, lien « carnet » frère (pas de lien imbriqué).
+    const card = page.locator('article').filter({ has: page.getByRole('link', { name: 'Kaa' }) });
     await expect(card).toBeVisible();
     await expect(card).toContainText('Boa constrictor');
+    await expect(card.getByRole('link', { name: 'Carnet de santé' })).toHaveAttribute(
+      'href',
+      /\/mes-animaux\/animal-e2e-1\/carnet$/,
+    );
+    await expect(card.locator('a a, a button')).toHaveCount(0);
     // Compte gratuit : un seul animal, l'ajout est désactivé et l'avertissement premium affiché.
     await expect(page.getByRole('button', { name: /Ajouter un animal/ })).toBeDisabled();
     await expect(page.getByRole('heading', { level: 3, name: 'Premium requis' })).toBeVisible();
