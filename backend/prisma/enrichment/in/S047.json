@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 5784980,
+  "commonNameFr": "Grenouille verte",
+  "scientificName": "Pelophylax kl. esculentus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5786666,
+  "commonNameFr": "Capybara",
+  "scientificName": "Hydrochoerus hydrochaeris",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5959092,
+  "commonNameFr": "Grand-duc d'Europe",
+  "scientificName": "Bubo bubo",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

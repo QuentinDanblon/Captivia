@@ -1,0 +1,375 @@
+[
+  {
+    "speciesId": 8170369,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Souris et rats congelés-décongelés",
+          "frequency": "hebdomadaire",
+          "notes": "Taille de la proie adaptée au diamètre du corps du serpent"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies vivantes sans supervision",
+          "reason": "Risque blessures graves ou mort du serpent"
+        },
+        {
+          "name": "Proies volumineuses",
+          "reason": "Étouffement, régurgitation, obstruction"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Constricteur opportuniste (rongeurs, oiseaux, autres reptiles et serpents à l'état sauvage) ; proposer des proies mortes (congelées-décongelées) plutôt que vivantes",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_californiae",
+          "title": "California kingsnake - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 21,
+      "tempMax": 29,
+      "humidityMin": 35,
+      "humidityMax": 60,
+      "minSpaceSize": "Terrarium 120x60x60cm minimum pour adultes",
+      "lightNeeds": "Cycle jour-nuit 12h/12h, chaleur basale 26-28°C avec zone plus fraîche",
+      "activityEnrichment": "Cachettes multiples, substrat profond pour fouir",
+      "hygieneNotes": "Nettoyage hebdomadaire, eau potable renouvelée quotidiennement, substrat sec",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_californiae",
+          "title": "California kingsnake - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent au tempérament docile, mais qui mord couramment lorsqu'on le manipule et peut libérer du musc et des excréments ; considéré comme inoffensif pour l'humain",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Convient enfants 8+ avec supervision, manipulations calmes",
+      "compatibilityWithOtherAnimals": "À maintenir seul : ophiophage, il chasse d'autres serpents (congénères inclus)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_californiae",
+          "title": "California kingsnake - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Respiration difficile, bruits de gorge, écoulements",
+          "prevention": "Terrarium sec, ventilation adéquate, température stable, hygiène régulière",
+          "whenToConsult": "Rapidement dès les premiers signes"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Refus nourriture, amaigrissement, diarrhée, régurgitation parasites",
+          "prevention": "Proies inspectées, hygiène stricte, nouveaux serpents traités préventivement",
+          "whenToConsult": "Dès symptômes digestifs"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_californiae",
+          "title": "California kingsnake - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_californiae",
+          "title": "California kingsnake - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "mai-août",
+      "gestationDays": null,
+      "incubationDays": 55,
+      "litterSizeMin": 5,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ovipare : ponte de mai à août, 42 à 63 jours après l'accouplement ; 5 à 12 oeufs (en moyenne 9), éclosion après 40 à 65 jours, jeunes de 20 à 33 cm",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_californiae",
+          "title": "California kingsnake - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 8214163,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Flocons premium pour poissons tropicaux",
+          "frequency": "quotidienne",
+          "notes": "Petites portions consommées en 2-3 minutes"
+        },
+        {
+          "name": "Daphnies, artémias vivantes ou congelées",
+          "frequency": "3-4x/semaine",
+          "notes": "Aliments vivants ou congelés en complément"
+        },
+        {
+          "name": "Algues, épinards blanchis, pastilles végétales",
+          "frequency": "hebdomadaire",
+          "notes": "Complément végétal"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Suralimentation",
+          "reason": "Dégradation qualité eau, faveur pathologies"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Omnivore plutôt vorace ; une alimentation variée (aliments secs et vivants) est recommandée",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Puntigrus_tetrazona",
+          "title": "Tiger barb - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 25,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Groupe de 6 individus ou plus ; aquarium bien planté (végétation sur environ deux tiers de l'espace)",
+      "lightNeeds": "Aquarium bien éclairé, avec une végétation abondante",
+      "activityEnrichment": "Plantes robustes, cachettes, roches, espace nage libre pour groupes",
+      "hygieneNotes": "Changement eau 25% hebdomadaire, filtration forte (haut apport oxygène), nettoyage filtre régulier",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Puntigrus_tetrazona",
+          "title": "Tiger barb - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson actif vivant en banc, avec une hiérarchie ; mordille les nageoires des poissons lents, surtout en groupe trop petit",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Convient enfants avec supervision, poisson dynamique intéressant à observer",
+      "compatibilityWithOtherAnimals": "Incompatible avec les poissons lents à longues nageoires (bettas, gouramis, scalaires) ; bonne entente avec beaucoup de poissons rapides ; groupe de 6 minimum (moins de 5 augmente l'agressivité)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Puntigrus_tetrazona",
+          "title": "Tiger barb - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ich (taches blanches)",
+          "symptoms": "Pointilles blancs corps/nageoires, frottement excessif, anorexie progressive",
+          "prevention": "Quarantaine nouveaux poissons, hygiène stricte, température stable 25-27°C",
+          "whenToConsult": "Rapidement, très contagieux en groupe"
+        },
+        {
+          "name": "Pourriture des nageoires",
+          "symptoms": "Nageoires effilochées, décolorées, bordure rougeâtre, destruction progressive",
+          "prevention": "Eau impeccable, pas surpopulation, nourriture variée, espace calme",
+          "whenToConsult": "Dès premiers signes, isoler poisson affecté"
+        },
+        {
+          "name": "Infections bactériennes (dont columnariose)",
+          "symptoms": "Taches rouges/blanches, ulcérations ouvertes, gonflements",
+          "prevention": "Hygiène aquarium, éviter plaies par combats, changements eau réguliers",
+          "whenToConsult": "Immédiatement, infections rapidement systémiques"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Puntigrus_tetrazona",
+          "title": "Tiger barb - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Puntigrus_tetrazona",
+          "title": "Tiger barb - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 500,
+      "sexualMaturityMonths": 2,
+      "breedingDifficulty": "facile",
+      "notes": "Ponte moyenne d'environ 300 oeufs adhésifs (jusqu'à 500), déposés tôt le matin dans les plantes ; fraie environ toutes les deux semaines ; maturité vers 6-7 semaines (2-3 cm)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Puntigrus_tetrazona",
+          "title": "Tiger barb - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 8583926,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes variés (grillons, blattes), vers",
+          "frequency": "3-4x/semaine",
+          "notes": "Insectes nourris au préalable (gut-loading)"
+        },
+        {
+          "name": "Fruits (papaye, raisins, baies)",
+          "frequency": "hebdomadaire",
+          "notes": "Complément alimentaire ; l'espèce consomme régulièrement des fruits à l'état sauvage"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes sauvages non inspectés",
+          "reason": "Risque parasites, pesticides toxiques"
+        },
+        {
+          "name": "Proies trop volumineuses",
+          "reason": "Étouffement, impaction"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Régime à base d'invertébrés (insectes, escargots) complété de fruits ; complément en calcium et vitamines généralement recommandé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Anolis_equestris",
+          "title": "Knight anole - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 32,
+      "humidityMin": 60,
+      "humidityMax": 80,
+      "minSpaceSize": "Terrarium vertical 100x60x150cm minimum, arboricole",
+      "lightNeeds": "UVB 8-10h/jour indispensable (lampe spécialisée), zone chaude 30-32°C, zone fraîche 24-26°C",
+      "activityEnrichment": "Branches épaisses, lierre artificiel, cachettes en hauteur, zone basking",
+      "hygieneNotes": "Brumisation quotidienne, retrait régulier des déjections, substrat entretenu",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Anolis_equestris",
+          "title": "Knight anole - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Diurne, arboricole et très territorial ; peut devenir plus tolérant à la manipulation s'il est manipulé régulièrement dès le plus jeune âge",
+      "sociability": "solitaire",
+      "difficultyLevel": "avance",
+      "compatibilityWithChildren": "Déconseillé : morsure puissante (dents petites et acérées), manipulation stressante",
+      "compatibilityWithOtherAnimals": "À maintenir seul : très territorial et agressif envers ses congénères",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Anolis_equestris",
+          "title": "Knight anole - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Metabolic Bone Disease (MBD, ostéodystrophie)",
+          "symptoms": "Jambes molles, gonflement mâchoires, colonne vertébrale courbée, refus nourriture",
+          "prevention": "UVB 8-10h jour obligatoire, suppléments calcium-vitD3 réguliers, alimentation variée",
+          "whenToConsult": "Urgence, peut être fatale sans traitement vétérinaire"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Respiration bruyante, mucus nasal, dyspnée, apathie, perte appétit",
+          "prevention": "Température stable, humidité adéquate, ventilation excellente, hygiène stricte",
+          "whenToConsult": "Immédiatement, souvent septiques rapidement"
+        },
+        {
+          "name": "Parasites externes (acariens, mites)",
+          "symptoms": "Plaques grises/blanches, grattage excessif, irritation cutanée, perte écailles",
+          "prevention": "Quarantaine nouveaux animaux, hygiène terrarium stricte, substrat régulièrement nettoyé",
+          "whenToConsult": "Dès premiers symptômes dermatites"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Anolis_equestris",
+          "title": "Knight anole - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Anolis_equestris",
+          "title": "Knight anole - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": null
+  }
+]

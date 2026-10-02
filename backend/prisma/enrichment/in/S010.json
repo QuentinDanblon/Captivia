@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2429038,
+  "commonNameFr": "Grenouille venimeuse de l'Amazone",
+  "scientificName": "Ameerega trivittata",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2429135,
+  "commonNameFr": "Grenouille de Dart",
+  "scientificName": "Oophaga pumilio",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2429295,
+  "commonNameFr": "Grenouille de Verre",
+  "scientificName": "Hyalinobatrachium valerioi",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

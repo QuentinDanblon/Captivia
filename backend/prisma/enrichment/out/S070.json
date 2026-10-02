@@ -1,0 +1,277 @@
+[
+  {
+    "speciesId": 104276062,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Feuilles mortes, mousses et bois en décomposition",
+          "frequency": "quotidienne",
+          "notes": "Base de l'alimentation : matière organique végétale en décomposition"
+        },
+        {
+          "name": "Légumes frais",
+          "frequency": "quotidienne",
+          "notes": "Carottes, laitue en complément"
+        },
+        {
+          "name": "Protéines (insectes séchés)",
+          "frequency": "hebdomadaire",
+          "notes": "Complément occasionnel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Pesticides et substances toxiques",
+          "reason": "Exosquelette perméable sensible aux toxines"
+        },
+        {
+          "name": "Aliments moisis",
+          "reason": "Risque d'infections fongiques"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Se nourrit de matière organique variée (feuilles, mousses, lichens, bois pourri). Apport de calcium utile pour l'exosquelette.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Porcellio_laevis",
+          "title": "Porcellio laevis"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium adapté à un petit groupe. Habitat naturel : sous les pierres et les bûches dans les zones humides, jardins, compost",
+      "lightNeeds": "Lumière indirecte, cycle naturel suffisant",
+      "activityEnrichment": "Substrat épais, écorces, cachettes multiples",
+      "hygieneNotes": "Substrat humide maintenu, aération suffisante, nettoyage régulier",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Porcellio_laevis",
+          "title": "Porcellio laevis"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Cloporte rapide : s'échappe par à-coups de vitesse et change de direction en alternance pour dérouter les prédateurs. Inoffensif",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Inoffensif et facile à observer, sous supervision",
+      "compatibilityWithOtherAnimals": "Compatible avec d'autres cloportes, peut servir de proie à des prédateurs",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Porcellio_laevis",
+          "title": "Porcellio laevis"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Dessiccation",
+          "symptoms": "Immobilité, exosquelette sec",
+          "prevention": "Maintenir un substrat humide",
+          "whenToConsult": "Corriger l'humidité sans délai si inactivité prolongée"
+        },
+        {
+          "name": "Infections fongiques",
+          "symptoms": "Taches blanches/noires, moisissures",
+          "prevention": "Éviter un substrat détrempé, aération suffisante",
+          "whenToConsult": "Dès apparition de taches"
+        },
+        {
+          "name": "Parasites externes",
+          "symptoms": "Lésions, comportement anormal",
+          "prevention": "Quarantaine des nouveaux individus",
+          "whenToConsult": "Si lésions visibles"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Porcellio_laevis",
+          "title": "Porcellio laevis"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Développement direct à partir d'œufs riches en vitellus. Les œufs puis les juvéniles se développent dans une poche incubatrice (marsupium) jusqu'au premier stade juvénile. Espèce facile à maintenir : un groupe s'installe en quelques semaines en terrarium",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Porcellio_laevis",
+          "title": "Porcellio laevis"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 144096299,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes variés (grillons, criquets, blattes)",
+          "frequency": "quotidienne",
+          "notes": "Nourriture principale ; les insectes très gras (vers de cire) sont difficiles à digérer pour les jeunes"
+        },
+        {
+          "name": "Feuilles et fruits",
+          "frequency": "2-3 fois par semaine",
+          "notes": "Complément végétal"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments épicés ou salés",
+          "reason": "Irritation digestive"
+        },
+        {
+          "name": "Insectes traités aux pesticides",
+          "reason": "Toxicité cumulée"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime omnivore varié (insectes, vers, petits vertébrés en nature). Supplémentation en calcium et vitamine D3 recommandée en captivité",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Basiliscus_plumifrons",
+          "title": "Plumed Basilisk"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": 32,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Très grand terrarium, surtout en hauteur (espèce arboricole et aquatique pouvant atteindre environ 90 cm de long queue comprise) avec un grand bassin d'eau. Habitat naturel : forêts tropicales chaudes et humides au bord de cours d'eau",
+      "lightNeeds": "Éclairage de jour avec UVB (espèce diurne)",
+      "activityEnrichment": "Bassin d'eau, branches épaisses, plantes vivantes, espace pour courir",
+      "hygieneNotes": "Eau du bassin renouvelée régulièrement, filtration légère recommandée, brumisation pour maintenir une atmosphère humide",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Basiliscus_plumifrons",
+          "title": "Plumed Basilisk"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Diurne, arboricole et aquatique, capable de courir sur l'eau en s'aidant des pattes et de la queue pour fuir les prédateurs. Très territorial",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Ne supporte pas bien la manipulation : déconseillé aux jeunes enfants",
+      "compatibilityWithOtherAnimals": "Très territorial : plusieurs mâles ne peuvent pas cohabiter dans le même terrarium",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Basiliscus_plumifrons",
+          "title": "Plumed Basilisk"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 60,
+      "litterSizeMin": 5,
+      "litterSizeMax": 15,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare. Pontes de 5 à 15 œufs (14-17 selon certaines observations), incubation de 8 à 10 semaines. Plusieurs pontes possibles au cours d'une même saison de reproduction (jusqu'à 4 ou 5)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Basiliscus_plumifrons",
+          "title": "Plumed Basilisk"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 156256182,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits insectes et arthropodes",
+          "frequency": "quotidienne",
+          "notes": "Proies de taille adaptée (le scinque mesure environ 4 cm du museau au cloaque)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes trop gros",
+          "reason": "Risque d'étouffement"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cryptoblepharus_virgatus",
+          "title": "Cryptoblepharus virgatus"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium offrant des surfaces verticales : l'espèce se rencontre en milieu urbain, boisé et herbeux, sur les arbres, clôtures et murs",
+      "lightNeeds": null,
+      "activityEnrichment": "Branches, écorce, cachettes multiples",
+      "hygieneNotes": "Nettoyage régulier du terrarium et des gamelles",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cryptoblepharus_virgatus",
+          "title": "Cryptoblepharus virgatus"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petit scinque se rencontrant sur les surfaces verticales (arbres, clôtures, murs). Lorsqu'il est menacé, il fait souvent le mort pour dérouter l'agresseur",
+      "sociability": null,
+      "difficultyLevel": null,
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cryptoblepharus_virgatus",
+          "title": "Cryptoblepharus virgatus"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": null
+  }
+]

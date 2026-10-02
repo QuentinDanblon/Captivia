@@ -1,0 +1,242 @@
+[
+  {
+    "speciesId": 5959230,
+    "feeding": {
+      "dietType": "frugivore",
+      "recommendedFoods": [
+        { "name": "Fruits variés (pommes, raisins, papaye, noix de coco)", "frequency": "quotidienne", "notes": "Préférer fruits non traités, équilibrés en nutriments" },
+        { "name": "Noix et graines (noix de macadamia, tournesol, cacahuètes)", "frequency": "quotidienne", "notes": "Riche en acides gras, excellentes pour la peau et le plumage" },
+        { "name": "Légumes frais (courges, brocoli, carottes cuites)", "frequency": "hebdomadaire", "notes": "Apportent fibres et minéraux essentiels" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Sel et sucre", "reason": "Nocif pour les reins et le système digestif des perroquets" },
+        { "name": "Avocat", "reason": "Toxique pour les oiseaux, peut causer troubles cardiaque" },
+        { "name": "Chocolat et caféine", "reason": "Causent tremblements, tachycardie et irritabilité" }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "En nature, se nourrit surtout de graines, de fruits, de noix et de bourgeons, et consomme de l'argile sur des « lèches » pour neutraliser les toxines des végétaux et obtenir du sel.",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Military_macaw", "title": "Military macaw - Wikipédia EN" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Ara_militaire", "title": "Ara militaire - Wikipédia FR" }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Perchoirs variés, jouets à détruire, cordes, branches naturelles pour grimper et ronger",
+      "hygieneNotes": "Bain régulier (pulvérisation d'eau), nettoyage régulier de la volière, prévention de l'humidité excessive",
+      "costEstimate": "élevé",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Military_macaw", "title": "Military macaw - Wikipédia EN" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Ara_militaire", "title": "Ara militaire - Wikipédia FR" }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Très vocal et bruyant, vit en grands groupes ou en couples, énergique et intelligent",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "À réserver à des enfants plus âgés, avec supervision constante ; peut mordre si dérangé",
+      "compatibilityWithOtherAnimals": "Territorial avec autres oiseaux, préférence pour compagnon humain unique",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Military_macaw", "title": "Military macaw - Wikipédia EN" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Ara_militaire", "title": "Ara militaire - Wikipédia FR" }
+      ]
+    },
+    "health": {
+      "diseases": [
+        { "name": "Psittacose (ornithose)", "symptoms": "Respiration sifflante, écoulement nasal, plumage gonflé, apathie, diarrhée", "prevention": "Hygiène volière stricte, quarantaine nouveaux oiseaux, vérification santé vétérinaire", "whenToConsult": "Dès premiers symptômes, contagion possible à humains" },
+        { "name": "Aspergillus (infection fongique respiratoire)", "symptoms": "Respiration bruyante, fatigue, perte appétit, dyspnée à l'effort", "prevention": "Bonne ventilation, absence humidité excessive, substrat sec", "whenToConsult": "À tout symptôme respiratoire, peut être fatal" },
+        { "name": "Carence en vitamine A", "symptoms": "Yeux gonflés, tuméfaction paupières, écoulement oculaire, infections respiratoires récurrentes", "prevention": "Alimentation riche fruits orange/jaune (papaye, mangue), multivitamines régulières", "whenToConsult": "Dès symptômes oculaires ou respiratoires fréquents" }
+      ],
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Military_macaw", "title": "Military macaw - Wikipédia EN" }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": ["Documents CITES requis (espèce inscrite à l'annexe I)"],
+        "restrictions": ["Commerce international à des fins commerciales interdit (CITES annexe I)"]
+      },
+      "sources": [
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Ara_militaire", "title": "Ara militaire - Wikipédia FR (CITES annexe I)" },
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Military_macaw", "title": "Military macaw - Wikipédia EN (CITES Appendix I)" }
+      ]
+    },
+    "reproduction": {
+      "season": "mars-octobre",
+      "gestationDays": null,
+      "incubationDays": 25,
+      "litterSizeMin": 2,
+      "litterSizeMax": 3,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Nidification dans de grands arbres de la canopée. Ponte de 2 à 3 œufs, incubation de 25 à 28 jours. Reproduction en captivité possible avec expérience.",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Military_macaw", "title": "Military macaw - Wikipédia EN" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Ara_militaire", "title": "Ara militaire - Wikipédia FR" }
+      ]
+    }
+  },
+  {
+    "speciesId": 7387949,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Souris et rats congelés-décongelés", "frequency": "hebdomadaire", "notes": "Taille adaptée au diamètre corps serpent, safer que vivants" },
+        { "name": "Lézards et petits oiseaux", "frequency": "mensuelle", "notes": "Diversification naturelle, enrichissement comportemental" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Proies vivantes sans supervision", "reason": "Risque blessure serpent, souffrance proie non nécessaire" },
+        { "name": "Proies trop volumineuses", "reason": "Risque fausse route, régurgitation" }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Proies congelées-décongelées de préférence, à température ambiante avant d'être proposées, de taille adaptée au serpent",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Elaphe_obsoleta", "title": "Western rat snake (Pantherophis obsoletus) - Wikipédia EN" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Pantherophis_obsoletus", "title": "Pantherophis obsoletus - Wikipédia FR" }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycle jour-nuit régulier",
+      "activityEnrichment": "Branches solides pour grimper, cachettes",
+      "hygieneNotes": "Nettoyage régulier, eau propre renouvelée fréquemment, substrat sec et bien drainé",
+      "costEstimate": "moyen",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Elaphe_obsoleta", "title": "Western rat snake (Pantherophis obsoletus) - Wikipédia EN" }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Excellent grimpeur, surtout diurne (parfois nocturne). Les individus nés en captivité sont généralement plus dociles que les individus sauvages ; peut fuir, se figer ou mordre si stressé",
+      "sociability": null,
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Avec supervision adulte uniquement, serpent généralement calme en captivité",
+      "compatibilityWithOtherAnimals": "A maintenir seul en captivité, risque de prédation sur autres reptiles",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Elaphe_obsoleta", "title": "Western rat snake (Pantherophis obsoletus) - Wikipédia EN" }
+      ]
+    },
+    "health": {
+      "diseases": [
+        { "name": "Mycose et infections bactériennes", "symptoms": "Taches/desquamation anormale, écailles soulevées, plaques grises/blanches", "prevention": "Terrarium propre, substrat sec, humidité modérée, aération suffisante", "whenToConsult": "À tout signe dermatite, avant extension" },
+        { "name": "Parasites (acariens, vers)", "symptoms": "Grattage excessif, refus nourriture, selles anormales, dépigmentation cutanée", "prevention": "Nourriture inspectée, hygiène stricte, quarantaine de nouveaux animaux", "whenToConsult": "Dès symptômes digestifs ou cutanés anormaux" }
+      ],
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Elaphe_obsoleta", "title": "Western rat snake (Pantherophis obsoletus) - Wikipédia EN" }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "mai-juin",
+      "gestationDays": null,
+      "incubationDays": 65,
+      "litterSizeMin": 12,
+      "litterSizeMax": 20,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Accouplement de fin mai à début juin. La femelle pond environ 12 à 20 œufs ; incubation de 65 à 70 jours (éclosions de fin août à début octobre).",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Elaphe_obsoleta", "title": "Western rat snake (Pantherophis obsoletus) - Wikipédia EN" }
+      ]
+    }
+  },
+  {
+    "speciesId": 7572096,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        { "name": "Flocons de qualité premium pour poissons tropicaux", "frequency": "quotidienne", "notes": "2 fois/jour petites portions, privilégier marques réputées" },
+        { "name": "Daphnie et artémia vivants ou congelés", "frequency": "2-3x/semaine", "notes": "Protéines animales essentielles, enrichissement comportemental" },
+        { "name": "Légumes (épinards, courgettes blanchis), fruits", "frequency": "hebdomadaire", "notes": "Fibres et nutriments supplémentaires" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Nourriture excessive ou non consommée", "reason": "Pollue l'eau, favorise croissance algues et bactéries" },
+        { "name": "Nourriture stockée longtemps", "reason": "Perte vitamines, dégradation nutriments" }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Ration petite (quantité avalable en 2-3 minutes), vitamines ajoutées nourriture régulièrement",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rosy_barb", "title": "Rosy barb - Wikipédia EN" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Pethia_conchonius", "title": "Pethia conchonius - Wikipédia FR" }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 18,
+      "tempMax": 26,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "150 litres minimum pour un groupe d'au moins 5 individus (longueur d'aquarium d'au moins 76 cm)",
+      "lightNeeds": null,
+      "activityEnrichment": "Plantes aquatiques, cachettes, espace libre pour nage active",
+      "hygieneNotes": "Changements d'eau partiels réguliers, entretien régulier du filtre, test régulier de la qualité de l'eau",
+      "costEstimate": "moyen",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rosy_barb", "title": "Rosy barb - Wikipédia EN" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Pethia_conchonius", "title": "Pethia conchonius - Wikipédia FR" }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Actif et vif, grégaire (à garder en groupe d'au moins 5, ne supporte pas la solitude), généralement paisible mais peut s'en prendre aux nageoires d'autres poissons",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Poisson d'aquarium actif, agréable à observer pour les enfants",
+      "compatibilityWithOtherAnimals": "Convient à un aquarium communautaire avec des espèces actives de taille similaire ; peut stresser ou mordiller les nageoires des espèces calmes ou à longues nageoires",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rosy_barb", "title": "Rosy barb - Wikipédia EN" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Pethia_conchonius", "title": "Pethia conchonius - Wikipédia FR" }
+      ]
+    },
+    "health": {
+      "diseases": [
+        { "name": "Ich (Ichthyophthirius multifiliis)", "symptoms": "Taches blanches pointillistes sur corps et nageoires, frottement roches/plantes, anorexie", "prevention": "Hygiène aquarium, température stable, éviter stress, quarantaine poissons neufs", "whenToConsult": "Urgent, contagion rapide à groupe" },
+        { "name": "Pourriture des nageoires", "symptoms": "Nageoires effilochées, décolorées, érosion progressif, ulcérations", "prevention": "Eau propre, température stable, diversification nourriture, espace adéquat", "whenToConsult": "Dès premiers signes, séparation poisson affecté recommandée" },
+        { "name": "Parasites externes", "symptoms": "Accrochage corps/plantes, refus nourriture, taches rouges, irritation cutanée", "prevention": "Nourriture inspectée, nouvelles plantes nettoyées, hygiène régulière", "whenToConsult": "À tout symptôme comportement anormal" }
+      ],
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rosy_barb", "title": "Rosy barb - Wikipédia EN" }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rosy_barb", "title": "Rosy barb - Wikipédia EN (IUCN : préoccupation mineure)" }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Ponte de plusieurs centaines d'œufs (plus de 1 000 selon Wikipédia FR). Éclosion en 24 à 36 heures selon la température ; les alevins nagent librement vers 6 jours.",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rosy_barb", "title": "Rosy barb - Wikipédia EN" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Pethia_conchonius", "title": "Pethia conchonius - Wikipédia FR" }
+      ]
+    }
+  }
+]

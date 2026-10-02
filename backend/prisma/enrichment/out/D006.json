@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000141,
+    "description": "L'Égyptien Mau est une rare race féline originaire d'Égypte, développée en 1953 en Italie après qu'une princesse ait obtenu un chat de l'ambassadeur égyptien. Cette race se distingue par son pelage tacheté naturel unique et sa musculature athlétique avec des pattes arrière plus longues que les avant. Ses yeux grands et ronds d'un vert clair particulier lui confèrent une apparence équilibrée entre la compacité du Birman et l'élégance du Siamois.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Egyptian_Mau"
+  },
+  {
+    "speciesId": 2000000142,
+    "description": "Le Khao Manee est une race féline originaire de Thaïlande, historiquement considérée comme porte-bonheur et race préférée du roi Rama V. Ce chat se distingue par sa robe à poil court de couleur blanche avec des yeux pouvant être jaunes, bleus ou vairons, caractéristiques qui lui valent le surnom d'« yeux de diamants ». Doté d'une silhouette élancée de type oriental, il affiche un tempérament très affectueux et sociable comparable à celui du Siamois.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Khao_Manee"
+  },
+  {
+    "speciesId": 2000000143,
+    "description": "Le LaPerm est une race féline originaire des États-Unis, créée en 1982 en Oregon après qu'une mutation génétique naturelle ait produit une chatte aux poils frisés nommée Curly. De taille moyenne, il se distingue par sa fourrure donnant l'impression de vagues et est disponible en versions à poils courts et mi-longs. Les LaPerms sont réputés pour être très affectueux, aimant se percher sur l'épaule de leurs propriétaires.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/LaPerm"
+  },
+  {
+    "speciesId": 2000000144,
+    "description": "Le Munchkin est une race féline originaire des États-Unis, issue d'une mutation génétique spontanée (achondroplasie) découverte en 1983 en Louisiane. Son trait distinctif est ses pattes courtes, bien que son corps soit de taille normale, d'où le surnom de « chat basset ». Équilibré de type semi-foreign avec une tête triangulaire arrondie et des yeux en forme de noix, il conserve un tempérament ludique et sociable malgré la brièveté de ses membres.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Munchkin_(chat)"
+  },
+  {
+    "speciesId": 2000000145,
+    "description": "Le Nebelung est une race féline russe représentant la variante à poils longs du Russian Blue, partageant les mêmes caractéristiques génétiques. Il se caractérise par son élégance, sa musculature gracieuse, son pelage bleu distinctif et ses yeux verts frappants. Vif, espiègle, affectueux et intelligent, il préfère les environnements calmes mais participe activement à la vie familiale tout en restant réservé avec les étrangers.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Nebelung"
+  },
+  {
+    "speciesId": 2000000146,
+    "description": "Le Peterbald est une race féline originaire de Russie, créée en 1994 à Saint-Pétersbourg par croisement entre un Donskoy et un Oriental à poil court. Il se distingue par son corps longiligne, sa tête triangulaire et ses grandes oreilles, avec une peau glabre, veloutée ou couverte d'un poil court selon la variété. Tempéré et pacifique, ce chat est énergique, curieux et sociable, mais supporte mal la solitude et a besoin de beaucoup d'attention.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Peterbald"
+  },
+  {
+    "speciesId": 2000000147,
+    "description": "Le Selkirk Rex est une race féline originaire des États-Unis, découverte en 1987 au Wyoming. Elle se caractérise par sa robe à poil frisé distinctive et une morphologie semi-cobby de taille moyenne à grande. Développée à partir d'une chatte mutante croisée avec un Persan, elle combine les traits de plusieurs races. Tempéramentalement, ces chats sont très patients, tolérants et affectueux, héritant de la nature docile du Persan.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Selkirk_Rex"
+  },
+  {
+    "speciesId": 2000000148,
+    "description": "Le Singapura est une race féline considérée comme la plus petite au monde, pesant entre 2 et 4 kg. Il se caractérise par son distinctive pelage « brown ticked tabby » et ses yeux amande. Actif, curieux et joueur, ce félin affectueux préfère la vie en intérieur, particulièrement dans les environnements chauds, et s'adapte bien au style de vie domestique.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Singapura"
+  },
+  {
+    "speciesId": 2000000149,
+    "description": "Le Snowshoe est une race féline originaire des États-Unis, créée dans les années 1960 à Philadelphie par Dorothy Hinds-Daugherty. C'est un croisement entre un Siamois et un American Shorthair bicolore, conçu pour obtenir des chats aux pieds blancs caractéristiques. De taille moyenne et musclé, ce félin allie l'élégance du Siamois à la robustesse du chat birmane avec des yeux bleus distinctifs.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Snowshoe"
+  },
+  {
+    "speciesId": 2000000150,
+    "description": "Le Toyger est une race féline originaire des États-Unis, développée dans les années 1980 par Judy Sudgen. Ce chat est caractérisé par son physique visant à ressembler le plus possible à celui d'un tigre miniature. Possédant une tête moyenne et arrondie, des yeux petits et ronds et une robe brun tabby mackerel avec des rayures distinctes, il est sociable, joueur et apprécie la compagnie humaine.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Toyger"
+  },
+  {
+    "speciesId": 2000000151,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000152,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000153,
+    "description": "Le York Chocolat est une race féline originaire des États-Unis, née accidentellement en 1985 dans l'État de New York. Elle se distingue par sa robe à poils courts ou mi-longs de couleur chocolat riche et ses grands yeux ovales de teinte or ou vert. Pesant entre 4 et 8 kilogrammes selon le sexe, le York Chocolat possède une fourrure douce et soyeuse. La race est décrite comme gaie, énergique et joueuse, formant des liens forts avec la famille.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/York_Chocolat"
+  },
+  {
+    "speciesId": 2000000154,
+    "description": "Le Lapin Nain Bélier est une race miniature de lapin domestique caractérisée par ses oreilles tombantes distinctives. Originaire des Pays-Bas, il résulte du croisement entre le bélier français et le bélier anglais, créé en 1949. Ces animaux sont réputés pour leur tempérament doux et docile, se laissant facilement manipuler et câliner, d'où leur surnom de « lapins-peluches ».",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/B%C3%A9lier_(lapin)"
+  },
+  {
+    "speciesId": 2000000155,
+    "description": "Le Lapin Bélier Français est une race de lapin domestique se caractérisant par ses oreilles pendantes distinctives. Ces oreilles donnent à la tête une apparence particulière et nécessitent un entretien régulier. Comme tous les lapins béliers, cette race offre un tempérament doux et docile, facilement manipulable et affectueux auprès de ses propriétaires.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Lop_rabbit"
+  }
+]

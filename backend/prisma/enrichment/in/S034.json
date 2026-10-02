@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 5219888,
+  "commonNameFr": "Porc-épic",
+  "scientificName": "Hystrix cristata",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5220136,
+  "commonNameFr": "Daim",
+  "scientificName": "Dama dama",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5220266,
+  "commonNameFr": "Tortue géante des Galapagos",
+  "scientificName": "Chelonoidis nigra",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

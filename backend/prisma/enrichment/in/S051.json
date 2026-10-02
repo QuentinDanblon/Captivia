@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 9198359,
+  "commonNameFr": "Galago",
+  "scientificName": "Galago senegalensis",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 9268496,
+  "commonNameFr": "Tortue à cou serpent",
+  "scientificName": "Chelodina longicollis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 9451184,
+  "commonNameFr": "Paon bleu",
+  "scientificName": "Pavo cristatus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

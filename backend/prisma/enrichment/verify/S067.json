@@ -1,0 +1,54 @@
+[
+  {
+    "speciesId": 104145998,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.incubationDays: null → 24 (Wikipédia FR : 23 à 25 jours)",
+      "reproduction.litterSizeMin/Max: 1-11 → 4-6 (Wikipédia FR : 4 à 6 œufs ; 1-11 mentionné dans les notes d'après Wikipedia EN)",
+      "feeding.specificNeeds: régime 'herbivore' nuancé (Wikipedia EN : surtout herbivore, techniquement omnivore)",
+      "behavior: 'signatures vocales individuelles' retiré (non confirmé) ; dialectes de groupe confirmés",
+      "habitat.minSpaceSize: '2x2x2 m' et 'résistent au froid' non confirmés → retirés"
+    ],
+    "removed": [
+      "legislation (section entière : l'espèce est CITES II d'après Wikipédia FR, ce qui contredit citesAppendix null ; statut français (espèce exotique envahissante ?) non confirmable → null ; source cites.org = page d'accueil générique)",
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (10-28 °C, 40-70 % non confirmés)",
+      "reproduction.season 'variable selon saisons appropriées' (sans contenu)",
+      "reproduction.sexualMaturityMonths 24 (non mentionné)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104146243,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.minSpaceSize: '1,5x1,5x1,5 m' retiré ; habitat naturel précisé (miombo, savane, forêts, Wikipedia EN)",
+      "behavior: 'agressivité limitée' retiré (non confirmé) ; 'relativement silencieux', 'dizaines de mots', 'couples ou petits groupes' confirmés",
+      "legislation: CITES II confirmé par Wikipedia EN ; source cites.org remplacée par la page Wikipedia de l'espèce",
+      "reproduction: 3-4 œufs, incubation 28 j, envol ~60 j confirmés (Wikipedia EN)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (15-28 °C, 45-70 % non confirmés)",
+      "legislation.euAnnex 'B' (non confirmé)",
+      "reproduction.season 'saison appropriée selon environnement' (sans contenu)",
+      "reproduction.sexualMaturityMonths 18 (non mentionné)",
+      "source https://www.cites.org (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104151432,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: grains, feuilles, invertébrés, noisettes, graines confirmés (Wikipedia EN/FR)",
+      "habitat.minSpaceSize: '100 m² minimum' non confirmé → formulation qualitative (forêts denses à sous-bois touffu, perchoirs nocturnes en hauteur : Wikipedia EN)",
+      "behavior: 'préfère courir au vol' et 'appel métallique' retirés (non confirmés) ; farouche, seul/couple/trio, groupes de 20-30 en saison, hybridation fertile avec le faisan doré confirmés (Wikipédia FR)",
+      "reproduction: texte méta ('Source Wikipedia manque données...') supprimé ; saison (mi-avril, parades dès mi-mars) et ponte observée (6-7 œufs) ajoutées d'après Wikipédia FR ; 'reproduction difficile' non confirmé (la source dit qu'elle se reproduit en captivité) → breedingDifficulty null"
+    ],
+    "removed": [
+      "legislation (section entière : statut 'allowed' non confirmé ; la seule source était la page d'accueil IUCN ; Wikipédia FR évoque un statut CITES non précisé → null)",
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (5-25 °C, 50-80 % non confirmés)",
+      "reproduction.breedingDifficulty 'avance' (non confirmé)"
+    ],
+    "confidence": "medium"
+  }
+]

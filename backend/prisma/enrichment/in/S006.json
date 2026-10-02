@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2367196,
+  "commonNameFr": "Koi",
+  "scientificName": "Cyprinus rubrofuscus",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2370243,
+  "commonNameFr": "Oscar",
+  "scientificName": "Astronotus ocellatus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2371275,
+  "commonNameFr": "Apistogramma cacatuoides",
+  "scientificName": "Apistogramma cacatuoides",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

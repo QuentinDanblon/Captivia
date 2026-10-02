@@ -1,0 +1,63 @@
+[
+  {
+    "speciesId": 5296842,
+    "health": null,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Données générales sur les phasmes (ordre des Phasmatodea), non spécifiques à cette espèce. Beaucoup d'espèces sont parthénogénétiques (les femelles peuvent pondre sans mâle). Les œufs ressemblent à des graines ; une femelle pond de 100 à 1 200 œufs selon l'espèce. Incubation variable : de 13 à plus de 70 jours, en moyenne 20 à 30 jours. Les espèces tempérées peuvent entrer en diapause hivernale. Les œufs sont projetés au sol, déposés dans les aisselles des plantes, enfouis ou collés sur un support. L'âge adulte est atteint après plusieurs mois et de nombreuses mues.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Stick_insect",
+          "title": "Stick insect - Reproduction and life cycle"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5299984,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 3,
+      "breedingDifficulty": "avance",
+      "notes": "La reproduction du Néon bleu est considérée comme difficile en aquarium domestique. Conditions requises : éclairage faible, eau très douce (dH inférieur à 1), pH d'environ 5,5, température d'environ 24°C et eau riche en tanins. Maturité sexuelle vers 12 semaines. La grande majorité des poissons vendus provient d'élevages (notamment en Asie du Sud-Est). Les alevins sont très délicats à élever.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Neon_tetra",
+          "title": "Neon tetra - Breeding"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5300016,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": 1,
+      "litterSizeMin": 12,
+      "litterSizeMax": 492,
+      "sexualMaturityMonths": 4,
+      "breedingDifficulty": "modere",
+      "notes": "Le mâle construit un nid de bulles à la surface de l'eau. Pendant le frai, le mâle enroule son corps autour de la femelle (étreinte nuptiale) ; environ 10 à 40 œufs sont libérés à chaque étreinte, et une femelle peut libérer de 12 à 492 œufs en une ponte. L'incubation dure 24 à 36 heures. Les larves restent dans le nid 2 à 3 jours, le temps d'absorber leur sac vitellin. Les femelles ont besoin d'au moins 4 semaines de repos entre les pontes, les mâles environ 1 semaine. Maturité sexuelle dès 4 à 5 mois.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Siamese_fighting_fish",
+          "title": "Siamese fighting fish - Reproduction and breeding"
+        }
+      ]
+    }
+  }
+]

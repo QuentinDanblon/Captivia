@@ -86,7 +86,11 @@ const VALID_DOMESTICATION = ['domestique', 'semi-domestique', 'NAC'];
 
 async function main() {
   const dataPath = path.resolve(__dirname, 'breeds-data.json');
-  const breeds: Breed[] = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+  const excluded = new Set<number>(
+    (JSON.parse(fs.readFileSync(path.resolve(__dirname, 'enrichment', 'excluded-breed-ids.json'), 'utf-8')) as { ids: number[] }).ids,
+  );
+  // Les entrées non animales (outils, objets, Q-ids) ne sont jamais importées.
+  const breeds: Breed[] = (JSON.parse(fs.readFileSync(dataPath, 'utf-8')) as Breed[]).filter((b) => !excluded.has(b.speciesId));
   console.log(`📦 ${breeds.length} fiches à importer`);
 
   let ok = 0;

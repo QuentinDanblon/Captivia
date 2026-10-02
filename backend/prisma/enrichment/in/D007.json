@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000156,
+  "commonNameFr": "Lapin Nain",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000158,
+  "commonNameFr": "Lapin Rex",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000159,
+  "commonNameFr": "Lapin Géant des Flandres",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000160,
+  "commonNameFr": "Lapin Hollandais",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000161,
+  "commonNameFr": "Lapin Lop",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000162,
+  "commonNameFr": "Lapin Papillon",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000163,
+  "commonNameFr": "Lapin Tête de Lion",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000164,
+  "commonNameFr": "Lapin Hermine",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000165,
+  "commonNameFr": "Lapin Polonais",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000166,
+  "commonNameFr": "Lapin Russe",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000167,
+  "commonNameFr": "Lapin Satin",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000168,
+  "commonNameFr": "Lapin Tacheté Anglais",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000169,
+  "commonNameFr": "Lapin Zibeline",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000170,
+  "commonNameFr": "Lapin Argenté de Champagne",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000171,
+  "commonNameFr": "Lapin Fauve de Bourgogne",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

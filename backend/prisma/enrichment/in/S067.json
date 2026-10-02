@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104145998,
+  "commonNameFr": "Conure veuve",
+  "scientificName": "Myiopsitta monachus",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104146243,
+  "commonNameFr": "Perroquet de Meyer",
+  "scientificName": "Poicephalus meyeri",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104151432,
+  "commonNameFr": "Faisan de Lady Amherst",
+  "scientificName": "Chrysolophus amherstiae",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

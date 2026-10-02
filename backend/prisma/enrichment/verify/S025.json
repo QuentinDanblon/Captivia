@@ -1,0 +1,65 @@
+[
+  {
+    "speciesId": 2479694,
+    "checked": ["feeding", "habitat", "behavior", "health", "reproduction", "legislation"],
+    "corrected": [
+      "feeding.dietType: granivore-frugivore -> nectarivore-frugivore (source: en.wikipedia Rainbow_lorikeet, fruit/pollen/nectar)",
+      "feeding: miel et pain retires des aliments conseilles / pain+miel deplaces en 'a eviter' (la page deconseille pain et miel)",
+      "feeding: graines germees retirees (non confirmees pour un nectarivore)",
+      "health: 'Problemes de plumage' remplace par Lorikeet Paralysis Syndrome (cite dans la page)",
+      "behavior.generalBehavior: 'groupes de 20 oiseaux' -> volees bruyantes (page: milliers d'oiseaux)",
+      "reproduction.season precisee (sud de l'Australie); incubationDays 25 et nichee 1-3 confirmes",
+      "reproduction.notes: monogamie et sexage ADN retires (non confirmes), incubation par la femelle seule ajoutee (source)",
+      "source URL normalisee en Rainbow_lorikeet"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize/lightNeeds (non confirmables)",
+      "behavior.compatibilityWithOtherAnimals (non confirme)",
+      "behavior.compatibilityWithChildren: 'enfants +10 ans' retire",
+      "reproduction.sexualMaturityMonths: 24 (non confirme)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2479870,
+    "checked": ["feeding", "habitat", "behavior", "health", "reproduction", "legislation"],
+    "corrected": [
+      "feeding: graines seules -> problemes de foie et croissance anormale du bec (source fr.wikipedia Cacatoes_blanc), pas 'obesite'",
+      "habitat.minSpaceSize: 2,5x2,5 m -> 4 m x 1,50 m x 2 m (recommandation fr.wikipedia)",
+      "behavior: groupes d'environ 20 confirme; 'comportement agressif possible' retire (la page dit plus calme que ses congeneres)",
+      "health: 'Hepatopathie lipidique' -> problemes hepatiques lies aux graines; ajout arrachage de plumes (cite dans la page); typo 'avaire' corrigee",
+      "reproduction.sexualMaturityMonths: 48 -> 36 (page: 3-4 ans, precise en notes)",
+      "reproduction: incubation 28 j et 2 oeufs confirmes; notes reecrites d'apres la source (envol ~84 j, independance 15-18 sem.)",
+      "source en.wikipedia White_cockatoo ajoutee (confirmee)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/lightNeeds (non confirmables)",
+      "behavior.compatibilityWithOtherAnimals ('agression entre males' non confirme)",
+      "reproduction.season: 'toute l'annee' (non confirme)",
+      "reproduction.notes: 'reproduction difficile / elevage tres limite' (non confirme)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2479888,
+    "checked": ["feeding", "habitat", "behavior", "health", "reproduction", "legislation"],
+    "corrected": [
+      "reproduction.incubationDays: 30 -> 26 (source: 25 a 27 jours)",
+      "reproduction.litterSizeMin: 1 -> 2 (source: 2 a 3 oeufs)",
+      "reproduction.season: precise nord/sud (aout-janvier sud, mai-septembre nord)",
+      "reproduction.notes: periode nid 9-12 semaines (source) au lieu de 60-70 j / independance 1 an",
+      "health: 'Longevite exceptionnelle et usure articulation' (pas une maladie, non source) remplace par PBFD (cite dans la page)",
+      "feeding: 'noix du Bresil' et 'mycotoxines' retires/corriges, notes absurdes ('moulins de graines') reecrites",
+      "behavior: 'aube et crepuscule', 'resolution cognitifs', 'apprentissage social' non sources -> reformules d'apres la page (tres bruyants, sentinelles, intelligents)",
+      "behavior.compatibilityWithChildren: aggressif/imprevisible (source), 'enfants +12 ans' retire"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize/lightNeeds (non confirmables)",
+      "habitat.activityEnrichment: 'vols libres' retire",
+      "behavior.compatibilityWithOtherAnimals (non confirme)",
+      "reproduction.sexualMaturityMonths: 60 (non confirme)",
+      "reproduction.notes: 'reproduction tres difficile' (non confirme)"
+    ],
+    "confidence": "medium"
+  }
+]

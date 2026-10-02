@@ -1,0 +1,366 @@
+[
+  {
+    "speciesId": 2498387,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Glands, baies et graines forestières",
+          "frequency": "quotidienne",
+          "notes": "Peuvent broyer les glands après déglutition dans le gésier"
+        },
+        {
+          "name": "Insectes",
+          "frequency": "hebdomadaire",
+          "notes": "Apport protéique complémentaire, surtout en période de reproduction"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments moisissants",
+          "reason": "Infection mycotoxine"
+        },
+        {
+          "name": "Sel et eau saumâtre prolongée",
+          "reason": "Déshydratation et lésions rénales"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès à eau fraîche, gravier pour broyage, herbes aquatiques fraîches",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Wood_duck",
+          "title": "Wood duck — Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle",
+      "activityEnrichment": "Nage libre, perchage, vol, exploration et broutage ; arbres ou nichoirs en cavité pour la nidification",
+      "hygieneNotes": "Eau propre quotidienne, accès zone sèche, drainage zone humide",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Wood_duck",
+          "title": "Wood duck — Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Canard qui niche dans des cavités d'arbres (unique parmi les canards) ; forme des couples pendant la saison de reproduction, avec des parades nuptiales (balancements de tête, battements d'ailes)",
+      "sociability": null,
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Oiseau prudent, à observer à distance",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Wood_duck",
+          "title": "Wood duck — Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasitose interne et externe",
+          "symptoms": "Plumage ébouriffé, perte de poids, diarrhée, léthargie",
+          "prevention": "Eau propre, rotation zones broutage, isolation malades, traitement antiparasitaire",
+          "whenToConsult": "Dès suspicion infestation"
+        },
+        {
+          "name": "Infection bactérienne intestinale",
+          "symptoms": "Diarrhée, anorexie, abattement, perte poids",
+          "prevention": "Hygiène stricte eau et aliments, aliments frais, éviter stagnation eau",
+          "whenToConsult": "Si persistance plus 48h"
+        },
+        {
+          "name": "Carence nutritionnelle (protéines, minéraux)",
+          "symptoms": "Croissance retardée, fragilité osseuse, plumage terne, infertilité",
+          "prevention": "Régime équilibré riche en protéines, suppléments minéraux, diversité aliments",
+          "whenToConsult": "À signes développement anormal"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Wood_duck",
+          "title": "Wood duck — Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "février à avril (ponte)",
+      "incubationDays": 30,
+      "litterSizeMin": 7,
+      "litterSizeMax": 15,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Nid en cavité arboricole. Femelle pond 7-15 œufs, incube environ 28-30 jours (jusqu'à 37 selon les sources). Les poussins quittent le nid en sautant dès le premier ou deuxième jour après l'éclosion.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Wood_duck",
+          "title": "Wood duck — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2498388,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines d'arbres (faînes de hêtre, glands) et plantes aquatiques",
+          "frequency": "quotidienne",
+          "notes": "Base de l'alimentation ; recherche de nourriture surtout à l'aube et au crépuscule"
+        },
+        {
+          "name": "Insectes, escargots et petits mollusques",
+          "frequency": "hebdomadaire",
+          "notes": "Apport protéique complémentaire"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Eau stagnante polluée",
+          "reason": "Infection bactérienne, parasitose"
+        },
+        {
+          "name": "Grains fermentés ou moisis",
+          "reason": "Toxine mycotoxine"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Eau fraîche, accès broutage naturel, végétation aquatique abondante",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mandarin_duck",
+          "title": "Mandarin duck — Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle, préfère la semi-ombre sous couvert d'arbres",
+      "activityEnrichment": "Nage, perchage dans les arbres, broutage ; berges boisées et végétation dense comme refuge",
+      "hygieneNotes": "Eau propre régulièrement renouvelée, zones de repos sec à l'ombre",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mandarin_duck",
+          "title": "Mandarin duck — Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau timide qui cherche à s'abriter sous les arbres, en petits groupes ; actif surtout à l'aube et au crépuscule, perché dans les arbres en journée ; formation de couples",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Oiseau timide, à observer à distance",
+      "compatibilityWithOtherAnimals": "Peut cohabiter avec d'autres oiseaux d'eau paisibles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mandarin_duck",
+          "title": "Mandarin duck — Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection parasitaire (vers, acariens)",
+          "symptoms": "Plumage ébouriffé, perte poids, activité réduite, diarrhée",
+          "prevention": "Eau très propre, rotation zones broutage, hygiène stricte",
+          "whenToConsult": "Dès signes parasitose"
+        },
+        {
+          "name": "Aspergillose (mycose respiratoire)",
+          "symptoms": "Respiration bruyante, toux, apathie, mort rapide si non traité",
+          "prevention": "Eau fraîche, ventilation, absence humidité stagnante, hygiène zone eau",
+          "whenToConsult": "Urgence respiratoire"
+        },
+        {
+          "name": "Avitaminose A",
+          "symptoms": "Cécité progressive, croûtes paupières, perte équilibre, mortalité",
+          "prevention": "Alimentation riche bêta-carotène, herbes fraîches, suppléments vitaminés",
+          "whenToConsult": "À signes oculaires anormaux"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mandarin_duck",
+          "title": "Mandarin duck — Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "avril à mai",
+      "incubationDays": 28,
+      "litterSizeMin": 9,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Nid en cavité arboricole. Femelle pond 9-12 œufs, incube seule environ 28 jours. Les populations asiatiques sont migratrices (hivernage dans l'est de la Chine et le sud du Japon).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mandarin_duck",
+          "title": "Mandarin duck — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Canard_mandarin",
+          "title": "Canard mandarin — Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 4263039,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Fruits tombés (mangues, avocats, noix), feuilles et tiges",
+          "frequency": "quotidienne",
+          "notes": "Régime principal, varie selon la disponibilité en forêt tropicale"
+        },
+        {
+          "name": "Herbes, racines, tubercules et graines",
+          "frequency": "quotidienne",
+          "notes": "Complément important, fouille active au sol"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Fruits exotiques traités au pesticide",
+          "reason": "Intoxication chronique"
+        },
+        {
+          "name": "Aliments salés",
+          "reason": "Inadaptés au régime herbivore naturel"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Variété fruits frais, herbes diverses, accès à fouille sol pour racines, eau fraîche",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lowland_paca",
+          "title": "Lowland paca — Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière tamisée, zones d'ombre (animal nocturne)",
+      "activityEnrichment": "Fouille sol, baignade régulière (bon nageur, peut rester immergé plusieurs minutes), broutage, exploration ; terrier avec sorties multiples dans la nature (environ 2 m sous la surface)",
+      "hygieneNotes": "Sol humide bien drainé, accès zone sèche, bain eau fraîche, nettoyage régulier enclos",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lowland_paca",
+          "title": "Lowland paca — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Paca",
+          "title": "Paca — Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Rongeur nocturne et solitaire, prudent, excellent nageur qui se réfugie dans l'eau en cas de danger ; peu vocal",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Très limité : animal sauvage craintif, à ne pas manipuler",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lowland_paca",
+          "title": "Lowland paca — Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection mycotique cutanée",
+          "symptoms": "Croûtes, perte poils localisée, démangeaisons, zones dénudées",
+          "prevention": "Hygiène stricte enclos, éviter humidité excessive, isolation malades, alimentation riche immunité",
+          "whenToConsult": "Dès apparition croûtes/dénudaisons"
+        },
+        {
+          "name": "Parasitose gastrointestinale",
+          "symptoms": "Diarrhée, perte poids, anorexie, distension abdominale",
+          "prevention": "Hygiène rigoureuse, aliments frais, traitement antiparasitaire régulier, isolation zone",
+          "whenToConsult": "Si symptômes persiste 48h"
+        },
+        {
+          "name": "Infection bactérienne respiratoire",
+          "symptoms": "Éternuements, respiration bruyante, écoulements nasaux, apathie",
+          "prevention": "Ventilation correcte, absence courants froid, hygiène air",
+          "whenToConsult": "Urgence vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lowland_paca",
+          "title": "Lowland paca — Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 2,
+      "gestationDays": 115,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "avance",
+      "notes": "Gestation d'environ 115-120 jours. En général un seul jeune par portée, parfois deux ; une à trois portées par an. Maturité sexuelle vers 1 an.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lowland_paca",
+          "title": "Lowland paca — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Paca",
+          "title": "Paca — Wikipedia"
+        }
+      ]
+    }
+  }
+]

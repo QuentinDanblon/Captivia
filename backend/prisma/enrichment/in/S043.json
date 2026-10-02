@@ -1,0 +1,38 @@
+[
+ {
+  "speciesId": 5289124,
+  "commonNameFr": "Écureuil Roux Européen",
+  "scientificName": "Sciurus vulgaris",
+  "category": "mammifère",
+  "domesticationType": "semi-domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5289145,
+  "commonNameFr": "Écureuil Volant de Corée",
+  "scientificName": "Pteromyidae",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5296455,
+  "commonNameFr": "Blatte Domestique",
+  "scientificName": "Blattella germanica",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ }
+]

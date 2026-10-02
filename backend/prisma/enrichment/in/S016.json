@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2440891,
+  "commonNameFr": "Âne",
+  "scientificName": "Equus asinus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2440954,
+  "commonNameFr": "Cerf sika",
+  "scientificName": "Cervus nippon",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2441108,
+  "commonNameFr": "Bœuf musqué",
+  "scientificName": "Ovibos moschatus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

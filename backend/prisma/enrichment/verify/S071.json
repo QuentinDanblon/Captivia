@@ -1,0 +1,54 @@
+[
+  {
+    "speciesId": 156261518,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "sources: 'Glass_catfish' / 'Kryptopterus' remplacés par https://en.wikipedia.org/wiki/Kryptopterus_vitreolus",
+      "feeding: 'petits poissons vivants (danios, mollys)' retiré (poisson de 6,5-8 cm selon la source, régime non confirmé : invraisemblable) ; conserve artémias/daphnies ; 'granulés colorés ... conscience visuelle' retiré (incohérent)",
+      "behavior: banc/social confirmé ; 'nocturne, timide' retiré (non confirmé) ; taille 6,5 cm (max 8 cm) ajoutée (source)",
+      "reproduction: Haiku affirmait ponte 100-500 œufs, maturité 6 mois ; la source dit que l'espèce n'est pas connue pour être reproduite commercialement (poissons capturés dans la nature)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax 24-28, pH 6.5-7.5, 100 L, groupe 6-10, 5000-6500K, '25% hebdo' (non confirmés)",
+      "health (source unique vcahospitals.com page d'accueil -> section null)",
+      "legislation (statut non confirmé ; source legifrance page d'accueil)",
+      "reproduction.season, litterSizeMin/Max 100-500, sexualMaturityMonths 6 (non confirmés / contredits)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 156315727,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "sources: 'Singapore_blue_tarantula' (autre espèce) et 'Tarantula' (famille) remplacés par https://en.wikipedia.org/wiki/Cyriopagopus_lividus (Cobalt blue tarantula)",
+      "behavior: 'docile si non provoquée' CONTREDIT par la source ('fast and defensive tarantula') -> rapide et défensive ; 'mue 1-2x/an' retiré ; morsure très douloureuse mais non mortelle confirmée ; difficultyLevel intermédiaire -> expert (espèce défensive, rapide, fossoriale)",
+      "habitat.minSpaceSize: 'légèrement arboricole 30x30x30' CONTREDIT -> espèce fossoriale vivant dans un terrier profond (source) ; 'branches' et 'toile' retirés de l'enrichissement",
+      "feeding: fréquence 2-3x/semaine, 'every_2_days', proies 3-10 cm, 'petites araignées, scorpions', 'insectes volants rapides' retirés (non confirmés)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax 22-27, humidityMin/humidityMax 70-85, brumisation 2-3x/semaine (non confirmés -> null)",
+      "health (source 'Tarantula' = famille, non spécifique -> section null)",
+      "legislation (statut non confirmé ; source legifrance page d'accueil)",
+      "reproduction: season, litter 100-500, maturité 24 mois, difficulté (non confirmés -> null) ; notes remplacées par dimorphisme sexuel de la source"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 163312909,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "sources: 'Columba_livia' (pigeon biset sauvage) remplacé par https://en.wikipedia.org/wiki/Domestic_pigeon",
+      "feeding: graines et céréales confirmées ; '60-70% du régime' retiré",
+      "habitat: 'poulailler' -> pigeonnier/colombier ou volière ; 'bain de poussière / sable' retiré (pigeons = bain d'eau)",
+      "behavior: 'au moins une paire requise', 'couve seul ou en couple', 'excellente cohabitation avec poules' retirés (non confirmés) ; partenaire choisi en colombier ouvert, parents très protecteurs (source)",
+      "health: 'Traitement antibiotique urgent' pour coccidiose -> consultation vétérinaire (traitement anticoccidien) ; source VCA remplacée par Domestic_pigeon (mentionne acariens, paramyxovirus, chlamydia ; coccidiose seulement en références)",
+      "reproduction: litter 2-3 -> 2 œufs (source) ; incubation 17-19 j confirmée ; 'œufs blancs' retiré ; pas de saison de reproduction confirmé"
+    ],
+    "removed": [
+      "habitat.tempMin 15 / tempMax 28 (non confirmés -> null)",
+      "reproduction.sexualMaturityMonths 6 (non confirmé : la source indique seulement taille adulte à ~4 semaines -> null)",
+      "legislation (statut 'allowed' plausible pour une espèce domestique mais source legifrance = page d'accueil non spécifique -> section null)"
+    ],
+    "confidence": "medium"
+  }
+]

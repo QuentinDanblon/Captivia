@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000188,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000189,
+    "description": "Les gerboises sont de petits rongeurs du désert caractérisés par des pattes arrière exceptionnellement longues leur permettant des sauts dépassant 1,80 mètres. Ces créatures nocturnes possèdent une queue allongée servant d'équilibre et se cachent dans des terriers profonds pendant la chaleur du jour. Elles ne doivent pas être confondues avec les gerbilles, qui appartiennent à une famille différente.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Gerboise"
+  },
+  {
+    "speciesId": 2000000190,
+    "description": "La calopsitte élégante est un petit perroquet australien mesurant 30-35 cm, caractérisé par son plumage gris anthracite, sa huppe jaune et ses joues rouge-orange. Seule espèce du genre Nymphicus, cet oiseau vit en groupes dans les savanes australiennes et est très apprécié comme animal de compagnie. Il demande une alimentation équilibrée et des soins réguliers pour prospérer en captivité.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Calopsitte"
+  },
+  {
+    "speciesId": 2000000191,
+    "description": "Le perroquet gris est un psittacidé africain originaire des forêts équatoriales d'Afrique de l'Ouest et centrale, mesurant 33 cm et pesant environ 400 grammes. Son plumage gris dominant et sa queue rouge caractéristique en font un oiseau distinctif. Remarquable pour son intelligence exceptionnelle, il peut apprendre plus de 100 mots et performer à un niveau cognitif comparable à celui d'un enfant humain de quatre à six ans.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/African_grey_parrot"
+  },
+  {
+    "speciesId": 2000000192,
+    "description": "L'ara hyacinthe est le plus grand perroquet du monde, originaire du Brésil, de Bolivie et du Paraguay. Avec son plumage bleu cobalt caractéristique et son bec extrêmement puissant, cet oiseau robuste pèse entre 1,4 et 1,7 kg pour une envergure de 1,30 à 1,50 m. Inscrite à l'Annexe I de la CITES, cette espèce vulnérable bénéficie de programmes de protection suite à son déclin causé par le commerce et le braconnage.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Ara_Hyacinthe"
+  },
+  {
+    "speciesId": 2000000193,
+    "description": "Les inséparables sont de petits perroquets africains mesurant environ 10-17 cm, natifs d'Afrique subsaharienne et de Madagascar. Ces oiseaux forment des couples très unis d'où leur nom, et vivent 12 à 15 ans. Ils sont apprécié exclusivement comme compagnons domestiques pour leur beauté colorée et leur comportement social attachant.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Inséparable"
+  },
+  {
+    "speciesId": 2000000194,
+    "description": "Les inséparables sont de petits perroquets africains mesurant 13-17 cm et pesant 40-60 grammes, parmi les plus petits perroquets. Caractérisés par une silhouette trapue, une queue courte et un bec relativement grand, ils doivent leur nom à leurs forts liens de paire monogames. Sociaux et affectueux, ils vivent une moyenne de 10 à 12 ans et sont appréciés comme animaux de compagnie.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Lovebird"
+  },
+  {
+    "speciesId": 2000000195,
+    "description": "Le loriquet arc-en-ciel est un perroquet coloré de taille moyenne originaire d'Australie orientale, mesurant 25-30 centimètres. Appartenant à la famille des Psittaculidae, cet oiseau vit du Queensland à la Tasmanie avec une sous-espèce présente au Cap York. Son statut de conservation est « Préoccupation mineure ».",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rainbow_lorikeet"
+  },
+  {
+    "speciesId": 2000000196,
+    "description": "Le munia à poitrine écailleuse est un petit oiseau granivore d'Asie du Sud et du Sud-Est mesurant 11-12 centimètres et pesant 12-16 grammes. Il se distingue par ses parties inférieures blanches avec des marques écailleuses sombres et forme des volées pouvant atteindre 100 oiseaux. Hautement social, cet oiseau à statut de « Préoccupation mineure » communique par des appels doux.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Scaly-breasted_munia"
+  },
+  {
+    "speciesId": 2000000197,
+    "description": "Les chardonnerets sont des oiseaux passériformes de la famille des Fringillidae, reconnus pour leur plumage frappant et leurs belles chansons. Historiquement, ils se nourrissaient de graines de chardon, bien que les populations aient considérablement décliné. Les populations françaises ont diminué de 40% en une décennie avant 2016.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chardonneret"
+  },
+  {
+    "speciesId": 2000000199,
+    "description": "La perruche Alexandre est une espèce de perroquet de grande taille native du sous-continent indien. Elle se distingue par sa taille imposante, un bec puissant, et un collier noir caractéristique chez les mâles accompagné d'une bande nucale rose. Nommée en hommage à Alexandre le Grand, cette perruche intelligente et docile s'est naturalisée dans plusieurs pays européens.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Perruche_Alexandre"
+  },
+  {
+    "speciesId": 2000000200,
+    "description": "La perruche omnicolore est un perroquet originaire du sud-est australien mesurant 30 cm de long. Elle se distingue par sa tête rouge, ses joues blanches et son plumage écaillé noir aux reflets jaunes ou verts. Introduite en Nouvelle-Zélande vers 1910, elle s'y est bien établie dans l'île du Nord.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Eastern_rosella"
+  },
+  {
+    "speciesId": 2000000201,
+    "description": "L'aratinga jandaya est un petit perroquet néotropical originaire du nord-est du Brésil mesurant 30 cm et pesant 125-140 grammes. Cet oiseau se distingue par son plumage coloré : corps rougeâtre, ailes vertes, tête et cou jaunes, et joues orangées. Bien que rare à l'état sauvage, l'espèce est commune en captivité où on l'appelle « jenday conure ».",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Jandaya_parakeet"
+  },
+  {
+    "speciesId": 2000000202,
+    "description": "Le caïque à tête noire est un petit perroquet originaire du bassin amazonien en Amérique du Sud mesurant environ 23 cm. Cet oiseau se distingue par sa calotte noire, son plumage principalement vert et ses pieds noirâtres. Il habite les forêts tropicales humides en Colombie, Équateur, Pérou, Brésil et dans les Guyanes où il vit en petits groupes dans la canopée.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Caique"
+  },
+  {
+    "speciesId": 2000000203,
+    "description": "Le pionus à tête bleue est un perroquet de taille moyenne d'environ 27 cm de long, avec un corps principalement vert, une tête et un cou bleus, et des couvertures sus-caudales rouges. Cet oiseau habite les régions tropicales et subtropicales d'Amérique du Sud et centrale du Costa Rica jusqu'à la Bolivie et au Brésil. Il est populaire comme animal de compagnie en raison de sa nature calme comparée à d'autres espèces de perroquets.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Blue-headed_parrot"
+  }
+]

@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000188,
+  "commonNameFr": "Mouton Nain",
+  "scientificName": "Ovis aries",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000189,
+  "commonNameFr": "Gerboise",
+  "scientificName": "Jaculus jaculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000190,
+  "commonNameFr": "Calopsitte Élégante",
+  "scientificName": "Nymphicus hollandicus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000191,
+  "commonNameFr": "Perroquet Gris du Gabon",
+  "scientificName": "Psittacus erithacus",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000192,
+  "commonNameFr": "Ara Hyacinthe",
+  "scientificName": "Anodorhynchus hyacinthinus",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000193,
+  "commonNameFr": "Inséparable Rosegorge",
+  "scientificName": "Agapornis roseicollis",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000194,
+  "commonNameFr": "Inséparable Fischer",
+  "scientificName": "Agapornis fischeri",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000195,
+  "commonNameFr": "Loriquet Arc-en-ciel",
+  "scientificName": "Trichoglossus moluccanus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000196,
+  "commonNameFr": "Bengali",
+  "scientificName": "Lonchura striata",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000197,
+  "commonNameFr": "Chardonneret",
+  "scientificName": "Carduelis carduelis",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000199,
+  "commonNameFr": "Perruche Alexandre",
+  "scientificName": "Psittacula eupatria",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000200,
+  "commonNameFr": "Perruche Omnicolore",
+  "scientificName": "Platycercus eximius",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000201,
+  "commonNameFr": "Aratinga Jandaya",
+  "scientificName": "Aratinga jandaya",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000202,
+  "commonNameFr": "Caïque à Tête Noire",
+  "scientificName": "Pionites melanocephalus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000203,
+  "commonNameFr": "Pionus à Tête Bleue",
+  "scientificName": "Pionus menstruus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

@@ -1,0 +1,389 @@
+[
+  {
+    "speciesId": 104052822,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines et noix (glands, noix, noisettes)",
+          "frequency": null,
+          "notes": "Aliment de base : graines et noix, dont glands, noix et noisettes"
+        },
+        {
+          "name": "Insectes et autres petites proies",
+          "frequency": null,
+          "notes": "Régime naturel omnivore : insectes, œufs, petits oiseaux, grenouilles, lézards et petits rongeurs"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments traités aux pesticides ou moisis",
+          "reason": "Accumulation de toxines, risque d'empoisonnement"
+        },
+        {
+          "name": "Aliments salés ou sucrés en excès",
+          "reason": "Problèmes dentaires et métaboliques"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Accès à une variété de noix et graines naturelles.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_gray_squirrel",
+          "title": "Eastern gray squirrel - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycle naturel jour-nuit ; activité diurne ou crépusculaire selon la saison",
+      "activityEnrichment": "Arbres matures, zones de recherche de nourriture, caches multiples, nids de feuilles (dreys), branches à ronger",
+      "hygieneNotes": "Habitat forestier naturel privilégié (forêts matures et denses de chênes et noyers), nettoyage minimal",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_gray_squirrel",
+          "title": "Eastern gray squirrel - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Diurne ou crépusculaire selon la saison, ne hiberne pas. Principalement solitaire : peut partager un nid de feuilles (drey) pour se tenir chaud en hiver, et les mâles et femelles le partagent brièvement pendant la reproduction.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Peut mordre ou griffer s'il est stressé, non recommandé pour enfants",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_gray_squirrel",
+          "title": "Eastern gray squirrel - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Virus de la variole de l'écureuil (squirrelpox)",
+          "symptoms": "Bosses cutanées, plaques, perte de fourrure, comportement léthargique",
+          "prevention": "Quarantaine des nouveaux individus, hygiène de l'habitat",
+          "whenToConsult": "Immédiatement à l'apparition de lésions cutanées"
+        },
+        {
+          "name": "Parasites externes (puces, poux, tiques, acariens, teigne)",
+          "symptoms": "Grattage excessif, irritation cutanée, perte de fourrure",
+          "prevention": "Habitat propre, contrôle périodique, isolement si infection",
+          "whenToConsult": "Dès signes d'irritation persistante"
+        },
+        {
+          "name": "Zoonoses portées par l'espèce (typhus, peste, tularémie)",
+          "symptoms": "Léthargie, perte d'appétit, fièvre (non visible directement)",
+          "prevention": "Hygiène des mains lors de contact, alimentation saine, habitat propre",
+          "whenToConsult": "Immédiatement si signes de malaise généralisé"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_gray_squirrel",
+          "title": "Eastern gray squirrel - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "prohibited",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce exotique envahissante préoccupante pour l'Union européenne (liste de l'UE depuis 2016) : importation, élevage, transport, commercialisation et libération volontaire interdits"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_gray_squirrel",
+          "title": "Eastern gray squirrel - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "jusqu'à deux portées par an",
+      "gestationDays": 44,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": 15,
+      "breedingDifficulty": "facile",
+      "notes": "Gestation d'environ 44 jours ; portée normale de un à quatre petits (maximum huit). Deux portées par an possibles pour les femelles expérimentées, généralement une seule pour les jeunes mères. Maturité des femelles vers 1,25 an, mâles entre un et deux ans.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_gray_squirrel",
+          "title": "Eastern gray squirrel - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104060633,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Fruits",
+          "frequency": null,
+          "notes": "Base du régime naturel : fruits principalement"
+        },
+        {
+          "name": "Invertébrés, petits animaux, œufs d'oiseaux",
+          "frequency": null,
+          "notes": "Complément de protéines animales dans le régime naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments salés ou épicés",
+          "reason": "Irritation digestive"
+        },
+        {
+          "name": "Viande crue ou contaminée",
+          "reason": "Risque élevé de parasites et infections bactériennes"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Régime varié : fruits, invertébrés, petits animaux. Fouille activement le sol avec son museau flexible : enrichissement alimentaire essentiel.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/South_American_coati",
+          "title": "South American coati - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Espèce diurne : cycle naturel jour-nuit, lumière naturelle régulière",
+      "activityEnrichment": "Arbres, lianes, zones de fouille, variété structurelle",
+      "hygieneNotes": "Originaire des forêts de plaine à l'est des Andes (jusqu'à 2 500 m) ; eau fraîche régulière, nettoyage modéré",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/South_American_coati",
+          "title": "South American coati - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Diurne. Les femelles forment de grands groupes (bandes de 15 à 30 individus) ; les mâles sont généralement solitaires. Les groupes n'ont pas de territoire exclusif.",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Vigilance requise : griffes et crocs acérés, peut être agressif",
+      "compatibilityWithOtherAnimals": "Vit en groupes de femelles et de jeunes ; cohabitation avec d'autres espèces déconseillée",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/South_American_coati",
+          "title": "South American coati - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasites gastrointestinaux",
+          "symptoms": "Diarrhée, perte de poids, abdomen gonflé",
+          "prevention": "Alimentation fraîche, hygiène de l'habitat, quarantaine des nouveaux individus",
+          "whenToConsult": "À tout signe de troubles digestifs persistants"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Toux, écoulements nasaux, respiration difficile",
+          "prevention": "Habitat sans humidité excessive, température stable, ventilation adéquate",
+          "whenToConsult": "Immédiatement si signes respiratoires"
+        },
+        {
+          "name": "Abcès dentaires/problèmes bucco-dentaires",
+          "symptoms": "Gonflement facial, salivation excessive, refus de nourriture",
+          "prevention": "Aliments durs à ronger, hygiène buccale, fruits et légumes variés",
+          "whenToConsult": "Dès signes de douleur oro-faciale"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/South_American_coati",
+          "title": "South American coati - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "prohibited",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce exotique envahissante préoccupante pour l'Union européenne (liste de l'UE depuis 2016) : importation et élevage interdits"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/South_American_coati",
+          "title": "South American coati - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": 77,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 7,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Gestation de 74 à 77 jours ; 1 à 7 petits par portée en captivité. La mère rejoint son groupe 5 à 6 semaines après la naissance.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/South_American_coati",
+          "title": "South American coati - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104060805,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Lémuriens (plus de 50 % du régime à l'état naturel)",
+          "frequency": null,
+          "notes": "Proie principale dans la nature"
+        },
+        {
+          "name": "Tenrecs, lézards, oiseaux",
+          "frequency": null,
+          "notes": "Tenrecs (9 %), lézards (9 %), oiseaux (2 %) du régime à l'état naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies de taille disproportionnée",
+          "reason": "Risque d'étouffement ou de blessures"
+        },
+        {
+          "name": "Viande contaminée ou avariée",
+          "reason": "Risque de transmission de maladies"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Carnivore : le régime dépend de la disponibilité des proies selon l'habitat et la saison.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fossa_(animal)",
+          "title": "Fossa (animal) - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Espèce cathémérale (active de jour comme de nuit) : cycle naturel jour-nuit",
+      "activityEnrichment": "Arbres hauts, structures de grimpe",
+      "hygieneNotes": "Espèce endémique de Madagascar : forêts sèches de l'ouest, forêts humides de l'est et forêts épineuses du sud ; eau fraîche",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fossa_(animal)",
+          "title": "Fossa (animal) - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Carnivore considéré comme solitaire (hormis les mères avec leurs petits et quelques paires de mâles), cathéméral (actif de jour comme de nuit). Griffes semi-rétractiles et chevilles flexibles lui permettant de grimper aux troncs avec aisance.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Absolument non recommandé, animal sauvage et prédateur, dangereux",
+      "compatibilityWithOtherAnimals": "Prédateur, incompatible avec la plupart des autres animaux",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fossa_(animal)",
+          "title": "Fossa (animal) - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasites internes (helminthes)",
+          "symptoms": "Perte de poids, diarrhée, abdomen gonflé",
+          "prevention": "Traitement préventif, quarantaine, hygiène de l'habitat",
+          "whenToConsult": "Traitement antiparasitaire périodique à voir avec un vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fossa_(animal)",
+          "title": "Fossa (animal) - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite en annexe II de la CITES, classée Vulnérable par l'UICN : la détention est encadrée en France, se renseigner auprès de la DDPP avant toute démarche"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fossa_(animal)",
+          "title": "Fossa (animal) - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "septembre-octobre",
+      "gestationDays": 90,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "Saison de reproduction en septembre-octobre à l'état sauvage ; gestation d'environ 90 jours ; 1 à 6 petits, typiquement 2 à 4. Maturité sexuelle vers 3 à 4 ans. Première reproduction en captivité en 1974.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fossa_(animal)",
+          "title": "Fossa (animal) - Wikipedia"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000251,
+    "description": "Poissons-chats d'Amérique du Sud appartenant à la famille des Callichthyidae, les Corydoras sont des animaux pacifiques de fond. Ils possèdent trois paires de barbillons leur permettant de détecter leur nourriture en fouillant le substrat. Ces poissons appréciés en aquariophilie vivent en groupes et prospèrent dans des bacs aménagés de manière naturelle.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Corydoras"
+  },
+  {
+    "speciesId": 2000000252,
+    "description": "Originaire du bassin de l'Orénoque au Venezuela et en Colombie, ce cichlidé nain mesure 5-7 cm. Il se distingue par sa coloration vive et son comportement paisible mais territorial durant la reproduction. L'espèce est fragile et exige des températures de 26-28°C, un pH de 5,5-7 et un aquarium de 60 litres minimum.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Ramirezi"
+  },
+  {
+    "speciesId": 2000000253,
+    "description": "Genre de petits cichlidés nains du bassin amazonien et de l'Orénoque, les Apistogramma mesurent rarement plus de 8 cm. Ils habitent des eaux acides et douces à environ 26°C avec une végétation abondante et des cachettes. Ces poissons sont idéaux pour les petits bacs aménagés en biotope naturel.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Apistogramma"
+  },
+  {
+    "speciesId": 2000000254,
+    "description": "Le tétra cardinal originaire des cours supérieurs de l'Orénoque et du Rio Negro mesure environ 3 cm. Il se caractérise par une ligne bleue iridescente et un corps inférieur rouge vif. En aquarium, il exige une eau acide et douce, des températures de 24-28°C et préfère vivre en petits groupes parmi la végétation.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Cardinal_tetra"
+  },
+  {
+    "speciesId": 2000000255,
+    "description": "Le tétra cuivré originaire du bassin du São Francisco au Brésil atteint 5 cm de longueur. Il se caractérise par une coloration transparente dorée avec une bande noire le long du corps, les mâles étant plus colorés. Ce poisson omnivore prospère à 22-28°C en eaux légèrement acides et dans un aquarium en groupe.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Hasemania_nana"
+  },
+  {
+    "speciesId": 2000000256,
+    "description": "Le barbus cerise originaire du Sri Lanka, provient des cours d'eau calmes et ombragés. Atteignant 5 cm de longueur, c'est l'une des plus petites variétés de barbus. Les mâles affichent une coloration rouge cerise lors de la reproduction, tandis que les femelles restent plus ternes. L'espèce se montre résiliente et longévive en aquarium.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Puntius_titteya"
+  },
+  {
+    "speciesId": 2000000257,
+    "description": "Le barbus tigré originaire de Sumatra en Indonésie atteint 7-10 cm de longueur. Ce petit cyprinidé présente une coloration argentée à jaune brunâtre avec quatre bandes noires distinctives et des nageoires rouges. En aquarium, il exige une eau légèrement acide et douce à 25-27,8°C et doit vivre en groupes de six individus minimum.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Puntigrus_tetrazona"
+  },
+  {
+    "speciesId": 2000000258,
+    "description": "Le danio perlé originaire du Sud-Est asiatique mesure environ 6 cm de longueur. Il se caractérise par une coloration bleue distinctive avec des bandes jaune pâle ou brunes et des nageoires teintées de rouge. Cette espèce active exige des températures de 20-25°C et doit être maintenue en groupes de 6-10 individus dans des bacs bien plantés.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Danio_perlé"
+  },
+  {
+    "speciesId": 2000000259,
+    "description": "Le rasbora arlequin originaire du Sud-Est asiatique mesure 4-5 cm de longueur. Cette espèce se distingue par son corps trapu rose-brun et un triangle noir caractéristique à l'arrière. En aquarium, elle prospère dans une eau douce et légèrement acide à 24-28°C et doit être maintenue en groupes d'au moins 10 individus dans un environnement densément planté.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Rasbora_arlequin"
+  },
+  {
+    "speciesId": 2000000260,
+    "description": "Originaire de la Péninsule de Paria au Venezuela, ce petit poisson vivipare se distingue par ses couleurs très intenses et variables. Les mâles présentent souvent une double queue-épée tandis que les femelles restent ternes. Ces poissons prolifiques se reproduisent très rapidement et sont populaires chez les aquariophiles, bien que l'espèce soit maintenant en danger d'extinction.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Poecilia_wingei"
+  },
+  {
+    "speciesId": 2000000261,
+    "description": "Le platy variatus originaire du Mexique atteint 7 cm de longueur maximale et présente des motifs colorés variables selon les souches d'élevage. Cette espèce appréciée pour sa robustesse peut confortablement vivre à des températures entre 16 et 24°C, ce qui la rend moins exigeante que d'autres espèces. Comme reproducteur prolifique et vivipare, elle est populaire chez les aquariophiles de tous niveaux.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Xiphophorus_variatus"
+  },
+  {
+    "speciesId": 2000000262,
+    "description": "Le kribensis est un cichlidé d'eau douce originaire du Nigeria et du Cameroun. Les mâles atteignent 12,5 cm tandis que les femelles mesurent environ 8 cm. Ces poissons se distinguent par une bande longitudinale sombre et des abdomens rose-rouge vifs durant la reproduction. Pour l'aquarium, ils prospèrent à 24-26°C en eau légèrement acide avec grottes et végétation.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Pelvicachromis_pulcher"
+  },
+  {
+    "speciesId": 2000000263,
+    "description": "La mygale rose originaire du Chili, de Bolivie et d'Argentine habite les régions désertiques du nord. Cette tarentule taille modérée se distingue par sa docilité relative et son entretien facile, la rendant populaire chez les amateurs. Elle préfère des températures de 25-30°C et se nourrit de grillons, exigeant peu d'humidité en raison de son habitat naturel aride.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Grammostola_rosea"
+  },
+  {
+    "speciesId": 2000000264,
+    "description": "Originaire de la côte pacifique du Guerrero au Mexique, cette grande tarentule mesure 52-59 mm pour les femelles. Elle se distingue par ses pattes noires-bleuâtres ornées d'anneaux rouges et roses caractéristiques. En nature, elle habite les forêts tropicales décidues et creuse des terriers complexes. Relativement docile, elle constitue un choix populaire comme animal de compagnie.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Brachypelma_smithi"
+  },
+  {
+    "speciesId": 2000000265,
+    "description": "La mygale tigre du Venezuela, originaire d'Amérique du Sud, est une tarentule arboricole remarquable. Les femelles présentent un corps noir avec des marquages orange vibrants sur l'abdomen et les pattes. Cette espèce manque de poils urticants typiques des Nouveau Monde et se défend par l'agression ou la fuite. Elle vit dans des crevasses qu'elle tapisse de toiles tubulaires.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Psalmopoeus_irminia"
+  }
+]

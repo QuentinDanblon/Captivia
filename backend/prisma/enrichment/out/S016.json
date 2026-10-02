@@ -1,0 +1,313 @@
+[
+  {
+    "speciesId": 2440891,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {"name": "Foin de qualité", "frequency": "quotidienne", "notes": "Base de l'alimentation, fourni en quantité illimitée"},
+        {"name": "Herbes fraîches et pâturage", "frequency": "quotidienne", "notes": "Complément du foin, l'animal doit pâturer plusieurs heures par jour"},
+        {"name": "Céréales (avoine, orge)", "frequency": "occasionnelle", "notes": "2-3 kg par jour selon l'activité et le poids"},
+        {"name": "Minéraux et vitamines", "frequency": "quotidienne", "notes": "Complément minéral-vitaminique, notamment pour les femelles gestantes"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Pâturages riches et trèfle en excès", "reason": "Risque de laminite et obésité"},
+        {"name": "Aliments moisis ou fermentés", "reason": "Risque de coliques et troubles digestifs"},
+        {"name": "Plantes toxiques (if, laurier)", "reason": "Toxicité directe pour l'animal"}
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "L'âne digère mal les aliments riches et concentrés. Un accès permanent au foin est essentiel. Eau fraîche et propre disponible en permanence.",
+      "sources": [
+        {"type": "guide", "url": "https://www.universalis.fr/encyclopedie/ane/", "title": "Universalis - Âne"},
+        {"type": "vet", "url": "https://www.ivis.org/library/veterinary-care-of-donkeys/nutrition-and-feeding-of-donkeys-0", "title": "IVIS - Nutrition and Feeding of Donkeys"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 5,
+      "tempMax": 30,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Minimum 0.5 hectare par animal, préférablement 1-2 hectares avec pâturage. Abri contre les intempéries.",
+      "lightNeeds": "Accès à la lumière naturelle. L'âne supporte bien le soleil mais a besoin d'ombre en été.",
+      "activityEnrichment": "Pâturage quotidien, socialisation avec d'autres animaux, travail léger (trait, selle) selon le tempérament",
+      "hygieneNotes": "Parage des sabots toutes les 6-8 semaines. Brossage régulier. Vaccination annuelle recommandée. Traitement anti-parasitaire semestriel.",
+      "costEstimate": "moyen",
+      "sources": [
+        {"type": "wikipedia", "url": "https://www.universalis.fr/encyclopedie/ane/", "title": "Universalis - Caractéristiques de l'âne"},
+        {"type": "guide", "url": "https://ontario.ca/page/management-recommendations-donkeys-and-mules", "title": "Ontario - Management recommendations for donkeys"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "L'âne est un animal intelligent, prudent et curieux. Souvent réputé têtu, il est en réalité très sensible et réfléchi. Il développe des liens forts avec ses congénères et son soigneur.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Excellent avec les enfants si bien socialisé. L'âne est patient et calme, idéal pour l'équitation enfantine.",
+      "compatibilityWithOtherAnimals": "Coexiste bien avec les chevaux, moutons et chèvres. Peut être agressif envers les prédateurs (loups, chiens errants) qu'il attaque pour protéger le troupeau.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://www.universalis.fr/encyclopedie/ane/", "title": "Universalis - Comportement et communication de l'âne"},
+        {"type": "guide", "url": "https://opensanctuary.org/common-donkey-health-issues/", "title": "Open Sanctuary Project - Donkey Behavior"}
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Laminite",
+          "symptoms": "Boiterie, préférence pour les terrains mous, position avec les pattes postérieures fléchies, chaleur dans les sabots, douleur à la palpation",
+          "prevention": "Contrôle strict du poids, éviter les pâturages trop riches, foin de qualité, exercice régulier modéré",
+          "whenToConsult": "Dès les premiers signes de boiterie ou sensibilité des sabots"
+        },
+        {
+          "name": "Coliques",
+          "symptoms": "Agitation, grattage du sol, roulement répété, perte d'appétit, diminution ou absence de défécation, transpiration excessive",
+          "prevention": "Alimentation régulière (foin d'abord), hydratation constante, changements alimentaires progressifs, vermifugation régulière",
+          "whenToConsult": "Immédiatement - les coliques peuvent être mortelles si non traitées rapidement"
+        },
+        {
+          "name": "Parasitisme interne",
+          "symptoms": "Perte de condition physique, pelage terne, anémie, diarrhée ou constipation, abdomen ballonné, baisse de vitalité",
+          "prevention": "Vermifugation 2-4 fois par an selon la région, rotation des pâturages, hygiène des abris, analyses fécales régulières",
+          "whenToConsult": "Consultation pour établir un programme de vermifugation approprié"
+        }
+      ],
+      "sources": [
+        {"type": "vet", "url": "https://opensanctuary.org/common-donkey-health-issues/", "title": "Open Sanctuary - Common Donkey Health Issues"},
+        {"type": "guide", "url": "https://donkeyrescue.org/?p=607", "title": "Donkey Rescue - Colic Understanding and Prevention"},
+        {"type": "vet", "url": "https://education.nsw.gov.au/teaching-and-learning/animals-in-schools/animals-in-schools-species/donkeys/donkeys-health", "title": "NSW Education - Donkeys Health"}
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {"type": "official", "url": "https://www.assemblee-nationale.fr/dyn/12/questions/QANR5L12QE65827.pdf", "title": "Assemblée Nationale - Statut juridique des animaux domestiques"},
+        {"type": "guide", "url": "https://www.actu-juridique.fr/administratif/les-animaux-ont-ils-des-droits/", "title": "Actu Juridique - Protection des animaux en France"}
+      ]
+    },
+    "reproduction": {
+      "season": "été-automne",
+      "gestationDays": 390,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 42,
+      "breedingDifficulty": "facile",
+      "notes": "L'ânesse porte généralement un seul ânon. L'allaitement dure 6-10 mois. Les ânes atteignent la maturité sexuelle tardivement (3-4 ans). Les femelles peuvent se reproduire une fois par an.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://www.universalis.fr/encyclopedie/ane/", "title": "Universalis - Reproduction de l'âne"},
+        {"type": "vet", "url": "https://www.ivis.org/library/clinical-companion-of-donkey/nutrition", "title": "IVIS - Donkey Reproduction and Breeding"}
+      ]
+    }
+  },
+  {
+    "speciesId": 2440954,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {"name": "Herbes et graminées", "frequency": "quotidienne", "notes": "Base du régime, pâturage naturel ou foin"},
+        {"name": "Feuillus (jeunes pousses, feuilles)", "frequency": "quotidienne", "notes": "Complément naturel en forêt"},
+        {"name": "Fruits sauvages et champignons", "frequency": "occasionnelle", "notes": "Nourriture saisonnière importante"},
+        {"name": "Écorce et jeunes rameaux", "frequency": "saisonnière", "notes": "Ressource hivernale importante"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Aliments concentrés en excès", "reason": "Risque de déséquilibre nutritionnel et de problèmes digestifs"},
+        {"name": "Plantes toxiques (le if, laurier-rose)", "reason": "Toxicité directe"}
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Herbivore ruminant adapté aux forêts mixtes. Nécessite accès à une grande variété de végétation. Le régime change selon les saisons.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://www.futura-sciences.com/planete/definitions/zoologie-cerf-sika-8682/", "title": "Futura Sciences - Cerf Sika"},
+        {"type": "guide", "url": "https://parcsaintecroix.com/wp-content/uploads/2023/08/dossier-cerf.pdf", "title": "Parc Sainte-Croix - Fiche Cerf"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 5,
+      "tempMax": 28,
+      "humidityMin": 40,
+      "humidityMax": 85,
+      "minSpaceSize": "Minimum 10-15 hectares pour une petite population. Forêt mixte ou buissonnante idéale.",
+      "lightNeeds": "Cycle lumière naturel. L'animal s'adapte bien à divers écosystèmes forestiers.",
+      "activityEnrichment": "Espace large pour le déplacement, broussailles et arbustes pour l'exploration, zones de repos ombragées",
+      "hygieneNotes": "Contrôle régulier des parasites externes (tiques), mise à disposition de points de baignade en été, surveillance des sabots",
+      "costEstimate": "élevé",
+      "sources": [
+        {"type": "guide", "url": "https://www.techno-science.net/fr/definitions/cerf-sika", "title": "Techno Science - Cerf Sika habitat"},
+        {"type": "wikipedia", "url": "https://www.mnhn.fr/en/sika-deer", "title": "Muséum National d'Histoire Naturelle - Sika Deer"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Le cerf sika est un animal grégaire vivant en hardes. Les femelles et jeunes forment des groupes stables. Les mâles sont généralement solitaires sauf durant le rut (septembre-novembre), période où ils deviennent très territoriaux et combattifs.",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé. C'est un animal sauvage qui peut être agressif, surtout pendant le rut. À éviter en contexte de proximité humaine régulière.",
+      "compatibilityWithOtherAnimals": "Risque d'hybridation avec les cerfs rouges (Cervus elaphus). Cohabitation possible avec d'autres espèces forestières dans de grands espaces.",
+      "sources": [
+        {"type": "guide", "url": "https://www.futura-sciences.com/planete/definitions/zoologie-cerf-sika-8682/", "title": "Futura Sciences - Comportement Cerf Sika"},
+        {"type": "wikipedia", "url": "https://environnement.public.lu/dam-assets/documents/natur/biodiversite/especes_invasives/fiches-identification/Cerf-Sika-FR.pdf", "title": "Luxembourg - Fiche Identification Cerf Sika"}
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Fasciolose hépatique (Fasciola hepatica)",
+          "symptoms": "Maigreur progressive, anémie, affaiblissement général, distension de l'abdomen, perte de pelage",
+          "prevention": "Drainage et assainissement des zones humides, prévention de la contamination de l'eau, vermifugation régulière",
+          "whenToConsult": "Dès signes d'anémie ou de dépérissement"
+        },
+        {
+          "name": "Parasitisme (Sarcocystis et autres endoparasites)",
+          "symptoms": "Perte de condition, diarrhée intermittente, pelage terne, fatigue",
+          "prevention": "Programme régulier de vermifugation, gestion des zones de pâturage, hygiène"
+        },
+        {
+          "name": "Infection par pathogènes portés par les tiques (Anaplasma, Babesia, Borrelia)",
+          "symptoms": "Fièvre, léthargie, anorexie, signes neurologiques possibles (selon l'agent)",
+          "prevention": "Lutte contre les tiques (traitement régulier), inspection visuelle fréquente, éviter les zones à forte infestation",
+          "whenToConsult": "Immédiatement en cas de fièvre ou de signes neurologiques"
+        }
+      ],
+      "sources": [
+        {"type": "vet", "url": "https://www.vdu.lt/cris/handle/20.500.12259/39186", "title": "Vytautas Magnus University - Parasites of Sika Deer"},
+        {"type": "vet", "url": "https://www.vdu.lt/cris/handle/20.500.12259/49246", "title": "Vytautas Magnus University - Fasciola hepatica in Sika Deer"},
+        {"type": "vet", "url": "https://pure.uhi.ac.uk/en/publications/the-health-of-wild-red-and-sika-deer-in-scotland-an-analysis-of-k/", "title": "UHI - Health of Wild Sika Deer"}
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": ["Autorisation préfectorale pour élevage de NAC"],
+        "restrictions": ["Statut d'animal non-domestique selon l'Arrêté du 21 novembre 1997"]
+      },
+      "sources": [
+        {"type": "official", "url": "https://legifrance.gouv.fr", "title": "Légifrance - Arrêté du 21 novembre 1997 relatif aux conditions d'autorisation d'élevage, d'achat, de vente, de location et de transit des animaux non domestiques"},
+        {"type": "guide", "url": "https://www.futura-sciences.com/planete/definitions/zoologie-cerf-sika-8682/", "title": "Futura Sciences - Statut légal Cerf Sika"}
+      ]
+    },
+    "reproduction": {
+      "season": "septembre à novembre",
+      "gestationDays": 210,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 18,
+      "breedingDifficulty": "modere",
+      "notes": "L'ânesse (femelle) porte généralement un seul faon. Le rut (période de reproduction) est très brutal, avec combats violents entre mâles. La maturité sexuelle est atteinte rapidement (1-2 ans).",
+      "sources": [
+        {"type": "wikipedia", "url": "https://www.futura-sciences.com/planete/definitions/zoologie-cerf-sika-8682/", "title": "Futura Sciences - Reproduction Cerf Sika"},
+        {"type": "guide", "url": "https://www.mdpi.com/2076-2615/15/7/908/html", "title": "MDPI - Sika Deer Biology and Breeding"}
+      ]
+    }
+  },
+  {
+    "speciesId": 2441108,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {"name": "Graminées et herbes", "frequency": "quotidienne", "notes": "Base du régime alimentaire"},
+        {"name": "Épilobe, joncs et roseaux", "frequency": "quotidienne", "notes": "Plantes caractéristiques de la toundra"},
+        {"name": "Mousses et lichens", "frequency": "quotidienne", "notes": "Complément nutritif important"},
+        {"name": "Plantes ligneuses (saules nains)", "frequency": "saisonnière", "notes": "Ressource importante en hiver"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Aliments concentrés industriels", "reason": "Animal adapté à une alimentation de plantes sauvages pauvres"},
+        {"name": "Foin de mauvaise qualité ou moisi", "reason": "Risque de mycotoxines et troubles digestifs"}
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Herbivore ruminant extrêmement adapté à la toundra arctique. Se nourrit des maigres ressources végétales disponibles. Capable de scraper la neige pour accéder aux plantes en hiver.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://www.futura-sciences.com/planete/definitions/zoologie-boeuf-musque-8151/", "title": "Futura Sciences - Bœuf Musqué alimentation"},
+        {"type": "guide", "url": "https://www.universalis.fr/encyclopedie/boeuf-musque/", "title": "Universalis - Bœuf Musqué"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": -30,
+      "tempMax": 15,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Minimum 20-30 hectares. Toundra arctique simulée avec terrains vallonnés, accès à l'eau, végétation basse.",
+      "lightNeeds": "Animal adapté à l'alternance extrême des saisons arctiques (24h de lumière en été, 24h d'obscurité en hiver)",
+      "activityEnrichment": "Grands espaces pour le déplacement, stimulation naturelle par changements saisonniers, actes d'exploration naturelle",
+      "hygieneNotes": "Toilettage naturel dans l'eau et la boue. Inspection régulière du pelage (qiviut) et des sabots. Pas de traitement spécial si conditions arctiques simulées.",
+      "costEstimate": "élevé",
+      "sources": [
+        {"type": "guide", "url": "https://www.hww.ca/assets/pdfs/factsheets/muskox-fr.pdf", "title": "Habitat, Wildife and Wildlife Management - Bœuf Musqué fiches"},
+        {"type": "wikipedia", "url": "https://www.quebec.ca/agriculture-environnement-et-ressources-naturelles/faune/animaux-sauvages-quebec/fiches-especes-fauniques/boeuf-musque", "title": "Québec - Bœuf Musqué"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Le bœuf musqué est un animal grégaire formant des hardes pour la protection collective. En été, les hardes sont petites (12-15 individus), mais en hiver elles peuvent regrouper 60-70 individus pour mieux résister aux prédateurs.",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé. C'est un grand animal sauvage potentiellement dangereux. Les adultes peuvent peser 300-500 kg avec des cornes agressives.",
+      "compatibilityWithOtherAnimals": "Agressif envers les prédateurs (loups) qu'il attaque en groupe. Formation défensive caractéristique avec les jeunes au centre et les adultes présentant leurs cornes.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://www.universalis.fr/encyclopedie/boeuf-musque/", "title": "Universalis - Comportement Bœuf Musqué"},
+        {"type": "guide", "url": "https://animaldiversity.org/accounts/Ovibos_moschatus/", "title": "Animal Diversity Web - Ovibos moschatus"}
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasitisme par nématodes gastriques",
+          "symptoms": "Perte de poids progressive, pelage terne, diarrhée intermittente, anémie",
+          "prevention": "Vermifugation régulière (adapté au climat arctique et aux cycles saisonniers), gestion des zones de pâturage",
+          "whenToConsult": "Lors de dépérissement physique ou d'anémie"
+        },
+        {
+          "name": "Maladies respiratoires (influenza équine, autres virus arctiques)",
+          "symptoms": "Toux, écoulements nasaux, fièvre, dépression, anorexie",
+          "prevention": "Limitation du stress, conditions sanitaires optimales, isolement des animaux malades",
+          "whenToConsult": "Immédiatement en cas de signes respiratoires"
+        },
+        {
+          "name": "Infections parasitaires externes (tiques, mites)",
+          "symptoms": "Démangeaisons, perte de pelage localisée, lésions cutanées, irritation",
+          "prevention": "Inspection régulière du pelage, traitement antiparasitaire adapté aux espèces arctiques, bains en eau claire",
+          "whenToConsult": "Dès les premiers signes d'irritation ou de lésions cutanées"
+        }
+      ],
+      "sources": [
+        {"type": "vet", "url": "https://www.universalis.fr/encyclopedie/boeuf-musque/", "title": "Universalis - Santé Bœuf Musqué"},
+        {"type": "guide", "url": "https://www.hww.ca/assets/pdfs/factsheets/muskox-fr.pdf", "title": "Habitat, Wildlife and Wildlife Management - Bœuf Musqué santé et maladies"}
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": ["Autorisation préfectorale pour élevage de NAC"],
+        "restrictions": ["Statut d'animal non-domestique selon l'Arrêté du 21 novembre 1997"]
+      },
+      "sources": [
+        {"type": "official", "url": "https://legifrance.gouv.fr", "title": "Légifrance - Arrêté du 21 novembre 1997 relatif aux conditions d'autorisation d'élevage, d'achat, de vente, de location et de transit des animaux non domestiques"},
+        {"type": "guide", "url": "https://www.universalis.fr/encyclopedie/boeuf-musque/", "title": "Universalis - Statut légal Bœuf Musqué"}
+      ]
+    },
+    "reproduction": {
+      "season": "juin à juillet",
+      "gestationDays": 240,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "modere",
+      "notes": "La femelle ne porte généralement qu'un seul veau. Le rut (période de reproduction) se déroule de juin à juillet. Les veaux naissent au printemps (avril-mai) avec un pelage très fin et des protubérances cornuales. Dépendent complètement de la mère pour la chaleur corporelle les premiers mois.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://www.universalis.fr/encyclopedie/boeuf-musque/", "title": "Universalis - Reproduction Bœuf Musqué"},
+        {"type": "guide", "url": "https://www.futura-sciences.com/planete/definitions/zoologie-boeuf-musque-8151/", "title": "Futura Sciences - Reproduction et élevage"}
+      ]
+    }
+  }
+]

@@ -1,0 +1,427 @@
+[
+  {
+    "speciesId": 5218028,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits arthropodes",
+          "frequency": "quotidienne",
+          "notes": "Insectes (notamment fourmis dans la nature) et petits invertébrés"
+        },
+        {
+          "name": "Drosophiles et petits insectes d'élevage",
+          "frequency": "quotidienne",
+          "notes": "Sources courantes en captivité"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes provenant de la nature sauvage non identifiés",
+          "reason": "Risque de parasites ou de produits chimiques"
+        },
+        {
+          "name": "Proies trop volumineuses",
+          "reason": "Petite taille de la grenouille (max 5 cm)"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Arthropodes vivants, diversité importante pour captivité réussie",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobates_leucomelas",
+          "title": "Dendrobates leucomelas"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_leucomelas",
+          "title": "Dendrobates leucomelas"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 26,
+      "tempMax": 30,
+      "humidityMin": 80,
+      "humidityMax": 95,
+      "minSpaceSize": "Au minimum 45x45x60 cm pour petit groupe",
+      "lightNeeds": "Lumière naturelle tamisée, 12h jour/12h nuit",
+      "activityEnrichment": "Végétation dense, broméliacées, roches, feuillage pour exploration",
+      "hygieneNotes": "Substrat humide (tourbe, écorce), eau déchlorée à disposition, nettoyage régulier",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_leucomelas",
+          "title": "Dendrobates leucomelas"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobates_leucomelas",
+          "title": "Dendrobates leucomelas"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Grenouille diurne, très territoriale (les mâles défendent leur territoire) ; vit en petits groupes selon la source anglaise, plutôt solitaire hors reproduction selon la source française",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé, manipulation stressante pour l'animal ; toxines cutanées chez les individus sauvages (très atténuées chez les individus nés en captivité)",
+      "compatibilityWithOtherAnimals": "Doit vivre en groupes conspecifiques établis ou seule",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_leucomelas",
+          "title": "Dendrobates leucomelas"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobates_leucomelas",
+          "title": "Dendrobates leucomelas"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Mycose cutanée",
+          "symptoms": "Décoloration, zones blanches ou noires sur la peau",
+          "prevention": "Maintenir une hygrométrie stable, substrat propre et sec en cas d'excès",
+          "whenToConsult": "Dès premiers signes de décoloration anormale"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Apathie, perte de poids, refus de nourriture",
+          "prevention": "Proies d'élevage certifiées, régime varié",
+          "whenToConsult": "En cas de lethargie ou perte d'appétit"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobate",
+          "title": "Dendrobate"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 12,
+      "litterSizeMin": 2,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": "facile",
+      "notes": "Reproduction facile en captivité (espèce facilement reproduite). Incubation des œufs d'environ 10 à 14 jours selon la source française",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobates_leucomelas",
+          "title": "Dendrobates leucomelas"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_leucomelas",
+          "title": "Dendrobates leucomelas"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5219362,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits mammifères",
+          "frequency": null,
+          "notes": "Souris, petits rongeurs"
+        },
+        {
+          "name": "Insectes et invertébrés",
+          "frequency": null,
+          "notes": "Complément protéique naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies empoisonnées",
+          "reason": "Risque d'accumulation de toxines"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Opportuniste : invertébrés, petits vertébrés, plantes et fruits ; diversité alimentaire importante",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Genette",
+          "title": "Genette"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_genet",
+          "title": "Common genet"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 15,
+      "tempMax": 28,
+      "humidityMin": 30,
+      "humidityMax": 70,
+      "minSpaceSize": null,
+      "lightNeeds": "Nuit/jour naturel ou cycle 12/12h, zones d'ombre appropriées",
+      "activityEnrichment": "Arbres, branches pour grimper, cachettes multiples, enrichissement nocturne",
+      "hygieneNotes": "Nettoyage hebdomadaire des zones de repos, substrat sec",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Genette",
+          "title": "Genette"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_genet",
+          "title": "Common genet"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Carnivore opportuniste nocturne et crépusculaire, très agile, excellent grimpeur, solitaire sauf en période de reproduction",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé, animal sauvage peu adapté à la vie en captivité",
+      "compatibilityWithOtherAnimals": "Solitaire, cohabitation uniquement pour reproduction programmée",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Genette",
+          "title": "Genette"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_genet",
+          "title": "Common genet"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasites externes",
+          "symptoms": "Grattage excessif, pelage terne, démangeaisons visibles",
+          "prevention": "Hygiène enclos régulière, inspection visuelle mensuelle",
+          "whenToConsult": "En cas de comportement de grattage prolongé"
+        },
+        {
+          "name": "Diarrhée",
+          "symptoms": "Selles molles, apathie, déshydratation",
+          "prevention": "Régime alimentaire stable et varié, eau propre permanente",
+          "whenToConsult": "Si diarrhée dure plus de 48h"
+        },
+        {
+          "name": "Troubles respiratoires",
+          "symptoms": "Éternuements, respiration sifflante, mucus nasal",
+          "prevention": "Éviter humidité excessive et courants d'air, température stable",
+          "whenToConsult": "Dès premiers signes respiratoires"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Genette",
+          "title": "Genette"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "prohibited",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": [
+          "Protection intégrale en France depuis 1981 : interdiction de capturer, blesser, transporter, vendre ou détenir l'espèce",
+          "Annexe V de la directive européenne Habitats ; Convention de Berne, annexe III"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Genette",
+          "title": "Genette - protection en France"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "printemps et fin été-automne",
+      "gestationDays": 70,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 5,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": "avance",
+      "notes": "Deux portées annuelles possibles (printemps et fin d'été-automne), femelle seule avec les jeunes. Espèce non adaptée à la vie en captivité",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Genette",
+          "title": "Genette"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_genet",
+          "title": "Common genet"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5219833,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines variées",
+          "frequency": "quotidienne",
+          "notes": "Blé, millet, avoine, graines spécialisées pour petits rongeurs"
+        },
+        {
+          "name": "Insectes et larves",
+          "frequency": "hebdomadaire",
+          "notes": "Crickets, vers de farine, complément protéique naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Graines pourries ou moisies",
+          "reason": "Toxines et contamination"
+        },
+        {
+          "name": "Aliments gras ou salés",
+          "reason": "Toxiques pour petits rongeurs"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Graines fraîches ; nectar et fruits occasionnellement (régime naturel : graines, insectes, nectar, fruits)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eurasian_harvest_mouse",
+          "title": "Eurasian harvest mouse"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Rat_des_moissons",
+          "title": "Rat des moissons"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": 18,
+      "tempMax": 24,
+      "humidityMin": 40,
+      "humidityMax": 60,
+      "minSpaceSize": "Cage 60x40x40 cm minimum pour habitat naturel simulé",
+      "lightNeeds": "Cycle naturel 12/12h, lumière douce, zones ombragées",
+      "activityEnrichment": "Tiges de graminées hautes, matériaux naturels pour nidification, grimpe verticale grâce à la queue préhensile",
+      "hygieneNotes": "Substrat sec (paille, tourbe claire), nettoyage hebdomadaire, nid préservé",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eurasian_harvest_mouse",
+          "title": "Eurasian harvest mouse"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Rat_des_moissons",
+          "title": "Rat des moissons"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Excellent grimpeur, utilise sa queue préhensile pour grimper et s'équilibrer ; actif toute l'année, plutôt nocturne l'été et plus diurne l'hiver (nid sphérique tissé dans les herbes hautes)",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Possible sous supervision, animal très petit et fragile",
+      "compatibilityWithOtherAnimals": "Probablement solitaire (couples seulement en période de reproduction) : cohabitation avec d'autres individus non recommandée hors reproduction ; attention aux prédateurs",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eurasian_harvest_mouse",
+          "title": "Eurasian harvest mouse"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Rat_des_moissons",
+          "title": "Rat des moissons"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Abcès cutanés",
+          "symptoms": "Gonflements durs, blessures, rougeurs localisées",
+          "prevention": "Cage propre, substrat sec, murs lisses sans arêtes",
+          "whenToConsult": "Si gonflement ne diminue pas en 48h"
+        },
+        {
+          "name": "Pneumonie",
+          "symptoms": "Respiration laborieuse, son de grincement, apathie",
+          "prevention": "Éviter courants d'air, humidité stable (40-60%), température 18-24°C",
+          "whenToConsult": "Immédiatement si respiration anormale"
+        },
+        {
+          "name": "Parasites intestinaux",
+          "symptoms": "Perte de poids, pelage terne, selles molles",
+          "prevention": "Nourriture fraîche, eau propre quotidienne, hygiène cage stricte",
+          "whenToConsult": "En cas de perte de poids sans raison"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eurasian_harvest_mouse",
+          "title": "Eurasian harvest mouse"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Rat_des_moissons",
+          "title": "Rat des moissons"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "juin-juillet en Grande-Bretagne (parfois avril-mai) ; jusqu'à 6 portées par an",
+      "gestationDays": 21,
+      "incubationDays": null,
+      "litterSizeMin": 4,
+      "litterSizeMax": 8,
+      "sexualMaturityMonths": 1,
+      "breedingDifficulty": "facile",
+      "notes": "Nids sphériques tissés dans les herbes hautes ; allaitement de 15-16 jours ; jeunes indépendants vers 18 jours",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eurasian_harvest_mouse",
+          "title": "Eurasian harvest mouse"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Rat_des_moissons",
+          "title": "Rat des moissons"
+        }
+      ]
+    }
+  }
+]

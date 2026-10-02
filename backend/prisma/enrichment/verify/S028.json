@@ -1,0 +1,56 @@
+[
+  {
+    "speciesId": 2495134,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.litterSize: 15-25 -> 5-15 oeufs (source en.wikipedia Emu)",
+      "feeding: '70-80 % herbe' non source -> retire; 'petits animaux' -> insectes et graines; cailloux/gravier confirmes",
+      "behavior: 'pacifique, 50 km/h' non confirme -> tres protecteur de ses jeunes, attaques documentees (source)",
+      "health: 'infection bacterienne intestinale' -> coccidioses chez les poussins (source); ajout parasites et problemes de pattes lies au manque d'espace (source)",
+      "reproduction.notes: incubation 56 j par le male seul et perte d'1/3 du poids confirmes; 'sans manger/boire' retire",
+      "habitat.minSpaceSize: '5 hectares' -> grand enclos + cloture solide (source)"
+    ],
+    "removed": [
+      "legislation (euAnnex 'B' et 'arrete 21/11/1997' non confirmes, emeu non CITES; source citee = page d'accueil Legifrance non probante)",
+      "habitat.tempMin/tempMax/lightNeeds ; 'nager si possible'",
+      "feeding.foodsToAvoid (plantes toxiques/aliments traites non sources)",
+      "health: botulisme, deficience minerale (non confirmes pour l'espece)",
+      "behavior.compatibilityWithOtherAnimals; compatibilityWithChildren 'bon avec enfants' remplace par mise en garde",
+      "reproduction.sexualMaturityMonths 20 (non confirme)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2495150,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "source URL normalisee en Common_ostrich (page confirmee)",
+      "reproduction.season: 'mai a septembre' -> de mars/avril jusqu'avant septembre (source)",
+      "reproduction.notes: 'male incube 42 j' corrige -> femelle le jour, male la nuit, 35-45 j; harems 2-7 femelles; ~20 oeufs/nid commun; 'oeufs 1.5-2 kg' retire (non confirme)",
+      "reproduction: litterSize 12-20 -> null (source: ~20 oeufs en moyenne dans un nid commun, mis en notes); sexualMaturity 36 mois conserve (femelles 2-4 ans)",
+      "behavior: '70 km/h', 'gregaire/hierarchique en captivite' non confirmes -> groupes nomades 5-100 en reproduction, couples/solitaire l'hiver, males territoriaux, coups de pattes dangereux (source)",
+      "feeding: 'racines' remplace par fleurs/invertebres (source); 'saumatres' retire",
+      "health: 'Vaccination' retiree de l'enterotoxemie; antiparasitaire 'regulier' -> suivi veterinaire"
+    ],
+    "removed": [
+      "legislation (euAnnex 'B' / arrete 21/11/1997 non confirmes. La page indique CITES Appendix I pour l'espece (en partie selon les populations) mais le statut legal en France n'est pas etabli -> section laissee a null)",
+      "habitat.tempMin/tempMax/minSpaceSize/lightNeeds ; 'buissons pour perchage' et 'nage' (faux/non sources)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2498343,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.season: 'mars a mai' non confirme -> eclosions de mai a juillet (source en.wikipedia Mute_swan)",
+      "reproduction.notes: 'cygnets volants apres 60-65 jours' -> envol apres 120-150 jours (source); nid reutilise chaque annee (source)",
+      "behavior: territorial/agressif (sifflements, coups d'aile, morsures) confirme; 'bon avec enfants' -> mise en garde",
+      "feeding: 'eau salee' retire (non confirme); plomb conserve (saturnisme connu)"
+    ],
+    "removed": [
+      "legislation (status 'allowed' non confirme ; le cygne tubercule est vraisemblablement une espece protegee en France mais aucune source verifiee ; source Legifrance = page d'accueil non probante)",
+      "habitat.tempMin/tempMax/minSpaceSize (non confirmables)"
+    ],
+    "confidence": "medium"
+  }
+]

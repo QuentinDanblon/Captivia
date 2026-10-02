@@ -1,0 +1,37 @@
+[
+ {
+  "speciesId": 5282524,
+  "commonNameFr": "Raton Laveur",
+  "scientificName": "Procyon lotor",
+  "category": "mammifère",
+  "domesticationType": "semi-domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5282588,
+  "commonNameFr": "Loutre Naine Asiatique",
+  "scientificName": "Aonyx cinereus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5283399,
+  "commonNameFr": "Lapin domestique",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ }
+]

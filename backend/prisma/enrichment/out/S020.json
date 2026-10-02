@@ -1,0 +1,426 @@
+[
+  {
+    "speciesId": 2455676,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Rongeurs congelés (souris ou rats)",
+          "frequency": "hebdomadaire",
+          "notes": "Taille appropriée à la taille du serpent, de préférence décongelés avant distribution"
+        },
+        {
+          "name": "Œufs de poule",
+          "frequency": "mensuelle",
+          "notes": "Occasionnel, en alternance avec les rongeurs"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies vivantes",
+          "reason": "Risque de blessures au serpent et stress inutile"
+        },
+        {
+          "name": "Aliments moisies ou contaminés",
+          "reason": "Risque d'infection bactérienne ou parasitaire"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Proies appropriées à la taille du serpent, jamais plus large que le diamètre du corps",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/black-ratsnake-care-sheet",
+          "title": "Black Ratsnake Care Sheet - ReptiFiles"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 22,
+      "tempMax": 32,
+      "humidityMin": 50,
+      "humidityMax": 70,
+      "minSpaceSize": "Terrarium de 1,2m x 0,6m minimum pour adulte",
+      "lightNeeds": "Cycle naturel jour/nuit, lumière naturelle ou fluorescente, extinction nocturne",
+      "activityEnrichment": "Branches et zones de grimpe, cachettes, substrat meuble pour fouiller",
+      "hygieneNotes": "Nettoyage hebdomadaire des zones sales, changement total du substrat mensuel, eau fraîche quotidienne",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/black-ratsnake-care-sheet",
+          "title": "Black Ratsnake Care Sheet - ReptiFiles"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent docile et calme en captivité, particulièrement s'il est élevé en captivité depuis jeune âge. Naturellement discret, préfère éviter les confrontations",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon avec surveillance constante d'un adulte",
+      "compatibilityWithOtherAnimals": "Doit être hébergé seul, peut manger les petits animaux",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus",
+          "title": "Pantherophis obsoletus - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Pantherophis_obsoletus/",
+          "title": "Pantherophis obsoletus - Animal Diversity Web"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stomatite infectieuse (« mouth rot »)",
+          "symptoms": "Taches rouges dans la gueule, mucus épais teinté de sang, odeur acide autour de la tête, refus de s'alimenter",
+          "prevention": "Température et hygrométrie appropriées, nettoyage régulier du terrarium, alimentation adéquate",
+          "whenToConsult": "Immédiatement si symptômes présents"
+        },
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Mucus nasal, respiration sifflante, apathie, perte d'appétit, respiration bouche ouverte",
+          "prevention": "Maintenir les bonnes conditions thermiques (pas de froid excessif), éviter l'humidité trop élevée ou trop basse",
+          "whenToConsult": "Dès les premiers symptômes, consultation vétérinaire urgente"
+        },
+        {
+          "name": "Parasitose interne",
+          "symptoms": "Diarrhée, régurgitation, perte de poids, amaigrissement",
+          "prevention": "Congélation des proies 2-3 semaines avant distribution, hygiène stricte du terrarium",
+          "whenToConsult": "Consultation vétérinaire recommandée si symptômes prolongés"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://vcahospitals.com/eagle-park/know-your-pet/snakes-diseases",
+          "title": "Common Diseases of Pet Snakes - VCA Hospitals"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": ["Certificat de capacité (CDC) potentiellement requis selon la préfecture"],
+        "restrictions": ["Espèce listée en annexe de l'arrêté du 21 novembre 1997 pour certains départements"]
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.agn-avocats.fr/?p=97187",
+          "title": "Réglementation NAC en France"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "mai-juin",
+      "gestationDays": null,
+      "incubationDays": 67,
+      "litterSizeMin": 12,
+      "litterSizeMax": 20,
+      "sexualMaturityMonths": 60,
+      "breedingDifficulty": "modere",
+      "notes": "Femelle pond 12 à 20 œufs après 5 semaines de gestation interne. Éclosion juillet-septembre. Les juvéniles sont indépendants à la naissance",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus",
+          "title": "Pantherophis obsoletus - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Pantherophis_obsoletus/",
+          "title": "Pantherophis obsoletus - Animal Diversity Web"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2457884,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Rongeurs congelés (souris ou rats)",
+          "frequency": "hebdomadaire",
+          "notes": "Taille appropriée au serpent, préférence pour les rongeurs"
+        },
+        {
+          "name": "Poussins ou œufs",
+          "frequency": "hebdomadaire",
+          "notes": "Excellent apport nutritif, l'espèce montre une préférence pour les oiseaux"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies vivantes",
+          "reason": "Risque de blessures et stress du serpent"
+        },
+        {
+          "name": "Proies de taille excessive",
+          "reason": "Risque d'étouffement et de régurgitation"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Cette espèce s'adapte bien à une grande variété de proies ; préférence documentée pour les oiseaux",
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.aphis.usda.gov/operational-wildlife-activities/brown-treesnake",
+          "title": "Brown Treesnake - USDA APHIS"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium vertical de 1,2m x 0,6m minimum, structure arboricole prioritaire",
+      "lightNeeds": "Cycles jour/nuit appropriés, l'espèce est active la nuit principalement",
+      "activityEnrichment": "Branches épaisses pour la grimpe, cachettes en hauteur, zone sombre pour la journée",
+      "hygieneNotes": "Nettoyage régulier, eau fraîche quotidienne, substrat sec ou légèrement humide",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.aphis.usda.gov/operational-wildlife-activities/brown-treesnake",
+          "title": "Brown Treesnake - USDA APHIS"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent arboricole et nocturne, généralement calme en captivité mais peut être défensif si menacé. Excellent grimpeur, passe la majorité de son temps en hauteur",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Nécessite une supervision constante, animal pour éleveur expérimenté",
+      "compatibilityWithOtherAnimals": "Doit être hébergé seul, prédateur de petits animaux",
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.aphis.usda.gov/operational-wildlife-activities/brown-treesnake",
+          "title": "Brown Treesnake - USDA APHIS"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stomatite infectieuse (« mouth rot »)",
+          "symptoms": "Taches hémorragiques ou mucus épais avec sang, odeur désagréable, refus alimentaire, respiration difficile",
+          "prevention": "Maintenir conditions optimales de température, nettoyer régulièrement le terrarium, éviter surpopulation",
+          "whenToConsult": "Consultation vétérinaire immédiate si présence de symptômes"
+        },
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Mucus nasal, sifflements respiratoires, apathie, perte d'appétit",
+          "prevention": "Éviter l'humidité excessive, maintenir gradients de température adéquats",
+          "whenToConsult": "Consultation urgent dès apparition des symptômes"
+        },
+        {
+          "name": "Ectoparasites (acariens)",
+          "symptoms": "Points rouges sur la peau, grattage excessif, serpent lethargique",
+          "prevention": "Hygiène stricte du terrarium, substrat propre et régulièrement changé",
+          "whenToConsult": "Dès observation de parasites visibles ou comportement anormal"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://vcahospitals.com/eagle-park/know-your-pet/snakes-diseases",
+          "title": "Common Diseases of Pet Snakes - VCA Hospitals"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "prohibited",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce envahissante problématique, interdiction de détention en France et UE"]
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.agn-avocats.fr/?p=97187",
+          "title": "Réglementation NAC en France"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "année",
+      "gestationDays": null,
+      "incubationDays": 87,
+      "litterSizeMin": 3,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction toute l'année possible. Femelle pond 3 à 12 œufs. Incubation 82-92 jours en captivité. Pas de soins parentaux. Élevage en captivité très difficile et déconseillé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/boiga_irregularis/",
+          "title": "Boiga irregularis - Animal Diversity Web"
+        },
+        {
+          "type": "vet",
+          "url": "https://conservationevidencejournal.com/individual-study/9926",
+          "title": "Boiga irregularis Captive reproduction and longevity"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2466939,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Crickets (grillons)",
+          "frequency": "quotidienne",
+          "notes": "Taille appropriée aux juvéniles ou adultes, nourriture principale"
+        },
+        {
+          "name": "Petits arthropodes (mouches, mites)",
+          "frequency": "quotidienne",
+          "notes": "Complément nutritif, variété importante pour la santé"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes trop grands",
+          "reason": "Risque d'étouffement ou de refus alimentaire"
+        },
+        {
+          "name": "Insectes capturés à l'état sauvage sans traitement",
+          "reason": "Risque de parasites et de contaminants"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Alimentation quotidienne essentielle pour les juvéniles et jeunes adultes, espèce très active",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/wp-content/uploads/2022/04/Green-Anole-Care-Sheet-ReptiFiles-PDF-1.pdf",
+          "title": "Green Anole Care Sheet - ReptiFiles"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 21,
+      "tempMax": 32,
+      "humidityMin": 60,
+      "humidityMax": 70,
+      "minSpaceSize": "Minimum 40L, terrarium vertical de 60cm hauteur, 40cm profondeur, 30cm largeur pour 1-2 individus",
+      "lightNeeds": "12h lumière-12h obscurité, UVB 8-10h/jour recommandé pour synthesis vitamine D",
+      "activityEnrichment": "Branches et plantes pour grimper, cachettes, zones d'exposition et zones ombragées",
+      "hygieneNotes": "Nettoyage des zones souillées quotidien, changement eau quotidien, misting 2x/jour pour humidité",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/wp-content/uploads/2022/04/Green-Anole-Care-Sheet-ReptiFiles-PDF-1.pdf",
+          "title": "Green Anole Care Sheet - ReptiFiles"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://animaldiversity.org/accounts/Anolis_carolinensis/",
+          "title": "Green Anole - Animal Diversity Web"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Lézard arboricole très actif et curieux. Changement de couleur selon l'humeur (vert à brun). Naturellement semi-grégaire mais mâles territoriaux et agressifs entre eux",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Excellent pour les enfants sous supervision, manipulation douce requise",
+      "compatibilityWithOtherAnimals": "Jamais deux mâles ensemble, femelles peuvent cohabiter avec un mâle ou entre elles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://animaldiversity.org/accounts/Anolis_carolinensis/",
+          "title": "Green Anole - Animal Diversity Web"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Malnutrition et carence en calcium",
+          "symptoms": "Fragilité osseuse, tremblements, paralysie légère, déformation de la colonne vertébrale",
+          "prevention": "Apport d'UVB régulier, alimentation variée, supplémentation calcique si nécessaire",
+          "whenToConsult": "Consultation vétérinaire si signes de faiblesse ou déformations osseuses"
+        },
+        {
+          "name": "Dermatite (infection cutanée)",
+          "symptoms": "Rougeurs cutanées, lésions, sécrétion anormale, perte d'écailles",
+          "prevention": "Maintenir hygrométrie adéquate, nettoyer régulièrement, éviter humidité excessive ou trop sèche",
+          "whenToConsult": "Consultation vétérinaire si lésions persistantes ou aggravation"
+        },
+        {
+          "name": "Parasitose interne",
+          "symptoms": "Amaigrissement, diarrhée, lethargie, refus alimentaire",
+          "prevention": "Hygiène stricte du terrarium, nettoyage quotidien, insectes de qualité vérifiée",
+          "whenToConsult": "Consultation vétérinaire si symptômes durables"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://vcahospitals.com/eagle-park/know-your-pet/snakes-diseases",
+          "title": "Common Diseases of Pet Reptiles - VCA Hospitals"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.agn-avocats.fr/?p=97187",
+          "title": "Réglementation NAC en France"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "avril-août",
+      "gestationDays": null,
+      "incubationDays": 43,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "facile",
+      "notes": "Femelle pond un œuf à la fois en succession continue d'avril à août. Incubation 36-63 jours selon conditions. Pas de soins parentaux. Hatchlings de 23-25mm",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://animaldiversity.org/accounts/Anolis_carolinensis/",
+          "title": "Green Anole - Animal Diversity Web"
+        },
+        {
+          "type": "guide",
+          "url": "https://anoleannals.org/2012/07/29/hatching-for-hobbyists",
+          "title": "Hatching for Hobbyists - Anole Annals"
+        }
+      ]
+    }
+  }
+]

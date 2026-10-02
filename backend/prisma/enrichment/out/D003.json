@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000090,
+    "description": "Le Griffon Bruxellois provient de Bruxelles, en Belgique. C'est une race de petit gabarit mesurant entre 23 et 28 cm pour un poids de 4 à 5 kg. Bien équilibré, fier et alerte, il est très attaché à son propriétaire. Curieux, intelligent et sensible, ces petits compagnons apprécient une approche douce en éducation.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Petit_Brabancon"
+  },
+  {
+    "speciesId": 2000000092,
+    "description": "Le phalène est un petit épagneul nain continental d'origine franco-belge qui a connu une grande popularité dans les cours royales d'Europe durant la Renaissance. Pesant entre 1,5 et 4,5 kg pour une taille maximale d'environ 28 cm, c'est une race rare aujourd'hui. C'est un chien de compagnie élégant et historique.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Phalène_(chien)"
+  },
+  {
+    "speciesId": 2000000093,
+    "description": "Le pudelpointer est une race allemande issue du croisement entre caniche et pointer anglais. C'est un chien de chasse de grande taille, mesurant 55 à 68 cm selon le sexe, au poil dur de couleur marron, feuille-morte ou noir. Caractérisé par son tempérament équilibré, il est joyeux, docile et facile à dresser, adorant l'eau et l'activité cynégétique.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Pudelpointer"
+  },
+  {
+    "speciesId": 2000000094,
+    "description": "Le Rhodesian Ridgeback est originaire de Rhodésie du Sud (actuel Zimbabwe) et d'Afrique du Sud, issu du croisement entre les chiens des pionniers européens et les chiens autochtones. Il se caractérise par une silhouette robuste et musclée mesurant 61-69 cm au garrot. Digne, intelligent et distant avec les étrangers, ce chien sportif exige beaucoup d'exercice physique.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Rhodesian_Ridgeback"
+  },
+  {
+    "speciesId": 2000000095,
+    "description": "Le lévrier persan, ou Saluki, est originaire du Moyen-Orient. De taille moyenne (58-71 cm), il se distingue par son pelage lisse et soyeux, avec des franges aux oreilles et à la queue. Son tempérament se caractérise par un calme naturel et une certaine réserve : c'est un chien sociable mais indépendant, affectueux sans être envahissant, et méfiant envers les étrangers.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Saluki"
+  },
+  {
+    "speciesId": 2000000097,
+    "description": "Le Schapendoes néerlandais est une très ancienne race de chien de berger originaire des Pays-Bas, reconnue au XVIIIe siècle. C'est un chien de taille moyenne, pesant environ 15-20 kg, avec un pelage long, touffu et hirsute de diverses couleurs. Son tempérament est intelligent, actif et aimable, ce qui en fait un excellent compagnon familial et gardien de troupeau.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Schapendoes"
+  },
+  {
+    "speciesId": 2000000099,
+    "description": "Le Terrier australien à poil soyeux est originaire d'Australie, développé en croisant des Yorkshire Terriers avec des Australian Terriers. C'est une petite race compacte, mesurant 23 cm au garrot, caractérisée par son long pelage soyeux gris et blanc ou bleu et feu. Naturellement alerte et actif, ce chien a été historiquement utilisé pour chasser les rongeurs et serpents.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Silky_Terrier"
+  },
+  {
+    "speciesId": 2000000101,
+    "description": "Le Sloughi est un lévrier originaire d'Afrique du Nord (Maroc, Algérie, Tunisie, Libye), race très ancienne représentée dans l'art rupestre du Sahara. De taille moyenne (66-72 cm pour les mâles), il possède un poil court et fin, avec une robe sable à roux. Son caractère se définit par la noblesse, le courage exceptionnel et son attachement profond à son maître.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Sloughi"
+  },
+  {
+    "speciesId": 2000000102,
+    "description": "Le spaniel springer anglais, originaire d'Angleterre et reconnu officiellement en 1902, est un chien de taille moyenne mesurant environ 48-53 cm. Descendant des épagneuls anciens, il combine l'élégance avec une expression douce. Traditionnellement utilisé pour la chasse, il excelle dans des rôles de détection grâce à son flair exceptionnel et sa volonté de travailler.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/English_Springer_Spaniel"
+  },
+  {
+    "speciesId": 2000000105,
+    "description": "Le Tosa est une race japonaise créée à partir du croisement de chiens locaux avec des races occidentales comme le bulldog et le mastiff. C'est un grand molossoïde imposant, mesurant minimum 60 cm au garrot pour les mâles et pesant entre 70 à 90 kg. Initialement sélectionné pour les combats de chiens, il figure parmi les races de seconde catégorie en France.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Tosa_(chien)"
+  },
+  {
+    "speciesId": 2000000106,
+    "description": "Le Vizsla est un braque hongrois à poil court originaire du Ier millénaire av. J.-C., résultant de croisements entre chiens courants locaux et un chien jaune turc. C'est un chien de taille moyenne (environ 60 cm) à constitution légère et sèche. Vif, aimable et facile à éduquer, il excelle à la chasse et s'adapte aussi très bien comme compagnon familial affectueux.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Vizsla"
+  },
+  {
+    "speciesId": 2000000107,
+    "description": "Le braque de Weimar est une race allemande originaire du Duché de Saxe-Weimar, où la noblesse l'appréciait pour la chasse. C'est un chien de grande taille (59-70 cm pour les mâles) à la robe grise caractéristique. Il se distingue par son tempérament équilibré, docile et passionné pour la chasse, tout en étant sociable et protecteur avec les enfants.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Weimaraner"
+  },
+  {
+    "speciesId": 2000000108,
+    "description": "Le Whippet est une race britannique de lévrier de taille moyenne, mesurant 44-51 cm. Originaire du Royaume-Uni, il a été développé au XIXe siècle pour la chasse et les courses. Le breed se caractérise par un tempérament calme et digne à la maison, mais très énergique à l'extérieur, avec une forte capacité à accélérer rapidement.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Whippet"
+  },
+  {
+    "speciesId": 2000000109,
+    "description": "L'European Shorthair est une race naturelle originaire d'Europe, descendant des chats communs du continent. De taille moyenne à grande avec une morphologie équilibrée, ce chat robuste présente un caractère indépendant mais affectueux. Intelligent et agile, il conserve les qualités de chasseur des chats domestiques européens, s'adaptant facilement à différents environnements familiaux.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chat_européen"
+  },
+  {
+    "speciesId": 2000000110,
+    "description": "Le Persan provient de l'Angora turc et de chats du Khorassan. Ce chat de taille moyenne à grande se caractérise par une silhouette compacte et ronde. Doté d'un tempérament calme et casanier, c'est un félin qui s'adapte facilement à la vie en appartement, bien qu'il reste capable de grimper aux arbres.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chat_persan"
+  }
+]

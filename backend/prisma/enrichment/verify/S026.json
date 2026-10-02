@@ -1,0 +1,56 @@
+[
+  {
+    "speciesId": 2482492,
+    "checked": ["feeding", "habitat", "behavior", "health", "reproduction", "legislation"],
+    "corrected": [
+      "ATTENTION: in/S026.json donne 'Corbeau familier' pour Corvus corax (= Grand corbeau; le Corbeau familier est Corvus splendens). Les sources/contenus portent sur Corvus corax; nom commun a verifier en amont",
+      "feeding.specificNeeds: 'restes alimentaires acceptables' retire; regime opportuniste sourced",
+      "feeding frequences chiffrees (3-4x/sem, 2x/sem) -> 'reguliere'",
+      "behavior: compatibilityWithChildren 'enfants +12 ans' retire; cognition reformulee d'apres la page (jeunes comparables a des grands singes aux tests)",
+      "reproduction.season: fevrier-avril -> fin janvier-avril (source); incubation 18-21 j, 4-6 oeufs, envol 35-49 j, 6 mois de dependance confirmes; maturite: appariement 2-3 ans apres la parade (valeur 24 conservee)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "habitat.activityEnrichment: 'vol libre' retire",
+      "behavior.compatibilityWithOtherAnimals: recommandation 'un seul couple' retiree (garde: defense du territoire, source)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2488955,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.incubationDays: 56 -> 70 (source en.wikipedia Corn_snake: ~10 semaines)",
+      "reproduction.notes: 'Incubation 50-60 jours a 25-27 C' -> ~10 semaines; delai accouplement-ponte 'un peu plus d'un mois' (source)",
+      "reproduction.season: 'avril-juillet' -> 'au printemps apres le refroidissement hivernal' (source)",
+      "reproduction.gestationDays: 30 -> null (espece ovipare; delai accouplement-ponte mis en notes)",
+      "health.prevention: chiffres 24-28 C / 50-70 % retires; 'quarantaine proies' -> quarantaine des nouveaux animaux"
+    ],
+    "removed": [
+      "health: Maladie osseuse metabolique (UVB 10 % / calcium 2x/sem non confirmes, peu pertinent pour un serpent nourri de proies entieres)",
+      "reproduction.sexualMaturityMonths: 18 (la page indique une maturite liee a la taille ~75 cm / 250 g, pas a l'age)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2490384,
+    "checked": ["feeding", "habitat", "behavior", "health", "reproduction", "legislation"],
+    "corrected": [
+      "feeding: '90% du regime' precise (graines, grains et fruits; source en.wikipedia Northern_cardinal); jeunes nourris presque exclusivement d'insectes (source)",
+      "behavior: les deux sexes chantent, chants appris et regionaux, cri metallique (source); difficultyLevel 'debutant' -> 'intermediaire' (non source, oiseau sauvage territorial)",
+      "behavior.compatibilityWithOtherAnimals: 'colonie spacieuse' retire; males chassent les autres males (source)",
+      "reproduction: 2-4 couvees/an, 3-4 oeufs, incubation 12-13 j, envol 10-11 j apres eclosion confirmes",
+      "habitat: 'buissons dense-mailles' reformule"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize/lightNeeds (non confirmables)",
+      "feeding.foodsToAvoid: 'Graines trop dures' (incoherent pour un granivore au bec puissant)",
+      "behavior.compatibilityWithChildren ('Excellente' non confirme)",
+      "health: 'Longevite et usure' (pas une maladie)",
+      "reproduction.season (fevrier-septembre non confirme)",
+      "reproduction.sexualMaturityMonths: 12 (non confirme)",
+      "legislation laissee a null : la page signale l'interdiction de detention aux Etats-Unis (Migratory Bird Treaty Act) mais aucune source sur le statut en France/UE"
+    ],
+    "confidence": "medium"
+  }
+]

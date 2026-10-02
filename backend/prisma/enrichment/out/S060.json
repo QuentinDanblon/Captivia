@@ -1,0 +1,214 @@
+[
+  {
+    "speciesId": 104060854,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {"name": "Petits rongeurs (souris, rats)", "frequency": null, "notes": "Les petits mammifères forment au moins 80 % du régime à l'état naturel, avec oiseaux, lézards, serpents et insectes"},
+        {"name": "Volaille (poulet découpé)", "frequency": null, "notes": "Viande maigre sans assaisonnement ; les oiseaux font partie du régime naturel"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Aliments transformés ou salés", "reason": "Régime naturel carnivore, incompatible avec les aliments transformés"},
+        {"name": "Fruits et légumes en excès", "reason": "Régime essentiellement carnivore"}
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Viande fraîche ou congelée-décongelée, os charnus occasionnels pour l'enrichissement",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Caracal", "title": "Caracal - Wikipedia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles jour/nuit naturels ; activité surtout nocturne et par températures inférieures à 20 °C",
+      "activityEnrichment": "Enrichissement vertical, branches à grimper, cachettes, stimulation sensorielle",
+      "hygieneNotes": "Nettoyage régulier de l'enclos, accès quotidien à l'eau fraîche",
+      "costEstimate": "élevé",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Caracal", "title": "Caracal - Wikipedia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Félin territorial vivant seul ou en couple, typiquement nocturne, très discret et difficile à observer ; excellent chasseur",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillé : animal sauvage potentiellement dangereux, instinct prédateur fort",
+      "compatibilityWithOtherAnimals": "Incompatible : prédateur d'autres petits mammifères et d'oiseaux",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Caracal", "title": "Caracal - Wikipedia"}
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Inscrit à la CITES : annexe II pour les populations africaines, annexe I pour les populations asiatiques. Détention encadrée en France, se renseigner auprès de la DDPP avant toute démarche"]
+      },
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Caracal", "title": "Caracal - Wikipedia"}
+      ]
+    },
+    "reproduction": {
+      "season": "naissances surtout d'octobre à février",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "avance",
+      "notes": "Gestation d'environ deux à trois mois ; portée de un à six petits. Maturité sexuelle atteinte vers un an.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Caracal", "title": "Caracal - Wikipedia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 104060891,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {"name": "Rongeurs (souris, rats)", "frequency": null, "notes": "Petits mammifères (gerbilles, lièvres, rongeurs) préférés dans la nature"},
+        {"name": "Poisson et volaille frais", "frequency": null, "notes": "Poissons, oiseaux, grenouilles, insectes et petits serpents font partie du régime naturel"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Aliments salés ou transformés", "reason": "Régime essentiellement carnivore"}
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Proies vivantes ou congelées, chasse simulée bénéfique pour l'enrichissement. L'espèce est partiellement omnivore et consomme des fruits, surtout en hiver.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Jungle_cat", "title": "Jungle cat - Wikipedia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles jour/nuit naturels (espèce plutôt diurne)",
+      "activityEnrichment": "Point d'eau, cachettes, zones d'observation surélevées",
+      "hygieneNotes": "Accès constant à l'eau fraîche, nettoyage régulier du bassin ; espèce des zones humides (marais, berges à végétation dense)",
+      "costEstimate": "moyen",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Jungle_cat", "title": "Jungle cat - Wikipedia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Chat des marais, typiquement diurne et chassant tout au long de la journée ; solitaire (ne côtoie ses congénères qu'en période de reproduction) et territorial (marquage urinaire et olfactif)",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillé : animal sauvage, potentiellement agressif",
+      "compatibilityWithOtherAnimals": "Incompatible avec ses proies potentielles",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Jungle_cat", "title": "Jungle cat - Wikipedia"}
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'annexe II de la CITES : détention encadrée en France, se renseigner auprès de la DDPP avant toute démarche"]
+      },
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Jungle_cat", "title": "Jungle cat - Wikipedia"}
+      ]
+    },
+    "reproduction": {
+      "season": "chaleurs de janvier à mars, naissances de décembre à juin",
+      "gestationDays": 60,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 5,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "avance",
+      "notes": "Gestation de près de deux mois ; un à cinq petits, typiquement deux à trois. Maturité sexuelle vers un an. Longévité en captivité de 15 à 20 ans.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Jungle_cat", "title": "Jungle cat - Wikipedia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 104060941,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {"name": "Petits rongeurs et lièvres", "frequency": null, "notes": "Proies naturelles principales"},
+        {"name": "Insectes et petits oiseaux", "frequency": null, "notes": "Le régime naturel comprend aussi serpents, petits lézards, grenouilles et poissons"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Aliments transformés", "reason": "Petit félin sauvage carnivore"},
+        {"name": "Chocolat", "reason": "Toxique pour les félidés"}
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Proies fraîches pour simuler la chasse naturelle",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Geoffroy%27s_cat", "title": "Geoffroy's cat - Wikipedia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles jour/nuit naturels ; espèce nocturne",
+      "activityEnrichment": "Agilité verticale, branches, cachettes multiples ; milieu naturel : pampas, savanes, bois ouverts et fourrés avec couvert",
+      "hygieneNotes": "Eau fraîche quotidienne, nettoyage régulier des zones de repos",
+      "costEstimate": "moyen",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Geoffroy%27s_cat", "title": "Geoffroy's cat - Wikipedia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petit chat d'Amérique du Sud, nocturne et solitaire (ne côtoie ses congénères qu'en période d'accouplement), chasseur adroit. Se dresse parfois sur ses pattes arrière, queue en appui, pour scruter les environs.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Très déconseillé : animal sauvage, griffes et comportement non contrôlables",
+      "compatibilityWithOtherAnimals": "Dangereux pour petits mammifères et oiseaux",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Geoffroy%27s_cat", "title": "Geoffroy's cat - Wikipedia"}
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'annexe I de la CITES (depuis 1992) : commerce international interdit sauf à des fins non commerciales. Détention très encadrée, se renseigner auprès de la DDPP avant toute démarche"]
+      },
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Geoffroy%27s_cat", "title": "Geoffroy's cat - Wikipedia"}
+      ]
+    },
+    "reproduction": {
+      "season": "octobre à mars (Amérique du Sud)",
+      "gestationDays": 75,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 3,
+      "sexualMaturityMonths": 18,
+      "breedingDifficulty": "avance",
+      "notes": "Gestation de 72 à 78 jours ; 1 à 3 petits (1 à 2 plus fréquent). Maturité sexuelle à 18 mois pour les femelles, 24 mois pour les mâles.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Geoffroy%27s_cat", "title": "Geoffroy's cat - Wikipedia"}
+      ]
+    }
+  }
+]

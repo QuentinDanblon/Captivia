@@ -1,0 +1,36 @@
+[
+ {
+  "speciesId": 5281802,
+  "commonNameFr": "Chat domestique",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5282447,
+  "commonNameFr": "Furet domestique",
+  "scientificName": "Mustela putorius furo",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5282475,
+  "commonNameFr": "Vison Américain",
+  "scientificName": "Neovison vison",
+  "category": "mammifère",
+  "domesticationType": "semi-domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ }
+]

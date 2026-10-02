@@ -1,0 +1,379 @@
+[
+  {
+    "speciesId": 104145998,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines variées",
+          "frequency": "quotidienne",
+          "notes": "Graines de tournesol, avoine, millet - le régime se compose surtout de graines, fruits, légumes et céréales"
+        },
+        {
+          "name": "Fruits et légumes frais",
+          "frequency": "quotidienne",
+          "notes": "Pomme, carotte, épinards, courges - diversification alimentaire"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Chocolat",
+          "reason": "Toxique pour les oiseaux"
+        },
+        {
+          "name": "Sel et aliments salés",
+          "reason": "Dangereux pour le métabolisme des oiseaux"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Alimentation variée à dominante végétale (techniquement omnivore : mange aussi des insectes et des vers). Besoins en calcium et vitamines A, D",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Monk_parakeet",
+          "title": "Monk parakeet (Wikipedia EN)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Grande volière spacieuse",
+      "lightNeeds": "12-14 heures de lumière naturelle quotidienne",
+      "activityEnrichment": "Matériaux de construction de nids (branches, brindilles), jouets à mâcher, perchoirs variés",
+      "hygieneNotes": "Nettoyage régulier, branches fraîches pour construction de nid, bains d'eau disponibles",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Monk_parakeet",
+          "title": "Monk parakeet (Wikipedia EN)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Très social et grégaire. Construit de grands nids externes collectifs avec une entrée séparée pour chaque couple. Développe des dialectes vocaux propres à chaque groupe",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Sociable mais peut être agressif s'il défend son nid. À surveiller avec des enfants",
+      "compatibilityWithOtherAnimals": "Très sociable en colonies. Préfère la compagnie de ses congénères",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Monk_parakeet",
+          "title": "Monk parakeet (Wikipedia EN)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stress comportemental",
+          "symptoms": "Agressivité accrue, arrachage de plumes, comportement stéréotypé",
+          "prevention": "Environnement enrichi, socialisation, compagnie de congénères ou propriétaire investi",
+          "whenToConsult": "Dès apparition de signes anormaux de comportement"
+        },
+        {
+          "name": "Malnutrition",
+          "symptoms": "Perte de poids, défaut de plumage, fatigue",
+          "prevention": "Alimentation variée et équilibrée, fruits et légumes réguliers",
+          "whenToConsult": "Consultation si perte de poids persistante"
+        },
+        {
+          "name": "Fracture de l'aile",
+          "symptoms": "Aile pendante, incapacité à voler, douleur",
+          "prevention": "Environnement sécurisé sans obstacles aigus, manipulation douce",
+          "whenToConsult": "Urgence vétérinaire immédiate"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Monk_parakeet",
+          "title": "Monk parakeet (Wikipedia EN)"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 24,
+      "litterSizeMin": 4,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Reproduction coloniale caractéristique : grands nids externes collectifs avec une entrée par couple (seule perruche à construire de tels nids). Incubation de 23 à 25 jours, 4 à 6 œufs par ponte (1 à 11 selon Wikipedia EN). Parfois reproduction solitaire. La femelle incube, le mâle apporte la nourriture",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Conure_veuve",
+          "title": "Conure veuve (Wikipédia FR)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Monk_parakeet",
+          "title": "Monk parakeet (Wikipedia EN)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104146243,
+    "feeding": {
+      "dietType": "granivore-frugivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines et noix",
+          "frequency": "quotidienne",
+          "notes": "Graines de légumineuses (base du régime naturel), noix variées"
+        },
+        {
+          "name": "Fruits et baies",
+          "frequency": "quotidienne",
+          "notes": "Baies, fruits - alimentation saisonnière naturelle"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Chocolat",
+          "reason": "Toxique pour tous les oiseaux"
+        },
+        {
+          "name": "Aliments salés ou épicés",
+          "reason": "Perturbent le métabolisme aviaire"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime riche en graines et noix. Compléments en calcium et vitamines utiles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meyer%27s_parrot",
+          "title": "Meyer's parrot (Wikipedia EN)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Volière spacieuse. Habitat naturel : forêts claires et savanes de plateau d'Afrique subsaharienne (miombo, savane, forêts)",
+      "lightNeeds": "12-14 heures de lumière quotidienne",
+      "activityEnrichment": "Branches à mâcher, cavités pour nidification, jouets à manipuler, interaction sociale",
+      "hygieneNotes": "Nettoyage régulier, branches fraîches variées, bains d'eau quotidiens",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meyer%27s_parrot",
+          "title": "Meyer's parrot (Wikipedia EN)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Perroquet de petite taille, relativement silencieux comparé à d'autres perroquets. Peut apprendre des dizaines de mots. Se déplace en couples ou en petits groupes",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Espèce relativement calme et de petite taille ; interactions à surveiller",
+      "compatibilityWithOtherAnimals": "Vit en couples ou petits groupes ; cohabitation avec des congénères possible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meyer%27s_parrot",
+          "title": "Meyer's parrot (Wikipedia EN)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Carence nutritionnelle",
+          "symptoms": "Plumage terne, fatigue, perte de poids",
+          "prevention": "Alimentation équilibrée riche en graines, noix et fruits variés",
+          "whenToConsult": "Consultation si symptômes persistants"
+        },
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Éternuements, respiration sifflante, mucus nasal",
+          "prevention": "Environnement avec bonne ventilation, hygiène de la cage",
+          "whenToConsult": "Consultation rapide si troubles respiratoires"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Diarrhée, amaigrissement, léthargie",
+          "prevention": "Hygiène stricte, alimentation propre, contrôles vétérinaires réguliers",
+          "whenToConsult": "Consultation pour diagnostic et traitement antiparasitaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meyer%27s_parrot",
+          "title": "Meyer's parrot (Wikipedia EN)"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meyer%27s_parrot",
+          "title": "Meyer's parrot (Wikipedia EN) - CITES Appendix II"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 28,
+      "litterSizeMin": 3,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Nidification dans des cavités d'arbres. Pontes typiquement de 3 à 4 œufs. Incubation d'environ 28 jours. Les oisillons quittent le nid vers 60 jours après l'éclosion",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meyer%27s_parrot",
+          "title": "Meyer's parrot (Wikipedia EN)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104151432,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grains et céréales",
+          "frequency": "quotidienne",
+          "notes": "Blé, avoine, maïs ; l'espèce se nourrit au sol de grains, feuilles, graines et noisettes"
+        },
+        {
+          "name": "Invertébrés et insectes",
+          "frequency": "2-3 fois par semaine",
+          "notes": "Vers, larves, insectes - apport protéique naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments moisis",
+          "reason": "Risque de mycotoxines"
+        },
+        {
+          "name": "Eau contaminée",
+          "reason": "Source de maladies parasitaires"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime mixte grains, feuillage et invertébrés. Feuillage frais disponible. Calcium pour la reproduction",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lady_Amherst%27s_pheasant",
+          "title": "Lady Amherst's pheasant (Wikipedia EN)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Faisan_de_Lady_Amherst",
+          "title": "Faisan de Lady Amherst (Wikipédia FR)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Grand enclos densément planté, avec sous-bois épais (habitat naturel : forêts denses et sombres à sous-bois touffu). Perchoirs en hauteur pour la nuit : l'espèce dort perchée dans les arbres",
+      "lightNeeds": "Accès à la lumière naturelle, cycles jour-nuit naturels",
+      "activityEnrichment": "Feuillage dense pour se cacher, perchoirs en hauteur pour la nuit, litière pour gratter",
+      "hygieneNotes": "Eau fraîche quotidienne, nettoyage des zones de perchoir, gestion de la litière",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lady_Amherst%27s_pheasant",
+          "title": "Lady Amherst's pheasant (Wikipedia EN)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau farouche et méfiant, vit seul, en couple ou en petit groupe (jusqu'à 20-30 individus en saison). Se nourrit au sol et dort perché dans les arbres",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Oiseau farouche : éviter la manipulation excessive",
+      "compatibilityWithOtherAnimals": "Hybridation fertile possible avec le faisan doré : à loger séparément si l'on souhaite préserver l'espèce pure",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Faisan_de_Lady_Amherst",
+          "title": "Faisan de Lady Amherst (Wikipédia FR)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stress et perte de condition",
+          "symptoms": "Plumage hirsute, amaigrissement, comportement nerveux",
+          "prevention": "Environnement calme, protection contre les prédateurs, manipulation minimale",
+          "whenToConsult": "Consultation si perte persistante de condition physique"
+        },
+        {
+          "name": "Parasites externes (poux)",
+          "symptoms": "Plumage ébouriffé, démangeaisons, perte de plumes",
+          "prevention": "Hygiène des perchoirs, poussière de diatomée régulière, litière propre",
+          "whenToConsult": "Traitement préventif recommandé saisonnièrement"
+        },
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Respiration sifflante, mucus, inactivité",
+          "prevention": "Ventilation adéquate, litière sèche, environnement sans humidité stagnante",
+          "whenToConsult": "Consultation rapide si troubles respiratoires"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lady_Amherst%27s_pheasant",
+          "title": "Lady Amherst's pheasant (Wikipedia EN)"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "à partir de mi-avril",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Les mâles paradent dès mi-mars et la nidification débute vers mi-avril. Dans une étude de terrain, quatre nids contenaient 6 œufs et un nid 7 œufs. Peut se reproduire en captivité ; hybridation fertile avec le faisan doré",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Faisan_de_Lady_Amherst",
+          "title": "Faisan de Lady Amherst (Wikipédia FR)"
+        }
+      ]
+    }
+  }
+]

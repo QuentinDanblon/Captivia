@@ -1,0 +1,361 @@
+[
+  {
+    "speciesId": 2491538,
+    "feeding": {
+      "dietType": "granivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines variées (millet, alpiste, tournesol)",
+          "frequency": "quotidienne",
+          "notes": "Mélange équilibré de graines fines et moyennes"
+        },
+        {
+          "name": "Fruits et baies frais",
+          "frequency": "occasionnelle",
+          "notes": "Pomme, poire, baies sauvages occasionnellement"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Avocat",
+          "reason": "Toxique pour les oiseaux"
+        },
+        {
+          "name": "Sel et sucres raffinés",
+          "reason": "Dangereux pour la santé digestive et cardiaque"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Eau fraîche constamment disponible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meadow_bunting",
+          "title": "Meadow bunting - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Perchoirs variés, branches pour sautiller, bains d'eau",
+      "hygieneNotes": "Nettoyage régulier du bac, eau changée chaque jour",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meadow_bunting",
+          "title": "Meadow bunting - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Vit en couples monogames qui réutilisent la même zone de reproduction plusieurs années de suite. Espèce des milieux ouverts et secs (buissons, cultures, prairies, lisières de bois).",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meadow_bunting",
+          "title": "Meadow bunting - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Acariens des sacs aériens",
+          "symptoms": "Respiration bruyante, apathie, perte de poids",
+          "prevention": "Hygiène stricte, isolation des oiseaux malades",
+          "whenToConsult": "À la première gêne respiratoire"
+        },
+        {
+          "name": "Carence en calcium",
+          "symptoms": "Fragilité osseuse, œufs à coquille molle, tremblements",
+          "prevention": "Apport régulier de calcium et vitamine D",
+          "whenToConsult": "Dès signes de faiblesse"
+        },
+        {
+          "name": "Infection bactérienne",
+          "symptoms": "Plumage ébouriffé, inappétence, diarrhée",
+          "prevention": "Hygiène rigoureuse, aliments frais",
+          "whenToConsult": "Sans attendre"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meadow_bunting",
+          "title": "Meadow bunting - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "incubationDays": 11,
+      "litterSizeMin": 3,
+      "litterSizeMax": 5,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Couples monogames. 3 à 5 œufs, incubés 11 jours ; les jeunes quittent le nid environ 11 jours après l'éclosion.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Meadow_bunting",
+          "title": "Meadow bunting - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2493661,
+    "feeding": {
+      "dietType": "granivore",
+      "recommendedFoods": [
+        {
+          "name": "Mélange de petites graines (millet blanc, niger, alpiste)",
+          "frequency": "quotidienne",
+          "notes": "Aliment principal"
+        },
+        {
+          "name": "Pâtée et insectes séchés",
+          "frequency": "régulière",
+          "notes": "Apport protéiné surtout durant la reproduction"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments salés et sucres",
+          "reason": "Nuisent à la santé générale"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Eau fraîche chaque jour, os de seiche pour le calcium",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lavender_waxbill",
+          "title": "Lavender waxbill - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Astrild_queue-de-vinaigre",
+          "title": "Astrild queue-de-vinaigre - Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Branches fines pour perchoirs, nids artificiels, bains d'eau",
+      "hygieneNotes": "Nettoyage régulier, eau fraîche quotidienne",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lavender_waxbill",
+          "title": "Lavender waxbill - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petit oiseau (environ 10 cm) social et actif, vivant en couples ou en petits groupes.",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Cohabitation possible avec d'autres petits oiseaux paisibles ; préfère la vie en groupe.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Astrild_queue-de-vinaigre",
+          "title": "Astrild queue-de-vinaigre - Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Trichomonose",
+          "symptoms": "Gorge gonflée, haleine mauvaise, perte d'appétit",
+          "prevention": "Hygiène stricte, eau propre renouvelée",
+          "whenToConsult": "Immédiatement"
+        },
+        {
+          "name": "Stress lié à l'isolement",
+          "symptoms": "Plumage ébouriffé, inactivité, perte de poids",
+          "prevention": "Maintenir en groupe, environnement calme",
+          "whenToConsult": "Avant la dépression totale"
+        },
+        {
+          "name": "Infection fongique",
+          "symptoms": "Croûtes sur peau, perte de plumes, démangeaisons",
+          "prevention": "Hygiène impeccable, air sec, isolation des malades",
+          "whenToConsult": "Dès apparition"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lavender_waxbill",
+          "title": "Lavender waxbill - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Construit un nid dans la végétation fournie.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lavender_waxbill",
+          "title": "Lavender waxbill - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2493720,
+    "feeding": {
+      "dietType": "granivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines d'herbes variées (millet rouge, alpiste, niger)",
+          "frequency": "quotidienne",
+          "notes": "Consomme jusqu'à 30 % de son poids corporel par jour ; graines de graminées toute l'année"
+        },
+        {
+          "name": "Verdure fraîche (épinards, laitue)",
+          "frequency": "régulière",
+          "notes": "Complément"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Avocat",
+          "reason": "Toxique pour les oiseaux"
+        },
+        {
+          "name": "Chocolat et caféine",
+          "reason": "Toxicité chez les oiseaux"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Eau fraîche, supplémentation en calcium essentielle ; graines de sorgho ou semi-mûres appréciées en période de reproduction.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gouldian_finch",
+          "title": "Gouldian finch - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Diamant_de_Gould",
+          "title": "Diamant de Gould - Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Branches, nids artificiels, bains d'eau",
+      "hygieneNotes": "Nettoyage régulier, eau fraîche chaque jour, bonne ventilation",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gouldian_finch",
+          "title": "Gouldian finch - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau spectaculaire, actif et social. Hors reproduction, forme de grands groupes, souvent mixtes avec d'autres espèces ; nomade en saison sèche. Trois formes de couleur de tête (rouge, noire, jaune).",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Peut cohabiter avec d'autres petits oiseaux non agressifs",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gouldian_finch",
+          "title": "Gouldian finch - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection aux acariens des sacs aériens",
+          "symptoms": "Gêne respiratoire, bruits anormaux, apathie",
+          "prevention": "Hygiène stricte, éviter humidité excessive, isolation rapide",
+          "whenToConsult": "Dès signes respiratoires"
+        },
+        {
+          "name": "Carence nutritionnelle",
+          "symptoms": "Plumage terne, manque d'énergie, infertilité",
+          "prevention": "Régime équilibré, suppléments minéraux (calcium), graines de qualité",
+          "whenToConsult": "Avant la dépression totale"
+        },
+        {
+          "name": "Stress environnemental",
+          "symptoms": "Plumage ébouriffé, inactivité, perte poids",
+          "prevention": "Environnement stable, lumière régulière",
+          "whenToConsult": "Dès changement comportemental"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gouldian_finch",
+          "title": "Gouldian finch - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "début de la saison sèche (à l'état sauvage), quand la nourriture est abondante",
+      "incubationDays": 14,
+      "litterSizeMin": 4,
+      "litterSizeMax": 8,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "4 à 8 œufs, incubés par les deux parents pendant 14 jours. Envol à 19-23 jours, indépendance vers 40 jours. Jusqu'à trois couvées par saison.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gouldian_finch",
+          "title": "Gouldian finch - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Diamant_de_Gould",
+          "title": "Diamant de Gould - Wikipédia"
+        }
+      ]
+    }
+  }
+]

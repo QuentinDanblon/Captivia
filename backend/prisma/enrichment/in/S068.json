@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104221549,
+  "commonNameFr": "Tarentule à pattes roses",
+  "scientificName": "Avicularia avicularia",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104221620,
+  "commonNameFr": "Tarentule mexicaine à genoux rouges",
+  "scientificName": "Brachypelma smithi",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104232708,
+  "commonNameFr": "Scorpion des Pyrénées",
+  "scientificName": "Buthus occitanus",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

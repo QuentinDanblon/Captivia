@@ -1,0 +1,59 @@
+[
+  {
+    "speciesId": 104233441,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.recommendedFoods: 'grillons, sauterelles, cafards' -> grillons, isopodes, centipèdes, perce-oreilles, papillons de nuit, araignées (source en.wikipedia Euscorpius_italicus; sauterelles/cafards non cités)",
+      "habitat.minSpaceSize: dimensions 30x30x20cm retirées (non confirmées), habitat naturel conservé",
+      "habitat.activityEnrichment/hygieneNotes: mention 'substrat sec' retirée (en contradiction avec humidité 50-70% de la source)",
+      "behavior: 'Venin très doux' -> 'considéré comme inoffensif' (source)",
+      "reproduction.notes: affirmation 'jeunes quittent la mère après la première mue (6-7 jours)' retirée (non retrouvée dans la source)"
+    ],
+    "removed": [
+      "legislation (statut 'allowed' non confirmé ; seule source citée = page d'accueil cites.org, non spécifique à l'espèce)",
+      "source https://www.cites.org (non spécifique à l'espèce)",
+      "health.diseases: 'Infection post-traumatique' (la source parle de plaies de piqûre chez l'humain, pas de pathologie du scorpion)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104247531,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.recommendedFoods: 'algues' retiré (non cité) -> restes animaux, excréments d'autres animaux, fruits trop mûrs (source en.wikipedia Coenobita_clypeatus)",
+      "feeding.specificNeeds: 'eau peu profonde pour respiration branchiale' -> branchies modifiées pour respirer l'air, coquille et air humide nécessaires (source)",
+      "habitat.minSpaceSize: dimensions 60x40x40cm, substrat 10-15cm et 'escargot indien préféré' retirés (non confirmés)",
+      "habitat.lightNeeds: '12h' retiré",
+      "behavior: 'grincement' -> gazouillis/stridulation (source 'chirping noise') ; 'combats de coquilles' et creusement sous racines confirmés",
+      "health.prevention: 'hygrométrie 60-80%' -> air humide (chiffre non confirmé)",
+      "reproduction: 'processus appelé washing' retiré ; notes recalées sur la source (ponte certaines nuits vers août, œufs relâchés dans l'océan, longévité 12 ans / 40 ans anecdotique)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax 20-28 (non confirmés -> null)",
+      "habitat.humidityMin/humidityMax 60-80 (non confirmés -> null)",
+      "behavior: 'scellent la coquille avec la grande pince' et 'compatibles avec autres crustacés pacifiques' (non confirmés)",
+      "reproduction.sexualMaturityMonths 24 (non confirmé -> null)",
+      "legislation (statut 'allowed' non confirmé ; source cites.org non spécifique)",
+      "source https://www.cites.org (non spécifique à l'espèce)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104260760,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.minSpaceSize: '20 litres' retiré (non confirmé) ; habitat naturel Japon, eaux à courant rapide confirmé (source en.wikipedia Amano_shrimp)",
+      "habitat.lightNeeds: '8-10 heures' retiré (non confirmé)",
+      "habitat.hygieneNotes: '25% hebdomadaire' -> changements d'eau partiels réguliers",
+      "behavior: 'distribution géographique large / dispersal larvaire' retiré ; 'plus actifs à température élevée' conservé (source)",
+      "feeding: sensibilité au cuivre confirmée (hémocyanine), formulation 'toxique fatal' adoucie"
+    ],
+    "removed": [
+      "reproduction.season 'printemps et été' (non confirmé -> null)",
+      "reproduction.sexualMaturityMonths 6 (non confirmé -> null)",
+      "legislation (statut 'allowed' non confirmé ; source cites.org non spécifique)",
+      "source https://www.cites.org (non spécifique à l'espèce)"
+    ],
+    "confidence": "high"
+  }
+]

@@ -1,0 +1,279 @@
+[
+  {
+    "speciesId": 156261518,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Artémias et daphnies (vivantes ou surgelées)",
+          "frequency": "quotidienne",
+          "notes": "Petites proies adaptées à un poisson de 6-8 cm"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Difficulté à avaler"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Horaires de nourrissage réguliers",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Kryptopterus_vitreolus",
+          "title": "Kryptopterus vitreolus"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Aquarium adapté à un banc de plusieurs individus. Habitat naturel : rivières et cours d'eau de Thaïlande",
+      "lightNeeds": "Lumière douce",
+      "activityEnrichment": "Plantes denses, cachettes, circulation d'eau douce, substrat sombre",
+      "hygieneNotes": "Filtration douce, changements d'eau partiels réguliers, absence d'ammoniac",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Kryptopterus_vitreolus",
+          "title": "Kryptopterus vitreolus"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson transparent vivant en banc, social. Préfère un groupe stable. Mesure généralement 6,5 cm (jusqu'à 8 cm)",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Observation seulement, pas de manipulation",
+      "compatibilityWithOtherAnimals": "Compatible avec de petits poissons pacifiques, incompatible avec des prédateurs",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Kryptopterus_vitreolus",
+          "title": "Kryptopterus vitreolus"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Espèce non connue pour être reproduite en élevage commercial : les poissons vendus sont majoritairement capturés dans la nature",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Kryptopterus_vitreolus",
+          "title": "Kryptopterus vitreolus"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 156315727,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes vivants (grillons, blattes)",
+          "frequency": "variable selon l'âge et la taille",
+          "notes": "Proies de taille adaptée"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop importantes",
+          "reason": "Risque de blessure"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Proies vivantes, eau à disposition",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cyriopagopus_lividus",
+          "title": "Cobalt blue tarantula"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium avec un substrat très profond permettant de creuser un terrier (espèce fossoriale de forêt tropicale d'Asie du Sud-Est, envergure d'environ 13 cm)",
+      "lightNeeds": "Lumière indirecte, UVB non indispensable",
+      "activityEnrichment": "Substrat profond pour creuser, cachette de type écorce",
+      "hygieneNotes": "Substrat maintenu humide, retirer rapidement les proies non consommées",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cyriopagopus_lividus",
+          "title": "Cobalt blue tarantula"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Tarantule rapide et défensive, qui passe presque tout son temps dans un terrier profond qu'elle creuse elle-même et n'en sort que pour chasser. Plutôt solitaire. Venin non mortel pour l'humain mais morsure pouvant être extrêmement douloureuse",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé : espèce défensive, morsure très douloureuse",
+      "compatibilityWithOtherAnimals": "Doit rester seule",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cyriopagopus_lividus",
+          "title": "Cobalt blue tarantula"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Dimorphisme sexuel visible après la mue finale du mâle : la femelle devient plus grande que le mâle et vit plusieurs années de plus",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cyriopagopus_lividus",
+          "title": "Cobalt blue tarantula"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 163312909,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grains (orge, maïs, blé, riz)",
+          "frequency": "quotidienne",
+          "notes": "Base de l'alimentation : graines et céréales"
+        },
+        {
+          "name": "Légumes verts et racines (laitue, navets, carottes)",
+          "frequency": "quotidienne",
+          "notes": "Complément en vitamines et minéraux"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Sel en excès",
+          "reason": "Déshydratation, problèmes rénaux"
+        },
+        {
+          "name": "Avocats, tomates vertes",
+          "reason": "Substances toxiques (persine, solanine)"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès libre à l'eau fraîche. Apport de calcium pour les pondeuses",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Domestic_pigeon",
+          "title": "Domestic pigeon"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Pigeonnier (colombier) ou volière sécurisée, avec accès à l'extérieur. Les oiseaux nichent dans un coin sûr et frais",
+      "lightNeeds": "Lumière naturelle, aime les rayons du soleil",
+      "activityEnrichment": "Vol quotidien, vie en groupe, accès à de l'eau pour se baigner",
+      "hygieneNotes": "Nettoyage régulier du pigeonnier, litière sèche, eau fraîche quotidienne",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Domestic_pigeon",
+          "title": "Domestic pigeon"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau social vivant en groupe. En colombier ouvert, chaque oiseau choisit son partenaire ; les deux parents protègent fortement leurs œufs et leurs petits. Bon sens de l'orientation",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Docile, peut être manipulé s'il est habitué jeune",
+      "compatibilityWithOtherAnimals": "Cohabite avec d'autres pigeons. Attention aux prédateurs",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Domestic_pigeon",
+          "title": "Domestic pigeon"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Coccidiose",
+          "symptoms": "Diarrhée, apathie, perte de poids",
+          "prevention": "Litière sèche, hygiène du pigeonnier, eau propre quotidienne",
+          "whenToConsult": "Consultation vétérinaire rapide (traitement anticoccidien)"
+        },
+        {
+          "name": "Parasites externes (poux, acariens)",
+          "symptoms": "Plumage ébouriffé, grattage, perte de plumes",
+          "prevention": "Hygiène du pigeonnier, accès à un bain d'eau",
+          "whenToConsult": "Traitement antiparasitaire si infestation importante"
+        },
+        {
+          "name": "Salmonellose",
+          "symptoms": "Diarrhée verte, affaiblissement progressif",
+          "prevention": "Hygiène stricte, isolement des malades, eau fraîche quotidienne",
+          "whenToConsult": "Quarantaine et consultation vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Domestic_pigeon",
+          "title": "Domestic pigeon"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": 17,
+      "litterSizeMin": 2,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Pas de saison de reproduction marquée. Deux œufs par ponte, incubation de 17 à 19 jours. Les jeunes sont nourris par les parents avec du lait de jabot, atteignent leur taille adulte vers 4 semaines et s'envolent en environ un mois",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Domestic_pigeon",
+          "title": "Domestic pigeon"
+        }
+      ]
+    }
+  }
+]

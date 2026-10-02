@@ -1,0 +1,46 @@
+[
+ {
+  "speciesId": 5220687,
+  "commonNameFr": "Iguane des Îles Fiji",
+  "scientificName": "Brachylophus vitiensis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5224503,
+  "commonNameFr": "Couleuvre faux-corail",
+  "scientificName": "Lampropeltis triangulum",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5225659,
+  "commonNameFr": "Python tapis",
+  "scientificName": "Morelia spilota",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

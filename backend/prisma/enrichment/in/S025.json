@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2479694,
+  "commonNameFr": "Lori de Swainson",
+  "scientificName": "Trichoglossus moluccanus",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2479870,
+  "commonNameFr": "Cacatoès blanc",
+  "scientificName": "Cacatua alba",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2479888,
+  "commonNameFr": "Cacatoès à huppe jaune",
+  "scientificName": "Cacatua galerita",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

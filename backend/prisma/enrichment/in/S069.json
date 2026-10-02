@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104233441,
+  "commonNameFr": "Scorpion à griffes fines",
+  "scientificName": "Euscorpius italicus",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104247531,
+  "commonNameFr": "Bernard-l'ermite terrestre",
+  "scientificName": "Coenobita clypeatus",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104260760,
+  "commonNameFr": "Crevette Amano",
+  "scientificName": "Caridina multidentata",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

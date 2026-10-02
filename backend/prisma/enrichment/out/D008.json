@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000172,
+    "description": "Le Lapin Géant Papillon provient d'Allemagne et pèse entre 5 et 11,3 kg, représentant une race impressionnante. Son pelage est court avec un motif distinctif présentant un papillon coloré, des cernes oculaires et des taches sur les joues sur fond blanc. Cette race remarquable est reconnue par le British Rabbit Council.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000174,
+    "description": "Le Cochon d'Inde Abyssinien possède un pelage distinctif avec des rosettes caractéristiques créant un motif de cheveux ondulé très esthétique. Cette race est prisée par les éleveurs de concours pour son apparence unique. Son pelage crée un effet très particulier et reconnaissable.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000175,
+    "description": "Le Cochon d'Inde Péruvien fait partie des races à long pelage droit très populaires. Originaire des Andes, ce rongeur nécessite un toilettage quotidien pour maintenir son apparence élégante et luxuriante. C'est une race prisée pour sa fourrure spectaculaire.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000176,
+    "description": "Le Cochon d'Inde Sheltie est une race à long pelage droit très semblable au Péruvien. Ces animaux possèdent une fourrure luxuriante et fluide qui nécessite un brossage quotidien pour préserver sa qualité. C'est une race appréciée pour son apparence élégante.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000177,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000178,
+    "description": "Le Cochon d'Inde Texel se distingue par son pelage long et ondulé naturellement bouclé, ce qui en fait une race unique parmi les cochons d'Inde. C'est la seule race avec des cheveux naturellement bouclés. Cette variété demande un entretien régulier pour maintenir ses caractéristiques distinctives.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000179,
+    "description": "Le Cochon d'Inde Skinny est une race de laboratoire adoptée par certains propriétaires particuliers. Il se caractérise par l'absence quasi-totale de fourrure, ce qui le distingue radicalement de toutes les autres races aux pelages développés. C'est une variété devenue populaire chez les amateurs d'animaux.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000180,
+    "description": "Le Hamster Chinois provient des déserts du nord de la Chine et de Mongolie, pesant entre 30 et 45 grammes à l'âge adulte. Il se distingue par une queue relativement longue comparée aux autres hamsters et une robe brune avec une bande noire sur l'épine dorsale. Naturellement solitaire et nocturne, il devient rapidement docile une fois apprivoisé.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_hamster"
+  },
+  {
+    "speciesId": 2000000181,
+    "description": "La Souris Domestique est le rongeur le plus connu, caractérisée par un museau pointu, de petites oreilles arrondies et une queue écailleuse de la longueur du corps. De taille généralement petite, elle s'adapte remarquablement à divers environnements. Sociable si élevée dès la naissance avec contact humain, elle peut devenir un compagnon affectueux.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Mouse"
+  },
+  {
+    "speciesId": 2000000182,
+    "description": "La Gerbille de Mongolie provient des steppes d'Asie centrale et mesure 110-135 mm de corps avec une queue de 95-120 mm, pesant entre 60 et 130 grammes. Sociable et docile, elle vit naturellement en groupes hiérarchisés. Elle s'est popularisée comme animal de compagnie aux États-Unis à partir de 1954.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Mongolian_gerbil"
+  },
+  {
+    "speciesId": 2000000183,
+    "description": "L'Octodon est un petit rongeur de la famille des Octodontidés, originaire d'Amérique du Sud, notamment du Chili et d'Argentine. Ces rongeurs présentent une diversité intéressante avec plusieurs espèces distinctes. Ils sont généralement nocturnes et adaptés aux conditions des régions qu'ils habitent.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Degu"
+  },
+  {
+    "speciesId": 2000000184,
+    "description": "Le Furet est un petit carnivore domestique, probablement issu du putois européen, mesurant environ 50 cm incluant la queue et pesant entre 0,7 et 2 kg. Sa fourrure peut être noire, brune, blanche ou mélangée. Contrairement à leurs ancêtres, la plupart des furets vivent heureux en groupes sociaux.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Ferret"
+  },
+  {
+    "speciesId": 2000000185,
+    "description": "L'Âne Nain provient de la race sardinienne importée aux États-Unis en 1929. Il mesure 36 pouces (90 cm) ou moins au garrot et se caractérise par une nature affectueuse. Cet animal compact et docile est devenu populaire comme animal de compagnie dans les pays développés au XXe siècle.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Miniature_donkey"
+  },
+  {
+    "speciesId": 2000000186,
+    "description": "Le Poney Shetland provient des îles Shetland en Écosse, où il est présent depuis l'Âge de Bronze. Mesurant jusqu'à 107 cm au garrot, c'est une race robuste dotée d'un pelage épais et d'une grande rusticité. Historiquement utilisé pour les travaux agricoles, il sert aujourd'hui principalement à l'équitation enfantine et à l'attelage.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Shetland_pony"
+  },
+  {
+    "speciesId": 2000000187,
+    "description": "Le Cheval Miniature est originaire d'Europe avec des traces documentées depuis le dix-huitième siècle, mesurant peu plus de 100 cm de hauteur. Génétiquement proche des poneys, il se distingue par sa robustesse et sa longévité de 25 à 35 ans. Il est couramment gardé comme animal de compagnie et participe à des activités d'équitation spécialisées.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Miniature_horse"
+  }
+]

@@ -1,0 +1,279 @@
+[
+  {
+    "speciesId": 2482492,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Viande (restes de viande maigre, poulet)",
+          "frequency": "régulière",
+          "notes": "Cuite, sans épices ni sel"
+        },
+        {
+          "name": "Insectes (crickets, sauterelles)",
+          "frequency": "régulière",
+          "notes": "Insectes d'élevage recommandés"
+        },
+        {
+          "name": "Graines et fruits (baies, céréales)",
+          "frequency": "quotidienne",
+          "notes": "Complément nutritif"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments salés ou épicés",
+          "reason": "Dangereux pour l'équilibre métabolique"
+        },
+        {
+          "name": "Chocolat",
+          "reason": "Toxique"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime omnivore très opportuniste (charognes, insectes, graines, baies, petits animaux). Supplémentation en calcium à voir avec un vétérinaire.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_raven",
+          "title": "Common Raven - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle, adaptée à la saison",
+      "activityEnrichment": "Jeux de résolution de problèmes (espèce très intelligente), manipulation d'objets, interactions sociales",
+      "hygieneNotes": "Nettoyage régulier, perchoirs variés, bains d'eau",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_raven",
+          "title": "Common Raven - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Extrêmement intelligents : de jeunes grands corbeaux se montrent comparables à des grands singes lors de tests cognitifs. Curieux, joueurs, excellents résolveurs de problèmes. Vivent généralement en couples ; les jeunes forment parfois des groupes.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Surveillance stricte requise.",
+      "compatibilityWithOtherAnimals": "Les couples défendent agressivement leur territoire et leurs ressources.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_raven",
+          "title": "Common Raven - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasites externes (poux, acariens)",
+          "symptoms": "Ébouriffement plumes, démangeaisons, perte plumes localisée",
+          "prevention": "Hygiène volière excellente, bains réguliers, isolation animaux neufs",
+          "whenToConsult": "Consultation vétérinaire aviaire"
+        },
+        {
+          "name": "Toxicose métallique (zinc, plomb)",
+          "symptoms": "Apathie, réduction appétit, paralysie partielle",
+          "prevention": "Volière sans peinture toxique, pas d'objets métalliques accessibles",
+          "whenToConsult": "Urgence vétérinaire à symptômes"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Respiration difficile, son anormal, perte appétit",
+          "prevention": "Hygiène irréprochable, ventilation adéquate, températures stables",
+          "whenToConsult": "Urgence vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_raven",
+          "title": "Common Raven - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "fin janvier-avril (février dans la majeure partie de l'aire, jusqu'en avril en climat froid)",
+      "gestationDays": null,
+      "incubationDays": 20,
+      "litterSizeMin": 4,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": "modere",
+      "notes": "Nid en arbre ou sur falaise. Incubation de 18 à 21 jours (femelle seule). Envol à 35-49 jours. Les jeunes restent avec leurs parents environ 6 mois après l'envol. Les couples restent généralement unis à vie ; l'appariement n'intervient souvent que 2 à 3 ans après le début de la parade.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_raven",
+          "title": "Common Raven - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2488955,
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection respiratoire (pneumonie)",
+          "symptoms": "Respirations bruyantes, mucosité buccale, lethargie",
+          "prevention": "Température et humidité adaptées, hygiène du terrarium",
+          "whenToConsult": "Consultation vétérinaire reptile urgente"
+        },
+        {
+          "name": "Parasites internes (helminthes, protozoaires)",
+          "symptoms": "Perte poids, régurgitations, fèces anormales",
+          "prevention": "Hygiène terrarium, quarantaine des nouveaux animaux, nettoyage hebdomadaire",
+          "whenToConsult": "Test fécal vétérinaire recommandé annuellement"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Corn_snake",
+          "title": "Corn Snake - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "au printemps, peu après le refroidissement hivernal",
+      "gestationDays": null,
+      "incubationDays": 70,
+      "litterSizeMin": 12,
+      "litterSizeMax": 24,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Ovipare : la femelle pond 12 à 24 œufs un peu plus d'un mois après l'accouplement, dans un endroit chaud, humide et caché. Éclosion environ 10 semaines après la ponte. La maturité dépend de la taille (environ 75 cm ou 250 g) plutôt que de l'âge. Les nouveau-nés (environ 13 cm) sont autonomes dès l'éclosion.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Corn_snake",
+          "title": "Corn Snake - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2490384,
+    "feeding": {
+      "dietType": "granivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines faciles à décortiquer (tournesol, millet)",
+          "frequency": "quotidienne",
+          "notes": "Graines, grains et fruits représentent jusqu'à 90 % du régime naturel"
+        },
+        {
+          "name": "Insectes (fourmis, sauterelles, chenilles)",
+          "frequency": "quotidienne pour les jeunes, saisonnière pour les adultes",
+          "notes": "Les jeunes au nid sont nourris presque exclusivement d'insectes"
+        },
+        {
+          "name": "Baies et fruits",
+          "frequency": "quotidienne",
+          "notes": "Complément saisonnier"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Sel, sucre, chocolat",
+          "reason": "Toxiques"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime riche en graines et en fruits, complété par des insectes ; les jeunes sont nourris presque exclusivement d'insectes.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Northern_cardinal",
+          "title": "Northern Cardinal - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Branches variées pour le perchage, végétation dense, bains d'eau",
+      "hygieneNotes": "Nettoyage régulier, eau fraîche quotidienne",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Northern_cardinal",
+          "title": "Northern Cardinal - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Mâles territoriaux et chanteurs (les deux sexes chantent). Chants appris, variant selon les régions. Cri d'alarme métallique caractéristique. Les couples restent souvent ensemble toute l'année.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Les mâles chassent les autres mâles de leur territoire : un seul couple par volière.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Northern_cardinal",
+          "title": "Northern Cardinal - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Aspergillose pulmonaire",
+          "symptoms": "Difficultés respiratoires, apathie, perte appétit",
+          "prevention": "Volière très propre, ventilation adéquate, pas d'humidité excessive",
+          "whenToConsult": "Urgence vétérinaire aviaire"
+        },
+        {
+          "name": "Parasites externes (acariens)",
+          "symptoms": "Ébouriffement, démangeaisons, zone sans plumes",
+          "prevention": "Hygiène excellente, bains d'eau réguliers",
+          "whenToConsult": "Consultation vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Northern_cardinal",
+          "title": "Northern Cardinal - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 12,
+      "litterSizeMin": 3,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "2 à 4 couvées par an, 3 à 4 œufs par nid. Incubation de 12-13 jours. Envol 10-11 jours après l'éclosion.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Northern_cardinal",
+          "title": "Northern Cardinal - Wikipedia"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,17 @@
+[
+ {"speciesId": 8909809, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["feeding.dietType: carnivore (Wikipedia FR 'principalement carnivore') ; '60% vegetal adulte' supprime","legislation: euAnnex 'B' + permis 'Certificat origine' non confirmes -> remplaces par le regime FR de Wikipedia (espece integralement protegee, certificat de capacite, etablissement d'elevage, puce RFID)","behavior: deplacements 1 km -> 800 m (Wikipedia FR)","reproduction: pontes 3-15 -> 3-16 oeufs ; maturite 60 -> 120 mois (10-12 ans) ; saison avril-mai ; incubation ~3 mois (90 j) confirmee","health: 'mycose' -> 'bacterienne ou fongique'","sources: ajout fr.wikipedia Cistude d'Europe, types repointes en 'wikipedia'"],
+  "removed": ["feeding.mealFrequency","feeding.foodsToAvoid 'viande sans sel' (non confirme)","habitat.tempMin/tempMax (non confirmes) et chiffres UVB/200 L (inadequats pour une carapace jusqu'a 38 cm)","behavior.sociability 'gregaire' (non confirme)","legislation: euAnnex B, permis 'Annex UE B'/'Certificat origine', 'Tracabilite obligatoire'"],
+  "confidence": "medium",
+  "notes": "citesAppendix laisse a null : Wikipedia indique l'annexe III seulement pour la population ukrainienne (EN) ; le statut FR (protegee integralement) est confirme par Wikipedia FR."},
+ {"speciesId": 8953936, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["feeding.specificNeeds: 'omnivore opportuniste, inclure matiere vegetale' faux -> carnivore opportuniste (Wikipedia)","habitat.minSpaceSize: 3000 L non adapte a un adulte de 1,4-2,5 m -> reformule","behavior.generalBehavior: 'sedentaire' -> comportement decrit par Wikipedia","reproduction.gestationDays 90 -> null (ovipare ; 90 j = incubation)","reproduction.notes: ajout maturite 4-7 ans, soins parentaux 12-18 mois, sexe selon temperature (Wikipedia FR)","legislation: CITES II confirme (C. c. apaporiensis annexe I)"],
+  "removed": ["feeding: '55% matiere vegetale', foodsToAvoid 'viande dessalee'","feeding.mealFrequency","habitat.humidity 70-90","health: nephrite (non confirme)","legislation: euAnnex B, 'Autorisation prefecture', 'Reproduction interdite sans autorisation', 'Tracabilite d'elevage' (non confirmes)","reproduction.notes: 'domes de vegetation' (non confirme)"],
+  "confidence": "medium",
+  "notes": "Statut 'permit_required' conserve (CITES II + crocodilien) mais le regime francais de detention (certificat de capacite / autorisation d'ouverture) n'a pas ete confirme par une source consultee ; temperatures 24-32 non confirmees mais conservees (plausibles)."},
+ {"speciesId": 9032472, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["behavior: 'crepusculaire' retire (non confirme, probablement faux)","habitat.lightNeeds: chiffres retires","health prevention: chiffres UVB/calcium retires","sources: types repointes en 'wikipedia' (la page FR Scinque_de_Schneider n'existe pas : 404 ; page EN utilisee)"],
+  "removed": ["feeding: petits lezards, escargots, mealFrequency","habitat.tempMin/tempMax/humidity (non confirmes)","behavior: 'risque cannibalisme', 'peu agressif'","reproduction: toutes les valeurs chiffrees (gestation 40, incubation 45, 4-10 oeufs, maturite 18 mois, saison) non confirmees ; seul 'ovipare' conserve"],
+  "confidence": "low",
+  "notes": "Page Wikipedia EN quasi sans donnees d'elevage ; legislation 'allowed' (non CITES, LC) conservee."}
+]

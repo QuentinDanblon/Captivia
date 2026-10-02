@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2441110,
+  "commonNameFr": "Mouton",
+  "scientificName": "Ovis aries",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2441385,
+  "commonNameFr": "Crocodile nain",
+  "scientificName": "Osteolaemus tetraspis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2441454,
+  "commonNameFr": "Tortue d'Hermann",
+  "scientificName": "Testudo hermanni",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

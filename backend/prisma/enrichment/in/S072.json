@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 165504395,
+  "commonNameFr": "Escargot de Bourgogne",
+  "scientificName": "Helix pomatia",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 165617687,
+  "commonNameFr": "Salamandre géante du Japon",
+  "scientificName": "Andrias japonicus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 308455619,
+  "commonNameFr": "Oie domestique",
+  "scientificName": "Anser anser domesticus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

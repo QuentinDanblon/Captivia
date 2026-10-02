@@ -1,0 +1,62 @@
+[
+  {
+    "speciesId": 2491538,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "ATTENTION: la page fr.wikipedia 'Bruant_du_Japon' decrit Emberiza sulphurata, pas Emberiza cioides -> source retiree partout, remplacee par en.wikipedia Meadow_bunting (E. cioides, confirmee). Nom commun de in/S027.json a verifier",
+      "reproduction: litterSize null -> 3-5 oeufs (source Meadow_bunting); incubation 11 j confirmee; envol ~11 j apres eclosion ajoute",
+      "reproduction.notes: 'nid tisse', 'couvee unique en captivite' non confirmes -> remplaces par faits sources (couples monogames)",
+      "behavior.generalBehavior: 'paisible, discret, actif au crepuscule' non confirme -> couples monogames, milieux ouverts secs (source)",
+      "health: typo 'osseuseponges molles' corrigee",
+      "feeding.frequency '2-3 fois par semaine' -> 'occasionnelle'"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/minSpaceSize/lightNeeds (non confirmables)",
+      "behavior.compatibilityWithChildren / compatibilityWithOtherAnimals (non confirmes)",
+      "reproduction.season (avril-aout non confirme), sexualMaturityMonths 6 (non confirme)",
+      "legislation (status 'allowed' non confirme ; source citee = page d'accueil INPN, non probante)",
+      "source https://fr.wikipedia.org/wiki/Bruant_du_Japon (autre espece)"
+    ],
+    "confidence": "low"
+  },
+  {
+    "speciesId": 2493661,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "source en.wikipedia Estrilda (genre) ne contient pas E. caerulescens ni aucun contenu de soin -> remplacee par en.wikipedia Lavender_waxbill et fr.wikipedia Astrild_queue-de-vinaigre (pages de l'espece, stubs sans donnees de soin)",
+      "ATTENTION: le nom 'Astrild a pointe' pour Estrilda caerulescens est douteux (la page fr correspond a 'Astrild queue-de-vinaigre')",
+      "feeding: '1 cuillere a cafe par oiseau' retire; 'Persil frise toxique' retire (faux/non source)",
+      "health: 'Maladie du trichomonose' -> 'Trichomonose'",
+      "behavior: reformule (environ 10 cm confirme par la page fr; le reste generique prudent)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize/lightNeeds (non confirmables)",
+      "behavior.compatibilityWithChildren (non confirme)",
+      "reproduction.season, incubationDays 12, litterSize/ponte 4-5, sexualMaturityMonths 3 (non confirmes)",
+      "legislation (status 'allowed' non confirme ; INPN page d'accueil non probante)",
+      "source https://en.wikipedia.org/wiki/Estrilda (ne couvre pas l'espece)"
+    ],
+    "confidence": "low"
+  },
+  {
+    "speciesId": 2493720,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: '30% du poids corporel' -> 'jusqu'a 30 %' (source en.wikipedia Gouldian_finch); calcium essentiel (source fr.wikipedia Diamant_de_Gould)",
+      "behavior: 'petit groupe' contredit par la source (grands groupes jusqu'a 1000-2000 hors reproduction, souvent mixtes) -> reformule; sociability semi-gregaire -> gregaire",
+      "reproduction.season: 'avril-septembre en captivite' -> debut de saison seche (a l'etat sauvage, source)",
+      "reproduction: incubation 14 j (fr), 4-8 oeufs (en+fr) confirmes; notes: envol 19-23 j, independance ~40 j, jusqu'a 3 couvees (sources)",
+      "health.prevention: 'groupes non-mixtes' retire",
+      "source fr.wikipedia Diamant_de_Gould ajoutee (confirmee)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize/lightNeeds (non confirmables)",
+      "feeding.foodsToAvoid: 'graines de courges' (non toxiques) retire",
+      "habitat.activityEnrichment: 'broutage d'herbes' retire",
+      "behavior.compatibilityWithChildren (phrase incomprehensible, non source)",
+      "reproduction.sexualMaturityMonths 6 (non confirme), notes 'partenaire sexuel determine' (non source)",
+      "legislation (status 'allowed' non confirme ; source INPN page d'accueil non probante)"
+    ],
+    "confidence": "medium"
+  }
+]

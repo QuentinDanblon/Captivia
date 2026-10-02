@@ -1,0 +1,441 @@
+[
+  {
+    "speciesId": 2339870,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Bois/driftwood",
+          "frequency": "continue",
+          "notes": "Nourriture principale, xylophage. Bois mou préféré, renouvelé régulièrement"
+        },
+        {
+          "name": "Pastilles de spiruline et algues",
+          "frequency": "3x par semaine",
+          "notes": "Pastilles coulantes adaptées aux plecos herbivores, le soir"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments très protéinés",
+          "reason": "Système digestif spécialisé pour le bois; excès de protéines provoque des problèmes digestifs"
+        },
+        {
+          "name": "Viandes et poissons crus",
+          "reason": "Non adaptés à ce pleco herbivore, risque de surcharge digestive"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Bois en abondance essentiel. Acclimatation difficile initialement (peuvent refuser nourriture). Nourrir la nuit quand actif.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Panaque",
+          "title": "Panaque (Wikipedia FR)"
+        },
+        {
+          "type": "guide",
+          "url": "https://fishprofiles.com/profiles/freshwater/Catfish_Bottom_Feeders/Panaque_nigrolineatus",
+          "title": "Panaque nigrolineatus Care Guide"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 24,
+      "tempMax": 27,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "450L minimum (volume indispensable pour la maintenance)",
+      "lightNeeds": "Lumière indirecte; préfère les zones ombragées. Nocturne.",
+      "activityEnrichment": "Bois et branches pour explorer et grignoter. Cachettes multiples (tuyaux, grottes). Besoin de courant modéré à fort.",
+      "hygieneNotes": "Filtration robuste conseillée. Nettoyage régulier des résidus de bois. Éviter accumulation de déchets.",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Panaque",
+          "title": "Panaque (Wikipedia FR)"
+        },
+        {
+          "type": "guide",
+          "url": "https://simstropicalfish.co.uk/product/l190-royal-pleco-panaque-nigrolineatus/",
+          "title": "Sim Tropical Fish - L190 Royal Pleco Care"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Pleco nocturne et reclus, actif surtout la nuit. Peut devenir agressif à l'alimentation. Peu de socialisation. Préfère rester caché le jour.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé pour débutants. Requiert expertise. Peut causer des blessures si manipulé.",
+      "compatibilityWithOtherAnimals": "Cohabitation possible avec poissons de taille similaire paisibles. Éviter petits poissons (compétition nourriture).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://fishprofiles.com/profiles/freshwater/Catfish_Bottom_Feeders/Panaque_nigrolineatus",
+          "title": "Panaque nigrolineatus Care Guide"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Pourriture des nageoires",
+          "symptoms": "Bords des nageoires effilochés, rouges ou blanchâtres; nageoires repliées contre le corps",
+          "prevention": "Maintenir bonne qualité eau, température stable 24-27°C, filtration appropriée, éviter surpopulation",
+          "whenToConsult": "Au premier signe de bords effilochés; action rapide prévient aggravation"
+        },
+        {
+          "name": "Mycose (infection fongique)",
+          "symptoms": "Croissance blanc-gris coton sur peau/nageoires; grattage contre décors; léthargique",
+          "prevention": "Qualité eau optimale, éviter stress, éviter blessures du substrat, nettoyage régulier du bac",
+          "whenToConsult": "Dès apparition de taches blanches; isoler fish si possible et traiter rapidement"
+        },
+        {
+          "name": "Ich (Ictyphophthirius)",
+          "symptoms": "Petits points blancs sur corps et nageoires; respiration rapide; grattage fréquent",
+          "prevention": "Quarantaine nouveaux poissons, température 24-27°C stable, filtration efficace, éviter chocs thermiques",
+          "whenToConsult": "Dès observation des points; traitement urgent recommandé pour éviter contagion à autres poissons"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://petfishonline.com/pleco-diseases/",
+          "title": "Pleco Diseases Guide"
+        },
+        {
+          "type": "guide",
+          "url": "https://petfishonline.com/pleco-fin-rot/",
+          "title": "Pleco Fin Rot Treatment"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.legifrance.gouv.fr/",
+          "title": "Légifrance - Base de données législation française"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction peu documentée en captivité. Œufs pondus dans bois creux. Requiert conditions très précises et expertise élevée. Augmenter température progressivement, puis réduction niveau eau recommandée.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://fishprofiles.com/profiles/freshwater/Catfish_Bottom_Feeders/Panaque_nigrolineatus",
+          "title": "Panaque nigrolineatus Care Guide"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2342606,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Pastilles coulantes pour poissons de fond",
+          "frequency": "quotidienne",
+          "notes": "Distribuer le soir après extinction lumière pour éviter que poissons de surface ne les mangent"
+        },
+        {
+          "name": "Aliments congelés (vers de vase, artémias)",
+          "frequency": "3-4x par semaine",
+          "notes": "Excellente source de protéines et stimule comportement naturel de fouissage"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments trop gros ou flottants",
+          "reason": "Poisson de fond ne peut les atteindre; crée compétition avec autres poissons"
+        },
+        {
+          "name": "Nourriture de surface exclusivement",
+          "reason": "Risque de malnutrition car barbillons sensibles adaptés au sol"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Distribution en fin de journée/nuit. Essentiellement détritivore: gère débris et restes au sol. Ne pas surcharger bac de nourriture.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.aquariadise.com/caresheet-bronze-corydoras/",
+          "title": "Aquariadise - Bronze Corydoras Care"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 26,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "80L minimum pour un groupe de 6 individus (20 gallons)",
+      "lightNeeds": "Lumière naturelle modérée. Préfère zones avec cachettes ombragées et plants.",
+      "activityEnrichment": "Bois et roches pour explorer. Plantes vivantes. Filtre gentil (pas courant fort). Accès régulier surface pour respirer air intestinalement.",
+      "hygieneNotes": "Substrat OBLIGATOIRE sable fin/très doux. Barbillons sensibles facilement blessés par substrat rugueux. Nettoyage régulier du sable. Grille protection éventuellement.",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.aquariadise.com/caresheet-bronze-corydoras/",
+          "title": "Aquariadise - Bronze Corydoras Care"
+        },
+        {
+          "type": "guide",
+          "url": "https://riverparkaquatics.co.uk/bronze-cory-corydoras-aeneus/",
+          "title": "Riverpark Aquatics - Bronze Corydoras"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson de fond paisible, actif surtout à la nuit. Fouille constamment sol en quête nourriture. Respire air à la surface périodiquement via intestins.",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Excellent choix débutants/enfants. Petit poisson inoffensif. Requiert juste conditions bonnes.",
+      "compatibilityWithOtherAnimals": "Excellent cohabitation communauté pacifique. Essentiel groupe minimum 6. Ne menace pas autres poissons.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.aquariadise.com/caresheet-bronze-corydoras/",
+          "title": "Aquariadise - Bronze Corydoras Care"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Érosion des barbillons",
+          "symptoms": "Barbillons raccourcis, enflammés ou rongés; difficulté chercher nourriture",
+          "prevention": "Substrat exclusivement sable fin. Maintenir qualité eau (nitrates <50ppm). Éviter stress.",
+          "whenToConsult": "Dès premiers signes raccourcissement ou rougeur; prévient infection bactérienne secondaire"
+        },
+        {
+          "name": "Pourriture des nageoires",
+          "symptoms": "Bords nageoires effilochés, blanchâtres ou rouges; inactivité",
+          "prevention": "Eau propre, température 22-26°C stable, filtration efficace, changements eau réguliers",
+          "whenToConsult": "Au premier signe d'effilochage; action rapide prévient propagation"
+        },
+        {
+          "name": "Infection fongique",
+          "symptoms": "Voile gris-blanc cotonneux peau/nageoires; grattage; léthargique",
+          "prevention": "Qualité eau optimale (pH 6-7), éviter surpopulation, nettoyage sable régulier, isolation malades",
+          "whenToConsult": "Dès taches blanches visibles; traitement antifongique recommandé rapidement"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://forum.aquariumcoop.com/tags/barbels",
+          "title": "Aquarium Coop - Barbel Issues in Corydoras"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.legifrance.gouv.fr/",
+          "title": "Légifrance - Base de données législation française"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": 4,
+      "litterSizeMin": 20,
+      "litterSizeMax": 100,
+      "sexualMaturityMonths": 5,
+      "breedingDifficulty": "facile",
+      "notes": "Reproduction facile en captivité (parmi les plus faciles Corydoras). Reconnaître femelle: corps plus épais/arrondi. Œufs éclosent 4-5 jours. Alevins consomment sac vitellin puis infusoires/poudre fine.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.aquariadise.com/caresheet-bronze-corydoras/",
+          "title": "Aquariadise - Bronze Corydoras Care"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2342679,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Pastilles coulantes pour Corydoras",
+          "frequency": "quotidienne",
+          "notes": "Nourrir tard le soir ou nuit car poisson diurne mais s'alimente après crépuscule"
+        },
+        {
+          "name": "Aliments congelés (vers de vase, crevettes artémias)",
+          "frequency": "3-4x par semaine",
+          "notes": "Riche protéines; essentiel condition optimale, reproduction"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments trop gros ou insuffisamment coulants",
+          "reason": "Poisson de fond ne peut pas les atteindre; cause malnutrition"
+        },
+        {
+          "name": "Restes trop importants au sol",
+          "reason": "Accumulation contamine eau; risque maladies barbillons"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Distribution surtout soirée/nuit. Régime varié essentiel santé. Peut fouiller sol pendant heures. Excellent nettoyeur débris fond.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/databank/sterbas-cory-",
+          "title": "Fishkeeper - Sterba's Cory Care"
+        },
+        {
+          "type": "guide",
+          "url": "https://aquariadise.com/sterbai-cory/",
+          "title": "Aquariadise - Sterbai Cory Care"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 29,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "75L minimum pour un petit groupe (20 gallons)",
+      "lightNeeds": "Lumière modérée. Actif jour mais apprécie zones ombragées avec plantes. Plus tolérant lumière que C. aeneus.",
+      "activityEnrichment": "Substrat sable pour fouir. Bois/roches abri. Plantes vivantes. Espaces ouvert-fermé variés. Excellente tolérance chaleur.",
+      "hygieneNotes": "Substrat OBLIGATOIRE sable fin sans arêtes. Barbillons très sensibles. Nettoyage régulier. Qualité eau: pH 6-7.8, dH 2-25.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://aquariadise.com/sterbai-cory/",
+          "title": "Aquariadise - Sterbai Cory Care"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.thinkfish.co.uk/fish/sterbai-cory.html",
+          "title": "ThinkFish - Sterbai Cory"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Diurne contrairement autres Corydoras (actif jour et nuit). Fouille sol constamment quête nourriture. Respire air surface périodiquement. Plus actif moins reclus que C. aeneus.",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon choix intermédiaires/enfants expérimentés. Requiert attention température et substrat spécifique.",
+      "compatibilityWithOtherAnimals": "Compatible communauté pacifique. Essentiel groupe minimum 5-6. Excellent avec poissons eau chaude (discus).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://aquariadise.com/sterbai-cory/",
+          "title": "Aquariadise - Sterbai Cory Care"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Érosion/infection barbillons",
+          "symptoms": "Barbillons raccourcis, rouges, enflammés; poisson ne peut fouir efficacement",
+          "prevention": "Sable fin obligatoire. Eau propre (nitrates <50ppm). pH 6-7.8 stable. Éviter stress.",
+          "whenToConsult": "Dès rougeur/raccourcissement visibles; condition prédispose infections bactériennes"
+        },
+        {
+          "name": "Pourriture des nageoires bactérienne",
+          "symptoms": "Bords nageoires effilochés, blanchâtres ou rouges; corps terne; inactivité",
+          "prevention": "Eau qualité optimale (22-29°C). Filtration robuste. Changements eau 25% hebdomadaires. Pas surpopulation.",
+          "whenToConsult": "Au premier signe nageoires effilochées; antibactériens efficaces si traitement rapide"
+        },
+        {
+          "name": "Mycose (infection fongique)",
+          "symptoms": "Voile blanc-gris coton peau/nageoires; comportement léthargique; repli fins",
+          "prevention": "Qualité eau stable, éviter blessures, isoler nouveaux poissons, nettoyage régulier sable",
+          "whenToConsult": "Dès taches blanches visibles; nécessite traitement antifongique rapide et isolation"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://forum.aquariumcoop.com/tags/barbels",
+          "title": "Aquarium Coop - Corydoras Barbel Issues"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/databank/sterbas-cory-",
+          "title": "Fishkeeper - Sterba's Cory Health"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.legifrance.gouv.fr/",
+          "title": "Légifrance - Base de données législation française"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "octobre à avril",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 80,
+      "litterSizeMax": 150,
+      "sexualMaturityMonths": 6,
+      "breedingDifficulty": "modere",
+      "notes": "Reproduction modérée difficile (plus que C. aeneus, moins que autres). Déclenche changement eau froide 3-4°C. Femelle pond 80-150 œufs. Récolte fry difficile. Élevage alevins requiert patience.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://gensou.sg/corydoras-sterbai-breeding-guide/",
+          "title": "Gensou - Corydoras Sterbai Breeding Guide"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.planetcatfish.com/forum/viewtopic.php?p=81644",
+          "title": "Planet Catfish - Sterbai Breeding Forum"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000090,
+  "commonNameFr": "Petit Brabançon",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000092,
+  "commonNameFr": "Phalène",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000093,
+  "commonNameFr": "Pudelpointer",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000094,
+  "commonNameFr": "Rhodesian Ridgeback",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000095,
+  "commonNameFr": "Saluki",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000097,
+  "commonNameFr": "Schapendoes",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000099,
+  "commonNameFr": "Silky Terrier",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000101,
+  "commonNameFr": "Sloughi",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000102,
+  "commonNameFr": "Springer Spaniel Anglais",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000105,
+  "commonNameFr": "Tosa",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000106,
+  "commonNameFr": "Vizsla",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000107,
+  "commonNameFr": "Weimaraner",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000108,
+  "commonNameFr": "Whippet Italien",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000109,
+  "commonNameFr": "Européen",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000110,
+  "commonNameFr": "Persan",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

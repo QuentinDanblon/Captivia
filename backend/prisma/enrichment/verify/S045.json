@@ -1,0 +1,39 @@
+[
+  {
+    "speciesId": 5300178,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.notes: reformulé selon la source (ovovivipare, alevins déjà éclos à la naissance)"
+    ],
+    "removed": [
+      "reproduction.gestationDays: 10 → null (sources contradictoires : FR 1 à 2 semaines, EN environ un mois)",
+      "reproduction.sexualMaturityMonths: 3 → null (la source donne 3 mois pour déterminer le sexe et 6 mois pour la taille adulte, pas la maturité)"
+    ],
+    "confidence": "medium",
+    "notes": "Scoliose du molly ballon et portée de 10 à 40 alevins confirmées (fr.wikipedia Molly). Pourriture des nageoires et ich non citées par la page mais maladies courantes des poissons d'aquarium : conservées."
+  },
+  {
+    "speciesId": 5301234,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.season: toute l'année → saison des pluies (en nature) (en.wikipedia Tliltocatl albopilosus)",
+      "reproduction.notes: remplacé les données de maturité du genre Brachypelma (9-10 ans femelle, 7-8 ans mâle) par les données de l'espèce : 300 à 500 œufs, cocon incubé 7 à 8 semaines à 24-27 °C, longévité femelle 8 à 25 ans, mâle environ 4 à 5 ans",
+      "source https://en.wikipedia.org/wiki/Brachypelma → https://en.wikipedia.org/wiki/Tliltocatl_albopilosus (la page du genre ne cite pas B. albopilosum)"
+    ],
+    "removed": [
+      "reproduction.sexualMaturityMonths: 120 → null (valeur du genre Brachypelma, non confirmée pour cette espèce)",
+      "notes: « les femelles pondent des œufs après une mue » et « les œufs éclosent avant la saison des pluies » (propres au genre, non confirmés pour l'espèce)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5301256,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.notes: précisé que le changement de sexe concerne le mâle reproducteur à la mort de la femelle dominante (en quelques jours)"
+    ],
+    "removed": [],
+    "confidence": "high",
+    "notes": "200 à 1500 œufs, hermaphrodisme protandre, ventilation des œufs par le mâle et hiérarchie confirmés (fr.wikipedia Amphiprion ocellaris)."
+  }
+]

@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000607,
+  "commonNameFr": "Hotot Nain",
+  "scientificName": "Hotot nain",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000608,
+  "commonNameFr": "Q19741974",
+  "scientificName": "Q19741974",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000609,
+  "commonNameFr": "Dalmatian",
+  "scientificName": "Dalmatian",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000610,
+  "commonNameFr": "New Zealand Rabbit",
+  "scientificName": "New Zealand rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000611,
+  "commonNameFr": "American Fuzzy Lop",
+  "scientificName": "American Fuzzy Lop",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000679,
+  "commonNameFr": "Cheval des Outer Banks",
+  "scientificName": "Cheval des Outer Banks",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000691,
+  "commonNameFr": "Brune de Lettonie",
+  "scientificName": "Brune de Lettonie",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000692,
+  "commonNameFr": "Vache D'Hérens",
+  "scientificName": "Vache d'Hérens",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000693,
+  "commonNameFr": "Deutsches Schwarzbunte",
+  "scientificName": "Deutsches schwarzbunte",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000694,
+  "commonNameFr": "Hanu",
+  "scientificName": "Hanu",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000695,
+  "commonNameFr": "Bestuzhev",
+  "scientificName": "Bestuzhev",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000696,
+  "commonNameFr": "Guernesey",
+  "scientificName": "Guernesey",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000697,
+  "commonNameFr": "Pinzgauer",
+  "scientificName": "Pinzgauer",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000698,
+  "commonNameFr": "Fjall",
+  "scientificName": "Fjall",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000699,
+  "commonNameFr": "Vänekor",
+  "scientificName": "Vänekor",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

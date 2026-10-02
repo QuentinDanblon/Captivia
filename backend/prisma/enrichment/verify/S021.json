@@ -1,0 +1,57 @@
+[
+  {
+    "speciesId": 2468095,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "feeding/behavior: 'espèce fossile' (= fossile) -> 'fouisseuse' (fr.wikipedia Orvet_fragile)",
+      "legislation.details.permits: 'Arrêté du 21/11/1997 NAC' (non sourcé) -> []",
+      "legislation.details.restrictions: 'autorisée en captivité avec permis' (non sourcé) -> 'Espèce protégée en France (arrêté du 8 janvier 2021)' (source FR)",
+      "reproduction.notes: lifespan précisé (30 ans en moyenne, max 54)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (8/25, non confirmés)",
+      "habitat.humidityMin/Max (60/80 : contredit la source, abris à humidité proche de la saturation)",
+      "reproduction.sexualMaturityMonths: 24 (non confirmé)",
+      "health: déjà null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2468542,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.specificNeeds: 'entièrement insectivore' -> principalement insectivore (coléoptères ~57 %), fruits jusqu'à 20 % chez populations insulaires (source FR)",
+      "habitat.lightNeeds: ajout actif dès ~15,6 °C, jeunes ~34 °C (source FR)",
+      "behavior.generalBehavior: 'très actif' retiré",
+      "legislation.details.permits: 'Arrêté du 21/11/1997 NAC' (non sourcé) -> []",
+      "legislation.details.restrictions: 'protégée dans certains pays d'origine' -> espèce protégée en France (capture, destruction, destruction d'habitat interdites), Convention de Berne annexe II (source FR)",
+      "reproduction.notes: ponte 'mai-juin' -> 'fin mai-début juin'; incubation 71-102 j à 25-29 °C (source FR)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (15/28 : contredit, la source donne activité dès 15,6 °C, tolérance max 42 °C, jeunes visant 34 °C)",
+      "habitat.humidityMin/Max (30/50, non confirmés)",
+      "habitat.minSpaceSize: 'Terrarium 120L+' (non confirmé et manifestement sous-dimensionné pour un lézard de 30-90 cm)",
+      "health: déjà null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2469188,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.specificNeeds: reformulé ('chasseur d'arthropodes', proies avalées entières)",
+      "behavior.compatibilityWithOtherAnimals: 'cohabitation possible en groupes, hiérarchie établie' -> mâles territoriaux en période de reproduction (avril-juin), éviter plusieurs mâles (source FR)",
+      "behavior.compatibilityWithChildren: 'Bon candidat pour débutants...' (non sourcé) -> robuste mais manipulation à limiter",
+      "behavior.generalBehavior: température corporelle optimale ~34 °C (source FR)",
+      "reproduction.notes: 'Oviparous' -> 'Ovipare'; ajout jusqu'à 3 pontes/an en plaine (source FR)"
+    ],
+    "removed": [
+      "legislation: section entière mise à null ('allowed' non confirmé ; la page FR ne fournit pas de statut clair et une consultation antérieure l'indique comme protégée au titre de la Directive Habitats annexe IV / Berne. L'espèce est très probablement protégée en France : à vérifier par un humain avant d'afficher quoi que ce soit)",
+      "habitat.tempMin/tempMax (15/30, non confirmés)",
+      "habitat.humidityMin/Max (40/60, non confirmés)",
+      "health: déjà null",
+      "alerte: une lecture de la page a mentionné 'CITES Annexe II' pour cette espèce : non retenu, non confirmé à la relecture (aucune mention CITES)"
+    ],
+    "confidence": "medium"
+  }
+]

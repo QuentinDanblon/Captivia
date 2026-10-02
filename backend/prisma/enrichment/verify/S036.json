@@ -1,0 +1,78 @@
+[
+  {
+    "speciesId": 5226308,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "behavior.sociability: solitaire → semi-grégaire (en.wikipedia: groupes avec mâle dominant, ~6 femelles)",
+      "reproduction.litterSizeMin/Max: 4/12 → 5/7 (en.wikipedia)",
+      "reproduction.season: après saisons des pluies → saisons des pluies",
+      "reproduction.notes: 'hibernation simulée' retiré ; maturité femelles 14-18 mois, mâles 2 ans, incubation 8-10 semaines",
+      "health: 'Dysphagie respiratoire' → 'Infections respiratoires'"
+    ],
+    "removed": [
+      "legislation entière (euAnnex B, déclaration préfectorale, arrêté 1997 non confirmés ; source legifrance.gouv.fr racine non pertinente)",
+      "sources https://vcahospitals.com/ et https://legifrance.gouv.fr/ (pages génériques, pas l'espèce)",
+      "source en.wikipedia Agama_(lizard) (genre) remplacée par Agama_agama",
+      "feeding 'vers de terre / source de calcium' et quantités '5-10 insectes' retirés",
+      "habitat.minSpaceSize '120 L'",
+      "reproduction.breedingDifficulty (non confirmé)"
+    ],
+    "confidence": "low"
+  },
+  {
+    "speciesId": 5227370,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "reproduction.sexualMaturityMonths: 24 → 36 (en.wikipedia: maturité vers 3 ans)",
+      "reproduction.season: printemps après hibernation → septembre-décembre ; 'hibernation nécessaire' retiré (brumation automnale seulement)",
+      "behavior: 'curieux' retiré, territorial ajouté",
+      "incubation 64 j et ponte 18-25 œufs confirmés"
+    ],
+    "removed": [
+      "legislation entière (CITES II confirmé par en.wikipedia mais euAnnex B, déclaration préfectorale et arrêté 1997 non confirmés)",
+      "feeding.foodsToAvoid 'Insectes venimeux'",
+      "habitat.minSpaceSize '2 m x 2 m'",
+      "sources vcahospitals.com, legifrance.gouv.fr, en.wikipedia/wiki/Tegu (non spécifiques à l'espèce)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5228034,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "reproduction.litterSizeMin/Max: 5/12 → 8/12 (en.wikipedia)",
+      "reproduction.incubationDays 23 confirmé (22-23 j)",
+      "behavior.generalBehavior: 'principalement solitaire/territorial' → au sol, groupes hivernaux (en.wikipedia)",
+      "reproduction.notes: parade/nid caché/jeûne incubation non confirmés remplacés par faits sourcés",
+      "legislation allowed conservé (espèce domestique courante, courante en zoos et volières selon en.wikipedia)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax 5-25 (non confirmable)",
+      "habitat.minSpaceSize '50 m²'",
+      "reproduction.sexualMaturityMonths 12 (non confirmé)",
+      "sources vcahospitals.com et legifrance.gouv.fr (non spécifiques) ; fr.wikipedia Faisan_doré non vérifiée, remplacée par en.wikipedia Golden_pheasant"
+    ],
+    "confidence": "medium"
+  }
+]

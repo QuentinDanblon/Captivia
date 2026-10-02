@@ -1,0 +1,73 @@
+[
+  {
+    "speciesId": 2441110,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.gestationDays: 148 → 150 (fr.wikipedia Mouton: environ cinq mois (150 jours))",
+      "reproduction.litterSizeMax: 3 → 2 (Wikipédia: la plupart des brebis ont 1 ou 2 agneaux) ; notes réécrites",
+      "reproduction.season: 'automne-hiver' → 'saisonnière (liée à la durée du jour)' (Wikipédia)",
+      "reproduction.notes: chiffres inventés retirés (agnelage janvier-juillet, 95% sans aide, 1 bélier pour 10-30 brebis, non confirmés)",
+      "feeding: 'min. 1,5 kg de foin/jour' et 'max 10 g/jour d'aliment nouveau' retirés (non confirmés / incohérents) ; raison entérotoxémie alignée sur Réussir",
+      "habitat.minSpaceSize: '200-300 m² par mouton + bergerie 1,5-2 m²' → ~500 m² pour deux moutons d'Ouessant (seloger) ; chiffre bergerie retiré",
+      "behavior: 'reconnaît les visages des humains' → 'visages individuels' (Wikipédia)",
+      "health.tremblante.prevention: 'dépistage génétique' retiré (BLV n'en parle pas) → maladie à déclaration obligatoire",
+      "health.entérotoxémie.prevention: 'vaccination régulière obligatoire' → avis vétérinaire sur la vaccination (non obligatoire / non confirmé)",
+      "health.parasitisme: fréquence '2-4x/an' retirée",
+      "legislation.restrictions: 'déclarer auprès de la mairie' → déclaration/identification par boucle obligatoires (seloger), PLU en mairie, règlement sanitaire départemental ; source typée guide (non officielle)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (0/30) → null (non confirmé)",
+      "source https://inspection.canada.ca/... (feeding, habitat: ne traite ni alimentation ni habitat ; gardée nulle part sauf retirée de health aussi)",
+      "source https://www.zoomalia.com/blog/article/reproduction-des-mouton-brebis.html (HTTP 403, non vérifiable)"
+    ],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 2441385,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation.citesAppendix: II → I (en.wikipedia Dwarf crocodile: CITES Appendix I) ; status permit_required conservé",
+      "reproduction.notes: 40-60 œufs → ~10 œufs, jusqu'à 20 ; incubation 60-110 j / 27-34°C → 85 à 105 jours (Wikipedia, exoticskeeper: ~85 j)",
+      "reproduction: 'reproduction en captivité très rare (quelques cas)' contredit : élevage suivi par studbooks européens, 14+ ans d'élevage à Crocodiles of the World (exoticskeeper)",
+      "reproduction.season: 'toute l'année' → début saison des pluies (avril-juin) à l'état sauvage (Wikipedia)",
+      "feeding.mealFrequency: every_2_days → weekly (exoticskeeper: nourri 1x/semaine) ; fréquences 2-3x/semaine corrigées",
+      "feeding: 'jeunes 70% insectes', 'poissons gras trout/tilapia', 'riche en calcium' retirés (non confirmés) ; item 'rongeurs de grande taille à éviter' retiré (contredit : rongeurs entiers servis en zoo)",
+      "habitat.lightNeeds: alternance 12h/12h retirée (non confirmée) ; UVI max 2,7, 26-35°C, 70-90%, 20 m² dont 2/3 en eau, 80 cm confirmés (exoticskeeper)",
+      "behavior: 'peu agressif envers congénères', 'rarement attaque', 'morsure petite' retirés ; ajouté taille adulte 1,5-1,9 m (badoca/Wikipedia) ; cohabitation poissons limitée aux grands bassins d'exposition",
+      "health.prevention: quarantaine '2-4 semaines' et supplément 'D3 régulier' généralisés (chiffres non confirmés)"
+    ],
+    "removed": [
+      "legislation.euAnnex 'B' → null (non confirmé par Wikipedia)",
+      "legislation.permits ('Arrêté 21 novembre 1997 ; déclaration obligatoire') retiré (non confirmé)",
+      "reproduction.sexualMaturityMonths 120 → null (non confirmé)",
+      "habitat.hygieneNotes: 'eau douce à légèrement saumâtre' retiré (salinité non traitée par la source)",
+      "source https://cites.org/sites/default/files/fra/com/sc/65/F-SC65-25-02.pdf (HTTP 403)",
+      "source https://fr.vikidia.org/wiki/Crocodile (HTTP 403, générique)",
+      "source https://ielc.libguides.com/.../managedcare (ne contient aucune donnée de soin ; retirée de habitat et health)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2441454,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.incubationDays: 110 → 75 (fr.wikipedia: 60 à 75 jours ; en.wikipedia: ~90 jours, mentionné en notes)",
+      "reproduction.litter: 2-8 → 1-5 (fr.wikipedia: 1 à 5 œufs en moyenne ; en.wikipedia jusqu'à 12 en notes)",
+      "reproduction.sexualMaturityMonths: 180 → 144 (fr.wikipedia: 12e-13e année)",
+      "reproduction.season: avril-août → mai à juillet (en.wikipedia) ; notes: sexe déterminé par T° corrigé (26°C mâles / 30°C femelles)",
+      "habitat.tempMin/Max 18/32 → 15/35 (en.wikipedia: basking 26-35°C, nuit 15-21°C) ; lightNeeds réécrit",
+      "feeding: 'trèfle' retiré (légumineuses signalées problématiques), chou/tomates/légumineuses ajoutés aux aliments à éviter (en.wikipedia) ; pourcentages 80/10-20/5% et fréquence supplément Ca 2-3x/sem retirés",
+      "behavior: 'cris rares possibles', 'timidité' retirés ; hivernage mi-octobre à mi-mars ajouté (fr.wikipedia)",
+      "legislation: CITES II et UE Annexe A confirmés ; permits remplacés par AEA (≤6 adultes) / certificat de capacité (fr.wikipedia) ; 'certificat de traçabilité' et 'déclaration préfecture' retirés (non confirmés)",
+      "health: chiffres retirés (UVB 10-12h, humidité 50-80%, quarantaine 30 j, Ca 2-3x/sem, point chaud 28-32°C)"
+    ],
+    "removed": [
+      "habitat.humidityMin/Max (50/80) → null ; habitat.minSpaceSize → null (non confirmés)",
+      "source https://www.larousse.fr/encyclopedie/vie-sauvage/crocodile/178183 (page crocodiles, pas la tortue d'Hermann)",
+      "source https://www.petmd.com/ (page d'accueil générique, aucune mention de l'espèce)",
+      "source https://cites.org/.../F-SC65-25-02.pdf (HTTP 403)",
+      "health: aucune source spécifique aux maladies confirmée ; maladies conservées car courantes chez les tortues terrestres, sources Wikipedia seulement (confiance basse sur ce point)"
+    ],
+    "confidence": "medium"
+  }
+]

@@ -1,0 +1,307 @@
+[
+  {
+    "speciesId": 5220687,
+    "health": {
+      "diseases": [
+        {
+          "name": "Dysecdisis",
+          "symptoms": "Mue incomplète, peau qui ne se détache pas correctement",
+          "prevention": "Humidité adaptée à l'espèce, substrat légèrement humide",
+          "whenToConsult": "Si mue incomplète après 48h"
+        },
+        {
+          "name": "Abcès",
+          "symptoms": "Gonflements durs à la surface peau, inflammation locale, refus alimentaire",
+          "prevention": "Température stable, hygiène de l'enclos excellente, réduction du stress",
+          "whenToConsult": "Dès apparition premiers gonflements"
+        },
+        {
+          "name": "Carence en calcium",
+          "symptoms": "Tremblements, affaiblissement, mandibule molle, spasmes",
+          "prevention": "UVB quotidiens et suppléments calciques réguliers saupoudrés sur la nourriture",
+          "whenToConsult": "Si signes musculaires anormaux"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fiji_crested_iguana",
+          "title": "Fiji crested iguana"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "mars-avril (parade en janvier)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 4,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare : 4 à 6 œufs par ponte, incubation de 189 jours à 9 mois, éclosions en octobre-novembre. Espèce en danger critique d'extinction (UICN), inscrite à l'annexe I de la CITES.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fiji_crested_iguana",
+          "title": "Fiji crested iguana"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5224503,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Rongeurs (souris, petits rats)",
+          "frequency": "hebdomadaire",
+          "notes": "Proies congelées-décongelées ou élevage captif, taille adaptée à l'âge"
+        },
+        {
+          "name": "Petits lézards",
+          "frequency": "hebdomadaire",
+          "notes": "Les lézards font partie du régime naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies sauvages non identifiées",
+          "reason": "Risque parasites et maladies"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Proies mortes (congelées-décongelées) recommandées pour la sécurité du serpent, taille adaptée à l'âge",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_triangulum",
+          "title": "Milk snake (Lampropeltis triangulum)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Lampropeltis_triangulum",
+          "title": "Lampropeltis triangulum"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 22,
+      "tempMax": 28,
+      "humidityMin": 40,
+      "humidityMax": 70,
+      "minSpaceSize": "Terrarium 90x40x40 cm pour adulte, plus pour grandes souches",
+      "lightNeeds": "Cycle 12/12h, lumière modérée, zone refuge obligatoire",
+      "activityEnrichment": "Substrat épais pour s'enfouir, cachettes multiples, zones de chaleur",
+      "hygieneNotes": "Nettoyage hebdomadaire des selles, changement eau quotidienne, substrat sec à peine humide",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_triangulum",
+          "title": "Milk snake (Lampropeltis triangulum)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent surtout nocturne (en été), terrestre, discret et se camouflant dans la litière, souvent assez docile",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Possible sous surveillance, temperament doux, taille manageable",
+      "compatibilityWithOtherAnimals": "Se nourrit aussi d'autres serpents : maintien isolé obligatoire",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_triangulum",
+          "title": "Milk snake (Lampropeltis triangulum)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Sons respiratoires anormaux, mucus nasal, respiration laborieuse",
+          "prevention": "Température 22-28°C stable, humidité modérée 40-70%, éviter stress",
+          "whenToConsult": "Immédiatement si symptômes respiratoires apparents"
+        },
+        {
+          "name": "Parasites externes et internes",
+          "symptoms": "Perte de poids, peau terne, selles molles ou anormales",
+          "prevention": "Quarantaine nouveau serpent 4-6 semaines, inspection visuelle régulière",
+          "whenToConsult": "En cas de perte de poids inexpliquée"
+        },
+        {
+          "name": "Blessures dues aux proies",
+          "symptoms": "Plaies, saignements, ecchymoses après alimentation",
+          "prevention": "Utiliser proies euthanasiques, surveillance durant alimentation",
+          "whenToConsult": "Si plaie ne guérit pas en 10 jours"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_triangulum",
+          "title": "Milk snake (Lampropeltis triangulum)"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Lampropeltis_triangulum",
+          "title": "Lampropeltis triangulum"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "mai à juillet",
+      "gestationDays": null,
+      "incubationDays": 60,
+      "litterSizeMin": 3,
+      "litterSizeMax": 24,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "modere",
+      "notes": "Ovipare : accouplement de début mai à fin juin, ponte de 3 à 24 œufs en juin-juillet, incubation d'environ 2 mois, éclosion vers août-septembre. Maturité sexuelle en 3 à 4 ans.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_triangulum",
+          "title": "Milk snake (Lampropeltis triangulum)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Lampropeltis_triangulum",
+          "title": "Lampropeltis triangulum"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5225659,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Rongeurs et petits mammifères",
+          "frequency": null,
+          "notes": "Jeunes: chaque 1-2 semaines, adultes: chaque 2-4 semaines selon condition"
+        },
+        {
+          "name": "Oiseaux occasionnels",
+          "frequency": "bi-mensuelle",
+          "notes": "Diversité alimentaire naturelle, enrichissement nutritionnel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies vivantes non supervisées",
+          "reason": "Risque blessures graves du python"
+        },
+        {
+          "name": "Proies pourries",
+          "reason": "Toxines et infections"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Proies adaptées taille serpent, préférentiellement euthanasiques, équilibrage nutrition pour croissance optimale",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Morelia_spilota",
+          "title": "Carpet python (Morelia spilota)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 22,
+      "tempMax": 32,
+      "humidityMin": 40,
+      "humidityMax": 70,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycle 12/12h jour/nuit, zone basking 28-32°C sous spot chaleur, ombrage refuge",
+      "activityEnrichment": "Branching abondant, cordes épaisses, cachettes en hauteur, spots basking multiples",
+      "hygieneNotes": "Eau fraiche quotidienne en gamelle ou brumisation, nettoyage selles régulier, changement substrat hebdomadaire",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Morelia_spilota",
+          "title": "Carpet python (Morelia spilota)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent plutôt arboricole (aussi terrestre), actif de jour comme de nuit (M. s. variegata surtout nocturne), constricteur ; tempérament variable selon les sous-espèces, souvent nerveux jeune mais docile adulte",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Possible avec supervision ; certaines sous-espèces (M. s. mcdowelli, M. s. variegata) plus irritables, taille imposante (2 à 4 m)",
+      "compatibilityWithOtherAnimals": "Serpent carnivore, isolation obligatoire, danger proies petites espèces",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Morelia_spilota",
+          "title": "Carpet python (Morelia spilota)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Respiration anormale, mucus nasal/buccal, sons respiratoires",
+          "prevention": "Température stable 22-32°C, humidité modérée 40-70%, excellent drainage",
+          "whenToConsult": "Immédiatement si symptômes respiratoires clairs"
+        },
+        {
+          "name": "Parasites hématophages",
+          "symptoms": "Anémie, lethargie, tiques ou acariens visibles",
+          "prevention": "Quarantaine 4-6 semaines nouveau serpent, inspection régulière peau",
+          "whenToConsult": "En cas de parasites visibles ou perte vitalité"
+        },
+        {
+          "name": "Dysecdisis",
+          "symptoms": "Mue incomplète, peau adhérente en bandes, notamment queue",
+          "prevention": "Humidité adéquate 40-70%, point eau immersion, réduction stress",
+          "whenToConsult": "Si mue incomplète après 10 jours"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Morelia_spilota",
+          "title": "Carpet python (Morelia spilota)"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 10,
+      "litterSizeMax": 50,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ovipare : la femelle pond 10 à 50 œufs et s'enroule autour pour les garder au chaud par contractions musculaires ; les soins maternels cessent à l'éclosion",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Morelia_spilota",
+          "title": "Carpet python (Morelia spilota)"
+        }
+      ]
+    }
+  }
+]

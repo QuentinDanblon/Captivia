@@ -1,0 +1,37 @@
+[
+  {
+    "speciesId": 5289002,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.notes: retrait de 'femelle gestante à nouveau 6 semaines après une portée' (non confirmé); ajout maturité 6 sem (F) / 8 sem (M), gestation 18-21 j, portées 5-12 (sources en.wikipedia House_mouse, fr.wikipedia Souris_domestique)"
+    ],
+    "removed": [],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 5289010,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.notes: même correction que 5289002 (retrait de la phrase non confirmée sur la gestation à 6 semaines)",
+      "health.Mycoplasma.symptoms: 'croûtes nasales' → 'écoulement nasal'",
+      "health.Tumeurs: ajout risque accru après 1 an, tumeurs mammaires (source Fancy_mouse)"
+    ],
+    "removed": [
+      "source https://en.wikipedia.org/wiki/Mouse (ne traite pas de santé ni de reproduction; remplacée par Fancy_mouse qui confirme les tumeurs)",
+      "health.prevention: mention 'acariens' et 'facteurs carcinogènes' (non sourcés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5289028,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.gestationDays: 26 → 25 (~25 j, 24-28, source fr.wikipedia Gerbille)",
+      "reproduction.notes: ajout taille de portée 1-10 (le plus souvent 4-6), monogamie à vie (source fr.wikipedia)"
+    ],
+    "removed": [
+      "reproduction.notes: 'séparation recommandée à 7+ semaines' (non confirmé)"
+    ],
+    "confidence": "high"
+  }
+]

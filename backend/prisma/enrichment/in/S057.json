@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104040409,
+  "commonNameFr": "Xénope lisse",
+  "scientificName": "Xenopus laevis",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104040736,
+  "commonNameFr": "Crapaud à ventre de feu",
+  "scientificName": "Bombina orientalis",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104041498,
+  "commonNameFr": "Salamandre de Taiwan",
+  "scientificName": "Hynobius formosanus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

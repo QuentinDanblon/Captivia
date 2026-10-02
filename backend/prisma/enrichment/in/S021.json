@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2468095,
+  "commonNameFr": "Orvet fragile",
+  "scientificName": "Anguis fragilis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2468542,
+  "commonNameFr": "Lézard ocellé",
+  "scientificName": "Timon lepidus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2469188,
+  "commonNameFr": "Lézard des murailles",
+  "scientificName": "Podarcis muralis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

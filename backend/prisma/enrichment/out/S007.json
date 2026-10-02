@@ -1,0 +1,418 @@
+[
+  {
+    "speciesId": 2371661,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Spirulina-based cichlid pellets",
+          "frequency": "quotidienne",
+          "notes": "Petites portions deux fois par jour, granulés à base de spiruline ou d'insectes"
+        },
+        {
+          "name": "Aliments congelés (mysis, krill, artémia) et légumes blanchis",
+          "frequency": "hebdomadaire",
+          "notes": "Une à deux fois par semaine en complément"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments à base de viande rouge",
+          "reason": "Trop riches en graisses, provoquent des troubles digestifs"
+        },
+        {
+          "name": "Poissons d'alimentation (feeder goldfish)",
+          "reason": "Risque de transmission de maladies (Wikipedia)"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Omnivore à tendance herbivore (Gensou); Aquarium Source conseille environ moitié aliments riches en protéines, moitié végétaux. Éviter l'excès de protéines animales (risque de ballonnement du Malawi).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://gensou.sg/labidochromis-caeruleus-yellow-lab-deep-dive/",
+          "title": "Labidochromis caeruleus breeding and diet guide"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.aquariumsource.com/yellow-lab-cichlid",
+          "title": "Yellow Lab Cichlid Care"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Environ 200 L minimum pour 1 mâle et 3 femelles (Gensou), aquarium d'au moins 120 cm avec décor rocheux et cavités",
+      "lightNeeds": "Lumière naturelle ou LED, photopériode de 12h jour/nuit",
+      "activityEnrichment": "Exploration des rochers, territorialité modérée; mieux vaut un aquarium bien peuplé qu'un bac clairsemé (Aquariadise)",
+      "hygieneNotes": "Changements d'eau réguliers (30% hebdomadaire), filtration puissante obligatoire",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.aquariumsource.com/yellow-lab-cichlid",
+          "title": "Yellow Lab Cichlid - Full Care Guide"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.aquariadise.com/yellow-lab-cichlid/",
+          "title": "How to Best Take Care of a Yellow Lab Cichlid"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Cichlidé territorial, l'un des mbunas les plus paisibles mais plus agressif qu'un poisson de communauté. Plus calme dans un aquarium bien peuplé avec beaucoup de rocaille; les mâles harcèlent les femelles si on les garde en couple (privilégier un mâle pour plusieurs femelles).",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Non applicable (poisson)",
+      "compatibilityWithOtherAnimals": "À garder avec d'autres cichlidés du Malawi (mbunas); ne convient pas avec des poissons de communauté comme tétras ou danios (Wikipedia). Peut être harcelé par des espèces dissemblables, ou cibler des poissons de taille et couleur similaires.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/cichlids/yellow-labidochromis",
+          "title": "Yellow Labidochromis Care Guide"
+        },
+        {
+          "type": "guide",
+          "url": "https://tropicalfreshwaterfish.com/species/Labidochromis_caeruleus.html",
+          "title": "Labidochromis caeruleus species profile"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ichtyo (points blancs)",
+          "symptoms": "Points blancs surélevés visibles sur le corps et les nageoires, nage irrégulière, frottements contre les décors, perte d'appétit",
+          "prevention": "Maintenir une bonne qualité d'eau, éviter les chocs thermiques, ne pas surcharger l'aquarium",
+          "whenToConsult": "Dès apparition des premiers points blancs, traitement immédiat obligatoire"
+        },
+        {
+          "name": "Maladie du trou dans la tête (HITH)",
+          "symptoms": "Piqûres ou cratères autour de la tête et des yeux, érosion de la ligne latérale, malaise général",
+          "prevention": "Alimentation équilibrée et variée, qualité d'eau irréprochable, réduction du stress par aquarium spacieux",
+          "whenToConsult": "Au premier signe de lésions sur la tête ou la ligne latérale"
+        },
+        {
+          "name": "Ballonnement du Malawi",
+          "symptoms": "Abdomen enflé, perte d'appétit, ralentissement des mouvements, peut être fatal rapidement",
+          "prevention": "Alimentation appropriée (pas trop de protéines animales), qualité d'eau excellente, pas d'excès de sel",
+          "whenToConsult": "Urgence vétérinaire à la moindre suspicion d'œdème abdominal"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.allpondsolutions.co.uk/fishkeeping-advice/fish-diseases-their-symptoms-how-to-treat-them.html",
+          "title": "Fish Diseases: Symptoms & Treatment"
+        },
+        {
+          "type": "guide",
+          "url": "https://gensou.sg/?p=20293",
+          "title": "Hole in Head Disease: Causes and Treatment for Cichlids"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.chewy.com/education/fish/general/dropsy-edema-malawi-bloat-and-similar-syndromes",
+          "title": "Malawi Bloat and Dropsy in Fish"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année",
+      "breedingDifficulty": "modere",
+      "notes": "Incubateur buccal maternel : la femelle garde les œufs (15-30 selon Gensou) dans sa bouche pendant environ 20-25 jours (environ 3 semaines selon Wikipedia; jusqu'à 40 jours selon Aquarium Source). Les mâles creusent un site de ponte dans le sable. Territorial au moment de la ponte.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://gensou.sg/labidochromis-caeruleus-yellow-lab-deep-dive/",
+          "title": "Labidochromis caeruleus breeding behaviour"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2373040,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Flocons et granulés cichlide de qualité",
+          "frequency": "quotidienne",
+          "notes": "Aliments spécialisés pour cichlides africains, petites portions 2x par jour"
+        },
+        {
+          "name": "Aliments végétaux (spiruline, épinards blanchis, nori)",
+          "frequency": "hebdomadaire",
+          "notes": "Base du régime : le zèbre mbuna est surtout végétarien (Seriously Fish)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Viande animale (cœur de bœuf, etc.)",
+          "reason": "Perturbe la digestion (Seriously Fish)"
+        },
+        {
+          "name": "Excès de protéines (vers de sang)",
+          "reason": "À limiter à quelques fois par semaine (Seriously Fish); risque de troubles digestifs"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Se nourrit surtout d'aufwuchs (algues et organismes fixés sur les rochers), de zooplancton et de petits invertébrés dans la nature (Wikipedia). Régime majoritairement végétal en aquarium.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/maylandia-zebra/",
+          "title": "Seriously Fish: Maylandia zebra"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Maylandia_zebra",
+          "title": "Wikipedia: Maylandia zebra"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Environ 205 L minimum (base 120 × 38 cm), décoration rocheuse abondante",
+      "lightNeeds": "Lumière modérée, photopériode naturelle 12h jour/nuit",
+      "activityEnrichment": "Creusage et exploration rocheuse, territorialité importante; trois femelles pour chaque mâle, un seul mâle dans un bac de moins de 200 L (Seriously Fish)",
+      "hygieneNotes": "Filtration efficace essentielle (haute biochimie), changements d'eau réguliers 30-40% hebdomadaire",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/maylandia-zebra/",
+          "title": "Seriously Fish: Maylandia zebra"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Cichlide très territoriale et agressive, surtout en période de reproduction. Consomme naturellement aufwuchs (algues et microorganismes rocheux). Comportement combatif marqué en espace restreint.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Non applicable (poisson)",
+      "compatibilityWithOtherAnimals": "Idéalement un mâle pour trois femelles ou plus, un seul mâle dans un bac de moins de 200 L (Seriously Fish). L'agressivité diminue avec un espace suffisant et des cachettes.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/maylandia-zebra/",
+          "title": "Seriously Fish: Maylandia zebra"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Maylandia_zebra",
+          "title": "Wikipedia: Maylandia zebra"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ichtyo (points blancs)",
+          "symptoms": "Points blancs surélevés sur les nageoires et le corps, nage erratique, frottements contre les décors",
+          "prevention": "Qualité d'eau stable, pas de chocs thermiques, éviter surcharges de poissons, quarantaine des nouveaux arrivants",
+          "whenToConsult": "Immédiatement à l'apparition des premiers points, traitement urgent recommandé"
+        },
+        {
+          "name": "Maladie du trou dans la tête (HITH/HLLE)",
+          "symptoms": "Cratères ou piqûres sur la tête autour des yeux, érosion suivant la ligne latérale",
+          "prevention": "Alimentation variée et équilibrée, qualité d'eau irréprochable, réduction du stress par groupes appropriés",
+          "whenToConsult": "Au premier signe de lésions, améliorer la qualité d'eau et l'alimentation"
+        },
+        {
+          "name": "Ballonnement du Malawi (Malawi bloat)",
+          "symptoms": "Abdomen enflé et bombé, perte d'appétit, nage ralentie, apathie",
+          "prevention": "Régime alimentaire approprié (modérer les protéines), qualité d'eau excellente, pas d'excès de sel",
+          "whenToConsult": "Urgence vétérinaire, peut être fatal en quelques jours"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://gensou.sg/?p=20293",
+          "title": "Hole in Head Disease in Cichlids"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.chewy.com/education/fish/general/dropsy-edema-malawi-bloat-and-similar-syndromes",
+          "title": "Malawi Bloat and Similar Syndromes"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.zooplus.ie/magazine/uncategorized-ga/diseases-in-fish",
+          "title": "Fish Diseases Overview"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année",
+      "breedingDifficulty": "facile",
+      "notes": "Femelle incubatrice buccale. Les œufs et jeunes alevins restent dans la bouche de la femelle pendant 3-4 semaines (18 à 24 jours selon Wikipedia); la femelle ne mange pas pendant ce temps. Une ponte compte en moyenne 10-15 œufs (Seriously Fish).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/maylandia-zebra/",
+          "title": "Seriously Fish: Maylandia zebra"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Maylandia_zebra",
+          "title": "Wikipedia: Maylandia zebra"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2373233,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Granulés cichlide pour carnivores à sinking lent",
+          "frequency": "quotidienne",
+          "notes": "Aliments de qualité supérieure adaptés aux besoins carnivores, 1-2x par jour"
+        },
+        {
+          "name": "Aliments congelés (Artémia, crevettes mysis, larves de moustique)",
+          "frequency": "hebdomadaire",
+          "notes": "Source de protéines animales, enrichit le régime"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Viande de mammifère ou d'oiseau",
+          "reason": "Mauvaise digestion, accumulation de graisses saturées, peut endommager le foie"
+        },
+        {
+          "name": "Poissons d'alimentation (feeder fish)",
+          "reason": "Risque de transmission de maladies (Seriously Fish)"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Prédateur de poissons et d'invertébrés dans la nature; omnivore à préférence pour les aliments carnés en aquarium (Fishkeeper). Légumes (épinards, chou kale) occasionnels.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/cyphotilapia-frontosa",
+          "title": "Cyphotilapia frontosa care guide"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/cichlids/frontosa-cichlid",
+          "title": "Frontosa Cichlid care requirements"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 23,
+      "tempMax": 27,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Base minimale 240 × 60 cm (environ 864 L) pour un groupe d'adultes selon Seriously Fish; les jeunes peuvent démarrer dans un aquarium d'au moins 150-180 cm (Fishkeeper)",
+      "lightNeeds": "Lumière modérée à faible, photopériode régulière 12h jour/nuit, aquarium partiellement ombragé",
+      "activityEnrichment": "Structures rocheuses et cavités; groupe d'au moins 5 individus (idéalement 10 ou plus)",
+      "hygieneNotes": "Très sensible à la dégradation de la qualité d'eau : aquarium mûr et stable, changements d'eau de 30-50% par semaine (Seriously Fish), filtration puissante.",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/cyphotilapia-frontosa",
+          "title": "Seriously Fish Frontosa guide"
+        },
+        {
+          "type": "guide",
+          "url": "https://tropicalfreshwaterfish.com/species/Cyphotilapia_frontosa.html",
+          "title": "Tropical Freshwater Fish Frontosa profile"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Grande cichlidé paisible mais territoriale, peu agressive; forme une hiérarchie de dominance (les mâles ne défendent pas de territoires distincts). Mange les poissons plus petits.",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non applicable (poisson)",
+      "compatibilityWithOtherAnimals": "À maintenir en groupe d'au moins 5 individus (7-10 mieux). Peut manger les petits poissons. Compatible avec de grands cichlidés du lac Tanganyika; les Tropheus sont déconseillés.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/cyphotilapia-frontosa",
+          "title": "Cyphotilapia frontosa behavior and grouping"
+        },
+        {
+          "type": "guide",
+          "url": "https://tropicalfreshwaterfish.com/species/Cyphotilapia_frontosa.html",
+          "title": "Frontosa species profile and natural history"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ichtyo (points blancs)",
+          "symptoms": "Points blancs surélevés visibles, nage irrégulière ou rapide, frottements contre décor",
+          "prevention": "Maintien de qualité d'eau stable et excellente, filtration puissante, éviter chocs thermiques",
+          "whenToConsult": "Immédiatement à la suspicion d'infestation, traitement urgent"
+        },
+        {
+          "name": "Maladie du trou dans la tête (HITH)",
+          "symptoms": "Piqûres ou cratères sur la tête (zone des yeux), érosion de la ligne latérale, comportement perturbé",
+          "prevention": "Alimentation variée, eau de qualité irréprochable, changements d'eau fréquents",
+          "whenToConsult": "Dès apparition de lésions, améliorer immédiatement la qualité d'eau"
+        },
+        {
+          "name": "Infections fongiques (Saprolegnia)",
+          "symptoms": "Accumulation blanchâtre ressemblant à du coton sur la peau, nageoires effilochées, perte de vitalité",
+          "prevention": "Maintenir bonne qualité d'eau, éviter blessures (aquarium sans arêtes vives), isolation des poissons blessés",
+          "whenToConsult": "Dès appariton de lésions blanches cotonnées, traitement antifongique nécessaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://seriouslyfish.com/species/cyphotilapia-frontosa",
+          "title": "Health issues in Cyphotilapia frontosa"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.allpondsolutions.co.uk/fishkeeping-advice/fish-diseases-their-symptoms-how-to-treat-them.html",
+          "title": "Fish Diseases and Treatment"
+        },
+        {
+          "type": "vet",
+          "url": "https://gensou.sg/?p=20293",
+          "title": "Cichlid health issues"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année",
+      "breedingDifficulty": "avance",
+      "notes": "Espèce difficile à reproduire. Maturité sexuelle lente (3-4 ans). Femelle incubatrice buccale, incubation de 35-50 jours ou plus (5-7 semaines selon Fishkeeper). Ponte de 10-50 œufs selon la taille de la femelle (20-50 selon Fishkeeper). Les alevins restent dans la bouche de la mère. Reproduction en captivité possible mais exigeante.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/cyphotilapia-frontosa",
+          "title": "Cyphotilapia frontosa breeding and reproduction"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/cichlids/frontosa-cichlid",
+          "title": "Frontosa reproductive behavior"
+        }
+      ]
+    }
+  }
+]

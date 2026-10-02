@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000126,
+  "commonNameFr": "Ocicat",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000127,
+  "commonNameFr": "Oriental",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000128,
+  "commonNameFr": "Ragdoll",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000129,
+  "commonNameFr": "Russian Blue",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000130,
+  "commonNameFr": "Savannah",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000131,
+  "commonNameFr": "Sibérien",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000132,
+  "commonNameFr": "Somali",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000133,
+  "commonNameFr": "Tonkinois",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000134,
+  "commonNameFr": "Turc de Van",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000135,
+  "commonNameFr": "Angora Turc",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000136,
+  "commonNameFr": "Bombay",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000137,
+  "commonNameFr": "Burmese",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000138,
+  "commonNameFr": "Ceylan",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000139,
+  "commonNameFr": "Chausie",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000140,
+  "commonNameFr": "Cornish Rex",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

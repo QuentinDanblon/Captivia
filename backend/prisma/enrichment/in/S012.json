@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2433753,
+  "commonNameFr": "Loutre",
+  "scientificName": "Lutra lutra",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2434126,
+  "commonNameFr": "Suricate",
+  "scientificName": "Suricata suricatta",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2434255,
+  "commonNameFr": "Mangouste",
+  "scientificName": "Herpestes ichneumon",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,55 @@
+[
+  {
+    "speciesId": 104061079,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.recommendedFoods[0]: ~75% poisson -> 60 à 75 % selon la région (en.wikipedia Fishing_cat: 3/4 à Keoladeo, 3/5 delta Godavari)",
+      "feeding.recommendedFoods[1]: ajout oiseaux/crabes/insectes conformes à la source",
+      "behavior.generalBehavior: crépusculaire-nocturne -> principalement nocturne; 'territorial' retiré (non confirmé)",
+      "legislation.euAnnex: B -> null (non confirmé); permits 'Arrêté du 21 novembre 1997' retiré; source cites.org générique remplacée par la page Wikipédia qui confirme CITES II; status permit_required conservé (CITES II, félidé sauvage) mais non confirmé par une source française",
+      "reproduction.notes: 'depuis 2016' retiré (non confirmé), gestation 63-70 j précisée"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (18-26) et humidityMin/Max (70-95) -> null (non confirmés, humidité douteuse)",
+      "habitat.minSpaceSize (40 m² / bassin 2 m²) -> null (non confirmé)",
+      "feeding.foodsToAvoid: 'Aliments contenant des conservateurs' (sans fondement)",
+      "health était déjà null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104069250,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "behavior.generalBehavior: précision hardes de femelles/mâles/célibataires, 80 km/h et lekking confirmés (en.wikipedia Indian_antelope)",
+      "reproduction: gestation 6 mois, 1 faon, maturité 8 mois femelles (accouplement pas avant 2 ans), mâles 18 mois, 10-15 ans confirmés; saison reformulée (toute l'année, pics printemps/automne)"
+    ],
+    "removed": [
+      "legislation (section entière -> null): CITES réelle = Appendice III selon Wikipédia, euAnnex B et 'Arrêté 21/11/1997' non confirmés, source INPN générique, statut français non confirmable",
+      "habitat.tempMin/tempMax (8-32) -> null (non confirmé)",
+      "habitat.minSpaceSize ('1 hectare par animal') -> null (non confirmé)",
+      "habitat.lightNeeds: 'tolérance chaleur élevée adaptée' retiré",
+      "health était déjà null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104076753,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.incubationDays: 42 -> 60 (source: éclosion 48-80 jours selon température)",
+      "reproduction.season: toute l'année -> décembre à juin (source en.wikipedia Phelsuma_grandis)",
+      "behavior.sociability: grégaire -> solitaire (mâles très territoriaux, mâle peut blesser la femelle)",
+      "behavior.compatibilityWithOtherAnimals / compatibilityWithChildren: 'docile', 'couples possibles' retirés/corrigés",
+      "feeding.specificNeeds: calcium/D3 'obligatoire' -> 'recommandée'; habitat.lightNeeds: UVB 'obligatoire' -> 'recommandé'",
+      "sources: fr.wikipedia non testée remplacée par en.wikipedia vérifiée"
+    ],
+    "removed": [
+      "legislation (section -> null): CITES II confirmé par Species+ via Wikipédia mais statut français (permit_required) et euAnnex B non confirmés",
+      "reproduction.litterSizeMin/Max (1-2) et sexualMaturityMonths (12) -> null (non mentionnés)",
+      "reproduction.notes: 'sélection variant haut rouge', 'accouplements fréquents' retirés",
+      "health était déjà null"
+    ],
+    "confidence": "medium"
+  }
+]

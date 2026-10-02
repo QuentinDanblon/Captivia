@@ -1,0 +1,406 @@
+[
+  {
+    "speciesId": 2470729,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Invertébrés (escargots, crabes)",
+          "frequency": "quotidienne",
+          "notes": "Proies naturelles, à adapter selon disponibilité"
+        },
+        {
+          "name": "Insectes variés (coléoptères, mille-pattes, centipèdes)",
+          "frequency": "quotidienne",
+          "notes": "Essentiels à l'alimentation, riches en chitine"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies toxiques ou venimeuses",
+          "reason": "Risque d'empoisonnement ou d'inflammation"
+        },
+        {
+          "name": "Aliments transformés ou trop gras",
+          "reason": "Peuvent causer des problèmes digestifs en captivité"
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Se nourrit presque exclusivement d'arthropodes et de mollusques ; dents émoussées adaptées à l'écrasement de proies à carapace dure. En captivité, succès de reproduction très rare.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Varanus_exanthematicus",
+          "title": "Varanus exanthematicus - Savannah Monitor"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Enclos très spacieux (l'espèce atteint jusqu'à environ 100 cm) avec substrat permettant de creuser un terrier",
+      "lightNeeds": "Lumière naturelle 12h/jour, lampe UVB recommandée",
+      "activityEnrichment": "Possibilité de creuser, cachettes, substrat profond",
+      "hygieneNotes": "Changement eau régulier, substrat sec à humide",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Varanus_exanthematicus",
+          "title": "Varanus exanthematicus - Savannah Monitor"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Varan terrestre qui s'abrite dans des terriers (fouisseur), parfois observé dans les buissons ou les arbres bas.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "À proscrire : morsure puissante, stressé par la manipulation",
+      "compatibilityWithOtherAnimals": "Strictement solitaire, agressif envers congénères",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Varanus_exanthematicus",
+          "title": "Varanus exanthematicus - Savannah Monitor"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections parasitaires",
+          "symptoms": "Troubles digestifs, perte de poids, fatigue",
+          "prevention": "Quarantaine, hygiène stricte, examens parasitologiques réguliers",
+          "whenToConsult": "Dès premiers signes de parasite"
+        },
+        {
+          "name": "Insuffisance rénale et digestive",
+          "symptoms": "Perte d'appétit, manque de réactivité, déshydratation",
+          "prevention": "Alimentation variée et adaptée, hydratation correcte",
+          "whenToConsult": "Dès perte d'appétit prolongée"
+        },
+        {
+          "name": "Mortalité en captivité (taux élevé)",
+          "symptoms": "Déclin général, refus de s'alimenter, immobilité",
+          "prevention": "Conditions captives très spécialisées ; la reproduction en captivité reste très rare",
+          "whenToConsult": "Consultation préalable recommandée avant acquisition"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Varanus_exanthematicus",
+          "title": "Varanus exanthematicus - Savannah Monitor"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": ["Documents CITES requis pour le commerce international (Annexe II)"],
+        "restrictions": ["Espèce inscrite à l'Annexe II de la CITES"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Varanus_exanthematicus",
+          "title": "Varanus exanthematicus - Conservation and CITES Status"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 158,
+      "litterSizeMin": null,
+      "litterSizeMax": 40,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Les femelles pondent jusqu'à 40 œufs ou plus ; éclosion après environ 156-160 jours. Succès reproductif très rare en captivité, taux de mortalité élevé.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Varanus_exanthematicus",
+          "title": "Varanus exanthematicus - Reproduction"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2470854,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grandes proies (ongulés, cerf, sanglier)",
+          "frequency": "variable",
+          "notes": "Peut consommer jusqu'à 80% de sa masse corporelle en un repas"
+        },
+        {
+          "name": "Insectes, oiseaux, œufs et petits reptiles",
+          "frequency": "variable",
+          "notes": "Régime naturel des juvéniles"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Tous les aliments domestiques",
+          "reason": "Espèce sauvage non adaptée à la captivité"
+        },
+        {
+          "name": "Aliments cuits ou transformés",
+          "reason": "Risques infections et digestion"
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Prédateur au sommet de la chaîne alimentaire, métabolisme lent (peut survivre avec seulement 12 repas par an). Espèce détenue uniquement en parcs zoologiques ; reproduction difficile en captivité.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Komodo_dragon",
+          "title": "Komodo Dragon - Diet and Feeding"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Espèce de très grande taille, impossible en captivité standard",
+      "lightNeeds": "Exposition solaire naturelle (créature diurne)",
+      "activityEnrichment": "Chasse active, creusage de terriers (1 à 3 m de large), escalade chez les juvéniles",
+      "hygieneNotes": "Eau pour abreuvement et immersion",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Komodo_dragon",
+          "title": "Komodo Dragon - Habitat and Behavior"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Prédateur solitaire qui chasse par affût. Combat rituel des mâles debout sur les pattes arrière. Les juvéniles grimpent aux arbres.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Extrêmement dangereux, totalement incompatible",
+      "compatibilityWithOtherAnimals": "Strictement solitaire, agressif envers tous les animaux",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Komodo_dragon",
+          "title": "Komodo Dragon - Behavior"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections et parasites",
+          "symptoms": "Infections bactériennes/virales, parasites internes",
+          "prevention": "Les spécimens capturés dans la nature sont sensibles aux infections et aux parasites",
+          "whenToConsult": "Suivi vétérinaire spécialisé (parc zoologique)"
+        },
+        {
+          "name": "Difficulté de reproduction en captivité",
+          "symptoms": "Refus d'accouplement, infertilité",
+          "prevention": "Reproduction difficile en captivité ; la parthénogenèse est possible chez les femelles isolées",
+          "whenToConsult": "Détention privée non recommandée"
+        },
+        {
+          "name": "Déclin en captivité",
+          "symptoms": "Stress, refus alimentaire, dépérissement",
+          "prevention": "Les premiers spécimens captifs vivaient en moyenne 5 ans ; les progrès d'élevage restent propres aux institutions spécialisées",
+          "whenToConsult": "Détention privée non recommandée"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Komodo_dragon",
+          "title": "Komodo Dragon - Conservation and Captive Care"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'Annexe I de la CITES : commerce international commercial interdit", "Espèce classée En danger (UICN)"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Komodo_dragon",
+          "title": "Komodo Dragon - CITES Status and Legal Protection"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "mai-août",
+      "gestationDays": null,
+      "incubationDays": 225,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 96,
+      "breedingDifficulty": "avance",
+      "notes": "Accouplement mai-août, ponte en septembre (en moyenne 20 œufs), incubation de 7 à 8 mois. Maturité sexuelle à 8-11 ans. Les femelles peuvent se reproduire par parthénogenèse (sans mâle ; ne produit que des mâles). Reproduction difficile en captivité.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Komodo_dragon",
+          "title": "Komodo Dragon - Reproduction"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2474162,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines (millet blanc, panicum, avoine)",
+          "frequency": "quotidienne",
+          "notes": "Base de l'alimentation, idéal pour version domestique"
+        },
+        {
+          "name": "Insectes et larves (criquets, vers de farine)",
+          "frequency": "3-4 fois/semaine",
+          "notes": "Essentiels pour l'apport protéique et minéral"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Sel et aliments salés",
+          "reason": "Toxicité pour les oiseaux"
+        },
+        {
+          "name": "Aliments pourris ou moisis",
+          "reason": "Risques d'infections et intoxications"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Grit/calcaire pour la digestion des graines. Eau fraîche en continu. Supplémentation minérales recommandée (calcium pour pondeuses).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_quail",
+          "title": "Japanese Quail - Diet and Feeding"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Cage min 60x40x40cm pour couple, plus pour groupe",
+      "lightNeeds": "12h lumière/jour pour ponte régulière, obscurité pour repos",
+      "activityEnrichment": "Bac à poussière quotidien (essentiel pour hygiène), nidification simple, couvert végétal dense pour se cacher",
+      "hygieneNotes": "Abreuvement eau douce quotidienne, nettoyage cage 2x/semaine, litière absorbante",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_quail",
+          "title": "Japanese Quail - Habitat and Behavior"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau terrestre social, vivant au sol dans la végétation dense. Bains de poussière nombreux chaque jour. Relations monogames et polygames observées. Production d'oeufs massive (jusqu'à 300/an en lignée domestique).",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Convient aux enfants avec supervision : petit oiseau, manipulation douce",
+      "compatibilityWithOtherAnimals": "Compatible avec autres cailles. Peut cohabiter. Vigilant avec prédateurs.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_quail",
+          "title": "Japanese Quail - Behavior and Communication"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasites externes (poux, acariens)",
+          "symptoms": "Irritation peau, plumage ébouriffé, grattage excessif",
+          "prevention": "Bac à poussière régulier (quotidien), hygiène cage stricte",
+          "whenToConsult": "Dès signes d'irritation cutanée"
+        },
+        {
+          "name": "Prolapsus cloacal",
+          "symptoms": "Expulsion tissus rectaux, saignement, straining",
+          "prevention": "Alimentation équilibrée en calcium/minéraux, hydratation, repos après ponte intensive",
+          "whenToConsult": "Urgence vétérinaire immédiate"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Éternuements, respiration sifflante, toux, congestion nasale",
+          "prevention": "Ventilation adéquate, absence de courants froid, hygiène cage",
+          "whenToConsult": "Dès premiers signes respiratoires"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_quail",
+          "title": "Japanese Quail - Health and Captive Care"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Caille_du_Japon",
+          "title": "Caille du Japon - Wikipedia FR"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": 16,
+      "litterSizeMin": 8,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 1,
+      "breedingDifficulty": "facile",
+      "notes": "Très prolifique : jusqu'à 300 oeufs/an en lignée domestique (plus de 200 selon la source FR). Ponte d'environ 8 œufs, incubation 16 à 18 jours. Oeufs pondus peu de temps avant le crépuscule. Maturité sexuelle très précoce (ponte dès environ 40 jours).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Caille_du_Japon",
+          "title": "Caille du Japon - Wikipedia FR"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_quail",
+          "title": "Japanese Quail - Reproduction and Eggs"
+        }
+      ]
+    }
+  }
+]

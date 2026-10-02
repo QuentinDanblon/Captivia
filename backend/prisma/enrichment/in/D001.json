@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000004,
+  "commonNameFr": "Bulldog Français",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000005,
+  "commonNameFr": "Bouledogue Anglais",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000009,
+  "commonNameFr": "Yorkshire Terrier",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000021,
+  "commonNameFr": "Jack Russell Terrier",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000022,
+  "commonNameFr": "Whippet",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000026,
+  "commonNameFr": "Berger Belge Malinois",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000030,
+  "commonNameFr": "Cavalier King Charles",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000033,
+  "commonNameFr": "Corgi Gallois",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000036,
+  "commonNameFr": "Fox Terrier",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000037,
+  "commonNameFr": "Lévrier Whippet Italien",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000042,
+  "commonNameFr": "Pitbull (American Staffordshire)",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000043,
+  "commonNameFr": "Pomsky",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000044,
+  "commonNameFr": "Poodle Toy",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000046,
+  "commonNameFr": "Schnauzer Nain",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000051,
+  "commonNameFr": "Spitz Nain",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

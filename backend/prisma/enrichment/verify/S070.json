@@ -1,0 +1,57 @@
+[
+  {
+    "speciesId": 104276062,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "sources: 'Isopoda' (ordre entier) remplacé par https://en.wikipedia.org/wiki/Porcellio_laevis (type wikipedia)",
+      "feeding: aliments recalés sur la source (feuilles, mousses, lichens, bois pourri) ; 'oeufs' retiré",
+      "behavior: 'Social, nocturne, groupe 10+' remplacé par comportement sourcé (rapide, déplacements alternés pour dérouter les prédateurs) ; facilité d'élevage confirmée (source)",
+      "reproduction.notes: 'ovovivipares' corrigé -> développement direct d'œufs riches en vitellus dans un marsupium (source)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax 20-25 et humidityMin/humidityMax 60-80 (non confirmés -> null)",
+      "habitat.minSpaceSize '40x30x30 cm' (non confirmé)",
+      "health.prevention '60-80%' (chiffre non confirmé)",
+      "reproduction: season 'toute l'année', litter 20-100, maturité 4 mois (non confirmés -> null)",
+      "legislation (statut non confirmé ; source legifrance.gouv.fr = page d'accueil non spécifique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 144096299,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: '3-5 insectes par jour' et '30% de végétaux' retirés (non confirmés) ; régime omnivore et insectes confirmés (source en.wikipedia Basiliscus_plumifrons) ; ajout mention vers de cire gras difficiles à digérer pour les jeunes (source)",
+      "habitat.tempMax: 32 conservé (température préférée 31,7 °C selon la source), tempMin 28 -> null",
+      "habitat.minSpaceSize: '120x80x150 cm' retiré -> terrarium très grand en hauteur avec bassin (longueur totale ~91 cm selon la source)",
+      "habitat.lightNeeds: '12-14h, lampe 10.0 UVB' retiré -> éclairage de jour avec UVB (espèce diurne)",
+      "behavior: course sur l'eau, territorialité, diurne confirmés ; 'doit être seul' -> plusieurs mâles ne peuvent pas cohabiter (source) ; manipulation mal tolérée (source)",
+      "reproduction.notes: incubation 8-10 semaines (60 j conservé), 5-15 œufs, pontes multiples (source)"
+    ],
+    "removed": [
+      "habitat.tempMin 28, humidityMin/humidityMax 70-95 (non confirmés -> null)",
+      "health (source unique = vcahospitals.com page d'accueil, non spécifique à l'espèce -> section null)",
+      "legislation (euAnnex 'B', permis 'Arrêté du 21 novembre 1997', déclaration de détention : non confirmés, l'espèce n'est pas listée CITES sur la page ; section null)",
+      "reproduction.season 'toute l'année' et sexualMaturityMonths 24 (non confirmés -> null)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 156256182,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "sources: titre 'Red-necked Skink' -> 'Cryptoblepharus virgatus' ; URL du genre Cryptoblepharus retirée (non spécifique)",
+      "feeding: liste réduite à 'petits insectes et arthropodes' (taille ~4 cm museau-cloaque, source) ; 'cantharis' toxiques, pollen, calcium retirés (inventés / non sourcés)",
+      "habitat: milieux urbains, boisés, herbeux, surfaces verticales (arbres, clôtures, murs) conformes à la source",
+      "behavior: ne conserve que ce que dit la source (surfaces verticales ; fait le mort quand menacé)"
+    ],
+    "removed": [
+      "habitat: tempMin/tempMax 25-30, humidité 50-70, terrarium 60x40x40, UVB 8.0 (non confirmés)",
+      "behavior: 'diurne, timide mais curieux, dimorphisme sexuel', sociability 'solitaire', difficultyLevel, compatibilité enfants/animaux ('agressif', 'docile si socialisé') non confirmés -> null",
+      "health (source unique = vcahospitals.com page d'accueil -> null)",
+      "legislation (permit_required, euAnnex B : faux/non confirmé ; l'espèce est classée 'Préoccupation mineure' IUCN, aucune restriction mentionnée ; section null)",
+      "reproduction (ovipare, ponte 2-8, incubation 45 j, maturité 12 mois : aucune donnée dans la source -> section null)"
+    ],
+    "confidence": "low"
+  }
+]

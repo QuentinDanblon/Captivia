@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000001116,
+  "commonNameFr": "Swedish Black Chicken",
+  "scientificName": "Swedish Black Chicken",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001117,
+  "commonNameFr": "Dominicaine (race de Poule)",
+  "scientificName": "Dominicaine (race de poule)",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001118,
+  "commonNameFr": "Hrvatica Chicken",
+  "scientificName": "Hrvatica chicken",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001119,
+  "commonNameFr": "Ko Shamo",
+  "scientificName": "Ko Shamo",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001120,
+  "commonNameFr": "Easter Egger",
+  "scientificName": "Easter Egger",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001121,
+  "commonNameFr": "Italienne",
+  "scientificName": "Italienne",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001122,
+  "commonNameFr": "Buckeye (race de Poule)",
+  "scientificName": "Buckeye (race de poule)",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001123,
+  "commonNameFr": "Naine Hollandaise",
+  "scientificName": "Naine hollandaise",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001124,
+  "commonNameFr": "Icelandic Chicken",
+  "scientificName": "Icelandic chicken",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001125,
+  "commonNameFr": "Plymouth",
+  "scientificName": "Plymouth",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001126,
+  "commonNameFr": "Ayam Pelung",
+  "scientificName": "Ayam Pelung",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001127,
+  "commonNameFr": "Kadaknath Shamanth",
+  "scientificName": "Kadaknath shamanth",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001128,
+  "commonNameFr": "Tomaru",
+  "scientificName": "Tomaru",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001129,
+  "commonNameFr": "Dong Tao Chicken",
+  "scientificName": "Dong Tao chicken",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001130,
+  "commonNameFr": "Laughing Chicken",
+  "scientificName": "Laughing Chicken",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

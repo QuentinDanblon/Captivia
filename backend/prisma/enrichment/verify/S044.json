@@ -1,0 +1,31 @@
+[
+  {
+    "speciesId": 5296842,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.notes: précisé qu'il s'agit de données générales sur l'ordre des Phasmatodea; ajout modes de ponte et maturité 'plusieurs mois' (source en.wikipedia Stick_insect)"
+    ],
+    "removed": [
+      "reproduction.incubationDays: 25 → null (moyenne 20-30 j valable pour l'ordre, pas confirmée pour cette espèce; nom 'Phryganistis chlorophaea' introuvable sur Wikipédia)",
+      "reproduction.litterSizeMin/Max: 100-1200 → null (fourchette de l'ordre, pas de l'espèce)",
+      "reproduction.sexualMaturityMonths: 2 → null (la page indique 'plusieurs mois')"
+    ],
+    "confidence": "low"
+  },
+  {
+    "speciesId": 5299984,
+    "checked": ["reproduction"],
+    "corrected": [],
+    "removed": [],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 5300016,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.notes: '10-40 œufs par cycle' → 10-40 œufs par étreinte, 12-492 œufs par ponte; ajout maturité 4-5 mois (source en.wikipedia Siamese_fighting_fish)"
+    ],
+    "removed": [],
+    "confidence": "high"
+  }
+]

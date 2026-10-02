@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000236,
+  "commonNameFr": "Dendrobate",
+  "scientificName": "Dendrobates tinctorius",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000237,
+  "commonNameFr": "Triton",
+  "scientificName": "Triturus vulgaris",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000238,
+  "commonNameFr": "Salamandre",
+  "scientificName": "Salamandra salamandra",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000239,
+  "commonNameFr": "Crapaud",
+  "scientificName": "Bufo bufo",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000240,
+  "commonNameFr": "Xénope",
+  "scientificName": "Xenopus tropicalis",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000241,
+  "commonNameFr": "Hylidé",
+  "scientificName": "Hyla cinerea",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000242,
+  "commonNameFr": "Pacman (Ceratophrys)",
+  "scientificName": "Ceratophrys ornata",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000243,
+  "commonNameFr": "Grenouille Tomato",
+  "scientificName": "Dyscophus antongilii",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000244,
+  "commonNameFr": "Néon Bleu",
+  "scientificName": "Paracheirodon innesi",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000245,
+  "commonNameFr": "Molly",
+  "scientificName": "Poecilia sphenops",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000246,
+  "commonNameFr": "Combattant (Betta)",
+  "scientificName": "Betta splendens",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000247,
+  "commonNameFr": "Poisson Rouge Fantail",
+  "scientificName": "Carassius auratus",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000248,
+  "commonNameFr": "Poisson Rouge Oranda",
+  "scientificName": "Carassius auratus",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000249,
+  "commonNameFr": "Poisson Rouge Ryukin",
+  "scientificName": "Carassius auratus",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000250,
+  "commonNameFr": "Poisson Rouge Black Moor",
+  "scientificName": "Carassius auratus",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

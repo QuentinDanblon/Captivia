@@ -1,0 +1,15 @@
+[
+ {"speciesId": 9198359, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["legislation: citesAppendix II confirme (Wikipedia FR : tous les galagos) ; source Legifrance racine retiree ; 'Arrete du 21 novembre 1997' (non verifiable) retire","reproduction.gestationDays 125 -> 115 (Wikipedia EN : 110-120 j) ; saison -> novembre et fevrier ; portee 1-2 confirmee","habitat.habitatType terrarium -> enclos (mammifere sauteur)","habitat.minSpaceSize '1 m2' -> volume en hauteur (bonds jusqu'a 5 m)","behavior: reecrit selon Wikipedia FR/EN (territorial, marquage urinaire, bonds 5 m) ; sources ajoutees EN"],
+  "removed": ["habitat.tempMin/tempMax/humidity (non confirmes)","behavior: 'curieux et joueur si bien socialise', 'cohabite avec congeneres sous surveillance'","reproduction.sexualMaturityMonths 10 ; notes 'tres difficile et rare'","legislation: arrete 1997, euAnnex, source legifrance.gouv.fr (page d'accueil)"],
+  "confidence": "medium",
+  "notes": "Statut 'permit_required' conserve (CITES II confirmee) ; le regime francais de detention des primates n'a pas ete verifie dans une source consultee."},
+ {"speciesId": 9268496, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["habitat: cle 'habitabType' (faute de frappe) -> 'habitatType'","habitat.minSpaceSize 200 L -> reformule (carapace jusqu'a ~28 cm)","habitat.lightNeeds / health: incoherence UVB 'non strict' vs 'UVB 10-12 h' -> reformule","reproduction.sexualMaturityMonths 48 -> 120 (Wikipedia EN : femelles ~10 ans) ; pontes 2-3/an (Wikipedia FR) ; notes 'ponte multiple rare' corrige","reproduction.season -> debut d'ete ; 8-20 oeufs et eclosion 3-5 mois confirmes"],
+  "removed": ["legislation (section entiere : 'permit_required'/arrete 1997 non confirmes ; espece non CITES, non protegee en Australie ; source Legifrance racine invalide)","behavior.sociability 'solitaire' (non confirme)","feeding: 'guppys'"],
+  "confidence": "medium"},
+ {"speciesId": 9451184, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["reproduction.litter 6-12 -> 3-8 oeufs (Wikipedia EN) ; incubation 28 j confirmee (28-30)","reproduction.breedingDifficulty modere -> facile (se reproduit facilement en captivite, Wikipedia EN)","behavior: groupes 1 male + 3-5 femelles, vole peu (Wikipedia EN/FR) ; 'bon avec autres especes' retire","habitat.lightNeeds: sensibilite a la lumiere artificielle (Wikipedia FR)"],
+  "removed": ["legislation (section entiere : Wikipedia FR indique CITES annexe III (Pakistan) et que seules les varietes blanche/ailes noires/pie sont legalement domestiques en France ; statut 'allowed' non confirme ; source Legifrance racine invalide)","habitat.tempMin/tempMax 15-28 (trompeur pour une espece rustique) ; enclos 100 m2","reproduction.sexualMaturityMonths 24, season (non confirmes)"],
+  "confidence": "medium"}
+]

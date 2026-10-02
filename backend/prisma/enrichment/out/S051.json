@@ -1,0 +1,428 @@
+[
+  {
+    "speciesId": 9198359,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes (coléoptères, grillons)",
+          "frequency": "quotidienne",
+          "notes": "Aliments naturels préférés"
+        },
+        {
+          "name": "Gomme d'arbre (acacia) ou substitut végétal",
+          "frequency": "quotidienne",
+          "notes": "Les gommes d'arbres font partie du régime naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Fruits tropicaux non identifiés",
+          "reason": "Peuvent contenir des toxines ou substances nuisibles"
+        },
+        {
+          "name": "Aliments traités chimiquement",
+          "reason": "Risque toxicologique en captivité"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime omnivore riche en insectes (dont coléoptères), complété de gommes d'arbres, jeunes pousses, fleurs et fruits ; variété alimentaire importante",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Galago",
+          "title": "Galago - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Senegal_bushbaby",
+          "title": "Senegal bushbaby - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Grand volume en hauteur avec nombreux supports (l'espèce effectue des bonds pouvant atteindre 5 m)",
+      "lightNeeds": "Espèce nocturne : cycle jour/nuit naturel, cachettes sombres",
+      "activityEnrichment": "Branches, cordes pour sauts, jeux nocturnes, terriers artificiels",
+      "hygieneNotes": "Nettoyage hebdomadaire, ventilation importante",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Galago",
+          "title": "Galago - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Senegal_bushbaby",
+          "title": "Senegal bushbaby - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petit primate nocturne, excellent sauteur (bonds jusqu'à 5 m en sautant d'arbre en arbre) ; marque son territoire à l'urine et peut adopter des postures défensives agressives",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé avec enfants, morsures et griffures possibles",
+      "compatibilityWithOtherAnimals": "Territorial : les mâles occupent des territoires distincts, les femelles partagent le leur avec leurs petits",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Galago",
+          "title": "Galago - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Senegal_bushbaby",
+          "title": "Senegal bushbaby - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stress et dépression en captivité",
+          "symptoms": "Apathie, perte d'appétit, automutilation",
+          "prevention": "Environnement enrichi, nocturne respecté, absence de stress sonore",
+          "whenToConsult": "À tout signe d'automutilation ou inappétence prolongée"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Diarrhée, perte de poids, vomissements",
+          "prevention": "Hygiène stricte, alimentation vérifiée, quarantaine des nouveaux individus",
+          "whenToConsult": "Si troubles digestifs persistant plus de 3 jours"
+        },
+        {
+          "name": "Malnutrition",
+          "symptoms": "Faiblesse, pelage terne, détérioration osseuse",
+          "prevention": "Régime varié, suppléments vitaminés réguliers, suivi pondéral",
+          "whenToConsult": "À perte de poids anormale ou signes de faiblesse"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Galago",
+          "title": "Galago - Wikipédia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [
+          "Certificat CITES"
+        ],
+        "restrictions": [
+          "Tous les galagos sont inscrits à l'annexe II de la CITES"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Galago",
+          "title": "Galago - Wikipédia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "novembre et février (deux périodes par an)",
+      "gestationDays": 115,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Deux saisons de reproduction par an ; gestation de 110 à 120 jours ; 1 à 2 petits par portée, nés sans défense",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Senegal_bushbaby",
+          "title": "Senegal bushbaby - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 9268496,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits poissons",
+          "frequency": "2-3 fois par semaine",
+          "notes": "Proies naturelles"
+        },
+        {
+          "name": "Insectes aquatiques et invertébrés",
+          "frequency": "hebdomadaire",
+          "notes": "Insectes aquatiques, vers, crustacés, mollusques (proies naturelles)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments terrestres inadaptés",
+          "reason": "Risque d'occlusion ou de malnutrition"
+        },
+        {
+          "name": "Proies trop grandes",
+          "reason": "Étouffement ou blessure interne"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Carnivore : insectes, vers, grenouilles, petits poissons, crustacés et mollusques ; variété de proies",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Chelodina_longicollis",
+          "title": "Chelodina longicollis - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_long-necked_turtle",
+          "title": "Eastern long-necked turtle - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 26,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Bassin spacieux avec zone terrestre ou d'insolation (carapace jusqu'à environ 28 cm)",
+      "lightNeeds": "Zone d'insolation (basking) sur rochers ou troncs ; UVB recommandés",
+      "activityEnrichment": "Rochers, plantes aquatiques, zones de nage",
+      "hygieneNotes": "Filtration forte, changements d'eau hebdomadaires, décor lavé régulièrement",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Chelodina_longicollis",
+          "title": "Chelodina longicollis - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_long-necked_turtle",
+          "title": "Eastern long-necked turtle - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Tortue aquatique qui s'expose au soleil sur des rochers ou des troncs ; en cas de menace, émet par ses glandes à musc un liquide à odeur nauséabonde",
+      "sociability": null,
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Surveillance nécessaire, attention aux morsures",
+      "compatibilityWithOtherAnimals": "Intraspécifique possible sous conditions de volume",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Chelodina_longicollis",
+          "title": "Chelodina longicollis - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_long-necked_turtle",
+          "title": "Eastern long-necked turtle - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Pourriture de carapace",
+          "symptoms": "Taches blanches ou jaunes sur carapace, odeur désagréable",
+          "prevention": "Hygiène de l'eau, filtration optimale, zone d'insolation et UVB adaptés",
+          "whenToConsult": "Dès apparition de taches ou odeur suspecte"
+        },
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Respiration bruyante, écoulements nasaux, apnée",
+          "prevention": "Température stable, hygiène de l'eau, absence de courant d'air froid",
+          "whenToConsult": "À signes respiratoires persistants"
+        },
+        {
+          "name": "Carence nutritionnelle",
+          "symptoms": "Déformation de carapace, faiblesse, perte d'appétit",
+          "prevention": "Alimentation variée, UVB adaptés, apport en calcium",
+          "whenToConsult": "À perte d'appétit ou déformation anormale"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Chelodina_longicollis",
+          "title": "Chelodina longicollis - Wikipédia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "début d'été",
+      "gestationDays": null,
+      "incubationDays": 90,
+      "litterSizeMin": 8,
+      "litterSizeMax": 20,
+      "sexualMaturityMonths": 120,
+      "breedingDifficulty": "avance",
+      "notes": "Ponte de 8 à 20 oeufs (environ 10 en captivité) dans le sable au début de l'été, 2 à 3 pontes par an ; éclosion 3 à 5 mois plus tard ; maturité des femelles vers 10 ans ; espèce rarement présente en captivité",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Chelodina_longicollis",
+          "title": "Chelodina longicollis - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eastern_long-necked_turtle",
+          "title": "Eastern long-necked turtle - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 9451184,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grains (maïs, blé, riz)",
+          "frequency": "quotidienne",
+          "notes": "Base de l'alimentation"
+        },
+        {
+          "name": "Insectes et larves",
+          "frequency": "2-3 fois par semaine",
+          "notes": "Complément de protéines animales (insectes, larves, parfois petits reptiles à l'état sauvage)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Avocats",
+          "reason": "Persine toxique pour les oiseaux"
+        },
+        {
+          "name": "Sel et aliments salés",
+          "reason": "Toxicité rénale"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Grains variés, protéines animales régulières, minéraux et calcium pour coquilles œuf",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Paon_bleu",
+          "title": "Paon bleu - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Indian_peafowl",
+          "title": "Indian peafowl - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Enclos spacieux avec accès à un espace herbeux",
+      "lightNeeds": "Lumière naturelle ; nuits tranquilles, sans éclairage artificiel (espèce diurne sensible à la lumière artificielle)",
+      "activityEnrichment": "Perchoirs hauts, bain de sable et eau, parcours variés",
+      "hygieneNotes": "Nettoyage régulier des enclos, protection contre prédateurs",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Paon_bleu",
+          "title": "Paon bleu - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Indian_peafowl",
+          "title": "Indian peafowl - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau diurne vivant en petits groupes (un mâle et trois à cinq femelles) ; les mâles défendent de petits territoires ; capable de voler mais se déplace surtout à pied ; très bruyant ; perche en hauteur la nuit",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon avec enfants sous supervision, surveiller agressions du mâle",
+      "compatibilityWithOtherAnimals": "Mâles territoriaux entre eux ; vit en petit groupe avec plusieurs femelles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Paon_bleu",
+          "title": "Paon bleu - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Indian_peafowl",
+          "title": "Indian peafowl - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Coccidiose",
+          "symptoms": "Diarrhée, apathie, perte de poids progressif",
+          "prevention": "Enclos sec, hygiène stricte, éviter surpopulation",
+          "whenToConsult": "À premiers signes de diarrhée anormale"
+        },
+        {
+          "name": "Parasites externes",
+          "symptoms": "Plumage ébouriffé, démangeaisons visibles, perte de plumes",
+          "prevention": "Bains de sable réguliers, traitement préventif en saison",
+          "whenToConsult": "À apparition de parasites visibles ou dégâts plumage"
+        },
+        {
+          "name": "Déficit alimentaire (carence calcique)",
+          "symptoms": "Œufs sans coquille, fragilité osseuse, paralysie partielle",
+          "prevention": "Calcium régulier, minéraux variés, alimentation équilibrée",
+          "whenToConsult": "À problème de ponte ou signes de fragilité"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Paon_bleu",
+          "title": "Paon bleu - Wikipédia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 28,
+      "litterSizeMin": 3,
+      "litterSizeMax": 8,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Ponte de 3 à 8 oeufs, incubation d'environ 28 à 30 jours ; saison de reproduction liée à la mousson dans l'aire d'origine ; se reproduit facilement en captivité",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Paon_bleu",
+          "title": "Paon bleu - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Indian_peafowl",
+          "title": "Indian peafowl - Wikipedia"
+        }
+      ]
+    }
+  }
+]

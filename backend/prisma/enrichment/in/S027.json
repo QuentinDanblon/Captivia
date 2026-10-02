@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2491538,
+  "commonNameFr": "Bruant du Japon",
+  "scientificName": "Emberiza cioides",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2493661,
+  "commonNameFr": "Astrild à pointe",
+  "scientificName": "Estrilda caerulescens",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2493720,
+  "commonNameFr": "Gouldien",
+  "scientificName": "Chloebia gouldiae",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

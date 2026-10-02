@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2434615,
+  "commonNameFr": "Binturong",
+  "scientificName": "Arctictis binturong",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2434982,
+  "commonNameFr": "Ocelot",
+  "scientificName": "Leopardus pardalis",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2435172,
+  "commonNameFr": "Serval",
+  "scientificName": "Leptailurus serval",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import { importBreedsBulk } from './breeds-bulk';
+import { importEnrichment } from './import-enrichment';
 
 // ============================================
 // SEED PROD — Données éditoriales uniquement
@@ -818,6 +819,17 @@ export async function main() {
   if (breeds.errors.length) {
     for (const e of breeds.errors.slice(0, 20)) console.error('  ❌', e);
     throw new Error(`Import des races : ${breeds.errors.length} fiche(s) invalide(s)`);
+  }
+
+  // ============================================
+  // Enrichissement éditorial (prisma/enrichment/out/*.json) — W5-02
+  // ============================================
+  // Ne crée que les sections manquantes, validées et sourcées (jamais d'écrasement).
+  console.log('📚 Seeding enrichment (sections manquantes sourcées)...');
+  const enrichment = await importEnrichment(prisma);
+  console.log(`✅ Enrichment: ${enrichment.files} lots, ${enrichment.entries} fiches,`, enrichment.created);
+  if (enrichment.skipped.length) {
+    console.log(`  ⚠️  ${enrichment.skipped.length} section(s) ignorée(s) (invalides ou non sourcées)`);
   }
 
   console.log('\n🎉 PROD seed completed successfully!');

@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000156,
+    "description": "Le Lapin Nain est originaire des Pays-Bas et représente la plus petite race de lapins domestiques. Son poids se situe entre 0,50 et 1,13 kg. Cette race se caractérise par un cou court et un visage arrondi, avec un tempérament adapté à la vie en captivité, en faisant un animal de compagnie apprécié.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Dwarf_rabbit"
+  },
+  {
+    "speciesId": 2000000158,
+    "description": "Le Lapin Rex est une race originaire de France, apparue en 1919 suite à une mutation génétique spontanée. C'est un lapin de taille moyenne pesant entre 3,4 et 4,8 kg, caractérisé par un pelage exceptionnel et velouté très distinctif. Calme et sociable, il est prisé pour son fourrure unique.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rex_rabbit"
+  },
+  {
+    "speciesId": 2000000159,
+    "description": "Le Lapin Géant des Flandres est la plus grande race de lapin domestique, originaire de Flandre en Belgique vers 1860. Cette race impressionnante se distingue par sa taille exceptionnelle et ses sept colorations reconnues : noir, bleu, fauve, sable, gris clair, gris acier et blanc. Caractérisé par une personnalité docile, il est prisé comme animal familial.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flemish_Giant_rabbit"
+  },
+  {
+    "speciesId": 2000000160,
+    "description": "Le Lapin Hollandais est originaire d'Angleterre, bien que son nom suggère les Pays-Bas. Cette race pèse entre 2,0 et 2,3 kg en standard britannique, avec des oreilles dressées et un pelage court. Il se distingue par ses marquages caractéristiques appelés « Dutch markings », disponibles en plusieurs couleurs comme le noir, bleu, marron et chocolat.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000161,
+    "description": "Le Lapin Lop français provient de France et est reconnu par l'ARBA et le BRC comme race moderne. Il s'agit d'une race imposante pesant environ 4,5 kg, avec des oreilles tombantes caractéristiques très distinctives. Disponible en de nombreuses couleurs, ce lapin combine taille respectable et allure particulière.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000162,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000163,
+    "description": "Le Lapin Tête de Lion provient de France et Belgique, résultant du croisement entre un Renard Suisse miniature et un Nain des Pays-Bas. Il pèse entre 1,1 et 1,7 kg avec des oreilles courtes et bien fourrées. Intelligent et sociable, c'est un animal amical et bien disposé, bien qu'il puisse être agressif s'il se sent menacé.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Lionhead_rabbit"
+  },
+  {
+    "speciesId": 2000000164,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000165,
+    "description": "Le Lapin Polonais, connu en standard britannique, pèse entre 0,68 et 1,13 kg et représente une race très petite. Il possède des oreilles dressées et est disponible en diverses colorations. Reconnu par le British Rabbit Council, c'est un petit lapin adapté aux espaces réduits.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000166,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000167,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000168,
+    "description": "Le Lapin Tacheté Anglais pèse entre 2,3 et 3,6 kg avec un pelage court et des oreilles droites. Son motif distinctif présente une teinte blanche accompagnée d'un papillon coloré caractéristique. Originaire d'Angleterre, cette race est reconnue par l'ARBA et le BRC.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000169,
+    "description": "Le Lapin Zibeline, ou American Sable, pèse entre 3,2 et 4,5 kg avec un pelage court et des oreilles droites. Sa robe présente une coloration zibeline distinctive très reconnaissable. Originaire de Californie, il est reconnu par l'ARBA mais pas par le BRC.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000170,
+    "description": "Le Lapin Argenté de Champagne pèse entre 4,1 et 5,4 kg avec un pelage court et des oreilles droites. Il présente des marquages spécifiques au champagne d'argent très distinctifs. Originaire de France, il est reconnu par l'ARBA pour ses caractéristiques uniques.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000171,
+    "description": "Le Lapin Fauve de Bourgogne pèse entre 3,2 et 5,0 kg avec un pelage court et des oreilles droites. Sa robe arbore une teinte orange-roux frappante très caractéristique. Bien que reconnu par le BRC, il n'est pas reconnu par l'ARBA et provient de France.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  }
+]

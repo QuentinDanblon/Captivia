@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000172,
+  "commonNameFr": "Lapin Géant Papillon",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000174,
+  "commonNameFr": "Cochon D’Inde Abyssinien",
+  "scientificName": "Cavia porcellus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000175,
+  "commonNameFr": "Cochon D’Inde Péruvien",
+  "scientificName": "Cavia porcellus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000176,
+  "commonNameFr": "Cochon D’Inde Sheltie",
+  "scientificName": "Cavia porcellus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000177,
+  "commonNameFr": "Cochon D’Inde Teddy",
+  "scientificName": "Cavia porcellus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000178,
+  "commonNameFr": "Cochon D’Inde Texel",
+  "scientificName": "Cavia porcellus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000179,
+  "commonNameFr": "Cochon D’Inde Skinny",
+  "scientificName": "Cavia porcellus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000180,
+  "commonNameFr": "Hamster Chinois",
+  "scientificName": "Cricetulus griseus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000181,
+  "commonNameFr": "Souris Domestique",
+  "scientificName": "Mus musculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000182,
+  "commonNameFr": "Gerbille de Mongolie",
+  "scientificName": "Meriones unguiculatus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000183,
+  "commonNameFr": "Octodon",
+  "scientificName": "Octodon degus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000184,
+  "commonNameFr": "Furet",
+  "scientificName": "Mustela putorius furo",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000185,
+  "commonNameFr": "Âne Nain",
+  "scientificName": "Equus asinus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000186,
+  "commonNameFr": "Poney Shetland",
+  "scientificName": "Equus ferus caballus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000187,
+  "commonNameFr": "Cheval Miniature",
+  "scientificName": "Equus ferus caballus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

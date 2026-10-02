@@ -1,0 +1,36 @@
+[
+ {
+  "speciesId": 5286201,
+  "commonNameFr": "Pangolin Asiatique",
+  "scientificName": "Manis pentadactyla",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5287871,
+  "commonNameFr": "Chien",
+  "scientificName": "Canis familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5288995,
+  "commonNameFr": "Cheval domestique",
+  "scientificName": "Equus caballus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ }
+]

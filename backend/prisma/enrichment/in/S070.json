@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104276062,
+  "commonNameFr": "Cloporte géant",
+  "scientificName": "Porcellio laevis",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 144096299,
+  "commonNameFr": "Basilic vert",
+  "scientificName": "Basiliscus plumifrons",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 156256182,
+  "commonNameFr": "Scinque à cou rouge",
+  "scientificName": "Cryptoblepharus virgatus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

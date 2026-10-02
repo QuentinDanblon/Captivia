@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2342738,
+  "commonNameFr": "Corydoras panda",
+  "scientificName": "Corydoras panda",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2354003,
+  "commonNameFr": "Tétra empereur",
+  "scientificName": "Nematobrycon palmeri",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2354646,
+  "commonNameFr": "Tétra fantôme noir",
+  "scientificName": "Hyphessobrycon megalopterus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,281 @@
+[
+  {
+    "speciesId": 104094514,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes (criquets, grillons)",
+          "frequency": "plusieurs fois par semaine",
+          "notes": "Taille adaptée au serpent, 3-4 fois par semaine"
+        },
+        {
+          "name": "Petits arthropodes et escargots",
+          "frequency": "hebdomadaire",
+          "notes": "Complément; petits amphibiens consommés occasionnellement en nature"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Risque d'étouffement"
+        },
+        {
+          "name": "Proies putréfiées",
+          "reason": "Infections digestives"
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Insectes variés pour équilibre nutritionnel",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Opheodrys_aestivus",
+          "title": "Opheodrys aestivus - Couleuvre verte"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 22,
+      "tempMax": 28,
+      "humidityMin": 60,
+      "humidityMax": 80,
+      "minSpaceSize": null,
+      "lightNeeds": "Photopériode naturelle 12h/12h, luminosité diurne importante (espèce diurne)",
+      "activityEnrichment": "Branches et feuillage pour grimper, cachettes, milieu semi-naturel",
+      "hygieneNotes": "Humidité régulière par brumisation, aération quotidienne, substrat humide",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Opheodrys_aestivus",
+          "title": "Opheodrys aestivus - habitat et conditions"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent principalement diurne et actif, calme et peu agressif, vit dans des zones plutôt humides et boisées",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Acceptable sous supervision (morsure rare mais possible)",
+      "compatibilityWithOtherAnimals": "À maintenir seul en terrarium",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Opheodrys_aestivus",
+          "title": "Comportement de la Couleuvre verte"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": "printemps",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 3,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Les femelles pondent de 3 à 12 œufs au printemps, éclosion généralement en août-septembre, juvéniles d'environ 20 cm à la naissance",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Opheodrys_aestivus",
+          "title": "Reproduction Opheodrys aestivus"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104101618,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Souris et petits rongeurs",
+          "frequency": "hebdomadaire",
+          "notes": "Congelés-décongelés ou vivants, taille adaptée"
+        },
+        {
+          "name": "Jeunes rats",
+          "frequency": "hebdomadaire",
+          "notes": "Pour adultes, moins fréquent chez juvéniles"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Risque d'étouffement et de régurgitation"
+        },
+        {
+          "name": "Rongeurs malades ou contaminés",
+          "reason": "Transmission de parasites et maladies"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Proies fraîches ou congelées-décongelées, taille adaptée (régime de rongeurs tués par constriction)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eryx_johnii",
+          "title": "Eryx johnii - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 30,
+      "humidityMin": 30,
+      "humidityMax": 60,
+      "minSpaceSize": "Terrarium 60x40x30cm, substrat épais pour fouissement",
+      "lightNeeds": "Éclairage minimal, cycles jour/nuit naturels",
+      "activityEnrichment": "Substrat profond pour fouir (sable, écorce), cachettes multiples",
+      "hygieneNotes": "Substrat sec à légèrement humide, bon drainage, changements partiels réguliers",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eryx_johnii",
+          "title": "Eryx johnii - Wikipedia (habitat: plaines semi-désertiques, sol sableux)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent fouisseur très calme, vit sous terre dans le sable meuble, peu agressif",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon, tempérament très calme",
+      "compatibilityWithOtherAnimals": "À maintenir seul",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eryx_johnii",
+          "title": "Eryx johnii - Wikipedia"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 14,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ovovivipare: jusqu'à 14 petits par portée, naissances de la fin de l'été à la mousson",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eryx_johnii",
+          "title": "Eryx johnii - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104101654,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits lézards (geckos, scinques)",
+          "frequency": "hebdomadaire",
+          "notes": "Proies principales en nature; en captivité, souris parfumées à la cuisse de poulet"
+        },
+        {
+          "name": "Souris parfumées à la cuisse de poulet",
+          "frequency": "hebdomadaire",
+          "notes": "Utilisées en captivité pour imiter la proie naturelle"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Risque de régurgitation et d'étouffement"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Proies mimant la prédation naturelle (lézards ou souris parfumées)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Casarea_dussumieri",
+          "title": "Round Island Boa - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium 80x40x60cm minimum",
+      "lightNeeds": "Cycles jour/nuit naturels, espèce nocturne/crépusculaire",
+      "activityEnrichment": "Litière de feuilles, troncs creux et cachettes multiples",
+      "hygieneNotes": "Substrat humide mais drainé, brumisations régulières, aération",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Casarea_dussumieri",
+          "title": "Casarea dussumieri - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent nocturne/crépusculaire, change de coloration selon l'activité (sombre le jour, clair de la soirée à l'aube)",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé, espèce fragile et exigeante",
+      "compatibilityWithOtherAnimals": "À maintenir seul absolument",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Casarea_dussumieri",
+          "title": "Casarea dussumieri - Wikipedia"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'annexe I de la CITES (statut UICN: Vulnérable)"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Casarea_dussumieri",
+          "title": "Round Island boa - Wikipedia (CITES Appendix I)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "à partir d'avril",
+      "gestationDays": null,
+      "incubationDays": 90,
+      "litterSizeMin": null,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare: ponte pouvant atteindre 12 œufs à coquille molle dans la litière ou des troncs de palmiers creux, incubation d'environ 90 jours, nouveau-nés orange; reproduction documentée en captivité",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Casarea_dussumieri",
+          "title": "Casarea dussumieri - Wikipedia"
+        }
+      ]
+    }
+  }
+]

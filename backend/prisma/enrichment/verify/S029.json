@@ -1,0 +1,59 @@
+[
+  {
+    "speciesId": 2498387,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: crustacés/amphibiens retirés des aliments (source EN/FR : plantes, graines, fruits, insectes)",
+      "reproduction.season: mars à juin → février à avril (en.wikipedia Wood_duck)",
+      "reproduction.incubationDays: 30 conservé (fr: 28-30 j ; en: 28-37 j), précisé en notes",
+      "reproduction.notes: saut des poussins dès le 1er/2e jour (en/fr)",
+      "health: coquilles de texte corrigées (« léthargieITems », « osseuseVente », « pelage » → plumage)",
+      "behavior.generalBehavior: reformulé selon la source (nidification en cavité, couples à la reproduction)"
+    ],
+    "removed": [
+      "legislation (euAnnex B / permis préfectoral non confirmés ; page Wikipédia sans CITES ni UE ; source legifrance.gouv.fr = page d'accueil)",
+      "habitat.tempMin/tempMax, minSpaceSize (non confirmables)",
+      "behavior.sociability, compatibilityWithOtherAnimals (« moins agressif que colvert » non confirmé)",
+      "reproduction.sexualMaturityMonths: 14 (non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2498388,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: ajusté à la source (faînes, glands, plantes ; escargots, insectes, mollusques) ; « baies » retiré",
+      "reproduction.incubationDays: 30 → 28 (fr.wikipedia Canard_mandarin, « environ 28 jours »)",
+      "reproduction.notes: migration « Asie-Pacifique » → populations asiatiques migratrices, hivernage Chine orientale / Japon sud (en.wikipedia)",
+      "behavior.sociability: grégaire → semi-grégaire (petits groupes, couples)",
+      "behavior: « peu bruyant », « aversion prédateurs » retirés ; « plongée superficielle » retirée de l'habitat",
+      "health: « Aspergil lose » → Aspergillose ; « arboricale » → arboricole",
+      "source ajoutée (vérifiée) : fr.wikipedia Canard_mandarin pour reproduction"
+    ],
+    "removed": [
+      "legislation (euAnnex B / permis non confirmés ; Wikipédia EN : non listé CITES ; FR : absent de l'arrêté du 29/10/2009 sur oiseaux protégés, sans statut de détention clair)",
+      "habitat.tempMin/tempMax, minSpaceSize (non confirmables)",
+      "reproduction.sexualMaturityMonths: 16 (non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 4263039,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.litterSizeMax: 3 → 2 (en.wikipedia Lowland_paca : généralement 1 jeune, parfois 2 ; 1 à 3 portées/an)",
+      "reproduction.notes: retiré « jeunes précociaux » et « maturation longue » (non confirmés, contradictoire avec maturité à 1 an)",
+      "feeding: « germes » → graines ; « viande » retiré des aliments à éviter (la source mentionne un comportement nécrophage)",
+      "habitat.activityEnrichment: reformulé (immersion de plusieurs minutes ; terrier d'environ 2 m dans la nature)",
+      "behavior: « non agressifs mais craintifs » retiré ; texte réduit à nocturne, solitaire, bon nageur",
+      "sources: Paca (genre) complété/remplacé par Lowland_paca (vérifiée)"
+    ],
+    "removed": [
+      "legislation (CITES III confirmé par en.wikipedia Lowland_paca mais statut français / « arrêté du 21 novembre 1997 – déclaration » non confirmé ; euAnnex B non confirmé)",
+      "habitat.tempMin/tempMax, humidityMin/humidityMax, minSpaceSize (non confirmables)",
+      "behavior.compatibilityWithOtherAnimals (« territoriaux, agressifs » non confirmé)",
+      "reproduction.season (« toute l'année, pics au printemps » non confirmé)"
+    ],
+    "confidence": "medium"
+  }
+]

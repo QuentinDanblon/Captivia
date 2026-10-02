@@ -1,0 +1,403 @@
+[
+  {
+    "speciesId": 2437577,
+    "feeding": {
+      "dietType": "frugivore",
+      "recommendedFoods": [
+        {
+          "name": "Fruits variés (pomme, poire, papaye, mangue, banane)",
+          "frequency": "quotidienne",
+          "notes": "Base du régime : à l'état sauvage, fruits tombés au sol, feuilles et racines"
+        },
+        {
+          "name": "Légumes frais (carotte, patate douce, courge, légumes feuillus)",
+          "frequency": "quotidienne",
+          "notes": "Riches en vitamines et minéraux. Au National Zoo : fruits, légumes, noix, verdures et granulés pour rongeurs"
+        },
+        {
+          "name": "Noix et graines (noix du Brésil, noisettes, graines de courge)",
+          "frequency": "2-3 fois par semaine",
+          "notes": "L'agouti sait ouvrir les noix du Brésil et les enterre pour les consommer plus tard"
+        },
+        {
+          "name": "Granulés de rongeur",
+          "frequency": "quotidienne",
+          "notes": "Complément nutritionnel équilibré"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments trop sucrés ou transformés",
+          "reason": "Risque de surcharge glucidique et de troubles digestifs"
+        },
+        {
+          "name": "Aliments contenant du cacao ou de la caféine",
+          "reason": "Toxicité potentielle pour les rongeurs"
+        },
+        {
+          "name": "Fruits exotiques non identifiés",
+          "reason": "Risque de toxicité, préférer les fruits connus"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime riche en fibres et pauvre en aliments gras ou sucrés. Les agoutis préfèrent les morceaux d'aliments de grande taille (étude sur D. leporina). Eau fraîche en permanence.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agouti",
+          "title": "Agouti - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.nationalzoo.si.edu/node/6925",
+          "title": "Red-rumped Agouti - Smithsonian National Zoo"
+        },
+        {
+          "type": "vet",
+          "url": "https://lrrd.cipav.org.co/lrrd30/11/kegan30193.html",
+          "title": "Feed particle size preference and feed wastage in Agouti (Dasyprocta leporina) reared intensively in Trinidad and Tobago - LRRD"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle ou cycle jour/nuit régulier, éviter l'exposition directe prolongée au soleil",
+      "activityEnrichment": "Zones de creusement, cachettes (à l'état sauvage : troncs creux et terriers sous les racines), enrichissement olfactif, matériaux naturels variés",
+      "hygieneNotes": "Nettoyage régulier des zones souillées, litière absorbante naturelle",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agouti",
+          "title": "Agouti - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Animaux timides à l'état sauvage mais pouvant devenir confiants en captivité. Forment des couples durables. Capables d'ouvrir des noix du Brésil grâce à leurs dents très tranchantes. Se réfugient dans des troncs creux ou des terriers.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Convient aux enfants sous supervision constante, risque de morsure si stressé ou manipulé brusquement",
+      "compatibilityWithOtherAnimals": "Vivent généralement en couples, peuvent être agressifs avec d'autres agoutis si non élevés ensemble. Risque de prédation avec petits carnivores.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agouti",
+          "title": "Agouti - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasitoses gastro-intestinales",
+          "symptoms": "Diarrhée, perte de poids, pelage terne, léthargie",
+          "prevention": "Hygiène stricte du milieu, examens fécaux réguliers, éviter la surpopulation. Des nématodes, Eimeria et Giardia ont été retrouvés chez des agoutis d'élevage et sauvages.",
+          "whenToConsult": "Dès apparition de signes digestifs persistants, diarrhée prolongée"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://bioone.org/journals/journal-of-zoo-and-wildlife-medicine/volume-47/issue-4/2015-0055.1/AEROBIC-MICROFLORA-AND-ENDOPARASITES-OF-FRESHLY-SHOT-WILD-AGOUTI-DASYPROCTA/10.1638/2015-0055.1.full",
+          "title": "Aerobic Microflora and Endoparasites of Freshly Shot Wild Agouti (Dasyprocta leporina) in Trinidad - JZWM"
+        },
+        {
+          "type": "vet",
+          "url": "https://revistas.ufg.br/index.php/vet/article/view/449",
+          "title": "Parasitas gastrintestinais de cutias (Dasyprocta leporina)"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Couples liés pour la vie. Gestation de trois à quatre mois selon les sources. Un à quatre petits par portée, très développés à la naissance (ils peuvent se déplacer et manger dans l'heure qui suit). Naissance dans des terriers garnis de feuilles, de racines et de poils. Reproduction possible toute l'année.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agouti",
+          "title": "Agouti - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.nationalzoo.si.edu/node/6925",
+          "title": "Red-rumped Agouti - Smithsonian National Zoo"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2437619,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Foin de fléole (Timothy hay) de haute qualité",
+          "frequency": "ad libitum",
+          "notes": "Environ 80 % de l'apport alimentaire quotidien, essentiel pour la santé digestive et dentaire"
+        },
+        {
+          "name": "Légumes frais variés (laitue, épinard, carotte, brocoli)",
+          "frequency": "quotidienne",
+          "notes": "Riche en vitamines et minéraux, contribue à l'hydratation"
+        },
+        {
+          "name": "Herbes fraîches et pâturages",
+          "frequency": "quotidienne en saison",
+          "notes": "À l'état sauvage, le régime est composé de graminées (herbivore)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Grains et aliments riches en glucides",
+          "reason": "Risque de troubles digestifs, le mara est adapté à un régime très fibreux"
+        },
+        {
+          "name": "Aliments contenant du sucre ou du chocolat",
+          "reason": "Toxicité, déséquilibre alimentaire"
+        },
+        {
+          "name": "Légumes moisis ou contaminés",
+          "reason": "Risque de toxine fongique et d'infection digestive"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime très fibreux, majoritairement du foin de qualité ; les granulés ne sont qu'un complément. Eau fraîche en permanence.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Patagonian_mara",
+          "title": "Patagonian Mara - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://furrycritter.com/pages/life_stages/small_mammals/patagonian_mara_adult.htm",
+          "title": "Patagonian Mara - Husbandry and Routine"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle, cycle jour/nuit régulier ; animaux diurnes, actifs durant la journée",
+      "activityEnrichment": "Espace de course libre, cachettes pour le repos, zones de terrier peu profondes, matériaux naturels variés, contact social avec un partenaire",
+      "hygieneNotes": "Sol bien drainé, protection contre l'humidité excessive, nettoyage régulier des zones de repos, abri du vent et de la pluie prolongée",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Patagonian_mara",
+          "title": "Patagonian Mara - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Animaux diurnes. Monogames : les couples restent ensemble toute leur vie. Dans la nature, les garennes de reproduction peuvent compter jusqu'à 29 couples. Pattes longues adaptées à la course.",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Peut convenir aux enfants dans un contexte supervisé, animaux peu agressifs mais nécessitant beaucoup d'espace",
+      "compatibilityWithOtherAnimals": "Monogames, vivent en couples stables. Peuvent cohabiter en petits groupes. Risque de prédation avec des carnivores.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Patagonian_mara",
+          "title": "Patagonian Mara - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://wildlifepark.novascotia.ca/node/1142",
+          "title": "Wildlife Park Nova Scotia - Mara Information"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Troubles digestifs (diarrhée, stase gastro-intestinale)",
+          "symptoms": "Anorexie, fèces molles ou diarrhée, perte de poids, apathie",
+          "prevention": "Alimentation stable riche en fibres, éviter les changements alimentaires brusques, eau fraîche constante",
+          "whenToConsult": "Si la diarrhée ou l'arrêt du transit persiste plus de 24 h malgré un ajustement alimentaire"
+        },
+        {
+          "name": "Problèmes dentaires",
+          "symptoms": "Difficulté à manger, salivation, perte de poids",
+          "prevention": "Foin à volonté pour user les dents, contrôles vétérinaires réguliers",
+          "whenToConsult": "Dès que l'animal mange moins ou autrement"
+        },
+        {
+          "name": "Pododermatite (bumblefoot) et obésité",
+          "symptoms": "Plaies ou rougeurs sous les pattes, prise de poids",
+          "prevention": "Sol adapté, alimentation maîtrisée, activité suffisante",
+          "whenToConsult": "Dès l'apparition de plaies aux pattes ou de boiterie"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://furrycritter.com/pages/life_stages/small_mammals/patagonian_mara_adult.htm",
+          "title": "Patagonian Mara - Husbandry and Routine"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "août-janvier (saison reproductrice naturelle)",
+      "gestationDays": 100,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Monogames, partenaires pour la vie. Saison de reproduction d'août à janvier, la plupart des naissances ayant lieu en septembre-octobre. Gestation d'environ 100 jours. Une portée par an à l'état sauvage, jusqu'à quatre en captivité.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Patagonian_mara",
+          "title": "Patagonian Mara - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2439965,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes variés (grillons, vers de farine, blattes)",
+          "frequency": "quotidienne",
+          "notes": "Source protéique principale"
+        },
+        {
+          "name": "Petits vertébrés (poussins ou souriceaux nouveau-nés congelés-décongelés)",
+          "frequency": "2-3 fois par semaine",
+          "notes": "À l'état sauvage : rongeurs, grenouilles et reptiles font partie du régime"
+        },
+        {
+          "name": "Œufs cuits ou crus (caille)",
+          "frequency": "1-2 fois par semaine",
+          "notes": "Source de protéines"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Fruits et légumes en grande quantité",
+          "reason": "Le régime est essentiellement animal (un peu de fruits seulement à l'état sauvage)"
+        },
+        {
+          "name": "Aliments transformés ou salés",
+          "reason": "Déséquilibre nutritionnel"
+        },
+        {
+          "name": "Proies contaminées par des pesticides ou des toxines",
+          "reason": "Risque sanitaire"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime essentiellement animal (insectes, petits vertébrés, invertébrés), pauvre en glucides, avec un peu de fruits à l'état sauvage. Eau fraîche en permanence.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gray_short-tailed_opossum",
+          "title": "Gray Short-tailed Opossum - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Espèce nocturne (surtout active dans les trois premières heures après le crépuscule) : cycle jour/nuit régulier, éviter la lumière directe",
+      "activityEnrichment": "Cachettes sombres, objets à explorer, substrat permettant de fouir, roue d'exercice",
+      "hygieneNotes": "Nettoyage régulier des zones souillées, substrat absorbant sec, bonne ventilation",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gray_short-tailed_opossum",
+          "title": "Gray Short-tailed Opossum - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Animal solitaire et nocturne. L'approche d'un congénère provoque généralement sifflements et cris. Les femelles n'ont pas de poche marsupiale : les petits restent accrochés aux tétines.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé : animal fragile et facilement stressé, risque de morsure défensive",
+      "compatibilityWithOtherAnimals": "Solitaire : cohabitation entre congénères déconseillée (conflits). À maintenir isolé sauf pour une reproduction encadrée.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gray_short-tailed_opossum",
+          "title": "Gray Short-tailed Opossum - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stress",
+          "symptoms": "Comportement agressif exacerbé, perte d'appétit, inactivité, pelage piqué",
+          "prevention": "Isolement des individus, environnement stable, manipulation limitée",
+          "whenToConsult": "Dès signes de refus alimentaire ou de comportement anormal"
+        },
+        {
+          "name": "Parasitoses internes",
+          "symptoms": "Diarrhée, perte de poids, pelage terne, abattement",
+          "prevention": "Hygiène du milieu, isolement des animaux atteints, proies de source sûre uniquement",
+          "whenToConsult": "Dès signes gastro-intestinaux ; examens coprologiques réguliers"
+        },
+        {
+          "name": "Blessures de combat (en cas de cohabitation)",
+          "symptoms": "Plaies ouvertes, saignement, abcès",
+          "prevention": "Ne pas maintenir deux animaux ensemble sans protocole d'élevage encadré",
+          "whenToConsult": "Immédiatement si blessure détectée, risque d'infection rapide"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gray_short-tailed_opossum",
+          "title": "Gray Short-tailed Opossum - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": 14,
+      "incubationDays": null,
+      "litterSizeMin": 6,
+      "litterSizeMax": 11,
+      "sexualMaturityMonths": 5,
+      "breedingDifficulty": "modere",
+      "notes": "Gestation très courte (14 jours). Portées de 6 à 11 petits, jusqu'à 6 portées par an en conditions favorables. Nouveau-nés minuscules (environ 1 cm, 0,1 g) accrochés aux tétines, sans poche. Maturité sexuelle vers 5-6 mois.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gray_short-tailed_opossum",
+          "title": "Gray Short-tailed Opossum - Wikipedia"
+        }
+      ]
+    }
+  }
+]

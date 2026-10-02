@@ -1,0 +1,383 @@
+[
+  {
+    "speciesId": 2354671,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Flocons de qualité",
+          "frequency": "quotidienne",
+          "notes": "Aliment séché de base, distribuer 1-2 fois par jour en petites portions"
+        },
+        {
+          "name": "Artemia vivante ou congelée",
+          "frequency": "hebdomadaire",
+          "notes": "Source de protéines, 2-3 fois par semaine"
+        },
+        {
+          "name": "Daphnia",
+          "frequency": "hebdomadaire",
+          "notes": "Enrichissement naturel du régime"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Nourriture trop volumineuse",
+          "reason": "Poisson de petite taille, risque d'étranglement"
+        },
+        {
+          "name": "Aliments de mauvaise qualité",
+          "reason": "Provoque des troubles digestifs et dégradation de la qualité de l'eau"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Bien nourri pour réduire le comportement de morsure des nageoires. Excellente acceptation des aliments secs et congelés.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/hyphessobrycon-anisitsi",
+          "title": "Seriously Fish: Buenos Aires Tetra Care Guide"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "minSpaceSize": "80L minimum pour un groupe de 8-10 individus",
+      "tempMin": 16,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "lightNeeds": "Lumière naturelle modérée, 8-10 heures par jour. Éviter une exposition directe prolongée au soleil.",
+      "activityEnrichment": "Espace de nage important, cachettes sous forme de plantes, bois flotté. Stimulation par la présence d'autres poissons dans un groupe stable.",
+      "hygieneNotes": "Changement d'eau de 25-30% hebdomadaire. Maintenir une température stable et éviter de rester longtemps vers le haut de la plage tolérée (16-28°C).",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/hyphessobrycon-anisitsi",
+          "title": "Seriously Fish: Buenos Aires Tetra Habitat Requirements"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson grégaire actif et rapide. Peut mordiller les nageoires des autres poissons, surtout si le groupe est trop petit ou l'espace limité (minimum 8-10 individus conseillé).",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Adapté, observation amusante pour les enfants du comportement en groupe.",
+      "compatibilityWithOtherAnimals": "Déconseillé avec les poissons à nageoires longues (risque de morsures). Acceptable avec d'autres poissons robustes de taille comparable, en groupe suffisant.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/hyphessobrycon-anisitsi",
+          "title": "Seriously Fish: Buenos Aires Tetra Behavior"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Pourriture des nageoires (Fin Rot)",
+          "symptoms": "Nageoires effilochées, bords noircis ou blancs, perte progressive des nageoires",
+          "prevention": "Qualité d'eau excellente, absence de stress, bonne alimentation, pas de blessures",
+          "whenToConsult": "Dès les premiers signes de nageoires endommagées; traitement par changements d'eau et amélioration des conditions"
+        },
+        {
+          "name": "Ichthyophthirius multifiliis (Ich - Maladie des points blancs)",
+          "symptoms": "Petits points blancs sur le corps et les nageoires, comportement d'irritation (frottement contre décors)",
+          "prevention": "Quarantaine des nouveaux poissons, stabilité thermique (pas de variations brusques)",
+          "whenToConsult": "Immédiatement; traitement antiparasitaire adapté, en respectant la plage de température tolérée par l'espèce (16-28°C)"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://en.wikipedia.org/wiki/List_of_aquarium_diseases",
+          "title": "Wikipedia: Aquarium Diseases"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.aquariadise.com/fish-diseases/",
+          "title": "Aquariadise: Fish Diseases Guide"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année en aquarium",
+      "gestationDays": null,
+      "incubationDays": 1,
+      "litterSizeMin": null,
+      "litterSizeMax": 2000,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Pondeurs sans soins parentaux (dispersion des œufs). Une femelle bien conditionnée peut pondre jusqu'à 2000 œufs. Éclosion en 24-36 heures. Reproduction possible en aquarium si l'eau est de bonne qualité.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/hyphessobrycon-anisitsi",
+          "title": "Seriously Fish: Buenos Aires Tetra Reproduction"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2356255,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Flocons de qualité supérieure",
+          "frequency": "quotidienne",
+          "notes": "Alimentation principale, distribuer 1-2 fois par jour"
+        },
+        {
+          "name": "Artemia vivante ou congelée",
+          "frequency": "hebdomadaire",
+          "notes": "Aliment protéiné, 2-3 fois par semaine pour optimiser la coloration"
+        },
+        {
+          "name": "Larves de moustique congelées",
+          "frequency": "hebdomadaire",
+          "notes": "Source de protéines, aliment frais/congelé"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments grandes tailles",
+          "reason": "Poisson de taille moyenne, risque d'étouffement"
+        },
+        {
+          "name": "Nourriture bas de gamme",
+          "reason": "Diminue la coloration et affecte la santé"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Les aliments vivants et congelés devraient représenter une part importante du régime pour une coloration optimale (seriouslyfish).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/phenacogrammus-interruptus",
+          "title": "Seriously Fish: Congo Tetra Care"
+        },
+        {
+          "type": "guide",
+          "url": "https://fishprofiles.com/profiles/freshwater/Characins/Phenacogrammus_interruptus",
+          "title": "Fish Profiles: Congo Tetra Feeding"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "minSpaceSize": "Environ 110 L minimum (base 120 × 30 cm) pour des adultes, en groupe",
+      "tempMin": 23,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "lightNeeds": "Aquarium bien planté avec espace de nage important. Lumière naturelle diffuse 8-10 heures/jour. Utiliser bois flotté et végétation flottante pour réduire l'éclairage direct.",
+      "activityEnrichment": "Espace de nage crucial pour ce poisson actif. Présence de plantes aquatiques denses, bois flotté, abris. Groupe stable de 6+ individus.",
+      "hygieneNotes": "Changement d'eau 25-30% hebdomadaire. Maintenance régulière des plantes. pH stable 6.0-7.5, dureté modérée (3-18 dGH).",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/phenacogrammus-interruptus",
+          "title": "Seriously Fish: Congo Tetra Habitat"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson pacifique mais actif, qui peut effrayer les espèces timides. Mâles adultes colorés aux nageoires allongées. Facile à effrayer s'il n'est pas maintenu en groupe. Comportement grégaire.",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Oui, spectaculaire avec ses nageoires étendues et sa nage gracieuse.",
+      "compatibilityWithOtherAnimals": "Compatible avec d'autres poissons pacifiques de taille similaire. Peut effrayer les espèces timides ; déconseillé avec espèces agressives ou mordeuses de nageoires.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/phenacogrammus-interruptus",
+          "title": "Seriously Fish: Congo Tetra Behavior"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection bactérienne (Aeromonas, Vibrio)",
+          "symptoms": "Plaques rouges ou noires sur le corps, gonflements, nage anormale, apathie",
+          "prevention": "Qualité d'eau optimale, pas de surpopulation, alimentation de qualité, pas de blessures",
+          "whenToConsult": "Immédiatement; traitement par amélioration des conditions d'eau et antibiotiques si grave"
+        },
+        {
+          "name": "Ichthyophthirius (Ich)",
+          "symptoms": "Petits points blancs sur le corps, comportement de frottement, respiration rapide",
+          "prevention": "Quarantaine des nouveaux poissons, stabilité thermique, eau propre",
+          "whenToConsult": "Dès l'apparition des points; traitement antiparasitaire adapté, élévation de température progressive sans dépasser 28°C"
+        },
+        {
+          "name": "Infection parasitaire (vers intestinaux)",
+          "symptoms": "Maigreur progressive, perte d'appétit, ventre creux, nage erratique",
+          "prevention": "Nourriture variée et fraîche, quarantaine, hygiène stricte, pas d'aliments contaminés",
+          "whenToConsult": "Dès les signes de maigreur ou d'appétit réduit; traitement antiparasitaire recommandé"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.aquariadise.com/fish-diseases/",
+          "title": "Aquariadise: Guide des Maladies des Poissons"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année en aquarium",
+      "gestationDays": null,
+      "incubationDays": 6,
+      "litterSizeMin": 100,
+      "litterSizeMax": 300,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction non facile mais possible en aquarium. Une femelle peut pondre jusqu'à 300 gros œufs sur plusieurs jours (100-200 plus courant). Éclosion en environ 6 jours. Nécessite conditionnement et paramètres d'eau spécifiques.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/phenacogrammus-interruptus",
+          "title": "Seriously Fish: Congo Tetra Breeding"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2364223,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Flocons de qualité",
+          "frequency": "quotidienne",
+          "notes": "Aliment de base, 1-2 distributions quotidiennes"
+        },
+        {
+          "name": "Légumes blanchis (petits pois, courgette)",
+          "frequency": "hebdomadaire",
+          "notes": "Apport végétal, 1-2 fois par semaine"
+        },
+        {
+          "name": "Artemia et Daphnia congelées",
+          "frequency": "hebdomadaire",
+          "notes": "Protéines animales, 2-3 fois par semaine"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments trop gras",
+          "reason": "Provoque obésité et dégradation de santé"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Omnivore : algues vertes, détritus, diatomées, diptères et matières animales dans la nature. Variété d'aliments secs, frais et congelés pour éviter les carences.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/puntius-titteya",
+          "title": "Fishipédia: Barbu Cerise - Alimentation"
+        },
+        {
+          "type": "guide",
+          "url": "https://aquahoy.com/cherry-barb-puntius-titteya-care-breeding-varieties-compatibility/",
+          "title": "AquaHoy: Cherry Barb Care and Breeding"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "minSpaceSize": "80L minimum pour un groupe de 5-6 individus",
+      "tempMin": 22,
+      "tempMax": 27,
+      "humidityMin": null,
+      "humidityMax": null,
+      "lightNeeds": "Éclairage modéré, environ 8 heures par jour. Aquarium densément planté avec espace de nage libre.",
+      "activityEnrichment": "Aquarium densément planté avec espace de nage libre, bois flotté, abris. Groupe stable d'au moins 5-6 individus.",
+      "hygieneNotes": "Changement d'eau 25-30% hebdomadaire. pH 6,8-7,2 et dureté 6-10 GH (fishipedia). Nettoyage régulier du filtre.",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/puntius-titteya",
+          "title": "Fishipédia: Barbu Cerise - Habitat"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petit poisson pacifique et grégaire, diurne, vivant en petits groupes. Actif mais parfois timide. Rivalité légère possible entre mâles, plus marquée en période de reproduction.",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Excellente, petit poisson coloré et actif, facile à observer en groupe.",
+      "compatibilityWithOtherAnimals": "Très bon avec autres petits poissons pacifiques. A maintenir en groupe de même espèce (minimum 5-6) pour bien-être optimal.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/puntius-titteya",
+          "title": "Fishipédia: Barbu Cerise - Comportement"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Pourriture des nageoires",
+          "symptoms": "Nageoires effilochées, bords blancs ou noircis, dégradation progressive",
+          "prevention": "Eau de qualité excellente, groupe stable sans stress, alimentation variée et abondante",
+          "whenToConsult": "Dès les premiers signes; améliorer qualité d'eau et conditions de vie"
+        },
+        {
+          "name": "Ichthyophthirius multifiliis (Ich)",
+          "symptoms": "Petits points blancs sur corps et nageoires, comportement d'irritation, frottement",
+          "prevention": "Quarantaine des nouveaux poissons, stabilité thermique, absence de stress",
+          "whenToConsult": "Immédiatement; traitement antiparasitaire adapté, hausse de température progressive selon les recommandations du traitement"
+        },
+        {
+          "name": "Infection bactérienne légère",
+          "symptoms": "Légère rougeur des branchies, perte d'appétit, nage anormale, muqueuse terne",
+          "prevention": "Qualité d'eau optimale, absence de surpopulation, alimentation de qualité",
+          "whenToConsult": "Consultation rapide; améliorer les conditions d'eau habituellement suffisant"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.allpondsolutions.co.uk/fishkeeping-advice/fish-diseases-their-symptoms-how-to-treat-them.html",
+          "title": "All Pond Solutions: Fish Diseases"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.aquariadise.com/fish-diseases/",
+          "title": "Aquariadise: Guide des Maladies Poissons"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année en aquarium",
+      "gestationDays": null,
+      "incubationDays": 2,
+      "litterSizeMin": 200,
+      "litterSizeMax": 300,
+      "sexualMaturityMonths": 6,
+      "breedingDifficulty": "modere",
+      "notes": "Ovipare : la femelle dépose 200 à 300 œufs sur la végétation. Éclosion en 24-48 heures, alevins nageant librement quelques jours plus tard. Maturité vers 6 mois.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/puntius-titteya",
+          "title": "Fishipédia: Barbu Cerise - Reproduction"
+        },
+        {
+          "type": "guide",
+          "url": "https://aquahoy.com/cherry-barb-puntius-titteya-care-breeding-varieties-compatibility/",
+          "title": "AquaHoy: Cherry Barb Breeding"
+        }
+      ]
+    }
+  }
+]

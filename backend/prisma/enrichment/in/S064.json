@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104101859,
+  "commonNameFr": "Python molure",
+  "scientificName": "Python bivittatus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104104828,
+  "commonNameFr": "Tortue radiée",
+  "scientificName": "Astrochelys radiata",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104105088,
+  "commonNameFr": "Tortue étoilée",
+  "scientificName": "Geochelone elegans",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

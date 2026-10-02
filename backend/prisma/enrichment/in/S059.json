@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104052822,
+  "commonNameFr": "Écureuil gris",
+  "scientificName": "Sciurus carolinensis",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104060633,
+  "commonNameFr": "Coati",
+  "scientificName": "Nasua nasua",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104060805,
+  "commonNameFr": "Fossa",
+  "scientificName": "Cryptoprocta ferox",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

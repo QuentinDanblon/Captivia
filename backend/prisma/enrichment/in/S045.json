@@ -1,0 +1,37 @@
+[
+ {
+  "speciesId": 5300178,
+  "commonNameFr": "Molly noire",
+  "scientificName": "Poecilia sphenops",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5301234,
+  "commonNameFr": "Tarentule du Curacao",
+  "scientificName": "Brachypelma albopilosum",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5301256,
+  "commonNameFr": "Poisson-Clown Orange",
+  "scientificName": "Amphiprion ocellaris",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ }
+]

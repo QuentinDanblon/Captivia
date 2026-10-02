@@ -1,0 +1,41 @@
+[
+  {
+    "speciesId": 5281802,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.gestationDays: 63 → 65 (en.wikipedia Cat : 64-67 jours, moyenne 65)",
+      "reproduction.sexualMaturityMonths: 9 → 7 (en.wikipedia Cat/Kitten : 5-10 mois, environ 7 mois)",
+      "reproduction.notes: sevrage « 4-5 semaines / 3-4 semaines » corrigé en 6-8 semaines (en.wikipedia Kitten/Cat) ; gestation 63-65 → 64-67 jours",
+      "source: https://en.wikipedia.org/wiki/Domestic_cat remplacée par https://en.wikipedia.org/wiki/Cat, ajout fr.wikipedia Chat"
+    ],
+    "removed": [],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 5282447,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.notes: retrait de « indépendance à 3 mois » (non confirmé) ; sevrage 3-6 semaines conservé (en.wikipedia Ferret)"
+    ],
+    "removed": ["reproduction.season (« printemps » : la source précise explicitement ne pas indiquer de saison)"],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 5282475,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "sources health/reproduction: https://en.wikipedia.org/wiki/Mink (page générique) → https://en.wikipedia.org/wiki/American_mink",
+      "reproduction.season: « printemps » → février à avril (mise bas avril-juin) (en.wikipedia American_mink)",
+      "reproduction.notes: gestation 40-75 jours dont 30-32 j de développement embryonnaire (et non « effective 39 jours / jusqu'à 76 »)",
+      "health.SARS-CoV-2: prévention reformulée (retrait de « pas de contact avec fermes contaminées »)",
+      "health.Parasitose externe: précisée puces/tiques (citées par la source)"
+    ],
+    "removed": [
+      "health: Influenza aviaire (H5N1) (non confirmé par la source, prévention incohérente « isolement des volailles »)",
+      "reproduction.gestationDays (50, non confirmé ; la source donne 40-75 j avec implantation retardée) → null, plage en notes",
+      "reproduction.litterSizeMin/Max (6-10, contredit par la source : moyenne 4 petits, 11-16 exceptionnels) → null, valeurs en notes",
+      "reproduction.notes: « longévité en captivité ~10 ans » et « une seule portée par an » (non confirmés)"
+    ],
+    "confidence": "medium"
+  }
+]

@@ -1,0 +1,73 @@
+[
+  {
+    "speciesId": 2354671,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: 'favorise les couleurs' (Daphnia) retiré, non confirmé",
+      "habitat.hygieneNotes: '20-26°C' remplacé par rappel de la plage 16-28°C et mise en garde haut de plage (seriouslyfish)",
+      "behavior.sociability: semi-grégaire -> grégaire (Wikipedia: social schoolers)",
+      "health.Ich: 'élévation à 28-30°C' retiré (dépasse le maximum 28°C de l'espèce)",
+      "reproduction: litterSizeMin 100 -> null, sexualMaturityMonths 6 -> null (non confirmés); incubationDays 1 et litterSizeMax 2000 confirmés (seriouslyfish)"
+    ],
+    "removed": [
+      "source https://allfish2u.au/buenos-aires-tetra-3cm/ (404)",
+      "behavior: 'hiérarchie sociale marquée entre mâles' (non confirmé)",
+      "health: maladie du Néon (symptômes 'bande bleue' propres au néon, non applicables à cette espèce, non confirmé)",
+      "legislation (seule source youschool.fr: site de formation, non officiel, ne mentionne pas l'espèce; statut non confirmé)"
+    ],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 2356255,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: 'renforce les couleurs des mâles' retiré; specificNeeds reformulé selon seriouslyfish",
+      "habitat.minSpaceSize: 120L / groupe 6+ -> ~108-110 L (base 120×30 cm), taille de groupe non confirmée (seriouslyfish)",
+      "health.Ich: '28-30°C' -> ne pas dépasser 28°C (max de l'espèce selon seriouslyfish)",
+      "reproduction: litterSizeMin 50 -> 100 (100-200 courant, max 300, seriouslyfish); sexualMaturityMonths 8 -> null (Wikipedia 9-12 mois avec avertissement de fiabilité); 'eau très douce' retiré"
+    ],
+    "removed": [
+      "source https://petfishonline.com/neon-tetra-fin-rot/ (page sur le néon, pas le Congo)",
+      "legislation (source youschool.fr non officielle, n'évoque pas l'espèce)"
+    ],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 2364223,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: légumes -> petits pois/courgette blanchis (aquahoy); 'pour la couleur' retiré; specificNeeds corrigé (omnivore, pas herbivore)",
+      "habitat.hygieneNotes: 'pH légèrement acide (6.8-7.2), eau douce' -> pH 6,8-7,2, 6-10 GH (fishipedia); claims de coloration/substrat sombre retirés",
+      "behavior.generalBehavior: 'coloration rouge en rivalité' et 'hiérarchie' retirés (non confirmés); rivalité mâles nuancée (Wikipedia, aquahoy)",
+      "health.Ich: température précise '28-30°C' retirée (au-dessus de la plage de l'espèce 22-27°C)",
+      "reproduction.incubationDays: 5 -> 2 (36-48 h, fishipedia; 1-2 jours Wikipedia)",
+      "reproduction.litterSize: 20-200 -> 200-300 (fishipedia, Wikipedia, aquahoy); notes 'soins parentaux/accouplement par paires' retirées; sexualMaturityMonths 6 confirmé"
+    ],
+    "removed": [
+      "feeding.foodsToAvoid: 'Plantes aquatiques tendres - espèce herbivore' (contredit: omnivore selon fishipedia)",
+      "legislation (source youschool.fr non officielle, n'évoque pas l'espèce)"
+    ],
+    "confidence": "high"
+  }
+]

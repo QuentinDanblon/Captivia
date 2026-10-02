@@ -21,14 +21,22 @@ describe('Seed complet (comptages minimaux)', () => {
     expect(count).toBeGreaterThanOrEqual(296);
   });
 
-  it('contient les 1 379 races de breeds-data.json', async () => {
+  it('contient les races de breeds-data.json, hors entrées non animales exclues', async () => {
     expect(breeds.length).toBeGreaterThanOrEqual(1379);
+    const excluded: number[] = (
+      JSON.parse(
+        fs.readFileSync(path.resolve(__dirname, '..', 'prisma', 'enrichment', 'excluded-breed-ids.json'), 'utf-8'),
+      ) as { ids: number[] }
+    ).ids;
+    const kept = breeds.filter((b) => !excluded.includes(b.speciesId));
     const found = await prisma.speciesProfile.count({
-      where: { speciesId: { in: breeds.map((b) => b.speciesId) } },
+      where: { speciesId: { in: kept.map((b) => b.speciesId) } },
     });
-    expect(found).toBeGreaterThanOrEqual(1379);
+    expect(found).toBe(kept.length);
+    // Aucune entrée non animale (outils, objets, Q-ids Wikidata) en base.
+    expect(await prisma.speciesProfile.count({ where: { speciesId: { in: excluded } } })).toBe(0);
     const races = await prisma.speciesProfile.count({ where: { speciesId: { gte: 2_000_000_001 } } });
-    expect(races).toBeGreaterThanOrEqual(1296);
+    expect(races).toBeGreaterThanOrEqual(1211);
   });
 
   it('a un contenu satellite pour chaque race (alimentation, habitat, comportement, santé, législation, reproduction)', async () => {
@@ -42,7 +50,7 @@ describe('Seed complet (comptages minimaux)', () => {
       prisma.speciesReproduction.count({ where }),
     ]);
     for (const n of [feeding, habitat, behavior, health, legislation, reproduction]) {
-      expect(n).toBeGreaterThanOrEqual(1296);
+      expect(n).toBeGreaterThanOrEqual(1211);
     }
   });
 

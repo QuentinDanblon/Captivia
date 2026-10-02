@@ -1,0 +1,78 @@
+[
+  {
+    "speciesId": 2000000221,
+    "description": "Serpent constricteur nord-américain de grande taille pouvant atteindre 180-200 cm à l'âge adulte. Excellente grimpeuse, cette espèce préfère les zones boisées et se nourrit de rongeurs, d'oiseaux et de petits serpents. Lorsqu'elle est menacée, elle vibre sa queue en imitation du serpent à sonnette.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Elaphe_obsoleta"
+  },
+  {
+    "speciesId": 2000000222,
+    "description": "Tortue terrestre méditerranéenne originaire d'Espagne, France et Italie, mesurant 18 à 28 cm selon la sous-espèce. Sa carapace jaune est ornée de taches noires distinctives. Elle habite les garrigues et zones rocheuses, protégée par la loi en France en raison de son statut vulnérable.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Testudo_hermanni"
+  },
+  {
+    "speciesId": 2000000223,
+    "description": "Tortue aquatique américaine originaire de l'est des États-Unis et du nord-ouest du Mexique. Elle se distingue par des bandes colorées jaunes ou rouges sur les tempes selon la sous-espèce. Devenue invasive en Europe, elle figure depuis 2016 sur la liste des espèces exotiques envahissantes de l'UE.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Trachemys_scripta"
+  },
+  {
+    "speciesId": 2000000224,
+    "description": "L'une des tortues les plus répandues d'Amérique du Nord, mesurant 10-25 cm. Sa carapace lisse vert olive à noire est ornée de rayures rouges et jaunes distinctives sur la tête, les pattes et la queue. Elle vit dans les eaux stagnantes peu profondes comme les marais, étangs et lacs.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chrysemys_picta"
+  },
+  {
+    "speciesId": 2000000225,
+    "description": "Tortue terrestre nord-américaine présentant des colorations aux motifs très variables. Remarquable pour sa capacité à vivre jusqu'à 138 ans sans déclin reproductif notable. Elle habite des zones terrestres variées, préférant les milieux humides et forestiers.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Terrapene_carolina"
+  }
+  ,
+  {
+    "speciesId": 2000000226,
+    "description": "Varan africain originaire d'Afrique de l'Ouest et centrale, mesurant 80-110 cm. Sa peau marron ou grise présente des taches blanches distinctives. Il habite les régions semi-arides et se nourrit principalement d'insectes, de petits rongeurs et d'œufs.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Varanus_exanthematicus"
+  },
+  {
+    "speciesId": 2000000227,
+    "description": "Crotale diamantin du sud-ouest américain et du nord du Mexique, mesurant généralement 120-150 cm, parfois plus de 2 mètres. Se distingue par ses taches foncées de forme rectangulaire à hexagonale et des bandes noires sur la queue. Son venin hémotoxique cause douleurs et hémorragies; il en injecte 250-350 mg par morsure.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Crotalus_atrox"
+  },
+  {
+    "speciesId": 2000000228,
+    "description": "Serpent venimeux africain d'Afrique de l'Ouest, centrale et australe, mesurant généralement 2-3 mètres, avec des spécimens atteignant 4,5 mètres. Présente une coloration jaune-vert à gris métallique, caractérisée par le noir distinctif de l'intérieur de sa bouche. Habite les zones boisées et rocheuses où il chasse activement le jour.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Dendroaspis_polylepis"
+  },
+  {
+    "speciesId": 2000000229,
+    "description": "Plus grand serpent venimeux du monde, originaire d'Asie du Sud et du Sud-Est, habitant les forêts tropicales humides. Mesure 3-4 mètres généralement, avec des individus exceptionnels atteignant 5,5 mètres. Se distingue par son capuchon caractéristique et son régime unique : il se nourrit principalement d'autres serpents.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Ophiophagus_hannah"
+  },
+  {
+    "speciesId": 2000000230,
+    "description": "Serpent venimeux eurasien mesurant en moyenne 55 cm, jusqu'à 104 cm en Scandinavie. Affectionne les végétations basses complexes et vit dans les landes et tourbières. Son aire de répartition s'étend du Royaume-Uni à l'île de Sakhaline, en faisant le seul serpent venimeux du nord de l'Europe.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Vipera_berus"
+  },
+  {
+    "speciesId": 2000000231,
+    "description": "Le plus gros serpent du monde, originaire du bassin amazonien d'Amérique du Sud. Peut atteindre 8,45 m et peser 200 kg. Ce constricteur aquatique possède des yeux et narines dorsaux lui permettant de chasser dans les cours d'eau des marécages, savanes inondées et bassins fluviaux.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Eunectes_murinus"
+  },
+  {
+    "speciesId": 2000000232,
+    "description": "Salamandre aquatique mexicaine endémique des environs de Xochimilco, mesurant généralement 25 cm. Se distingue par sa capacité à conserver des caractères juvéniles à l'âge adulte via la néoténie. Prospère dans les eaux froides 14-20°C et possède une exceptionnelle faculté de régénération des organes endommagés.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Ambystoma_mexicanum"
+  },
+  {
+    "speciesId": 2000000233,
+    "description": "Grenouille amphibienne africaine originaire d'Afrique australe, mesurant 57-188 mm selon le sexe. Aquatique, elle se caractérise par ses doigts munis de griffes distinctives. Aujourd'hui invasive mondialement, elle pose des risques écologiques majeurs en tant que vecteur de maladies fongiques affectant les amphibiens.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Xenopus_laevis"
+  },
+  {
+    "speciesId": 2000000234,
+    "description": "Petit amphibien européen mesurant environ 5 cm, aux couleurs vertes souvent très vives. Se distingue par sa peau lisse et une bande brune de l'œil aux flancs. Elle habite les forêts de feuillus, parcs, vergers et zones marécageuses, se nourrissant principalement d'insectes volants.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Hyla_arborea"
+  },
+  {
+    "speciesId": 2000000235,
+    "description": "Grenouille arboricole australienne mesurant environ 10 cm. Sa couleur varie du brun au vert selon la température et l'environnement. Espèce paisible vivant dans la canopée des arbres près de sources d'eau, elle s'adapte bien aux habitations humaines où on la trouve souvent sur les rebords de fenêtres.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Litoria_caerulea"
+  }
+]

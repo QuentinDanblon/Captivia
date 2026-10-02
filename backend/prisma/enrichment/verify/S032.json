@@ -1,0 +1,56 @@
+[
+  {
+    "speciesId": 5217160,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: « Petits rongeurs » retiré des aliments à éviter (en.wikipedia : consomme de petites souris)",
+      "reproduction.sexualMaturityMonths: 24 → 36 (en/fr.wikipedia : 3 à 7 ans)",
+      "reproduction.notes: éclosion ~10 j (en), 2-3 semaines selon température (fr) ; métamorphose ~12 semaines ; cordons 1500-6000 œufs (en ; fr indique 5000-7000)",
+      "legislation: euAnnex B retiré ; protection légale confirmée par fr.wikipedia Crapaud_commun (protégé en France, Convention de Berne annexe III, non CITES) ; status permit_required conservé (minimum pour espèce protégée, interdiction explicite non confirmée)",
+      "source en.wikipedia European_toad → Common_toad",
+      "behavior: « risque de cannibalisme » remplacé par mise en garde sur proies avalées (sourcé)"
+    ],
+    "removed": [
+      "health (source VCA = page d'accueil ; aucune source valide)",
+      "legislation.permits « Arrêté du 21 novembre 1997 », euAnnex B (non confirmés) ; source INPN (page d'accueil)",
+      "habitat.tempMin/tempMax, humidityMin/humidityMax, minSpaceSize (non confirmables)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5217264,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "sources: Wamiz (page d'accueil) remplacée par en.wikipedia Rhacophorus_maximus (redirige vers Zhangixalus smaragdinus, même taxon)",
+      "behavior: reformulé selon la source (arboricole, canopée hors reproduction) ; « nocturne » retiré (non confirmé)",
+      "reproduction: ne garde que les nids de mousse au-dessus des mares/étangs (confirmé)",
+      "feeding/habitat: typos corrigées (« pequenos scarabés », « déchllorée »), fréquences et dosages généralisés"
+    ],
+    "removed": [
+      "health (source VCA = page d'accueil)",
+      "legislation (« allowed » non confirmé ; page sans info CITES ; INPN = page d'accueil)",
+      "habitat.tempMin/tempMax, humidityMin/humidityMax (80-95 %), minSpaceSize",
+      "behavior.sociability, compatibilityWithOtherAnimals",
+      "reproduction.season « mousson », incubationDays 21, litter 50-100, maturité 18 mois (non confirmés)"
+    ],
+    "confidence": "low"
+  },
+  {
+    "speciesId": 5218022,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: aliments alignés sur la source (fourmis, acariens ; drosophiles/grillons en captivité) ; « nourriture pour insectes / source incorrecte de toxines » retiré ; risque « alcaloïdes » des insectes sauvages → pesticides/parasites",
+      "behavior: « terrestre, grégaire, diurne » → semi-arboricole, territorial, mâles chanteurs, regroupements avant accouplement ; sociability grégaire → semi-grégaire",
+      "behavior.compatibilityWithChildren: « toxine même captive élevée » contredit (les individus nourris de grillons/drosophiles sont non toxiques)",
+      "reproduction: incubationDays 15 → 14 ; litter 3-6 → ~12 œufs (fr.wikipedia) ; maturité 8 → 12 mois (fr : 12-15 mois) ; « rôle inverse des sexes / femelle domine » retiré ; soins parentaux : parents, en général les mâles (en)",
+      "sources: page générique « Poison_dart_frog » remplacée par en.wikipedia Green_and_black_poison_dart_frog et fr.wikipedia Dendrobates_auratus"
+    ],
+    "removed": [
+      "health (source VCA = page d'accueil)",
+      "legislation (CITES II confirmé par les deux pages Wikipédia, mais statut français « permit_required » et euAnnex B / arrêté 21/11/1997 non confirmés → section retirée)",
+      "habitat.tempMin/tempMax, humidité 80-100 %, minSpaceSize 45x45x45",
+      "reproduction.season « toute l'année » (non confirmé)"
+    ],
+    "confidence": "medium"
+  }
+]

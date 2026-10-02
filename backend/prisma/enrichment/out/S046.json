@@ -1,0 +1,120 @@
+[
+  {
+    "speciesId": 5345021,
+    "health": {
+      "diseases": [
+        {
+          "name": "Carence en vitamine A",
+          "symptoms": "Gonflement des yeux, cécité progressives, infections respiratoires",
+          "prevention": "Alimentation variée avec fruits et légumes riches en caroténoïdes (carottes, épinards)",
+          "whenToConsult": "Au premier signe de gonflement oculaire ou de problème respiratoire"
+        },
+        {
+          "name": "Psittacose (Chlamydophila psittaci)",
+          "symptoms": "Apathie, plumage ébouriffé, diarrhée, conjonctivite",
+          "prevention": "Quarantaine des nouveaux oiseaux, hygiène stricte, alimentation adéquate pour renforcer immunité",
+          "whenToConsult": "Dès signes d'apathie ou de maladie respiratoire (zoonose, risque humain)"
+        },
+        {
+          "name": "Aspergillose",
+          "symptoms": "Difficultés respiratoires, sons respiratoires anormaux, perte d'appétit",
+          "prevention": "Éviter humidité excessive, maintenir bonne aération, éviter litières moisies",
+          "whenToConsult": "Immédiatement si respiration sifflante ou bruits respiratoires anormaux"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Agapornis_roseicollis",
+          "title": "Agapornis roseicollis - Wikipédia FR"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "février à octobre",
+      "gestationDays": null,
+      "incubationDays": 23,
+      "litterSizeMin": 4,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": 10,
+      "breedingDifficulty": "facile",
+      "notes": "Femelle pond 4 à 6 œufs espacés de 2 jours. Incubation 22-23 jours. Les jeunes s'envolent à 45 jours et deviennent indépendants vers 2 mois. Maturité sexuelle 9-11 mois femelle, 11-13 mois mâle. Couples restent fortement liés.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Agapornis_roseicollis",
+          "title": "Agapornis roseicollis - Wikipédia FR"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5345889,
+    "reproduction": {
+      "season": "mars à avril",
+      "gestationDays": null,
+      "incubationDays": 31,
+      "litterSizeMin": 2,
+      "litterSizeMax": 3,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Saison de reproduction mars-avril. Femelle pond 2-3 œufs fin avril à fin mai. Œufs blancs, environ 38x31 mm. Incubation 29-33 jours. Poussins très petits (3-4 cm à l'éclosion). Fledging environ 147 jours post-éclosion. Succès de reproduction 65-70%. Couples monogames et s'unissent pour la vie. Mâle nourrit femelle qui nourrit jeunes.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Psittacus_erithacus",
+          "title": "Psittacus erithacus - Wikipédia FR"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5347189,
+    "health": {
+      "diseases": [
+        {
+          "name": "Carence nutritionnelle (régime graines uniquement)",
+          "symptoms": "Obésité, dyslipidémie hépatique, pellicules, faiblesse musculaire",
+          "prevention": "Granulés de qualité + fruits/légumes frais quotidiens, semences limitées à gâterie occasionnelle",
+          "whenToConsult": "Si obésité progressive ou signes de fatigue malgré alimentation abondante"
+        },
+        {
+          "name": "Problèmes comportementaux (captivité insuffisante)",
+          "symptoms": "Arrachage de plumes, agressivité, dépression, cris excessifs",
+          "prevention": "Interaction quotidienne régulière, jouets variés, enrichissement environnemental régulier",
+          "whenToConsult": "Dès premiers signes d'arrachage ou comportement anormal"
+        },
+        {
+          "name": "Aspergillose et infections respiratoires",
+          "symptoms": "Respiration difficile, sons respiratoires anormaux, apathie",
+          "prevention": "Environnement sec, ventilation adéquate, hygiène de la cage, alimentation renforçant l'immunité",
+          "whenToConsult": "Immédiatement en cas de difficultés respiratoires"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Nymphicus_hollandicus",
+          "title": "Nymphicus hollandicus - Wikipédia FR"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "déclenchée par la pluie à l'état sauvage",
+      "gestationDays": null,
+      "incubationDays": 20,
+      "litterSizeMin": 2,
+      "litterSizeMax": 7,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "2 à 7 œufs, éclosion après 18-22 jours (variable selon température). Mâle incube le jour, femelle la nuit. Les parents continuent à nourrir les jeunes pendant environ un mois après l'envol.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Nymphicus_hollandicus",
+          "title": "Nymphicus hollandicus - Wikipédia FR"
+        }
+      ]
+    }
+  }
+]

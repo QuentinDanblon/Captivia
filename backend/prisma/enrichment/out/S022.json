@@ -1,0 +1,177 @@
+[
+  {
+    "speciesId": 2470656,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Poissons", "frequency": "quotidienne", "notes": "Proies aquatiques principales" },
+        { "name": "Crustacés", "frequency": "hebdomadaire", "notes": "Complément protéiné" },
+        { "name": "Mollusques", "frequency": "hebdomadaire", "notes": "Escargots, moules" },
+        { "name": "Rongeurs", "frequency": "hebdomadaire", "notes": "Adultes cibles mammifères" },
+        { "name": "Insectes", "frequency": "quotidienne", "notes": "Jeunes consomment insectes surtout" },
+        { "name": "Oiseaux et œufs", "frequency": "hebdomadaire", "notes": "Adultes opportunistes" }
+      ],
+      "foodsToAvoid": [
+        { "reason": "Carnivore strict opportuniste - éviter aliments toxiques pour reptiles" }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Régime carnivore très varié, adaptatif au contexte. Les jeunes consomment plutôt insectes, larves, poissons et petites proies ; les adultes ciblent des proies plus lentes (gastéropodes, escargots). Très opportuniste.",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Varan_du_Nil", "title": "Varan du Nil - Wikipedia FR" }]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Jeunes : espace vertical ; adultes (160-180 cm) : enclos horizontal très vaste ou enclos extérieur. Un espace insuffisant provoque des problèmes musculaires et osseux",
+      "lightNeeds": "Exposition solaire longue, UVB fort, lumière naturelle 12-14h/jour",
+      "activityEnrichment": "Accès constant à l'eau pour nager (au minimum un bac de trempage, idéalement un bassin), zones terrestres, cachettes, branches pour grimper (jeunes)",
+      "hygieneNotes": "Espèce semi-aquatique qui défèque dans l'eau : changement d'eau quotidien nécessaire",
+      "costEstimate": "élevé",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Varan_du_Nil", "title": "Varan du Nil habitat - Wikipedia FR" }]
+    },
+    "behavior": {
+      "generalBehavior": "Varan semi-aquatique, très bon nageur (un adulte peut rester plus d'une demi-heure sous l'eau). Tempérament défensif : mâchoires puissantes, griffes acérées, coups de queue précis. Défend son territoire. Nécessite beaucoup d'espace.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Fortement déconseillé; espèce agressive, morsure puissante, griffes acérées",
+      "compatibilityWithOtherAnimals": "Isolation totale obligatoire; prédateur opportuniste mangeant petits vertébrés",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Nile_monitor", "title": "Nile Monitor behavior - Wikipedia EN" }]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": { "citesAppendix": "II", "euAnnex": null, "permits": ["Documents CITES requis pour le commerce international (Annexe II)"], "restrictions": ["Espèce inscrite à l'Annexe II de la CITES"] },
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Nile_monitor", "title": "Nile Monitor - Wikipedia EN" }]
+    },
+    "reproduction": {
+      "season": "variable selon climat",
+      "gestationDays": null,
+      "incubationDays": 155,
+      "litterSizeMin": null,
+      "litterSizeMax": 60,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Femelles pondent jusqu'à 60 œufs par ponte, de préférence dans des termitières, environ 1 mois après l'accouplement (en captivité). Incubation 140-165 jours à 29-30°C. Reproduction difficile en captivité.",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Varan_du_Nil", "title": "Varan du Nil reproduction - Wikipedia FR" }]
+    }
+  },
+  {
+    "speciesId": 2470685,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Poissons", "frequency": "quotidienne", "notes": "Principale source alimentaire naturelle" },
+        { "name": "Grenouilles", "frequency": "hebdomadaire", "notes": "Proies aquatiques importantes" },
+        { "name": "Crustacés", "frequency": "hebdomadaire", "notes": "Crabes, écrevisses" },
+        { "name": "Mollusques", "frequency": "hebdomadaire", "notes": "Proies naturelles variées" },
+        { "name": "Rongeurs", "frequency": "hebdomadaire", "notes": "Adultes consomment mammifères" },
+        { "name": "Oiseaux", "frequency": "hebdomadaire", "notes": "Oiseaux aquatiques et œufs" }
+      ],
+      "foodsToAvoid": [
+        { "reason": "Carnivore strict; ne pas donner aliments transformés, éviter toxines" }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Régime semi-aquatique carnivore (poissons, grenouilles, rongeurs, oiseaux et leurs œufs, crabes, mollusques, insectes, autres lézards et serpents). Accès à proies aquatiques et terrestres. Très opportuniste. En captivité, complémentation minérale importante.",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Asian_water_monitor", "title": "Asian water monitor diet - Wikipedia EN" }]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Espèce pouvant dépasser 50 kg en captivité : enclos de très grande taille avec zones natatoires profondes et zones terrestres",
+      "lightNeeds": "Exposition solaire régulière, UVB fort, 12-14h lumière/jour",
+      "activityEnrichment": "Accès constant à eau pour nager et plonger, zones terrestres pour basking, cachettes multiples, branches",
+      "hygieneNotes": "Système de filtration d'eau robuste, nettoyage régulier",
+      "costEstimate": "élevé",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Asian_water_monitor", "title": "Asian water monitor habitat - Wikipedia EN" }]
+    },
+    "behavior": {
+      "generalBehavior": "Varan semi-aquatique, excellent nageur et plongeur. Jeunes principalement arboricoles, adultes terrestres. Face à une menace : grimpe aux arbres ou plonge dans l'eau. Adapté aux zones urbaines avec cours d'eau et canaux.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Absolument déconseillé; très grande taille, morsure puissante",
+      "compatibilityWithOtherAnimals": "Isolation obligatoire; prédateur mangeant tous petits vertébrés",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Asian_water_monitor", "title": "Asian water monitor behavior - Wikipedia EN" }]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": { "citesAppendix": "II", "euAnnex": null, "permits": ["Documents CITES requis pour le commerce international (Annexe II)"], "restrictions": ["Espèce inscrite à l'Annexe II de la CITES"] },
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Asian_water_monitor", "title": "Asian water monitor - Wikipedia EN" }]
+    },
+    "reproduction": {
+      "season": "avril-octobre",
+      "gestationDays": null,
+      "incubationDays": 195,
+      "litterSizeMin": 10,
+      "litterSizeMax": 40,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction avril-octobre. Femelles pondent 10-40 œufs environ 1 mois après l'accouplement. Incubation 6-7 mois (180-210 jours). Jeunes indépendants à la naissance. Maturité atteinte vers 150 cm. Espèce longévive 11-25 ans en captivité.",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Asian_water_monitor", "title": "Asian water monitor reproduction - Wikipedia EN" }]
+    }
+  },
+  {
+    "speciesId": 2470711,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Araignées", "frequency": "quotidienne", "notes": "Proies principales naturelles" },
+        { "name": "Orthoptères", "frequency": "quotidienne", "notes": "Sauterelles, criquets" },
+        { "name": "Coléoptères", "frequency": "quotidienne", "notes": "Insectes principaux" },
+        { "name": "Petits lézards", "frequency": "hebdomadaire", "notes": "Geckos et petits lézards" }
+      ],
+      "foodsToAvoid": [
+        { "reason": "Très spécialisé sur invertébrés et petits lézards; éviter toxines et aliments transformés" }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Insectivore/carnivore spécialisé petites proies. Chasse araignées, orthoptères et coléoptères principalement. Complément occasionnel geckos et autres petits lézards.",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Varanus_gilleni", "title": "Varanus gilleni diet - Wikipedia EN" }]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium 80L+ avec zones aérées, arbustes artificiels pour escalade arboricole",
+      "lightNeeds": "Lumière naturelle importante, UVB modéré, minimum 10-12h/jour",
+      "activityEnrichment": "Branches, écorces, creux d'arbres artificiels pour comportement arboricole. Hauteur importante pour escalade verticale.",
+      "hygieneNotes": "Substrat léger (tourbe + copeaux), humidité modérée, accès eau de boisson, nettoyage hebdomadaire",
+      "costEstimate": "moyen",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Varanus_gilleni", "title": "Varanus gilleni habitat - Wikipedia EN" }]
+    },
+    "behavior": {
+      "generalBehavior": "Petit varan (~40 cm) arboricole à queue préhensile, vivant sous les écorces et dans les creux d'arbres. Chasse toutefois au sol. Très bien adapté aux conditions arides.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Possible avec surveillance; moins agressif que grands varans mais toujours carnivore actif",
+      "compatibilityWithOtherAnimals": "Isolation obligatoire; consomme petits lézards et invertébrés",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Varanus_gilleni", "title": "Varanus gilleni behavior - Wikipedia EN" }]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": { "citesAppendix": "II", "euAnnex": null, "permits": ["Documents CITES requis pour le commerce international (Annexe II)"], "restrictions": ["Espèce inscrite à l'Annexe II de la CITES"] },
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Varanus_gilleni", "title": "Varanus gilleni - Wikipedia FR" }]
+    },
+    "reproduction": {
+      "season": "septembre-octobre",
+      "gestationDays": null,
+      "incubationDays": 90,
+      "litterSizeMin": null,
+      "litterSizeMax": 7,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Accouplement probablement septembre-octobre. Femelles pondent jusqu'à 7 œufs dans des terriers d'environ 30 cm de profondeur. Incubation 3 mois. Mâles combattent rituellement 'ventre contre ventre'. Espèce adaptée aux conditions arides.",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Varanus_gilleni", "title": "Varanus gilleni reproduction - Wikipedia EN" }]
+    }
+  }
+]

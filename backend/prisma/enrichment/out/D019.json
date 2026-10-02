@@ -1,0 +1,77 @@
+[
+ {
+  "speciesId": 2000000607,
+  "description": "Le Hotot nain est une race de lapin domestique originaire d'Allemagne, caractérisée par un pelage entièrement blanc avec un cercle de couleur autour de chaque œil. C'est un petit lapin pesant au maximum 1,36 kg, développé dans les années 1970 par des éleveurs allemands. Cette race est exclusivement destinée aux animaux de compagnie.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Hotot_nain"
+ },
+ {
+  "speciesId": 2000000608,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000609,
+  "description": "Le Dalmatien est une race de chien originaire de Croatie, caractérisée par son pelage blanc tacheté de noir ou brun. De taille moyenne (56-61 cm), c'est un chien musculaire et énergique, autrefois utilisé comme chien de chasse et de carrosse. Amical et loyal envers sa famille, il possède un fort instinct de garde.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Dalmatian_dog"
+ },
+ {
+  "speciesId": 2000000610,
+  "description": "Le New Zealand est une race de lapin originaire de Californie, malgré son nom trompeur. Ces lapins pèsent entre 4,5 et 5,4 kg avec un corps large, musculaire et profond. Élevés initialement pour la viande et la fourrure, ils demeurent les plus courants pour la production commerciale et la recherche scientifique.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/New_Zealand_rabbit"
+ },
+ {
+  "speciesId": 2000000611,
+  "description": "L'American Fuzzy Lop est une race de lapin originaire des États-Unis, reconnue par l'American Rabbit Breeders Association. Cette petite race pèse entre 1,4 et 1,8 kg avec une laine semblable à celle de l'Angora, mais plus courte. Elle se caractérise par ses oreilles tombantes et son museau plat ressemblant à celui d'un chat.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/American_Fuzzy_Lop"
+ },
+ {
+  "speciesId": 2000000679,
+  "description": "Le cheval des Outer Banks est une population de chevaux sauvages originaire des îles barrière de Caroline du Nord. Ces petits chevaux robustes mesurent entre 1,32 et 1,50 m et pèsent 360 à 450 kg. Issus d'ancêtres espagnols domestiques arrivés au XVIe siècle, ils se caractérisent par un tempérament docile et une grande résistance.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Cheval_des_Outer_Banks"
+ },
+ {
+  "speciesId": 2000000691,
+  "description": "La brune de Lettonie est une race bovine lettonne originaire de la Baltique, développée au XIXe siècle avec influence de races Angeln. Cette race laitière de taille moyenne pèse environ 520 kg pour les vaches et 800 kg pour les taureaux. Elle se distingue par sa robe rouge à nuances brunes et produit annuellement du lait riche.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Brune_de_Lettonie"
+ },
+ {
+  "speciesId": 2000000692,
+  "description": "La vache d'Hérens est une race bovine suisse originaire du Val d'Hérens en Valais. De taille moyenne avec une robe noire ou rouge foncé, elle se caractérise par des cornes en forme de guidon de vélo. Montagnarde rustique capable de grimper jusqu'à 3 000 mètres, elle produit environ 3 000 kg de lait riche en protéines.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Vache_d%27H%C3%A9rens"
+ },
+ {
+  "speciesId": 2000000693,
+  "description": "La Holstein est une race bovine internationale originaire de Frise (Pays-Bas) et du Schleswig-Holstein (Allemagne). Spécialisée en production laitière, elle est la race la plus efficace au monde avec une production moyenne annuelle frôlant les 10 000 kg de lait. Caractérisée par sa robe pie noire distincte, elle domine tous les pays.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Deutsches_schwarzbunte"
+ },
+ {
+  "speciesId": 2000000694,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000695,
+  "description": "Le Bestuzhev est une race bovine russe de la région d'Asie centrale créée durant l'époque soviétique. Cette race provient du croisement du zébu local avec des taureaux suisses Pie-Rouge, suédois et Simmental. Élevée pour la production laitière et carnée, elle est adaptée aux conditions difficiles de l'Asie centrale.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Bestuzhev_cattle"
+ },
+ {
+  "speciesId": 2000000696,
+  "description": "Les bovins de Guernesey sont une race bovine laitière originaire de l'île de Guernesey. Reconnaissable à leur lait riche et crémeux de couleur dorée, ces animaux produisent également une viande au goût caractéristique. Le beurre fabriqué à partir de leur lait possède une couleur jaune distinctive très appréciée.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Guernesey"
+ },
+ {
+  "speciesId": 2000000697,
+  "description": "Le Pinzgauer est une race bovine originaire de la région de Pinzgau en Autriche. Elle se distingue par une robe chestnut-brown sur les flancs et un dos blanc. Autrefois élevée pour la viande, le lait et le travail agricole, cette race était très populaire en Autriche-Hongrie avant de décliner après la Première Guerre mondiale.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Pinzgauer_cattle"
+ },
+ {
+  "speciesId": 2000000698,
+  "description": "Le Fjäll est une race suédoise traditionnelle de bovins de montagne sans cornes, originaire du nord de la Suède. Les mâles pèsent entre 650-800 kg et les femelles environ 450 kg. C'est principalement une race laitière produisant environ 5500 kg de lait par lactation riche en matière grasse.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Fjall_cattle"
+ },
+ {
+  "speciesId": 2000000699,
+  "description": null,
+  "sourceUrl": null
+ }
+]

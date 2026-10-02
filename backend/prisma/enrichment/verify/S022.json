@@ -1,0 +1,60 @@
+[
+  {
+    "speciesId": 2470656,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.specificNeeds: jeunes = insectes/larves/poissons, adultes = proies plus lentes (gastéropodes) (source FR)",
+      "habitat.hygieneNotes: 'température stable 29-30°C' (température d'incubation mal appliquée) + 'nettoyage hebdomadaire' -> changement d'eau quotidien (source FR)",
+      "habitat.minSpaceSize: '500L+' (sous-dimensionné pour 160-180 cm) -> jeunes verticalement, adultes grand enclos horizontal ou extérieur (source FR)",
+      "behavior.generalBehavior: ajout tempérament défensif, apnée > 1/2 h (source FR)",
+      "legislation.details: permits 'CITES Appendix II' / 'permis d'importation/détention requis' (non sourcé) -> documents CITES commerce international; CITES II confirmé (en.wikipedia)",
+      "reproduction.gestationDays: 30 -> null (reptile ovipare; 30 j = délai accouplement-ponte)",
+      "reproduction.notes: 'terriers' retiré (source: termitières)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (25/32) et humidityMin/Max (60/85) non confirmés",
+      "reproduction.litterSizeMin: 20 (non confirmé; source: jusqu'à 60)",
+      "reproduction.sexualMaturityMonths: 24 (non confirmé)",
+      "legislation.details.euAnnex: B (non confirmé)",
+      "health: déjà null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2470685,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "behavior.generalBehavior: 'très actif et agressif' (non confirmé) -> jeunes arboricoles / adultes terrestres, fuite arbre/eau (en.wikipedia)",
+      "behavior.compatibilityWithChildren: 'très agressive' -> très grande taille, morsure puissante",
+      "habitat.minSpaceSize: '600L+' (aberrant : >50 kg en captivité) -> enclos de très grande taille",
+      "habitat.hygieneNotes: température 25-32°C retirée",
+      "legislation.details: permits/restrictions reformulés; CITES II confirmé (en.wikipedia)",
+      "reproduction.gestationDays: 30 -> null (reptile ovipare)",
+      "reproduction.notes: 'dans bois pourris' retiré (non confirmé); ajout maturité ~150 cm"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (25/32) et humidityMin/Max (65/90) non confirmés",
+      "reproduction.sexualMaturityMonths: 36 (non confirmé; source: ~150 cm)",
+      "legislation.details.euAnnex: B (non confirmé)",
+      "health: déjà null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2470711,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "behavior.generalBehavior: 'diurne', 'métabolisme élevé' (non confirmés) retirés; ajout queue préhensile, ~40 cm, adapté aux milieux arides (en.wikipedia)",
+      "legislation: citesAppendix null -> 'II' (page fr.wikipedia Varanus_gilleni: annexe II de la CITES); source remplacée par la page FR",
+      "legislation.details.permits 'Arrêté du 21/11/1997' et restrictions 'statut protégé modéré' (inventés) -> supprimés, remplacés par mention CITES II",
+      "reproduction.season: 'probablement septembre-octobre'"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (22/30) et humidityMin/Max (30/50) non confirmés",
+      "reproduction.litterSizeMin: 2 (non confirmé; source: jusqu'à 7)",
+      "reproduction.sexualMaturityMonths: 18 (non confirmé)",
+      "health: déjà null"
+    ],
+    "confidence": "medium"
+  }
+]

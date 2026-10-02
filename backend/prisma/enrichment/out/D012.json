@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000236,
+    "description": "Petite grenouille toxique originaire d'Amérique du Sud (Guyane, Suriname, Brésil), mesurant 40-60 mm selon le sexe. Ses couleurs varient du bleu au jaune maculé de noir selon la région. Elle habite les forêts tropicales humides près des cours d'eau et produit un venin puissant via sa peau.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Dendrobates_tinctorius"
+  },
+  {
+    "speciesId": 2000000237,
+    "description": "Petit triton européen mesurant 7-11 cm, présentant un fort dimorphisme sexuel. Le mâle arbore une crète dorsale ondulée lors de la reproduction, tandis que la femelle reste uniformément brune. Il habite les mares et étangs ensoleillés d'Europe du Nord et de l'Est, préférant les eaux stagnantes riches en végétation.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Triturus_vulgaris"
+  },
+  {
+    "speciesId": 2000000238,
+    "description": "Amphibien européen mesurant jusqu'à 20 cm, avec peau noire ornée de taches jaunes caractéristiques. Exclusivement terrestre, elle préfère les forêts humides de feuillus où elle se cache sous le bois mort et les pierres. Elle se reproduit uniquement en eau douce.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Salamandra_salamandra"
+  },
+  {
+    "speciesId": 2000000239,
+    "description": "Crapaud le plus répandu et le plus gros d'Europe, mesurant 50-110 mm selon le sexe. Trapu et court sur pattes, il possède une peau pustuleuse produisant un venin défensif. Il vit en milieux humides et boisés du niveau de la mer jusqu'à 1 500 m d'altitude, se nourrissant d'insectes et de petits animaux.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Bufo_bufo"
+  },
+  {
+    "speciesId": 2000000240,
+    "description": "Crapaud africain d'Afrique de l'Ouest mesurant 4-6 cm. Possède une peau lisse avec des griffes caractéristiques distinctives. Vit dans les étangs et mares des zones tropicales, se reproduisant toute l'année en milieu aquatique.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Xenopus_tropicalis"
+  },
+  {
+    "speciesId": 2000000241,
+    "description": "Rainette arboricole endémique du sud-est des États-Unis, de la famille des Hylidae. Se rencontre du Texas à la Virginie. Se caractérise par sa capacité vocale distincte et possède un sac vocal inférieur lui permettant un chant puissant pour délimiter son territoire et sa reproduction. Classée en préoccupation mineure par l'UICN.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Hyla_cinerea"
+  },
+  {
+    "speciesId": 2000000242,
+    "description": "Grenouille cornue sud-américaine des régions des Pampas en Argentine, Uruguay et Brésil, mesurant jusqu'à 12 cm. Possède un corps bien en chair, une bouche immense et des yeux saillants. Sa peau présente des teintes vertes brillantes. Elle habite les zones humides où elle s'enterre dans la boue pour chasser.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Ceratophrys_ornata"
+  },
+  {
+    "speciesId": 2000000243,
+    "description": "Crapaud rouge malgache originaire du nord-est de Madagascar. Mâles mesurant 60-65 mm, femelles 85-105 mm. Son dos présente une coloration jaune-orangé à rouge foncé, la femelle étant plus brillante. Cette grenouille sécrète des toxines défensives lorsqu'elle est menacée.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Dyscophus_antongilii"
+  },
+  {
+    "speciesId": 2000000244,
+    "description": "Petit poisson sud-américain du Pérou, Colombie et Brésil, mesurant 3-5 cm. Se distingue par sa bande longitudinale bleu-vert brillante et sa coloration rouge caractéristique. En aquarium, doit être maintenu en groupe d'au moins 10 individus dans une eau douce légèrement acide 22-28°C, bac bien planté d'au moins 80 litres.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Paracheirodon_innesi"
+  },
+  {
+    "speciesId": 2000000245,
+    "description": "Poisson d'Amérique centrale, femelles jusqu'à 6 cm en nature, mâles 4 cm. Noir moucheté de jaune à l'état sauvage, il se décline en multiples variétés colorées en captivité. Ovovivipare produisant 20-50 alevins par portée mensuellement.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Poecilia_sphenops"
+  },
+  {
+    "speciesId": 2000000246,
+    "description": "Poisson d'eau douce tropical originaire d'Asie du Sud-Est, particulièrement de Thaïlande, mesurant 5-8 cm. Se distingue par ses nageoires spectaculaires et ses couleurs variées. Très territorial, les mâles belliqueux doivent être maintenus séparément. Nécessite minimum 30 litres, 24-26°C et végétation abondante.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Betta_splendens"
+  },
+  {
+    "speciesId": 2000000247,
+    "description": "Variante fantail du poisson rouge chinois domestique aux nageoires multiples. Corps en forme d'œuf avec nageoire dorsale haute et queue quadruple caractéristique. Mesure 15-20 cm. Requiert un aquarium spacieux de 100+ litres avec filtration puissante, température 22-28°C et eau neutre à alcaline (pH 7-8).",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Carassius_auratus"
+  },
+  {
+    "speciesId": 2000000248,
+    "description": "Variante oranda du poisson rouge chinois avec excroissance caractéristique sur le dessus de la tête. Mesure 15-20 cm. Requiert un aquarium spacieux de 100+ litres avec filtration puissante, température 22-28°C et eau neutre à alcaline (pH 7-8). Variété ornementale remarquable.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Carassius_auratus"
+  },
+  {
+    "speciesId": 2000000249,
+    "description": "Variante ryukin du poisson rouge chinois arbore un long voile double sur la nageoire caudale et un corps étiré distinctif. Mesure 15-20 cm. Requiert un aquarium spacieux de 100+ litres avec filtration puissante, température 22-28°C et eau neutre à alcaline (pH 7-8).",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Carassius_auratus"
+  },
+  {
+    "speciesId": 2000000250,
+    "description": "Variante black moor du poisson rouge chinois, appelée aussi télescope, affiche des yeux exorbités caractéristiques. Mesure 15-20 cm. Requiert un aquarium spacieux de 100+ litres avec filtration puissante, température 22-28°C et eau neutre à alcaline (pH 7-8).",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Carassius_auratus"
+  }
+]

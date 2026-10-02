@@ -1,0 +1,51 @@
+[
+  {
+    "speciesId": 5209145,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.season: printemps → avril à août (Floride) (en.wikipedia American_green_tree_frog)",
+      "reproduction.notes: chants avril-septembre → mars à septembre ; moyenne 400 œufs, jusqu'à 1200 ; éclosion 4-14 j (moy. 5) confirmée",
+      "reproduction.litterSizeMin/Max 400-1200, incubationDays 5, sexualMaturityMonths 12 confirmés (« moins d'un an »)",
+      "health: source VCA remplacée par la page Wikipédia de l'espèce ; parasites précisés (nématodes, protozoaires, trématodes, confirmés) ; « humidité 70-80% » retirée ; « déchllorée » corrigé"
+    ],
+    "removed": [
+      "source https://www.vcahospitals.com/ (page d'accueil générique)",
+      "chiffre d'humidité 70-80 % (non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5216573,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation: citesAppendix I confirmé (fr.wikipedia Dyscophus_antongilii, annexe I depuis 1987) ; statut permit_required conservé ; source cites.org (page d'accueil) remplacée par la page Wikipédia FR",
+      "reproduction.incubationDays: 1 → null (éclosion ~36 h, précisé en notes) ; season : toute l'année → toute l'année sauf novembre, pic janvier-mai ; maturité 9-14 mois ; 45-60 j métamorphose (en.wikipedia)",
+      "behavior: « active au crépuscule » → nocturne ; sécrétion cutanée irritante / allergènes confirmée",
+      "feeding: suppléments « 2x par mois » et fréquences précises généralisés (non sourcés) ; typo « déchllorée »"
+    ],
+    "removed": [
+      "legislation.euAnnex A (non confirmé), permits « Arrêté du 21 novembre 1997 », restriction « interdite de vente sans permis de détention CITES » (non confirmés)",
+      "health (source VCA = page d'accueil ; aucune source valide)",
+      "habitat.tempMin/tempMax, humidityMin/humidityMax, minSpaceSize, UVB 50-75 mW (non confirmables)",
+      "behavior.sociability, compatibilityWithOtherAnimals (« risque de cannibalisme » non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5216933,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: « Petits rongeurs » retiré des aliments à éviter (en.wikipedia : l'espèce consomme de petits rongeurs)",
+      "behavior: toxicité largement sous-estimée → bufotoxine très toxique, dangereuse pour les chiens, décès humains documentés ; « sédentaire » et « cannibalisme » retirés",
+      "reproduction.litterSizeMin/Max: 5000-30000 → 8000-25000 (en.wikipedia) ; incubationDays 14 → 2 (éclosion sous 48 h, 14 h à ~1 semaine) ; notes précisées",
+      "typo « déchllorée » corrigée"
+    ],
+    "removed": [
+      "health (source VCA = page d'accueil)",
+      "legislation (« allowed » non confirmé ; page sans info CITES/UE/FR ; source INPN = page d'accueil)",
+      "habitat.tempMin/tempMax (20-28 non confirmé ; la source donne 10-15 °C min / 40-42 °C max critiques), humidité, minSpaceSize",
+      "reproduction.sexualMaturityMonths: 12 (source : variable selon la région), season « toute l'année »"
+    ],
+    "confidence": "medium"
+  }
+]

@@ -1,0 +1,45 @@
+[
+ {
+  "speciesId": 5170451,
+  "commonNameFr": "Tarentule Goliath",
+  "scientificName": "Theraphosa blondi",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5202178,
+  "commonNameFr": "Pleco commun",
+  "scientificName": "Hypostomus plecostomus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5209105,
+  "commonNameFr": "Axolotl",
+  "scientificName": "Ambystoma mexicanum",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ }
+]

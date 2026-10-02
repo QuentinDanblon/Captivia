@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 8909809,
+  "commonNameFr": "Tortue palustre",
+  "scientificName": "Emys orbicularis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 8953936,
+  "commonNameFr": "Caïman à lunettes",
+  "scientificName": "Caiman crocodilus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 9032472,
+  "commonNameFr": "Scinque de Schneider",
+  "scientificName": "Eumeces schneideri",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

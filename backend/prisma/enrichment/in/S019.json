@@ -1,0 +1,45 @@
+[
+ {
+  "speciesId": 2446584,
+  "commonNameFr": "Gecko de l'ouest",
+  "scientificName": "Rhacodactylus leachianus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2448340,
+  "commonNameFr": "Boa Constrictor",
+  "scientificName": "Boa constrictor",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2448847,
+  "commonNameFr": "Caméléon de Parson",
+  "scientificName": "Calumma parsonii",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

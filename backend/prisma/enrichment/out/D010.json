@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000204,
+    "description": "Le Toui Été est une petite perruche colorée d'Amérique du Sud mesurant 12 cm. Les mâles se distinguent par leurs primaires, secondaires et couvertures pourpre-bleu brillant, tandis que les femelles manquent de ces teintes bleues. Cette espèce grégaire vit en petits groupes dans les zones semi-arides et les forêts de faible altitude, se nourrissant principalement de graines.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Green-rumped_parrotlet"
+  },
+  {
+    "speciesId": 2000000205,
+    "description": "Le Toui à Lunettes est une petite perruche de 12 centimètres originaire d'Amérique centrale et du Sud. Hautement social, il vit en petits groupes et se nourrit de graines, fruits et baies. Les mâles se distinguent par leurs anneaux bleus caractéristiques autour des yeux, tandis que les femelles possèdent des anneaux verts émeraude.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Spectacled_parrotlet"
+  },
+  {
+    "speciesId": 2000000206,
+    "description": "L'Astrild ondulé appartient au genre Estrilda, qui regroupe 17 espèces d'oiseaux nommés astrilds. Ce petit oiseau fait partie de la famille des Estrildidae et se trouve principalement en Afrique subsaharienne. L'espèce se distingue par les motifs caractéristiques de son plumage qui lui donnent son nom commun.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Astrild"
+  },
+  {
+    "speciesId": 2000000207,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000209,
+    "description": "La Brahma est une race américaine de poule de grande taille originaire des États-Unis, développée à partir d'oiseaux importés du port chinois de Shanghai dans les années 1840. Devenue le principal élevage de viande américain de 1850 à 1930, cette volaille impose par ses dimensions importantes et ses pattes abondamment emplumées. Elle est également une bonne pondeuse d'œufs bruns durant l'hiver.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Brahma_chicken"
+  },
+  {
+    "speciesId": 2000000210,
+    "description": "La Poule Sussex est une race britannique de poule polyvalente originaire du comté de Sussex en Angleterre du sud-est. Présentée pour la première fois en 1845, cette poule est élevée tant pour la production de viande que d'œufs, pondant environ 180-200 œufs teintés par an. Elle existe en huit variétés de couleurs différentes, dont la light, la red et la speckled.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Sussex_chicken"
+  },
+  {
+    "speciesId": 2000000211,
+    "description": "La Wyandotte est une race poule américaine créée dans les années 1870, nommée d'après le peuple autochtone Wyandot. Cette volaille polyvalente est élevée à la fois pour ses œufs bruns et sa viande à peau jaune, existe en neuf variétés de couleurs reconnues. Elle se distingue par sa crête en rose et son poids de 2,7 à 4 kg, étant prisée comme poule d'exposition.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Wyandotte_chicken"
+  },
+  {
+    "speciesId": 2000000212,
+    "description": "La Leghorn est l'une des races de poule domestique les plus répandues au monde, originaire d'Italie, particulièrement de Toscane. Mondialisée après son importation aux États-Unis entre 1828 et 1853, elle se distingue par ses excellentes performances de ponte d'environ 280 œufs par an. Aujourd'hui, environ 70% des poules pondeuses industrielles descendent partiellement de cette race.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Leghorn"
+  },
+  {
+    "speciesId": 2000000213,
+    "description": "La Poule Orpington est une race britannique de poule domestique créée dans les années 1880 par William Cook à Orpington, en Angleterre. Initialement conçue comme poule polyvalente pour la production d'œufs et de viande, elle est devenue principalement une volaille d'exposition. Cette race pèse entre 2,7 et 4,5 kg selon le sexe et pond environ 180 œufs bruns par an.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Orpington_chicken"
+  },
+  {
+    "speciesId": 2000000215,
+    "description": "L'oie de Toulouse est une race française d'eau domestique originaire de la région de Toulouse. Ces grands oiseaux pèsent 7-12 kg, se distinguent par leur plumage gris et blanc, et peuvent vivre jusqu'à 25 ans. Développée par sélection des oies cendrées sauvages, elle est principalement élevée à des fins industrielles, particulièrement pour la production de foie gras, ainsi que pour la viande et les plumes.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Toulouse_goose"
+  },
+  {
+    "speciesId": 2000000216,
+    "description": "L'anolis vert est un petit lézard mesurant jusqu'à 22 cm de longueur originaire du sud-est des États-Unis et des Caraïbes. Ce reptile peut changer de couleur du vert vibrant au brun selon la température, l'émotion et les besoins de camouflage. Les mâles affichent des fan de gorge rouges distinctifs lors de disputes territoriales et de parades nuptiales, tandis que l'espèce se nourrit d'insectes.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Green_anole"
+  },
+  {
+    "speciesId": 2000000217,
+    "description": "Le tégou argentin noir et blanc est la plus grande des espèces de lézards tégou, pouvant atteindre 120-140 cm de longueur et vivre plus de 20 ans en captivité. Ce reptile omnivore habite les forêts tropicales, savanes et semi-déserts d'Amérique du Sud, notamment en Argentine, Brésil et Paraguay. Notable pour son intelligence exceptionnelle et sa nature relativement docile, les mâles se distinguent par des joues largement développées.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Argentine_black_and_white_tegu"
+  },
+  {
+    "speciesId": 2000000218,
+    "description": "Le varan d'eau asiatique est un grand lézard originaire d'Asie du Sud et du Sud-Est, considéré comme le deuxième plus grand lézard après le dragon de Komodo. Excellent nageur, il habite les zones humides près des lacs et rivières et se nourrit de poissons, grenouilles et autres proies aquatiques. Son statut de conservation est actuellement « Préoccupation mineure » en raison de sa large distribution et sa population stable.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Asian_water_monitor"
+  },
+  {
+    "speciesId": 2000000219,
+    "description": "Le boa constricteur est un grand serpent de la famille des Boidae, originaire d'Amérique du Sud et l'un des plus grands serpents du continent après l'Anaconda. Mesurant entre 1,50 m et 4,20 m, il chasse la nuit en se nourrissant de rongeurs, oiseaux et lézards. Contrairement à la croyance populaire, il tue ses proies en interrompant la circulation sanguine plutôt qu'en les étouffant.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Boa_constricteur"
+  },
+  {
+    "speciesId": 2000000220,
+    "description": "Le Serpent Roi commun est un serpent non-venimeux du genre Lampropeltis qui utilise la constriction pour tuer ses proies. Il se nourrit d'autres serpents, y compris les espèces venimeuses comme les crotales, ce qui le rend très utile pour le contrôle des populations de serpents. Ce serpent terrestre se trouve coast-to-coast en Amérique du Nord et mesure entre 61 et 152 centimètres de long.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Kingsnake"
+  }
+]

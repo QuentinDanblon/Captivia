@@ -1,0 +1,138 @@
+[
+  {
+    "speciesId": 5209145,
+    "health": {
+      "diseases": [
+        { "name": "Infection de la peau", "symptoms": "Décoloration, plaques blanches ou grises, refus de s'alimenter", "prevention": "Eau déchlorée, humidité correcte du terrarium, hygiène du terrarium", "whenToConsult": "Dès apparition de taches anormales" },
+        { "name": "Parasites internes (nématodes, protozoaires, trématodes)", "symptoms": "Amaigrissement, gonflement abdominal, selles anormales", "prevention": "Quarantaine des nouveaux animaux, maintenance d'eau propre", "whenToConsult": "Si symptômes persistent plus de 5 jours" },
+        { "name": "Malnutrition", "symptoms": "Perte de poids, inactivité, peau terne", "prevention": "Alimentation variée en insectes, suppléments en calcium et D3", "whenToConsult": "Si perte de poids notable en 2 semaines" }
+      ],
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/American_green_tree_frog", "title": "American Green Tree Frog" }]
+    },
+    "reproduction": {
+      "season": "avril à août (Floride)",
+      "gestationDays": null,
+      "incubationDays": 5,
+      "litterSizeMin": 400,
+      "litterSizeMax": 1200,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "modere",
+      "notes": "Accouplement d'avril à août en Floride. Les pontes comptent en moyenne 400 œufs, jusqu'à 1200 dans les conditions optimales. Éclosion en 4 à 14 jours (5 jours en moyenne). Maturité sexuelle en moins d'un an. Les mâles chantent de mars à septembre.",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/American_green_tree_frog", "title": "American Green Tree Frog" }]
+    }
+  },
+  {
+    "speciesId": 5216573,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Petits arthropodes (grillons, criquets, mouches)", "frequency": "plusieurs fois par semaine", "notes": "Proies de la taille de la tête de la grenouille" },
+        { "name": "Vers de farine, petits insectes", "frequency": "hebdomadaire", "notes": "Complément nutritionnel" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Proies trop grosses", "reason": "Étouffement possible ou problèmes digestifs" },
+        { "name": "Insectes sauvages non vérifiés", "reason": "Risque de pesticides ou de parasites" }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Alimentation variée de petits insectes et invertébrés, avec suppléments en calcium et vitamines",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Tomato_frog", "title": "Tomato Frog" }]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle modérée, alternance jour/nuit (espèce nocturne)",
+      "activityEnrichment": "Plantes vivantes, écorce pour se cacher, récipient d'eau peu profonde pour trempage",
+      "hygieneNotes": "Eau déchlorée pour trempage, se laver les mains après tout contact (sécrétion cutanée irritante)",
+      "costEstimate": "moyen",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Tomato_frog", "title": "Tomato Frog" }]
+    },
+    "behavior": {
+      "generalBehavior": "Grenouille nocturne endémique de Madagascar ; quand elle est menacée, elle gonfle son corps et sécrète une substance épaisse qui irrite les yeux et la bouche du prédateur",
+      "sociability": null,
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Manipulation minimale recommandée : la sécrétion cutanée peut provoquer des réactions allergiques chez l'humain",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Tomato_frog", "title": "Tomato Frog" }]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": ["CITES Appendix I"],
+        "restrictions": ["Espèce inscrite à l'annexe I de la CITES (depuis 1987) : commerce international strictement encadré"]
+      },
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Dyscophus_antongilii", "title": "Dyscophus antongilii — Wikipédia" }]
+    },
+    "reproduction": {
+      "season": "toute l'année sauf novembre (pic de janvier à mai)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 1000,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 9,
+      "breedingDifficulty": "facile",
+      "notes": "Pond plus de 1000 œufs chaque mois sauf novembre (pic de janvier à mai). Les œufs éclosent en environ 36 heures ; les têtards deviennent de jeunes grenouilles après 45 à 60 jours. Maturité sexuelle entre 9 et 14 mois.",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Tomato_frog", "title": "Tomato Frog" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Dyscophus_antongilii", "title": "Dyscophus antongilii — Wikipédia" }
+      ]
+    }
+  },
+  {
+    "speciesId": 5216933,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Insectes variés (grillons, criquets, coléoptères)", "frequency": "plusieurs fois par semaine", "notes": "Adapté à la taille de l'animal ; prédateur opportuniste" },
+        { "name": "Vers de terre, vers de farine", "frequency": "hebdomadaire", "notes": "Source importante de nutriments" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Proies venimeuses", "reason": "Peuvent blesser ou tuer le crapaud" }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Régime riche en protéines, avec suppléments en calcium et vitamine D3",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Cane_toad", "title": "Cane Toad" }]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle, alternance jour/nuit (espèce nocturne)",
+      "activityEnrichment": "Cachettes, plantes, récipient d'eau pour trempage",
+      "hygieneNotes": "Eau déchlorée pour trempage, se laver les mains après tout contact (sécrétions toxiques)",
+      "costEstimate": "moyen",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Cane_toad", "title": "Cane Toad" }]
+    },
+    "behavior": {
+      "generalBehavior": "Crapaud terrestre opportuniste, principalement nocturne et solitaire, chasseur à la vue et à l'odorat",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Déconseillé : la peau et les glandes parotoïdes sécrètent de la bufotoxine, très toxique (des décès humains sont documentés après ingestion) ; ne pas laisser manipuler par des enfants",
+      "compatibilityWithOtherAnimals": "Très dangereux pour les chiens et autres animaux qui le mordent ou l'ingèrent ; à garder seul",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Cane_toad", "title": "Cane Toad" }]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 2,
+      "litterSizeMin": 8000,
+      "litterSizeMax": 25000,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Reproductrices très prolifiques : la femelle pond 8 000 à 25 000 œufs en cordons gélatineux pouvant atteindre 20 m. Éclosion en général sous 48 heures ; développement jusqu'au stade juvénile en 12 à 60 jours (environ quatre semaines en moyenne). Espérance de vie de 10 à 15 ans dans la nature, jusqu'à 35 ans en captivité.",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Cane_toad", "title": "Cane Toad" }]
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 5217160,
+  "commonNameFr": "Crapaud commun",
+  "scientificName": "Bufo bufo",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5217264,
+  "commonNameFr": "Grenouille arboricole géante",
+  "scientificName": "Rhacophorus maximus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5218022,
+  "commonNameFr": "Dendrobate à ventre tacheté",
+  "scientificName": "Dendrobates auratus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

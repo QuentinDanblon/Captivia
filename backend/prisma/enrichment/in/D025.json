@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000001166,
+  "commonNameFr": "Canard de Vouillé",
+  "scientificName": "Canard de Vouillé",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001167,
+  "commonNameFr": "Canard de Gimbsheim",
+  "scientificName": "Canard de Gimbsheim",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001168,
+  "commonNameFr": "Canard de la Semois",
+  "scientificName": "Canard de la Semois",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001169,
+  "commonNameFr": "Kriaxera",
+  "scientificName": "Kriaxera",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001170,
+  "commonNameFr": "Forest Duck",
+  "scientificName": "Forest Duck",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001171,
+  "commonNameFr": "Silver Bantam",
+  "scientificName": "Silver Bantam",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001172,
+  "commonNameFr": "Q134112854",
+  "scientificName": "Q134112854",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001173,
+  "commonNameFr": "Meitei Nganu",
+  "scientificName": "Meitei Nganu",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001265,
+  "commonNameFr": "Chistopolian High-flying Pigeon",
+  "scientificName": "Chistopolian High-flying Pigeon",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001266,
+  "commonNameFr": "Donek",
+  "scientificName": "Donek",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001267,
+  "commonNameFr": "Helmet",
+  "scientificName": "Helmet",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001268,
+  "commonNameFr": "Iranian Highflying Tumbler",
+  "scientificName": "Iranian Highflying Tumbler",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001269,
+  "commonNameFr": "Parlor Roller",
+  "scientificName": "Parlor Roller",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001270,
+  "commonNameFr": "Hirondelle de Thuringe",
+  "scientificName": "Hirondelle de Thuringe",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001271,
+  "commonNameFr": "Broad Breasted White",
+  "scientificName": "Broad Breasted White",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

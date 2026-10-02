@@ -1,0 +1,45 @@
+[
+  {
+    "speciesId": 5289124,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.season: hiver → hiver (janvier-mars); notes: décembre-juillet, principalement janvier-mars (fr.wikipedia Écureuil_roux)",
+      "reproduction.litterSizeMax: 5 → 4 (généralement 3-4, 1-10 possible)",
+      "reproduction.notes: 'une portée par an' → le plus souvent une, parfois deux; mortalité juvénile '80 % avant l'âge adulte' → avant un an",
+      "health.Coccidiose: 'transmise par écureuils gris' retiré (non confirmé), renommée Eimeria sciurorum; prévention: contact avec écureuils gris à éviter car porteurs du parapoxvirus (fr.wikipedia + en.wikipedia Red_squirrel); 'peut être fatale' retiré"
+    ],
+    "removed": [],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5289145,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.notes: retrait de 'généralement une portée par an'; reformulation des éléments confirmés (accouplement fév-mars, vol à ~2,5 mois, 6 ans sauvage / 15 ans captivité, source en.wikipedia Flying_squirrel)"
+    ],
+    "removed": [
+      "health (section entière → null : la seule source Flying_squirrel ne contient aucune information de santé; chiffre 18-24°C non sourcé; espèce ambiguë, nom scientifique = famille Pteromyidae)",
+      "reproduction.gestationDays: 30 → null (non confirmé; le Siberian flying squirrel indique ~5 semaines mais identité de l'espèce non établie)",
+      "reproduction.litterSizeMin/Max: 2-4 → null (non confirmé pour cette entrée)",
+      "reproduction.sexualMaturityMonths: 6 → null (non confirmé)"
+    ],
+    "confidence": "low"
+  },
+  {
+    "speciesId": 5296455,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.incubationDays: 1 → null (les nymphes émergent ~24 h après détachement de l'oothèque, mais la femelle porte l'oothèque pendant l'incubation : 1 jour trompeur)",
+      "reproduction.litterSizeMin: 12 → 18 (oothèque de 18-50 œufs, moyenne ~32, source en.wikipedia German_cockroach)",
+      "reproduction.notes: 'œuf à adulte en 50-60 jours' → nymphe à adulte en 50-60 jours (6-7 stades)",
+      "health: section réécrite pour ne garder que ce que la page Cockroach confirme (transport passif de microbes pathogènes, allergies/asthme, tropomyosine)"
+    ],
+    "removed": [
+      "health.Transmission bactérienne: noms Salmonella/E. coli/Pseudomonas retirés (non confirmés par les pages)",
+      "health.Transmission fongique (Aspergillus fumigatus) (non confirmé)",
+      "health.Parasites et protozoaires (non confirmé)",
+      "source https://en.wikipedia.org/wiki/German_cockroach retirée de health (aucune info sur les pathogènes), conservée pour reproduction"
+    ],
+    "confidence": "medium"
+  }
+]

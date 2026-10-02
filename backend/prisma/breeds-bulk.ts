@@ -41,9 +41,14 @@ export async function importBreedsBulk(prisma: PrismaClient): Promise<BreedsBulk
   const dataPath = path.resolve(__dirname, 'breeds-data.json');
   const all: Breed[] = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
   const errors: string[] = [];
+  // Entrées qui ne sont pas des animaux (outils, objets, Q-ids Wikidata non résolus).
+  const excluded = new Set<number>(
+    (JSON.parse(fs.readFileSync(path.resolve(__dirname, 'enrichment', 'excluded-breed-ids.json'), 'utf-8')) as { ids: number[] }).ids,
+  );
 
   const breeds = all.filter((b) => {
     const label = `[${b.speciesId}] ${b.commonNameFr}`;
+    if (excluded.has(b.speciesId)) return false;
     if (!VALID_CATEGORIES.includes(b.category)) errors.push(`${label}: catégorie invalide "${b.category}"`);
     else if (!VALID_DOMESTICATION.includes(b.domesticationType))
       errors.push(`${label}: domesticationType invalide "${b.domesticationType}"`);

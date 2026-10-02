@@ -1,0 +1,91 @@
+[
+  {
+    "speciesId": 5285143,
+    "health": {
+      "diseases": [
+        {
+          "name": "Diabète sucré",
+          "symptoms": "Polyphagie, polydipsie, polyurie, perte de poids malgré un appétit conservé ; cataracte possible en complication",
+          "prevention": "Alimentation sans sucres libres : éviter les fruits sucrés et les mélanges du commerce contenant de la mélasse ou d'autres ingrédients sucrés",
+          "whenToConsult": "Dès augmentation de la consommation d'eau ou de nourriture, ou de la miction"
+        },
+        {
+          "name": "Bumblefoot (pododermatite)",
+          "symptoms": "Gonflement de la patte, claudication, abcès visible sous la plante du pied",
+          "prevention": "Éviter les sols en plastique ou durs ; garnir le plancher de tapis d'herbe ou de substrat doux, nettoyage régulier",
+          "whenToConsult": "Dès boiterie ou gonflement du pied"
+        },
+        {
+          "name": "Problèmes dentaires",
+          "symptoms": "Hypersalivation, réduction de l'appétit, gonflement facial asymétrique",
+          "prevention": "Dents à croissance continue : fournir des éléments à ronger (bois, foin grossier) pour l'usure dentaire",
+          "whenToConsult": "Dès modification du comportement alimentaire, hypersalivation ou gonflement facial"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_degu",
+          "title": "Common degu - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "début de la saison de reproduction à l'automne (hémisphère sud, Chili) ; naissances au début-milieu du printemps",
+      "gestationDays": 90,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Gestation d'environ 90 jours, longue pour un rongeur non caviomorphe. Portée moyenne de 6 petits (de 1 ou 2 jusqu'à 12). Petits nés entièrement fourrés, yeux ouverts. Les mâles participent à la protection et à l'éducation des petits, ce qui est inhabituel chez les rongeurs.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_degu",
+          "title": "Common degu - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5285167,
+    "reproduction": {
+      "season": "octobre à décembre",
+      "gestationDays": 130,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "modere",
+      "notes": "Accouplement d'octobre à décembre. Gestation de 120 à 140 jours (130 = valeur médiane). Un seul petit par portée, né précoce : entièrement fourré, yeux ouverts, capable de manger des aliments solides dès le premier jour. Pour le genre Lagidium (données de la viscache du Nord) : maturité sexuelle vers 1 an, sevrage vers 8 semaines.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lagidium",
+          "title": "Lagidium - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5285942,
+    "reproduction": {
+      "season": "naissances de mai à juillet",
+      "gestationDays": 210,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction polygame. Gestation de 7 mois ; un seul petit né de mai à juillet, pesant environ 1,7 à 1,9 kg. Absence de soins paternels. Le jeune quitte le terrier avec sa mère vers 2 semaines, mange des termites vers 9 semaines, creuse son propre terrier vers 6 mois. Maturité sexuelle vers 2 ans.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Aardvark",
+          "title": "Aardvark - Wikipedia EN"
+        }
+      ]
+    }
+  }
+]

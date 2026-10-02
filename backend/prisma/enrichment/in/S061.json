@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104061079,
+  "commonNameFr": "Chat pêcheur",
+  "scientificName": "Prionailurus viverrinus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104069250,
+  "commonNameFr": "Antilope cervicapre",
+  "scientificName": "Antilope cervicapra",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104076753,
+  "commonNameFr": "Gecko géant de Madagascar",
+  "scientificName": "Phelsuma grandis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,60 @@
+[
+  {
+    "speciesId": 5281802,
+    "reproduction": {
+      "season": "printemps à fin automne en zones tempérées",
+      "gestationDays": 65,
+      "incubationDays": null,
+      "litterSizeMin": 2,
+      "litterSizeMax": 5,
+      "sexualMaturityMonths": 7,
+      "breedingDifficulty": "facile",
+      "notes": "Femelle fertile du printemps à la fin de l'automne en zones tempérées, toute l'année en zones équatoriales ; plusieurs cycles œstraux par an, ovulation induite par l'accouplement. Maturité sexuelle vers 5 à 10 mois selon le sexe et la race (environ 7 mois en moyenne). Gestation de 64 à 67 jours (moyenne 65). Portées souvent de 2 à 5 chatons. Sevrage complet vers 6 à 8 semaines.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Cat", "title": "Cat - Wikipedia"},
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Chat", "title": "Chat - Wikipédia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 5282447,
+    "reproduction": {
+      "season": null,
+      "gestationDays": 42,
+      "incubationDays": null,
+      "litterSizeMin": 3,
+      "litterSizeMax": 7,
+      "sexualMaturityMonths": 6,
+      "breedingDifficulty": "modere",
+      "notes": "Gestation moyenne de 42 jours. Femelles à ovulation induite par l'accouplement ; la copulation peut dépasser 1 h. Portées de 3 à 7 petits ; sevrage après 3 à 6 semaines. Maturité sexuelle vers 6 mois. Une femelle peut avoir 2 ou 3 portées par an. Dimorphisme sexuel marqué : les mâles sont nettement plus grands.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Ferret", "title": "Ferret - Wikipedia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 5282475,
+    "health": {
+      "diseases": [
+        {"name": "Infection à coronavirus (SARS-CoV-2)", "symptoms": "Difficultés respiratoires, apathie, perte d'appétit", "prevention": "Limiter le contact avec des personnes infectées, hygiène stricte, surveillance vétérinaire", "whenToConsult": "Consultation vétérinaire immédiate si symptômes respiratoires"},
+        {"name": "Parasitose externe (puces, tiques)", "symptoms": "Grattage excessif, perte de poils, irritations cutanées", "prevention": "Inspection régulière, traitements antiparasitaires, hygiène de l'enclos", "whenToConsult": "Traitement vétérinaire rapide si infestation confirmée"}
+      ],
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/American_mink", "title": "American mink - Wikipedia"}
+      ]
+    },
+    "reproduction": {
+      "season": "février à avril (mise bas d'avril à juin)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 10,
+      "breedingDifficulty": "avance",
+      "notes": "Saison de reproduction de février (sud de l'aire) à avril (nord). Implantation embryonnaire retardée : la gestation dure de 40 à 75 jours, dont environ 30 à 32 jours de développement embryonnaire effectif. Portées de 4 petits en moyenne ; des portées exceptionnelles de 11 (Tartarie) et 16 (États-Unis) ont été relevées. Les petits naissent aveugles, ouvrent les yeux vers 25 jours et sont sevrés vers 5 semaines. Maturité sexuelle vers 10 mois.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/American_mink", "title": "American mink - Wikipedia"}
+      ]
+    }
+  }
+]

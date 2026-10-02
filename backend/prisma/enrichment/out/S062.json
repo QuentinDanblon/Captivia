@@ -1,0 +1,203 @@
+[
+  {
+    "speciesId": 104085484,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {"name": "Rongeurs, insectes, œufs ou poisson", "frequency": "hebdomadaire", "notes": "Source de protéines animales (omnivore opportuniste, en captivité souvent plutôt carnée)"},
+        {"name": "Fruits et légumes divers", "frequency": "hebdomadaire", "notes": "Compléments végétaux"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Aliments salés ou gras transformés", "reason": "Digestion reptilienne inadaptée"},
+        {"name": "Fruits trop sucrés ou exotiques inconnus", "reason": "Surcharge hépatique"}
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Brumation hivernale en nature (jusqu'à 7 mois selon les régions), régime varié",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Red_tegu", "title": "Red tegu - Wikipedia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium 200x120x100cm minimum, substrat profond pour fouilles et repos",
+      "lightNeeds": "Cycle jour/nuit, lampe chauffante (point chaud), UVB quotidien",
+      "activityEnrichment": "Cachettes, terriers, roches plates, bois pour escalade, substrat pour fouille",
+      "hygieneNotes": "Brumisation hebdomadaire, nettoyage des zones humides, abreuvoir régulièrement rempli",
+      "costEstimate": "moyen",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Red_tegu", "title": "Red tegu - Wikipedia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Lézard terrestre diurne, docile, dressable, excellent fouisseur toute l'année, brumation hivernale en nature",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon avec supervision: tempérament calme",
+      "compatibilityWithOtherAnimals": "Séparation recommandée: omnivore opportuniste pouvant s'attaquer aux petits animaux",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Red_tegu", "title": "Red tegu - Wikipedia"}
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": "modere",
+      "notes": "Maturité sexuelle généralement atteinte en 2 à 3 ans, longévité jusqu'à 15-20 ans en captivité",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Red_tegu", "title": "Red tegu - Wikipedia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 104087619,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {"name": "Feuillage frais (ronce, mûrier, hibiscus)", "frequency": "quotidienne", "notes": "Plus de 100 espèces de plantes consommées en nature (feuilles, fleurs, graines, fruits, jeunes pousses)"},
+        {"name": "Fruits mûrs saisonniers", "frequency": "hebdomadaire", "notes": "Complément énergétique (davantage de fruits en saison humide en nature)"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Laitue iceberg, pâtes blanches", "reason": "Carence nutritionnelle, peu de fibres"},
+        {"name": "Fruits pesticides, végétaux toxiques", "reason": "Empoisonnement potentiel"}
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Grande variété végétale cruciale, supplément calcium D3 recommandé, eau fraîche pulvérisée quotidienne",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana", "title": "Lesser Antillean iguana - Wikipedia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 32,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium vertical très grand 150x150x180cm minimum ou serre",
+      "lightNeeds": "UVB 10-12h quotidien indispensable, lampe chauffante point chaud 28-30°C",
+      "activityEnrichment": "Branches robustes pour escalade, plantes vivantes non toxiques, cachettes arboricoles",
+      "hygieneNotes": "Brumisation régulière, aération, nettoyage végétation décomposée",
+      "costEstimate": "élevé",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana", "title": "Lesser Antillean iguana - Wikipedia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Iguane arboricole des Antilles, dimorphisme sexuel marqué (mâles plus grands, bajoues roses et écailles bleues autour des yeux)",
+      "sociability": null,
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillé: espèce en danger critique d'extinction, élevage réservé aux programmes de conservation",
+      "compatibilityWithOtherAnimals": "Ne jamais cohabiter ni croiser avec l'iguane vert (hybridation, principale cause de déclin): séparation stricte",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana", "title": "Lesser Antillean iguana - Wikipedia"}
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce en danger critique d'extinction (UICN), légalement protégée de la chasse dans son aire de répartition"]
+      },
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana", "title": "Lesser Antillean iguana - Wikipedia (CITES II, statut UICN)"}
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 30,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Jusqu'à 30 œufs par ponte; en captivité la plupart des œufs pondus sont infertiles; éclosions réussies au Durrell Wildlife Conservation Trust (1997, 8 en 2000, 11 en 2016) et programmes d'élevage dans plusieurs zoos",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana", "title": "Lesser Antillean iguana - Wikipedia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 104093507,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {"name": "Petits lézards", "frequency": "quotidienne", "notes": "Proies principales naturelles"},
+        {"name": "Petits mammifères (souriceaux)", "frequency": "hebdomadaire", "notes": "Parfois chassés en nature, avec d'autres petits serpents"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Rongeurs trop gros", "reason": "Risque asphyxie ou étouffement"},
+        {"name": "Aliments préparés", "reason": "Contaminants non appropriés aux reptiles"}
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Proies appropriées à la taille buccale, espèce hibernante en hiver",
+      "sources": [
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Coronelle_girondine", "title": "Coronelle girondine - Wikipédia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium 80x50x60cm pour individu adulte, substrat profond (écorce, sable)",
+      "lightNeeds": "Cycle naturel 12h/12h, refuge sombre nécessaire (milieux secs: garrigue, haies, terrains rocailleux)",
+      "activityEnrichment": "Caches multiples, substrat fouissable, zones fraîches et tièdes, hibernaculum optionnel",
+      "hygieneNotes": "Eau fraîche constante, nettoyage mensuel des zones souillées, change total substrat trimestriel",
+      "costEstimate": "faible",
+      "sources": [
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Coronelle_girondine", "title": "Coronelle girondine - Wikipédia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Couleuvre discrète et calme, chasse le soir et la nuit par temps chaud, hibernante; inoffensive (aplatit la tête pour imiter une vipère en cas de menace)",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Possible: serpent calme et inoffensif, mais espèce totalement protégée en France (voir législation)",
+      "compatibilityWithOtherAnimals": "Séparation recommandée: prédatrice de lézards et parfois d'autres petits serpents",
+      "sources": [
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Coronelle_girondine", "title": "Coronelle girondine - Wikipédia"}
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce totalement protégée en France depuis 1976", "Convention de Berne: annexe III"]
+      },
+      "sources": [
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Coronelle_girondine", "title": "Coronelle girondine - Wikipédia (protection)"}
+      ]
+    },
+    "reproduction": {
+      "season": "printemps (après l'hibernation)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 16,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Ovipare: la femelle pond de 1 à 16 œufs oblongs, généralement collés ensemble",
+      "sources": [
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Coronelle_girondine", "title": "Coronelle girondine - Wikipédia"}
+      ]
+    }
+  }
+]

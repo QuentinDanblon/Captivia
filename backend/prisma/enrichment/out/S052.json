@@ -1,0 +1,401 @@
+[
+  {
+    "speciesId": 9589697,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Graminées et herbes fraîches",
+          "frequency": "quotidienne",
+          "notes": "Base naturelle de l'alimentation"
+        },
+        {
+          "name": "Feuillage varié, racines, fruits",
+          "frequency": "quotidienne",
+          "notes": "Suppléments nutritifs naturels"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Plantes toxiques (taxus, rhododendron)",
+          "reason": "Toxicité mortelle pour les marsuppiaux"
+        },
+        {
+          "name": "Grains traités chimiquement",
+          "reason": "Risque toxicologique"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Herbes variées riches en fibres, accès à pâturage naturel, cellulose pour digestion ruminale",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Wallaby",
+          "title": "Wallaby — Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 10,
+      "tempMax": 25,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Enclos 500m² minimum, terrain accidenté avec refuge",
+      "lightNeeds": "Lumière naturelle optimale, protection solaire en été extrême",
+      "activityEnrichment": "Parcours avec sauts, zones boisées, terriers naturels",
+      "hygieneNotes": "Nettoyage des zones de repos, drainage adéquat du terrain",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Wallaby",
+          "title": "Wallaby — Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Marsupial actif, excellent sauteur (1.5m hauteur, 7m longueur), grégaire en petits groupes, agressif en période de rut",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé, risques de morsure et coup de patte",
+      "compatibilityWithOtherAnimals": "Cohabitation avec congénères sous supervision, agressivité mâle importante",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Wallaby",
+          "title": "Wallaby — Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Entérite infectieuse",
+          "symptoms": "Diarrhée liquide, perte de poids rapide, déshydratation",
+          "prevention": "Hygiène stricte enclos, alimentation propre, isolement des malades",
+          "whenToConsult": "Immédiatement à premiers signes de diarrhée anormale"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Perte de poids progressive, pelage terne, troubles digestifs",
+          "prevention": "Traitement antiparasitaire préventif, hygiène de l'enclos",
+          "whenToConsult": "À suspicion de parasites ou perte poids anormale"
+        },
+        {
+          "name": "Myopie infectieuse",
+          "symptoms": "Occlusion oculaire, écoulements, rougeur",
+          "prevention": "Protéger des courants d'air, hygiène optimale",
+          "whenToConsult": "À premier signe d'infection oculaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Wallaby",
+          "title": "Wallaby — Wikipédia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": ["Arrêté du 21 novembre 1997"],
+        "restrictions": ["Espèce exotique, détention contrôlée"]
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.legifrance.gouv.fr",
+          "title": "Legifrance — Arrêté du 21 novembre 1997"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 35,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "avance",
+      "notes": "Marsupial, jeune élevé en poche, une portée par an généralement",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Wallaby",
+          "title": "Wallaby — Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 9606290,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grains variés (maïs, blé, orge)",
+          "frequency": "quotidienne",
+          "notes": "Aliment de base"
+        },
+        {
+          "name": "Insectes, vers, vers de terre",
+          "frequency": "2-3 fois par semaine",
+          "notes": "Protéines animales essentielles"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Avocats",
+          "reason": "Persine toxique pour les oiseaux"
+        },
+        {
+          "name": "Sel et sodium en excès",
+          "reason": "Toxicité rénale et cardiaque"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Grains équilibrés, minéraux, calcium pour la production œuf, protéines animales régulières",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dinde",
+          "title": "Dinde — Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 10,
+      "tempMax": 25,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Enclos 50m² minimum avec abri couvert",
+      "lightNeeds": "Lumière naturelle 14-16h/jour, nuits tranquilles pour reproduction",
+      "activityEnrichment": "Zone de fouille, bain de sable, perchoirs élevés, parcours varié",
+      "hygieneNotes": "Nettoyage régulier abri, litière sèche, protection contre prédateurs",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dinde",
+          "title": "Dinde — Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau domestique lourd, peu volant, grégaire, mâle très territorial et agressif en reproduction",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Bon avec enfants sous supervision, attention au mâle en rut",
+      "compatibilityWithOtherAnimals": "Peut cohabiter avec autres volailles, territorial entre mâles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dinde",
+          "title": "Dinde — Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Grippe aviaire (H5N1)",
+          "symptoms": "Apathie, diarrhée aqueuse, gonflement tête/gorge, mort rapide",
+          "prevention": "Isolement de nouveaux oiseaux, hygiène stricte, désinfection enclos",
+          "whenToConsult": "Immédiatement à suspicion, maladie hautement contagieuse"
+        },
+        {
+          "name": "Coccidiose",
+          "symptoms": "Diarrhée sanguinolente, dépression, perte de poids",
+          "prevention": "Enclos sec, hygiène optimale, éviter surpopulation, traitement préventif",
+          "whenToConsult": "À apparition de diarrhée anormale"
+        },
+        {
+          "name": "Salmonellose",
+          "symptoms": "Diarrhée, arthrite, paralysie partielle, mort possible",
+          "prevention": "Hygiène rigoureuse, eau propre, isolation des malades",
+          "whenToConsult": "À premiers signes de maladie systémique"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dinde",
+          "title": "Dinde — Wikipédia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.legifrance.gouv.fr",
+          "title": "Legifrance"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "printemps-été",
+      "gestationDays": null,
+      "incubationDays": 28,
+      "litterSizeMin": 8,
+      "litterSizeMax": 15,
+      "sexualMaturityMonths": 5,
+      "breedingDifficulty": "facile",
+      "notes": "Ponte saisonnière, incubation naturelle ou artificielle, plusieurs portées par saison",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dinde",
+          "title": "Dinde — Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 9761484,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Végétation aquatique et graminées",
+          "frequency": "quotidienne",
+          "notes": "Base naturelle, herbivore obligatoire"
+        },
+        {
+          "name": "Invertébrés aquatiques, poissons, graines",
+          "frequency": "quotidienne",
+          "notes": "Aliments supplémentaires variés"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Avocats",
+          "reason": "Persine toxique"
+        },
+        {
+          "name": "Aliments traités pesticides",
+          "reason": "Accumulation toxique possible"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Alimentation naturelle en eau, plantes aquatiques, insectes, minéraux calcium pour coquilles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
+          "title": "Canard colvert — Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 5,
+      "tempMax": 25,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Point d'eau 100L minimum, enclos 30m² avec zone herbeuse",
+      "lightNeeds": "Lumière naturelle 12-14h/jour pour reproduction",
+      "activityEnrichment": "Nage libre, zones de fouille, végétation aquatique, refuge sombre",
+      "hygieneNotes": "Eau changée régulièrement, abri sec et bien ventilé, litière fraîche",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
+          "title": "Canard colvert — Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau aquatique, grégaire, bon nageur et volant, mâle territorial en reproduction",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Bon avec enfants sous supervision, vigilance à la morsure/pinçure",
+      "compatibilityWithOtherAnimals": "Cohabitation avec autres anatidés possible, marginal avec mâles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
+          "title": "Canard colvert — Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Botulisme aviaire",
+          "symptoms": "Paralysie progressive, mort rapide si sévère",
+          "prevention": "Eau propre, aliments non moisis, retrait débris eau",
+          "whenToConsult": "Immédiatement à signes de paralysie"
+        },
+        {
+          "name": "Coccidiose",
+          "symptoms": "Diarrhée, apathie, retard croissance chez jeunes",
+          "prevention": "Enclos sec, hygiène eau, éviter surpopulation",
+          "whenToConsult": "À apparition diarrhée anormale"
+        },
+        {
+          "name": "Entérite virale",
+          "symptoms": "Diarrhée verte, déshydratation, mort possible",
+          "prevention": "Isolation des malades, hygiène stricte, vaccination si possible",
+          "whenToConsult": "À premiers symptômes entériques"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
+          "title": "Canard colvert — Wikipédia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.legifrance.gouv.fr",
+          "title": "Legifrance"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "printemps",
+      "gestationDays": null,
+      "incubationDays": 28,
+      "litterSizeMin": 8,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": 3,
+      "breedingDifficulty": "facile",
+      "notes": "Pont saisonnière au printemps, incubation naturelle, cantons très précoces",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Canard_colvert",
+          "title": "Canard colvert — Wikipédia"
+        }
+      ]
+    }
+  }
+]

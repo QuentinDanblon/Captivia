@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2437577,
+  "commonNameFr": "Agouti",
+  "scientificName": "Dasyprocta leporina",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2437619,
+  "commonNameFr": "Mara",
+  "scientificName": "Dolichotis patagonum",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2439965,
+  "commonNameFr": "Opossum pygmée",
+  "scientificName": "Monodelphis domestica",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

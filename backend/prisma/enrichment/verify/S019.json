@@ -1,0 +1,43 @@
+[
+  {
+    "speciesId": 2446584,
+    "checked": ["feeding", "behavior", "reproduction", "legislation"],
+    "corrected": [
+      "reproduction.notes: '4 pontes/an' → jusqu'à 10 pontes/an (en.wikipedia) ; litterSizeMin 1 → 2 ; sexe par T° ajouté (29°C mâles / 22°C femelles)",
+      "behavior: longévité '40+ ans' → >20 ans, jusqu'à 50 (en.wikipedia) ; 'semi-grégaire' → solitaire ; agressivité en reproduction (morsures) confirmée",
+      "feeding: quantités '1,5-2 oz', 'aucune alimentation à volonté' retirées ; régime sauvage (fruits, nectar, sève, insectes, petits vertébrés) ajouté d'après Wikipedia"
+    ],
+    "removed": [
+      "legislation entière → null (CITES/UE non confirmé ; 'déclaration NAC' et arrêté 1997 non confirmés ; source karmactive non vérifiable)",
+      "habitat.tempMin/Max, humidityMin/Max (non confirmés) → null ; UVB T5 2-7% et dimensions précises retirés",
+      "reproduction.incubationDays 75, sexualMaturityMonths 60, season 'toute l'année' → null (non confirmés)",
+      "sources thebiodude.com, bgsu.edu, reptiletalk.net, zenhabitats.com (non ouvertes dans le budget de temps, non vérifiables) ; health/habitat gardés avec la seule source Wikipedia (maladies génériques, confiance basse)"
+    ],
+    "confidence": "low"
+  },
+  {
+    "speciesId": 2448340,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.notes: 'Femelles pondent seules' retiré (espèce ovovivipare) ; gestation 100-120 j, portée 10-65 (moy. 25), saison avril-août, ~50% des femelles/an, stockage de sperme 1 an, maturité 3-4 ans : tous confirmés (en.wikipedia)"
+    ],
+    "removed": [],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 2448847,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation: CITES II (depuis 1995) confirmé ; euAnnex 'B' → null ; permits inventés ('déclaration', 'non commercialisable en magasin sans autorisation') retirés ; 'habitat Madagascar protégé' et 'majorité des spécimens sauvages' retirés",
+      "behavior: longévité '8-14 ans' → jusqu'à 14 ans en captivité (en.wikipedia) ; 'cornes verruqueuses' retiré",
+      "habitat.lightNeeds: phrase absurde '(pas CITES obligatoire comme geckos)' retirée",
+      "reproduction: incubation 400-660 j (jusqu'à 781), 20-60 œufs, ~30 cm, maturité ~3 ans confirmés ; saison 'saison des pluies' → null",
+      "feeding: fréquences '3-4x/semaine' et 'mensuelle' non confirmées → 'variable'/'occasionnelle' ; item 'insectes trop mous' retiré"
+    ],
+    "removed": [
+      "habitat.tempMin/Max (13/29), humidité 70-90, dimensions 120x60x120 → null / généralisé (non confirmés)",
+      "health: seuils '1-2 semaines' retirés ; source reptiletalk.net (non vérifiée) remplacée par Wikipedia (maladies génériques, confiance basse)"
+    ],
+    "confidence": "medium"
+  }
+]

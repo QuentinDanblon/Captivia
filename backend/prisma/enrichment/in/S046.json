@@ -1,0 +1,37 @@
+[
+ {
+  "speciesId": 5345021,
+  "commonNameFr": "Inséparable Rosâtre",
+  "scientificName": "Agapornis roseicollis",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5345889,
+  "commonNameFr": "Perroquet Gris d'Afrique",
+  "scientificName": "Psittacus erithacus",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5347189,
+  "commonNameFr": "Perruche Calopsite",
+  "scientificName": "Nymphicus hollandicus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ }
+]

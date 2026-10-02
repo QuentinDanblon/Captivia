@@ -1,0 +1,452 @@
+[
+  {
+    "speciesId": 2441110,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Herbe de pâture (graminées et légumineuses)",
+          "frequency": "quotidienne",
+          "notes": "Pâturage avec accès constant, laisser l'herbe récupérer grâce à un pâturage tournant"
+        },
+        {
+          "name": "Foin de qualité",
+          "frequency": "quotidienne",
+          "notes": "Aliment de base quand l'herbe manque (hiver) ; fibres indispensables au bon transit"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments concentrés en grande quantité",
+          "reason": "Une alimentation déséquilibrée (manque de fibres, surcharge en concentrés) favorise l'entérotoxémie"
+        },
+        {
+          "name": "Changement alimentaire brusque",
+          "reason": "Les transitions rapides favorisent l'entérotoxémie ; changer de ration progressivement"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès constant à l'eau potable. Le mouton est un ruminant herbivore (estomac à quatre compartiments). Éviter les changements alimentaires rapides.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Mouton",
+          "title": "Mouton - Wikipédia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.reussir.fr/patre/reperer-les-enterotoxemies-lautopsie",
+          "title": "Entérotoxémie - Réussir"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Environ 500 m² de pâture pour deux moutons (race d'Ouessant, petite race) ; davantage pour les races plus grandes",
+      "lightNeeds": "Lumière naturelle, accès régulier à l'extérieur",
+      "activityEnrichment": "Pâturage naturel avec possibilité de se mouvoir librement ; instinct grégaire à respecter (élevage en groupe)",
+      "hygieneNotes": "Bergerie bien ventilée pour éviter humidité et maladies respiratoires ; nettoyage régulier des litières",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://edito.seloger.com/conseils-d-experts/reglementations/chevres-moutons-anes-regles-connaitre-de-accueillir-jardin",
+          "title": "Chèvre, mouton, âne... Les règles à connaître avant de les accueillir dans son jardin"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Mouton",
+          "title": "Mouton - Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Animal paisible et grégaire, reconnaît les visages individuels sur la durée. Communique par bêlements, établit une hiérarchie sociale.",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Bon avec enfants si socialisé tôt ; à surveiller selon la taille des enfants",
+      "compatibilityWithOtherAnimals": "Excellent avec congénères ; instinct grégaire fort. Cohabitation possible avec chèvres.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Mouton",
+          "title": "Mouton - Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Tremblante (Scrapie)",
+          "symptoms": "Troubles du comportement (anxiété, agressivité), faiblesse de l'arrière-train, chutes soudaines, démangeaisons intenses, perte de poids",
+          "prevention": "Maladie à déclaration obligatoire : signaler tout cas suspect ; éviter l'achat d'animaux de source douteuse ; biosécurité stricte",
+          "whenToConsult": "Dès les premiers signes nerveux ou comportementaux inhabituels (consulter un vétérinaire immédiatement)"
+        },
+        {
+          "name": "Entérotoxémie (Clostridium perfringens)",
+          "symptoms": "Mort souvent subite ; gonflement rapide de l'abdomen, mousse parfois teintée de sang aux naseaux, agitation, température élevée (41-42°C)",
+          "prevention": "Alimentation contrôlée (éviter les changements brusques et la surcharge en concentrés, apporter assez de fibres) ; avis du vétérinaire sur la vaccination",
+          "whenToConsult": "Urgence vétérinaire ; la mort peut survenir en quelques minutes"
+        },
+        {
+          "name": "Parasitisme interne (nématodes : Haemonchus contortus, Teladorsagia circumcincta)",
+          "symptoms": "Anémie, faiblesse, ralentissement de la croissance, troubles digestifs, perte de poids",
+          "prevention": "Rotation des pâtures ; vermifugation raisonnée sur avis vétérinaire ; éviter les zones humides ; hygiène de la bergerie",
+          "whenToConsult": "Surveillance régulière ; coproscopie sur avis vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.blv.admin.ch/fr/tremblante-du-mouton",
+          "title": "Tremblante du mouton (scrapie) - BLV"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.reussir.fr/patre/reperer-les-enterotoxemies-lautopsie",
+          "title": "Entérotoxémie - Réussir"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Mouton",
+          "title": "Mouton - Wikipédia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Se renseigner auprès de la mairie (PLU : les zones urbaines denses peuvent restreindre l'élevage) ; déclaration et identification par boucle d'oreille obligatoires même pour un seul animal ; respecter le règlement sanitaire départemental"]
+      },
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://edito.seloger.com/conseils-d-experts/reglementations/chevres-moutons-anes-regles-connaitre-de-accueillir-jardin",
+          "title": "Règles à connaître pour accueillir moutons, chèvres et ânes dans son jardin"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "saisonnière (liée à la durée du jour)",
+      "gestationDays": 150,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": 6,
+      "breedingDifficulty": "facile",
+      "notes": "Gestation d'environ cinq mois (150 jours). La plupart des brebis ont une ou deux agneaux par portée ; certaines races ont régulièrement des portées plus importantes. Maturité sexuelle des brebis entre 6 et 8 mois, des béliers entre 4 et 6 mois. La reproduction est le plus souvent saisonnière, liée à la durée du jour.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Mouton",
+          "title": "Mouton - Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2441385,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Poissons (frais ou congelés-décongelés)",
+          "frequency": "hebdomadaire",
+          "notes": "Poissons entiers, taille adaptée à l'animal"
+        },
+        {
+          "name": "Crustacés et autres invertébrés (écrevisses, crevettes, crabes)",
+          "frequency": "hebdomadaire",
+          "notes": "Proies entières ; à l'état sauvage : poissons, crabes, crevettes, grenouilles, gastéropodes"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments de la table humaine",
+          "reason": "Mal équilibrés nutritionnellement"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Régime carnivore généraliste ; en élevage zoologique les proies sont données entières (poisson, écrevisses, rongeurs, volaille), environ une fois par semaine, à réduire légèrement en saison fraîche. Accès constant à une eau propre.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exoticskeeper.com/?p=22655",
+          "title": "Dwarf Crocodile Care - Exoticskeeper"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dwarf_crocodile",
+          "title": "Dwarf crocodile - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 26,
+      "tempMax": 35,
+      "humidityMin": 70,
+      "humidityMax": 90,
+      "minSpaceSize": "Environ 20 m² dont deux tiers de surface en eau (profondeur max. d'environ 80 cm) pour un adulte",
+      "lightNeeds": "UVB modéré (UVI max. 2,7 en zone d'exposition) ; zones sombres et abritées essentielles",
+      "activityEnrichment": "Zones de refuge terrestres et aquatiques, cachettes ; décor naturel",
+      "hygieneNotes": "Filtration robuste de l'eau (eau entre 26 et 30°C) ; changements d'eau réguliers ; hygiène de l'enclos impérative",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exoticskeeper.com/?p=22655",
+          "title": "Dwarf Crocodile Care Guide"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Timide, discret et cryptique, principalement nocturne. Passe la journée dans de petites mares ou des terriers. Animal solitaire qui n'interagit étroitement avec ses congénères qu'en période de reproduction.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé ; animal de 1,5 à 1,9 m à l'âge adulte nécessitant une installation spécialisée et une grande expertise",
+      "compatibilityWithOtherAnimals": "Cohabitation uniquement dans de très grands bassins d'exposition (poissons) ; risque de prédation",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exoticskeeper.com/?p=22655",
+          "title": "Dwarf Crocodile Care"
+        },
+        {
+          "type": "guide",
+          "url": "https://badoca.com/en/?p=93175",
+          "title": "Dwarf Crocodile - Badoca Safari Park"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection respiratoire (pneumonie)",
+          "symptoms": "Respiration laborieuse, bruits respiratoires, léthargie, perte d'appétit",
+          "prevention": "Gradient thermique correct (26-35°C) ; humidité adéquate (70-90%) ; hygiène de l'eau excellente ; éviter le stress",
+          "whenToConsult": "Dès les signes respiratoires ; urgence si la respiration est très difficile"
+        },
+        {
+          "name": "Parasitisme interne",
+          "symptoms": "Perte de poids, régurgitations, selles anormales, léthargie",
+          "prevention": "Quarantaine des nouveaux animaux ; hygiène irréprochable ; alimentation variée et saine",
+          "whenToConsult": "Examen des selles sur avis vétérinaire ; traitement antiparasitaire si infestation"
+        },
+        {
+          "name": "Carence en calcium / maladie osseuse métabolique",
+          "symptoms": "Mâchoire molle, déformations osseuses, difficultés motrices",
+          "prevention": "Éclairage UVB adapté ; alimentation variée en proies entières ; supplémentation selon avis vétérinaire",
+          "whenToConsult": "À la moindre suspicion de déformation ; suivi vétérinaire recommandé"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exoticskeeper.com/blog/breeding-dwarf-crocodile-in-captivity/",
+          "title": "Dwarf Crocodile Breeding in Captivity"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'Annexe I de la CITES : commerce international strictement encadré ; la détention d'un crocodilien en France est soumise à autorisation (se renseigner auprès de la DDPP/préfecture avant toute acquisition)"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dwarf_crocodile",
+          "title": "Dwarf crocodile - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "début de la saison des pluies (avril-juin) à l'état sauvage",
+      "gestationDays": null,
+      "incubationDays": 85,
+      "litterSizeMin": 10,
+      "litterSizeMax": 20,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Espèce ovipare. Une ponte compte généralement environ 10 œufs, jusqu'à 20. Incubation de 85 à 105 jours (environ 85 jours en incubation artificielle). Le sexe dépend de la température d'incubation. Reproduction réalisée en parcs zoologiques (programme d'élevage européen suivi par des studbooks) : réservée à des structures expertes.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exoticskeeper.com/blog/breeding-dwarf-crocodile-in-captivity/",
+          "title": "Breeding Dwarf Crocodiles in Captivity"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dwarf_crocodile",
+          "title": "Dwarf crocodile - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2441454,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Feuilles et plantes sauvages (laitue, endive, plantain)",
+          "frequency": "quotidienne",
+          "notes": "Privilégier la variété ; riche en fibres et minéraux ; à l'état sauvage : feuilles, fleurs, parfois fruits"
+        },
+        {
+          "name": "Légumes (courge, poivron, carotte râpée, courgette)",
+          "frequency": "3-4x/semaine",
+          "notes": "En complément des plantes sauvages"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Fruits en excès",
+          "reason": "Trop sucrés, favorisent les troubles digestifs"
+        },
+        {
+          "name": "Chou, tomates et légumineuses",
+          "reason": "Peuvent être toxiques ou mal tolérés ; l'acide oxalique peut s'accumuler et provoquer une insuffisance rénale"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès à des herbes sauvages en enclos extérieur idéalement. Éclairage UVB indispensable à la synthèse de la vitamine D3 ; apport en calcium selon avis vétérinaire. Eau en bassine peu profonde.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_d%27Hermann",
+          "title": "Tortue d'Hermann - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hermann%27s_tortoise",
+          "title": "Hermann's tortoise - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 15,
+      "tempMax": 35,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "UVB indispensable ; zone de chauffe (basking) de 26 à 35°C ; température nocturne de 15 à 21°C ; alternance jour/nuit",
+      "activityEnrichment": "Substrat à creuser ; roches, plantes ; accès extérieur saisonnier idéalement",
+      "hygieneNotes": "Substrat maintenu propre et légèrement humide ; cachettes multiples ; nettoyage régulier",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hermann%27s_tortoise",
+          "title": "Hermann's tortoise - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_d%27Hermann",
+          "title": "Tortue d'Hermann - Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Diurne, terrestre. Mâles et femelles vivent en solitaires et ne se rencontrent que pour l'accouplement. Hiverne à l'état naturel de mi-octobre à mi-mars.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillé ; fragile, espèce protégée, nécessite de l'expertise ; les manipulations sont stressantes",
+      "compatibilityWithOtherAnimals": "Espèce solitaire : à élever seule en général ; risque de blessures lors des accouplements",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_d%27Hermann",
+          "title": "Tortue d'Hermann - Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection respiratoire (stomatite, pneumonie)",
+          "symptoms": "Respiration bruyante ou laborieuse, écoulement nasal/oculaire, gonflement de la gueule, refus de s'alimenter, léthargie",
+          "prevention": "Gradient thermique correct ; hygiène de l'enclos excellente ; stress minimisé ; quarantaine des nouveaux individus",
+          "whenToConsult": "Urgence vétérinaire ; ces infections peuvent s'aggraver rapidement"
+        },
+        {
+          "name": "Maladie osseuse métabolique (carence calcium/vitamine D3)",
+          "symptoms": "Carapace molle, mâchoire faible, déformations, ralentissement de la motricité",
+          "prevention": "Éclairage UVB indispensable (synthèse de la vitamine D3) ; alimentation riche en calcium (légumes verts) ; supplémentation selon avis vétérinaire",
+          "whenToConsult": "Consultation rapide dès les premiers signes"
+        },
+        {
+          "name": "Parasitisme interne et externe",
+          "symptoms": "Abattement, anorexie, diarrhée ou constipation, gonflement abdominal",
+          "prevention": "Quarantaine des nouveaux individus ; hygiène stricte de l'enclos ; contrôle des selles sur avis vétérinaire ; éviter la surpopulation",
+          "whenToConsult": "Examen parasitologique dès suspicion"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hermann%27s_tortoise",
+          "title": "Hermann's tortoise - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_d%27Hermann",
+          "title": "Tortue d'Hermann - Wikipédia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": "A",
+        "permits": ["Autorisation d'élevage d'agrément (AEA) jusqu'à 6 adultes ; certificat de capacité au-delà (selon Wikipédia)"],
+        "restrictions": ["Espèce protégée (CITES Annexe II, UE Annexe A) ; commerce interdit en France selon un arrêté de 1985 (selon Wikipédia) ; ne jamais prélever d'animal dans la nature"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_d%27Hermann",
+          "title": "Tortue d'Hermann - Wikipédia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "mai à juillet (ponte)",
+      "gestationDays": null,
+      "incubationDays": 75,
+      "litterSizeMin": 1,
+      "litterSizeMax": 5,
+      "sexualMaturityMonths": 144,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare. Ponte en moyenne de 1 à 5 œufs (jusqu'à 12 selon Wikipédia anglais), la femelle pouvant pondre deux à trois fois dans l'année ; période de ponte de mai à juillet. Incubation d'environ 60 à 75 jours selon Wikipédia FR (environ 90 jours selon Wikipédia EN, variable avec la température). Le sexe dépend de la température d'incubation (à 26°C uniquement des mâles, à 30°C uniquement des femelles). Maturité sexuelle vers la 12e ou 13e année. Reproduction à réserver à des éleveurs expérimentés.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_d%27Hermann",
+          "title": "Tortue d'Hermann - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hermann%27s_tortoise",
+          "title": "Hermann's tortoise - Wikipedia"
+        }
+      ]
+    }
+  }
+]

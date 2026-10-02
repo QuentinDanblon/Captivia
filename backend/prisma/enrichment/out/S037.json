@@ -1,0 +1,105 @@
+[
+  {
+    "speciesId": 5228265,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 20,
+      "litterSizeMin": 8,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": 7,
+      "breedingDifficulty": "facile",
+      "notes": "Poules et coqs sont sexuellement matures à partir de 5 à 9 mois. Ponte de 100 à 300 œufs par an selon la race et l'âge ; la formation d'un œuf prend environ 25 à 26 h. La poule commence à couver une fois 8 à 12 œufs déposés dans le nid ; l'incubation dure 19 à 21 jours selon les races et la taille.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Poule_domestique", "title": "Poule domestique - Wikipédia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 5229044,
+    "feeding": {
+      "dietType": "frugivore-grainivore",
+      "recommendedFoods": [
+        {"name": "Granulés pour perroquets (de qualité)", "frequency": "quotidienne", "notes": "Base nutritionnelle complète"},
+        {"name": "Fruits frais (pommes, raisins, baies)", "frequency": "quotidienne", "notes": "Enrichissement naturel, source de vitamines ; l'espèce est frugivore et granivore à l'état sauvage"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Avocat", "reason": "Toxine persine hautement toxique pour les oiseaux"},
+        {"name": "Chocolat et caféine", "reason": "Toxiques pour tous les oiseaux"}
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Calcium et vitamine A importants, accès à un os de sèche comme source de calcium",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Plum-headed_parakeet", "title": "Plum-headed parakeet - Wikipedia"},
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Perruche_%C3%A0_t%C3%AAte_de_prune", "title": "Perruche à tête de prune - Wikipédia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle régulière et alternance jour/nuit stable",
+      "activityEnrichment": "Jouets à mâcher, perchoirs de diamètres variables, cachettes, éléments à détruire",
+      "hygieneNotes": "Nettoyage quotidien des gamelles d'eau et de nourriture, renouvellement régulier du substrat",
+      "costEstimate": "moyen",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Plum-headed_parakeet", "title": "Plum-headed parakeet - Wikipedia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Perroquets grégaires et bruyants, vocalisations régulières ; en captivité, l'espèce peut imiter des sons et des mélodies courtes",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "À surveiller, becquetage possible, socialisation importante",
+      "compatibilityWithOtherAnimals": "Cohabitation possible avec d'autres perroquets calmes de même taille",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Plum-headed_parakeet", "title": "Plum-headed parakeet - Wikipedia"},
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Perruche_%C3%A0_t%C3%AAte_de_prune", "title": "Perruche à tête de prune - Wikipédia"}
+      ]
+    },
+    "health": {
+      "diseases": [
+        {"name": "Syndrome de la plume et du bec (PBFD)", "symptoms": "Perte de plumes anormale et irréversible, malformation du bec et des griffes", "prevention": "Quarantaine, hygiène stricte, test diagnostique avant introduction d'un nouvel oiseau ; aucun traitement spécifique connu", "whenToConsult": "Diagnostic vétérinaire urgent si symptômes"},
+        {"name": "Aspergillose", "symptoms": "Respiration difficile, éternuements, apathie", "prevention": "Environnement sec, sans humidité excessive, pas de moisissures", "whenToConsult": "Consultation vétérinaire immédiate si signes respiratoires"},
+        {"name": "Malnutrition par carence", "symptoms": "Plumage terne, faiblesse, perte d'appétit", "prevention": "Alimentation équilibrée et variée, supplémentation vitaminique", "whenToConsult": "Consultation vétérinaire régulière, évaluation de l'alimentation"}
+      ],
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Psittacine_beak_and_feather_disease", "title": "Psittacine beak and feather disease - Wikipedia"}
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "décembre à avril en Inde (à l'état sauvage)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 4,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Ponte de 4 à 6 œufs blancs (4-5, parfois 6) dans une cavité d'arbre ou un ancien nid de pic. L'espèce peut s'hybrider avec la perruche de l'Himalaya et la perruche à collier.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Plum-headed_parakeet", "title": "Plum-headed parakeet - Wikipedia"},
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Perruche_%C3%A0_t%C3%AAte_de_prune", "title": "Perruche à tête de prune - Wikipédia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 5281775,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 65,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 8,
+      "sexualMaturityMonths": 1,
+      "breedingDifficulty": "facile",
+      "notes": "Gestation de 60 à 70 jours selon la taille de la portée (moyenne de 4 petits, de 1 à 8). Les jeunes naissent précoces (fourrure, dents, griffes, yeux ouverts) et sont autonomes en quelques heures. Femelles fécondes dès 4 à 5 semaines, mâles vers 9 semaines. Cycle œstral de 15 à 17 jours. Fécondation possible immédiatement après la mise bas (environ une demi-journée). Jusqu'à 5 portées par an possibles, mais plus de 2 par an est déconseillé. Allaitement jusqu'à 4 semaines.",
+      "sources": [
+        {"type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Cochon_d%27Inde", "title": "Cochon d'Inde - Wikipédia"}
+      ]
+    }
+  }
+]

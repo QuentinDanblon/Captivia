@@ -1,0 +1,421 @@
+[
+  {
+    "speciesId": 104013399,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes (grillons, criquets, blattes)",
+          "frequency": null,
+          "notes": "Proies vivantes ; régime principal (insectes et proies de taille comparable)"
+        },
+        {
+          "name": "Petits rongeurs (souriceaux)",
+          "frequency": null,
+          "notes": "Pour les adultes ; le genre Ceratophrys consomme aussi des souris"
+        }
+      ],
+      "foodsToAvoid": [],
+      "mealFrequency": "variable",
+      "specificNeeds": "Prédateur à l'affût très vorace, langue très adhésive ; mange des proies pouvant atteindre près de la moitié de sa taille. Régime riche en protéines.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cranwell%27s_horned_frog",
+          "title": "Cranwell's horned frog — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ceratophrys_cranwelli",
+          "title": "Ceratophrys cranwelli — Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ceratophrys",
+          "title": "Ceratophrys — Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "UVB non indispensable mais peut favoriser l'absorption du calcium",
+      "activityEnrichment": "Substrat humide et meuble permettant de s'enfouir (pas de gravier), cachettes",
+      "hygieneNotes": "Environnement humide, eau propre et déchlorée, manipulations limitées (peau perméable)",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cranwell%27s_horned_frog",
+          "title": "Cranwell's horned frog — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ceratophrys_cranwelli",
+          "title": "Ceratophrys cranwelli — Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Prédateur à l'affût nocturne, généralement inactif mais très vorace ; peut bondir sur plusieurs longueurs de corps pour saisir sa proie ; vie exclusivement terrestre, s'enfouit dans le sol",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Doit vivre seul : cannibale envers les autres grenouilles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cranwell%27s_horned_frog",
+          "title": "Cranwell's horned frog — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ceratophrys_cranwelli",
+          "title": "Ceratophrys cranwelli — Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Impaction (ingestion de substrat)",
+          "symptoms": "Ballonnement, perte d'appétit, absence de selles",
+          "prevention": "Substrat humide adapté (pas de gravier)",
+          "whenToConsult": "Dès les premiers signes"
+        },
+        {
+          "name": "Mycose cutanée",
+          "symptoms": "Plaques blanches ou sombres sur la peau, érosion",
+          "prevention": "Hygiène du terrarium, eau saine",
+          "whenToConsult": "Dès l'apparition de plaques"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Distension abdominale, amaigrissement",
+          "prevention": "Quarantaine insectes proies, alimentation équilibrée",
+          "whenToConsult": "Traitement antiparasitaire spécialisé"
+        },
+        {
+          "name": "Infections bactériennes",
+          "symptoms": "Lésions peau, abcès",
+          "prevention": "Propreté eau/substrat, pas surpopulation",
+          "whenToConsult": "Consulte si progression"
+        },
+        {
+          "name": "Maladie métabolique osseuse",
+          "symptoms": "Déformations ou faiblesse des membres",
+          "prevention": "Supplémentation en calcium et vitamines",
+          "whenToConsult": "Dès l'apparition de déformations"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cranwell%27s_horned_frog",
+          "title": "Cranwell's horned frog — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ceratophrys_cranwelli",
+          "title": "Ceratophrys cranwelli — Wikipédia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Les mâles émettent un chant semblable à celui d'une cigale pour appeler les femelles (genre Ceratophrys). Durée de vie d'environ 1 à 4 ans en nature et jusqu'à 15 ans en captivité (genre Ceratophrys).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ceratophrys",
+          "title": "Ceratophrys — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104015330,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits arthropodes : fourmis, acariens, collemboles",
+          "frequency": "quotidienne",
+          "notes": "Alimentation naturelle (fr/en wikipedia)"
+        },
+        {
+          "name": "Drosophiles",
+          "frequency": "quotidienne",
+          "notes": "Alternative en captivité"
+        }
+      ],
+      "foodsToAvoid": [],
+      "mealFrequency": "daily",
+      "specificNeeds": "Petits arthropodes du sol. Ne fabrique pas ses toxines : il séquestre des alcaloïdes présents dans ses proies (fourmis, acariens).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Plantes denses, mousse, cachettes sombres et humides, points d'eau pour le dépôt des têtards (vit surtout au sol mais grimpe parfois dans les arbres)",
+      "hygieneNotes": "Environnement humide, eau déchlorée changée régulièrement, mains propres (peau perméable)",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Grenouille vénéneuse vivant surtout au sol mais grimpant parfois dans les arbres (jusqu'à 5 m), muette ; plus de 30 variantes (morphes) reconnues",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Mycose dermatologique",
+          "symptoms": "Plagues peau, décoloration",
+          "prevention": "Humidité stable, hygiène eau/substrat",
+          "whenToConsult": "Traitement antifongique dès apparition"
+        },
+        {
+          "name": "Chytrid infection (Bd)",
+          "symptoms": "Comportement anormal, perte appétit, mort",
+          "prevention": "Hygiène stricte, quarantaine, eau saine",
+          "whenToConsult": "Isolement immédiat suspects"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Amaigrissement, inactivité",
+          "prevention": "Source arthropodes saine/naturelle",
+          "whenToConsult": "Traitement spécialisé amphibiens"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": [
+          "Espèce protégée en Guyane française ; sauf autorisations spéciales, transport et commercialisation interdits en France (fr.wikipedia)"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 4,
+      "litterSizeMax": 10,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ponte de 4 à 10 œufs dans des endroits sombres et humides ; le mâle dépose ensuite les têtards dans l'eau, un par un. Plus de 30 morphes reconnus.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dendrobates_tinctorius",
+          "title": "Dendrobates tinctorius — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104020622,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons, criquets, sauterelles",
+          "frequency": "quotidienne",
+          "notes": "Orthoptères, proies naturelles"
+        },
+        {
+          "name": "Mouches, moustiques, papillons de nuit",
+          "frequency": "quotidienne",
+          "notes": "Insectes volants, proies naturelles"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes trop gros",
+          "reason": "Rainette petite/délicate, déglutition difficile"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Insectivore nocturne arboricole : papillons de nuit, orthoptères (grillons, sauterelles), diptères (mouches, moustiques) et autres insectes",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agalychnis_callidryas",
+          "title": "Agalychnis callidryas — Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": 80,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Plantes vivantes denses, branches et feuilles larges (espèce arboricole qui passe l'essentiel de son temps sur les feuilles), point d'eau",
+      "hygieneNotes": "Humidité élevée (au moins 80 %), eau déchlorée, mains propres (peau perméable)",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agalychnis_callidryas",
+          "title": "Agalychnis callidryas — Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Rainette arboricole nocturne ; les mâles appellent les femelles en coassant et se disputent entre eux par des luttes",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agalychnis_callidryas",
+          "title": "Agalychnis callidryas — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Agalychnis_callidryas",
+          "title": "Agalychnis callidryas — Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Mycose dermatologique (fungal)",
+          "symptoms": "Plaques blanches/colorées peau, érosion",
+          "prevention": "Humidité stable, eau saine, pas surpopulation",
+          "whenToConsult": "Traitement antifongique dès detection"
+        },
+        {
+          "name": "Infections virales ou parasitaires (ranavirus, chytridiomycose)",
+          "symptoms": "Lésions peau, amaigrissement",
+          "prevention": "Quarantaine, hygiène stricte, arthropodes sources saines",
+          "whenToConsult": "Isolement/traitement spécialisé"
+        },
+        {
+          "name": "Stress captivité",
+          "symptoms": "Inactivité, perte appétit",
+          "prevention": "Aménagement naturel, photopériode correct, pas manipulation excessive",
+          "whenToConsult": "Amélioration habitat/conditions"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agalychnis_callidryas",
+          "title": "Agalychnis callidryas — Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "saison des pluies (octobre-mars)",
+      "gestationDays": null,
+      "incubationDays": 6,
+      "litterSizeMin": 40,
+      "litterSizeMax": 40,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Reproduction saisonnière ; les mâles coassent pour appeler les femelles. Ponte d'environ 40 œufs ; éclosion en 6 à 8 jours si les œufs ne sont pas dérangés. Les embryons peuvent éclore plus tôt en cas de menace (vibrations de prédateur) ; les têtards tombent dans l'eau où se fait leur développement.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agalychnis_callidryas",
+          "title": "Agalychnis callidryas — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Agalychnis_callidryas",
+          "title": "Agalychnis callidryas — Wikipédia"
+        }
+      ]
+    }
+  }
+]

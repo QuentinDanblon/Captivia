@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104013399,
+  "commonNameFr": "Grenouille cornue de Cranwell",
+  "scientificName": "Ceratophrys cranwelli",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104015330,
+  "commonNameFr": "Dendrobate à tapirer",
+  "scientificName": "Dendrobates tinctorius",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104020622,
+  "commonNameFr": "Rainette aux yeux rouges",
+  "scientificName": "Agalychnis callidryas",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]
