@@ -1,112 +1,62 @@
-name: Deploy
+name: Seed production
 
-# Déploie après un CI vert sur main : migrations Neon → API Render → site Netlify.
-# Secrets requis (Settings → Secrets and variables → Actions) :
-#   NEON_DATABASE_URL_DIRECT  URL Neon *directe* (sans -pooler) pour prisma migrate
-#   RENDER_DEPLOY_HOOK_URL    Render → service captivia-api → Settings → Deploy Hook
-#   NETLIFY_AUTH_TOKEN        Netlify → User settings → Applications → Personal access token
-#   NETLIFY_SITE_ID           Netlify → captivia → Site configuration → Site ID
-# Variables (onglet Variables) :
-#   API_URL                   ex. https://captivia-api.onrender.com
-#   WEB_URL                   ex. https://captivia.netlify.app
+# Ce workflow ne déploie plus rien. Depuis l'intégration Git (DEP-01) :
+#   - Render reconstruit l'API tout seul après un push sur main (autoDeployTrigger: checksPass
+#     dans render.yaml : il attend que le CI soit vert, migrations Neon comprises) ;
+#   - Netlify reconstruit le site tout seul (et publie des previews de PR) ;
+#   - les migrations Prisma sont appliquées par le job « migrate-production » de ci.yml.
+# Les anciens jobs « deploy hook Render » et « netlify-cli » sont donc supprimés.
+#
+# Reste ici le seul geste manuel : charger le catalogue (espèces, races, magasins…) dans
+# la base de production. Le seed est idempotent (upsert) et peut être relancé.
+#
+# Lancement : Actions → « Seed production » → Run workflow.
+# Secret requis : NEON_DATABASE_URL_DIRECT (URL Neon DIRECTE, sans « -pooler »).
 
 on:
-  workflow_run:
-    workflows: [CI]
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
-    inputs:
-      seed:
-        description: "Exécuter le seed de production (idempotent) après les migrations"
-        type: boolean
-        default: false
-
-concurrency:
-  group: deploy-production
-  cancel-in-progress: false
 
 permissions:
   contents: read
 
+concurrency:
+  group: seed-production
+  cancel-in-progress: false
+
 jobs:
-  migrate:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+  seed:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     environment: production
+    env:
+      DATABASE_URL: ${{ secrets.NEON_DATABASE_URL_DIRECT }}
     steps:
+      - name: Garde — secret NEON_DATABASE_URL_DIRECT
+        id: guard
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::warning::Secret NEON_DATABASE_URL_DIRECT absent : seed de production ignoré (voir docs/DEPLOY.md)."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+        if: steps.guard.outputs.skip != 'true'
       - uses: actions/setup-node@v4
+        if: steps.guard.outputs.skip != 'true'
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: backend/package-lock.json
       - name: Install
+        if: steps.guard.outputs.skip != 'true'
         working-directory: backend
         run: npm ci
       - name: Prisma migrate deploy
+        if: steps.guard.outputs.skip != 'true'
         working-directory: backend
-        env:
-          DATABASE_URL: ${{ secrets.NEON_DATABASE_URL_DIRECT }}
         run: npx prisma migrate deploy
-      - name: Seed production (optionnel)
-        if: github.event_name == 'workflow_dispatch' && inputs.seed
+      - name: Seed production (idempotent)
+        if: steps.guard.outputs.skip != 'true'
         working-directory: backend
-        env:
-          DATABASE_URL: ${{ secrets.NEON_DATABASE_URL_DIRECT }}
         run: npx prisma db seed
-
-  deploy-api:
-    needs: migrate
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    environment: production
-    steps:
-      - name: Déclencher le déploiement Render
-        env:
-          HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: curl -fsS -X POST "$HOOK" > /dev/null
-      - name: Attendre que l'API réponde
-        env:
-          API_URL: ${{ vars.API_URL }}
-        run: |
-          # Laisse Render démarrer la nouvelle version (build Docker ~3-6 min).
-          sleep 90
-          for i in $(seq 1 60); do
-            if curl -fsS --max-time 20 "$API_URL/health" > /dev/null; then
-              echo "API OK"; exit 0
-            fi
-            sleep 10
-          done
-          echo "::error::L'API ne répond pas sur $API_URL/health"; exit 1
-
-  deploy-web:
-    needs: deploy-api
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    environment: production
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: frontend/package-lock.json
-      - name: Install
-        working-directory: frontend
-        run: npm ci
-      - name: Build et déploiement Netlify (production)
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          NEXT_PUBLIC_API_URL: ${{ vars.API_URL }}
-        run: npx --yes netlify-cli@latest deploy --build --prod --filter frontend --message "deploy ${GITHUB_SHA::7}"
-      - name: Smoke test
-        env:
-          WEB_URL: ${{ vars.WEB_URL }}
-        run: curl -fsS --max-time 30 "$WEB_URL/fr" > /dev/null
