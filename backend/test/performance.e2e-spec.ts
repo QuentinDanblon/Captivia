@@ -183,9 +183,7 @@ describe('Performance Tests', () => {
         .post('/auth/register')
         .send({
           email: testEmail,
-          password: 'password123',
-          acceptTerms: true,
-          ageConfirmed: true,
+          password: 'password123', acceptTerms: true, ageConfirmed: true,
         });
       const duration = Date.now() - start;
       

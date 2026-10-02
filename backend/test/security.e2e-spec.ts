@@ -6,6 +6,9 @@ import { TestCacheModule } from './test-cache.module';
 import * as request from 'supertest';
 import { PrismaService } from '../src/prisma/prisma.service';
 
+/** Champs de consentement désormais obligatoires à l'inscription (W2-03). */
+const TERMS = { acceptTerms: true, ageConfirmed: true };
+
 describe('Security Tests', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -46,14 +49,14 @@ describe('Security Tests', () => {
     
     const user1Response = await request(app.getHttpServer())
       .post('/auth/register')
-      .send({ email: user1Email, password: 'password123', acceptTerms: true, ageConfirmed: true });
+      .send({ email: user1Email, password: 'password123', ...TERMS });
     
     user1Token = user1Response.body.accessToken;
     user1Id = user1Response.body.user.id;
     
     const user2Response = await request(app.getHttpServer())
       .post('/auth/register')
-      .send({ email: user2Email, password: 'password123', acceptTerms: true, ageConfirmed: true });
+      .send({ email: user2Email, password: 'password123', ...TERMS });
     
     user2Token = user2Response.body.accessToken;
     user2Id = user2Response.body.user.id;

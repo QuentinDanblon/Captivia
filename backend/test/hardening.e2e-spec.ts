@@ -17,6 +17,9 @@ function makeEmail(tag: string): string {
   return `hardening-${tag}-${Date.now()}-${Math.floor(Math.random() * 1000)}@captivia.local`;
 }
 
+/** Champs de consentement désormais obligatoires à l'inscription (W2-03). */
+const TERMS = { acceptTerms: true, ageConfirmed: true };
+
 describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnelles', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -26,7 +29,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
   async function registerUser(email: string): Promise<{ email: string; token: string; userId: string }> {
     const res = await request(app.getHttpServer())
       .post('/auth/register')
-      .send({ email, password: PASSWORD, locale: 'fr', acceptTerms: true, ageConfirmed: true })
+      .send({ email, password: PASSWORD, locale: 'fr', ...TERMS })
       .expect(201);
     createdEmails.push(email);
     return {

@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import {
   BadRequestException,
+  Logger,
   ConflictException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -20,8 +21,20 @@ jest.mock('bcryptjs', () => ({
 
 import * as bcrypt from 'bcryptjs';
 
+const bcryptMock = bcrypt as unknown as {
+  hash: jest.Mock;
+  compare: jest.Mock;
+};
+
+/** `data` du premier appel d'un mock Prisma (create/update). */
+function firstCallData(fn: jest.Mock): Record<string, unknown> {
+  const [arg] = fn.mock.calls[0] as [{ data: Record<string, unknown> }];
+  return arg.data;
+}
+
 describe('AuthService', () => {
   let service: AuthService;
+  const serviceLogger = () => (service as unknown as { logger: Logger }).logger;
 
   const mockUser = {
     id: 'user-id-123',
@@ -121,7 +134,7 @@ describe('AuthService', () => {
 
       await service.register(registerDto);
 
-      const data = mockPrismaService.user.create.mock.calls[0][0].data;
+      const data = firstCallData(mockPrismaService.user.create);
       expect(data.termsAcceptedAt).toBeInstanceOf(Date);
       expect(data.termsVersion).toBe(CURRENT_TERMS_VERSION);
       expect(data).not.toHaveProperty('role');
@@ -139,7 +152,7 @@ describe('AuthService', () => {
       expect(mockPrismaService.user.findUnique).toHaveBeenCalledWith({
         where: { email: 'newuser@captivia.com' },
       });
-      expect(mockPrismaService.user.create.mock.calls[0][0].data.email).toBe(
+      expect(firstCallData(mockPrismaService.user.create).email).toBe(
         'newuser@captivia.com',
       );
     });
@@ -170,7 +183,7 @@ describe('AuthService', () => {
 
       await service.register(registerDto);
 
-      expect(bcrypt.hash).toHaveBeenCalledWith(registerDto.password, 10);
+      expect(bcryptMock.hash).toHaveBeenCalledWith(registerDto.password, 10);
     });
 
     it('should throw ConflictException if email already exists', async () => {
@@ -207,7 +220,7 @@ describe('AuthService', () => {
     it('should successfully login with valid credentials', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
       mockJwtService.sign.mockReturnValue('jwt-token');
-      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+      bcryptMock.compare.mockResolvedValue(true);
 
       const result = await service.login(loginDto);
 
@@ -226,7 +239,7 @@ describe('AuthService', () => {
 
     it('looks the user up with the normalized email', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
-      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+      bcryptMock.compare.mockResolvedValue(true);
 
       await service.login({ ...loginDto, email: ' TEST@Captivia.com ' });
 
@@ -237,7 +250,7 @@ describe('AuthService', () => {
 
     it('unknown user: still runs bcrypt.compare against a dummy hash, then 401', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(null);
-      (bcrypt.compare as jest.Mock).mockResolvedValue(false);
+      bcryptMock.compare.mockResolvedValue(false);
 
       await expect(service.login(loginDto)).rejects.toThrow(
         UnauthorizedException,
@@ -245,7 +258,7 @@ describe('AuthService', () => {
       await expect(service.login(loginDto)).rejects.toThrow(
         'Invalid credentials',
       );
-      expect(bcrypt.compare).toHaveBeenCalledWith(
+      expect(bcryptMock.compare).toHaveBeenCalledWith(
         loginDto.password,
         expect.stringMatching(/^\$2[aby]\$10\$/),
       );
@@ -253,7 +266,7 @@ describe('AuthService', () => {
 
     it('unknown user is rejected even if the dummy compare were to succeed', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(null);
-      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+      bcryptMock.compare.mockResolvedValue(true);
 
       await expect(service.login(loginDto)).rejects.toThrow(
         UnauthorizedException,
@@ -262,12 +275,12 @@ describe('AuthService', () => {
 
     it('should throw UnauthorizedException if password is invalid', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
-      (bcrypt.compare as jest.Mock).mockResolvedValue(false);
+      bcryptMock.compare.mockResolvedValue(false);
 
       await expect(service.login(loginDto)).rejects.toThrow(
         'Invalid credentials',
       );
-      expect(bcrypt.compare).toHaveBeenCalledWith(
+      expect(bcryptMock.compare).toHaveBeenCalledWith(
         loginDto.password,
         mockUser.passwordHash,
       );
@@ -335,20 +348,19 @@ describe('AuthService', () => {
       process.env.NODE_ENV = 'production';
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
       const warn = jest
-        .spyOn((service as any).logger, 'warn')
+        .spyOn(serviceLogger(), 'warn')
         .mockImplementation(() => {});
       const error = jest
-        .spyOn((service as any).logger, 'error')
+        .spyOn(serviceLogger(), 'error')
         .mockImplementation(() => {});
       const log = jest
-        .spyOn((service as any).logger, 'log')
+        .spyOn(serviceLogger(), 'log')
         .mockImplementation(() => {});
 
       await service.requestPasswordReset('TEST@captivia.com');
       await new Promise((r) => setImmediate(r));
 
-      const data =
-        mockPrismaService.passwordResetToken.create.mock.calls[0][0].data;
+      const data = firstCallData(mockPrismaService.passwordResetToken.create);
       expect(data).not.toHaveProperty('token');
       expect(data.tokenHash).toMatch(/^[a-f0-9]{64}$/);
 
@@ -368,7 +380,7 @@ describe('AuthService', () => {
       delete process.env.FRONTEND_URL;
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
       const warn = jest
-        .spyOn((service as any).logger, 'warn')
+        .spyOn(serviceLogger(), 'warn')
         .mockImplementation(() => {});
 
       await service.requestPasswordReset('test@captivia.com');
@@ -379,9 +391,9 @@ describe('AuthService', () => {
         /http:\/\/localhost:3000\/reset-password\?token=([a-f0-9]{64})/,
       );
       expect(match).not.toBeNull();
-      const stored =
-        mockPrismaService.passwordResetToken.create.mock.calls[0][0].data
-          .tokenHash;
+      const stored = firstCallData(
+        mockPrismaService.passwordResetToken.create,
+      ).tokenHash;
       expect(stored).toBe(hashResetToken(match![1]));
       expect(stored).not.toBe(match![1]);
     });
@@ -407,7 +419,7 @@ describe('AuthService', () => {
       mockPrismaService.passwordResetToken.deleteMany.mockResolvedValue({
         count: 1,
       });
-      (bcrypt.hash as jest.Mock).mockResolvedValue('new-hash');
+      bcryptMock.hash.mockResolvedValue('new-hash');
 
       await service.resetPassword(token, 'newPassword123');
 
@@ -442,8 +454,8 @@ describe('AuthService', () => {
   describe('changePassword', () => {
     it('bumps tokenVersion and returns a fresh token', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
-      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
-      (bcrypt.hash as jest.Mock).mockResolvedValue('new-hash');
+      bcryptMock.compare.mockResolvedValue(true);
+      bcryptMock.hash.mockResolvedValue('new-hash');
       mockPrismaService.user.update.mockResolvedValue({
         ...mockUser,
         tokenVersion: 1,

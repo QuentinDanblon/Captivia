@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { App } from 'supertest/types';
 import * as crypto from 'crypto';
 import { UserRole } from '@prisma/client';
 import { AppModule } from '../src/app.module';
@@ -11,6 +12,15 @@ import { AuthRateLimitGuard } from '../src/common/guards/rate-limit.guard';
 import { CURRENT_TERMS_VERSION } from '../src/auth/auth.constants';
 
 jest.setTimeout(60000);
+
+/** Corps des réponses /auth/* (register, login, me, change-password). */
+interface AuthBody {
+  accessToken: string;
+  user: { id: string; email: string; role: string; isPremium: boolean };
+  role: string;
+  isPremium: boolean;
+}
+const body = (res: { body: unknown }): AuthBody => res.body as AuthBody;
 
 /**
  * W0-01 / W1-01 / W2-03 / W0-04 — verrouillage :
@@ -29,7 +39,7 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
   const OPERATOR_EMAIL = emailFor('op');
   const prevOperatorEmails = process.env.OPERATOR_EMAILS;
 
-  const server = () => app.getHttpServer();
+  const server = (): App => app.getHttpServer() as App;
 
   function register(email: string, extra: Record<string, unknown> = {}) {
     return request(server())
@@ -84,8 +94,8 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
       const res = await register(
         `  ${emailFor('Mixed').toUpperCase()}  `,
       ).expect(201);
-      expect(res.body.user.email).toBe(emailFor('mixed'));
-      expect(res.body.user.role).toBe('USER');
+      expect(body(res).user.email).toBe(emailFor('mixed'));
+      expect(body(res).user.role).toBe('USER');
     });
 
     it('une variante de casse d’un email existant → 409', async () => {
@@ -114,10 +124,10 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
 
     it('email listé dans OPERATOR_EMAILS, inscrit en MAJUSCULES → aucun droit (403, pas premium)', async () => {
       const res = await register(OPERATOR_EMAIL.toUpperCase()).expect(201);
-      opToken = res.body.accessToken;
-      opId = res.body.user.id;
-      expect(res.body.user.role).toBe('USER');
-      expect(res.body.user.isPremium).toBe(false);
+      opToken = body(res).accessToken;
+      opId = body(res).user.id;
+      expect(body(res).user.role).toBe('USER');
+      expect(body(res).user.isPremium).toBe(false);
 
       await request(server())
         .post(`/admin/users/${opId}/premium`)
@@ -129,7 +139,7 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
         .get('/auth/me')
         .set('Authorization', `Bearer ${opToken}`)
         .expect(200);
-      expect(me.body.isPremium).toBe(false);
+      expect(body(me).isPremium).toBe(false);
     });
 
     it('le rôle OPERATOR attribué en base (CLI) ouvre les routes opérateur', async () => {
@@ -180,7 +190,7 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
     it('le token de reset est stocké haché (sha256) et le lien loggé (dev) correspond', async () => {
       const email = emailFor('reset');
       const reg = await register(email).expect(201);
-      const oldToken: string = reg.body.accessToken;
+      const oldToken: string = body(reg).accessToken;
 
       const warn = jest
         .spyOn(Logger.prototype, 'warn')
@@ -240,14 +250,14 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
         .expect(200);
       await request(server())
         .get('/auth/me')
-        .set('Authorization', `Bearer ${login.body.accessToken}`)
+        .set('Authorization', `Bearer ${body(login).accessToken}`)
         .expect(200);
     });
 
     it('changer de mot de passe révoque les anciens tokens et en renvoie un nouveau', async () => {
       const email = emailFor('change');
       const reg = await register(email).expect(201);
-      const oldToken: string = reg.body.accessToken;
+      const oldToken: string = body(reg).accessToken;
 
       const res = await request(server())
         .post('/auth/change-password')
@@ -262,7 +272,7 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
 
       await request(server())
         .get('/auth/me')
-        .set('Authorization', `Bearer ${res.body.accessToken}`)
+        .set('Authorization', `Bearer ${body(res).accessToken}`)
         .expect(200);
     });
 
@@ -274,7 +284,7 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
         Buffer.from(JSON.stringify(o)).toString('base64url');
       const header = b64({ alg: 'HS512', typ: 'JWT' });
       const payload = b64({
-        sub: reg.body.user.id,
+        sub: body(reg).user.id,
         email,
         tokenVersion: 0,
         exp: Math.floor(Date.now() / 1000) + 600,
