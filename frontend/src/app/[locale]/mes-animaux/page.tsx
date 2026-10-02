@@ -7,6 +7,7 @@ import { useRouter, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, type Animal as ApiAnimal, type SpeciesRoutineTemplate } from '@/lib/api';
 import { Link } from '@/i18n/navigation';
+import Modal from '@/components/ui/Modal';
 
 interface Animal extends ApiAnimal {
   speciesName?: string;
@@ -195,6 +196,11 @@ function MyAnimalsPageContent() {
       setSpeciesQuery(preselectedSpeciesName);
     }
     setShowAddModal(true);
+  };
+
+  const handleCloseAddModal = () => {
+    setShowAddModal(false);
+    resetForm();
   };
 
   // Open the add-animal modal automatically when arriving with ?addSpecies=...&speciesName=...
@@ -551,15 +557,30 @@ function MyAnimalsPageContent() {
       </div>
 
       {/* Add Animal Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 md:p-8 max-w-sm md:max-w-2xl w-full max-h-[90vh] overflow-y-auto my-auto">
+      <Modal
+        open={showAddModal}
+        onClose={handleCloseAddModal}
+        size="xl"
+        title={
+          newAnimalId && routineTemplates.length > 0
+            ? t('animals.routineTemplates.title')
+            : t('animals.addAnimal')
+        }
+        dismissible={!formSubmitting && !templatesAdding}
+        closeOnOverlayClick={false}
+        hideCloseButton
+        className="md:p-8"
+        titleClassName={
+          newAnimalId && routineTemplates.length > 0
+            ? 'text-2xl md:text-3xl font-bold mb-2 text-gray-800 dark:text-white'
+            : 'text-2xl md:text-3xl font-bold mb-6 text-gray-800 dark:text-white'
+        }
+      >
+        {showAddModal && (
+          <>
             {newAnimalId && routineTemplates.length > 0 ? (
               /* Étape 2 : routines recommandées pour l'espèce (module D) */
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800 dark:text-white">
-                  {t('animals.routineTemplates.title')}
-                </h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                   {t('animals.routineTemplates.suggested')}
                 </p>
@@ -643,10 +664,7 @@ function MyAnimalsPageContent() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => {
-                      setShowAddModal(false);
-                      resetForm();
-                    }}
+                    onClick={handleCloseAddModal}
                     className="flex-1 px-4 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                   >
                     {t('common.cancel')}
@@ -655,10 +673,6 @@ function MyAnimalsPageContent() {
               </div>
             ) : (
               <>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800 dark:text-white">
-              {t('animals.addAnimal')}
-            </h2>
-            
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Name field */}
               <div>
@@ -844,10 +858,7 @@ function MyAnimalsPageContent() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setShowAddModal(false);
-                    resetForm();
-                  }}
+                  onClick={handleCloseAddModal}
                   className="flex-1 px-4 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                   {t('common.cancel')}
@@ -856,9 +867,9 @@ function MyAnimalsPageContent() {
             </form>
               </>
             )}
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </Modal>
     </div>
   );
 }
