@@ -404,7 +404,18 @@
     "legalNotice": "Impressum",
     "navLabel": "Rechtliche Informationen",
     "sources": "Quellen und Lizenzen",
-    "tagline": "Pflege, ganz einfach."
+    "tagline": "Pflege, ganz einfach.",
+    "description": "Gesundheitspass, Pflegeerinnerungen und belegte Artenprofile Ihrer Tiere an einem Ort."
+  },
+  "nav": {
+    "species": "Arten",
+    "agenda": "Kalender",
+    "transparency": "Transparenz",
+    "account": "Konto",
+    "guest": "Gast",
+    "createAccount": "Konto erstellen",
+    "community": "Gemeinschaft",
+    "soon": "Bald"
   },
   "grade": {
     "bronze": "Bronze",

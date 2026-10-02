@@ -404,7 +404,18 @@
     "legalNotice": "Note legali",
     "navLabel": "Informazioni legali",
     "sources": "Fonti e licenze",
-    "tagline": "Prendersi cura, semplicemente."
+    "tagline": "Prendersi cura, semplicemente.",
+    "description": "Il libretto sanitario, i promemoria delle cure e le schede di specie con fonti dei vostri animali, in un unico posto."
+  },
+  "nav": {
+    "species": "Specie",
+    "agenda": "Calendario",
+    "transparency": "Trasparenza",
+    "account": "Profilo",
+    "guest": "Ospite",
+    "createAccount": "Crea un account",
+    "community": "Comunità",
+    "soon": "Presto"
   },
   "grade": {
     "bronze": "Bronzo",

@@ -404,7 +404,18 @@
     "legalNotice": "Aviso legal",
     "navLabel": "Información legal",
     "sources": "Fuentes y licencias",
-    "tagline": "Cuidar, sencillamente."
+    "tagline": "Cuidar, sencillamente.",
+    "description": "La cartilla sanitaria, los recordatorios de cuidados y las fichas de especies con fuentes de sus animales, en un solo lugar."
+  },
+  "nav": {
+    "species": "Especies",
+    "agenda": "Calendario",
+    "transparency": "Transparencia",
+    "account": "Cuenta",
+    "guest": "Invitado",
+    "createAccount": "Crear una cuenta",
+    "community": "Comunidad",
+    "soon": "Pronto"
   },
   "grade": {
     "bronze": "Bronce",

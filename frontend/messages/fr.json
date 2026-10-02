@@ -404,7 +404,18 @@
     "sources": "Sources et licences",
     "tagline": "Prendre soin, simplement.",
     "terms": "Conditions d'utilisation",
-    "transparency": "Transparence & affiliation"
+    "transparency": "Transparence & affiliation",
+    "description": "Le carnet de santé, les rappels de soins et les fiches d'espèces sourcées de vos animaux, au même endroit."
+  },
+  "nav": {
+    "species": "Espèces",
+    "agenda": "Agenda",
+    "transparency": "Transparence",
+    "account": "Compte",
+    "guest": "Invité",
+    "createAccount": "Créer un compte",
+    "community": "Communauté",
+    "soon": "Bientôt"
   },
   "grade": {
     "bronze": "Bronze",
