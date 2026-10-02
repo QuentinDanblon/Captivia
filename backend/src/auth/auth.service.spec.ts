@@ -1,10 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ConflictException, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Logger,
+  ConflictException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { AuthService } from './auth.service';
+import { UserRole } from '@prisma/client';
+import { AuthService, hashResetToken } from './auth.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { CURRENT_TERMS_VERSION } from './auth.constants';
 
 // Mock bcryptjs before importing (AuthService imports * as bcrypt from 'bcryptjs')
 jest.mock('bcryptjs', () => ({
@@ -14,10 +21,20 @@ jest.mock('bcryptjs', () => ({
 
 import * as bcrypt from 'bcryptjs';
 
+const bcryptMock = bcrypt as unknown as {
+  hash: jest.Mock;
+  compare: jest.Mock;
+};
+
+/** `data` du premier appel d'un mock Prisma (create/update). */
+function firstCallData(fn: jest.Mock): Record<string, unknown> {
+  const [arg] = fn.mock.calls[0] as [{ data: Record<string, unknown> }];
+  return arg.data;
+}
+
 describe('AuthService', () => {
   let service: AuthService;
-  let prismaService: PrismaService;
-  let jwtService: JwtService;
+  const serviceLogger = () => (service as unknown as { logger: Logger }).logger;
 
   const mockUser = {
     id: 'user-id-123',
@@ -25,6 +42,10 @@ describe('AuthService', () => {
     passwordHash: 'hashed-password',
     locale: 'fr',
     isPremium: false,
+    role: UserRole.USER,
+    tokenVersion: 0,
+    termsAcceptedAt: new Date(),
+    termsVersion: CURRENT_TERMS_VERSION,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -33,7 +54,14 @@ describe('AuthService', () => {
     user: {
       findUnique: jest.fn(),
       create: jest.fn(),
+      update: jest.fn(),
     },
+    passwordResetToken: {
+      findUnique: jest.fn(),
+      create: jest.fn(),
+      deleteMany: jest.fn(),
+    },
+    $transaction: jest.fn(),
   };
 
   const mockJwtService = {
@@ -44,23 +72,19 @@ describe('AuthService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AuthService,
-        {
-          provide: PrismaService,
-          useValue: mockPrismaService,
-        },
-        {
-          provide: JwtService,
-          useValue: mockJwtService,
-        },
+        { provide: PrismaService, useValue: mockPrismaService },
+        { provide: JwtService, useValue: mockJwtService },
       ],
     }).compile();
 
     service = module.get<AuthService>(AuthService);
-    prismaService = module.get<PrismaService>(PrismaService);
-    jwtService = module.get<JwtService>(JwtService);
-
-    // Reset mocks
     jest.clearAllMocks();
+    // $transaction : tableau d'opérations OU callback interactif
+    mockPrismaService.$transaction.mockImplementation((arg: unknown) =>
+      typeof arg === 'function'
+        ? (arg as (tx: typeof mockPrismaService) => unknown)(mockPrismaService)
+        : Promise.all(arg as unknown[]),
+    );
   });
 
   it('should be defined', () => {
@@ -72,6 +96,8 @@ describe('AuthService', () => {
       email: 'newuser@captivia.com',
       password: 'password123',
       locale: 'fr',
+      acceptTerms: true,
+      ageConfirmed: true,
     };
 
     it('should successfully register a new user', async () => {
@@ -87,6 +113,7 @@ describe('AuthService', () => {
           id: mockUser.id,
           email: mockUser.email,
           locale: mockUser.locale,
+          role: UserRole.USER,
           isPremium: mockUser.isPremium,
           createdAt: mockUser.createdAt,
         },
@@ -94,23 +121,69 @@ describe('AuthService', () => {
       expect(mockPrismaService.user.findUnique).toHaveBeenCalledWith({
         where: { email: registerDto.email },
       });
-      expect(mockPrismaService.user.create).toHaveBeenCalled();
       expect(mockJwtService.sign).toHaveBeenCalledWith({
         sub: mockUser.id,
         email: mockUser.email,
+        tokenVersion: 0,
       });
+    });
+
+    it('stores terms acceptance date + current version and never sets a role', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue(null);
+      mockPrismaService.user.create.mockResolvedValue(mockUser);
+
+      await service.register(registerDto);
+
+      const data = firstCallData(mockPrismaService.user.create);
+      expect(data.termsAcceptedAt).toBeInstanceOf(Date);
+      expect(data.termsVersion).toBe(CURRENT_TERMS_VERSION);
+      expect(data).not.toHaveProperty('role');
+    });
+
+    it('normalizes the email defensively (trim + lowercase)', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue(null);
+      mockPrismaService.user.create.mockResolvedValue(mockUser);
+
+      await service.register({
+        ...registerDto,
+        email: '  NewUser@Captivia.COM ',
+      });
+
+      expect(mockPrismaService.user.findUnique).toHaveBeenCalledWith({
+        where: { email: 'newuser@captivia.com' },
+      });
+      expect(firstCallData(mockPrismaService.user.create).email).toBe(
+        'newuser@captivia.com',
+      );
+    });
+
+    it('an operator-looking email registers as a plain USER (no premium)', async () => {
+      const prev = process.env.OPERATOR_EMAILS;
+      process.env.OPERATOR_EMAILS = 'op@example.com';
+      try {
+        mockPrismaService.user.findUnique.mockResolvedValue(null);
+        mockPrismaService.user.create.mockResolvedValue({
+          ...mockUser,
+          email: 'op@example.com',
+        });
+        const result = await service.register({
+          ...registerDto,
+          email: 'OP@EXAMPLE.COM',
+        });
+        expect(result.user.role).toBe(UserRole.USER);
+        expect(result.user.isPremium).toBe(false);
+      } finally {
+        process.env.OPERATOR_EMAILS = prev;
+      }
     });
 
     it('should hash password with bcrypt', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(null);
       mockPrismaService.user.create.mockResolvedValue(mockUser);
-      mockJwtService.sign.mockReturnValue('jwt-token');
-
-      const bcryptHashSpy = jest.spyOn(bcrypt, 'hash');
 
       await service.register(registerDto);
 
-      expect(bcryptHashSpy).toHaveBeenCalledWith(registerDto.password, 10);
+      expect(bcryptMock.hash).toHaveBeenCalledWith(registerDto.password, 10);
     });
 
     it('should throw ConflictException if email already exists', async () => {
@@ -125,25 +198,14 @@ describe('AuthService', () => {
     });
 
     it('should use default locale "fr" if not provided', async () => {
-      const dtoWithoutLocale = {
-        email: 'test@captivia.com',
-        password: 'password123',
-      };
-
       mockPrismaService.user.findUnique.mockResolvedValue(null);
-      mockPrismaService.user.create.mockResolvedValue({
-        ...mockUser,
-        locale: 'fr',
-      });
-      mockJwtService.sign.mockReturnValue('jwt-token');
+      mockPrismaService.user.create.mockResolvedValue(mockUser);
 
-      await service.register(dtoWithoutLocale);
+      await service.register({ ...registerDto, locale: undefined });
 
       expect(mockPrismaService.user.create).toHaveBeenCalledWith(
         expect.objectContaining({
-          data: expect.objectContaining({
-            locale: 'fr',
-          }),
+          data: expect.objectContaining({ locale: 'fr' }),
         }),
       );
     });
@@ -158,7 +220,7 @@ describe('AuthService', () => {
     it('should successfully login with valid credentials', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
       mockJwtService.sign.mockReturnValue('jwt-token');
-      jest.spyOn(bcrypt, 'compare').mockResolvedValue(true as never);
+      bcryptMock.compare.mockResolvedValue(true);
 
       const result = await service.login(loginDto);
 
@@ -168,48 +230,57 @@ describe('AuthService', () => {
           id: mockUser.id,
           email: mockUser.email,
           locale: mockUser.locale,
+          role: UserRole.USER,
           isPremium: mockUser.isPremium,
           createdAt: mockUser.createdAt,
         },
       });
+    });
+
+    it('looks the user up with the normalized email', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
+      bcryptMock.compare.mockResolvedValue(true);
+
+      await service.login({ ...loginDto, email: ' TEST@Captivia.com ' });
+
       expect(mockPrismaService.user.findUnique).toHaveBeenCalledWith({
-        where: { email: loginDto.email },
+        where: { email: 'test@captivia.com' },
       });
     });
 
-    it('should throw UnauthorizedException if user not found', async () => {
+    it('unknown user: still runs bcrypt.compare against a dummy hash, then 401', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(null);
+      bcryptMock.compare.mockResolvedValue(false);
 
       await expect(service.login(loginDto)).rejects.toThrow(
         UnauthorizedException,
       );
       await expect(service.login(loginDto)).rejects.toThrow(
         'Invalid credentials',
+      );
+      expect(bcryptMock.compare).toHaveBeenCalledWith(
+        loginDto.password,
+        expect.stringMatching(/^\$2[aby]\$10\$/),
+      );
+    });
+
+    it('unknown user is rejected even if the dummy compare were to succeed', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue(null);
+      bcryptMock.compare.mockResolvedValue(true);
+
+      await expect(service.login(loginDto)).rejects.toThrow(
+        UnauthorizedException,
       );
     });
 
     it('should throw UnauthorizedException if password is invalid', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
-      jest.spyOn(bcrypt, 'compare').mockResolvedValue(false as never);
+      bcryptMock.compare.mockResolvedValue(false);
 
-      await expect(service.login(loginDto)).rejects.toThrow(
-        UnauthorizedException,
-      );
       await expect(service.login(loginDto)).rejects.toThrow(
         'Invalid credentials',
       );
-    });
-
-    it('should verify password with bcrypt.compare', async () => {
-      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
-      const bcryptCompareSpy = jest
-        .spyOn(bcrypt, 'compare')
-        .mockResolvedValue(true as never);
-      mockJwtService.sign.mockReturnValue('jwt-token');
-
-      await service.login(loginDto);
-
-      expect(bcryptCompareSpy).toHaveBeenCalledWith(
+      expect(bcryptMock.compare).toHaveBeenCalledWith(
         loginDto.password,
         mockUser.passwordHash,
       );
@@ -220,23 +291,191 @@ describe('AuthService', () => {
     it('should return user data without passwordHash', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
 
-      const result = await service.validateUser(mockUser.id);
+      const result = await service.validateUser(mockUser.id, 0);
 
       expect(result).toEqual({
         id: mockUser.id,
         email: mockUser.email,
         locale: mockUser.locale,
+        role: UserRole.USER,
         isPremium: mockUser.isPremium,
       });
       expect(result).not.toHaveProperty('passwordHash');
     });
 
+    it('returns null when the token version is stale', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue({
+        ...mockUser,
+        tokenVersion: 2,
+      });
+
+      expect(await service.validateUser(mockUser.id, 1)).toBeNull();
+      expect(await service.validateUser(mockUser.id)).toBeNull();
+    });
+
+    it('OPERATOR role grants effective premium', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue({
+        ...mockUser,
+        role: UserRole.OPERATOR,
+      });
+
+      const result = await service.validateUser(mockUser.id, 0);
+      expect(result).toMatchObject({
+        role: UserRole.OPERATOR,
+        isPremium: true,
+      });
+    });
+
     it('should return null if user not found', async () => {
       mockPrismaService.user.findUnique.mockResolvedValue(null);
 
-      const result = await service.validateUser('invalid-id');
+      expect(await service.validateUser('invalid-id')).toBeNull();
+    });
+  });
 
-      expect(result).toBeNull();
+  describe('password reset', () => {
+    const OLD_ENV = process.env;
+
+    beforeEach(() => {
+      process.env = { ...OLD_ENV };
+      delete process.env.MAIL_HOST;
+    });
+    afterAll(() => {
+      process.env = OLD_ENV;
+    });
+
+    it('stores only sha256(token) and never logs the link in production', async () => {
+      process.env.NODE_ENV = 'production';
+      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
+      const warn = jest
+        .spyOn(serviceLogger(), 'warn')
+        .mockImplementation(() => {});
+      const error = jest
+        .spyOn(serviceLogger(), 'error')
+        .mockImplementation(() => {});
+      const log = jest
+        .spyOn(serviceLogger(), 'log')
+        .mockImplementation(() => {});
+
+      await service.requestPasswordReset('TEST@captivia.com');
+      await new Promise((r) => setImmediate(r));
+
+      const data = firstCallData(mockPrismaService.passwordResetToken.create);
+      expect(data).not.toHaveProperty('token');
+      expect(data.tokenHash).toMatch(/^[a-f0-9]{64}$/);
+
+      const logged = [
+        ...warn.mock.calls,
+        ...error.mock.calls,
+        ...log.mock.calls,
+      ]
+        .flat()
+        .join(' ');
+      expect(logged).not.toContain('reset-password?token=');
+      expect(logged).not.toMatch(/[a-f0-9]{64}/);
+    });
+
+    it('logs the link in development only, and the logged token matches the stored hash', async () => {
+      process.env.NODE_ENV = 'development';
+      delete process.env.FRONTEND_URL;
+      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
+      const warn = jest
+        .spyOn(serviceLogger(), 'warn')
+        .mockImplementation(() => {});
+
+      await service.requestPasswordReset('test@captivia.com');
+      await new Promise((r) => setImmediate(r));
+
+      const message = warn.mock.calls.flat().join(' ');
+      const match = message.match(
+        /http:\/\/localhost:3000\/reset-password\?token=([a-f0-9]{64})/,
+      );
+      expect(match).not.toBeNull();
+      const stored = firstCallData(
+        mockPrismaService.passwordResetToken.create,
+      ).tokenHash;
+      expect(stored).toBe(hashResetToken(match![1]));
+      expect(stored).not.toBe(match![1]);
+    });
+
+    it('unknown email: generic answer, nothing created', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue(null);
+
+      const res = await service.requestPasswordReset('nobody@captivia.com');
+
+      expect(res.message).toMatch(/Si un compte existe/);
+      expect(
+        mockPrismaService.passwordResetToken.create,
+      ).not.toHaveBeenCalled();
+    });
+
+    it('resetPassword looks the token up by hash and bumps tokenVersion', async () => {
+      const token = 'a'.repeat(64);
+      mockPrismaService.passwordResetToken.findUnique.mockResolvedValue({
+        id: 'rt-1',
+        userId: mockUser.id,
+        expiresAt: new Date(Date.now() + 60_000),
+      });
+      mockPrismaService.passwordResetToken.deleteMany.mockResolvedValue({
+        count: 1,
+      });
+      bcryptMock.hash.mockResolvedValue('new-hash');
+
+      await service.resetPassword(token, 'newPassword123');
+
+      expect(
+        mockPrismaService.passwordResetToken.findUnique,
+      ).toHaveBeenCalledWith({
+        where: { tokenHash: hashResetToken(token) },
+      });
+      expect(mockPrismaService.user.update).toHaveBeenCalledWith({
+        where: { id: mockUser.id },
+        data: { passwordHash: 'new-hash', tokenVersion: { increment: 1 } },
+      });
+    });
+
+    it('resetPassword rejects an expired or already-consumed token', async () => {
+      mockPrismaService.passwordResetToken.findUnique.mockResolvedValue({
+        id: 'rt-1',
+        userId: mockUser.id,
+        expiresAt: new Date(Date.now() + 60_000),
+      });
+      mockPrismaService.passwordResetToken.deleteMany.mockResolvedValue({
+        count: 0,
+      });
+
+      await expect(
+        service.resetPassword('b'.repeat(64), 'newPassword123'),
+      ).rejects.toThrow(BadRequestException);
+      expect(mockPrismaService.user.update).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('changePassword', () => {
+    it('bumps tokenVersion and returns a fresh token', async () => {
+      mockPrismaService.user.findUnique.mockResolvedValue(mockUser);
+      bcryptMock.compare.mockResolvedValue(true);
+      bcryptMock.hash.mockResolvedValue('new-hash');
+      mockPrismaService.user.update.mockResolvedValue({
+        ...mockUser,
+        tokenVersion: 1,
+      });
+      mockJwtService.sign.mockReturnValue('fresh-token');
+
+      const res = await service.changePassword(
+        mockUser.id,
+        'old',
+        'newPassword123',
+      );
+
+      expect(mockPrismaService.user.update).toHaveBeenCalledWith({
+        where: { id: mockUser.id },
+        data: { passwordHash: 'new-hash', tokenVersion: { increment: 1 } },
+      });
+      expect(mockJwtService.sign).toHaveBeenCalledWith(
+        expect.objectContaining({ tokenVersion: 1 }),
+      );
+      expect(res.accessToken).toBe('fresh-token');
     });
   });
 });

@@ -138,6 +138,8 @@ describe('API E2E Tests', () => {
         .send({
           email: testEmail,
           password: testPassword,
+          acceptTerms: true,
+          ageConfirmed: true,
           locale: 'fr',
         })
         .expect(201);
@@ -157,6 +159,8 @@ describe('API E2E Tests', () => {
         .send({
           email: testEmail,
           password: testPassword,
+          acceptTerms: true,
+          ageConfirmed: true,
         })
         .expect(409);
     });

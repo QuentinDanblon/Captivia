@@ -14,12 +14,26 @@ datasource db {
 // Phase 0 - User & Auth
 // ============================================
 
+/// Rôle applicatif. OPERATOR ne s'obtient JAMAIS par inscription : uniquement
+/// via `npm run operator:set` (scripts/set-operator.ts) — cf. W0-01.
+enum UserRole {
+  USER
+  OPERATOR
+}
+
 model User {
   id           String   @id @default(uuid())
+  /// Toujours normalisé (trim + minuscules) — CHECK SQL "User_email_normalized_check".
   email        String   @unique
   passwordHash String
   locale       String   @default("fr")
   isPremium    Boolean  @default(false)
+  role         UserRole @default(USER)
+  /// Incrémenté à chaque reset / changement de mot de passe : invalide les JWT émis avant.
+  tokenVersion Int      @default(0)
+  /// Consentement CGU + politique de confidentialité à l'inscription (W2-03)
+  termsAcceptedAt DateTime? @db.Timestamptz(3)
+  termsVersion    String?
   points       Int      @default(0)   // Points pour le système de grade
   grade        String   @default("bronze") // bronze | silver | gold | platinum | diamond
   createdAt    DateTime @default(now()) @db.Timestamptz(3)
@@ -36,7 +50,8 @@ model User {
 model PasswordResetToken {
   id        String   @id @default(uuid())
   userId    String
-  token     String   @unique
+  /// sha256(token) en hexadécimal : le token en clair n'est jamais stocké.
+  tokenHash String   @unique
   expiresAt DateTime @db.Timestamptz(3)
   createdAt DateTime @default(now()) @db.Timestamptz(3)
 

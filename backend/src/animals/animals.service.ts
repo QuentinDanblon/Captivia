@@ -8,7 +8,7 @@ import { randomBytes } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAnimalDto, UpdateAnimalDto } from './dto/animal.dto';
 import { ensureAnimalOwnership } from '../common/helpers/ownership.helper';
-import { isOperatorEmail } from '../common/operators';
+import { effectivePremium } from '../common/operators';
 
 const FREE_ANIMAL_LIMIT = 1;
 
@@ -32,16 +32,8 @@ export interface PublicLinkState {
   url: string | null;
 }
 
-/**
- * Premium effectif (miroir de AuthService.effectivePremium, qui n'est pas exporté) :
- * abonnement actif OU opérateur. À remplacer par l'export partagé quand il existera.
- */
-export function isEffectivelyPremium(user: {
-  email: string;
-  isPremium: boolean;
-}): boolean {
-  return user.isPremium || isOperatorEmail(user.email);
-}
+/** Premium effectif : abonnement actif OU rôle opérateur (source unique : common/operators). */
+export const isEffectivelyPremium = effectivePremium;
 
 /** URL de base publique, construite côté serveur uniquement (jamais depuis le client). */
 function publicWebBaseUrl(): string {
@@ -381,7 +373,7 @@ export class AnimalsService {
   private async assertPremium(userId: string): Promise<void> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      select: { email: true, isPremium: true },
+      select: { isPremium: true, role: true },
     });
     if (!user || !isEffectivelyPremium(user)) {
       throw new ForbiddenException(
@@ -497,7 +489,7 @@ export class AnimalsService {
         birthDate: true,
         photos: true,
         publicShowHealth: true,
-        user: { select: { email: true, isPremium: true } },
+        user: { select: { isPremium: true, role: true } },
         speciesProfile: {
           select: { commonNameFr: true, scientificName: true },
         },

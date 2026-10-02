@@ -91,7 +91,7 @@ describe('Account E2E — suppression et export RGPD', () => {
     await prisma.passwordResetToken.create({
       data: {
         userId,
-        token: `reset-token-${userId}`,
+        tokenHash: `reset-token-hash-${userId}`,
         expiresAt: new Date(Date.now() + 3600_000),
       },
     });
