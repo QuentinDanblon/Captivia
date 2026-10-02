@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
@@ -13,8 +13,47 @@ export function AppHeader() {
   const pathname = usePathname();
   const { user, isLoading: authLoading, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  // Menu mobile modal : focus sur le premier lien à l'ouverture, Échap pour fermer
+  // (focus rendu au bouton), Tab confiné au menu et à son bouton d'ouverture.
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const menu = mobileMenuRef.current;
+    const focusables = () =>
+      Array.from(menu?.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), select') ?? []);
+    focusables()[0]?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const items = focusables();
+      const button = menuButtonRef.current;
+      if (items.length === 0 || !button) return;
+      const cycle = [button, ...items];
+      const index = cycle.indexOf(document.activeElement as HTMLElement);
+      if (index === -1) {
+        event.preventDefault();
+        items[0].focus();
+      } else if (!event.shiftKey && index === cycle.length - 1) {
+        event.preventDefault();
+        cycle[0].focus();
+      } else if (event.shiftKey && index === 0) {
+        event.preventDefault();
+        cycle[cycle.length - 1].focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [mobileMenuOpen]);
   const isHome = pathname === '/' || /^\/[a-z]{2}\/?$/.test(pathname ?? '');
   const userInitials = user?.email?.slice(0, 2).toUpperCase() || 'C';
 
@@ -22,6 +61,13 @@ export function AppHeader() {
   const mobileLinkClass = (active: boolean) => `captivia-mobile-link${active ? ' is-active' : ''}`;
 
   return (
+    <>
+    <a
+      href="#main-content"
+      className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:font-semibold focus:text-emerald-800 focus:shadow-lg focus:outline focus:outline-2 focus:outline-emerald-700"
+    >
+      {t('home.skipToContent')}
+    </a>
     <header className="captivia-header">
       <div className="captivia-header-inner">
         <Link href="/" className="captivia-brand" onClick={closeMobileMenu}>
@@ -31,7 +77,7 @@ export function AppHeader() {
           <span>{t('common.appName')}</span>
         </Link>
 
-        <nav className="captivia-desktop-nav" aria-label="Navigation principale">
+        <nav className="captivia-desktop-nav" aria-label={t('home.mainNavigation')}>
           <Link
             href="/"
             className={navLinkClass(isHome)}
@@ -108,10 +154,11 @@ export function AppHeader() {
         <div className="captivia-mobile-actions">
           <LanguageSelector />
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setMobileMenuOpen((open) => !open)}
             className="captivia-menu-button"
-            aria-label="Menu"
+            aria-label={mobileMenuOpen ? t('home.closeMenu') : t('home.openMenu')}
             aria-expanded={mobileMenuOpen}
             aria-controls="captivia-mobile-navigation"
           >
@@ -121,8 +168,15 @@ export function AppHeader() {
       </div>
 
       {mobileMenuOpen && (
-        <div id="captivia-mobile-navigation" className="captivia-mobile-menu" role="dialog" aria-label="Navigation">
-          <nav className="captivia-mobile-nav" aria-label="Navigation mobile">
+        <div
+          id="captivia-mobile-navigation"
+          ref={mobileMenuRef}
+          className="captivia-mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t('home.mobileNavigation')}
+        >
+          <nav className="captivia-mobile-nav" aria-label={t('home.mobileNavigation')}>
             <Link href="/" className={mobileLinkClass(isHome)} onClick={closeMobileMenu}>
               <Home size={17} aria-hidden="true" />
               <span>{t('common.home')}</span>
@@ -200,5 +254,6 @@ export function AppHeader() {
         </div>
       )}
     </header>
+    </>
   );
 }

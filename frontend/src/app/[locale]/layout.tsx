@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { AppHeader } from '@/components/AppHeader';
+import { SiteFooter } from '@/components/SiteFooter';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import '../globals.css';
 
@@ -47,11 +48,12 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             <AppHeader />
-            <main className="flex-1 w-full">
+            <main id="main-content" tabIndex={-1} className="flex-1 w-full">
               <ErrorBoundary>
                 {children}
               </ErrorBoundary>
             </main>
+            <SiteFooter />
           </AuthProvider>
         </NextIntlClientProvider>
       </body>

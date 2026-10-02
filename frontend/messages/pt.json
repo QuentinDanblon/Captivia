@@ -319,8 +319,14 @@
     "about": "Sobre",
     "contact": "Contato",
     "privacy": "Privacidade",
-    "terms": "Termos",
-    "transparency": "Transparência e afiliação"
+    "terms": "Termos de uso",
+    "transparency": "Transparência e afiliação",
+    "accountDeletion": "Excluir minha conta",
+    "amazonAssociate": "Como Associado da Amazon, a Captivia ganha com compras qualificadas.",
+    "legalNotice": "Aviso legal",
+    "navLabel": "Informações legais",
+    "sources": "Fontes e licenças",
+    "tagline": "Cuidar, simplesmente."
   },
   "grade": {
     "bronze": "Bronze",
@@ -355,7 +361,12 @@
     "recent": "Novidades",
     "searchPlaceholder": "Pesquisar uma espécie...",
     "subtitle": "Descubra e cuide dos seus animais",
-    "title": "O Guia da Fauna"
+    "title": "O Guia da Fauna",
+    "closeMenu": "Fechar o menu",
+    "mainNavigation": "Navegação principal",
+    "mobileNavigation": "Navegação móvel",
+    "openMenu": "Abrir o menu",
+    "skipToContent": "Ir para o conteúdo"
   },
   "notifications": {
     "addCustom": "Adicionar um tópico",
@@ -530,12 +541,20 @@
   },
   "store": {
     "allCategories": "Todos os tipos",
-    "disclaimer": "Links de afiliados: ao comprar por esses links, você apoia a Captivia. Os preços continuam os mesmos para você.",
+    "disclaimer": "Links de afiliado: ao comprar por estes links, você apoia a Captivia. O preço continua o mesmo para você.",
     "filterByCategory": "Filtrar por tipo de animal",
-    "forSpecies": "Lojas adequadas para esta espécie",
-    "subtitle": "Links para sites parceiros de alimentação e acessórios adequados ao seu animal.",
+    "forSpecies": "Lojas adequadas a esta espécie",
+    "subtitle": "Links para sites parceiros de alimentação e equipamentos adequados ao seu animal.",
     "title": "Loja",
-    "visitStore": "Ver o site"
+    "visitStore": "Ver o site",
+    "categoryAmphibian": "Anfíbios",
+    "categoryArachnid": "Aracnídeos",
+    "categoryBird": "Aves",
+    "categoryFish": "Peixes",
+    "categoryInsect": "Insetos",
+    "categoryMammal": "Mamíferos",
+    "categoryReptile": "Répteis",
+    "productLinksNotice": "Os links para produtos podem ser links de afiliado."
   },
   "subscription": {
     "benefitAnimals": "Animais ilimitados em “Meus animais”",
@@ -555,5 +574,42 @@
     "subtitle": "Desbloqueie todas as vantagens do Captivia",
     "title": "Assinatura Premium",
     "yearly": "Anual"
+  },
+  "legal": {
+    "englishFallback": "A versão em inglês prevalece enquanto aguardamos a tradução.",
+    "lastUpdated": "Última atualização: {date}",
+    "pendingInfo": "Algumas informações do editor ainda precisam ser preenchidas; estão marcadas com «À COMPLÉTER» (a preencher).",
+    "reviewWarning": "Documento a ser validado por um profissional do direito",
+    "tableOfContents": "Índice"
+  },
+  "transparency": {
+    "affiliateIndependence": "As recomendações de equipamentos e alimentação dependem das necessidades da espécie, não do valor das comissões.",
+    "affiliateLabelled": "Os links de afiliado são indicados pela menção «Link de afiliado» ou por um aviso próximo.",
+    "affiliatePartners": "Parceiro no lançamento: Amazon (amazon.fr). Os sites parceiros estão listados na <link>Loja</link>.",
+    "affiliateSamePrice": "O preço é o mesmo, usando ou não o nosso link.",
+    "affiliateTitle": "Nossos links de afiliado",
+    "backHome": "Voltar ao início",
+    "contactBody": "Alguma dúvida sobre nosso modelo econômico, a afiliação ou seus dados? Escreva para nós:",
+    "contactTitle": "Contato",
+    "dataDeletion": "Você pode excluir sua conta e todos os dados associados a qualquer momento em <link>Configurações, seção Conta</link>.",
+    "dataExport": "Você pode exportar gratuitamente todos os seus dados em <link>Configurações, seção Conta</link>.",
+    "dataMore": "Ler a política de privacidade",
+    "dataNoSale": "Não vendemos nem alugamos seus dados pessoais e não os usamos para publicidade.",
+    "dataNoTrackers": "Nenhum cookie publicitário nem ferramenta de medição de audiência de terceiros: apenas rastreadores estritamente necessários (login, idioma) são usados.",
+    "dataPrivate": "As fichas dos seus animais são privadas por padrão. O compartilhamento público de um animal é opcional: você o ativa e pode desativá-lo a qualquer momento.",
+    "dataTitle": "Seus dados",
+    "intro": "Como a Captivia é financiada, como funcionam nossos links de afiliado e o que fazemos — e não fazemos — com seus dados.",
+    "metaDescription": "Como a Captivia é financiada, como funcionam seus links de afiliado e o que ela faz com seus dados.",
+    "missionBody": "A Captivia ajuda tutores de animais, inclusive de animais exóticos, a conhecer e cuidar melhor dos seus animais com informações de fontes abertas. Essas informações não substituem a orientação de um veterinário.",
+    "missionTitle": "Nossa missão",
+    "modelAffiliation": "afiliação: alguns links para sites de compras, principalmente a Amazon, nos rendem uma comissão quando você compra por eles, sem custo adicional para você;",
+    "modelAlwaysFree": "Exportar seus dados e excluir sua conta são e continuarão sendo gratuitos.",
+    "modelIntro": "A consulta das fichas de espécies é gratuita. O serviço é financiado por:",
+    "modelSubscription": "uma assinatura opcional, em breve: ainda não está à venda. O preço e as condições (renovação, cancelamento, direito de arrependimento) serão exibidos antes de qualquer pagamento.",
+    "modelTitle": "Nosso modelo econômico",
+    "openDataBody": "As fichas se baseiam em GBIF, Wikipédia, Wikidata, Species+ (CITES), PubMed, Open Pet Food Facts, iNaturalist e Encyclopedia of Life. Essas fontes não recebem nenhum dado pessoal nosso.",
+    "openDataMore": "Ver fontes e licenças",
+    "openDataTitle": "Dados abertos",
+    "title": "Transparência e afiliação"
   }
 }

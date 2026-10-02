@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { api } from '@/lib/api';
 import Link from 'next/link';
+import { localizedPath } from '@/lib/legal';
 
 interface AffiliateStore {
   id: string;
@@ -14,16 +15,17 @@ interface AffiliateStore {
   types: string[];
 }
 
+// Les valeurs correspondent aux catégories stockées côté API (en français).
 const CATEGORY_OPTIONS = [
   { value: '', labelKey: 'store.allCategories' },
-  { value: 'mammifère', label: 'Mammifères' },
-  { value: 'reptile', label: 'Reptiles' },
-  { value: 'oiseau', label: 'Oiseaux' },
-  { value: 'poisson', label: 'Poissons' },
-  { value: 'amphibien', label: 'Amphibiens' },
-  { value: 'insecte', label: 'Insectes' },
-  { value: 'arachnide', label: 'Arachnides' },
-];
+  { value: 'mammifère', labelKey: 'store.categoryMammal' },
+  { value: 'reptile', labelKey: 'store.categoryReptile' },
+  { value: 'oiseau', labelKey: 'store.categoryBird' },
+  { value: 'poisson', labelKey: 'store.categoryFish' },
+  { value: 'amphibien', labelKey: 'store.categoryAmphibian' },
+  { value: 'insecte', labelKey: 'store.categoryInsect' },
+  { value: 'arachnide', labelKey: 'store.categoryArachnid' },
+] as const;
 
 function safeHref(url: string): string {
   if (!url || typeof url !== 'string') return '#';
@@ -38,6 +40,7 @@ function safeHref(url: string): string {
 
 export default function MagasinPage() {
   const t = useTranslations();
+  const locale = useLocale();
   const [stores, setStores] = useState<AffiliateStore[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,8 +48,6 @@ export default function MagasinPage() {
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
-    setError(null);
     api
       .getAffiliateStores(selectedCategory || undefined, undefined)
       .then((data) => {
@@ -64,7 +65,7 @@ export default function MagasinPage() {
     return () => {
       cancelled = true;
     };
-  }, [selectedCategory]);
+  }, [selectedCategory, t]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800">
@@ -79,32 +80,38 @@ export default function MagasinPage() {
         </div>
 
         <div className="mb-6 flex flex-wrap items-center gap-3">
-          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-            {t('store.filterByCategory')}:
-          </span>
+          <label htmlFor="store-category-filter" className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            {t('store.filterByCategory')}
+          </label>
           <select
+            id="store-category-filter"
             value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            onChange={(e) => {
+              setLoading(true);
+              setError(null);
+              setSelectedCategory(e.target.value);
+            }}
             className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
           >
             {CATEGORY_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
-                {opt.labelKey ? t(opt.labelKey) : opt.label}
+                {t(opt.labelKey)}
               </option>
             ))}
           </select>
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-16">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent" />
+          <div className="flex items-center justify-center py-16" role="status">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent" aria-hidden="true" />
+            <span className="sr-only">{t('common.loading')}</span>
           </div>
         ) : error ? (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl shadow-lg p-8 text-center text-red-600 dark:text-red-400">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl shadow-lg p-8 text-center text-red-700 dark:text-red-300">
             {t('common.error')} : {error}
           </div>
         ) : stores.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center text-gray-500 dark:text-gray-400">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center text-gray-600 dark:text-gray-300">
             {t('common.noData')}
           </div>
         ) : (
@@ -138,11 +145,11 @@ export default function MagasinPage() {
                     <a
                       href={href}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 text-white rounded-lg font-medium hover:bg-emerald-700 transition-colors"
+                      rel="sponsored noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-700 text-white rounded-lg font-medium hover:bg-emerald-800 transition-colors"
                     >
                       {t('store.visitStore')}
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
                     </a>
@@ -155,9 +162,12 @@ export default function MagasinPage() {
 
         <div className="mt-8 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
           <p className="text-sm text-amber-800 dark:text-amber-200">
+            {t('footer.amazonAssociate')}
+          </p>
+          <p className="text-sm text-amber-800 dark:text-amber-200 mt-1">
             {t('store.disclaimer')}
           </p>
-          <Link href="/transparency" className="text-sm text-emerald-600 dark:text-emerald-400 hover:underline mt-2 inline-block">
+          <Link href={localizedPath(locale, '/transparency')} className="text-sm text-emerald-700 dark:text-emerald-300 underline-offset-2 hover:underline mt-2 inline-block">
             {t('footer.transparency')}
           </Link>
         </div>

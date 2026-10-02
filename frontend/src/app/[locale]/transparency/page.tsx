@@ -1,176 +1,134 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
+import { LEGAL, LEGAL_ROUTES, contactMailto, localizedPath } from '@/lib/legal';
 
-export default function TransparencyPage() {
-  const t = useTranslations();
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'transparency' });
+  return { title: `${t('title')} – ${LEGAL.serviceName}`, description: t('metaDescription') };
+}
+
+const linkClass =
+  'font-medium text-emerald-700 underline underline-offset-2 hover:text-emerald-800 dark:text-emerald-300 dark:hover:text-emerald-200';
+
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return (
+    <section aria-labelledby={id} className="space-y-3">
+      <h2 id={id} className="text-xl font-bold text-emerald-800 sm:text-2xl dark:text-emerald-300">
+        {title}
+      </h2>
+      {children}
+    </section>
+  );
+}
+
+export default async function TransparencyPage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'transparency' });
+  const tFooter = await getTranslations({ locale, namespace: 'footer' });
+  const href = (path: string) => localizedPath(locale, path);
+  const mailto = contactMailto();
+  const settingsLink = (chunks: ReactNode) => (
+    <Link href={href(LEGAL_ROUTES.accountSettings)} className={linkClass}>
+      {chunks}
+    </Link>
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 min-w-0">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-6 sm:mb-8">
-          {t('footer.transparency')}
-        </h1>
+      <div className="mx-auto w-full min-w-0 max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
+        <h1 className="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl dark:text-white">{t('title')}</h1>
+        <p className="mb-8 text-gray-700 dark:text-gray-300">{t('intro')}</p>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 space-y-8 break-words">
-          {/* Section: Notre Mission */}
-          <section>
-            <h2 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">
-              Notre Mission
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Captivia est une plateforme complète, pédagogique et bienveillante
-              qui accompagne les propriétaires d'animaux domestiques et NAC (Nouveaux
-              Animaux de Compagnie) au quotidien. Notre objectif est de fournir
-              des informations fiables, accessibles et à jour sans se substituer
-              à un vétérinaire.
+        <div className="space-y-8 break-words rounded-xl bg-white p-4 leading-relaxed text-gray-800 shadow-lg sm:p-8 dark:bg-gray-800 dark:text-gray-200">
+          <Section id="transparency-mission" title={t('missionTitle')}>
+            <p>{t('missionBody')}</p>
+          </Section>
+
+          <Section id="transparency-model" title={t('modelTitle')}>
+            <p>{t('modelIntro')}</p>
+            <ul className="list-disc space-y-2 pl-5">
+              <li>{t('modelAffiliation')}</li>
+              <li>{t('modelSubscription')}</li>
+            </ul>
+            <p className="font-medium">{t('modelAlwaysFree')}</p>
+          </Section>
+
+          <Section id="transparency-affiliate" title={t('affiliateTitle')}>
+            <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-amber-900 dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-100">
+              {tFooter('amazonAssociate')}
             </p>
-          </section>
-
-          {/* Section: Modèle Économique */}
-          <section>
-            <h2 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">
-              Notre Modèle Économique
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Captivia est gratuit pour consulter le catalogue d'espèces et les
-              informations associées (santé, législation, alimentation, matériel).
-              Pour financer le développement et la maintenance de la plateforme,
-              nous utilisons deux sources de revenus :
-            </p>
-            <div className="space-y-4 ml-4">
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
-                  1. Affiliation (dès maintenant)
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  Nous recommandons du matériel et de l'alimentation via des liens
-                  affiliés (principalement Amazon). Lorsque vous achetez un produit
-                  via ces liens, nous recevons une petite commission sans coût
-                  supplémentaire pour vous. Tous les liens affiliés sont clairement
-                  identifiés par un badge "Lien affilié".
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
-                  2. Abonnement Premium (à venir)
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  À l'avenir, nous proposerons un abonnement premium pour accéder
-                  à des fonctionnalités avancées :
-                </p>
-                <ul className="list-disc list-inside mt-2 space-y-1 text-gray-700 dark:text-gray-300">
-                  <li>Gestion d'animaux illimitée (1 gratuit, au-delà = abonnement)</li>
-                  <li>Rappels avancés et personnalisés</li>
-                  <li>Statistiques détaillées</li>
-                  <li>Export de données</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          {/* Section: Transparence des Liens Affiliés */}
-          <section>
-            <h2 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">
-              Transparence des Liens Affiliés
-            </h2>
-            <div className="space-y-3 text-gray-700 dark:text-gray-300">
-              <p>
-                <strong>Identification claire :</strong> Tous les liens affiliés
-                sont marqués d'un badge "Lien affilié" visible.
-              </p>
-              <p>
-                <strong>Aucun coût supplémentaire :</strong> Le prix des produits
-                est identique, que vous passiez par notre lien ou non.
-              </p>
-              <p>
-                <strong>Recommandations honnêtes :</strong> Nous recommandons
-                uniquement du matériel que nous jugeons adapté et de qualité.
-                L'affiliation ne compromet jamais notre intégrité.
-              </p>
-              <p>
-                <strong>Partenaires :</strong> Amazon (mondial), et à terme
-                d'autres enseignes spécialisées.
-              </p>
-            </div>
-          </section>
-
-          {/* Section: Protection des Données */}
-          <section>
-            <h2 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">
-              Protection de Vos Données
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Nous prenons la confidentialité de vos données très au sérieux :
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+            <ul className="list-disc space-y-2 pl-5">
+              <li>{t('affiliateLabelled')}</li>
+              <li>{t('affiliateSamePrice')}</li>
+              <li>{t('affiliateIndependence')}</li>
               <li>
-                Les données de vos animaux (nom, âge, photos, notes) sont privées
-                et ne sont jamais partagées.
-              </li>
-              <li>
-                Aucune vente de données personnelles à des tiers.
-              </li>
-              <li>
-                Conformité RGPD (Europe) et réglementations locales.
-              </li>
-              <li>
-                Vous pouvez supprimer votre compte et toutes vos données à tout moment.
+                {t.rich('affiliatePartners', {
+                  link: (chunks) => (
+                    <Link href={href('/magasin')} className={linkClass}>
+                      {chunks}
+                    </Link>
+                  ),
+                })}
               </li>
             </ul>
-          </section>
+          </Section>
 
-          {/* Section: Open Data */}
-          <section>
-            <h2 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">
-              Engagement Open Data
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Captivia s'appuie sur des sources de données ouvertes et fiables :
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-              <li>
-                <strong>GBIF</strong> (Global Biodiversity Information Facility)
-                - Données taxonomiques et distribution
-              </li>
-              <li>
-                <strong>Species+</strong> (CITES) - Législation et commerce
-                international
-              </li>
-              <li>
-                <strong>PubMed</strong> - Références scientifiques santé
-              </li>
-              <li>
-                <strong>Open Pet Food Facts</strong> - Composition alimentaire
-              </li>
-              <li>
-                <strong>LafeberVet, IVIS</strong> - Ressources vétérinaires NAC
-              </li>
+          <Section id="transparency-data" title={t('dataTitle')}>
+            <ul className="list-disc space-y-2 pl-5">
+              <li>{t('dataNoSale')}</li>
+              <li>{t('dataNoTrackers')}</li>
+              <li>{t('dataPrivate')}</li>
+              <li>{t.rich('dataExport', { link: settingsLink })}</li>
+              <li>{t.rich('dataDeletion', { link: settingsLink })}</li>
             </ul>
-          </section>
+            <p>
+              <Link href={href(LEGAL_ROUTES.privacy)} className={linkClass}>
+                {t('dataMore')}
+              </Link>
+            </p>
+          </Section>
 
-          {/* Section: Contact */}
-          <section className="pt-6 border-t border-gray-200 dark:border-gray-700">
-            <h2 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">
-              Contact
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Pour toute question concernant notre modèle économique, l'affiliation,
-              ou la protection des données, n'hésitez pas à nous contacter :
+          <Section id="transparency-open-data" title={t('openDataTitle')}>
+            <p>{t('openDataBody')}</p>
+            <p>
+              <Link href={href(LEGAL_ROUTES.sources)} className={linkClass}>
+                {t('openDataMore')}
+              </Link>
             </p>
-            <p className="mt-3 text-emerald-600 dark:text-emerald-400 font-semibold">
-              contact@captivia.com (exemple)
-            </p>
-          </section>
+          </Section>
+
+          <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
+            <Section id="transparency-contact" title={t('contactTitle')}>
+              <p>{t('contactBody')}</p>
+              <p className="font-semibold">
+                {mailto ? (
+                  <a href={mailto} className={linkClass}>
+                    {LEGAL.contactEmail}
+                  </a>
+                ) : (
+                  <mark
+                    lang="fr"
+                    className="rounded bg-amber-100 px-1 text-amber-900 dark:bg-amber-900/60 dark:text-amber-100"
+                  >
+                    {LEGAL.contactEmail}
+                  </mark>
+                )}
+              </p>
+            </Section>
+          </div>
         </div>
 
         <div className="mt-8 text-center">
           <Link
-            href="/"
-            className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+            href={href('/')}
+            className="inline-block rounded-lg bg-emerald-700 px-6 py-3 text-white transition-colors hover:bg-emerald-800"
           >
-            {t('common.back')} {t('common.home')}
+            {t('backHome')}
           </Link>
         </div>
       </div>

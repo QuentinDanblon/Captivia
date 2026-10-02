@@ -317,9 +317,15 @@
   },
   "footer": {
     "about": "About",
+    "accountDeletion": "Delete my account",
+    "amazonAssociate": "As an Amazon Associate, Captivia earns from qualifying purchases.",
     "contact": "Contact",
+    "legalNotice": "Legal notice",
+    "navLabel": "Legal information",
     "privacy": "Privacy",
-    "terms": "Terms",
+    "sources": "Sources and licences",
+    "tagline": "Caring, made simple.",
+    "terms": "Terms of use",
     "transparency": "Transparency & affiliation"
   },
   "grade": {
@@ -350,12 +356,24 @@
     "yourStatus": "Your status"
   },
   "home": {
+    "closeMenu": "Close menu",
     "featured": "Featured",
+    "mainNavigation": "Main navigation",
+    "mobileNavigation": "Mobile navigation",
+    "openMenu": "Open menu",
     "popular": "Most viewed",
     "recent": "Recent",
     "searchPlaceholder": "Search for a species...",
+    "skipToContent": "Skip to content",
     "subtitle": "Discover and care for your animals",
     "title": "The Wildlife Guide"
+  },
+  "legal": {
+    "englishFallback": "The English version is authoritative pending translation.",
+    "lastUpdated": "Last updated: {date}",
+    "pendingInfo": "Some publisher details are still missing; they are marked “À COMPLÉTER” (to be completed).",
+    "reviewWarning": "Document to be reviewed by a legal professional",
+    "tableOfContents": "Contents"
   },
   "notifications": {
     "addCustom": "Add topic",
@@ -530,9 +548,17 @@
   },
   "store": {
     "allCategories": "All types",
+    "categoryAmphibian": "Amphibians",
+    "categoryArachnid": "Arachnids",
+    "categoryBird": "Birds",
+    "categoryFish": "Fish",
+    "categoryInsect": "Insects",
+    "categoryMammal": "Mammals",
+    "categoryReptile": "Reptiles",
     "disclaimer": "Affiliate links: purchasing via these links supports Captivia. Prices remain the same for you.",
     "filterByCategory": "Filter by animal type",
     "forSpecies": "Stores suited to this species",
+    "productLinksNotice": "Product links may be affiliate links.",
     "subtitle": "Partner links for food and equipment suited to your pet.",
     "title": "Shop",
     "visitStore": "Visit site"
@@ -555,5 +581,35 @@
     "subtitle": "Unlock all Captivia benefits",
     "title": "Premium subscription",
     "yearly": "Yearly"
+  },
+  "transparency": {
+    "affiliateIndependence": "Equipment and food recommendations depend on the needs of the species, not on commission rates.",
+    "affiliateLabelled": "Affiliate links are marked “Affiliate link” or accompanied by a nearby notice.",
+    "affiliatePartners": "Partner at launch: Amazon (amazon.fr). Partner sites are listed in the <link>Shop</link>.",
+    "affiliateSamePrice": "The price is the same whether or not you use our link.",
+    "affiliateTitle": "Our affiliate links",
+    "backHome": "Back to home",
+    "contactBody": "A question about our business model, affiliation or your data? Write to us:",
+    "contactTitle": "Contact",
+    "dataDeletion": "You can delete your account and all related data at any time from <link>Settings, Account section</link>.",
+    "dataExport": "You can export all your data free of charge from <link>Settings, Account section</link>.",
+    "dataMore": "Read the privacy policy",
+    "dataNoSale": "We do not sell or rent your personal data and we do not use it for advertising.",
+    "dataNoTrackers": "No advertising cookies and no third-party audience measurement: only strictly necessary trackers (login, language) are used.",
+    "dataPrivate": "Your animals’ profiles are private by default. Public sharing of an animal is optional: you turn it on yourself and can turn it off at any time.",
+    "dataTitle": "Your data",
+    "intro": "How Captivia is funded, how our affiliate links work and what we do — and do not do — with your data.",
+    "metaDescription": "How Captivia is funded, how its affiliate links work and what it does with your data.",
+    "missionBody": "Captivia helps pet owners, including owners of exotic pets, understand and care for their animals using information from open sources. This information does not replace a veterinarian’s advice.",
+    "missionTitle": "Our mission",
+    "modelAffiliation": "affiliate links: some links to merchant websites, mainly Amazon, earn us a commission when you buy through them, at no extra cost to you;",
+    "modelAlwaysFree": "Exporting your data and deleting your account are, and will remain, free.",
+    "modelIntro": "Browsing species profiles is free. The service is funded by:",
+    "modelSubscription": "an optional subscription, coming later: it is not on sale yet. Its price and terms (renewal, cancellation, right of withdrawal) will be shown before any payment.",
+    "modelTitle": "Our business model",
+    "openDataBody": "Profiles rely on GBIF, Wikipedia, Wikidata, Species+ (CITES), PubMed, Open Pet Food Facts, iNaturalist and Encyclopedia of Life. These sources receive no personal data from us.",
+    "openDataMore": "See sources and licences",
+    "openDataTitle": "Open data",
+    "title": "Transparency and affiliation"
   }
 }
