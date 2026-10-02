@@ -447,8 +447,11 @@ export default function ComptePage() {
             <h3 id="sessions-title" className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
               {t('sessions.title')}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
               {t('sessions.logoutAllDescription')}
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+              {t('sessions.accessRevokedNotice')}
             </p>
             <button
               type="button"

@@ -21,7 +21,11 @@ import { LoginDto } from './dto/login.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
-import { RefreshTokenDto, VerifyEmailDto } from './dto/refresh-token.dto';
+import {
+  LogoutDto,
+  RefreshTokenDto,
+  VerifyEmailDto,
+} from './dto/refresh-token.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { AuthRateLimitGuard } from '../common/guards/rate-limit.guard';
 
@@ -77,11 +81,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary:
-      'Revoke the session (refresh token family) of the given refresh token',
+      'Revoke the session (refresh token family) of the given refresh token; optionally remove this device push subscription (endpoint)',
   })
   @ApiResponse({ status: 200, description: 'Logged out (idempotent)' })
-  async logout(@Body() dto: RefreshTokenDto) {
-    return this.authService.logout(dto.refreshToken);
+  async logout(@Body() dto: LogoutDto) {
+    return this.authService.logout(dto.refreshToken, dto.endpoint);
   }
 
   @Post('logout-all')
@@ -90,7 +94,7 @@ export class AuthController {
   @ApiBearerAuth()
   @ApiOperation({
     summary:
-      'Log out from all devices (revokes every refresh token, invalidates access tokens)',
+      'Log out from all devices (revokes every refresh token, invalidates access tokens, disables the calendar feed link and removes push subscriptions)',
   })
   @ApiResponse({ status: 200, description: 'All sessions revoked' })
   async logoutAll(@Request() req: { user: { id: string } }) {
@@ -114,7 +118,8 @@ export class AuthController {
   @UseGuards(AuthRateLimitGuard, JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Resend the email verification link (max 1/min per account)',
+    summary:
+      'Resend the email verification link (max 1/min and 5 per 24 h per account)',
   })
   @ApiResponse({ status: 200, description: 'Email sent (or already verified)' })
   @ApiResponse({ status: 429, description: 'Too many requests' })

@@ -258,4 +258,194 @@ describe('Auth E2E — refresh tokens (W1-01)', () => {
       await me(body(r).accessToken).expect(200);
     });
   });
+
+  describe('revue de sécurité — révocation complète et hygiène des jetons', () => {
+    /** Donne au compte un lien calendrier actif et deux abonnements push. */
+    async function seedPersistentAccess(userId: string) {
+      await prisma.user.update({
+        where: { id: userId },
+        data: { calendarToken: sha256(`cal-${userId}`) },
+      });
+      for (const n of [1, 2]) {
+        await prisma.pushSubscription.create({
+          data: {
+            userId,
+            endpoint: `https://fcm.googleapis.com/fcm/send/${userId}-${n}`,
+            keys: { p256dh: 'k', auth: 'a' },
+          },
+        });
+      }
+    }
+    async function persistentAccess(userId: string) {
+      const user = await prisma.user.findUniqueOrThrow({
+        where: { id: userId },
+        select: { calendarToken: true },
+      });
+      return {
+        calendarToken: user.calendarToken,
+        push: await prisma.pushSubscription.count({ where: { userId } }),
+      };
+    }
+
+    it('chaque refresh token porte la tokenVersion du compte ; une version périmée est refusée et sa famille révoquée', async () => {
+      const reg = await register(emailFor('tv')).expect(201);
+      const userId = body(reg).user.id;
+      const stored = await prisma.refreshToken.findUniqueOrThrow({
+        where: { tokenHash: sha256(body(reg).refreshToken) },
+      });
+      expect(stored.tokenVersion).toBe(0);
+
+      // Jeton « survivant » simulé : actif, mais émis pour une version antérieure du compte.
+      await prisma.user.update({
+        where: { id: userId },
+        data: { tokenVersion: { increment: 1 } },
+      });
+      await refresh(body(reg).refreshToken).expect(401);
+      const family = await prisma.refreshToken.findMany({
+        where: { familyId: stored.familyId },
+      });
+      expect(family.every((t) => t.revokedAt !== null)).toBe(true);
+
+      // Un jeton hérité (tokenVersion NULL, émis avant la migration) reste accepté puis versionné.
+      const login = await request(server())
+        .post('/auth/login')
+        .send({ email: emailFor('tv'), password: PASSWORD })
+        .expect(200);
+      await prisma.refreshToken.updateMany({
+        where: { tokenHash: sha256(body(login).refreshToken) },
+        data: { tokenVersion: null },
+      });
+      const rotated = await refresh(body(login).refreshToken).expect(200);
+      const next = await prisma.refreshToken.findUniqueOrThrow({
+        where: { tokenHash: sha256(body(rotated).refreshToken) },
+      });
+      expect(next.tokenVersion).toBe(1);
+    });
+
+    it('logout-all désactive aussi le lien calendrier et supprime les abonnements push', async () => {
+      const reg = await register(emailFor('all-access')).expect(201);
+      const userId = body(reg).user.id;
+      await seedPersistentAccess(userId);
+      expect((await persistentAccess(userId)).push).toBe(2);
+
+      await request(server())
+        .post('/auth/logout-all')
+        .set('Authorization', `Bearer ${body(reg).accessToken}`)
+        .expect(200);
+      expect(await persistentAccess(userId)).toEqual({
+        calendarToken: null,
+        push: 0,
+      });
+    });
+
+    it('change-password désactive le lien calendrier et supprime les abonnements push', async () => {
+      const reg = await register(emailFor('chpw-access')).expect(201);
+      const userId = body(reg).user.id;
+      await seedPersistentAccess(userId);
+      await request(server())
+        .post('/auth/change-password')
+        .set('Authorization', `Bearer ${body(reg).accessToken}`)
+        .send({ currentPassword: PASSWORD, newPassword: 'ChangedPass456' })
+        .expect(200);
+      expect(await persistentAccess(userId)).toEqual({
+        calendarToken: null,
+        push: 0,
+      });
+    });
+
+    it('reset-password révoque sessions, lien calendrier et abonnements push', async () => {
+      const reg = await register(emailFor('reset-access')).expect(201);
+      const userId = body(reg).user.id;
+      await seedPersistentAccess(userId);
+      const raw = crypto.randomBytes(32).toString('hex');
+      await prisma.passwordResetToken.create({
+        data: {
+          userId,
+          tokenHash: sha256(raw),
+          expiresAt: new Date(Date.now() + 60_000),
+        },
+      });
+      await request(server())
+        .post('/auth/reset-password')
+        .send({ token: raw, newPassword: 'ResetPass4567' })
+        .expect(200);
+      expect(await persistentAccess(userId)).toEqual({
+        calendarToken: null,
+        push: 0,
+      });
+      await refresh(body(reg).refreshToken).expect(401);
+      await me(body(reg).accessToken).expect(401);
+    });
+
+    it('logout avec endpoint supprime l’abonnement push de cet appareil seulement', async () => {
+      const reg = await register(emailFor('logout-push')).expect(201);
+      const userId = body(reg).user.id;
+      await seedPersistentAccess(userId);
+      const victim = await register(emailFor('logout-push-other')).expect(201);
+      const foreign = `https://fcm.googleapis.com/fcm/send/foreign-${tag}`;
+      await prisma.pushSubscription.create({
+        data: {
+          userId: body(victim).user.id,
+          endpoint: foreign,
+          keys: { p256dh: 'k', auth: 'a' },
+        },
+      });
+
+      // Endpoint d'un autre compte : ignoré (aucune suppression croisée).
+      const r1 = await refresh(body(reg).refreshToken).expect(200);
+      await request(server())
+        .post('/auth/logout')
+        .send({ refreshToken: body(r1).refreshToken, endpoint: foreign })
+        .expect(200);
+      expect(
+        await prisma.pushSubscription.count({ where: { endpoint: foreign } }),
+      ).toBe(1);
+
+      const login = await request(server())
+        .post('/auth/login')
+        .send({ email: emailFor('logout-push'), password: PASSWORD })
+        .expect(200);
+      await request(server())
+        .post('/auth/logout')
+        .send({
+          refreshToken: body(login).refreshToken,
+          endpoint: `https://fcm.googleapis.com/fcm/send/${userId}-1`,
+        })
+        .expect(200);
+      const left = await prisma.pushSubscription.findMany({
+        where: { userId },
+        select: { endpoint: true },
+      });
+      expect(left).toEqual([
+        { endpoint: `https://fcm.googleapis.com/fcm/send/${userId}-2` },
+      ]);
+      await refresh(body(login).refreshToken).expect(401);
+    });
+
+    it('refresh purge (best effort) les refresh tokens expirés du compte', async () => {
+      const reg = await register(emailFor('purge')).expect(201);
+      const userId = body(reg).user.id;
+      await prisma.refreshToken.createMany({
+        data: [1, 2, 3].map((n) => ({
+          userId,
+          tokenHash: sha256(`expired-${tag}-${n}`),
+          familyId: crypto.randomUUID(),
+          expiresAt: new Date(Date.now() - n * 60_000),
+        })),
+      });
+      await refresh(body(reg).refreshToken).expect(200);
+      const deadline = Date.now() + 5_000;
+      let expired = -1;
+      while (Date.now() < deadline) {
+        expired = await prisma.refreshToken.count({
+          where: { userId, expiresAt: { lt: new Date() } },
+        });
+        if (expired === 0) break;
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      expect(expired).toBe(0);
+      // Les jetons non expirés (dont l'ancien, roté, conservé pour la détection de rejeu) restent.
+      expect(await prisma.refreshToken.count({ where: { userId } })).toBe(2);
+    });
+  });
 });

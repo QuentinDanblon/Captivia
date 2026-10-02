@@ -1,7 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MaxLength, MinLength } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 
-/** Corps de POST /auth/refresh et POST /auth/logout (W1-01). */
+/** Corps de POST /auth/refresh (W1-01). */
 export class RefreshTokenDto {
   @ApiProperty({
     description:
@@ -11,6 +11,18 @@ export class RefreshTokenDto {
   @MinLength(1)
   @MaxLength(256)
   refreshToken: string;
+}
+
+/** Corps de POST /auth/logout : refresh token + abonnement push facultatif de cet appareil. */
+export class LogoutDto extends RefreshTokenDto {
+  @ApiPropertyOptional({
+    description:
+      "Endpoint Web Push de cet appareil : l'abonnement correspondant du compte est supprimé.",
+  })
+  @IsOptional()
+  @IsString()
+  @MaxLength(500)
+  endpoint?: string;
 }
 
 /** Corps de POST /auth/verify-email (W2-04). */

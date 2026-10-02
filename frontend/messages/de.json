@@ -884,7 +884,8 @@
     "logoutAllDescription": "Meldet Captivia auf allen deinen Geräten (Telefone, Browser) ab, auch auf diesem. Nützlich, wenn du ein Gerät verlierst.",
     "logoutAllButton": "Von allen Geräten abmelden",
     "logoutAllLoading": "Abmeldung…",
-    "logoutAllError": "Die Abmeldung von allen Geräten ist fehlgeschlagen. Bitte versuche es erneut."
+    "logoutAllError": "Die Abmeldung von allen Geräten ist fehlgeschlagen. Bitte versuche es erneut.",
+    "accessRevokedNotice": "Auch der Abo-Link des Pflegekalenders und die Push-Benachrichtigungen werden deaktiviert: Erzeuge den Link im Pflegekalender neu und aktiviere die Benachrichtigungen wieder."
   },
   "emailVerification": {
     "bannerText": "Bitte bestätige deine E-Mail-Adresse: Wir haben dir einen Bestätigungslink gesendet.",

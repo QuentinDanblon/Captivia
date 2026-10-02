@@ -884,7 +884,8 @@
     "logoutAllDescription": "Disconnette Captivia da tutti i tuoi dispositivi (telefoni, browser), compreso questo. Utile se perdi un dispositivo.",
     "logoutAllButton": "Disconnetti da tutti i dispositivi",
     "logoutAllLoading": "Disconnessione…",
-    "logoutAllError": "La disconnessione da tutti i dispositivi non è riuscita. Riprova."
+    "logoutAllError": "La disconnessione da tutti i dispositivi non è riuscita. Riprova.",
+    "accessRevokedNotice": "Anche il link di abbonamento all’Agenda delle cure e le notifiche push vengono disattivati: rigenera il link dall’Agenda delle cure e riattiva le notifiche."
   },
   "emailVerification": {
     "bannerText": "Verifica il tuo indirizzo e-mail: ti abbiamo inviato un link di conferma.",

@@ -126,6 +126,8 @@ function ResetPasswordForm() {
           {message && (
             <div className="captivia-auth-feedback is-success" role="status">
               <p>{message}</p>
+              {/* Le reset révoque aussi le lien du flux calendrier et les abonnements push. */}
+              <p>{t('sessions.accessRevokedNotice')}</p>
             </div>
           )}
           {error && (

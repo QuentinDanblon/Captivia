@@ -884,7 +884,8 @@
     "logoutAllDescription": "Signs Captivia out of all your devices (phones, browsers), including this one. Useful if you lose a device.",
     "logoutAllButton": "Sign out of all devices",
     "logoutAllLoading": "Signing out…",
-    "logoutAllError": "Signing out of all devices failed. Please try again."
+    "logoutAllError": "Signing out of all devices failed. Please try again.",
+    "accessRevokedNotice": "The Care agenda subscription link and push notifications are also turned off: regenerate the link from the Care agenda and turn notifications back on."
   },
   "emailVerification": {
     "bannerText": "Please verify your email address: we sent you a confirmation link.",
