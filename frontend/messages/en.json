@@ -315,10 +315,15 @@
     "yourStatus": "Your status"
   },
   "home": {
+    "closeMenu": "Close menu",
     "featured": "Featured",
+    "mainNavigation": "Main navigation",
+    "mobileNavigation": "Mobile navigation",
+    "openMenu": "Open menu",
     "popular": "Most viewed",
     "recent": "Recent",
     "searchPlaceholder": "Search for a species...",
+    "skipToContent": "Skip to content",
     "subtitle": "Discover and care for your animals",
     "title": "The Wildlife Guide"
   },

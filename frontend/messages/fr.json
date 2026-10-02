@@ -315,10 +315,15 @@
     "yourStatus": "Votre statut"
   },
   "home": {
+    "closeMenu": "Fermer le menu",
     "featured": "À la une",
+    "mainNavigation": "Navigation principale",
+    "mobileNavigation": "Navigation mobile",
+    "openMenu": "Ouvrir le menu",
     "popular": "Les plus consultés",
     "recent": "Nouveautés",
     "searchPlaceholder": "Rechercher une espèce...",
+    "skipToContent": "Aller au contenu",
     "subtitle": "Découvrez et prenez soin de vos animaux",
     "title": "Le Guide de la Faune"
   },

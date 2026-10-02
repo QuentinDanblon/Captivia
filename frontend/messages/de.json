@@ -315,10 +315,15 @@
     "yourStatus": "Ihr Status"
   },
   "home": {
+    "closeMenu": "Menü schließen",
     "featured": "Empfohlen",
+    "mainNavigation": "Hauptnavigation",
+    "mobileNavigation": "Mobile Navigation",
+    "openMenu": "Menü öffnen",
     "popular": "Beliebt",
     "recent": "Neu",
     "searchPlaceholder": "Art suchen...",
+    "skipToContent": "Zum Inhalt springen",
     "subtitle": "Entdecke und pflege deine Tiere",
     "title": "Der Tierführer"
   },
