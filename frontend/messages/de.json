@@ -35,7 +35,7 @@
     "whatItem3": "Ihre Benachrichtigungseinstellungen, Push-Abonnements und der Erinnerungsverlauf.",
     "whatItem4": "Offene Tokens zum Zurücksetzen des Passworts.",
     "backupTitle": "Backups",
-    "backupBody": "Technische Backups, die Ihre Daten noch enthalten, werden spätestens 14 Tage nach der Löschung bereinigt.",
+    "backupBody": "Technische Backups, die Ihre Daten noch enthalten, werden spätestens 30 Tage nach der Löschung bereinigt.",
     "exportInfoTitle": "Ihre Daten vor dem Abschied sichern",
     "exportInfoBody": "Bevor Sie Ihr Konto löschen, können Sie unter Einstellungen, Konto, „Meine Daten“ kostenlos einen vollständigen Export Ihrer Daten (JSON-Format) herunterladen.",
     "backHome": "Zurück zur Startseite"

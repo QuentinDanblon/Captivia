@@ -35,7 +35,7 @@
     "whatItem3": "Your notification preferences, push subscriptions and reminder history.",
     "whatItem4": "Any pending password reset tokens.",
     "backupTitle": "Backups",
-    "backupBody": "Technical backups that still contain your data are purged within 14 days at most after deletion.",
+    "backupBody": "Technical backups that still contain your data are purged within 30 days at most after deletion.",
     "exportInfoTitle": "Get your data before you go",
     "exportInfoBody": "Before deleting your account, you can download a complete export of your data (JSON format) free of charge from Settings, Account, \"My data\".",
     "backHome": "Back to home"

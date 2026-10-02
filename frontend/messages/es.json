@@ -35,7 +35,7 @@
     "whatItem3": "Sus preferencias de notificación, suscripciones push e historial de recordatorios.",
     "whatItem4": "Los tokens de restablecimiento de contraseña pendientes.",
     "backupTitle": "Copias de seguridad",
-    "backupBody": "Las copias de seguridad técnicas que aún contienen sus datos se purgan en un plazo máximo de 14 días tras la eliminación.",
+    "backupBody": "Las copias de seguridad técnicas que aún contienen sus datos se purgan en un plazo máximo de 30 días tras la eliminación.",
     "exportInfoTitle": "Recupere sus datos antes de irse",
     "exportInfoBody": "Antes de eliminar su cuenta, puede descargar gratis una exportación completa de sus datos (formato JSON) desde Configuración, Cuenta, «Mis datos».",
     "backHome": "Volver al inicio"

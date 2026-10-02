@@ -35,7 +35,7 @@
     "whatItem3": "Le tue preferenze di notifica, le sottoscrizioni push e la cronologia dei promemoria.",
     "whatItem4": "Eventuali token di reimpostazione della password in sospeso.",
     "backupTitle": "Backup",
-    "backupBody": "I backup tecnici che contengono ancora i tuoi dati vengono eliminati entro un massimo di 14 giorni dalla cancellazione.",
+    "backupBody": "I backup tecnici che contengono ancora i tuoi dati vengono eliminati entro un massimo di 30 giorni dalla cancellazione.",
     "exportInfoTitle": "Recupera i tuoi dati prima di andare via",
     "exportInfoBody": "Prima di eliminare il tuo account, puoi scaricare gratuitamente un'esportazione completa dei tuoi dati (formato JSON) da Impostazioni, Account, «I miei dati».",
     "backHome": "Torna alla home"

@@ -35,7 +35,7 @@
     "whatItem3": "Vos préférences de notification, abonnements push et historique de rappels.",
     "whatItem4": "Les jetons de réinitialisation de mot de passe en cours.",
     "backupTitle": "Sauvegardes",
-    "backupBody": "Les sauvegardes techniques qui contiennent encore vos données sont purgées dans un délai maximal de 14 jours après la suppression.",
+    "backupBody": "Les sauvegardes techniques qui contiennent encore vos données sont purgées dans un délai maximal de 30 jours après la suppression.",
     "exportInfoTitle": "Récupérer vos données avant de partir",
     "exportInfoBody": "Avant de supprimer votre compte, vous pouvez télécharger gratuitement l'export complet de vos données (format JSON) depuis Paramètres, Compte, « Mes données ».",
     "backHome": "Retour à l'accueil"

@@ -2,10 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { LEGAL } from '@/lib/legal';
 
-// Adresse de contact provisoire (même valeur que la page transparence) :
-// à remplacer par le vrai contact lors de la finalisation des pages légales (W2-02).
-const CONTACT_EMAIL = 'contact@captivia.com';
+// Contact unique défini dans lib/legal.ts (à compléter par le propriétaire).
+const CONTACT_EMAIL = LEGAL.contactEmail;
 
 /**
  * Page publique (sans authentification) expliquant comment supprimer son compte.

@@ -35,7 +35,7 @@
     "whatItem3": "As suas preferências de notificação, inscrições push e histórico de lembretes.",
     "whatItem4": "Eventuais tokens de redefinição de senha pendentes.",
     "backupTitle": "Backups",
-    "backupBody": "Os backups técnicos que ainda contêm os seus dados são eliminados no prazo máximo de 14 dias após a exclusão.",
+    "backupBody": "Os backups técnicos que ainda contêm os seus dados são eliminados no prazo máximo de 30 dias após a exclusão.",
     "exportInfoTitle": "Leve os seus dados antes de sair",
     "exportInfoBody": "Antes de excluir a sua conta, você pode baixar gratuitamente uma exportação completa dos seus dados (formato JSON) em Configurações, Conta, \"Meus dados\".",
     "backHome": "Voltar ao início"
