@@ -280,7 +280,7 @@ npm run operator:set -- <email>                 # promouvoir en OPERATOR
 npm run operator:set -- <email> --revoke        # rétrograder en USER
 ```
 
-Le script (`backend/scripts/set-operator.ts`) normalise l'adresse (espaces retirés, minuscules). Le rôle est relu en base à chaque requête authentifiée : l'effet est immédiat. Il n'existe pas de script `operator:remove` : la révocation passe par `--revoke`.
+Le script (`backend/scripts/set-operator.ts`) normalise l'adresse (espaces retirés, minuscules) et **refuse de promouvoir un compte dont l'adresse e-mail n'est pas vérifiée** (W2-04) : l'intéressé doit d'abord cliquer sur le lien de vérification (renvoyable depuis le bandeau de vérification affiché aux utilisateurs connectés). Le rôle est relu en base à chaque requête authentifiée : l'effet est immédiat. Il n'existe pas de script `operator:remove` : la révocation passe par `--revoke`.
 
 ### 5.2 Révoquer par SQL (alternative)
 
@@ -292,10 +292,14 @@ UPDATE "User" SET role = 'USER' WHERE email = lower('<email>');
 
 ### 5.3 Fermer les sessions d'un compte
 
-Incrémenter `tokenVersion` invalide tous les jetons déjà émis pour ce compte (un jeton n'est accepté que si sa version correspond à celle de la base) :
+L'utilisateur peut le faire lui-même (*Paramètres → Compte → Se déconnecter de tous les appareils*). En urgence, par SQL, il faut **à la fois** incrémenter `tokenVersion` (invalide les access tokens déjà émis, durée de vie 30 min) **et** révoquer les refresh tokens (sinon l'appareil obtiendrait un nouvel access token) :
 
 ```sql
+BEGIN;
 UPDATE "User" SET "tokenVersion" = "tokenVersion" + 1 WHERE email = lower('<email>');
+UPDATE "RefreshToken" SET "revokedAt" = now()
+ WHERE "revokedAt" IS NULL AND "userId" = (SELECT id FROM "User" WHERE email = lower('<email>'));
+COMMIT;
 ```
 
 ---

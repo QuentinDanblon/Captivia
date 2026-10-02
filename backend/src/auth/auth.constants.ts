@@ -25,3 +25,15 @@ export const JWT_ALGORITHM = 'HS256' as const;
 export function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }
+
+/** Durée de vie d'un access token JWT (W1-01). */
+export const ACCESS_TOKEN_TTL = '30m';
+
+/** Durée de validité d'un refresh token (W1-01) : 30 jours, renouvelée à chaque rotation. */
+export const REFRESH_TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+
+/** Durée de validité d'un lien de vérification d'e-mail (W2-04) : 24 h. */
+export const EMAIL_VERIFICATION_TTL_MS = 24 * 60 * 60 * 1000;
+
+/** Délai minimal entre deux envois d'e-mail de vérification pour un même compte (W2-04). */
+export const EMAIL_VERIFICATION_RESEND_COOLDOWN_MS = 60 * 1000;

@@ -50,6 +50,7 @@ describe('AuthService', () => {
     tokenVersion: 0,
     termsAcceptedAt: new Date(),
     termsVersion: CURRENT_TERMS_VERSION,
+    emailVerifiedAt: null as Date | null,
     createdAt: new Date(),
     updatedAt: new Date(),
   };
@@ -62,6 +63,18 @@ describe('AuthService', () => {
     },
     passwordResetToken: {
       findUnique: jest.fn(),
+      create: jest.fn(),
+      deleteMany: jest.fn(),
+    },
+    refreshToken: {
+      findUnique: jest.fn(),
+      create: jest.fn(),
+      deleteMany: jest.fn(),
+      updateMany: jest.fn(),
+    },
+    emailVerificationToken: {
+      findUnique: jest.fn(),
+      findFirst: jest.fn(),
       create: jest.fn(),
       deleteMany: jest.fn(),
     },
@@ -115,12 +128,14 @@ describe('AuthService', () => {
 
       expect(result).toEqual({
         accessToken: 'jwt-token',
+        refreshToken: expect.stringMatching(/^[a-f0-9]{64}$/),
         user: {
           id: mockUser.id,
           email: mockUser.email,
           locale: mockUser.locale,
           role: UserRole.USER,
           isPremium: mockUser.isPremium,
+          emailVerified: false,
           createdAt: mockUser.createdAt,
         },
       });
@@ -232,12 +247,14 @@ describe('AuthService', () => {
 
       expect(result).toEqual({
         accessToken: 'jwt-token',
+        refreshToken: expect.stringMatching(/^[a-f0-9]{64}$/),
         user: {
           id: mockUser.id,
           email: mockUser.email,
           locale: mockUser.locale,
           role: UserRole.USER,
           isPremium: mockUser.isPremium,
+          emailVerified: false,
           createdAt: mockUser.createdAt,
         },
       });
@@ -307,6 +324,7 @@ describe('AuthService', () => {
         locale: mockUser.locale,
         role: UserRole.USER,
         isPremium: mockUser.isPremium,
+        emailVerified: false,
       });
       expect(result).not.toHaveProperty('passwordHash');
     });
@@ -509,6 +527,12 @@ describe('AuthService', () => {
         expect.objectContaining({ tokenVersion: 1 }),
       );
       expect(res.accessToken).toBe('fresh-token');
+      expect(res.refreshToken).toMatch(/^[a-f0-9]{64}$/);
+      // Les refresh tokens existants sont révoqués
+      expect(mockPrismaService.refreshToken.updateMany).toHaveBeenCalledWith({
+        where: { userId: mockUser.id, revokedAt: null },
+        data: { revokedAt: expect.any(Date) },
+      });
     });
   });
 });

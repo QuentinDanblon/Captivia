@@ -819,7 +819,8 @@
     "speciesTitle": "Species guide",
     "storeDescription": "Equipment, food and accessories recommended for the needs of each species, with clearly labelled affiliate links.",
     "storeTitle": "Store",
-    "agendaTitle": "Care agenda"
+    "agendaTitle": "Care agenda",
+    "verifyEmailTitle": "Email address verification"
   },
   "agenda": {
     "title": "Care agenda",
@@ -877,5 +878,28 @@
       "secret": "Anyone with this link can see your care schedule. Regenerate it if it leaks.",
       "error": "Operation unavailable right now. Please try again."
     }
+  },
+  "sessions": {
+    "title": "Connected devices",
+    "logoutAllDescription": "Signs Captivia out of all your devices (phones, browsers), including this one. Useful if you lose a device.",
+    "logoutAllButton": "Sign out of all devices",
+    "logoutAllLoading": "Signing out…",
+    "logoutAllError": "Signing out of all devices failed. Please try again."
+  },
+  "emailVerification": {
+    "bannerText": "Please verify your email address: we sent you a confirmation link.",
+    "bannerResend": "Resend link",
+    "bannerSending": "Sending…",
+    "bannerSent": "Email sent. Remember to check your spam folder.",
+    "bannerTooSoon": "An email was just sent. Try again in a minute.",
+    "bannerError": "Sending failed. Please try again later.",
+    "bannerDismiss": "Dismiss",
+    "pageTitle": "Verifying your email address",
+    "verifying": "Verifying…",
+    "success": "Your email address is verified. Thank you!",
+    "invalid": "This verification link is invalid or has expired. Sign in to receive a new one.",
+    "missingToken": "Incomplete verification link.",
+    "goToApp": "Go to my animals",
+    "goToLogin": "Sign in"
   }
 }

@@ -58,13 +58,21 @@ async function main(prisma: PrismaClient): Promise<void> {
 
   const user = await prisma.user.findUnique({
     where: { email },
-    select: { id: true, role: true, createdAt: true },
+    select: { id: true, role: true, createdAt: true, emailVerifiedAt: true },
   });
   if (!user) {
     console.error(
       `Aucun compte pour "${email}". Le compte doit d'abord être créé par inscription.`,
     );
     process.exit(2);
+  }
+
+  // W2-04 : le rôle opérateur exige une adresse e-mail vérifiée (possession prouvée).
+  if (role === UserRole.OPERATOR && !user.emailVerifiedAt) {
+    console.error(
+      `"${email}" n'a pas vérifié son adresse e-mail. Demandez à l'intéressé de cliquer sur le lien de vérification avant de le promouvoir.`,
+    );
+    process.exit(3);
   }
 
   if (user.role === role) {

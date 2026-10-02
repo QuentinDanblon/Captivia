@@ -819,7 +819,8 @@
     "speciesTitle": "Ficha da espécie",
     "storeDescription": "Material, alimentação e acessórios recomendados conforme as necessidades de cada espécie, com ligações de afiliação claramente identificadas.",
     "storeTitle": "Loja",
-    "agendaTitle": "Agenda de cuidados"
+    "agendaTitle": "Agenda de cuidados",
+    "verifyEmailTitle": "Verificação do endereço de e-mail"
   },
   "agenda": {
     "title": "Agenda de cuidados",
@@ -877,5 +878,28 @@
       "secret": "Qualquer pessoa com esta ligação pode ver os seus cuidados. Regenere-a se tiver sido divulgada.",
       "error": "Operação indisponível de momento. Tente novamente."
     }
+  },
+  "sessions": {
+    "title": "Dispositivos ligados",
+    "logoutAllDescription": "Termina a sessão do Captivia em todos os teus dispositivos (telemóveis, navegadores), incluindo este. Útil se perderes um dispositivo.",
+    "logoutAllButton": "Terminar sessão em todos os dispositivos",
+    "logoutAllLoading": "A terminar sessão…",
+    "logoutAllError": "Não foi possível terminar a sessão em todos os dispositivos. Tenta novamente."
+  },
+  "emailVerification": {
+    "bannerText": "Verifica o teu endereço de e-mail: enviámos-te um link de confirmação.",
+    "bannerResend": "Reenviar link",
+    "bannerSending": "A enviar…",
+    "bannerSent": "E-mail enviado. Verifica também a pasta de spam.",
+    "bannerTooSoon": "Acabou de ser enviado um e-mail. Tenta novamente dentro de um minuto.",
+    "bannerError": "O envio falhou. Tenta novamente mais tarde.",
+    "bannerDismiss": "Ocultar",
+    "pageTitle": "Verificação do teu endereço de e-mail",
+    "verifying": "A verificar…",
+    "success": "O teu endereço de e-mail está verificado. Obrigado!",
+    "invalid": "Este link de verificação é inválido ou expirou. Inicia sessão para receberes um novo.",
+    "missingToken": "Link de verificação incompleto.",
+    "goToApp": "Ir para os meus animais",
+    "goToLogin": "Iniciar sessão"
   }
 }

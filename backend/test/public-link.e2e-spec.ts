@@ -61,7 +61,7 @@ describe('Public animal link (W0-06)', () => {
     premiumId = premium.id;
     await prisma.user.update({
       where: { id: premiumId },
-      data: { isPremium: true },
+      data: { isPremium: true, emailVerifiedAt: new Date() },
     });
 
     const free = await register(`pl-free-${stamp}@captivia.com`);
@@ -73,7 +73,7 @@ describe('Public animal link (W0-06)', () => {
     otherId = other.id;
     await prisma.user.update({
       where: { id: otherId },
-      data: { isPremium: true },
+      data: { isPremium: true, emailVerifiedAt: new Date() },
     });
 
     const animal = await request(app.getHttpServer())

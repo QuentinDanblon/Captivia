@@ -57,7 +57,7 @@ export default function RegisterPage() {
       });
 
       if (response.accessToken && response.user) {
-        login(response.accessToken, response.user);
+        login(response.accessToken, response.user, response.refreshToken);
         router.push('/mes-animaux');
       } else {
         setError(response.message || t('auth.registerError'));
