@@ -13,7 +13,7 @@ import * as bcrypt from 'bcryptjs';
 
 async function main() {
   if (process.env.NODE_ENV === 'production') {
-    throw new Error('seed-dev interdit en production');
+    throw new Error('reset-dev-password interdit en production');
   }
   const email = process.argv[2];
   const newPassword = process.argv[3];
