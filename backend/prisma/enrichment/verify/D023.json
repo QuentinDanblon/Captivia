@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000001116,
+    "status": "corrected",
+    "note": "Page Swedish Black Chicken : poids, peau/tissus noirs, vol, banque de gènes 1991 confirmés. Supprimé « petite race » et « ressource génétique patrimoniale » (non sourcés) ; anglicisme « Distinguished » corrigé."
+  },
+  {
+    "speciesId": 2000001117,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001118,
+    "status": "corrected",
+    "note": "Confirmé : Croatie, 1917, Ivan Lakuš, Podravina, 2,1/1,4 kg, crête en pois. Supprimé « œufs, viande et autres usages » (la page ne précise que « triple-purpose »)."
+  },
+  {
+    "speciesId": 2000001119,
+    "status": "corrected",
+    "note": "Page Shamo (groupe de 7 races, dont Ko-Shamo = petit Shamo) : description recentrée sur le Ko-Shamo ; origine Thaïlande XVIIe, monuments naturels, combat, exposition confirmés. Page générique sur le groupe, confiance moyenne."
+  },
+  {
+    "speciesId": 2000001120,
+    "status": "corrected",
+    "note": "Confirmé : hybride/croisé, gène œuf bleu, non reconnu APA/ABA, vendu comme « Americana », couleurs d'œufs. Supprimé la phrase finale sur la « valeur pratique » (non sourcée)."
+  },
+  {
+    "speciesId": 2000001121,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001122,
+    "status": "corrected",
+    "note": "Confirmé : Nettie Metcalf, Ohio, 1896, 4/3 kg, rouge acajou, 150-200 œufs, chasse aux souris (dire des éleveurs). Supprimé « taille moyenne », « graines de noisetier » et « viande » (non confirmés)."
+  },
+  {
+    "speciesId": 2000001123,
+    "status": "corrected",
+    "note": "Confirmé : vrai bantam, Pays-Bas, 500-550/400-450 g, ~160 œufs. « farouche » nuancé en « un peu nerveux » (flighty) ; œufs crème/blancs précisés ; supprimé « idéale pour les amateurs de basse-cour » (non sourcé)."
+  },
+  {
+    "speciesId": 2000001124,
+    "status": "corrected",
+    "note": "Confirmé : colons nordiques IXe siècle, taille moyenne, rusticité, œufs blanc à beige même en hiver, diversité génétique. « race de base » corrigé en race locale (landrace)."
+  },
+  {
+    "speciesId": 2000001125,
+    "status": "corrected",
+    "note": "Confirmé : Massachusetts XIXe, poids minimaux 3,4/2,9 kg, facile à gérer, résistance au froid, ~200 œufs bruns, race la plus répandue des USA jusqu'à ~WWII. Supprimé « taille moyenne à grande » et « usage double » (non confirmés)."
+  },
+  {
+    "speciesId": 2000001126,
+    "status": "corrected",
+    "note": "Confirmé : Cianjur, chant long et mélodieux, concours, 3-6 kg, croissance rapide, poulet de chair. Hauteur 46 cm corrigée en 50 cm (page : « up to 50 cm »)."
+  },
+  {
+    "speciesId": 2000001127,
+    "status": "removed",
+    "note": "Nom « Kadaknath Shamanth » ; la page Kadaknath ne mentionne pas « Shamanth » : impossible de confirmer que c'est la même race (peut être une lignée/variété). Description passée à null."
+  },
+  {
+    "speciesId": 2000001128,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001129,
+    "status": "corrected",
+    "note": "Confirmé : village Đông Tảo (Khoái Châu, près de Hanoï), 5,5-6/4,5 kg, famille royale et mandarins, mets recherché, œufs cassés par les grosses pattes donc incubateur. Supprimé « griffes de dragon » (non sourcé) et reformulé la dernière phrase."
+  },
+  {
+    "speciesId": 2000001130,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  }
+]

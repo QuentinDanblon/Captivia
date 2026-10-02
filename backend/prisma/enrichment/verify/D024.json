@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000001131,
+    "status": "corrected",
+    "note": "Confirmé : Indonésie/Malaisie, nom « village/free-range chicken », croisement non contrôlé, 2-2,5/1,5-2 kg, noir-rouge le plus courant, croissance lente, viande plus chère. Supprimé « petite race » et « double-usage » (non confirmés)."
+  },
+  {
+    "speciesId": 2000001152,
+    "status": "corrected",
+    "note": "Confirmé : colvert domestiqué en Chine ~2000 av. J.-C., Barbarie (Mexique/Amérique du Sud), Appleyard 0,7 kg, Aylesbury 4,6 kg, Coureur indien >300 œufs, Pékin blanc viande, races ornementales. Supprimé « Chine du sud » et « apport du canard de Barbarie » (non confirmés)."
+  },
+  {
+    "speciesId": 2000001153,
+    "status": "corrected",
+    "note": "Page American Pekin (le Pékin allemand est une entrée distincte) : 1873, Long Island, blanc crème, 4,5/4,1 kg, calme et fertile, >3,5 kg en 7 semaines, viande. Poids corrigé (4-4,5 → 4,5 mâle / 4,1 femelle), supprimé « solidement bâtis »."
+  },
+  {
+    "speciesId": 2000001154,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001155,
+    "status": "removed",
+    "note": "La page citée décrit la poule Ancona ; l'entrée est située dans une série de races de canards (Duclair, Shetland, Arlequin…) et correspond très probablement au canard Ancona (page en.wikipedia.org/wiki/Ancona_duck existante). Race non confirmée : description passée à null (la description de poule contenait de plus « rustres », mauvais sens, et un statut « vulnérable » en réalité « à risque »)."
+  },
+  {
+    "speciesId": 2000001156,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001157,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001158,
+    "status": "corrected",
+    "note": "Confirmé : Finger Lakes ~1840, peuple Cayuga, vert scarabée, principal canard de chair US au XIXe, supplanté par le Pékin dès 1890, 100-150 œufs, surtout ornement/exposition. Poids corrigé (3-3,5 → 3,6 mâle / 3,2 femelle) ; supprimé « originellement développé comme canard de viande » et « taille moyenne à lourde »."
+  },
+  {
+    "speciesId": 2000001159,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001160,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001161,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001162,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001163,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001164,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  },
+  {
+    "speciesId": 2000001165,
+    "status": "removed",
+    "note": "Aucune description produite (null) : rien à vérifier, laissé à null."
+  }
+]

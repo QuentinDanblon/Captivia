@@ -1,17 +1,17 @@
 [
   {
     "speciesId": 2000001131,
-    "description": "L'Ayam Kampong est une race de poule issue d'Indonésie et de Malaisie dont le nom signifie poulet libre ou poule de village. Cette petite race double-usage résulte du croisement de la poule rouge de la jungle avec des poules asiatiques indigènes et des races exotiques importées. Les mâles pèsent 2-2,5 kg et les femelles 1,5-2 kg, avec un coloris très variable, noir-rouge étant le plus courant. Élevée traditionnellement pour la viande et les œufs, elle offre une croissance lente mais commande des prix premium.",
+    "description": "L'Ayam Kampong (« poulet de village » ou poulet en liberté) est une poule d'Indonésie et de Malaisie, issue du croisement non contrôlé de la poule sauvage rouge (Gallus gallus), de poules indigènes d'Asie du Sud-Est et de races exotiques. Les mâles pèsent en moyenne 2 à 2,5 kg et les femelles 1,5 à 2 kg ; la variété noire et rouge est la plus courante. Elle grandit lentement, mais sa viande se vend plus cher que celle des races commerciales.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Ayam_Kampong"
   },
   {
     "speciesId": 2000001152,
-    "description": "Le canard domestique provient principalement de colverts domestiqués en Chine du sud vers 2000 av. J.-C., avec apport de canards de Barbarie domestiqués au Mexique et en Amérique du sud. Ces oiseaux varient considérablement en taille, des petites races comme l'Appleyard à 0,7 kg aux grandes races de viande comme l'Aylesbury pesant jusqu'à 4,6 kg. Aujourd'hui, ils servent multiples usages : races comme le Pékin blanc pour la viande, les Coureurs indiens pour 300+ œufs par an, variétés ornementales pour l'exposition.",
+    "description": "Les canards domestiques descendent principalement du colvert, domestiqué en Chine vers 2000 av. J.-C. ; le canard de Barbarie a, lui, été domestiqué au Mexique et en Amérique du Sud. Leur taille varie beaucoup, des petites races comme l'Appleyard (0,7 kg) aux grandes races de chair comme l'Aylesbury (jusqu'à 4,6 kg). Le Pékin blanc est élevé pour la viande, le Coureur indien peut pondre plus de 300 œufs par an, et d'autres races sont purement ornementales, sélectionnées pour l'exposition.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Domestic_duck"
   },
   {
     "speciesId": 2000001153,
-    "description": "Le Canard Pékin américain descend d'oiseaux chinois importés aux États-Unis en 1873, devenant largement connu comme Canard de Long Island. Ces grands oiseaux solidement bâtis au plumage blanc crème pèsent environ 4-4,5 kg et se caractérisent par un tempérament calme et fertile. Croissance rapide et conversion efficace de l'aliment en viande, atteignant plus de 3,5 kg en sept semaines, élevés quasi exclusivement pour la viande.",
+    "description": "Le Pékin américain descend de canards chinois importés aux États-Unis en 1873 ; il a été largement élevé à Long Island (New York), d'où son nom de « canard de Long Island ». Son plumage est blanc crème ; le mâle pèse environ 4,5 kg et la femelle 4,1 kg. De tempérament calme et fertile, il peut dépasser 3,5 kg en sept semaines et est élevé presque exclusivement pour la viande.",
     "sourceUrl": "https://en.wikipedia.org/wiki/American_Pekin"
   },
   {
@@ -21,8 +21,8 @@
   },
   {
     "speciesId": 2000001155,
-    "description": "L'Ancona est une race de poule italienne originaire de la région des Marches, bien qu'affinée au Royaume-Uni dans les années 1800. Ces oiseaux de taille moyenne pèsent 2,5-2,8 kg pour les coqs et 1,8-2,1 kg pour les poules, avec un plumage noir tacheté blanc distinctif. Rustiques, vifs et rustres, ils excellent comme pondeuses produisant environ 220 œufs blancs par an. Relativement rares, la race conserve un statut vulnérable avec des efforts continus de préservation.",
-    "sourceUrl": "https://en.wikipedia.org/wiki/Ancona_chicken"
+    "description": null,
+    "sourceUrl": null
   },
   {
     "speciesId": 2000001156,
@@ -36,7 +36,7 @@
   },
   {
     "speciesId": 2000001158,
-    "description": "Le Canard Cayuga est une race américaine introduite vers 1840 dans la région des Finger Lakes de New York et nommée d'après le peuple Cayuga de cette région. Ces canards de taille moyenne à lourde pèsent 3-3,5 kg avec un plumage noir aux reflets d'un vert de scarabée très brillant. Originellement développé comme canard de viande dominant la production américaine jusqu'aux années 1890, le Cayuga sert aujourd'hui multiples usages: 100-150 gros œufs par an, viande, oiseaux ornementaux.",
+    "description": "Le Cayuga est une race de canard américaine, introduite vers 1840 dans la région des Finger Lakes (New York) et nommée d'après le peuple Cayuga. Son plumage est noir aux reflets vert scarabée ; le mâle pèse environ 3,6 kg et la cane 3,2 kg. Principal canard de chair des États-Unis dans la seconde moitié du XIXe siècle, il a été supplanté par le Pékin américain à partir de 1890. La cane pond 100 à 150 gros œufs par an ; il est aujourd'hui surtout gardé pour l'ornement ou l'exposition.",
     "sourceUrl": "https://en.wikipedia.org/wiki/Cayuga_duck"
   },
   {

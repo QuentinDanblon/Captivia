@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000172,
+    "status": "corrected",
+    "note": "Tableau Wikipedia « Giant Papillon » : Allemagne, 11-25 lb (5,0-11,3 kg), poil court, BRC oui/ARBA non. Retiré : cernes oculaires, taches de joues, fond blanc (non confirmés)."
+  },
+  {
+    "speciesId": 2000000174,
+    "status": "corrected",
+    "note": "Rosettes/épis et popularité chez les éleveurs confirmés. Retiré : « poil ondulé », « éleveurs de concours »."
+  },
+  {
+    "speciesId": 2000000175,
+    "status": "corrected",
+    "note": "« Straight longhair » et photo « show-length coat » confirmés. Retiré : origine Andes de la race et toilettage quotidien (non confirmés)."
+  },
+  {
+    "speciesId": 2000000176,
+    "status": "corrected",
+    "note": "« Straight longhair » et popularité chez les éleveurs confirmés. Retiré : ressemblance au Péruvien, brossage quotidien."
+  },
+  {
+    "speciesId": 2000000177,
+    "status": "removed",
+    "note": "Description déjà null : rien à vérifier"
+  },
+  {
+    "speciesId": 2000000178,
+    "status": "corrected",
+    "note": "« Curly longhair » confirmé. Retiré : « seule race aux cheveux bouclés » (non confirmé), entretien."
+  },
+  {
+    "speciesId": 2000000179,
+    "status": "corrected",
+    "note": "« Laboratory breed adopted by some pet owners », « mostly furless » confirmés. Retiré : popularité, comparaison aux autres races."
+  },
+  {
+    "speciesId": 2000000180,
+    "status": "verified",
+    "note": "Tous les faits confirmés (désert N Chine/Mongolie, 30-45 g, queue longue, robe brune à bande noire, solitaire, nocturne, tame). Précisions ajoutées depuis la page."
+  },
+  {
+    "speciesId": 2000000181,
+    "status": "corrected",
+    "note": "Museau, oreilles, queue « body-length », docilité avec contact humain confirmés. Retiré : « rongeur le plus connu », « taille petite », « compagnon affectueux »."
+  },
+  {
+    "speciesId": 2000000182,
+    "status": "corrected",
+    "note": "Dimensions, poids, 1954 confirmés. Corrigé : « steppes d'Asie centrale » → Chine/Mongolie/Russie ; « groupes hiérarchisés » → groupes familiaux patriarcaux ; « sociable » → « gentle and hardy »."
+  },
+  {
+    "speciesId": 2000000183,
+    "status": "corrected",
+    "note": "Famille, Chili/Argentine, plusieurs espèces confirmés. Retiré : « généralement nocturnes » (la page ne le dit que pour O. lunatus ; O. degus n'est pas nocturne) et « adaptés aux conditions »."
+  },
+  {
+    "speciesId": 2000000184,
+    "status": "verified",
+    "note": "Taille, poids, couleurs, ascendance putois européen, vie en groupe confirmés."
+  },
+  {
+    "speciesId": 2000000185,
+    "status": "corrected",
+    "note": "Sarde, 1929, ≤ 90 cm confirmés. Retiré : « compact et docile » ; nature affectueuse attribuée à R. Green ; popularité reformulée (concerne les ânes en général)."
+  },
+  {
+    "speciesId": 2000000186,
+    "status": "corrected",
+    "note": "Origine, âge du bronze, 107 cm, pelage dense, usages confirmés. Retiré : « grande rusticité » (non cité) ; ajout poney de mine et attelage depuis la page."
+  },
+  {
+    "speciesId": 2000000187,
+    "status": "corrected",
+    "note": "Europe fin XVIIIe, ~100 cm, génétiquement proche des poneys, 25-35 ans, compagnie/attelage confirmés. Retiré : « activités d'équitation spécialisées » (la page dit « plutôt que l'équitation… attelage »), « robustesse »."
+  }
+]
