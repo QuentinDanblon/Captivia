@@ -8,7 +8,6 @@ import {
   Param,
   UseGuards,
   Req,
-  ForbiddenException,
   Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
@@ -18,29 +17,21 @@ import { CreateMedicationDto, UpdateMedicationDto } from './dto/medication.dto';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @ApiTags('animals')
+// D-16 : carnet de santé complet sans Premium (la limite porte sur le nombre d'animaux).
 @Controller('users/me/animals/:animalId/medications')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class MedicationsController {
   constructor(private readonly medicationsService: MedicationsService) {}
 
-  private ensurePremium(req: { user: { id: string; isPremium?: boolean } }) {
-    if (!req.user.isPremium) {
-      throw new ForbiddenException(
-        'Premium subscription required to access medication reminders.',
-      );
-    }
-  }
-
   @Get()
   @ApiOperation({ summary: 'List medications for an animal (sorted by startDate desc)' })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async findAll(
-    @Req() req: { user: { id: string; isPremium?: boolean } },
+    @Req() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Query() page: PaginationQueryDto,
   ) {
-    this.ensurePremium(req);
     return this.medicationsService.findAll(animalId, req.user.id, page);
   }
 
@@ -48,11 +39,10 @@ export class MedicationsController {
   @ApiOperation({ summary: 'Add a medication reminder' })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async create(
-    @Req() req: { user: { id: string; isPremium?: boolean } },
+    @Req() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Body() dto: CreateMedicationDto,
   ) {
-    this.ensurePremium(req);
     return this.medicationsService.create(animalId, req.user.id, dto);
   }
 
@@ -61,12 +51,11 @@ export class MedicationsController {
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   @ApiParam({ name: 'medicationId', description: 'Medication ID' })
   async update(
-    @Req() req: { user: { id: string; isPremium?: boolean } },
+    @Req() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Param('medicationId') medicationId: string,
     @Body() dto: UpdateMedicationDto,
   ) {
-    this.ensurePremium(req);
     return this.medicationsService.update(animalId, medicationId, req.user.id, dto);
   }
 
@@ -75,11 +64,10 @@ export class MedicationsController {
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   @ApiParam({ name: 'medicationId', description: 'Medication ID' })
   async remove(
-    @Req() req: { user: { id: string; isPremium?: boolean } },
+    @Req() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Param('medicationId') medicationId: string,
   ) {
-    this.ensurePremium(req);
     return this.medicationsService.remove(animalId, medicationId, req.user.id);
   }
 }

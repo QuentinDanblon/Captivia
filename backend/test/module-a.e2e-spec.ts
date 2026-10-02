@@ -370,32 +370,45 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
   });
 
   // ============================================================
-  // 4. Guards — premium requis + ownership
+  // 4. Guards — ownership (D-16 : plus de Premium requis pour le carnet)
   // ============================================================
-  describe('4. Guards premium & ownership', () => {
+  describe('4. Guards ownership (carnet sans Premium, D-16)', () => {
     let premiumToken: string;
     let animalId: string;
     let freeToken: string;
 
-    it('compte non-premium → 403 sur medications et vet-appointments', async () => {
+    it('D-16 : compte gratuit → carnet de SON animal accessible (medications, vet-appointments)', async () => {
       const acc = await registerPremium(makeEmail('owner'));
       premiumToken = acc.token;
       animalId = await createAnimal(premiumToken, 'Guard Gecko');
 
       const free = await createUser(makeEmail('free'), false);
       freeToken = free.token;
+      const freeAnimalId = await createAnimal(freeToken, 'Free Gecko');
 
       await request(app.getHttpServer())
-        .get(`/users/me/animals/${animalId}/medications`)
+        .get(`/users/me/animals/${freeAnimalId}/medications`)
         .set('Authorization', `Bearer ${freeToken}`)
-        .expect(403);
+        .expect(200);
       await request(app.getHttpServer())
-        .post(`/users/me/animals/${animalId}/medications`)
+        .post(`/users/me/animals/${freeAnimalId}/medications`)
         .set('Authorization', `Bearer ${freeToken}`)
         .send({ name: 'X', dose: '1', frequency: 'daily', startDate: todayStr() })
-        .expect(403);
+        .expect(201);
       await request(app.getHttpServer())
-        .get(`/users/me/animals/${animalId}/vet-appointments`)
+        .get(`/users/me/animals/${freeAnimalId}/vet-appointments`)
+        .set('Authorization', `Bearer ${freeToken}`)
+        .expect(200);
+      await request(app.getHttpServer())
+        .post(`/users/me/animals/${freeAnimalId}/vet-appointments`)
+        .set('Authorization', `Bearer ${freeToken}`)
+        .send({ vetName: 'Dr X', date: todayStr() })
+        .expect(201);
+    });
+
+    it('compte gratuit → 403 sur le carnet d’un animal d’autrui (ownership)', async () => {
+      await request(app.getHttpServer())
+        .get(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${freeToken}`)
         .expect(403);
       await request(app.getHttpServer())
