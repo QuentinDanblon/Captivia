@@ -1,0 +1,160 @@
+[
+ {
+  "speciesId": 1025719,
+  "commonNameFr": "Mille-pattes géant",
+  "scientificName": "Archispirostreptus gigas",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 1406471,
+  "commonNameFr": "Mante orchidée",
+  "scientificName": "Hymenopus coronatus",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 1415423,
+  "commonNameFr": "Phasme feuille",
+  "scientificName": "Phyllium philippinicum",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "behavior",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2153441,
+  "commonNameFr": "Tarentule mexicaine à genoux oranges",
+  "scientificName": "Brachypelma auratum",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2153949,
+  "commonNameFr": "Tarentule saumonée",
+  "scientificName": "Lasiodora parahybana",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 2339870,
+  "commonNameFr": "Pleco royal",
+  "scientificName": "Panaque nigrolineatus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2354003,
+  "commonNameFr": "Tétra empereur",
+  "scientificName": "Nematobrycon palmeri",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2354646,
+  "commonNameFr": "Tétra fantôme noir",
+  "scientificName": "Hyphessobrycon megalopterus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2371275,
+  "commonNameFr": "Apistogramma cacatuoides",
+  "scientificName": "Apistogramma cacatuoides",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 2422905,
+  "commonNameFr": "Crapaud de Fowler",
+  "scientificName": "Anaxyrus fowleri",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2424454,
+  "commonNameFr": "Grenouille cornue",
+  "scientificName": "Ceratophrys ornata",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 2424499,
+  "commonNameFr": "Grenouille du lac Titicaca",
+  "scientificName": "Telmatobius culeus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2427573,
+  "commonNameFr": "Rainette à doigts de cuivre",
+  "scientificName": "Hyla arborea",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2429295,
+  "commonNameFr": "Grenouille de Verre",
+  "scientificName": "Hyalinobatrachium valerioi",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ }
+]

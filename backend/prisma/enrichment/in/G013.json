@@ -1,0 +1,128 @@
+[
+ {
+  "speciesId": 2000000165,
+  "commonNameFr": "Lapin Polonais",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000166,
+  "commonNameFr": "Lapin Russe",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000167,
+  "commonNameFr": "Lapin Satin",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000169,
+  "commonNameFr": "Lapin Zibeline",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000177,
+  "commonNameFr": "Cochon D’Inde Teddy",
+  "scientificName": "Cavia porcellus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000188,
+  "commonNameFr": "Mouton Nain",
+  "scientificName": "Ovis aries",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000196,
+  "commonNameFr": "Bengali",
+  "scientificName": "Lonchura striata",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000207,
+  "commonNameFr": "Tourterelle à Collier",
+  "scientificName": "Streptopelia risoria",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000258,
+  "commonNameFr": "Danio Perlé",
+  "scientificName": "Danio margaritatus",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000576,
+  "commonNameFr": "Petit Papillon",
+  "scientificName": "Petit papillon",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000577,
+  "commonNameFr": "Blue Of Sint-Niklaas",
+  "scientificName": "Blue of Sint-Niklaas",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000578,
+  "commonNameFr": "Fee de Marbourg",
+  "scientificName": "Fee de Marbourg",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000579,
+  "commonNameFr": "Miniature Lop",
+  "scientificName": "Miniature Lop",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000580,
+  "commonNameFr": "Teddyzwerg",
+  "scientificName": "Teddyzwerg",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

@@ -57,21 +57,21 @@
   {
     "speciesId": 2000000247,
     "status": "corrected",
-    "note": "Page FR Carassius_auratus décrit bien la variété Fantail (corps en forme d'œuf, longue nageoire caudale quadruple). Supprimé/corrigé : taille 15-20 cm remplacée par 'ne dépasse pas 20 cm' ; 'filtration puissante' non confirmé ; valeurs 100 l, 22-28 °C, pH 7-8 attribuées au poisson rouge en général."
+    "note": "Page FR Carassius_auratus : description Fantail confirmée par citation (corps en œuf, dorsale haute, caudale quadruple) ; 100 L min + 50 L/poisson et pH 7-8 confirmés. Corrigé : supprimé 'mesure 15-20 cm' (la page donne jusqu'à 47 cm pour le poisson rouge classique) et '22-28 °C' (la page : 1 à 28 °C) ; 'filtration puissante' non confirmé."
   },
   {
     "speciesId": 2000000248,
     "status": "corrected",
-    "note": "Page FR Carassius_auratus décrit bien la variété Oranda (excroissance sur le dessus de la tête). Supprimé : 'filtration puissante', 'variété ornementale remarquable', 'chinois' (non confirmés) ; paramètres d'aquarium attribués au poisson rouge en général."
+    "note": "Page FR Carassius_auratus : description Oranda confirmée par citation ; 100 L min + 50 L/poisson et pH 7-8 confirmés. Corrigé : supprimé 'mesure 15-20 cm', '22-28 °C', 'filtration puissante', 'chinois', 'remarquable' (non confirmés/contredits)."
   },
   {
     "speciesId": 2000000249,
     "status": "corrected",
-    "note": "Page FR Carassius_auratus décrit bien la variété Ryukin (corps étiré en hauteur avec cassure tête/corps, long voile double sur la caudale). Corrigé 'corps étiré' ; supprimé 'filtration puissante', 'chinois'."
+    "note": "Page FR Carassius_auratus : description Ryukin confirmée par citation ; 100 L min + 50 L/poisson et pH 7-8 confirmés. Corrigé : supprimé 'mesure 15-20 cm', '22-28 °C', 'filtration puissante', 'chinois'."
   },
   {
     "speciesId": 2000000250,
     "status": "corrected",
-    "note": "Page FR Carassius_auratus décrit bien la variété Black Moor (Télescope) aux yeux exorbités. Supprimé : 'filtration puissante', 'chinois' ; paramètres d'aquarium attribués au poisson rouge en général."
+    "note": "Page FR Carassius_auratus : description Black Moor/télescope confirmée par citation ; 100 L min + 50 L/poisson et pH 7-8 confirmés. Corrigé : supprimé 'mesure 15-20 cm', '22-28 °C', 'filtration puissante', 'chinois'."
   }
 ]

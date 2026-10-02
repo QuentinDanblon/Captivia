@@ -53,3 +53,11 @@ Pour chacune : `description` = 2 à 4 phrases factuelles en français (origine, 
 - Vérifie la validité du JSON avant de terminer : `python3 -c "import json;json.load(open('<chemin>'))"`.
 - N'utilise pas git (ne commit pas, ne push pas). Ne modifie aucun autre fichier.
 - Réponse finale : une ligne « lot X : N/M animaux complétés, sections null : … ».
+
+## Lots « G » (comblement des manques, rédacteurs Sonnet) — PREUVE OBLIGATOIRE
+
+Mêmes règles et même schéma que les lots S (champs `missing` + `description`/`sourceUrl` si `needDescription`), avec en plus :
+- **Chaque chiffre et chaque affirmation factuelle doit être appuyé par une citation exacte** (copiée mot pour mot) d'une page que tu as ouverte avec WebFetch. Sans citation → le champ reste `null` (ou la section entière `null`).
+- `habitat.tempMin`/`tempMax` sont obligatoires en base : ne remplis l'habitat que si une source donne une plage de température adaptée à l'élevage/la captivité (ou au milieu de vie pour un poisson). Sinon `habitat: null`.
+- Écris AUSSI `verify/<LOT>.json` : `[{"speciesId":…, "evidence":[{"field":"reproduction.gestationDays","value":63,"quote":"…citation exacte…","url":"https://…"}, …]}]`.
+- Pas de section `legislation` (réservée à une relecture juridique).

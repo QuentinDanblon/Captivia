@@ -1,0 +1,128 @@
+[
+ {
+  "speciesId": 2000001127,
+  "commonNameFr": "Kadaknath Shamanth",
+  "scientificName": "Kadaknath shamanth",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001128,
+  "commonNameFr": "Tomaru",
+  "scientificName": "Tomaru",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001130,
+  "commonNameFr": "Laughing Chicken",
+  "scientificName": "Laughing Chicken",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001154,
+  "commonNameFr": "Canard Duclair",
+  "scientificName": "Canard Duclair",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001155,
+  "commonNameFr": "Ancona",
+  "scientificName": "Ancona",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001156,
+  "commonNameFr": "Canard de Shetland",
+  "scientificName": "Canard de Shetland",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001157,
+  "commonNameFr": "Canard Arlequin du Pays des Galles",
+  "scientificName": "Canard arlequin du pays des Galles",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001159,
+  "commonNameFr": "Alabio Duck",
+  "scientificName": "Alabio Duck",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001160,
+  "commonNameFr": "Australian Spotted",
+  "scientificName": "Australian Spotted",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001161,
+  "commonNameFr": "Ànnera Mallorquina",
+  "scientificName": "Ànnera mallorquina",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001162,
+  "commonNameFr": "Canard Pékin Allemand",
+  "scientificName": "Canard Pékin allemand",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001163,
+  "commonNameFr": "Blekinge Duck",
+  "scientificName": "Blekinge duck",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001164,
+  "commonNameFr": "Canard de Termonde",
+  "scientificName": "Canard de Termonde",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001165,
+  "commonNameFr": "Canard D'Estaires",
+  "scientificName": "Canard d'Estaires",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

@@ -1,0 +1,176 @@
+[
+ {
+  "speciesId": 104008238,
+  "commonNameFr": "Poisson éléphant",
+  "scientificName": "Gnathonemus petersii",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104013399,
+  "commonNameFr": "Grenouille cornue de Cranwell",
+  "scientificName": "Ceratophrys cranwelli",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104015330,
+  "commonNameFr": "Dendrobate à tapirer",
+  "scientificName": "Dendrobates tinctorius",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104020622,
+  "commonNameFr": "Rainette aux yeux rouges",
+  "scientificName": "Agalychnis callidryas",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104040409,
+  "commonNameFr": "Xénope lisse",
+  "scientificName": "Xenopus laevis",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 104040736,
+  "commonNameFr": "Crapaud à ventre de feu",
+  "scientificName": "Bombina orientalis",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 104041498,
+  "commonNameFr": "Salamandre de Taiwan",
+  "scientificName": "Hynobius formosanus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104044141,
+  "commonNameFr": "Triton alpestre",
+  "scientificName": "Ichthyosaura alpestris",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 104048045,
+  "commonNameFr": "Ouistiti",
+  "scientificName": "Callithrix jacchus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104052770,
+  "commonNameFr": "Écureuil volant",
+  "scientificName": "Pteromys volans",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 104052822,
+  "commonNameFr": "Écureuil gris",
+  "scientificName": "Sciurus carolinensis",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104060633,
+  "commonNameFr": "Coati",
+  "scientificName": "Nasua nasua",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104060805,
+  "commonNameFr": "Fossa",
+  "scientificName": "Cryptoprocta ferox",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 104060854,
+  "commonNameFr": "Caracal",
+  "scientificName": "Caracal caracal",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ }
+]

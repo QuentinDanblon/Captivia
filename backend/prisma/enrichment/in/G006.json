@@ -1,0 +1,166 @@
+[
+ {
+  "speciesId": 5216933,
+  "commonNameFr": "Crapaud buffle",
+  "scientificName": "Rhinella marina",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5217160,
+  "commonNameFr": "Crapaud commun",
+  "scientificName": "Bufo bufo",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5217264,
+  "commonNameFr": "Grenouille arboricole géante",
+  "scientificName": "Rhacophorus maximus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "behavior",
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5218022,
+  "commonNameFr": "Dendrobate à ventre tacheté",
+  "scientificName": "Dendrobates auratus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5219362,
+  "commonNameFr": "Genette",
+  "scientificName": "Genetta genetta",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5219888,
+  "commonNameFr": "Porc-épic",
+  "scientificName": "Hystrix cristata",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5220136,
+  "commonNameFr": "Daim",
+  "scientificName": "Dama dama",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5220266,
+  "commonNameFr": "Tortue géante des Galapagos",
+  "scientificName": "Chelonoidis nigra",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5225659,
+  "commonNameFr": "Python tapis",
+  "scientificName": "Morelia spilota",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5226308,
+  "commonNameFr": "Agame à tête rouge",
+  "scientificName": "Agama agama",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5227370,
+  "commonNameFr": "Téju noir et blanc",
+  "scientificName": "Salvator merianae",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5228034,
+  "commonNameFr": "Faisan doré",
+  "scientificName": "Chrysolophus pictus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5229044,
+  "commonNameFr": "Perroquet à tête de prune",
+  "scientificName": "Psittacula cyanocephala",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5285167,
+  "commonNameFr": "Viscache des Andes",
+  "scientificName": "Lagidium viscacia",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ }
+]

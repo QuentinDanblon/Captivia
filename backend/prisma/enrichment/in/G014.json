@@ -1,0 +1,128 @@
+[
+ {
+  "speciesId": 2000000581,
+  "commonNameFr": "Lux",
+  "scientificName": "Lux",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000583,
+  "commonNameFr": "Jamora",
+  "scientificName": "Jamora",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000589,
+  "commonNameFr": "Perlfee",
+  "scientificName": "Perlfee",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000590,
+  "commonNameFr": "Blue Of Ham",
+  "scientificName": "Blue of Ham",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000591,
+  "commonNameFr": "Liptov Baldspotted Rabbit",
+  "scientificName": "Liptov Baldspotted Rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000592,
+  "commonNameFr": "Carmagnola Grey",
+  "scientificName": "Carmagnola Grey",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000595,
+  "commonNameFr": "Brazilian Domestic Rabbit",
+  "scientificName": "Brazilian domestic rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000597,
+  "commonNameFr": "Cashmere Lop",
+  "scientificName": "Cashmere Lop",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000599,
+  "commonNameFr": "Enderby Island Rabbit",
+  "scientificName": "Enderby Island Rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000603,
+  "commonNameFr": "Swedish Hare",
+  "scientificName": "Swedish Hare",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000604,
+  "commonNameFr": "Czech Black Guard Haired Rabbit",
+  "scientificName": "Czech Black Guard Haired Rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000605,
+  "commonNameFr": "Petit Bélier",
+  "scientificName": "Petit Bélier",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000606,
+  "commonNameFr": "Hulstlander",
+  "scientificName": "Hulstlander",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000694,
+  "commonNameFr": "Hanu",
+  "scientificName": "Hanu",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]
