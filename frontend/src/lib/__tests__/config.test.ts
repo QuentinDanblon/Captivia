@@ -4,46 +4,55 @@
 import { resolveApiUrl, DEFAULT_API_URL } from '../config';
 
 describe('resolveApiUrl', () => {
+  const env = process.env as Record<string, string | undefined>;
+  const originalNodeEnv = env.NODE_ENV;
+  const withNodeEnv = (value: string) => {
+    env.NODE_ENV = value;
+  };
+  afterEach(() => {
+    env.NODE_ENV = originalNodeEnv;
+  });
+
   it('utilise NEXT_PUBLIC_API_URL même sur un hôte non local (production)', () => {
-    expect(
-      resolveApiUrl({ envUrl: 'https://api.captivia.app', nodeEnv: 'production', hostname: 'www.captivia.app' }),
-    ).toBe('https://api.captivia.app');
+    withNodeEnv('production');
+    expect(resolveApiUrl({ envUrl: 'https://api.captivia.app', hostname: 'www.captivia.app' })).toBe(
+      'https://api.captivia.app',
+    );
   });
 
   it('utilise NEXT_PUBLIC_API_URL sur un hôte LAN, y compris en développement', () => {
-    expect(
-      resolveApiUrl({ envUrl: 'https://api.example.com', nodeEnv: 'development', hostname: '192.168.1.20' }),
-    ).toBe('https://api.example.com');
-  });
-
-  it('supprime les slashs finaux', () => {
-    expect(resolveApiUrl({ envUrl: ' https://api.example.com/// ', nodeEnv: 'production' })).toBe(
+    withNodeEnv('development');
+    expect(resolveApiUrl({ envUrl: 'https://api.example.com', hostname: '192.168.1.20' })).toBe(
       'https://api.example.com',
     );
   });
 
+  it('supprime les slashs finaux', () => {
+    withNodeEnv('production');
+    expect(resolveApiUrl({ envUrl: ' https://api.example.com/// ' })).toBe('https://api.example.com');
+  });
+
   it('ne déduit JAMAIS http://<host>:3001 hors développement quand la variable est absente', () => {
-    expect(resolveApiUrl({ envUrl: undefined, nodeEnv: 'production', hostname: 'www.captivia.app' })).toBe(
-      DEFAULT_API_URL,
-    );
-    expect(resolveApiUrl({ envUrl: '', nodeEnv: 'test', hostname: '192.168.1.20' })).toBe(DEFAULT_API_URL);
+    withNodeEnv('production');
+    expect(resolveApiUrl({ envUrl: undefined, hostname: 'www.captivia.app' })).toBe(DEFAULT_API_URL);
+    withNodeEnv('test');
+    expect(resolveApiUrl({ envUrl: '', hostname: '192.168.1.20' })).toBe(DEFAULT_API_URL);
   });
 
   it('en développement sans variable, utilise le même hôte LAN sur le port 3001', () => {
-    expect(resolveApiUrl({ envUrl: undefined, nodeEnv: 'development', hostname: '192.168.1.20' })).toBe(
-      'http://192.168.1.20:3001',
-    );
+    withNodeEnv('development');
+    expect(resolveApiUrl({ envUrl: undefined, hostname: '192.168.1.20' })).toBe('http://192.168.1.20:3001');
   });
 
   it('en développement sur localhost, retombe sur http://localhost:3001', () => {
-    expect(resolveApiUrl({ envUrl: undefined, nodeEnv: 'development', hostname: 'localhost' })).toBe(
-      'http://localhost:3001',
-    );
+    withNodeEnv('development');
+    expect(resolveApiUrl({ envUrl: undefined, hostname: 'localhost' })).toBe('http://localhost:3001');
   });
 
   it('ignore une valeur invalide (protocole absent / URL malformée)', () => {
-    expect(resolveApiUrl({ envUrl: 'api.example.com', nodeEnv: 'production' })).toBe(DEFAULT_API_URL);
-    expect(resolveApiUrl({ envUrl: 'http://', nodeEnv: 'production' })).toBe(DEFAULT_API_URL);
+    withNodeEnv('production');
+    expect(resolveApiUrl({ envUrl: 'api.example.com' })).toBe(DEFAULT_API_URL);
+    expect(resolveApiUrl({ envUrl: 'http://' })).toBe(DEFAULT_API_URL);
   });
 });
 

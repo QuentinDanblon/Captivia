@@ -17,8 +17,6 @@ const DEV_BACKEND_PORT = '3001';
 export interface ApiUrlInputs {
   /** Valeur brute de NEXT_PUBLIC_API_URL. */
   envUrl?: string | null;
-  /** Valeur de process.env.NODE_ENV. */
-  nodeEnv?: string | null;
   /** window.location.hostname (undefined côté serveur). */
   hostname?: string | null;
 }
@@ -34,12 +32,15 @@ function normalizeHttpUrl(raw: string | null | undefined): string | null {
   return value.replace(/\/+$/, '');
 }
 
-/** Fonction pure (testable) : calcule l'URL de l'API à partir de l'environnement. */
-export function resolveApiUrl({ envUrl, nodeEnv, hostname }: ApiUrlInputs): string {
+/**
+ * Calcule l'URL de l'API. `process.env.NODE_ENV` est lu littéralement ici : au build de
+ * production Next.js l'inline, et la branche LAN (avec son « :3001 ») est éliminée du bundle.
+ */
+export function resolveApiUrl({ envUrl, hostname }: ApiUrlInputs): string {
   const fromEnv = normalizeHttpUrl(envUrl);
   if (fromEnv) return fromEnv;
 
-  if (nodeEnv === 'development' && hostname) {
+  if (process.env.NODE_ENV === 'development' && hostname) {
     const isLoopback =
       hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1' || hostname === '[::1]';
     if (!isLoopback) {
@@ -55,6 +56,5 @@ export function resolveApiUrl({ envUrl, nodeEnv, hostname }: ApiUrlInputs): stri
 export const API_URL: string = resolveApiUrl({
   // Accès statique requis pour que Next.js inline la variable dans le bundle client.
   envUrl: process.env.NEXT_PUBLIC_API_URL,
-  nodeEnv: process.env.NODE_ENV,
   hostname: typeof window !== 'undefined' ? window.location.hostname : undefined,
 });
