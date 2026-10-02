@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 // ============================================
 // SEED PROD — Données éditoriales uniquement
@@ -775,7 +775,8 @@ export async function main() {
   // les magasins existants (même ceux ajoutés manuellement).
   console.log('🏪 Seeding AffiliateStores (upsert, idempotent)...');
 
-  const affiliateStores: never[] = [];
+  // Vrais magasins partenaires à ajouter ici (aucune URL factice en production).
+  const affiliateStores: Prisma.AffiliateStoreCreateInput[] = [];
 
   for (const store of affiliateStores) {
     const existing = await prisma.affiliateStore.findFirst({ where: { name: store.name } });
