@@ -9,7 +9,10 @@ on:
   schedule:
     - cron: "30 5 * * 2"
 
-# Les résultats sont envoyés dans l'onglet Security → Code scanning.
+# Dépôt public (ou GitHub Advanced Security activé) : résultats envoyés dans Security →
+# Code scanning. Dépôt privé sans GHAS (l'envoi est refusé) : l'analyse tourne quand même,
+# les résultats sont publiés en artefact SARIF + annotations, et le job échoue sur toute
+# alerte de sévérité sécurité élevée ou critique (security-severity >= 7.0).
 permissions:
   contents: read
 
@@ -35,3 +38,42 @@ jobs:
       - uses: github/codeql-action/analyze@v4
         with:
           category: "/language:javascript-typescript"
+          upload: ${{ github.event.repository.private && 'never' || 'always' }}
+          output: sarif-results
+      - name: Résultats (dépôt privé sans code scanning)
+        if: github.event.repository.private
+        run: |
+          python3 - <<'PY'
+          import json, glob, os
+          rules, results = {}, []
+          for f in glob.glob('sarif-results/*.sarif'):
+              for run in json.load(open(f))['runs']:
+                  for r in run['tool']['driver'].get('rules', []):
+                      rules[r['id']] = r
+                  results += run.get('results', [])
+          high = 0
+          lines = []
+          for r in results:
+              rule = rules.get(r.get('ruleId'), {})
+              sev = float(rule.get('properties', {}).get('security-severity', 0) or 0)
+              loc = r['locations'][0]['physicalLocation']
+              path = loc['artifactLocation']['uri']; line = loc.get('region', {}).get('startLine', 1)
+              msg = r['message']['text'].replace('\n', ' ')[:300]
+              level = 'error' if sev >= 7.0 else 'warning'
+              high += sev >= 7.0
+              print(f"::{level} file={path},line={line},title={r.get('ruleId')} ({sev})::{msg}")
+              lines.append(f"| {r.get('ruleId')} | {sev} | `{path}:{line}` |")
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as s:
+              s.write(f"### CodeQL : {len(results)} alerte(s), dont {high} élevée(s)/critique(s)\n\n")
+              if lines:
+                  s.write("| Règle | Sévérité | Emplacement |\n|---|---|---|\n" + "\n".join(lines) + "\n")
+          if high:
+              raise SystemExit(f"{high} alerte(s) CodeQL de sévérité >= 7.0")
+          PY
+      - name: Artefact SARIF
+        if: always() && github.event.repository.private
+        uses: actions/upload-artifact@v4
+        with:
+          name: codeql-sarif
+          path: sarif-results
+          retention-days: 14"
