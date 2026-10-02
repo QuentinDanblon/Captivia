@@ -12,7 +12,8 @@ export default function proxy(request: NextRequest) {
   // Note: the extension exclusion cannot live in the matcher regex (crashes
   // Next.js build with "The string did not match the expected pattern"), so we
   // do it here with an early return.
-  if (/\.[a-zA-Z0-9]+$/.test(pathname)) {
+  // /.well-known/* (apple-app-site-association, assetlinks.json…) ne doit jamais être localisé.
+  if (pathname.startsWith('/.well-known/') || /\.[a-zA-Z0-9]+$/.test(pathname)) {
     return NextResponse.next();
   }
 

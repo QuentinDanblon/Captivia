@@ -49,6 +49,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  themeColor: '#0aa678',
+  viewportFit: 'cover',
 };
 
 /** Pré-rend une version par locale ; toute autre valeur (ex. /robots.txt) tombe sur notFound(). */
@@ -71,7 +73,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className="scroll-smooth">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col w-screen`}
+        className={`${inter.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col w-full`}
       >
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>

@@ -9,6 +9,8 @@
   publish = ".next"
 
 [build.environment]
+  # URL publique du site (canonical, hreflang, sitemap). À remplacer par le domaine définitif.
+  NEXT_PUBLIC_SITE_URL = "https://captivia.netlify.app"
   NODE_VERSION = "22"
   NEXT_TELEMETRY_DISABLED = "1"
 
