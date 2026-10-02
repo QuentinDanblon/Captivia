@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000221,
+    "status": "corrected",
+    "note": "Page FR Elaphe_obsoleta OK. Corrigé : le plus long spécimen = 260 cm (et non 180-200 cm) ; régime précisé (souris, rats, autres serpents, tamias, écureuils, œufs, oiseaux)."
+  },
+  {
+    "speciesId": 2000000222,
+    "status": "corrected",
+    "note": "Page FR Testudo_hermanni : taille 18-20 cm (occidentale) à 28 cm (orientale), Espagne/France/Italie, carapace à dominante jaune, garrigues : confirmés. Supprimé : 'protégée par la loi en France' (non confirmé par la page) ; remplacé par le statut UICN Vulnérable et le plan national de restauration."
+  },
+  {
+    "speciesId": 2000000223,
+    "status": "verified",
+    "note": "Page FR Trachemys_scripta : est des USA/nord-ouest du Mexique, bandes temporales jaunes ou rouges selon sous-espèce, liste UE des espèces exotiques envahissantes depuis 2016 : confirmé."
+  },
+  {
+    "speciesId": 2000000224,
+    "status": "corrected",
+    "note": "Page FR Chrysemys_picta. Corrigé : 10-25 cm = femelle (mâle 7-15 cm) ; rayures rouges, orange ou jaunes ; 'l'une des plus répandues' → aire la plus étendue des tortues nord-américaines."
+  },
+  {
+    "speciesId": 2000000225,
+    "status": "corrected",
+    "note": "Page FR Terrapene_carolina : colorations très variables, longévité jusqu'à 138 ans et sénescence négligeable : confirmés. Supprimé : 'terrestre', 'milieux humides et forestiers' (la page donne peu de détails d'habitat). Ajouté : six sous-espèces, statut UICN Vulnérable."
+  },
+  {
+    "speciesId": 2000000226,
+    "status": "corrected",
+    "note": "Page FR Varanus_exanthematicus : 80-110 cm, Afrique de l'Ouest et centrale, régime insectivore/petits rongeurs/œufs : confirmés. Supprimé : 'régions semi-arides' (absent). Corrigé : peau marron clair ou grise, taches blanches plus visibles chez les jeunes."
+  },
+  {
+    "speciesId": 2000000227,
+    "status": "corrected",
+    "note": "Page FR Crotalus_atrox : 120-150 cm (>2 m exceptionnel), sud-ouest USA/nord Mexique, taches rectangulaires à hexagonales, bandes noires de la queue, venin principalement hémotoxique, 250-350 mg : confirmés. Supprimé : 'douleurs et hémorragies' (non confirmé) ; remplacé par l'atteinte des vaisseaux sanguins et du cœur."
+  },
+  {
+    "speciesId": 2000000228,
+    "status": "corrected",
+    "note": "Page FR Dendroaspis_polylepis : 2 à >3 m, jusqu'à 4,2-4,5 m, jaune-vert à gris métallique, intérieur de la bouche noir, zones boisées/rocheuses, diurne : confirmés. Corrigé : aire = Afrique subsaharienne (du Sénégal à l'Afrique du Sud) plutôt que 'Ouest, centrale et australe'."
+  },
+  {
+    "speciesId": 2000000229,
+    "status": "verified",
+    "note": "Page FR Ophiophagus_hannah : plus grand serpent venimeux, Asie du Sud et Sud-Est, forêts tropicales, 3-4 m jusqu'à 5,5 m, capuchon, régime d'autres serpents : confirmé."
+  },
+  {
+    "speciesId": 2000000230,
+    "status": "corrected",
+    "note": "Page FR Vipera_berus : aire Royaume-Uni → Sakhaline, moyenne 55 cm, 104 cm en Scandinavie, landes/tourbières/végétation basse : confirmés. Corrigé : 'seul serpent venimeux de la moitié nord de l'Europe'."
+  },
+  {
+    "speciesId": 2000000231,
+    "status": "corrected",
+    "note": "Page FR Eunectes_murinus : 8,45 m, 200 kg, plus gros serpent du monde, yeux/narines à fleur d'eau, savanes inondées/marécages : confirmés. Corrigé : aire = bassins Orénoque/Amazone/Paraná/Paraguay (pas seulement amazonien). Supprimé : 'constricteur' non vérifié sur la page."
+  },
+  {
+    "speciesId": 2000000232,
+    "status": "corrected",
+    "note": "Page FR Ambystoma_mexicanum : Xochimilco, néoténie, 14-20 °C, régénération : confirmés. Corrigé : taille 15-33 cm, moyenne ~25 cm ; ajout statut en danger critique."
+  },
+  {
+    "speciesId": 2000000233,
+    "status": "corrected",
+    "note": "Page FR Xenopus_laevis : Afrique australe, aquatique, doigts griffus, invasive, vecteur de Batrachochytrium dendrobatidis : confirmés. Corrigé : tailles mâles 75,6-187,5 mm, femelles 57-147 mm."
+  },
+  {
+    "speciesId": 2000000234,
+    "status": "verified",
+    "note": "Page FR Hyla_arborea : ≤5 cm, peau lisse verte, bande brune de l'œil aux flancs, forêts de feuillus/parcs/vergers/zones humides, insectes volants : confirmé."
+  },
+  {
+    "speciesId": 2000000235,
+    "status": "corrected",
+    "note": "Page FR Litoria_caerulea : ~10 cm, couleur brun à vert selon température/milieu, canopée près de l'eau, rebords de fenêtres, très paisible : confirmés. Corrigé : origine = nord et est de l'Australie et sud de la Nouvelle-Guinée."
+  }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000090,
+    "status": "corrected",
+    "note": "Origine Bruxelles, 23-28 cm, 4-5 kg, caractère confirmés; 'intelligent' et 'approche douce en éducation' non sourcés retirés; précision sur les 3 variétés ajoutée (la page ne dit pas laquelle est lisse)."
+  },
+  {
+    "speciesId": 2000000092,
+    "status": "corrected",
+    "note": "'Élégant et historique' non sourcé retiré; popularité 'durant la Renaissance' nuancée (représentations Renaissance); rareté et lien avec le papillon ajoutés depuis la page."
+  },
+  {
+    "speciesId": 2000000093,
+    "status": "corrected",
+    "note": "'Adorant l'eau' non sourcé reformulé (travaille dans l'eau); XIXe siècle ajouté; reste confirmé."
+  },
+  {
+    "speciesId": 2000000094,
+    "status": "corrected",
+    "note": "'Et d'Afrique du Sud' et 'silhouette robuste et musclée' non confirmés retirés; ancêtres khoïkhoï, usage lion, caractère ajoutés/confirmés."
+  },
+  {
+    "speciesId": 2000000095,
+    "status": "verified",
+    "note": "Origine, taille, poil, caractère confirmés; usage de chasse à vue ajouté."
+  },
+  {
+    "speciesId": 2000000097,
+    "status": "verified",
+    "note": "XVIIIe s., poids, poil, caractère confirmés; taille ajoutée."
+  },
+  {
+    "speciesId": 2000000099,
+    "status": "corrected",
+    "note": "Couleurs 'gris et blanc ou bleu et feu' retirées (formulation douteuse sur la page); origine, taille, usage confirmés; XIXe s. précisé."
+  },
+  {
+    "speciesId": 2000000101,
+    "status": "corrected",
+    "note": "'Art rupestre du Sahara' précisé (Tassili n'Ajjer); 'courage exceptionnel/attachement profond' ramenés au standard; usages ajoutés."
+  },
+  {
+    "speciesId": 2000000102,
+    "status": "corrected",
+    "note": "'Élégance/expression douce' et 'flair exceptionnel/volonté de travailler' non sourcés retirés; ascendance, usage et lignées ajoutés."
+  },
+  {
+    "speciesId": 2000000105,
+    "status": "corrected",
+    "note": "'Grand molossoïde imposant' non sourcé retiré; croisements, évaluation comportementale ajoutés; 70-90 kg, 60 cm, seconde catégorie confirmés."
+  },
+  {
+    "speciesId": 2000000106,
+    "status": "corrected",
+    "note": "'Chiens courants locaux' → 'chiens de chasse hongrois'; 'taille ~60 cm' → 54-64 cm; 'constitution légère et sèche' non sourcé retiré; poids, poil et besoin d'exercice ajoutés."
+  },
+  {
+    "speciesId": 2000000107,
+    "status": "corrected",
+    "note": "'Protecteur avec les enfants' non sourcé retiré; poids, poils, XVIIe s. ajoutés."
+  },
+  {
+    "speciesId": 2000000108,
+    "status": "removed",
+    "note": "Page Wikipédia EN 'Whippet' ne décrit pas un « Whippet italien » : elle traite du whippet anglais (race distincte, simplement proche du lévrier italien). La description initiale décrivait le whippet anglais, donc pas la race de l'entrée. Mise à null."
+  },
+  {
+    "speciesId": 2000000109,
+    "status": "corrected",
+    "note": "'Taille moyenne à grande', 'morphologie équilibrée', 'robuste' non sourcés retirés (poids 3,5-5 kg); reconnaissance FIFé/LOOF ajoutée."
+  },
+  {
+    "speciesId": 2000000110,
+    "status": "corrected",
+    "note": "'Capable de grimper aux arbres' (non sourcé, la page dit seulement capable d'activité extérieure) retiré; 'silhouette compacte et ronde' / 'taille moyenne à grande' remplacés par poids et face plate; ascendance nuancée (possible Khorassan)."
+  }
+]

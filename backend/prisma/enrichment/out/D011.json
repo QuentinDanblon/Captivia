@@ -1,12 +1,12 @@
 [
   {
     "speciesId": 2000000221,
-    "description": "Serpent constricteur nord-américain de grande taille pouvant atteindre 180-200 cm à l'âge adulte. Excellente grimpeuse, cette espèce préfère les zones boisées et se nourrit de rongeurs, d'oiseaux et de petits serpents. Lorsqu'elle est menacée, elle vibre sa queue en imitation du serpent à sonnette.",
+    "description": "Serpent constricteur nord-américain de grande taille, dont le plus long spécimen connu mesurait 260 cm. Excellent grimpeur, il préfère les zones fortement boisées et se nourrit de souris, de rats, d'autres serpents, de tamias, d'écureuils, d'œufs et d'oiseaux. Quand il est menacé, il fait vibrer sa queue, imitant le serpent à sonnette.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Elaphe_obsoleta"
   },
   {
     "speciesId": 2000000222,
-    "description": "Tortue terrestre méditerranéenne originaire d'Espagne, France et Italie, mesurant 18 à 28 cm selon la sous-espèce. Sa carapace jaune est ornée de taches noires distinctives. Elle habite les garrigues et zones rocheuses, protégée par la loi en France en raison de son statut vulnérable.",
+    "description": "Tortue terrestre méditerranéenne présente en Espagne, en France et en Italie, mesurant de 18 à 20 cm pour la sous-espèce occidentale jusqu'à 28 cm pour l'orientale. Sa carapace à dominante jaune porte des marques sombres. Elle habite les garrigues et les zones rocheuses. Classée « Vulnérable » par l'UICN, elle fait l'objet d'un plan national de restauration en France.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Testudo_hermanni"
   },
   {
@@ -16,28 +16,27 @@
   },
   {
     "speciesId": 2000000224,
-    "description": "L'une des tortues les plus répandues d'Amérique du Nord, mesurant 10-25 cm. Sa carapace lisse vert olive à noire est ornée de rayures rouges et jaunes distinctives sur la tête, les pattes et la queue. Elle vit dans les eaux stagnantes peu profondes comme les marais, étangs et lacs.",
+    "description": "Tortue d'Amérique du Nord à l'aire de répartition la plus étendue de toutes les tortues du continent. La femelle mesure de 10 à 25 cm, le mâle 7 à 15 cm. Sa carapace lisse, vert olive à noire, est ornée de rayures rouges, orange ou jaunes sur la tête et les extrémités. Elle préfère les eaux peu profondes sans courant : marais, étangs, criques et rives de lacs.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Chrysemys_picta"
   },
   {
     "speciesId": 2000000225,
-    "description": "Tortue terrestre nord-américaine présentant des colorations aux motifs très variables. Remarquable pour sa capacité à vivre jusqu'à 138 ans sans déclin reproductif notable. Elle habite des zones terrestres variées, préférant les milieux humides et forestiers.",
+    "description": "Tortue boîte d'Amérique du Nord, comptant six sous-espèces réparties aux États-Unis et au Mexique. Sa coloration présente des motifs très variables, y compris au sein d'une même sous-espèce. Elle est remarquable par sa longévité (jusqu'à 138 ans rapportés) et une sénescence négligeable. Elle est classée « Vulnérable » par l'UICN.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Terrapene_carolina"
-  }
-  ,
+  },
   {
     "speciesId": 2000000226,
-    "description": "Varan africain originaire d'Afrique de l'Ouest et centrale, mesurant 80-110 cm. Sa peau marron ou grise présente des taches blanches distinctives. Il habite les régions semi-arides et se nourrit principalement d'insectes, de petits rongeurs et d'œufs.",
+    "description": "Varan africain d'Afrique de l'Ouest et centrale, mesurant 80 à 110 cm. Sa peau marron clair ou grise porte des taches blanches sur le dos, plus visibles chez les jeunes. Diurne et terrestre, c'est un carnivore surtout insectivore, qui mange aussi de petits rongeurs et des œufs.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Varanus_exanthematicus"
   },
   {
     "speciesId": 2000000227,
-    "description": "Crotale diamantin du sud-ouest américain et du nord du Mexique, mesurant généralement 120-150 cm, parfois plus de 2 mètres. Se distingue par ses taches foncées de forme rectangulaire à hexagonale et des bandes noires sur la queue. Son venin hémotoxique cause douleurs et hémorragies; il en injecte 250-350 mg par morsure.",
+    "description": "Crotale diamantin du sud-ouest des États-Unis et du nord du Mexique, mesurant généralement 120 à 150 cm et parfois plus de 2 m. Son dos porte des taches foncées de forme rectangulaire à hexagonale, et sa queue de 2 à 8 bandes noires bordées de blanc. Son venin, principalement hémotoxique, atteint les vaisseaux sanguins et le cœur ; il peut en injecter 250 à 350 mg par morsure.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Crotalus_atrox"
   },
   {
     "speciesId": 2000000228,
-    "description": "Serpent venimeux africain d'Afrique de l'Ouest, centrale et australe, mesurant généralement 2-3 mètres, avec des spécimens atteignant 4,5 mètres. Présente une coloration jaune-vert à gris métallique, caractérisée par le noir distinctif de l'intérieur de sa bouche. Habite les zones boisées et rocheuses où il chasse activement le jour.",
+    "description": "Serpent venimeux d'Afrique subsaharienne, mesurant généralement de 2 à plus de 3 m, avec des spécimens atteignant 4,2 à 4,5 m. Sa peau va du jaune-vert au gris métallique, et l'intérieur de sa bouche est noir, d'où son nom. Il fréquente les zones boisées ou rocheuses et est actif le jour.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Dendroaspis_polylepis"
   },
   {
@@ -47,22 +46,22 @@
   },
   {
     "speciesId": 2000000230,
-    "description": "Serpent venimeux eurasien mesurant en moyenne 55 cm, jusqu'à 104 cm en Scandinavie. Affectionne les végétations basses complexes et vit dans les landes et tourbières. Son aire de répartition s'étend du Royaume-Uni à l'île de Sakhaline, en faisant le seul serpent venimeux du nord de l'Europe.",
+    "description": "Serpent venimeux eurasien dont l'aire s'étend du Royaume-Uni à l'île de Sakhaline. Il mesure en moyenne 55 cm, jusqu'à 104 cm en Scandinavie. Il affectionne les milieux ouverts à végétation basse structurée, comme les landes et les tourbières. C'est le seul serpent venimeux présent dans la moitié nord de l'Europe.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Vipera_berus"
   },
   {
     "speciesId": 2000000231,
-    "description": "Le plus gros serpent du monde, originaire du bassin amazonien d'Amérique du Sud. Peut atteindre 8,45 m et peser 200 kg. Ce constricteur aquatique possède des yeux et narines dorsaux lui permettant de chasser dans les cours d'eau des marécages, savanes inondées et bassins fluviaux.",
+    "description": "Considéré comme le plus gros serpent du monde, l'anaconda vert peut mesurer jusqu'à 8,45 m et peser 200 kg. Il vit en Amérique du Sud, dans les bassins de l'Orénoque, de l'Amazone, du Paraná et du Paraguay. Principalement aquatique, il fréquente lacs, cours d'eau lents, marécages et savanes inondées ; dans l'eau, seuls ses yeux et ses narines dépassent en surface.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Eunectes_murinus"
   },
   {
     "speciesId": 2000000232,
-    "description": "Salamandre aquatique mexicaine endémique des environs de Xochimilco, mesurant généralement 25 cm. Se distingue par sa capacité à conserver des caractères juvéniles à l'âge adulte via la néoténie. Prospère dans les eaux froides 14-20°C et possède une exceptionnelle faculté de régénération des organes endommagés.",
+    "description": "Salamandre aquatique mexicaine endémique des environs de Xochimilco, mesurant entre 15 et 33 cm (environ 25 cm en moyenne). Elle conserve des caractères juvéniles à l'âge adulte (néoténie), notamment ses branchies externes. Elle vit en eau froide, de 14 à 20 °C, et régénère des organes endommagés. Elle est classée en danger critique d'extinction.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Ambystoma_mexicanum"
   },
   {
     "speciesId": 2000000233,
-    "description": "Grenouille amphibienne africaine originaire d'Afrique australe, mesurant 57-188 mm selon le sexe. Aquatique, elle se caractérise par ses doigts munis de griffes distinctives. Aujourd'hui invasive mondialement, elle pose des risques écologiques majeurs en tant que vecteur de maladies fongiques affectant les amphibiens.",
+    "description": "Grenouille aquatique d'Afrique australe, aux doigts munis de griffes. Les mâles mesurent 76 à 188 mm et les femelles 57 à 147 mm. Devenue invasive dans plusieurs régions du monde (dont la France), elle porte le champignon Batrachochytrium dendrobatidis, responsable de la chytridiomycose, maladie dévastatrice pour les populations d'amphibiens.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Xenopus_laevis"
   },
   {
@@ -72,7 +71,7 @@
   },
   {
     "speciesId": 2000000235,
-    "description": "Grenouille arboricole australienne mesurant environ 10 cm. Sa couleur varie du brun au vert selon la température et l'environnement. Espèce paisible vivant dans la canopée des arbres près de sources d'eau, elle s'adapte bien aux habitations humaines où on la trouve souvent sur les rebords de fenêtres.",
+    "description": "Grenouille arboricole du nord et de l'est de l'Australie et du sud de la Nouvelle-Guinée, mesurant jusqu'à 10 cm. Sa couleur varie du brun au vert selon la température et l'environnement. Animal très paisible, elle vit dans la canopée des arbres près de sources d'eau et s'adapte bien à la proximité humaine : on la trouve souvent sur les rebords de fenêtres ou dans les maisons.",
     "sourceUrl": "https://fr.wikipedia.org/wiki/Litoria_caerulea"
   }
 ]
