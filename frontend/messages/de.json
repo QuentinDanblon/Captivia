@@ -501,13 +501,21 @@
     "whenToConsult": "Wann zum Tierarzt"
   },
   "store": {
-    "allCategories": "Tous les types",
-    "disclaimer": "Liens d'affiliation : en achetant via ces liens, vous soutenez Captivia. Les prix restent identiques pour vous.",
-    "filterByCategory": "Filtrer par type d'animal",
-    "forSpecies": "Magasins adaptés à cette espèce",
-    "subtitle": "Liens vers des sites partenaires pour l'alimentation et le matériel adaptés à votre animal.",
-    "title": "Magasin",
-    "visitStore": "Voir le site"
+    "allCategories": "Alle Tierarten",
+    "categoryAmphibian": "Amphibien",
+    "categoryArachnid": "Spinnentiere",
+    "categoryBird": "Vögel",
+    "categoryFish": "Fische",
+    "categoryInsect": "Insekten",
+    "categoryMammal": "Säugetiere",
+    "categoryReptile": "Reptilien",
+    "disclaimer": "Affiliate-Links: Wenn du über diese Links kaufst, unterstützt du Captivia. Der Preis bleibt für dich gleich.",
+    "filterByCategory": "Nach Tierart filtern",
+    "forSpecies": "Für diese Art geeignete Shops",
+    "productLinksNotice": "Produktlinks können Affiliate-Links sein.",
+    "subtitle": "Links zu Partnerseiten für Futter und Zubehör, die zu deinem Tier passen.",
+    "title": "Shop",
+    "visitStore": "Zur Website"
   },
   "subscription": {
     "benefitAnimals": "Animaux illimités dans « Mes animaux »",

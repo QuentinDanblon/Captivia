@@ -502,9 +502,17 @@
   },
   "store": {
     "allCategories": "All types",
+    "categoryAmphibian": "Amphibians",
+    "categoryArachnid": "Arachnids",
+    "categoryBird": "Birds",
+    "categoryFish": "Fish",
+    "categoryInsect": "Insects",
+    "categoryMammal": "Mammals",
+    "categoryReptile": "Reptiles",
     "disclaimer": "Affiliate links: purchasing via these links supports Captivia. Prices remain the same for you.",
     "filterByCategory": "Filter by animal type",
     "forSpecies": "Stores suited to this species",
+    "productLinksNotice": "Product links may be affiliate links.",
     "subtitle": "Partner links for food and equipment suited to your pet.",
     "title": "Shop",
     "visitStore": "Visit site"

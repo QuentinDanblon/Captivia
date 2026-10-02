@@ -155,7 +155,7 @@ function MagasinTabContent({ category }: { category?: string | null }) {
               <a
                 href={href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="sponsored noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline"
               >
                 {t('store.visitStore')}
@@ -1186,7 +1186,7 @@ export default function SpeciesDetailPage({
               {/* Transparency link */}
               <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Les liens vers les produits peuvent etre des liens affilies.{' '}
+                  {t('store.productLinksNotice')}{' '}
                   <Link
                     href="/transparency"
                     className="text-emerald-600 hover:text-emerald-700"

@@ -501,13 +501,21 @@
     "whenToConsult": "Quando consultare"
   },
   "store": {
-    "allCategories": "Tous les types",
-    "disclaimer": "Liens d'affiliation : en achetant via ces liens, vous soutenez Captivia. Les prix restent identiques pour vous.",
-    "filterByCategory": "Filtrer par type d'animal",
-    "forSpecies": "Magasins adaptés à cette espèce",
-    "subtitle": "Liens vers des sites partenaires pour l'alimentation et le matériel adaptés à votre animal.",
-    "title": "Magasin",
-    "visitStore": "Voir le site"
+    "allCategories": "Tutti i tipi",
+    "categoryAmphibian": "Anfibi",
+    "categoryArachnid": "Aracnidi",
+    "categoryBird": "Uccelli",
+    "categoryFish": "Pesci",
+    "categoryInsect": "Insetti",
+    "categoryMammal": "Mammiferi",
+    "categoryReptile": "Rettili",
+    "disclaimer": "Link di affiliazione: acquistando tramite questi link sostieni Captivia. Il prezzo resta lo stesso per te.",
+    "filterByCategory": "Filtra per tipo di animale",
+    "forSpecies": "Negozi adatti a questa specie",
+    "productLinksNotice": "I link ai prodotti possono essere link di affiliazione.",
+    "subtitle": "Link a siti partner per alimentazione e accessori adatti al tuo animale.",
+    "title": "Negozio",
+    "visitStore": "Visita il sito"
   },
   "subscription": {
     "benefitAnimals": "Animaux illimités dans « Mes animaux »",
