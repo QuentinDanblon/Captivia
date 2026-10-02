@@ -198,8 +198,9 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
       const reg = await register(email).expect(201);
       const oldToken: string = body(reg).accessToken;
 
-      const warn = jest
-        .spyOn(Logger.prototype, 'warn')
+      // W3-01 : sans MAIL_HOST, MailService (jsonTransport) journalise le message en debug hors prod.
+      const debug = jest
+        .spyOn(Logger.prototype, 'debug')
         .mockImplementation(() => undefined);
       let logged = '';
       try {
@@ -207,10 +208,10 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
           .post('/auth/forgot-password')
           .send({ email: email.toUpperCase() })
           .expect(200);
-        await new Promise((r) => setImmediate(r));
-        logged = warn.mock.calls.flat().map(String).join('\n');
+        await new Promise((r) => setTimeout(r, 50));
+        logged = debug.mock.calls.flat().map(String).join('\n');
       } finally {
-        warn.mockRestore();
+        debug.mockRestore();
       }
 
       const match = logged.match(/reset-password\?token=([a-f0-9]{64})/);
