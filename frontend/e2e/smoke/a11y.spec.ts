@@ -6,6 +6,9 @@ const PUBLIC_PAGES = [
   '/en',
   '/login',
   '/register',
+  '/forgot-password',
+  '/reset-password?token=e2e',
+  '/verifier-email',
   '/species/2435099',
   '/mentions-legales',
   '/confidentialite',
@@ -17,7 +20,18 @@ const PUBLIC_PAGES = [
 ];
 
 /** Parcours authentifiés. */
-const PRIVATE_PAGES = ['/mes-animaux', '/mes-animaux/liste', '/mes-animaux/animal-e2e-1', '/parametres/compte'];
+const PRIVATE_PAGES = [
+  '/mes-animaux',
+  '/mes-animaux/liste',
+  '/mes-animaux/animal-e2e-1',
+  '/agenda',
+  '/parametres',
+  '/parametres/compte',
+  '/parametres/notifications',
+  '/parametres/grade',
+  '/parametres/abonnement',
+  '/magasin',
+];
 
 /** Rendu stable : le contenu principal de chaque page est présent avant l'analyse. */
 async function waitForContent(page: import('@playwright/test').Page) {

@@ -192,7 +192,8 @@ Couches, dans l'ordre : `theme, base, components, utilities, fields`.
 3. **`utilities` (fin)** : *pont « mode sombre »* pour les pages non migrées — une classe
    `text-gray-700`, `text-emerald-600`… sans `dark:text-*` et sans fond clair propre reçoit
    l'encre sombre équivalente. Plafonne aussi les titres hérités `font-bold` à 600.
-   **À supprimer au lot 4**, quand plus aucune page n'utilise la palette Tailwind brute.
+   **Réduit au lot 4** à la seule règle encore utile (`text-emerald-600` sans `dark:text-*`, liens
+   de la fiche espèce `species/[id]`) : voir § 11. À supprimer avec la migration de cette fiche.
 4. **`fields`** (après les utilitaires) : plancher de contraste des bordures de champ.
    `border-gray-300` (1,6:1) reste à ≥ 3:1. Focus → `--accent`, `aria-invalid` → `--danger`.
 
@@ -501,9 +502,11 @@ groupe `(app)`, `src/components/SiteChrome.tsx` rend l'ancien cadre pour toutes 
    textes avec la section 2. 5. Vérifier : jest, axe (0 sérieux/critique), captures 1440/390
    clair/sombre, aucun débordement à 320 px.
 
-Quand toutes les pages sont migrées (fin du lot 4) : supprimer le pont « mode sombre », la
+Quand toutes les pages sont migrées : supprimer le pont « mode sombre » résiduel, la
 palette héritée de `@theme`, les classes `captivia-*` inutilisées et `tailwind.config.ts`
-(ignoré par Tailwind 4, aucun `@config`).
+(ignoré par Tailwind 4, aucun `@config`). Après le lot 4, restent à migrer : la fiche espèce
+`species/[id]`, `animal-public`, `transparency`, `suppression-compte`, `content/legal/*` et
+`ui/ErrorBoundary` (la landing et les pages légales relèvent du groupe `(marketing)`).
 
 ## 9. Décisions (lot 1)
 
@@ -558,3 +561,57 @@ palette héritée de `@theme`, les classes `captivia-*` inutilisées et `tailwin
   depuis l'app ; elle ne lit donc aucun jeton, reprend la palette papier / encre en valeurs fixes
   (§ 3), reste claire en mode sombre (c'est un document) et masque la coquille de l'app à
   l'impression.
+
+## 11. Décisions (lot 4 — outils et compte)
+
+- **Écrans de compte = `AuthFrame`** (`src/components/auth/AuthFrame.tsx`) : connexion,
+  inscription, mot de passe oublié / nouveau, vérification d'e-mail et passage invité → compte
+  (`/sauvegarder`). Formulaire sur le papier à gauche (`Field`, `Button`, `Alert` pour les
+  messages, `role="alert"` conservé) ; à partir de 1024 px, une planche texturée à droite
+  (`AuthPanel` : papier creusé + grain `cv-texture`, silhouettes au trait légendées « fig. »,
+  trois raisons de tenir le carnet). **Aucune photo** : `public/images/` n'en contient encore
+  aucune sous licence, et jamais d'image générée. `/sauvegarder` remplace la planche par ce qui
+  suit l'invité (son animal, le carnet, les rappels, les réglages). Les pages restent hors du
+  groupe `(app)` et ne sont pas déplacées : le groupe `(marketing)` les accueillera tel quel.
+- **« Essayer sans compte » reste en vue** : sous le bouton de connexion, et désormais aussi
+  sous l'inscription, après un séparateur « ou », avec la promesse en une phrase (1 animal, carnet
+  complet, rien n'est perdu). Bouton `secondary` pleine largeur, taille `lg`.
+- **Paramètres = table des matières** : l'index `/parametres` liste les rubriques numérotées en
+  mono (filets, pas de carte à pictogramme pastel) et, à côté, la carte du profil (initiales,
+  formule, langue, déconnexion). Chaque sous-page s'ouvre sur `SettingsHeader`
+  (`parametres/_components`) : lien de retour + `SectionHeader`.
+- **Compte** : profil, mot de passe, appareils connectés et données en `Card` ; la suppression
+  vit dans un encart brique (`bg-danger-soft` + filet gauche) et se confirme dans une `Modal`
+  `alertdialog` restylée (`Field`, `Button` `danger`). Déconnexion « sur cet appareil » dans la
+  colonne de droite ; jamais pour un invité (inchangé).
+- **Rappels et notifications** : les onglets « Configurer / Mes notifications » (doublon) sont
+  fusionnés : chaque rappel porte son résumé en mono (« 19:30 · Chaque semaine · Vendredi »), un
+  interrupteur `role="switch"` nommé par le rappel, ses champs (`Field`) et ses actions. Le canal
+  de réception devient un groupe de boutons radio natifs. L'enregistrement automatique est dit
+  (« Chaque changement est enregistré automatiquement ») ; le bouton « Enregistrer » reste.
+- **Grade** : sceau au trait (`GradeSeal`, cinq losanges pleins jusqu'au rang) à la place des
+  médailles en dégradé ; progression en barre fine `accent` ; échelle des cinq grades en
+  segments ; rappels du jour en `CareTimeline` avec leurs actions (« C'est fait », « Reporter »,
+  « Supprimer »).
+- **Agenda** : une seule `CareTimeline` (ordre de `groupByDay`, statuts de `careStatusOf` comme le
+  tableau de bord), période en contrôle segmenté (`aria-pressed`), filtres en `Field`, pastilles
+  `TaskPill`, période affichée en marge (mono). L'abonnement calendrier passe dans la colonne de
+  droite, en trois étapes numérotées, avec l'état du lien en `Badge` ; libellé du bouton honnête
+  selon l'état (créer / copier / obtenir un nouveau lien, ce dernier régénérant le jeton comme
+  avant).
+- **Abonnement** : deux formules côte à côte (`PlanCard`), puis un comparatif en vrai `<table>`
+  (« Inclus » / « Non inclus » lus, pas seulement montrés) et trois questions. **Aucun prix codé
+  en dur** : les anciennes chaînes `subscription.priceMonthly/priceYearly/…` sont retirées des six
+  langues (et de la liste blanche du test de parité) ; Premium affiche « Abonnement mensuel ou
+  annuel » et « Tarif affiché dans l'app avant tout achat » (formulations de la landing), le
+  tarif réel venant des stores via RevenueCat. Le web ne vend rien (W6-08) ; le comparatif suit
+  l'API : 1 animal en gratuit (`FREE_ANIMAL_LIMIT`), carnet complet pour tous (D-16), page
+  publique / QR code et reproduction réservés à Premium.
+- **Magasin** : le seed de production ne référence aucune boutique. Sans boutique, un
+  `EmptyState` le dit et renvoie aux fiches espèces ; ni filtre, ni mention d'affiliation tant
+  qu'aucun lien d'affiliation n'est affiché.
+- **Pont « mode sombre »** (§ 4) : réduit à `text-emerald-600` (seule classe encore posée sans
+  `dark:text-*`, sur les liens de `species/[id]`, hors lot). Classes `captivia-auth-*` supprimées.
+- **Smoke** : l'API simulée couvre agenda (jeton calendrier), abonnement, préférences, grade,
+  événements et boutiques ; axe passe sur ces pages ; `e2e/smoke/tools.spec.ts` vérifie la frise
+  et ses filtres, l'absence de prix et de bouton d'achat, et l'état vide du magasin.

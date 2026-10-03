@@ -63,7 +63,7 @@ test.describe('Mode invité', () => {
     api.animals = [fixture<MockAnimal>('animal')];
     await page.goto('/sauvegarder');
 
-    await expect(page.getByRole('heading', { level: 1, name: 'Créer votre compte' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: 'Gardez votre carnet pour de bon' })).toBeVisible();
     await expect(page.getByText('Kaa et son carnet seront rattachés à votre compte.')).toBeVisible();
 
     const fill = async (email: string) => {

@@ -2,31 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { useRouter } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
-import { Link } from '@/i18n/navigation';
 import { GUEST_UPGRADE_PATH, isGuestUser } from '@/lib/guest';
-
-const consentRowStyle: React.CSSProperties = {
-  display: 'flex',
-  alignItems: 'flex-start',
-  gap: 10,
-  fontSize: '0.8rem',
-  lineHeight: 1.5,
-  cursor: 'pointer',
-};
-
-const checkboxStyle: React.CSSProperties = {
-  marginTop: 3,
-  flexShrink: 0,
-};
+import { useStartGuest } from '@/components/guest/useStartGuest';
+import { AuthFrame, OrDivider } from '@/components/auth/AuthFrame';
+import { Alert, Button, Field } from '@/components/ui';
 
 export default function RegisterPage() {
   const t = useTranslations();
+  const tGuest = useTranslations('guest');
   const locale = useLocale();
   const router = useRouter();
   const { login, user } = useAuth();
+  const { start: startGuest, starting: guestStarting, error: guestError } = useStartGuest();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -75,128 +65,124 @@ export default function RegisterPage() {
     }
   };
 
-  return (
-    <div className="captivia-auth-page">
-      <div className="captivia-auth-card">
-        <h1 className="captivia-auth-title">{t('auth.registerTitle')}</h1>
+  const legalLink = (href: string) => {
+    const LegalLink = (chunks: React.ReactNode) => (
+      <Link href={href} target="_blank" rel="noopener noreferrer" className="text-accent-text underline underline-offset-2">
+        {chunks}
+      </Link>
+    );
+    return LegalLink;
+  };
 
-        <form onSubmit={handleSubmit} className="captivia-auth-form">
-          <div className="captivia-auth-field">
-            <label htmlFor="email" className="captivia-auth-label">
-              {t('auth.emailLabel')}
-            </label>
+  return (
+    <AuthFrame title={t('auth.registerHeading')} lead={t('auth.registerLead')}>
+      <div className="grid gap-8">
+        <form onSubmit={handleSubmit} className="grid gap-5">
+          <Field label={t('auth.emailLabel')} id="email">
             <input
               type="email"
-              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              className="captivia-auth-input"
+              inputMode="email"
             />
-          </div>
+          </Field>
 
-          <div className="captivia-auth-field">
-            <label htmlFor="password" className="captivia-auth-label">
-              {t('auth.passwordLabel')}
-            </label>
+          <Field label={t('auth.passwordLabel')} hint={t('account.passwordRule')} id="password">
             <input
               type="password"
-              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={10}
               maxLength={128}
               autoComplete="new-password"
-              className="captivia-auth-input"
             />
-            <p className="captivia-auth-hint">{t('auth.passwordMin')}</p>
-          </div>
+          </Field>
 
-          <div className="captivia-auth-field">
-            <label htmlFor="confirmPassword" className="captivia-auth-label">
-              {t('auth.confirmPasswordLabel')}
-            </label>
+          <Field label={t('auth.confirmPasswordLabel')} id="confirmPassword">
             <input
               type="password"
-              id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
               minLength={10}
               maxLength={128}
               autoComplete="new-password"
-              className="captivia-auth-input"
             />
-          </div>
+          </Field>
 
-          <div className="captivia-auth-field" style={{ display: 'grid', gap: 10 }}>
-            <label htmlFor="acceptTerms" className="captivia-auth-hint" style={consentRowStyle}>
+          <fieldset className="m-0 grid gap-3 border-0 p-0">
+            <legend className="sr-only">{t('auth.consentLegend')}</legend>
+            <label htmlFor="acceptTerms" className="flex cursor-pointer items-start gap-3 text-ui text-ink">
               <input
                 type="checkbox"
                 id="acceptTerms"
                 checked={acceptTerms}
                 onChange={(e) => setAcceptTerms(e.target.checked)}
                 required
-                style={checkboxStyle}
+                className="mt-0.5 size-4 shrink-0"
               />
               <span>
                 {t.rich('auth.acceptTermsLabel', {
-                  terms: (chunks) => (
-                    <Link href="/cgu" target="_blank" rel="noopener noreferrer" className="captivia-auth-inline-link">
-                      {chunks}
-                    </Link>
-                  ),
-                  privacy: (chunks) => (
-                    <Link
-                      href="/confidentialite"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="captivia-auth-inline-link"
-                    >
-                      {chunks}
-                    </Link>
-                  ),
+                  terms: legalLink('/cgu'),
+                  privacy: legalLink('/confidentialite'),
                 })}
               </span>
             </label>
-            <label htmlFor="ageConfirmed" className="captivia-auth-hint" style={consentRowStyle}>
+            <label htmlFor="ageConfirmed" className="flex cursor-pointer items-start gap-3 text-ui text-ink">
               <input
                 type="checkbox"
                 id="ageConfirmed"
                 checked={ageConfirmed}
                 onChange={(e) => setAgeConfirmed(e.target.checked)}
                 required
-                style={checkboxStyle}
+                className="mt-0.5 size-4 shrink-0"
               />
               <span>{t('auth.ageConfirmLabel')}</span>
             </label>
-          </div>
+          </fieldset>
 
-          {error && (
-            <div className="captivia-auth-feedback is-error" role="alert">
-              <p>{error}</p>
-            </div>
-          )}
+          {error && <Alert severity="urgent" title={error} />}
 
-          <button type="submit" disabled={loading} className="captivia-auth-submit">
-            {loading ? t('common.loading') : t('auth.registerButton')}
-          </button>
+          <Button type="submit" size="lg" fullWidth loading={loading}>
+            {loading ? t('common.loading') : t('auth.registerSubmit')}
+          </Button>
         </form>
 
-        <div className="captivia-auth-links">
-          <p>
-            {t('auth.hasAccount')}{' '}
-            <Link href="/login" className="captivia-auth-secondary-link">
-              {t('auth.loginButton')}
-            </Link>
-          </p>
-          <Link href="/" className="captivia-auth-back-link">
-            {t('common.back')} {t('common.home')}
+        {/* Sans session : on peut commencer sans compte et convertir plus tard, sans perte. */}
+        {!user && (
+          <section aria-labelledby="register-guest-title" className="grid gap-4">
+            <OrDivider label={t('common.or')} />
+            <div className="grid gap-1">
+              <h2 id="register-guest-title" className="m-0 font-display text-h4 font-semibold text-ink">
+                {t('auth.guestTitle')}
+              </h2>
+              <p className="m-0 text-ui text-ink-2">{t('auth.guestLead')}</p>
+            </div>
+            <Button
+              variant="secondary"
+              size="lg"
+              fullWidth
+              loading={guestStarting}
+              onClick={async () => {
+                if (await startGuest()) router.push('/mes-animaux');
+              }}
+            >
+              {guestStarting ? tGuest('entryStarting') : tGuest('entryTry')}
+            </Button>
+            {guestError && <Alert severity="urgent" title={guestError} />}
+          </section>
+        )}
+
+        <p className="m-0 border-t border-line pt-6 text-ui text-ink-2">
+          {t('auth.hasAccount')}{' '}
+          <Link href="/login" className="font-medium text-accent-text underline underline-offset-2">
+            {t('auth.loginButton')}
           </Link>
-        </div>
+        </p>
       </div>
-    </div>
+    </AuthFrame>
   );
 }

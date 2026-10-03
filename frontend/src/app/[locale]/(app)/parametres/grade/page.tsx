@@ -1,19 +1,26 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
-import { useRouter } from '@/i18n/navigation';
+import { useCallback, useState, useEffect } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { Link } from '@/i18n/navigation';
 import { api } from '@/lib/api';
+import {
+  Alert,
+  Button,
+  Card,
+  CareTimeline,
+  EmptyState,
+  Skeleton,
+  SkeletonGroup,
+  buttonClasses,
+  cx,
+  type CareStatus,
+} from '@/components/ui';
+import { SettingsHeader } from '../_components/SettingsHeader';
 
-const BADGE_IMAGES: Record<string, string> = {
-  bronze: '/badges/bronze.svg',
-  silver: '/badges/silver.svg',
-  gold: '/badges/gold.svg',
-  platinum: '/badges/platinum.svg',
-  diamond: '/badges/diamond.svg',
-};
+/** Grades, du premier au dernier (seuils côté API : GradeService). */
+const GRADES = ['bronze', 'silver', 'gold', 'platinum', 'diamond'] as const;
 
 type GradeData = {
   points: number;
@@ -43,6 +50,35 @@ type NotificationEvent = {
   routineId?: string;
 };
 
+/**
+ * Sceau de grade au trait : deux cercles et cinq losanges, pleins jusqu'au rang atteint.
+ * Remplace les médailles en dégradé (pas de doré ni de dégradé, DESIGN.md § 7).
+ */
+function GradeSeal({ level, size = 88, className }: { level: number; size?: number; className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" width={size} height={size} className={className} fill="none" aria-hidden="true" data-level={level}>
+      <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth="0.75" strokeDasharray="1.5 2" />
+      {GRADES.map((_, i) => {
+        const x = 24 + (i - 2) * 6.4;
+        const filled = i < level;
+        return (
+          <path
+            key={i}
+            d={`M${x} 20.6 ${x + 2.6} 24 ${x} 27.4 ${x - 2.6} 24Z`}
+            fill={filled ? 'currentColor' : 'none'}
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinejoin="round"
+          />
+        );
+      })}
+    </svg>
+  );
+}
+
+const STATUS_OF: Record<string, CareStatus> = { done: 'done', skipped: 'skipped', pending: 'due' };
+
 export default function GradePage() {
   const t = useTranslations();
   const locale = useLocale();
@@ -61,13 +97,7 @@ export default function GradePage() {
     }
   }, [user, authLoading, router]);
 
-  useEffect(() => {
-    if (user && token) {
-      loadData();
-    }
-  }, [user, token]);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     if (!token) return;
     setLoading(true);
     try {
@@ -85,7 +115,13 @@ export default function GradePage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    if (user && token) {
+      void loadData();
+    }
+  }, [user, token, loadData]);
 
   const handleMark = async (eventId: string, status: 'done' | 'skipped') => {
     if (!token) return;
@@ -125,236 +161,161 @@ export default function GradePage() {
     }
   };
 
-  const displayGrade = grade ?? DEFAULT_GRADE;
-  const gradeLabelKey = displayGrade.grade ? `grade.${displayGrade.grade}` : '';
-  const gradeLabel = gradeLabelKey ? t(gradeLabelKey as Parameters<typeof t>[0]) : displayGrade.grade;
-
-  /** Couleur de la barre selon le pourcentage acquis (0→rouge/ambre, 50→jaune, 75→vert clair, 100→vert) */
-  const progressBarColor = (pct: number) => {
-    if (pct >= 75) return 'from-emerald-500 to-emerald-600 dark:from-emerald-500 dark:to-emerald-400';
-    if (pct >= 50) return 'from-lime-500 to-emerald-500 dark:from-lime-400 dark:to-emerald-500';
-    if (pct >= 25) return 'from-amber-400 to-lime-500 dark:from-amber-400 dark:to-lime-400';
-    return 'from-amber-500 to-amber-400 dark:from-amber-500 dark:to-amber-400';
-  };
-  const progressPercent = Math.max(0, Math.min(100, displayGrade.progressPercent ?? 0));
-
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent mb-4" />
-          <p className="text-gray-600 dark:text-gray-300">{t('common.loading')}</p>
-        </div>
+      <div className="cv-container py-6 sm:py-8">
+        <SkeletonGroup label={t('common.loading')} className="grid gap-6">
+          <Skeleton width="35%" height={40} />
+          <div className="grid gap-6 md:grid-cols-12">
+            <Skeleton shape="block" height={340} className="md:col-span-5" />
+            <Skeleton shape="block" height={340} className="md:col-span-7" />
+          </div>
+        </SkeletonGroup>
       </div>
     );
   }
 
+  const displayGrade = grade ?? DEFAULT_GRADE;
+  const gradeName = (key: string) =>
+    (GRADES as readonly string[]).includes(key) ? t(`grade.${key}` as Parameters<typeof t>[0]) : key;
+  const level = Math.max(0, GRADES.indexOf(displayGrade.grade as (typeof GRADES)[number])) + 1;
+  const target = displayGrade.points - displayGrade.pointsInCurrent + displayGrade.pointsNeededForNext;
+  const remaining = Math.max(0, target - displayGrade.points);
+  const percent = Math.max(0, Math.min(100, displayGrade.progressPercent ?? 0));
+  const number = new Intl.NumberFormat(locale, { maximumFractionDigits: 0 });
+
+  const statusLabels = {
+    done: t('grade.done'),
+    due: t('today.status.due'),
+    overdue: t('today.status.overdue'),
+    planned: t('today.status.planned'),
+    skipped: t('grade.skipped'),
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-w-0">
-        <nav className="text-sm text-gray-500 mb-4">
-          <Link href="/parametres" className="hover:text-emerald-600">
-            {t('settings.title')}
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="text-gray-800 dark:text-white">{t('grade.title')}</span>
-        </nav>
+    <div className="cv-container grid gap-6 py-6 sm:py-8">
+      <SettingsHeader
+        title={t('grade.title')}
+        description={t('grade.lead')}
+        marginNote={t('grade.pointsCount', { count: displayGrade.points })}
+        marginLabel={t('grade.points')}
+      />
 
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white mb-6">
-          {t('grade.title')}
-        </h1>
+      {gradeError ? <Alert severity="warning" title={gradeError} /> : null}
 
-        {/* Statut actuel : grade + médaille + points — toujours affiché */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">
-            {t('grade.yourStatus')}
-          </h2>
-          {gradeError && (
-            <p className="text-sm text-amber-600 dark:text-amber-400 mb-3">{gradeError}</p>
-          )}
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <div className="shrink-0 relative w-28 h-28 flex items-center justify-center">
-              <img
-                src={BADGE_IMAGES[displayGrade.grade] || BADGE_IMAGES.bronze}
-                alt=""
-                className="w-24 h-24 sm:w-28 sm:h-28 object-contain absolute inset-0 m-auto"
-                onError={(e) => {
-                  const el = e.target as HTMLImageElement;
-                  el.style.visibility = 'hidden';
-                  const fallback = el.parentElement?.querySelector('.badge-fallback') as HTMLElement;
-                  if (fallback) fallback.classList.remove('hidden');
-                }}
-              />
-              <div
-                className="badge-fallback hidden w-24 h-24 sm:w-28 sm:h-28 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/40 text-4xl"
-                aria-hidden
-              >
-                🏅
-              </div>
-            </div>
-            <div className="flex-1 w-full min-w-0 text-center sm:text-left">
-              <p className="text-2xl font-bold text-gray-800 dark:text-white capitalize flex items-center justify-center sm:justify-start gap-2">
-                <img
-                  src={BADGE_IMAGES[displayGrade.grade] || BADGE_IMAGES.bronze}
-                  alt=""
-                  className="w-8 h-8 object-contain shrink-0"
-                  aria-hidden
-                />
-                {gradeLabel}
-              </p>
-              <p className="text-lg text-emerald-600 dark:text-emerald-400 font-semibold mt-1">
-                {displayGrade.points} {t('grade.points')}
+      <div className="grid gap-6 md:grid-cols-12">
+        <Card as="section" title={t('grade.yourStatus')} titleId="grade-status" className="self-start md:col-span-5">
+          <div className="flex items-center gap-5">
+            <GradeSeal level={level} className="shrink-0 text-accent-text" />
+            <div className="grid min-w-0 gap-1">
+              <p className="m-0 font-display text-h2 text-ink">{gradeName(displayGrade.grade)}</p>
+              <p className="m-0 font-mono text-body text-ink-2">
+                {t('grade.pointsCount', { count: displayGrade.points })}
               </p>
             </div>
           </div>
 
-          {/* Barre d'évolution des points — progression verte visible quand on marque routine/notification comme fait */}
-          <div className="mt-5 pt-4 border-t border-gray-200 dark:border-gray-600">
+          <div className="mt-6 grid gap-2 border-t border-line pt-5">
             {displayGrade.nextGrade ? (
               <>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                  {displayGrade.points} / {displayGrade.points - displayGrade.pointsInCurrent + displayGrade.pointsNeededForNext}{' '}
-                  {t('grade.points')} → {t(`grade.${displayGrade.nextGrade}` as Parameters<typeof t>[0])}
-                </p>
+                <div className="flex flex-wrap items-baseline justify-between gap-2 text-ui">
+                  <span className="text-ink">{t('grade.towards', { grade: gradeName(displayGrade.nextGrade) })}</span>
+                  <span className="font-mono text-ink-2">
+                    {number.format(displayGrade.points)} / {number.format(target)}
+                  </span>
+                </div>
                 <div
-                  className="w-full h-6 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600"
+                  className="h-2 overflow-hidden rounded-full bg-sunken"
                   role="progressbar"
                   aria-valuenow={displayGrade.points}
                   aria-valuemin={0}
-                  aria-valuemax={displayGrade.points - displayGrade.pointsInCurrent + displayGrade.pointsNeededForNext}
+                  aria-valuemax={target}
                   aria-label={t('grade.progressBarLabel')}
                 >
-                  <div
-                    className="h-full rounded-full transition-all duration-500 ease-out min-w-[12px] bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-500 dark:to-emerald-400 shadow-sm"
-                    style={{
-                      width: `${Math.max(0, Math.min(100, displayGrade.progressPercent ?? 0))}%`,
-                    }}
-                  />
+                  <div className="h-full rounded-full bg-accent transition-[width] duration-200" style={{ width: `${percent}%` }} />
                 </div>
-                <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-1.5 font-medium">
-                  {Math.round(displayGrade.progressPercent ?? 0)}% {t('grade.progressToNext')}
+                <p className="m-0 text-meta text-ink-2">
+                  {t('grade.remaining', { count: remaining, grade: gradeName(displayGrade.nextGrade) })}
                 </p>
               </>
             ) : (
-              <>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                  {displayGrade.points} {t('grade.points')} — {t(`grade.${displayGrade.grade}` as Parameters<typeof t>[0])} max
-                </p>
-                <div
-                  className="w-full h-6 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600"
-                  role="progressbar"
-                  aria-valuenow={displayGrade.points}
-                  aria-valuemin={0}
-                  aria-valuemax={displayGrade.points}
-                >
-                  <div className="h-full w-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-500 dark:to-emerald-400" />
-                </div>
-                <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-1.5 font-medium">
-                  100% — {t('grade.maxGrade')}
-                </p>
-              </>
+              <p className="m-0 text-ui text-ink">{t('grade.maxGrade')}</p>
             )}
           </div>
-        </div>
 
-        {/* Rappels du jour — créés par routines et préférences notifications */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-          <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
-            {t('grade.remindersToday')}
-          </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-            {t('grade.routinesCreateReminders')}
-          </p>
-          {events.length === 0 ? (
-            <p className="text-gray-500 dark:text-gray-400 text-sm">
-              {t('grade.noReminders')}
-            </p>
-          ) : (
-            <ul className="space-y-3">
-              {events.map((ev) => (
+          <ol className="m-0 mt-6 grid list-none grid-cols-5 gap-1 border-t border-line p-0 pt-5" aria-label={t('grade.scaleLabel')}>
+            {GRADES.map((key, index) => {
+              const state = index + 1 < level ? 'done' : index + 1 === level ? 'current' : 'todo';
+              return (
                 <li
-                  key={ev.id}
-                  className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/30"
+                  key={key}
+                  aria-current={state === 'current' ? 'step' : undefined}
+                  className="grid gap-2"
                 >
-                  <div className="min-w-0">
-                    <p className="font-medium text-gray-800 dark:text-white">
-                      {ev.label || ev.type}
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {new Date(ev.scheduledAt).toLocaleTimeString(locale, {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-2 shrink-0">
+                  <span aria-hidden="true" className={cx('h-1 rounded-full', state === 'todo' ? 'bg-line-strong' : 'bg-accent')} />
+                  <span className={cx('text-meta', state === 'current' ? 'font-semibold text-ink' : 'text-ink-2')}>
+                    {gradeName(key)}
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
+        </Card>
+
+        <Card as="section" title={t('grade.remindersToday')} titleId="reminders-today" className="self-start md:col-span-7">
+          <p className="m-0 mb-5 text-ui text-ink-2">{t('grade.remindersIntro')}</p>
+          {events.length === 0 ? (
+            <EmptyState
+              title={t('grade.noRemindersTitle')}
+              benefit={t('grade.noReminders')}
+              action={
+                <Link href="/parametres/notifications" className={buttonClasses({ size: 'sm', variant: 'secondary' })}>
+                  {t('grade.setUpReminders')}
+                </Link>
+              }
+            />
+          ) : (
+            <CareTimeline
+              label={t('grade.remindersToday')}
+              statusLabels={statusLabels}
+              items={events.map((ev) => ({
+                id: ev.id,
+                date: ev.scheduledAt,
+                title: ev.label || ev.type,
+                status: STATUS_OF[ev.status] ?? 'planned',
+                kind:
+                  ev.status === 'done' && ev.pointsAwarded
+                    ? t('grade.pointsAwarded', { count: ev.pointsAwarded })
+                    : ev.routineId
+                      ? t('grade.routineWorth')
+                      : undefined,
+                action: (
+                  <div className="flex flex-wrap items-center gap-2">
                     {ev.status === 'pending' ? (
                       <>
-                        <button
-                          type="button"
-                          disabled={actionId === ev.id}
-                          onClick={() => handleMark(ev.id, 'done')}
-                          className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 text-sm font-medium"
-                        >
-                          {ev.routineId
-                            ? t('grade.markDoneRoutine')
-                            : t('grade.markDoneNotification')}
-                        </button>
-                        <button
-                          type="button"
-                          disabled={actionId === ev.id}
-                          onClick={() => handleMark(ev.id, 'skipped')}
-                          className="px-4 py-2 border border-gray-300 dark:border-gray-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 text-sm"
-                        >
+                        <Button size="sm" variant="secondary" loading={actionId === ev.id} onClick={() => handleMark(ev.id, 'done')}>
+                          {t('grade.markDone')}
+                        </Button>
+                        <Button size="sm" variant="quiet" disabled={actionId === ev.id} onClick={() => handleMark(ev.id, 'skipped')}>
                           {t('grade.markSkipped')}
-                        </button>
+                        </Button>
                       </>
-                    ) : (
-                      <span
-                        className={`text-sm font-medium px-3 py-1 rounded-full ${
-                          ev.status === 'done'
-                            ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
-                            : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
-                        }`}
-                      >
-                      {ev.status === 'done'
-                        ? (ev.pointsAwarded
-                            ? `${t('grade.done')} (+${ev.pointsAwarded} pts)`
-                            : t('grade.done'))
-                        : t('grade.skipped')}
-                      </span>
-                    )}
-                    <button
-                      type="button"
-                      disabled={deletingId === ev.id}
+                    ) : null}
+                    <Button
+                      size="sm"
+                      variant="quiet"
+                      loading={deletingId === ev.id}
                       onClick={() => handleDeleteReminder(ev.id)}
-                      className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-colors"
-                      title={t('grade.deleteReminder')}
-                      aria-label={t('grade.deleteReminder')}
+                      aria-label={`${t('grade.deleteReminder')} — ${ev.label || ev.type}`}
                     >
-                      {deletingId === ev.id ? (
-                        <span className="inline-block w-5 h-5 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
-                      ) : (
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                      )}
-                    </button>
+                      {t('common.delete')}
+                    </Button>
                   </div>
-                </li>
-              ))}
-            </ul>
+                ),
+              }))}
+            />
           )}
-        </div>
-
-        <div className="mt-6">
-          <Link
-            href="/parametres"
-            className="inline-flex items-center text-emerald-600 dark:text-emerald-400 hover:underline"
-          >
-            ← {t('settings.title')}
-          </Link>
-        </div>
+        </Card>
       </div>
     </div>
   );

@@ -2,48 +2,48 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { CalendarDays, CalendarPlus, Link2Off, Pill, RefreshCw, Stethoscope, Syringe, Repeat } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { isGuestUser } from '@/lib/guest';
+import { careStatusOf, summarizeAgenda } from '@/lib/today';
 import { GuestEntry } from '@/components/guest/GuestEntry';
 import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
 import {
+  Alert,
+  Badge,
+  Button,
+  Card,
+  CareTimeline,
+  EmptyState,
+  Field,
+  SectionHeader,
+  Skeleton,
+  SkeletonGroup,
+  TaskPill,
+  buttonClasses,
+  cx,
+} from '@/components/ui';
+import {
   AGENDA_TYPES,
   buildFeedUrl,
+  displayDay,
   distinctAnimals,
   fetchAgenda,
   filterItems,
   getCalendarTokenStatus,
   groupByDay,
-  localDayKey,
   rangeFromToday,
   regenerateCalendarToken,
   revokeCalendarToken,
-  type AgendaItem,
   type AgendaItemType,
   type AgendaResponse,
 } from '@/lib/agenda';
 
 const RANGE_OPTIONS = [
-  { days: 7, labelKey: 'range7' },
-  { days: 30, labelKey: 'range30' },
-  { days: 92, labelKey: 'range90' },
+  { days: 7, labelKey: 'range7', titleKey: 'timelineTitle7' },
+  { days: 30, labelKey: 'range30', titleKey: 'timelineTitle30' },
+  { days: 92, labelKey: 'range90', titleKey: 'timelineTitle90' },
 ] as const;
-
-const TYPE_ICONS: Record<AgendaItemType, typeof Pill> = {
-  routine: Repeat,
-  medication: Pill,
-  vaccination: Syringe,
-  vet_appointment: Stethoscope,
-};
-
-const TYPE_BADGE_CLASS: Record<AgendaItemType, string> = {
-  routine: 'bg-emerald-50 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200',
-  medication: 'bg-violet-50 text-violet-800 dark:bg-violet-900/40 dark:text-violet-200',
-  vaccination: 'bg-amber-50 text-amber-900 dark:bg-amber-900/40 dark:text-amber-100',
-  vet_appointment: 'bg-sky-50 text-sky-900 dark:bg-sky-900/40 dark:text-sky-100',
-};
 
 const FEED_URL_KEY = 'captivia:agenda-feed-url';
 
@@ -73,8 +73,14 @@ function dayKeyToDate(day: string): Date {
   return new Date(y, m - 1, d, 12);
 }
 
+/**
+ * Agenda des soins : la frise de toutes les échéances (routines, traitements, vaccins, visites)
+ * sur 7 jours, 30 jours ou 3 mois, filtrable par animal et par type ; à côté, l'abonnement du
+ * calendrier personnel (flux iCalendar, comptes seulement).
+ */
 export default function AgendaPage() {
   const t = useTranslations('agenda');
+  const tAll = useTranslations();
   const locale = useLocale();
   const tGuest = useTranslations('guest');
   const { user, token, isLoading: authLoading } = useAuth();
@@ -85,6 +91,8 @@ export default function AgendaPage() {
   const [failed, setFailed] = useState(false);
   const [animalId, setAnimalId] = useState('');
   const [type, setType] = useState<AgendaItemType | ''>('');
+  // Horloge figée au montage : statuts cohérents pendant la visite (comme « Aujourd'hui »).
+  const [now] = useState(() => new Date());
 
   const [feedActive, setFeedActive] = useState(false);
   const [feedUrl, setFeedUrl] = useState<string | null>(null);
@@ -126,17 +134,12 @@ export default function AgendaPage() {
     };
   }, [token, user]);
 
-  const dayFormat = useMemo(
-    () => new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
-    [locale],
-  );
-  const timeFormat = useMemo(() => new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit' }), [locale]);
-
   const items = useMemo(() => data?.items ?? [], [data]);
   const animals = useMemo(() => distinctAnimals(items), [items]);
   const filtered = useMemo(() => filterItems(items, { animalId, type }), [items, animalId, type]);
-  const groups = useMemo(() => groupByDay(filtered), [filtered]);
-  const todayKey = localDayKey(new Date());
+  // Ordre de la frise : par jour d'affichage, journées entières en tête, puis par heure.
+  const ordered = useMemo(() => groupByDay(filtered).flatMap((group) => group.items), [filtered]);
+  const summary = useMemo(() => summarizeAgenda(filtered, now), [filtered, now]);
   const filtersActive = animalId !== '' || type !== '';
 
   const copy = async (url: string, successKey: 'copied' | 'regenerated') => {
@@ -199,334 +202,283 @@ export default function AgendaPage() {
 
   if (authLoading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <p className="text-gray-600 dark:text-gray-300" role="status">
-          {t('loading')}
-        </p>
+      <div className="cv-container py-6 sm:py-8">
+        <SkeletonGroup label={t('loading')} className="grid gap-6">
+          <Skeleton width="40%" height={40} />
+          <div className="grid gap-6 lg:grid-cols-12">
+            <Skeleton shape="block" height={420} className="lg:col-span-8" />
+            <Skeleton shape="block" height={260} className="lg:col-span-4" />
+          </div>
+        </SkeletonGroup>
       </div>
     );
   }
 
-  const buttonBase =
-    'inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:opacity-60';
-  const selectClass =
-    'w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 dark:border-gray-600 dark:bg-gray-800 dark:text-white';
+  const guest = isGuestUser(user);
+  const range = RANGE_OPTIONS.find((opt) => opt.days === days) ?? RANGE_OPTIONS[1];
+  const { from, to } = rangeFromToday(days, now);
+  const rangeFormat = new Intl.DateTimeFormat(locale, { day: '2-digit', month: '2-digit' });
+  const rangeLabel = `${rangeFormat.format(dayKeyToDate(from))} → ${rangeFormat.format(dayKeyToDate(to))}`;
+  const statusLabels = {
+    done: tAll('today.status.done'),
+    due: tAll('today.status.due'),
+    overdue: tAll('today.status.overdue'),
+    planned: tAll('today.status.planned'),
+    skipped: tAll('today.status.skipped'),
+  };
+  const subscribeLabel = !feedActive ? t('sub.button') : feedUrl ? t('sub.buttonCopy') : t('sub.buttonNew');
 
-  return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-w-0">
-        <header className="mb-6">
-          <h1 className="flex items-center gap-3 text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
-            <CalendarDays className="h-7 w-7 text-emerald-700 dark:text-emerald-400" aria-hidden="true" />
-            {t('title')}
-          </h1>
-          <p className="mt-2 text-gray-600 dark:text-gray-300">{t('subtitle')}</p>
-        </header>
-
-        {/* Abonnement calendrier externe — réservé aux comptes : expliqué à l'invité. */}
-        {isGuestUser(user) ? (
-          <GuestFeatureNote className="mb-6">{tGuest('calendarNote')}</GuestFeatureNote>
-        ) : (
-        <section
-          aria-labelledby="agenda-sub-title"
-          className="mb-6 rounded-xl border border-gray-200 bg-white p-4 sm:p-5 dark:border-gray-700 dark:bg-gray-800"
-        >
-          <h2 id="agenda-sub-title" className="text-lg font-semibold text-gray-800 dark:text-white">
-            {t('sub.title')}
-          </h2>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">{t('sub.description')}</p>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-            {feedActive ? t('sub.active') : t('sub.inactive')}
-          </p>
-
-          <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-            <button
-              type="button"
-              onClick={handleSubscribe}
-              disabled={feedBusy}
-              className={`${buttonBase} bg-emerald-700 text-white hover:bg-emerald-800`}
-            >
-              <CalendarPlus className="h-4 w-4" aria-hidden="true" />
-              {t('sub.button')}
-            </button>
-            {feedActive && !confirmRegenerate && (
-              <button
-                type="button"
-                onClick={() => setConfirmRegenerate(true)}
-                disabled={feedBusy}
-                className={`${buttonBase} border border-gray-300 text-gray-800 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-700`}
-              >
-                <RefreshCw className="h-4 w-4" aria-hidden="true" />
-                {t('sub.regenerate')}
-              </button>
-            )}
-            {feedActive && (
-              <button
-                type="button"
-                onClick={handleRevoke}
-                disabled={feedBusy}
-                className={`${buttonBase} border border-gray-300 text-gray-800 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-700`}
-              >
-                <Link2Off className="h-4 w-4" aria-hidden="true" />
-                {t('sub.revoke')}
-              </button>
-            )}
-          </div>
-
-          {confirmRegenerate && (
-            <div
-              role="alertdialog"
-              aria-labelledby="agenda-regenerate-question"
-              className="mt-3 rounded-lg border border-amber-300 bg-amber-50 p-3 text-amber-900 dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-100"
-            >
-              <p id="agenda-regenerate-question" className="text-sm font-medium">
-                {t('sub.regenerateConfirm')}
-              </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                <button
-                  type="button"
-                  onClick={() => void generate('regenerated')}
-                  disabled={feedBusy}
-                  className={`${buttonBase} bg-amber-700 text-white hover:bg-amber-800`}
-                >
-                  {t('sub.confirmYes')}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setConfirmRegenerate(false)}
-                  className={`${buttonBase} border border-amber-700 text-amber-900 dark:text-amber-100`}
-                >
-                  {t('sub.confirmNo')}
-                </button>
+  const timeline = (
+    <Card
+      as="section"
+      title={t(range.titleKey)}
+      titleId="agenda-timeline-title"
+      actions={
+        data && !failed && filtered.length > 0 ? (
+          <span className="font-mono text-meta text-ink-2">{t('countShort', { count: filtered.length })}</span>
+        ) : undefined
+      }
+    >
+      <div aria-busy={loading}>
+        {loading && !data ? (
+          <SkeletonGroup label={t('loading')} className="grid gap-5">
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} className="grid grid-cols-[5rem_minmax(0,1fr)] gap-4">
+                <Skeleton width="80%" />
+                <Skeleton width={`${72 - i * 10}%`} />
               </div>
-            </div>
-          )}
-
-          {feedActive && feedUrl && (
-            <div className="mt-3">
-              <label htmlFor="agenda-feed-url" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                {t('sub.urlLabel')}
-              </label>
-              <input
-                id="agenda-feed-url"
-                type="text"
-                readOnly
-                value={feedUrl}
-                onFocus={(e) => e.currentTarget.select()}
-                className="mt-1 w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 font-mono text-xs text-gray-800 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
-              />
-              <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">{t('sub.secret')}</p>
-            </div>
-          )}
-
-          <p
-            role="status"
-            aria-live="polite"
-            className={`mt-3 text-sm ${feedMessage?.error ? 'text-red-700 dark:text-red-300' : 'text-emerald-800 dark:text-emerald-300'}`}
-          >
-            {feedMessage?.text}
-          </p>
-        </section>
-        )}
-
-        {/* Période et filtres */}
-        <div role="group" aria-label={t('filtersLabel')} className="mb-6 grid gap-4 sm:grid-cols-3">
-          <div>
-            <span id="agenda-range-label" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200">
-              {t('rangeLabel')}
-            </span>
-            <div role="group" aria-labelledby="agenda-range-label" className="flex overflow-hidden rounded-lg border border-gray-300 dark:border-gray-600">
-              {RANGE_OPTIONS.map((opt) => (
-                <button
-                  key={opt.days}
-                  type="button"
-                  aria-pressed={days === opt.days}
-                  onClick={() => setDays(opt.days)}
-                  className={`flex-1 px-2 py-2 text-sm font-medium focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-emerald-700 ${
-                    days === opt.days
-                      ? 'bg-emerald-700 text-white'
-                      : 'bg-white text-gray-800 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  {t(opt.labelKey)}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div>
-            <label htmlFor="agenda-animal" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200">
-              {t('animalFilter')}
-            </label>
-            <select id="agenda-animal" value={animalId} onChange={(e) => setAnimalId(e.target.value)} className={selectClass}>
-              <option value="">{t('allAnimals')}</option>
-              {animals.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="agenda-type" className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200">
-              {t('typeFilter')}
-            </label>
-            <select
-              id="agenda-type"
-              value={type}
-              onChange={(e) => setType(e.target.value as AgendaItemType | '')}
-              className={selectClass}
-            >
-              <option value="">{t('allTypes')}</option>
-              {AGENDA_TYPES.map((value) => (
-                <option key={value} value={value}>
-                  {t(`types.${value}`)}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        {/* Contenu */}
-        <div aria-busy={loading}>
-          {loading && !data && (
-            <p role="status" className="py-10 text-center text-gray-600 dark:text-gray-300">
-              {t('loading')}
-            </p>
-          )}
-
-          {failed && (
-            <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 dark:border-red-800 dark:bg-red-900/30 dark:text-red-200">
-              <p>{t('error')}</p>
-              <button
-                type="button"
-                onClick={() => void load()}
-                className={`${buttonBase} mt-3 bg-red-700 text-white hover:bg-red-800`}
-              >
+            ))}
+          </SkeletonGroup>
+        ) : failed ? (
+          <Alert
+            severity="urgent"
+            title={t('error')}
+            action={
+              <Button variant="secondary" size="sm" onClick={() => void load()}>
                 {t('retry')}
-              </button>
-            </div>
-          )}
+              </Button>
+            }
+          />
+        ) : data ? (
+          <div className="grid gap-5">
+            {data.truncated ? <Alert severity="warning" title={t('truncated')} /> : null}
 
-          {!failed && data && (
-            <>
-              {data.truncated && (
-                <p role="status" className="mb-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900 dark:bg-amber-900/30 dark:text-amber-100">
-                  {t('truncated')}
-                </p>
-              )}
-
-              {items.length === 0 ? (
-                <div className="rounded-xl border border-dashed border-gray-300 bg-white p-8 text-center dark:border-gray-600 dark:bg-gray-800">
-                  <CalendarDays className="mx-auto h-10 w-10 text-gray-400" aria-hidden="true" />
-                  <h2 className="mt-3 text-lg font-semibold text-gray-800 dark:text-white">{t('emptyTitle')}</h2>
-                  <p className="mt-1 text-gray-600 dark:text-gray-300">{t('emptyHint')}</p>
-                  <Link
-                    href="/mes-animaux"
-                    className={`${buttonBase} mt-4 bg-emerald-700 text-white hover:bg-emerald-800`}
-                  >
+            {items.length === 0 ? (
+              <EmptyState
+                title={t('emptyTitle')}
+                benefit={t('emptyHint')}
+                action={
+                  <Link href="/mes-animaux" className={buttonClasses({ size: 'sm' })}>
                     {t('emptyAction')}
                   </Link>
-                </div>
-              ) : filtered.length === 0 ? (
-                <div className="rounded-xl bg-white p-6 text-center dark:bg-gray-800">
-                  <p className="text-gray-700 dark:text-gray-200">{t('noMatch')}</p>
-                  {filtersActive && (
-                    <button
-                      type="button"
+                }
+              />
+            ) : filtered.length === 0 ? (
+              <EmptyState
+                title={t('noMatch')}
+                benefit={t('noMatchBenefit')}
+                action={
+                  filtersActive ? (
+                    <Button
+                      variant="secondary"
+                      size="sm"
                       onClick={() => {
                         setAnimalId('');
                         setType('');
                       }}
-                      className={`${buttonBase} mt-3 border border-gray-300 text-gray-800 hover:bg-gray-100 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-gray-700`}
                     >
                       {t('resetFilters')}
-                    </button>
-                  )}
-                </div>
-              ) : (
-                <>
-                  <p className="sr-only" role="status" aria-live="polite">
-                    {t('count', { count: filtered.length })}
-                  </p>
-                  <div aria-label={t('listLabel')} role="region" className="space-y-6">
-                    {groups.map((group) => {
-                      const headingId = `agenda-day-${group.day}`;
-                      return (
-                        <section key={group.day} aria-labelledby={headingId}>
-                          <h2
-                            id={headingId}
-                            className="mb-2 flex flex-wrap items-center gap-2 text-base font-semibold capitalize text-gray-800 dark:text-white"
-                          >
-                            <time dateTime={group.day}>{dayFormat.format(dayKeyToDate(group.day))}</time>
-                            {group.day === todayKey && (
-                              <span className="rounded-full bg-emerald-700 px-2 py-0.5 text-xs font-semibold normal-case text-white">
-                                {t('today')}
-                              </span>
-                            )}
-                          </h2>
-                          <ul className="divide-y divide-gray-100 overflow-hidden rounded-xl border border-gray-200 bg-white dark:divide-gray-700 dark:border-gray-700 dark:bg-gray-800">
-                            {group.items.map((item) => (
-                              <AgendaRow
-                                key={item.id}
-                                item={item}
-                                time={item.allDay ? t('allDay') : timeFormat.format(new Date(item.date))}
-                                typeLabel={t(`types.${item.type}`)}
-                                statusLabel={t(`status.${item.status}`)}
-                              />
-                            ))}
-                          </ul>
-                        </section>
-                      );
-                    })}
-                  </div>
-                </>
-              )}
-            </>
-          )}
+                    </Button>
+                  ) : undefined
+                }
+              />
+            ) : (
+              <>
+                <p className="sr-only" role="status" aria-live="polite">
+                  {t('count', { count: filtered.length })}
+                </p>
+                <CareTimeline
+                  label={t('listLabel')}
+                  allDayLabel={tAll('today.allDayShort')}
+                  statusLabels={statusLabels}
+                  items={ordered.map((item) => ({
+                    id: item.id,
+                    date: item.allDay ? `${displayDay(item)}T12:00:00` : item.date,
+                    allDay: item.allDay,
+                    title: item.title,
+                    detail: [animalId === '' ? item.animalName : null, item.detail]
+                      .filter(Boolean)
+                      .join(' · ') || undefined,
+                    status: careStatusOf(item, now),
+                    kind: t(`types.${item.type}`),
+                  }))}
+                />
+              </>
+            )}
+          </div>
+        ) : null}
+      </div>
+    </Card>
+  );
+
+  return (
+    <div className="cv-container grid gap-6 py-6 sm:py-8">
+      <SectionHeader title={t('title')} description={t('subtitle')} marginNote={rangeLabel} marginLabel={t('rangeShown')} />
+
+      <div className="grid gap-6 lg:grid-cols-12">
+        <div className="grid min-w-0 content-start gap-6 lg:col-span-8">
+          {/* Période et filtres */}
+          <div role="group" aria-label={t('filtersLabel')} className="grid gap-4 sm:grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)] sm:items-end">
+            <div className="grid gap-1.5">
+              <span id="agenda-range-label" className="text-ui font-medium text-ink">
+                {t('rangeLabel')}
+              </span>
+              <div
+                role="group"
+                aria-labelledby="agenda-range-label"
+                className="inline-flex w-full rounded-control border border-line-field bg-surface p-0.5 sm:w-auto"
+              >
+                {RANGE_OPTIONS.map((opt) => (
+                  <button
+                    key={opt.days}
+                    type="button"
+                    aria-pressed={days === opt.days}
+                    onClick={() => setDays(opt.days)}
+                    className={cx(
+                      'min-h-[2.375rem] flex-1 rounded-[4px] px-3 text-ui font-medium whitespace-nowrap transition-colors pointer-coarse:min-h-11 sm:flex-none',
+                      days === opt.days ? 'bg-accent text-on-accent' : 'text-ink hover:bg-sunken',
+                    )}
+                  >
+                    {t(opt.labelKey)}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <Field label={t('animalFilter')} id="agenda-animal">
+              <select value={animalId} onChange={(e) => setAnimalId(e.target.value)}>
+                <option value="">{t('allAnimals')}</option>
+                {animals.map((a) => (
+                  <option key={a.id} value={a.id}>
+                    {a.name}
+                  </option>
+                ))}
+              </select>
+            </Field>
+            <Field label={t('typeFilter')} id="agenda-type">
+              <select value={type} onChange={(e) => setType(e.target.value as AgendaItemType | '')}>
+                <option value="">{t('allTypes')}</option>
+                {AGENDA_TYPES.map((value) => (
+                  <option key={value} value={value}>
+                    {t(`types.${value}`)}
+                  </option>
+                ))}
+              </select>
+            </Field>
+          </div>
+
+          {data && !failed && filtered.length > 0 ? (
+            <div className="flex flex-wrap gap-2">
+              <TaskPill count={summary.due} label={tAll('today.pillDue', { count: summary.due })} />
+              {summary.overdue > 0 ? (
+                <TaskPill count={summary.overdue} tone="danger" label={tAll('today.pillOverdue', { count: summary.overdue })} />
+              ) : null}
+              {summary.appointments > 0 ? (
+                <TaskPill count={summary.appointments} tone="neutral" label={t('pillAppointments', { count: summary.appointments })} />
+              ) : null}
+            </div>
+          ) : null}
+
+          {timeline}
         </div>
+
+        {/* Abonnement calendrier externe — réservé aux comptes : expliqué à l'invité. */}
+        <aside className="grid min-w-0 content-start gap-6 lg:col-span-4">
+          {guest ? (
+            <GuestFeatureNote>{tGuest('calendarNote')}</GuestFeatureNote>
+          ) : (
+            <Card
+              as="section"
+              title={t('sub.title')}
+              titleId="agenda-sub-title"
+              headingLevel={2}
+              actions={
+                <Badge tone={feedActive ? 'ok' : 'neutral'} dot>
+                  {feedActive ? t('sub.activeBadge') : t('sub.inactiveBadge')}
+                </Badge>
+              }
+            >
+              <div className="grid gap-5">
+                <p className="m-0 text-ui text-ink-2">{t('sub.description')}</p>
+                <ol className="m-0 grid list-none gap-0 p-0">
+                  {[1, 2, 3].map((n) => (
+                    <li key={n} className="grid grid-cols-[1.75rem_minmax(0,1fr)] gap-x-2 border-t border-line py-2.5 text-ui">
+                      <span className="font-mono text-meta leading-6 text-ink-2">{String(n).padStart(2, '0')}</span>
+                      <span className="text-ink">{t(`sub.step${n}`)}</span>
+                    </li>
+                  ))}
+                </ol>
+
+                <Button fullWidth onClick={handleSubscribe} loading={feedBusy}>
+                  {subscribeLabel}
+                </Button>
+
+                {feedActive && feedUrl ? (
+                  <Field label={t('sub.urlLabel')} hint={t('sub.secret')} id="agenda-feed-url">
+                    <input
+                      type="text"
+                      readOnly
+                      value={feedUrl}
+                      onFocus={(e) => e.currentTarget.select()}
+                      className="font-mono text-meta"
+                    />
+                  </Field>
+                ) : null}
+
+                {confirmRegenerate ? (
+                  <div
+                    role="alertdialog"
+                    aria-labelledby="agenda-regenerate-question"
+                    className="grid gap-3 rounded-control bg-warn-soft p-4 text-ink shadow-[inset_3px_0_0_var(--warn)]"
+                  >
+                    <p id="agenda-regenerate-question" className="m-0 text-ui font-medium">
+                      {t('sub.regenerateConfirm')}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Button size="sm" variant="secondary" onClick={() => void generate('regenerated')} disabled={feedBusy}>
+                        {t('sub.confirmYes')}
+                      </Button>
+                      <Button size="sm" variant="quiet" onClick={() => setConfirmRegenerate(false)}>
+                        {t('sub.confirmNo')}
+                      </Button>
+                    </div>
+                  </div>
+                ) : null}
+
+                {feedActive ? (
+                  <div className="flex flex-wrap gap-2 border-t border-line pt-4">
+                    {!confirmRegenerate ? (
+                      <Button size="sm" variant="quiet" onClick={() => setConfirmRegenerate(true)} disabled={feedBusy}>
+                        {t('sub.regenerate')}
+                      </Button>
+                    ) : null}
+                    <Button size="sm" variant="quiet" onClick={handleRevoke} disabled={feedBusy}>
+                      {t('sub.revoke')}
+                    </Button>
+                  </div>
+                ) : null}
+
+                <p
+                  role="status"
+                  aria-live="polite"
+                  className={cx('m-0 text-ui empty:hidden', feedMessage?.error ? 'text-danger' : 'text-ok')}
+                >
+                  {feedMessage?.text}
+                </p>
+              </div>
+            </Card>
+          )}
+        </aside>
       </div>
     </div>
-  );
-}
-
-function AgendaRow({
-  item,
-  time,
-  typeLabel,
-  statusLabel,
-}: {
-  item: AgendaItem;
-  time: string;
-  typeLabel: string;
-  statusLabel: string;
-}) {
-  const Icon = TYPE_ICONS[item.type];
-  const muted = item.status === 'done' || item.status === 'skipped' || item.status === 'cancelled';
-  return (
-    <li className="flex flex-col gap-1 p-3 sm:flex-row sm:items-center sm:gap-4 sm:p-4">
-      <div className="w-32 shrink-0 text-sm font-semibold tabular-nums text-gray-700 dark:text-gray-200">
-        <time dateTime={item.allDay ? item.day : item.date}>{time}</time>
-      </div>
-      <div className="min-w-0 flex-1">
-        <p className={`break-words font-medium text-gray-900 dark:text-white ${muted ? 'line-through opacity-70' : ''}`}>
-          {item.title}
-        </p>
-        <p className="break-words text-sm text-gray-600 dark:text-gray-300">
-          {item.animalName}
-          {item.detail ? ` · ${item.detail}` : ''}
-        </p>
-      </div>
-      <div className="flex flex-wrap items-center gap-2">
-        <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${TYPE_BADGE_CLASS[item.type]}`}>
-          <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-          {typeLabel}
-        </span>
-        {item.status !== 'pending' && (
-          <span className="rounded-full border border-gray-300 px-2.5 py-1 text-xs font-medium text-gray-700 dark:border-gray-600 dark:text-gray-200">
-            {statusLabel}
-          </span>
-        )}
-      </div>
-    </li>
   );
 }

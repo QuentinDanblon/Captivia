@@ -5,7 +5,8 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { isGuestUser } from '@/lib/guest';
-import { Link } from '@/i18n/navigation';
+import { Alert, Badge, Button, Card, EmptyState, Field, Skeleton, SkeletonGroup, cx } from '@/components/ui';
+import { SettingsHeader } from '../_components/SettingsHeader';
 
 /** Fréquences de répétition */
 export type RecurrenceKind =
@@ -111,7 +112,7 @@ export default function NotificationsPreferencesPage() {
     return id ? t(`notifications.suggested.${id}`) : type;
   };
   const router = useRouter();
-  const { user, token, logout, isLoading: authLoading } = useAuth();
+  const { user, token, isLoading: authLoading } = useAuth();
   const [preferences, setPreferences] = useState<NotificationPreferences | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -126,7 +127,6 @@ export default function NotificationsPreferencesPage() {
   const [newTypeLabel, setNewTypeLabel] = useState('');
   /** Édition du libellé : type en cours d’édition => valeur du champ */
   const [editingType, setEditingType] = useState<{ key: string; value: string } | null>(null);
-  const [activeTab, setActiveTab] = useState<'config' | 'my-notifications'>('config');
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -464,409 +464,145 @@ export default function NotificationsPreferencesPage() {
 
   if (authLoading || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">
-            {t('common.loading')}
-          </p>
-        </div>
+      <div className="cv-container py-6 sm:py-8">
+        <SkeletonGroup label={t('common.loading')} className="grid gap-6">
+          <Skeleton width="40%" height={40} />
+          <div className="grid gap-6 lg:grid-cols-12">
+            <Skeleton shape="block" height={460} className="lg:col-span-8" />
+            <Skeleton shape="block" height={300} className="lg:col-span-4" />
+          </div>
+        </SkeletonGroup>
       </div>
     );
   }
 
+  const guest = isGuestUser(user);
+  const typeEntries = Object.entries(preferences?.types ?? {});
+  const suggestions = SUGGESTED_NOTIFICATION_TYPES.filter((suggested) => (preferences?.types ?? {})[suggested] === undefined);
+  const scheduleSummary = (schedule: TypeSchedule) => {
+    const recurrence = RECURRENCE_OPTIONS.find((o) => o.value === schedule.recurrence)?.labelKey;
+    const parts: string[] = [];
+    parts.push(schedule.time);
+    if (schedule.recurrence === 'hourly') parts.push(t('notifications.everyHours', { count: schedule.intervalHours ?? 2 }));
+    else if (recurrence) parts.push(t(recurrence as Parameters<typeof t>[0]));
+    if (schedule.recurrence === 'weekly' && schedule.weekDay != null) {
+      parts.push(t(`notifications.weekDay${schedule.weekDay}` as Parameters<typeof t>[0]));
+    }
+    if (schedule.recurrence === 'monthly' && schedule.dayOfMonth != null) {
+      parts.push(t('notifications.onDay', { day: schedule.dayOfMonth }));
+    }
+    if (schedule.recurrence === 'once' && schedule.date) parts.push(schedule.date);
+    return parts.join(' · ');
+  };
+  const pushBadge =
+    pushStatus === 'subscribed' ? (
+      <Badge tone="ok" dot>
+        {t('notifications.pushOn')}
+      </Badge>
+    ) : pushStatus === 'denied' ? (
+      <Badge tone="warn" dot>
+        {t('notifications.pushOff')}
+      </Badge>
+    ) : pushStatus === null ? null : (
+      <Badge>{t('notifications.pushOff')}</Badge>
+    );
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Breadcrumb */}
-      <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 py-4 min-w-0">
-        <nav className="text-sm text-gray-500">
-          <Link href="/parametres" className="hover:text-emerald-600">
-            {t('settings.title')}
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="text-gray-800 dark:text-white">{t('notifications.title')}</span>
-        </nav>
-      </div>
+    <div className="cv-container grid gap-6 py-6 sm:py-8">
+      <SettingsHeader title={t('notifications.pageTitle')} description={t('notifications.pageLead')} />
 
-      <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-w-0">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white mb-2">
-          {t('notifications.title')}
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {t('notifications.description')}
-        </p>
+      <div className="grid gap-6 lg:grid-cols-12">
+        <div className="grid min-w-0 content-start gap-6 lg:col-span-8">
+          {/* Rappels : sujets suggérés + personnalisation (activation, horaire, répétition) */}
+          {preferences ? (
+            <Card as="section" title={t('notifications.remindersTitle')} titleId="reminders-title">
+              <p className="m-0 mb-5 text-ui text-ink-2">{t('notifications.remindersIntro')}</p>
 
-        {/* Tabs: Configurer | Mes notifications */}
-        <div className="flex gap-2 mb-6 border-b border-gray-200 dark:border-gray-700">
-          <button
-            type="button"
-            onClick={() => setActiveTab('config')}
-            className={`px-4 py-2 font-medium rounded-t-lg transition-colors ${
-              activeTab === 'config'
-                ? 'bg-white dark:bg-gray-800 text-emerald-600 border border-b-0 border-gray-200 dark:border-gray-700 -mb-px'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
-            }`}
-          >
-            {t('notifications.tabConfig')}
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('my-notifications')}
-            className={`px-4 py-2 font-medium rounded-t-lg transition-colors ${
-              activeTab === 'my-notifications'
-                ? 'bg-white dark:bg-gray-800 text-emerald-600 border border-b-0 border-gray-200 dark:border-gray-700 -mb-px'
-                : 'text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200'
-            }`}
-          >
-            {t('notifications.tabMyNotifications')}
-          </button>
-        </div>
-
-        <div className="space-y-6">
-          {/* Tab: Mes notifications — liste des notifications enregistrées */}
-          {activeTab === 'my-notifications' && preferences && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
-                {t('notifications.tabMyNotifications')}
-              </h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                {t('notifications.myNotificationsDescription')}
-              </p>
-              {Object.entries(preferences.types ?? {}).length === 0 ? (
-                <p className="text-gray-500 dark:text-gray-400 py-4">
-                  {t('notifications.noNotificationsSaved')}
-                </p>
+              {typeEntries.length === 0 ? (
+                <EmptyState title={t('notifications.emptyTitle')} benefit={t('notifications.myTypesHint')} />
               ) : (
-                <div className="space-y-3">
-                  {Object.entries(preferences.types ?? {}).map(([type, enabled]) => {
-                    const schedule: TypeSchedule =
-                      (preferences.typeSchedules ?? {})[type] ?? DEFAULT_TYPE_SCHEDULE;
-                    const recurrenceLabel =
-                      RECURRENCE_OPTIONS.find((o) => o.value === schedule.recurrence)?.labelKey ||
-                      schedule.recurrence;
+                <ul className="m-0 grid list-none border-t border-line p-0">
+                  {typeEntries.map(([type, enabled], index) => {
+                    const schedule: TypeSchedule = (preferences.typeSchedules ?? {})[type] ?? DEFAULT_TYPE_SCHEDULE;
+                    const idBase = `reminder-${index}`;
+                    const editing = editingType?.key === type;
                     return (
-                      <div
-                        key={type}
-                        className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/30"
-                      >
-                        <div>
-                          <p className="font-medium text-gray-800 dark:text-white">{type}</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {t('notifications.time')} {schedule.time} · {t(recurrenceLabel as Parameters<typeof t>[0])}
-                            {schedule.recurrence === 'weekly' && schedule.weekDay != null && (
-                              <> · {t(`notifications.weekDay${schedule.weekDay}` as Parameters<typeof t>[0])}</>
-                            )}
-                            {schedule.recurrence === 'once' && schedule.date && (
-                              <> · {schedule.date}</>
-                            )}
-                          </p>
-                          <span
-                            className={`inline-block mt-1 px-2 py-0.5 text-xs rounded-full ${
-                              enabled
-                                ? 'bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200'
-                                : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
-                            }`}
-                          >
-                            {enabled ? t('notifications.enabled') : t('notifications.disabled')}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setEditingType({ key: type, value: type });
-                              setActiveTab('config');
-                            }}
-                            className="px-3 py-1.5 text-sm bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
-                          >
-                            {t('common.edit')}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => removeType(type)}
-                            className="px-3 py-1.5 text-sm border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/30"
-                          >
-                            {t('common.delete')}
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Tab: Configurer — contenu actuel */}
-          {activeTab === 'config' && (
-            <>
-          {/* Enable Notifications */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-            <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
-              {t('notifications.enable')}
-            </h2>
-            {pushStatus === null && (
-              <p className="text-sm text-gray-500 dark:text-gray-400">…</p>
-            )}
-            {pushStatus === 'unsupported' && (
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                {t('notifications.pushUnsupported')}
-              </p>
-            )}
-            {pushStatus === 'unavailable' && (
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                {t('notifications.pushUnavailable')}
-              </p>
-            )}
-            {pushStatus === 'denied' && (
-              <p className="text-sm text-amber-700 dark:text-amber-400">
-                {t('notifications.pushBlocked')}
-              </p>
-            )}
-            {pushStatus === 'unsubscribed' && (
-              <div>
-                <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
-                  {t('notifications.enableBrowser')}
-                </p>
-                <button
-                  type="button"
-                  onClick={enablePush}
-                  disabled={pushBusy}
-                  className="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {pushBusy ? t('notifications.enabling') : t('notifications.enableButton')}
-                </button>
-              </div>
-            )}
-            {pushStatus === 'subscribed' && (
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-3 text-green-600">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span>{t('notifications.notificationsEnabled')}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={disablePush}
-                  disabled={pushBusy}
-                  className="px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {pushBusy ? t('notifications.disabling') : t('notifications.disableButton')}
-                </button>
-              </div>
-            )}
-            {pushError && (
-              <p role="alert" className="mt-3 text-sm text-red-600 dark:text-red-400">
-                {t('notifications.pushError')}
-              </p>
-            )}
-          </div>
-
-          {/* Canal de réception : téléphone (push) ou email — routines et notifications créent les rappels */}
-          {preferences && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold mb-2 text-gray-800 dark:text-white">
-                {t('notifications.deliveryChannel')}
-              </h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                {t('notifications.deliveryDescription')}
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {(['push', 'email', 'both'] as const).map((channel) => (
-                  <button
-                    key={channel}
-                    type="button"
-                    // Invité : aucune adresse, rappels par notification seulement (explication ci-dessous).
-                    disabled={channel !== 'push' && isGuestUser(user)}
-                    aria-describedby={channel !== 'push' && isGuestUser(user) ? 'delivery-guest-note' : undefined}
-                    onClick={() => {
-                      setPreferences((p) => (p ? { ...p, deliveryChannel: channel } : p));
-                      if (autoSaveTimeout) {
-                        clearTimeout(autoSaveTimeout);
-                        setAutoSaveTimeout(null);
-                      }
-                      handleSavePreferencesBackend({ ...preferences, deliveryChannel: channel });
-                    }}
-                    className={`px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
-                      (preferences.deliveryChannel ?? 'push') === channel
-                        ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300'
-                        : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
-                    }`}
-                  >
-                    {channel === 'push' && t('notifications.deliveryPush')}
-                    {channel === 'email' && t('notifications.deliveryEmail')}
-                    {channel === 'both' && t('notifications.deliveryBoth')}
-                  </button>
-                ))}
-              </div>
-              {isGuestUser(user) && (
-                <p id="delivery-guest-note" className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-                  {t('guest.emailChannelNote')}
-                </p>
-              )}
-            </div>
-          )}
-
-          {/* Types de notifications : propositions + personnalisation */}
-          {preferences && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
-                {t('notifications.types')}
-              </h2>
-              {saveMessage && (
-                <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-600 dark:text-green-400 text-sm">
-                  {saveMessage}
-                </div>
-              )}
-
-              {/* Sujets suggérés */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">
-                  {t('notifications.suggestedTypes')}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {SUGGESTED_NOTIFICATION_TYPES.filter(
-                    (suggested) => (preferences.types ?? {})[suggested] === undefined,
-                  ).map((label) => (
-                    <button
-                      key={label}
-                      type="button"
-                      onClick={() => addType(label)}
-                      className="px-3 py-1.5 text-sm rounded-lg border border-emerald-500 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
-                    >
-                      + {typeLabel(label)}
-                    </button>
-                  ))}
-                  {SUGGESTED_NOTIFICATION_TYPES.every(
-                    (s) => (preferences.types ?? {})[s] !== undefined,
-                  ) && SUGGESTED_NOTIFICATION_TYPES.length > 0 && (
-                    <span className="text-sm text-gray-500 dark:text-gray-400 self-center">
-                      {t('notifications.allSuggestedAdded')}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Ma personnalisation : sujets ajoutés, avec activation, horaire et modification */}
-              <div>
-                <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">
-                  {t('notifications.myTypes')}
-                </h3>
-                <div className="space-y-4">
-                  {Object.entries(preferences.types ?? {}).map(([type, enabled]) => {
-                    const schedule: TypeSchedule =
-                      (preferences.typeSchedules ?? {})[type] ?? DEFAULT_TYPE_SCHEDULE;
-                    return (
-                      <div
-                        key={type}
-                        className="p-4 border rounded-xl border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/30 space-y-3"
-                      >
-                        {/* Ligne nom + actions */}
-                        <div className="flex flex-wrap items-center gap-3">
-                          {editingType?.key === type ? (
-                            <>
+                      <li key={type} className="grid gap-4 border-b border-line py-5">
+                        {/* Nom, état, actions */}
+                        {editing ? (
+                          <div className="flex flex-wrap items-end gap-2">
+                            <Field label={t('notifications.renameType')} id={`${idBase}-name`} className="min-w-[12rem] flex-1">
                               <input
                                 type="text"
                                 value={editingType.value}
-                                onChange={(e) =>
-                                  setEditingType((prev) => prev && { ...prev, value: e.target.value })
-                                }
+                                onChange={(e) => setEditingType((prev) => prev && { ...prev, value: e.target.value })}
                                 onKeyDown={(e) => {
                                   if (e.key === 'Enter') saveEditType();
                                   if (e.key === 'Escape') setEditingType(null);
                                 }}
-                                className="flex-1 min-w-[120px] px-3 py-2 border rounded-lg dark:bg-gray-700 dark:text-white text-gray-900"
                                 autoFocus
                               />
-                              <button
-                                type="button"
-                                onClick={saveEditType}
-                                className="shrink-0 px-3 py-1.5 text-sm bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
-                              >
-                                {t('common.save')}
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => setEditingType(null)}
-                                className="shrink-0 px-3 py-1.5 text-sm border rounded-lg dark:border-gray-500 dark:text-gray-300"
-                              >
-                                {t('common.cancel')}
-                              </button>
-                            </>
-                          ) : (
-                            <>
-                              <span className="flex-1 min-w-0 font-medium text-gray-800 dark:text-gray-200 truncate">
-                                {typeLabel(type)}
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() => startEditType(type)}
-                                className="shrink-0 p-1.5 rounded text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
-                                title={t('notifications.renameType')}
-                                aria-label={t('notifications.renameType')}
-                              >
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
-                              </button>
+                            </Field>
+                            <Button size="sm" onClick={saveEditType}>
+                              {t('common.save')}
+                            </Button>
+                            <Button size="sm" variant="quiet" onClick={() => setEditingType(null)}>
+                              {t('common.cancel')}
+                            </Button>
+                          </div>
+                        ) : (
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                            <div className="grid min-w-0 flex-1 gap-0.5">
+                              <p className={cx('m-0 truncate font-medium', enabled ? 'text-ink' : 'text-ink-2')}>{typeLabel(type)}</p>
+                              <p className="m-0 font-mono text-meta text-ink-2">{scheduleSummary(schedule)}</p>
+                            </div>
+                            <div className="flex items-center gap-1">
                               <button
                                 type="button"
                                 role="switch"
-                                aria-checked={enabled as boolean}
-                                aria-label={enabled ? t('notifications.enabled') : t('notifications.disabled')}
-                                onClick={() => updateType(type, !(enabled as boolean))}
-                                className={`shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border-2 text-sm font-medium transition-colors ${
-                                  enabled
-                                    ? 'bg-emerald-600 border-emerald-600 text-white hover:bg-emerald-700'
-                                    : 'bg-transparent border-gray-300 dark:border-gray-500 text-gray-600 dark:text-gray-400 hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400'
-                                }`}
+                                aria-checked={enabled}
+                                aria-label={typeLabel(type)}
+                                onClick={() => updateType(type, !enabled)}
+                                className="inline-flex min-h-11 items-center gap-2 rounded-control px-2 text-ui text-ink-2 transition-colors hover:bg-sunken"
                               >
-                                {enabled ? t('notifications.enabled') : t('notifications.disabled')}
+                                <span
+                                  aria-hidden="true"
+                                  className={cx(
+                                    'relative inline-flex h-5 w-9 shrink-0 rounded-full border transition-colors',
+                                    enabled ? 'border-accent bg-accent' : 'border-line-field bg-surface',
+                                  )}
+                                >
+                                  <span
+                                    className={cx(
+                                      'absolute top-0.5 size-3.5 rounded-full transition-[left] duration-150',
+                                      enabled ? 'left-[1.1rem] bg-on-accent' : 'left-0.5 bg-line-field',
+                                    )}
+                                  />
+                                </span>
+                                <span className="w-[5.5rem] text-left">{enabled ? t('notifications.enabled') : t('notifications.disabled')}</span>
                               </button>
-                              <button
-                                type="button"
-                                onClick={() => removeType(type)}
-                                className="shrink-0 p-1.5 rounded text-gray-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/30"
-                                title={t('notifications.removeType')}
-                                aria-label={t('notifications.removeType')}
-                              >
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                              </button>
-                            </>
-                          )}
-                        </div>
-                        {/* Heure et date pour ce type (masqué en mode édition du nom) */}
-                        {editingType?.key !== type && (
-                          <div className="flex flex-wrap items-center gap-4 pl-1 border-t border-gray-200 dark:border-gray-600 pt-3">
-                            <label className="flex items-center gap-2">
-                              <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                                {t('notifications.time')}
-                              </span>
+                              <Button size="sm" variant="quiet" onClick={() => startEditType(type)} aria-label={`${t('notifications.renameType')} — ${typeLabel(type)}`}>
+                                {t('common.edit')}
+                              </Button>
+                              <Button size="sm" variant="quiet" onClick={() => removeType(type)} aria-label={`${t('notifications.removeType')} — ${typeLabel(type)}`}>
+                                {t('common.delete')}
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Heure, répétition et précision (masqués pendant le renommage) */}
+                        {!editing ? (
+                          <div className="grid gap-3 sm:grid-cols-3">
+                            <Field label={t('notifications.time')} id={`${idBase}-time`}>
                               <input
                                 type="time"
                                 value={schedule.time}
                                 onChange={(e) => updateTypeSchedule(type, { time: e.target.value })}
-                                className="px-2 py-1.5 border rounded-lg dark:bg-gray-700 dark:text-white text-sm"
+                                className="font-mono"
                               />
-                            </label>
-                            <label className="flex items-center gap-2">
-                              <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                                {t('notifications.recurrence')}
-                              </span>
+                            </Field>
+                            <Field label={t('notifications.recurrence')} id={`${idBase}-recurrence`}>
                               <select
                                 value={schedule.recurrence}
                                 onChange={(e) => {
@@ -879,7 +615,6 @@ export default function NotificationsPreferencesPage() {
                                     intervalHours: rec === 'hourly' ? (schedule.intervalHours ?? 2) : undefined,
                                   });
                                 }}
-                                className="px-2 py-1.5 border rounded-lg dark:bg-gray-700 dark:text-white text-sm min-w-[160px]"
                               >
                                 {RECURRENCE_OPTIONS.map((opt) => (
                                   <option key={opt.value} value={opt.value}>
@@ -887,86 +622,103 @@ export default function NotificationsPreferencesPage() {
                                   </option>
                                 ))}
                               </select>
-                            </label>
-                            {schedule.recurrence === 'once' && (
-                              <label className="flex items-center gap-2">
-                                <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                                  {t('notifications.date')}
-                                </span>
+                            </Field>
+                            {schedule.recurrence === 'once' ? (
+                              <Field label={t('notifications.date')} id={`${idBase}-date`}>
                                 <input
                                   type="date"
                                   value={schedule.date ?? localDayKey(new Date())}
                                   onChange={(e) => updateTypeSchedule(type, { date: e.target.value })}
-                                  className="px-2 py-1.5 border rounded-lg dark:bg-gray-700 dark:text-white text-sm"
+                                  className="font-mono"
                                 />
-                              </label>
-                            )}
-                            {schedule.recurrence === 'weekly' && (
-                              <label className="flex items-center gap-2">
-                                <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                                  {t('notifications.weekDay')}
-                                </span>
+                              </Field>
+                            ) : null}
+                            {schedule.recurrence === 'weekly' ? (
+                              <Field label={t('notifications.weekDay')} id={`${idBase}-weekday`}>
                                 <select
                                   value={schedule.weekDay ?? new Date().getDay()}
                                   onChange={(e) => updateTypeSchedule(type, { weekDay: parseInt(e.target.value, 10) })}
-                                  className="px-2 py-1.5 border rounded-lg dark:bg-gray-700 dark:text-white text-sm min-w-[140px]"
                                 >
-                                  {[0, 1, 2, 3, 4, 5, 6].map((d) => (
+                                  {[1, 2, 3, 4, 5, 6, 0].map((d) => (
                                     <option key={d} value={d}>
                                       {t(`notifications.weekDay${d}` as Parameters<typeof t>[0])}
                                     </option>
                                   ))}
                                 </select>
-                              </label>
-                            )}
-                            {schedule.recurrence === 'monthly' && (
-                              <label className="flex items-center gap-2">
-                                <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                                  {t('notifications.dayOfMonth')}
-                                </span>
+                              </Field>
+                            ) : null}
+                            {schedule.recurrence === 'monthly' ? (
+                              <Field label={t('notifications.dayOfMonth')} id={`${idBase}-day`}>
                                 <input
                                   type="number"
                                   min={1}
                                   max={31}
+                                  inputMode="numeric"
                                   value={schedule.dayOfMonth ?? new Date().getDate()}
                                   onChange={(e) =>
                                     updateTypeSchedule(type, {
                                       dayOfMonth: Math.min(31, Math.max(1, parseInt(e.target.value, 10) || 1)),
                                     })
                                   }
-                                  className="px-2 py-1.5 border rounded-lg dark:bg-gray-700 dark:text-white text-sm w-16"
+                                  className="font-mono"
                                 />
-                              </label>
-                            )}
-                            {schedule.recurrence === 'hourly' && (
-                              <label className="flex items-center gap-2">
-                                <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
-                                  {t('notifications.intervalHours')}
-                                </span>
+                              </Field>
+                            ) : null}
+                            {schedule.recurrence === 'hourly' ? (
+                              <Field label={t('notifications.intervalLabel')} hint={t('notifications.intervalHint')} id={`${idBase}-interval`}>
                                 <input
                                   type="number"
                                   min={1}
                                   max={24}
+                                  inputMode="numeric"
                                   value={schedule.intervalHours ?? 2}
                                   onChange={(e) =>
                                     updateTypeSchedule(type, {
                                       intervalHours: Math.min(24, Math.max(1, parseInt(e.target.value, 10) || 1)),
                                     })
                                   }
-                                  className="px-2 py-1.5 border rounded-lg dark:bg-gray-700 dark:text-white text-sm w-16"
+                                  className="font-mono"
                                 />
-                                <span className="text-sm text-gray-500">{t('notifications.hours')}</span>
-                              </label>
-                            )}
+                              </Field>
+                            ) : null}
                           </div>
-                        )}
-                      </div>
+                        ) : null}
+                      </li>
                     );
                   })}
-                </div>
+                </ul>
+              )}
 
-                {/* Ajouter un sujet personnalisé */}
-                <div className="mt-4 flex flex-wrap items-center gap-2">
+              {/* Idées de rappels */}
+              <div className="mt-6 grid gap-3">
+                <h3 className="m-0 text-ui font-semibold text-ink">{t('notifications.suggestedTypes')}</h3>
+                {suggestions.length > 0 ? (
+                  <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
+                    {suggestions.map((label) => (
+                      <li key={label}>
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          onClick={() => addType(label)}
+                          iconStart={
+                            <svg viewBox="0 0 16 16" className="size-3.5" fill="none">
+                              <path d="M8 3.5v9M3.5 8h9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                            </svg>
+                          }
+                        >
+                          {typeLabel(label)}
+                        </Button>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="m-0 text-ui text-ink-2">{t('notifications.allSuggestedAdded')}</p>
+                )}
+              </div>
+
+              {/* Sujet personnalisé */}
+              <div className="mt-6 flex flex-wrap items-end gap-2 border-t border-line pt-5">
+                <Field label={t('notifications.addCustomLabel')} id="reminder-new" className="min-w-[12rem] flex-1">
                   <input
                     type="text"
                     value={newTypeLabel}
@@ -975,69 +727,138 @@ export default function NotificationsPreferencesPage() {
                       if (e.key === 'Enter') addType(newTypeLabel);
                     }}
                     placeholder={t('notifications.addCustomPlaceholder')}
-                    className="flex-1 min-w-[180px] px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 text-gray-900"
                   />
-                  <button
-                    type="button"
-                    onClick={() => addType(newTypeLabel)}
-                    disabled={!newTypeLabel.trim()}
-                    className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {t('notifications.addCustom')}
-                  </button>
-                </div>
-                {Object.keys(preferences.types ?? {}).length === 0 && (
-                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                    {t('notifications.myTypesHint')}
-                  </p>
-                )}
+                </Field>
+                <Button variant="secondary" onClick={() => addType(newTypeLabel)} disabled={!newTypeLabel.trim()}>
+                  {t('notifications.addCustom')}
+                </Button>
               </div>
-            </div>
+            </Card>
+          ) : (
+            <Alert severity="warning" title={t('notifications.loadError')} />
           )}
 
-          {/* Snooze */}
-          {preferences && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
-                {t('notifications.snooze')}
-              </h2>
-              <input
-                type="number"
-                min="5"
-                max="120"
-                step="5"
-                value={preferences.snooze ?? 15}
-                onChange={(e) => {
-                  const snooze = parseInt(e.target.value);
-                  autoSavePreferences({ ...preferences, snooze });
-                }}
-                className="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white"
-              />
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                {t('notifications.snoozeHint')}
-              </p>
-            </div>
-          )}
-
-          {/* Save Button */}
-          <div className="flex gap-4">
-            <button
-              onClick={handleSave}
-              disabled={saving || !preferences}
-              className="flex-1 bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 disabled:opacity-50 transition-colors"
-            >
-              {saving ? t('common.loading') : t('common.save')}
-            </button>
-            <Link
-              href="/mes-animaux"
-              className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-3 rounded-lg font-semibold text-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-            >
-              {t('common.cancel')}
-            </Link>
-          </div>
-            </>
-          )}
+          {/* Report */}
+          {preferences ? (
+            <Card as="section" title={t('notifications.snoozeTitle')} titleId="snooze-title">
+              <Field label={t('notifications.snooze')} hint={t('notifications.snoozeHint')} id="snooze-minutes" className="max-w-xs">
+                <input
+                  type="number"
+                  min="5"
+                  max="120"
+                  step="5"
+                  inputMode="numeric"
+                  value={preferences.snooze ?? 15}
+                  onChange={(e) => {
+                    const snooze = parseInt(e.target.value);
+                    autoSavePreferences({ ...preferences, snooze });
+                  }}
+                  className="font-mono"
+                />
+              </Field>
+            </Card>
+          ) : null}
         </div>
+
+        <aside className="grid min-w-0 content-start gap-6 lg:col-span-4">
+          {/* Web Push sur CET appareil */}
+          <Card as="section" title={t('notifications.deviceTitle')} titleId="device-title" actions={pushBadge}>
+            <div className="grid gap-4">
+              {pushStatus === null ? (
+                <SkeletonGroup label={t('common.loading')}>
+                  <Skeleton width="80%" />
+                </SkeletonGroup>
+              ) : null}
+              {pushStatus === 'unsupported' ? <p className="m-0 text-ui text-ink-2">{t('notifications.pushUnsupported')}</p> : null}
+              {pushStatus === 'unavailable' ? <p className="m-0 text-ui text-ink-2">{t('notifications.pushUnavailable')}</p> : null}
+              {pushStatus === 'denied' ? <Alert severity="warning" title={t('notifications.pushBlocked')} /> : null}
+              {pushStatus === 'unsubscribed' ? (
+                <>
+                  <p className="m-0 text-ui text-ink-2">{t('notifications.enableBrowser')}</p>
+                  <Button onClick={enablePush} loading={pushBusy} fullWidth>
+                    {pushBusy ? t('notifications.enabling') : t('notifications.enableButton')}
+                  </Button>
+                </>
+              ) : null}
+              {pushStatus === 'subscribed' ? (
+                <>
+                  <p className="m-0 text-ui text-ink-2">{t('notifications.pushOnText')}</p>
+                  <Button variant="secondary" onClick={disablePush} loading={pushBusy} fullWidth>
+                    {pushBusy ? t('notifications.disabling') : t('notifications.disableButton')}
+                  </Button>
+                </>
+              ) : null}
+              {pushError ? (
+                <p role="alert" className="m-0 text-ui font-medium text-danger">
+                  {t('notifications.pushError')}
+                </p>
+              ) : null}
+            </div>
+          </Card>
+
+          {/* Canal de réception : téléphone (push) ou e-mail */}
+          {preferences ? (
+            <Card as="section" title={t('notifications.deliveryTitle')} titleId="delivery-title">
+              <fieldset className="m-0 grid gap-2 border-0 p-0">
+                <legend className="mb-3 p-0 text-ui text-ink-2">{t('notifications.deliveryDescription')}</legend>
+                {(['push', 'email', 'both'] as const).map((channel) => {
+                  // Invité : aucune adresse, rappels par notification seulement (explication ci-dessous).
+                  const locked = channel !== 'push' && guest;
+                  const checked = (preferences.deliveryChannel ?? 'push') === channel;
+                  return (
+                    <label
+                      key={channel}
+                      className={cx(
+                        'flex items-start gap-3 rounded-control border px-3 py-3 text-ui transition-colors',
+                        checked ? 'border-accent bg-accent-soft' : 'border-line-field bg-surface',
+                        locked ? 'cursor-not-allowed opacity-60' : 'cursor-pointer hover:bg-sunken',
+                        checked && !locked && 'hover:bg-accent-soft',
+                      )}
+                    >
+                      <input
+                        type="radio"
+                        name="delivery-channel"
+                        value={channel}
+                        checked={checked}
+                        disabled={locked}
+                        aria-describedby={locked ? 'delivery-guest-note' : undefined}
+                        onChange={() => {
+                          setPreferences((p) => (p ? { ...p, deliveryChannel: channel } : p));
+                          if (autoSaveTimeout) {
+                            clearTimeout(autoSaveTimeout);
+                            setAutoSaveTimeout(null);
+                          }
+                          handleSavePreferencesBackend({ ...preferences, deliveryChannel: channel });
+                        }}
+                        className="mt-0.5 size-4 shrink-0"
+                      />
+                      <span className="font-medium text-ink">
+                        {channel === 'push' && t('notifications.deliveryPush')}
+                        {channel === 'email' && t('notifications.deliveryEmail')}
+                        {channel === 'both' && t('notifications.deliveryBoth')}
+                      </span>
+                    </label>
+                  );
+                })}
+              </fieldset>
+              {guest ? (
+                <p id="delivery-guest-note" className="m-0 mt-3 text-ui text-ink-2">
+                  {t('guest.emailChannelNote')}
+                </p>
+              ) : null}
+            </Card>
+          ) : null}
+        </aside>
+      </div>
+
+      {/* Enregistrement : automatique à chaque changement ; le bouton force l'envoi. */}
+      <div className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2 border-t border-line pt-5">
+        <p role="status" aria-live="polite" className="m-0 mr-auto text-ui text-ink-2">
+          {saveMessage ?? t('notifications.autoSaveHint')}
+        </p>
+        <Button onClick={handleSave} loading={saving} disabled={!preferences}>
+          {saving ? t('common.loading') : t('common.save')}
+        </Button>
       </div>
     </div>
   );

@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
-import { Link } from '@/i18n/navigation';
 import { GUEST_UPGRADE_PATH, isGuestUser } from '@/lib/guest';
 import { useStartGuest } from '@/components/guest/useStartGuest';
-import { Alert, Button, buttonClasses } from '@/components/ui';
+import { AuthFrame, OrDivider } from '@/components/auth/AuthFrame';
+import { Alert, Button, Field, buttonClasses } from '@/components/ui';
 
 export default function LoginPage() {
   const t = useTranslations();
@@ -55,15 +55,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="captivia-auth-page">
-      <div className="captivia-auth-card">
-        <h1 className="captivia-auth-title">{t('auth.loginTitle')}</h1>
-
+    <AuthFrame title={t('auth.loginHeading')} lead={t('auth.loginLead')}>
+      <div className="grid gap-8">
         {/* Invité : se connecter ouvre un AUTRE compte (aucune fusion) ; la conversion est proposée. */}
         {isGuestUser(user) && (
           <Alert
             severity="warning"
-            className="mb-4"
             title={tGuest('loginGuestWarning')}
             action={
               <Link href={GUEST_UPGRADE_PATH} className={buttonClasses({ variant: 'secondary', size: 'sm' })}>
@@ -73,55 +70,51 @@ export default function LoginPage() {
           />
         )}
 
-        <form onSubmit={handleSubmit} className="captivia-auth-form">
-          <div className="captivia-auth-field">
-            <label htmlFor="email" className="captivia-auth-label">
-              {t('auth.emailLabel')}
-            </label>
+        <form onSubmit={handleSubmit} className="grid gap-5">
+          <Field label={t('auth.emailLabel')} id="email">
             <input
               type="email"
-              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              className="captivia-auth-input"
+              inputMode="email"
             />
+          </Field>
+
+          <div className="grid gap-2">
+            <Field label={t('auth.passwordLabel')} id="password">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={8}
+                autoComplete="current-password"
+              />
+            </Field>
+            <Link href="/forgot-password" className="justify-self-end text-ui text-accent-text underline underline-offset-2">
+              {t('auth.forgotPassword')}
+            </Link>
           </div>
 
-          <div className="captivia-auth-field">
-            <div className="captivia-auth-label-row">
-              <label htmlFor="password">{t('auth.passwordLabel')}</label>
-              <Link href="/forgot-password" className="captivia-auth-inline-link">
-                {t('auth.forgotPassword')}
-              </Link>
-            </div>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={8}
-              autoComplete="current-password"
-              className="captivia-auth-input"
-            />
-          </div>
+          {error && <Alert severity="urgent" title={error} />}
 
-          {error && (
-            <div className="captivia-auth-feedback is-error" role="alert">
-              <p>{error}</p>
-            </div>
-          )}
-
-          <button type="submit" disabled={loading} className="captivia-auth-submit">
+          <Button type="submit" size="lg" fullWidth loading={loading}>
             {loading ? t('common.loading') : t('auth.loginButton')}
-          </button>
+          </Button>
         </form>
 
         {/* Sans session : l'app s'utilise aussi sans compte (1 animal, carnet complet). */}
         {!user && (
-          <div className="mt-4 grid gap-2">
+          <section aria-labelledby="login-guest-title" className="grid gap-4">
+            <OrDivider label={t('common.or')} />
+            <div className="grid gap-1">
+              <h2 id="login-guest-title" className="m-0 font-display text-h4 font-semibold text-ink">
+                {t('auth.guestTitle')}
+              </h2>
+              <p className="m-0 text-ui text-ink-2">{t('auth.guestLead')}</p>
+            </div>
             <Button
               variant="secondary"
               size="lg"
@@ -133,37 +126,27 @@ export default function LoginPage() {
             >
               {guestStarting ? tGuest('entryStarting') : tGuest('entryTry')}
             </Button>
-            {guestError && (
-              <div className="captivia-auth-feedback is-error" role="alert">
-                <p>{guestError}</p>
-              </div>
-            )}
-          </div>
+            {guestError && <Alert severity="urgent" title={guestError} />}
+          </section>
         )}
 
-        <div className="captivia-auth-links">
-          <p>
-            {t('auth.noAccount')}{' '}
-            <Link href="/register" className="captivia-auth-secondary-link">
-              {t('auth.registerButton')}
-            </Link>
-          </p>
-
-          <Link href="/" className="captivia-auth-back-link">
-            {t('common.back')} {t('common.home')}
+        <p className="m-0 border-t border-line pt-6 text-ui text-ink-2">
+          {t('auth.noAccount')}{' '}
+          <Link href="/register" className="font-medium text-accent-text underline underline-offset-2">
+            {t('auth.createAccountLink')}
           </Link>
-        </div>
+        </p>
 
         {process.env.NODE_ENV === 'development' && mobileLink && (
-          <div className="captivia-auth-mobile-link">
-            <strong>Lien pour tester sur votre téléphone (même Wi‑Fi)</strong>
-            <a href={mobileLink} target="_blank" rel="noopener noreferrer">
+          <div className="grid gap-1 rounded-card border border-dashed border-line-strong p-4 text-ui text-ink-2">
+            <strong className="text-ink">Lien pour tester sur votre téléphone (même Wi‑Fi)</strong>
+            <a href={mobileLink} target="_blank" rel="noopener noreferrer" className="font-mono text-meta break-all text-accent-text">
               {mobileLink}
             </a>
-            <p>Gardez le backend lancé sur ce PC (port 3001).</p>
+            <p className="m-0">Gardez le backend lancé sur ce PC (port 3001).</p>
           </div>
         )}
       </div>
-    </div>
+    </AuthFrame>
   );
 }

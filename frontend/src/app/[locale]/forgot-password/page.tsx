@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { api } from '@/lib/api';
+import { AuthFrame } from '@/components/auth/AuthFrame';
+import { Alert, Button, Field } from '@/components/ui';
 
 export default function ForgotPasswordPage() {
   const t = useTranslations();
@@ -29,49 +31,35 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="captivia-auth-page">
-      <div className="captivia-auth-card">
-        <h1 className="captivia-auth-title">{t('auth.forgotPasswordTitle')}</h1>
-        <p className="captivia-auth-description">{t('auth.forgotPasswordDescription')}</p>
-
-        <form onSubmit={handleSubmit} className="captivia-auth-form">
-          <div className="captivia-auth-field">
-            <label htmlFor="email" className="captivia-auth-label">
-              {t('auth.emailLabel')}
-            </label>
+    <AuthFrame title={t('auth.forgotHeading')} lead={t('auth.forgotLead')}>
+      <div className="grid gap-8">
+        <form onSubmit={handleSubmit} className="grid gap-5">
+          <Field label={t('auth.emailLabel')} id="email">
             <input
               type="email"
-              id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
-              className="captivia-auth-input"
+              inputMode="email"
             />
-          </div>
+          </Field>
 
-          {message && (
-            <div className="captivia-auth-feedback is-success" role="status">
-              <p>{message}</p>
-            </div>
-          )}
-          {error && (
-            <div className="captivia-auth-feedback is-error" role="alert">
-              <p>{error}</p>
-            </div>
-          )}
+          {message && <Alert severity="info" title={message}>{t('auth.forgotSpamHint')}</Alert>}
+          {error && <Alert severity="urgent" title={error} />}
 
-          <button type="submit" disabled={loading} className="captivia-auth-submit">
+          <Button type="submit" size="lg" fullWidth loading={loading}>
             {loading ? t('common.loading') : t('auth.forgotPasswordSubmit')}
-          </button>
+          </Button>
         </form>
 
-        <div className="captivia-auth-links">
-          <Link href="/login" className="captivia-auth-secondary-link">
+        <p className="m-0 border-t border-line pt-6 text-ui text-ink-2">
+          {t('auth.rememberedPassword')}{' '}
+          <Link href="/login" className="font-medium text-accent-text underline underline-offset-2">
             {t('auth.backToLogin')}
           </Link>
-        </div>
+        </p>
       </div>
-    </div>
+    </AuthFrame>
   );
 }
