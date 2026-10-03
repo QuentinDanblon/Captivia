@@ -1,4 +1,4 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import {
   CACHE_MAX_ENTRIES,
   CACHE_STALE_GRACE_SECONDS,
@@ -10,7 +10,6 @@ import { ConfigService } from '@nestjs/config';
 
 describe('CacheService', () => {
   let service: CacheService;
-  let configService: ConfigService;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -29,7 +28,6 @@ describe('CacheService', () => {
     }).compile();
 
     service = module.get<CacheService>(CacheService);
-    configService = module.get<ConfigService>(ConfigService);
   });
 
   afterEach(() => {
@@ -226,7 +224,6 @@ describe('CacheService', () => {
 
   describe('TTL configuration', () => {
     it('should use default TTL when CACHE_TTL not set', () => {
-      const configService = new ConfigService();
       const mockConfig = {
         get: jest.fn((key: string) => {
           if (key === 'CACHE_TTL') return undefined;
@@ -234,7 +231,9 @@ describe('CacheService', () => {
         }),
       };
 
-      const testService = new CacheService(mockConfig as any);
+      const testService = new CacheService(
+        mockConfig as unknown as ConfigService,
+      );
       const stats = testService.getCacheStats();
 
       // Default TTL should be 86400 seconds (24 hours) from CACHE_CONFIG.species

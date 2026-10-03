@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call -- tests : mocks du client HTTP typés any */
 import { HttpException, Logger } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { OpenPetFoodFactsService } from './openpetfoodfacts.service';
@@ -82,7 +81,9 @@ describe('OpenPetFoodFactsService (résilience)', () => {
       const { service, http, cache } = buildService();
       http.get.mockRejectedValue(httpError(503));
 
-      const error = await service.getProduct('3017620422003').catch((e) => e);
+      const error = (await service
+        .getProduct('3017620422003')
+        .catch((e: unknown) => e)) as HttpException;
       expect(error).toBeInstanceOf(HttpException);
       expect(error.getStatus()).toBe(503);
       expect(cache.set).not.toHaveBeenCalled();

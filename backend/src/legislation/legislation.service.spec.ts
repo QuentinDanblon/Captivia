@@ -5,8 +5,6 @@ import { SpeciesPlusService } from './services/speciesplus.service';
 
 describe('LegislationService', () => {
   let service: LegislationService;
-  let prismaService: PrismaService;
-  let speciesPlusService: SpeciesPlusService;
 
   const mockLegislation = {
     id: 'leg-id-123',
@@ -53,8 +51,6 @@ describe('LegislationService', () => {
     }).compile();
 
     service = module.get<LegislationService>(LegislationService);
-    prismaService = module.get<PrismaService>(PrismaService);
-    speciesPlusService = module.get<SpeciesPlusService>(SpeciesPlusService);
 
     jest.clearAllMocks();
     // Par défaut : Species+ non configuré (pas de jeton)

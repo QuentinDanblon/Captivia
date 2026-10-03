@@ -10,7 +10,6 @@ import {
 
 describe('RoutinesService', () => {
   let service: RoutinesService;
-  let prismaService: PrismaService;
 
   const mockUserId = 'user-id-123';
   const mockAnimalId = 'animal-id-456';
@@ -83,7 +82,6 @@ describe('RoutinesService', () => {
     }).compile();
 
     service = module.get<RoutinesService>(RoutinesService);
-    prismaService = module.get<PrismaService>(PrismaService);
 
     jest.clearAllMocks();
   });

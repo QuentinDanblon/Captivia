@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/require-await -- tests : adaptateur axios simulé typé any */
 import { Logger } from '@nestjs/common';
 import { AxiosError, AxiosHeaders, InternalAxiosRequestConfig } from 'axios';
 import {
@@ -29,7 +28,8 @@ function setup(steps: Step[], random = 0.5) {
   const configs: InternalAxiosRequestConfig[] = [];
   let index = 0;
 
-  const adapter = jest.fn(async (config: InternalAxiosRequestConfig) => {
+  // Adaptateur scripté : l'exécuteur de la promesse transforme tout `throw` en rejet.
+  const respond = (config: InternalAxiosRequestConfig) => {
     configs.push(config);
     const step = steps[Math.min(index, steps.length - 1)];
     index += 1;
@@ -71,14 +71,19 @@ function setup(steps: Step[], random = 0.5) {
       );
     }
     throw new AxiosError(step.network, AxiosError.ERR_NETWORK, config);
-  });
+  };
+  const adapter = jest.fn(
+    (config: InternalAxiosRequestConfig) =>
+      new Promise((resolve) => resolve(respond(config))),
+  );
 
   const http = new ExternalHttpService({
     adapter: adapter as never,
     now: () => clock,
-    sleep: async (ms) => {
+    sleep: (ms) => {
       sleeps.push(ms);
       clock += ms;
+      return Promise.resolve();
     },
     random: () => random,
   });

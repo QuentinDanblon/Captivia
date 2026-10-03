@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument -- tests : mocks axios/supertest typés any */
+import type { Server } from 'http';
 import { INestApplication } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { Test } from '@nestjs/testing';
@@ -11,6 +11,7 @@ import { HealthController, READINESS_DB_TIMEOUT_MS } from './health.controller';
 describe('HealthController', () => {
   let app: INestApplication;
   const queryRaw = jest.fn();
+  const server = () => app.getHttpServer() as Server;
 
   beforeEach(async () => {
     queryRaw.mockReset();
@@ -37,18 +38,21 @@ describe('HealthController', () => {
   });
 
   it('GET /health : liveness inchangé, sans toucher à la base', async () => {
-    const res = await request(app.getHttpServer()).get('/health').expect(200);
-    expect(res.body.status).toBe('ok');
-    expect(typeof res.body.version).toBe('string');
-    expect(typeof res.body.timestamp).toBe('string');
+    const res = await request(server()).get('/health').expect(200);
+    const body = res.body as {
+      status: string;
+      version: string;
+      timestamp: string;
+    };
+    expect(body.status).toBe('ok');
+    expect(typeof body.version).toBe('string');
+    expect(typeof body.timestamp).toBe('string');
     expect(queryRaw).not.toHaveBeenCalled();
   });
 
   it('GET /health/ready : 200 quand la base répond', async () => {
     queryRaw.mockResolvedValue([{ '?column?': 1 }]);
-    const res = await request(app.getHttpServer())
-      .get('/health/ready')
-      .expect(200);
+    const res = await request(server()).get('/health/ready').expect(200);
     expect(res.body).toMatchObject({ status: 'ok', database: 'up' });
     expect(queryRaw).toHaveBeenCalledTimes(1);
   });
@@ -57,9 +61,7 @@ describe('HealthController', () => {
     queryRaw.mockRejectedValue(
       new Error('connect ECONNREFUSED postgres://user:secret@db:5432'),
     );
-    const res = await request(app.getHttpServer())
-      .get('/health/ready')
-      .expect(503);
+    const res = await request(server()).get('/health/ready').expect(503);
     expect(JSON.stringify(res.body)).not.toContain('secret');
   });
 
@@ -78,8 +80,8 @@ describe('HealthController', () => {
   it('les sondes ne sont pas soumises au rate limiting', async () => {
     queryRaw.mockResolvedValue([1]);
     for (let i = 0; i < 5; i++) {
-      await request(app.getHttpServer()).get('/health').expect(200);
-      await request(app.getHttpServer()).get('/health/ready').expect(200);
+      await request(server()).get('/health').expect(200);
+      await request(server()).get('/health/ready').expect(200);
     }
   });
 });

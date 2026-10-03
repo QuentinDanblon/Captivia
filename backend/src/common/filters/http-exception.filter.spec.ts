@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- tests : mocks axios/supertest typés any */
 import {
   ArgumentsHost,
   BadRequestException,
@@ -47,7 +46,10 @@ describe('HttpExceptionFilter', () => {
     expect(stack).toBe(error.stack);
 
     expect(status).toHaveBeenCalledWith(500);
-    const body = json.mock.calls[0][0];
+    const body = (json.mock.calls[0] as unknown[])[0] as Record<
+      string,
+      unknown
+    >;
     expect(body.message).toBe('Internal server error');
     expect(JSON.stringify(body)).not.toContain('db exploded');
     expect(JSON.stringify(body)).not.toContain('at ');
@@ -101,7 +103,10 @@ describe('HttpExceptionFilter', () => {
       }),
       host,
     );
-    const body = json.mock.calls[0][0];
+    const body = (json.mock.calls[0] as unknown[])[0] as Record<
+      string,
+      unknown
+    >;
     expect(body).toMatchObject({
       statusCode: 403,
       code: 'GUEST_ACCOUNT',

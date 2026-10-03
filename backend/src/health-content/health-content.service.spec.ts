@@ -5,8 +5,6 @@ import { PubmedService } from './services/pubmed.service';
 
 describe('HealthContentService', () => {
   let service: HealthContentService;
-  let prismaService: PrismaService;
-  let pubmedService: PubmedService;
 
   const mockHealthContent = {
     id: 'health-id-123',
@@ -55,8 +53,6 @@ describe('HealthContentService', () => {
     }).compile();
 
     service = module.get<HealthContentService>(HealthContentService);
-    prismaService = module.get<PrismaService>(PrismaService);
-    pubmedService = module.get<PubmedService>(PubmedService);
 
     jest.clearAllMocks();
     mockPrismaService.speciesProfile.findUnique.mockResolvedValue(null);

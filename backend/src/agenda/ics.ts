@@ -13,7 +13,7 @@ const VET_DURATION_MS = 60 * 60 * 1000;
 export function escapeIcsText(value: string): string {
   return (
     value
-      // eslint-disable-next-line no-control-regex
+      // eslint-disable-next-line no-control-regex -- la plage de caractères de contrôle est précisément l'objet de ce nettoyage
       .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
       .replace(/\\/g, '\\\\')
       .replace(/;/g, '\\;')

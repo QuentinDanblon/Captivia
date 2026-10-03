@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment -- tests : mocks du client HTTP typés any */
 import { NotFoundException } from '@nestjs/common';
 import { GbifService } from './gbif.service';
 

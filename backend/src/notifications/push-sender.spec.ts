@@ -154,7 +154,11 @@ describe('WebPushSender', () => {
       expect(ok).toBe(true);
       expect(findMany).toHaveBeenCalledWith({ where: { userId: 'u1' } });
       expect(sendNotification).toHaveBeenCalledTimes(2);
-      const [pushSub, body, options] = sendNotification.mock.calls[0];
+      const [pushSub, body, options] = sendNotification.mock.calls[0] as [
+        unknown,
+        string,
+        { timeout: number },
+      ];
       expect(pushSub).toEqual({
         endpoint: 'https://fcm.googleapis.com/fcm/send/a',
         keys: { p256dh: 'p256dh-a', auth: 'auth-a' },
@@ -189,7 +193,7 @@ describe('WebPushSender', () => {
         urgency: 'high',
       });
 
-      expect(sendNotification.mock.calls[0][2]).toMatchObject({
+      expect((sendNotification.mock.calls[0] as unknown[])[2]).toMatchObject({
         TTL: 120,
         urgency: 'high',
       });
@@ -304,9 +308,13 @@ describe('WebPushSender', () => {
 
       expect(res).toEqual({ sent: 1, failed: 4, removed: 0 });
       expect(sendNotification).toHaveBeenCalledTimes(1);
-      expect(sendNotification.mock.calls[0][0].endpoint).toBe(
-        'https://fcm.googleapis.com/fcm/send/ok',
-      );
+      expect(
+        (
+          (sendNotification.mock.calls[0] as unknown[])[0] as {
+            endpoint: string;
+          }
+        ).endpoint,
+      ).toBe('https://fcm.googleapis.com/fcm/send/ok');
       // Une ligne refusée n'est pas supprimée (la liste blanche peut évoluer).
       expect(deleteMany).not.toHaveBeenCalled();
     });
@@ -330,9 +338,13 @@ describe('WebPushSender', () => {
           failed: 1,
           removed: 0,
         });
-        expect(sendNotification.mock.calls[0][2].timeout).toBe(
-          PUSH_REQUEST_TIMEOUT_MS,
-        );
+        expect(
+          (
+            (sendNotification.mock.calls[0] as unknown[])[2] as {
+              timeout: number;
+            }
+          ).timeout,
+        ).toBe(PUSH_REQUEST_TIMEOUT_MS);
         expect(PUSH_REQUEST_TIMEOUT_MS).toBe(5_000);
       } finally {
         jest.useRealTimers();

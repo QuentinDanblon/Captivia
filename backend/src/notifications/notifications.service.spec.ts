@@ -9,7 +9,6 @@ import { WebPushSender } from './push-sender';
 
 describe('NotificationsService', () => {
   let service: NotificationsService;
-  let prismaService: PrismaService;
 
   const mockUserId = 'user-id-123';
   const mockSubscription = {
@@ -76,7 +75,6 @@ describe('NotificationsService', () => {
     }).compile();
 
     service = module.get<NotificationsService>(NotificationsService);
-    prismaService = module.get<PrismaService>(PrismaService);
 
     jest.clearAllMocks();
     mockPrismaService.$queryRaw.mockResolvedValue([{ '?column?': 1 }]);

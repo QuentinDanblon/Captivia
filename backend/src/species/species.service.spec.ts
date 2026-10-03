@@ -35,30 +35,32 @@ describe('SpeciesService', () => {
     mockCacheService.get.mockReset().mockReturnValue(null);
     mockCacheService.getStale.mockReset().mockReturnValue(null);
     mockTransformerService.transformSearchResults.mockImplementation(
-      (results: any[]) => ({
+      (results: unknown[] | null | undefined) => ({
         results: results ?? [],
         total: results?.length ?? 0,
         source: 'gbif',
         cachedAt: new Date(),
       }),
     );
-    mockTransformerService.transformSpecies.mockImplementation((item: any) => ({
-      ...item,
-    }));
+    mockTransformerService.transformSpecies.mockImplementation(
+      (item: Record<string, unknown>) => ({
+        ...item,
+      }),
+    );
     mockTransformerService.transformVernacularNames.mockImplementation(
-      (arr: any[]) => ({
+      (arr: Array<{ language: string; name: string }> | null | undefined) => ({
         results: (arr ?? [])
-          .filter((v: any) => v.language === 'french')
-          .map((v: any) => v.name),
+          .filter((v) => v.language === 'french')
+          .map((v) => v.name),
         source: 'gbif',
         cachedAt: new Date(),
       }),
     );
     mockTransformerService.transformMedia.mockImplementation(
-      (arr: any[]) => arr ?? [],
+      (arr: unknown[] | null | undefined) => arr ?? [],
     );
     mockFilterService.applyFilters.mockImplementation(
-      (results: any[], _filters: any) => ({
+      (results: unknown[] | null | undefined, _filters: unknown) => ({
         results: results ?? [],
         total: results?.length ?? 0,
         filtersApplied: [] as string[],
@@ -185,7 +187,7 @@ describe('SpeciesService', () => {
 
       const result = await service.searchSpecies('boa', 10, 0, {
         class: 'Reptilia',
-      } as any);
+      });
 
       expect(mockSpeciesProfileService.searchFromProfile).toHaveBeenCalledWith(
         'boa',
@@ -692,7 +694,9 @@ describe('SpeciesService', () => {
           new ExternalUnavailableError('gbif'),
         );
 
-        const error = await service.getSpecies('999').catch((e) => e);
+        const error = (await service
+          .getSpecies('999')
+          .catch((e: unknown) => e)) as HttpException;
 
         expect(error).toBeInstanceOf(HttpException);
         expect(error.getStatus()).toBe(503);
@@ -713,7 +717,9 @@ describe('SpeciesService', () => {
           upstreamHttpError(502),
         );
 
-        const error = await service.getDistributions('1').catch((e) => e);
+        const error = (await service
+          .getDistributions('1')
+          .catch((e: unknown) => e)) as HttpException;
 
         expect(error).toBeInstanceOf(HttpException);
         expect(error.getStatus()).toBe(503);

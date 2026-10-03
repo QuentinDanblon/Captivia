@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/unbound-method -- tests : mocks axios/supertest typés any */
 import 'reflect-metadata';
 import { AdvancedSearchController } from '../species/advanced-search.controller';
 import { ApiGatewayController } from '../gateway/api-gateway.controller';
@@ -54,10 +53,11 @@ describe('throttle.config', () => {
   });
 
   it('POST /gateway/clear-cache/* exige JwtAuthGuard puis OperatorGuard', () => {
-    const guards = Reflect.getMetadata(
-      '__guards__',
-      ApiGatewayController.prototype.clearCache,
-    ) as unknown[];
+    const handler = Object.getOwnPropertyDescriptor(
+      ApiGatewayController.prototype,
+      'clearCache',
+    )?.value as object;
+    const guards = Reflect.getMetadata('__guards__', handler) as unknown[];
     expect(guards).toEqual([JwtAuthGuard, OperatorGuard]);
   });
 });

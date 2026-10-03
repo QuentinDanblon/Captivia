@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import {
   ApiGatewayService,
   ENRICH_CONCURRENCY,
@@ -20,7 +19,9 @@ function buildService(options: {
     searchSpecies: jest.fn().mockResolvedValue({ results }),
   };
   const wikipediaService = {
-    searchSpecies: jest.fn(options.onWikipedia ?? (async () => null)),
+    searchSpecies: jest.fn(
+      options.onWikipedia ?? (() => Promise.resolve(null)),
+    ),
   };
   const wikidataService = {
     searchSpecies: jest.fn().mockResolvedValue({ results: [] }),
@@ -112,9 +113,7 @@ describe('ApiGatewayService.searchSpecies', () => {
   it("un échec d'enrichissement n'échoue pas la recherche", async () => {
     const { service } = buildService({
       gbifCount: 2,
-      onWikipedia: async () => {
-        throw new Error('boom');
-      },
+      onWikipedia: () => Promise.reject(new Error('boom')),
     });
     const out = (await service.searchSpecies('boa', 2)) as {
       results: unknown[];
@@ -144,10 +143,10 @@ describe('mapWithConcurrency', () => {
 
   it('gère une liste vide et une concurrence invalide', async () => {
     await expect(
-      mapWithConcurrency([], 3, async (n: number) => n),
+      mapWithConcurrency([], 3, (n: number) => Promise.resolve(n)),
     ).resolves.toEqual([]);
     await expect(
-      mapWithConcurrency([1, 2], 0, async (n) => n),
+      mapWithConcurrency([1, 2], 0, (n) => Promise.resolve(n)),
     ).resolves.toEqual([1, 2]);
   });
 });

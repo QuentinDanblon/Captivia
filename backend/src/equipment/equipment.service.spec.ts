@@ -4,7 +4,6 @@ import { PrismaService } from '../prisma/prisma.service';
 
 describe('EquipmentService', () => {
   let service: EquipmentService;
-  let prismaService: PrismaService;
 
   const mockEquipment = {
     id: 'equip-id-123',
@@ -39,7 +38,6 @@ describe('EquipmentService', () => {
     }).compile();
 
     service = module.get<EquipmentService>(EquipmentService);
-    prismaService = module.get<PrismaService>(PrismaService);
 
     jest.clearAllMocks();
   });

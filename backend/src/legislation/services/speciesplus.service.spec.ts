@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call -- tests : mocks du client HTTP typés any */
 import { HttpException, Logger } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { SpeciesPlusService } from './speciesplus.service';
@@ -59,7 +58,7 @@ describe('SpeciesPlusService', () => {
         () => service.getDistributions(1),
       ];
       for (const call of calls) {
-        const error = await call().catch((e) => e);
+        const error = (await call().catch((e: unknown) => e)) as HttpException;
         expect(error).toBeInstanceOf(HttpException);
         expect(error.getStatus()).toBe(503);
         expect(error.getResponse()).toMatchObject({
@@ -112,7 +111,9 @@ describe('SpeciesPlusService', () => {
       const { service, http, cache } = buildService();
       http.get.mockRejectedValue(httpError(500));
 
-      const error = await service.getEULegislation(7).catch((e) => e);
+      const error = (await service
+        .getEULegislation(7)
+        .catch((e: unknown) => e)) as HttpException;
       expect(error).toBeInstanceOf(HttpException);
       expect(error.getStatus()).toBe(503);
       expect(error.getResponse()).toMatchObject({
