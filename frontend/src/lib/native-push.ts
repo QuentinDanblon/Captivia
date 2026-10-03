@@ -10,7 +10,11 @@
  * - Rafraîchissement : FCM peut changer le jeton (événement `registration` spontané) ; le nouveau
  *   est renvoyé avec `previousToken`. L'app réenregistre aussi le jeton à chaque synchronisation
  *   (lancement, retour au premier plan), ce qui tient `lastSeenAt` à jour côté serveur.
- * - Déconnexion, rappels coupés sur l'appareil : le jeton est retiré du compte.
+ * - Déconnexion (y compris forcée : session expirée ou révoquée, hors ligne), rappels coupés sur
+ *   l'appareil : le jeton est retiré du compte (best effort) ET invalidé auprès de FCM / APNs
+ *   (`PushNotifications.unregister()`) : même si le serveur n'a pas pu être joint, FCM répondra
+ *   UNREGISTERED au prochain envoi et le serveur purgera la ligne. Un `register()` ultérieur
+ *   (reconnexion, rappels réactivés) obtient un nouveau jeton.
  * - Notification touchée : `pushNotificationRoute` donne la page à ouvrir (fiche de l'animal).
  *
  * Plugin importé à la demande : rien dans le bundle web, aucun effet hors de l'app native.
@@ -50,6 +54,8 @@ export interface PushSession {
   locale: string;
   /** Fin de la couverture locale ; null : aucune ; absent : inchangée côté serveur. */
   coveredUntil?: Date | null;
+  /** Avec `coveredUntil` : instant serveur de l'Agenda programmé (`generatedAt`). */
+  coveredAsOf?: string;
 }
 
 export type PushRegisterOutcome = 'registered' | 'unsupported' | 'no-permission' | 'error';
@@ -85,6 +91,9 @@ async function postToken(token: string, current: PushSession): Promise<boolean> 
   const body: Record<string, unknown> = { token, platform, locale: current.locale };
   if (current.coveredUntil !== undefined) {
     body.localRemindersUntil = current.coveredUntil ? current.coveredUntil.toISOString() : null;
+    // Sans état des soins, le serveur ne retient aucune couverture (il ne peut pas savoir quels
+    // soins ont été programmés) : anti-perte plutôt qu'anti-doublon.
+    if (current.coveredUntil && current.coveredAsOf) body.localRemindersAsOf = current.coveredAsOf;
   }
   if (previous && previous !== token) body.previousToken = previous;
   try {
@@ -179,29 +188,57 @@ export function registerNativePush(next: PushSession): Promise<PushRegisterOutco
 }
 
 /**
+ * Invalide le jeton de l'installation auprès de FCM / APNs (`unregister()` du plugin), après une
+ * éventuelle inscription en cours (file `chain`). Seulement dans un build avec push natif
+ * (sans Firebase, le plugin n'est jamais sollicité). N'échoue jamais.
+ */
+function unregisterPlugin(): Promise<void> {
+  if (!isNative() || getPlatform() === 'web' || !isNativePushBuild()) return Promise.resolve();
+  const run = chain.then(
+    () => doUnregisterPlugin(),
+    () => doUnregisterPlugin(),
+  );
+  chain = run.catch(() => undefined);
+  return run;
+}
+
+async function doUnregisterPlugin(): Promise<void> {
+  try {
+    await (await loadPush()).unregister();
+  } catch {
+    // plugin absent ou jeton déjà invalidé
+  }
+}
+
+/**
  * Retire le jeton de cette installation du compte (rappels coupés, déconnexion) et l'oublie.
- * `authToken` null : oubli local seulement (session déjà perdue). N'échoue jamais.
+ * `authToken` null : session déjà perdue (déconnexion forcée), pas d'appel serveur. Dans tous les
+ * cas le jeton est invalidé auprès de FCM / APNs (`unregister()`), ce qui fait purger la ligne
+ * côté serveur au prochain envoi (UNREGISTERED) si le DELETE n'a pas abouti (hors ligne).
+ * N'échoue jamais.
  */
 export async function unregisterNativePush(authToken: string | null): Promise<void> {
   session = null;
   const token = currentNativePushToken();
-  if (!token) return;
   rememberToken(null);
-  if (!isNative() || !authToken) return;
-  try {
-    await authFetch(
-      DEVICE_TOKENS_URL(),
-      {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
-        body: JSON.stringify({ token }),
-      },
-      // Pendant une déconnexion : ni rafraîchissement ni événement de déconnexion en cascade.
-      { logoutOn401: false },
-    );
-  } catch {
-    // best effort : FCM finira par signaler le jeton périmé, ou le prochain compte le reprendra
+  if (token && isNative() && authToken) {
+    try {
+      await authFetch(
+        DEVICE_TOKENS_URL(),
+        {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
+          body: JSON.stringify({ token }),
+        },
+        // Pendant une déconnexion : ni rafraîchissement ni événement de déconnexion en cascade.
+        { logoutOn401: false },
+      );
+    } catch {
+      // hors ligne : l'invalidation ci-dessous fera répondre UNREGISTERED à FCM, et le serveur
+      // supprimera la ligne au prochain envoi
+    }
   }
+  await unregisterPlugin();
 }
 
 /** Session terminée sans appel serveur possible : plus de renvoi spontané du jeton. */
@@ -218,7 +255,13 @@ export async function syncNativePush(result: SyncResult, current: Omit<PushSessi
   if (result.outcome === 'scheduled') {
     await registerNativePush({
       ...current,
-      ...(result.coveredUntil ? { coveredUntil: result.coveredUntil } : {}),
+      // null transmis tel quel (aucune couverture garantie) ; absent : inchangée côté serveur.
+      ...(result.coveredUntil !== undefined
+        ? {
+            coveredUntil: result.coveredUntil,
+            ...(result.coveredAsOf ? { coveredAsOf: result.coveredAsOf } : {}),
+          }
+        : {}),
     });
   } else if (result.outcome === 'disabled' || result.outcome === 'no-permission') {
     await unregisterNativePush(current.authToken);

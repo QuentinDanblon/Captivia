@@ -16,12 +16,28 @@ export interface PushReminderPayload {
   /** Urgence Web Push (RFC 8030). Défaut : `normal`. */
   urgency?: PushUrgency;
   /**
-   * W6-07 — Instant du soin quand l'app le programme AUSSI en notification locale (élément de
-   * l'agenda : routine, médicament, vaccin, RDV). Un appareil natif qui l'a déjà programmé
-   * (`DeviceToken.localRemindersUntil`) ne reçoit pas de push distant pour ce rappel (anti-doublon).
-   * Ignoré par le Web Push.
+   * W6-07 — Présent seulement quand l'app programme CE rappel-là, à CET instant, en notification
+   * locale (routine ou médicament de l'Agenda, instant vérifié : `localReminderFor`). Un appareil
+   * natif dont la couverture locale l'inclut ne reçoit pas de push distant (anti-doublon). Ignoré
+   * par le Web Push.
    */
-  localReminderAt?: Date;
+  localReminder?: LocalReminderRef;
+  /**
+   * W6-07 — Échéance (ms depuis l'epoch) du canal natif pour l'exécution en cours du scheduler :
+   * au-delà, aucun envoi FCM n'est tenté ni attendu. Ignorée par le Web Push.
+   */
+  nativeDeadline?: number;
+}
+
+/** Rappel programmé aussi en local par l'app (cf. `PushReminderPayload.localReminder`). */
+export interface LocalReminderRef {
+  /** Instant du rappel (identique à celui de la notification locale). */
+  at: Date;
+  /**
+   * Dernière modification de la source (routine, médicament) : l'appareil ne l'a programmée que
+   * si son état des soins (`DeviceToken.localRemindersAsOf`) est postérieur.
+   */
+  sourceUpdatedAt: Date;
 }
 
 /** Envoi de notifications push pour un utilisateur. Renvoie true si au moins un envoi a abouti. */

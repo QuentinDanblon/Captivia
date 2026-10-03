@@ -15,6 +15,12 @@ export const GOOGLE_OAUTH_TOKEN_URL = 'https://oauth2.googleapis.com/token';
 export const FCM_SCOPE = 'https://www.googleapis.com/auth/firebase.messaging';
 /** Échéance d'un appel à Google (jeton ou envoi) : un service lent ne bloque pas le cron. */
 export const FCM_REQUEST_TIMEOUT_MS = 5_000;
+/**
+ * Coupe-circuit (revue de sécurité, constat 5) : après un échec d'obtention du jeton d'accès
+ * (Google lent, clé révoquée…), les appels suivants échouent aussitôt pendant 60 s au lieu
+ * d'attendre chacun jusqu'à {@link FCM_REQUEST_TIMEOUT_MS}.
+ */
+export const AUTH_FAILURE_BACKOFF_MS = 60_000;
 /** Le jeton d'accès est renouvelé 5 min avant son expiration. */
 const ACCESS_TOKEN_MARGIN_MS = 5 * 60 * 1000;
 const ASSERTION_LIFETIME_S = 3600;
@@ -94,10 +100,13 @@ interface GoogleErrorBody {
 /**
  * Interprète une réponse d'erreur FCM v1. Jeton à purger :
  * - `UNREGISTERED` (404) : application désinstallée, jeton expiré ou révoqué ;
- * - `SENDER_ID_MISMATCH` (403) : jeton d'un autre projet Firebase ;
  * - `INVALID_ARGUMENT` (400) **visant le jeton** (`fieldViolations` sur `message.token`, ou message
  *   « registration token ») : jeton mal formé. Un `INVALID_ARGUMENT` sur un autre champ signale un
  *   défaut de NOTRE message : on journalise sans purger (sinon un bogue viderait toute la table).
+ *
+ * `SENDER_ID_MISMATCH` (403) n'est PAS purgé (revue de sécurité, constat 2) : il signale le plus
+ * souvent une clé de compte de service d'un autre projet Firebase que celui de l'app ; purger
+ * viderait toute la table. Erreur de configuration, journalisée par l'expéditeur.
  */
 export function classifyFcmError(
   status: number,
@@ -121,7 +130,6 @@ export function classifyFcmError(
 
   const invalidToken =
     errorCode === 'UNREGISTERED' ||
-    errorCode === 'SENDER_ID_MISMATCH' ||
     (errorCode === 'INVALID_ARGUMENT' && tokenTargeted);
 
   return { ok: false, status, errorCode, invalidToken, message };
@@ -130,6 +138,8 @@ export function classifyFcmError(
 export class FcmClient {
   private cached: { token: string; expiresAt: number } | null = null;
   private pending: Promise<string> | null = null;
+  /** Échec récent d'obtention du jeton d'accès : échec immédiat jusqu'à cet instant (ms). */
+  private authFailedUntil = 0;
 
   constructor(
     private readonly account: FcmServiceAccount,
@@ -167,17 +177,35 @@ export class FcmClient {
     this.cached = null;
   }
 
-  /** Jeton d'accès valide (cache partagé ; un seul échange simultané). */
+  /**
+   * Jeton d'accès valide (cache partagé ; un seul échange simultané). Après un échec, cache
+   * négatif de {@link AUTH_FAILURE_BACKOFF_MS} : échec immédiat, sans appel à Google.
+   */
   async accessToken(): Promise<string> {
-    if (
-      this.cached &&
-      this.cached.expiresAt - ACCESS_TOKEN_MARGIN_MS > this.now()
-    ) {
+    const now = this.now();
+    if (this.cached && this.cached.expiresAt - ACCESS_TOKEN_MARGIN_MS > now) {
       return this.cached.token;
     }
-    this.pending ??= this.fetchAccessToken().finally(() => {
-      this.pending = null;
-    });
+    if (!this.pending && now < this.authFailedUntil) {
+      const seconds = Math.ceil((this.authFailedUntil - now) / 1000);
+      throw new Error(
+        `Jeton d'accès Google indisponible (échec récent, nouvel essai dans ${seconds} s)`,
+      );
+    }
+    this.pending ??= this.fetchAccessToken()
+      .then(
+        (token) => {
+          this.authFailedUntil = 0;
+          return token;
+        },
+        (error: unknown) => {
+          this.authFailedUntil = this.now() + AUTH_FAILURE_BACKOFF_MS;
+          throw error;
+        },
+      )
+      .finally(() => {
+        this.pending = null;
+      });
     return this.pending;
   }
 

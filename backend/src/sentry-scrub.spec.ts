@@ -144,6 +144,44 @@ describe('scrubEvent (erreurs)', () => {
     ]);
   });
 
+  it('masks every key ending with "token" (FCM device tokens), in objects and JSON text bodies', () => {
+    // Revue de sécurité W6-07, constat 4 : jetons FCM (deviceToken, previousToken…) en clair.
+    const out = scrubEvent({
+      request: {
+        url: 'https://api.captivia.app/users/me/device-tokens',
+        data: `{"token":"${SECRET}","previousToken":"${SECRET}","platform":"ios","fcm_token":"${SECRET}"}`,
+      },
+      extra: {
+        deviceToken: SECRET,
+        nested: { PreviousToken: SECRET, fcmToken: SECRET, tokens: 2 },
+        pairs: [['deviceToken', SECRET]],
+      },
+      contexts: { push: { DEVICETOKEN: SECRET, platform: 'android' } },
+      breadcrumbs: [
+        {
+          message: `POST /auth/logout {"refreshToken":"${SECRET}","deviceToken":"${SECRET}"}`,
+          data: { body: { deviceToken: SECRET } },
+        },
+      ],
+    } as unknown as ScrubbedEvent);
+    expect(leaks(out)).toBe(false);
+    expect(out.request?.data).toBe(
+      `{"token":"${FILTERED}","previousToken":"${FILTERED}","platform":"ios","fcm_token":"${FILTERED}"}`,
+    );
+    expect(out.extra).toEqual({
+      deviceToken: FILTERED,
+      nested: { PreviousToken: FILTERED, fcmToken: FILTERED, tokens: 2 },
+      pairs: [['deviceToken', FILTERED]],
+    });
+    expect(out.contexts).toEqual({
+      push: { DEVICETOKEN: FILTERED, platform: 'android' },
+    });
+    expect(
+      scrubSpan({ data: { 'push.deviceToken': SECRET } } as unknown as Span)
+        .data,
+    ).toEqual({ 'push.deviceToken': FILTERED });
+  });
+
   it('keeps generic "code" keys outside of the request (error codes stay readable)', () => {
     const out = scrubEvent({
       extra: { code: 'P2002' },

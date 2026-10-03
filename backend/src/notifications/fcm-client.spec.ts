@@ -1,5 +1,6 @@
 import { generateKeyPairSync, verify } from 'crypto';
 import {
+  AUTH_FAILURE_BACKOFF_MS,
   FCM_SCOPE,
   FcmClient,
   FetchLike,
@@ -136,6 +137,27 @@ describe('FcmClient', () => {
     expect(calls.some((c) => c.url.startsWith('https://fcm.'))).toBe(false);
   });
 
+  it('échec du jeton d’accès : cache négatif de 60 s, puis nouvel essai', async () => {
+    const { impl, calls } = fakeFetch([], {
+      status: 400,
+      body: { error: 'invalid_grant' },
+    });
+    let clock = 1_000_000;
+    const client = new FcmClient(account, impl, () => clock);
+    expect((await client.send(message)).ok).toBe(false);
+    clock += AUTH_FAILURE_BACKOFF_MS - 1;
+    const fast = await client.send(message);
+    expect(fast).toMatchObject({ ok: false, errorCode: 'AUTH' });
+    expect(calls.filter((c) => c.url === GOOGLE_OAUTH_TOKEN_URL)).toHaveLength(
+      1,
+    );
+    clock += 1;
+    await client.send(message);
+    expect(calls.filter((c) => c.url === GOOGLE_OAUTH_TOKEN_URL)).toHaveLength(
+      2,
+    );
+  });
+
   it('401 de FCM : le jeton d’accès est oublié et redemandé au prochain envoi', async () => {
     const { impl, calls } = fakeFetch([
       { status: 401, body: { error: { status: 'UNAUTHENTICATED' } } },
@@ -186,13 +208,14 @@ describe('classifyFcmError', () => {
     ).toMatchObject({ errorCode: 'UNREGISTERED', invalidToken: true });
   });
 
-  it('SENDER_ID_MISMATCH (403) : jeton d’un autre projet, à purger', () => {
+  it('SENDER_ID_MISMATCH (403) : erreur de configuration (clé d’un autre projet), jeton conservé', () => {
+    // Revue de sécurité W6-07, constat 2 : purger viderait toute la table sur une mauvaise clé.
     expect(
       classifyFcmError(
         403,
         fcmError('PERMISSION_DENIED', 'SENDER_ID_MISMATCH'),
       ),
-    ).toMatchObject({ invalidToken: true });
+    ).toMatchObject({ errorCode: 'SENDER_ID_MISMATCH', invalidToken: false });
   });
 
   it('INVALID_ARGUMENT visant le jeton : à purger', () => {

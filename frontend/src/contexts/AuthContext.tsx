@@ -59,6 +59,11 @@ function clearStoredSession() {
   removeStorage(TOKEN_KEY);
   removeStorage(REFRESH_TOKEN_KEY);
   removeStorage(USER_KEY);
+  // W6-07 : session terminée sans passer par `logout()` (401 / `auth:logout`, session révoquée au
+  // lancement…) : le jeton de push de l'appareil, encore connu, est invalidé auprès de FCM / APNs
+  // (le serveur, injoignable avec cette session, le purgera sur UNREGISTERED). Après `logout()`,
+  // le jeton est déjà oublié : rien à refaire.
+  if (isNative() && currentNativePushToken()) void unregisterNativePush(null).catch(() => undefined);
 }
 
 /**

@@ -465,13 +465,16 @@ model DeviceToken {
   userId              String
   /// "android" | "ios" (CHECK SQL "DeviceToken_platform_check")
   platform            String
-  /// Jeton d'enregistrement FCM (secret technique : jamais exporté ni journalisé).
+  /// Jeton d'enregistrement FCM (secret technique : jamais exporté ni journalisé ; ≤ 512 caractères, CHECK SQL).
   token               String    @unique
   /// Langue de l'app au dernier enregistrement (fr, en, es, de, it, pt).
   locale              String    @default("fr")
   /// Les rappels de soins prévus avant cet instant sont déjà programmés en notifications locales
   /// sur l'appareil (W6-06) : pas de push distant pour eux (anti-doublon). NULL = aucun.
   localRemindersUntil DateTime? @db.Timestamptz(3)
+  /// Instant serveur (`generatedAt` de l'Agenda) de l'état des soins programmés sur l'appareil : une
+  /// routine / un médicament modifié depuis n'est pas réputé couvert. NULL = aucune couverture.
+  localRemindersAsOf  DateTime? @db.Timestamptz(3)
   createdAt           DateTime  @default(now()) @db.Timestamptz(3)
   /// Dernier enregistrement par l'app (lancement, retour au premier plan) : purge après 270 jours.
   lastSeenAt          DateTime  @default(now()) @db.Timestamptz(3)

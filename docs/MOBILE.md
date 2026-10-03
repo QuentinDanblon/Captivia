@@ -256,7 +256,16 @@ distant (FCM/APNs, W6-07) complète ces rappels : § 7.3.
   remplace le Web Push dans l'app) : tous les rappels programmés sont annulés et plus rien n'est
   programmé jusqu'à réactivation.
 - **Clic** sur un rappel : `localNotificationActionPerformed` → fiche de l'animal (`animalDetailPath`).
-- **Android** : canal `captivia-reminders` (importance haute, nom traduit), `allowWhileIdle`.
+- **Android** : canal `captivia-reminders-v2` (importance haute, nom traduit, **visibilité privée** :
+  sur l'écran verrouillé, « contenu masqué » — le titre d'un rappel peut contenir le nom d'un
+  médicament, sa dose ou le nom du vétérinaire), `allowWhileIdle`. La visibilité d'un canal existant
+  ne pouvant plus être modifiée par une app, l'ancien canal `captivia-reminders` (visibilité
+  publique) est supprimé à chaque synchronisation (`deleteChannel`) et les rappels sont reprogrammés
+  sur le nouveau : pas de doublon dans les réglages. Le texte complet reste affiché une fois le
+  téléphone déverrouillé.
+- **iOS** : rien à forcer ; l'affichage des aperçus sur l'écran verrouillé est un réglage de
+  l'utilisateur (*Réglages → Notifications → Afficher les aperçus* : « Si déverrouillé » masque le
+  texte des rappels, push compris).
 
 ### 7.2 Permissions Android
 
@@ -298,14 +307,30 @@ appareil ; les préférences existantes s'appliquent (`deliveryChannel` « e-mai
 types désactivés : aucun rappel généré). Il n'existe pas d'heures calmes réglables aujourd'hui (la
 fenêtre `schedule` des préférences n'est pas exposée ni appliquée, y compris au Web Push).
 
-**Anti-doublon avec les rappels locaux (§ 7.1)** : après chaque synchronisation réussie depuis le
-réseau, l'app envoie `localRemindersUntil` (fin de l'horizon de 30 jours, ou instant du 64ᵉ rappel
-si la limite iOS est atteinte). Le serveur n'envoie **pas** de push pour un rappel d'agenda (routine,
-médicament, vaccin, RDV) prévu avant cette date : le téléphone le sonne déjà, même hors ligne. Les
-rappels au-delà (routine horaire, 64 atteints) et les types personnalisés (absents de l'agenda)
-arrivent en push. Valeur bornée à 31 jours côté serveur. Limite connue : un soin ajouté **depuis le
-site** pendant que l'app est en arrière-plan n'est rappelé sur le téléphone qu'après le prochain
-retour au premier plan (comme avant W6-07).
+**Anti-doublon avec les rappels locaux (§ 7.1)** : un rappel n'est retenu côté serveur que si l'app
+programme **réellement ce rappel-là, à cet instant-là** (revue de sécurité W6-07, constat 1). Après
+chaque synchronisation réussie depuis le réseau, l'app envoie `localRemindersUntil` (fin de
+l'horizon de 30 jours, ou instant du 64ᵉ rappel si la limite iOS est atteinte) et
+`localRemindersAsOf` (`generatedAt` de l'Agenda programmé, horloge serveur). Le serveur ne pousse
+**pas** à cet appareil un rappel qui remplit toutes ces conditions (`localReminderFor`,
+`coveredLocally`) :
+
+- c'est une **routine** ou un **médicament** dont l'Agenda contient une occurrence **au même instant**
+  (mêmes fonctions de calcul : `agenda-occurrences.ts`) ; un médicament hebdomadaire un autre jour ou
+  une prise « toutes les N heures » qui ne tombe pas à 08:00 n'est donc pas couvert ;
+- l'instant précède `localRemindersUntil` ;
+- la routine / le médicament n'a **pas été modifié depuis** `localRemindersAsOf` (sinon, par exemple
+  une routine créée depuis le site pendant que l'app est en arrière-plan, le push part).
+
+Ne sont **jamais** couverts, donc toujours poussés : les **RDV vétérinaires** (l'app ne programme
+qu'une notification à l'heure du RDV, le serveur envoie les rappels J-N et celui du jour à 08:00),
+les **vaccins** (l'app rappelle à 9 h heure du téléphone, le serveur à 08:00 heure du compte : deux
+notifications ce jour-là), les types personnalisés (absents de l'agenda). Sans `localRemindersAsOf`,
+ou si l'Agenda a été tronqué par l'API, aucune couverture n'est retenue (anti-perte avant
+anti-doublon). Valeur bornée à 31 jours côté serveur. L'app demande l'Agenda de J-2 à J+31 (jours du
+téléphone) pour que tous les soins de la couverture y figurent même si le téléphone n'est pas dans
+le fuseau du compte. Limite connue : après un changement de fuseau du compte, les rappels locaux
+suivent au prochain retour au premier plan.
 
 **Cycle de vie du jeton** (`src/lib/native-push.ts`) :
 
@@ -315,9 +340,16 @@ retour au premier plan (comme avant W6-07).
 - rafraîchi : nouvel événement `registration` → renvoyé avec `previousToken` (l'ancien est supprimé) ;
 - retiré : déconnexion (`/auth/logout` avec `deviceToken` + `DELETE`), « Couper les rappels sur ce
   téléphone », permission retirée dans les réglages, logout-all, suppression du compte, purge des
-  invités, réponse `UNREGISTERED` / `SENDER_ID_MISMATCH` / `INVALID_ARGUMENT` (jeton) de FCM, 270 jours
-  sans réenregistrement (maintenance) ;
-- un jeton enregistré par un autre compte (téléphone prêté, déconnexion hors ligne) lui est retiré.
+  invités, réponse `UNREGISTERED` / `INVALID_ARGUMENT` (jeton) de FCM, 270 jours sans
+  réenregistrement (maintenance). `SENDER_ID_MISMATCH` ne purge **pas** : c'est presque toujours une
+  clé de compte de service d'un autre projet Firebase (erreur de configuration, RUNBOOK § 4.7) ;
+- invalidé auprès de FCM / APNs (`PushNotifications.unregister()`) à chaque retrait côté app, y
+  compris à la déconnexion **forcée** (session expirée ou révoquée : `auth:logout`) et hors ligne :
+  si le `DELETE` n'a pas abouti, FCM répond `UNREGISTERED` au prochain envoi et le serveur purge la
+  ligne. La reconnexion (ou la réactivation des rappels) appelle `register()`, qui fournit un nouveau
+  jeton ;
+- un jeton enregistré par un autre compte (téléphone prêté, déconnexion hors ligne) lui est retiré ;
+  le compte qui le reprend reste plafonné à 10 installations (les moins récemment vues partent).
 
 **Notification touchée** : `pushNotificationActionPerformed` → `data.animalId` → fiche de l'animal
 (`animalDetailPath`), sinon l'agenda. Au premier plan, la notification est affichée aussi
@@ -327,11 +359,13 @@ retour au premier plan (comme avant W6-07).
 
 | Route | Corps | Réponse |
 | --- | --- | --- |
-| `POST /users/me/device-tokens` | `{ token, platform: "android"\|"ios", locale?, localRemindersUntil?: ISO\|null, previousToken? }` | `200 { enabled, platform, lastSeenAt }` (`enabled` : FCM configuré côté serveur) |
+| `POST /users/me/device-tokens` | `{ token, platform: "android"\|"ios", locale?, localRemindersUntil?: ISO\|null, localRemindersAsOf?: ISO, previousToken? }` | `200 { enabled, platform, lastSeenAt }` (`enabled` : FCM configuré côté serveur) |
 | `DELETE /users/me/device-tokens` | `{ token }` | `200 { success: true }` (idempotent) |
 | `POST /auth/logout` | `{ refreshToken, endpoint?, deviceToken? }` | `200` |
 
-`token` : 32 à 4 096 caractères `[A-Za-z0-9_:-]` ; champ inconnu → 400.
+`token`, `previousToken`, `deviceToken` : 32 à 512 caractères `[A-Za-z0-9_:-]` (CHECK SQL
+identique) ; champ inconnu → 400. `localRemindersUntil` sans `localRemindersAsOf` : aucune
+couverture retenue.
 
 #### 7.3.1 Projet Firebase (gratuit, une fois)
 
@@ -368,11 +402,12 @@ retour au premier plan (comme avant W6-07).
 <meta-data android:name="com.google.firebase.messaging.default_notification_color"
     android:resource="@color/captivia_notification" />
 <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id"
-    android:value="captivia-reminders" />
+    android:value="captivia-reminders-v2" />
 ```
 
   avec `<color name="captivia_notification">#0AA678</color>` dans `res/values/colors.xml`. Le canal
-  `captivia-reminders` est créé par l'app (§ 7.1) ; `POST_NOTIFICATIONS` est déjà déclarée.
+  `captivia-reminders-v2` (visibilité privée) est créé par l'app (§ 7.1) et l'API l'indique dans
+  chaque message (`android.notification.channel_id`) ; `POST_NOTIFICATIONS` est déjà déclarée.
 
 #### 7.3.3 iOS (Xcode)
 

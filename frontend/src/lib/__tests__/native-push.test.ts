@@ -17,6 +17,7 @@ const plugin = {
       }
     }, 0);
   }),
+  unregister: jest.fn(async () => undefined),
   addListener: jest.fn(async (name: string, fn: Handler) => {
     pushListeners.set(name, fn);
     return { remove: async () => void pushListeners.delete(name) };
@@ -105,7 +106,9 @@ describe('registerNativePush', () => {
   it('enregistre le jeton FCM auprès de l’API (plateforme, langue, couverture locale)', async () => {
     plugin.tokens = ['fcm-1'];
     const until = new Date('2026-11-02T00:00:00.000Z');
-    expect(await registerNativePush({ ...session, coveredUntil: until })).toBe('registered');
+    expect(
+      await registerNativePush({ ...session, coveredUntil: until, coveredAsOf: '2026-10-03T10:00:00.000Z' }),
+    ).toBe('registered');
     const [post] = calls('POST');
     expect(post[0]).toBe('https://api.test/users/me/device-tokens');
     expect((post[1] as RequestInit).headers).toMatchObject({ Authorization: 'Bearer jwt' });
@@ -114,6 +117,7 @@ describe('registerNativePush', () => {
       platform: 'android',
       locale: 'fr',
       localRemindersUntil: '2026-11-02T00:00:00.000Z',
+      localRemindersAsOf: '2026-10-03T10:00:00.000Z',
     });
     expect(currentNativePushToken()).toBe('fcm-1');
     expect(localStorage.getItem(PUSH_TOKEN_KEY)).toBe('fcm-1');
@@ -166,13 +170,14 @@ describe('registerNativePush', () => {
 });
 
 describe('unregisterNativePush', () => {
-  it('retire le jeton du compte puis l’oublie', async () => {
+  it('retire le jeton du compte, l’invalide auprès de FCM (unregister) puis l’oublie', async () => {
     plugin.tokens = ['fcm-1'];
     await registerNativePush(session);
     await unregisterNativePush('jwt');
     const [del] = calls('DELETE');
     expect(bodyOf(del)).toEqual({ token: 'fcm-1' });
     expect(del[2]).toEqual({ logoutOn401: false });
+    expect(plugin.unregister).toHaveBeenCalledTimes(1);
     expect(currentNativePushToken()).toBeNull();
     // Plus de session : un rafraîchissement spontané n'est plus transmis.
     mockAuthFetch.mockClear();
@@ -181,30 +186,92 @@ describe('unregisterNativePush', () => {
     expect(mockAuthFetch).not.toHaveBeenCalled();
   });
 
-  it('sans jeton connu ou sans session : aucun appel', async () => {
-    await unregisterNativePush('jwt');
-    expect(mockAuthFetch).not.toHaveBeenCalled();
-    localStorage.setItem(PUSH_TOKEN_KEY, 'fcm-1');
-    await unregisterNativePush(null);
-    expect(mockAuthFetch).not.toHaveBeenCalled();
-    expect(currentNativePushToken()).toBeNull();
-  });
-
-  it('une erreur réseau ne remonte jamais', async () => {
+  it('déconnexion hors ligne : DELETE en échec, le jeton est quand même invalidé (unregister)', async () => {
     localStorage.setItem(PUSH_TOKEN_KEY, 'fcm-1');
     mockAuthFetch.mockRejectedValueOnce(new Error('offline'));
     await expect(unregisterNativePush('jwt')).resolves.toBeUndefined();
+    expect(plugin.unregister).toHaveBeenCalledTimes(1);
+    expect(currentNativePushToken()).toBeNull();
+  });
+
+  it('déconnexion forcée (session perdue) : aucun appel serveur, jeton invalidé et oublié', async () => {
+    localStorage.setItem(PUSH_TOKEN_KEY, 'fcm-1');
+    await unregisterNativePush(null);
+    expect(mockAuthFetch).not.toHaveBeenCalled();
+    expect(plugin.unregister).toHaveBeenCalledTimes(1);
+    expect(currentNativePushToken()).toBeNull();
+  });
+
+  it('sans jeton connu : aucun appel serveur', async () => {
+    await unregisterNativePush('jwt');
+    expect(mockAuthFetch).not.toHaveBeenCalled();
+  });
+
+  it('unregister() qui échoue ne remonte jamais', async () => {
+    localStorage.setItem(PUSH_TOKEN_KEY, 'fcm-1');
+    plugin.unregister.mockRejectedValueOnce(new Error('plugin'));
+    await expect(unregisterNativePush('jwt')).resolves.toBeUndefined();
+  });
+
+  it('build sans Firebase ou web : le plugin n’est jamais sollicité', async () => {
+    delete process.env.NEXT_PUBLIC_NATIVE_PUSH;
+    localStorage.setItem(PUSH_TOKEN_KEY, 'fcm-1');
+    await unregisterNativePush(null);
+    expect(plugin.unregister).not.toHaveBeenCalled();
+    process.env.NEXT_PUBLIC_NATIVE_PUSH = '1';
+    mockIsNative.mockReturnValue(false);
+    await unregisterNativePush(null);
+    expect(plugin.unregister).not.toHaveBeenCalled();
+  });
+
+  it('réactivation après déconnexion : register() obtient un nouveau jeton, enregistré sans previousToken', async () => {
+    plugin.tokens = ['fcm-1', 'fcm-2'];
+    await registerNativePush(session);
+    await unregisterNativePush('jwt');
+    expect(plugin.unregister).toHaveBeenCalledTimes(1);
+    mockAuthFetch.mockClear();
+    expect(await registerNativePush(session)).toBe('registered');
+    expect(plugin.register).toHaveBeenCalledTimes(2);
+    expect(bodyOf(calls('POST')[0])).toEqual({ token: 'fcm-2', platform: 'android', locale: 'fr' });
+    expect(currentNativePushToken()).toBe('fcm-2');
+  });
+
+  it('unregister() passe après une inscription en cours : le jeton obtenu est invalidé', async () => {
+    const order: string[] = [];
+    plugin.tokens = ['fcm-1'];
+    plugin.register.mockImplementationOnce(async () => {
+      order.push('register');
+      setTimeout(() => {
+        (pushListeners.get('registration') as (p: { value: string }) => void)?.({ value: 'fcm-1' });
+      }, 5);
+    });
+    plugin.unregister.mockImplementationOnce(async () => void order.push('unregister'));
+    const registering = registerNativePush(session);
+    await flush();
+    await unregisterNativePush(null);
+    await registering;
+    expect(order).toEqual(['register', 'unregister']);
   });
 });
 
 describe('syncNativePush', () => {
-  it('rappels programmés : enregistre avec la couverture ; hors ligne : couverture omise', async () => {
-    plugin.tokens = ['fcm-1', 'fcm-1'];
+  it('rappels programmés : enregistre avec la couverture ; hors ligne : couverture omise ; tronquée : null', async () => {
+    plugin.tokens = ['fcm-1', 'fcm-1', 'fcm-1'];
     const until = new Date('2026-11-02T00:00:00.000Z');
-    await syncNativePush({ outcome: 'scheduled', count: 3, source: 'network', coveredUntil: until }, session);
-    expect(bodyOf(calls('POST')[0]).localRemindersUntil).toBe(until.toISOString());
+    const asOf = '2026-10-03T10:00:00.000Z';
+    await syncNativePush(
+      { outcome: 'scheduled', count: 3, source: 'network', coveredUntil: until, coveredAsOf: asOf },
+      session,
+    );
+    expect(bodyOf(calls('POST')[0])).toMatchObject({
+      localRemindersUntil: until.toISOString(),
+      localRemindersAsOf: asOf,
+    });
     await syncNativePush({ outcome: 'scheduled', count: 3, source: 'cache' }, session);
     expect(bodyOf(calls('POST')[1])).not.toHaveProperty('localRemindersUntil');
+    await syncNativePush({ outcome: 'scheduled', count: 3, source: 'network', coveredUntil: null }, session);
+    expect(bodyOf(calls('POST')[2]).localRemindersUntil).toBeNull();
+    expect(bodyOf(calls('POST')[2])).not.toHaveProperty('localRemindersAsOf');
   });
 
   it('rappels coupés ou permission retirée : jeton retiré ; indisponible : rien', async () => {

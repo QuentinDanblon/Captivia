@@ -203,6 +203,10 @@ describe('Jetons de push natif (E2E)', () => {
         platform: 'ios',
       },
       { token: 'a'.repeat(5000), platform: 'ios' },
+      // Longueur maximale : 512 (revue de sécurité, constat 6).
+      { token: 'a'.repeat(513), platform: 'ios' },
+      { token, platform: 'ios', previousToken: 'a'.repeat(513) },
+      { token, platform: 'ios', localRemindersAsOf: 'hier' },
       { token, platform: 'ios', locale: 'xx' },
       { token, platform: 'ios', localRemindersUntil: 'demain' },
       { token, platform: 'ios', previousToken: 'x' },
@@ -211,7 +215,16 @@ describe('Jetons de push natif (E2E)', () => {
       await post(accessToken, body).expect(400);
     }
     await del(accessToken, { token: '../../x' }).expect(400);
+    await del(accessToken, { token: 'a'.repeat(513) }).expect(400);
+    await request(server())
+      .post('/auth/logout')
+      .send({ refreshToken: 'x'.repeat(40), deviceToken: 'a'.repeat(513) })
+      .expect(400);
     expect(await rows(user.id)).toHaveLength(0);
+    // 512 caractères : accepté.
+    await post(accessToken, { token: 'a'.repeat(512), platform: 'ios' }).expect(
+      200,
+    );
   });
 
   it('enregistre, puis réenregistre sans doublon (lastSeenAt, langue, couverture locale)', async () => {
@@ -231,16 +244,29 @@ describe('Jetons de push natif (E2E)', () => {
     expect(JSON.stringify(first.body)).not.toContain(token);
 
     const until = new Date(Date.now() + 10 * DAY_MS).toISOString();
+    const asOf = new Date(Date.now() - 60_000).toISOString();
+    // Couverture sans état des soins (`localRemindersAsOf`) : non retenue.
+    await post(accessToken, {
+      token,
+      platform: 'android',
+      localRemindersUntil: until,
+    }).expect(200);
+    expect((await rows(user.id))[0]).toMatchObject({
+      localRemindersUntil: null,
+      localRemindersAsOf: null,
+    });
     await post(accessToken, {
       token,
       platform: 'android',
       locale: 'de',
       localRemindersUntil: until,
+      localRemindersAsOf: asOf,
     }).expect(200);
     const [row, ...others] = await rows(user.id);
     expect(others).toHaveLength(0);
     expect(row).toMatchObject({ token, platform: 'android', locale: 'de' });
     expect(row.localRemindersUntil?.toISOString()).toBe(until);
+    expect(row.localRemindersAsOf?.toISOString()).toBe(asOf);
     expect(row.lastSeenAt.getTime()).toBeGreaterThanOrEqual(
       row.createdAt.getTime(),
     );
@@ -251,8 +277,13 @@ describe('Jetons de push natif (E2E)', () => {
       token,
       platform: 'android',
       localRemindersUntil: '2999-01-01T00:00:00.000Z',
+      localRemindersAsOf: '2999-01-01T00:00:00.000Z',
     }).expect(200);
     const [clamped] = await rows(user.id);
+    // État des soins dans le futur : ramené à l'instant de l'enregistrement.
+    expect(clamped.localRemindersAsOf!.getTime()).toBeLessThanOrEqual(
+      Date.now(),
+    );
     expect(clamped.localRemindersUntil!.getTime()).toBeLessThanOrEqual(
       Date.now() + MAX_LOCAL_COVERAGE_MS,
     );
@@ -270,7 +301,10 @@ describe('Jetons de push natif (E2E)', () => {
       platform: 'android',
       localRemindersUntil: null,
     }).expect(200);
-    expect((await rows(user.id))[0].localRemindersUntil).toBeNull();
+    expect((await rows(user.id))[0]).toMatchObject({
+      localRemindersUntil: null,
+      localRemindersAsOf: null,
+    });
   });
 
   it('un jeton passe au dernier compte qui l’enregistre ; previousToken remplace l’ancien', async () => {
@@ -281,6 +315,7 @@ describe('Jetons de push natif (E2E)', () => {
       token: shared,
       platform: 'ios',
       localRemindersUntil: new Date(Date.now() + DAY_MS).toISOString(),
+      localRemindersAsOf: new Date().toISOString(),
     }).expect(200);
     await post(b.accessToken, { token: shared, platform: 'ios' }).expect(200);
     expect(await rows(a.user.id)).toHaveLength(0);
@@ -288,6 +323,7 @@ describe('Jetons de push natif (E2E)', () => {
     expect(transferred.token).toBe(shared);
     // La couverture locale du compte A ne vaut pas pour B.
     expect(transferred.localRemindersUntil).toBeNull();
+    expect(transferred.localRemindersAsOf).toBeNull();
 
     // A ne peut pas retirer le jeton de B.
     await del(a.accessToken, { token: shared }).expect(200);
@@ -318,6 +354,76 @@ describe('Jetons de push natif (E2E)', () => {
     }
     const kept = (await rows(user.id)).map((r) => r.token).sort();
     expect(kept).toEqual(tokens.slice(2).sort());
+  });
+
+  it('jeton repris d’un autre compte : le plafond s’applique aussi (revue de sécurité, constat 6)', async () => {
+    const a = await register('cap-transfer-a');
+    const b = await register('cap-transfer-b');
+    const own = Array.from({ length: MAX_DEVICE_TOKENS_PER_USER }, fcmToken);
+    for (const token of own) {
+      await post(b.accessToken, { token, platform: 'android' }).expect(200);
+    }
+    const shared = fcmToken();
+    await post(a.accessToken, { token: shared, platform: 'ios' }).expect(200);
+
+    await post(b.accessToken, { token: shared, platform: 'ios' }).expect(200);
+    const kept = (await rows(b.user.id)).map((r) => r.token).sort();
+    expect(kept).toHaveLength(MAX_DEVICE_TOKENS_PER_USER);
+    // La moins récemment vue de B est partie ; la ligne transférée est conservée.
+    expect(kept).toEqual([...own.slice(1), shared].sort());
+    expect(await rows(a.user.id)).toHaveLength(0);
+  });
+
+  it('création concurrente (P2002) : le repli rejoue le transfert (couverture remise à zéro) et retire previousToken', async () => {
+    const a = await register('race-a');
+    const b = await register('race-b');
+    const shared = fcmToken();
+    const previous = fcmToken();
+    await post(a.accessToken, {
+      token: shared,
+      platform: 'android',
+      localRemindersUntil: new Date(Date.now() + DAY_MS).toISOString(),
+      localRemindersAsOf: new Date().toISOString(),
+    }).expect(200);
+    await post(b.accessToken, { token: previous, platform: 'android' }).expect(
+      200,
+    );
+
+    // Première transaction d'enregistrement : violation d'unicité (création concurrente).
+    const original = prisma.$transaction.bind(prisma) as (
+      ...args: unknown[]
+    ) => Promise<unknown>;
+    let failed = false;
+    const spy = jest.spyOn(prisma, '$transaction').mockImplementation(((
+      ...args: unknown[]
+    ) => {
+      if (!failed && typeof args[0] === 'function') {
+        failed = true;
+        return Promise.reject(
+          Object.assign(new Error('Unique constraint failed'), {
+            code: 'P2002',
+          }),
+        );
+      }
+      return original(...args);
+    }) as unknown as typeof prisma.$transaction);
+    try {
+      await post(b.accessToken, {
+        token: shared,
+        platform: 'android',
+        previousToken: previous,
+      }).expect(200);
+    } finally {
+      spy.mockRestore();
+    }
+    expect(failed).toBe(true);
+    expect(await rows(a.user.id)).toHaveLength(0);
+    const after = await rows(b.user.id);
+    expect(after.map((r) => r.token)).toEqual([shared]);
+    expect(after[0]).toMatchObject({
+      localRemindersUntil: null,
+      localRemindersAsOf: null,
+    });
   });
 
   it('déconnexion (deviceToken), logout-all et export RGPD', async () => {
