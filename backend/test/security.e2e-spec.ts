@@ -19,7 +19,7 @@ describe('Security Tests', () => {
   beforeAll(async () => {
     // Serveur à l'écoute sur un port éphémère, configuré comme main.ts
     // (ValidationPipe, filtre, CORS, helmet) — cf. test/utils/create-app.ts (BE-10).
-    ({ app, url } = await createTestApp({ offlineGbif: true }));
+    ({ app, url } = await createTestApp());
 
     prisma = app.get(PrismaService);
 

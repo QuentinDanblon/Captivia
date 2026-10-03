@@ -114,4 +114,14 @@ export const envValidationSchema = Joi.object({
   /** Mode invité : "false" désactive la purge planifiée des invités inactifs. */
   GUEST_PURGE_ENABLED: Joi.string().valid('true', 'false').default('true'),
   GOOGLE_PLAY_PACKAGE_NAME: Joi.string().allow('').optional(),
+  /**
+   * Intégrations externes (W3-05) — TOUTES optionnelles :
+   * - Species+ (CITES/UE) exige un jeton : absent, /speciesplus/* répond 503
+   *   INTEGRATION_DISABLED et la fiche législation indique `speciesPlus.status = "disabled"` ;
+   * - PubMed (NCBI) est public : la clé et l'e-mail relèvent seulement le quota (3 → 10 req/s) ;
+   * - Amazon : aucune intégration (route /amazon/* retirée, décision D-09), donc aucune variable.
+   */
+  SPECIESPLUS_API_TOKEN: Joi.string().trim().allow('').optional(),
+  NCBI_API_KEY: Joi.string().trim().allow('').optional(),
+  NCBI_EMAIL: Joi.string().trim().allow('').optional(),
 });

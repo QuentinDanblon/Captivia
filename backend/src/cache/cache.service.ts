@@ -5,6 +5,11 @@ import { getCacheTTL, getDefaultCacheTTL } from './cache.config';
 
 /** Nombre maximal d'entrées en mémoire (éviction LRU au-delà). */
 export const CACHE_MAX_ENTRIES = 5000;
+/**
+ * Durée (secondes) pendant laquelle une entrée EXPIRÉE reste consultable via `getStale`
+ * (repli quand un fournisseur externe est indisponible). Jamais servie par `get`.
+ */
+export const CACHE_STALE_GRACE_SECONDS = 7 * 24 * 3600;
 /** Les clés plus longues sont remplacées par leur empreinte SHA-1. */
 export const CACHE_MAX_KEY_LENGTH = 200;
 
@@ -12,6 +17,8 @@ interface CacheEntry {
   data: unknown;
   /** Date d'expiration absolue (ms epoch), calculée à l'écriture. */
   expiresAt: number;
+  /** Au-delà, l'entrée n'est plus servie même en repli (`getStale`). */
+  staleUntil: number;
 }
 
 /**
@@ -52,7 +59,8 @@ export class CacheService {
 
     if (item.expiresAt <= Date.now()) {
       this.logger.debug(`Cache expired for key: ${storeKey}`);
-      this.cache.delete(storeKey);
+      // Conservée pour `getStale` jusqu'à la fin de la période de grâce.
+      if (item.staleUntil <= Date.now()) this.cache.delete(storeKey);
       return null;
     }
 
@@ -61,6 +69,22 @@ export class CacheService {
     this.cache.set(storeKey, item);
 
     this.logger.debug(`Cache hit for key: ${storeKey}`);
+    return item.data;
+  }
+
+  /**
+   * Valeur la plus récente connue, MÊME EXPIRÉE (dans la période de grâce) : repli
+   * lorsque le fournisseur externe est en panne. À n'utiliser qu'après un échec de `get`
+   * + de l'appel externe ; ne rafraîchit ni le TTL ni la position LRU.
+   */
+  getStale(key: string): unknown {
+    const storeKey = normalizeCacheKey(key);
+    const item = this.cache.get(storeKey);
+    if (!item) return null;
+    if (item.staleUntil <= Date.now()) {
+      this.cache.delete(storeKey);
+      return null;
+    }
     return item.data;
   }
 
@@ -79,9 +103,11 @@ export class CacheService {
 
     // Réécriture : repositionne la clé en fin de Map (la plus récente).
     this.cache.delete(storeKey);
+    const expiresAt = Date.now() + ttlSeconds * 1000;
     this.cache.set(storeKey, {
       data,
-      expiresAt: Date.now() + ttlSeconds * 1000,
+      expiresAt,
+      staleUntil: expiresAt + CACHE_STALE_GRACE_SECONDS * 1000,
     });
 
     while (this.cache.size > CACHE_MAX_ENTRIES) {
@@ -98,7 +124,7 @@ export class CacheService {
     if (!item) return false;
 
     if (item.expiresAt <= Date.now()) {
-      this.cache.delete(storeKey);
+      if (item.staleUntil <= Date.now()) this.cache.delete(storeKey);
       return false;
     }
 

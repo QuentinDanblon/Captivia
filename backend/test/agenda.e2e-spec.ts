@@ -50,7 +50,7 @@ describe('Agenda des soins E2E', () => {
   const get = (path: string, t = tokenA) => request(url).get(path).set(auth(t));
 
   beforeAll(async () => {
-    ({ app, url } = await createTestApp({ offlineGbif: true }));
+    ({ app, url } = await createTestApp());
     prisma = app.get(PrismaService);
 
     ({ token: tokenA, id: userA } = await register('a'));

@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException, Logger } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  NotFoundException,
+  Logger,
+} from '@nestjs/common';
 import { CacheService } from '../cache/cache.service';
 import { GbifService } from '../external/gbif.service';
 import { SpeciesTransformerService } from '../transformers/species-transformer.service';
@@ -6,7 +11,12 @@ import { SpeciesFilterService } from '../filters/species-filter.service';
 import { SpeciesProfileService } from './species-profile.service';
 import { SpeciesFilter } from '../filters/species-filter.interface';
 import { Media } from '../transformers/data-transformer.interface';
-import axios from 'axios';
+import {
+  isUpstreamError,
+  isUpstreamNotFound,
+  toUpstreamHttpException,
+  upstreamUnavailable,
+} from '../external/http/external-errors';
 
 interface SearchResult {
   results: unknown[];
@@ -54,11 +64,17 @@ export class SpeciesService {
     // Fallback to GBIF when no profile results (recherche vide ou base profils limitée)
     if ((result.results?.length ?? 0) === 0) {
       const searchQuery = (query?.trim() || 'animal').slice(0, 100);
+      const gbifLimit = Math.min(limit * 3, 60);
+      const cacheKey = `search:gbif:${searchQuery.toLowerCase()}:${limit}:${offset}:${filters?.class ?? ''}`;
+      const cached = this.cacheService.get(cacheKey) as any;
+      if (cached) {
+        return cached;
+      }
       this.logger.log(`Profile empty, falling back to GBIF with query="${searchQuery}"`);
       try {
         const gbifResponse = await this.gbifService.searchSpecies(
           searchQuery,
-          Math.min(limit * 3, 60),
+          gbifLimit,
           offset,
         );
         let gbifResults = gbifResponse.results || [];
@@ -75,8 +91,17 @@ export class SpeciesService {
         result = this.transformerService.transformSearchResults(sliced);
         result.total = gbifResults.length;
         result.source = 'gbif';
+        // Réponse GBIF valide (même vide : « aucune espèce ») : mise en cache 1 h.
+        this.cacheService.set(cacheKey, result, 3600);
       } catch (err) {
-        this.logger.warn(`GBIF fallback failed: ${err}`);
+        // Panne GBIF : jamais de 500 sur une recherche. Repli sur la dernière réponse
+        // connue (même périmée), sinon sur le résultat local (vide) — NON mis en cache.
+        this.logger.warn(`GBIF fallback failed: ${(err as Error).message}`);
+        const stale = this.cacheService.getStale(cacheKey) as any;
+        if (stale) {
+          return { ...stale, stale: true };
+        }
+        result = { ...result, degraded: true };
       }
     }
 
@@ -127,6 +152,9 @@ export class SpeciesService {
     let rank: string = 'SPECIES';
     let iucnStatus: string | undefined;
     let gbifSpecies: any = null;
+    // Panne GBIF (réseau, 5xx, disjoncteur ouvert) : distincte d'un 404 (espèce inconnue
+    // de GBIF, normal pour les races au speciesId artificiel).
+    let gbifUnavailable = false;
     try {
       gbifSpecies = await this.gbifService.getSpecies(id);
       if (gbifSpecies) {
@@ -141,10 +169,23 @@ export class SpeciesService {
       }
     } catch (err) {
       this.logger.warn(`GBIF taxonomy for species ${id} failed: ${(err as Error).message}`);
+      gbifUnavailable = isUpstreamError(err) && !isUpstreamNotFound(err);
+    }
+
+    if (gbifUnavailable) {
+      // Dernière fiche complète connue (même périmée) : meilleure qu'une fiche sans taxonomie.
+      const stale = this.cacheService.getStale(cacheKey);
+      if (stale) {
+        return { ...(stale as object), stale: true };
+      }
     }
 
     // If no local profile AND no GBIF data, species truly does not exist
     if (!profileDetail.profile && !gbifSpecies) {
+      if (gbifUnavailable) {
+        // On ne peut pas affirmer que l'espèce n'existe pas : 503, pas 404.
+        throw upstreamUnavailable('Species data temporarily unavailable');
+      }
       throw new NotFoundException('Species not found');
     }
 
@@ -207,6 +248,12 @@ export class SpeciesService {
       };
     }
 
+    if (gbifUnavailable) {
+      // Fiche locale sans taxonomie : renvoyée, mais JAMAIS mise en cache (sinon la panne
+      // GBIF serait figée 24 h dans la réponse).
+      return { ...response, degraded: true };
+    }
+
     // Cache the results with species-specific TTL (24h)
     this.cacheService.set(cacheKey, response, 86400);
 
@@ -256,32 +303,24 @@ export class SpeciesService {
         source: 'gbif',
       };
     } catch (error) {
-      // Re-throw NotFoundException, otherwise re-throw the error
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      // Check if it's an axios error with 404 status
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        throw new NotFoundException('Species not found');
-      }
-      throw error;
+      return this.onGbifFailure(error, 'Species not found', `vernacular:${id}`, (stale: any) => ({ results: stale.results, source: 'stale-cache' }));
     }
   }
 
   async getIucn(id: string) {
     this.logger.log(`Getting IUCN status for species: ${id}`);
+    const cacheKey = `iucn:${id}`;
+    const cachedIucn = this.cacheService.get(cacheKey);
+    if (cachedIucn) {
+      return cachedIucn;
+    }
     try {
-      return await this.gbifService.getIucn(id);
+      const gbifIucn = await this.gbifService.getIucn(id);
+      // Mise en cache 24 h d'une réponse valide uniquement (jamais d'un échec).
+      if (gbifIucn) this.cacheService.set(cacheKey, gbifIucn, 86400);
+      return gbifIucn;
     } catch (error) {
-      // Re-throw NotFoundException, otherwise re-throw the error
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      // Check if it's an axios error with 404 status
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        throw new NotFoundException('IUCN status not available for this species');
-      }
-      throw error;
+      return this.onGbifFailure(error, 'IUCN status not available for this species', `iucn:${id}`, (stale: any) => stale);
     }
   }
 
@@ -327,15 +366,7 @@ export class SpeciesService {
 
       return gbifDistributions;
     } catch (error) {
-      // Re-throw NotFoundException, otherwise re-throw the error
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      // Check if it's an axios error with 404 status
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        throw new NotFoundException('Species not found');
-      }
-      throw error;
+      return this.onGbifFailure(error, 'Species not found', `distributions:${id}`, (stale: any) => stale);
     }
   }
 
@@ -372,15 +403,7 @@ export class SpeciesService {
         source: 'gbif',
       };
     } catch (error) {
-      // Re-throw NotFoundException, otherwise re-throw the error
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      // Check if it's an axios error with 404 status
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        throw new NotFoundException('Species not found');
-      }
-      throw error;
+      return this.onGbifFailure(error, 'Species not found', `media:${id}`, (stale: any) => ({ results: Array.isArray(stale) ? stale : (stale.results ?? []), source: 'stale-cache' }));
     }
   }
 
@@ -405,15 +428,7 @@ export class SpeciesService {
 
       return gbifMetrics;
     } catch (error) {
-      // Re-throw NotFoundException, otherwise re-throw the error
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      // Check if it's an axios error with 404 status
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        throw new NotFoundException('Species not found');
-      }
-      throw error;
+      return this.onGbifFailure(error, 'Species not found', `metrics:${id}`, (stale: any) => stale);
     }
   }
 
@@ -438,16 +453,36 @@ export class SpeciesService {
 
       return gbifCount;
     } catch (error) {
-      // Re-throw NotFoundException, otherwise re-throw the error
-      if (error instanceof NotFoundException) {
-        throw error;
-      }
-      // Check if it's an axios error with 404 status
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        throw new NotFoundException('Species not found');
-      }
+      return this.onGbifFailure(error, 'Species not found', `occurrences:${id}`, (stale: any) => stale);
+    }
+  }
+
+  /**
+   * Traite l'échec d'un appel GBIF pour un sous-endpoint (noms, IUCN, médias…) :
+   * 404 → NotFound ; panne (réseau, 5xx, disjoncteur ouvert) → dernière valeur connue
+   * même périmée, sinon 503 explicite. Jamais de 500 pour une indisponibilité GBIF.
+   */
+  private onGbifFailure<T>(
+    error: unknown,
+    notFoundMessage: string,
+    staleKey: string,
+    fromStale: (stale: unknown) => T,
+  ): T {
+    if (error instanceof HttpException) {
       throw error;
     }
+    if (isUpstreamNotFound(error)) {
+      throw new NotFoundException(notFoundMessage);
+    }
+    const stale = this.cacheService.getStale(staleKey);
+    if (stale) {
+      this.logger.warn(`GBIF indisponible, réponse périmée servie pour ${staleKey}`);
+      return fromStale(stale);
+    }
+    throw toUpstreamHttpException(
+      error,
+      'Species data temporarily unavailable',
+    );
   }
 
   clearCacheForSpecies(id: string): void {
@@ -455,6 +490,7 @@ export class SpeciesService {
       `species:${id}`,
       `media:${id}`,
       `vernacular:${id}`,
+      `iucn:${id}`,
       `distributions:${id}`,
       `metrics:${id}`,
       `occurrences:${id}`,

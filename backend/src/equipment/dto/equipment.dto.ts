@@ -4,7 +4,6 @@ import {
   IsInt,
   IsArray,
   Min,
-  Max,
   MaxLength,
   ArrayMaxSize,
 } from 'class-validator';
@@ -88,22 +87,4 @@ export class UpdateEquipmentDto {
   @Min(0)
   @Type(() => Number)
   order?: number;
-}
-
-export class AmazonSearchDto {
-  @IsString()
-  @MaxLength(200)
-  q: string;
-
-  @IsOptional()
-  @IsString()
-  @MaxLength(100)
-  category?: string;
-
-  @IsOptional()
-  @IsInt()
-  @Min(1)
-  @Max(50)
-  @Type(() => Number)
-  limit?: number;
 }

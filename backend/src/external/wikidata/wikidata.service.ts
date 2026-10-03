@@ -1,6 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
-import axios, { AxiosInstance } from 'axios';
-import { isValidQid } from '../http-safety';
+import { describeHttpError, isValidQid } from '../http-safety';
+import { ExternalHttpService } from '../http/external-http.service';
+import { isUpstreamNotFound } from '../http/external-errors';
+
+/** Nom scientifique accepté dans la requête SPARQL (lettres, espaces, . ' - ×). */
+const SCIENTIFIC_NAME_REGEX = /^[\p{L}\p{M}][\p{L}\p{M} .'×-]{1,99}$/u;
+
+const SPARQL_HEADERS = { Accept: 'application/json' };
 
 /**
  * Wikidata API Service for fetching species information from Wikidata
@@ -9,38 +15,11 @@ import { isValidQid } from '../http-safety';
 @Injectable()
 export class WikidataService {
   private readonly logger = new Logger(WikidataService.name);
-  private readonly wikidataApi: AxiosInstance;
-  private readonly wikidataQueryApi: AxiosInstance;
-  private readonly wikidataSearchApi: AxiosInstance;
   private readonly wikidataBaseUrl = 'https://www.wikidata.org/wiki/Special:EntityData';
   private readonly wikidataQueryUrl = 'https://query.wikidata.org/sparql';
+  private readonly wikidataSearchUrl = 'https://www.wikidata.org/w/api.php';
 
-  constructor() {
-    this.wikidataApi = axios.create({
-      baseURL: this.wikidataBaseUrl,
-      headers: {
-        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
-      },
-      timeout: 10000,
-    });
-
-    this.wikidataQueryApi = axios.create({
-      baseURL: this.wikidataQueryUrl,
-      timeout: 10000,
-      headers: {
-        Accept: 'application/json',
-        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
-      },
-    });
-
-    this.wikidataSearchApi = axios.create({
-      baseURL: 'https://www.wikidata.org/w/api.php',
-      timeout: 10000,
-      headers: {
-        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
-      },
-    });
-  }
+  constructor(private readonly http: ExternalHttpService) {}
 
   /**
    * Search Wikidata for a species by name using the entity search API
@@ -49,7 +28,7 @@ export class WikidataService {
    */
   async searchSpecies(query: string) {
     try {
-      const response = await this.wikidataSearchApi.get('', {
+      const response = await this.http.get('wikidata', this.wikidataSearchUrl, {
         params: {
           action: 'wbsearchentities',
           search: query,
@@ -61,7 +40,7 @@ export class WikidataService {
 
       return this.transformSearchResults(response.data);
     } catch (error) {
-      this.logger.error('Wikidata search failed', error);
+      this.logger.error(`Wikidata search failed: ${describeHttpError(error)}`);
       return { results: [], source: 'wikidata' };
     }
   }
@@ -74,7 +53,7 @@ export class WikidataService {
   async getEntity(qid: string) {
     if (!isValidQid(qid)) return null;
     try {
-      const response = await this.wikidataApi.get(`/${qid}.json`);
+      const response = await this.http.get('wikidata', `${this.wikidataBaseUrl}/${qid}.json`);
 
       if (!response.data || !response.data.entities || !response.data.entities[qid]) {
         return null;
@@ -82,10 +61,10 @@ export class WikidataService {
 
       return this.transformEntity(response.data.entities[qid]);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikidata entity fetch failed', error);
+      this.logger.error(`Wikidata entity fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -96,6 +75,14 @@ export class WikidataService {
    * @returns Species data from Wikidata
    */
   async getSpeciesByScientificName(scientificName: string) {
+    // Le nom est interpolé dans la requête SPARQL : on refuse tout caractère de syntaxe.
+    if (
+      typeof scientificName !== 'string' ||
+      !SCIENTIFIC_NAME_REGEX.test(scientificName.trim())
+    ) {
+      return null;
+    }
+    scientificName = scientificName.trim();
     try {
       // Try to find the species using common name or scientific name
       const sparqlQuery = `
@@ -116,7 +103,8 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.wikidataQueryApi.get('', {
+      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
+        headers: SPARQL_HEADERS,
         params: {
           query: sparqlQuery,
           format: 'json',
@@ -129,10 +117,10 @@ export class WikidataService {
 
       return this.transformEntity(response.data.results.bindings[0]);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikidata species fetch failed', error);
+      this.logger.error(`Wikidata species fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -159,7 +147,8 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.wikidataQueryApi.get('', {
+      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
+        headers: SPARQL_HEADERS,
         params: {
           query: sparqlQuery,
           format: 'json',
@@ -172,10 +161,10 @@ export class WikidataService {
 
       return this.transformConservationStatus(response.data.results.bindings[0]);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikidata conservation status fetch failed', error);
+      this.logger.error(`Wikidata conservation status fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -206,7 +195,8 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.wikidataQueryApi.get('', {
+      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
+        headers: SPARQL_HEADERS,
         params: {
           query: sparqlQuery,
           format: 'json',
@@ -219,10 +209,10 @@ export class WikidataService {
 
       return this.transformClassification(response.data.results.bindings[0]);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikidata classification fetch failed', error);
+      this.logger.error(`Wikidata classification fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -247,7 +237,8 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.wikidataQueryApi.get('', {
+      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
+        headers: SPARQL_HEADERS,
         params: {
           query: sparqlQuery,
           format: 'json',
@@ -260,10 +251,10 @@ export class WikidataService {
 
       return this.transformDescriptions(response.data.results.bindings[0]);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikidata descriptions fetch failed', error);
+      this.logger.error(`Wikidata descriptions fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -288,7 +279,8 @@ export class WikidataService {
         LIMIT 5
       `;
 
-      const response = await this.wikidataQueryApi.get('', {
+      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
+        headers: SPARQL_HEADERS,
         params: {
           query: sparqlQuery,
           format: 'json',
@@ -301,10 +293,10 @@ export class WikidataService {
 
       return this.transformImages(response.data.results.bindings);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikidata images fetch failed', error);
+      this.logger.error(`Wikidata images fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -330,7 +322,8 @@ export class WikidataService {
         LIMIT 10
       `;
 
-      const response = await this.wikidataQueryApi.get('', {
+      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
+        headers: SPARQL_HEADERS,
         params: {
           query: sparqlQuery,
           format: 'json',
@@ -343,10 +336,10 @@ export class WikidataService {
 
       return this.transformRelatedSpecies(response.data.results.bindings);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikidata related species fetch failed', error);
+      this.logger.error(`Wikidata related species fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -356,24 +349,28 @@ export class WikidataService {
    * @returns Health status
    */
   async checkApiHealth() {
+    const started = Date.now();
     try {
       const sparqlQuery = 'SELECT ?item WHERE { ?item wdt:P225 "Panthera leo" } LIMIT 1';
-      const response = await this.wikidataQueryApi.get('', {
+      await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
+        headers: SPARQL_HEADERS,
         params: {
           query: sparqlQuery,
           format: 'json',
         },
-        timeout: 5000,
+        retry: false,
       });
       return {
         status: 'healthy',
-        responseTime: response.headers['request-duration'] || 'unknown',
+        responseTime: `${Date.now() - started}ms`,
+        circuit: this.http.circuitState('wikidata-sparql'),
       };
     } catch (error) {
-      this.logger.error('Wikidata API health check failed', error);
+      this.logger.warn(`Wikidata API health check failed: ${describeHttpError(error)}`);
       return {
         status: 'unhealthy',
-        error: error.message,
+        error: error instanceof Error ? error.message : 'unknown error',
+        circuit: this.http.circuitState('wikidata-sparql'),
       };
     }
   }

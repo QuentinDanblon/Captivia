@@ -1,13 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   PaginationQueryDto,
   toPage,
 } from '../common/dto/pagination-query.dto';
 import { SpeciesPlusService } from './services/speciesplus.service';
+import { describeHttpError } from '../external/http-safety';
 
 @Injectable()
 export class LegislationService {
+  private readonly logger = new Logger(LegislationService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly speciesPlusService: SpeciesPlusService,
@@ -36,21 +39,15 @@ export class LegislationService {
       legislations = items;
     }
 
-    // TODO: Fetch from Species+ API
-    // For now, this would require the scientific name
-    // const species = await gbifService.getSpecies(speciesId);
-    // const speciesPlusResults = await this.speciesPlusService.searchByScientificName(species.scientificName);
-    // const citesData = await this.speciesPlusService.getCitesLegislation(speciesPlusResults[0].id);
-    // const euData = await this.speciesPlusService.getEULegislation(speciesPlusResults[0].id);
+    // Species+ (CITES / UE) : uniquement si l'intégration est configurée (jeton), via le nom
+    // scientifique du profil local. Jamais de donnée inventée : `status` dit ce qu'il en est.
+    const speciesPlus = await this.getSpeciesPlusInfo(speciesId);
 
     return {
       speciesId,
       country: country?.toUpperCase(),
       editorial: legislations?.filter(Boolean) || [],
-      speciesPlus: {
-        cites: null, // Will be populated when integrated with GBIF
-        eu: null,
-      },
+      speciesPlus,
       disclaimer:
         'Informations indicatives. Vérifiez toujours la réglementation locale en vigueur.',
       sources: [
@@ -59,6 +56,53 @@ export class LegislationService {
         'https://www.aphis.usda.gov/',
       ],
     };
+  }
+
+  /**
+   * Statut Species+ d'une espèce :
+   * - `disabled`    : pas de jeton SPECIESPLUS_API_TOKEN (intégration désactivée) ;
+   * - `not_found`   : pas de profil local, ou taxon absent de Species+ ;
+   * - `unavailable` : Species+ en panne (disjoncteur / réseau) — la fiche reste servie ;
+   * - `ok`          : listes CITES et UE issues de Species+.
+   */
+  private async getSpeciesPlusInfo(speciesId: number): Promise<{
+    status: 'disabled' | 'not_found' | 'unavailable' | 'ok';
+    taxonId?: number;
+    cites: unknown[] | null;
+    eu: unknown[] | null;
+  }> {
+    if (!this.speciesPlusService.isConfigured()) {
+      return { status: 'disabled', cites: null, eu: null };
+    }
+    const profile = await this.prisma.speciesProfile.findUnique({
+      where: { speciesId },
+      select: { scientificName: true },
+    });
+    if (!profile?.scientificName) {
+      return { status: 'not_found', cites: null, eu: null };
+    }
+    try {
+      const taxa = await this.speciesPlusService.searchByScientificName(
+        profile.scientificName,
+      );
+      const wanted = profile.scientificName.trim().toLowerCase();
+      const taxon =
+        taxa.find((t: any) => String(t?.full_name ?? '').toLowerCase() === wanted) ??
+        taxa[0];
+      if (!taxon || typeof taxon.id !== 'number') {
+        return { status: 'not_found', cites: null, eu: null };
+      }
+      const [cites, eu] = await Promise.all([
+        this.speciesPlusService.getCitesLegislation(taxon.id),
+        this.speciesPlusService.getEULegislation(taxon.id),
+      ]);
+      return { status: 'ok', taxonId: taxon.id, cites, eu };
+    } catch (error) {
+      this.logger.warn(
+        `Species+ indisponible pour l'espèce ${speciesId}: ${describeHttpError(error)}`,
+      );
+      return { status: 'unavailable', cites: null, eu: null };
+    }
   }
 
   async createOrUpdateLegislation(

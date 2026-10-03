@@ -1,6 +1,6 @@
 import { Throttle } from '@nestjs/throttler';
 import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
-import { BadRequestException, Controller, Get, Query, Param, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Query, Param, NotFoundException } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -9,8 +9,12 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 import { OpenPetFoodFactsService } from './services/openpetfoodfacts.service';
-import { FoodSearchDto } from './dto/food-search.dto';
-import { isValidBarcode } from '../external/http-safety';
+import {
+  BarcodeParamDto,
+  FoodSearchDto,
+  FoodSpeciesParamDto,
+  FoodSpeciesQueryDto,
+} from './dto/food-search.dto';
 
 @ApiTags('food')
 @Controller('food')
@@ -53,11 +57,11 @@ export class FoodController {
   @ApiParam({ name: 'barcode', description: 'Product barcode/EAN' })
   @ApiResponse({ status: 200, description: 'Product found' })
   @ApiResponse({ status: 404, description: 'Product not found' })
-  async getProduct(@Param('barcode') barcode: string): Promise<unknown> {
-    if (!isValidBarcode(barcode)) {
-      throw new BadRequestException('barcode must be 8 to 14 digits');
-    }
-    const product = await this.openPetFoodFactsService.getProduct(barcode);
+  @ApiResponse({ status: 400, description: 'Barcode must be 8 to 14 digits' })
+  @ApiResponse({ status: 503, description: 'Food database temporarily unavailable' })
+  async getProduct(@Param() params: BarcodeParamDto): Promise<unknown> {
+    // Le format du code-barres (^\d{8,14}$) est validé par BarcodeParamDto.
+    const product = await this.openPetFoodFactsService.getProduct(params.barcode);
 
     if (!product) {
       throw new NotFoundException('Product not found');
@@ -85,13 +89,17 @@ export class FoodController {
   @ApiQuery({ name: 'type', required: false, description: 'Food type (dry, wet, treats)' })
   @ApiResponse({ status: 200, description: 'Food products for species' })
   async getFoodBySpecies(
-    @Param('species') species: string,
-    @Query('type') type?: string,
+    @Param() params: FoodSpeciesParamDto,
+    @Query() query: FoodSpeciesQueryDto,
   ) {
     try {
-      return await this.openPetFoodFactsService.searchBySpecies(species, type);
+      return await this.openPetFoodFactsService.searchBySpecies(
+        params.species,
+        query.type,
+      );
     } catch {
-      return { products: [], count: 0, page: 1 };
+      // Jamais de 500 : au pire, une liste vide signalée comme dégradée.
+      return { products: [], count: 0, page: 1, degraded: true };
     }
   }
 }

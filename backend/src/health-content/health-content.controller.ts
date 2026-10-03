@@ -19,7 +19,7 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { HealthContentService } from './health-content.service';
-import { HealthQueryDto } from './dto/health-query.dto';
+import { HealthQueryDto, PubMedSearchDto } from './dto/health-query.dto';
 import { CreateHealthContentDto } from './dto/health-content.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { OperatorGuard } from '../common/guards/operator.guard';
@@ -87,10 +87,8 @@ export class PubMedController {
   @ApiQuery({ name: 'q', description: 'Search query' })
   @ApiQuery({ name: 'limit', required: false, description: 'Maximum results (default: 10)' })
   @ApiResponse({ status: 200, description: 'PubMed search results' })
-  async searchPubMed(
-    @Query('q') query: string,
-    @Query('limit') limit?: number,
-  ): Promise<unknown[]> {
-    return this.healthContentService.searchPubMed(query, limit || 10);
+  @ApiResponse({ status: 503, description: 'PubMed temporarily unavailable' })
+  async searchPubMed(@Query() query: PubMedSearchDto): Promise<unknown[]> {
+    return this.healthContentService.searchPubMed(query.q, query.limit || 10);
   }
 }

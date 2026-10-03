@@ -100,11 +100,21 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `OPERATOR_EMAILS` | Render | remplacé par `User.role` (W0-01) | — |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Render (`sync: false` ; clé publique servie par `GET /notifications/vapid-public-key`, rien côté Netlify) | `npm run vapid:generate` (backend/) | Dès W3-03 |
 | `IAP_ENABLED`, `REVENUECAT_WEBHOOK_SECRET`, `REVENUECAT_ENTITLEMENT_ID`, `GOOGLE_PLAY_PACKAGE_NAME` | Render (`sync: false`) | RevenueCat (achats in-app, pas de Stripe — voir `docs/PAYMENTS.md`) | Dès la publication sur les stores |
+| `SPECIESPLUS_API_TOKEN` | Render (`sync: false`) | jeton Species+ (api.speciesplus.net) | Non : sans jeton, `/speciesplus/*` → 503 `INTEGRATION_DISABLED` et `speciesPlus.status = "disabled"` sur la fiche législation |
+| `NCBI_API_KEY`, `NCBI_EMAIL` | Render (`sync: false`) | clé NCBI et e-mail de contact | Non : PubMed est public (3 req/s), la clé porte le quota à 10 req/s |
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
 | `NEON_DATABASE_URL_DIRECT` | GitHub Secrets | Neon **directe** | Oui |
 | `BACKUP_AGE_RECIPIENT` | GitHub Secrets | clé publique age (`age1…`) | Pour « Database Backup » (sans lui, aucune sauvegarde) |
 | `API_URL` | GitHub Variables | URL de l'API Render | Pour `keep-warm.yml` (diagnostic manuel) |
+
+### API externes : résilience et intégrations (W1-04, W3-05)
+
+- **Client HTTP unique** (`backend/src/external/http/`) : timeout 5 s, 3 redirections max (https, hôtes publics), réponse ≤ 5 Mo, User-Agent `Captivia/1.0`. GBIF : 3 tentatives max (erreur réseau, 5xx ou 429) avec backoff + jitter, budget total 7,5 s.
+- **Disjoncteur par fournisseur** (GBIF, Wikipedia, Wikidata, Open Pet Food Facts, PubMed, Species+, iNaturalist, EOL) : 5 échecs consécutifs ouvrent le circuit 30 s ; les appels échouent alors sans toucher le réseau et l'API se replie sur les `SpeciesProfile` locaux ou le cache périmé (conservé 7 jours). Une recherche ne renvoie jamais 500 ; un échec n'est jamais mis en cache. L'état des disjoncteurs de GBIF / Wikipedia / Wikidata est visible dans `GET /gateway/health` (`status: "degraded"` si un fournisseur est en panne).
+- **Species+** : intégration réelle, active uniquement si `SPECIESPLUS_API_TOKEN` est défini.
+- **PubMed** : intégration réelle, sans clé obligatoire (références affichées sur la fiche santé d'une espèce).
+- **Amazon** : aucune intégration (décision D-09 : la PA-API 5 est remplacée par la Creators API, qui exige un compte Associates actif). La route `/amazon/*` est retirée (404) ; les liens d'affiliation viennent de la table `AffiliateStore`. À rouvrir quand le compte Associates est validé.
 
 (*) D'autres tâches du plan (vague 0 et 1, durcissement de la configuration) rendent `CORS_ORIGIN` et `FRONTEND_URL` **obligatoires en production** : l'API pourra refuser de démarrer si elles sont absentes. Elles sont déjà fournies par `render.yaml` ; ne pas les supprimer du Blueprint ni du Dashboard.
 

@@ -32,7 +32,7 @@ Captivia est une application web multilingue permettant de :
 - ORM: Prisma + PostgreSQL
 - Auth: JWT + Passport
 - Cache: Redis/Memcached/Memory
-- APIs: GBIF, Species+, PubMed, Open Pet Food Facts, Amazon PA
+- APIs: GBIF, Species+ (jeton optionnel), PubMed, Open Pet Food Facts
 ```
 
 **Frontend** (Next.js)
@@ -54,7 +54,7 @@ backend/
 ├── health-content/# Santé (PubMed)
 ├── legislation/   # Législation (Species+)
 ├── food/          # Alimentation (Open Pet Food Facts)
-├── equipment/     # Matériel (Taxonomie + Amazon)
+├── equipment/     # Matériel (taxonomie éditoriale)
 ├── notifications/ # Push notifications
 ├── species/       # Catalogue GBIF
 └── prisma/        # ORM & migrations
@@ -153,7 +153,7 @@ Voir la section [📦 Déploiement Docker](#-déploiement-docker) pour les ports
 - 🩺 **Santé**: Maladies courantes, symptômes, prévention, références PubMed
 - ⚖️ **Législation**: Statut CITES, EU Wildlife Trade, réglementations par pays
 - 🍖 **Alimentation**: Produits recommandés (Open Pet Food Facts)
-- 🛠️ **Matériel**: Équipement recommandé avec liens affiliés Amazon
+- 🛠️ **Matériel**: Équipement recommandé (taxonomie éditoriale) et boutiques partenaires
 
 ### ✅ Compte Utilisateur (Requis pour Mes Animaux)
 
@@ -220,9 +220,9 @@ Sélecteur de langue dans toutes les pages.
 | **Wikipedia** | Descriptions, images | ✅ Actif |
 | **Wikidata** | Données structurées | ✅ Actif |
 | **PubMed** | Références scientifiques santé | ✅ Actif |
-| **Species+** | CITES, EU Wildlife Trade | ✅ Actif (token requis) |
+| **Species+** | CITES, EU Wildlife Trade | ✅ Actif avec `SPECIESPLUS_API_TOKEN` (sinon désactivé : 503 explicite) |
 | **Open Pet Food Facts** | Composition alimentaire | ✅ Actif |
-| **Amazon PA API** | Produits matériel | ✅ Structure (credentials requis) |
+| **Amazon (PA-API / Creators API)** | Produits matériel | ⛔ Non intégré (décision D-09, route `/amazon/*` retirée) |
 
 ---
 
@@ -415,7 +415,7 @@ FRONTEND_URL=http://localhost:3000
 ### Secrets et intégrations
 
 - `JWT_SECRET` doit être remplacé par une valeur aléatoire d'au moins 32 caractères avant toute mise en production.
-- Les variables optionnelles (`SPECIESPLUS_*`, `AMAZON_*`, `VAPID_*`, SMTP, Sentry) peuvent être ajoutées au `.env` racine ; Compose les transmet au backend.
+- Les variables optionnelles (`SPECIESPLUS_API_TOKEN`, `NCBI_*`, `VAPID_*`, SMTP, Sentry) peuvent être ajoutées au `.env` racine ; Compose les transmet au backend.
 - Aucun fichier `.env` n'est copié dans les images Docker.
 - La base PostgreSQL est stockée dans le volume Docker `captivia_pgdata`.
 

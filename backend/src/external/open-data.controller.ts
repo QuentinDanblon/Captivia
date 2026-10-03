@@ -9,6 +9,11 @@ import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
 import { Controller, Get, Query, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { OpenDataService } from './open-data.service';
+import {
+  ExternalQueryDto,
+  ExternalTaxonQueryDto,
+  ExternalTitleDto,
+} from './dto/external-query.dto';
 
 @ApiTags('Open Data')
 @Controller('api/open-data')
@@ -24,8 +29,8 @@ export class OpenDataController {
   @ApiOperation({ summary: 'Recherche sur Wikipedia' })
   @ApiQuery({ name: 'title', required: true, description: 'Titre de l\'article' })
   @ApiResponse({ status: 200, description: 'Données Wikipedia' })
-  async searchWikipedia(@Query('title') title: string) {
-    return this.openDataService.searchWikipedia(title);
+  async searchWikipedia(@Query() query: ExternalTitleDto) {
+    return this.openDataService.searchWikipedia(query.title);
   }
 
   /**
@@ -36,8 +41,8 @@ export class OpenDataController {
   @ApiOperation({ summary: 'Recherche sur Wikidata' })
   @ApiQuery({ name: 'title', required: true, description: 'Titre de l\'entité' })
   @ApiResponse({ status: 200, description: 'Données Wikidata' })
-  async searchWikidata(@Query('title') title: string) {
-    return this.openDataService.searchWikidata(title);
+  async searchWikidata(@Query() query: ExternalTitleDto) {
+    return this.openDataService.searchWikidata(query.title);
   }
 
   /**
@@ -48,8 +53,8 @@ export class OpenDataController {
   @ApiOperation({ summary: 'Recherche sur iNaturalist' })
   @ApiQuery({ name: 'query', required: true, description: 'Recherche' })
   @ApiResponse({ status: 200, description: 'Observations iNaturalist' })
-  async searchINaturalist(@Query('query') query: string) {
-    return this.openDataService.searchINaturalist(query);
+  async searchINaturalist(@Query() dto: ExternalQueryDto) {
+    return this.openDataService.searchINaturalist(dto.query);
   }
 
   /**
@@ -60,8 +65,8 @@ export class OpenDataController {
   @ApiOperation({ summary: 'Recherche sur EOL' })
   @ApiQuery({ name: 'query', required: true, description: 'Recherche' })
   @ApiResponse({ status: 200, description: 'Données EOL' })
-  async searchEOL(@Query('query') query: string) {
-    return this.openDataService.searchEOL(query);
+  async searchEOL(@Query() dto: ExternalQueryDto) {
+    return this.openDataService.searchEOL(dto.query);
   }
 
   /**
@@ -72,8 +77,8 @@ export class OpenDataController {
   @ApiOperation({ summary: 'Recherche combinée sur plusieurs APIs' })
   @ApiQuery({ name: 'query', required: true, description: 'Recherche' })
   @ApiResponse({ status: 200, description: 'Résultats de toutes les APIs' })
-  async multiSourceSearch(@Query('query') query: string) {
-    return this.openDataService.multiSourceSearch(query);
+  async multiSourceSearch(@Query() dto: ExternalQueryDto) {
+    return this.openDataService.multiSourceSearch(dto.query);
   }
 
   /**
@@ -85,11 +90,8 @@ export class OpenDataController {
   @ApiQuery({ name: 'taxonId', required: true, description: 'ID du taxon' })
   @ApiQuery({ name: 'limit', required: false, default: 20, description: 'Nombre de résultats' })
   @ApiResponse({ status: 200, description: 'Observations iNaturalist' })
-  async searchINaturalistByTaxon(
-    @Query('taxonId') taxonId: string,
-    @Query('limit') limit?: string,
-  ) {
-    return this.openDataService.searchINaturalistByTaxon(parseInt(taxonId, 10), limit ? parseInt(limit, 10) : 20);
+  async searchINaturalistByTaxon(@Query() query: ExternalTaxonQueryDto) {
+    return this.openDataService.searchINaturalistByTaxon(query.taxonId, query.limit ?? 20);
   }
 
   /**
@@ -101,10 +103,7 @@ export class OpenDataController {
   @ApiQuery({ name: 'taxonId', required: true, description: 'ID du taxon' })
   @ApiQuery({ name: 'limit', required: false, default: 20, description: 'Nombre de résultats' })
   @ApiResponse({ status: 200, description: 'Données EOL' })
-  async searchEOLByTaxon(
-    @Query('taxonId') taxonId: string,
-    @Query('limit') limit?: string,
-  ) {
-    return this.openDataService.searchEOLByTaxon(parseInt(taxonId, 10), limit ? parseInt(limit, 10) : 20);
+  async searchEOLByTaxon(@Query() query: ExternalTaxonQueryDto) {
+    return this.openDataService.searchEOLByTaxon(query.taxonId, query.limit ?? 20);
   }
 }

@@ -42,6 +42,11 @@ export class RedisCacheService {
     }
   }
 
+  /** Pas d'étagère « périmé » avec Redis (les clés expirées sont supprimées). */
+  getStale(_key: string): unknown {
+    return null;
+  }
+
   async set(key: string, data: unknown, ttl?: number): Promise<void> {
     try {
       const serialized = JSON.stringify(data);

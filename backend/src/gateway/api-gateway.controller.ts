@@ -268,14 +268,21 @@ export class ApiGatewayController {
   @ApiOperation({ summary: 'Get API gateway health status' })
   @ApiResponse({ status: 200, description: 'Health status' })
   async getHealth() {
+    const [gbif, wikipedia, wikidata] = await Promise.all([
+      this.apiGatewayService.checkGbifHealth(),
+      this.apiGatewayService.checkWikipediaHealth(),
+      this.apiGatewayService.checkWikidataHealth(),
+    ]);
+    const services = { gbif, wikipedia, wikidata };
+    const allHealthy = Object.values(services).every(
+      (service) => service?.status === 'healthy',
+    );
     return {
-      status: 'healthy',
+      // « degraded » dès qu'un fournisseur ne répond pas : l'API reste utilisable
+      // (repli sur les profils locaux / le cache), mais l'état n'est plus « healthy ».
+      status: allHealthy ? 'healthy' : 'degraded',
       timestamp: new Date().toISOString(),
-      services: {
-        gbif: await this.apiGatewayService.checkGbifHealth(),
-        wikipedia: await this.apiGatewayService.checkWikipediaHealth(),
-        wikidata: await this.apiGatewayService.checkWikidataHealth(),
-      },
+      services,
     };
   }
 

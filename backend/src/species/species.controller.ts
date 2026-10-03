@@ -18,7 +18,10 @@ import {
 } from '@nestjs/swagger';
 import { SpeciesService } from './species.service';
 import { SearchSpeciesDto, GetSpeciesDto } from '../dto/species.dto';
-import axios from 'axios';
+import {
+  isUpstreamNotFound,
+  toUpstreamHttpException,
+} from '../external/http/external-errors';
 
 @UseGuards(RateLimitGuard)
 @ApiTags('species')
@@ -104,12 +107,12 @@ export class SpeciesController {
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (
-        (axios.isAxiosError(error) && error.response?.status === 404) ||
+        isUpstreamNotFound(error) ||
         error instanceof NotFoundException
       ) {
         throw new NotFoundException('Species not found');
       }
-      throw new InternalServerErrorException('Failed to fetch species details');
+      throw toUpstreamHttpException(error, 'Failed to fetch species details');
     }
   }
 
@@ -128,12 +131,12 @@ export class SpeciesController {
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (
-        (axios.isAxiosError(error) && error.response?.status === 404) ||
+        isUpstreamNotFound(error) ||
         error instanceof NotFoundException
       ) {
         throw new NotFoundException('Species not found');
       }
-      throw new InternalServerErrorException('Failed to fetch vernacular names');
+      throw toUpstreamHttpException(error, 'Failed to fetch vernacular names');
     }
   }
 
@@ -148,14 +151,14 @@ export class SpeciesController {
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (
-        (axios.isAxiosError(error) && error.response?.status === 404) ||
+        isUpstreamNotFound(error) ||
         error instanceof NotFoundException
       ) {
         throw new NotFoundException(
           'IUCN status not available for this species',
         );
       }
-      throw new InternalServerErrorException('Failed to fetch IUCN status');
+      throw toUpstreamHttpException(error, 'Failed to fetch IUCN status');
     }
   }
 
@@ -194,14 +197,12 @@ export class SpeciesController {
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (
-        (axios.isAxiosError(error) && error.response?.status === 404) ||
+        isUpstreamNotFound(error) ||
         error instanceof NotFoundException
       ) {
         throw new NotFoundException('Species not found');
       }
-      throw new InternalServerErrorException(
-        'Failed to fetch distribution data',
-      );
+      throw toUpstreamHttpException(error, 'Failed to fetch distribution data');
     }
   }
 
@@ -218,12 +219,12 @@ export class SpeciesController {
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (
-        (axios.isAxiosError(error) && error.response?.status === 404) ||
+        isUpstreamNotFound(error) ||
         error instanceof NotFoundException
       ) {
         throw new NotFoundException('Species not found');
       }
-      throw new InternalServerErrorException('Failed to fetch media data');
+      throw toUpstreamHttpException(error, 'Failed to fetch media data');
     }
   }
 
@@ -238,12 +239,12 @@ export class SpeciesController {
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (
-        (axios.isAxiosError(error) && error.response?.status === 404) ||
+        isUpstreamNotFound(error) ||
         error instanceof NotFoundException
       ) {
         throw new NotFoundException('Species not found');
       }
-      throw new InternalServerErrorException('Failed to fetch metrics');
+      throw toUpstreamHttpException(error, 'Failed to fetch metrics');
     }
   }
 
@@ -258,14 +259,12 @@ export class SpeciesController {
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (
-        (axios.isAxiosError(error) && error.response?.status === 404) ||
+        isUpstreamNotFound(error) ||
         error instanceof NotFoundException
       ) {
         throw new NotFoundException('Species not found');
       }
-      throw new InternalServerErrorException(
-        'Failed to fetch occurrence count',
-      );
+      throw toUpstreamHttpException(error, 'Failed to fetch occurrence count');
     }
   }
 }
