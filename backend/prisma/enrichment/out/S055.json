@@ -1,0 +1,361 @@
+[
+  {
+    "speciesId": 103973942,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Micro-aliments flottants",
+          "frequency": "quotidienne",
+          "notes": "Paillettes très fines pour petite bouche"
+        },
+        {
+          "name": "Nauplii d'Artemia, petits crustacés",
+          "frequency": "quotidienne",
+          "notes": "Petites proies vivantes ou congelées"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Gros aliments",
+          "reason": "Poisson de très petite taille"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Carnivore de petites proies (en nature : larves, daphnies, copépodes, œufs d'insectes trouvés sur les plantes et la litière)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cardinal_tetra",
+          "title": "Cardinal tetra - Wikipedia EN"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Éclairage doux (eaux ombragées de forêt en nature)",
+      "activityEnrichment": "Vivre en banc, plantes aquatiques denses, zones d'ombre",
+      "hygieneNotes": "Reproduire au mieux les eaux ombragées de son habitat naturel (cours supérieur de rivières d'Amérique du Sud)",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cardinal_tetra",
+          "title": "Cardinal tetra - Wikipedia EN"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson de banc ; en nature, remonte les rivières en grand nombre pour frayer",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "À maintenir en banc. Petit poisson paisible.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cardinal_tetra",
+          "title": "Cardinal tetra - Wikipedia EN"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Chlorose des néons (NCS)",
+          "symptoms": "Perte couleur bleue neon, amaigrissement",
+          "prevention": "Eau de qualité, pas surpopulation, quarantaine nouveaux poissons",
+          "whenToConsult": "Dès perte caractéristique couleur"
+        },
+        {
+          "name": "Ichthyophthirus (Ick)",
+          "symptoms": "Points blancs sur corps",
+          "prevention": "Température stable, eau saine",
+          "whenToConsult": "Traitement antiparasitaire dès l'apparition de points blancs"
+        },
+        {
+          "name": "Infections parasitaires",
+          "symptoms": "Comportement anormal, maigrir",
+          "prevention": "Quarantaine, alimentation variée",
+          "whenToConsult": "En cas symptômes persistants"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cardinal_tetra",
+          "title": "Cardinal tetra - Wikipedia EN"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "En nature, ponte en grands groupes dans des eaux ombragées de forêt après remontée de rivière. Longtemps difficile à reproduire en captivité, de nombreux éleveurs en produisent aujourd'hui.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cardinal_tetra",
+          "title": "Cardinal tetra - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103997157,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Aliments flottants variés",
+          "frequency": "quotidienne",
+          "notes": "Granulés, paillettes de qualité (aliments du commerce acceptés)"
+        },
+        {
+          "name": "Larves de moustiques et de chironomes, vers",
+          "frequency": "hebdomadaire",
+          "notes": "Proies acceptées en captivité"
+        }
+      ],
+      "foodsToAvoid": [],
+      "mealFrequency": "daily",
+      "specificNeeds": "Se nourrit surtout d'insectes tombés à l'eau, complétés de vers et de crustacés ; accepte les aliments du commerce",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Giant_danio",
+          "title": "Giant danio - Wikipedia EN"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 27,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Aquarium d'au moins 1,20 m de long avec espace de nage dégagé, pour un groupe de 6 individus ou plus",
+      "lightNeeds": "Eau claire et ombragée",
+      "activityEnrichment": "Espace ouvert pour nager, banc de 6 individus ou plus (idéalement 8-10), plantes robustes",
+      "hygieneNotes": "pH 6,0-8,0, dureté 5-19 dGH. Eau claire. Couvercle obligatoire (espèce sauteuse).",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Giant_danio",
+          "title": "Giant danio - Wikipedia EN"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson de banc très actif et sauteur, assez agressif, peut harceler les autres poissons",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "À maintenir en groupe de 6 individus ou plus (idéalement 8-10). Peut harceler les autres poissons d'un aquarium communautaire.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Giant_danio",
+          "title": "Giant danio - Wikipedia EN"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections bactériennes",
+          "symptoms": "Lésions, nageoires effilochées",
+          "prevention": "Eau saine, pH stable, pas surpopulation",
+          "whenToConsult": "Dès apparition blessures"
+        },
+        {
+          "name": "Parasites externes",
+          "symptoms": "Grattage contre objets, points blancs",
+          "prevention": "Quarantaine nouveaux poissons, eau saine",
+          "whenToConsult": "Traitement antiparasitaire"
+        },
+        {
+          "name": "Malnutrition/Constipation",
+          "symptoms": "Amaigrissement, distension abdominale",
+          "prevention": "Alimentation variée, jeûne occasionnel",
+          "whenToConsult": "En cas symptômes persistants"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Giant_danio",
+          "title": "Giant danio - Wikipedia EN"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 300,
+      "litterSizeMax": 300,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Le mâle bouscule l'abdomen de la femelle pendant la ponte ; environ 300 œufs dispersés dans les plantes. Reproduction en aquarium stimulée par une hausse de température et une pluie artificielle. Les alevins ressemblent aux adultes vers 65 jours. Durée de vie de 5 à 7 ans en captivité.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Giant_danio",
+          "title": "Giant danio - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104008238,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Larves de moustiques vivantes ou congelées",
+          "frequency": "quotidienne",
+          "notes": "Proies naturelles"
+        },
+        {
+          "name": "Petits vers (vers de vase, tubifex), artémias",
+          "frequency": "quotidienne",
+          "notes": "Aliments vivants ou congelés"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Paillettes et granulés",
+          "reason": "Souvent refusés selon fr.wikipedia (en.wikipedia indique qu'il peut accepter des aliments congelés ou en paillettes)"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Carnivore se nourrissant de petits vers et d'invertébrés aquatiques ; sable comme substrat pour fouiller",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Peters%27s_elephantnose_fish",
+          "title": "Peters's elephantnose fish — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Gnathonemus_petersii",
+          "title": "Gnathonemus petersii — Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 26,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Aquarium de 200 L minimum, 400 L et plus pour plusieurs individus ; sable comme substrat",
+      "lightNeeds": "Lumière réduite (espèce timide, surtout visible la nuit)",
+      "activityEnrichment": "Substrat sable fin, souches bois, abris, plantes robustes. Zones exploration fouille.",
+      "hygieneNotes": "Eau propre et bien oxygénée. Poisson électrique faible : éviter les équipements qui perturbent son champ électrique.",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Peters%27s_elephantnose_fish",
+          "title": "Peters's elephantnose fish — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Gnathonemus_petersii",
+          "title": "Gnathonemus petersii — Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson timide, surtout actif la nuit, qui utilise un faible champ électrique pour se repérer et trouver sa nourriture",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Généralement docile avec les autres espèces ; territorial et agressif envers ses congénères sauf en très grand aquarium (400 L et plus)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Peters%27s_elephantnose_fish",
+          "title": "Peters's elephantnose fish — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Gnathonemus_petersii",
+          "title": "Gnathonemus petersii — Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections bactériennes liées stress",
+          "symptoms": "Lésions peau, perte couleur",
+          "prevention": "Aquarium complexe, peu d'agitation",
+          "whenToConsult": "Dès lésions visibles"
+        },
+        {
+          "name": "Parasites intestinaux",
+          "symptoms": "Amaigrissement malgré alimentation",
+          "prevention": "Aliments variés vivants, pas surpopulation",
+          "whenToConsult": "Traitement antiparasitaire"
+        },
+        {
+          "name": "Stress de captivité",
+          "symptoms": "Inactivité complète, cachage permanent",
+          "prevention": "Aquarium spacieux, refuges adéquats, routine stable",
+          "whenToConsult": "Observation; remédiation par aménagement"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Peters%27s_elephantnose_fish",
+          "title": "Peters's elephantnose fish — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Gnathonemus_petersii",
+          "title": "Gnathonemus petersii — Wikipédia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Jamais reproduit en captivité : tous les individus vendus en aquariophilie sont capturés dans la nature.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Peters%27s_elephantnose_fish",
+          "title": "Peters's elephantnose fish — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Gnathonemus_petersii",
+          "title": "Gnathonemus petersii — Wikipédia"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,76 @@
+[
+  {
+    "speciesId": 9799308,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: proies précisées d'après fr.wikipedia (petits vertébrés, lézards, surtout serpents)",
+      "behavior: activité 'crépusculaire' -> début/fin de journée, nocturne en saison chaude (fr/en wikipedia) ; 'excellent fouisseur' et 'morsure rare' retirés",
+      "reproduction.season: printemps-été -> printemps (en.wikipedia) ; notes: incubation 2-2,5 mois (en.wikipedia)",
+      "sources: en.wikipedia ajoutée sur habitat/behavior/reproduction"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize/lightNeeds (non confirmés par les pages)",
+      "health: 'Inclusion corporelle (stéatite)' (confusion IBD/stéatite, non confirmé) ; prévention 'UVB régulier'",
+      "reproduction.litterSizeMin/Max (4-24) et sexualMaturityMonths (18) non confirmés",
+      "legislation entière (arrêté 21/11/1997 et statut permit_required non confirmés ; fr.wikipedia indique que l'espèce figure depuis 2022 sur la liste UE des espèces exotiques envahissantes : importation, élevage, transport, commerce et lâcher interdits dans l'UE - situation à traiter à part, ne pas afficher 'permit_required')",
+      "source https://www.legifrance.gouv.fr (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 103899345,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: 'aliments non vivants refusés' contredit par fr.wikipedia (surgelé accepté, granulés/flocons souvent refusés) ; artémias/crevettes remplacés par 'aliments surgelés'",
+      "habitat: 300 L pour 4-5 individus, ~5 g/L de sel, 25-28 °C confirmés",
+      "behavior: 'semi-agressif' et 'compétitivité alimentaire forte' retirés (non confirmés)",
+      "reproduction.notes: reproduction rare en captivité, mœurs mal connues (en.wikipedia)"
+    ],
+    "removed": [
+      "feeding.foodsToAvoid 'Poissons ou matière fécale' (non pertinent)",
+      "habitat.lightNeeds (10-12 h, UVB non confirmé) ; changements d'eau 25 % hebdomadaires -> 'réguliers'",
+      "reproduction.season",
+      "legislation entière (arrêté 1997 inventé/non confirmé, non CITES)",
+      "source https://www.legifrance.gouv.fr"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 103940037,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding.dietType: omnivore -> carnivore (fr.wikipedia)",
+      "habitat.tempMin/tempMax: 20-24 -> 21-24 (fr.wikipedia) ; pH 5,5-7 (6,5 idéal), 20 L min par harem confirmés ; éclairage faible (fr.wikipedia) au lieu de 10-12 h",
+      "behavior: '1 mâle/3 femelles' -> un mâle pour plusieurs femelles",
+      "reproduction.incubationDays: 15 -> 14 (fr: 14-15 j à 26 °C ; en: 14 j)"
+    ],
+    "removed": [
+      "feeding.foodsToAvoid 'Eau eutrophisée' (pas un aliment)",
+      "reproduction.litterSizeMin/Max (5-50), sexualMaturityMonths (2), season non confirmés",
+      "legislation entière (statut allowed non confirmé par une source)",
+      "source https://www.legifrance.gouv.fr"
+    ],
+    "confidence": "medium"
+  }
+]

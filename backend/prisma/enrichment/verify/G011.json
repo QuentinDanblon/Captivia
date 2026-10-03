@@ -1,0 +1,331 @@
+[
+ {
+  "speciesId": 104106412,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Aucune plage de température d'élevage dans Wikipedia EN/FR ni ADW (seules figurent des températures d'incubation/sexe des œufs).",
+    "url": "https://animaldiversity.org/accounts/Alligator_mississippiensis/"
+   },
+   {
+    "field": "health",
+    "reason": "ADW/Wikipedia EN ne listent que des parasites (sans symptômes, prévention ni conduite à tenir) -> pas 3 maladies documentées.",
+    "url": "https://animaldiversity.org/accounts/Alligator_mississippiensis/"
+   }
+  ]
+ },
+ {
+  "speciesId": 104110162,
+  "evidence": [
+   {
+    "field": "health.diseases[0] (poux rouges)",
+    "value": "red mites",
+    "quote": "Doves are susceptible to red mites, which hide during the day and come out at night to feed on the bird's blood, and doves housed outdoors are susceptible to roundworms, tapeworms and other worm species.",
+    "url": "https://lafeber.com/pet-birds/species/dove/"
+   },
+   {
+    "field": "health.diseases[1] (vers)",
+    "value": "roundworms, tapeworms (oiseaux en extérieur)",
+    "quote": "doves housed outdoors are susceptible to roundworms, tapeworms and other worm species.",
+    "url": "https://lafeber.com/pet-birds/species/dove/"
+   },
+   {
+    "field": "health.diseases[2] (chancre)",
+    "value": "canker",
+    "quote": "Canker, a respiratory disease that shows as a swelling in the dove's throat and a cheesy looking growth around the mouth, can be fatal if not treated.",
+    "url": "https://lafeber.com/pet-birds/species/dove/"
+   },
+   {
+    "field": "health.diseases[3] (zoonoses)",
+    "value": "Chlamydia, Salmonella",
+    "quote": "Those who keep pigeons should wash their hands after handling, feeding or cleaning the dove's housing because doves can transfer Chlamydia and Salmonella (bacterial infections) to people.",
+    "url": "https://lafeber.com/pet-birds/species/dove/"
+   },
+   {
+    "field": "health (espèce couverte)",
+    "value": "ring-necked dove = tourterelle domestique",
+    "quote": "Diamond doves and ring-necked doves are the two dove species most likely to offered for sale in large pet stores, as well as avian-specialty stores and from bird breeders",
+    "url": "https://lafeber.com/pet-birds/species/dove/"
+   }
+  ],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Wikipédia FR, Lafeber (dove) : aucune plage de température.",
+    "url": "https://lafeber.com/pet-birds/species/dove/"
+   },
+   {
+    "field": "habitat",
+    "reason": "aucune plage de température trouvée (WPT/Lafeber/Wikipédia FR) -> habitat null",
+    "url": "https://lafeber.com/pet-birds/species/dove/"
+   }
+  ]
+ },
+ {
+  "speciesId": 104128782,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Wikipédia FR/EN : aucune température d'élevage.",
+    "url": "https://en.wikipedia.org/wiki/Red-billed_leiothrix"
+   },
+   {
+    "field": "health",
+    "reason": "Seule mention : parasite du paludisme aviaire détecté dans le sang (Wikipedia EN) -> insuffisant.",
+    "url": "https://en.wikipedia.org/wiki/Red-billed_leiothrix"
+   }
+  ]
+ },
+ {
+  "speciesId": 104145240,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 18,
+    "quote": "Une température stable (18-24°C).",
+    "url": "https://blooming-pets.com/inseparable-de-fischer/",
+    "note": "Citation tirée de la section « La vie hors de la cage » (température ambiante) d'une page de site commercial (blooming-pets.com) : seule source chiffrée trouvée ; à relire."
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 24,
+    "quote": "Une température stable (18-24°C).",
+    "url": "https://blooming-pets.com/inseparable-de-fischer/",
+    "note": "Citation tirée de la section « La vie hors de la cage » (température ambiante) d'une page de site commercial (blooming-pets.com) : seule source chiffrée trouvée ; à relire."
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "1,2 m ; intérieur par temps froid",
+    "quote": "Aviary or suspended cage, indoors if in cold weather, minimum length 1.2 m (4 ft).",
+    "url": "https://www.parrots.org/encyclopedia/fischers-lovebird"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "volière",
+    "quote": "Aviary or suspended cage, indoors if in cold weather, minimum length 1.2 m (4 ft).",
+    "url": "https://www.parrots.org/encyclopedia/fischers-lovebird"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVA+UVB quotidien",
+    "quote": "Les oiseaux doivent avoir accès de manière quotidienne à une lumière de spectre lumineux complet (ultraviolets A et B compris).",
+    "url": "https://nacinfo.wordpress.com/inseparables/"
+   },
+   {
+    "field": "habitat.lightNeeds (cycle)",
+    "value": "cycle journalier régulier",
+    "quote": "Il est important de respecter un cycle journalier relativement régulier.",
+    "url": "https://nacinfo.wordpress.com/inseparables/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "nettoyage quotidien/hebdomadaire",
+    "quote": "Un nettoyage quotidien du substrat souillé ainsi que de l'alimentation et de l'eau de boisson doit être réalisé. Un nettoyage complet de la cage ainsi que des accessoires doit être réalisé une fois par semaine environ, à l'eau chaude et au savon.",
+    "url": "https://nacinfo.wordpress.com/inseparables/"
+   },
+   {
+    "field": "habitat (réserve)",
+    "value": "source de la plage 18-24 °C = site commercial (blooming-pets.com), seule source de température trouvée",
+    "quote": "Une température stable (18-24°C).",
+    "url": "https://blooming-pets.com/inseparable-de-fischer/"
+   }
+  ]
+ },
+ {
+  "speciesId": 104145246,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Taille de cage documentée (World Parrot Trust) mais aucune plage de température d'élevage trouvée (WPT, Wikipédia FR/EN, Lafeber) -> habitat null (tempMin/tempMax obligatoires).",
+    "url": "https://www.parrots.org/encyclopedia/masked-lovebird"
+   },
+   {
+    "field": "habitat",
+    "reason": "blooming-pets.com/inseparable-masque : aucune température chiffrée ; la plage 18-24 °C n'est citée que pour A. fischeri et n'a pas été extrapolée.",
+    "url": "https://blooming-pets.com/inseparable-masque/"
+   }
+  ]
+ },
+ {
+  "speciesId": 104145297,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Taille de cage documentée (World Parrot Trust) mais aucune plage de température d'élevage trouvée (WPT, Wikipédia FR/EN, Lafeber) -> habitat null (tempMin/tempMax obligatoires).",
+    "url": "https://www.parrots.org/encyclopedia/white-fronted-amazon"
+   }
+  ]
+ },
+ {
+  "speciesId": 104145998,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Taille de cage documentée (World Parrot Trust) mais aucune plage de température d'élevage trouvée (WPT, Wikipédia FR/EN, Lafeber) -> habitat null (tempMin/tempMax obligatoires).",
+    "url": "https://www.parrots.org/encyclopedia/monk-parakeet"
+   }
+  ]
+ },
+ {
+  "speciesId": 104146243,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Taille de cage documentée (World Parrot Trust) mais aucune plage de température d'élevage trouvée (WPT, Wikipédia FR/EN, Lafeber) -> habitat null (tempMin/tempMax obligatoires).",
+    "url": "https://www.parrots.org/encyclopedia/meyers-parrot"
+   }
+  ]
+ },
+ {
+  "speciesId": 104151432,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Wikipédia FR/EN : aucune donnée de température/volière.",
+    "url": "https://en.wikipedia.org/wiki/Lady_Amherst%27s_pheasant"
+   }
+  ]
+ },
+ {
+  "speciesId": 104221549,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Wikipedia EN : seulement humidité qualitative (substrat sec + point d'eau) et terrarium haut ; aucune température.",
+    "url": "https://en.wikipedia.org/wiki/Pink-toed_tarantula"
+   }
+  ]
+ },
+ {
+  "speciesId": 104221620,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Wikipédia FR/EN : aucune température/hygrométrie.",
+    "url": "https://en.wikipedia.org/wiki/Brachypelma_smithi"
+   }
+  ]
+ },
+ {
+  "speciesId": 104232708,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior (nocturne, chasse des araignées)",
+    "value": "nocturne ; araignées",
+    "quote": "Nocturne, il chasse surtout les araignées.",
+    "url": "https://fr.wikipedia.org/wiki/Buthus_occitanus"
+   },
+   {
+    "field": "behavior.generalBehavior (abri sous pierres)",
+    "value": "sous les pierres le jour",
+    "quote": "hides under stones etc. during daytime",
+    "url": "https://en.wikipedia.org/wiki/Buthus_occitanus"
+   }
+  ],
+  "nullNotes": [
+   {
+    "field": "feeding/habitat/health/reproduction",
+    "reason": "aucune citation exploitable (pas de température, de proies à éviter, de maladies ni de chiffres de reproduction) -> null",
+    "url": "https://fr.wikipedia.org/wiki/Buthus_occitanus"
+   }
+  ]
+ },
+ {
+  "speciesId": 104247531,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 24,
+    "quote": "Hermit crabs need a consistent temperature of 75–85 °F (24–30 °C), and a consistent humidity of 75–85%. Low humidity will result in a hermit crab slowly suffocating. Hermit crabs breathe using modified gills. These modified gills need to be moist in order to function. Hermit crabs should be kept in glass tanks of an appropriate size in order to maintain the humidity and temperature needed. At least 10 gallons of tank space should be provided per hermit crab.",
+    "url": "https://en.wikipedia.org/wiki/Hermit_crab"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 30,
+    "quote": "Hermit crabs need a consistent temperature of 75–85 °F (24–30 °C), and a consistent humidity of 75–85%. Low humidity will result in a hermit crab slowly suffocating. Hermit crabs breathe using modified gills. These modified gills need to be moist in order to function. Hermit crabs should be kept in glass tanks of an appropriate size in order to maintain the humidity and temperature needed. At least 10 gallons of tank space should be provided per hermit crab.",
+    "url": "https://en.wikipedia.org/wiki/Hermit_crab"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 75,
+    "quote": "Hermit crabs need a consistent temperature of 75–85 °F (24–30 °C), and a consistent humidity of 75–85%. Low humidity will result in a hermit crab slowly suffocating. Hermit crabs breathe using modified gills. These modified gills need to be moist in order to function. Hermit crabs should be kept in glass tanks of an appropriate size in order to maintain the humidity and temperature needed. At least 10 gallons of tank space should be provided per hermit crab.",
+    "url": "https://en.wikipedia.org/wiki/Hermit_crab"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 85,
+    "quote": "Hermit crabs need a consistent temperature of 75–85 °F (24–30 °C), and a consistent humidity of 75–85%. Low humidity will result in a hermit crab slowly suffocating. Hermit crabs breathe using modified gills. These modified gills need to be moist in order to function. Hermit crabs should be kept in glass tanks of an appropriate size in order to maintain the humidity and temperature needed. At least 10 gallons of tank space should be provided per hermit crab.",
+    "url": "https://en.wikipedia.org/wiki/Hermit_crab"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "10 gallons par bernard-l'ermite ; terrarium en verre",
+    "quote": "Hermit crabs need a consistent temperature of 75–85 °F (24–30 °C), and a consistent humidity of 75–85%. Low humidity will result in a hermit crab slowly suffocating. Hermit crabs breathe using modified gills. These modified gills need to be moist in order to function. Hermit crabs should be kept in glass tanks of an appropriate size in order to maintain the humidity and temperature needed. At least 10 gallons of tank space should be provided per hermit crab.",
+    "url": "https://en.wikipedia.org/wiki/Hermit_crab"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "terrarium (glass tanks)",
+    "quote": "Hermit crabs need a consistent temperature of 75–85 °F (24–30 °C), and a consistent humidity of 75–85%. Low humidity will result in a hermit crab slowly suffocating. Hermit crabs breathe using modified gills. These modified gills need to be moist in order to function. Hermit crabs should be kept in glass tanks of an appropriate size in order to maintain the humidity and temperature needed. At least 10 gallons of tank space should be provided per hermit crab.",
+    "url": "https://en.wikipedia.org/wiki/Hermit_crab"
+   },
+   {
+    "field": "habitat (espèce visée)",
+    "value": "Coenobita clypeatus cité comme espèce de compagnie de la section « As pets »",
+    "quote": "Caribbean hermit crab (Coenobita clypeatus) ; Ecuadorian hermit crab (Coenobita compressus) — section \"As pets\" de la page",
+    "url": "https://en.wikipedia.org/wiki/Hermit_crab"
+   }
+  ]
+ },
+ {
+  "speciesId": 104260760,
+  "evidence": [
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "avance (difficile à reproduire)",
+    "quote": "La littérature la décrit comme une espèce « difficile à reproduire »",
+    "url": "https://fr.wikipedia.org/wiki/Caridina_multidentata"
+   },
+   {
+    "field": "reproduction.notes (contexte)",
+    "value": "plus difficile que Neocaridina/C. cantonensis",
+    "quote": "néanmoins elle est en train de se faire surclasser par des espèces plus colorées et plus faciles à faire reproduire (Neocaridina Davidi, Caridina Cantonensis ...). La littérature la décrit comme une espèce « difficile à reproduire »",
+    "url": "https://fr.wikipedia.org/wiki/Caridina_multidentata"
+   },
+   {
+    "field": "reproduction.notes (incubation sous l'abdomen)",
+    "value": "œufs incubés sous l'abdomen",
+    "quote": "Ces dernières présentent une cavité importante constituée sous l'abdomen par les pléopodes, où les œufs incubent avant l'expulsion des larves.",
+    "url": "https://fr.wikipedia.org/wiki/Caridina_multidentata"
+   },
+   {
+    "field": "reproduction.notes (larves, eau saumâtre)",
+    "value": "eau saumâtre",
+    "quote": "Le développement larvaire et les premières mues s'effectuent en eau saumâtre, avant que les jeunes crevettes, devenues capables de nager remontent le courant pour rejoindre les eaux douces où elles ont été pondues.",
+    "url": "https://fr.wikipedia.org/wiki/Caridina_multidentata"
+   },
+   {
+    "field": "reproduction.notes (larves, eau salée)",
+    "value": "eau salée",
+    "quote": "Oviposition and hatching occurs in freshwater, and newly hatched larvae drift to saltwater and develop as juveniles, returning to freshwater in their adult forms.",
+    "url": "https://en.wikipedia.org/wiki/Amano_shrimp"
+   }
+  ],
+  "nullNotes": [
+   {
+    "field": "reproduction.* (hors difficulté/notes)",
+    "reason": "Aucun chiffre (nombre d'œufs, incubation, maturité, saison en aquarium) dans les pages consultées -> null",
+    "url": "https://fr.wikipedia.org/wiki/Caridina_multidentata"
+   }
+  ]
+ }
+]

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import { api } from '@/lib/api';
-import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
+import { api, type PublicAnimalProfile } from '@/lib/api';
+import { Link } from '@/i18n/navigation';
 
 export default function AnimalPublicPage({
   params,
@@ -11,16 +11,9 @@ export default function AnimalPublicPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const t = useTranslations();
+  const locale = useLocale();
   const [slug, setSlug] = useState<string | null>(null);
-  const [data, setData] = useState<{
-    name: string;
-    speciesId: number;
-    birthDate?: string;
-    sex?: string;
-    photos: string[];
-    notes?: string;
-    healthRecords: Array<{ id: string; type: string; title: string; date: string; notes?: string }>;
-  } | null>(null);
+  const [data, setData] = useState<PublicAnimalProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,25 +28,20 @@ export default function AnimalPublicPage({
     api
       .getPublicAnimal(slug)
       .then(setData)
-      .catch((e) => setError(e instanceof Error ? e.message : 'Erreur'))
+      .catch((e: Error & { status?: number }) =>
+        // 404 : lien inexistant, désactivé ou régénéré — message générique, sans détail
+        setError(e.status === 404 ? t('publicLink.pageNotFound') : e.message || t('publicLink.pageNotFound')),
+      )
       .finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return '-';
     try {
-      return new Date(dateString).toLocaleDateString();
+      return new Date(dateString).toLocaleDateString(locale);
     } catch {
       return dateString;
-    }
-  };
-
-  const getHealthTypeName = (type: string) => {
-    const key = `animals.healthRecordTypes.${type}` as any;
-    try {
-      return t(key);
-    } catch {
-      return type;
     }
   };
 
@@ -73,7 +61,7 @@ export default function AnimalPublicPage({
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
         <div className="text-center max-w-md">
           <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-            {error || 'Animal introuvable.'}
+            {error || t('publicLink.pageNotFound')}
           </p>
           <Link
             href="/"
@@ -94,18 +82,22 @@ export default function AnimalPublicPage({
           <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-6 sm:p-8">
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/20 flex items-center justify-center text-4xl font-bold shrink-0 overflow-hidden ring-2 ring-white/30">
-                {data.photos?.[0] ? (
-                  <img src={data.photos[0]} alt={data.name} className="w-full h-full object-cover" />
+                {data.photo ? (
+                  <img src={data.photo} alt={data.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 ) : (
                   data.name.charAt(0).toUpperCase()
                 )}
               </div>
               <div className="text-center sm:text-left">
                 <h1 className="text-2xl sm:text-3xl font-bold mb-2">{data.name}</h1>
-                {data.birthDate && (
+                {data.species && (
                   <p className="text-white/90 text-sm">
-                    {t('animals.birthDate')}: {formatDate(data.birthDate)}
+                    {data.species.commonName}
+                    {data.species.scientificName ? ` (${data.species.scientificName})` : ''}
                   </p>
+                )}
+                {data.birthYear && (
+                  <p className="text-white/90 text-sm">{t('publicLink.bornIn', { year: data.birthYear })}</p>
                 )}
                 {data.sex && (
                   <p className="text-white/90 text-sm">
@@ -116,43 +108,31 @@ export default function AnimalPublicPage({
             </div>
           </div>
 
-          <div className="p-6 sm:p-8 space-y-6">
-            {data.notes && (
-              <div>
-                <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{t('animals.notes')}</h2>
-                <p className="text-gray-600 dark:text-gray-300 text-sm whitespace-pre-wrap">{data.notes}</p>
-              </div>
-            )}
-
-            <div>
-              <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">{t('animalPublic.healthRecord')}</h2>
-              {data.healthRecords.length === 0 ? (
-                <p className="text-gray-500 dark:text-gray-400 text-sm">{t('animalPublic.noRecords')}</p>
+          {/* Vaccinations : uniquement si le propriétaire a choisi de les afficher */}
+          {data.vaccinations && (
+            <div className="p-6 sm:p-8">
+              <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-3">{t('publicLink.vaccinations')}</h2>
+              {data.vaccinations.length === 0 ? (
+                <p className="text-gray-500 dark:text-gray-400 text-sm">{t('publicLink.noVaccinations')}</p>
               ) : (
                 <ul className="space-y-3">
-                  {data.healthRecords.map((r) => (
+                  {data.vaccinations.map((v, i) => (
                     <li
-                      key={r.id}
+                      key={`${v.name}-${v.date}-${i}`}
                       className="p-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/50"
                     >
-                      <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
-                        {getHealthTypeName(r.type)}
-                      </span>
-                      <p className="font-medium text-gray-800 dark:text-white mt-1">{r.title}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{formatDate(r.date)}</p>
-                      {r.notes && (
-                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">{r.notes}</p>
-                      )}
+                      <p className="font-medium text-gray-800 dark:text-white">{v.name}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{formatDate(v.date)}</p>
                     </li>
                   ))}
                 </ul>
               )}
             </div>
-          </div>
+          )}
         </div>
 
         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">
-          {t('common.appName')} — page publique (lecture seule)
+          {t('common.appName')} — {t('publicLink.readOnly')}
         </p>
       </div>
     </div>

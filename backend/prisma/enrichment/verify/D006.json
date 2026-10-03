@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000141,
+    "status": "corrected",
+    "note": "« Compacité du Birman » corrigé en Burmese (page EN) ; gabarit « petite à moyenne » ; princesse nommée ; reste confirmé."
+  },
+  {
+    "speciesId": 2000000142,
+    "status": "verified",
+    "note": "Thaïlande, porte-bonheur, Rama V, robe blanche, yeux jaunes/bleus/vairons, « diamond eyes », type oriental, caractère confirmés."
+  },
+  {
+    "speciesId": 2000000143,
+    "status": "verified",
+    "note": "USA, 1982, Oregon, mutation naturelle (Curly), taille moyenne, vagues, poil court et mi-long, épaule confirmés."
+  },
+  {
+    "speciesId": 2000000144,
+    "status": "verified",
+    "note": "USA, 1983 Louisiane, achondroplasie, pattes courtes, « chat basset », semi-foreign, yeux en noix, sociable confirmés."
+  },
+  {
+    "speciesId": 2000000145,
+    "status": "corrected",
+    "note": "« Race russe » corrigé : variété à poils longs du Russian Blue, lignée américaine (Siegfried 1984, Brunhilde 1985) ; « mêmes caractéristiques génétiques » retiré (non confirmé)."
+  },
+  {
+    "speciesId": 2000000146,
+    "status": "verified",
+    "note": "Russie, 1994, Saint-Pétersbourg, Donskoy x Oriental, variétés de pelage, caractère confirmés (variété brush précisée)."
+  },
+  {
+    "speciesId": 2000000147,
+    "status": "verified",
+    "note": "USA, 1987, Wyoming, poil frisé, semi-cobby, chatte mutante x Persan, caractère confirmés."
+  },
+  {
+    "speciesId": 2000000148,
+    "status": "corrected",
+    "note": "Poids 2-4 kg corrigé (la page donne moyennes 1,8 kg femelle / 2,7 kg mâle dans les standards) ; « brown » retiré (page : ticked tabby) ; « préfère les environnements chauds » reformulé (n'aime pas le froid)."
+  },
+  {
+    "speciesId": 2000000149,
+    "status": "corrected",
+    "note": "« Robustesse du chat birmane » corrigé en « côté massif du Sacré de Birmanie » ; reste confirmé."
+  },
+  {
+    "speciesId": 2000000150,
+    "status": "corrected",
+    "note": "Description de la tête corrigée (contours arrondis, pas « tête moyenne ») ; yeux petits à moyens ; rayures épaisses, seule couleur brown mackerel tabby ; orthographe « Sudgen » conforme à la page."
+  },
+  {
+    "speciesId": 2000000151,
+    "status": "removed",
+    "note": "description déjà null en entrée, aucune source."
+  },
+  {
+    "speciesId": 2000000152,
+    "status": "removed",
+    "note": "description déjà null en entrée, aucune source."
+  },
+  {
+    "speciesId": 2000000153,
+    "status": "corrected",
+    "note": "Poids corrigé : mâles 6-8 kg, femelles 4-5 kg (et non 4 à 8 kg) ; reste confirmé."
+  },
+  {
+    "speciesId": 2000000154,
+    "status": "corrected",
+    "note": "« Bélier anglais » retiré : croisement lapin nain x bélier français (De Cock, Néerlandais, 1949) ; poids 1,4-1,8 kg ajouté ; « Pays-Bas » reformulé en éleveur néerlandais ; sourceUrl page « Bélier (lapin) » conservée."
+  },
+  {
+    "speciesId": 2000000155,
+    "status": "corrected",
+    "note": "sourceUrl EN Lop_rabbit (page générale sans info sur la race) remplacée par la page FR Bélier français ; « entretien régulier des oreilles » retiré (absent) ; origine, poids, oreilles 42 cm, caractère calme ajoutés d'après la page."
+  }
+]

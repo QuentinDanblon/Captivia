@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000221,
+  "commonNameFr": "Serpent Ratier",
+  "scientificName": "Elaphe obsoleta",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000222,
+  "commonNameFr": "Tortue Hermann",
+  "scientificName": "Testudo hermanni",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000223,
+  "commonNameFr": "Tortue de Floride",
+  "scientificName": "Trachemys scripta",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000224,
+  "commonNameFr": "Tortue Peinte",
+  "scientificName": "Chrysemys picta",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000225,
+  "commonNameFr": "Tortue Boîte",
+  "scientificName": "Terrapene carolina",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000226,
+  "commonNameFr": "Varan de Savane",
+  "scientificName": "Varanus exanthematicus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000227,
+  "commonNameFr": "Crotale (serpent à Sonnette)",
+  "scientificName": "Crotalus atrox",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000228,
+  "commonNameFr": "Mamba Noir",
+  "scientificName": "Dendroaspis polylepis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000229,
+  "commonNameFr": "Cobra Royal",
+  "scientificName": "Ophiophagus hannah",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000230,
+  "commonNameFr": "Vipère",
+  "scientificName": "Vipera berus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000231,
+  "commonNameFr": "Anaconda Vert",
+  "scientificName": "Eunectes murinus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000232,
+  "commonNameFr": "Axolotl",
+  "scientificName": "Ambystoma mexicanum",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000233,
+  "commonNameFr": "Grenouille à Griffes",
+  "scientificName": "Xenopus laevis",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000234,
+  "commonNameFr": "Rainette Arboricole",
+  "scientificName": "Hyla arborea",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000235,
+  "commonNameFr": "Rainette Verte",
+  "scientificName": "Litoria caerulea",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ }
+]

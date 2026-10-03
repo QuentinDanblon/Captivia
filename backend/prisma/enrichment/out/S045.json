@@ -1,0 +1,94 @@
+[
+  {
+    "speciesId": 5300178,
+    "health": {
+      "diseases": [
+        {
+          "name": "Pourriture des nageoires",
+          "symptoms": "Dégradation des nageoires, coloration blanchâtre ou noire, léthargique",
+          "prevention": "Maintenir une bonne qualité de l'eau, pH stable, nettoyage régulier",
+          "whenToConsult": "Au premier signe de dégradation des nageoires"
+        },
+        {
+          "name": "Ich (Ichthyophthirius)",
+          "symptoms": "Petits points blancs sur le corps, grattage contre décors, ralentissement",
+          "prevention": "Maintenir température stable, ne pas introduire poissons sans quarantaine",
+          "whenToConsult": "Dès apparition des premiers points blancs"
+        },
+        {
+          "name": "Scoliose (chez Molly ballon)",
+          "symptoms": "Colonne vertébrale courbée, difficulté à nager, respiration laborieuse",
+          "prevention": "Éviter reproduction sélective sur la déformation, sélectionner géniteurs sains",
+          "whenToConsult": "À l'observation d'une sévère courbure vertébrale"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Molly_(poisson)",
+          "title": "Molly (poisson) - Wikipédia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "litterSizeMin": 10,
+      "litterSizeMax": 40,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Ovovivipare : les femelles portent les œufs et mettent bas des alevins déjà éclos, mais vulnérables. Très prolifique.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Molly_(poisson)",
+          "title": "Molly (poisson) - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Poecilia_sphenops",
+          "title": "Poecilia sphenops - Wikipédia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5301234,
+    "reproduction": {
+      "season": "saison des pluies (en nature)",
+      "gestationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Les femelles réceptives s'accouplent généralement pendant la saison des pluies et pondent environ 300 à 500 œufs quelques semaines plus tard ; le cocon est incubé environ 7 à 8 semaines à 24-27 °C. Longévité : femelles potentiellement 8 à 25 ans, mâles environ 4 à 5 ans.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Tliltocatl_albopilosus",
+          "title": "Tliltocatl albopilosus (Brachypelma albopilosum) - Wikipédia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5301256,
+    "health": null,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "litterSizeMin": 200,
+      "litterSizeMax": 1500,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Hermaphrodite protandre : en cas de mort de la femelle dominante, le mâle reproducteur change de sexe en quelques jours. Le mâle surveille la ponte et ventile les œufs avec ses nageoires pectorales. Hiérarchie sociale stricte dans les groupes.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Amphiprion_ocellaris",
+          "title": "Amphiprion ocellaris - Wikipédia FR"
+        }
+      ]
+    }
+  }
+]

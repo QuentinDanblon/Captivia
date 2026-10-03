@@ -1,0 +1,425 @@
+[
+  {
+    "speciesId": 2424499,
+    "feeding": {
+      "dietType": "carnivore aquatique",
+      "recommendedFoods": [
+        {
+          "name": "Amphipodes (Hyalella)",
+          "frequency": null,
+          "notes": "Petits crustacés aquatiques, proies principales en milieu naturel"
+        },
+        {
+          "name": "Petits escargots aquatiques (Heleobia, Biomphalaria)",
+          "frequency": null,
+          "notes": "Constituent une partie importante du régime naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes terrestres",
+          "reason": "Espèce entièrement aquatique à langue courte, elle ne capture pas de proies terrestres"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Proies aquatiques ; en nature l'espèce mange aussi des têtards et de petits poissons, et le cannibalisme sur les petits individus est documenté",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Titicaca_water_frog",
+          "title": "Wikipedia - Titicaca water frog"
+        },
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Telmatobius_culeus",
+          "title": "Animal Diversity Web - Telmatobius culeus"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 10,
+      "tempMax": 16,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles jour/nuit réguliers ; espèce plutôt nocturne",
+      "activityEnrichment": "Refuges sous-aquatiques, roches, végétation aquatique, zones sableuses et boueuses",
+      "hygieneNotes": "Eau froide, bien filtrée et oxygénée, eau déchlorée, changements partiels réguliers, mains propres pour toute manipulation",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Titicaca_water_frog",
+          "title": "Wikipedia - Titicaca water frog (eau du lac : 8 à 17,5 °C)"
+        },
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Telmatobius_culeus",
+          "title": "Animal Diversity Web - Telmatobius culeus"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Entièrement aquatique, plutôt nocturne, vit sur le fond ; adopte un comportement de « pompes » sur le fond qui augmente les échanges d'oxygène quand l'eau en manque",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé pour enfants, espèce délicate et menacée",
+      "compatibilityWithOtherAnimals": "Cannibalisme occasionnel documenté : ne pas mélanger des individus de tailles différentes ni avec d'autres espèces",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Telmatobius_culeus",
+          "title": "Animal Diversity Web - Telmatobius culeus"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Titicaca_water_frog",
+          "title": "Wikipedia - Titicaca water frog"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Chytridiomycose (Batrachochytrium dendrobatidis)",
+          "symptoms": "Perte d'appétit, apathie, altération de la peau, comportement anormal",
+          "prevention": "Maintien d'une eau froide et bien oxygénée, isolation des individus malades, quarantaine des nouveaux arrivants",
+          "whenToConsult": "Dès signes de perte d'appétit ou comportement anormal persistant"
+        },
+        {
+          "name": "Infection bactérienne secondaire",
+          "symptoms": "Gonflements, rougeurs, plaies ouvertes",
+          "prevention": "Qualité d'eau optimale, paramètres thermiques stables, réduction du stress",
+          "whenToConsult": "Apparition rapide de gonflements ou plaies"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://bioone.org/journals/journal-of-wildlife-diseases/volume-52/issue-4/2016-01-007/Chytrid-Fungus-i--span-classgenus-speciesBatrachochytrium-dendrobatidis-span-i/10.7589/2016-01-007.full",
+          "title": "Chytrid Fungus in Telmatobius culeus"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": [
+          "CITES Annexe I - commerce international à des fins commerciales interdit",
+          "Espèce classée « en danger » par l'UICN (Wikipedia)"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Titicaca_water_frog",
+          "title": "Wikipedia - Titicaca water frog (CITES Appendix I)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "une fois par an, en été (milieu naturel)",
+      "gestationDays": null,
+      "incubationDays": 14,
+      "litterSizeMin": 80,
+      "litterSizeMax": 500,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "Œufs pondus en eau peu profonde, éclosion en 1 à 2 semaines ; la métamorphose des têtards dure de quelques mois à un an. Reproduction en captivité réussie seulement en institutions spécialisées (premier succès en 2010 au zoo de Huachipa, Pérou)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Titicaca_water_frog",
+          "title": "Wikipedia - Titicaca water frog"
+        },
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Telmatobius_culeus",
+          "title": "Animal Diversity Web - Telmatobius culeus"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2427573,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Crickets gut-loadés",
+          "frequency": "quotidienne juvéniles, tous les 2-3 jours adultes",
+          "notes": "Proie principale en captivité, taille adaptée à la gueule"
+        },
+        {
+          "name": "Petits insectes volants (mouches des fruits, petits papillons)",
+          "frequency": "hebdomadaire",
+          "notes": "En nature l'espèce se nourrit surtout d'insectes volants ; stimulation de chasse"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes traités aux pesticides",
+          "reason": "Toxicité directe, contamination bioaccumulative"
+        },
+        {
+          "name": "Proies de grande taille",
+          "reason": "Difficulté d'ingestion, risque d'étouffement pour petit individu"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Calcium + D3 2-3x/semaine, multivitamines 1x/semaine, insectes gut-loadés variés",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Hyla_arborea",
+          "title": "Wikipedia - Rainette verte"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/European_tree_frog",
+          "title": "Wikipedia - European tree frog"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles jour/nuit réguliers, lumière naturelle ou LED spectre complet",
+      "activityEnrichment": "Plantes vivantes denses, branches, cachettes multiples, brumisation d'eau déchlorée",
+      "hygieneNotes": "Mains propres avant manipulation, eau déchlorée pour brumisations, nettoyage régulier du substrat",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Hyla_arborea",
+          "title": "Wikipedia - Rainette verte"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petit amphibien arboricole (jusqu'à 5 cm), surtout nocturne, qui se repose parfois immobile au soleil sur des branches. Chœurs nocturnes de mâles au printemps. Excellent grimpeur grâce aux ventouses des doigts",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Peau fragile et perméable : manipulation déconseillée, observation sous supervision",
+      "compatibilityWithOtherAnimals": "Pas de cohabitation avec d'autres espèces ; petit groupe de congénères possible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Hyla_arborea",
+          "title": "Wikipedia FR - Rainette verte"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Chytridiomycose (Batrachochytrium dendrobatidis)",
+          "symptoms": "Apathie, anorexie, peau épaissie ou desquamation",
+          "prevention": "Humidité adéquate, eau déchlorée, quarantaine des nouveaux arrivants, éviter le stress",
+          "whenToConsult": "Dès apathie persistante ou refus alimentaire de plusieurs jours"
+        },
+        {
+          "name": "Ranavirose",
+          "symptoms": "Ulcères cutanés, hémorragies, comportement anormal, mort soudaine",
+          "prevention": "Isolation stricte des malades, hygiène des mains, matériel dédié",
+          "whenToConsult": "Apparition d'ulcères cutanés, comportement erratique"
+        },
+        {
+          "name": "Parasitoses intestinales (helminthes)",
+          "symptoms": "Amaigrissement, apathie, diarrhée, stagnation de croissance",
+          "prevention": "Alimentation variée, eau propre, nettoyage régulier, éviter la surpopulation",
+          "whenToConsult": "Perte de poids progressive ou croissance arrêtée"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://redi.cedia.edu.ec/document/342444",
+          "title": "Major disease threats to European amphibians (chytridiomycose et ranavirus)"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": "IV (Directive Habitats 92/43/CEE)",
+        "permits": [],
+        "restrictions": [
+          "Espèce protégée en France (protection nationale), Directive Habitats annexe IV, Convention de Berne annexe II"
+        ]
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.sarthe.fr/sites/default/files/2021-05/triton-marbre_et_rainette-verte.pdf",
+          "title": "Fiche Natura 2000 - Triton marbré et Rainette verte (statuts de protection)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "printemps (mars-juin)",
+      "gestationDays": null,
+      "incubationDays": 14,
+      "litterSizeMin": 800,
+      "litterSizeMax": 1000,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": "modere",
+      "notes": "Œufs pondus en masses non flottantes ; éclosion en 10 à 14 jours, métamorphose des têtards après environ 3 mois. Les mâles chantent pour attirer les femelles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Hyla_arborea",
+          "title": "Wikipedia FR - Rainette verte"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/European_tree_frog",
+          "title": "Wikipedia - European tree frog"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2427694,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Crickets gut-loadés",
+          "frequency": "quotidienne juvéniles, tous les 2-3 jours adultes",
+          "notes": "Proie principale en captivité, facile à élever"
+        },
+        {
+          "name": "Blattes (Dubia)",
+          "frequency": "hebdomadaire",
+          "notes": "Source de protéines alternative ; en nature l'espèce mange blattes, papillons de nuit et criquets"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes sauvages non identifiés",
+          "reason": "Risque parasitaire et contamination chimique"
+        },
+        {
+          "name": "Trop de vers de farine géants / vers de cire",
+          "reason": "Excès de gras, favorise l'obésité"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Insectes variés, calcium régulier, surveillance du poids pour éviter l'obésité",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Litoria_caerulea",
+          "title": "Wikipedia - Litoria caerulea"
+        },
+        {
+          "type": "guide",
+          "url": "https://gensou.sg/?p=41816",
+          "title": "White Tree Frog Care Guide"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 22,
+      "tempMax": 30,
+      "humidityMin": 60,
+      "humidityMax": 70,
+      "minSpaceSize": "60×45×60 cm minimum pour 1 adulte, terrarium vertical",
+      "lightNeeds": "Cycles jour/nuit réguliers 12h/12h, avec éclairage UVB selon le guide cité",
+      "activityEnrichment": "Branches robustes épaisses, plantes vivantes, cachettes multiples, brumisations",
+      "hygieneNotes": "Mains propres, eau déchlorée pour pulvérisation, bol d'eau peu profond pour trempage, nettoyage régulier du substrat",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://gensou.sg/?p=41816",
+          "title": "White Tree Frog Care Guide - Vivarium Setup"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Litoria_caerulea",
+          "title": "Wikipedia - Litoria caerulea"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Grande rainette arboricole nocturne, très docile et peu craintive envers l'humain. Peut se regrouper en amas pour dormir. Longévité importante en captivité (environ 16 ans en moyenne, parfois plus de 20 ans)",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Docile mais peau fragile et perméable : manipulation à limiter, supervision d'un adulte et lavage des mains",
+      "compatibilityWithOtherAnimals": "Cohabitation possible entre individus de taille similaire ; l'espèce peut manger de plus petites grenouilles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Litoria_caerulea",
+          "title": "Wikipedia EN - Litoria caerulea"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Chytridiomycose (Batrachochytrium dendrobatidis)",
+          "symptoms": "Léthargie, anorexie, peau anormale",
+          "prevention": "Humidité et température stables, eau déchlorée, quarantaine des nouveaux arrivants",
+          "whenToConsult": "Refus alimentaire persistant ou apathie"
+        },
+        {
+          "name": "Obésité",
+          "symptoms": "Ventre distendu, mobilité réduite, plis de peau excessifs",
+          "prevention": "Portions mesurées, alimentation variée, éviter les proies grasses régulières, pesée mensuelle",
+          "whenToConsult": "Gain de poids rapide ou mobilité réduite"
+        },
+        {
+          "name": "Maladie osseuse métabolique",
+          "symptoms": "Déformations osseuses, faiblesse, tremblements",
+          "prevention": "Supplémentation régulière en calcium, éclairage adapté",
+          "whenToConsult": "Dès déformation ou faiblesse des membres"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Litoria_caerulea",
+          "title": "Wikipedia - Litoria caerulea (chytridiomycose)"
+        },
+        {
+          "type": "guide",
+          "url": "https://gensou.sg/?p=41816",
+          "title": "White Tree Frog Care Guide (obésité, maladie osseuse métabolique)"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "novembre-février (saison humide tropicale)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 200,
+      "litterSizeMax": 2000,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Œufs pondus en amas qui coulent en moins de 24 h ; métamorphose des têtards en environ 6 semaines. Les mâles chantent le soir en saison de reproduction",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Litoria_caerulea",
+          "title": "Wikipedia - Litoria caerulea"
+        }
+      ]
+    }
+  }
+]

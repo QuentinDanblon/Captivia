@@ -1,0 +1,69 @@
+[
+  {
+    "speciesId": 103951502,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "habitat: 26-29 °C, pH 6,6-7,8, 20 gallons/paire confirmés (en.wikipedia) ; reproduction.sexualMaturityMonths 4 -> 6 (dès 16 sem., couramment 6 mois)",
+      "reproduction: 'reproduction 6-8 fois/an' remplacé par pontes répétées à 12-13 j d'intervalle (en.wikipedia) ; incubation 72 h = 3 j confirmé",
+      "behavior: 'monogames' non confirmé, remplacé par soins biparentaux"
+    ],
+    "removed": [
+      "habitat.lightNeeds (non confirmé)",
+      "reproduction.litterSizeMin/Max (50-200 non confirmé), season",
+      "legislation entière (statut non confirmé ; source INPN = page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 103952549,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding/habitat: carnivore, 22-30 °C (survie 8-10 °C), pH 6-7 confirmés (en.wikipedia)",
+      "reproduction: 500-800 œufs confirmé ; soins biparentaux et nourriture pré-mâchée confirmés"
+    ],
+    "removed": [
+      "habitat.minSpaceSize (150 L, non confirmé) et lightNeeds",
+      "reproduction.incubationDays (2), sexualMaturityMonths (12), season ; notes 'alevins nagent 7-8 jours' et 'paires monogames' non confirmés",
+      "legislation entière (non confirmée ; source INPN générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 103953586,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "behavior: 'paisible et grégaire' -> paisible, territorial à la reproduction, vit en couple (en/fr wikipedia) ; dimorphisme = rayons dorsaux prolongés",
+      "health: Ich 'traitement antifongique' -> antiparasitaire (l'Ich est un protozoaire)",
+      "habitat: 60 L / 60 cm pour un couple confirmé (fr.wikipedia) ; 25,5-29,5 °C et pH 5,2-6,7 confirmés (en.wikipedia)",
+      "reproduction: notes sélection artificielle reformulées d'après en.wikipedia (fertilité réduite, problèmes de santé) ; éclosion 40 h à 29 °C = 1,7 j confirmé ; fr.wikipedia ajoutée en source"
+    ],
+    "removed": [
+      "health: 'Varices de captivité' (maladie inexistante chez les poissons)",
+      "reproduction.sexualMaturityMonths (8), season",
+      "habitat.lightNeeds",
+      "legislation entière (non confirmée ; source INPN générique)"
+    ],
+    "confidence": "medium"
+  }
+]

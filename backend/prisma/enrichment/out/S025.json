@@ -1,0 +1,386 @@
+[
+  {
+    "speciesId": 2479694,
+    "feeding": {
+      "dietType": "nectarivore-frugivore",
+      "recommendedFoods": [
+        {
+          "name": "Nectar de fleurs (eucalyptus, grevillea) ou nectar spécial loris",
+          "frequency": "quotidienne",
+          "notes": "Langue spécialisée adaptée au nectar et au pollen"
+        },
+        {
+          "name": "Fruits frais (figues, mangues, baies)",
+          "frequency": "quotidienne",
+          "notes": "Varier les fruits selon la saison"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Pain et miel",
+          "reason": "Déconseillés : un mélange nutritionnel pour loris est préférable (recommandation vétérinaire)"
+        },
+        {
+          "name": "Chocolat",
+          "reason": "Toxique pour les oiseaux"
+        },
+        {
+          "name": "Sel",
+          "reason": "Dangereux pour l'équilibre métabolique"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime à base de nectar, de pollen et de fruits : accès constant à du nectar ou des fruits variés.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rainbow_lorikeet",
+          "title": "Rainbow Lorikeet - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Branchages naturels variés, jouets, interactions sociales quotidiennes",
+      "hygieneNotes": "Bains d'eau réguliers, nettoyage régulier de la volière",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rainbow_lorikeet",
+          "title": "Rainbow Lorikeet - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Très vocaux et grégaires, vivent en volées bruyantes. Énergiques et joueurs.",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Surveillance requise car peuvent mordre.",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rainbow_lorikeet",
+          "title": "Rainbow Lorikeet - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Syndrome de paralysie des loris (Lorikeet Paralysis Syndrome)",
+          "symptoms": "Paralysie, signalée de façon saisonnière chez les loris sauvages en Australie",
+          "prevention": "Cause non établie (possiblement liée à des plantes) : pas de prévention connue",
+          "whenToConsult": "Dès les premiers signes de faiblesse ou de paralysie"
+        },
+        {
+          "name": "Parasites externes (poux, acariens)",
+          "symptoms": "Démangeaisons, picotage excessif, zone chauve",
+          "prevention": "Hygiène régulière, bains d'eau, nettoyage volière",
+          "whenToConsult": "Consultation vétérinaire si symptômes persistants"
+        },
+        {
+          "name": "Psittacose",
+          "symptoms": "Fatigue, manque d'appétit, diarrhée, respiration difficile",
+          "prevention": "Hygiène excellente, quarantaine pour nouveaux oiseaux",
+          "whenToConsult": "Urgence vétérinaire à tout symptôme respiratoire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rainbow_lorikeet",
+          "title": "Rainbow Lorikeet - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "août-janvier (sud de l'Australie)",
+      "gestationDays": null,
+      "incubationDays": 25,
+      "litterSizeMin": 1,
+      "litterSizeMax": 3,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Nidification dans des cavités (creux d'arbres, troncs de palmiers). Incubation assurée par la femelle seule (environ 25 jours).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rainbow_lorikeet",
+          "title": "Rainbow Lorikeet - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2479870,
+    "feeding": {
+      "dietType": "granivore-frugivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines variées (tournesol, carthame, noix)",
+          "frequency": "quotidienne",
+          "notes": "Ne pas nourrir uniquement de graines ; compléter avec fruits et légumes"
+        },
+        {
+          "name": "Fruits frais (pomme, raisin, papaye, fruits rouges)",
+          "frequency": "quotidienne",
+          "notes": "Papaye appréciée à l'état naturel ; aident à varier le régime"
+        },
+        {
+          "name": "Légumes frais",
+          "frequency": "hebdomadaire",
+          "notes": "Endives, épinards, carottes"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Graines seules (régime mono-aliment)",
+          "reason": "Provoque des problèmes de foie et une croissance anormale du bec"
+        },
+        {
+          "name": "Sel et sucres ajoutés",
+          "reason": "Déconseillés pour les oiseaux"
+        },
+        {
+          "name": "Chocolat, avocat",
+          "reason": "Hautement toxiques"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime varié essentiel : un régime à base de graines seules entraîne des problèmes de foie et une croissance anormale du bec.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cacatoès_blanc",
+          "title": "Cacatoès blanc - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/White_cockatoo",
+          "title": "White cockatoo - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Cage ou volière d'environ 4 m de long, 1,50 m de large et 2 m de haut (recommandation de la page Wikipédia), perchoirs solides",
+      "lightNeeds": null,
+      "activityEnrichment": "Espaces de jeu dédiés pour éviter l'ennui et l'arrachage de plumes, jouets à détruire changés souvent, plusieurs heures d'interaction humaine par jour",
+      "hygieneNotes": "Bains réguliers, nettoyage régulier de la volière",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cacatoès_blanc",
+          "title": "Cacatoès blanc - Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Très sociaux, se déplacent en groupes d'environ 20 individus. Bruyants. Requièrent plusieurs heures d'attention quotidienne.",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Peu adapté aux jeunes enfants : animal très exigeant, destructeur et bruyant ; supervision par des adultes expérimentés indispensable.",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cacatoès_blanc",
+          "title": "Cacatoès blanc - Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Problèmes hépatiques (régime à base de graines)",
+          "symptoms": "Léthargie, perte d'appétit, abdomen gonflé",
+          "prevention": "Régime varié (fruits, légumes), activité physique, pas d'excès alimentaires",
+          "whenToConsult": "Consultation vétérinaire rapide"
+        },
+        {
+          "name": "Anomalies du bec",
+          "symptoms": "Croissance anormale, déformation, perte de symétrie",
+          "prevention": "Nutrition équilibrée, pas de régime à base de graines seules",
+          "whenToConsult": "Consultation vétérinaire aviaire dès déformation du bec"
+        },
+        {
+          "name": "Arrachage de plumes (ennui, dépression)",
+          "symptoms": "Plumes arrachées, zones dégarnies",
+          "prevention": "Espaces de jeu, jouets renouvelés, interactions quotidiennes",
+          "whenToConsult": "Consultation vétérinaire aviaire si les signes persistent"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cacatoès_blanc",
+          "title": "Cacatoès blanc - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/White_cockatoo",
+          "title": "White cockatoo - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 28,
+      "litterSizeMin": 2,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "Nidification en cavités d'arbres, 2 œufs, couvés par les deux parents (environ 28 jours). Envol vers 84 jours environ, indépendance 15 à 18 semaines plus tard. Maturité sexuelle à 3-4 ans.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cacatoès_blanc",
+          "title": "Cacatoès blanc - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/White_cockatoo",
+          "title": "White cockatoo - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2479888,
+    "feeding": {
+      "dietType": "granivore-frugivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines variées (tournesol, noix, fruits à coque)",
+          "frequency": "quotidienne",
+          "notes": "À varier ; ne pas se limiter aux graines"
+        },
+        {
+          "name": "Fruits frais (pomme, raisin, baies)",
+          "frequency": "quotidienne",
+          "notes": "Varier régulièrement"
+        },
+        {
+          "name": "Légumes (carottes, courges)",
+          "frequency": "régulière",
+          "notes": "Complément nutritif"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Sel et sucres",
+          "reason": "Déconseillés pour les oiseaux"
+        },
+        {
+          "name": "Chocolat, avocat",
+          "reason": "Hautement toxiques"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime varié essentiel (graines, fruits, végétaux). Suspendre ou cacher les graines pour l'enrichissement comportemental.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Sulphur-crested_cockatoo",
+          "title": "Sulphur-crested Cockatoo - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Jouets destructibles (fort besoin de ronger), bains d'eau, manipulation d'objets, interactions sociales",
+      "hygieneNotes": "Nettoyage régulier de la volière, bains d'eau réguliers",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Sulphur-crested_cockatoo",
+          "title": "Sulphur-crested Cockatoo - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Très bruyants, très intelligents, vivent en volées (des sentinelles montent la garde pendant que le groupe est au sol). Animaux socialement très exigeants, au comportement destructeur.",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Peut être agressif et imprévisible. Déconseillé avec de jeunes enfants ; risque de morsures.",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Sulphur-crested_cockatoo",
+          "title": "Sulphur-crested Cockatoo - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladie du bec et des plumes des psittacidés (PBFD)",
+          "symptoms": "Perte de plumes (maladie virale)",
+          "prevention": "Quarantaine des nouveaux oiseaux, hygiène stricte, provenance d'élevages contrôlés",
+          "whenToConsult": "Dès les premières pertes de plumes anormales"
+        },
+        {
+          "name": "Parasites externes",
+          "symptoms": "Plumes ébouriffées, démangeaisons, perte plumes",
+          "prevention": "Hygiène excellente, bains réguliers, volière propre",
+          "whenToConsult": "Consultation vétérinaire à premiers signes"
+        },
+        {
+          "name": "Troubles du comportement (captivité)",
+          "symptoms": "Comportement répétitif, automutilation, vocalisations excessives",
+          "prevention": "Enrichissement quotidien, interactions sociales, espace suffisant",
+          "whenToConsult": "Consultation comportement aviaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Sulphur-crested_cockatoo",
+          "title": "Sulphur-crested Cockatoo - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "août-janvier (sud de l'Australie) ; mai-septembre (nord)",
+      "gestationDays": null,
+      "incubationDays": 26,
+      "litterSizeMin": 2,
+      "litterSizeMax": 3,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Nidification en cavités. Incubation de 25 à 27 jours. Les jeunes restent au nid 9 à 12 semaines, puis restent avec leurs parents pendant plusieurs mois après l'envol.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Sulphur-crested_cockatoo",
+          "title": "Sulphur-crested Cockatoo - Wikipedia"
+        }
+      ]
+    }
+  }
+]

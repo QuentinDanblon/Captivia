@@ -1,7 +1,10 @@
+import { Throttle } from '@nestjs/throttler';
+import { EXTERNAL_API_THROTTLE } from '../../config/throttle.config';
 import {
   Controller,
   Get,
   Query,
+  BadRequestException,
   NotFoundException,
   InternalServerErrorException,
   UseGuards,
@@ -14,11 +17,22 @@ import {
   ApiResponse,
 } from '@nestjs/swagger';
 import { WikidataService } from './wikidata.service';
+import { isValidQid } from '../http-safety';
+
+/** Le QID est interpolé dans des requêtes SPARQL / URLs : format strict Q\d+. */
+function assertValidQid(qid: unknown): void {
+  if (!isValidQid(qid)) {
+    throw new BadRequestException(
+      'qid must match Q followed by digits (e.g. Q140)',
+    );
+  }
+}
 import { GetWikidataDto, ConservationStatusDto } from '../../dto/species.dto';
 
 @UseGuards(RateLimitGuard)
 @ApiTags('wikidata')
 @Controller('wikidata')
+@Throttle(EXTERNAL_API_THROTTLE)
 export class WikidataController {
   constructor(private readonly wikidataService: WikidataService) {}
 
@@ -41,6 +55,7 @@ export class WikidataController {
   @ApiResponse({ status: 200, description: 'Entity data' })
   @ApiResponse({ status: 404, description: 'Not found' })
   async getEntity(@Query('qid') qid: string) {
+    assertValidQid(qid);
     try {
       return await this.wikidataService.getEntity(qid);
     } catch (error) {
@@ -75,6 +90,7 @@ export class WikidataController {
   @ApiResponse({ status: 200, description: 'Conservation status' })
   @ApiResponse({ status: 404, description: 'Not found' })
   async getConservationStatus(@Query() conservationDto: ConservationStatusDto) {
+    assertValidQid(conservationDto.qid);
     try {
       return await this.wikidataService.getConservationStatus(
         conservationDto.qid,
@@ -95,6 +111,7 @@ export class WikidataController {
   @ApiResponse({ status: 200, description: 'Classification data' })
   @ApiResponse({ status: 404, description: 'Not found' })
   async getClassification(@Query('qid') qid: string) {
+    assertValidQid(qid);
     try {
       return await this.wikidataService.getClassification(qid);
     } catch (error) {
@@ -111,6 +128,7 @@ export class WikidataController {
   @ApiResponse({ status: 200, description: 'Description data' })
   @ApiResponse({ status: 404, description: 'Not found' })
   async getDescriptions(@Query('qid') qid: string) {
+    assertValidQid(qid);
     try {
       return await this.wikidataService.getDescriptions(qid);
     } catch (error) {
@@ -127,6 +145,7 @@ export class WikidataController {
   @ApiResponse({ status: 200, description: 'Image data' })
   @ApiResponse({ status: 404, description: 'Not found' })
   async getImages(@Query('qid') qid: string) {
+    assertValidQid(qid);
     try {
       return await this.wikidataService.getImages(qid);
     } catch (error) {
@@ -143,6 +162,7 @@ export class WikidataController {
   @ApiResponse({ status: 200, description: 'Related species' })
   @ApiResponse({ status: 404, description: 'Not found' })
   async getRelatedSpecies(@Query('qid') qid: string) {
+    assertValidQid(qid);
     try {
       return await this.wikidataService.getRelatedSpecies(qid);
     } catch (error) {

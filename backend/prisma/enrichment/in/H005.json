@@ -1,0 +1,118 @@
+[
+ {
+  "speciesId": 104060633,
+  "commonNameFr": "Coati",
+  "scientificName": "Nasua nasua",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 104060805,
+  "commonNameFr": "Fossa",
+  "scientificName": "Cryptoprocta ferox",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 104060854,
+  "commonNameFr": "Caracal",
+  "scientificName": "Caracal caracal",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104060891,
+  "commonNameFr": "Chaus",
+  "scientificName": "Felis chaus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104060941,
+  "commonNameFr": "Chat de Geoffroy",
+  "scientificName": "Leopardus geoffroyi",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104061079,
+  "commonNameFr": "Chat pêcheur",
+  "scientificName": "Prionailurus viverrinus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104069250,
+  "commonNameFr": "Antilope cervicapre",
+  "scientificName": "Antilope cervicapra",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 2000000108,
+  "commonNameFr": "Whippet Italien",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000151,
+  "commonNameFr": "Turc",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000152,
+  "commonNameFr": "Ussuri",
+  "scientificName": "Felis catus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000162,
+  "commonNameFr": "Lapin Papillon",
+  "scientificName": "Oryctolagus cuniculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "speciesId": 104040409,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: fréquences 'quotidienne / 2-3 fois par jour' et mealFrequency daily non confirmées -> null ; texte 'nourrir à proximité du substrat' remplacé par les faits de la source (pas de langue, mains, odorat/ligne latérale, nocturne)",
+      "behavior.compatibilityWithOtherAnimals: 'groupes monosexes ou couples' non confirmé -> remplacé par cannibalisme confirmé (consomme ses propres larves) ; sociability 'semi-grégaire' non confirmé -> null",
+      "habitat: température 16-28, 60 L (+40 L/individu), pH 6.5-7.5, 30%/semaine non confirmés -> null/retirés ; 'substrat pour fouir' retiré",
+      "health: ajout chytridiomycose (porteur sain confirmé par la source) ; 'Léthargic' -> 'Léthargie'",
+      "reproduction: incubation 2 j et 100-5000 œufs non confirmés -> null ; maturité 12 mois conservé (source : 1-2 ans) ; 'reproduction prolifique' retiré ; saison 'quand les conditions le permettent'"
+    ],
+    "removed": [
+      "legislation (source = page d'accueil Légifrance générique, statut non confirmé ; espèce susceptible d'être réglementée comme espèce exotique envahissante en France)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104040736,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: fréquences et mealFrequency non confirmées -> null ; poissons confirmés ('feeder insects and small fish'), vers/insectes confirmés ; langue non projetable confirmée",
+      "habitat: temp 15-24, humidité 60-80, 40 L, cycle 12h/12h, UVB, pH non confirmés -> null/retirés ; remplacé par info de la source (diurne, D3 via soleil, éclairage/chauffage spécialisé minimal)",
+      "behavior: 'actif début et fin de journée' -> 'diurne' (source) ; 'sociable et grégaire' non confirmé -> sociability null ; compatibilité enfants corrigée (mucus irritant bouche/yeux, toxine sans danger notable) ; compatibilité autres animaux non confirmée -> null",
+      "health: 'écailles blanches' (les amphibiens n'ont pas d'écailles) -> 'desquamation anormale' ; 'tempête thermique stable' -> 'température stable'",
+      "reproduction: incubation 3 j et maturité 12 mois non confirmés -> null ; 40-110 œufs et mi-mai confirmés ; métamorphose '6-8 semaines' corrigée : pattes en 6-8 semaines, métamorphose complète en août-septembre"
+    ],
+    "removed": [
+      "legislation (source = page d'accueil Légifrance générique, statut non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104041498,
+    "checked": ["habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat: temp 10-18, humidité 70-90, terrarium 40x30x30, lumière non confirmés -> null",
+      "behavior: 'terrestre et semi-aquatique, peu active, nocturne', sociability solitaire, cohabitation non confirmés -> retirés ; remplacé par info de la source (endémique de Taïwan, haute montagne vers 2 100 m, milieux alpins ouverts à forêts sempervirentes humides)",
+      "health: 'Dessication' -> 'Déshydratation' ; hygrométrie 70-90 % retirée",
+      "reproduction: saison, maturité 24 mois, difficulté 'avance' non confirmés -> null ; notes réécrites (UICN En danger 2020, protégée à Taïwan confirmés)"
+    ],
+    "removed": [
+      "legislation (statut 'prohibited' + 'annexe A UE / protégée en France' = invention : la source indique seulement En danger UICN et protection à Taïwan)",
+      "feeding était déjà null"
+    ],
+    "confidence": "low"
+  }
+]

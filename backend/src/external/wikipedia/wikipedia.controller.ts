@@ -1,3 +1,5 @@
+import { Throttle } from '@nestjs/throttler';
+import { EXTERNAL_API_THROTTLE } from '../../config/throttle.config';
 import {
   Controller,
   Get,
@@ -19,6 +21,7 @@ import { GetWikipediaDto } from '../../dto/species.dto';
 @UseGuards(RateLimitGuard)
 @ApiTags('wikipedia')
 @Controller('wikipedia')
+@Throttle(EXTERNAL_API_THROTTLE)
 export class WikipediaController {
   constructor(private readonly wikipediaService: WikipediaService) {}
 

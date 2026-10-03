@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000522,
+  "commonNameFr": "Quality Control Tool",
+  "scientificName": "quality control tool",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000523,
+  "commonNameFr": "Q124727325",
+  "scientificName": "Q124727325",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000524,
+  "commonNameFr": "Digging Hoe",
+  "scientificName": "Digging Hoe",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000525,
+  "commonNameFr": "Q130705482",
+  "scientificName": "Q130705482",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000526,
+  "commonNameFr": "Instrument de Collecte de Données",
+  "scientificName": "instrument de collecte de données",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000527,
+  "commonNameFr": "Studio Equipment",
+  "scientificName": "studio equipment",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000528,
+  "commonNameFr": "Lighting Equipment",
+  "scientificName": "lighting equipment",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000529,
+  "commonNameFr": "Additional Camera Equipment",
+  "scientificName": "additional camera equipment",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000530,
+  "commonNameFr": "Mata'a",
+  "scientificName": "mata'a",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000531,
+  "commonNameFr": "Ergonomic Mouse",
+  "scientificName": "ergonomic mouse",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000532,
+  "commonNameFr": "Duplex Axe",
+  "scientificName": "Duplex axe",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000533,
+  "commonNameFr": "Tushkar",
+  "scientificName": "Tushkar",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000574,
+  "commonNameFr": "New Zealand Red Rabbit",
+  "scientificName": "New Zealand red rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000575,
+  "commonNameFr": "Tête de Lion",
+  "scientificName": "Tête de lion",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000576,
+  "commonNameFr": "Petit Papillon",
+  "scientificName": "Petit papillon",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

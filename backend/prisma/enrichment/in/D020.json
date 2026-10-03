@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000700,
+  "commonNameFr": "Dexter (race Bovine)",
+  "scientificName": "Dexter (race bovine)",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000701,
+  "commonNameFr": "Vache à Viande",
+  "scientificName": "Vache à viande",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000702,
+  "commonNameFr": "Pie Rouge de Norvège",
+  "scientificName": "Pie rouge de Norvège",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000703,
+  "commonNameFr": "Pie Rouge de Suède",
+  "scientificName": "Pie rouge de Suède",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000704,
+  "commonNameFr": "Kostroma",
+  "scientificName": "Kostroma",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000705,
+  "commonNameFr": "Kazakh Whiteheaded",
+  "scientificName": "Kazakh Whiteheaded",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000706,
+  "commonNameFr": "Alatau Cattle",
+  "scientificName": "Alatau cattle",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000707,
+  "commonNameFr": "Asturiana de la Montaña",
+  "scientificName": "Asturiana de la montaña",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000708,
+  "commonNameFr": "Japanese Brown",
+  "scientificName": "Japanese Brown",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000709,
+  "commonNameFr": "Krishna Valley Cattle",
+  "scientificName": "Krishna Valley cattle",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000980,
+  "commonNameFr": "American Landrace",
+  "scientificName": "American Landrace",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000981,
+  "commonNameFr": "Hampshire (race Porcine)",
+  "scientificName": "Hampshire (race porcine)",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000982,
+  "commonNameFr": "Angeln Saddleback",
+  "scientificName": "Angeln Saddleback",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000983,
+  "commonNameFr": "Large Black",
+  "scientificName": "Large Black",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000984,
+  "commonNameFr": "Husumer",
+  "scientificName": "Husumer",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

@@ -1,0 +1,128 @@
+[
+ {
+  "speciesId": 2000000699,
+  "commonNameFr": "Vänekor",
+  "scientificName": "Vänekor",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000705,
+  "commonNameFr": "Kazakh Whiteheaded",
+  "scientificName": "Kazakh Whiteheaded",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000708,
+  "commonNameFr": "Japanese Brown",
+  "scientificName": "Japanese Brown",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000987,
+  "commonNameFr": "Berkshire",
+  "scientificName": "Berkshire",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000988,
+  "commonNameFr": "Porc de Breïtovo",
+  "scientificName": "Porc de Breïtovo",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000991,
+  "commonNameFr": "Porc de Sibérie du Nord",
+  "scientificName": "Porc de Sibérie du Nord",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000992,
+  "commonNameFr": "Danish Landrace",
+  "scientificName": "Danish Landrace",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000994,
+  "commonNameFr": "Grice",
+  "scientificName": "Grice",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000997,
+  "commonNameFr": "Porc de Livny",
+  "scientificName": "Porc de Livny",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001011,
+  "commonNameFr": "Krškopolje Pig",
+  "scientificName": "Krškopolje pig",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001013,
+  "commonNameFr": "Landrace Pig",
+  "scientificName": "Landrace pig",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001115,
+  "commonNameFr": "Hollandaise Huppée",
+  "scientificName": "Hollandaise huppée",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001117,
+  "commonNameFr": "Dominicaine (race de Poule)",
+  "scientificName": "Dominicaine (race de poule)",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001121,
+  "commonNameFr": "Italienne",
+  "scientificName": "Italienne",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

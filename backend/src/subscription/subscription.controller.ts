@@ -16,8 +16,12 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { GuestForbidden, NoGuestGuard } from '../common/guest';
 import { SubscriptionService } from './subscription.service';
 import { SubscribeDto } from './dto/subscribe.dto';
+
+export const SUBSCRIBE_IN_APP_ONLY_MESSAGE =
+  "Abonnement disponible dans l'application mobile Captivia (achats intégrés App Store / Google Play). Aucun paiement n'est proposé sur le web.";
 
 @ApiTags('subscription')
 @Controller('users/me/subscription')
@@ -31,7 +35,8 @@ export class SubscriptionController {
   @ApiOperation({ summary: 'Get current subscription status' })
   @ApiResponse({
     status: 200,
-    description: 'Statut d’abonnement actuel : { isPremium, plan? }',
+    description:
+      'Statut d’abonnement : { premium, source, status, productId, currentPeriodEnd, willRenew, manageUrl } (+ isPremium, plan? pour compatibilité)',
   })
   @ApiNotFoundResponse({ description: 'Utilisateur introuvable' })
   getStatus(@Req() req: { user: { id: string } }) {
@@ -39,19 +44,20 @@ export class SubscriptionController {
   }
 
   @Post()
+  // Mode invité : acheter un abonnement exige d'abord un compte (403 GUEST_ACCOUNT).
+  @UseGuards(NoGuestGuard)
+  @GuestForbidden('subscription')
   @ApiOperation({
     summary:
-      'Subscribe (monthly or yearly) — DÉSACTIVÉ : le paiement en ligne n’est pas encore disponible. Retourne 501.',
+      'Subscribe — DÉSACTIVÉ sur le web : l’abonnement se souscrit uniquement dans l’application mobile (achats intégrés App Store / Google Play). Retourne 501.',
     deprecated: true,
   })
   @ApiResponse({
     status: 501,
     description:
-      'Le paiement en ligne arrive bientôt. Contactez un administrateur pour activer le premium.',
+      "Abonnement disponible dans l'application mobile Captivia (pas de paiement web).",
   })
   subscribe(@Req() _req: { user: { id: string } }, @Body() _dto: SubscribeDto) {
-    throw new NotImplementedException(
-      'Le paiement en ligne arrive bientôt. Contactez un administrateur pour activer le premium.',
-    );
+    throw new NotImplementedException(SUBSCRIBE_IN_APP_ONLY_MESSAGE);
   }
 }

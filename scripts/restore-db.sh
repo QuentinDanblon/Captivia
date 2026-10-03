@@ -1,22 +1,34 @@
 #!/bin/bash
 #
-# Restauration d'un backup PostgreSQL Captivia (dump .sql.gz).
+# Restauration d'une sauvegarde PostgreSQL Captivia (dump au format custom, .dump).
 #
-# Usage   : ./scripts/restore-db.sh backups/captivia-YYYYMMDD-HHMMSS.sql.gz
+# Usage   : DATABASE_URL='<URL Neon DIRECTE de la base cible>' \
+#             bash scripts/restore-db.sh chemin/vers/captivia-YYYYMMDD-HHMMSS.dump
 #
-# ⚠️ DESTRUCTIF : écrase la base 'captivia' actuelle (confirmation demandée).
-# Pour une restauration propre (recommandé avant) :
-#   docker compose exec -T postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
-#     -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
+# Le fichier doit être DÉCHIFFRÉ au préalable (age --decrypt, voir docs/RUNBOOK.md §3).
 #
-# Stratégie : docker compose exec sur le service postgres si la stack tourne,
-#             sinon psql local via DATABASE_URL.
+# ⚠️ DESTRUCTIF : remplace les objets de la base ciblée par ceux du dump (confirmation « oui »
+# demandée, la cible est affichée sans identifiants). À tester d'abord sur une branche Neon
+# jetable.
+#
+# Stratégie : pg_restore --clean --if-exists --no-owner --single-transaction --exit-on-error.
+#   - --single-transaction + --exit-on-error : tout ou rien. À la première erreur, la
+#     transaction est annulée et la base reste dans son état d'origine ;
+#   - le paramètre ?schema=… (Prisma) est retiré de l'URL, les autres paramètres sont conservés
+#     (sslmode=require…) ;
+#   - l'URL contient le mot de passe : elle n'est JAMAIS affichée, et le mot de passe est
+#     transmis à pg_restore par PGPASSWORD, jamais dans --dbname (ligne de commande visible
+#     par tous via ps) ;
+#   - umask 077 : aucun fichier temporaire lisible par d'autres utilisateurs ;
+#   - pg_restore doit être de version >= celle du pg_dump qui a produit le dump (PostgreSQL 17
+#     dans le workflow de sauvegarde), sinon « unsupported version in file header ».
 
 set -euo pipefail
+umask 077
 
 DUMP="${1:-}"
 if [ -z "$DUMP" ]; then
-  echo "❌ Usage : $0 backups/captivia-*.sql.gz" >&2
+  echo "❌ Usage : $0 chemin/vers/captivia-YYYYMMDD-HHMMSS.dump" >&2
   exit 1
 fi
 if [ ! -f "$DUMP" ]; then
@@ -25,32 +37,37 @@ if [ ! -f "$DUMP" ]; then
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-DB_NAME="captivia"
-DATABASE_URL="${DATABASE_URL:-}"
+# shellcheck source=lib/db-url.sh source-path=SCRIPTDIR
+source "$SCRIPT_DIR/lib/db-url.sh"
 
-compose() {
-  docker compose --project-directory "$REPO_ROOT" "$@"
-}
+DATABASE_URL="${DATABASE_URL:-}"
+if [ -z "$DATABASE_URL" ]; then
+  echo "❌ Erreur : DATABASE_URL non fourni." >&2
+  exit 1
+fi
+refuse_pooled_url "$DATABASE_URL"
 
 SIZE="$(du -h "$DUMP" | cut -f1)"
-echo "⚠️  Restauration de $DUMP ($SIZE) dans la base '$DB_NAME'…"
-echo "    Cette opération ÉCRASE les données actuelles."
+echo "⚠️  Restauration de $DUMP ($SIZE)"
+echo "    Cible : $(db_target_label "$DATABASE_URL")"
+echo "    Cette opération REMPLACE les données actuelles de cette base."
 read -r -p "    Taper 'oui' pour confirmer : " confirm
 if [ "$confirm" != "oui" ]; then
   echo "Annulé."
   exit 1
 fi
 
-if [ -n "$(compose ps --status running -q postgres 2>/dev/null)" ]; then
-  echo "🐳 Restauration via le service Compose postgres…"
-  gunzip -c "$DUMP" | compose exec -T postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
-elif command -v psql >/dev/null 2>&1 && [ -n "$DATABASE_URL" ]; then
-  echo "🐘 Restauration via psql local (DATABASE_URL)…"
-  gunzip -c "$DUMP" | psql "$DATABASE_URL"
-else
-  echo "❌ Erreur : la stack Compose n'est pas démarrée et DATABASE_URL n'est pas fourni pour psql local." >&2
-  exit 1
+CLEAN_URL="$(strip_schema_param "$DATABASE_URL")"
+# Mot de passe par l'environnement (PGPASSWORD), jamais en argument de commande.
+URL_PASSWORD="$(db_url_password "$CLEAN_URL")"
+if [ -n "$URL_PASSWORD" ]; then
+  export PGPASSWORD="$URL_PASSWORD"
 fi
+unset URL_PASSWORD
+CLEAN_URL="$(strip_url_password "$CLEAN_URL")"
+
+echo "🐘 Restauration via pg_restore (--clean --if-exists --no-owner --single-transaction --exit-on-error)…"
+pg_restore --clean --if-exists --no-owner --single-transaction --exit-on-error \
+  --dbname="$CLEAN_URL" "$DUMP"
 
 echo "✅ Restauration terminée."

@@ -1,0 +1,304 @@
+[
+  {
+    "speciesId": 104008238,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "La reproduction en aquarium n'a jamais été réussie (d'après Wikipédia FR).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Gnathonemus_petersii",
+          "title": "Gnathonemus petersii — Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104013399,
+    "feeding": null,
+    "habitat": null,
+    "reproduction": null
+  },
+  {
+    "speciesId": 104015330,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Drosophiles (mouches des fruits)",
+          "frequency": "quotidienne juvéniles, tous les 2-3 jours adultes",
+          "notes": "Base de l'alimentation, proies vivantes"
+        },
+        {
+          "name": "Proies vivantes complémentaires (pucerons, collemboles, bruches des haricots, petits criquets)",
+          "frequency": "quotidienne juvéniles, tous les 2-3 jours adultes",
+          "notes": "En complément des drosophiles"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes capturés dans la nature",
+          "reason": "Peuvent héberger des bactéries nocives"
+        },
+        {
+          "name": "Excès de proies (suralimentation)",
+          "reason": "Un excès d'insectes peut stresser dangereusement les grenouilles ; ne pas donner plus que ce qu'elles mangent en 2 minutes"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Saupoudrer les insectes d'un mélange 1:1 de multivitamines et de calcium + D3.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/",
+          "title": "Exo Terra — Care guide Dendrobates tinctorius (Dyeing poison dart frog)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 25,
+      "tempMax": 27,
+      "humidityMin": 70,
+      "humidityMax": 80,
+      "minSpaceSize": "Terrarium de 45 x 45 x 60 cm pour 2 à 3 grenouilles",
+      "lightNeeds": "Cycle jour/nuit de 12 h ; ne pas placer le terrarium près d'une fenêtre en plein soleil (risque de surchauffe). Baisse de 3 à 5 °C la nuit.",
+      "activityEnrichment": null,
+      "hygieneNotes": "Nettoyer ponctuellement le terrarium une fois par semaine (ou plus si nécessaire) ; traiter l'eau du robinet (métaux lourds, chlore, chloramines).",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/",
+          "title": "Exo Terra — Care guide Dendrobates tinctorius (Dyeing poison dart frog)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104020622,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 20,
+      "tempMax": 29,
+      "humidityMin": 70,
+      "humidityMax": 75,
+      "minSpaceSize": "Terrarium de 45 x 45 x 60 cm pour 2 à 3 grenouilles ; 90 x 45 x 90 cm pour 5 à 8",
+      "lightNeeds": "Cycle jour/nuit de 12 h ; ne pas placer le terrarium près d'une fenêtre en plein soleil.",
+      "activityEnrichment": "Plantes grimpantes (Philodendron, Epipremnum/pothos, Scindapsus)",
+      "hygieneNotes": "Substrat toujours humide mais pas détrempé ; traiter l'eau du robinet (métaux lourds, chlore, chloramines) ; ne jamais renouveler toute l'eau d'un coup ; ne pas déranger les grenouilles pendant la journée.",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/",
+          "title": "Exo Terra — Care guide Agalychnis callidryas (Red-eyed tree frog)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104040409,
+    "feeding": null,
+    "habitat": null,
+    "behavior": {
+      "generalBehavior": "Grenouille nocturne : l'alimentation et l'essentiel de l'activité de reproduction ont lieu après la tombée de la nuit. Elle est particulièrement cannibale et tente d'avaler tout ce qui tient dans sa bouche.",
+      "sociability": null,
+      "difficultyLevel": null,
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Ne pas la cohabiter avec des animaux assez petits pour tenir dans sa bouche (elle les avale) ; les mâles agrippent d'autres mâles et même d'autres espèces de grenouilles.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/African_clawed_frog",
+          "title": "African clawed frog — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104040736,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons vivants",
+          "frequency": "quotidienne juvéniles, tous les 2-3 jours adultes",
+          "notes": "Proies vivantes uniquement"
+        },
+        {
+          "name": "Vers de farine et vers de cire vivants",
+          "frequency": "quotidienne juvéniles, tous les 2-3 jours adultes",
+          "notes": "Proies vivantes uniquement"
+        },
+        {
+          "name": "Vers de terre",
+          "frequency": "quotidienne juvéniles, tous les 2-3 jours adultes",
+          "notes": "Proies vivantes uniquement"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes capturés dans la nature",
+          "reason": "Peuvent héberger des bactéries nocives"
+        },
+        {
+          "name": "Proies mortes ou immobiles",
+          "reason": "Le crapaud ne reconnaît que les proies vivantes et ne se nourrit que d'insectes vivants"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Saupoudrer légèrement les insectes d'un mélange 1:1 de vitamines/minéraux et de calcium + D3.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/",
+          "title": "Exo Terra — Care guide Bombina orientalis (Fire-bellied toad)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 27,
+      "humidityMin": 55,
+      "humidityMax": 65,
+      "minSpaceSize": "Terrarium de 45 x 45 x 45 cm (jusqu'à 4 crapauds) à 90 x 45 x 45 cm (jusqu'à 8-10 crapauds)",
+      "lightNeeds": "Cycle jour/nuit de 12 h ; la nuit, la température baisse de 5 °C et l'humidité monte à 75-85 %. Ne pas placer le terrarium près d'une fenêtre en plein soleil.",
+      "activityEnrichment": null,
+      "hygieneNotes": "Traiter l'eau du robinet (métaux lourds, chlore, chloramines) ; ne jamais renouveler toute l'eau d'un coup ; se laver et rincer les mains à l'eau tiède avant et après toute manipulation d'un amphibien.",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/",
+          "title": "Exo Terra — Care guide Bombina orientalis (Fire-bellied toad)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Crapaud surtout diurne, à la peau très sensible, qui sécrète de légères toxines par la peau (ventre vif = signal d'avertissement). Manipulations excessives déconseillées.",
+      "sociability": "grégaire",
+      "difficultyLevel": null,
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Espèce assez sociable, à garder en petits groupes de 4 à 8 individus ; cohabitation avec d'autres espèces généralement déconseillée.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/",
+          "title": "Exo Terra — Care guide Bombina orientalis (Fire-bellied toad)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Oriental_fire-bellied_toad",
+          "title": "Oriental fire-bellied toad — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104041498,
+    "feeding": null,
+    "habitat": null,
+    "behavior": null,
+    "reproduction": null
+  },
+  {
+    "speciesId": 104044141,
+    "feeding": null,
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 10,
+      "tempMax": 18,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Profondeur d'eau d'au moins 20 cm ; espèce très aquatique : la partie aquatique doit être assez grande (montage semi-aquatique ou entièrement aquatique en intérieur)",
+      "lightNeeds": "Pas d'éclairage particulier requis (ampoule spéciale seulement pour les plantes) ; ne pas placer le bac en plein soleil.",
+      "activityEnrichment": "Multiplier les cachettes (tas de pierres, bois en décomposition) ; mousses et fougères conviennent comme plantes.",
+      "hygieneNotes": "La température ne doit jamais dépasser 23 °C. Eau calme : éviter un filtre trop puissant ; sans filtre, beaucoup de plantes pour oxygéner l'eau et absorber les déchets. Éviter la terre comme substrat (risque de maladies bactériennes si peu de plantes).",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml",
+          "title": "Caudata Culture Species Entry - Mesotriton (Triturus) alpestris"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Semi-aquatique : passe l'essentiel de l'année (9 à 10 mois) à terre et ne retourne à l'eau que pour se reproduire. À terre, il est surtout nocturne et reste caché la majeure partie de la journée ; en phase aquatique, il peut se déplacer et se nourrir en plein jour.",
+      "sociability": null,
+      "difficultyLevel": null,
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Alpine_newt",
+          "title": "Alpine newt — Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ichthyosaura_alpestris",
+          "title": "Ichthyosaura alpestris — Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104048045,
+    "feeding": null,
+    "habitat": null
+  },
+  {
+    "speciesId": 104052770,
+    "feeding": null,
+    "habitat": null,
+    "behavior": {
+      "generalBehavior": "Espèce nocturne (les femelles allaitantes peuvent s'alimenter de jour). Elle n'hiberne pas en hiver mais peut rester inactive plusieurs jours d'affilée. Elle s'abrite dans des anfractuosités de troncs d'arbre ou utilise fréquemment des trous de pics.",
+      "sociability": "grégaire",
+      "difficultyLevel": null,
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Pteromys_volans",
+          "title": "Pteromys volans — Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://animaldiversity.org/accounts/Pteromys_volans/",
+          "title": "Pteromys volans (Siberian flying squirrel) | INFORMATION | Animal Diversity Web"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104052822,
+    "feeding": null,
+    "habitat": null
+  },
+  {
+    "speciesId": 104060633,
+    "feeding": null,
+    "habitat": null
+  },
+  {
+    "speciesId": 104060805,
+    "feeding": null,
+    "habitat": null
+  },
+  {
+    "speciesId": 104060854,
+    "feeding": null,
+    "habitat": null,
+    "health": null
+  }
+]

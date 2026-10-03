@@ -1,0 +1,49 @@
+[
+  {
+    "speciesId": 104094514,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: arthropodes + escargots + petits amphibiens occasionnels (fr.wikipedia Opheodrys_aestivus); frequency 'quotidienne' incohérente avec '3-4 fois par semaine' -> 'plusieurs fois par semaine'",
+      "reproduction.notes: 3-12 œufs, éclosion août-septembre, ~20 cm confirmés; 'œufs en sites communautaires' retiré (non confirmé)"
+    ],
+    "removed": [
+      "health (section -> null): unique source wamiz.com (page d'accueil, pas l'espèce); 'dermatite respiratoire' non standard",
+      "legislation (section -> null): aucun statut CITES/UE sur la page; 'Certificat de capacité (Arrêté 21/11/1997)' et euAnnex B non confirmés; source legifrance générique",
+      "reproduction.incubationDays (45) et sexualMaturityMonths (24) -> null (non mentionnés)",
+      "habitat.minSpaceSize (60x40x50 cm) -> null (trop petit pour un adulte d'environ 100 cm)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104101618,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.specificNeeds: 'apport calcique via suppléments' retiré; régime de rongeurs tués par constriction confirmé (en.wikipedia Eryx_johnii)",
+      "behavior: 'docile' -> 'très calme' (source); 'actif surtout la nuit' retiré (non mentionné dans la source)",
+      "reproduction.notes: ovovivipare, jusqu'à 14 petits, naissances fin d'été-mousson confirmés"
+    ],
+    "removed": [
+      "health (section -> null): unique source wamiz.com (page d'accueil)",
+      "legislation (section -> null): CITES non mentionné sur la page; 'Certificat de capacité' et euAnnex B non confirmés",
+      "reproduction.incubationDays (60, erroné pour un ovovivipare), litterSizeMin (4), sexualMaturityMonths (30), season (printemps) -> null (non confirmés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104101654,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation.status: prohibited -> permit_required (CITES I confirmé par en.wikipedia Casarea_dussumieri mais aucune source ne dit 'interdit'); euAnnex A -> null; source cites.org générique remplacée par Wikipédia",
+      "habitat: 'espèce arboricole' retiré (la source cite litière de feuilles et troncs de palmiers creux)",
+      "reproduction.season: avril -> à partir d'avril (source: breeding begins in April); incubation 90 jours, ponte jusqu'à 12 œufs, nouveau-nés orange confirmés",
+      "feeding: lézards (geckos, scinques) et souris parfumées au poulet confirmés"
+    ],
+    "removed": [
+      "health (section -> null): unique source wamiz.com (page d'accueil)",
+      "habitat.tempMin/Max (20-27) et humidité (60-75) -> null (non confirmés)",
+      "feeding.foodsToAvoid: 'Proies non-scented' (non confirmé)",
+      "reproduction.litterSizeMin (2) et sexualMaturityMonths (36) -> null (non mentionnés)"
+    ],
+    "confidence": "medium"
+  }
+]

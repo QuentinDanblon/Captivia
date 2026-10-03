@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000507,
+  "commonNameFr": "Outil Pour le Travail du Bois",
+  "scientificName": "outil pour le travail du bois",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000508,
+  "commonNameFr": "Fishing Tool",
+  "scientificName": "fishing tool",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000509,
+  "commonNameFr": "Agriculture Tool",
+  "scientificName": "agriculture tool",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000510,
+  "commonNameFr": "Forestry Tool",
+  "scientificName": "forestry tool",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000511,
+  "commonNameFr": "Kajandu",
+  "scientificName": "kajandu",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000512,
+  "commonNameFr": "Design Tool",
+  "scientificName": "design tool",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000513,
+  "commonNameFr": "Q18088438",
+  "scientificName": "Q18088438",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000514,
+  "commonNameFr": "Q27959421",
+  "scientificName": "Q27959421",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000515,
+  "commonNameFr": "Équipement Servant à Faire du Feu",
+  "scientificName": "équipement servant à faire du feu",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000516,
+  "commonNameFr": "Équipement D'usage Personnel",
+  "scientificName": "équipement d'usage personnel",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000517,
+  "commonNameFr": "Hache de Vizcaya",
+  "scientificName": "Hache de Vizcaya",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000518,
+  "commonNameFr": "Kitush",
+  "scientificName": "kitush",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000519,
+  "commonNameFr": "Data Recorder",
+  "scientificName": "data recorder",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000520,
+  "commonNameFr": "Axe Hammer",
+  "scientificName": "axe hammer",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000521,
+  "commonNameFr": "Crochet de Débardage",
+  "scientificName": "crochet de débardage",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

@@ -1,0 +1,420 @@
+[
+  {
+    "speciesId": 2000000581,
+    "evidence": [
+      {
+        "field": "description.nom_poids",
+        "value": "2,5-3,2 kg",
+        "quote": "The Lynx rabbit, also called the Luchskaninchen rabbit and the Lux rabbit, is a medium-sized rabbit that weighs 2.5–3.2 kg (5.5–7.1 lb).",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.origine",
+        "value": "Allemagne, Karl Hoffmann, 1919",
+        "quote": "The Lynx originates from Germany and was created by Karl Hoffmann from Düsseldorf who first exhibited the breed in 1919.",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000583,
+    "evidence": [
+      {
+        "field": "description.nom_type",
+        "value": "Dwarf Gangora, poil long",
+        "quote": "The Jamora rabbit, also called the Dwarf Gangora rabbit, is a long-haired rabbit breed",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.nain",
+        "value": "considéré comme nain",
+        "quote": "It is considered a dwarf rabbit.",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.poids",
+        "value": "2 kg normal, 2,5 kg max",
+        "quote": "Their normal weight is 2 kg (4.4 lb), the maximum permissible weight is 2.5 kg (5.5 lb).",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.origine_allemagne",
+        "value": "Allemagne",
+        "quote": "It was first bred in the EU and Germany.",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.eleveurs",
+        "value": "Thimm, Bauerschmidt, Heldt",
+        "quote": "It was bred by Dr. Bernhard Thimm from Dornstadt, as well as Barbara Bauerschmidt and Johannes Heldt from Blaustein.",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.objectif",
+        "value": "petite race à poil long",
+        "quote": "The goal of these breeders was to create a small, long-haired breed of rabbits that stood out for their appearance.",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.expo_1990",
+        "value": "présenté en 1990 à Nuremberg",
+        "quote": "The Jamora rabbit was shown for the first time in 1990 in Nuremberg.",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.reconnaissance_1994",
+        "value": "reconnu 1994",
+        "quote": "The recognition by the Central Association of German Rabbit Breeders took place in 1994.",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000589,
+    "evidence": [
+      {
+        "field": "description.origine",
+        "value": "Allemagne (origine contestée), race rare",
+        "quote": "The Perlfee rabbit is a rare breed originating in Germany [disputed – discuss]",
+        "url": "https://en.wikipedia.org/wiki/Perlfee"
+      },
+      {
+        "field": "description.couleur",
+        "value": "gris bleuté",
+        "quote": "They are only found in blueish-grey colour, with dark, light and medium shades accepted, medium is preferred, the belly and around the eyes should be lighter in colour.",
+        "url": "https://en.wikipedia.org/wiki/Perlfee"
+      },
+      {
+        "field": "description.reconnaissance",
+        "value": "BRC oui, ARBA non",
+        "quote": "It is a recognized breed by the British Rabbit Council but not the American Rabbit Breeders Association.",
+        "url": "https://en.wikipedia.org/wiki/Perlfee"
+      },
+      {
+        "field": "description.caractere_1",
+        "value": "docile, amical",
+        "quote": "Perlfee rabbits are rather docile and friendly.",
+        "url": "https://en.wikipedia.org/wiki/Perlfee"
+      },
+      {
+        "field": "description.caractere_2",
+        "value": "vif, convient à un débutant",
+        "quote": "They are lively rabbits who make excellent pets for the beginner.",
+        "url": "https://en.wikipedia.org/wiki/Perlfee"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000590,
+    "evidence": [
+      {
+        "field": "description.origine",
+        "value": "rare, village belge Ham-sur-Heure, Wallonie",
+        "quote": "The Blue of Ham, also known as the Blue of Hem or Bleu de Ham, is a rare breed of domestic rabbit that originated in the Belgian village of Ham-sur-Heure in Wallonia.",
+        "url": "https://en.wikipedia.org/wiki/Blue_of_Ham"
+      },
+      {
+        "field": "description.creation",
+        "value": "viande et fourrure, 1897, Horemans; rare après la WWII",
+        "quote": "Developed as a meat and fur breed in 1897 by Ulysses Horemans (who introduced the breed to St. Petersburg in 1902), the once-popular Blue of Ham became rare following World War II.",
+        "url": "https://en.wikipedia.org/wiki/Blue_of_Ham"
+      },
+      {
+        "field": "description.pelage",
+        "value": "bleu ardoise, long, dense, soyeux",
+        "quote": "This rabbit has a \"long, dense, silky and lustrous\" coat that is slate blue with a blue sub-color, extending as deep as possible.",
+        "url": "https://en.wikipedia.org/wiki/Blue_of_Ham"
+      },
+      {
+        "field": "description.poids_caractere",
+        "value": "4,5-6 kg, très sociable",
+        "quote": "The Blue of Ham weighs 9.9–13.2 pounds (4.5–6 kg) and is said to be \"very sociable\".",
+        "url": "https://en.wikipedia.org/wiki/Blue_of_Ham"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000591,
+    "evidence": [
+      {
+        "field": "description.type",
+        "value": "race slovaque de lapin domestique",
+        "quote": "The Liptov Baldspotted Rabbit (Slovak: Liptovský lysko) is a Slovak breed of domestic rabbit.",
+        "url": "https://en.wikipedia.org/wiki/Liptov_Baldspotted_Rabbit"
+      },
+      {
+        "field": "description.reconnaissance",
+        "value": "2005",
+        "quote": "It was officially recognized in 2005.",
+        "url": "https://en.wikipedia.org/wiki/Liptov_Baldspotted_Rabbit"
+      },
+      {
+        "field": "description.poids",
+        "value": "4-4,25 kg",
+        "quote": "It weighs approximately 4–4.25 kilograms (8.8–9.4 lb).",
+        "url": "https://en.wikipedia.org/wiki/Liptov_Baldspotted_Rabbit"
+      },
+      {
+        "field": "description.couleurs",
+        "value": "trois variétés",
+        "quote": "There are three colour varieties: agouti, blue-agouti, and black.",
+        "url": "https://en.wikipedia.org/wiki/Liptov_Baldspotted_Rabbit"
+      },
+      {
+        "field": "description.marques",
+        "value": "liste blanche, pas d'autre marque blanche",
+        "quote": "The pattern on the head is a white blaze (similar to \"Dutch\" head markings), but there are no other white markings anywhere on the rabbit.",
+        "url": "https://en.wikipedia.org/wiki/Liptov_Baldspotted_Rabbit"
+      },
+      {
+        "field": "description.origine",
+        "value": "région de Liptov, Slovaquie",
+        "quote": "It has been bred in the Liptov region of Slovakia.",
+        "url": "https://en.wikipedia.org/wiki/Liptov_Baldspotted_Rabbit"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000592,
+    "evidence": [
+      {
+        "field": "description.origine_rarete",
+        "value": "Italie, rare, presque éteint",
+        "quote": "The Carmagnola Grey rabbit is a rare breed from Italy, almost extinct.",
+        "url": "https://en.wikipedia.org/wiki/Carmagnola_Grey"
+      },
+      {
+        "field": "description.usage",
+        "value": "viande, grande race chinchilla",
+        "quote": "It is a large chinchilla-colored breed bred for meat.",
+        "url": "https://en.wikipedia.org/wiki/Carmagnola_Grey"
+      },
+      {
+        "field": "description.pelage",
+        "value": "chinchilla",
+        "quote": "The coat of the Carmagnola Grey exhibits chinchilla coloration.",
+        "url": "https://en.wikipedia.org/wiki/Carmagnola_Grey"
+      },
+      {
+        "field": "description.poids",
+        "value": "3,5-4,5 kg",
+        "quote": "The average weight of an adult Carmagnola Grey is 7.7–9.9 pounds (3.5–4.5 kg).",
+        "url": "https://en.wikipedia.org/wiki/Carmagnola_Grey"
+      },
+      {
+        "field": "description.effectif",
+        "value": "moins de 500 sujets en 2002",
+        "quote": "Fewer than 500 specimens were found in a 2002 population study.",
+        "url": "https://en.wikipedia.org/wiki/Carmagnola_Grey"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000595,
+    "evidence": [
+      {
+        "field": "description.origine_taille",
+        "value": "Brésil, taille moyenne, rustique",
+        "quote": "Brazilian domestic rabbit is a medium-sized hardy breed originated in Brazil.",
+        "url": "https://en.wikipedia.org/wiki/Brazilian_domestic_rabbit"
+      },
+      {
+        "field": "description.usage",
+        "value": "viande",
+        "quote": "They were developed as a meat breed.",
+        "url": "https://en.wikipedia.org/wiki/Brazilian_domestic_rabbit"
+      },
+      {
+        "field": "description.reconnaissance",
+        "value": "non reconnu ARBA/BRC",
+        "quote": "The breed is not current recognized by the American Rabbit Breeders Association or the British Rabbit council.",
+        "url": "https://en.wikipedia.org/wiki/Brazilian_domestic_rabbit"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000597,
+    "evidence": [
+      {
+        "field": "description.taille_fourrure",
+        "value": "taille moyenne, fourrure longue et dense",
+        "quote": "The Cashmere Lop rabbit is a medium-sized rabbit with long dense fur.",
+        "url": "https://en.wikipedia.org/wiki/Cashmere_Lop"
+      },
+      {
+        "field": "description.miniature",
+        "value": "version miniature",
+        "quote": "There is also a Miniature Cashmere Lop.",
+        "url": "https://en.wikipedia.org/wiki/Cashmere_Lop"
+      },
+      {
+        "field": "description.reconnaissance",
+        "value": "distinct du Dwarf Lop par le BRC, années 1980",
+        "quote": "The Cashmere lop was recognised as being different from the Dwarf Lop by the British Rabbit Council in the 1980s.",
+        "url": "https://en.wikipedia.org/wiki/Cashmere_Lop"
+      },
+      {
+        "field": "description.origine_coloris_poids",
+        "value": "Angleterre, nombreux coloris, 4-5 lbs",
+        "quote": "This breed, which originated in England, comes in many different colors and weighs approximately 4-5 lbs.",
+        "url": "https://en.wikipedia.org/wiki/Cashmere_Lop"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000599,
+    "evidence": [
+      {
+        "field": "description.rarete",
+        "value": "race rare de lapin domestique",
+        "quote": "The Enderby Island Rabbit, or simply Enderby rabbit or Enderby, is a rare breed of domesticated European rabbit (Oryctolagus cuniculus).",
+        "url": "https://en.wikipedia.org/wiki/Enderby_Island_rabbit"
+      },
+      {
+        "field": "description.origine",
+        "value": "introduits d'Australie en octobre 1865",
+        "quote": "It originates from rabbits introduced to Enderby Island, an uninhabited subantarctic island in New Zealand's Auckland Islands group, from Australia in October 1865 to serve as castaway food.",
+        "url": "https://en.wikipedia.org/wiki/Enderby_Island_rabbit"
+      },
+      {
+        "field": "description.pelage",
+        "value": "gris argenté, sous-poil bleu ardoise",
+        "quote": "Enderby Island Rabbits are mainly silver-grey in colour, with an undercoat of dark slate-blue.",
+        "url": "https://en.wikipedia.org/wiki/Enderby_Island_rabbit"
+      },
+      {
+        "field": "description.poids",
+        "value": "2 kg",
+        "quote": "Adult rabbits weigh about 2 kg.",
+        "url": "https://en.wikipedia.org/wiki/Enderby_Island_rabbit"
+      },
+      {
+        "field": "description.jeunes",
+        "value": "naissent noirs ou crème, tiquetage argenté à la puberté",
+        "quote": "Kits are born black or cream then silver ticking develops at puberty.",
+        "url": "https://en.wikipedia.org/wiki/Enderby_Island_rabbit"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000603,
+    "evidence": [
+      {
+        "field": "description.nom_poids",
+        "value": "ex-Elfin, petit, 2,3 kg",
+        "quote": "The Swedish Hare, formerly the Elfin rabbit, is a small rabbit weighing 2.3 kg (5 lb).",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.couleurs",
+        "value": "blanc, brun, noir, gris…",
+        "quote": "The breed comes in white, brown, black, grey, and many others.",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      },
+      {
+        "field": "description.origine",
+        "value": "2008, Suède, Gille et Ahlsen, saut",
+        "quote": "It was developed in 2008 by Mirjam Gille and Linda Ahlsen in Sweden for its competitive jumping ability.",
+        "url": "https://en.wikipedia.org/wiki/List_of_rabbit_breeds_not_recognized_by_the_American_Rabbit_Breeders_Association_or_the_British_Rabbit_Council"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000604,
+    "evidence": [
+      {
+        "field": "description.origine",
+        "value": "race nationale tchèque, Provazník, Holice, 1974",
+        "quote": "Český černopesíkatý (Ččp) je české národní plemeno králíka, které vyšlechtil v roce 1974 František Provazník z Holic.",
+        "url": "https://cs.wikipedia.org/wiki/%C4%8Cesk%C3%BD_%C4%8Dernopes%C3%ADkat%C3%BD"
+      },
+      {
+        "field": "description.reconnaissance",
+        "value": "1976",
+        "quote": "Uznané bylo v roce 1976.",
+        "url": "https://cs.wikipedia.org/wiki/%C4%8Cesk%C3%BD_%C4%8Dernopes%C3%ADkat%C3%BD"
+      },
+      {
+        "field": "description.taille_poids",
+        "value": "petite race, 2,00-3,25 kg",
+        "quote": "Patří mezi malá plemena, s hmotností 2,00–3,25 kg.",
+        "url": "https://cs.wikipedia.org/wiki/%C4%8Cesk%C3%BD_%C4%8Dernopes%C3%ADkat%C3%BD"
+      },
+      {
+        "field": "description.pelage",
+        "value": "blanc à nuance gris cendré",
+        "quote": "Barva srsti je bílá se šedopopelavým nádechem.",
+        "url": "https://cs.wikipedia.org/wiki/%C4%8Cesk%C3%BD_%C4%8Dernopes%C3%ADkat%C3%BD"
+      },
+      {
+        "field": "description.aspect",
+        "value": "évoque le renard polaire",
+        "quote": "Zbarvením má připomínat polární lišku.",
+        "url": "https://cs.wikipedia.org/wiki/%C4%8Cesk%C3%BD_%C4%8Dernopes%C3%ADkat%C3%BD"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000605,
+    "evidence": [
+      {
+        "field": "description.definition_belier",
+        "value": "lapin bélier = oreilles tombantes",
+        "quote": "Le lapin bélier, ou lope, est une variété de lapin domestique, se distinguant principalement des autres par ses oreilles tombantes.",
+        "url": "https://fr.wikipedia.org/wiki/Lapin_b%C3%A9lier"
+      },
+      {
+        "field": "description.origine_poids",
+        "value": "Allemagne, 2,6-3,5 kg",
+        "quote": "le petit bélier est originaire d'Allemagne. Son poids varie entre 2,6 et 3,5 kg ;",
+        "url": "https://fr.wikipedia.org/wiki/Lapin_b%C3%A9lier"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000606,
+    "evidence": [
+      {
+        "field": "description.taille_couleur",
+        "value": "petite/moyenne, blanc, yeux bleu pâle",
+        "quote": "The Hulstlander is a small/medium breed of rabbit only recognised in white with pale blue eyes. Any other colour is a fault.",
+        "url": "https://en.wikipedia.org/wiki/Hulstlander"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000694,
+    "evidence": [
+      {
+        "field": "description.origine_taille",
+        "value": "race bovine de petite taille, Corée, aussi Coréenne brune",
+        "quote": "La hanu (coréen : 한우), également nommée Coréenne brune, est une race bovine de petite taille, originaire de Corée.",
+        "url": "https://fr.wikipedia.org/wiki/Hanu"
+      },
+      {
+        "field": "description.usage_passe",
+        "value": "trait",
+        "quote": "Elle était autrefois utilisée comme animal de trait, mais cet usage a pratiquement disparu.",
+        "url": "https://fr.wikipedia.org/wiki/Hanu"
+      },
+      {
+        "field": "description.usage_actuel",
+        "value": "viande",
+        "quote": "Elle est désormais élevée principalement pour la viande.",
+        "url": "https://fr.wikipedia.org/wiki/Hanu"
+      },
+      {
+        "field": "description.mensurations",
+        "value": "DAD-IS: femelles 1,17 m/355 kg, mâles 1,24 m/466 kg",
+        "quote": "D'après la base de données DAD-IS, les femelles toisent en moyenne 1,17 m pour 355 kg, et les mâles 1,24 m pour 466 kg.",
+        "url": "https://fr.wikipedia.org/wiki/Hanu"
+      },
+      {
+        "field": "description.pelage_cornes",
+        "value": "brun ou roux, deux sexes cornus",
+        "quote": "Le pelage est brun ou roux ; les deux sexes sont cornus.",
+        "url": "https://fr.wikipedia.org/wiki/Hanu"
+      }
+    ]
+  }
+]

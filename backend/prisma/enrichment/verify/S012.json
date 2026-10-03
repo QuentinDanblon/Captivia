@@ -1,0 +1,50 @@
+[
+  {
+    "speciesId": 2433753,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.specificNeeds: 800 g/jour -> ~1 kg/jour (fiche Grand Est) ; pourcentages de poisson 50-90 % retirés",
+      "habitat.habitatType: aquarium -> enclos",
+      "legislation.status: prohibited -> permit_required (aucune source ne dit 'interdit' explicitement) ; euAnnex IV -> II et IV ; CITES I, Berne II, arrêté 17/04/1981 art. 1 confirmés (fiche Grand Est)",
+      "reproduction.litterSizeMin: 2 -> 1 (Wikipedia 1-4) ; notes réécrites (sevrage 8 mois, dépendance ~13 mois)",
+      "behavior: 'plus sociale que la littérature classique' retiré (source non vérifiée)",
+      "health: Aonchotheca putorii -> parasitoses digestives génériques"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (non confirmés) -> null ; reproduction.season (non confirmée) -> null",
+      "health 'urolithiase' (non confirmée)",
+      "legislation.restrictions 'Loi du 10 juillet 1976', 'chasse interdite depuis 1972' (non confirmés)",
+      "sources ifaw.org (ne parle pas de Lutra lutra), cites.org (page d'accueil), PMC10143350 (non vérifiée), iucnosgbull Hancox_1992 (hors sujet), PDF Auvergne-Rhône-Alpes (illisible)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2434126,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "behavior.difficultyLevel: débutant -> expert ; compatibilityWithChildren: 'bon avec enfants' -> déconseillé (Wikipedia EN : agressif, odeur forte, rage)",
+      "behavior: groupes 20-50 -> 2-30 (jusqu'à 50 selon certaines sources) ; '30 types de vocalisation' retiré",
+      "reproduction.sexualMaturityMonths: 12 -> 24 (1-3 ans selon sources) ; 'sevrage 12 semaines' et 'reproduction facile' retirés ; breedingDifficulty -> null",
+      "health: 'Mycobacterium tuberculosis' -> tuberculose (non spécifié) ; 'rage' conservée (Wikipedia FR/EN)"
+    ],
+    "removed": [
+      "legislation entière ('arrêté du 21 novembre 1997', 'certificat de détention' non confirmés ; seul 'non CITES / LC' confirmé) -> null",
+      "habitat.tempMin/tempMax (non confirmés) -> null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2434255,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.season: 'février-juin' -> naissances de mi-avril à mi-août (Wikipedia EN)",
+      "feeding/habitat: 'technique de casser les oeufs contre un rocher' retirée (non confirmée)",
+      "health: leishmaniose retirée"
+    ],
+    "removed": [
+      "legislation entière (Berne III, Habitats annexe V, non-CITES confirmés pour l'espèce, mais 'arrêté 21 novembre 1997' et statut français de détention non confirmés) -> null",
+      "habitat.tempMin/tempMax (non confirmés) -> null"
+    ],
+    "confidence": "medium"
+  }
+]

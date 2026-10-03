@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2354671,
+  "commonNameFr": "Tétras de Buenos Aires",
+  "scientificName": "Hyphessobrycon anisitsi",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2356255,
+  "commonNameFr": "Tétra du Congo",
+  "scientificName": "Phenacogrammus interruptus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2364223,
+  "commonNameFr": "Barbu cerise",
+  "scientificName": "Puntius titteya",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

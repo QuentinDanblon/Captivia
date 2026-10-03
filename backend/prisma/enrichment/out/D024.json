@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000001131,
+    "description": "L'Ayam Kampong (« poulet de village » ou poulet en liberté) est une poule d'Indonésie et de Malaisie, issue du croisement non contrôlé de la poule sauvage rouge (Gallus gallus), de poules indigènes d'Asie du Sud-Est et de races exotiques. Les mâles pèsent en moyenne 2 à 2,5 kg et les femelles 1,5 à 2 kg ; la variété noire et rouge est la plus courante. Elle grandit lentement, mais sa viande se vend plus cher que celle des races commerciales.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Ayam_Kampong"
+  },
+  {
+    "speciesId": 2000001152,
+    "description": "Les canards domestiques descendent principalement du colvert, domestiqué en Chine vers 2000 av. J.-C. ; le canard de Barbarie a, lui, été domestiqué au Mexique et en Amérique du Sud. Leur taille varie beaucoup, des petites races comme l'Appleyard (0,7 kg) aux grandes races de chair comme l'Aylesbury (jusqu'à 4,6 kg). Le Pékin blanc est élevé pour la viande, le Coureur indien peut pondre plus de 300 œufs par an, et d'autres races sont purement ornementales, sélectionnées pour l'exposition.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Domestic_duck"
+  },
+  {
+    "speciesId": 2000001153,
+    "description": "Le Pékin américain descend de canards chinois importés aux États-Unis en 1873 ; il a été largement élevé à Long Island (New York), d'où son nom de « canard de Long Island ». Son plumage est blanc crème ; le mâle pèse environ 4,5 kg et la femelle 4,1 kg. De tempérament calme et fertile, il peut dépasser 3,5 kg en sept semaines et est élevé presque exclusivement pour la viande.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/American_Pekin"
+  },
+  {
+    "speciesId": 2000001154,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001155,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001156,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001157,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001158,
+    "description": "Le Cayuga est une race de canard américaine, introduite vers 1840 dans la région des Finger Lakes (New York) et nommée d'après le peuple Cayuga. Son plumage est noir aux reflets vert scarabée ; le mâle pèse environ 3,6 kg et la cane 3,2 kg. Principal canard de chair des États-Unis dans la seconde moitié du XIXe siècle, il a été supplanté par le Pékin américain à partir de 1890. La cane pond 100 à 150 gros œufs par an ; il est aujourd'hui surtout gardé pour l'ornement ou l'exposition.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Cayuga_duck"
+  },
+  {
+    "speciesId": 2000001159,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001160,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001161,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001162,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001163,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001164,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000001165,
+    "description": null,
+    "sourceUrl": null
+  }
+]

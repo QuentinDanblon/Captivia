@@ -2,6 +2,11 @@ import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/commo
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateRoutineDto, UpdateRoutineDto, CreateActionLogDto } from './dto/routine.dto';
 import { ensureAnimalOwnership } from '../common/helpers/ownership.helper';
+import {
+  PaginationQueryDto,
+  toPage,
+} from '../common/dto/pagination-query.dto';
+
 
 @Injectable()
 export class RoutinesService {
@@ -26,12 +31,13 @@ export class RoutinesService {
     });
   }
 
-  async findAllRoutines(userId: string, animalId: string) {
+  async findAllRoutines(userId: string, animalId: string, page?: PaginationQueryDto) {
     await ensureAnimalOwnership(this.prisma, animalId, userId);
 
     return this.prisma.routine.findMany({
       where: { animalId },
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
+      ...toPage(page),
     });
   }
 
@@ -90,13 +96,14 @@ export class RoutinesService {
     });
   }
 
-  async getHistory(userId: string, animalId: string, limit = 100) {
+  async getHistory(userId: string, animalId: string, limit = 100, offset = 0) {
     await ensureAnimalOwnership(this.prisma, animalId, userId);
 
     return this.prisma.actionLog.findMany({
       where: { animalId },
-      orderBy: { doneAt: 'desc' },
+      orderBy: [{ doneAt: 'desc' }, { id: 'asc' }],
       take: limit,
+      skip: offset,
     });
   }
 

@@ -1,0 +1,40 @@
+[
+ {
+  "speciesId": 5228265,
+  "commonNameFr": "Poule domestique",
+  "scientificName": "Gallus gallus domesticus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5229044,
+  "commonNameFr": "Perroquet à tête de prune",
+  "scientificName": "Psittacula cyanocephala",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5281775,
+  "commonNameFr": "Cochon d'Inde",
+  "scientificName": "Cavia porcellus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ }
+]

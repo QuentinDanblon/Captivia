@@ -1,0 +1,16 @@
+{
+  "speciesId": 2435099,
+  "editorial": [
+    {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": "B",
+        "permits": ["Certificat de capacité requis (fixture)"],
+        "restrictions": []
+      },
+      "sources": []
+    }
+  ]
+}

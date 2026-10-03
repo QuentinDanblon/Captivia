@@ -1,0 +1,450 @@
+[
+  {
+    "speciesId": 2441502,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Feuilles vertes foncées (laitue, endive, chicorée)",
+          "frequency": "quotidienne",
+          "notes": "Base de l'alimentation : régime riche en fibres, pauvre en sucres et en protéines"
+        },
+        {
+          "name": "Fruits fibreux (poires, pommes)",
+          "frequency": "occasionnelle",
+          "notes": "En petite quantité et avec modération (régime pauvre en sucres)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments riches en sucres ou en protéines",
+          "reason": "Le régime recommandé en captivité est riche en fibres, pauvre en sucres et en protéines"
+        },
+        {
+          "name": "Aliments transformés et additifs",
+          "reason": "Peuvent causer des troubles digestifs"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime herbivore riche en fibres, pauvre en sucres et en protéines, à base de plantes proches de celles de son milieu méditerranéen. Eau fraîche toujours disponible.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/listings/turtle-tortoise-galleries/marginated-tortoise/",
+          "title": "Marginated Tortoise - Reptiles Magazine"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Marginated_tortoise",
+          "title": "Marginated tortoise - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 21,
+      "tempMax": 29,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Exposition au soleil naturel ou éclairage UVB (essentiel pour la vitamine D3) ; zone de chauffe (basking) plus chaude que le reste de l'enclos",
+      "activityEnrichment": "Accès à la végétation naturelle, cachettes, substrat pour creuser, parcours avec variation de niveaux",
+      "hygieneNotes": "Substrat profond pour creuser, nettoyage régulier des zones souillées, eau fraîche accessible",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Marginated_tortoise",
+          "title": "Marginated tortoise - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/listings/turtle-tortoise-galleries/marginated-tortoise/",
+          "title": "Marginated Tortoise Care - Reptiles Magazine"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Tortue terrestre, la plus grande tortue d'Europe (jusqu'à 35 cm et 5 kg), plutôt calme mais parfois territoriale. Les mâles peuvent être très agressifs lors de l'accouplement (coups de carapace pouvant tuer la femelle).",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Déconseillé pour les jeunes enfants : animal fragile, manipulations stressantes",
+      "compatibilityWithOtherAnimals": "Éviter de loger plusieurs mâles ensemble ; risque de blessures graves, voire mortelles, pour les femelles lors de l'accouplement",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/listings/turtle-tortoise-galleries/marginated-tortoise/",
+          "title": "Marginated Tortoise Behavior - Reptiles Magazine"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Marginated_tortoise",
+          "title": "Marginated tortoise - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladie métabolique osseuse (MMO)",
+          "symptoms": "Carapace molle, déformations, boiterie, difficulté à se mouvoir",
+          "prevention": "Exposition régulière aux UV, alimentation adaptée riche en calcium, hygiène correcte",
+          "whenToConsult": "Dès observation de déformations ou ramollissement de la carapace"
+        },
+        {
+          "name": "Pourriture de carapace",
+          "symptoms": "Cavités, décoloration, odeur désagréable sur carapace ou plastron",
+          "prevention": "Hygiène stricte du substrat, absence d'humidité excessive, nettoyage des blessures",
+          "whenToConsult": "Immédiatement si présence de lésions ou décoloration anormale"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Mucosités nasales, respirations bruyantes, manque d'appétit, léthargie",
+          "prevention": "Maintien de températures adéquates, éviter les courants d'air froids, hygiène de l'enclos",
+          "whenToConsult": "Dès les premiers signes, l'infection peut s'aggraver rapidement"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://lafeber.com/vet/respiratory-disease-in-chelonians/",
+          "title": "Respiratory Disease in Chelonians - LaFeber"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": "A",
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'Annexe II de la CITES et à l'Annexe A du règlement UE 338/97 (selon Wikipédia) : commerce et détention encadrés, se renseigner auprès de la DDPP/préfecture avant toute acquisition"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_bordée",
+          "title": "Tortue bordée - Wikipédia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "ponte en mai-juin",
+      "gestationDays": null,
+      "incubationDays": 100,
+      "litterSizeMin": null,
+      "litterSizeMax": 15,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ovipare : les grosses femelles peuvent pondre jusqu'à trois fois par été, environ 15 œufs par ponte, déposés dans le sol en mai-juin. Incubation d'environ 100 jours en conditions naturelles ; en incubateur à 31,5°C, éclosion à partir de 60 jours. Les mâles peuvent être très agressifs lors de l'accouplement et blesser ou tuer les femelles. Hibernation (dormance) en hiver.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Marginated_tortoise",
+          "title": "Marginated tortoise - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/listings/turtle-tortoise-galleries/marginated-tortoise/",
+          "title": "Marginated Tortoise - Reptiles Magazine"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2443074,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Escargots d'eau, moules et autres mollusques",
+          "frequency": "quotidienne",
+          "notes": "Aliment principal à l'état sauvage ; les femelles adultes ont des mâchoires puissantes adaptées à écraser les coquilles"
+        },
+        {
+          "name": "Écrevisses et autres crustacés",
+          "frequency": "hebdomadaire",
+          "notes": "Source de protéines et de calcium"
+        },
+        {
+          "name": "Insectes aquatiques",
+          "frequency": "variable",
+          "notes": "Complément, surtout chez les mâles"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Viandes grasses ou cuites",
+          "reason": "Digestibilité difficile et accumulation de lipides"
+        },
+        {
+          "name": "Proies de taille inadaptée",
+          "reason": "Risque d'étouffement ou de maldigestion"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Spécialiste des mollusques. Les femelles adultes consomment des proies plus grosses (escargots, palourdes, écrevisses) que les mâles (insectes aquatiques, escargots, petits crustacés) ; poissons morts et végétation également consommés.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Graptemys_geographica",
+          "title": "Graptemys geographica - Animal Diversity Web"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Northern_map_turtle",
+          "title": "Northern map turtle - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Espèce diurne qui se chauffe sur des supports émergés (troncs, rochers) : prévoir une zone de basking avec éclairage adapté (UVB)",
+      "activityEnrichment": "Végétation aquatique, roches de repos, bois flotté pour le basking, substrat naturel",
+      "hygieneNotes": "Filtration puissante impérative. Nettoyage régulier du filtre et changements d'eau réguliers",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Graptemys_geographica",
+          "title": "Graptemys geographica - Animal Diversity Web"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Northern_map_turtle",
+          "title": "Northern map turtle - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Espèce semi-aquatique diurne, prudente et farouche : elle plonge et se cache au moindre danger. Se rassemble en groupe pour le basking. Hiberne sous l'eau en hiver. Les femelles adultes (18-27 cm) sont bien plus grandes que les mâles (10-16 cm).",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillé : animal farouche, sensible au stress",
+      "compatibilityWithOtherAnimals": "Se rassemble en groupe pour le basking ; cohabitation en captivité à envisager avec prudence (régime à base de mollusques, crustacés et insectes)",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Graptemys_geographica",
+          "title": "Graptemys geographica - Animal Diversity Web"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Northern_map_turtle",
+          "title": "Northern map turtle - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Pourriture de carapace et plastron",
+          "symptoms": "Décoloration, cavités, odeur, ramollissement des écailles",
+          "prevention": "Hygiène stricte de l'aquarium, filtration correcte, éviter la stagnation de l'eau",
+          "whenToConsult": "Immédiatement si lésions visibles"
+        },
+        {
+          "name": "Infections oculaires et respiratoires",
+          "symptoms": "Yeux gonflés ou fermés, mucosités nasales, difficultés respiratoires",
+          "prevention": "Qualité de l'eau optimale, températures correctes, filtration adéquate",
+          "whenToConsult": "Dès les premiers signes de gonflement ou d'infection"
+        },
+        {
+          "name": "Parasites intestinaux",
+          "symptoms": "Diarrhée, perte de poids, léthargie, refus de manger",
+          "prevention": "Hygiène stricte de l'aquarium, quarantaine des nouveaux spécimens",
+          "whenToConsult": "Pour traitement antiparasitaire vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://dubiaroaches.com/blogs/turtle-care/tagged/northern-map-turtle",
+          "title": "Map Turtle Care - Dubia Roaches"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "printemps et automne (ponte de mai à juillet)",
+      "gestationDays": null,
+      "incubationDays": 60,
+      "litterSizeMin": 6,
+      "litterSizeMax": 20,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction au printemps et à l'automne ; ponte de mai à juillet, 6 à 20 œufs par ponte, plusieurs pontes possibles par saison. Incubation de 50 à 70 jours, éclosions surtout en août-septembre. Le sexe dépend de la température : à 25°C surtout des mâles, à 30-35°C davantage de femelles. Les femelles atteignent la maturité sexuelle tardivement (environ 14 ans selon Animal Diversity Web).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Northern_map_turtle",
+          "title": "Northern map turtle - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Graptemys_geographica",
+          "title": "Graptemys geographica Reproduction - Animal Diversity Web"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2445755,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons de taille adaptée",
+          "frequency": "quotidienne",
+          "notes": "Aliment principal, proies de taille proportionnée à la bouche du gecko"
+        },
+        {
+          "name": "Blattes de petite taille (Blatta lateralis)",
+          "frequency": "variable",
+          "notes": "Bonne source de protéines"
+        },
+        {
+          "name": "Petits escargots",
+          "frequency": "variable",
+          "notes": "Considérés comme essentiels pour les femelles reproductrices (calcium)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies de grande taille",
+          "reason": "Risque d'étouffement, le gecko a une petite bouche"
+        },
+        {
+          "name": "Insectes toxiques ou chimiquement traités",
+          "reason": "Accumulation de toxines, risque mortel"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Petit gecko nocturne nécessitant des proies de petite taille. Insectes saupoudrés de calcium et de multivitamines. Besoins en calcium accrus chez les femelles reproductrices.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/satanic-leaf-tailed-gecko-care-sheet/",
+          "title": "Satanic Leaf-Tailed Gecko Care Sheet - Reptiles Magazine"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Uroplatus_phantasticus",
+          "title": "Uroplatus phantasticus - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 16,
+      "tempMax": 26,
+      "humidityMin": 65,
+      "humidityMax": 100,
+      "minSpaceSize": "Environ 25 x 25 x 50 cm (10 x 10 x 20 pouces) pour un adulte seul ; un peu plus grand (environ 30 x 40 x 50 cm) pour un couple ou un trio d'élevage. Espace vertical privilégié",
+      "lightNeeds": "Espèce nocturne : éclairage tamisé, cycle jour/nuit ; éviter la lumière vive directe",
+      "activityEnrichment": "Végétation vivante, branches fines pour grimper, feuilles pour le camouflage, cachettes",
+      "hygieneNotes": "Substrat humide (mousse sphaigne, terreau humide), brumisation régulière pour maintenir l'hygrométrie. Climat frais et très humide : jour 22-26°C, nuit 16-18°C",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/satanic-leaf-tailed-gecko-care-sheet/",
+          "title": "Satanic Leaf-Tailed Gecko Care - Reptiles Magazine"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Gecko nocturne et arboricole, parfaitement camouflé parmi les feuilles. Défense : aplatissement contre le support, ouverture de la bouche rouge vif, perte volontaire de la queue. Très timide : manipuler uniquement en cas de nécessité absolue.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillé. Très stressé par la manipulation ; manipulation à limiter au strict minimum",
+      "compatibilityWithOtherAnimals": "Espèce solitaire : les couples ou trios d'élevage sont logés dans un terrarium plus grand ; cohabitation avec d'autres espèces déconseillée",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/satanic-leaf-tailed-gecko-care-sheet/",
+          "title": "Satanic Leaf-Tailed Gecko Behavior - Reptiles Magazine"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Uroplatus_phantasticus",
+          "title": "Uroplatus phantasticus - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Déshydratation",
+          "symptoms": "Queue ridée/atrophiée, perte de poids, salive épaisse",
+          "prevention": "Humidité élevée maintenue (65-100%), brumisation régulière, substrat humide",
+          "whenToConsult": "Dès les premiers signes de déshydratation, le risque peut devenir critique rapidement"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Mucosités nasales/buccales, difficultés respiratoires, gonflement de la tête",
+          "prevention": "Humidité contrôlée avec une ventilation légère, hygiène du terrarium",
+          "whenToConsult": "Immédiatement si signes respiratoires"
+        },
+        {
+          "name": "Problèmes de mue",
+          "symptoms": "Peau qui ne se détache pas complètement",
+          "prevention": "Humidité adéquate, alimentation équilibrée",
+          "whenToConsult": "Si la mue reste incomplète"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/satanic-leaf-tailed-gecko-care-sheet/",
+          "title": "Satanic Leaf-Tailed Gecko Care Sheet - Reptiles Magazine"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'Annexe II de la CITES (selon Wikipedia) : commerce international soumis à permis ; se renseigner auprès de la DDPP/préfecture et exiger les documents d'origine à l'achat"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Uroplatus_phantasticus",
+          "title": "Uroplatus phantasticus - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 90,
+      "litterSizeMin": 2,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare : pontes de deux œufs sphériques, avec un intervalle d'environ 30 jours entre les pontes. Incubation de 90 à 120 jours. Les femelles reproductrices ont des besoins en calcium accrus (petits escargots). Élevage exigeant, déconseillé aux débutants.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Uroplatus_phantasticus",
+          "title": "Uroplatus phantasticus - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/satanic-leaf-tailed-gecko-care-sheet/",
+          "title": "Satanic Leaf-Tailed Gecko Care Sheet - Reptiles Magazine"
+        }
+      ]
+    }
+  }
+]

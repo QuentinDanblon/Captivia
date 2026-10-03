@@ -1,3 +1,5 @@
+import { Throttle } from '@nestjs/throttler';
+import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
 import {
   Controller,
   Get,
@@ -59,6 +61,7 @@ export class EquipmentController {
       query.speciesId,
       query.category,
       query.size,
+      query,
     );
   }
 
@@ -119,6 +122,7 @@ export class EquipmentController {
 
 @ApiTags('amazon')
 @Controller('amazon')
+@Throttle(EXTERNAL_API_THROTTLE)
 export class AmazonController {
   constructor(private readonly equipmentService: EquipmentService) {}
 

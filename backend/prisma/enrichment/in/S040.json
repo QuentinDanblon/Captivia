@@ -1,0 +1,38 @@
+[
+ {
+  "speciesId": 5285143,
+  "commonNameFr": "Dègue du Chili",
+  "scientificName": "Octodon degus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5285167,
+  "commonNameFr": "Viscache des Andes",
+  "scientificName": "Lagidium viscacia",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5285942,
+  "commonNameFr": "Oryctérope du Cap",
+  "scientificName": "Orycteropus afer",
+  "category": "mammifère",
+  "domesticationType": "semi-domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ }
+]

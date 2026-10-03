@@ -1,0 +1,53 @@
+[
+  {
+    "speciesId": 2431776,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.sources: remplacées par Wikipedia EN Fire salamander (régime : insectes, araignées, mille-pattes, vers, limaces)",
+      "behavior: nocturne (diurne par temps de pluie), longévité >50 ans, alcaloïdes (samandarine) confirmés",
+      "reproduction.notes: 'larves libérées dans mares temporaires' -> larves déposées dans l'eau"
+    ],
+    "removed": [
+      "legislation entière : annexe IV Habitats (fausse pour cette espèce) et 'certificat de capacité obligatoire' non confirmés -> null",
+      "habitat.temp/humidité/dimensions (non confirmés) -> null",
+      "reproduction.season, litterSize 20-40, sexualMaturity 24 (non confirmés) -> null",
+      "sources fr.vikidia.org (403), zoomalia.com (403), savethefrogs.com (404), PDF Wallonie (ne traite pas des maladies)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2431886,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.season: mars-juin -> février-juin (Wikipedia EN)",
+      "habitat: plantes aquatiques alignées sur BFC Nature (Glyceria, Juncus, Carex, Hottonia) ; non-présence de poissons notée",
+      "behavior: 'plus aquatique que terrestre' corrigé (phase terrestre en milieu boisé) ; cohabitation avec autres tritons retirée",
+      "legislation: protection nationale (arrêté 19/11/2007 art. 2), Habitats annexe IV, Berne annexe III confirmés (Sarthe + BFC Nature) ; 'certificat de capacité' retiré"
+    ],
+    "removed": [
+      "health entière (aucune source valide pour Triturus marmoratus) -> null",
+      "habitat.temp/humidité/100 L/profondeur (non confirmés) -> null",
+      "reproduction.litterSize 100-300, sexualMaturity 36, parade 2-3 mois, larves 4-5 mois (non confirmés ou contredits : maturité variable selon région)",
+      "feeding.foodsToAvoid 'poissons de grande taille' ; sources fr.vikidia.org (403)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2433573,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: pourcentages 60-70 % / 10-15 % / 15-20 % remplacés par ~90 % fruits (figues) et ~10 % autres (Wikipedia, IELC)",
+      "behavior.sociability: grégaire -> semi-grégaire (dort en groupe, chasse seul)",
+      "behavior: longévité 20-25 / 40 ans -> ~23 ans en captivité, record 42 (Wikipedia)",
+      "reproduction.sexualMaturityMonths: 24 -> 27 (femelle, Oregon Zoo) ; allaitement 3-4 mois -> sevrage 8 semaines, indépendance 4 mois",
+      "legislation.euAnnex: 'B' -> null (CITES III = annexe C, non confirmé) ; permis et 'certificat de capacité' retirés ; arrêté du 15 mai 1986 (vente/achat interdits) ajouté d'après aida.ineris.fr",
+      "health: ajout obésité/diabète, maladies dentaires (em-consulte)"
+    ],
+    "removed": [
+      "habitat.temp/humidité/50 m², 3 m (non confirmés) -> null",
+      "source leap.unep.org (loi de Madagascar, hors sujet), treatment.plazi.org (page vide)",
+      "health 'troubles métaboliques osseux' (non confirmé)"
+    ],
+    "confidence": "medium"
+  }
+]

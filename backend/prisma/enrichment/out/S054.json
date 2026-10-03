@@ -1,0 +1,350 @@
+[
+  {
+    "speciesId": 103951502,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Paillettes/flocons pour poissons",
+          "frequency": "quotidienne",
+          "notes": "Aliments préparés acceptés facilement"
+        },
+        {
+          "name": "Larves de moustiques, petites crevettes",
+          "frequency": "hebdomadaire",
+          "notes": "Proies vivantes ou congelées"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments de grande taille",
+          "reason": "Risque d'étouffement"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Omnivores opportunistes (végétaux, algues, petits poissons, crustacés, insectes, vers), acceptent la plupart des aliments préparés",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Convict_cichlid",
+          "title": "Convict cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 26,
+      "tempMax": 29,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Aquarium de 75 L (20 gallons) minimum pour une paire",
+      "lightNeeds": null,
+      "activityEnrichment": "Roches, branches immergées, grottes artificielles pour refuge",
+      "hygieneNotes": "Eau à pH 6,6-7,8, filtration appropriée recommandée",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Convict_cichlid",
+          "title": "Convict cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Cichlidé très agressif et territorial en période de reproduction, comportements complexes ; soins parentaux assurés par les deux parents",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Très agressif envers les autres poissons en période de reproduction ; nécessite un aquarium bien structuré",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Convict_cichlid",
+          "title": "Convict cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stress et problèmes digestifs",
+          "symptoms": "Comportement anormal, perte d'appétit",
+          "prevention": "Aménagement approprié, compatibilité entre poissons",
+          "whenToConsult": "Dès persistance des symptômes"
+        },
+        {
+          "name": "Parasites externes",
+          "symptoms": "Écailles irritées, nageoires déchirées",
+          "prevention": "Eau propre, qualité d'eau appropriée",
+          "whenToConsult": "Dès apparition de lésions"
+        },
+        {
+          "name": "Infection bactérienne",
+          "symptoms": "Plaies, décoloration",
+          "prevention": "Maintenance régulière, eau saine",
+          "whenToConsult": "Dès apparition de blessures"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Convict_cichlid",
+          "title": "Convict cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 3,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 6,
+      "breedingDifficulty": "facile",
+      "notes": "Maturité sexuelle dès 16 semaines, couramment vers 6 mois. Éclosion environ 72 h après la fécondation. Soins biparentaux (œufs, larves, juvéniles) pendant 4 à 6 semaines. En aquarium, pontes répétées plusieurs fois par an à intervalles de 12-13 jours.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Convict_cichlid",
+          "title": "Convict cichlid - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103952549,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits poissons",
+          "frequency": "hebdomadaire",
+          "notes": "Alevins ou petits poissons vivants ou congelés"
+        },
+        {
+          "name": "Crustacés, vers, insectes",
+          "frequency": "hebdomadaire",
+          "notes": "Larves de moustiques, crevettes"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Poissons de grande taille",
+          "reason": "Risque de blessure pour le Jack Dempsey lui-même"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Carnivore qui mange presque tout ce qui est plus petit que lui (vers, crustacés, insectes, poissons)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_cichlid",
+          "title": "Jack Dempsey cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 30,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Grottes, roches, racines pour les cachettes et le territoire",
+      "hygieneNotes": "pH 6-7. Préfère l'eau chaude (22-30 °C), peut survivre temporairement à 8-10 °C",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_cichlid",
+          "title": "Jack Dempsey cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Cichlide territorial et agressif ; les deux parents protègent les œufs et les alevins et leur donnent de la nourriture pré-mâchée",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Très agressif ; mange tout poisson plus petit que lui",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_cichlid",
+          "title": "Jack Dempsey cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stress de captivité",
+          "symptoms": "Perte couleur, inactivité",
+          "prevention": "Aquarium bien structuré, pas de cohabitation stressante",
+          "whenToConsult": "Si comportement anormal durable"
+        },
+        {
+          "name": "Infection bactérienne des nageoires",
+          "symptoms": "Nageoires effilochées, lésions",
+          "prevention": "Eau saine, éviter blessures des congénères",
+          "whenToConsult": "Dès apparition de lésions"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Amaigrissement, comportement anormal",
+          "prevention": "Quarantaine nouveaux poissons, alimentation diverse",
+          "whenToConsult": "En cas d'amaigrissement progressif"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_cichlid",
+          "title": "Jack Dempsey cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 500,
+      "litterSizeMax": 800,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Environ 500 à 800 œufs par ponte ; les deux parents participent à l'incubation et à la garde des alevins",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_cichlid",
+          "title": "Jack Dempsey cichlid - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103953586,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Paillettes fines pour petits poissons",
+          "frequency": "quotidienne",
+          "notes": "Granules adaptés à petite bouche"
+        },
+        {
+          "name": "Micro-proies vivantes (Daphnia, nauplii Artemia)",
+          "frequency": "hebdomadaire",
+          "notes": "Enrichissement protéiné"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments de grande taille",
+          "reason": "Trop volumineux pour petite bouche"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Petit poisson à petite bouche : paillettes fines, daphnies, artémias, vers de vase, aliments surgelés",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ram_cichlid",
+          "title": "Ram cichlid - Wikipedia EN"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Mikrogeophagus_ramirezi",
+          "title": "Mikrogeophagus ramirezi — Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 25.5,
+      "tempMax": 29.5,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "60 L minimum pour un couple (aquarium d'au moins 60 cm de long), eau végétalisée",
+      "lightNeeds": null,
+      "activityEnrichment": "Plantes aquatiques, substrat sombre, petites grottes, bois mou",
+      "hygieneNotes": "Eau acide (pH 5,2-6,7), chaude (25,5-29,5 °C), propre et changements d'eau fréquents ; espèce fragile",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ram_cichlid",
+          "title": "Ram cichlid - Wikipedia EN"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Mikrogeophagus_ramirezi",
+          "title": "Mikrogeophagus ramirezi — Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petite cichlide paisible mais territoriale à la reproduction ; vit en couple, les mâles ne tolèrent pas les autres mâles. Mâle reconnaissable à ses rayons de nageoire dorsale prolongés.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Un couple peut convenir en aquarium communautaire ; les mâles ne tolèrent pas les autres mâles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ram_cichlid",
+          "title": "Ram cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ichthyophthirus (Ick)",
+          "symptoms": "Petits points blancs sur corps",
+          "prevention": "Température stable, eau saine",
+          "whenToConsult": "Traitement antiparasitaire si progression"
+        },
+        {
+          "name": "Infections bactériennes",
+          "symptoms": "Lésions, nageoires fragmentées",
+          "prevention": "Qualité eau, pas de surpopulation",
+          "whenToConsult": "Traitement antibactérien si progression"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ram_cichlid",
+          "title": "Ram cichlid - Wikipedia EN"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 1.7,
+      "litterSizeMin": 150,
+      "litterSizeMax": 300,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ovipare, œufs éclosant après environ 40 h à 29 °C ; larves nageant librement après 5 jours ; soins biparentaux. La sélection artificielle de variétés a produit des souches moins fertiles, plus fragiles ou aux soins parentaux réduits.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ram_cichlid",
+          "title": "Ram cichlid - Wikipedia EN"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Mikrogeophagus_ramirezi",
+          "title": "Mikrogeophagus ramirezi — Wikipédia"
+        }
+      ]
+    }
+  }
+]

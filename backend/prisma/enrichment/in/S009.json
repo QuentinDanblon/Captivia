@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2424499,
+  "commonNameFr": "Grenouille du lac Titicaca",
+  "scientificName": "Telmatobius culeus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2427573,
+  "commonNameFr": "Rainette à doigts de cuivre",
+  "scientificName": "Hyla arborea",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2427694,
+  "commonNameFr": "Rainette de White",
+  "scientificName": "Litoria caerulea",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,164 @@
+[
+ {
+  "speciesId": 5285942,
+  "commonNameFr": "Oryctérope du Cap",
+  "scientificName": "Orycteropus afer",
+  "category": "mammifère",
+  "domesticationType": "semi-domestique",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5289145,
+  "commonNameFr": "Écureuil Volant de Corée",
+  "scientificName": "Pteromyidae",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5296842,
+  "commonNameFr": "Bâton du Diable (Phasme)",
+  "scientificName": "Phryganistis chlorophaea",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5301256,
+  "commonNameFr": "Poisson-Clown Orange",
+  "scientificName": "Amphiprion ocellaris",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5784980,
+  "commonNameFr": "Grenouille verte",
+  "scientificName": "Pelophylax kl. esculentus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 5786666,
+  "commonNameFr": "Capybara",
+  "scientificName": "Hydrochoerus hydrochaeris",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5959092,
+  "commonNameFr": "Grand-duc d'Europe",
+  "scientificName": "Bubo bubo",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5959230,
+  "commonNameFr": "Ara militaire",
+  "scientificName": "Ara militaris",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 7387949,
+  "commonNameFr": "Couleuvre ratière",
+  "scientificName": "Elaphe obsoleta",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 7572096,
+  "commonNameFr": "Barbu rosé",
+  "scientificName": "Pethia conchonius",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 8170369,
+  "commonNameFr": "Serpent roi de Californie",
+  "scientificName": "Lampropeltis californiae",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ },
+ {
+  "speciesId": 8583926,
+  "commonNameFr": "Anole de Cuba",
+  "scientificName": "Anolis equestris",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 8909809,
+  "commonNameFr": "Tortue palustre",
+  "scientificName": "Emys orbicularis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 8953936,
+  "commonNameFr": "Caïman à lunettes",
+  "scientificName": "Caiman crocodilus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding"
+  ]
+ }
+]

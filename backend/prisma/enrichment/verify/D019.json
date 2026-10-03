@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000607,
+    "status": "verified",
+    "note": "Allemagne, années 1970, max 1,36 kg, blanc à cercles oculaires colorés, animal de compagnie exclusivement : confirmé."
+  },
+  {
+    "speciesId": 2000000608,
+    "status": "removed",
+    "note": "Q19741974 : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000609,
+    "status": "verified",
+    "note": "Croatie/Dalmatie, blanc tacheté noir ou foie, 56-61 cm, musclé et endurant, chien de chasse/de guerre/de carrosse, amical mais instinct de garde marqué : confirmé."
+  },
+  {
+    "speciesId": 2000000610,
+    "status": "corrected",
+    "note": "Poids 4,5-5,4 kg → ♂ 4,1-5 / ♀ 4,5-5,4 kg ; 'les plus courants' (commercial + recherche) remplacé par les formulations de la page ('l'une des meilleures', 'choix courant en laboratoire')."
+  },
+  {
+    "speciesId": 2000000611,
+    "status": "verified",
+    "note": "États-Unis, ARBA (1988), 1,4-1,8 kg, laine type Angora plus courte, oreilles tombantes, museau court et plat : confirmé."
+  },
+  {
+    "speciesId": 2000000679,
+    "status": "corrected",
+    "note": "'sauvages' → ensauvagés (redevenus sauvages) selon la page ; reste inchangé (tailles/poids confirmés)."
+  },
+  {
+    "speciesId": 2000000691,
+    "status": "corrected",
+    "note": "'développée au XIXe siècle' → race ancienne issue de populations locales, influence Angeln au XIXe ; production chiffrée à partir de la page ; 'sans cornes' et 'rouge à brune' selon page."
+  },
+  {
+    "speciesId": 2000000692,
+    "status": "corrected",
+    "note": "Robe : ajouté 'châtain' (page : rouge foncé, noire, châtain) ; reste confirmé."
+  },
+  {
+    "speciesId": 2000000693,
+    "status": "corrected",
+    "note": "La sourceUrl redirige vers 'Holstein (race bovine)' : la description parlait de 'la Holstein', recadrée sur le nom de l'entrée ; 'la plus efficace au monde'/'domine tous les pays' → formulations de la page ; variante rouge ajoutée."
+  },
+  {
+    "speciesId": 2000000694,
+    "status": "removed",
+    "note": "Hanu : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000695,
+    "status": "corrected",
+    "note": "Source EN (Uzbekistan, zébu x Brown Swiss/Simmental) contredit la source RU (Russie, Volga, Shorthorn x pie noire hollandaise + Simmental) et la description (incohérente : 'russe' et 'Asie centrale') ; description réécrite d'après la page RU, sourceUrl remplacée. Confiance moyenne."
+  },
+  {
+    "speciesId": 2000000696,
+    "status": "corrected",
+    "note": "La sourceUrl initiale (fr.wikipedia Guernesey) décrit l'île, pas la race : remplacée par la page de la race ; 'lait de couleur dorée' corrigé (beurre/fromage dorés, lait riche en carotène)."
+  },
+  {
+    "speciesId": 2000000697,
+    "status": "corrected",
+    "note": "'chestnut-brown' traduit ; précisé Land de Salzbourg, triple aptitude, cause du déclin (remplacée par races plus laitières)."
+  },
+  {
+    "speciesId": 2000000698,
+    "status": "verified",
+    "note": "Suède du Nord, sans cornes, mâles 650-800 kg, femelles 450 kg, ~5 500 kg de lait/lactation riche en matière grasse (4,5 %), surtout laitière : confirmé."
+  },
+  {
+    "speciesId": 2000000699,
+    "status": "removed",
+    "note": "Vänekor : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  }
+]

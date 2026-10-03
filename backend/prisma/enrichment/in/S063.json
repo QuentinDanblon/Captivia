@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104094514,
+  "commonNameFr": "Couleuvre verte",
+  "scientificName": "Opheodrys aestivus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104101618,
+  "commonNameFr": "Serpent des sables",
+  "scientificName": "Eryx johnii",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104101654,
+  "commonNameFr": "Boa de l'île Ronde",
+  "scientificName": "Casarea dussumieri",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

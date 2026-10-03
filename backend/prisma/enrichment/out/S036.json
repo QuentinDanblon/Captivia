@@ -1,0 +1,360 @@
+[
+  {
+    "speciesId": 5226308,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes (grillons, criquets)",
+          "frequency": "quotidienne",
+          "notes": "Régime naturel : surtout fourmis, criquets, coléoptères et termites"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments toxiques",
+          "reason": "Fruits et légumes non identifiés peuvent être toxiques"
+        },
+        {
+          "name": "Insectes sauvages non identifiés",
+          "reason": "Risque de parasites et de maladies"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Apport régulier de calcium et vitamine D3 pour la croissance osseuse",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agama_agama",
+          "title": "Agama agama"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 25,
+      "tempMax": 38,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière UVB 10-12h par jour, point chaud à 35-38°C",
+      "activityEnrichment": "Branches de décoration, cachettes, substrat terrestre pour creuser",
+      "hygieneNotes": "Nettoyage hebdomadaire, eau fraîche quotidienne",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agama_agama",
+          "title": "Agama agama"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Lézard diurne ; les mâles sont territoriaux et se battent pour défendre leur espace ; groupes sociaux avec un mâle dominant, environ six femelles et des mâles subordonnés",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "À surveiller, peuvent mordre si stressés",
+      "compatibilityWithOtherAnimals": "Mâles territoriaux et agressifs entre eux : un seul mâle par terrarium",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agama_agama",
+          "title": "Agama agama"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Métabolisme osseux désordre (MBD)",
+          "symptoms": "Déformation osseuse, mobilité réduite, spasmes musculaires",
+          "prevention": "UVB régulier et apport en calcium",
+          "whenToConsult": "Dès signes de boiterie ou paralysie"
+        },
+        {
+          "name": "Infections parasitaires",
+          "symptoms": "Amaigrissement, diarrhée, régurgitations",
+          "prevention": "Hygiène stricte, insectes de source sûre",
+          "whenToConsult": "Consultation vétérinaire immédiate"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Respiration bruyante, mucus nasal",
+          "prevention": "Humidité adéquate, pas de courants d'air froid",
+          "whenToConsult": "Consultation vétérinaire rapide si persistant"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agama_agama",
+          "title": "Agama agama"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "saisons des pluies",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 5,
+      "litterSizeMax": 7,
+      "sexualMaturityMonths": 18,
+      "breedingDifficulty": null,
+      "notes": "Ponte de 5 à 7 œufs éclosant en 8 à 10 semaines ; femelles matures à 14-18 mois, mâles vers 2 ans ; le sexe dépend de la température d'incubation",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Agama_agama",
+          "title": "Agama agama"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5227370,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits rongeurs (souris, rats)",
+          "frequency": "1-2 fois par semaine",
+          "notes": "Congelés-décongelés ou vivants"
+        },
+        {
+          "name": "Fruits et légumes",
+          "frequency": "2-3 fois par semaine",
+          "notes": "Bananes, papayes, mangues"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments salés ou épicés",
+          "reason": "Toxiques pour les reptiles"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Nourriture variée, enrichissement alimentaire régulier",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Argentine_black_and_white_tegu",
+          "title": "Argentine black and white tegu"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 32,
+      "humidityMin": 50,
+      "humidityMax": 80,
+      "minSpaceSize": null,
+      "lightNeeds": "12h lumière naturelle ou UVB, point chaud à 28-32°C",
+      "activityEnrichment": "Cachettes, zones de creusement, substrat épais (10-15cm)",
+      "hygieneNotes": "Nettoyage 2x par semaine, abreuvement quotidien régulier",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Argentine_black_and_white_tegu",
+          "title": "Argentine black and white tegu"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Intelligent et relativement docile (facile à apprivoiser), territorial ; entre en brumation à l'automne",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "À surveiller, peuvent mordre si menacés",
+      "compatibilityWithOtherAnimals": "Incompatibles avec autres espèces",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Argentine_black_and_white_tegu",
+          "title": "Argentine black and white tegu"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Impaction digestive",
+          "symptoms": "Constipation, apathie, perte d'appétit",
+          "prevention": "Substrat adéquat, hydratation suffisante",
+          "whenToConsult": "Si plus de 3-4 jours sans défécation"
+        },
+        {
+          "name": "Parasitose interne",
+          "symptoms": "Amaigrissement, diarrhée, régurgitations",
+          "prevention": "Aliments de source sûre, hygiène stricte",
+          "whenToConsult": "Consultation vétérinaire rapide"
+        },
+        {
+          "name": "Brûlures thermiques",
+          "symptoms": "Plaies, cicatrices sur la peau",
+          "prevention": "Point chaud correctement isolé avec grillage",
+          "whenToConsult": "Traitement vétérinaire immédiat si brûlure"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Argentine_black_and_white_tegu",
+          "title": "Argentine black and white tegu"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "septembre à décembre",
+      "gestationDays": null,
+      "incubationDays": 64,
+      "litterSizeMin": 18,
+      "litterSizeMax": 25,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "Maturité vers 3 ans, jusqu'à deux pontes par an de 18 à 25 œufs, incubation moyenne de 64 jours (40 à 75), nid de herbes, branches et feuilles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Argentine_black_and_white_tegu",
+          "title": "Argentine black and white tegu"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5228034,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Granulés pour volailles",
+          "frequency": "quotidienne",
+          "notes": "Nourriture dédiée aux faisans d'élevage"
+        },
+        {
+          "name": "Graines (blé, orge, maïs)",
+          "frequency": "quotidienne",
+          "notes": "Complément naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments salés",
+          "reason": "Toxiques pour les oiseaux"
+        },
+        {
+          "name": "Avocat et chocolat",
+          "reason": "Hautement toxiques"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès à grit minéral, supplémentation vitaminique en période de reproduction",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Golden_pheasant",
+          "title": "Golden pheasant"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle, préférence pour zones semi-ombragées",
+      "activityEnrichment": "Arbustes bas, zone de bain à poussière, branches pour perchoir",
+      "hygieneNotes": "Nettoyage hebdomadaire, protection contre l'humidité excessive",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Golden_pheasant",
+          "title": "Golden pheasant"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau terrestre qui préfère courir et se cacher plutôt que voler ; en hiver, des groupes s'alimentent ensemble ; le mâle émet un cri métallique en période de reproduction",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Oiseaux sauvages, à observer à distance",
+      "compatibilityWithOtherAnimals": "Mâles très agressifs entre eux, risque important de blessures",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Golden_pheasant",
+          "title": "Golden pheasant"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasitose externe (poux, acariens)",
+          "symptoms": "Plumage ébouriffé, démangeaisons, perte de plumes",
+          "prevention": "Accès à bain de poussière régulier",
+          "whenToConsult": "Consultation vétérinaire si symptômes persistants"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Respiration bruyante, écoulement nasal",
+          "prevention": "Enclos bien ventilé, pas d'humidité excessive",
+          "whenToConsult": "Consultation vétérinaire rapide"
+        },
+        {
+          "name": "Blessures par bagarres",
+          "symptoms": "Plumes cassées, blessures visibles",
+          "prevention": "Isolation des mâles agressifs",
+          "whenToConsult": "Traitement immédiat pour prévention infection"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Golden_pheasant",
+          "title": "Golden pheasant"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Golden_pheasant",
+          "title": "Golden pheasant"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "printemps",
+      "gestationDays": null,
+      "incubationDays": 23,
+      "litterSizeMin": 8,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ponte de 8 à 12 œufs, incubation d'environ 22-23 jours ; dimorphisme sexuel marqué (mâle très coloré, femelle au plumage cryptique)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Golden_pheasant",
+          "title": "Golden pheasant"
+        }
+      ]
+    }
+  }
+]

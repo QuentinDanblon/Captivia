@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104085484,
+  "commonNameFr": "Téju rouge",
+  "scientificName": "Salvator rufescens",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104087619,
+  "commonNameFr": "Iguane des Petites Antilles",
+  "scientificName": "Iguana delicatissima",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104093507,
+  "commonNameFr": "Couleuvre de Vigneau",
+  "scientificName": "Coronella girondica",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

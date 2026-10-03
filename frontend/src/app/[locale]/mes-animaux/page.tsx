@@ -2,10 +2,17 @@
 
 import { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { api, type Animal as ApiAnimal, type SpeciesRoutineTemplate } from '@/lib/api';
-import Link from 'next/link';
+import { animalCarnetPath, animalDetailPath } from '@/lib/platform';
+import { api, ApiError, type Animal as ApiAnimal, type SpeciesRoutineTemplate } from '@/lib/api';
+import { Link } from '@/i18n/navigation';
+import Modal from '@/components/ui/Modal';
+import { GuestEntry } from '@/components/guest/GuestEntry';
+import { GuestSaveBanner } from '@/components/guest/GuestSaveBanner';
+import { AddAnimalLockedSlot } from '@/components/guest/AddAnimalLockedSlot';
+import { ANIMAL_LIMIT_CODE, isGuestUser } from '@/lib/guest';
 
 interface Animal extends ApiAnimal {
   speciesName?: string;
@@ -27,7 +34,7 @@ function MyAnimalsPageContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { user, token, isLoading: authLoading, logout } = useAuth();
+  const { user, token, isLoading: authLoading } = useAuth();
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -61,12 +68,6 @@ function MyAnimalsPageContent() {
   const [speciesResults, setSpeciesResults] = useState<SpeciesResult[]>([]);
   const [speciesSearching, setSpeciesSearching] = useState(false);
   const [showSpeciesDropdown, setShowSpeciesDropdown] = useState(false);
-
-  useEffect(() => {
-    if (!authLoading && !user) {
-      router.push('/login');
-    }
-  }, [user, authLoading, router]);
 
   useEffect(() => {
     if (user && token) {
@@ -145,12 +146,10 @@ function MyAnimalsPageContent() {
       await fetchAnimals();
       setToast(t('animals.animalUpdated'));
     } catch (err) {
-      const msg = (err instanceof Error ? err.message : String(err)).toLowerCase();
-      if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('forbidden') || msg.includes('403') || msg.includes('401')) {
-        logout();
-        router.push('/login');
-        return;
-      }
+      // Session perdue : lib/api a déjà tenté le refresh et émis `auth:logout` si elle est
+      // révoquée (la page redirige alors). Jamais de logout() ici : ni sur 403, ni sur un
+      // échec passager du backend.
+      if (err instanceof ApiError && err.status === 401) return;
       console.error('Error updating photo:', err);
       setToast(t('animals.errorAdding'));
     } finally {
@@ -196,6 +195,11 @@ function MyAnimalsPageContent() {
     setShowAddModal(true);
   };
 
+  const handleCloseAddModal = () => {
+    setShowAddModal(false);
+    resetForm();
+  };
+
   // Open the add-animal modal automatically when arriving with ?addSpecies=...&speciesName=...
   // (from the "Ajouter à Mes animaux" button on the species page), then clean the URL
   // so a refresh doesn't re-open the modal.
@@ -222,7 +226,7 @@ function MyAnimalsPageContent() {
     }
     
     if (!formSpeciesId) {
-      setFormError('Veuillez sélectionner une espèce');
+      setFormError(t('animals.speciesRequired'));
       return;
     }
 
@@ -261,12 +265,15 @@ function MyAnimalsPageContent() {
       setShowAddModal(false);
       resetForm();
     } catch (error) {
-      const msg = (error instanceof Error ? error.message : String(error)).toLowerCase();
-      if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('forbidden') || msg.includes('403') || msg.includes('401')) {
-        logout();
-        router.push('/login');
+      // Limite d'animaux (invité / compte gratuit) : explication, jamais de déconnexion.
+      if (error instanceof ApiError && error.code === ANIMAL_LIMIT_CODE) {
+        setFormError(isGuestUser(user) ? t('guest.lockedValueGuest') : t('guest.lockedValueFree'));
         return;
       }
+      // Session perdue : lib/api a déjà tenté le refresh et émis `auth:logout` si elle est
+      // révoquée (la page redirige alors). Jamais de logout() ici : ni sur 403, ni sur un
+      // échec passager du backend.
+      if (error instanceof ApiError && error.status === 401) return;
       console.error('Error creating animal:', error);
       setFormError(error instanceof Error ? error.message : t('animals.errorAdding'));
     } finally {
@@ -274,7 +281,9 @@ function MyAnimalsPageContent() {
     }
   };
 
-  const canAddAnimal = user?.isPremium || animals.length < 1;
+  // Plusieurs animaux = compte + Premium : un invité reste à 1 animal (D-16).
+  const guest = isGuestUser(user);
+  const canAddAnimal = (!guest && user?.isPremium) || animals.length < 1;
 
   // ---- Routines recommandées (module D) ----
   const getTemplateTypeLabel = (type: string): string => {
@@ -355,18 +364,21 @@ function MyAnimalsPageContent() {
       resetForm();
       fetchAnimals();
     } catch (error) {
-      const msg = (error instanceof Error ? error.message : String(error)).toLowerCase();
-      if (msg.includes('unauthorized') || msg.includes('non autorisé') || msg.includes('forbidden') || msg.includes('403') || msg.includes('401')) {
-        logout();
-        router.push('/login');
-        return;
-      }
+      // Session perdue : lib/api a déjà tenté le refresh et émis `auth:logout` si elle est
+      // révoquée (la page redirige alors). Jamais de logout() ici : ni sur 403, ni sur un
+      // échec passager du backend.
+      if (error instanceof ApiError && error.status === 401) return;
       console.error('Error adding routine templates:', error);
       setTemplatesError(error instanceof Error ? error.message : t('animals.errorAdding'));
     } finally {
       setTemplatesAdding(false);
     }
   };
+
+  // Sans session : « Essayer sans compte » ou connexion (plus de redirection vers /login).
+  if (!authLoading && !user) {
+    return <GuestEntry />;
+  }
 
   if (authLoading || loading) {
     return (
@@ -391,21 +403,20 @@ function MyAnimalsPageContent() {
       )}
 
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-w-0">
+        <GuestSaveBanner animalName={animals[0]?.name} className="mb-6" />
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
             {t('animals.myAnimals')}
           </h1>
-          <button
-            onClick={() => openAddModal()}
-            disabled={!canAddAnimal}
-            className={`w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg transition-colors shrink-0 ${
-              canAddAnimal 
-                ? 'bg-emerald-600 text-white hover:bg-emerald-700' 
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-          >
-            + {t('animals.addAnimal')}
-          </button>
+          {/* Limite atteinte : l'emplacement verrouillé remplace le bouton (dans la grille). */}
+          {canAddAnimal && (
+            <button
+              onClick={() => openAddModal()}
+              className="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg transition-colors shrink-0 bg-emerald-600 text-white hover:bg-emerald-700"
+            >
+              + {t('animals.addAnimal')}
+            </button>
+          )}
         </div>
 
         {animals.length === 0 ? (
@@ -450,10 +461,12 @@ function MyAnimalsPageContent() {
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {animals.map((animal) => (
-              <Link
+              // Carte en <article> : le nom porte un lien étiré (after:absolute inset-0) qui rend toute
+              // la carte cliquable ; les boutons (photo) et le lien « carnet » sont des frères en
+              // relative z-10, jamais imbriqués dans un lien (HTML invalide, clics ambigus).
+              <article
                 key={animal.id}
-                href={`/mes-animaux/${animal.id}`}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow block"
+                className="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow block"
               >
                 <div className="relative aspect-video bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white text-4xl font-bold overflow-hidden group">
                   {photoUploading && photoAnimalId === animal.id ? (
@@ -474,7 +487,7 @@ function MyAnimalsPageContent() {
                       <button
                         type="button"
                         onClick={(e) => handleCardPhotoClick(e, animal.id)}
-                        className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors opacity-0 group-hover:opacity-100 text-white text-sm font-medium"
+                        className="absolute inset-0 z-10 flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-colors opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 [@media(hover:none)]:inset-auto [@media(hover:none)]:bottom-2 [@media(hover:none)]:right-2 text-white text-sm font-medium"
                         title={t('animals.changePhoto')}
                       >
                         <span className="px-3 py-1.5 bg-white/90 text-gray-800 rounded-lg">
@@ -486,7 +499,12 @@ function MyAnimalsPageContent() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
-                    {animal.name}
+                    <Link
+                      href={animalDetailPath(animal.id)}
+                      className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-emerald-500 focus-visible:after:rounded-xl"
+                    >
+                      {animal.name}
+                    </Link>
                   </h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
                     {animal.speciesName || `Species ID: ${animal.speciesId}`}
@@ -529,36 +547,47 @@ function MyAnimalsPageContent() {
                       </span>
                     )}
                   </div>
+                  <Link
+                    href={animalCarnetPath(animal.id)}
+                    className="relative z-10 mt-4 inline-block text-sm font-medium text-emerald-700 dark:text-emerald-300 hover:underline"
+                  >
+                    {t('carnetPrint.title')}
+                  </Link>
                 </div>
-              </Link>
+              </article>
             ))}
+            {/* « Ajouter un animal » verrouillé : invité → compte, gratuit → Premium. */}
+            {!canAddAnimal && <AddAnimalLockedSlot isGuest={guest} />}
             </div>
           </>
-        )}
-
-        {/* Premium limit warning */}
-        {!user?.isPremium && animals.length >= 1 && (
-          <div className="mt-8 p-6 bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 rounded-lg">
-            <h3 className="text-lg font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
-              {t('animals.premiumRequired')}
-            </h3>
-            <p className="text-yellow-700 dark:text-yellow-300">
-              {t('animals.premiumMessage')}
-            </p>
-          </div>
         )}
       </div>
 
       {/* Add Animal Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 overflow-y-auto">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 md:p-8 max-w-sm md:max-w-2xl w-full max-h-[90vh] overflow-y-auto my-auto">
+      <Modal
+        open={showAddModal}
+        onClose={handleCloseAddModal}
+        size="xl"
+        title={
+          newAnimalId && routineTemplates.length > 0
+            ? t('animals.routineTemplates.title')
+            : t('animals.addAnimal')
+        }
+        dismissible={!formSubmitting && !templatesAdding}
+        closeOnOverlayClick={false}
+        hideCloseButton
+        className="md:p-8"
+        titleClassName={
+          newAnimalId && routineTemplates.length > 0
+            ? 'text-2xl md:text-3xl font-bold mb-2 text-gray-800 dark:text-white'
+            : 'text-2xl md:text-3xl font-bold mb-6 text-gray-800 dark:text-white'
+        }
+      >
+        {showAddModal && (
+          <>
             {newAnimalId && routineTemplates.length > 0 ? (
               /* Étape 2 : routines recommandées pour l'espèce (module D) */
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800 dark:text-white">
-                  {t('animals.routineTemplates.title')}
-                </h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
                   {t('animals.routineTemplates.suggested')}
                 </p>
@@ -642,10 +671,7 @@ function MyAnimalsPageContent() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => {
-                      setShowAddModal(false);
-                      resetForm();
-                    }}
+                    onClick={handleCloseAddModal}
                     className="flex-1 px-4 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                   >
                     {t('common.cancel')}
@@ -654,10 +680,6 @@ function MyAnimalsPageContent() {
               </div>
             ) : (
               <>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800 dark:text-white">
-              {t('animals.addAnimal')}
-            </h2>
-            
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Name field */}
               <div>
@@ -843,10 +865,7 @@ function MyAnimalsPageContent() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
-                    setShowAddModal(false);
-                    resetForm();
-                  }}
+                  onClick={handleCloseAddModal}
                   className="flex-1 px-4 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                 >
                   {t('common.cancel')}
@@ -855,9 +874,9 @@ function MyAnimalsPageContent() {
             </form>
               </>
             )}
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </Modal>
     </div>
   );
 }

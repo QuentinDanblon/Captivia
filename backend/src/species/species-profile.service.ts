@@ -56,6 +56,7 @@ export class SpeciesProfileService {
     const [profiles, total] = await Promise.all([
       this.prisma.speciesProfile.findMany({
         where,
+        orderBy: [{ commonNameFr: 'asc' }, { id: 'asc' }],
         skip: offset,
         take: limit,
       }),

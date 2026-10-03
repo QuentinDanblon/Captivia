@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104106412,
+  "commonNameFr": "Alligator d'Amérique",
+  "scientificName": "Alligator mississippiensis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104110162,
+  "commonNameFr": "Tourterelle domestique",
+  "scientificName": "Streptopelia risoria",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104128782,
+  "commonNameFr": "Rossignol du Japon",
+  "scientificName": "Leiothrix lutea",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

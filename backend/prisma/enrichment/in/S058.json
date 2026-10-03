@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104044141,
+  "commonNameFr": "Triton alpestre",
+  "scientificName": "Ichthyosaura alpestris",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104048045,
+  "commonNameFr": "Ouistiti",
+  "scientificName": "Callithrix jacchus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104052770,
+  "commonNameFr": "Écureuil volant",
+  "scientificName": "Pteromys volans",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

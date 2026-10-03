@@ -1,0 +1,401 @@
+[
+  {
+    "speciesId": 2476004,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Fruits variés (figues, papaye, mangue, baies)",
+          "frequency": "quotidienne",
+          "notes": "Base de l'alimentation, préférence pour fruits tropicaux mûrs"
+        },
+        {
+          "name": "Insectes et petites proies animales (reptiles, rongeurs, petits oiseaux)",
+          "frequency": "3-4 fois/semaine",
+          "notes": "Apport protéique, complémente un régime dominé par les fruits"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Fruits avocats, chocolat",
+          "reason": "Toxiques pour les oiseaux"
+        },
+        {
+          "name": "Aliments salés ou transformés",
+          "reason": "Déséquilibres nutritionnels et troubles digestifs"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime dominé par les fruits frais variés, avec complément de protéine animale. Eau fraîche en continu.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhinoceros_hornbill",
+          "title": "Rhinoceros Hornbill - Diet and Feeding"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Très grande volière permettant le vol, idéalement plus spacieuse que le minimum",
+      "lightNeeds": "Lumière naturelle 12h/jour, sous-bois semi-ombragé imité",
+      "activityEnrichment": "Cavités arboricoles pour nidification, branches épaisses pour perchoirs, espace vol libre",
+      "hygieneNotes": "Bassin eau pour trempage, nettoyage régulier, substrat naturel débris",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhinoceros_hornbill",
+          "title": "Rhinoceros Hornbill - Habitat"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau de forêt tropicale humide. Femelle emmurée dans une cavité arboricole pendant l'incubation et l'élevage (entrée fermée avec boue, nourriture et fèces), le mâle la ravitaille par une petite ouverture.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non compatible : grande taille, comportement territorial, dangereux",
+      "compatibilityWithOtherAnimals": "Vit en couple durant la reproduction. Cohabitation avec d'autres espèces à n'envisager qu'avec prudence.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhinoceros_hornbill",
+          "title": "Rhinoceros Hornbill - Behavior and Breeding"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Carences nutritionnelles",
+          "symptoms": "Troubles reproductifs, fragilité osseuse, plumage dégradé",
+          "prevention": "Alimentation variée fruits+protéines, suppléments vitamines A et D",
+          "whenToConsult": "Dès signes dégénérescence plumage"
+        },
+        {
+          "name": "Infections respiratoires et aspergillose",
+          "symptoms": "Respiration difficile, toux, écoulements nasaux",
+          "prevention": "Hygiène stricte volière, humidité contrôlée, ventilation adéquate",
+          "whenToConsult": "Urgence vétérinaire dès premiers signes"
+        },
+        {
+          "name": "Parasites internes et externes",
+          "symptoms": "Amaigrissement, troubles digestifs, irritation cutanée",
+          "prevention": "Quarantaine nouveaux oiseaux, traitement antiparasitaire préventif",
+          "whenToConsult": "Traitement vétérinaire recommandé annuellement"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhinoceros_hornbill",
+          "title": "Rhinoceros Hornbill - Health in Captivity"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": ["Documents CITES requis pour le commerce international (Annexe II)"],
+        "restrictions": ["Espèce inscrite à l'Annexe II de la CITES", "Espèce classée Vulnérable (UICN)"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhinoceros_hornbill",
+          "title": "Rhinoceros Hornbill - Conservation Status and CITES"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Nidification élaborée : la femelle est emmurée dans une cavité arboricole (boue, nourriture et fèces), le mâle la ravitaille par une petite ouverture. Longévité jusqu'à 35 ans en captivité.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhinoceros_hornbill",
+          "title": "Rhinoceros Hornbill - Reproduction"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2478765,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Fruits variés (figues, oranges, guavas, peppers)",
+          "frequency": "quotidienne",
+          "notes": "Frugivore généraliste, préférence fruits charnus mûrs"
+        },
+        {
+          "name": "Insectes, oeufs et oisillons",
+          "frequency": "2-3 fois/semaine",
+          "notes": "Protéines animales pour équilibre nutritionnel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Avocats et fruits tropicaux toxiques",
+          "reason": "Toxicité pour les oiseaux"
+        },
+        {
+          "name": "Sel, sucre raffiné, aliments transformés",
+          "reason": "Déséquilibres nutritionnels"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Fruits frais abondants, variétés tropicales. Eau fraîche quotidienne. Suppléments vitamines A et D.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Toco_toucan",
+          "title": "Toco Toucan - Diet and Feeding"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Grande volière permettant le vol, grand bec nécessitant de l'espace",
+      "lightNeeds": "Lumière naturelle 12h/jour, semi-ouvert semi-fermé (gallery forest simulation)",
+      "activityEnrichment": "Perchoirs épais, branchage naturel, cavités arboricoles, espace vol libre",
+      "hygieneNotes": "Bassin trempage eau profond, nettoyage 2-3x/semaine, litière naturelle débris",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Toco_toucan",
+          "title": "Toco Toucan - Habitat and Behavior"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau moins grégaire que les autres toucans, s'alimente seul ou en petits groupes aux arbres fruitiers. Moins actif en journée, se repose parfois dans la cime des arbres.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Possible avec supervision : grand bec dangereux, morsure puissante",
+      "compatibilityWithOtherAnimals": "Se nourrit aussi d'œufs et d'oisillons d'autres oiseaux : cohabitation avec de petits oiseaux déconseillée.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Toco_toucan",
+          "title": "Toco Toucan - Behavior and Ecology"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasites internes et externes (protozoaires, poux)",
+          "symptoms": "Troubles digestifs, diarrhée, amaigrissement",
+          "prevention": "Quarantaine oiseaux nouveaux, hygiène stricte, analyse coprologique",
+          "whenToConsult": "Traitement vétérinaire recommandé dès diagnostic"
+        },
+        {
+          "name": "Carences nutritionnelles",
+          "symptoms": "Plumage terne, faiblesse générale, troubles reproductifs",
+          "prevention": "Fruits variés, protéines régulières, suppléments vitamines",
+          "whenToConsult": "Dès premiers signes carence"
+        },
+        {
+          "name": "Aspergillose et infections respiratoires",
+          "symptoms": "Respiration laborieuse, toux, écoulements nasaux",
+          "prevention": "Hygiène excellente, humidité maîtrisée, ventilation adéquate",
+          "whenToConsult": "Urgence vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Toco_toucan",
+          "title": "Toco Toucan - Health and Captive Care"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": ["Documents CITES requis pour le commerce international (Annexe II)"],
+        "restrictions": ["Espèce inscrite à l'Annexe II de la CITES : commerce régulé"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Toco_toucan",
+          "title": "Toco Toucan - Conservation and Trade"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "septembre-février",
+      "gestationDays": null,
+      "incubationDays": 17,
+      "litterSizeMin": 2,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Nidification en cavités d'arbres ou termitières. Saison de reproduction septembre-février dans la plupart des régions (décembre-juin en Bolivie/Argentine). Incubation 17-18 jours, envol 43-52 jours après l'éclosion.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Toco_toucan",
+          "title": "Toco Toucan - Reproduction"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2479505,
+    "feeding": {
+      "dietType": "granivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines herbes (millet, panic grass, canary seed)",
+          "frequency": "quotidienne",
+          "notes": "Perruches herbornes, régime centré sur les graines de graminées"
+        },
+        {
+          "name": "Fleurs et jeunes pousses",
+          "frequency": "quotidienne",
+          "notes": "Complément végétal saisonnier"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Sel et condiments",
+          "reason": "Toxiques pour les oiseaux"
+        },
+        {
+          "name": "Aliments chocolat, avocats, thé, café",
+          "reason": "Toxicité directe"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Se nourrit de graines, principalement de graminées : graines fines (pas de gros aliments). Eau fraîche quotidienne.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Perruche_élégante",
+          "title": "Perruche élégante - Wikipedia FR"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Volière spacieuse permettant le vol",
+      "lightNeeds": "Lumière naturelle 12h/jour, simulation saisons australiennes",
+      "activityEnrichment": "Branchage naturel, nidification cavités, herbes fraîches, espace vol libre",
+      "hygieneNotes": "Hygiène stricte, changement d'eau quotidien, nettoyage fréquent",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Neophema",
+          "title": "Neophema - Grass Parrots"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petites perruches australiennes granivores, vivant en couples ou en petits groupes. Oiseaux délicats qui peuvent mourir sans cause apparente.",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Non recommandé : très sensibles au stress, fragiles",
+      "compatibilityWithOtherAnimals": "Peuvent être gardées en petit groupe avec quelques petits oiseaux inoffensifs ; risque de harcèlement par des oiseaux plus robustes.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Neophema",
+          "title": "Neophema - Aviculture and Care"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Mort inexpliquée (stress-related)",
+          "symptoms": "Déclin rapide, refus alimentaire, immobilité",
+          "prevention": "Environnement très stable, absence de stress, manipulation minimale",
+          "whenToConsult": "Consultation vétérinaire exotique recommandée avant acquisition"
+        },
+        {
+          "name": "Carences nutritionnelles",
+          "symptoms": "Perte de poids, troubles reproductifs, plumage terne",
+          "prevention": "Alimentation spécialisée graines fines, suppléments vitamines",
+          "whenToConsult": "Suivi nutritionnel vétérinaire recommandé"
+        },
+        {
+          "name": "Parasites et infections respiratoires",
+          "symptoms": "Respiration difficile, troubles digestifs, irritation",
+          "prevention": "Hygiène volière excellente, quarantaine nouveaux oiseaux",
+          "whenToConsult": "Traitement vétérinaire précoce essentiel"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Neophema",
+          "title": "Neophema - Health and Avicultural Challenges"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": ["Documents CITES requis pour le commerce international (Annexe II)"],
+        "restrictions": ["Espèce inscrite à l'Annexe II de la CITES"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Perruche_élégante",
+          "title": "Perruche élégante - Wikipedia FR"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "juillet-novembre",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 4,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Nidification dans une cavité d'arbre située à plus de 15 m de haut, généralement un eucalyptus près d'un cours d'eau. 4 à 6 œufs blancs ronds. Une ou parfois deux couvées selon les pluies. Saison de reproduction de juillet à novembre ou après des pluies.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Elegant_parrot",
+          "title": "Elegant Parrot - Breeding and Reproduction"
+        }
+      ]
+    }
+  }
+]

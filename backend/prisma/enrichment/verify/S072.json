@@ -1,0 +1,59 @@
+[
+  {
+    "speciesId": 165504395,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "sources: 'Helix_pomatia' -> https://en.wikipedia.org/wiki/Roman_snail (page vérifiée)",
+      "reproduction.sexualMaturityMonths: 18 mois CONTREDIT -> source : maturité après 2 à 5 ans (valeur mise à null, durée en notes)",
+      "reproduction.season -> fin mai à juillet (source) ; clutch 40-65 confirmé ; incubationDays 21 non confirmé -> null",
+      "feeding: ortie (préférence des juvéniles) confirmée ; fréquence fruits '3-4 fois/semaine' -> occasionnelle",
+      "behavior: 'nocturne, sociable' retiré (non confirmé) ; hermaphrodite et épiphragme (estivation/hibernation) confirmés ; longévité 20 ans (max 35) ajoutée",
+      "habitat: 40x30x30, 1x/mois retirés ; habitat naturel forêts/buissons/milieux anthropisés (source)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax 15-22, humidityMin/humidityMax 70-95 (non confirmés -> null)",
+      "behavior.sociability 'semi-grégaire' (non confirmé -> null)",
+      "health (source unique vcahospitals.com page d'accueil -> section null)",
+      "legislation : Haiku indiquait 'allowed' sans restriction, FAUX/incomplet : la source indique annexe V de la directive Habitats et, en France, ramassage interdit pour coquilles < 3 cm de diamètre et du 1er avril au 30 juin. Statut de détention non tranché -> section null (restriction de ramassage à signaler à l'équipe)",
+      "reproduction.breedingDifficulty 'facile' et notes 'accouplements réciproques' (non confirmés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 165617687,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation: citesAppendix I confirmé (source en.wikipedia Japanese_giant_salamander : 'Included on CITES Appendix I') ; statut permit_required conservé ; permits/restrictions reformulés (déclaration obligatoire inventée retirée) ; ajout Monument naturel spécial au Japon, UICN Vulnérable (source)",
+      "habitat.minSpaceSize: '200 L pour adulte' CONTREDIT (animal jusqu'à 1,5 m et 25 kg) -> très grand bassin",
+      "feeding: fréquence '2-3x/semaine' et mealFrequency every_2_days incohérentes avec 'métabolisme très lent, semaines sans manger' (source) -> espacée/null ; taille 5-15 cm et 'crustacés pointus' retirés ; régime élargi (crabes, vers, insectes, grenouilles, poissons, petits mammifères) selon la source",
+      "behavior: aquatique et nocturne confirmés ; longévité '50+ ans' -> record captif 52 ans (source)",
+      "reproduction: season août-septembre confirmée ; mâle gardant et ventilant les œufs confirmé ; soins aux larves jusqu'au printemps suivant ajoutés"
+    ],
+    "removed": [
+      "legislation.details.euAnnex 'A' (non confirmé par la source -> null)",
+      "source https://cites.org (page non spécifique)",
+      "habitat.tempMin/tempMax 10-18 (non confirmés -> null) ; health.prevention '10-18°C'",
+      "health (source unique vcahospitals.com -> section null)",
+      "reproduction: litterSizeMin/Max 400-500, sexualMaturityMonths 240 (non confirmés -> null), 'très rare en captivité' (non confirmé)",
+      "behavior.sociability 'solitaire' (non confirmé -> null)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 308455619,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "sources: 'Greylag_goose' (oie sauvage) -> https://en.wikipedia.org/wiki/Domestic_goose",
+      "behavior: 'bon si socialisé' CONTREDIT par la source (caractère très agressif, protectrice, bruyante, sensible aux mouvements inhabituels) -> surveillance indispensable ; 'couples monogames durables' et 'excellente cohabitation avec canards' retirés (non confirmés)",
+      "reproduction: source indique jusqu'à 100 œufs/an (5-12 chez l'oie sauvage), œufs de 120-170 g ; pontes '4-6 œufs' et 'deux pontes par an' non confirmés",
+      "feeding: '60% du régime' et 'plantes riches en tannins' retirés"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax 5-25 et '200 m² par couple' (non confirmés)",
+      "health (source unique vcahospitals.com -> section null)",
+      "legislation (statut non confirmé ; source legifrance page d'accueil)",
+      "reproduction: season mars-juin, incubationDays 28, litter 4-6, maturité 12 mois (absents de la source -> null)"
+    ],
+    "confidence": "medium"
+  }
+]

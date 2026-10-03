@@ -1,0 +1,61 @@
+[
+  {
+    "speciesId": 2441502,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.dietType: omnivore → herbivore (en/fr Wikipedia: herbivore) ; 'escargots/limaces' et 'besoin de protéines animales' retirés (Wikipedia: régime riche en fibres, pauvre en sucres et en protéines)",
+      "habitat.tempMin/Max 24/32 → 21/29 (en.wikipedia: côté frais 21-26°C, côté chaud 27-29°C)",
+      "reproduction.incubationDays: 75 → 100 (en.wikipedia: ~100 j en conditions naturelles ; 60 j en incubateur à 31,5°C, en notes)",
+      "reproduction.litterSizeMax 15 conservé (~15 œufs/ponte, jusqu'à 3 pontes) ; litterSizeMin 3 → null",
+      "reproduction.season: printemps-été → ponte en mai-juin (en.wikipedia)",
+      "reproduction.notes: '31,5°C seuil critique pour sex-ratio' retiré (31,5°C = température d'éclosion, pas un seuil)",
+      "behavior.sociability: semi-grégaire → solitaire (Wikipedia/Reptiles Magazine: plutôt territoriale) ; 'agressif envers les autres mâles' retiré (seule l'agressivité à l'accouplement est confirmée)",
+      "legislation: CITES II et UE Annexe A confirmés (fr.wikipedia Tortue bordée) ; 'certificat de capacité requis' et 'Directive Habitats' retirés (non confirmés)"
+    ],
+    "removed": [
+      "habitat.minSpaceSize (4 m²), substrat 10-15 cm, trempage 2-3x/sem, 4-6 h de soleil (non confirmés)",
+      "source https://www.tortoiseclub.org/.../MARGINATED_TORTOISE_CARE_SHEET_spring2014.pdf (PDF illisible, contenu non vérifiable)",
+      "source https://kingsnake.com/blog/archives/1805-... (non vérifiée)",
+      "source https://eunis.eea.europa.eu/species/Testudo marginata (non vérifiée, URL invalide avec espace)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2443074,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.dietType: carnivore → omnivore (Animal Diversity Web: omnivore, consomme aussi poissons morts et végétation) ; '90% de l'alimentation' retiré ; 'jeunes plus insectivores' retiré (non confirmé) ; différences femelles/mâles ajoutées (ADW)",
+      "behavior: 'très agressif envers autres tortues et poissons, isolement préféré' contredit (Wikipedia/ADW: farouche, fuit dans l'eau, bask en groupe) ; 'femelles agressives envers mâles' retiré",
+      "reproduction: 'possible surhibernation en nid' retiré ; saison/ponte alignées sur Wikipedia (ponte mai-juillet) ; incubation 50-70 j, 6-20 œufs, sexe par T° (25°C mâles / 30-35°C femelles) confirmés",
+      "habitat.hygieneNotes: 'eau douce à légèrement saumâtre' et '25-30% hebdo' retirés ; type de source Wikipedia corrigé"
+    ],
+    "removed": [
+      "legislation entière → null (CITES III + 'permis requis depuis 2006' non confirmés ; PDF cites.org non vérifié)",
+      "habitat.tempMin/tempMax (20/28), minSpaceSize (150-200 L, sous-dimensionné pour une femelle de 18-27 cm), UVB 8-12 h, basking 28-32°C : non confirmés",
+      "reproduction.sexualMaturityMonths 36 → null (ADW : femelles ~14 ans)",
+      "source https://cites.org/.../F-CoP19-Prop-24.pdf (non vérifiée) ; source https://en.wikipedia.org/wiki/Texas_map_turtle remplacée par Northern_map_turtle (autre espèce)",
+      "source dubiaroaches retirée de feeding/habitat (page sans contenu de soin), gardée seule en health (confiance basse sur health)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2445755,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.temp 22-28 → 16-26 (Reptiles Magazine: jour 22-26°C, nuit 16-18°C) ; humidité 65-90 → 65-100% ; terrarium 25x25x40 → ~25x25x50 cm (10x10x20 in), couples/trios 30x40x50 cm",
+      "feeding: 'pas de suppléments synthétiques' contredit (insectes saupoudrés de calcium + multivitamines) ; 'grisets', 'grillons 3-5 mm' retirés ; fréquences blattes/escargots non confirmées → 'variable'",
+      "behavior: 'isolation obligatoire, cannibalisme' → espèce solitaire mais couples/trios d'élevage logés ensemble (Reptiles Magazine) ; cannibalisme retiré (non confirmé)",
+      "health: 'vitamine A', 'mue incomplète après 2-3 semaines', 'substrat 5-7 cm' retirés (non confirmés)",
+      "reproduction: incubation 90 (90-120 j, Wikipedia) ; 2 œufs/ponte, ~30 j entre pontes confirmés ; 'reproduction rarissime' retiré",
+      "legislation.restrictions: 'quotas Madagascar' / 'espèce protégée Madagascar' retirés ; CITES II confirmé (en.wikipedia) ; source retypée (wikipedia, pas official)"
+    ],
+    "removed": [
+      "legislation.euAnnex 'B' → null (non confirmé)",
+      "reproduction.season, sexualMaturityMonths (24) → null (non confirmés)",
+      "habitat.lightNeeds: 'pas d'UVB requis' retiré (non confirmé)",
+      "source https://pierrewildlife.com/?p=15849 (hors habitat/feeding, HTTP 404)",
+      "source https://cites.org/.../E13-P27.pdf (non vérifiée)"
+    ],
+    "confidence": "medium"
+  }
+]

@@ -1,0 +1,432 @@
+[
+  {
+    "speciesId": 2436412,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Fruits et légumes frais variés (pomme, patate douce, banane)",
+          "frequency": "quotidienne",
+          "notes": "À l'état sauvage : fruits, feuilles et fleurs (gousses de tamarinier / kily très appréciées). Varier l'apport et rester modéré sur les fruits sucrés."
+        },
+        {
+          "name": "Biscuits commerciaux pour primates et feuillage (browse)",
+          "frequency": "quotidienne",
+          "notes": "En captivité : biscuits de qualité zoo, produits frais et feuillage frais pour le fourragement naturel."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments très riches en fer",
+          "reason": "Les lémuriens captifs sont sujets à une surcharge en fer"
+        },
+        {
+          "name": "Fruits sucrés et transformés en excès",
+          "reason": "Une étude (JZAR) montre qu'un régime sans fruits réduit l'agressivité et les comportements autodirigés chez des lémuriens captifs, dont Lemur catta"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime proche de l'état sauvage : feuillage et fibres, fruits en quantité raisonnable. Enrichir l'enclos avec des aliments à chercher. Eau fraîche en permanence.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://ielc.libguides.com/sdzg/factsheets/ringtailedlemur/diet",
+          "title": "San Diego Zoo Wildlife Alliance - Ring-tailed Lemur Diet"
+        },
+        {
+          "type": "guide",
+          "url": "https://ielc.libguides.com/sdzg/factsheets/ringtailedlemur/summary",
+          "title": "San Diego Zoo Wildlife Alliance - Ring-tailed Lemur Summary"
+        },
+        {
+          "type": "scientific",
+          "url": "https://www.jzar.org/jzar/article/view/119",
+          "title": "Aggression and self-directed behaviour of captive lemurs is reduced by feeding fruit-free diets - JZAR"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle régulière. Les lémuriens catta font des bains de soleil tôt le matin quand la température est inférieure à 13 °C et se regroupent pour se réchauffer.",
+      "activityEnrichment": "Fourragement, enrichissement vertical, arbres et structures pour grimper et se reposer en groupe.",
+      "hygieneNotes": "Nettoyage régulier des zones de repos. Vérifier régulièrement la présence de parasites. Eau fraîche quotidienne.",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://ielc.libguides.com/sdzg/factsheets/ringtailedlemur/summary",
+          "title": "San Diego Zoo Wildlife Alliance - Ring-tailed Lemur Summary"
+        },
+        {
+          "type": "scientific",
+          "url": "https://pure.psu.edu/en/publications/behavioral-thermoregulation-in-lemur-catta-the-significance-of-su-3/",
+          "title": "Behavioral Thermoregulation in Lemur catta: The significance of sunning and huddling behaviors"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Strictement diurne. Animal social très hiérarchisé : les femelles sont dominantes sur les mâles. Vit en troupes de 3 à 27 individus (jusqu'à environ 30 selon Wikipédia).",
+      "sociability": "grégaire",
+      "difficultyLevel": "avance",
+      "compatibilityWithChildren": "Déconseillé : primate sauvage complexe, besoin de groupe stable, hiérarchies marquées.",
+      "compatibilityWithOtherAnimals": "Doit vivre en groupe de congénères. Cohabitation avec d'autres espèces déconseillée.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://ielc.libguides.com/sdzg/factsheets/ringtailedlemur/summary",
+          "title": "San Diego Zoo Wildlife Alliance - Ring-tailed Lemur Summary"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Maki_catta",
+          "title": "Maki catta - Wikipédia FR"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Toxoplasmose",
+          "symptoms": "Fièvre, léthargie, apathie, anorexie, avortement possible.",
+          "prevention": "Éviter tout contact avec des chats et leurs déjections. Hygiène stricte. Cuire complètement tout aliment d'origine animale.",
+          "whenToConsult": "Immédiatement en cas d'inappétence ou de léthargie : les lémuriens figurent parmi les espèces les plus sensibles."
+        },
+        {
+          "name": "Entérocolite aiguë (bactérienne)",
+          "symptoms": "Anorexie, léthargie, douleurs abdominales, vomissements, diarrhée.",
+          "prevention": "Alimentation équilibrée, eau propre, hygiène de l'enclos, éviter le stress et la surpopulation.",
+          "whenToConsult": "Immédiatement : risque d'évolution rapide."
+        },
+        {
+          "name": "Parasitoses intestinales",
+          "symptoms": "Diarrhée, perte de poids, abattement.",
+          "prevention": "Hygiène régulière, eau propre, aliments frais, analyses fécales régulières.",
+          "whenToConsult": "Dès apparition de diarrhée persistante ou de perte de poids."
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://ojs.unlpam.edu.ar/index.php/veterinaria/article/view/8471",
+          "title": "Toxoplasmosis in ring-tailed lemur colonies (Lemur catta) under human care and its medical management"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": ["Certificat CITES (annexe I)"],
+        "restrictions": ["Espèce inscrite à l'annexe I de la CITES : commerce international interdit sauf dérogations"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Maki_catta",
+          "title": "Maki catta - Wikipédia FR (CITES annexe I)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "naissances en août",
+      "gestationDays": 135,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 3,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": "facile",
+      "notes": "Gestation de 120 à 136 jours (Wikipédia) ou 134 à 144 jours (San Diego Zoo). Un seul petit le plus souvent, jumeaux occasionnels, triplés rares. Saison des naissances courte, en août. Maturité sexuelle des femelles vers 2 ans. L'espèce se reproduit facilement en captivité.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://ielc.libguides.com/sdzg/factsheets/ringtailedlemur/reproduction",
+          "title": "San Diego Zoo Wildlife Alliance - Ring-tailed Lemur Reproduction"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Maki_catta",
+          "title": "Maki catta - Wikipédia FR"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2436469,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes vivants (criquets, vers de farine, mouches des fruits)",
+          "frequency": "quotidienne",
+          "notes": "Environ 40 % du régime naturel. Source protéique essentielle ; les insectes vivants favorisent le comportement de fourragement."
+        },
+        {
+          "name": "Fruits frais et gommes d'arbres (mangue, papaye, fruits rouges)",
+          "frequency": "quotidienne",
+          "notes": "Fruits mûrs privilégiés (environ 38 % du régime naturel). Gommes et exsudats végétaux (environ 14 %) pour l'enrichissement."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Apports déséquilibrés en calcium et phosphore",
+          "reason": "Le rapport calcium/phosphore doit rester équilibré chez les callitrichidés captifs"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Équilibre proche du régime naturel : environ 38 % de fruits, 40 % d'insectes, 14 % de gommes. Supplémentation vitaminique sur avis vétérinaire.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Saguinus_oedipus",
+          "title": "Animal Diversity Web - Saguinus oedipus (Cotton-top Tamarin)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cotton-top_tamarin",
+          "title": "Cotton-top tamarin - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle ou simulée avec un cycle jour/nuit régulier. Éviter l'exposition directe intensive au soleil.",
+      "activityEnrichment": "Branches épaisses pour sauter et grimper (espèce arboricole). Feuillage pour la nidification. Insectes vivants cachés (fourragement). Nid pour le repos.",
+      "hygieneNotes": "Nettoyage régulier des nids et du sol. Eau fraîche quotidienne.",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Saguinus_oedipus",
+          "title": "Animal Diversity Web - Cotton-top Tamarin"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Diurne et arboricole. Vit en groupes familiaux de 3 à 9 individus, avec un couple dominant seul reproducteur ; les autres membres aident à élever les jeunes (reproduction coopérative). Les mâles s'investissent fortement dans les soins aux jeunes.",
+      "sociability": "grégaire",
+      "difficultyLevel": "avance",
+      "compatibilityWithChildren": "Déconseillé : primate complexe vivant en groupe hiérarchisé, sensible au stress.",
+      "compatibilityWithOtherAnimals": "Doit vivre en groupe familial stable. Cohabitation avec d'autres espèces déconseillée.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Saguinus_oedipus",
+          "title": "Animal Diversity Web - Cotton-top Tamarin"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cotton-top_tamarin",
+          "title": "Cotton-top tamarin - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Encéphalitozoonose (Encephalitozoon)",
+          "symptoms": "Mortalité néonatale, signes neurologiques possibles (tremblements, ataxie).",
+          "prevention": "Hygiène stricte des nids et des zones de reproduction. Surveillance étroite des femelles gestantes.",
+          "whenToConsult": "Immédiatement en cas de signes neurologiques ou de mortalité chez les jeunes."
+        },
+        {
+          "name": "Colite chronique",
+          "symptoms": "Diarrhée chronique, malabsorption, perte de poids, abattement. L'espèce est très sujette à la colite en captivité.",
+          "prevention": "Alimentation riche en fibres, eau propre, réduction du stress, hygiène impeccable, éviter la surpopulation.",
+          "whenToConsult": "Dès les premiers signes digestifs."
+        },
+        {
+          "name": "Parasitoses intestinales",
+          "symptoms": "Diarrhée, malabsorption, perte de poids.",
+          "prevention": "Hygiène rigoureuse, aliments frais, analyses parasitologiques régulières.",
+          "whenToConsult": "Dès apparition de diarrhée ou d'amaigrissement."
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://noahspath.com/index.php/servicio/ver/4/5/12/Encefalitozoonosis-en-tamarinos.html",
+          "title": "Noah's Path - Encephalitozoonosis in Tamarins (Disseminated encephalitozoonosis in cotton-top and emperor tamarins)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cotton-top_tamarin",
+          "title": "Cotton-top tamarin - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": ["Certificat CITES (annexe I)"],
+        "restrictions": ["Espèce inscrite à l'annexe I de la CITES : commerce international interdit sauf dérogations"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cotton-top_tamarin",
+          "title": "Cotton-top tamarin - Wikipedia (CITES Appendix I)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": 140,
+      "incubationDays": null,
+      "litterSizeMin": 2,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": 18,
+      "breedingDifficulty": "modere",
+      "notes": "Gestation d'environ 140 jours. Jumeaux non identiques, deux naissances par an. Seul le couple dominant se reproduit au sein du groupe. Maturité sexuelle : 18 mois chez la femelle, 24 mois chez le mâle.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Saguinus_oedipus",
+          "title": "Animal Diversity Web - Saguinus oedipus"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2436484,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes vivants : criquets, grillons, sauterelles, insectes volants",
+          "frequency": "quotidienne",
+          "notes": "Régime essentiellement insectivore. Les insectes vivants stimulent la chasse naturelle."
+        },
+        {
+          "name": "Petits vertébrés occasionnels : lézards, oisillons",
+          "frequency": "hebdomadaire",
+          "notes": "Complément naturel dans le régime sauvage (lézards, serpents, petits oiseaux)."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments non vivants ou immobiles",
+          "reason": "Prédateur de proies actives : les aliments inertes peuvent être refusés"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Prédateur strictement carnivore/insectivore. Pas de fruits ni de végétaux. Dispositif de chasse (insectes vivants) essentiel.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Tarsius_syrichta",
+          "title": "Animal Diversity Web - Tarsius syrichta (Philippine Tarsier)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tarsier_des_Philippines",
+          "title": "Tarsier des Philippines - Wikipédia FR"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Espèce nocturne : lumière tamisée la journée, zones d'ombre et abris obscurs pour le repos diurne.",
+      "activityEnrichment": "Branches verticales fines pour les sauts (espèce arboricole). Insectes dispersés pour la chasse active. Zones de repos en hauteur.",
+      "hygieneNotes": "Eau fraîche. Nettoyage doux pour limiter le stress (espèce très sensible).",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Tarsius_syrichta",
+          "title": "Animal Diversity Web - Tarsius syrichta"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Nocturne et arboricole. Territorial ; vit en couples monogames ou en petits groupes de quatre individus au maximum. Très sensible au stress en captivité : cas de comportements d'automutilation rapportés.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Fortement déconseillé : espèce extrêmement sensible au stress en captivité (bruit, flash, manipulation).",
+      "compatibilityWithOtherAnimals": "Couples monogames ou individus isolés uniquement. Très sensible au stress social. Cohabitation avec d'autres espèces déconseillée.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Tarsius_syrichta",
+          "title": "Animal Diversity Web - Tarsius syrichta"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tarsier_des_Philippines",
+          "title": "Tarsier des Philippines - Wikipédia FR"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Pathologie liée au stress (captivité)",
+          "symptoms": "Refus alimentaire, apathie, automutilation, comportements stéréotypés, mort brutale possible.",
+          "prevention": "Minimiser la manipulation et les stimulations (bruit, flash). Enrichissement adapté (insectes vivants, hauteur, obscurité partielle). Environnement très calme.",
+          "whenToConsult": "Immédiatement en cas de refus alimentaire ou de comportement anormal."
+        },
+        {
+          "name": "Traumatisme de capture et d'acclimatation",
+          "symptoms": "Refus alimentaire, blessures, état de choc, décès possible dans les premières semaines.",
+          "prevention": "Éviter capture et transport. Quarantaine et acclimatation longues et douces.",
+          "whenToConsult": "Immédiatement : pronostic souvent réservé."
+        },
+        {
+          "name": "Maladies parasitaires/infectieuses (données limitées)",
+          "symptoms": "Peu documentées en captivité.",
+          "prevention": "Hygiène stricte, insectes de source saine. Suivi par un vétérinaire spécialisé en faune exotique.",
+          "whenToConsult": "Dès tout signe anormal : peu de vétérinaires ont l'expérience de l'espèce."
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Tarsius_syrichta",
+          "title": "Animal Diversity Web - Tarsius syrichta"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tarsier_des_Philippines",
+          "title": "Tarsier des Philippines - Wikipédia FR"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 180,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Gestation d'environ 6 mois (179 jours). Un seul petit par naissance. Reproduction possible deux fois par an, toute l'année, au sein de couples monogames.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Tarsius_syrichta",
+          "title": "Animal Diversity Web - Tarsius syrichta"
+        }
+      ]
+    }
+  }
+]

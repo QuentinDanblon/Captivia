@@ -1,0 +1,29 @@
+name: Release
+
+# release-please en mode manifeste : release-please-config.json (un paquet par dossier,
+# type de version par paquet) + .release-please-manifest.json (versions courantes).
+# NE PAS passer « release-type » à l'action : cela désactiverait le mode manifeste.
+#
+# Prérequis du dépôt : Settings → Actions → General → « Allow GitHub Actions to create and
+# approve pull requests » (sans cela, l'action ne peut pas ouvrir la PR de release).
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    name: Create Release PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release PR
+        uses: googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

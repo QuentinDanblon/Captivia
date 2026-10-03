@@ -1,0 +1,516 @@
+[
+  {
+    "speciesId": 2342738,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Flocons ou pastilles coulantes de qualité",
+          "frequency": "quotidienne",
+          "notes": "Une fois par jour en petites portions consommées en 2-3 minutes"
+        },
+        {
+          "name": "Aliments vivants ou congelés (vers de vase, artémias, daphnies)",
+          "frequency": "régulière",
+          "notes": "Régime à dominante animale : varier les aliments"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Nourriture trop grande",
+          "reason": "Petit poisson de fond (environ 5 cm à l'âge adulte)"
+        },
+        {
+          "name": "Excès de nourriture sans jour de jeûne",
+          "reason": "Un à deux jours de jeûne par semaine sont recommandés pour éviter la suralimentation"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Poisson de fond qui se nourrit en fouillant le substrat ; un substrat fin non coupant est nécessaire.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.zooplus.fr/magazine/poisson/guide-des-especes-de-poissons/corydoras-panda",
+          "title": "Corydoras panda - Guide Zooplus"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/corydoras-panda",
+          "title": "Corydoras panda - Fishipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Corydoras_panda",
+          "title": "Corydoras panda - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 20,
+      "tempMax": 26,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "80 L minimum (50 cm de longueur) pour un groupe d'au moins 8 individus",
+      "lightNeeds": "Lumière modérée, bac bien planté avec cachettes",
+      "activityEnrichment": "Décoration variée avec cachettes et plantes ; substrat de sable fin ou non coupant pour fouiller",
+      "hygieneNotes": "Qualité d'eau et propreté du substrat à surveiller scrupuleusement. Changements d'eau réguliers (20-30 %). Filtre efficace sans courant trop fort.",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/corydoras-panda",
+          "title": "Corydoras panda - Fishipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.zooplus.fr/magazine/poisson/guide-des-especes-de-poissons/corydoras-panda",
+          "title": "Corydoras panda - Zooplus"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Corydoras_panda",
+          "title": "Corydoras panda - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson pacifique, sociable et grégaire, qui vit près du fond de l'aquarium et fouille constamment le substrat avec ses barbillons. Peut respirer de l'air à la surface.",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Facile à observer, mais sensible à la qualité de l'eau : demande un entretien rigoureux",
+      "compatibilityWithOtherAnimals": "Bonne cohabitation avec les poissons paisibles et d'autres Corydoras. Groupe d'au moins 8 individus recommandé.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/corydoras-panda",
+          "title": "Corydoras panda - Fishipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.zooplus.fr/magazine/poisson/guide-des-especes-de-poissons/corydoras-panda",
+          "title": "Corydoras panda - Zooplus"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Corydoras_panda",
+          "title": "Corydoras panda - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Pourriture des nageoires (Fin Rot)",
+          "symptoms": "Nageoires effilochées, blanches ou grisâtres ; détérioration progressive des tissus",
+          "prevention": "Eau de qualité excellente, changements d'eau réguliers, pas de surpopulation, substrat propre et non coupant",
+          "whenToConsult": "Au premier signe d'effilochage"
+        },
+        {
+          "name": "Infections bactériennes",
+          "symptoms": "Taches blanches ou rouges sur le corps, léthargie, perte d'appétit, gonflement de l'abdomen",
+          "prevention": "Paramètres d'eau stables, filtre efficace, introduction progressive des nouveaux poissons",
+          "whenToConsult": "Dès l'apparition de symptômes ; tout traitement doit se faire sur avis d'un vétérinaire ou d'un aquariophile expérimenté"
+        },
+        {
+          "name": "Parasitoses (Oodinium, Ichthyophthirius)",
+          "symptoms": "Voile blanchâtre ou poudre dorée sur le corps, grattage contre le décor, nage anormale, perte d'appétit",
+          "prevention": "Quarantaine des nouveaux poissons, eau stable, filtre et décor entretenus régulièrement",
+          "whenToConsult": "Dès l'observation des symptômes ; demander conseil avant de traiter (les poissons de fond sans écailles sont sensibles à certains médicaments)"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.vin.com/doc/?id=3863674",
+          "title": "Parasitic Diseases of Aquarium Fishes - VIN"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Corydoras_panda",
+          "title": "Corydoras panda - Wikipedia (qualité d'eau et propreté du substrat)"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Corydoras_panda",
+          "title": "Corydoras panda - Wikipedia (poisson d'aquarium ; IUCN quasi menacé, aucune mention CITES)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 15,
+      "litterSizeMax": 25,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Ovipare : la ponte (15 à 25 œufs) est déclenchée par un changement d'eau plus fraîche et plus douce, qui simule la saison des pluies. Les œufs, déposés sur des surfaces lisses, éclosent en 3-4 jours à 22 °C ; les adultes mangent leurs œufs et alevins, d'où le déplacement des œufs dans un bac dédié. Maturité sexuelle estimée entre 10 semaines et 5 mois selon les sources.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/corydoras-panda",
+          "title": "Corydoras panda - Fishipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.zooplus.fr/magazine/poisson/guide-des-especes-de-poissons/corydoras-panda",
+          "title": "Corydoras panda - Zooplus"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Corydoras_panda",
+          "title": "Corydoras panda - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2354003,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Flocons ou micro-pellets de qualité",
+          "frequency": "quotidienne",
+          "notes": "Portions consommées en 2-3 minutes"
+        },
+        {
+          "name": "Aliments vivants ou congelés (daphnies, larves de moustiques, artémias, vers de vase)",
+          "frequency": "régulière",
+          "notes": "Enrichissent le régime"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments trop gros",
+          "reason": "Petit poisson (environ 4 à 6 cm)"
+        },
+        {
+          "name": "Excès de nourriture",
+          "reason": "Dégrade la qualité d'eau et favorise la suralimentation"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Omnivore à tendance carnivore ; apprécie les petites proies vivantes ou congelées.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/nematobrycon-palmeri",
+          "title": "Nematobrycon palmeri - Fishipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/characins/emperor-tetra",
+          "title": "Emperor Tetra Care - Fishkeeper"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emperor_tetra",
+          "title": "Nematobrycon palmeri - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 23,
+      "tempMax": 27,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "100 L minimum (60 cm de façade) pour un groupe d'au moins 10 individus",
+      "lightNeeds": "Lumière tamisée ; plantes flottantes en surface pour faire ressortir la teinte violacée",
+      "activityEnrichment": "Aquarium bien planté (plantes enracinées et flottantes) avec bois flotté fin ; zones de nage dégagées",
+      "hygieneNotes": "Changements d'eau réguliers. Filtre modéré, pas de courant violent. Eau neutre à légèrement acide.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/nematobrycon-palmeri",
+          "title": "Nematobrycon palmeri - Fishipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/characins/emperor-tetra",
+          "title": "Emperor Tetra Care - Fishkeeper"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emperor_tetra",
+          "title": "Nematobrycon palmeri - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson placide qui vit en banc. Coloration bleu-noir à reflets avec reflet violacé. Peut être perturbé par des espèces trop agitées.",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon ; poisson intéressant à observer",
+      "compatibilityWithOtherAnimals": "Compatible avec les poissons paisibles de taille similaire (autres petits tétras). À éviter avec des espèces agitées, agressives ou trop grandes.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/nematobrycon-palmeri",
+          "title": "Nematobrycon palmeri - Fishipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emperor_tetra",
+          "title": "Nematobrycon palmeri - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ichthyophthirius (maladie des points blancs)",
+          "symptoms": "Points blancs sur le corps et les nageoires, grattage contre le décor, nage anormale, perte d'appétit",
+          "prevention": "Paramètres d'eau stables, quarantaine des nouveaux poissons, ne pas introduire de poissons stressés",
+          "whenToConsult": "Dès l'apparition des points ; traitement sur avis d'un vétérinaire ou d'un aquariophile expérimenté"
+        },
+        {
+          "name": "Oodinium (maladie du velours)",
+          "symptoms": "Film poudré gris-doré sur le corps, grattage, nage erratique, perte de couleur",
+          "prevention": "Eau stable, quarantaine régulière, hygiène stricte du bac",
+          "whenToConsult": "Au premier signe ; demander conseil pour le choix du traitement"
+        },
+        {
+          "name": "Infections bactériennes",
+          "symptoms": "Taches rouges, gonflement du corps, nageoires abîmées, léthargie",
+          "prevention": "Eau de qualité excellente, pas de surpopulation, entretien régulier du filtre, limiter le stress",
+          "whenToConsult": "Dès l'apparition des symptômes ; tout traitement doit être prescrit par un vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.vin.com/doc/?id=3863674",
+          "title": "Parasitic Diseases of Aquarium Fishes - VIN"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emperor_tetra",
+          "title": "Nematobrycon palmeri - Wikipedia (poisson d'aquarium courant, aucune mention CITES)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ovipare, pond librement en pleine eau, quelques œufs à la fois pendant plusieurs heures, sans soins parentaux. Mâles polygames ; un mâle pour plusieurs femelles (environ 3 femelles pour 1 mâle) est conseillé. Éclosion en 24-36 heures selon la température ; les alevins nagent librement 4-5 jours plus tard et sont nourris d'infusoires puis de nauplies d'artémia. Bac de reproduction séparé, eau douce et légèrement acide.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/characins/emperor-tetra",
+          "title": "Emperor Tetra Care - Fishkeeper"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/poissons/nematobrycon-palmeri",
+          "title": "Nematobrycon palmeri - Fishipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2354646,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Flocons ou micro-pellets de qualité",
+          "frequency": "quotidienne",
+          "notes": "Aliment de base"
+        },
+        {
+          "name": "Aliments carnés vivants ou congelés (vers de vase, artémias, daphnies, larves de moustiques)",
+          "frequency": "régulière",
+          "notes": "Espèce appréciant les aliments carnés (vers, petits insectes, micro-crustacés)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Nourriture trop volumineuse",
+          "reason": "Petit poisson (environ 4 cm)"
+        },
+        {
+          "name": "Suralimentation chronique",
+          "reason": "Dégradation de la qualité d'eau"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Omnivore à tendance carnée ; apprécie les petits crustacés et larves d'insectes.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/fr/poissons/hyphessobrycon-megalopterus",
+          "title": "Hyphessobrycon megalopterus - Fishipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://riverparkaquatics.co.uk/black-phantom-tetra-hyphessobrycon-megalopterus/",
+          "title": "Black Phantom Tetra Care - River Park Aquatics"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hyphessobrycon_megalopterus",
+          "title": "Hyphessobrycon megalopterus - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "75 à 100 L minimum selon les sources, pour un groupe d'au moins 6 à 10 individus",
+      "lightNeeds": "Lumière tamisée ; plantes flottantes en surface",
+      "activityEnrichment": "Aquarium densément planté avec cachettes ; zones de nage dégagées. Espèce originaire des bassins du Guaporé et du Paraguay (eaux lentes riches en végétation).",
+      "hygieneNotes": "Changements d'eau réguliers. Filtre doux, pas de courant violent.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/fr/poissons/hyphessobrycon-megalopterus",
+          "title": "Hyphessobrycon megalopterus - Fishipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://riverparkaquatics.co.uk/black-phantom-tetra-hyphessobrycon-megalopterus/",
+          "title": "Black Phantom Tetra Habitat - River Park Aquatics"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hyphessobrycon_megalopterus",
+          "title": "Hyphessobrycon megalopterus - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson très grégaire qui nage en banc, stressé et fragile s'il est isolé. Reste volontiers près des berges et de la végétation dans la nature.",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon ; poisson actif et intéressant à observer en banc",
+      "compatibilityWithOtherAnimals": "Compatible avec les poissons paisibles d'aquarium communautaire (autres tétras, petits poissons paisibles). À éviter avec des prédateurs ou des poissons agressifs.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/fr/poissons/hyphessobrycon-megalopterus",
+          "title": "Hyphessobrycon megalopterus - Fishipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hyphessobrycon_megalopterus",
+          "title": "Hyphessobrycon megalopterus - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ichthyophthirius (maladie des points blancs)",
+          "symptoms": "Points blancs visibles sur la peau et les nageoires, grattage répété contre le décor, nage anormale, perte d'appétit",
+          "prevention": "Quarantaine des nouveaux poissons, eau stable, limiter le stress",
+          "whenToConsult": "Dès la première observation ; traitement sur avis d'un vétérinaire ou d'un aquariophile expérimenté"
+        },
+        {
+          "name": "Infections bactériennes (dont columnaris)",
+          "symptoms": "Taches rouges ou noires, nageoires effilochées, gonflement abdominal, léthargie, perte de couleur",
+          "prevention": "Eau de qualité optimale, filtration efficace, pas de surpopulation, alimentation variée",
+          "whenToConsult": "Dès l'apparition de symptômes ; tout traitement antibiotique doit être prescrit par un vétérinaire"
+        },
+        {
+          "name": "Parasitoses (Oodinium/velvet, trématodes)",
+          "symptoms": "Film poudré or/gris sur la peau, grattage excessif, perte d'appétit, amaigrissement, nage erratique",
+          "prevention": "Eau stable et de qualité, hygiène du bac, quarantaine des nouveaux arrivants, alimentation saine",
+          "whenToConsult": "Rapidement après le diagnostic ; traitement sur avis vétérinaire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://aquariadise.com/black-phantom-tetra/",
+          "title": "Black Phantom Tetra - Aquariadise"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.vin.com/doc/?id=3863674",
+          "title": "Parasitic Diseases of Aquarium Fishes - VIN"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hyphessobrycon_megalopterus",
+          "title": "Hyphessobrycon megalopterus - Wikipedia (poisson d'aquarium, presque tous élevés en captivité ; IUCN préoccupation mineure)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 300,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare, pond en eau libre sans soins parentaux (jusqu'à 300 œufs selon une fiche d'élevage). Les parents doivent être retirés après la ponte pour éviter qu'ils ne mangent les œufs. Les alevins se nourrissent d'abord d'infusoires puis de nauplies d'artémia. Reproduction réputée difficile en captivité. Dans la nature, la reproduction a lieu en saison des pluies.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/fr/poissons/hyphessobrycon-megalopterus",
+          "title": "Hyphessobrycon megalopterus - Fishipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://aquariadise.com/black-phantom-tetra/",
+          "title": "Black Phantom Tetra - Aquariadise"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hyphessobrycon_megalopterus",
+          "title": "Hyphessobrycon megalopterus - Wikipedia"
+        }
+      ]
+    }
+  }
+]

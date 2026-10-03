@@ -1,0 +1,68 @@
+[
+  {
+    "speciesId": 5220687,
+    "checked": [
+      "health",
+      "reproduction"
+    ],
+    "corrected": [
+      "reproduction.gestationDays: 270 → null (espèce ovipare)",
+      "reproduction.incubationDays: 240 → null, plage 189 j-9 mois en notes (en.wikipedia Fiji_crested_iguana)",
+      "reproduction.litterSizeMin/Max: 5/7 → 4/6 (page B. vitiensis ; 5-7 concernait B. bulabula)",
+      "reproduction.season: toute l'année → mars-avril, parade en janvier",
+      "reproduction.sexualMaturityMonths: 36 → null (non indiqué pour B. vitiensis)",
+      "health.prevention: chiffres d'humidité/température/UVB non sourcés retirés"
+    ],
+    "removed": [
+      "source en.wikipedia.org/wiki/Fiji_banded_iguana (concerne B. bulabula, autre espèce)",
+      "reproduction.notes 'gestation 9 mois', 'élevage hautement réglementé' (non confirmés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5224503,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "reproduction.gestationDays: 60 → null (ovipare)",
+      "reproduction.notes: ponte juin-juillet (pas 'juillet sous débris')",
+      "feeding: item 'serpents venimeux à éviter' retiré (le régime naturel inclut des serpents)",
+      "behavior: 'excellent mangeur' retiré",
+      "health: 'pelage terne' → 'peau terne' (serpent)",
+      "legislation allowed conservé : fr.wikipedia indique aucune loi spécifique en France"
+    ],
+    "removed": [
+      "feeding.foodsToAvoid 'Serpents venimeux'",
+      "source 'official' en.wikipedia Species status remplacée par fr.wikipedia Lampropeltis_triangulum"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5225659,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding.mealFrequency weekly → null (jeunes 1-2 sem., adultes 2-4 sem. selon en.wikipedia)",
+      "behavior: 'striement' → constricteur ; sous-espèces irritables mcdowelli et variegata (en.wikipedia)",
+      "reproduction.notes: 'incubation 2 mois' retiré, soins maternels cessent à l'éclosion"
+    ],
+    "removed": [
+      "legislation entière (aucun statut légal indiqué par la page citée)",
+      "habitat.minSpaceSize '120x60x60' (non confirmé, trop petit pour 2-4 m)",
+      "reproduction.season, incubationDays 60, sexualMaturityMonths 18 (non indiqués)"
+    ],
+    "confidence": "medium"
+  }
+]

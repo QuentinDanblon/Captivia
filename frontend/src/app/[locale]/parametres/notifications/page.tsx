@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import Link from 'next/link';
+import { isGuestUser } from '@/lib/guest';
+import { Link } from '@/i18n/navigation';
 
 /** Fréquences de répétition */
 export type RecurrenceKind =
@@ -26,6 +27,36 @@ export type TypeSchedule = {
   intervalHours?: number; // 1-24 si recurrence === 'hourly'
 };
 
+/** Forme brute (non fiable) d'un horaire renvoyé par l'API */
+interface RawTypeSchedule {
+  time?: unknown;
+  recurrence?: unknown;
+  date?: unknown;
+  weekDay?: unknown;
+  dayOfMonth?: unknown;
+  intervalHours?: unknown;
+}
+
+/** Forme brute (non fiable) des préférences renvoyées par l'API */
+interface RawPreferences {
+  types?: Record<string, unknown>;
+  typeSchedules?: Record<string, unknown>;
+  schedule?: unknown;
+  snooze?: unknown;
+  deliveryChannel?: unknown;
+  [key: string]: unknown;
+}
+
+/** Préférences de notification telles que gérées par la page */
+interface NotificationPreferences {
+  types?: Record<string, boolean>;
+  typeSchedules?: Record<string, TypeSchedule>;
+  schedule?: { start: string; end: string };
+  snooze?: number;
+  deliveryChannel?: string;
+  [key: string]: unknown;
+}
+
 const DEFAULT_TYPE_SCHEDULE: TypeSchedule = {
   time: '08:00',
   recurrence: 'daily',
@@ -41,33 +72,54 @@ const RECURRENCE_OPTIONS: { value: RecurrenceKind; labelKey: string }[] = [
   { value: 'once', labelKey: 'notifications.recurrenceOnce' },
 ];
 
-/** Sujets suggérés pour guider l'utilisateur (il peut aussi créer les siens) */
-const SUGGESTED_NOTIFICATION_TYPES = [
-  'Nourrissage',
-  'Nettoyage',
-  'UVB / éclairage',
-  'Santé',
-  'Rappel vétérinaire',
-  'Mue',
-  'Pondération',
-  'Bain',
-  'Température',
-  'Humidité',
-] as const;
+/**
+ * Sujets suggérés pour guider l'utilisateur (il peut aussi créer les siens).
+ * Les clés ci-dessous sont les identifiants stockés côté API (inchangés) ;
+ * seul l'affichage est traduit via notifications.suggested.<id>.
+ */
+const SUGGESTED_TYPE_LABEL_IDS: Record<string, string> = {
+  'Nourrissage': 'feeding',
+  'Nettoyage': 'cleaning',
+  'UVB / éclairage': 'uvb',
+  'Santé': 'health',
+  'Rappel vétérinaire': 'vet',
+  'Mue': 'shedding',
+  'Pondération': 'weighing',
+  'Bain': 'bath',
+  'Température': 'temperature',
+  'Humidité': 'humidity',
+};
+const SUGGESTED_NOTIFICATION_TYPES = Object.keys(SUGGESTED_TYPE_LABEL_IDS);
 
-const getApiBase = () =>
-  typeof process !== 'undefined' && process.env.NEXT_PUBLIC_API_URL
-    ? process.env.NEXT_PUBLIC_API_URL
-    : 'http://localhost:3001';
+import { authFetch } from '@/lib/api';
+import { API_URL } from '@/lib/config';
+import { localDayKey } from '@/lib/dates';
+import {
+  fetchVapidPublicKey,
+  resolvePushStatus,
+  subscribeToPush,
+  unsubscribeFromPush,
+  type PushStatus,
+} from '@/lib/web-push';
+
+const getApiBase = () => API_URL;
 
 export default function NotificationsPreferencesPage() {
   const t = useTranslations();
+  const typeLabel = (type: string): string => {
+    const id = SUGGESTED_TYPE_LABEL_IDS[type];
+    return id ? t(`notifications.suggested.${id}`) : type;
+  };
   const router = useRouter();
   const { user, token, logout, isLoading: authLoading } = useAuth();
-  const [preferences, setPreferences] = useState<any>(null);
+  const [preferences, setPreferences] = useState<NotificationPreferences | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
+  /** État du Web Push de CE navigateur (null = en cours de détection). */
+  const [pushStatus, setPushStatus] = useState<PushStatus | null>(null);
+  const [pushKey, setPushKey] = useState<string | null>(null);
+  const [pushBusy, setPushBusy] = useState(false);
+  const [pushError, setPushError] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout | null>(null);
   /** Nouveau sujet en cours de saisie (personnalisation) */
@@ -99,15 +151,16 @@ export default function NotificationsPreferencesPage() {
     sante: 'Santé',
   };
 
-  const normalizePreferences = (data: any) => {
-    if (!data || typeof data !== 'object') return null;
-    let types = data.types && typeof data.types === 'object' ? data.types : {};
+  const normalizePreferences = (raw: unknown): NotificationPreferences | null => {
+    if (!raw || typeof raw !== 'object') return null;
+    const data = raw as RawPreferences;
+    const types = data.types && typeof data.types === 'object' ? data.types : {};
     const normalized: Record<string, boolean> = {};
     for (const [key, value] of Object.entries(types)) {
       const label = LEGACY_TYPE_KEYS[key] ?? key;
       normalized[label] = value as boolean;
     }
-    let typeSchedules =
+    const typeSchedules =
       data.typeSchedules && typeof data.typeSchedules === 'object' ? data.typeSchedules : {};
     const normalizedSchedules: Record<string, TypeSchedule> = {};
     const validRecurrence = (r: string): RecurrenceKind => {
@@ -115,9 +168,9 @@ export default function NotificationsPreferencesPage() {
       return allowed.includes(r as RecurrenceKind) ? (r as RecurrenceKind) : 'daily';
     };
     for (const [key, val] of Object.entries(typeSchedules)) {
-      const v = val as any;
+      const v = val as RawTypeSchedule | null;
       if (v && typeof v === 'object' && typeof v.time === 'string') {
-        const rec = validRecurrence(v.recurrence);
+        const rec = validRecurrence(String(v.recurrence));
         normalizedSchedules[key] = {
           time: v.time || '08:00',
           recurrence: rec,
@@ -141,7 +194,7 @@ export default function NotificationsPreferencesPage() {
       ...data,
       types: normalized,
       typeSchedules: normalizedSchedules,
-      schedule: data.schedule && typeof data.schedule === 'object' ? data.schedule : defaultSchedule,
+      schedule: data.schedule && typeof data.schedule === 'object' ? (data.schedule as { start: string; end: string }) : defaultSchedule,
       snooze: typeof data.snooze === 'number' ? data.snooze : 15,
       deliveryChannel,
     };
@@ -152,14 +205,14 @@ export default function NotificationsPreferencesPage() {
     if (!authToken) return;
 
     try {
-      const response = await fetch(
+      const response = await authFetch(
         `${getApiBase()}/users/me/notification-preferences`,
         {
           headers: { Authorization: `Bearer ${authToken}` },
         },
       );
       if (response.status === 401) {
-        setSaveMessage('Session expirée. Veuillez vous reconnecter.');
+        setSaveMessage(t('common.sessionExpired'));
         return;
       }
       const data = await response.json();
@@ -172,22 +225,61 @@ export default function NotificationsPreferencesPage() {
   };
 
   const checkSubscription = async () => {
-    if (!('Notification' in window)) {
-      return;
-    }
-
-    const permission = Notification.permission;
-    setSubscribed(permission === 'granted');
+    const key = await fetchVapidPublicKey();
+    setPushKey(key);
+    setPushStatus(await resolvePushStatus(key, authTokenOrNull()));
   };
 
-  // Push web non implémenté côté backend : le bouton d'autorisation est désactivé
-  // (« bientôt disponible ») — la fonction requestPermission a été retirée pour
-  // ne pas promettre une fonctionnalité inexistante.
+  const authTokenOrNull = () =>
+    (token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null))?.trim() || null;
+
+  /** Appelé directement par le clic : la permission du navigateur n'est demandée qu'ici. */
+  const enablePush = async () => {
+    const authToken = authTokenOrNull();
+    if (!authToken) {
+      setSaveMessage(t('common.sessionExpired'));
+      return;
+    }
+    setPushBusy(true);
+    setPushError(false);
+    const result = await subscribeToPush(authToken, pushKey);
+    setPushBusy(false);
+    switch (result.status) {
+      case 'subscribed':
+        setPushStatus('subscribed');
+        break;
+      case 'denied':
+        setPushStatus('denied');
+        break;
+      case 'unavailable':
+      case 'unsupported':
+        setPushStatus(result.status);
+        break;
+      case 'dismissed':
+        break; // fenêtre de permission fermée sans choix : on reste sur le bouton
+      default:
+        setPushError(true);
+    }
+  };
+
+  const disablePush = async () => {
+    const authToken = authTokenOrNull();
+    if (!authToken) {
+      setSaveMessage(t('common.sessionExpired'));
+      return;
+    }
+    setPushBusy(true);
+    setPushError(false);
+    const ok = await unsubscribeFromPush(authToken);
+    setPushBusy(false);
+    if (ok) setPushStatus('unsubscribed');
+    else setPushError(true);
+  };
 
   const handleSave = async () => {
     const authToken = (token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null))?.trim();
     if (!authToken || !preferences) {
-      if (!authToken) setSaveMessage('Session expirée. Veuillez vous reconnecter.');
+      if (!authToken) setSaveMessage(t('common.sessionExpired'));
       return;
     }
 
@@ -202,7 +294,7 @@ export default function NotificationsPreferencesPage() {
     };
 
     try {
-      const response = await fetch(
+      const response = await authFetch(
         `${getApiBase()}/users/me/notification-preferences`,
         {
           method: 'PATCH',
@@ -217,22 +309,22 @@ export default function NotificationsPreferencesPage() {
       const data = await response.json().catch(() => ({}));
 
       if (response.ok) {
-        setSaveMessage('Préférences enregistrées ✓');
+        setSaveMessage(`${t('notifications.saved')} ✓`);
         setTimeout(() => setSaveMessage(null), 3000);
       } else if (response.status === 401) {
-        setSaveMessage('Session expirée. Veuillez vous reconnecter.');
+        setSaveMessage(t('common.sessionExpired'));
       } else {
-        setSaveMessage((data as { message?: string }).message || 'Erreur lors de la sauvegarde');
+        setSaveMessage((data as { message?: string }).message || t('notifications.saveError'));
       }
     } catch (error) {
       console.error('Error saving preferences:', error);
-      setSaveMessage('Erreur lors de la sauvegarde');
+      setSaveMessage(t('notifications.saveError'));
     } finally {
       setSaving(false);
     }
   };
 
-  const autoSavePreferences = (newPreferences: any) => {
+  const autoSavePreferences = (newPreferences: NotificationPreferences) => {
     setPreferences(newPreferences);
     
     // Clear previous timeout
@@ -248,7 +340,7 @@ export default function NotificationsPreferencesPage() {
     setAutoSaveTimeout(timeout);
   };
 
-  const handleSavePreferencesBackend = async (prefsToSave: any) => {
+  const handleSavePreferencesBackend = async (prefsToSave: NotificationPreferences) => {
     const authToken = (token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null))?.trim();
     if (!authToken) return;
 
@@ -261,7 +353,7 @@ export default function NotificationsPreferencesPage() {
     };
 
     try {
-      const response = await fetch(
+      const response = await authFetch(
         `${getApiBase()}/users/me/notification-preferences`,
         {
           method: 'PATCH',
@@ -275,16 +367,16 @@ export default function NotificationsPreferencesPage() {
 
       const data = await response.json().catch(() => ({}));
       if (response.ok) {
-        setSaveMessage('Préférences enregistrées ✓');
+        setSaveMessage(`${t('notifications.saved')} ✓`);
         setTimeout(() => setSaveMessage(null), 3000);
       } else if (response.status === 401) {
-        setSaveMessage('Session expirée. Veuillez vous reconnecter.');
+        setSaveMessage(t('common.sessionExpired'));
       } else {
-        setSaveMessage((data as { message?: string }).message || 'Erreur lors de l’enregistrement');
+        setSaveMessage((data as { message?: string }).message || t('notifications.saveError'));
       }
     } catch (error) {
       console.error('Error saving preferences:', error);
-      setSaveMessage('Erreur lors de l’enregistrement');
+      setSaveMessage(t('notifications.saveError'));
     }
   };
 
@@ -460,9 +552,9 @@ export default function NotificationsPreferencesPage() {
                         <div>
                           <p className="font-medium text-gray-800 dark:text-white">{type}</p>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {t('notifications.time')} {schedule.time} · {t(recurrenceLabel as any)}
+                            {t('notifications.time')} {schedule.time} · {t(recurrenceLabel as Parameters<typeof t>[0])}
                             {schedule.recurrence === 'weekly' && schedule.weekDay != null && (
-                              <> · {t(`notifications.weekDay${schedule.weekDay}` as any)}</>
+                              <> · {t(`notifications.weekDay${schedule.weekDay}` as Parameters<typeof t>[0])}</>
                             )}
                             {schedule.recurrence === 'once' && schedule.date && (
                               <> · {schedule.date}</>
@@ -513,36 +605,72 @@ export default function NotificationsPreferencesPage() {
             <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
               {t('notifications.enable')}
             </h2>
-            {!subscribed ? (
+            {pushStatus === null && (
+              <p className="text-sm text-gray-500 dark:text-gray-400">…</p>
+            )}
+            {pushStatus === 'unsupported' && (
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                {t('notifications.pushUnsupported')}
+              </p>
+            )}
+            {pushStatus === 'unavailable' && (
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                {t('notifications.pushUnavailable')}
+              </p>
+            )}
+            {pushStatus === 'denied' && (
+              <p className="text-sm text-amber-700 dark:text-amber-400">
+                {t('notifications.pushBlocked')}
+              </p>
+            )}
+            {pushStatus === 'unsubscribed' && (
               <div>
-                <button
-                  disabled
-                  title={t('notifications.comingSoon')}
-                  className="px-6 py-3 bg-gray-300 text-gray-500 dark:bg-gray-600 dark:text-gray-400 rounded-lg cursor-not-allowed"
-                >
-                  Autoriser les notifications
-                </button>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                  {t('notifications.comingSoon')}
+                <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
+                  {t('notifications.enableBrowser')}
                 </p>
-              </div>
-            ) : (
-              <div className="flex items-center gap-3 text-green-600">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <button
+                  type="button"
+                  onClick={enablePush}
+                  disabled={pushBusy}
+                  className="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <span>Notifications activées</span>
+                  {pushBusy ? t('notifications.enabling') : t('notifications.enableButton')}
+                </button>
               </div>
+            )}
+            {pushStatus === 'subscribed' && (
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3 text-green-600">
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  <span>{t('notifications.notificationsEnabled')}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={disablePush}
+                  disabled={pushBusy}
+                  className="px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {pushBusy ? t('notifications.disabling') : t('notifications.disableButton')}
+                </button>
+              </div>
+            )}
+            {pushError && (
+              <p role="alert" className="mt-3 text-sm text-red-600 dark:text-red-400">
+                {t('notifications.pushError')}
+              </p>
             )}
           </div>
 
@@ -560,8 +688,11 @@ export default function NotificationsPreferencesPage() {
                   <button
                     key={channel}
                     type="button"
+                    // Invité : aucune adresse, rappels par notification seulement (explication ci-dessous).
+                    disabled={channel !== 'push' && isGuestUser(user)}
+                    aria-describedby={channel !== 'push' && isGuestUser(user) ? 'delivery-guest-note' : undefined}
                     onClick={() => {
-                      setPreferences((p: any) => (p ? { ...p, deliveryChannel: channel } : p));
+                      setPreferences((p) => (p ? { ...p, deliveryChannel: channel } : p));
                       if (autoSaveTimeout) {
                         clearTimeout(autoSaveTimeout);
                         setAutoSaveTimeout(null);
@@ -580,6 +711,11 @@ export default function NotificationsPreferencesPage() {
                   </button>
                 ))}
               </div>
+              {isGuestUser(user) && (
+                <p id="delivery-guest-note" className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+                  {t('guest.emailChannelNote')}
+                </p>
+              )}
             </div>
           )}
 
@@ -610,7 +746,7 @@ export default function NotificationsPreferencesPage() {
                       onClick={() => addType(label)}
                       className="px-3 py-1.5 text-sm rounded-lg border border-emerald-500 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
                     >
-                      + {label}
+                      + {typeLabel(label)}
                     </button>
                   ))}
                   {SUGGESTED_NOTIFICATION_TYPES.every(
@@ -672,7 +808,7 @@ export default function NotificationsPreferencesPage() {
                           ) : (
                             <>
                               <span className="flex-1 min-w-0 font-medium text-gray-800 dark:text-gray-200 truncate">
-                                {type}
+                                {typeLabel(type)}
                               </span>
                               <button
                                 type="button"
@@ -737,7 +873,7 @@ export default function NotificationsPreferencesPage() {
                                   const rec = e.target.value as RecurrenceKind;
                                   updateTypeSchedule(type, {
                                     recurrence: rec,
-                                    date: rec === 'once' ? schedule.date ?? new Date().toISOString().slice(0, 10) : undefined,
+                                    date: rec === 'once' ? schedule.date ?? localDayKey(new Date()) : undefined,
                                     weekDay: rec === 'weekly' ? (schedule.weekDay ?? new Date().getDay()) : undefined,
                                     dayOfMonth: rec === 'monthly' ? (schedule.dayOfMonth ?? new Date().getDate()) : undefined,
                                     intervalHours: rec === 'hourly' ? (schedule.intervalHours ?? 2) : undefined,
@@ -747,7 +883,7 @@ export default function NotificationsPreferencesPage() {
                               >
                                 {RECURRENCE_OPTIONS.map((opt) => (
                                   <option key={opt.value} value={opt.value}>
-                                    {t(opt.labelKey as any)}
+                                    {t(opt.labelKey as Parameters<typeof t>[0])}
                                   </option>
                                 ))}
                               </select>
@@ -759,7 +895,7 @@ export default function NotificationsPreferencesPage() {
                                 </span>
                                 <input
                                   type="date"
-                                  value={schedule.date ?? new Date().toISOString().slice(0, 10)}
+                                  value={schedule.date ?? localDayKey(new Date())}
                                   onChange={(e) => updateTypeSchedule(type, { date: e.target.value })}
                                   className="px-2 py-1.5 border rounded-lg dark:bg-gray-700 dark:text-white text-sm"
                                 />
@@ -777,7 +913,7 @@ export default function NotificationsPreferencesPage() {
                                 >
                                   {[0, 1, 2, 3, 4, 5, 6].map((d) => (
                                     <option key={d} value={d}>
-                                      {t(`notifications.weekDay${d}` as any)}
+                                      {t(`notifications.weekDay${d}` as Parameters<typeof t>[0])}
                                     </option>
                                   ))}
                                 </select>
@@ -878,7 +1014,7 @@ export default function NotificationsPreferencesPage() {
                 className="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white"
               />
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                Durée du report en minutes (5-120)
+                {t('notifications.snoozeHint')}
               </p>
             </div>
           )}

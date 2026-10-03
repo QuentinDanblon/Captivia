@@ -1,0 +1,59 @@
+[
+  {
+    "speciesId": 104145240,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "behavior.compatibilityWithOtherAnimals: 'à loger seul ou en couple' contredit la source (la séparation du partenaire nuit à la santé) → 'à loger en couple stable plutôt que seul' (Wikipedia EN)",
+      "habitat.minSpaceSize: dimensions 60x60x80 cm non confirmées → formulation qualitative de la source (beaucoup de place, santé dégradée en espace réduit)",
+      "feeding.recommendedFoods[0].notes: reformulé (graines et fruits d'après la source)",
+      "legislation: CITES II confirmé par Wikipedia EN ; source cites.org (page d'accueil générique) remplacée par la page Wikipedia de l'espèce"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (15-28 °C, 40-70 % non confirmés)",
+      "legislation.euAnnex 'B' (non confirmé)",
+      "reproduction.season 'janvier-avril et juin-juillet' (non confirmé)",
+      "reproduction.sexualMaturityMonths 12 (non mentionné par la source)",
+      "source https://www.cites.org (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104145246,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "behavior: 'compatible avec cailles et faisans' retiré (non confirmé) ; hybridation et agressivité moindre confirmées (Wikipedia EN)",
+      "reproduction.notes: 'reproduction coloniale' et 'couples à vie' retirés (non confirmés pour cette page) ; incubation 23 j, envol ~42 j, 4-5 œufs confirmés",
+      "habitat.minSpaceSize: 400x400x500 mm confirmé (Wikipedia EN)",
+      "legislation: CITES II confirmé par Wikipedia EN ; source cites.org remplacée par la page Wikipedia de l'espèce"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (15-28 °C, 40-70 % non confirmés)",
+      "legislation.euAnnex 'B' (non confirmé)",
+      "reproduction.season 'toute l'année (pics au printemps)' (non confirmé)",
+      "reproduction.sexualMaturityMonths 12 (non mentionné par la source)",
+      "source https://www.cites.org (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104145297,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "behavior: 'groupes jusqu'à 20 individus (parfois centaines)' → 'jusqu'à 50 individus' (Wikipédia FR) ; 'imite 30-40 sons' retiré (non confirmé) ; 'inadapté à l'appartement' confirmé (Wikipedia EN)",
+      "habitat.minSpaceSize: 'enclos 3 m minimum' non confirmé → formulation qualitative ; habitats naturels (forêts humides à savanes à cactus) confirmés",
+      "feeding: 'régime naturel basé sur les fruits' reformulé (régime non détaillé dans la source, conseils génériques conservés)",
+      "health: faute 'Aspergilllose' corrigée",
+      "legislation: CITES II confirmé par Wikipédia FR (annexe II) ; source cites.org remplacée par la page Wikipédia FR de l'espèce",
+      "reproduction.notes: longévité reformulée (~40 ans, >50 ans possibles en captivité, Wikipedia EN) ; 'reproduction printanière' retiré"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (18-30 °C, 50-80 % non confirmés)",
+      "legislation.euAnnex 'B' (non confirmé)",
+      "reproduction.season 'février à juin-juillet' (non confirmé)",
+      "reproduction.sexualMaturityMonths 18 (non mentionné ; valeur peu plausible pour un Amazona)",
+      "behavior : 'potentiellement agressif' retiré (non confirmé)",
+      "source https://www.cites.org (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  }
+]

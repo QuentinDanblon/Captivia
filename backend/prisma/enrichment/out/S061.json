@@ -1,0 +1,191 @@
+[
+  {
+    "speciesId": 104061079,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {"name": "Poisson frais ou congelé", "frequency": "quotidienne", "notes": "Environ 60 à 75 % du régime naturel selon la région"},
+        {"name": "Petits rongeurs, oiseaux, crabes, insectes", "frequency": "hebdomadaire", "notes": "Complément carnivore diversifié"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Poisson cru sauvage", "reason": "Risque de thiaminase et parasites"}
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès à l'eau pour la chasse, proies aquatiques encouragées, régime riche en protéines",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Fishing_cat", "title": "Fishing cat diet - Wikipedia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles jour/nuit naturels, zones végétalisées denses et ombragées (milieu de zones humides)",
+      "activityEnrichment": "Eau pour nager et chasser, roches pour observer, cachettes végétales",
+      "hygieneNotes": "Eau filtrée et renouvelée régulièrement, hygiène stricte du bassin",
+      "costEstimate": "élevé",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Fishing_cat", "title": "Fishing cat habitat - Wikipedia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Chat des zones humides asiatiques, bon nageur (nage sous l'eau), principalement nocturne, solitaire",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillé: NAC sauvage, morsures et griffes dangereuses",
+      "compatibilityWithOtherAnimals": "Incompatible avec autres animaux et petits mammifères",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Fishing_cat", "title": "Fishing cat behavior - Wikipedia"}
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'annexe II de la CITES (commerce international soumis à permis)"]
+      },
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Fishing_cat", "title": "Fishing cat - Wikipedia (CITES Appendix II)"}
+      ]
+    },
+    "reproduction": {
+      "season": "janvier-février (saison naturelle Asie)",
+      "gestationDays": 66,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": 15,
+      "breedingDifficulty": "avance",
+      "notes": "Gestation de 63 à 70 jours, naissances mars-avril en nature, sevrage complet vers 6 mois, statut Vulnérable UICN",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Fishing_cat", "title": "Fishing cat reproduction - Wikipedia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 104069250,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {"name": "Herbes et graminées basses", "frequency": "quotidienne", "notes": "Fourrage principal, pâturage extensif"},
+        {"name": "Légumes verts, luzerne, trèfle", "frequency": "quotidienne", "notes": "Complément riche en protéines"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Grains trop concentrés", "reason": "Risque de surcharge ruminale"},
+        {"name": "Plantes toxiques (ifs, rhododendrons)", "reason": "Empoisonnement"},
+        {"name": "Aliments moisissables", "reason": "Infection digestive"}
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Pâturage continu ou fourrage de qualité, accès eau fraîche constant, minéraux (calcium, phosphore équilibré)",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Indian_antelope", "title": "Indian antelope diet - Wikipedia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Luminosité naturelle complète (plaines herbeuses et zones peu boisées avec point d'eau permanent)",
+      "activityEnrichment": "Libre circulation, salt lick, zones de repos ombragées, accès eau perpétuel",
+      "hygieneNotes": "Nettoyage points d'eau régulier, gestion parasitaires (vers internes), brossage occasionnel",
+      "costEstimate": "moyen",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Indian_antelope", "title": "Indian antelope habitat - Wikipedia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Antilope herbivore vivant en petits groupes (hardes de femelles, de mâles, de célibataires), très rapide (jusqu'à 80 km/h), territoire défendu par les mâles via lekking",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Possible avec supervision: sauvagerie atténuée mais imprévisible",
+      "compatibilityWithOtherAnimals": "Coexistence possible avec ongulés non agressifs de taille similaire",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Indian_antelope", "title": "Indian antelope behavior - Wikipedia"}
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année avec pics au printemps et à l'automne",
+      "gestationDays": 180,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 8,
+      "breedingDifficulty": "facile",
+      "notes": "Un seul faon par gestation (environ 6 mois). Maturité femelles: 8 mois mais accouplement pas avant 2 ans, mâles: 18 mois, longévité 10-15 ans",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Indian_antelope", "title": "Indian antelope reproduction - Wikipedia"}
+      ]
+    }
+  },
+  {
+    "speciesId": 104076753,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {"name": "Insectes variés (grillons, criquets, blattes)", "frequency": "quotidienne", "notes": "Composant principal du régime"},
+        {"name": "Fruits mûrs (mangues, papaye) et nectar floral", "frequency": "quotidienne", "notes": "Fruits mous sucrés, pollen et nectar complémentaires"}
+      ],
+      "foodsToAvoid": [
+        {"name": "Insectes sauvages non identifiés", "reason": "Pesticides et parasites"},
+        {"name": "Aliments de mammifère ou fruits sucrés", "reason": "Obésité et carences"}
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Insectes nourris et saupoudrés de vitamines, fruits frais 2-3x semaine, supplémentation calcium et D3 recommandée",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Phelsuma_grandis", "title": "Phelsuma grandis - Wikipedia"}
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 28,
+      "humidityMin": 60,
+      "humidityMax": 80,
+      "minSpaceSize": "Terrarium vertical minimum 60x60x90cm pour couple",
+      "lightNeeds": "UVB recommandé 10-12h quotidien, lumière naturelle/spectre complet LED (espèce diurne)",
+      "activityEnrichment": "Branches, plantes vivantes, cachettes, parois verticales, murs pour escalade",
+      "hygieneNotes": "Hygrométrie contrôlée par brumisation régulière, aération quotidienne, substrat humide mais pas détrempé",
+      "costEstimate": "moyen",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Phelsuma_grandis", "title": "Phelsuma grandis - Wikipedia"}
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Gecko diurne arboricole du nord de Madagascar, actif, vue excellente, grimpeur agile des surfaces lisses, excellent évadé",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Déconseillé de manipuler: reptile fragile, à observer plutôt qu'à manipuler",
+      "compatibilityWithOtherAnimals": "Mâles très territoriaux: ne jamais cohabiter deux mâles; en captivité le mâle peut blesser sérieusement la femelle, séparation parfois nécessaire",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Phelsuma_grandis", "title": "Phelsuma grandis - Wikipedia"}
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": "décembre à juin",
+      "gestationDays": null,
+      "incubationDays": 60,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Les femelles pondent plusieurs paires d'œufs; éclosion après environ 48 à 80 jours selon la température",
+      "sources": [
+        {"type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Phelsuma_grandis", "title": "Phelsuma grandis - Wikipedia"}
+      ]
+    }
+  }
+]

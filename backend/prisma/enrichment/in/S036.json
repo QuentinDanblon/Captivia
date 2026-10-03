@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 5226308,
+  "commonNameFr": "Agame à tête rouge",
+  "scientificName": "Agama agama",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5227370,
+  "commonNameFr": "Téju noir et blanc",
+  "scientificName": "Salvator merianae",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5228034,
+  "commonNameFr": "Faisan doré",
+  "scientificName": "Chrysolophus pictus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

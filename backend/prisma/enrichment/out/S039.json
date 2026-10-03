@@ -1,0 +1,125 @@
+[
+  {
+    "speciesId": 5282524,
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladie de Carré (distemper)",
+          "symptoms": "Fièvre, écoulement nasal et oculaire, toux, léthargie, convulsions tardives",
+          "prevention": "Isolement des animaux malades, maintien de l'hygiène, avis vétérinaire sur la vaccination",
+          "whenToConsult": "Dès les premiers symptômes respiratoires ou neurologiques"
+        },
+        {
+          "name": "Rage",
+          "symptoms": "Changements comportementaux, hypersalivation, agressivité, paralysie progressive",
+          "prevention": "Éviter le contact avec la faune sauvage, vaccination si exposition",
+          "whenToConsult": "Immédiatement en cas de morsure suspecte, risque de zoonose"
+        },
+        {
+          "name": "Parasitoses intestinales (dont Baylisascaris procyonis)",
+          "symptoms": "Diarrhée, amaigrissement, troubles neurologiques dans les cas sévères",
+          "prevention": "Hygiène de l'habitat, nettoyage des fèces avec précaution (risque zoonotique), vermifugation sous contrôle vétérinaire",
+          "whenToConsult": "Dès observation de diarrhée prolongée, perte de poids ou troubles neurologiques"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Raccoon",
+          "title": "Raccoon - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "fin janvier à mi-mars (mises bas au printemps)",
+      "gestationDays": 65,
+      "incubationDays": null,
+      "litterSizeMin": 2,
+      "litterSizeMax": 5,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "facile",
+      "notes": "Accouplement surtout de fin janvier à mi-mars. Gestation d'environ 63 à 65 jours ; la femelle met bas au printemps, en général 2 à 5 petits. Les femelles d'un an peuvent déjà se reproduire, tandis que les jeunes mâles n'atteignent souvent la maturité qu'après la saison principale d'accouplement.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Raton_laveur",
+          "title": "Raton laveur - Wikipédia FR"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Raccoon",
+          "title": "Raccoon - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5282588,
+    "health": {
+      "diseases": [
+        {
+          "name": "Ostéoporose",
+          "symptoms": "Fragilité osseuse accrue, fractures pathologiques, mobilité réduite",
+          "prevention": "Alimentation adaptée riche en calcium et phosphore, exposition lumineuse régulière, enrichissement physique",
+          "whenToConsult": "En cas de fracture suite à un traumatisme léger ou de mobilité anormale"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Toux, écoulement nasal, respiration sifflante, léthargie",
+          "prevention": "Éviter les courants d'air et les écarts de température, conditions d'hébergement adaptées",
+          "whenToConsult": "Dès signes respiratoires ou changement comportemental"
+        },
+        {
+          "name": "Parasitose intestinale",
+          "symptoms": "Diarrhée, perte de poids, ventre ballonné, malabsorption",
+          "prevention": "Hygiène stricte du bassin, alimentation fraîche et propre, quarantaine des nouveaux individus",
+          "whenToConsult": "Après observation de diarrhée prolongée ou perte de condition"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Asian_small-clawed_otter",
+          "title": "Asian small-clawed otter - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 74,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 7,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Couples monogames en captivité. Gestation de 62 à 86 jours (74 = valeur médiane). Portées de 1 à 7 petits ; nouveau-nés de 46 à 63 g. Cycle œstral de 28 à 30 jours, œstrus de 1 à 13 jours. Au minimum 8 mois entre deux portées. Les jeunes deviennent indépendants vers 4 à 5 mois.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Asian_small-clawed_otter",
+          "title": "Asian small-clawed otter - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5283399,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 31,
+      "incubationDays": null,
+      "litterSizeMin": 3,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": 4,
+      "breedingDifficulty": "facile",
+      "notes": "Gestation de 28 à 33 jours. Portées de 3 à 12 lapereaux ; une lapine a en moyenne 3 à 5 portées par an. Maturité sexuelle dès 3,5 mois chez les femelles et 4 mois chez les mâles. La mère allaite une fois par jour pendant 3 à 4 semaines. Mortalité élevée des lapereaux à l'état sauvage (environ 75 % meurent pendant la période d'allaitement).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Lapin_de_garenne",
+          "title": "Lapin de garenne - Wikipédia FR"
+        }
+      ]
+    }
+  }
+]

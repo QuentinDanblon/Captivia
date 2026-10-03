@@ -1645,7 +1645,7 @@ export const SPECIES_DATABASE = [
     },
     behavior: {
       generalBehavior: 'Aquatique permanent, peu agressif, apprenabilité étonnante',
-      sociability: 'semi-solitaire',
+      sociability: 'solitaire',
       difficultyLevel: 'intermédiaire',
       compatibilityWithChildren: 'Bon, animal fragile pas manipulation',
       compatibilityWithOtherAnimals: 'Peut manger petits poissons, cohabitation limitée',

@@ -1,0 +1,473 @@
+[
+  {
+    "speciesId": 2153441,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons",
+          "frequency": "variable",
+          "notes": "Proies principales adaptées à la taille de l'animal, espacées de plusieurs jours à quelques semaines pour un adulte"
+        },
+        {
+          "name": "Insectes (blattes, sauterelles, criquets)",
+          "frequency": "variable",
+          "notes": "Autres proies possibles, fréquence selon l'appétit"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop volumineuses",
+          "reason": "Risque de blessure ou rejet de la proie"
+        },
+        {
+          "name": "Proies parasitées ou contaminées",
+          "reason": "Transmission de maladies et parasites à la tarentule"
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Les tarentules ne mangent pas très fréquemment. Après un gros repas, elles peuvent ne pas chasser pendant plusieurs semaines.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://tarantulaforum.com/media/mexican-flame-knee-tarantula-how-to-care-for-the-brachypelma-auratum.11082",
+          "title": "Mexican Flame Knee Tarantula Care Guide - Tarantula Forum"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Éclairage naturel indirect, éviter l'exposition prolongée au soleil",
+      "activityEnrichment": "Abris/cachettes (écorce de liège, pots coupés), substrat permettant de creuser légèrement",
+      "hygieneNotes": "Substrat principalement sec (tourbe ou terreau), avec une petite zone légèrement humide qu'on laisse sécher avant de la ré-humidifier. Bol d'eau à disposition.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://tarantulaforum.com/media/mexican-flame-knee-tarantula-how-to-care-for-the-brachypelma-auratum.11082",
+          "title": "Mexican Flame Knee Tarantula Care Guide - Tarantula Forum"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma_auratum",
+          "title": "Brachypelma auratum - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Tarentule terrestre sédentaire, peu active, qui creuse légèrement.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "À manipuler le moins possible, avec prudence (poils urticants, réaction défensive possible) ; supervision d'un adulte indispensable",
+      "compatibilityWithOtherAnimals": "Solitaire strictement, aucune cohabitation possible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://tarantulaforum.com/media/mexican-flame-knee-tarantula-how-to-care-for-the-brachypelma-auratum.11082",
+          "title": "Mexican Flame Knee Tarantula Care Guide"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma_auratum",
+          "title": "Brachypelma auratum - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Acariens",
+          "symptoms": "Présence visible de petits acariens (souvent inoffensifs, de type charognards ou phorétiques) ; ils prolifèrent en milieu humide",
+          "prevention": "Environnement propre, substrat non détrempé, bonne ventilation, quarantaine des nouvelles acquisitions",
+          "whenToConsult": "Si les acariens sont très nombreux ou si l'animal montre des signes de stress persistants, consulter un spécialiste des arachnides"
+        },
+        {
+          "name": "Dyskinetic Syndrome (DKS)",
+          "symptoms": "Mouvements saccadés, perte de coordination, incapacité à se nourrir",
+          "prevention": "Causes suspectées : pesticides, micro-organismes, moisissures, toxines. Éviter tout pesticide à proximité, terrarium propre et bien ventilé",
+          "whenToConsult": "Immédiatement si symptômes observés : pas de traitement connu, l'euthanasie par un vétérinaire est souvent envisagée dans les cas graves"
+        },
+        {
+          "name": "Mycoses et infections fongiques",
+          "symptoms": "Taches noires ou blanches sur le corps, croûtes, odeur désagréable, perte d'appétit",
+          "prevention": "Éviter l'excès d'humidité couplé à une mauvaise ventilation, enclos propre, retirer les proies non consommées",
+          "whenToConsult": "Dès observation de taches suspectes"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.giantspiders.com/captive-care/common-ailments",
+          "title": "Common Tarantula Ailments - Giant Spiders"
+        },
+        {
+          "type": "guide",
+          "url": "https://arachnoboards.com/threads/all-you-need-to-know-about-mites.309211/",
+          "title": "Mites in Tarantulas - Arachnoboards"
+        },
+        {
+          "type": "guide",
+          "url": "https://tomsbigspiders.com/2014/05/24/dks-dyskinetic-syndrome-in-tarantulas/",
+          "title": "DKS (Dyskinetic Syndrome) - Tom's Big Spiders"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [
+          "Permis CITES pour tout commerce international (import/export hors UE)"
+        ],
+        "restrictions": [
+          "Inscrite à la CITES Annexe II (tous les Brachypelma depuis 1994) : commerce réglementé"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma_auratum",
+          "title": "Brachypelma auratum - Wikipedia (CITES status)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Après l'accouplement, la femelle tente souvent d'attaquer et de dévorer le mâle ; elle doit être nourrie abondamment ensuite pour produire son cocon. Pour les tarentules en général, l'éclosion prend environ 6 à 8 semaines, et la maturité est atteinte entre 2 et 5 ans pour les mâles et 4 à 10 ans pour les femelles (valeurs générales, non spécifiques à cette espèce).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://tarantulaforum.com/articles/tarantula-breeding-the-basics-of-pairing-and-mating-your-ts.5/",
+          "title": "Tarantula Breeding Basics - Tarantula Forum"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2153712,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons",
+          "frequency": "variable",
+          "notes": "Adulte : un repas toutes les 2 à 3 semaines, 1 à 5 insectes de taille adaptée par repas"
+        },
+        {
+          "name": "Insectes (blattes, vers, autres insectes de taille adaptée)",
+          "frequency": "variable",
+          "notes": "Proies adaptées à la taille de l'animal"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Risque de blessure, rejet ou difficulté à consommer"
+        },
+        {
+          "name": "Proies sauvages ou traitées aux pesticides",
+          "reason": "Risque de contamination et de maladie"
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Espèce docile et robuste. Peut jeûner plusieurs semaines à plusieurs mois (souvent avant une mue). Surveiller l'abdomen pour éviter la suralimentation.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://dubiaroaches.com/blogs/invert-care/chilean-rosehair-tarantula-care-sheet",
+          "title": "Chilean Rosehair Tarantula Care Sheet - Dubia Roaches"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.thetarantulacollective.com/caresheets/grammostola-rosea",
+          "title": "Grammostola rosea Care Sheet - The Tarantula Collective"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Chilean_rose_tarantula",
+          "title": "Chilean rose tarantula - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 20,
+      "tempMax": 26,
+      "humidityMin": 40,
+      "humidityMax": 60,
+      "minSpaceSize": "Terrarium d'au moins 50 x 25 x 25 cm pour un adulte (plus large que haut ; 3 à 5 fois l'envergure de l'animal)",
+      "lightNeeds": "Éclairage naturel indirect, préfère les zones ombragées",
+      "activityEnrichment": "Abris/cachettes, substrat permettant de creuser",
+      "hygieneNotes": "Substrat bien drainant (tourbe, terreau) assez profond pour creuser, humidité modérée sans excès. Petit bol d'eau pour l'abreuvement.",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.thetarantulacollective.com/caresheets/grammostola-rosea",
+          "title": "Grammostola rosea Care Sheet - The Tarantula Collective"
+        },
+        {
+          "type": "guide",
+          "url": "https://dubiaroaches.com/blogs/invert-care/chilean-rosehair-tarantula-care-sheet",
+          "title": "Chilean Rosehair Tarantula Care Sheet"
+        },
+        {
+          "type": "vet",
+          "url": "https://vetverified.com/articles/a-beginners-guide-to-owning-a-chilean-rose-tarantula",
+          "title": "Beginner's Guide to Chilean Rose Tarantula - VetVerified"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Tarentule très docile, calme et lente, qui mord rarement et projette rarement ses poils. Activité réduite, peut rester inactive longtemps. Une des espèces les plus recommandées pour débutants.",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Docile mais fragile : manipulation à éviter ou très réduite (une chute, même de faible hauteur, peut lui être fatale) ; supervision d'un adulte indispensable",
+      "compatibilityWithOtherAnimals": "Solitaire strictement, aucune cohabitation",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.thetarantulacollective.com/caresheets/grammostola-rosea",
+          "title": "Grammostola rosea Care Sheet"
+        },
+        {
+          "type": "vet",
+          "url": "https://vetverified.com/articles/a-beginners-guide-to-owning-a-chilean-rose-tarantula",
+          "title": "Beginner's Guide to Chilean Rose Tarantula - VetVerified"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Acariens",
+          "symptoms": "Petits acariens visibles sur le corps (souvent inoffensifs) ; ils prolifèrent en milieu humide",
+          "prevention": "Environnement propre, ventilation adéquate, substrat non détrempé, quarantaine des nouveaux spécimens",
+          "whenToConsult": "Si l'infestation est importante et persistante malgré une amélioration de l'hygiène"
+        },
+        {
+          "name": "Dyskinetic Syndrome (DKS)",
+          "symptoms": "Mouvements saccadés, perte de coordination, incapacité à se nourrir",
+          "prevention": "Causes suspectées : pesticides, micro-organismes, moisissures, toxines. Éviter tout pesticide à proximité, terrarium propre et bien ventilé",
+          "whenToConsult": "Immédiatement : pas de traitement connu, l'euthanasie par un vétérinaire est souvent envisagée dans les cas graves"
+        },
+        {
+          "name": "Jeûne prolongé",
+          "symptoms": "Absence de consommation de proies pendant plusieurs semaines ou mois ; fréquent avant une mue et généralement normal chez cette espèce",
+          "prevention": "Conditions stables, ne pas forcer l'alimentation, retirer les proies non consommées",
+          "whenToConsult": "Si le jeûne s'accompagne d'un amaigrissement, d'un abdomen ridé (déshydratation) ou d'un comportement anormal, consulter un spécialiste des arachnides"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.giantspiders.com/captive-care/common-ailments",
+          "title": "Common Tarantula Ailments - Giant Spiders"
+        },
+        {
+          "type": "guide",
+          "url": "https://arachnoboards.com/threads/all-you-need-to-know-about-mites.309211/",
+          "title": "Mites Discussion - Arachnoboards"
+        },
+        {
+          "type": "guide",
+          "url": "https://tomsbigspiders.com/2014/05/24/dks-dyskinetic-syndrome-in-tarantulas/",
+          "title": "DKS (Dyskinetic Syndrome) - Tom's Big Spiders"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [
+          "Permis CITES pour tout commerce international (import/export hors UE)"
+        ],
+        "restrictions": [
+          "Inscrite à la CITES Annexe II (inscription en vigueur depuis le 5 mars 2026 selon Wikipédia) : commerce réglementé"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Chilean_rose_tarantula",
+          "title": "Chilean Rose Tarantula - Wikipedia (CITES)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "deux périodes d'accouplement par an",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 50,
+      "litterSizeMax": 200,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "La femelle tente souvent d'attaquer et de dévorer le mâle après l'accouplement. Un cocon contient 50 à 200 œufs selon Wikipédia (100 à 500 selon une autre fiche d'élevage, beaucoup étant infertiles). Éclosion en 6 à 12 semaines selon les sources. Maturité sexuelle très lente : de quelques années (3-4 ans) à plus de 8 ans selon le sexe et la source. Réceptivité des femelles irrégulière.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Chilean_rose_tarantula",
+          "title": "Chilean Rose Tarantula - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.thetarantulacollective.com/caresheets/grammostola-rosea",
+          "title": "Grammostola rosea Care Sheet - The Tarantula Collective"
+        },
+        {
+          "type": "guide",
+          "url": "https://tarantulaforum.com/articles/tarantula-breeding-the-basics-of-pairing-and-mating-your-ts.5/",
+          "title": "Tarantula Breeding Basics"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2153949,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes (grillons, blattes, criquets)",
+          "frequency": "variable",
+          "notes": "Juvénile : tous les 7-10 jours ; adulte : tous les 2-3 semaines ; jeune : deux fois par semaine (The Tarantula Collective)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies infectées ou parasitées",
+          "reason": "Transmission de maladies et parasites"
+        },
+        {
+          "name": "Suralimentation",
+          "reason": "Risque d'obésité et de problèmes de mue"
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Réponse alimentaire vive ; surveiller l'abdomen pour prévenir l'obésité. Dans la nature, se nourrit surtout de gros insectes, occasionnellement d'amphibiens et de petits reptiles.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.thetarantulacollective.com/caresheets/lasiodora-parahybana",
+          "title": "Salmon Pink Birdeater Care Sheet - The Tarantula Collective"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lasiodora_parahybana",
+          "title": "Lasiodora parahybana - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 20,
+      "tempMax": 24,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium d'au moins 3 fois l'envergure de l'animal (4 à 5 fois pour un adulte), plus large que haut",
+      "lightNeeds": "Éclairage naturel indirect",
+      "activityEnrichment": "Substrat profond pour creuser (rempli jusqu'à la moitié du terrarium pour juvéniles et adultes), peu de décoration, cachettes, bol d'eau",
+      "hygieneNotes": "Couches profondes du substrat humides, surface supérieure laissée sèche entre les arrosages. Bol d'eau disponible. Bonne ventilation.",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.thetarantulacollective.com/caresheets/lasiodora-parahybana",
+          "title": "Salmon Pink Birdeater Care Sheet"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Tarentule terrestre massive (envergure jusqu'à 28 cm), considérée comme docile et plutôt hardie que défensive. Ne tisse pas de toile, vit au sol. Peut projeter ses poils urticants et ne mord qu'en dernier recours.",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Non recommandée : grande taille, rapidité, poils urticants, manipulation non conseillée",
+      "compatibilityWithOtherAnimals": "Solitaire strictement ; prédatrice, ne pas cohabiter avec d'autres animaux",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.thetarantulacollective.com/caresheets/lasiodora-parahybana",
+          "title": "Salmon Pink Birdeater Care Sheet"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lasiodora_parahybana",
+          "title": "Lasiodora parahybana - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Problèmes de mue",
+          "symptoms": "Incapacité à se dégager de l'ancienne peau, refus d'alimentation post-mue",
+          "prevention": "Humidité adaptée, éviter l'obésité, réduire l'alimentation avant une mue, substrat suffisamment profond",
+          "whenToConsult": "Immédiatement si signes de mue difficile ; toute assistance est délicate et risquée"
+        },
+        {
+          "name": "Acariens",
+          "symptoms": "Présence de petits acariens (souvent inoffensifs) ; ils prolifèrent en milieu humide",
+          "prevention": "Enclos propre, ventilation adéquate, substrat non détrempé, quarantaine des nouvelles acquisitions",
+          "whenToConsult": "Si l'infestation est importante ou si l'animal perd l'appétit, consulter un vétérinaire spécialisé en NAC"
+        },
+        {
+          "name": "Dyskinetic Syndrome (DKS)",
+          "symptoms": "Mouvements saccadés, perte de coordination, incapacité à se nourrir",
+          "prevention": "Causes suspectées : pesticides, micro-organismes, moisissures, toxines. Éviter tout pesticide à proximité, terrarium propre et bien ventilé",
+          "whenToConsult": "Immédiatement : pas de traitement curatif connu, l'euthanasie par un vétérinaire est souvent envisagée dans les cas graves"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.giantspiders.com/captive-care/common-ailments",
+          "title": "Common Tarantula Ailments - Giant Spiders"
+        },
+        {
+          "type": "guide",
+          "url": "https://tomsbigspiders.com/2014/05/24/dks-dyskinetic-syndrome-in-tarantulas/",
+          "title": "DKS in Tarantulas - Tom's Big Spiders"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 600,
+      "litterSizeMax": 1000,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Un cocon contient de 600 à plus de 1 000 œufs ; les jeunes sortent en 6 à 8 semaines environ (The Tarantula Collective). Maturité : mâles environ 2-3 ans, femelles 3-4 ans. La femelle peut attaquer le mâle après l'accouplement.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.thetarantulacollective.com/caresheets/lasiodora-parahybana",
+          "title": "Salmon Pink Birdeater Care Sheet - The Tarantula Collective"
+        },
+        {
+          "type": "guide",
+          "url": "https://tarantulaforum.com/articles/tarantula-breeding-the-basics-of-pairing-and-mating-your-ts.5/",
+          "title": "Tarantula Breeding Basics"
+        }
+      ]
+    }
+  }
+]

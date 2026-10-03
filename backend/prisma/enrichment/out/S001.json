@@ -1,0 +1,383 @@
+[
+  {
+    "speciesId": 1025719,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Feuilles fraîches (chou, chou frisé, épinards, laitue)",
+          "frequency": "quotidienne",
+          "notes": "Base alimentaire principale, bien hydratée"
+        },
+        {
+          "name": "Fruits et légumes (pomme, carotte, courgette)",
+          "frequency": "hebdomadaire",
+          "notes": "Apport complémentaire varié"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Plantes traitées aux pesticides",
+          "reason": "Toxiques pour le milieu de vie et l'alimentation"
+        },
+        {
+          "name": "Aliments salés ou épicés",
+          "reason": "Perturbent l'équilibre hydrique naturel"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Calcium via os de seiche, matière organique en décomposition (feuilles mortes) dans le substrat, feuilles fraîches non traitées",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.reptilecentre.com/info-giant-african-millipede-care-sheet",
+          "title": "Giant African Millipede Care Sheet"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Archispirostreptus_gigas",
+          "title": "Archispirostreptus gigas - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 21,
+      "tempMax": 24,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium d'au moins 30 cm de long et 30 cm de haut ; plus grand recommandé (l'espèce peut atteindre plus de 30 cm)",
+      "lightNeeds": "Pas de lumière UV requise, espèce nocturne, éclairage doux le jour",
+      "activityEnrichment": "Substrat profond pour fouir (au moins 5 cm), cachettes naturelles, bois/écorce à explorer",
+      "hygieneNotes": "Renouvellement régulier du substrat, nettoyage des zones souillées, substrat à base de terre riche en matière organique",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.reptilecentre.com/info-giant-african-millipede-care-sheet",
+          "title": "Giant African Millipede Care Sheet"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Archispirostreptus_gigas",
+          "title": "Archispirostreptus gigas - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Espèce docile, très peu active le jour. Passe la majorité du temps enfouie dans le substrat, surtout active à la tombée de la nuit. Se défend en s'enroulant en spirale et en sécrétant un liquide irritant.",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Bonne avec supervision - peu de risque, mais la sécrétion défensive peut irriter la peau sensible ; se laver les mains après manipulation",
+      "compatibilityWithOtherAnimals": "À élever seul ou avec des congénères de taille proche ; ne pas cohabiter avec d'autres espèces",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Archispirostreptus_gigas",
+          "title": "Archispirostreptus gigas - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections fongiques (moisissure)",
+          "symptoms": "Croissance blanche, grise ou verdâtre sur l'exosquelette, entre les segments, près des pattes",
+          "prevention": "Maintenir une ventilation adéquate, éviter l'excès d'humidité, substrat propre et nettoyage régulier",
+          "whenToConsult": "Dès apparition de taches blanches/grises, isoler l'animal"
+        },
+        {
+          "name": "Déshydratation",
+          "symptoms": "Ralentissement moteur, corps ratatiné, perte d'appétit",
+          "prevention": "Substrat légèrement humide, point d'eau, humidité adaptée sans excès",
+          "whenToConsult": "Si immobilité accrue ou aspect flétri"
+        },
+        {
+          "name": "Défaut de mue",
+          "symptoms": "Exosquelette qui ne se détache pas correctement, immobilité",
+          "prevention": "Humidité stable, substrat adéquat pour faciliter la mue, absence de stress",
+          "whenToConsult": "Dès difficulté visible de mue, isoler l'animal"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.furrycritter.com/pages/health/invertebrates/myr_fungal_infection.htm",
+          "title": "Myriapods Fungal Infection Health Guide"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Les œufs sont pondus dans le substrat (frass) et les jeunes en sortent en le mangeant. Selon un élevage universitaire, la reproduction demande peu de dérangement, des feuilles de feuillus, des cachettes et un mâle et une femelle de taille proche. Les générations successives en captivité restent rares.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://arachnoboards.com/threads/the-secrets-to-breeding-a-gigas.266488/",
+          "title": "The Secrets to Breeding A. gigas - Arachnoboards"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 1406471,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons (brown crickets)",
+          "frequency": "tous les 2 jours",
+          "notes": "Proie la plus facilement acceptée, de taille adaptée à la mante"
+        },
+        {
+          "name": "Petits insectes (mouches, coléoptères, abeilles)",
+          "frequency": "selon appétit",
+          "notes": "Variété importante pour équilibre nutritionnel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Risque de blessure pour la mante"
+        },
+        {
+          "name": "Proies traitées aux pesticides",
+          "reason": "Toxines nocives pour l'insecte"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Proies vivantes de taille adaptée (1-2 grillons selon la taille de la mante) ; retirer les proies non consommées",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.reptilecentre.com/info-orchid-mantis-care-sheet",
+          "title": "Orchid Mantis Care Sheet"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hymenopus_coronatus",
+          "title": "Hymenopus coronatus - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 21,
+      "tempMax": 24,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium en verre d'au moins 20 cm de long et 30 cm de haut",
+      "lightNeeds": "Lumière naturelle douce, éviter le soleil direct. Pas d'UV obligatoire",
+      "activityEnrichment": "Branches naturelles et plantes artificielles pour le perchage, espace suffisant pour les mouvements",
+      "hygieneNotes": "Vaporisation quotidienne le matin sur un substrat d'environ 5 cm retenant l'humidité, point d'eau, nettoyage régulier, retrait des proies non consommées",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.reptilecentre.com/info-orchid-mantis-care-sheet",
+          "title": "Orchid Mantis Care Sheet"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Prédatrice à l'affût, camouflage floral (blanc/rose) mimant une orchidée. Peu active sauf lors de la chasse.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bonne avec supervision, peu de risque. Animal fragile à manipuler avec précaution.",
+      "compatibilityWithOtherAnimals": "Strictement solitaire. Cannibalisme documenté entre congénères. À élever seule.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hymenopus_coronatus",
+          "title": "Hymenopus coronatus - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Black Death (septicémie bactérienne)",
+          "symptoms": "Zones sombres sur le corps, lenteur extrême, inactivité, mort rapide",
+          "prevention": "Hygiène stricte du terrarium, éviter les blessures, retirer les proies non consommées, stress minimal",
+          "whenToConsult": "Dès apparition de taches noires ou comportement anormal"
+        },
+        {
+          "name": "Parasites (vers de cheval/horsehair worms)",
+          "symptoms": "Comportement anormal (attirance vers l'eau), retard de croissance",
+          "prevention": "Éviter les proies capturées dans la nature ou potentiellement parasitées, hygiène stricte",
+          "whenToConsult": "Si orientation anormale vers l'eau ou comportement étrange"
+        },
+        {
+          "name": "Infections fongiques",
+          "symptoms": "Croissance blanche/grise sur l'exosquelette, articulations gonflées",
+          "prevention": "Contrôle de l'humidité, ventilation adéquate, propreté constante",
+          "whenToConsult": "Dès apparition d'une croissance suspecte"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.furrycritter.com/pages/health/invertebrates/black_death_bacterial_septicemia.htm",
+          "title": "Black Death (Bacterial Septicemia) - Furry Critter"
+        },
+        {
+          "type": "guide",
+          "url": "https://a-z-animals.com/articles/the-deadly-parasite-that-forces-praying-mantises-to-drown/",
+          "title": "The Deadly Parasite - A-Z Animals"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Dimorphisme sexuel très marqué : le mâle mesure moins de la moitié de la taille de la femelle. La femelle garde ses œufs.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hymenopus_coronatus",
+          "title": "Hymenopus coronatus - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 1415423,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Ronce (Rubus)",
+          "frequency": "quotidienne",
+          "notes": "Plante hôte citée par le Phasmid Study Group"
+        },
+        {
+          "name": "Rosier, aubépine, feuilles de goyavier",
+          "frequency": "quotidienne",
+          "notes": "Autres plantes hôtes citées par le Phasmid Study Group"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Feuilles sèches ou fanées",
+          "reason": "Risque de malnutrition et de déshydratation"
+        },
+        {
+          "name": "Plantes traitées aux pesticides",
+          "reason": "Toxiques pour le phasme"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Feuilles fraîches et tendres, régulièrement remplacées",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://phasmidstudygroup.org/phasmid-info/psg-culture-list/species-info?psg_no=278",
+          "title": "Phyllium philippinicum - Phasmid Study Group"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Phyllium_philippinicum",
+          "title": "Phyllium philippinicum - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium haut avec de nombreuses branches fraîches pour l'alimentation et le perchage",
+      "lightNeeds": "Lumière naturelle douce, pas d'exposition prolongée au soleil direct",
+      "activityEnrichment": "Branches naturelles fraîches pour alimentation et perchage, espace vertical",
+      "hygieneNotes": "Vaporisation régulière, ventilation constante pour éviter les moisissures, branches renouvelées avec feuilles fraîches, nettoyage hebdomadaire",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://phasmidstudygroup.org/phasmid-info/psg-culture-list/species-info?psg_no=278",
+          "title": "Phyllium philippinicum - Phasmid Study Group"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Camouflage remarquable mimant une feuille. Très peu actif, passe la journée immobile sur les branches. Facilement stressé par des manipulations fréquentes.",
+      "sociability": null,
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Bonne avec observation respectueuse sans manipulation excessive. Non agressif, pas de défense active, peu de risque.",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://phasmidstudygroup.org/phasmid-info/psg-culture-list/species-info?psg_no=278",
+          "title": "Phyllium philippinicum - Phasmid Study Group"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Phyllium_philippinicum",
+          "title": "Phyllium philippinicum - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections fongiques",
+          "symptoms": "Croissance blanche/grise sur le corps ou moisissures sur le décor, léthargie, perte d'appétit",
+          "prevention": "Ventilation adéquate, éviter l'excès d'humidité, branches nettoyées régulièrement, retrait des feuilles moisies",
+          "whenToConsult": "Dès apparition de taches blanches ou grises"
+        },
+        {
+          "name": "Déshydratation",
+          "symptoms": "Corps ratatiné surtout au niveau abdominal, ralentissement, léthargie",
+          "prevention": "Vaporisation régulière, feuilles fraîches",
+          "whenToConsult": "Si apparence flétrie ou immobilité inhabituelle"
+        },
+        {
+          "name": "Défaut de mue",
+          "symptoms": "Exosquelette qui ne se détache pas, insecte bloqué dans l'ancienne peau, perte de membres",
+          "prevention": "Humidité suffisante, espace vertical suffisant, plantes hôtes fraîches, éviter la manipulation pendant la mue",
+          "whenToConsult": "Dès difficulté visible de mue"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.furrycritter.com/pages/articles/invertebrates/stick_insect_health.htm",
+          "title": "Stick Insect Health - Furry Critter"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Reproduction sexuée signalée par le Phasmid Study Group. Dimorphisme : femelle d'environ 80 mm, mâle d'environ 55 mm.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://phasmidstudygroup.org/phasmid-info/psg-culture-list/species-info?psg_no=278",
+          "title": "Phyllium philippinicum - Phasmid Study Group"
+        }
+      ]
+    }
+  }
+]

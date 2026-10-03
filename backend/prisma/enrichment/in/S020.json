@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2455676,
+  "commonNameFr": "Serpent des blés de l'Ouest",
+  "scientificName": "Pantherophis obsoletus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2457884,
+  "commonNameFr": "Boiga brune",
+  "scientificName": "Boiga irregularis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2466939,
+  "commonNameFr": "Anole vert",
+  "scientificName": "Anolis carolinensis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

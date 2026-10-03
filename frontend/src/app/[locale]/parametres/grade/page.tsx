@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { api } from '@/lib/api';
 
 const BADGE_IMAGES: Record<string, string> = {
@@ -45,6 +45,7 @@ type NotificationEvent = {
 
 export default function GradePage() {
   const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
   const { user, token, isLoading: authLoading } = useAuth();
   const [grade, setGrade] = useState<GradeData | null>(DEFAULT_GRADE);
@@ -70,10 +71,12 @@ export default function GradePage() {
     if (!token) return;
     setLoading(true);
     try {
-      const today = new Date().toISOString().slice(0, 10);
+      // Sans `date` : le backend prend « aujourd'hui » dans le fuseau du compte (User.timezone),
+      // comme le scheduler de rappels et l'agenda. L'ancienne date UTC du navigateur désignait
+      // la veille entre minuit et 2 h à Paris.
       const [gradeRes, eventsRes] = await Promise.all([
         api.getGrade(token),
-        api.getNotificationEvents(token, today, true),
+        api.getNotificationEvents(token, undefined, true),
       ]);
       setGrade(gradeRes?.points != null ? gradeRes : null);
       setEvents(Array.isArray(eventsRes) ? eventsRes : []);
@@ -112,11 +115,11 @@ export default function GradePage() {
       if (res?.deleted !== false) {
         setEvents((prev) => prev.filter((e) => e.id !== eventId));
       } else {
-        setGradeError(t('grade.deleteError') || 'Impossible de supprimer le rappel.');
+        setGradeError(t('grade.deleteError'));
       }
     } catch (e) {
       console.error(e);
-      setGradeError(e instanceof Error ? e.message : (t('grade.deleteError') || 'Impossible de supprimer le rappel.'));
+      setGradeError(e instanceof Error ? e.message : (t('grade.deleteError')));
     } finally {
       setDeletingId(null);
     }
@@ -124,7 +127,7 @@ export default function GradePage() {
 
   const displayGrade = grade ?? DEFAULT_GRADE;
   const gradeLabelKey = displayGrade.grade ? `grade.${displayGrade.grade}` : '';
-  const gradeLabel = gradeLabelKey ? t(gradeLabelKey as any) : displayGrade.grade;
+  const gradeLabel = gradeLabelKey ? t(gradeLabelKey as Parameters<typeof t>[0]) : displayGrade.grade;
 
   /** Couleur de la barre selon le pourcentage acquis (0→rouge/ambre, 50→jaune, 75→vert clair, 100→vert) */
   const progressBarColor = (pct: number) => {
@@ -211,7 +214,7 @@ export default function GradePage() {
               <>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
                   {displayGrade.points} / {displayGrade.points - displayGrade.pointsInCurrent + displayGrade.pointsNeededForNext}{' '}
-                  {t('grade.points')} → {t(`grade.${displayGrade.nextGrade}` as any)}
+                  {t('grade.points')} → {t(`grade.${displayGrade.nextGrade}` as Parameters<typeof t>[0])}
                 </p>
                 <div
                   className="w-full h-6 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600"
@@ -235,7 +238,7 @@ export default function GradePage() {
             ) : (
               <>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                  {displayGrade.points} {t('grade.points')} — {t(`grade.${displayGrade.grade}` as any)} max
+                  {displayGrade.points} {t('grade.points')} — {t(`grade.${displayGrade.grade}` as Parameters<typeof t>[0])} max
                 </p>
                 <div
                   className="w-full h-6 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600"
@@ -278,7 +281,7 @@ export default function GradePage() {
                       {ev.label || ev.type}
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {new Date(ev.scheduledAt).toLocaleTimeString(undefined, {
+                      {new Date(ev.scheduledAt).toLocaleTimeString(locale, {
                         hour: '2-digit',
                         minute: '2-digit',
                       })}

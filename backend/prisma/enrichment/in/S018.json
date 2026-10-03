@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2441502,
+  "commonNameFr": "Tortue bordée",
+  "scientificName": "Testudo marginata",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2443074,
+  "commonNameFr": "Tortue map",
+  "scientificName": "Graptemys geographica",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2445755,
+  "commonNameFr": "Gecko satanique",
+  "scientificName": "Uroplatus phantasticus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

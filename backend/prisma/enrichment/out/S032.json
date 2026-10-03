@@ -1,0 +1,176 @@
+[
+  {
+    "speciesId": 5217160,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Insectes variés (grillons, criquets, vers de farine)", "frequency": "plusieurs fois par semaine", "notes": "Proies adaptées à la taille ; chasseur nocturne vorace (cloportes, limaces, coléoptères, chenilles, mouches, fourmis, araignées)" },
+        { "name": "Vers de terre, petits arthropodes", "frequency": "hebdomadaire", "notes": "Enrichissement nutritionnel" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Proies trop grosses", "reason": "Risque d'étouffement" }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Régime riche en protéines, avec suppléments en calcium et vitamine D3",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Common_toad", "title": "Common Toad (Bufo bufo)" }]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle, pas de chauffage excessif, nuit naturelle",
+      "activityEnrichment": "Cachettes, écorce, substrat profond, zone humide",
+      "hygieneNotes": "Eau déchlorée, se laver les mains après contact, substrat humide",
+      "costEstimate": "moyen",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Common_toad", "title": "Common Toad (Bufo bufo)" }]
+    },
+    "behavior": {
+      "generalBehavior": "Crapaud terrestre nocturne et solitaire, qui reste caché pendant la journée et sort au crépuscule ; plus actif par temps humide ; migre au printemps vers les mares de reproduction",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Faible, peu de manipulation recommandée",
+      "compatibilityWithOtherAnimals": "Solitaire ; peut avaler de petites proies (jusqu'à de petites souris), ne pas faire cohabiter avec de petits animaux",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Common_toad", "title": "Common Toad (Bufo bufo)" }]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce protégée en France (arrêté du 22 juillet 1993, art. 1, d'après Wikipédia FR) et inscrite à l'annexe III de la Convention de Berne ; non inscrite à la CITES. Se renseigner auprès de la DDPP/DREAL avant toute détention."]
+      },
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Crapaud_commun", "title": "Crapaud commun — Wikipédia" }]
+    },
+    "reproduction": {
+      "season": "printemps",
+      "gestationDays": null,
+      "incubationDays": 10,
+      "litterSizeMin": 1500,
+      "litterSizeMax": 6000,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "modere",
+      "notes": "Migration printanière vers les mares de reproduction. La femelle pond de longs cordons gélatineux doubles de 1500 à 6000 œufs. Éclosion après environ 10 jours (jusqu'à 2-3 semaines selon la température de l'eau), métamorphose vers 12 semaines. Maturité sexuelle à 3 à 7 ans.",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Common_toad", "title": "Common Toad (Bufo bufo)" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Crapaud_commun", "title": "Crapaud commun — Wikipédia" }
+      ]
+    }
+  },
+  {
+    "speciesId": 5217264,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Insectes arboricoles (mouches, grillons, petits papillons)", "frequency": "plusieurs fois par semaine", "notes": "Proies de faible taille adaptées" },
+        { "name": "Petits arthropodes et vers", "frequency": "hebdomadaire", "notes": "Vers de farine et petits scarabées" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Proies venimeuses", "reason": "Blessures graves" },
+        { "name": "Aliments transformés", "reason": "Inadaptés aux amphibiens" }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Alimentation variée, avec suppléments minéraux",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rhacophorus_maximus", "title": "Zhangixalus smaragdinus (syn. Rhacophorus maximus) — Wikipedia" }]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Alternance naturelle jour/nuit",
+      "activityEnrichment": "Plantes vivantes, branches pour grimper, feuillage dense (espèce arboricole de forêts humides)",
+      "hygieneNotes": "Eau déchlorée, se laver les mains après contact, humidité élevée",
+      "costEstimate": "élevé",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rhacophorus_maximus", "title": "Zhangixalus smaragdinus (syn. Rhacophorus maximus) — Wikipedia" }]
+    },
+    "behavior": {
+      "generalBehavior": "Grenouille arboricole, qui passe l'essentiel de son temps dans la canopée hors période de reproduction",
+      "sociability": null,
+      "difficultyLevel": "avance",
+      "compatibilityWithChildren": "Non recommandé, manipulation minimale",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rhacophorus_maximus", "title": "Zhangixalus smaragdinus (syn. Rhacophorus maximus) — Wikipedia" }]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Construit des nids de mousse au-dessus des mares et des étangs.",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Rhacophorus_maximus", "title": "Zhangixalus smaragdinus (syn. Rhacophorus maximus) — Wikipedia" }]
+    }
+  },
+  {
+    "speciesId": 5218022,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Petits arthropodes (fourmis, acariens ; en captivité drosophiles et petits grillons)", "frequency": "quotidienne ou tous les 2 jours", "notes": "Dans la nature, régime de petits arthropodes, surtout fourmis et acariens" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Insectes sauvages non identifiés", "reason": "Risque de pesticides ou de parasites" }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Les alcaloïdes toxiques viennent de l'alimentation naturelle (fourmis, acariens) ; en captivité, nourries de grillons et de drosophiles, elles deviennent non toxiques",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Green_and_black_poison_dart_frog", "title": "Green and black poison dart frog — Wikipedia" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Dendrobates_auratus", "title": "Dendrobates auratus — Wikipédia" }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle modérée, pas de chauffage excessif",
+      "activityEnrichment": "Plantes vivantes (bromélies avec petites mares), mousse, feuillage, zones ombragées",
+      "hygieneNotes": "Eau déchlorée, se laver les mains après contact, humidité élevée (forêts humides)",
+      "costEstimate": "élevé",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Green_and_black_poison_dart_frog", "title": "Green and black poison dart frog — Wikipedia" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Dendrobates_auratus", "title": "Dendrobates auratus — Wikipédia" }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Dendrobate semi-arboricole et territorial, qui passe du temps dans les petites mares de bromélies ; les mâles chantent fort en période de reproduction et se rassemblent en groupes avant l'accouplement",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "avance",
+      "compatibilityWithChildren": "Déconseillé : petit animal fragile, manipulation à éviter ; les individus nourris de grillons et de drosophiles en captivité deviennent non toxiques",
+      "compatibilityWithOtherAnimals": "Comportement territorial",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Green_and_black_poison_dart_frog", "title": "Green and black poison dart frog — Wikipedia" }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 14,
+      "litterSizeMin": 12,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "avance",
+      "notes": "Ponte d'environ une douzaine d'œufs ; éclosion en têtards après environ 14 jours ; les parents (en général les mâles) transportent les têtards sur leur dos jusqu'aux mares de bromélies. Les têtards peuvent être cannibales. Maturité sexuelle à 12-15 mois ; espérance de vie d'environ 8 ans en captivité.",
+      "sources": [
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Green_and_black_poison_dart_frog", "title": "Green and black poison dart frog — Wikipedia" },
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Dendrobates_auratus", "title": "Dendrobates auratus — Wikipédia" }
+      ]
+    }
+  }
+]

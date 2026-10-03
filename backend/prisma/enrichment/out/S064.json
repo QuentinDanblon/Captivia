@@ -1,0 +1,301 @@
+[
+  {
+    "speciesId": 104101859,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Rats et souris congelés-décongelés",
+          "frequency": "hebdomadaire",
+          "notes": "Taille progressive selon l'âge du python, principal menu"
+        },
+        {
+          "name": "Petits mammifères (lapins, cobayes jeunes)",
+          "frequency": "hebdomadaire",
+          "notes": "Pour adultes, complément nutritionnel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies vivantes non surveillées",
+          "reason": "Risque de blessures du serpent par contre-attaque"
+        },
+        {
+          "name": "Proies contaminées ou malades",
+          "reason": "Transmission de parasites et infections"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Proies congelées-décongelées ou vivantes tuées, adaptées à la taille du serpent (en nature: oiseaux, reptiles et mammifères tués par constriction)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Python_bivittatus",
+          "title": "Python bivittatus - Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 25,
+      "tempMax": 30,
+      "humidityMin": 60,
+      "humidityMax": 75,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles jour/nuit naturels 12h/12h, point chaud 30°C, lampe UVA mineure",
+      "activityEnrichment": "Branches pour grimper (excellent grimpeur), cachettes, zone humide pour trempage",
+      "hygieneNotes": "Substrat humide-drainé, brumisations régulières, bassin d'eau douce",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Python_bivittatus",
+          "title": "Python bivittatus - Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent nocturne, excellent grimpeur et nageur, passe le jour caché dans des terriers ou cavités",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Non recommandé, morsure possible et serpent agressif potentiellement",
+      "compatibilityWithOtherAnimals": "À maintenir seul, prédateur strict",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Python_bivittatus",
+          "title": "Python bivittatus - Wikipédia"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 60,
+      "litterSizeMin": 20,
+      "litterSizeMax": 50,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ponte de 20 à 50 œufs (rarement jusqu'à 100) environ 7-8 semaines après l'accouplement, incubation d'environ 2 mois; la femelle garde les œufs et fournit de la chaleur métabolique si la température baisse",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Python_bivittatus",
+          "title": "Python bivittatus - Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104104828,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Opuntia (figuier de Barbarie)",
+          "frequency": "quotidienne",
+          "notes": "Aliment préféré, jeunes pousses appréciées"
+        },
+        {
+          "name": "Graminées et herbes variées",
+          "frequency": "quotidienne",
+          "notes": "80-90% du régime alimentaire (pâturage)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Fruits trop sucrés",
+          "reason": "Digestifs problématiques, diarrhée"
+        },
+        {
+          "name": "Laitue iceberg et chou cru",
+          "reason": "Pauvre nutritionnellement, peu digeste"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "80-90% herbes graminées naturelles, suppléments de calcium réguliers",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Astrochelys_radiata",
+          "title": "Astrochelys radiata - Tortue radiée - Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 20,
+      "tempMax": 30,
+      "humidityMin": 40,
+      "humidityMax": 60,
+      "minSpaceSize": null,
+      "lightNeeds": "Exposition solaire directe quotidienne 3-4h minimum, UVB 10-12h/jour si indoor",
+      "activityEnrichment": "Substrat profond pour fouissement, cachettes, plantes naturelles comestibles",
+      "hygieneNotes": "Substrat coco-fibre mélangé terre, humidité modérée, zone sèche et zone humide",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Astrochelys_radiata",
+          "title": "Astrochelys radiata - Tortue radiée - Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Herbivore, diurne actif, fouisseur naturel, peu agressif",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon si manipulation douce, attention aux carapaces fragiles",
+      "compatibilityWithOtherAnimals": "Cohabitation possible avec autres tortues de même espèce si espace suffisant",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Astrochelys_radiata",
+          "title": "Astrochelys radiata - Tortue radiée - Wikipédia"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'annexe I de la CITES depuis 1975, en danger critique d'extinction (UICN)"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Astrochelys_radiata",
+          "title": "Astrochelys radiata - Wikipédia (CITES I)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 180,
+      "litterSizeMin": 3,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ponte de 3 à 12 œufs, incubation de 5 à 8 mois, nouveau-nés de 3,2 à 4 cm",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Astrochelys_radiata",
+          "title": "Astrochelys radiata - Tortue radiée - Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104105088,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Graminées naturelles (ray-grass, fescue)",
+          "frequency": "quotidienne",
+          "notes": "Principal aliment naturel (graminées, fruits tombés, fleurs et feuilles de plantes succulentes)"
+        },
+        {
+          "name": "Fleurs et feuillage variés (pissenlit, trèfle)",
+          "frequency": "quotidienne",
+          "notes": "Diversification nutritionnelle"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Viande et produits animaux",
+          "reason": "Espèce essentiellement herbivore, risque de problèmes digestifs"
+        },
+        {
+          "name": "Fruits trop sucrés",
+          "reason": "Causent diarrhée et déséquilibre nutritionnel"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Herbes naturelles fraîches quotidiennement, calcium régulier, accès constant à foin de qualité",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Indian_star_tortoise",
+          "title": "Indian star tortoise - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Enclos outdoor 2m² minimum, terrarium indoor 100x70x40cm",
+      "lightNeeds": "UVB 10-12h/jour, exposition solaire 4-5h quotidienne si possible, éviter surchauffe",
+      "activityEnrichment": "Substrat naturel pour fouissement, cachettes, variations de relief",
+      "hygieneNotes": "Substrat coco-fibre + terre mélangés, humidité modérée, nettoyage régulier déjections",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Indian_star_tortoise",
+          "title": "Indian star tortoise - Wikipedia (habitat: zones sèches, forêts claires, semi-désert)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Herbivore diurne; les mâles rivalisent pour les femelles en se bousculant et en tentant de retourner leurs rivaux",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Très bon, manipulation possible avec douceur",
+      "compatibilityWithOtherAnimals": "Éviter de garder plusieurs mâles ensemble (combats de rivalité); cohabitation à tester au cas par cas",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Indian_star_tortoise",
+          "title": "Indian star tortoise - Wikipedia"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce inscrite à l'annexe I de la CITES depuis 2019"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Indian_star_tortoise",
+          "title": "Indian star tortoise - Wikipedia (CITES Appendix I, 2019)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 115,
+      "litterSizeMin": 1,
+      "litterSizeMax": 10,
+      "sexualMaturityMonths": 96,
+      "breedingDifficulty": "avance",
+      "notes": "Maturité sexuelle vers 6-8 ans (mâles) et 8-12 ans (femelles), 1 à 9 pontes par an possibles, 1 à 10 œufs par ponte, incubation de 50 à 180 jours selon les conditions",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Indian_star_tortoise",
+          "title": "Indian star tortoise - Wikipedia"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000058,
+    "status": "verified",
+    "note": "Peuple Malimiut Inupiaq, poids, calme/aboie rarement confirmés; taille et usage ajoutés."
+  },
+  {
+    "speciesId": 2000000063,
+    "status": "corrected",
+    "note": "'Croisement avec d'autres petits chiens' remplacé par ascendance réelle (maltais, barbet, caniche); 'Renaissance' précisé (XVIe s., François Ier/Henri III)."
+  },
+  {
+    "speciesId": 2000000064,
+    "status": "corrected",
+    "note": "'Ossature très forte' non sourcé remplacé par tailles/poids; usage pistage ajouté; légende VIIIe s. confirmée."
+  },
+  {
+    "speciesId": 2000000068,
+    "status": "corrected",
+    "note": "Taille 45-62 cm, origine FCI/Allemagne, canard, caractère calme confirmés; 'polyvalence' remplacé par 'facile à dresser'."
+  },
+  {
+    "speciesId": 2000000069,
+    "status": "corrected",
+    "note": "'Apparence de Colley miniature' et 'docile' non sourcés retirés; taille 33-39,5 cm (femelles 33-38) corrigée; ascendance complétée."
+  },
+  {
+    "speciesId": 2000000070,
+    "status": "corrected",
+    "note": "'Tempérament de travailleur dévoué' non sourcé (page sans caractère) retiré; poids et rôle de messager ajoutés."
+  },
+  {
+    "speciesId": 2000000073,
+    "status": "corrected",
+    "note": "Poids corrigé 9-14 → 11-14 kg (24-30 lb); 'énergique/enthousiaste' non sourcé remplacé par 'amical et affectueux'."
+  },
+  {
+    "speciesId": 2000000074,
+    "status": "corrected",
+    "note": "Nom de race ajouté (description initiale anonyme); origine XVIe s., Charles II, poids, caractère confirmés; 'idéal' retiré."
+  },
+  {
+    "speciesId": 2000000076,
+    "status": "corrected",
+    "note": "Ascendance corrigée (celtes vertragus, sloughis seulement possible); 'tempérament de chasseur rapide' non sourcé retiré; poils lisse/rude ajoutés."
+  },
+  {
+    "speciesId": 2000000077,
+    "status": "corrected",
+    "note": "Taille corrigée 70-80 → 68-76 cm (contredit); 'musculature puissante/élégance' non sourcé retiré; vitesse et usages ajoutés."
+  },
+  {
+    "speciesId": 2000000080,
+    "status": "corrected",
+    "note": "'Équilibré' non sourcé remplacé par 'éveillé'; taille et entretien du poil ajoutés."
+  },
+  {
+    "speciesId": 2000000083,
+    "status": "corrected",
+    "note": "'Nature équilibrée' et 'amical' reformulés selon la page; taille ajoutée; peuple Malimiut et traîneaux confirmés."
+  },
+  {
+    "speciesId": 2000000085,
+    "status": "corrected",
+    "note": "Poids corrigé 30-40 → 23-32 kg (contredit), taille 55-60 → 55-63 cm; 'découvert comme type naturel / régions rurales' non sourcé retiré; usages et poils ajoutés."
+  },
+  {
+    "speciesId": 2000000087,
+    "status": "corrected",
+    "note": "'Hybridation ancienne loups-chiens' non sourcé/contredit (page : race ancienne de type spitz) retiré; taille et usages ajoutés."
+  },
+  {
+    "speciesId": 2000000088,
+    "status": "corrected",
+    "note": "Poids/taille corrigés par sexe; 'courage du Bulldog et sagacité du Setter' contredit (page : sagacité du Retriever) retiré; rareté et fin de la chasse (1978) ajoutées."
+  }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000188,
+    "status": "removed",
+    "note": "Description déjà null : rien à vérifier"
+  },
+  {
+    "speciesId": 2000000189,
+    "status": "verified",
+    "note": "Tous les faits confirmés par fr.wikipedia (sauts > 1,80 m, nocturne, queue-balancier, terrier profond, distinction gerbilles/muridés). Page générale « gerboises » ; J. jaculus y figure."
+  },
+  {
+    "speciesId": 2000000190,
+    "status": "corrected",
+    "note": "Taille, plumage, huppe, joues, genre monotypique, savanes, groupes confirmés. « Petit perroquet » non confirmé -> « oiseau » ; phrase générique sur les soins remplacée par le fait sourcé (taux d'abandon)."
+  },
+  {
+    "speciesId": 2000000191,
+    "status": "corrected",
+    "note": "33 cm, 400 g, gris/queue rouge, niveau cognitif 4-6 ans confirmés. Corrigé : « forêts équatoriales d'Afrique de l'Ouest et centrale » -> Afrique équatoriale (liste de pays) ; « peut apprendre 100+ mots » -> cas d'Alex."
+  },
+  {
+    "speciesId": 2000000192,
+    "status": "verified",
+    "note": "Plus grand perroquet, aire, bleu cobalt, poids, envergure, CITES I, Vulnérable, causes du déclin, programmes de protection confirmés sur fr.wikipedia."
+  },
+  {
+    "speciesId": 2000000193,
+    "status": "corrected",
+    "note": "Page fr « Inséparable » (genre) où A. roseicollis figure : petits psittacidés d'Afrique australe/Madagascar, couples liés, 12-15 ans confirmés. Retiré : taille 10-17 cm (non confirmée), « exclusivement compagnons domestiques » (faux/non confirmé), « Afrique subsaharienne » -> sud de l'Afrique. Source = page du genre, pas de l'espèce."
+  },
+  {
+    "speciesId": 2000000194,
+    "status": "corrected",
+    "note": "Chiffres 13-17 cm / 40-60 g valent pour le genre, pas pour Fischer (14 cm) : corrigé et attribué au genre ; description de Fischer ajoutée depuis la page. Retiré : « sociaux et affectueux », « animaux de compagnie »."
+  },
+  {
+    "speciesId": 2000000195,
+    "status": "corrected",
+    "note": "Taille, famille, statut LC, sous-espèce du cap York confirmés. Corrigé : aire « du Queensland à la Tasmanie » précisée (côte est, N-S-Galles, Victoria, Australie-Méridionale, Tasmanie)."
+  },
+  {
+    "speciesId": 2000000196,
+    "status": "removed",
+    "note": "Page Scaly-breasted_munia = Lonchura punctulata (munia ponctué), espèce différente du Bengali (Lonchura striata domestica). Description d'une autre espèce -> null."
+  },
+  {
+    "speciesId": 2000000197,
+    "status": "corrected",
+    "note": "La page citée (fr Chardonneret) est une page d'homonymie (plusieurs espèces) ; description réécrite d'après la page de l'espèce fr.wikipedia « Chardonneret élégant », sourceUrl remplacée. Corrigé : « historiquement » (faux, il se nourrit toujours de graines de chardon) ; 40 % en 10 ans (2016) -> 40 % entre 2010 et 2020."
+  },
+  {
+    "speciesId": 2000000199,
+    "status": "verified",
+    "note": "Grand perroquet du sous-continent indien, bec puissant, collier noir + bande nucale rose (mâle), nom en hommage à Alexandre, docile/intelligente, naturalisée en Europe : tout confirmé."
+  },
+  {
+    "speciesId": 2000000200,
+    "status": "corrected",
+    "note": "Origine, 30 cm, tête rouge, joues blanches, dos écaillé, introduction ~1910 NZ, île du Nord confirmés. Reformulé : « plumage écaillé noir aux reflets » -> plumes noires bordées de jaune/vert."
+  },
+  {
+    "speciesId": 2000000201,
+    "status": "corrected",
+    "note": "Tout confirmé ; « rare à l'état sauvage » -> « localement rare » (aire étendue) ; « corps rougeâtre » -> orange rougeâtre ; ailes ET queue vertes."
+  },
+  {
+    "speciesId": 2000000202,
+    "status": "corrected",
+    "note": "23 cm, calotte noire, vert, pieds noirâtres, canopée confirmés. Retiré : liste de pays incluant l'Équateur (la page cite Colombie, Venezuela, Guyanes, Pérou, Brésil), « bassin amazonien » ; « petits groupes » -> 10-30 individus (page sur les caïques)."
+  },
+  {
+    "speciesId": 2000000203,
+    "status": "corrected",
+    "note": "27 cm, couleurs, aire (Costa Rica…Bolivie/Brésil) confirmés. Retiré : « subtropicales », « populaire comme animal de compagnie » (la page parle de calme/affectueux, peu bavard)."
+  }
+]

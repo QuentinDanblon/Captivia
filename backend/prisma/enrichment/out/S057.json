@@ -1,0 +1,326 @@
+[
+  {
+    "speciesId": 104040409,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits poissons",
+          "frequency": null,
+          "notes": "Régime naturel : poissons, têtards, crustacés, annélides et arthropodes"
+        },
+        {
+          "name": "Petits crustacés (daphnies, artémias)",
+          "frequency": null,
+          "notes": "Crustacés consommés à l'état naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies de grande taille",
+          "reason": "Le xénope n'a pas de langue et pousse la nourriture dans sa bouche avec ses mains : risque de difficultés à avaler"
+        },
+        {
+          "name": "Nourriture contaminée ou viande crue de qualité douteuse",
+          "reason": "Risque d'infections parasitaires et bactériennes"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Pas de langue : le xénope utilise ses mains pour pousser la nourriture dans sa bouche. Il repère ses proies par l'odorat et la ligne latérale plutôt que par la vue. Se nourrit surtout après la tombée de la nuit.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/African_clawed_frog",
+          "title": "African clawed frog - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycle jour-nuit régulier ; espèce principalement nocturne, éviter l'éclairage intense",
+      "activityEnrichment": "Cachettes aquatiques (PVC, pierres), plantes aquatiques pour se cacher",
+      "hygieneNotes": "Espèce entièrement aquatique : eau déchlorée, changements d'eau réguliers, filtration efficace",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/African_clawed_frog",
+          "title": "African clawed frog - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Entièrement aquatique et nocturne : la plupart de l'activité alimentaire et reproductrice a lieu après la tombée de la nuit. Détecte les proies par l'odorat et la ligne latérale plutôt que par la vue.",
+      "sociability": null,
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Non recommandé pour les enfants, manipulation minimale",
+      "compatibilityWithOtherAnimals": "Espèce fortement cannibale (consomme ses propres larves) : ne pas la faire cohabiter avec des larves, têtards ou petits animaux aquatiques",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/African_clawed_frog",
+          "title": "African clawed frog - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections parasitaires (monogènes)",
+          "symptoms": "Léthargie, perte d'appétit, irritation de la peau",
+          "prevention": "Quarantaine des nouveaux individus, eau de qualité optimale, nourriture fraîche",
+          "whenToConsult": "Dès observation de comportement anormal ou perte d'appétit"
+        },
+        {
+          "name": "Mycose/Infection fongique",
+          "symptoms": "Taches blanches sur la peau ou les branchies, peau endommagée",
+          "prevention": "Eau propre, filtration adéquate, éviter les blessures",
+          "whenToConsult": "À l'apparition de taches blanches persistantes"
+        },
+        {
+          "name": "Redleg (infection bactérienne)",
+          "symptoms": "Rougeur au niveau des pattes et du ventre, gonflement",
+          "prevention": "Qualité de l'eau, température stable, hygiène de l'aquarium",
+          "whenToConsult": "Immédiatement si signes de rougeur"
+        },
+        {
+          "name": "Chytridiomycose (Batrachochytrium dendrobatidis)",
+          "symptoms": "Le xénope peut porter le champignon sans symptômes visibles et contaminer d'autres amphibiens",
+          "prevention": "Ne jamais mettre en contact avec d'autres amphibiens, quarantaine des nouveaux individus",
+          "whenToConsult": "En cas de doute avant toute cohabitation avec d'autres amphibiens"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/African_clawed_frog",
+          "title": "African clawed frog - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année (quand les conditions le permettent)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "facile",
+      "notes": "Maturité sexuelle à 1-2 ans. Amplexus inguinal (le mâle saisit la femelle au niveau des pattes arrière). Les mâles émettent des trilles longs et courts alternés comme appels.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/African_clawed_frog",
+          "title": "African clawed frog - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104040736,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Vers de terre et insectes",
+          "frequency": null,
+          "notes": "Régime naturel des adultes : invertébrés terrestres (vers, mollusques, insectes)"
+        },
+        {
+          "name": "Petits poissons",
+          "frequency": null,
+          "notes": "Acceptés en captivité, avec les insectes d'élevage"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes traités aux pesticides",
+          "reason": "Bioaccumulation de toxines"
+        },
+        {
+          "name": "Proies de taille disproportionnée",
+          "reason": "Risque de refus ou de difficultés à avaler"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Le crapaud ne peut pas projeter sa langue : il doit bondir sur sa proie. Proposer des proies vivantes.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Oriental_fire-bellied_toad",
+          "title": "Oriental fire-bellied toad - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Éclairage ou chauffage spécialisé minimal ; espèce diurne qui utilise la lumière du soleil pour sa vitamine D3",
+      "activityEnrichment": "Zone terrestre et zone aquatique (espèce semi-aquatique), cachettes, plantes",
+      "hygieneNotes": "Eau déchlorée, changements d'eau réguliers, filtration douce",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Oriental_fire-bellied_toad",
+          "title": "Oriental fire-bellied toad - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Semi-aquatique et diurne. Quand il se sent menacé, il se met sur le dos pour exhiber son ventre coloré, signal d'avertissement (aposématisme).",
+      "sociability": null,
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Manipulation déconseillée : le mucus peut irriter la bouche et les yeux (toxine sans danger notable pour l'humain). Toujours se laver les mains.",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Oriental_fire-bellied_toad",
+          "title": "Oriental fire-bellied toad - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection fongique (Chytridiomycose)",
+          "symptoms": "Peau endommagée, desquamation anormale, léthargie",
+          "prevention": "Eau de qualité, température stable, quarantaine des nouveaux individus",
+          "whenToConsult": "À l'apparition de lésions anormales"
+        },
+        {
+          "name": "Infection bactérienne (Redleg)",
+          "symptoms": "Rougeur des membres et du ventre, gonflement",
+          "prevention": "Hygiène de l'habitat, eau propre, température stable",
+          "whenToConsult": "Immédiatement si signes de rougeur anormale"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Perte d'appétit, amaigrissement, abdomen gonflé",
+          "prevention": "Quarantaine, alimentation variée et fraîche",
+          "whenToConsult": "Dès signes de perte de poids"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Oriental_fire-bellied_toad",
+          "title": "Oriental fire-bellied toad - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "printanière",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 40,
+      "litterSizeMax": 110,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Reproduction vers la mi-mai, à la sortie d'hibernation. Les femelles pondent 40 à 110 œufs en grappes près de la surface de l'eau. Les pattes apparaissent après 6 à 8 semaines, la métamorphose se termine en août-septembre.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Oriental_fire-bellied_toad",
+          "title": "Oriental fire-bellied toad - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104041498,
+    "feeding": null,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Substrat humide (mousse, terreau), cachettes multiples",
+      "hygieneNotes": "Substrat gardé humide mais non saturé, eau déchlorée, mains propres lors de toute manipulation (peau perméable)",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Taiwan_salamander",
+          "title": "Taiwan salamander - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Salamandre endémique de Taïwan, vivant en haute montagne (vers 2 100 m), des milieux alpins ouverts aux forêts sempervirentes humides et ombragées.",
+      "sociability": null,
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé pour enfants, espèce délicate et en danger",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Taiwan_salamander",
+          "title": "Taiwan salamander - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection fongique (Chytridiomycose)",
+          "symptoms": "Peau endommagée, plaques blanches ou grises",
+          "prevention": "Substrat toujours humide, éviter surcharges bactériennes",
+          "whenToConsult": "À l'apparition de toute lésion cutanée"
+        },
+        {
+          "name": "Déshydratation",
+          "symptoms": "Peau sèche, apathie, refus de nourriture",
+          "prevention": "Hygrométrie élevée et constante, pulvérisations régulières",
+          "whenToConsult": "Dès signes de perte d'hydratation"
+        },
+        {
+          "name": "Parasites cutanés",
+          "symptoms": "Irritations cutanées, grattage anormal",
+          "prevention": "Quarantaine des nouveaux individus, substrat propre",
+          "whenToConsult": "À l'observation de signes d'irritation"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Taiwan_salamander",
+          "title": "Taiwan salamander - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Espèce classée « En danger » par l'UICN (2020) et protégée à Taïwan. Aucune donnée de reproduction en captivité n'est documentée : élevage non recommandé.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Taiwan_salamander",
+          "title": "Taiwan salamander - Wikipedia"
+        }
+      ]
+    }
+  }
+]

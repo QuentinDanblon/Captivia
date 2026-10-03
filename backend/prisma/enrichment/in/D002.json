@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000058,
+  "commonNameFr": "Alaskan Malamute",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000063,
+  "commonNameFr": "Bichon Frisé",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000064,
+  "commonNameFr": "Bloodhound",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000068,
+  "commonNameFr": "Caniche Royal",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000069,
+  "commonNameFr": "Chien de Berger des Shetland",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000070,
+  "commonNameFr": "Chien D’eau Portugais",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000073,
+  "commonNameFr": "Épagneul Cocker Américain",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000074,
+  "commonNameFr": "Épagneul King Charles",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000076,
+  "commonNameFr": "Galgo Espagnol",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000077,
+  "commonNameFr": "Greyhound",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000080,
+  "commonNameFr": "Lagotto Romagnolo",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000083,
+  "commonNameFr": "Malamute",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000085,
+  "commonNameFr": "Néerlandais",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000087,
+  "commonNameFr": "Norvégien",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000088,
+  "commonNameFr": "Otterhound",
+  "scientificName": "Canis lupus familiaris",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

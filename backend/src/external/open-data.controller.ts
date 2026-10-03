@@ -4,12 +4,15 @@
  * Source: plans/resource-improvement-plan.md
  */
 
+import { Throttle } from '@nestjs/throttler';
+import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
 import { Controller, Get, Query, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { OpenDataService } from './open-data.service';
 
 @ApiTags('Open Data')
 @Controller('api/open-data')
+@Throttle(EXTERNAL_API_THROTTLE)
 export class OpenDataController {
   constructor(private readonly openDataService: OpenDataService) {}
 

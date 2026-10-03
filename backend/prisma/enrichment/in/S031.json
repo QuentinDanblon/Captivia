@@ -1,0 +1,46 @@
+[
+ {
+  "speciesId": 5209145,
+  "commonNameFr": "Rainette Arboricole Verte",
+  "scientificName": "Hyla cinerea",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5216573,
+  "commonNameFr": "Grenouille tomate",
+  "scientificName": "Dyscophus antongilii",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5216933,
+  "commonNameFr": "Crapaud buffle",
+  "scientificName": "Rhinella marina",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

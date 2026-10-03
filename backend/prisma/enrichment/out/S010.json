@@ -1,0 +1,393 @@
+[
+  {
+    "speciesId": 2429038,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Drosophila hydei (mouches à fruits)",
+          "frequency": "quotidienne",
+          "notes": "Source alimentaire principale des adultes (D. melanogaster pour les juvéniles), saupoudrer de supplément vitamino-minéral"
+        },
+        {
+          "name": "Petits criquets (pinhead crickets)",
+          "frequency": "plusieurs fois par semaine",
+          "notes": "À compléter avec un supplément vitamino-minéral ; collemboles et isopodes appréciés"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes sauvages non identifiés",
+          "reason": "Risque de contamination et de parasites"
+        },
+        {
+          "name": "Eau chlorée ou chloraminée",
+          "reason": "Nocive pour les amphibiens"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Tous les insectes doivent être saupoudrés de supplément. Vitamine A 2 fois par mois, calcium sur les autres repas.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://joshsfrogs.com/sp/ameerega-trivittatus-orange-captive-bred-three-striped-poison-arrow-frog-dart119",
+          "title": "Josh's Frogs - Ameerega trivittata Care"
+        },
+        {
+          "type": "vet",
+          "url": "https://coloradoexoticanimalhospital.com/node/383",
+          "title": "Colorado Exotic Animal Hospital - Poison Dart Frog Care"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 18,
+      "tempMax": 27,
+      "humidityMin": 80,
+      "humidityMax": 100,
+      "minSpaceSize": "20 L minimum pour 2-3 individus ; environ 150 L (40 gallons) ou plus recommandés car espèce très active",
+      "lightNeeds": "Lumière naturelle indirecte, imiter le cycle jour/nuit de la forêt tropicale",
+      "activityEnrichment": "Substrat épais de feuilles mortes et mousse, cachettes multiples, branches, bassin d'eau peu profond",
+      "hygieneNotes": "Eau sans chlore ni chloramine (eau minérale, filtrée sur charbon ou aérée 48 h). Changement d'eau de 50 % par semaine, jamais 100 %. Mains propres lors de la manipulation (peau perméable).",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://joshsfrogs.com/sp/ameerega-trivittatus-orange-captive-bred-three-striped-poison-arrow-frog-dart119",
+          "title": "Josh's Frogs - Ameerega trivittata Care"
+        },
+        {
+          "type": "vet",
+          "url": "https://coloradoexoticanimalhospital.com/node/383",
+          "title": "Colorado Exotic Animal Hospital - Poison Dart Frog Care"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Grenouille terrestre diurne, active, vivant dans la litière de feuilles. Les mâles sont territoriaux en saison de reproduction.",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "À éviter pour jeunes enfants ; manipulation stressante pour la grenouille",
+      "compatibilityWithOtherAnimals": "Peut être logée en groupe si l'espace est suffisant (environ 20 gallons par individu pour limiter l'agressivité). Éviter reptiles et autres amphibiens.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ameerega_trivittata",
+          "title": "Wikipedia - Ameerega trivittata"
+        },
+        {
+          "type": "guide",
+          "url": "https://joshsfrogs.com/sp/ameerega-trivittatus-orange-captive-bred-three-striped-poison-arrow-frog-dart119",
+          "title": "Josh's Frogs - Ameerega trivittata Care"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Déficience en calcium et vitamine A",
+          "symptoms": "Malformations osseuses, vision réduite, apathie, refus de s'alimenter",
+          "prevention": "Supplémenter systématiquement tous les insectes (vitamine A 2 fois par mois, calcium sur les autres repas)",
+          "whenToConsult": "Dès signes de déformation osseuse ou apathie persistante"
+        },
+        {
+          "name": "Infections fongiques (mycose)",
+          "symptoms": "Lésions blanches ou grises sur la peau, peau terne ou desquamation anormale",
+          "prevention": "Maintenir une humidité élevée et stable, bonne aération, eau déchlorée, substrat propre",
+          "whenToConsult": "Immédiatement si lésions observées"
+        },
+        {
+          "name": "Infection bactérienne cutanée",
+          "symptoms": "Rougeur des membres ou du ventre, gonflement, difficultés de mobilité",
+          "prevention": "Eau propre et sans chlore, quarantaine des nouveaux individus",
+          "whenToConsult": "Urgence vétérinaire dès rougeurs ou gonflements"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://coloradoexoticanimalhospital.com/node/383",
+          "title": "Colorado Exotic Animal Hospital - Poison Dart Frog Care"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "saison des pluies",
+      "gestationDays": null,
+      "incubationDays": 15,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Petites pontes déposées sous des feuilles mortes. Le mâle garde les œufs environ 15 jours puis transporte les têtards vers de l'eau ; développement des têtards de 41 à 54 jours. Mâles territoriaux en période de reproduction.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ameerega_trivittata",
+          "title": "Wikipedia - Ameerega trivittata"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2429135,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Drosophila melanogaster (petites mouches à fruits)",
+          "frequency": "3 à 4 fois par semaine",
+          "notes": "Aliment principal en captivité ; peut être complété de petits grillons (pinhead) et termites"
+        },
+        {
+          "name": "Collemboles (springtails)",
+          "frequency": "3 à 4 fois par semaine",
+          "notes": "Petites proies adaptées à la taille de la grenouille"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Risque d'étouffement ; grenouille minuscule (environ 17-22 mm)"
+        },
+        {
+          "name": "Insectes traités ou pesticides",
+          "reason": "Contamination directe et risque d'empoisonnement"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Saupoudrer les proies d'un supplément vitamino-minéral (une fois par semaine chez l'adulte, un repas sur deux chez les jeunes). La toxicité de l'espèce en nature provient d'acariens et de fourmis ingérés.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/?p=7804",
+          "title": "Reptiles Magazine - Strawberry Poison Frog Care Tips"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Strawberry_poison-dart_frog",
+          "title": "Wikipedia - Strawberry poison-dart frog"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 20,
+      "tempMax": 29,
+      "humidityMin": 80,
+      "humidityMax": 100,
+      "minSpaceSize": "Terrarium vertical de 10 gallons (environ 38 L) pour un couple adulte ; 20 gallons pour jusqu'à quatre individus",
+      "lightNeeds": "Lumière douce, cycle jour/nuit tropical",
+      "activityEnrichment": "Broméliacées vivantes, feuilles mortes, mousses, plantes grimpantes, points d'eau peu profonds",
+      "hygieneNotes": "Eau sans chlore ni chloramine pour la brumisation, brumisation quotidienne, mains propres, manipulation à éviter. Préférer des individus nés en captivité.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/?p=7804",
+          "title": "Reptiles Magazine - Strawberry Poison Frog Care Tips"
+        },
+        {
+          "type": "vet",
+          "url": "https://coloradoexoticanimalhospital.com/node/383",
+          "title": "Colorado Exotic Animal Hospital - Poison Dart Frog Care"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Très petite grenouille terrestre (environ 17-22 mm), diurne. Les mâles sont territoriaux.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "À éviter ; taille minuscule, stress facile, risque de perte ou d'écrasement accidentel",
+      "compatibilityWithOtherAnimals": "Logement en couple conseillé (mâles territoriaux). Aucune cohabitation avec d'autres espèces.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Strawberry_poison-dart_frog",
+          "title": "Wikipedia - Strawberry poison-dart frog"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Déficience en calcium et vitamine A",
+          "symptoms": "Croissance anormale, vision trouble, léthargie, refus alimentaire",
+          "prevention": "Supplémentation vitamino-minérale régulière des proies (vitamine A 2 fois par mois, calcium sur les autres repas)",
+          "whenToConsult": "Tout signe de croissance anormale ou apathie"
+        },
+        {
+          "name": "Mycose (infection fongique cutanée)",
+          "symptoms": "Zones blanches ou grises sur la peau, ternissement général",
+          "prevention": "Humidité élevée, aération régulière, eau déchlorée, substrat propre, éviter le surpeuplement",
+          "whenToConsult": "Immédiatement si lésions ; dégradation rapide possible chez un petit individu"
+        },
+        {
+          "name": "Atteinte oculaire (yeux troubles)",
+          "symptoms": "Opacité des yeux, difficulté à se nourrir, yeux rouges ou gonflés",
+          "prevention": "Eau propre, quarantaine des nouveaux individus",
+          "whenToConsult": "Consultation vétérinaire spécialisée en amphibiens"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://coloradoexoticanimalhospital.com/node/383",
+          "title": "Colorado Exotic Animal Hospital - Poison Dart Frog Care"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 10,
+      "litterSizeMin": 3,
+      "litterSizeMax": 5,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Le mâle garde et humidifie les œufs pendant 10 à 12 jours. La femelle transporte ensuite les têtards vers l'eau (broméliacées) et les nourrit d'œufs non fécondés pendant 6 à 8 semaines jusqu'à la métamorphose. En nature, seuls 5 à 12 % d'une ponte donnent des têtards.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Strawberry_poison-dart_frog",
+          "title": "Wikipedia - Strawberry poison-dart frog"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2429295,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Drosophila (mouches à fruits)",
+          "frequency": "quotidienne",
+          "notes": "Aliment principal en captivité, adapté à la taille minuscule (environ 24-26 mm)"
+        },
+        {
+          "name": "Petites araignées et petits insectes",
+          "frequency": null,
+          "notes": "En nature : grillons, papillons de nuit, mouches, araignées"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Risque d'étouffement chez une très petite espèce"
+        },
+        {
+          "name": "Eau contaminée ou stagnante",
+          "reason": "Source de maladies fongiques et bactériennes"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Appétit important : nourriture à disposition la nuit. Saupoudrer les proies de supplément.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/glass-frog-care-and-information/",
+          "title": "Reptiles Magazine - Glass Frog Care"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hyalinobatrachium_valerioi",
+          "title": "Wikipedia - Hyalinobatrachium valerioi"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": 27,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium très vertical : au moins 75 cm de haut pour 30 cm de profondeur et 35 cm de large (jusqu'à 2 mâles et 3 femelles)",
+      "lightNeeds": "Espèce nocturne, lumière faible",
+      "activityEnrichment": "Structure très verticale avec branches, feuilles larges et plantes grimpantes ; feuilles surplombant l'eau pour la ponte ; brumisation importante simulant la saison des pluies",
+      "hygieneNotes": "Brumisation quotidienne, humidité élevée, eau sans chlore ni chloramine, bonne aération pour limiter les mycoses, mains propres avant toute manipulation",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/glass-frog-care-and-information/",
+          "title": "Reptiles Magazine - Glass Frog Care"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petite grenouille arboricole nocturne (24-26 mm), vit dans les buissons et arbres au bord des ruisseaux. Les mâles sont territoriaux et peuvent se battre violemment. Le mâle garde la ponte 24 h sur 24.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Absolument déconseillé : espèce fragile, stressée par la manipulation, taille minuscule",
+      "compatibilityWithOtherAnimals": "Un seul mâle par terrarium (mâles très territoriaux, risque de combats mortels)",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://gonefroggin.com/2019/03/25/reticulated-glass-frog-hyalinobatrachium-valerioi/",
+          "title": "Frog of the Week - Reticulated Glass Frog"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hyalinobatrachium_valerioi",
+          "title": "Wikipedia - Hyalinobatrachium valerioi"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Chytridiomycose (Batrachochytrium dendrobatidis)",
+          "symptoms": "Perte d'appétit, yeux enfoncés, léthargie, perte de couleur",
+          "prevention": "Humidité élevée maintenue avec une bonne circulation d'air, eau sans chlore, quarantaine des nouveaux arrivants",
+          "whenToConsult": "Dès les premiers signes ; petite espèce qui se dégrade vite"
+        },
+        {
+          "name": "Déficience nutritionnelle (calcium/vitamine A)",
+          "symptoms": "Croissance stagnante, vision réduite, refus alimentaire progressif",
+          "prevention": "Supplémentation régulière des proies",
+          "whenToConsult": "Dès les premiers signes de malnutrition"
+        },
+        {
+          "name": "Stress / refus alimentaire",
+          "symptoms": "Arrêt de l'alimentation, recherche excessive de cachette, immobilité prolongée",
+          "prevention": "Manipulation minimale, terrarium bien dimensionné et planté, quarantaine des nouveaux",
+          "whenToConsult": "Tout refus alimentaire persistant"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/glass-frog-care-and-information/",
+          "title": "Reptiles Magazine - Glass Frog Care"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "saison des pluies",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 40,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Œufs pondus sous les feuilles surplombant les ruisseaux (40 œufs au maximum par ponte). Le mâle reste sur la ponte jour et nuit pour la garder et l'humidifier. Reproduction complexe en captivité, élevage des larves délicat.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Hyalinobatrachium_valerioi",
+          "title": "Wikipedia - Hyalinobatrachium valerioi"
+        },
+        {
+          "type": "guide",
+          "url": "https://gonefroggin.com/2019/03/25/reticulated-glass-frog-hyalinobatrachium-valerioi/",
+          "title": "Frog of the Week - Reticulated Glass Frog"
+        }
+      ]
+    }
+  }
+]

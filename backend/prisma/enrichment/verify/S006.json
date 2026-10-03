@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2367196,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: foodsToAvoid 'hors périodes froides' reformulé (ne pas nourrir sous 10°C, Wikipedia); épinards retirés; specificNeeds reformulé (fishkeeper)",
+      "habitat.minSpaceSize: '1000 L / 50-100 litres' (gallons convertis à tort en litres) -> profondeur de bassin + volumes en gallons convertis (pondinformer, fishkeeper, Wikipedia)",
+      "habitat.hygieneNotes: pH 7,0-8,5 -> 7-9; dureté 25° et '25-50% hebdomadaires' retirés (non confirmés); lightNeeds: 'O2 > 7 mg/L' retiré",
+      "behavior: 'peuvent sauter de l'eau' et 'mangent petits poissons/invertébrés' retirés (non confirmés); longévité nuancée (Wikipedia: ~50 ans à plus)",
+      "health.KHV: symptômes détaillés non confirmés (sources 404/silencieuses) -> formulation prudente; KHV confirmé par Wikipedia",
+      "health.sources: Wikipedia Koi ajoutée (confirme KHV); koiwatergarden confirme Ich et dropsy (mais pas KHV)",
+      "reproduction: season mai-juin -> fin avril-juillet; notes: 18-21°C -> 18-25°C, 'photopériode 12h+', 'éclosion 3-7 j', '10% survie' retirés (cuttlebrook)"
+    ],
+    "removed": [
+      "source https://www.petsmart.com/... (403, non vérifiable)",
+      "source https://nextdaykoi.com/?p=571 (404)",
+      "legislation (source fedeaqua.org/la-ffa-reagit = page de plaidoyer, ne traite pas du statut de l'espèce; statut non confirmé)",
+      "reproduction.incubationDays 5, litterSize 100000-400000, sexualMaturityMonths 24 -> null (non confirmés; source donne 100-120 000 œufs/kg)",
+      "source https://www.hepper.com/... (301 redirect, non vérifié)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2370243,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: 'favorisent les couleurs' retiré; aliments adultes selon fishkeeper; 'refusent les aliments s'ils ne sont pas nourris à la main' retiré",
+      "habitat.temp 23-30 -> 22-27 (fishkeeper 23-27, tropicalfreshwaterfish 22-26); minSpaceSize 280/470 L non confirmé -> ~380 L (100 gal.), substrat retiré",
+      "behavior: sociability semi-grégaire -> solitaire (Wikipedia: très territorial); 'frappe les parois' retiré; compatibilité reformulée",
+      "health.Ich.prevention: '74-86°F' (unités mélangées) retiré",
+      "reproduction: litter 100-1000 -> 300-3000 (Wikipedia; Florida Museum 1000-2000); maturité 14 -> 12 mois (Wikipedia ~1 an); 'refusent de se reproduire avant 2-3 ans' et 'mâles préparent le site' retirés; incubation 3-4 j confirmée"
+    ],
+    "removed": [
+      "source https://seabase.core.cli.mbl.edu/... (404)",
+      "legislation (source fedeaqua.org/la-ffa-reagit = page de plaidoyer, ne traite pas du statut de l'espèce; statut non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2371275,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding: 'carnivores stricts' retiré (Aquarium Source: omnivore à préférence protéines; LiveAquaria: carnivore); 'nitrites' retiré",
+      "habitat: temp 22-26 -> 24-28 (Wikipedia); pH 5,0-6,0 -> 6,0-7,0 (tolère jusqu'à 8,0); minSpaceSize 55/115 L non confirmé -> 75-115 L / 120 L; dureté 2-15° retirée",
+      "behavior: 'mâle moins agressif' -> mâles très territoriaux (Wikipedia); 'épées, ram' (incohérent) retiré; compatibilités reformulées",
+      "health: Ich/parasitoses courantes confirmés par Aquarium Source (source ajoutée); pvas ne traite pas de maladies",
+      "reproduction: incubationDays 10 -> null (non confirmé); 'coloration jaune indique ponte' et 'upside-down' retirés; 95-1410 œufs et maturité 7 mois (214 j) confirmés"
+    ],
+    "removed": [
+      "behavior.difficultyLevel 'débutant' -> null (contradit la sensibilité à la qualité d'eau, non sourcé)",
+      "source fws.gov Ecological-Risk-Screening PDF (illisible, non vérifiable)",
+      "legislation (source fedeaqua.org/la-ffa-reagit = page de plaidoyer, ne traite pas du statut de l'espèce; statut non confirmé)"
+    ],
+    "confidence": "medium"
+  }
+]

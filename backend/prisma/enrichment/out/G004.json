@@ -1,0 +1,85 @@
+[
+  {
+    "speciesId": 2468542,
+    "feeding": null,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 2469188,
+    "feeding": null,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 2470656,
+    "feeding": null,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 2470685,
+    "feeding": null,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 2470711,
+    "feeding": null,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 2470729,
+    "habitat": null
+  },
+  {
+    "speciesId": 2470854,
+    "habitat": null
+  },
+  {
+    "speciesId": 2474162,
+    "habitat": null
+  },
+  {
+    "speciesId": 2476004,
+    "habitat": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Ponte de 1 ou 2 œufs ; incubation de 37 à 46 jours. La femelle reste emmurée dans le nid pendant toute l'incubation et l'élevage des oisillons.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Calao_rhinocéros",
+          "title": "Calao rhinocéros - Wikipédia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2478765,
+    "habitat": null
+  },
+  {
+    "speciesId": 2479505,
+    "habitat": null
+  },
+  {
+    "speciesId": 2479694,
+    "habitat": null
+  },
+  {
+    "speciesId": 2479870,
+    "habitat": null
+  },
+  {
+    "speciesId": 2479888,
+    "habitat": null
+  }
+]

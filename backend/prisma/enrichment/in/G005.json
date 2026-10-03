@@ -1,0 +1,165 @@
+[
+ {
+  "speciesId": 2482492,
+  "commonNameFr": "Corbeau familier",
+  "scientificName": "Corvus corax",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2490384,
+  "commonNameFr": "Cardinal rouge",
+  "scientificName": "Cardinalis cardinalis",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2491538,
+  "commonNameFr": "Bruant du Japon",
+  "scientificName": "Emberiza cioides",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2493661,
+  "commonNameFr": "Astrild à pointe",
+  "scientificName": "Estrilda caerulescens",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2493720,
+  "commonNameFr": "Gouldien",
+  "scientificName": "Chloebia gouldiae",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2495134,
+  "commonNameFr": "Émeu",
+  "scientificName": "Dromaius novaehollandiae",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2495150,
+  "commonNameFr": "Autruche",
+  "scientificName": "Struthio camelus",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2498343,
+  "commonNameFr": "Cygne tuberculé",
+  "scientificName": "Cygnus olor",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2498387,
+  "commonNameFr": "Canard carolin",
+  "scientificName": "Aix sponsa",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "behavior"
+  ]
+ },
+ {
+  "speciesId": 2498388,
+  "commonNameFr": "Canard mandarin",
+  "scientificName": "Aix galericulata",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 4263039,
+  "commonNameFr": "Paca",
+  "scientificName": "Cuniculus paca",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 5170451,
+  "commonNameFr": "Tarentule Goliath",
+  "scientificName": "Theraphosa blondi",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 5202178,
+  "commonNameFr": "Pleco commun",
+  "scientificName": "Hypostomus plecostomus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior",
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5216573,
+  "commonNameFr": "Grenouille tomate",
+  "scientificName": "Dyscophus antongilii",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "behavior",
+   "health"
+  ]
+ }
+]

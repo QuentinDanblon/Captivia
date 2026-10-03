@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2436412,
+  "commonNameFr": "Lemur catta",
+  "scientificName": "Lemur catta",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2436469,
+  "commonNameFr": "Tamarin",
+  "scientificName": "Saguinus oedipus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2436484,
+  "commonNameFr": "Tarsier",
+  "scientificName": "Tarsius syrichta",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

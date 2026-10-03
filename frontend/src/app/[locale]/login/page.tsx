@@ -2,15 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { GUEST_UPGRADE_PATH, isGuestUser } from '@/lib/guest';
+import { useStartGuest } from '@/components/guest/useStartGuest';
+import { Alert, Button, buttonClasses } from '@/components/ui';
 
 export default function LoginPage() {
   const t = useTranslations();
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+  const tGuest = useTranslations('guest');
+  const { start: startGuest, starting: guestStarting, error: guestError } = useStartGuest();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,7 +23,8 @@ export default function LoginPage() {
   const [mobileLink, setMobileLink] = useState<string | null>(null);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    // Lien « test sur téléphone » : outil de développement uniquement.
+    if (process.env.NODE_ENV !== 'development' || typeof window === 'undefined') return;
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     if (!isLocal) return;
     fetch('/api/mobile-link')
@@ -36,7 +42,7 @@ export default function LoginPage() {
       const response = await api.login(email, password);
 
       if (response.accessToken && response.user) {
-        login(response.accessToken, response.user);
+        login(response.accessToken, response.user, response.refreshToken);
         router.push('/mes-animaux');
       } else {
         setError(t('auth.invalidCredentials'));
@@ -52,6 +58,20 @@ export default function LoginPage() {
     <div className="captivia-auth-page">
       <div className="captivia-auth-card">
         <h1 className="captivia-auth-title">{t('auth.loginTitle')}</h1>
+
+        {/* Invité : se connecter ouvre un AUTRE compte (aucune fusion) ; la conversion est proposée. */}
+        {isGuestUser(user) && (
+          <Alert
+            severity="warning"
+            className="mb-4"
+            title={tGuest('loginGuestWarning')}
+            action={
+              <Link href={GUEST_UPGRADE_PATH} className={buttonClasses({ variant: 'secondary', size: 'sm' })}>
+                {tGuest('loginGuestUpgrade')}
+              </Link>
+            }
+          />
+        )}
 
         <form onSubmit={handleSubmit} className="captivia-auth-form">
           <div className="captivia-auth-field">
@@ -99,6 +119,28 @@ export default function LoginPage() {
           </button>
         </form>
 
+        {/* Sans session : l'app s'utilise aussi sans compte (1 animal, carnet complet). */}
+        {!user && (
+          <div className="mt-4 grid gap-2">
+            <Button
+              variant="secondary"
+              size="lg"
+              fullWidth
+              loading={guestStarting}
+              onClick={async () => {
+                if (await startGuest()) router.push('/mes-animaux');
+              }}
+            >
+              {guestStarting ? tGuest('entryStarting') : tGuest('entryTry')}
+            </Button>
+            {guestError && (
+              <div className="captivia-auth-feedback is-error" role="alert">
+                <p>{guestError}</p>
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="captivia-auth-links">
           <p>
             {t('auth.noAccount')}{' '}
@@ -106,12 +148,13 @@ export default function LoginPage() {
               {t('auth.registerButton')}
             </Link>
           </p>
+
           <Link href="/" className="captivia-auth-back-link">
             {t('common.back')} {t('common.home')}
           </Link>
         </div>
 
-        {mobileLink && (
+        {process.env.NODE_ENV === 'development' && mobileLink && (
           <div className="captivia-auth-mobile-link">
             <strong>Lien pour tester sur votre téléphone (même Wi‑Fi)</strong>
             <a href={mobileLink} target="_blank" rel="noopener noreferrer">

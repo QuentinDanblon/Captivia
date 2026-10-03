@@ -1,0 +1,50 @@
+[
+  {
+    "speciesId": 2455676,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction: 12-20 œufs et incubation 65-70 j confirmés (en.wikipedia) ; accouplement fin mai-début juin, ponte ~5 semaines après ; éclosion 'juillet-septembre' → fin août-début octobre",
+      "feeding: 'œufs de poule mensuels' retirés (non confirmés ; Wikipedia cite œufs d'oiseaux sauvages)",
+      "health.parasitose.prevention: 'congélation des proies 2-3 semaines' retiré (non confirmé)"
+    ],
+    "removed": [
+      "legislation entière → null ('certificat de capacité potentiellement requis', 'annexe arrêté 1997 certains départements' non confirmés ; source agn-avocats non vérifiable)",
+      "habitat.tempMin/Max, humidité 50-70, dimensions 1,2 x 0,6 m (trop petit pour un adulte de 1,07-1,83 m, non confirmé) → null/généralisé",
+      "reproduction.sexualMaturityMonths 60 → null (non confirmé)",
+      "sources reptifiles.com, animaldiversity.org, vcahospitals.com, agn-avocats.fr (non vérifiables dans le budget de temps) ; Wikipedia gardée comme seule source ; health à confiance basse"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2457884,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.incubationDays: 87 → 90 (en.wikipedia ~90 j) ; ponte 3-12 → 4-12 œufs, jusqu'à 2 pontes/an ; maturité 24 mois → 37 mois (âge médian 3,1 ans mâles / 3,7 ans femelles)",
+      "behavior: omission grave corrigée : serpent opisthoglyphe (venin faiblement neurotoxique, risque sérieux pour jeunes enfants) ; 'généralement calme en captivité' retiré ; difficultyLevel intermédiaire → expert",
+      "feeding: régime sauvage aligné sur Wikipedia (oiseaux, lézards, chauves-souris, œufs, petits rongeurs) ; 'préférence documentée pour les oiseaux' retiré"
+    ],
+    "removed": [
+      "legislation.status 'prohibited' + 'interdiction de détention en France et UE' → legislation entière null (aucune source ne le confirme ; agn-avocats non vérifiable)",
+      "habitat.tempMin/Max (24/28) → null ; dimensions 1,2 x 0,6 m → généralisé",
+      "reproduction.season 'année' → null (non confirmé)",
+      "sources aphis.usda.gov, animaldiversity.org, conservationevidencejournal.com, vcahospitals.com, agn-avocats.fr (non vérifiables dans le budget de temps) ; Wikipedia gardée"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2466939,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction: ponte 1 œuf → 1-2 œufs (première ponte, jusqu'à ~10 par saison) ; incubation 43 → 40 (30-45 j, 27-29°C) ; notes '36-63 jours' contredites ; saison avril-août → avril à septembre ; maturité 12 → 8 mois (en.wikipedia)",
+      "habitat.tempMax 32 → 30 (jour 25-30°C, nuit 21-24°C) ; humidité 60-70% confirmée ; litre/dimensions et 'UVB 8-10 h' retirés (non confirmés)",
+      "behavior: territorialité des mâles confirmée ; 'excellent pour les enfants' retiré → animal fragile à observer ; longévité jusqu'à 8 ans ajoutée",
+      "feeding: régime élargi aux arthropodes (grillons, mouches, cafards, coléoptères, araignées) selon Wikipedia"
+    ],
+    "removed": [
+      "legislation entière → null (statut 'allowed' non confirmé ; agn-avocats non vérifiable)",
+      "habitat.minSpaceSize → null (non confirmé)",
+      "sources reptifiles.com PDF, animaldiversity.org, anoleannals.org, agn-avocats.fr (non vérifiables) ; vcahospitals.com 'snakes-diseases' (page sur les serpents, pas un lézard) retirée ; Wikipedia gardée ; health à confiance basse"
+    ],
+    "confidence": "medium"
+  }
+]

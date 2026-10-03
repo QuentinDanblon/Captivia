@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000058,
+    "description": "L'Alaskan Malamute a été élevé par le peuple Malimiut Inupiaq, en Alaska, pour le traîneau et le transport de charges. Il mesure 58,5 à 63,5 cm pour 34 à 38 kg (standard de travail). Très affectueux envers les gens, c'est généralement un chien calme qui aboie rarement.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Alaskan_Malamute"
+  },
+  {
+    "speciesId": 2000000063,
+    "description": "Le Bichon Frisé descend du bichon maltais, du barbet et du caniche. Présent sur les côtes méditerranéennes depuis le XIVe siècle, il a été amené en France au XVIe siècle et est devenu le favori des cours royales. Petit chien de 25 à 30 cm au plus, au poil blanc très frisé, il est vif, joyeux, affectueux, sociable et joueur avec les enfants, mais n'aime pas la solitude.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Bichon_frisé"
+  },
+  {
+    "speciesId": 2000000064,
+    "description": "Le chien de Saint-Hubert (Bloodhound) est originaire de Belgique ; selon la légende, saint Hubert aurait élevé ses ancêtres au VIIIe siècle. Grand chien (62 à 68 cm, 42 à 56 kg) aux oreilles longues et pendantes et à la peau très lâche, il est réputé pour son odorat exceptionnel et sert à la recherche de personnes. Doux, placide et sociable, il est très attaché à son propriétaire.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chien_de_Saint-Hubert"
+  },
+  {
+    "speciesId": 2000000068,
+    "description": "Le caniche de grande taille (Caniche Royal) mesure de 45 à 62 cm. Il est originaire de France selon la FCI, l'Allemagne revendiquant aussi la race, et descend du barbet, chien de chasse au canard. Joyeux, curieux, intelligent et facile à dresser, il a une nature plutôt calme et aboie peu.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Caniche"
+  },
+  {
+    "speciesId": 2000000069,
+    "description": "Le berger des Shetland (Sheltie) est originaire des îles Shetland, en Écosse ; il descend de petits colleys écossais, croisés notamment avec des épagneuls et des chiens de type spitz. Il mesure environ 33 à 39,5 cm et possède un double poil long. Chien de berger à l'origine, il est intelligent, vocal, désireux de plaire et se distingue en agilité et en obéissance.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Shetland_Sheepdog"
+  },
+  {
+    "speciesId": 2000000070,
+    "description": "Le chien d'eau portugais est originaire des côtes du Portugal, où il aidait les pêcheurs à tirer le poisson dans les filets et servait sur les bateaux, parfois en portant des messages entre navires. Il mesure 43 à 58 cm et pèse 15 à 27 kg selon le sexe. Son poil est frisé ou long et ondulé.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chien_d%27eau_portugais"
+  },
+  {
+    "speciesId": 2000000073,
+    "description": "L'épagneul cocker américain descend de cockers anglais importés aux États-Unis, où ils ont été sélectionnés plus petits pour chasser la bécasse américaine. Il mesure environ 34 à 39 cm et pèse 11 à 14 kg. Chien de chasse qui lève le gibier, au poil mi-long à long et soyeux, il est amical et affectueux.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Cocker_Spaniel"
+  },
+  {
+    "speciesId": 2000000074,
+    "description": "L'épagneul King Charles est un petit épagneul anglais du XVIe siècle, qui doit son nom au roi Charles II qui l'appréciait à la cour. Il mesure 25 à 30 cm pour 3,6 à 6,3 kg et a le museau plus court et la face plus aplatie que le Cavalier King Charles. Calme, doux, affectueux et non agressif, c'est un chien de compagnie, bon avec les enfants.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Épagneul_King_Charles"
+  },
+  {
+    "speciesId": 2000000076,
+    "description": "Le galgo espagnol est un lévrier d'Espagne qui descendrait de lévriers celtes (vertragus) de l'Ibérie romaine, peut-être croisés avec des sloughis nord-africains amenés par les Maures. Il mesure 60 à 70 cm, avec une musculature plus plate que celle du greyhound, et existe en poil lisse ou rude. Il est élevé pour chasser le lièvre à courre et pour la course.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Spanish_Greyhound"
+  },
+  {
+    "speciesId": 2000000077,
+    "description": "Le greyhound est un lévrier ancien originaire de Grande-Bretagne, probablement descendant de lévriers arabes importés par les Phéniciens. Il mesure 68 à 76 cm et peut atteindre 70 km/h, ce qui en fait le plus rapide des lévriers ; il sert à la course et au coursing. Intelligent, doux et calme, il est très affectueux envers ses propriétaires.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Lévrier_greyhound"
+  },
+  {
+    "speciesId": 2000000080,
+    "description": "Originaire de Romagne, en Italie, le lagotto romagnolo était utilisé comme rapporteur de gibier d'eau dans les marais avant de devenir chien truffier. Il mesure 41 à 48 cm pour 13 à 18 kg et a un poil laineux et frisé qui demande des tontes régulières. Docile, éveillé et affectueux, il est très attaché à son maître.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Lagotto_Romagnolo"
+  },
+  {
+    "speciesId": 2000000083,
+    "description": "Le Malamute est originaire d'Alaska, où il a été élevé par le peuple Malimiut Inupiaq pour la traction de traîneaux et le transport de charges. Il mesure 58,5 à 63,5 cm pour 34 à 38 kg (standard de travail). Très affectueux envers les gens, c'est généralement un chien calme qui aboie rarement.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Alaskan_Malamute"
+  },
+  {
+    "speciesId": 2000000085,
+    "description": "Le berger néerlandais est originaire des Pays-Bas, où il a été développé comme chien de berger pour les bergers et fermiers. Il mesure 55 à 63 cm pour 23 à 32 kg et existe en trois poils (court, long et dur). Loyal, fiable, vigilant, actif, indépendant et intelligent, il sert aussi comme chien de police, de recherche et d'assistance.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Dutch_Shepherd"
+  },
+  {
+    "speciesId": 2000000087,
+    "description": "L'elkhound norvégien est une race ancienne de Norvège, de type spitz, qui pistait et acculait l'élan en prévenant le chasseur par ses aboiements. Il mesure 50 à 52 cm pour 20 à 23 kg et a un poil gris argenté et une queue enroulée. Hardi, loyal, joueur, indépendant et très intelligent, il est aussi un bon chien de garde.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Norwegian_Elkhound"
+  },
+  {
+    "speciesId": 2000000088,
+    "description": "L'otterhound est un chien courant anglais élevé pour la chasse à la loutre, devenu une race distincte au XVIIIe siècle et décrit dans le nord-ouest de l'Angleterre au début du XIXe. Il mesure 61 à 69 cm pour 36 à 52 kg selon le sexe. Cette chasse ayant cessé en 1978, la race est aujourd'hui très menacée (environ 600 individus en 2012).",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Otterhound"
+  }
+]

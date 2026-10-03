@@ -1,0 +1,43 @@
+[
+  {
+    "speciesId": 5228265,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.sexualMaturityMonths: 8 → 7 (fr.wikipedia Poule domestique : maturité sexuelle de 5 à 9 mois)",
+      "reproduction.notes: reformulé selon la source (incubation 19-21 j, 8-12 œufs avant couvaison)"
+    ],
+    "removed": ["reproduction.season (« printemps à automne » non confirmé par la source)"],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 5229044,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "sources feeding/habitat/behavior/reproduction: page genre Psittacula remplacée par la page espèce en.wikipedia Plum-headed_parakeet (+ fr.wikipedia Perruche_à_tête_de_prune)",
+      "feeding.recommendedFoods: retrait de « environ 1/3 du régime » (non confirmé)",
+      "behavior.generalBehavior: « intelligents et sociaux, capacité d'apprentissage élevée » → grégaires et bruyants, imitation de sons possible (source en.wikipedia)",
+      "health PBFD: symptômes/prévention reformulés d'après en.wikipedia Psittacine_beak_and_feather_disease (perte de plumes irréversible, malformation bec/griffes, quarantaine, pas de traitement spécifique)",
+      "reproduction.season: « printemps » → décembre à avril en Inde, état sauvage (en.wikipedia)",
+      "reproduction.litterSizeMin/Max: 3-6 → 4-6 œufs (en.wikipedia : 4-6 ; fr.wikipedia : 4-5, parfois 6)",
+      "reproduction.notes: remplacé par les faits sourcés (cavité d'arbre, hybridation)"
+    ],
+    "removed": [
+      "legislation entière (CITES II confirmé par Wikipédia mais euAnnex B, « détention autorisée avec déclaration » et statut permit_required non confirmés ; doute réel → null)",
+      "source https://www.cites.org/ (page d'accueil générique, ne confirme pas l'espèce)",
+      "source https://vcahospitals.com/ (page d'accueil générique, non spécifique)",
+      "habitat.tempMin/tempMax (15/28), humidityMin/Max (40/70), minSpaceSize (cage 1 m), 12 h de lumière, substrat 2x/semaine : chiffres non confirmés → null / reformulés en conseils génériques",
+      "reproduction.incubationDays (25), sexualMaturityMonths (24), breedingDifficulty (« avancé ») et affirmation « très difficile en captivité » : non confirmables"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5281775,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.sexualMaturityMonths: 8 → 1 (fr.wikipedia Cochon d'Inde : femelles 4-5 semaines, mâles 9 semaines ; en.wikipedia : fécondes dès 4 semaines)",
+      "reproduction.notes: ajout des valeurs de la source (portée moyenne 4, cycle 15-17 j, fécondité post-partum environ une demi-journée, >2 portées/an déconseillé)"
+    ],
+    "removed": [],
+    "confidence": "high"
+  }
+]

@@ -4,20 +4,28 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
   schedule:
     - cron: "0 6 * * 1"
 
+permissions:
+  contents: read
+
 jobs:
+  # `npm audit` BLOQUANT sur les dépendances de production (vulnérabilités high et critical).
+  # Les devDependencies sont exclues : elles ne sont pas livrées dans les images.
   audit:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [backend, frontend]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Audit backend
-        working-directory: backend
-        run: npm audit --audit-level=high
-      - name: Audit frontend
-        working-directory: frontend
-        run: npm audit --audit-level=high
+      - name: Audit ${{ matrix.project }}
+        working-directory: ${{ matrix.project }}
+        run: npm audit --omit=dev --audit-level=high

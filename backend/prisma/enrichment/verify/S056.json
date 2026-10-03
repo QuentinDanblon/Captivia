@@ -1,0 +1,80 @@
+[
+  {
+    "speciesId": 104013399,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "sources: page genre Ceratophrys remplacée par en/fr wikipedia de C. cranwelli (genre gardé seulement pour reproduction : chant, longévité 1-4 ans / 15 ans)",
+      "feeding: insectes et proies de taille comparable (rongeurs), langue adhésive confirmés ; fréquences 'quotidienne/hebdomadaire' retirées (non confirmées, risque d'obésité)",
+      "behavior: nocturne, à l'affût, cannibale, s'enfouit confirmés ; 'Crasse passif' supprimé",
+      "habitat: UVB non requis mais utile pour le calcium (en.wikipedia) ; substrat humide, pas de gravier",
+      "health: impaction et maladie métabolique osseuse ajoutées (citées par en.wikipedia) ; typos corrigées"
+    ],
+    "removed": [
+      "feeding.foodsToAvoid 'Poissons vivants' (non confirmé ; le genre mange des poissons)",
+      "habitat.tempMin/tempMax (22-26), humidityMin/Max (75-100), minSpaceSize non confirmés",
+      "reproduction.season, litterSizeMin/Max (500-2000), sexualMaturityMonths (18), amplexus/ponte en mousse/têtards carnivores non confirmés",
+      "legislation entière (non confirmée ; pas de mention CITES ; source INPN générique)",
+      "source https://en.wikipedia.org/wiki/Ceratophrys (retirée de feeding/habitat/behavior/health : page de genre)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104015330,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "reproduction.litterSizeMin/Max: 3-6 -> 4-10 œufs (fr.wikipedia)",
+      "reproduction.notes: 'les mâles gardent les œufs' non confirmé -> le mâle dépose les têtards dans l'eau un par un (fr.wikipedia)",
+      "feeding: fourmis, acariens, collemboles (fr/en wikipedia) ; 'carnivore fouisseur' faux (vit au sol, grimpe parfois jusqu'à 5 m)",
+      "habitat: 'habitat canopée' faux -> surtout au sol (fr/en wikipedia)",
+      "legislation: CITES II confirmé (en/fr wikipedia) ; statut permit_required justifié par fr.wikipedia (protégée en Guyane, transport et commercialisation interdits en France sauf autorisations spéciales) ; euAnnex B retiré"
+    ],
+    "removed": [
+      "legislation: 'Arrêté 21 novembre 1997' et 'certificat de capacité requis' (non confirmés), euAnnex 'B', sources cites.org et inpn (pages d'accueil génériques)",
+      "habitat.tempMin/Max, humidityMin/Max (80-100), minSpaceSize, lightNeeds non confirmés",
+      "behavior: 'plus agressif que les autres poison frogs', combats, couples stables ; compatibilityWithOtherAnimals",
+      "feeding.foodsToAvoid 'proies sans alcaloïdes' ; 'petits coléoptères', 'petits grillons'",
+      "reproduction.season, sexualMaturityMonths (6), 'toxicité = paralysie/mort des prédateurs', 'captifs perdent leur toxicité'"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104020622,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "reproduction: saison octobre-mars, ~40 œufs, éclosion 6-8 j, éclosion précoce par vibrations confirmés (en.wikipedia) ; litter 30-60 -> 40",
+      "feeding: régime = papillons de nuit, orthoptères, diptères (en.wikipedia) ; 'mantes' et 'petites araignées' retirés",
+      "habitat: humidité >= 80 % confirmée",
+      "behavior: 'sociable en paires/petits groupes' non confirmé -> mâles en lutte (en.wikipedia)",
+      "health: ranavirus et chytridiomycose cités par en.wikipedia"
+    ],
+    "removed": [
+      "habitat.tempMin/Max (20-26), minSpaceSize (60x60x60), lightNeeds, humidityMax",
+      "behavior.compatibilityWithOtherAnimals (non confirmé)",
+      "reproduction.sexualMaturityMonths (12)",
+      "legislation entière : en/fr wikipedia indiquent CITES Annexe II (non reporté dans l'ancien contenu) mais le statut légal France n'est pas confirmé -> section nulle ; à décider par le relecteur (citesAppendix II, statut à qualifier)",
+      "source INPN générique"
+    ],
+    "confidence": "medium"
+  }
+]

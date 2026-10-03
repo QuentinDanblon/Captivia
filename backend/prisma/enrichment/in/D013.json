@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000251,
+  "commonNameFr": "Corydoras",
+  "scientificName": "Corydoras paleatus",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000252,
+  "commonNameFr": "Ramirezi",
+  "scientificName": "Mikrogeophagus ramirezi",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000253,
+  "commonNameFr": "Apistogramma",
+  "scientificName": "Apistogramma agassizii",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000254,
+  "commonNameFr": "Tétra Cardinal",
+  "scientificName": "Paracheirodon axelrodi",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000255,
+  "commonNameFr": "Tétra Cuivré",
+  "scientificName": "Hasemania nana",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000256,
+  "commonNameFr": "Barbus Cerise",
+  "scientificName": "Puntius titteya",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000257,
+  "commonNameFr": "Barbus de Sumatra",
+  "scientificName": "Puntigrus tetrazona",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000258,
+  "commonNameFr": "Danio Perlé",
+  "scientificName": "Danio margaritatus",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000259,
+  "commonNameFr": "Rasbora Arlequin",
+  "scientificName": "Trigonostigma heteromorpha",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000260,
+  "commonNameFr": "Guppy Endler",
+  "scientificName": "Poecilia wingei",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000261,
+  "commonNameFr": "Platy Variatus",
+  "scientificName": "Xiphophorus variatus",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000262,
+  "commonNameFr": "Kribensis",
+  "scientificName": "Pelvicachromis pulcher",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000263,
+  "commonNameFr": "Mygale Rose",
+  "scientificName": "Grammostola rosea",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000264,
+  "commonNameFr": "Mygale Mexicaine",
+  "scientificName": "Brachypelma smithi",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000265,
+  "commonNameFr": "Mygale Tigre",
+  "scientificName": "Psalmopoeus irminia",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "speciesId": 104052822,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: fréquences, '50 % minimum de l'apport calorique', 'fruits/baies/champignons/écorce' non confirmés -> retirés ; régime source (graines, noix, insectes, œufs, petits vertébrés) ; suppléments calcium retirés",
+      "habitat: -10/25 °C et '1,5-8 ha (100+ ha)' non confirmés -> null (source : forêt mature d'environ 40 ha)",
+      "behavior: 'solitaires ou petits groupes' -> principalement solitaire, nid partagé en hiver et brièvement à la reproduction (source) ; agressivité intraspécifique non confirmée -> null",
+      "health: 'vaccination possible' non confirmée -> retirée ; 'maladie typhoïde/tularémie' -> typhus, peste, tularémie (source) ; parasites ajustés (puces, poux, tiques, acariens, teigne)",
+      "legislation: euAnnex 'A' (inventé) -> null ; prohibited conservé car la liste UE des espèces exotiques envahissantes (2016) interdit importation, élevage, transport, commerce (source Wikipedia)",
+      "reproduction: portée 1-8 -> 1-4 (normale, max 8 en notes) ; 'sevrage 10 semaines' et 'très prolifique' non confirmés -> retirés ; gestation 44 j et maturité 15 mois confirmés"
+    ],
+    "removed": [
+      "source https://inpn.mnhn.fr (page d'accueil générique, ne concerne pas l'espèce)"
+    ],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 104060633,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: 'mangues, bananes', 'œufs de crocodile', fréquences -> retirés ; régime source : fruits, invertébrés, petits animaux, œufs d'oiseaux",
+      "habitat: 20-30 °C, 60-90 %, enclos 1-2 ha non confirmés -> null ; habitat source (forêts de plaine à l'est des Andes jusqu'à 2 500 m)",
+      "behavior: groupes '4-25' -> 15-30 individus (source) ; vocalisations et 'féroces en défense' non confirmés -> retirés ; diurne et mâles solitaires confirmés",
+      "legislation: permit_required + euAnnex B + 'Arrêté du 21 novembre 1997' (non confirmés) -> prohibited : la source indique espèce exotique envahissante de l'UE depuis 2016, importation et élevage interdits",
+      "reproduction: portée 3-7 -> 1-7 (source) ; saison pluvieuse, maturité 24 mois, nids, synchronisation fruits non confirmés -> retirés ; gestation 74-77 j confirmée"
+    ],
+    "removed": [
+      "source https://en.wikipedia.org/wiki/Coati (page générique du groupe) remplacée par https://en.wikipedia.org/wiki/South_American_coati",
+      "source https://legifrance.gouv.fr (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104060805,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: 'rongeurs' et fréquences non confirmés -> retirés ; pourcentages source (lémuriens > 50 %, tenrecs 9 %, lézards 9 %, oiseaux 2 %) ; 'anthrax/distemper' retiré des aliments à éviter",
+      "habitat: 18-28 °C, 70-95 %, 2-4 ha, 3-26 km² non confirmés -> null",
+      "behavior: 'mâles territoriaux jusqu'à 26 km²' et 'densité 1 animal/3-5 km²' non confirmés -> retirés ; solitaire, cathéméral, grimpeur confirmés",
+      "health: anthrax et 'distemper' (non confirmés, intitulé confus) retirés ; seule l'entrée parasites internes conservée (conseil générique)",
+      "legislation: prohibited + euAnnex A non confirmés -> permit_required ; CITES II confirmé (Wikipedia), UICN Vulnérable",
+      "reproduction: gestation 60 j -> 90 j (source) ; 'copulation 3 h', 'naissances aveugles et édentées', 'sevrage 4,5 mois', polyandrie non confirmés -> retirés ; maturité 3-4 ans, saison sept-oct, portée 1-6 confirmées"
+    ],
+    "removed": [
+      "sources https://cites.org et https://inpn.mnhn.fr (pages d'accueil génériques)"
+    ],
+    "confidence": "medium"
+  }
+]

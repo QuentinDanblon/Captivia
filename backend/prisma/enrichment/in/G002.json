@@ -1,0 +1,158 @@
+[
+ {
+  "speciesId": 2431776,
+  "commonNameFr": "Salamandre tachetée",
+  "scientificName": "Salamandra salamandra",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2431886,
+  "commonNameFr": "Triton marbré",
+  "scientificName": "Triturus marmoratus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 2433573,
+  "commonNameFr": "Kinkajou",
+  "scientificName": "Potos flavus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2433753,
+  "commonNameFr": "Loutre",
+  "scientificName": "Lutra lutra",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2434126,
+  "commonNameFr": "Suricate",
+  "scientificName": "Suricata suricatta",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2434255,
+  "commonNameFr": "Mangouste",
+  "scientificName": "Herpestes ichneumon",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2434615,
+  "commonNameFr": "Binturong",
+  "scientificName": "Arctictis binturong",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2434982,
+  "commonNameFr": "Ocelot",
+  "scientificName": "Leopardus pardalis",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2435172,
+  "commonNameFr": "Serval",
+  "scientificName": "Leptailurus serval",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2436412,
+  "commonNameFr": "Lemur catta",
+  "scientificName": "Lemur catta",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2436469,
+  "commonNameFr": "Tamarin",
+  "scientificName": "Saguinus oedipus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2436484,
+  "commonNameFr": "Tarsier",
+  "scientificName": "Tarsius syrichta",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2437577,
+  "commonNameFr": "Agouti",
+  "scientificName": "Dasyprocta leporina",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2437619,
+  "commonNameFr": "Mara",
+  "scientificName": "Dolichotis patagonum",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ }
+]

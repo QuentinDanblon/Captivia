@@ -1,0 +1,290 @@
+[
+  {
+    "speciesId": 104221549,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons",
+          "frequency": "hebdomadaire",
+          "notes": "Proies naturelles principales, de taille adaptée"
+        },
+        {
+          "name": "Insectes variés",
+          "frequency": "hebdomadaire",
+          "notes": "Papillons de cire, sauterelles, cafards - diversification des proies"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Risque de blessure, consommation incomplète"
+        },
+        {
+          "name": "Proies contaminées par des pesticides",
+          "reason": "Accumulation toxique"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Prédateur arboricole embusqué se nourrissant surtout d'insectes (parfois de petites rainettes ou lézards). Eau fraîche disponible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Avicularia_avicularia",
+          "title": "Pink-toed tarantula (Wikipedia EN)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium haut avec espace pour grimper, substrat sec, gamelle d'eau et bonne ventilation croisée (arboricole, vit dans la canopée en milieu à humidité modérée et forte aération)",
+      "lightNeeds": "Lumière naturelle indirecte, cycle jour-nuit naturel",
+      "activityEnrichment": "Branches, plantes pour grimper, lieux de repos élevés, matériel pour tisser des toiles",
+      "hygieneNotes": "Eau fraîche en récipient peu profond, ventilation adéquate, nettoyage régulier des toiles mortes",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Avicularia_avicularia",
+          "title": "Pink-toed tarantula (Wikipedia EN)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Prédateur embusqué arboricole. Utilise sa toile à la fois comme piège et comme senseur. Face à une menace, s'enfuit, saute ou réagit de façon défensive. Venin considéré comme faible",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "À ne pas manipuler - vitesse élevée et risque de chute. Peu défensive en général",
+      "compatibilityWithOtherAnimals": "Strictement solitaire, cannibale envers ses congénères",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Avicularia_avicularia",
+          "title": "Pink-toed tarantula (Wikipedia EN)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Déshydratation",
+          "symptoms": "Abdomen rétréci, léthargie, refus de nourriture",
+          "prevention": "Eau fraîche permanente en récipient peu profond",
+          "whenToConsult": "Consultation si signes persistants"
+        },
+        {
+          "name": "Maladie de la mue (dysecdysie)",
+          "symptoms": "Impossibilité à compléter la mue, exosquelette partiel",
+          "prevention": "Humidité et température stables, pas de stress durant la mue",
+          "whenToConsult": "Urgence - intervention vétérinaire possible"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Avicularia_avicularia",
+          "title": "Pink-toed tarantula (Wikipedia EN)"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 48,
+      "breedingDifficulty": "avance",
+      "notes": "Maturité vers 4 à 5 ans. Les mâles vivent 2 à 3 ans, les femelles 6 à 9 ans",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Avicularia_avicularia",
+          "title": "Pink-toed tarantula (Wikipedia EN)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104221620,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons",
+          "frequency": "hebdomadaire",
+          "notes": "Proies principales - taille adaptée à l'araignée"
+        },
+        {
+          "name": "Petits insectes et petits vertébrés",
+          "frequency": "occasionnel",
+          "notes": "Sauterelles, cafards ; occasionnellement lézards ou petites grenouilles dans la nature"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies contaminées",
+          "reason": "Pesticides et polluants toxiques"
+        },
+        {
+          "name": "Proies trop volumineuses",
+          "reason": "Risque de blessure, consommation incomplète"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Prédateur embusqué à l'entrée de son terrier. Eau disponible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma",
+          "title": "Brachypelma (Wikipedia EN)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma_smithi",
+          "title": "Brachypelma smithi (Wikipedia EN)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium horizontal avec substrat profond permettant de creuser un terrier (dans la nature : terrier à entrée unique, tunnel horizontal et une à deux chambres)",
+      "lightNeeds": "Lumière naturelle indirecte, cycle jour-nuit naturel",
+      "activityEnrichment": "Substrat profond pour creuser, cache de mue séparée, abri de repos",
+      "hygieneNotes": "Eau en récipient peu profond, nettoyage modéré du terrier, ventilation adéquate",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma",
+          "title": "Brachypelma (Wikipedia EN)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma_smithi",
+          "title": "Brachypelma smithi (Wikipedia EN)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Prédateur embusqué. Reste à l'entrée du terrier, saisit les proies passantes. Docile et facile à garder en terrarium, mais projette rapidement ses poils urticants en cas de menace. Solitaire",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Docile mais à ne pas manipuler : risque de chute et poils urticants",
+      "compatibilityWithOtherAnimals": "Strictement solitaire - isolation obligatoire sauf pour de brefs accouplements",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma",
+          "title": "Brachypelma (Wikipedia EN)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladie de la mue (dysecdysie)",
+          "symptoms": "Incapacité à compléter la mue, exosquelette partiel, mort possible",
+          "prevention": "Stabilité température/humidité, substrat approprié, pas de stress",
+          "whenToConsult": "Urgence vétérinaire possible"
+        },
+        {
+          "name": "Abcès post-traumatique",
+          "symptoms": "Gonflement, plaie purulente, léthargie",
+          "prevention": "Minimiser les manipulations, éviter les combats entre individus",
+          "whenToConsult": "Consultation vétérinaire"
+        },
+        {
+          "name": "Parasitose",
+          "symptoms": "Comportement anormal, léthargie, refus de nourriture",
+          "prevention": "Hygiène du substrat, proies de source fiable",
+          "whenToConsult": "Consultation pour diagnostic"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma",
+          "title": "Brachypelma (Wikipedia EN)"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": [
+          "Espèce inscrite à l'annexe II de la CITES : le commerce international est soumis à permis"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma_smithi",
+          "title": "Brachypelma smithi (Wikipedia EN) - CITES Appendix II (1985)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 108,
+      "breedingDifficulty": "avance",
+      "notes": "Femelles : maturité vers 9-10 ans, puis environ 10 ans de vie supplémentaires. Mâles : maturité vers 7-8 ans, décès généralement dans l'année qui suit. Les femelles produisent un cocon d'œufs avant la mue ; l'éclosion a lieu quelques semaines avant le début de la saison des pluies",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brachypelma",
+          "title": "Brachypelma (Wikipedia EN)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104232708,
+    "feeding": null,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium horizontal avec abris (pierres). Habitat naturel : zones sèches et chaudes à végétation clairsemée, l'animal se cache sous les pierres durant la journée",
+      "lightNeeds": "Obscurité principalement, lumière naturelle indirecte acceptable",
+      "activityEnrichment": "Pierres et roches pour se cacher, substrat sec, abri sombre",
+      "hygieneNotes": "Eau peu profonde, nettoyage des abris, substrat sec, ventilation adéquate",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Buthus_occitanus",
+          "title": "Buthus occitanus (Wikipedia EN)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Buthus_occitanus",
+          "title": "Scorpion languedocien (Wikipédia FR)"
+        }
+      ]
+    },
+    "behavior": null,
+    "health": null,
+    "legislation": null,
+    "reproduction": null
+  }
+]

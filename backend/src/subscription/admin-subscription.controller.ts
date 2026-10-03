@@ -23,7 +23,7 @@ import { SubscriptionService } from './subscription.service';
 import { AdminActivatePremiumDto } from './dto/admin-activate-premium.dto';
 
 /**
- * Administration du premium, réservée aux opérateurs (emails dans OPERATOR_EMAILS).
+ * Administration du premium, réservée aux opérateurs (User.role = OPERATOR, attribué via `npm run operator:set`).
  * L'activation automatique sans paiement (POST /users/me/subscription) étant
  * désactivée (501), c'est le seul moyen de rendre un compte premium.
  */
@@ -33,7 +33,7 @@ import { AdminActivatePremiumDto } from './dto/admin-activate-premium.dto';
 @ApiBearerAuth()
 @ApiUnauthorizedResponse({ description: 'Token JWT manquant ou invalide' })
 @ApiForbiddenResponse({
-  description: "L'appelant n'est pas un opérateur (email absent de OPERATOR_EMAILS)",
+  description: "L'appelant n'est pas un opérateur (User.role ≠ OPERATOR)",
 })
 export class AdminSubscriptionController {
   constructor(private readonly subscriptionService: SubscriptionService) {}
@@ -46,11 +46,13 @@ export class AdminSubscriptionController {
   })
   @ApiResponse({
     status: 200,
-    description: 'Premium activé — retourne le nouveau statut : { isPremium, plan? }',
+    description:
+      'Premium activé — retourne le nouveau statut : { isPremium, plan? }',
   })
   @ApiResponse({
     status: 400,
-    description: "L'email fourni dans le body ne correspond pas au compte cible",
+    description:
+      "L'email fourni dans le body ne correspond pas au compte cible",
   })
   @ApiNotFoundResponse({ description: 'Utilisateur cible introuvable' })
   activate(
@@ -68,7 +70,8 @@ export class AdminSubscriptionController {
   })
   @ApiResponse({
     status: 200,
-    description: 'Premium désactivé — retourne le nouveau statut : { isPremium, plan? }',
+    description:
+      'Premium désactivé — retourne le nouveau statut : { isPremium, plan? }',
   })
   @ApiNotFoundResponse({ description: 'Utilisateur cible introuvable' })
   deactivate(@Param('userId') userId: string) {

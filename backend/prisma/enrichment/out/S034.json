@@ -1,0 +1,456 @@
+[
+  {
+    "speciesId": 5219888,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Écorces et branches",
+          "frequency": "quotidienne",
+          "notes": "Bois tendre, écorce fruitière, châtaignier"
+        },
+        {
+          "name": "Légumes variés",
+          "frequency": "quotidienne",
+          "notes": "Carottes, courges, pommes, feuillage frais"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments toxiques pour rongeurs",
+          "reason": "Chocolat, avocat, aliments moisissants"
+        },
+        {
+          "name": "Aliments épicés ou salés",
+          "reason": "Troubles digestifs chez le porc-épic"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès constant à bois pour ronger et user les incisives, aliments fibreux abondants",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Hystrix_cristata",
+          "title": "Hystrix cristata"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Crested_porcupine",
+          "title": "Crested porcupine"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 15,
+      "tempMax": 25,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Nuit/jour naturel, riche en végétation naturelle",
+      "activityEnrichment": "Bois à ronger, sol à creuser, roches, débris naturels, végétation dense",
+      "hygieneNotes": "Nettoyage mensuel des zones principales, litière naturelle (feuilles, paille)",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Hystrix_cristata",
+          "title": "Hystrix cristata"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Crested_porcupine",
+          "title": "Crested porcupine"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Rongeur terrestre nocturne ; se réfugie le jour dans de profonds terriers ou des creux de rochers ; cherche sa nourriture seul, vit en petite unité familiale (couple et jeunes) ; se défend en hérissant ses piquants et en chargeant à reculons",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Non recommandé, piquants pouvant blesser (l'animal charge à reculons quand il se sent menacé)",
+      "compatibilityWithOtherAnimals": "Cohabitation possible au sein du couple ou de la famille ; défensif avec les autres animaux",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Hystrix_cristata",
+          "title": "Hystrix cristata"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Crested_porcupine",
+          "title": "Crested porcupine"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Problèmes dentaires",
+          "symptoms": "Usure anormale des incisives, bave, refus de nourriture",
+          "prevention": "Bois frais à disposition permanente pour usure mécanique naturelle",
+          "whenToConsult": "Si refus persistant de nourriture"
+        },
+        {
+          "name": "Infections des plaies de piquants",
+          "symptoms": "Gonflements, pus, boiterie, inflammation locale",
+          "prevention": "Minimiser stress, enlever piquants morts régulièrement",
+          "whenToConsult": "Si signe d'infection locale (chaleur, gonflement)"
+        },
+        {
+          "name": "Parasites intestinaux",
+          "symptoms": "Perte de poids progressive, anémie, selles molles",
+          "prevention": "Hygiène enclos excellente, eau potable fraiche, isolation initialement",
+          "whenToConsult": "En cas de perte de poids anormale"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Hystrix_cristata",
+          "title": "Hystrix cristata"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "III",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": [
+          "Espèce inscrite à l'annexe III de la CITES, à l'annexe II de la Convention de Berne et à l'annexe IV de la directive européenne Habitats (selon Wikipédia FR)"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Hystrix_cristata",
+          "title": "Hystrix cristata"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 66,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": 18,
+      "breedingDifficulty": "avance",
+      "notes": "Une portée par an en général, de 1 à 2 petits bien développés (environ 1 kg) qui quittent le terrier après une semaine ; mise bas dans un terrier garni d'herbe",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Crested_porcupine",
+          "title": "Crested porcupine"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5220136,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Herbe fraîche et pâturage",
+          "frequency": "quotidienne",
+          "notes": "Graminées naturelles, herbes variées en pré"
+        },
+        {
+          "name": "Feuillage, glands et châtaignes",
+          "frequency": "quotidienne",
+          "notes": "Glands, châtaignes, feuilles, pousses et bourgeons selon la saison"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Plantes toxiques",
+          "reason": "Certains arbustes sont toxiques pour cervidés"
+        },
+        {
+          "name": "Nourriture pourrie ou gelée",
+          "reason": "Troubles digestifs graves"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès permanent à un pâturage varié (herbes, pousses, feuilles, glands, fruits et baies) ; compléments minéraux éventuels sur avis vétérinaire",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Daim_europ%C3%A9en",
+          "title": "Daim européen"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fallow_deer",
+          "title": "Fallow deer"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Jour/nuit naturel complet, accès ombrage régulier",
+      "activityEnrichment": "Pâturage varié, arbustes browzables, eau courante ou bassin, abris naturels, amis congénères si possible",
+      "hygieneNotes": "Surveillance sanitaire régulière, pâturage rotatif, gestion parasites naturels",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Daim_europ%C3%A9en",
+          "title": "Daim européen"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fallow_deer",
+          "title": "Fallow deer"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Cervidé grégaire : femelles et jeunes en hardes de 6 à 50 individus menées par une femelle âgée ; mâles solitaires ou en groupes de célibataires ; rut (« raire ») en octobre-novembre avec combats entre mâles",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Possible avec supervision constante, animaux sauvages imprévisibles",
+      "compatibilityWithOtherAnimals": "Cohabitation groupe congénères recommandée, isolation stressante",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Daim_europ%C3%A9en",
+          "title": "Daim européen"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fallow_deer",
+          "title": "Fallow deer"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasites externes et internes",
+          "symptoms": "Pelage terne, perte de poids, comportement anormal de toilettage",
+          "prevention": "Pâturage rotatif, surveillance vétérinaire saisonnière, isolation quarantaine",
+          "whenToConsult": "Pelage terne, amaigrissement ou comportement anormal"
+        },
+        {
+          "name": "Maladies infectieuses",
+          "symptoms": "Fièvre, dépression, diarrhée, toux",
+          "prevention": "Quarantaine à l'introduction de nouveaux animaux, suivi vétérinaire du troupeau",
+          "whenToConsult": "Immédiatement si fièvre ou symptômes généraux"
+        },
+        {
+          "name": "Traumatismes bois (antlers)",
+          "symptoms": "Saignements bois pendant velours, blessures tête/cou",
+          "prevention": "Pâturage sécurisé, obstacles lisses, espacement groupe approprié",
+          "whenToConsult": "Si saignement actif ou gonflement anormal des antlers"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Daim_europ%C3%A9en",
+          "title": "Daim européen"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [
+          "Déclaration de détention en préfecture pour un petit groupe de femelles (jusqu'à trois individus) ; certificat de capacité et autorisation d'ouverture d'établissement pour des groupes plus importants ou des mâles (selon Wikipédia FR)"
+        ],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Daim_europ%C3%A9en",
+          "title": "Daim européen"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "automne",
+      "gestationDays": 230,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Rut (« raire ») en octobre-novembre, gestation d'environ 8 mois, un faon (parfois deux) né en juin-juillet. Les bois des mâles tombent en mai et atteignent leur plus grand développement en septembre.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Daim_europ%C3%A9en",
+          "title": "Daim européen"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5220266,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Cactus (feuilles et fruits)",
+          "frequency": "quotidienne",
+          "notes": "Cactus, herbes et feuillage font partie du régime naturel"
+        },
+        {
+          "name": "Légumes variés et feuillage",
+          "frequency": "quotidienne",
+          "notes": "Salades, courges, feuilles sombres, graminées, diversité essentielle"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Avocat",
+          "reason": "Toxiques pour tortues géantes"
+        },
+        {
+          "name": "Aliments trop protéinés",
+          "reason": "Risque de déformations de la carapace et de goutte"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès eau permanente pour boire et trempage corporel, richesse minérale (calcium, phosphore essentiels)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gal%C3%A1pagos_tortoise",
+          "title": "Galápagos tortoise"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_g%C3%A9ante_des_Gal%C3%A1pagos",
+          "title": "Tortue géante des Galápagos"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": 18,
+      "tempMax": 32,
+      "humidityMin": 50,
+      "humidityMax": 80,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière solaire directe, UVB nécessaires, zone ombragée refuge",
+      "activityEnrichment": "Végétation naturelle à brouter, roches plates pour basking, point d'eau immersion, pentes variées",
+      "hygieneNotes": "Point d'eau changé quotidiennement, substrat humide maintenu (basking sec), nettoyage zone selles régulier",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gal%C3%A1pagos_tortoise",
+          "title": "Galápagos tortoise"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_g%C3%A9ante_des_Gal%C3%A1pagos",
+          "title": "Tortue géante des Galápagos"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Tortue géante lente, active le jour (cherche sa nourriture 8-9 h par jour), prend le soleil 1-2 h après l'aube ; populations à carapace en dôme grégaires, types à carapace en selle solitaires et territoriaux",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non, manipulation dangereuse et stressante, engagement très long (100+ ans)",
+      "compatibilityWithOtherAnimals": "Tolère autres tortues geantes, attention prédateurs petites espèces",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gal%C3%A1pagos_tortoise",
+          "title": "Galápagos tortoise"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_g%C3%A9ante_des_Gal%C3%A1pagos",
+          "title": "Tortue géante des Galápagos"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladies respiratoires",
+          "symptoms": "Rhume nasal, sécrétions nasales, respiration laborieuse",
+          "prevention": "Humidité stable 50-80%, éviter courants froids, nettoyage eau quotidien",
+          "whenToConsult": "Immédiatement si symptômes respiratoires"
+        },
+        {
+          "name": "Carence calcium",
+          "symptoms": "Carapace molle, déformations osseuses, faiblesse membres",
+          "prevention": "Supplémentation calcique, UVB quotidien, alimentation riche minéraux",
+          "whenToConsult": "Si carapace anormalement souple"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gal%C3%A1pagos_tortoise",
+          "title": "Galápagos tortoise"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": "A",
+        "permits": [],
+        "restrictions": [
+          "Espèce inscrite à l'annexe A (selon Wikipédia FR) ; toutes les sous-espèces survivantes sont classées menacées par l'UICN"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_g%C3%A9ante_des_Gal%C3%A1pagos",
+          "title": "Tortue géante des Galápagos"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gal%C3%A1pagos_tortoise",
+          "title": "Galápagos tortoise"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "juillet à novembre (juin à décembre selon Wikipédia FR)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 2,
+      "litterSizeMax": 16,
+      "sexualMaturityMonths": 240,
+      "breedingDifficulty": "avance",
+      "notes": "Maturité sexuelle à 20-25 ans, ponte de 2 à 16 œufs selon la sous-espèce, incubation de 4 à 8 mois (120 à 240 jours)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Gal%C3%A1pagos_tortoise",
+          "title": "Galápagos tortoise"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tortue_g%C3%A9ante_des_Gal%C3%A1pagos",
+          "title": "Tortue géante des Galápagos"
+        }
+      ]
+    }
+  }
+]

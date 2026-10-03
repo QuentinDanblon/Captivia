@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 156261518,
+  "commonNameFr": "Poisson-chat de verre",
+  "scientificName": "Kryptopterus vitreolus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 156315727,
+  "commonNameFr": "Tarentule de Cobalt",
+  "scientificName": "Cyriopagopus lividus",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 163312909,
+  "commonNameFr": "Pigeon domestique",
+  "scientificName": "Columba livia domestica",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

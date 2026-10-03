@@ -1,0 +1,225 @@
+[
+  {
+    "speciesId": 104060891,
+    "evidence": []
+  },
+  {
+    "speciesId": 104060941,
+    "evidence": []
+  },
+  {
+    "speciesId": 104061079,
+    "evidence": []
+  },
+  {
+    "speciesId": 104069250,
+    "evidence": []
+  },
+  {
+    "speciesId": 104076753,
+    "evidence": []
+  },
+  {
+    "speciesId": 104085484,
+    "evidence": []
+  },
+  {
+    "speciesId": 104087619,
+    "evidence": [
+      {
+        "field": "reproduction.litterSizeMax",
+        "value": 30,
+        "quote": "Females can grow to approximately 38.5 cm (15 in), and can lay up to 30 eggs.",
+        "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana"
+      },
+      {
+        "field": "reproduction.breedingDifficulty",
+        "value": "avance",
+        "quote": "Maintaining and breeding the species in captivity is difficult. Mating and egg laying have occurred at each institution, but most eggs have been infertile.",
+        "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "reproduction en captivité difficile, œufs surtout infertiles",
+        "quote": "Maintaining and breeding the species in captivity is difficult. Mating and egg laying have occurred at each institution, but most eggs have been infertile.",
+        "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana"
+      }
+    ]
+  },
+  {
+    "speciesId": 104093507,
+    "evidence": []
+  },
+  {
+    "speciesId": 104094514,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": "29 (85°F = 29,4°C)",
+        "quote": "Rough green snakes are most comfortable when kept within the range of 85 to 88 degrees Fahrenheit",
+        "url": "https://reptilesmagazine.com/rough-green-snake-care-sheet/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": "31 (88°F = 31,1°C)",
+        "quote": "Rough green snakes are most comfortable when kept within the range of 85 to 88 degrees Fahrenheit",
+        "url": "https://reptilesmagazine.com/rough-green-snake-care-sheet/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "55-75 gallons",
+        "quote": "A fifty five to seventy five gallon equivalent enclosure is suitable for two adults",
+        "url": "https://reptilesmagazine.com/rough-green-snake-care-sheet/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "spectre complet",
+        "quote": "It is beneficial for the rough green snake to have full spectrum lighting, provided by snake heat lamps",
+        "url": "https://reptilesmagazine.com/rough-green-snake-care-sheet/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "plantes pour grimper et se cacher",
+        "quote": "this enclosure should be heavily adorned with live or artificial plants for climbing and hiding",
+        "url": "https://reptilesmagazine.com/rough-green-snake-care-sheet/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "brumisation hebdomadaire",
+        "quote": "the captive environment should be gently misted at least once a week to maintain adequate humidity",
+        "url": "https://reptilesmagazine.com/rough-green-snake-care-sheet/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "substrat graviers, acariens",
+        "quote": "Substrate in the enclosure should be in the form of small stone or gravel. This will enable easy cleaning and reduce the risk of harmful external parasites such as snake mites.",
+        "url": "https://reptilesmagazine.com/rough-green-snake-care-sheet/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "retirer les fèces sèches",
+        "quote": "Dry feces is easily visible on the gravel and should be removed at once.",
+        "url": "https://reptilesmagazine.com/rough-green-snake-care-sheet/"
+      }
+    ]
+  },
+  {
+    "speciesId": 104101618,
+    "evidence": [
+      {
+        "field": "reproduction.season",
+        "value": "fin d'été à la mousson",
+        "quote": "E. johnii is ovoviviparous, with females giving birth to up to 14 young at a time in late summer to monsoon.",
+        "url": "https://en.wikipedia.org/wiki/Eryx_johnii"
+      },
+      {
+        "field": "reproduction.litterSizeMax",
+        "value": 14,
+        "quote": "E. johnii is ovoviviparous, with females giving birth to up to 14 young at a time in late summer to monsoon.",
+        "url": "https://en.wikipedia.org/wiki/Eryx_johnii"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "ovovivipare, jusqu'à 14 petits",
+        "quote": "E. johnii is ovoviviparous, with females giving birth to up to 14 young at a time in late summer to monsoon.",
+        "url": "https://en.wikipedia.org/wiki/Eryx_johnii"
+      }
+    ]
+  },
+  {
+    "speciesId": 104101654,
+    "evidence": []
+  },
+  {
+    "speciesId": 104101859,
+    "evidence": [
+      {
+        "field": "habitat.tempMax",
+        "value": 31,
+        "quote": "around 31℃ (88℉) in the sun",
+        "url": "https://www.reptilecentre.com/info-burmese-python-care-sheet"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 29,
+        "quote": "cool to 29℃ (85℉) on the opposite side",
+        "url": "https://www.reptilecentre.com/info-burmese-python-care-sheet"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "4 ft x 2 ft (juvéniles) ; 7 x 3 x 2 ft (mâles)",
+        "quote": "enclosures 4ft in length and 2ft in depth and hieght",
+        "url": "https://www.reptilecentre.com/info-burmese-python-care-sheet"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "UVB 2-5 %",
+        "quote": "Zone 1 or 2-5% UVB tube",
+        "url": "https://www.reptilecentre.com/info-burmese-python-care-sheet"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "obscurité totale la nuit",
+        "quote": "At night, all of the lights should go off and the enclosure should be completely dark. This should make sure that the snake has a clear day night cycle.",
+        "url": "https://www.reptilecentre.com/info-burmese-python-care-sheet"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "cachette fermée avec mousse humide",
+        "quote": "providing a fully enclosed cave or tub with an entrance large enough for the snake to get in and out of easily. Within this hide you can add wet moss to keep the humidity high",
+        "url": "https://www.reptilecentre.com/info-burmese-python-care-sheet"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "mâles adultes : environ 7 x 3 x 2 pieds",
+        "quote": "something around 7 x 3 x 2ft",
+        "url": "https://www.reptilecentre.com/info-burmese-python-care-sheet"
+      }
+    ]
+  },
+  {
+    "speciesId": 104104828,
+    "evidence": []
+  },
+  {
+    "speciesId": 104105088,
+    "evidence": [
+      {
+        "field": "habitat.tempMax",
+        "value": "38 (100°F = 37,8°C)",
+        "quote": "To accomplish the required basking temperature of 90oF- 100°F, we use a basking bulb",
+        "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": "21 (70°F = 21,1°C)",
+        "quote": "The nighttime temperature of 70°F is created by using a ceramic night bulb.",
+        "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "1150 mm",
+        "quote": "The vivarium should be at least 1150mm (46\"). The enclosure needs to be hot at",
+        "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "UVB >= 10 %",
+        "quote": "The tube should be at least 10% UVB for desert species.",
+        "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "UVB et vitamine D3",
+        "quote": "Tortoises require UVB in order to synthesise vitamin D3 inside their skin.",
+        "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "bain 2-3 fois par semaine",
+        "quote": "Instead tortoises should be given a shallow bath 2-3 times a week for 10 minutes.",
+        "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+      }
+    ]
+  }
+]

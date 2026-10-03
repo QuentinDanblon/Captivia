@@ -1,0 +1,63 @@
+[
+  {
+    "speciesId": 2436412,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation.status: prohibited -> permit_required (CITES I, aucune source ne dit 'interdit')",
+      "legislation.details.euAnnex: A -> null (non confirmé)",
+      "reproduction.gestationDays: 139 -> 135 (Wikipédia FR 120-136 j ; San Diego Zoo 134-144 j)",
+      "reproduction.season: avril -> naissances en août (San Diego Zoo)",
+      "reproduction.breedingDifficulty: modere -> facile (Wikipédia : se reproduit facilement en captivité)",
+      "feeding.dietType: omnivore -> herbivore (SDZ)",
+      "behavior: groupes 3-27 (SDZ) ; retrait de 'stink fights'"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "source https://vin.com/doc/?id=9853637 (accès membre/login)",
+      "source https://veterinarymedicinejournal.usamv.ro/pdf/2025/issue_2/Art18.pdf (ne concerne pas l'espèce)",
+      "sources CITES legislative status table et speciesplus (non spécifiques/non vérifiables)",
+      "reproduction.notes: fécondité 75-84 %, reproduction annuelle (non confirmés)",
+      "feeding: '50 % du temps au fourragement', diabète (non confirmés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2436469,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation.status: prohibited -> permit_required (CITES I confirmé par Wikipédia EN ; ADW dit II mais obsolète)",
+      "legislation.details.euAnnex: A -> null",
+      "habitat.habitatType: terrarium -> enclos",
+      "health: 'colite et maladies intestinales (myocardite, glomérulonéphrite 72-85 %)' -> colite chronique (Wikipédia : très sujet à la colite) ; chiffres issus d'une étude sur Saguinus mystax retirés",
+      "reproduction: season janvier-juin -> null (ADW : 2 naissances/an, pas de saison confirmée)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "source https://pmc.ncbi.nlm.nih.gov/articles/PMC2703172 (concerne Saguinus mystax)",
+      "source jzar.org/jzar/article/download/990/557/8215 (non vérifiable)",
+      "sources CITES legislative status table (non spécifique)",
+      "behavior: 'légalement interdit en captivité privée en France' (non confirmé)",
+      "reproduction.notes: cycle oestral 15 j, résorption si manipulation (non confirmés) ; Moniliformis clarki",
+      "feeding.foodsToAvoid 'aliments toxiques ou allergènes' (raison hors sujet)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2436484,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation: CITES I (faux, Wikipédia FR et ADW disent annexe II) ; statut 'prohibited' non sourcé -> legislation = null",
+      "habitat.habitatType: terrarium -> enclos",
+      "behavior: monogamie / petits groupes (<=4) selon ADW ; solitaire selon Wikipédia FR, formulation nuancée",
+      "health.whenToConsult: phrase incohérente 'espèce euthanasie souvent' retirée"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "source https://czaw.org/?p=5077 (concerne des macaques rhésus)",
+      "source CITES legislative status table",
+      "feeding: '40-50 insectes/jour' (non confirmé)",
+      "reproduction.notes: proies capturées à 45 jours, 'non viable ex situ' (non confirmés)"
+    ],
+    "confidence": "medium"
+  }
+]

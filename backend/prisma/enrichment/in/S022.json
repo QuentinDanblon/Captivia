@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2470656,
+  "commonNameFr": "Varan du Nil",
+  "scientificName": "Varanus niloticus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2470685,
+  "commonNameFr": "Varan d'eau",
+  "scientificName": "Varanus salvator",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2470711,
+  "commonNameFr": "Varan de Gillen",
+  "scientificName": "Varanus gilleni",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

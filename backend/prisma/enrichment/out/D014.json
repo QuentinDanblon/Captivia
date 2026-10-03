@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000448,
+    "description": "Le Colley est un chien de berger d'origine britannique, fixé en Écosse vers la fin du XIXe siècle. Il mesure 56-61 cm au garrot pour les mâles et 51-56 cm pour les femelles, et pèse 20 à 32 kg. Son pelage long et dense existe en trois colorations principales : sable, tricolore et bleu merle. Chien intelligent, doux, affectueux et patient, il n'est ni craintif ni agressif.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Colley"
+  },
+  {
+    "speciesId": 2000000449,
+    "description": "Le terme Cocker Spaniel désigne deux races distinctes, l'anglaise et l'américaine, élevées à l'origine comme chiens de chasse au Royaume-Uni (le nom vient de la chasse à la bécasse). L'anglais mesure 38-43 cm pour 12-15 kg ; l'américain est plus petit. Leur robe, mi-longue à longue et soyeuse, existe en noir, fauve, rouge, bicolore et d'autres combinaisons. Chiens d'arme, ils sont décrits comme amicaux et affectueux.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Cocker_Spaniel"
+  },
+  {
+    "speciesId": 2000000450,
+    "description": "Le Fox-terrier regroupe deux races de terriers distinctes, le fox-terrier à poil lisse et le fox-terrier à poil dur, toutes deux originaires d'Angleterre au XIXe siècle. Le poil lisse mesure 36-39 cm au garrot pour 6,8-8,6 kg. Leur robe est majoritairement blanche avec des marques colorées, et leur tête est longue et en forme de coin. Élevés pour débusquer le renard de son terrier, ils ont connu un grand succès au Westminster Kennel Club Dog Show.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Fox_Terrier"
+  },
+  {
+    "speciesId": 2000000495,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000496,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000497,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000498,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000499,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000500,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000501,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000502,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000503,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000504,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000505,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000506,
+    "description": null,
+    "sourceUrl": null
+  }
+]

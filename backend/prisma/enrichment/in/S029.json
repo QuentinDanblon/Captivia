@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2498387,
+  "commonNameFr": "Canard carolin",
+  "scientificName": "Aix sponsa",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2498388,
+  "commonNameFr": "Canard mandarin",
+  "scientificName": "Aix galericulata",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 4263039,
+  "commonNameFr": "Paca",
+  "scientificName": "Cuniculus paca",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

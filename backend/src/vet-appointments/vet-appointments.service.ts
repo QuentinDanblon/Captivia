@@ -5,6 +5,11 @@ import {
   CreateVetAppointmentDto,
   UpdateVetAppointmentDto,
 } from './dto/vet-appointment.dto';
+import {
+  PaginationQueryDto,
+  toPage,
+} from '../common/dto/pagination-query.dto';
+
 
 @Injectable()
 export class VetAppointmentsService {
@@ -13,11 +18,12 @@ export class VetAppointmentsService {
     private readonly animalsService: AnimalsService,
   ) {}
 
-  async findAll(animalId: string, userId: string) {
+  async findAll(animalId: string, userId: string, page?: PaginationQueryDto) {
     await this.animalsService.findOne(animalId, userId);
     return this.prisma.vetAppointment.findMany({
       where: { animalId },
-      orderBy: { date: 'desc' },
+      orderBy: [{ date: 'desc' }, { id: 'asc' }],
+      ...toPage(page),
     });
   }
 

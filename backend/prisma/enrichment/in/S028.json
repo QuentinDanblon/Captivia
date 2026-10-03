@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2495134,
+  "commonNameFr": "Émeu",
+  "scientificName": "Dromaius novaehollandiae",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2495150,
+  "commonNameFr": "Autruche",
+  "scientificName": "Struthio camelus",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2498343,
+  "commonNameFr": "Cygne tuberculé",
+  "scientificName": "Cygnus olor",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000204,
+    "status": "corrected",
+    "note": "Page EN Green-rumped parrotlet OK (12 cm, mâle bleu-pourpre, grégaire, graines, habitat sec). Précision de l'aire (nord-est de l'Amérique du Sud) et de l'habitat."
+  },
+  {
+    "speciesId": 2000000205,
+    "status": "corrected",
+    "note": "Page EN Spectacled parrotlet OK. Corrigé : aire = Panama, Colombie, Venezuela (et non 'Amérique centrale et du Sud' en général) ; régime précisé."
+  },
+  {
+    "speciesId": 2000000206,
+    "status": "corrected",
+    "note": "La page citée (genre Estrilda) ne décrit pas l'espèce ; l'affirmation sur 'les motifs du plumage qui donnent son nom' n'y figurait pas. Remplacée par la page FR dédiée Astrild_ondulé (consultée, OK) : 9,5-11,5 cm, plumage brun barré avec trait rouge sur l'œil, champs/prairies, troupes, graines."
+  },
+  {
+    "speciesId": 2000000207,
+    "status": "removed",
+    "note": "description déjà null, rien à vérifier"
+  },
+  {
+    "speciesId": 2000000209,
+    "status": "verified",
+    "note": "Page EN Brahma chicken : origine USA/Shanghai années 1840, principale race de chair 1850-1930, pattes emplumées, pondeuse hiver d'œufs bruns : tout confirmé."
+  },
+  {
+    "speciesId": 2000000210,
+    "status": "verified",
+    "note": "Page EN Sussex chicken : origine Sussex, 1845, double usage, 180-200 œufs teintés, huit variétés (light, red, speckled citées) : confirmé."
+  },
+  {
+    "speciesId": 2000000211,
+    "status": "corrected",
+    "note": "Page EN Wyandotte : origine USA 1870s, nom Wyandot, œufs bruns, peau jaune, crête rose, 2,7-4 kg, neuf variétés (reconnues par l'APA), poule d'exposition : confirmé. Reformulation mineure (variétés reconnues par l'APA)."
+  },
+  {
+    "speciesId": 2000000212,
+    "status": "corrected",
+    "note": "Page FR Leghorn : ponte moyenne 280/an, 70 % des pondeuses industrielles partiellement issues, import USA 1828-1853 : confirmés. Corrigé : origine = anciennes races de Toscane ou d'Italie centrale (importation depuis Livourne)."
+  },
+  {
+    "speciesId": 2000000213,
+    "status": "verified",
+    "note": "Page EN Orpington : William Cook, années 1880, Orpington, double usage puis race d'exposition, ~180 œufs bruns clair/an, poids 2,70-4,55 kg : confirmé."
+  },
+  {
+    "speciesId": 2000000215,
+    "status": "corrected",
+    "note": "Page EN Toulouse goose : origine Toulouse, descendante d'Anser anser, viande/foie gras/duvet confirmés. Corrigé : poids 7-8,5 kg (femelles) et 9-9,5 kg (mâles) au lieu de 7-12 kg. Supprimé : longévité 25 ans et plumage gris et blanc (absents de la page) ; 'principalement industrielle' non confirmé."
+  },
+  {
+    "speciesId": 2000000216,
+    "status": "corrected",
+    "note": "Page EN Green anole. Corrigé : taille 12,5-20,3 cm (mâles adultes) au lieu de 'jusqu'à 22 cm' ; aire d'origine = sud-est des USA (Caraïbes = populations introduites) ; couleur selon humeur/stress/communication (température non confirmée) ; fanon orange à rouge, 3x plus grand que celui de la femelle."
+  },
+  {
+    "speciesId": 2000000217,
+    "status": "verified",
+    "note": "Page EN Argentine black and white tegu : plus grand tégou, 120-140 cm, >20 ans en captivité, forêts/savanes/semi-déserts, Argentine/Brésil/Paraguay (+Bolivie, Uruguay), intelligent et docile, joues du mâle : confirmé."
+  },
+  {
+    "speciesId": 2000000218,
+    "status": "verified",
+    "note": "Page EN Asian water monitor : 2e plus grand lézard après le Komodo, bon nageur, proies aquatiques, UICN préoccupation mineure, population stable : confirmé."
+  },
+  {
+    "speciesId": 2000000219,
+    "status": "verified",
+    "note": "Page FR Boa constricteur : Boidae, Amérique du Sud, 1,50-4,20 m, nocturne/crépusculaire, régime rongeurs/oiseaux/lézards, mort par arrêt circulatoire : confirmé."
+  },
+  {
+    "speciesId": 2000000220,
+    "status": "corrected",
+    "note": "Page EN Common_kingsnake (consultée, re-vérifiée par citations) : 'harmless snake', max 208,2 cm, 107 cm = moyenne de la sous-espèce L. g. getula (et non de l'espèce, corrigé), sud du New Jersey à la Floride (sous-espèce), 25+ ans en captivité. Page 'Kingsnake' (genre) écartée ; supprimé 'coast-to-coast' et 61-152 cm (valeurs du genre)."
+  }
+]

@@ -1,0 +1,208 @@
+[
+ {
+  "speciesId": 2482492,
+  "evidence": []
+ },
+ {
+  "speciesId": 2490384,
+  "evidence": []
+ },
+ {
+  "speciesId": 2491538,
+  "evidence": []
+ },
+ {
+  "speciesId": 2493661,
+  "evidence": []
+ },
+ {
+  "speciesId": 2493720,
+  "evidence": []
+ },
+ {
+  "speciesId": 2495134,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 10,
+    "quote": "The thermoneutral zone of emus lies between 10 and 30 °C (50 and 86 °F).",
+    "url": "https://en.wikipedia.org/wiki/Emu",
+    "note": "zone thermoneutre (confort thermique), pas une consigne d'élevage chiffrée : à relire"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 30,
+    "quote": "The thermoneutral zone of emus lies between 10 and 30 °C (50 and 86 °F).",
+    "url": "https://en.wikipedia.org/wiki/Emu",
+    "note": "idem"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "enclos",
+    "quote": "Emus breed well in captivity, and are kept in large open pens to avoid the leg and digestive problems that arise from inactivity.",
+    "url": "https://en.wikipedia.org/wiki/Emu"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Vastes enclos ouverts",
+    "quote": "Les Émeus d'Australie se reproduisent bien en captivité et doivent être gardés dans de vastes enclos pour éviter les problèmes liés à l'inactivité.",
+    "url": "https://fr.wikipedia.org/wiki/%C3%89meu_d%27Australie"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "vastes enclos / éviter l'inactivité",
+    "quote": "Emus breed well in captivity, and are kept in large open pens to avoid the leg and digestive problems that arise from inactivity.",
+    "url": "https://en.wikipedia.org/wiki/Emu"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "diurne",
+    "quote": "Emus forage in a diurnal pattern and eat a variety of native and introduced plant species.",
+    "url": "https://en.wikipedia.org/wiki/Emu"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "are kept in large open pens to avoid the leg and digestive problems that arise from inactivity.",
+    "url": "https://en.wikipedia.org/wiki/Emu",
+    "note": "déduction éditoriale (vastes enclos), pas une citation de coût : à relire"
+   }
+  ]
+ },
+ {
+  "speciesId": 2495150,
+  "evidence": []
+ },
+ {
+  "speciesId": 2498343,
+  "evidence": []
+ },
+ {
+  "speciesId": 2498387,
+  "evidence": []
+ },
+ {
+  "speciesId": 2498388,
+  "evidence": []
+ },
+ {
+  "speciesId": 4263039,
+  "evidence": []
+ },
+ {
+  "speciesId": 5170451,
+  "evidence": []
+ },
+ {
+  "speciesId": 5202178,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "nocturne, poisson de fond",
+    "quote": "bottom-feeding, nocturnal catfish",
+    "url": "https://en.wikipedia.org/wiki/Hypostomus_plecostomus"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "calme jeune / agressif adulte",
+    "quote": "When they are young, Common Plecos are pretty easy-going. They get along well with most fish of a similar size. However, that changes once they reach adulthood. These fish can exhibit aggressive behavior when they are fully grown.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "territorial même envers la même espèce",
+    "quote": "This is primarily because they can become territorial. This behavior applies to even fish of the same species!",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "passe la journée caché",
+    "quote": "Don't expect to see much activity during the day. This species will spend their days in hiding as they rest.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "solitaire",
+    "quote": "In general, Common Plecos prefer to stay alone and will have no problem attacking other fish.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "behavior.difficultyLevel",
+    "value": "intermédiaire",
+    "quote": "Medium difficult",
+    "url": "https://www.aquariumsource.com/common-pleco/",
+    "note": "citation courte du niveau de soin ; mapping 'medium' -> intermédiaire"
+   },
+   {
+    "field": "behavior.compatibilityWithOtherAnimals",
+    "value": "poissons de taille similaire, autres niveaux d'eau",
+    "quote": "Your best bet would be to choose similarly sized fish that occupy other parts of the water column.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "health.diseases[0]",
+    "value": "Ich",
+    "quote": "Ich is a common ailment that's usually caused by stress. It's very contagious and causes small white bumps to form all over the fish's body.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Dropsy",
+    "quote": "Dropsy is a form of bloat. The fish's body starts to swell up with fluids, making it difficult to swim.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Infections bactériennes/fongiques",
+    "quote": "Your fish may also experience bacterial or fungal infections. These maladies tend to accompany other diseases.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "health.prevention",
+    "value": "changements d'eau 30 %/semaine",
+    "quote": "You should also perform 30-percent water changes every week to support the filtration system.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "health.prevention",
+    "value": "mauvaises conditions d'eau",
+    "quote": "They're usually caused by poor water conditions",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "health.whenToConsult",
+    "value": "quarantaine, cuivre",
+    "quote": "If your fish contracts a disease, quarantine them to start treatment immediately.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "health.whenToConsult",
+    "value": "sensibilité au cuivre",
+    "quote": "Common Plecos can be sensitive to copper-based medicines, so exercise caution.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "avance",
+    "quote": "Breeding Common Plecos in captivity is extremely difficult.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "grotte, garde des oeufs",
+    "quote": "Males will find a suitable cave for spawning. He'll then clean the cave and invite the female. She will then lay her eggs on the side of the cave. Males watch over the eggs until they hatch, which takes a few days.",
+    "url": "https://www.aquariumsource.com/common-pleco/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "oeufs gardés",
+    "quote": "Eggs are guarded by one or both parents.",
+    "url": "https://www.fishbase.se/summary/Hypostomus-plecostomus.html"
+   }
+  ]
+ },
+ {
+  "speciesId": 5216573,
+  "evidence": []
+ }
+]

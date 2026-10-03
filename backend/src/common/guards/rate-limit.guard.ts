@@ -27,7 +27,7 @@ interface RateLimitResult {
 class RedisRateLimiter {
   private limiter: RateLimiterRedis;
 
-  constructor(points: number, duration: number) {
+  constructor(keyPrefix: string, points: number, duration: number) {
     const redis = new Redis({
       host: process.env.REDIS_HOST || 'localhost',
       port: parseInt(process.env.REDIS_PORT || '6379', 10),
@@ -37,7 +37,7 @@ class RedisRateLimiter {
 
     this.limiter = new RateLimiterRedis({
       storeClient: redis,
-      keyPrefix: 'rate-limit',
+      keyPrefix,
       points,
       duration,
     });
@@ -54,9 +54,9 @@ class RedisRateLimiter {
 class MemoryRateLimiter {
   private limiter: RateLimiterMemory;
 
-  constructor(points: number, duration: number) {
+  constructor(keyPrefix: string, points: number, duration: number) {
     this.limiter = new RateLimiterMemory({
-      keyPrefix: 'rate-limit',
+      keyPrefix,
       points,
       duration,
     });
@@ -75,14 +75,21 @@ abstract class BaseRateLimitGuard implements CanActivate {
   private readonly logger = new Logger('RateLimitGuard');
   private readonly rateLimiter: RedisRateLimiter | MemoryRateLimiter;
 
+  /**
+   * @param name Identifiant du guard : sert de préfixe de clé. Deux guards de limites
+   *             différentes (ex. 10/min et 100/min) ne doivent JAMAIS partager le même
+   *             compteur (collision de clés dans Redis), d'où un préfixe par guard.
+   */
   protected constructor(
+    name: string,
     protected readonly points: number,
     protected readonly duration: number,
   ) {
+    const keyPrefix = `rate-limit:${name}:${points}:${duration}`;
     this.rateLimiter =
       process.env.REDIS_ENABLED === 'true'
-        ? new RedisRateLimiter(points, duration)
-        : new MemoryRateLimiter(points, duration);
+        ? new RedisRateLimiter(keyPrefix, points, duration)
+        : new MemoryRateLimiter(keyPrefix, points, duration);
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -157,7 +164,7 @@ abstract class BaseRateLimitGuard implements CanActivate {
 @Injectable()
 export class RateLimitGuard extends BaseRateLimitGuard {
   constructor() {
-    super(100, 60);
+    super('default', 100, 60);
   }
 }
 
@@ -168,6 +175,23 @@ export class RateLimitGuard extends BaseRateLimitGuard {
 @Injectable()
 export class AuthRateLimitGuard extends BaseRateLimitGuard {
   constructor() {
-    super(10, 60);
+    super('auth', 10, 60);
+  }
+}
+
+/** Créations de comptes invités autorisées par IP et par heure (POST /auth/guest). */
+export const GUEST_CREATION_LIMIT = 5;
+export const GUEST_CREATION_WINDOW_SECONDS = 60 * 60;
+
+/**
+ * Création de comptes invités (POST /auth/guest) : 5 par heure et par IP. Route anonyme qui
+ * écrit en base : la limite empêche la création massive de comptes. Pas de captcha côté client
+ * aujourd'hui ; une session invité existante est réutilisée par l'app (aucune création à
+ * chaque lancement), et les invités inactifs sont purgés (GUEST_RETENTION_DAYS).
+ */
+@Injectable()
+export class GuestCreationRateLimitGuard extends BaseRateLimitGuard {
+  constructor() {
+    super('guest', GUEST_CREATION_LIMIT, GUEST_CREATION_WINDOW_SECONDS);
   }
 }

@@ -1,0 +1,101 @@
+[
+ {
+  "speciesId": 5216933,
+  "habitat": null,
+  "health": null
+ },
+ {
+  "speciesId": 5217160,
+  "habitat": null,
+  "health": {
+   "diseases": [
+    {
+     "name": "Chytridiomycose",
+     "symptoms": "Mue excessive de la peau, épaississement de la peau (pouvant mener rapidement à la mort), léthargie, rougeur de la peau, convulsions et perte du réflexe de redressement. Signalée chez le crapaud commun en Espagne et au Royaume-Uni.",
+     "prevention": null,
+     "whenToConsult": "Doit toujours être traitée avec l'avis d'un vétérinaire (le traitement n'est pas toujours efficace)."
+    },
+    {
+     "name": "Myiase due à la mouche Lucilia bufonivora",
+     "symptoms": "La mouche pond sur la peau du crapaud ; à l'éclosion, les larves pénètrent dans les narines et dévorent les tissus de l'intérieur, avec une issue fatale.",
+     "prevention": null,
+     "whenToConsult": null
+    },
+    {
+     "name": "Nématode pulmonaire Rhabdias bufonis",
+     "symptoms": "Chez les juvéniles : croissance ralentie, endurance et condition physique réduites ; anorexie induite par le parasite, avec baisse de la prise alimentaire et mortalité chez certains individus.",
+     "prevention": null,
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/European_toad",
+     "title": "European toad - Wikipedia"
+    },
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Chytridiomycosis",
+     "title": "Chytridiomycosis - Wikipedia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5217264,
+  "habitat": null,
+  "behavior": null,
+  "health": null,
+  "reproduction": null
+ },
+ {
+  "speciesId": 5218022,
+  "feeding": null,
+  "habitat": null,
+  "health": null
+ },
+ {
+  "speciesId": 5219362,
+  "feeding": null,
+  "habitat": null
+ },
+ {
+  "speciesId": 5219888,
+  "habitat": null
+ },
+ {
+  "speciesId": 5220136,
+  "habitat": null
+ },
+ {
+  "speciesId": 5220266,
+  "habitat": null
+ },
+ {
+  "speciesId": 5225659,
+  "feeding": null,
+  "habitat": null
+ },
+ {
+  "speciesId": 5226308,
+  "feeding": null,
+  "habitat": null
+ },
+ {
+  "speciesId": 5227370,
+  "habitat": null
+ },
+ {
+  "speciesId": 5228034,
+  "habitat": null
+ },
+ {
+  "speciesId": 5229044,
+  "habitat": null
+ },
+ {
+  "speciesId": 5285167,
+  "health": null
+ }
+]

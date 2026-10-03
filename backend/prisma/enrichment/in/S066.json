@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104145240,
+  "commonNameFr": "Inséparable de Fischer",
+  "scientificName": "Agapornis fischeri",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104145246,
+  "commonNameFr": "Inséparable masqué",
+  "scientificName": "Agapornis personatus",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104145297,
+  "commonNameFr": "Amazone à front blanc",
+  "scientificName": "Amazona albifrons",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,77 @@
+[
+ {
+  "speciesId": 2000000700,
+  "description": "Le Dexter est une race bovine originaire du comté de Kerry, dans le sud-ouest de l'Irlande, apparue au XVIIIe siècle. C'est un petit bovin aux pattes courtes : les taureaux mesurent généralement 102 à 112 cm au garrot et les vaches pèsent environ 325 kg. Sa robe est le plus souvent noire, parfois rouge ou dun. C'est une race mixte, élevée pour le lait et la viande.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Dexter_cattle"
+ },
+ {
+  "speciesId": 2000000701,
+  "description": "Les bovins de boucherie sont du bétail élevé pour la production de viande, distincts du bétail laitier. La production comprend trois étapes principales : les opérations vache-veau, l'engraissement et les parcs d'engraissement. Ces animaux sont sélectivement élevés pour des traits désirables comme la viande maigre ou la résistance aux maladies.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Beef_cattle"
+ },
+ {
+  "speciesId": 2000000702,
+  "description": "La Pie rouge de Norvège est une race bovine laitière originaire de Norvège, créée en 1961 par la fusion de plusieurs races régionales. Cette race se caractérise par une taille moyenne avec une hauteur au garrot d'environ 130 cm et pèse environ 575 kg pour les femelles. Elle est principalement élevée pour la production laitière.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Norwegian_Red"
+ },
+ {
+  "speciesId": 2000000703,
+  "description": "La Pie rouge de Suède est une race bovine laitière suédoise créée dans les années 1920 en croisant les races Pie rouge suédoise et Ayrshire suédoise. Cette race se caractérise par sa robe rouge avec des marques blanches et ses cornes présentes chez les deux sexes. En 2001, elle constituait près de 48 % du cheptel laitier national suédois.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Swedish_Red-and-White"
+ },
+ {
+  "speciesId": 2000000704,
+  "description": "La race Kostroma est une race bovine russe développée dans la première moitié du XXe siècle dans l'oblast de Kostroma, en Haute-Volga. Elle est issue du croisement de bovins locaux améliorés avec des taureaux Brown Swiss, Allgäu et Ayrshire. Elle est reconnue pour sa production laitière, typiquement de 3 900 à 5 000 kg de lait par lactation.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Kostroma_cattle"
+ },
+ {
+  "speciesId": 2000000705,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000706,
+  "description": "Les bovins Alatau sont une race originaire de la République socialiste soviétique du Kazakhstan, nommée d'après les montagnes Alatau. C'est une race mixte, utilisée à la fois pour la production de viande et de lait.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Alatau_cattle"
+ },
+ {
+  "speciesId": 2000000707,
+  "description": "La race Asturiana de la Montaña est une race bovine locale espagnole originaire des Asturies, particulièrement de la région montagneuse des Picos de Europa. Elle se distingue par ses capacités de reproduction et sa grande docilité. Elle est élevée principalement pour la production de viande et participe à la fabrication du fromage Casín.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Asturiana_de_la_Monta%C3%B1a"
+ },
+ {
+  "speciesId": 2000000708,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000709,
+  "description": "Le Krishna Valley est une race bovine indienne de trait originaire des vallées du Krishna et de ses affluents. Cette race a été créée vers 1880 pour les travaux agricoles lourds en combinant des caractéristiques du Gir, du Kankrej et de l'Ongole. Les animaux affichent une robe gris-blanc distinctive.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Krishna_Valley_cattle"
+ },
+ {
+  "speciesId": 2000000980,
+  "description": "L'American Landrace est une race porcine américaine blanche, au corps long, au poil fin, au long museau et aux oreilles lourdes et tombantes. Elle descend du Landrace danois, dont des sujets ont été importés aux États-Unis en 1934. Elle compte 16 ou 17 côtes.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/American_Landrace_pig"
+ },
+ {
+  "speciesId": 2000000981,
+  "description": "Le Hampshire est une race porcine américaine issue de porcs à selle importés du comté de Hampshire (Angleterre) aux États-Unis dès les années 1820. Il a un corps noir avec une bande blanche sur les épaules descendant sur les pattes avant, et des oreilles dressées. Musclé et à croissance rapide, il fournit une carcasse de bonne qualité.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Hampshire_pig"
+ },
+ {
+  "speciesId": 2000000982,
+  "description": "L'Angeln Saddleback est une race porcine rare originaire de la région d'Angeln (Allemagne), élevée surtout au Schleswig-Holstein, obtenue en croisant un Landrace local noir et blanc avec le Wessex Saddleback. C'est un grand porc noir aux oreilles tombantes, avec une ceinture blanche autour du corps au niveau des pattes avant. Établie comme race distincte en 1937, elle est devenue presque éteinte, le marché se détournant de sa viande grasse.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Angeln_Saddleback"
+ },
+ {
+  "speciesId": 2000000983,
+  "description": "Le Large Black est une race porcine britannique créée à la fin du XIXe siècle par la fusion des populations de porcs noirs du Devon et de Cornouailles avec celles de l'Essex, du Suffolk et du Kent. C'est le seul porc britannique entièrement noir ; il est rustique, docile et prolifique, fourrage bien et convient à l'élevage extensif. Sa population a fortement diminué après la Seconde Guerre mondiale et la race reste menacée.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Large_Black_pig"
+ },
+ {
+  "speciesId": 2000000984,
+  "description": "Le Husumer (Rotbunte Husumer) est une race porcine rare, originaire de la région de Husum (Schleswig-Holstein, Allemagne), où ce type de porc est documenté depuis la fin du XIXe siècle. C'est un porc rouge avec une ceinture ou selle blanche incluant les membres antérieurs ; la tête, le cou et l'arrière-train restent rouges. Variante de couleur de l'Angeln Saddleback, il aurait, selon la légende, été sélectionné par des éleveurs séparatistes danois pour évoquer la croix nordique.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Husumer_pig"
+ }
+]

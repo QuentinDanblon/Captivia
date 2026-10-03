@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2339870,
+  "commonNameFr": "Pleco royal",
+  "scientificName": "Panaque nigrolineatus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2342606,
+  "commonNameFr": "Corydoras bronze",
+  "scientificName": "Corydoras aeneus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2342679,
+  "commonNameFr": "Corydoras sterbai",
+  "scientificName": "Corydoras sterbai",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "speciesId": 5286201,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.season: été-automne → printemps (avril-mai) (source en.wikipedia Chinese_pangolin)",
+      "reproduction.litterSizeMax: 3 → 1 (Chinese pangolin: un seul jeune à la fois)",
+      "reproduction.notes: retrait de 'polygame, accouplements saisonniers' et 'espèces asiatiques ~100 j' (non confirmés), ajout poids de naissance ~93 g, sevrage 3 mois et maturité 2 ans confirmés par Pangolin",
+      "health: retrait des chiffres de température 25-28°C (non sourcés), 'Ulcères de stress' → 'Ulcères', retrait de 'reproduction évitée'; typo léthargie"
+    ],
+    "removed": ["reproduction.gestationDays: 100 (valeur propre à l'espèce non confirmée; Pangolin donne 70-140 j pour le groupe)"],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5287871,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.notes: 'mâles plus tardifs en grandes races' → maturité retardée jusqu'à 2 ans chez certaines grandes races (les deux sexes); 'cycles thermiques' → chaleurs ~2 fois par an; retrait de 'codage génétique favorable à domestication'; ajout gestation 58-68 j et portée moyenne ~6 (source en.wikipedia Dog)",
+      "health.Parvovirus.prevention: 'rappels annuels' → vaccination selon protocole vétérinaire (non confirmé)",
+      "health.Dirofilariose.prevention: 'mensuel' retiré, prophylaxie médicamenteuse (source Dog health)"
+    ],
+    "removed": ["reproduction.litterSizeMin/Max (2-12) → null (seule la moyenne ~6 est confirmée, mentionnée en notes)"],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 5288995,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.gestationDays: 330 → 340 (320-370, source en.wikipedia Horse)",
+      "reproduction.season: printemps → printemps à automne (anoestrus hivernal)",
+      "reproduction.sexualMaturityMonths: 24 → 18 (capables de se reproduire vers 18 mois, rarement mis à la reproduction avant 3 ans)",
+      "reproduction.notes: 'pouliche marche 1 h après naissance' → poulain debout et court peu après la naissance; retrait de 'colostrum 48 h' et 'étalons utilisables 3-4 ans' (non confirmés)",
+      "health.Grippe équine: fièvre 40°C → 41°C; 'vaccination obligatoire' → annuelle recommandée, rappels 6 mois pour chevaux de compétition (source Equine influenza); conseil de repos reformulé",
+      "health.Colique: 'grattage' → piaffement; 'transpiration' → rythme cardiaque accéléré; typo 'colic'"
+    ],
+    "removed": [],
+    "confidence": "high"
+  }
+]

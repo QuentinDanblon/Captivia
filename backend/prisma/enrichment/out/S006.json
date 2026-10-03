@@ -1,0 +1,398 @@
+[
+  {
+    "speciesId": 2367196,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Granulés ou sticks flottants pour carpe koï",
+          "frequency": "quotidienne",
+          "notes": "Aliments haute qualité spécialisés, distribués selon la température de l'eau"
+        },
+        {
+          "name": "Vers de terre, crevettes, aliments congelés",
+          "frequency": "hebdomadaire",
+          "notes": "Complément de protéines; la laitue peut aussi être donnée en friandise"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments riches en graisses",
+          "reason": "Risque de problèmes métaboliques et de mauvaise qualité d'eau"
+        },
+        {
+          "name": "Nourriture en eau froide (< 10°C)",
+          "reason": "En dessous de 10°C le système immunitaire est très affaibli : ne pas nourrir (Wikipedia)"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Adapter l'alimentation à la saison : aliments plus riches au printemps/été, formules pour eau froide ou arrêt de l'alimentation en hiver. Éviter la suralimentation.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://pondinformer.com/what-do-koi-eat-in-the-wild/",
+          "title": "What Do Koi Carp Eat in the Wild? (Natural Diet Facts)"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/pond-fish/koi",
+          "title": "Fishkeeper.co.uk - Koi Care Guide"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 2,
+      "tempMax": 30,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Bassin extérieur profond (au moins 1,2 m selon Fishkeeper; 1,5 m en climat froid selon Wikipedia). En bac intérieur, uniquement temporaire pour de jeunes koïs (50-150 gallons US, soit environ 190-570 L); adultes : au moins 50-100 gallons US (environ 190-380 L) par poisson selon PondInformer, bassin recommandé.",
+      "lightNeeds": "Lumière naturelle, bonne aération de l'eau",
+      "activityEnrichment": "Espace de nage libre, zones d'ombrage, filtration robuste pour supporter la charge bioaccumulée (poissons très polluants)",
+      "hygieneNotes": "Changements d'eau réguliers, filtration puissante, pH 7-9 (PondInformer).",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://pondinformer.com/webstories/keeping-koi-in-tanks/",
+          "title": "Can Koi Fish Live in an Indoor Tank?"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poissons robustes et sociables, qui reconnaissent leur soigneur et peuvent manger dans sa main. Longévité élevée (plus de 50 ans selon certaines sources). Fouillent le fond et déracinent les plantes.",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Compatibles sous supervision, fascinants à observer et peut-être à nourrir, mais exigent un équipement coûteux et un engagement long terme",
+      "compatibilityWithOtherAnimals": "Généralement paisibles entre eux. Détruisent les plantes aquatiques.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/pond-fish/koi",
+          "title": "Fishkeeper.co.uk Koi Profile"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Herpèsvirus de la carpe koï (KHV)",
+          "symptoms": "Maladie virale grave de la carpe koï (KHV); mortalité élevée possible. Tout comportement anormal (léthargie, nage anormale) doit alerter.",
+          "prevention": "Quarantaine des nouveaux poissons, excellente qualité d'eau",
+          "whenToConsult": "Dès les premiers signes de nage anormale ou de changement de comportement"
+        },
+        {
+          "name": "Maladie des points blancs (Ichthyophthirius multifiliis)",
+          "symptoms": "Points blancs ressemblant à du sel sur le corps, les branchies et les nageoires, frottement contre les surfaces, respiration difficile",
+          "prevention": "Maintien des paramètres d'eau stables, quarantaine, éviter le surpeuplement et le stress thermique",
+          "whenToConsult": "À la première observation des symptômes, avant qu'ils ne s'étendent"
+        },
+        {
+          "name": "Maladie de la goutte (Dropsy)",
+          "symptoms": "Yeux bombants, ventre gonflé, écailles soulevées comme une pomme de pin, perte d'appétit",
+          "prevention": "Excellente filtration, changements d'eau réguliers, aliments de qualité, réduction du stress",
+          "whenToConsult": "Immédiatement, car c'est une indication d'infection systémique ou de problème rénal"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.koiwatergarden.com/blog/complete-guide-to-koi-disease-identification",
+          "title": "Complete Guide to Koi Disease Identification"
+        },
+        {
+          "type": "guide",
+          "url": "https://en.wikipedia.org/wiki/Koi",
+          "title": "Wikipedia: Koi"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "printemps-été (fin avril à juillet)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Frai naturel de fin avril à juillet quand l'eau est entre 18 et 25°C. Une femelle peut produire de 100 000 à 120 000 œufs par kilo de poids, sans garantie de viabilité. Les alevins remontent respirer à la surface environ 7-8 jours après la ponte. Les adultes peuvent manger les œufs et les alevins.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://cuttlebrookkoifarm.co.uk/blogs/articles/ten-top-tips-for-koi-breeding",
+          "title": "Ten Top Tips For Koi Breeding"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2370243,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Granulés de haute qualité pour cichlidés carnivores",
+          "frequency": "quotidienne",
+          "notes": "Distribuer 2-3 fois par jour, seulement la quantité consommée en 2 minutes"
+        },
+        {
+          "name": "Aliments congelés ou vivants (larves de moustique, artémia, mysis; crevettes, moules, krill pour adultes)",
+          "frequency": "hebdomadaire",
+          "notes": "Les poissons vivants d'alimentation sont inutiles et déconseillés (Fishkeeper)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments gras ou de mauvaise qualité",
+          "reason": "Risque d'obésité, de maladie du foie et de mauvaise qualité d'eau"
+        },
+        {
+          "name": "Poissons vivants non contrôlés",
+          "reason": "Risque de transmission de parasites ou de maladies"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Mangeur vorace et peu sélectif; peut reconnaître son soigneur et manger dans sa main. Régime carné, repas adaptés à la taille du poisson.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/cichlids/oscar",
+          "title": "Fishkeeper.co.uk - Oscar Fish Profile"
+        },
+        {
+          "type": "vet",
+          "url": "https://untamedscience.com/biodiversity/tiger-oscar/",
+          "title": "Untamed Science - Oscar Fish: A Complete Guide"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 27,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Très grand aquarium pour un adulte : environ 380 L (100 gallons US) minimum selon Tropical Freshwater Fish, avec large espace de nage. Les jeunes grandissent vite et doivent être déplacés rapidement dans un bac plus grand. Filtration puissante.",
+      "lightNeeds": "Éclairage classique aquarium, pas d'exigence particulière en UVB. 8-12 heures de photoséquence",
+      "activityEnrichment": "Structures cachettes, rochers plats pour reproduction éventuellement, espace de nage libre. Poissons actifs nécessitant l'observation et stimulation mentale.",
+      "hygieneNotes": "Changements d'eau 25-50% hebdomadaires car très polluants. pH 6,0-8,0, dureté jusqu'à 25°. Filtration excellente requise.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://tropicalfreshwaterfish.com/species/Astronotus_ocellatus.html",
+          "title": "Tropical Freshwater Fish - Oscar Profile"
+        },
+        {
+          "type": "guide",
+          "url": "https://untamedscience.com/biodiversity/tiger-oscar/",
+          "title": "Oscar Fish: A Complete Guide"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson intelligent qui reconnaît son propriétaire et peut manger dans sa main. Très territorial et agressif envers les autres poissons qui entrent dans son territoire; déplace le décor et déracine les plantes. Mangeur vorace.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon poisson d'observation, mais demande un très grand bac et un engagement à long terme; supervision lors de l'entretien.",
+      "compatibilityWithOtherAnimals": "Territorial et agressif envers les autres poissons; mange les poissons plus petits. Cohabitation délicate, même avec des poissons de taille similaire.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.fishkeeper.co.uk/fish/freshwater/cichlids/oscar",
+          "title": "Fishkeeper.co.uk - Oscar Profile"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ich (Maladie des points blancs, Ichthyophthirius multifiliis)",
+          "symptoms": "Petits points blancs sur le corps et les nageoires, frottement contre les objets, nage erratique ou twitching",
+          "prevention": "Quarantaine des poissons neufs, température stable, éviter surpeuplement et stress",
+          "whenToConsult": "À l'apparition des premiers symptômes avant généralisation"
+        },
+        {
+          "name": "Pourriture des nageoires et de la queue (bacterial fin rot)",
+          "symptoms": "Nageoires effrangées et déchiquetées, discoloration blanc laiteux ou noir, traînées rouges à la base des nageoires",
+          "prevention": "Excellente qualité d'eau, changements réguliers, éviter les surfaces abrasives, gérer stress et alimentation",
+          "whenToConsult": "Dès observation de fraying, car condition progressive pouvant mener à la septicémie"
+        },
+        {
+          "name": "Dropsy (Maladie de la goutte)",
+          "symptoms": "Ventre notablement gonflé ou distendu, écailles retroussées donnant aspect « pomme de pin », perte d'appétit, nage anormale",
+          "prevention": "Excellente filtration, changements d'eau réguliers (25-50% hebdomadaires), alimentation équilibrée de qualité",
+          "whenToConsult": "Immédiatement, car indication d'infection systémique grave ou défaillance rénale"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://petfishonline.com/oscar-fish-diseases/",
+          "title": "PetFishOnline - Oscar Fish Diseases"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année en aquarium (été dans le milieu naturel)",
+      "gestationDays": null,
+      "incubationDays": 4,
+      "litterSizeMin": 300,
+      "litterSizeMax": 3000,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "modere",
+      "notes": "Les deux parents nettoient une surface plane pour la ponte et gardent les œufs puis les alevins. Éclosion en 3-4 jours. Les oscars atteignent la maturité sexuelle vers 1 an (1 à 1,5 an selon les sources).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.floridamuseum.ufl.edu/discover-fish/species-profiles/oscar/",
+          "title": "Florida Museum - Oscar Species Profile"
+        },
+        {
+          "type": "guide",
+          "url": "https://petfishonline.com/how-often-oscar-lay-eggs/",
+          "title": "How Often Oscar Lay Eggs"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2371275,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Aliments floconneux et granulés de haute qualité à base de protéines",
+          "frequency": "quotidienne",
+          "notes": "Spécialisés pour petits cichlidés, consommer complètement"
+        },
+        {
+          "name": "Aliments vivants ou congelés (vers de sang, nauplies d'artémia, daphnies)",
+          "frequency": "hebdomadaire",
+          "notes": "Aliments riches en protéines (vers de sang, artémia, crevettes)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments gras ou peu nutritifs",
+          "reason": "Peuvent altérer la qualité de l'eau"
+        },
+        {
+          "name": "Granulés trop volumineux",
+          "reason": "Apistogrammas ont petite bouche et préfèrent aliments finement granulés"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime à dominante protéique (naturellement insectes, petits invertébrés, vers). Distribuer de petites portions.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://ca.aquariumsource.com/apistogramma-dwarf-cichlid",
+          "title": "Aquarium Source - Apistogramma Care 101"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.liveaquaria.com/products/dwarf-cockatoo-cichlid",
+          "title": "LiveAquaria - Dwarf Cockatoo Cichlid"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 24,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Environ 75-115 L (20-30 gallons US) pour un groupe selon Aquarium Source; au moins 120 L si plusieurs femelles territoriales (Wikipedia)",
+      "lightNeeds": "Lumière modérée, photoséquence 10-12 heures. Préfèrent aquariums avec zones ombragées et peu de lumière intense",
+      "activityEnrichment": "Nombreuses cachettes indispensables (cavernes, plantes, bois). Femelles territoriales qui défendent zones. Mâles patrouillent plus larges territoires. Espace de nage libre mais structuré.",
+      "hygieneNotes": "Changements d'eau hebdomadaires réguliers. pH 6,0-7,0 recommandé (Aquarium Source); l'espèce tolère aussi une eau alcaline jusqu'à pH 8,0 (Wikipedia). Aquarium bien établi avant introduction.",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://ca.aquariumsource.com/apistogramma-dwarf-cichlid",
+          "title": "Aquarium Source - Apistogramma Dwarf Cichlid Care"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.liveaquaria.com/products/dwarf-cockatoo-cichlid",
+          "title": "LiveAquaria - Cockatoo Dwarf Cichlid"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petit cichlidé actif, dont les mâles arborent de grandes nageoires dorsales. Mâles très territoriaux; chaque femelle défend un territoire d'environ 30 cm de rayon. Vit en couple, trio ou harem (un mâle, plusieurs femelles).",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": null,
+      "compatibilityWithChildren": "Petit poisson coloré et intéressant à observer; nécessite un aquarium bien entretenu.",
+      "compatibilityWithOtherAnimals": "Compatible avec des poissons paisibles comme les tétras (Wikipedia), mais mâles territoriaux et agressivité possible envers d'autres poissons (PVAS). À éviter avec de gros poissons agressifs; plusieurs mâles ensemble déconseillés sans grand espace.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://ca.aquariumsource.com/apistogramma-dwarf-cichlid",
+          "title": "Aquarium Source - Apistogramma Care"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections bactériennes (septicémie cutanée)",
+          "symptoms": "Plaies, bosses ou trous sur tête/corps, rougeur aux narines, petites zones rouges sur peau indiquant septicémie",
+          "prevention": "Quarantaine poissons sauvages, eau impeccable et stable, éviter stress, changements réguliers",
+          "whenToConsult": "Immédiatement dès apparition plaies car risque rapide de généralisation"
+        },
+        {
+          "name": "Parasites internes (nématodes, Camallanus, anguillules)",
+          "symptoms": "Perte de poids progressive, perte d'appétit, nage anormale, léthargique, frottement sur surfaces",
+          "prevention": "Quarantaine 2-3 semaines poissons sauvages, alimentation équilibrée, eau de qualité, hygiène du bac",
+          "whenToConsult": "Dès observation perte d'appétit chez individu isolé ou nouveau"
+        },
+        {
+          "name": "Ich (Ichthyophthirius multifiliis) et autres parasites externes",
+          "symptoms": "Petits points blancs, frottement contre rochers, respiration difficile, comportement isolé ou léthargique",
+          "prevention": "Acclimatation lente, quarantaine, température stable, changements d'eau réguliers",
+          "whenToConsult": "À la première observation de points ou comportement anormal"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.pvas.com/post/apistogramma-cacatuoides",
+          "title": "PVAS - Apistogramma Cacatuoides"
+        },
+        {
+          "type": "guide",
+          "url": "https://ca.aquariumsource.com/apistogramma-dwarf-cichlid",
+          "title": "Aquarium Source - Apistogramma Care 101"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année (en aquarium stable)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 95,
+      "litterSizeMax": 1410,
+      "sexualMaturityMonths": 7,
+      "breedingDifficulty": "facile",
+      "notes": "Couples ou harems. Pond dans une cavité ou sous des feuilles; la femelle garde les œufs et les alevins. Première ponte en moyenne vers 214 jours en captivité; 1 à 12 pontes par femelle de 95 à 1410 œufs; survie larvaire de 34 % à 15 jours (étude Instituto de Pesca).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.pvas.com/post/apistogramma-cacatuoides",
+          "title": "PVAS - Apistogramma Cacatuoides Breeding"
+        },
+        {
+          "type": "guide",
+          "url": "https://institutodepesca.org/index.php/bip/en/article/view/886",
+          "title": "Instituto de Pesca - Apistogramma Reproduction Study"
+        }
+      ]
+    }
+  }
+]

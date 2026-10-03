@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000985,
+  "commonNameFr": "American Yorkshire",
+  "scientificName": "American Yorkshire",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000986,
+  "commonNameFr": "Pie Noir de Bentheim",
+  "scientificName": "Pie noir de Bentheim",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000987,
+  "commonNameFr": "Berkshire",
+  "scientificName": "Berkshire",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000988,
+  "commonNameFr": "Porc de Breïtovo",
+  "scientificName": "Porc de Breïtovo",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000989,
+  "commonNameFr": "Cochon Créole",
+  "scientificName": "Cochon créole",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000990,
+  "commonNameFr": "Poland China",
+  "scientificName": "Poland china",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000991,
+  "commonNameFr": "Porc de Sibérie du Nord",
+  "scientificName": "Porc de Sibérie du Nord",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000992,
+  "commonNameFr": "Danish Landrace",
+  "scientificName": "Danish Landrace",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000993,
+  "commonNameFr": "Estonian Bacon",
+  "scientificName": "Estonian Bacon",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000994,
+  "commonNameFr": "Grice",
+  "scientificName": "Grice",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000995,
+  "commonNameFr": "Ukrainian White Steppe",
+  "scientificName": "Ukrainian White Steppe",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000996,
+  "commonNameFr": "Lithuanian White",
+  "scientificName": "Lithuanian White",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000997,
+  "commonNameFr": "Porc de Livny",
+  "scientificName": "Porc de Livny",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000998,
+  "commonNameFr": "Meishan (cochon)",
+  "scientificName": "Meishan (cochon)",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000999,
+  "commonNameFr": "Myrhorod",
+  "scientificName": "Myrhorod",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

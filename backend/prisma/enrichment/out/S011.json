@@ -1,0 +1,398 @@
+[
+  {
+    "speciesId": 2431776,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Vers de terre",
+          "frequency": null,
+          "notes": "Proie naturelle appréciée"
+        },
+        {
+          "name": "Petits invertébrés (araignées, limaces, mille-pattes, cloportes)",
+          "frequency": null,
+          "notes": "En nature : insectes, araignées, mille-pattes, vers de terre et limaces"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes traités aux pesticides",
+          "reason": "Accumulation toxique chez le prédateur"
+        },
+        {
+          "name": "Proies trop grandes",
+          "reason": "Risque d'étouffement"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Proies animales vivantes. Eau propre et non chlorée disponible.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fire_salamander",
+          "title": "Wikipedia - Fire salamander"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Espèce nocturne : pénombre, éviter les UV intenses",
+      "activityEnrichment": "Cachettes (écorces, pierres), substrat humide (tourbe, mousse), zone d'eau peu profonde",
+      "hygieneNotes": "Mains propres avant manipulation (peau perméable). Eau déchlorée. Renouveler l'eau régulièrement.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fire_salamander",
+          "title": "Wikipedia - Fire salamander (forêts de feuillus, zones moussues, eau propre)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Animal surtout nocturne (actif de jour par temps de pluie), souvent caché sous le bois et les débris. Très longévif (un individu a vécu plus de 50 ans). Sécrète des alcaloïdes toxiques (samandarine) en défense.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé pour enfants (peau toxique, fragilité) ; observation sans manipulation",
+      "compatibilityWithOtherAnimals": "À conserver seule ; peut manger de petits tritons et jeunes grenouilles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fire_salamander",
+          "title": "Wikipedia - Fire salamander"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Batrachochytrium salamandrivorans (Bsal)",
+          "symptoms": "Lésions cutanées, perte d'appétit, comportement anormal, déclin rapide",
+          "prevention": "Hygiène stricte, isolation des individus malades, désinfection du matériel, éviter tout contact avec des milieux naturels potentiellement contaminés",
+          "whenToConsult": "Dès apparition de lésions cutanées ou changement de comportement"
+        },
+        {
+          "name": "Ranavirus",
+          "symptoms": "Gonflement des membres, ulcères cutanés, refus de nourriture, mortalité rapide",
+          "prevention": "Quarantaine des nouveaux individus, désinfection du matériel",
+          "whenToConsult": "Immédiatement en cas de symptômes visibles"
+        },
+        {
+          "name": "Mycoses cutanées",
+          "symptoms": "Plaques blanches ou grises sur la peau, perte de lustre cutané",
+          "prevention": "Hygrométrie adaptée, renouvellement régulier de l'eau, éviter la surdensité",
+          "whenToConsult": "Dès apparition de décoloration anormale de la peau"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fire_salamander",
+          "title": "Wikipedia - Fire salamander (menace Bsal)"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction ovovivipare pour la plupart des sous-espèces : la femelle porte les œufs et dépose les larves dans l'eau.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fire_salamander",
+          "title": "Wikipedia - Fire salamander"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2431886,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits invertébrés aquatiques (larves de diptères, petits crustacés)",
+          "frequency": null,
+          "notes": "Nourriture naturelle de l'espèce"
+        },
+        {
+          "name": "Petits vers aquatiques et tubifex",
+          "frequency": null,
+          "notes": "Source de protéines"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Invertébrés traités aux pesticides",
+          "reason": "Toxicité accumulée chez ce prédateur"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Carnivore. Eau déchlorée.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Marbled_newt",
+          "title": "Wikipedia - Marbled newt"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière modérée, cycle jour/nuit, éviter les UV intenses",
+      "activityEnrichment": "Végétation aquatique dense (Glyceria, joncs, laîches, Hottonia), pierres et racines pour cachettes, zone terrestre ombragée",
+      "hygieneNotes": "Eau déchlorée, changements partiels réguliers. Éviter la surpopulation.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://bfcnature.fr/wp-content/uploads/2024/08/BNHS11_triton_marbre.pdf",
+          "title": "Triton marbré - Les Amphibiens de Bourgogne (BFC Nature)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Amphibien qui se reproduit en mares (souvent forestières, végétalisées et sans poissons) et passe sa phase terrestre en milieu boisé. Les mâles portent une crête dorsale spectaculaire et font des battements de queue en parade.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Observation possible avec supervision. Manipulation à éviter (peau sensible).",
+      "compatibilityWithOtherAnimals": "Éviter poissons et grands amphibiens ; en nature l'espèce est observée dans des mares sans poissons",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://bfcnature.fr/wp-content/uploads/2024/08/BNHS11_triton_marbre.pdf",
+          "title": "Triton marbré - Les Amphibiens de Bourgogne (BFC Nature)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Marbled_newt",
+          "title": "Wikipedia - Marbled newt"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": "IV (Directive Habitats 92/43/CEE)",
+        "permits": [],
+        "restrictions": [
+          "Espèce protégée en France (protection nationale, arrêté du 19 novembre 2007, article 2), Directive Habitats annexe IV, Convention de Berne annexe III"
+        ]
+      },
+      "sources": [
+        {
+          "type": "official",
+          "url": "https://www.sarthe.fr/sites/default/files/2021-05/triton-marbre_et_rainette-verte.pdf",
+          "title": "Fiche Natura 2000 - Triton marbré et Rainette verte (statuts de protection)"
+        },
+        {
+          "type": "guide",
+          "url": "https://bfcnature.fr/wp-content/uploads/2024/08/BNHS11_triton_marbre.pdf",
+          "title": "Triton marbré - Les Amphibiens de Bourgogne (BFC Nature)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "février à juin",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Reproduction aquatique. Les femelles enveloppent chaque œuf dans une feuille de plante aquatique. Les mâles développent une crête dorsale et effectuent une parade (battements de queue). L'âge de maturité varie selon les régions.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Marbled_newt",
+          "title": "Wikipedia - Marbled newt"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2433573,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Fruits mûrs (figues, mangues, papayes, goyaves, fruits de la passion)",
+          "frequency": "quotidienne",
+          "notes": "Environ 90 % du régime naturel est constitué de fruits mûrs ; les figues sont la composante principale"
+        },
+        {
+          "name": "Insectes, fleurs et nectar, œufs d'oiseaux",
+          "frequency": "occasionnelle",
+          "notes": "Complément représentant environ 10 % du régime naturel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Cacao et chocolat",
+          "reason": "Théobromine toxique pour de nombreux mammifères"
+        },
+        {
+          "name": "Aliments traités ou trop salés",
+          "reason": "Régime frugivore, risque de déséquilibre"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Frugivore opportuniste. Les régimes en captivité sont mal connus : surveiller obésité, diabète, pancréatite et maladies dentaires ; faire valider la ration par un vétérinaire NAC.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://ielc.libguides.com/sdzg/factsheets/kinkajou/diet-feeding",
+          "title": "Kinkajou Diet and Feeding - IELC San Diego Zoo"
+        },
+        {
+          "type": "guide",
+          "url": "https://oregonzoo.org/animals/kinkajou",
+          "title": "Kinkajou - Oregon Zoo"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.em-consulte.com/article/321081/considerations-for-kinkajou-captive-diets",
+          "title": "Considerations for Kinkajou Captive Diets"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Animal nocturne : repos diurne important, cycle jour/nuit naturel",
+      "activityEnrichment": "Arbres, lianes et branches épaisses pour grimper et se suspendre (espèce arboricole), nids surélevés, aliments cachés",
+      "hygieneNotes": "Nettoyage régulier de l'enclos, eau fraîche disponible en permanence",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Kinkajou",
+          "title": "Wikipedia - Kinkajou"
+        },
+        {
+          "type": "guide",
+          "url": "https://carolinatigerrescue.org/newsroom/kinkajous/",
+          "title": "Kinkajous - Carolina Tiger Rescue"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Mammifère strictement nocturne et arboricole, qui dort en groupe familial mais cherche sa nourriture surtout seul. Devient extrêmement agressif vers 2 ans en captivité. Longévité d'environ 23 ans en captivité (record 42 ans).",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé : adultes agressifs, morsures dangereuses, risque de zoonoses (ascaris du raton laveur)",
+      "compatibilityWithOtherAnimals": "Agressivité probable à maturité ; ne pas cohabiter avec d'autres espèces",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://carolinatigerrescue.org/newsroom/kinkajous/",
+          "title": "Kinkajous - Carolina Tiger Rescue"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Kinkajou",
+          "title": "Wikipedia - Kinkajou"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasitoses intestinales",
+          "symptoms": "Perte de poids, diarrhée, abdomen gonflé, apathie",
+          "prevention": "Hygiène rigoureuse de l'enclos, alimentation saine et fraîche, dépistage parasitaire régulier",
+          "whenToConsult": "Dès signes digestifs persistants (diarrhée de plus de 2 jours)"
+        },
+        {
+          "name": "Obésité et diabète",
+          "symptoms": "Prise de poids, soif accrue, léthargie",
+          "prevention": "Ration de fruits contrôlée et variée, suivi du poids",
+          "whenToConsult": "Dès prise de poids rapide ou changement de comportement"
+        },
+        {
+          "name": "Maladies dentaires",
+          "symptoms": "Refus alimentaire sélectif, hypersalivation, mauvaise haleine",
+          "prevention": "Alimentation variée, suivi dentaire vétérinaire régulier",
+          "whenToConsult": "Dès changement du comportement alimentaire ou anomalies buccales"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.em-consulte.com/article/321081/considerations-for-kinkajou-captive-diets",
+          "title": "Considerations for Kinkajou Captive Diets (obésité, diabète, pancréatite, maladies dentaires)"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "III (Honduras)",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": [
+          "CITES Annexe III (inscription par le Honduras) : permis d'exportation requis depuis ce pays",
+          "Espèce citée dans l'arrêté du 15 mai 1986 (mammifères protégés, Guyane) : vente et achat interdits sur le territoire national d'après le texte cité"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Kinkajou",
+          "title": "Wikipedia - Kinkajou (CITES Appendix III, Honduras)"
+        },
+        {
+          "type": "official",
+          "url": "https://aida.ineris.fr/node/33268",
+          "title": "Arrêté du 15 mai 1986 - mammifères protégés (Guyane)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 112,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": 27,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction possible toute l'année, gestation de 112 à 118 jours, généralement un seul petit (parfois deux). Maturité sexuelle vers 27 mois chez la femelle (18 mois chez le mâle). Sevrage vers 8 semaines, indépendance vers 4 mois.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Kinkajou",
+          "title": "Wikipedia - Kinkajou"
+        },
+        {
+          "type": "guide",
+          "url": "https://oregonzoo.org/animals/kinkajou",
+          "title": "Kinkajou - Oregon Zoo"
+        }
+      ]
+    }
+  }
+]

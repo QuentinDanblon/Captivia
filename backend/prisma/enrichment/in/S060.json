@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 104060854,
+  "commonNameFr": "Caracal",
+  "scientificName": "Caracal caracal",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104060891,
+  "commonNameFr": "Chaus",
+  "scientificName": "Felis chaus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104060941,
+  "commonNameFr": "Chat de Geoffroy",
+  "scientificName": "Leopardus geoffroyi",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

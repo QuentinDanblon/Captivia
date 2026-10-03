@@ -1,0 +1,49 @@
+[
+  {
+    "speciesId": 104044141,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: fréquences ('2-3 portions par jour', '3-4 fois/semaine') non confirmées -> null ; 'mites, vers à soie' remplacé par insectes/araignées/cloportes (source) ; 'se nourrissent en eau' corrigé (régime aquatique ou terrestre selon la phase) ; ajout cannibalisme œufs/larves (confirmé)",
+      "habitat: temp 10-18, 60 L, UVB, 70/30 aqua/terre, 'eau < 20 °C', pH non confirmés -> null/retirés",
+      "behavior: '9-10 mois à terre' non confirmé -> reformulé ; 'ventre orange en défense' non confirmé -> retiré ; sociability 'semi-grégaire' et 'compatible entre tritons' non confirmés -> null / remplacé par prédation sur œufs et larves (confirmé)",
+      "health: chytridiomycose étendue à B. salamandrivorans (létal en labo, source) ; 'température basse' retirée des mesures de prévention",
+      "legislation: allowed/aucune restriction -> permit_required, espèce protégée en France (arrêté du 19 novembre 2007, capture/déplacement interdits, source fr.wikipedia)",
+      "reproduction: incubation 12 j non confirmée (1-2 sem. fr / 2-4 sem. en) -> null ; maturité 18 mois -> 36 (mâles ~3 ans, femelles 4-5 ans) ; saison 'printemps' -> février-août ; 70-390 œufs et larves ~3 mois confirmés"
+    ],
+    "removed": [
+      "source https://legifrance.gouv.fr (page d'accueil générique, ne concerne pas l'espèce)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104048045,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: fréquences/mealFrequency non confirmées -> null ; 'termites, fourmis' non confirmés -> 'insectes' ; 'tanins' (non sourcé) retiré ; gomme 20-70 % et insectes 24-30 % confirmés (mais pourcentages de temps d'alimentation, précisé)",
+      "habitat: 24-30 °C, 60-80 % humidité, enclos 3x3x3 m, cycle 12h/12h non confirmés -> null/retirés",
+      "behavior: groupes '9-15' -> en moyenne 9, jusqu'à 15 (source) ; vocalisations détaillées reformulées d'après la source (phees) ; mention 'noms humains' retirée ; difficulté de contrôle adulte confirmée",
+      "legislation: euAnnex B non confirmé -> null ; permis 'Arrêté du 21 novembre 1997' non confirmé -> retiré ; CITES II confirmé (fr.wikipedia infobox) ; status permit_required conservé par prudence",
+      "reproduction: maturité 12 mois -> 15 mois (source) ; portée 2-2 -> null (jumeaux 'habituels' seulement) ; 'soins parentaux élaborés' -> soins par toute la famille (confirmé) ; gestation 5 mois (150 j) conservée"
+    ],
+    "removed": [
+      "sources https://legifrance.gouv.fr et https://cites.org (pages génériques, ne concernent pas l'espèce)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104052770,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: fréquences non confirmées -> null ; 'épicéa, pin, sapin' et 'écorce' non confirmés -> retirés (régime source : feuilles, graines, cônes, bourgeons, pousses, noix, baies) ; régime de captivité non sourcé retiré",
+      "habitat: -15/15 °C, enclos 2-3 hectares -> null ; 'nocturne' non confirmé par la source -> retiré",
+      "behavior: 'yeux très développés', 'peu agressifs', 'solitaires ou petits groupes' non confirmés -> retirés ; sociability solitaire -> null ; planeur > 100 m confirmé",
+      "health: 'trouble de la mue' remplacé par blessures lors des vols planés ; 'UVB naturelle' retirée",
+      "legislation: prohibited + annexe A UE + 'Espèce Menacée' non confirmés -> permit_required (espèce protégée par la directive Habitats, source Wikipedia), euAnnex null, source INPN remplacée par la page Wikipedia",
+      "reproduction: maturité 6 mois non confirmée -> null ; sevrage précoce retiré ; deux saisons d'accouplement fin mars/avril (Finlande) confirmées ; gestation 5 semaines et portée 2-3 de ~5 g confirmées"
+    ],
+    "removed": [
+      "source https://inpn.mnhn.fr (page d'accueil générique, espèce non présente en France)"
+    ],
+    "confidence": "medium"
+  }
+]

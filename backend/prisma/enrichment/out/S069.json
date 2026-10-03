@@ -1,0 +1,347 @@
+[
+  {
+    "speciesId": 104233441,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons",
+          "frequency": "hebdomadaire",
+          "notes": "Proie naturelle, toujours plus petite que le scorpion"
+        },
+        {
+          "name": "Arthropodes variés",
+          "frequency": "hebdomadaire",
+          "notes": "Isopodes (cloportes), centipèdes, perce-oreilles, papillons de nuit, araignées - proies plus petites que le scorpion"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies plus grandes que le scorpion",
+          "reason": "Le scorpion ne chasse que des arthropodes plus petits que lui"
+        },
+        {
+          "name": "Proies contaminées",
+          "reason": "Risque de toxines"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Prédateur nocturne qui chasse la nuit. Eau disponible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Euscorpius_italicus",
+          "title": "Euscorpius italicus"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 18,
+      "tempMax": 25,
+      "humidityMin": 50,
+      "humidityMax": 70,
+      "minSpaceSize": "Terrarium horizontal. Habitat naturel : ruines, bâtiments, mobilier, fissures de murs",
+      "lightNeeds": "Obscurité principalement, crépuscule naturel acceptable",
+      "activityEnrichment": "Caches et fissures pour se cacher, abris rocheux",
+      "hygieneNotes": "Eau peu profonde régulière, nettoyage modéré",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Euscorpius_italicus",
+          "title": "Euscorpius italicus"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Solitaire et nocturne. Passe la majorité du temps caché. Tempérament doux, utilise rarement son dard. Conflits possibles entre femelles. Ne chasse que les proies plus petites qu'elle",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Venin considéré comme inoffensif. Manipulation non recommandée",
+      "compatibilityWithOtherAnimals": "Strictement solitaire - isolement obligatoire",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Euscorpius_italicus",
+          "title": "Euscorpius italicus"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Déshydratation",
+          "symptoms": "Immobilité, refus de nourriture, aspect desséché",
+          "prevention": "Eau peu profonde disponible en permanence, humidité 50-70%",
+          "whenToConsult": "Consultation si signes persistants"
+        },
+        {
+          "name": "Maladie de la mue (dysecdysie)",
+          "symptoms": "Incapacité à compléter la mue, exosquelette partiel",
+          "prevention": "Stabilité température/humidité, pas de stress durant la mue",
+          "whenToConsult": "Avis vétérinaire possible"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Euscorpius_italicus",
+          "title": "Euscorpius italicus"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "août-septembre",
+      "gestationDays": 335,
+      "incubationDays": null,
+      "litterSizeMin": 9,
+      "litterSizeMax": 62,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "Accouplement exclusivement en août-septembre. Gestation de 11 à 11,5 mois. Les femelles produisent 9 à 62 jeunes par portée. Maturité sexuelle : 5-6 mues chez les mâles (2-3 ans), 6-7 mues chez les femelles (2,5-4 ans). Longévité estimée 4-8 ans en nature, plus de 10 ans observés en laboratoire",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Euscorpius_italicus",
+          "title": "Euscorpius italicus"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104247531,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Débris organiques",
+          "frequency": "quotidienne",
+          "notes": "Restes végétaux, fruits trop mûrs - charognard naturel"
+        },
+        {
+          "name": "Restes animaux",
+          "frequency": "quotidienne",
+          "notes": "Restes d'animaux et excréments d'autres animaux consommés à l'état naturel - régime omnivore opportuniste"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Nourriture moisie",
+          "reason": "Mycotoxines potentiellement toxiques"
+        },
+        {
+          "name": "Aliments salés",
+          "reason": "Déséquilibre osmotique"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Charognard omnivore opportuniste. Respire l'air grâce à des branchies modifiées : la coquille et un air humide sont nécessaires",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Coenobita_clypeatus",
+          "title": "Caribbean Hermit Crab"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium horizontal spacieux avec substrat profond permettant de creuser. Coquilles variées de rechange",
+      "lightNeeds": "Lumière naturelle indirecte, cycle jour-nuit régulier",
+      "activityEnrichment": "Racines pour s'enfouir, substrat meuble, coquilles de rechange variées, décors pour exploration",
+      "hygieneNotes": "Nettoyage régulier des aires humides, eau fraîche peu profonde, air humide essentiel",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Coenobita_clypeatus",
+          "title": "Caribbean Hermit Crab"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Les adultes creusent sous les racines des arbres et s'éloignent considérablement du rivage. Combats de coquilles pour s'approprier les meilleures. Émettent un gazouillis (stridulation) quand ils sont stressés",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Compatible si manipulation douce, peuvent pincer s'ils se sentent menacés",
+      "compatibilityWithOtherAnimals": "Vivent en petits groupes",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Coenobita_clypeatus",
+          "title": "Caribbean Hermit Crab"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Déshydratation et perte d'humidité",
+          "symptoms": "Retraite permanente dans la coquille, dépérissement",
+          "prevention": "Air humide, eau peu profonde disponible, coquille appropriée",
+          "whenToConsult": "Urgence si signes persistants"
+        },
+        {
+          "name": "Changement de coquille difficile",
+          "symptoms": "Comportement erratique, retraite prolongée, impossibilité à changer de coquille",
+          "prevention": "Coquilles variées disponibles, substrat stable",
+          "whenToConsult": "Avis spécialisé en cas de retraite prolongée"
+        },
+        {
+          "name": "Infection bactérienne post-blessure",
+          "symptoms": "Plaie purulente, gonflement des appendices",
+          "prevention": "Coquilles sans arêtes vives, limiter les combats",
+          "whenToConsult": "Consultation vétérinaire si plaie infectée"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Coenobita_clypeatus",
+          "title": "Caribbean Hermit Crab"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "août (certaines nuits)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "La ponte a lieu certaines nuits, généralement vers août : les femelles libèrent les œufs fécondés dans l'océan. Reproduction en captivité très difficile (accès à l'eau de mer nécessaire pour les larves). Longévité confirmée jusqu'à 12 ans, certains propriétaires rapportent jusqu'à 40 ans",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Coenobita_clypeatus",
+          "title": "Caribbean Hermit Crab"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104260760,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Algues variées",
+          "frequency": "quotidienne",
+          "notes": "Alimentation principale naturelle - nettoie l'aquarium en consommant les algues"
+        },
+        {
+          "name": "Légumes blanchis",
+          "frequency": "3 fois par semaine",
+          "notes": "Spiruline, épinards, courgette blanchis - complément en cas d'algues insuffisantes"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments contenant du cuivre",
+          "reason": "Très sensibles au cuivre (hémocyanine) - toxique pour les crustacés"
+        },
+        {
+          "name": "Traitements d'aquarium contenant du cuivre",
+          "reason": "Mortel même en faibles quantités"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Se nourrissent principalement d'algues. Besoin d'algues abondantes ou de supplémentation. Éviter absolument le cuivre",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Amano_shrimp",
+          "title": "Amano Shrimp"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 18,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Aquarium d'eau douce adapté à une petite colonie. Habitat naturel : eaux douces à courant rapide du sud-ouest du Japon",
+      "lightNeeds": "Lumière modérée favorisant la croissance d'algues",
+      "activityEnrichment": "Plantes aquatiques, zones de courant, substrat varié",
+      "hygieneNotes": "Changements d'eau partiels réguliers, pH 6,5-7,5, absence totale de cuivre",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Amano_shrimp",
+          "title": "Amano Shrimp"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Mangeurs d'algues efficaces en nombre suffisant. Adaptés aux eaux à courant rapide. Plus actifs à température élevée (mais durée de vie potentiellement réduite)",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Compatible avec les enfants - non agressif, observation intéressante",
+      "compatibilityWithOtherAnimals": "Compatible avec poissons pacifiques et autres crustacés non prédateurs",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Amano_shrimp",
+          "title": "Amano Shrimp"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Toxicité au cuivre (intoxication)",
+          "symptoms": "Comportement anormal, paralysie, mort rapide",
+          "prevention": "Éviter tout cuivre (engrais, traitements, équipement)",
+          "whenToConsult": "Souvent fatal - prévention indispensable"
+        },
+        {
+          "name": "Problème de mue (dysecdysie)",
+          "symptoms": "Incapacité à compléter la mue, mort post-mue",
+          "prevention": "Eau stable, paramètres constants, pas de stress",
+          "whenToConsult": "Avis spécialisé si mue incomplète persistante"
+        },
+        {
+          "name": "Carence nutritionnelle",
+          "symptoms": "Coloration pâle, inactivité, croissance ralentie",
+          "prevention": "Algues abondantes ou supplémentation en légumes blanchis",
+          "whenToConsult": "Avis spécialisé si signes nutritionnels persistants"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Amano_shrimp",
+          "title": "Amano Shrimp"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Espèce amphidrome : les œufs éclosent en eau douce, les larves dérivent en eau salée pour se développer en juvéniles, puis reviennent en eau douce à l'âge adulte. Œufs ovales riches en vitellus. La reproduction complète en captivité est très difficile (larves nécessitant de l'eau salée)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Amano_shrimp",
+          "title": "Amano Shrimp"
+        }
+      ]
+    }
+  }
+]

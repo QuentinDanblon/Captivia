@@ -8,7 +8,7 @@ import { main as seedProd, prisma as prismaProd } from './seed-prod';
 // Usage : `npm run seed:dev`
 // 1. Exécute d'abord le seed PROD (données éditoriales, sûr, idempotent).
 // 2. Crée ensuite les fixtures de DÉMO ci-dessous :
-//    - testUser        test@captivia.local / Test1234!   ⚠️ A SUPPRIMER EN PROD
+//    - testUser        dev@example.com / <voir credentials en commentaire>   ⚠️ A SUPPRIMER EN PROD
 //    - testAnimal      Rango (gecko léopard, ID explicite test-animal-rango)
 //    - testRoutine     nourrissage hebdo (mar/ven 19:00)
 //    - NotificationPreference du testUser
@@ -22,6 +22,9 @@ const SPECIES_IDS = {
 };
 
 async function main() {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('seed-dev interdit en production');
+  }
   console.log('🌱 Starting DEV seed (demo fixtures)...');
 
   // (a) Données éditoriales d'abord (seed PROD)
@@ -31,13 +34,13 @@ async function main() {
   console.log('👤 Seeding test User, Animal, NotificationPreference, Routine...');
 
   // ⚠️ A SUPPRIMER EN PROD : compte de démo avec mot de passe en dur
-  const passwordHash = await bcrypt.hash('Test1234!', 10);
+  const passwordHash = await bcrypt.hash('DevPassword123!', 10);
 
   const testUser = await prisma.user.upsert({
-    where: { email: 'test@captivia.local' },
+    where: { email: 'dev@example.com' },
     update: { isPremium: true },
     create: {
-      email: 'test@captivia.local',
+      email: 'dev@example.com',
       passwordHash,
       locale: 'fr',
       isPremium: true,
@@ -108,8 +111,8 @@ async function main() {
 
   console.log('\n🎉 DEV seed completed successfully!');
   console.log('\n📋 Test credentials (DEV ONLY):');
-  console.log('   Email: test@captivia.local');
-  console.log('   Password: Test1234!');
+  console.log('   Email: dev@example.com');
+  console.log('   Password: <voir code source seed-dev.ts>');
 }
 
 main()

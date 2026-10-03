@@ -1,0 +1,56 @@
+[
+  {
+    "speciesId": 2437577,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.gestationDays: 90 -> null (Wikipédia : 3 mois ; National Zoo : ~4 mois)",
+      "reproduction.litterSizeMin: 2 -> 1 (National Zoo : 1 à 4 ; Wikipédia : 2 à 4)",
+      "habitat: retrait de 'activité crépusculaire et nocturne' (Wikipédia : diurne ou nocturne incertain)",
+      "health: titres des sources corrigés (parasites de Dasyprocta leporina confirmés)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "legislation entière (la source INERIS citée est un arrêté de Martinique de 1989, pas l'arrêté de 1997 ; statut non confirmé) -> null",
+      "reproduction.sexualMaturityMonths 6 (non confirmé)",
+      "feeding: pourcentages protéines/graisses, '40-50 %' (non confirmés)",
+      "health: ulcère gastrique, dystocie (non confirmés)",
+      "behavior: 'forte capacité de fuite'"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2437619,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.litterSizeMin/Max: 1-3 -> null (non confirmé)",
+      "health: gale sarcoptique et déséquilibre minéral remplacés par problèmes dentaires, stase digestive, pododermatite/obésité (source furrycritter)",
+      "feeding: foin ~80 % (furrycritter) ; retrait du supplément minéral 'essentiel'"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "legislation entière (source INERIS = arrêté Martinique 1989, non pertinent) -> null",
+      "reproduction.sexualMaturityMonths 8 ; 'fertiles 30 minutes tous les 3-4 mois' (non confirmés)",
+      "behavior: vision, sons d'alerte, 'ressemblent à des lièvres' (non confirmés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2439965,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.litterSizeMin/Max: 7-9 -> 6-11 (Wikipédia EN)",
+      "reproduction.sexualMaturityMonths: 2 -> 5 (Wikipédia EN : 5-6 mois)",
+      "feeding.dietType: carnivore -> omnivore (Wikipédia : proies animales + un peu de fruits)",
+      "behavior: 'unique parmi les marsupiaux' (faux : d'autres marsupiaux n'ont pas de poche) retiré"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "legislation entière ('allowed' non confirmé ; la page youschool.fr ne mentionne pas l'espèce) -> null",
+      "source https://cshprotocols.cshlp.org/content/2008/10/pdb.prot5073.short (403)",
+      "feeding: suppléments taurine/vitamines A et D (non confirmés)",
+      "reproduction.season ; fixation aux mamelles 3-4 semaines (non confirmés)",
+      "health: 'hibernation impossible en captivité chaude'"
+    ],
+    "confidence": "medium"
+  }
+]

@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 9589697,
+  "commonNameFr": "Wallaby de Bennett",
+  "scientificName": "Notamacropus rufogriseus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 9606290,
+  "commonNameFr": "Dinde domestique",
+  "scientificName": "Meleagris gallopavo",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 9761484,
+  "commonNameFr": "Canard colvert",
+  "scientificName": "Anas platyrhynchos",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

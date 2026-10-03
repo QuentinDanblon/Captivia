@@ -1,0 +1,192 @@
+[
+ {
+  "speciesId": 104276062,
+  "habitat": null,
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": "Les œufs, riches en vitellus, et les juvéniles se développent dans une poche incubatrice (marsupium) jusqu'au premier stade juvénile.",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Porcellio_laevis",
+     "title": "Porcellio laevis (Wikipedia EN)"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 144096299,
+  "habitat": null,
+  "health": null
+ },
+ {
+  "speciesId": 156256182,
+  "feeding": null,
+  "habitat": null,
+  "behavior": {
+   "generalBehavior": "Petit lézard actif qui, s'il est menacé, fait souvent le mort ; on le voit souvent sur des surfaces verticales (arbres, clôtures, murs).",
+   "sociability": null,
+   "difficultyLevel": null,
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Cryptoblepharus_virgatus",
+     "title": "Cryptoblepharus virgatus (Wikipedia EN)"
+    }
+   ]
+  },
+  "health": null,
+  "reproduction": null
+ },
+ {
+  "speciesId": 156261518,
+  "feeding": null,
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 20,
+   "tempMax": 26,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Aquarium d'au moins 90 × 30 cm de base (~81 litres) ; groupe de 6 individus minimum",
+   "lightNeeds": "Préfère des conditions relativement tamisées : aquarium bien décoré avec de la végétation de surface ou flottante",
+   "activityEnrichment": null,
+   "hygieneNotes": "Ne pas l'introduire dans un aquarium biologiquement immature : il est sensible aux variations de la chimie de l'eau (pH 4,0–7,0, dureté 1–10 dGH)",
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/",
+     "title": "Kryptopterus vitreolus — Seriously Fish"
+    }
+   ]
+  },
+  "health": null,
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": "Reproduction non documentée (« Unrecorded »). L'espèce ne semble jamais avoir été élevée à échelle commerciale ; les poissons du commerce sont prélevés dans la nature.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/",
+     "title": "Kryptopterus vitreolus — Seriously Fish"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 156315727,
+  "feeding": null,
+  "habitat": null,
+  "health": null,
+  "reproduction": null
+ },
+ {
+  "speciesId": 163312909,
+  "habitat": null
+ },
+ {
+  "speciesId": 165504395,
+  "habitat": null,
+  "behavior": {
+   "generalBehavior": "Espèce nocturne. Elle hiberne en hiver : elle creuse un trou, se rétracte dans sa coquille et la scelle avec un épiphragme de mucus. Elle laisse une traînée de mucus lorsqu'elle cherche sa nourriture.",
+   "sociability": null,
+   "difficultyLevel": null,
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://animaldiversity.org/accounts/Helix_pomatia/",
+     "title": "Helix pomatia — Animal Diversity Web"
+    }
+   ]
+  },
+  "health": null
+ },
+ {
+  "speciesId": 165617687,
+  "feeding": null,
+  "habitat": null,
+  "behavior": {
+   "generalBehavior": "Espèce entièrement aquatique et presque exclusivement nocturne. Elle est territoriale : les grands mâles tuent souvent des rivaux plus petits pour défendre les fosses de ponte.",
+   "sociability": null,
+   "difficultyLevel": null,
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Japanese_giant_salamander",
+     "title": "Japanese giant salamander (Wikipedia EN)"
+    },
+    {
+     "type": "guide",
+     "url": "https://animaldiversity.org/accounts/Andrias_japonicus/",
+     "title": "Andrias japonicus — Animal Diversity Web"
+    }
+   ]
+  },
+  "health": null
+ },
+ {
+  "speciesId": 308455619,
+  "habitat": null,
+  "health": null,
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": 12,
+   "breedingDifficulty": null,
+   "notes": "La fécondation des œufs est possible dès l'âge d'un an, chez l'oie comme chez le jars. Les oies sont plutôt monogames ; les éleveurs constituent des troupeaux d'un mâle pour quatre à six femelles. La présence d'eau favorise la reproduction.",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://fr.wikipedia.org/wiki/Oie_domestique",
+     "title": "Oie domestique (Wikipédia FR)"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2000000108,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000151,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000152,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000162,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000164,
+  "description": "Race de petit lapin à la robe toujours blanche. Ses origines sont confuses : il serait issu de petits lapins importés de Pologne. Son poids ne doit pas excéder 1,5 kg, idéalement entre 1 et 1,35 kg.",
+  "sourceUrl": "https://fr.wikipedia.org/wiki/Hermine_(lapin)"
+ }
+]

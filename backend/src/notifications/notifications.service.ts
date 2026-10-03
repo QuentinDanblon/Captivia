@@ -1,32 +1,25 @@
-import { Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { UpdateNotificationPreferencesDto } from './dto/notification-preferences.dto';
+import { PushReminderPayload, WebPushSender } from './push-sender';
+import { isAllowedPushEndpoint } from './push-endpoint';
 
-// Note: web-push library would be imported here in production
-// import * as webPush from 'web-push';
-
-interface PushPayload {
-  title: string;
-  body: string;
-  icon?: string;
-  data?: any;
-}
+/** Nombre maximal d'abonnements push par compte : au-delà, le plus ancien est remplacé. */
+export const MAX_PUSH_SUBSCRIPTIONS_PER_USER = 10;
 
 @Injectable()
 export class NotificationsService {
   private readonly logger = new Logger(NotificationsService.name);
 
-  constructor(private readonly prisma: PrismaService) {
-    // In production, configure web-push:
-    // const vapidKeys = {
-    //   publicKey: process.env.VAPID_PUBLIC_KEY,
-    //   privateKey: process.env.VAPID_PRIVATE_KEY,
-    // };
-    // webPush.setVapidDetails(
-    //   'mailto:contact@captivia.com',
-    //   vapidKeys.publicKey,
-    //   vapidKeys.privateKey,
-    // );
-  }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly pushSender: WebPushSender,
+  ) {}
 
   async subscribeToPush(
     userId: string,
@@ -35,18 +28,62 @@ export class NotificationsService {
       keys: { p256dh: string; auth: string };
     },
   ) {
-    // Create or update push subscription
-    return this.prisma.pushSubscription.upsert({
-      where: { endpoint: subscription.endpoint },
-      create: {
-        userId,
-        endpoint: subscription.endpoint,
-        keys: subscription.keys,
-      },
-      update: {
-        keys: subscription.keys,
-      },
-    });
+    const { endpoint, keys } = subscription;
+    const forbidden = () =>
+      new ForbiddenException(
+        'This push endpoint is registered to another account',
+      );
+    // Défense en profondeur : le DTO l'a déjà vérifié (liste blanche des services push).
+    if (!isAllowedPushEndpoint(endpoint)) {
+      throw new BadRequestException(
+        'endpoint must be an https URL of a supported Web Push service',
+      );
+    }
+
+    try {
+      return await this.prisma.$transaction(async (tx) => {
+        // Verrou User : le plafond d'abonnements tient même sous inscriptions concurrentes.
+        await tx.$queryRaw`SELECT 1 FROM "User" WHERE "id" = ${userId} FOR UPDATE`;
+        // L'endpoint est unique globalement : un abonnement appartenant à un autre compte
+        // ne doit jamais être écrasé ni « volé » (403).
+        const existing = await tx.pushSubscription.findUnique({
+          where: { endpoint },
+        });
+        if (existing) {
+          if (existing.userId !== userId) throw forbidden();
+          return tx.pushSubscription.update({
+            where: { id: existing.id },
+            data: { keys },
+          });
+        }
+        // Plafond par compte : les abonnements les plus anciens sont remplacés.
+        const current = await tx.pushSubscription.findMany({
+          where: { userId },
+          orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+          select: { id: true },
+        });
+        const excess = current.length - (MAX_PUSH_SUBSCRIPTIONS_PER_USER - 1);
+        if (excess > 0) {
+          await tx.pushSubscription.deleteMany({
+            where: { id: { in: current.slice(0, excess).map((c) => c.id) } },
+          });
+        }
+        return tx.pushSubscription.create({
+          data: { userId, endpoint, keys },
+        });
+      });
+    } catch (e) {
+      // Création concurrente du même endpoint par un autre compte (P2002) : on relit pour décider.
+      if ((e as { code?: string })?.code !== 'P2002') throw e;
+      const again = await this.prisma.pushSubscription.findUnique({
+        where: { endpoint },
+      });
+      if (!again || again.userId !== userId) throw forbidden();
+      return this.prisma.pushSubscription.update({
+        where: { id: again.id },
+        data: { keys },
+      });
+    }
   }
 
   async unsubscribeFromPush(userId: string, endpoint: string) {
@@ -72,29 +109,17 @@ export class NotificationsService {
     });
   }
 
-  async sendNotification(userId: string, payload: PushPayload) {
-    const subscriptions = await this.getUserSubscriptions(userId);
-
-    const results = await Promise.allSettled(
-      subscriptions.map(async (sub) => {
-        // In production, use web-push:
-        // await webPush.sendNotification(
-        //   {
-        //     endpoint: sub.endpoint,
-        //     keys: sub.keys as any,
-        //   },
-        //   JSON.stringify(payload),
-        // );
-
-        console.log(`[PUSH] Would send to ${sub.endpoint}:`, payload);
-        return { success: true };
-      }),
-    );
-
-    return {
-      sent: results.filter((r) => r.status === 'fulfilled').length,
-      failed: results.filter((r) => r.status === 'rejected').length,
-    };
+  /**
+   * Envoi immédiat vers tous les appareils de l'utilisateur (notification de test).
+   * Ne renvoie QUE « au moins un envoi a réussi » : le détail (échecs, purges) servait d'oracle
+   * pour sonder des adresses (revue de sécurité, constat 2).
+   */
+  async sendNotification(
+    userId: string,
+    payload: PushReminderPayload,
+  ): Promise<{ sent: boolean }> {
+    const { sent } = await this.pushSender.deliver(userId, payload);
+    return { sent: sent > 0 };
   }
 
   async getNotificationPreferences(userId: string) {
@@ -128,19 +153,14 @@ export class NotificationsService {
 
   async updateNotificationPreferences(
     userId: string,
-    data: {
-      types?: any;
-      typeSchedules?: Record<string, any>;
-      schedule?: any;
-      snooze?: number;
-      deliveryChannel?: 'push' | 'email' | 'both';
-    },
+    data: UpdateNotificationPreferencesDto,
   ) {
     const existing = await this.getNotificationPreferences(userId);
 
     const updateData: Record<string, any> = {};
     if (data.types !== undefined) updateData.types = data.types;
-    if (data.typeSchedules !== undefined) updateData.typeSchedules = data.typeSchedules;
+    if (data.typeSchedules !== undefined)
+      updateData.typeSchedules = data.typeSchedules;
     if (data.schedule !== undefined) updateData.schedule = data.schedule;
     if (data.snooze !== undefined) updateData.snooze = data.snooze;
     if (data.deliveryChannel !== undefined) {
@@ -159,18 +179,31 @@ export class NotificationsService {
   async checkIfShouldNotify(userId: string, type: string): Promise<boolean> {
     const prefs = await this.getNotificationPreferences(userId);
 
-    // Check if type is enabled
-    const types = prefs.types as any;
+    // Check if type is enabled (types / schedule peuvent être nuls ou mal formés en base)
+    const types =
+      prefs.types &&
+      typeof prefs.types === 'object' &&
+      !Array.isArray(prefs.types)
+        ? (prefs.types as Record<string, unknown>)
+        : {};
     if (!types[type]) {
       return false;
     }
 
-    // Check time window
+    // Check time window : sans fenêtre valide, aucune restriction horaire
+    const schedule =
+      prefs.schedule &&
+      typeof prefs.schedule === 'object' &&
+      !Array.isArray(prefs.schedule)
+        ? (prefs.schedule as { start?: unknown; end?: unknown })
+        : {};
+    const start = typeof schedule.start === 'string' ? schedule.start : '00:00';
+    const end = typeof schedule.end === 'string' ? schedule.end : '23:59';
+
     const now = new Date();
     const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-    const schedule = prefs.schedule as any;
 
-    if (currentTime < schedule.start || currentTime > schedule.end) {
+    if (currentTime < start || currentTime > end) {
       return false;
     }
 

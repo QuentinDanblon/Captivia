@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2470729,
+  "commonNameFr": "Varan des steppes",
+  "scientificName": "Varanus exanthematicus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2470854,
+  "commonNameFr": "Varan de Komodo",
+  "scientificName": "Varanus komodoensis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2474162,
+  "commonNameFr": "Caille du Japon",
+  "scientificName": "Coturnix japonica",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,60 @@
+[
+  {
+    "speciesId": 5784980,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "behavior.generalBehavior: retiré « nocturne et crépusculaire » et « solitaire en captivité » (non confirmés) ; ajouté hibernation d'environ 4 mois et sacs vocaux externes (source)",
+      "reproduction.notes: traduit « tadpoles », précisé l'hybride P. lessonae x P. ridibundus",
+      "health: corrections orthographiques (chytridiomycose, déchlorée, stricte, léthargie)"
+    ],
+    "removed": [
+      "habitat.tempMin 10 / tempMax 25 → null (non confirmé)",
+      "habitat.minSpaceSize « 60 litres » → null (non confirmé)",
+      "habitat.lightNeeds → null (non confirmé)",
+      "habitat.hygieneNotes: retiré « 30 % toutes les 2 semaines » (chiffre non confirmé)",
+      "behavior.sociability « solitaire » → null (page silencieuse)",
+      "legislation (statut « allowed » non confirmé par la source ; espèce sauvage possiblement protégée en France) → null"
+    ],
+    "confidence": "medium",
+    "notes": "Régime (arthropodes, insectes, petits crustacés, larves d'amphibiens, vers), ponte 1500-4000 œufs, éclosion 2-3 semaines, métamorphose 2-3 mois, maturité 3 ans, mars-avril : confirmés (fr.wikipedia). Maladies (chytridiomycose, parasites, septicémie) non citées mais existent chez les amphibiens."
+  },
+  {
+    "speciesId": 5786666,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.litterSize: 4-4 → 1-8 (moyenne 4, de 1 à 8 selon en.wikipedia)",
+      "behavior.generalBehavior: « 50-100 en saison sèche » → « jusqu'à une centaine » ; « hiérarchie sociale via marquage » remplacé par marquage olfactif (glandes du museau et anales)",
+      "reproduction.notes: durée de vie en nature précisée (rarement plus de 4 ans)"
+    ],
+    "removed": [
+      "legislation entière (euAnnex B, « arrêté du 21 novembre 1997 », autorisation préfectorale) → null : non confirmé, source INPN = page d'accueil générique sans lien avec l'espèce",
+      "habitat.tempMin 15 / tempMax 28 → null (non confirmé)",
+      "habitat.minSpaceSize: retiré « 2000 m² / 1000 m² » (chiffres non confirmés)",
+      "reproduction.season « toute l'année » → null (non confirmé)",
+      "reproduction.notes: « jeunes consomment herbe dès une semaine » (non confirmé)",
+      "behavior.compatibilityWithOtherAnimals: « cohabitation avec oiseaux parasites tolérée en nature » (non sourcé)"
+    ],
+    "confidence": "medium",
+    "notes": "Gestation 130-150 jours (en.wikipedia ; fr.wikipedia indique 110 jours au nord, 150 au sud) : 140 conservé. Groupes de 10-20, sevrage 16 semaines, dents à croissance continue, parasites confirmés."
+  },
+  {
+    "speciesId": 5959092,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation.status: prohibited → permit_required (la source indique protection par arrêté du 17 avril 1981 et détention en captivité soumise à certificat de capacité + autorisation, CIC pour les spécimens nés en captivité)",
+      "legislation.details: permits/restrictions réécrits d'après la source ; citesAppendix II confirmé",
+      "legislation.sources: INPN (page d'accueil générique) → fr.wikipedia Grand-duc d'Europe",
+      "reproduction.season: « automne hiver » → « fin mars à début avril (nidification) » (contredit par la source)",
+      "reproduction.notes: envol « 8-10 semaines » → quitte le nid vers 1,5 mois, vole vers 3 mois (source)",
+      "behavior.generalBehavior: retiré « crépusculaire » (source : nocturne)"
+    ],
+    "removed": [
+      "health: « Myxomatose (via proies) » supprimée (maladie spécifique du lapin ; la source ne cite la myxomatose que comme maladie des proies, pas du rapace)",
+      "legislation.euAnnex « A » → null (non confirmé par la page)",
+      "feeding: « 2-3 fois/semaine minimum » et « jeûne 1-2 jours » retirés ; mealFrequency every_2_days → null (non confirmés)",
+      "habitat.tempMin 5 / tempMax 30 → null ; minSpaceSize « 100+ m² » → texte sans chiffre ; lightNeeds « 12-14h/jour » → retiré (non confirmés)"
+    ],
+    "confidence": "medium",
+    "notes": "Confirmés : 75 cm, yeux rouge-orangé, longévité >20 ans, incubation 32-37 jours par la femelle, 2-4 œufs, nids jusqu'à 2400 m, rodenticides (bromadiolone) comme menace, CITES II."
+  }
+]

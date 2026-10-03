@@ -1,3 +1,5 @@
+import { Throttle } from '@nestjs/throttler';
+import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
 import {
   Controller,
   Get,
@@ -73,6 +75,7 @@ export class HealthContentController {
 
 @ApiTags('pubmed')
 @Controller('pubmed')
+@Throttle(EXTERNAL_API_THROTTLE)
 export class PubMedController {
   constructor(private readonly healthContentService: HealthContentService) {}
 

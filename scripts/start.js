@@ -27,14 +27,14 @@ function run(cmd, args, cwd, env = {}) {
 }
 
 console.log('Démarrage Captivia en local...');
-console.log('  Backend:  http://localhost:3000');
-console.log('  Frontend: http://localhost:3001');
+console.log('  Frontend: http://localhost:3000');
+console.log('  Backend:  http://localhost:3001');
 console.log('');
 
-run('npm', ['run', 'start:dev'], 'backend');
+run('npm', ['run', 'start:dev'], 'backend', { PORT: '3001' });
 setTimeout(() => {
   run('npm', ['run', 'dev'], 'frontend', {
-    NEXT_PUBLIC_API_URL: 'http://localhost:3000',
-    PORT: '3001',
+    NEXT_PUBLIC_API_URL: 'http://localhost:3001',
+    PORT: '3000',
   });
 }, 2000);

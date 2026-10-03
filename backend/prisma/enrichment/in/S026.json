@@ -1,0 +1,46 @@
+[
+ {
+  "speciesId": 2482492,
+  "commonNameFr": "Corbeau familier",
+  "scientificName": "Corvus corax",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2488955,
+  "commonNameFr": "Serpent des blés",
+  "scientificName": "Pantherophis guttatus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2490384,
+  "commonNameFr": "Cardinal rouge",
+  "scientificName": "Cardinalis cardinalis",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

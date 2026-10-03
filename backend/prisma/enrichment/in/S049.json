@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 8170369,
+  "commonNameFr": "Serpent roi de Californie",
+  "scientificName": "Lampropeltis californiae",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 8214163,
+  "commonNameFr": "Barbu de Sumatra",
+  "scientificName": "Puntigrus tetrazona",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 8583926,
+  "commonNameFr": "Anole de Cuba",
+  "scientificName": "Anolis equestris",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

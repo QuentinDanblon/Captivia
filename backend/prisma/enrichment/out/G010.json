@@ -1,0 +1,160 @@
+[
+  {
+    "speciesId": 104060891,
+    "feeding": null,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 104060941,
+    "feeding": null,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 104061079,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 104069250,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 104076753,
+    "health": null
+  },
+  {
+    "speciesId": 104085484,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 104087619,
+    "behavior": null,
+    "health": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 30,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Une ponte peut compter jusqu'à 30 œufs. L'élevage et la reproduction en captivité sont difficiles : accouplements et pontes ont eu lieu dans chaque institution, mais la plupart des œufs étaient infertiles.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana",
+          "title": "Lesser Antillean iguana — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104093507,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 104094514,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 29,
+      "tempMax": 31,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Enclosure équivalent à 55-75 gallons US (environ 208 à 284 L), adapté pour deux adultes",
+      "lightNeeds": "Éclairage à spectre complet bénéfique, fourni par les lampes chauffantes pour serpents",
+      "activityEnrichment": "Enclos abondamment garni de plantes vivantes ou artificielles pour grimper et se cacher",
+      "hygieneNotes": "Brumiser doucement l'enclos au moins une fois par semaine pour maintenir l'humidité ; substrat en petits cailloux ou graviers pour faciliter le nettoyage et réduire le risque d'acariens ; retirer immédiatement les fèces sèches.",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/rough-green-snake-care-sheet/",
+          "title": "Rough Green Snake Care Sheet — Reptiles Magazine"
+        }
+      ]
+    },
+    "health": null
+  },
+  {
+    "speciesId": 104101618,
+    "health": null,
+    "reproduction": {
+      "season": "Fin d'été jusqu'à la mousson",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 14,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Espèce ovovivipare : les femelles donnent naissance à jusqu'à 14 petits à la fois.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eryx_johnii",
+          "title": "Eryx johnii — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104101654,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 104101859,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 29,
+      "tempMax": 31,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Juvéniles : enclos de 4 pieds (environ 120 cm) de long sur 2 pieds de profondeur et de hauteur ; mâles adultes : environ 7 x 3 x 2 pieds (les femelles ont besoin d'un enclos encore plus grand)",
+      "lightNeeds": "Tube UVB de 2-5 % (zone 1 ou 2) ; la nuit, toutes les lumières doivent être éteintes et l'enclos complètement sombre pour garder un cycle jour/nuit net.",
+      "activityEnrichment": "Cachette fermée (grotte ou bac) avec une entrée assez large, garnie de mousse humide pour maintenir une humidité élevée.",
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.reptilecentre.com/info-burmese-python-care-sheet",
+          "title": "Burmese Python Care Sheet — Reptile Centre"
+        }
+      ]
+    },
+    "health": null
+  },
+  {
+    "speciesId": 104104828,
+    "habitat": null,
+    "health": null
+  },
+  {
+    "speciesId": 104105088,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 21,
+      "tempMax": 38,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Vivarium d'au moins 1150 mm (46 pouces)",
+      "lightNeeds": "Tube UVB à au moins 10 % pour les espèces désertiques : les tortues ont besoin d'UVB pour synthétiser la vitamine D3 dans leur peau.",
+      "activityEnrichment": null,
+      "hygieneNotes": "Plutôt que de laisser un bac d'eau, donner à la tortue un bain peu profond 2 à 3 fois par semaine pendant 10 minutes.",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet",
+          "title": "Indian Star Tortoise Care Sheet — Reptile Centre"
+        }
+      ]
+    },
+    "health": null
+  }
+]

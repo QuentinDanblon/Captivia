@@ -14,12 +14,42 @@ datasource db {
 // Phase 0 - User & Auth
 // ============================================
 
+/// Rôle applicatif. OPERATOR ne s'obtient JAMAIS par inscription : uniquement
+/// via `npm run operator:set` (scripts/set-operator.ts) — cf. W0-01.
+enum UserRole {
+  USER
+  OPERATOR
+}
+
 model User {
   id           String   @id @default(uuid())
-  email        String   @unique
-  passwordHash String
+  /// Toujours normalisé (trim + minuscules) — CHECK SQL "User_email_normalized_check".
+  /// NULL uniquement pour un compte invité (`isGuest`) : CHECK SQL "User_guest_credentials_check".
+  email        String?  @unique
+  /// NULL uniquement pour un compte invité (aucun mot de passe : connexion par refresh token seul).
+  passwordHash String?
+  /// Compte invité (mode « Essayer sans compte ») : ni e-mail ni mot de passe, 1 animal, pas de
+  /// lien public / flux ICS / achat / publication. Converti en compte (même ligne, mêmes données)
+  /// par POST /auth/upgrade ; purgé après GUEST_RETENTION_DAYS d'inactivité.
+  isGuest      Boolean  @default(false)
+  /// Dernière activité connue (création, rotation de refresh token, requête authentifiée —
+  /// au plus une écriture par jour). Sert à la purge des invités inactifs.
+  lastActiveAt DateTime @default(now()) @db.Timestamptz(3)
   locale       String   @default("fr")
+  /// Fuseau IANA (ex. "Europe/Paris") : sert au scheduler de rappels pour la « journée en cours » (W3-02).
+  timezone     String   @default("Europe/Paris")
+  /// Jeton du flux iCalendar personnel (« Agenda des soins ») : sha256(jeton) en hexadécimal, JAMAIS le
+  /// jeton en clair. NULL = flux désactivé. Régénérer remplace la valeur (l'ancien lien cesse de fonctionner).
+  calendarToken String? @unique
   isPremium    Boolean  @default(false)
+  role         UserRole @default(USER)
+  /// Incrémenté à chaque reset / changement de mot de passe : invalide les JWT émis avant.
+  tokenVersion Int      @default(0)
+  /// Consentement CGU + politique de confidentialité à l'inscription (W2-03)
+  termsAcceptedAt DateTime? @db.Timestamptz(3)
+  termsVersion    String?
+  /// Date de vérification de l'adresse e-mail (W2-04) ; null = non vérifiée.
+  emailVerifiedAt DateTime? @db.Timestamptz(3)
   points       Int      @default(0)   // Points pour le système de grade
   grade        String   @default("bronze") // bronze | silver | gold | platinum | diamond
   createdAt    DateTime @default(now()) @db.Timestamptz(3)
@@ -31,12 +61,130 @@ model User {
   notificationPreferences NotificationPreference[]
   notificationEvents      NotificationEvent[]
   passwordResetTokens     PasswordResetToken[]
+  refreshTokens           RefreshToken[]
+  emailVerificationTokens EmailVerificationToken[]
+  subscriptions           Subscription[]
+  paymentEvents           PaymentEvent[]
+
+  /// Purge des invités inactifs (GuestPurgeService).
+  @@index([isGuest, lastActiveAt])
+}
+
+// ============================================
+// Achats intégrés (W6-08) — App Store / Google Play via RevenueCat
+// ============================================
+
+enum SubscriptionSource {
+  APPLE
+  GOOGLE
+  MANUAL
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  IN_GRACE_PERIOD
+  CANCELLED
+  EXPIRED
+  BILLING_ISSUE
+  REFUNDED
+}
+
+enum SubscriptionEnvironment {
+  SANDBOX
+  PRODUCTION
+}
+
+/// Abonnement store (une ligne par achat d'origine). Donne accès au premium tant que
+/// status ∈ {ACTIVE, IN_GRACE_PERIOD, CANCELLED} ET currentPeriodEnd > maintenant.
+model Subscription {
+  id                    String                  @id @default(uuid())
+  userId                String
+  source                SubscriptionSource
+  productId             String
+  entitlement           String                  @default("premium")
+  status                SubscriptionStatus
+  /// Identifiant de l'achat d'origine chez le store (stable entre renouvellements).
+  originalTransactionId String
+  currentPeriodEnd      DateTime?               @db.Timestamptz(3)
+  willRenew             Boolean                 @default(false)
+  environment           SubscriptionEnvironment @default(PRODUCTION)
+  lastEventId           String?
+  /// event_timestamp_ms du dernier événement appliqué : les événements plus anciens sont ignorés.
+  lastEventAt           DateTime?               @db.Timestamptz(3)
+  createdAt             DateTime                @default(now()) @db.Timestamptz(3)
+  updatedAt             DateTime                @updatedAt @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([source, originalTransactionId])
+  @@index([userId, status, currentPeriodEnd])
+}
+
+/// Journal des notifications de paiement reçues (idempotence par eventId).
+/// userId passe à NULL à la suppression du compte (le payload ne contient pas d'e-mail).
+model PaymentEvent {
+  id         String   @id @default(uuid())
+  provider   String
+  eventId    String   @unique
+  type       String
+  userId     String?
+  /// applied | duplicate | ignored_stale | ignored_unknown_user | ignored_entitlement | ignored_store | ignored_type
+  outcome    String   @default("applied")
+  payload    Json
+  receivedAt DateTime @default(now()) @db.Timestamptz(3)
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([receivedAt])
+}
+
+/// Refresh token opaque (W1-01) : seul sha256(token) est stocké. Rotation à chaque
+/// /auth/refresh ; la réutilisation d'un token déjà roté révoque toute la famille.
+model RefreshToken {
+  id           String    @id @default(uuid())
+  userId       String
+  /// sha256(token) en hexadécimal : le token en clair n'est jamais stocké.
+  tokenHash    String    @unique
+  /// Identifiant de la chaîne de rotation (une famille = une session / un appareil).
+  familyId     String
+  expiresAt    DateTime  @db.Timestamptz(3)
+  revokedAt    DateTime? @db.Timestamptz(3)
+  /// Token émis en remplacement lors de la rotation (null = token courant de la famille).
+  replacedById String?
+  userAgent    String?
+  /// Copie de User.tokenVersion à l'émission : un refresh est refusé si elle diffère de la
+  /// version courante (révocation par logout-all / changement ou reset du mot de passe).
+  /// NULL = jeton émis avant cette colonne (pas de contrôle ; remplacé à la rotation suivante).
+  tokenVersion Int?
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([familyId])
+  @@index([expiresAt])
+}
+
+/// Token de vérification d'e-mail (W2-04), haché (sha256), valable 24 h.
+model EmailVerificationToken {
+  id        String   @id @default(uuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime @db.Timestamptz(3)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
 }
 
 model PasswordResetToken {
   id        String   @id @default(uuid())
   userId    String
-  token     String   @unique
+  /// sha256(token) en hexadécimal : le token en clair n'est jamais stocké.
+  tokenHash String   @unique
   expiresAt DateTime @db.Timestamptz(3)
   createdAt DateTime @default(now()) @db.Timestamptz(3)
 
@@ -60,6 +208,9 @@ model Animal {
   photos     String[] // URLs
   notes      String?
   publicSlug String?   @unique // slug pour page publique / QR (Premium)
+  // W0-06 — partage public (QR) en opt-in : désactivé par défaut, révocable (regénération du slug)
+  publicEnabled    Boolean @default(false)
+  publicShowHealth Boolean @default(false) // affiche les vaccinations (nom + date) sur la page publique
   // Module F — parenté & groupement (éleveurs)
   fatherId  String? // FK -> Animal.id (père, SetNull à la suppression)
   motherId  String? // FK -> Animal.id (mère, SetNull à la suppression)
@@ -313,6 +464,11 @@ model NotificationEvent {
   appointmentId  String?  // optionnel : lien vers un RDV vétérinaire (Module A)
   vaccinationId  String?  // optionnel : lien vers un rappel vaccin (Module C)
   animalId       String?  // optionnel : animal concerné
+  // W0-07 — clé d'idempotence : "routine:<id>" | "medication:<id>" | "appointment:<id>" | "vaccination:<id>" | "pref:<type>".
+  // Nullable : les anciens créateurs d'événements sans clé ne sont pas dédupliqués (NULL distincts en SQL).
+  sourceKey      String?
+  /// W3-02 — posé atomiquement par le scheduler quand le rappel a été envoyé (anti-doublon).
+  notifiedAt     DateTime? @db.Timestamptz(3)
   createdAt      DateTime @default(now()) @db.Timestamptz(3)
   updatedAt      DateTime @updatedAt @db.Timestamptz(3)
 
@@ -332,6 +488,7 @@ model NotificationEvent {
   @@index([appointmentId])
   @@index([vaccinationId])
   @@index([userId, status, scheduledAt])
+  @@unique([userId, sourceKey, scheduledAt])
 }
 
 // ============================================

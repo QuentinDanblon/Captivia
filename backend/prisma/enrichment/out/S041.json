@@ -1,0 +1,159 @@
+[
+  {
+    "speciesId": 5286201,
+    "health": {
+      "diseases": [
+        {
+          "name": "Pneumonie",
+          "symptoms": "Respiration difficile, écoulement nasal, léthargie, perte d'appétit, fièvre",
+          "prevention": "Maintien d'une température stable et d'une humidité adaptée, minimiser le stress en captivité",
+          "whenToConsult": "Immédiatement à tout signe respiratoire (risque de mortalité élevé en captivité)"
+        },
+        {
+          "name": "Parasitose intestinale",
+          "symptoms": "Diarrhée, perte de poids, abdomen ballonné, malabsorption, faiblesse",
+          "prevention": "Hygiène stricte du terrarium, quarantaine des individus sauvages capturés, traitement antiparasitaire",
+          "whenToConsult": "Après observation de fèces anormales ou détérioration générale de l'état"
+        },
+        {
+          "name": "Ulcères",
+          "symptoms": "Apathie profonde, refus alimentaire, déshydratation, mort soudaine",
+          "prevention": "Environnement calme et sécurisant, manipulation minimale",
+          "whenToConsult": "Urgence vétérinaire en cas de refus alimentaire ou de comportement anormal débutant"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Pangolin",
+          "title": "Pangolin - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "printemps (avril-mai)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 24,
+      "breedingDifficulty": "avance",
+      "notes": "Un seul jeune à la fois (environ 93 g à la naissance). Gestation de 70 à 140 jours selon les espèces de pangolins (valeur propre à cette espèce non confirmée). Sevrage vers 3 mois, maturité sexuelle et indépendance vers 2 ans. Réponses immunitaires nettement diminuées (dysfonction génétique), animaux très fragiles. Reproduction en captivité très rarement réussie.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Pangolin",
+          "title": "Pangolin - Wikipedia EN"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Chinese_pangolin",
+          "title": "Chinese pangolin - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5287871,
+    "health": {
+      "diseases": [
+        {
+          "name": "Dysplasie de la hanche",
+          "symptoms": "Boiterie, difficulté à se lever, raideur après repos, douleur à l'articulation",
+          "prevention": "Sélection génétique des reproducteurs, exercice modéré dès le jeune âge, alimentation équilibrée",
+          "whenToConsult": "Dès boiterie persistante ou modification de la démarche, surtout chez les races de grande taille"
+        },
+        {
+          "name": "Parvovirus canin",
+          "symptoms": "Vomissements, diarrhée hémorragique, déshydratation, apathie, fièvre",
+          "prevention": "Vaccination selon le protocole du vétérinaire, hygiène, éviter le contact avec des animaux malades",
+          "whenToConsult": "Immédiatement si vomissements ou diarrhée aigus chez un jeune chiot ou un chien non vacciné"
+        },
+        {
+          "name": "Dirofilariose (Vers du cœur)",
+          "symptoms": "Toux chronique, fatigue, intolérance à l'effort, syncope, épanchement pleural",
+          "prevention": "Traitement préventif médicamenteux prescrit par le vétérinaire (maladie transmise par les moustiques), exposition réduite en saison de transmission",
+          "whenToConsult": "Après toux persistante ou dyspnée, surtout après un voyage en zone d'endémie"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dog_health",
+          "title": "Dog health - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 63,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "facile",
+      "notes": "Maturité sexuelle vers 6 mois à 1 an, parfois jusqu'à 2 ans chez certaines grandes races. Chaleurs environ deux fois par an. Gestation de 58 à 68 jours (63 jours en moyenne). Portée moyenne d'environ 6 chiots (variable selon la race).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Dog",
+          "title": "Dog - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5288995,
+    "health": {
+      "diseases": [
+        {
+          "name": "Colique équine",
+          "symptoms": "Douleur abdominale (piaffement, regard vers le flanc, roulades, agitation), anorexie, diminution des crottins, accélération du rythme cardiaque",
+          "prevention": "Apport hydrique régulier, changements d'alimentation progressifs, exercice régulier, parasitisme contrôlé (vermifugation)",
+          "whenToConsult": "Immédiatement : la colique est une urgence vétérinaire, risque de mortalité élevé sans traitement"
+        },
+        {
+          "name": "Grippe équine",
+          "symptoms": "Fièvre (jusqu'à 41°C), toux sèche, écoulement nasal, abattement, anorexie, myalgies",
+          "prevention": "Vaccination annuelle recommandée (rappels tous les 6 mois pour les chevaux de compétition qui voyagent), isolement de 2 semaines des chevaux nouvellement arrivés, hygiène stricte",
+          "whenToConsult": "Consultation vétérinaire dès fièvre ou toux, ou si pneumonie secondaire ; repos d'au moins une semaine par jour de fièvre (minimum 3 jours)"
+        },
+        {
+          "name": "Parasitose gastro-intestinale",
+          "symptoms": "Amaigrissement progressif, pelage terne, coliques intermittentes, diarrhée, fatigue anormale",
+          "prevention": "Vermifugation régulière (rotation des molécules), pâturages entretenus, litières changées régulièrement",
+          "whenToConsult": "Après amaigrissement inexpliqué ou diarrhée persistante malgré une alimentation adéquate"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Colic_in_horses",
+          "title": "Colic in horses - Wikipedia EN"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Equine_influenza",
+          "title": "Equine influenza - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "printemps à automne",
+      "gestationDays": 340,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 1,
+      "sexualMaturityMonths": 18,
+      "breedingDifficulty": "facile",
+      "notes": "Cycle œstral de la jument toutes les 19 à 22 jours, du début du printemps à l'automne (repos hivernal pour la plupart des juments). Gestation d'environ 340 jours (320 à 370 jours). Le poulain se lève et court peu de temps après la naissance. Certains chevaux (surtout les poulains mâles) sont physiquement capables de se reproduire vers 18 mois, mais les chevaux domestiques sont rarement mis à la reproduction avant 3 ans, en particulier les juments.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Horse",
+          "title": "Horse - Wikipedia EN"
+        }
+      ]
+    }
+  }
+]

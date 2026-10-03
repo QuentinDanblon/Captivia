@@ -1,0 +1,445 @@
+[
+  {
+    "speciesId": 2434615,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Figues fraîches ou séchées (Ficus spp.)",
+          "frequency": "quotidienne",
+          "notes": "Ressource alimentaire essentielle à l'état sauvage (les figuiers étrangleurs, Ficus, sont très consommés). Le régime est composé d'environ 80 % de végétaux"
+        },
+        {
+          "name": "Fruits variés (papaye, banane)",
+          "frequency": "quotidienne",
+          "notes": "Complément aux figues, source de vitamines"
+        },
+        {
+          "name": "Viande maigre cuite (poulet, bœuf)",
+          "frequency": "hebdomadaire",
+          "notes": "Complément protéiné, sans sel ni épices"
+        },
+        {
+          "name": "Insectes et petits animaux",
+          "frequency": "occasionnelle",
+          "notes": "Enrichissement naturel du régime (petits mammifères, oiseaux, poissons, insectes et œufs sont consommés à l'état sauvage)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments trop gras ou salés",
+          "reason": "Perturbent la digestion adaptée à un régime à forte tendance frugivore"
+        },
+        {
+          "name": "Produits laitiers",
+          "reason": "Source d'inconfort digestif chez de nombreux carnivores adultes"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime à forte tendance frugivore (environ 80 % de végétaux) complété par des protéines animales. Accès à de l'eau fraîche quotidienne.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Binturong",
+          "title": "Binturong - Wikipédia FR"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.aquariumofpacific.org/onlinelearningcenter/species/binturong",
+          "title": "Aquarium of Pacific - Binturong"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles jour/nuit naturels ou simulés. Zones d'ombre importantes (espèce à activité crépusculaire et nocturne)",
+      "activityEnrichment": "Aménagements verticaux pour grimper (espèce arboricole), branches robustes, cachettes. Stimulation nocturne. Enrichissement alimentaire régulier",
+      "hygieneNotes": "Nettoyage quotidien des zones de repos. Substrat absorbant. Eau fraîche en permanence",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Binturong",
+          "title": "Binturong - Wikipédia FR"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Arboricole et solitaire, au rythme d'activité arythmique avec tendance crépusculaire et nocturne. Grimpe lentement mais habilement grâce à sa queue préhensile.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé. Animal sauvage, risques de morsures et de griffures graves",
+      "compatibilityWithOtherAnimals": "Solitaire. Cohabitation avec d'autres animaux déconseillée",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Binturong",
+          "title": "Binturong - Wikipédia FR"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.aquariumofpacific.org/onlinelearningcenter/species/binturong",
+          "title": "Aquarium of Pacific - Binturong"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasitoses gastro-intestinales",
+          "symptoms": "Diarrhées, amaigrissement, léthargie",
+          "prevention": "Nettoyage quotidien de l'enclos, analyse fécale régulière, traitement antiparasitaire adapté sur avis vétérinaire",
+          "whenToConsult": "Dès signes de diarrhée persistante ou perte de poids inexpliquée"
+        },
+        {
+          "name": "Infections respiratoires liées au stress",
+          "symptoms": "Écoulement nasal, respiration sifflante, léthargie, perte d'appétit",
+          "prevention": "Environnement stable, réduction des stress. Isolement des nouveaux individus",
+          "whenToConsult": "Immédiatement si signes respiratoires détectés"
+        },
+        {
+          "name": "Malnutrition et carences",
+          "symptoms": "Pelage terne, amaigrissement, apathie",
+          "prevention": "Régime équilibré et varié, figues et fruits frais réguliers. Suivi pondéral régulier",
+          "whenToConsult": "À la moindre suspicion de perte pondérale ou changement de comportement"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10844781",
+          "title": "Prevalence of gastrointestinal parasites in captive mammals at Khon Kaen Zoo, Thailand (NCBI)"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": 92,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": 30,
+      "breedingDifficulty": "avance",
+      "notes": "Gestation de 84 à 99 jours (typiquement 92). Portée généralement de 2 petits (1 à 6 possibles), pesant 280-340 g à la naissance. Maturité sexuelle vers 30 mois chez la femelle et 28 mois chez le mâle.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Binturong",
+          "title": "Binturong - Wikipédia FR"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.aquariumofpacific.org/onlinelearningcenter/species/binturong",
+          "title": "Aquarium of Pacific - Binturong"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2434982,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits rongeurs (souris, rats)",
+          "frequency": "quotidienne",
+          "notes": "Proies de prédilection de l'ocelot à l'état sauvage"
+        },
+        {
+          "name": "Petits oiseaux (moineaux, tourterelles)",
+          "frequency": "2-3 fois/semaine",
+          "notes": "Complément protéiné. Proies naturelles en milieu sauvage"
+        },
+        {
+          "name": "Viande maigre crue ou légèrement cuite",
+          "frequency": "hebdomadaire",
+          "notes": "Poulet ou bœuf, complément pour variété alimentaire"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Poisson cru en excès",
+          "reason": "Peut contenir des thiaminases et des parasites"
+        },
+        {
+          "name": "Chocolat et produits sucrés",
+          "reason": "Toxiques pour les félins"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime strictement carnivore avec proies variées (rongeurs, oiseaux, reptiles...). Accès à eau fraîche quotidienne. Enrichissement de chasse (prédation simulée) pour l'équilibre comportemental",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ocelot",
+          "title": "Ocelot - Wikipédia FR"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/mammiferes/leopardus-pardalis",
+          "title": "Fishipedia - Ocelot"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles jour/nuit naturels ou simulés. Zones d'ombre importantes pour le repos diurne (espèce surtout nocturne)",
+      "activityEnrichment": "Aménagements verticaux pour grimper, cachettes multiples, stimulation nocturne. Jeux de chasse (balles, jouets mobiles). Enrichissement sensoriel régulier",
+      "hygieneNotes": "Nettoyage quotidien des zones de repos. Substrat absorbant. Bonne aération",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ocelot",
+          "title": "Ocelot - Wikipédia FR"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Félin nocturne, chasseur au sol. Grimpeur agile bien que terrestre. Solitaire et territorial.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé. Félin sauvage, risques graves de morsures et de griffures. Animal imprévisible",
+      "compatibilityWithOtherAnimals": "Solitaire et territorial. Cohabitation avec d'autres animaux déconseillée",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ocelot",
+          "title": "Ocelot - Wikipédia FR"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishipedia.fr/mammiferes/leopardus-pardalis",
+          "title": "Fishipedia - Ocelot"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Gale notoédrique",
+          "symptoms": "Prurit intense, lésions cutanées à la tête et aux oreilles, desquamation, croûtes",
+          "prevention": "Inspection cutanée régulière, hygiène irréprochable de l'enclos, isolement en cas d'infection",
+          "whenToConsult": "Immédiatement à l'apparition de lésions ou de prurit anormal"
+        },
+        {
+          "name": "Problèmes dentaires",
+          "symptoms": "Tartre dentaire, gingivite, difficulté à manger, salivation excessive",
+          "prevention": "Alimentation variée avec proies entières occasionnelles. Examens dentaires réguliers",
+          "whenToConsult": "À la première détection de tartre ou de perte dentaire"
+        },
+        {
+          "name": "Parasitoses digestives",
+          "symptoms": "Diarrhées, perte de poids, pelage terne, apathie",
+          "prevention": "Analyses fécales régulières. Traitement antiparasitaire adapté sur avis vétérinaire. Hygiène stricte de l'enclos",
+          "whenToConsult": "Dès signes de diarrhée persistante ou de perte pondérale"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://bioone.org/journals/journal-of-wildlife-diseases/volume-52/issue-4/2015-09-225/Clinical-Evaluation-Hematology-and-Serum-Chemistry-of-Ocelots-Leopardus-pardalis/10.7589/2015-09-225.full",
+          "title": "Clinical Evaluation, Hematology, and Serum Chemistry of Ocelots in the Atlantic Forest of Brazil - Journal of Wildlife Diseases"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": ["Certificat CITES (annexe I)"],
+        "restrictions": ["Espèce inscrite à l'annexe I de la CITES : commerce international interdit sauf dérogations"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ocelot",
+          "title": "Ocelot - Wikipédia FR (CITES annexe I)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": 80,
+      "incubationDays": null,
+      "litterSizeMin": 1,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Gestation d'environ 80 jours. Portée de 1 à 4 petits. Jeunes dépendants de leur mère pendant 5-6 mois et quittant le territoire maternel vers 2 ans.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ocelot",
+          "title": "Ocelot - Wikipédia FR"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2435172,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Rongeurs (souris, rats, musaraignes)",
+          "frequency": "quotidienne",
+          "notes": "Plus de 90 % du régime naturel est constitué de petits mammifères. Proies de petite taille (moins de 200 g pour 90 % d'entre elles)"
+        },
+        {
+          "name": "Petits oiseaux",
+          "frequency": "2-3 fois/semaine",
+          "notes": "Environ 5 % du régime naturel. Complément protéiné"
+        },
+        {
+          "name": "Viande maigre cuite ou crue",
+          "frequency": "hebdomadaire",
+          "notes": "Complément nutritionnel si proies naturelles insuffisantes"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments gras ou salés",
+          "reason": "Inadaptés au régime carnivore strict"
+        },
+        {
+          "name": "Produits laitiers",
+          "reason": "Intolérance digestive"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Carnivore avec un taux de succès de chasse d'environ 50 % à l'état sauvage (48 % selon Animal Diversity Web). Eau fraîche quotidienne. Enrichissement de chasse quotidien important pour l'équilibre physique et psychique",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Serval",
+          "title": "Serval - Wikipédia FR"
+        },
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Leptailurus_serval",
+          "title": "Animal Diversity Web - Serval"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycles naturels jour/nuit. Lumière naturelle ou simulée. Lumière douce crépusculaire pour une activité optimale",
+      "activityEnrichment": "Espaces ouverts pour courir et sauter (le serval saute sur plus d'un mètre de hauteur et quatre mètres de longueur). Herbes hautes pour mimer le comportement de chasse. Enrichissement olfactif régulier. Jeux de prédation avec jouets mobiles",
+      "hygieneNotes": "Nettoyage régulier de l'enclos. Zones herbeuses maintenues. Eau fraîche renouvelée quotidiennement. Bonne aération",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Serval",
+          "title": "Serval - Wikipédia FR"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Félin africain solitaire, excellent chasseur. Taux de succès de chasse d'environ 50 % (parmi les plus élevés des félins). Capacité de saut remarquable (quatre mètres de longueur, plus d'un mètre de hauteur). Marque son territoire par des mictions fréquentes.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé. Félin sauvage imprévisible. Risques graves de morsures et de griffures",
+      "compatibilityWithOtherAnimals": "Solitaire et territorial. Cohabitation avec d'autres animaux déconseillée",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Serval",
+          "title": "Serval - Wikipédia FR"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Panleucopénie féline (parvovirus)",
+          "symptoms": "Vomissements, anorexie, diarrhées, leucopénie sévère, décès possible",
+          "prevention": "Vaccination sur avis vétérinaire. Isolement des nouveaux individus. Hygiène stricte des installations. Éviter le contact avec des félins domestiques non vaccinés",
+          "whenToConsult": "Immédiatement à l'apparition de signes gastro-intestinaux ou de léthargie"
+        },
+        {
+          "name": "Infections parasitaires (intestinales et externes)",
+          "symptoms": "Diarrhées, perte de poids, pelage terne, prurit possible",
+          "prevention": "Analyses fécales régulières. Traitement antiparasitaire adapté sur avis vétérinaire. Hygiène impeccable de l'enclos. Inspection cutanée régulière",
+          "whenToConsult": "À la première détection de symptômes digestifs ou cutanés anormaux"
+        },
+        {
+          "name": "Zoonoses (leptospirose, rage)",
+          "symptoms": "Selon la maladie : fièvre, signes neurologiques, syndrome grippal",
+          "prevention": "Protocoles de biosécurité stricts. Port de gants et d'équipement de protection. Suivi par un vétérinaire spécialisé en faune exotique",
+          "whenToConsult": "Immédiatement en cas de symptôme ou d'exposition (morsure, égratignure)"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8166362",
+          "title": "Viral Prevalence in Wild Serval Population is Driven by Season and Sex (NCBI)"
+        },
+        {
+          "type": "guide",
+          "url": "https://ielc.libguides.com/sdzg/factsheets/serval/summary",
+          "title": "San Diego Zoo Global - Serval"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": ["Certificat spécial pour la détention d'un animal non domestique"],
+        "restrictions": ["Détention interdite en France sans certificat spécial (animal non domestique)", "Commerce international contrôlé par la CITES (annexe II)"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Serval",
+          "title": "Serval - Wikipédia FR (CITES annexe II, statut en France)"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 71,
+      "incubationDays": null,
+      "litterSizeMin": 2,
+      "litterSizeMax": 3,
+      "sexualMaturityMonths": 21,
+      "breedingDifficulty": "modere",
+      "notes": "Une à deux portées par an. Gestation de 66 à 77 jours selon les sources. Portée de 2 à 3 chatons, nés dans des terriers ou des zones abritées. Maturité sexuelle vers 18-24 mois. Indépendance des jeunes vers 12-18 mois.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Serval",
+          "title": "Serval - Wikipédia FR"
+        },
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Leptailurus_serval",
+          "title": "Animal Diversity Web - Serval reproduction"
+        }
+      ]
+    }
+  }
+]

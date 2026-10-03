@@ -1,0 +1,167 @@
+[
+ {
+  "speciesId": 2468542,
+  "commonNameFr": "Lézard ocellé",
+  "scientificName": "Timon lepidus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 2469188,
+  "commonNameFr": "Lézard des murailles",
+  "scientificName": "Podarcis muralis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 2470656,
+  "commonNameFr": "Varan du Nil",
+  "scientificName": "Varanus niloticus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 2470685,
+  "commonNameFr": "Varan d'eau",
+  "scientificName": "Varanus salvator",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 2470711,
+  "commonNameFr": "Varan de Gillen",
+  "scientificName": "Varanus gilleni",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 2470729,
+  "commonNameFr": "Varan des steppes",
+  "scientificName": "Varanus exanthematicus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2470854,
+  "commonNameFr": "Varan de Komodo",
+  "scientificName": "Varanus komodoensis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2474162,
+  "commonNameFr": "Caille du Japon",
+  "scientificName": "Coturnix japonica",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2476004,
+  "commonNameFr": "Calao",
+  "scientificName": "Buceros rhinoceros",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2478765,
+  "commonNameFr": "Toucan toco",
+  "scientificName": "Ramphastos toco",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2479505,
+  "commonNameFr": "Perruche élégante",
+  "scientificName": "Neophema elegans",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2479694,
+  "commonNameFr": "Lori de Swainson",
+  "scientificName": "Trichoglossus moluccanus",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2479870,
+  "commonNameFr": "Cacatoès blanc",
+  "scientificName": "Cacatua alba",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2479888,
+  "commonNameFr": "Cacatoès à huppe jaune",
+  "scientificName": "Cacatua galerita",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ }
+]

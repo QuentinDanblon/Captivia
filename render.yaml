@@ -1,0 +1,100 @@
+# Render Blueprint — API NestJS Captivia (offre gratuite, région Francfort).
+# Création : Render Dashboard → New → Blueprint → ce dépôt. Voir docs/DEPLOY.md.
+#
+# Pipeline à build automatique (DEP-01) : le service est relié à GitHub et se
+# redéploie tout seul après un push sur la branche principale.
+#   autoDeployTrigger: checksPass → Render attend que TOUS les checks GitHub du
+#   commit soient verts (tests, build, et le job « migrate-production » de
+#   .github/workflows/ci.yml qui applique les migrations Prisma sur Neon), puis
+#   déploie. (Valeurs possibles : off | commit | checksPass ; ce champ remplace
+#   l'ancien booléen autoDeploy, déprécié.)
+#   Les anciens Deploy Hooks ne sont plus utilisés.
+services:
+  - type: web
+    name: captivia-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    rootDir: backend
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      # URL « pooled » Neon (host « -pooler ») à saisir dans le Dashboard :
+      #   postgresql://USER:PASS@ep-xxx-pooler.eu-central-1.aws.neon.tech/captivia?sslmode=require&pgbouncer=true&connect_timeout=15
+      # (les migrations, elles, utilisent l'URL directe via le secret GitHub NEON_DATABASE_URL_DIRECT).
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      # Origines autorisées (CORS) et URL publique du site. À ajuster si le nom du site
+      # Netlify diffère de « captivia ». Obligatoires en production (voir docs/DEPLOY.md).
+      # Apps mobiles Capacitor (vague 6, docs/MOBILE.md) : ajouter les origines de la WebView,
+      #   https://captivia-app.netlify.app,capacitor://localhost,https://localhost
+      # (capacitor://localhost = iOS, https://localhost = Android).
+      - key: CORS_ORIGIN
+        value: https://captivia-app.netlify.app
+      - key: FRONTEND_URL
+        value: https://captivia-app.netlify.app
+      # URL publique du site web, utilisée pour les liens des e-mails et des pages publiques.
+      - key: PUBLIC_WEB_URL
+        value: https://captivia-app.netlify.app
+      - key: TRUST_PROXY
+        value: "true"
+      - key: CACHE_TYPE
+        value: memory
+      - key: REDIS_ENABLED
+        value: "false"
+      - key: LOG_LEVEL
+        value: info
+      # Facultatifs — à renseigner dans le Dashboard quand disponibles.
+      - key: SENTRY_DSN
+        sync: false
+      # Web Push (W3-03) : `npm run vapid:generate` (backend/) génère la paire de clés.
+      # Sans clés, le push est désactivé (no-op journalisé). La clé publique est servie au
+      # navigateur par GET /notifications/vapid-public-key (pas de variable côté Netlify).
+      - key: VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_SUBJECT
+        sync: false
+      # Achats intégrés (W6-08, docs/PAYMENTS.md) : IAP_ENABLED=true rend
+      # REVENUECAT_WEBHOOK_SECRET obligatoire (≥ 32 caractères) au démarrage.
+      - key: IAP_ENABLED
+        sync: false
+      - key: REVENUECAT_WEBHOOK_SECRET
+        sync: false
+      - key: REVENUECAT_ENTITLEMENT_ID
+        sync: false
+      - key: GOOGLE_PLAY_PACKAGE_NAME
+        sync: false
+      # Mode invité : jours d'inactivité avant purge d'un invité non converti (défaut 90,
+      # docs/RUNBOOK.md). Laisser vide pour garder le défaut.
+      - key: GUEST_RETENTION_DAYS
+        sync: false
+      - key: SENTRY_TRACES_SAMPLE_RATE
+        sync: false
+      - key: MAIL_HOST
+        sync: false
+      - key: MAIL_PORT
+        sync: false
+      - key: MAIL_SECURE
+        sync: false
+      - key: MAIL_USER
+        sync: false
+      - key: MAIL_PASS
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      - key: REMINDERS_ENABLED
+        sync: false
+      # Les opérateurs ne sont plus définis par variable d'environnement (W0-01) :
+      # promouvoir un compte existant depuis un poste de dev :
+      #   cd backend && DATABASE_URL=<URL Neon directe> npm run operator:set -- <email>
+      # (l'image runtime ne contient ni ts-node ni scripts/, donc pas depuis Render Shell).

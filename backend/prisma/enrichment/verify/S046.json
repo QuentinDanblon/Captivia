@@ -1,0 +1,30 @@
+[
+  {
+    "speciesId": 5345021,
+    "checked": ["health", "reproduction"],
+    "corrected": [],
+    "removed": [],
+    "confidence": "medium",
+    "notes": "Reproduction entièrement confirmée (fr.wikipedia Agapornis roseicollis : saison février à octobre, 4 à 6 œufs, incubation 22-23 jours, envol 45 jours, maturité 9-11 mois femelle / 11-13 mois mâle). La page ne cite aucune maladie ; vitamine A, psittacose et aspergillose sont des affections courantes des psittacidés (conseils génériques conservés)."
+  },
+  {
+    "speciesId": 5345889,
+    "checked": ["reproduction"],
+    "corrected": [],
+    "removed": [],
+    "confidence": "high",
+    "notes": "Tout confirmé (fr.wikipedia Psittacus erithacus : mars-avril, 2-3 œufs, incubation 29-33 jours, 38,3 x 31,3 mm, envol 147 jours, succès 65-70 %, couples pour la vie)."
+  },
+  {
+    "speciesId": 5347189,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.season: « toute l'année (déclenchée par pluie en nature) » → « déclenchée par la pluie à l'état sauvage » (« toute l'année » non confirmé)",
+      "reproduction.notes: phrase non sourcée sur l'élevage en captivité remplacée par « les parents continuent à nourrir les jeunes environ un mois après l'envol » (source)",
+      "health: « 2 heures minimum d'interaction quotidienne » → « interaction quotidienne régulière » (chiffre non confirmé)"
+    ],
+    "removed": [],
+    "confidence": "medium",
+    "notes": "Ponte 2-7 œufs, incubation 18-22 jours, mâle le jour / femelle la nuit confirmés. Carences alimentaires (régime graines) et troubles comportementaux confirmés par la page ; aspergillose non citée mais courante chez les psittacidés (conservée)."
+  }
+]

@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2402307,
+  "commonNameFr": "Poisson-papillon",
+  "scientificName": "Pantodon buchholzi",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2422905,
+  "commonNameFr": "Crapaud de Fowler",
+  "scientificName": "Anaxyrus fowleri",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2424454,
+  "commonNameFr": "Grenouille cornue",
+  "scientificName": "Ceratophrys ornata",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2431776,
+  "commonNameFr": "Salamandre tachetée",
+  "scientificName": "Salamandra salamandra",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2431886,
+  "commonNameFr": "Triton marbré",
+  "scientificName": "Triturus marmoratus",
+  "category": "amphibien",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2433573,
+  "commonNameFr": "Kinkajou",
+  "scientificName": "Potos flavus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

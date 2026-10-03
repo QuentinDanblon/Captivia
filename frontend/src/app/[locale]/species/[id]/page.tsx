@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { api, type SpeciesReproduction } from '@/lib/api';
+import { countryName } from '@/lib/country';
 import { useAuth } from '@/contexts/AuthContext';
 import * as Tabs from '@radix-ui/react-tabs';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link } from '@/i18n/navigation';
+import { useRouter } from '@/i18n/navigation';
 
 interface Disease {
   name: string;
@@ -74,7 +75,79 @@ interface FoodProduct {
   image_url?: string;
   brands?: string;
   categories?: string;
-  nutriments?: Record<string, any>;
+  nutriments?: Record<string, unknown>;
+}
+
+interface SpeciesFoodEntry {
+  name?: string;
+  frequency?: string;
+  notes?: string;
+  reason?: string;
+}
+
+/** Vrai pour une URL Wikipédia (http/https) : seules ces sources exigent l'attribution CC BY-SA. */
+function isWikipediaUrl(url?: string | null): boolean {
+  if (!url) return false;
+  try {
+    const u = new URL(url);
+    return (u.protocol === 'https:' || u.protocol === 'http:') && /(^|\.)wikipedia\.org$/.test(u.hostname);
+  } catch {
+    return false;
+  }
+}
+
+/** Les speciesId ≥ 2 000 000 001 sont des races artificielles, absentes de GBIF. */
+function isGbifKey(speciesId?: number): boolean {
+  return typeof speciesId === 'number' && speciesId > 0 && speciesId < 2_000_000_001;
+}
+
+/** Fiche espèce telle que renvoyée par GET /species/:id (champs utilisés par cette page) */
+interface SpeciesData {
+  scientificName: string;
+  canonicalName?: string;
+  rank?: string;
+  iucnStatus?: string;
+  kingdom?: string;
+  phylum?: string;
+  class?: string;
+  order?: string;
+  family?: string;
+  genus?: string;
+  distribution?: string | string[];
+  biome?: string;
+  profile?: {
+    speciesId?: number;
+    sourceUrl?: string | null;
+    commonNameFr?: string;
+    scientificName?: string;
+    category?: string;
+    subcategory?: string;
+    domesticationType?: string;
+    description?: string;
+  };
+  habitat?: {
+    habitatType?: string;
+    temperature?: string;
+    humidity?: string;
+    spaceRequirements?: string;
+    lighting?: string;
+    enrichment?: string;
+  };
+  behavior?: {
+    generalBehavior?: string;
+    sociability?: string;
+    difficulty?: string;
+    compatibility?: string;
+  };
+  feeding?: {
+    dietType?: string;
+    mealFrequency?: string;
+    feedingFrequency?: string;
+    recommendedFoods?: SpeciesFoodEntry[] | string;
+    foodsToAvoid?: SpeciesFoodEntry[] | string;
+    avoidedFoods?: SpeciesFoodEntry[] | string;
+    specificNeeds?: string;
+  };
 }
 
 /** Returns a valid URL string for href, or '#' to avoid "The string did not match the expected pattern" */
@@ -101,23 +174,22 @@ interface StoreItem {
 
 function MagasinTabContent({ category }: { category?: string | null }) {
   const t = useTranslations();
-  const [stores, setStores] = useState<StoreItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Résultat chargé, associé à la catégorie demandée : `loading` est dérivé (pas de setState synchrone dans l'effet)
+  const [result, setResult] = useState<{ category: string | null; stores: StoreItem[] } | null>(null);
+  const requestedCategory = category ?? null;
+  const loading = result === null || result.category !== requestedCategory;
+  const stores = result?.stores ?? [];
 
   useEffect(() => {
     let cancelled = false;
-    setLoading(true);
     api
       .getAffiliateStores(category || undefined, undefined)
       .then((data) => {
         const list = Array.isArray(data) ? data : [];
-        if (!cancelled) setStores(list);
+        if (!cancelled) setResult({ category: category ?? null, stores: list });
       })
       .catch(() => {
-        if (!cancelled) setStores([]);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) setResult({ category: category ?? null, stores: [] });
       });
     return () => {
       cancelled = true;
@@ -134,7 +206,7 @@ function MagasinTabContent({ category }: { category?: string | null }) {
   if (stores.length === 0) {
     return (
       <p className="text-gray-500 dark:text-gray-400 italic">
-        Aucun magasin partenaire pour cette catégorie pour le moment. Consultez l’onglet Magasin depuis l’accueil.
+        {t('species.noPartnerStores')}
       </p>
     );
   }
@@ -155,7 +227,7 @@ function MagasinTabContent({ category }: { category?: string | null }) {
               <a
                 href={href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="sponsored noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline"
               >
                 {t('store.visitStore')}
@@ -177,13 +249,14 @@ export default function SpeciesDetailPage({
   params: Promise<{ locale: string; id: string }>;
 }) {
   const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
   const { user, token } = useAuth();
   const [resolvedParams, setResolvedParams] = useState<{
     locale: string;
     id: string;
   } | null>(null);
-  const [species, setSpecies] = useState<any>(null);
+  const [species, setSpecies] = useState<SpeciesData | null>(null);
   const [health, setHealth] = useState<HealthData | null>(null);
   const [legislation, setLegislation] = useState<LegislationData | null>(null);
   const [equipment, setEquipment] = useState<EquipmentData | null>(null);
@@ -216,7 +289,7 @@ export default function SpeciesDetailPage({
             api.getSpeciesReproduction(resolvedParams.id).catch(() => null),
           ]);
 
-        setSpecies(speciesData as any);
+        setSpecies(speciesData as SpeciesData);
         setHealth(healthData as HealthData | null);
         setLegislation(legislationData as LegislationData | null);
         setEquipment(equipmentData as EquipmentData | null);
@@ -304,6 +377,7 @@ export default function SpeciesDetailPage({
       router.push('/login');
       return;
     }
+    if (!species) return;
     // Navigate to mes-animaux with species pre-selected
     const speciesName = species.canonicalName || species.scientificName;
     router.push(`/mes-animaux?addSpecies=${resolvedParams?.id}&speciesName=${encodeURIComponent(speciesName)}`);
@@ -327,7 +401,7 @@ export default function SpeciesDetailPage({
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <p className="text-xl text-gray-600 dark:text-gray-300">
-            {t('species.notFound') || 'Species not found'}
+            {t('species.notFound')}
           </p>
           <Link
             href="/"
@@ -460,34 +534,34 @@ export default function SpeciesDetailPage({
             {species.profile && (
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
                 <h2 className="text-xl sm:text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-                  {t('species.identification')} / Profil
+                  {t('species.identification')} / {t('species.profileLabel')}
                 </h2>
                 <div className="grid md:grid-cols-2 gap-4">
                   {species.profile.commonNameFr && (
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Nom commun (FR):</span>{' '}
+                      <span className="text-gray-600 dark:text-gray-400">{t('species.commonNameFr')}</span>{' '}
                       <span className="font-semibold">{species.profile.commonNameFr}</span>
                     </div>
                   )}
                   <div>
-                    <span className="text-gray-600 dark:text-gray-400">Nom scientifique:</span>{' '}
+                    <span className="text-gray-600 dark:text-gray-400">{t('species.scientificName')} :</span>{' '}
                     <span className="font-semibold">{species.profile.scientificName}</span>
                   </div>
                   {species.profile.category && (
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Catégorie:</span>{' '}
+                      <span className="text-gray-600 dark:text-gray-400">{t('species.category')}</span>{' '}
                       <span className="font-semibold capitalize">{species.profile.category}</span>
                     </div>
                   )}
                   {species.profile.subcategory && (
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Sous-catégorie:</span>{' '}
+                      <span className="text-gray-600 dark:text-gray-400">{t('species.subcategory')}</span>{' '}
                       <span className="font-semibold">{species.profile.subcategory}</span>
                     </div>
                   )}
                   {species.profile.domesticationType && (
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Type de domestication:</span>{' '}
+                      <span className="text-gray-600 dark:text-gray-400">{t('species.domesticationType')}</span>{' '}
                       <span className="font-semibold capitalize">{species.profile.domesticationType}</span>
                     </div>
                   )}
@@ -495,9 +569,41 @@ export default function SpeciesDetailPage({
                 {species.profile.description && (
                   <div className="mt-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
                     <h3 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-2">
-                      Description
+                      {t('species.description')}
                     </h3>
                     <p className="text-gray-700 dark:text-gray-300">{species.profile.description}</p>
+                  </div>
+                )}
+                {/* Attributions (licences des données — W2-06) */}
+                {(isWikipediaUrl(species.profile.sourceUrl) || isGbifKey(species.profile.speciesId)) && (
+                  <div className="mt-3 space-y-1 text-xs text-gray-500 dark:text-gray-400">
+                    {isWikipediaUrl(species.profile.sourceUrl) && (
+                      <p>
+                        {t('attribution.wikipediaPrefix')}{' '}
+                        <a
+                          href={species.profile.sourceUrl as string}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline hover:text-emerald-600 dark:hover:text-emerald-400"
+                        >
+                          {t('attribution.wikipediaName')}
+                        </a>{' '}
+                        — {t('attribution.license')}
+                      </p>
+                    )}
+                    {isGbifKey(species.profile.speciesId) && (
+                      <p>
+                        {t('attribution.gbifPrefix')}{' '}
+                        <a
+                          href={`https://www.gbif.org/species/${species.profile.speciesId}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline hover:text-emerald-600 dark:hover:text-emerald-400"
+                        >
+                          {t('attribution.gbifName')}
+                        </a>
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
@@ -510,27 +616,27 @@ export default function SpeciesDetailPage({
               </h2>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">Kingdom:</span>{' '}
+                  <span className="text-gray-600 dark:text-gray-400">{t('species.kingdom')}</span>{' '}
                   <span className="font-semibold">{species.kingdom || '-'}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">Phylum:</span>{' '}
+                  <span className="text-gray-600 dark:text-gray-400">{t('species.phylum')}</span>{' '}
                   <span className="font-semibold">{species.phylum || '-'}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">Class:</span>{' '}
+                  <span className="text-gray-600 dark:text-gray-400">{t('species.class')}</span>{' '}
                   <span className="font-semibold">{species.class || '-'}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">Order:</span>{' '}
+                  <span className="text-gray-600 dark:text-gray-400">{t('species.order')}</span>{' '}
                   <span className="font-semibold">{species.order || '-'}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">Family:</span>{' '}
+                  <span className="text-gray-600 dark:text-gray-400">{t('species.family')}</span>{' '}
                   <span className="font-semibold">{species.family || '-'}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600 dark:text-gray-400">Genus:</span>{' '}
+                  <span className="text-gray-600 dark:text-gray-400">{t('species.genus')}</span>{' '}
                   <span className="font-semibold">{species.genus || '-'}</span>
                 </div>
               </div>
@@ -540,13 +646,13 @@ export default function SpeciesDetailPage({
             {species.habitat && (
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
                 <h2 className="text-xl sm:text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-                  Habitat éditorial
+                  {t('species.habitatEditorial')}
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {species.habitat.habitatType && (
                     <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
                       <h3 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-2">
-                        Type d'habitat
+                        {t('species.habitatType')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.habitat.habitatType}</p>
                     </div>
@@ -554,7 +660,7 @@ export default function SpeciesDetailPage({
                   {species.habitat.temperature && (
                     <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                       <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
-                        Température
+                        {t('species.temperature')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.habitat.temperature}</p>
                     </div>
@@ -562,7 +668,7 @@ export default function SpeciesDetailPage({
                   {species.habitat.humidity && (
                     <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                       <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
-                        Humidité
+                        {t('species.humidity')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.habitat.humidity}</p>
                     </div>
@@ -570,7 +676,7 @@ export default function SpeciesDetailPage({
                   {species.habitat.spaceRequirements && (
                     <div className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
                       <h3 className="font-semibold text-orange-800 dark:text-orange-200 mb-2">
-                        Espace requis
+                        {t('species.spaceRequirements')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.habitat.spaceRequirements}</p>
                     </div>
@@ -578,7 +684,7 @@ export default function SpeciesDetailPage({
                   {species.habitat.lighting && (
                     <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
                       <h3 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
-                        Éclairage
+                        {t('species.lighting')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.habitat.lighting}</p>
                     </div>
@@ -586,7 +692,7 @@ export default function SpeciesDetailPage({
                   {species.habitat.enrichment && (
                     <div className="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
                       <h3 className="font-semibold text-purple-800 dark:text-purple-200 mb-2">
-                        Enrichissement
+                        {t('species.enrichment')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.habitat.enrichment}</p>
                     </div>
@@ -599,13 +705,13 @@ export default function SpeciesDetailPage({
             {species.behavior && (
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
                 <h2 className="text-xl sm:text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-                  Comportement
+                  {t('species.behavior')}
                 </h2>
                 <div className="space-y-4">
                   {species.behavior.generalBehavior && (
                     <div className="p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg">
                       <h3 className="font-semibold text-indigo-800 dark:text-indigo-200 mb-2">
-                        Comportement général
+                        {t('species.generalBehavior')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.behavior.generalBehavior}</p>
                     </div>
@@ -613,7 +719,7 @@ export default function SpeciesDetailPage({
                   {species.behavior.sociability && (
                     <div className="p-4 bg-pink-50 dark:bg-pink-900/20 rounded-lg">
                       <h3 className="font-semibold text-pink-800 dark:text-pink-200 mb-2">
-                        Sociabilité
+                        {t('species.sociability')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.behavior.sociability}</p>
                     </div>
@@ -621,7 +727,7 @@ export default function SpeciesDetailPage({
                   {species.behavior.difficulty && (
                     <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
                       <h3 className="font-semibold text-red-800 dark:text-red-200 mb-2">
-                        Niveau de difficulté
+                        {t('species.difficultyLevel')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.behavior.difficulty}</p>
                     </div>
@@ -629,7 +735,7 @@ export default function SpeciesDetailPage({
                   {species.behavior.compatibility && (
                     <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
                       <h3 className="font-semibold text-green-800 dark:text-green-200 mb-2">
-                        Compatibilité
+                        {t('species.compatibility')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.behavior.compatibility}</p>
                     </div>
@@ -749,16 +855,16 @@ export default function SpeciesDetailPage({
                 )}
                 <div className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
                   <h3 className="font-semibold text-orange-800 dark:text-orange-200 mb-2">
-                    Biome
+                    {t('species.biome')}
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300">
-                    {species.biome || 'Tropical / Subtropical'}
+                    {species.biome || t('species.defaultBiome')}
                   </p>
                 </div>
               </div>
               {!species.habitat && !species.distribution && (
                 <p className="text-gray-500 dark:text-gray-400 italic">
-                  Donnees environnementales a completer
+                  {t('species.environmentDataMissing')}
                 </p>
               )}
             </div>
@@ -829,7 +935,7 @@ export default function SpeciesDetailPage({
                   {health.editorial?.sources && health.editorial.sources.length > 0 && (
                     <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
                       <h4 className="font-semibold text-gray-600 dark:text-gray-400 mb-2">
-                        Sources:
+                        {t('species.sources')} :
                       </h4>
                       <ul className="space-y-1">
                         {health.editorial.sources.map((source, idx) => {
@@ -918,7 +1024,7 @@ export default function SpeciesDetailPage({
                     <div key={item.country} className="border border-gray-200 dark:border-gray-600 rounded-xl p-4 sm:p-6 bg-gray-50/50 dark:bg-gray-700/30">
                       <div className="flex items-center gap-3 mb-4">
                         <h3 className="text-lg font-bold text-gray-800 dark:text-white">
-                          {item.country === 'FR' ? 'France' : item.country === 'US' ? 'États-Unis' : item.country === 'BE' ? 'Belgique' : item.country}
+                          {countryName(item.country, locale)}
                         </h3>
                         <span className={`px-3 py-1.5 rounded-full text-sm font-semibold ${getStatusColor(item.status)}`}>
                           {getStatusLabel(item.status)}
@@ -928,14 +1034,14 @@ export default function SpeciesDetailPage({
                       {item.details?.citesAppendix && (
                         <div className="p-3 bg-white dark:bg-gray-800 rounded-lg mb-3">
                           <h4 className="font-semibold text-gray-800 dark:text-white mb-1">{t('species.citesStatus')}</h4>
-                          <p className="text-gray-700 dark:text-gray-300">Annexe {item.details.citesAppendix}</p>
+                          <p className="text-gray-700 dark:text-gray-300">{t('species.annex', { value: item.details.citesAppendix })}</p>
                         </div>
                       )}
 
                       {item.details?.euAnnex && (
                         <div className="p-3 bg-white dark:bg-gray-800 rounded-lg mb-3">
                           <h4 className="font-semibold text-gray-800 dark:text-white mb-1">{t('species.euRegulation')}</h4>
-                          <p className="text-gray-700 dark:text-gray-300">Annexe {item.details.euAnnex}</p>
+                          <p className="text-gray-700 dark:text-gray-300">{t('species.annex', { value: item.details.euAnnex })}</p>
                         </div>
                       )}
 
@@ -963,7 +1069,7 @@ export default function SpeciesDetailPage({
 
                       {item.sources && item.sources.length > 0 && (
                         <div className="pt-3 border-t border-gray-200 dark:border-gray-600">
-                          <h4 className="font-semibold text-gray-600 dark:text-gray-400 mb-1 text-sm">Sources</h4>
+                          <h4 className="font-semibold text-gray-600 dark:text-gray-400 mb-1 text-sm">{t('species.sources')}</h4>
                           <ul className="space-y-0.5">
                             {item.sources.map((source, idx) => {
                               const srcHref = safeHref(source);
@@ -999,24 +1105,24 @@ export default function SpeciesDetailPage({
             {species.feeding && (
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6">
                 <h2 className="text-xl sm:text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-                  Alimentation adaptée à l&apos;espèce
+                  {t('species.feedingTitle')}
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
                   {species.feeding.dietType && (
                     <div className="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
                       <h3 className="font-semibold text-green-800 dark:text-green-200 mb-2">
-                        Type de régime
+                        {t('species.dietType')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">{species.feeding.dietType}</p>
                     </div>
                   )}
-                  {(species.feeding.mealFrequency || (species.feeding as any).feedingFrequency) && (
+                  {(species.feeding.mealFrequency || species.feeding.feedingFrequency) && (
                     <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                       <h3 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
-                        Fréquence des repas
+                        {t('species.mealFrequency')}
                       </h3>
                       <p className="text-gray-700 dark:text-gray-300">
-                        {species.feeding.mealFrequency || (species.feeding as any).feedingFrequency}
+                        {species.feeding.mealFrequency || species.feeding.feedingFrequency}
                       </p>
                     </div>
                   )}
@@ -1032,7 +1138,7 @@ export default function SpeciesDetailPage({
                   return (
                     <div className="mt-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
                       <h3 className="font-semibold text-emerald-800 dark:text-emerald-200 mb-2">
-                        Aliments recommandés
+                        {t('species.recommendedFoods')}
                       </h3>
                       <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
                         {list.map((s, i) => (
@@ -1043,7 +1149,7 @@ export default function SpeciesDetailPage({
                   );
                 })()}
                 {(() => {
-                  const avoid = species.feeding.foodsToAvoid ?? (species.feeding as any).avoidedFoods;
+                  const avoid = species.feeding.foodsToAvoid ?? species.feeding.avoidedFoods;
                   if (!avoid) return null;
                   const list = Array.isArray(avoid)
                     ? avoid.map((a: { name?: string; reason?: string }) =>
@@ -1053,7 +1159,7 @@ export default function SpeciesDetailPage({
                   return (
                     <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
                       <h3 className="font-semibold text-red-800 dark:text-red-200 mb-2">
-                        Aliments à éviter
+                        {t('species.foodsToAvoid')}
                       </h3>
                       <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
                         {list.map((s, i) => (
@@ -1066,7 +1172,7 @@ export default function SpeciesDetailPage({
                 {species.feeding.specificNeeds && (
                   <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
                     <h3 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
-                      Besoins spécifiques
+                      {t('species.specificNeeds')}
                     </h3>
                     <p className="text-gray-700 dark:text-gray-300">{species.feeding.specificNeeds}</p>
                   </div>
@@ -1091,7 +1197,7 @@ export default function SpeciesDetailPage({
                 <div className="p-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
                   <p className="text-sm text-amber-800 dark:text-amber-200">{foodError}</p>
                   <p className="text-xs text-amber-700 dark:text-amber-300 mt-2">
-                    Les recommandations ci-dessus (base de données espèce) restent la référence.
+                    {t('species.foodReferenceNote')}
                   </p>
                 </div>
               ) : food.length > 0 ? (
@@ -1109,7 +1215,7 @@ export default function SpeciesDetailPage({
                         />
                       )}
                       <h3 className="font-semibold text-gray-800 dark:text-white mb-1">
-                        {product.product_name || 'Produit sans nom'}
+                        {product.product_name || t('species.unnamedProduct')}
                       </h3>
                       {product.brands && (
                         <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -1186,7 +1292,7 @@ export default function SpeciesDetailPage({
               {/* Transparency link */}
               <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Les liens vers les produits peuvent etre des liens affilies.{' '}
+                  {t('store.productLinksNotice')}{' '}
                   <Link
                     href="/transparency"
                     className="text-emerald-600 hover:text-emerald-700"

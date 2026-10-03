@@ -1,0 +1,58 @@
+[
+  {
+    "speciesId": 2470729,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.specificNeeds: confirmé arthropodes/mollusques, dents émoussées (en.wikipedia)",
+      "habitat.minSpaceSize: 'min 1,2 m de long' (sous-dimensionné, espèce jusqu'à ~100 cm) -> enclos très spacieux",
+      "behavior.generalBehavior: 'chasse à l'affût' (non confirmé) -> terrestre, fouisseur, parfois buissons",
+      "health: 'reproduction quasi-impossible' -> 'très rare' (source); mortalité élevée en captivité confirmée",
+      "legislation.details: permits 'Arrêté 21/11/1997' + 'Permis de détention préfectoral' (non sourcés) -> documents CITES; CITES II confirmé",
+      "reproduction.notes: 'ponte souterraine' retiré; éclosion ~156-160 j confirmée"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (24/32) et humidityMin/Max (40/60) non confirmés",
+      "habitat.activityEnrichment: chiffre '20cm+' retiré",
+      "legislation.details.euAnnex: B (non confirmé)",
+      "reproduction.season: 'printemps-été' (non confirmé)",
+      "reproduction.litterSizeMin: 20 (non confirmé; source: jusqu'à 40 ou plus)",
+      "reproduction.sexualMaturityMonths: 24 (non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2470854,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: 'Charognes quotidienne, régime principalement charognard' -> faux (prédateur à l'affût); remplacé par régime des juvéniles (insectes, oiseaux, œufs, petits reptiles) (en.wikipedia)",
+      "feeding.specificNeeds: 'Ne peut pas être élevé en captivité' -> faux (134 spécimens au zoo de Surabaya) -> détenu uniquement en zoos, reproduction difficile",
+      "health: 'ne se reproduit pas en captivité' / 'détention prohibée' -> reproduction difficile, parthénogenèse possible, premiers captifs ~5 ans de survie",
+      "legislation.status: 'prohibited' -> 'permit_required' (source: CITES I, commerce international commercial interdit; aucune source n'interdit explicitement la détention en France); permits ['Aucun'] -> []; restrictions reformulées (UICN En danger)",
+      "reproduction.incubationDays: 240 -> 225 (source: 7-8 mois)",
+      "reproduction.sexualMaturityMonths: 48 -> 96 (source: 8-11 ans)",
+      "reproduction.notes: 'Non reproductible en captivité' -> reproduction difficile; ponte moyenne ~20 œufs, ponte en septembre"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (28/38) et humidityMin/Max (30/50) non confirmés",
+      "legislation.details.euAnnex: A (non confirmé)",
+      "reproduction.litterSizeMin/Max: 15/25 (source: moyenne 20) -> null"
+    ],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 2474162,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "behavior: 'postures d'accouplement élaborées' (non confirmé) retiré; ajout bains de poussière, relations monogames/polygames (en.wikipedia)",
+      "behavior.compatibilityWithChildren: 'Excellent pour enfants... docile' -> convient avec supervision",
+      "habitat.activityEnrichment: 'perchoir bas' (espèce terrestre) -> couvert végétal dense",
+      "legislation: source remplacée par la page FR (forme domestique C. japonica domesticus citée dans la loi française) ; statut 'allowed' conservé",
+      "reproduction: ajout source FR; litterSizeMin 8 (ponte de 8 œufs, FR), litterSizeMax -> null; notes: maturité '6-8 semaines' -> ponte dès ~40 jours; incubation 16-18 j (EN: 16,5)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (15/25) et humidityMin/Max (40/70) non confirmés",
+      "reproduction.litterSizeMax: 16 (non confirmé)"
+    ],
+    "confidence": "medium"
+  }
+]

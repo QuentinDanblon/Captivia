@@ -108,7 +108,9 @@ describe('EquipmentService', () => {
         mockPrismaService.recommendedEquipment.findMany,
       ).toHaveBeenCalledWith({
         where: { category: 'heating' },
-        orderBy: { order: 'asc' },
+        orderBy: [{ order: 'asc' }, { id: 'asc' }],
+        take: 100,
+        skip: 0,
       });
     });
 
@@ -122,7 +124,9 @@ describe('EquipmentService', () => {
         mockPrismaService.recommendedEquipment.findMany,
       ).toHaveBeenCalledWith({
         where: { size: 'small' },
-        orderBy: { order: 'asc' },
+        orderBy: [{ order: 'asc' }, { id: 'asc' }],
+        take: 100,
+        skip: 0,
       });
     });
 
@@ -138,7 +142,9 @@ describe('EquipmentService', () => {
         where: {
           OR: [{ speciesId: 123 }, { speciesId: null }],
         },
-        orderBy: { order: 'asc' },
+        orderBy: [{ order: 'asc' }, { id: 'asc' }],
+        take: 100,
+        skip: 0,
       });
     });
 

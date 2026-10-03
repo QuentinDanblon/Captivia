@@ -1,0 +1,37 @@
+[
+ {
+  "speciesId": 5289002,
+  "commonNameFr": "Souris blanche domestique",
+  "scientificName": "Mus musculus domesticus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5289010,
+  "commonNameFr": "Souris Sylvestre",
+  "scientificName": "Mus musculus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5289028,
+  "commonNameFr": "Gerbille",
+  "scientificName": "Meriones unguiculatus",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ }
+]

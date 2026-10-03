@@ -1,0 +1,282 @@
+[
+  {
+    "speciesId": 165504395,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Feuilles (ortie, laitue, épinard)",
+          "frequency": "quotidienne",
+          "notes": "Base de l'alimentation ; les jeunes montrent une préférence pour l'ortie (Urtica dioica). Varier les végétaux"
+        },
+        {
+          "name": "Fruits (pomme, poire, abricot)",
+          "frequency": "occasionnelle",
+          "notes": "Complément en vitamines et sucres"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Laitue iceberg",
+          "reason": "Trop d'eau, peu de nutriments"
+        },
+        {
+          "name": "Aliments salés ou sucrés industriels",
+          "reason": "Déséquilibre digestif"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Apport de calcium pour la coquille, aliments frais humides",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Roman_snail",
+          "title": "Helix pomatia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium spacieux. Habitat naturel : forêts, buissons et milieux anthropisés d'Europe centrale (jusqu'à 2 000 m d'altitude dans les Alpes)",
+      "lightNeeds": "Lumière indirecte",
+      "activityEnrichment": "Substrat profond pour fouir, plantes, cachettes humides",
+      "hygieneNotes": "Substrat maintenu humide, renouvellement régulier, nettoyage fréquent des gamelles",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Roman_snail",
+          "title": "Helix pomatia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Hermaphrodite. Capable de sceller sa coquille avec un épiphragme calcaire pendant l'estivation ou l'hibernation. Meurt souvent plus tôt que sa longévité potentielle (jusqu'à 20 ans) à cause de la sécheresse estivale et du gel hivernal",
+      "sociability": null,
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Sans danger, observation sous supervision",
+      "compatibilityWithOtherAnimals": "Compatible avec d'autres escargots",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Roman_snail",
+          "title": "Helix pomatia"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": "fin mai à juillet",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 40,
+      "litterSizeMax": 65,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Hermaphrodite. En Europe centrale, la reproduction commence fin mai ; les œufs sont pondus en juin-juillet par pontes de 40 à 65 œufs. Maturité atteinte après 2 à 5 ans. Longévité jusqu'à 20 ans (maximum 35 ans)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Roman_snail",
+          "title": "Helix pomatia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 165617687,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Poissons et écrevisses/crabes d'eau douce",
+          "frequency": "espacée (métabolisme très lent)",
+          "notes": "Proies aquatiques naturelles ; l'espèce consomme aussi vers, insectes, grenouilles et petits amphibiens"
+        },
+        {
+          "name": "Vers aquatiques",
+          "frequency": "occasionnelle",
+          "notes": "Complément"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop volumineuses",
+          "reason": "Difficulté à avaler"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Métabolisme très lent : peut rester des semaines sans manger. Prédateur opportuniste (crustacés, vers, insectes, grenouilles, poissons, petits mammifères)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_giant_salamander",
+          "title": "Japanese giant salamander"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Très grand bassin (animal entièrement aquatique pouvant atteindre 1,5 m). Habitat naturel : cours d'eau de montagne rapides à eau claire et fraîche",
+      "lightNeeds": "Lumière indirecte (espèce presque exclusivement nocturne). Eau fraîche essentielle",
+      "activityEnrichment": "Courant simulant une rivière, roches, cachettes",
+      "hygieneNotes": "Filtration excellente et eau bien oxygénée, changements d'eau réguliers",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_giant_salamander",
+          "title": "Japanese giant salamander"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Entièrement aquatique et presque exclusivement nocturne. Métabolisme très lent. Longévité très élevée (record en captivité : 52 ans). Peut sécréter une substance laiteuse à forte odeur quand il est menacé",
+      "sociability": null,
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non adapté : espèce très spécialisée, à observer uniquement",
+      "compatibilityWithOtherAnimals": "Prédateur opportuniste : ne pas cohabiter avec de petits animaux",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_giant_salamander",
+          "title": "Japanese giant salamander"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "I",
+        "euAnnex": null,
+        "permits": [
+          "Documents CITES (annexe I) pour tout commerce international"
+        ],
+        "restrictions": [
+          "Espèce inscrite à l'annexe I de la CITES : commerce international strictement encadré",
+          "Monument naturel spécial au Japon (protection maximale), statut UICN Vulnérable"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_giant_salamander",
+          "title": "Japanese giant salamander"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "fin août-début septembre",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare. Le mâle occupe le site de nidification, garde les œufs fécondés et les ventile avec de l'eau, puis assure des soins aux larves jusqu'au printemps suivant. Une femelle s'accouple souvent avec plusieurs mâles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Japanese_giant_salamander",
+          "title": "Japanese giant salamander"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 308455619,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Herbes naturelles et graminées",
+          "frequency": "quotidienne",
+          "notes": "Pâturage privilégié"
+        },
+        {
+          "name": "Céréales (orge, maïs), légumes (betteraves, navets)",
+          "frequency": "quotidienne",
+          "notes": "Complément alimentaire, notamment en hiver"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments moisis ou fermentés",
+          "reason": "Troubles digestifs"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Eau fraîche quotidienne, calcium pour les pondeuses. Pâturage extérieur idéal",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Domestic_goose",
+          "title": "Domestic goose"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Accès à un plan d'eau (mare, bassin) et à un pâturage, avec abri",
+      "lightNeeds": "Lumière naturelle",
+      "activityEnrichment": "Baignade, pâturage extensif, vie en groupe, nichoir au sol pour la nidification",
+      "hygieneNotes": "Eau renouvelée régulièrement, nettoyage régulier de l'abri, litière sèche",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Domestic_goose",
+          "title": "Domestic goose"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Très protectrice envers ses petits et les autres membres du groupe, bruyante, sensible aux mouvements inhabituels et au caractère très agressif : utilisée comme animal de garde. La plupart des races restent capables de voler",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Peut se montrer agressive et défensive : surveillance indispensable",
+      "compatibilityWithOtherAnimals": "Attention aux chiens et autres prédateurs",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Domestic_goose",
+          "title": "Domestic goose"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Une oie domestique peut pondre jusqu'à 100 œufs par an (contre 5 à 12 chez l'oie sauvage). Œufs de 120 à 170 g. Parents très protecteurs envers leurs petits",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Domestic_goose",
+          "title": "Domestic goose"
+        }
+      ]
+    }
+  }
+]

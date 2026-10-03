@@ -1,0 +1,59 @@
+[
+  {
+    "speciesId": 2476004,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.recommendedFoods[1]: 'termites, vers' -> insectes et petites proies (reptiles, rongeurs, petits oiseaux) (en.wikipedia)",
+      "behavior.sociability: 'grégaire' -> 'semi-grégaire' (source ne mentionne que des couples); 'Monogame... Agressif envers autres espèces' (non sourcé) -> vit en couple, cohabitation avec prudence",
+      "health.prevention: 'humidité 60-80%' -> 'contrôlée'",
+      "habitat.minSpaceSize: 'min 3x3x4m' (non sourcé) -> très grande volière",
+      "legislation: CITES II confirmé; 'protection stricte' (non sourcé) -> UICN Vulnérable (en.wikipedia)",
+      "reproduction.notes: ajout longévité jusqu'à 35 ans en captivité, mur de boue/nourriture/fèces"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (22/30) et humidityMin/Max (60/85) non confirmés",
+      "legislation.details.euAnnex: B (non confirmé)",
+      "reproduction.season (février-juin), incubationDays (40), litterSizeMin/Max (1/2), sexualMaturityMonths (48): aucun confirmé par la source",
+      "note: section health conservée comme conseils génériques (la source ne traite pas la santé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2478765,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "behavior.generalBehavior: 'activité crépusculaire/aurore' (non confirmé) -> moins actif en journée, repos dans la cime (en.wikipedia)",
+      "behavior.compatibilityWithOtherAnimals: 'peut cohabiter avec autres oiseaux' -> contredit (mange œufs et oisillons d'autres oiseaux) : cohabitation avec petits oiseaux déconseillée",
+      "health: ajout poux/protozoaires; 'humidité 50-75%' -> 'maîtrisée'",
+      "legislation.details.restrictions: 'Espèce protégée... prix $12.450+' -> CITES II commerce régulé",
+      "reproduction.notes: ajout régions/saisons (sept-fév; déc-juin Bolivie/Argentine), termitières, envol 43-52 j"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (18/28) et humidityMin/Max (50/75) non confirmés",
+      "habitat.minSpaceSize: dimensions '2,5x2,5x3m' retirées",
+      "legislation.details.euAnnex: B (non confirmé)",
+      "reproduction.sexualMaturityMonths: 36 (non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2479505,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation: 'allowed, non CITES' -> FAUX : 'permit_required', CITES Annexe II (fr.wikipedia Perruche_élégante); source remplacée par la page FR",
+      "feeding: source remplacée par la page FR (graines, principalement de graminées confirmé); 'fleurs et jeunes pousses essentiels reproduction' -> complément végétal saisonnier",
+      "behavior.generalBehavior: 'herbivores spécialisées' -> granivores; vit en couples ou petits groupes (FR)",
+      "behavior.difficultyLevel: 'expert' -> 'intermédiaire' ('not beginner's birds', source Neophema)",
+      "behavior.compatibilityWithOtherAnimals: reformulé (petit groupe avec petits oiseaux inoffensifs, risque de harcèlement)",
+      "habitat.hygieneNotes: 'eau 2x/jour' -> quotidien"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (10/28) et humidityMin/Max (40/70) non confirmés",
+      "habitat.minSpaceSize: dimensions '2x2x2m' retirées",
+      "reproduction.incubationDays: 18 (non confirmé)",
+      "reproduction.sexualMaturityMonths: 12 (non confirmé)",
+      "legislation.restrictions: 'endémique, non CITES' (faux)"
+    ],
+    "confidence": "medium"
+  }
+]

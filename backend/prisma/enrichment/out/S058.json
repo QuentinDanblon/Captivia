@@ -1,0 +1,402 @@
+[
+  {
+    "speciesId": 104044141,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Vers de terre, larves de chironomes, petits crustacés (daphnies)",
+          "frequency": null,
+          "notes": "Régime naturel : plancton, mollusques, larves d'insectes (chironomes), crustacés (daphnies, ostracodes, amphipodes) en phase aquatique"
+        },
+        {
+          "name": "Petits insectes, araignées, cloportes",
+          "frequency": null,
+          "notes": "Proies habituelles des adultes en phase terrestre"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes traités aux pesticides",
+          "reason": "Accumulation de toxines dans les tissus"
+        },
+        {
+          "name": "Aliments secs ou déshydratés",
+          "reason": "Les tritons se nourrissent de proies vivantes et hydratées"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Régime différent selon la phase (aquatique ou terrestre). Consomme aussi des œufs et des larves d'amphibiens, y compris de sa propre espèce : ne pas laisser cohabiter adultes et larves.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Alpine_newt",
+          "title": "Alpine newt - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Triton_alpestre",
+          "title": "Triton alpestre - Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycle jour-nuit naturel ; espèce surtout nocturne en phase terrestre",
+      "activityEnrichment": "Zone aquatique avec plantes (les femelles enveloppent leurs œufs dans les feuilles de plantes aquatiques) et zone terrestre avec cachettes et feuilles mortes",
+      "hygieneNotes": "Espèce de petits plans d'eau frais : eau fraîche et déchlorée, changements réguliers, éviter toute surchauffe",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Alpine_newt",
+          "title": "Alpine newt - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Espèce semi-aquatique : vit surtout à terre en milieu forestier et rejoint les petits plans d'eau frais pour se reproduire. Principalement nocturne en phase terrestre (se cache le jour). Les mâles effectuent des parades nuptiales élaborées (ventilation de la queue, phéromones) dans l'eau.",
+      "sociability": null,
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "À éviter pour enfants, manipulation minimale, espèce sensible",
+      "compatibilityWithOtherAnimals": "Mange les œufs et larves d'amphibiens, y compris ceux de sa propre espèce : ne pas faire cohabiter avec d'autres amphibiens ou leurs larves",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Alpine_newt",
+          "title": "Alpine newt - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Chytridiomycoses (Batrachochytrium dendrobatidis, B. salamandrivorans)",
+          "symptoms": "Lésions cutanées blanches ou grises, peau endommagée",
+          "prevention": "Eau de qualité, quarantaine des nouveaux individus, aucun contact avec des amphibiens sauvages ou inconnus",
+          "whenToConsult": "À l'apparition de toute anomalie cutanée"
+        },
+        {
+          "name": "Infection bactérienne",
+          "symptoms": "Gonflement, rougeur, comportement anormal",
+          "prevention": "Hygiène rigoureuse, eau propre, filtration efficace",
+          "whenToConsult": "Immédiatement si signes d'infection"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Perte d'appétit, amaigrissement, comportement léthargique",
+          "prevention": "Alimentation variée, quarantaine, hygiène habitat",
+          "whenToConsult": "Dès signes de perte de poids persistante"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Alpine_newt",
+          "title": "Alpine newt - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce protégée en France (arrêté du 19 novembre 2007) : il est interdit de capturer les individus, de les déplacer, de les mutiler ou de détruire leurs œufs. Ne jamais prélever d'individu dans la nature ; se renseigner auprès de la DDPP avant toute détention."]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Triton_alpestre",
+          "title": "Triton alpestre - Wikipédia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "de février à août (de la fonte des neiges à l'été)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 70,
+      "litterSizeMax": 390,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "modere",
+      "notes": "70 à 390 œufs par femelle et par an, pondus un à un et enveloppés dans des feuilles de plantes aquatiques. Développement des œufs de quelques semaines selon la température. Larves métamorphosées après environ 3 mois. Maturité sexuelle vers 3 ans pour les mâles, 4-5 ans pour les femelles (populations de plaine).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Alpine_newt",
+          "title": "Alpine newt - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104048045,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Gommes, sève, latex et résines végétales",
+          "frequency": null,
+          "notes": "Base de l'alimentation à l'état naturel (20 à 70 % du temps passé à s'alimenter)"
+        },
+        {
+          "name": "Insectes, fruits, graines, fleurs",
+          "frequency": null,
+          "notes": "Les insectes représentent 24 à 30 % de l'alimentation à l'état naturel ; petits vertébrés et œufs occasionnels"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments à base de chocolat ou caféine",
+          "reason": "Toxiques pour les primates"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Régime très spécialisé en gommivore : accès régulier à des gommes/sève ou à des équivalents adaptés, alimentation variée. Un suivi vétérinaire de la supplémentation en calcium et vitamines est recommandé en captivité.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_marmoset",
+          "title": "Common marmoset - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle régulière ; originaire des forêts côtières du nord-est du Brésil",
+      "activityEnrichment": "Arbres, lianes, branches variées, jouets à explorer, nids artificiels",
+      "hygieneNotes": "Nettoyage régulier des aires, eau fraîche quotidienne",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_marmoset",
+          "title": "Common marmoset - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Primates arboricoles vivant en familles élargies stables, en moyenne 9 individus (jusqu'à 15), dans lesquelles seuls quelques membres se reproduisent. Communication vocale riche, notamment des « phees » (sifflements) qui servent à garder le groupe uni, attirer des partenaires, défendre le territoire et retrouver un congénère égaré.",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Nécessite une surveillance très rapprochée : devenus adultes, ils sont difficiles à contrôler et peuvent mordre ou griffer",
+      "compatibilityWithOtherAnimals": "Vivent en groupes familiaux stables ; cohabitation avec d'autres espèces déconseillée",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_marmoset",
+          "title": "Common marmoset - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Carences nutritionnelles (calcium, vitamines)",
+          "symptoms": "Faiblesse osseuse, ostéoporose, paralysie, tremblements",
+          "prevention": "Supplémentation régulière en calcium et vitamine D3, UVB exposition",
+          "whenToConsult": "Dès signes de faiblesse motrice"
+        },
+        {
+          "name": "Maladie parodontale",
+          "symptoms": "Perte de dents, inflammation des gencives, mauvaise haleine",
+          "prevention": "Alimentation appropriée, hygiène bucco-dentaire, aliments naturels",
+          "whenToConsult": "Immédiatement si signes de problèmes dentaires"
+        },
+        {
+          "name": "Parasites intestinaux",
+          "symptoms": "Diarrhée, malabsorption, perte de poids",
+          "prevention": "Hygiène, aliments frais, quarantaine des nouveaux individus",
+          "whenToConsult": "À tout signe de troubles digestifs"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_marmoset",
+          "title": "Common marmoset - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce non domestique inscrite en annexe II de la CITES : la détention est encadrée en France, se renseigner auprès de la DDPP avant toute acquisition"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Ouistiti_commun",
+          "title": "Ouistiti commun - Wikipédia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 150,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 15,
+      "breedingDifficulty": "avance",
+      "notes": "Gestation d'environ 5 mois ; portée habituelle de jumeaux non identiques, avec un intervalle d'environ 5 mois entre naissances (jusqu'à deux fois par an). Maturité sexuelle vers 15 mois, mais un individu ne peut se reproduire que s'il devient dominant. Le couple reproducteur supprime comportementalement et physiologiquement la reproduction des autres membres ; toute la famille participe aux soins des jumeaux.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_marmoset",
+          "title": "Common marmoset - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104052770,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Graines, cônes et noix",
+          "frequency": null,
+          "notes": "Régime naturel : feuilles, graines, cônes, bourgeons, pousses, noix et baies"
+        },
+        {
+          "name": "Bourgeons, pousses, jeunes feuilles, baies",
+          "frequency": null,
+          "notes": "Variété saisonnière"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Noix ou graines traitées",
+          "reason": "Risque d'intoxication, accumulation de pesticides"
+        },
+        {
+          "name": "Bois traité chimiquement",
+          "reason": "Toxines potentiellement mortelles"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Régime naturel à base de matières végétales variées (feuilles, graines, cônes, bourgeons, pousses, noix, baies) ; ne proposer que des aliments non traités.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Siberian_flying_squirrel",
+          "title": "Siberian flying squirrel - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycle naturel jour-nuit",
+      "activityEnrichment": "Arbres hauts, zones de glisse, branches pour nidification, bois de ronger",
+      "hygieneNotes": "Espèce des forêts boréales (notamment forêts anciennes d'épicéas) : habitat forestier naturel, eau fraîche",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Siberian_flying_squirrel",
+          "title": "Siberian flying squirrel - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Écureuil arboricole des forêts boréales, doté d'un patagium (membrane de peau entre les pattes avant et arrière) lui permettant de planer sur plus de 100 mètres.",
+      "sociability": null,
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé, espèce fragile et stressée par les manipulations",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Siberian_flying_squirrel",
+          "title": "Siberian flying squirrel - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Carence en vitamines (A, D)",
+          "symptoms": "Problèmes oculaires, faiblesse osseuse, perte de poids",
+          "prevention": "Régime varié en graines et plantes",
+          "whenToConsult": "À l'apparition de troubles visuels ou moteurs"
+        },
+        {
+          "name": "Parasites externes (puces, acariens)",
+          "symptoms": "Grattage excessif, perte de fourrure, irritation",
+          "prevention": "Habitat propre, nettoyage régulier, absence de contact avec animaux malades",
+          "whenToConsult": "Dès signes de grattage anormal"
+        },
+        {
+          "name": "Fractures ou blessures lors des vols planés",
+          "symptoms": "Immobilité, gonflement, boiterie",
+          "prevention": "Habitat sans obstacles tranchants, espace de vol dégagé",
+          "whenToConsult": "Immédiatement en cas d'immobilité"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Siberian_flying_squirrel",
+          "title": "Siberian flying squirrel - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Espèce protégée par la directive européenne « Habitats » de 1992 : ne jamais prélever d'individu dans la nature ; se renseigner auprès de la DDPP avant toute détention"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Siberian_flying_squirrel",
+          "title": "Siberian flying squirrel - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "printemps",
+      "gestationDays": 35,
+      "incubationDays": null,
+      "litterSizeMin": 2,
+      "litterSizeMax": 3,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Accouplement au début du printemps (dans le sud de la Finlande : une première saison fin mars, une seconde en avril). Gestation de cinq semaines ; portée de deux ou trois jeunes pesant environ 5 g chacun.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Siberian_flying_squirrel",
+          "title": "Siberian flying squirrel - Wikipedia"
+        }
+      ]
+    }
+  }
+]

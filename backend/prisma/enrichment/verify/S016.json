@@ -1,0 +1,53 @@
+[
+  {
+    "speciesId": 2440891,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: 'céréales 2-3 kg par jour' retiré (dangereux : laminite) ; grains à éviter",
+      "habitat.hygieneNotes: parage ~8 semaines (NSW) au lieu de 6-8 ; vermifugation 3-6 mois",
+      "health.parasitisme: fréquence de vermifugation 2-4/an -> tous les 3 à 6 mois, coprologie ~3 mois (Open Sanctuary, NSW)",
+      "behavior.compatibilityWithChildren: 'excellent, idéal' -> nuancé"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/minSpaceSize (non confirmables)",
+      "reproduction entière (gestation 390 j, maturité 42 mois, saison: non confirmés ; source IVIS non vérifiée) -> null",
+      "sources non vérifiées/injoignables: universalis.fr, ivis.org (x2), ontario.ca, assemblee-nationale.fr, actu-juridique.fr"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2440954,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.notes: 'L'ânesse (femelle)' (erreur de copie) -> biche ; rut octobre-novembre / fin septembre-début novembre",
+      "reproduction.sexualMaturityMonths: 18 conservé (Futura : 18-30 mois) ; naissances mai-juillet (Wikipédia)",
+      "behavior: hardes d'une dizaine d'individus, jusqu'à ~50 en hiver (Wikipédia, Futura)",
+      "health: ajout Elaphostrongylus et Dictyocaulus (UHI)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "legislation entière (statut France non confirmé : Wikipédia dit 'espèce chassable à caractère envahissant', pas de statut de détention ; arrêté 1997 non vérifié) -> null",
+      "sources non vérifiées/injoignables: parcsaintecroix.com, techno-science.net, mnhn.fr, environnement.public.lu, vdu.lt (x2), mdpi.com (403), legifrance.gouv.fr (page d'accueil)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2441108,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.gestationDays: 240 -> 255 (Wikipédia : 8,5 mois ; ADW 7,5-8,5 ; Futura 8-9)",
+      "reproduction.season: juin-juillet -> juillet à septembre (Wikipédia ; ADW fin août-septembre)",
+      "reproduction.notes: veau 1 fois tous les 2 ans, maturité F 3-4 ans / M 5-6 ans (Wikipédia)",
+      "behavior: hardes d'été ~12, d'hiver 60-70 (Futura)"
+    ],
+    "removed": [
+      "health entière (maladie 'influenza équine' invraisemblable ; aucune source valide sur la santé) -> null",
+      "legislation entière (statut non confirmé) -> null",
+      "habitat.tempMin/tempMax/minSpaceSize (non confirmables)",
+      "behavior: poids 300-500 kg (non confirmé)",
+      "reproduction.notes: naissances avril-mai, pelage fin (non confirmés)",
+      "sources non vérifiées/injoignables: universalis.fr, hww.ca PDF (illisible), quebec.ca"
+    ],
+    "confidence": "medium"
+  }
+]

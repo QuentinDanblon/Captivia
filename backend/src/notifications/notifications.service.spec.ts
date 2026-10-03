@@ -1,6 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { NotificationsService } from './notifications.service';
+import { BadRequestException, ForbiddenException } from '@nestjs/common';
+import {
+  MAX_PUSH_SUBSCRIPTIONS_PER_USER,
+  NotificationsService,
+} from './notifications.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { WebPushSender } from './push-sender';
 
 describe('NotificationsService', () => {
   let service: NotificationsService;
@@ -10,7 +15,7 @@ describe('NotificationsService', () => {
   const mockSubscription = {
     id: 'sub-id-456',
     userId: mockUserId,
-    endpoint: 'https://push.example.com/endpoint',
+    endpoint: 'https://fcm.googleapis.com/fcm/send/endpoint',
     keys: {
       p256dh: 'test-key',
       auth: 'test-auth',
@@ -38,17 +43,25 @@ describe('NotificationsService', () => {
 
   const mockPrismaService = {
     pushSubscription: {
-      upsert: jest.fn(),
+      findUnique: jest.fn(),
+      create: jest.fn(),
+      update: jest.fn(),
       findFirst: jest.fn(),
       findMany: jest.fn(),
       delete: jest.fn(),
+      deleteMany: jest.fn(),
     },
     notificationPreference: {
       findUnique: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
     },
+    // Verrou User (SELECT … FOR UPDATE) + transaction interactive : le callback reçoit le mock.
+    $queryRaw: jest.fn(),
+    $transaction: jest.fn(),
   };
+
+  const mockPushSender = { deliver: jest.fn() };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -58,6 +71,7 @@ describe('NotificationsService', () => {
           provide: PrismaService,
           useValue: mockPrismaService,
         },
+        { provide: WebPushSender, useValue: mockPushSender },
       ],
     }).compile();
 
@@ -65,6 +79,11 @@ describe('NotificationsService', () => {
     prismaService = module.get<PrismaService>(PrismaService);
 
     jest.clearAllMocks();
+    mockPrismaService.$queryRaw.mockResolvedValue([{ '?column?': 1 }]);
+    mockPrismaService.pushSubscription.findMany.mockResolvedValue([]);
+    mockPrismaService.$transaction.mockImplementation(
+      (fn: (tx: typeof mockPrismaService) => unknown) => fn(mockPrismaService),
+    );
   });
 
   it('should be defined', () => {
@@ -72,33 +91,121 @@ describe('NotificationsService', () => {
   });
 
   describe('subscribeToPush', () => {
-    it('should create or update push subscription', async () => {
-      const subscriptionData = {
-        endpoint: 'https://push.example.com/endpoint',
-        keys: {
-          p256dh: 'test-key',
-          auth: 'test-auth',
-        },
-      };
+    const subscriptionData = {
+      endpoint: 'https://fcm.googleapis.com/fcm/send/endpoint',
+      keys: {
+        p256dh: 'test-key',
+        auth: 'test-auth',
+      },
+    };
 
-      mockPrismaService.pushSubscription.upsert.mockResolvedValue(
+    it('should create a new push subscription', async () => {
+      mockPrismaService.pushSubscription.findUnique.mockResolvedValue(null);
+      mockPrismaService.pushSubscription.create.mockResolvedValue(
         mockSubscription,
       );
 
-      const result = await service.subscribeToPush(mockUserId, subscriptionData);
+      const result = await service.subscribeToPush(
+        mockUserId,
+        subscriptionData,
+      );
 
       expect(result).toEqual(mockSubscription);
-      expect(mockPrismaService.pushSubscription.upsert).toHaveBeenCalledWith({
-        where: { endpoint: subscriptionData.endpoint },
-        create: {
+      expect(mockPrismaService.pushSubscription.create).toHaveBeenCalledWith({
+        data: {
           userId: mockUserId,
           endpoint: subscriptionData.endpoint,
           keys: subscriptionData.keys,
         },
-        update: {
-          keys: subscriptionData.keys,
-        },
       });
+    });
+
+    it('should update the keys of the owner own subscription', async () => {
+      mockPrismaService.pushSubscription.findUnique.mockResolvedValue(
+        mockSubscription,
+      );
+      mockPrismaService.pushSubscription.update.mockResolvedValue(
+        mockSubscription,
+      );
+
+      await service.subscribeToPush(mockUserId, subscriptionData);
+
+      expect(mockPrismaService.pushSubscription.update).toHaveBeenCalledWith({
+        where: { id: mockSubscription.id },
+        data: { keys: subscriptionData.keys },
+      });
+      expect(mockPrismaService.pushSubscription.create).not.toHaveBeenCalled();
+    });
+
+    it('should refuse (403) an endpoint that belongs to another user', async () => {
+      mockPrismaService.pushSubscription.findUnique.mockResolvedValue({
+        ...mockSubscription,
+        userId: 'someone-else',
+      });
+
+      await expect(
+        service.subscribeToPush(mockUserId, subscriptionData),
+      ).rejects.toThrow(ForbiddenException);
+      expect(mockPrismaService.pushSubscription.update).not.toHaveBeenCalled();
+      expect(mockPrismaService.pushSubscription.create).not.toHaveBeenCalled();
+    });
+
+    it('should refuse (403) when a concurrent creation by another user wins', async () => {
+      mockPrismaService.pushSubscription.findUnique
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce({ ...mockSubscription, userId: 'someone-else' });
+      mockPrismaService.pushSubscription.create.mockRejectedValue({
+        code: 'P2002',
+      });
+
+      await expect(
+        service.subscribeToPush(mockUserId, subscriptionData),
+      ).rejects.toThrow(ForbiddenException);
+      expect(mockPrismaService.pushSubscription.update).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      'https://127.0.0.1:8443/internal',
+      'https://169.254.169.254/latest/meta-data',
+      'https://push.example.com/endpoint',
+      'https://fcm.googleapis.com:8443/fcm/send/x',
+      'http://fcm.googleapis.com/fcm/send/x',
+    ])(
+      'refuses (400) a non-allowed push endpoint, without touching the DB: %s',
+      async (endpoint) => {
+        await expect(
+          service.subscribeToPush(mockUserId, {
+            ...subscriptionData,
+            endpoint,
+          }),
+        ).rejects.toThrow(BadRequestException);
+        expect(mockPrismaService.$transaction).not.toHaveBeenCalled();
+        expect(
+          mockPrismaService.pushSubscription.create,
+        ).not.toHaveBeenCalled();
+      },
+    );
+
+    it(`caps subscriptions at ${MAX_PUSH_SUBSCRIPTIONS_PER_USER} per user: the oldest are replaced`, async () => {
+      mockPrismaService.pushSubscription.findUnique.mockResolvedValue(null);
+      mockPrismaService.pushSubscription.findMany.mockResolvedValue(
+        Array.from({ length: MAX_PUSH_SUBSCRIPTIONS_PER_USER + 1 }, (_, i) => ({
+          id: `old-${i}`,
+        })),
+      );
+      mockPrismaService.pushSubscription.create.mockResolvedValue(
+        mockSubscription,
+      );
+
+      await service.subscribeToPush(mockUserId, subscriptionData);
+
+      expect(mockPrismaService.$queryRaw).toHaveBeenCalled(); // verrou User
+      expect(
+        mockPrismaService.pushSubscription.deleteMany,
+      ).toHaveBeenCalledWith({
+        where: { id: { in: ['old-0', 'old-1'] } },
+      });
+      expect(mockPrismaService.pushSubscription.create).toHaveBeenCalled();
     });
   });
 
@@ -152,40 +259,46 @@ describe('NotificationsService', () => {
   });
 
   describe('sendNotification', () => {
-    it('should send notification to all user subscriptions', async () => {
-      mockPrismaService.pushSubscription.findMany.mockResolvedValue([
-        mockSubscription,
-      ]);
-
-      const payload = {
-        title: 'Test Notification',
-        body: 'Test message',
-      };
+    it('delegates to the push sender and only reports whether one send succeeded (no oracle)', async () => {
+      mockPushSender.deliver.mockResolvedValue({
+        sent: 2,
+        failed: 1,
+        removed: 1,
+      });
+      const payload = { title: 'Test Notification', body: 'Test message' };
 
       const result = await service.sendNotification(mockUserId, payload);
 
-      expect(result).toEqual({
-        sent: 1,
-        failed: 0,
-      });
+      expect(mockPushSender.deliver).toHaveBeenCalledWith(mockUserId, payload);
+      expect(result).toEqual({ sent: true });
     });
 
-    it('should handle multiple subscriptions', async () => {
-      mockPrismaService.pushSubscription.findMany.mockResolvedValue([
-        mockSubscription,
-        { ...mockSubscription, id: 'sub-2' },
-        { ...mockSubscription, id: 'sub-3' },
-      ]);
+    it('hides failures and purges behind a single false', async () => {
+      mockPushSender.deliver.mockResolvedValue({
+        sent: 0,
+        failed: 3,
+        removed: 2,
+      });
+      const result = await service.sendNotification(mockUserId, {
+        title: 'T',
+        body: 'B',
+      });
+      expect(result).toEqual({ sent: false });
+    });
 
-      const payload = {
-        title: 'Test',
-        body: 'Message',
-      };
+    it('reports nothing sent when push is disabled', async () => {
+      mockPushSender.deliver.mockResolvedValue({
+        sent: 0,
+        failed: 0,
+        removed: 0,
+      });
 
-      const result = await service.sendNotification(mockUserId, payload);
+      const result = await service.sendNotification(mockUserId, {
+        title: 'T',
+        body: 'B',
+      });
 
-      expect(result.sent).toEqual(3);
-      expect(result.failed).toEqual(0);
+      expect(result).toEqual({ sent: false });
     });
   });
 
@@ -211,25 +324,25 @@ describe('NotificationsService', () => {
       const result = await service.getNotificationPreferences(mockUserId);
 
       expect(result).toEqual(mockPreferences);
-      expect(mockPrismaService.notificationPreference.create).toHaveBeenCalledWith(
-        {
-          data: {
-            userId: mockUserId,
-            types: {
-              nourrissage: true,
-              nettoyage: true,
-              uvb: true,
-              sante: true,
-            },
-            schedule: {
-              start: '08:00',
-              end: '22:00',
-            },
-            snooze: 15,
-            deliveryChannel: 'push',
+      expect(
+        mockPrismaService.notificationPreference.create,
+      ).toHaveBeenCalledWith({
+        data: {
+          userId: mockUserId,
+          types: {
+            nourrissage: true,
+            nettoyage: true,
+            uvb: true,
+            sante: true,
           },
+          schedule: {
+            start: '08:00',
+            end: '22:00',
+          },
+          snooze: 15,
+          deliveryChannel: 'push',
         },
-      );
+      });
     });
   });
 
@@ -251,12 +364,12 @@ describe('NotificationsService', () => {
       );
 
       expect(result.snooze).toEqual(30);
-      expect(mockPrismaService.notificationPreference.update).toHaveBeenCalledWith(
-        {
-          where: { id: mockPreferences.id },
-          data: updateData,
-        },
-      );
+      expect(
+        mockPrismaService.notificationPreference.update,
+      ).toHaveBeenCalledWith({
+        where: { id: mockPreferences.id },
+        data: updateData,
+      });
     });
 
     it('should create preferences if not exist before updating', async () => {
@@ -272,7 +385,9 @@ describe('NotificationsService', () => {
 
       await service.updateNotificationPreferences(mockUserId, { snooze: 20 });
 
-      expect(mockPrismaService.notificationPreference.create).toHaveBeenCalled();
+      expect(
+        mockPrismaService.notificationPreference.create,
+      ).toHaveBeenCalled();
     });
   });
 
@@ -329,6 +444,24 @@ describe('NotificationsService', () => {
       expect(result).toBe(false);
 
       jest.useRealTimers();
+    });
+
+    it('should not throw when schedule or types are null (no time restriction)', async () => {
+      mockPrismaService.notificationPreference.findUnique.mockResolvedValue({
+        ...mockPreferences,
+        schedule: null,
+      });
+      await expect(
+        service.checkIfShouldNotify(mockUserId, 'nourrissage'),
+      ).resolves.toBe(true);
+
+      mockPrismaService.notificationPreference.findUnique.mockResolvedValue({
+        ...mockPreferences,
+        types: null,
+      });
+      await expect(
+        service.checkIfShouldNotify(mockUserId, 'nourrissage'),
+      ).resolves.toBe(false);
     });
 
     it('should return false if outside time window (after end)', async () => {

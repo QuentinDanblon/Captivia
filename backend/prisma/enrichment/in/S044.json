@@ -1,0 +1,36 @@
+[
+ {
+  "speciesId": 5296842,
+  "commonNameFr": "Bâton du Diable (Phasme)",
+  "scientificName": "Phryganistis chlorophaea",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5299984,
+  "commonNameFr": "Néon Bleu (Tétra Néon)",
+  "scientificName": "Paracheirodon innesi",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 5300016,
+  "commonNameFr": "Poisson Combattant (Betta)",
+  "scientificName": "Betta splendens",
+  "category": "poisson",
+  "domesticationType": "domestique",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ }
+]

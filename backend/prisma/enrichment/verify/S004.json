@@ -1,0 +1,57 @@
+[
+  {
+    "speciesId": 2342738,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: 'deux fois par jour' -> une fois par jour (fishipedia) ; frequence des aliments vivants '3-4x/sem' -> reguliere",
+      "habitat.temp 23-26 -> 20-26 (Wikipedia optimum 20-25, zooplus 23-26)",
+      "habitat.minSpaceSize 80 L pour 5-6 -> 80 L (50 cm) pour au moins 8 individus (fishipedia, Wikipedia)",
+      "behavior.sociability semi-grégaire -> grégaire ; 'groupes hierarchises' et 'excellent avec crevettes' retires ; 'robuste' retire (Wikipedia: eau tres exigeante)",
+      "health: traitements au cuivre/formaline retires (sensibilite des poissons de fond), remplaces par avis veterinaire",
+      "reproduction.litter null -> 15-25 oeufs (zooplus, Wikipedia) ; 'pond a 18-20 C' et 'ratio 2-3 males' retires",
+      "sources: fishipedia reclasse 'guide' (pas Wikipedia)"
+    ],
+    "removed": [
+      "sources guidarium.com (404) et forum.aquariumcoop topic 1199 (403) dans health ; remplaces par VIN et Wikipedia",
+      "source youschool.fr dans legislation (site commercial, non officiel, ne cite pas l'espece) ; remplacee par Wikipedia",
+      "habitat.lightNeeds 'photoperiode 12h/12h' (non confirme)",
+      "reproduction.sexualMaturityMonths 3 (sources divergentes 10 semaines a 5 mois), breedingDifficulty 'facile', season"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2354003,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: taille '3-5 cm' -> ~4-6 cm (Wikipedia 4,2 cm) ; frequence aliments vivants '3-4x/sem' -> reguliere",
+      "behavior/compat: 'rasboras, crevettes' retires (non confirme)",
+      "habitat.hygieneNotes: 'changements 20-30% mensuels', 'nitrates <50 mg/L' retires",
+      "health: traitements au cuivre/quinine retires, remplaces par avis veterinaire",
+      "reproduction: eclosion 24-30 h -> 24-36 h (fishkeeper) ; alevins nageant librement 4-5 j apres ; ratio 3 femelles/1 male garde (fishipedia)"
+    ],
+    "removed": [
+      "source guidarium.com (404) dans health ; vin.com conserve (article generique sur les parasitoses des poissons d'aquarium)",
+      "source youschool.fr dans legislation (non officiel), remplacee par Wikipedia",
+      "reproduction.sexualMaturityMonths 6 (non confirme), season",
+      "feeding: 'nourriture consommee a mi-eau' (non confirme)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2354646,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.minSpaceSize 100 L/10+ -> 75 a 100 L selon les sources (riverpark 75 L/6 ; fishipedia 100 L/10)",
+      "feeding: 'deux fois par jour' retire ; taille ~4 cm (Wikipedia 4,4 cm)",
+      "behavior: 'males dorsales allongees/femelles anal rougeatre', 'diurne', 'lueurs lumineuses' retires (non confirmes)",
+      "health: traitements (cuivre, erythromycine, Kanaplex, fenbendazole) retires, remplaces par avis veterinaire ; columnaris ajoute (aquariadise)",
+      "reproduction.breedingDifficulty modere -> avance (fishipedia: difficile en captivite) ; litterSizeMax 300 (aquariadise) ; eclosion 24-36 h retiree"
+    ],
+    "removed": [
+      "sources guidarium.com (404) dans health ; remplacee par VIN et aquariadise",
+      "source youschool.fr dans legislation (non officiel), remplacee par Wikipedia",
+      "reproduction.sexualMaturityMonths 5, season (non confirmes)"
+    ],
+    "confidence": "medium"
+  }
+]

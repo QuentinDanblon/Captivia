@@ -1,0 +1,260 @@
+[
+ {
+  "speciesId": 9032472,
+  "feeding": null,
+  "habitat": null,
+  "reproduction": null
+ },
+ {
+  "speciesId": 9198359,
+  "habitat": null
+ },
+ {
+  "speciesId": 9268496,
+  "behavior": {
+   "generalBehavior": "Tortue carnivore qui, lorsqu'elle se sent menacée, émet par ses glandes à musc un liquide à l'odeur désagréable.",
+   "sociability": null,
+   "difficultyLevel": null,
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Eastern_long-necked_turtle",
+     "title": "Eastern long-necked turtle - Wikipedia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 9451184,
+  "habitat": null
+ },
+ {
+  "speciesId": 9589697,
+  "habitat": null
+ },
+ {
+  "speciesId": 9606290,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 18,
+   "tempMax": 21,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": null,
+   "lightNeeds": null,
+   "activityEnrichment": null,
+   "hygieneNotes": null,
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Domesticated_turkey",
+     "title": "Domesticated turkey - Wikipedia"
+    },
+    {
+     "type": "wikipedia",
+     "url": "https://fr.wikipedia.org/wiki/Dinde_domestique",
+     "title": "Dinde domestique — Wikipédia"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": 28,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Domesticated_turkey",
+     "title": "Domesticated turkey - Wikipedia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 9761484,
+  "habitat": null
+ },
+ {
+  "speciesId": 9799308,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 21,
+   "tempMax": 32,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Terrarium d'au moins 86 cm (34 pouces) de longueur",
+   "lightNeeds": "Tube UVB de 5 % (T8) ou de 2 à 5 % (T5), ou unité plus puissante mais plus petite",
+   "activityEnrichment": null,
+   "hygieneNotes": "Substrat sec pour éviter l'accumulation d'humidité dans l'enclos ; bac à eau assez grand pour que le serpent s'y immerge, côté frais",
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Lampropeltis_californiae",
+     "title": "California kingsnake - Wikipedia"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.reptilecentre.com/info-kingsnake-care-sheet",
+     "title": "Kingsnake Care Sheet - Reptile Centre"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 103899345,
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 25,
+   "tempMax": 30,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Aquarium d'au moins 170 à 210 L (45 à 55 gallons US), un volume supérieur étant préférable ; profondeur d'au moins 20 à 30 cm",
+   "lightNeeds": null,
+   "activityEnrichment": null,
+   "hygieneNotes": null,
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Banded_archerfish",
+     "title": "Banded archerfish - Wikipedia"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": 20000,
+   "litterSizeMax": 150000,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": "avance",
+   "notes": "Les premières reproductions ont lieu vers 10 cm de long. L'espèce se reproduit rarement en captivité et n'y a pas encore été reproduite avec succès selon la source.",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Banded_archerfish",
+     "title": "Banded archerfish - Wikipedia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 103951502,
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 26,
+   "tempMax": 29,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Aquarium d'au moins 20 gallons US (environ 76 L) pour un couple",
+   "lightNeeds": null,
+   "activityEnrichment": "Décor imitant le milieu naturel, avec roches et grottes artificielles pour la reproduction",
+   "hygieneNotes": "Filtration externe préférable aux filtres sous gravier, l'espèce ayant tendance à creuser",
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Convict_cichlid",
+     "title": "Convict cichlid - Wikipedia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 103952549,
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 22,
+   "tempMax": 30,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": null,
+   "lightNeeds": "Lumière tamisée et substrat sombre pour faire ressortir les couleurs",
+   "activityEnrichment": null,
+   "hygieneNotes": "Eau de pH 6 à 7 et de dureté 9 à 20 dGH",
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Jack_Dempsey_(fish)",
+     "title": "Jack Dempsey (fish) - Wikipedia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 103953586,
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 25.5,
+   "tempMax": 29.5,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": null,
+   "lightNeeds": null,
+   "activityEnrichment": null,
+   "hygieneNotes": "Eau acide (pH 5,2 à 6,7)",
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Mikrogeophagus_ramirezi",
+     "title": "Ram cichlid - Wikipedia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 103973942,
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 24,
+   "tempMax": 28,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Aquarium d'au minimum 80 cm de long (100 ou 120 cm conseillé)",
+   "lightNeeds": null,
+   "activityEnrichment": null,
+   "hygieneNotes": "pH compris entre 6 et 7 ; dureté de 2 à 10 °dGH",
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi",
+     "title": "Paracheirodon axelrodi — Wikipédia"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": 70,
+   "litterSizeMax": 250,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": "Ponte le matin après une parade, le couple frayant au-dessus des plantes ; éclosion en 24 heures et nage libre en 5 jours. Difficulté d'élevage jugée « délicate » par la source.",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://fr.wikipedia.org/wiki/Paracheirodon_axelrodi",
+     "title": "Paracheirodon axelrodi — Wikipédia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 103997157,
+  "feeding": null
+ }
+]

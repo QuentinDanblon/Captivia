@@ -1,0 +1,39 @@
+[
+  {
+    "speciesId": 5282524,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "health: « Distemper » renommé Maladie de Carré ; prévention « Vaccination » → avis vétérinaire sur la vaccination (non confirmé pour le raton laveur)",
+      "health: « Mange parasitaire » (non confirmé par en.wikipedia Raccoon) remplacé par parasitoses intestinales / Baylisascaris procyonis (cité par la source)",
+      "health.sources: ajout en.wikipedia Raccoon (distemper, rage, Baylisascaris confirmés dans la section Health)",
+      "reproduction.season: « hiver tardif » → fin janvier à mi-mars (en.wikipedia : mating between late January and mid-March), mises bas au printemps",
+      "reproduction.notes: « maturité 1-2 ans » remplacé par la formulation de la source (femelles d'un an peuvent se reproduire, jeunes mâles après la saison principale)",
+      "sources: ajout en.wikipedia Raccoon"
+    ],
+    "removed": ["reproduction.notes: « Reproduction opportuniste en milieu semi-captif » (non sourcé)"],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5282588,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.notes: gestation 62-86 jours (74 = médiane) ; poids des nouveau-nés 46-63 g, œstrus 1-13 jours, indépendance 4-5 mois (en.wikipedia)",
+      "health.Infections respiratoires: prévention sans chiffres (18-24 °C, 60-80 % supprimés, non sourcés)"
+    ],
+    "removed": [
+      "reproduction.sexualMaturityMonths (18, non confirmé par la page) → null",
+      "reproduction.notes: « poids double à 2 mois » (non confirmé)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5283399,
+    "checked": ["reproduction"],
+    "corrected": [
+      "source title: « Lapin domestique - Wikipedia FR » → « Lapin de garenne - Wikipédia FR » (la page couvre Oryctolagus cuniculus sauvage et domestique)",
+      "reproduction.notes: gestation 28-33 jours précisée ; mortalité de 75 % précisée comme concernant la période d'allaitement à l'état sauvage"
+    ],
+    "removed": [],
+    "confidence": "high"
+  }
+]

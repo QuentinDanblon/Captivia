@@ -1,0 +1,139 @@
+[
+ {
+  "speciesId": 5285942,
+  "health": null
+ },
+ {
+  "speciesId": 5289145,
+  "health": null
+ },
+ {
+  "speciesId": 5296842,
+  "health": null
+ },
+ {
+  "speciesId": 5301256,
+  "health": null
+ },
+ {
+  "speciesId": 5784980,
+  "habitat": null,
+  "behavior": {
+   "generalBehavior": "Hiberne durant les quatre mois d'hiver, généralement de début novembre à fin février ou début mars, enfouie dans la vase des fonds de mares, ruisseaux et étangs ; elle peut alors survivre de très longues périodes sans se nourrir en ralentissant son métabolisme.",
+   "sociability": null,
+   "difficultyLevel": null,
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://fr.wikipedia.org/wiki/Pelophylax_kl._esculentus",
+     "title": "Pelophylax kl. esculentus — Wikipédia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5786666,
+  "habitat": null
+ },
+ {
+  "speciesId": 5959092,
+  "feeding": null,
+  "habitat": null
+ },
+ {
+  "speciesId": 5959230,
+  "habitat": null
+ },
+ {
+  "speciesId": 7387949,
+  "feeding": null,
+  "habitat": null,
+  "behavior": {
+   "generalBehavior": "Excellent grimpeur, qui passe beaucoup de temps dans les arbres. Surpris, il peut se figer en se pliant en une série de coudes, ou fuir rapidement ou faire vibrer la queue. Les individus nés en captivité seraient plus dociles que les sauvages, mais les avis sur son caractère varient.",
+   "sociability": null,
+   "difficultyLevel": null,
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus",
+     "title": "Pantherophis obsoletus (Elaphe obsoleta) - Wikipedia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 7572096,
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 18,
+   "tempMax": 22,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Aquarium d'au moins 76 cm de longueur",
+   "lightNeeds": null,
+   "activityEnrichment": null,
+   "hygieneNotes": "Eau de pH 6 à 8 et de dureté 5 à 19 dGH",
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Rosy_barb",
+     "title": "Rosy barb - Wikipedia"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": "Ponte généralement tôt le matin, sur plusieurs heures, avec plusieurs centaines d'œufs ; éclosion en 24 à 36 heures selon la température de l'eau ; maturité atteinte vers 63,5 mm.",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Rosy_barb",
+     "title": "Rosy barb - Wikipedia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 8170369,
+  "feeding": null
+ },
+ {
+  "speciesId": 8583926,
+  "feeding": null,
+  "reproduction": null
+ },
+ {
+  "speciesId": 8909809,
+  "feeding": null,
+  "habitat": null,
+  "behavior": {
+   "generalBehavior": "Tortue méfiante, craintive et très farouche, qui plonge au moindre bruit ; surtout active aux heures les plus chaudes de la journée. À l'automne, elle s'enfouit dans la vase pour passer l'hiver et redevient active au printemps.",
+   "sociability": null,
+   "difficultyLevel": null,
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://fr.wikipedia.org/wiki/Cistude_d'Europe",
+     "title": "Cistude d'Europe — Wikipédia"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 8953936,
+  "feeding": null
+ }
+]

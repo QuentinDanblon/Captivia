@@ -1,19 +1,25 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from '@/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { api } from '@/lib/api';
+import { api, type SubscriptionStatusView } from '@/lib/api';
+import { isGuestUser } from '@/lib/guest';
+import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
 
+/**
+ * W6-08 — L'abonnement Premium se souscrit uniquement dans l'application mobile
+ * (achats intégrés App Store / Google Play). Le web affiche l'état et le lien de gestion,
+ * jamais de bouton d'achat.
+ */
 export default function AbonnementPage() {
   const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
-  const { user, token, isLoading: authLoading, setUser } = useAuth();
-  const [status, setStatus] = useState<{ isPremium: boolean } | null>(null);
-  const [submitting, setSubmitting] = useState<'monthly' | 'yearly' | null>(null);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const { user, token, isLoading: authLoading } = useAuth();
+  const [status, setStatus] = useState<SubscriptionStatusView | null>(null);
 
   useEffect(() => {
     if (!authLoading && !user) router.push('/login');
@@ -21,25 +27,12 @@ export default function AbonnementPage() {
 
   useEffect(() => {
     if (token) {
-      api.getSubscription(token).then((d) => setStatus({ isPremium: d.isPremium })).catch(() => setStatus({ isPremium: false }));
+      api
+        .getSubscription(token)
+        .then(setStatus)
+        .catch(() => setStatus({ premium: false, isPremium: false }));
     }
   }, [token]);
-
-  const handleSubscribe = async (plan: 'monthly' | 'yearly') => {
-    if (!token) return;
-    setSubmitting(plan);
-    setMessage(null);
-    try {
-      await api.subscribe(plan, token);
-      setStatus({ isPremium: true });
-      setUser?.((prev) => (prev ? { ...prev, isPremium: true } : prev));
-      setMessage({ type: 'success', text: t('subscription.subscribeSuccess') });
-    } catch {
-      setMessage({ type: 'error', text: t('subscription.subscribeError') });
-    } finally {
-      setSubmitting(null);
-    }
-  };
 
   if (authLoading || (token && status === null)) {
     return (
@@ -52,6 +45,11 @@ export default function AbonnementPage() {
     );
   }
 
+  const premium = Boolean(status?.premium ?? status?.isPremium);
+  const periodEnd = status?.currentPeriodEnd
+    ? new Date(status.currentPeriodEnd).toLocaleDateString(locale, { dateStyle: 'long' })
+    : null;
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-w-0">
@@ -61,39 +59,60 @@ export default function AbonnementPage() {
         </Link>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white mb-2">{t('subscription.title')}</h1>
         <p className="text-gray-600 dark:text-gray-400 mb-8">{t('subscription.subtitle')}</p>
-        {status?.isPremium && (
-          <div className="mb-8 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 border-2 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200">
-            {t('subscription.currentPlan')}
-          </div>
+
+        {status?.source && (
+          <section className="mb-8 p-5 rounded-2xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600" aria-labelledby="subscription-status-title">
+            <h2 id="subscription-status-title" className="text-lg font-semibold text-gray-800 dark:text-white mb-3">{t('subscription.statusTitle')}</h2>
+            {premium && (
+              <p className="mb-2 text-emerald-700 dark:text-emerald-300 font-medium">{t('subscription.currentPlan')}</p>
+            )}
+            <p className="text-gray-700 dark:text-gray-300">
+              {t('subscription.sourceLabel')} : {t(`subscription.source${status.source}`)}
+            </p>
+            {status.status === 'BILLING_ISSUE' && (
+              <p className="mt-2 text-amber-700 dark:text-amber-300">{t('subscription.billingIssue')}</p>
+            )}
+            {(status.status === 'EXPIRED' || status.status === 'REFUNDED') && (
+              <p className="mt-2 text-gray-600 dark:text-gray-400">{t('subscription.expired')}</p>
+            )}
+            {premium && periodEnd && (
+              <p className="mt-2 text-gray-700 dark:text-gray-300">
+                {status.willRenew ? t('subscription.renewsOn', { date: periodEnd }) : t('subscription.endsOn', { date: periodEnd })}
+              </p>
+            )}
+            {status.manageUrl && (
+              <a
+                href={status.manageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-block py-2.5 px-4 rounded-xl border-2 border-emerald-600 text-emerald-700 dark:text-emerald-300 font-semibold hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors"
+              >
+                {t('subscription.manage')}
+              </a>
+            )}
+          </section>
         )}
-        {message && (
-          <div className={`mb-6 p-4 rounded-2xl border-2 ${message.type === 'success' ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200' : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200'}`}>
-            {message.text}
-          </div>
-        )}
+
         <ul className="mb-8 space-y-3 text-gray-700 dark:text-gray-300">
           <li className="flex items-start gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">✓</span>{t('subscription.benefitAnimals')}</li>
           <li className="flex items-start gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">✓</span>{t('subscription.benefitHealth')}</li>
           <li className="flex items-start gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">✓</span>{t('subscription.benefitQR')}</li>
         </ul>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div className="rounded-2xl border-2 border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 p-6 flex flex-col">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-1">{t('subscription.monthly')}</h2>
-            <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">{t('subscription.priceMonthly')}<span className="text-base font-normal text-gray-500 dark:text-gray-400">{t('subscription.perMonth')}</span></p>
-            <button type="button" onClick={() => handleSubscribe('monthly')} disabled={!!status?.isPremium || submitting !== null} className="mt-auto w-full py-3 px-4 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-              {submitting === 'monthly' ? t('common.loading') : t('subscription.chooseMonthly')}
-            </button>
+
+        {/* Invité : l'achat exige d'abord un compte (l'API répond 403 GUEST_ACCOUNT). */}
+        {!premium && isGuestUser(user) && (
+          <GuestFeatureNote>{t('guest.subscriptionNote')}</GuestFeatureNote>
+        )}
+
+        {!premium && !isGuestUser(user) && (
+          <div className="rounded-2xl border-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10 p-6" role="note">
+            <p className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{t('subscription.inAppOnly')}</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">{t('subscription.inAppOnlyHint')}</p>
+            <p className="text-gray-700 dark:text-gray-300">
+              {t('subscription.monthly')} : {t('subscription.priceMonthly')}{t('subscription.perMonth')} · {t('subscription.yearly')} : {t('subscription.priceYearly')}{t('subscription.perYear')} ({t('subscription.yearlyEquivalent')})
+            </p>
           </div>
-          <div className="rounded-2xl border-2 border-emerald-500 dark:border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10 p-6 flex flex-col relative">
-            <span className="absolute top-4 right-4 text-xs font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-200 dark:bg-emerald-800 px-2 py-0.5 rounded">−17 %</span>
-            <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-1">{t('subscription.yearly')}</h2>
-            <p className="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-4">{t('subscription.priceYearly')}<span className="text-base font-normal text-gray-500 dark:text-gray-400">{t('subscription.perYear')}</span></p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">≈ 2,50 € / mois</p>
-            <button type="button" onClick={() => handleSubscribe('yearly')} disabled={!!status?.isPremium || submitting !== null} className="mt-auto w-full py-3 px-4 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-              {submitting === 'yearly' ? t('common.loading') : t('subscription.chooseYearly')}
-            </button>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000001000,
+  "commonNameFr": "Turopolje Pig",
+  "scientificName": "Turopolje pig",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001001,
+  "commonNameFr": "Tamworth",
+  "scientificName": "Tamworth",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001002,
+  "commonNameFr": "Chato Murciano",
+  "scientificName": "Chato Murciano",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001003,
+  "commonNameFr": "Gloucestershire Old Spots",
+  "scientificName": "Gloucestershire Old Spots",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001004,
+  "commonNameFr": "Porc Celte",
+  "scientificName": "porc celte",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001005,
+  "commonNameFr": "Jeju Black Pig",
+  "scientificName": "Jeju Black Pig",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001006,
+  "commonNameFr": "Middle White",
+  "scientificName": "Middle White",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001007,
+  "commonNameFr": "Ossabaw Island Hog",
+  "scientificName": "Ossabaw Island Hog",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001008,
+  "commonNameFr": "Red Wattle",
+  "scientificName": "Red Wattle",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001009,
+  "commonNameFr": "Taihu Pig",
+  "scientificName": "Taihu pig",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001010,
+  "commonNameFr": "Wessex Saddleback",
+  "scientificName": "Wessex Saddleback",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001011,
+  "commonNameFr": "Krškopolje Pig",
+  "scientificName": "Krškopolje pig",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001012,
+  "commonNameFr": "Göttingen Minipig",
+  "scientificName": "Göttingen minipig",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001013,
+  "commonNameFr": "Landrace Pig",
+  "scientificName": "Landrace pig",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000001115,
+  "commonNameFr": "Hollandaise Huppée",
+  "scientificName": "Hollandaise huppée",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

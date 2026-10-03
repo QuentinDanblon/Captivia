@@ -1,0 +1,329 @@
+[
+ {
+  "speciesId": 104276062,
+  "evidence": [
+   {
+    "field": "reproduction.notes",
+    "value": "œufs vitellins ; marsupium",
+    "quote": "directly develop from yolky eggs. Both the eggs and juveniles develop within a brood pouch called a marsupium until the first juvenile stage",
+    "url": "https://en.wikipedia.org/wiki/Porcellio_laevis"
+   }
+  ],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "pas de température/hygrométrie dans la source -> null",
+    "url": "https://en.wikipedia.org/wiki/Porcellio_laevis"
+   }
+  ]
+ },
+ {
+  "speciesId": 144096299,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "la température idéale, qui se trouve entre 29 et 31 °C (concerne l'incubation des œufs, pas le terrarium) ; « The temperature preference of B. plumifrons is between 31.7 ± 0.5 °C » (température préférée, pas une plage d'élevage) -> habitat null",
+    "url": "https://fr.wikipedia.org/wiki/Basilic_vert"
+   },
+   {
+    "field": "health",
+    "reason": "aucune maladie documentée dans les pages consultées -> null",
+    "url": "https://en.wikipedia.org/wiki/Plumed_basilisk"
+   }
+  ]
+ },
+ {
+  "speciesId": 156256182,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior (actif, fait le mort)",
+    "value": "active ; play dead",
+    "quote": "It is an active little lizard, and if threatened will often play dead to confuse the attacker.",
+    "url": "https://en.wikipedia.org/wiki/Cryptoblepharus_virgatus"
+   },
+   {
+    "field": "behavior.generalBehavior (surfaces verticales)",
+    "value": "surfaces verticales",
+    "quote": "It will often be seen on vertical surfaces such as trees, fences, and walls.",
+    "url": "https://en.wikipedia.org/wiki/Cryptoblepharus_virgatus"
+   }
+  ],
+  "nullNotes": [
+   {
+    "field": "feeding/habitat/health/reproduction",
+    "reason": "aucune donnée (régime, température, maladies, ponte) dans la page consultée -> null",
+    "url": "https://en.wikipedia.org/wiki/Cryptoblepharus_virgatus"
+   }
+  ]
+ },
+ {
+  "speciesId": 156261518,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 20,
+    "quote": "Temperature: 20–26°C",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 26,
+    "quote": "Temperature: 20–26°C",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "90×30 cm base ; ~81 L",
+    "quote": "An aquarium with base dimensions of 90 ∗ 30 cm or equivalent should be the smallest considered. (~81litres)",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.minSpaceSize (groupe)",
+    "value": "6 individus minimum",
+    "quote": "K. vitreolus is highly gregarious and tends to form quite tight schools meaning a group of 6 or more specimens is the minimum recommended.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "conditions tamisées, végétation de surface/flottante",
+    "quote": "Best kept in a well-decorated set-up with some surface or floating vegetation since it appears to prefer relatively dim conditions.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "aquarium mature",
+    "quote": "Do not add this fish to a biologically immature aquarium as it can be susceptible to swings in water chemistry.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.hygieneNotes (paramètres)",
+    "value": "pH 4.0–7.0 ; 1–10 dGH",
+    "quote": "pH: 4.0–7.0 ; Hardness: 1–10dGH",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "non documentée",
+    "quote": "Unrecorded.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "reproduction.notes (commerce)",
+    "value": "jamais élevé commercialement",
+    "quote": "appears never to have been bred on a commercial basis",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   }
+  ],
+  "nullNotes": [
+   {
+    "field": "feeding",
+    "reason": "recommandés : « dried foods of a suitable size… Artemia nauplii, Moina, grindal worm » mais aucun aliment à éviter documenté (foodsToAvoid < 2) -> feeding null",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "health",
+    "reason": "aucune maladie documentée dans la source -> null",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   }
+  ]
+ },
+ {
+  "speciesId": 156315727,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "feeding/habitat/health/reproduction",
+    "reason": "Wikipedia EN (Cobalt blue tarantula) et Wikipédia FR : aucune donnée d'élevage, de proies, de santé ni de reproduction.",
+    "url": "https://en.wikipedia.org/wiki/Cobalt_blue_tarantula"
+   }
+  ]
+ },
+ {
+  "speciesId": 163312909,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Wikipédia FR/EN : aucune température ni dimension de pigeonnier chiffrée.",
+    "url": "https://fr.wikipedia.org/wiki/Pigeon_domestique"
+   }
+  ]
+ },
+ {
+  "speciesId": 165504395,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior (nocturne)",
+    "value": "nocturne",
+    "quote": "They are nocturnal because of the cooler temperatures at night",
+    "url": "https://animaldiversity.org/accounts/Helix_pomatia/"
+   },
+   {
+    "field": "behavior.generalBehavior (hibernation)",
+    "value": "hibernation, épiphragme",
+    "quote": "The snails hibernate in the winter because they are not able to survive the cold temperatures of the winter months. Prior to hibernation, they dig a hole and lay shell-mouth up. They completely retract into their shells and secrete a mucus covering, called an epiphragm, to seal the shell's opening",
+    "url": "https://animaldiversity.org/accounts/Helix_pomatia/"
+   },
+   {
+    "field": "behavior.generalBehavior (trace de mucus)",
+    "value": "traînée de mucus",
+    "quote": "When Helix pomatia forage, a slime trail is left behind",
+    "url": "https://animaldiversity.org/accounts/Helix_pomatia/"
+   }
+  ],
+  "nullNotes": [
+   {
+    "field": "habitat",
+    "reason": "Wikipédia FR : « Un sol composé de 30 % de matières organiques ainsi qu'une température de 21 °C et un taux d'humidité de 80 % constituent les conditions idéales. » = valeur unique (pas de plage tempMin/tempMax) ; ADW : « fairly constant, mild temperatures » sans chiffre -> habitat null",
+    "url": "https://fr.wikipedia.org/wiki/Helix_pomatia"
+   },
+   {
+    "field": "health",
+    "reason": "ADW : « Nematodes, trematodes, fungi, and other parasite are capable of infecting dense snail populations, causing high mortality » = 1 seul item, ni symptômes ni prévention -> health null",
+    "url": "https://animaldiversity.org/accounts/Helix_pomatia/"
+   }
+  ]
+ },
+ {
+  "speciesId": 165617687,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior (aquatique, nocturne)",
+    "value": "entièrement aquatique ; nocturne",
+    "quote": "It is entirely aquatic and almost entirely nocturnal.",
+    "url": "https://en.wikipedia.org/wiki/Japanese_giant_salamander"
+   },
+   {
+    "field": "behavior.generalBehavior (territorial)",
+    "value": "territorial",
+    "quote": "Andrias japonicus is territorial, with large males often killing smaller rivals in defense of spawning pits.",
+    "url": "https://animaldiversity.org/accounts/Andrias_japonicus/"
+   }
+  ],
+  "nullNotes": [
+   {
+    "field": "feeding",
+    "reason": "Régime documenté (« Adults feed mainly on freshwater crabs, other crustaceans, worms, insects, frogs, other small amphibians, fish, and even small mammals. ») mais aucun aliment à éviter -> feeding null",
+    "url": "https://en.wikipedia.org/wiki/Japanese_giant_salamander"
+   },
+   {
+    "field": "habitat",
+    "reason": "« streams with clear, cool water » sans plage chiffrée -> null",
+    "url": "https://en.wikipedia.org/wiki/Japanese_giant_salamander"
+   },
+   {
+    "field": "health",
+    "reason": "ADW : un seul parasite cité (« giant Japanese salamanders can house parasitic roundworms, specifically Spiroxys hanzaki ») -> health null",
+    "url": "https://animaldiversity.org/accounts/Andrias_japonicus/"
+   }
+  ]
+ },
+ {
+  "speciesId": 308455619,
+  "evidence": [
+   {
+    "field": "reproduction.sexualMaturityMonths",
+    "value": 12,
+    "quote": "Dès l'âge de un an, pour l'oie comme pour le jars, on peut espérer la fécondation des œufs.",
+    "url": "https://fr.wikipedia.org/wiki/Oie_domestique"
+   },
+   {
+    "field": "reproduction.notes (ratio mâle/femelles)",
+    "value": "1 mâle pour 4 à 6 femelles",
+    "quote": "les oies sont plutôt monogames ; cependant pour optimiser leur production d'œufs, les éleveurs constituent leurs troupeaux avec un mâle pour quatre à six femelles",
+    "url": "https://fr.wikipedia.org/wiki/Oie_domestique"
+   },
+   {
+    "field": "reproduction.notes (eau)",
+    "value": "eau favorable",
+    "quote": "L'eau est un atout pour qu'il y ait plus de facilité et d'envie de se reproduire.",
+    "url": "https://fr.wikipedia.org/wiki/Oie_domestique"
+   }
+  ],
+  "nullNotes": [
+   {
+    "field": "reproduction.incubationDays",
+    "reason": "durée d'incubation absente de la page Wikipédia FR ; la valeur de l'oie cendrée sauvage (~28 jours, Wikipedia EN Greylag goose) n'a pas été reprise pour la forme domestique -> null",
+    "url": "https://en.wikipedia.org/wiki/Greylag_goose"
+   },
+   {
+    "field": "habitat",
+    "reason": "« dans un poulailler de 100 à 500 m2 avec une mare… » : pas de température -> null",
+    "url": "https://fr.wikipedia.org/wiki/Oie_domestique"
+   },
+   {
+    "field": "health",
+    "reason": "aucune maladie documentée sur la page (Wikipedia EN Domestic goose : seulement « Angel wing – a disease common in geese ») -> null",
+    "url": "https://en.wikipedia.org/wiki/Domestic_goose"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000108,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "description/sourceUrl",
+    "reason": "Nom « Whippet Italien » absent de Wikipédia FR : « Lévrier whippet » et « Petit lévrier italien » (levrette d'Italie) sont deux races distinctes ; correspondance non établie -> null.",
+    "url": null
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000151,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "description/sourceUrl",
+    "reason": "« Turc » n'existe pas comme race autonome (Wikipédia FR : « Angora turc » et « Turc de Van » sont distincts) ; correspondance non établie -> null.",
+    "url": null
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000152,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "description/sourceUrl",
+    "reason": "Aucune page Wikipédia FR trouvée pour une race « Ussuri » (page 404, absente de la Liste de races de chats) -> null.",
+    "url": null
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000162,
+  "evidence": [],
+  "nullNotes": [
+   {
+    "field": "description/sourceUrl",
+    "reason": "Pas de race « Lapin Papillon » seule dans Wikipédia FR (Papillon anglais, Petit papillon, Papillon rhénan, Géant papillon français) ; correspondance ambiguë -> null.",
+    "url": "https://fr.wikipedia.org/wiki/Liste_de_races_de_lapins"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000000164,
+  "evidence": [
+   {
+    "field": "description.origine",
+    "value": "importés de Pologne",
+    "quote": "Ses origines sont confuses, il serait issu de populations de petits lapins importées de Pologne.",
+    "url": "https://fr.wikipedia.org/wiki/Hermine_(lapin)"
+   },
+   {
+    "field": "description.poids",
+    "value": "1,5 kg max ; idéal 1 à 1,35 kg",
+    "quote": "Sa masse ne doit pas excéder 1,5 kg, dans l'idéal entre 1 kg et 1,350 kg.",
+    "url": "https://fr.wikipedia.org/wiki/Hermine_(lapin)"
+   },
+   {
+    "field": "description.robe",
+    "value": "blanche",
+    "quote": "La robe des polonais est toujours blanche, mais peut être due à deux gènes différents.",
+    "url": "https://fr.wikipedia.org/wiki/Hermine_(lapin)"
+   }
+  ]
+ }
+]

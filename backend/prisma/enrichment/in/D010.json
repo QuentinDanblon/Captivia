@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000204,
+  "commonNameFr": "Toui Été",
+  "scientificName": "Forpus passerinus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000205,
+  "commonNameFr": "Toui à Lunettes",
+  "scientificName": "Forpus conspicillatus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000206,
+  "commonNameFr": "Astrild Ondulé",
+  "scientificName": "Estrilda astrild",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000207,
+  "commonNameFr": "Tourterelle à Collier",
+  "scientificName": "Streptopelia risoria",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000209,
+  "commonNameFr": "Poule Brahma",
+  "scientificName": "Gallus gallus domesticus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000210,
+  "commonNameFr": "Poule Sussex",
+  "scientificName": "Gallus gallus domesticus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000211,
+  "commonNameFr": "Poule Wyandotte",
+  "scientificName": "Gallus gallus domesticus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000212,
+  "commonNameFr": "Poule Leghorn",
+  "scientificName": "Gallus gallus domesticus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000213,
+  "commonNameFr": "Poule Orpington",
+  "scientificName": "Gallus gallus domesticus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000215,
+  "commonNameFr": "Oie de Toulouse",
+  "scientificName": "Anser anser domesticus",
+  "category": "oiseau",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000216,
+  "commonNameFr": "Anolis Vert",
+  "scientificName": "Anolis carolinensis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000217,
+  "commonNameFr": "Tégou Argentin",
+  "scientificName": "Salvator merianae",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000218,
+  "commonNameFr": "Varan D’eau",
+  "scientificName": "Varanus salvator",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000219,
+  "commonNameFr": "Boa Constricteur",
+  "scientificName": "Boa constrictor",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000220,
+  "commonNameFr": "Serpent Roi",
+  "scientificName": "Lampropeltis getula",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": true,
+  "missing": []
+ }
+]

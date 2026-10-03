@@ -1,0 +1,581 @@
+[
+  {
+    "speciesId": 104008238,
+    "evidence": [
+      {
+        "field": "reproduction.breedingDifficulty",
+        "value": "avance",
+        "quote": "La reproduction en aquarium n'a jamais été réussie.",
+        "url": "https://fr.wikipedia.org/wiki/Gnathonemus_petersii"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "La reproduction en aquarium n'a jamais été réussie",
+        "quote": "La reproduction en aquarium n'a jamais été réussie.",
+        "url": "https://fr.wikipedia.org/wiki/Gnathonemus_petersii"
+      }
+    ]
+  },
+  {
+    "speciesId": 104013399,
+    "evidence": []
+  },
+  {
+    "speciesId": 104015330,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "insectivore",
+        "quote": "Dyeing poison dart frogs feed on tiny, live insects and other arthropods. Fruit flies can be fed as a staple diet, complemented with other live prey such as aphids, springtails, bean beetles, rice flour beetles, small fly larvae and pinhead crickets.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "Drosophiles",
+        "quote": "Dyeing poison dart frogs feed on tiny, live insects and other arthropods. Fruit flies can be fed as a staple diet, complemented with other live prey such as aphids, springtails, bean beetles, rice flour beetles, small fly larvae and pinhead crickets.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "pucerons, collemboles, bruches, criquets",
+        "quote": "Dyeing poison dart frogs feed on tiny, live insects and other arthropods. Fruit flies can be fed as a staple diet, complemented with other live prey such as aphids, springtails, bean beetles, rice flour beetles, small fly larvae and pinhead crickets.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "feeding.recommendedFoods[].frequency",
+        "value": "juvéniles quotidien / adultes 2-3 jours",
+        "quote": "Always dust your feeder insects with a 1:1 mix of Exo Terra® Multivitamin and Calcium +D3 powder supplement – feed juveniles daily and adults every second or third day.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "every_2_days",
+        "quote": "Always dust your feeder insects with a 1:1 mix of Exo Terra® Multivitamin and Calcium +D3 powder supplement – feed juveniles daily and adults every second or third day.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "supplément 1:1 multivitamines / calcium+D3",
+        "quote": "Always dust your feeder insects with a 1:1 mix of Exo Terra® Multivitamin and Calcium +D3 powder supplement – feed juveniles daily and adults every second or third day.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "Insectes capturés dans la nature",
+        "quote": "We do not recommend feeding wild caught insects as these can harbor harmful bacteria.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "Excès de proies",
+        "quote": "Overfeeding should be avoided: an excess of feeder insects can dangerously stress out the frogs.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1].reason",
+        "value": "pas plus que ce qu'elles mangent en 2 minutes",
+        "quote": "Never feed more then the frogs can eat during a period of 2 minutes.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 25,
+        "quote": "Dyeing poison dart frogs thrive at temperatures of 78-81°F or 25-27°C during the day, with a drop of 5-9°F or 3-5°C at night.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 27,
+        "quote": "Dyeing poison dart frogs thrive at temperatures of 78-81°F or 25-27°C during the day, with a drop of 5-9°F or 3-5°C at night.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": 70,
+        "quote": "During the day, an average relative humidity of 70-80% and temperature of 78-81°F or 25-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": 80,
+        "quote": "During the day, an average relative humidity of 70-80% and temperature of 78-81°F or 25-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "45 x 45 x 60 cm pour 2-3 grenouilles",
+        "quote": "Dart Frog Terrarium (PT2745): up to 2-3 Frogs 45 x 45 x 60 cm",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "cycle 12 h",
+        "quote": "A 12-hour day/night cycle will benefit your frogs and stimulate live plant growth.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "pas près d'une fenêtre ensoleillée",
+        "quote": "Do not place the Terrarium near a window where it can receive direct sunlight, as this could cause the terrarium to overheat.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "nettoyage hebdomadaire",
+        "quote": "Spot-clean your Dyeing poison dart frog's enclosure once a week, or more if necessary, to prevent harmful bacteria to build up.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "traiter l'eau du robinet",
+        "quote": "Always treat tap water with Aquatize to remove harmful heavy metals, chlorine and chloramines.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      }
+    ]
+  },
+  {
+    "speciesId": 104020622,
+    "evidence": [
+      {
+        "field": "habitat.tempMax",
+        "value": "29 (haut de la plage de jour 24-29 °C)",
+        "quote": "75-85°F or 24-29°C",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": "20 (bas de la plage de nuit 20-24 °C)",
+        "quote": "68-75°F or 20-24°C",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": 70,
+        "quote": "The average humidity should be kept between 70-75% with peaks of 90% in the morning and evening",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": 75,
+        "quote": "The average humidity should be kept between 70-75% with peaks of 90% in the morning and evening",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "45 x 45 x 60 cm pour 2-3 grenouilles (page Exo Terra : 90 x 45 x 90 cm pour 5-8)",
+        "quote": "45 x 45 x 60 cm",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "cycle 12 h",
+        "quote": "A 12-hour day/night cycle will benefit your frogs and stimulate live plant growth.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "pas près d'une fenêtre ensoleillée",
+        "quote": "Do not place the Terrarium near a window where it can receive direct sunlight",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "plantes grimpantes",
+        "quote": "Ideal for Tree Frogs are all the vining plants like Philodendron, Epipremnum (pothos) and Scindapsus",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "substrat humide pas détrempé",
+        "quote": "The substrate should be kept moist at all times, but definitely not soaking wet.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "traiter l'eau",
+        "quote": "Always treat tap water with Aquatize to remove harmful heavy metals, chlorine and chloramines",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "pas de changement total d'eau",
+        "quote": "never perform entire water changes",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "ne pas déranger de jour",
+        "quote": "Do not disturb them during daytime hours",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      }
+    ]
+  },
+  {
+    "speciesId": 104040409,
+    "evidence": [
+      {
+        "field": "behavior.generalBehavior",
+        "value": "nocturne",
+        "quote": "Clawed frogs are nocturnal, and most reproductive activity and feeding occurs after dark.",
+        "url": "https://en.wikipedia.org/wiki/African_clawed_frog"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "cannibale",
+        "quote": "These frogs are particularly cannibalistic; the stomach contents of feral clawed frogs in California have revealed large amounts of the frog's larvae.",
+        "url": "https://en.wikipedia.org/wiki/African_clawed_frog"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "avale tout ce qui tient dans sa bouche",
+        "quote": "Clawed frogs will try to consume anything that is able to fit into their mouths.",
+        "url": "https://en.wikipedia.org/wiki/African_clawed_frog"
+      },
+      {
+        "field": "behavior.compatibilityWithOtherAnimals",
+        "value": "avale ce qui tient dans sa bouche",
+        "quote": "Clawed frogs will try to consume anything that is able to fit into their mouths.",
+        "url": "https://en.wikipedia.org/wiki/African_clawed_frog"
+      },
+      {
+        "field": "behavior.compatibilityWithOtherAnimals",
+        "value": "mâles agrippent autres mâles et autres espèces",
+        "quote": "Male clawed frogs will grab onto other males and even other species of frogs.",
+        "url": "https://en.wikipedia.org/wiki/African_clawed_frog"
+      }
+    ]
+  },
+  {
+    "speciesId": 104040736,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "insectivore",
+        "quote": "Fire-Bellied toads are insectivorous and only recognise live prey – meaning they will only feed on live insects such as crickets, mealworms, wax worms, earthworms, or similar food items.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "Grillons vivants",
+        "quote": "Fire-Bellied toads are insectivorous and only recognise live prey – meaning they will only feed on live insects such as crickets, mealworms, wax worms, earthworms, or similar food items.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "Vers de farine et vers de cire vivants",
+        "quote": "Fire-Bellied toads are insectivorous and only recognise live prey – meaning they will only feed on live insects such as crickets, mealworms, wax worms, earthworms, or similar food items.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "Vers de terre",
+        "quote": "Fire-Bellied toads are insectivorous and only recognise live prey – meaning they will only feed on live insects such as crickets, mealworms, wax worms, earthworms, or similar food items.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "feeding.recommendedFoods[].frequency",
+        "value": "juvéniles quotidien / adultes 2-3 jours",
+        "quote": "Feed juveniles daily, and adults every second or third day.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "every_2_days",
+        "quote": "Feed juveniles daily, and adults every second or third day.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "supplément 1:1 vitamines-minéraux / calcium+D3",
+        "quote": "Always lightly dust live feeder insects with a 1:1 vitamin-mineral supplement blend like Exo Terra® Multi Vitamin and Calcium + D3.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "Insectes capturés dans la nature",
+        "quote": "We do not recommend feeding wild caught insects as these can harbor harmful bacteria.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "Proies mortes ou immobiles",
+        "quote": "Fire-Bellied toads are insectivorous and only recognise live prey – meaning they will only feed on live insects such as crickets, mealworms, wax worms, earthworms, or similar food items.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 24,
+        "quote": "Fire-Bellied Toads thrive at above average room temperatures of (75-80°F / 24-27°C) during the day, with a drop of 10°F or 5°C at night.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 27,
+        "quote": "Fire-Bellied Toads thrive at above average room temperatures of (75-80°F / 24-27°C) during the day, with a drop of 10°F or 5°C at night.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": 55,
+        "quote": "During the day, an average relative humidity of 55-65% and terrarium temperature of 75-80°F or 24-27°C should be maintained. At night, humidity should rise up to about 75-85%.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": 65,
+        "quote": "During the day, an average relative humidity of 55-65% and terrarium temperature of 75-80°F or 24-27°C should be maintained. At night, humidity should rise up to about 75-85%.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "45 x 45 x 45 cm (jusqu'à 4) ; page : 90 x 45 x 45 cm (jusqu'à 8-10)",
+        "quote": "45 x 45 x 45 cm",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "cycle 12 h",
+        "quote": "Fire-Bellied Toads are mainly diurnal and a 12-hour day/night cycle will benefit your frogs and stimulate live plant growth.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "pas près d'une fenêtre ensoleillée",
+        "quote": "Do not place the Terrarium near a window where it can receive direct sunlight, as this could cause the terrarium to overheat and stress or kill your Frogs.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "traiter l'eau du robinet",
+        "quote": "Always treat tap water with Aquatize to remove harmful heavy metals, chlorine and chloramines.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "pas de changement total d'eau",
+        "quote": "Unless really necessary, make sure to never perform entire water changes, as this will also remove beneficial bacteria.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "se laver les mains avant/après manipulation",
+        "quote": "Always thoroughly wash and rinse your hands with warm water before and after handling any amphibian.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "behavior.sociability",
+        "value": "grégaire",
+        "quote": "Fire-Bellied Toads are a fairly social species and are best enjoyed when kept in small groups of 4 to 8 animals.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "surtout diurne",
+        "quote": "Fire-Bellied Toads are mainly diurnal and a 12-hour day/night cycle will benefit your frogs and stimulate live plant growth.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "peau très sensible",
+        "quote": "Like most amphibians, Fire-bellied toads have a very sensitive skin, and are especially sensitive to chemicals like soap, lotion, etc.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "manipulation excessive déconseillée",
+        "quote": "For the well-being of the frogs however, we do not recommend excessive handling.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "toxines légères, ventre = avertissement",
+        "quote": "these frogs have mild toxins that can be excreted through their skin, with their vibrant underbellies serving as a warning",
+        "url": "https://en.wikipedia.org/wiki/Oriental_fire-bellied_toad"
+      },
+      {
+        "field": "behavior.compatibilityWithOtherAnimals",
+        "value": "groupes de 4 à 8",
+        "quote": "Fire-Bellied Toads are a fairly social species and are best enjoyed when kept in small groups of 4 to 8 animals.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "behavior.compatibilityWithOtherAnimals",
+        "value": "cohabitation inter-espèces déconseillée",
+        "quote": "We generally don't recommend housing different species together.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "90 x 45 x 45 cm (jusqu'à 8-10 crapauds)",
+        "quote": "90 x 45 x 45 cm",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      }
+    ]
+  },
+  {
+    "speciesId": 104041498,
+    "evidence": []
+  },
+  {
+    "speciesId": 104044141,
+    "evidence": [
+      {
+        "field": "habitat.tempMax",
+        "value": 18,
+        "quote": "In fact, alpines prefer temperatures in the range of 10-18°C (50-65°F).",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 10,
+        "quote": "In fact, alpines prefer temperatures in the range of 10-18°C (50-65°F).",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "température jamais > 23 °C",
+        "quote": "REMEMBER: temperature should never be allowed to go above 23°C (73°F).",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "eau >= 20 cm",
+        "quote": "Water depth should be at least 20 cm (8 in).",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "espèce très aquatique",
+        "quote": "I. alpestris is a very aquatic species; this means the water part needs to be quite large.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "montage semi-aquatique ou aquatique",
+        "quote": "If kept indoors, alpines can be kept in either a semi-aquatic or completely aquatic set up.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "pas en plein soleil",
+        "quote": "Don't place the tank in direct sunlight.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "pas d'éclairage particulier",
+        "quote": "No particular lighting is required by the newts, but if you have plants then you'll need a special bulb for them.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "cachettes",
+        "quote": "Make lots of hiding places.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "pierres et bois",
+        "quote": "Hiding places can be made by making piles of stones and decaying wood.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "mousses et fougères",
+        "quote": "Mosses and ferns are suitable as plants.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "filtre peu puissant",
+        "quote": "Alpines are found in still or slowly flowing water, so don't use too powerful a filter, otherwise you'll agitate them like a washing machine!",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "plantes sans filtre",
+        "quote": "If you don't use a filter, you must have a lot of plants to oxygenate the water and to absorb waste products.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "éviter la terre",
+        "quote": "I would avoid soil because if you don't have lots of plants in it, with time, it might become a good vehicle for bacterial diseases.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "habitat.habitatType",
+        "value": "aquarium",
+        "quote": "If kept indoors, alpines can be kept in either a semi-aquatic or completely aquatic set up.",
+        "url": "https://www.caudata.org/cc/species/Triturus/T_alpestris.shtml"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "semi-aquatique 9-10 mois à terre",
+        "quote": "Alpine newts are usually semiaquatic, spending most of the year (9–10 months) on land and only returning to the water for breeding.",
+        "url": "https://en.wikipedia.org/wiki/Alpine_newt"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "surtout nocturne à terre",
+        "quote": "On land, alpine newts are mainly nocturnal, hiding for most of the day and moving and feeding during the night or in the twilight.",
+        "url": "https://en.wikipedia.org/wiki/Alpine_newt"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "phase aquatique : actif en plein jour",
+        "quote": "À l'inverse, en phase aquatique, il n'hésite pas à se déplacer et se nourrir parfois en plein jour.",
+        "url": "https://fr.wikipedia.org/wiki/Ichthyosaura_alpestris"
+      }
+    ]
+  },
+  {
+    "speciesId": 104048045,
+    "evidence": []
+  },
+  {
+    "speciesId": 104052770,
+    "evidence": [
+      {
+        "field": "behavior.generalBehavior",
+        "value": "nocturne",
+        "quote": "Elle est nocturne, bien que les femelles allaitantes puissent s'alimenter de jour.",
+        "url": "https://fr.wikipedia.org/wiki/Pteromys_volans"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "n'hiberne pas, inactif plusieurs jours",
+        "quote": "En hiver, le Polatouche n'hiberne pas, mais peut rester inactif plusieurs jours d'affilée.",
+        "url": "https://fr.wikipedia.org/wiki/Pteromys_volans"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "abris : troncs, trous de pics",
+        "quote": "Ils s'abritent dans des anfractuosités des troncs d'arbre ou utilisent fréquemment des trous de pics.",
+        "url": "https://fr.wikipedia.org/wiki/Pteromys_volans"
+      },
+      {
+        "field": "behavior.sociability",
+        "value": "grégaire",
+        "quote": "Pteromys volans are a social species; many can be found together in a single tree.",
+        "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+      }
+    ]
+  },
+  {
+    "speciesId": 104052822,
+    "evidence": []
+  },
+  {
+    "speciesId": 104060633,
+    "evidence": []
+  },
+  {
+    "speciesId": 104060805,
+    "evidence": []
+  },
+  {
+    "speciesId": 104060854,
+    "evidence": []
+  }
+]

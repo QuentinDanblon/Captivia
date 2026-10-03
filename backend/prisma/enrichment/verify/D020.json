@@ -1,0 +1,77 @@
+[
+ {
+  "speciesId": 2000000700,
+  "status": "corrected",
+  "note": "Poids 325 kg = vache (pas mâle) ; 'bringée' non confirmé (noir, rouge ou dun) ; ajout race mixte lait/viande (page EN Dexter cattle)"
+ },
+ {
+  "speciesId": 2000000701,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000000702,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000000703,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000000704,
+  "status": "corrected",
+  "note": "'Taille moyenne' non confirmé, supprimé ; races croisées précisées (Brown Swiss, Allgäu, Ayrshire) ; première moitié du XXe s."
+ },
+ {
+  "speciesId": 2000000705,
+  "status": "removed",
+  "note": "Déjà null (aucune source) ; laissé à null"
+ },
+ {
+  "speciesId": 2000000706,
+  "status": "corrected",
+  "note": "'Adaptée aux régions montagneuses d'Asie centrale' non présent dans la source, supprimé"
+ },
+ {
+  "speciesId": 2000000707,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000000708,
+  "status": "removed",
+  "note": "Déjà null (aucune source) ; laissé à null"
+ },
+ {
+  "speciesId": 2000000709,
+  "status": "verified",
+  "note": "Affirmations confirmées par la page sourceUrl"
+ },
+ {
+  "speciesId": 2000000980,
+  "status": "corrected",
+  "note": "'laine fine' -> poil fin ; 'maigre' non confirmé, supprimé"
+ },
+ {
+  "speciesId": 2000000981,
+  "status": "corrected",
+  "note": "Origine reformulée (race issue de porcs anglais importés ; la page ne dit pas 'originaire du comté de Hampshire' pour la race américaine) ; oreilles dressées ajouté"
+ },
+ {
+  "speciesId": 2000000982,
+  "status": "corrected",
+  "note": "Faute 'quasi-extinc' corrigée ; description complétée uniquement avec des faits de la page"
+ },
+ {
+  "speciesId": 2000000983,
+  "status": "corrected",
+  "note": "Mots anglais 'hardy/prolific' traduits ; formulation du déclin alignée sur la source"
+ },
+ {
+  "speciesId": 2000000984,
+  "status": "corrected",
+  "note": "ERREUR : la tête était dite blanche, la source dit rouge (tête, cou, croupe rouges) ; 'symbolise la résistance culturelle danoise' remplacé par la légende rapportée par la source"
+ }
+]

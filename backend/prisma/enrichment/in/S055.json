@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 103973942,
+  "commonNameFr": "Néon cardinalis",
+  "scientificName": "Paracheirodon axelrodi",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 103997157,
+  "commonNameFr": "Danio géant",
+  "scientificName": "Devario aequipinnatus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104008238,
+  "commonNameFr": "Poisson éléphant",
+  "scientificName": "Gnathonemus petersii",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

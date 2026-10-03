@@ -1,0 +1,65 @@
+[
+  {
+    "speciesId": 5959230,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation: citesAppendix I confirmé (fr + en.wikipedia) ; permits/restrictions réécrits (documents CITES, commerce international commercial interdit) ; source « official » → pages Wikipédia",
+      "feeding.specificNeeds: reformulé d'après la source (argile des lèches pour neutraliser les toxines et obtenir du sel)",
+      "reproduction.notes: ajouté ponte 2-3 œufs, incubation 25-28 jours (fr.wikipedia) ; retiré l'élevage des jeunes « 2-3 mois »",
+      "sources: type « guide »/« vet »/« official » → « wikipedia », titres normalisés",
+      "behavior: « tempérament affectueux » retiré ; « enfants 10+ » → enfants plus âgés avec supervision"
+    ],
+    "removed": [
+      "legislation.euAnnex « A » → null (non confirmé)",
+      "legislation.permits « Autorisation préfecture pour NAC » et restrictions « pas de reproduction sans autorisation / traçabilité requise » (non confirmés)",
+      "habitat.tempMin 15 / tempMax 28 → null",
+      "habitat.minSpaceSize « 2m x 2m x 2m » → null (non confirmé)",
+      "habitat.lightNeeds « 10-12 h » → null",
+      "habitat.hygieneNotes: retiré « 2x/semaine »",
+      "reproduction.sexualMaturityMonths 48 → null (non confirmé)"
+    ],
+    "confidence": "medium",
+    "notes": "dietType « frugivore » conservé (fr.wikipedia : fruits, noix, bourgeons ; en.wikipedia : surtout graines). Section health : la page ne cite aucune maladie ; psittacose, aspergillose et carence en vitamine A conservées comme conseils génériques sur les psittacidés. Habitat/élevage en volière non documentés dans les sources."
+  },
+  {
+    "speciesId": 7387949,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "reproduction.notes: remplacé « pondent 5 semaines après accouplement, œufs en substrat chaud et humide » par données de la source (accouplement fin mai-début juin, 12 à 20 œufs, incubation 65 à 70 jours)",
+      "behavior.generalBehavior: « docile et curieux » → individus nés en captivité plus dociles que les sauvages (source) ; excellent grimpeur, surtout diurne confirmés",
+      "feeding.specificNeeds: retiré « 1-2 proies par repas »",
+      "sources: type « vet »/« guide »/« official » → « wikipedia » ; ajout fr.wikipedia Pantherophis obsoletus"
+    ],
+    "removed": [
+      "source https://en.wikipedia.org/wiki/Rat_snake (page générique du groupe, non vérifiée pour cette espèce)",
+      "health: « Inclusion Body Disease (IBD) » supprimée (maladie des boïdés, non confirmée chez les couleuvres ratières)",
+      "legislation (« allowed », aucune information légale dans les sources) → null",
+      "habitat.tempMin 22 / tempMax 28 / humidité 50-70 / terrarium 100x60x60 → null (non confirmés)",
+      "reproduction.gestationDays 35 → null ; sexualMaturityMonths 24 → null (non confirmés)",
+      "feeding.mealFrequency every_2_days → null (incohérent avec les repas hebdomadaires et non confirmé)",
+      "behavior.sociability « solitaire » → null (la source indique des hibernations en groupes)"
+    ],
+    "confidence": "medium",
+    "notes": "Confirmés : régime (souris, rats, autres serpents, lézards, oiseaux), 12-20 œufs, incubation 65-70 jours, accouplement fin mai-début juin. Mycoses/bactéries et parasites : non cités mais courants chez les serpents captifs."
+  },
+  {
+    "speciesId": 7572096,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.minSpaceSize: retiré « 200L préféré » ; 150 litres minimum et groupe de 5 confirmés (fr.wikipedia), aquarium d'au moins 76 cm (en.wikipedia)",
+      "behavior: ajout groupe d'au moins 5, ne supporte pas la solitude (fr.wikipedia) ; « excellent pour enfants, tolérant » reformulé (la page signale un risque de mordillement des nageoires)",
+      "behavior.compatibilityWithOtherAnimals: précisé qu'il peut stresser les espèces calmes (fr.wikipedia)",
+      "health: « (Flexibacter) » retiré du nom de la pourriture des nageoires ; « copépodes, anguillules » retiré",
+      "reproduction.notes: œufs « plusieurs centaines » (EN) à « plus de 1 000 » (FR), éclosion 24-36 h, nage libre vers 6 jours",
+      "sources: type « vet »/« official »/« guide » → « wikipedia »"
+    ],
+    "removed": [
+      "reproduction.litterSizeMin 500 / litterSizeMax 2000 → null (sources divergentes : plusieurs centaines vs plus de 1000)",
+      "reproduction.sexualMaturityMonths 4 → null (la source donne une taille de 63,5 mm, pas un âge)",
+      "reproduction.season « toute l'année » → null (non confirmé)",
+      "habitat.lightNeeds « 8-10h/jour » → null ; hygieneNotes : chiffres retirés (25 % hebdo, filtre 2x/mois)"
+    ],
+    "confidence": "medium",
+    "notes": "Température conservée à 18-26 °C (EN : milieu naturel 18-22 °C ; FR : aquarium 20-26 °C). Legislation « allowed » conservée (poisson d'aquarium courant, IUCN préoccupation mineure, aucune inscription CITES indiquée) mais la page ne traite pas la réglementation française : confiance basse sur cette section. Maladies (ich, pourriture des nageoires, parasites) non citées par la page mais courantes chez les poissons d'aquarium."
+  }
+]

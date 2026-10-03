@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000236,
+    "status": "corrected",
+    "note": "Page FR Dendrobates_tinctorius : variantes bleu/jaune/noir, forêts tropicales humides près des cours d'eau, Guyana/Suriname/Guyane/Brésil : confirmés. Corrigé : mâles 40-50 mm, femelles jusqu'à 60 mm ; venin = toxines cutanées passives (pas 'puissant'), toxicité perdue en captivité."
+  },
+  {
+    "speciesId": 2000000237,
+    "status": "corrected",
+    "note": "Page FR Triturus_vulgaris (= Lissotriton vulgaris, triton ponctué) : 7-11 cm (mâle), crête dorsale ondulée, femelle uniformément brune, eaux stagnantes ensoleillées : confirmés. Corrigé : aire = d'Irlande à la Sibérie occidentale (pas seulement 'Europe du Nord et de l'Est'). Supprimé : 'riches en végétation' (non confirmé)."
+  },
+  {
+    "speciesId": 2000000238,
+    "status": "corrected",
+    "note": "Page FR Salamandra_salamandra : jusqu'à 20 cm, peau noire à taches jaunes, adultes exclusivement terrestres, forêts de feuillus/bois mort/pierres : confirmés. Corrigé : 'se reproduit uniquement en eau douce' était faux (femelle ovovivipare déposant des larves dans l'eau ; populations méridionales vivipares)."
+  },
+  {
+    "speciesId": 2000000239,
+    "status": "verified",
+    "note": "Page FR Bufo_bufo : plus gros et plus répandu des crapauds d'Europe, mâles 50-90 mm/femelles 80-110 mm, trapu, peau pustuleuse, venin, milieux humides frais et boisés (jusqu'à 1 500 m en montagne), insectes et petites proies : confirmé."
+  },
+  {
+    "speciesId": 2000000240,
+    "status": "corrected",
+    "note": "Page FR Xenopus_tropicalis : 4-6 cm, peau lisse, griffes, étangs et mares d'Afrique tropicale, Afrique de l'Ouest : confirmés. Précisé : reproduction toute l'année, préférentiellement de mai à juillet."
+  },
+  {
+    "speciesId": 2000000241,
+    "status": "corrected",
+    "note": "Page FR Hyla_cinerea (= Dryophytes cinereus) : endémique des USA, Texas-Virginie, Hylidae, sac vocal inférieur, UICN LC : confirmés. Supprimé : 'pour délimiter son territoire et sa reproduction' (non confirmé)."
+  },
+  {
+    "speciesId": 2000000242,
+    "status": "corrected",
+    "note": "Page FR Ceratophrys_ornata : Pampas d'Argentine, Uruguay, jusqu'à 12 cm, corps bien en chair, bouche immense, yeux saillants, peau verte, s'enterre dans la boue : confirmés. Corrigé : présence au Brésil seulement probable ; supprimé : 'zones humides' (non confirmé). Statut quasi menacé ajouté."
+  },
+  {
+    "speciesId": 2000000243,
+    "status": "corrected",
+    "note": "Page FR Dyscophus_antongilii : nord-est de Madagascar, mâles 60-65 mm/femelles 85-105 mm, jaune-orangé à rouge foncé, femelle plus vive, toxines défensives : confirmés. Corrigé : c'est une grenouille (Microhylidae), non un crapaud ; supprimé 'dos'."
+  },
+  {
+    "speciesId": 2000000244,
+    "status": "corrected",
+    "note": "Page FR Paracheirodon_innesi : 3-5 cm, bande bleu-vert + zone rouge, groupe d'une dizaine minimum, 22-28 °C, 80-120 l pour une dizaine : confirmés. Corrigé : Pérou = sud du Pérou ; supprimé 'bac bien planté' (non confirmé)."
+  },
+  {
+    "speciesId": 2000000245,
+    "status": "verified",
+    "note": "Page FR Poecilia_sphenops : Amérique centrale, femelles jusqu'à 6 cm/mâles 4 cm en nature, noir moucheté de jaune, ovovivipare, 20-50 alevins/portée, ~1 portée/mois : confirmé."
+  },
+  {
+    "speciesId": 2000000246,
+    "status": "corrected",
+    "note": "Page FR Betta_splendens : Asie du Sud-Est, 5-8 cm en captivité, 24-26 °C, combats violents entre mâles : confirmés. Corrigé : 30 l min. pour voiles longs, 40 l pour voiles courts et femelles ; pays d'origine élargis (Thaïlande, Indonésie, Cambodge, Viêt Nam, Laos, Malaisie). Supprimé : 'végétation abondante' (non spécifié pour le mâle)."
+  },
+  {
+    "speciesId": 2000000247,
+    "status": "corrected",
+    "note": "Page FR Carassius_auratus : description Fantail confirmée par citation (corps en œuf, dorsale haute, caudale quadruple) ; 100 L min + 50 L/poisson et pH 7-8 confirmés. Corrigé : supprimé 'mesure 15-20 cm' (la page donne jusqu'à 47 cm pour le poisson rouge classique) et '22-28 °C' (la page : 1 à 28 °C) ; 'filtration puissante' non confirmé."
+  },
+  {
+    "speciesId": 2000000248,
+    "status": "corrected",
+    "note": "Page FR Carassius_auratus : description Oranda confirmée par citation ; 100 L min + 50 L/poisson et pH 7-8 confirmés. Corrigé : supprimé 'mesure 15-20 cm', '22-28 °C', 'filtration puissante', 'chinois', 'remarquable' (non confirmés/contredits)."
+  },
+  {
+    "speciesId": 2000000249,
+    "status": "corrected",
+    "note": "Page FR Carassius_auratus : description Ryukin confirmée par citation ; 100 L min + 50 L/poisson et pH 7-8 confirmés. Corrigé : supprimé 'mesure 15-20 cm', '22-28 °C', 'filtration puissante', 'chinois'."
+  },
+  {
+    "speciesId": 2000000250,
+    "status": "corrected",
+    "note": "Page FR Carassius_auratus : description Black Moor/télescope confirmée par citation ; 100 L min + 50 L/poisson et pH 7-8 confirmés. Corrigé : supprimé 'mesure 15-20 cm', '22-28 °C', 'filtration puissante', 'chinois'."
+  }
+]

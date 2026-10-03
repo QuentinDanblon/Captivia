@@ -9,6 +9,7 @@ import {
   UseGuards,
   Req,
   ForbiddenException,
+  Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -17,6 +18,7 @@ import {
   CreateBreedingRecordDto,
   UpdateBreedingRecordDto,
 } from './dto/breeding-record.dto';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @ApiTags('animals')
 @Controller('users/me/animals/:animalId/breeding')
@@ -39,9 +41,10 @@ export class BreedingController {
   async findAll(
     @Req() req: { user: { id: string; isPremium?: boolean } },
     @Param('animalId') animalId: string,
+    @Query() page: PaginationQueryDto,
   ) {
     this.ensurePremium(req);
-    return this.breedingService.findAll(animalId, req.user.id);
+    return this.breedingService.findAll(animalId, req.user.id, page);
   }
 
   @Post()

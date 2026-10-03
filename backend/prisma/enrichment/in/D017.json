@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000577,
+  "commonNameFr": "Blue Of Sint-Niklaas",
+  "scientificName": "Blue of Sint-Niklaas",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000578,
+  "commonNameFr": "Fee de Marbourg",
+  "scientificName": "Fee de Marbourg",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000579,
+  "commonNameFr": "Miniature Lop",
+  "scientificName": "Miniature Lop",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000580,
+  "commonNameFr": "Teddyzwerg",
+  "scientificName": "Teddyzwerg",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000581,
+  "commonNameFr": "Lux",
+  "scientificName": "Lux",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000582,
+  "commonNameFr": "Californien",
+  "scientificName": "Californien",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000583,
+  "commonNameFr": "Jamora",
+  "scientificName": "Jamora",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000584,
+  "commonNameFr": "Tan Rabbit",
+  "scientificName": "Tan rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000585,
+  "commonNameFr": "Gotland Rabbit",
+  "scientificName": "Gotland rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000586,
+  "commonNameFr": "Czech Red",
+  "scientificName": "Czech Red",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000587,
+  "commonNameFr": "Havana",
+  "scientificName": "Havana",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000588,
+  "commonNameFr": "American Sable",
+  "scientificName": "American Sable",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000589,
+  "commonNameFr": "Perlfee",
+  "scientificName": "Perlfee",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000590,
+  "commonNameFr": "Blue Of Ham",
+  "scientificName": "Blue of Ham",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000591,
+  "commonNameFr": "Liptov Baldspotted Rabbit",
+  "scientificName": "Liptov Baldspotted Rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

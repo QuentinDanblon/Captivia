@@ -1,0 +1,77 @@
+[
+ {
+  "speciesId": 2000001000,
+  "description": "Le porc Turopolje est une race ancienne originaire de Turopolje en Croatie, au sud de Zagreb. Bien que relativement petit et à maturation lente, il est réputé pour sa robustesse en conditions d'élevage extensif. La race se distingue par sa couche de graisse épaisse et ses taches noires sur une peau grisâtre.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Turopolje_pig"
+ },
+ {
+  "speciesId": 2000001001,
+  "description": "Le Tamworth est une race porcine britannique originaire de la région de Tamworth dans le Staffordshire. De taille moyenne avec un corps fin et allongé, ce porc se caractérise par une robe distinctive de couleur rouge-or. Cette race est principalement élevée pour la production de bacon.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Tamworth_pig"
+ },
+ {
+  "speciesId": 2000001002,
+  "description": "Le Chato Murciano est une race de porc domestique originaire de Murcie, en Espagne, caractérisée par son museau court et sa petite tête. Sa robe est noire ou blanche, certains sujets portant des taches blanches (queue, pattes). Il est élevé principalement pour le bacon et la viande maigre, et s'adapte bien au climat chaud et sec du sud de l'Espagne.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Chato_Murciano"
+ },
+ {
+  "speciesId": 2000001003,
+  "description": "Le Gloucestershire Old Spots est une race porcine anglaise, nommée d'après le comté de Gloucestershire, à robe blanche tachetée de noir. Les verrats atteignent environ 272 kg et les truies 227 kg. La race est connue pour sa docilité, son intelligence, sa prolificité et sa rusticité ; ses truies, très bonnes mères, élèvent de grandes portées au pâturage.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Gloucestershire_Old_Spots"
+ },
+ {
+  "speciesId": 2000001004,
+  "description": "Le Porco celta est une race de porc originaire de la Galice, en Espagne du nord-ouest, avec une robe noire et blanche distinctive. Ces animaux se développent plus lentement que les races modernes et accumulent davantage de graisse. Ils sont particulièrement adaptés à la production de charcuterie traditionnelle.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Celtic_pig"
+ },
+ {
+  "speciesId": 2000001005,
+  "description": "Le Porc Noir de Jeju est une race coréenne originaire de l'île de Jeju au sud de la Corée du Sud. Il s'agit d'un petit porc au pelage noir lisse avec des oreilles droites et un museau étroit. Sa viande possède une saveur distinctive et est traditionnellement fumée.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Jeju_Black_Pig"
+ },
+ {
+  "speciesId": 2000001006,
+  "description": "Le Middle White est une race porcine britannique originaire du Yorkshire, dérivée de la Large White et de la Small White disparue. De taille moyenne, ce porc pèse environ 275 kg pour les mâles et 225 kg pour les femelles, se distinguant par un museau court et relevé. Traditionnellement élevée pour la production de porc frais, c'est une race en danger.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Middle_White_pig"
+ },
+ {
+  "speciesId": 2000001007,
+  "description": "Le porc d'Ossabaw Island descend d'une population de porcs férals de l'île d'Ossabaw, en Géorgie (États-Unis), issue de porcs lâchés par des explorateurs espagnols au XVIe siècle. Petit (moins de 51 cm de haut) et pesant moins de 90 kg, il est rustique et très bon fouilleur, utile en élevage extensif.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Ossabaw_Island_Hog"
+ },
+ {
+  "speciesId": 2000001008,
+  "description": "Le Red Wattle Hog est une race porcine originaire des États-Unis, nommée pour sa robe rouge et ses pendeloques (« wattles » ou « tassels ») caractéristiques. Ces porcs pèsent typiquement de 360 à 450 kg ; ils grandissent vite, fouillent bien et sont rustiques, au tempérament doux et résistants aux maladies. Ils sont réputés pour leurs qualités maternelles et conviennent à l'élevage extensif.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Red_Wattle_hog"
+ },
+ {
+  "speciesId": 2000001009,
+  "description": "Le porc Taihu est une race domestique originaire de la région du lac Tai, dans la vallée du bas Yangtsé en Chine. Grand, noir, avec une grosse tête au front large, des oreilles larges et repliées et le visage fortement ridé, il se distingue par son taux de reproduction élevé : jusqu'à vingt porcelets par portée, quatorze en moyenne.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Taihu_pig"
+ },
+ {
+  "speciesId": 2000001010,
+  "description": "Le Wessex Saddleback est une race porcine originaire du West Country en Angleterre (Wessex), notamment du Wiltshire et de la New Forest. C'est un grand animal élancé, noir, avec une bande blanche allant d'une patte avant à l'autre en passant sur les épaules, comme une selle. Adapté à la recherche de nourriture en forêt, il a traditionnellement été élevé comme porc à bacon et à jambon.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Wessex_Saddleback"
+ },
+ {
+  "speciesId": 2000001011,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000001012,
+  "description": "Le Göttingen Minipig est un porc miniature élevé au début des années 1960 à l'Université de Göttingen, en Allemagne. Il est issu de petits porcs vietnamiens croisés avec le Minnesota Miniature, une variante blanche ayant été obtenue par croisement avec le Landrace allemand. Il est surtout utilisé en recherche médicale en raison de ses similitudes biochimiques, anatomiques et physiologiques avec l'humain.",
+  "sourceUrl": "https://en.wikipedia.org/wiki/Minipig"
+ },
+ {
+  "speciesId": 2000001013,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000001115,
+  "description": null,
+  "sourceUrl": null
+ }
+]

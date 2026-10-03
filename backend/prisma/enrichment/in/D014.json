@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000448,
+  "commonNameFr": "Colley (race de Chien)",
+  "scientificName": "Colley (race de chien)",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000449,
+  "commonNameFr": "Cocker Spaniel",
+  "scientificName": "cocker spaniel",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000450,
+  "commonNameFr": "Fox-terrier",
+  "scientificName": "Fox-terrier",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000495,
+  "commonNameFr": "Outil de Dessin Technique",
+  "scientificName": "outil de dessin technique",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000496,
+  "commonNameFr": "Bendo",
+  "scientificName": "bendo",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000497,
+  "commonNameFr": "Outil de Programmation",
+  "scientificName": "outil de programmation",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000498,
+  "commonNameFr": "Fire Hatchet",
+  "scientificName": "fire hatchet",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000499,
+  "commonNameFr": "Halligan",
+  "scientificName": "halligan",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000500,
+  "commonNameFr": "Test Equipment",
+  "scientificName": "test equipment",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000501,
+  "commonNameFr": "Joiners' Hammer",
+  "scientificName": "Joiners' hammer",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000502,
+  "commonNameFr": "Priling Tower",
+  "scientificName": "priling tower",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000503,
+  "commonNameFr": "Hacktool",
+  "scientificName": "hacktool",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000504,
+  "commonNameFr": "Outil Agricole",
+  "scientificName": "outil agricole",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000505,
+  "commonNameFr": "Équipement Médical",
+  "scientificName": "équipement médical",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000506,
+  "commonNameFr": "Bingo Dabber",
+  "scientificName": "bingo dabber",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

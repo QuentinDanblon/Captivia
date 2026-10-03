@@ -1,0 +1,453 @@
+[
+  {
+    "speciesId": 8909809,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Poissons, crevettes, vers aquatiques",
+          "frequency": "3-4x/semaine",
+          "notes": "Les jeunes sont surtout carnivores"
+        },
+        {
+          "name": "Végétation aquatique (laitue d'eau), fruits",
+          "frequency": "hebdomadaire",
+          "notes": "La part végétale augmente avec l'âge selon Wikipedia (EN)"
+        },
+        {
+          "name": "Mollusques, escargots",
+          "frequency": "hebdomadaire",
+          "notes": "Proies naturelles (mollusques, crustacés, larves d'insectes)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insecticides ou herbicides",
+          "reason": "Toxicité directe, bioaccumulation"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Régime principalement carnivore (insectes aquatiques, alevins, vers, mollusques, crustacés, têtards), qui évolue vers davantage de végétaux avec l'âge",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cistude_d'Europe",
+          "title": "Cistude d'Europe - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emys_orbicularis",
+          "title": "European pond turtle - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Grand bassin (de préférence extérieur) avec zone terrestre sèche et zone d'insolation ; espèce semi-aquatique atteignant 12 à 38 cm de carapace",
+      "lightNeeds": "Longues périodes d'insolation sur troncs ou berges (basking), UVB recommandés en intérieur",
+      "activityEnrichment": "Roches basking, plantes aquatiques, abris, substrat pour nidification femelles",
+      "hygieneNotes": "Filtration efficace, changements d'eau réguliers, retrait régulier des déjections",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cistude_d'Europe",
+          "title": "Cistude d'Europe - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emys_orbicularis",
+          "title": "European pond turtle - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Semi-aquatique et diurne, méfiante ; passe beaucoup de temps à s'exposer au soleil ; peut parcourir jusqu'à 800 m lors de la ponte et s'enfouit dans la vase en hiver",
+      "sociability": null,
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Enfants 10+ avec supervision stricte, ne jamais manipuler si stress",
+      "compatibilityWithOtherAnimals": "Peut coexister autres Emys si espace adéquat, prédation petits poissons",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cistude_d'Europe",
+          "title": "Cistude d'Europe - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emys_orbicularis",
+          "title": "European pond turtle - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladie respiratoire (bactérienne ou fongique)",
+          "symptoms": "Yeux gonflés, écoulement nasal, respiration difficile, nez gonflé, refus nourriture",
+          "prevention": "Eau propre, température stable, zone sèche basking, ventilation adéquate",
+          "whenToConsult": "Urgence, souvent fatale sans traitement rapide"
+        },
+        {
+          "name": "Shell Rot (nécrose carapace)",
+          "symptoms": "Points mous carapace, odeur désagréable, plaques blanches/molles",
+          "prevention": "Hygiène eau excellente, zone sèche, UVB régulier, pas surpopulation",
+          "whenToConsult": "Rapidement, infection progressive"
+        },
+        {
+          "name": "Carence en vitamine A",
+          "symptoms": "Yeux gonflés, inflammation paupières fermées, refus nourriture, infections récurrentes",
+          "prevention": "UVB 6-8h jour, alimentation variée fruits-légumes, suppléments vitaminés",
+          "whenToConsult": "Dès premier signe oculaire ou respiratoire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emys_orbicularis",
+          "title": "European pond turtle - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [
+          "Certificat de capacité",
+          "Établissement d'élevage autorisé"
+        ],
+        "restrictions": [
+          "Espèce intégralement protégée en France (Code de l'environnement L411-1 et L411-2)",
+          "Détention réservée aux établissements d'élevage autorisés",
+          "Identification par puce RFID obligatoire (fichier national d'identification)"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cistude_d'Europe",
+          "title": "Cistude d'Europe - Wikipédia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "avril-mai",
+      "gestationDays": null,
+      "incubationDays": 90,
+      "litterSizeMin": 3,
+      "litterSizeMax": 16,
+      "sexualMaturityMonths": 120,
+      "breedingDifficulty": "avance",
+      "notes": "Accouplement en avril-mai ; 3 à 16 oeufs (moyenne 7-8) pondus dans un trou de 6-12 cm ; incubation d'environ 3 mois ; sexe déterminé par la température du nid (plus de mâles à basse température) ; maturité vers 10-12 ans",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Cistude_d'Europe",
+          "title": "Cistude d'Europe - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emys_orbicularis",
+          "title": "European pond turtle - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 8953936,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Poissons, crustacés",
+          "frequency": "quotidienne juvénile, 3-4x/semaine adulte",
+          "notes": "Poissons surtout en saison sèche"
+        },
+        {
+          "name": "Petits mammifères (rats, souris)",
+          "frequency": "hebdomadaire adulte",
+          "notes": "Les grands individus consomment des mammifères"
+        },
+        {
+          "name": "Escargots, crabes d'eau douce",
+          "frequency": "saison des pluies",
+          "notes": "Proies principales en saison des pluies"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop volumineuses",
+          "reason": "Fausse route, étouffement"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Carnivore opportuniste au régime variable selon la saison (escargots et crabes en saison des pluies, poissons en saison sèche) ; les jeunes consomment davantage d'insectes",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Caïman_à_lunettes",
+          "title": "Caïman à lunettes - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Spectacled_caiman",
+          "title": "Spectacled caiman - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 32,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Très grand bassin avec zone terrestre : l'adulte mesure 1,4 à 2,5 m (jusqu'à 40 kg ou plus)",
+      "lightNeeds": "Zone d'insolation chauffée à proximité de l'eau",
+      "activityEnrichment": "Zone nage profonde, roches basking émergeantes, cachettes subaquatiques, eau circulante",
+      "hygieneNotes": "Filtration excellente, changement eau 30% hebdomadaire minimum, décantage quotidien",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Caïman_à_lunettes",
+          "title": "Caïman à lunettes - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Spectacled_caiman",
+          "title": "Spectacled caiman - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Souvent immobile au bord de l'eau mais capable de mouvements rapides en cas de menace ; mâles agressifs en saison des pluies ; communication complexe (9 vocalisations, 13 affichages visuels)",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Dangereux enfants, requiert expérience herpétologique, morsure graves",
+      "compatibilityWithOtherAnimals": "Peut tolérer congénères si espace énorme, prédation mammifères-reptiles petits",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Caïman_à_lunettes",
+          "title": "Caïman à lunettes - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Spectacled_caiman",
+          "title": "Spectacled caiman - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections bactériennes cutanées (fissures, ulcères)",
+          "symptoms": "Plaques blanches/rouges écailles, plaies ouvertes, gonflements, pus",
+          "prevention": "Eau impeccablement filtrée, pas chevauchement agressif, hygiène substrat rigoureuse",
+          "whenToConsult": "Rapidement, infections systémiques rapides chez crocodiliens"
+        },
+        {
+          "name": "Parasites internes (vers, protozoaires)",
+          "symptoms": "Diarrhée sanglante, amaigrissement progressif, refus nourriture, distension abdominale",
+          "prevention": "Nourriture inspectée, eau filtrée, examen fecès annuel recommandé",
+          "whenToConsult": "Dès symptômes digestifs anormaux persistants"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Spectacled_caiman",
+          "title": "Spectacled caiman - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [
+          "Certificat CITES"
+        ],
+        "restrictions": [
+          "Sous-espèce C. c. apaporiensis en annexe I de la CITES"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Caïman_à_lunettes",
+          "title": "Caïman à lunettes - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Spectacled_caiman",
+          "title": "Spectacled caiman - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "mai-août",
+      "gestationDays": null,
+      "incubationDays": 90,
+      "litterSizeMin": 14,
+      "litterSizeMax": 40,
+      "sexualMaturityMonths": 48,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare : accouplement de mai à août, ponte en juillet-août ; 14 à 40 oeufs (moyenne 22) ; incubation d'environ 90 jours, sexe déterminé par la température du nid ; maturité à 4-7 ans (environ 1,2 m) ; soins parentaux de 12 à 18 mois",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Caïman_à_lunettes",
+          "title": "Caïman à lunettes - Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Spectacled_caiman",
+          "title": "Spectacled caiman - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 9032472,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes variés (grillons, vers)",
+          "frequency": "3-4x/semaine",
+          "notes": "Proies principales en captivité"
+        },
+        {
+          "name": "Végétaux (laitue, courge, fruits mous)",
+          "frequency": "hebdomadaire",
+          "notes": "Complément alimentaire"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes sauvages non inspectés",
+          "reason": "Parasites, pesticides bioaccumulés toxiques"
+        },
+        {
+          "name": "Proies trop volumineuses",
+          "reason": "Impaction, étouffement possible"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Diversité alimentaire importante ; supplément en calcium et vitamine D3 généralement recommandé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eumeces_schneideri",
+          "title": "Schneider's skink - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium 100x60x60cm minimum, substrat profond pour creuser naturellement",
+      "lightNeeds": "UVB recommandés, avec une zone d'insolation chauffée",
+      "activityEnrichment": "Substrat creusable (sable/tourbe), roches basking plates, cachettes multiple",
+      "hygieneNotes": "Substrat sec bien drainé, changement partiel hebdomadaire, hygiène quotidienne",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eumeces_schneideri",
+          "title": "Schneider's skink - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Scinque terrestre des zones rocheuses, prairies, broussailles et zones humides",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Enfants 8+ avec supervision, manipulation calme tolérée si bien socialisé",
+      "compatibilityWithOtherAnimals": "À maintenir seul par précaution",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eumeces_schneideri",
+          "title": "Schneider's skink - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Metabolic Bone Disease (ostéodystrophie)",
+          "symptoms": "Jambes molles, gonflement mâchoires/articulations, colonne courbée, refus nourriture",
+          "prevention": "UVB adaptés, supplémentation en calcium, insectes enrichis en vitamines (gut-loading)",
+          "whenToConsult": "Urgence vétérinaire, condition potentiellement fatale"
+        },
+        {
+          "name": "Infections dermatologiques (mycose, bactérie)",
+          "symptoms": "Plaques décolorées, squamation anormale, gonflements, plaies, écailles détachées",
+          "prevention": "Terrarium propre, substrat sec, éviter humidité excessive, quarantaine nouveaux individus",
+          "whenToConsult": "Rapidement, infections progressives"
+        },
+        {
+          "name": "Parasites (acariens, vers)",
+          "symptoms": "Grattage excessif, taches rouges cutanées, selles anormales, refus nourriture",
+          "prevention": "Insectes nourris vitamines, hygiène stricte, inspection régulière, substrat nouveau régulier",
+          "whenToConsult": "Dès symptômes comportement ou digestion anormaux"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eumeces_schneideri",
+          "title": "Schneider's skink - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eumeces_schneideri",
+          "title": "Schneider's skink - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Espèce ovipare",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Eumeces_schneideri",
+          "title": "Schneider's skink - Wikipedia"
+        }
+      ]
+    }
+  }
+]

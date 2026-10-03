@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000111,
+    "description": "Le Maine Coon est une race de chat originaire de l'État du Maine aux États-Unis, probablement issue de croisements entre des chats de ferme locaux et des chats importés par les immigrants européens. C'est l'une des plus grandes races domestiques, avec un poids de 6 à 9 kg pour les mâles. Le Maine Coon se distingue par son tempérament sociable et affectueux, décrit comme un gentil géant très attaché à sa famille.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Maine_Coon"
+  },
+  {
+    "speciesId": 2000000112,
+    "description": "Le Siamois est une race féline originaire de Thaïlande, considérée comme sacrée et autrefois réservée à la famille royale. Ce chat présente un corps svelte et bien musclé avec une silhouette longiligne et élégante. Très attaché à son propriétaire, il se distingue par son intelligence et son besoin constant de compagnie, ce qui en fait un compagnon exceptionnellement proche de l'humain.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chat_siamois"
+  },
+  {
+    "speciesId": 2000000113,
+    "description": "Le Bengal est une race de chat originaire des États-Unis, issue du croisement entre un chat domestique et le chat-léopard sauvage d'Asie. C'est un félin de taille moyenne à grande, athlétique et musclé, caractérisé par sa fourrure ressemblant à celle de son ancêtre sauvage. Vif, intelligent et très affectueux, il se distingue par son attrait pour l'eau et ses vocalises proches de celles des grands fauves.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Bengal_(chat)"
+  },
+  {
+    "speciesId": 2000000114,
+    "description": "Le British Shorthair est originaire de Grande-Bretagne, où il descend des chats de ferme britanniques. C'est un chat de taille moyenne à grande, robuste et puissant aux formes arrondies. Son tempérament se caractérise par son calme, sa douceur et son affection, bien qu'il reste indépendant et peu exigeant en attention.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/British_Shorthair"
+  },
+  {
+    "speciesId": 2000000115,
+    "description": "Le Scottish Fold est originaire d'Écosse : le premier spécimen connu de chat aux oreilles pliées, Susie, une chatte vivant dans une ferme au nord de Dundee, a été découvert en 1961. C'est un chat de taille moyenne à grande, au corps large, musclé et massif mais tout en rondeur, avec une tête large et très arrondie. Son tempérament est décrit comme calme et plutôt silencieux, mais très joueur, et il apprécie la compagnie de ses semblables.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Scottish_Fold"
+  },
+  {
+    "speciesId": 2000000116,
+    "description": "Le chat Sphynx, originaire du Canada depuis 1966, est issu d'une mutation génétique naturelle. De taille moyenne avec un corps musclé et élancé, il se distingue par son absence de fourrure. Ce félin affiche un tempérament remarquablement sociable et ressemblant à celui d'un chien, très attaché à ses propriétaires et particulièrement énergique et curieux.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Sphynx_cat"
+  },
+  {
+    "speciesId": 2000000117,
+    "description": "L'Abyssin est une race de chat développée au Royaume-Uni, avec des références remontant au moins aux années 1890 ; des études génétiques indiquent que des chats d'Asie et d'Europe ont servi à la créer. De taille moyenne, il pèse en moyenne 4,5 kg. Très sociable et demandeur d'attention, ludique, il est parfois surnommé le « clown du monde félin ».",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Abyssinian_cat"
+  },
+  {
+    "speciesId": 2000000118,
+    "description": "Le Sacré de Birmanie est une race de chat dont l'origine la plus souvent envisagée est française, dans les années 1920, d'un accouplement fortuit entre un siamois ganté de blanc et un persan. De taille moyenne, il possède une fourrure mi-longue avec un patron colorpoint comme le Siamois, mais des pattes d'un blanc pur, en forme de gants. Affectueux et doux, calme et à la voix douce, il est sociable et s'adapte bien à la vie en famille.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Sacré_de_Birmanie"
+  },
+  {
+    "speciesId": 2000000119,
+    "description": "Le Chartreux est une race de chat originaire du Proche-Orient, probablement de Syrie, qui aurait été ramenée en France au temps des croisades. C'est un chat de taille moyenne à grande au corps musclé et robuste, au pelage court et fourni entièrement bleu et aux yeux or à cuivre. Enjoué, très sociable et fidèle, il est qualifié de « chat-chien » : peu miauleur, il aime suivre son maître de pièce en pièce.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chartreux_(chat)"
+  },
+  {
+    "speciesId": 2000000120,
+    "description": "Le Devon Rex est une race originaire du Royaume-Uni, où un chaton à la fourrure bouclée a été recueilli près de Buckfastleigh, dans le Devon, en 1960. De taille moyenne, au corps ferme, musclé et gracieux, il a une tête conique aux pommettes hautes, de larges oreilles et une robe courte et frisée. Joueur, espiègle et très proche des humains, il réclame beaucoup d'attention et se comporte parfois comme un chien.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Devon_Rex"
+  },
+  {
+    "speciesId": 2000000121,
+    "description": "L'Exotic Shorthair est une race américaine née dans les années 1950 d'un croisement entre persan et American Shorthair. Ce chat de taille moyenne à grande possède un corps ramassé et musclé, avec une tête ronde massive au nez écrasé. Doté d'un tempérament calme et joueur, il s'adapte bien à la vie en appartement et partage la morphologie caractéristique du persan en version à poils courts.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Exotic_Shorthair"
+  },
+  {
+    "speciesId": 2000000122,
+    "description": "L'Himalayen est une race de chat originaire des États-Unis, issue de croisements entre Siamois et Persans à partir de 1947. De silhouette cobby, il a un poil long avec sous-poil abondant, une robe colourpoint et des yeux bleus. Calme et doux, il serait toutefois un peu plus actif que son cousin le Persan, du fait de son héritage siamois.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Himalayen"
+  },
+  {
+    "speciesId": 2000000123,
+    "description": "Le Korat est une race naturelle ancienne originaire de Thaïlande, citée parmi les chats porte-bonheur dans le Tamra Maew (rédigé entre 1350 et 1767). Ce chat, qui pèse de 2,5 à 4,5 kg, se distingue par sa robe bleue et ses yeux verts. Son caractère est souvent décrit comme proche de celui du Siamois : très fidèle, fortement attaché à son propriétaire et gardant un vif intérêt pour le jeu toute sa vie.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Korat_(chat)"
+  },
+  {
+    "speciesId": 2000000124,
+    "description": "Le Manx, originaire de l'île de Man, se caractérise par une absence de queue causée par une mutation génétique. C'est un chat de taille moyenne à grande au corps musclé, compact, puissant mais tout en rondeur. Son tempérament est décrit comme facile à vivre, qui s'adapte bien aux changements, et affectueux avec son propriétaire, ce qui en fait un compagnon agréable et robuste.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Manx_(chat)"
+  },
+  {
+    "speciesId": 2000000125,
+    "description": "Le Norvégien est originaire de Norvège, où il s'est développé par sélection naturelle du climat froid des pays scandinaves. C'est un chat de grande taille, solidement bâti avec une forte ossature, caractérisé par sa fourrure épaisse et mi-longue. Généralement rustique, sûr de lui et très posé, il possède un tempérament sportif nécessitant un environnement adapté avec espace ou arbres à chat.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Chat_des_forêts_norvégiennes"
+  }
+]

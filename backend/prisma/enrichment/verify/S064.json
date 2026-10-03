@@ -1,0 +1,50 @@
+[
+  {
+    "speciesId": 104101859,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.specificNeeds: régime naturel (oiseaux, reptiles, mammifères, constriction) ajouté d'après fr.wikipedia Python_bivittatus",
+      "reproduction.notes: 20-50 œufs (rarement 100), ponte 7-8 semaines après accouplement, incubation ~2 mois confirmés; 'enroulée en cône' retiré (la source dit: garde les œufs et fournit de la chaleur métabolique)",
+      "behavior.generalBehavior: nocturne, grimpeur, nageur, cavités/terriers confirmés"
+    ],
+    "removed": [
+      "health (section -> null): unique source wamiz.com (page d'accueil); 'Inclusion corporelle (BOA et pythons)' douteux",
+      "legislation (section -> null): CITES II confirmé par la page, mais 'Certificat de capacité (Arrêté 21/11/1997)' et euAnnex B non confirmés, statut français non vérifiable; source cites.org générique",
+      "habitat.minSpaceSize ('120x60x60 cm minimum pour adulte') -> null: dimension manifestement insuffisante pour un adulte pouvant dépasser plusieurs mètres (danger pour le bien-être)",
+      "reproduction.sexualMaturityMonths (36) et season (printemps) -> null (non mentionnés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104104828,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation.status: prohibited -> permit_required (CITES I depuis 1975 confirmé par fr.wikipedia Astrochelys_radiata; aucune source ne dit 'interdite'); euAnnex A -> null; permits/restrictions 'interdite à la possession' retirés; source cites.org générique remplacée par Wikipédia",
+      "feeding: Opuntia préféré + 80-90 % pâturage confirmés; '(plus protéines, moins fibres)' retiré; 'calcium 2-3x/semaine' -> 'réguliers'",
+      "reproduction.notes: 3-12 œufs, incubation 5-8 mois, nouveau-nés 3,2-4 cm confirmés; 'blanc-cassé' et 'en terriers' retirés"
+    ],
+    "removed": [
+      "health (section -> null): unique source wamiz.com (page d'accueil)",
+      "habitat.minSpaceSize (enclos 2 m² / terrarium 120x80x40) -> null: trop petit pour des adultes de 30-40 cm",
+      "reproduction.sexualMaturityMonths (84) et season (printemps) -> null (source: maturité des mâles à 31 cm, pas d'âge)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104105088,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: 'strictement herbivore' -> essentiellement herbivore (mange occasionnellement des charognes selon en.wikipedia Indian_star_tortoise); pourcentage '70-80 %' retiré",
+      "behavior: 'calme et pacifique' corrigé (les mâles se bousculent et tentent de retourner leurs rivaux); cohabitation: éviter plusieurs mâles",
+      "legislation.euAnnex: A -> null (non confirmé); 'protection renforcée suite à braconnage massif' retiré; CITES I confirmé (relevé en 2019 selon la page)",
+      "reproduction: 1-10 œufs, 1-9 pontes/an, maturité 6-8 ans (mâles) / 8-12 ans (femelles) confirmés; season 'toute l'année' -> null",
+      "sources: URL Geochelone_elegans remplacée par la page vérifiée Indian_star_tortoise"
+    ],
+    "removed": [
+      "health (section -> null): unique source wamiz.com (page d'accueil)",
+      "habitat.tempMin/Max (20-28) et humidité (45-65) -> null (non confirmés, plage de température jugée trop basse)",
+      "legislation: source cites.org générique retirée"
+    ],
+    "confidence": "medium"
+  }
+]

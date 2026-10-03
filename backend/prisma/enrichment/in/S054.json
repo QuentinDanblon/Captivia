@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 103951502,
+  "commonNameFr": "Cichlidé convict",
+  "scientificName": "Amatitlania nigrofasciata",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 103952549,
+  "commonNameFr": "Cichlidé de Jack Dempsey",
+  "scientificName": "Rocio octofasciata",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 103953586,
+  "commonNameFr": "Cichlidé de Ramirezi",
+  "scientificName": "Mikrogeophagus ramirezi",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

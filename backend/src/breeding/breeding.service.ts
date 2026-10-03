@@ -9,6 +9,11 @@ import {
   CreateBreedingRecordDto,
   UpdateBreedingRecordDto,
 } from './dto/breeding-record.dto';
+import {
+  PaginationQueryDto,
+  toPage,
+} from '../common/dto/pagination-query.dto';
+
 
 @Injectable()
 export class BreedingService {
@@ -34,11 +39,12 @@ export class BreedingService {
     }
   }
 
-  async findAll(animalId: string, userId: string) {
+  async findAll(animalId: string, userId: string, page?: PaginationQueryDto) {
     await this.animalsService.findOne(animalId, userId);
     return this.prisma.breedingRecord.findMany({
       where: { animalId },
-      orderBy: { date: 'desc' },
+      orderBy: [{ date: 'desc' }, { id: 'asc' }],
+      ...toPage(page),
     });
   }
 

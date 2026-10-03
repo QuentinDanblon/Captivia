@@ -1,0 +1,406 @@
+[
+  {
+    "speciesId": 104145240,
+    "feeding": {
+      "dietType": "granivore",
+      "recommendedFoods": [
+        {
+          "name": "Mélange de graines variées",
+          "frequency": "quotidienne",
+          "notes": "Millet, tournesol, avoine - le régime naturel comprend graines et fruits"
+        },
+        {
+          "name": "Fruits frais",
+          "frequency": "quotidienne",
+          "notes": "Pomme, raisin, carotte - complément vitaminé"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Chocolat",
+          "reason": "Toxique pour les oiseaux"
+        },
+        {
+          "name": "Avocat",
+          "reason": "Composé toxique (persine) dangereux pour les oiseaux"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Alimentation variée avec graines et fruits. Besoins en minéraux et calcium",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fischer%27s_lovebird",
+          "title": "Fischer's lovebird (Wikipedia EN)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Cage ou volière spacieuse : l'espèce a besoin de beaucoup de place, la captivité en espace réduit dégrade sa santé",
+      "lightNeeds": "12 heures de lumière naturelle ou artificielle quotidienne",
+      "activityEnrichment": "Jeux à mâcher, branches naturelles, jouets à détruire. Très actif et curieux",
+      "hygieneNotes": "Nettoyage régulier de la cage, bain d'eau disponible, branches fraîches à mâcher",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fischer%27s_lovebird",
+          "title": "Fischer's lovebird (Wikipedia EN)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Très vocal avec des cris aigus. Intelligent et curieux. Bon voilier. Bec très puissant et destructeur",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "À surveiller, peut être agressif s'il se sent menacé. Bec puissant peut mordre",
+      "compatibilityWithOtherAnimals": "S'accouple pour la vie avec sa partenaire et recherche le contact physique : la séparation du partenaire nuit à sa santé. À loger en couple stable plutôt que seul",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fischer%27s_lovebird",
+          "title": "Fischer's lovebird (Wikipedia EN)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Syndrome de consommation de plumes",
+          "symptoms": "Perte de plumes, automutilation, plumage hirsute",
+          "prevention": "Enrichissement environnemental adéquat, compagnie ou espace suffisant, éclairage naturel",
+          "whenToConsult": "Dès apparition de perte anormale de plumes"
+        },
+        {
+          "name": "Œuf bloqué (dystocie)",
+          "symptoms": "Apathie, respiration difficile, abdomen distendu, paralysie des pattes",
+          "prevention": "Apport de calcium et minéraux, nid approprié, femelle en bon état physique",
+          "whenToConsult": "Urgence - immédiatement si symptômes de blocage"
+        },
+        {
+          "name": "Infections par automutilation",
+          "symptoms": "Blessures ouvertes, saignements, plaies infectées",
+          "prevention": "Prévention du stress et de l'automutilation par enrichissement, lutte contre l'isolement",
+          "whenToConsult": "Dès apparition de blessures ou signes d'infection"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fischer%27s_lovebird",
+          "title": "Fischer's lovebird (Wikipedia EN)"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fischer%27s_lovebird",
+          "title": "Fischer's lovebird (Wikipedia EN) - CITES Appendix II"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 23,
+      "litterSizeMin": 3,
+      "litterSizeMax": 8,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "S'accouplent pour la vie. La femelle incube 23 jours. Les poussins s'envolent 38 à 42 jours après l'éclosion. Généralement 4-5 œufs par ponte (3 à 8 possibles)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fischer%27s_lovebird",
+          "title": "Fischer's lovebird (Wikipedia EN)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104145246,
+    "feeding": {
+      "dietType": "granivore",
+      "recommendedFoods": [
+        {
+          "name": "Mélange de graines variées",
+          "frequency": "quotidienne",
+          "notes": "Millet, tournesol, avoine - régime de graines, comme les autres inséparables"
+        },
+        {
+          "name": "Fruits frais",
+          "frequency": "quotidienne",
+          "notes": "Pomme, raisin, carotte - apport vitaminé régulier"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Chocolat",
+          "reason": "Toxique pour les oiseaux"
+        },
+        {
+          "name": "Avocat",
+          "reason": "Contient la persine, toxique pour les oiseaux"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Alimentation variée riche en graines et fruits. Minéraux et calcium essentiels",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Yellow-collared_lovebird",
+          "title": "Yellow-collared lovebird (Wikipedia EN)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Cage de reproduction minimum 400x400x500 mm par couple. Volière ou cage spacieuse recommandée pour le bien-être",
+      "lightNeeds": "12 heures de lumière quotidienne",
+      "activityEnrichment": "Matériaux de nidification (brindilles, écorces), jouets à mâcher, branches naturelles",
+      "hygieneNotes": "Accès régulier à l'eau pour les bains, nettoyage de la cage, matériaux de nidification propres",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Yellow-collared_lovebird",
+          "title": "Yellow-collared lovebird (Wikipedia EN)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Réputé moins agressif que l'inséparable à face rose, légèrement plus grand. Tête noire distinctive, bec rouge vif. Très actif et curieux",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "À surveiller, peut mordre si stressé. Manipulation douce requise",
+      "compatibilityWithOtherAnimals": "Forme des couples stables. Risque d'hybridation avec les autres espèces d'inséparables si elles sont logées ensemble",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Yellow-collared_lovebird",
+          "title": "Yellow-collared lovebird (Wikipedia EN)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Syndrome de consommation de plumes",
+          "symptoms": "Arrachage de plumes, automutilation, apparence désordonnée",
+          "prevention": "Enrichissement adéquat, prévention du stress, compagnie ou isolement approprié",
+          "whenToConsult": "Dès signes visibles de perte excessive de plumes"
+        },
+        {
+          "name": "Dystocie (œuf bloqué)",
+          "symptoms": "Apathie, respiration difficile, abdomen gonflé",
+          "prevention": "Calcium et minéraux suffisants, femelles en bon état physique, nids adéquats",
+          "whenToConsult": "Urgence vétérinaire immédiate"
+        },
+        {
+          "name": "Parasitose interne",
+          "symptoms": "Amaigrissement, diarrhée, manque d'appétit",
+          "prevention": "Hygiène de la cage, alimentation propre, contrôles vétérinaires réguliers",
+          "whenToConsult": "Consultation dès signes de maladie persistants"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Yellow-collared_lovebird",
+          "title": "Yellow-collared lovebird (Wikipedia EN)"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Yellow-collared_lovebird",
+          "title": "Yellow-collared lovebird (Wikipedia EN) - CITES Appendix II"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 23,
+      "litterSizeMin": 4,
+      "litterSizeMax": 5,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "La femelle construit le nid avec des brindilles et des écorces. Incubation d'environ 23 jours, envol à environ 42 jours après l'éclosion. Typiquement 4 à 5 œufs par ponte",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Yellow-collared_lovebird",
+          "title": "Yellow-collared lovebird (Wikipedia EN)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104145297,
+    "feeding": {
+      "dietType": "frugivore-grainovore",
+      "recommendedFoods": [
+        {
+          "name": "Fruits variés",
+          "frequency": "quotidienne",
+          "notes": "Pomme, raisin, orange, mangue - régime varié de fruits"
+        },
+        {
+          "name": "Noix et graines",
+          "frequency": "quotidienne",
+          "notes": "Noix, graines de tournesol, cacahuètes non salées"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Chocolat",
+          "reason": "Toxique pour les perroquets"
+        },
+        {
+          "name": "Avocat",
+          "reason": "La persine est toxique pour les oiseaux"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime riche en fruits, noix et graines. Apports suffisants en calcium et vitamines",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/White-fronted_amazon",
+          "title": "White-fronted amazon (Wikipedia EN)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Volière spacieuse. Habitat naturel varié : forêts humides jusqu'aux savanes sèches à cactus",
+      "lightNeeds": "Lumière naturelle 12-14 heures quotidienne, exposition solaire régulière",
+      "activityEnrichment": "Branches pour se percher et mâcher, jouets à manipuler, bassin de baignade, interactions sociales",
+      "hygieneNotes": "Bain régulier, branches fraîches variées, nettoyage fréquent de l'habitat",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/White-fronted_amazon",
+          "title": "White-fronted amazon (Wikipedia EN)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau sociable, affectueux, joueur et intelligent ; vit en groupes pouvant atteindre 50 individus. Bruyant, inadapté à la vie en appartement",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Oiseau bruyant au bec puissant ; manipulation à réserver aux personnes expérimentées",
+      "compatibilityWithOtherAnimals": "Sociable avec ses congénères. Peut cohabiter si l'espace est suffisant",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/White-fronted_amazon",
+          "title": "White-fronted amazon (Wikipedia EN)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Amazone_%C3%A0_front_blanc",
+          "title": "Amazone à front blanc (Wikipédia FR)"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Syndrome du stress (automutilation)",
+          "symptoms": "Arrachage de plumes, comportement stéréotypé, agressivité",
+          "prevention": "Enrichissement constant, socialisation, espace suffisant, interactions régulières",
+          "whenToConsult": "Dès apparition de signes de stress comportemental"
+        },
+        {
+          "name": "Lipidose hépatique",
+          "symptoms": "Léthargie, régurgitations, manque d'appétit, abdomen gonflé",
+          "prevention": "Alimentation équilibrée, exercice régulier, poids optimal",
+          "whenToConsult": "Consultation immédiate si signes de maladie"
+        },
+        {
+          "name": "Aspergillose (infection fongique)",
+          "symptoms": "Respiration difficile, détresse respiratoire, léthargie",
+          "prevention": "Hygiène de l'habitat, ventilation adéquate, absence d'humidité stagnante",
+          "whenToConsult": "Urgence vétérinaire en cas de détresse respiratoire"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/White-fronted_amazon",
+          "title": "White-fronted amazon (Wikipedia EN)"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Amazone_%C3%A0_front_blanc",
+          "title": "Amazone à front blanc (Wikipédia FR) - CITES annexe II"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 26,
+      "litterSizeMin": 3,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Femelles pondent en moyenne 3 à 4 œufs blancs. Incubation d'environ 26 jours. Les oisillons quittent le nid vers 60 jours. Longévité d'environ 40 ans, plus de 50 ans possibles en captivité",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/White-fronted_amazon",
+          "title": "White-fronted amazon (Wikipedia EN)"
+        }
+      ]
+    }
+  }
+]

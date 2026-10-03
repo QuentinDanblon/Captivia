@@ -1,0 +1,55 @@
+[
+  {
+    "speciesId": 104085484,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "feeding.recommendedFoods: 'Petits rongeurs et lézards = proies principales' -> omnivore opportuniste (fruits, légumes, insectes, rongeurs, oiseaux, poisson) selon en.wikipedia Red_tegu",
+      "feeding.specificNeeds: brumation 'recommandée 3-7 mois' -> brumation hivernale en nature jusqu'à 7 mois",
+      "habitat.lightNeeds: point chaud 28-30°C retiré (non sourcé, trop bas pour un téguu)",
+      "behavior: 'cannibalisme juvéniles' et 'agressivité territoriale mâles' retirés (non confirmés); fouisseur, dressable, diurne confirmés",
+      "reproduction.notes: longévité 15-20 ans et maturité 2-3 ans confirmées"
+    ],
+    "removed": [
+      "legislation (section -> null): CITES II confirmé mais statut français, euAnnex B et 'Arrêté 21/11/1997' non confirmés; source INPN générique retirée",
+      "habitat.tempMin/Max (18-32) et humidité (40-70) -> null (non mentionnés)",
+      "reproduction.incubationDays (65), litterSizeMin/Max (8-20) et season -> null (non mentionnés)",
+      "reproduction.notes: 'reproduction réussie en captivité avec brumation' retiré",
+      "health était déjà null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104087619,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: suggestion 'fruits de l'arbre manchineel' retirée (toxique); 'plus de 100 espèces' (et non 50+) selon la source",
+      "behavior.sociability: grégaire -> null (non confirmé); 'sédentaire en terroir limité' retiré",
+      "behavior.compatibilityWithChildren: 'mortalité élevée même experte' -> espèce en danger critique (source)",
+      "legislation.euAnnex: A -> null (non confirmé); permits CITES retiré de la liste; source cites.org générique retirée; CITES II, CR et protection légale contre la chasse confirmés (en.wikipedia)",
+      "reproduction.notes: '3 succès documentés' -> éclosions Durrell 1997, 2000 (8), 2016 (11) + autres zoos; 'quasi-impossible' -> la plupart des œufs infertiles",
+      "reproduction.litterSizeMax: 30 confirmé (jusqu'à 30 œufs)"
+    ],
+    "removed": [
+      "habitat.humidityMin/Max (70-95) -> null (non confirmé); brumisation '3-4x quotidienne' généralisée",
+      "reproduction.litterSizeMin (1), sexualMaturityMonths (48), season -> null (non mentionnés)",
+      "health était déjà null"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104093507,
+    "checked": ["feeding", "habitat", "behavior", "legislation", "reproduction"],
+    "corrected": [
+      "legislation.status: allowed ('espèce native, aucune restriction') -> permit_required: espèce TOTALEMENT PROTÉGÉE en France depuis 1976 (fr.wikipedia Coronelle_girondine) + Convention de Berne annexe III. ERREUR GRAVE",
+      "reproduction: 'ovoviviparité, 2-8 petits, naissance juin-juillet' -> OVIPARE, 1 à 16 œufs (source); sexualMaturity 24 mois et longévité 12+ retirés",
+      "feeding: 'anguilles' (proie fausse) et insectes retirés -> lézards, parfois petits mammifères et petits serpents",
+      "behavior: 'fossorial', 'opistoglyphe (crochets arrière)' retirés; 'diurne-crépusculaire' -> chasse le soir et la nuit par temps chaud",
+      "sources: en.wikipedia (sans info diète/comportement/reproduction) remplacée par fr.wikipedia vérifiée; source INPN générique retirée"
+    ],
+    "removed": [
+      "habitat.tempMin/Max (10-26) et humidité (40-70) -> null (non confirmés)",
+      "health était déjà null"
+    ],
+    "confidence": "medium"
+  }
+]

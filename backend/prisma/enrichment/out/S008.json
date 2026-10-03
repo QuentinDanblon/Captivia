@@ -1,0 +1,433 @@
+[
+  {
+    "speciesId": 2402307,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes vivants (grillons, petits vers de farine, mouches)",
+          "frequency": "quotidienne",
+          "notes": "Nourriture naturelle capturée à la surface; l'espèce accepte rarement les aliments préparés (Wikipedia)"
+        },
+        {
+          "name": "Aliments vivants ou congelés (vers de sang, artémia, crevette)",
+          "frequency": "hebdomadaire",
+          "notes": "Peuvent être acceptés après habituation, toujours distribués en surface (Seriously Fish, Aquariadise)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments granulés qui coulent",
+          "reason": "Le poisson-papillon se nourrit en surface et ne peut pas descendre pour les chercher"
+        },
+        {
+          "name": "Poissons porteurs de parasites",
+          "reason": "Risque de transmission de parasites et de maladies"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Prédateur de surface (bouche dirigée vers le haut) qui se nourrit principalement d'insectes aquatiques et de petits poissons (Wikipedia); il ne mange qu'en surface. Éviter les aliments coulants.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Freshwater_butterflyfish",
+          "title": "Freshwater butterflyfish - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/pantodon-buchholzi/",
+          "title": "Pantodon buchholzi - Seriously Fish"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 24,
+      "tempMax": 27,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Environ 80 L minimum (base 90 × 30 cm) : la surface compte plus que la profondeur (Seriously Fish)",
+      "lightNeeds": "Éclairage modéré à faible; plantes flottantes pour la couverture",
+      "activityEnrichment": "Végétation dense ou en surplomb pour la couverture. Filtration douce essentielle, sans courant fort qui gênerait l'alimentation de surface",
+      "hygieneNotes": "pH 6,0-7,5 (Seriously Fish), eau calme. Couvercle hermétique obligatoire : espèce très bonne sauteuse.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://aquariadise.com/african-butterfly-fish/",
+          "title": "African Butterfly Fish Care Guide - Aquariadise"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Freshwater_butterflyfish",
+          "title": "Freshwater butterflyfish - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson de surface carnivore, très bon sauteur grâce à ses grandes nageoires pectorales : peut s'élancer hors de l'eau pour capturer des proies ou fuir. Chasse des insectes et de petits poissons à la surface et reste souvent immobile sous la végétation.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Poisson d'observation; demande une installation précise (couvercle hermétique, eau calme).",
+      "compatibilityWithOtherAnimals": "Peut être agressif envers ses congénères et d'autres poissons (Wikipedia); mange les petits poissons. À garder seul ou avec précaution, sous surveillance.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Freshwater_butterflyfish",
+          "title": "Freshwater butterflyfish - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://gensou.sg/?p=33226",
+          "title": "African Butterflyfish Care Guide - Gensou"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Pourriture des nageoires (fin rot)",
+          "symptoms": "Dégénérescence et effilochage des nageoires délicates, décoloration",
+          "prevention": "Maintenir une excellente qualité d'eau, paramètres stables, filtration douce pour éviter les dommages des nageoires",
+          "whenToConsult": "Dès observation de déchirures ou dégénérescence des nageoires"
+        },
+        {
+          "name": "Infections fongiques",
+          "symptoms": "Filaments blanchâtres d'aspect cotonneux sur le corps ou les nageoires",
+          "prevention": "Excellente qualité d'eau, couvercle adapté pour éviter les blessures liées aux sauts",
+          "whenToConsult": "Dès l'apparition de filaments cotonneux; traitement par changements d'eau et bains/produits adaptés"
+        },
+        {
+          "name": "Stress et immunodéficience",
+          "symptoms": "Perte d'appétit, couleurs pâles, léthargique, susceptibilité aux infections",
+          "prevention": "Filtration douce, absence de courants forts, couvercle sécurisé, alimentation régulière avec nourriture vivante",
+          "whenToConsult": "Si le poisson refuse de se nourrir pendant plus de 2-3 jours"
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://aquariadise.com/african-butterfly-fish/",
+          "title": "African Butterfly Fish Care - Aquariadise"
+        },
+        {
+          "type": "vet",
+          "url": "https://seriouslyfish.com/species/pantodon-buchholzi/",
+          "title": "Pantodon buchholzi Care - Seriously Fish"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 100,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Fécondation interne; le couple dépose à la surface des œufs flottants (plus de 100 œufs par jour selon Seriously Fish). Éclosion en 3-4 jours (Seriously Fish) à environ 7 jours (Wikipedia). L'élevage des alevins est très difficile (nauplies d'artémia, qualité d'eau).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Freshwater_butterflyfish",
+          "title": "Freshwater butterflyfish - Wikipedia"
+        },
+        {
+          "type": "guide",
+          "url": "https://seriouslyfish.com/species/pantodon-buchholzi/",
+          "title": "Pantodon buchholzi - Seriously Fish"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2422905,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes vivants (grillons, petits insectes terrestres)",
+          "frequency": "quotidienne",
+          "notes": "Dans la nature : insectes et petits invertébrés terrestres (Wikipedia)"
+        },
+        {
+          "name": "Petits invertébrés terrestres (larves d'insectes, petits arthropodes)",
+          "frequency": "quotidienne",
+          "notes": "Adapter la taille des proies à celle du crapaud"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Vers de terre",
+          "reason": "Dans la nature, l'espèce évite les vers de terre (Wikipedia)"
+        },
+        {
+          "name": "Proies trop grosses",
+          "reason": "Proies surdimensionnées : risque d'étouffement"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Prédateur d'insectes et de petits invertébrés terrestres; proposer des proies variées.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.ontario.ca/fr/page/le-crapaud-de-fowler",
+          "title": "Le crapaud de Fowler - Ontario.ca"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fowler%27s_toad",
+          "title": "Wikipedia: Fowler's toad"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Espèce nocturne : prévoir des cachettes; éviter l'exposition directe prolongée au soleil.",
+      "activityEnrichment": "Substrat de sable fin ou terreau pour permettre l'enfouissement naturel. Cachettes et végétation pour réduire le stress. Activité principalement nocturne.",
+      "hygieneNotes": "Peau perméable : eau déchlorée. Les glandes cutanées sécrètent des toxines (bufadiénolides) : se laver les mains après toute manipulation (Wikipedia).",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.ontario.ca/fr/page/le-crapaud-de-fowler",
+          "title": "Le crapaud de Fowler - Ontario.ca"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fowler%27s_toad",
+          "title": "Wikipedia: Fowler's toad"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Crapaud nocturne qui s'enfouit dans le sable ou la terre pendant les périodes chaudes et sèches et l'hiver. Les mâles émettent un chant pour attirer les femelles à la saison de reproduction.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Manipulation déconseillée : la peau sécrète des toxines; supervision d'un adulte et lavage des mains.",
+      "compatibilityWithOtherAnimals": "Généralement gardé seul.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.ontario.ca/fr/page/le-crapaud-de-fowler",
+          "title": "Le crapaud de Fowler - Ontario.ca"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Anaxyrus_fowleri",
+          "title": "Anaxyrus fowleri - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Chytridomycose (maladie du chytride)",
+          "symptoms": "Léthargique, couleur terne, perte de comportement d'alimentation normal, amaigrissement progressif, décès",
+          "prevention": "Hygiène stricte des mains avant manipulation, eau déchlorée, éviter le surpeuplement, quarantaine des nouveaux spécimens",
+          "whenToConsult": "Immédiatement si symptômes respiratoires ou léthargique"
+        },
+        {
+          "name": "Infections bactériennes (syndrome des jambes rouges)",
+          "symptoms": "Rougeur des zones ventrales, œdème, ulcères cutanés, léthargique",
+          "prevention": "Eau de qualité, température stable, hygiène du substrat, éviter le surpeuplement",
+          "whenToConsult": "Dès apparition de rougeurs anormales"
+        },
+        {
+          "name": "Parasites (vers, protozoaires)",
+          "symptoms": "Perte d'appétit, amaigrissement, diarrhée, comportement anormal",
+          "prevention": "Substrat stérile ou fraîchement préparé, eau renouvelée régulièrement, alimentation variée",
+          "whenToConsult": "Si anorexie ou signes de malnutrition prolongée"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians",
+          "title": "Infectious Diseases of Amphibians - Merck Veterinary Manual"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.ontario.ca/fr/page/le-crapaud-de-fowler",
+          "title": "Le crapaud de Fowler - Ontario.ca"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "printemps (pic en mai-juin)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 10000,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction aquatique dans des eaux peu profondes (mares, marais), surtout en mai-juin. Après l'amplexus, une femelle peut pondre jusqu'à 7 000 à 10 000 œufs. Éclosion en 2 à 7 jours (environ 7 jours selon Ontario.ca); les têtards se métamorphosent après 40 à 60 jours. La maturité sexuelle est atteinte entre une saison et trois ans.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.ontario.ca/fr/page/le-crapaud-de-fowler",
+          "title": "Le crapaud de Fowler - Ontario.ca"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Anaxyrus_fowleri",
+          "title": "Anaxyrus fowleri - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2424454,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons vivants (de taille appropriée)",
+          "frequency": "tous les 3-4 jours",
+          "notes": "Jeunes (3-4 semaines) : plusieurs petits grillons ou une souris rose tous les 3-4 jours (Reptiles Magazine). Plusieurs petites proies valent mieux qu'une grosse."
+        },
+        {
+          "name": "Petites souris (adultes), avec modération",
+          "frequency": "toutes les 2 semaines",
+          "notes": "Reptiles Magazine : environ une fois toutes les deux semaines pour un adulte; Exo Terra : adultes nourris tous les 3-4 jours (insectes, occasionnellement souris)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop volumineuses",
+          "reason": "Risque d'étouffement ou de rupture d'estomac"
+        },
+        {
+          "name": "Alimentation principalement à base de souris",
+          "reason": "Surcharge graisseuse pouvant conduire à la cécité et à la mort (Wikipedia)"
+        }
+      ],
+      "mealFrequency": "every_3_to_4_days",
+      "specificNeeds": "Prédateur à l'affût et vorace. Les adultes mangent moins souvent que les jeunes; saupoudrer les insectes de calcium et de vitamines (Lafeber, Exo Terra). Risque d'obésité en cas de suralimentation.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/Frog-Amphibian-Species/Ornate-Horned-Frog/",
+          "title": "Ornate Horned Frog Care - Reptiles Magazine"
+        },
+        {
+          "type": "guide",
+          "url": "https://lafeber.com/vet/basic-information-for-ornate-horned-frog/",
+          "title": "Ornate Horned Frog - LaFeber Vet"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 28,
+      "humidityMin": 65,
+      "humidityMax": 80,
+      "minSpaceSize": "Environ 57-76 L (15-20 gallons US, terrarium horizontal) pour un adulte selon Reptiles Magazine; Exo Terra : 45 × 45 × 45 cm. Un espace modeste est préférable pour que la grenouille atteigne ses proies.",
+      "lightNeeds": "Faible à modéré. Lumière à spectre complet pour l'absorption du calcium. Éviter la radiance thermique directe qui dessèche l'environnement.",
+      "activityEnrichment": "Substrat humide permettant de s'enterrer (la grenouille y reste enfouie la majeure partie du temps), cachette. Peu d'eau suffit (environ 1,3 cm de profondeur selon Reptiles Magazine).",
+      "hygieneNotes": "Substrat humide mais pas détrempé. Eau déchlorée. Température nocturne légèrement plus basse (18-24°C selon les sources). Éviter les sources de chaleur rayonnante qui dessèchent l'air.",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/Frog-Amphibian-Species/Ornate-Horned-Frog/",
+          "title": "Ornate Horned Frog Care - Reptiles Magazine"
+        },
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/ceratophrys-ornata/",
+          "title": "Ceratophrys ornata Care Guide - Exo Terra"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Grenouille sédentaire et ambush vorace. S'enterre dans le substrat humide en laissant visible que ses yeux. Prédateur opportuniste qui ingère tout ce qui bouge à sa portée, y compris d'autres grenouilles. Peu active, elle passe la majeure partie du temps enfouie.",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Peu active, adaptée aux débutants, mais peut mordre douloureusement : manipulation à éviter.",
+      "compatibilityWithOtherAnimals": "Solitaire stricte. Jambivore : dévorera toute autre grenouille ou petit animal.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/Frog-Amphibian-Species/Ornate-Horned-Frog/",
+          "title": "Ornate Horned Frog Care - Reptiles Magazine"
+        },
+        {
+          "type": "guide",
+          "url": "https://lafeber.com/vet/basic-information-for-ornate-horned-frog/",
+          "title": "Ornate Horned Frog - LaFeber Vet"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladie métabolique osseuse (hyperparathyroïdisme nutritionnel)",
+          "symptoms": "Déformation osseuse, mâchoire faible, incapacité à fermer la bouche, croissance anormale, lethargie",
+          "prevention": "Alimentation équilibrée, complémentation en calcium et D3, éclairage UVB modéré, variété de proies",
+          "whenToConsult": "Dès signes de malformation ou croissance anormale"
+        },
+        {
+          "name": "Obésité et lipidose cornéenne",
+          "symptoms": "Surpoids excessif, opacification des yeux (lipidose cornéenne), mobilité réduite, risque accru de mortalité",
+          "prevention": "Fréquence alimentaire adaptée à l'âge, éviter l'alimentation excessive, proies de taille modérée",
+          "whenToConsult": "Si la grenouille dépasse la taille normale ou refuse de se nourrir"
+        },
+        {
+          "name": "Abrasions et traumatismes du rostre (museau)",
+          "symptoms": "Lésions cutanées, saignement, infection secondaire, scarification",
+          "prevention": "Décoration lisse, substrat sans aspérités tranchantes, manipulation minimale, cachettes appropriées",
+          "whenToConsult": "Dès observation de plaies ouvertes"
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://lafeber.com/vet/basic-information-for-ornate-horned-frog/",
+          "title": "Ornate Horned Frog - LaFeber Vet"
+        },
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/ceratophrys-ornata/",
+          "title": "Ceratophrys ornata Care Guide - Exo Terra"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": 2000,
+      "sexualMaturityMonths": 18,
+      "breedingDifficulty": "modere",
+      "notes": "Les femelles pondent environ 2 000 œufs dans l'eau et les têtards éclosent en moins de deux semaines (Wikipedia). Maturité sexuelle à 18-24 mois; les mâles chantent et développent des callosités nuptiales sur les pouces (Lafeber). Humidité d'environ 90 % en période d'accouplement (Exo Terra).",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptilesmagazine.com/Frog-Amphibian-Species/Ornate-Horned-Frog/",
+          "title": "Ornate Horned Frog Care - Reptiles Magazine"
+        },
+        {
+          "type": "guide",
+          "url": "https://lafeber.com/vet/basic-information-for-ornate-horned-frog/",
+          "title": "Ornate Horned Frog - LaFeber Vet"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ceratophrys_ornata",
+          "title": "Wikipedia: Ceratophrys ornata"
+        }
+      ]
+    }
+  }
+]

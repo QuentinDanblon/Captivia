@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2476004,
+  "commonNameFr": "Calao",
+  "scientificName": "Buceros rhinoceros",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2478765,
+  "commonNameFr": "Toucan toco",
+  "scientificName": "Ramphastos toco",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2479505,
+  "commonNameFr": "Perruche élégante",
+  "scientificName": "Neophema elegans",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

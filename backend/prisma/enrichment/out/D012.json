@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000236,
+    "description": "Petite grenouille d'Amérique du Sud (Guyana, Suriname, Guyane française, Brésil) : les mâles mesurent 40 à 50 mm et les femelles jusqu'à 60 mm. Ses couleurs varient du bleu au jaune, maculé de noir, selon la région (une trentaine de variantes). Elle vit dans les forêts tropicales humides près des cours d'eau. Ses glandes cutanées produisent des toxines passives, dangereuses seulement au contact d'une plaie ou des muqueuses.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Dendrobates_tinctorius"
+  },
+  {
+    "speciesId": 2000000237,
+    "description": "Petit triton européen (triton ponctué) au fort dimorphisme sexuel. Le mâle mesure de 7 à 11 cm selon les régions et arbore en période de reproduction une crête dorsale plus ou moins ondulée, tandis que la femelle est uniformément brune, sans taches sur les flancs. Présent de l'Irlande à la Sibérie occidentale, il fréquente des points d'eau de toutes sortes, plutôt stagnants et ensoleillés.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Triturus_vulgaris"
+  },
+  {
+    "speciesId": 2000000238,
+    "description": "Amphibien européen mesurant jusqu'à 20 cm, à la peau noire ornée de taches jaunes. Les adultes sont exclusivement terrestres et vivent dans les forêts de feuillus et boisements mixtes humides, abrités sous le bois mort et les pierres. La femelle est ovovivipare : elle dépose ses larves dans l'eau (mares, sources, petits cours d'eau forestiers) ; certaines populations du sud sont vivipares.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Salamandra_salamandra"
+  },
+  {
+    "speciesId": 2000000239,
+    "description": "Crapaud le plus répandu et le plus gros d'Europe, mesurant 50-110 mm selon le sexe. Trapu et court sur pattes, il possède une peau pustuleuse produisant un venin défensif. Il vit en milieux humides et boisés du niveau de la mer jusqu'à 1 500 m d'altitude, se nourrissant d'insectes et de petits animaux.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Bufo_bufo"
+  },
+  {
+    "speciesId": 2000000240,
+    "description": "Petit crapaud griffu à la peau lisse, d'Afrique de l'Ouest (du Sénégal au Cameroun), mesurant 4 à 6 cm. Il vit dans les étangs et les mares d'Afrique tropicale. Il peut se reproduire toute l'année, préférentiellement de mai à juillet, avec environ 3 pontes par an.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Xenopus_tropicalis"
+  },
+  {
+    "speciesId": 2000000241,
+    "description": "Rainette arboricole endémique des États-Unis, présente dans le sud-est du pays, du Texas à la Virginie (introduite à Porto Rico), de la famille des Hylidae. Elle possède un sac vocal inférieur, typique des rainettes, qui produit un chant puissant. Elle est classée en préoccupation mineure par l'UICN.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Hyla_cinerea"
+  },
+  {
+    "speciesId": 2000000242,
+    "description": "Grenouille cornue sud-américaine de la région des Pampas en Argentine et en Uruguay (peut-être aussi au sud du Brésil), mesurant jusqu'à 12 cm. Elle a un corps bien en chair, une bouche immense, des yeux saillants et une peau aux teintes vertes. Elle chasse à l'affût, enterrée dans la boue avec seuls les yeux dépassant ; ses têtards sont aussi prédateurs. Statut : quasi menacée.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Ceratophrys_ornata"
+  },
+  {
+    "speciesId": 2000000243,
+    "description": "Grenouille de la famille des Microhylidae (appelée aussi crapaud rouge de Madagascar), endémique du nord-est de Madagascar. Les mâles mesurent 60 à 65 mm et les femelles 85 à 105 mm. Sa coloration va du jaune-orangé au rouge foncé, la femelle étant plus brillante. Agressée, elle sécrète des toxines qui brûlent la bouche et les yeux des prédateurs et peuvent provoquer des allergies chez l'homme.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Dyscophus_antongilii"
+  },
+  {
+    "speciesId": 2000000244,
+    "description": "Petit poisson sud-américain originaire du sud du Pérou, de Colombie et du Brésil, mesurant 3 à 5 cm. Il se distingue par sa bande longitudinale bleu-vert brillante et sa partie rouge. Poisson grégaire, il doit être maintenu en groupe d'une dizaine d'individus au minimum, en eau douce acide entre 22 et 28 °C, dans un aquarium de 80 à 120 litres.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Paracheirodon_innesi"
+  },
+  {
+    "speciesId": 2000000245,
+    "description": "Poisson d'Amérique centrale, femelles jusqu'à 6 cm en nature, mâles 4 cm. Noir moucheté de jaune à l'état sauvage, il se décline en multiples variétés colorées en captivité. Ovovivipare produisant 20-50 alevins par portée mensuellement.",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Poecilia_sphenops"
+  },
+  {
+    "speciesId": 2000000246,
+    "description": "Poisson d'eau douce tropical originaire d'Asie du Sud-Est (Thaïlande, Indonésie, Cambodge, Viêt Nam, Laos, Malaisie), mesurant 5 à 8 cm en captivité. Il se distingue par ses nageoires spectaculaires et ses couleurs variées, issues de la sélection. Les mâles, très territoriaux, se livrent à des combats violents pouvant aller jusqu'à la mort ; ils ne doivent pas être réunis. Compter 24 à 26 °C et 30 litres minimum (40 litres pour les voiles courts et les femelles).",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Betta_splendens"
+  },
+  {
+    "speciesId": 2000000247,
+    "description": "Variété ornementale du poisson rouge (Carassius auratus), la queue d'éventail (fantail), forme occidentale du ryukin, a un corps en forme d'œuf, une nageoire dorsale haute et une longue nageoire caudale quadruple. Pour les poissons rouges, la page recommande un aquarium de grand volume (100 litres minimum pour un poisson, plus 50 litres par poisson supplémentaire) et une eau au pH neutre à alcalin (7,0 à 8,0).",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Carassius_auratus"
+  },
+  {
+    "speciesId": 2000000248,
+    "description": "Variété ornementale du poisson rouge (Carassius auratus), l'oranda présente une excroissance sur le dessus de la tête. Pour les poissons rouges, la page recommande un aquarium de grand volume (100 litres minimum pour un poisson, plus 50 litres par poisson supplémentaire) et une eau au pH neutre à alcalin (7,0 à 8,0).",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Carassius_auratus"
+  },
+  {
+    "speciesId": 2000000249,
+    "description": "Variété ornementale du poisson rouge (Carassius auratus), le ryukin est reconnaissable à son long voile double sur la nageoire caudale ; son corps est particulièrement étiré en hauteur, avec une cassure entre la tête et le corps. Pour les poissons rouges, la page recommande un aquarium de grand volume (100 litres minimum pour un poisson, plus 50 litres par poisson supplémentaire) et une eau au pH neutre à alcalin (7,0 à 8,0).",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Carassius_auratus"
+  },
+  {
+    "speciesId": 2000000250,
+    "description": "Variété ornementale du poisson rouge (Carassius auratus), le black moor, variété originale de poisson télescope, a des yeux exorbités caractéristiques. Pour les poissons rouges, la page recommande un aquarium de grand volume (100 litres minimum pour un poisson, plus 50 litres par poisson supplémentaire) et une eau au pH neutre à alcalin (7,0 à 8,0).",
+    "sourceUrl": "https://fr.wikipedia.org/wiki/Carassius_auratus"
+  }
+]

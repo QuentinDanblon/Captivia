@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000172,
+    "description": "Le Lapin Géant Papillon est originaire d'Allemagne et pèse entre 5,0 et 11,3 kg. Il a le poil court, les oreilles dressées et un motif en papillon, dans toutes les couleurs reconnues par le British Rabbit Council, qui le reconnaît (pas l'ARBA).",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000174,
+    "description": "Le Cochon d'Inde Abyssinien a un pelage ébouriffé, formant des épis ou rosettes. C'est une race populaire parmi les éleveurs.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000175,
+    "description": "Le Cochon d'Inde Péruvien fait partie des races à poil long et lisse. Il est présenté en concours avec un pelage de grande longueur.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000176,
+    "description": "Le Cochon d'Inde Sheltie est une race à poil long et lisse, populaire parmi les éleveurs.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000177,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000178,
+    "description": "Le Cochon d'Inde Texel est une race à poil long et bouclé.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000179,
+    "description": "Le Cochon d'Inde Skinny est une race de laboratoire adoptée par certains propriétaires d'animaux de compagnie. Il est presque dépourvu de poils.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Guinea_pig"
+  },
+  {
+    "speciesId": 2000000180,
+    "description": "Le Hamster Chinois est originaire des déserts du nord de la Chine et de Mongolie ; adulte, il pèse entre 30 et 45 grammes. Sa queue est longue comparée à celle des autres hamsters, et sa robe sauvage est brune avec une bande noire le long de la colonne vertébrale. Naturellement solitaire et surtout nocturne, il peut être agressif si la cage est trop petite ou partagée, mais devient vite docile une fois apprivoisé.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Chinese_hamster"
+  },
+  {
+    "speciesId": 2000000181,
+    "description": "La Souris domestique a un museau pointu, de petites oreilles arrondies et une queue écailleuse presque aussi longue que le corps. Elle s'adapte à de nombreux environnements et se reproduit à un rythme élevé. Généralement très docile si elle est élevée depuis la naissance avec suffisamment de contact humain, elle peut s'habituer à être manipulée.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Mouse"
+  },
+  {
+    "speciesId": 2000000182,
+    "description": "La Gerbille de Mongolie vit dans les prairies, steppes et semi-déserts de Chine, de Mongolie et de Russie. Elle mesure 110-135 mm (queue de 95-120 mm) et pèse entre 60 et 130 grammes. Animal doux et robuste, elle vit à l'état sauvage en groupes familiaux de type patriarcal. Introduite aux États-Unis en 1954, elle y est devenue un animal de compagnie populaire à la fin des années 1950.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Mongolian_gerbil"
+  },
+  {
+    "speciesId": 2000000183,
+    "description": "Les octodons (ou degus) forment un groupe de rongeurs de la famille des Octodontidés, originaires d'Amérique du Sud, notamment du Chili et d'Argentine. Le nom désignait historiquement l'octodon commun (Octodon degus, du centre du Chili) ; le groupe compte aujourd'hui cinq espèces réparties en deux genres.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Degu"
+  },
+  {
+    "speciesId": 2000000184,
+    "description": "Le Furet est un petit carnivore domestique issu du putois européen, mesurant environ 50 cm queue comprise et pesant entre 0,7 et 2 kg. Sa fourrure peut être noire, brune, blanche ou un mélange de ces couleurs. Contrairement à ses ancêtres solitaires, la plupart des furets vivent volontiers en groupes sociaux.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Ferret"
+  },
+  {
+    "speciesId": 2000000185,
+    "description": "L'Âne Nain descend de la petite race sarde (Sardaigne), dont sept individus furent importés aux États-Unis en 1929 par Robert Green. Il mesure 36 pouces (90 cm) ou moins au garrot ; son promoteur américain lui prêtait une nature affectueuse. Au XXe siècle, les ânes sont devenus plus souvent gardés comme animaux de compagnie aux États-Unis et dans d'autres pays riches.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Miniature_donkey"
+  },
+  {
+    "speciesId": 2000000186,
+    "description": "Le Poney Shetland est originaire des îles Shetland, en Écosse, où des petits chevaux sont élevés depuis l'âge du bronze. Il mesure jusqu'à 107 cm au garrot, avec un dos court et large, une crinière et une queue longues et épaisses et un pelage d'hiver double et dense. Utilisé autrefois pour les travaux agricoles et comme poney de mine, il sert aujourd'hui à l'équitation des enfants et à l'attelage.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Shetland_pony"
+  },
+  {
+    "speciesId": 2000000187,
+    "description": "Le Cheval Miniature est apparu en Europe, avec des documents écrits et iconographiques datant de la fin du XVIIIe siècle. Il mesure un peu plus de 100 cm, voire moins, et est génétiquement bien plus proche des poneys, comme le Shetland, que des chevaux. Son espérance de vie est de 25 à 35 ans. Il est surtout un animal de compagnie, adapté à l'attelage, et quelques-uns ont été dressés comme chevaux guides.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Miniature_horse"
+  }
+]

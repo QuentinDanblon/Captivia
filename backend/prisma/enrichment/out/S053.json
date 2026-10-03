@@ -1,0 +1,364 @@
+[
+  {
+    "speciesId": 9799308,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits vertébrés (rongeurs, lézards)",
+          "frequency": "hebdomadaire",
+          "notes": "Proies naturelles ; surtout des serpents à l'état sauvage"
+        },
+        {
+          "name": "Lézards, autres serpents",
+          "frequency": "hebdomadaire",
+          "notes": "Proies naturelles de l'espèce (ophiophage)"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies de taille démesurée",
+          "reason": "Risque d'étouffement ou blessure interne"
+        },
+        {
+          "name": "Proies intoxiquées ou parasitées",
+          "reason": "Transmission de parasites et toxines au serpent"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Carnivore, régime très varié (petits vertébrés, lézards, serpents) ; proies fraîches ou congelées-décongelées",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Lampropeltis_getula",
+          "title": "Lampropeltis getula — Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Cachettes et substrat permettant de s'enfouir (espèce terrestre qui passe l'essentiel de son temps dissimulée sous terre et litière)",
+      "hygieneNotes": "Eau fraîche régulièrement renouvelée, nettoyage régulier du terrarium, substrat sec",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Lampropeltis_getula",
+          "title": "Lampropeltis getula — Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_getula",
+          "title": "Lampropeltis getula — Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent constricteur terrestre et ophiophage, solitaire, principalement actif en début et fin de journée (nocturne en saison chaude), souvent docile",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Possible sous supervision d'un adulte, manipuler avec douceur",
+      "compatibilityWithOtherAnimals": "Strictement solitaire, ophiophage (consomme autres serpents)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Lampropeltis_getula",
+          "title": "Lampropeltis getula — Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_getula",
+          "title": "Lampropeltis getula — Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stomatite (infection buccale)",
+          "symptoms": "Écoulement buccal, perte d'appétit, haleine fétide",
+          "prevention": "Hygiène stricte, température correcte, aliments propres",
+          "whenToConsult": "À premiers signes d'infection buccale"
+        },
+        {
+          "name": "Parasites internes",
+          "symptoms": "Refus alimentaire, diarrhée, amaigrissement progressif",
+          "prevention": "Quarantaine des nouveaux individus, hygiène terrarium, proies saines",
+          "whenToConsult": "À comportement alimentaire anormal ou perte poids"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Lampropeltis_getula",
+          "title": "Lampropeltis getula — Wikipédia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "printemps",
+      "gestationDays": null,
+      "incubationDays": 60,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ovipare : les œufs éclosent après environ 2 à 2,5 mois d'incubation (accouplement au printemps)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Lampropeltis_getula",
+          "title": "Lampropeltis getula — Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Lampropeltis_getula",
+          "title": "Lampropeltis getula — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103899345,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes (mouches, moustiques)",
+          "frequency": "quotidienne",
+          "notes": "Proies naturelles"
+        },
+        {
+          "name": "Aliments surgelés",
+          "frequency": "quotidienne",
+          "notes": "Acceptés en captivité"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Granulés et flocons",
+          "reason": "Souvent refusés par l'espèce"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Insectes et petites proies ; aliments surgelés acceptés, granulés et flocons souvent refusés",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Toxotes_jaculatrix",
+          "title": "Toxotes jaculatrix — Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 25,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Aquarium de 300 L minimum pour un groupe de 4-5 individus, eau légèrement saumâtre (environ 5 g de sel par litre)",
+      "lightNeeds": null,
+      "activityEnrichment": "Plantes flottantes et végétation émergente, aquarium couvert avec surface dégagée",
+      "hygieneNotes": "Filtration forte, changements d'eau réguliers",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Toxotes_jaculatrix",
+          "title": "Toxotes jaculatrix — Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson capable de projeter un jet d'eau sur des insectes au-dessus de la surface, vit en groupe",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé, aquarium spécialisé requiert expertise",
+      "compatibilityWithOtherAnimals": "À maintenir en groupe de congénères (4-5 individus)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Toxotes_jaculatrix",
+          "title": "Toxotes jaculatrix — Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ich (Ichthyophthirius multifiliis)",
+          "symptoms": "Points blancs sur corps, comportement frotté, respiration rapide",
+          "prevention": "Température stable, qualité eau, isolement des malades",
+          "whenToConsult": "À apparition de points blancs"
+        },
+        {
+          "name": "Infection bactérienne des nageoires",
+          "symptoms": "Nageoires effilochées, nécrose progressive",
+          "prevention": "Eau maintenue propre, filtration optimale, éviter blessures",
+          "whenToConsult": "À dégradation nageoires"
+        },
+        {
+          "name": "Stress osmotique (adaptation saumâtre)",
+          "symptoms": "Comportement erratique, refus alimentaire, mort progressive",
+          "prevention": "Salinité maintenue stable, acclimation progressive",
+          "whenToConsult": "À troubles comportementaux ou alimentaires"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Toxotes_jaculatrix",
+          "title": "Toxotes jaculatrix — Wikipédia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare, pas de dimorphisme sexuel visible ; mœurs de reproduction mal connues et reproduction en captivité rare",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Toxotes_jaculatrix",
+          "title": "Toxotes jaculatrix — Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Banded_archerfish",
+          "title": "Banded archerfish — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103940037,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Proies vivantes (nauplies d'artémia, vers de vase)",
+          "frequency": "quotidienne",
+          "notes": "Nourriture préférée"
+        },
+        {
+          "name": "Aliments congelés ou flocons fins",
+          "frequency": "quotidienne",
+          "notes": "Acceptés, mais l'espèce se porte mieux avec des proies vivantes"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments trop gros",
+          "reason": "Bouche minuscule, impossible d'ingérer"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Proies vivantes ou congelées de petite taille",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Aphyosemion_australe",
+          "title": "Aphyosemion australe — Wikipédia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 21,
+      "tempMax": 24,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Aquarium de 20 L minimum pour un harem (30 L et plus idéal), eau douce, pH 5,5 à 7 (6,5 idéal)",
+      "lightNeeds": "Éclairage faible",
+      "activityEnrichment": "Végétation dense, plantes flottantes, mousses ou mops (supports de ponte)",
+      "hygieneNotes": "Filtration douce, changements d'eau réguliers",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Aphyosemion_australe",
+          "title": "Aphyosemion australe — Wikipédia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Petit poisson vivant en harem (un mâle pour plusieurs femelles), excellent sauteur, calme s'il dispose de cachettes",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Aquarium obligatoirement couvert (excellent sauteur)",
+      "compatibilityWithOtherAnimals": "Banc monospecifique ou petits poissons non-agressifs compatibles",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Aphyosemion_australe",
+          "title": "Aphyosemion australe — Wikipédia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Ich (parasites ponctuels blancs)",
+          "symptoms": "Points blancs fins corps/nageoires, frottement",
+          "prevention": "Température stable, eau très propre, quarantaine nouveaux poissons",
+          "whenToConsult": "À observation points blancs"
+        },
+        {
+          "name": "Fongose des nageoires",
+          "symptoms": "Nageoires effilochées, coton blanc apparent",
+          "prevention": "Eau oligotrophe, pas d'algues filamenteuses, hygiène optimale",
+          "whenToConsult": "À dégradation nageoires"
+        },
+        {
+          "name": "Malnutrition (régime insuffisant)",
+          "symptoms": "Couleurs pâles, maigreur, stérilité",
+          "prevention": "Alimentation variée vivante, nourriture régulière, eau riche en microfaune",
+          "whenToConsult": "À perte couleur ou maigreur anormale"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Aphyosemion_australe",
+          "title": "Aphyosemion australe — Wikipédia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 14,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Ovipare : œufs déposés dans la végétation ou des mops, développement d'environ 14-15 jours à 26 °C ; reproduction relativement facile",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Aphyosemion_australe",
+          "title": "Aphyosemion australe — Wikipédia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Aphyosemion_australe",
+          "title": "Aphyosemion australe — Wikipedia"
+        }
+      ]
+    }
+  }
+]

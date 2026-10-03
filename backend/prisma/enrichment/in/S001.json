@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 1025719,
+  "commonNameFr": "Mille-pattes géant",
+  "scientificName": "Archispirostreptus gigas",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 1406471,
+  "commonNameFr": "Mante orchidée",
+  "scientificName": "Hymenopus coronatus",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 1415423,
+  "commonNameFr": "Phasme feuille",
+  "scientificName": "Phyllium philippinicum",
+  "category": "insecte",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

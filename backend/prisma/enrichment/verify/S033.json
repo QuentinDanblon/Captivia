@@ -1,0 +1,81 @@
+[
+  {
+    "speciesId": 5218028,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "habitat.tempMin/tempMax: 22/26 → 26/30 (en.wikipedia Dendrobates_leucomelas: 26-30 °C)",
+      "reproduction.litterSizeMin/Max: 3/6 → 2/12 (fr.wikipedia: 2 à 12 œufs)",
+      "reproduction.sexualMaturityMonths: 12 → 24 (fr.wikipedia: 2 ans)",
+      "reproduction.notes: retrait de 'mâle garde les œufs / transport des têtards' (non confirmé), incubation 10-14 j conservée (fr.wikipedia)",
+      "behavior.generalBehavior: nuance sociabilité (EN petits groupes, FR solitaire hors reproduction)",
+      "behavior.compatibilityWithChildren: toxicité atténuée en captivité (fr.wikipedia Dendrobate)",
+      "feeding.recommendedFoods[0].notes: fourmis (fr.wikipedia)"
+    ],
+    "removed": [
+      "legislation entière (CITES II confirmé mais statut France, 'arrêté 21/11/1997 NAC' et 'notification préfecture' non confirmés ; euAnnex B non indiqué par Wikipédia)",
+      "health.diseases: Dysecdisis (non pertinent/non confirmé chez les amphibiens)",
+      "reproduction.season 'toute l'année' → null (non confirmé)",
+      "source fr.wikipedia.org/wiki/Dendrobate retirée de legislation/reproduction (page de genre) ; health garde cette page (valide mais sans maladies : conseils génériques conservés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5219362,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding.dietType: carnivore → omnivore (fr.wikipedia: omnivores, invertébrés/petits vertébrés/fruits)",
+      "feeding.recommendedFoods: 'petits lagomorphes' retiré, fréquences hebdomadaires → null",
+      "feeding.mealFrequency: weekly → null (non confirmé)",
+      "legislation.status: permit_required → prohibited (fr.wikipedia: protection totale depuis 1981, interdiction de capturer, transporter, vendre, détenir) ; mention directive Habitats annexe V / Berne III",
+      "behavior.generalBehavior: 'réflexes exceptionnels' retiré, nocturne/crépusculaire ajouté (en.wikipedia)",
+      "legislation.permits: arrêté 21/11/1997 retiré (non applicable : détention interdite)"
+    ],
+    "removed": [
+      "feeding.foodsToAvoid 'Fruits toxiques' (contredit : les fruits font partie du régime)",
+      "habitat.minSpaceSize '3-5 m²' (non confirmé, risqué)",
+      "habitat.activityEnrichment 'terriers' (non confirmé)",
+      "health source 'Genette - Soins et santé' retitrée (la page ne traite pas de santé ; conseils génériques conservés)",
+      "legislation.citesAppendix/euAnnex restent null (non indiqués)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5219833,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "behavior.sociability: semi-grégaire → solitaire (en.wikipedia: thought to be solitary ; fr: couples seulement à la reproduction)",
+      "behavior.generalBehavior: 'surtout diurne' → actif toute l'année, nocturne l'été/plus diurne l'hiver (fr.wikipedia)",
+      "behavior.compatibilityWithOtherAnimals: cohabitation entre souris déconseillée hors reproduction",
+      "reproduction.litterSizeMax: 8 conservé (en: up to eight; fr: 4-7)",
+      "reproduction.season: 'avril à septembre' → juin-juillet GB, parfois avril-mai ; jusqu'à 6 portées/an (en/fr)",
+      "reproduction.notes: allaitement 15-16 j (en), indépendance 18 j (fr)",
+      "gestation 21 j et maturité 1 mois confirmés par fr.wikipedia"
+    ],
+    "removed": [
+      "legislation entière (source citée fr.wikipedia/Souris ne concerne pas l'espèce ; aucun statut France sourcé)",
+      "source fr.wikipedia.org/wiki/Souris (hors sujet)"
+    ],
+    "confidence": "medium"
+  }
+]

@@ -23,6 +23,7 @@ import {
 import { RoutinesService } from './routines.service';
 import { CreateRoutineDto, UpdateRoutineDto, CreateActionLogDto } from './dto/routine.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @ApiTags('routines')
 @Controller('users/me/animals/:animalId/routines')
@@ -63,8 +64,12 @@ export class RoutinesController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
-  async findAllRoutines(@Request() req, @Param('animalId') animalId: string) {
-    return this.routinesService.findAllRoutines(req.user.id, animalId);
+  async findAllRoutines(
+    @Request() req,
+    @Param('animalId') animalId: string,
+    @Query() page: PaginationQueryDto,
+  ) {
+    return this.routinesService.findAllRoutines(req.user.id, animalId, page);
   }
 
   @Get(':routineId')
@@ -171,11 +176,15 @@ export class HistoryController {
     @Request() req,
     @Param('animalId') animalId: string,
     @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
+    @Query('offset', new ParseIntPipe({ optional: true })) offset?: number,
   ) {
     if (limit !== undefined && (limit < 1 || limit > 100)) {
       throw new BadRequestException('limit must be between 1 and 100');
     }
-    return this.routinesService.getHistory(req.user.id, animalId, limit ?? 100);
+    if (offset !== undefined && offset < 0) {
+      throw new BadRequestException('offset must be >= 0');
+    }
+    return this.routinesService.getHistory(req.user.id, animalId, limit ?? 100, offset ?? 0);
   }
 
   @Delete(':logId')

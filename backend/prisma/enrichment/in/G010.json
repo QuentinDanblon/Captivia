@@ -1,0 +1,172 @@
+[
+ {
+  "speciesId": 104060891,
+  "commonNameFr": "Chaus",
+  "scientificName": "Felis chaus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104060941,
+  "commonNameFr": "Chat de Geoffroy",
+  "scientificName": "Leopardus geoffroyi",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104061079,
+  "commonNameFr": "Chat pêcheur",
+  "scientificName": "Prionailurus viverrinus",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104069250,
+  "commonNameFr": "Antilope cervicapre",
+  "scientificName": "Antilope cervicapra",
+  "category": "mammifère",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104076753,
+  "commonNameFr": "Gecko géant de Madagascar",
+  "scientificName": "Phelsuma grandis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104085484,
+  "commonNameFr": "Téju rouge",
+  "scientificName": "Salvator rufescens",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104087619,
+  "commonNameFr": "Iguane des Petites Antilles",
+  "scientificName": "Iguana delicatissima",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "behavior",
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104093507,
+  "commonNameFr": "Couleuvre de Vigneau",
+  "scientificName": "Coronella girondica",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104094514,
+  "commonNameFr": "Couleuvre verte",
+  "scientificName": "Opheodrys aestivus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104101618,
+  "commonNameFr": "Serpent des sables",
+  "scientificName": "Eryx johnii",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "health",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 104101654,
+  "commonNameFr": "Boa de l'île Ronde",
+  "scientificName": "Casarea dussumieri",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104101859,
+  "commonNameFr": "Python molure",
+  "scientificName": "Python bivittatus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104104828,
+  "commonNameFr": "Tortue radiée",
+  "scientificName": "Astrochelys radiata",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ },
+ {
+  "speciesId": 104105088,
+  "commonNameFr": "Tortue étoilée",
+  "scientificName": "Geochelone elegans",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat",
+   "health"
+  ]
+ }
+]

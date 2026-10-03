@@ -1,0 +1,132 @@
+[
+  {
+    "speciesId": 5289002,
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 19,
+      "litterSizeMin": 5,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": 1,
+      "breedingDifficulty": "facile",
+      "notes": "Gestation de 18 à 21 jours. Portées de 5 à 12 petits (18 au maximum), jusqu'à 8 portées par an. Maturité sexuelle précoce : environ 6 semaines pour les femelles et 8 semaines pour les mâles (accouplements possibles dès 5 semaines). Cycle d'œstrus de 4 à 6 jours.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/House_mouse",
+          "title": "House mouse - Reproduction"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Souris_domestique",
+          "title": "Souris domestique - Reproduction"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5289010,
+    "health": {
+      "diseases": [
+        {
+          "name": "Infection respiratoire à Mycoplasma",
+          "symptoms": "Éternuements fréquents, respiration sifflante, écoulement nasal, perte d'appétit",
+          "prevention": "Maintenir l'hygiène de la cage, éviter les courants d'air froids, réduire les poussières",
+          "whenToConsult": "Dès l'apparition des premiers symptômes, car l'infection peut progresser rapidement"
+        },
+        {
+          "name": "Maladies tumorales",
+          "symptoms": "Masse palpable, affaiblissement général, problèmes de mobilité, perte de poids",
+          "prevention": "Alimentation équilibrée, réduction du stress",
+          "whenToConsult": "Immédiatement à la découverte d'une masse ou de symptômes de déclin (risque accru après un an, tumeurs mammaires fréquentes chez les femelles)"
+        },
+        {
+          "name": "Abcès cutanés et infections bactériennes",
+          "symptoms": "Plaies, nodules ou gonflements, perte de poils localisée, croûtes",
+          "prevention": "Cage nettoyée régulièrement, éviter les blessures, maintenir un environnement hygiénique",
+          "whenToConsult": "Lors de plaies infectées ou d'abcès visibles"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fancy_mouse",
+          "title": "Fancy mouse - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 19,
+      "litterSizeMin": 5,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": 1,
+      "breedingDifficulty": "facile",
+      "notes": "Gestation de 18 à 21 jours. Portées de 5 à 12 petits (18 au maximum), jusqu'à 8 portées par an. Maturité sexuelle précoce : environ 6 semaines pour les femelles et 8 semaines pour les mâles (accouplements possibles dès 5 semaines). Cycle d'œstrus de 4 à 6 jours.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/House_mouse",
+          "title": "House mouse - Reproduction"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Souris_domestique",
+          "title": "Souris domestique - Reproduction"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5289028,
+    "health": {
+      "diseases": [
+        {
+          "name": "Listériose",
+          "symptoms": "Fièvre, paralysie, tremblements, convulsions, perte d'équilibre",
+          "prevention": "Hygiène rigoureuse de la cage, aliments frais et bien conservés, éviter les contaminations",
+          "whenToConsult": "Immédiatement en cas de signes neurologiques"
+        },
+        {
+          "name": "Maladie de Tyzzer",
+          "symptoms": "Diarrhée aqueuse, déshydratation, affaiblissement, déclin rapide",
+          "prevention": "Maintenir une excellente propreté de la cage, alimentation de qualité, réduction du stress",
+          "whenToConsult": "Urgence vétérinaire à la première diarrhée importante"
+        },
+        {
+          "name": "Pseudotuberculose",
+          "symptoms": "Amaigrissement progressif, apathie, nodules internes (détectables à la palpation)",
+          "prevention": "Hygiène stricte, stockage sécurisé de la nourriture, isoler les animaux malades",
+          "whenToConsult": "Consultations régulières et observation de tout déclin de condition physique"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Gerbille",
+          "title": "Gerbille - Santé et maladies"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mongolian_gerbil",
+          "title": "Mongolian gerbil - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": 25,
+      "litterSizeMin": 4,
+      "litterSizeMax": 6,
+      "sexualMaturityMonths": 2,
+      "breedingDifficulty": "facile",
+      "notes": "Animaux monogames : le couple reste uni à vie et élève les jeunes ensemble. Gestation d'environ 25 jours (24 à 28 jours). Portées de 1 à 10 petits, le plus souvent de 4 à 6. Maturité sexuelle à environ 10 semaines pour les mâles et 18 semaines pour les femelles. Au moins 6 portées par an possibles. Sevrage vers 6 semaines.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Gerbille",
+          "title": "Gerbille - Reproduction"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "id": "animal-e2e-1",
+  "name": "Kaa",
+  "speciesId": 2435099,
+  "birthDate": "2023-04-12T00:00:00.000Z",
+  "sex": "male",
+  "photos": [],
+  "notes": "Animal de test",
+  "fatherId": null,
+  "motherId": null,
+  "groupName": null,
+  "father": null,
+  "mother": null
+}

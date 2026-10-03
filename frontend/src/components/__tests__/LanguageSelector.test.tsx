@@ -1,5 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { useLocale } from 'next-intl';
+import { usePathname } from '@/i18n/navigation';
+import { hardNavigate } from '@/lib/hard-navigate';
 import { LanguageSelector } from '../LanguageSelector';
+
+jest.mock('@/lib/hard-navigate', () => ({ hardNavigate: jest.fn() }));
+jest.mock('@/lib/platform', () => ({ IS_MOBILE_BUILD: false }));
 
 // Mock next-intl/routing (ESM) so i18n/routing can load
 jest.mock('next-intl/routing', () => ({
@@ -15,11 +21,15 @@ jest.mock('next-intl', () => ({
   useTranslations: jest.fn(() => (key: string) => key),
 }));
 
-jest.mock('next/navigation', () => ({
+jest.mock('@/i18n/navigation', () => ({
   useRouter: jest.fn(() => ({
-    push: jest.fn(),
+    replace: jest.fn(),
   })),
   usePathname: jest.fn(() => '/'),
+  // as-needed : pas de préfixe pour la locale par défaut (fr).
+  getPathname: jest.fn(({ href, locale }: { href: string; locale: string }) =>
+    locale === 'fr' ? href : `/${locale}${href === '/' ? '' : href}`,
+  ),
 }));
 
 jest.mock('../../i18n', () => ({
@@ -53,67 +63,44 @@ describe('LanguageSelector', () => {
     });
   });
 
-  it('should call router.push when language changes', () => {
-    const mockPush = jest.fn();
-    const mockUseRouter = require('next/navigation').useRouter;
-    mockUseRouter.mockReturnValue({ push: mockPush });
-    
+  beforeEach(() => {
+    jest.mocked(useLocale).mockReturnValue('fr');
+    jest.mocked(usePathname).mockReturnValue('/');
+  });
+
+  function setup(locale: string, pathname: string) {
+    jest.mocked(hardNavigate).mockClear();
+    jest.mocked(useLocale).mockReturnValue(locale);
+    jest.mocked(usePathname).mockReturnValue(pathname);
     render(<LanguageSelector />);
-    
-    const select = screen.getByRole('combobox');
+    return { select: screen.getByRole('combobox') };
+  }
+
+  it('écrit le cookie NEXT_LOCALE puis recharge la page dans la nouvelle langue', () => {
+    const { select } = setup('fr', '/');
     fireEvent.change(select, { target: { value: 'en' } });
-    
-    expect(mockPush).toHaveBeenCalledWith('/en/');
+    expect(document.cookie).toContain('NEXT_LOCALE=en');
+    expect(hardNavigate).toHaveBeenCalledWith('/en');
   });
 
-  it('should handle locale change from fr to en', () => {
-    const mockPush = jest.fn();
-    const mockUseRouter = require('next/navigation').useRouter;
-    mockUseRouter.mockReturnValue({ push: mockPush });
-    
-    const mockUsePathname = require('next/navigation').usePathname;
-    mockUsePathname.mockReturnValue('/mes-animaux');
-    
-    render(<LanguageSelector />);
-    
-    const select = screen.getByRole('combobox');
-    fireEvent.change(select, { target: { value: 'en' } });
-    
-    expect(mockPush).toHaveBeenCalledWith('/en/mes-animaux');
-  });
-
-  it('should remove locale prefix when changing to fr (default locale)', () => {
-    const mockPush = jest.fn();
-    const mockUseRouter = require('next/navigation').useRouter;
-    mockUseRouter.mockReturnValue({ push: mockPush });
-    
-    const mockUseLocale = require('next-intl').useLocale;
-    mockUseLocale.mockReturnValue('en');
-    
-    const mockUsePathname = require('next/navigation').usePathname;
-    mockUsePathname.mockReturnValue('/en/species/123');
-    
-    render(<LanguageSelector />);
-    
-    const select = screen.getByRole('combobox');
-    fireEvent.change(select, { target: { value: 'fr' } });
-    
-    expect(mockPush).toHaveBeenCalledWith('/species/123');
-  });
-
-  it('should preserve pathname structure when changing language', () => {
-    const mockPush = jest.fn();
-    const mockUseRouter = require('next/navigation').useRouter;
-    mockUseRouter.mockReturnValue({ push: mockPush });
-    
-    const mockUsePathname = require('next/navigation').usePathname;
-    mockUsePathname.mockReturnValue('/fr/species/123');
-    
-    render(<LanguageSelector />);
-    
-    const select = screen.getByRole('combobox');
+  it('conserve le chemin courant', () => {
+    const { select } = setup('fr', '/mes-animaux');
     fireEvent.change(select, { target: { value: 'es' } });
-    
-    expect(mockPush).toHaveBeenCalledWith('/es/species/123');
+    expect(hardNavigate).toHaveBeenCalledWith('/es/mes-animaux');
+  });
+
+  it('revient à fr (locale par défaut, sans préfixe) en mettant à jour le cookie', () => {
+    const { select } = setup('en', '/species/123');
+    fireEvent.change(select, { target: { value: 'fr' } });
+    expect(document.cookie).toContain('NEXT_LOCALE=fr');
+    expect(hardNavigate).toHaveBeenCalledWith('/species/123');
+  });
+
+  it('conserve la query string', () => {
+    window.history.pushState({}, '', '/mes-animaux?filter=cats');
+    const { select } = setup('en', '/mes-animaux');
+    fireEvent.change(select, { target: { value: 'fr' } });
+    expect(hardNavigate).toHaveBeenCalledWith('/mes-animaux?filter=cats');
+    window.history.pushState({}, '', '/');
   });
 });

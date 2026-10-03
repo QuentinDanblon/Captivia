@@ -1,0 +1,34 @@
+# Netlify — frontend Next.js Captivia (monorepo : l'app est dans frontend/).
+# Le runtime Next.js de Netlify (OpenNext) est détecté automatiquement.
+# Le site est relié à GitHub (DEP-01) : Netlify construit et publie la production à
+# chaque push sur main, et des « deploy previews » pour chaque pull request.
+# Aucun workflow GitHub ne déploie plus le front (voir docs/DEPLOY.md).
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # URL publique du site (canonical, hreflang, sitemap). À remplacer par le domaine définitif.
+  NEXT_PUBLIC_SITE_URL = "https://captivia-app.netlify.app"
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# NEXT_PUBLIC_API_URL (URL de l'API Render) est lue au BUILD et intégrée au bundle.
+# Elle se définit dans Netlify → Site configuration → Environment variables, avec une
+# valeur par contexte (Production, Deploy Previews, Branch deploys) : ne jamais la
+# committer ici pour la production. Pour que les previews de PR parlent à l'API de
+# staging (DEP-05) plutôt qu'à la production, décommenter et adapter :
+#
+# [context.deploy-preview.environment]
+#   NEXT_PUBLIC_API_URL = "https://captivia-api-staging.onrender.com"
+#
+# Attention : l'origine d'une preview (https://deploy-preview-N--captivia-app.netlify.app)
+# doit aussi être autorisée par CORS_ORIGIN côté API pour que les appels réussissent.
+
+# Fichiers statiques de Next.js : le nom contient un hash du contenu, donc cache longue
+# durée et immuable.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

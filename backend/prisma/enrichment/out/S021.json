@@ -1,0 +1,168 @@
+[
+  {
+    "speciesId": 2468095,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Limaces", "frequency": "quotidienne", "notes": "Principale source alimentaire naturelle" },
+        { "name": "Vers de terre", "frequency": "quotidienne", "notes": "Riche en protéines et minéraux" },
+        { "name": "Araignées", "frequency": "hebdomadaire", "notes": "Proies naturelles variées" },
+        { "name": "Insectes divers", "frequency": "hebdomadaire", "notes": "Larves, coléoptères" }
+      ],
+      "foodsToAvoid": [
+        { "reason": "Espèce fouisseuse qui se nourrit de proies naturelles vivantes - pas d'aliments transformés testés" }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime carnivore basé sur invertébrés (limaces, vers, araignées, insectes et larves). En captivité, accès à substrat humide contenant limaces et vers naturels essentiel.",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Orvet_fragile", "title": "Orvet fragile - Wikipedia FR" }]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium 80L minimum avec substrat profond (20cm) pour fouissement",
+      "lightNeeds": "Lumière naturelle ou UVB faible, préfère zones ombragées",
+      "activityEnrichment": "Cachettes souterraines, substrat pour creuser (galeries jusqu'à 70 cm de profondeur à l'état naturel), zones très humides",
+      "hygieneNotes": "Substrat humide (tourbe + mousse), contrôle d'humidité, nettoyage hebdomadaire des zones stagnantes",
+      "costEstimate": "moyen",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Orvet_fragile", "title": "Orvet fragile habitat - Wikipedia FR" }]
+    },
+    "behavior": {
+      "generalBehavior": "Espèce fouisseuse passant la majorité du temps sous terre, en galeries jusqu'à 70 cm de profondeur ou dans terriers de rongeurs. Crépusculaire, peu visible.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Non recommandé pour enfants; espèce fragile et stressée par la manipulation excessive",
+      "compatibilityWithOtherAnimals": "A maintenir isolé; régime carnivore, peut consommer petits invertébrés",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Orvet_fragile", "title": "Orvet fragile comportement - Wikipedia FR" }]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": { "citesAppendix": null, "euAnnex": null, "permits": [], "restrictions": ["Espèce protégée en France (arrêté du 8 janvier 2021)"] },
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Orvet_fragile", "title": "Orvet fragile - Wikipedia FR" }]
+    },
+    "reproduction": {
+      "season": "été",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 5,
+      "litterSizeMax": 20,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Espèce ovovivipare. Les femelles produisent 5-20 jeunes entre juin et août dans des membranes que les jeunes percutent pour naître. Reproduction rare en captivité. Durée de vie exceptionnelle: ~30 ans en moyenne, maximum 54 ans.",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Orvet_fragile", "title": "Orvet fragile reproduction - Wikipedia FR" }]
+    }
+  },
+  {
+    "speciesId": 2468542,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Coléoptères", "frequency": "quotidienne", "notes": "Proies préférées naturelles" },
+        { "name": "Insectes divers", "frequency": "quotidienne", "notes": "Papillons, sauterelles, orthoptères" },
+        { "name": "Vers de terre", "frequency": "hebdomadaire", "notes": "Complément protéiné" },
+        { "name": "Petits escargots", "frequency": "hebdomadaire", "notes": "Source minérale naturelle" }
+      ],
+      "foodsToAvoid": [
+        { "reason": "Pas d'aliments toxiques documentés; éviter invertébrés traités aux pesticides" }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime principalement insectivore (coléoptères ~57 % des proies, orthoptères ~12 %, hyménoptères ~9 %). Les populations insulaires sont opportunistes et peuvent consommer des fruits (jusqu'à 20 % du régime selon la saison).",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Lézard_ocellé", "title": "Lézard ocellé - Wikipedia FR" }]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Exposition solaire prolongée indispensable à la thermorégulation (actif dès ~15,6 °C ; jeunes visant ~34 °C). UVB fort recommandé. Préfère zones très ensoleillées",
+      "activityEnrichment": "Décor rocheux avec crevasses et tas de pierres, cachettes/terriers, substrat xérique (sable, graviers)",
+      "hygieneNotes": "Substrat sec (sable fin + roches), éviter humidité excessive, accès à eau de boisson",
+      "costEstimate": "moyen",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Lézard_ocellé", "title": "Lézard ocellé habitat - Wikipedia FR" }]
+    },
+    "behavior": {
+      "generalBehavior": "Lézard diurne, spécialiste du basking (exposition solaire prolongée pour thermorégulation). Dépend de refuges (crevasses, terriers, tas de pierres) et grimpe bien sur les rochers.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Possible avec surveillance; moins fragile que certaines espèces mais nécessite manipulation minimale",
+      "compatibilityWithOtherAnimals": "A maintenir isolé; comportement compétitif",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Lézard_ocellé", "title": "Lézard ocellé comportement - Wikipedia FR" }]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": { "citesAppendix": null, "euAnnex": null, "permits": [], "restrictions": ["Espèce protégée en France : capture, destruction et destruction de l'habitat interdites", "Annexe II de la Convention de Berne"] },
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Lézard_ocellé", "title": "Lézard ocellé - Wikipedia FR" }]
+    },
+    "reproduction": {
+      "season": "printemps",
+      "gestationDays": null,
+      "incubationDays": 75,
+      "litterSizeMin": 5,
+      "litterSizeMax": 20,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "Accouplement avril-mai. Femelles pondent 5-20 œufs fin mai-début juin. Incubation 71-102 jours selon température (25-29 °C). Jeunes indépendants à la naissance.",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Lézard_ocellé", "title": "Lézard ocellé reproduction - Wikipedia FR" }]
+    }
+  },
+  {
+    "speciesId": 2469188,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Araignées", "frequency": "quotidienne", "notes": "Invertébrés naturels principaux" },
+        { "name": "Insectes divers", "frequency": "quotidienne", "notes": "Papillons, sauterelles, coléoptères, mouches" },
+        { "name": "Vers de terre", "frequency": "hebdomadaire", "notes": "Complément alimentaire" },
+        { "name": "Petites limaces", "frequency": "hebdomadaire", "notes": "Apport minéral" }
+      ],
+      "foodsToAvoid": [
+        { "reason": "Pas d'aliments toxiques majeurs documentés pour cette espèce" }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Chasseur d'arthropodes et petits invertébrés (dents pour saisir seulement, proies avalées entières). Régime varié essentiel.",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Lézard_des_murailles", "title": "Lézard des murailles - Wikipedia FR" }]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium vertical 60L+ avec pierres et cachettes multiples",
+      "lightNeeds": "Exposition solaire, préfère zones ensoleillées et abritées. UVB modéré à fort",
+      "activityEnrichment": "Murs de pierre, crevasses rocheuses, bois pour grimper, zones d'escalade verticales",
+      "hygieneNotes": "Substrat minéral (gravier, sable), accès à eau de boisson, nettoyage régulier",
+      "costEstimate": "faible",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Lézard_des_murailles", "title": "Lézard des murailles habitat - Wikipedia FR" }]
+    },
+    "behavior": {
+      "generalBehavior": "Lézard diurne très actif, excellent grimpeur rocailleux. Exposition solaire fréquente pour thermorégulation (température corporelle optimale ~34 °C). Colonise facilement zones urbaines (murs, pierres). Locomotion rapide par ondulation latérale du corps.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Espèce robuste mais manipulation à limiter (stress)",
+      "compatibilityWithOtherAnimals": "Mâles territoriaux en période de reproduction (avril-juin) : éviter de cohabiter plusieurs mâles",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Lézard_des_murailles", "title": "Lézard des murailles comportement - Wikipedia FR" }]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": "printemps-été",
+      "gestationDays": null,
+      "incubationDays": 56,
+      "litterSizeMin": 3,
+      "litterSizeMax": 11,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "facile",
+      "notes": "Ovipare. Accouplement avril-juin. Femelles pondent 5-10 œufs (3-11) en trous peu profonds, jusqu'à 3 pontes par an en plaine. Incubation 4-11 semaines selon climat. Jeunes totalement indépendants à l'éclosion.",
+      "sources": [{ "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Lézard_des_murailles", "title": "Lézard des murailles reproduction - Wikipedia FR" }]
+    }
+  }
+]

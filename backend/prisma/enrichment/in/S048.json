@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 5959230,
+  "commonNameFr": "Ara militaire",
+  "scientificName": "Ara militaris",
+  "category": "oiseau",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 7387949,
+  "commonNameFr": "Couleuvre ratière",
+  "scientificName": "Elaphe obsoleta",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 7572096,
+  "commonNameFr": "Barbu rosé",
+  "scientificName": "Pethia conchonius",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000156,
+    "status": "corrected",
+    "note": "Poids BRC, plus petite race, cou court/visage arrondi confirmés. Retiré : origine Pays-Bas (non écrite explicitement) et tempérament (non traité par la page)."
+  },
+  {
+    "speciesId": 2000000158,
+    "status": "corrected",
+    "note": "France 1919, 3,4-4,8 kg, pelage velouté confirmés. Retiré : « mutation spontanée », « taille moyenne », « calme et sociable » (non sourcés ; la page dit activité faible à modérée)."
+  },
+  {
+    "speciesId": 2000000159,
+    "status": "corrected",
+    "note": "Origine précisée (XVIe s. près de Gand, ~1860 = première mention authentique), 7 couleurs ARBA, docilité nuancée confirmées."
+  },
+  {
+    "speciesId": 2000000160,
+    "status": "corrected",
+    "note": "Tableau Wikipedia : origine Angleterre, 2,0-2,3 kg (UK), oreilles dressées, poil court. Retiré : remarque sur le nom/Pays-Bas ; « marron » remplacé par des couleurs listées."
+  },
+  {
+    "speciesId": 2000000161,
+    "status": "corrected",
+    "note": "French Lop : France, 10 lb (4,5 kg), oreilles « lop », poil court, ARBA+BRC, nombreuses couleurs confirmés. Retiré : « race moderne », « allure particulière ». Source ne décrit que le French Lop."
+  },
+  {
+    "speciesId": 2000000162,
+    "status": "removed",
+    "note": "Aucune description (déjà null) : rien à vérifier"
+  },
+  {
+    "speciesId": 2000000163,
+    "status": "corrected",
+    "note": "Tous les faits confirmés ; parenté nuancée (« none substantiated »)."
+  },
+  {
+    "speciesId": 2000000164,
+    "status": "removed",
+    "note": "Aucune description (déjà null) : rien à vérifier"
+  },
+  {
+    "speciesId": 2000000165,
+    "status": "removed",
+    "note": "Polonais absent du tableau de la page Rabbit_breeds : la page ne décrit pas cette race."
+  },
+  {
+    "speciesId": 2000000166,
+    "status": "removed",
+    "note": "Aucune description (déjà null) : rien à vérifier"
+  },
+  {
+    "speciesId": 2000000167,
+    "status": "removed",
+    "note": "Aucune description (déjà null) : rien à vérifier"
+  },
+  {
+    "speciesId": 2000000168,
+    "status": "verified",
+    "note": "Tableau Wikipedia : Angleterre, 5-8 lb (2,3-3,6 kg), oreilles dressées, poil court, ARBA+BRC, blanc avec papillon coloré."
+  },
+  {
+    "speciesId": 2000000169,
+    "status": "removed",
+    "note": "Page Rabbit_breeds liste « American Sable » ; l'équivalence « Lapin Zibeline = American Sable » n'est confirmée par aucune source (fr.wikipedia ne la donne pas). Description non vérifiable pour CETTE race."
+  },
+  {
+    "speciesId": 2000000170,
+    "status": "corrected",
+    "note": "Tableau : France, 9-12 lb (4,1-5,4 kg), poil court, oreilles dressées, ARBA oui/BRC non. Retiré : « marquages très distinctifs » (flou)."
+  },
+  {
+    "speciesId": 2000000171,
+    "status": "verified",
+    "note": "Tableau Wikipedia : France, 7-11 lb (3,2-5,0 kg), orange/rouge, BRC oui/ARBA non."
+  }
+]

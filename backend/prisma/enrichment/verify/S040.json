@@ -1,0 +1,35 @@
+[
+  {
+    "speciesId": 5285143,
+    "checked": ["health", "reproduction"],
+    "corrected": [
+      "reproduction.season: « toute l'année » → début de la saison de reproduction à l'automne chilien, naissances au printemps (en.wikipedia Common_degu contredit « toute l'année »)",
+      "health.Diabète: prévention « graines, légumes » reformulée selon la source (éviter sucres libres, mélasse) ; cataracte ajoutée comme complication citée",
+      "health.Bumblefoot: prévention « pas de grillage » → éviter sols en plastique/durs, tapis d'herbe (source)",
+      "health.Problèmes dentaires: whenToConsult « abdominal ballonné » incohérent supprimé"
+    ],
+    "removed": ["reproduction.sexualMaturityMonths (8, non mentionné par la source) → null"],
+    "confidence": "high"
+  },
+  {
+    "speciesId": 5285167,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.season: « automne » → octobre à décembre (printemps austral ; en.wikipedia Lagidium, « mating occurs from October through December »)",
+      "source title: « Viscacha » → « Lagidium »",
+      "reproduction.notes: maturité sexuelle (1 an) et sevrage (8 semaines) précisés comme données de la viscache du Nord (L. peruanum), pas de L. viscacia"
+    ],
+    "removed": [],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5285942,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.season: « mai-juillet » (présenté comme saison de reproduction) → naissances de mai à juillet (en.wikipedia Aardvark)",
+      "reproduction.notes: ajout du calendrier de développement de la source"
+    ],
+    "removed": ["reproduction.notes: « Compagnons se lient seulement durant saison reproductive » (non confirmé par la source)"],
+    "confidence": "high"
+  }
+]

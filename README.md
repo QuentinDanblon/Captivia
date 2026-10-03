@@ -1,7 +1,5 @@
 # 🦎 Captivia - Le Guide de la Faune
 
-> ⚠️ **Dernière mise à jour**: 1er février 2026 - Tous les bugs structurels et visuels ont été corrigés. Voir [FIXES_APPLIED.md](./FIXES_APPLIED.md) pour les détails.
-
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat&logo=nestjs&logoColor=white)](https://nestjs.com/)
 [![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
@@ -287,8 +285,6 @@ SCORE GLOBAL: 100% ✅
 
 ## 🧪 Tests
 
-Voir [TESTING_CHECKLIST.md](TESTING_CHECKLIST.md) pour la liste complète des tests.
-
 **Tests rapides:**
 ```bash
 # Health check
@@ -310,33 +306,27 @@ curl "http://localhost:3001/food/search?q=dog+food"
 
 ## 💾 Backup & Restauration
 
-Scripts de sauvegarde / restauration de la base PostgreSQL (`captivia`) — dumps gzip + rotation automatique.
+Scripts de sauvegarde / restauration de la base PostgreSQL : dump au format custom de `pg_dump` (déjà compressé), vérifié par `pg_restore --list`, rotation automatique. En production (Neon), la sauvegarde est faite par le workflow `.github/workflows/backup.yml` (chiffrée avec age) : voir [`docs/RUNBOOK.md`](docs/RUNBOOK.md) §3.
 
 ### Sauvegarde
 
 ```bash
-./scripts/backup-db.sh
+DATABASE_URL='postgresql://user:<mot de passe>@127.0.0.1:5432/captivia' bash scripts/backup-db.sh
 ```
 
-- Produit `backups/captivia-YYYYMMDD-HHMMSS.sql.gz` (dump PostgreSQL compressé).
-- Utilise `docker compose exec postgres pg_dump` si la stack tourne, sinon `pg_dump` local avec `DATABASE_URL` fournie explicitement.
+- Produit `backups/captivia-YYYYMMDD-HHMMSS.dump` (dossier ignoré par git).
+- Nécessite `pg_dump` et `pg_restore` en local, de version supérieure ou égale à celle du serveur, et `DATABASE_URL` (l'URL n'est jamais affichée). Le paramètre `?schema=…` ajouté par Prisma est retiré automatiquement ; les autres (`sslmode`…) sont conservés.
 - Rotation : seuls les **14** dumps les plus récents sont conservés (`KEEP=14` dans le script).
-- Cron (quotidien à 2 h) :
-
-```cron
-0 2 * * * cd /chemin/vers/captivia && ./scripts/backup-db.sh >> backups/backup.log 2>&1
-```
+- Le dump n'est pas chiffré : ne pas le conserver en clair hors de la machine.
 
 ### Restauration
 
 ```bash
-# (recommandé) base propre avant restauration :
-docker compose exec -T postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "DROP SCHEMA public CASCADE; CREATE SCHEMA public;"
-# puis :
-./scripts/restore-db.sh backups/captivia-20260809-020000.sql.gz
+DATABASE_URL='postgresql://user:<mot de passe>@127.0.0.1:5432/captivia' \
+  bash scripts/restore-db.sh backups/captivia-20261002-020000.dump
 ```
 
-⚠️ La restauration écrase les données actuelles — une confirmation interactive est demandée.
+⚠️ La restauration remplace les données de la base ciblée (confirmation « oui » demandée ; la cible est affichée sans identifiants). Elle est atomique (`--single-transaction --exit-on-error`) : à la première erreur, la base reste inchangée. Les objets absents du dump ne sont pas supprimés ; pour repartir d'une base vide, exécuter d'abord `psql "$DATABASE_URL" -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public;'`.
 
 ### Test de restauration recommandé
 
@@ -344,7 +334,8 @@ Un backup jamais testé n'est pas un backup : vérifiez régulièrement qu'un du
 
 ```bash
 docker compose exec -T postgres createdb -U "$POSTGRES_USER" captivia_restore_test
-gunzip -c backups/captivia-<date>.sql.gz | docker compose exec -T postgres psql -U "$POSTGRES_USER" -d captivia_restore_test
+DATABASE_URL="postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@127.0.0.1:5432/captivia_restore_test" \
+  bash scripts/restore-db.sh backups/captivia-<date>.dump
 docker compose exec -T postgres psql -U "$POSTGRES_USER" -d captivia_restore_test -c "SELECT count(*) FROM information_schema.tables;"
 docker compose exec -T postgres dropdb -U "$POSTGRES_USER" captivia_restore_test
 ```
@@ -459,8 +450,6 @@ Les images sont multi-stage : l'image backend runtime ne contient ni sources Typ
 - Google Play Store (Android)
 - Apple App Store (iOS)
 
-Voir [CAPACITOR_SETUP.md](CAPACITOR_SETUP.md) pour wrapper mobile.
-
 ---
 
 ## 🔒 Sécurité
@@ -493,18 +482,19 @@ Private - © 2026 Captivia
 
 ---
 
-## 🎉 Statut du Projet
+## 📊 Statut
 
-**✅ Production Ready!**
+Voir [docs/PLAN-PRODUCTION.md](docs/PLAN-PRODUCTION.md) pour le statut complet du projet, la roadmap, et les étapes de production.
 
-Toutes les fonctionnalités principales sont implémentées et testées. Le projet est prêt pour le déploiement en production.
+---
 
-**Prochaines étapes suggérées:**
-1. Installer web-push et @nestjs/schedule pour notifications push temps réel
-2. Configurer credentials Amazon PA API pour affiliation active
-3. Obtenir token Species+ pour données législatives complètes
-4. Créer contenu éditorial (santé, législation par espèce)
-5. Build wrapper Capacitor pour Android/iOS
+## 📦 Déploiement
+
+Pour les instructions de déploiement, les configurations de serveur et les environnements, consultez [docs/DEPLOY.md](docs/DEPLOY.md).
+
+**Configurations disponibles :**
+- `netlify.toml` — Configuration pour Netlify (frontend)
+- `render.yaml` — Configuration pour Render (backend)
 
 ---
 

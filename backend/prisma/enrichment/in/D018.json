@@ -1,0 +1,137 @@
+[
+ {
+  "speciesId": 2000000592,
+  "commonNameFr": "Carmagnola Grey",
+  "scientificName": "Carmagnola Grey",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000593,
+  "commonNameFr": "American Rabbit",
+  "scientificName": "American rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000594,
+  "commonNameFr": "Beige Rabbit",
+  "scientificName": "Beige rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000595,
+  "commonNameFr": "Brazilian Domestic Rabbit",
+  "scientificName": "Brazilian domestic rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000596,
+  "commonNameFr": "British Giant Rabbit",
+  "scientificName": "British Giant rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000597,
+  "commonNameFr": "Cashmere Lop",
+  "scientificName": "Cashmere Lop",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000598,
+  "commonNameFr": "Continental Giant Rabbit",
+  "scientificName": "Continental Giant rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000599,
+  "commonNameFr": "Enderby Island Rabbit",
+  "scientificName": "Enderby Island Rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000600,
+  "commonNameFr": "Florida White",
+  "scientificName": "Florida White",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000601,
+  "commonNameFr": "Silver Fox Rabbit",
+  "scientificName": "Silver Fox rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000602,
+  "commonNameFr": "Silver Marten",
+  "scientificName": "Silver Marten",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000603,
+  "commonNameFr": "Swedish Hare",
+  "scientificName": "Swedish Hare",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000604,
+  "commonNameFr": "Czech Black Guard Haired Rabbit",
+  "scientificName": "Czech Black Guard Haired Rabbit",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000605,
+  "commonNameFr": "Petit Bélier",
+  "scientificName": "Petit Bélier",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ },
+ {
+  "speciesId": 2000000606,
+  "commonNameFr": "Hulstlander",
+  "scientificName": "Hulstlander",
+  "category": "mammifère",
+  "domesticationType": "domestique",
+  "needDescription": true,
+  "missing": []
+ }
+]

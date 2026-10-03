@@ -1,0 +1,129 @@
+[
+ {
+  "speciesId": 104008238,
+  "commonNameFr": "Poisson éléphant",
+  "scientificName": "Gnathonemus petersii",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 156261518,
+  "commonNameFr": "Poisson-chat de verre",
+  "scientificName": "Kryptopterus vitreolus",
+  "category": "poisson",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "health",
+   "reproduction",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2441454,
+  "commonNameFr": "Tortue d'Hermann",
+  "scientificName": "Testudo hermanni",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2441502,
+  "commonNameFr": "Tortue bordée",
+  "scientificName": "Testudo marginata",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2443074,
+  "commonNameFr": "Tortue map",
+  "scientificName": "Graptemys geographica",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2446584,
+  "commonNameFr": "Gecko de l'ouest",
+  "scientificName": "Rhacodactylus leachianus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2448847,
+  "commonNameFr": "Caméléon de Parson",
+  "scientificName": "Calumma parsonii",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2455676,
+  "commonNameFr": "Serpent des blés de l'Ouest",
+  "scientificName": "Pantherophis obsoletus",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2457884,
+  "commonNameFr": "Boiga brune",
+  "scientificName": "Boiga irregularis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2466939,
+  "commonNameFr": "Anole vert",
+  "scientificName": "Anolis carolinensis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "habitat"
+  ]
+ },
+ {
+  "speciesId": 2468095,
+  "commonNameFr": "Orvet fragile",
+  "scientificName": "Anguis fragilis",
+  "category": "reptile",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "health",
+   "habitat"
+  ]
+ }
+]

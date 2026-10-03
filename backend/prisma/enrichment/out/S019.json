@@ -1,0 +1,268 @@
+[
+  {
+    "speciesId": 2446584,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Régime commercial en poudre pour geckos (type Repashy/Pangea)",
+          "frequency": "variable",
+          "notes": "À l'état sauvage : fruits (dont Cassine curtipendula), nectar, sève, insectes, araignées, petits vertébrés"
+        },
+        {
+          "name": "Insectes (grillons, blattes)",
+          "frequency": "variable",
+          "notes": "Complément protéiné, proies de taille adaptée"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments trop caloriques",
+          "reason": "Risque de surpoids ; ne pas nourrir sans limite"
+        },
+        {
+          "name": "Alimentation sans apport en calcium",
+          "reason": "Risque de maladie osseuse métabolique"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Omnivore (insectes, araignées, petits vertébrés, fruits, nectar, sève). Supplémentation en calcium et vitamines selon avis vétérinaire. Eau fraîche disponible.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhacodactylus_leachianus",
+          "title": "Rhacodactylus leachianus - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Grand terrarium vertical : espèce arboricole de grande taille (36 à 43 cm, 250 à 500 g pour les populations de Grande Terre)",
+      "lightNeeds": "Espèce nocturne ; cycle jour/nuit régulier",
+      "activityEnrichment": "Branches épaisses verticales et horizontales, écorces de liège, plantes grimpantes, cachettes multiples",
+      "hygieneNotes": "Brumisation régulière pour maintenir l'humidité, ventilation adéquate pour éviter les infections fongiques",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhacodactylus_leachianus",
+          "title": "Rhacodactylus leachianus - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Gecko nocturne arboricole de grande taille. Peut vivre plus de 20 ans en captivité (jusqu'à 50 ans signalés). Agressif lors de la reproduction (morsures, violents mouvements) ; peut produire des vocalisations défensives (grognements).",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandé pour enfants ; morsure possible, manipulation stressante, longévité exigeante",
+      "compatibilityWithOtherAnimals": "Éviter de loger plusieurs mâles ensemble ; agressivité marquée pendant la période de reproduction",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhacodactylus_leachianus",
+          "title": "Rhacodactylus leachianus - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladie osseuse métabolique (MOM)",
+          "symptoms": "Mâchoire molle, os flexibles, queue déformée, tremblements des membres, difficulté à grimper",
+          "prevention": "Supplémentation calcique adaptée, alimentation équilibrée, insectes bien nourris",
+          "whenToConsult": "Dès les premiers signes de faiblesse osseuse ou de boiterie"
+        },
+        {
+          "name": "Infections bactériennes/fongiques de la peau",
+          "symptoms": "Taches décolorées sur la peau, mue anormale, zones enflées ou purulentes",
+          "prevention": "Ventilation suffisante, hygiène du terrarium, éviter l'humidité stagnante",
+          "whenToConsult": "Au premier signe de lésion cutanée ou de mue problématique"
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Respiration sifflante, mucus autour des narines, respiration bouche ouverte",
+          "prevention": "Ventilation adéquate, éviter une humidité excessive sans aération, température stable",
+          "whenToConsult": "Immédiatement en cas de signes respiratoires ; consultation d'un vétérinaire NAC"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhacodactylus_leachianus",
+          "title": "Rhacodactylus leachianus - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 2,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare : les femelles pondent deux œufs à la fois, jusqu'à 10 pontes par an. Le sexe dépend de la température d'incubation (environ 29°C : mâles ; environ 22°C : femelles). Reproduction complexe, juvéniles sensibles.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Rhacodactylus_leachianus",
+          "title": "Rhacodactylus leachianus - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2448340,
+    "reproduction": {
+      "season": "saison sèche (avril-août)",
+      "gestationDays": 110,
+      "incubationDays": null,
+      "litterSizeMin": 10,
+      "litterSizeMax": 65,
+      "sexualMaturityMonths": 40,
+      "breedingDifficulty": "modere",
+      "notes": "Espèce ovovivipare (naissance de jeunes vivants). Gestation d'environ 100 à 120 jours ; portée de 10 à 65 jeunes (moyenne 25). Environ la moitié des femelles se reproduisent chaque année. Les femelles peuvent conserver le sperme jusqu'à un an. Maturité sexuelle vers 3-4 ans. Reproducteurs expérimentés recommandés.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Boa_constrictor",
+          "title": "Boa constrictor - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2448847,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes variés (grillons, criquets, blattes)",
+          "frequency": "variable",
+          "notes": "Se nourrit principalement d'invertébrés, surtout d'insectes ; prédateur à l'affût (sit-and-wait)"
+        },
+        {
+          "name": "Petits vertébrés occasionnels (petits lézards, oisillons)",
+          "frequency": "occasionnelle",
+          "notes": "Espèce opportuniste qui prend parfois de petits vertébrés ; non indispensable"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments de mauvaise qualité ou anciens",
+          "reason": "Risque de refus alimentaire et de malnutrition"
+        }
+      ],
+      "mealFrequency": "every_2_days",
+      "specificNeeds": "Variété du régime alimentaire pour éviter la monotonie et l'arrêt d'alimentation. Pas d'alimentation herbivore.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Calumma_parsonii",
+          "title": "Calumma parsonii - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Terrarium très vertical et spacieux (grande espèce de caméléon), bien structuré avec des branches variées",
+      "lightNeeds": "Cycle jour/nuit régulier ; lumière naturelle bénéfique",
+      "activityEnrichment": "Branches épaisses et variées en diamètre, plantes vivantes robustes. Caméléon essentiellement arboricole, peu actif au sol.",
+      "hygieneNotes": "Brumisation régulière (gros buveur) ; drainage efficace pour éviter l'eau stagnante ; hygiène du terrarium rigoureuse",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Calumma_parsonii",
+          "title": "Calumma parsonii - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Prédateur à l'affût (sit-and-wait), lent et généralement peu actif, sauf durant la saison de reproduction. Pâlit pendant le sommeil nocturne. Jusqu'à 14 ans documentés en captivité.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Non recommandé, manipulation stressante, fragile, longévité exigeante, régime spécialisé",
+      "compatibilityWithOtherAnimals": "Solitaire strict, sauf brièvement durant la reproduction. Stress important en cas de cohabitation.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Calumma_parsonii",
+          "title": "Calumma parsonii - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stomatite (maladie buccale)",
+          "symptoms": "Décoloration le long des gencives et des dents, gonflements buccaux, mauvaise haleine, difficulté à manger",
+          "prevention": "Hygiène du terrarium, branches propres, humidité adéquate, alimentation de qualité, éviter le stress",
+          "whenToConsult": "Immédiatement dès les signes buccaux"
+        },
+        {
+          "name": "Plaies aux pieds et aux pattes",
+          "symptoms": "Plaies ouvertes, boiterie, refus de se positionner sur les branches",
+          "prevention": "Branches de diamètre approprié, inspection régulière des pieds",
+          "whenToConsult": "Plaies ouvertes visibles : traitement vétérinaire pour prévenir l'infection"
+        },
+        {
+          "name": "Refus d'alimentation",
+          "symptoms": "Arrêt de la prise alimentaire, perte de poids, apathie",
+          "prevention": "Variété du régime alimentaire, conditions de vie adaptées, cycles jour/nuit réguliers",
+          "whenToConsult": "Si le refus persiste, consultation vétérinaire NAC spécialisée en reptiles"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Calumma_parsonii",
+          "title": "Calumma parsonii - Wikipedia"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": ["Inscrit à l'Annexe II de la CITES depuis 1995 (commerce international soumis à permis) ; statut IUCN : quasi menacé ; se renseigner auprès de la DDPP/préfecture et exiger les documents d'origine à l'achat"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Calumma_parsonii",
+          "title": "Calumma parsonii - Wikipedia"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 530,
+      "litterSizeMin": 20,
+      "litterSizeMax": 60,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "Maturité sexuelle vers 3 ans (entre 2 et 5 ans). Femelles pondent 20 à 60 œufs enterrés à environ 30 cm. Incubation exceptionnellement longue : généralement 400 à 660 jours, jusqu'à 781 jours enregistrés ; des températures plus chaudes raccourcissent l'incubation. Les femelles pondent une fois par an ou sautent des saisons ; stockage de sperme possible. Élevage captif difficile.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Calumma_parsonii",
+          "title": "Calumma parsonii - Wikipedia"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "speciesId": 2434615,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.habitatType: terrarium -> enclos (mammifère)",
+      "reproduction.litterSizeMax: 3 -> 6 (Wikipédia FR: généralement 2, jusqu'à 6)",
+      "feeding: '80% du régime' reformulé selon Wikipédia (environ 80 % de végétaux, pas de figues seules)",
+      "health: titre de la source PMC10844781 corrigé (étude sur les parasites GI des mammifères captifs du zoo de Khon Kaen, 4 binturongs)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "legislation entière (CITES III confirmé par Wikipédia mais statut France/EU annex/arrêté 1997 non confirmés) -> null",
+      "source https://cites.org/sites/default/files/fra/cop/11/doc/29.pdf (403, non spécifique)",
+      "reproduction.season (non confirmé)",
+      "reproduction.notes: diapause embryonnaire, posture d'accouplement, femelle dominante (non confirmés)",
+      "health: taurine, hygrométrie 60-85 %, fréquence trimestrielle d'analyses (non confirmés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2434982,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.habitatType: terrarium -> enclos",
+      "legislation.details.euAnnex: A -> null (non confirmé) ; CITES I confirmé (Wikipédia FR)",
+      "feeding: retrait du '70-80 %' de rongeurs, reformulation selon Wikipédia",
+      "health: 'Notoedric mange' -> gale notoédrique ; titre de la source bioone corrigé"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "behavior: domaine vital 16-43 km², 'somme en posture caractéristique' (non confirmés)",
+      "legislation: arrêté du 21/11/1997, autorisation préfectorale, déclaration faune (non confirmés)",
+      "source https://cites.org/sites/default/files/fra/cop/11/doc/29.pdf (403)",
+      "reproduction.sexualMaturityMonths 24 et season (non confirmés)",
+      "reproduction.notes: femelle initie l'accouplement, plusieurs portées/an en captivité (non confirmés)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 2435172,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: rongeurs '80-90 %' -> plus de 90 % de petits mammifères, oiseaux ~5 % (ADW)",
+      "health: 'Parvovirus félin et canin' -> panleucopénie féline (source PMC8166362 porte sur 6 virus chez le serval sauvage, dont le virus de la panleucopénie) ; titre de source corrigé",
+      "legislation.details.euAnnex: B -> null (non confirmé) ; CITES II et permis spécial en France confirmés par Wikipédia FR",
+      "behavior: taux de succès de chasse ~50 % (Wikipédia) / 48 % (ADW)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax/minSpaceSize (non confirmables)",
+      "legislation: arrêté 21/11/1997, autorisation préfectorale (non confirmés)",
+      "source https://cites.org/sites/default/files/fra/cop/11/doc/29.pdf (403)",
+      "behavior: 'oreilles larges pour proies souterraines' (non confirmé)"
+    ],
+    "confidence": "high"
+  }
+]

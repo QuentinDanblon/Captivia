@@ -1,0 +1,16 @@
+[
+ {"speciesId": 8170369, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["feeding.mealFrequency every_2_days -> null (incohérent avec 'hebdomadaire', non sourcé)","behavior.generalBehavior: 'peu agressif' nuancé (mord couramment à la manipulation, musc) selon Wikipedia","health: 'Mycose respiratoire' -> 'Infection respiratoire' (générique)","reproduction.notes: tailles converties en cm, ponte 42-63 j après accouplement (Wikipedia)","reproduction.gestationDays 42 -> null (espèce ovipare, valeur placée en notes)","sources: types 'vet'/'official' repointés en 'wikipedia' (la page citée est Wikipedia)"],
+  "removed": ["feeding: 'Oeufs de reptile ou petits serpents' (non confirmé comme aliment recommandé)","health: Inclusion Body Disease (maladie des boïdés, non confirmée chez Lampropeltis ; absente de la page)","habitat.activityEnrichment: 'branches pour grimper' (espèce terrestre)","reproduction.sexualMaturityMonths 18 (non confirmé)"],
+  "confidence": "medium",
+  "notes": "Temperatures/hygrometrie et statut legal 'allowed' (CITES/UE null) non confirmes par Wikipedia mais plausibles (espece non CITES, courante en captivite) ; conserves."},
+ {"speciesId": 8214163, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["habitat.tempMin 24 -> 25 (Wikipedia 25-27.8 C), tempMax 28","habitat.lightNeeds reecrit ('lumiere indirecte' contredisait 'well lit')","habitat.minSpaceSize 150-250 L (non confirme) -> reecrit selon Wikipedia (groupe >=6, bassin plante)","behavior: precisions Wikipedia (bettas, gouramis, scalaires ; <5 individus = agressivite)","health: 'Infections bacteriennes' precisee (columnariose, citee par Wikipedia)","reproduction.litterSizeMax 500 conserve, notes: moyenne ~300 oeufs, frai ~toutes les 2 semaines, maturite 6-7 semaines","sources: types repointes en 'wikipedia'"],
+  "removed": ["feeding: tubifex","feeding.foodsToAvoid: 'Petits poissons ou alevins' (raison incoherente)","reproduction.litterSizeMin 200 (non confirme)","reproduction.notes: 'alevins nagent libres apres 4-5 jours' (non confirme)"],
+  "confidence": "medium"},
+ {"speciesId": 8583926, "checked": ["feeding","habitat","behavior","health","legislation","reproduction"],
+  "corrected": ["feeding.dietType insectivore -> omnivore (Wikipedia : invertebres + fruits reguliers)","feeding.specificNeeds: 'ad libitum' / '2x/semaine' non sources -> reformule","behavior: tolerance a la manipulation selon Wikipedia (plus docile si manipule des le jeune age)","habitat.hygieneNotes: texte incomprehensible reecrit","sources: types repointes en 'wikipedia'"],
+  "removed": ["reproduction (section entiere : incubation 30 j probablement faux pour cette espece, pas de donnees sur la page Wikipedia)","feeding.mealFrequency (non confirme)","feeding: petits lezards/oisillons comme aliment recommande"],
+  "confidence": "low",
+  "notes": "Parametres d'habitat (temperatures, UVB, humidite) non confirmes par Wikipedia, conserves car coherents avec les pratiques standard ; legislation 'allowed' non confirmee mais espece non CITES."}
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000251,
+    "status": "corrected",
+    "note": "Retiré : « vivent en groupes » et « bacs aménagés de manière naturelle » (non confirmés par la page). Ajouté faits confirmés (+200 espèces, C. paleatus listé)."
+  },
+  {
+    "speciesId": 2000000252,
+    "status": "verified",
+    "note": "Origine Orénoque (Venezuela/Colombie), 5-7 cm, paisible mais territorial, fragile, 26-28°C, pH 5,5-7, volume mini 60 l : tout confirmé par fr.wikipedia."
+  },
+  {
+    "speciesId": 2000000253,
+    "status": "corrected",
+    "note": "« bassin de l'Orénoque » remplacé par « Amazone et Venezuela » (page); retiré « végétation abondante » et « idéaux pour petits bacs / biotope » (non confirmés); cachettes précisées d'après la page."
+  },
+  {
+    "speciesId": 2000000254,
+    "status": "corrected",
+    "note": "Retiré : plage 24-28°C (la page ne donne que des seuils de survie 19,6-33,7°C), « eau acide et douce » et « petits groupes » et « bancs en cours d'eau de forêt tropicale » (non confirmés explicitement)."
+  },
+  {
+    "speciesId": 2000000255,
+    "status": "verified",
+    "note": "São Francisco, 5 cm, transparent doré avec bande noire, mâles plus colorés, omnivore, 22-28°C, eaux légèrement acides, vit en groupe : confirmé par en.wikipedia."
+  },
+  {
+    "speciesId": 2000000256,
+    "status": "corrected",
+    "note": "Retiré : « l'une des plus petites variétés de barbus » et « femelles plus ternes » (non confirmés par le texte); reformulé d'après la page."
+  },
+  {
+    "speciesId": 2000000257,
+    "status": "corrected",
+    "note": "« eau douce » retiré (dureté 5-19 dGH sur la page); pH précisé; reste confirmé (taille, bandes, température, groupes)."
+  },
+  {
+    "speciesId": 2000000258,
+    "status": "removed",
+    "note": "La page fr.wikipedia « Danio perlé » décrit Danio albolineatus (danio perlé, ~6 cm) et non Danio margaritatus (danio perlé céleste, 2-3 cm) : description non applicable à cette espèce -> null."
+  },
+  {
+    "speciesId": 2000000259,
+    "status": "corrected",
+    "note": "« 4-5 cm » -> « jusqu'à 4,5 cm »; « rose-brun » -> « rosée »; pH ajouté d'après la page."
+  },
+  {
+    "speciesId": 2000000260,
+    "status": "corrected",
+    "note": "« souvent » -> « de nombreux » (page : many); couleurs détaillées; fréquence de mise bas (23 jours) et statut UICN Endangered d'après la page; « populaires chez les aquariophiles » retiré."
+  },
+  {
+    "speciesId": 2000000261,
+    "status": "corrected",
+    "note": "Retiré : « appréciée pour sa robustesse », « moins exigeante que d'autres espèces », « de tous niveaux » (non confirmés); origine précisée; chiffres (7 cm, 16-24°C) confirmés."
+  },
+  {
+    "speciesId": 2000000262,
+    "status": "corrected",
+    "note": "Retiré « grottes » (non confirmé); « abdomens rose-rouge vifs » précisé (femelle, intensité variable); pH 5,6-6,2 ajouté d'après la page; tailles et température confirmées."
+  },
+  {
+    "speciesId": 2000000263,
+    "status": "corrected",
+    "note": "Retiré « taille modérée » (non confirmé); « régions désertiques du nord » précisé (hauts déserts et broussailles); « criquets » ajouté d'après la page."
+  },
+  {
+    "speciesId": 2000000264,
+    "status": "corrected",
+    "note": "Retiré : « grande », « relativement docile » (non présent dans la page); couleurs corrigées (orange rougeâtre foncé / blanc rosé); mâles ajoutés; « terriers complexes » -> « construit ou agrandit des terriers sous les roches »."
+  },
+  {
+    "speciesId": 2000000265,
+    "status": "corrected",
+    "note": "« originaire du Venezuela/Amérique du Sud » corrigé en Venezuela, Guyana, Brésil; défense reformulée d'après la page; reste confirmé."
+  }
+]

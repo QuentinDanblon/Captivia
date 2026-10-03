@@ -1,0 +1,74 @@
+[
+  {
+    "speciesId": 103973942,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "habitat: 19,6-33,7 °C étaient des limites létales d'une étude (96 h), pas des paramètres d'élevage -> retirés",
+      "reproduction: 'difficile en captivité' nuancé (longtemps difficile, de nombreux éleveurs en produisent aujourd'hui, en.wikipedia)",
+      "health: Ich 'antifongique' -> antiparasitaire",
+      "feeding: carnivore de petites proies confirmé (en.wikipedia)"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax, minSpaceSize (120 L, 6-10 individus non confirmé)",
+      "reproduction.season, litterSizeMin/Max (500-1000), sexualMaturityMonths (4)",
+      "legislation entière (non confirmée ; source INPN générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 103997157,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "feeding.dietType: omnivore -> insectivore (surtout insectes, complétés de vers et crustacés, en.wikipedia)",
+      "habitat: 22-27 °C, pH 6-8, 5-19 dGH, 1,2 m, couvercle confirmés",
+      "behavior: banc de 6+ (idéal 8-10), assez agressif confirmés ; 'dominent par volume' retiré",
+      "reproduction: ~300 œufs, hausse de température + pluie artificielle, 65 j, 5-7 ans confirmés"
+    ],
+    "removed": [
+      "feeding.foodsToAvoid 'Aliments très lourds' (non pertinent)",
+      "habitat: 'courant d'eau léger' non confirmé",
+      "reproduction.season, sexualMaturityMonths (6)",
+      "legislation entière (non confirmée ; source INPN générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104008238,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "sources: page Mormyridae (famille, pas l'espèce) remplacée par en/fr wikipedia de Gnathonemus petersii",
+      "reproduction: 'extrêmement difficile/non documentée' -> jamais reproduit en captivité, tous les individus sauvages (en/fr wikipedia)",
+      "feeding: flocons — en.wikipedia accepte congelé/flocons, fr.wikipedia refuse flocons/granulés : formulé avec nuance",
+      "habitat: température 26-28 (en) / 23-28 (fr) -> 26-28 ; 200 L (400 L+ pour plusieurs) et sable confirmés",
+      "behavior: 'peu compatible petits poissons (prédation)' remplacé par docile avec autres espèces, territorial envers congénères (en.wikipedia)"
+    ],
+    "removed": [
+      "habitat: pH 6,5-7 (sources contradictoires 6,8-7,2 / 5,5-6,5) et 'eau turbide préférée' non confirmés",
+      "reproduction.season ; 'poisson de collecteurs expérimentés'",
+      "legislation entière (non confirmée ; source INPN générique)",
+      "source https://en.wikipedia.org/wiki/Mormyridae (famille)"
+    ],
+    "confidence": "medium"
+  }
+]

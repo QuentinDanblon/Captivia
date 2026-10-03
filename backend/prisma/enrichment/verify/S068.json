@@ -1,0 +1,51 @@
+[
+  {
+    "speciesId": 104221549,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.minSpaceSize: '30x30x40 cm' non confirmé → formulation qualitative de la source (espace vertical, substrat sec, gamelle d'eau, ventilation croisée)",
+      "feeding.specificNeeds: 'prédateur actif' → prédateur arboricole embusqué (Wikipedia EN) ; petites rainettes/lézards occasionnels confirmés",
+      "behavior: 'utilise la défécation en projectile' et 'peut mordre' retirés (non confirmés) ; 'venin faible' et réactions défensives (fuite, saut) confirmés",
+      "reproduction.sexualMaturityMonths: 36 → 48 (Wikipedia EN : maturité vers 4-5 ans)",
+      "reproduction.notes: 'crochets pour toiles de sperme' et 'cannibalisme sexuel' retirés (non confirmés) ; durées de vie (mâles 2-3 ans, femelles 6-9 ans) confirmées"
+    ],
+    "removed": [
+      "legislation (section entière : statut 'allowed' non confirmable, la seule source était la page d'accueil cites.org ; aucune mention CITES sur Wikipedia EN/FR)",
+      "habitat.tempMin/tempMax (24-28 °C non confirmés)",
+      "health: item 'Infection post-morsure' (incohérent et non sourcé)",
+      "source https://www.cites.org (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104221620,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "legislation: CITES II confirmé (Wikipedia EN : annexe II depuis 1985) ; status permit_required → allowed (le permis CITES ne concerne que le commerce international, pas la détention privée) ; euAnnex 'B' non confirmé → null ; restriction reformulée",
+      "behavior: 'comportement territorial strict' retiré (non confirmé) ; 'docile, facile à garder' et poils urticants projetés confirmés (Wikipedia EN) ; 'enceinte isolée obligatoire' (absurde) corrigé",
+      "habitat.minSpaceSize: '30x30x20 cm' et '5-10 cm de substrat' non confirmés → formulation qualitative ; terrier à entrée unique et chambres (mue / repos) confirmés",
+      "reproduction.notes: maturité femelles 9-10 ans / mâles 7-8 ans et éclosion avant la saison des pluies confirmées ; 'longévité max 12 ans en captivité' retiré (contredit 9-10 ans + ~10 ans de vie de la source) ; faute 'lécharité' corrigée en 'léthargie'",
+      "sources: page Brachypelma_smithi (vérifiée) ajoutée à côté de la page du genre"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (22-28 °C, 45-65 % non confirmés)",
+      "legislation.euAnnex 'B' (non confirmé)",
+      "reproduction.season 'avant saison des pluies' (porte sur l'éclosion, pas sur la saison d'accouplement)",
+      "source https://www.cites.org (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104232708,
+    "checked": ["habitat", "legislation"],
+    "corrected": [
+      "habitat.minSpaceSize: dimensions précises retirées ; habitat naturel (zones sèches et chaudes, végétation clairsemée, abri sous les pierres le jour) confirmé par Wikipedia EN/FR (nom FR de l'espèce selon Wikipédia : Scorpion languedocien)"
+    ],
+    "removed": [
+      "legislation (section entière : statut 'allowed' non confirmable ; aucune information de protection/CITES dans les sources ; source cites.org = page d'accueil générique)",
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (20-30 °C, 30-60 % non confirmés)",
+      "source https://www.cites.org (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  }
+]

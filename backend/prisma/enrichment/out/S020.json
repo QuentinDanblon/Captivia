@@ -1,0 +1,348 @@
+[
+  {
+    "speciesId": 2455676,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Rongeurs (souris ou rats) décongelés",
+          "frequency": "hebdomadaire",
+          "notes": "Taille adaptée à celle du serpent ; à l'état sauvage : souris, campagnols, rats, mais aussi œufs d'oiseaux et petits oiseaux"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies vivantes",
+          "reason": "Risque de blessures pour le serpent"
+        },
+        {
+          "name": "Aliments moisis ou contaminés",
+          "reason": "Risque d'infection bactérienne ou parasitaire"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Constricteur : proies adaptées à la taille du serpent, jamais plus larges que le diamètre de son corps.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus",
+          "title": "Pantherophis obsoletus - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Grand terrarium : adulte de 107 à 183 cm (jusqu'à 218 cm), bon grimpeur",
+      "lightNeeds": "Cycle naturel jour/nuit",
+      "activityEnrichment": "Branches et zones de grimpe, cachettes, substrat meuble",
+      "hygieneNotes": "Nettoyage régulier des zones souillées, eau fraîche quotidienne",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus",
+          "title": "Pantherophis obsoletus - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Les individus nés en captivité sont plus dociles que les sauvages. En cas de menace : immobilité, fuite, vibration de la queue ou production de musc. Espérance de vie d'environ 15 ans en captivité, voire plus.",
+      "sociability": "solitaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Bon avec surveillance constante d'un adulte",
+      "compatibilityWithOtherAnimals": "Doit être hébergé seul ; consomme de petits animaux",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus",
+          "title": "Pantherophis obsoletus - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stomatite infectieuse (« mouth rot »)",
+          "symptoms": "Taches rouges dans la gueule, mucus épais teinté de sang, refus de s'alimenter",
+          "prevention": "Température et hygrométrie appropriées, nettoyage régulier du terrarium, alimentation adéquate",
+          "whenToConsult": "Immédiatement si symptômes présents"
+        },
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Mucus nasal, respiration sifflante, apathie, perte d'appétit, respiration bouche ouverte",
+          "prevention": "Maintenir de bonnes conditions thermiques, éviter l'humidité trop élevée ou trop basse",
+          "whenToConsult": "Dès les premiers symptômes, consultation vétérinaire urgente"
+        },
+        {
+          "name": "Parasitose interne",
+          "symptoms": "Diarrhée, régurgitation, perte de poids",
+          "prevention": "Hygiène stricte du terrarium, proies de source sûre",
+          "whenToConsult": "Consultation vétérinaire recommandée si symptômes prolongés"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus",
+          "title": "Pantherophis obsoletus - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "accouplement fin mai-début juin",
+      "gestationDays": null,
+      "incubationDays": 67,
+      "litterSizeMin": 12,
+      "litterSizeMax": 20,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Ovipare : la femelle pond environ 12 à 20 œufs environ cinq semaines après l'accouplement (fin mai-début juin). Incubation d'environ 65 à 70 jours, éclosion de fin août à début octobre.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Pantherophis_obsoletus",
+          "title": "Pantherophis obsoletus - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2457884,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Rongeurs (souris ou rats) décongelés",
+          "frequency": "hebdomadaire",
+          "notes": "Taille adaptée au serpent ; à l'état sauvage : oiseaux, lézards, chauves-souris, souris et petits rongeurs"
+        },
+        {
+          "name": "Poussins ou œufs",
+          "frequency": "hebdomadaire",
+          "notes": "Régime très varié : reptiles, œufs et oiseaux figurent parmi les proies principales"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies vivantes",
+          "reason": "Risque de blessures et de stress pour le serpent"
+        },
+        {
+          "name": "Proies de taille excessive",
+          "reason": "Risque de régurgitation"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Prédateur généraliste s'adaptant à une grande variété de proies (reptiles, œufs, oiseaux, mammifères).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brown_tree_snake",
+          "title": "Brown tree snake - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Grand terrarium vertical (serpent de 1 à 2 m, jusqu'à 3 m), structure arboricole prioritaire",
+      "lightNeeds": "Cycle jour/nuit ; espèce principalement nocturne",
+      "activityEnrichment": "Branches épaisses pour grimper, cachettes en hauteur, zone sombre pour la journée",
+      "hygieneNotes": "Nettoyage régulier, eau fraîche quotidienne",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brown_tree_snake",
+          "title": "Brown tree snake - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Serpent arboricole et nocturne de 1 à 2 m (jusqu'à 3 m). Serpent opisthoglyphe (crochets venimeux à l'arrière de la gueule) : venin faiblement neurotoxique, d'effets locaux sans gravité pour un adulte mais risque sérieux pour les jeunes enfants.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillé : venin présentant un risque sérieux pour les jeunes enfants",
+      "compatibilityWithOtherAnimals": "Doit être hébergé seul, prédateur de petits animaux",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brown_tree_snake",
+          "title": "Brown tree snake - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Stomatite infectieuse (« mouth rot »)",
+          "symptoms": "Taches hémorragiques ou mucus épais teinté de sang, odeur désagréable, refus alimentaire",
+          "prevention": "Conditions de température adaptées, nettoyage régulier du terrarium",
+          "whenToConsult": "Consultation vétérinaire immédiate si symptômes"
+        },
+        {
+          "name": "Infection respiratoire",
+          "symptoms": "Mucus nasal, sifflements respiratoires, apathie, perte d'appétit",
+          "prevention": "Éviter l'humidité excessive, maintenir des gradients de température adéquats",
+          "whenToConsult": "Consultation urgente dès l'apparition des symptômes"
+        },
+        {
+          "name": "Ectoparasites (acariens)",
+          "symptoms": "Points rouges sur la peau, grattage excessif, léthargie",
+          "prevention": "Hygiène stricte du terrarium, substrat propre et régulièrement changé",
+          "whenToConsult": "Dès observation de parasites visibles ou de comportement anormal"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brown_tree_snake",
+          "title": "Brown tree snake - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 90,
+      "litterSizeMin": 4,
+      "litterSizeMax": 12,
+      "sexualMaturityMonths": 37,
+      "breedingDifficulty": "avance",
+      "notes": "Ovipare : 4 à 12 œufs par ponte, jusqu'à deux pontes par an selon le climat et la nourriture. Incubation d'environ 90 jours. Maturité sexuelle à un âge médian de 3,1 ans chez les mâles et 3,7 ans chez les femelles.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Brown_tree_snake",
+          "title": "Brown tree snake - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2466939,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        {
+          "name": "Grillons",
+          "frequency": "quotidienne",
+          "notes": "Taille adaptée à l'animal, nourriture principale"
+        },
+        {
+          "name": "Petits arthropodes (mouches, mites, cafards, petits coléoptères, araignées)",
+          "frequency": "quotidienne",
+          "notes": "Régime varié de petits insectes et autres arthropodes"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes trop grands",
+          "reason": "Risque d'étouffement ou de refus alimentaire"
+        },
+        {
+          "name": "Insectes capturés à l'état sauvage sans précaution",
+          "reason": "Risque de parasites et de contaminants (pesticides)"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Régime d'insectes et d'autres petits arthropodes. Petit lézard très actif.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Green_anole",
+          "title": "Green anole - Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 21,
+      "tempMax": 30,
+      "humidityMin": 60,
+      "humidityMax": 70,
+      "minSpaceSize": null,
+      "lightNeeds": "Cycle jour/nuit ; éclairage UVB recommandé pour la vitamine D",
+      "activityEnrichment": "Branches et plantes pour grimper, cachettes, zones d'exposition et zones ombragées",
+      "hygieneNotes": "Nettoyage régulier des zones souillées, eau fraîche, brumisation pour maintenir l'humidité. Jour : 25-30°C ; nuit : 21-24°C",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Green_anole",
+          "title": "Green anole - Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Lézard arboricole très actif. Les mâles sont fortement territoriaux et se montrent agressifs entre eux ; changement de couleur (vert à brun) lié à l'humeur et aux signaux sociaux, et non au camouflage. Jusqu'à 8 ans en captivité.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Petit animal fragile, à observer plutôt qu'à manipuler ; supervision d'un adulte",
+      "compatibilityWithOtherAnimals": "Jamais deux mâles ensemble (territorialité marquée)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Green_anole",
+          "title": "Green anole - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Malnutrition et carence en calcium",
+          "symptoms": "Fragilité osseuse, tremblements, déformation de la colonne vertébrale",
+          "prevention": "Éclairage UVB, alimentation variée, supplémentation calcique si nécessaire",
+          "whenToConsult": "Consultation vétérinaire si signes de faiblesse ou de déformations osseuses"
+        },
+        {
+          "name": "Dermatite (infection cutanée)",
+          "symptoms": "Rougeurs cutanées, lésions, perte d'écailles",
+          "prevention": "Maintenir une hygrométrie adéquate, nettoyer régulièrement",
+          "whenToConsult": "Consultation vétérinaire si lésions persistantes ou aggravation"
+        },
+        {
+          "name": "Parasitose interne",
+          "symptoms": "Amaigrissement, diarrhée, léthargie, refus alimentaire",
+          "prevention": "Hygiène stricte du terrarium, insectes de qualité vérifiée",
+          "whenToConsult": "Consultation vétérinaire si symptômes durables"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Green_anole",
+          "title": "Green anole - Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "avril à septembre",
+      "gestationDays": null,
+      "incubationDays": 40,
+      "litterSizeMin": 1,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": 8,
+      "breedingDifficulty": "facile",
+      "notes": "Ovipare : la première ponte compte généralement un ou deux œufs, la femelle pouvant pondre un œuf toutes les deux semaines pendant la saison de reproduction (jusqu'à environ 10 œufs par saison). Incubation de 5 à 7 semaines (30 à 45 jours) à 27-29°C. Maturité atteinte vers 8 mois.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Green_anole",
+          "title": "Green anole - Wikipedia"
+        }
+      ]
+    }
+  }
+]

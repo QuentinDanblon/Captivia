@@ -1,0 +1,184 @@
+[
+ {
+  "speciesId": 104106412,
+  "habitat": null,
+  "health": null
+ },
+ {
+  "speciesId": 104110162,
+  "habitat": null,
+  "health": {
+   "diseases": [
+    {
+     "name": "Poux rouges (acariens)",
+     "symptoms": "Parasites qui se cachent le jour et sortent la nuit pour se nourrir du sang de l'oiseau",
+     "prevention": null,
+     "whenToConsult": null
+    },
+    {
+     "name": "Vers parasites (ascaris, ténias et autres)",
+     "symptoms": null,
+     "prevention": null,
+     "whenToConsult": null
+    },
+    {
+     "name": "Chancre (canker)",
+     "symptoms": "Maladie respiratoire qui se manifeste par un gonflement de la gorge et une excroissance d'aspect caséeux autour de la bouche",
+     "prevention": null,
+     "whenToConsult": "Rapidement : peut être mortelle si elle n'est pas traitée"
+    },
+    {
+     "name": "Chlamydiose et salmonellose (transmissibles à l'humain)",
+     "symptoms": null,
+     "prevention": "Se laver les mains après avoir manipulé l'oiseau, l'avoir nourri ou avoir nettoyé son logement",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://lafeber.com/pet-birds/species/dove/",
+     "title": "Lafeber Pet Birds — Dove species profile"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104128782,
+  "habitat": null,
+  "health": null
+ },
+ {
+  "speciesId": 104145240,
+  "habitat": {
+   "habitatType": "volière",
+   "tempMin": 18,
+   "tempMax": 24,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Volière ou cage suspendue, longueur minimale 1,2 m ; à abriter à l'intérieur par temps froid",
+   "lightNeeds": "Accès quotidien à une lumière de spectre complet (UVA et UVB compris) ; cycle jour/nuit relativement régulier",
+   "activityEnrichment": null,
+   "hygieneNotes": "Nettoyage quotidien du substrat souillé, de la nourriture et de l'eau ; nettoyage complet de la cage et des accessoires environ une fois par semaine, à l'eau chaude et au savon",
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://blooming-pets.com/inseparable-de-fischer/",
+     "title": "Inséparable de Fischer — Blooming Pets"
+    },
+    {
+     "type": "official",
+     "url": "https://www.parrots.org/encyclopedia/fischers-lovebird",
+     "title": "Fischer's Lovebird — World Parrot Trust encyclopedia"
+    },
+    {
+     "type": "guide",
+     "url": "https://nacinfo.wordpress.com/inseparables/",
+     "title": "Inséparables — NAC-INFO"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104145246,
+  "habitat": null
+ },
+ {
+  "speciesId": 104145297,
+  "habitat": null
+ },
+ {
+  "speciesId": 104145998,
+  "habitat": null
+ },
+ {
+  "speciesId": 104146243,
+  "habitat": null
+ },
+ {
+  "speciesId": 104151432,
+  "habitat": null
+ },
+ {
+  "speciesId": 104221549,
+  "habitat": null
+ },
+ {
+  "speciesId": 104221620,
+  "habitat": null
+ },
+ {
+  "speciesId": 104232708,
+  "feeding": null,
+  "habitat": null,
+  "behavior": {
+   "generalBehavior": "Espèce nocturne qui chasse surtout les araignées ; se cache sous les pierres durant la journée.",
+   "sociability": null,
+   "difficultyLevel": null,
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://fr.wikipedia.org/wiki/Buthus_occitanus",
+     "title": "Buthus occitanus (Wikipédia FR)"
+    },
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Buthus_occitanus",
+     "title": "Buthus occitanus (Wikipedia EN)"
+    }
+   ]
+  },
+  "health": null,
+  "reproduction": null
+ },
+ {
+  "speciesId": 104247531,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 24,
+   "tempMax": 30,
+   "humidityMin": 75,
+   "humidityMax": 85,
+   "minSpaceSize": "Terrarium en verre ; au moins 10 gallons (environ 38 litres) par bernard-l'ermite",
+   "lightNeeds": null,
+   "activityEnrichment": null,
+   "hygieneNotes": null,
+   "costEstimate": null,
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Hermit_crab",
+     "title": "Hermit crab — section « As pets » (Wikipedia EN)"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104260760,
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": "avance",
+   "notes": "Les œufs incubent sous l'abdomen de la femelle. À l'éclosion, les larves dérivent vers l'eau saumâtre/salée où se déroulent le développement larvaire et les premières mues, puis les jeunes regagnent l'eau douce. La littérature décrit l'espèce comme « difficile à reproduire » en aquarium.",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://fr.wikipedia.org/wiki/Caridina_multidentata",
+     "title": "Caridina multidentata (Wikipédia FR)"
+    },
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Amano_shrimp",
+     "title": "Amano shrimp (Wikipedia EN)"
+    }
+   ]
+  }
+ }
+]

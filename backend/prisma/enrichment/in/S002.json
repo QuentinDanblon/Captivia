@@ -1,0 +1,50 @@
+[
+ {
+  "speciesId": 2153441,
+  "commonNameFr": "Tarentule mexicaine à genoux oranges",
+  "scientificName": "Brachypelma auratum",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2153712,
+  "commonNameFr": "Tarentule de Gordon",
+  "scientificName": "Grammostola rosea",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ },
+ {
+  "speciesId": 2153949,
+  "commonNameFr": "Tarentule saumonée",
+  "scientificName": "Lasiodora parahybana",
+  "category": "arachnide",
+  "domesticationType": "NAC",
+  "needDescription": false,
+  "missing": [
+   "feeding",
+   "habitat",
+   "behavior",
+   "health",
+   "legislation",
+   "reproduction"
+  ]
+ }
+]

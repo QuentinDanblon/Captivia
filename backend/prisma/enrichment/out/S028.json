@@ -1,0 +1,337 @@
+[
+  {
+    "speciesId": 2495134,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Herbes et pâturage frais",
+          "frequency": "quotidienne",
+          "notes": "Élevé en captivité avec des céréales complétées par du pâturage"
+        },
+        {
+          "name": "Insectes et graines",
+          "frequency": "occasionnel",
+          "notes": "Sauterelles, criquets, coléoptères, graines"
+        }
+      ],
+      "foodsToAvoid": [],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès à des petits cailloux/gravier (avalés pour broyer les végétaux dans le gésier), eau fraîche abondante",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emu",
+          "title": "Emu — Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Grand enclos ouvert (espace insuffisant = problèmes de pattes et digestifs) ; clôture très solide car les pattes peuvent déchirer un grillage métallique",
+      "lightNeeds": null,
+      "activityEnrichment": "Grand espace ouvert pour courir et fourrager",
+      "hygieneNotes": "Maintien du sol sec, paillage régulier, points d'eau fraîche quotidienne",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emu",
+          "title": "Emu — Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Généralement grégaire hors saison de reproduction (vit souvent en couples), curieux. Très protecteur envers ses jeunes ; des attaques sur des humains sont documentées.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Grand oiseau puissant et défensif : supervision stricte indispensable.",
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emu",
+          "title": "Emu — Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infections intestinales (coccidioses chez les poussins)",
+          "symptoms": "Diarrhée, déshydratation, anorexie, abattement",
+          "prevention": "Hygiène stricte, eau propre, aliments frais, isolation des malades",
+          "whenToConsult": "Immédiatement si diarrhée prolongée"
+        },
+        {
+          "name": "Parasites externes et internes (poux, tiques, acariens, nématodes)",
+          "symptoms": "Démangeaisons, perte de poids, troubles respiratoires ou digestifs",
+          "prevention": "Hygiène de l'enclos, contrôle vétérinaire régulier",
+          "whenToConsult": "Dès signes cliniques"
+        },
+        {
+          "name": "Problèmes de pattes et troubles digestifs (manque d'espace)",
+          "symptoms": "Boiterie, croissance anormale, troubles digestifs",
+          "prevention": "Grand enclos ouvert, alimentation adaptée",
+          "whenToConsult": "Dès signes de faiblesse ou de boiterie"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emu",
+          "title": "Emu — Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "avril à juin (période d'accouplement)",
+      "incubationDays": 56,
+      "litterSizeMin": 5,
+      "litterSizeMax": 15,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Le mâle couve seul environ 56 jours et perd environ un tiers de son poids corporel. Le mâle garde ensuite les poussins jusqu'à 7 mois environ. Les jeunes atteignent leur taille adulte vers 6 mois.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Emu",
+          "title": "Emu — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2495150,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Herbes, feuillages frais et pâturage",
+          "frequency": "quotidienne",
+          "notes": "Aliment majoritaire"
+        },
+        {
+          "name": "Graines, fruits, fleurs et invertébrés",
+          "frequency": "quotidienne",
+          "notes": "Complément nutritionnel"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Viande crue ou pourrie",
+          "reason": "Risque infection parasitaire et bactérienne"
+        },
+        {
+          "name": "Aliments moisis",
+          "reason": "Toxines, impaction digestive"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès constant à eau fraîche, pâturage, gravier (gastrolithes) pour broyage gastrique",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_ostrich",
+          "title": "Common ostrich — Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Espace vaste pour courir et explorer",
+      "hygieneNotes": "Sol drainant, abri sec, eau potable fraîche quotidienne, nettoyage régulier de l'abri",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_ostrich",
+          "title": "Common ostrich — Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau puissant et rapide. L'hiver, vit en couples ou seul ; en saison de reproduction, forme des groupes nomades de 5 à 100 oiseaux. Les mâles défendent un territoire. Acculé, peut donner des coups de pattes très puissants, parfois mortels pour l'humain.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Animal dangereux (coups de pattes puissants) : supervision permanente indispensable, enfants à tenir à l'écart.",
+      "compatibilityWithOtherAnimals": "Les mâles sont territoriaux.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_ostrich",
+          "title": "Common ostrich — Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Fractures et traumatismes",
+          "symptoms": "Boiterie, impossibilité à supporter poids, gonflement articulations",
+          "prevention": "Sol dégagé, enclos sans obstacles, fourniture abri sûr",
+          "whenToConsult": "Après tout traumatisme visible"
+        },
+        {
+          "name": "Parasitose gastrointestinale",
+          "symptoms": "Perte poids, diarrhée, distension abdominale, faiblesse",
+          "prevention": "Hygiène stricte zone pâturage, rotation enclos, suivi antiparasitaire vétérinaire",
+          "whenToConsult": "Dès signes digestifs"
+        },
+        {
+          "name": "Entérotoxémie (Clostridium perfringens)",
+          "symptoms": "Diarrhée hémorragique, mort rapide, abattement sévère",
+          "prevention": "Hygiène, aliments frais, eau propre, éviter surpopulation",
+          "whenToConsult": "Urgence absolue"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_ostrich",
+          "title": "Common ostrich — Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "de mars ou avril jusqu'avant septembre",
+      "incubationDays": 42,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "Les mâles territoriaux forment des harems de 2 à 7 femelles ; ponte dans un nid commun (environ 20 œufs en moyenne). Incubation de 35 à 45 jours : femelle le jour, mâle la nuit. Maturité sexuelle des femelles à 2-4 ans, des mâles environ 6 mois plus tard.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_ostrich",
+          "title": "Common ostrich — Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2498343,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Plantes aquatiques submergées et semi-submergées",
+          "frequency": "quotidienne",
+          "notes": "Végétation atteinte avec le long cou, plantes aquatiques"
+        },
+        {
+          "name": "Graminées et cultures agricoles (blé, colza)",
+          "frequency": "quotidienne",
+          "notes": "Broutage à terre"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Plomb (plombs de pêche, grenaille)",
+          "reason": "Toxicité chronique et saturnisme"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Accès permanent à un plan d'eau douce, végétation fraîche",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mute_swan",
+          "title": "Mute swan — Wikipedia"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "libre",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle, cycle jour/nuit régulier",
+      "activityEnrichment": "Nage libre, plongée du cou, broutage sur la berge, construction du nid",
+      "hygieneNotes": "Eau propre maintenue, élimination débris et algues mortes",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mute_swan",
+          "title": "Mute swan — Wikipedia"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau aquatique monogame, fortement territorial (un seul couple sur les petits plans d'eau), peu vocal. Les jeunes non reproducteurs forment des groupes.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Très agressif pour défendre nid et jeunes (sifflements, coups d'aile, morsures) : distance indispensable.",
+      "compatibilityWithOtherAnimals": "Fortement territorial : en général un seul couple par plan d'eau.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mute_swan",
+          "title": "Mute swan — Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Aspergillose (infection fongique respiratoire)",
+          "symptoms": "Respiration laborieuse, toux, léthargie, perte poids",
+          "prevention": "Eau propre, éviter humidité excessive, hygiène zone eau",
+          "whenToConsult": "Dès gêne respiratoire"
+        },
+        {
+          "name": "Botulisme aquatique",
+          "symptoms": "Paralysie progressive, perte contrôle moteur, mort rapide",
+          "prevention": "Eau fraîche régulièrement renouvelée, aliments frais, absence sédiments toxiques",
+          "whenToConsult": "Urgence absolue"
+        },
+        {
+          "name": "Infection parasitaire (vers, ectoparasites)",
+          "symptoms": "Plumage ébouriffé, inactivité, diarrhée, perte poids",
+          "prevention": "Eau propre, rotation zone pâturage, suivi antiparasitaire vétérinaire",
+          "whenToConsult": "Dès signes cliniques"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mute_swan",
+          "title": "Mute swan — Wikipedia"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "éclosions de mai à juillet",
+      "incubationDays": 36,
+      "litterSizeMin": 5,
+      "litterSizeMax": 8,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "modere",
+      "notes": "Monogame ; le couple réutilise souvent le même nid massif, restauré chaque année. Incubation d'environ 36 jours. Les cygnets prennent leur envol après 120 à 150 jours. Les jeunes non reproducteurs ont 3-4 ans.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mute_swan",
+          "title": "Mute swan — Wikipedia"
+        }
+      ]
+    }
+  }
+]

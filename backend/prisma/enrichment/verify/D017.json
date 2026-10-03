@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000577,
+    "status": "removed",
+    "note": "Blue Of Sint-Niklaas : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000578,
+    "status": "removed",
+    "note": "Fee de Marbourg : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000579,
+    "status": "removed",
+    "note": "Miniature Lop : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000580,
+    "status": "removed",
+    "note": "Teddyzwerg : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000581,
+    "status": "removed",
+    "note": "Lux : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000582,
+    "status": "corrected",
+    "note": "Retiré 'excellent rapport viande-os' (absent de la page) ; ajouté fondateur/lieu précis (Lynwood, G. S. West) ; poids 3,4-4,8 kg = min BRC / max ARBA, reformulé 'jusqu'à 4,8 kg'."
+  },
+  {
+    "speciesId": 2000000583,
+    "status": "removed",
+    "note": "Jamora : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000584,
+    "status": "corrected",
+    "note": "Poids '2-3 kg' → 4-6 livres (≈1,8-2,7 kg) ; 'animal de compagnie' et 'apparence frappante' non confirmés, retirés ; tempérament 'très hyperactif' selon la page."
+  },
+  {
+    "speciesId": 2000000585,
+    "status": "verified",
+    "note": "Origine suédoise, redécouverte années 1970 à Gotland, 3-4 kg, viande/peaux, 6-8 lapereaux, vif et curieux, adapté à l'extérieur : tout confirmé par la page."
+  },
+  {
+    "speciesId": 2000000586,
+    "status": "corrected",
+    "note": "'reconnue officieusement en 1959' → 'reconnue en 1959' (page : Official Recognition 1959)."
+  },
+  {
+    "speciesId": 2000000587,
+    "status": "corrected",
+    "note": "Précisé que les 5 couleurs sont celles reconnues par l'ARBA ; ajouté Perlfee (page) ; 'petite race' non confirmé, retiré."
+  },
+  {
+    "speciesId": 2000000588,
+    "status": "corrected",
+    "note": "Origine corrigée : 'croisements de Chinchilla' → rejetons de couleur issus de Chinchilla pur (Otto Brock) ; 'taille moyenne' non confirmé, retiré."
+  },
+  {
+    "speciesId": 2000000589,
+    "status": "removed",
+    "note": "Perlfee : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000590,
+    "status": "removed",
+    "note": "Blue Of Ham : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  },
+  {
+    "speciesId": 2000000591,
+    "status": "removed",
+    "note": "Liptov Baldspotted Rabbit : aucune description (null) dans out, rien à vérifier ; laissé à null."
+  }
+]

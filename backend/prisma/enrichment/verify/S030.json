@@ -1,0 +1,53 @@
+[
+  {
+    "speciesId": 5170451,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: « petits scorpions, mille-pattes » et « impaction chitine » retirés (non confirmés) ; régime aligné sur la source (grands arthropodes, vers, amphibiens)",
+      "feeding.mealFrequency: every_2_days → null (incohérent avec « 1 à 2 insectes par semaine », non sourcé)",
+      "behavior: ajout des poils urticants très irritants / crochets 2-4 cm (en.wikipedia Goliath_birdeater) ; « cannibalisme si cohabitation » retiré (non confirmé)",
+      "reproduction.notes: « mâles 3-6 ans » reformulé (source : durée de vie très courte après maturité) ; femelles maturité 3-6 ans, 15-25 ans de vie ; éclosion 6-8 semaines",
+      "habitat.hygieneNotes: « ventilation minimale » → ventilation suffisante"
+    ],
+    "removed": [
+      "health (source VCA Hospitals = page d'accueil, non spécifique ; aucune source valide restante)",
+      "legislation (« permit_required, arrêté 21/11/1997, déclaration en mairie » non confirmé ; source INPN = page d'accueil ; non CITES d'après la page)",
+      "habitat.tempMin/tempMax, humidityMin/humidityMax, minSpaceSize 60x40x40 (non confirmables)",
+      "reproduction.season: toute l'année (non confirmé)",
+      "source https://www.vcahospitals.com/ (page générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5202178,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "habitat.minSpaceSize: 300 L / 150 cm → description de taille adulte (38 cm captivité, 50 cm sauvage) car volume non confirmé",
+      "habitat: température 22-30 °C confirmée ; pH 6,5-7,5 ajouté (en.wikipedia)",
+      "behavior: « peu agressif / tolérant » → semi-agressif (en.wikipedia) ; sociability semi-grégaire retirée",
+      "behavior.difficultyLevel: débutant → intermédiaire (poisson adulte de 38-50 cm)",
+      "feeding: « salade d'eau » retiré des exemples"
+    ],
+    "removed": [
+      "health (sources VCA Hospitals = page d'accueil ; aucune source valide ; page Wikipédia sans maladies)",
+      "legislation (statut « allowed » non confirmé par une source ; INPN = page d'accueil ; espèce invasive en Asie selon Wikipédia, pas de statut FR trouvé)",
+      "reproduction (section entière : source Wamiz = page d'accueil ; Wikipédia sans reproduction ; maturité 12 mois et « toute l'année » non confirmés)",
+      "sources https://www.vcahospitals.com/, https://www.wamiz.com/, https://inpn.mnhn.fr/ (pages génériques)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5209105,
+    "checked": ["reproduction"],
+    "corrected": [
+      "reproduction.litterSizeMax: 300 → 500 (fr.wikipedia Axolotl : 100 à 500 œufs, moyenne ~300)",
+      "reproduction.incubationDays: 14 confirmé (fr.wikipedia : éclosion ~14 jours)",
+      "reproduction.sexualMaturityMonths: 12 confirmé (fr : à partir d'un an)",
+      "reproduction.season: toute l'année → mars à juin dans la nature (fr.wikipedia)",
+      "reproduction.notes: « larves 1-2 jours dans l'œuf » et « rencontre dans eau 16-18 °C » retirés (non confirmés) ; ajout fécondation par spermatophore, larves cannibales",
+      "source ajoutée (vérifiée) : fr.wikipedia Axolotl"
+    ],
+    "removed": [],
+    "confidence": "high"
+  }
+]

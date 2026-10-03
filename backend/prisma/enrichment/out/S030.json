@@ -1,0 +1,110 @@
+[
+  {
+    "speciesId": 5170451,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        { "name": "Gros insectes (grillons, blattes)", "frequency": "hebdomadaire", "notes": "Proies de taille adaptée à l'âge et à la taille de l'araignée" },
+        { "name": "Arthropodes et vers de terre", "frequency": "hebdomadaire", "notes": "Dans la nature : grands arthropodes, vers, amphibiens ; les oiseaux ne sont que rarement capturés" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Proies capables de blesser l'araignée (grosses ou venimeuses)", "reason": "Risque de blessure" }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Proies adaptées à la taille de l'araignée ; elle les traîne dans son terrier pour les consommer",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Goliath_birdeater", "title": "Goliath Birdeater" }]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": "Lumière naturelle modérée, alternance naturelle lumière/obscurité (espèce nocturne)",
+      "activityEnrichment": "Terrier ou grotte, substrat profond pour permettre le creusement d'un terrier (l'espèce vit dans des terriers profonds)",
+      "hygieneNotes": "Changer le substrat si souillé, maintenir une humidité adaptée, ventilation suffisante",
+      "costEstimate": "moyen",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Goliath_birdeater", "title": "Goliath Birdeater" }]
+    },
+    "behavior": {
+      "generalBehavior": "Araignée terrestre nocturne vivant dans un terrier profond. Quand elle est menacée, elle projette des poils très irritants de son abdomen et émet un bruit de stridulation ; ses crochets mesurent 2 à 4 cm",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Déconseillée : poils urticants très irritants et crochets de 2 à 4 cm ; adultes avertis seulement, manipulation à éviter",
+      "compatibilityWithOtherAnimals": "Vit seule dans son terrier ; ne pas faire cohabiter",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Goliath_birdeater", "title": "Goliath Birdeater" }]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": 42,
+      "litterSizeMin": 100,
+      "litterSizeMax": 200,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "La femelle pond 100 à 200 œufs, qui éclosent en 6 à 8 semaines. Les femelles atteignent la maturité en 3 à 6 ans et vivent 15 à 25 ans ; les mâles ont une durée de vie nettement plus courte, quelques années après la maturité.",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Goliath_birdeater", "title": "Goliath Birdeater" }]
+    }
+  },
+  {
+    "speciesId": 5202178,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        { "name": "Algues et plantes aquatiques", "frequency": "quotidienne", "notes": "Spiruline, légumes blanchis (courgette)" },
+        { "name": "Pastilles de nourriture pour poisson de fond", "frequency": "quotidienne", "notes": "Pastilles qui coulent, nourriture adaptée" }
+      ],
+      "foodsToAvoid": [
+        { "name": "Nourriture trop grosse", "reason": "Difficultés à ingérer" },
+        { "name": "Aliments sucrés ou transformés", "reason": "Mauvais pour la digestion et le système digestif" }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Consomme l'algue naturelle de l'aquarium (bouche en ventouse qui racle les surfaces), a besoin de supplément en légumes, bois flotté pour raclage",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Hypostomus_plecostomus", "title": "Common Pleco" }]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 22,
+      "tempMax": 30,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Très grand aquarium : l'adulte peut atteindre 38 cm en captivité (jusqu'à 50 cm dans la nature)",
+      "lightNeeds": "Lumière modérée, zones d'ombre disponibles (poisson nocturne)",
+      "activityEnrichment": "Grottes, bois flotté, racines, endroits sombres pour se reposer de jour",
+      "hygieneNotes": "pH entre 6,5 et 7,5. Changement d'eau 25-30% par semaine, filtration robuste, éviter surpopulation",
+      "costEstimate": "moyen",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Hypostomus_plecostomus", "title": "Common Pleco" }]
+    },
+    "behavior": {
+      "generalBehavior": "Poisson de fond nocturne, plutôt sédentaire la journée, actif la nuit pour se nourrir ; comportement semi-agressif, protégé par une armure épaisse ; peut respirer l'air en surface",
+      "sociability": null,
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Poisson d'aquarium à observer ; prévoir un grand bac (taille adulte importante)",
+      "compatibilityWithOtherAnimals": "Semi-agressif ; prudence avec d'autres poissons de fond",
+      "sources": [{ "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Hypostomus_plecostomus", "title": "Common Pleco" }]
+    },
+    "health": null,
+    "legislation": null,
+    "reproduction": null
+  },
+  {
+    "speciesId": 5209105,
+    "reproduction": {
+      "season": "mars à juin (dans la nature)",
+      "gestationDays": null,
+      "incubationDays": 14,
+      "litterSizeMin": 100,
+      "litterSizeMax": 500,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "facile",
+      "notes": "Reproduction courante en captivité. La femelle pond 100 à 500 œufs (environ 300 en moyenne) ; l'éclosion a lieu environ 14 jours après la ponte. Fécondation par dépôt d'un spermatophore par le mâle. Les larves sont cannibales : à séparer par taille. Maturité sexuelle à partir d'un an environ, sans métamorphose (néoténie).",
+      "sources": [
+        { "type": "wikipedia", "url": "https://fr.wikipedia.org/wiki/Axolotl", "title": "Axolotl — Wikipédia" },
+        { "type": "wikipedia", "url": "https://en.wikipedia.org/wiki/Axolotl", "title": "Axolotl" }
+      ]
+    }
+  }
+]

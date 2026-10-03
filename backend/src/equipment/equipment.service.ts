@@ -2,6 +2,11 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { AmazonPAService } from './services/amazon-pa.service';
+import {
+  PaginationQueryDto,
+  PAGINATION_MAX_LIMIT,
+  toPage,
+} from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class EquipmentService {
@@ -24,6 +29,7 @@ export class EquipmentService {
     speciesId?: number,
     category?: string,
     size?: string,
+    page?: PaginationQueryDto,
   ): Promise<unknown> {
     const where: any = {};
 
@@ -41,7 +47,8 @@ export class EquipmentService {
 
     let recommendations = await this.prisma.recommendedEquipment.findMany({
       where,
-      orderBy: { order: 'asc' },
+      orderBy: [{ order: 'asc' }, { id: 'asc' }],
+      ...toPage(page),
     });
 
     // If no species-specific equipment found (only general), try fallback by class
@@ -114,7 +121,8 @@ export class EquipmentService {
 
       const generalEquipment = await this.prisma.recommendedEquipment.findMany({
         where,
-        orderBy: { order: 'asc' },
+        orderBy: [{ order: 'asc' }, { id: 'asc' }],
+        take: PAGINATION_MAX_LIMIT,
       });
 
       this.logger.debug(`Returning ${generalEquipment.length} general equipment as fallback`);

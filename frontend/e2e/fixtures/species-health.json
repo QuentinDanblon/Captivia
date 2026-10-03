@@ -1,0 +1,14 @@
+{
+  "editorial": {
+    "diseases": [
+      {
+        "name": "Stomatite infectieuse",
+        "symptoms": "Gencives rouges, salivation excessive.",
+        "prevention": "Hygiène du terrarium et alimentation adaptée.",
+        "whenToConsult": "Dès les premiers signes."
+      }
+    ],
+    "sources": [{ "title": "Source vétérinaire de test", "url": "https://example.com/vet" }]
+  },
+  "pubmed": []
+}

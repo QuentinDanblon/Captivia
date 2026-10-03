@@ -1,0 +1,339 @@
+[
+  {
+    "speciesId": 104106412,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits poissons, grenouilles et invertébrés (jeunes)",
+          "frequency": "hebdomadaire",
+          "notes": "Les jeunes se nourrissent d'invertébrés, d'insectes, de petits poissons et de grenouilles"
+        },
+        {
+          "name": "Poissons, petits mammifères et oiseaux (adultes)",
+          "frequency": "hebdomadaire",
+          "notes": "Les adultes chassent des proies plus grosses ; taille de la proie adaptée à celle de l'animal"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies trop grandes",
+          "reason": "Étouffement et blocage digestif"
+        },
+        {
+          "name": "Viande avariée",
+          "reason": "Botulisme et infections graves"
+        }
+      ],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Juvéniles : invertébrés et petits poissons ; adultes : proies variées adaptées à la taille",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Alligator_mississippiensis",
+          "title": "Alligator d'Amérique (Wikipédia FR)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/American_alligator",
+          "title": "American alligator (Wikipedia EN)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Enclos avec grand bassin et zone terrestre ; dimensions très importantes pour un adulte (plusieurs mètres de long)",
+      "lightNeeds": "Cycle jour/nuit régulier, zone chauffée permettant la thermorégulation",
+      "activityEnrichment": "Zone sèche et plate pour se réchauffer, eau suffisante pour nager, cachettes terrestres",
+      "hygieneNotes": "Eau douce filtrée, changements d'eau réguliers, retrait régulier des déchets organiques",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/American_alligator",
+          "title": "American alligator (Wikipedia EN) - Habitat"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Crocodilien semi-aquatique ; parades collectives lors de la saison de reproduction",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Animal dangereux, morsure très puissante (9 452 N, soit environ 964 kgf d'après Wikipédia FR) : inadapté à la présence d'enfants",
+      "compatibilityWithOtherAnimals": "Aucune cohabitation, prédateur strict",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Alligator_mississippiensis",
+          "title": "Alligator d'Amérique (Wikipédia FR)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/American_alligator",
+          "title": "American alligator (Wikipedia EN)"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": [
+          "Espèce dangereuse : la détention est encadrée en France, se renseigner auprès de la DDPP avant toute acquisition"
+        ]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/American_alligator",
+          "title": "American alligator (Wikipedia EN) - CITES Appendix II"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Alligator_mississippiensis",
+          "title": "Alligator d'Amérique (Wikipédia FR) - CITES"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "printemps",
+      "gestationDays": null,
+      "incubationDays": 65,
+      "litterSizeMin": 20,
+      "litterSizeMax": 50,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Maturité sexuelle estimée vers 11-12 ans chez le mâle et 15-16 ans chez la femelle (Wikipédia EN). Le sexe des petits dépend de la température d'incubation (seuils exacts variables selon les sources).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/American_alligator",
+          "title": "American alligator (Wikipedia EN) - Reproduction"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Alligator_mississippiensis",
+          "title": "Alligator d'Amérique (Wikipédia FR)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104110162,
+    "feeding": {
+      "dietType": "granivore",
+      "recommendedFoods": [
+        {
+          "name": "Mélange de graines (millet, blé, maïs)",
+          "frequency": "quotidienne",
+          "notes": "Aliment principal : millet rouge et blanc, brisures de maïs, blé"
+        },
+        {
+          "name": "Graines de chanvre",
+          "frequency": "hebdomadaire",
+          "notes": "Complément du mélange de graines"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Graines moisies ou fermentées",
+          "reason": "Toxines, intoxications graves"
+        },
+        {
+          "name": "Avocat et chocolat",
+          "reason": "Toxiques pour les oiseaux"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Eau de boisson changée quotidiennement, suppléments calciques occasionnels",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tourterelle_domestique",
+          "title": "Tourterelle domestique (Wikipédia FR)"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "cage",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Au moins 1 m³ par individu pour pouvoir exercer ses ailes ; volière intérieure/extérieure ou grande cage",
+      "lightNeeds": "Cycle jour/nuit naturel",
+      "activityEnrichment": "Perchoirs de diamètres variés, nids artificiels, possibilité de se baigner dans une eau peu profonde",
+      "hygieneNotes": "Nettoyage de la cage quotidien (déjections), changement de l'eau quotidien, substrat sain",
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tourterelle_domestique",
+          "title": "Tourterelle domestique (Wikipédia FR)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau calme qui communique par vocalisations et parades, vit naturellement en couple",
+      "sociability": "grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": "Oiseau généralement doux et peu agressif",
+      "compatibilityWithOtherAnimals": "Se garde en couple ; cohabitation possible avec d'autres oiseaux pacifiques si l'espace est suffisant",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tourterelle_domestique",
+          "title": "Tourterelle domestique (Wikipédia FR)"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": null,
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tourterelle_domestique",
+          "title": "Tourterelle domestique (Wikipédia FR) - espèce non protégée, variétés d'élevage considérées comme domestiques"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": 15,
+      "litterSizeMin": 2,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "2 œufs par ponte, incubation de 15 jours, reproduction possible toute l'année en captivité. Longévité de 14 ans en moyenne, jusqu'à 30 ans en captivité. Domestiquée depuis 2 000 à 3 000 ans.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Tourterelle_domestique",
+          "title": "Tourterelle domestique (Wikipédia FR)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104128782,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Insectes variés (vers de farine, grillons, petits coléoptères)",
+          "frequency": "quotidienne",
+          "notes": "Invertébrés : base du régime (insectes, araignées, mille-pattes, mollusques)"
+        },
+        {
+          "name": "Fruits (fraise, papaye mûre, goyave)",
+          "frequency": "quotidienne",
+          "notes": "Complément de fruits frais en petites portions"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Insectes traités aux pesticides",
+          "reason": "Accumulation de toxines, empoisonnement"
+        },
+        {
+          "name": "Fruits trop sucrés ou fermentés",
+          "reason": "Diarrhée, déséquilibres nutritionnels"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Insectes vivants (vers, grillons), fruits frais coupés petits, eau de boisson constante",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red-billed_leiothrix",
+          "title": "Red-billed leiothrix (Wikipedia EN) - Diet"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Volière spacieuse avec végétation dense (l'espèce fréquente les strates basses de forêts à sous-bois denses)",
+      "lightNeeds": "Cycles jour/nuit naturels, luminosité suffisante en journée, zone d'ombre",
+      "activityEnrichment": "Branches épaisses pour perchoirs, végétation dense, cachettes multiples, eau pour baignade",
+      "hygieneNotes": "Nettoyage des débris quotidien, changement d'eau quotidien, perchoirs désinfectés régulièrement",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red-billed_leiothrix",
+          "title": "Red-billed leiothrix (Wikipedia EN) - Habitat"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Oiseau vocal et chanteur (chants longs et complexes des mâles), actif mais discret ; grégaire hors saison de reproduction, territorial en saison de reproduction",
+      "sociability": "grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": "Oiseau farouche, plutôt à observer qu'à manipuler",
+      "compatibilityWithOtherAnimals": "Forme des couples territoriaux en saison de reproduction ; groupes de 10 à 30 oiseaux hors reproduction dans la nature",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red-billed_leiothrix",
+          "title": "Red-billed leiothrix (Wikipedia EN) - Behavior"
+        }
+      ]
+    },
+    "health": null,
+    "legislation": {
+      "country": "FR",
+      "status": "allowed",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": [],
+        "restrictions": []
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red-billed_leiothrix",
+          "title": "Red-billed leiothrix (Wikipedia EN) - CITES Appendix II"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "avril-septembre",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 3,
+      "litterSizeMax": 5,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "modere",
+      "notes": "Couples territoriaux en saison de reproduction ; nid en coupe ouverte (feuilles sèches, mousse, lichen) dans la végétation dense, à moins de 3 m du sol ; 3 à 5 œufs par ponte (moyenne de 3,4)",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red-billed_leiothrix",
+          "title": "Red-billed leiothrix (Wikipedia EN) - Breeding"
+        }
+      ]
+    }
+  }
+]

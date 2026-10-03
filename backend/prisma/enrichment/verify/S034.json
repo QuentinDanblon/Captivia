@@ -1,0 +1,80 @@
+[
+  {
+    "speciesId": 5219888,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "reproduction.gestationDays: 112 → 66 (en.wikipedia Crested porcupine)",
+      "reproduction.litterSizeMax: 4 → 2 (en.wikipedia: 1-2 petits)",
+      "reproduction.season: automne-hiver → toute l'année (en.wikipedia)",
+      "behavior.sociability: solitaire → semi-grégaire (unité familiale en.wikipedia ; FR: cherche sa nourriture seul)",
+      "behavior: 'myope', 'territorial', 'piquants urticants' retirés/corrigés (piquants qui blessent)",
+      "legislation: citesAppendix null → III, restrictions sourcées (CITES III, Berne II, Habitats IV d'après fr.wikipedia) ; arrêté 1997 retiré"
+    ],
+    "removed": [
+      "habitat.minSpaceSize '4-6 m²' (non confirmé)",
+      "reproduction.notes 'piquants durcissant sous 3 jours' (non confirmé)",
+      "source fr.wikipedia.org/wiki/Porc-épic (non vérifiée, remplacée par Hystrix_cristata FR/EN)",
+      "legislation.permits arrêté 21/11/1997 et 'délais quarantaine' (non confirmés)",
+      "euAnnex (non indiqué)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5220136,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "reproduction.notes: rut août-octobre → octobre-novembre ('raire', pas 'bramée'), faon fin mai-juin → juin-juillet, bois tombent en mai (fr.wikipedia Daim européen)",
+      "legislation.permits: arrêté 1997 NAC → déclaration préfecture jusqu'à 3 femelles, certificat de capacité + autorisation d'ouverture au-delà (fr.wikipedia)",
+      "behavior: 'diurne' retiré, structure des hardes précisée (fr.wikipedia)",
+      "feeding.specificNeeds: 'minéraux avant bramée' retiré/reformulé",
+      "health: 'vaccination calendrier strict' et 'consultation tous les 3 mois' retirés"
+    ],
+    "removed": [
+      "habitat.tempMin/tempMax (non confirmables)",
+      "habitat.minSpaceSize '2 hectares' (non confirmé)",
+      "reproduction.sexualMaturityMonths 14 (non confirmé)",
+      "legislation.restrictions 'espèce partiellement protégée, chasse réglementée' (non confirmé)",
+      "en.wikipedia ne contient ni rut/gestation/légal : sections reproduction/legislation re-sourcées sur fr.wikipedia"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 5220266,
+    "checked": [
+      "feeding",
+      "habitat",
+      "behavior",
+      "health",
+      "legislation",
+      "reproduction"
+    ],
+    "corrected": [
+      "reproduction.season: février-juin → juillet-novembre (en.wikipedia ; juin-décembre fr)",
+      "reproduction.incubationDays: 120 → null, notes 4-8 mois / 120-240 j (en/fr)",
+      "reproduction.litterSizeMin: 2/16 conservé (fr: 2-16 ; en: 1-16)",
+      "legislation: permits 'Déclaration préfecture' et restrictions 'reproduction interdite par convention', 'enclos sécurisé obligatoire' retirés (inventés) ; euAnnex A conservé (fr.wikipedia 'annexe A')",
+      "behavior.generalBehavior: sociabilité selon type de carapace (en.wikipedia)"
+    ],
+    "removed": [
+      "legislation.citesAppendix I → null (non explicitement indiqué dans les pages Wikipédia récupérées)",
+      "habitat.minSpaceSize '50 m²' et 'UVB 7-10%' (non confirmés)",
+      "health: 'Abcès en gaine pénis' (non confirmé)",
+      "reproduction.notes 'sable côtier' retiré du libellé"
+    ],
+    "confidence": "medium"
+  }
+]

@@ -1,0 +1,361 @@
+[
+  {
+    "speciesId": 5784980,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Arthropodes et insectes",
+          "frequency": "quotidienne",
+          "notes": "Mouches, moucherons, petits insectes aquatiques, vers de terre"
+        },
+        {
+          "name": "Petits crustacés",
+          "frequency": "hebdomadaire",
+          "notes": "Daphnies, petites crevettes d'eau douce"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Nourriture séchée pour poissons",
+          "reason": "Trop peu nourrissante, ne stimule pas les comportements de chasse naturels"
+        },
+        {
+          "name": "Aliments contaminés ou moisissants",
+          "reason": "Risque d'infections parasitaires et bactériennes"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Proies vivantes préférées pour stimulation comportementale. Qualité de l'eau impérative : maintenir déchloration de l'eau.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Pelophylax_kl._esculentus",
+          "title": "Pelophylax kl. esculentus - Wikipédia FR"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": "Zones de cachettes (plantes aquatiques flottantes, roches), zones de repos, substrat du fond",
+      "hygieneNotes": "Eau déchlorée, changements d'eau réguliers. Se laver les mains avant et après toute manipulation. Éviter les produits chimiques.",
+      "costEstimate": "moyen",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Pelophylax_kl._esculentus",
+          "title": "Pelophylax kl. esculentus - Wikipédia FR"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Amphibien semi-aquatique des plans d'eau, mares, étangs et cours d'eau lents, actif au printemps et en été. Hiberne environ quatre mois en hiver, enfoui dans la vase. Les mâles possèdent deux sacs vocaux externes.",
+      "sociability": null,
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non recommandée aux enfants. Amphibien fragile nécessitant expertise spécifique.",
+      "compatibilityWithOtherAnimals": "Peut coexister avec des congénères en milieu naturel, mais la captivité est difficile.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Pelophylax_kl._esculentus",
+          "title": "Pelophylax kl. esculentus - Wikipédia FR"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Chytridiomycose (infection fongique)",
+          "symptoms": "Peau épaissie ou décolorée, apathie, perte d'appétit, mort soudaine",
+          "prevention": "Quarantaine stricte des nouveaux individus, eau déchlorée, hygiène rigoureuse entre manipulations",
+          "whenToConsult": "Immédiatement en cas de changement de teinte ou d'apathie (maladie hautement contagieuse)"
+        },
+        {
+          "name": "Infection parasitaire",
+          "symptoms": "Léthargie, peau anormale, difficulté à respirer, perte de poids",
+          "prevention": "Eau de qualité, changements réguliers, éviter surpeuplement, isolation des individus malades",
+          "whenToConsult": "Dès signes d'apathie ou changement comportemental"
+        },
+        {
+          "name": "Septicémie bactérienne",
+          "symptoms": "Ulcérations sur peau, hémorragies, abattement total",
+          "prevention": "Eau déchlorée, conditions hygiéniques irréprochables, alimentation appropriée",
+          "whenToConsult": "Urgence vétérinaire à la moindre ulcération ou hémorragie"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Pelophylax_kl._esculentus",
+          "title": "Pelophylax kl. esculentus - Wikipédia FR"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": "mars à avril",
+      "gestationDays": null,
+      "litterSizeMin": 1500,
+      "litterSizeMax": 4000,
+      "sexualMaturityMonths": 36,
+      "breedingDifficulty": "avance",
+      "notes": "Reproduction au printemps (mars-avril) dans l'eau. Les femelles pondent 1 500 à 4 000 œufs. Éclosion en 2 à 3 semaines. Les têtards se métamorphosent en 2 à 3 mois. Maturité sexuelle vers 3 ans. Hybride fertile entre Pelophylax lessonae et Pelophylax ridibundus.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Pelophylax_kl._esculentus",
+          "title": "Pelophylax kl. esculentus - Wikipédia FR"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5786666,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Herbes fraîches et graminées",
+          "frequency": "quotidienne",
+          "notes": "Herbe de prairie, foin de qualité, herbes aquatiques (nénuphar, élodée)"
+        },
+        {
+          "name": "Légumes d'eau",
+          "frequency": "quotidienne",
+          "notes": "Laitue d'eau, jacinthes d'eau, plantes aquatiques comestibles"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments traités aux pesticides",
+          "reason": "Toxicité pour rongeur, accumulation dans l'organisme"
+        },
+        {
+          "name": "Aliments salés ou transformés",
+          "reason": "Maladies rénales et métaboliques"
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Herbivore strict. Besoins importants de foin ou herbe fraîche. Accès continu à l'eau pour boire et se baigner.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Capybara",
+          "title": "Capybara - Wikipédia EN"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "enclos",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Très grand enclos avec bassin ou plan d'eau permanent obligatoire (rongeur semi-aquatique de grande taille).",
+      "lightNeeds": "Lumière naturelle, accès extérieur pour exposition UV naturelle",
+      "activityEnrichment": "Bassin d'eau pour nage, zone d'herbage, tunnels/caches, enrichissement environnemental régulier",
+      "hygieneNotes": "Brossage occasionnel. Enclos nettoyé régulièrement. Accès constant à l'eau fraîche et claire.",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Capybara",
+          "title": "Capybara - Wikipédia EN"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Rongeur semi-aquatique herbivore. Très social et grégaire, vit en groupes de 10 à 20 individus (jusqu'à une centaine en saison sèche autour des points d'eau). Communication par aboiements, sifflements, pépiements, souffles et ronronnements. Marquage olfactif (glandes du museau et glandes anales).",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Non adapté aux enfants. Très grand rongeur nécessitant infrastructure massive et expertise spécialisée.",
+      "compatibilityWithOtherAnimals": "Naturellement grégaire. Cohabitation avec congénères préférable.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Capybara",
+          "title": "Capybara - Wikipédia EN"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Infestation parasitaire externe",
+          "symptoms": "Grattage excessif, perte de poils, dermatite, plaies cutanées",
+          "prevention": "Hygiène enclos, bains réguliers, isolation des individus infestés, alimentation fortifiée",
+          "whenToConsult": "À l'observation de grattage anormal ou lésions cutanées"
+        },
+        {
+          "name": "Maladies digestives",
+          "symptoms": "Diarrhée, perte d'appétit, abattement, perte de poids",
+          "prevention": "Alimentation stable et de qualité, eau fraîche constante, hygiène du bassin et enclos",
+          "whenToConsult": "Dès premiers signes de diarrhée ou anorexie"
+        },
+        {
+          "name": "Problèmes dentaires (croissance continue)",
+          "symptoms": "Difficulté à manger, salivation excessive, perte de poids",
+          "prevention": "Alimentation abrasive (herbes longues, foin), choses à ronger, dents contrôlées régulièrement",
+          "whenToConsult": "Si difficulté à mastiquer observée"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Capybara",
+          "title": "Capybara - Wikipédia EN"
+        }
+      ]
+    },
+    "legislation": null,
+    "reproduction": {
+      "season": null,
+      "gestationDays": 140,
+      "litterSizeMin": 1,
+      "litterSizeMax": 8,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Gestation de 130 à 150 jours. Moyenne de 4 petits par portée (1 à 8). Allaitement jusqu'à environ 16 semaines. Durée de vie en captivité jusqu'à ~12 ans (en nature, rarement plus de 4 ans à cause de la prédation).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Capybara",
+          "title": "Capybara - Wikipédia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5959092,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Rongeurs (souriceaux, rats)",
+          "frequency": "variable",
+          "notes": "Aliment principal, proies entières vivantes ou congelées-décongelées"
+        },
+        {
+          "name": "Oiseaux (pigeons, perdrix, cailles)",
+          "frequency": "occasionnelle",
+          "notes": "Proies opportunistes en nature, disponibles pour variation"
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Proies empoisonnées aux rodenticides",
+          "reason": "Accumulation toxine dans le rapace, bioaccumulation secondaire"
+        },
+        {
+          "name": "Proies malades ou contaminées",
+          "reason": "Transmission de pathogènes, déclin vital du rapace"
+        }
+      ],
+      "mealFrequency": null,
+      "specificNeeds": "Prédateur apex. Une diversité de proies enrichit le régime alimentaire.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Grand-duc_d%27Europe",
+          "title": "Grand-duc d'Europe - Wikipédia FR"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "volière",
+      "tempMin": null,
+      "tempMax": null,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Très grande volière (très grand rapace). Zones rocheuses ou nid sur falaise simulée, perchoirs larges et robustes",
+      "lightNeeds": "Lumière naturelle. Cycles saisonniers importants pour la reproduction en captivité.",
+      "activityEnrichment": "Perchoirs variés, sites de nidification, espace libre vol si possible, enrichissement comportemental",
+      "hygieneNotes": "Nettoyage volière régulier. Proies données entières quand possible. Contrôles vétérinaires spécialisés réguliers.",
+      "costEstimate": "élevé",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Grand-duc_d%27Europe",
+          "title": "Grand-duc d'Europe - Wikipédia FR"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Plus grand rapace nocturne du monde (75 cm). Prédateur apex nocturne. Plumage cryptique, yeux rouge-orangé distinctifs. Territorialité marquée, cris puissants. Longévité de plus de 20 ans.",
+      "sociability": "solitaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": "Absolument déconseillé. Rapace dangereux nécessitant expertise spécialisée et autorisation légale.",
+      "compatibilityWithOtherAnimals": "Territorial, chasse autres rapaces. Cohabitation impossible sauf partenaire reproducteur.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Grand-duc_d%27Europe",
+          "title": "Grand-duc d'Europe - Wikipédia FR"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Empoisonnement secondaire (rodenticides)",
+          "symptoms": "Apathie, perte de coordination, hémorragies, détresse respiratoire",
+          "prevention": "Éviter proies empoisonnées, utiliser proies d'élevage, dépistage de source d'exposition",
+          "whenToConsult": "Urgence vétérinaire: symptômes sont graves et mortels"
+        },
+        {
+          "name": "Aspergilloses et mycoses respiratoires",
+          "symptoms": "Difficultés respiratoires, raclements, perte de voix, apathie",
+          "prevention": "Volière sèche, bonne ventilation, propreté, alimentation fortifiée",
+          "whenToConsult": "Immédiatement en cas de difficultés respiratoires"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Grand-duc_d%27Europe",
+          "title": "Grand-duc d'Europe - Wikipédia FR"
+        }
+      ]
+    },
+    "legislation": {
+      "country": "FR",
+      "status": "permit_required",
+      "details": {
+        "citesAppendix": "II",
+        "euAnnex": null,
+        "permits": ["Certificat de capacité et autorisation de détention", "Certificat intracommunautaire (CIC) et justificatifs d'origine pour les spécimens nés en captivité"],
+        "restrictions": ["Espèce protégée en France (arrêté ministériel du 17 avril 1981) : destruction, capture et perturbation interdites dans la nature"]
+      },
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Grand-duc_d%27Europe",
+          "title": "Grand-duc d'Europe - Wikipédia FR"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "fin mars à début avril (nidification)",
+      "gestationDays": null,
+      "incubationDays": 35,
+      "litterSizeMin": 2,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Nidification dans des niches de falaises rocheuses jusqu'à 2 400 m d'altitude. La femelle pond 2 à 4 œufs blancs. Incubation de 32 à 37 jours assurée par la femelle ; le mâle l'approvisionne. Les jeunes quittent le nid vers 1,5 mois et volent vers 3 mois. Couples monogames.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Grand-duc_d%27Europe",
+          "title": "Grand-duc d'Europe - Wikipédia FR"
+        }
+      ]
+    }
+  }
+]

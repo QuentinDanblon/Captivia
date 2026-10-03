@@ -1,0 +1,77 @@
+[
+  {
+    "speciesId": 2000000156,
+    "description": "Le Lapin Nain (Netherland Dwarf) est la plus petite des races de lapins domestiques. Son poids se situe entre 0,50 et 1,13 kg selon le standard du British Rabbit Council. Il se caractérise par un cou court et un visage arrondi.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Dwarf_rabbit"
+  },
+  {
+    "speciesId": 2000000158,
+    "description": "Le Lapin Rex est une race originaire de France, apparue en 1919. Son poids idéal est de 3,4 à 4,8 kg. Son pelage est sa particularité : le poil se dresse vers l'extérieur au lieu de se coucher à plat, ce qui lui donne un aspect pelucheux et velouté. Son niveau d'activité est faible à modéré.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rex_rabbit"
+  },
+  {
+    "speciesId": 2000000159,
+    "description": "Le Lapin Géant des Flandres est la plus grande race de lapin domestique. Originaire de Flandre (Belgique), il était élevé dès le XVIe siècle près de Gand, et la plus ancienne mention authentique date d'environ 1860. L'ARBA reconnaît sept couleurs : noir, bleu, fauve, sable, gris clair, gris acier et blanc. Docile et tolérant à la manipulation s'il est souvent en contact avec les humains, il sert d'animal de compagnie.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Flemish_Giant_rabbit"
+  },
+  {
+    "speciesId": 2000000160,
+    "description": "Le Lapin Hollandais est répertorié comme une race d'origine anglaise. Il pèse entre 2,0 et 2,3 kg selon le standard britannique, avec des oreilles dressées et un pelage court. Il se distingue par ses marquages « Dutch », associés à plusieurs couleurs comme le noir, le bleu, le chocolat ou le gris acier.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000161,
+    "description": "Le Lapin Lop désigne des lapins à oreilles tombantes ; le Lop français (French Lop), originaire de France, est reconnu par l'ARBA et le BRC. Il pèse environ 4,5 kg, a le poil court et existe dans de nombreuses couleurs.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000162,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000163,
+    "description": "Le Lapin Tête de Lion est originaire de France et de Belgique ; il serait issu du croisement d'un Renard suisse miniature et d'un Nain des Pays-Bas, sans que cela soit prouvé. Il pèse environ 1,1 à 1,7 kg et a de courtes oreilles bien fourrées. Intelligent, sociable et généralement amical, il peut se montrer agressif s'il se sent menacé.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Lionhead_rabbit"
+  },
+  {
+    "speciesId": 2000000164,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000165,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000166,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000167,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000168,
+    "description": "Le Lapin Tacheté Anglais (English Spot) pèse entre 2,3 et 3,6 kg, avec un pelage court et des oreilles dressées. Son motif présente un fond blanc avec un papillon coloré. Originaire d'Angleterre, il est reconnu par l'ARBA et le BRC.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000169,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000170,
+    "description": "Le Lapin Argenté de Champagne (Champagne d'Argent) pèse entre 4,1 et 5,4 kg, avec un pelage court et des oreilles dressées. Originaire de France, il est reconnu par l'ARBA mais pas par le BRC.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  },
+  {
+    "speciesId": 2000000171,
+    "description": "Le Lapin Fauve de Bourgogne pèse entre 3,2 et 5,0 kg, avec un pelage court et des oreilles dressées. Sa robe est d'un orange-roux caractéristique. Originaire de France, il est reconnu par le BRC mais pas par l'ARBA.",
+    "sourceUrl": "https://en.wikipedia.org/wiki/Rabbit_breeds"
+  }
+]

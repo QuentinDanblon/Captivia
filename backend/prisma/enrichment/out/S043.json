@@ -1,0 +1,123 @@
+[
+  {
+    "speciesId": 5289124,
+    "health": {
+      "diseases": [
+        {
+          "name": "Parasitisme interne (Douves hépatiques et ténias)",
+          "symptoms": "Amaigrissement, diarrhée, pelage terne, fatigue excessive, entérocolite",
+          "prevention": "Éviter l'accès à la nature (herbes contaminées, eaux stagnantes), alimentation contrôlée, hygiène stricte en captivité",
+          "whenToConsult": "Dès signes de parasitisme ou amaigrissement anormal"
+        },
+        {
+          "name": "Parasitisme externe (Puces, tiques, acariens)",
+          "symptoms": "Démangeaisons intenses, perte de poils localisée, croûtes, comportement de grattage excessif",
+          "prevention": "Contrôle régulier du pelage, nettoyage fréquent de l'environnement, isolation des animaux infestés",
+          "whenToConsult": "Immédiatement en cas d'infestation visible ou de comportement anormal"
+        },
+        {
+          "name": "Coccidiose (Eimeria sciurorum)",
+          "symptoms": "Diarrhée, déshydratation, affaiblissement, déclin rapide",
+          "prevention": "Hygiène stricte, alimentation équilibrée pour renforcer l'immunité, éviter tout contact avec les écureuils gris (porteurs du parapoxvirus, souvent mortel pour l'écureuil roux)",
+          "whenToConsult": "Consultation vétérinaire rapide en cas de diarrhée ou de déshydratation"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Écureuil_roux",
+          "title": "Écureuil roux - Santé et parasites"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red_squirrel",
+          "title": "Red squirrel - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "hiver (janvier-mars)",
+      "gestationDays": 38,
+      "litterSizeMin": 3,
+      "litterSizeMax": 4,
+      "sexualMaturityMonths": 12,
+      "breedingDifficulty": "modere",
+      "notes": "Accouplement de décembre à juillet, principalement de janvier à mars. Gestation de 38-39 jours. Le plus souvent une portée par an, parfois deux. Portées de 1 à 10 petits, généralement 3 à 4. Les jeunes deviennent indépendants à 8-10 semaines. Maturité sexuelle vers 1 an. Mortalité juvénile importante (environ 80 % des jeunes meurent avant un an en nature).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Écureuil_roux",
+          "title": "Écureuil roux - Reproduction"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Red_squirrel",
+          "title": "Red squirrel - Wikipedia EN"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5289145,
+    "health": null,
+    "reproduction": {
+      "season": "février-mars",
+      "gestationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "avance",
+      "notes": "Saison d'accouplement en février-mars. Les jeunes naissent presque sans poils, s'exercent à bondir et planer, et maîtrisent le vol plané à environ 2 mois et demi, âge où ils quittent le nid. Espérance de vie d'environ 6 ans à l'état sauvage, jusqu'à 15 ans en captivité.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Flying_squirrel",
+          "title": "Flying squirrel - Reproduction"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5296455,
+    "health": {
+      "diseases": [
+        {
+          "name": "Transport de microbes pathogènes (risque sanitaire pour l'humain)",
+          "symptoms": "Les blattes peuvent transporter passivement des microbes pathogènes sur leur surface corporelle, notamment en milieu hospitalier ; contamination possible des surfaces",
+          "prevention": "Hygiène des mains stricte après manipulation, nettoyage fréquent de l'habitat, séparation des zones de vie humaine et de la cuisine",
+          "whenToConsult": "Consultation médicale en cas de symptômes digestifs chez le propriétaire après contact"
+        },
+        {
+          "name": "Allergies et asthme",
+          "symptoms": "Réactions allergiques, symptômes respiratoires chez les personnes sensibles (allergène : tropomyosine)",
+          "prevention": "Ventilation adéquate, humidité contrôlée, substrat propre et sec",
+          "whenToConsult": "Consultation médicale pour symptômes respiratoires liés à l'exposition"
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cockroach",
+          "title": "Cockroach - Wikipedia EN"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": "toute l'année",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 18,
+      "litterSizeMax": 50,
+      "sexualMaturityMonths": 2,
+      "breedingDifficulty": "facile",
+      "notes": "La femelle porte une oothèque (capsule d'œufs) de 18 à 50 œufs (environ 32 en moyenne) jusqu'à peu avant l'éclosion. Les nymphes émergent environ 24 h après le détachement de l'oothèque. Elles passent par six ou sept stades et atteignent l'âge adulte en 50 à 60 jours environ dans des conditions idéales. Reproduction continue possible toute l'année en environnement stable.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/German_cockroach",
+          "title": "German cockroach - Wikipedia EN"
+        }
+      ]
+    }
+  }
+]

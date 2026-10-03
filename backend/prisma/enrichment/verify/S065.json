@@ -1,0 +1,65 @@
+[
+  {
+    "speciesId": 104106412,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: proies reformulées d'après la source (jeunes : invertébrés, insectes, petits poissons, grenouilles ; adultes : proies plus grosses) - Wikipédia FR/EN",
+      "habitat.habitatType: aquarium → enclos (un aquarium est inadapté à un alligator)",
+      "habitat.minSpaceSize: '500L+ pour un adulte' remplacé par une formulation qualitative (adulte de plusieurs mètres)",
+      "behavior.compatibilityWithChildren: morsure reformulée d'après Wikipédia FR (9 452 N ≈ 964 kgf)",
+      "behavior.generalBehavior: 'agressif sexuellement / actif la nuit' retiré (non confirmé) ; parades collectives en reproduction (Wikipédia EN)",
+      "legislation.citesAppendix: null → II (Wikipédia EN : Appendix II ; Wikipédia FR cite les annexes I et II avec révisions historiques)",
+      "legislation.permits/restrictions: 'déclaration préfecture, assurance, interdit en appartement' retirés (non sourcés), remplacés par une mention générique de détention encadrée",
+      "reproduction.notes: seuils de température de détermination du sexe contradictoires entre Wikipédia FR (<30 / >34 °C) et EN (31,5 / 32,5-33,5 / 34,5 °C) → formulation sans seuils ; maturité sexuelle (mâle ~11,6 ans, femelle ~15,8 ans, Wikipédia EN) déplacée dans les notes"
+    ],
+    "removed": [
+      "health (section entière : seule source = https://www.wamiz.com, page d'accueil sans rapport avec l'espèce)",
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (26-31 °C, 70-90 % non confirmés)",
+      "legislation.euAnnex 'A' (non confirmé)",
+      "legislation source https://www.legifrance.gouv.fr (page d'accueil générique, ne mentionne pas l'espèce)",
+      "reproduction.sexualMaturityMonths 144 (la source donne des valeurs différentes selon le sexe)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104110162,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: 'graine de pavot' retirée (non confirmée), chanvre conservé (Wikipédia FR) ; faute 'Avocate' corrigée ; 'graines décortiquées préférées' retiré",
+      "habitat.minSpaceSize: incohérence corrigée (1 m³ par individu selon Wikipédia FR vs cage 100x60x60 cm = 0,36 m³)",
+      "behavior: 'Excellent' avec enfants adouci en 'généralement doux' (non confirmé)",
+      "reproduction.notes: longévité 14-30 ans reformulée (14 ans standard, jusqu'à 30 ans en captivité, Wikipédia FR)",
+      "sources: URL fr.wikipedia.org/wiki/Streptopelia_risoria remplacée par https://fr.wikipedia.org/wiki/Tourterelle_domestique (vérifiée)",
+      "legislation: source Legifrance générique remplacée par Wikipédia FR (espèce non protégée, variétés d'élevage domestiques) ; statut allowed confirmé"
+    ],
+    "removed": [
+      "health (section entière : seule source = https://www.wamiz.com, page d'accueil sans rapport avec l'espèce)",
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (15-24 °C, 40-70 % non confirmés)",
+      "reproduction.sexualMaturityMonths 6 (non mentionné par la source)",
+      "source https://www.wamiz.com (page générique)",
+      "source https://www.legifrance.gouv.fr (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  },
+  {
+    "speciesId": 104128782,
+    "checked": ["feeding", "habitat", "behavior", "health", "legislation", "reproduction"],
+    "corrected": [
+      "feeding: répartition '70 % / 30 %' retirée (non confirmée) ; régime invertébrés + fruits confirmé (Wikipedia EN)",
+      "habitat.minSpaceSize: dimensions précises 150x100x100 cm retirées, remplacées par une formulation qualitative (strates basses, sous-bois denses)",
+      "behavior: 'oiseaux sauvages-ish' et 'monogames' retirés ; groupes de 10-30 hors reproduction et territorialité confirmés",
+      "legislation.citesAppendix: null → II (Wikipedia EN)",
+      "legislation.status: permit_required → allowed ; 'certificat de capacité si >10 oiseaux' et 'espèce invasive' non sourcés, retirés",
+      "reproduction.notes: 'monogames' retiré ; description du nid et moyenne 3,4 œufs ajoutées d'après la source",
+      "sources: URL en.wikipedia.org/wiki/Leiothrix_lutea remplacée par Red-billed_leiothrix (vérifiée)"
+    ],
+    "removed": [
+      "health (section entière : seule source = https://www.wamiz.com, page d'accueil sans rapport avec l'espèce)",
+      "habitat.tempMin/tempMax/humidityMin/humidityMax (15-26 °C, 50-75 % non confirmés)",
+      "legislation.euAnnex 'B' (non confirmé)",
+      "reproduction.incubationDays 13 et sexualMaturityMonths 12 (non mentionnés par la source)",
+      "source https://www.legifrance.gouv.fr (page d'accueil générique)"
+    ],
+    "confidence": "medium"
+  }
+]
