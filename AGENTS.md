@@ -202,7 +202,8 @@ Textes des stores modifiés : `npm run store:check` (longueurs, `frontend/script
   - avant de fusionner, vérifier le contenu de l'aperçu Netlify (lien direct du déploiement), pas
     seulement son statut, pour ne pas devoir rouvrir une PR de correctif ;
   - la CI ne lance que les jobs concernés (backend ou frontend, job `changes`) ; Netlify ne
-    reconstruit que si `frontend/` change ; Dependabot regroupe tout en une PR mensuelle ;
+    reconstruit que si `frontend/` change ; Dependabot n'ouvre plus de PR de version (seulement
+    les correctifs de sécurité) ;
     release-please se lance à la main (Actions → Release).
 - **CI verte obligatoire** avant fusion (`test-backend`, `lint-backend`, `build-frontend`,
   `docker-build`, `quality`, `e2e`, audit `security.yml`).

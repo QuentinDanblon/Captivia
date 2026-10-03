@@ -41,7 +41,7 @@ Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (
 | **Vague 0 — Urgences sécurité** | | | |
 | W0-01 | Rôles et e-mails normalisés | ✅ | `User.role`, e-mails en minuscules, index unique, CLI `operator:set`. Après la migration, **aucun compte n'est opérateur** (§0.5). |
 | W0-02 | URL d'API unique | ✅ | `frontend/src/lib/config.ts`, plus de branche LAN dans le bundle de production. |
-| W0-03 | Dépendances vulnérables | ✅ | `npm audit` à 0 au dernier relevé ; Dependabot actif (`.github/dependabot.yml`), une PR groupée par mois et par écosystème. À rejouer avant la mise en ligne. |
+| W0-03 | Dépendances vulnérables | ✅ | `npm audit` à 0 au dernier relevé ; Dependabot : correctifs de sécurité seulement (mises à jour de version désactivées pour économiser les minutes Actions ; à faire à la main, regroupées). À rejouer avant la mise en ligne. |
 | W0-04 | Secrets et valeurs par défaut de prod | 🟡 | Joi de production (`JWT_SECRET`, `CORS_ORIGIN`, `FRONTEND_URL`), jeton de reset haché, compose durci : fait. **`MAIL_HOST` n'est pas obligatoire en production** : sans SMTP, aucun e-mail ne part (reset, vérification, rappels par e-mail). À rendre obligatoire une fois le prestataire choisi (D-06). |
 | W0-05 | Seed de prod propre | ✅ | Magasins factices retirés, gardes `NODE_ENV=production` sur les scripts de dev. Base déjà seedée avec les anciens magasins : requête de purge dans [RUNBOOK.md § 6.6](RUNBOOK.md#66-seed-du-catalogue--idempotence-et-nettoyage-dune-base-ancienne). |
 | W0-06 | Page QR publique sûre | ✅ | Opt-in (`publicEnabled`, `publicFields`), lien révocable, URL construite côté backend. |

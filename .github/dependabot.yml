@@ -1,25 +1,20 @@
 version: 2
 
-# Économie de minutes Actions : chaque PR de Dependabot relance toute la CI et un aperçu
-# Netlify. Donc : une fois par mois, toutes les mises à jour d'un écosystème regroupées en une
-# seule PR (versions majeures comprises, à relire avant fusion), une seule PR ouverte à la fois.
-# Les correctifs de sécurité (Dependabot security updates, réglage du dépôt) ne sont pas
-# concernés et restent immédiats.
+# Mises à jour de VERSION désactivées (open-pull-requests-limit: 0) : chaque PR de Dependabot
+# relançait toute la CI et un aperçu Netlify, et il les mettait à jour à chaque fusion dans
+# main. Les mises à jour de dépendances se font à la main, regroupées dans une seule PR, quand
+# le propriétaire le décide.
+# Les correctifs de SÉCURITÉ (Dependabot security updates, réglage du dépôt) ne sont pas
+# concernés par cette limite et restent actifs.
 updates:
   - package-ecosystem: npm
     directories: ["/", "/backend", "/frontend"]
     schedule:
       interval: monthly
-    open-pull-requests-limit: 1
-    groups:
-      npm-mensuel:
-        patterns: ["*"]
+    open-pull-requests-limit: 0
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
-    open-pull-requests-limit: 1
-    groups:
-      github-actions-mensuel:
-        patterns: ["*"]
+    open-pull-requests-limit: 0
