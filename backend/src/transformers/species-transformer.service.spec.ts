@@ -329,6 +329,25 @@ describe('SpeciesTransformerService', () => {
       ]);
     });
 
+    it('keeps the source page and MIME type when GBIF provides them (photo credit)', () => {
+      const [media] = service.transformMedia([
+        {
+          type: 'StillImage',
+          format: 'image/jpeg',
+          creator: 'Ana Martínez',
+          identifier: 'https://example.com/photo.jpg',
+          references: 'https://www.inaturalist.org/photos/1',
+          license: 'http://creativecommons.org/licenses/by/4.0/',
+        },
+      ]);
+
+      expect(media).toMatchObject({
+        url: 'https://example.com/photo.jpg',
+        references: 'https://www.inaturalist.org/photos/1',
+        format: 'image/jpeg',
+      });
+    });
+
     it('should handle empty results', () => {
       const result = service.transformMedia([]);
 

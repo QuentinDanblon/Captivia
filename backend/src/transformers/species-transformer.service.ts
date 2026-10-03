@@ -85,6 +85,9 @@ export class SpeciesTransformerService {
       title: m.title,
       license: m.license,
       url: m.identifier,
+      // Page source (crédit photo lié) et type MIME (image ou vidéo), quand GBIF les fournit.
+      ...(m.references ? { references: m.references } : {}),
+      ...(m.format ? { format: m.format } : {}),
     }));
   }
 
