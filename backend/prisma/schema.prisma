@@ -819,6 +819,9 @@ model CommunityMedia {
   /// NULL tant que l'image n'est rattachée à aucune publication (ou après sa suppression).
   postId    String?
   position  Int      @default(0)
+  /// Texte alternatif saisi par l'auteur (300 caractères au plus, facultatif) : décrit l'image aux
+  /// personnes malvoyantes. Posé à la publication, soumis aux mêmes règles que la légende.
+  alt       String?
   /// Clé de stockage aléatoire, sans donnée personnelle : "<uuid>.webp".
   key       String   @unique
   mimeType  String   @default("image/webp")

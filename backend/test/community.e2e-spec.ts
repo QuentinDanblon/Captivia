@@ -63,6 +63,16 @@ interface MeBody {
   reasons: string[];
   ageConfirmationRequired: boolean;
   profile: unknown;
+  suspendedUntil: string | null;
+}
+
+/** Décision vue par son destinataire (`GET /community/me/decisions`). */
+interface DecisionBody {
+  id: string;
+  action: string;
+  targetType: string;
+  targetId: string | null;
+  target: { type: string; exists: boolean };
 }
 
 /** Détail d'une publication avec ses commentaires. */
@@ -82,7 +92,7 @@ interface CommunityExport {
   exportVersion: number;
   community: {
     profile: { avatarUrl: string };
-    posts: unknown[];
+    posts: { media: { url: string; alt: string | null }[] }[];
     comments: unknown[];
     reactions: unknown[];
     blocks: { handle: string }[];
@@ -604,6 +614,126 @@ describe('Communauté (E2E)', () => {
         .set(bearer(alice))
         .send({ type: 'PHOTO', mediaIds: [photo.media[0].id] })
         .expect(400);
+    });
+
+    it('texte alternatif par image : nettoyé, borné, modéré comme la légende, exporté', async () => {
+      const first = bodyOf<IdBody>(
+        await upload(alice, await gpsJpeg()).expect(201),
+      );
+      const second = bodyOf<IdBody>(
+        await upload(alice, await gpsJpeg()).expect(201),
+      );
+      // Une image téléversée sans texte alternatif : alt null.
+      expect(
+        bodyOf<IdBody & { alt: string | null }>(
+          await upload(alice, await gpsJpeg()).expect(201),
+        ).alt,
+      ).toBeNull();
+
+      const created = await http()
+        .post('/community/posts')
+        .set(bearer(alice))
+        .send({
+          type: 'PHOTO',
+          body: 'Deux photos',
+          mediaIds: [first.id, second.id],
+          mediaAlts: [
+            '  Un gecko\r\n léopard\t sur   une pierre\u0000 ',
+            '   ',
+          ],
+        })
+        .expect(201);
+      const post = bodyOf<CommunityPostBody>(created);
+      expect(post.media.map((m) => m.alt)).toEqual([
+        'Un gecko léopard sur une pierre',
+        null,
+      ]);
+      expect(
+        await prisma.communityMedia.findMany({
+          where: { postId: post.id },
+          orderBy: { position: 'asc' },
+          select: { alt: true },
+        }),
+      ).toEqual([{ alt: 'Un gecko léopard sur une pierre' }, { alt: null }]);
+
+      // Détail, fil et fil d'un membre renvoient `alt`.
+      const detail = await http()
+        .get(`/community/posts/${post.id}`)
+        .set(bearer(carol))
+        .expect(200);
+      expect(bodyOf<CommunityPostBody>(detail).media[0].alt).toBe(
+        'Un gecko léopard sur une pierre',
+      );
+      const feed = await http()
+        .get('/community/posts?limit=50')
+        .set(bearer(carol))
+        .expect(200);
+      expect(
+        bodyOf<Page<CommunityPostBody>>(feed).items.find(
+          (p) => p.id === post.id,
+        )!.media[0].alt,
+      ).toBe('Un gecko léopard sur une pierre');
+
+      // Export RGPD : le texte alternatif suit l'image.
+      const exported = await http()
+        .get('/users/me/export')
+        .set(bearer(alice))
+        .expect(200);
+      const exportedPost = bodyOf<CommunityExport>(
+        exported,
+      ).community.posts.find((p) =>
+        p.media.some((m) => m.alt === 'Un gecko léopard sur une pierre'),
+      );
+      expect(exportedPost).toBeDefined();
+      expect(exportedPost!.media.map((m) => m.alt)).toEqual([
+        'Un gecko léopard sur une pierre',
+        null,
+      ]);
+    });
+
+    it('texte alternatif : 300 caractères au plus, jamais plus de textes que d’images, liens refusés aux comptes récents', async () => {
+      const media = bodyOf<IdBody>(
+        await upload(alice, await gpsJpeg()).expect(201),
+      );
+      const postWith = (mediaAlts: unknown) =>
+        http()
+          .post('/community/posts')
+          .set(bearer(alice))
+          .send({ type: 'PHOTO', mediaIds: [media.id], mediaAlts });
+      await postWith(['a'.repeat(301)]).expect(400);
+      await postWith([42]).expect(400);
+      await postWith('pas une liste').expect(400);
+      const extra = await postWith(['un', 'deux']).expect(400);
+      expect(bodyOf<ErrorBody>(extra).code).toBe('COMMUNITY_INVALID_MEDIA');
+      // Exactement 300 caractères : accepté.
+      await postWith(['a'.repeat(300)]).expect(201);
+
+      // Compte récent : mêmes règles que la légende (pas de lien pendant 7 jours).
+      const fresh = bodyOf<IdBody>(
+        await upload(bob, await gpsJpeg()).expect(201),
+      );
+      const linked = await http()
+        .post('/community/posts')
+        .set(bearer(bob))
+        .send({
+          type: 'PHOTO',
+          mediaIds: [fresh.id],
+          mediaAlts: ['Photo vue sur www.reptiles-discount.com'],
+        })
+        .expect(400);
+      expect(bodyOf<ErrorBody>(linked).code).toBe(
+        'COMMUNITY_LINKS_NOT_ALLOWED',
+      );
+      // L'image n'a pas été consommée par la tentative refusée.
+      await http()
+        .post('/community/posts')
+        .set(bearer(bob))
+        .send({
+          type: 'PHOTO',
+          mediaIds: [fresh.id],
+          mediaAlts: ['Mon gecko sur sa branche'],
+        })
+        .expect(201);
     });
 
     it('QUESTION : texte obligatoire, 2 000 caractères au plus', async () => {
@@ -1364,16 +1494,148 @@ describe('Communauté (E2E)', () => {
         .set(bearer(bob))
         .expect(200);
       expect(bodyOf<MeBody>(me).reasons).toContain('COMMUNITY_SUSPENDED');
+      // Fin de suspension exposée à la racine (profil actif ici) ; aucune suspension : null.
+      const until = bodyOf<MeBody>(me).suspendedUntil;
+      expect(until).toEqual(expect.any(String));
+      expect(Date.parse(until!) - Date.now()).toBeGreaterThan(2.9 * DAY_MS);
+      const quiet = await http()
+        .get('/community/profile')
+        .set(bearer(alice))
+        .expect(200);
+      expect(bodyOf<MeBody>(quiet).suspendedUntil).toBeNull();
       await http()
         .post(`/community/moderation/users/${handle('bob')}/unsuspend`)
         .set(bearer(operator))
         .send({ statement: 'Suspension levée après échange.' })
         .expect(200);
+      const lifted = await http()
+        .get('/community/profile')
+        .set(bearer(bob))
+        .expect(200);
+      expect(bodyOf<MeBody>(lifted).suspendedUntil).toBeNull();
       await http()
         .post('/community/posts')
         .set(bearer(bob))
         .send({ type: 'QUESTION', body: 'Merci, je ferai attention.' })
         .expect(201);
+    });
+  });
+
+  // ---------------------------------------------------------------------------
+  describe('décisions : nature de la cible', () => {
+    let dana: Account; // membre dédié : ses contenus n'interfèrent avec aucune autre suite
+    const statement = 'Contenu contraire aux règles de la communauté.';
+
+    beforeAll(async () => {
+      dana = await verified('dana');
+      await activate(dana, handle('dana')).expect(201);
+    });
+
+    const decisionsOf = async (a: Account) =>
+      bodyOf<Page<DecisionBody>>(
+        await http()
+          .get('/community/me/decisions?limit=50')
+          .set(bearer(a))
+          .expect(200),
+      ).items;
+
+    const moderate = (kind: string, id: string, action: string) =>
+      http()
+        .post(`/community/moderation/${kind}/${id}/${action}`)
+        .set(bearer(operator))
+        .send({ reason: 'SPAM', statement })
+        .expect(200);
+
+    it('contenu masqué : cible existante ; supprimé : cible nommée, sans identifiant ni contenu', async () => {
+      const secret = `Publication-supprimee-${tag}`;
+      const post = await photoPost(dana, secret);
+      const remark = `Commentaire-supprime-${tag}`;
+      const comment = bodyOf<IdBody>(
+        await http()
+          .post(`/community/posts/${post.id}/comments`)
+          .set(bearer(bob))
+          .send({ body: remark })
+          .expect(201),
+      );
+
+      await moderate('posts', post.id, 'hide');
+      const hidden = (await decisionsOf(dana)).find(
+        (d) => d.action === 'HIDE',
+      )!;
+      expect(hidden).toMatchObject({
+        targetType: 'POST',
+        targetId: post.id,
+        target: { type: 'POST', exists: true },
+      });
+
+      await moderate('comments', comment.id, 'delete');
+      await moderate('posts', post.id, 'delete');
+
+      const danaDecisions = await decisionsOf(dana);
+      for (const action of ['HIDE', 'DELETE']) {
+        expect(danaDecisions.find((d) => d.action === action)).toMatchObject({
+          targetType: 'POST',
+          targetId: null,
+          target: { type: 'POST', exists: false },
+        });
+      }
+      const bobDeleted = (await decisionsOf(bob)).find(
+        (d) => d.action === 'DELETE' && d.targetType === 'COMMENT',
+      )!;
+      expect(bobDeleted).toMatchObject({
+        targetId: null,
+        target: { type: 'COMMENT', exists: false },
+      });
+
+      // Détail : même contrat, jamais le texte du contenu supprimé.
+      const detail = await http()
+        .get(`/community/me/decisions/${bobDeleted.id}`)
+        .set(bearer(bob))
+        .expect(200);
+      expect(bodyOf<DecisionBody>(detail)).toMatchObject({
+        id: bobDeleted.id,
+        target: { type: 'COMMENT', exists: false },
+      });
+      expect(JSON.stringify(detail.body)).not.toContain(remark);
+      expect(JSON.stringify(danaDecisions)).not.toContain(secret);
+    });
+
+    it('supprimé par son auteur après un masquage : la décision perd le lien, garde la nature', async () => {
+      const own = await photoPost(dana, `Retiree-par-auteur-${tag}`);
+      await moderate('posts', own.id, 'hide');
+      const decision = (await decisionsOf(dana)).find(
+        (d) => d.targetId === own.id,
+      )!;
+      expect(decision.target).toEqual({ type: 'POST', exists: true });
+      await http()
+        .delete(`/community/posts/${own.id}`)
+        .set(bearer(dana))
+        .expect(204);
+      const after = await http()
+        .get(`/community/me/decisions/${decision.id}`)
+        .set(bearer(dana))
+        .expect(200);
+      expect(bodyOf<DecisionBody>(after)).toMatchObject({
+        targetType: 'POST',
+        targetId: null,
+        target: { type: 'POST', exists: false },
+      });
+    });
+
+    it('suspension : la cible est le profil, sans identifiant', async () => {
+      await http()
+        .post(`/community/moderation/users/${handle('dana')}/suspend`)
+        .set(bearer(operator))
+        .send({ reason: 'SPAM', statement, days: 1 })
+        .expect(200);
+      const suspend = (await decisionsOf(dana)).find(
+        (d) => d.action === 'SUSPEND',
+      )!;
+      expect(suspend).toMatchObject({
+        targetType: 'USER',
+        targetId: null,
+        target: { type: 'USER', exists: true },
+      });
     });
   });
 

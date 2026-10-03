@@ -659,8 +659,9 @@ export class CommunityModerationService {
       take: limit + 1,
     });
     const page = paginate(rows, limit);
+    const existing = await this.existingTargets(page.items);
     return {
-      items: page.items.map((a) => this.present(a)),
+      items: page.items.map((a) => this.presentToSubject(a, existing)),
       nextCursor: page.nextCursor,
       contactEmail: communityContactEmail(),
     };
@@ -671,7 +672,52 @@ export class CommunityModerationService {
       where: { id: actionId, subjectId: userId, action: { not: 'DISMISS' } },
     });
     if (!action) throw notFound();
-    return { ...this.present(action), contactEmail: communityContactEmail() };
+    const existing = await this.existingTargets([action]);
+    return {
+      ...this.presentToSubject(action, existing),
+      contactEmail: communityContactEmail(),
+    };
+  }
+
+  /**
+   * Identifiants (publications, commentaires) des contenus visés qui existent encore. Une seule
+   * requête par type pour toute la page.
+   */
+  private async existingTargets(
+    actions: CommunityModerationAction[],
+  ): Promise<Set<string>> {
+    const ids = (type: 'POST' | 'COMMENT') =>
+      actions.filter((a) => a.targetType === type).map((a) => a.targetId);
+    const [posts, comments] = await Promise.all([
+      this.prisma.communityPost.findMany({
+        where: { id: { in: ids('POST') } },
+        select: { id: true },
+      }),
+      this.prisma.communityComment.findMany({
+        where: { id: { in: ids('COMMENT') } },
+        select: { id: true },
+      }),
+    ]);
+    return new Set([...posts, ...comments].map((r) => r.id));
+  }
+
+  /**
+   * Décision vue par son destinataire. `target` dit toujours de quoi il s'agit (publication,
+   * commentaire, profil) et si le contenu existe encore ; une fois supprimé, `targetId` passe à
+   * null. Le contenu lui-même n'est jamais renvoyé (la décision ne conserve pas d'extrait) : le
+   * motif de la décision et l'exposé des motifs en tiennent lieu.
+   */
+  private presentToSubject(
+    a: CommunityModerationAction,
+    existing: ReadonlySet<string>,
+  ) {
+    const exists = a.targetType === 'USER' || existing.has(a.targetId);
+    const view = this.present(a);
+    return {
+      ...view,
+      targetId: exists ? view.targetId : null,
+      target: { type: a.targetType, exists },
+    };
   }
 
   async appeal(userId: string, actionId: string, dto: AppealDto) {
@@ -1121,7 +1167,13 @@ export class CommunityModerationService {
           createdAt: true,
           media: {
             orderBy: { position: 'asc' },
-            select: { id: true, key: true, width: true, height: true },
+            select: {
+              id: true,
+              key: true,
+              width: true,
+              height: true,
+              alt: true,
+            },
           },
           author: {
             select: { communityProfile: { select: { handle: true } } },

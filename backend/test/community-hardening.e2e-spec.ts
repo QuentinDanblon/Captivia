@@ -439,6 +439,16 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
       expect(bodyOf<{ reasons: string[] }>(me).reasons).toContain(
         'COMMUNITY_SUSPENDED',
       );
+      // Sans profil, la fin de suspension est exposée à la racine (le client ne la lit plus dans
+      // le message d'erreur) : c'est la date portée par le compte.
+      const account = await prisma.user.findUnique({
+        where: { id: bad.userId },
+        select: { communitySuspendedUntil: true },
+      });
+      expect(bodyOf<{ profile: unknown }>(me).profile).toBeNull();
+      expect(bodyOf<{ suspendedUntil: string }>(me).suspendedUntil).toBe(
+        account!.communitySuspendedUntil!.toISOString(),
+      );
       const again = await activate(bad, bad.handle!).expect(403);
       expect(bodyOf<ErrorBody>(again).code).toBe('COMMUNITY_SUSPENDED');
       const other = await activate(bad, `${bad.handle!}x`).expect(403);
@@ -452,6 +462,14 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         where: { id: bad.userId },
         data: { communitySuspendedUntil: new Date(Date.now() - 1000) },
       });
+      // Échue : plus de date annoncée, même si la colonne du compte n'est pas encore remise à zéro.
+      const expired = await http()
+        .get('/community/profile')
+        .set(bearer(bad))
+        .expect(200);
+      expect(
+        bodyOf<{ suspendedUntil: string | null }>(expired).suspendedUntil,
+      ).toBeNull();
       await activate(bad, bad.handle!).expect(201);
       await http()
         .post('/community/posts')

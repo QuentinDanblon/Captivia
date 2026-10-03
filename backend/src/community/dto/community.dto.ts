@@ -30,6 +30,7 @@ import {
   FEED_DEFAULT_LIMIT,
   FEED_MAX_LIMIT,
   HANDLE_MAX_LENGTH,
+  MEDIA_ALT_MAX_LENGTH,
   MODERATION_STATEMENT_MAX_LENGTH,
   MODERATION_STATEMENT_MIN_LENGTH,
   PHOTO_POST_MAX_MEDIA,
@@ -174,6 +175,20 @@ export class CreatePostDto {
   @ArrayUnique()
   @IsUUID('all', { each: true })
   mediaIds?: string[];
+
+  @ApiPropertyOptional({
+    type: [String],
+    maxLength: MEDIA_ALT_MAX_LENGTH,
+    description:
+      "Texte alternatif de chaque image, dans l'ordre de `mediaIds` (chaîne vide = aucun) ; " +
+      "au plus autant de textes que d'images. Soumis aux mêmes règles que la légende.",
+  })
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(PHOTO_POST_MAX_MEDIA)
+  @IsString({ each: true })
+  @MaxLength(MEDIA_ALT_MAX_LENGTH, { each: true })
+  mediaAlts?: string[];
 
   @ApiPropertyOptional({
     description:

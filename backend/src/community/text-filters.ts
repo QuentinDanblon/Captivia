@@ -1,4 +1,7 @@
-import { LINKS_MIN_ACCOUNT_AGE_DAYS } from './community.constants';
+import {
+  LINKS_MIN_ACCOUNT_AGE_DAYS,
+  MEDIA_ALT_MAX_LENGTH,
+} from './community.constants';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -42,4 +45,16 @@ export function cleanText(text: string | null | undefined): string {
     .filter((ch) => !isStrippedControl(ch))
     .join('')
     .trim();
+}
+
+/**
+ * Texte alternatif d'une image : nettoyé comme les autres textes (`cleanText`), ramené à une seule
+ * ligne, tronqué à MEDIA_ALT_MAX_LENGTH ; null s'il est vide.
+ */
+export function cleanAlt(text: string | null | undefined): string | null {
+  const alt = Array.from(cleanText(text).replace(/\s+/g, ' '))
+    .slice(0, MEDIA_ALT_MAX_LENGTH)
+    .join('')
+    .trim();
+  return alt || null;
 }

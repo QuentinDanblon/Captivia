@@ -24,7 +24,12 @@ import {
 import { afterCursor, decodeCursor, paginate } from './cursor';
 import { handleKey } from './handle';
 import { CommunityMediaService } from './media/community-media.service';
-import { cleanText, containsLink, isNewAccount } from './text-filters';
+import {
+  cleanAlt,
+  cleanText,
+  containsLink,
+  isNewAccount,
+} from './text-filters';
 import {
   CreateCommentDto,
   CreatePostDto,
@@ -259,6 +264,19 @@ export class CommunityPostsService {
     this.assertLinksAllowed(body, actor.createdAt);
 
     const mediaIds = dto.mediaIds ?? [];
+    const rawAlts = dto.mediaAlts ?? [];
+    if (rawAlts.length > mediaIds.length) {
+      throw badRequest(
+        CommunityErrorCode.INVALID_MEDIA,
+        'More alternative texts than images.',
+      );
+    }
+    // Même modération que la légende : texte nettoyé, liens refusés aux comptes récents.
+    const alts = mediaIds.map((_id, i) => {
+      const alt = cleanAlt(rawAlts[i]);
+      this.assertLinksAllowed(alt ?? '', actor.createdAt);
+      return alt;
+    });
     const [min, max] =
       dto.type === CommunityPostType.PHOTO
         ? [PHOTO_POST_MIN_MEDIA, PHOTO_POST_MAX_MEDIA]
@@ -320,7 +338,7 @@ export class CommunityPostsService {
         for (const [position, id] of mediaIds.entries()) {
           const res = await tx.communityMedia.updateMany({
             where: { id, ownerId: userId, postId: null },
-            data: { postId: created.id, position },
+            data: { postId: created.id, position, alt: alts[position] },
           });
           if (res.count !== 1) {
             throw badRequest(

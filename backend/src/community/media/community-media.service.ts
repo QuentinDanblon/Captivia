@@ -19,6 +19,8 @@ export interface MediaView {
   url: string;
   width: number;
   height: number;
+  /** Texte alternatif saisi par l'auteur ; null = aucun (le client compose un repli). */
+  alt: string | null;
 }
 
 /** Lecteur authentifié (facultatif) d'une image : `req.user` de la stratégie JWT. */
@@ -61,12 +63,14 @@ export class CommunityMediaService {
     key: string;
     width: number;
     height: number;
+    alt?: string | null;
   }): MediaView {
     return {
       id: media.id,
       url: this.url(media.key),
       width: media.width,
       height: media.height,
+      alt: media.alt ?? null,
     };
   }
 

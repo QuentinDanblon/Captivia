@@ -71,6 +71,13 @@ export class CommunityProfileService {
     const reasons = this.access.ineligibility(actor);
     return {
       profile: profile ? this.view(profile, actor.suspendedUntil) : null,
+      /**
+       * Fin de la suspension de publication en cours (portée par le compte), même sans profil
+       * (départ de la communauté puis retour) ; null si aucune suspension active.
+       */
+      suspendedUntil: isSuspended(actor.suspendedUntil)
+        ? actor.suspendedUntil
+        : null,
       currentRulesVersion: COMMUNITY_RULES_VERSION,
       canPublish: reasons.length === 0,
       reasons,

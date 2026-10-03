@@ -38,7 +38,7 @@ export function postSelect(viewerId: string) {
     animal: { select: animalSelect },
     media: {
       orderBy: { position: 'asc' },
-      select: { id: true, key: true, width: true, height: true },
+      select: { id: true, key: true, width: true, height: true, alt: true },
     },
     _count: {
       select: {

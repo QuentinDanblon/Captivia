@@ -1,4 +1,9 @@
-import { cleanText, containsLink, isNewAccount } from './text-filters';
+import {
+  cleanAlt,
+  cleanText,
+  containsLink,
+  isNewAccount,
+} from './text-filters';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -43,5 +48,19 @@ describe('cleanText', () => {
 
   it('laisse le HTML tel quel (texte brut, échappé à l’affichage)', () => {
     expect(cleanText('<b>gras</b>')).toBe('<b>gras</b>');
+  });
+});
+
+describe('cleanAlt', () => {
+  it('nettoie, ramène à une ligne et renvoie null si vide', () => {
+    expect(cleanAlt('  Un gecko\r\nléopard\t sur   une pierre\u0000 ')).toBe(
+      'Un gecko léopard sur une pierre',
+    );
+    expect(cleanAlt('   \n ')).toBeNull();
+    expect(cleanAlt(undefined)).toBeNull();
+  });
+
+  it('tronque à 300 caractères', () => {
+    expect(cleanAlt('a'.repeat(450))).toHaveLength(300);
   });
 });

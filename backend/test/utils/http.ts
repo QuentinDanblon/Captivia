@@ -42,7 +42,7 @@ export interface UrlBody {
 export interface CommunityPostBody {
   id: string;
   type: string;
-  media: { id: string; url: string }[];
+  media: { id: string; url: string; alt: string | null }[];
   speciesCategory?: string;
   animal?: unknown;
 }

@@ -119,7 +119,7 @@ export class CommunityDataService {
           updatedAt: true,
           media: {
             orderBy: { position: 'asc' },
-            select: { key: true, width: true, height: true },
+            select: { key: true, width: true, height: true, alt: true },
           },
         },
       }),
@@ -189,6 +189,7 @@ export class CommunityDataService {
         select: {
           key: true,
           postId: true,
+          alt: true,
           width: true,
           height: true,
           bytes: true,
@@ -221,6 +222,7 @@ export class CommunityDataService {
           url: url(x.key),
           width: x.width,
           height: x.height,
+          alt: x.alt,
         })),
       })),
       comments,

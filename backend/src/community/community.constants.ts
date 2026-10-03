@@ -30,6 +30,9 @@ export const PHOTO_POST_MIN_MEDIA = 1;
 export const PHOTO_POST_MAX_MEDIA = 4;
 export const QUESTION_POST_MAX_MEDIA = 1;
 
+/** Texte alternatif d'une image (caractères) : facultatif, une ligne. */
+export const MEDIA_ALT_MAX_LENGTH = 300;
+
 /** Ancienneté minimale du compte (jours) pour écrire des liens dans un texte. */
 export const LINKS_MIN_ACCOUNT_AGE_DAYS = 7;
 
