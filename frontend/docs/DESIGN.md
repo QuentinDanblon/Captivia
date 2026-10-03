@@ -568,6 +568,8 @@ Avant de fusionner un lot visuel : captures 1440 et 390, clair et sombre, aucun 
 
 **Reste à faire** (hors design) : regrouper connexion, inscription, mot de passe, vérification,
 `/sauvegarder` et `animal-public` dans `(marketing)` puis supprimer `SiteChrome` (le layout
-racine ne garderait que `<html>`, polices, fournisseurs, `ErrorBoundary`) ; choisir une variante
-unique du portugais (pt-PT ou pt-BR, aujourd'hui mêlées) ; dater les aperçus de la landing
-(`SAMPLE_TODAY`, fixe) si l'on veut qu'ils suivent le jour courant.
+racine ne garderait que `<html>`, polices, fournisseurs, `ErrorBoundary`) ; dater les aperçus de la
+landing (`SAMPLE_TODAY`, fixe) si l'on veut qu'ils suivent le jour courant. La locale `pt` est du
+**portugais européen (pt-PT, AO90)** : « palavra-passe », « eliminar », « guardar », « subscrição »,
+« ficheiro », « telemóvel », « ecrã », « boletim de saúde » ; adresse en « o seu », impératif à la
+3e personne, enclise (« Inscreva-se »), jamais de gérondif (« a fazer », pas « fazendo »).
