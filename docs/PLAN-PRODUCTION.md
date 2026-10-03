@@ -90,7 +90,7 @@ Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (
 | **Vague 6 — Mobile (Capacitor 7)** | | | |
 | W6-01 | Comptes développeurs | 👤 | Apple Developer + Google Play en organisation (D-U-N-S), contrats et fiscalité. Chemin critique. |
 | W6-02 | Export statique `MOBILE_BUILD` | ✅ | `npm run build:mobile`, routes à query, `localePrefix: 'always'`, CSP en `<meta>`. |
-| W6-03 | Initialisation de Capacitor | 🟡 | Capacitor 7, `capacitor.config.ts`, plugins installés. **Projets natifs non générés** (`npx cap add android` / `ios` à faire, puis à versionner) ; origines `capacitor://localhost` et `https://localhost` absentes de `CORS_ORIGIN` dans `render.yaml` : 👤. |
+| W6-03 | Initialisation de Capacitor | 🟡 | Capacitor 7, `capacitor.config.ts`, plugins installés. **Projets natifs non générés** (`npx cap add android` / `ios` à faire, puis à versionner) . Origines `capacitor://localhost` et `https://localhost` ajoutées à `CORS_ORIGIN` dans `render.yaml` (à reporter à la main si le service Render n'a pas été créé par le Blueprint). |
 | W6-04 | Stockage sécurisé des jetons | ✅ | `tokenStorage` : Preferences sur natif, `localStorage` sur le web. |
 | W6-05 | Couche plateforme | 🟡 | `openExternal`, caméra / galerie, partage du carnet : code et tests jest. Non testé sur appareil ([MOBILE.md § 9](MOBILE.md#9-checklist-stores)). |
 | W6-06 | Rappels en notifications locales | 🟡 | `local-reminders.ts`, explication préalable, hors ligne. Non testé sur appareil ; `appRestoredResult` Android non géré (photo perdue si l'app est tuée pendant la prise de vue). |
@@ -158,7 +158,7 @@ Dans l'ordre. Les blocs A à C conditionnent la mise en ligne du web ; D conditi
 15. **Comptes Apple Developer et Google Play en organisation** (D-12, D-U-N-S), contrats « Paid Apps » et fiscalité (W6-01).
 16. **RevenueCat et produits** ([PAYMENTS.md](PAYMENTS.md)) : abonnements mensuel et annuel dans App Store Connect et la Play Console, **prix à fixer par le propriétaire**, projet RevenueCat, entitlement `premium`, webhook ; variables Render `IAP_ENABLED`, `REVENUECAT_WEBHOOK_SECRET`, `REVENUECAT_ENTITLEMENT_ID`, `GOOGLE_PLAY_PACKAGE_NAME` ; variables GitHub `REVENUECAT_IOS_KEY`, `REVENUECAT_ANDROID_KEY` ; test Sandbox.
 17. **Firebase et APNs** ([MOBILE.md § 7.3](MOBILE.md#73-push-natif-fcm--apns-w6-07)) : projet Firebase, `google-services.json` (secret `GOOGLE_SERVICES_JSON_BASE64`), `GoogleService-Info.plist`, clé APNs `.p8`, capacités Xcode, `AppDelegate`, `FCM_SERVICE_ACCOUNT_JSON` sur Render ; poser `NATIVE_PUSH` seulement ensuite.
-18. **Projets natifs** : `npx cap add android` / `ios`, versionner, ajouter `capacitor://localhost` et `https://localhost` à `CORS_ORIGIN` ([MOBILE.md § 5](MOBILE.md#5-cors-backend)), `APPLE_TEAM_ID` et `ANDROID_SHA256_CERT_FINGERPRINTS` sur Netlify, Associated Domains et `intent-filter`.
+18. **Projets natifs** : `npx cap add android` / `ios`, versionner, vérifier que `CORS_ORIGIN` sur Render contient `capacitor://localhost` et `https://localhost` ([MOBILE.md § 5](MOBILE.md#5-cors-backend)), `APPLE_TEAM_ID` et `ANDROID_SHA256_CERT_FINGERPRINTS` sur Netlify, Associated Domains et `intent-filter`.
 19. **Logo définitif (D-15)** et graphique de présentation Play ; saisie des fiches et des déclarations dans les consoles ([store/README.md](store/README.md)) ; URL des fiches (`NEXT_PUBLIC_APP_STORE_URL`, `NEXT_PUBLIC_PLAY_STORE_URL`) ; compte de démo ; TestFlight et test fermé Play.
 
 **E. Ouverture de la communauté** (`COMMUNITY_ENABLED`, seulement une fois la modération prête)

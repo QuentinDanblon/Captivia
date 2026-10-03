@@ -97,7 +97,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `DATABASE_URL` | Render | Neon **pooled** + `pgbouncer=true&connect_timeout=15` | Oui |
 | `JWT_SECRET` | Render | généré par Render (≥ 32 caractères) | Oui |
 | `NODE_ENV` | Render | `production` | Oui |
-| `CORS_ORIGIN` | Render | URL Netlify (+ `capacitor://localhost,https://localhost` en vague 6) | Oui (*) |
+| `CORS_ORIGIN` | Render | URL Netlify + `capacitor://localhost,https://localhost` (app mobile, déjà dans `render.yaml`) | Oui (*) |
 | `FRONTEND_URL` | Render | URL publique du site | Oui (*) |
 | `PUBLIC_WEB_URL` | Render | URL publique du site (liens e-mails, pages publiques) | Oui (*) |
 | `TRUST_PROXY` | Render | `true` | Oui |

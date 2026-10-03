@@ -34,11 +34,10 @@ services:
         generateValue: true
       # Origines autorisées (CORS) et URL publique du site. À ajuster si le nom du site
       # Netlify diffère de « captivia ». Obligatoires en production (voir docs/DEPLOY.md).
-      # Apps mobiles Capacitor (vague 6, docs/MOBILE.md) : ajouter les origines de la WebView,
-      #   https://captivia-app.netlify.app,capacitor://localhost,https://localhost
-      # (capacitor://localhost = iOS, https://localhost = Android).
+      # Inclut les origines de la WebView des apps mobiles Capacitor (docs/MOBILE.md § 5) :
+      # capacitor://localhost = iOS, https://localhost = Android.
       - key: CORS_ORIGIN
-        value: https://captivia-app.netlify.app
+        value: https://captivia-app.netlify.app,capacitor://localhost,https://localhost
       - key: FRONTEND_URL
         value: https://captivia-app.netlify.app
       # URL publique du site web, utilisée pour les liens des e-mails et des pages publiques.

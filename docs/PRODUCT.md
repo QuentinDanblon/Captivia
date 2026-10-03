@@ -14,7 +14,7 @@
 ## Forme
 - **Une vraie application**, mobile d'abord (Android / iOS via Capacitor), **pleinement utilisable sur PC** dans le navigateur (même app, navigation adaptée : barre d'onglets en mobile, barre latérale sur PC).
 - **Une landing marketing** séparée de l'app, pensée comme un entonnoir (PC en priorité) : elle montre concrètement ce qu'il y a derrière la connexion (aperçus réels du carnet, de l'agenda, des fiches, de la communauté), puis mène à « Essayer sans compte ».
-- **Direction artistique et message cohérents** entre landing, app web, app mobile et fiches stores (cf. `docs/DESIGN.md`). Vraies photos d'animaux et de nature sous licence libre vérifiée, jamais d'images générées.
+- **Direction artistique et message cohérents** entre landing, app web, app mobile et fiches stores (cf. `frontend/docs/DESIGN.md`). Vraies photos d'animaux et de nature sous licence libre vérifiée, jamais d'images générées.
 
 ## Accès et offre
 | Profil | Animaux | Accès |

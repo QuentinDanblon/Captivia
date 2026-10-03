@@ -13,7 +13,7 @@
 ## 📋 Vue d'ensemble
 
 Captivia est une application web multilingue permettant de :
-- 🔍 **Découvrir** : Catalogue de 10 000+ espèces (GBIF, Wikipedia, Wikidata)
+- 🔍 **Découvrir** : Plus de 1 500 fiches espèces et races sourcées (GBIF, Wikipédia, Wikidata)
 - 📚 **Apprendre** : Fiches espèces avec santé, législation, alimentation, matériel
 - 🐾 **Gérer** : Suivi de vos animaux avec routines de soins
 - 🔔 **Rappels** : Notifications intelligentes (nourrissage, entretien, UVB, santé)
@@ -146,7 +146,7 @@ Voir la section [📦 Déploiement Docker](#-déploiement-docker) pour les ports
 - Recherche par nom commun ou scientifique
 - Filtres taxonomiques (royaume, classe, ordre, famille)
 - Filtres conservation (IUCN)
-- 10 000+ espèces disponibles
+- Plus de 1 500 fiches espèces et races sourcées
 
 **Fiche Espèce Complète:**
 - 📊 **Overview**: Classification, distribution, conservation
