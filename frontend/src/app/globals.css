@@ -2024,217 +2024,30 @@
   }
 
   /* ---------------------------------------------------------------------- */
-  /* Écrans d'authentification                                                */
+  /* Texture papier (planche des écrans de connexion, encarts d'ambiance)      */
+  /* Grain SVG en data URI (CSP img-src data:), le même que `Figure grain`.   */
   /* ---------------------------------------------------------------------- */
 
-  .captivia-auth-page {
-    min-height: calc(100vh - var(--header-h));
-    min-height: calc(100dvh - var(--header-h));
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: clamp(32px, 7vw, 72px) var(--gutter);
-    color: var(--ink);
-    background: var(--paper);
-  }
-
-  .captivia-auth-card {
+  .cv-texture {
     position: relative;
-    width: min(100%, 480px);
-    padding: clamp(24px, 5vw, 40px);
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-card);
-    background: var(--surface);
+    isolation: isolate;
   }
-
-  .captivia-auth-title {
-    margin: 0 0 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--line);
-    color: var(--ink);
-    font-size: var(--text-h1);
-    line-height: 1.1;
+  .cv-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0.16;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.15 0 0 0 0 0.12 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-
-  .captivia-auth-description {
-    margin: -8px 0 24px;
-    max-width: 420px;
-    color: var(--ink-2);
-    font-size: 0.9375rem;
-    line-height: 1.6;
-  }
-
-  .captivia-auth-form {
-    display: grid;
-    gap: 20px;
-  }
-
-  .captivia-auth-field {
-    min-width: 0;
-  }
-
-  .captivia-auth-label,
-  .captivia-auth-label-row {
-    color: var(--ink);
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
-
-  .captivia-auth-label-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .captivia-auth-input {
-    width: 100%;
-    min-height: 48px;
-    margin-top: 6px;
-    padding: 0 14px !important;
-    border: 1px solid var(--line-field) !important;
-    border-radius: var(--radius-control) !important;
-    color: var(--ink) !important;
-    background: var(--surface) !important;
-    box-shadow: none !important;
-    font-size: 1rem;
-  }
-
-  .captivia-auth-input:focus {
-    border-color: var(--accent) !important;
-  }
-
-  .captivia-auth-hint {
-    margin: 6px 0 0;
-    color: var(--ink-2);
-    font-size: 0.8rem;
-  }
-
-  .captivia-auth-inline-link,
-  .captivia-auth-secondary-link,
-  .captivia-auth-back-link {
-    color: var(--accent-text);
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
-  }
-
-  .captivia-auth-submit {
-    width: 100%;
-    min-height: 48px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 18px;
-    border: 0;
-    border-radius: var(--radius-control);
-    color: var(--on-accent);
-    background: var(--accent);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color var(--dur-fast) var(--ease);
-  }
-
-  .captivia-auth-submit:hover {
-    background: var(--accent-strong);
-  }
-
-  .captivia-auth-submit:disabled {
-    cursor: not-allowed;
-    opacity: 0.55;
-  }
-
-  .captivia-auth-feedback {
-    padding: 12px 14px;
-    border-radius: var(--radius-control);
-    font-size: 0.875rem;
-    line-height: 1.5;
-  }
-
-  .captivia-auth-feedback p {
-    margin: 0;
-  }
-
-  .captivia-auth-feedback.is-error {
-    border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
-    color: var(--ink);
-    background: var(--danger-soft);
-    box-shadow: inset 3px 0 0 var(--danger);
-  }
-
-  .captivia-auth-feedback.is-success {
-    border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
-    color: var(--ink);
-    background: var(--ok-soft);
-    box-shadow: inset 3px 0 0 var(--ok);
-  }
-
-  .captivia-auth-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    margin-top: 24px;
-    color: var(--ink-2);
-    font-size: 0.875rem;
-    text-align: center;
-  }
-
-  .captivia-auth-links p {
-    margin: 0;
-  }
-
-  .captivia-auth-links strong {
-    color: var(--ink);
-    font-weight: 600;
-  }
-
-  .captivia-auth-back-link {
-    color: var(--ink-2);
-  }
-
-  .captivia-auth-mobile-link {
-    margin-top: 24px;
-    padding: 14px;
-    border: 1px dashed var(--line-strong);
-    border-radius: var(--radius-control);
-    color: var(--ink-2);
-    background: transparent;
-    font-size: 0.8rem;
-    line-height: 1.55;
-  }
-
-  .captivia-auth-mobile-link p {
-    margin: 4px 0 0;
-  }
-
-  .captivia-auth-mobile-link strong {
-    color: var(--ink);
-    font-weight: 600;
-  }
-
-  .captivia-auth-mobile-link a {
-    display: block;
-    overflow-wrap: anywhere;
-    color: var(--accent-text);
-  }
-
-  .captivia-auth-invalid-card {
-    width: min(100%, 460px);
-  }
-
-  @media (max-width: 767px) {
-    .captivia-auth-page {
-      padding: 24px var(--gutter) 40px;
-    }
-
-    .captivia-auth-label-row {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 6px;
+  @media (prefers-color-scheme: dark) {
+    .cv-texture::before {
+      opacity: 0.12;
+      mix-blend-mode: screen;
+      filter: invert(1);
     }
   }
 }

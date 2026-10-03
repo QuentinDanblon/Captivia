@@ -3,10 +3,11 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import { useRouter } from '@/i18n/navigation';
-import { Link } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { api } from '@/lib/api';
 import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '@/lib/config';
+import { AuthFrame } from '@/components/auth/AuthFrame';
+import { Alert, Button, Field, Skeleton, SkeletonGroup, buttonClasses } from '@/components/ui';
 
 function ResetPasswordForm() {
   const t = useTranslations();
@@ -68,97 +69,83 @@ function ResetPasswordForm() {
 
   if (!token) {
     return (
-      <div className="captivia-auth-page">
-        <div className="captivia-auth-card captivia-auth-invalid-card">
-          <div className="captivia-auth-feedback is-error" role="alert">
-            <p>{t('auth.resetPasswordInvalidLink')}</p>
-          </div>
-          <div className="captivia-auth-links">
-            <Link href="/forgot-password" className="captivia-auth-secondary-link">
-              {t('auth.forgotPasswordTitle')}
-            </Link>
-          </div>
+      <AuthFrame title={t('auth.resetInvalidHeading')}>
+        <div className="grid gap-6">
+          <Alert severity="urgent" title={t('auth.resetPasswordInvalidLink')} />
+          <Link href="/forgot-password" className={buttonClasses({ size: 'lg', fullWidth: true })}>
+            {t('auth.resetRequestNew')}
+          </Link>
         </div>
-      </div>
+      </AuthFrame>
     );
   }
 
   return (
-    <div className="captivia-auth-page">
-      <div className="captivia-auth-card">
-        <h1 className="captivia-auth-title">{t('auth.resetPasswordTitle')}</h1>
-        <p className="captivia-auth-description">{t('auth.resetPasswordDescription')}</p>
-
-        <form onSubmit={handleSubmit} className="captivia-auth-form">
-          <div className="captivia-auth-field">
-            <label htmlFor="password" className="captivia-auth-label">
-              {t('auth.newPasswordLabel')}
-            </label>
+    <AuthFrame title={t('auth.resetHeading')} lead={t('auth.resetPasswordDescription')}>
+      <div className="grid gap-8">
+        <form onSubmit={handleSubmit} className="grid gap-5">
+          <Field label={t('auth.newPasswordLabel')} id="password">
             <input
               type="password"
-              id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={PASSWORD_MIN_LENGTH}
               maxLength={PASSWORD_MAX_LENGTH}
               autoComplete="new-password"
-              className="captivia-auth-input"
             />
-          </div>
-          <div className="captivia-auth-field">
-            <label htmlFor="confirmPassword" className="captivia-auth-label">
-              {t('auth.confirmPasswordLabel')}
-            </label>
+          </Field>
+          <Field label={t('auth.confirmPasswordLabel')} id="confirmPassword">
             <input
               type="password"
-              id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
               minLength={PASSWORD_MIN_LENGTH}
               maxLength={PASSWORD_MAX_LENGTH}
               autoComplete="new-password"
-              className="captivia-auth-input"
             />
-          </div>
+          </Field>
 
           {message && (
-            <div className="captivia-auth-feedback is-success" role="status">
-              <p>{message}</p>
-              {/* Le reset révoque aussi le lien du flux calendrier et les abonnements push. */}
-              <p>{t('sessions.accessRevokedNotice')}</p>
-            </div>
+            // Le reset révoque aussi le lien du flux calendrier et les abonnements push.
+            <Alert severity="info" title={message}>
+              {t('sessions.accessRevokedNotice')}
+            </Alert>
           )}
-          {error && (
-            <div className="captivia-auth-feedback is-error" role="alert">
-              <p>{error}</p>
-            </div>
-          )}
+          {error && <Alert severity="urgent" title={error} />}
 
-          <button type="submit" disabled={loading} className="captivia-auth-submit">
+          <Button type="submit" size="lg" fullWidth loading={loading}>
             {loading ? t('common.loading') : t('auth.resetPasswordSubmit')}
-          </button>
+          </Button>
         </form>
 
-        <div className="captivia-auth-links">
-          <Link href="/login" className="captivia-auth-secondary-link">
+        <p className="m-0 border-t border-line pt-6 text-ui text-ink-2">
+          <Link href="/login" className="font-medium text-accent-text underline underline-offset-2">
             {t('auth.backToLogin')}
           </Link>
-        </div>
+        </p>
       </div>
+    </AuthFrame>
+  );
+}
+
+function ResetPasswordFallback() {
+  const t = useTranslations();
+  return (
+    <div className="cv-container py-12">
+      <SkeletonGroup label={t('common.loading')} className="grid max-w-md gap-4">
+        <Skeleton width="70%" height={36} />
+        <Skeleton shape="block" height={44} />
+        <Skeleton shape="block" height={44} />
+      </SkeletonGroup>
     </div>
   );
 }
 
 export default function ResetPasswordPage() {
-  const t = useTranslations();
   return (
-    <Suspense fallback={
-      <div className="captivia-auth-page">
-        <p className="captivia-auth-description">{t('common.loading')}</p>
-      </div>
-    }>
+    <Suspense fallback={<ResetPasswordFallback />}>
       <ResetPasswordForm />
     </Suspense>
   );

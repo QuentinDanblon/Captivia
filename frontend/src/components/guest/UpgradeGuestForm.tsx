@@ -87,7 +87,7 @@ export function UpgradeGuestForm({ onUpgraded }: UpgradeGuestFormProps) {
           maxLength={254}
         />
       </Field>
-      <Field label={t('auth.passwordLabel')} hint={t('auth.passwordMin')} error={errors.password} required>
+      <Field label={t('auth.passwordLabel')} hint={t('account.passwordRule')} error={errors.password} required>
         <input
           type="password"
           name="new-password"
@@ -153,11 +153,9 @@ export function UpgradeGuestForm({ onUpgraded }: UpgradeGuestFormProps) {
         </p>
       ) : null}
 
-      <div>
-        <Button type="submit" size="lg" loading={submitting}>
-          {t('guest.upgradeSubmit')}
-        </Button>
-      </div>
+      <Button type="submit" size="lg" fullWidth loading={submitting}>
+        {t('guest.upgradeSubmit')}
+      </Button>
     </form>
   );
 }
