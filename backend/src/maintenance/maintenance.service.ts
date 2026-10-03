@@ -1,7 +1,8 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, Optional } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { CommunityMediaService } from '../community/media/community-media.service';
 import {
   MAINTENANCE_BATCH_SIZE,
   MAINTENANCE_LOCK_KEY,
@@ -15,6 +16,12 @@ export interface MaintenanceCounts {
   emailVerificationTokens: number;
   refreshTokens: number;
   notificationEvents: number;
+  /** Communauté : décisions de modération de plus de 365 jours. */
+  communityModerationActions: number;
+  /** Communauté : signalements traités de plus de 365 jours. */
+  communityReports: number;
+  /** Communauté : images orphelines (fichier + ligne). */
+  communityMedia: number;
 }
 
 export interface MaintenanceResult {
@@ -31,6 +38,9 @@ const EMPTY_COUNTS: MaintenanceCounts = {
   emailVerificationTokens: 0,
   refreshTokens: 0,
   notificationEvents: 0,
+  communityModerationActions: 0,
+  communityReports: 0,
+  communityMedia: 0,
 };
 
 /**
@@ -40,7 +50,10 @@ const EMPTY_COUNTS: MaintenanceCounts = {
  * - les jetons de réinitialisation de mot de passe expirés (durée de vie 1 h) ;
  * - les jetons de vérification d'e-mail expirés ou invalidés (durée de vie 24 h) ;
  * - les refresh tokens expirés ou révoqués depuis plus de 30 jours (tous les comptes) ;
- * - les `NotificationEvent` dont la date prévue remonte à plus de 90 jours.
+ * - les `NotificationEvent` dont la date prévue remonte à plus de 90 jours ;
+ * - communauté : décisions de modération et signalements traités de plus de 365 jours, images
+ *   orphelines (ni publication ni avatar ; propriétaire supprimé ou téléversées depuis plus de
+ *   24 h), fichier compris (1 000 au plus par exécution).
  *
  * Ne touche JAMAIS à `PaymentEvent` : journal des notifications de paiement des stores, conservé
  * au titre des obligations comptables et de la preuve des transactions (cf. registre).
@@ -55,7 +68,10 @@ const EMPTY_COUNTS: MaintenanceCounts = {
 export class MaintenanceService {
   private readonly logger = new Logger(MaintenanceService.name);
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    @Optional() private readonly communityMedia?: CommunityMediaService,
+  ) {}
 
   get enabled(): boolean {
     return (
@@ -79,8 +95,9 @@ export class MaintenanceService {
       this.logger.log(
         `Maintenance : ${d.passwordResetTokens} jeton(s) de réinitialisation, ` +
           `${d.emailVerificationTokens} jeton(s) de vérification d'e-mail, ` +
-          `${d.refreshTokens} refresh token(s), ${d.notificationEvents} événement(s) de rappel ` +
-          `supprimé(s) en ${res.durationMs} ms.`,
+          `${d.refreshTokens} refresh token(s), ${d.notificationEvents} événement(s) de rappel, ` +
+          `${d.communityModerationActions} décision(s) de modération, ${d.communityReports} signalement(s) ` +
+          `traité(s), ${d.communityMedia} image(s) orpheline(s) supprimé(s) en ${res.durationMs} ms.`,
       );
     } catch (error) {
       this.logger.error(
@@ -122,6 +139,19 @@ export class MaintenanceService {
             Prisma.sql`"NotificationEvent"`,
             Prisma.sql`"scheduledAt" < ${cutoffs.notificationEventsBefore}`,
           ),
+          communityModerationActions: await this.deleteInBatches(
+            tx,
+            Prisma.sql`"CommunityModerationAction"`,
+            Prisma.sql`"createdAt" < ${cutoffs.moderationBefore}`,
+          ),
+          communityReports: await this.deleteInBatches(
+            tx,
+            Prisma.sql`"CommunityReport"`,
+            Prisma.sql`"status" <> 'OPEN' AND "createdAt" < ${cutoffs.moderationBefore}`,
+          ),
+          communityMedia: this.communityMedia
+            ? await this.communityMedia.purgeOrphans(now, tx)
+            : 0,
         };
         return { locked: true, deleted };
       },

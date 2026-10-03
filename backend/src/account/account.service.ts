@@ -1,6 +1,7 @@
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import * as bcryptjs from 'bcryptjs';
 import { PrismaService } from '../prisma/prisma.service';
+import { CommunityDataService } from '../community/community-data.service';
 
 // bcryptjs 2.x est livré sans types : on type localement la seule fonction utilisée.
 const bcrypt = bcryptjs as unknown as {
@@ -11,14 +12,19 @@ const bcrypt = bcryptjs as unknown as {
  * Version du format d'export (à incrémenter si la structure change).
  * v2 : emailVerifiedAt, sessions, état du flux calendrier, nombre d'abonnements push actifs.
  * v3 : profile.isGuest et profile.lastActiveAt (mode invité ; `email` vaut null pour un invité).
+ * v4 : section `community` (profil public, publications, commentaires, réactions, signalements
+ *      émis, blocages, décisions de modération, images).
  */
-export const EXPORT_FORMAT_VERSION = 3;
+export const EXPORT_FORMAT_VERSION = 4;
 
 @Injectable()
 export class AccountService {
   private readonly logger = new Logger(AccountService.name);
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly community: CommunityDataService,
+  ) {}
 
   /**
    * Suppression définitive du compte (RGPD art. 17).
@@ -30,6 +36,11 @@ export class AccountService {
    * PasswordResetToken). Les suppressions explicites ci-dessous, dans la même
    * transaction, rendent l'opération indépendante de ces cascades (défense en
    * profondeur) et atomique : tout ou rien.
+   *
+   * Communauté : profil, publications, commentaires, réactions, signalements émis et blocages sont
+   * supprimés dans la même transaction ; les fichiers des images sont effacés juste après (un
+   * échec est repris par le job de maintenance, la ligne restant orpheline). Le journal de
+   * modération est conservé sans lien vers le compte (subjectId → NULL).
    */
   async deleteAccount(
     userId: string,
@@ -53,7 +64,9 @@ export class AccountService {
       }
     }
 
+    const mediaKeys = await this.community.mediaKeysOf(userId);
     await this.prisma.$transaction(async (tx) => {
+      await this.community.deleteRows(tx, userId, true);
       const animalFilter = { animal: { userId } };
       await tx.notificationEvent.deleteMany({ where: { userId } });
       await tx.routine.deleteMany({ where: animalFilter });
@@ -70,6 +83,7 @@ export class AccountService {
       await tx.passwordResetToken.deleteMany({ where: { userId } });
       await tx.user.delete({ where: { id: userId } });
     });
+    await this.community.purgeMedia(mediaKeys);
 
     // Pas d'e-mail dans les logs : donnée personnelle.
     this.logger.log(`Compte supprimé (userId=${userId})`);
@@ -148,6 +162,8 @@ export class AccountService {
       ...profile
     } = user;
 
+    const community = await this.community.exportFor(userId);
+
     return {
       exportVersion: EXPORT_FORMAT_VERSION,
       exportedAt: new Date().toISOString(),
@@ -163,6 +179,7 @@ export class AccountService {
       notificationPreferences,
       notificationEvents,
       pushSubscriptions,
+      community,
     };
   }
 }

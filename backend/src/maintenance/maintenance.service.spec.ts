@@ -75,6 +75,9 @@ describe('MaintenanceService (Prisma simulé)', () => {
       emailVerificationTokens: 0,
       refreshTokens: 0,
       notificationEvents: 0,
+      communityModerationActions: 0,
+      communityReports: 0,
+      communityMedia: 0,
     });
     expect(tx.$executeRaw).not.toHaveBeenCalled();
     expect(statements[0].sql).toContain('pg_try_advisory_xact_lock');
@@ -94,6 +97,8 @@ describe('MaintenanceService (Prisma simulé)', () => {
         if (table === 'PasswordResetToken') return 3;
         if (table === 'EmailVerificationToken') return 2;
         if (table === 'NotificationEvent') return 11;
+        if (table === 'CommunityModerationAction') return 4;
+        if (table === 'CommunityReport') return 5;
         return 0;
       },
     });
@@ -105,6 +110,10 @@ describe('MaintenanceService (Prisma simulé)', () => {
       emailVerificationTokens: 2,
       refreshTokens: 2 * MAINTENANCE_BATCH_SIZE + 7,
       notificationEvents: 11,
+      communityModerationActions: 4,
+      communityReports: 5,
+      // Sans service de médias (test unitaire) : aucune image purgée.
+      communityMedia: 0,
     });
     expect(deletesFor(statements, 'RefreshToken')).toHaveLength(3);
 
@@ -126,6 +135,25 @@ describe('MaintenanceService (Prisma simulé)', () => {
     const [events] = deletesFor(statements, 'NotificationEvent');
     expect(events.sql).toContain('"scheduledAt" <');
     expect(events.values[0]).toEqual(new Date('2027-03-17T03:41:00.000Z'));
+    const [moderation] = deletesFor(statements, 'CommunityModerationAction');
+    expect(moderation.values[0]).toEqual(cutoffs.moderationBefore);
+    expect(cutoffs.moderationBefore).toEqual(
+      new Date(NOW.getTime() - 365 * DAY_MS),
+    );
+    const [reports] = deletesFor(statements, 'CommunityReport');
+    // Les signalements encore ouverts ne sont jamais purgés.
+    expect(reports.sql).toContain(`"status" <> 'OPEN'`);
+  });
+
+  it('purge les médias communautaires orphelins dans la transaction verrouillée', async () => {
+    const { prisma, tx } = buildPrisma({ locked: true });
+    const purgeOrphans = jest.fn().mockResolvedValue(3);
+    const service = new MaintenanceService(prisma, {
+      purgeOrphans,
+    } as unknown as ConstructorParameters<typeof MaintenanceService>[1]);
+    const res = await service.runOnce(NOW);
+    expect(res.deleted.communityMedia).toBe(3);
+    expect(purgeOrphans).toHaveBeenCalledWith(NOW, tx);
   });
 
   it('never deletes PaymentEvent (accounting obligations) nor any account', async () => {
@@ -190,7 +218,7 @@ describe('MaintenanceService (Prisma simulé)', () => {
     await service.handleCron();
     expect(log).toHaveBeenCalledWith(
       expect.stringMatching(
-        /4 événement\(s\) de rappel supprimé\(s\) en \d+ ms/,
+        /4 événement\(s\) de rappel, 0 décision\(s\) de modération, .* supprimé\(s\) en \d+ ms/,
       ),
     );
 
