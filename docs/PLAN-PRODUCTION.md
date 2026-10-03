@@ -43,7 +43,7 @@ Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (
 | W0-02 | URL d'API unique | ✅ | `frontend/src/lib/config.ts`, plus de branche LAN dans le bundle de production. |
 | W0-03 | Dépendances vulnérables | ✅ | `npm audit` à 0 au dernier relevé ; Dependabot actif (`.github/dependabot.yml`). À rejouer avant la mise en ligne. |
 | W0-04 | Secrets et valeurs par défaut de prod | 🟡 | Joi de production (`JWT_SECRET`, `CORS_ORIGIN`, `FRONTEND_URL`), jeton de reset haché, compose durci : fait. **`MAIL_HOST` n'est pas obligatoire en production** : sans SMTP, aucun e-mail ne part (reset, vérification, rappels par e-mail). À rendre obligatoire une fois le prestataire choisi (D-06). |
-| W0-05 | Seed de prod propre | ✅ | Magasins factices retirés, gardes `NODE_ENV=production` sur les scripts de dev. Base déjà seedée avec les anciens magasins : requête de purge dans `docs/DEPLOY-NOTES-seed.md`. |
+| W0-05 | Seed de prod propre | ✅ | Magasins factices retirés, gardes `NODE_ENV=production` sur les scripts de dev. Base déjà seedée avec les anciens magasins : requête de purge dans [RUNBOOK.md § 6.6](RUNBOOK.md#66-seed-du-catalogue--idempotence-et-nettoyage-dune-base-ancienne). |
 | W0-06 | Page QR publique sûre | ✅ | Opt-in (`publicEnabled`, `publicFields`), lien révocable, URL construite côté backend. |
 | W0-07 | DoS des notifications, farming de points | ✅ | DTO bornés, plafond d'événements, crédit atomique. |
 | W0-08 | Amplification, rate limiting, cache | ✅ | Throttler global, limites `/gateway/search`, cache LRU borné. |
@@ -54,7 +54,7 @@ Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (
 | W1-04 | Résilience des API externes | ✅ | Client HTTP unique, retry GBIF, disjoncteur par fournisseur (implémentation interne), replis locaux. |
 | W1-05 | Pagination et tri stable | 🟡 | Backend : `limit` ≤ 100 et tri stable. **Le frontend ne pagine pas** : au-delà de 100 éléments d'une liste, les suivants ne s'affichent pas. |
 | W1-06 | Tests stables et CI bloquante | ✅ | `ci.yml` : tests backend (e2e inclus), `tsc`, build, Docker, ESLint frontend, garde-fou des styles, smoke Playwright, audit ; CodeQL (`codeql.yml`) et Dependabot. **La CI ne démarre plus** (quota Actions) : 👤. Protection de la branche `main` : à activer (non vérifiable depuis le dépôt) : 👤. |
-| W1-07 | Dette lint et code mort | 🟡 | Lint backend (`src/` + `test/`, `npm run lint:check`) à 0 erreur, **bloquant en CI** (`lint-backend`) ; lint frontend bloquant. Reliquats de code mort : `frontend/src/i18n.ts` (déprécié), module `database-optimization`. |
+| W1-07 | Dette lint et code mort | ✅ | Lint backend (`src/` + `test/`, `npm run lint:check`) à 0 erreur, **bloquant en CI** (`lint-backend`) ; lint frontend bloquant. Code mort retiré le 2026-10-03 : `frontend/src/i18n.ts` et `frontend/src/i18n/request.ts` (réexports dépréciés, aucun import), module backend `database-optimization` (statistiques jamais alimentées, chargé seulement avec Redis), dépendance frontend `axios` (aucun import). |
 | W1-08 | Corrections backend diverses | ✅ | Limite d'animaux sans course, abonnement push sûr, anti-énumération. |
 | W1-09 | Durcissement du schéma | 🟡 | CHECK, FK, index trigram (migration `20261003010000_schema_hardening`). La migration vers `prisma.config.ts` n'est pas faite (le bloc `prisma` de `backend/package.json` subsiste). |
 | **Vague 2 — Légal et compte** | | | |
@@ -79,9 +79,9 @@ Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (
 | W4-04 | SEO | 🟡 | Métadonnées traduites, hreflang, canonical, image OpenGraph par langue, JSON-LD, `sitemap.ts`, `robots.ts`. **Le sitemap ne liste pas les fiches espèces** (TODO dans `sitemap.ts`, endpoint d'identifiants à créer). |
 | W4-05 | Accessibilité | 🟡 | Modales Radix (`ui/Modal`, plus de modale écrite à la main), lien d'évitement, contrastes, axe bloquant (« serious ») en CI. Déclaration d'accessibilité non rédigée. |
 | W4-06 | PWA et ergonomie mobile | 🟡 | Manifeste, icônes 192/512/maskable, `viewport`, safe-area, `dvh`. Page hors ligne et cache du shell (Serwist) non faits ; logo et icônes **provisoires** (D-15). |
-| W4-07 | Performance | 🟡 | Page animal découpée (4 699 → 719 lignes, sections chargées à la demande), compression des photos. Budget JS ≤ 170 Ko et Lighthouse mobile ≥ 90 **non mesurés**. |
+| W4-07 | Performance | 🟡 | Page animal découpée (4 699 → 719 lignes, sections chargées à la demande), compression des photos ; `public/` nettoyé (`themes/`, `badges/` et images du gabarit Next, sans référence, retirés le 2026-10-03). Budget JS ≤ 170 Ko et Lighthouse mobile ≥ 90 **non mesurés**. |
 | W4-08 | CSP stricte | ✅ | Sans `unsafe-eval`, `object-src 'none'`, `frame-ancestors 'none'`, HSTS ; hachages SHA-256 par page en export mobile ; `vercel.json` supprimé. Écart assumé et documenté : pas de nonce, `'unsafe-inline'` reste dans `script-src` du web (`docs/DEPLOY.md` §10). |
-| W4-09 | E2E Playwright fiables | 🟡 | Smoke déterministe (API mockée, axe), projets bureau et mobile, bloquant en CI. Suites héritées `e2e/integration/` (20 `waitForTimeout`) et scripts `frontend/e2e-*.js` toujours présents. |
+| W4-09 | E2E Playwright fiables | 🟡 | Smoke déterministe (API mockée, axe), projets bureau et mobile, bloquant en CI. Scripts `frontend/e2e-*.js` supprimés (2026-10-03). Reste : suites héritées `e2e/integration/` (20 `waitForTimeout`, projets `chromium` / `Mobile Chrome` de `playwright.config.ts`, hors CI, backend réel) et `e2e/manual-modals-flow.spec.ts` (`npm run test:modals`) : à réécrire sur le modèle du smoke ou à supprimer. |
 | **Vague 5 — Contenu** | | | |
 | W5-01 | Seed complet et vérifiable | ✅ | Races dans le seed, `seed:breeds`, test de comptages, `semi-solitaire` corrigé. |
 | W5-02 | Curation des fiches | 🟡 | Enrichissement sourcé, contre-vérifié (`VERIFY.md`) et contrôlé mécaniquement (`backend/prisma/enrichment/check_quotes.py` : citations retrouvées dans les pages sources). Dernier relevé (commit `93e5bc9`) : **1 401 fiches complètes sur 1 510**, soit ≈ 109 incomplètes. Sections législation marquées `needsReview` : relecture humaine (vétérinaire / juriste) à faire : 👤. |
@@ -114,10 +114,10 @@ Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (
 | DEP-09 | Test de charge | ⏳ | Dépend du staging. |
 | DEP-10 | Scalabilité | ⏳ | P2, après le lancement. |
 | **Vague H — Hygiène** | | | |
-| WH-01 | README racine | 🟡 | Liens morts retirés. Il annonce encore « 10 000+ espèces » (catalogue réel ≈ 1 600 profils). |
-| WH-02 | Archivage des audits | ✅ | `docs/archive/`, `docs/plan-api.md`. |
+| WH-01 | README et guide des agents | ✅ | `README.md` réécrit (produit, démarrage local, liens, statut) ; `AGENTS.md` (guide canonique : règles, carte, commandes de vérification) et `CLAUDE.md` (renvoi) ajoutés le 2026-10-03 ; `backend/README.md` et `frontend/README.md` remis à jour. |
+| WH-02 | Archivage des audits | ✅ | `docs/archive/` : audits du 2026-08-09, `plan-api.md` et `DEPLOY-NOTES-seed.md` (archivés le 2026-10-03, contenu utile repris dans `docs/RUNBOOK.md` § 6.6). |
 | WH-03 | README frontend | ✅ | `frontend/README.md` réécrit. |
-| WH-04 | Fichiers inutiles, ports | 🟡 | `start.bat` et `.cursorindexingignore` supprimés, ports alignés. `scripts/vercel-open.js` (script `vercel:open`) et `frontend/e2e-*.js` subsistent. |
+| WH-04 | Fichiers inutiles, ports | ✅ | `start.bat` et `.cursorindexingignore` supprimés, ports alignés. Le 2026-10-03 : `scripts/vercel-open.js` (et le script `vercel:open`), `scripts/start.js`, `start-db.sh`, `stop-db.sh`, `verify-implementation.js`, `api-functional-test.py`, `i18n_propagate.py`, `frontend/scripts/i18n_module_{a,c}.py` et `frontend/e2e-*.js` supprimés (aucune référence, obsolètes). |
 | WH-05 | `.nvmrc` et `engines` | ✅ | Node 22 ; `engines` dans les trois `package.json`. |
 | WH-06 | Fichier `LICENSE` | ⏳ | Absent (D-13) ; `backend/package.json` déclare `UNLICENSED`. À trancher avant tout passage du dépôt en public. |
 | WH-07 | Issues du backlog | ⏳ | Aucune issue ouverte dans le dépôt GitHub. |
@@ -172,7 +172,7 @@ Dans l'ordre. Les blocs A à C conditionnent la mise en ligne du web ; D conditi
 - **2026-10-02, sprint initial** (20 agents + 1 revue Opus) : vagues 0 à 2 et socle des vagues 3 à 5 ; 11 constats de revue corrigés (migration CI après tous les checks, anti-antidatage des points, jeton après changement de mot de passe, scrub Sentry, export RGPD complet…). Seed de production vérifié sur base vierge.
 - **Soirée du 2026-10-02, vague « niveau complet »** : refresh tokens, vérification d'e-mail, Web Push, modales Radix, découpe de la page animal, E2E fiables, socle Capacitor, agenda ICS, sauvegardes chiffrées, release-please. Enrichissement des fiches : ~70 agents rédacteurs, contre-vérification obligatoire par des agents Sonnet (nombreuses hallucinations corrigées ou retirées : statuts légaux inventés, espèces protégées présentées « sans restriction », maladies inexistantes, sources génériques) ; seuls les lots ayant un rapport `verify/<LOT>.json` sont importés, sources https obligatoires, législation marquée `needsReview`.
 - **Nuit du 2-3 octobre, vague « produit et design »** : revues Opus backend (12 constats) et frontend (15 constats) corrigées, produit (D-16), mode invité, refonte design, résilience des API externes, durcissement du schéma, purge RGPD, CSP stricte, rappels locaux et deep links, lots d'enrichissement H001-H011 (citations contrôlées mécaniquement).
-- **2026-10-03** : lint backend résorbé (1 908 → 0 erreur, bloquant, `test/` inclus), préparation des stores, achats intégrés RevenueCat (Stripe abandonné), communauté (backend, interface, modération DSA, correctifs de sécurité), pt-PT, suppression de `SiteChrome`, push natif FCM / APNs (W6-07).
+- **2026-10-03** : lint backend résorbé (1 908 → 0 erreur, bloquant, `test/` inclus), préparation des stores, achats intégrés RevenueCat (Stripe abandonné), communauté (backend, interface, modération DSA, correctifs de sécurité), pt-PT, suppression de `SiteChrome`, push natif FCM / APNs (W6-07) ; guide `AGENTS.md`, README réécrit, documents périmés archivés et code mort retiré (W1-07, WH-01, WH-04).
 
 ### 0.5 Points d'attention et changements de contrat
 
