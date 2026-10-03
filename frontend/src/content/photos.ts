@@ -1,11 +1,11 @@
 /**
- * Photothèque de la landing : photos Wikimedia Commons sous licence libre vérifiée (API Commons,
+ * Photothèque du catalogue et de la landing : photos Wikimedia Commons sous licence libre vérifiée (API Commons,
  * champ `LicenseShortName`), recadrées et exportées en AVIF + WebP sans métadonnées
  * (`public/images/<dossier>/<slug>-<largeur>.<format>`, plus grande variante ≤ 150 Ko).
  *
  * Chaque entrée est aussi inscrite dans `public/images/CREDITS.md` et listée dans la page
- * « Sources et licences » (section « Photographies »). Les textes alternatifs sont traduits
- * (`landing.photos.<clé>`), le crédit (auteur + licence + lien) est affiché par `Figure`.
+ * « Sources et licences » (section « Photographies »). Les composants fournissent un texte
+ * alternatif traduit ; le crédit (auteur + licence + lien) est affiché avec chaque photo.
  */
 import type { PhotoCredit } from '@/components/ui/Figure';
 
@@ -22,6 +22,46 @@ export type PhotoKey =
   | 'neonTetra'
   | 'horse'
   | 'hen'
+  | 'guineaPig'
+  | 'syrianHamster'
+  | 'ferret'
+  | 'chinchilla'
+  | 'domesticMouse'
+  | 'domesticRat'
+  | 'canary'
+  | 'africanGrey'
+  | 'boaConstrictor'
+  | 'ballPython'
+  | 'greenIguana'
+  | 'redEaredSlider'
+  | 'veiledChameleon'
+  | 'axolotl'
+  | 'goldfish'
+  | 'betta'
+  | 'guppy'
+  | 'stickInsect'
+  | 'hissingCockroach'
+  | 'emperorScorpion'
+  | 'bullfrog'
+  | 'russianHamster'
+  | 'campbellHamster'
+  | 'roborovskiHamster'
+  | 'crestedGecko'
+  | 'pantherChameleon'
+  | 'hermannTortoise'
+  | 'ringNeckedParakeet'
+  | 'fischerLovebird'
+  | 'blueYellowMacaw'
+  | 'angelfish'
+  | 'zebrafish'
+  | 'ramirezi'
+  | 'redEyedTreeFrog'
+  | 'dyeingPoisonFrog'
+  | 'cherryShrimp'
+  | 'amanoShrimp'
+  | 'sheep'
+  | 'donkey'
+  | 'africanHedgehog'
   | 'mossForest'
   | 'grassDroplets'
   | 'lemonBalm';
@@ -57,6 +97,11 @@ const LICENSES = {
   'CC BY-SA 3.0': 'https://creativecommons.org/licenses/by-sa/3.0/',
   'CC BY 4.0': 'https://creativecommons.org/licenses/by/4.0/',
   'CC BY 3.0': 'https://creativecommons.org/licenses/by/3.0/',
+  'CC BY 2.0': 'https://creativecommons.org/licenses/by/2.0/',
+  'CC BY 2.5': 'https://creativecommons.org/licenses/by/2.5/',
+  'CC BY-SA 2.0': 'https://creativecommons.org/licenses/by-sa/2.0/',
+  'CC BY-SA 2.5': 'https://creativecommons.org/licenses/by-sa/2.5/',
+  'CC0': 'https://creativecommons.org/publicdomain/zero/1.0/',
   'Domaine public': undefined,
 } as const;
 
@@ -132,6 +177,206 @@ export const PHOTOS: Record<PhotoKey, Photo> = {
   hen: photo({
     base: '/images/animals/hen', widths: [480, 800, 1200], ratio: 3 / 2,
     file: 'Hen chicken.jpg', author: 'Thegreenj', license: 'CC BY-SA 3.0',
+  }),
+  guineaPig: photo({
+    base: '/images/animals/guinea-pig', widths: [480, 800], ratio: 4 / 3,
+    file: 'Yoyocochondinde.JPG',
+    author: 'Variraptor', license: 'CC BY-SA 3.0',
+  }),
+  syrianHamster: photo({
+    base: '/images/animals/syrian-hamster', widths: [480, 800], ratio: 4 / 3,
+    file: 'Golden hamster front 1.jpg',
+    author: 'Adamjennison111 at English Wikipedia', license: 'CC BY 2.5',
+  }),
+  ferret: photo({
+    base: '/images/animals/ferret', widths: [480, 800], ratio: 4 / 3,
+    file: 'Ferret 2008.png',
+    author: 'Alfredo Gutiérrez', license: 'CC BY-SA 4.0',
+  }),
+  chinchilla: photo({
+    base: '/images/animals/chinchilla', widths: [480, 800], ratio: 4 / 3,
+    file: 'Chinchilla lanigera1.jpg',
+    author: 'Trurl66', license: 'Domaine public',
+  }),
+  domesticMouse: photo({
+    base: '/images/animals/domestic-mouse', widths: [480, 800], ratio: 4 / 3,
+    file: 'Farbmaeuse.jpg',
+    author: 'Whitesky', license: 'CC BY-SA 3.0',
+  }),
+  domesticRat: photo({
+    base: '/images/animals/domestic-rat', widths: [480, 800], ratio: 4 / 3,
+    file: 'Rats-domestique.jpg',
+    author: 'Alexalouest', license: 'CC0',
+  }),
+  canary: photo({
+    base: '/images/animals/canary', widths: [480, 800], ratio: 4 / 3,
+    file: 'GelbA.JPG',
+    author: 'NEWSchr', license: 'CC BY-SA 4.0',
+  }),
+  africanGrey: photo({
+    base: '/images/animals/african-grey', widths: [480, 800], ratio: 4 / 3,
+    file: 'Psittacus_erithacus_qtl1.jpg',
+    author: 'Quartl', license: 'CC BY-SA 3.0',
+  }),
+  boaConstrictor: photo({
+    base: '/images/animals/boa-constrictor', widths: [480, 800], ratio: 4 / 3,
+    file: 'Boa_constrictor_Gallion_Guyane.jpg',
+    author: 'Arnaud Aury', license: 'CC BY 4.0',
+  }),
+  ballPython: photo({
+    base: '/images/animals/ball-python', widths: [480, 800], ratio: 4 / 3,
+    file: 'Ball_python_lucy.JPG',
+    author: 'Mokele at English Wikipedia', license: 'CC BY-SA 3.0',
+  }),
+  greenIguana: photo({
+    base: '/images/animals/green-iguana', widths: [480, 800], ratio: 4 / 3,
+    file: 'Iguanidae_head_from_Venezuela.jpg',
+    author: 'Wilfredor', license: 'CC0',
+  }),
+  redEaredSlider: photo({
+    base: '/images/animals/red-eared-slider', widths: [480, 800], ratio: 4 / 3,
+    file: 'Roodwangsierschildpad.jpg',
+    author: 'Fruggo', license: 'CC BY-SA 3.0',
+  }),
+  veiledChameleon: photo({
+    base: '/images/animals/veiled-chameleon', widths: [480, 800], ratio: 4 / 3,
+    file: '2017-05-13_AT_Wien_22_Donaustadt,_Palmenhaus_Hirschstetten,_Chamaeleo_calyptratus_(51099601593).jpg',
+    author: 'Paul Korecky', license: 'CC BY-SA 2.0',
+  }),
+  axolotl: photo({
+    base: '/images/animals/axolotl', widths: [480, 800], ratio: 4 / 3,
+    file: 'Ambystoma_mexicanum_-_Aksolotli,_Mexican_axolotl_C_IMG_3700.JPG',
+    author: 'Anneli Salo', license: 'CC BY-SA 3.0',
+  }),
+  goldfish: photo({
+    base: '/images/animals/goldfish', widths: [480, 800], ratio: 4 / 3,
+    file: 'Gold fish1.jpg',
+    author: 'לינה אבוגוש', license: 'CC BY-SA 3.0',
+  }),
+  betta: photo({
+    base: '/images/animals/betta', widths: [320, 425], ratio: 4 / 3,
+    file: 'Betta splendens - Flickr - Nippyfish.jpg',
+    author: 'Nippyfish', license: 'CC BY 2.0',
+  }),
+  guppy: photo({
+    base: '/images/animals/guppy', widths: [320, 378], ratio: 4 / 3,
+    file: 'Guppy_coppia_gialla.jpg',
+    author: 'Marrabbio2', license: 'CC BY-SA 3.0',
+  }),
+  stickInsect: photo({
+    base: '/images/animals/stick-insect', widths: [320, 734], ratio: 4 / 3,
+    file: 'Carausius morosus-adult1.JPG',
+    author: 'Dinosaur918', license: 'CC BY-SA 3.0',
+  }),
+  hissingCockroach: photo({
+    base: '/images/animals/hissing-cockroach', widths: [480, 800], ratio: 4 / 3,
+    file: 'Female_Madagascar_hissing_cockroach.JPG',
+    author: 'Almabes at English Wikipedia', license: 'Domaine public',
+  }),
+  emperorScorpion: photo({
+    base: '/images/animals/emperor-scorpion', widths: [480, 800], ratio: 4 / 3,
+    file: 'Pandinus-imperator-6609.jpg',
+    author: 'Danny Steaven', license: 'CC BY-SA 3.0',
+  }),
+  bullfrog: photo({
+    base: '/images/animals/bullfrog', widths: [480, 800], ratio: 4 / 3,
+    file: 'North-American-bullfrog1.jpg',
+    author: 'Carl D. Howe', license: 'CC BY-SA 2.5',
+  }),
+  russianHamster: photo({
+    base: '/images/animals/russian-hamster', widths: [480, 800], ratio: 4 / 3,
+    file: 'Phodopus_sungorus2.jpg',
+    author: 'Dirk Goldhahn', license: 'CC BY-SA 2.5',
+  }),
+  campbellHamster: photo({
+    base: '/images/animals/campbell-hamster', widths: [320, 360], ratio: 4 / 3,
+    file: 'Campbell_hamster_blue_fawn.jpg',
+    author: 'Allen Huang', license: 'Domaine public',
+  }),
+  roborovskiHamster: photo({
+    base: '/images/animals/roborovski-hamster', widths: [320, 559], ratio: 4 / 3,
+    file: 'Photo_of_Roborovski_Hamster.jpg',
+    author: 'Roborovskihamsters at en.wikipedia', license: 'Domaine public',
+  }),
+  crestedGecko: photo({
+    base: '/images/animals/crested-gecko', widths: [480, 800], ratio: 4 / 3,
+    file: 'Eveha\'s_crested_gecko.jpg',
+    author: 'Eveha', license: 'CC BY-SA 3.0',
+  }),
+  pantherChameleon: photo({
+    base: '/images/animals/panther-chameleon', widths: [480, 800], ratio: 4 / 3,
+    file: 'Panther chameleon (Furcifer pardalis) male Montagne d’Ambre 2.jpg',
+    author: 'Charles J. Sharp', license: 'CC BY-SA 4.0',
+  }),
+  hermannTortoise: photo({
+    base: '/images/animals/hermann-tortoise', widths: [480, 800], ratio: 4 / 3,
+    file: 'Testudo_hermanni_hermanni_Mallorca_02.jpg',
+    author: 'Orchi', license: 'CC BY-SA 3.0',
+  }),
+  ringNeckedParakeet: photo({
+    base: '/images/animals/ring-necked-parakeet', widths: [320, 645], ratio: 4 / 3,
+    file: 'Rose-ringed_Parakeets_(Male_&_Female)-_During_Foreplay_at_Hodal_I_Picture_0034.jpg',
+    author: 'J.M.Garg', license: 'CC BY-SA 3.0',
+  }),
+  fischerLovebird: photo({
+    base: '/images/animals/fischer-lovebird', widths: [480, 800], ratio: 4 / 3,
+    file: 'Inséparables.JPG',
+    author: 'Ghislain38', license: 'CC BY-SA 3.0',
+  }),
+  blueYellowMacaw: photo({
+    base: '/images/animals/blue-yellow-macaw', widths: [480, 800], ratio: 4 / 3,
+    file: 'Ara ararauna qtl3.jpg',
+    author: 'Quartl', license: 'CC BY-SA 3.0',
+  }),
+  angelfish: photo({
+    base: '/images/animals/angelfish', widths: [480, 800], ratio: 4 / 3,
+    file: 'Angelfish 2.jpg',
+    author: 'Gannu03', license: 'CC BY-SA 4.0',
+  }),
+  zebrafish: photo({
+    base: '/images/animals/zebrafish', widths: [480, 800], ratio: 4 / 3,
+    file: 'Zebradanio-P1219668.jpg',
+    author: 'Ffish.asia', license: 'CC BY 4.0',
+  }),
+  ramirezi: photo({
+    base: '/images/animals/ramirezi', widths: [320, 444], ratio: 4 / 3,
+    file: 'Mikrogeophagus_ramirezi_2.jpg',
+    author: 'Grommash', license: 'CC BY-SA 3.0',
+  }),
+  redEyedTreeFrog: photo({
+    base: '/images/animals/red-eyed-tree-frog', widths: [480, 800], ratio: 4 / 3,
+    file: 'Agalychnis_callidryas.jpg',
+    author: 'Christian R. Linder', license: 'CC BY-SA 3.0',
+  }),
+  dyeingPoisonFrog: photo({
+    base: '/images/animals/dyeing-poison-frog', widths: [480, 800], ratio: 4 / 3,
+    file: 'Dendrobates tinctorius - Wilhelma.jpg',
+    author: 'H. Zell', license: 'CC BY-SA 3.0',
+  }),
+  cherryShrimp: photo({
+    base: '/images/animals/cherry-shrimp', widths: [480, 800], ratio: 4 / 3,
+    file: 'RedCherryShrimp.jpg',
+    author: 'Atulbhats', license: 'CC BY-SA 4.0',
+  }),
+  amanoShrimp: photo({
+    base: '/images/animals/amano-shrimp', widths: [480, 800], ratio: 4 / 3,
+    file: 'Caridina_multidentata(Hamamatsu,Shizuoka,Japan,2007).jpg',
+    author: 'Seotaro', license: 'CC BY-SA 3.0',
+  }),
+  sheep: photo({
+    base: '/images/animals/sheep', widths: [480, 800], ratio: 4 / 3,
+    file: 'Flock_of_sheep.jpg',
+    author: 'Keith Weller', license: 'Domaine public',
+  }),
+  donkey: photo({
+    base: '/images/animals/donkey', widths: [320, 714], ratio: 4 / 3,
+    file: 'Donkey_in_Clovelly,_North_Devon,_England.jpg',
+    author: 'Adrian Pingstone', license: 'Domaine public',
+  }),
+  africanHedgehog: photo({
+    base: '/images/animals/african-hedgehog', widths: [480, 800], ratio: 4 / 3,
+    file: 'Atelerix albiventris in Spain.jpg',
+    author: 'Nacaru', license: 'CC BY-SA 4.0',
   }),
   mossForest: photo({
     base: '/images/nature/moss-forest', widths: [640, 960, 1280], ratio: 16 / 9,
