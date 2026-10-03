@@ -59,7 +59,7 @@ test.describe('Paramètres du compte (RGPD)', () => {
 
     // Compte supprimé : déconnexion et retour à l'accueil.
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Connaître le vivant.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Vous les aimez.');
     expect(await page.evaluate(() => localStorage.getItem('token'))).toBeNull();
 
     const deletes = api.callsTo('DELETE', '/users/me');

@@ -43,6 +43,8 @@ const EXCLUDED = [
   'src/app/manifest.ts',
   'src/app/robots.ts',
   'src/app/sitemap.ts',
+  // Image Open Graph de la landing (next/og, lecture de fichier au build) : sans objet dans l'app.
+  'src/app/[locale]/(marketing)/opengraph-image.tsx',
 ];
 
 /** Routes dynamiques web → routes à query de l'app (miroir de src/lib/platform.ts). */

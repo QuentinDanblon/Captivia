@@ -5,6 +5,9 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 
 /** Groupe de routes de l'application : il porte sa propre coquille (`AppShell`, cf. `(app)/layout.tsx`). */
 export const APP_ROUTE_GROUP = '(app)';
+/** Groupe de la vitrine : en-tête, `<main>` et pied fournis par `(marketing)/layout.tsx`. */
+export const MARKETING_ROUTE_GROUP = '(marketing)';
+const SELF_FRAMED_GROUPS = new Set([APP_ROUTE_GROUP, MARKETING_ROUTE_GROUP]);
 
 export interface SiteChromeProps {
   /** En-tête marketing et bandeaux (rendus côté serveur par le layout racine). */
@@ -23,13 +26,16 @@ export interface SiteChromeProps {
  * Le test porte sur le segment du groupe, pas sur une liste d'URL : déplacer une page dans `(app)`
  * suffit à lui donner la coquille de l'app.
  *
- * Transitoire (DESIGN.md § 8.1, point 3) : quand le groupe `(marketing)` porte son propre
- * habillage, ce composant disparaît et le layout racine ne garde que `<html>`, les polices, les
+ * Les pages du groupe `(marketing)` (landing, pages légales) reçoivent de même leur cadre de
+ * `(marketing)/layout.tsx`.
+ *
+ * Transitoire (DESIGN.md § 8.1, point 3) : quand les dernières pages hors groupe (connexion,
+ * inscription…) auront rejoint un groupe, ce composant disparaît et le layout racine ne garde que `<html>`, les polices, les
  * fournisseurs et `ErrorBoundary`.
  */
 export function SiteChrome({ header, footer, children }: SiteChromeProps) {
   const segment = useSelectedLayoutSegment();
-  if (segment === APP_ROUTE_GROUP) return <>{children}</>;
+  if (segment && SELF_FRAMED_GROUPS.has(segment)) return <>{children}</>;
 
   return (
     <>

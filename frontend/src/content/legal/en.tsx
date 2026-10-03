@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { HOSTS, LEGAL, LEGAL_ROUTES } from '@/lib/legal';
 import { A, Field, ILink, P, Table, UL, type LegalContent } from './ui';
+import { PhotoCreditsTable } from './photos';
 
 const EU_REGION = 'Frankfurt (Germany, European Union)';
 
@@ -685,11 +686,26 @@ export function buildEnContent(locale: string): LegalContent {
           ),
         },
         {
+          id: 'photographs',
+          title: 'Photographs',
+          body: (
+            <>
+              <P>
+                The animal and nature photographs on this site come from{' '}
+                <A href="https://commons.wikimedia.org">Wikimedia Commons</A>. Each licence was checked on the file&apos;s
+                own page; none is AI-generated. Every photo is credited where it appears; adaptations of CC BY-SA photos
+                are shared under the same licence.
+              </P>
+              <PhotoCreditsTable lang="en" />
+            </>
+          ),
+        },
+        {
           id: 'software',
           title: 'Fonts and icons',
           body: (
             <UL>
-              <li>Inter and JetBrains Mono fonts: SIL Open Font License 1.1.</li>
+              <li>Fraunces, IBM Plex Sans and IBM Plex Mono fonts: SIL Open Font License 1.1.</li>
               <li>Lucide icons: ISC licence.</li>
             </UL>
           ),

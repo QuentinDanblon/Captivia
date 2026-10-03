@@ -50,7 +50,7 @@ const ALLOWED_EVERYWHERE = new Set([
   // Noms de stores (W6-08)
   'App Store',
   'Google Play',
-  // Nom de l'offre (mention PremiumBadge du mode invité)
+  // Nom de l'offre payante (mention PremiumBadge du mode invité, tableau des formules de la landing)
   'Premium',
 ]);
 

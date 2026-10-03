@@ -468,7 +468,7 @@
     "navLabel": "Legal information",
     "privacy": "Privacy",
     "sources": "Sources and licences",
-    "tagline": "Caring, made simple.",
+    "tagline": "You love them, we remember the rest.",
     "terms": "Terms of use",
     "transparency": "Transparency & affiliation",
     "description": "Your animals' health record, care reminders and sourced species profiles, in one place."
@@ -512,33 +512,11 @@
   },
   "home": {
     "closeMenu": "Close menu",
-    "featured": "Featured",
     "mainNavigation": "Main navigation",
     "mobileNavigation": "Mobile navigation",
     "openMenu": "Open menu",
-    "popular": "Most viewed",
-    "recent": "Recent",
-    "searchPlaceholder": "Search for a species...",
     "skipToContent": "Skip to content",
-    "subtitle": "Discover and care for your animals",
-    "title": "The Wildlife Guide",
-    "searchUnavailable": "The search server is unavailable. Start the backend or try again later.",
-    "eyebrow": "WILDLIFE GUIDE",
-    "heroLine": "Know the living world.",
-    "pillarsLabel": "The pillars of Captivia",
-    "pillarExplore": "Explore",
-    "pillarUnderstand": "Understand",
-    "pillarCare": "Care",
-    "explorerKicker": "EXPLORE",
-    "explorerTitle": "A species in mind?",
-    "speciesProfiles": "Species profiles",
-    "instantSearch": "Instant search",
     "noResults": "No results",
-    "discoverKicker": "DISCOVER",
-    "resultsKicker": "RESULTS",
-    "resultsTitle": "Species found",
-    "profileCount": "{count, plural, one {# profile} other {# profiles}}",
-    "profileBadge": "Profile",
     "taxonomy": {
       "Reptilia": "Reptile",
       "Aves": "Bird",
@@ -556,6 +534,266 @@
       "Fungi": "Fungus",
       "Bacteria": "Bacterium",
       "Archaea": "Archaeon"
+    }
+  },
+  "landing": {
+    "meta": {
+      "title": "Captivia — your pets' health record and reminders",
+      "description": "Vaccines, treatments, weigh-ins, vet appointments: log them once and Captivia reminds you right on time. Free for one pet, no account needed to start.",
+      "ogAlt": "A golden retriever in profile, with the headline: You love them. Captivia remembers the rest.",
+      "ogCredit": "Photo: Dietmar Rabich, CC BY-SA 4.0"
+    },
+    "hero": {
+      "titleLead": "You love them.",
+      "titleRest": "Captivia remembers the rest.",
+      "lead": "Vaccines, dewormers, weigh-ins, vet visits: log them once and Captivia reminds you when they're due. For a cat, a dog, a rabbit… or a leopard gecko.",
+      "ctaPrimary": "Start for free",
+      "ctaSecondary": "I already have an account",
+      "reassurance": "No account, no credit card. Free for one pet.",
+      "species": "Dogs · cats · rabbits · birds · reptiles · fish",
+      "photoAlt": "Tan dog up to its neck in water, looking at the camera in the evening light",
+      "previewCaption": "Captivia's “Today” screen, with sample pets."
+    },
+    "sample": {
+      "today": "Today",
+      "dueToday": "{count, plural, one {task today} other {tasks today}}",
+      "overdue": "{count, plural, one {overdue} other {overdue}}",
+      "alertAction": "Book an appointment",
+      "markDone": "Mark as done",
+      "timelineLabel": "Today's care",
+      "weekLabel": "Coming up",
+      "allDay": "All day",
+      "status": {
+        "done": "Done",
+        "due": "To do",
+        "overdue": "Overdue",
+        "planned": "Planned",
+        "skipped": "Skipped"
+      },
+      "kind": {
+        "medication": "Medication",
+        "feeding": "Feeding",
+        "cleaning": "Upkeep",
+        "weighing": "Weigh-in",
+        "vet": "Vet"
+      },
+      "care": {
+        "dewormTitle": "Dewormer",
+        "dewormDetail": "Moka · 1 tablet",
+        "feedTitle": "Feeding",
+        "feedDetail": "Pixel · 5 calcium-dusted crickets",
+        "terrariumTitle": "Terrarium clean-out",
+        "terrariumDetail": "Pixel · due yesterday",
+        "weighTitle": "Weigh-in",
+        "weighDetail": "Fleur · before her meal",
+        "hayTitle": "Fresh hay and greens",
+        "hayDetail": "Fleur · 1 bundle, 3 endive leaves",
+        "vetTitle": "Vet visit",
+        "vetDetail": "Moka · Dr Lambert · check-up and vaccine",
+        "moltTitle": "Shed check",
+        "moltDetail": "Pixel · moisten the humid hide"
+      },
+      "lastWeighing": "Last weigh-in",
+      "lastWeighingValue": "4.5 kg · 12 days ago",
+      "nextVaccine": "Next vaccine",
+      "nextVaccineValue": "in 6 days",
+      "vaccinesTitle": "Vaccines",
+      "vaccineFeline": "Panleukopenia and cat flu",
+      "vaccineRabies": "Rabies",
+      "vaccineDueSoon": "Booster in 6 days",
+      "vaccineUpToDate": "Up to date",
+      "weightTitle": "Weight",
+      "weightChart": "Moka's weight curve: from 4.1 kg to 4.5 kg over a year",
+      "appointmentTitle": "Fleur's yearly check-up is due",
+      "appointmentBody": "Last visit 11 months ago.",
+      "geckoName": "Leopard gecko",
+      "geckoFacts": {
+        "hotSpot": "Basking spot",
+        "activity": "Active at",
+        "activityValue": "dusk and dawn",
+        "diet": "Diet",
+        "dietValue": "live insects",
+        "lifespan": "Lifespan in captivity",
+        "lifespanValue": "15–20 years"
+      },
+      "geckoStatus": "IUCN status",
+      "geckoLc": "Least Concern",
+      "geckoTipLabel": "Good to know",
+      "geckoTip": "A thinning tail is often the first sign of weight loss: worth mentioning to your vet.",
+      "geckoSources": "Sources: Wikipedia (CC BY-SA 4.0) · GBIF · IUCN Red List",
+      "postCockatielsTime": "2 h ago",
+      "postCockatielsTitle": "Our three cockatiels finally moved into the new aviary",
+      "postQuestionTime": "5 h ago",
+      "postQuestionTitle": "My bearded dragon eats less now the days are getting shorter. Anyone else?",
+      "reactions": "{count, plural, one {# reaction} other {# reactions}}",
+      "replies": "{count, plural, one {# reply} other {# replies}}",
+      "postQuestionBody": "Basking spot is at 34 °C, he drinks normally, but he's been ignoring crickets for a week."
+    },
+    "tour": {
+      "title": "Every treatment logged. Every date kept.",
+      "intro": "Moka, Pixel and Fleur are sample pets. Their screens, though, are the real app.",
+      "previewNote": "App preview, sample data",
+      "soon": "Coming soon",
+      "record": {
+        "label": "Health record",
+        "title": "Everything your vet will ask for, already written down.",
+        "body": "Vaccines, treatments, weigh-ins and visit notes, dated and in order. The weight curve updates with every weigh-in, and the record prints or shares before the appointment."
+      },
+      "reminders": {
+        "label": "Reminders and calendar",
+        "title": "The right reminder, right on time.",
+        "body": "Dewormer every three months, feeding every other day, vaccines once a year: Captivia keeps the schedule and reminds you by notification or email. Your appointments show up in your phone's calendar too."
+      },
+      "species": {
+        "label": "Species guides",
+        "title": "Sourced answers, not hearsay.",
+        "body": "Temperature, diet, behaviour, health, regulations: every guide says what your pet needs, and where the information comes from."
+      },
+      "community": {
+        "label": "Community",
+        "title": "Coming soon: fellow pet people.",
+        "body": "Share photos of your pets, ask your questions, answer other people's. Your pet's health record stays private."
+      }
+    },
+    "gallery": {
+      "title": "From the sofa cat to the terrarium gecko.",
+      "body": "Dogs, cats, rabbits, birds, reptiles, fish, horses or hens: every species has its guide, every pet has its record."
+    },
+    "photos": {
+      "dogGoldenRetriever": "Golden retriever in profile, looking up, in the woods",
+      "catTabby": "Young tabby cat sitting, facing the camera",
+      "rabbitStraw": "Black and white rabbit drinking from a wooden bowl on straw",
+      "budgerigars": "Two green and yellow budgerigars facing each other",
+      "beardedDragon": "Head of a bearded dragon, scales in relief, resting on a branch",
+      "neonTetra": "Blue and red neon tetra swimming among aquarium plants",
+      "horse": "Head of a light grey horse in a halter, with a long mane",
+      "hen": "Russet hen with a red comb, in profile",
+      "catStraw": "Ginger and white cat lying on straw in the sun",
+      "leopardGecko": "Spotted leopard gecko on sand",
+      "cockatiels": "Three cockatiels lined up on a branch"
+    },
+    "galleryNames": {
+      "dogGoldenRetriever": "Dog",
+      "catTabby": "Cat",
+      "rabbitStraw": "Rabbit",
+      "budgerigars": "Budgerigars",
+      "beardedDragon": "Bearded dragon",
+      "neonTetra": "Neon tetra",
+      "horse": "Horse",
+      "hen": "Hen"
+    },
+    "steps": {
+      "title": "Three steps and you're set.",
+      "one": {
+        "title": "Introduce your pet",
+        "body": "Species, name, date of birth. A photo if you like."
+      },
+      "two": {
+        "title": "Log what matters",
+        "body": "The last vaccine, the current treatment, today's weight. The rest will follow week by week."
+      },
+      "three": {
+        "title": "Let us remind you",
+        "body": "A notification or an email before every due date, and appointments in your calendar."
+      },
+      "cta": "Add my first pet"
+    },
+    "offer": {
+      "title": "Free for one pet. Premium when the family grows.",
+      "intro": "Start without an account. Create one to back up your data, and switch to Premium the day a second pet arrives.",
+      "caption": "What each plan includes",
+      "feature": "What you get",
+      "guest": "No account",
+      "guestPrice": "Free",
+      "guestHint": "On this device",
+      "free": "Free account",
+      "freePrice": "Free",
+      "freeHint": "Backed up and synced",
+      "premium": "Premium",
+      "premiumPrice": "Monthly or yearly subscription",
+      "premiumHint": "Price shown in the app before any purchase",
+      "rows": {
+        "animals": "Pets",
+        "record": "Full health record: vaccines, treatments, weigh-ins",
+        "reminders": "Reminders and care calendar",
+        "species": "Sourced species guides",
+        "sync": "Backup and access from several devices",
+        "qr": "Pet QR code (read-only record)"
+      },
+      "several": "Several",
+      "included": "Included",
+      "notIncluded": "Not included",
+      "keepData": "Starting without an account? The day you create one, your pet and its whole record come with you.",
+      "cta": "Start for free"
+    },
+    "trust": {
+      "title": "Your pet's record is nobody's business but yours.",
+      "private": {
+        "title": "Private by default",
+        "body": "Nobody but you sees the record. Nothing is published without your consent, even once the community opens."
+      },
+      "europe": {
+        "title": "Hosted in Europe",
+        "body": "Captivia's server and database are in Frankfurt, Germany."
+      },
+      "sources": {
+        "title": "Sources, not rumours",
+        "body": "Wikipedia, GBIF, the IUCN Red List, CITES: every guide cites its own."
+      },
+      "noAds": {
+        "title": "No advertising cookies",
+        "body": "Your data is never sold or rented. You can delete your account and everything in it at any time."
+      },
+      "privacyLink": "Read the privacy policy"
+    },
+    "search": {
+      "title": "Got a species in mind?",
+      "body": "Open a guide before you even start your record: boa, leopard gecko, cockatiel, lop rabbit…",
+      "label": "Search for a species",
+      "placeholder": "e.g. leopard gecko",
+      "submit": "Search",
+      "browse": "Browse by group",
+      "suggestions": "Suggested species",
+      "results": "{count, plural, one {# guide found} other {# guides found}}",
+      "resultsTitle": "Results",
+      "unavailable": "Search is unavailable right now. Please try again in a moment."
+    },
+    "faq": {
+      "title": "Questions people ask us",
+      "free": {
+        "q": "Is it really free?",
+        "a": "Yes, for one pet: health record, reminders, calendar and species guides included. Premium is for when you look after several pets; you subscribe in the mobile app, and the price is shown there before any purchase."
+      },
+      "account": {
+        "q": "Do I need an account?",
+        "a": "No. You can start right away, without an account. A free account backs up your data so you can find it on another device."
+      },
+      "upgrade": {
+        "q": "If I create an account later, will I lose what I've logged?",
+        "a": "No. Your pet and its record are attached to your new account, with nothing to re-enter."
+      },
+      "animals": {
+        "q": "Which animals can I keep track of?",
+        "a": "Dogs, cats, rabbits and rodents, birds, reptiles, amphibians, fish, horses, poultry… The guides draw on GBIF, the global biodiversity database, and keep growing."
+      },
+      "vet": {
+        "q": "Does Captivia replace my vet?",
+        "a": "No, and that's not its job. Captivia helps you forget nothing and arrive at the appointment with a complete history. The health guides tell you what should prompt a visit."
+      },
+      "data": {
+        "q": "Where is my pet's data stored?",
+        "a": "On a server and a database located in Frankfurt, Germany. It is never sold or rented, and you can delete it at any time."
+      },
+      "devices": {
+        "q": "Which devices does Captivia work on?",
+        "a": "Computers, tablets and phones, in the browser. The Android and iOS apps use the same account."
+      }
+    },
+    "final": {
+      "title": "Start with the one asleep on the sofa.",
+      "body": "A name, a species, and the record is open. The reminders will follow.",
+      "cta": "Add my first pet",
+      "secondary": "I already have an account"
     }
   },
   "legal": {
@@ -884,8 +1122,8 @@
     "accountDeletionTitle": "Delete your account",
     "animalsTitle": "My animals",
     "carnetTitle": "Health record",
-    "defaultTitle": "Captivia – The animal care guide",
-    "description": "Captivia supports owners of pets and exotic animals every day: sourced species guides, health, feeding, housing and tracking of your animals.",
+    "defaultTitle": "Captivia — health record and reminders for your pets",
+    "description": "Vaccines, treatments, weigh-ins, vet appointments: Captivia remembers them for you and reminds you right on time. Sourced species guides, free for one pet.",
     "forgotPasswordTitle": "Forgot password",
     "loginTitle": "Log in",
     "registerTitle": "Sign up",

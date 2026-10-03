@@ -16,6 +16,12 @@ export default function proxy(request: NextRequest) {
   if (pathname.startsWith('/.well-known/') || /\.[a-zA-Z0-9]+$/.test(pathname)) {
     return NextResponse.next();
   }
+  // Images Open Graph (`/<locale>/opengraph-image-…`) : servies telles quelles, y compris pour la
+  // locale par défaut — sans quoi `og:image` répondrait par une redirection 307 vers l'URL sans
+  // préfixe.
+  if (/^\/[a-z]{2}\/opengraph-image/.test(pathname)) {
+    return NextResponse.next();
+  }
 
   return intlMiddleware(request);
 }

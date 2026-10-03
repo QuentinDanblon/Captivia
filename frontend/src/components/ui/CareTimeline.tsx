@@ -1,5 +1,3 @@
-'use client';
-
 import type { ReactNode } from 'react';
 import { useLocale } from 'next-intl';
 import { cx } from './cx';
@@ -88,6 +86,9 @@ function StatusMark({ status }: { status: CareStatus }) {
 const toDate = (value: string | Date) => (value instanceof Date ? value : new Date(value));
 
 /**
+ * Composant partagé (sans état ni effet, `useLocale` fonctionne côté serveur) : rendu en
+ * Server Component quand il est importé depuis le serveur, sans coût d'hydratation.
+ *
  * Signature n° 2 — frise de soins « à l'encre » : un trait vertical continu, une pastille par
  * soin, la date en mono dans la colonne de gauche (le jour n'est répété qu'au changement de
  * jour). Liste ordonnée (`<ol>`) : l'ordre chronologique est porté par la structure.

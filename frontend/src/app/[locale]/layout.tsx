@@ -10,11 +10,15 @@ import { AppHeader } from '@/components/AppHeader';
 import { EmailVerificationBanner } from '@/components/EmailVerificationBanner';
 import { NativeWelcome } from '@/components/guest/NativeWelcome';
 import { SiteChrome } from '@/components/SiteChrome';
-import { SiteFooter } from '@/components/SiteFooter';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
+import { SiteFooter } from '@/components/SiteFooter';
 import '../globals.css';
 
 /*
+ * Préchargement limité au sous-ensemble `latin` (fr, en, es, de, it, pt, œ et € compris) :
+ * les autres sous-ensembles (latin-ext…) restent déclarés par unicode-range et ne sont
+ * téléchargés qu'en cas de besoin — 256 Ko de moins à précharger sur mobile.
+ *
  * Polices auto-hébergées au build par next/font (aucune requête vers Google à l'exécution :
  * compatible avec l'export statique mobile et la CSP `font-src 'self'`). Voir docs/DESIGN.md.
  *  - Fraunces : titres et noms latins (variable : opsz automatique, SOFT réglé en CSS).
@@ -23,7 +27,7 @@ import '../globals.css';
  */
 const fraunces = Fraunces({
   variable: '--font-fraunces',
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin'],
   style: ['normal', 'italic'],
   axes: ['opsz', 'SOFT'],
   display: 'swap',
@@ -31,13 +35,13 @@ const fraunces = Fraunces({
 
 const plexSans = IBM_Plex_Sans({
   variable: '--font-plex-sans',
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin'],
   display: 'swap',
 });
 
 const plexMono = IBM_Plex_Mono({
   variable: '--font-plex-mono',
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin'],
   weight: ['400', '500'],
   display: 'swap',
   preload: false,
@@ -94,14 +98,17 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
-  const messages = await getMessages({ locale });
+  // Les textes de la landing sont rendus côté serveur : seul `landing.search` (composant client
+  // de recherche) est transmis au navigateur, pour ne pas alourdir chaque page de ~11 Ko.
+  const { landing, ...shared } = await getMessages({ locale });
+  const messages = { ...shared, landing: { search: (landing as Record<string, unknown> | undefined)?.search } };
 
   return (
     <html lang={locale} className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}>
       <body className="min-h-screen flex flex-col w-full bg-paper text-ink font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
-            {/* En-tête, <main> et pied hors de l'app ; le groupe (app) a sa coquille (AppShell). */}
+            {/* En-tête, <main> et pied pour les pages hors groupe ; (app) et (marketing) ont leur propre cadre. */}
             <SiteChrome
               header={
                 <>
