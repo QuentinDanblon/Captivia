@@ -7,6 +7,7 @@ import { Link, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { BrandMark } from '@/components/ui/BrandMark';
+import { ThemeToggle } from '@/components/ThemePreference';
 import { GUEST_UPGRADE_PATH } from '@/lib/guest';
 
 type NavItem = {
@@ -142,6 +143,7 @@ export function AppHeader() {
 
           <div className="site-header__tools">
             <LanguageSelector />
+            <ThemeToggle />
             {!authLoading &&
               (user ? (
                 <>

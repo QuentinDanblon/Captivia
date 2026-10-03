@@ -8,6 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { BrandMark } from '@/components/ui/BrandMark';
 import { GUEST_UPGRADE_PATH } from '@/lib/guest';
 import { useCommunityAvailability } from '@/components/community/useCommunityAvailability';
+import { ThemeToggle } from '@/components/ThemePreference';
 
 export interface AppDestination {
   href: string;
@@ -137,7 +138,7 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
             ))}
           </ul>
         </nav>
-        <div className="app-shell__rail-foot">{account}</div>
+        <div className="app-shell__rail-foot"><ThemeToggle />{account}</div>
       </div>
 
       {/* Barre haute (mobile) */}
@@ -146,6 +147,7 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
           <BrandMark className="site-brand__mark" />
           <span className="site-brand__name">{t('common.appName')}</span>
         </Link>
+        <ThemeToggle />
         {!isLoading && (!user || guestSession) ? (
           <Link href={createAccountHref} className="app-shell__guest-cta">
             {t('nav.createAccount')}

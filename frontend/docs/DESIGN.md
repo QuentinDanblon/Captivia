@@ -95,7 +95,7 @@ en `timeZone: 'UTC'`. Valeur absente : « — » ou la ligne est masquée, jamai
 
 ## 3. Jetons
 
-Définis sur `:root` (clair) et redéfinis sous `@media (prefers-color-scheme: dark)` ; exposés en
+Définis sur `:root` (clair) et redéfinis sous `:root[data-theme='dark']` ; exposés en
 utilitaires par `@theme inline` : `bg-paper`, `text-ink-2`, `border-line`… Ce sont les **seules**
 couleurs disponibles (§ 4).
 
@@ -190,7 +190,7 @@ Noms latins : `<i lang="la">Boa constrictor</i>` (ou `.latin`) — Fraunces ital
 
 Couches, dans l'ordre : `theme, base, components, utilities, fields`.
 
-1. **Jetons** (`:root`, puis `prefers-color-scheme: dark`).
+1. **Jetons** (`:root`, puis `:root[data-theme='dark']`). Le choix mémorisé prime sur la préférence système (§ 10.8).
 2. **Couleurs : jetons seulement** — `@theme { --color-*: initial; }` retire toute la palette
    Tailwind (`gray-*`, `emerald-*`, `white`…) : une classe de couleur brute ne produit plus rien.
    Restent les mots-clés `transparent`, `current`, `inherit`.
@@ -519,7 +519,7 @@ Avant de fusionner un lot visuel : captures 1440 et 390, clair et sombre, aucun 
 
 ### 10.1 Lot 1 — fondations
 
-- **Mode sombre par `prefers-color-scheme`**, sans sélecteur de thème (aucune préférence stockée).
+- **Mode sombre par `prefers-color-scheme` à l'origine** ; remplacé par le choix mémorisé clair/sombre/système au § 10.8.
 - **Accent sombre clair `#8CC5A2` avec texte foncé** : un vert moyen ne peut pas à la fois porter
   du texte blanc et se lire comme texte sur fond sombre ; on inverse.
 - **Pas d'icônes dans la navigation de l'en-tête marketing** ; icônes conservées dans les onglets
@@ -612,6 +612,16 @@ Avant de fusionner un lot visuel : captures 1440 et 390, clair et sombre, aucun 
   pour être importable depuis le composant client `error.tsx`.
 - **Export mobile** : les routes miroir de `mobile/app/` suivent les groupes
   (`mobile/app/[locale]/(marketing)/animal-public/`) ; `[...rest]` reste écarté du build.
+
+### 10.8 Choix du thème (octobre 2026)
+
+- **Clair / sombre** : choix explicite depuis les en-têtes du site et des écrans de compte, le rail et la barre haute de l'app ;
+  le réglage de Compte propose aussi « Système ». Par défaut, la préférence système est suivie.
+- **Persistance** : `localStorage` sur le web et le stockage `Preferences` de Capacitor sur iOS / Android.
+  `theme-init.js`, chargé depuis une URL locale en `beforeInteractive`, applique le choix avant
+  l'hydratation ; le contrôle de Compte réconcilie le miroir local avec `Preferences` au démarrage.
+- **Palette inchangée** : `data-theme` ne fait que sélectionner les deux jeux de jetons existants ;
+  les icônes et contrôles utilisent les composants et couleurs tokenisés du système.
 
 **Reste à faire** (hors design) : dater les aperçus de la landing (`SAMPLE_TODAY`, fixe) si l'on
 veut qu'ils suivent le jour courant. La locale `pt` est du

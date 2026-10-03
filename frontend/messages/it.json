@@ -353,7 +353,8 @@
       "routineName": "Nome della routine (facoltativo)",
       "dayOfMonth": "Giorno del mese (1-31)",
       "everyHours": "Ogni X ore (1-24)",
-      "everyNHours": "{count, plural, one {Ogni ora} other {Ogni # ore}}"
+      "everyNHours": "{count, plural, one {Ogni ora} other {Ogni # ore}}",
+      "speciesGuide": "Scheda della specie"
     },
     "photoUrlInsecure": "Questo indirizzo dell'immagine non è sicuro. Usa un indirizzo che inizia con https:// oppure scegli un file.",
     "photoUrlInvalid": "Questo indirizzo dell'immagine non è valido. Incolla l'indirizzo completo (https://…) oppure scegli un file.",
@@ -996,7 +997,16 @@
       "cleaning": "Pulizia",
       "feeding": "Alimentazione",
       "health": "Controllo salute",
-      "uvb": "UVB"
+      "uvb": "UVB",
+      "waterChange": "Cambio dell’acqua",
+      "habitatCleaning": "Pulizia dell’habitat",
+      "litter": "Cura della lettiera",
+      "walk": "Passeggiata",
+      "exercise": "Attività fisica",
+      "brushing": "Spazzolatura",
+      "hygiene": "Igiene",
+      "training": "Addestramento",
+      "equipmentCheck": "Controllo dell’attrezzatura"
     },
     "paused": "In pausa",
     "toggleActive": "Attiva/metti in pausa",
@@ -1026,7 +1036,12 @@
     "planFreeShort": "Gratis",
     "planLabel": "Piano",
     "guestProfile": "Senza account, su questo dispositivo",
-    "memberSince": "Iscritto da {date}"
+    "memberSince": "Iscritto da {date}",
+    "themeTitle": "Tema",
+    "themeDescription": "Scegli l’aspetto del sito e dell’app.",
+    "themeSystem": "Sistema",
+    "themeLight": "Chiaro",
+    "themeDark": "Scuro"
   },
   "species": {
     "allowed": "Consentito",

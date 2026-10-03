@@ -37,6 +37,40 @@ jest.mock('next-intl', () => ({
 // Mock fetch
 global.fetch = jest.fn();
 
+// jsdom does not provide matchMedia. Model the light system preference by default and retain
+// listeners so components can subscribe/unsubscribe as they do in a browser.
+const mediaQueryLists = new Map<string, MediaQueryList>();
+window.matchMedia = jest.fn((media: string) => {
+  const existing = mediaQueryLists.get(media);
+  if (existing) return existing;
+
+  const listeners = new Set<EventListenerOrEventListenerObject>();
+  const addListener = jest.fn((listener: EventListenerOrEventListenerObject) => listeners.add(listener));
+  const removeListener = jest.fn((listener: EventListenerOrEventListenerObject) => listeners.delete(listener));
+  const list = {
+    matches: false,
+    media,
+    onchange: null,
+    addListener,
+    removeListener,
+    addEventListener: jest.fn((type: string, listener: EventListenerOrEventListenerObject) => {
+      if (type === 'change') addListener(listener);
+    }),
+    removeEventListener: jest.fn((type: string, listener: EventListenerOrEventListenerObject) => {
+      if (type === 'change') removeListener(listener);
+    }),
+    dispatchEvent: jest.fn((event: Event) => {
+      for (const listener of listeners) {
+        if (typeof listener === 'function') listener(event);
+        else listener.handleEvent(event);
+      }
+      return true;
+    }),
+  } as unknown as MediaQueryList;
+  mediaQueryLists.set(media, list);
+  return list;
+});
+
 // Setup localStorage mock
 const localStorageMock = (() => {
   let store: Record<string, string> = {};

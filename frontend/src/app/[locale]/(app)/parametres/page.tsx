@@ -9,6 +9,7 @@ import { isGuestUser } from '@/lib/guest';
 import { languageNames } from '@/components/LanguageSelector';
 import { GuestEntry } from '@/components/guest/GuestEntry';
 import { GuestSaveBanner } from '@/components/guest/GuestSaveBanner';
+import { ThemePreference } from '@/components/ThemePreference';
 import { Badge, Button, Card, PremiumBadge, SectionHeader, Skeleton, SkeletonGroup } from '@/components/ui';
 
 interface SettingsEntry {
@@ -28,7 +29,7 @@ export default function ParametresPage() {
   const { user, isLoading: authLoading, logout } = useAuth();
 
   // Sans session : « Essayer sans compte » ou connexion (plus de redirection vers /login).
-  if (!authLoading && !user) return <GuestEntry />;
+  if (!authLoading && !user) return <div className="grid gap-5"><GuestEntry /><section className="cv-container pb-8"><Card className="grid gap-4"><ThemePreference /></Card></section></div>;
 
   if (authLoading || !user) {
     return (
@@ -73,6 +74,7 @@ export default function ParametresPage() {
       {/* Invité : l'invitation à créer un compte (sans perte) est le premier réglage. */}
       <GuestSaveBanner dismissible={false} />
       <SectionHeader title={t('settings.title')} description={t('settings.lead')} />
+      <Card><ThemePreference /></Card>
 
       <div className="grid gap-8 md:grid-cols-12">
         <nav aria-label={t('settings.sectionsLabel')} className="md:col-span-8">

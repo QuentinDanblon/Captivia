@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Script from 'next/script';
 
 /**
  * Dernier filet de sécurité : erreur dans le layout racine lui-même. Remplace tout le document,
@@ -26,9 +27,10 @@ export default function GlobalError({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Captivia</title>
+        <Script src="/theme-init.js" strategy="beforeInteractive" />
         <style>{`
           :root { color-scheme: light dark; --bg:#f6f3ec; --ink:#1d2b24; --muted:#5b655e; --accent:#2f5d46; --accent-hover:#234836; --on-accent:#fffdf8; --border:#8c8576; }
-          @media (prefers-color-scheme: dark) { :root { --bg:#121714; --ink:#ece8de; --muted:#a9b0a8; --accent:#8cc5a2; --accent-hover:#a9d6ba; --on-accent:#10201a; --border:#6b776f; } }
+          :root[data-theme='dark'] { color-scheme: dark; --bg:#121714; --ink:#ece8de; --muted:#a9b0a8; --accent:#8cc5a2; --accent-hover:#a9d6ba; --on-accent:#10201a; --border:#6b776f; }
           body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; box-sizing:border-box; background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
           main { max-width:520px; text-align:center; }
           h1 { margin:0 0 8px; font-family:Georgia,'Times New Roman',serif; font-weight:600; font-size:1.95rem; line-height:1.15; }

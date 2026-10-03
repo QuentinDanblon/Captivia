@@ -47,6 +47,8 @@ export function SpeciesPhotoFigure({
   return (
     <Figure
       src={photo.src}
+      srcSet={photo.srcSet}
+      sources={photo.sources}
       alt={alt}
       ratio={ratio}
       sizes={sizes}

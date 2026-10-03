@@ -497,6 +497,41 @@ export async function installMockApi(page: Page): Promise<MockApi> {
       const collection = pathname.split('/').pop() ?? '';
       return json(route, 200, api.collections[collection] ?? []);
     }
+    const routineCollection = /^\/users\/me\/animals\/([^/]+)\/routines$/.exec(pathname);
+    if (routineCollection && method === 'POST') {
+      if (!authorized) return unauthorized();
+      const data = (body ?? {}) as Record<string, unknown>;
+      const animal = api.animals.find((entry) => entry.id === routineCollection[1]);
+      if (!animal) return json(route, 404, { statusCode: 404, message: 'Animal introuvable' });
+      const routine = {
+        id: `routine-e2e-${(api.collections.routines ?? []).length + 1}`,
+        animalId: animal.id,
+        name: data.name ?? null,
+        type: data.type,
+        frequency: data.frequency,
+        schedule: data.schedule,
+        active: data.active ?? true,
+      };
+      api.collections.routines = [...(api.collections.routines ?? []), routine];
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(8, 0, 0, 0);
+      const day = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
+      api.agenda.push({
+        id: `agenda-${routine.id}`,
+        date: tomorrow.toISOString(),
+        day,
+        allDay: false,
+        type: 'routine',
+        animalId: animal.id,
+        animalName: animal.name,
+        title: String(data.name || 'Promenade'),
+        detail: null,
+        status: 'pending',
+        sourceId: routine.id,
+      });
+      return json(route, 201, routine);
+    }
     // Agenda agrégé (tableau de bord « Aujourd'hui », page Agenda).
     if (method === 'GET' && pathname === '/users/me/agenda') {
       return json(route, 200, { from: url.searchParams.get('from'), to: url.searchParams.get('to'), items: api.agenda, truncated: false });

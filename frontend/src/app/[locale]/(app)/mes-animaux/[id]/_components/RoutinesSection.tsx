@@ -57,6 +57,15 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
       uvb: t('routines.types.uvb'),
       controle: t('routines.types.health'),
       entretien: t('routines.types.cleaning'),
+      changement_eau: t('routines.types.waterChange'),
+      nettoyage_habitat: t('routines.types.habitatCleaning'),
+      litiere: t('routines.types.litter'),
+      promenade: t('routines.types.walk'),
+      exercice: t('routines.types.exercise'),
+      brossage: t('routines.types.brushing'),
+      hygiene: t('routines.types.hygiene'),
+      entrainement: t('routines.types.training'),
+      controle_materiel: t('routines.types.equipmentCheck'),
     };
     return types[type] || type;
   };
@@ -389,6 +398,15 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
             <select value={routineType} onChange={(e) => setRoutineType(e.target.value)}>
               <option value="nourrissage">{t('routines.types.feeding')}</option>
               <option value="entretien">{t('routines.types.cleaning')}</option>
+              <option value="changement_eau">{t('routines.types.waterChange')}</option>
+              <option value="nettoyage_habitat">{t('routines.types.habitatCleaning')}</option>
+              <option value="litiere">{t('routines.types.litter')}</option>
+              <option value="promenade">{t('routines.types.walk')}</option>
+              <option value="exercice">{t('routines.types.exercise')}</option>
+              <option value="brossage">{t('routines.types.brushing')}</option>
+              <option value="hygiene">{t('routines.types.hygiene')}</option>
+              <option value="entrainement">{t('routines.types.training')}</option>
+              <option value="controle_materiel">{t('routines.types.equipmentCheck')}</option>
               <option value="uvb">{t('routines.types.uvb')}</option>
               <option value="controle">{t('routines.types.health')}</option>
             </select>

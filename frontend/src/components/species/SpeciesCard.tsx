@@ -38,7 +38,7 @@ export function SpeciesCard({ species }: { species: SpeciesSummary }) {
   const t = useTranslations();
   const locale = useLocale();
   const [ref, near] = useNearViewport<HTMLLIElement>();
-  const photo = useSpeciesPhoto(species.id, near);
+  const photo = useSpeciesPhoto(species.id, near, { latin: species.latin, commonNameFr: species.commonNameFr });
   const { name, isLatin } = speciesDisplayName(locale, species.commonNameFr, species.latin);
   const groupLabel = species.group ? t(`home.taxonomy.${species.group.gbifClass}`) : null;
   const ready = photo.status === 'ready' ? photo.photo : null;

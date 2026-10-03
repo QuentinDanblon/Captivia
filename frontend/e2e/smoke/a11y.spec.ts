@@ -119,4 +119,22 @@ test.describe('Accessibilité (axe-core)', () => {
       });
     }
   });
+
+  test.describe('thème sombre forcé', () => {
+    test.use({ colorScheme: 'light' });
+
+    for (const path of ['/', '/parametres']) {
+      test(`${path} (sombre choisi) : aucune violation sérieuse`, async ({ page, api }) => {
+        await page.addInitScript(() => localStorage.setItem('captivia.theme', 'dark'));
+        if (path === '/parametres') {
+          await signIn(page);
+          api.animals = [fixture<MockAnimal>('animal')];
+        }
+        await page.goto(path);
+        await waitForContent(page);
+        await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+        await expectNoSeriousViolations(page, `${path} (sombre choisi)`);
+      });
+    }
+  });
 });

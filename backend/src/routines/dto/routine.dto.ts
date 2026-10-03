@@ -9,7 +9,21 @@ import {
 } from 'class-validator';
 import type { Prisma } from '@prisma/client';
 
-const routineTypes = ['nourrissage', 'entretien', 'uvb', 'controle'] as const;
+export const routineTypes = [
+  'nourrissage',
+  'entretien',
+  'uvb',
+  'controle',
+  'changement_eau',
+  'nettoyage_habitat',
+  'litiere',
+  'promenade',
+  'exercice',
+  'brossage',
+  'hygiene',
+  'entrainement',
+  'controle_materiel',
+] as const;
 const frequencies = [
   'daily',
   'every_2_days',

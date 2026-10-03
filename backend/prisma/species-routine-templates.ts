@@ -19,7 +19,20 @@ import type { Prisma } from '@prisma/client';
 // Le format `schedule` suit le format frontend des routines :
 // { time: "08:00", recurrence: "daily"|"weekly", days?: [...], durationHours?: n }
 
-export type RoutineTemplateType = 'nourrissage' | 'entretien' | 'uvb' | 'controle';
+export type RoutineTemplateType =
+  | 'nourrissage'
+  | 'entretien'
+  | 'uvb'
+  | 'controle'
+  | 'changement_eau'
+  | 'nettoyage_habitat'
+  | 'litiere'
+  | 'promenade'
+  | 'exercice'
+  | 'brossage'
+  | 'hygiene'
+  | 'entrainement'
+  | 'controle_materiel';
 
 export type RoutineTemplateFrequency =
   | 'daily'
