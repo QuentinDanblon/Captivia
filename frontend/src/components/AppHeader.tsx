@@ -81,12 +81,11 @@ export function AppHeader() {
     };
   }, [menuOpen]);
 
-  const isHome = pathname === '/' || /^\/[a-z]{2}\/?$/.test(pathname);
   const items: NavItem[] = [
     {
-      href: '/',
+      href: '/especes',
       label: t('nav.species'),
-      isActive: (p) => isHome || startsWithSegment(p, '/species'),
+      isActive: (p) => startsWithSegment(p, '/especes') || startsWithSegment(p, '/species'),
     },
     { href: '/magasin', label: t('common.shop'), isActive: (p) => startsWithSegment(p, '/magasin') },
     ...(user
