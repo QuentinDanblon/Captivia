@@ -1,8 +1,9 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useAuth } from '@/contexts/AuthContext';
+import { syncNativePush, unregisterNativePush } from '@/lib/native-push';
 import {
   areLocalRemindersEnabled,
   countScheduledReminders,
@@ -30,12 +31,14 @@ async function readStatus(): Promise<Status> {
 }
 
 /**
- * Paramètres de notifications, dans l'app native (W6-06) : rappels programmés sur ce téléphone.
- * Activer demande la permission du système (seul moment où elle est demandée sur action) ;
- * couper annule tous les rappels programmés et n'en programme plus.
+ * Paramètres de notifications, dans l'app native (W6-06, W6-07) : rappels programmés sur ce
+ * téléphone et push natif. Activer demande la permission du système puis enregistre le téléphone
+ * pour le push ; couper annule tous les rappels programmés, n'en programme plus et retire le
+ * téléphone du push.
  */
 export function NativeRemindersCard() {
   const t = useTranslations();
+  const locale = useLocale();
   const { user, token } = useAuth();
   const texts = useReminderTexts();
   const [status, setStatus] = useState<Status | null>(null);
@@ -64,6 +67,8 @@ export function NativeRemindersCard() {
       await setLocalRemindersEnabled(true);
       const result = await syncLocalReminders({ token, userId: user.id, texts, prompt: 'always' });
       setSyncError(result.outcome === 'unavailable');
+      // Push natif (W6-07) : même autorisation, enregistré avec la couverture locale.
+      await syncNativePush(result, { authToken: token, locale }).catch(() => undefined);
     } catch {
       setSyncError(true);
     }
@@ -75,6 +80,8 @@ export function NativeRemindersCard() {
     setBusy(true);
     setSyncError(false);
     await setLocalRemindersEnabled(false);
+    // Plus aucun rappel sur ce téléphone : ni local, ni distant.
+    await unregisterNativePush(token).catch(() => undefined);
     await refresh();
     setBusy(false);
   };

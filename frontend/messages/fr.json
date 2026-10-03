@@ -1663,7 +1663,11 @@
     "offText": "Repas, traitements, vaccins et rendez-vous : ce téléphone vous les rappelle à l’heure prévue, même sans connexion.",
     "enable": "Activer les rappels sur ce téléphone",
     "disable": "Couper les rappels sur ce téléphone",
-    "syncError": "Impossible de récupérer vos soins pour le moment. Vérifiez votre connexion et réessayez."
+    "syncError": "Impossible de récupérer vos soins pour le moment. Vérifiez votre connexion et réessayez.",
+    "primerTitle": "Être prévenu à l’heure des soins ?",
+    "primerBody": "Captivia peut vous envoyer une notification quand un repas, un traitement, un vaccin ou un rendez-vous approche, même app fermée. Vous pourrez couper ces rappels à tout moment dans les paramètres.",
+    "primerAccept": "Activer les rappels",
+    "primerLater": "Plus tard"
   },
   "paywall": {
     "modalTitle": "Suivez tous vos animaux",

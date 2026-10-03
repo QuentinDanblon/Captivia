@@ -1663,7 +1663,11 @@
     "offText": "Comidas, tratamientos, vacunas y citas: este teléfono te los recuerda a su hora, incluso sin conexión.",
     "enable": "Activar los recordatorios en este teléfono",
     "disable": "Desactivar los recordatorios en este teléfono",
-    "syncError": "No se pueden cargar tus cuidados ahora mismo. Comprueba la conexión y vuelve a intentarlo."
+    "syncError": "No se pueden cargar tus cuidados ahora mismo. Comprueba la conexión y vuelve a intentarlo.",
+    "primerTitle": "¿Quieres un aviso a la hora de los cuidados?",
+    "primerBody": "Captivia puede enviarte una notificación cuando se acerque una comida, un tratamiento, una vacuna o una cita veterinaria, incluso con la app cerrada. Puedes desactivar estos recordatorios cuando quieras en los ajustes.",
+    "primerAccept": "Activar recordatorios",
+    "primerLater": "Más tarde"
   },
   "paywall": {
     "modalTitle": "Sigue a todos tus animales",

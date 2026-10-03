@@ -263,6 +263,24 @@ export interface SyncResult {
   count: number;
   /** Provenance de la liste : réseau ou dernière liste connue. */
   source: 'network' | 'cache' | null;
+  /** `no-permission` : soins qui auraient été rappelés (la permission mérite d'être proposée). */
+  planned?: number;
+  /**
+   * `scheduled` depuis le réseau (W6-07) : les soins prévus AVANT cet instant sont tous programmés
+   * sur l'appareil ; le serveur ne les renvoie pas en push natif (anti-doublon). Fin de l'horizon
+   * de 30 jours, ou instant du dernier rappel programmé quand la limite de 64 est atteinte.
+   */
+  coveredUntil?: Date;
+}
+
+/**
+ * Fin de la couverture locale (fonction pure) : tout l'horizon si rien n'a été écarté, sinon
+ * l'instant du dernier rappel programmé (un soin à cet instant précis peut alors arriver deux
+ * fois, jamais être perdu).
+ */
+export function localCoverageEnd(planned: readonly PlannedReminder[], truncated: boolean, now: Date): Date {
+  if (truncated && planned.length > 0) return planned[planned.length - 1].at;
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate() + REMINDER_HORIZON_DAYS);
 }
 
 let syncChain: Promise<unknown> = Promise.resolve();
@@ -305,7 +323,10 @@ async function doSync({ token, userId, texts, prompt = false, now = new Date() }
   }
   if (!items) return { outcome: 'unavailable', count: 0, source: null };
 
-  const planned = planReminders(items, { now });
+  // Un de plus que la limite : sait si des soins ont été écartés (couverture locale incomplète).
+  const candidates = planReminders(items, { now, limit: MAX_PENDING_REMINDERS + 1 });
+  const truncated = candidates.length > MAX_PENDING_REMINDERS;
+  const planned = candidates.slice(0, MAX_PENDING_REMINDERS);
 
   // 2. Permission : jamais demandée au lancement à froid ni sans soin à rappeler.
   let ln: LocalNotificationsApi;
@@ -322,7 +343,7 @@ async function doSync({ token, userId, texts, prompt = false, now = new Date() }
       permission = (await ln.requestPermissions()).display;
     }
   }
-  if (permission !== 'granted') return { outcome: 'no-permission', count: 0, source };
+  if (permission !== 'granted') return { outcome: 'no-permission', count: 0, source, planned: planned.length };
 
   // 3. Canal Android (idempotent).
   if (getPlatform() === 'android') {
@@ -358,7 +379,39 @@ async function doSync({ token, userId, texts, prompt = false, now = new Date() }
     });
   }
   await prefSet(PREF_IDS, JSON.stringify(planned.map((p) => p.id)));
-  return { outcome: 'scheduled', count: planned.length, source };
+  return {
+    outcome: 'scheduled',
+    count: planned.length,
+    source,
+    // Liste hors ligne : on ne sait pas ce qui a changé depuis, la couverture n'est pas annoncée.
+    ...(source === 'network' ? { coveredUntil: localCoverageEnd(planned, truncated, now) } : {}),
+  };
+}
+
+/** La permission a-t-elle déjà été proposée sur cet appareil (explication comprise) ? */
+export async function wasReminderPermissionAsked(): Promise<boolean> {
+  return (await prefGet(PREF_ASKED)) === '1';
+}
+
+/** Retient que la permission a été proposée (acceptée, refusée ou « plus tard »). */
+export async function markReminderPermissionAsked(): Promise<void> {
+  await prefSet(PREF_ASKED, '1');
+}
+
+/**
+ * Demande la permission d'afficher des notifications (rappels locaux ET push natif : une seule
+ * autorisation système sur iOS comme sur Android 13+). À appeler après l'explication préalable
+ * (`NotificationPrimer`) ou sur le bouton des paramètres, jamais au lancement.
+ */
+export async function requestReminderPermission(): Promise<ReminderPermission> {
+  if (!isNative()) return 'denied';
+  await markReminderPermissionAsked();
+  try {
+    const { display } = await (await loadNotifications()).requestPermissions();
+    return display === 'granted' ? 'granted' : display === 'denied' ? 'denied' : 'prompt';
+  } catch {
+    return 'denied';
+  }
 }
 
 /** Animal visé par une notification Captivia touchée (`extra.animalId`), sinon null. */

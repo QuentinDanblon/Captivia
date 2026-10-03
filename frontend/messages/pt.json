@@ -1663,7 +1663,11 @@
     "offText": "Refeições, tratamentos, vacinas e consultas: este telemóvel lembra-o na hora certa, mesmo sem ligação.",
     "enable": "Ativar os lembretes neste telemóvel",
     "disable": "Desativar os lembretes neste telemóvel",
-    "syncError": "Não foi possível carregar os seus cuidados neste momento. Verifique a ligação e tente novamente."
+    "syncError": "Não foi possível carregar os seus cuidados neste momento. Verifique a ligação e tente novamente.",
+    "primerTitle": "Quer ser avisado à hora dos cuidados?",
+    "primerBody": "O Captivia pode enviar-lhe uma notificação quando se aproximar uma refeição, um tratamento, uma vacina ou uma consulta veterinária, mesmo com a app fechada. Pode desativar estes lembretes a qualquer momento nas definições.",
+    "primerAccept": "Ativar lembretes",
+    "primerLater": "Mais tarde"
   },
   "paywall": {
     "modalTitle": "Acompanhe todos os seus animais",

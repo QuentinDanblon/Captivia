@@ -60,7 +60,11 @@ import {
   clearLocalReminders,
   countScheduledReminders,
   getReminderPermission,
+  localCoverageEnd,
+  markReminderPermissionAsked,
   planReminders,
+  requestReminderPermission,
+  wasReminderPermissionAsked,
   reminderAnimalId,
   reminderFireDate,
   reminderId,
@@ -236,7 +240,8 @@ describe('syncLocalReminders', () => {
     const items = [item({ sourceId: 'a' }), item({ sourceId: 'b', type: 'medication', animalId: 'a2', at: new Date(2026, 9, 4, 20) })];
     mockFetchAgenda.mockResolvedValue({ items, from: '', to: '', truncated: false });
     const res = await sync();
-    expect(res).toEqual({ outcome: 'scheduled', count: 2, source: 'network' });
+    // W6-07 : tout l'horizon est programmé → couvert jusqu'au 2 nov. 0 h (fin du 30e jour).
+    expect(res).toEqual({ outcome: 'scheduled', count: 2, source: 'network', coveredUntil: new Date(2026, 10, 2) });
     expect(mockFetchAgenda).toHaveBeenCalledWith('jwt', '2026-10-03', '2026-11-01');
     const scheduled = ln.schedule.mock.calls[0][0].notifications;
     expect(scheduled.map((n: Pending) => n.id)).toEqual(items.map((i) => reminderId(i.id)));
@@ -282,7 +287,45 @@ describe('syncLocalReminders', () => {
     mockFetchAgenda.mockResolvedValue({ items: hourly(200) });
     const res = await sync();
     expect(res.count).toBe(64);
-    expect(ln.schedule.mock.calls[0][0].notifications).toHaveLength(64);
+    const scheduled = ln.schedule.mock.calls[0][0].notifications;
+    expect(scheduled).toHaveLength(64);
+    // W6-07 : couverture locale arrêtée au dernier rappel programmé (le serveur pousse la suite).
+    expect(res.coveredUntil).toEqual(scheduled[63].schedule.at);
+  });
+
+  it('W6-07 : couverture locale non annoncée hors ligne ; soins à rappeler comptés sans permission', async () => {
+    mockFetchAgenda.mockResolvedValueOnce({ items: [item({ sourceId: 'a' })] });
+    await sync();
+    mockFetchAgenda.mockRejectedValueOnce(new AgendaApiError('network', 0));
+    const offline = await sync();
+    expect(offline.source).toBe('cache');
+    expect(offline).not.toHaveProperty('coveredUntil');
+
+    ln.permission = 'prompt';
+    mockFetchAgenda.mockResolvedValueOnce({ items: [item({ sourceId: 'a' }), item({ sourceId: 'b' })] });
+    expect(await sync()).toEqual({ outcome: 'no-permission', count: 0, source: 'network', planned: 2 });
+  });
+
+  it('W6-07 : requestReminderPermission demande l’autorisation et la retient comme proposée', async () => {
+    ln.permission = 'prompt';
+    ln.afterRequest = 'granted';
+    expect(await wasReminderPermissionAsked()).toBe(false);
+    expect(await requestReminderPermission()).toBe('granted');
+    expect(ln.requestPermissions).toHaveBeenCalledTimes(1);
+    expect(await wasReminderPermissionAsked()).toBe(true);
+    // « Plus tard » : retenu sans rien demander.
+    prefs.clear();
+    await markReminderPermissionAsked();
+    expect(await wasReminderPermissionAsked()).toBe(true);
+    mockIsNative.mockReturnValue(false);
+    expect(await requestReminderPermission()).toBe('denied');
+  });
+
+  it('localCoverageEnd : horizon complet ou dernier rappel programmé', () => {
+    const plan = planReminders(hourly(3), { now: NOW });
+    expect(localCoverageEnd(plan, false, NOW)).toEqual(new Date(2026, 10, 2));
+    expect(localCoverageEnd(plan, true, NOW)).toEqual(plan[2].at);
+    expect(localCoverageEnd([], true, NOW)).toEqual(new Date(2026, 10, 2));
   });
 
   it('hors ligne : reprend la dernière liste connue du même compte', async () => {

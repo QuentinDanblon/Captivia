@@ -1663,7 +1663,11 @@
     "offText": "Meals, treatments, vaccines and appointments: this phone reminds you right on time, even offline.",
     "enable": "Turn on reminders on this phone",
     "disable": "Turn off reminders on this phone",
-    "syncError": "Your care schedule can’t be loaded right now. Check your connection and try again."
+    "syncError": "Your care schedule can’t be loaded right now. Check your connection and try again.",
+    "primerTitle": "Get reminded when care is due?",
+    "primerBody": "Captivia can notify you when a meal, treatment, vaccination or vet appointment is coming up, even when the app is closed. You can turn these reminders off at any time in the settings.",
+    "primerAccept": "Turn on reminders",
+    "primerLater": "Not now"
   },
   "paywall": {
     "modalTitle": "Keep track of all your animals",

@@ -1,4 +1,5 @@
-import { act, render } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { CARE_SCHEDULED_EVENT } from '@/lib/care-events';
 
 // --- Plugins et dépendances mockés ------------------------------------------
 type Listener = (payload: never) => void;
@@ -17,6 +18,9 @@ jest.mock('@capacitor/app', () => ({ App: mockApp }));
 jest.mock('@capacitor/local-notifications', () => ({
   LocalNotifications: { addListener: (name: string, fn: Listener) => addListener(name, fn) },
 }));
+jest.mock('@capacitor/push-notifications', () => ({
+  PushNotifications: { addListener: (name: string, fn: Listener) => addListener(name, fn) },
+}));
 
 const mockIsNative = jest.fn(() => true);
 jest.mock('@/lib/platform', () => ({
@@ -29,12 +33,30 @@ jest.mock('../../../i18n/routing', () => ({
   routing: { locales: ['fr', 'en', 'es', 'de', 'it', 'pt'], defaultLocale: 'fr' },
 }));
 
-const mockSync = jest.fn(async () => ({ outcome: 'scheduled', count: 0, source: 'network' }));
+type SyncResultLike = { outcome: string; count: number; source: string | null; planned?: number; coveredUntil?: Date };
+const mockSync = jest.fn<Promise<SyncResultLike>, unknown[]>(async () => ({ outcome: 'scheduled', count: 0, source: 'network' }));
 const mockClear = jest.fn(async () => undefined);
+const mockPermission = jest.fn(async () => 'granted');
+const mockAsked = jest.fn(async () => false);
+const mockRequest = jest.fn(async () => 'granted');
+const mockMarkAsked = jest.fn(async () => undefined);
 jest.mock('@/lib/local-reminders', () => ({
   ...jest.requireActual('@/lib/local-reminders'),
-  syncLocalReminders: (...args: unknown[]) => mockSync(...(args as [])),
+  syncLocalReminders: (...args: unknown[]) => mockSync(...args),
   clearLocalReminders: () => mockClear(),
+  getReminderPermission: () => mockPermission(),
+  wasReminderPermissionAsked: () => mockAsked(),
+  areLocalRemindersEnabled: async () => true,
+  requestReminderPermission: () => mockRequest(),
+  markReminderPermissionAsked: () => mockMarkAsked(),
+}));
+
+const mockSyncPush = jest.fn(async () => undefined);
+const mockForgetPush = jest.fn();
+jest.mock('@/lib/native-push', () => ({
+  ...jest.requireActual('@/lib/native-push'),
+  syncNativePush: (...args: unknown[]) => mockSyncPush(...(args as [])),
+  forgetNativePushSession: () => mockForgetPush(),
 }));
 
 const mockSyncPurchases = jest.fn(async () => true);
@@ -64,6 +86,10 @@ beforeEach(() => {
   jest.clearAllMocks();
   mockIsNative.mockReturnValue(true);
   mockAuth = { user: null, token: null, isLoading: true };
+  mockSync.mockResolvedValue({ outcome: 'scheduled', count: 0, source: 'network' });
+  mockPermission.mockResolvedValue('granted');
+  mockAsked.mockResolvedValue(false);
+  mockRequest.mockResolvedValue('granted');
 });
 
 describe('handleBackButton', () => {
@@ -136,7 +162,13 @@ describe('NativeBridge', () => {
     const { unmount } = render(<NativeBridgeEffects />);
     await flush();
     expect([...listeners.keys()].sort()).toEqual(
-      ['appStateChange', 'appUrlOpen', 'backButton', 'localNotificationActionPerformed'].sort(),
+      [
+        'appStateChange',
+        'appUrlOpen',
+        'backButton',
+        'localNotificationActionPerformed',
+        'pushNotificationActionPerformed',
+      ].sort(),
     );
     unmount();
     expect(removed.sort()).toEqual([...listeners.keys()].sort());
@@ -163,6 +195,22 @@ describe('NativeBridge', () => {
     expect(mockPush).toHaveBeenCalledWith('/fr/mes-animaux/detail/?id=a%201');
     mockPush.mockClear();
     fire('localNotificationActionPerformed', { actionId: 'tap', notification: { id: 2, extra: { kind: 'autre', animalId: 'x' } } });
+    expect(mockPush).not.toHaveBeenCalled();
+  });
+
+  it('W6-07 : une notification distante touchée ouvre la fiche de l’animal (sinon l’agenda)', async () => {
+    render(<NativeBridgeEffects />);
+    await flush();
+    mockPush.mockClear();
+    fire('pushNotificationActionPerformed', {
+      actionId: 'tap',
+      notification: { id: 'm1', data: { kind: 'captivia-push', animalId: 'a 1', eventId: 'e1' } },
+    });
+    expect(mockPush).toHaveBeenLastCalledWith('/fr/mes-animaux/detail/?id=a%201');
+    fire('pushNotificationActionPerformed', { actionId: 'tap', notification: { id: 'm2', data: { kind: 'captivia-push' } } });
+    expect(mockPush).toHaveBeenLastCalledWith('/fr/agenda/');
+    mockPush.mockClear();
+    fire('pushNotificationActionPerformed', { actionId: 'tap', notification: { id: 'm3', data: { kind: 'autre' } } });
     expect(mockPush).not.toHaveBeenCalled();
   });
 
@@ -199,7 +247,9 @@ describe('NativeBridge', () => {
       expect(mockSync).not.toHaveBeenCalled();
     });
 
-    it('connexion (ou essai invité) pendant la session : permission proposée', async () => {
+    it('connexion (ou essai invité) pendant la session : explication proposée, jamais la boîte système directement', async () => {
+      mockPermission.mockResolvedValue('prompt');
+      mockSync.mockResolvedValue({ outcome: 'no-permission', count: 0, source: 'network', planned: 2 });
       const view = render(<NativeBridgeEffects />);
       mockAuth = { user: null, token: null, isLoading: false };
       view.rerender(<NativeBridgeEffects />);
@@ -208,7 +258,84 @@ describe('NativeBridge', () => {
       mockAuth = { user: { id: 'guest-1' }, token: 'jwt-guest', isLoading: false };
       view.rerender(<NativeBridgeEffects />);
       await flush();
-      expect(mockSync).toHaveBeenCalledWith(expect.objectContaining({ userId: 'guest-1', prompt: 'once' }));
+      expect(mockSync).toHaveBeenCalledWith(expect.objectContaining({ userId: 'guest-1', prompt: false }));
+      expect(mockRequest).not.toHaveBeenCalled();
+      expect(screen.getByRole('dialog')).toHaveTextContent('primerTitle');
+
+      // « Activer » : boîte système, puis rappels et push synchronisés.
+      mockSync.mockResolvedValue({ outcome: 'scheduled', count: 2, source: 'network', coveredUntil: new Date(2030, 0, 1) });
+      mockSyncPush.mockClear();
+      fireEvent.click(screen.getByRole('button', { name: 'primerAccept' }));
+      await flush();
+      expect(mockRequest).toHaveBeenCalledTimes(1);
+      expect(mockSyncPush).toHaveBeenCalledWith(
+        expect.objectContaining({ outcome: 'scheduled' }),
+        { authToken: 'jwt-guest', locale: 'fr' },
+      );
+      expect(screen.queryByRole('dialog')).toBeNull();
+    });
+
+    it('rien à rappeler, permission déjà proposée ou refusée : aucune explication', async () => {
+      mockPermission.mockResolvedValue('prompt');
+      mockSync.mockResolvedValue({ outcome: 'no-permission', count: 0, source: 'network', planned: 0 });
+      const view = render(<NativeBridgeEffects />);
+      mockAuth = { user: null, token: null, isLoading: false };
+      view.rerender(<NativeBridgeEffects />);
+      await flush();
+      mockAuth = { user: { id: 'u1' }, token: 'jwt', isLoading: false };
+      view.rerender(<NativeBridgeEffects />);
+      await flush();
+      expect(screen.queryByRole('dialog')).toBeNull();
+
+      mockSync.mockResolvedValue({ outcome: 'no-permission', count: 0, source: 'network', planned: 3 });
+      mockAsked.mockResolvedValue(true);
+      act(() => window.dispatchEvent(new Event(CARE_SCHEDULED_EVENT)));
+      await act(async () => {
+        await new Promise((r) => setTimeout(r, 450));
+      });
+      expect(screen.queryByRole('dialog')).toBeNull();
+    });
+
+    it('premier soin créé : explication proposée ; « Plus tard » ne demande rien', async () => {
+      mockPermission.mockResolvedValue('prompt');
+      mockAuth = { user: { id: 'u1' }, token: 'jwt', isLoading: false };
+      render(<NativeBridgeEffects />);
+      await flush();
+      // Lancement à froid : jamais d'explication.
+      expect(screen.queryByRole('dialog')).toBeNull();
+
+      act(() => {
+        window.dispatchEvent(new Event(CARE_SCHEDULED_EVENT));
+        window.dispatchEvent(new Event(CARE_SCHEDULED_EVENT));
+      });
+      await act(async () => {
+        await new Promise((r) => setTimeout(r, 450));
+      });
+      expect(screen.getByRole('dialog')).toHaveTextContent('primerBody');
+      fireEvent.click(screen.getByRole('button', { name: 'primerLater' }));
+      await flush();
+      expect(mockMarkAsked).toHaveBeenCalledTimes(1);
+      expect(mockRequest).not.toHaveBeenCalled();
+      expect(screen.queryByRole('dialog')).toBeNull();
+    });
+
+    it('soin créé, permission accordée : rappels et push resynchronisés (regroupés)', async () => {
+      mockAuth = { user: { id: 'u1' }, token: 'jwt', isLoading: false };
+      render(<NativeBridgeEffects />);
+      await flush();
+      mockSync.mockClear();
+      act(() => {
+        for (let i = 0; i < 3; i++) window.dispatchEvent(new Event(CARE_SCHEDULED_EVENT));
+      });
+      await act(async () => {
+        await new Promise((r) => setTimeout(r, 450));
+      });
+      expect(mockSync).toHaveBeenCalledTimes(1);
+      expect(mockSyncPush).toHaveBeenLastCalledWith(expect.objectContaining({ outcome: 'scheduled' }), {
+        authToken: 'jwt',
+        locale: 'fr',
+      });
+      expect(screen.queryByRole('dialog')).toBeNull();
     });
 
     it('déconnexion : annule les rappels', async () => {
@@ -219,6 +346,8 @@ describe('NativeBridge', () => {
       view.rerender(<NativeBridgeEffects />);
       await flush();
       expect(mockClear).toHaveBeenCalledTimes(1);
+      // Plus de renvoi spontané du jeton push pour ce compte.
+      expect(mockForgetPush).toHaveBeenCalled();
     });
 
     it('ne resynchronise pas quand seul le jeton change (rotation)', async () => {
