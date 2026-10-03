@@ -215,6 +215,7 @@ describe('SpeciesService', () => {
         metrics: {},
         occurrenceCount: 0,
         source: 'profile',
+        lastReviewedAt: null,
         profile: mockProfile,
         feeding: { food: 'insectes' },
         habitat: { setup: 'terrarium' },
@@ -222,6 +223,22 @@ describe('SpeciesService', () => {
       });
       expect(mockGbifService.getSpecies).toHaveBeenCalledWith('5221172');
       expect(mockCacheService.set).toHaveBeenCalledWith('species:5221172', expect.any(Object), 86400);
+    });
+
+    it('expose lastReviewedAt de la fiche (W5-04)', async () => {
+      mockCacheService.get.mockReturnValue(null);
+      const reviewed = new Date('2026-09-15T00:00:00.000Z');
+      mockSpeciesProfileService.getBySpeciesId.mockResolvedValue({
+        profile: { ...mockProfile, lastReviewedAt: reviewed },
+        feeding: null,
+        habitat: null,
+        behavior: null,
+      });
+      mockGbifService.getSpecies.mockResolvedValue({ key: 5221172, class: 'Reptilia', rank: 'SPECIES' });
+
+      const result = await service.getSpecies('5221172');
+
+      expect(result.lastReviewedAt).toEqual(reviewed);
     });
 
     it('should return cached species when available', async () => {

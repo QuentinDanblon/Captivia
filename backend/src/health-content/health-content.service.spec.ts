@@ -214,6 +214,17 @@ describe('HealthContentService', () => {
     });
   });
 
+  describe('createOrUpdateHealthContent — fiche inexistante (W1-09)', () => {
+    it('convertit la violation de FK (P2003) en 404', async () => {
+      mockPrismaService.speciesHealthContent.upsert.mockRejectedValue(
+        Object.assign(new Error('FK'), { code: 'P2003' }),
+      );
+      await expect(
+        service.createOrUpdateHealthContent(999, 'fr', [], []),
+      ).rejects.toMatchObject({ status: 404 });
+    });
+  });
+
   describe('searchPubMed', () => {
     it('should search PubMed with default maxResults', async () => {
       const mockArticles = [

@@ -408,6 +408,30 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     const SPECIES_WITH_FR = 99001001;
     const SPECIES_WITH_FALLBACK = 99001002;
 
+    // W1-09 : SpeciesReproduction.speciesId est une FK vers SpeciesProfile -> fiches jetables.
+    beforeAll(async () => {
+      for (const speciesId of [SPECIES_WITH_FR, SPECIES_WITH_FALLBACK]) {
+        await prisma.speciesProfile.upsert({
+          where: { speciesId },
+          update: {},
+          create: {
+            speciesId,
+            commonNameFr: `Test module-b ${speciesId}`,
+            scientificName: `Testus moduleb ${speciesId}`,
+            category: 'mammifère',
+            domesticationType: 'NAC',
+          },
+        });
+      }
+    });
+
+    afterAll(async () => {
+      // Cascade : supprime aussi les fiches reproduction de test.
+      await prisma.speciesProfile.deleteMany({
+        where: { speciesId: { in: [SPECIES_WITH_FR, SPECIES_WITH_FALLBACK] } },
+      });
+    });
+
     it('GET espèce inexistante → 404 propre (message clair)', async () => {
       // 5221172 (Gecko léopard) possède désormais une fiche reproduction complète
       // (pipeline races 2026-08-09) — le 404 doit être testé sur un ID inconnu.

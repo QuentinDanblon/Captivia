@@ -9,7 +9,10 @@
  *  - ne renseigne `description` / `sourceUrl` que si la fiche n'en a pas ;
  *  - une section n'est importée que si elle est valide (énumérations autorisées,
  *    champs obligatoires) ET sourcée par au moins une URL https ; sinon ignorée ;
- *  - les fiches dont le speciesId n'existe pas sont ignorées.
+ *  - les fiches dont le speciesId n'existe pas sont ignorées ;
+ *  - W5-04 : chaque fiche dont du contenu (section ou description) est importé reçoit
+ *    `lastReviewedAt` = date du rapport verify/<LOT>.json (champ `reviewedAt` s'il existe, sinon
+ *    mtime du rapport arrondi au jour UTC). Jamais écrasé par une date plus ancienne.
  *
  * Usage : depuis backend/ : npx ts-node prisma/import-enrichment.ts
  * Appelé aussi à la fin de seed-prod.ts.
@@ -35,6 +38,46 @@ export interface EnrichmentReport {
   entries: number;
   created: Record<string, number>;
   skipped: string[];
+  /** Fiches dont `lastReviewedAt` a été posé ou avancé. */
+  reviewed: number;
+}
+
+/** Arrondit au jour (UTC) : 00:00:00.000Z. */
+export function startOfUtcDay(d: Date): Date {
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+}
+
+function parseDate(v: unknown): Date | null {
+  if (typeof v !== 'string' || !v.trim()) return null;
+  const d = new Date(v);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+/**
+ * Date de vérification d'une fiche d'après le rapport `verify/<LOT>.json` :
+ *  1. `reviewedAt` de l'entrée du rapport portant ce speciesId ;
+ *  2. sinon `reviewedAt` au niveau du rapport (objet `{ reviewedAt, entries }`) ;
+ *  3. sinon mtime du fichier, arrondi au jour (UTC).
+ */
+export function reviewDateFor(reportPath: string, speciesId: number): Date {
+  let report: unknown;
+  try {
+    report = JSON.parse(fs.readFileSync(reportPath, 'utf-8'));
+  } catch {
+    report = null;
+  }
+  if (Array.isArray(report)) {
+    const entry = report.find((r) => isObj(r) && r.speciesId === speciesId);
+    const d = isObj(entry) ? parseDate(entry.reviewedAt) : null;
+    if (d) return d;
+  } else if (isObj(report)) {
+    const entry = Array.isArray(report.entries)
+      ? report.entries.find((r) => isObj(r) && r.speciesId === speciesId)
+      : undefined;
+    const d = (isObj(entry) ? parseDate(entry.reviewedAt) : null) ?? parseDate(report.reviewedAt);
+    if (d) return d;
+  }
+  return startOfUtcDay(fs.statSync(reportPath).mtime);
 }
 
 function isObj(v: unknown): v is Json {
@@ -87,7 +130,7 @@ export async function importEnrichment(
   prisma: PrismaClient,
   dir = path.resolve(__dirname, 'enrichment', 'out'),
 ): Promise<EnrichmentReport> {
-  const report: EnrichmentReport = { files: 0, entries: 0, created: {}, skipped: [] };
+  const report: EnrichmentReport = { files: 0, entries: 0, created: {}, skipped: [], reviewed: 0 };
   if (!fs.existsSync(dir)) return report;
   const deadPath = path.join(dir, '..', 'dead-urls.json');
   if (fs.existsSync(deadPath)) {
@@ -104,6 +147,7 @@ export async function importEnrichment(
 
   const bump = (k: string) => (report.created[k] = (report.created[k] ?? 0) + 1);
   const skip = (id: number, why: string) => report.skipped.push(`[${id}] ${why}`);
+  const totalCreated = () => Object.values(report.created).reduce((a, b) => a + b, 0);
 
   for (const file of files) {
     let entries: unknown;
@@ -120,6 +164,7 @@ export async function importEnrichment(
       if (!isObj(e) || typeof e.speciesId !== 'number') continue;
       const speciesId = e.speciesId;
       report.entries++;
+      const createdBefore = totalCreated();
       const profile = await prisma.speciesProfile.findUnique({
         where: { speciesId },
         select: { description: true, sourceUrl: true },
@@ -271,6 +316,17 @@ export async function importEnrichment(
           bump('reproduction');
         } else skip(speciesId, 'reproduction invalide ou non sourcée');
       }
+
+      // W5-04 — la fiche a reçu du contenu (section ou description) : on date sa vérification.
+      // `updateMany` conditionnel : jamais de recul si la base porte déjà une date plus récente.
+      if (totalCreated() > createdBefore) {
+        const reviewedAt = reviewDateFor(path.join(verifyDir, file), speciesId);
+        const { count } = await prisma.speciesProfile.updateMany({
+          where: { speciesId, OR: [{ lastReviewedAt: null }, { lastReviewedAt: { lt: reviewedAt } }] },
+          data: { lastReviewedAt: reviewedAt },
+        });
+        report.reviewed += count;
+      }
     }
   }
   return report;
@@ -280,7 +336,7 @@ if (require.main === module) {
   const prisma = new PrismaClient();
   importEnrichment(prisma)
     .then((r) => {
-      console.log(`📚 Enrichissement : ${r.files} lots, ${r.entries} fiches lues`, r.created);
+      console.log(`📚 Enrichissement : ${r.files} lots, ${r.entries} fiches lues, ${r.reviewed} fiches datées`, r.created);
       if (r.skipped.length) console.log(`⚠️  ${r.skipped.length} sections ignorées (non valides ou non sourcées)`);
     })
     .catch((e) => {

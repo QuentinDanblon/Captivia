@@ -213,6 +213,8 @@ export class SpeciesService {
         metrics: {},
         occurrenceCount: 0,
         source: 'profile',
+        // W5-04 — date de la dernière vérification éditoriale (ISO 8601) ; null = jamais vérifiée.
+        lastReviewedAt: profileDetail.profile.lastReviewedAt ?? null,
         profile: profileDetail.profile,
         feeding: profileDetail.feeding,
         habitat: profileDetail.habitat,
@@ -241,6 +243,7 @@ export class SpeciesService {
         metrics: {},
         occurrenceCount: 0,
         source: 'gbif',
+        lastReviewedAt: null,
         profile: null,
         feeding: null,
         habitat: null,

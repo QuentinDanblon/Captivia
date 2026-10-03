@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { PubmedService } from './services/pubmed.service';
 import { describeHttpError } from '../external/http-safety';
@@ -72,24 +72,32 @@ export class HealthContentService {
     diseases: any,
     sources: any,
   ) {
-    return this.prisma.speciesHealthContent.upsert({
-      where: {
-        speciesId_locale: {
+    try {
+      return await this.prisma.speciesHealthContent.upsert({
+        where: {
+          speciesId_locale: {
+            speciesId,
+            locale,
+          },
+        },
+        create: {
           speciesId,
           locale,
+          diseases,
+          sources,
         },
-      },
-      create: {
-        speciesId,
-        locale,
-        diseases,
-        sources,
-      },
-      update: {
-        diseases,
-        sources,
-      },
-    });
+        update: {
+          diseases,
+          sources,
+        },
+      });
+    } catch (e) {
+      // W1-09 : FK SpeciesHealthContent.speciesId -> SpeciesProfile (P2003) = fiche espèce inexistante.
+      if ((e as { code?: string })?.code === 'P2003') {
+        throw new NotFoundException('Species not found');
+      }
+      throw e;
+    }
   }
 
   async searchPubMed(query: string, maxResults = 10): Promise<unknown[]> {
