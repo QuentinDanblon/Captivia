@@ -17,6 +17,10 @@ import { SpeciesSearch } from './SpeciesSearch';
 export const APP_ENTRY = '/mes-animaux';
 const LOGIN = '/login';
 
+/** Bouton-lien de la landing : le libellé peut passer à la ligne sur 320 px (de, pt). */
+const cta = (variant: 'primary' | 'secondary' = 'primary') =>
+  buttonClasses({ variant, size: 'lg', className: 'text-center whitespace-normal!' });
+
 type Props = { locale: string };
 
 function Section({
@@ -64,10 +68,10 @@ export async function Hero({ locale }: Props) {
           </h1>
           <p className="mt-6 mb-0 max-w-[34rem] text-body text-ink-2 sm:text-[1.125rem] sm:leading-relaxed">{t('hero.lead')}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={APP_ENTRY} className={buttonClasses({ size: 'lg' })}>
+            <Link href={APP_ENTRY} className={cta()}>
               {t('hero.ctaPrimary')}
             </Link>
-            <Link href={LOGIN} className={buttonClasses({ variant: 'secondary', size: 'lg' })}>
+            <Link href={LOGIN} className={cta('secondary')}>
               {t('hero.ctaSecondary')}
             </Link>
           </div>
@@ -211,7 +215,7 @@ export async function HowItWorks({ locale }: Props) {
         ))}
       </ol>
       <div className="mt-8 flex flex-wrap items-center gap-4">
-        <Link href={APP_ENTRY} className={buttonClasses({ size: 'lg' })}>
+        <Link href={APP_ENTRY} className={cta()}>
           {t('steps.cta')}
         </Link>
       </div>
@@ -282,7 +286,7 @@ export async function Offer({ locale }: Props) {
           </h2>
           <p className="mt-4 mb-0 text-body text-ink-2">{t('offer.intro')}</p>
           <p className="mt-4 mb-0 border-l border-line-strong pl-4 text-ui text-ink">{t('offer.keepData')}</p>
-          <Link href={APP_ENTRY} className={cx(buttonClasses({ size: 'lg' }), 'mt-8')}>
+          <Link href={APP_ENTRY} className={cx(cta(), 'mt-8')}>
             {t('offer.cta')}
           </Link>
         </div>
@@ -462,10 +466,10 @@ export async function FinalCta({ locale }: Props) {
           </h2>
           <p className="mt-4 mb-0 text-body text-ink-2">{t('final.body')}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={APP_ENTRY} className={buttonClasses({ size: 'lg' })}>
+            <Link href={APP_ENTRY} className={cta()}>
               {t('final.cta')}
             </Link>
-            <Link href={LOGIN} className={buttonClasses({ variant: 'secondary', size: 'lg' })}>
+            <Link href={LOGIN} className={cta('secondary')}>
               {t('final.secondary')}
             </Link>
           </div>

@@ -57,7 +57,7 @@ async function loadSample(locale: string) {
       detail: t(`sample.care.${c.care}Detail`),
       kind: t(`sample.kind.${c.kind}`),
       action: c.actionable ? (
-        <span className={buttonClasses({ variant: 'secondary', size: 'sm' })}>{t('sample.markDone')}</span>
+        <span className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'text-center whitespace-normal!' })}>{t('sample.markDone')}</span>
       ) : undefined,
     }));
   return { t, statusLabels, toItems };
@@ -166,7 +166,7 @@ export async function RemindersPreview({ locale }: Props) {
         <Alert
           severity="info"
           title={t('sample.appointmentTitle')}
-          action={<span className={buttonClasses({ variant: 'secondary', size: 'sm' })}>{t('sample.alertAction')}</span>}
+          action={<span className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'text-center whitespace-normal!' })}>{t('sample.alertAction')}</span>}
         >
           {t('sample.appointmentBody')}
         </Alert>
