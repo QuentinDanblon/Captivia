@@ -13,3 +13,6 @@ test
 # VCS
 .git
 .gitignore
+
+# Médias du pilote local (jamais dans l'image)
+var

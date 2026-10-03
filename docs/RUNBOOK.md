@@ -260,6 +260,12 @@ Voir §3.5.
 3. Rien à changer côté Netlify : le navigateur lit la clé publique via `GET /notifications/vapid-public-key`.
 4. Conséquence : les abonnements push existants deviennent invalides. Les envois vers ces abonnements échouent (404/410) et l'API les purge ; chaque utilisateur doit réactiver les notifications dans *Paramètres → Notifications*.
 
+### 4.6 Jeton R2 des médias communautaires
+
+1. Cloudflare → *R2 → Manage API tokens* : créer un nouveau jeton *Object Read & Write* limité au bucket des médias.
+2. Render → *Environment* : remplacer `S3_ACCESS_KEY_ID` et `S3_SECRET_ACCESS_KEY`, enregistrer (redéploiement).
+3. Publier une image de test, puis révoquer l'ancien jeton. Les URL publiques des images ne changent pas.
+
 ---
 
 ## 5. Opérateurs (rôle `OPERATOR`)
@@ -349,6 +355,9 @@ Les durées ci-dessous sont celles du registre des traitements ([`docs/legal/reg
 | `EmailVerificationToken` | expirées ou invalidées par un nouvel envoi (validité 24 h) |
 | `RefreshToken` | expirées **ou** révoquées depuis plus de **30 jours**, tous comptes confondus |
 | `NotificationEvent` | date prévue (`scheduledAt`) antérieure à **90 jours** |
+| `CommunityModerationAction` | décisions de modération de plus de **365 jours** (journal DSA) |
+| `CommunityReport` | signalements **traités** (`ACTIONED` / `DISMISSED`) de plus de **365 jours** ; jamais les signalements ouverts |
+| `CommunityMedia` | images orphelines (ni publication ni avatar) dont le propriétaire est supprimé ou téléversées depuis plus de **24 h** : **fichier effacé du stockage** puis ligne supprimée (1 000 au plus par exécution ; un échec de suppression du fichier garde la ligne, reprise le lendemain) |
 
 - **Jamais purgé** : `PaymentEvent` (journal des notifications de paiement RevenueCat : obligations comptables et preuve des transactions ; `userId` passe à NULL à la suppression du compte). Sa durée de conservation reste à fixer par le propriétaire (registre, T6).
 - Aucun compte n'est supprimé par ce job. Les invités relèvent de `GuestPurgeService` (§6.4, 03:17 UTC).
@@ -396,7 +405,7 @@ Après une exécution, ces compteurs doivent être nuls (sauf arriéré de plus 
    COMMIT;
    ```
 
-   Les clés étrangères suppriment en cascade animaux, carnet, rappels, sessions et abonnements ; `PaymentEvent.userId` passe à NULL.
+   Les clés étrangères suppriment en cascade animaux, carnet, rappels, sessions, abonnements et contenus communautaires ; `PaymentEvent.userId` et `CommunityModerationAction.subjectId` passent à NULL. Les images communautaires du compte deviennent orphelines (`ownerId` NULL) : le job de maintenance efface leurs fichiers à l'exécution suivante.
 4. Consigner la date et le nombre de comptes supprimés (sans les adresses). Les données disparaissent des sauvegardes au bout de 30 jours.
 
 ---
@@ -439,6 +448,49 @@ Pas de délai de réponse garanti connu pour les offres gratuites : voir les con
 
 ---
 
+## 9. Modération de la communauté
+
+Volet désactivé tant que `COMMUNITY_ENABLED` n'est pas à `true` (toutes les routes `/community/*` répondent 404). Avant l'ouverture : point de contact (`COMMUNITY_CONTACT_EMAIL`), règles de communauté publiées (version `COMMUNITY_RULES_VERSION`, `backend/src/community/community.constants.ts`), au moins un opérateur (§5) et le stockage R2 (`docs/DEPLOY.md`).
+
+### 9.1 Principes (règlement européen sur les services numériques, DSA)
+
+- **Signalement** (art. 16) : tout compte connecté, invité compris, motif dans une liste fermée (`SPAM`, `HARASSMENT`, `HATE`, `VIOLENCE`, `ANIMAL_WELFARE`, `ILLEGAL_TRADE`, `DANGEROUS_ADVICE`, `NUDITY`, `PERSONAL_DATA`, `IMPERSONATION`, `OTHER`), précisions facultatives ; un signalement par compte et par contenu.
+- **Masquage automatique** : au-delà de `COMMUNITY_HIDE_THRESHOLD` signalements distincts ouverts (défaut 3), le contenu passe en `HIDDEN_AUTO` et l'auteur est notifié (décision automatisée signalée comme telle). Un contenu déjà examiné par un opérateur (rétabli ou classé) n'est plus masqué automatiquement : seuls les opérateurs décident.
+- **Exposé des motifs** (art. 17) : toute décision défavorable (masquage, suppression, suspension) porte un motif de la liste et une explication rédigée ; l'auteur la reçoit par e-mail et la retrouve dans l'application (`GET /community/me/decisions`), avec le point de contact, le recours interne et la mention du règlement extrajudiciaire (art. 21) et de la voie judiciaire.
+- **Recours interne** (art. 20) : gratuit, pendant 6 mois, une fois par décision ; il est toujours tranché par un opérateur (jamais automatiquement).
+- **Journal** : chaque décision (y compris automatique, classement, rétablissement, issue d'un recours) est consignée dans `CommunityModerationAction`, conservée 365 jours (§6.5), sans lien vers un compte supprimé.
+
+### 9.2 Traiter la file (opérateur, e-mail vérifié)
+
+Toutes les routes sont sous `/community/moderation` (jeton d'un compte `OPERATOR`) :
+
+1. **Lire la file** : `GET queue` (contenus avec signalements ouverts, du plus ancien au plus récent : motifs, nombre, précisions, pseudo de l'auteur — jamais son e-mail), `GET hidden` (contenus masqués), `GET appeals` (recours en attente), `GET log` (journal).
+2. **Décider**, pour une publication (`posts/:id`) ou un commentaire (`comments/:id`) :
+   - `POST …/hide` `{ "reason": "<MOTIF>", "statement": "<explication ≥ 10 caractères>" }` : masque, clôt les signalements, notifie l'auteur ;
+   - `POST …/delete` (même corps) : supprime définitivement (images effacées du stockage), notifie l'auteur. Réserver aux contenus manifestement illicites ou graves : une suppression ne peut pas être annulée par un recours ;
+   - `POST …/restore` `{ "statement": "…" }` : rétablit un contenu masqué (notifie l'auteur) et le protège du masquage automatique ;
+   - `POST …/dismiss` `{ "statement": "…" }` : classe les signalements sans suite (aucune notification à l'auteur).
+3. **Suspendre** un membre qui récidive : `POST users/:pseudo/suspend` `{ "reason", "statement", "days": 1-365 }` ; il garde la lecture et les « j'aime » mais ne peut plus publier, commenter ni changer de pseudo ou d'avatar. Lever : `POST users/:pseudo/unsuspend` `{ "statement" }`.
+4. **Recours** : `POST appeals/:id/resolve` `{ "outcome": "UPHELD" | "REVERSED", "statement" }`. `REVERSED` rétablit le contenu masqué ou lève la suspension ; l'auteur reçoit la réponse.
+5. **Contenus manifestement illicites** (maltraitance, trafic d'espèces protégées, menaces) : supprimer, suspendre, puis conserver hors ligne les éléments utiles et signaler aux autorités (PHAROS en France) `[À COMPLÉTER : procédure et contact du propriétaire]`.
+
+Délai cible de traitement : `[À COMPLÉTER : par ex. 48 h ouvrées pour la file, 7 jours pour un recours]`. Contrôle rapide (lecture seule) :
+
+```sql
+SELECT count(*) FILTER (WHERE status = 'OPEN') AS signalements_ouverts,
+       min("createdAt") FILTER (WHERE status = 'OPEN') AS plus_ancien
+  FROM "CommunityReport";
+SELECT count(*) AS recours_en_attente FROM "CommunityModerationAction" WHERE "appealStatus" = 'PENDING';
+```
+
+### 9.3 Incidents
+
+- **Vague de spam** : baisser `COMMUNITY_POSTS_PER_HOUR` / `COMMUNITY_COMMENTS_PER_MINUTE` ou `COMMUNITY_HIDE_THRESHOLD` (Render, redéploiement), suspendre les comptes concernés. En dernier recours, `COMMUNITY_ENABLED=false` ferme tout le volet (404) sans perte de données.
+- **Image illicite** : `POST posts/:id/delete` efface aussi le fichier du bucket R2 ; vérifier son absence à son URL publique (le cache CDN peut la servir quelques minutes : purger l'URL dans Cloudflare si besoin).
+- **Notification non reçue** (e-mail) : la décision reste consultable dans l'application ; `notifiedAt` vide dans le journal signale un envoi en échec.
+
+---
+
 ## Annexe : variables d'environnement
 
 Aucune valeur secrète n'est notée ici. Sources : `render.yaml`, `netlify.toml` et le schéma Joi (`backend/src/config/env.validation.ts`).
@@ -469,8 +521,13 @@ Aucune valeur secrète n'est notée ici. Sources : `render.yaml`, `netlify.toml`
 | `GUEST_RETENTION_DAYS` | Dashboard (`sync: false`) | Jours d'inactivité avant purge d'un invité (défaut 90) ; `GUEST_PURGE_ENABLED=false` (schéma Joi) suspend cette purge |
 | `MAINTENANCE_ENABLED` | Dashboard (`sync: false`) | `false` suspend le job de maintenance quotidien (§6.5) |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Dashboard (`sync: false`) | Web Push ; sans elles, l'envoi push est désactivé (journalisé) |
+| `COMMUNITY_ENABLED` | Dashboard (`sync: false`) | Défaut `false` : routes `/community/*` en 404 ; `true` exige `MEDIA_DRIVER=s3` en production (§9) |
+| `COMMUNITY_CONTACT_EMAIL` | Dashboard (`sync: false`) | Point de contact DSA cité dans les notifications de modération |
+| `COMMUNITY_HIDE_THRESHOLD`, `COMMUNITY_POSTS_PER_HOUR`, `COMMUNITY_COMMENTS_PER_MINUTE`, `COMMUNITY_UPLOADS_PER_HOUR` | Dashboard (`sync: false`) | Défauts 3, 5, 5, 30 |
+| `MEDIA_DRIVER`, `MEDIA_MAX_BYTES`, `MEDIA_BUCKET`, `MEDIA_PUBLIC_BASE_URL` | Dashboard (`sync: false`) | Stockage des images (R2) : `docs/DEPLOY.md` |
+| `S3_ENDPOINT`, `S3_REGION`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_FORCE_PATH_STYLE` | Dashboard (`sync: false`) | Identifiants R2 (secret : jeton limité au bucket) |
 
-Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `REDIS_HOST` (défaut `localhost`), `REDIS_PORT` (défaut 6379).
+Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `REDIS_HOST` (défaut `localhost`), `REDIS_PORT` (défaut 6379), `MEDIA_LOCAL_DIR` (pilote local, développement).
 
 ### Frontend (Netlify)
 

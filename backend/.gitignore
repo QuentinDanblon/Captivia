@@ -54,3 +54,6 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Médias communautaires du pilote local (MEDIA_DRIVER=local, MEDIA_LOCAL_DIR par défaut)
+/var

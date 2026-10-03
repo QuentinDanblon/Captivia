@@ -38,6 +38,7 @@ import { SpeciesRoutinesModule } from './species-routines/species-routines.modul
 import { AccountModule } from './account/account.module';
 import { AgendaModule } from './agenda/agenda.module';
 import { MaintenanceModule } from './maintenance/maintenance.module';
+import { CommunityModule } from './community/community.module';
 import { ExternalHttpModule } from './external/http/external-http.module';
 
 const redisEnabled = process.env.REDIS_ENABLED === 'true';
@@ -92,6 +93,8 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     GradeModule,
     AccountModule,
     AgendaModule,
+    // Communauté : routes en 404 tant que COMMUNITY_ENABLED != true (export/suppression RGPD actifs).
+    CommunityModule,
     MaintenanceModule,
     CacheModule.registerAsync(),
     TransformerModule,

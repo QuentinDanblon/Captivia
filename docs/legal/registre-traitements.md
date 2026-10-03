@@ -33,6 +33,7 @@ Les données saisies sur les **animaux** (carnet de santé, médicaments, vaccin
 | T10 | Suivi des erreurs (Sentry) | Intérêt légitime (6.1.f) | 90 jours au plus |
 | T11 | Contenu encyclopédique (GBIF, PubMed, Species+) | — (aucune donnée personnelle transmise) | Sans objet |
 | T12 | Administration (rôle opérateur) | Intérêt légitime (6.1.f) | Durée du compte opérateur |
+| T13 | Communauté (profil public, publications, modération) — désactivée tant que `COMMUNITY_ENABLED` ≠ `true` | Contrat (6.1.b) : CGU + règles de communauté ; modération : obligation légale (6.1.c, DSA) et intérêt légitime (6.1.f) | Contenus : jusqu'à leur suppression, le départ de la communauté ou la suppression du compte ; journal de modération et signalements traités : 365 jours |
 
 ## 2. Fiches de traitement
 
@@ -87,7 +88,7 @@ Les données saisies sur les **animaux** (carnet de santé, médicaments, vaccin
 ### T7 — Exercice des droits
 
 - **Finalité** : répondre aux demandes d'accès, de portabilité, de rectification et d'effacement.
-- **Mise en œuvre** : export JSON complet et gratuit (`GET /users/me/export`, sans empreintes de mots de passe ni jetons) ; rectification dans le service ; suppression du compte en libre-service (`DELETE /users/me`, mot de passe exigé hors invité), en cascade sur toutes les données liées, sauf `PaymentEvent` (T6).
+- **Mise en œuvre** : export JSON complet et gratuit (`GET /users/me/export`, format 4, sans empreintes de mots de passe ni jetons ; section `community` : profil public, publications et URL des images, commentaires, réactions, signalements émis, blocages, décisions de modération reçues) ; rectification dans le service ; suppression du compte en libre-service (`DELETE /users/me`, mot de passe exigé hors invité), en cascade sur toutes les données liées, sauf `PaymentEvent` (T6) et le journal de modération (T13, conservé sans lien vers le compte) ; les fichiers des images communautaires sont effacés du stockage juste après (un échec est repris par le job de maintenance).
 - **Conservation** : la suppression est immédiate en base ; les données subsistent dans les sauvegardes jusqu'à leur expiration (T8). Les demandes reçues par e-mail sont conservées `[À COMPLÉTER : durée, par ex. 1 an pour la preuve de la réponse]`.
 
 ### T8 — Sauvegardes chiffrées
@@ -124,10 +125,31 @@ Les données saisies sur les **animaux** (carnet de santé, médicaments, vaccin
 
 ### T12 — Administration (rôle opérateur)
 
-- **Finalité** : modérer et administrer le service (statut premium manuel, contenus, mesure d'usage).
+- **Finalité** : modérer et administrer le service (statut premium manuel, contenus et file de modération de la communauté — T13 —, mesure d'usage). Les opérateurs voient le pseudo des auteurs et le contenu signalé, jamais leur adresse e-mail.
 - **Données** : compte opérateur (T1), rôle `OPERATOR` attribué uniquement en base par `npm run operator:set` ; e-mail vérifié obligatoire.
 - **Base légale** : intérêt légitime (gestion du service).
 - **Conservation** : durée du compte ; rétrogradation documentée (`docs/RUNBOOK.md` §5).
+
+### T13 — Communauté (volet social)
+
+- **Finalité** : permettre aux membres qui le choisissent de publier des photos et des questions sur leurs animaux, de commenter et d'aimer les publications ; modérer ces contenus (signalements, masquage, suppression, suspension, recours) conformément au règlement (UE) 2022/2065 sur les services numériques (DSA) ; protéger les membres (blocage, limitation des abus).
+- **Activation** : aucune donnée n'est créée sans activation explicite du profil public par l'utilisateur, qui accepte les règles de communauté (version et date enregistrées, `CommunityProfile.rulesVersion` / `rulesAcceptedAt`). Réservé aux comptes à e-mail vérifié (jamais aux invités) ayant confirmé l'âge minimal des CGU (15 ans, D-07) : case de l'inscription, ou confirmation à l'activation pour un compte antérieur (`ageConfirmedAt`). Le volet entier est désactivé tant que `COMMUNITY_ENABLED` ≠ `true`.
+- **Données** :
+  - profil public (`CommunityProfile`) : pseudo, avatar facultatif, version et date d'acceptation des règles, date de confirmation de l'âge, suspension éventuelle — **jamais l'adresse e-mail** ;
+  - publications (`CommunityPost`) : type, texte (≤ 2 000 caractères), catégorie d'espèce, images, et **si l'auteur le choisit** l'animal montré : seuls son nom et son espèce sont affichés, **aucune donnée du carnet de santé** (séparation vérifiée par un test automatisé) ;
+  - commentaires (`CommunityComment`), « j'aime » (`CommunityReaction`), blocages (`CommunityBlock`) ;
+  - images (`CommunityMedia`) : fichier ré-encodé en WebP, ≤ 1 600 px de large, **sans aucune métadonnée** (EXIF, dont la géolocalisation GPS, XMP, IPTC retirés avant stockage) ; clé aléatoire, dimensions, poids ;
+  - signalements (`CommunityReport`) : auteur du signalement, contenu visé, motif (liste fermée), précisions facultatives (≤ 500 caractères), statut ;
+  - décisions de modération (`CommunityModerationAction`) : action, contenu ou compte visé, motif, exposé des motifs, caractère automatisé, opérateur, date de notification, recours (texte, issue).
+- **Base légale** : exécution du contrat (CGU et règles de communauté acceptées) pour le profil, les contenus, les réactions et les blocages ; obligation légale (DSA art. 16, 17 et 20 : traitement des signalements, exposé des motifs, recours interne) et intérêt légitime (sécurité de la communauté, lutte contre le spam) pour la modération et les limitations.
+- **Destinataires** : les membres connectés (contenus publiés : pseudo, avatar, texte, images, nom et espèce de l'animal montré) ; les opérateurs (T12) ; le stockage objet des images (Cloudflare R2, si `MEDIA_DRIVER=s3`) ; le prestataire e-mail (notifications de modération à l'auteur) ; hébergeurs. Les images sont publiques pour qui connaît leur adresse (clé aléatoire non devinable).
+- **Mesures** : modération décrite dans `docs/RUNBOOK.md` §9 ; masquage automatique au-delà de `COMMUNITY_HIDE_THRESHOLD` signalements distincts (défaut 3), toujours revu par une personne sur recours ; notification motivée de chaque décision défavorable avec point de contact (`COMMUNITY_CONTACT_EMAIL`), recours interne gratuit pendant 6 mois, mention du règlement extrajudiciaire et de la voie judiciaire ; blocage entre membres (contenus masqués dans les deux sens) ; limites par compte (publications par heure, commentaires par minute, images par heure, signalements par heure) ; liens interdits pendant les 7 premiers jours d'un compte ; contrôle du type réel des fichiers (signature binaire), taille maximale (`MEDIA_MAX_BYTES`, 8 Mo par défaut).
+- **Conservation** :
+  - profil, publications, commentaires, réactions, blocages, images : jusqu'à leur suppression par l'utilisateur, son départ de la communauté (`DELETE /community/profile` : tout est effacé, fichiers compris), la suppression par un opérateur ou la suppression du compte ;
+  - contenus masqués : conservés (visibles de leur seul auteur et des opérateurs) jusqu'à la décision de l'opérateur, la suppression par l'auteur ou celle du compte ;
+  - images téléversées jamais rattachées à une publication ou un avatar : **24 heures** (job de maintenance, fichier compris) ;
+  - signalements : ouverts jusqu'à leur traitement ; traités : **365 jours** ; supprimés avec le compte de leur auteur ;
+  - journal des décisions de modération : **365 jours** (exposé des motifs, recours ouvert 6 mois), conservé après la suppression du contenu ou du compte, sans lien vers le compte (`subjectId` → NULL) `[À VALIDER : durée, avec un professionnel du droit]`.
 
 ## 3. Sous-traitants et destinataires
 
@@ -139,6 +161,7 @@ Les données saisies sur les **animaux** (carnet de santé, médicaments, vaccin
 | Brevo (Sendinblue SAS) — si `MAIL_*` configuré (D-06) | E-mails transactionnels et rappels | E-mail, langue, contenu des messages (noms d'animaux, soins) | UE (France) | Sans transfert hors UE annoncé | À signer |
 | Functional Software, Inc. (Sentry) — si DSN configuré | Suivi des erreurs | Événements d'erreur nettoyés | Région UE du compte ; société aux États-Unis | CCT / DPF | À signer |
 | RevenueCat, Inc. — si `IAP_ENABLED` | Gestion des achats intégrés | Identifiant interne, achats, statut d'abonnement | États-Unis | CCT / DPF | À signer |
+| Cloudflare, Inc. (R2) — si `MEDIA_DRIVER=s3` (T13) | Stockage et diffusion des images de la communauté | Images ré-encodées sans métadonnées (clés aléatoires) | Juridiction UE du bucket si choisie `[À COMPLÉTER]` ; société aux États-Unis | CCT / DPF | À signer avant `COMMUNITY_ENABLED=true` |
 | GitHub, Inc. (Microsoft) | CI/CD, stockage des sauvegardes **chiffrées** | Dumps chiffrés (illisibles sans la clé privée), code | États-Unis | CCT / DPF | À accepter (DPA intégré aux conditions GitHub) |
 | Apple Inc., Google LLC | Vente des achats intégrés ; services push | Achat (identité du payeur chez le store) ; messages push chiffrés | Monde | Responsables distincts (stores) / éditeurs de navigateur | Sans objet (conditions des stores) |
 | Applications d'agenda de l'utilisateur | Lecture du flux ICS | Contenu du flux | Selon l'application | À l'initiative de l'utilisateur | Sans objet |
@@ -159,6 +182,9 @@ Aucune donnée n'est vendue, louée ni utilisée à des fins publicitaires. Pas 
 | Événements de rappel (`NotificationEvent`) | **90 jours** après la date prévue | `MaintenanceService` | Quotidienne, 03:41 UTC |
 | Abonnements push | Jusqu'à désinscription, échec 404/410 ou suppression du compte | `WebPushSender`, cascade | À l'événement |
 | Jeton du flux ICS | Jusqu'à régénération, désactivation ou suppression du compte | Remplacement de `User.calendarToken` | À l'événement |
+| Communauté : contenus, profil, réactions, blocages (T13) | Jusqu'à suppression par l'utilisateur, départ de la communauté, décision d'un opérateur ou suppression du compte | `CommunityDataService` (départ, suppression du compte : fichiers compris), cascade SQL | Immédiate |
+| Communauté : images orphelines | 24 h (jamais rattachées) ; immédiat si le propriétaire est supprimé | `MaintenanceService` → `CommunityMediaService.purgeOrphans` (fichier puis ligne, 1 000 par exécution) | Quotidienne, 03:41 UTC |
+| Communauté : signalements traités, journal de modération | **365 jours** (`COMMUNITY_MODERATION_RETENTION_DAYS`) ; signalements ouverts : jusqu'à traitement | `MaintenanceService` | Quotidienne, 03:41 UTC |
 | Journal de paiement (`PaymentEvent`) | `[À COMPLÉTER : 10 ans ?]` — **non purgé** | Aucun (obligations comptables) ; `userId` → NULL à la suppression du compte | — |
 | Sauvegardes chiffrées | 30 jours | `retention-days: 30` (`backup.yml`) | Hebdomadaire |
 | Compteurs de mesure d'usage (Redis, opérateurs) | 90 jours | `EXPIRE` sur les clés journalières (`ApiAnalyticsService`) | À l'écriture |
@@ -175,6 +201,7 @@ Le job de maintenance (`backend/src/maintenance/`) supprime par lots de 1 000 li
 - **Jetons à usage unique** (réinitialisation, vérification d'e-mail, flux ICS) : stockés uniquement sous forme d'empreinte SHA-256, durée de vie courte, purge quotidienne.
 - **Cloisonnement** : chaque ressource est filtrée par propriétaire (protection BOLA) ; rôle opérateur attribué uniquement en base, e-mail vérifié exigé.
 - **Limitation de débit** : globale (throttler) et dédiée (connexion, réinitialisation, création d'invités : 5 par heure et par IP).
+- **Communauté (T13)** : images contrôlées par leur signature binaire (JPEG, PNG, WebP seulement), taille et nombre de pixels bornés, ré-encodées en WebP sans métadonnées (EXIF/GPS) ; aucune route communautaire ne lit le carnet de santé ni l'adresse e-mail (test automatisé) ; texte stocké brut et affiché comme texte ; limites par compte ; blocage ; volet désactivable instantanément (`COMMUNITY_ENABLED=false`).
 - **Validation** : DTO stricts (`whitelist`, `forbidNonWhitelisted`) ; appels sortants par un client unique (hôtes publics en HTTPS, taille et délai bornés, secrets retirés, disjoncteur).
 - **Minimisation des journaux** : masquage des en-têtes d'autorisation, cookies, mots de passe, jetons et e-mails (pino) ; nettoyage Sentry ; aucun identifiant d'utilisateur en paramètre d'URL.
 - **Base de données** : hébergement UE, chiffrement au repos et en transit (Neon), contraintes d'intégrité SQL (CHECK, clés étrangères en cascade).
@@ -202,6 +229,7 @@ La durée de 36 mois (référence CNIL pour une inactivité prolongée) est à c
 - [ ] Sentry — DPA, avec vérification de la région UE du projet `[À COMPLÉTER]`
 - [ ] RevenueCat — DPA, avant `IAP_ENABLED=true` `[À COMPLÉTER]`
 - [ ] GitHub — DPA (GitHub Data Protection Agreement, intégré aux conditions) `[À COMPLÉTER]`
+- [ ] Cloudflare (R2, images de la communauté) — DPA (Cloudflare Data Processing Addendum), avant `COMMUNITY_ENABLED=true` `[À COMPLÉTER]`
 - [ ] Apple (Paid Applications Agreement) et Google Play (Developer Distribution Agreement) : pas de DPA, conditions des stores à accepter (W6-01)
 
 ## 8. Points à décider ou compléter par le propriétaire
@@ -213,3 +241,4 @@ La durée de 36 mois (référence CNIL pour une inactivité prolongée) est à c
 - Durée de l'historique Neon (offre souscrite).
 - Signature des DPA (§7) et registre des violations.
 - Mention des achats intégrés (RevenueCat, Apple, Google) dans la politique de confidentialité avant la vague 6 (absente aujourd'hui).
+- **Communauté (T13), avant `COMMUNITY_ENABLED=true`** : publier les règles de communauté (version `2026-10`) et compléter les CGU (contenus des membres, licence d'affichage, modération, recours) ; ajouter T13 à la politique de confidentialité ; désigner le point de contact DSA (`COMMUNITY_CONTACT_EMAIL`) et le délai cible de traitement des signalements et des recours ; valider la durée de 365 jours du journal de modération ; signer le DPA Cloudflare (R2) et choisir la juridiction UE du bucket ; prévoir la procédure de signalement aux autorités des contenus manifestement illicites (`docs/RUNBOOK.md` §9.2).

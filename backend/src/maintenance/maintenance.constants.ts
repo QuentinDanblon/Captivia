@@ -24,6 +24,13 @@ export const NOTIFICATION_EVENT_RETENTION_DAYS = 90;
  */
 export const REFRESH_TOKEN_GRACE_DAYS = 30;
 
+/**
+ * Communauté : journal des décisions de modération et signalements traités (ACTIONED / DISMISSED),
+ * conservés 365 jours (motivation des décisions, recours ouvert 6 mois — DSA art. 17 et 20), puis
+ * supprimés. Les signalements encore ouverts ne sont jamais purgés.
+ */
+export const COMMUNITY_MODERATION_RETENTION_DAYS = 365;
+
 /** Seuil d'inactivité au-delà duquel un COMPTE est signalé (aucune suppression automatique). */
 export const INACTIVE_ACCOUNT_MONTHS = 36;
 
@@ -34,6 +41,8 @@ export interface MaintenanceCutoffs {
   refreshTokensBefore: Date;
   /** `NotificationEvent.scheduledAt` antérieur à cette date. */
   notificationEventsBefore: Date;
+  /** Journal de modération et signalements traités antérieurs à cette date. */
+  moderationBefore: Date;
 }
 
 /** Calcule les dates limites de purge pour un instant donné (fonction pure, testable). */
@@ -44,6 +53,9 @@ export function maintenanceCutoffs(now: Date): MaintenanceCutoffs {
     refreshTokensBefore: new Date(t - REFRESH_TOKEN_GRACE_DAYS * DAY_MS),
     notificationEventsBefore: new Date(
       t - NOTIFICATION_EVENT_RETENTION_DAYS * DAY_MS,
+    ),
+    moderationBefore: new Date(
+      t - COMMUNITY_MODERATION_RETENTION_DAYS * DAY_MS,
     ),
   };
 }

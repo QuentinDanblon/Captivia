@@ -63,6 +63,66 @@ describe('envValidationSchema', () => {
       ).toBeUndefined();
     });
 
+    it('communauté : désactivée par défaut ; activée, elle exige le pilote s3 complet', () => {
+      expect(validate(baseProd).value.COMMUNITY_ENABLED).toBe('false');
+      expect(validate(baseProd).value.MEDIA_DRIVER).toBe('local');
+      expect(
+        validate({ ...baseProd, COMMUNITY_ENABLED: 'true' }).error?.message,
+      ).toContain('MEDIA_DRIVER');
+      expect(
+        validate({
+          ...baseProd,
+          COMMUNITY_ENABLED: 'true',
+          MEDIA_DRIVER: 'local',
+        }).error?.message,
+      ).toContain('MEDIA_DRIVER');
+      const missing = validate({
+        ...baseProd,
+        COMMUNITY_ENABLED: 'true',
+        MEDIA_DRIVER: 's3',
+      }).error?.message;
+      for (const name of [
+        'MEDIA_PUBLIC_BASE_URL',
+        'MEDIA_BUCKET',
+        'S3_ACCESS_KEY_ID',
+        'S3_SECRET_ACCESS_KEY',
+      ]) {
+        expect(missing).toContain(name);
+      }
+      const ok = validate({
+        ...baseProd,
+        COMMUNITY_ENABLED: 'true',
+        MEDIA_DRIVER: 's3',
+        MEDIA_BUCKET: 'captivia-media',
+        MEDIA_PUBLIC_BASE_URL: 'https://media.captivia.example',
+        S3_ENDPOINT: 'https://acc.r2.cloudflarestorage.com',
+        S3_ACCESS_KEY_ID: 'key',
+        S3_SECRET_ACCESS_KEY: 'secret',
+      });
+      expect(ok.error).toBeUndefined();
+      expect(ok.value).toMatchObject({
+        S3_REGION: 'auto',
+        COMMUNITY_HIDE_THRESHOLD: 3,
+        COMMUNITY_POSTS_PER_HOUR: 5,
+        COMMUNITY_COMMENTS_PER_MINUTE: 5,
+        MEDIA_MAX_BYTES: 8 * 1024 * 1024,
+      });
+    });
+
+    it('communauté : bornes des réglages anti-abus', () => {
+      expect(
+        validate({ ...baseProd, COMMUNITY_HIDE_THRESHOLD: 0 }).error?.message,
+      ).toContain('COMMUNITY_HIDE_THRESHOLD');
+      expect(
+        validate({ ...baseProd, MEDIA_MAX_BYTES: 50 * 1024 * 1024 }).error
+          ?.message,
+      ).toContain('MEDIA_MAX_BYTES');
+      expect(
+        validate({ ...baseProd, COMMUNITY_CONTACT_EMAIL: 'pas-un-email' }).error
+          ?.message,
+      ).toContain('COMMUNITY_CONTACT_EMAIL');
+    });
+
     it('accepte un JWT_SECRET de 32 caractères', () => {
       const { error } = validate({ ...baseProd, JWT_SECRET: 'a1'.repeat(16) });
       expect(error).toBeUndefined();
