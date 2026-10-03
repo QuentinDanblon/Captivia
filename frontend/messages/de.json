@@ -1216,11 +1216,37 @@
         "thermostat": "Thermostat",
         "thermometre": "Thermometer",
         "pulverisateur": "Sprühflasche",
-        "filtration": "Filterung"
+        "filtration": "Filterung",
+        "couchage": "Schlafplatz",
+        "jouet": "Spielzeug",
+        "litiere": "Katzenstreu",
+        "griffoir": "Kratzbäume",
+        "decoration": "Einrichtung",
+        "enclos": "Gehege",
+        "aquarium": "Aquarium",
+        "aquaterrarium": "Aquaterrarium",
+        "voliere": "Voliere",
+        "vivarium": "Vivarien",
+        "bassin": "Teich"
       }
     },
     "pubmedNote": "Artikel aus PubMed (NCBI), auf Englisch",
-    "reviewedOn": "Steckbrief geprüft am {date}"
+    "reviewedOn": "Steckbrief geprüft am {date}",
+    "equipmentItems": {
+      "bed": "Körbchen oder Kissen in passender Größe",
+      "bowls": "Futter- und Wassernäpfe",
+      "dogToys": "Geeignetes Hundespielzeug",
+      "litterTray": "Katzentoilette",
+      "scratchingPost": "Stabiler Kratzbaum",
+      "terrarium": "Artgerechtes Terrarium",
+      "vivarium": "Artgerechtes Vivarium",
+      "aquarium": "Artgerechtes Aquarium",
+      "aquaterrarium": "Artgerechtes Aquaterrarium",
+      "cage": "Artgerechter Käfig",
+      "aviary": "Artgerechte Voliere",
+      "enclosure": "Artgerechtes Gehege",
+      "pond": "Artgerechter Teich"
+    }
   },
   "store": {
     "allCategories": "Alle Tierarten",

@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { isGuestUser } from '@/lib/guest';
+import { api, type Animal } from '@/lib/api';
 import { careStatusOf, summarizeAgenda } from '@/lib/today';
 import { GuestEntry } from '@/components/guest/GuestEntry';
 import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
@@ -27,7 +28,6 @@ import {
   AGENDA_TYPES,
   buildFeedUrl,
   displayDay,
-  distinctAnimals,
   fetchAgenda,
   filterItems,
   getCalendarTokenStatus,
@@ -87,6 +87,7 @@ export default function AgendaPage() {
 
   const [days, setDays] = useState<number>(30);
   const [data, setData] = useState<AgendaResponse | null>(null);
+  const [animals, setAnimals] = useState<Pick<Animal, 'id' | 'name'>[]>([]);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
   const [animalId, setAnimalId] = useState('');
@@ -106,13 +107,20 @@ export default function AgendaPage() {
     setFailed(false);
     try {
       const { from, to } = rangeFromToday(days);
-      setData(await fetchAgenda(token, from, to));
+      const [agenda, registeredAnimals] = await Promise.all([
+        fetchAgenda(token, from, to),
+        api.getMyAnimals(token),
+      ]);
+      setData(agenda);
+      // Le filtre reste disponible même pour un animal sans soin prévu dans la période.
+      setAnimals(registeredAnimals.map(({ id, name }) => ({ id, name }))
+        .sort((a, b) => a.name.localeCompare(b.name, locale)));
     } catch {
       setFailed(true);
     } finally {
       setLoading(false);
     }
-  }, [token, days]);
+  }, [token, days, locale]);
 
   useEffect(() => {
     void load();
@@ -135,7 +143,6 @@ export default function AgendaPage() {
   }, [token, user]);
 
   const items = useMemo(() => data?.items ?? [], [data]);
-  const animals = useMemo(() => distinctAnimals(items), [items]);
   const filtered = useMemo(() => filterItems(items, { animalId, type }), [items, animalId, type]);
   // Ordre de la frise : par jour d'affichage, journées entières en tête, puis par heure.
   const ordered = useMemo(() => groupByDay(filtered).flatMap((group) => group.items), [filtered]);

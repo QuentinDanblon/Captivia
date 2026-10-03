@@ -373,7 +373,7 @@ export function EquipmentSection({ equipment }: { equipment: EquipmentData }) {
             <ul className="m-0 grid list-none gap-1.5 p-0">
               {recs.map((rec) => (
                 <li key={rec.id} className="flex flex-wrap items-baseline justify-between gap-x-3 text-body text-ink">
-                  <span>{rec.label}</span>
+                  <span>{rec.labelKey ? t(`species.equipmentItems.${rec.labelKey}`) : rec.label}</span>
                   {rec.size ? <span className="font-mono text-meta text-ink-2">{rec.size}</span> : null}
                 </li>
               ))}
@@ -381,6 +381,7 @@ export function EquipmentSection({ equipment }: { equipment: EquipmentData }) {
           </div>
         ))}
       </div>
+      <SourceNote sources={equipment.sources} />
     </SheetSection>
   );
 }

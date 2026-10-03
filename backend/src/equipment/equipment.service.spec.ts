@@ -18,7 +18,9 @@ describe('EquipmentService', () => {
   };
 
   const mockPrismaService = {
+    speciesProfile: { findUnique: jest.fn(), findFirst: jest.fn() },
     recommendedEquipment: {
+      count: jest.fn(),
       findMany: jest.fn(),
       create: jest.fn(),
       update: jest.fn(),
@@ -40,6 +42,13 @@ describe('EquipmentService', () => {
     service = module.get<EquipmentService>(EquipmentService);
 
     jest.clearAllMocks();
+    mockPrismaService.speciesProfile.findFirst.mockResolvedValue(null);
+    mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+      speciesId: 123,
+      scientificName: 'Eublepharis macularius',
+      category: 'reptile',
+      habitats: [],
+    });
   });
 
   it('should be defined', () => {
@@ -103,7 +112,7 @@ describe('EquipmentService', () => {
       });
     });
 
-    it('should include speciesId OR null in query when speciesId provided', async () => {
+    it('should limit general terrarium items to reptiles and temperature control', async () => {
       mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
 
       await service.getRecommendedEquipment(123);
@@ -112,12 +121,184 @@ describe('EquipmentService', () => {
         mockPrismaService.recommendedEquipment.findMany,
       ).toHaveBeenCalledWith({
         where: {
-          OR: [{ speciesId: 123 }, { speciesId: null }],
+          OR: [
+            { speciesId: 123 },
+            {
+              speciesId: null,
+              category: { in: ['thermostat', 'thermometre'] },
+            },
+          ],
         },
         orderBy: [{ order: 'asc' }, { id: 'asc' }],
         take: 100,
         skip: 0,
       });
+    });
+
+    it.each(['Canis familiaris', 'Canis lupus familiaris'])(
+      'recommande couchage et gamelles pour %s, sans matériel de reptile',
+      async (scientificName) => {
+        mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+          speciesId: 123,
+          scientificName,
+          category: 'mammifère',
+          habitats: [],
+        });
+        mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
+        const result = (await service.getRecommendedEquipment(123)) as {
+          recommendations: { labelKey?: string }[];
+        };
+        expect(result.recommendations.map((rec) => rec.labelKey)).toEqual([
+          'bed',
+          'bowls',
+          'dogToys',
+        ]);
+        expect(
+          mockPrismaService.recommendedEquipment.findMany,
+        ).toHaveBeenCalledWith(
+          expect.objectContaining({
+            where: { OR: [{ speciesId: 123 }] },
+          }),
+        );
+      },
+    );
+
+    it('recommande litière et griffoir aux races de chat', async () => {
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+        speciesId: 2000000100,
+        scientificName: 'Felis catus',
+        category: 'mammifère',
+        habitats: [],
+      });
+      mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
+      const result = (await service.getRecommendedEquipment(2000000100)) as {
+        recommendations: { labelKey?: string }[];
+      };
+      expect(result.recommendations.map((rec) => rec.labelKey)).toEqual([
+        'bed',
+        'bowls',
+        'litterTray',
+        'scratchingPost',
+      ]);
+    });
+
+    it.each([
+      ['reptile', 'terrarium', 'terrarium'],
+      ['poisson', 'aquarium', 'aquarium'],
+      ['amphibien', 'aquaterrarium', 'aquaterrarium'],
+      ['oiseau', 'volière', 'aviary'],
+      ['mammifère', 'enclos', 'enclosure'],
+      ['insecte', 'terrarium', 'terrarium'],
+      ['arachnide', 'terrarium', 'terrarium'],
+    ])('utilise l’habitat %s : %s', async (category, habitatType, labelKey) => {
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+        speciesId: 123,
+        scientificName: 'Species test',
+        category,
+        habitats: [
+          { habitatType, activityEnrichment: '', lightNeeds: '', sources: [] },
+        ],
+      });
+      mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
+      const result = (await service.getRecommendedEquipment(123)) as {
+        recommendations: { labelKey?: string }[];
+      };
+      expect(result.recommendations.map((rec) => rec.labelKey)).toEqual([
+        labelKey,
+      ]);
+    });
+
+    it('ne remplace pas le matériel spécifique et conserve la pagination des suggestions', async () => {
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+        speciesId: 123,
+        scientificName: 'Felis catus',
+        category: 'mammifère',
+        habitats: [],
+      });
+      mockPrismaService.recommendedEquipment.count.mockResolvedValue(1);
+      mockPrismaService.recommendedEquipment.findMany
+        .mockResolvedValueOnce([])
+        .mockResolvedValueOnce([{ category: 'couchage' }]);
+      const result = (await service.getRecommendedEquipment(
+        123,
+        undefined,
+        undefined,
+        { limit: 2, offset: 1 },
+      )) as { recommendations: { labelKey?: string }[] };
+      expect(result.recommendations.map((rec) => rec.labelKey)).toEqual([
+        'bowls',
+        'litterTray',
+      ]);
+    });
+
+    it('une espèce inconnue ne reçoit pas le matériel général des reptiles', async () => {
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue(null);
+      mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
+      await service.getRecommendedEquipment(999);
+      expect(
+        mockPrismaService.recommendedEquipment.findMany,
+      ).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: { OR: [{ speciesId: 999 }] },
+        }),
+      );
+    });
+
+    it('reprend l’habitat documenté du parent pour une race sans habitat propre', async () => {
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+        speciesId: 2000000200,
+        scientificName: 'Equus caballus',
+        category: 'mammifère',
+        habitats: [],
+      });
+      mockPrismaService.speciesProfile.findFirst.mockResolvedValue({
+        habitats: [
+          {
+            habitatType: 'enclos',
+            activityEnrichment: '',
+            lightNeeds: '',
+            sources: [],
+          },
+        ],
+      });
+      mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
+      const result = (await service.getRecommendedEquipment(2000000200)) as {
+        recommendations: { labelKey?: string }[];
+      };
+      expect(result.recommendations.map((rec) => rec.labelKey)).toEqual([
+        'enclosure',
+      ]);
+      expect(mockPrismaService.speciesProfile.findFirst).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: {
+            scientificName: { equals: 'Equus caballus', mode: 'insensitive' },
+            habitats: { some: { locale: 'fr' } },
+          },
+        }),
+      );
+    });
+
+    it('respecte le filtre de catégorie et n’ajoute pas une taille inventée', async () => {
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+        speciesId: 123,
+        scientificName: 'Canis familiaris',
+        category: 'mammifère',
+        habitats: [],
+      });
+      mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
+      const categoryResult = (await service.getRecommendedEquipment(
+        123,
+        'couchage',
+      )) as { recommendations: { labelKey?: string }[] };
+      expect(categoryResult.recommendations.map((rec) => rec.labelKey)).toEqual(
+        ['bed'],
+      );
+      const sizeResult = (await service.getRecommendedEquipment(
+        123,
+        undefined,
+        'small',
+      )) as { recommendations: unknown[] };
+      expect(sizeResult.recommendations).toEqual([]);
     });
 
     it('ne renvoie jamais de liste de produits (aucune donnée inventée)', async () => {
