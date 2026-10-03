@@ -1,6 +1,6 @@
 # Paiements — abonnement Premium via achats intégrés (W6-08, MOB-30)
 
-Captivia Premium (5,99 €/mois, 29,99 €/an) est vendu **uniquement** par les achats intégrés
+Captivia Premium (formules mensuelle et annuelle ; prix fixés dans App Store Connect et la Play Console — `[À COMPLÉTER]`, jamais codés en dur dans l’app) est vendu **uniquement** par les achats intégrés
 Apple App Store et Google Play, via **RevenueCat**. Il n'y a **aucun paiement web** (pas de
 Stripe) : `POST /users/me/subscription` répond 501 « Abonnement disponible dans l'application
 mobile ». `User.isPremium` reste l'activation **manuelle** par un opérateur (rétrocompatible).
@@ -53,7 +53,7 @@ vers la gestion App Store ou Google Play selon la source.
 
 1. Accords, taxes et coordonnées bancaires signés (contrat « Paid Apps »).
 2. App > Abonnements : créer un **groupe d'abonnements** « Captivia Premium » contenant deux
-   abonnements **auto-renouvelables** : mensuel (5,99 €) et annuel (29,99 €), avec nom
+   abonnements **auto-renouvelables** : mensuel et annuel (prix `[À COMPLÉTER]` par le propriétaire), avec nom
    localisé, description et capture d'écran de revue.
 3. Utilisateurs et accès > Intégrations > **clé In-App Purchase** (fichier .p8) + Issuer ID,
    à téléverser dans RevenueCat ; renseigner aussi le secret partagé spécifique à l'app.
