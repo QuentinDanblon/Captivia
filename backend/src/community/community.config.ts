@@ -18,6 +18,16 @@ export function hideThreshold(): number {
   return intEnv('COMMUNITY_HIDE_THRESHOLD', 3, 1);
 }
 
+/**
+ * Ancienneté minimale du compte (jours) pour qu'un signalement compte dans le seuil de masquage
+ * automatique (défaut 7). Seuls comptent les signalements de membres (compte non invité, e-mail
+ * vérifié, profil communautaire actif) assez anciens : les autres vont en file opérateur, sans
+ * masquage. Empêche quelques comptes jetables (invités) de masquer n'importe quel contenu.
+ */
+export function reportMinAccountAgeDays(): number {
+  return intEnv('COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS', 7, 0);
+}
+
 /** Publications par compte et par heure (défaut 5). */
 export function postsPerHour(): number {
   return intEnv('COMMUNITY_POSTS_PER_HOUR', 5, 1);

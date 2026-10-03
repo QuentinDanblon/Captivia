@@ -56,9 +56,29 @@ describe('checkHandle', () => {
     'null',
     'staff',
     'superadmin',
+    // Leet-speak et sosies (chiffres et lettres qui imitent une autre lettre).
+    'm0derateur',
+    'adm1n',
+    'Capt1via_Officiel',
+    'Captlvia',
+    'C4pt1v14',
+    'adrnin',
+    '5upport',
+    'h3lp',
+    'r00t',
+    '0perat0r',
+    'lnfo',
+    'm0d3rat10n_team',
   ])('refuse le mot réservé %s', (h) => {
     expect(checkHandle(h)).toEqual({ ok: false, reason: 'reserved' });
   });
+
+  it.each(['gecko_lover', 'Bob42', 'lola_reptiles', 'Milo.2020', 'leo_77'])(
+    'n’assimile pas à un mot réservé un pseudo ordinaire : %s',
+    (h) => {
+      expect(checkHandle(h)).toMatchObject({ ok: true });
+    },
+  );
 
   it('dérive la clé d’unicité en minuscules', () => {
     expect(handleKey('@GeckoLover')).toBe('geckolover');

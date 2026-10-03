@@ -12,7 +12,9 @@ export const HANDLE_PATTERN = new RegExp(
 );
 
 /**
- * Mots réservés : comparés à la clé débarrassée des « _ », « . » et chiffres (« Admin_01 » →
+ * Mots réservés : comparés au « squelette » du pseudo (voir `handleSkeleton` : minuscules, sans
+ * « _ » ni « . », leet-speak et sosies ramenés à une lettre — « m0derateur » → « moderateur »,
+ * « Captlvia » → « captivia »), et à ce même squelette calculé sans les chiffres (« Admin_01 » →
  * « admin »). Les racines de `RESERVED_FRAGMENTS` sont refusées où qu'elles apparaissent
  * (« captivia_officiel », « le.moderateur »…) pour empêcher l'usurpation de l'équipe.
  */
@@ -59,6 +61,56 @@ export const RESERVED_FRAGMENTS: readonly string[] = [
   'operat',
 ];
 
+/**
+ * Sosies : chiffres et lettres qui imitent une autre lettre (leet-speak). « l » et « i » sont
+ * confondus (polices sans empattement), « rn » imite « m ».
+ */
+const LOOKALIKES: Readonly<Record<string, string>> = {
+  '0': 'o',
+  '1': 'i',
+  '2': 'z',
+  '3': 'e',
+  '4': 'a',
+  '5': 's',
+  '6': 'g',
+  '7': 't',
+  '8': 'b',
+  '9': 'g',
+  l: 'i',
+};
+
+/** Squelette de comparaison aux mots réservés (jamais stocké : la clé reste `handleKey`). */
+export function handleSkeleton(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[._]/g, '')
+    .replace(/rn/g, 'm')
+    .replace(/[0-9l]/g, (c) => LOOKALIKES[c] ?? c);
+}
+
+const RESERVED_SKELETONS: ReadonlySet<string> = new Set(
+  [...RESERVED_HANDLES].map(handleSkeleton),
+);
+const RESERVED_FRAGMENT_SKELETONS: readonly string[] =
+  RESERVED_FRAGMENTS.map(handleSkeleton);
+
+/** Vrai si le pseudo imite un mot réservé (avec ou sans ses chiffres). */
+export function isReservedHandle(key: string): boolean {
+  const variants = new Set([
+    handleSkeleton(key),
+    handleSkeleton(key.replace(/[0-9]/g, '')),
+  ]);
+  for (const v of variants) {
+    if (
+      RESERVED_SKELETONS.has(v) ||
+      RESERVED_FRAGMENT_SKELETONS.some((f) => v.includes(f))
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
 export type HandleCheck =
   | { ok: true; handle: string; key: string }
   | { ok: false; reason: 'invalid' | 'reserved' };
@@ -83,12 +135,6 @@ export function checkHandle(raw: unknown): HandleCheck {
     return { ok: false, reason: 'invalid' };
   }
   const key = handle.toLowerCase();
-  const stripped = key.replace(/[._0-9]/g, '');
-  if (
-    RESERVED_HANDLES.has(stripped) ||
-    RESERVED_FRAGMENTS.some((f) => stripped.includes(f))
-  ) {
-    return { ok: false, reason: 'reserved' };
-  }
+  if (isReservedHandle(key)) return { ok: false, reason: 'reserved' };
   return { ok: true, handle, key };
 }
