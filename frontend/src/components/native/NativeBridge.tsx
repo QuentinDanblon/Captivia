@@ -8,6 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { appRoute, mapWebUrlToAppRoute } from '@/lib/deep-links';
 import { clearLocalReminders, reminderAnimalId, syncLocalReminders, type ReminderTexts, type SyncOptions } from '@/lib/local-reminders';
 import { IS_MOBILE_BUILD, animalDetailPath, isNative } from '@/lib/platform';
+import { syncPurchasesUser } from '@/lib/purchases';
 import { useReminderTexts } from './useReminderTexts';
 
 /**
@@ -53,6 +54,8 @@ let launchUrlHandled = false;
  * - Universal Links / App Links (`appUrlOpen`) → route de l'app (W6-09) ;
  * - rappels locaux (W6-06) : synchronisés après la connexion (invité compris) et à chaque retour
  *   au premier plan ; annulés à la déconnexion ; un rappel touché ouvre la fiche de l'animal ;
+ * - achats intégrés (W6-08) : compte connecté → RevenueCat `configure` / `logIn` (appUserID = id du
+ *   compte) ; invité ou déconnexion → `logOut` ;
  * - bouton retour Android.
  */
 export function NativeBridgeEffects() {
@@ -61,6 +64,7 @@ export function NativeBridgeEffects() {
   const { user, token, isLoading } = useAuth();
   const texts = useReminderTexts();
   const userId = user?.id ?? null;
+  const isGuest = user?.isGuest === true;
 
   const state = useRef<BridgeState | null>(null);
   useEffect(() => {
@@ -138,6 +142,12 @@ export function NativeBridgeEffects() {
     if (userId === previous || !state.current) return;
     runSync(state.current, sawSignedOut.current ? 'once' : false);
   }, [isLoading, userId]);
+
+  // Achats intégrés : identité RevenueCat alignée sur la session (jamais pour un invité).
+  useEffect(() => {
+    if (!isNative() || isLoading) return;
+    void syncPurchasesUser(userId ? { id: userId, isGuest } : null).catch(() => undefined);
+  }, [isLoading, userId, isGuest]);
 
   return null;
 }

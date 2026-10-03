@@ -45,6 +45,11 @@ interface AuthContextType {
   logoutAll: () => Promise<void>;
   isLoading: boolean;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  /**
+   * Relit le profil (`GET /auth/me`) et met la session à jour (ex. Premium activé par le webhook
+   * d'achat intégré). Null si aucune session ou en cas d'échec ; jamais de déconnexion ici.
+   */
+  reloadUser: () => Promise<User | null>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -234,6 +239,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('storage', onStorage);
   }, []);
 
+  const reloadUser = useCallback(async (): Promise<User | null> => {
+    const current = readStorage(TOKEN_KEY);
+    if (!current) return null;
+    try {
+      const fresh = (await api.getProfile(current)) as User | null;
+      if (!fresh || typeof fresh !== 'object' || typeof fresh.id !== 'string') return null;
+      // Session changée entre-temps (déconnexion, autre compte) : la réponse est ignorée.
+      const stored = parseStoredUser(readStorage(USER_KEY) ?? '');
+      if (!readStorage(TOKEN_KEY) || (stored && stored.id !== fresh.id)) return null;
+      setUser(fresh);
+      writeStorage(USER_KEY, JSON.stringify(fresh));
+      return fresh;
+    } catch {
+      return null;
+    }
+  }, []);
+
   const login = (newToken: string, newUser: User, newRefreshToken?: string) => {
     setToken(newToken);
     setUser(newUser);
@@ -285,7 +307,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, token, login, updateToken, logout, logoutAll, isLoading, setUser }}
+      value={{ user, token, login, updateToken, logout, logoutAll, isLoading, setUser, reloadUser }}
     >
       {children}
     </AuthContext.Provider>

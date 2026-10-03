@@ -111,6 +111,9 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `SPECIESPLUS_API_TOKEN` | Render (`sync: false`) | jeton Species+ (api.speciesplus.net) | Non : sans jeton, `/speciesplus/*` → 503 `INTEGRATION_DISABLED` et `speciesPlus.status = "disabled"` sur la fiche législation |
 | `NCBI_API_KEY`, `NCBI_EMAIL` | Render (`sync: false`) | clé NCBI et e-mail de contact | Non : PubMed est public (3 req/s), la clé porte le quota à 10 req/s |
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
+| `NEXT_PUBLIC_REVENUECAT_IOS_KEY`, `NEXT_PUBLIC_REVENUECAT_ANDROID_KEY` | Build mobile (GitHub Variables `REVENUECAT_IOS_KEY`, `REVENUECAT_ANDROID_KEY` → `mobile.yml`) ; inutiles sur Netlify | clés **publiques** RevenueCat (`appl_…`, `goog_…`) | Pour l'achat in-app : sans clé, l'app affiche « Abonnement indisponible » sur la plateforme concernée (voir `docs/PAYMENTS.md`) |
+| `NEXT_PUBLIC_REVENUECAT_ENTITLEMENT_ID` | Build mobile | `premium` (défaut) : identique à `REVENUECAT_ENTITLEMENT_ID` | Non |
+| `NEXT_PUBLIC_APP_STORE_URL`, `NEXT_PUBLIC_PLAY_STORE_URL` | Netlify | `[À COMPLÉTER]` : URL https des fiches App Store et Google Play | À la publication (sinon la page abonnement du web affiche le marqueur) |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
 | `APPLE_TEAM_ID` | Netlify | Team ID Apple (10 caractères, developer.apple.com → Membership) | Pour les Universal Links iOS (W6-09) : sans elle, `/.well-known/apple-app-site-association` → 404 |
 | `IOS_BUNDLE_ID` | Netlify | `app.captivia` (défaut, = `appId` de `capacitor.config.ts`) | Non |

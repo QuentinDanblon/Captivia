@@ -47,7 +47,9 @@ Puis régler `targetSdkVersion = 36` / `compileSdkVersion = 36` dans `mobile/and
 le déploiement iOS minimal et « iPhone only » dans Xcode, et versionner les deux dossiers.
 
 `NEXT_PUBLIC_API_URL` est **obligatoire** : il est inliné dans le bundle et ajouté au `connect-src` de la
-CSP. `NEXT_PUBLIC_SENTRY_DSN` est facultatif (même rôle que sur le web).
+CSP. `NEXT_PUBLIC_SENTRY_DSN` est facultatif (même rôle que sur le web). `NEXT_PUBLIC_REVENUECAT_IOS_KEY` /
+`NEXT_PUBLIC_REVENUECAT_ANDROID_KEY` ouvrent l'achat intégré (§ 6) ; le SDK appelle RevenueCat depuis le
+code natif, hors de la WebView : rien à ajouter à la CSP.
 
 ### Ce que fait `npm run build:mobile`
 
@@ -201,10 +203,12 @@ Aucune modification du code backend n'est nécessaire (liste déjà lue depuis l
 
 ## 6. Achats intégrés (RevenueCat)
 
-`@revenuecat/purchases-capacitor` (v11, compatible Capacitor 7) est installé. Produits, webhook vers
-`Subscription`, paywall conforme et sandbox : voir **`docs/PAYMENTS.md`** et la tâche W6-08. Option MVP
-(D-04) : masquer l'offre sur natif (`isNative()`) tant que W6-08 n'est pas livrée — aucun lien vers un
-paiement web dans l'app (règle 3.1.1).
+`@revenuecat/purchases-capacitor` (v11, compatible Capacitor 7) est branché : `src/lib/purchases.ts`
+(configure / logIn / logOut suivant la session, offering, achat, restauration, attente du webhook) et
+paywall `src/components/purchases/NativePaywall.tsx` (page abonnement, modale du deuxième animal). Clés
+publiques au build : `NEXT_PUBLIC_REVENUECAT_IOS_KEY`, `NEXT_PUBLIC_REVENUECAT_ANDROID_KEY` (sans clé :
+achat désactivé, message propre). Produits, offerings, webhook et sandbox : **`docs/PAYMENTS.md`**. Aucun
+lien vers un paiement web dans l'app (règle 3.1.1). Xcode : ajouter la capacité *In-App Purchase*.
 
 ## 7. Notifications locales
 
@@ -388,7 +392,7 @@ la barre finale de l'export statique (`trailingSlash`).
 - [ ] `PrivacyInfo.xcprivacy` (§ 12), App Privacy, Data Safety, questionnaire d'âge Apple, IARC (`docs/store/`) (W6-11) : réponses rédigées, saisie dans les consoles à faire.
 - [ ] Suppression de compte dans l'app **et** page web publique (`/suppression-compte`).
 - [ ] Liens Amazon via `openExternal`, mention d'affiliation, app déclarée dans Associates Central.
-- [ ] Paywall conforme ou offre masquée sur natif ; sandbox IAP testée (W6-08).
+- [ ] Sandbox IAP testée (paywall conforme livré, clés RevenueCat au build) (W6-08).
 - [ ] Compte de démo rempli pour la relecture, aucun « bientôt disponible » (W6-13).
 - [ ] TestFlight + test fermé Play.
 - [ ] Signature : keystore (secrets `ANDROID_KEY*`, § 10) et certificats iOS (fastlane match, § 13) en secrets CI, jamais dans le dépôt (W6-12).

@@ -50,6 +50,8 @@ const ALLOWED_EVERYWHERE = new Set([
   // Noms de stores (W6-08)
   'App Store',
   'Google Play',
+  // Paywall natif : prix du store suivi de la période traduite (« 2,49 € par mois »)
+  '{price} {per}',
   // Nom de l'offre payante (mention PremiumBadge du mode invité, tableau des formules de la landing)
   'Premium',
   // Fiches espèces : installations et matériel au nom international, crédit des photos GBIF

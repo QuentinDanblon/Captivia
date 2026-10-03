@@ -37,10 +37,15 @@ jest.mock('@/lib/local-reminders', () => ({
   clearLocalReminders: () => mockClear(),
 }));
 
+const mockSyncPurchases = jest.fn(async () => true);
+jest.mock('@/lib/purchases', () => ({
+  syncPurchasesUser: (...args: unknown[]) => mockSyncPurchases(...(args as [])),
+}));
+
 const mockPush = jest.fn();
 jest.mock('next/navigation', () => ({ useRouter: () => ({ push: mockPush }) }));
 
-type AuthState = { user: { id: string } | null; token: string | null; isLoading: boolean };
+type AuthState = { user: { id: string; isGuest?: boolean } | null; token: string | null; isLoading: boolean };
 let mockAuth: AuthState = { user: null, token: null, isLoading: true };
 jest.mock('@/contexts/AuthContext', () => ({ useAuth: () => mockAuth }));
 
@@ -111,6 +116,7 @@ describe('NativeBridge', () => {
     await flush();
     expect(mockApp.addListener).not.toHaveBeenCalled();
     expect(mockSync).not.toHaveBeenCalled();
+    expect(mockSyncPurchases).not.toHaveBeenCalled();
   });
 
   // Doit rester le premier montage natif du fichier : l'URL de lancement est consommée une fois par exécution.
@@ -226,6 +232,37 @@ describe('NativeBridge', () => {
       // … mais le prochain retour au premier plan utilise le nouveau jeton.
       fire('appStateChange', { isActive: true });
       expect(mockSync).toHaveBeenLastCalledWith(expect.objectContaining({ token: 'jwt-2' }));
+    });
+  });
+
+  describe('achats intégrés (RevenueCat)', () => {
+    it('attend la fin du chargement de la session', async () => {
+      render(<NativeBridgeEffects />);
+      await flush();
+      expect(mockSyncPurchases).not.toHaveBeenCalled();
+    });
+
+    it('compte connecté : identifie le compte ; déconnexion : logOut', async () => {
+      mockAuth = { user: { id: 'u1' }, token: 'jwt', isLoading: false };
+      const view = render(<NativeBridgeEffects />);
+      await flush();
+      expect(mockSyncPurchases).toHaveBeenLastCalledWith({ id: 'u1', isGuest: false });
+      mockAuth = { user: null, token: null, isLoading: false };
+      view.rerender(<NativeBridgeEffects />);
+      await flush();
+      expect(mockSyncPurchases).toHaveBeenLastCalledWith(null);
+    });
+
+    it('invité puis création de compte (même id) : identifié seulement une fois devenu compte', async () => {
+      mockAuth = { user: { id: 'g1', isGuest: true }, token: 'jwt', isLoading: false };
+      const view = render(<NativeBridgeEffects />);
+      await flush();
+      expect(mockSyncPurchases).toHaveBeenLastCalledWith({ id: 'g1', isGuest: true });
+      mockAuth = { user: { id: 'g1', isGuest: false }, token: 'jwt-2', isLoading: false };
+      view.rerender(<NativeBridgeEffects />);
+      await flush();
+      expect(mockSyncPurchases).toHaveBeenLastCalledWith({ id: 'g1', isGuest: false });
+      expect(mockSyncPurchases).toHaveBeenCalledTimes(2);
     });
   });
 });

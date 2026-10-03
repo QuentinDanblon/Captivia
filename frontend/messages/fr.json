@@ -1607,7 +1607,8 @@
     "faq2Q": "Comment arrêter ?",
     "faq2A": "À tout moment, depuis la gestion des abonnements de votre store. Premium reste actif jusqu’à la fin de la période déjà payée.",
     "faq3Q": "Et sans compte ?",
-    "faq3A": "L’essai sans compte couvre un animal. Pour Premium, créez d’abord un compte : votre animal et son carnet sont conservés."
+    "faq3A": "L’essai sans compte couvre un animal. Pour Premium, créez d’abord un compte : votre animal et son carnet sont conservés.",
+    "storeLinksLabel": "Télécharger l’application"
   },
   "speciesSearch": {
     "title": "Espèces",
@@ -1661,5 +1662,63 @@
     "enable": "Activer les rappels sur ce téléphone",
     "disable": "Couper les rappels sur ce téléphone",
     "syncError": "Impossible de récupérer vos soins pour le moment. Vérifiez votre connexion et réessayez."
+  },
+  "paywall": {
+    "modalTitle": "Suivez tous vos animaux",
+    "modalLead": "Avec Premium, ajoutez autant d’animaux que vous voulez, chacun avec son carnet et ses rappels.",
+    "loading": "Chargement des formules…",
+    "choosePlan": "Choisissez votre formule",
+    "priceLine": "{price} {per}",
+    "subscribe": "S’abonner pour {price} {per}",
+    "per": {
+      "day": "{count, plural, one {par jour} other {tous les # jours}}",
+      "week": "{count, plural, one {par semaine} other {toutes les # semaines}}",
+      "month": "{count, plural, one {par mois} other {tous les # mois}}",
+      "year": "{count, plural, one {par an} other {tous les # ans}}"
+    },
+    "planName": {
+      "day": "{count, plural, one {Quotidien} other {# jours}}",
+      "week": "{count, plural, one {Hebdomadaire} other {# semaines}}",
+      "month": "{count, plural, one {Mensuel} other {# mois}}",
+      "year": "{count, plural, one {Annuel} other {# ans}}"
+    },
+    "duration": {
+      "day": "{count, plural, one {# jour} other {# jours}}",
+      "week": "{count, plural, one {# semaine} other {# semaines}}",
+      "month": "{count, plural, one {# mois} other {# mois}}",
+      "year": "{count, plural, one {# an} other {# ans}}"
+    },
+    "introFree": "Essai gratuit de {duration}, puis {price} {per}.",
+    "introPaid": "{introPrice} {introPer} pendant {duration}, puis {price} {per}.",
+    "termsIos": "Abonnement à renouvellement automatique. Le paiement est débité sur votre compte Apple à la confirmation de l’achat. L’abonnement se renouvelle au même tarif, sauf résiliation au moins 24 heures avant la fin de la période en cours. Gérez-le ou résiliez-le à tout moment dans les réglages de votre compte App Store.",
+    "termsAndroid": "Abonnement à renouvellement automatique. Le paiement est débité sur votre compte Google Play à la confirmation de l’achat. L’abonnement se renouvelle au même tarif jusqu’à sa résiliation, possible à tout moment dans Google Play, rubrique Abonnements. Premium reste actif jusqu’à la fin de la période payée.",
+    "deletionNote": "Supprimer votre compte Captivia ne résilie pas l’abonnement : résiliez-le aussi dans le store.",
+    "restore": "Restaurer mes achats",
+    "terms": "Conditions d’utilisation",
+    "privacy": "Confidentialité",
+    "manage": "Gérer mon abonnement",
+    "unavailableTitle": "Abonnement indisponible pour le moment",
+    "unavailableText": "Premium ne peut pas encore être souscrit dans cette version de l’application. Votre animal et son carnet restent accessibles.",
+    "loadErrorTitle": "Impossible d’afficher les formules",
+    "retry": "Réessayer",
+    "emptyTitle": "Aucune formule proposée pour le moment",
+    "emptyText": "Le store ne propose pas encore Premium sur cet appareil. Réessayez un peu plus tard.",
+    "errors": {
+      "network": "Connexion au store impossible. Vérifiez votre réseau, puis réessayez.",
+      "unavailable": "Cette formule n’est pas disponible sur cet appareil ou dans votre pays.",
+      "notAllowed": "Les achats sont désactivés sur cet appareil (réglages du store ou contrôle parental).",
+      "pending": "Paiement en attente de validation. Premium s’activera dès que le store l’aura confirmé.",
+      "alreadyOwned": "Cet abonnement est déjà actif sur votre compte store. Touchez « Restaurer mes achats ».",
+      "store": "Le store n’a pas pu traiter l’achat. Réessayez dans un instant.",
+      "notConfigured": "L’achat n’a pas pu démarrer. Fermez l’application, rouvrez-la, puis réessayez.",
+      "unknown": "L’achat n’a pas abouti. Réessayez dans un instant."
+    },
+    "activatingTitle": "Activation en cours…",
+    "activatingText": "Le store a confirmé votre achat. Premium s’active sur votre compte : comptez quelques secondes.",
+    "pendingText": "Votre achat est bien enregistré, mais votre compte n’est pas encore à jour. Cela peut prendre quelques minutes : touchez « Vérifier » ou revenez plus tard, sans repayer.",
+    "checkAgain": "Vérifier",
+    "activeTitle": "Premium est actif",
+    "activeText": "Ajoutez autant d’animaux que vous voulez, chacun avec son carnet.",
+    "restoreNothing": "Aucun abonnement Premium à restaurer sur ce compte store."
   }
 }

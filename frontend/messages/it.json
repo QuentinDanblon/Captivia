@@ -1607,7 +1607,8 @@
     "faq2Q": "Come si disdice?",
     "faq2A": "In qualsiasi momento, dalla gestione degli abbonamenti del tuo store. Premium resta attivo fino alla fine del periodo già pagato.",
     "faq3Q": "E senza account?",
-    "faq3A": "La prova senza account copre un animale. Per Premium, crea prima un account: il tuo animale e il suo libretto vengono conservati."
+    "faq3A": "La prova senza account copre un animale. Per Premium, crea prima un account: il tuo animale e il suo libretto vengono conservati.",
+    "storeLinksLabel": "Scarica l’app"
   },
   "speciesSearch": {
     "title": "Specie",
@@ -1661,5 +1662,63 @@
     "enable": "Attiva i promemoria su questo telefono",
     "disable": "Disattiva i promemoria su questo telefono",
     "syncError": "Impossibile caricare le tue cure in questo momento. Controlla la connessione e riprova."
+  },
+  "paywall": {
+    "modalTitle": "Segui tutti i tuoi animali",
+    "modalLead": "Con Premium aggiungi tutti gli animali che vuoi, ognuno con il suo libretto e i suoi promemoria.",
+    "loading": "Caricamento dei piani…",
+    "choosePlan": "Scegli il tuo piano",
+    "priceLine": "{price} {per}",
+    "subscribe": "Abbonati per {price} {per}",
+    "per": {
+      "day": "{count, plural, one {al giorno} other {ogni # giorni}}",
+      "week": "{count, plural, one {a settimana} other {ogni # settimane}}",
+      "month": "{count, plural, one {al mese} other {ogni # mesi}}",
+      "year": "{count, plural, one {all’anno} other {ogni # anni}}"
+    },
+    "planName": {
+      "day": "{count, plural, one {Giornaliero} other {# giorni}}",
+      "week": "{count, plural, one {Settimanale} other {# settimane}}",
+      "month": "{count, plural, one {Mensile} other {# mesi}}",
+      "year": "{count, plural, one {Annuale} other {# anni}}"
+    },
+    "duration": {
+      "day": "{count, plural, one {# giorno} other {# giorni}}",
+      "week": "{count, plural, one {# settimana} other {# settimane}}",
+      "month": "{count, plural, one {# mese} other {# mesi}}",
+      "year": "{count, plural, one {# anno} other {# anni}}"
+    },
+    "introFree": "Prova gratuita di {duration}, poi {price} {per}.",
+    "introPaid": "{introPrice} {introPer} per {duration}, poi {price} {per}.",
+    "termsIos": "Abbonamento a rinnovo automatico. Il pagamento viene addebitato sul tuo account Apple alla conferma dell’acquisto. L’abbonamento si rinnova allo stesso prezzo, salvo disdetta almeno 24 ore prima della fine del periodo in corso. Gestiscilo o disdicilo quando vuoi nelle impostazioni del tuo account App Store.",
+    "termsAndroid": "Abbonamento a rinnovo automatico. Il pagamento viene addebitato sul tuo account Google Play alla conferma dell’acquisto. L’abbonamento si rinnova allo stesso prezzo fino alla disdetta, che puoi fare in qualsiasi momento in Google Play, sezione Abbonamenti. Premium resta attivo fino alla fine del periodo pagato.",
+    "deletionNote": "Eliminare il tuo account Captivia non disdice l’abbonamento: disdicilo anche nello store.",
+    "restore": "Ripristina acquisti",
+    "terms": "Condizioni d’uso",
+    "privacy": "Privacy",
+    "manage": "Gestisci il mio abbonamento",
+    "unavailableTitle": "Abbonamento non ancora disponibile",
+    "unavailableText": "In questa versione dell’app non puoi ancora sottoscrivere Premium. Il tuo animale e il suo libretto restano disponibili.",
+    "loadErrorTitle": "Impossibile mostrare i piani",
+    "retry": "Riprova",
+    "emptyTitle": "Nessun piano disponibile al momento",
+    "emptyText": "Lo store non offre ancora Premium su questo dispositivo. Riprova un po’ più tardi.",
+    "errors": {
+      "network": "Impossibile raggiungere lo store. Controlla la connessione e riprova.",
+      "unavailable": "Questo piano non è disponibile su questo dispositivo o nel tuo paese.",
+      "notAllowed": "Gli acquisti sono disattivati su questo dispositivo (impostazioni dello store o controllo parentale).",
+      "pending": "Pagamento in attesa di approvazione. Premium si attiverà appena lo store lo conferma.",
+      "alreadyOwned": "Questo abbonamento è già attivo sul tuo account dello store. Tocca «Ripristina acquisti».",
+      "store": "Lo store non è riuscito a elaborare l’acquisto. Riprova tra un attimo.",
+      "notConfigured": "Impossibile avviare l’acquisto. Chiudi l’app, riaprila e riprova.",
+      "unknown": "L’acquisto non è andato a buon fine. Riprova tra un attimo."
+    },
+    "activatingTitle": "Attivazione in corso…",
+    "activatingText": "Lo store ha confermato l’acquisto. Premium si sta attivando sul tuo account: servono pochi secondi.",
+    "pendingText": "Il tuo acquisto è registrato, ma il tuo account non è ancora aggiornato. Può richiedere qualche minuto: tocca «Verifica» o torna più tardi, senza pagare di nuovo.",
+    "checkAgain": "Verifica",
+    "activeTitle": "Premium è attivo",
+    "activeText": "Aggiungi tutti gli animali che vuoi, ognuno con il suo libretto.",
+    "restoreNothing": "Nessun abbonamento Premium da ripristinare su questo account dello store."
   }
 }

@@ -1607,7 +1607,8 @@
     "faq2Q": "How do I stop?",
     "faq2A": "Any time, from your store’s subscription settings. Premium stays active until the end of the period already paid.",
     "faq3Q": "What about without an account?",
-    "faq3A": "Trying without an account covers one animal. For Premium, create an account first: your animal and its record are kept."
+    "faq3A": "Trying without an account covers one animal. For Premium, create an account first: your animal and its record are kept.",
+    "storeLinksLabel": "Get the app"
   },
   "speciesSearch": {
     "title": "Species",
@@ -1661,5 +1662,63 @@
     "enable": "Turn on reminders on this phone",
     "disable": "Turn off reminders on this phone",
     "syncError": "Your care schedule can’t be loaded right now. Check your connection and try again."
+  },
+  "paywall": {
+    "modalTitle": "Keep track of all your animals",
+    "modalLead": "With Premium, add as many animals as you like, each with its own record and reminders.",
+    "loading": "Loading plans…",
+    "choosePlan": "Choose your plan",
+    "priceLine": "{price} {per}",
+    "subscribe": "Subscribe for {price} {per}",
+    "per": {
+      "day": "{count, plural, one {per day} other {every # days}}",
+      "week": "{count, plural, one {per week} other {every # weeks}}",
+      "month": "{count, plural, one {per month} other {every # months}}",
+      "year": "{count, plural, one {per year} other {every # years}}"
+    },
+    "planName": {
+      "day": "{count, plural, one {Daily} other {# days}}",
+      "week": "{count, plural, one {Weekly} other {# weeks}}",
+      "month": "{count, plural, one {Monthly} other {# months}}",
+      "year": "{count, plural, one {Yearly} other {# years}}"
+    },
+    "duration": {
+      "day": "{count, plural, one {# day} other {# days}}",
+      "week": "{count, plural, one {# week} other {# weeks}}",
+      "month": "{count, plural, one {# month} other {# months}}",
+      "year": "{count, plural, one {# year} other {# years}}"
+    },
+    "introFree": "Free {duration} trial, then {price} {per}.",
+    "introPaid": "{introPrice} {introPer} for {duration}, then {price} {per}.",
+    "termsIos": "Auto-renewing subscription. Payment is charged to your Apple Account when you confirm the purchase. The subscription renews at the same price unless cancelled at least 24 hours before the end of the current period. Manage or cancel it at any time in your App Store account settings.",
+    "termsAndroid": "Auto-renewing subscription. Payment is charged to your Google Play account when you confirm the purchase. The subscription renews at the same price until you cancel, which you can do at any time in Google Play under Subscriptions. Premium stays active until the end of the paid period.",
+    "deletionNote": "Deleting your Captivia account does not cancel the subscription: cancel it in the store as well.",
+    "restore": "Restore purchases",
+    "terms": "Terms of use",
+    "privacy": "Privacy",
+    "manage": "Manage my subscription",
+    "unavailableTitle": "Subscription not available yet",
+    "unavailableText": "Premium cannot be purchased in this version of the app yet. Your animal and its record stay available.",
+    "loadErrorTitle": "Plans could not be shown",
+    "retry": "Try again",
+    "emptyTitle": "No plan available right now",
+    "emptyText": "The store does not offer Premium on this device yet. Try again a little later.",
+    "errors": {
+      "network": "Could not reach the store. Check your connection, then try again.",
+      "unavailable": "This plan is not available on this device or in your country.",
+      "notAllowed": "Purchases are turned off on this device (store settings or parental controls).",
+      "pending": "Payment awaiting approval. Premium will turn on as soon as the store confirms it.",
+      "alreadyOwned": "This subscription is already active on your store account. Tap “Restore purchases”.",
+      "store": "The store could not process the purchase. Try again in a moment.",
+      "notConfigured": "The purchase could not start. Close the app, reopen it, then try again.",
+      "unknown": "The purchase did not go through. Try again in a moment."
+    },
+    "activatingTitle": "Activating…",
+    "activatingText": "The store confirmed your purchase. Premium is being turned on for your account: allow a few seconds.",
+    "pendingText": "Your purchase is recorded, but your account is not up to date yet. This can take a few minutes: tap “Check again” or come back later, with nothing to pay again.",
+    "checkAgain": "Check again",
+    "activeTitle": "Premium is active",
+    "activeText": "Add as many animals as you like, each with its own record.",
+    "restoreNothing": "No Premium subscription to restore on this store account."
   }
 }

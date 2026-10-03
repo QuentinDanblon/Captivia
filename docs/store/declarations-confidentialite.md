@@ -21,7 +21,7 @@ Captivia ne contient **ni publicité, ni SDK d'analyse d'usage, ni identifiant p
 
 Aucune des données ci-dessus n'est **vendue, louée, ni utilisée pour de la publicité, du profilage ou du suivi**. Les prestataires (Render et Neon à Francfort, Brevo, Sentry, RevenueCat) agissent comme sous-traitants (registre § 3) : ni Apple ni Google ne comptent ces transferts comme un « partage ».
 
-> **À confirmer au branchement du SDK d'achat.** Au 2026-10-03, le code de l'app ne contient pas encore d'appel au SDK RevenueCat (le backend, le webhook et la page abonnement existent ; le paywall natif est à finir, W6-08/W6-13). Les lignes 5 et 6 sont déclarées **par anticipation** : déclarer plus que ce qui est collecté est sans risque, l'inverse est un motif de rejet. Si l'offre reste masquée sur natif (option MVP, D-04), retirer ces deux lignes **et** les entrées `PurchaseHistory` / `DeviceID` du `PrivacyInfo.xcprivacy`.
+> **SDK d'achat branché (W6-08).** L'app appelle RevenueCat (`frontend/src/lib/purchases.ts`) pour les comptes connectés uniquement (jamais pour un invité), avec `appUserID = User.id` : les lignes 5 et 6 correspondent à la collecte réelle. Si l'offre devait être masquée sur natif (option MVP, D-04 : aucune clé RevenueCat au build), retirer ces deux lignes **et** les entrées `PurchaseHistory` / `DeviceID` du `PrivacyInfo.xcprivacy`.
 
 ## 2. Ce qui n'est PAS collecté (ne rien cocher)
 
