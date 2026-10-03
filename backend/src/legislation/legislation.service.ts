@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   PaginationQueryDto,
@@ -112,26 +112,34 @@ export class LegislationService {
     details: any,
     sources: string[],
   ) {
-    return this.prisma.speciesLegislation.upsert({
-      where: {
-        speciesId_country: {
+    try {
+      return await this.prisma.speciesLegislation.upsert({
+        where: {
+          speciesId_country: {
+            speciesId,
+            country: country.toUpperCase(),
+          },
+        },
+        create: {
           speciesId,
           country: country.toUpperCase(),
+          status,
+          details,
+          sources,
         },
-      },
-      create: {
-        speciesId,
-        country: country.toUpperCase(),
-        status,
-        details,
-        sources,
-      },
-      update: {
-        status,
-        details,
-        sources,
-      },
-    });
+        update: {
+          status,
+          details,
+          sources,
+        },
+      });
+    } catch (e) {
+      // W1-09 : FK SpeciesLegislation.speciesId -> SpeciesProfile (P2003) = fiche espèce inexistante.
+      if ((e as { code?: string })?.code === 'P2003') {
+        throw new NotFoundException('Species not found');
+      }
+      throw e;
+    }
   }
 
   async searchSpeciesPlus(scientificName: string) {
