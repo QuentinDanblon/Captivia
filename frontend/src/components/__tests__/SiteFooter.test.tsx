@@ -53,12 +53,12 @@ describe('SiteFooter', () => {
     ]);
   });
 
-  it('marque, description, mention d’affiliation Amazon et copyright de l’année', async () => {
+  it('marque, description et copyright de l’année, sans mention d’affiliation (aucun lien affilié affiché)', async () => {
     await renderFooter();
     const footer = screen.getByRole('contentinfo');
     expect(within(footer).getByRole('link', { name: 'common.appName' })).toHaveAttribute('href', '/');
     expect(within(footer).getByText('footer.description')).toBeInTheDocument();
-    expect(within(footer).getByText('footer.amazonAssociate')).toBeInTheDocument();
+    expect(footer).not.toHaveTextContent(/amazon/i);
     expect(footer).toHaveTextContent(`© ${new Date().getFullYear()} Captivia · footer.tagline`);
   });
 });

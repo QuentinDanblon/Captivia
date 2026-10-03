@@ -492,7 +492,6 @@
     "terms": "Termini di utilizzo",
     "transparency": "Trasparenza e affiliazione",
     "accountDeletion": "Elimina il mio account",
-    "amazonAssociate": "In qualità di Affiliato Amazon, Captivia riceve un guadagno dagli acquisti idonei.",
     "legalNotice": "Note legali",
     "navLabel": "Informazioni legali",
     "sources": "Fonti e licenze",
@@ -1125,7 +1124,8 @@
       "taxonomy": "Classificazione",
       "photo": "Foto",
       "viaGbif": "tramite GBIF",
-      "references": "Riferimenti"
+      "references": "Riferimenti",
+      "pubmed": "Letteratura scientifica"
     },
     "values": {
       "diet": {
@@ -1192,7 +1192,8 @@
         "pulverisateur": "Nebulizzatore",
         "filtration": "Filtrazione"
       }
-    }
+    },
+    "pubmedNote": "Articoli da PubMed (NCBI), in inglese"
   },
   "store": {
     "allCategories": "Tutti i tipi",
@@ -1209,7 +1210,6 @@
     "categoryInsect": "Insetti",
     "categoryMammal": "Mammiferi",
     "categoryReptile": "Rettili",
-    "productLinksNotice": "I link ai prodotti possono essere link di affiliazione.",
     "pageTitle": "Negozi partner",
     "lead": "Negozi scelti per l’alimentazione e l’attrezzatura dei tuoi animali.",
     "loadError": "Non è stato possibile caricare i negozi.",
@@ -1253,10 +1253,10 @@
   },
   "transparency": {
     "affiliateIndependence": "I consigli su accessori e alimentazione dipendono dalle esigenze della specie, non dall'importo delle commissioni.",
-    "affiliateLabelled": "I link di affiliazione sono indicati dalla dicitura «Link di affiliazione» o da un avviso posto nelle vicinanze.",
-    "affiliatePartners": "Partner al lancio: Amazon (amazon.fr). I siti partner sono elencati nel <link>Negozio</link>.",
+    "affiliateLabelled": "Se vengono proposti link di affiliazione, sono indicati dalla dicitura «Link di affiliazione» o da un avviso vicino, e il programma interessato è indicato.",
+    "affiliatePartners": "Oggi non viene mostrato alcun link di affiliazione. I negozi partner, se presenti, sono elencati nel <link>Negozio</link>.",
     "affiliateSamePrice": "Il prezzo è lo stesso, che tu usi il nostro link o no.",
-    "affiliateTitle": "I nostri link di affiliazione",
+    "affiliateTitle": "Link dei partner",
     "backHome": "Torna alla home",
     "contactBody": "Una domanda sul nostro modello economico, sull'affiliazione o sui tuoi dati? Scrivici:",
     "contactTitle": "Contatti",
@@ -1267,11 +1267,11 @@
     "dataNoTrackers": "Nessun cookie pubblicitario né strumento di misurazione del pubblico di terze parti: si usano solo strumenti strettamente necessari (accesso, lingua).",
     "dataPrivate": "Le schede dei tuoi animali sono private per impostazione predefinita. La condivisione pubblica di un animale è facoltativa: la attivi tu e puoi disattivarla in qualsiasi momento.",
     "dataTitle": "I tuoi dati",
-    "intro": "Come viene finanziato Captivia, come funzionano i nostri link di affiliazione e cosa facciamo — e non facciamo — dei tuoi dati.",
+    "intro": "Come viene finanziato Captivia, come verrebbero indicati eventuali link dei partner e cosa facciamo — e non facciamo — dei tuoi dati.",
     "metaDescription": "Come viene finanziato Captivia, come funzionano i suoi link di affiliazione e cosa fa dei tuoi dati.",
     "missionBody": "Captivia aiuta i proprietari di animali, compresi gli animali esotici, a conoscere e curare meglio i propri animali grazie a informazioni provenienti da fonti aperte. Queste informazioni non sostituiscono il parere di un veterinario.",
     "missionTitle": "La nostra missione",
-    "modelAffiliation": "l'affiliazione: alcuni link verso siti di vendita, principalmente Amazon, ci fanno guadagnare una commissione quando acquisti tramite essi, senza costi aggiuntivi per te;",
+    "modelAffiliation": "se del caso, l'affiliazione: se vengono proposti link verso siti di vendita, possono farci guadagnare una commissione quando acquisti tramite essi, senza costi aggiuntivi per te;",
     "modelAlwaysFree": "L'esportazione dei tuoi dati e l'eliminazione del tuo account sono e resteranno gratuite.",
     "modelIntro": "La consultazione delle schede delle specie è gratuita. Il servizio è finanziato da:",
     "modelSubscription": "l'abbonamento Premium, facoltativo, per seguire più animali: si sottoscrive nell'app mobile, e prezzo e condizioni (rinnovo, disdetta, diritto di recesso) sono mostrati prima di qualsiasi pagamento.",

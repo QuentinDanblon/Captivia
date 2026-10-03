@@ -167,6 +167,9 @@ export default function AnimalDetailPage({
     if (user && token && resolvedParams) {
       fetchAnimalData();
     }
+    // Chargement à l'ouverture et au changement de session ou d'animal seulement : fetchAnimalData
+    // est recréée à chaque rendu (pas de useCallback), l'ajouter relancerait la requête en boucle.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, token, resolvedParams]);
 
   // Garde « cancelled » : chaque chargement porte un numéro ; un chargement dépassé (autre animal,

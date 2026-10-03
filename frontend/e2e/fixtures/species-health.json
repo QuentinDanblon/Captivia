@@ -8,7 +8,21 @@
         "whenToConsult": "Dès les premiers signes."
       }
     ],
-    "sources": [{ "title": "Source vétérinaire de test", "url": "https://example.com/vet" }]
+    "sources": [
+      {
+        "title": "Source vétérinaire de test",
+        "url": "https://example.com/vet"
+      }
+    ]
   },
-  "pubmed": []
+  "pubmed": [
+    {
+      "pmid": "12345678",
+      "title": "Stomatitis in captive boid snakes: a retrospective study",
+      "journal": "J Herpetol Med Surg",
+      "pubDate": "2019",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12345678/"
+    }
+  ],
+  "pubmedAvailable": true
 }

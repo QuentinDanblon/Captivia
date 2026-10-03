@@ -139,6 +139,8 @@ export default function NotificationsPreferencesPage() {
       fetchPreferences();
       checkSubscription();
     }
+    // Chargement initial par session : les deux fonctions sont recréées à chaque rendu.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, token]);
 
   const defaultSchedule = { start: '08:00', end: '22:00' };

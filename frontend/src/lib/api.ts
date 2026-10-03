@@ -453,14 +453,6 @@ export const api = {
     );
   },
 
-  searchAmazon: async (query: string, category?: string, limit = 10) => {
-    const params = new URLSearchParams();
-    params.set('q', query);
-    if (category) params.set('category', category);
-    params.set('limit', limit.toString());
-    return request(`${API_URL}/amazon/search?${params.toString()}`);
-  },
-
   // Animals endpoints
   getMyAnimals: async (token: string) => {
     return request(`${API_URL}/users/me/animals`, {

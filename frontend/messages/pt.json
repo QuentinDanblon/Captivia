@@ -492,7 +492,6 @@
     "terms": "Termos de uso",
     "transparency": "Transparência e afiliação",
     "accountDeletion": "Excluir minha conta",
-    "amazonAssociate": "Como Associado da Amazon, a Captivia ganha com compras qualificadas.",
     "legalNotice": "Aviso legal",
     "navLabel": "Informações legais",
     "sources": "Fontes e licenças",
@@ -1125,7 +1124,8 @@
       "taxonomy": "Classificação",
       "photo": "Foto",
       "viaGbif": "via GBIF",
-      "references": "Referências"
+      "references": "Referências",
+      "pubmed": "Literatura científica"
     },
     "values": {
       "diet": {
@@ -1192,7 +1192,8 @@
         "pulverisateur": "Pulverizador",
         "filtration": "Filtração"
       }
-    }
+    },
+    "pubmedNote": "Artigos do PubMed (NCBI), em inglês"
   },
   "store": {
     "allCategories": "Todos os tipos",
@@ -1209,7 +1210,6 @@
     "categoryInsect": "Insetos",
     "categoryMammal": "Mamíferos",
     "categoryReptile": "Répteis",
-    "productLinksNotice": "Os links para produtos podem ser links de afiliado.",
     "pageTitle": "Lojas parceiras",
     "lead": "Lojas escolhidas para a alimentação e o material dos seus animais.",
     "loadError": "Não foi possível carregar as lojas.",
@@ -1253,10 +1253,10 @@
   },
   "transparency": {
     "affiliateIndependence": "As recomendações de equipamentos e alimentação dependem das necessidades da espécie, não do valor das comissões.",
-    "affiliateLabelled": "Os links de afiliado são indicados pela menção «Link de afiliado» ou por um aviso próximo.",
-    "affiliatePartners": "Parceiro no lançamento: Amazon (amazon.fr). Os sites parceiros estão listados na <link>Loja</link>.",
+    "affiliateLabelled": "Se forem propostos links de afiliado, são indicados pela menção «Link de afiliado» ou por um aviso próximo, e o programa em causa é identificado.",
+    "affiliatePartners": "Hoje não é apresentado nenhum link de afiliado. As lojas parceiras, se existirem, estão listadas na <link>Loja</link>.",
     "affiliateSamePrice": "O preço é o mesmo, usando ou não o nosso link.",
-    "affiliateTitle": "Nossos links de afiliado",
+    "affiliateTitle": "Links de parceiros",
     "backHome": "Voltar ao início",
     "contactBody": "Alguma dúvida sobre nosso modelo econômico, a afiliação ou seus dados? Escreva para nós:",
     "contactTitle": "Contato",
@@ -1267,11 +1267,11 @@
     "dataNoTrackers": "Nenhum cookie publicitário nem ferramenta de medição de audiência de terceiros: apenas rastreadores estritamente necessários (login, idioma) são usados.",
     "dataPrivate": "As fichas dos seus animais são privadas por padrão. O compartilhamento público de um animal é opcional: você o ativa e pode desativá-lo a qualquer momento.",
     "dataTitle": "Seus dados",
-    "intro": "Como a Captivia é financiada, como funcionam nossos links de afiliado e o que fazemos — e não fazemos — com seus dados.",
+    "intro": "Como a Captivia é financiada, como seriam assinalados eventuais links de parceiros e o que fazemos — e não fazemos — com os seus dados.",
     "metaDescription": "Como a Captivia é financiada, como funcionam seus links de afiliado e o que ela faz com seus dados.",
     "missionBody": "A Captivia ajuda tutores de animais, inclusive de animais exóticos, a conhecer e cuidar melhor dos seus animais com informações de fontes abertas. Essas informações não substituem a orientação de um veterinário.",
     "missionTitle": "Nossa missão",
-    "modelAffiliation": "afiliação: alguns links para sites de compras, principalmente a Amazon, nos rendem uma comissão quando você compra por eles, sem custo adicional para você;",
+    "modelAffiliation": "se for o caso, a afiliação: se forem propostos links para sites de compras, podem render-nos uma comissão quando comprar através deles, sem custo adicional para si;",
     "modelAlwaysFree": "Exportar seus dados e excluir sua conta são e continuarão sendo gratuitos.",
     "modelIntro": "A consulta das fichas de espécies é gratuita. O serviço é financiado por:",
     "modelSubscription": "a assinatura Premium, opcional, para acompanhar vários animais: é contratada na aplicação móvel, e o preço e as condições (renovação, cancelamento, direito de arrependimento) são exibidos antes de qualquer pagamento.",

@@ -105,8 +105,9 @@ export function buildEnContent(locale: string): LegalContent {
           title: 'Affiliate links',
           body: (
             <P>
-              As an Amazon Associate, {LEGAL.serviceName} earns from qualifying purchases. Affiliate links are
-              labelled as such; see the {L(LEGAL_ROUTES.transparency, 'Transparency and affiliation')} page.
+              {LEGAL.serviceName} does not currently show any affiliate links. If partner links to merchant
+              websites are offered, they are labelled as such and the affiliate programme concerned is named next to
+              them; see the {L(LEGAL_ROUTES.transparency, 'Transparency and affiliation')} page.
             </P>
           ),
         },
@@ -265,8 +266,8 @@ export function buildEnContent(locale: string): LegalContent {
                 servers: as with any web resource, your browser then sends them your IP address.
               </P>
               <P>
-                When you follow an affiliate link, you leave {LEGAL.serviceName}: the merchant&apos;s website (for
-                example Amazon) applies its own privacy and cookie policy. We do not send it any data about you; the
+                If you follow a link to a partner merchant website, you leave {LEGAL.serviceName}: that website
+                applies its own privacy and cookie policy. We do not send it any data about you; the
                 link only contains our partner identifier.
               </P>
             </>
@@ -414,7 +415,7 @@ export function buildEnContent(locale: string): LegalContent {
             <UL>
               <li>Free access to species profiles (taxonomy, care, feeding, equipment, regulations).</li>
               <li>With an account: record your animals, health record, routines, reminders and notifications.</li>
-              <li>A shop listing links to partner merchant websites (affiliate links).</li>
+              <li>A shop that may list links to partner merchant websites (affiliate links, labelled as such).</li>
               <li>Optional public sharing of an animal&apos;s profile.</li>
             </UL>
           ),
@@ -492,8 +493,8 @@ export function buildEnContent(locale: string): LegalContent {
           title: '8. Affiliate links and third-party sites',
           body: (
             <P>
-              As an Amazon Associate, {LEGAL.serviceName} earns from qualifying purchases. The price you pay is the
-              same. Purchases are made directly with the merchant, under its own terms; {LEGAL.serviceName} is not a
+              If partner links to merchant websites are offered, they are labelled as such and may earn
+              {LEGAL.serviceName} a commission; the price you pay is the same. Purchases are made directly with the merchant, under its own terms; {LEGAL.serviceName} is not a
               party to the sale. See the {L(LEGAL_ROUTES.transparency, 'Transparency and affiliation')} page.
             </P>
           ),

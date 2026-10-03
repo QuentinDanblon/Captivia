@@ -23,10 +23,11 @@ test.describe('Pages légales', () => {
     });
   }
 
-  test('le pied de page rappelle la mention d’affiliation Amazon', async ({ page }) => {
+  test('aucun lien affilié affiché : le pied de page ne revendique aucun partenariat marchand', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.getByRole('contentinfo')).toContainText('Partenaire Amazon');
+    await expect(page.getByRole('contentinfo')).toBeVisible();
+    await expect(page.getByRole('contentinfo')).not.toContainText(/Amazon/i);
   });
 });
 

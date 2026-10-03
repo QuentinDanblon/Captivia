@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
 import { getTranslations } from 'next-intl/server';
-import { Alert, SectionHeader } from '@/components/ui';
+import { SectionHeader } from '@/components/ui';
 import { Field } from '@/content/legal/ui';
 import { LEGAL, LEGAL_ROUTES, contactMailto } from '@/lib/legal';
 
@@ -38,7 +38,6 @@ function List({ children }: { children: ReactNode }) {
 export default async function TransparencyPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'transparency' });
-  const tFooter = await getTranslations({ locale, namespace: 'footer' });
   const mailto = contactMailto();
   const settingsLink = (chunks: ReactNode) => (
     <Link href={LEGAL_ROUTES.accountSettings} className={linkClass}>
@@ -67,7 +66,6 @@ export default async function TransparencyPage({ params }: Props) {
             </Section>
 
             <Section id="transparency-affiliate" index={3} title={t('affiliateTitle')}>
-              <Alert severity="info" title={tFooter('amazonAssociate')} />
               <List>
                 <li>{t('affiliateLabelled')}</li>
                 <li>{t('affiliateSamePrice')}</li>

@@ -488,7 +488,6 @@
   "footer": {
     "about": "À propos",
     "accountDeletion": "Supprimer mon compte",
-    "amazonAssociate": "En tant que Partenaire Amazon, Captivia réalise un bénéfice sur les achats remplissant les conditions requises.",
     "contact": "Contact",
     "legalNotice": "Mentions légales",
     "navLabel": "Informations légales",
@@ -1132,7 +1131,8 @@
       "taxonomy": "Classification",
       "photo": "Photo",
       "viaGbif": "via GBIF",
-      "references": "Références"
+      "references": "Références",
+      "pubmed": "Littérature scientifique"
     },
     "values": {
       "diet": {
@@ -1199,7 +1199,8 @@
         "pulverisateur": "Pulvérisateur",
         "filtration": "Filtration"
       }
-    }
+    },
+    "pubmedNote": "Articles de PubMed (NCBI), en anglais"
   },
   "store": {
     "allCategories": "Tous les types",
@@ -1210,10 +1211,9 @@
     "categoryInsect": "Insectes",
     "categoryMammal": "Mammifères",
     "categoryReptile": "Reptiles",
-    "disclaimer": "Liens d'affiliation : en achetant via ces liens, vous soutenez Captivia. Les prix restent identiques pour vous.",
+    "disclaimer": "Liens d'affiliation : en achetant par ces liens, vous soutenez Captivia. Le prix reste le même pour vous.",
     "filterByCategory": "Filtrer par type d'animal",
     "forSpecies": "Magasins adaptés à cette espèce",
-    "productLinksNotice": "Les liens vers des produits peuvent être des liens d'affiliation.",
     "subtitle": "Liens vers des sites partenaires pour l'alimentation et le matériel adaptés à votre animal.",
     "title": "Magasin",
     "visitStore": "Voir le site",
@@ -1253,10 +1253,10 @@
   },
   "transparency": {
     "affiliateIndependence": "Les recommandations de matériel et d'alimentation dépendent des besoins de l'espèce, pas du montant des commissions.",
-    "affiliateLabelled": "Les liens d'affiliation sont signalés par la mention « Lien affilié » ou par un avertissement placé à proximité.",
-    "affiliatePartners": "Partenaire au lancement : Amazon (amazon.fr). Les sites partenaires sont listés dans le <link>Magasin</link>.",
+    "affiliateLabelled": "Si des liens d'affiliation sont proposés, ils sont signalés par la mention « Lien affilié » ou par un avertissement placé à proximité, et le programme concerné est nommé.",
+    "affiliatePartners": "Aucun lien d'affiliation n'est affiché aujourd'hui. Les boutiques partenaires, s'il y en a, sont listées dans le <link>Magasin</link>.",
     "affiliateSamePrice": "Le prix est le même, que vous passiez par notre lien ou non.",
-    "affiliateTitle": "Nos liens d'affiliation",
+    "affiliateTitle": "Liens partenaires",
     "backHome": "Retour à l'accueil",
     "contactBody": "Une question sur notre modèle économique, l'affiliation ou vos données ? Écrivez-nous :",
     "contactTitle": "Contact",
@@ -1267,11 +1267,11 @@
     "dataNoTrackers": "Aucun cookie publicitaire ni outil de mesure d'audience tiers : seuls des traceurs strictement nécessaires (connexion, langue) sont utilisés.",
     "dataPrivate": "Les fiches de vos animaux sont privées par défaut. Le partage public d'un animal est facultatif : vous l'activez vous-même et pouvez le désactiver à tout moment.",
     "dataTitle": "Vos données",
-    "intro": "Comment Captivia est financé, comment fonctionnent nos liens d'affiliation et ce que nous faisons — et ne faisons pas — de vos données.",
+    "intro": "Comment Captivia est financé, comment seraient signalés d'éventuels liens partenaires et ce que nous faisons — et ne faisons pas — de vos données.",
     "metaDescription": "Comment Captivia est financé, comment fonctionnent ses liens d'affiliation et ce qu'il fait de vos données.",
     "missionBody": "Captivia aide les propriétaires d'animaux, des chats et chiens aux nouveaux animaux de compagnie (NAC), à ne rien oublier de leurs soins et à mieux les connaître, grâce à des informations issues de sources ouvertes. Ces informations ne remplacent pas l'avis d'un vétérinaire.",
     "missionTitle": "Notre mission",
-    "modelAffiliation": "l'affiliation : certains liens vers des sites marchands, principalement Amazon, nous rapportent une commission lorsque vous achetez via ces liens, sans surcoût pour vous ;",
+    "modelAffiliation": "le cas échéant, l'affiliation : si des liens vers des sites marchands sont proposés, ils peuvent nous rapporter une commission lorsque vous achetez par leur intermédiaire, sans surcoût pour vous ;",
     "modelAlwaysFree": "L'export de vos données et la suppression de votre compte sont et resteront gratuits.",
     "modelIntro": "La consultation des fiches d’espèces est gratuite. Le service est financé par :",
     "modelSubscription": "l'abonnement Premium, facultatif, pour suivre plusieurs animaux : il se souscrit dans l'application mobile, et son prix et ses conditions (renouvellement, résiliation, droit de rétractation) sont affichés avant tout paiement.",

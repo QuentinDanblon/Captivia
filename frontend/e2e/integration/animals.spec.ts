@@ -38,7 +38,7 @@ test.describe('Animals Management', () => {
   test('should display empty state when no animals', async ({ page }) => {
     await page.goto('/mes-animaux');
     
-    const content = await page.textContent('body');
+    await page.textContent('body');
     // Should show message about adding first animal if empty
     // This depends on actual implementation
   });
@@ -64,7 +64,7 @@ test.describe('Animals Management', () => {
     
     // This test assumes user already has 1 animal
     // Check if premium message is displayed
-    const content = await page.textContent('body');
+    await page.textContent('body');
     // Premium message might be visible when trying to add 2nd animal
   });
 });

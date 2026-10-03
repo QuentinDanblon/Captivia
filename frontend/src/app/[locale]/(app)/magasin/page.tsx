@@ -170,7 +170,6 @@ export default function MagasinPage() {
           {/* Mention d'affiliation : seulement quand des liens d'affiliation sont affichés. */}
           <aside className="grid gap-1 border-t border-line pt-4 text-meta text-ink-2">
             <p className="m-0">{t('store.disclaimer')}</p>
-            <p className="m-0">{t('footer.amazonAssociate')}</p>
             <Link href="/transparency" className="justify-self-start text-accent-text underline underline-offset-2">
               {t('footer.transparency')}
             </Link>

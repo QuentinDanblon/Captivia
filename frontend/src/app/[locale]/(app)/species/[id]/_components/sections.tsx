@@ -6,7 +6,6 @@
  * valeurs chiffrées en mono, ses sources en note.
  */
 import { useLocale, useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
 import { countryName } from '@/lib/country';
 import { isGbifKey, type SpeciesPhoto } from '@/lib/species';
 import { Alert, Badge } from '@/components/ui';
@@ -211,18 +210,34 @@ export function HealthSection({ health }: { health: HealthData | null }) {
       )}
       {pubmed.length > 0 ? (
         <div className="grid gap-2">
-          <h3 className="m-0 font-sans text-ui font-semibold text-ink">{t('species.scientificReferences')}</h3>
+          <div className="grid gap-0.5">
+            <h3 className="m-0 font-sans text-ui font-semibold text-ink">{t('species.scientificReferences')}</h3>
+            <p className="m-0 text-meta text-ink-2">{t('species.pubmedNote')}</p>
+          </div>
           <ul className="m-0 grid list-none gap-2 p-0">
             {pubmed.map((article) => {
               const href = safeUrl(article.url);
+              // Titres PubMed : en anglais, annoncés comme tels aux lecteurs d'écran (`lang="en"`).
               return (
                 <li key={article.pmid} className="grid gap-0.5">
                   {href ? (
-                    <a href={href} target="_blank" rel="noopener noreferrer" className="text-accent-text underline decoration-1 underline-offset-2">
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      lang="en"
+                      className="text-accent-text underline decoration-1 underline-offset-2"
+                    >
                       {article.title}
+                      <span className="sr-only" lang={locale}>
+                        {' '}
+                        {t('plans.newTab')}
+                      </span>
                     </a>
                   ) : (
-                    <span className="text-ink">{article.title}</span>
+                    <span lang="en" className="text-ink">
+                      {article.title}
+                    </span>
                   )}
                   <span className="font-mono text-meta text-ink-2">{[article.journal, article.pubDate, `PMID ${article.pmid}`].filter(Boolean).join(' · ')}</span>
                 </li>
@@ -368,12 +383,6 @@ export function EquipmentSection({ equipment }: { equipment: EquipmentData }) {
           </div>
         ))}
       </div>
-      <p className="m-0 border-t border-dotted border-line-strong pt-3 text-meta text-ink-2">
-        {t('store.productLinksNotice')}{' '}
-        <Link href="/transparency" className="text-accent-text underline decoration-1 underline-offset-2">
-          {t('footer.transparency')}
-        </Link>
-      </p>
     </SheetSection>
   );
 }
@@ -388,11 +397,14 @@ export function SourcesSection({
   speciesId,
   sectionSources,
   photo,
+  pubmedCount = 0,
 }: {
   species: SpeciesData;
   speciesId: number;
   sectionSources: Array<SourceRef | string>;
   photo: SpeciesPhoto | null;
+  /** Articles PubMed cités dans la section santé (listés là-bas, avec leurs liens). */
+  pubmedCount?: number;
 }) {
   const t = useTranslations();
   const description = safeUrl(species.profile?.sourceUrl);
@@ -448,6 +460,14 @@ export function SourcesSection({
                 {t('species.sourceLabels.viaGbif')}
               </span>
             </span>
+          </li>
+        ) : null}
+        {pubmedCount > 0 ? (
+          <li className="grid gap-0.5">
+            <span className="text-meta text-ink-2">{t('species.sourceLabels.pubmed')}</span>
+            <a href="#sante" className={`${linkClass} justify-self-start`}>
+              {t('species.pubmedNote')}
+            </a>
           </li>
         ) : null}
         {references.length > 0 ? (

@@ -492,7 +492,6 @@
     "terms": "Nutzungsbedingungen",
     "transparency": "Transparenz & Affiliate",
     "accountDeletion": "Konto löschen",
-    "amazonAssociate": "Als Amazon-Partner verdient Captivia an qualifizierten Verkäufen.",
     "legalNotice": "Impressum",
     "navLabel": "Rechtliche Informationen",
     "sources": "Quellen und Lizenzen",
@@ -1125,7 +1124,8 @@
       "taxonomy": "Systematik",
       "photo": "Foto",
       "viaGbif": "über GBIF",
-      "references": "Literatur"
+      "references": "Literatur",
+      "pubmed": "Fachliteratur"
     },
     "values": {
       "diet": {
@@ -1192,7 +1192,8 @@
         "pulverisateur": "Sprühflasche",
         "filtration": "Filterung"
       }
-    }
+    },
+    "pubmedNote": "Artikel aus PubMed (NCBI), auf Englisch"
   },
   "store": {
     "allCategories": "Alle Tierarten",
@@ -1209,7 +1210,6 @@
     "categoryInsect": "Insekten",
     "categoryMammal": "Säugetiere",
     "categoryReptile": "Reptilien",
-    "productLinksNotice": "Produktlinks können Affiliate-Links sein.",
     "pageTitle": "Partnershops",
     "lead": "Ausgewählte Shops für Futter und Zubehör Ihrer Tiere.",
     "loadError": "Die Shops konnten nicht geladen werden.",
@@ -1253,10 +1253,10 @@
   },
   "transparency": {
     "affiliateIndependence": "Empfehlungen für Zubehör und Futter richten sich nach den Bedürfnissen der Art, nicht nach der Höhe der Provision.",
-    "affiliateLabelled": "Affiliate-Links sind mit „Affiliate-Link“ gekennzeichnet oder von einem Hinweis in der Nähe begleitet.",
-    "affiliatePartners": "Partner zum Start: Amazon (amazon.fr). Die Partnerseiten sind im <link>Shop</link> aufgeführt.",
+    "affiliateLabelled": "Werden Affiliate-Links angeboten, sind sie mit „Affiliate-Link“ gekennzeichnet oder von einem Hinweis in der Nähe begleitet, und das betreffende Programm wird genannt.",
+    "affiliatePartners": "Derzeit werden keine Affiliate-Links angezeigt. Partnershops, falls vorhanden, sind im <link>Shop</link> aufgeführt.",
     "affiliateSamePrice": "Der Preis ist derselbe, ob Sie unseren Link nutzen oder nicht.",
-    "affiliateTitle": "Unsere Affiliate-Links",
+    "affiliateTitle": "Partnerlinks",
     "backHome": "Zurück zur Startseite",
     "contactBody": "Eine Frage zu unserem Geschäftsmodell, den Affiliate-Links oder Ihren Daten? Schreiben Sie uns:",
     "contactTitle": "Kontakt",
@@ -1267,11 +1267,11 @@
     "dataNoTrackers": "Keine Werbe-Cookies und keine Reichweitenmessung durch Dritte: Es werden nur unbedingt erforderliche Speicherungen (Anmeldung, Sprache) verwendet.",
     "dataPrivate": "Die Profile Ihrer Tiere sind standardmäßig privat. Das öffentliche Teilen eines Tieres ist freiwillig: Sie aktivieren es selbst und können es jederzeit deaktivieren.",
     "dataTitle": "Deine Daten",
-    "intro": "Wie Captivia finanziert wird, wie unsere Affiliate-Links funktionieren und was wir mit Ihren Daten tun – und was nicht.",
+    "intro": "Wie Captivia finanziert wird, wie mögliche Partnerlinks gekennzeichnet würden und was wir mit Ihren Daten tun – und was nicht.",
     "metaDescription": "Wie Captivia finanziert wird, wie seine Affiliate-Links funktionieren und was mit Ihren Daten geschieht.",
     "missionBody": "Captivia hilft Tierhalterinnen und Tierhaltern, auch von Exoten, ihre Tiere mithilfe von Informationen aus offenen Quellen besser zu verstehen und zu versorgen. Diese Informationen ersetzen keinen tierärztlichen Rat.",
     "missionTitle": "Unsere Mission",
-    "modelAffiliation": "Affiliate-Links: Für manche Links zu Händlerseiten, vor allem Amazon, erhalten wir eine Provision, wenn Sie darüber kaufen – ohne Mehrkosten für Sie;",
+    "modelAffiliation": "gegebenenfalls Affiliate-Links: Werden Links zu Händlerseiten angeboten, können wir eine Provision erhalten, wenn Sie darüber kaufen – ohne Mehrkosten für Sie;",
     "modelAlwaysFree": "Der Export Ihrer Daten und die Löschung Ihres Kontos sind und bleiben kostenlos.",
     "modelIntro": "Das Ansehen der Artenprofile ist kostenlos. Der Dienst finanziert sich durch:",
     "modelSubscription": "das optionale Premium-Abonnement für mehrere Tiere: Es wird in der mobilen App abgeschlossen; Preis und Bedingungen (Verlängerung, Kündigung, Widerrufsrecht) werden vor jeder Zahlung angezeigt.",
