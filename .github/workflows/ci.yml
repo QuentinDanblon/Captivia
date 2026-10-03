@@ -1,9 +1,13 @@
 name: CI
 
+# Économie de minutes Actions (dépôt privé, quota gratuit) : les changements purement
+# documentaires ne relancent pas la CI.
 on:
   push:
     branches: [main]
+    paths-ignore: ['docs/**', '**/*.md', 'backend/prisma/enrichment/in/**']
   pull_request:
+    paths-ignore: ['docs/**', '**/*.md', 'backend/prisma/enrichment/in/**']
   # Déclenchement manuel : relance toute la CI à la demande.
   workflow_dispatch:
 
@@ -104,7 +108,11 @@ jobs:
         run: npm run build
 
   # Images Docker de production : on vérifie seulement qu'elles se construisent (pas de push).
+  # Image Docker (≈ 7 min) : construite sur main et en manuel seulement ; Render la
+  # reconstruit de toute façon au déploiement. Sur les PR, le build TypeScript du backend
+  # (test-backend) et du frontend (build-frontend) couvrent l'essentiel.
   docker-build:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
