@@ -464,7 +464,8 @@ Bouton principal → `/mes-animaux` (l'app propose l'essai sans compte).
 `(marketing)` (accueil + pages légales). `login`, `register`, `forgot-password`,
 `reset-password`, `verifier-email`, `animal-public` restent hors groupe ; en attendant le
 groupe `(app)`, `src/components/SiteChrome.tsx` rend l'ancien cadre pour toutes les pages hors
-`(marketing)`. Points 2, 3 et 5 restent à faire.
+`(marketing)`. Point 2 fait au lot 3 (mes animaux, agenda, paramètres, magasin) et complété au
+lot 2 (recherche `/especes`, fiche `species/[id]`) ; point 5 fait au lot 2. Le point 3 reste à faire.
 
 ### 8.2 Correspondances classe → composant/jeton
 
@@ -558,3 +559,34 @@ palette héritée de `@theme`, les classes `captivia-*` inutilisées et `tailwin
   depuis l'app ; elle ne lit donc aucun jeton, reprend la palette papier / encre en valeurs fixes
   (§ 3), reste claire en mode sombre (c'est un document) et masque la coquille de l'app à
   l'impression.
+
+## 11. Décisions (lot 2 — fiches et recherche d'espèces)
+
+- **Recherche de l'app sur `/especes`** (`(app)/especes`) : URL française comme les autres pages de
+  l'app (`/mes-animaux`, `/agenda`) ; `/species` reste réservé aux fiches, et l'export mobile
+  l'occupe déjà (`/species?id=` = fiche). « Espèces » (`APP_DESTINATIONS`, et l'en-tête marketing)
+  y mène ; l'onglet reste actif sur `/species/<id>`. La recherche de la landing ne change pas.
+  Sans critère, la page liste toutes les fiches (l'API exige un filtre : `kingdom=Animalia`) ;
+  recherche pendant la frappe (≥ 2 caractères, 350 ms), filtres par groupe (classe GBIF → catégorie
+  Captivia), texte et groupe reflétés dans l'URL (`?q=&groupe=`) pour retrouver la liste au retour.
+- **Fiche `species/[id]` dans `(app)`**, consultable sans compte ; métadonnées SEO inchangées,
+  plus un JSON-LD `Taxon` (nom scientifique, nom commun en français, rang, fiche GBIF). Overlays
+  mobiles sous `mobile/app/[locale]/(app)/species/**`, layout SEO toujours écarté par
+  `build-mobile.mjs`. Hors français, la fiche est titrée par son binôme latin (les noms
+  vernaculaires de l'API sont français, même règle que les métadonnées).
+- **Photo d'espèce** (`GET /species/:id/media`, médias GBIF ; `lib/species.ts`, testé) : première
+  image fixe dont l'auteur (`creator`) est renseigné **et** la licence reconnue libre (CC0, marque
+  du domaine public, CC BY, CC BY-SA ; NC, ND, « tous droits réservés » et inconnues refusées),
+  servie en https ; crédit auteur + licence liés à la page source (`references`, conservé par le
+  backend depuis ce lot, sinon le fichier). Sinon, silhouette. Les vignettes de la recherche ne la
+  demandent qu'à l'approche de l'écran ; la fiche réutilise la même requête (cache de session).
+- **Sections** en cartes ancrées (alimentation, habitat, comportement, santé, reproduction,
+  législation, matériel, sources), affichées seulement si elles ont du contenu, sauf santé et
+  législation (avertissements toujours visibles) et sources. Valeurs éditoriales (« grégaire »,
+  `every_2_days`…) traduites (`species.values.*`), plages chiffrées en mono (« 26–32 °C »).
+  `needsReview` (législation, santé) → badge « À confirmer » + phrase d'explication. Le biome
+  « Tropical / Subtropical » affiché par défaut et les onglets Magasin et produits Open Pet Food
+  Facts sont retirés (donnée inventée, doublon de `/magasin`).
+- **Sommaire** collant à droite en bureau (section en cours marquée d'un filet), ancres
+  défilables sous l'en-tête en dessous de 1024 px. Une seule action principale : « Ajouter un
+  animal de cette espèce » → `/mes-animaux?addSpecies=<id>&speciesName=<binôme>` (invité compris).
