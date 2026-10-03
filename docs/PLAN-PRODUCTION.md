@@ -32,6 +32,30 @@
 
 ---
 
+## Avancement — vague « produit et design » (nuit du 2-3 octobre 2026, agents par paires)
+
+**Fusionné sur `claude/zen-mendel-xq6nkb`** (PR #1 mergée dans `main` ; la suite est sur la PR #16, CI GitHub bloquée par le quota Actions du dépôt privé, toutes les vérifications faites localement) :
+- Backend : **1 093/1 093 tests**, migrations + seed + `migrate diff` OK, `npm audit` 0.
+- Frontend : **480/480 tests jest**, ESLint 0 erreur / 0 avertissement, builds web + mobile OK, **E2E smoke 172/172** sans retry, axe bloquant (0 violation sérieuse), garde-fou CI des motifs de style interdits.
+
+| Tâche | Livré |
+|---|---|
+| Revues Opus | Revue backend (12 constats, dont une course refresh/révocation : 0 session survivante après correctif) et frontend (15 constats) : tous corrigés. |
+| Produit | `docs/PRODUCT.md` (vision, offre, D-16 validée, règle d'écriture), `docs/MESSAGING.md`. |
+| Mode invité ✅ | App sans compte (1 animal, carnet complet), conversion en compte sans perte, purge 90 j. |
+| Refonte design ✅ | Direction « carnet de terrain », `frontend/docs/DESIGN.md`, AppShell (onglets mobile / barre latérale PC), tableau de bord « Aujourd'hui », fiches, outils, landing en entonnoir avec 15 photos Commons créditées, passe de finition globale. |
+| W1-04 ✅ | Client HTTP unique, retry/jitter, disjoncteur, replis locaux. |
+| W1-09 ✅ | CHECK, 7 FK, index trigram (migration testée sur base « sale »). |
+| W2-08 ✅ | Purge quotidienne, `docs/legal/registre-traitements.md`, analytics sans `userId` en query. |
+| W3-05 ✅ | Amazon retiré, Species+ (jeton optionnel), PubMed branché. |
+| W4-03 ✅ | i18n unifiée (formes d'adresse), plus de prix inventés. |
+| W4-08 ✅ | CSP sans `unsafe-eval`, `object-src 'none'`, `frame-ancestors 'none'`, HSTS ; hachages SHA-256 en export mobile. |
+| W5-04 ✅ | `lastReviewedAt` (« Fiche vérifiée le… »). |
+| W6-05/06/09 ✅ | Liens externes natifs, caméra, rappels en notifications locales hors ligne, deep links + fichiers `.well-known`. |
+| W5-02 | Lots H001-H003 : 307 citations vérifiées ; 1 358 fiches complètes sur 1 510. |
+
+**Restent** : W1-07 (dette lint backend), W6-07 (push FCM/APNs), W6-10 à W6-14 (assets, déclarations, CI mobile, soumission), DEP-02/04/05/09, volet réseau social, textes légaux `[À COMPLÉTER]`, comptes stores, déblocage du quota GitHub Actions.
+
 ## Avancement — vague « niveau complet » (soir du 2026-10-02, 9 agents fonctionnels + 17 lots de contenu)
 
 **Fusionné sur `claude/zen-mendel-xq6nkb` et vérifié sur base vierge** (HEAD `d27ca0c`) :
