@@ -48,7 +48,7 @@
     "@sentry/nestjs": "^10.69.0",
     "@sentry/node": "^10.69.0",
     "axios": "^1.20.0",
-    "bcryptjs": "^2.4.3",
+    "bcryptjs": "^3.0.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.3",
     "dotenv": "^17.2.3",
