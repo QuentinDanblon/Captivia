@@ -492,3 +492,41 @@ palette héritée de `@theme`, les classes `captivia-*` inutilisées et `tailwin
 - **« Espèces » remplace « Accueil »** dans la navigation : l'accueil est le guide des espèces,
   le libellé dit ce qu'on y trouve. « Paramètres » passe dans le bloc compte (initiales).
 - **Fraunces plafonné à 600** pour les titres hérités en `font-bold` (le 700 empâte la serif).
+
+## 10. Décisions (lot 3 — mes animaux)
+
+- **Groupe `(app)` créé** (§ 8.1, point 2) : `mes-animaux`, `agenda`, `parametres`, `magasin`
+  y vivent sous `AppShell` (+ `EmailVerificationBanner` en tête du contenu). Les overlays mobiles
+  suivent (`mobile/app/[locale]/(app)/mes-animaux/**`) ; `build-mobile.mjs` ne change pas : les
+  groupes ne modifient ni les URL ni l'export.
+- **`SiteChrome`, transitoire** : tant que `(marketing)` n'a pas son layout, le layout racine
+  passe l'en-tête, le pied et `<main>` à `SiteChrome`, qui les omet pour le segment `(app)`
+  (`useSelectedLayoutSegment`) : un seul `<main>`, aucun en-tête doublé. À retirer avec le point 3
+  du § 8.1 ; le layout racine ne garde alors que `<html>`, polices, fournisseurs, `ErrorBoundary`.
+- **« Aujourd'hui » sur `/mes-animaux`** : l'onglet « Mes animaux » (`APP_DESTINATIONS`, inchangé)
+  ouvre directement la journée de l'animal ; toutes les entrées existantes y mènent déjà
+  (connexion, inscription, essai sans compte, `NativeWelcome`, conversion invité) et le lien
+  `?addSpecies=` des fiches espèces y ouvre l'ajout présélectionné. La liste complète passe en vue
+  secondaire, `/mes-animaux/liste` (lien « Tous vos animaux ») : pour l'animal unique d'un invité
+  ou d'un compte gratuit, le tableau de bord suffit. Fiche et carnet restent sous `/mes-animaux/…`,
+  l'onglet reste donc actif partout, export mobile compris (`detail?id=`, `carnet?id=`).
+- **Ajout d'un animal = `Steps`** (`mes-animaux/_components/AddAnimalFlow`) : espèce, puis nom et
+  naissance, puis premiers soins (routines recommandées de l'espèce). En page au premier
+  lancement, en modale ensuite ; mêmes appels API qu'avant.
+- **Alertes graduées** (`lib/today.ts`, testé) : rappel de vaccin dépassé → `urgent`, sous 30 j →
+  `warning` ; traitement en cours → `info` ; dernière pesée > 90 j → `warning`, > 30 j ou aucune →
+  `info`. Une section non chargée ou refusée ne produit aucune alerte.
+- **Poids** : grammes sous 10 kg (« 2 340 g »), kilogrammes au-delà, via `Intl.NumberFormat`.
+- **`Figure userPhoto`** : seule exception au crédit obligatoire, la photo de l'animal prise par
+  son propriétaire (`alt` toujours requis). `AnimalCard` accepte `ratio` (16/9 dans la colonne du
+  tableau de bord) ; `EmptyState` accepte `headingLevel={1}` (fiche introuvable).
+- **Fiche** : en-tête « planche » (photo, `SectionHeader` avec binôme latin lié à la fiche
+  espèce, n° GBIF en marge) et bandeau de synthèse (âge, pesée, rendez-vous, traitement, rappel)
+  visibles sans défiler à 1440 px ; frise construite à partir des données déjà chargées (aucun
+  appel ajouté) ; formulaires en `Modal` + `Field`, suppressions en `alertdialog`. Sous 1024 px,
+  barre d'actions collante au-dessus de la barre d'onglets (« Peser », « Carnet », modifier,
+  supprimer), cibles de 44 px.
+- **Carnet imprimable** : même feuille pour l'écran, l'impression A4 et le fichier HTML partagé
+  depuis l'app ; elle ne lit donc aucun jeton, reprend la palette papier / encre en valeurs fixes
+  (§ 3), reste claire en mode sombre (c'est un document) et masque la coquille de l'app à
+  l'impression.
