@@ -1441,7 +1441,27 @@
     "timelineTitle90": "I prossimi 3 mesi",
     "countShort": "{count, plural, one {# cura} other {# cure}}",
     "noMatchBenefit": "Allarga il periodo o mostra tutti i tipi di cura.",
-    "pillAppointments": "{count, plural, one {appuntamento veterinario} other {appuntamenti veterinari}}"
+    "pillAppointments": "{count, plural, one {appuntamento veterinario} other {appuntamenti veterinari}}",
+    "period": {
+      "units": {
+        "hours": "Ore",
+        "days": "Giorni",
+        "months": "Mesi"
+      },
+      "duration": "Durata",
+      "hint": "Scorri da 1 a {max}, oppure usa le frecce della tastiera.",
+      "hourHint": "A partire da ora. Le cure senza orario restano visibili per i giorni inclusi.",
+      "values": {
+        "hours": "{count, plural, one {# ora} other {# ore}}",
+        "days": "{count, plural, one {# giorno} other {# giorni}}",
+        "months": "{count, plural, one {# mese} other {# mesi}}"
+      },
+      "timeline": {
+        "hours": "{count, plural, one {La prossima ora} other {Le prossime # ore}}",
+        "days": "{count, plural, one {Oggi} other {I prossimi # giorni}}",
+        "months": "{count, plural, one {Il prossimo mese} other {I prossimi # mesi}}"
+      }
+    }
   },
   "sessions": {
     "title": "Dispositivi connessi",

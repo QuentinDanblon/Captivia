@@ -96,10 +96,45 @@ export function buildFeedUrl(feedPath: string): string {
 // Utilitaires purs
 // ---------------------------------------------------------------------------
 
-/** Période [aujourd'hui local ; aujourd'hui + days − 1] au format attendu par l'API (≤ 92 jours). */
+/** Période [aujourd'hui local ; aujourd'hui + days − 1] au format attendu par l'API. */
 export function rangeFromToday(days: number, now: Date = new Date()): { from: string; to: string } {
   const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + days - 1);
   return { from: localDayKey(now), to: localDayKey(end) };
+}
+
+export type AgendaPeriodUnit = 'hours' | 'days' | 'months';
+export const AGENDA_PERIOD_MAX: Record<AgendaPeriodUnit, number> = { hours: 24, days: 30, months: 12 };
+
+export interface AgendaPeriodRange {
+  from: string;
+  to: string;
+  start: Date;
+  /** Borne exclusive ; les jours et mois commencent au début du jour local. */
+  end: Date;
+  unit: AgendaPeriodUnit;
+}
+
+/** Mois calendaires, anniversaire ramené au dernier jour du mois si nécessaire. */
+export function agendaPeriodRange(unit: AgendaPeriodUnit, value: number, now: Date = new Date()): AgendaPeriodRange {
+  if (!Number.isInteger(value) || value < 1 || value > AGENDA_PERIOD_MAX[unit]) {
+    throw new RangeError('Invalid agenda period');
+  }
+  const start = unit === 'hours' ? new Date(now) : new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  let end: Date;
+  if (unit === 'hours') end = new Date(start.getTime() + value * 3_600_000);
+  else if (unit === 'days') end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + value);
+  else {
+    const lastDay = new Date(start.getFullYear(), start.getMonth() + value + 1, 0).getDate();
+    end = new Date(start.getFullYear(), start.getMonth() + value, Math.min(start.getDate(), lastDay));
+  }
+  return { from: localDayKey(start), to: localDayKey(new Date(end.getTime() - 1)), start, end, unit };
+}
+
+/** Une échéance sans heure reste visible si son jour croise la fenêtre horaire. */
+export function filterPeriodItems(items: AgendaItem[], range: AgendaPeriodRange): AgendaItem[] {
+  return items.filter((item) => item.allDay
+    ? item.day >= range.from && item.day <= range.to
+    : new Date(item.date).getTime() >= range.start.getTime() && new Date(item.date).getTime() < range.end.getTime());
 }
 
 /** Jour d'affichage d'un élément : `day` pour une échéance sans heure, sinon jour local de l'instant. */

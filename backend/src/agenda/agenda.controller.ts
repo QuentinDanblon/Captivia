@@ -33,7 +33,7 @@ export class AgendaController {
   @ApiOperation({
     summary: 'Agenda des soins',
     description:
-      'Soins à venir de tous les animaux (routines, médicaments en cours, rappels de vaccin, RDV vétérinaires), triés par date. Période max 92 jours.',
+      'Soins à venir de tous les animaux (routines, médicaments en cours, rappels de vaccin, RDV vétérinaires), triés par date. Période max 366 jours.',
   })
   @ApiQuery({
     name: 'from',
@@ -49,7 +49,7 @@ export class AgendaController {
   @ApiResponse({ status: 200, description: "Éléments de l'agenda" })
   @ApiResponse({
     status: 400,
-    description: 'Bornes invalides ou période > 92 jours',
+    description: 'Bornes invalides ou période > 366 jours',
   })
   async getAgenda(
     @Request() req: { user: { id: string } },

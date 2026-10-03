@@ -1441,7 +1441,27 @@
     "timelineTitle90": "Die nächsten 3 Monate",
     "countShort": "{count, plural, one {# Pflege} other {# Pflegen}}",
     "noMatchBenefit": "Erweitern Sie den Zeitraum oder zeigen Sie alle Pflegearten an.",
-    "pillAppointments": "{count, plural, one {Tierarzttermin} other {Tierarzttermine}}"
+    "pillAppointments": "{count, plural, one {Tierarzttermin} other {Tierarzttermine}}",
+    "period": {
+      "units": {
+        "hours": "Stunden",
+        "days": "Tage",
+        "months": "Monate"
+      },
+      "duration": "Dauer",
+      "hint": "Scrollen Sie von 1 bis {max} oder verwenden Sie die Pfeiltasten.",
+      "hourHint": "Ab jetzt. Pflege ohne Uhrzeit wird weiterhin für die enthaltenen Tage angezeigt.",
+      "values": {
+        "hours": "{count, plural, one {# Stunde} other {# Stunden}}",
+        "days": "{count, plural, one {# Tag} other {# Tage}}",
+        "months": "{count, plural, one {# Monat} other {# Monate}}"
+      },
+      "timeline": {
+        "hours": "{count, plural, one {Die nächste Stunde} other {Die nächsten # Stunden}}",
+        "days": "{count, plural, one {Heute} other {Die nächsten # Tage}}",
+        "months": "{count, plural, one {Der nächste Monat} other {Die nächsten # Monate}}"
+      }
+    }
   },
   "sessions": {
     "title": "Verbundene Geräte",

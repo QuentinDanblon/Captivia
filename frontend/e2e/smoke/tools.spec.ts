@@ -1,4 +1,4 @@
-import { expect, signIn, test, type MockAgendaItem } from '../support/test';
+import { expect, signIn, test, runAxe, type MockAgendaItem } from '../support/test';
 
 /** Outils du compte : agenda des soins, abonnement, magasin (lot 4). */
 test.describe('Outils du compte', () => {
@@ -48,8 +48,10 @@ test.describe('Outils du compte', () => {
     await expect(timeline.getByRole('listitem')).toHaveCount(3);
 
     // Période : 7 jours relance l'appel avec la nouvelle borne.
-    await page.getByRole('button', { name: '7 jours' }).click();
-    await expect(page.getByRole('button', { name: '7 jours' })).toHaveAttribute('aria-pressed', 'true');
+    await page.getByRole('spinbutton', { name: 'Durée' }).press('Home');
+    await page.getByRole('spinbutton', { name: 'Durée' }).press('PageUp');
+    await page.getByRole('spinbutton', { name: 'Durée' }).press('ArrowUp');
+    await expect(page.getByRole('spinbutton', { name: 'Durée' })).toHaveAttribute('aria-valuenow', '7');
     await expect.poll(() => api.callsTo('GET', '/users/me/agenda').length).toBeGreaterThanOrEqual(2);
 
     // Abonnement calendrier : aucun lien tant qu'il n'est pas créé.
@@ -70,10 +72,54 @@ test.describe('Outils du compte', () => {
     await expect(filter.getByRole('option')).toHaveText(['Tous les animaux', 'Kaa', 'Pogo']);
     await filter.selectOption('animal-e2e-2');
     await expect(filter).toHaveValue('animal-e2e-2');
-    await page.getByRole('button', { name: '7 jours' }).click();
+    await page.getByRole('spinbutton', { name: 'Durée' }).press('Home');
+    await page.getByRole('spinbutton', { name: 'Durée' }).press('PageUp');
+    await page.getByRole('spinbutton', { name: 'Durée' }).press('ArrowUp');
     await expect.poll(() => api.callsTo('GET', '/users/me/agenda').length).toBeGreaterThanOrEqual(2);
     await expect(filter).toHaveValue('animal-e2e-2');
     await expect(filter.getByRole('option')).toHaveText(['Tous les animaux', 'Kaa', 'Pogo']);
+  });
+
+  test('agenda : roulette heures, jours et mois, défilement et clavier', async ({ page, api }) => {
+    await page.clock.setFixedTime(new Date('2026-10-03T10:30:00Z'));
+    const timed = (id: string, date: string): MockAgendaItem => ({
+      id, date, day: '2026-10-03', allDay: false, type: 'routine',
+      animalId: 'animal-e2e-1', animalName: 'Kaa', title: id, detail: null, status: 'pending', sourceId: id,
+    });
+    api.agenda = [timed('Passé', '2026-10-03T10:00:00Z'), timed('Dans trente minutes', '2026-10-03T11:00:00Z'), timed('Trop tard', '2026-10-03T11:30:00Z')];
+    await page.goto('/agenda');
+    const wheel = page.getByRole('spinbutton', { name: 'Durée' });
+    await expect(wheel).toHaveAttribute('aria-valuenow', '30');
+    await expect(wheel).toHaveAttribute('aria-valuemax', '30');
+    await page.getByRole('button', { name: 'Heures', exact: true }).click();
+    await expect(wheel).toHaveAttribute('aria-valuemax', '24');
+    await wheel.press('Home');
+    await expect(wheel).toHaveAttribute('aria-valuenow', '1');
+    const timeline = page.getByRole('list', { name: 'Soins à venir par jour' });
+    await expect(timeline.getByRole('listitem')).toHaveCount(1);
+    await expect(timeline).toContainText('Dans trente minutes');
+    await expect(page.getByRole('heading', { name: 'La prochaine heure', exact: true })).toBeVisible();
+    await wheel.press('ArrowDown');
+    await expect(wheel).toHaveAttribute('aria-valuenow', '1');
+    await wheel.press('End');
+    await wheel.press('ArrowUp');
+    await expect(wheel).toHaveAttribute('aria-valuenow', '24');
+    await page.getByRole('button', { name: 'Mois', exact: true }).click();
+    await expect(wheel).toHaveAttribute('aria-valuemax', '12');
+    await wheel.press('End');
+    await expect(page.getByRole('heading', { name: 'Les 12 prochains mois', exact: true })).toBeVisible();
+    await expect.poll(() => api.callsTo('GET', '/users/me/agenda').at(-1)?.query.get('to')).toBe('2027-10-02');
+    await page.getByRole('button', { name: 'Jours', exact: true }).click();
+    await expect(wheel).toHaveAttribute('aria-valuenow', '30');
+    await wheel.evaluate((element) => { element.scrollTop = 4 * 44; });
+    await expect(wheel).toHaveAttribute('aria-valuenow', '5');
+    await expect(page.getByRole('heading', { name: 'Les 5 prochains jours', exact: true })).toBeVisible();
+    await wheel.press('Home');
+    await expect(page.getByRole('heading', { name: 'Aujourd’hui', exact: true })).toBeVisible();
+    await wheel.press('End');
+    await expect(wheel).toHaveAttribute('aria-valuenow', '30');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    expect((await runAxe(page)).filter((v) => ['serious', 'critical'].includes(v.impact ?? ''))).toEqual([]);
   });
 
   test('abonnement : deux formules honnêtes, aucun prix ni bouton d’achat sur le web', async ({ page, api }) => {

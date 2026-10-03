@@ -1441,7 +1441,27 @@
     "timelineTitle90": "The next 3 months",
     "countShort": "{count, plural, one {# item} other {# items}}",
     "noMatchBenefit": "Widen the period or show every type of care.",
-    "pillAppointments": "{count, plural, one {vet appointment} other {vet appointments}}"
+    "pillAppointments": "{count, plural, one {vet appointment} other {vet appointments}}",
+    "period": {
+      "units": {
+        "hours": "Hours",
+        "days": "Days",
+        "months": "Months"
+      },
+      "duration": "Duration",
+      "hint": "Scroll from 1 to {max}, or use the arrow keys.",
+      "hourHint": "Starting now. Care without a time is still shown for the days included.",
+      "values": {
+        "hours": "{count, plural, one {# hour} other {# hours}}",
+        "days": "{count, plural, one {# day} other {# days}}",
+        "months": "{count, plural, one {# month} other {# months}}"
+      },
+      "timeline": {
+        "hours": "{count, plural, one {The next hour} other {The next # hours}}",
+        "days": "{count, plural, one {Today} other {The next # days}}",
+        "months": "{count, plural, one {The next month} other {The next # months}}"
+      }
+    }
   },
   "sessions": {
     "title": "Connected devices",

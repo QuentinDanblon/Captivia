@@ -204,3 +204,39 @@ describe('AgendaService — le tampon n’efface plus les sources (constat 5)', 
     expect(res.items.filter((i) => i.type === 'routine')).toHaveLength(24 * 30);
   });
 });
+
+describe('AgendaService — douze mois', () => {
+  it.each([
+    ['2027-03-01', '2028-02-29', 366],
+    ['2026-10-03', '2027-10-02', 365],
+  ])(
+    'génère chaque routine quotidienne sur %s → %s',
+    async (from, to, count) => {
+      const svc = serviceWith({
+        timezone: 'Europe/Brussels',
+        routines: [routine('year', { time: '08:00', recurrence: 'daily' })],
+      });
+      const res = await svc.getAgenda('u1', from, to, NOW);
+      expect(res.items).toHaveLength(count);
+      expect(res.items[0].day).toBe(from);
+      expect(res.items.at(-1)?.day).toBe(to);
+      expect(res.truncated).toBe(false);
+      for (const occurrence of res.items)
+        expect(parisTime(occurrence.date)).toBe('08:00');
+    },
+  );
+  it('conserve le plafond et signale la troncature sur douze mois', async () => {
+    const svc = serviceWith({
+      routines: [
+        routine('hourly-year', {
+          time: '08:00',
+          recurrence: 'hourly',
+          intervalHours: 1,
+        }),
+      ],
+    });
+    const res = await svc.getAgenda('u1', '2028-01-01', '2028-12-31', NOW);
+    expect(res.items).toHaveLength(MAX_AGENDA_ITEMS);
+    expect(res.truncated).toBe(true);
+  });
+});

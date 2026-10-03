@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
@@ -17,6 +17,7 @@ import {
   CareTimeline,
   EmptyState,
   Field,
+  NumberWheel,
   SectionHeader,
   Skeleton,
   SkeletonGroup,
@@ -32,18 +33,17 @@ import {
   filterItems,
   getCalendarTokenStatus,
   groupByDay,
-  rangeFromToday,
+  agendaPeriodRange,
+  filterPeriodItems,
+  AGENDA_PERIOD_MAX,
+  type AgendaPeriodUnit,
   regenerateCalendarToken,
   revokeCalendarToken,
   type AgendaItemType,
   type AgendaResponse,
 } from '@/lib/agenda';
 
-const RANGE_OPTIONS = [
-  { days: 7, labelKey: 'range7', titleKey: 'timelineTitle7' },
-  { days: 30, labelKey: 'range30', titleKey: 'timelineTitle30' },
-  { days: 92, labelKey: 'range90', titleKey: 'timelineTitle90' },
-] as const;
+const PERIOD_UNITS: AgendaPeriodUnit[] = ['hours', 'days', 'months'];
 
 const FEED_URL_KEY = 'captivia:agenda-feed-url';
 
@@ -75,7 +75,7 @@ function dayKeyToDate(day: string): Date {
 
 /**
  * Agenda des soins : la frise de toutes les échéances (routines, traitements, vaccins, visites)
- * sur 7 jours, 30 jours ou 3 mois, filtrable par animal et par type ; à côté, l'abonnement du
+ * sur une durée personnalisée, filtrable par animal et par type ; à côté, l'abonnement du
  * calendrier personnel (flux iCalendar, comptes seulement).
  */
 export default function AgendaPage() {
@@ -85,15 +85,19 @@ export default function AgendaPage() {
   const tGuest = useTranslations('guest');
   const { user, token, isLoading: authLoading } = useAuth();
 
-  const [days, setDays] = useState<number>(30);
+  const [unit, setUnit] = useState<AgendaPeriodUnit>('days');
+  const [values, setValues] = useState({ hours: 24, days: 30, months: 3 });
+  const value = values[unit];
+  const requestId = useRef(0);
   const [data, setData] = useState<AgendaResponse | null>(null);
   const [animals, setAnimals] = useState<Pick<Animal, 'id' | 'name'>[]>([]);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
   const [animalId, setAnimalId] = useState('');
   const [type, setType] = useState<AgendaItemType | ''>('');
-  // Horloge figée au montage : statuts cohérents pendant la visite (comme « Aujourd'hui »).
-  const [now] = useState(() => new Date());
+  // Une nouvelle période part de l’instant de sélection.
+  const [now, setNow] = useState(() => new Date());
+  const period = useMemo(() => agendaPeriodRange(unit, value, now), [unit, value, now]);
 
   const [feedActive, setFeedActive] = useState(false);
   const [feedUrl, setFeedUrl] = useState<string | null>(null);
@@ -103,27 +107,31 @@ export default function AgendaPage() {
 
   const load = useCallback(async () => {
     if (!token) return;
+    const currentRequest = ++requestId.current;
     setLoading(true);
     setFailed(false);
     try {
-      const { from, to } = rangeFromToday(days);
+      const { from, to } = period;
       const [agenda, registeredAnimals] = await Promise.all([
         fetchAgenda(token, from, to),
         api.getMyAnimals(token),
       ]);
+      if (currentRequest !== requestId.current) return;
       setData(agenda);
       // Le filtre reste disponible même pour un animal sans soin prévu dans la période.
       setAnimals(registeredAnimals.map(({ id, name }) => ({ id, name }))
         .sort((a, b) => a.name.localeCompare(b.name, locale)));
     } catch {
-      setFailed(true);
+      if (currentRequest === requestId.current) setFailed(true);
     } finally {
-      setLoading(false);
+      if (currentRequest === requestId.current) setLoading(false);
     }
-  }, [token, days, locale]);
+  }, [token, period, locale]);
 
   useEffect(() => {
+    const requests = requestId;
     void load();
+    return () => { requests.current++; };
   }, [load]);
 
   useEffect(() => {
@@ -142,7 +150,7 @@ export default function AgendaPage() {
     };
   }, [token, user]);
 
-  const items = useMemo(() => data?.items ?? [], [data]);
+  const items = useMemo(() => filterPeriodItems(data?.items ?? [], period), [data, period]);
   const filtered = useMemo(() => filterItems(items, { animalId, type }), [items, animalId, type]);
   // Ordre de la frise : par jour d'affichage, journées entières en tête, puis par heure.
   const ordered = useMemo(() => groupByDay(filtered).flatMap((group) => group.items), [filtered]);
@@ -222,10 +230,14 @@ export default function AgendaPage() {
   }
 
   const guest = isGuestUser(user);
-  const range = RANGE_OPTIONS.find((opt) => opt.days === days) ?? RANGE_OPTIONS[1];
-  const { from, to } = rangeFromToday(days, now);
-  const rangeFormat = new Intl.DateTimeFormat(locale, { day: '2-digit', month: '2-digit' });
-  const rangeLabel = `${rangeFormat.format(dayKeyToDate(from))} → ${rangeFormat.format(dayKeyToDate(to))}`;
+  const { from, to } = period;
+  const rangeFormat = new Intl.DateTimeFormat(locale, {
+    day: 'numeric', month: 'short', year: 'numeric',
+    ...(unit === 'hours' ? { hour: '2-digit', minute: '2-digit' } as const : {}),
+  });
+  const rangeLabel = unit === 'hours'
+    ? `${rangeFormat.format(period.start)} → ${rangeFormat.format(period.end)}`
+    : `${rangeFormat.format(dayKeyToDate(from))} → ${rangeFormat.format(dayKeyToDate(to))}`;
   const statusLabels = {
     done: tAll('today.status.done'),
     due: tAll('today.status.due'),
@@ -238,7 +250,7 @@ export default function AgendaPage() {
   const timeline = (
     <Card
       as="section"
-      title={t(range.titleKey)}
+      title={t(`period.timeline.${unit}`, { count: value })}
       titleId="agenda-timeline-title"
       actions={
         data && !failed && filtered.length > 0 ? (
@@ -335,31 +347,28 @@ export default function AgendaPage() {
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="grid min-w-0 content-start gap-6 lg:col-span-8">
           {/* Période et filtres */}
-          <div role="group" aria-label={t('filtersLabel')} className="grid gap-4 sm:grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)] sm:items-end">
-            <div className="grid gap-1.5">
+          <div role="group" aria-label={t('filtersLabel')} className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-3 sm:col-span-2">
               <span id="agenda-range-label" className="text-ui font-medium text-ink">
                 {t('rangeLabel')}
               </span>
-              <div
-                role="group"
-                aria-labelledby="agenda-range-label"
-                className="inline-flex w-full rounded-control border border-line-field bg-surface p-0.5 sm:w-auto"
-              >
-                {RANGE_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.days}
-                    type="button"
-                    aria-pressed={days === opt.days}
-                    onClick={() => setDays(opt.days)}
-                    className={cx(
-                      'min-h-[2.375rem] flex-1 rounded-[4px] px-3 text-ui font-medium whitespace-nowrap transition-colors pointer-coarse:min-h-11 sm:flex-none',
-                      days === opt.days ? 'bg-accent text-on-accent' : 'text-ink hover:bg-sunken',
-                    )}
-                  >
-                    {t(opt.labelKey)}
+              <div role="group" aria-labelledby="agenda-range-label"
+                className="flex rounded-control border border-line-field bg-surface p-0.5">
+                {PERIOD_UNITS.map((option) => (
+                  <button key={option} type="button" aria-pressed={unit === option}
+                    onClick={() => { setUnit(option); setNow(new Date()); }}
+                    className={cx('min-h-11 min-w-0 flex-1 rounded-[4px] px-3 text-ui font-medium transition-colors',
+                      unit === option ? 'bg-accent text-on-accent' : 'text-ink hover:bg-sunken')}>
+                    {t(`period.units.${option}`)}
                   </button>
                 ))}
               </div>
+              <NumberWheel key={unit} id="agenda-period-wheel" label={t('period.duration')}
+                hint={t('period.hint', { max: AGENDA_PERIOD_MAX[unit] })}
+                max={AGENDA_PERIOD_MAX[unit]} value={value}
+                valueText={(number) => t(`period.values.${unit}`, { count: number })}
+                onChange={(number) => { setValues((previous) => ({ ...previous, [unit]: number })); setNow(new Date()); }} />
+              {unit === 'hours' ? <p className="m-0 text-meta text-ink-2">{t('period.hourHint')}</p> : null}
             </div>
             <Field label={t('animalFilter')} id="agenda-animal">
               <select value={animalId} onChange={(e) => setAnimalId(e.target.value)}>

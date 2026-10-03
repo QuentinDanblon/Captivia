@@ -5,6 +5,7 @@
 export { default as Button, buttonClasses } from './Button';
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonStyleOptions } from './Button';
 export { default as Field } from './Field';
+export { default as NumberWheel } from './NumberWheel';
 export type { FieldProps, FieldControlProps } from './Field';
 export { default as Card } from './Card';
 export type { CardProps } from './Card';

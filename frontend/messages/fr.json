@@ -1441,7 +1441,27 @@
     "timelineTitle90": "Les 3 prochains mois",
     "countShort": "{count, plural, one {# soin} other {# soins}}",
     "noMatchBenefit": "Élargissez la période ou affichez tous les types de soin.",
-    "pillAppointments": "{count, plural, one {rendez-vous vétérinaire} other {rendez-vous vétérinaires}}"
+    "pillAppointments": "{count, plural, one {rendez-vous vétérinaire} other {rendez-vous vétérinaires}}",
+    "period": {
+      "units": {
+        "hours": "Heures",
+        "days": "Jours",
+        "months": "Mois"
+      },
+      "duration": "Durée",
+      "hint": "Faites défiler de 1 à {max}, ou utilisez les flèches du clavier.",
+      "hourHint": "À partir de maintenant. Les soins sans heure restent affichés pour les journées concernées.",
+      "values": {
+        "hours": "{count, plural, one {# heure} other {# heures}}",
+        "days": "{count, plural, one {# jour} other {# jours}}",
+        "months": "{count} mois"
+      },
+      "timeline": {
+        "hours": "{count, plural, one {La prochaine heure} other {Les # prochaines heures}}",
+        "days": "{count, plural, one {Aujourd’hui} other {Les # prochains jours}}",
+        "months": "{count, plural, one {Le prochain mois} other {Les # prochains mois}}"
+      }
+    }
   },
   "sessions": {
     "title": "Appareils connectés",
