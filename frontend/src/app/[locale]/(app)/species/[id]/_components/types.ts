@@ -1,7 +1,7 @@
 /**
  * Données de la fiche espèce, telles que renvoyées par l'API (GET /species/:id et ses
  * sous-ressources). Les sections éditoriales sont les lignes Prisma (SpeciesFeeding,
- * SpeciesHabitat…) ; quelques anciens noms de champs restent acceptés (`temperature`,
+ * SpeciesHabitat…) ; quelques anciens noms de champs restent acceptés (`spaceRequirements`,
  * `difficulty`…) pour les fiches et jeux d'essai antérieurs.
  */
 import type { SpeciesReproduction } from '@/lib/api';
@@ -43,8 +43,6 @@ export interface SpeciesHabitat {
   hygieneNotes?: string | null;
   costEstimate?: string | null;
   /** Anciens champs texte. */
-  temperature?: string | null;
-  humidity?: string | null;
   spaceRequirements?: string | null;
   lighting?: string | null;
   enrichment?: string | null;

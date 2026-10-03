@@ -22,8 +22,10 @@
   },
   "habitat": {
     "habitatType": "Terrarium",
-    "temperature": "28-32 °C",
-    "humidity": "60-70 %",
+    "tempMin": 28,
+    "tempMax": 32,
+    "humidityMin": 60,
+    "humidityMax": 70,
     "minSpaceSize": "180 × 60 × 60 cm",
     "lightNeeds": "Cycle jour/nuit de 12 h, UVB faible recommandé.",
     "sources": [

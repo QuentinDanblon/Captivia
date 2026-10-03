@@ -102,7 +102,7 @@ export function hasHabitat(h: SpeciesHabitat | null | undefined, distribution: s
   return Boolean(
     distribution ||
       (h &&
-        (h.habitatType || h.tempMin != null || h.tempMax != null || h.temperature || h.humidity || h.humidityMin != null || h.minSpaceSize || h.spaceRequirements || h.lightNeeds || h.lighting || h.activityEnrichment || h.enrichment)),
+        (h.habitatType || h.tempMin != null || h.tempMax != null || h.humidityMin != null || h.humidityMax != null || h.minSpaceSize || h.spaceRequirements || h.lightNeeds || h.lighting || h.activityEnrichment || h.enrichment)),
   );
 }
 
@@ -110,8 +110,8 @@ export function HabitatSection({ habitat, distribution }: { habitat: SpeciesHabi
   const t = useTranslations();
   const locale = useLocale();
   const h = habitat ?? {};
-  const temperature = formatRange(locale, h.tempMin, h.tempMax, '°C') ?? h.temperature ?? null;
-  const humidity = formatRange(locale, h.humidityMin, h.humidityMax, '%') ?? h.humidity ?? null;
+  const temperature = formatRange(locale, h.tempMin, h.tempMax, '°C');
+  const humidity = formatRange(locale, h.humidityMin, h.humidityMax, '%');
   return (
     <SheetSection id="habitat" title={t('species.sections.habitat')}>
       <FactList
