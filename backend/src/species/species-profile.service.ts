@@ -154,6 +154,7 @@ export class SpeciesProfileService {
       subcategory: profile.subcategory,
       domesticationType: profile.domesticationType,
       description: profile.description,
+      lastReviewedAt: profile.lastReviewedAt ?? null,
     };
   }
 }

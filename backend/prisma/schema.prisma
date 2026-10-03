@@ -204,7 +204,7 @@ model Animal {
   speciesId  Int // GBIF key
   name       String
   birthDate  DateTime? @db.Timestamptz(3)
-  sex        String?
+  sex        String?   // male | female | unknown — CHECK SQL "Animal_sex_check" (W1-09)
   photos     String[] // URLs
   notes      String?
   publicSlug String?   @unique // slug pour page publique / QR (Premium)
@@ -247,7 +247,7 @@ model Animal {
 model AnimalHealthRecord {
   id        String   @id @default(uuid())
   animalId  String
-  type      String   // vaccine | surgery | specific_food | medical_history
+  type      String   // vaccine | surgery | specific_food | medical_history — CHECK SQL "AnimalHealthRecord_type_check" (W1-09)
   title     String   // ex. "Vaccin rage", "Stérilisation"
   date      DateTime @db.Timestamptz(3) // date de l'événement
   notes     String?  // description libre
@@ -366,7 +366,7 @@ model Vaccination {
 }
 
 // Module D — Modèles de routines par défaut par espèce (proposés à la création d'un animal)
-// Pas de FK : cohérence par speciesId (GBIF key), comme les autres tables Species*.
+// FK vers SpeciesProfile.speciesId (W1-09, ON DELETE CASCADE).
 model SpeciesRoutineTemplate {
   id        String   @id @default(uuid())
   speciesId Int // GBIF key
@@ -379,6 +379,8 @@ model SpeciesRoutineTemplate {
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, type, order])
   @@index([speciesId])
 }
@@ -512,11 +514,25 @@ model SpeciesProfile {
   createdAt           DateTime  @default(now()) @db.Timestamptz(3)
   updatedAt           DateTime  @updatedAt @db.Timestamptz(3)
 
+  /// W5-04 — date de la dernière vérification éditoriale de la fiche (rapport verify/<LOT>.json).
+  /// NULL = jamais vérifiée (fiche historique). Posée par import-enrichment.ts.
+  lastReviewedAt      DateTime? @db.Timestamptz(3)
+
   // Relations
-  animals Animal[]
+  animals          Animal[]
+  feedings         SpeciesFeeding[]
+  habitats         SpeciesHabitat[]
+  behaviors        SpeciesBehavior[]
+  healthContents   SpeciesHealthContent[]
+  legislations     SpeciesLegislation[]
+  reproductions    SpeciesReproduction[]
+  routineTemplates SpeciesRoutineTemplate[]
 
   @@index([category])
   @@index([domesticationType])
+  /// W1-09 — recherche « contient » insensible à la casse (ILIKE '%x%') : index trigram (extension pg_trgm).
+  @@index([commonNameFr(ops: raw("gin_trgm_ops"))], type: Gin, map: "SpeciesProfile_commonNameFr_trgm_idx")
+  @@index([scientificName(ops: raw("gin_trgm_ops"))], type: Gin, map: "SpeciesProfile_scientificName_trgm_idx")
 }
 
 model SpeciesFeeding {
@@ -532,6 +548,8 @@ model SpeciesFeeding {
   createdAt          DateTime @default(now()) @db.Timestamptz(3)
   updatedAt          DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
   @@index([dietType])
@@ -555,6 +573,8 @@ model SpeciesHabitat {
   createdAt            DateTime @default(now()) @db.Timestamptz(3)
   updatedAt            DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
   @@index([habitatType])
@@ -573,6 +593,8 @@ model SpeciesBehavior {
   createdAt                    DateTime @default(now()) @db.Timestamptz(3)
   updatedAt                    DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
   @@index([difficultyLevel])
@@ -587,6 +609,8 @@ model SpeciesHealthContent {
   createdAt   DateTime @default(now()) @db.Timestamptz(3)
   updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
 }
@@ -595,12 +619,14 @@ model SpeciesLegislation {
   id          String   @id @default(uuid())
   speciesId   Int // GBIF key
   country     String // ISO code (FR, US, GB, etc.)
-  status      String // allowed, prohibited, permit_required
+  status      String // allowed, prohibited, permit_required — CHECK SQL "SpeciesLegislation_status_check" (W1-09)
   details     Json // { citesAppendix, euAnnex, permits, restrictions }
   sources     String[] // URLs to official sources
   createdAt   DateTime @default(now()) @db.Timestamptz(3)
   updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, country])
   @@index([speciesId])
   @@index([country])
@@ -623,6 +649,8 @@ model SpeciesReproduction {
   createdAt            DateTime @default(now()) @db.Timestamptz(3)
   updatedAt            DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
 }
@@ -654,7 +682,6 @@ model AffiliateStore {
   createdAt   DateTime @default(now()) @db.Timestamptz(3)
   updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
-  @@index([categories])
   @@index([categories], type: Gin, map: "AffiliateStore_categories_gin_idx")
   @@index([types], type: Gin, map: "AffiliateStore_types_gin_idx")
 }

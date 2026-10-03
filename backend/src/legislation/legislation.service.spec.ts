@@ -248,6 +248,24 @@ describe('LegislationService', () => {
     });
   });
 
+  describe('createOrUpdateLegislation — fiche inexistante (W1-09)', () => {
+    it('convertit la violation de FK (P2003) en 404', async () => {
+      mockPrismaService.speciesLegislation.upsert.mockRejectedValue(
+        Object.assign(new Error('FK'), { code: 'P2003' }),
+      );
+      await expect(
+        service.createOrUpdateLegislation(999, 'FR', 'allowed', {}, []),
+      ).rejects.toMatchObject({ status: 404 });
+    });
+
+    it('laisse passer les autres erreurs', async () => {
+      mockPrismaService.speciesLegislation.upsert.mockRejectedValue(new Error('boom'));
+      await expect(
+        service.createOrUpdateLegislation(1, 'FR', 'allowed', {}, []),
+      ).rejects.toThrow('boom');
+    });
+  });
+
   describe('searchSpeciesPlus', () => {
     it('should search Species+ by scientific name', async () => {
       const mockResults = [{ id: 1, name: 'Boa constrictor' }];
