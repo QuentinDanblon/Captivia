@@ -154,7 +154,7 @@ export default function Figure(props: FigureProps) {
               sizes={resolvedSizes}
               alt={props.alt}
               loading={priority ? 'eager' : 'lazy'}
-              decoding={priority ? 'sync' : 'async'}
+              decoding="async"
               fetchPriority={priority ? 'high' : undefined}
               onError={() => setFailed(true)}
               className="absolute inset-0 size-full"
