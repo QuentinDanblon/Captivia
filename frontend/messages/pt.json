@@ -1607,7 +1607,8 @@
     "faq2Q": "Como cancelar?",
     "faq2A": "A qualquer momento, na gestão de assinaturas da sua loja. O Premium fica ativo até ao fim do período já pago.",
     "faq3Q": "E sem conta?",
-    "faq3A": "A experiência sem conta abrange um animal. Para o Premium, crie primeiro uma conta: o seu animal e o caderno são mantidos."
+    "faq3A": "A experiência sem conta abrange um animal. Para o Premium, crie primeiro uma conta: o seu animal e o caderno são mantidos.",
+    "storeLinksLabel": "Baixar o aplicativo"
   },
   "speciesSearch": {
     "title": "Espécies",
@@ -1661,5 +1662,63 @@
     "enable": "Ativar os lembretes neste telefone",
     "disable": "Desativar os lembretes neste telefone",
     "syncError": "Não foi possível carregar seus cuidados agora. Verifique a conexão e tente novamente."
+  },
+  "paywall": {
+    "modalTitle": "Acompanhe todos os seus animais",
+    "modalLead": "Com o Premium, adicione quantos animais quiser, cada um com o seu boletim e os seus lembretes.",
+    "loading": "Carregando os planos…",
+    "choosePlan": "Escolha o seu plano",
+    "priceLine": "{price} {per}",
+    "subscribe": "Assinar por {price} {per}",
+    "per": {
+      "day": "{count, plural, one {por dia} other {a cada # dias}}",
+      "week": "{count, plural, one {por semana} other {a cada # semanas}}",
+      "month": "{count, plural, one {por mês} other {a cada # meses}}",
+      "year": "{count, plural, one {por ano} other {a cada # anos}}"
+    },
+    "planName": {
+      "day": "{count, plural, one {Diário} other {# dias}}",
+      "week": "{count, plural, one {Semanal} other {# semanas}}",
+      "month": "{count, plural, one {Mensal} other {# meses}}",
+      "year": "{count, plural, one {Anual} other {# anos}}"
+    },
+    "duration": {
+      "day": "{count, plural, one {# dia} other {# dias}}",
+      "week": "{count, plural, one {# semana} other {# semanas}}",
+      "month": "{count, plural, one {# mês} other {# meses}}",
+      "year": "{count, plural, one {# ano} other {# anos}}"
+    },
+    "introFree": "Teste grátis de {duration}, depois {price} {per}.",
+    "introPaid": "{introPrice} {introPer} durante {duration}, depois {price} {per}.",
+    "termsIos": "Assinatura com renovação automática. O pagamento é cobrado na sua conta Apple ao confirmar a compra. A assinatura é renovada pelo mesmo preço, a menos que seja cancelada pelo menos 24 horas antes do fim do período atual. Gerencie ou cancele quando quiser nos ajustes da sua conta da App Store.",
+    "termsAndroid": "Assinatura com renovação automática. O pagamento é cobrado na sua conta do Google Play ao confirmar a compra. A assinatura é renovada pelo mesmo preço até ser cancelada, o que você pode fazer a qualquer momento no Google Play, em Assinaturas. O Premium fica ativo até o fim do período pago.",
+    "deletionNote": "Excluir a sua conta Captivia não cancela a assinatura: cancele-a também na loja.",
+    "restore": "Restaurar compras",
+    "terms": "Termos de uso",
+    "privacy": "Privacidade",
+    "manage": "Gerenciar minha assinatura",
+    "unavailableTitle": "Assinatura indisponível no momento",
+    "unavailableText": "Ainda não é possível assinar o Premium nesta versão do aplicativo. O seu animal e o boletim dele continuam disponíveis.",
+    "loadErrorTitle": "Não foi possível mostrar os planos",
+    "retry": "Tentar novamente",
+    "emptyTitle": "Nenhum plano disponível no momento",
+    "emptyText": "A loja ainda não oferece o Premium neste aparelho. Tente novamente um pouco mais tarde.",
+    "errors": {
+      "network": "Não foi possível conectar à loja. Verifique a sua conexão e tente novamente.",
+      "unavailable": "Este plano não está disponível neste aparelho ou no seu país.",
+      "notAllowed": "As compras estão desativadas neste aparelho (ajustes da loja ou controle parental).",
+      "pending": "Pagamento aguardando aprovação. O Premium será ativado assim que a loja confirmar.",
+      "alreadyOwned": "Esta assinatura já está ativa na sua conta da loja. Toque em «Restaurar compras».",
+      "store": "A loja não conseguiu processar a compra. Tente novamente em instantes.",
+      "notConfigured": "Não foi possível iniciar a compra. Feche o aplicativo, abra-o de novo e tente novamente.",
+      "unknown": "A compra não foi concluída. Tente novamente em instantes."
+    },
+    "activatingTitle": "Ativando…",
+    "activatingText": "A loja confirmou a sua compra. O Premium está sendo ativado na sua conta: leva alguns segundos.",
+    "pendingText": "A sua compra está registrada, mas a sua conta ainda não foi atualizada. Isso pode levar alguns minutos: toque em «Verificar» ou volte mais tarde, sem pagar de novo.",
+    "checkAgain": "Verificar",
+    "activeTitle": "O Premium está ativo",
+    "activeText": "Adicione quantos animais quiser, cada um com o seu boletim.",
+    "restoreNothing": "Nenhuma assinatura Premium para restaurar nesta conta da loja."
   }
 }

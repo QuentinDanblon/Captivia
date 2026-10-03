@@ -55,6 +55,9 @@ jobs:
         working-directory: frontend
     env:
       NEXT_PUBLIC_API_URL: ${{ inputs.api_url }}
+      # Clés publiques RevenueCat (achat intégré, docs/PAYMENTS.md) ; absentes → achat désactivé dans l'app.
+      NEXT_PUBLIC_REVENUECAT_IOS_KEY: ${{ vars.REVENUECAT_IOS_KEY }}
+      NEXT_PUBLIC_REVENUECAT_ANDROID_KEY: ${{ vars.REVENUECAT_ANDROID_KEY }}
       NEXT_TELEMETRY_DISABLED: '1'
     steps:
       - uses: actions/checkout@v4

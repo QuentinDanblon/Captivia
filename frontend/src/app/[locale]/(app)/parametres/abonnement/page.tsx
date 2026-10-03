@@ -1,12 +1,15 @@
 'use client';
 
-import { useState, useEffect, type ReactNode } from 'react';
+import { useCallback, useState, useEffect, type ReactNode } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, type SubscriptionStatusView } from '@/lib/api';
 import { isGuestUser } from '@/lib/guest';
+import { useIsNative } from '@/lib/platform';
+import { isPendingStoreLink, storeLinks } from '@/lib/store-links';
 import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
+import { NativePaywall } from '@/components/purchases/NativePaywall';
 import { Alert, Badge, Card, ExternalLink, PremiumBadge, Skeleton, SkeletonGroup, buttonClasses, cx } from '@/components/ui';
 import { SettingsHeader } from '../_components/SettingsHeader';
 
@@ -102,10 +105,37 @@ function PlanCard({ name, audience, price, priceNote, points, current, currentLa
   );
 }
 
+/** Fiches de l'app sur les stores (web) ; marqueur `[À COMPLÉTER]` tant que l'app n'est pas publiée. */
+function StoreLinks({ label }: { label: string }) {
+  return (
+    <ul aria-label={label} className="m-0 mt-2 flex list-none flex-wrap gap-x-4 gap-y-2 p-0 text-ui">
+      {storeLinks().map((link) => (
+        <li key={link.key}>
+          {isPendingStoreLink(link) ? (
+            <span className="text-ink">
+              {link.name}{' '}
+              <mark className="rounded-control bg-warn-soft px-1 font-medium text-ink shadow-[inset_0_-1px_0_var(--warn)]">
+                {link.href}
+              </mark>
+            </span>
+          ) : (
+            <ExternalLink
+              href={link.href}
+              className="font-medium text-accent-text underline decoration-1 underline-offset-[0.18em] hover:text-ink"
+            >
+              {link.name}
+            </ExternalLink>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 /**
  * W6-08 — L'abonnement Premium se souscrit uniquement dans l'application mobile
- * (achats intégrés App Store / Google Play). Le web affiche l'état et le lien de gestion,
- * jamais de bouton d'achat. Offre (docs/PRODUCT.md) : gratuit = 1 animal et son carnet complet ;
+ * (achats intégrés App Store / Google Play, RevenueCat). Dans l'app native : paywall du store
+ * (`NativePaywall`). Le web affiche l'état et le lien de gestion, jamais de bouton d'achat. Offre (docs/PRODUCT.md) : gratuit = 1 animal et son carnet complet ;
  * Premium = plusieurs animaux (+ page publique, reproduction). Aucun prix affiché sur le web :
  * le tarif vient des stores (RevenueCat) et s'affiche dans l'app avant tout achat.
  */
@@ -114,20 +144,24 @@ export default function AbonnementPage() {
   const locale = useLocale();
   const router = useRouter();
   const { user, token, isLoading: authLoading } = useAuth();
+  const native = useIsNative();
   const [status, setStatus] = useState<SubscriptionStatusView | null>(null);
 
   useEffect(() => {
     if (!authLoading && !user) router.push('/login');
   }, [user, authLoading, router]);
 
-  useEffect(() => {
-    if (token) {
-      api
-        .getSubscription(token)
-        .then(setStatus)
-        .catch(() => setStatus({ premium: false, isPremium: false }));
-    }
+  const loadStatus = useCallback(() => {
+    if (!token) return;
+    api
+      .getSubscription(token)
+      .then(setStatus)
+      .catch(() => setStatus({ premium: false, isPremium: false }));
   }, [token]);
+
+  useEffect(() => {
+    loadStatus();
+  }, [loadStatus]);
 
   if (authLoading || (token && status === null)) {
     return (
@@ -166,11 +200,15 @@ export default function AbonnementPage() {
   } else if (guest) {
     // Invité : l'achat exige d'abord un compte (l'API répond 403 GUEST_ACCOUNT).
     premiumFooter = <GuestFeatureNote>{t('guest.subscriptionNote')}</GuestFeatureNote>;
+  } else if (native) {
+    // App native : achat intégré (prix et durée lus dans le store), restauration, gestion.
+    premiumFooter = <NativePaywall manageUrl={status?.manageUrl ?? null} onActivated={loadStatus} />;
   } else {
     premiumFooter = (
       <div className="grid gap-1 rounded-control bg-sunken px-4 py-3" role="note">
         <p className="m-0 font-medium text-ink">{t('plans.whereTitle')}</p>
         <p className="m-0 text-ui text-ink-2">{t('plans.whereText')}</p>
+        <StoreLinks label={t('plans.storeLinksLabel')} />
       </div>
     );
   }

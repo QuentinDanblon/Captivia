@@ -52,7 +52,11 @@ test.describe('Outils du compte', () => {
     await expect(premium.getByText('Tarif affiché dans l’app avant tout achat.')).toBeVisible();
     // Le tarif vient des stores : aucun montant d'abonnement codé en dur, aucun achat sur le site.
     await expect(premium).not.toContainText(/\d+[,.]\d{2}\s?€|€\s?\d/);
-    await expect(page.getByRole('button', { name: /s'abonner|acheter|payer/i })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: /s['’]abonner|acheter|payer|restaurer/i })).toHaveCount(0);
+    // L'abonnement se prend dans l'app : fiches des stores (marqueur tant qu'elles ne sont pas publiées).
+    const stores = premium.getByRole('list', { name: 'Télécharger l’application' });
+    await expect(stores).toContainText('App Store');
+    await expect(stores).toContainText('Google Play');
 
     // Comparatif : 1 animal en gratuit, illimité en Premium.
     const table = page.getByRole('table');

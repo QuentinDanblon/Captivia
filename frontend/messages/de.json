@@ -1607,7 +1607,8 @@
     "faq2Q": "Wie kündige ich?",
     "faq2A": "Jederzeit in der Abo-Verwaltung Ihres Stores. Premium bleibt bis zum Ende des bereits bezahlten Zeitraums aktiv.",
     "faq3Q": "Und ohne Konto?",
-    "faq3A": "Das Ausprobieren ohne Konto umfasst ein Tier. Für Premium erstellen Sie zuerst ein Konto: Ihr Tier und sein Heft bleiben erhalten."
+    "faq3A": "Das Ausprobieren ohne Konto umfasst ein Tier. Für Premium erstellen Sie zuerst ein Konto: Ihr Tier und sein Heft bleiben erhalten.",
+    "storeLinksLabel": "App herunterladen"
   },
   "speciesSearch": {
     "title": "Arten",
@@ -1661,5 +1662,63 @@
     "enable": "Erinnerungen auf diesem Telefon aktivieren",
     "disable": "Erinnerungen auf diesem Telefon ausschalten",
     "syncError": "Ihre Pflegetermine können gerade nicht geladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
+  },
+  "paywall": {
+    "modalTitle": "Alle Ihre Tiere im Blick",
+    "modalLead": "Mit Premium fügen Sie so viele Tiere hinzu, wie Sie möchten – jedes mit eigenem Heft und eigenen Erinnerungen.",
+    "loading": "Tarife werden geladen…",
+    "choosePlan": "Wählen Sie Ihren Tarif",
+    "priceLine": "{price} {per}",
+    "subscribe": "Für {price} {per} abonnieren",
+    "per": {
+      "day": "{count, plural, one {pro Tag} other {alle # Tage}}",
+      "week": "{count, plural, one {pro Woche} other {alle # Wochen}}",
+      "month": "{count, plural, one {pro Monat} other {alle # Monate}}",
+      "year": "{count, plural, one {pro Jahr} other {alle # Jahre}}"
+    },
+    "planName": {
+      "day": "{count, plural, one {Täglich} other {# Tage}}",
+      "week": "{count, plural, one {Wöchentlich} other {# Wochen}}",
+      "month": "{count, plural, one {Monatlich} other {# Monate}}",
+      "year": "{count, plural, one {Jährlich} other {# Jahre}}"
+    },
+    "duration": {
+      "day": "{count, plural, one {# Tag} other {# Tage}}",
+      "week": "{count, plural, one {# Woche} other {# Wochen}}",
+      "month": "{count, plural, one {# Monat} other {# Monate}}",
+      "year": "{count, plural, one {# Jahr} other {# Jahre}}"
+    },
+    "introFree": "{duration} kostenlos testen, danach {price} {per}.",
+    "introPaid": "{introPrice} {introPer} für {duration}, danach {price} {per}.",
+    "termsIos": "Automatisch verlängertes Abonnement. Die Zahlung wird bei Bestätigung des Kaufs Ihrem Apple Account belastet. Das Abonnement verlängert sich zum gleichen Preis, sofern Sie es nicht mindestens 24 Stunden vor Ende des laufenden Zeitraums kündigen. Verwalten oder kündigen Sie es jederzeit in den Einstellungen Ihres App-Store-Kontos.",
+    "termsAndroid": "Automatisch verlängertes Abonnement. Die Zahlung wird bei Bestätigung des Kaufs Ihrem Google-Play-Konto belastet. Das Abonnement verlängert sich zum gleichen Preis bis zur Kündigung, die Sie jederzeit in Google Play unter „Abos“ vornehmen können. Premium bleibt bis zum Ende des bezahlten Zeitraums aktiv.",
+    "deletionNote": "Das Löschen Ihres Captivia-Kontos kündigt das Abonnement nicht: Kündigen Sie es zusätzlich im Store.",
+    "restore": "Käufe wiederherstellen",
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutz",
+    "manage": "Abonnement verwalten",
+    "unavailableTitle": "Abonnement derzeit nicht verfügbar",
+    "unavailableText": "Premium kann in dieser App-Version noch nicht abgeschlossen werden. Ihr Tier und sein Heft bleiben verfügbar.",
+    "loadErrorTitle": "Tarife können nicht angezeigt werden",
+    "retry": "Erneut versuchen",
+    "emptyTitle": "Derzeit kein Tarif verfügbar",
+    "emptyText": "Der Store bietet Premium auf diesem Gerät noch nicht an. Versuchen Sie es etwas später erneut.",
+    "errors": {
+      "network": "Keine Verbindung zum Store. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+      "unavailable": "Dieser Tarif ist auf diesem Gerät oder in Ihrem Land nicht verfügbar.",
+      "notAllowed": "Käufe sind auf diesem Gerät deaktiviert (Store-Einstellungen oder Jugendschutz).",
+      "pending": "Zahlung wartet auf Bestätigung. Premium wird aktiviert, sobald der Store sie bestätigt.",
+      "alreadyOwned": "Dieses Abonnement ist in Ihrem Store-Konto bereits aktiv. Tippen Sie auf „Käufe wiederherstellen“.",
+      "store": "Der Store konnte den Kauf nicht verarbeiten. Versuchen Sie es gleich noch einmal.",
+      "notConfigured": "Der Kauf konnte nicht starten. Schließen Sie die App, öffnen Sie sie erneut und versuchen Sie es noch einmal.",
+      "unknown": "Der Kauf wurde nicht abgeschlossen. Versuchen Sie es gleich noch einmal."
+    },
+    "activatingTitle": "Wird aktiviert…",
+    "activatingText": "Der Store hat Ihren Kauf bestätigt. Premium wird für Ihr Konto aktiviert: Das dauert einige Sekunden.",
+    "pendingText": "Ihr Kauf ist erfasst, Ihr Konto ist aber noch nicht aktualisiert. Das kann einige Minuten dauern: Tippen Sie auf „Erneut prüfen“ oder schauen Sie später wieder vorbei, ohne erneut zu bezahlen.",
+    "checkAgain": "Erneut prüfen",
+    "activeTitle": "Premium ist aktiv",
+    "activeText": "Fügen Sie so viele Tiere hinzu, wie Sie möchten, jedes mit eigenem Heft.",
+    "restoreNothing": "Kein Premium-Abonnement in diesem Store-Konto zum Wiederherstellen."
   }
 }
