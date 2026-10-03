@@ -43,8 +43,8 @@ const ALLOWED_EVERYWHERE = new Set([
   'Captivia',
   'UVB',
   '+100 pts',
-  '5,99 €',
-  '29,99 €',
+  // Formule gratuite ; aucun prix d'abonnement codé en dur (tarif des stores, via RevenueCat).
+  '0 €',
   'CC BY-SA 4.0',
   'GBIF.org',
   // Noms de stores (W6-08)
@@ -62,6 +62,9 @@ const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {
     'Photos', 'Points', 'Restrictions', 'Routines', 'Type', 'Vaccinations',
     'Reptile', 'Bivalve', 'Animal', 'Biome', 'Sources', 'Tropical / Subtropical',
     'Urgent',
+    // « point(s) » s'écrit de même en anglais (grade).
+    '{count, plural, one {# point} other {# points}}',
+    '{count, plural, one {+# point} other {+# points}}',
   ]),
   es: new Set(['Email', 'Reptiles', 'Animal', 'Tropical / Subtropical']),
   de: new Set(['Bronze', 'Diamant', 'Profil']),
