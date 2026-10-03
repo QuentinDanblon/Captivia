@@ -1,222 +1,139 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import type { ReactNode } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import { useAuth } from '@/contexts/AuthContext';
 import { Link } from '@/i18n/navigation';
+import { isGuestUser } from '@/lib/guest';
+import { languageNames } from '@/components/LanguageSelector';
 import { GuestEntry } from '@/components/guest/GuestEntry';
 import { GuestSaveBanner } from '@/components/guest/GuestSaveBanner';
+import { Badge, Button, Card, PremiumBadge, SectionHeader, Skeleton, SkeletonGroup } from '@/components/ui';
 
+interface SettingsEntry {
+  href: string;
+  title: string;
+  description: string;
+  status?: ReactNode;
+}
+
+/**
+ * Index « Compte » (onglet de l'app) : la table des matières des réglages — profil et sécurité,
+ * rappels, abonnement, grade — et, à côté, la carte du profil.
+ */
 export default function ParametresPage() {
   const t = useTranslations();
-  const { user, isLoading: authLoading } = useAuth();
+  const locale = useLocale();
+  const { user, isLoading: authLoading, logout } = useAuth();
 
   // Sans session : « Essayer sans compte » ou connexion (plus de redirection vers /login).
   if (!authLoading && !user) return <GuestEntry />;
 
-  if (authLoading) {
+  if (authLoading || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">
-            {t('common.loading')}
-          </p>
-        </div>
+      <div className="cv-container py-6 sm:py-8">
+        <SkeletonGroup label={t('common.loading')} className="grid gap-6">
+          <Skeleton width="35%" height={40} />
+          <div className="grid gap-6 md:grid-cols-12">
+            <Skeleton shape="block" height={360} className="md:col-span-8" />
+            <Skeleton shape="block" height={200} className="md:col-span-4" />
+          </div>
+        </SkeletonGroup>
       </div>
     );
   }
 
+  const guest = isGuestUser(user);
+  const premium = !guest && user.isPremium;
+  const createdAt = (user as { createdAt?: string }).createdAt;
+  const memberSince = createdAt
+    ? new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(new Date(createdAt))
+    : null;
+  const initials = user.email?.slice(0, 2).toUpperCase() ?? '··';
+
+  const entries: SettingsEntry[] = [
+    { href: '/parametres/compte', title: t('settings.accountTitle'), description: t('settings.accountDescription') },
+    {
+      href: '/parametres/notifications',
+      title: t('settings.notificationsTitle'),
+      description: t('settings.notificationsDescription'),
+    },
+    {
+      href: '/parametres/abonnement',
+      title: t('settings.subscriptionTitle'),
+      description: premium ? t('settings.subscriptionDescriptionPremium') : t('settings.subscriptionDescription'),
+      status: premium ? <PremiumBadge label={t('guest.premium')} /> : <Badge>{t('settings.planFree')}</Badge>,
+    },
+    { href: '/parametres/grade', title: t('settings.gradeTitle'), description: t('settings.gradeDescription') },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-w-0">
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white mb-6 sm:mb-8">
-          {t('settings.title')}
-        </h1>
+    <div className="cv-container grid gap-6 py-6 sm:py-8">
+      {/* Invité : l'invitation à créer un compte (sans perte) est le premier réglage. */}
+      <GuestSaveBanner dismissible={false} />
+      <SectionHeader title={t('settings.title')} description={t('settings.lead')} />
 
-        {/* Invité : l'invitation à créer un compte (sans perte) est le premier réglage. */}
-        <GuestSaveBanner dismissible={false} className="mb-6" />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-          {/* Compte card */}
-          <Link
-            href="/parametres/compte"
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-emerald-100 dark:bg-emerald-900 rounded-lg group-hover:bg-emerald-200 dark:group-hover:bg-emerald-800 transition-colors">
-                <svg
-                  className="w-8 h-8 text-emerald-600 dark:text-emerald-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+      <div className="grid gap-8 md:grid-cols-12">
+        <nav aria-label={t('settings.sectionsLabel')} className="md:col-span-8">
+          <ul className="m-0 list-none border-t border-line p-0">
+            {entries.map((entry, index) => (
+              <li key={entry.href} className="border-b border-line">
+                <Link
+                  href={entry.href}
+                  className="group grid grid-cols-[2rem_minmax(0,1fr)_auto] items-start gap-x-4 py-5 text-ink no-underline sm:grid-cols-[2.5rem_minmax(0,1fr)_auto]"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                  {t('settings.account')}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {t('settings.accountDescription')}
-                </p>
-              </div>
-              <svg
-                className="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </div>
-          </Link>
+                  <span aria-hidden="true" className="pt-1 font-mono text-meta text-ink-2">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="grid min-w-0 gap-1">
+                    <span className="font-display text-h4 font-semibold decoration-1 underline-offset-4 group-hover:underline">
+                      {entry.title}
+                    </span>
+                    <span className="text-ui text-ink-2">{entry.description}</span>
+                  </span>
+                  <span className="flex items-center gap-3 pt-1">
+                    {entry.status}
+                    <svg viewBox="0 0 16 16" className="size-4 text-ink-3 transition-colors group-hover:text-ink" fill="none" aria-hidden="true">
+                      <path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          {/* Notifications card */}
-          <Link
-            href="/parametres/notifications"
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg group-hover:bg-blue-200 dark:group-hover:bg-blue-800 transition-colors">
-                <svg
-                  className="w-8 h-8 text-blue-600 dark:text-blue-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                  />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {t('settings.notifications')}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {t('settings.notificationsDescription')}
-                </p>
-              </div>
-              <svg
-                className="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+        <Card as="aside" aria-label={t('settings.profileLabel')} className="grid content-start gap-5 self-start md:col-span-4">
+          <div className="flex items-center gap-4">
+            <span
+              aria-hidden="true"
+              className="inline-flex size-12 shrink-0 items-center justify-center rounded-full border border-line-strong bg-sunken font-mono text-ui text-ink"
+            >
+              {initials}
+            </span>
+            <div className="grid min-w-0 gap-0.5">
+              <p className="m-0 truncate font-medium text-ink">{user.email ?? t('nav.guest')}</p>
+              <p className="m-0 text-ui text-ink-2">
+                {guest ? t('settings.guestProfile') : memberSince ? t('settings.memberSince', { date: memberSince }) : t('settings.planFree')}
+              </p>
             </div>
-          </Link>
-
-          {/* Abonnement Premium card */}
-          <Link
-            href="/parametres/abonnement"
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-emerald-100 dark:bg-emerald-900 rounded-lg group-hover:bg-emerald-200 dark:group-hover:bg-emerald-800 transition-colors">
-                <svg
-                  className="w-8 h-8 text-emerald-600 dark:text-emerald-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                  />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                  {t('settings.subscription')}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {t('settings.subscriptionDescription')}
-                </p>
-              </div>
-              <svg
-                className="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+          </div>
+          <dl className="m-0 grid gap-0 border-t border-line text-ui">
+            <div className="flex items-baseline justify-between gap-4 border-b border-line py-3">
+              <dt className="text-ink-2">{t('settings.planLabel')}</dt>
+              <dd className="m-0 text-ink">{premium ? t('guest.premium') : t('settings.planFreeShort')}</dd>
             </div>
-          </Link>
-
-          {/* Grade card */}
-          <Link
-            href="/parametres/grade"
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow group"
-          >
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-amber-100 dark:bg-amber-900 rounded-lg group-hover:bg-amber-200 dark:group-hover:bg-amber-800 transition-colors">
-                <svg
-                  className="w-8 h-8 text-amber-600 dark:text-amber-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                  />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-                  {t('settings.grade')}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {t('settings.gradeDescription')}
-                </p>
-              </div>
-              <svg
-                className="w-5 h-5 text-gray-400 group-hover:text-amber-600 transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+            <div className="flex items-baseline justify-between gap-4 border-b border-line py-3">
+              <dt className="text-ink-2">{t('common.language')}</dt>
+              <dd className="m-0 text-ink">{languageNames[locale as keyof typeof languageNames] ?? locale}</dd>
             </div>
-          </Link>
-        </div>
+          </dl>
+          {!guest ? (
+            <Button variant="secondary" onClick={logout} fullWidth>
+              {t('common.logout')}
+            </Button>
+          ) : null}
+        </Card>
       </div>
     </div>
   );
