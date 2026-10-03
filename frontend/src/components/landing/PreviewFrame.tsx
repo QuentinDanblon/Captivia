@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { BrandMark, cx, type PhotoCredit } from '@/components/ui';
+import { BrandMark, ExternalLink, cx, type PhotoCredit } from '@/components/ui';
 import { DeferredMount } from './DeferredMount';
 
 export interface PreviewFrameProps {
@@ -42,14 +42,14 @@ export function PreviewFrame({ description, note, credits = [], children, deferr
         {credits.map((credit) => (
           <span key={credit.sourceUrl} className="font-mono">
             {' · © '}
-            <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-1 underline-offset-2">
+            <ExternalLink href={credit.sourceUrl} className="underline decoration-1 underline-offset-2">
               {credit.author}
-            </a>
+            </ExternalLink>
             {', '}
             {credit.licenseUrl ? (
-              <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer license" className="underline decoration-1 underline-offset-2">
+              <ExternalLink href={credit.licenseUrl} rel="license" className="underline decoration-1 underline-offset-2">
                 {credit.license}
-              </a>
+              </ExternalLink>
             ) : (
               credit.license
             )}

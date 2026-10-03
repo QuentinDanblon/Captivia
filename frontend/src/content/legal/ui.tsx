@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
+import ExternalLink from '@/components/ui/ExternalLink';
 import { isLegalMarker } from '@/lib/legal';
 
 /** Briques de mise en forme partagées par les contenus légaux FR et EN. */
@@ -48,12 +49,12 @@ export function Field({ value }: { value: string | number }) {
 const linkClass =
   'font-medium text-accent-text underline decoration-1 underline-offset-[0.18em] transition-colors hover:text-ink';
 
-/** Lien externe (nouvel onglet). */
+/** Lien externe : nouvel onglet sur le web, navigateur du système dans l'app (`ExternalLink`). */
 export function A({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+    <ExternalLink href={href} className={linkClass}>
       {children}
-    </a>
+    </ExternalLink>
   );
 }
 

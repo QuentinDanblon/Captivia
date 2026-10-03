@@ -9,8 +9,8 @@ import type { Metadata } from 'next';
 import { hasLocale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '../../i18n/routing';
+import { DEFAULT_SITE_URL, getSiteUrl } from './site-url';
 
-export const DEFAULT_SITE_URL = 'https://captivia-app.netlify.app';
 export const SITE_NAME = 'Captivia';
 
 /** Locale OpenGraph (langue_PAYS) pour chaque locale de l'application. */
@@ -23,19 +23,8 @@ export const OG_LOCALES: Record<string, string> = {
   pt: 'pt_PT',
 };
 
-/** Origine publique du site (sans slash final). `NEXT_PUBLIC_SITE_URL` ou valeur par défaut. */
-export function getSiteUrl(): string {
-  const raw = (process.env.NEXT_PUBLIC_SITE_URL ?? '').trim();
-  if (raw) {
-    try {
-      const url = new URL(raw);
-      if (url.protocol === 'http:' || url.protocol === 'https:') return url.origin;
-    } catch {
-      // valeur invalide : repli sur la valeur par défaut
-    }
-  }
-  return DEFAULT_SITE_URL;
-}
+/** Origine publique du site (sans slash final) : `src/lib/site-url.ts`, partagé avec le client. */
+export { DEFAULT_SITE_URL, getSiteUrl };
 
 /**
  * Chemin localisé (relatif à l'origine) d'une page. `path` vaut '' pour l'accueil, sinon '/magasin'.

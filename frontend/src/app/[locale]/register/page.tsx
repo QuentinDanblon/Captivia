@@ -9,6 +9,7 @@ import { GUEST_UPGRADE_PATH, isGuestUser } from '@/lib/guest';
 import { useStartGuest } from '@/components/guest/useStartGuest';
 import { AuthFrame, OrDivider } from '@/components/auth/AuthFrame';
 import { Alert, Button, Field } from '@/components/ui';
+import { NewTabPageLink } from '@/components/NewTabPageLink';
 
 export default function RegisterPage() {
   const t = useTranslations();
@@ -67,9 +68,9 @@ export default function RegisterPage() {
 
   const legalLink = (href: string) => {
     const LegalLink = (chunks: React.ReactNode) => (
-      <Link href={href} target="_blank" rel="noopener noreferrer" className="text-accent-text underline underline-offset-2">
+      <NewTabPageLink href={href} className="text-accent-text underline underline-offset-2">
         {chunks}
-      </Link>
+      </NewTabPageLink>
     );
     return LegalLink;
   };

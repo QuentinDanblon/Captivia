@@ -3,6 +3,7 @@
 import { useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import AnimalSilhouette, { type SilhouetteKind } from './AnimalSilhouette';
+import ExternalLink from './ExternalLink';
 import { cx } from './cx';
 
 /** Crédit obligatoire de toute photo (cf. public/images/CREDITS.md et DESIGN.md § 7). */
@@ -119,14 +120,14 @@ function CreditLine({ credit }: { credit: PhotoCredit }) {
   return (
     <>
       ©{' '}
-      <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-1 underline-offset-2">
+      <ExternalLink href={credit.sourceUrl} className="underline decoration-1 underline-offset-2">
         {credit.author}
-      </a>
+      </ExternalLink>
       {' · '}
       {credit.licenseUrl ? (
-        <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer license" className="underline decoration-1 underline-offset-2">
+        <ExternalLink href={credit.licenseUrl} rel="license" className="underline decoration-1 underline-offset-2">
           {credit.license}
-        </a>
+        </ExternalLink>
       ) : (
         credit.license
       )}
