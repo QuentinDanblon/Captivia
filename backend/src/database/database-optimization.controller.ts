@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Delete,
-  Query,
   UseGuards,
   HttpCode,
   HttpStatus,
@@ -27,14 +26,6 @@ export class DatabaseOptimizationController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async getDatabaseStats() {
     return await this.optimizationService.getDatabaseStats();
-  }
-
-  @Get('query-explain')
-  @ApiOperation({ summary: 'Get query explanation' })
-  @ApiResponse({ status: 200, description: 'Returns query explanation' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getQueryExplain(@Query('query') query: string) {
-    return await this.optimizationService.getQueryExplain(query);
   }
 
   @Post('optimize-cache')

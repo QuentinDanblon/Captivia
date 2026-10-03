@@ -230,18 +230,6 @@ export class DatabaseOptimizationService {
     this.logger.log('Database stats have been reset');
   }
 
-  async getQueryExplain(query: string): Promise<any> {
-    // In a real implementation, this would use database-specific EXPLAIN functionality
-    // For now, return a mock response
-    return {
-      query,
-      timestamp: new Date().toISOString(),
-      message: 'Query explanation would be provided by the database driver',
-      estimatedCost: Math.floor(Math.random() * 1000),
-      estimatedRows: Math.floor(Math.random() * 1000),
-    };
-  }
-
   private generateRecommendations(stats: {
     totalQueries: number;
     cacheHits: number;

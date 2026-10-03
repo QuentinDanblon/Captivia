@@ -75,7 +75,6 @@ Monitors database query performance.
 
 **Endpoints:**
 - `GET /database/stats` - Get database stats
-- `GET /database/query-explain` - Get query explanation
 - `POST /database/optimize-cache` - Optimize query cache
 - `DELETE /database/stats/reset` - Reset database stats
 

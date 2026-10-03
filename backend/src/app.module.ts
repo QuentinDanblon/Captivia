@@ -13,8 +13,6 @@ import { CommonModule } from './common/common.module';
 import { CacheModule } from './cache/cache.module';
 import { TransformerModule } from './transformers/transformer.module';
 import { FilterModule } from './filters/filter.module';
-import { ExceptionsModule } from './common/exceptions/exceptions.module';
-import { InterceptorsModule } from './common/interceptors/interceptors.module';
 import { MonitoringModule } from './monitoring/monitoring.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { DatabaseOptimizationModule } from './database/database-optimization.module';
@@ -98,8 +96,6 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     CacheModule.registerAsync(),
     TransformerModule,
     FilterModule,
-    ExceptionsModule,
-    InterceptorsModule,
     SpeciesModule,
     HealthModule,
     CommonModule,
