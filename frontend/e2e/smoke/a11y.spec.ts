@@ -7,6 +7,7 @@ const PUBLIC_PAGES = [
   '/login',
   '/register',
   '/species/2435099',
+  '/especes',
   '/mentions-legales',
   '/confidentialite',
   '/cgu',
