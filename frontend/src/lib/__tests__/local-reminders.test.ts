@@ -24,6 +24,7 @@ const ln = {
     return { notifications: notifications.map((n) => ({ id: n.id })) };
   }),
   createChannel: jest.fn(async () => undefined),
+  deleteChannel: jest.fn(async () => undefined),
 };
 jest.mock('@capacitor/local-notifications', () => ({ LocalNotifications: ln }));
 
@@ -52,6 +53,7 @@ jest.mock('../agenda', () => {
 import { AgendaApiError } from '../agenda';
 import {
   ALL_DAY_REMINDER_HOUR,
+  LEGACY_REMINDER_CHANNEL_ID,
   MAX_PENDING_REMINDERS,
   REMINDER_CHANNEL_ID,
   REMINDER_KIND,
@@ -76,6 +78,7 @@ import {
 
 // --- Données ------------------------------------------------------------------
 const NOW = new Date(2026, 9, 3, 12, 0, 0); // 3 oct. 2026, 12:00 locale
+const GENERATED_AT = '2026-10-03T10:00:00.000Z';
 
 function item(partial: Partial<AgendaItem> & { at?: Date }): AgendaItem {
   const at = partial.at ?? new Date(2026, 9, 4, 8, 0, 0);
@@ -238,11 +241,19 @@ describe('reminderAnimalId', () => {
 describe('syncLocalReminders', () => {
   it('programme l’agenda des 30 prochains jours avec des identifiants stables', async () => {
     const items = [item({ sourceId: 'a' }), item({ sourceId: 'b', type: 'medication', animalId: 'a2', at: new Date(2026, 9, 4, 20) })];
-    mockFetchAgenda.mockResolvedValue({ items, from: '', to: '', truncated: false });
+    mockFetchAgenda.mockResolvedValue({ items, from: '', to: '', truncated: false, generatedAt: GENERATED_AT });
     const res = await sync();
-    // W6-07 : tout l'horizon est programmé → couvert jusqu'au 2 nov. 0 h (fin du 30e jour).
-    expect(res).toEqual({ outcome: 'scheduled', count: 2, source: 'network', coveredUntil: new Date(2026, 10, 2) });
-    expect(mockFetchAgenda).toHaveBeenCalledWith('jwt', '2026-10-03', '2026-11-01');
+    // W6-07 : tout l'horizon est programmé → couvert jusqu'au 2 nov. 0 h (fin du 30e jour), avec
+    // l'instant serveur de l'Agenda programmé.
+    expect(res).toEqual({
+      outcome: 'scheduled',
+      count: 2,
+      source: 'network',
+      coveredUntil: new Date(2026, 10, 2),
+      coveredAsOf: GENERATED_AT,
+    });
+    // J-2 → J+31 (jours du téléphone) : marge pour un compte dans un autre fuseau.
+    expect(mockFetchAgenda).toHaveBeenCalledWith('jwt', '2026-10-01', '2026-11-03');
     const scheduled = ln.schedule.mock.calls[0][0].notifications;
     expect(scheduled.map((n: Pending) => n.id)).toEqual(items.map((i) => reminderId(i.id)));
     expect(scheduled[1]).toMatchObject({
@@ -284,13 +295,23 @@ describe('syncLocalReminders', () => {
   });
 
   it('ne programme jamais plus de 64 rappels', async () => {
-    mockFetchAgenda.mockResolvedValue({ items: hourly(200) });
+    mockFetchAgenda.mockResolvedValue({ items: hourly(200), truncated: false, generatedAt: GENERATED_AT });
     const res = await sync();
     expect(res.count).toBe(64);
     const scheduled = ln.schedule.mock.calls[0][0].notifications;
     expect(scheduled).toHaveLength(64);
     // W6-07 : couverture locale arrêtée au dernier rappel programmé (le serveur pousse la suite).
     expect(res.coveredUntil).toEqual(scheduled[63].schedule.at);
+  });
+
+  it('W6-07 : Agenda tronqué par l’API ou sans instant serveur : couverture nulle (rien n’est garanti)', async () => {
+    mockFetchAgenda.mockResolvedValueOnce({ items: [item({ sourceId: 'a' })], truncated: true, generatedAt: GENERATED_AT });
+    const truncated = await sync();
+    expect(truncated.count).toBe(1);
+    expect(truncated.coveredUntil).toBeNull();
+    expect(truncated).not.toHaveProperty('coveredAsOf');
+    mockFetchAgenda.mockResolvedValueOnce({ items: [item({ sourceId: 'a' })], truncated: false });
+    expect((await sync()).coveredUntil).toBeNull();
   });
 
   it('W6-07 : couverture locale non annoncée hors ligne ; soins à rappeler comptés sans permission', async () => {
@@ -422,13 +443,33 @@ describe('syncLocalReminders', () => {
     });
   });
 
-  it('Android : crée le canal des rappels', async () => {
+  it('Android : canal des rappels en visibilité PRIVÉE (écran verrouillé), ancien canal public supprimé', async () => {
     mockPlatform.mockReturnValue('android');
     mockFetchAgenda.mockResolvedValue({ items: [item({})] });
     await sync();
+    expect(REMINDER_CHANNEL_ID).toBe('captivia-reminders-v2');
     expect(ln.createChannel).toHaveBeenCalledWith(
-      expect.objectContaining({ id: REMINDER_CHANNEL_ID, name: 'Rappels de soins', importance: 4 }),
+      expect.objectContaining({ id: REMINDER_CHANNEL_ID, name: 'Rappels de soins', importance: 4, visibility: 0 }),
     );
+    expect(ln.deleteChannel).toHaveBeenCalledWith({ id: LEGACY_REMINDER_CHANNEL_ID });
+    expect(LEGACY_REMINDER_CHANNEL_ID).toBe('captivia-reminders');
+    // Les rappels sont (re)programmés sur le nouveau canal, après la suppression de l'ancien.
+    expect(ln.schedule.mock.calls[0][0].notifications[0].channelId).toBe(REMINDER_CHANNEL_ID);
+    expect(ln.deleteChannel.mock.invocationCallOrder[0]).toBeLessThan(ln.schedule.mock.invocationCallOrder[0]);
+  });
+
+  it('Android : un échec de suppression de l’ancien canal n’empêche pas la programmation', async () => {
+    mockPlatform.mockReturnValue('android');
+    ln.deleteChannel.mockRejectedValueOnce(new Error('absent'));
+    mockFetchAgenda.mockResolvedValue({ items: [item({})] });
+    expect((await sync()).outcome).toBe('scheduled');
+  });
+
+  it('iOS : aucun canal (aperçus sur l’écran verrouillé gérés par l’utilisateur)', async () => {
+    mockFetchAgenda.mockResolvedValue({ items: [item({})] });
+    await sync();
+    expect(ln.createChannel).not.toHaveBeenCalled();
+    expect(ln.deleteChannel).not.toHaveBeenCalled();
   });
 
   it('sur le web : aucun effet', async () => {

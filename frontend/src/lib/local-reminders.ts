@@ -15,7 +15,7 @@
  *
  * Plugins importés à la demande : rien dans le bundle web, aucun effet hors de l'app native.
  */
-import { AgendaApiError, fetchAgenda, rangeFromToday, type AgendaItem } from './agenda';
+import { AgendaApiError, fetchAgenda, localDayKey, type AgendaItem } from './agenda';
 import { getPlatform, isNative } from './platform';
 
 /** Horizon programmé sur l'appareil. */
@@ -24,8 +24,20 @@ export const REMINDER_HORIZON_DAYS = 30;
 export const MAX_PENDING_REMINDERS = 64;
 /** Échéance « journée entière » (vaccin, rendez-vous sans heure) : rappel à 9 h, heure locale. */
 export const ALL_DAY_REMINDER_HOUR = 9;
-/** Canal Android des rappels. */
-export const REMINDER_CHANNEL_ID = 'captivia-reminders';
+/**
+ * Canal Android des rappels (partagé avec le push natif FCM, `ANDROID_CHANNEL_ID` côté API).
+ * Visibilité PRIVÉE sur l'écran verrouillé : le titre d'un rappel peut contenir le nom d'un
+ * médicament, sa dose ou le nom du vétérinaire (revue de sécurité W6-07, constat 7). La visibilité
+ * d'un canal existant ne pouvant plus être modifiée par l'app, c'est un NOUVEL identifiant ;
+ * l'ancien canal est supprimé à la synchronisation (pas de doublon dans les réglages).
+ * iOS : rien à forcer, l'affichage des aperçus sur l'écran verrouillé est un réglage de
+ * l'utilisateur (Réglages > Notifications > Afficher les aperçus).
+ */
+export const REMINDER_CHANNEL_ID = 'captivia-reminders-v2';
+/** Ancien canal (visibilité publique), supprimé au démarrage. */
+export const LEGACY_REMINDER_CHANNEL_ID = 'captivia-reminders';
+/** `NotificationChannel.VISIBILITY_PRIVATE` : sur l'écran verrouillé, « contenu masqué ». */
+export const REMINDER_CHANNEL_VISIBILITY = 0;
 /** Marque des notifications programmées par Captivia (champ `extra.kind`). */
 export const REMINDER_KIND = 'captivia-agenda';
 
@@ -50,6 +62,17 @@ export function reminderId(key: string): number {
     hash = Math.imul(hash, 0x01000193) >>> 0;
   }
   return (hash % MAX_ID) + 1;
+}
+
+/**
+ * Période demandée à l'Agenda : de J-2 à J+31 (jours du TÉLÉPHONE). L'API compte en jours du
+ * fuseau du COMPTE : la marge (écart de fuseaux ≤ 26 h) garantit que tous les soins à venir
+ * jusqu'à la fin de la couverture annoncée (J+30 à minuit) sont dans la réponse, même quand le
+ * téléphone n'est pas dans le fuseau du compte (voyage). Les soins passés sont écartés au plan.
+ */
+export function reminderAgendaRange(now: Date): { from: string; to: string } {
+  const day = (offset: number) => localDayKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() + offset));
+  return { from: day(-2), to: day(REMINDER_HORIZON_DAYS + 1) };
 }
 
 /** Instant du rappel : l'heure du soin, ou 9 h locale le jour d'une échéance sans heure. */
@@ -269,8 +292,15 @@ export interface SyncResult {
    * `scheduled` depuis le réseau (W6-07) : les soins prévus AVANT cet instant sont tous programmés
    * sur l'appareil ; le serveur ne les renvoie pas en push natif (anti-doublon). Fin de l'horizon
    * de 30 jours, ou instant du dernier rappel programmé quand la limite de 64 est atteinte.
+   * null : aucune couverture garantie (Agenda tronqué par l'API, ou sans `generatedAt`).
+   * Absent (liste hors ligne) : couverture précédente inchangée côté serveur.
    */
-  coveredUntil?: Date;
+  coveredUntil?: Date | null;
+  /**
+   * Avec `coveredUntil` : instant serveur de l'Agenda programmé (`generatedAt`). Le serveur ne
+   * tient pour programmés que les soins dont la source n'a pas changé depuis.
+   */
+  coveredAsOf?: string;
 }
 
 /**
@@ -308,10 +338,15 @@ async function doSync({ token, userId, texts, prompt = false, now = new Date() }
   // 1. Agenda des 30 prochains jours ; hors ligne (ou serveur indisponible) : dernière liste connue.
   let items: AgendaItem[] | null = null;
   let source: SyncResult['source'] = null;
+  let agendaComplete = false;
+  let generatedAt: string | null = null;
   try {
-    const { from, to } = rangeFromToday(REMINDER_HORIZON_DAYS, now);
-    items = (await fetchAgenda(token, from, to)).items;
+    const { from, to } = reminderAgendaRange(now);
+    const agenda = await fetchAgenda(token, from, to);
+    items = agenda.items;
     source = 'network';
+    agendaComplete = agenda.truncated !== true;
+    generatedAt = typeof agenda.generatedAt === 'string' && agenda.generatedAt ? agenda.generatedAt : null;
     await prefSet(PREF_CACHE, JSON.stringify({ userId, savedAt: now.toISOString(), items } satisfies ReminderCache));
   } catch (err) {
     // 401/403 : session perdue ou refusée, on ne reprogramme pas une liste peut-être périmée.
@@ -345,7 +380,8 @@ async function doSync({ token, userId, texts, prompt = false, now = new Date() }
   }
   if (permission !== 'granted') return { outcome: 'no-permission', count: 0, source, planned: planned.length };
 
-  // 3. Canal Android (idempotent).
+  // 3. Canal Android (idempotent) : contenu masqué sur l'écran verrouillé ; l'ancien canal public
+  //    est supprimé (les rappels sont reprogrammés juste après sur le nouveau).
   if (getPlatform() === 'android') {
     try {
       await ln.createChannel({
@@ -353,10 +389,15 @@ async function doSync({ token, userId, texts, prompt = false, now = new Date() }
         name: texts.channelName,
         description: texts.channelDescription,
         importance: 4,
-        visibility: 1,
+        visibility: REMINDER_CHANNEL_VISIBILITY,
       });
     } catch {
       // canal par défaut
+    }
+    try {
+      await ln.deleteChannel({ id: LEGACY_REMINDER_CHANNEL_ID });
+    } catch {
+      // déjà supprimé, ou jamais créé
     }
   }
 
@@ -384,7 +425,12 @@ async function doSync({ token, userId, texts, prompt = false, now = new Date() }
     count: planned.length,
     source,
     // Liste hors ligne : on ne sait pas ce qui a changé depuis, la couverture n'est pas annoncée.
-    ...(source === 'network' ? { coveredUntil: localCoverageEnd(planned, truncated, now) } : {}),
+    // Agenda tronqué par l'API (ou sans instant serveur) : rien n'est garanti, couverture nulle.
+    ...(source === 'network'
+      ? agendaComplete && generatedAt
+        ? { coveredUntil: localCoverageEnd(planned, truncated, now), coveredAsOf: generatedAt }
+        : { coveredUntil: null }
+      : {}),
   };
 }
 
