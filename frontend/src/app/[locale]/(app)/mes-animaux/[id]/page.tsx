@@ -604,7 +604,7 @@ export default function AnimalDetailPage({
   ] as const;
 
   return (
-    <div className="cv-container grid gap-6 py-6 pb-28 sm:py-8 lg:pb-8">
+    <div className="cv-container grid gap-6 py-6 pb-44 sm:py-8 sm:pb-44 lg:pb-8">
       <nav aria-label={t('animals.sheet.breadcrumb')} className="text-ui text-ink-2">
         <ol className="m-0 flex list-none flex-wrap items-center gap-2 p-0">
           <li>
@@ -653,6 +653,9 @@ export default function AnimalDetailPage({
                 <Link href={animalCarnetPath(animal.id)} className={buttonClasses({ variant: 'secondary' })}>
                   <FileText size={18} strokeWidth={1.75} aria-hidden="true" />
                   {t('carnetPrint.title')}
+                </Link>
+                <Link href={speciesPath(animal.speciesId)} className={buttonClasses({ variant: 'primary' })}>
+                  {t('animals.sheet.speciesGuide')}
                 </Link>
                 <Button variant="secondary" onClick={() => setShowEditAnimalModal(true)} iconStart={<Pencil size={18} strokeWidth={1.75} />}>
                   {t('animals.editAnimal')}
@@ -859,28 +862,33 @@ export default function AnimalDetailPage({
       <div
         role="toolbar"
         aria-label={t('animals.sheet.actionsLabel', { name: animal.name })}
-        className="noprint fixed inset-x-0 z-20 flex gap-2 border-t border-line-strong bg-paper px-[max(var(--gutter,16px),env(safe-area-inset-left,0px))] py-2 lg:hidden bottom-[calc(var(--tabbar-h,60px)+env(safe-area-inset-bottom,0px))]"
+        className="noprint fixed inset-x-0 z-20 grid grid-cols-2 gap-2 border-t border-line-strong bg-paper px-[max(var(--gutter,16px),env(safe-area-inset-left,0px))] py-2 lg:hidden bottom-[calc(var(--tabbar-h,60px)+env(safe-area-inset-bottom,0px))]"
       >
-        {!measurementsLocked ? (
-          <Button className="flex-1" onClick={() => setMeasurementRequest((n) => n + 1)} iconStart={<Scale size={18} strokeWidth={1.75} />}>
-            {t('animals.sheet.weigh')}
-          </Button>
-        ) : null}
-        <Link href={animalCarnetPath(animal.id)} className={buttonClasses({ variant: 'secondary', className: 'flex-1' })}>
+        <Link href={animalCarnetPath(animal.id)} className={buttonClasses({ variant: 'secondary', size: 'sm', className: 'min-h-11 min-w-0 whitespace-normal text-center' })}>
           {t('animals.sheet.carnetShort')}
         </Link>
-        <Button variant="secondary" onClick={() => setShowEditAnimalModal(true)} aria-label={t('animals.editAnimal')} title={t('animals.editAnimal')}>
-          <Pencil size={18} strokeWidth={1.75} aria-hidden="true" />
-        </Button>
-        <Button
-          variant="secondary"
-          className="text-danger"
-          onClick={() => setShowDeleteConfirm(true)}
-          aria-label={t('animals.deleteAnimal')}
-          title={t('animals.deleteAnimal')}
-        >
-          <Trash2 size={18} strokeWidth={1.75} aria-hidden="true" />
-        </Button>
+        <Link href={speciesPath(animal.speciesId)} className={buttonClasses({ variant: 'primary', size: 'sm', className: 'min-h-11 min-w-0 whitespace-normal text-center' })}>
+          {t('animals.sheet.speciesGuide')}
+        </Link>
+        <div className="col-span-2 flex gap-2">
+          {!measurementsLocked ? (
+            <Button variant="secondary" className="flex-1" onClick={() => setMeasurementRequest((n) => n + 1)} iconStart={<Scale size={18} strokeWidth={1.75} />}>
+              {t('animals.sheet.weigh')}
+            </Button>
+          ) : null}
+          <Button variant="secondary" onClick={() => setShowEditAnimalModal(true)} aria-label={t('animals.editAnimal')} title={t('animals.editAnimal')}>
+            <Pencil size={18} strokeWidth={1.75} aria-hidden="true" />
+          </Button>
+          <Button
+            variant="secondary"
+            className="text-danger"
+            onClick={() => setShowDeleteConfirm(true)}
+            aria-label={t('animals.deleteAnimal')}
+            title={t('animals.deleteAnimal')}
+          >
+            <Trash2 size={18} strokeWidth={1.75} aria-hidden="true" />
+          </Button>
+        </div>
       </div>
 
       {/* Edit Animal Modal */}

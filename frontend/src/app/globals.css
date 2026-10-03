@@ -5,7 +5,7 @@
  * Contrat complet (principes, jetons, composants, migration) : frontend/docs/DESIGN.md.
  *
  * Organisation de ce fichier :
- *   1. Jetons (variables CSS) — clair puis sombre (prefers-color-scheme)
+ *   1. Jetons (variables CSS) — clair puis sombre (choix mémorisé / système)
  *   2. Couleurs — palette Tailwind par défaut retirée (remise à zéro avant les jetons)
  *   3. Pont Tailwind 4 — jetons sémantiques exposés en utilitaires (bg-paper, text-ink…)
  *   4. @layer base — typographie, champs de formulaire, focus, liens, impression
@@ -87,42 +87,40 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
+:root[data-theme='dark'] {
+  color-scheme: dark;
 
-    --paper: #121714;
-    --surface: #1a211d;
-    --sunken: #222a25;
-    --ink: #ece8de; /* 14,8:1 sur papier */
-    --ink-2: #a9b0a8; /* 8,2:1 sur papier */
-    --ink-3: #7c857d;
+  --paper: #121714;
+  --surface: #1a211d;
+  --sunken: #222a25;
+  --ink: #ece8de; /* 14,8:1 sur papier */
+  --ink-2: #a9b0a8; /* 8,2:1 sur papier */
+  --ink-3: #7c857d;
 
-    --line: #2b3430;
-    --line-strong: #3a4540;
-    --line-field: #6b776f; /* 3,5:1 sur surface */
+  --line: #2b3430;
+  --line-strong: #3a4540;
+  --line-field: #6b776f; /* 3,5:1 sur surface */
 
-    --accent: #8cc5a2; /* aplat clair, texte foncé dessus */
-    --accent-strong: #a9d6ba;
-    --accent-soft: #1f3328;
-    --accent-text: #8cc5a2;
-    --on-accent: #10201a;
+  --accent: #8cc5a2; /* aplat clair, texte foncé dessus */
+  --accent-strong: #a9d6ba;
+  --accent-soft: #1f3328;
+  --accent-text: #8cc5a2;
+  --on-accent: #10201a;
 
-    --ok: #8cc5a2;
-    --ok-soft: #1e3127;
-    --warn: #e3b85c;
-    --warn-soft: #33291a;
-    --danger: #f08c7a;
-    --danger-strong: #f5a597;
-    --danger-soft: #3a211c;
-    --on-danger: #1a0f0c;
-    --info: #8dbbdd;
-    --info-soft: #1c2a35;
+  --ok: #8cc5a2;
+  --ok-soft: #1e3127;
+  --warn: #e3b85c;
+  --warn-soft: #33291a;
+  --danger: #f08c7a;
+  --danger-strong: #f5a597;
+  --danger-soft: #3a211c;
+  --on-danger: #1a0f0c;
+  --info: #8dbbdd;
+  --info-soft: #1c2a35;
 
-    --focus: #8cc5a2;
-    --scrim: rgb(6 9 7 / 0.7);
-    --elevation-overlay: 0 0 0 1px var(--line-strong), 0 18px 40px -18px rgb(0 0 0 / 0.6);
-  }
+  --focus: #8cc5a2;
+  --scrim: rgb(6 9 7 / 0.7);
+  --elevation-overlay: 0 0 0 1px var(--line-strong), 0 18px 40px -18px rgb(0 0 0 / 0.6);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -648,6 +646,28 @@
     background: var(--sunken);
   }
 
+  .theme-toggle {
+    display: inline-flex;
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-control);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  }
+  .theme-toggle:hover {
+    background: var(--sunken);
+  }
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
   /* Sélecteur de langue (LanguageSelector.tsx, logique inchangée). C'est un champ : sa bordure
      garde le plancher 3:1 de la couche `fields`. */
   .cv-language-select {
@@ -724,6 +744,12 @@
     }
   }
   @media (max-width: 380px) {
+    .site-header__bar {
+      gap: 8px;
+    }
+    .site-header__tools {
+      gap: 4px;
+    }
     .site-brand__name {
       font-size: 1.2rem;
     }
@@ -1027,6 +1053,9 @@
       box-shadow: inset 2px 0 0 var(--accent);
     }
     .app-shell__rail-foot {
+      display: grid;
+      justify-items: start;
+      gap: 12px;
       margin-top: auto;
     }
     .app-shell__content {
@@ -1062,10 +1091,8 @@
     filter: grayscale(1) sepia(0.28) hue-rotate(62deg) saturate(0.55) contrast(1.04);
   }
   /* En sombre, la planche passe à l'encre : bichromie assombrie pour ne pas éblouir. */
-  @media (prefers-color-scheme: dark) {
-    .cv-photo[data-treatment='duotone'] img {
-      filter: grayscale(1) sepia(0.28) hue-rotate(62deg) saturate(0.55) brightness(0.45) contrast(1.1);
-    }
+  :root[data-theme='dark'] .cv-photo[data-treatment='duotone'] img {
+    filter: grayscale(1) sepia(0.28) hue-rotate(62deg) saturate(0.55) brightness(0.45) contrast(1.1);
   }
   .cv-photo__fallback {
     position: absolute;
@@ -1197,12 +1224,10 @@
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.15 0 0 0 0 0.12 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
-  @media (prefers-color-scheme: dark) {
-    .cv-texture::before {
-      opacity: 0.12;
-      mix-blend-mode: screen;
-      filter: invert(1);
-    }
+  :root[data-theme='dark'] .cv-texture::before {
+    opacity: 0.12;
+    mix-blend-mode: screen;
+    filter: invert(1);
   }
 }
 

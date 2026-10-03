@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Fraunces, IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import Script from 'next/script';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '../../../i18n/routing';
@@ -72,11 +73,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  // Couleur de la barre du navigateur = papier de l'en-tête (clair / sombre).
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f6f3ec' },
-    { media: '(prefers-color-scheme: dark)', color: '#121714' },
-  ],
+  // `theme-init.js` adapte la barre du navigateur au thème choisi.
+  themeColor: '#f6f3ec',
   viewportFit: 'cover',
 };
 
@@ -103,7 +101,8 @@ export default async function LocaleLayout({
   const messages = { ...shared, landing: { search: landingMessages?.search, photos: landingMessages?.photos } };
 
   return (
-    <html lang={locale} className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}>
+    <html lang={locale} suppressHydrationWarning className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}>
+      <head><Script src="/theme-init.js" strategy="beforeInteractive" /></head>
       <body className="min-h-screen flex flex-col w-full bg-paper text-ink font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>

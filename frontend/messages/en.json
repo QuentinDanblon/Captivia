@@ -353,7 +353,8 @@
       "routineName": "Routine name (optional)",
       "dayOfMonth": "Day of the month (1-31)",
       "everyHours": "Every X hours (1-24)",
-      "everyNHours": "{count, plural, one {Every hour} other {Every # hours}}"
+      "everyNHours": "{count, plural, one {Every hour} other {Every # hours}}",
+      "speciesGuide": "Species guide"
     },
     "photoUrlInsecure": "This image address isn't secure. Use an address starting with https://, or choose a file.",
     "photoUrlInvalid": "This image address isn't valid. Paste the full address (https://…) or choose a file.",
@@ -1003,7 +1004,16 @@
       "cleaning": "Cleaning",
       "feeding": "Feeding",
       "health": "Health check",
-      "uvb": "UVB"
+      "uvb": "UVB",
+      "waterChange": "Water change",
+      "habitatCleaning": "Habitat cleaning",
+      "litter": "Litter care",
+      "walk": "Walk",
+      "exercise": "Exercise",
+      "brushing": "Brushing",
+      "hygiene": "Hygiene",
+      "training": "Training",
+      "equipmentCheck": "Equipment check"
     },
     "paused": "Paused",
     "toggleActive": "Toggle active/paused",
@@ -1033,7 +1043,12 @@
     "planFreeShort": "Free",
     "planLabel": "Plan",
     "guestProfile": "No account, on this device",
-    "memberSince": "Member since {date}"
+    "memberSince": "Member since {date}",
+    "themeTitle": "Theme",
+    "themeDescription": "Choose how the website and app look.",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark"
   },
   "species": {
     "allowed": "Allowed",

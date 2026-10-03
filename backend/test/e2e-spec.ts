@@ -6,6 +6,7 @@ import { TestCacheModule } from './test-cache.module';
 import * as request from 'supertest';
 import { AuthBody, IdBody, bodyOf, httpServer } from './utils/http';
 import { PrismaService } from '../src/prisma/prisma.service';
+import { routineTypes } from '../src/routines/dto/routine.dto';
 
 describe('API E2E Tests', () => {
   let app: INestApplication;
@@ -294,6 +295,46 @@ describe('API E2E Tests', () => {
       expect(response.body).toHaveProperty('frequency', 'daily');
 
       routineId = bodyOf<IdBody>(response).id;
+    });
+
+    it('persists all supported routine types through create, update, and list', async () => {
+      const ids: string[] = [];
+      for (const [index, type] of routineTypes.entries()) {
+        const created = await request(httpServer(app))
+          .post(`/users/me/animals/${animalId}/routines`)
+          .set('Authorization', `Bearer ${authToken}`)
+          .send({ type, frequency: 'daily', schedule: { time: '08:00' } })
+          .expect(201);
+
+        const createdRoutine = bodyOf<{ id: string; type: string }>(created);
+        expect(createdRoutine.type).toBe(type);
+        ids.push(createdRoutine.id);
+
+        const nextType = routineTypes[(index + 1) % routineTypes.length];
+        const updated = await request(httpServer(app))
+          .patch(`/users/me/animals/${animalId}/routines/${ids[index]}`)
+          .set('Authorization', `Bearer ${authToken}`)
+          .send({ type: nextType })
+          .expect(200);
+
+        expect(bodyOf<{ type: string }>(updated).type).toBe(nextType);
+      }
+
+      const listed = await request(httpServer(app))
+        .get(`/users/me/animals/${animalId}/routines`)
+        .set('Authorization', `Bearer ${authToken}`)
+        .expect(200);
+      const persistedTypes = (listed.body as { id: string; type: string }[])
+        .filter((routine) => ids.includes(routine.id))
+        .map((routine) => routine.type);
+
+      expect(new Set(persistedTypes)).toEqual(
+        new Set(
+          routineTypes.map(
+            (_, index) => routineTypes[(index + 1) % routineTypes.length],
+          ),
+        ),
+      );
     });
 
     it('POST « une seule fois » sans date → 400 (le rappel ne se déclencherait jamais)', () => {

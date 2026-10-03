@@ -1,8 +1,10 @@
 import { ApiError, BACKEND_UNAVAILABLE_MESSAGE } from '../api';
 import {
   AVAILABILITY_CACHE_TTL_MS,
+  UNAVAILABLE_CACHE_TTL_MS,
   availabilityFromStatus,
   ensureCommunityProbe,
+  subscribeCommunityAvailability,
   getCommunityAvailability,
   resetCommunityAvailabilityForTests,
   communityErrorKey,
@@ -166,7 +168,7 @@ describe('dates relatives', () => {
   });
 });
 
-describe('sonde du volet : résultat gardé 12 h dans le navigateur', () => {
+describe('sonde du volet : cache et nouvelle ouverture', () => {
   const KEY = 'captivia.community';
   let fetchSpy: jest.Mock;
 
@@ -177,11 +179,66 @@ describe('sonde du volet : résultat gardé 12 h dans le navigateur', () => {
     global.fetch = fetchSpy as unknown as typeof fetch;
   });
 
+  afterEach(() => {
+    resetCommunityAvailabilityForTests();
+    jest.useRealTimers();
+  });
+
   it('résultat récent : aucune nouvelle requête (pas d’erreur console à chaque visite)', () => {
-    localStorage.setItem(KEY, JSON.stringify({ value: 'unavailable', at: Date.now() - 3_600_000 }));
+    localStorage.setItem(KEY, JSON.stringify({ value: 'unavailable', at: Date.now() - 1_000 }));
     expect(getCommunityAvailability()).toBe('unavailable');
     ensureCommunityProbe();
     expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('ouverture récente : une fermeture mémorisée depuis plus d’une minute est recontrôlée', async () => {
+    localStorage.setItem(KEY, JSON.stringify({ value: 'unavailable', at: Date.now() - UNAVAILABLE_CACHE_TTL_MS - 1 }));
+    fetchSpy.mockResolvedValue({ status: 401 });
+    expect(getCommunityAvailability()).toBe('unknown');
+    ensureCommunityProbe();
+    await waitForProbe();
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(getCommunityAvailability()).toBe('available');
+  });
+
+  it('une communauté ouverte conserve son cache positif de douze heures', () => {
+    localStorage.setItem(KEY, JSON.stringify({ value: 'available', at: Date.now() - AVAILABILITY_CACHE_TTL_MS + 1_000 }));
+    expect(getCommunityAvailability()).toBe('available');
+    ensureCommunityProbe();
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('un onglet ouvert détecte une activation après une minute et arrête sa sonde au démontage', async () => {
+    jest.useFakeTimers();
+    const intervalSpy = jest.spyOn(window, 'setInterval');
+    const clearIntervalSpy = jest.spyOn(window, 'clearInterval');
+    localStorage.setItem(KEY, JSON.stringify({ value: 'unavailable', at: Date.now() }));
+    fetchSpy.mockResolvedValue({ status: 401 });
+    const listener = jest.fn();
+    const unsubscribe = subscribeCommunityAvailability(listener);
+    expect(fetchSpy).not.toHaveBeenCalled();
+    jest.advanceTimersByTime(UNAVAILABLE_CACHE_TTL_MS);
+    await waitForProbe();
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(getCommunityAvailability()).toBe('available');
+    expect(listener).toHaveBeenCalledTimes(1);
+    unsubscribe();
+    expect(clearIntervalSpy).toHaveBeenCalledWith(intervalSpy.mock.results[0].value);
+    intervalSpy.mockRestore();
+    clearIntervalSpy.mockRestore();
+  });
+
+  it('le retour dans un onglet recontrôle une fermeture expirée', async () => {
+    jest.useFakeTimers();
+    localStorage.setItem(KEY, JSON.stringify({ value: 'unavailable', at: Date.now() }));
+    fetchSpy.mockResolvedValue({ status: 401 });
+    const unsubscribe = subscribeCommunityAvailability(jest.fn());
+    jest.setSystemTime(Date.now() + UNAVAILABLE_CACHE_TTL_MS);
+    window.dispatchEvent(new Event('focus'));
+    await waitForProbe();
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(getCommunityAvailability()).toBe('available');
+    unsubscribe();
   });
 
   it('résultat expiré ou illisible : nouvelle sonde, puis mémorisée', async () => {

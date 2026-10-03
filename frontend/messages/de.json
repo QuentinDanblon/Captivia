@@ -353,7 +353,8 @@
       "routineName": "Name der Routine (optional)",
       "dayOfMonth": "Tag des Monats (1-31)",
       "everyHours": "Alle X Stunden (1-24)",
-      "everyNHours": "{count, plural, one {Stündlich} other {Alle # Stunden}}"
+      "everyNHours": "{count, plural, one {Stündlich} other {Alle # Stunden}}",
+      "speciesGuide": "Artensteckbrief"
     },
     "photoUrlInsecure": "Diese Bildadresse ist nicht sicher. Verwenden Sie eine Adresse, die mit https:// beginnt, oder wählen Sie eine Datei.",
     "photoUrlInvalid": "Diese Bildadresse ist ungültig. Fügen Sie die vollständige Adresse (https://…) ein oder wählen Sie eine Datei.",
@@ -996,7 +997,16 @@
       "cleaning": "Reinigung",
       "feeding": "Fütterung",
       "health": "Gesundheitscheck",
-      "uvb": "UVB"
+      "uvb": "UVB",
+      "waterChange": "Wasserwechsel",
+      "habitatCleaning": "Reinigung des Lebensraums",
+      "litter": "Pflege der Streu",
+      "walk": "Spaziergang",
+      "exercise": "Bewegung",
+      "brushing": "Bürsten",
+      "hygiene": "Hygiene",
+      "training": "Training",
+      "equipmentCheck": "Ausrüstungskontrolle"
     },
     "paused": "Pausiert",
     "toggleActive": "Aktiv/pausiert umschalten",
@@ -1026,7 +1036,12 @@
     "planFreeShort": "Kostenlos",
     "planLabel": "Tarif",
     "guestProfile": "Ohne Konto, auf diesem Gerät",
-    "memberSince": "Mitglied seit {date}"
+    "memberSince": "Mitglied seit {date}",
+    "themeTitle": "Darstellung",
+    "themeDescription": "Wählen Sie das Erscheinungsbild von Website und App.",
+    "themeSystem": "System",
+    "themeLight": "Hell",
+    "themeDark": "Dunkel"
   },
   "species": {
     "allowed": "Erlaubt",

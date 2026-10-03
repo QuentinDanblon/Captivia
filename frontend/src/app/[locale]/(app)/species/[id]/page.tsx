@@ -115,7 +115,12 @@ export default function SpeciesDetailPage({ params }: { params: Promise<{ locale
   const [attempt, setAttempt] = useState(0);
   const [state, setState] = useState<LoadState | null>(null);
   const requestKey = `${id}:${locale}:${attempt}`;
-  const photo = useSpeciesPhoto(id);
+  const currentSheet = state?.status === 'ready' && state.key === requestKey ? state.sheet.species : null;
+  const photo = useSpeciesPhoto(
+    id,
+    Boolean(currentSheet),
+    currentSheet ? { latin: currentSheet.profile?.scientificName || currentSheet.scientificName, commonNameFr: currentSheet.profile?.commonNameFr || currentSheet.canonicalName } : undefined,
+  );
 
   useEffect(() => {
     let cancelled = false;

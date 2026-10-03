@@ -32,6 +32,8 @@ export interface FreeLicense {
 /** Photo affichable : source, auteur et licence libre vérifiés. */
 export interface SpeciesPhoto {
   src: string;
+  srcSet?: string;
+  sources?: { type: string; srcSet: string }[];
   author: string;
   license: FreeLicense;
   /** Page à laquelle renvoie le crédit (page source, à défaut le fichier lui-même). */

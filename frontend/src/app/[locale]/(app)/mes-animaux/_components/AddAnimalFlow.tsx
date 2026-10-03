@@ -6,8 +6,10 @@ import { api, ApiError, type SpeciesRoutineTemplate } from '@/lib/api';
 import { errorKey } from '@/lib/api-errors';
 import { ANIMAL_LIMIT_CODE } from '@/lib/guest';
 import { checkPhotoUrl, compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
-import { Button, Field, Steps, cx } from '@/components/ui';
+import { Button, ExternalLink, Field, Steps, cx } from '@/components/ui';
 import { usePhotoPicker } from '@/components/usePhotoPicker';
+import { useSpeciesPhoto } from '@/components/species/useSpeciesPhoto';
+import { photoCredit, SpeciesPhotoFigure } from '@/components/species/SpeciesPhotoFigure';
 
 interface SpeciesResult {
   key: number;
@@ -43,9 +45,54 @@ const ROUTINE_TYPE_KEYS: Record<string, string> = {
   uvb: 'routines.types.uvb',
   controle: 'routines.types.health',
   entretien: 'routines.types.cleaning',
+  changement_eau: 'routines.types.waterChange',
+  nettoyage_habitat: 'routines.types.habitatCleaning',
+  litiere: 'routines.types.litter',
+  promenade: 'routines.types.walk',
+  exercice: 'routines.types.exercise',
+  brossage: 'routines.types.brushing',
+  hygiene: 'routines.types.hygiene',
+  entrainement: 'routines.types.training',
+  controle_materiel: 'routines.types.equipmentCheck',
 };
 
 const FREQUENCIES = ['daily', 'every_2_days', 'every_3_days', 'weekly', 'monthly', 'once', 'hourly', 'custom'];
+
+function SpeciesOption({ species, onSelect }: { species: SpeciesResult; onSelect: () => void }) {
+  const t = useTranslations();
+  const ref = useRef<HTMLLIElement>(null);
+  const [near, setNear] = useState(() => typeof IntersectionObserver === 'undefined');
+  useEffect(() => {
+    if (near || !ref.current) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) setNear(true);
+    }, { rootMargin: '100px' });
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [near]);
+  const name = species.vernacularName || species.canonicalName || species.scientificName;
+  const photo = useSpeciesPhoto(species.key, near, { latin: species.scientificName, commonNameFr: name });
+  const credit = photo.status === 'ready' && photo.photo ? photoCredit(photo.photo) : null;
+  return (
+    <li ref={ref}>
+      <div className="grid grid-cols-[3.5rem_minmax(0,1fr)] items-center gap-3 rounded-control px-2 py-2 hover:bg-sunken">
+        <SpeciesPhotoFigure state={photo} alt={name} fallbackKind="other" ratio="1/1" className="size-14" creditPlacement="external" />
+        <button type="button" onClick={onSelect} className="grid min-h-11 min-w-0 content-center gap-0.5 text-left">
+          <span className="truncate font-medium text-ink">{name}</span>
+          <i lang="la" className="latin truncate text-ui text-ink-2">{species.scientificName}</i>
+        </button>
+      </div>
+      {credit ? (
+        <p className="m-0 pl-[4.25rem] font-mono text-meta break-words text-ink-2">
+          {t('speciesSearch.photoBy')}{' '}
+          <ExternalLink href={credit.sourceUrl} className="text-ink-2 underline decoration-1 underline-offset-2">{credit.author}</ExternalLink>
+          {' · '}
+          <ExternalLink href={credit.licenseUrl} rel="license" className="text-ink-2 underline decoration-1 underline-offset-2">{credit.license}</ExternalLink>
+        </p>
+      ) : null}
+    </li>
+  );
+}
 
 /**
  * Ajout d'un animal en trois étapes (DESIGN.md § 5.11, `Steps`) : l'espèce, puis le nom et la
@@ -321,22 +368,7 @@ export default function AddAnimalFlow({
                 aria-label={t('onboarding.resultsLabel')}
                 className="absolute z-20 mt-1 max-h-64 w-full list-none overflow-y-auto rounded-control border border-line-strong bg-surface p-1 shadow-overlay"
               >
-                {results.map((species) => (
-                  <li key={species.key}>
-                    <button
-                      type="button"
-                      onClick={() => selectSpecies(species)}
-                      className="grid min-h-11 w-full gap-0.5 rounded-control px-3 py-2 text-left transition-colors hover:bg-sunken"
-                    >
-                      <span className="font-medium text-ink">
-                        {species.vernacularName || species.canonicalName || species.scientificName}
-                      </span>
-                      <i lang="la" className="latin text-ui text-ink-2">
-                        {species.scientificName}
-                      </i>
-                    </button>
-                  </li>
-                ))}
+                {results.map((species) => <SpeciesOption key={species.key} species={species} onSelect={() => selectSpecies(species)} />)}
               </ul>
             ) : null}
           </div>

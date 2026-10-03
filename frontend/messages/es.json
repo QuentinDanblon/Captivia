@@ -353,7 +353,8 @@
       "routineName": "Nombre de la rutina (opcional)",
       "dayOfMonth": "Día del mes (1-31)",
       "everyHours": "Cada X horas (1-24)",
-      "everyNHours": "{count, plural, one {Cada hora} other {Cada # horas}}"
+      "everyNHours": "{count, plural, one {Cada hora} other {Cada # horas}}",
+      "speciesGuide": "Ficha de la especie"
     },
     "photoUrlInsecure": "Esta dirección de imagen no es segura. Usa una dirección que empiece por https:// o elige un archivo.",
     "photoUrlInvalid": "Esta dirección de imagen no es válida. Pega la dirección completa (https://…) o elige un archivo.",
@@ -996,7 +997,16 @@
       "cleaning": "Limpieza",
       "feeding": "Alimentación",
       "health": "Control de salud",
-      "uvb": "UVB"
+      "uvb": "UVB",
+      "waterChange": "Cambio de agua",
+      "habitatCleaning": "Limpieza del hábitat",
+      "litter": "Cuidado de la arena",
+      "walk": "Paseo",
+      "exercise": "Ejercicio",
+      "brushing": "Cepillado",
+      "hygiene": "Higiene",
+      "training": "Entrenamiento",
+      "equipmentCheck": "Revisión del material"
     },
     "paused": "En pausa",
     "toggleActive": "Activar/pausar",
@@ -1026,7 +1036,12 @@
     "planFreeShort": "Gratis",
     "planLabel": "Plan",
     "guestProfile": "Sin cuenta, en este dispositivo",
-    "memberSince": "Miembro desde {date}"
+    "memberSince": "Miembro desde {date}",
+    "themeTitle": "Tema",
+    "themeDescription": "Elige la apariencia del sitio y de la aplicación.",
+    "themeSystem": "Sistema",
+    "themeLight": "Claro",
+    "themeDark": "Oscuro"
   },
   "species": {
     "allowed": "Permitido",

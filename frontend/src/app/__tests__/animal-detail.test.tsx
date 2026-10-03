@@ -68,6 +68,9 @@ describe('fiche animal', () => {
     render(<AnimalDetailPage params={params('a1')} />);
 
     expect(await screen.findByRole('heading', { level: 1, name: 'Rango' })).toBeInTheDocument();
+    const carnetLink = screen.getByRole('link', { name: 'carnetPrint.title' });
+    expect(carnetLink.nextElementSibling).toHaveAccessibleName('animals.sheet.speciesGuide');
+    expect(carnetLink.nextElementSibling).toHaveAttribute('href', '/species/1');
     await waitFor(() => expect(apiMock.getMedications).toHaveBeenCalled());
     expect(logout).not.toHaveBeenCalled();
     expect(push).not.toHaveBeenCalledWith('/login');

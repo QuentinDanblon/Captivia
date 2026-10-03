@@ -353,7 +353,8 @@
       "routineName": "Nom de la routine (facultatif)",
       "dayOfMonth": "Jour du mois (1-31)",
       "everyHours": "Toutes les X heures (1-24)",
-      "everyNHours": "{count, plural, one {Toutes les heures} other {Toutes les # heures}}"
+      "everyNHours": "{count, plural, one {Toutes les heures} other {Toutes les # heures}}",
+      "speciesGuide": "Fiche de l’espèce"
     },
     "photoUrlInsecure": "Cette adresse d'image n'est pas sécurisée. Utilisez une adresse qui commence par https://, ou choisissez un fichier.",
     "photoUrlInvalid": "Cette adresse d'image n'est pas valide. Collez l'adresse complète (https://…) ou choisissez un fichier.",
@@ -1003,7 +1004,16 @@
       "cleaning": "Nettoyage",
       "feeding": "Nourrissage",
       "health": "Contrôle santé",
-      "uvb": "UVB"
+      "uvb": "UVB",
+      "waterChange": "Changement d’eau",
+      "habitatCleaning": "Nettoyage de l’habitat",
+      "litter": "Entretien de la litière",
+      "walk": "Promenade",
+      "exercise": "Exercice",
+      "brushing": "Brossage",
+      "hygiene": "Hygiène",
+      "training": "Entraînement",
+      "equipmentCheck": "Contrôle du matériel"
     },
     "paused": "En pause",
     "toggleActive": "Basculer actif/pause",
@@ -1033,7 +1043,12 @@
     "planFreeShort": "Gratuit",
     "planLabel": "Formule",
     "guestProfile": "Sans compte, sur cet appareil",
-    "memberSince": "Membre depuis {date}"
+    "memberSince": "Membre depuis {date}",
+    "themeTitle": "Thème",
+    "themeDescription": "Choisissez l’apparence du site et de l’application.",
+    "themeSystem": "Système",
+    "themeLight": "Clair",
+    "themeDark": "Sombre"
   },
   "species": {
     "allowed": "Autorisé",

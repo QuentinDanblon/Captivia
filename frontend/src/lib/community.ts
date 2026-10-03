@@ -298,12 +298,14 @@ const PROBE_TIMEOUT_MS = 8_000;
 const AVAILABILITY_CACHE_KEY = 'captivia.community';
 /**
  * Durée de validité du résultat de la sonde. Le navigateur journalise toujours la réponse 404
- * (volet fermé) ou 401 (sans session) dans la console : le résultat est gardé 12 h dans ce
- * navigateur (et non plus le temps d'un onglet) pour ne pas sonder à chaque visite. Une page de
+ * (volet fermé) ou 401 (sans session) dans la console : une ouverture est gardée 12 h dans ce
+ * navigateur ; une fermeture est recontrôlée après une minute. Une page de
  * la communauté qui reçoit une réponse le corrige aussitôt (`markCommunity*`). En production,
  * `NEXT_PUBLIC_COMMUNITY_ENABLED=false` supprime toute sonde tant que le volet est fermé.
  */
 export const AVAILABILITY_CACHE_TTL_MS = 12 * 3_600_000;
+/** Une fermeture est recontrôlée rapidement pour rendre une nouvelle ouverture visible. */
+export const UNAVAILABLE_CACHE_TTL_MS = 60_000;
 
 /** Sonde l'API (une requête, sans jeton : jamais de déconnexion ni de rafraîchissement). */
 export async function probeCommunity(fetchImpl: typeof fetch = fetch, apiUrl: string = API_URL): Promise<CommunityAvailability> {
@@ -321,7 +323,8 @@ function readCachedAvailability(now: number = Date.now()): CommunityAvailability
   try {
     const raw = localStorage.getItem(AVAILABILITY_CACHE_KEY);
     const cached = raw ? (JSON.parse(raw) as { value?: unknown; at?: unknown }) : null;
-    if (!cached || typeof cached.at !== 'number' || now - cached.at > AVAILABILITY_CACHE_TTL_MS || cached.at > now) {
+    const ttl = cached?.value === 'unavailable' ? UNAVAILABLE_CACHE_TTL_MS : AVAILABILITY_CACHE_TTL_MS;
+    if (!cached || typeof cached.at !== 'number' || now - cached.at >= ttl || cached.at > now) {
       return 'unknown';
     }
     return cached.value === 'available' || cached.value === 'unavailable' ? cached.value : 'unknown';
@@ -339,10 +342,19 @@ function writeCachedAvailability(value: CommunityAvailability) {
   }
 }
 
-/** Magasin de la disponibilité (une seule sonde par chargement, résultat gardé 12 h). */
+/** Magasin partagé ; une fermeture est recontrôlée pendant que l'application est visible. */
 let availability: CommunityAvailability | null = null;
 let probing: Promise<void> | null = null;
 const listeners = new Set<() => void>();
+let recheckTimer: ReturnType<typeof setInterval> | null = null;
+
+function recheckAvailability() {
+  if (document.visibilityState === 'hidden' || COMMUNITY_BUILD_FLAG === 'off') return;
+  if (availability !== 'available' && readCachedAvailability() === 'unknown') {
+    availability = null;
+    ensureCommunityProbe();
+  }
+}
 
 function setAvailability(value: CommunityAvailability) {
   availability = value;
@@ -369,7 +381,20 @@ export function ensureCommunityProbe(): void {
 export function subscribeCommunityAvailability(listener: () => void): () => void {
   listeners.add(listener);
   ensureCommunityProbe();
-  return () => listeners.delete(listener);
+  if (!recheckTimer && typeof window !== 'undefined' && COMMUNITY_BUILD_FLAG !== 'off') {
+    recheckTimer = setInterval(recheckAvailability, UNAVAILABLE_CACHE_TTL_MS);
+    window.addEventListener('focus', recheckAvailability);
+    document.addEventListener('visibilitychange', recheckAvailability);
+  }
+  return () => {
+    listeners.delete(listener);
+    if (listeners.size === 0 && recheckTimer) {
+      clearInterval(recheckTimer);
+      recheckTimer = null;
+      window.removeEventListener('focus', recheckAvailability);
+      document.removeEventListener('visibilitychange', recheckAvailability);
+    }
+  };
 }
 
 /** Une page de la communauté a reçu un 404 « volet fermé » : on le mémorise pour la session. */
@@ -384,6 +409,10 @@ export function markCommunityAvailable(): void {
 
 /** Tests uniquement : remet le magasin à zéro. */
 export function resetCommunityAvailabilityForTests(): void {
+  if (recheckTimer) clearInterval(recheckTimer);
+  recheckTimer = null;
+  window.removeEventListener('focus', recheckAvailability);
+  document.removeEventListener('visibilitychange', recheckAvailability);
   availability = null;
   probing = null;
   listeners.clear();

@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { EmailVerificationBanner } from '@/components/EmailVerificationBanner';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { BrandMark } from '@/components/ui/BrandMark';
+import { ThemeToggle } from '@/components/ThemePreference';
 import { LEGAL, LEGAL_ROUTES } from '@/lib/legal';
 
 /**
@@ -42,6 +43,7 @@ function AccountHeader() {
             <span className="site-brand__name">{t('common.appName')}</span>
           </Link>
           <div className="site-header__tools">
+            <ThemeToggle />
             <Link href="/" className="site-header__quiet site-header__auth">
               <ArrowLeft size={16} strokeWidth={1.75} aria-hidden="true" />
               {t('errors.backHome')}
