@@ -687,7 +687,8 @@
       "community": {
         "label": "Community",
         "title": "Coming soon: fellow pet people.",
-        "body": "Share photos of your pets, ask your questions, answer other people's. Your pet's health record stays private."
+        "body": "Share photos of your pets, ask your questions, answer other people's. Your pet's health record stays private.",
+        "cta": "Join the community"
       }
     },
     "gallery": {
@@ -1302,7 +1303,8 @@
     "agendaTitle": "Care agenda",
     "verifyEmailTitle": "Email address verification",
     "speciesSearchTitle": "Species guides",
-    "speciesSearchDescription": "Look up a species and open its guide: diet, habitat, behaviour, health and regulations, with sources."
+    "speciesSearchDescription": "Look up a species and open its guide: diet, habitat, behaviour, health and regulations, with sources.",
+    "communityTitle": "Community"
   },
   "agenda": {
     "title": "Care agenda",
@@ -1720,5 +1722,663 @@
     "activeTitle": "Premium is active",
     "activeText": "Add as many animals as you like, each with its own record.",
     "restoreNothing": "No Premium subscription to restore on this store account."
+  },
+  "community": {
+    "loading": "Loading the community…",
+    "time": {
+      "justNow": "just now"
+    },
+    "soon": {
+      "title": "The community opens soon",
+      "body": "Photos of your pets, questions for fellow enthusiasts, answers that actually help: everything is ready, we just need to open the doors. Your pets' health record stays private.",
+      "action": "Back to my pets"
+    },
+    "join": {
+      "title": "Fellow pet people are waiting",
+      "body": "Show your pets, ask your questions and answer other people's. A free account is all you need to join the community.",
+      "register": "Create a free account",
+      "login": "I already have an account",
+      "privacy": "Your pets' health record is never published: you choose what you share, one post at a time."
+    },
+    "actions": {
+      "createAccount": "Create my account",
+      "createProfile": "Create my profile",
+      "reviewRules": "Review the rules",
+      "seeDecision": "See the decision",
+      "login": "Sign in again",
+      "retry": "Try again",
+      "resendVerification": "Resend the e-mail",
+      "verificationSent": "E-mail sent: open the link inside.",
+      "verificationError": "The e-mail could not be sent. Try again in a minute."
+    },
+    "errors": {
+      "network": {
+        "title": "Can't connect",
+        "body": "Check your internet connection, then try again."
+      },
+      "session": {
+        "title": "Your session has expired",
+        "body": "Sign in again to get back to the community."
+      },
+      "guest": {
+        "title": "An account to take part",
+        "body": "While trying Captivia without an account you can read the feed. To post, reply or like, create an account: your pet and its record come with you."
+      },
+      "emailNotVerified": {
+        "title": "Verify your e-mail address",
+        "body": "Open the link we e-mailed you to post in the community. Nothing arrived? We can send it again."
+      },
+      "ageRequired": {
+        "title": "Confirm your age",
+        "body": "The community is open from age 15. Confirm it when you create your profile."
+      },
+      "profileRequired": {
+        "title": "Choose your username",
+        "body": "Create your public profile (a username, and an avatar if you like) to post, reply and like."
+      },
+      "profileExists": {
+        "title": "Your profile already exists",
+        "body": "You can change your username and avatar from your profile."
+      },
+      "rulesNotAccepted": {
+        "title": "The rules have changed",
+        "body": "Read and accept the new version of the rules to keep posting."
+      },
+      "suspended": {
+        "title": "Posting suspended",
+        "body": "You can still read and like, but not post or reply for now. The decision and how to appeal are available.",
+        "bodyUntil": "You can still read and like, but not post or reply until {date}. The decision and how to appeal are available."
+      },
+      "rateLimited": {
+        "title": "Limit reached for now",
+        "body": "You've posted a lot in a short time. Try again in a while: this limit protects the community from spam."
+      },
+      "linksNotAllowed": {
+        "title": "No links just yet",
+        "body": "Links are allowed once an account is 7 days old, to keep spam out. Remove the address and try again."
+      },
+      "handleInvalid": {
+        "title": "Invalid username",
+        "body": "3 to 30 characters: unaccented letters, digits, “_” or “.” (not at the start or end)."
+      },
+      "handleReserved": {
+        "title": "Username reserved",
+        "body": "This username (or a close variant) is reserved, for example because it sounds like the team or was used recently. Choose another one."
+      },
+      "handleTaken": {
+        "title": "Username already taken",
+        "body": "Another member already uses this username. Add a number or a word: “kaa_and_me”, “gecko.lea”."
+      },
+      "mediaType": {
+        "title": "Photo format not accepted",
+        "body": "Send a JPEG, PNG or WebP photo."
+      },
+      "mediaTooLarge": {
+        "title": "Photo too heavy",
+        "body": "Choose a lighter photo (8 MB at most after resizing)."
+      },
+      "mediaInvalid": {
+        "title": "Unreadable photo",
+        "body": "This photo could not be read. Choose another one."
+      },
+      "mediaDimensions": {
+        "title": "Unusual photo size",
+        "body": "This photo is too stretched or too large. Crop it, then try again."
+      },
+      "cannotReportOwn": {
+        "title": "This is your post",
+        "body": "You can delete it yourself."
+      },
+      "cannotBlockSelf": {
+        "title": "You can't block yourself",
+        "body": "This profile is yours."
+      },
+      "appealNotAllowed": {
+        "title": "Appeal not possible",
+        "body": "This decision has already been appealed, or the 6-month deadline has passed."
+      },
+      "bodyRequired": {
+        "title": "Some text is needed",
+        "body": "Write a few words before sending."
+      },
+      "invalidParent": {
+        "title": "Can't reply",
+        "body": "This comment is no longer visible."
+      },
+      "notAuthor": {
+        "title": "For the question's author only",
+        "body": "Only the person who asked the question picks the helpful answer."
+      },
+      "notFound": {
+        "title": "Not found",
+        "body": "This content was deleted or hidden, or its author is no longer visible to you."
+      },
+      "forbidden": {
+        "title": "Action not allowed",
+        "body": "Your account can't do this."
+      },
+      "generic": {
+        "title": "Something went wrong",
+        "body": "Try again in a moment. If it keeps happening, contact us."
+      }
+    },
+    "type": {
+      "PHOTO": "Photo",
+      "QUESTION": "Question",
+      "plural": {
+        "PHOTO": "Photos",
+        "QUESTION": "Questions"
+      }
+    },
+    "categories": {
+      "MAMMAL": "Mammals",
+      "BIRD": "Birds",
+      "REPTILE": "Reptiles",
+      "FISH": "Fish",
+      "AMPHIBIAN": "Amphibians",
+      "ARACHNID": "Arachnids",
+      "INSECT": "Insects",
+      "OTHER": "Other animals"
+    },
+    "reasons": {
+      "SPAM": {
+        "label": "Spam or advertising",
+        "hint": "Selling, promotion, repeated messages."
+      },
+      "HARASSMENT": {
+        "label": "Harassment or bullying",
+        "hint": "Targeted mockery, insults, hounding."
+      },
+      "HATE": {
+        "label": "Hate speech",
+        "hint": "Attacks someone for who they are."
+      },
+      "VIOLENCE": {
+        "label": "Violence or threats",
+        "hint": "Threats, encouraging harm."
+      },
+      "ANIMAL_WELFARE": {
+        "label": "Animal cruelty",
+        "hint": "An animal in distress, dangerous living conditions."
+      },
+      "ILLEGAL_TRADE": {
+        "label": "Illegal animal trade",
+        "hint": "Protected species, unauthorised sales."
+      },
+      "DANGEROUS_ADVICE": {
+        "label": "Dangerous advice",
+        "hint": "Could put an animal's health at risk."
+      },
+      "NUDITY": {
+        "label": "Sexual content or nudity",
+        "hint": "Sexual images or language."
+      },
+      "PERSONAL_DATA": {
+        "label": "Personal data",
+        "hint": "Someone's address, phone number or full name."
+      },
+      "IMPERSONATION": {
+        "label": "Impersonation",
+        "hint": "Pretends to be someone else or the team."
+      },
+      "OTHER": {
+        "label": "Other breach of the rules",
+        "hint": "Explain what's wrong below."
+      }
+    },
+    "form": {
+      "charCount": "{count} / {max} characters"
+    },
+    "list": {
+      "more": "See more",
+      "auto": "Load more as I scroll",
+      "end": "You're all caught up.",
+      "shown": "{count, plural, one {# item shown} other {# items shown}}"
+    },
+    "photo": {
+      "position": "Photo {n} of {total}",
+      "byAuthor": "Photo posted by @{handle}",
+      "fallback": "A member's photo"
+    },
+    "card": {
+      "open": "open the post",
+      "formerMember": "Former member",
+      "hidden": "Hidden",
+      "likeLabel": "Like ({count})",
+      "repliesLabel": "{count, plural, one {# reply} other {# replies}}",
+      "answered": "Helpful answer found",
+      "report": "Report this post",
+      "reportShort": "Report"
+    },
+    "feed": {
+      "title": "Community",
+      "lead": "Members' latest photos and questions. Everyone's health records stay private.",
+      "publish": "Post",
+      "filtersLabel": "Filter the feed",
+      "typeLabel": "Show",
+      "allTypes": "All",
+      "categoryLabel": "Species",
+      "allCategories": "All species",
+      "listLabel": "Recent posts",
+      "loading": "Loading the feed…",
+      "emptyTitle": "The feed is waiting for its first photo",
+      "emptyBody": "Show your pet or ask the question that's on your mind: members answer here.",
+      "emptyAction": "Post a photo",
+      "emptyFilteredTitle": "Nothing here yet",
+      "emptyFilteredBody": "No post matches these filters. Widen your search or be the first to post.",
+      "resetFilters": "See the whole feed"
+    },
+    "aside": {
+      "label": "My community space",
+      "linksLabel": "Community pages",
+      "myProfile": "My community profile",
+      "seePublicProfile": "See my public profile",
+      "blocks": "Blocked people",
+      "decisions": "Decisions and reports",
+      "moderation": "Moderation queue",
+      "joinTitle": "Pick a username and you're in",
+      "joinBody": "A username and agreeing to the rules is all it takes to post. Your e-mail is never shown.",
+      "rulesTitle": "The rules in short",
+      "rule": {
+        "one": "Kindness first: answer the question, not the person.",
+        "two": "Health: advice never replaces a vet. When in doubt, point people to one.",
+        "three": "No selling animals, no personal data, no advertising."
+      },
+      "rulesLink": "Read the community rules"
+    },
+    "post": {
+      "loading": "Loading the post…",
+      "backToFeed": "Back to the feed",
+      "notFoundTitle": "Post not found",
+      "notFoundBody": "Its author deleted it, it was hidden after review, or its author is no longer visible to you.",
+      "hiddenTitle": "Post hidden",
+      "hiddenBody": "Only you and the moderation team can see it. The decision explains why and how to challenge it.",
+      "delete": "Delete the post",
+      "deleteTitle": "Delete this post?",
+      "deleteBody": "Its photos, replies and likes go with it. This can't be undone."
+    },
+    "comments": {
+      "title": "{count, plural, one {# reply} other {# replies}}",
+      "answersTitle": "{count, plural, one {# answer to the question} other {# answers to the question}}",
+      "empty": "No replies yet. A kind word always goes down well.",
+      "emptyQuestion": "Nobody has answered yet. If you know, share what you've been through.",
+      "label": "Your reply",
+      "answerLabel": "Your answer to the question",
+      "send": "Reply",
+      "sendReply": "Send reply",
+      "reply": "Reply",
+      "replyTo": "Reply to @{handle}",
+      "repliesTo": "Replies to @{handle}",
+      "more": "See more replies",
+      "helpful": "Helpful answer",
+      "helpfulHint": "Did an answer help you? Mark it as helpful: it will be highlighted for the next people.",
+      "markHelpful": "Mark as helpful",
+      "unmarkHelpful": "Remove “helpful”",
+      "report": "Report",
+      "delete": "Delete",
+      "deleteTitle": "Delete this reply?",
+      "deleteBody": "Replies made to it are deleted too. This can't be undone.",
+      "deleted": "Reply deleted"
+    },
+    "report": {
+      "titlePost": "Report this post",
+      "titleComment": "Report this reply",
+      "intro": "A person on the team reviews your report. The author doesn't know who reported it.",
+      "reasonLabel": "What's going on?",
+      "reasonMissing": "Choose the closest reason.",
+      "detailsLabel": "Details (optional)",
+      "submit": "Send the report",
+      "sent": "Report sent, we're on it.",
+      "already": "You've already reported this content: it's being reviewed.",
+      "next": "After several reports, the content is hidden until the team decides. You can also block its author from their profile."
+    },
+    "compose": {
+      "title": "New post",
+      "lead": "A photo of your pet, or a question for fellow enthusiasts.",
+      "typeLegend": "What would you like to share?",
+      "type": {
+        "PHOTO": {
+          "title": "A photo",
+          "hint": "1 to 4 photos, with a caption if you like."
+        },
+        "QUESTION": {
+          "title": "A question",
+          "hint": "Some text, and a photo to show what puzzles you."
+        }
+      },
+      "photosLabel": "Photos (up to {max})",
+      "questionPhotoLabel": "Photo (optional)",
+      "addPhoto": "Add a photo",
+      "removePhoto": "Remove photo {n}",
+      "previewAlt": "Preview of photo {n}",
+      "photoHint": "JPEG, PNG or WebP. Photos are resized to 1,600 px and their location data removed before upload.",
+      "converted": "Converted from HEIC",
+      "preparing": "Preparing the photo…",
+      "photosRequired": "Add at least one photo, or choose “A question”.",
+      "tooManyPhotos": "{max, plural, one {Only one photo here.} other {# photos at most: the extra ones were not added.}}",
+      "unnamedPhoto": "This photo",
+      "photoError": {
+        "heic": "{name}: this HEIC format can't be read on this device. On iPhone, choose “Most Compatible” in Settings › Camera › Formats, or share the photo as JPEG.",
+        "type": "{name}: format not accepted. Choose a JPEG, PNG or WebP photo.",
+        "dimensions": "{name}: photo too stretched (panorama, very long screenshot). Crop it, then try again.",
+        "tooLarge": "{name}: photo too heavy (20 MB at most).",
+        "unreadable": "{name}: the photo could not be read. Choose another one."
+      },
+      "captionLabel": "Caption",
+      "captionHint": "Optional: their name, their mood, the story behind the photo.",
+      "questionLabel": "Your question",
+      "questionHint": "Give the species, age and what you noticed: the answers will be more precise.",
+      "bodyRequired": "Write your question before posting.",
+      "bodyTooLong": "The text is over 2,000 characters.",
+      "animalLabel": "Show one of my pets",
+      "animalHint": "Optional. Only its name and species will be visible.",
+      "noAnimal": "No pet",
+      "animalVisible": "Visible to members: {name}",
+      "animalPrivate": "Its health record, care and appointments stay private.",
+      "categoryLabel": "Category",
+      "categoryHint": "Optional: helps others find your post.",
+      "categoryFromAnimal": "Optional: otherwise taken from your pet's species.",
+      "noCategory": "No category",
+      "submit": "Post",
+      "uploading": "Uploading photo {n} of {total}…",
+      "publishing": "Posting…",
+      "privacy": "Your posts are visible to signed-in members. You can delete them at any time, photos included."
+    },
+    "profile": {
+      "title": "My community profile",
+      "lead": "Your public identity: a username and, if you like, an avatar. Never your e-mail.",
+      "back": "Back to my profile",
+      "activateTitle": "Create my public profile",
+      "activateLead": "Choose how other members will see you. You can change your username and avatar later.",
+      "handleLabel": "Username",
+      "handleHint": "3 to 30 characters: unaccented letters, digits, “_” or “.”.",
+      "avatarLabel": "Avatar (optional)",
+      "avatarHint": "A photo of your pet works perfectly.",
+      "avatarChoose": "Choose a photo",
+      "avatarChange": "Change avatar",
+      "avatarRemove": "Remove avatar",
+      "avatarPreview": "Avatar preview",
+      "avatarSaved": "Avatar saved",
+      "avatarRemoved": "Avatar removed",
+      "avatarLater": "Profile created. The avatar could not be uploaded: add it from your profile.",
+      "acceptRules": "I have read and accept the community rules",
+      "rulesVersion": "rules version {version}",
+      "readRules": "Read the rules",
+      "rulesRequired": "Accept the rules to create your profile.",
+      "confirmAge": "I am 15 or older",
+      "ageRequired": "The community is open from age 15.",
+      "activate": "Create my profile",
+      "visibleTitle": "What members will see",
+      "visibleHandle": "Your username and when you joined",
+      "visibleAvatar": "Your avatar, if you choose one",
+      "visiblePosts": "Your posts and replies",
+      "neverVisible": "Never your e-mail or your pets' health record.",
+      "identityTitle": "Public identity",
+      "saveHandle": "Save username",
+      "handleSaved": "Username saved",
+      "memberSince": "Member since",
+      "rulesAcceptedOn": "Rules accepted on",
+      "rulesUpdatedTitle": "New version of the rules ({version})",
+      "rulesUpdatedBody": "Accept it to keep posting, replying and liking.",
+      "acceptNewRules": "Accept the rules",
+      "rulesAccepted": "Rules accepted",
+      "seePublic": "See my public profile",
+      "leaveTitle": "Leave the community",
+      "leaveBody": "Your profile, posts, replies, likes and photos are deleted. Your account and your pets' records stay untouched.",
+      "leave": "Leave the community",
+      "leaveConfirmTitle": "Leave the community?",
+      "leaveConfirmBody": "Everything you've posted disappears, photos included. This can't be undone.",
+      "dataNote": "Community data is described in our privacy policy.",
+      "privacyLink": "Privacy"
+    },
+    "member": {
+      "loading": "Loading the profile…",
+      "notFoundTitle": "Profile not found",
+      "notFoundBody": "This username doesn't exist, has changed, or this member is no longer visible to you.",
+      "posts": "{count, plural, one {# post} other {# posts}}",
+      "postsLabel": "Number of posts",
+      "since": "Member since {date}",
+      "edit": "Edit my profile",
+      "listLabel": "Posts by @{handle}",
+      "emptyTitle": "No posts yet",
+      "emptyBody": "This member hasn't posted anything yet.",
+      "emptyMineTitle": "Your first post is waiting",
+      "emptyMineBody": "A photo, a question: members will discover your pets here."
+    },
+    "blocks": {
+      "title": "Blocked people",
+      "lead": "You no longer see their posts or replies, and they no longer see yours. They aren't notified.",
+      "loading": "Loading…",
+      "emptyTitle": "You haven't blocked anyone",
+      "emptyBody": "Is a member bothering you? Block them from their profile or one of their posts: neither of you will see the other.",
+      "since": "Blocked on {date}",
+      "unblock": "Unblock",
+      "unblockHandle": "Unblock @{handle}",
+      "unblocked": "@{handle} is unblocked.",
+      "block": "Block",
+      "blockHandle": "Block @{handle}",
+      "confirmTitle": "Block @{handle}?",
+      "confirmBody": "You won't see their posts or replies any more, and they won't see yours. They aren't notified, and you can undo it at any time."
+    },
+    "decisions": {
+      "title": "Decisions and reports",
+      "lead": "Moderation decisions about your content or account, with their reasons and the option to challenge them.",
+      "loading": "Loading decisions…",
+      "emptyTitle": "No decisions about you",
+      "emptyBody": "If one of your posts is ever hidden or deleted, you'll find the reason here and how to challenge it.",
+      "appealOpen": "Appeal possible",
+      "backToList": "All decisions",
+      "notFoundTitle": "Decision not found",
+      "notFoundBody": "This link doesn't match any decision on your account. Check that you're signed in to the right account.",
+      "detailLead": "What was decided, why, and how to challenge it.",
+      "statementTitle": "Statement of reasons",
+      "seeContent": "See the content concerned",
+      "facts": {
+        "date": "Decision date",
+        "reason": "Reason",
+        "automated": "Automated decision",
+        "until": "Suspended until",
+        "deadline": "Appeal possible until"
+      },
+      "automatedYes": "Yes: hidden after several reports, pending review by a person",
+      "automatedNo": "No: decided by a person on the team",
+      "appealTitle": "Your appeal",
+      "appealPendingBody": "Your appeal is in the hands of a person on the team. You'll get their answer by e-mail.",
+      "appealFormTitle": "Challenge this decision",
+      "appealIntro": "Appeals are free and reviewed by someone who didn't take the original decision. Explain what the team may have misunderstood.",
+      "appealLabel": "Your explanation",
+      "appealTooShort": "Write at least {min} characters.",
+      "appealSubmit": "Send my appeal",
+      "appealSent": "Appeal sent",
+      "appealSentBody": "We'll answer by e-mail. The answer will also appear here.",
+      "appealClosed": "This decision can no longer be challenged in the app (already appealed or 6-month deadline passed).",
+      "remediesTitle": "Your other options",
+      "remediesBody": "You can also turn to a certified out-of-court dispute settlement body, or to the courts. These options remain open whatever the outcome of your appeal.",
+      "contact": "Moderation contact: {email}",
+      "titles": {
+        "AUTO_HIDE_POST": "Post hidden after reports",
+        "AUTO_HIDE_COMMENT": "Reply hidden after reports",
+        "HIDE_POST": "Post hidden",
+        "HIDE_COMMENT": "Reply hidden",
+        "RESTORE_POST": "Post restored",
+        "RESTORE_COMMENT": "Reply restored",
+        "DELETE_POST": "Post deleted",
+        "DELETE_COMMENT": "Reply deleted",
+        "SUSPEND_USER": "Posting suspended",
+        "UNSUSPEND_USER": "Suspension lifted",
+        "OTHER": "Moderation decision"
+      },
+      "appealStatus": {
+        "PENDING": "Appeal under review",
+        "UPHELD": "Decision upheld",
+        "REVERSED": "Decision reversed"
+      }
+    },
+    "reports": {
+      "title": "My reports",
+      "empty": "You haven't reported anything. Thanks for keeping an eye out.",
+      "error": "Your reports can't be shown right now.",
+      "seeContent": "See the content",
+      "status": {
+        "OPEN": "Under review",
+        "ACTIONED": "Action taken",
+        "DISMISSED": "Reviewed, no action"
+      }
+    },
+    "rules": {
+      "title": "Community rules",
+      "versionLabel": "Rules version",
+      "lead": "A place to share our love for our animals and help each other. These rules keep it pleasant for everyone.",
+      "items": {
+        "kind": {
+          "title": "Kindness first",
+          "body": "Answer the question, not the person. No insults, targeted mockery, harassment or hateful language."
+        },
+        "animals": {
+          "title": "Animal welfare above all",
+          "body": "No images or advice that trivialise an animal's suffering. Worried about living conditions? Report it rather than arguing about it."
+        },
+        "health": {
+          "title": "Advice doesn't replace a vet",
+          "body": "Share your experience, cite your sources, and point to a vet at the slightest worrying sign. Dangerous advice is removed."
+        },
+        "trade": {
+          "title": "No selling or swapping animals",
+          "body": "The community isn't a marketplace. Trading protected species is illegal and reported to the authorities."
+        },
+        "privacy": {
+          "title": "Everyone's privacy",
+          "body": "No addresses, phone numbers or full names, neither yours nor anyone else's. Check that no photo shows your address."
+        },
+        "spam": {
+          "title": "No advertising",
+          "body": "No promotion and no repeated messages. Links are allowed once an account is 7 days old."
+        },
+        "honest": {
+          "title": "Be yourself",
+          "body": "A username of your own, photos you have the right to share, and nobody but you behind the profile."
+        }
+      },
+      "processTitle": "When a rule is broken",
+      "process": {
+        "report": "Any member can report content. After several reports, it is hidden until a person on the team reviews it.",
+        "decision": "Every decision (hiding, deletion, suspension) is explained to you by e-mail and in the app, with its reason.",
+        "appeal": "You can challenge it for free for 6 months: a person reviews your case and answers you."
+      }
+    },
+    "moderation": {
+      "title": "Moderation",
+      "lead": "Reports, hidden content, appeals and log. Every decision needs a reason and an explanation, sent to the author.",
+      "loading": "Loading the queue…",
+      "forbiddenTitle": "For the moderation team only",
+      "forbiddenBody": "This page is open to operators whose e-mail address is verified.",
+      "tabsLabel": "Moderation queues",
+      "tabs": {
+        "queue": "Reports",
+        "hidden": "Hidden",
+        "appeals": "Appeals",
+        "log": "Log"
+      },
+      "target": {
+        "POST": "Post",
+        "COMMENT": "Reply"
+      },
+      "status": {
+        "VISIBLE": "Visible",
+        "HIDDEN_AUTO": "Hidden automatically",
+        "HIDDEN_MODERATOR": "Hidden by the team"
+      },
+      "openReports": "{count, plural, one {# open report} other {# open reports}}",
+      "firstReport": "First report on {date}",
+      "reasonsLabel": "Report reasons",
+      "details": "{count, plural, one {See the reporter's details} other {See the # reporters' details}}",
+      "imageAlt": "Image {n} of the reported content",
+      "openPost": "Open the post",
+      "appealText": "Appeal text",
+      "automated": "Automated",
+      "by": "by @{handle}",
+      "byAutomation": "by automatic hiding",
+      "byTeam": "by the team",
+      "notNotified": "Notification not sent",
+      "queueEmptyTitle": "No pending reports",
+      "queueEmptyBody": "The queue is empty. New reports will appear here, oldest first.",
+      "hiddenEmptyTitle": "No hidden content",
+      "hiddenEmptyBody": "Content hidden automatically or by the team will appear here.",
+      "appealsEmptyTitle": "No pending appeals",
+      "appealsEmptyBody": "Members' appeals will appear here, oldest first.",
+      "logEmptyTitle": "Empty log",
+      "logEmptyBody": "Every decision, even automated ones, will be recorded here.",
+      "form": {
+        "reason": "Reason",
+        "chooseReason": "Choose a reason",
+        "reasonRequired": "Choose the reason for the decision.",
+        "statement": "Statement of reasons",
+        "statementHint": "Sent to the author: what exactly is wrong.",
+        "statementTooShort": "Write at least {min} characters.",
+        "days": "Suspension length (days)",
+        "daysHint": "From 1 to {max} days.",
+        "daysRange": "Enter a number of days between 1 and {max}."
+      },
+      "actions": {
+        "hide": {
+          "short": "Hide",
+          "title": "Hide this content",
+          "body": "Only its author can still see it. Reports are closed and the author receives your explanation.",
+          "confirm": "Hide"
+        },
+        "delete": {
+          "short": "Delete",
+          "title": "Delete permanently",
+          "body": "The content and its images are erased. An appeal can't bring it back: keep this for clearly illegal or serious content.",
+          "confirm": "Delete"
+        },
+        "restore": {
+          "short": "Restore",
+          "title": "Restore this content",
+          "body": "The content becomes visible again and won't be hidden automatically any more. The author is notified.",
+          "confirm": "Restore"
+        },
+        "dismiss": {
+          "short": "Dismiss",
+          "title": "Dismiss the reports",
+          "body": "The content stays visible and won't be hidden automatically any more. The author isn't notified.",
+          "confirm": "Dismiss"
+        },
+        "suspend": {
+          "short": "Suspend the author",
+          "title": "Suspend @{handle}",
+          "body": "The member can still read and like, but can no longer post, reply, or change username or avatar.",
+          "confirm": "Suspend"
+        },
+        "unsuspend": {
+          "short": "Lift the suspension",
+          "title": "Lift @{handle}'s suspension",
+          "body": "The member can post again. They are notified.",
+          "confirm": "Lift the suspension"
+        },
+        "uphold": {
+          "short": "Uphold the decision",
+          "title": "Uphold the decision",
+          "body": "The decision stays in place. The member receives your answer.",
+          "confirm": "Uphold"
+        },
+        "reverse": {
+          "short": "Reverse the decision",
+          "title": "Reverse the decision",
+          "body": "The hidden content is restored or the suspension lifted. The member receives your answer.",
+          "confirm": "Reverse the decision"
+        }
+      },
+      "done": {
+        "hide": "Content hidden, author notified",
+        "delete": "Content deleted, author notified",
+        "restore": "Content restored",
+        "dismiss": "Reports dismissed",
+        "suspend": "Member suspended, notified by e-mail",
+        "unsuspend": "Suspension lifted",
+        "uphold": "Decision upheld, member notified",
+        "reverse": "Decision reversed, member notified"
+      }
+    }
   }
 }

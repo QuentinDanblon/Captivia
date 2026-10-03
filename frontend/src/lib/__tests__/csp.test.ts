@@ -3,6 +3,7 @@ import {
   buildCsp,
   cspDirectives,
   isAllowedRemoteImage,
+  mediaOriginFor,
   securityHeaders,
   sentryOrigin,
   HSTS,
@@ -142,5 +143,37 @@ describe('origines', () => {
     expect(isAllowedRemoteImage('http://upload.wikimedia.org/x.jpg')).toBe(false);
     expect(isAllowedRemoteImage('https://upload.wikimedia.org.evil.example/x.jpg')).toBe(false);
     expect(isAllowedRemoteImage('not a url')).toBe(false);
+  });
+});
+
+describe('img-src — images de la communauté (NEXT_PUBLIC_MEDIA_BASE_URL)', () => {
+  const MEDIA = 'https://media.captivia.app/communaute';
+
+  it("ajoute l'origine du bucket public, sans chemin ni joker", () => {
+    const img = prod({ mediaBaseUrl: MEDIA }).get('img-src') ?? [];
+    expect(img).toContain('https://media.captivia.app');
+    expect(img.some((source) => source.includes('/communaute'))).toBe(false);
+    expect(img).not.toContain('https:');
+    expect(img.every((source) => !source.includes('*'))).toBe(true);
+  });
+
+  it("sans origine dédiée : l'API sert les images (pilote local du backend)", () => {
+    expect(prod().get('img-src')).toContain('https://captivia-api.onrender.com');
+    expect(mediaOriginFor({ apiUrl: 'http://127.0.0.1:4010' })).toBe('http://127.0.0.1:4010');
+  });
+
+  it("ignore une origine de médias invalide (et retombe sur l'API)", () => {
+    expect(mediaOriginFor({ mediaBaseUrl: 'javascript:alert(1)', apiUrl: API })).toBe('https://captivia-api.onrender.com');
+    expect(prod({ mediaBaseUrl: 'data:image/png' }).get('img-src')).not.toContain('data:image/png');
+  });
+
+  it("même règle pour l'app mobile (<meta>)", () => {
+    const img = parse(buildCsp({ target: 'mobile', apiUrl: API, mediaBaseUrl: MEDIA })).get('img-src') ?? [];
+    expect(img).toContain('https://media.captivia.app');
+  });
+
+  it("n'ajoute pas l'origine en double", () => {
+    const img = prod({ mediaBaseUrl: 'https://upload.wikimedia.org' }).get('img-src') ?? [];
+    expect(img.filter((source) => source === 'https://upload.wikimedia.org')).toHaveLength(1);
   });
 });

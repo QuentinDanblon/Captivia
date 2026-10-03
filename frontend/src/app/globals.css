@@ -1211,6 +1211,12 @@
     opacity: 0;
   }
 }
+/* « J'aime » (communauté) : le cœur se remplit d'un léger battement, 180 ms, sans déplacement. */
+@keyframes cv-pop {
+  50% {
+    transform: scale(1.22);
+  }
+}
 @keyframes cv-rise {
   from {
     opacity: 0;

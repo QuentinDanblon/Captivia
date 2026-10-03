@@ -62,5 +62,10 @@ export {
   fixture,
   type MockAnimal,
   type MockAgendaItem,
+  communityPost,
+  COMMUNITY_HANDLE,
+  COMMUNITY_MEDIA_PREFIX,
+  type MockCommunityPost,
+  type MockCommunityComment,
 } from './mock-api';
 export { runAxe } from './axe';

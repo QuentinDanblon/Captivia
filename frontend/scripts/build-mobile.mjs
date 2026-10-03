@@ -51,11 +51,18 @@ const EXCLUDED = [
   'src/app/[locale]/(marketing)/opengraph-image.tsx',
 ];
 
-/** Routes dynamiques web → routes à query de l'app (miroir de src/lib/platform.ts). */
+/**
+ * Routes dynamiques web → routes à query de l'app (miroir de src/lib/platform.ts) :
+ * [préfixe (segments séparés par « / »), route de l'app, nom du paramètre]. Le dernier segment de
+ * l'URL web devient le paramètre (`/communaute/u/<pseudo>` → `/communaute/u/?handle=<pseudo>`).
+ */
 const DYNAMIC_ROUTES = [
   ['mes-animaux', '/mes-animaux/detail/', 'id'],
   ['species', '/species/', 'id'],
   ['animal-public', '/animal-public/', 'slug'],
+  ['communaute/publication', '/communaute/publication/', 'id'],
+  ['communaute/u', '/communaute/u/', 'handle'],
+  ['communaute/decisions', '/communaute/decisions/', 'id'],
 ];
 const PLACEHOLDER_SEGMENT = '/_/';
 
@@ -195,8 +202,9 @@ function inlineScriptHashes(html) {
 function cspFactory({ buildCsp, apiOrigin }) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const sentryDsn = process.env.NEXT_PUBLIC_SENTRY_DSN;
+  const mediaBaseUrl = process.env.NEXT_PUBLIC_MEDIA_BASE_URL;
   if (!apiOrigin(apiUrl)) log('AVERTISSEMENT : NEXT_PUBLIC_API_URL absent ou invalide, connect-src limité à self');
-  return (scriptHashes) => buildCsp({ target: 'mobile', apiUrl, sentryDsn, scriptHashes });
+  return (scriptHashes) => buildCsp({ target: 'mobile', apiUrl, sentryDsn, mediaBaseUrl, scriptHashes });
 }
 
 /**
@@ -216,7 +224,7 @@ function pick(){try{var s=localStorage.getItem('captivia.locale');if(LOCALES.ind
 var n=navigator.languages||[navigator.language||''];for(var i=0;i<n.length;i++){var c=String(n[i]).slice(0,2).toLowerCase();if(LOCALES.indexOf(c)>=0)return c}return DEF}
 var l=location,seg=l.pathname.split('/').filter(Boolean);if(seg[seg.length-1]==='index.html')seg.pop();
 var loc=LOCALES.indexOf(seg[0])>=0?seg.shift():pick(),q=new URLSearchParams(l.search),rest='/'+seg.join('/')+(seg.length?'/':'');
-if(seg.length===2&&ROUTES.indexOf(rest)<0){for(var j=0;j<DYN.length;j++){if(seg[0]===DYN[j][0]){try{q.set(DYN[j][2],decodeURIComponent(seg[1]))}catch(e){q.set(DYN[j][2],seg[1])}rest=DYN[j][1];break}}}
+if(seg.length>=2&&ROUTES.indexOf(rest)<0){for(var j=0;j<DYN.length;j++){var pre=DYN[j][0].split('/'),last=seg[seg.length-1];if(seg.length===pre.length+1&&seg.slice(0,-1).join('/')===DYN[j][0]){try{q.set(DYN[j][2],decodeURIComponent(last))}catch(e){q.set(DYN[j][2],last)}rest=DYN[j][1];break}}}
 if(ROUTES.indexOf(rest)<0)rest='/';var s=q.toString();l.replace('/'+loc+rest+'index.html'+(s?'?'+s:'')+l.hash);
 })();`;
   return `<!DOCTYPE html>

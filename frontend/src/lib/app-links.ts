@@ -35,6 +35,10 @@ export const APP_LINK_PATHS = [
   '/animal-public/*',
   '/species/*',
   '/especes',
+  '/communaute',
+  '/communaute/*',
+  // Lien des notifications de modération envoyées par le backend (redirigé vers /communaute/decisions).
+  '/community/decisions/*',
   '/reset-password',
   '/verifier-email',
 ] as const;

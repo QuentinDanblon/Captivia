@@ -24,6 +24,12 @@ export interface CspOptions {
   /** NEXT_PUBLIC_SENTRY_DSN (origine d'ingestion, https uniquement). */
   sentryDsn?: string | null;
   /**
+   * NEXT_PUBLIC_MEDIA_BASE_URL : domaine public des images de la communauté (bucket R2,
+   * `https://media.<domaine>`), ajouté à img-src. Absent : les images sont servies par l'API
+   * (pilote local, `GET /community/media/:key`) et c'est l'origine de l'API qui est autorisée.
+   */
+  mediaBaseUrl?: string | null;
+  /**
    * Hachages des scripts inline de la page (`sha256-…`, sans guillemets). S'ils sont fournis,
    * ils remplacent `'unsafe-inline'` dans script-src (cible mobile).
    */
@@ -74,6 +80,15 @@ export function sentryOrigin(dsn: string | null | undefined): string | null {
   return originOf(dsn, ['https:']);
 }
 
+/**
+ * Origine des images de la communauté autorisée en img-src : celle de `mediaBaseUrl` (https, ou
+ * http seulement en local), sinon celle de l'API (pilote local du backend). `null` si aucune n'est
+ * valide. Partagée par la CSP et par l'affichage (`isAllowedMediaUrl`, src/lib/community.ts).
+ */
+export function mediaOriginFor(options: { mediaBaseUrl?: string | null; apiUrl?: string | null }): string | null {
+  return originOf(options.mediaBaseUrl, ['http:', 'https:']) ?? apiOrigin(options.apiUrl);
+}
+
 /** Vrai si l'URL (https) d'une photo distante est servie par un hôte autorisé en img-src. */
 export function isAllowedRemoteImage(url: string): boolean {
   try {
@@ -97,7 +112,14 @@ export function cspDirectives(options: CspOptions = {}): Array<[string, string[]
 
   const scriptSrc = [...self, ...(hashes.length > 0 ? hashes : ["'unsafe-inline'"]), ...(dev ? ["'unsafe-eval'"] : [])];
   const connectSrc = [...self, ...(api ? [api] : []), ...(sentry ? [sentry] : []), ...(dev ? DEV_API_ORIGINS : [])];
-  const imgSrc = [...self, 'data:', 'blob:', ...SPECIES_IMAGE_HOSTS.map((host) => `https://${host}`)];
+  const media = mediaOriginFor({ mediaBaseUrl: options.mediaBaseUrl, apiUrl: options.apiUrl });
+  const imgSrc = [
+    ...self,
+    'data:',
+    'blob:',
+    ...SPECIES_IMAGE_HOSTS.map((host) => `https://${host}`),
+    ...(media && !SPECIES_IMAGE_HOSTS.some((host) => media === `https://${host}`) ? [media] : []),
+  ];
 
   const directives: Array<[string, string[]]> = [
     ['default-src', self],

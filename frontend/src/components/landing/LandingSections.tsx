@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { LEGAL_ROUTES } from '@/lib/legal';
+import { COMMUNITY_BUILD_FLAG } from '@/lib/community-flag';
 import { Badge, buttonClasses, cx, Figure, PremiumBadge, SectionHeader, type SilhouetteKind } from '@/components/ui';
 import { photoSources, type PhotoKey } from '@/content/photos';
 import { CommunityPreview, HealthRecordPreview, RemindersPreview, SpeciesPreview, TodayPreview } from './AppPreviews';
@@ -110,6 +111,7 @@ function TourRow({
   title,
   body,
   badge,
+  action,
   preview,
   reverse = false,
 }: {
@@ -118,6 +120,8 @@ function TourRow({
   title: string;
   body: string;
   badge?: ReactNode;
+  /** Lien sous le texte (communauté ouverte). */
+  action?: ReactNode;
   preview: ReactNode;
   reverse?: boolean;
 }) {
@@ -131,6 +135,7 @@ function TourRow({
         </p>
         <h3 className="mt-3 mb-0 text-h3 text-ink">{title}</h3>
         <p className="mt-3 mb-0 max-w-[32rem] text-body text-ink-2">{body}</p>
+        {action ? <div className="mt-5">{action}</div> : null}
       </div>
       <div className={cx('min-w-0 lg:col-span-7', reverse && 'lg:order-1 lg:col-start-1 lg:row-start-1')}>{preview}</div>
     </li>
@@ -151,7 +156,23 @@ export async function Tour({ locale }: Props) {
         <TourRow index={1} label={t('tour.record.label')} title={t('tour.record.title')} body={t('tour.record.body')} preview={<HealthRecordPreview locale={locale} />} />
         <TourRow index={2} reverse label={t('tour.reminders.label')} title={t('tour.reminders.title')} body={t('tour.reminders.body')} preview={<RemindersPreview locale={locale} />} />
         <TourRow index={3} label={t('tour.species.label')} title={t('tour.species.title')} body={t('tour.species.body')} preview={<SpeciesPreview locale={locale} />} />
-        <TourRow index={4} reverse label={t('tour.community.label')} title={t('tour.community.title')} body={t('tour.community.body')} badge={soon} preview={<CommunityPreview locale={locale} />} />
+        {/* « Bientôt » tant que NEXT_PUBLIC_COMMUNITY_ENABLED n'est pas `true` (src/lib/community.ts). */}
+        <TourRow
+          index={4}
+          reverse
+          label={t('tour.community.label')}
+          title={t('tour.community.title')}
+          body={t('tour.community.body')}
+          badge={COMMUNITY_BUILD_FLAG === 'on' ? undefined : soon}
+          action={
+            COMMUNITY_BUILD_FLAG === 'on' ? (
+              <Link href="/communaute" className={buttonClasses({ variant: 'secondary' })}>
+                {t('tour.community.cta')}
+              </Link>
+            ) : undefined
+          }
+          preview={<CommunityPreview locale={locale} />}
+        />
       </ol>
     </Section>
   );

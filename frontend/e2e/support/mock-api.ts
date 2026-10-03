@@ -70,6 +70,81 @@ export interface MockAgendaItem {
   sourceId: string;
 }
 
+/** Publication de la communauté telle que la renvoie l'API (src/lib/community.ts, `CommunityPost`). */
+export interface MockCommunityPost {
+  id: string;
+  type: 'PHOTO' | 'QUESTION';
+  body: string;
+  speciesCategory: string | null;
+  status: string;
+  createdAt: string;
+  author: { handle: string | null; avatarUrl: string | null };
+  animal: { name: string; species: string; scientificName: string } | null;
+  media: { id: string; url: string; width: number; height: number }[];
+  likeCount: number;
+  commentCount: number;
+  likedByMe: boolean;
+  isMine: boolean;
+  helpfulCommentId: string | null;
+}
+
+export interface MockCommunityComment {
+  id: string;
+  postId: string;
+  parentId: string | null;
+  body: string;
+  status: string;
+  createdAt: string;
+  author: { handle: string | null; avatarUrl: string | null };
+  isMine: boolean;
+  isHelpful: boolean;
+  replies?: MockCommunityComment[];
+}
+
+/**
+ * Communauté simulée (routes `/community/*`). `enabled: false` (défaut) reproduit un serveur avec
+ * `COMMUNITY_ENABLED=false` : toutes les routes répondent 404, comme le vrai garde.
+ */
+export interface MockCommunity {
+  enabled: boolean;
+  /** Profil de la session (`GET /community/profile`). */
+  me: {
+    profile: { handle: string; avatarUrl: string | null; rulesVersion: string; rulesAcceptedAt: string; suspendedUntil: string | null; createdAt: string } | null;
+    currentRulesVersion: string;
+    canPublish: boolean;
+    reasons: string[];
+    ageConfirmationRequired: boolean;
+  };
+  posts: MockCommunityPost[];
+  comments: Record<string, MockCommunityComment[]>;
+  blocks: { handle: string; avatarUrl: string | null; blockedAt: string }[];
+}
+
+/** Profil communautaire actif par défaut (compte du fixture, e-mail vérifié). */
+export const COMMUNITY_HANDLE = 'kaa_et_moi';
+export const COMMUNITY_RULES = '2026-10';
+/** Origine (simulée) des images de la communauté : pilote local, servies par l'API. */
+export const COMMUNITY_MEDIA_PREFIX = `${API_ORIGIN}/community/media/`;
+
+export function communityPost(overrides: Partial<MockCommunityPost> & { id: string }): MockCommunityPost {
+  return {
+    type: 'PHOTO',
+    body: '',
+    speciesCategory: 'REPTILE',
+    status: 'VISIBLE',
+    createdAt: new Date(Date.now() - 2 * 3600_000).toISOString(),
+    author: { handle: 'gecko.lea', avatarUrl: null },
+    animal: null,
+    media: [],
+    likeCount: 0,
+    commentCount: 0,
+    likedByMe: false,
+    isMine: false,
+    helpfulCommentId: null,
+    ...overrides,
+  };
+}
+
 export interface MockApi {
   /** Animaux de l'utilisateur (modifiable avant la navigation). */
   animals: MockAnimal[];
@@ -85,6 +160,8 @@ export interface MockApi {
   callsTo: (method: string, pathname: string) => RecordedCall[];
   /** Profil de l'invité converti par POST /auth/upgrade (null avant). */
   upgradedUser: Record<string, unknown> | null;
+  /** Communauté (désactivée par défaut, comme en production). */
+  community: MockCommunity;
 }
 
 const CORS_HEADERS = {
@@ -113,6 +190,26 @@ export async function installMockApi(page: Page): Promise<MockApi> {
     calls: [],
     unmocked: [],
     upgradedUser: null,
+    community: {
+      enabled: false,
+      me: {
+        profile: {
+          handle: COMMUNITY_HANDLE,
+          avatarUrl: null,
+          rulesVersion: COMMUNITY_RULES,
+          rulesAcceptedAt: '2026-09-01T10:00:00.000Z',
+          suspendedUntil: null,
+          createdAt: '2026-09-01T10:00:00.000Z',
+        },
+        currentRulesVersion: COMMUNITY_RULES,
+        canPublish: true,
+        reasons: [],
+        ageConfirmationRequired: false,
+      },
+      posts: [],
+      comments: {},
+      blocks: [],
+    },
     callsTo: (method, pathname) => api.calls.filter((c) => c.method === method && c.path === pathname),
   };
   const user = fixture<Record<string, unknown>>('user');
@@ -214,6 +311,143 @@ export async function installMockApi(page: Page): Promise<MockApi> {
       }
       api.upgradedUser = { ...GUEST_USER, email: email ?? null, isGuest: false };
       return json(route, 201, { accessToken: UPGRADED_TOKEN, refreshToken: 'e2e-upgrade-refresh', user: api.upgradedUser });
+    }
+
+    // --- Communauté (/community/*) : 404 tant que le volet est fermé, comme CommunityEnabledGuard ---
+    if (pathname.startsWith('/community/')) {
+      const c = api.community;
+      const notFound = () => json(route, 404, { statusCode: 404, message: 'Not Found' });
+      if (!c.enabled) return notFound();
+      // Images (pilote local) : publiques, sans jeton.
+      if (method === 'GET' && pathname.startsWith('/community/media/')) {
+        return route.fulfill({ status: 200, headers: { ...CORS_HEADERS, 'content-type': 'image/webp' }, body: readFileSync(SAMPLE_PHOTO) });
+      }
+      if (!authorized) return unauthorized();
+      const isGuest = bearer === GUEST_TOKEN;
+      const me = isGuest
+        ? { profile: null, currentRulesVersion: COMMUNITY_RULES, canPublish: false, reasons: ['GUEST_ACCOUNT', 'COMMUNITY_PROFILE_REQUIRED'], ageConfirmationRequired: false }
+        : c.me;
+      const forbiddenGuest = () => json(route, 403, { statusCode: 403, code: 'GUEST_ACCOUNT', message: 'Create an account to publish in the community.' });
+      const now = () => new Date().toISOString();
+
+      if (method === 'GET' && pathname === '/community/rules') return json(route, 200, { version: COMMUNITY_RULES });
+      if (pathname === '/community/profile') {
+        if (method === 'GET') return json(route, 200, me);
+        if (isGuest) return forbiddenGuest();
+        if (method === 'POST') {
+          const { handle } = (body ?? {}) as { handle?: string };
+          if (handle === 'pris') return json(route, 409, { statusCode: 409, code: 'HANDLE_TAKEN', message: 'taken' });
+          c.me = {
+            ...c.me,
+            profile: { handle: handle ?? 'membre', avatarUrl: null, rulesVersion: COMMUNITY_RULES, rulesAcceptedAt: now(), suspendedUntil: null, createdAt: now() },
+            canPublish: true,
+            reasons: [],
+          };
+          return json(route, 201, c.me.profile);
+        }
+      }
+      if (method === 'GET' && pathname === '/community/me/decisions') return json(route, 200, { items: [], nextCursor: null, contactEmail: null });
+      // Route annoncée par la revue de sécurité du backend : absente ici, l'interface doit le tolérer.
+      if (method === 'GET' && pathname === '/community/me/reports') return notFound();
+      if (method === 'GET' && pathname === '/community/blocks') return json(route, 200, { items: c.blocks });
+
+      if (pathname === '/community/media' && method === 'POST') {
+        if (isGuest) return forbiddenGuest();
+        const n = api.calls.filter((call) => call.method === 'POST' && call.path === '/community/media').length;
+        const id = `00000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
+        return json(route, 201, { id, url: `${COMMUNITY_MEDIA_PREFIX}${id}.webp`, width: 480, height: 320 });
+      }
+
+      if (pathname === '/community/posts') {
+        if (method === 'GET') {
+          const type = url.searchParams.get('type');
+          const category = url.searchParams.get('category');
+          const items = c.posts.filter((p) => p.status === 'VISIBLE' && (!type || p.type === type) && (!category || p.speciesCategory === category));
+          const start = Number(url.searchParams.get('cursor') ?? 0) || 0;
+          const limit = Number(url.searchParams.get('limit') ?? 20) || 20;
+          const page = items.slice(start, start + limit);
+          return json(route, 200, { items: page, nextCursor: start + limit < items.length ? String(start + limit) : null });
+        }
+        if (method === 'POST') {
+          if (isGuest) return forbiddenGuest();
+          const data = (body ?? {}) as { type: 'PHOTO' | 'QUESTION'; body?: string; mediaIds?: string[]; speciesCategory?: string };
+          const created = communityPost({
+            id: `10000000-0000-4000-8000-${String(c.posts.length + 1).padStart(12, '0')}`,
+            type: data.type,
+            body: data.body ?? '',
+            speciesCategory: data.speciesCategory ?? null,
+            createdAt: now(),
+            author: { handle: c.me.profile?.handle ?? null, avatarUrl: null },
+            media: (data.mediaIds ?? []).map((id) => ({ id, url: `${COMMUNITY_MEDIA_PREFIX}${id}.webp`, width: 480, height: 320 })),
+            isMine: true,
+          });
+          c.posts.unshift(created);
+          return json(route, 201, created);
+        }
+      }
+      const postMatch = /^\/community\/posts\/([^/]+)(\/(comments|like|report))?$/.exec(pathname);
+      if (postMatch) {
+        const target = c.posts.find((p) => p.id === postMatch[1]);
+        if (!target) return notFound();
+        const sub = postMatch[3];
+        if (!c.comments[target.id]) c.comments[target.id] = [];
+        const comments = c.comments[target.id];
+        if (!sub && method === 'GET') return json(route, 200, { ...target, comments: { items: comments, nextCursor: null } });
+        if (sub === 'comments' && method === 'GET') return json(route, 200, { items: comments, nextCursor: null });
+        if (sub === 'comments' && method === 'POST') {
+          if (isGuest) return forbiddenGuest();
+          const { body: text, parentId } = (body ?? {}) as { body?: string; parentId?: string };
+          const created: MockCommunityComment = {
+            id: `20000000-0000-4000-8000-${String(comments.length + 1).padStart(12, '0')}`,
+            postId: target.id,
+            parentId: parentId ?? null,
+            body: text ?? '',
+            status: 'VISIBLE',
+            createdAt: now(),
+            author: { handle: c.me.profile?.handle ?? null, avatarUrl: null },
+            isMine: true,
+            isHelpful: false,
+          };
+          if (parentId) comments.find((cm) => cm.id === parentId)?.replies?.push(created);
+          else comments.push({ ...created, replies: [] });
+          target.commentCount += 1;
+          return json(route, 201, created);
+        }
+        if (sub === 'like') {
+          if (isGuest && method === 'PUT') return forbiddenGuest();
+          target.likedByMe = method === 'PUT';
+          target.likeCount = Math.max(0, target.likeCount + (method === 'PUT' ? 1 : -1));
+          return json(route, 200, { liked: target.likedByMe, likeCount: target.likeCount });
+        }
+        if (sub === 'report' && method === 'POST') {
+          if (target.isMine) return json(route, 400, { statusCode: 400, code: 'COMMUNITY_CANNOT_REPORT_OWN', message: 'own' });
+          return json(route, 200, { reported: true, alreadyReported: false });
+        }
+      }
+      if (method === 'POST' && /^\/community\/comments\/[^/]+\/report$/.test(pathname)) {
+        return json(route, 200, { reported: true, alreadyReported: false });
+      }
+      const userMatch = /^\/community\/users\/([^/]+)(\/posts)?$/.exec(pathname);
+      if (userMatch && method === 'GET') {
+        const handle = decodeURIComponent(userMatch[1]);
+        const posts = c.posts.filter((p) => p.author.handle === handle);
+        if (!posts.length && handle !== c.me.profile?.handle) return notFound();
+        if (userMatch[2]) return json(route, 200, { items: posts, nextCursor: null });
+        return json(route, 200, {
+          handle,
+          avatarUrl: null,
+          memberSince: '2026-09-01T10:00:00.000Z',
+          postCount: posts.length,
+          isMe: handle === c.me.profile?.handle,
+        });
+      }
+      const blockMatch = /^\/community\/blocks\/([^/]+)$/.exec(pathname);
+      if (blockMatch && (method === 'PUT' || method === 'DELETE')) {
+        const handle = decodeURIComponent(blockMatch[1]);
+        if (method === 'PUT' && !c.blocks.some((b) => b.handle === handle)) c.blocks.push({ handle, avatarUrl: null, blockedAt: now() });
+        if (method === 'DELETE') c.blocks = c.blocks.filter((b) => b.handle !== handle);
+        return json(route, 200, { handle, blocked: method === 'PUT' });
+      }
     }
 
     // --- Animaux de l'utilisateur ---

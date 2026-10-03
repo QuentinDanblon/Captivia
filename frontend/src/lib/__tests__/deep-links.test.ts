@@ -186,3 +186,32 @@ describe('mapWebUrlToAppRoute — refus', () => {
     expect(mapWebUrlToAppRoute(`${SITE}/species/1`, opts)).toBeNull();
   });
 });
+
+describe('mapWebUrlToAppRoute — communauté', () => {
+  const ID = '0b7c6f2e-8d1a-4c3b-9e5f-1a2b3c4d5e6f';
+
+  it('publication, profil public et décision → routes à query de l’app', () => {
+    expect(map(`/communaute/publication/${ID}`)).toBe(`/fr/communaute/publication/?id=${ID}`);
+    expect(map('/en/communaute/u/gecko.lea')).toBe('/en/communaute/u/?handle=gecko.lea');
+    expect(map(`/de/communaute/decisions/${ID}`)).toBe(`/de/communaute/decisions/?id=${ID}`);
+  });
+
+  it("lien de l'e-mail de modération, ancienne forme /community/decisions/<id>", () => {
+    expect(map(`/community/decisions/${ID}`)).toBe(`/fr/communaute/decisions/?id=${ID}`);
+    expect(map(`/es/community/decisions/${ID}`)).toBe(`/es/communaute/decisions/?id=${ID}`);
+  });
+
+  it("formes déjà converties de l'app et pages statiques", () => {
+    expect(map(`/communaute/publication?id=${ID}`)).toBe(`/fr/communaute/publication/?id=${ID}`);
+    expect(map('/communaute')).toBe('/fr/communaute/');
+    expect(map('/communaute/decisions')).toBe('/fr/communaute/decisions/');
+    expect(map('/communaute/nouvelle')).toBe('/fr/communaute/nouvelle/');
+  });
+
+  it('paramètres invalides ou chemins inconnus → accueil', () => {
+    expect(map('/communaute/u/a%20b')).toBe('/fr/mes-animaux/');
+    expect(map('/communaute/publication')).toBe('/fr/mes-animaux/');
+    expect(map('/communaute/constructor/x')).toBe('/fr/mes-animaux/');
+    expect(map('/community/feed')).toBe('/fr/mes-animaux/');
+  });
+});

@@ -30,6 +30,13 @@ const STATIC_ROUTES = new Set([
   '/register',
   '/forgot-password',
   '/sauvegarder',
+  '/communaute',
+  '/communaute/nouvelle',
+  '/communaute/profil',
+  '/communaute/blocages',
+  '/communaute/decisions',
+  '/communaute/moderation',
+  '/communaute/regles',
 ]);
 
 /** Paramètres de query conservés, par page (les autres sont ignorés). */
@@ -41,6 +48,8 @@ const KEPT_QUERY: Record<string, readonly string[]> = {
 
 /** Identifiant d'animal, d'espèce ou slug public : caractères d'URL sûrs uniquement. */
 const SAFE_SEGMENT = /^[A-Za-z0-9_-]{1,128}$/;
+/** Pseudo de la communauté (lettres, chiffres, « _ » et « . »). */
+const SAFE_HANDLE = /^[A-Za-z0-9_.]{1,64}$/;
 /** Jeton de réinitialisation / vérification. */
 const SAFE_TOKEN = /^[A-Za-z0-9._~-]{1,512}$/;
 /** Ancre de section (`#sante`). */
@@ -129,6 +138,25 @@ function routeForSegments(segments: string[], params: URLSearchParams): string |
     return `/${first}?${name}=${enc(value)}`;
   }
 
+  // Communauté : publication, profil public, décision de modération (lien de l'e-mail, y compris
+  // l'ancienne forme `/community/decisions/<id>` envoyée par le backend).
+  if (first === 'communaute' || (first === 'community' && second === 'decisions')) {
+    const kinds: Record<string, [string, RegExp]> = {
+      publication: ['id', SAFE_SEGMENT],
+      u: ['handle', SAFE_HANDLE],
+      decisions: ['id', SAFE_SEGMENT],
+    };
+    const kind = second && Object.prototype.hasOwnProperty.call(kinds, second) ? kinds[second] : undefined;
+    if (kind && segments.length <= 3) {
+      const [name, pattern] = kind;
+      const value = segments.length === 3 ? third : params.get(name);
+      if (value && pattern.test(value)) return `/communaute/${second}?${name}=${enc(value)}`;
+      // `/communaute/decisions` sans identifiant : la liste des décisions (page statique).
+      if (segments.length === 3 || second !== 'decisions' || first === 'community') return null;
+    }
+    if (first === 'community') return null;
+  }
+
   if (page === '/reset-password' || page === '/verifier-email') return `${page}${keptQuery(page, params)}`;
   if (STATIC_ROUTES.has(page)) return `${page}${keptQuery(page, params)}`;
   return null;
@@ -139,7 +167,9 @@ function routeForSegments(segments: string[], params: URLSearchParams): string |
  *
  * - `https://<site>/mes-animaux/<id>` → `/fr/mes-animaux/detail/?id=<id>` (locale de l'URL, sinon
  *   `options.locale`, sinon `fr`) ; idem `/species/<id>`, `/animal-public/<slug>`, `/…/carnet`,
- *   `/reset-password?token=`, `/verifier-email?token=`, `/especes` et les pages de l'app ;
+ *   `/reset-password?token=`, `/verifier-email?token=`, `/especes`, la communauté
+ *   (`/communaute/publication/<id>`, `/communaute/u/<pseudo>`, `/communaute/decisions/<id>`) et les
+ *   pages de l'app ;
  * - chemin inconnu ou paramètre invalide → accueil de l'app (`/<locale>/mes-animaux/`) ;
  * - domaine étranger, schéma non http(s), identifiants dans l'URL ou URL invalide → `null`
  *   (le lien est ignoré).

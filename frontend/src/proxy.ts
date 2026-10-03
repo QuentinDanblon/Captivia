@@ -13,7 +13,9 @@ export default function proxy(request: NextRequest) {
   // Next.js build with "The string did not match the expected pattern"), so we
   // do it here with an early return.
   // /.well-known/* (apple-app-site-association, assetlinks.json…) ne doit jamais être localisé.
-  if (pathname.startsWith('/.well-known/') || /\.[a-zA-Z0-9]+$/.test(pathname)) {
+  // Exception : un pseudo de la communauté peut contenir un point (`/communaute/u/gecko.lea`).
+  const isMemberProfile = /^(\/[a-z]{2})?\/communaute\/u\/[^/]+\/?$/.test(pathname);
+  if (pathname.startsWith('/.well-known/') || (/\.[a-zA-Z0-9]+$/.test(pathname) && !isMemberProfile)) {
     return NextResponse.next();
   }
   // Images Open Graph (`/<locale>/opengraph-image-…`) : servies telles quelles, y compris pour la

@@ -687,7 +687,8 @@
       "community": {
         "label": "Comunità",
         "title": "Presto: gli altri appassionati.",
-        "body": "Condividi le foto dei tuoi animali, fai le tue domande, rispondi a quelle degli altri. Il libretto sanitario resta privato."
+        "body": "Condividi le foto dei tuoi animali, fai le tue domande, rispondi a quelle degli altri. Il libretto sanitario resta privato.",
+        "cta": "Entra nella community"
       }
     },
     "gallery": {
@@ -1302,7 +1303,8 @@
     "agendaTitle": "Agenda delle cure",
     "verifyEmailTitle": "Verifica dell'indirizzo e-mail",
     "speciesSearchTitle": "Schede delle specie",
-    "speciesSearchDescription": "Cerca una specie e apri la sua scheda: alimentazione, habitat, comportamento, salute e normativa, con le fonti."
+    "speciesSearchDescription": "Cerca una specie e apri la sua scheda: alimentazione, habitat, comportamento, salute e normativa, con le fonti.",
+    "communityTitle": "Community"
   },
   "agenda": {
     "title": "Agenda delle cure",
@@ -1720,5 +1722,663 @@
     "activeTitle": "Premium è attivo",
     "activeText": "Aggiungi tutti gli animali che vuoi, ognuno con il suo libretto.",
     "restoreNothing": "Nessun abbonamento Premium da ripristinare su questo account dello store."
+  },
+  "community": {
+    "loading": "Caricamento della community…",
+    "time": {
+      "justNow": "adesso"
+    },
+    "soon": {
+      "title": "La community apre presto",
+      "body": "Foto dei tuoi animali, domande ad altri appassionati, risposte che aiutano davvero: è tutto pronto, manca solo l'apertura. Il libretto dei tuoi animali resta privato.",
+      "action": "Torna ai miei animali"
+    },
+    "join": {
+      "title": "Altri appassionati ti aspettano",
+      "body": "Mostra i tuoi animali, fai le tue domande e rispondi a quelle degli altri. Basta un account gratuito per entrare nella community.",
+      "register": "Crea un account gratuito",
+      "login": "Ho già un account",
+      "privacy": "Il libretto sanitario dei tuoi animali non viene mai pubblicato: scegli tu cosa condividere, un post alla volta."
+    },
+    "actions": {
+      "createAccount": "Crea il mio account",
+      "createProfile": "Crea il mio profilo",
+      "reviewRules": "Rileggi le regole",
+      "seeDecision": "Vedi la decisione",
+      "login": "Accedi di nuovo",
+      "retry": "Riprova",
+      "resendVerification": "Invia di nuovo l'e-mail",
+      "verificationSent": "E-mail inviata: apri il link che contiene.",
+      "verificationError": "Non è stato possibile inviare l'e-mail. Riprova tra un minuto."
+    },
+    "errors": {
+      "network": {
+        "title": "Connessione non riuscita",
+        "body": "Controlla la connessione internet e riprova."
+      },
+      "session": {
+        "title": "La sessione è scaduta",
+        "body": "Accedi di nuovo per tornare alla community."
+      },
+      "guest": {
+        "title": "Un account per partecipare",
+        "body": "Provando senza account puoi leggere il feed. Per pubblicare, rispondere o mettere mi piace, crea un account: il tuo animale e il suo libretto ti seguono."
+      },
+      "emailNotVerified": {
+        "title": "Verifica il tuo indirizzo e-mail",
+        "body": "Apri il link che ti abbiamo inviato per e-mail per pubblicare nella community. Non è arrivato nulla? Possiamo inviarlo di nuovo."
+      },
+      "ageRequired": {
+        "title": "Conferma la tua età",
+        "body": "La community è aperta dai 15 anni. Confermalo quando crei il tuo profilo."
+      },
+      "profileRequired": {
+        "title": "Scegli il tuo nome utente",
+        "body": "Crea il tuo profilo pubblico (un nome utente e, se vuoi, un avatar) per pubblicare, rispondere e mettere mi piace."
+      },
+      "profileExists": {
+        "title": "Il tuo profilo esiste già",
+        "body": "Puoi cambiare nome utente e avatar dal tuo profilo."
+      },
+      "rulesNotAccepted": {
+        "title": "Le regole sono cambiate",
+        "body": "Leggi e accetta la nuova versione delle regole per continuare a pubblicare."
+      },
+      "suspended": {
+        "title": "Pubblicazione sospesa",
+        "body": "Puoi ancora leggere e mettere mi piace, ma per ora non puoi pubblicare né rispondere. Puoi consultare la decisione e come fare ricorso.",
+        "bodyUntil": "Puoi ancora leggere e mettere mi piace, ma non pubblicare né rispondere fino al {date}. Puoi consultare la decisione e come fare ricorso."
+      },
+      "rateLimited": {
+        "title": "Limite raggiunto per ora",
+        "body": "Hai pubblicato molto in poco tempo. Riprova tra un po': questo limite protegge la community dallo spam."
+      },
+      "linksNotAllowed": {
+        "title": "Ancora niente link",
+        "body": "I link sono ammessi quando l'account ha 7 giorni, per frenare lo spam. Togli l'indirizzo e riprova."
+      },
+      "handleInvalid": {
+        "title": "Nome utente non valido",
+        "body": "Da 3 a 30 caratteri: lettere senza accenti, cifre, «_» o «.» (non all'inizio né alla fine)."
+      },
+      "handleReserved": {
+        "title": "Nome utente riservato",
+        "body": "Questo nome (o una variante simile) è riservato, per esempio perché ricorda il team o è stato usato di recente. Scegline un altro."
+      },
+      "handleTaken": {
+        "title": "Nome utente già in uso",
+        "body": "Un altro membro usa già questo nome. Aggiungi un numero o una parola: «kaa_e_io», «gecko.lea»."
+      },
+      "mediaType": {
+        "title": "Formato della foto non accettato",
+        "body": "Invia una foto JPEG, PNG o WebP."
+      },
+      "mediaTooLarge": {
+        "title": "Foto troppo pesante",
+        "body": "Scegli una foto più leggera (al massimo 8 MB dopo la riduzione)."
+      },
+      "mediaInvalid": {
+        "title": "Foto illeggibile",
+        "body": "Non è stato possibile leggere questa foto. Scegline un'altra."
+      },
+      "mediaDimensions": {
+        "title": "Formato della foto insolito",
+        "body": "Questa foto è troppo allungata o troppo grande. Ritagliala e riprova."
+      },
+      "cannotReportOwn": {
+        "title": "È un tuo post",
+        "body": "Puoi eliminarlo tu stesso."
+      },
+      "cannotBlockSelf": {
+        "title": "Non puoi bloccare te stesso",
+        "body": "Questo profilo è il tuo."
+      },
+      "appealNotAllowed": {
+        "title": "Ricorso non possibile",
+        "body": "Per questa decisione è già stato fatto ricorso, oppure il termine di 6 mesi è scaduto."
+      },
+      "bodyRequired": {
+        "title": "Serve un testo",
+        "body": "Scrivi qualche parola prima di inviare."
+      },
+      "invalidParent": {
+        "title": "Impossibile rispondere",
+        "body": "Questo commento non è più visibile."
+      },
+      "notAuthor": {
+        "title": "Solo per chi ha fatto la domanda",
+        "body": "Solo chi ha fatto la domanda sceglie la risposta utile."
+      },
+      "notFound": {
+        "title": "Non trovato",
+        "body": "Questo contenuto è stato eliminato o nascosto, oppure il suo autore non è più visibile per te."
+      },
+      "forbidden": {
+        "title": "Azione non consentita",
+        "body": "Il tuo account non consente questa azione."
+      },
+      "generic": {
+        "title": "Si è verificato un problema",
+        "body": "Riprova tra un attimo. Se continua, scrivici."
+      }
+    },
+    "type": {
+      "PHOTO": "Foto",
+      "QUESTION": "Domanda",
+      "plural": {
+        "PHOTO": "Foto",
+        "QUESTION": "Domande"
+      }
+    },
+    "categories": {
+      "MAMMAL": "Mammiferi",
+      "BIRD": "Uccelli",
+      "REPTILE": "Rettili",
+      "FISH": "Pesci",
+      "AMPHIBIAN": "Anfibi",
+      "ARACHNID": "Aracnidi",
+      "INSECT": "Insetti",
+      "OTHER": "Altri animali"
+    },
+    "reasons": {
+      "SPAM": {
+        "label": "Spam o pubblicità",
+        "hint": "Vendita, promozione, messaggi ripetuti."
+      },
+      "HARASSMENT": {
+        "label": "Molestie o intimidazioni",
+        "hint": "Prese in giro mirate, insulti, accanimento."
+      },
+      "HATE": {
+        "label": "Incitamento all'odio",
+        "hint": "Attacca qualcuno per ciò che è."
+      },
+      "VIOLENCE": {
+        "label": "Violenza o minacce",
+        "hint": "Minacce, incitamento a fare del male."
+      },
+      "ANIMAL_WELFARE": {
+        "label": "Maltrattamento di animali",
+        "hint": "Animale sofferente, condizioni di vita pericolose."
+      },
+      "ILLEGAL_TRADE": {
+        "label": "Commercio illegale di animali",
+        "hint": "Specie protette, vendita senza autorizzazione."
+      },
+      "DANGEROUS_ADVICE": {
+        "label": "Consiglio pericoloso",
+        "hint": "Può mettere a rischio la salute di un animale."
+      },
+      "NUDITY": {
+        "label": "Contenuti sessuali o nudità",
+        "hint": "Immagini o frasi a sfondo sessuale."
+      },
+      "PERSONAL_DATA": {
+        "label": "Dati personali",
+        "hint": "Indirizzo, telefono o nome completo di una persona."
+      },
+      "IMPERSONATION": {
+        "label": "Furto d'identità",
+        "hint": "Si spaccia per qualcun altro o per il team."
+      },
+      "OTHER": {
+        "label": "Altra violazione delle regole",
+        "hint": "Spiega qui sotto qual è il problema."
+      }
+    },
+    "form": {
+      "charCount": "{count} / {max} caratteri"
+    },
+    "list": {
+      "more": "Mostra altro",
+      "auto": "Carica altro mentre scorro",
+      "end": "Sei in pari.",
+      "shown": "{count, plural, one {# elemento mostrato} other {# elementi mostrati}}"
+    },
+    "photo": {
+      "position": "Foto {n} di {total}",
+      "byAuthor": "Foto pubblicata da @{handle}",
+      "fallback": "Foto di un membro"
+    },
+    "card": {
+      "open": "apri il post",
+      "formerMember": "Ex membro",
+      "hidden": "Nascosto",
+      "likeLabel": "Mi piace ({count})",
+      "repliesLabel": "{count, plural, one {# risposta} other {# risposte}}",
+      "answered": "Risposta utile trovata",
+      "report": "Segnala questo post",
+      "reportShort": "Segnala"
+    },
+    "feed": {
+      "title": "Community",
+      "lead": "Le ultime foto e domande dei membri. Il libretto sanitario di ognuno resta privato.",
+      "publish": "Pubblica",
+      "filtersLabel": "Filtra il feed",
+      "typeLabel": "Mostra",
+      "allTypes": "Tutto",
+      "categoryLabel": "Specie",
+      "allCategories": "Tutte le specie",
+      "listLabel": "Post recenti",
+      "loading": "Caricamento del feed…",
+      "emptyTitle": "Il feed aspetta la sua prima foto",
+      "emptyBody": "Mostra il tuo animale o fai la domanda che ti frulla in testa: i membri rispondono qui.",
+      "emptyAction": "Pubblica una foto",
+      "emptyFilteredTitle": "Ancora niente qui",
+      "emptyFilteredBody": "Nessun post corrisponde a questi filtri. Allarga la ricerca o pubblica per primo.",
+      "resetFilters": "Vedi tutto il feed"
+    },
+    "aside": {
+      "label": "Il mio spazio nella community",
+      "linksLabel": "Pagine della community",
+      "myProfile": "Il mio profilo nella community",
+      "seePublicProfile": "Vedi il mio profilo pubblico",
+      "blocks": "Persone bloccate",
+      "decisions": "Decisioni e segnalazioni",
+      "moderation": "Coda di moderazione",
+      "joinTitle": "Scegli un nome utente e ci sei",
+      "joinBody": "Per pubblicare bastano un nome utente e l'accettazione delle regole. La tua e-mail non viene mai mostrata.",
+      "rulesTitle": "Le regole in breve",
+      "rule": {
+        "one": "Prima la gentilezza: si risponde alla domanda, non alla persona.",
+        "two": "Salute: un consiglio non sostituisce il veterinario. Nel dubbio, si indirizza da lui.",
+        "three": "Niente vendita di animali, niente dati personali, niente pubblicità."
+      },
+      "rulesLink": "Leggi le regole della community"
+    },
+    "post": {
+      "loading": "Caricamento del post…",
+      "backToFeed": "Torna al feed",
+      "notFoundTitle": "Post non trovato",
+      "notFoundBody": "È stato eliminato dal suo autore, nascosto dopo una verifica, oppure il suo autore non è più visibile per te.",
+      "hiddenTitle": "Post nascosto",
+      "hiddenBody": "Lo vedete solo tu e il team di moderazione. La decisione spiega il motivo e come contestarla.",
+      "delete": "Elimina il post",
+      "deleteTitle": "Eliminare questo post?",
+      "deleteBody": "Foto, risposte e mi piace spariscono con lui. L'operazione è definitiva."
+    },
+    "comments": {
+      "title": "{count, plural, one {# risposta} other {# risposte}}",
+      "answersTitle": "{count, plural, one {# risposta alla domanda} other {# risposte alla domanda}}",
+      "empty": "Ancora nessuna risposta. Una parola gentile fa sempre piacere.",
+      "emptyQuestion": "Nessuno ha ancora risposto. Se lo sai, condividi la tua esperienza.",
+      "label": "La tua risposta",
+      "answerLabel": "La tua risposta alla domanda",
+      "send": "Rispondi",
+      "sendReply": "Invia la risposta",
+      "reply": "Rispondi",
+      "replyTo": "Rispondi a @{handle}",
+      "repliesTo": "Risposte a @{handle}",
+      "more": "Mostra altre risposte",
+      "helpful": "Risposta utile",
+      "helpfulHint": "Una risposta ti è stata utile? Segnala che è utile: verrà messa in evidenza per chi arriva dopo.",
+      "markHelpful": "Segna come utile",
+      "unmarkHelpful": "Togli «utile»",
+      "report": "Segnala",
+      "delete": "Elimina",
+      "deleteTitle": "Eliminare questa risposta?",
+      "deleteBody": "Anche le risposte ricevute verranno eliminate. L'operazione è definitiva.",
+      "deleted": "Risposta eliminata"
+    },
+    "report": {
+      "titlePost": "Segnala questo post",
+      "titleComment": "Segnala questa risposta",
+      "intro": "Una persona del team esamina la tua segnalazione. L'autore non sa chi l'ha fatta.",
+      "reasonLabel": "Che cosa succede?",
+      "reasonMissing": "Scegli il motivo più vicino.",
+      "detailsLabel": "Dettagli (facoltativo)",
+      "submit": "Invia la segnalazione",
+      "sent": "Segnalazione inviata, ce ne occupiamo.",
+      "already": "Hai già segnalato questo contenuto: è in fase di verifica.",
+      "next": "Dopo diverse segnalazioni, il contenuto viene nascosto in attesa della decisione del team. Puoi anche bloccare l'autore dal suo profilo."
+    },
+    "compose": {
+      "title": "Nuovo post",
+      "lead": "Una foto del tuo animale o una domanda per altri appassionati.",
+      "typeLegend": "Che cosa vuoi condividere?",
+      "type": {
+        "PHOTO": {
+          "title": "Una foto",
+          "hint": "Da 1 a 4 foto, con una didascalia se vuoi."
+        },
+        "QUESTION": {
+          "title": "Una domanda",
+          "hint": "Un testo e una foto per mostrare cosa ti incuriosisce."
+        }
+      },
+      "photosLabel": "Foto (fino a {max})",
+      "questionPhotoLabel": "Foto (facoltativa)",
+      "addPhoto": "Aggiungi una foto",
+      "removePhoto": "Togli la foto {n}",
+      "previewAlt": "Anteprima della foto {n}",
+      "photoHint": "JPEG, PNG o WebP. Le foto vengono ridotte a 1600 px e private dei dati di posizione prima dell'invio.",
+      "converted": "Convertita da HEIC",
+      "preparing": "Preparazione della foto…",
+      "photosRequired": "Aggiungi almeno una foto, oppure scegli «Una domanda».",
+      "tooManyPhotos": "{max, plural, one {Qui è possibile una sola foto.} other {Al massimo # foto: le altre non sono state aggiunte.}}",
+      "unnamedPhoto": "Questa foto",
+      "photoError": {
+        "heic": "{name}: questo formato HEIC non può essere letto su questo dispositivo. Su iPhone scegli «Più compatibile» in Impostazioni › Fotocamera › Formati, oppure condividi la foto in JPEG.",
+        "type": "{name}: formato non accettato. Scegli una foto JPEG, PNG o WebP.",
+        "dimensions": "{name}: foto troppo allungata (panorama, screenshot molto lungo). Ritagliala e riprova.",
+        "tooLarge": "{name}: foto troppo pesante (al massimo 20 MB).",
+        "unreadable": "{name}: non è stato possibile leggere la foto. Scegline un'altra."
+      },
+      "captionLabel": "Didascalia",
+      "captionHint": "Facoltativa: il suo nome, il suo umore, la storia della foto.",
+      "questionLabel": "La tua domanda",
+      "questionHint": "Indica specie, età e cosa hai notato: le risposte saranno più precise.",
+      "bodyRequired": "Scrivi la tua domanda prima di pubblicare.",
+      "bodyTooLong": "Il testo supera i 2000 caratteri.",
+      "animalLabel": "Mostra uno dei miei animali",
+      "animalHint": "Facoltativo. Saranno visibili solo il nome e la specie.",
+      "noAnimal": "Nessun animale",
+      "animalVisible": "Visibile ai membri: {name}",
+      "animalPrivate": "Il suo libretto sanitario, le cure e gli appuntamenti restano privati.",
+      "categoryLabel": "Categoria",
+      "categoryHint": "Facoltativa: aiuta gli altri a trovare il tuo post.",
+      "categoryFromAnimal": "Facoltativa: altrimenti ricavata dalla specie del tuo animale.",
+      "noCategory": "Nessuna categoria",
+      "submit": "Pubblica",
+      "uploading": "Invio della foto {n} di {total}…",
+      "publishing": "Pubblicazione…",
+      "privacy": "I tuoi post sono visibili ai membri connessi. Puoi eliminarli quando vuoi, foto comprese."
+    },
+    "profile": {
+      "title": "Il mio profilo nella community",
+      "lead": "La tua identità pubblica: un nome utente e, se vuoi, un avatar. Mai la tua e-mail.",
+      "back": "Torna al mio profilo",
+      "activateTitle": "Crea il mio profilo pubblico",
+      "activateLead": "Scegli come ti vedranno gli altri membri. Potrai cambiare nome utente e avatar in seguito.",
+      "handleLabel": "Nome utente",
+      "handleHint": "Da 3 a 30 caratteri: lettere senza accenti, cifre, «_» o «.».",
+      "avatarLabel": "Avatar (facoltativo)",
+      "avatarHint": "Una foto del tuo animale va benissimo.",
+      "avatarChoose": "Scegli una foto",
+      "avatarChange": "Cambia avatar",
+      "avatarRemove": "Togli l'avatar",
+      "avatarPreview": "Anteprima dell'avatar",
+      "avatarSaved": "Avatar salvato",
+      "avatarRemoved": "Avatar tolto",
+      "avatarLater": "Profilo creato. Non è stato possibile inviare l'avatar: aggiungilo dal tuo profilo.",
+      "acceptRules": "Ho letto e accetto le regole della community",
+      "rulesVersion": "versione {version}",
+      "readRules": "Leggi le regole",
+      "rulesRequired": "Accetta le regole per creare il tuo profilo.",
+      "confirmAge": "Ho almeno 15 anni",
+      "ageRequired": "La community è aperta dai 15 anni.",
+      "activate": "Crea il mio profilo",
+      "visibleTitle": "Cosa vedranno i membri",
+      "visibleHandle": "Il tuo nome utente e la data di arrivo",
+      "visibleAvatar": "Il tuo avatar, se ne scegli uno",
+      "visiblePosts": "I tuoi post e le tue risposte",
+      "neverVisible": "Mai la tua e-mail né il libretto sanitario dei tuoi animali.",
+      "identityTitle": "Identità pubblica",
+      "saveHandle": "Salva il nome utente",
+      "handleSaved": "Nome utente salvato",
+      "memberSince": "Membro dal",
+      "rulesAcceptedOn": "Regole accettate il",
+      "rulesUpdatedTitle": "Nuova versione delle regole ({version})",
+      "rulesUpdatedBody": "Accettala per continuare a pubblicare, rispondere e mettere mi piace.",
+      "acceptNewRules": "Accetta le regole",
+      "rulesAccepted": "Regole accettate",
+      "seePublic": "Vedi il mio profilo pubblico",
+      "leaveTitle": "Lascia la community",
+      "leaveBody": "Il tuo profilo, i tuoi post, le risposte, i mi piace e le foto vengono eliminati. Il tuo account e i libretti dei tuoi animali restano intatti.",
+      "leave": "Lascia la community",
+      "leaveConfirmTitle": "Lasciare la community?",
+      "leaveConfirmBody": "Tutto ciò che hai pubblicato sparisce, foto comprese. L'operazione è definitiva.",
+      "dataNote": "I dati della community sono descritti nella nostra informativa sulla privacy.",
+      "privacyLink": "Privacy"
+    },
+    "member": {
+      "loading": "Caricamento del profilo…",
+      "notFoundTitle": "Profilo non trovato",
+      "notFoundBody": "Questo nome utente non esiste, è cambiato, oppure questo membro non è più visibile per te.",
+      "posts": "{count, plural, one {# post} other {# post}}",
+      "postsLabel": "Numero di post",
+      "since": "Membro dal {date}",
+      "edit": "Modifica il mio profilo",
+      "listLabel": "Post di @{handle}",
+      "emptyTitle": "Ancora nessun post",
+      "emptyBody": "Questo membro non ha ancora pubblicato nulla.",
+      "emptyMineTitle": "Il tuo primo post ti aspetta",
+      "emptyMineBody": "Una foto, una domanda: qui i membri conosceranno i tuoi animali."
+    },
+    "blocks": {
+      "title": "Persone bloccate",
+      "lead": "Non vedi più i loro post né le loro risposte, e loro non vedono più i tuoi. Non ricevono alcun avviso.",
+      "loading": "Caricamento…",
+      "emptyTitle": "Non hai bloccato nessuno",
+      "emptyBody": "Un membro ti infastidisce? Bloccalo dal suo profilo o da uno dei suoi post: non vi vedrete più a vicenda.",
+      "since": "Bloccato il {date}",
+      "unblock": "Sblocca",
+      "unblockHandle": "Sblocca @{handle}",
+      "unblocked": "@{handle} è stato sbloccato.",
+      "block": "Blocca",
+      "blockHandle": "Blocca @{handle}",
+      "confirmTitle": "Bloccare @{handle}?",
+      "confirmBody": "Non vedrai più i suoi post né le sue risposte, e lui non vedrà più i tuoi. Non riceve alcun avviso e puoi tornare indietro quando vuoi."
+    },
+    "decisions": {
+      "title": "Decisioni e segnalazioni",
+      "lead": "Le decisioni di moderazione sui tuoi contenuti o sul tuo account, con i motivi e la possibilità di contestarle.",
+      "loading": "Caricamento delle decisioni…",
+      "emptyTitle": "Nessuna decisione ti riguarda",
+      "emptyBody": "Se un tuo contenuto venisse nascosto o eliminato, qui troverai il motivo e come contestarlo.",
+      "appealOpen": "Ricorso possibile",
+      "backToList": "Tutte le decisioni",
+      "notFoundTitle": "Decisione non trovata",
+      "notFoundBody": "Questo link non corrisponde a nessuna decisione del tuo account. Controlla di aver effettuato l'accesso con l'account giusto.",
+      "detailLead": "Cosa è stato deciso, perché e come contestarlo.",
+      "statementTitle": "Motivazione",
+      "seeContent": "Vedi il contenuto interessato",
+      "facts": {
+        "date": "Data della decisione",
+        "reason": "Motivo",
+        "automated": "Decisione automatica",
+        "until": "Sospensione fino al",
+        "deadline": "Ricorso possibile fino al"
+      },
+      "automatedYes": "Sì: nascosto dopo diverse segnalazioni, in attesa della verifica di una persona",
+      "automatedNo": "No: decisione presa da una persona del team",
+      "appealTitle": "Il tuo ricorso",
+      "appealPendingBody": "Il tuo ricorso è nelle mani di una persona del team. Riceverai la risposta per e-mail.",
+      "appealFormTitle": "Contesta questa decisione",
+      "appealIntro": "Il ricorso è gratuito ed esaminato da una persona che non ha preso la decisione iniziale. Spiega cosa il team potrebbe aver frainteso.",
+      "appealLabel": "La tua spiegazione",
+      "appealTooShort": "Scrivi almeno {min} caratteri.",
+      "appealSubmit": "Invia il mio ricorso",
+      "appealSent": "Ricorso inviato",
+      "appealSentBody": "Ti risponderemo per e-mail. La risposta comparirà anche qui.",
+      "appealClosed": "Questa decisione non può più essere contestata nell'app (ricorso già fatto o termine di 6 mesi scaduto).",
+      "remediesTitle": "Le altre tue possibilità",
+      "remediesBody": "Puoi anche rivolgerti a un organismo certificato di risoluzione extragiudiziale delle controversie o al tribunale. Queste strade restano aperte qualunque sia l'esito del tuo ricorso.",
+      "contact": "Contatto della moderazione: {email}",
+      "titles": {
+        "AUTO_HIDE_POST": "Post nascosto dopo segnalazioni",
+        "AUTO_HIDE_COMMENT": "Risposta nascosta dopo segnalazioni",
+        "HIDE_POST": "Post nascosto",
+        "HIDE_COMMENT": "Risposta nascosta",
+        "RESTORE_POST": "Post ripristinato",
+        "RESTORE_COMMENT": "Risposta ripristinata",
+        "DELETE_POST": "Post eliminato",
+        "DELETE_COMMENT": "Risposta eliminata",
+        "SUSPEND_USER": "Pubblicazione sospesa",
+        "UNSUSPEND_USER": "Sospensione revocata",
+        "OTHER": "Decisione di moderazione"
+      },
+      "appealStatus": {
+        "PENDING": "Ricorso in esame",
+        "UPHELD": "Decisione confermata",
+        "REVERSED": "Decisione annullata"
+      }
+    },
+    "reports": {
+      "title": "Le mie segnalazioni",
+      "empty": "Non hai segnalato nulla. Grazie per tenere gli occhi aperti.",
+      "error": "Al momento non è possibile mostrare le tue segnalazioni.",
+      "seeContent": "Vedi il contenuto",
+      "status": {
+        "OPEN": "In esame",
+        "ACTIONED": "Provvedimento preso",
+        "DISMISSED": "Esaminata, senza seguito"
+      }
+    },
+    "rules": {
+      "title": "Regole della community",
+      "versionLabel": "Versione delle regole",
+      "lead": "Uno spazio per condividere l'amore per i nostri animali e aiutarci a vicenda. Queste regole lo mantengono piacevole per tutti.",
+      "items": {
+        "kind": {
+          "title": "Prima la gentilezza",
+          "body": "Si risponde alla domanda, non alla persona. Niente insulti, prese in giro mirate, molestie né discorsi d'odio."
+        },
+        "animals": {
+          "title": "Il benessere animale prima di tutto",
+          "body": "Nessuna immagine né consiglio che banalizzi la sofferenza di un animale. Dubbi sulle condizioni di vita? Segnalalo invece di discuterne."
+        },
+        "health": {
+          "title": "Un consiglio non sostituisce il veterinario",
+          "body": "Condividi la tua esperienza, cita le fonti e indirizza dal veterinario al minimo segnale preoccupante. I consigli pericolosi vengono rimossi."
+        },
+        "trade": {
+          "title": "Niente vendita né scambio di animali",
+          "body": "La community non è un mercato. Il commercio di specie protette è illegale e viene segnalato alle autorità."
+        },
+        "privacy": {
+          "title": "La privacy di ognuno",
+          "body": "Niente indirizzi, telefoni o nomi completi, né i tuoi né quelli degli altri. Controlla che nessuna foto mostri il tuo indirizzo."
+        },
+        "spam": {
+          "title": "Niente pubblicità",
+          "body": "Né promozioni né messaggi ripetuti. I link sono ammessi quando l'account ha 7 giorni."
+        },
+        "honest": {
+          "title": "Sii te stesso",
+          "body": "Un nome utente tuo, foto che hai il diritto di condividere e nessun altro dietro il profilo."
+        }
+      },
+      "processTitle": "Quando una regola non viene rispettata",
+      "process": {
+        "report": "Ogni membro può segnalare un contenuto. Dopo diverse segnalazioni viene nascosto, in attesa della verifica di una persona del team.",
+        "decision": "Ogni decisione (nascondere, eliminare, sospendere) ti viene spiegata per e-mail e nell'app, con il suo motivo.",
+        "appeal": "Puoi contestarla gratuitamente per 6 mesi: una persona riesamina il tuo caso e ti risponde."
+      }
+    },
+    "moderation": {
+      "title": "Moderazione",
+      "lead": "Segnalazioni, contenuti nascosti, ricorsi e registro. Ogni decisione richiede un motivo e una spiegazione, inviati all'autore.",
+      "loading": "Caricamento della coda…",
+      "forbiddenTitle": "Riservato al team di moderazione",
+      "forbiddenBody": "Questa pagina è aperta agli operatori con indirizzo e-mail verificato.",
+      "tabsLabel": "Code di moderazione",
+      "tabs": {
+        "queue": "Segnalazioni",
+        "hidden": "Nascosti",
+        "appeals": "Ricorsi",
+        "log": "Registro"
+      },
+      "target": {
+        "POST": "Post",
+        "COMMENT": "Risposta"
+      },
+      "status": {
+        "VISIBLE": "Visibile",
+        "HIDDEN_AUTO": "Nascosto automaticamente",
+        "HIDDEN_MODERATOR": "Nascosto dal team"
+      },
+      "openReports": "{count, plural, one {# segnalazione aperta} other {# segnalazioni aperte}}",
+      "firstReport": "Prima segnalazione il {date}",
+      "reasonsLabel": "Motivi delle segnalazioni",
+      "details": "{count, plural, one {Vedi il dettaglio di chi ha segnalato} other {Vedi i # dettagli di chi ha segnalato}}",
+      "imageAlt": "Immagine {n} del contenuto segnalato",
+      "openPost": "Apri il post",
+      "appealText": "Testo del ricorso",
+      "automated": "Automatica",
+      "by": "da @{handle}",
+      "byAutomation": "dall'oscuramento automatico",
+      "byTeam": "dal team",
+      "notNotified": "Notifica non inviata",
+      "queueEmptyTitle": "Nessuna segnalazione in attesa",
+      "queueEmptyBody": "La coda è vuota. Le nuove segnalazioni compariranno qui, dalla più vecchia alla più recente.",
+      "hiddenEmptyTitle": "Nessun contenuto nascosto",
+      "hiddenEmptyBody": "Qui compariranno i contenuti nascosti automaticamente o dal team.",
+      "appealsEmptyTitle": "Nessun ricorso in attesa",
+      "appealsEmptyBody": "I ricorsi dei membri compariranno qui, dal più vecchio al più recente.",
+      "logEmptyTitle": "Registro vuoto",
+      "logEmptyBody": "Ogni decisione, anche automatica, verrà registrata qui.",
+      "form": {
+        "reason": "Motivo",
+        "chooseReason": "Scegli un motivo",
+        "reasonRequired": "Scegli il motivo della decisione.",
+        "statement": "Motivazione",
+        "statementHint": "Inviata all'autore: qual è esattamente il problema.",
+        "statementTooShort": "Scrivi almeno {min} caratteri.",
+        "days": "Durata della sospensione (giorni)",
+        "daysHint": "Da 1 a {max} giorni.",
+        "daysRange": "Indica un numero di giorni tra 1 e {max}."
+      },
+      "actions": {
+        "hide": {
+          "short": "Nascondi",
+          "title": "Nascondi questo contenuto",
+          "body": "Solo il suo autore potrà vederlo. Le segnalazioni vengono chiuse e l'autore riceve la tua spiegazione.",
+          "confirm": "Nascondi"
+        },
+        "delete": {
+          "short": "Elimina",
+          "title": "Elimina definitivamente",
+          "body": "Il contenuto e le sue immagini vengono cancellati. Un ricorso non potrà ripristinarlo: riservalo ai contenuti chiaramente illeciti o gravi.",
+          "confirm": "Elimina"
+        },
+        "restore": {
+          "short": "Ripristina",
+          "title": "Ripristina questo contenuto",
+          "body": "Il contenuto torna visibile e non verrà più nascosto automaticamente. L'autore viene avvisato.",
+          "confirm": "Ripristina"
+        },
+        "dismiss": {
+          "short": "Archivia senza seguito",
+          "title": "Archivia le segnalazioni senza seguito",
+          "body": "Il contenuto resta visibile e non verrà più nascosto automaticamente. L'autore non viene avvisato.",
+          "confirm": "Archivia senza seguito"
+        },
+        "suspend": {
+          "short": "Sospendi l'autore",
+          "title": "Sospendi @{handle}",
+          "body": "Il membro può ancora leggere e mettere mi piace, ma non può più pubblicare, rispondere né cambiare nome utente o avatar.",
+          "confirm": "Sospendi"
+        },
+        "unsuspend": {
+          "short": "Revoca la sospensione",
+          "title": "Revoca la sospensione di @{handle}",
+          "body": "Il membro può di nuovo pubblicare. Viene avvisato.",
+          "confirm": "Revoca la sospensione"
+        },
+        "uphold": {
+          "short": "Conferma la decisione",
+          "title": "Conferma la decisione",
+          "body": "La decisione resta valida. Il membro riceve la tua risposta.",
+          "confirm": "Conferma"
+        },
+        "reverse": {
+          "short": "Annulla la decisione",
+          "title": "Annulla la decisione",
+          "body": "Il contenuto nascosto viene ripristinato o la sospensione revocata. Il membro riceve la tua risposta.",
+          "confirm": "Annulla la decisione"
+        }
+      },
+      "done": {
+        "hide": "Contenuto nascosto, autore avvisato",
+        "delete": "Contenuto eliminato, autore avvisato",
+        "restore": "Contenuto ripristinato",
+        "dismiss": "Segnalazioni archiviate",
+        "suspend": "Membro sospeso, avvisato per e-mail",
+        "unsuspend": "Sospensione revocata",
+        "uphold": "Decisione confermata, membro avvisato",
+        "reverse": "Decisione annullata, membro avvisato"
+      }
+    }
   }
 }

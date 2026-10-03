@@ -4,7 +4,7 @@
  * - `isNative()` : vrai seulement dans l'app Capacitor (iOS / Android).
  * - `openExternal(url)` : ouvre un lien dans le navigateur système (boutiques, sources : jamais dans la WebView).
  * - `tokenStorage` : stockage de session, Preferences sur natif + miroir localStorage, localStorage seul sur le web.
- * - `animalDetailPath` / `speciesPath` / `publicAnimalPath` : chemins des fiches selon la cible
+ * - `animalDetailPath` / `speciesPath` / `publicAnimalPath` / `communityPostPath`… : chemins des fiches selon la cible
  *   (routes dynamiques sur le web, routes à query `?id=` dans l'export statique mobile).
  */
 import { useMemo, useSyncExternalStore } from 'react';
@@ -138,6 +138,24 @@ export function speciesPath(id: string | number): string {
 /** Page publique (QR) : `/animal-public/<slug>` (web) ou `/animal-public?slug=<slug>` (app). */
 export function publicAnimalPath(slug: string): string {
   return IS_MOBILE_BUILD ? `/animal-public?slug=${enc(slug)}` : `/animal-public/${enc(slug)}`;
+}
+
+/** Publication de la communauté : `/communaute/publication/<id>` (web) ou `/communaute/publication?id=<id>` (app). */
+export function communityPostPath(id: string): string {
+  return IS_MOBILE_BUILD ? `/communaute/publication?id=${enc(id)}` : `/communaute/publication/${enc(id)}`;
+}
+
+/** Profil public d'un membre : `/communaute/u/<pseudo>` (web) ou `/communaute/u?handle=<pseudo>` (app). */
+export function communityProfilePath(handle: string): string {
+  return IS_MOBILE_BUILD ? `/communaute/u?handle=${enc(handle)}` : `/communaute/u/${enc(handle)}`;
+}
+
+/**
+ * Décision de modération me concernant (lien envoyé par e-mail) : `/communaute/decisions/<id>` (web)
+ * ou `/communaute/decisions?id=<id>` (app ; la page liste aussi les décisions sans `id`).
+ */
+export function communityDecisionPath(id: string): string {
+  return IS_MOBILE_BUILD ? `/communaute/decisions?id=${enc(id)}` : `/communaute/decisions/${enc(id)}`;
 }
 
 /**

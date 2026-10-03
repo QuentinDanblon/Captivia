@@ -70,13 +70,15 @@ const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {
     'Photos', 'Points', 'Restrictions', 'Routines', 'Type', 'Vaccinations',
     'Reptile', 'Bivalve', 'Animal', 'Biome', 'Sources', 'Tropical / Subtropical',
     'Urgent',
+    // Communauté : statut d'un contenu en modération, type de publication
+    'Visible', 'Question', 'Questions',
     // « point(s) » s'écrit de même en anglais (grade).
     '{count, plural, one {# point} other {# points}}',
     '{count, plural, one {+# point} other {+# points}}',
     // Fiches espèces (régime, matériel, crédit photo)
     'Carnivore', 'Herbivore', 'Insectivore', 'Omnivore', 'Cage', 'Filtration', 'Photo', 'Budget',
   ]),
-  es: new Set(['Email', 'Reptiles', 'Animal', 'Tropical / Subtropical']),
+  es: new Set(['Email', 'Reptiles', 'Animal', 'Tropical / Subtropical', 'Visible']),
   de: new Set(['Bronze', 'Diamant', 'Profil', 'Rang']),
   it: new Set(['Dose', 'Email', 'Facile', 'Habitat', 'Bivalve', 'Budget', 'Classe']),
   pt: new Set([

@@ -32,6 +32,8 @@ const SECURITY_HEADERS = securityHeaders({
   dev: !isProd,
   apiUrl: API_URL,
   sentryDsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  // Images de la communauté (bucket R2 public) ; absent : servies par l'API (pilote local).
+  mediaBaseUrl: process.env.NEXT_PUBLIC_MEDIA_BASE_URL,
 });
 
 /**
@@ -48,6 +50,20 @@ const webConfig: NextConfig = {
   reactCompiler: true,
   // Aucun composant next/image n'est utilisé : on évite l'optimiseur (sharp, remotePatterns).
   images: { unoptimized: true },
+  /**
+   * Notifications de modération (backend, `decisionUrl`) : liens `/community/decisions/<id>`, sans
+   * locale. La page vit sous `/communaute/decisions/<id>` : redirection permanente, locale gardée.
+   */
+  async redirects() {
+    return [
+      { source: '/community/decisions/:id', destination: '/communaute/decisions/:id', permanent: true },
+      {
+        source: '/:locale(en|es|de|it|pt)/community/decisions/:id',
+        destination: '/:locale/communaute/decisions/:id',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
