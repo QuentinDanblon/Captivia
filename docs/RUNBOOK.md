@@ -454,11 +454,14 @@ Volet désactivé tant que `COMMUNITY_ENABLED` n'est pas à `true` (toutes les r
 
 ### 9.1 Principes (règlement européen sur les services numériques, DSA)
 
-- **Signalement** (art. 16) : tout compte connecté, invité compris, motif dans une liste fermée (`SPAM`, `HARASSMENT`, `HATE`, `VIOLENCE`, `ANIMAL_WELFARE`, `ILLEGAL_TRADE`, `DANGEROUS_ADVICE`, `NUDITY`, `PERSONAL_DATA`, `IMPERSONATION`, `OTHER`), précisions facultatives ; un signalement par compte et par contenu.
-- **Masquage automatique** : au-delà de `COMMUNITY_HIDE_THRESHOLD` signalements distincts ouverts (défaut 3), le contenu passe en `HIDDEN_AUTO` et l'auteur est notifié (décision automatisée signalée comme telle). Un contenu déjà examiné par un opérateur (rétabli ou classé) n'est plus masqué automatiquement : seuls les opérateurs décident.
+- **Signalement** (art. 16) : tout compte connecté, invité compris, motif dans une liste fermée (`SPAM`, `HARASSMENT`, `HATE`, `VIOLENCE`, `ANIMAL_WELFARE`, `ILLEGAL_TRADE`, `DANGEROUS_ADVICE`, `NUDITY`, `PERSONAL_DATA`, `IMPERSONATION`, `OTHER`), précisions facultatives ; un signalement par compte et par contenu. Chaque signalement entre dans la file des opérateurs.
+- **Masquage automatique** : au-delà de `COMMUNITY_HIDE_THRESHOLD` signalements distincts ouverts (défaut 3) **émis par des membres établis** — compte non invité, e-mail vérifié, profil communautaire actif, compte d'au moins `COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS` jours (défaut 7) —, le contenu passe en `HIDDEN_AUTO` et l'auteur est notifié (décision automatisée signalée comme telle). Les signalements des invités et des comptes récents ne masquent jamais rien : ils attendent un opérateur. Un contenu déjà examiné par un opérateur (rétabli ou classé) n'est plus masqué automatiquement : seuls les opérateurs décident.
+- **Information des auteurs de signalements** (art. 16(5)) : à la clôture d'un signalement (masquage, suppression, rétablissement, classement), son auteur reçoit un e-mail (compte avec adresse) et retrouve le statut et la décision dans l'application (`GET /community/me/reports`, invités compris).
 - **Exposé des motifs** (art. 17) : toute décision défavorable (masquage, suppression, suspension) porte un motif de la liste et une explication rédigée ; l'auteur la reçoit par e-mail et la retrouve dans l'application (`GET /community/me/decisions`), avec le point de contact, le recours interne et la mention du règlement extrajudiciaire (art. 21) et de la voie judiciaire.
-- **Recours interne** (art. 20) : gratuit, pendant 6 mois, une fois par décision ; il est toujours tranché par un opérateur (jamais automatiquement).
+- **Recours interne** (art. 20) : gratuit, pendant 6 mois, une fois par décision ; il est toujours tranché par un opérateur (jamais automatiquement). Une décision dont le recours est en attente n'est jamais purgée.
 - **Journal** : chaque décision (y compris automatique, classement, rétablissement, issue d'un recours) est consignée dans `CommunityModerationAction`, conservée 365 jours (§6.5), sans lien vers un compte supprimé.
+- **Suspension** : portée par le compte (`User.communitySuspendedUntil`), pas par le profil. Un membre suspendu peut quitter la communauté (droit de partir) ; il ne peut pas réactiver de profil avant la fin de la suspension (403 `COMMUNITY_SUSPENDED`).
+- **Pseudos** : un pseudo abandonné (changement, départ, suppression du compte) reste réservé 60 jours à son ancien titulaire (`CommunityHandleHold`, anti-usurpation) ; les sosies des mots réservés (« adm1n », « m0derateur », « Captlvia ») sont refusés.
 
 ### 9.2 Traiter la file (opérateur, e-mail vérifié)
 
@@ -485,9 +488,11 @@ SELECT count(*) AS recours_en_attente FROM "CommunityModerationAction" WHERE "ap
 
 ### 9.3 Incidents
 
-- **Vague de spam** : baisser `COMMUNITY_POSTS_PER_HOUR` / `COMMUNITY_COMMENTS_PER_MINUTE` ou `COMMUNITY_HIDE_THRESHOLD` (Render, redéploiement), suspendre les comptes concernés. En dernier recours, `COMMUNITY_ENABLED=false` ferme tout le volet (404) sans perte de données.
-- **Image illicite** : `POST posts/:id/delete` efface aussi le fichier du bucket R2 ; vérifier son absence à son URL publique (le cache CDN peut la servir quelques minutes : purger l'URL dans Cloudflare si besoin).
-- **Notification non reçue** (e-mail) : la décision reste consultable dans l'application ; `notifiedAt` vide dans le journal signale un envoi en échec.
+- **Vague de spam** : baisser `COMMUNITY_POSTS_PER_HOUR` / `COMMUNITY_COMMENTS_PER_MINUTE` (Render, redéploiement), traiter la file, suspendre les comptes concernés. **Ne pas baisser `COMMUNITY_HIDE_THRESHOLD`** : un seuil bas permet à quelques comptes coordonnés de masquer n'importe quel contenu (abus des signalements) ; le seuil ne se relève qu'avec `COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS` (plus d'ancienneté exigée), jamais l'inverse. En dernier recours, `COMMUNITY_ENABLED=false` ferme tout le volet (404) sans perte de données.
+- **Campagne de signalements abusifs** (un contenu légitime masqué automatiquement) : `POST …/restore` (le contenu est protégé du masquage automatique), puis examiner les comptes signalants dans `GET queue` (précisions) et les suspendre si besoin.
+- **Image illicite** : `POST posts/:id/delete` efface le fichier du stockage ; l'URL publique répond ensuite 404. Les images sont servies avec `Cache-Control: public, max-age=86400` (24 h au plus dans les caches) : **purger l'URL dans le cache CDN Cloudflare** (Caching → Configuration → Custom Purge → URL) pour un retrait immédiat.
+- **Contenu masqué (pilote `s3`)** : le masquage retire le contenu des fils et de l'API, et l'image ne s'affiche plus dans l'application, mais l'objet reste dans le bucket sous sa clé aléatoire (non devinable, connue des seuls lecteurs antérieurs) et dans les caches jusqu'à 24 h. Pour un contenu illicite ou sensible, préférer `POST …/delete` (objet supprimé) puis purger l'URL dans Cloudflare. Avec le pilote `local`, l'image d'un contenu masqué répond 404 (sauf à son auteur et aux opérateurs authentifiés).
+- **Notification non reçue** (e-mail) : la décision reste consultable dans l'application (`GET /community/me/decisions`, `GET /community/me/reports`). Un envoi en échec est relancé chaque nuit par le job de maintenance pendant 7 jours (`notificationPending` vrai dans `CommunityModerationAction`, `notifiedAt` vide dans `CommunityReport`).
 
 ---
 
@@ -523,7 +528,8 @@ Aucune valeur secrète n'est notée ici. Sources : `render.yaml`, `netlify.toml`
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Dashboard (`sync: false`) | Web Push ; sans elles, l'envoi push est désactivé (journalisé) |
 | `COMMUNITY_ENABLED` | Dashboard (`sync: false`) | Défaut `false` : routes `/community/*` en 404 ; `true` exige `MEDIA_DRIVER=s3` en production (§9) |
 | `COMMUNITY_CONTACT_EMAIL` | Dashboard (`sync: false`) | Point de contact DSA cité dans les notifications de modération |
-| `COMMUNITY_HIDE_THRESHOLD`, `COMMUNITY_POSTS_PER_HOUR`, `COMMUNITY_COMMENTS_PER_MINUTE`, `COMMUNITY_UPLOADS_PER_HOUR` | Dashboard (`sync: false`) | Défauts 3, 5, 5, 30 |
+| `COMMUNITY_HIDE_THRESHOLD`, `COMMUNITY_POSTS_PER_HOUR`, `COMMUNITY_COMMENTS_PER_MINUTE`, `COMMUNITY_UPLOADS_PER_HOUR` | Dashboard (`sync: false`) | Défauts 3, 5, 5, 30 (ne pas baisser le seuil de masquage : §9.3) |
+| `COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS` | Dashboard (`sync: false`) | Défaut 7 : ancienneté minimale du compte pour qu'un signalement compte dans le seuil de masquage |
 | `MEDIA_DRIVER`, `MEDIA_MAX_BYTES`, `MEDIA_BUCKET`, `MEDIA_PUBLIC_BASE_URL` | Dashboard (`sync: false`) | Stockage des images (R2) : `docs/DEPLOY.md` |
 | `S3_ENDPOINT`, `S3_REGION`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_FORCE_PATH_STYLE` | Dashboard (`sync: false`) | Identifiants R2 (secret : jeton limité au bucket) |
 
