@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import SpeciesDetailPage from '@/app/[locale]/species/[id]/page';
+import SpeciesDetailPage from '@/app/[locale]/(app)/species/[id]/page';
 import { useQueryRouteParams } from '@/lib/platform';
 
 function SpeciesFromQuery() {

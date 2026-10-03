@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { cache } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
-import { routing } from '../../../../../i18n/routing';
+import { routing } from '../../../../../../i18n/routing';
 import { API_URL } from '@/lib/config';
-import { buildPageMetadata } from '@/lib/seo';
+import { buildPageMetadata, getSiteUrl, localizedPath } from '@/lib/seo';
 
 type Props = { children: ReactNode; params: Promise<{ locale: string; id: string }> };
 
@@ -13,10 +14,15 @@ const FETCH_TIMEOUT_MS = 3000;
 /** Les fiches changent rarement : cache de données Next.js de 24 h. */
 const REVALIDATE_SECONDS = 86400;
 
-type SpeciesLookup = { found: true; commonName?: string; scientificName?: string } | { found: false; missing: boolean };
+type SpeciesLookup =
+  | { found: true; commonName?: string; scientificName?: string; rank?: string }
+  | { found: false; missing: boolean };
 
-/** Nom de l'espèce via l'API publique GET /species/:id ; ne lève jamais d'exception. */
-async function fetchSpeciesNames(id: string): Promise<SpeciesLookup> {
+/**
+ * Nom de l'espèce via l'API publique GET /species/:id ; ne lève jamais d'exception.
+ * `cache` : un seul appel par requête pour les métadonnées et le JSON-LD.
+ */
+const fetchSpeciesNames = cache(async (id: string): Promise<SpeciesLookup> => {
   if (!/^\d+$/.test(id)) return { found: false, missing: true };
   try {
     const res = await fetch(`${API_URL}/species/${id}`, {
@@ -29,6 +35,7 @@ async function fetchSpeciesNames(id: string): Promise<SpeciesLookup> {
     const data = (await res.json()) as {
       scientificName?: unknown;
       canonicalName?: unknown;
+      rank?: unknown;
       profile?: { commonNameFr?: unknown; scientificName?: unknown };
     };
     const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim() : undefined);
@@ -36,11 +43,12 @@ async function fetchSpeciesNames(id: string): Promise<SpeciesLookup> {
       found: true,
       commonName: str(data.profile?.commonNameFr),
       scientificName: str(data.profile?.scientificName) ?? str(data.canonicalName) ?? str(data.scientificName),
+      rank: str(data.rank),
     };
   } catch {
     return { found: false, missing: false };
   }
-}
+});
 
 export async function generateMetadata({ params }: Pick<Props, 'params'>): Promise<Metadata> {
   const { locale, id } = await params;
@@ -75,6 +83,35 @@ export async function generateMetadata({ params }: Pick<Props, 'params'>): Promi
   });
 }
 
-export default function SpeciesLayout({ children }: Pick<Props, 'children'>) {
-  return children;
+/** Données structurées schema.org `Taxon` (nom scientifique, nom commun, rang, fiche GBIF). */
+function TaxonJsonLd({ locale, id, species }: { locale: string; id: string; species: Extract<SpeciesLookup, { found: true }> }) {
+  if (!species.scientificName) return null;
+  const gbif = Number(id) < 2_000_000_001;
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'Taxon',
+    name: species.scientificName,
+    ...(locale === 'fr' && species.commonName ? { alternateName: species.commonName } : {}),
+    ...(species.rank ? { taxonRank: species.rank.toLowerCase() } : {}),
+    url: `${getSiteUrl()}${localizedPath(locale, `/species/${id}`)}`,
+    ...(gbif ? { sameAs: `https://www.gbif.org/species/${id}` } : {}),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      // JSON sérialisé : « < » échappé pour qu'aucune valeur ne puisse fermer la balise <script>.
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }}
+    />
+  );
+}
+
+export default async function SpeciesLayout({ children, params }: Props) {
+  const { locale, id } = await params;
+  const species = hasLocale(routing.locales, locale) ? await fetchSpeciesNames(id) : null;
+  return (
+    <>
+      {species?.found ? <TaxonJsonLd locale={locale} id={id} species={species} /> : null}
+      {children}
+    </>
+  );
 }
