@@ -10,7 +10,8 @@ export interface EmptyStateProps {
   action?: ReactNode;
   /** Illustration au trait (silhouette d'animal…), décorative. Jamais d'icône dans un carré pastel. */
   illustration?: ReactNode;
-  headingLevel?: 2 | 3 | 4;
+  /** 1 quand l'état vide est toute la page (fiche introuvable). */
+  headingLevel?: 1 | 2 | 3 | 4;
   /** `inline` : version compacte dans une carte ; `page` : bloc d'une page vide. */
   size?: 'inline' | 'page';
   className?: string;

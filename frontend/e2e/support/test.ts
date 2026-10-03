@@ -49,5 +49,6 @@ export {
   TAKEN_EMAIL,
   fixture,
   type MockAnimal,
+  type MockAgendaItem,
 } from './mock-api';
 export { runAxe } from './axe';

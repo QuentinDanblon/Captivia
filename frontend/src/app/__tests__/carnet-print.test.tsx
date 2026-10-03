@@ -40,7 +40,7 @@ jest.mock('@/lib/carnet-share', () => ({
   shareCarnetFile: (...args: unknown[]) => shareCarnetFile(...args),
 }));
 
-import CarnetPrintPage from '../[locale]/mes-animaux/[id]/carnet/page';
+import CarnetPrintPage from '../[locale]/(app)/mes-animaux/[id]/carnet/page';
 
 const FUTURE = '2099-01-01T00:00:00.000Z';
 
@@ -141,8 +141,8 @@ describe('carnet imprimable', () => {
     const weights = screen.getByRole('heading', { name: 'animals.measurements.title' }).closest('section')!;
     const rows = within(weights).getAllByRole('row');
     expect(rows).toHaveLength(3);
-    expect(within(rows[1]).getByText('1.45')).toBeInTheDocument();
-    expect(within(rows[2]).getByText('1.2')).toBeInTheDocument();
+    expect(within(rows[1]).getByText('1,45')).toBeInTheDocument();
+    expect(within(rows[2]).getByText('1,2')).toBeInTheDocument();
 
     // RDV
     const appointments = screen.getByRole('heading', { name: 'animals.vetAppointments.title' }).closest('section')!;

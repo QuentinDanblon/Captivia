@@ -22,7 +22,7 @@ jest.mock('@/contexts/AuthContext', () => ({
 jest.mock('@/i18n/navigation', () => ({
   __esModule: true,
   useRouter: () => ({ push: jest.fn(), replace: jest.fn() }),
-  usePathname: () => '/mes-animaux',
+  usePathname: () => '/mes-animaux/liste',
   Link: ({ href, children, className }: { href: string; children: React.ReactNode; className?: string }) => (
     <a href={href} className={className}>
       {children}
@@ -30,7 +30,7 @@ jest.mock('@/i18n/navigation', () => ({
   ),
 }));
 
-import MyAnimalsPage from '../[locale]/mes-animaux/page';
+import MyAnimalsPage from '../[locale]/(app)/mes-animaux/liste/page';
 
 /** Revue frontend, constat 10 : plus de bouton ni de lien imbriqué dans le lien de la carte. */
 describe('mes-animaux : cartes', () => {

@@ -1,5 +1,5 @@
 import type { ElementType, ReactNode } from 'react';
-import Figure, { type PhotoCredit } from './Figure';
+import Figure, { type FigureRatio, type PhotoCredit } from './Figure';
 import MediaCard from './MediaCard';
 import type { SilhouetteKind } from './AnimalSilhouette';
 
@@ -14,8 +14,8 @@ export interface AnimalCardProps {
   name: string;
   /** Binôme latin de l'espèce. */
   latin?: string;
-  /** Photo de l'animal (crédit requis s'il ne s'agit pas d'une photo de l'utilisateur). */
-  photo?: { src: string; alt: string; credit: PhotoCredit };
+  /** Photo de l'animal : crédit requis, sauf pour la photo de l'utilisateur (`userPhoto`). */
+  photo?: { src: string; alt: string; credit: PhotoCredit } | { src: string; alt: string; userPhoto: true };
   /** Silhouette de repli (classe animale). */
   kind?: SilhouetteKind;
   /** Pastilles d'état (`TaskPill`, `Badge`, `PremiumBadge`). */
@@ -27,6 +27,12 @@ export interface AnimalCardProps {
   href?: string;
   linkAs?: ElementType;
   headingLevel?: 2 | 3 | 4;
+  /** Format de la vignette (défaut 4/3 ; 16/9 dans une colonne étroite du tableau de bord). */
+  ratio?: FigureRatio;
+  /** Attribut `sizes` de la photo (largeur de la carte dans la grille). */
+  sizes?: string;
+  /** Contenu libre sous les faits (soins du jour, alerte). */
+  children?: ReactNode;
   className?: string;
 }
 
@@ -52,12 +58,19 @@ export default function AnimalCard({
   href,
   linkAs,
   headingLevel = 3,
+  ratio = '4/3',
+  sizes,
+  children,
   className,
 }: AnimalCardProps) {
   const media = photo ? (
-    <Figure src={photo.src} alt={photo.alt} credit={photo.credit} ratio="4/3" fallbackKind={kind} />
+    'userPhoto' in photo ? (
+      <Figure src={photo.src} alt={photo.alt} userPhoto ratio={ratio} fallbackKind={kind} sizes={sizes} />
+    ) : (
+      <Figure src={photo.src} alt={photo.alt} credit={photo.credit} ratio={ratio} fallbackKind={kind} sizes={sizes} />
+    )
   ) : (
-    <Figure ratio="4/3" fallbackKind={kind} />
+    <Figure ratio={ratio} fallbackKind={kind} />
   );
 
   return (
@@ -88,6 +101,7 @@ export default function AnimalCard({
           ))}
         </dl>
       ) : null}
+      {children}
     </MediaCard>
   );
 }

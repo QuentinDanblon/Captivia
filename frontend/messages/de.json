@@ -275,6 +275,62 @@
       "invalid": "Einige Angaben sind ungültig. Bitte überprüfe das Formular.",
       "notFound": "Dieser Eintrag existiert nicht mehr. Bitte lade die Seite neu.",
       "unavailable": "Der Dienst ist vorübergehend nicht verfügbar. Bitte versuche es gleich noch einmal."
+    },
+    "list": {
+      "count": "{count, plural, =0 {Keine Tiere} one {# Tier} other {# Tiere}}",
+      "description": "Jedes Tier hat sein eigenes Pflegeheft, seine Erinnerungen und sein Artprofil.",
+      "emptyBenefit": "Fügen Sie Ihr erstes Tier hinzu: Pflegeheft, Erinnerungen und Richtwerte seiner Art sind in drei Schritten bereit.",
+      "routines": "{count, plural, one {# Routine} other {# Routinen}}"
+    },
+    "sheet": {
+      "loading": "Profil wird geöffnet…",
+      "back": "Zurück zu meinen Tieren",
+      "errorBenefit": "Das Profil wurde möglicherweise gelöscht, oder die Verbindung wurde unterbrochen.",
+      "breadcrumb": "Brotkrumennavigation",
+      "gbifLabel": "GBIF-Kennung der Art",
+      "summaryTitle": "Auf einen Blick",
+      "unknownValue": "Keine Angabe",
+      "bornOn": "Geburt: {date}",
+      "treatments": "Laufende Behandlung",
+      "noTreatment": "Keine",
+      "until": "bis {date}",
+      "nextVaccine": "Nächste Auffrischung",
+      "noVaccine": "Keine",
+      "sectionsNav": "In diesem Profil",
+      "speciesTitle": "Richtwerte der Art",
+      "timelineTitle": "Letzte Pflege, nächste Termine",
+      "timelineLabel": "Pflege-Zeitleiste von {name}",
+      "timelineEmpty": "Die Zeitleiste füllt sich mit dem Gewicht, den Impfungen und Terminen, die Sie unten eintragen.",
+      "kinds": {
+        "visit": "Tierarzttermin",
+        "vaccine": "Impfung",
+        "vaccineDue": "Auffrischimpfung",
+        "weighing": "Wiegen",
+        "health": "Gesundheitspass",
+        "treatmentStart": "Beginn der Behandlung",
+        "treatmentEnd": "Ende der Behandlung"
+      },
+      "actionsLabel": "Aktionen für {name}",
+      "weigh": "Wiegen",
+      "carnetShort": "Pass",
+      "carnetTitle": "Der Pass zum Mitnehmen",
+      "carnetText": "Identität, Impfungen, Behandlungen, Gewicht und Termine auf einer A4-Seite: zum Drucken oder als PDF für den Tierarzt.",
+      "openCarnet": "Druckbaren Pass öffnen",
+      "qrAlt": "QR-Code der öffentlichen Seite von {name}",
+      "medicationsBenefit": "Dosis, Häufigkeit, Enddatum: Captivia erinnert Sie zur geplanten Uhrzeit an jede Gabe.",
+      "measurementsBenefit": "Einmal im Monat wiegen reicht, um Gewichtsverlust vor den ersten Symptomen zu erkennen.",
+      "measurementsList": "Gewichtsverlauf",
+      "weightHint": "In Kilogramm: 250 g = 0,25.",
+      "vaccinationsBenefit": "Tragen Sie Datum und nächste Auffrischung ein: Captivia weist Sie einen Monat vorher darauf hin.",
+      "vetBenefit": "Datum und Tierarzt eintragen: Eine Erinnerung kommt 7 Tage vorher und am Vortag.",
+      "healthBenefit": "Operationen, Vorerkrankungen, besondere Ernährung: die Vorgeschichte, nach der Ihr Tierarzt fragen wird.",
+      "routinesBenefit": "Fütterung, Reinigung, UVB: Uhrzeit einmal festlegen, Captivia erinnert Sie danach.",
+      "breedingBenefit": "Brunst, Paarung, Geburt: Halten Sie die genauen Daten jedes Zyklus fest.",
+      "vaccineOverdue": "Auffrischung überfällig ({when})",
+      "vaccineDue": "Auffrischung {when}",
+      "routineName": "Name der Routine (optional)",
+      "dayOfMonth": "Tag des Monats (1-31)",
+      "everyHours": "Alle X Stunden (1-24)"
     }
   },
   "attribution": {
@@ -968,5 +1024,103 @@
     "welcomeTitle": "Willkommen bei Captivia",
     "welcomeText": "Starte jetzt, ohne E-Mail und Passwort: 1 Tier, sein Gesundheitsheft, Erinnerungen und Pflegekalender.",
     "welcomeLater": "Später"
+  },
+  "today": {
+    "title": "Heute",
+    "allDayShort": "Ganztägig",
+    "dateLabel": "Heutiges Datum",
+    "loading": "Ihr Tag wird vorbereitet…",
+    "loadError": "Ihre Tiere konnten nicht geladen werden. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
+    "pillDue": "{count, plural, one {Aufgabe heute} other {Aufgaben heute}}",
+    "pillOverdue": "{count, plural, one {überfällig} other {überfällig}}",
+    "pillAppointments": "{count, plural, one {Termin diese Woche} other {Termine diese Woche}}",
+    "alertsTitle": "Im Blick behalten",
+    "urgent": "Dringend",
+    "openSheet": "Profil von {name} öffnen",
+    "moreAlerts": "{count, plural, one {# weiterer Punkt} other {# weitere Punkte}} in den Profilen.",
+    "alerts": {
+      "vaccineOverdue": {
+        "title": "Auffrischimpfung überfällig: {subject}",
+        "body": "{name} — die Auffrischung war {when} fällig. Ein Anruf beim Tierarzt genügt, um sie neu zu planen."
+      },
+      "vaccineSoon": {
+        "title": "Auffrischimpfung {when}: {subject}",
+        "body": "{name} — am {date}. Jetzt ist ein guter Moment, einen Termin zu vereinbaren."
+      },
+      "treatment": {
+        "title": "Laufende Behandlung: {subject}",
+        "body": "{name} — bis {date}. Jede Gabe erscheint in der Zeitleiste."
+      },
+      "treatmentOpen": {
+        "title": "Laufende Behandlung: {subject}",
+        "body": "{name} — ohne Enddatum. Beenden Sie sie im Profil, sobald sie abgeschlossen ist."
+      },
+      "weighingOld": {
+        "title": "{name} zuletzt gewogen {when}",
+        "body": "Einmal im Monat wiegen reicht, um Gewichtsverlust vor den ersten Symptomen zu erkennen."
+      },
+      "weighingNone": {
+        "title": "Noch kein Gewicht für {name}",
+        "body": "Eine erste Messung ist der Ausgangswert, um das Wachstum zu verfolgen."
+      }
+    },
+    "timelineTitle": "Die nächsten 7 Tage",
+    "timelineLabel": "Pflege heute und in den nächsten 7 Tagen",
+    "fullAgenda": "Ganzer Kalender",
+    "timelineEmptyTitle": "Eine Woche ohne geplante Pflege",
+    "timelineEmptyBenefit": "Planen Sie eine Fütterung, ein Besprühen oder eine Behandlung: Captivia erinnert Sie am Tag selbst, zur geplanten Uhrzeit.",
+    "timelineEmptyAction": "Pflege planen",
+    "agendaError": "Die Pflege dieser Woche konnte nicht geladen werden.",
+    "status": {
+      "done": "Erledigt",
+      "due": "Zu tun",
+      "overdue": "Überfällig",
+      "planned": "Geplant",
+      "skipped": "Abgesagt"
+    },
+    "animalsTitle": "Ihre Tiere",
+    "allAnimals": "Alle Ihre Tiere",
+    "photoAlt": "{name}, Profilfoto",
+    "factWeight": "Letztes Wiegen",
+    "factNoWeight": "Noch nicht gewogen",
+    "factNextVisit": "Nächster Termin",
+    "factNoVisit": "Keiner geplant",
+    "factAge": "Alter",
+    "tipLabel": "Gut zu wissen",
+    "tipSource": "Artprofil {species}",
+    "tipPrevention": "{topic}: {text}",
+    "tipHabitat": "Halten Sie die Umgebung bei {temperature} und einer Luftfeuchtigkeit von {humidity}.",
+    "tipTemperature": "Empfohlene Temperatur der Umgebung: {temperature}.",
+    "tipHumidity": "Empfohlene Luftfeuchtigkeit der Umgebung: {humidity}.",
+    "routinesAdded": "{count, plural, one {# Pflege zum Pflegeheft hinzugefügt} other {# Pflegen zum Pflegeheft hinzugefügt}}"
+  },
+  "onboarding": {
+    "title": "Sein Pflegeheft in drei Schritten",
+    "text": "Wählen Sie die Art und geben Sie einen Namen: Captivia richtet die Grundpflege, die Erinnerungen und die wichtigsten Angaben aus dem Artprofil ein.",
+    "stepSpecies": "Art",
+    "stepIdentity": "Name und Geburt",
+    "stepCare": "Erste Pflege",
+    "stepsLabel": "Ihr Tier hinzufügen",
+    "progress": "Schritt {current} von {total}",
+    "speciesTitle": "Welche Art ist es?",
+    "speciesText": "Deutscher oder wissenschaftlicher Name: „Boa“, „Pogona“, „Nymphensittich“…",
+    "speciesHint": "Die Suche beginnt ab 2 Buchstaben.",
+    "searching": "Suche…",
+    "resultsLabel": "Gefundene Arten",
+    "speciesChosen": "Gewählte Art:",
+    "identityTitle": "Wie heißt es?",
+    "identityText": "Alles lässt sich später ändern. Art:",
+    "photoHint": "Oder die Adresse eines Fotos, das bereits online ist.",
+    "careTitle": "Die Grundpflege von {name}",
+    "careText": "Die für diese Art empfohlenen Routinen, bereits eingestellt. Haken Sie die gewünschten an: Captivia erinnert Sie pünktlich.",
+    "careCount": "{checked} von {total} ausgewählt",
+    "careLater": "Später",
+    "perksTitle": "Was Sie erwartet",
+    "perk1Title": "Jede Pflege pünktlich",
+    "perk1": "Fütterung, Besprühen, Behandlungen: eine Erinnerung im richtigen Moment und die Woche auf einen Blick.",
+    "perk2Title": "Ein vollständiger Gesundheitspass",
+    "perk2": "Gewicht, Impfungen, Termine: alles ist datiert, und der Pass lässt sich als PDF für den Tierarzt drucken.",
+    "perk3Title": "Die richtigen Richtwerte",
+    "perk3": "Temperatur, Futter, Warnzeichen: das Artprofil, mit Quellenangaben."
   }
 }

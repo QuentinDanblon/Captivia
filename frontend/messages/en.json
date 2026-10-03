@@ -275,6 +275,62 @@
       "invalid": "Some information is invalid. Please check the form.",
       "notFound": "This item no longer exists. Please reload the page.",
       "unavailable": "The service is temporarily unavailable. Please try again in a moment."
+    },
+    "list": {
+      "count": "{count, plural, =0 {No animals} one {# animal} other {# animals}}",
+      "description": "Each animal has its own care log, reminders and species profile.",
+      "emptyBenefit": "Add your first animal: their care log, reminders and species benchmarks are ready in three steps.",
+      "routines": "{count, plural, one {# care routine} other {# care routines}}"
+    },
+    "sheet": {
+      "loading": "Opening the profile…",
+      "back": "Back to my animals",
+      "errorBenefit": "The profile may have been deleted, or the connection was interrupted.",
+      "breadcrumb": "Breadcrumb",
+      "gbifLabel": "GBIF species identifier",
+      "summaryTitle": "At a glance",
+      "unknownValue": "Not specified",
+      "bornOn": "Born: {date}",
+      "treatments": "Ongoing treatment",
+      "noTreatment": "None",
+      "until": "until {date}",
+      "nextVaccine": "Next booster",
+      "noVaccine": "None",
+      "sectionsNav": "On this profile",
+      "speciesTitle": "Species benchmarks",
+      "timelineTitle": "Recent care, upcoming dates",
+      "timelineLabel": "{name}'s care timeline",
+      "timelineEmpty": "The timeline fills up with the weigh-ins, vaccines and appointments you add below.",
+      "kinds": {
+        "visit": "Vet appointment",
+        "vaccine": "Vaccine",
+        "vaccineDue": "Vaccine booster",
+        "weighing": "Weigh-in",
+        "health": "Health record",
+        "treatmentStart": "Treatment start",
+        "treatmentEnd": "Treatment end"
+      },
+      "actionsLabel": "Actions for {name}",
+      "weigh": "Weigh",
+      "carnetShort": "Record",
+      "carnetTitle": "A record to take along",
+      "carnetText": "Identity, vaccines, treatments, weigh-ins and appointments on one A4 page: print it or save it as a PDF for your vet.",
+      "openCarnet": "Open the printable record",
+      "qrAlt": "QR code for {name}'s public page",
+      "medicationsBenefit": "Dose, frequency, end date: Captivia reminds you of every dose at the scheduled time.",
+      "measurementsBenefit": "Weighing once a month is enough to spot weight loss before the first symptoms.",
+      "measurementsList": "Weigh-in history",
+      "weightHint": "In kilograms: 250 g = 0.25.",
+      "vaccinationsBenefit": "Log the date and the next booster: Captivia flags it a month ahead.",
+      "vetBenefit": "Add the date and the vet: a reminder arrives 7 days before, then the day before.",
+      "healthBenefit": "Surgery, medical history, special diet: the history your vet will ask for.",
+      "routinesBenefit": "Feeding, cleaning, UVB: set the time once and Captivia reminds you from then on.",
+      "breedingBenefit": "Heat, mating, births: keep the exact dates of every cycle.",
+      "vaccineOverdue": "Booster overdue ({when})",
+      "vaccineDue": "Booster {when}",
+      "routineName": "Routine name (optional)",
+      "dayOfMonth": "Day of the month (1-31)",
+      "everyHours": "Every X hours (1-24)"
     }
   },
   "attribution": {
@@ -968,5 +1024,103 @@
     "welcomeTitle": "Welcome to Captivia",
     "welcomeText": "Start now, no e-mail or password: 1 animal, its health record, reminders and care calendar.",
     "welcomeLater": "Later"
+  },
+  "today": {
+    "title": "Today",
+    "allDayShort": "All day",
+    "dateLabel": "Today's date",
+    "loading": "Getting your day ready…",
+    "loadError": "We couldn't load your animals. Check your connection, then try again.",
+    "pillDue": "{count, plural, one {task today} other {tasks today}}",
+    "pillOverdue": "{count, plural, one {overdue} other {overdue}}",
+    "pillAppointments": "{count, plural, one {appointment this week} other {appointments this week}}",
+    "alertsTitle": "Keep an eye on",
+    "urgent": "Urgent",
+    "openSheet": "Open {name}'s profile",
+    "moreAlerts": "{count, plural, one {# more thing to keep an eye on} other {# more things to keep an eye on}} in the profiles.",
+    "alerts": {
+      "vaccineOverdue": {
+        "title": "Vaccine booster overdue: {subject}",
+        "body": "{name} — the booster was due {when}. One call to the vet is enough to reschedule it."
+      },
+      "vaccineSoon": {
+        "title": "Vaccine booster {when}: {subject}",
+        "body": "{name} — on {date}. Now is a good time to book the appointment."
+      },
+      "treatment": {
+        "title": "Ongoing treatment: {subject}",
+        "body": "{name} — until {date}. Every dose shows up on the timeline."
+      },
+      "treatmentOpen": {
+        "title": "Ongoing treatment: {subject}",
+        "body": "{name} — no end date. Remember to stop it in the profile once it's finished."
+      },
+      "weighingOld": {
+        "title": "{name} was last weighed {when}",
+        "body": "Weighing once a month is enough to spot weight loss before the first symptoms."
+      },
+      "weighingNone": {
+        "title": "No weigh-in yet for {name}",
+        "body": "A first weigh-in gives you a baseline to follow their growth."
+      }
+    },
+    "timelineTitle": "The next 7 days",
+    "timelineLabel": "Care for today and the next 7 days",
+    "fullAgenda": "Full schedule",
+    "timelineEmptyTitle": "Nothing scheduled this week",
+    "timelineEmptyBenefit": "Schedule a feeding, a misting or a treatment: Captivia reminds you on the day, at the right time.",
+    "timelineEmptyAction": "Schedule a task",
+    "agendaError": "This week's care couldn't be loaded.",
+    "status": {
+      "done": "Done",
+      "due": "To do",
+      "overdue": "Overdue",
+      "planned": "Planned",
+      "skipped": "Cancelled"
+    },
+    "animalsTitle": "Your animals",
+    "allAnimals": "All your animals",
+    "photoAlt": "{name}, profile photo",
+    "factWeight": "Last weigh-in",
+    "factNoWeight": "Not weighed yet",
+    "factNextVisit": "Next appointment",
+    "factNoVisit": "None scheduled",
+    "factAge": "Age",
+    "tipLabel": "Good to know",
+    "tipSource": "{species} profile",
+    "tipPrevention": "{topic}: {text}",
+    "tipHabitat": "Keep their enclosure between {temperature}, with {humidity} humidity.",
+    "tipTemperature": "Recommended enclosure temperature: {temperature}.",
+    "tipHumidity": "Recommended enclosure humidity: {humidity}.",
+    "routinesAdded": "{count, plural, one {# routine added to their log} other {# routines added to their log}}"
+  },
+  "onboarding": {
+    "title": "Their care log, ready in three steps",
+    "text": "Pick their species and give them a name: Captivia sets up their basic care, their reminders and the key facts from their species profile.",
+    "stepSpecies": "Species",
+    "stepIdentity": "Name and birth",
+    "stepCare": "First care",
+    "stepsLabel": "Add your animal",
+    "progress": "Step {current} of {total}",
+    "speciesTitle": "What species are they?",
+    "speciesText": "Common or scientific name: “boa”, “Pogona”, “cockatiel”…",
+    "speciesHint": "Search starts after 2 letters.",
+    "searching": "Searching…",
+    "resultsLabel": "Matching species",
+    "speciesChosen": "Species:",
+    "identityTitle": "What's their name?",
+    "identityText": "You can change everything later. Species:",
+    "photoHint": "Or the address of a photo that's already online.",
+    "careTitle": "{name}'s basic care",
+    "careText": "The routines recommended for their species, already set up. Tick the ones to follow: Captivia reminds you on time.",
+    "careCount": "{checked} of {total} selected",
+    "careLater": "Later",
+    "perksTitle": "What you get",
+    "perk1Title": "Every task, on time",
+    "perk1": "Feeding, misting, treatments: a reminder at the right moment, and the whole week at a glance.",
+    "perk2Title": "A complete health record",
+    "perk2": "Weigh-ins, vaccines, vet visits: everything is dated, and the record prints as a PDF for your vet.",
+    "perk3Title": "The right benchmarks",
+    "perk3": "Temperature, diet, warning signs: their species profile, with its sources."
   }
 }

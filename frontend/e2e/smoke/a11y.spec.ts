@@ -17,7 +17,7 @@ const PUBLIC_PAGES = [
 ];
 
 /** Parcours authentifiés. */
-const PRIVATE_PAGES = ['/mes-animaux', '/mes-animaux/animal-e2e-1', '/parametres/compte'];
+const PRIVATE_PAGES = ['/mes-animaux', '/mes-animaux/liste', '/mes-animaux/animal-e2e-1', '/parametres/compte'];
 
 /** Rendu stable : le contenu principal de chaque page est présent avant l'analyse. */
 async function waitForContent(page: import('@playwright/test').Page) {

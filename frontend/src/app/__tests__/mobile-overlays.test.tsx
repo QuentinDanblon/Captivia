@@ -23,18 +23,18 @@ function makePage(label: string) {
     return null;
   };
 }
-jest.mock('@/app/[locale]/mes-animaux/[id]/page', () => ({ __esModule: true, default: makePage('animal') }));
+jest.mock('@/app/[locale]/(app)/mes-animaux/[id]/page', () => ({ __esModule: true, default: makePage('animal') }));
 jest.mock('@/app/[locale]/species/[id]/page', () => ({ __esModule: true, default: makePage('species') }));
 jest.mock('@/app/[locale]/animal-public/[slug]/page', () => ({ __esModule: true, default: makePage('public') }));
-jest.mock('@/app/[locale]/mes-animaux/[id]/carnet/CarnetPrintView', () => ({
+jest.mock('@/app/[locale]/(app)/mes-animaux/[id]/carnet/CarnetPrintView', () => ({
   __esModule: true,
   default: makePage('carnet'),
 }));
 
-import MobileAnimalDetailPage from '../../../mobile/app/[locale]/mes-animaux/detail/page';
+import MobileAnimalDetailPage from '../../../mobile/app/[locale]/(app)/mes-animaux/detail/page';
 import MobileSpeciesPage from '../../../mobile/app/[locale]/species/page';
 import MobilePublicAnimalPage from '../../../mobile/app/[locale]/animal-public/page';
-import MobileCarnetPage from '../../../mobile/app/[locale]/mes-animaux/carnet/page';
+import MobileCarnetPage from '../../../mobile/app/[locale]/(app)/mes-animaux/carnet/page';
 
 describe('overlays mobile : une fiche par id', () => {
   beforeEach(() => {

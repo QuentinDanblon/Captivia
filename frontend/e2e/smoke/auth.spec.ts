@@ -48,7 +48,7 @@ test.describe('Inscription', () => {
     await page.getByRole('button', { name: "S'inscrire" }).click();
 
     await expect(page).toHaveURL(/\/mes-animaux$/);
-    await expect(page.getByRole('heading', { level: 1, name: 'Mes animaux' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: "Aujourd'hui" })).toBeVisible();
 
     const [call] = api.callsTo('POST', '/auth/register');
     expect(call.body).toMatchObject({
@@ -84,7 +84,7 @@ test.describe('Connexion', () => {
     await page.getByRole('button', { name: 'Se connecter' }).click();
 
     await expect(page).toHaveURL(/\/mes-animaux$/);
-    await expect(page.getByRole('heading', { level: 1, name: 'Mes animaux' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: "Aujourd'hui" })).toBeVisible();
     expect(await page.evaluate(() => localStorage.getItem('token'))).toBe('e2e-login-token');
     expect(api.callsTo('POST', '/auth/login')[0].body).toMatchObject({ email: 'smoke@captivia.test' });
   });

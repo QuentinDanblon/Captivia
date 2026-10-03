@@ -275,6 +275,62 @@
       "invalid": "Algumas informações são inválidas. Verifica o formulário.",
       "notFound": "Este elemento já não existe. Recarrega a página.",
       "unavailable": "O serviço está temporariamente indisponível. Tenta novamente dentro de instantes."
+    },
+    "list": {
+      "count": "{count, plural, =0 {Nenhum animal} one {# animal} other {# animais}}",
+      "description": "Cada animal tem o seu caderno, os seus lembretes e a ficha da espécie.",
+      "emptyBenefit": "Adicione o seu primeiro animal: caderno, lembretes e referências da espécie ficam prontos em três passos.",
+      "routines": "{count, plural, one {# rotina} other {# rotinas}}"
+    },
+    "sheet": {
+      "loading": "A abrir a ficha…",
+      "back": "Voltar aos meus animais",
+      "errorBenefit": "A ficha pode ter sido eliminada, ou a ligação foi interrompida.",
+      "breadcrumb": "Trilho de navegação",
+      "gbifLabel": "Identificador GBIF da espécie",
+      "summaryTitle": "Em resumo",
+      "unknownValue": "Não indicado",
+      "bornOn": "Nascimento: {date}",
+      "treatments": "Tratamento em curso",
+      "noTreatment": "Nenhum",
+      "until": "até {date}",
+      "nextVaccine": "Próximo reforço",
+      "noVaccine": "Nenhum",
+      "sectionsNav": "Nesta ficha",
+      "speciesTitle": "Referências da espécie",
+      "timelineTitle": "Últimos cuidados, próximas datas",
+      "timelineLabel": "Linha do tempo dos cuidados de {name}",
+      "timelineEmpty": "A linha do tempo vai-se preenchendo com as pesagens, vacinas e consultas que adicionar abaixo.",
+      "kinds": {
+        "visit": "Consulta veterinária",
+        "vaccine": "Vacina",
+        "vaccineDue": "Reforço da vacina",
+        "weighing": "Pesagem",
+        "health": "Boletim de saúde",
+        "treatmentStart": "Início do tratamento",
+        "treatmentEnd": "Fim do tratamento"
+      },
+      "actionsLabel": "Ações para {name}",
+      "weigh": "Pesar",
+      "carnetShort": "Boletim",
+      "carnetTitle": "O boletim para levar",
+      "carnetText": "Identidade, vacinas, tratamentos, pesagens e consultas numa página A4: para imprimir ou guardar em PDF para o veterinário.",
+      "openCarnet": "Abrir o boletim para imprimir",
+      "qrAlt": "Código QR da página pública de {name}",
+      "medicationsBenefit": "Dose, frequência, data de fim: a Captivia lembra cada toma à hora prevista.",
+      "measurementsBenefit": "Uma pesagem por mês chega para detetar uma perda de peso antes dos primeiros sintomas.",
+      "measurementsList": "Histórico de pesagens",
+      "weightHint": "Em quilogramas: 250 g = 0,25.",
+      "vaccinationsBenefit": "Registe a data e o próximo reforço: a Captivia avisa-o com um mês de antecedência.",
+      "vetBenefit": "Adicione a data e o veterinário: recebe um lembrete 7 dias antes e outro na véspera.",
+      "healthBenefit": "Cirurgias, antecedentes, alimentação especial: o histórico que o veterinário lhe vai pedir.",
+      "routinesBenefit": "Refeições, limpeza, UVB: defina a hora uma vez e a Captivia lembra-o a partir daí.",
+      "breedingBenefit": "Cios, acasalamentos, nascimentos: guarde as datas exatas de cada ciclo.",
+      "vaccineOverdue": "Reforço em atraso ({when})",
+      "vaccineDue": "Reforço {when}",
+      "routineName": "Nome da rotina (opcional)",
+      "dayOfMonth": "Dia do mês (1-31)",
+      "everyHours": "A cada X horas (1-24)"
     }
   },
   "attribution": {
@@ -968,5 +1024,103 @@
     "welcomeTitle": "Bem-vindo ao Captivia",
     "welcomeText": "Comece agora, sem e-mail nem palavra-passe: 1 animal, o seu boletim de saúde, lembretes e agenda.",
     "welcomeLater": "Mais tarde"
+  },
+  "today": {
+    "title": "Hoje",
+    "allDayShort": "Todo o dia",
+    "dateLabel": "Data de hoje",
+    "loading": "A preparar o seu dia…",
+    "loadError": "Não foi possível carregar os seus animais. Verifique a ligação e tente novamente.",
+    "pillDue": "{count, plural, one {cuidado hoje} other {cuidados hoje}}",
+    "pillOverdue": "{count, plural, one {em atraso} other {em atraso}}",
+    "pillAppointments": "{count, plural, one {consulta esta semana} other {consultas esta semana}}",
+    "alertsTitle": "A acompanhar",
+    "urgent": "Urgente",
+    "openSheet": "Ver a ficha de {name}",
+    "moreAlerts": "{count, plural, one {Mais # ponto a acompanhar} other {Mais # pontos a acompanhar}} nas fichas.",
+    "alerts": {
+      "vaccineOverdue": {
+        "title": "Reforço da vacina em atraso: {subject}",
+        "body": "{name} — o reforço estava previsto {when}. Basta um telefonema ao veterinário para o reagendar."
+      },
+      "vaccineSoon": {
+        "title": "Reforço da vacina {when}: {subject}",
+        "body": "{name} — a {date}. É a altura certa para marcar a consulta."
+      },
+      "treatment": {
+        "title": "Tratamento em curso: {subject}",
+        "body": "{name} — até {date}. Cada toma aparece na linha do tempo."
+      },
+      "treatmentOpen": {
+        "title": "Tratamento em curso: {subject}",
+        "body": "{name} — sem data de fim. Lembre-se de o terminar na ficha quando acabar."
+      },
+      "weighingOld": {
+        "title": "Última pesagem de {name} {when}",
+        "body": "Uma pesagem por mês chega para detetar uma perda de peso antes dos primeiros sintomas."
+      },
+      "weighingNone": {
+        "title": "Ainda sem pesagem para {name}",
+        "body": "Uma primeira pesagem serve de referência para acompanhar o crescimento."
+      }
+    },
+    "timelineTitle": "Os próximos 7 dias",
+    "timelineLabel": "Cuidados de hoje e dos próximos 7 dias",
+    "fullAgenda": "Agenda completa",
+    "timelineEmptyTitle": "Uma semana sem cuidados agendados",
+    "timelineEmptyBenefit": "Agende uma refeição, uma nebulização ou um tratamento: a Captivia lembra-o no próprio dia, à hora prevista.",
+    "timelineEmptyAction": "Agendar um cuidado",
+    "agendaError": "Não foi possível carregar os cuidados da semana.",
+    "status": {
+      "done": "Feito",
+      "due": "Por fazer",
+      "overdue": "Em atraso",
+      "planned": "Previsto",
+      "skipped": "Cancelado"
+    },
+    "animalsTitle": "Os seus animais",
+    "allAnimals": "Todos os seus animais",
+    "photoAlt": "{name}, foto de perfil",
+    "factWeight": "Última pesagem",
+    "factNoWeight": "Ainda não pesado",
+    "factNextVisit": "Próxima consulta",
+    "factNoVisit": "Nenhuma agendada",
+    "factAge": "Idade",
+    "tipLabel": "Bom saber",
+    "tipSource": "Ficha {species}",
+    "tipPrevention": "{topic}: {text}",
+    "tipHabitat": "Mantenha o ambiente entre {temperature}, com uma humidade de {humidity}.",
+    "tipTemperature": "Temperatura recomendada para o ambiente: {temperature}.",
+    "tipHumidity": "Humidade recomendada para o ambiente: {humidity}.",
+    "routinesAdded": "{count, plural, one {# cuidado adicionado ao caderno} other {# cuidados adicionados ao caderno}}"
+  },
+  "onboarding": {
+    "title": "O caderno dele, pronto em três passos",
+    "text": "Escolha a espécie e dê-lhe um nome: a Captivia prepara os cuidados básicos, os lembretes e as referências da ficha da espécie.",
+    "stepSpecies": "Espécie",
+    "stepIdentity": "Nome e nascimento",
+    "stepCare": "Primeiros cuidados",
+    "stepsLabel": "Adicionar o seu animal",
+    "progress": "Passo {current} de {total}",
+    "speciesTitle": "Qual é a espécie?",
+    "speciesText": "O nome comum ou científico: «jiboia», «Pogona», «caturra»…",
+    "speciesHint": "A pesquisa começa a partir de 2 letras.",
+    "searching": "A pesquisar…",
+    "resultsLabel": "Espécies encontradas",
+    "speciesChosen": "Espécie escolhida:",
+    "identityTitle": "Como se chama?",
+    "identityText": "Pode alterar tudo mais tarde. Espécie:",
+    "photoHint": "Ou o endereço de uma foto já disponível online.",
+    "careTitle": "Os cuidados básicos de {name}",
+    "careText": "As rotinas recomendadas para a espécie, já configuradas. Assinale as que quer seguir: a Captivia lembra-o à hora certa.",
+    "careCount": "{checked} de {total} assinaladas",
+    "careLater": "Mais tarde",
+    "perksTitle": "O que o espera",
+    "perk1Title": "Cada cuidado, à hora certa",
+    "perk1": "Refeições, nebulização, tratamentos: um lembrete no momento certo e a semana num relance.",
+    "perk2Title": "Um boletim de saúde completo",
+    "perk2": "Pesagens, vacinas, consultas: tudo fica datado e o boletim imprime-se em PDF para o veterinário.",
+    "perk3Title": "As referências certas",
+    "perk3": "Temperatura, alimentação, sinais de alerta: a ficha da espécie, com as fontes."
   }
 }
