@@ -2,6 +2,7 @@
 
 import { Component, ErrorInfo, ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
+import Button from './Button';
 
 interface Props {
   children: ReactNode;
@@ -37,21 +38,15 @@ class ErrorBoundaryInner extends Component<InnerProps, State> {
     if (this.state.hasError) {
       if (this.props.fallback) return this.props.fallback;
 
+      // Message technique jamais affiché (même règle que `[locale]/error.tsx`) : constat, une action.
       return (
-        <div className="flex flex-col items-center justify-center min-h-[40vh] p-8 text-center">
-          <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-6 max-w-md">
-            <h2 className="text-lg font-semibold text-red-700 dark:text-red-400 mb-2">
-              {this.props.title}
-            </h2>
-            <p className="text-sm text-red-600 dark:text-red-300 mb-4">
-              {this.state.error?.message || this.props.unexpectedMessage}
-            </p>
-            <button
-              onClick={() => this.setState({ hasError: false, error: undefined })}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm"
-            >
+        <div role="alert" className="mx-auto my-8 grid max-w-xl gap-3 rounded-card border border-dashed border-line-strong px-6 py-8 shadow-[inset_3px_0_0_var(--danger)]">
+          <h2 className="m-0 text-h3 text-ink">{this.props.title}</h2>
+          <p className="m-0 text-body text-ink-2">{this.props.unexpectedMessage}</p>
+          <div className="pt-1">
+            <Button variant="secondary" size="sm" onClick={() => this.setState({ hasError: false, error: undefined })}>
               {this.props.retryLabel}
-            </button>
+            </Button>
           </div>
         </div>
       );

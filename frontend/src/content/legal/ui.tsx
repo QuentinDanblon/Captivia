@@ -26,18 +26,18 @@ export interface LegalContent {
 export type LegalDocKey = keyof LegalContent;
 
 export function P({ children }: { children: ReactNode }) {
-  return <p className="leading-relaxed">{children}</p>;
+  return <p className="m-0 max-w-prose leading-relaxed">{children}</p>;
 }
 
 export function UL({ children }: { children: ReactNode }) {
-  return <ul className="list-disc space-y-2 pl-5 leading-relaxed">{children}</ul>;
+  return <ul className="m-0 grid max-w-prose list-disc gap-2 pl-5 leading-relaxed marker:text-ink-3">{children}</ul>;
 }
 
 /** Valeur issue de `LEGAL` : un marqueur à compléter est mis en évidence. */
 export function Field({ value }: { value: string | number }) {
   if (isLegalMarker(value)) {
     return (
-      <mark className="rounded bg-amber-100 px-1 font-semibold text-amber-900 dark:bg-amber-900/60 dark:text-amber-100">
+      <mark className="rounded-control bg-warn-soft px-1 font-medium text-ink shadow-[inset_0_-1px_0_var(--warn)]">
         {value}
       </mark>
     );
@@ -46,7 +46,7 @@ export function Field({ value }: { value: string | number }) {
 }
 
 const linkClass =
-  'font-medium text-emerald-700 underline underline-offset-2 hover:text-emerald-800 dark:text-emerald-300 dark:hover:text-emerald-200';
+  'font-medium text-accent-text underline decoration-1 underline-offset-[0.18em] transition-colors hover:text-ink';
 
 /** Lien externe (nouvel onglet). */
 export function A({ href, children }: { href: string; children: ReactNode }) {
@@ -70,14 +70,14 @@ export function ILink({ locale, href, children }: { locale: string; href: string
 export function Table({ head, rows }: { head: string[]; rows: ReactNode[][] }) {
   return (
     <div>
-      <table className="w-full table-fixed border-collapse break-words text-left text-sm">
+      <table className="w-full table-fixed border-collapse break-words text-left text-ui">
         <thead>
           <tr>
             {head.map((h) => (
               <th
                 key={h}
                 scope="col"
-                className="border-b border-gray-300 py-2 pr-4 font-semibold text-gray-900 dark:border-gray-600 dark:text-white"
+                className="border-b border-ink py-2 pr-4 text-ui font-medium text-ink"
               >
                 {h}
               </th>
@@ -88,7 +88,7 @@ export function Table({ head, rows }: { head: string[]; rows: ReactNode[][] }) {
           {rows.map((row, i) => (
             <tr key={i} className="align-top">
               {row.map((cell, j) => (
-                <td key={j} className="border-b border-gray-200 py-2 pr-4 dark:border-gray-700">
+                <td key={j} className="border-b border-line py-2 pr-4">
                   {cell}
                 </td>
               ))}

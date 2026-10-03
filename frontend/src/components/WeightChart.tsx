@@ -15,7 +15,7 @@ interface WeightChartProps {
  * Courbe de poids (SVG maison) : une seule série, trait de 2 px à l'encre mousse, grille
  * horizontale en filet, graduations et dates en mono, dernière valeur étiquetée en bout de
  * courbe. Chaque point porte sa valeur (survol / lecteur d'écran) ; la liste des pesées sous la
- * courbe tient lieu de tableau. Couleurs par jetons : clair et sombre sans `dark:`.
+ * courbe tient lieu de tableau. Couleurs par jetons : clair et sombre sans variante Tailwind.
  */
 export default function WeightChart({ measurements }: WeightChartProps) {
   const t = useTranslations();

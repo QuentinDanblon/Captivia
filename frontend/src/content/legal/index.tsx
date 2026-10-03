@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { Alert, SectionHeader } from '@/components/ui';
 import { LEGAL, hasPendingLegalMarkers } from '@/lib/legal';
 import { buildEnContent } from './en';
 import { buildFrContent } from './fr';
@@ -26,83 +27,78 @@ export function legalMetadata(locale: string, key: LegalDocKey): Metadata {
   };
 }
 
-/** Rendu commun d'un document légal (Server Component, aucun état). */
+/**
+ * Rendu commun d'un document légal (Server Component, aucun état) : en-tête « planche »
+ * (`SectionHeader`), avertissements en `Alert`, sections numérotées en mono et sommaire en
+ * colonne collante à partir de 1024 px (même lecture que la fiche espèce).
+ */
 export async function LegalDocument({ locale, docKey }: { locale: string; docKey: LegalDocKey }) {
   const t = await getTranslations({ locale, namespace: 'legal' });
   const doc = getLegalContent(locale)[docKey];
   const fallback = isTranslationFallback(locale);
+  const pending = hasPendingLegalMarkers();
   const contentLang = locale === 'fr' ? 'fr' : 'en';
   const updated = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: 'UTC' }).format(
     new Date(`${LEGAL.lastUpdated}T00:00:00Z`),
   );
+  const number = (index: number) => String(index + 1).padStart(2, '0');
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <article
-        lang={contentLang}
-        className="mx-auto w-full min-w-0 max-w-3xl break-words px-4 py-8 text-gray-800 sm:px-6 sm:py-12 dark:text-gray-200"
-      >
-        <header className="mb-8 space-y-4">
-          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl dark:text-white">{doc.title}</h1>
-          <p className="text-sm text-gray-600 dark:text-gray-300" lang={locale}>
-            {t('lastUpdated', { date: updated })}
-          </p>
-          {fallback && (
-            <p
-              lang={locale}
-              className="rounded-lg border border-sky-200 bg-sky-50 p-3 text-sm text-sky-900 dark:border-sky-800 dark:bg-sky-950 dark:text-sky-100"
-            >
-              {t('englishFallback')}
-            </p>
-          )}
-          {hasPendingLegalMarkers() && (
-            <div
-              role="note"
-              lang={locale}
-              className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-100"
-            >
-              <p className="font-semibold">{t('reviewWarning')}</p>
-              <p>{t('pendingInfo')}</p>
+    <div className="cv-container py-8 sm:py-12">
+      <div className="grid gap-x-6 gap-y-8 lg:grid-cols-12">
+        <article lang={contentLang} className="min-w-0 break-words lg:col-span-8">
+          <SectionHeader title={doc.title} description={<span lang={locale}>{t('lastUpdated', { date: updated })}</span>} />
+
+          {fallback || pending ? (
+            <div className="mt-6 grid gap-3" lang={locale}>
+              {fallback ? <Alert severity="info" title={t('englishFallback')} /> : null}
+              {pending ? (
+                <div role="note">
+                  <Alert severity="warning" title={t('reviewWarning')}>
+                    {t('pendingInfo')}
+                  </Alert>
+                </div>
+              ) : null}
             </div>
-          )}
-        </header>
+          ) : null}
 
-        <nav
-          aria-label={t('tableOfContents')}
-          lang={locale}
-          className="mb-10 rounded-xl bg-white p-4 shadow-sm dark:bg-gray-800"
-        >
-          <p className="mb-2 font-semibold text-gray-900 dark:text-white">{t('tableOfContents')}</p>
-          <ol className="space-y-1 text-sm" lang={contentLang}>
-            {doc.sections.map((section) => (
-              <li key={section.id}>
-                <a
-                  href={`#${section.id}`}
-                  className="text-emerald-700 underline-offset-2 hover:underline dark:text-emerald-300"
-                >
-                  {section.title}
-                </a>
-              </li>
+          <div className="mt-10 grid gap-10 text-body text-ink">
+            {doc.sections.map((section, index) => (
+              <section key={section.id} id={section.id} aria-labelledby={`${section.id}-title`} className="grid scroll-mt-24 gap-3">
+                <h2 id={`${section.id}-title`} className="m-0 flex items-baseline gap-3 text-h3 text-ink">
+                  <span aria-hidden="true" className="font-mono text-meta font-normal text-ink-2">
+                    {number(index)}
+                  </span>
+                  <span>{section.title}</span>
+                </h2>
+                {section.body}
+              </section>
             ))}
-          </ol>
-        </nav>
+          </div>
+        </article>
 
-        <div className="space-y-10">
-          {doc.sections.map((section) => (
-            <section
-              key={section.id}
-              id={section.id}
-              aria-labelledby={`${section.id}-title`}
-              className="scroll-mt-24 space-y-3"
-            >
-              <h2 id={`${section.id}-title`} className="text-xl font-bold text-gray-900 sm:text-2xl dark:text-white">
-                {section.title}
-              </h2>
-              {section.body}
-            </section>
-          ))}
-        </div>
-      </article>
+        {/* Sommaire : au-dessus du texte en mobile, colonne collante en bureau. */}
+        <nav aria-label={t('tableOfContents')} lang={locale} className="-order-1 min-w-0 lg:order-none lg:col-span-4">
+          <div className="lg:sticky lg:top-24">
+            <p className="m-0 mb-2 text-meta text-ink-2">{t('tableOfContents')}</p>
+            <ol className="m-0 grid list-none border-t border-line p-0" lang={contentLang}>
+              {doc.sections.map((section, index) => (
+                <li key={section.id} className="border-b border-line">
+                  <a
+                    href={`#${section.id}`}
+                    className="grid min-h-11 grid-cols-[2rem_minmax(0,1fr)] items-center gap-x-2 py-2 text-ui text-ink no-underline transition-colors hover:text-accent-text"
+                  >
+                    <span aria-hidden="true" className="font-mono text-meta text-ink-2">
+                      {number(index)}
+                    </span>
+                    <span>{section.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }

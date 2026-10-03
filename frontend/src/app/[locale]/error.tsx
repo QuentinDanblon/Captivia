@@ -3,10 +3,12 @@
 import { useEffect } from 'react';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { Button, buttonClasses } from '@/components/ui';
 
 /**
  * Erreur de rendu d'un segment de route (rendue dans le layout [locale]).
  * Le message technique n'est jamais affiché : seul le `digest` sert de référence au support.
+ * Même cadre que la 404 (page de carnet en pointillés), filet brique à gauche.
  */
 export default function LocaleError({
   error,
@@ -26,33 +28,24 @@ export default function LocaleError({
   }, [error]);
 
   return (
-    <section
-      role="alert"
-      aria-labelledby="error-title"
-      className="mx-auto flex min-h-[60vh] max-w-xl flex-col items-center justify-center px-4 py-16 text-center"
-    >
-      <h1 id="error-title" className="text-2xl font-semibold text-[var(--captivia-ink)] sm:text-3xl">
-        {t('errorTitle')}
-      </h1>
-      <p className="mt-3 max-w-md text-base text-[var(--captivia-muted)]">{t('errorDescription')}</p>
-      {error.digest ? (
-        <p className="mt-2 font-mono text-xs text-[var(--captivia-muted)]">{t('reference', { digest: error.digest })}</p>
-      ) : null}
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <button
-          type="button"
-          onClick={() => reset()}
-          className="inline-flex items-center justify-center rounded-xl bg-[#067256] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#055a44] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#067256]"
-        >
-          {t('retry')}
-        </button>
-        <Link
-          href="/"
-          className="inline-flex items-center justify-center rounded-xl border border-[var(--captivia-border-strong)] px-6 py-3 text-sm font-semibold text-[var(--captivia-ink)] transition-colors hover:bg-[var(--captivia-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#067256]"
-        >
-          {t('backHome')}
-        </Link>
-      </div>
-    </section>
+    <div className="cv-container py-12 sm:py-20">
+      <section
+        role="alert"
+        aria-labelledby="error-title"
+        className="mx-auto grid max-w-3xl gap-3 rounded-card border border-dashed border-line-strong px-6 py-10 shadow-[inset_3px_0_0_var(--danger)] sm:px-12 sm:py-14"
+      >
+        <h1 id="error-title" className="m-0 text-h1 text-ink">
+          {t('errorTitle')}
+        </h1>
+        <p className="m-0 max-w-prose text-body text-ink-2">{t('errorDescription')}</p>
+        {error.digest ? <p className="m-0 font-mono text-meta text-ink-2">{t('reference', { digest: error.digest })}</p> : null}
+        <div className="flex flex-wrap items-center gap-3 pt-3">
+          <Button onClick={() => reset()}>{t('retry')}</Button>
+          <Link href="/" className={buttonClasses({ variant: 'secondary' })}>
+            {t('backHome')}
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }

@@ -3,7 +3,7 @@
 /**
  * Pièces communes des sections de la fiche animal : liste d'entrées datées, actions en icône,
  * formulaire en modale, confirmation de suppression, états « chargement / erreur / réservé ».
- * Tout passe par les composants `ui/` et les jetons (aucune couleur brute, aucun `dark:`).
+ * Tout passe par les composants `ui/` et les jetons (aucune couleur brute, aucune variante sombre Tailwind).
  */
 import type { FormEvent, ReactNode } from 'react';
 import { useTranslations } from 'next-intl';

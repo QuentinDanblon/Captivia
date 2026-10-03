@@ -27,16 +27,16 @@ export default function GlobalError({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Captivia</title>
         <style>{`
-          :root { color-scheme: light dark; --bg:#f4f7f2; --ink:#14252b; --muted:#53636a; --accent:#067256; --accent-hover:#055a44; --border:#bfd2c6; }
-          @media (prefers-color-scheme: dark) { :root { --bg:#0d1a20; --ink:#edf6f1; --muted:#a7b8ba; --border:#3c5963; } }
+          :root { color-scheme: light dark; --bg:#f6f3ec; --ink:#1d2b24; --muted:#5b655e; --accent:#2f5d46; --accent-hover:#234836; --on-accent:#fffdf8; --border:#8c8576; }
+          @media (prefers-color-scheme: dark) { :root { --bg:#121714; --ink:#ece8de; --muted:#a9b0a8; --accent:#8cc5a2; --accent-hover:#a9d6ba; --on-accent:#10201a; --border:#6b776f; } }
           body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; box-sizing:border-box; background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
           main { max-width:520px; text-align:center; }
-          h1 { margin:0 0 8px; font-size:1.6rem; }
+          h1 { margin:0 0 8px; font-family:Georgia,'Times New Roman',serif; font-weight:600; font-size:1.95rem; line-height:1.15; }
           p { margin:0 0 8px; color:var(--muted); line-height:1.5; }
-          .ref { font-family:ui-monospace,monospace; font-size:.75rem; }
+          .ref { font-family:ui-monospace,monospace; font-size:.8rem; }
           .actions { margin-top:24px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-          button, a.btn { font:inherit; font-weight:600; font-size:.9rem; padding:12px 24px; border-radius:12px; cursor:pointer; text-decoration:none; }
-          button { border:0; background:var(--accent); color:#fff; }
+          button, a.btn { font:inherit; font-weight:600; font-size:.9rem; min-height:44px; padding:10px 20px; border-radius:6px; box-sizing:border-box; cursor:pointer; text-decoration:none; }
+          button { border:0; background:var(--accent); color:var(--on-accent); }
           button:hover { background:var(--accent-hover); }
           a.btn { border:1px solid var(--border); color:var(--ink); }
           button:focus-visible, a.btn:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
@@ -48,7 +48,7 @@ export default function GlobalError({
             Une erreur est survenue <span lang="en">/ Something went wrong</span>
           </h1>
           <p>
-            Un problème inattendu s&apos;est produit. Veuillez réessayer.
+            Un problème inattendu s&apos;est produit. Réessayez dans un instant.
           </p>
           <p lang="en">An unexpected problem occurred. Please try again.</p>
           {error.digest ? <p className="ref">Ref: {error.digest}</p> : null}
