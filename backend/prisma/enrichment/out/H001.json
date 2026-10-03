@@ -1,0 +1,305 @@
+[
+ {
+  "speciesId": 2422905,
+  "habitat": null
+ },
+ {
+  "speciesId": 2424454,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Grillons, vers de terre et blattes",
+     "frequency": "tous les jours si le repas est composé d'insectes",
+     "notes": "Base de l'alimentation"
+    },
+    {
+     "name": "Souriceaux (pinkies)",
+     "frequency": "occasionnelle (friandise)",
+     "notes": "Seulement en friandise : riches en graisses"
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Souriceaux (pinkies) en aliment régulier",
+     "reason": "Très gras : ils font rapidement prendre un excès de poids à la grenouille."
+    },
+    {
+     "name": "Animaux plus petits que la grenouille (y compris d'autres grenouilles) hébergés avec elle",
+     "reason": "Une grenouille cornue essaiera de les manger."
+    }
+   ],
+   "mealFrequency": "daily",
+   "specificNeeds": "Compléter l'alimentation avec un supplément de calcium et un multivitamine adaptés aux grenouilles.",
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://resources.pangovet.com/pet-breeds/frogs/pacman-frog",
+     "title": "Pacman Frog: Info, Pictures, Care Sheet - The Vet Desk"
+    },
+    {
+     "type": "guide",
+     "url": "https://reptile.guide/pacman-frog/",
+     "title": "Pacman Frog Care Sheet - Reptile Guide"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2424499,
+  "feeding": null,
+  "habitat": null
+ },
+ {
+  "speciesId": 2427573,
+  "habitat": null
+ },
+ {
+  "speciesId": 2429295,
+  "habitat": null
+ },
+ {
+  "speciesId": 2431776,
+  "habitat": null
+ },
+ {
+  "speciesId": 2431886,
+  "health": {
+   "diseases": [
+    {
+     "name": "Chytridiomycose",
+     "symptoms": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+     "prevention": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Saprolegniose",
+     "symptoms": "Croissance blanchâtre, cotonneuse sur la peau, typiquement sur une ancienne lésion ; léthargie, détresse respiratoire, anorexie.",
+     "prevention": "La perte du mucus protecteur causée par des irritants chimiques (désinfectants, savons, détergents), des pics d'ammoniaque et la malnutrition (surtout la carence en vitamine A) peut favoriser la maladie.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+     "symptoms": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+     "prevention": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians",
+     "title": "Infectious Diseases of Amphibians - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 5,
+   "tempMax": 25,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "À titre indicatif, un aquarium de 120 x 40 x 30 cm convient pour 3 couples ; la taille dépend du nombre d'animaux.",
+   "lightNeeds": "Pas d'éclairage fort nécessaire : mousses et plantes qui n'exigent pas une forte lumière conviennent dans l'aquarium.",
+   "activityEnrichment": "Caches en pierres et en bois, qui servent aussi à sortir de l'eau.",
+   "hygieneNotes": null,
+   "costEstimate": "faible",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://salamanderland.com/articles/articles-caresheets/triturus-marmoratus",
+     "title": "Triturus marmoratus - Care-sheet - Salamanderland"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5216573,
+  "behavior": {
+   "generalBehavior": "Grenouille terrestre et nocturne qui chasse à l'affût ; elle passe l'essentiel de son temps enterrée dans son substrat en attendant une proie.",
+   "sociability": "semi-grégaire",
+   "difficultyLevel": "débutant",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": "Plusieurs grenouilles tomates peuvent cohabiter (au moins 10 gallons par individu) ; les mâles peuvent se battre en période de reproduction.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptile.guide/tomato-frog/",
+     "title": "Tomato Frog Care Sheet - Reptile Guide"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique",
+     "symptoms": "Os fins et fragiles, léthargie, perte d'appétit, déformations de croissance.",
+     "prevention": "Donner des insectes riches en calcium (gavés) ou saupoudrer les proies de poudre de calcium.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Déshydratation",
+     "symptoms": "Si l'habitat se dessèche, la grenouille se déshydrate très vite, en quelques heures.",
+     "prevention": "Vérifier chaque jour l'humidité et l'humidité du substrat.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Exposition aux produits chimiques",
+     "symptoms": null,
+     "prevention": "Se laver les mains avant de manipuler la grenouille et remplir sa gamelle d'eau déchlorée ; ne pas donner d'insectes sauvages (risque d'insecticides).",
+     "whenToConsult": null
+    },
+    {
+     "name": "Infections fongiques",
+     "symptoms": null,
+     "prevention": "Changer le substrat et nettoyer l'enclos chaque mois ; éviter que la litière devienne marécageuse.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptile.guide/tomato-frog/",
+     "title": "Tomato Frog Care Sheet - Reptile Guide"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 18.3,
+   "tempMax": 26.7,
+   "humidityMin": 65.0,
+   "humidityMax": 80.0,
+   "minSpaceSize": "Terrarium de 10 gallons minimum par grenouille (20 x 10 x 12 pouces).",
+   "lightNeeds": "Éclairage complémentaire non obligatoire ; un éclairage UVB est probablement bénéfique.",
+   "activityEnrichment": "Cachettes variées : demi-bûches, rochers, grottes, liège, litière de feuilles, fausses plantes et autres décors bas adaptés aux amphibiens.",
+   "hygieneNotes": "Utiliser de l'eau déchlorée, car les amphibiens absorbent l'eau par la peau.",
+   "costEstimate": "faible",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptile.guide/tomato-frog/",
+     "title": "Tomato Frog Care Sheet - Reptile Guide"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5216933,
+  "health": {
+   "diseases": [
+    {
+     "name": "Chytridiomycose",
+     "symptoms": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+     "prevention": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+     "symptoms": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+     "prevention": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Mycobactériose",
+     "symptoms": "Nodules gris ou ulcérations de la peau et des organes ; l'animal peut bien manger tout en maigrissant.",
+     "prevention": "Les amphibiens captifs affaiblis, gardés en surpopulation ou dans des conditions insalubres sont les plus sensibles.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians",
+     "title": "Infectious Diseases of Amphibians - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 15.6,
+   "tempMax": 27.8,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Terrarium d'au moins 36 x 18 x 18 pouces (50 gallons) pour un crapaud.",
+   "lightNeeds": "UVB non indispensable à sa survie mais recommandé.",
+   "activityEnrichment": "Litière de feuilles, bois de mopani, écorce de liège, roches, plantes vivantes ou artificielles, cachettes et grottes préfabriquées, ornements artificiels.",
+   "hygieneNotes": "Prévoir un bac d'eau assez grand pour que le crapaud puisse s'y asseoir.",
+   "costEstimate": "faible",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/amphibian-care/cane-toad-care-sheet",
+     "title": "Cane Toad Care Sheet - DubiaRoaches.com"
+    },
+    {
+     "type": "guide",
+     "url": "https://thevetdesk.com/pet-health-wellness/amphibians/how-to-take-care-of-a-toad/",
+     "title": "How to Take Care of a Toad - The Vet Desk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5217160,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 10,
+   "tempMax": 22,
+   "humidityMin": 50.0,
+   "humidityMax": 70.0,
+   "minSpaceSize": "Terrarium en verre ou en plastique d'au moins 90 cm de long pour un crapaud adulte.",
+   "lightNeeds": "Pas d'UVB indispensable (espèce nocturne), mais une ampoule UVB de faible puissance peut être bénéfique.",
+   "activityEnrichment": "Écorce, rondelles de liège, roches et plantes vivantes ou artificielles pour recréer un milieu naturel.",
+   "hygieneNotes": null,
+   "costEstimate": "faible",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://vetverified.com/articles/keeping-common-toads-as-pets-a-comprehensive-guide",
+     "title": "Keeping Common Toads as Pets - VetVerified"
+    },
+    {
+     "type": "guide",
+     "url": "https://thevetdesk.com/pet-health-wellness/amphibians/how-to-take-care-of-a-toad/",
+     "title": "How to Take Care of a Toad - The Vet Desk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5217264,
+  "behavior": null,
+  "health": {
+   "diseases": [
+    {
+     "name": "Chytridiomycose",
+     "symptoms": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+     "prevention": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+     "symptoms": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+     "prevention": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Rhabdiase (vers pulmonaires Rhabdias)",
+     "symptoms": "Animal anorexique, maigre et affaibli ; la mort brutale n'est pas rare.",
+     "prevention": "Une excellente hygiène est essentielle : retirer régulièrement les mues, les fèces, les restes de nourriture et les cadavres de l'enclos.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians",
+     "title": "Infectious Diseases of Amphibians - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "reproduction": null,
+  "habitat": null
+ }
+]

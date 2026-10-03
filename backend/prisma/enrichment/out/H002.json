@@ -1,0 +1,471 @@
+[
+ {
+  "speciesId": 5218022,
+  "feeding": {
+   "dietType": "insectivore",
+   "recommendedFoods": [
+    {
+     "name": "Drosophiles aptères (mouches des fruits)",
+     "frequency": "",
+     "notes": "Aliment de base recommandé"
+    },
+    {
+     "name": "Petits grillons",
+     "frequency": "",
+     "notes": "Seulement s'ils sont assez petits pour la grenouille"
+    },
+    {
+     "name": "Autres petites proies : grillons « pinhead », bruches, collemboles, cloportes, pucerons, tribolium, larves de fausse teigne, vers « phoenix »",
+     "frequency": "",
+     "notes": "Saupoudrer chaque proie de vitamines/minéraux"
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Grillons devenus trop gros",
+     "reason": "Ils grandissent vite et deviennent trop gros pour la grenouille."
+    },
+    {
+     "name": "Proies de plus de 1/8 de pouce de long",
+     "reason": "Les D. auratus préfèrent les proies plus petites."
+    },
+    {
+     "name": "Insectes morts ou immobiles",
+     "reason": "Elle ne mange que de petits insectes vivants."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptilesmagazine.com/?p=982",
+     "title": "Poison Dart Frog Care Sheet - Reptiles Magazine"
+    },
+    {
+     "type": "guide",
+     "url": "https://joshsfrogs.com/care-sheet/dendrobates-auratus-costa-rican-green-and-black",
+     "title": "Dendrobates auratus Care Sheet - Josh's Frogs"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Chytridiomycose",
+     "symptoms": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+     "prevention": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+     "symptoms": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+     "prevention": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Rhabdiase (vers pulmonaires Rhabdias)",
+     "symptoms": "Animal anorexique, maigre et affaibli ; la mort brutale n'est pas rare.",
+     "prevention": "Une excellente hygiène est essentielle : retirer régulièrement les mues, les fèces, les restes de nourriture et les cadavres de l'enclos.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians",
+     "title": "Infectious Diseases of Amphibians - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 22,
+   "tempMax": 27,
+   "humidityMin": 80,
+   "humidityMax": 100,
+   "minSpaceSize": "Terrarium de 20 gallons (75 L) très planté pour une à quatre grenouilles.",
+   "lightNeeds": "Éclairage de faible intensité, à spectre complet, pour une bonne absorption du calcium alimentaire.",
+   "activityEnrichment": "Plantes et barrières visuelles, une ou deux branches disposées en diagonale.",
+   "hygieneNotes": "Laisser reposer l'eau chlorée 24 à 48 heures en récipient ouvert pour que le chlore se dissipe.",
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/",
+     "title": "Basic Information Sheet: Poison Dart Frog - LafeberVet"
+    },
+    {
+     "type": "shop",
+     "url": "https://joshsfrogs.com/sp/dendrobates-auratus-nicaraguan-green-black-green-and-black-poison-dart-frog-captive-bred-5-8-dart007",
+     "title": "Dendrobates auratus - Josh's Frogs"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5784980,
+  "behavior": null,
+  "habitat": null
+ },
+ {
+  "speciesId": 104013399,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Grillons gavés",
+     "frequency": "jeunes : plusieurs fois par semaine ; adultes : un repas par semaine",
+     "notes": null
+    },
+    {
+     "name": "Crevettes, poisson, rongeurs adaptés, vers de terre, vers de cire, vers à soie",
+     "frequency": "friandises espacées",
+     "notes": "Riches en graisses"
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Congénères hébergés ensemble",
+     "reason": "Elle se nourrit de tout ce qui bouge, y compris d'autres C. cranwelli : il vaut mieux les loger séparément."
+    },
+    {
+     "name": "Aliments gras en excès (crevettes, poisson, rongeurs, vers de cire...)",
+     "reason": "Ils sont généralement riches en graisses : à espacer dans le calendrier d'alimentation."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": "Gaver les grillons avec des légumes frais et un aliment du commerce, et saupoudrer les proies d'un supplément vitamines/minéraux, surtout chez les jeunes.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptilesmagazine.com/listings/frog-amphibians-information-news/chacoan-horned-frog/",
+     "title": "Chacoan Horned Frog - Reptiles Magazine"
+    },
+    {
+     "type": "guide",
+     "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/",
+     "title": "Perfecting Pacman Frog Care - Exotics Keeper Magazine"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": "En milieu naturel, la reproduction a lieu après de fortes pluies.",
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": 1000,
+   "litterSizeMax": 2000,
+   "sexualMaturityMonths": 24,
+   "breedingDifficulty": "avance",
+   "notes": "Les œufs éclosent généralement en moins de 4 jours ; les adultes mangent la ponte (à isoler immédiatement) et les têtards sont très cannibales.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/",
+     "title": "Perfecting Pacman Frog Care - Exotics Keeper Magazine"
+    }
+   ]
+  },
+  "habitat": null
+ },
+ {
+  "speciesId": 104015330,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 20,
+   "tempMax": 27,
+   "humidityMin": 80,
+   "humidityMax": 90,
+   "minSpaceSize": "Au moins 10 gallons d'espace par grenouille.",
+   "lightNeeds": "Cycle lumineux naturel 12 h/12 h avec une LED à spectre complet.",
+   "activityEnrichment": "Sol couvert surtout de litière de feuilles stérilisée, avec un peu de mousse vivante par endroits.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://frogdaddy.net/blogs/dendroknow/dendrobates-tinctorius-care-sheet",
+     "title": "Dendrobates tinctorius Care Sheet - Frog Daddy"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.neherpetoculture.com/tinctoriuscaresheet",
+     "title": "Tinctorius Care Sheet - NE Herpetoculture"
+    },
+    {
+     "type": "shop",
+     "url": "https://joshsfrogs.com/sp/dendrobates-tinctorius-regina-dart041",
+     "title": "Dendrobates tinctorius - Josh's Frogs"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104020622,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 21.1,
+   "tempMax": 26.7,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Terrarium de 15 à 20 gallons, même pour une seule rainette.",
+   "lightNeeds": "Éclairage UVB nécessaire pour absorber la vitamine D et le calcium.",
+   "activityEnrichment": "Plantes à larges feuilles, branches et substrat pour grimper et se reposer.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://resources.pangovet.com/pet-breeds/frogs/red-eyed-tree-frog",
+     "title": "Red-Eyed Tree Frog - The Vet Desk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104040409,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Vers de terre",
+     "frequency": "",
+     "notes": null
+    },
+    {
+     "name": "Larves de mouche soldat noire et vers de vase (bloodworms)",
+     "frequency": "",
+     "notes": null
+    },
+    {
+     "name": "Aliment commercial adapté (type Tetra ReptoMin)",
+     "frequency": "en rotation",
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Poissons contenant de la thiaminase",
+     "reason": "Le guide d'élevage conseille de les éviter."
+    },
+    {
+     "name": "Foie de bœuf et autres aliments « naturels » de ce type",
+     "reason": "Risque de contamination bactérienne et d'hypervitaminose A."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet",
+     "title": "African Clawed Frog Care Sheet - DubiaRoaches.com"
+    },
+    {
+     "type": "guide",
+     "url": "https://wiki.xenbase.org/xenwiki/index.php/Xenopus_tropicalis_and_Xenopus_laevis_environmental_parameter_standard_operating_procedure_(Kroll_lab)",
+     "title": "Xenopus husbandry SOP - Xenbase wiki"
+    }
+   ]
+  },
+  "behavior": {
+   "generalBehavior": "Grenouille aquatique surtout nocturne : l'alimentation et l'essentiel de l'activité de reproduction ont lieu après la tombée de la nuit.",
+   "sociability": "solitaire",
+   "difficultyLevel": "débutant",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": "Cohabitation déconseillée : l'espèce est cannibale.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet",
+     "title": "African Clawed Frog Care Sheet - DubiaRoaches.com"
+    },
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/African_clawed_frog",
+     "title": "African clawed frog - Wikipedia"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 20,
+   "tempMax": 22.2,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Aquarium de 10 gallons minimum pour une grenouille (20 x 10 x 10 pouces), eau pas plus profonde d'environ 12 pouces.",
+   "lightNeeds": "UVB non indispensable à la survie, mais recommandé.",
+   "activityEnrichment": "Bois de mopani, plantes vivantes ou artificielles, cachettes/grottes, ornements artificiels ; éviter tout objet en métal (toxique) et prévoir des zones couvertes pour se retirer.",
+   "hygieneNotes": "Traiter toute eau ajoutée avec un déchlorant pour ne pas introduire de produits chimiques nocifs.",
+   "costEstimate": "faible",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet",
+     "title": "African Clawed Frog Care Sheet - DubiaRoaches.com"
+    },
+    {
+     "type": "guide",
+     "url": "https://thevetdesk.com/pet-lifestyle/frogs/pet-frog-cost/",
+     "title": "How Much Does a Pet Frog Cost? - The Vet Desk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104040736,
+  "behavior": {
+   "generalBehavior": "Amphibien docile qui se garde au mieux en petits groupes de 4 à 8 animaux.",
+   "sociability": "grégaire",
+   "difficultyLevel": "débutant",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": "Se garde en petits groupes de 4 à 8 individus de la même espèce.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis",
+     "title": "Bombina orientalis - Exo Terra care guide"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 22,
+   "tempMax": 26,
+   "humidityMin": 50,
+   "humidityMax": 70,
+   "minSpaceSize": "Au moins 10 gallons pour un seul crapaud.",
+   "lightNeeds": "Pas d'UVB spécifique indispensable, mais une bonne source de lumière pour encourager le comportement diurne.",
+   "activityEnrichment": "Plantes aquatiques, mousse humide et éventuellement une petite île flottante pour se reposer.",
+   "hygieneNotes": null,
+   "costEstimate": "faible",
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad",
+     "title": "Oriental Fire-Bellied Toad - The Vet Desk"
+    },
+    {
+     "type": "guide",
+     "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis",
+     "title": "Bombina orientalis - Exo Terra care guide"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104041498,
+  "feeding": null,
+  "behavior": null,
+  "reproduction": null,
+  "habitat": null
+ },
+ {
+  "speciesId": 104044141,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Asticots et vers de terre",
+     "frequency": "",
+     "notes": "Adultes ; tout ce qui peut entrer dans leur bouche"
+    },
+    {
+     "name": "Artemia, tubifex, larves de chironome (vers de vase), daphnies, cyclops, vers blancs (juvéniles et larves)",
+     "frequency": "",
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Lanières de viande crue maigre non mangées",
+     "reason": "À retirer immédiatement si elles ne sont pas mangées."
+    },
+    {
+     "name": "Vers blancs comme seul aliment des jeunes",
+     "reason": "Plus la nourriture est rouge, plus le ventre est rouge ; chez les jeunes nourris uniquement de vers blancs, il reste jaune pâle."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://caudata.org/cc/species/Triturus/T_alpestris.shtml",
+     "title": "Ichthyosaura alpestris - Caudata Culture species entry"
+    }
+   ]
+  },
+  "behavior": {
+   "generalBehavior": "Vie en alternant une phase aquatique (l'essentiel du temps chez l'adulte) et une phase terrestre (juvéniles ou hors période de reproduction).",
+   "sociability": "solitaire",
+   "difficultyLevel": "intermédiaire",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": "Ce ne sont pas des animaux sociaux, mais ils peuvent être gardés en groupe si l'espace est suffisant.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://vetverified.com/articles/the-complete-guide-to-caring-for-an-alpine-newt",
+     "title": "The Complete Guide to Caring for an Alpine Newt - VetVerified"
+    }
+   ]
+  },
+  "habitat": null
+ },
+ {
+  "speciesId": 165617687,
+  "feeding": null,
+  "behavior": null,
+  "health": {
+   "diseases": [
+    {
+     "name": "Chytridiomycose",
+     "symptoms": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+     "prevention": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Saprolegniose",
+     "symptoms": "Croissance blanchâtre, cotonneuse sur la peau, typiquement sur une ancienne lésion ; léthargie, détresse respiratoire, anorexie.",
+     "prevention": "La perte du mucus protecteur causée par des irritants chimiques (désinfectants, savons, détergents), des pics d'ammoniaque et la malnutrition (surtout la carence en vitamine A) peut favoriser la maladie.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+     "symptoms": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+     "prevention": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians",
+     "title": "Infectious Diseases of Amphibians - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": null
+ },
+ {
+  "speciesId": 2153441,
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": 400,
+   "litterSizeMax": 800,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": "Maturité très lente : mâles en 4 à 7 ans, femelles en 8 à 12 ans.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.thetarantulacollective.com/caresheets/brachypelmaauratum",
+     "title": "Mexican Flame Knee Tarantula - The Tarantula Collective"
+    }
+   ]
+  },
+  "habitat": null
+ }
+]
