@@ -5,23 +5,21 @@ import type { SpeciesEquipmentData } from './types';
 
 export default function SpeciesEquipmentTab({ speciesEquipment }: { speciesEquipment: SpeciesEquipmentData | null }) {
   const t = useTranslations();
+  const items = speciesEquipment?.recommendations ?? [];
+  if (items.length === 0) return <p className="m-0 text-body text-ink-2">{t('common.noData')}</p>;
   return (
-    <div className="space-y-3">
-      {speciesEquipment?.recommendations && speciesEquipment.recommendations.length > 0 ? (
-        <div className="space-y-3">
-          {speciesEquipment.recommendations.map((equipment, idx: number) => (
-            <div key={idx} className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
-              <p className="font-semibold text-gray-800 dark:text-white">{equipment.label}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {equipment.category}
-                {equipment.size && ` - ${equipment.size}`}
-              </p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-500 dark:text-gray-400">{t('common.noData')}</p>
-      )}
-    </div>
+    <ul className="m-0 grid list-none divide-y divide-line p-0">
+      {items.map((equipment, idx) => (
+        <li key={idx} className="flex flex-wrap items-baseline justify-between gap-x-4 py-2.5 first:pt-0 last:pb-0">
+          <span className="font-medium text-ink">{equipment.label}</span>
+          {equipment.category || equipment.size ? (
+            <span className="text-ui text-ink-2">
+              {equipment.category}
+              {equipment.size ? <span className="font-mono"> · {equipment.size}</span> : null}
+            </span>
+          ) : null}
+        </li>
+      ))}
+    </ul>
   );
 }

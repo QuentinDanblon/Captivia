@@ -2,67 +2,85 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { countryName } from '@/lib/country';
+import { Badge } from '@/components/ui';
 import type { SpeciesLegislationData } from './types';
 
 export default function SpeciesLegislationTab({ speciesLegislation }: { speciesLegislation: SpeciesLegislationData | null }) {
   const t = useTranslations();
   const locale = useLocale();
+  const items = speciesLegislation?.editorial ?? [];
+  if (items.length === 0) return <p className="m-0 text-body text-ink-2">{t('species.noLegalData')}</p>;
+
   return (
-    <div className="space-y-4">
-      {speciesLegislation?.editorial && speciesLegislation.editorial.length > 0 ? (
-        speciesLegislation.editorial.map((item) => (
-          <div key={item.country} className="p-4 rounded-xl bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="font-semibold text-gray-800 dark:text-white">
-                {countryName(item.country, locale)}
-              </span>
-              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                item.status === 'allowed' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
-                item.status === 'prohibited' ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200' :
-                'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-              }`}>
-                {item.status === 'allowed' ? t('species.allowed') : item.status === 'prohibited' ? t('species.prohibited') : t('species.permitRequired')}
-              </span>
-            </div>
-            {item.details?.citesAppendix && (
-              <p className="text-sm text-gray-700 dark:text-gray-300"><strong>CITES:</strong> {t('species.annex', { value: item.details.citesAppendix })}</p>
-            )}
-            {item.details?.euAnnex && (
-              <p className="text-sm text-gray-700 dark:text-gray-300"><strong>{t('species.euAnnexLabel')}</strong> {item.details.euAnnex}</p>
-            )}
-            {item.details?.permits && item.details.permits.length > 0 && (
-              <div className="text-sm mt-1">
-                <strong>{t('species.permits')} :</strong>
-                <ul className="list-disc list-inside mt-0.5">
-                  {item.details.permits.map((permit: string, idx: number) => (
-                    <li key={idx}>{permit}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {item.details?.restrictions && item.details.restrictions.length > 0 && (
-              <div className="text-sm mt-1">
-                <strong>{t('species.restrictions')} :</strong>
-                <ul className="list-disc list-inside mt-0.5">
-                  {item.details.restrictions.map((restriction: string, idx: number) => (
-                    <li key={idx}>{restriction}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {item.sources && item.sources.length > 0 && (
-              <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-600">
-                <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{t('species.sources')}</p>
-                {item.sources.slice(0, 2).map((src: string, idx: number) => (
-                  <a key={idx} href={src.startsWith('http') ? src : '#'} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-600 hover:underline break-all block">{src}</a>
-                ))}
-              </div>
-            )}
+    <ul className="m-0 grid list-none divide-y divide-line p-0">
+      {items.map((item) => (
+        <li key={item.country} className="grid gap-2 py-3 first:pt-0 last:pb-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="m-0 font-sans text-body font-semibold text-ink">{countryName(item.country, locale)}</h3>
+            <Badge tone={item.status === 'allowed' ? 'ok' : item.status === 'prohibited' ? 'danger' : 'warn'} dot>
+              {item.status === 'allowed'
+                ? t('species.allowed')
+                : item.status === 'prohibited'
+                  ? t('species.prohibited')
+                  : t('species.permitRequired')}
+            </Badge>
           </div>
-        ))
-      ) : (
-        <p className="text-gray-500 dark:text-gray-400">{t('species.noLegalData')}</p>
-      )}
-    </div>
+          <dl className="m-0 grid gap-1 text-ui sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-4">
+            {item.details?.citesAppendix ? (
+              <>
+                <dt className="text-ink-2">CITES</dt>
+                <dd className="m-0 font-mono text-ink">{t('species.annex', { value: item.details.citesAppendix })}</dd>
+              </>
+            ) : null}
+            {item.details?.euAnnex ? (
+              <>
+                <dt className="text-ink-2">{t('species.euAnnexLabel')}</dt>
+                <dd className="m-0 font-mono text-ink">{item.details.euAnnex}</dd>
+              </>
+            ) : null}
+            {item.details?.permits && item.details.permits.length > 0 ? (
+              <>
+                <dt className="text-ink-2">{t('species.permits')}</dt>
+                <dd className="m-0 text-ink">
+                  <ul className="m-0 grid list-disc gap-0.5 pl-5">
+                    {item.details.permits.map((permit, idx) => (
+                      <li key={idx}>{permit}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </>
+            ) : null}
+            {item.details?.restrictions && item.details.restrictions.length > 0 ? (
+              <>
+                <dt className="text-ink-2">{t('species.restrictions')}</dt>
+                <dd className="m-0 text-ink">
+                  <ul className="m-0 grid list-disc gap-0.5 pl-5">
+                    {item.details.restrictions.map((restriction, idx) => (
+                      <li key={idx}>{restriction}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </>
+            ) : null}
+          </dl>
+          {item.sources && item.sources.length > 0 ? (
+            <p className="m-0 grid gap-0.5 border-t border-dotted border-line pt-2 font-mono text-meta text-ink-2">
+              <span>{t('species.sources')}</span>
+              {item.sources.slice(0, 2).map((src, idx) =>
+                src.startsWith('http') ? (
+                  <a key={idx} href={src} target="_blank" rel="noopener noreferrer" className="break-all text-accent-text underline decoration-1 underline-offset-2">
+                    {src}
+                  </a>
+                ) : (
+                  <span key={idx} className="break-all">
+                    {src}
+                  </span>
+                ),
+              )}
+            </p>
+          ) : null}
+        </li>
+      ))}
+    </ul>
   );
 }

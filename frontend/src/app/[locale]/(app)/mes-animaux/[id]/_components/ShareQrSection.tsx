@@ -2,7 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { QrCode } from 'lucide-react';
 import { api, type Animal } from '@/lib/api';
+import { Button, Card, Modal, Skeleton, SkeletonGroup } from '@/components/ui';
+import { FormError, SectionError } from './parts';
 
 interface Props {
   animal: Animal;
@@ -104,117 +107,87 @@ export default function ShareQrSection({ animal, token, locale }: Props) {
     }
   };
 
+  const switchClass = 'mt-0.5 size-5 shrink-0';
+
   return (
     <>
-    {/* QR code */}
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-      <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
-        {t('premiumLock.qrCode')}
-      </h2>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-        {t('premiumLock.qrCodeHelp')}
-      </p>
-      {/* W0-06 — partage public en opt-in (désactivé par défaut) */}
-      <div className="mb-4 space-y-3">
-        <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            role="switch"
-            className="mt-1 h-5 w-5 accent-emerald-600"
-            checked={!!publicLink?.enabled}
-            disabled={publicLinkBusy || !publicLink}
-            onChange={(e) => updatePublicLink({ enabled: e.target.checked })}
-          />
-          <span>
-            <span className="block text-sm font-medium text-gray-800 dark:text-white">
-              {t('publicLink.enableLabel')}
+      <Card as="section" id="partage" title={t('premiumLock.qrCode')} titleId="share-title" className="scroll-mt-20">
+        <p className="m-0 mb-4 text-ui text-ink-2">{t('premiumLock.qrCodeHelp')}</p>
+        {/* W0-06 — partage public en opt-in (désactivé par défaut) */}
+        <div className="grid gap-3">
+          <label className="flex cursor-pointer items-start gap-3">
+            <input
+              type="checkbox"
+              role="switch"
+              className={switchClass}
+              checked={!!publicLink?.enabled}
+              disabled={publicLinkBusy || !publicLink}
+              onChange={(e) => updatePublicLink({ enabled: e.target.checked })}
+            />
+            <span className="grid gap-0.5">
+              <span className="text-ui font-medium text-ink">{t('publicLink.enableLabel')}</span>
+              <span className="text-meta text-ink-2">{t('publicLink.enableHelp')}</span>
             </span>
-            <span className="block text-xs text-gray-500 dark:text-gray-400">
-              {t('publicLink.enableHelp')}
-            </span>
-          </span>
-        </label>
-        {publicLink?.enabled && (
-          <>
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                role="switch"
-                className="mt-1 h-5 w-5 accent-emerald-600"
-                checked={publicLink.showHealth}
-                disabled={publicLinkBusy}
-                onChange={(e) => updatePublicLink({ showHealth: e.target.checked })}
-              />
-              <span>
-                <span className="block text-sm font-medium text-gray-800 dark:text-white">
-                  {t('publicLink.showHealthLabel')}
+          </label>
+          {publicLink?.enabled ? (
+            <>
+              <label className="flex cursor-pointer items-start gap-3">
+                <input
+                  type="checkbox"
+                  role="switch"
+                  className={switchClass}
+                  checked={publicLink.showHealth}
+                  disabled={publicLinkBusy}
+                  onChange={(e) => updatePublicLink({ showHealth: e.target.checked })}
+                />
+                <span className="grid gap-0.5">
+                  <span className="text-ui font-medium text-ink">{t('publicLink.showHealthLabel')}</span>
+                  <span className="text-meta text-ink-2">{t('publicLink.showHealthHelp')}</span>
                 </span>
-                <span className="block text-xs text-gray-500 dark:text-gray-400">
-                  {t('publicLink.showHealthHelp')}
-                </span>
-              </span>
-            </label>
-            <button
-              type="button"
-              onClick={regeneratePublicLink}
-              disabled={publicLinkBusy}
-              className="w-full py-2 px-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-70"
+              </label>
+              <div>
+                <Button variant="quiet" size="sm" onClick={regeneratePublicLink} disabled={publicLinkBusy}>
+                  {t('publicLink.regenerate')}
+                </Button>
+              </div>
+            </>
+          ) : (
+            <p className="m-0 text-meta text-ink-2">{t('publicLink.disabledHint')}</p>
+          )}
+          <FormError>{publicLinkError}</FormError>
+          <div className="border-t border-line pt-4">
+            <Button
+              variant="secondary"
+              onClick={handleOpenQR}
+              disabled={qrLoading || !publicLink?.enabled}
+              iconStart={<QrCode size={18} strokeWidth={1.75} />}
             >
-              {t('publicLink.regenerate')}
-            </button>
-          </>
-        )}
-        {!publicLink?.enabled && (
-          <p className="text-xs text-gray-500 dark:text-gray-400">{t('publicLink.disabledHint')}</p>
-        )}
-        {publicLinkError && (
-          <p role="alert" className="text-sm text-red-600 dark:text-red-400">{publicLinkError}</p>
-        )}
-      </div>
-      <button
-        type="button"
-        onClick={handleOpenQR}
-        disabled={qrLoading || !publicLink?.enabled}
-        className="w-full py-3 px-4 rounded-xl bg-emerald-600 text-white font-medium hover:bg-emerald-700 disabled:opacity-70 transition-colors flex items-center justify-center gap-2"
-      >
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
-        </svg>
-        {qrLoading ? t('common.loading') : t('premiumLock.qrCodeButton')}
-      </button>
-    </div>
-      <div className="contents">
-        {/* QR code modal */}
-        {showQRModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 w-full max-w-[384px]">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{t('premiumLock.qrCode')}</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{t('premiumLock.qrCodeHelp')}</p>
-              {qrLoading ? (
-                <div className="flex justify-center py-12">
-                  <div className="animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent" />
-                </div>
-              ) : qrDataUrl ? (
-                <div className="flex flex-col items-center">
-                  <img src={qrDataUrl} alt="QR Code" className="w-64 h-64 rounded-lg bg-white p-2" />
-                  <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 break-all text-center max-w-full">{qrUrl}</p>
-                </div>
-              ) : qrError ? (
-                <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm text-center">
-                  {qrError}
-                </div>
-              ) : null}
-              <button
-                type="button"
-                onClick={() => setShowQRModal(false)}
-                className="mt-4 w-full py-2 rounded-xl border-2 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-700"
-              >
-                {t('common.close')}
-              </button>
-            </div>
+              {t('premiumLock.qrCodeButton')}
+            </Button>
           </div>
-        )}
-      </div>
+        </div>
+      </Card>
+
+      <Modal open={showQRModal} onClose={() => setShowQRModal(false)} title={t('premiumLock.qrCode')} description={t('premiumLock.qrCodeHelp')} size="sm">
+        {qrLoading ? (
+          <SkeletonGroup label={t('common.loading')} className="flex justify-center">
+            <Skeleton shape="block" width={256} height={256} />
+          </SkeletonGroup>
+        ) : qrDataUrl ? (
+          <figure className="m-0 grid justify-items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element -- QR généré localement (data URL) */}
+            <img src={qrDataUrl} alt={t('animals.sheet.qrAlt', { name: animal.name })} className="size-64 rounded-control border border-line" />
+            <figcaption className="max-w-full font-mono text-meta break-all text-ink-2">{qrUrl}</figcaption>
+          </figure>
+        ) : qrError ? (
+          <SectionError message={qrError} />
+        ) : null}
+        <div className="mt-4">
+          <Button variant="secondary" fullWidth onClick={() => setShowQRModal(false)}>
+            {t('common.close')}
+          </Button>
+        </div>
+      </Modal>
     </>
   );
 }

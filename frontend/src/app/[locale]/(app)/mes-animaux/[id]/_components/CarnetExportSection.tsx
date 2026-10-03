@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Download, FileText } from 'lucide-react';
+import { Link } from '@/i18n/navigation';
 import { api, type Animal } from '@/lib/api';
+import { animalCarnetPath } from '@/lib/platform';
+import { Button, Card, buttonClasses } from '@/components/ui';
 import { localDayKey } from '@/lib/dates';
 import { isPremiumLocked } from './sectionErrors';
 
@@ -41,28 +45,17 @@ export default function CarnetExportSection({ animal, token, onToast }: Props) {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-      <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4">
-        {t('animals.carnet.export')}
-      </h2>
-      <button
-        type="button"
-        onClick={handleExportCarnet}
-        disabled={exportingCarnet}
-        className="inline-flex items-center gap-2 rounded-xl border-2 border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 px-4 py-3 text-sm font-semibold hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition-colors disabled:opacity-50"
-      >
-        {exportingCarnet ? (
-          <>
-            <span className="inline-block w-4 h-4 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-            {t('common.loading')}
-          </>
-        ) : (
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
-        )}
-        {!exportingCarnet && t('animals.carnet.export')}
-      </button>
-    </div>
+    <Card as="section" id="carnet" title={t('animals.sheet.carnetTitle')} titleId="carnet-title" className="scroll-mt-20">
+      <p className="m-0 mb-4 text-ui text-ink-2">{t('animals.sheet.carnetText')}</p>
+      <div className="flex flex-wrap items-center gap-2">
+        <Link href={animalCarnetPath(animal.id)} className={buttonClasses({ variant: 'secondary' })}>
+          <FileText size={18} strokeWidth={1.75} aria-hidden="true" />
+          {t('animals.sheet.openCarnet')}
+        </Link>
+        <Button variant="quiet" onClick={handleExportCarnet} loading={exportingCarnet} iconStart={<Download size={18} strokeWidth={1.75} />}>
+          {t('animals.carnet.export')}
+        </Button>
+      </div>
+    </Card>
   );
 }

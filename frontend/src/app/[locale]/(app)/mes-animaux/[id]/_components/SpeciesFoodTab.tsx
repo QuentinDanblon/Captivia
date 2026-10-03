@@ -5,27 +5,16 @@ import type { SpeciesFoodProduct } from './types';
 
 export default function SpeciesFoodTab({ speciesFood }: { speciesFood: SpeciesFoodProduct[] }) {
   const t = useTranslations();
+  if (!speciesFood || speciesFood.length === 0) return <p className="m-0 text-body text-ink-2">{t('common.noData')}</p>;
   return (
-    <div className="space-y-3">
-      {speciesFood && speciesFood.length > 0 ? (
-        <div className="space-y-3">
-          {speciesFood.slice(0, 5).map((food, idx: number) => (
-            <div key={idx} className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
-              <p className="font-semibold text-gray-800 dark:text-white">
-                {food.product_name || food.name}
-              </p>
-              {food.brands && (
-                <p className="text-xs text-gray-500 dark:text-gray-400">{food.brands}</p>
-              )}
-              {food.categories && (
-                <p className="text-xs text-gray-500 dark:text-gray-400">{food.categories}</p>
-              )}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-500 dark:text-gray-400">{t('common.noData')}</p>
-      )}
-    </div>
+    <ul className="m-0 grid list-none divide-y divide-line p-0">
+      {speciesFood.slice(0, 5).map((food, idx) => (
+        <li key={idx} className="grid gap-0.5 py-2.5 first:pt-0 last:pb-0">
+          <span className="font-medium text-ink">{food.product_name || food.name}</span>
+          {food.brands ? <span className="text-ui text-ink-2">{food.brands}</span> : null}
+          {food.categories ? <span className="line-clamp-1 text-meta text-ink-2">{food.categories}</span> : null}
+        </li>
+      ))}
+    </ul>
   );
 }

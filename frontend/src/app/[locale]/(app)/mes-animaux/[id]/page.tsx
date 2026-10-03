@@ -1,16 +1,51 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
+import { Camera, FileText, Pencil, Scale, Trash2 } from 'lucide-react';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, ApiError, type Animal, type Medication, type VetAppointment, type AnimalMeasurement, type Vaccination, type BreedingRecord } from '@/lib/api';
 import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
 import { Link } from '@/i18n/navigation';
+import { currentMedications } from '@/lib/carnet';
+import {
+  ageOf,
+  animalAlerts,
+  commonName,
+  daysFrom,
+  formatAge,
+  formatRelativeDays,
+  formatWeight,
+  lastWeighing,
+  latinName,
+  nextAppointment,
+  sheetTimeline,
+  speciesTip,
+  weightTrend,
+  type SpeciesSheet,
+} from '@/lib/today';
+import {
+  Alert,
+  AnimalSilhouette,
+  Button,
+  Card,
+  CareTimeline,
+  EmptyState,
+  Figure,
+  SectionHeader,
+  Skeleton,
+  SkeletonGroup,
+  SkeletonText,
+  Tip,
+  Toast,
+  buttonClasses,
+  silhouetteKindOf,
+} from '@/components/ui';
 import FamilySection from './_components/FamilySection';
 import SectionSkeleton from './_components/SectionSkeleton';
-import { useFormatters } from './_components/useFormatters';
+import { ConfirmDelete } from './_components/parts';
 import type {
   Routine,
   HealthRecord,
@@ -20,7 +55,7 @@ import type {
   SpeciesEquipmentData,
   SpeciesFoodProduct,
 } from './_components/types';
-import { speciesPath } from '@/lib/platform';
+import { animalCarnetPath, speciesPath } from '@/lib/platform';
 import { isGuestUser } from '@/lib/guest';
 import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
 
@@ -71,7 +106,6 @@ export default function AnimalDetailPage({
 }) {
   const t = useTranslations();
   const router = useRouter();
-  const { formatDate } = useFormatters();
   const { user, token, isLoading: authLoading } = useAuth();
   const [resolvedParams, setResolvedParams] = useState<{
     locale: string;
@@ -114,6 +148,10 @@ export default function AnimalDetailPage({
   const [breedingError, setBreedingError] = useState('');
   const [breedingLocked, setBreedingLocked] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  // Interface : horloge figée au montage (statuts cohérents), demande « Peser » de la barre d'actions.
+  const [now] = useState(() => new Date());
+  const [measurementRequest, setMeasurementRequest] = useState(0);
+  const closeToast = useCallback(() => setToast(null), []);
 
   useEffect(() => {
     params.then(setResolvedParams);
@@ -130,13 +168,6 @@ export default function AnimalDetailPage({
       fetchAnimalData();
     }
   }, [user, token, resolvedParams]);
-
-  // Auto-hide toast
-  useEffect(() => {
-    if (!toast) return;
-    const timer = setTimeout(() => setToast(null), 3000);
-    return () => clearTimeout(timer);
-  }, [toast]);
 
   // Garde « cancelled » : chaque chargement porte un numéro ; un chargement dépassé (autre animal,
   // rechargement plus récent, démontage) n'écrit plus dans l'état de la fiche.
@@ -433,334 +464,439 @@ export default function AnimalDetailPage({
 
   if (authLoading || loading || !resolvedParams) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300">
-            {t('common.loading')}
-          </p>
-        </div>
+      <div className="cv-container py-6 sm:py-8">
+        <SkeletonGroup label={t('animals.sheet.loading')} className="grid gap-6">
+          <Skeleton width={180} />
+          <div className="grid gap-6 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+            <Skeleton shape="block" height={180} />
+            <div className="grid content-start gap-3">
+              <Skeleton width="45%" height={40} />
+              <Skeleton width="30%" height={22} />
+              <Skeleton shape="block" height={84} className="mt-4" />
+            </div>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-12">
+            <Skeleton shape="block" height={280} className="lg:col-span-7" />
+            <Skeleton shape="block" height={280} className="lg:col-span-5" />
+          </div>
+        </SkeletonGroup>
       </div>
     );
   }
 
   if (error || !animal) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-4">
-            {error || t('animals.notFound')}
-          </p>
-          <Link
-            href="/mes-animaux"
-            className="text-emerald-600 hover:text-emerald-700"
-          >
-            {t('common.back')} {t('common.myAnimals')}
-          </Link>
-        </div>
+      <div className="cv-container grid gap-6 py-6 sm:py-8">
+        <EmptyState
+          size="page"
+          headingLevel={1}
+          title={error || t('animals.notFound')}
+          benefit={t('animals.sheet.errorBenefit')}
+          illustration={<AnimalSilhouette kind="other" size={72} />}
+          action={
+            <Link href="/mes-animaux" className={buttonClasses({ variant: 'secondary' })}>
+              {t('animals.sheet.back')}
+            </Link>
+          }
+        />
       </div>
     );
   }
 
+  const sheet = species as (Species & SpeciesSheet) | null;
+  const latin = latinName(sheet);
+  const common = commonName(sheet, resolvedParams.locale);
+  const kind = silhouetteKindOf(sheet?.class);
+  const age = ageOf(animal.birthDate, now);
+  const weighing = lastWeighing(measurements);
+  const trend = weightTrend(measurements);
+  const appointment = nextAppointment(vetAppointments, now);
+  const treatments = currentMedications(medications, now);
+  const nextVaccine = vaccinations
+    .filter((v) => v.nextDueDate)
+    .sort((a, b) => new Date(a.nextDueDate as string).getTime() - new Date(b.nextDueDate as string).getTime())
+    .find((v) => daysFrom(v.nextDueDate as string, now) >= -365);
+  const alerts = animalAlerts(
+    {
+      animal,
+      vaccinations: vaccinationsLoading || vaccinationsLocked || vaccinationsError ? null : vaccinations,
+      medications: medicationsLoading || medicationsLocked || medicationsError ? null : medications,
+      measurements: measurementsLoading || measurementsLocked || measurementsError ? null : measurements,
+    },
+    now,
+  ).filter((a) => a.level !== 'info' || a.kind === 'treatment');
+  const tip = speciesTip(sheet, speciesHealth);
+  const locale = resolvedParams.locale;
+  const timeline = sheetTimeline({ vetAppointments, vaccinations, measurements, healthRecords, medications }, now, (kg) => formatWeight(kg, locale));
+  const dateFormat = new Intl.DateTimeFormat(resolvedParams.locale, { day: 'numeric', month: 'short', year: 'numeric' });
+  const shortDate = new Intl.DateTimeFormat(resolvedParams.locale, { day: '2-digit', month: 'short' });
+  const longDate = new Intl.DateTimeFormat(resolvedParams.locale, { day: 'numeric', month: 'long' });
+  const dateTime = new Intl.DateTimeFormat(resolvedParams.locale, { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+  const pending = <Skeleton width="60%" />;
+
+  const statusLabels = {
+    done: t('today.status.done'),
+    due: t('today.status.due'),
+    overdue: t('today.status.overdue'),
+    planned: t('today.status.planned'),
+    skipped: t('today.status.skipped'),
+  };
+
+  const summary: { key: string; label: string; value: ReactNode; note?: ReactNode }[] = [
+    {
+      key: 'age',
+      label: t('today.factAge'),
+      value: age ? formatAge(age, locale) : t('animals.sheet.unknownValue'),
+      note: animal.birthDate ? t('animals.sheet.bornOn', { date: dateFormat.format(new Date(animal.birthDate)) }) : getSexName(animal.sex),
+    },
+    {
+      key: 'weight',
+      label: t('today.factWeight'),
+      value: measurementsLoading ? pending : weighing ? formatWeight(weighing.weightKg, locale) : t('today.factNoWeight'),
+      note: weighing ? (
+        <>
+          {formatRelativeDays(daysFrom(weighing.measuredAt, now), locale)}
+          {trend !== null && trend !== 0 ? <> · {formatWeight(trend, locale, true)}</> : null}
+        </>
+      ) : undefined,
+    },
+    {
+      key: 'visit',
+      label: t('today.factNextVisit'),
+      value: vetAppointmentsLoading ? pending : appointment ? dateTime.format(new Date(appointment.date)) : t('today.factNoVisit'),
+      note: appointment ? [appointment.vetName, appointment.reason].filter(Boolean).join(' · ') : undefined,
+    },
+    {
+      key: 'treatment',
+      label: t('animals.sheet.treatments'),
+      value: medicationsLoading
+        ? pending
+        : medicationsLocked
+          ? '—'
+          : treatments.length > 0
+            ? treatments.map((m) => m.name).join(', ')
+            : t('animals.sheet.noTreatment'),
+      note:
+        treatments.length === 1 && treatments[0].endDate
+          ? t('animals.sheet.until', { date: shortDate.format(new Date(treatments[0].endDate)) })
+          : undefined,
+    },
+    {
+      key: 'vaccine',
+      label: t('animals.sheet.nextVaccine'),
+      value: vaccinationsLoading ? pending : nextVaccine?.nextDueDate ? shortDate.format(new Date(nextVaccine.nextDueDate)) : t('animals.sheet.noVaccine'),
+      note: nextVaccine?.nextDueDate ? (
+        <>
+          {nextVaccine.name} · {formatRelativeDays(daysFrom(nextVaccine.nextDueDate, now), locale)}
+        </>
+      ) : undefined,
+    },
+  ];
+
+  const sections = [
+    ['soins', t('routines.title')],
+    ['traitements', t('animals.medications.title')],
+    ['mesures', t('animals.measurements.title')],
+    ['vaccins', t('animals.vaccinations.title')],
+    ['rendez-vous', t('animals.vetAppointments.title')],
+    ['sante', t('animals.healthRecord')],
+    ['espece', t('animals.sheet.speciesTitle')],
+  ] as const;
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      {/* Breadcrumb */}
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 min-w-0">
-        <nav className="text-sm text-gray-500">
-          <Link href="/mes-animaux" className="hover:text-emerald-600">
-            {t('animals.myAnimals')}
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="text-gray-800 dark:text-white">{animal.name}</span>
-        </nav>
-      </div>
+    <div className="cv-container grid gap-6 py-6 pb-28 sm:py-8 lg:pb-8">
+      <nav aria-label={t('animals.sheet.breadcrumb')} className="text-ui text-ink-2">
+        <ol className="m-0 flex list-none flex-wrap items-center gap-2 p-0">
+          <li>
+            <Link href="/mes-animaux" className="text-ink-2 underline decoration-1 underline-offset-2 hover:text-ink">
+              {t('animals.myAnimals')}
+            </Link>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" className="text-ink">
+            {animal.name}
+          </li>
+        </ol>
+      </nav>
 
-      {/* Animal Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-6 sm:py-8">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 min-w-0">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 flex-1 min-w-0">
-              <input
-                ref={avatarPhotoInputRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                aria-hidden
-                onChange={handleAvatarPhotoFile}
-              />
-              <button
-                type="button"
-                onClick={handleAvatarPhotoClick}
-                disabled={avatarPhotoUploading}
-                className="w-20 h-20 sm:w-24 sm:h-24 bg-white/20 rounded-full flex items-center justify-center text-3xl sm:text-4xl font-bold shrink-0 overflow-hidden ring-2 ring-white/30 hover:ring-white/50 hover:bg-white/25 transition-all disabled:opacity-70 cursor-pointer"
-                title={t('animals.changePhoto')}
-              >
-                {avatarPhotoUploading ? (
-                  <div className="animate-spin rounded-full h-8 w-8 border-2 border-white border-t-transparent" />
-                ) : animal.photos?.[0] ? (
-                  <img
-                    src={animal.photos[0]}
-                    alt={animal.name}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  animal.name.charAt(0).toUpperCase()
-                )}
-              </button>
-              <div className="text-center sm:text-left">
-                <h1 className="text-2xl sm:text-3xl font-bold mb-2">{animal.name}</h1>
-                {species && (
-                  <Link 
-                    href={speciesPath(animal.speciesId)}
-                    className="text-lg opacity-90 hover:opacity-100 hover:underline"
-                  >
-                    {species.canonicalName || species.scientificName}
-                  </Link>
-                )}
-                <div className="flex gap-4 mt-2 text-sm opacity-80">
-                  {animal.birthDate && (
-                    <span>{t('animals.birthDate')}: {formatDate(animal.birthDate)}</span>
-                  )}
-                  <span>{t('animals.sex')}: {getSexName(animal.sex)}</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <button
-                type="button"
-                onClick={() => setShowEditAnimalModal(true)}
-                className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-                {t('animals.editAnimal')}
-              </button>
-              <button
-                onClick={() => setShowDeleteConfirm(true)}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                {t('common.delete')}
-              </button>
-            </div>
-          </div>
+      {/* En-tête « planche » : photo, nom, binôme latin, âge, poids. */}
+      <header className="grid gap-6 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] md:items-start">
+        <div className="grid max-w-[15rem] gap-2">
+          {animal.photos?.[0] ? (
+            <Figure src={animal.photos[0]} alt={t('today.photoAlt', { name: animal.name })} userPhoto ratio="4/3" priority sizes="15rem" fallbackKind={kind} />
+          ) : (
+            <Figure ratio="4/3" fallbackKind={kind} />
+          )}
+          <input ref={avatarPhotoInputRef} type="file" accept="image/*" className="hidden" tabIndex={-1} aria-hidden onChange={handleAvatarPhotoFile} />
+          <Button
+            variant="quiet"
+            size="sm"
+            className="justify-self-start"
+            onClick={handleAvatarPhotoClick}
+            loading={avatarPhotoUploading}
+            iconStart={<Camera size={16} strokeWidth={1.75} />}
+          >
+            {t('animals.changePhoto')}
+          </Button>
         </div>
-      </div>
 
-      <FamilySection animal={animal} offspring={offspring} />
-
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-w-0">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-          {/* Main content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Care advice block */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">
-                {t('species.careAdvice')}
-              </h2>
-              
-              {species ? (
-                <div className="space-y-4">
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Conseils de soins pour votre {species.canonicalName || species.scientificName} :
-                  </p>
-                  
-                  {speciesHealth?.editorial?.diseases && speciesHealth.editorial.diseases.length > 0 ? (
-                    <div className="space-y-4">
-                      <div>
-                        <h3 className="font-semibold text-gray-800 dark:text-white mb-2">
-                          {t('species.commonDiseases')}
-                        </h3>
-                        <ul className="space-y-2">
-                          {speciesHealth.editorial.diseases.map((disease, idx: number) => (
-                            <li key={idx} className="text-sm text-gray-700 dark:text-gray-300">
-                              <strong>{disease.name}</strong>
-                              {disease.symptoms && ` - ${disease.symptoms}`}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
-                      {speciesHealth.editorial.diseases[0]?.prevention && (
-                        <div>
-                          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">
-                            {t('species.prevention')}
-                          </h3>
-                          <p className="text-sm text-gray-700 dark:text-gray-300">
-                            {speciesHealth.editorial.diseases[0].prevention}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                      <li>{t('animals.defaultCareTips.environment')}</li>
-                      <li>{t('animals.defaultCareTips.feeding')}</li>
-                      <li>{t('animals.defaultCareTips.equipment')}</li>
-                      <li>{t('animals.defaultCareTips.illness')}</li>
-                    </ul>
-                  )}
-                  
-                  <Link
-                    href={speciesPath(animal.speciesId)}
-                    className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium mt-4"
-                  >
-                    {t('species.viewFullGuide')}
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                </div>
-              ) : (
-                <p className="text-gray-500 dark:text-gray-400">
-                  {t('common.loading')}
-                </p>
-              )}
-            </div>
-
-            {/* Notes */}
-            {animal.notes && (
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-                <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
-                  {t('animals.notes')}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400 whitespace-pre-wrap">
-                  {animal.notes}
-                </p>
+        <div className="grid min-w-0 gap-5">
+          <SectionHeader
+            title={animal.name}
+            latin={latin ? <Link href={speciesPath(animal.speciesId)} className="text-ink-2 no-underline hover:underline">{latin}</Link> : undefined}
+            marginNote={`GBIF ${animal.speciesId}`}
+            marginLabel={t('animals.sheet.gbifLabel')}
+            description={[common, getSexName(animal.sex)].filter(Boolean).join(' · ')}
+            actions={
+              <div className="hidden flex-wrap gap-2 lg:flex">
+                <Link href={animalCarnetPath(animal.id)} className={buttonClasses({ variant: 'secondary' })}>
+                  <FileText size={18} strokeWidth={1.75} aria-hidden="true" />
+                  {t('carnetPrint.title')}
+                </Link>
+                <Button variant="secondary" onClick={() => setShowEditAnimalModal(true)} iconStart={<Pencil size={18} strokeWidth={1.75} />}>
+                  {t('animals.editAnimal')}
+                </Button>
+                <Button
+                  variant="quiet"
+                  className="text-danger hover:not-disabled:bg-danger-soft"
+                  onClick={() => setShowDeleteConfirm(true)}
+                  aria-label={t('animals.deleteAnimal')}
+                  title={t('animals.deleteAnimal')}
+                >
+                  <Trash2 size={18} strokeWidth={1.75} aria-hidden="true" />
+                </Button>
               </div>
-            )}
+            }
+          />
 
-            {/* Species Information Tabs */}
-            <SpeciesInfoTabs
-              speciesHealth={speciesHealth}
-              speciesLegislation={speciesLegislation}
-              speciesEquipment={speciesEquipment}
-              speciesFood={speciesFood}
-            />
-          </div>
+          {/* Bandeau de synthèse : visible sans défiler en bureau. */}
+          <section aria-labelledby="summary-title" className="rounded-card border border-line bg-surface">
+            <h2 id="summary-title" className="sr-only">
+              {t('animals.sheet.summaryTitle')}
+            </h2>
+            <dl className="m-0 grid grid-cols-2 divide-line sm:grid-cols-3 xl:grid-cols-5 xl:divide-x">
+              {summary.map((item) => (
+                <div key={item.key} className="grid content-start gap-1 border-b border-line px-4 py-3 last:border-b-0 xl:border-b-0">
+                  <dt className="text-meta text-ink-2">{item.label}</dt>
+                  <dd className="m-0 font-mono text-body font-medium break-words text-ink">{item.value}</dd>
+                  {item.note ? <dd className="m-0 text-meta text-ink-2">{item.note}</dd> : null}
+                </div>
+              ))}
+            </dl>
+          </section>
+        </div>
+      </header>
 
-          {/* Sidebar - Carnet de santé + Routines */}
-          <div className="space-y-6">
-            <HealthRecordsSection animal={animal} token={token} healthRecords={healthRecords} onRefresh={fetchAnimalData} />
-            {/* Invité : la page publique (QR) demande un compte — action retirée, raison expliquée. */}
-            {isGuestUser(user) ? (
-              <GuestFeatureNote>{t('guest.publicLinkNote')}</GuestFeatureNote>
+      {alerts.length > 0 ? (
+        <ul className="m-0 grid list-none gap-2 p-0" aria-label={t('today.alertsTitle')}>
+          {alerts.slice(0, 3).map((alert) => {
+            const when = alert.days !== undefined ? formatRelativeDays(alert.days, locale) : '';
+            const values = { name: alert.animalName, subject: alert.subject ?? '', when, date: alert.date ? longDate.format(new Date(alert.date)) : '' };
+            const key = alert.kind === 'treatment' && !alert.date ? 'treatmentOpen' : alert.kind === 'weighingStale' ? 'weighingOld' : alert.kind;
+            return (
+              <li key={`${alert.kind}-${alert.subject ?? ''}`}>
+                <Alert
+                  severity={alert.level === 'urgent' ? 'urgent' : alert.level === 'warning' ? 'warning' : 'info'}
+                  severityLabel={alert.level === 'urgent' ? t('today.urgent') : undefined}
+                  title={t(`today.alerts.${key}.title`, values)}
+                >
+                  {t(`today.alerts.${key}.body`, values)}
+                </Alert>
+              </li>
+            );
+          })}
+        </ul>
+      ) : null}
+
+      <nav aria-label={t('animals.sheet.sectionsNav')} className="noprint -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+        <ul className="m-0 flex w-max list-none gap-1 border-b border-line p-0">
+          {sections.map(([id, label]) => (
+            <li key={id}>
+              <a
+                href={`#${id}`}
+                className="inline-flex min-h-11 items-center border-b-2 border-transparent px-3 text-ui font-medium whitespace-nowrap text-ink-2 no-underline transition-colors hover:border-line-field hover:text-ink"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div className="grid gap-6 lg:grid-cols-12">
+        <div className="grid min-w-0 content-start gap-6 lg:col-span-7">
+          <Card as="section" title={t('animals.sheet.timelineTitle')} titleId="sheet-timeline-title">
+            {timeline.length === 0 ? (
+              <p className="m-0 text-body text-ink-2">{t('animals.sheet.timelineEmpty')}</p>
             ) : (
-              <ShareQrSection animal={animal} token={token} locale={resolvedParams.locale} />
+              <CareTimeline
+                label={t('animals.sheet.timelineLabel', { name: animal.name })}
+                statusLabels={statusLabels}
+                allDayLabel={t('today.allDayShort')}
+                items={timeline.map((entry) => ({
+                  id: entry.id,
+                  date: entry.date,
+                  allDay: entry.allDay,
+                  title: entry.title,
+                  detail: entry.detail,
+                  status: entry.status,
+                  kind: t(`animals.sheet.kinds.${entry.kind}`),
+                }))}
+              />
             )}
-            <RoutinesSection animal={animal} token={token} routines={routines} onRefresh={fetchAnimalData} onToast={setToast} />
-            <MedicationsSection
-              animal={animal}
-              token={token}
-              medications={medications}
-              loading={medicationsLoading}
-              error={medicationsError}
-              locked={medicationsLocked}
-              onLocked={() => setMedicationsLocked(true)}
-              onRefresh={fetchAnimalData}
-            />
-            <VetAppointmentsSection
-              animal={animal}
-              token={token}
-              vetAppointments={vetAppointments}
-              loading={vetAppointmentsLoading}
-              error={vetAppointmentsError}
-              onRefresh={fetchAnimalData}
-            />
-            <MeasurementsSection
-              animal={animal}
-              token={token}
-              measurements={measurements}
-              loading={measurementsLoading}
-              error={measurementsError}
-              locked={measurementsLocked}
-              onLocked={() => setMeasurementsLocked(true)}
-              onRefresh={fetchAnimalData}
-            />
-            <VaccinationsSection
-              animal={animal}
-              token={token}
-              vaccinations={vaccinations}
-              loading={vaccinationsLoading}
-              error={vaccinationsError}
-              locked={vaccinationsLocked}
-              onLocked={() => setVaccinationsLocked(true)}
-              onRefresh={fetchAnimalData}
-            />
-            <BreedingSection
-              animal={animal}
-              token={token}
-              breedingRecords={breedingRecords}
-              loading={breedingLoading}
-              error={breedingError}
-              locked={breedingLocked}
-              onLocked={() => setBreedingLocked(true)}
-              onRefresh={fetchAnimalData}
-            />
-            <CarnetExportSection animal={animal} token={token} onToast={setToast} />
-          </div>
+          </Card>
+          <RoutinesSection animal={animal} token={token} routines={routines} onRefresh={fetchAnimalData} onToast={setToast} />
+          <MedicationsSection
+            animal={animal}
+            token={token}
+            medications={medications}
+            loading={medicationsLoading}
+            error={medicationsError}
+            locked={medicationsLocked}
+            onLocked={() => setMedicationsLocked(true)}
+            onRefresh={fetchAnimalData}
+          />
+          <MeasurementsSection
+            animal={animal}
+            token={token}
+            measurements={measurements}
+            loading={measurementsLoading}
+            error={measurementsError}
+            locked={measurementsLocked}
+            onLocked={() => setMeasurementsLocked(true)}
+            onRefresh={fetchAnimalData}
+            createRequest={measurementRequest}
+          />
+          <VaccinationsSection
+            animal={animal}
+            token={token}
+            vaccinations={vaccinations}
+            loading={vaccinationsLoading}
+            error={vaccinationsError}
+            locked={vaccinationsLocked}
+            onLocked={() => setVaccinationsLocked(true)}
+            onRefresh={fetchAnimalData}
+          />
+          <VetAppointmentsSection
+            animal={animal}
+            token={token}
+            vetAppointments={vetAppointments}
+            loading={vetAppointmentsLoading}
+            error={vetAppointmentsError}
+            onRefresh={fetchAnimalData}
+          />
+          <HealthRecordsSection animal={animal} token={token} healthRecords={healthRecords} onRefresh={fetchAnimalData} />
+          <BreedingSection
+            animal={animal}
+            token={token}
+            breedingRecords={breedingRecords}
+            loading={breedingLoading}
+            error={breedingError}
+            locked={breedingLocked}
+            onLocked={() => setBreedingLocked(true)}
+            onRefresh={fetchAnimalData}
+          />
         </div>
+
+        <div className="grid min-w-0 content-start gap-6 lg:col-span-5">
+          <Card as="section" title={t('species.careAdvice')} titleId="care-advice-title">
+            {species ? (
+              <div className="grid gap-4">
+                {tip ? (
+                  <Tip label={t('today.tipLabel')} source={t('today.tipSource', { species: common ?? latin ?? '' })}>
+                    {tip.kind === 'prevention'
+                      ? t('today.tipPrevention', { topic: tip.topic, text: tip.text })
+                      : tip.temperature && tip.humidity
+                        ? t('today.tipHabitat', { temperature: tip.temperature, humidity: tip.humidity })
+                        : tip.temperature
+                          ? t('today.tipTemperature', { temperature: tip.temperature })
+                          : t('today.tipHumidity', { humidity: tip.humidity ?? '' })}
+                  </Tip>
+                ) : (
+                  <ul className="m-0 grid gap-1.5 pl-5 text-ui text-ink">
+                    <li>{t('animals.defaultCareTips.environment')}</li>
+                    <li>{t('animals.defaultCareTips.feeding')}</li>
+                    <li>{t('animals.defaultCareTips.equipment')}</li>
+                    <li>{t('animals.defaultCareTips.illness')}</li>
+                  </ul>
+                )}
+                <Link href={speciesPath(animal.speciesId)} className={buttonClasses({ variant: 'quiet', size: 'sm', className: 'justify-self-start' })}>
+                  {t('species.viewFullGuide')}
+                </Link>
+              </div>
+            ) : (
+              <SkeletonGroup label={t('common.loading')}>
+                <SkeletonText lines={3} />
+              </SkeletonGroup>
+            )}
+          </Card>
+
+          {animal.notes ? (
+            <Card as="section" title={t('animals.notes')} titleId="notes-title">
+              <p className="m-0 text-body whitespace-pre-wrap text-ink">{animal.notes}</p>
+            </Card>
+          ) : null}
+
+          <SpeciesInfoTabs
+            speciesHealth={speciesHealth}
+            speciesLegislation={speciesLegislation}
+            speciesEquipment={speciesEquipment}
+            speciesFood={speciesFood}
+          />
+          <FamilySection animal={animal} offspring={offspring} />
+          <CarnetExportSection animal={animal} token={token} onToast={setToast} />
+          {/* Invité : la page publique (QR) demande un compte — action retirée, raison expliquée. */}
+          {isGuestUser(user) ? (
+            <GuestFeatureNote>{t('guest.publicLinkNote')}</GuestFeatureNote>
+          ) : (
+            <ShareQrSection animal={animal} token={token} locale={resolvedParams.locale} />
+          )}
+        </div>
+      </div>
+
+      {/* Barre d'actions collante (mobile et tablette) : au-dessus de la barre d'onglets. */}
+      <div
+        role="toolbar"
+        aria-label={t('animals.sheet.actionsLabel', { name: animal.name })}
+        className="noprint fixed inset-x-0 z-20 flex gap-2 border-t border-line-strong bg-paper px-[max(var(--gutter,16px),env(safe-area-inset-left,0px))] py-2 lg:hidden bottom-[calc(var(--tabbar-h,60px)+env(safe-area-inset-bottom,0px))]"
+      >
+        {!measurementsLocked ? (
+          <Button className="flex-1" onClick={() => setMeasurementRequest((n) => n + 1)} iconStart={<Scale size={18} strokeWidth={1.75} />}>
+            {t('animals.sheet.weigh')}
+          </Button>
+        ) : null}
+        <Link href={animalCarnetPath(animal.id)} className={buttonClasses({ variant: 'secondary', className: 'flex-1' })}>
+          {t('animals.sheet.carnetShort')}
+        </Link>
+        <Button variant="secondary" onClick={() => setShowEditAnimalModal(true)} aria-label={t('animals.editAnimal')} title={t('animals.editAnimal')}>
+          <Pencil size={18} strokeWidth={1.75} aria-hidden="true" />
+        </Button>
+        <Button
+          variant="secondary"
+          className="text-danger"
+          onClick={() => setShowDeleteConfirm(true)}
+          aria-label={t('animals.deleteAnimal')}
+          title={t('animals.deleteAnimal')}
+        >
+          <Trash2 size={18} strokeWidth={1.75} aria-hidden="true" />
+        </Button>
       </div>
 
       {/* Edit Animal Modal */}
       {showEditAnimalModal && (
-        <EditAnimalModal
-          animal={animal}
-          token={token}
-          onClose={() => setShowEditAnimalModal(false)}
-          onRefresh={fetchAnimalData}
-        />
+        <EditAnimalModal animal={animal} token={token} onClose={() => setShowEditAnimalModal(false)} onRefresh={fetchAnimalData} />
       )}
 
-      {/* Toast notification */}
-      {toast && (
-        <div
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] px-4 py-3 rounded-lg shadow-lg text-sm font-medium bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900"
-          role="alert"
-        >
-          {toast}
-        </div>
-      )}
+      {toast ? <Toast message={toast} onClose={closeToast} /> : null}
 
-      {/* Delete Confirmation Modal */}
-      {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-[384px] w-full">
-            <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white">
-              {t('animals.deleteAnimal')}
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
-              {t('common.confirmDelete')}
-            </p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowDeleteConfirm(false)}
-                disabled={isDeleting}
-                className="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
-              >
-                {t('common.cancel')}
-              </button>
-              <button
-                onClick={handleDeleteAnimal}
-                disabled={isDeleting}
-                className="flex-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                {isDeleting ? (
-                  <>
-                    <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
-                    {t('common.loading')}
-                  </>
-                ) : (
-                  t('animals.deleteAnimal')
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ConfirmDelete
+        open={showDeleteConfirm}
+        title={t('animals.deleteAnimal')}
+        message={t('common.confirmDelete')}
+        busy={isDeleting}
+        onConfirm={handleDeleteAnimal}
+        onCancel={() => setShowDeleteConfirm(false)}
+      />
     </div>
   );
 }
