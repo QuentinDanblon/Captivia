@@ -50,9 +50,11 @@
 | Nouveau ✅ | **Agenda des soins** multi-animaux + abonnement calendrier **ICS** par jeton révocable. **Carnet de santé imprimable** (web) / accessible dans l'app. |
 | DEP-03 ✅ | Sauvegarde hebdomadaire chiffrée (`age`, pg_dump 17, artefact 30 j), scripts de sauvegarde/restauration, `docs/RUNBOOK.md`. |
 | DEP-07 ✅ | release-please (manifeste backend/frontend). |
+| W1-04 ✅ | Client HTTP sortant unique (`backend/src/external/http/`) : timeout 5 s, 3 redirections max (https, hôtes publics, secrets retirés), réponse ≤ 5 Mo, User-Agent explicite ; GBIF 3 tentatives (réseau/5xx/429, backoff + jitter, budget 7,5 s) ; **disjoncteur par fournisseur** (implémentation interne, sans cockatiel) avec repli sur les `SpeciesProfile` / le cache périmé (`CacheService.getStale`, 7 j) ; aucun 500 sur une recherche, aucun échec mis en cache ; DTO `barcode ^\d{8,14}$`, `qid`, longueurs ; `/gateway/health` corrigé (statut `degraded`). e2e déterministes : transport HTTP simulé (`test/utils/fake-external-adapter.ts`). |
+| W3-05 ✅ | Amazon : **retiré** (route `/amazon/*` → 404, `AmazonPAService` supprimé ; la PA-API 5 est remplacée par la Creators API, D-09). Species+ : intégration réelle, **désactivée sans `SPECIESPLUS_API_TOKEN`** (503 `INTEGRATION_DISABLED`, `speciesPlus.status`). PubMed : intégration réelle (clé `NCBI_API_KEY` optionnelle), références branchées sur la fiche santé. Variables documentées (`.env.example`, Joi, `render.yaml`, `docs/DEPLOY.md`). |
 | W5-02 ✅ | Lots G (Sonnet) avec preuve par citation, **672 citations contrôlées mécaniquement** contre les pages sources (`enrichment/check_quotes.py`) ; base : 1 340 fiches complètes sur 1 510. Lots H (120 fiches) préparés. |
 
-**Restent ouverts** : W1-04, W1-07 (lint backend), W1-09, W2-02 (textes légaux `[À COMPLÉTER]` + juriste), W2-08, W3-05, W4-03, W4-08, W5-03, W5-04, W6-05 à W6-14, DEP-02, DEP-04 à DEP-06, DEP-09/10 ; relecture humaine législation/santé ; mise en ligne sur les nouveaux comptes Neon/Render/Netlify.
+**Restent ouverts** : W1-07 (lint backend), W1-09, W2-02 (textes légaux `[À COMPLÉTER]` + juriste), W2-08, W4-03, W4-08, W5-03, W5-04, W6-05 à W6-14, DEP-02, DEP-04 à DEP-06, DEP-09/10 ; relecture humaine législation/santé ; mise en ligne sur les nouveaux comptes Neon/Render/Netlify.
 
 ## Avancement — sprint du 2026-10-02 (3 vagues, 20 agents + 1 revue Opus, tout fusionné sur `claude/zen-mendel-xq6nkb`)
 

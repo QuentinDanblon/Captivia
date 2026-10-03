@@ -29,10 +29,14 @@ describe('HealthContentService', () => {
       findUnique: jest.fn(),
       upsert: jest.fn(),
     },
+    speciesProfile: {
+      findUnique: jest.fn(),
+    },
   };
 
   const mockPubmedService = {
     searchArticles: jest.fn(),
+    searchBySpeciesAndDisease: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -55,6 +59,7 @@ describe('HealthContentService', () => {
     pubmedService = module.get<PubmedService>(PubmedService);
 
     jest.clearAllMocks();
+    mockPrismaService.speciesProfile.findUnique.mockResolvedValue(null);
   });
 
   it('should be defined', () => {
@@ -78,8 +83,53 @@ describe('HealthContentService', () => {
           updatedAt: mockHealthContent.updatedAt,
         },
         pubmed: [],
+        pubmedAvailable: true,
         disclaimer: expect.any(String),
       });
+    });
+
+    it("n'appelle pas PubMed sans profil local (pas de nom scientifique)", async () => {
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
+
+      await service.getSpeciesHealth(999);
+
+      expect(mockPubmedService.searchBySpeciesAndDisease).not.toHaveBeenCalled();
+    });
+
+    it('renvoie les références PubMed réelles de l\'espèce (nom scientifique du profil)', async () => {
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+        scientificName: 'Boa constrictor',
+      });
+      const articles = [{ pmid: '1', title: 'Boa health' }];
+      mockPubmedService.searchBySpeciesAndDisease.mockResolvedValue(articles);
+
+      const result = await service.getSpeciesHealth(2448340, 'mites');
+
+      expect(mockPubmedService.searchBySpeciesAndDisease).toHaveBeenCalledWith(
+        'Boa constrictor',
+        'mites',
+      );
+      expect(result.pubmed).toEqual(articles);
+      expect(result.pubmedAvailable).toBe(true);
+    });
+
+    it('PubMed en panne : la fiche est servie (pas de 500), pubmedAvailable=false', async () => {
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(
+        mockHealthContent,
+      );
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+        scientificName: 'Boa constrictor',
+      });
+      mockPubmedService.searchBySpeciesAndDisease.mockRejectedValue(
+        new Error('PubMed temporarily unavailable'),
+      );
+
+      const result = await service.getSpeciesHealth(2448340);
+
+      expect(result.pubmed).toEqual([]);
+      expect(result.pubmedAvailable).toBe(false);
+      expect(result.editorial).not.toBeNull();
     });
 
     it('should return null editorial if no content found', async () => {

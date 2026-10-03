@@ -25,9 +25,13 @@ describe('LegislationService', () => {
       findMany: jest.fn(),
       upsert: jest.fn(),
     },
+    speciesProfile: {
+      findUnique: jest.fn(),
+    },
   };
 
   const mockSpeciesPlusService = {
+    isConfigured: jest.fn(),
     searchByScientificName: jest.fn(),
     getCitesLegislation: jest.fn(),
     getEULegislation: jest.fn(),
@@ -53,6 +57,9 @@ describe('LegislationService', () => {
     speciesPlusService = module.get<SpeciesPlusService>(SpeciesPlusService);
 
     jest.clearAllMocks();
+    // Par défaut : Species+ non configuré (pas de jeton)
+    mockSpeciesPlusService.isConfigured.mockReturnValue(false);
+    mockPrismaService.speciesProfile.findUnique.mockResolvedValue(null);
   });
 
   it('should be defined', () => {
@@ -72,11 +79,63 @@ describe('LegislationService', () => {
         country: 'FR',
         editorial: [mockLegislation],
         speciesPlus: {
+          status: 'disabled',
           cites: null,
           eu: null,
         },
         disclaimer: expect.any(String),
         sources: expect.any(Array),
+      });
+      expect(mockSpeciesPlusService.searchByScientificName).not.toHaveBeenCalled();
+    });
+
+    describe('Species+ configuré', () => {
+      beforeEach(() => {
+        mockSpeciesPlusService.isConfigured.mockReturnValue(true);
+        mockPrismaService.speciesLegislation.findMany.mockResolvedValue([]);
+      });
+
+      it('renvoie les listes CITES / UE du taxon correspondant au nom scientifique', async () => {
+        mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+          scientificName: 'Boa constrictor',
+        });
+        mockSpeciesPlusService.searchByScientificName.mockResolvedValue([
+          { id: 99, full_name: 'Boa constrictor imperator' },
+          { id: 7, full_name: 'Boa constrictor' },
+        ]);
+        mockSpeciesPlusService.getCitesLegislation.mockResolvedValue([{ appendix: 'II' }]);
+        mockSpeciesPlusService.getEULegislation.mockResolvedValue([{ annex: 'B' }]);
+
+        const result = await service.getSpeciesLegislation(2448340);
+
+        expect(mockSpeciesPlusService.getCitesLegislation).toHaveBeenCalledWith(7);
+        expect(result.speciesPlus).toEqual({
+          status: 'ok',
+          taxonId: 7,
+          cites: [{ appendix: 'II' }],
+          eu: [{ annex: 'B' }],
+        });
+      });
+
+      it('pas de profil local : not_found, aucun appel Species+', async () => {
+        const result = await service.getSpeciesLegislation(123);
+
+        expect(result.speciesPlus).toEqual({ status: 'not_found', cites: null, eu: null });
+        expect(mockSpeciesPlusService.searchByScientificName).not.toHaveBeenCalled();
+      });
+
+      it('Species+ en panne : fiche servie, statut unavailable (jamais de 500)', async () => {
+        mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+          scientificName: 'Boa constrictor',
+        });
+        mockSpeciesPlusService.searchByScientificName.mockRejectedValue(
+          new Error('Species+ temporarily unavailable'),
+        );
+
+        const result = await service.getSpeciesLegislation(2448340);
+
+        expect(result.speciesPlus).toEqual({ status: 'unavailable', cites: null, eu: null });
+        expect(result.editorial).toEqual([]);
       });
     });
 

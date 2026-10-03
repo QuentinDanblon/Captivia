@@ -1,7 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { AmazonPAService } from './services/amazon-pa.service';
 import {
   PaginationQueryDto,
   PAGINATION_MAX_LIMIT,
@@ -20,10 +19,7 @@ export class EquipmentService {
     'Amphibia': 0, // No amphibian template yet
   };
 
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly amazonService: AmazonPAService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async getRecommendedEquipment(
     speciesId?: number,
@@ -57,35 +53,23 @@ export class EquipmentService {
       recommendations = await this.getEquipmentFallbackByClass(speciesId, category, size);
     }
 
-    // For each recommendation, fetch products from Amazon
-    const recommendationsWithProducts = await Promise.all(
-      recommendations.map(async (rec) => {
-        const searchTerms = rec.searchTerms.join(' ');
-        const products = await this.amazonService.searchProducts(
-          searchTerms,
-          rec.category,
-          5,
-        );
-
-        return {
-          id: rec.id,
-          label: rec.label,
-          category: rec.category,
-          size: rec.size,
-          speciesId: rec.speciesId,
-          products,
-        };
-      }),
-    );
-
+    // Recommandations éditoriales uniquement (taxonomie locale). L'intégration produits
+    // Amazon (PA-API / Creators API) n'est pas branchée : aucune liste de produits n'est
+    // renvoyée, donc aucune donnée inventée (décision D-09, tâche W3-05).
     return {
       speciesId,
       category,
       size,
-      recommendations: recommendationsWithProducts,
+      recommendations: recommendations.map((rec) => ({
+        id: rec.id,
+        label: rec.label,
+        category: rec.category,
+        size: rec.size,
+        speciesId: rec.speciesId,
+      })),
       affiliate: {
         disclaimer:
-          'Les liens vers Amazon sont des liens affiliés. En achetant via ces liens, vous soutenez Captivia sans coût supplémentaire.',
+          'Certains liens de la boutique Captivia sont des liens affiliés. En achetant via ces liens, vous soutenez Captivia sans coût supplémentaire.',
         transparencyUrl: '/transparency',
       },
     };
@@ -194,9 +178,5 @@ export class EquipmentService {
     });
 
     return categories.map((c) => c.category);
-  }
-
-  async searchAmazonProducts(query: string, category?: string, limit = 10): Promise<unknown> {
-    return this.amazonService.searchProducts(query, category, limit);
   }
 }

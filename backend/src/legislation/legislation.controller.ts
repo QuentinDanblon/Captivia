@@ -19,7 +19,11 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { LegislationService } from './legislation.service';
-import { CreateLegislationDto, LegislationQueryDto } from './dto/legislation.dto';
+import {
+  CreateLegislationDto,
+  LegislationQueryDto,
+  SpeciesPlusSearchDto,
+} from './dto/legislation.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { OperatorGuard } from '../common/guards/operator.guard';
 
@@ -85,8 +89,13 @@ export class SpeciesPlusController {
   })
   @ApiQuery({ name: 'name', description: 'Scientific name' })
   @ApiResponse({ status: 200, description: 'Species+ search results' })
-  async searchSpeciesPlus(@Query('name') name: string) {
-    return this.legislationService.searchSpeciesPlus(name);
+  @ApiResponse({
+    status: 503,
+    description:
+      'Integration not configured (SPECIESPLUS_API_TOKEN missing) or Species+ unavailable',
+  })
+  async searchSpeciesPlus(@Query() query: SpeciesPlusSearchDto) {
+    return this.legislationService.searchSpeciesPlus(query.name);
   }
 
   @Get('taxon/:taxonId/cites')

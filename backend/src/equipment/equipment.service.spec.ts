@@ -1,12 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EquipmentService } from './equipment.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { AmazonPAService } from './services/amazon-pa.service';
 
 describe('EquipmentService', () => {
   let service: EquipmentService;
   let prismaService: PrismaService;
-  let amazonService: AmazonPAService;
 
   const mockEquipment = {
     id: 'equip-id-123',
@@ -20,15 +18,6 @@ describe('EquipmentService', () => {
     updatedAt: new Date(),
   };
 
-  const mockAmazonProducts = [
-    {
-      asin: 'B001',
-      title: 'Test Product',
-      price: 49.99,
-      link: 'https://amazon.com/product',
-    },
-  ];
-
   const mockPrismaService = {
     recommendedEquipment: {
       findMany: jest.fn(),
@@ -36,10 +25,6 @@ describe('EquipmentService', () => {
       update: jest.fn(),
       delete: jest.fn(),
     },
-  };
-
-  const mockAmazonService = {
-    searchProducts: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -50,16 +35,11 @@ describe('EquipmentService', () => {
           provide: PrismaService,
           useValue: mockPrismaService,
         },
-        {
-          provide: AmazonPAService,
-          useValue: mockAmazonService,
-        },
       ],
     }).compile();
 
     service = module.get<EquipmentService>(EquipmentService);
     prismaService = module.get<PrismaService>(PrismaService);
-    amazonService = module.get<AmazonPAService>(AmazonPAService);
 
     jest.clearAllMocks();
   });
@@ -69,12 +49,10 @@ describe('EquipmentService', () => {
   });
 
   describe('getRecommendedEquipment', () => {
-    it('should return recommendations with Amazon products', async () => {
+    it('should return the editorial recommendations without any product list (no Amazon integration)', async () => {
       mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([
         mockEquipment,
       ]);
-      mockAmazonService.searchProducts.mockResolvedValue(mockAmazonProducts);
-
       const result = await service.getRecommendedEquipment(123);
 
       expect(result).toEqual({
@@ -88,7 +66,6 @@ describe('EquipmentService', () => {
             category: mockEquipment.category,
             size: mockEquipment.size,
             speciesId: mockEquipment.speciesId,
-            products: mockAmazonProducts,
           },
         ],
         affiliate: {
@@ -100,7 +77,6 @@ describe('EquipmentService', () => {
 
     it('should filter by category', async () => {
       mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
-      mockAmazonService.searchProducts.mockResolvedValue([]);
 
       await service.getRecommendedEquipment(undefined, 'heating');
 
@@ -116,7 +92,6 @@ describe('EquipmentService', () => {
 
     it('should filter by size', async () => {
       mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
-      mockAmazonService.searchProducts.mockResolvedValue([]);
 
       await service.getRecommendedEquipment(undefined, undefined, 'small');
 
@@ -132,7 +107,6 @@ describe('EquipmentService', () => {
 
     it('should include speciesId OR null in query when speciesId provided', async () => {
       mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([]);
-      mockAmazonService.searchProducts.mockResolvedValue([]);
 
       await service.getRecommendedEquipment(123);
 
@@ -148,19 +122,18 @@ describe('EquipmentService', () => {
       });
     });
 
-    it('should call Amazon API with search terms', async () => {
+    it('ne renvoie jamais de liste de produits (aucune donnée inventée)', async () => {
       mockPrismaService.recommendedEquipment.findMany.mockResolvedValue([
         mockEquipment,
       ]);
-      mockAmazonService.searchProducts.mockResolvedValue(mockAmazonProducts);
 
-      await service.getRecommendedEquipment(123);
+      const result = (await service.getRecommendedEquipment(123)) as {
+        recommendations: Array<Record<string, unknown>>;
+      };
 
-      expect(mockAmazonService.searchProducts).toHaveBeenCalledWith(
-        'terrarium glass reptile',
-        mockEquipment.category,
-        5,
-      );
+      expect(result.recommendations).toHaveLength(1);
+      expect(result.recommendations[0]).not.toHaveProperty('products');
+      expect(result.recommendations[0]).not.toHaveProperty('searchTerms');
     });
   });
 
@@ -270,33 +243,6 @@ describe('EquipmentService', () => {
         select: { category: true },
         distinct: ['category'],
       });
-    });
-  });
-
-  describe('searchAmazonProducts', () => {
-    it('should search Amazon with query', async () => {
-      mockAmazonService.searchProducts.mockResolvedValue(mockAmazonProducts);
-
-      const result = await service.searchAmazonProducts('reptile tank');
-
-      expect(result).toEqual(mockAmazonProducts);
-      expect(mockAmazonService.searchProducts).toHaveBeenCalledWith(
-        'reptile tank',
-        undefined,
-        10,
-      );
-    });
-
-    it('should respect category and limit parameters', async () => {
-      mockAmazonService.searchProducts.mockResolvedValue([]);
-
-      await service.searchAmazonProducts('test', 'heating', 20);
-
-      expect(mockAmazonService.searchProducts).toHaveBeenCalledWith(
-        'test',
-        'heating',
-        20,
-      );
     });
   });
 });

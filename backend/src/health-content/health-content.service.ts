@@ -1,9 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { PubmedService } from './services/pubmed.service';
+import { describeHttpError } from '../external/http-safety';
 
 @Injectable()
 export class HealthContentService {
+  private readonly logger = new Logger(HealthContentService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly pubmedService: PubmedService,
@@ -26,17 +29,28 @@ export class HealthContentService {
       },
     );
 
-    // Get PubMed articles (we'll need the scientific name)
-    // For now, we'll use a placeholder approach
-    // In a real implementation, you'd fetch the species name from GBIF
-    let pubmedArticles = [];
-    
-    // TODO: Fetch species scientific name from GBIF/species service
-    // const species = await this.gbifService.getSpecies(speciesId);
-    // pubmedArticles = await this.pubmedService.searchBySpeciesAndDisease(
-    //   species.scientificName,
-    //   disease
-    // );
+    // Références PubMed : recherche par nom scientifique (profil local de l'espèce).
+    // Pas de profil → aucun appel PubMed. Panne PubMed → fiche servie sans références,
+    // signalée par `pubmedAvailable: false` (jamais une erreur 5xx ni un résultat caché).
+    let pubmedArticles: unknown[] = [];
+    let pubmedAvailable = true;
+    const profile = await this.prisma.speciesProfile.findUnique({
+      where: { speciesId },
+      select: { scientificName: true },
+    });
+    if (profile?.scientificName) {
+      try {
+        pubmedArticles = await this.pubmedService.searchBySpeciesAndDisease(
+          profile.scientificName,
+          disease,
+        );
+      } catch (error) {
+        pubmedAvailable = false;
+        this.logger.warn(
+          `PubMed indisponible pour l'espèce ${speciesId}: ${describeHttpError(error)}`,
+        );
+      }
+    }
 
     return {
       speciesId,
@@ -47,6 +61,7 @@ export class HealthContentService {
         updatedAt: editorialContent.updatedAt,
       } : null,
       pubmed: pubmedArticles,
+      pubmedAvailable,
       disclaimer: 'Cette information ne remplace pas un avis vétérinaire. Consultez toujours un professionnel en cas de doute.',
     };
   }

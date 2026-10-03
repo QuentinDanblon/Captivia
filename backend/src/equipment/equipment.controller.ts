@@ -1,5 +1,3 @@
-import { Throttle } from '@nestjs/throttler';
-import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
 import {
   Controller,
   Get,
@@ -24,7 +22,6 @@ import {
   EquipmentQueryDto,
   CreateEquipmentDto,
   UpdateEquipmentDto,
-  AmazonSearchDto,
 } from './dto/equipment.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { OperatorGuard } from '../common/guards/operator.guard';
@@ -38,7 +35,7 @@ export class EquipmentController {
   @ApiOperation({
     summary: 'Get recommended equipment',
     description:
-      'Get recommended equipment list with Amazon product results',
+      'Get the recommended equipment list (editorial taxonomy)',
   })
   @ApiQuery({
     name: 'speciesId',
@@ -117,29 +114,5 @@ export class EquipmentController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async deleteRecommendation(@Param('id') id: string) {
     return this.equipmentService.deleteRecommendation(id);
-  }
-}
-
-@ApiTags('amazon')
-@Controller('amazon')
-@Throttle(EXTERNAL_API_THROTTLE)
-export class AmazonController {
-  constructor(private readonly equipmentService: EquipmentService) {}
-
-  @Get('search')
-  @ApiOperation({
-    summary: 'Search Amazon products',
-    description: 'Search for products on Amazon (with affiliate links)',
-  })
-  @ApiQuery({ name: 'q', description: 'Search query' })
-  @ApiQuery({ name: 'category', required: false, description: 'Product category' })
-  @ApiQuery({ name: 'limit', required: false, description: 'Max results (default: 10)' })
-  @ApiResponse({ status: 200, description: 'Amazon product results' })
-  async searchAmazon(@Query() query: AmazonSearchDto): Promise<unknown> {
-    return this.equipmentService.searchAmazonProducts(
-      query.q,
-      query.category,
-      query.limit || 10,
-    );
   }
 }

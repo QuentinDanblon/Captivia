@@ -168,6 +168,30 @@ describe('envValidationSchema', () => {
     });
   });
 
+  describe('intégrations externes (W3-05) : variables optionnelles', () => {
+    it('SPECIESPLUS_API_TOKEN, NCBI_API_KEY et NCBI_EMAIL sont facultatifs (absents ou vides)', () => {
+      expect(validate(baseProd).error).toBeUndefined();
+      const empty = validate({
+        ...baseProd,
+        SPECIESPLUS_API_TOKEN: '',
+        NCBI_API_KEY: '',
+        NCBI_EMAIL: '',
+      });
+      expect(empty.error).toBeUndefined();
+    });
+
+    it('accepte des valeurs renseignées', () => {
+      const { error, value } = validate({
+        ...baseProd,
+        SPECIESPLUS_API_TOKEN: 'jeton',
+        NCBI_API_KEY: 'cle',
+        NCBI_EMAIL: 'contact@example.test',
+      });
+      expect(error).toBeUndefined();
+      expect(value.SPECIESPLUS_API_TOKEN).toBe('jeton');
+    });
+  });
+
   describe('isExampleJwtSecret', () => {
     it("détecte les valeurs d'exemple et laisse passer un vrai secret", () => {
       expect(isExampleJwtSecret('dev-only-anything')).toBe(true);
