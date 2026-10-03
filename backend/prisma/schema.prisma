@@ -50,6 +50,9 @@ model User {
   termsVersion    String?
   /// Date de vérification de l'adresse e-mail (W2-04) ; null = non vérifiée.
   emailVerifiedAt DateTime? @db.Timestamptz(3)
+  /// Communauté : suspension de publication décidée par un opérateur (NULL = aucune). Portée par
+  /// le compte, pas par le profil : quitter la communauté puis réactiver le profil ne la lève pas.
+  communitySuspendedUntil DateTime? @db.Timestamptz(3)
   points       Int      @default(0)   // Points pour le système de grade
   grade        String   @default("bronze") // bronze | silver | gold | platinum | diamond
   createdAt    DateTime @default(now()) @db.Timestamptz(3)
@@ -77,6 +80,8 @@ model User {
   communityBlocksReceived    CommunityBlock[]            @relation("CommunityBlocked")
   communityModerationSubject CommunityModerationAction[] @relation("CommunityModerationSubject")
   communityModerationTaken   CommunityModerationAction[] @relation("CommunityModerationOperator")
+  communityHandleHolds       CommunityHandleHold[]
+  communityUploadAttempts    CommunityUploadAttempt[]
 
   /// Purge des invités inactifs (GuestPurgeService).
   @@index([isGuest, lastActiveAt])
@@ -796,7 +801,7 @@ model CommunityProfile {
   /// Âge minimal (CGU) : date de la confirmation (case de l'inscription, ou confirmation à
   /// l'activation pour un compte antérieur à cette case).
   ageConfirmedAt  DateTime  @db.Timestamptz(3)
-  /// Suspension de publication décidée par un opérateur (NULL = aucune).
+  /// Copie d'affichage de User.communitySuspendedUntil (source de vérité : le compte).
   suspendedUntil  DateTime? @db.Timestamptz(3)
   createdAt       DateTime  @default(now()) @db.Timestamptz(3)
   updatedAt       DateTime  @updatedAt @db.Timestamptz(3)
@@ -913,17 +918,24 @@ model CommunityReport {
   details    String?
   status     CommunityReportStatus @default(OPEN)
   resolvedAt DateTime?             @db.Timestamptz(3)
+  /// Décision qui a clos le signalement (DSA art. 16(5) : notifiée à l'auteur du signalement).
+  decisionId String?
+  /// Date d'envoi de la notification de la décision à l'auteur du signalement (e-mail).
+  notifiedAt DateTime?             @db.Timestamptz(3)
   createdAt  DateTime              @default(now()) @db.Timestamptz(3)
 
-  reporter User              @relation(fields: [reporterId], references: [id], onDelete: Cascade)
-  post     CommunityPost?    @relation(fields: [postId], references: [id], onDelete: Cascade)
-  comment  CommunityComment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  reporter User                       @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  post     CommunityPost?             @relation(fields: [postId], references: [id], onDelete: Cascade)
+  comment  CommunityComment?          @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  decision CommunityModerationAction? @relation(fields: [decisionId], references: [id], onDelete: SetNull)
 
   @@unique([reporterId, postId])
   @@unique([reporterId, commentId])
   @@index([status, createdAt])
   @@index([postId, status])
   @@index([commentId, status])
+  @@index([decisionId])
+  @@index([reporterId, createdAt])
 }
 
 /// Blocage : les contenus sont masqués dans les deux sens.
@@ -962,6 +974,8 @@ model CommunityModerationAction {
   suspendedUntil   DateTime?                     @db.Timestamptz(3)
   /// Date d'envoi de la notification à l'auteur (e-mail) ; la décision reste lisible dans l'app.
   notifiedAt       DateTime?                     @db.Timestamptz(3)
+  /// Notification à l'auteur due mais pas encore envoyée : relancée par le job de maintenance.
+  notificationPending Boolean                    @default(false)
   appealStatus     CommunityAppealStatus         @default(NONE)
   appealText       String?
   appealedAt       DateTime?                     @db.Timestamptz(3)
@@ -971,9 +985,40 @@ model CommunityModerationAction {
 
   subject  User? @relation("CommunityModerationSubject", fields: [subjectId], references: [id], onDelete: SetNull)
   operator User? @relation("CommunityModerationOperator", fields: [operatorId], references: [id], onDelete: SetNull)
+  reports  CommunityReport[]
 
   @@index([subjectId, createdAt])
   @@index([targetType, targetId])
   @@index([appealStatus, appealedAt])
+  @@index([createdAt])
+  @@index([notificationPending, createdAt])
+}
+
+/// Pseudo libéré (changement de pseudo, départ de la communauté, suppression du compte) : réservé
+/// à son ancien titulaire pendant COMMUNITY_HANDLE_HOLD_DAYS jours (anti-usurpation). `userId` NULL
+/// après suppression du compte : plus personne ne peut le reprendre avant l'expiration.
+model CommunityHandleHold {
+  id         String   @id @default(uuid())
+  handleKey  String   @unique
+  userId     String?
+  releasedAt DateTime @default(now()) @db.Timestamptz(3)
+  expiresAt  DateTime @db.Timestamptz(3)
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+/// Tentatives de téléversement (réussies ou non), consommées AVANT le traitement de l'image :
+/// support de la limite COMMUNITY_UPLOADS_PER_HOUR. Purgées après 24 h par la maintenance.
+model CommunityUploadAttempt {
+  id        String   @id @default(uuid())
+  userId    String
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
   @@index([createdAt])
 }
