@@ -81,7 +81,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
    Le domaine des liens est celui de `NEXT_PUBLIC_SITE_URL` : en cas de domaine définitif, le reporter aussi dans *Associated Domains* (iOS) et l'`intent-filter` (Android), voir `docs/MOBILE.md` § 8.
 
 ### 3.5 Protection de `main`
-*Settings → Branches → Add rule* sur `main` : PR obligatoire, checks requis (`test-backend`, `build-frontend`, `docker-build`, `quality`), branche à jour. Ne pas exiger `migrate-production` (il ne tourne que sur `push`).
+*Settings → Branches → Add rule* sur `main` : PR obligatoire, checks requis (`test-backend`, `build-frontend`, `docker-build`, `quality`), branche à jour. Ne pas exiger `migrate-production` (il ne tourne que sur `push`). Un job ignoré (PR en brouillon, ou partie non modifiée : job `changes` de `ci.yml`) compte comme réussi pour GitHub ; la CI tourne au passage de la PR à « prête ».
 
 ## 4. Migrations : URL pooled ou directe ?
 

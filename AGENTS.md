@@ -191,8 +191,19 @@ Textes des stores modifiés : `npm run store:check` (longueurs, `frontend/script
 
 ## 5. Flux de travail
 
-- Une tâche = une branche = une PR, référence de tâche du plan dans le titre quand elle existe
-  (ex. `W4-09`). Jamais de push direct sur `main`.
+- **Une demande du propriétaire = une seule PR**, référence de tâche du plan dans le titre quand
+  elle existe (ex. `W4-09`). Jamais de push direct sur `main`.
+- **Économie de minutes Actions** (dépôt privé, quota payant) : chaque push sur une PR prête
+  relance la CI. Donc :
+  - ouvrir la PR **en brouillon** (rien ne tourne en brouillon), tout vérifier **en local** avec
+    les commandes du § 4, pousser **en une fois**, puis passer la PR « prête » : un seul passage
+    de CI ;
+  - ne pas pousser commit par commit pour « voir si la CI passe » ; regrouper les corrections ;
+  - avant de fusionner, vérifier le contenu de l'aperçu Netlify (lien direct du déploiement), pas
+    seulement son statut, pour ne pas devoir rouvrir une PR de correctif ;
+  - la CI ne lance que les jobs concernés (backend ou frontend, job `changes`) ; Netlify ne
+    reconstruit que si `frontend/` change ; Dependabot regroupe tout en une PR mensuelle ;
+    release-please se lance à la main (Actions → Release).
 - **CI verte obligatoire** avant fusion (`test-backend`, `lint-backend`, `build-frontend`,
   `docker-build`, `quality`, `e2e`, audit `security.yml`).
 - Après fusion sur `main` : le job `migrate-production` applique les migrations sur Neon (secret
@@ -200,7 +211,7 @@ Textes des stores modifiés : `npm run store:check` (longueurs, `frontend/script
   (`autoDeployTrigger: checksPass`) ; **Netlify**, relié à GitHub, construit et publie le site (et
   une preview par PR). Le seed du catalogue est manuel (workflow « Seed production »).
 - Commits en **français**, petits et clairs, au format Conventional Commits (`feat:`, `fix:`,
-  `docs:`, `refactor:`…, release-please s'en sert pour les changelogs). Aucune ligne de signature
+  `docs:`, `refactor:`…, release-please s'en sert pour les changelogs quand on le lance). Aucune ligne de signature
   ou d'attribution n'est requise dans les messages.
 - Toute livraison met à jour la documentation qu'elle rend fausse (et le § 0.2 du plan).
 

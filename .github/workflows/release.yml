@@ -7,10 +7,10 @@ name: Release
 # Prérequis du dépôt : Settings → Actions → General → « Allow GitHub Actions to create and
 # approve pull requests » (sans cela, l'action ne peut pas ouvrir la PR de release).
 
+# Déclenchement MANUEL uniquement (Actions → Release → Run workflow) : en automatique, chaque
+# fusion dans main ouvrait ou mettait à jour une PR de release, qui relançait toute la CI.
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 permissions:
   contents: write

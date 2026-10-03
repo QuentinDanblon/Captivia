@@ -7,6 +7,9 @@ on:
     branches: [main]
     paths-ignore: ['docs/**', '**/*.md', 'backend/prisma/enrichment/in/**']
   pull_request:
+    # ready_for_review : une PR en brouillon ne lance rien (voir le job `changes`) ; le passage
+    # à « prête » déclenche l'unique passage de CI.
+    types: [opened, synchronize, reopened, ready_for_review]
     paths-ignore: ['docs/**', '**/*.md', 'backend/prisma/enrichment/in/**']
   # Déclenchement manuel : relance toute la CI à la demande.
   workflow_dispatch:
@@ -22,7 +25,39 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
+  # Économie de minutes : détecte ce qui a changé. Les jobs backend ne tournent que si backend/
+  # (ou ce workflow, ou render.yaml) a changé ; les jobs frontend, que si frontend/ (ou ce
+  # workflow, ou netlify.toml) a changé. Rien ne tourne tant qu'une PR est en brouillon.
+  changes:
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft != true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    # Déclenchement manuel : tout est relancé, sans filtre.
+    outputs:
+      backend: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.backend == 'true' }}
+      frontend: ${{ github.event_name == 'workflow_dispatch' || steps.filter.outputs.frontend == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: filter
+        if: github.event_name != 'workflow_dispatch'
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            backend:
+              - 'backend/**'
+              - '.github/workflows/ci.yml'
+              - 'render.yaml'
+            frontend:
+              - 'frontend/**'
+              - '.github/workflows/ci.yml'
+              - 'netlify.toml'
+
   test-backend:
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     services:
@@ -81,6 +116,8 @@ jobs:
         run: npm test -- --runInBand
 
   build-frontend:
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -112,7 +149,8 @@ jobs:
   # reconstruit de toute façon au déploiement. Sur les PR, le build TypeScript du backend
   # (test-backend) et du frontend (build-frontend) couvrent l'essentiel.
   docker-build:
-    if: github.event_name != 'pull_request'
+    needs: changes
+    if: github.event_name != 'pull_request' && (needs.changes.outputs.backend == 'true' || needs.changes.outputs.frontend == 'true')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -140,6 +178,8 @@ jobs:
 
   # Lint frontend : BLOQUANT.
   quality:
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -176,6 +216,8 @@ jobs:
   # toute nouvelle erreur fait échouer le job.
   # Render (autoDeployTrigger: checksPass) attend que TOUS les checks soient verts.
   lint-backend:
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -199,10 +241,14 @@ jobs:
   # Prérequis : secret NEON_DATABASE_URL_DIRECT (URL Neon DIRECTE, sans « -pooler »).
   # Sans ce secret, le job est ignoré proprement (avertissement, pas d'échec).
   migrate-production:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    # Migrer seulement si TOUT ce qui conditionne le déploiement Render est vert,
-    # sinon la base serait migrée sans que la nouvelle API soit déployée.
-    needs: [test-backend, build-frontend, docker-build, quality]
+    # Migrer seulement si le backend a changé et que rien de ce qui conditionne le déploiement
+    # Render n'a échoué (un job ignoré faute de changement compte comme réussi), sinon la base
+    # serait migrée sans que la nouvelle API soit déployée.
+    if: >-
+      always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+      && needs.changes.outputs.backend == 'true'
+      && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    needs: [changes, test-backend, build-frontend, docker-build, quality]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: production
@@ -258,6 +304,8 @@ jobs:
   # (page.route + frontend/e2e/fixtures). Aucun backend ni base de données.
   # Local : NEXT_PUBLIC_API_URL=http://127.0.0.1:4010 npm run build && npx playwright test --project=smoke
   e2e:
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
