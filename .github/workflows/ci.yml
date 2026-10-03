@@ -171,7 +171,9 @@ jobs:
           echo "Aucun motif interdit."
 
   # Lint backend : BLOQUANT (0 erreur ESLint, règles typées de typescript-eslint incluses).
-  # La dette historique a été résorbée par W1-07 ; toute nouvelle erreur fait échouer le job.
+  # Couvre src/ ET test/ (e2e, utilitaires, mocks) : `npm run lint:check` = eslint sur
+  # {src,apps,libs,test}/**/*.ts sans --fix. La dette historique a été résorbée par W1-07 ;
+  # toute nouvelle erreur fait échouer le job.
   # Render (autoDeployTrigger: checksPass) attend que TOUS les checks soient verts.
   lint-backend:
     runs-on: ubuntu-latest
@@ -186,9 +188,9 @@ jobs:
       - name: Install
         working-directory: backend
         run: npm ci
-      - name: ESLint backend
+      - name: ESLint backend (src + test)
         working-directory: backend
-        run: npx eslint "src/**/*.ts" --no-fix
+        run: npm run lint:check
 
   # Applique les migrations Prisma sur Neon AVANT le déploiement de Render.
   # Render est configuré en `autoDeployTrigger: checksPass` : il attend que tous les
