@@ -212,8 +212,10 @@ Textes des stores modifiés : `npm run store:check` (longueurs, `frontend/script
   (`autoDeployTrigger: checksPass`) ; **Netlify**, relié à GitHub, construit et publie le site (et
   une preview par PR). Le seed du catalogue est manuel (workflow « Seed production »).
 - Commits en **français**, petits et clairs, au format Conventional Commits (`feat:`, `fix:`,
-  `docs:`, `refactor:`…, release-please s'en sert pour les changelogs quand on le lance). Aucune ligne de signature
-  ou d'attribution n'est requise dans les messages.
+  `docs:`, `refactor:`…, release-please s'en sert pour les changelogs quand on le lance).
+  Auteur : QuentinDanblon ; chaque commit se termine par la ligne de co-auteur suivante, et
+  aucune autre ligne de signature ou d'attribution (pas d'outil ni d'agent IA) :
+  `Co-authored-by: Amaury Baptist <amaurybaptistecole@gmail.com>`
 - Toute livraison met à jour la documentation qu'elle rend fausse (et le § 0.2 du plan).
 
 ## 6. Ne jamais
