@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import AnimalDetailPage from '@/app/[locale]/mes-animaux/[id]/page';
+import AnimalDetailPage from '@/app/[locale]/(app)/mes-animaux/[id]/page';
 import { useQueryRouteParams } from '@/lib/platform';
 
 function AnimalDetailFromQuery() {

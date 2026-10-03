@@ -30,7 +30,7 @@ jest.mock('@/i18n/navigation', () => ({
   ),
 }));
 
-import MyAnimalsPage from '../[locale]/mes-animaux/page';
+import MyAnimalsPage from '../[locale]/(app)/mes-animaux/page';
 
 /** Revue frontend, constat 10 : plus de bouton ni de lien imbriqué dans le lien de la carte. */
 describe('mes-animaux : cartes', () => {

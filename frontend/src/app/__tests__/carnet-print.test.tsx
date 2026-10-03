@@ -40,7 +40,7 @@ jest.mock('@/lib/carnet-share', () => ({
   shareCarnetFile: (...args: unknown[]) => shareCarnetFile(...args),
 }));
 
-import CarnetPrintPage from '../[locale]/mes-animaux/[id]/carnet/page';
+import CarnetPrintPage from '../[locale]/(app)/mes-animaux/[id]/carnet/page';
 
 const FUTURE = '2099-01-01T00:00:00.000Z';
 

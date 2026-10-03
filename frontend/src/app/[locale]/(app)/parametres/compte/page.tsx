@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useId } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { languageNames } from '@/components/LanguageSelector';
 import { Link, useRouter, usePathname } from '@/i18n/navigation';
-import type { Locale } from '../../../../../i18n/routing';
+import type { Locale } from '../../../../../../i18n/routing';
 import { useAuth } from '@/contexts/AuthContext';
 import Modal from '@/components/ui/Modal';
 import { api } from '@/lib/api';

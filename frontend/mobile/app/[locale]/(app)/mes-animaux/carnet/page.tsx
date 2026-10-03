@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import CarnetPrintView from '@/app/[locale]/mes-animaux/[id]/carnet/CarnetPrintView';
+import CarnetPrintView from '@/app/[locale]/(app)/mes-animaux/[id]/carnet/CarnetPrintView';
 
 function CarnetFromQuery() {
   const id = useSearchParams().get('id') ?? '';

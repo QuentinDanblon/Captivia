@@ -9,6 +9,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { AppHeader } from '@/components/AppHeader';
 import { EmailVerificationBanner } from '@/components/EmailVerificationBanner';
 import { NativeWelcome } from '@/components/guest/NativeWelcome';
+import { SiteChrome } from '@/components/SiteChrome';
 import { SiteFooter } from '@/components/SiteFooter';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import '../globals.css';
@@ -100,14 +101,20 @@ export default async function LocaleLayout({
       <body className="min-h-screen flex flex-col w-full bg-paper text-ink font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
-            <AppHeader />
-            <EmailVerificationBanner />
-            <main id="main-content" tabIndex={-1} className="flex-1 w-full">
+            {/* En-tête, <main> et pied hors de l'app ; le groupe (app) a sa coquille (AppShell). */}
+            <SiteChrome
+              header={
+                <>
+                  <AppHeader />
+                  <EmailVerificationBanner />
+                </>
+              }
+              footer={<SiteFooter />}
+            >
               <ErrorBoundary>
                 {children}
               </ErrorBoundary>
-            </main>
-            <SiteFooter />
+            </SiteChrome>
             {/* App mobile : premier lancement sans session → essai sans compte proposé. */}
             <NativeWelcome />
           </AuthProvider>
