@@ -259,6 +259,11 @@ describe('Jetons de push natif (E2E)', () => {
     expect(clamped.localRemindersUntil!.getTime()).toBeGreaterThanOrEqual(
       before + MAX_LOCAL_COVERAGE_MS - 60_000,
     );
+    // Champ absent (synchronisation locale hors ligne) : couverture inchangée.
+    await post(accessToken, { token, platform: 'android' }).expect(200);
+    expect((await rows(user.id))[0].localRemindersUntil).toEqual(
+      clamped.localRemindersUntil,
+    );
     // null : plus aucune couverture locale.
     await post(accessToken, {
       token,
@@ -272,10 +277,17 @@ describe('Jetons de push natif (E2E)', () => {
     const a = await register('owner-a');
     const b = await register('owner-b');
     const shared = fcmToken();
-    await post(a.accessToken, { token: shared, platform: 'ios' }).expect(200);
+    await post(a.accessToken, {
+      token: shared,
+      platform: 'ios',
+      localRemindersUntil: new Date(Date.now() + DAY_MS).toISOString(),
+    }).expect(200);
     await post(b.accessToken, { token: shared, platform: 'ios' }).expect(200);
     expect(await rows(a.user.id)).toHaveLength(0);
-    expect((await rows(b.user.id)).map((r) => r.token)).toEqual([shared]);
+    const [transferred] = await rows(b.user.id);
+    expect(transferred.token).toBe(shared);
+    // La couverture locale du compte A ne vaut pas pour B.
+    expect(transferred.localRemindersUntil).toBeNull();
 
     // A ne peut pas retirer le jeton de B.
     await del(a.accessToken, { token: shared }).expect(200);

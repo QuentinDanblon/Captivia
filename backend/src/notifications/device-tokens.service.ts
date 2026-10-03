@@ -40,12 +40,18 @@ export class DeviceTokensService {
     dto: RegisterDeviceTokenDto,
     now: Date = new Date(),
   ): Promise<DeviceTokenRegistration> {
+    // `localRemindersUntil` absent : couverture inchangée (synchronisation locale hors ligne) ;
+    // null : plus aucun rappel local programmé.
+    const coverage =
+      dto.localRemindersUntil === undefined
+        ? undefined
+        : this.coverage(dto.localRemindersUntil, now);
     const data = {
       userId,
       platform: dto.platform,
       locale: dto.locale ?? 'fr',
-      localRemindersUntil: this.coverage(dto.localRemindersUntil, now),
       lastSeenAt: now,
+      ...(coverage !== undefined ? { localRemindersUntil: coverage } : {}),
     };
 
     const upsert = async (tx: Prisma.TransactionClient) => {
@@ -61,7 +67,14 @@ export class DeviceTokensService {
         select: { id: true, userId: true },
       });
       if (existing) {
-        return tx.deviceToken.update({ where: { id: existing.id }, data });
+        return tx.deviceToken.update({
+          where: { id: existing.id },
+          // Changement de compte : la couverture locale de l'ancien compte ne vaut plus.
+          data:
+            existing.userId === userId
+              ? data
+              : { localRemindersUntil: null, ...data },
+        });
       }
       const current = await tx.deviceToken.findMany({
         where: { userId },

@@ -44,7 +44,7 @@ export class RegisterDeviceTokenDto {
 
   @ApiPropertyOptional({
     description:
-      "Les rappels de soins prévus avant cet instant (ISO 8601) sont déjà programmés en notifications locales sur l'appareil : ils ne lui sont pas renvoyés en push. null : aucun.",
+      "Les rappels de soins prévus avant cet instant (ISO 8601) sont déjà programmés en notifications locales sur l'appareil : ils ne lui sont pas renvoyés en push. null : aucun ; absent : valeur précédente conservée.",
     nullable: true,
   })
   @IsOptional()
