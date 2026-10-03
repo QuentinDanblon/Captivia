@@ -1223,11 +1223,37 @@
         "thermostat": "Thermostat",
         "thermometre": "Thermometer",
         "pulverisateur": "Mister",
-        "filtration": "Filtration"
+        "filtration": "Filtration",
+        "couchage": "Bedding",
+        "jouet": "Toys",
+        "litiere": "Litter",
+        "griffoir": "Scratching posts",
+        "decoration": "Furnishings",
+        "enclos": "Enclosure",
+        "aquarium": "Aquarium",
+        "aquaterrarium": "Aquaterrarium",
+        "voliere": "Aviary",
+        "vivarium": "Vivariums",
+        "bassin": "Pond"
       }
     },
     "pubmedNote": "Articles from PubMed (NCBI), in English",
-    "reviewedOn": "Profile checked on {date}"
+    "reviewedOn": "Profile checked on {date}",
+    "equipmentItems": {
+      "bed": "Bed or cushion suited to the animal’s size",
+      "bowls": "Food and water bowls",
+      "dogToys": "Suitable dog toys",
+      "litterTray": "Litter tray",
+      "scratchingPost": "Sturdy scratching post",
+      "terrarium": "Species-appropriate terrarium",
+      "vivarium": "Species-appropriate vivarium",
+      "aquarium": "Species-appropriate aquarium",
+      "aquaterrarium": "Species-appropriate aqua-terrarium",
+      "cage": "Species-appropriate cage",
+      "aviary": "Species-appropriate aviary",
+      "enclosure": "Species-appropriate enclosure",
+      "pond": "Species-appropriate pond"
+    }
   },
   "store": {
     "allCategories": "All types",

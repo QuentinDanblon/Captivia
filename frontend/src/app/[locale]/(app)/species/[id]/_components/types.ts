@@ -132,11 +132,13 @@ export interface EquipmentRecommendation {
   id: string;
   category: string;
   label: string;
+  labelKey?: string;
   size?: string;
 }
 
 export interface EquipmentData {
   recommendations?: EquipmentRecommendation[];
+  sources?: Array<SourceRef | string>;
 }
 
 export type ReproductionData = SpeciesReproduction & { sources?: SourceRef[] | null };

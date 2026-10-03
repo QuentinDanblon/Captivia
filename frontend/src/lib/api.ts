@@ -462,7 +462,7 @@ export const api = {
 
   // Animals endpoints
   getMyAnimals: async (token: string) => {
-    return request(`${API_URL}/users/me/animals`, {
+    return request<Animal[]>(`${API_URL}/users/me/animals`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -1216,11 +1216,37 @@
         "thermostat": "Termostato",
         "thermometre": "Termómetro",
         "pulverisateur": "Pulverizador",
-        "filtration": "Filtración"
+        "filtration": "Filtración",
+        "couchage": "Descanso",
+        "jouet": "Juguetes",
+        "litiere": "Arena",
+        "griffoir": "Rascadores",
+        "decoration": "Accesorios",
+        "enclos": "Recinto",
+        "aquarium": "Acuario",
+        "aquaterrarium": "Acuaterrario",
+        "voliere": "Pajarera",
+        "vivarium": "Vivario",
+        "bassin": "Estanque"
       }
     },
     "pubmedNote": "Artículos de PubMed (NCBI), en inglés",
-    "reviewedOn": "Ficha verificada el {date}"
+    "reviewedOn": "Ficha verificada el {date}",
+    "equipmentItems": {
+      "bed": "Cama o cojín adecuado al tamaño",
+      "bowls": "Cuencos para comida y agua",
+      "dogToys": "Juguetes adecuados para el perro",
+      "litterTray": "Bandeja de arena",
+      "scratchingPost": "Rascador estable",
+      "terrarium": "Terrario adecuado para la especie",
+      "vivarium": "Vivario adecuado para la especie",
+      "aquarium": "Acuario adecuado para la especie",
+      "aquaterrarium": "Acuaterrario adecuado para la especie",
+      "cage": "Jaula adecuada para la especie",
+      "aviary": "Aviario adecuado para la especie",
+      "enclosure": "Recinto adecuado para la especie",
+      "pond": "Estanque adecuado para la especie"
+    }
   },
   "store": {
     "allCategories": "Todos los tipos",

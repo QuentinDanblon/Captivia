@@ -1,6 +1,11 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { Prisma, RecommendedEquipment } from '@prisma/client';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import {
+  domesticGroup,
+  equipmentDefaults,
+  type EquipmentItem,
+} from './equipment-defaults';
 import {
   PaginationQueryDto,
   PAGINATION_MAX_LIMIT,
@@ -9,16 +14,6 @@ import {
 
 @Injectable()
 export class EquipmentService {
-  private readonly logger = new Logger(EquipmentService.name);
-
-  // Mapping of GBIF class to template species ID for fallback
-  private readonly classTemplateMapping: Record<string, number> = {
-    Reptilia: 2448340, // Boa constrictor as reptile template
-    Aves: 0, // No bird template yet
-    Mammalia: 0, // No mammal template yet
-    Amphibia: 0, // No amphibian template yet
-  };
-
   constructor(private readonly prisma: PrismaService) {}
 
   async getRecommendedEquipment(
@@ -27,35 +22,124 @@ export class EquipmentService {
     size?: string,
     page?: PaginationQueryDto,
   ): Promise<unknown> {
+    const species = speciesId
+      ? await this.prisma.speciesProfile.findUnique({
+          where: { speciesId },
+          select: {
+            speciesId: true,
+            scientificName: true,
+            category: true,
+            habitats: {
+              where: { locale: 'fr' },
+              take: 1,
+              select: {
+                habitatType: true,
+                activityEnrichment: true,
+                lightNeeds: true,
+                sources: true,
+              },
+            },
+          },
+        })
+      : null;
+    if (
+      species &&
+      !species.habitats.length &&
+      !domesticGroup(species.scientificName)
+    ) {
+      // Les races sans section propre reprennent l'habitat documenté de leur espèce parente.
+      const parent = await this.prisma.speciesProfile.findFirst({
+        where: {
+          scientificName: {
+            equals: species.scientificName,
+            mode: 'insensitive',
+          },
+          habitats: { some: { locale: 'fr' } },
+        },
+        orderBy: { speciesId: 'asc' },
+        select: {
+          habitats: {
+            where: { locale: 'fr' },
+            take: 1,
+            select: {
+              habitatType: true,
+              activityEnrichment: true,
+              lightNeeds: true,
+              sources: true,
+            },
+          },
+        },
+      });
+      species.habitats = parent?.habitats ?? [];
+    }
     const where: Prisma.RecommendedEquipmentWhereInput = {};
-
     if (speciesId) {
-      where.OR = [{ speciesId }, { speciesId: null }]; // Include general items
+      where.OR = [{ speciesId }];
+      // Les anciennes lignes « générales » sont du matériel de terrarium, pas du matériel universel.
+      if (species?.category === 'reptile') {
+        where.OR.push({
+          speciesId: null,
+          category: { in: ['thermostat', 'thermometre'] },
+        });
+      }
     }
+    if (category) where.category = category;
+    if (size) where.size = size;
 
-    if (category) {
-      where.category = category;
-    }
-
-    if (size) {
-      where.size = size;
-    }
-
-    let recommendations = await this.prisma.recommendedEquipment.findMany({
+    const defaults = species
+      ? equipmentDefaults(species)
+      : { recommendations: [], sources: [] };
+    const { take, skip } = toPage(page);
+    const records = await this.prisma.recommendedEquipment.findMany({
       where,
       orderBy: [{ order: 'asc' }, { id: 'asc' }],
-      ...toPage(page),
+      take,
+      skip,
     });
-
-    // If no species-specific equipment found (only general), try fallback by class
-    if (speciesId && recommendations.length === 0) {
-      this.logger.debug(
-        `No specific equipment found for species ${speciesId}, attempting class fallback`,
+    const recommendations: EquipmentItem[] = records.map((rec) => ({
+      id: rec.id,
+      label: rec.label,
+      category: rec.category,
+      size: rec.size,
+      speciesId: rec.speciesId,
+    }));
+    // Les suggestions viennent après les entrées spécifiques, avec la même pagination.
+    if (species && records.length < take && !size) {
+      const total =
+        skip === 0
+          ? records.length
+          : await this.prisma.recommendedEquipment.count({ where });
+      const categories =
+        skip === 0
+          ? records
+          : await this.prisma.recommendedEquipment.findMany({
+              where,
+              select: { category: true },
+              distinct: ['category'],
+              take: PAGINATION_MAX_LIMIT,
+            });
+      const existingCategories = new Set(categories.map((rec) => rec.category));
+      const housingCategories = [
+        'cage',
+        'terrarium',
+        'vivarium',
+        'aquarium',
+        'aquaterrarium',
+        'voliere',
+        'enclos',
+        'bassin',
+      ];
+      if (housingCategories.some((value) => existingCategories.has(value))) {
+        housingCategories.forEach((value) => existingCategories.add(value));
+      }
+      const fallback = defaults.recommendations.filter(
+        (rec) =>
+          !existingCategories.has(rec.category) &&
+          (!category || rec.category === category),
       );
-      recommendations = await this.getEquipmentFallbackByClass(
-        speciesId,
-        category,
-        size,
+      const start = Math.max(0, skip - total);
+      recommendations.push(
+        ...fallback.slice(start, start + take - records.length),
       );
     }
 
@@ -66,65 +150,14 @@ export class EquipmentService {
       speciesId,
       category,
       size,
-      recommendations: recommendations.map((rec) => ({
-        id: rec.id,
-        label: rec.label,
-        category: rec.category,
-        size: rec.size,
-        speciesId: rec.speciesId,
-      })),
+      recommendations,
+      ...(defaults.sources.length ? { sources: defaults.sources } : {}),
       affiliate: {
         disclaimer:
           'Certains liens de la boutique Captivia sont des liens affiliés. En achetant via ces liens, vous soutenez Captivia sans coût supplémentaire.',
         transparencyUrl: '/transparency',
       },
     };
-  }
-
-  /**
-   * Get equipment fallback by species class (e.g., use Reptilia template for reptiles)
-   */
-  private async getEquipmentFallbackByClass(
-    speciesId: number,
-    category?: string,
-    size?: string,
-  ): Promise<RecommendedEquipment[]> {
-    try {
-      // Try to fetch species data to get its class
-      // Note: This is a simple implementation; in production, you'd want to cache this
-      const where: Prisma.RecommendedEquipmentWhereInput = {
-        OR: [{ speciesId: null }], // Get general items first
-      };
-
-      // Try to determine the class (simplified approach)
-      // In a full implementation, we'd fetch the species from GBIF/database
-      // For now, we use general equipment only as fallback
-      // If you implement species fetching, you can map the class to a template species
-
-      if (category) {
-        where.category = category;
-      }
-
-      if (size) {
-        where.size = size;
-      }
-
-      const generalEquipment = await this.prisma.recommendedEquipment.findMany({
-        where,
-        orderBy: [{ order: 'asc' }, { id: 'asc' }],
-        take: PAGINATION_MAX_LIMIT,
-      });
-
-      this.logger.debug(
-        `Returning ${generalEquipment.length} general equipment as fallback`,
-      );
-      return generalEquipment;
-    } catch (error) {
-      this.logger.error(
-        `Error in equipment fallback: ${(error as Error).message}`,
-      );
-      return [];
-    }
   }
 
   async createRecommendation(data: {
