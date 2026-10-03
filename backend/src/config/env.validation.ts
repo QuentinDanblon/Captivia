@@ -113,6 +113,11 @@ export const envValidationSchema = Joi.object({
   GUEST_RETENTION_DAYS: Joi.number().integer().min(1).max(3650).default(90),
   /** Mode invité : "false" désactive la purge planifiée des invités inactifs. */
   GUEST_PURGE_ENABLED: Joi.string().valid('true', 'false').default('true'),
+  /**
+   * Maintenance quotidienne (W2-08) : "false" suspend la purge des jetons expirés, des refresh
+   * tokens périmés et des événements de rappel de plus de 90 jours (docs/RUNBOOK.md).
+   */
+  MAINTENANCE_ENABLED: Joi.string().valid('true', 'false').default('true'),
   GOOGLE_PLAY_PACKAGE_NAME: Joi.string().allow('').optional(),
   /**
    * Intégrations externes (W3-05) — TOUTES optionnelles :
