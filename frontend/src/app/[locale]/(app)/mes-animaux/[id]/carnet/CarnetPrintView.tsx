@@ -13,16 +13,14 @@ import {
 } from '@/lib/carnet';
 import { buildCarnetHtml, carnetFileName, isShareCancelled, shareCarnetFile } from '@/lib/carnet-share';
 import { localDayKey } from '@/lib/dates';
+import { commonName, latinName, type SpeciesSheet } from '@/lib/today';
 import { animalDetailPath, isNative } from '@/lib/platform';
+import { Button, Skeleton, SkeletonGroup, buttonClasses } from '@/components/ui';
 import { CARNET_CSS } from './print-styles';
 
 type Status = 'loading' | 'ready' | 'premium' | 'notFound' | 'error';
 
-interface SpeciesInfo {
-  scientificName?: string;
-  canonicalName?: string;
-  vernacularName?: string;
-}
+type SpeciesInfo = SpeciesSheet;
 
 const EMPTY = '—';
 
@@ -32,16 +30,24 @@ const useIsNative = () => useSyncExternalStore(noopSubscribe, isNative, () => fa
 
 function Section({
   title,
+  number,
   keepTogether,
   children,
 }: {
   title: string;
+  /** Numéro de planche (« 01 »), en mono dans le titre ; décoratif. */
+  number: number;
   keepTogether?: boolean;
   children: ReactNode;
 }) {
   return (
     <section className={`carnet-section${keepTogether ? ' carnet-keep' : ''}`}>
-      <h2 className="carnet-h2">{title}</h2>
+      <h2 className="carnet-h2">
+        <span className="carnet-num" aria-hidden="true">
+          {String(number).padStart(2, '0')}
+        </span>
+        {title}
+      </h2>
       {children}
     </section>
   );
@@ -161,6 +167,10 @@ export default function CarnetPrintView({ id }: { id: string }) {
   };
   const text = (value?: string | number | null) =>
     value === null || value === undefined || value === '' ? EMPTY : String(value);
+  /** Date ou mesure en mono (chiffres tabulaires), lisible dans un tableau imprimé. */
+  const mono = (value: string) => <span className="carnet-mono">{value}</span>;
+  const decimal = (value?: number | null) =>
+    value === null || value === undefined ? EMPTY : new Intl.NumberFormat(locale, { maximumFractionDigits: 3 }).format(value);
 
   const sexLabel = (sex?: string) => {
     if (sex === 'male') return t('animals.male');
@@ -213,7 +223,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
 
   const backHref = animalDetailPath(id ?? '');
   const backButton = (
-    <Link href={backHref} className="carnet-btn">
+    <Link href={backHref} className={buttonClasses({ variant: 'secondary' })}>
       <span aria-hidden="true">←</span> {t('carnetPrint.back')}
     </Link>
   );
@@ -221,41 +231,29 @@ export default function CarnetPrintView({ id }: { id: string }) {
   let body: ReactNode;
   if (status === 'ready' && carnet && view) {
     const { animal } = carnet;
-    const speciesName = species
-      ? species.vernacularName || species.canonicalName || species.scientificName
-      : undefined;
-    const scientific =
-      species?.scientificName && species.scientificName !== speciesName
-        ? species.scientificName
-        : undefined;
+    // Nom commun dans la langue du carnet, puis le binôme latin sans l'autorité (« Linnaeus, 1758 »).
+    const latin = latinName(species);
+    const common = commonName(species, locale);
+    const speciesName = common ?? latin;
+    const scientific = common && latin && latin !== common ? latin : undefined;
     const edited = fmtDateTime(carnet.exportedAt ?? new Date().toISOString());
 
     body = (
       <>
-        <div className="carnet-toolbar carnet-noprint">
-          {backButton}
-          {native ? (
-            <button
-              type="button"
-              className="carnet-btn carnet-btn-primary"
-              onClick={handleShare}
-              disabled={sharing}
-              aria-busy={sharing}
-            >
-              {t('carnetPrint.share')}
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="carnet-btn carnet-btn-primary"
-              onClick={() => window.print()}
-            >
-              {t('carnetPrint.print')}
-            </button>
-          )}
-          <p className="carnet-hint">{t(native ? 'carnetPrint.shareHint' : 'carnetPrint.printHint')}</p>
+        <div className="carnet-noprint mb-6 grid gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            {backButton}
+            {native ? (
+              <Button onClick={handleShare} loading={sharing}>
+                {t('carnetPrint.share')}
+              </Button>
+            ) : (
+              <Button onClick={() => window.print()}>{t('carnetPrint.print')}</Button>
+            )}
+          </div>
+          <p className="m-0 max-w-prose text-ui text-ink-2">{t(native ? 'carnetPrint.shareHint' : 'carnetPrint.printHint')}</p>
           {shareError && (
-            <p className="carnet-hint carnet-status-error" role="alert">
+            <p className="m-0 text-ui font-medium text-danger" role="alert">
               {t('carnetPrint.shareError')}
             </p>
           )}
@@ -263,24 +261,26 @@ export default function CarnetPrintView({ id }: { id: string }) {
 
         <article className="carnet-sheet" ref={sheetRef}>
           <header className="carnet-header">
-            <div className="carnet-brand">Captivia</div>
-            <div className="carnet-header-meta">
-              <h1 className="carnet-title">{t('carnetPrint.title')}</h1>
-              <p className="carnet-edited">{t('carnetPrint.editedOn', { date: edited })}</p>
-            </div>
+            <p className="carnet-brand">Captivia</p>
+            <p className="carnet-edited">{t('carnetPrint.editedOn', { date: edited })}</p>
+            <h1 className="carnet-title">{t('carnetPrint.title')}</h1>
           </header>
+          <div className="carnet-rule" aria-hidden="true" />
+          <p className="carnet-subject">
+            <span className="carnet-name">{animal.name}</span>
+          </p>
 
-          <Section title={t('carnetPrint.identity')} keepTogether>
+          <Section title={t('carnetPrint.identity')} number={1} keepTogether>
             <dl className="carnet-identity">
-              <div>
-                <dt>{t('carnetPrint.name')}</dt>
-                <dd>{animal.name}</dd>
-              </div>
               <div>
                 <dt>{t('animals.species')}</dt>
                 <dd>
                   {speciesName ?? `#${animal.speciesId}`}
-                  {scientific && <em> ({scientific})</em>}
+                  {scientific && (
+                    <em className="carnet-latin" lang="la">
+                      {' '}({scientific})
+                    </em>
+                  )}
                 </dd>
               </div>
               <div>
@@ -289,12 +289,12 @@ export default function CarnetPrintView({ id }: { id: string }) {
               </div>
               <div>
                 <dt>{t('carnetPrint.birthDate')}</dt>
-                <dd>{animal.birthDate ? fmtDate(animal.birthDate) : t('carnetPrint.notSpecified')}</dd>
+                <dd>{animal.birthDate ? mono(fmtDate(animal.birthDate)) : t('carnetPrint.notSpecified')}</dd>
               </div>
               {animal.microchip && (
                 <div>
                   <dt>{t('carnetPrint.microchip')}</dt>
-                  <dd>{animal.microchip}</dd>
+                  <dd className="carnet-mono">{animal.microchip}</dd>
                 </div>
               )}
               {animal.groupName && (
@@ -306,7 +306,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
             </dl>
           </Section>
 
-          <Section title={t('animals.vaccinations.title')}>
+          <Section title={t('animals.vaccinations.title')} number={2}>
             {view.vaccinations.length === 0 ? (
               <p className="carnet-empty">{t('animals.vaccinations.noData')}</p>
             ) : (
@@ -321,9 +321,9 @@ export default function CarnetPrintView({ id }: { id: string }) {
                 ]}
                 rows={view.vaccinations.map((v) => [
                   v.name,
-                  fmtDate(v.date),
-                  fmtDate(v.nextDueDate),
-                  text(v.batchNumber),
+                  mono(fmtDate(v.date)),
+                  mono(fmtDate(v.nextDueDate)),
+                  v.batchNumber ? mono(v.batchNumber) : EMPTY,
                   text(v.vetName),
                   text(v.notes),
                 ])}
@@ -331,7 +331,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
             )}
           </Section>
 
-          <Section title={t('carnetPrint.currentTreatments')}>
+          <Section title={t('carnetPrint.currentTreatments')} number={3}>
             {view.treatments.length === 0 ? (
               <p className="carnet-empty">{t('carnetPrint.noTreatments')}</p>
             ) : (
@@ -348,15 +348,15 @@ export default function CarnetPrintView({ id }: { id: string }) {
                   m.name,
                   [m.dose, m.unit].filter(Boolean).join(' ') || EMPTY,
                   frequencyLabel(m.frequency, m.intervalHours),
-                  fmtDate(m.startDate),
-                  fmtDate(m.endDate),
+                  mono(fmtDate(m.startDate)),
+                  mono(fmtDate(m.endDate)),
                   text(m.notes),
                 ])}
               />
             )}
           </Section>
 
-          <Section title={t('carnetPrint.healthHistory')}>
+          <Section title={t('carnetPrint.healthHistory')} number={4}>
             {view.healthRecords.length === 0 ? (
               <p className="carnet-empty">{t('animals.healthRecordEmpty')}</p>
             ) : (
@@ -368,7 +368,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
                   t('animals.vaccinations.notes'),
                 ]}
                 rows={view.healthRecords.map((r) => [
-                  fmtDate(r.date),
+                  mono(fmtDate(r.date)),
                   healthTypeLabel(r.type),
                   r.title,
                   text(r.notes),
@@ -377,7 +377,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
             )}
           </Section>
 
-          <Section title={t('animals.measurements.title')}>
+          <Section title={t('animals.measurements.title')} number={5}>
             {view.measurements.length === 0 ? (
               <p className="carnet-empty">{t('animals.measurements.noData')}</p>
             ) : (
@@ -389,16 +389,16 @@ export default function CarnetPrintView({ id }: { id: string }) {
                   t('animals.measurements.notes'),
                 ]}
                 rows={view.measurements.map((m) => [
-                  fmtDate(m.measuredAt),
-                  text(m.weightKg),
-                  text(m.heightCm),
+                  mono(fmtDate(m.measuredAt)),
+                  mono(decimal(m.weightKg)),
+                  mono(decimal(m.heightCm)),
                   text(m.notes),
                 ])}
               />
             )}
           </Section>
 
-          <Section title={t('animals.vetAppointments.title')}>
+          <Section title={t('animals.vetAppointments.title')} number={6}>
             {view.appointments.length === 0 ? (
               <p className="carnet-empty">{t('animals.vetAppointments.noData')}</p>
             ) : (
@@ -411,7 +411,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
                   t('carnetPrint.status'),
                 ]}
                 rows={view.appointments.map((a) => [
-                  fmtDateTime(a.date),
+                  mono(fmtDateTime(a.date)),
                   a.vetName,
                   text(a.reason),
                   text(a.location),
@@ -421,7 +421,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
             )}
           </Section>
 
-          <Section title={t('carnetPrint.contacts')} keepTogether>
+          <Section title={t('carnetPrint.contacts')} number={7} keepTogether>
             {view.contacts.length === 0 ? (
               <p className="carnet-empty">{t('carnetPrint.noContacts')}</p>
             ) : (
@@ -429,7 +429,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
                 {view.contacts.map((c) => (
                   <li key={c.name}>
                     <strong>{c.name}</strong>
-                    {c.locations.length > 0 && ` - ${c.locations.join(' / ')}`}
+                    {c.locations.length > 0 && ` · ${c.locations.join(' / ')}`}
                   </li>
                 ))}
               </ul>
@@ -442,9 +442,13 @@ export default function CarnetPrintView({ id }: { id: string }) {
     );
   } else if (status === 'loading') {
     body = (
-      <p className="carnet-status" role="status">
-        {t('carnetPrint.loading')}
-      </p>
+      <SkeletonGroup label={t('carnetPrint.loading')} className="grid gap-4">
+        <div className="flex gap-3">
+          <Skeleton width={160} height={44} />
+          <Skeleton width={200} height={44} />
+        </div>
+        <Skeleton shape="block" height={420} />
+      </SkeletonGroup>
     );
   } else {
     const message =
@@ -455,8 +459,8 @@ export default function CarnetPrintView({ id }: { id: string }) {
           : t('carnetPrint.loadError');
     body = (
       <>
-        <div className="carnet-toolbar">{backButton}</div>
-        <p className="carnet-status carnet-status-error" role="alert">
+        <div className="mb-6">{backButton}</div>
+        <p className="m-0 rounded-control bg-danger-soft px-4 py-3 font-medium text-ink shadow-[inset_3px_0_0_var(--danger)]" role="alert">
           {message}
         </p>
       </>
@@ -464,7 +468,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
   }
 
   return (
-    <div className="carnet-page">
+    <div className="carnet-page cv-container">
       <style>{CARNET_CSS}</style>
       {body}
     </div>

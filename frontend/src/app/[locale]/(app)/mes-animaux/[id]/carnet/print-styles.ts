@@ -1,55 +1,66 @@
 /**
  * Feuille de style du carnet imprimable. Injectée par la page (balise <style>) : elle disparaît
- * avec la page, donc `@page` et le masquage de l'en-tête/pied de site ne touchent aucune autre route.
+ * avec la page, donc `@page` et le masquage de la coquille de l'app ne touchent aucune autre route.
+ *
+ * La même feuille accompagne le fichier HTML autonome partagé depuis l'app mobile : la planche
+ * ne dépend donc d'aucun jeton de l'app. Ses couleurs reprennent la palette « papier / encre »
+ * (DESIGN.md § 3) en valeurs fixes ; les polices de l'app sont utilisées si elles sont chargées,
+ * sinon leurs équivalents système. La feuille reste claire en mode sombre : c'est un document.
  */
 export const CARNET_CSS = `
-.carnet-page{max-width:calc(210mm + 2rem);margin:0 auto;padding:1.5rem 1rem 3rem}
-.carnet-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin-bottom:1rem}
-.carnet-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1rem;border-radius:.6rem;border:1px solid #bfd2c6;background:#fff;color:#14252b;font-size:.9rem;font-weight:600;text-decoration:none;cursor:pointer}
-.carnet-btn:hover{background:#e5f4ec}
-.carnet-btn:focus-visible{outline:2px solid #067256;outline-offset:2px}
-.carnet-btn-primary{background:#067256;border-color:#067256;color:#fff}
-.carnet-btn-primary:hover{background:#055a44}
-.carnet-btn[disabled]{opacity:.5;cursor:not-allowed}
-.carnet-hint{flex-basis:100%;margin:0;font-size:.8rem;color:var(--foreground,#14252b)}
-.carnet-status{padding:2rem 1rem;text-align:center;color:var(--foreground,#14252b)}
-.carnet-status-error{color:#b42318}
-.carnet-sheet{background:#fff;color:#14252b;border:1px solid #dce7df;border-radius:.75rem;box-shadow:0 8px 30px rgba(20,54,42,.1);padding:1.25rem}
-@media (min-width:640px){.carnet-sheet{padding:2rem 2.25rem}}
-.carnet-header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:.75rem;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:3px solid #0aa678}
-.carnet-brand{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;color:#067256}
-.carnet-header-meta{text-align:right}
-.carnet-title{margin:0;font-size:1.35rem;font-weight:700}
-.carnet-edited{margin:.15rem 0 0;font-size:.8rem;color:#4a5a5d}
-.carnet-section{margin-top:1.25rem}
-.carnet-h2{margin:0 0 .5rem;padding-bottom:.25rem;border-bottom:1px solid #dce7df;font-size:1rem;font-weight:700;color:#067256}
-.carnet-identity{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.6rem 1.25rem;margin:0}
-.carnet-identity dt{font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:#4a5a5d}
-.carnet-identity dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.carnet-page{max-width:calc(210mm + 3rem);margin:0 auto;padding-top:1.5rem;padding-bottom:3rem}
+.carnet-sheet{--c-paper:#FFFDF8;--c-ink:#1D2B24;--c-ink-2:#5B655E;--c-line:#E2DCCF;--c-line-strong:#CDC5B4;--c-accent:#2F5D46;--c-warn:#8A5A00;
+  --c-serif:var(--font-fraunces,'Iowan Old Style','Palatino Linotype',Georgia,serif);
+  --c-sans:var(--font-plex-sans,system-ui,-apple-system,'Segoe UI',sans-serif);
+  --c-mono:var(--font-plex-mono,ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace);
+  background:var(--c-paper);color:var(--c-ink);font-family:var(--c-sans);font-size:.9375rem;line-height:1.5;
+  border:1px solid var(--c-line-strong);border-radius:10px;padding:1.25rem}
+@media (min-width:640px){.carnet-sheet{padding:2.25rem 2.5rem}}
+.carnet-sheet *{box-sizing:border-box}
+.carnet-header{display:grid;grid-template-columns:1fr auto;align-items:end;gap:.25rem 1rem;padding-bottom:.6rem}
+.carnet-brand{margin:0;font-family:var(--c-serif);font-size:1rem;font-weight:600;color:var(--c-accent)}
+.carnet-title{margin:0;font-family:var(--c-serif);font-size:1.9rem;font-weight:500;line-height:1.15;letter-spacing:-.01em}
+.carnet-edited{margin:0;font-family:var(--c-mono);font-size:.75rem;color:var(--c-ink-2);text-align:right;font-variant-numeric:tabular-nums}
+.carnet-rule{height:5px;border-top:2px solid var(--c-ink);border-bottom:1px solid var(--c-ink);margin:0 0 1.25rem}
+.carnet-subject{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .75rem;margin:0 0 1rem}
+.carnet-name{margin:0;font-family:var(--c-serif);font-size:1.5rem;font-weight:600}
+.carnet-latin{font-family:var(--c-serif);font-style:italic;color:var(--c-ink-2)}
+.carnet-section{margin-top:1.5rem}
+.carnet-h2{display:flex;align-items:baseline;gap:.6rem;margin:0 0 .5rem;padding-bottom:.3rem;border-bottom:1px solid var(--c-ink);font-family:var(--c-serif);font-size:1.15rem;font-weight:600}
+.carnet-num{font-family:var(--c-mono);font-size:.75rem;font-weight:400;color:var(--c-ink-2)}
+.carnet-identity{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:0 1.5rem;margin:0}
+.carnet-identity>div{padding:.45rem 0;border-bottom:1px dotted var(--c-line-strong)}
+.carnet-identity dt{font-size:.75rem;color:var(--c-ink-2)}
+.carnet-identity dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+.carnet-mono{font-family:var(--c-mono);font-variant-numeric:tabular-nums slashed-zero}
 .carnet-table-wrap{overflow-x:auto}
 .carnet-table{width:100%;border-collapse:collapse;font-size:.85rem}
-.carnet-table th,.carnet-table td{padding:.35rem .5rem;border:1px solid #dce7df;text-align:left;vertical-align:top;overflow-wrap:anywhere}
-.carnet-table th{background:#e5f4ec;font-size:.75rem;font-weight:700}
-.carnet-empty{margin:0;font-size:.85rem;font-style:italic;color:#4a5a5d}
-.carnet-contacts{margin:0;padding-left:1.1rem;font-size:.85rem}
-.carnet-disclaimer{margin:1.5rem 0 0;padding-top:.6rem;border-top:1px solid #dce7df;text-align:center;font-size:.75rem;color:#4a5a5d}
+.carnet-table th,.carnet-table td{padding:.4rem .5rem .4rem 0;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.carnet-table th{font-size:.72rem;font-weight:500;color:var(--c-ink-2);border-bottom:1px solid var(--c-line-strong)}
+.carnet-table td{border-bottom:1px dotted var(--c-line-strong)}
+.carnet-table tr:last-child td{border-bottom:0}
+.carnet-table .carnet-mono{white-space:nowrap}
+.carnet-empty{margin:0;font-size:.85rem;font-style:italic;color:var(--c-ink-2)}
+.carnet-contacts{margin:0;padding-left:1.1rem;font-size:.875rem}
+.carnet-disclaimer{margin:2rem 0 0;padding-top:.6rem;border-top:1px solid var(--c-line-strong);font-size:.75rem;color:var(--c-ink-2)}
 
-@page{size:A4;margin:14mm 12mm 22mm 12mm}
+@page{size:A4;margin:14mm 14mm 20mm 14mm}
 @media print{
   html,body{background:#fff!important;color:#000!important;min-height:0!important;height:auto!important}
   body{display:block!important;font-size:10pt}
-  body>header,body>footer,body>a[href="#main-content"],.carnet-noprint{display:none!important}
-  main{display:block!important;flex:none!important}
+  body>header,body>footer,body>a[href="#main-content"],.carnet-noprint,.noprint{display:none!important}
+  .app-shell{display:block!important;min-height:0!important}
+  main,.app-shell__content{display:block!important;flex:none!important;padding:0!important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .carnet-page{max-width:none;margin:0;padding:0}
-  .carnet-sheet{padding:0;border:0;border-radius:0;box-shadow:none}
-  .carnet-section{margin-top:5mm}
+  .carnet-sheet{padding:0;border:0;border-radius:0;background:#fff}
+  .carnet-section{margin-top:6mm}
   .carnet-keep{break-inside:avoid}
   .carnet-h2{break-after:avoid}
   .carnet-table-wrap{overflow:visible}
   .carnet-table{font-size:9pt}
   .carnet-table thead{display:table-header-group}
   .carnet-table tr{break-inside:avoid}
-  .carnet-disclaimer{position:fixed;left:0;right:0;bottom:-16mm;margin:0;border-top:1px solid #999;color:#333;font-size:8pt}
+  .carnet-disclaimer{position:fixed;left:0;right:0;bottom:-14mm;margin:0;color:#333;font-size:8pt}
 }
 `;
