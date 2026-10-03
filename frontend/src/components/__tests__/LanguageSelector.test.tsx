@@ -32,10 +32,6 @@ jest.mock('@/i18n/navigation', () => ({
   ),
 }));
 
-jest.mock('../../i18n', () => ({
-  locales: ['fr', 'en', 'es', 'de', 'it', 'pt'],
-}));
-
 describe('LanguageSelector', () => {
   it('should render language selector', () => {
     render(<LanguageSelector />);

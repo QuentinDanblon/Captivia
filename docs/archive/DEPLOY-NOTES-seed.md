@@ -1,3 +1,5 @@
+> Archivé le 2026-10-03 : contenu repris dans `docs/RUNBOOK.md` § 6.6 (idempotence du seed, nettoyage d'une base seedée avant le 2026-10-02).
+
 # Seed Production - Notes de déploiement
 
 ## Purgé de magasins factices

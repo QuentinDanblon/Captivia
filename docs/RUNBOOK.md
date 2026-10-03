@@ -427,6 +427,28 @@ Après une exécution, ces compteurs doivent être nuls (sauf arriéré de plus 
    Les clés étrangères suppriment en cascade animaux, carnet, rappels, sessions, abonnements et contenus communautaires ; `PaymentEvent.userId` et `CommunityModerationAction.subjectId` passent à NULL. Les images communautaires du compte deviennent orphelines (`ownerId` NULL) : le job de maintenance efface leurs fichiers à l'exécution suivante.
 4. Consigner la date et le nombre de comptes supprimés (sans les adresses). Les données disparaissent des sauvegardes au bout de 30 jours.
 
+### 6.6 Seed du catalogue : idempotence et nettoyage d'une base ancienne
+
+Le seed de production (`backend/prisma/seed-prod.ts`, `npx prisma db seed`, workflow « Seed production ») peut être relancé sans créer de doublons : données éditoriales (`SpeciesProfile`, `SpeciesFeeding`…) en upsert par clés naturelles, magasins d'affiliation (`AffiliateStore`) en upsert par nom, aucun `deleteMany` (les données ajoutées à la main sont préservées). Il ne nettoie donc pas ce qu'un ancien seed a laissé ; pour une base seedée **avant le 2026-10-02**, à exécuter une fois (URL directe, après contrôle par un `SELECT count(*)` équivalent) :
+
+- **Magasins factices** (URL `example-*`, retirés du seed, W0-05) :
+
+  ```sql
+  DELETE FROM "AffiliateStore" WHERE url LIKE '%example-%';
+  ```
+
+- **Entrées non animales du catalogue de races** : 85 entrées de `breeds-data.json` (identifiants 2000000451 à 2000000533, plus 2000000608 et 2000001172 : outils, objets et identifiants Wikidata non résolus, classés « Chat » par erreur). Elles sont listées dans `backend/prisma/enrichment/excluded-breed-ids.json` et ne sont plus importées. À supprimer seulement si aucun animal d'utilisateur ne les référence :
+
+  ```sql
+  DELETE FROM "SpeciesFeeding"       WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesHabitat"       WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesBehavior"      WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesHealthContent" WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesLegislation"   WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesReproduction"  WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesProfile"       WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  ```
+
 ---
 
 ## 7. Qui contacter

@@ -32,7 +32,7 @@ contenu distant (`server.url` interdit : rejet Apple 4.2). Elle parle à l'API p
 
 ```bash
 cd frontend
-NEXT_PUBLIC_API_URL=https://api.captivia.app npm run build:mobile   # → out/
+NEXT_PUBLIC_API_URL=https://captiviacaptivia-api.onrender.com npm run build:mobile   # → out/
 npx cap sync                                                       # copie out/ + plugins dans les projets natifs
 npx cap open android   # ou: npx cap open ios
 ```
