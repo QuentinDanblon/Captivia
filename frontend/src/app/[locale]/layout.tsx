@@ -98,10 +98,12 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
-  // Les textes de la landing sont rendus côté serveur : seul `landing.search` (composant client
-  // de recherche) est transmis au navigateur, pour ne pas alourdir chaque page de ~11 Ko.
+  // Les textes de la landing sont rendus côté serveur : seuls `landing.search` (composant client
+  // de recherche) et `landing.photos` (textes alternatifs de `CommonsPhoto`, écrans de compte et
+  // essai) sont transmis au navigateur, pour ne pas alourdir chaque page de ~11 Ko.
   const { landing, ...shared } = await getMessages({ locale });
-  const messages = { ...shared, landing: { search: (landing as Record<string, unknown> | undefined)?.search } };
+  const landingMessages = landing as Record<string, unknown> | undefined;
+  const messages = { ...shared, landing: { search: landingMessages?.search, photos: landingMessages?.photos } };
 
   return (
     <html lang={locale} className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}>

@@ -138,8 +138,8 @@ export default function AnimalPublicPage({
           <span>
             {t('common.appName')} · {t('publicLink.readOnly')}
           </span>
-          <Link href="/" className="font-medium text-accent-text underline decoration-1 underline-offset-[0.18em] hover:text-ink">
-            {t('landing.hero.ctaPrimary')}
+          <Link href="/mes-animaux" className="font-medium text-accent-text underline decoration-1 underline-offset-[0.18em] hover:text-ink">
+            {t('guest.entryTry')}
           </Link>
         </p>
       </div>

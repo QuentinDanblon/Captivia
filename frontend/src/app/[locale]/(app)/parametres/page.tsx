@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
+import { CircleUserRound } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Link } from '@/i18n/navigation';
 import { isGuestUser } from '@/lib/guest';
@@ -49,7 +50,7 @@ export default function ParametresPage() {
   const memberSince = createdAt
     ? new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(new Date(createdAt))
     : null;
-  const initials = user.email?.slice(0, 2).toUpperCase() ?? '··';
+  const initials = user.email ? user.email.slice(0, 2).toUpperCase() : <CircleUserRound className="size-5" strokeWidth={1.5} />;
 
   const entries: SettingsEntry[] = [
     { href: '/parametres/compte', title: t('settings.accountTitle'), description: t('settings.accountDescription') },
