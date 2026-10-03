@@ -71,6 +71,14 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 2. *Site configuration → Environment variables* : créer `NEXT_PUBLIC_API_URL` = URL de l'API Render, avec une valeur pour les contextes **Production** et **Deploy Previews**. Cette variable est lue **au build** : après modification, relancer un déploiement.
 3. Activer les **Deploy Previews** (par défaut pour les PR). L'origine d'une preview (`https://deploy-preview-N--captivia-app.netlify.app`) n'est pas dans `CORS_ORIGIN` : les appels API des previews échoueront tant que l'API de staging (DEP-05) n'autorise pas ce motif, ou que l'origine n'est pas ajoutée à la main.
 4. Les workflows GitHub ne déploient plus le front : `NETLIFY_AUTH_TOKEN` et `NETLIFY_SITE_ID` ne sont plus nécessaires.
+5. **Apps mobiles (W6-09)** : créer aussi `APPLE_TEAM_ID` et `ANDROID_SHA256_CERT_FINGERPRINTS` (contexte **Production** ; `IOS_BUNDLE_ID` et `ANDROID_PACKAGE_NAME` seulement si l'identifiant diffère de `app.captivia`). Ces variables sont lues **au build** pour générer `/.well-known/apple-app-site-association` et `/.well-known/assetlinks.json` ; une valeur absente ou mal formée donne une 404 (jamais de fichier invalide). Après modification, relancer un déploiement, puis vérifier :
+
+   ```bash
+   curl -sI https://captivia-app.netlify.app/.well-known/apple-app-site-association   # 200, content-type: application/json, sans redirection
+   curl -s  https://captivia-app.netlify.app/.well-known/assetlinks.json
+   ```
+
+   Le domaine des liens est celui de `NEXT_PUBLIC_SITE_URL` : en cas de domaine définitif, le reporter aussi dans *Associated Domains* (iOS) et l'`intent-filter` (Android), voir `docs/MOBILE.md` § 8.
 
 ### 3.5 Protection de `main`
 *Settings → Branches → Add rule* sur `main` : PR obligatoire, checks requis (`test-backend`, `build-frontend`, `docker-build`, `quality`), branche à jour. Ne pas exiger `migrate-production` (il ne tourne que sur `push`).
@@ -104,6 +112,10 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `NCBI_API_KEY`, `NCBI_EMAIL` | Render (`sync: false`) | clé NCBI et e-mail de contact | Non : PubMed est public (3 req/s), la clé porte le quota à 10 req/s |
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
+| `APPLE_TEAM_ID` | Netlify | Team ID Apple (10 caractères, developer.apple.com → Membership) | Pour les Universal Links iOS (W6-09) : sans elle, `/.well-known/apple-app-site-association` → 404 |
+| `IOS_BUNDLE_ID` | Netlify | `app.captivia` (défaut, = `appId` de `capacitor.config.ts`) | Non |
+| `ANDROID_PACKAGE_NAME` | Netlify | `app.captivia` (défaut) | Non |
+| `ANDROID_SHA256_CERT_FINGERPRINTS` | Netlify | empreintes SHA-256 de la clé **Play App Signing** et de la clé d'**upload**, séparées par des virgules (`AA:BB:…`, voir `docs/MOBILE.md` § 8.4) | Pour les App Links Android (W6-09) : sans elle, `/.well-known/assetlinks.json` → 404 |
 | `NEON_DATABASE_URL_DIRECT` | GitHub Secrets | Neon **directe** | Oui |
 | `BACKUP_AGE_RECIPIENT` | GitHub Secrets | clé publique age (`age1…`) | Pour « Database Backup » (sans lui, aucune sauvegarde) |
 | `API_URL` | GitHub Variables | URL de l'API Render | Pour `keep-warm.yml` (diagnostic manuel) |
