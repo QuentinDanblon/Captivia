@@ -39,6 +39,7 @@ interface ExportBody {
   notificationPreferences: { types: unknown }[];
   notificationEvents: unknown[];
   pushSubscriptions: unknown[];
+  appInstallations: unknown[];
   exportVersion: number;
   community: unknown;
   pushSubscriptionsActive: number;
@@ -302,7 +303,8 @@ describe('Account E2E — suppression et export RGPD', () => {
       expect(body.pushSubscriptions).toHaveLength(1);
 
       // Revue de sécurité, constat 10 : export complété (format v2).
-      expect(body.exportVersion).toBe(4);
+      expect(body.exportVersion).toBe(5);
+      expect(body.appInstallations).toEqual([]);
       expect(body.community).toMatchObject({ profile: null, posts: [] });
       expect(body.profile).toHaveProperty('emailVerifiedAt', null);
       expect(body.profile.timezone).toBe('Europe/Paris');

@@ -14,8 +14,10 @@ const bcrypt = bcryptjs as unknown as {
  * v3 : profile.isGuest et profile.lastActiveAt (mode invité ; `email` vaut null pour un invité).
  * v4 : section `community` (profil public, publications, commentaires, réactions, signalements
  *      émis, blocages, décisions de modération, images).
+ * v5 : section `appInstallations` (W6-07 : installations de l'app inscrites au push natif —
+ *      plateforme, langue, dates ; jamais le jeton FCM).
  */
-export const EXPORT_FORMAT_VERSION = 4;
+export const EXPORT_FORMAT_VERSION = 5;
 
 @Injectable()
 export class AccountService {
@@ -79,6 +81,7 @@ export class AccountService {
       await tx.breedingRecord.deleteMany({ where: animalFilter });
       await tx.animal.deleteMany({ where: { userId } });
       await tx.pushSubscription.deleteMany({ where: { userId } });
+      await tx.deviceToken.deleteMany({ where: { userId } });
       await tx.notificationPreference.deleteMany({ where: { userId } });
       await tx.passwordResetToken.deleteMany({ where: { userId } });
       await tx.user.delete({ where: { id: userId } });
@@ -92,7 +95,8 @@ export class AccountService {
   /**
    * Export complet des données de l'utilisateur (RGPD art. 20), gratuit pour tous.
    * Exclut passwordHash, tokens de réinitialisation, empreintes des refresh tokens, jeton du flux
-   * calendrier (seul son état actif / inactif est exporté) et clés cryptographiques push.
+   * calendrier (seul son état actif / inactif est exporté), clés cryptographiques push et jetons
+   * FCM des installations de l'app.
    */
   async exportData(userId: string) {
     const user = await this.prisma.user.findUnique({
@@ -134,6 +138,17 @@ export class AccountService {
           // `keys` (p256dh/auth) sont des secrets techniques, non exportés.
           select: { id: true, endpoint: true, createdAt: true },
         },
+        // W6-07 : installations de l'app (le jeton FCM, secret technique, n'est pas exporté).
+        deviceTokens: {
+          orderBy: { createdAt: 'asc' },
+          select: {
+            id: true,
+            platform: true,
+            locale: true,
+            createdAt: true,
+            lastSeenAt: true,
+          },
+        },
         // Sessions (refresh tokens) : métadonnées seulement, JAMAIS l'empreinte du jeton.
         refreshTokens: {
           orderBy: { createdAt: 'asc' },
@@ -155,6 +170,7 @@ export class AccountService {
       notificationPreferences,
       notificationEvents,
       pushSubscriptions,
+      deviceTokens,
       refreshTokens,
       calendarToken,
       points,
@@ -179,6 +195,7 @@ export class AccountService {
       notificationPreferences,
       notificationEvents,
       pushSubscriptions,
+      appInstallations: deviceTokens,
       community,
     };
   }

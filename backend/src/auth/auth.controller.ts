@@ -129,11 +129,15 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary:
-      'Revoke the session (refresh token family) of the given refresh token; optionally remove this device push subscription (endpoint)',
+      'Revoke the session (refresh token family) of the given refresh token; optionally remove this device push subscription (endpoint) and native push token (deviceToken)',
   })
   @ApiResponse({ status: 200, description: 'Logged out (idempotent)' })
   async logout(@Body() dto: LogoutDto) {
-    return this.authService.logout(dto.refreshToken, dto.endpoint);
+    return this.authService.logout(
+      dto.refreshToken,
+      dto.endpoint,
+      dto.deviceToken,
+    );
   }
 
   @Post('logout-all')

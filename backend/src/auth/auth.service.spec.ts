@@ -86,6 +86,9 @@ describe('AuthService', () => {
     pushSubscription: {
       deleteMany: jest.fn(),
     },
+    deviceToken: {
+      deleteMany: jest.fn(),
+    },
     // Verrou de la ligne User (SELECT … FOR UPDATE)
     $queryRaw: jest.fn(),
     $transaction: jest.fn(),

@@ -56,6 +56,9 @@ describe('maintenanceCutoffs', () => {
     expect(c.notificationEventsBefore.toISOString()).toBe(
       '2027-03-17T03:41:00.000Z',
     );
+    expect(c.deviceTokensBefore).toEqual(
+      new Date(NOW.getTime() - 270 * DAY_MS),
+    );
   });
 });
 
@@ -75,6 +78,7 @@ describe('MaintenanceService (Prisma simulé)', () => {
       emailVerificationTokens: 0,
       refreshTokens: 0,
       notificationEvents: 0,
+      deviceTokens: 0,
       communityModerationActions: 0,
       communityReports: 0,
       communityMedia: 0,
@@ -100,6 +104,7 @@ describe('MaintenanceService (Prisma simulé)', () => {
         if (table === 'PasswordResetToken') return 3;
         if (table === 'EmailVerificationToken') return 2;
         if (table === 'NotificationEvent') return 11;
+        if (table === 'DeviceToken') return 9;
         if (table === 'CommunityModerationAction') return 4;
         if (table === 'CommunityReport') return 5;
         if (table === 'CommunityHandleHold') return 6;
@@ -115,6 +120,7 @@ describe('MaintenanceService (Prisma simulé)', () => {
       emailVerificationTokens: 2,
       refreshTokens: 2 * MAINTENANCE_BATCH_SIZE + 7,
       notificationEvents: 11,
+      deviceTokens: 9,
       communityModerationActions: 4,
       communityReports: 5,
       // Sans service de médias (test unitaire) : aucune image purgée.
@@ -142,6 +148,9 @@ describe('MaintenanceService (Prisma simulé)', () => {
     const [events] = deletesFor(statements, 'NotificationEvent');
     expect(events.sql).toContain('"scheduledAt" <');
     expect(events.values[0]).toEqual(new Date('2027-03-17T03:41:00.000Z'));
+    const [devices] = deletesFor(statements, 'DeviceToken');
+    expect(devices.sql).toContain('"lastSeenAt" <');
+    expect(devices.values[0]).toEqual(cutoffs.deviceTokensBefore);
     const [moderation] = deletesFor(statements, 'CommunityModerationAction');
     expect(moderation.values[0]).toEqual(cutoffs.moderationBefore);
     // Une décision dont le recours est en attente n'est jamais purgée.
@@ -259,7 +268,7 @@ describe('MaintenanceService (Prisma simulé)', () => {
     await service.handleCron();
     expect(log).toHaveBeenCalledWith(
       expect.stringMatching(
-        /4 événement\(s\) de rappel, 0 décision\(s\) de modération, .* supprimé\(s\) ; 0 notification\(s\) de modération relancée\(s\) en \d+ ms/,
+        /4 événement\(s\) de rappel, 0 jeton\(s\) de push natif inactif\(s\), 0 décision\(s\) de modération, .* supprimé\(s\) ; 0 notification\(s\) de modération relancée\(s\) en \d+ ms/,
       ),
     );
 

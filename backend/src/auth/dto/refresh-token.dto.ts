@@ -1,5 +1,15 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  Matches,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import {
+  DEVICE_TOKEN_MAX_LENGTH,
+  DEVICE_TOKEN_REGEX,
+} from '../../notifications/dto/device-token.dto';
 
 /** Corps de POST /auth/refresh (W1-01). */
 export class RefreshTokenDto {
@@ -23,6 +33,18 @@ export class LogoutDto extends RefreshTokenDto {
   @IsString()
   @MaxLength(500)
   endpoint?: string;
+
+  @ApiPropertyOptional({
+    description:
+      "Jeton de push natif (FCM) de cette installation de l'app : supprimé s'il appartient au compte (W6-07).",
+  })
+  @IsOptional()
+  @IsString()
+  @MaxLength(DEVICE_TOKEN_MAX_LENGTH)
+  @Matches(DEVICE_TOKEN_REGEX, {
+    message: 'deviceToken must be an FCM registration token',
+  })
+  deviceToken?: string;
 }
 
 /** Corps de POST /auth/verify-email (W2-04). */

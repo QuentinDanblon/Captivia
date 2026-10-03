@@ -11,6 +11,7 @@ import {
   NotificationsSchedulerService,
   REMINDERS_LOCK_KEY,
   effectiveChannel,
+  isAgendaSource,
   localDay,
   normalizeChannel,
 } from './notifications-scheduler.service';
@@ -29,6 +30,20 @@ describe('reminder helpers', () => {
     expect(normalizeChannel('both')).toBe('both');
     expect(normalizeChannel('sms')).toBe('push');
     expect(normalizeChannel(undefined)).toBe('push');
+  });
+
+  it('recognizes the agenda sources also scheduled locally by the app (W6-07)', () => {
+    for (const key of [
+      'routine:1',
+      'medication:2',
+      'appointment:3',
+      'vaccination:4',
+    ]) {
+      expect(isAgendaSource(key)).toBe(true);
+    }
+    for (const key of ['pref:Bain', 'test:1', null, undefined, '']) {
+      expect(isAgendaSource(key)).toBe(false);
+    }
   });
 
   it('falls back to push for an account without e-mail (guest)', () => {
@@ -201,6 +216,40 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
     const second = await scheduler.runOnce(new Date(NOW.getTime() + 60_000));
     expect(second.locked).toBe(true);
     expect(mailsTo(user.email)).toHaveLength(1);
+  });
+
+  it('W6-07 : un rappel d’agenda porte son instant (anti-doublon local), un type personnalisé non', async () => {
+    const user = await createUser('push');
+    const at = new Date(NOW.getTime() - 60_000);
+    await prisma.notificationEvent.createMany({
+      data: [
+        {
+          userId: user.id,
+          type: 'routine',
+          label: 'Brumisation',
+          scheduledAt: at,
+          status: 'pending',
+          sourceKey: `routine:${randomUUID()}`,
+        },
+        {
+          userId: user.id,
+          type: 'Bain',
+          label: 'Bain',
+          scheduledAt: at,
+          status: 'pending',
+          sourceKey: 'pref:Bain',
+        },
+      ],
+    });
+
+    await scheduler.runOnce(NOW);
+    const payloads = pushesTo(user.id).map((c) => c[1]);
+    expect(payloads).toHaveLength(2);
+    const routine = payloads.find((p) => p.title === 'Brumisation');
+    const custom = payloads.find((p) => p.title === 'Bain');
+    expect(routine?.localReminderAt).toEqual(at);
+    expect(custom).toBeDefined();
+    expect(custom).not.toHaveProperty('localReminderAt');
   });
 
   it('guest (no e-mail) with channel "both": push only, never an e-mail', async () => {

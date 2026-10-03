@@ -61,6 +61,7 @@ model User {
   // Relations
   animals                 Animal[]
   pushSubscriptions       PushSubscription[]
+  deviceTokens            DeviceToken[]
   notificationPreferences NotificationPreference[]
   notificationEvents      NotificationEvent[]
   passwordResetTokens     PasswordResetToken[]
@@ -455,6 +456,30 @@ model PushSubscription {
 
   @@index([userId])
   @@index([userId, endpoint])
+}
+
+/// W6-07 — Jeton de push natif (FCM : Android, et iOS via APNs relayé par FCM) d'une installation
+/// de l'app. Le jeton est unique : il appartient au dernier compte qui l'a enregistré.
+model DeviceToken {
+  id                  String    @id @default(uuid())
+  userId              String
+  /// "android" | "ios" (CHECK SQL "DeviceToken_platform_check")
+  platform            String
+  /// Jeton d'enregistrement FCM (secret technique : jamais exporté ni journalisé).
+  token               String    @unique
+  /// Langue de l'app au dernier enregistrement (fr, en, es, de, it, pt).
+  locale              String    @default("fr")
+  /// Les rappels de soins prévus avant cet instant sont déjà programmés en notifications locales
+  /// sur l'appareil (W6-06) : pas de push distant pour eux (anti-doublon). NULL = aucun.
+  localRemindersUntil DateTime? @db.Timestamptz(3)
+  createdAt           DateTime  @default(now()) @db.Timestamptz(3)
+  /// Dernier enregistrement par l'app (lancement, retour au premier plan) : purge après 270 jours.
+  lastSeenAt          DateTime  @default(now()) @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([lastSeenAt])
 }
 
 model NotificationPreference {

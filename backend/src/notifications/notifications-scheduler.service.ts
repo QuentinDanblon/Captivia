@@ -38,6 +38,7 @@ const DUE_REMINDER_SELECT = {
   type: true,
   label: true,
   scheduledAt: true,
+  sourceKey: true,
   userId: true,
   animalId: true,
   animal: { select: { name: true } },
@@ -60,6 +61,24 @@ type DueReminder = Prisma.NotificationEventGetPayload<{
 
 /** `YYYY-MM-DD` de `now` dans le fuseau IANA donné (repli Europe/Paris si invalide). */
 export { localDay };
+
+/**
+ * Sources de rappel que l'app programme aussi en notifications locales (agenda W6-06 : routines,
+ * médicaments, RDV, vaccins). Les rappels de « types » personnalisés (`pref:`) n'y figurent pas.
+ */
+const AGENDA_SOURCE_PREFIXES = [
+  'routine:',
+  'medication:',
+  'appointment:',
+  'vaccination:',
+];
+
+export function isAgendaSource(sourceKey: string | null | undefined): boolean {
+  return (
+    typeof sourceKey === 'string' &&
+    AGENDA_SOURCE_PREFIXES.some((p) => sourceKey.startsWith(p))
+  );
+}
 
 export function normalizeChannel(value: unknown): DeliveryChannel {
   return value === 'email' || value === 'both' ? value : 'push';
@@ -87,7 +106,8 @@ export function effectiveChannel(
  *  3. réserve les événements `pending` dus dans (now − 10 min ; now] et pas encore notifiés :
  *     `notifiedAt` passe de NULL à `now` (UPDATE … RETURNING, atomique) — jamais de doublon ;
  *  4. APRÈS la transaction (verrou et connexion libérés), envoie les rappels réservés par lots
- *     de `DISPATCH_CONCURRENCY` (`Promise.allSettled`), selon `deliveryChannel`. Un service push
+ *     de `DISPATCH_CONCURRENCY` (`Promise.allSettled`), selon `deliveryChannel` (« push » = tous
+ *     les canaux push actifs : Web Push et app native FCM / APNs, via `PushDispatcher`). Un service push
  *     ou SMTP lent ne bloque plus le verrou ni la transaction (revue de sécurité, constat 2).
  *     Un rappel dont aucun canal n'a abouti est libéré (`notifiedAt` remis à NULL) pour être
  *     retenté au tick suivant.
@@ -355,6 +375,10 @@ export class NotificationsSchedulerService {
             // Préfixe de locale pour l'URL ouverte au clic (sw.js : notificationclick).
             locale: ev.user.locale,
           },
+          // Push natif : pas d'envoi à un téléphone qui a déjà programmé ce soin en local (W6-07).
+          ...(isAgendaSource(ev.sourceKey)
+            ? { localReminderAt: ev.scheduledAt }
+            : {}),
         })
         .catch(() => false);
     }

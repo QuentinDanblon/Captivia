@@ -35,6 +35,13 @@ export const COMMUNITY_MODERATION_RETENTION_DAYS = 365;
 /** Communauté : tentatives de téléversement conservées 24 h (limite horaire par compte). */
 export const UPLOAD_ATTEMPT_RETENTION_HOURS = 24;
 
+/**
+ * Jetons de push natif (W6-07) non réenregistrés par l'app depuis 270 jours : supprimés. FCM
+ * considère lui-même périmé un jeton Android inactif depuis 270 jours ; l'app réenregistre le sien
+ * à chaque lancement et retour au premier plan.
+ */
+export const DEVICE_TOKEN_RETENTION_DAYS = 270;
+
 /** Seuil d'inactivité au-delà duquel un COMPTE est signalé (aucune suppression automatique). */
 export const INACTIVE_ACCOUNT_MONTHS = 36;
 
@@ -49,6 +56,8 @@ export interface MaintenanceCutoffs {
   moderationBefore: Date;
   /** Tentatives de téléversement communautaires antérieures à cette date (24 h). */
   uploadAttemptsBefore: Date;
+  /** Jetons de push natif dont le dernier enregistrement est antérieur à cette date. */
+  deviceTokensBefore: Date;
 }
 
 /** Calcule les dates limites de purge pour un instant donné (fonction pure, testable). */
@@ -66,5 +75,6 @@ export function maintenanceCutoffs(now: Date): MaintenanceCutoffs {
     uploadAttemptsBefore: new Date(
       t - UPLOAD_ATTEMPT_RETENTION_HOURS * HOUR_MS,
     ),
+    deviceTokensBefore: new Date(t - DEVICE_TOKEN_RETENTION_DAYS * DAY_MS),
   };
 }

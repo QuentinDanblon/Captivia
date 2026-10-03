@@ -24,7 +24,7 @@ export interface GuestPurgeResult {
  *
  * Un invité (`User.isGuest`) jamais converti en compte et sans activité (`lastActiveAt`) depuis
  * `GUEST_RETENTION_DAYS` jours (défaut 90) est supprimé avec toutes ses données (cascade SQL :
- * animaux, carnet, rappels, sessions, abonnements push). Un invité titulaire d'un abonnement store
+ * animaux, carnet, rappels, sessions, abonnements Web Push et jetons de push natif). Un invité titulaire d'un abonnement store
  * (cas anormal : l'achat exige un compte) n'est jamais purgé automatiquement.
  *
  * Tous les jours à 03:17 UTC, sous verrou consultatif de transaction (même mécanique que le
