@@ -29,8 +29,8 @@ import type {
 } from './agenda.types';
 
 const DAY_MS = 86_400_000;
-/** Amplitude maximale d'une requête (jours, bornes incluses) : un trimestre civil. */
-export const MAX_AGENDA_DAYS = 92;
+/** Amplitude maximale d'une requête (jours, bornes incluses) : douze mois, année bissextile comprise. */
+export const MAX_AGENDA_DAYS = 366;
 /** Période par défaut quand `to` est omis (jours, bornes incluses). */
 export const DEFAULT_AGENDA_DAYS = 30;
 /** Nombre maximal d'éléments renvoyés (au-delà : `truncated: true`). */
@@ -81,7 +81,7 @@ function rangeOfDays(
 /**
  * Résout et valide la période demandée, en jours LOCAUX de `timeZone` : `from` par défaut =
  * `todayDay` (aujourd'hui local) ; `to` par défaut = `from` + 29 jours. Rejette (400) un
- * format/une date invalide, `to < from` et plus de 92 jours.
+ * format/une date invalide, `to < from` et plus de 366 jours.
  */
 export function resolveAgendaRange(
   from: string | undefined,
@@ -135,7 +135,7 @@ function compareItems(a: AgendaItem, b: AgendaItem): number {
 
 /**
  * Éléments générés jour après jour (ordre chronologique) jusqu'à dépasser `limit` : la mémoire
- * reste bornée (au pire un jour de trop) même pour des routines horaires sur 92 jours.
+ * reste bornée (au pire un jour de trop) même pour des routines horaires sur 366 jours.
  */
 function collectByDay(
   days: string[],

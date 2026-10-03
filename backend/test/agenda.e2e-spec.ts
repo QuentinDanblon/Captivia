@@ -371,14 +371,17 @@ describe('Agenda des soins E2E', () => {
       ['from=2026-02-31&to=2026-03-02', 'date inexistante'],
       ['from=demain', 'format invalide'],
       ['from=2026-10-10&to=2026-10-01', 'to < from'],
-      ['from=2026-01-01&to=2026-04-03', '93 jours'],
+      ['from=2026-01-01&to=2027-01-02', '367 jours'],
       ['from=2026-01-01&to=2026-01-02&foo=1', 'paramètre inconnu'],
     ])('rejette les bornes invalides : %s (%s)', async (qs) => {
       await get(`/users/me/agenda?${qs}`).expect(400);
     });
 
-    it('accepte exactement 92 jours', async () => {
-      await get('/users/me/agenda?from=2026-01-01&to=2026-04-02').expect(200);
+    it.each([
+      ['2026-01-01', '2026-04-02'],
+      ['2028-01-01', '2028-12-31'],
+    ])('accepte une période de 92 à 366 jours : %s → %s', async (from, to) => {
+      await get(`/users/me/agenda?from=${from}&to=${to}`).expect(200);
     });
   });
 

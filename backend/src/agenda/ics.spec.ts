@@ -146,11 +146,22 @@ describe('resolveAgendaRange', () => {
     expect(
       resolveAgendaRange('2026-10-01', '2026-12-31', '2026-10-02').toDay,
     ).toBe('2026-12-31');
-    expect(MAX_AGENDA_DAYS).toBe(92);
+    expect(MAX_AGENDA_DAYS).toBe(366);
+  });
+
+  it('accepte douze mois bissextiles et conserve les bornes locales', () => {
+    const range = resolveAgendaRange(
+      '2028-01-01',
+      '2028-12-31',
+      '2028-01-01',
+      'Europe/Brussels',
+    );
+    expect(range.start.toISOString()).toBe('2027-12-31T23:00:00.000Z');
+    expect(range.end.toISOString()).toBe('2028-12-31T22:59:59.999Z');
   });
 
   it.each([
-    ['2026-10-01', '2027-01-01'], // 93 jours
+    ['2026-10-01', '2027-10-02'], // 367 jours
     ['2026-10-05', '2026-10-01'], // to < from
     ['2026-02-31', '2026-03-01'], // date inexistante
     ['hier', '2026-03-01'], // format

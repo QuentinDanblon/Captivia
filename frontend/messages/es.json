@@ -1441,7 +1441,27 @@
     "timelineTitle90": "Los próximos 3 meses",
     "countShort": "{count, plural, one {# cuidado} other {# cuidados}}",
     "noMatchBenefit": "Amplía el periodo o muestra todos los tipos de cuidado.",
-    "pillAppointments": "{count, plural, one {cita veterinaria} other {citas veterinarias}}"
+    "pillAppointments": "{count, plural, one {cita veterinaria} other {citas veterinarias}}",
+    "period": {
+      "units": {
+        "hours": "Horas",
+        "days": "Días",
+        "months": "Meses"
+      },
+      "duration": "Duración",
+      "hint": "Desliza de 1 a {max}, o usa las flechas del teclado.",
+      "hourHint": "A partir de ahora. Los cuidados sin hora siguen apareciendo en los días incluidos.",
+      "values": {
+        "hours": "{count, plural, one {# hora} other {# horas}}",
+        "days": "{count, plural, one {# día} other {# días}}",
+        "months": "{count, plural, one {# mes} other {# meses}}"
+      },
+      "timeline": {
+        "hours": "{count, plural, one {La próxima hora} other {Las próximas # horas}}",
+        "days": "{count, plural, one {Hoy} other {Los próximos # días}}",
+        "months": "{count, plural, one {El próximo mes} other {Los próximos # meses}}"
+      }
+    }
   },
   "sessions": {
     "title": "Dispositivos conectados",

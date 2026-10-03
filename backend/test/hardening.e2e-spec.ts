@@ -7,6 +7,7 @@ import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
 import { TestCacheModule } from './test-cache.module';
 import { PrismaService } from '../src/prisma/prisma.service';
+import { localDay, resolveTimeZone } from '../src/common/timezone';
 
 // Boot NestJS + Prisma peut prendre du temps sur Windows
 jest.setTimeout(60000);
@@ -249,7 +250,12 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
       });
       expect(prefs).toBeNull();
 
-      const today = new Date().toISOString().slice(0, 10);
+      // Les routines commencent au jour local du compte, même quand UTC est encore la veille.
+      const account = await prisma.user.findUniqueOrThrow({
+        where: { id: userId },
+        select: { timezone: true },
+      });
+      const today = localDay(new Date(), resolveTimeZone(account.timezone));
       const res = await request(httpServer(app))
         .get(`/users/me/notification-events?date=${today}`)
         .set('Authorization', `Bearer ${token}`)
