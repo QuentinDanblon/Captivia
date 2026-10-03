@@ -570,6 +570,7 @@ Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `RED
 | `BACKUP_AGE_RECIPIENT` | Secret | Clé publique age (`age1…`) : chiffrement des sauvegardes |
 | `API_URL` | Variable | `keep-warm.yml` (déclenchement manuel) |
 | `GOOGLE_SERVICES_JSON_BASE64` | Secret (facultatif) | `mobile.yml` : `google-services.json` de l'app Android (push natif, W6-07) ; sans lui, APK / AAB sans push |
+| `NATIVE_PUSH` | Variable (facultative) | `1` → `NEXT_PUBLIC_NATIVE_PUSH` : l'app enregistre son jeton push ; exige le secret ci-dessus (sinon `mobile.yml` échoue) |
 
 ---
 

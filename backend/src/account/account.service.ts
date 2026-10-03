@@ -14,10 +14,10 @@ const bcrypt = bcryptjs as unknown as {
  * v3 : profile.isGuest et profile.lastActiveAt (mode invité ; `email` vaut null pour un invité).
  * v4 : section `community` (profil public, publications, commentaires, réactions, signalements
  *      émis, blocages, décisions de modération, images).
- * v5 : section `appInstallations` (W6-07 : installations de l'app inscrites au push natif —
- *      plateforme, langue, dates ; jamais le jeton FCM).
+ *      Ajout rétrocompatible (W6-07) : section `appInstallations` (installations de l'app inscrites
+ *      au push natif — plateforme, langue, dates ; jamais le jeton FCM). Les lecteurs v4 l'ignorent.
  */
-export const EXPORT_FORMAT_VERSION = 5;
+export const EXPORT_FORMAT_VERSION = 4;
 
 @Injectable()
 export class AccountService {

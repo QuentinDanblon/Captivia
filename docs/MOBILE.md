@@ -50,7 +50,9 @@ le déploiement iOS minimal et « iPhone only » dans Xcode, et versionner les d
 `NEXT_PUBLIC_API_URL` est **obligatoire** : il est inliné dans le bundle et ajouté au `connect-src` de la
 CSP. `NEXT_PUBLIC_SENTRY_DSN` est facultatif (même rôle que sur le web). `NEXT_PUBLIC_REVENUECAT_IOS_KEY` /
 `NEXT_PUBLIC_REVENUECAT_ANDROID_KEY` ouvrent l'achat intégré (§ 6) ; le SDK appelle RevenueCat depuis le
-code natif, hors de la WebView : rien à ajouter à la CSP.
+code natif, hors de la WebView : rien à ajouter à la CSP. `NEXT_PUBLIC_NATIVE_PUSH=1` active le push
+natif (§ 7.3), uniquement avec la configuration Firebase dans les projets natifs ; FCM et APNs sont
+joints par le code natif : rien à ajouter à la CSP non plus.
 
 ### Ce que fait `npm run build:mobile`
 
@@ -283,6 +285,12 @@ l'**API HTTP v1** directement (assertion JWT RS256 signée avec la clé du compt
 SDK Firebase Admin : aucune dépendance ajoutée). Sans `FCM_SERVICE_ACCOUNT_JSON`, le canal natif est
 désactivé (journal « info » au démarrage), comme le Web Push sans clés VAPID.
 
+**Interrupteur de build** : `NEXT_PUBLIC_NATIVE_PUSH=1` (build mobile ; variable GitHub `NATIVE_PUSH`
+pour `mobile.yml`), à poser **seulement** quand les projets natifs contiennent la configuration
+Firebase (§ 7.3.1 à 7.3.3). Sans lui, l'app n'appelle jamais `PushNotifications.register()` : sur
+Android, cet appel fait planter l'app si `google-services.json` manque (Firebase non initialisé).
+`mobile.yml` échoue si `NATIVE_PUSH=1` sans le secret `GOOGLE_SERVICES_JSON_BASE64`.
+
 **Ce qui part en push** : les mêmes rappels que le Web Push (scheduler W3-02 : routines, médicaments,
 vaccins, rendez-vous, types personnalisés) et la notification de test. `PushDispatcher` envoie sur
 tous les canaux actifs du compte (navigateurs abonnés **et** installations de l'app), une fois par
@@ -411,6 +419,7 @@ func application(_ application: UIApplication,
 
 #### 7.3.4 Vérifier sur appareil
 
+0. Build mobile avec `NEXT_PUBLIC_NATIVE_PUSH=1` (après 7.3.1 à 7.3.3), puis `npx cap sync`.
 1. API avec `FCM_SERVICE_ACCOUNT_JSON` : journal `Push natif actif (FCM HTTP v1, projet …)`.
 2. App installée, connecté, permission accordée : une ligne `DeviceToken` apparaît
    (`platform`, `lastSeenAt`).
@@ -558,7 +567,8 @@ la barre finale de l'export statique (`trailingSlash`).
 - [ ] Icône de notification `ic_stat_captivia` (copier `mobile/android-template/res/`, § 11.2) ; aucune `SCHEDULE_EXACT_ALARM` / `USE_EXACT_ALARM` (§ 7.2).
 - [ ] Push natif (W6-07, § 7.3) : projet Firebase, `google-services.json` (secret CI `GOOGLE_SERVICES_JSON_BASE64`),
       `GoogleService-Info.plist`, clé APNs `.p8` téléversée dans Firebase, capacités *Push Notifications* et
-      *Background Modes → Remote notifications*, `AppDelegate` (FirebaseMessaging), `FCM_SERVICE_ACCOUNT_JSON` sur Render.
+      *Background Modes → Remote notifications*, `AppDelegate` (FirebaseMessaging), `FCM_SERVICE_ACCOUNT_JSON` sur Render,
+      puis seulement `NEXT_PUBLIC_NATIVE_PUSH=1` (variable GitHub `NATIVE_PUSH`) au build mobile.
 
 ### À vérifier sur appareil réel (non couvert par jest / Playwright)
 

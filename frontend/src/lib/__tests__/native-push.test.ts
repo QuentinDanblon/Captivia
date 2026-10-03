@@ -46,6 +46,7 @@ import {
   PUSH_TOKEN_KEY,
   __resetNativePushForTests,
   currentNativePushToken,
+  isNativePushBuild,
   pushNotificationRoute,
   registerNativePush,
   syncNativePush,
@@ -69,6 +70,11 @@ beforeEach(() => {
   mockIsNative.mockReturnValue(true);
   mockPlatform.mockReturnValue('android');
   mockAuthFetch.mockResolvedValue({ ok: true, status: 200 } as Response);
+  process.env.NEXT_PUBLIC_NATIVE_PUSH = '1';
+});
+
+afterAll(() => {
+  delete process.env.NEXT_PUBLIC_NATIVE_PUSH;
 });
 
 describe('registerNativePush', () => {
@@ -76,6 +82,15 @@ describe('registerNativePush', () => {
     mockIsNative.mockReturnValue(false);
     expect(await registerNativePush(session)).toBe('unsupported');
     expect(plugin.checkPermissions).not.toHaveBeenCalled();
+    expect(mockAuthFetch).not.toHaveBeenCalled();
+  });
+
+  it('build sans Firebase (NEXT_PUBLIC_NATIVE_PUSH absent) : register() jamais appelé', async () => {
+    delete process.env.NEXT_PUBLIC_NATIVE_PUSH;
+    expect(isNativePushBuild()).toBe(false);
+    expect(await registerNativePush(session)).toBe('unsupported');
+    expect(plugin.checkPermissions).not.toHaveBeenCalled();
+    expect(plugin.register).not.toHaveBeenCalled();
     expect(mockAuthFetch).not.toHaveBeenCalled();
   });
 

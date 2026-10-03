@@ -29,6 +29,17 @@ export const REGISTRATION_TIMEOUT_MS = 15_000;
 
 const DEVICE_TOKENS_URL = () => `${API_URL}/users/me/device-tokens`;
 
+/**
+ * Push natif compilé dans l'app : `NEXT_PUBLIC_NATIVE_PUSH=1` au build mobile, seulement quand les
+ * projets natifs contiennent la configuration Firebase (`google-services.json`,
+ * `GoogleService-Info.plist` + `AppDelegate`, docs/MOBILE.md § 7.3). Sans elle,
+ * `PushNotifications.register()` n'est jamais appelé : sur Android, il ferait planter l'app
+ * (Firebase non initialisé). Les rappels locaux fonctionnent dans tous les cas.
+ */
+export function isNativePushBuild(): boolean {
+  return process.env.NEXT_PUBLIC_NATIVE_PUSH === '1';
+}
+
 type PushApi = typeof import('@capacitor/push-notifications').PushNotifications;
 const loadPush = (): Promise<PushApi> => import('@capacitor/push-notifications').then((m) => m.PushNotifications);
 
@@ -133,7 +144,7 @@ function obtainToken(push: PushApi): Promise<string> {
 }
 
 async function doRegister(next: PushSession): Promise<PushRegisterOutcome> {
-  if (!isNative() || getPlatform() === 'web') return 'unsupported';
+  if (!isNative() || getPlatform() === 'web' || !isNativePushBuild()) return 'unsupported';
   let push: PushApi;
   try {
     push = await loadPush();
