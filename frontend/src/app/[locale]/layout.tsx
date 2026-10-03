@@ -102,8 +102,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning className={`${fraunces.variable} ${plexSans.variable} ${plexMono.variable}`}>
-      <head><Script src="/theme-init.js" strategy="beforeInteractive" /></head>
       <body className="min-h-screen flex flex-col w-full bg-paper text-ink font-sans antialiased">
+        {/* Next injecte ce script dans le head ; le layout garde le head implicite pour l'hydratation Netlify. */}
+        <Script src="/theme-init.js" strategy="beforeInteractive" />
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
             {/* Aucun cadre ici : chaque groupe de routes apporte le sien — (app) AppShell, (marketing)

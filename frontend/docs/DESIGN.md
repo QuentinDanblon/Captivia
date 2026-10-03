@@ -623,6 +623,10 @@ Avant de fusionner un lot visuel : captures 1440 et 390, clair et sombre, aucun 
 - **Palette inchangée** : `data-theme` ne fait que sélectionner les deux jeux de jetons existants ;
   les icônes et contrôles utilisent les composants et couleurs tokenisés du système.
 
+- **Compatibilité Netlify** : `beforeInteractive` est déclaré dans le corps du layout ; Next
+  l'injecte lui-même dans l'en-tête. Un `<head>` explicite contenant ce script provoquait une
+  erreur d'hydratation uniquement sur le déploiement de production, malgré un aperçu valide.
+
 **Reste à faire** (hors design) : dater les aperçus de la landing (`SAMPLE_TODAY`, fixe) si l'on
 veut qu'ils suivent le jour courant. La locale `pt` est du
 **portugais européen (pt-PT, AO90)** : « palavra-passe », « eliminar », « guardar », « subscrição »,
