@@ -526,7 +526,8 @@
     "guest": "Gast",
     "createAccount": "Konto erstellen",
     "community": "Gemeinschaft",
-    "soon": "Bald"
+    "soon": "Bald",
+    "guides": "Ratgeber"
   },
   "grade": {
     "bronze": "Bronze",
@@ -2496,5 +2497,212 @@
     "notFound": "Dieser Eintrag wurde nicht gefunden. Möglicherweise wurde er gelöscht.",
     "tooManyRequests": "Zu viele Versuche hintereinander. Warten Sie eine Minute, bevor Sie es erneut versuchen.",
     "generic": "Etwas ist schiefgelaufen. Versuchen Sie es gleich noch einmal."
+  },
+  "guides": {
+    "title": "Einrichtungsratgeber",
+    "intro": "Richten Sie einen passenden Lebensraum für Ihr Tier ein: Platz, Ausstattung, Einrichtung und Pflege, mit Quellen zum Weiterlesen.",
+    "open": "Einrichtungsratgeber",
+    "chooseSpecies": "Ein Ratgeber für Ihre Tierart",
+    "myAnimals": "Meine Tiere",
+    "chooseAnimal": "Eines meiner Tiere auswählen",
+    "animalsError": "Ihre Tiere konnten nicht geladen werden.",
+    "searchSpecies": "Tierart suchen",
+    "searchHint": "Geben Sie mindestens zwei Zeichen ein, auf Deutsch oder mit dem wissenschaftlichen Namen.",
+    "search": "Suchen",
+    "loadError": "Der Ratgeber für diese Tierart konnte nicht geladen werden.",
+    "noResults": "Keine Tierart gefunden. Versuchen Sie es mit dem wissenschaftlichen Namen.",
+    "categoriesTitle": "Kategorie auswählen",
+    "chooseWater": "Wählen Sie bei diesem Fisch je nach Lebensraum Süß- oder Meerwasser.",
+    "speciesIntro": "Die folgenden Angaben stammen aus dem Profil der ausgewählten Tierart. Sie helfen dabei, den Ratgeber für diese Kategorie anzupassen.",
+    "noHabitat": "Für den Lebensraum dieser Tierart liegen noch keine belegten Angaben vor.",
+    "noDimensions": "Für diese Tierart sind keine Mindestmaße angegeben. Lassen Sie sie bestätigen, bevor Sie den Lebensraum kaufen.",
+    "noEquipment": "Die Ausstattungsliste für diese Tierart ist vorübergehend nicht verfügbar.",
+    "fullSpecies": "Vollständiges Artenprofil ansehen",
+    "categoryScope": "Diese Richtwerte gelten für die Kategorie. Wählen Sie Ihre Tierart aus, um ihre eigenen Maße und Parameter zu sehen.",
+    "installation": "Einrichten und pflegen",
+    "checklist": "Ausstattung vorbereiten",
+    "checklistHint": "Markieren Sie, was Sie vorbereitet haben. Diese Liste bleibt verfügbar, solange dieser Ratgeber geöffnet ist.",
+    "sources": "Quellen des Ratgebers",
+    "start": "Wählen Sie eine Kategorie oder Tierart aus, um den Ratgeber zu öffnen.",
+    "unknownCategory": "Wählen Sie die passende Kategorie für diese Tierart.",
+    "planTitle": "Ihr bemaßter Plan",
+    "planIntro": "Tragen Sie die Maße Ihrer Anlage ein und wählen Sie die Positionen der Ausstattung. Der Plan zeigt Ihre Auswahl; er bestätigt weder Mindestmaße noch eine geeignete Anordnung für die Art.",
+    "length": "Länge (cm)",
+    "width": "Breite (cm)",
+    "height": "Höhe (cm)",
+    "planHint": "Geben Sie drei positive Maße ein, um den Plan und das geometrische Volumen anzuzeigen.",
+    "planTop": "Draufsicht",
+    "planFront": "Vorderansicht",
+    "planVolume": "Geometrisches Volumen: {litres} l",
+    "planVolumeHint": "Das tatsächliche Wasservolumen ist wegen Bodengrund, Dekoration und des freien Abstands zum Rand geringer. Aus dieser Berechnung lässt sich nicht ableiten, wie viele Tiere darin leben können.",
+    "planAlt": "Bemaßter Plan Ihrer Einrichtung: {length} cm lang, {width} cm breit und {height} cm hoch.",
+    "diagramsTitle": "Das Aquarium verstehen",
+    "filterDiagram": "Ein Beispiel für die Wasserzirkulation mit einem Außenfilter. Die Pfeile zeigen den Wasserweg; die Zeichnung gibt weder Maße noch Durchfluss vor.",
+    "cycleDiagram": "Stickstoffkreislauf: Aus Abfällen entsteht Ammoniak, das Bakterien in Nitrit und anschließend Nitrat umwandeln. Die Originalgrafik enthält englische Beschriftungen.",
+    "categories": {
+      "dogs": {
+        "title": "Hunde",
+        "space": "Richten Sie einen ruhigen, trockenen und zugfreien Ruheplatz ein. Ihr Hund sollte sich dort bewegen und bequem hinlegen können. Trennen Sie diesen Bereich vom Löseplatz.",
+        "setup": "Stellen Sie ein bequemes Bett sowie gut erreichbare Wasser- und Futternäpfe bereit. Schaffen Sie einen Rückzugsort, an dem Ihr Hund Situationen meiden kann, die ihm Angst machen. Wählen Sie sicheres, geeignetes Spielzeug.",
+        "care": "Halten Sie Bett und Näpfe sauber. Sorgen Sie je nach Alter, Gesundheit und Bedürfnissen Ihres Hundes für Bewegung und Beschäftigung. Beobachten Sie seine Gewohnheiten und passen Sie Aktivität und Ruhe daran an.",
+        "equipment": {
+          "e0": "Bequemes Bett",
+          "e1": "Futter- und Wassernäpfe",
+          "e2": "Sicheres, geeignetes Hundespielzeug",
+          "e3": "Ruhiger Ruheplatz und Rückzugsort",
+          "e4": "Reinigungsmittel für Bett und Näpfe"
+        }
+      },
+      "cats": {
+        "title": "Katzen",
+        "space": "Richten Sie getrennte Bereiche zum Ausruhen, Fressen und für die Toilette ein. Wasser und Futter sollten Abstand zum Katzenklo haben. Bieten Sie Verstecke und erhöhte Plätze, an denen sich Ihre Katze sicher fühlt.",
+        "setup": "Stellen Sie einen stabilen Kratzbaum bereit, an dem sich Ihre Katze strecken kann, dazu einen Schlafplatz und Spielzeug. Ressourcen sollten erreichbar sein, ohne dass sie sich einem Tier oder einer Situation nähern muss, vor der sie Angst hat.",
+        "care": "Halten Sie das Katzenklo sauber und stellen Sie frisches Wasser bereit. Bieten Sie regelmäßig Spiel und Beschäftigung an, besonders bei Wohnungskatzen. Lassen Sie Ihre Katze ungestört schlafen und sich verstecken.",
+        "equipment": {
+          "e0": "Schlafplatz und Verstecke",
+          "e1": "Stabiler Kratzbaum",
+          "e2": "Katzenklo und Reinigungsmittel",
+          "e3": "Näpfe mit Abstand zum Katzenklo",
+          "e4": "Erhöhte Plätze und Spielzeug"
+        }
+      },
+      "rodents": {
+        "title": "Nagetiere",
+        "space": "Wählen Sie zuerst die Tierart: Hamster, Ratten, Chinchillas und Meerschweinchen brauchen unterschiedliche Lebensräume. Prüfen Sie Maße, Bewegungsbedarf und Haltungsbedingungen, bevor Sie Käfig oder Gehege auswählen.",
+        "setup": "Bieten Sie Verstecke, geeignetes Einstreu und artgerechte Beschäftigung. Hamster brauchen Einstreu, in der sie graben können. Für Meerschweinchen fördern Tunnel und unbehandelte Holzstücke das Erkunden und Nagen.",
+        "care": "Entfernen Sie verschmutztes Einstreu und halten Sie es trocken. Prüfen Sie im Artenprofil den Sozialbedarf: Empfehlungen für Meerschweinchen gelten nicht für alle Hamster. Richten Sie den Lebensraum passend zum Tier ein, statt den Käfig mit Zubehör zu füllen.",
+        "equipment": {
+          "e0": "Käfig oder Gehege passend zur Tierart",
+          "e1": "Geeignetes Einstreu und Nistmaterial",
+          "e2": "Passende Verstecke und Tunnel",
+          "e3": "Beschäftigung und Nagematerial je nach Tierart",
+          "e4": "Reinigungsmittel"
+        }
+      },
+      "rabbits": {
+        "title": "Kaninchen",
+        "space": "Verbinden Sie einen Unterschlupf mit einem zugänglichen Auslauf. Richten Sie getrennte Bereiche zum Fressen, Ausruhen und für die Toilette ein. Sichern Sie Innenbereiche und schützen Sie Außenbereiche vor Raubtieren und Wetter. Für zwei mittelgroße Kaninchen empfiehlt die RSPCA mindestens 3 m × 2 m Grundfläche und 1 m Höhe, einschließlich Unterschlupf und Auslauf.",
+        "setup": "Wählen Sie einen rutschfesten Boden, einen trockenen, gut belüfteten Unterschlupf, Verstecke und Möglichkeiten zum Erkunden. Lassen Sie genug Platz für freie Bewegung. Das Einstreu sollte geeignet und staubfrei sein.",
+        "care": "Entfernen Sie Verschmutzungen und reinigen Sie die gesamte Anlage regelmäßig. Verwenden Sie ungiftige Mittel und lassen Sie alles trocknen, bevor die Kaninchen zurückkehren. Bewahren Sie eine kleine Menge sauberes, bereits verwendetes Einstreu mit vertrautem Geruch auf.",
+        "equipment": {
+          "e0": "Sicheres Auslaufgehege",
+          "e1": "Trockener, gut belüfteter Unterschlupf",
+          "e2": "Verstecke und Tunnel",
+          "e3": "Geeignetes, staubfreies Einstreu",
+          "e4": "Ungiftige Reinigungsmittel"
+        }
+      },
+      "mammals": {
+        "title": "Andere Säugetiere",
+        "space": "Wählen Sie die Tierart, bevor Sie die Haltung einrichten. Frettchen, Igel, Pferde und Schafe brauchen unterschiedliche Bedingungen. Beachten Sie die Angaben zum Lebensraum und die Ausstattungsliste im Artenprofil.",
+        "setup": "Planen Sie für ein Pferd Auslauf im Freien und Schutz vor Sonne, Wind und extremen Temperaturen ein. Eine Box sollte sauber, belüftet und zugfrei sein. Richten Sie andere Arten nach ihren jeweiligen Empfehlungen ein.",
+        "care": "Verwenden Sie für ein Pferd in der Box sauberes, hochwertiges und staubarmes Einstreu. Prüfen Sie bei anderen Säugetieren die Empfehlungen zu Ruhe, Beschäftigung und Pflege im Profil, bevor Sie eine Routine festlegen.",
+        "equipment": {
+          "e0": "Haltungsbereich passend zur Tierart",
+          "e1": "Unterschlupf oder Ruheplatz je nach Tierart",
+          "e2": "Ausstattung laut Artenprofil",
+          "e3": "Passende Bewegungs- oder Beschäftigungsausstattung",
+          "e4": "Pflegemittel passend zur Anlage"
+        }
+      },
+      "birds": {
+        "title": "Vögel",
+        "space": "Wählen Sie Käfig oder Voliere passend zu Ihrer Tierart. Prüfen Sie die Maße und den Stababstand im Profil. Berücksichtigen Sie auch Platz für Beschäftigung und die Position des Zubehörs.",
+        "setup": "Bieten Sie Sitzstangen mit unterschiedlichen Durchmessern aus geeignetem, unbehandeltem Holz an. Ergänzen Sie Futtersuche: Eine Pappröhre mit Papier und verstecktem Futter kann Beschäftigung bieten.",
+        "care": "Prüfen Sie Äste, Spielzeug und Zubehör vor dem Einsatz auf Sicherheit. Verwenden Sie geeignetes Holz ohne Behandlung oder Spritzmittel. Richten Sie Beschäftigung und Haltung nach den belegten Bedürfnissen Ihres Vogels aus.",
+        "equipment": {
+          "e0": "Käfig oder Voliere passend zur Tierart",
+          "e1": "Sitzstangen mit unterschiedlichen Durchmessern",
+          "e2": "Geeignete, unbehandelte Holzäste",
+          "e3": "Zubehör zur Futtersuche",
+          "e4": "Spezifische Ausstattung laut Artenprofil"
+        }
+      },
+      "reptiles": {
+        "title": "Reptilien",
+        "space": "Richten Sie das Terrarium nach der Lebensweise ein: bodenlebend, baumbewohnend oder aquatisch. Prüfen Sie die dokumentierten Maße, Temperatur-, Feuchtigkeits- und Lichtbedürfnisse der Tierart. Eine baumbewohnende Echse und eine Landschildkröte brauchen unterschiedliche Bereiche.",
+        "setup": "Platzieren Sie eine geeignete Wärmequelle an einem Ende, um einen Temperaturgradienten zu schaffen. Regeln Sie sie mit einem Thermostat und verhindern Sie direkten Kontakt des Tieres. Wählen Sie Beleuchtung und UVB passend zur Tierart sowie geeignetes Substrat und Verstecke.",
+        "care": "Kontrollieren Sie Temperatur und Luftfeuchtigkeit mit geeigneten Messgeräten. Sorgen Sie für ausreichende Belüftung: Sie zu verringern, um Wärme oder Feuchte zu halten, kann Probleme verursachen. Prüfen Sie Heizung und Beleuchtung und beachten Sie die Pflegehinweise der Tierart.",
+        "equipment": {
+          "e0": "Terrarium passend zur Lebensweise",
+          "e1": "Geschützte Heizung und Thermostat",
+          "e2": "Thermometer und Hygrometer",
+          "e3": "Beleuchtung und UVB je nach Tierart",
+          "e4": "Passendes Substrat, Verstecke und Sitzflächen"
+        }
+      },
+      "amphibians": {
+        "title": "Amphibien",
+        "space": "Klären Sie zuerst den Lebensraum der Tierart: an Land, im Wasser oder gemischt. Temperaturbedürfnisse unterscheiden sich und entsprechen nicht denen aller Reptilien. Nutzen Sie die Angaben im Profil, um Terrarium, Paludarium oder Aquarium auszuwählen.",
+        "setup": "Sorgen Sie für geeignetes Wasser, Verstecke und Substrat. Landlebende Arten benötigen eine flache Wasserschale. In einem Wasserhabitat hilft eine geeignete Filterung, die Wasserqualität zu erhalten. Prüfen Sie Feuchtigkeit und Belüftung.",
+        "care": "Kontrollieren Sie Temperatur und artspezifische Wasserwerte. Vermeiden Sie Zedern- und Kiefernsubstrat, das giftige Öle enthält. Bieten Sie geeignete Verstecke und Feuchtigkeit, ohne die Belüftung einzuschränken.",
+        "equipment": {
+          "e0": "Terrarium, Paludarium oder Aquarium je nach Tierart",
+          "e1": "Verstecke und geeignetes Substrat",
+          "e2": "Thermometer und Feuchtigkeitskontrolle",
+          "e3": "Wasserschale oder Filterung je nach Lebensraum",
+          "e4": "Wassertests"
+        }
+      },
+      "freshwater": {
+        "title": "Süßwasseraquarium",
+        "space": "Wählen Sie Volumen und Maße passend zu Tierarten, ausgewachsener Größe und Bedürfnissen. Leiten Sie den Besatz nicht aus einer einfachen Liter-pro-Fisch-Regel ab. Prüfen Sie auch Wasserwerte und Verträglichkeit der Bewohner.",
+        "setup": "Installieren Sie einen Filter und lassen Sie das Aquarium ohne Fische einfahren, bevor Tiere einziehen. Behandeln Sie neues Wasser mit einem geeigneten Mittel gegen Chlor. Falls eine Heizung nötig ist, sollte sie thermostatgeregelt und mit einem Thermometer kontrollierbar sein.",
+        "care": "Testen Sie das Wasser, um stickstoffhaltige Abfälle zu überwachen. Warten Sie den Filter und wechseln Sie Wasser passend zu Ihrer Anlage. Bereiten Sie neues Wasser mit einer Temperatur vor, die zum Becken passt, um abrupte Änderungen zu vermeiden.",
+        "equipment": {
+          "e0": "Aquarium und geeignete Filterung",
+          "e1": "Thermometer und thermostatische Heizung bei Bedarf",
+          "e2": "Tests für Ammoniak, Nitrit und Nitrat",
+          "e3": "Geeignete Wasseraufbereitung",
+          "e4": "Zubehör für Wasserwechsel und Filterpflege"
+        }
+      },
+      "marine": {
+        "title": "Meerwasseraquarium",
+        "space": "Legen Sie Tierarten und Beckentyp fest: ein reines Fischbecken oder eine Anlage mit Wirbellosen. Prüfen Sie Volumen, Temperatur, Salzgehalt und Lichtbedarf aller Bewohner. Osmosewasser wird für Meerwasseranlagen empfohlen und ist für Wirbellose wie Korallen unerlässlich.",
+        "setup": "Richten Sie eine biologische Filterung ein und lassen Sie das Becken einfahren, bevor Tiere einziehen. Kontrollieren Sie Ammoniak und Nitrit: Beide Werte müssen bei null bleiben, bevor Sie den Besatz schrittweise erweitern. Verwenden Sie Meersalz für Aquarien, messen Sie den Salzgehalt mit einem Aräometer oder Refraktometer und sorgen Sie für Strömung ohne stagnierende Bereiche, besonders bei Lebendgestein oder Korallen.",
+        "care": "Testen Sie Ammoniak, Nitrit, Nitrat und pH. Bei Korallen kontrollieren Sie zusätzlich Phosphat, dKH, Calcium und Magnesium. Mischen und erwärmen Sie Wasser für Teilwasserwechsel in einem separaten Behälter. Passen Sie Häufigkeit und Menge an Besatz und Beckenbetrieb an.",
+        "equipment": {
+          "e0": "Aquarium und biologische Filterung",
+          "e1": "Meersalz für Aquarien und geeignetes Osmosewasser",
+          "e2": "Aräometer oder Refraktometer und Thermometer",
+          "e3": "Tests für Ammoniak, Nitrit, Nitrat und pH; Rifftests bei Korallen",
+          "e4": "Strömung und Beleuchtung passend zu den Bewohnern"
+        }
+      },
+      "insects": {
+        "title": "Insekten",
+        "space": "Bestimmen Sie die Tierart, bevor Sie ein Gehege wählen: Gespenstschrecken, Fangschrecken und Schaben brauchen unterschiedliche Bedingungen. Gespenstschrecken brauchen genug Platz für die Häutung; der Feuchtigkeitsbedarf hängt von der Art ab.",
+        "setup": "Bieten Sie Gespenstschrecken geeignete Kletterstrukturen und Futterpflanzen sowie frisches Futter. Passen Sie Belüftung, Temperatur und Wasserangebot an die Empfehlungen der Tierart an. Richten Sie andere Insekten nach deren Bedürfnissen ein.",
+        "care": "Kontrollieren Sie die Pflanzen und halten Sie das Gehege sauber. Vermeiden Sie zu viele Tiere und lassen Sie während der Häutung ausreichend Platz. Wählen und bereiten Sie Futterpflanzen für Gespenstschrecken so vor, dass Verunreinigungen vermieden werden.",
+        "equipment": {
+          "e0": "Gehege passend zur Tierart",
+          "e1": "Geeignete Kletter- und Häutungsstrukturen",
+          "e2": "Futter oder Futterpflanzen passend zur Tierart",
+          "e3": "Kontrolle von Temperatur und Feuchtigkeit",
+          "e4": "Pflegemittel und passende Wasserversorgung"
+        }
+      },
+      "arachnids": {
+        "title": "Spinnentiere",
+        "space": "Wählen Sie die Haltung passend zu Tierart und Lebensweise: Eine baumbewohnende Vogelspinne und eine grabende Art brauchen unterschiedliche Bedingungen. Prüfen Sie Substrat, Verstecke, Temperatur und Luftfeuchtigkeit, bevor das Tier einzieht.",
+        "setup": "Bieten Sie Vogelspinnen ein passendes Versteck und Substrat, eine Wasserschale und einen sicheren Verschluss. Richten Sie die Haltung nach den Empfehlungen der Tierart ein. Prüfen Sie bei Skorpionen vorab deren spezifische Bedürfnisse.",
+        "care": "Beachten Sie artspezifische Temperatur- und Feuchtigkeitswerte und stellen Sie je nach Bedarf Wasser bereit. Prüfen Sie Verstecke und Verschluss. Beachten Sie die besonderen Hinweise zu Häutung und Pflege der Anlage.",
+        "equipment": {
+          "e0": "Sicheres Terrarium passend zur Tierart",
+          "e1": "Substrat passend zur Lebensweise",
+          "e2": "Verstecke und Sitzflächen je nach Tierart",
+          "e3": "Geeignete Wasserschale",
+          "e4": "Kontrolle von Temperatur und Feuchtigkeit"
+        }
+      }
+    },
+    "planEquipment": "Ausstattung auf Ihrem Plan platzieren",
+    "planPositions": {
+      "none": "Nicht platziert",
+      "left": "Links",
+      "centre": "In der Mitte",
+      "right": "Rechts"
+    }
   }
 }

@@ -28,7 +28,7 @@ beforeEach(() => {
 });
 
 describe('AppShell', () => {
-  it('4 destinations (≤ 5) en onglets mobiles et dans le rail, contenu dans <main>', () => {
+  it('4 destinations (≤ 5) en onglets mobiles et Guides dans le rail, contenu dans <main>', () => {
     mockedAuth.mockReturnValue({ user: { email: 'smoke@captivia.test' }, isLoading: false, logout });
     render(
       <AppShell>
@@ -42,9 +42,19 @@ describe('AppShell', () => {
     expect(within(tabbar).getAllByRole('listitem')).toHaveLength(APP_DESTINATIONS.length);
     expect(within(tabbar).getAllByRole('link')).toHaveLength(open);
     const rail = screen.getByRole('navigation', { name: 'home.mainNavigation' });
-    expect(within(rail).getAllByRole('link')).toHaveLength(open);
+    expect(within(rail).getAllByRole('link')).toHaveLength(open + 1);
+    expect(within(rail).getByRole('link', { name: 'nav.guides' })).toHaveAttribute('href', '/guides');
     expect(screen.getByRole('main')).toHaveAttribute('id', 'main-content');
     expect(within(screen.getByRole('main')).getByRole('heading', { name: 'Agenda' })).toBeInTheDocument();
+  });
+
+  it('Guides : accès actif dans le rail et la barre haute mobile', () => {
+    mockedAuth.mockReturnValue({ user: null, isLoading: false, logout });
+    (usePathname as jest.Mock).mockReturnValue('/guides');
+    render(<AppShell>…</AppShell>);
+    const current = screen.getAllByRole('link', { current: 'page' });
+    expect(current).toHaveLength(2);
+    current.forEach((link) => expect(link).toHaveAttribute('href', '/guides'));
   });
 
   it('Communauté réservée : « bientôt », désactivée, sans lien mort', () => {

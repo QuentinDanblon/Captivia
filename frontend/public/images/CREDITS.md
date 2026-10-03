@@ -8,7 +8,7 @@ Règles complètes : `frontend/docs/DESIGN.md`, section « Imagerie ».
 - Sources : Wikimedia Commons en priorité (licence lue sur la page du fichier, pas sur un site miroir).
 - Interdit : images générées par IA, banques d'images sans licence libre, captures d'autres sites,
   licences NC/ND (incompatibles avec la redistribution et le recadrage).
-- Fichiers : `public/images/<animals|nature>/<slug>-<largeur>.<avif|webp>`, plusieurs largeurs, plus
+- Fichiers : `public/images/<animals|nature|guides>/<slug>-<largeur>.<avif|webp>`, plusieurs largeurs, plus
   grande variante ≤ 150 Ko, métadonnées (EXIF, XMP, ICC, localisation) retirées.
 
 Le registre utilisé par le code est `src/content/photos.ts` (même liste) : `Figure` affiche le
@@ -32,6 +32,10 @@ la même API : licence libre, auteur/attribution et identification taxonomique d
 et les catégories de Commons, puis contrôle visuel. Les images sans attribution exploitable,
 sous licence non admise ou montrant un autre taxon ont été remplacées. Les variantes ne sont
 pas agrandies au-delà de la largeur originale.
+
+Les deux schémas des guides ont été vérifiés le **2026-10-03** dans les métadonnées de la même API.
+Ils sont conservés en entier sur fond blanc, redimensionnés et convertis en AVIF + WebP ; la
+source vectorielle permet de produire chaque largeur sans recadrage.
 
 ## Photographies
 
@@ -92,6 +96,8 @@ pas agrandies au-delà de la largeur originale.
 | `animals/sheep-{480,800}` | Mouton (Ovis aries) | Flock_of_sheep.jpg | Keith Weller | Domaine public | https://commons.wikimedia.org/wiki/File:Flock_of_sheep.jpg |
 | `animals/donkey-{320,714}` | Âne (Equus asinus) | Donkey_in_Clovelly,_North_Devon,_England.jpg | Adrian Pingstone | Domaine public | https://commons.wikimedia.org/wiki/File:Donkey_in_Clovelly,_North_Devon,_England.jpg |
 | `animals/african-hedgehog-{480,800}` | Hérisson africain (Atelerix albiventris) | Atelerix albiventris in Spain.jpg | Nacaru | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Atelerix_albiventris_in_Spain.jpg |
+| `guides/aquarium-filter-{480,800,1200}` | Schéma de filtre extérieur d'aquarium | Aquarium-Au enfilter.svg | Fred the Oyster | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Aquarium-Au_enfilter.svg |
+| `guides/nitrogen-cycle-{480,800,1200}` | Cycle de l'azote dans un aquarium | Aquarium Nitrogen Cycle.svg | Ilmari Karonen | Domaine public | https://commons.wikimedia.org/wiki/File:Aquarium_Nitrogen_Cycle.svg |
 
 Chaque fichier existe en `.avif` et en `.webp`. Licences : CC BY-SA 4.0
 (https://creativecommons.org/licenses/by-sa/4.0/), CC BY-SA 3.0

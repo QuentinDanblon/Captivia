@@ -632,3 +632,15 @@ veut qu'ils suivent le jour courant. La locale `pt` est du
 **portugais européen (pt-PT, AO90)** : « palavra-passe », « eliminar », « guardar », « subscrição »,
 « ficheiro », « telemóvel », « ecrã », « boletim de saúde » ; adresse en « o seu », impératif à la
 3e personne, enclise (« Inscreva-se »), jamais de gérondif (« a fazer », pas « fazendo »).
+
+
+### 10.12 — Guides d’aménagement (GUI-01, 2026-10-04)
+
+La destination Guides est ajoutée au rail bureau. En mobile, elle dispose d’un onglet sur
+une seconde ligne de la barre haute : les cinq onglets du bas conservent leurs zones tactiles.
+Les illustrations techniques libres sont présentées entières sur fond clair, avec crédit.
+Un plan coté interactif utilise les mesures saisies par la personne ; il ne certifie pas
+une dimension minimale pour une espèce. Les accessoires peuvent être placés par la personne
+sur la vue de dessus et sont repérés dans une légende ; aucune position n’est préremplie.
+Les recommandations numériques restent celles
+des fiches espèces sourcées, sans valeur générique de remplacement.
