@@ -138,7 +138,8 @@ Toute nouvelle paire texte/fond passe dans le script avant d'être utilisée.
 | Interface, texte courant | **IBM Plex Sans** (variable) | 400 texte, 500 libellés et boutons, 600 emphase |
 | Mesures, dates, doses, poids, n° de puce, identifiants | **IBM Plex Mono** 400/500 | `font-variant-numeric: tabular-nums slashed-zero` (automatique sur `.font-mono`, `time`, `code`) |
 
-Chargées par `next/font/google` (`latin`, `latin-ext`) : fichiers auto-hébergés au build,
+Chargées par `next/font/google` (préchargement du seul sous-ensemble `latin` ; `latin-ext` et
+les autres à la demande par `unicode-range`) : fichiers auto-hébergés au build,
 compatibles avec l'export statique mobile et la CSP `font-src 'self'`. Variables :
 `--font-fraunces`, `--font-plex-sans`, `--font-plex-mono` → utilitaires `font-display`
 (alias `font-serif`), `font-sans`, `font-mono`.
@@ -326,6 +327,13 @@ Ratio fixe (pas de CLS), `loading="lazy"` (sauf `priority`), coins 6 px, traitem
 `none | grain | duotone`, légende + crédit **obligatoire** (le typage refuse une photo sans
 `credit`), repli en silhouette sans photo ou en cas d'erreur.
 
+Photos de `public/images/` : passer par `photoSources(clé)` (`src/content/photos.ts`), qui
+fournit `src`, `srcSet` WebP et `sources` AVIF → `<picture>` natif (next/image n'optimise pas
+ici). Options : `objectPosition` (cadrage dans le ratio), `ratio="fill"` (fond de bandeau,
+le parent fixe la hauteur), `creditPlacement` = `caption` (défaut) | `overlay` (cartouche sur
+la photo, `creditCorner` `top`/`bottom`) | `external` (le composant englobant affiche le
+crédit, ex. légende d'un aperçu d'écran).
+
 ### 5.1 Tableau de bord « aujourd'hui » (accueil de l'app, invité ou connecté)
 
 L'accueil de l'app est la journée de l'animal. Composition de référence (lot 3) :
@@ -401,6 +409,18 @@ Tailwind gris dans les nouvelles pages : laisser le défaut.
   filigrane, pas de texte incrusté. Traitement `grain` pour les grandes photos de la landing,
   `duotone` pour des bandeaux d'ambiance, `none` sur les fiches (couleurs fidèles à l'espèce).
 - Sans photo : `AnimalSilhouette` de la classe de l'espèce.
+- Export : AVIF + WebP, 2 à 4 largeurs, plus grande variante ≤ 150 Ko, métadonnées retirées
+  (`sharp`). Une seule photo `priority` par page (celle du haut de la landing).
+
+### 6.1 Landing (`(marketing)/page.tsx`, `src/components/landing/`)
+
+Ordre : accroche + aperçu réel de l'écran « Aujourd'hui » → quatre aperçus (carnet, agenda,
+fiche espèce, communauté « Bientôt ») → espèces en photos → trois étapes → offre (tableau
+Sans compte / Gratuit / Premium) → confiance → recherche de fiches → FAQ → dernier appel.
+Les aperçus sont composés avec les vrais composants `ui/` et les données fixes de
+`landing/sample.ts`, dans `PreviewFrame` (illustration `aria-hidden` sans élément focusable,
+description et crédits dans la légende). Textes : `docs/MESSAGING.md`, namespace `landing`.
+Bouton principal → `/mes-animaux` (l'app propose l'essai sans compte).
 
 ## 7. À ne pas faire
 
@@ -437,6 +457,12 @@ Tailwind gris dans les nouvelles pages : laisser le défaut.
    exclus) et les overlays `mobile/app/[locale]/**` : ils doivent suivre le déplacement.
 5. Repointer la destination « Espèces » d'`APP_DESTINATIONS` vers la page de recherche de
    l'app quand elle existe (aujourd'hui `/`).
+
+**État (landing, octobre 2026)** : point 1 fait pour la partie marketing — groupe
+`(marketing)` (accueil + pages légales). `login`, `register`, `forgot-password`,
+`reset-password`, `verifier-email`, `animal-public` restent hors groupe ; en attendant le
+groupe `(app)`, `src/components/SiteChrome.tsx` rend l'ancien cadre pour toutes les pages hors
+`(marketing)`. Points 2, 3 et 5 restent à faire.
 
 ### 8.2 Correspondances classe → composant/jeton
 

@@ -414,7 +414,7 @@
     "legalNotice": "Aviso legal",
     "navLabel": "Informações legais",
     "sources": "Fontes e licenças",
-    "tagline": "Cuidar, simplesmente.",
+    "tagline": "Gosta deles, nós lembramo-nos do resto.",
     "description": "A caderneta de saúde, os lembretes de cuidados e as fichas de espécies com fontes dos seus animais, num só lugar."
   },
   "nav": {
@@ -455,34 +455,12 @@
     "yourStatus": "Seu status"
   },
   "home": {
-    "featured": "Destaque",
-    "popular": "Mais vistos",
-    "recent": "Novidades",
-    "searchPlaceholder": "Pesquisar uma espécie...",
-    "subtitle": "Descubra e cuide dos seus animais",
-    "title": "O Guia da Fauna",
     "closeMenu": "Fechar o menu",
     "mainNavigation": "Navegação principal",
     "mobileNavigation": "Navegação móvel",
     "openMenu": "Abrir o menu",
     "skipToContent": "Ir para o conteúdo",
-    "searchUnavailable": "O servidor de pesquisa está indisponível. Inicie o backend ou tente novamente mais tarde.",
-    "eyebrow": "GUIA DA FAUNA",
-    "heroLine": "Conhecer o vivo.",
-    "pillarsLabel": "Os pilares da Captivia",
-    "pillarExplore": "Explorar",
-    "pillarUnderstand": "Compreender",
-    "pillarCare": "Cuidar",
-    "explorerKicker": "EXPLORAR",
-    "explorerTitle": "Tem uma espécie em mente?",
-    "speciesProfiles": "Perfis de espécies",
-    "instantSearch": "Pesquisa instantânea",
     "noResults": "Nenhum resultado",
-    "discoverKicker": "DESCOBRIR",
-    "resultsKicker": "RESULTADOS",
-    "resultsTitle": "Espécies encontradas",
-    "profileCount": "{count, plural, one {# perfil} other {# perfis}}",
-    "profileBadge": "Perfil",
     "taxonomy": {
       "Reptilia": "Réptil",
       "Aves": "Ave",
@@ -500,6 +478,266 @@
       "Fungi": "Fungo",
       "Bacteria": "Bactéria",
       "Archaea": "Arqueia"
+    }
+  },
+  "landing": {
+    "meta": {
+      "title": "Captivia — o boletim de saúde e os lembretes dos seus animais",
+      "description": "Vacinas, tratamentos, pesagens, consultas no veterinário: registe-os uma vez e a Captivia avisa-o na hora certa. Grátis para um animal, sem conta para começar.",
+      "ogAlt": "Um golden retriever de perfil, com o título: Gosta deles. A Captivia lembra-se do resto.",
+      "ogCredit": "Fotografia: Dietmar Rabich, CC BY-SA 4.0"
+    },
+    "hero": {
+      "titleLead": "Gosta deles.",
+      "titleRest": "A Captivia lembra-se do resto.",
+      "lead": "Vacinas, desparasitações, pesagens, idas ao veterinário: registe-as uma vez e a Captivia avisa-o quando chegar a hora. Para um gato, um cão, um coelho… ou um gecko-leopardo.",
+      "ctaPrimary": "Começar grátis",
+      "ctaSecondary": "Já tenho conta",
+      "reassurance": "Sem conta, sem cartão. Grátis para um animal.",
+      "species": "Cães · gatos · coelhos · aves · répteis · peixes",
+      "photoAlt": "Cão de pelo fulvo dentro de água até ao pescoço, a olhar para a câmara à luz do fim da tarde",
+      "previewCaption": "O ecrã «Hoje» da Captivia, com animais de exemplo."
+    },
+    "sample": {
+      "today": "Hoje",
+      "dueToday": "{count, plural, one {cuidado hoje} other {cuidados hoje}}",
+      "overdue": "{count, plural, one {em atraso} other {em atraso}}",
+      "alertAction": "Marcar consulta",
+      "markDone": "Marcar como feito",
+      "timelineLabel": "Cuidados do dia",
+      "weekLabel": "Próximos cuidados",
+      "allDay": "Todo o dia",
+      "status": {
+        "done": "Feito",
+        "due": "Por fazer",
+        "overdue": "Em atraso",
+        "planned": "Previsto",
+        "skipped": "Ignorado"
+      },
+      "kind": {
+        "medication": "Medicamento",
+        "feeding": "Refeição",
+        "cleaning": "Manutenção",
+        "weighing": "Pesagem",
+        "vet": "Veterinário"
+      },
+      "care": {
+        "dewormTitle": "Desparasitação",
+        "dewormDetail": "Moka · 1 comprimido",
+        "feedTitle": "Refeição",
+        "feedDetail": "Pixel · 5 grilos polvilhados com cálcio",
+        "terrariumTitle": "Limpeza do terrário",
+        "terrariumDetail": "Pixel · previsto ontem",
+        "weighTitle": "Pesagem",
+        "weighDetail": "Fleur · antes da refeição",
+        "hayTitle": "Feno fresco e legumes",
+        "hayDetail": "Fleur · 1 molho, 3 folhas de endívia",
+        "vetTitle": "Consulta no veterinário",
+        "vetDetail": "Moka · Dra. Lambert · check-up e vacina",
+        "moltTitle": "Controlo da muda",
+        "moltDetail": "Pixel · humedecer o abrigo húmido"
+      },
+      "lastWeighing": "Última pesagem",
+      "lastWeighingValue": "4,5 kg · há 12 dias",
+      "nextVaccine": "Próxima vacina",
+      "nextVaccineValue": "daqui a 6 dias",
+      "vaccinesTitle": "Vacinas",
+      "vaccineFeline": "Panleucopenia e coriza",
+      "vaccineRabies": "Raiva",
+      "vaccineDueSoon": "Reforço daqui a 6 dias",
+      "vaccineUpToDate": "Em dia",
+      "weightTitle": "Peso",
+      "weightChart": "Curva de peso da Moka: de 4,1 kg para 4,5 kg num ano",
+      "appointmentTitle": "Check-up anual da Fleur por marcar",
+      "appointmentBody": "Última consulta há 11 meses.",
+      "geckoName": "Gecko-leopardo",
+      "geckoFacts": {
+        "hotSpot": "Ponto quente",
+        "activity": "Atividade",
+        "activityValue": "crepuscular",
+        "diet": "Alimentação",
+        "dietValue": "insetos vivos",
+        "lifespan": "Longevidade em cativeiro",
+        "lifespanValue": "15-20 anos"
+      },
+      "geckoStatus": "Estado UICN",
+      "geckoLc": "Pouco preocupante",
+      "geckoTipLabel": "Bom saber",
+      "geckoTip": "Uma cauda que emagrece é muitas vezes o primeiro sinal de perda de peso: a comunicar ao veterinário.",
+      "geckoSources": "Fontes: Wikipédia (CC BY-SA 4.0) · GBIF · Lista Vermelha da UICN",
+      "postCockatielsTime": "há 2 h",
+      "postCockatielsTitle": "As nossas três caturras finalmente estrearam o novo viveiro",
+      "postQuestionTime": "há 5 h",
+      "postQuestionTitle": "O meu dragão-barbudo come menos desde que os dias encurtaram. Já vos aconteceu?",
+      "reactions": "{count, plural, one {# reação} other {# reações}}",
+      "replies": "{count, plural, one {# resposta} other {# respostas}}",
+      "postQuestionBody": "O ponto quente está a 34 °C, bebe normalmente, mas há uma semana que ignora os grilos."
+    },
+    "tour": {
+      "title": "Cada cuidado registado. Cada data cumprida.",
+      "intro": "A Moka, o Pixel e a Fleur são animais de exemplo. Os ecrãs, esses, são mesmo os da app.",
+      "previewNote": "Pré-visualização da app, dados de exemplo",
+      "soon": "Em breve",
+      "record": {
+        "label": "Boletim de saúde",
+        "title": "Tudo o que o veterinário lhe vai perguntar, já registado.",
+        "body": "Vacinas, tratamentos, pesagens e relatórios de consulta, datados e arrumados. A curva de peso desenha-se a cada pesagem, e o boletim imprime-se ou partilha-se antes da consulta."
+      },
+      "reminders": {
+        "label": "Lembretes e agenda",
+        "title": "O lembrete certo, na hora certa.",
+        "body": "Desparasitação de três em três meses, refeição dia sim, dia não, vacina todos os anos: a Captivia gere o calendário e avisa-o por notificação ou por e-mail. As suas consultas aparecem também na agenda do telemóvel."
+      },
+      "species": {
+        "label": "Fichas de espécies",
+        "title": "Respostas com fontes, não boatos.",
+        "body": "Temperatura, alimentação, comportamento, saúde, regulamentação: cada ficha diz o que o seu animal precisa e de onde vem a informação."
+      },
+      "community": {
+        "label": "Comunidade",
+        "title": "Em breve: outros apaixonados como você.",
+        "body": "Partilhe fotografias dos seus animais, faça as suas perguntas, responda às dos outros. O boletim de saúde continua privado."
+      }
+    },
+    "gallery": {
+      "title": "Do gato do sofá ao gecko do terrário.",
+      "body": "Cães, gatos, coelhos, aves, répteis, peixes, cavalos ou galinhas: cada espécie tem a sua ficha, cada animal tem o seu boletim."
+    },
+    "photos": {
+      "dogGoldenRetriever": "Golden retriever de perfil, a olhar para cima, num bosque",
+      "catTabby": "Gato tigrado jovem sentado, virado para a câmara",
+      "rabbitStraw": "Coelho preto e branco a beber de uma tigela de madeira, sobre palha",
+      "budgerigars": "Dois periquitos verdes e amarelos, frente a frente",
+      "beardedDragon": "Cabeça de um dragão-barbudo, escamas em relevo, num ramo",
+      "neonTetra": "Tetra-néon azul e vermelho a nadar entre as plantas de um aquário",
+      "horse": "Cabeça de um cavalo cinzento-claro com cabeção e crina comprida",
+      "hen": "Galinha ruiva de crista vermelha, de perfil",
+      "catStraw": "Gato ruivo e branco deitado ao sol sobre palha",
+      "leopardGecko": "Gecko-leopardo malhado na areia",
+      "cockatiels": "Três caturras alinhadas num ramo"
+    },
+    "galleryNames": {
+      "dogGoldenRetriever": "Cão",
+      "catTabby": "Gato",
+      "rabbitStraw": "Coelho",
+      "budgerigars": "Periquitos",
+      "beardedDragon": "Dragão-barbudo",
+      "neonTetra": "Tetra-néon",
+      "horse": "Cavalo",
+      "hen": "Galinha"
+    },
+    "steps": {
+      "title": "Três passos e está feito.",
+      "one": {
+        "title": "Apresente-nos o seu animal",
+        "body": "A espécie, o nome, a data de nascimento. Uma fotografia, se quiser."
+      },
+      "two": {
+        "title": "Registe o que importa",
+        "body": "A última vacina, o tratamento em curso, o peso de hoje. O resto vem com as semanas."
+      },
+      "three": {
+        "title": "Deixe que o avisemos",
+        "body": "Uma notificação ou um e-mail antes de cada prazo, e as consultas na sua agenda."
+      },
+      "cta": "Adicionar o meu primeiro animal"
+    },
+    "offer": {
+      "title": "Grátis para um animal. Premium quando a família cresce.",
+      "intro": "Comece sem conta. Crie uma para guardar os seus dados e passe a Premium no dia em que chegar um segundo animal.",
+      "caption": "O que inclui cada opção",
+      "feature": "O que inclui",
+      "guest": "Sem conta",
+      "guestPrice": "Grátis",
+      "guestHint": "Neste dispositivo",
+      "free": "Conta gratuita",
+      "freePrice": "Grátis",
+      "freeHint": "Guardado e sincronizado",
+      "premium": "Premium",
+      "premiumPrice": "Assinatura mensal ou anual",
+      "premiumHint": "Preço indicado na app antes de qualquer compra",
+      "rows": {
+        "animals": "Animais",
+        "record": "Boletim de saúde completo: vacinas, tratamentos, pesagens",
+        "reminders": "Lembretes e agenda de cuidados",
+        "species": "Fichas de espécies com fontes",
+        "sync": "Cópia de segurança e acesso a partir de vários dispositivos",
+        "qr": "Código QR do animal (boletim só de leitura)"
+      },
+      "several": "Vários",
+      "included": "Incluído",
+      "notIncluded": "Não incluído",
+      "keepData": "Começa sem conta? No dia em que criar uma, o seu animal e todo o boletim vão consigo.",
+      "cta": "Começar grátis"
+    },
+    "trust": {
+      "title": "O boletim do seu animal só diz respeito a si.",
+      "private": {
+        "title": "Privado por predefinição",
+        "body": "Ninguém além de si vê o boletim. Nada é publicado sem o seu consentimento, nem quando a comunidade abrir."
+      },
+      "europe": {
+        "title": "Alojado na Europa",
+        "body": "O servidor e a base de dados da Captivia ficam em Frankfurt, na Alemanha."
+      },
+      "sources": {
+        "title": "Fontes, não rumores",
+        "body": "Wikipédia, GBIF, Lista Vermelha da UICN, CITES: cada ficha cita as suas."
+      },
+      "noAds": {
+        "title": "Nenhum cookie publicitário",
+        "body": "Os seus dados não são vendidos nem alugados. Pode apagar a sua conta e todo o conteúdo a qualquer momento."
+      },
+      "privacyLink": "Ler a política de privacidade"
+    },
+    "search": {
+      "title": "Tem uma espécie em mente?",
+      "body": "Abra uma ficha antes mesmo de criar o boletim: jiboia, gecko-leopardo, caturra, coelho-anão orelhudo…",
+      "label": "Pesquisar uma espécie",
+      "placeholder": "Ex.: gecko-leopardo",
+      "submit": "Pesquisar",
+      "browse": "Explorar por grupo",
+      "suggestions": "Sugestões",
+      "results": "{count, plural, one {# ficha encontrada} other {# fichas encontradas}}",
+      "resultsTitle": "Resultados",
+      "unavailable": "A pesquisa está indisponível de momento. Tente novamente daqui a pouco."
+    },
+    "faq": {
+      "title": "As perguntas que nos fazem",
+      "free": {
+        "q": "É mesmo grátis?",
+        "a": "Sim, para um animal: boletim de saúde, lembretes, agenda e fichas de espécies incluídos. O Premium faz sentido quando acompanha vários animais; subscreve-se na app móvel, onde o preço é indicado antes de qualquer compra."
+      },
+      "account": {
+        "q": "É preciso criar conta?",
+        "a": "Não. Começa logo, sem conta. Uma conta gratuita serve para guardar os seus dados e encontrá-los noutro dispositivo."
+      },
+      "upgrade": {
+        "q": "Se criar conta mais tarde, perco o que registei?",
+        "a": "Não. O seu animal e o boletim ficam associados à nova conta, sem ter de voltar a escrever nada."
+      },
+      "animals": {
+        "q": "Que animais posso acompanhar?",
+        "a": "Cães, gatos, coelhos e roedores, aves, répteis, anfíbios, peixes, cavalos, aves de capoeira… As fichas baseiam-se no GBIF, a base de dados mundial da biodiversidade, e são enriquecidas regularmente."
+      },
+      "vet": {
+        "q": "A Captivia substitui o meu veterinário?",
+        "a": "Não, e não é esse o seu papel. A Captivia ajuda-o a não esquecer nada e a chegar à consulta com um historial completo. As fichas de saúde indicam o que deve levá-lo a consultar."
+      },
+      "data": {
+        "q": "Onde ficam guardados os dados do meu animal?",
+        "a": "Num servidor e numa base de dados situados em Frankfurt, na Alemanha. Não são vendidos nem alugados, e pode apagá-los a qualquer momento."
+      },
+      "devices": {
+        "q": "Em que dispositivos funciona a Captivia?",
+        "a": "No computador, tablet e telemóvel, no navegador. As apps para Android e iOS usam a mesma conta."
+      }
+    },
+    "final": {
+      "title": "Comece por aquele que dorme no sofá.",
+      "body": "Um nome, uma espécie, e o boletim fica aberto. Os lembretes vêm a seguir.",
+      "cta": "Adicionar o meu primeiro animal",
+      "secondary": "Já tenho conta"
     }
   },
   "notifications": {
@@ -828,8 +1066,8 @@
     "accountDeletionTitle": "Eliminar a sua conta",
     "animalsTitle": "Os meus animais",
     "carnetTitle": "Caderneta de saúde",
-    "defaultTitle": "Captivia – O guia da fauna",
-    "description": "A Captivia acompanha todos os dias quem vive com animais de estimação e exóticos: fichas de espécies com fontes, saúde, alimentação, habitat e acompanhamento dos seus animais.",
+    "defaultTitle": "Captivia — boletim de saúde e lembretes para os seus animais",
+    "description": "Vacinas, tratamentos, pesagens, consultas no veterinário: a Captivia lembra-se por si e avisa-o na hora certa. Fichas de espécies com fontes, grátis para um animal.",
     "forgotPasswordTitle": "Palavra-passe esquecida",
     "loginTitle": "Iniciar sessão",
     "registerTitle": "Criar conta",

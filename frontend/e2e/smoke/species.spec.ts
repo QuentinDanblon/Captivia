@@ -3,7 +3,7 @@ import { expect, test } from '../support/test';
 test.describe('Fiche espèce', () => {
   test('depuis la recherche : ouverture de la fiche et contenu', async ({ page }) => {
     await page.goto('/');
-    const search = page.getByRole('textbox', { name: 'Rechercher une espèce...' });
+    const search = page.getByRole('searchbox', { name: 'Rechercher une espèce' });
     await search.fill('boa');
     await search.press('Enter');
 

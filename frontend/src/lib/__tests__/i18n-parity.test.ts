@@ -50,6 +50,8 @@ const ALLOWED_EVERYWHERE = new Set([
   // Noms de stores (W6-08)
   'App Store',
   'Google Play',
+  // Nom de l'offre payante (landing, tableau des formules)
+  'Premium',
 ]);
 
 const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {

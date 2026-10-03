@@ -7,16 +7,19 @@ test.describe('Accueil et langue', () => {
 
     await expect(page).toHaveTitle(/Captivia/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Connaître le vivant.');
-    await expect(page.getByRole('textbox', { name: 'Rechercher une espèce...' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Vous les aimez.');
+    await expect(page.getByRole('searchbox', { name: 'Rechercher une espèce' })).toBeVisible();
+    // Appel à l'action principal : l'entrée de l'app (qui propose l'essai sans compte).
+    await expect(page.getByRole('link', { name: 'Commencer gratuitement' }).first()).toHaveAttribute('href', '/mes-animaux');
+    await expect(page.getByRole('link', { name: "J'ai déjà un compte" }).first()).toHaveAttribute('href', '/login');
   });
 
   test('accueil EN : contenu anglais sous /en', async ({ page }) => {
     await page.goto('/en');
 
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Know the living world.');
-    await expect(page.getByRole('textbox', { name: 'Search for a species...' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('You love them.');
+    await expect(page.getByRole('searchbox', { name: 'Search for a species' })).toBeVisible();
   });
 
   // Le changement de langue recharge la page (cookie NEXT_LOCALE + navigation pleine page) : on
@@ -30,12 +33,12 @@ test.describe('Accueil et langue', () => {
   test('changement de langue : le sélecteur bascule vers /en en anglais', async ({ page }) => {
     await page.goto('/');
     await settled(page);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Connaître le vivant.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Vous les aimez.');
 
     await page.getByRole('combobox', { name: 'Langue' }).selectOption('en');
     await page.waitForURL(/\/en\/?$/);
     await settled(page);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Know the living world.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('You love them.');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(page.getByRole('combobox', { name: 'Language' })).toHaveValue('en');
   });
@@ -46,24 +49,24 @@ test.describe('Accueil et langue', () => {
     await page.getByRole('combobox', { name: 'Langue' }).selectOption('en');
     await page.waitForURL(/\/en\/?$/);
     await settled(page);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Know the living world.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('You love them.');
 
     await page.getByRole('combobox', { name: 'Language' }).selectOption('fr');
     await page.waitForURL((url) => !/^\/en(\/|$)/.test(url.pathname));
     await settled(page);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Connaître le vivant.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Vous les aimez.');
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
 
     // La préférence persiste : un rechargement reste en français.
     await page.reload();
     await settled(page);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Connaître le vivant.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Vous les aimez.');
   });
 
   test('recherche : la requête part vers l’API et les résultats s’affichent', async ({ page, api }) => {
     await page.goto('/');
 
-    const search = page.getByRole('textbox', { name: 'Rechercher une espèce...' });
+    const search = page.getByRole('searchbox', { name: 'Rechercher une espèce' });
     await search.fill('boa');
     await search.press('Enter');
 

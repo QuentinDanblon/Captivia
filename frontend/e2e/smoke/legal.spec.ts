@@ -40,7 +40,7 @@ test.describe('Page 404', () => {
 
     await page.getByRole('link', { name: "Retour à l'accueil" }).click();
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Connaître le vivant.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Vous les aimez.');
   });
 
   test('404 localisée en anglais', async ({ page }) => {
