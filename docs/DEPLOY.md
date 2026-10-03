@@ -107,6 +107,8 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `SENTRY_DSN` | Render | projet Sentry UE | Recommandé |
 | `OPERATOR_EMAILS` | Render | remplacé par `User.role` (W0-01) | — |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Render (`sync: false` ; clé publique servie par `GET /notifications/vapid-public-key`, rien côté Netlify) | `npm run vapid:generate` (backend/) | Dès W3-03 |
+| `FCM_SERVICE_ACCOUNT_JSON` | Render (`sync: false`, secret) | clé JSON du compte de service Firebase **encodée en base64** (`base64 -w0 captivia-firebase-adminsdk-xxxx.json` ; Firebase → Paramètres du projet → Comptes de service → Générer une nouvelle clé privée). Push natif de l'app (W6-07) : Android via FCM, iOS via le relais APNs de FCM | Non : sans elle, push natif désactivé (journal info au démarrage), rappels locaux et Web Push inchangés. Dès la publication des apps |
+| `FCM_PROJECT_ID` | Render (`sync: false`) | identifiant du projet Firebase (ex. `captivia-app`) | Non : `project_id` du JSON par défaut |
 | `IAP_ENABLED`, `REVENUECAT_WEBHOOK_SECRET`, `REVENUECAT_ENTITLEMENT_ID`, `GOOGLE_PLAY_PACKAGE_NAME` | Render (`sync: false`) | RevenueCat (achats in-app, pas de Stripe — voir `docs/PAYMENTS.md`) | Dès la publication sur les stores |
 | `SPECIESPLUS_API_TOKEN` | Render (`sync: false`) | jeton Species+ (api.speciesplus.net) | Non : sans jeton, `/speciesplus/*` → 503 `INTEGRATION_DISABLED` et `speciesPlus.status = "disabled"` sur la fiche législation |
 | `NCBI_API_KEY`, `NCBI_EMAIL` | Render (`sync: false`) | clé NCBI et e-mail de contact | Non : PubMed est public (3 req/s), la clé porte le quota à 10 req/s |

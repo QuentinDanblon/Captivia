@@ -64,6 +64,12 @@ services:
         sync: false
       - key: VAPID_SUBJECT
         sync: false
+      # Push natif de l'app (W6-07, docs/MOBILE.md § 7.3) : clé JSON du compte de service Firebase,
+      # encodée en base64. Sans elle, le push natif est désactivé (journal info au démarrage).
+      - key: FCM_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: FCM_PROJECT_ID
+        sync: false
       # Achats intégrés (W6-08, docs/PAYMENTS.md) : IAP_ENABLED=true rend
       # REVENUECAT_WEBHOOK_SECRET obligatoire (≥ 32 caractères) au démarrage.
       - key: IAP_ENABLED

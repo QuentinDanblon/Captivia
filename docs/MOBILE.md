@@ -13,6 +13,7 @@ contenu distant (`server.url` interdit : rejet Apple 4.2). Elle parle à l'API p
 | Projets natifs | `frontend/mobile/android`, `frontend/mobile/ios` (créés par `npx cap add`) |
 | Couche plateforme | `frontend/src/lib/platform.ts` |
 | Icônes, splash, icône de notification | `frontend/mobile/assets/` (sources), `frontend/mobile/android-template/res/` (notification), script `frontend/scripts/make-mobile-assets.mjs` (§ 11) |
+| Push natif FCM / APNs (W6-07) | `frontend/src/lib/native-push.ts`, `backend/src/notifications/` (`native-push-sender.ts`, `fcm-client.ts`, `device-tokens.*`) (§ 7.3) |
 | Fiches store, déclarations, âge | `docs/store/` (§ 12) ; `frontend/mobile/ios-template/PrivacyInfo.xcprivacy` |
 | CI | `.github/workflows/mobile.yml` (manuel ; APK de debug, AAB signé optionnel) (§ 10) |
 
@@ -139,6 +140,7 @@ importés dynamiquement (`import('@capacitor/…')`), donc absents du bundle web
 | `@capacitor/app` | 7.1.x | `appUrlOpen`, `getLaunchUrl`, `appStateChange`, `backButton`, `exitApp` (`NativeBridge`) |
 | `@capacitor/camera` | 7.0.x | photo d'animal : appareil photo ou galerie (`usePhotoPicker`) |
 | `@capacitor/local-notifications` | 7.0.x | rappels de soins (`src/lib/local-reminders.ts`) |
+| `@capacitor/push-notifications` | 7.0.x | push natif FCM / APNs (`src/lib/native-push.ts`, § 7.3) |
 | `@capacitor/preferences` | 7.0.x | session (`tokenStorage`), réglage et dernière liste des rappels |
 | `@capacitor/filesystem`, `@capacitor/share` | 7.1.x, 7.0.x | partage du carnet (`src/lib/carnet-share.ts`) |
 | `@revenuecat/purchases-capacitor` | 11.x | achats intégrés (W6-08) |
@@ -186,8 +188,10 @@ seulement si `isNative()` :
 
 - `appUrlOpen` et `App.getLaunchUrl()` (lien ouvert à froid, traité une seule fois) →
   `mapWebUrlToAppRoute` → `router.push` (§ 8.5) ;
-- rappels locaux : synchronisation après la connexion (invité compris) et à chaque retour au premier
-  plan (`appStateChange`), annulation à la déconnexion, rappel touché → fiche de l'animal (§ 7) ;
+- rappels locaux puis push natif : synchronisation après la connexion (invité compris), à chaque
+  retour au premier plan (`appStateChange`) et après la création d'un soin (`captivia:care-scheduled`),
+  annulation à la déconnexion, notification touchée (locale ou distante) → fiche de l'animal (§ 7) ;
+- explication préalable (`NotificationPrimer`) avant la demande de permission système (§ 7.1) ;
 - **bouton retour Android** (`backButton`) : ferme d'abord une fenêtre modale ouverte (Échap), sinon
   `history.back()` si la WebView a un historique, sinon `App.exitApp()`.
 
@@ -219,7 +223,7 @@ lien vers un paiement web dans l'app (règle 3.1.1). Xcode : ajouter la capacit�
 sur l'appareil, fonctionnent hors ligne. Icône Android `ic_stat_captivia` (silhouette blanche sur fond transparent, versionnée dans
 `mobile/android-template/res/drawable-*/` : à copier après `cap add android`, § 11.2), couleur `#0aa678` (`capacitor.config.ts`). Android 13+ :
 demander `POST_NOTIFICATIONS` ; Android 14+ : `SCHEDULE_EXACT_ALARM` seulement si nécessaire. Le push
-distant (FCM/APNs) relève de W6-07.
+distant (FCM/APNs, W6-07) complète ces rappels : § 7.3.
 
 ### 7.1 Fonctionnement (`src/lib/local-reminders.ts`)
 
@@ -237,10 +241,15 @@ distant (FCM/APNs) relève de W6-07.
   soins passés en sont retirés. Une session refusée (401/403) ne reprogramme rien.
 - **Déclencheurs** (`NativeBridge`) : connexion ou essai invité, retour au premier plan, bouton des
   paramètres. Déconnexion : tout est annulé et la liste oubliée.
-- **Permission** : jamais au lancement à froid. Demandée (1) juste après une connexion faite pendant
-  l'exécution, s'il y a au moins un soin à rappeler, **une seule fois par appareil** ; (2) sur le
-  bouton « Activer les rappels sur ce téléphone » des paramètres de notifications. Refusée dans les
-  réglages : jamais redemandée, la carte explique comment la rétablir.
+- **Permission** (une seule autorisation système pour les rappels locaux et le push natif) : jamais
+  au lancement à froid. Une **explication préalable** (`NotificationPrimer` : « Être prévenu à
+  l'heure des soins ? », boutons « Activer les rappels » / « Plus tard ») est proposée **une seule
+  fois par appareil** : (1) à la création du premier soin (routine, médicament, vaccin, rendez-vous ;
+  événement `captivia:care-scheduled` émis par `api.ts`) ; (2) juste après une connexion faite
+  pendant l'exécution, s'il y a au moins un soin à rappeler. Seul « Activer » ouvre la boîte de
+  dialogue du système ; « Plus tard » ne demande rien. (3) Le bouton « Activer les rappels sur ce
+  téléphone » des paramètres de notifications demande directement (action explicite). Refusée dans
+  les réglages : jamais redemandée, la carte explique comment la rétablir.
 - **Couper les rappels** (paramètres de notifications → « Sur cet appareil », carte native qui
   remplace le Web Push dans l'app) : tous les rappels programmés sont annulés et plus rien n'est
   programmé jusqu'à réactivation.
@@ -264,6 +273,151 @@ retards importants sont constatés sur appareil (et alors la demander à l'utili
 
 iOS : aucune clé `Info.plist` pour les notifications locales ; la permission est demandée par
 `requestPermissions()` au moment décrit au § 7.1.
+
+### 7.3 Push natif FCM / APNs (W6-07)
+
+**Choix** : **Firebase Cloud Messaging pour les deux plateformes**, iOS compris (FCM relaie vers
+APNs avec la clé `.p8` téléversée dans Firebase). Un seul fournisseur gratuit (FCM n'a ni quota
+payant ni facturation), un seul jeton par installation, une seule clé côté serveur. L'API appelle
+l'**API HTTP v1** directement (assertion JWT RS256 signée avec la clé du compte de service, sans
+SDK Firebase Admin : aucune dépendance ajoutée). Sans `FCM_SERVICE_ACCOUNT_JSON`, le canal natif est
+désactivé (journal « info » au démarrage), comme le Web Push sans clés VAPID.
+
+**Ce qui part en push** : les mêmes rappels que le Web Push (scheduler W3-02 : routines, médicaments,
+vaccins, rendez-vous, types personnalisés) et la notification de test. `PushDispatcher` envoie sur
+tous les canaux actifs du compte (navigateurs abonnés **et** installations de l'app), une fois par
+appareil ; les préférences existantes s'appliquent (`deliveryChannel` « e-mail seul » : aucun push ;
+types désactivés : aucun rappel généré). Il n'existe pas d'heures calmes réglables aujourd'hui (la
+fenêtre `schedule` des préférences n'est pas exposée ni appliquée, y compris au Web Push).
+
+**Anti-doublon avec les rappels locaux (§ 7.1)** : après chaque synchronisation réussie depuis le
+réseau, l'app envoie `localRemindersUntil` (fin de l'horizon de 30 jours, ou instant du 64ᵉ rappel
+si la limite iOS est atteinte). Le serveur n'envoie **pas** de push pour un rappel d'agenda (routine,
+médicament, vaccin, RDV) prévu avant cette date : le téléphone le sonne déjà, même hors ligne. Les
+rappels au-delà (routine horaire, 64 atteints) et les types personnalisés (absents de l'agenda)
+arrivent en push. Valeur bornée à 31 jours côté serveur. Limite connue : un soin ajouté **depuis le
+site** pendant que l'app est en arrière-plan n'est rappelé sur le téléphone qu'après le prochain
+retour au premier plan (comme avant W6-07).
+
+**Cycle de vie du jeton** (`src/lib/native-push.ts`) :
+
+- enregistré (`POST /users/me/device-tokens`) seulement si la permission est accordée, après chaque
+  synchronisation des rappels (lancement avec session, retour au premier plan, soin créé, bouton des
+  paramètres) : `lastSeenAt` reste à jour ;
+- rafraîchi : nouvel événement `registration` → renvoyé avec `previousToken` (l'ancien est supprimé) ;
+- retiré : déconnexion (`/auth/logout` avec `deviceToken` + `DELETE`), « Couper les rappels sur ce
+  téléphone », permission retirée dans les réglages, logout-all, suppression du compte, purge des
+  invités, réponse `UNREGISTERED` / `SENDER_ID_MISMATCH` / `INVALID_ARGUMENT` (jeton) de FCM, 270 jours
+  sans réenregistrement (maintenance) ;
+- un jeton enregistré par un autre compte (téléphone prêté, déconnexion hors ligne) lui est retiré.
+
+**Notification touchée** : `pushNotificationActionPerformed` → `data.animalId` → fiche de l'animal
+(`animalDetailPath`), sinon l'agenda. Au premier plan, la notification est affichée aussi
+(`presentationOptions` de `capacitor.config.ts`).
+
+**Contrat API** (JWT, invités compris, 30 requêtes / min / IP) :
+
+| Route | Corps | Réponse |
+| --- | --- | --- |
+| `POST /users/me/device-tokens` | `{ token, platform: "android"\|"ios", locale?, localRemindersUntil?: ISO\|null, previousToken? }` | `200 { enabled, platform, lastSeenAt }` (`enabled` : FCM configuré côté serveur) |
+| `DELETE /users/me/device-tokens` | `{ token }` | `200 { success: true }` (idempotent) |
+| `POST /auth/logout` | `{ refreshToken, endpoint?, deviceToken? }` | `200` |
+
+`token` : 32 à 4 096 caractères `[A-Za-z0-9_:-]` ; champ inconnu → 400.
+
+#### 7.3.1 Projet Firebase (gratuit, une fois)
+
+1. <https://console.firebase.google.com> → **Ajouter un projet** (« captivia »), Google Analytics
+   **désactivé** (inutile, et il ajouterait une collecte à déclarer).
+2. **Android** : *Ajouter une application* → Android, nom de package `app.captivia` → télécharger
+   **`google-services.json`**. Le placer dans `frontend/mobile/android/app/google-services.json`
+   (**jamais commité** : `.gitignore`). Le gabarit Capacitor applique le plugin Gradle
+   `com.google.gms.google-services` dès que ce fichier existe. CI : secret
+   `GOOGLE_SERVICES_JSON_BASE64` (`base64 -w0 google-services.json`), écrit par `mobile.yml` avant le
+   build (sans lui, l'APK se construit sans push).
+3. **iOS** : *Ajouter une application* → iOS, bundle ID `app.captivia` → télécharger
+   **`GoogleService-Info.plist`**, l'ajouter dans Xcode au groupe `App` (cible cochée). Non commité.
+4. **Clé APNs** : developer.apple.com → *Certificates, IDs & Profiles* → *Keys* → **+** → cocher
+   *Apple Push Notifications service (APNs)* → télécharger `AuthKey_<KEYID>.p8` (une seule fois ;
+   la ranger dans le coffre de l'équipe, jamais dans le dépôt). Firebase → *Paramètres du projet* →
+   *Cloud Messaging* → *Configuration de l'application Apple* → **Clé d'authentification APNs** →
+   téléverser le `.p8` avec le **Key ID** et le **Team ID**. Une clé `.p8` sert en développement et
+   en production, et n'expire pas.
+5. **Compte de service pour l'API** : Firebase → *Paramètres du projet* → *Comptes de service* →
+   *Générer une nouvelle clé privée* (JSON). Sur Render : `FCM_SERVICE_ACCOUNT_JSON` =
+   `base64 -w0 captivia-firebase-adminsdk-xxxx.json` (et facultativement `FCM_PROJECT_ID`) ; voir
+   `docs/DEPLOY.md`. Supprimer le fichier local ensuite. Rotation : `docs/RUNBOOK.md`.
+
+#### 7.3.2 Android
+
+- `variables.gradle` : `firebaseMessagingVersion` (défaut du plugin 24.1.0) peut rester tel quel.
+- `AndroidManifest.xml`, dans `<application>` : icône et couleur des notifications affichées par
+  le plugin au premier plan (en arrière-plan, l'API envoie déjà `icon` / `color` / `channel_id`) :
+
+```xml
+<meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+    android:resource="@drawable/ic_stat_captivia" />
+<meta-data android:name="com.google.firebase.messaging.default_notification_color"
+    android:resource="@color/captivia_notification" />
+<meta-data android:name="com.google.firebase.messaging.default_notification_channel_id"
+    android:value="captivia-reminders" />
+```
+
+  avec `<color name="captivia_notification">#0AA678</color>` dans `res/values/colors.xml`. Le canal
+  `captivia-reminders` est créé par l'app (§ 7.1) ; `POST_NOTIFICATIONS` est déjà déclarée.
+
+#### 7.3.3 iOS (Xcode)
+
+1. Cible *App* → *Signing & Capabilities* → **+ Capability** → **Push Notifications**, puis
+   **Background Modes** → cocher **Remote notifications**. (developer.apple.com : l'identifiant
+   `app.captivia` doit avoir *Push Notifications* coché ; les profils sont régénérés.)
+2. Ajouter **FirebaseMessaging** (Swift Package Manager : `https://github.com/firebase/firebase-ios-sdk`,
+   produit `FirebaseMessaging` ; ou CocoaPods : `pod 'FirebaseMessaging'` dans `ios/App/Podfile`).
+3. `AppDelegate.swift` : le plugin Capacitor reçoit le jeton **APNs** ; on le confie à Firebase et on
+   transmet à Capacitor le jeton **FCM** (celui que l'API sait utiliser) :
+
+```swift
+import FirebaseCore
+import FirebaseMessaging
+
+func application(_ application: UIApplication,
+                 didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    FirebaseApp.configure()
+    return true
+}
+
+func application(_ application: UIApplication,
+                 didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    Messaging.messaging().apnsToken = deviceToken
+    Messaging.messaging().token { token, error in
+        if let error = error {
+            NotificationCenter.default.post(name: .capacitorDidFailToRegisterForRemoteNotifications, object: error)
+        } else if let token = token {
+            NotificationCenter.default.post(name: .capacitorDidRegisterForRemoteNotifications, object: token)
+        }
+    }
+}
+
+func application(_ application: UIApplication,
+                 didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    NotificationCenter.default.post(name: .capacitorDidFailToRegisterForRemoteNotifications, object: error)
+}
+```
+
+4. `PrivacyInfo.xcprivacy` : FirebaseMessaging embarque son propre manifeste ; vérifier le rapport
+   de confidentialité Xcode (*Generate Privacy Report*). App Privacy : l'identifiant d'appareil
+   (jeton push) est une donnée « Identifiants → ID de l'appareil » liée au compte, finalité
+   « Fonctionnalité de l'app », sans suivi (`docs/store/declarations-confidentialite.md`).
+
+#### 7.3.4 Vérifier sur appareil
+
+1. API avec `FCM_SERVICE_ACCOUNT_JSON` : journal `Push natif actif (FCM HTTP v1, projet …)`.
+2. App installée, connecté, permission accordée : une ligne `DeviceToken` apparaît
+   (`platform`, `lastSeenAt`).
+3. *Paramètres → Notifications* (site ou app) → **notification de test** : reçue app fermée et app
+   ouverte ; toucher → l'app s'ouvre (fiche de l'animal pour un rappel).
+4. Désinstaller l'app puis renvoyer un test : FCM répond `UNREGISTERED`, la ligne est supprimée.
+5. Se déconnecter : la ligne disparaît ; « Couper les rappels sur ce téléphone » aussi.
 
 ## 8. Universal Links / App Links (W6-09)
 
@@ -402,6 +556,9 @@ la barre finale de l'export statique (`trailingSlash`).
 - [ ] Universal / App Links : `APPLE_TEAM_ID` et `ANDROID_SHA256_CERT_FINGERPRINTS` (Play App Signing +
       upload) sur Netlify, *Associated Domains* et `intent-filter autoVerify` en place (§ 8).
 - [ ] Icône de notification `ic_stat_captivia` (copier `mobile/android-template/res/`, § 11.2) ; aucune `SCHEDULE_EXACT_ALARM` / `USE_EXACT_ALARM` (§ 7.2).
+- [ ] Push natif (W6-07, § 7.3) : projet Firebase, `google-services.json` (secret CI `GOOGLE_SERVICES_JSON_BASE64`),
+      `GoogleService-Info.plist`, clé APNs `.p8` téléversée dans Firebase, capacités *Push Notifications* et
+      *Background Modes → Remote notifications*, `AppDelegate` (FirebaseMessaging), `FCM_SERVICE_ACCOUNT_JSON` sur Render.
 
 ### À vérifier sur appareil réel (non couvert par jest / Playwright)
 
@@ -410,9 +567,12 @@ la barre finale de l'export statique (`trailingSlash`).
 - Photo : feuille « Prendre une photo / Choisir dans la galerie », refus puis autorisation dans les
   réglages, orientation, poids après compression. Android : app tuée par le système pendant la prise
   de vue (`appRestoredResult` non géré à ce jour : la photo est alors perdue).
-- Rappels : permission proposée après connexion / essai invité (pas au lancement), rappels reçus app
-  fermée, en mode avion, après redémarrage (Android) ; 64 au plus avec une routine horaire ; « Couper »
-  vide la liste ; clic → fiche ; retard toléré sans alarme exacte (Doze).
+- Rappels : explication proposée au premier soin créé ou après connexion / essai invité (pas au
+  lancement), boîte système seulement sur « Activer », rappels reçus app fermée, en mode avion, après
+  redémarrage (Android) ; 64 au plus avec une routine horaire ; « Couper » vide la liste ; clic → fiche ;
+  retard toléré sans alarme exacte (Doze).
+- Push natif (§ 7.3.4) : notification de test reçue app fermée / ouverte, une seule notification par
+  rappel (pas de doublon local + distant), toucher → fiche, jeton retiré à la déconnexion.
 - Liens universels : lien de réinitialisation et QR public ouverts depuis Mail / Gmail / l'appareil
   photo, à froid et app ouverte ; lien d'un autre domaine ignoré.
 - Bouton retour Android : modale fermée, puis historique, puis sortie de l'app.
