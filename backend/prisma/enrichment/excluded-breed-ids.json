@@ -1,5 +1,5 @@
 {
- "_comment": "Entrées de breeds-data.json qui ne sont pas des animaux (outils, objets, identifiants Wikidata non résolus) : jamais importées. Voir docs/DEPLOY-NOTES-seed.md.",
+ "_comment": "Entrées de breeds-data.json qui ne sont pas des animaux (outils, objets, identifiants Wikidata non résolus) : jamais importées. Nettoyage d'une base déjà seedée : docs/RUNBOOK.md § 6.6.",
  "ids": [
   2000000451,
   2000000452,

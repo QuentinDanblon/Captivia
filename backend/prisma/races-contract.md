@@ -1,7 +1,7 @@
 # CONTRAT SOUS-AGENTS — Fiches races Captivia (348 races)
 
 Tu produis des fiches races COMPLÈTES et SOURCÉES pour la plateforme Captivia
-(guide de la faune + e-commerce d'alimentation animale).
+(carnet de santé, rappels et fiches espèces pour les particuliers).
 
 ## RÈGLE D'OR ABSOLUE — SOURCING
 

@@ -1,3 +1,5 @@
+> Archivé le 2026-10-03 : ancien guide de saisie (≈ 80 espèces, « génération semi-automatique ») contraire à la règle actuelle (toute donnée sourcée par citation exacte) ; voir `backend/prisma/enrichment/CONTRACT.md`. Anciennement `backend/prisma/SPECIES_DATA_GUIDE.md`.
+
 // SPECIES DATA STRUCTURE & GENERATION GUIDE
 // ==========================================
 

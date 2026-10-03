@@ -1,3 +1,5 @@
+> Archivé le 2026-10-03 : plan d'intégration GBIF initial, jamais suivi tel quel ; l'intégration réelle est dans `backend/src/species/` et `backend/src/external/` (résilience : `docs/DEPLOY.md`, « API externes »).
+
 Plan d’intégration de l’API GBIF dans Captivia
 (en suivant la documentation officielle : https://techdocs.gbif.org/en/openapi/v1/species)
 
