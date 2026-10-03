@@ -78,7 +78,10 @@ describe('MaintenanceService (Prisma simulé)', () => {
       communityModerationActions: 0,
       communityReports: 0,
       communityMedia: 0,
+      communityHandleHolds: 0,
+      communityUploadAttempts: 0,
     });
+    expect(res.retried).toEqual({ decisions: 0, reports: 0 });
     expect(tx.$executeRaw).not.toHaveBeenCalled();
     expect(statements[0].sql).toContain('pg_try_advisory_xact_lock');
     expect(statements[0].values).toEqual([MAINTENANCE_LOCK_KEY]);
@@ -99,6 +102,8 @@ describe('MaintenanceService (Prisma simulé)', () => {
         if (table === 'NotificationEvent') return 11;
         if (table === 'CommunityModerationAction') return 4;
         if (table === 'CommunityReport') return 5;
+        if (table === 'CommunityHandleHold') return 6;
+        if (table === 'CommunityUploadAttempt') return 8;
         return 0;
       },
     });
@@ -114,6 +119,8 @@ describe('MaintenanceService (Prisma simulé)', () => {
       communityReports: 5,
       // Sans service de médias (test unitaire) : aucune image purgée.
       communityMedia: 0,
+      communityHandleHolds: 6,
+      communityUploadAttempts: 8,
     });
     expect(deletesFor(statements, 'RefreshToken')).toHaveLength(3);
 
@@ -137,6 +144,13 @@ describe('MaintenanceService (Prisma simulé)', () => {
     expect(events.values[0]).toEqual(new Date('2027-03-17T03:41:00.000Z'));
     const [moderation] = deletesFor(statements, 'CommunityModerationAction');
     expect(moderation.values[0]).toEqual(cutoffs.moderationBefore);
+    // Une décision dont le recours est en attente n'est jamais purgée.
+    expect(moderation.sql).toContain(`"appealStatus" <> 'PENDING'`);
+    const [holds] = deletesFor(statements, 'CommunityHandleHold');
+    expect(holds.sql).toContain('"expiresAt" <');
+    expect(holds.values[0]).toEqual(NOW);
+    const [attempts] = deletesFor(statements, 'CommunityUploadAttempt');
+    expect(attempts.values[0]).toEqual(new Date(NOW.getTime() - DAY_MS));
     expect(cutoffs.moderationBefore).toEqual(
       new Date(NOW.getTime() - 365 * DAY_MS),
     );
@@ -154,6 +168,33 @@ describe('MaintenanceService (Prisma simulé)', () => {
     const res = await service.runOnce(NOW);
     expect(res.deleted.communityMedia).toBe(3);
     expect(purgeOrphans).toHaveBeenCalledWith(NOW, tx);
+  });
+
+  it('relance les notifications de modération après la purge, si le verrou est obtenu', async () => {
+    const retryNotifications = jest
+      .fn()
+      .mockResolvedValue({ decisions: 2, reports: 3 });
+    const moderation = {
+      retryNotifications,
+    } as unknown as ConstructorParameters<typeof MaintenanceService>[2];
+    const locked = buildPrisma({ locked: true });
+    const res = await new MaintenanceService(
+      locked.prisma,
+      undefined,
+      moderation,
+    ).runOnce(NOW);
+    expect(res.retried).toEqual({ decisions: 2, reports: 3 });
+    expect(retryNotifications).toHaveBeenCalledWith(NOW);
+
+    retryNotifications.mockClear();
+    const busy = buildPrisma({ locked: false });
+    const skipped = await new MaintenanceService(
+      busy.prisma,
+      undefined,
+      moderation,
+    ).runOnce(NOW);
+    expect(skipped.retried).toEqual({ decisions: 0, reports: 0 });
+    expect(retryNotifications).not.toHaveBeenCalled();
   });
 
   it('never deletes PaymentEvent (accounting obligations) nor any account', async () => {
@@ -218,7 +259,7 @@ describe('MaintenanceService (Prisma simulé)', () => {
     await service.handleCron();
     expect(log).toHaveBeenCalledWith(
       expect.stringMatching(
-        /4 événement\(s\) de rappel, 0 décision\(s\) de modération, .* supprimé\(s\) en \d+ ms/,
+        /4 événement\(s\) de rappel, 0 décision\(s\) de modération, .* supprimé\(s\) ; 0 notification\(s\) de modération relancée\(s\) en \d+ ms/,
       ),
     );
 

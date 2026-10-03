@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import {
   CommunityContentStatus,
   CommunityModerationAction,
+  CommunityModerationActionType,
   CommunityReason,
   Prisma,
 } from '@prisma/client';
@@ -12,11 +13,14 @@ import {
   communityContactEmail,
   frontendUrl,
   hideThreshold,
+  reportMinAccountAgeDays,
 } from './community.config';
 import {
   APPEAL_WINDOW_DAYS,
   CommunityErrorCode,
   FEED_MAX_LIMIT,
+  NOTIFICATION_RETRY_DAYS,
+  NOTIFICATION_RETRY_MAX_PER_RUN,
   REPORTS_PER_HOUR,
 } from './community.constants';
 import { badRequest, notFound } from './community.errors';
@@ -25,8 +29,10 @@ import { handleKey } from './handle';
 import { CommunityMediaService } from './media/community-media.service';
 import {
   APPEALABLE_ACTIONS,
+  frontendLocalePrefix,
   reasonLabel,
   renderModerationDecision,
+  renderReportDecision,
 } from './moderation-mail';
 import { cleanText } from './text-filters';
 import {
@@ -55,9 +61,39 @@ interface TargetInfo {
   post?: { id: string; status: CommunityContentStatus; authorId: string };
 }
 
-/** Lien de la page « décision » (lecture et recours) dans le frontend (phase 2). */
-export function decisionUrl(actionId: string): string {
-  return `${frontendUrl()}/community/decisions/${actionId}`;
+/**
+ * Lien de la page « décision » (lecture et recours) du frontend : `/communaute/decisions/:id`,
+ * précédé du préfixe de locale hors français (`/en/communaute/decisions/:id`, next-intl
+ * « as-needed »).
+ */
+export function decisionUrl(actionId: string, locale?: string | null): string {
+  return `${frontendUrl()}${frontendLocalePrefix(locale)}/communaute/decisions/${actionId}`;
+}
+
+/**
+ * Signalements qui comptent dans le seuil de masquage automatique : émis par un membre (compte non
+ * invité, e-mail vérifié, profil communautaire actif) dont le compte a au moins
+ * COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS jours. Les autres restent dans la file des opérateurs.
+ */
+export function qualifyingReporter(
+  now: Date = new Date(),
+): Prisma.UserWhereInput {
+  return {
+    isGuest: false,
+    emailVerifiedAt: { not: null },
+    communityProfile: { isNot: null },
+    createdAt: {
+      lte: new Date(now.getTime() - reportMinAccountAgeDays() * DAY_MS),
+    },
+  };
+}
+
+/** Résultat d'une relance des notifications (job de maintenance). */
+export interface NotificationRetryCounts {
+  /** Notifications de décision envoyées aux auteurs de contenus. */
+  decisions: number;
+  /** Notifications de décision envoyées aux auteurs de signalements. */
+  reports: number;
 }
 
 export function appealDeadline(createdAt: Date): Date {
@@ -67,9 +103,12 @@ export function appealDeadline(createdAt: Date): Date {
 /**
  * Modération (règlement européen sur les services numériques, DSA) :
  * - signalement par tout compte connecté, motif dans une liste fermée (art. 16) ;
- * - masquage automatique au-delà de COMMUNITY_HIDE_THRESHOLD signalements distincts ;
+ * - masquage automatique au-delà de COMMUNITY_HIDE_THRESHOLD signalements distincts émis par des
+ *   membres établis (`qualifyingReporter`) ; les autres signalements vont en file opérateur ;
  * - décisions des opérateurs (masquer, rétablir, supprimer, classer, suspendre), toujours motivées
  *   et notifiées à l'auteur avec les voies de recours (art. 17) ;
+ * - auteurs des signalements informés de la décision (art. 16(5)) : e-mail et
+ *   `GET /community/me/reports` ;
  * - recours interne gratuit pendant 6 mois, tranché par une personne (art. 20) ;
  * - journal des décisions (`CommunityModerationAction`).
  */
@@ -144,14 +183,22 @@ export class CommunityModerationService {
     return { reported: true, alreadyReported: false };
   }
 
-  /** Masquage automatique quand le seuil de signalements distincts ouverts est atteint. */
+  /**
+   * Masquage automatique quand le seuil de signalements distincts ouverts est atteint. Seuls
+   * comptent les signalements de membres établis (`qualifyingReporter`) : quelques comptes
+   * invités ou tout juste créés ne peuvent pas masquer un contenu ; leurs signalements restent
+   * dans la file des opérateurs.
+   */
   private async applyThreshold(target: TargetInfo): Promise<void> {
     if (target.reviewedAt) return; // déjà examiné par un opérateur : décision humaine seulement.
-    const where =
-      target.type === 'POST' ? { postId: target.id } : { commentId: target.id };
-    const open = await this.prisma.communityReport.count({
-      where: { ...where, status: 'OPEN' },
-    });
+    const where = {
+      ...(target.type === 'POST'
+        ? { postId: target.id }
+        : { commentId: target.id }),
+      status: 'OPEN' as const,
+      reporter: qualifyingReporter(),
+    };
+    const open = await this.prisma.communityReport.count({ where });
     if (open < hideThreshold()) return;
     const updated = await this.updateTarget(
       target.type,
@@ -160,9 +207,11 @@ export class CommunityModerationService {
       { status: 'VISIBLE', reviewedAt: null },
     );
     if (updated === 0) return; // déjà masqué (course entre deux signalements)
+    const { reporter: _qualifying, ...allOpen } = where;
+    const total = await this.prisma.communityReport.count({ where: allOpen });
     const top = await this.prisma.communityReport.groupBy({
       by: ['reason'],
-      where: { ...where, status: 'OPEN' },
+      where,
       _count: { _all: true },
       orderBy: { _count: { reason: 'desc' } },
       take: 1,
@@ -176,8 +225,8 @@ export class CommunityModerationService {
         operatorId: null,
         automated: true,
         reason: top[0]?.reason ?? null,
-        statement: `Hidden automatically: ${open} distinct reports (threshold ${hideThreshold()}). A moderator will review it.`,
-        reportCount: open,
+        statement: `Hidden automatically: ${open} distinct reports from established members (threshold ${hideThreshold()}). A moderator will review it.`,
+        reportCount: total,
       },
       excerpt(target.body),
     );
@@ -199,22 +248,22 @@ export class CommunityModerationService {
       hiddenAt: new Date(),
       reviewedAt: new Date(),
     });
-    const reportCount = await this.closeReports(type, id, 'ACTIONED');
-    return this.present(
-      await this.record(
-        {
-          action: 'HIDE',
-          targetType: type,
-          targetId: id,
-          subjectId: target.authorId,
-          operatorId,
-          reason: dto.reason,
-          statement: cleanText(dto.statement),
-          reportCount,
-        },
-        excerpt(target.body),
-      ),
+    const closed = await this.closeReports(type, id, 'ACTIONED');
+    const action = await this.record(
+      {
+        action: 'HIDE',
+        targetType: type,
+        targetId: id,
+        subjectId: target.authorId,
+        operatorId,
+        reason: dto.reason,
+        statement: cleanText(dto.statement),
+        reportCount: closed.total,
+      },
+      excerpt(target.body),
     );
+    await this.decideReports(closed.ids, action);
+    return this.present(action);
   }
 
   async restore(
@@ -229,22 +278,22 @@ export class CommunityModerationService {
       hiddenAt: null,
       reviewedAt: new Date(),
     });
-    const reportCount = await this.closeReports(type, id, 'DISMISSED');
-    return this.present(
-      await this.record(
-        {
-          action: 'RESTORE',
-          targetType: type,
-          targetId: id,
-          subjectId: target.authorId,
-          operatorId,
-          statement: cleanText(dto.statement),
-          reportCount,
-        },
-        // Un contenu jamais masqué n'a rien à « rétablir » : pas de notification inutile.
-        target.status === 'VISIBLE' ? false : excerpt(target.body),
-      ),
+    const closed = await this.closeReports(type, id, 'DISMISSED');
+    const action = await this.record(
+      {
+        action: 'RESTORE',
+        targetType: type,
+        targetId: id,
+        subjectId: target.authorId,
+        operatorId,
+        statement: cleanText(dto.statement),
+        reportCount: closed.total,
+      },
+      // Un contenu jamais masqué n'a rien à « rétablir » : pas de notification inutile.
+      target.status === 'VISIBLE' ? false : excerpt(target.body),
     );
+    await this.decideReports(closed.ids, action);
+    return this.present(action);
   }
 
   /** Classement sans suite des signalements ouverts ; le contenu ne sera plus masqué automatiquement. */
@@ -256,21 +305,21 @@ export class CommunityModerationService {
   ) {
     const target = await this.requireTarget(type, id);
     await this.updateTarget(type, id, { reviewedAt: new Date() });
-    const reportCount = await this.closeReports(type, id, 'DISMISSED');
-    return this.present(
-      await this.record(
-        {
-          action: 'DISMISS',
-          targetType: type,
-          targetId: id,
-          subjectId: target.authorId,
-          operatorId,
-          statement: cleanText(dto.statement),
-          reportCount,
-        },
-        false,
-      ),
+    const closed = await this.closeReports(type, id, 'DISMISSED');
+    const action = await this.record(
+      {
+        action: 'DISMISS',
+        targetType: type,
+        targetId: id,
+        subjectId: target.authorId,
+        operatorId,
+        statement: cleanText(dto.statement),
+        reportCount: closed.total,
+      },
+      false,
     );
+    await this.decideReports(closed.ids, action);
+    return this.present(action);
   }
 
   async remove(
@@ -280,43 +329,41 @@ export class CommunityModerationService {
     dto: ModerationDecisionDto,
   ) {
     const target = await this.requireTarget(type, id);
-    const reportCount = await this.prisma.communityReport.count({
-      where: type === 'POST' ? { postId: id } : { commentId: id },
-    });
+    // Les signalements disparaissent avec le contenu (clé étrangère en cascade) : la décision
+    // est consignée et notifiée aux auteurs des signalements AVANT la suppression.
+    const closed = await this.closeReports(type, id, 'ACTIONED');
+    const action = await this.record(
+      {
+        action: 'DELETE',
+        targetType: type,
+        targetId: id,
+        subjectId: target.authorId,
+        operatorId,
+        reason: dto.reason,
+        statement: cleanText(dto.statement),
+        reportCount: closed.total,
+      },
+      excerpt(target.body),
+    );
+    await this.decideReports(closed.ids, action);
     if (type === 'POST') {
       const media = await this.prisma.communityMedia.findMany({
         where: { postId: id },
         select: { key: true },
       });
-      await this.prisma.communityPost.delete({ where: { id } });
+      await this.prisma.communityPost.deleteMany({ where: { id } });
+      // Fichiers supprimés du stockage : l'URL publique cesse de fonctionner.
       await this.media.purgeKeys(media.map((m) => m.key));
     } else {
-      await this.prisma.communityComment.delete({ where: { id } });
+      await this.prisma.communityComment.deleteMany({ where: { id } });
     }
-    return this.present(
-      await this.record(
-        {
-          action: 'DELETE',
-          targetType: type,
-          targetId: id,
-          subjectId: target.authorId,
-          operatorId,
-          reason: dto.reason,
-          statement: cleanText(dto.statement),
-          reportCount,
-        },
-        excerpt(target.body),
-      ),
-    );
+    return this.present(action);
   }
 
   async suspend(operatorId: string, handle: string, dto: SuspendDto) {
     const profile = await this.requireProfile(handle);
     const until = new Date(Date.now() + dto.days * DAY_MS);
-    await this.prisma.communityProfile.update({
-      where: { userId: profile.userId },
-      data: { suspendedUntil: until },
-    });
+    await this.setSuspension(profile.userId, until);
     return this.present(
       await this.record(
         {
@@ -336,10 +383,7 @@ export class CommunityModerationService {
 
   async unsuspend(operatorId: string, handle: string, dto: ModerationNoteDto) {
     const profile = await this.requireProfile(handle);
-    await this.prisma.communityProfile.update({
-      where: { userId: profile.userId },
-      data: { suspendedUntil: null },
-    });
+    await this.setSuspension(profile.userId, null);
     return this.present(
       await this.record(
         {
@@ -505,23 +549,25 @@ export class CommunityModerationService {
     actionId: string,
     dto: ResolveAppealDto,
   ) {
-    const action = await this.prisma.communityModerationAction.findUnique({
-      where: { id: actionId },
-    });
-    if (!action || action.appealStatus !== 'PENDING') throw notFound();
     const statement = cleanText(dto.statement);
-    const now = new Date();
-    if (dto.outcome === 'REVERSED') {
-      await this.revert(action, operatorId, statement);
-    }
-    const updated = await this.prisma.communityModerationAction.update({
-      where: { id: actionId },
+    // Transition atomique PENDING → issue : une seule requête concurrente l'emporte ; elle seule
+    // annule la décision et notifie l'auteur (ni double rétablissement ni double e-mail).
+    const res = await this.prisma.communityModerationAction.updateMany({
+      where: { id: actionId, appealStatus: 'PENDING' },
       data: {
         appealStatus: dto.outcome,
-        appealResolvedAt: now,
+        appealResolvedAt: new Date(),
         appealStatement: statement,
       },
     });
+    if (res.count !== 1) throw notFound();
+    const updated =
+      await this.prisma.communityModerationAction.findUniqueOrThrow({
+        where: { id: actionId },
+      });
+    if (dto.outcome === 'REVERSED') {
+      await this.revert(updated, operatorId, statement);
+    }
     await this.notify(updated, null, dto.outcome);
     return this.present(updated);
   }
@@ -544,12 +590,12 @@ export class CommunityModerationService {
         { status: { not: 'VISIBLE' } },
       );
       if (n > 0) {
-        const reportCount = await this.closeReports(
+        const closed = await this.closeReports(
           type,
           action.targetId,
           'DISMISSED',
         );
-        await this.prisma.communityModerationAction.create({
+        const restore = await this.prisma.communityModerationAction.create({
           data: {
             action: 'RESTORE',
             targetType: type,
@@ -557,15 +603,23 @@ export class CommunityModerationService {
             subjectId: action.subjectId,
             operatorId,
             statement,
-            reportCount,
+            reportCount: closed.total,
             // La réponse au recours tient lieu de notification.
             notifiedAt: new Date(),
           },
         });
+        await this.decideReports(closed.ids, restore);
       }
     } else if (action.action === 'SUSPEND' && action.subjectId) {
-      const n = await this.prisma.communityProfile.updateMany({
-        where: { userId: action.subjectId, suspendedUntil: { not: null } },
+      const n = await this.prisma.user.updateMany({
+        where: {
+          id: action.subjectId,
+          communitySuspendedUntil: { not: null },
+        },
+        data: { communitySuspendedUntil: null },
+      });
+      await this.prisma.communityProfile.updateMany({
+        where: { userId: action.subjectId },
         data: { suspendedUntil: null },
       });
       if (n.count > 0) {
@@ -648,9 +702,198 @@ export class CommunityModerationService {
     return this.myDecision(userId, actionId);
   }
 
+  /**
+   * Mes signalements (DSA art. 16(5)) : statut (OPEN, ACTIONED, DISMISSED) et décision prise,
+   * sans exposé des motifs ni identité de l'auteur du contenu. Un signalement disparaît avec le
+   * contenu supprimé (sa décision a été notifiée par e-mail avant la suppression).
+   */
+  async myReports(
+    userId: string,
+    cursorRaw: string | undefined,
+    limit: number,
+  ) {
+    await this.access.loadActor(userId);
+    const cursor = decodeCursor(cursorRaw);
+    const rows = await this.prisma.communityReport.findMany({
+      where: { reporterId: userId, ...afterCursor(cursor) },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+      take: limit + 1,
+      select: {
+        id: true,
+        postId: true,
+        commentId: true,
+        reason: true,
+        status: true,
+        createdAt: true,
+        resolvedAt: true,
+        decision: { select: { action: true, reason: true, createdAt: true } },
+      },
+    });
+    const page = paginate(rows, limit);
+    return {
+      items: page.items.map((r) => ({
+        id: r.id,
+        targetType: r.postId ? ('POST' as const) : ('COMMENT' as const),
+        targetId: (r.postId ?? r.commentId)!,
+        reason: r.reason,
+        reasonLabel: reasonLabel(r.reason, 'en'),
+        status: r.status,
+        createdAt: r.createdAt,
+        resolvedAt: r.resolvedAt,
+        decision: r.decision
+          ? {
+              action: r.decision.action,
+              contentRemoved: REMOVING_ACTIONS.includes(r.decision.action),
+              reason: r.decision.reason,
+              reasonLabel: reasonLabel(r.decision.reason, 'en'),
+              decidedAt: r.decision.createdAt,
+            }
+          : null,
+      })),
+      nextCursor: page.nextCursor,
+      contactEmail: communityContactEmail(),
+    };
+  }
+
+  // -------------------------------------------------------------------------
+  // Relance des notifications (job de maintenance)
+  // -------------------------------------------------------------------------
+
+  /**
+   * Relance les notifications en échec de moins de NOTIFICATION_RETRY_DAYS jours (au plus
+   * NOTIFICATION_RETRY_MAX_PER_RUN par catégorie) : décisions dont l'auteur n'a pas été notifié
+   * (`notificationPending`), décisions non notifiées aux auteurs des signalements (`notifiedAt`
+   * NULL). Un masquage devenu sans objet (contenu rétabli ou supprimé entre-temps) n'est plus
+   * envoyé.
+   */
+  async retryNotifications(
+    now: Date = new Date(),
+  ): Promise<NotificationRetryCounts> {
+    const since = new Date(now.getTime() - NOTIFICATION_RETRY_DAYS * DAY_MS);
+    let decisions = 0;
+    const pending = await this.prisma.communityModerationAction.findMany({
+      where: { notificationPending: true, createdAt: { gte: since } },
+      orderBy: { createdAt: 'asc' },
+      take: NOTIFICATION_RETRY_MAX_PER_RUN,
+    });
+    for (const action of pending) {
+      let body: string | null = null;
+      if (action.targetType !== 'USER') {
+        const target = await this.loadTarget(
+          action.targetType,
+          action.targetId,
+        );
+        if (
+          (action.action === 'AUTO_HIDE' || action.action === 'HIDE') &&
+          (!target || target.status === 'VISIBLE')
+        ) {
+          await this.prisma.communityModerationAction.update({
+            where: { id: action.id },
+            data: { notificationPending: false },
+          });
+          continue;
+        }
+        body = target ? excerpt(target.body) : null;
+      }
+      const res = await this.notify(action, body);
+      if (res.notifiedAt) decisions++;
+    }
+    const reports = await this.notifyReporters(
+      {
+        status: { not: 'OPEN' },
+        resolvedAt: { gte: since },
+      },
+      NOTIFICATION_RETRY_MAX_PER_RUN,
+    );
+    return { decisions, reports };
+  }
+
   // -------------------------------------------------------------------------
   // Outils internes
   // -------------------------------------------------------------------------
+
+  /** Suspension portée par le compte (source de vérité), copiée sur le profil (affichage). */
+  private async setSuspension(userId: string, until: Date | null) {
+    await this.prisma.$transaction([
+      this.prisma.user.update({
+        where: { id: userId },
+        data: { communitySuspendedUntil: until },
+      }),
+      this.prisma.communityProfile.updateMany({
+        where: { userId },
+        data: { suspendedUntil: until },
+      }),
+    ]);
+  }
+
+  /** Rattache les signalements clos à la décision et en informe leurs auteurs. */
+  private async decideReports(
+    reportIds: string[],
+    action: CommunityModerationAction,
+  ): Promise<void> {
+    if (reportIds.length === 0) return;
+    await this.prisma.communityReport.updateMany({
+      where: { id: { in: reportIds } },
+      data: { decisionId: action.id },
+    });
+    await this.notifyReporters({ id: { in: reportIds } }, reportIds.length);
+  }
+
+  /**
+   * E-mail aux auteurs de signalements clos (DSA art. 16(5)), comptes avec adresse e-mail
+   * seulement (un invité suit ses signalements dans l'application). `notifiedAt` n'est posé
+   * qu'après un envoi réussi : les échecs sont relancés par la maintenance.
+   */
+  private async notifyReporters(
+    where: Prisma.CommunityReportWhereInput,
+    take: number,
+  ): Promise<number> {
+    const rows = await this.prisma.communityReport.findMany({
+      where: {
+        ...where,
+        notifiedAt: null,
+        decisionId: { not: null },
+        reporter: { email: { not: null } },
+      },
+      orderBy: { createdAt: 'asc' },
+      take,
+      select: {
+        id: true,
+        postId: true,
+        reason: true,
+        createdAt: true,
+        decision: { select: { action: true } },
+        reporter: { select: { email: true, locale: true } },
+      },
+    });
+    let sent = 0;
+    for (const r of rows) {
+      if (!r.decision || !r.reporter.email) continue;
+      const rendered = renderReportDecision(r.reporter.locale, {
+        targetType: r.postId ? 'POST' : 'COMMENT',
+        reportReason: r.reason,
+        reportedAt: r.createdAt,
+        action: r.decision.action,
+        contactEmail: communityContactEmail(),
+      });
+      const result = await this.mail.send({
+        to: r.reporter.email,
+        ...rendered,
+      });
+      if (!result.sent) {
+        this.logger.warn(
+          `Notification de décision au signalant non envoyée (signalement ${r.id}) : relance par la maintenance.`,
+        );
+        continue;
+      }
+      await this.prisma.communityReport.update({
+        where: { id: r.id },
+        data: { notifiedAt: new Date() },
+      });
+      sent++;
+    }
+    return sent;
+  }
 
   private canAppeal(a: CommunityModerationAction, now = new Date()): boolean {
     return (
@@ -691,25 +934,39 @@ export class CommunityModerationService {
     data: Prisma.CommunityModerationActionUncheckedCreateInput,
     excerptOrSkip: string | null | false,
   ): Promise<CommunityModerationAction> {
-    const action = await this.prisma.communityModerationAction.create({ data });
-    if (excerptOrSkip !== false) {
-      return this.notify(action, excerptOrSkip);
-    }
+    const notifies = excerptOrSkip !== false;
+    const action = await this.prisma.communityModerationAction.create({
+      data: { ...data, notificationPending: notifies && !!data.subjectId },
+    });
+    if (notifies) return this.notify(action, excerptOrSkip);
     return action;
   }
 
-  /** E-mail à l'auteur (s'il en a un) ; la décision reste consultable dans l'application. */
+  /**
+   * E-mail à l'auteur (s'il en a un) ; la décision reste consultable dans l'application. Un
+   * envoi en échec laisse `notificationPending` à vrai : la maintenance relance.
+   */
   private async notify(
     action: CommunityModerationAction,
     contentExcerpt: string | null,
     appealOutcome?: 'UPHELD' | 'REVERSED',
   ): Promise<CommunityModerationAction> {
-    if (!action.subjectId) return action;
-    const user = await this.prisma.user.findUnique({
-      where: { id: action.subjectId },
-      select: { email: true, locale: true },
-    });
-    if (!user?.email) return action;
+    const user = action.subjectId
+      ? await this.prisma.user.findUnique({
+          where: { id: action.subjectId },
+          select: { email: true, locale: true },
+        })
+      : null;
+    if (!user?.email) {
+      // Personne à joindre par e-mail (compte supprimé) : rien à relancer.
+      if (!appealOutcome && action.notificationPending) {
+        return this.prisma.communityModerationAction.update({
+          where: { id: action.id },
+          data: { notificationPending: false },
+        });
+      }
+      return action;
+    }
     const rendered = renderModerationDecision(user.locale, {
       action: action.action,
       targetType: action.targetType,
@@ -720,7 +977,7 @@ export class CommunityModerationService {
       automated: action.automated && !appealOutcome,
       excerpt: contentExcerpt,
       suspendedUntil: action.suspendedUntil,
-      decisionUrl: decisionUrl(action.id),
+      decisionUrl: decisionUrl(action.id, user.locale),
       appealDeadline: appealDeadline(action.createdAt),
       contactEmail: communityContactEmail(),
       appealOutcome,
@@ -735,22 +992,33 @@ export class CommunityModerationService {
     if (appealOutcome) return action;
     return this.prisma.communityModerationAction.update({
       where: { id: action.id },
-      data: { notifiedAt: new Date() },
+      data: { notifiedAt: new Date(), notificationPending: false },
     });
   }
 
+  /**
+   * Clôt les signalements ouverts du contenu ; renvoie le nombre total de signalements (journal)
+   * et les identifiants des signalements clos par cette décision.
+   */
   private async closeReports(
     type: ContentType,
     id: string,
     status: 'ACTIONED' | 'DISMISSED',
-  ): Promise<number> {
+  ): Promise<{ total: number; ids: string[] }> {
     const where = type === 'POST' ? { postId: id } : { commentId: id };
     const total = await this.prisma.communityReport.count({ where });
-    await this.prisma.communityReport.updateMany({
+    const open = await this.prisma.communityReport.findMany({
       where: { ...where, status: 'OPEN' },
-      data: { status, resolvedAt: new Date() },
+      select: { id: true },
     });
-    return total;
+    const ids = open.map((r) => r.id);
+    if (ids.length > 0) {
+      await this.prisma.communityReport.updateMany({
+        where: { id: { in: ids }, status: 'OPEN' },
+        data: { status, resolvedAt: new Date() },
+      });
+    }
+    return { total, ids };
   }
 
   private async loadTarget(
@@ -904,6 +1172,13 @@ export class CommunityModerationService {
     };
   }
 }
+
+/** Décisions qui retirent le contenu signalé (vue « Mes signalements »). */
+const REMOVING_ACTIONS: readonly CommunityModerationActionType[] = [
+  'AUTO_HIDE',
+  'HIDE',
+  'DELETE',
+];
 
 function excerpt(body: string): string | null {
   const text = body.replace(/\s+/g, ' ').trim();

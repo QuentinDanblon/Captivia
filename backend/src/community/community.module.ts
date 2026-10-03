@@ -46,6 +46,11 @@ export function createMediaStorage(): MediaStorage {
     CommunityModerationService,
     CommunityDataService,
   ],
-  exports: [CommunityDataService, CommunityMediaService, MEDIA_STORAGE],
+  exports: [
+    CommunityDataService,
+    CommunityMediaService,
+    CommunityModerationService,
+    MEDIA_STORAGE,
+  ],
 })
 export class CommunityModule {}

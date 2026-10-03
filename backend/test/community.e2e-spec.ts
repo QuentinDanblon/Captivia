@@ -941,12 +941,27 @@ describe('Communauté (E2E)', () => {
 
     it('seuil de signalements distincts atteint : masquage automatique notifié', async () => {
       send.mockClear();
-      // N'importe quel compte connecté peut signaler, y compris un invité.
+      // N'importe quel compte connecté peut signaler, y compris un invité…
       await http()
         .post(`/community/posts/${post.id}/report`)
         .set(bearer(guest))
         .send({ reason: 'SPAM' })
         .expect(200);
+      // … mais ni l'invité ni bob (compte d'un jour) ne comptent dans le seuil : toujours visible,
+      // en file opérateur.
+      await http()
+        .get(`/community/posts/${post.id}`)
+        .set(bearer(carol))
+        .expect(200);
+      expect(mailsTo(alice.email, /modération/)).toHaveLength(0);
+      // Deux membres établis (seuil 2) : masquage automatique.
+      for (const reporter of [carol, operator]) {
+        await http()
+          .post(`/community/posts/${post.id}/report`)
+          .set(bearer(reporter))
+          .send({ reason: 'SPAM' })
+          .expect(200);
+      }
       await http()
         .get(`/community/posts/${post.id}`)
         .set(bearer(carol))
@@ -970,7 +985,10 @@ describe('Communauté (E2E)', () => {
       expect(mails[0].text).toContain(
         'Point de contact : moderation@captivia.example',
       );
-      expect(mails[0].text).toMatch(/\/community\/decisions\/[0-9a-f-]{36}/);
+      // Lien vers la page frontend de la décision (français : pas de préfixe de locale).
+      expect(mails[0].text).toMatch(
+        /http:\/\/[^/\s]+\/communaute\/decisions\/[0-9a-f-]{36}/,
+      );
 
       const decisions = await http()
         .get('/community/me/decisions')
@@ -994,7 +1012,8 @@ describe('Communauté (E2E)', () => {
       expect(log).toMatchObject({
         automated: true,
         operatorId: null,
-        reportCount: 2,
+        // Tous les signalements ouverts (4), dont 2 de membres établis (seuil).
+        reportCount: 4,
       });
       expect(log!.notifiedAt).not.toBeNull();
     });
@@ -1044,8 +1063,8 @@ describe('Communauté (E2E)', () => {
       expect(item).toMatchObject({
         targetType: 'POST',
         status: 'HIDDEN_AUTO',
-        openReports: 2,
-        reasons: { SPAM: 2 },
+        openReports: 4,
+        reasons: { SPAM: 4 },
         authorHandle: handle('Alice'),
       });
       expect(JSON.stringify(queue.body)).not.toContain(alice.email);

@@ -135,8 +135,14 @@ export const envValidationSchema = Joi.object({
    * éphémère) et une URL publique des médias en https.
    */
   COMMUNITY_ENABLED: Joi.string().valid('true', 'false').default('false'),
-  /** Signalements distincts déclenchant le masquage automatique d'un contenu. */
+  /** Signalements distincts (de membres établis) déclenchant le masquage automatique. */
   COMMUNITY_HIDE_THRESHOLD: Joi.number().integer().min(1).max(100).default(3),
+  /** Ancienneté minimale du compte (jours) pour qu'un signalement compte dans ce seuil. */
+  COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS: Joi.number()
+    .integer()
+    .min(0)
+    .max(365)
+    .default(7),
   COMMUNITY_POSTS_PER_HOUR: Joi.number().integer().min(1).max(1000).default(5),
   COMMUNITY_COMMENTS_PER_MINUTE: Joi.number()
     .integer()
