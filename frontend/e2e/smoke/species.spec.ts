@@ -3,6 +3,15 @@ import { expect, fixture, runAxe, test } from '../support/test';
 
 const API = 'http://127.0.0.1:4010';
 const CORS = { 'access-control-allow-origin': '*', 'content-type': 'application/json' };
+/** Taxon sans photo locale, pour conserver la couverture du repli vers les médias de l'API. */
+const IMPERATOR = {
+  key: 2435100,
+  canonicalName: 'Boa imperator',
+  scientificName: 'Boa imperator Daudin, 1803',
+  rank: 'SPECIES',
+  class: 'Reptilia',
+  profile: { speciesId: 2435100, commonNameFr: 'Boa impérial', scientificName: 'Boa imperator', category: 'reptile' },
+};
 
 /** Remplace une réponse GET de l'API simulée pour ce test (prioritaire sur mock-api.ts). */
 async function overrideApi(page: Page, pathname: string, body: unknown, status = 200) {
@@ -32,10 +41,10 @@ test.describe("Recherche d'espèces dans l'app", () => {
     expect(api.callsTo('GET', '/species/search')[0].query.get('kingdom')).toBe('Animalia');
     await expect(page.getByText('2 fiches')).toBeVisible();
 
-    // Photo sous licence libre créditée (la première, NC, est écartée) ; sinon silhouette.
+    // Photo locale libre créditée ; un taxon sans photo locale et avec seulement du NC garde sa silhouette.
     const boa = cards.filter({ hasText: 'Boa constricteur' });
     await expect(boa.getByRole('img', { name: 'Boa constricteur, photographie' })).toBeVisible();
-    await expect(boa.getByRole('link', { name: 'Ana Martínez' })).toHaveAttribute('href', 'https://photos.example.org/boa/by');
+    await expect(boa.getByRole('link', { name: 'Arnaud Aury' })).toHaveAttribute('href', 'https://commons.wikimedia.org/wiki/File:Boa_constrictor_Gallion_Guyane.jpg');
     await expect(boa.getByRole('link', { name: 'CC BY 4.0' })).toBeVisible();
     await expect(boa).not.toContainText('Photographe NC');
     const imperial = cards.filter({ hasText: 'Boa impérial' });
@@ -99,9 +108,9 @@ test.describe('Fiche espèce', () => {
     await expect(header.getByText('Préoccupation mineure')).toBeVisible();
     await expect(page.getByText('SPECIES')).toHaveCount(0);
 
-    // Photo : licence libre et auteur fournis → photo avec crédit (la photo NC est écartée).
+    // Photo locale vérifiée : sa source et son auteur priment sur les médias externes.
     await expect(header.getByRole('img', { name: 'Boa constricteur, photographie' })).toBeVisible();
-    await expect(header.getByRole('link', { name: 'Ana Martínez' })).toHaveAttribute('href', 'https://photos.example.org/boa/by');
+    await expect(header.getByRole('link', { name: 'Arnaud Aury' })).toHaveAttribute('href', 'https://commons.wikimedia.org/wiki/File:Boa_constrictor_Gallion_Guyane.jpg');
     await expect(header.getByRole('link', { name: 'CC BY 4.0' })).toHaveAttribute('href', 'https://creativecommons.org/licenses/by/4.0/');
     await expect(page.getByText('Photographe NC')).toHaveCount(0);
 
@@ -134,11 +143,24 @@ test.describe('Fiche espèce', () => {
     await expect(page).toHaveURL(/#legislation$/);
   });
 
-  test('sans photo sous licence libre : silhouette, aucun crédit', async ({ page }) => {
-    await overrideApi(page, '/species/2435099/media', fixture<unknown[]>('species-media').slice(0, 1));
-    await page.goto('/species/2435099');
+  test('sans photo locale : média externe crédité, licence NC écartée', async ({ page }) => {
+    await overrideApi(page, '/species/2435100', IMPERATOR);
+    await overrideApi(page, '/species/2435100/media', fixture<unknown[]>('species-media'));
+    await page.goto('/species/2435100');
     const header = page.locator('header').filter({ has: page.getByRole('heading', { level: 1 }) }).first();
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Boa constricteur');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Boa impérial');
+    await expect(header.getByRole('img', { name: 'Boa impérial, photographie' })).toBeVisible();
+    await expect(header.getByRole('link', { name: 'Ana Martínez' })).toHaveAttribute('href', 'https://photos.example.org/boa/by');
+    await expect(header.getByRole('link', { name: 'CC BY 4.0' })).toHaveAttribute('href', 'https://creativecommons.org/licenses/by/4.0/');
+    await expect(page.getByText('Photographe NC')).toHaveCount(0);
+  });
+
+  test('sans photo sous licence libre : silhouette, aucun crédit', async ({ page }) => {
+    await overrideApi(page, '/species/2435100', IMPERATOR);
+    await overrideApi(page, '/species/2435100/media', fixture<unknown[]>('species-media').slice(0, 1));
+    await page.goto('/species/2435100');
+    const header = page.locator('header').filter({ has: page.getByRole('heading', { level: 1 }) }).first();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Boa impérial');
     await expect(header.locator('.cv-photo__fallback svg')).toBeVisible();
     await expect(header.locator('img')).toHaveCount(0);
     await expect(page.getByText('Photographe NC')).toHaveCount(0);
