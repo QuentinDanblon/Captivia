@@ -1642,5 +1642,13 @@
     "photoBy": "Foto",
     "more": "{count, plural, one {Letzten Steckbrief anzeigen} other {# weitere Steckbriefe anzeigen}}",
     "moreFailed": "Weitere Ergebnisse konnten nicht geladen werden. Bitte erneut versuchen."
+  },
+  "photoPicker": {
+    "header": "Foto Ihres Tieres",
+    "camera": "Foto aufnehmen",
+    "library": "Aus der Galerie wählen",
+    "cancel": "Abbrechen",
+    "accessDenied": "Captivia hat keinen Zugriff auf die Kamera oder Ihre Fotos. Erlauben Sie den Zugriff in den Einstellungen Ihres Telefons und versuchen Sie es erneut.",
+    "error": "Dieses Foto konnte nicht geladen werden. Versuchen Sie es mit einem anderen Bild."
   }
 }

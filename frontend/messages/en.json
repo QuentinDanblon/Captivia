@@ -1642,5 +1642,13 @@
     "photoBy": "Photo",
     "more": "{count, plural, one {Show the last guide} other {Show # more guides}}",
     "moreFailed": "The next results couldn't be loaded. Try again."
+  },
+  "photoPicker": {
+    "header": "Your animal’s photo",
+    "camera": "Take a photo",
+    "library": "Choose from gallery",
+    "cancel": "Cancel",
+    "accessDenied": "Captivia can’t access the camera or your photos. Allow access in your phone’s settings, then try again.",
+    "error": "This photo couldn’t be loaded. Try another image."
   }
 }

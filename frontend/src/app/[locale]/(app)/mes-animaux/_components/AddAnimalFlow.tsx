@@ -6,6 +6,7 @@ import { api, ApiError, type SpeciesRoutineTemplate } from '@/lib/api';
 import { ANIMAL_LIMIT_CODE } from '@/lib/guest';
 import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
 import { Button, Field, Steps, cx } from '@/components/ui';
+import { usePhotoPicker } from '@/components/usePhotoPicker';
 
 interface SpeciesResult {
   key: number;
@@ -85,7 +86,6 @@ export default function AddAnimalFlow({
   const [photoUrl, setPhotoUrl] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState('');
-  const fileRef = useRef<HTMLInputElement>(null);
 
   // Étape 3 : premier soin (routines recommandées de l'espèce, module D)
   const [createdId, setCreatedId] = useState<string | null>(null);
@@ -135,8 +135,7 @@ export default function AddAnimalFlow({
     setShowResults(false);
   };
 
-  const handlePhotoFile = async (file: File | undefined) => {
-    if (!file) return;
+  const handlePhotoFile = async (file: Blob) => {
     try {
       setPhotoUrl(await compressImageToDataUrl(file));
       setFormError('');
@@ -144,6 +143,8 @@ export default function AddAnimalFlow({
       setFormError(isImageTooLargeError(err) ? t('animals.photoTooLarge') : t('animals.errorAdding'));
     }
   };
+  // Web : sélecteur de fichier ; app native : appareil photo ou galerie (W6-05).
+  const { inputRef: photoInputRef, open: openPhotoPicker, onChange: onPhotoInputChange } = usePhotoPicker({ onFile: handlePhotoFile, onError: setFormError });
 
   const handleCreate = async (e: FormEvent) => {
     e.preventDefault();
@@ -389,8 +390,8 @@ export default function AddAnimalFlow({
                 // eslint-disable-next-line @next/next/no-img-element -- aperçu local (data URL ou adresse saisie)
                 <img src={photoUrl} alt="" className="size-14 rounded-control border border-line object-cover" />
               ) : null}
-              <input ref={fileRef} type="file" accept="image/*" className="hidden" tabIndex={-1} aria-hidden onChange={(e) => { void handlePhotoFile(e.target.files?.[0]); e.target.value = ''; }} />
-              <Button variant="secondary" size="sm" onClick={() => fileRef.current?.click()}>
+              <input ref={photoInputRef} type="file" accept="image/*" className="hidden" tabIndex={-1} aria-hidden onChange={onPhotoInputChange} />
+              <Button variant="secondary" size="sm" onClick={() => void openPhotoPicker()}>
                 {t('animals.choosePhotoFile')}
               </Button>
             </div>

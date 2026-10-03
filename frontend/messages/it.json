@@ -1642,5 +1642,13 @@
     "photoBy": "Foto",
     "more": "{count, plural, one {Mostra l'ultima scheda} other {Mostra altre # schede}}",
     "moreFailed": "Impossibile caricare altri risultati. Riprova."
+  },
+  "photoPicker": {
+    "header": "Foto del tuo animale",
+    "camera": "Scatta una foto",
+    "library": "Scegli dalla galleria",
+    "cancel": "Annulla",
+    "accessDenied": "Captivia non ha accesso alla fotocamera o alle tue foto. Consenti l’accesso nelle impostazioni del telefono, poi riprova.",
+    "error": "Impossibile caricare questa foto. Prova con un’altra immagine."
   }
 }
