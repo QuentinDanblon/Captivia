@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Camera, HelpCircle, ImagePlus, Lock, X } from 'lucide-react';
 import { useRouter } from '@/i18n/navigation';
 import { api, type Animal } from '@/lib/api';
@@ -10,6 +10,7 @@ import {
   COMMUNITY_LIMITS,
   communityApi,
   communityErrorKey,
+  formatLongDate,
   type CommunityCategory,
   type CommunityErrorKey,
   type CommunityPostType,
@@ -28,6 +29,8 @@ interface Photo {
   filename: string;
   preview: string;
   converted: boolean;
+  /** Description facultative de la photo (texte alternatif publié avec elle). */
+  alt: string;
 }
 
 /** Fichiers proposés au sélecteur : JPEG, PNG, WebP, et HEIC (converti si le navigateur le lit). */
@@ -43,6 +46,7 @@ function revoke(url: string) {
 
 function Composer() {
   const t = useTranslations('community');
+  const locale = useLocale();
   const router = useRouter();
   const { token, isGuest, me } = useCommunity();
   const formId = useId();
@@ -56,7 +60,7 @@ function Composer() {
   const [category, setCategory] = useState<CommunityCategory | ''>('');
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [submitError, setSubmitError] = useState<CommunityErrorKey | null>(null);
-  const [rawError, setRawError] = useState<unknown>(null);
+  const [suspendedUntil, setSuspendedUntil] = useState<string | null>(null);
   const [fieldError, setFieldError] = useState<'photos' | 'body' | null>(null);
   const photosRef = useRef<Photo[]>([]);
   useEffect(() => {
@@ -96,6 +100,7 @@ function Composer() {
           filename: prepared.filename,
           preview: URL.createObjectURL(prepared.blob),
           converted: prepared.converted,
+          alt: '',
         };
         setPhotos((prev) => (prev.length < maxPhotos ? [...prev, photo] : (revoke(photo.preview), prev)));
       } catch (err) {
@@ -123,6 +128,10 @@ function Composer() {
     const files = Array.from(event.target.files ?? []);
     event.target.value = '';
     if (files.length) void addFiles(files);
+  };
+
+  const setPhotoAlt = (key: string, alt: string) => {
+    setPhotos((prev) => prev.map((p) => (p.key === key ? { ...p, alt } : p)));
   };
 
   const removePhoto = (key: string) => {
@@ -170,14 +179,23 @@ function Composer() {
         type,
         ...(body.trim() ? { body: body.trim() } : {}),
         ...(mediaIds.length ? { mediaIds } : {}),
+        ...(photos.some((p) => p.alt.trim()) ? { mediaAlts: photos.map((p) => p.alt.trim()) } : {}),
         ...(animalId ? { animalId } : {}),
         ...(category ? { speciesCategory: category } : {}),
       });
       router.replace(communityPostPath(created.id));
     } catch (err) {
-      setSubmitError(communityErrorKey(err));
-      setRawError(err);
+      const key = communityErrorKey(err);
+      setSubmitError(key);
       setProgress(null);
+      // Suspension prononcée depuis le chargement de la page : relire sa fin dans le profil (le
+      // brouillon reste affiché).
+      if (key === 'suspended') {
+        communityApi
+          .me(token)
+          .then((fresh) => setSuspendedUntil(fresh.suspendedUntil ?? null))
+          .catch(() => undefined);
+      }
     }
   };
 
@@ -287,6 +305,39 @@ function Composer() {
             ) : null}
           </div>
 
+          {photos.length > 0 ? (
+            <div className="grid gap-3">
+              <p id={`${formId}-alt-hint`} className="m-0 text-meta text-ink-2">
+                {t('compose.altHint')}
+              </p>
+              <ul className="m-0 grid list-none gap-4 p-0">
+                {photos.map((photo, index) => (
+                  <li key={photo.key} className="grid grid-cols-[4.5rem_minmax(0,1fr)] items-start gap-3">
+                    <div className="cv-photo aspect-square">
+                      {/* eslint-disable-next-line @next/next/no-img-element -- aperçu local (blob:), décoratif : la photo est décrite par le champ voisin */}
+                      <img src={photo.preview} alt="" className="absolute inset-0 size-full object-cover" />
+                    </div>
+                    <Field
+                      label={photos.length > 1 ? t('compose.altLabelN', { n: index + 1 }) : t('compose.altLabel')}
+                      hint={<CharCount value={photo.alt} max={COMMUNITY_LIMITS.mediaAlt} />}
+                    >
+                      <input
+                        type="text"
+                        value={photo.alt}
+                        maxLength={COMMUNITY_LIMITS.mediaAlt}
+                        autoComplete="off"
+                        placeholder={t('compose.altPlaceholder')}
+                        aria-describedby={`${formId}-alt-hint`}
+                        disabled={busy}
+                        onChange={(e) => setPhotoAlt(photo.key, e.target.value)}
+                      />
+                    </Field>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           <Field
             label={bodyLabel}
             required={type === 'QUESTION'}
@@ -335,7 +386,13 @@ function Composer() {
             </div>
           ) : null}
 
-          {submitError ? <CommunityNotice errorKey={submitError} severity="urgent" token={token} error={rawError} /> : null}
+          {submitError ? <CommunityNotice
+              errorKey={submitError}
+              severity="urgent"
+              token={token}
+              suspendedUntil={suspendedUntil ? formatLongDate(suspendedUntil, locale) : null}
+              accountWide={submitError === 'suspended'}
+            /> : null}
 
           <div className="flex flex-wrap items-center gap-4">
             <Button type="submit" size="lg" loading={busy} disabled={preparing > 0}>

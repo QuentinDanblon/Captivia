@@ -2071,6 +2071,10 @@
       },
       "captionLabel": "Pie de foto",
       "captionHint": "Opcional: su nombre, su humor, la historia de la foto.",
+      "altLabel": "Describir la foto",
+      "altLabelN": "Describir la foto {n}",
+      "altHint": "Opcional, pero muy útil: los lectores de pantalla se lo leen a las personas con discapacidad visual.",
+      "altPlaceholder": "Un gecko leopardo naranja sobre una piedra caliente",
       "questionLabel": "Tu pregunta",
       "questionHint": "Indica la especie, la edad y lo que has observado: las respuestas serán más precisas.",
       "bodyRequired": "Escribe tu pregunta antes de publicar.",
@@ -2181,9 +2185,16 @@
       "facts": {
         "date": "Fecha de la decisión",
         "reason": "Motivo",
+        "target": "Contenido afectado",
         "automated": "Decisión automática",
         "until": "Suspensión hasta el",
         "deadline": "Recurso posible hasta el"
+      },
+      "target": {
+        "POST": "Publicación",
+        "COMMENT": "Respuesta",
+        "USER": "Tu perfil",
+        "gone": "Contenido eliminado. Ya no se muestra."
       },
       "automatedYes": "Sí: ocultado tras varias denuncias, a la espera de que lo revise una persona",
       "automatedNo": "No: decisión tomada por una persona del equipo",

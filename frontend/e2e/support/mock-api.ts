@@ -80,7 +80,7 @@ export interface MockCommunityPost {
   createdAt: string;
   author: { handle: string | null; avatarUrl: string | null };
   animal: { name: string; species: string; scientificName: string } | null;
-  media: { id: string; url: string; width: number; height: number }[];
+  media: { id: string; url: string; width: number; height: number; alt?: string | null }[];
   likeCount: number;
   commentCount: number;
   likedByMe: boolean;
@@ -114,7 +114,11 @@ export interface MockCommunity {
     canPublish: boolean;
     reasons: string[];
     ageConfirmationRequired: boolean;
+    /** Fin de la suspension portée par le compte, même sans profil. */
+    suspendedUntil?: string | null;
   };
+  /** `GET /community/me/decisions` et `/community/me/decisions/:id`. */
+  decisions: Record<string, unknown>[];
   posts: MockCommunityPost[];
   comments: Record<string, MockCommunityComment[]>;
   blocks: { handle: string; avatarUrl: string | null; blockedAt: string }[];
@@ -207,7 +211,9 @@ export async function installMockApi(page: Page): Promise<MockApi> {
         canPublish: true,
         reasons: [],
         ageConfirmationRequired: false,
+        suspendedUntil: null,
       },
+      decisions: [],
       posts: [],
       comments: {},
       blocks: [],
@@ -328,7 +334,7 @@ export async function installMockApi(page: Page): Promise<MockApi> {
       if (!authorized) return unauthorized();
       const isGuest = bearer === GUEST_TOKEN;
       const me = isGuest
-        ? { profile: null, currentRulesVersion: COMMUNITY_RULES, canPublish: false, reasons: ['GUEST_ACCOUNT', 'COMMUNITY_PROFILE_REQUIRED'], ageConfirmationRequired: false }
+        ? { profile: null, currentRulesVersion: COMMUNITY_RULES, canPublish: false, reasons: ['GUEST_ACCOUNT', 'COMMUNITY_PROFILE_REQUIRED'], ageConfirmationRequired: false, suspendedUntil: null }
         : c.me;
       const forbiddenGuest = () => json(route, 403, { statusCode: 403, code: 'GUEST_ACCOUNT', message: 'Create an account to publish in the community.' });
       const now = () => new Date().toISOString();
@@ -349,7 +355,12 @@ export async function installMockApi(page: Page): Promise<MockApi> {
           return json(route, 201, c.me.profile);
         }
       }
-      if (method === 'GET' && pathname === '/community/me/decisions') return json(route, 200, { items: [], nextCursor: null, contactEmail: null });
+      if (method === 'GET' && pathname === '/community/me/decisions') return json(route, 200, { items: c.decisions, nextCursor: null, contactEmail: null });
+      const decisionMatch = /^\/community\/me\/decisions\/([^/]+)$/.exec(pathname);
+      if (method === 'GET' && decisionMatch) {
+        const found = c.decisions.find((d) => d.id === decisionMatch[1]);
+        return found ? json(route, 200, { ...found, contactEmail: 'moderation@captivia.example' }) : notFound();
+      }
       // Mes signalements (contrat F3) ; absente (null) : l'interface doit tolérer le 404.
       if (method === 'GET' && pathname === '/community/me/reports') {
         return c.reports ? json(route, 200, { items: c.reports, nextCursor: null, contactEmail: null }) : notFound();
@@ -360,7 +371,7 @@ export async function installMockApi(page: Page): Promise<MockApi> {
         if (isGuest) return forbiddenGuest();
         const n = api.calls.filter((call) => call.method === 'POST' && call.path === '/community/media').length;
         const id = `00000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
-        return json(route, 201, { id, url: `${COMMUNITY_MEDIA_PREFIX}${id}.webp`, width: 480, height: 320 });
+        return json(route, 201, { id, url: `${COMMUNITY_MEDIA_PREFIX}${id}.webp`, width: 480, height: 320, alt: null });
       }
 
       if (pathname === '/community/posts') {
@@ -375,7 +386,7 @@ export async function installMockApi(page: Page): Promise<MockApi> {
         }
         if (method === 'POST') {
           if (isGuest) return forbiddenGuest();
-          const data = (body ?? {}) as { type: 'PHOTO' | 'QUESTION'; body?: string; mediaIds?: string[]; speciesCategory?: string };
+          const data = (body ?? {}) as { type: 'PHOTO' | 'QUESTION'; body?: string; mediaIds?: string[]; mediaAlts?: string[]; speciesCategory?: string };
           const created = communityPost({
             id: `10000000-0000-4000-8000-${String(c.posts.length + 1).padStart(12, '0')}`,
             type: data.type,
@@ -383,7 +394,7 @@ export async function installMockApi(page: Page): Promise<MockApi> {
             speciesCategory: data.speciesCategory ?? null,
             createdAt: now(),
             author: { handle: c.me.profile?.handle ?? null, avatarUrl: null },
-            media: (data.mediaIds ?? []).map((id) => ({ id, url: `${COMMUNITY_MEDIA_PREFIX}${id}.webp`, width: 480, height: 320 })),
+            media: (data.mediaIds ?? []).map((id, i) => ({ id, url: `${COMMUNITY_MEDIA_PREFIX}${id}.webp`, width: 480, height: 320, alt: data.mediaAlts?.[i]?.trim() || null })),
             isMine: true,
           });
           c.posts.unshift(created);

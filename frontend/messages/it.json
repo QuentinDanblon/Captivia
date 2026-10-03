@@ -2071,6 +2071,10 @@
       },
       "captionLabel": "Didascalia",
       "captionHint": "Facoltativa: il suo nome, il suo umore, la storia della foto.",
+      "altLabel": "Descrivi la foto",
+      "altLabelN": "Descrivi la foto {n}",
+      "altHint": "Facoltativo, ma prezioso: gli screen reader lo leggono alle persone cieche o ipovedenti.",
+      "altPlaceholder": "Un geco leopardino arancione su una pietra calda",
       "questionLabel": "La tua domanda",
       "questionHint": "Indica specie, età e cosa hai notato: le risposte saranno più precise.",
       "bodyRequired": "Scrivi la tua domanda prima di pubblicare.",
@@ -2181,9 +2185,16 @@
       "facts": {
         "date": "Data della decisione",
         "reason": "Motivo",
+        "target": "Contenuto interessato",
         "automated": "Decisione automatica",
         "until": "Sospensione fino al",
         "deadline": "Ricorso possibile fino al"
+      },
+      "target": {
+        "POST": "Post",
+        "COMMENT": "Risposta",
+        "USER": "Il tuo profilo",
+        "gone": "Contenuto eliminato. Non viene più mostrato."
       },
       "automatedYes": "Sì: nascosto dopo diverse segnalazioni, in attesa della verifica di una persona",
       "automatedNo": "No: decisione presa da una persona del team",

@@ -10,7 +10,6 @@ import {
   communityErrorKey,
   formatLongDate,
   markCommunityAvailable,
-  suspendedUntilFromError,
   markCommunityUnavailable,
   type CommunityErrorKey,
   type CommunityMe,
@@ -29,7 +28,8 @@ export interface CommunitySession {
   reloadMe: () => Promise<void>;
 }
 
-const CommunityContext = createContext<CommunitySession | null>(null);
+/** Exporté pour les tests des composants qui lisent la session (`useCommunity`). */
+export const CommunityContext = createContext<CommunitySession | null>(null);
 
 /** Session communauté de la page (à appeler sous `CommunityGate`). */
 export function useCommunity(): CommunitySession {
@@ -112,7 +112,6 @@ export function CommunityNotice({
   onRetry,
   suspendedUntil,
   accountWide = false,
-  error,
   decisionId,
   className,
   token,
@@ -124,8 +123,6 @@ export function CommunityNotice({
   suspendedUntil?: string | null;
   /** Suspension portée par le compte alors qu'aucun profil n'existe (départ puis retour). */
   accountWide?: boolean;
-  /** Refus d'origine : la date de fin de suspension peut s'y lire (403 COMMUNITY_SUSPENDED). */
-  error?: unknown;
   decisionId?: string | null;
   className?: string;
   /** Jeton : permet de renvoyer l'e-mail de vérification depuis le message. */
@@ -133,8 +130,11 @@ export function CommunityNotice({
 }) {
   const t = useTranslations('community');
   const locale = useLocale();
-  const errorUntil = suspendedUntilFromError(error);
-  const until = suspendedUntil ?? (errorUntil ? formatLongDate(errorUntil, locale) : null);
+  // Fin de suspension : celle annoncée par `GET /community/profile` (portée par le compte, même
+  // sans profil), sauf date déjà mise en forme par l'appelant.
+  const community = useOptionalCommunity();
+  const accountUntil = community?.me.suspendedUntil ?? community?.me.profile?.suspendedUntil ?? null;
+  const until = suspendedUntil ?? (accountUntil ? formatLongDate(accountUntil, locale) : null);
   const [resend, setResend] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   const sendVerification = async () => {
@@ -316,7 +316,7 @@ export function EligibilityNotice({ className }: { className?: string }) {
           : reason === 'COMMUNITY_RULES_NOT_ACCEPTED'
             ? 'rulesNotAccepted'
             : 'suspended';
-  const until = me.profile?.suspendedUntil ?? null;
+  const until = me.suspendedUntil ?? me.profile?.suspendedUntil ?? null;
   return (
     <CommunityNotice
       errorKey={key}

@@ -231,6 +231,8 @@ export function DecisionDetail({ id }: { id: string }) {
   }
   if (state.error || !state.data) return <CommunityNotice errorKey={state.error ?? 'generic'} severity="urgent" onRetry={() => setAttempt((n) => n + 1)} />;
   const d = state.data;
+  // Nature du contenu visé, même supprimé (API antérieure : on déduit de `targetType`).
+  const target = d.target ?? { type: d.targetType, exists: d.targetType === 'USER' || d.targetId !== null };
   const tooShort = text.trim().length < COMMUNITY_LIMITS.appealMin;
 
   const submit = async (event: FormEvent) => {
@@ -256,6 +258,13 @@ export function DecisionDetail({ id }: { id: string }) {
   const facts: Array<[string, React.ReactNode]> = [
     [t('decisions.facts.date'), <span key="d" className="font-mono">{formatLongDate(d.createdAt, locale)}</span>],
     [t('decisions.facts.reason'), reasonOf(d.reason)],
+    [
+      t('decisions.facts.target'),
+      <span key="t">
+        {t(`decisions.target.${target.type}`)}
+        {target.exists ? null : <span className="block text-meta text-ink-2">{t('decisions.target.gone')}</span>}
+      </span>,
+    ],
     [t('decisions.facts.automated'), d.automated ? t('decisions.automatedYes') : t('decisions.automatedNo')],
   ];
   if (d.suspendedUntil) facts.push([t('decisions.facts.until'), <span key="u" className="font-mono">{formatLongDate(d.suspendedUntil, locale)}</span>]);
@@ -271,7 +280,7 @@ export function DecisionDetail({ id }: { id: string }) {
         <div className="grid content-start gap-6 lg:col-span-7">
           <Card as="section" title={t('decisions.statementTitle')} titleId="motifs">
             <PlainText text={d.statement} className="text-body text-ink" />
-            {d.targetId && d.action !== 'DELETE' && d.targetType === 'POST' ? (
+            {d.targetId && d.targetType === 'POST' ? (
               <Link href={communityPostPath(d.targetId)} className="mt-4 inline-block text-ui text-accent-text underline underline-offset-2">
                 {t('decisions.seeContent')}
               </Link>

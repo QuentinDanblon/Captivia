@@ -2071,6 +2071,10 @@
       },
       "captionLabel": "Caption",
       "captionHint": "Optional: their name, their mood, the story behind the photo.",
+      "altLabel": "Describe the photo",
+      "altLabelN": "Describe photo {n}",
+      "altHint": "Optional, but it matters: screen readers read it aloud for blind and low-vision people.",
+      "altPlaceholder": "An orange leopard gecko on a warm rock",
       "questionLabel": "Your question",
       "questionHint": "Give the species, age and what you noticed: the answers will be more precise.",
       "bodyRequired": "Write your question before posting.",
@@ -2181,9 +2185,16 @@
       "facts": {
         "date": "Decision date",
         "reason": "Reason",
+        "target": "Content concerned",
         "automated": "Automated decision",
         "until": "Suspended until",
         "deadline": "Appeal possible until"
+      },
+      "target": {
+        "POST": "Post",
+        "COMMENT": "Reply",
+        "USER": "Your profile",
+        "gone": "Content deleted. It is no longer shown."
       },
       "automatedYes": "Yes: hidden after several reports, pending review by a person",
       "automatedNo": "No: decided by a person on the team",

@@ -150,6 +150,9 @@ test.describe('Communauté', () => {
     await expect(page.getByRole('img', { name: 'Aperçu de la photo 1' })).toBeVisible();
 
     await page.getByRole('textbox', { name: 'Légende' }).fill('Kaa a mué cette nuit.');
+    // Texte alternatif facultatif, un champ par photo (libellé simple avec une seule photo).
+    await expect(page.getByText("les lecteurs d'écran le lisent aux personnes malvoyantes")).toBeVisible();
+    await page.getByRole('textbox', { name: 'Décrire la photo' }).fill('  Un dragon barbu orange sur une pierre chaude ');
     await page.getByLabel('Montrer un de mes animaux').selectOption({ index: 1 });
     await expect(page.getByText('Son carnet de santé, ses soins et ses rendez-vous restent privés.')).toBeVisible();
     await expectNoSeriousA11y(page);
@@ -167,6 +170,86 @@ test.describe('Communauté', () => {
     const created = api.callsTo('POST', '/community/posts')[0].body as Record<string, unknown>;
     expect(created).toMatchObject({ type: 'PHOTO', body: 'Kaa a mué cette nuit.', animalId: 'animal-e2e-1' });
     expect(created.mediaIds).toHaveLength(1);
+    expect(created.mediaAlts).toEqual(['Un dragon barbu orange sur une pierre chaude']);
+    // Le détail utilise la description de l'auteur comme texte alternatif de l'image.
+    await expect(page.getByRole('img', { name: 'Un dragon barbu orange sur une pierre chaude' })).toBeVisible();
+  });
+
+  test('publication photo sans description : champ facultatif, aucun texte alternatif envoyé', async ({ page, api }) => {
+    await signIn(page);
+    seed(api);
+    await page.goto('/communaute/nouvelle');
+    const photo = path.join(__dirname, '..', '..', 'public', 'images', 'animals', 'bearded-dragon-480.webp');
+    await page.locator('input[type="file"]').setInputFiles(photo);
+    await expect(page.getByRole('textbox', { name: 'Décrire la photo' })).toBeVisible();
+    await page.getByRole('button', { name: 'Publier', exact: true }).click();
+    await expect(page).toHaveURL(/\/communaute\/publication\/10000000-/);
+    const created = api.callsTo('POST', '/community/posts')[0].body as Record<string, unknown>;
+    expect(created).not.toHaveProperty('mediaAlts');
+  });
+
+  test('fil : la description de l’auteur sert de texte alternatif, sinon la légende', async ({ page, api }) => {
+    await signIn(page);
+    seed(api);
+    api.community.posts[1].media = [
+      { id: 'm1', url: `${COMMUNITY_MEDIA_PREFIX}m1.webp`, width: 480, height: 320, alt: 'Un chat roux endormi sur un rebord de fenêtre' },
+    ];
+    await page.goto('/communaute');
+    await expect(page.getByRole('img', { name: 'Un chat roux endormi sur un rebord de fenêtre' })).toBeVisible();
+    api.community.posts[1].media[0].alt = null;
+    await page.reload();
+    await expect(page.getByRole('img', { name: 'Sieste au soleil après le bain.' })).toBeVisible();
+  });
+
+  test('suspension sans profil : la date de fin vient du profil, pas d’un message d’erreur', async ({ page, api }) => {
+    await signIn(page);
+    seed(api);
+    api.community.me = {
+      ...api.community.me,
+      profile: null,
+      canPublish: false,
+      reasons: ['COMMUNITY_PROFILE_REQUIRED', 'COMMUNITY_SUSPENDED'],
+      suspendedUntil: '2031-11-02T10:00:00.000Z',
+    };
+    await page.goto('/communaute/profil');
+    await expect(page.getByText('Publication suspendue')).toBeVisible();
+    await expect(page.getByText(/jusqu'au 2 nov\. 2031/)).toBeVisible();
+    // Aucun appel d'activation : la date n'a pas besoin d'un refus de l'API.
+    expect(api.callsTo('POST', '/community/profile')).toHaveLength(0);
+    // Sans date annoncée : texte propre au compte, jamais le message brut de l'API.
+    api.community.me = { ...api.community.me, suspendedUntil: null };
+    await page.reload();
+    await expect(page.getByText('même après un départ de la communauté')).toBeVisible();
+  });
+
+  test('décision sur un contenu supprimé : nature du contenu, sans lien ni extrait', async ({ page, api }) => {
+    await signIn(page);
+    seed(api);
+    api.community.decisions = [
+      {
+        id: 'dec-1',
+        action: 'DELETE',
+        targetType: 'POST',
+        targetId: null,
+        target: { type: 'POST', exists: false },
+        reason: 'SPAM',
+        statement: 'Publicité répétée après avertissement.',
+        automated: false,
+        suspendedUntil: null,
+        createdAt: '2026-10-02T09:00:00.000Z',
+        appealStatus: 'NONE',
+        appealDeadline: '2027-04-03T09:00:00.000Z',
+        canAppeal: true,
+        appealStatement: null,
+        appealResolvedAt: null,
+      },
+    ];
+    await page.goto('/communaute/decisions/dec-1');
+    await expect(page.getByRole('heading', { level: 1, name: 'Publication supprimée' })).toBeVisible();
+    await expect(page.getByText('Contenu concerné')).toBeVisible();
+    await expect(page.getByText("Contenu supprimé. Il n'est plus affiché.")).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Voir le contenu concerné' })).toHaveCount(0);
+    await expectNoSeriousA11y(page);
   });
 
   test('photo HEIC illisible : refus clair, rien n’est envoyé', async ({ page, api }) => {

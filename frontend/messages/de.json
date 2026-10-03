@@ -2071,6 +2071,10 @@
       },
       "captionLabel": "Bildunterschrift",
       "captionHint": "Optional: sein Name, seine Laune, die Geschichte hinter dem Foto.",
+      "altLabel": "Foto beschreiben",
+      "altLabelN": "Foto {n} beschreiben",
+      "altHint": "Optional, aber hilfreich: Screenreader lesen den Text sehbehinderten und blinden Menschen vor.",
+      "altPlaceholder": "Ein oranger Leopardgecko auf einem warmen Stein",
       "questionLabel": "Ihre Frage",
       "questionHint": "Nennen Sie Tierart, Alter und was Ihnen aufgefallen ist: So werden die Antworten genauer.",
       "bodyRequired": "Schreiben Sie Ihre Frage, bevor Sie posten.",
@@ -2181,9 +2185,16 @@
       "facts": {
         "date": "Datum der Entscheidung",
         "reason": "Grund",
+        "target": "Betroffener Inhalt",
         "automated": "Automatische Entscheidung",
         "until": "Ausgesetzt bis",
         "deadline": "Widerspruch möglich bis"
+      },
+      "target": {
+        "POST": "Beitrag",
+        "COMMENT": "Antwort",
+        "USER": "Ihr Profil",
+        "gone": "Inhalt gelöscht. Er wird nicht mehr angezeigt."
       },
       "automatedYes": "Ja: nach mehreren Meldungen ausgeblendet, bis eine Person prüft",
       "automatedNo": "Nein: Entscheidung einer Person aus dem Team",

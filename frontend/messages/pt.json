@@ -2071,6 +2071,10 @@
       },
       "captionLabel": "Legenda",
       "captionHint": "Opcional: o nome dele, o humor, a história da foto.",
+      "altLabel": "Descrever a foto",
+      "altLabelN": "Descrever a foto {n}",
+      "altHint": "Opcional, mas muito útil: os leitores de ecrã leem-no às pessoas com deficiência visual.",
+      "altPlaceholder": "Um gecko-leopardo laranja numa pedra quente",
       "questionLabel": "A sua pergunta",
       "questionHint": "Indique a espécie, a idade e o que observou: as respostas serão mais precisas.",
       "bodyRequired": "Escreva a sua pergunta antes de publicar.",
@@ -2181,9 +2185,16 @@
       "facts": {
         "date": "Data da decisão",
         "reason": "Motivo",
+        "target": "Conteúdo em causa",
         "automated": "Decisão automática",
         "until": "Suspensão até",
         "deadline": "Recurso possível até"
+      },
+      "target": {
+        "POST": "Publicação",
+        "COMMENT": "Resposta",
+        "USER": "O seu perfil",
+        "gone": "Conteúdo apagado. Já não é apresentado."
       },
       "automatedYes": "Sim: ocultado após várias denúncias, até ser analisado por uma pessoa",
       "automatedNo": "Não: decisão tomada por uma pessoa da equipa",

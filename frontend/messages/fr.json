@@ -2071,6 +2071,10 @@
       },
       "captionLabel": "Légende",
       "captionHint": "Facultative : son nom, son humeur, l'histoire de la photo.",
+      "altLabel": "Décrire la photo",
+      "altLabelN": "Décrire la photo {n}",
+      "altHint": "Facultatif, mais précieux : les lecteurs d'écran le lisent aux personnes malvoyantes.",
+      "altPlaceholder": "Un gecko léopard orange sur une pierre chaude",
       "questionLabel": "Votre question",
       "questionHint": "Donnez l'espèce, l'âge et ce que vous avez observé : les réponses seront plus précises.",
       "bodyRequired": "Écrivez votre question avant de publier.",
@@ -2181,9 +2185,16 @@
       "facts": {
         "date": "Date de la décision",
         "reason": "Motif",
+        "target": "Contenu concerné",
         "automated": "Décision automatique",
         "until": "Suspension jusqu'au",
         "deadline": "Recours possible jusqu'au"
+      },
+      "target": {
+        "POST": "Publication",
+        "COMMENT": "Réponse",
+        "USER": "Votre profil",
+        "gone": "Contenu supprimé. Il n'est plus affiché."
       },
       "automatedYes": "Oui : masquage après plusieurs signalements, en attendant l'examen d'une personne",
       "automatedNo": "Non : décision prise par une personne de l'équipe",

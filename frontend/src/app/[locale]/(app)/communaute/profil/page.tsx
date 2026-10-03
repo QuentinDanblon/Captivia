@@ -46,7 +46,6 @@ function ActivationForm() {
   const [avatarError, setAvatarError] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ handle?: string; rules?: string; age?: string }>({});
   const [submitError, setSubmitError] = useState<CommunityErrorKey | null>(null);
-  const [rawError, setRawError] = useState<unknown>(null);
   const [busy, setBusy] = useState(false);
   const [avatarWarning, setAvatarWarning] = useState(false);
 
@@ -99,7 +98,6 @@ function ActivationForm() {
       if (HANDLE_ERRORS.includes(key)) setErrors({ handle: t(`errors.${key}.body`) });
       else {
         setSubmitError(key);
-        setRawError(err);
       }
     } finally {
       setBusy(false);
@@ -199,7 +197,7 @@ function ActivationForm() {
             </div>
           ) : null}
 
-          {submitError ? <CommunityNotice errorKey={submitError} severity="urgent" token={token} error={rawError} accountWide /> : null}
+          {submitError ? <CommunityNotice errorKey={submitError} severity="urgent" token={token} accountWide /> : null}
           {avatarWarning ? <Alert severity="warning" title={t('profile.avatarLater')} /> : null}
 
           <div>

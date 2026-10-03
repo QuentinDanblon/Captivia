@@ -51,6 +51,8 @@ export interface CommunityMedia {
   url: string;
   width: number;
   height: number;
+  /** Description saisie par l'auteur (300 caractères au plus) ; absente : repli composé par `photoAlt`. */
+  alt?: string | null;
 }
 
 export interface CommunityPost {
@@ -110,6 +112,11 @@ export interface MyProfile {
 /** `GET /community/profile` : mon profil (ou null) et ce qui m'empêche de publier. */
 export interface CommunityMe {
   profile: MyProfile | null;
+  /**
+   * Fin de la suspension de publication en cours (portée par le compte), même sans profil ;
+   * null sans suspension. Absente d'une API antérieure : lue comme null.
+   */
+  suspendedUntil?: string | null;
   currentRulesVersion: string;
   canPublish: boolean;
   reasons: IneligibilityReason[];
@@ -134,12 +141,24 @@ export type ModerationActionType = 'AUTO_HIDE' | 'HIDE' | 'RESTORE' | 'DELETE' |
 export type ModerationTarget = 'POST' | 'COMMENT' | 'USER';
 export type AppealStatus = 'NONE' | 'PENDING' | 'UPHELD' | 'REVERSED';
 
+/**
+ * Contenu visé par une décision : sa nature, et s'il existe encore (`exists: false` : supprimé, le
+ * contenu n'est jamais renvoyé).
+ */
+export interface DecisionTarget {
+  type: ModerationTarget;
+  exists: boolean;
+}
+
 /** Décision de modération telle que la voit son destinataire (jamais l'opérateur). */
 export interface ModerationDecision {
   id: string;
   action: ModerationActionType;
   targetType: ModerationTarget;
+  /** Null pour un profil, ou quand le contenu a été supprimé. */
   targetId: string | null;
+  /** Côté destinataire (`/community/me/decisions`) ; absent des vues d'opérateur. */
+  target?: DecisionTarget;
   reason: CommunityReason | null;
   statement: string;
   automated: boolean;
@@ -231,6 +250,7 @@ export const COMMUNITY_LIMITS = {
   photosMin: 1,
   photosMax: 4,
   questionPhotosMax: 1,
+  mediaAlt: 300,
   suspensionMaxDays: 365,
   feedPageSize: 20,
 } as const;
@@ -383,15 +403,18 @@ export function isAllowedMediaUrl(
 }
 
 /**
- * Texte alternatif d'une photo publiée : l'API ne stocke pas de description, on la compose à partir
- * de la légende (tronquée), sinon de l'animal montré, sinon de l'auteur.
+ * Texte alternatif d'une photo publiée : la description de l'auteur (`media[index].alt`) si elle
+ * existe, sinon un repli composé à partir de la légende (tronquée), de l'animal montré, puis de
+ * l'auteur.
  */
 export function photoAlt(
-  post: Pick<CommunityPost, 'body' | 'animal' | 'author'>,
+  post: Pick<CommunityPost, 'body' | 'animal' | 'author'> & { media?: Pick<CommunityMedia, 'alt'>[] },
   index: number,
   total: number,
   labels: { photoOf: (n: number, total: number) => string; byAuthor: (handle: string) => string; fallback: string },
 ): string {
+  const own = post.media?.[index]?.alt?.replace(/\s+/g, ' ').trim();
+  if (own) return own;
   const prefix = total > 1 ? `${labels.photoOf(index + 1, total)} · ` : '';
   const caption = post.body.replace(/\s+/g, ' ').trim();
   if (caption) return `${prefix}${caption.length > 120 ? `${caption.slice(0, 119)}…` : caption}`;
@@ -514,16 +537,6 @@ export function communityErrorKey(err: unknown): CommunityErrorKey {
   return 'generic';
 }
 
-/**
- * Fin de suspension annoncée par un refus 403 `COMMUNITY_SUSPENDED` (« … suspended until <ISO> »),
- * pour l'afficher quand le profil n'existe pas (la suspension est portée par le compte).
- */
-export function suspendedUntilFromError(err: unknown): string | null {
-  if (!(err instanceof ApiError) || err.code !== 'COMMUNITY_SUSPENDED') return null;
-  const match = /\d{4}-\d{2}-\d{2}T[\d:.]+Z/.exec(err.message);
-  return match && !Number.isNaN(new Date(match[0]).getTime()) ? match[0] : null;
-}
-
 /** Raisons d'inéligibilité → clé d'erreur (même texte qu'un refus de l'API). */
 export function reasonToErrorKey(reason: IneligibilityReason): CommunityErrorKey {
   return CODE_TO_KEY[reason] ?? 'generic';
@@ -596,7 +609,15 @@ export const communityApi = {
     ),
   createPost: (
     token: string,
-    body: { type: CommunityPostType; body?: string; mediaIds?: string[]; animalId?: string; speciesCategory?: CommunityCategory },
+    body: {
+      type: CommunityPostType;
+      body?: string;
+      mediaIds?: string[];
+      /** Description de chaque image, dans l'ordre de `mediaIds` (chaîne vide : aucune). */
+      mediaAlts?: string[];
+      animalId?: string;
+      speciesCategory?: CommunityCategory;
+    },
   ) => call<CommunityPost>(token, '/community/posts', { method: 'POST', body: jsonBody(body) }),
   post: (token: string, id: string) => call<PostDetail>(token, `/community/posts/${enc(id)}`),
   deletePost: (token: string, id: string) => call<void>(token, `/community/posts/${enc(id)}`, { method: 'DELETE' }),

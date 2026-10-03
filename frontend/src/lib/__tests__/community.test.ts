@@ -9,7 +9,6 @@ import {
   photoAlt,
   probeCommunity,
   reasonToErrorKey,
-  suspendedUntilFromError,
 } from '../community';
 
 describe('drapeau de build NEXT_PUBLIC_COMMUNITY_ENABLED', () => {
@@ -101,13 +100,6 @@ describe('codes d’erreur → messages', () => {
     expect(communityErrorKey('oops')).toBe('generic');
   });
 
-  it('date de fin lue dans un refus 403 COMMUNITY_SUSPENDED (activation après un départ)', () => {
-    const refusal = new ApiError(403, 'Publishing is suspended until 2026-11-02T10:00:00.000Z.', 'COMMUNITY_SUSPENDED');
-    expect(suspendedUntilFromError(refusal)).toBe('2026-11-02T10:00:00.000Z');
-    expect(suspendedUntilFromError(new ApiError(403, 'Publishing is suspended.', 'COMMUNITY_SUSPENDED'))).toBeNull();
-    expect(suspendedUntilFromError(new ApiError(403, 'until 2026-11-02T10:00:00.000Z', 'OTHER'))).toBeNull();
-  });
-
   it('motifs d’inéligibilité du profil', () => {
     expect(reasonToErrorKey('GUEST_ACCOUNT')).toBe('guest');
     expect(reasonToErrorKey('COMMUNITY_SUSPENDED')).toBe('suspended');
@@ -142,6 +134,19 @@ describe('médias', () => {
     );
     expect(photoAlt({ body: '', animal: null, author }, 0, 1, labels)).toBe('par @kaa_fan');
     expect(photoAlt({ body: 'x'.repeat(300), animal: null, author }, 0, 1, labels)).toHaveLength(120);
+  });
+
+  it('alt : la description de l’auteur prime, photo par photo ; repli si vide', () => {
+    const author = { handle: 'kaa_fan', avatarUrl: null };
+    const media = [{ alt: '  Un boa  enroulé\nsur sa branche ' }, { alt: null }, { alt: '   ' }, {}];
+    const base = { body: 'Kaa au soleil', animal: null, author, media };
+    expect(photoAlt(base, 0, 4, labels)).toBe('Un boa enroulé sur sa branche');
+    // Pas de description : repli habituel (légende, avec la position).
+    expect(photoAlt(base, 1, 4, labels)).toBe('Photo 2/4 · Kaa au soleil');
+    expect(photoAlt(base, 2, 4, labels)).toBe('Photo 3/4 · Kaa au soleil');
+    expect(photoAlt(base, 3, 4, labels)).toBe('Photo 4/4 · Kaa au soleil');
+    // Pas de liste de médias (anciens appelants).
+    expect(photoAlt({ body: '', animal: null, author }, 0, 1, labels)).toBe('par @kaa_fan');
   });
 });
 

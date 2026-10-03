@@ -2,9 +2,8 @@ import type { AnchorHTMLAttributes, ReactNode } from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { PlainText } from '../primitives';
 import PostCard from '../PostCard';
-import { CommunityNotice } from '../CommunityGate';
-import type { CommunityErrorKey, CommunityPost } from '@/lib/community';
-import { ApiError } from '@/lib/api';
+import { CommunityContext, CommunityNotice, type CommunitySession } from '../CommunityGate';
+import type { CommunityErrorKey, CommunityMe, CommunityPost } from '@/lib/community';
 
 jest.mock('@/i18n/navigation', () => ({
   Link: ({ href, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement> & { href: string; children: ReactNode }) => (
@@ -66,6 +65,17 @@ describe('texte des membres : texte brut, jamais de HTML ni de lien', () => {
     const hrefs = Array.from(container.querySelectorAll('a')).map((a) => a.getAttribute('href'));
     expect(hrefs.every((href) => href?.startsWith('/communaute/'))).toBe(true);
     expect(hrefs.some((href) => href?.includes('promo.example') || href?.includes('arnaque'))).toBe(false);
+  });
+
+  it('photo : le texte alternatif de l’auteur est utilisé, sinon le repli', () => {
+    const media = [
+      { id: 'm1', url: 'https://evil.example/1.webp', width: 10, height: 10, alt: 'Un boa enroulé sur sa branche' },
+      { id: 'm2', url: 'https://evil.example/2.webp', width: 10, height: 10, alt: null },
+    ];
+    render(<PostCard post={post({ body: 'Kaa au soleil', animal: null, media })} token="t" />);
+    expect(screen.getByTitle('Un boa enroulé sur sa branche')).toBeInTheDocument();
+    // Pas de description : repli composé (position · légende), clés de traduction rendues telles quelles.
+    expect(screen.getByTitle('photo.position · Kaa au soleil')).toBeInTheDocument();
   });
 
   it("n'affiche que le nom et l'espèce de l'animal ; avatar hors origine des médias → patte au trait", () => {
@@ -136,18 +146,31 @@ describe('états et refus : un texte propre par code', () => {
     expect(screen.getByRole('link', { name: 'actions.seeDecision' })).toHaveAttribute('href', '/communaute/decisions/abc');
   });
 
-  it('suspension portée par le compte (sans profil) : texte dédié ; date lue dans le refus', () => {
-    const { unmount } = render(<CommunityNotice errorKey="suspended" accountWide />);
+  it('suspension portée par le compte (sans profil) : texte dédié, puis date lue dans le profil (suspendedUntil)', () => {
+    const session = (me: Partial<CommunityMe>): CommunitySession => ({
+      token: 't',
+      isGuest: false,
+      reloadMe: async () => undefined,
+      me: { profile: null, currentRulesVersion: '2026-10', canPublish: false, reasons: ['COMMUNITY_SUSPENDED'], ageConfirmationRequired: false, ...me },
+    });
+    const { unmount } = render(
+      <CommunityContext.Provider value={session({ suspendedUntil: null })}>
+        <CommunityNotice errorKey="suspended" accountWide />
+      </CommunityContext.Provider>,
+    );
     expect(screen.getByText('errors.suspended.bodyNoDate')).toBeInTheDocument();
     unmount();
     render(
-      <CommunityNotice
-        errorKey="suspended"
-        accountWide
-        error={new ApiError(403, 'Publishing is suspended until 2026-11-02T10:00:00.000Z.', 'COMMUNITY_SUSPENDED')}
-      />,
+      <CommunityContext.Provider value={session({ suspendedUntil: '2026-11-02T10:00:00.000Z' })}>
+        <CommunityNotice errorKey="suspended" accountWide />
+      </CommunityContext.Provider>,
     );
     expect(screen.getByText('errors.suspended.bodyUntil')).toBeInTheDocument();
+  });
+
+  it('suspension : le message d’erreur de l’API n’est plus analysé', () => {
+    render(<CommunityNotice errorKey="suspended" accountWide />);
+    expect(screen.getByText('errors.suspended.bodyNoDate')).toBeInTheDocument();
   });
 
   it('e-mail non vérifié → renvoi du lien depuis le message', async () => {
