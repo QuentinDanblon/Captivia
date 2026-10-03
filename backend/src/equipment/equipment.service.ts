@@ -1,5 +1,5 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, RecommendedEquipment } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   PaginationQueryDto,
@@ -27,7 +27,7 @@ export class EquipmentService {
     size?: string,
     page?: PaginationQueryDto,
   ): Promise<unknown> {
-    const where: any = {};
+    const where: Prisma.RecommendedEquipmentWhereInput = {};
 
     if (speciesId) {
       where.OR = [{ speciesId }, { speciesId: null }]; // Include general items
@@ -88,11 +88,11 @@ export class EquipmentService {
     speciesId: number,
     category?: string,
     size?: string,
-  ): Promise<any[]> {
+  ): Promise<RecommendedEquipment[]> {
     try {
       // Try to fetch species data to get its class
       // Note: This is a simple implementation; in production, you'd want to cache this
-      const where: any = {
+      const where: Prisma.RecommendedEquipmentWhereInput = {
         OR: [{ speciesId: null }], // Get general items first
       };
 
@@ -120,7 +120,9 @@ export class EquipmentService {
       );
       return generalEquipment;
     } catch (error) {
-      this.logger.error(`Error in equipment fallback: ${error.message}`);
+      this.logger.error(
+        `Error in equipment fallback: ${(error as Error).message}`,
+      );
       return [];
     }
   }

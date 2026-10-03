@@ -182,7 +182,7 @@ export class AdvancedSearchDto {
 
 export class AdvancedSearchResults {
   @ApiProperty({ description: 'Résultats de recherche' })
-  results: any[];
+  results: unknown[];
 
   @ApiProperty({ description: 'Nombre total de résultats' })
   total: number;

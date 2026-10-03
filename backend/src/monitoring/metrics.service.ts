@@ -34,8 +34,10 @@ export class MetricsService implements OnModuleInit {
     this.delAsync = (key) => this.redis.del(key);
   }
 
-  async onModuleInit() {
-    this.initializeMetrics();
+  onModuleInit(): void {
+    // Volontairement non attendu : le préchauffage ne doit pas retarder le démarrage
+    // (et `initializeMetrics` absorbe déjà les erreurs de chaque lecture).
+    void this.initializeMetrics();
   }
 
   private async initializeMetrics() {
@@ -100,11 +102,11 @@ export class MetricsService implements OnModuleInit {
 
     // Get endpoints
     const endpoints = (await this.getAsync('metrics:endpoints')) || '{}';
-    const requestsByEndpoint = JSON.parse(endpoints);
+    const requestsByEndpoint = JSON.parse(endpoints) as Record<string, number>;
 
     // Get errors by type
     const errors = (await this.getAsync('metrics:errors')) || '{}';
-    const errorsByType = JSON.parse(errors);
+    const errorsByType = JSON.parse(errors) as Record<string, number>;
 
     return {
       totalRequests: parseInt(total),

@@ -170,7 +170,7 @@ export class DatabaseOptimizationService {
 
   async getRecentQueries(limit: number = 20): Promise<QueryPerformance[]> {
     const queries = await this.lrangeAsync('query:perf', 0, limit - 1);
-    return queries.map((q) => JSON.parse(q)).reverse();
+    return queries.map((q) => JSON.parse(q) as QueryPerformance).reverse();
   }
 
   async getSlowQueries(): Promise<
@@ -182,7 +182,7 @@ export class DatabaseOptimizationService {
     }>
   > {
     const keys = (await this.getAsync('slow:query:keys')) || '{}';
-    const queryKeys = Object.keys(JSON.parse(keys));
+    const queryKeys = Object.keys(JSON.parse(keys) as Record<string, unknown>);
 
     const slowQueries: Array<{
       query: string;
@@ -281,8 +281,8 @@ export class DatabaseOptimizationService {
 
   private async ltrimAsync(
     key: string,
-    start: number,
-    stop: number,
+    _start: number,
+    _stop: number,
   ): Promise<'OK'> {
     return this.setAsync(`${key}:len`, '0');
   }

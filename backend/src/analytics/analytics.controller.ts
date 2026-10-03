@@ -11,7 +11,7 @@ import {
   Req,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { ApiAnalyticsService } from './api-analytics.service';
+import { ApiAnalyticsService, AnalyticsQuery } from './api-analytics.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { OperatorGuard } from '../common/guards/operator.guard';
 import { TrackRequestQueryDto } from './dto/track-request.dto';
@@ -26,7 +26,7 @@ export class AnalyticsController {
   @ApiOperation({ summary: 'Get API usage analytics' })
   @ApiResponse({ status: 200, description: 'Returns API usage analytics' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getAnalytics(@Query() query: any) {
+  async getAnalytics(@Query() query: AnalyticsQuery) {
     return await this.analyticsService.getAnalytics(query);
   }
 

@@ -26,9 +26,24 @@ export default tseslint.config(
   },
   {
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn'
+      // Convention du projet : un paramètre ou une variable préfixé par « _ » est
+      // volontairement inutilisé (signature imposée par un contrat, un décorateur ou
+      // une interface).
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+        },
+      ],
+      // `import x = require('pkg')` est la forme TypeScript des modules CommonJS à
+      // `export =` (ex. memcached) : le projet compile en CommonJS sans esModuleInterop.
+      '@typescript-eslint/no-require-imports': [
+        'error',
+        { allowAsImport: true },
+      ],
     },
   },
 );

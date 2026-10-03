@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client';
 import {
   ArrayMaxSize,
   IsArray,
@@ -28,7 +29,7 @@ export class CreateLegislationDto {
 
   @IsOptional()
   @IsObject()
-  details?: any;
+  details?: Prisma.InputJsonObject;
 
   @IsOptional()
   @IsArray()

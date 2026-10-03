@@ -32,7 +32,7 @@ export class SpeciesRoutinesController {
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
   async getRoutineTemplates(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('animalId') animalId: string,
   ) {
     return this.speciesRoutinesService.findTemplatesForAnimal(

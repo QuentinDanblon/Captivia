@@ -1,4 +1,5 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 import { SpeciesPlusService } from './services/speciesplus.service';
@@ -90,9 +91,8 @@ export class LegislationService {
       );
       const wanted = profile.scientificName.trim().toLowerCase();
       const taxon =
-        taxa.find(
-          (t: any) => String(t?.full_name ?? '').toLowerCase() === wanted,
-        ) ?? taxa[0];
+        taxa.find((t) => String(t?.full_name ?? '').toLowerCase() === wanted) ??
+        taxa[0];
       if (!taxon || typeof taxon.id !== 'number') {
         return { status: 'not_found', cites: null, eu: null };
       }
@@ -113,7 +113,7 @@ export class LegislationService {
     speciesId: number,
     country: string,
     status: string,
-    details: any,
+    details: Prisma.InputJsonValue,
     sources: string[],
   ) {
     try {

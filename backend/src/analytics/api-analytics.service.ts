@@ -119,13 +119,8 @@ export class ApiAnalyticsService {
   }
 
   async getAnalytics(query: AnalyticsQuery = {}): Promise<ApiUsage> {
-    const {
-      startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-        .toISOString()
-        .split('T')[0],
-      endDate = new Date().toISOString().split('T')[0],
-      endpoint,
-    } = query;
+    const { endDate = new Date().toISOString().split('T')[0], endpoint } =
+      query;
 
     const totalRequests = parseInt(
       (await this.getAsync('analytics:totalRequests')) || '0',
@@ -150,13 +145,13 @@ export class ApiAnalyticsService {
       ? `analytics:endpoints:${endpoint}`
       : 'analytics:endpoints';
     const endpoints = (await this.getAsync(endpointsKey)) || '{}';
-    const requestsByEndpoint = JSON.parse(endpoints);
+    const requestsByEndpoint = JSON.parse(endpoints) as Record<string, number>;
 
     // Get top endpoints
     const topEndpoints = Object.entries(requestsByEndpoint)
       .map(([endpoint, count]) => ({
         endpoint,
-        count: parseInt(count as string),
+        count: parseInt(String(count)),
       }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 5);
@@ -188,7 +183,6 @@ export class ApiAnalyticsService {
 
     // Determine peak traffic time
     const peakTime = (await this.getAsync('analytics:peakTime')) || '00:00';
-    const peakCount = (await this.getAsync('analytics:peakCount')) || '0';
 
     // Get overall average response time
     const overallAvg =
@@ -239,10 +233,12 @@ export class ApiAnalyticsService {
 
     const endpoints =
       (await this.getAsync(`analytics:endpoints:${date}`)) || '{}';
-    const topEndpoints = Object.entries(JSON.parse(endpoints))
+    const topEndpoints = Object.entries(
+      JSON.parse(endpoints) as Record<string, number>,
+    )
       .map(([endpoint, count]) => ({
         endpoint,
-        count: parseInt(count as string),
+        count: parseInt(String(count)),
       }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 5);

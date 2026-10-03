@@ -25,7 +25,33 @@ interface SpeciesPlusResponse {
   }>;
 }
 
-type TaxonList = any[];
+/** Résumé d'un taxon (résultat de recherche) ; les autres champs sont transmis tels quels. */
+export interface SpeciesPlusTaxonSummary {
+  id: number;
+  full_name?: string;
+  [field: string]: unknown;
+}
+
+/** Entrée de législation ou de distribution (structure libre, transmise telle quelle). */
+type SpeciesPlusEntry = Record<string, unknown>;
+
+type TaxonList = SpeciesPlusEntry[];
+
+interface TaxonSearchResponse {
+  taxon_concepts?: SpeciesPlusTaxonSummary[];
+}
+interface TaxonDetailsResponse {
+  taxon_concept?: SpeciesPlusResponse;
+}
+interface CitesListingsResponse {
+  cites_listings?: SpeciesPlusEntry[];
+}
+interface EuListingsResponse {
+  eu_listings?: SpeciesPlusEntry[];
+}
+interface DistributionsResponse {
+  distributions?: SpeciesPlusEntry[];
+}
 
 /**
  * Species+ (CITES / UE) — API qui EXIGE un jeton (`SPECIESPLUS_API_TOKEN`).
@@ -91,14 +117,14 @@ export class SpeciesPlusService {
 
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as T;
     }
 
     try {
       const data = await load();
       // Réponse valide uniquement (une liste vide valide est mise en cache ; `null` = rien).
       if (data !== null && data !== undefined) {
-        await this.cacheService.set(cacheKey, JSON.stringify(data), 604800);
+        this.cacheService.set(cacheKey, JSON.stringify(data), 604800);
       }
       return data;
     } catch (error) {
@@ -110,7 +136,7 @@ export class SpeciesPlusService {
       const stale = this.cacheService.getStale(cacheKey);
       if (typeof stale === 'string' && stale) {
         try {
-          return JSON.parse(stale);
+          return JSON.parse(stale) as T;
         } catch {
           /* illisible : 503 ci-dessous */
         }
@@ -119,14 +145,19 @@ export class SpeciesPlusService {
     }
   }
 
-  async searchByScientificName(scientificName: string): Promise<TaxonList> {
-    return this.cached<TaxonList>(
+  async searchByScientificName(
+    scientificName: string,
+  ): Promise<SpeciesPlusTaxonSummary[]> {
+    return this.cached<SpeciesPlusTaxonSummary[]>(
       `${this.cachePrefix}search:${scientificName}`,
       'search',
       async () => {
-        const response = await this.fetchTaxon<any>('/taxon_concepts', {
-          name: scientificName,
-        });
+        const response = await this.fetchTaxon<TaxonSearchResponse>(
+          '/taxon_concepts',
+          {
+            name: scientificName,
+          },
+        );
         return response.data?.taxon_concepts || [];
       },
       [],
@@ -138,7 +169,7 @@ export class SpeciesPlusService {
       `${this.cachePrefix}taxon:${taxonId}`,
       'taxon details',
       async () => {
-        const response = await this.fetchTaxon<any>(
+        const response = await this.fetchTaxon<TaxonDetailsResponse>(
           `/taxon_concepts/${taxonId}`,
           undefined,
         );
@@ -153,7 +184,7 @@ export class SpeciesPlusService {
       `${this.cachePrefix}cites:${taxonId}`,
       'CITES legislation',
       async () => {
-        const response = await this.fetchTaxon<any>(
+        const response = await this.fetchTaxon<CitesListingsResponse>(
           `/taxon_concepts/${taxonId}/cites_legislation`,
           undefined,
         );
@@ -168,7 +199,7 @@ export class SpeciesPlusService {
       `${this.cachePrefix}eu:${taxonId}`,
       'EU legislation',
       async () => {
-        const response = await this.fetchTaxon<any>(
+        const response = await this.fetchTaxon<EuListingsResponse>(
           `/taxon_concepts/${taxonId}/eu_legislation`,
           undefined,
         );
@@ -183,7 +214,7 @@ export class SpeciesPlusService {
       `${this.cachePrefix}distribution:${taxonId}`,
       'distributions',
       async () => {
-        const response = await this.fetchTaxon<any>(
+        const response = await this.fetchTaxon<DistributionsResponse>(
           `/taxon_concepts/${taxonId}/distributions`,
           undefined,
         );

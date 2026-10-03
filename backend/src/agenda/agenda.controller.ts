@@ -51,7 +51,10 @@ export class AgendaController {
     status: 400,
     description: 'Bornes invalides ou période > 92 jours',
   })
-  async getAgenda(@Request() req, @Query() query: AgendaQueryDto) {
+  async getAgenda(
+    @Request() req: { user: { id: string } },
+    @Query() query: AgendaQueryDto,
+  ) {
     return this.agendaService.getAgenda(req.user.id, query.from, query.to);
   }
 
@@ -90,7 +93,7 @@ export class AgendaController {
     summary:
       "Un lien de calendrier est-il actif ? (le jeton lui-même n'est jamais relu)",
   })
-  async getTokenStatus(@Request() req) {
+  async getTokenStatus(@Request() req: { user: { id: string } }) {
     return { active: await this.agendaService.hasCalendarToken(req.user.id) };
   }
 
@@ -105,7 +108,7 @@ export class AgendaController {
     description:
       "Le jeton n'est renvoyé qu'une fois ; l'ancien lien est invalidé immédiatement.",
   })
-  async regenerateToken(@Request() req) {
+  async regenerateToken(@Request() req: { user: { id: string } }) {
     const { token, feedPath } =
       await this.agendaService.regenerateCalendarToken(req.user.id);
     return { active: true, token, feedPath };
@@ -117,7 +120,7 @@ export class AgendaController {
   @ApiOperation({
     summary: 'Révoque le jeton : le flux iCalendar cesse de fonctionner',
   })
-  async revokeToken(@Request() req) {
+  async revokeToken(@Request() req: { user: { id: string } }) {
     await this.agendaService.revokeCalendarToken(req.user.id);
     return { active: false };
   }

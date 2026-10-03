@@ -114,12 +114,20 @@ export function isTransientError(error: unknown): boolean {
   );
 }
 
+/** Options de redirection transmises par follow-redirects (champs lus uniquement). */
+interface RedirectOptions {
+  protocol?: string;
+  hostname?: string;
+  host?: string;
+  headers?: Record<string, unknown>;
+}
+
 /**
  * Contrôle d'une redirection (appelé par axios/follow-redirects avant de la suivre) :
  * https uniquement, jamais vers localhost/une IP littérale (SSRF), et aucun secret
  * de fournisseur retransmis.
  */
-export function assertSafeRedirect(options: Record<string, any>): void {
+export function assertSafeRedirect(options: RedirectOptions): void {
   const protocol = String(options.protocol ?? '');
   const hostname = String(options.hostname ?? options.host ?? '')
     .replace(/^\[|\]$/g, '')

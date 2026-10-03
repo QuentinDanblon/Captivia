@@ -9,7 +9,7 @@ export interface ErrorLog {
   type?: string;
   message: string;
   stack?: string;
-  context?: Record<string, any>;
+  context?: Record<string, unknown>;
   userId?: string;
   endpoint?: string;
   userAgent?: string;
@@ -77,7 +77,7 @@ export class ErrorTrackingService {
     // Update error stats
     const pipeline = this.redis.pipeline();
     pipeline.incr('errors:total');
-    pipeline.incr(`errors:types:${(errorData as any).type}`);
+    pipeline.incr(`errors:types:${errorData.type}`);
     pipeline.incr(`errors:endpoints:${errorData.endpoint || 'unknown'}`);
     pipeline.set('errors:lastError', timestamp);
     await pipeline.exec();
@@ -99,18 +99,18 @@ export class ErrorTrackingService {
 
     // Get errors by type
     const types = (await this.getAsync('errors:types')) || '{}';
-    const errorsByType = JSON.parse(types);
+    const errorsByType = JSON.parse(types) as Record<string, number>;
 
     // Get errors by endpoint
     const endpoints = (await this.getAsync('errors:endpoints')) || '{}';
-    const errorsByEndpoint = JSON.parse(endpoints);
+    const errorsByEndpoint = JSON.parse(endpoints) as Record<string, number>;
 
     // Get top errors
     const topErrors = Object.entries(errorsByType)
-      .map(([type, count]) => ({ type, count: parseInt(count as string) }))
+      .map(([type, count]) => ({ type, count: parseInt(String(count)) }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 10)
-      .map((e: any) => ({
+      .map((e) => ({
         ...e,
         lastOccurrence: lastError,
       }));
@@ -133,7 +133,7 @@ export class ErrorTrackingService {
 
   async getRecentErrors(limit: number = 50): Promise<ErrorLog[]> {
     const errors = await this.lrangeAsync('errors:logs', 0, limit - 1);
-    return errors.map((err) => JSON.parse(err)).reverse();
+    return errors.map((err) => JSON.parse(err) as ErrorLog).reverse();
   }
 
   async getErrorById(id: string): Promise<ErrorLog | null> {
@@ -225,14 +225,14 @@ export class ErrorTrackingService {
   // Convenience methods for logging different error levels
   async logInfo(
     message: string,
-    context?: Record<string, any>,
+    context?: Record<string, unknown>,
   ): Promise<string> {
     return this.logError({ level: 'info', message, context });
   }
 
   async logWarning(
     message: string,
-    context?: Record<string, any>,
+    context?: Record<string, unknown>,
   ): Promise<string> {
     return this.logError({ level: 'warning', message, context });
   }
@@ -240,7 +240,7 @@ export class ErrorTrackingService {
   async logErrorMethod(
     message: string,
     stack?: string,
-    context?: Record<string, any>,
+    context?: Record<string, unknown>,
   ): Promise<string> {
     return this.logError({ level: 'error', message, stack, context });
   }

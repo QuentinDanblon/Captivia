@@ -16,7 +16,8 @@ export class CacheModule {
         {
           provide: 'CACHE_SERVICE',
           useFactory: (configService: ConfigService) => {
-            const cacheType = configService.get('CACHE_TYPE') || 'memory';
+            const cacheType =
+              configService.get<string>('CACHE_TYPE') || 'memory';
 
             if (cacheType === 'redis') {
               return new RedisCacheService();

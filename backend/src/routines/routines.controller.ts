@@ -47,7 +47,7 @@ export class RoutinesController {
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
   async createRoutine(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Body() createRoutineDto: CreateRoutineDto,
   ) {
@@ -69,7 +69,7 @@ export class RoutinesController {
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
   async findAllRoutines(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Query() page: PaginationQueryDto,
   ) {
@@ -88,7 +88,7 @@ export class RoutinesController {
   @ApiResponse({ status: 403, description: 'Not your routine' })
   @ApiResponse({ status: 404, description: 'Routine not found' })
   async findOneRoutine(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Param('routineId') routineId: string,
   ) {
@@ -111,7 +111,7 @@ export class RoutinesController {
   @ApiResponse({ status: 403, description: 'Not your routine' })
   @ApiResponse({ status: 404, description: 'Routine not found' })
   async updateRoutine(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Param('routineId') routineId: string,
     @Body() updateRoutineDto: UpdateRoutineDto,
@@ -136,7 +136,7 @@ export class RoutinesController {
   @ApiResponse({ status: 403, description: 'Not your routine' })
   @ApiResponse({ status: 404, description: 'Routine not found' })
   async deleteRoutine(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Param('routineId') routineId: string,
   ) {
@@ -162,7 +162,7 @@ export class HistoryController {
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
   async logAction(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Body() createActionLogDto: CreateActionLogDto,
   ) {
@@ -189,7 +189,7 @@ export class HistoryController {
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
   async getHistory(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Query('limit', new ParseIntPipe({ optional: true })) limit?: number,
     @Query('offset', new ParseIntPipe({ optional: true })) offset?: number,
@@ -220,7 +220,7 @@ export class HistoryController {
   @ApiResponse({ status: 403, description: 'Not your history entry' })
   @ApiResponse({ status: 404, description: 'History entry not found' })
   async deleteHistoryEntry(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('animalId') animalId: string,
     @Param('logId') logId: string,
   ) {
