@@ -526,7 +526,8 @@
     "guest": "Convidado",
     "createAccount": "Criar conta",
     "community": "Comunidade",
-    "soon": "Em breve"
+    "soon": "Em breve",
+    "guides": "Guias"
   },
   "grade": {
     "bronze": "Bronze",
@@ -2496,5 +2497,212 @@
     "notFound": "Não encontrámos este elemento. Pode ter sido eliminado.",
     "tooManyRequests": "Demasiadas tentativas seguidas. Aguarde um minuto antes de tentar novamente.",
     "generic": "Ocorreu um erro. Tente novamente dentro de instantes."
+  },
+  "guides": {
+    "title": "Guias de instalação",
+    "intro": "Prepare um espaço adequado para o seu animal: espaço, equipamento, instalação e manutenção, com fontes para saber mais.",
+    "open": "Guia de instalação",
+    "chooseSpecies": "Um guia para a sua espécie",
+    "myAnimals": "Os meus animais",
+    "chooseAnimal": "Escolha um dos meus animais",
+    "animalsError": "Não foi possível carregar os seus animais.",
+    "searchSpecies": "Pesquisar uma espécie",
+    "searchHint": "Introduza pelo menos dois caracteres, em português ou o nome científico.",
+    "search": "Pesquisar",
+    "loadError": "Não foi possível carregar o guia desta espécie.",
+    "noResults": "Não foi encontrada nenhuma espécie. Experimente o nome científico.",
+    "categoriesTitle": "Escolha uma categoria",
+    "chooseWater": "Para este peixe, escolha água doce ou água salgada, de acordo com o seu habitat.",
+    "speciesIntro": "Os parâmetros abaixo provêm da ficha da espécie selecionada. Permitem adaptar o guia da respetiva categoria.",
+    "noHabitat": "As necessidades de habitat desta espécie ainda não estão documentadas com uma fonte.",
+    "noDimensions": "As dimensões mínimas desta espécie não estão indicadas. Confirme-as antes de comprar o habitat.",
+    "noEquipment": "A lista de equipamento desta espécie está temporariamente indisponível.",
+    "fullSpecies": "Ver a ficha completa da espécie",
+    "categoryScope": "Estas orientações dizem respeito à categoria. Selecione a sua espécie para consultar as respetivas dimensões e parâmetros.",
+    "installation": "Instalação e manutenção",
+    "checklist": "Equipamento a preparar",
+    "checklistHint": "Assinale o que já preparou. Esta lista fica disponível enquanto o guia estiver aberto.",
+    "sources": "Fontes do guia",
+    "start": "Escolha uma categoria ou espécie para abrir o respetivo guia.",
+    "unknownCategory": "Escolha a categoria correspondente a esta espécie.",
+    "planTitle": "Plano com medidas",
+    "planIntro": "Indique as dimensões da instalação e escolha onde colocar o material. Este plano representa as suas escolhas; não certifica dimensões mínimas nem uma disposição adequada à espécie.",
+    "length": "Comprimento (cm)",
+    "width": "Largura (cm)",
+    "height": "Altura (cm)",
+    "planHint": "Introduza três medidas positivas para ver o plano e o respetivo volume geométrico.",
+    "planTop": "Vista de cima",
+    "planFront": "Vista de frente",
+    "planVolume": "Volume geométrico: {litres} L",
+    "planVolumeHint": "O volume real de água será inferior devido ao substrato, à decoração e ao espaço livre até ao rebordo. Este cálculo não determina quantos animais pode alojar.",
+    "planAlt": "Plano com medidas da sua instalação: {length} cm de comprimento, {width} cm de largura e {height} cm de altura.",
+    "diagramsTitle": "Compreender o aquário",
+    "filterDiagram": "Exemplo de circulação da água com um filtro externo. As setas indicam o percurso da água; o desenho não define dimensões nem caudal.",
+    "cycleDiagram": "Ciclo do azoto: os resíduos produzem amoníaco, que as bactérias transformam em nitritos e depois em nitratos. O esquema original contém legendas em inglês.",
+    "categories": {
+      "dogs": {
+        "title": "Cães",
+        "space": "Prepare um local tranquilo, seco e sem correntes de ar para o descanso. O seu cão deve poder deslocar-se e deitar-se confortavelmente. Separe esta zona do local onde faz as necessidades.",
+        "setup": "Coloque uma cama confortável, água e comedouros acessíveis. Mantenha um refúgio onde o seu cão possa afastar-se de situações que o assustem. Escolha brinquedos seguros e adequados.",
+        "care": "Mantenha a cama e os comedouros limpos. Proporcione oportunidades de exercício e interação de acordo com a idade, a saúde e as necessidades do seu cão. Observe os seus hábitos para ajustar as atividades e o descanso.",
+        "equipment": {
+          "e0": "Cama confortável",
+          "e1": "Comedouros para comida e água",
+          "e2": "Brinquedos seguros e adequados ao cão",
+          "e3": "Zona de descanso tranquila e refúgio",
+          "e4": "Material para limpar a cama e os comedouros"
+        }
+      },
+      "cats": {
+        "title": "Gatos",
+        "space": "Organize zonas para descansar, comer e fazer as necessidades. Coloque a água e a comida longe da caixa de areia. Disponibilize esconderijos e locais elevados onde o seu gato se sinta seguro.",
+        "setup": "Acrescente um arranhador estável que permita ao gato esticar-se, uma cama e brinquedos. Os recursos devem estar acessíveis sem que tenha de se aproximar de outro animal ou de uma situação que o assuste.",
+        "care": "Mantenha a caixa de areia limpa e disponibilize água fresca. Proponha brincadeiras e atividades regularmente, sobretudo se o seu gato viver dentro de casa. Deixe-o dormir e esconder-se sem o incomodar.",
+        "equipment": {
+          "e0": "Cama e esconderijos",
+          "e1": "Arranhador estável",
+          "e2": "Caixa de areia e material de limpeza",
+          "e3": "Comedouros afastados da caixa de areia",
+          "e4": "Locais elevados e brinquedos"
+        }
+      },
+      "rodents": {
+        "title": "Roedores",
+        "space": "Comece por identificar a espécie: um hamster, um rato, uma chinchila e um porquinho-da-índia não precisam do mesmo habitat. Confirme as dimensões, as necessidades de movimento e as condições de vida antes de escolher a gaiola ou o cercado.",
+        "setup": "Prepare esconderijos, substrato adequado e atividades próprias da espécie. Para um hamster, o substrato deve permitir escavar. Para um porquinho-da-índia, túneis e objetos de madeira não tratada podem incentivar a exploração e o roer.",
+        "care": "Retire o que estiver sujo e mantenha o substrato seco. Consulte a ficha da espécie sobre necessidades sociais: as recomendações para porquinhos-da-índia não se aplicam a todos os hamsters. Adapte o espaço ao animal em vez de encher a gaiola de acessórios.",
+        "equipment": {
+          "e0": "Gaiola ou cercado adequado à espécie",
+          "e1": "Substrato e materiais de nidificação adequados",
+          "e2": "Esconderijos e túneis adequados",
+          "e3": "Atividades e objetos para roer, conforme a espécie",
+          "e4": "Material de limpeza"
+        }
+      },
+      "rabbits": {
+        "title": "Coelhos",
+        "space": "Combine um abrigo com uma zona de exercício acessível. Prepare áreas distintas para comer, descansar e fazer as necessidades. Um espaço interior deve ser seguro; um espaço exterior deve estar protegido de predadores e das intempéries. Para dois coelhos de tamanho médio, a RSPCA recomenda pelo menos 3 m × 2 m de área no chão e 1 m de altura, incluindo abrigo e zona de exercício.",
+        "setup": "Escolha um piso antiderrapante, um abrigo seco e ventilado, esconderijos e oportunidades para escavar. Deixe espaço suficiente para se movimentarem livremente. O substrato deve ser adequado e sem pó.",
+        "care": "Retire a sujidade e limpe regularmente toda a instalação. Use produtos não tóxicos e deixe secar antes de voltar a instalar os coelhos. Guarde uma pequena quantidade de substrato limpo já usado para manter um cheiro familiar.",
+        "equipment": {
+          "e0": "Cercado de exercício seguro",
+          "e1": "Abrigo seco e ventilado",
+          "e2": "Esconderijos e túneis",
+          "e3": "Substrato adequado e sem pó",
+          "e4": "Produtos de limpeza não tóxicos"
+        }
+      },
+      "mammals": {
+        "title": "Outros mamíferos",
+        "space": "Selecione a espécie antes de escolher a instalação. As necessidades de um furão, ouriço-cacheiro, cavalo ou ovelha exigem espaços diferentes. Consulte os dados de habitat e a lista de equipamento da respetiva ficha.",
+        "setup": "Para um cavalo, prepare uma zona exterior para exercício e um abrigo contra o sol, o vento e temperaturas extremas. Uma box deve estar limpa, ventilada e sem correntes de ar. Para outras espécies, siga as recomendações específicas.",
+        "care": "Para um cavalo numa box, mantenha uma cama limpa, de qualidade e sem pó. Para os outros mamíferos, consulte na respetiva ficha as necessidades de descanso, enriquecimento e manutenção antes de definir uma rotina.",
+        "equipment": {
+          "e0": "Instalação dimensionada para a espécie",
+          "e1": "Abrigo ou zona de descanso adequada à espécie",
+          "e2": "Material indicado na ficha da espécie",
+          "e3": "Equipamento de exercício ou enriquecimento adequado",
+          "e4": "Material de manutenção adequado à instalação"
+        }
+      },
+      "birds": {
+        "title": "Aves",
+        "space": "Escolha a gaiola ou o aviário de acordo com as necessidades da espécie. Confirme na respetiva ficha as dimensões e o espaçamento entre as barras. Tenha também em conta o espaço para atividades e a localização dos acessórios.",
+        "setup": "Prepare poleiros de vários diâmetros feitos de ramos de madeira seguros e não tratados. Acrescente atividades de procura de alimento: um tubo de cartão com papel e comida escondida pode servir de enriquecimento.",
+        "care": "Verifique a segurança dos ramos, brinquedos e acessórios antes de os instalar. Escolha madeiras adequadas, sem tratamento nem pulverização. Ajuste as atividades e as condições da instalação às necessidades documentadas da sua ave.",
+        "equipment": {
+          "e0": "Gaiola ou aviário adequado à espécie",
+          "e1": "Poleiros de vários diâmetros",
+          "e2": "Ramos de madeira segura e não tratada",
+          "e3": "Acessórios para procurar alimento",
+          "e4": "Material específico indicado na ficha da espécie"
+        }
+      },
+      "reptiles": {
+        "title": "Répteis",
+        "space": "Adapte o viveiro ao modo de vida: terrestre, arborícola ou aquático. Consulte as dimensões, a temperatura, a humidade e a iluminação documentadas para a espécie. Um réptil arborícola e uma tartaruga terrestre precisam de espaços diferentes.",
+        "setup": "Coloque o aquecimento numa extremidade para criar um gradiente térmico. Controle-o com um termóstato e proteja o animal do contacto direto. Escolha a iluminação e os UVB de acordo com as necessidades da espécie, assim como o substrato e os refúgios.",
+        "care": "Controle a temperatura e a humidade com instrumentos adequados. Garanta ventilação suficiente: reduzi-la para reter calor ou humidade pode causar problemas. Verifique o funcionamento do aquecimento e da iluminação e siga as instruções de manutenção da espécie.",
+        "equipment": {
+          "e0": "Viveiro adequado ao modo de vida",
+          "e1": "Aquecimento protegido e termóstato",
+          "e2": "Termómetro e higrómetro",
+          "e3": "Iluminação e UVB adequados à espécie",
+          "e4": "Substrato, refúgios e suportes adequados"
+        }
+      },
+      "amphibians": {
+        "title": "Anfíbios",
+        "space": "Identifique o meio adequado à espécie: terrestre, aquático ou misto. As necessidades de temperatura variam e não são iguais às de todos os répteis. Use os parâmetros da respetiva ficha para escolher um terrário, paludário ou aquário.",
+        "setup": "Prepare água de qualidade, refúgios e substrato adequado. As espécies terrestres precisam de um recipiente pouco profundo com água. Num meio aquático, uma filtragem adequada ajuda a manter a qualidade da água. Controle a humidade e a ventilação.",
+        "care": "Controle a temperatura e os parâmetros da água específicos da espécie. Evite substratos de cedro ou pinho, que contêm óleos tóxicos. Disponibilize esconderijos e um ambiente húmido adequado sem eliminar a ventilação.",
+        "equipment": {
+          "e0": "Terrário, paludário ou aquário, conforme a espécie",
+          "e1": "Refúgios e substrato adequado",
+          "e2": "Termómetro e controlo da humidade",
+          "e3": "Recipiente com água ou filtragem, conforme o meio",
+          "e4": "Testes de qualidade da água"
+        }
+      },
+      "freshwater": {
+        "title": "Aquário de água doce",
+        "space": "Escolha o volume e as dimensões de acordo com as espécies, o tamanho adulto e as respetivas necessidades. Não determine a população com uma simples regra de litros por peixe. Confirme também os parâmetros da água e a compatibilidade dos habitantes.",
+        "setup": "Instale um sistema de filtragem e faça o ciclo do aquário sem peixes antes de introduzir os animais. Trate a água nova com um produto adequado ao cloro. Se for necessário aquecimento, este deve ser controlado por termóstato e verificado com um termómetro.",
+        "care": "Analise a água para acompanhar os resíduos azotados. Faça a manutenção do filtro e as mudanças de água adequadas à instalação. Prepare a água nova a uma temperatura compatível com a do aquário para evitar uma alteração brusca.",
+        "equipment": {
+          "e0": "Aquário e filtragem adequada",
+          "e1": "Termómetro e aquecimento com termóstato, se necessário",
+          "e2": "Testes de amónio, nitritos e nitratos",
+          "e3": "Condicionador de água adequado",
+          "e4": "Material para mudanças de água e manutenção do filtro"
+        }
+      },
+      "marine": {
+        "title": "Aquário de água salgada",
+        "space": "Defina as espécies e o tipo de aquário: apenas peixes ou uma instalação com invertebrados. Confirme as necessidades de volume, temperatura, salinidade e luz de cada habitante. A água de osmose inversa é recomendada para instalações marinhas e essencial para invertebrados como os corais.",
+        "setup": "Prepare a filtragem biológica e faça o ciclo antes da chegada dos animais. Acompanhe o amónio e os nitritos: devem manter-se a zero antes de avançar gradualmente com a população. Use sal próprio para aquários marinhos, meça a salinidade com um densímetro ou refratómetro e organize a circulação da água sem zonas estagnadas, sobretudo com rocha viva ou corais.",
+        "care": "Analise o amónio, os nitritos, os nitratos e o pH. Com corais, controle também os fosfatos, o dKH, o cálcio e o magnésio. Prepare a água para as mudanças parciais num recipiente separado, onde é misturada e aquecida. Ajuste a frequência e o volume das mudanças à população e ao funcionamento do aquário.",
+        "equipment": {
+          "e0": "Aquário e filtragem biológica",
+          "e1": "Sal marinho para aquário e água de osmose inversa adequada",
+          "e2": "Densímetro ou refratómetro e termómetro",
+          "e3": "Testes de amónio, nitritos, nitratos e pH; testes para recife se houver corais",
+          "e4": "Circulação da água e iluminação adequadas aos habitantes"
+        }
+      },
+      "insects": {
+        "title": "Insetos",
+        "space": "Identifique a espécie antes de escolher o recinto: bichos-pau, louva-a-deus e baratas precisam de instalações diferentes. Para os bichos-pau, deixe espaço suficiente para a muda; a humidade necessária varia consoante a espécie.",
+        "setup": "Para os bichos-pau, prepare suportes e plantas alimentares adequadas e disponibilize alimento fresco. Ajuste a ventilação, a temperatura e a água às recomendações da espécie. Para outros insetos, siga as necessidades específicas.",
+        "care": "Acompanhe o estado das plantas e mantenha o recinto limpo. Evite a sobrelotação e deixe espaço para as mudas. Escolha e prepare as plantas para os bichos-pau de modo a evitar contaminantes.",
+        "equipment": {
+          "e0": "Recinto adequado à espécie",
+          "e1": "Suportes adequados à deslocação e à muda",
+          "e2": "Alimento ou plantas próprias da espécie",
+          "e3": "Controlo da temperatura e da humidade",
+          "e4": "Material de manutenção e fornecimento de água adequado"
+        }
+      },
+      "arachnids": {
+        "title": "Aracnídeos",
+        "space": "Escolha a instalação de acordo com a espécie e o seu modo de vida: uma tarântula arborícola e uma espécie escavadora têm necessidades diferentes. Antes de a receber, confirme o substrato, os refúgios e as condições de temperatura e humidade.",
+        "setup": "Para as tarântulas, prepare um refúgio e substrato adequados, um recipiente com água e um fecho seguro. Adapte a instalação às recomendações da espécie. Para os escorpiões, consulte as respetivas necessidades antes de escolher as condições de manutenção.",
+        "care": "Acompanhe a humidade e a temperatura próprias da espécie e disponibilize água de acordo com as suas necessidades. Verifique os refúgios e o fecho. Consulte as instruções específicas para a muda e a manutenção da instalação.",
+        "equipment": {
+          "e0": "Terrário seguro e adequado à espécie",
+          "e1": "Substrato adequado ao modo de vida",
+          "e2": "Refúgios e suportes adequados à espécie",
+          "e3": "Recipiente com água adequado",
+          "e4": "Controlo da temperatura e da humidade"
+        }
+      }
+    },
+    "planEquipment": "Colocar o material no seu plano",
+    "planPositions": {
+      "none": "Não colocado",
+      "left": "À esquerda",
+      "centre": "Ao centro",
+      "right": "À direita"
+    }
   }
 }

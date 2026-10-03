@@ -848,11 +848,31 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    height: calc(56px + env(safe-area-inset-top, 0px));
+    min-height: calc(56px + env(safe-area-inset-top, 0px));
+    flex-wrap: wrap;
     padding: env(safe-area-inset-top, 0px) max(var(--gutter), env(safe-area-inset-right, 0px)) 0
       max(var(--gutter), env(safe-area-inset-left, 0px));
+    padding-bottom: 8px;
     border-bottom: 1px solid var(--line-strong);
     background: var(--paper);
+  }
+
+  .app-shell__guide {
+    flex-basis: 100%;
+  }
+  .app-shell__guide-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 8px;
+    color: var(--accent-text);
+    border-radius: var(--radius-control);
+    text-decoration: none;
+  }
+  .app-shell__guide-link[aria-current='page'] {
+    background: var(--accent-soft);
+    font-weight: 600;
   }
 
   .app-shell__content {
@@ -1075,6 +1095,9 @@
   }
   .cv-photo img {
     object-fit: cover;
+  }
+  .cv-photo[data-fit='contain'] img {
+    object-fit: contain;
   }
   /* Grain argentique léger (bruit SVG en data URI, autorisé par la CSP img-src data:). */
   .cv-photo[data-treatment='grain']::after {

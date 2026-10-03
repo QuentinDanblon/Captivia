@@ -526,7 +526,8 @@
     "guest": "Ospite",
     "createAccount": "Crea un account",
     "community": "Comunità",
-    "soon": "Presto"
+    "soon": "Presto",
+    "guides": "Guide"
   },
   "grade": {
     "bronze": "Bronzo",
@@ -2496,5 +2497,212 @@
     "notFound": "Elemento non trovato. Potrebbe essere stato eliminato.",
     "tooManyRequests": "Troppi tentativi di fila. Attendi un minuto prima di riprovare.",
     "generic": "Qualcosa non ha funzionato. Riprova tra un istante."
+  },
+  "guides": {
+    "title": "Guide per l’allestimento",
+    "intro": "Prepara un ambiente adatto al tuo animale: spazio, attrezzatura, allestimento e manutenzione, con fonti per approfondire.",
+    "open": "Guida per l’allestimento",
+    "chooseSpecies": "Una guida per la tua specie",
+    "myAnimals": "I miei animali",
+    "chooseAnimal": "Scegli uno dei miei animali",
+    "animalsError": "Non è stato possibile caricare i tuoi animali.",
+    "searchSpecies": "Cerca una specie",
+    "searchHint": "Inserisci almeno due caratteri, in francese o con il nome scientifico.",
+    "search": "Cerca",
+    "loadError": "Impossibile caricare la guida per questa specie.",
+    "noResults": "Nessuna specie trovata. Prova il suo nome scientifico.",
+    "categoriesTitle": "Scegli una categoria",
+    "chooseWater": "Per questo pesce, scegli acqua dolce o marina in base al suo ambiente.",
+    "speciesIntro": "I parametri seguenti provengono dalla scheda della specie selezionata e permettono di personalizzare la guida della categoria.",
+    "noHabitat": "Le esigenze di habitat di questa specie non sono ancora documentate con una fonte.",
+    "noDimensions": "Le dimensioni minime di questa specie non sono indicate. Verificale prima di acquistare il suo habitat.",
+    "noEquipment": "L’elenco dell’attrezzatura per questa specie non è al momento disponibile.",
+    "fullSpecies": "Vedi la scheda completa della specie",
+    "categoryScope": "Queste indicazioni riguardano la categoria. Seleziona la tua specie per conoscerne dimensioni e parametri specifici.",
+    "installation": "Allestimento e manutenzione",
+    "checklist": "Attrezzatura da preparare",
+    "checklistHint": "Seleziona ciò che hai preparato. L’elenco resta disponibile finché la guida è aperta.",
+    "sources": "Fonti della guida",
+    "start": "Scegli una categoria o una specie per aprire la guida.",
+    "unknownCategory": "Scegli la categoria adatta a questa specie.",
+    "planTitle": "La tua pianta quotata",
+    "planIntro": "Inserisci le dimensioni del tuo allestimento e scegli dove posizionare il materiale. La pianta rappresenta le tue misure, ma non certifica dimensioni minime o una disposizione adatta alla specie.",
+    "length": "Lunghezza (cm)",
+    "width": "Larghezza (cm)",
+    "height": "Altezza (cm)",
+    "planHint": "Inserisci tre misure positive per visualizzare la pianta e il volume geometrico.",
+    "planTop": "Vista dall'alto",
+    "planFront": "Vista frontale",
+    "planVolume": "Volume geometrico: {litres} L",
+    "planVolumeHint": "Il volume reale dell’acqua sarà inferiore per via del substrato, degli arredi e dello spazio libero dal bordo. Questo calcolo non stabilisce quanti animali ospitare.",
+    "planAlt": "Pianta del tuo allestimento: {length} cm di lunghezza, {width} cm di larghezza e {height} cm di altezza.",
+    "diagramsTitle": "Capire l’acquario",
+    "filterDiagram": "Esempio di circolazione dell’acqua con un filtro esterno. Le frecce indicano il percorso dell’acqua; il disegno non stabilisce dimensioni né portata.",
+    "cycleDiagram": "Ciclo dell’azoto: i rifiuti producono ammoniaca, trasformata dai batteri in nitriti e poi nitrati. Lo schema originale riporta etichette in inglese.",
+    "categories": {
+      "dogs": {
+        "title": "Cani",
+        "space": "Prepara un luogo tranquillo, asciutto e senza correnti d’aria dove il tuo cane possa riposare. Deve potersi muovere e sdraiare comodamente. Tieni questa zona separata da quella in cui fa i bisogni.",
+        "setup": "Prepara una cuccia o un cuscino comodo, acqua e ciotole facilmente accessibili. Lascia un rifugio dove il cane possa ritirarsi se qualcosa lo spaventa. Scegli giochi sicuri e adatti alla sua taglia.",
+        "care": "Tieni puliti la cuccia e le ciotole. Offri occasioni di movimento e interazione in base all’età, alla salute e alle esigenze del cane. Osserva le sue abitudini e adatta attività e riposo.",
+        "equipment": {
+          "e0": "Cuccia o cuscino comodo",
+          "e1": "Ciotole per cibo e acqua",
+          "e2": "Giochi sicuri e adatti alla taglia del cane",
+          "e3": "Zona tranquilla per il riposo e un rifugio",
+          "e4": "Materiale per pulire la cuccia e le ciotole"
+        }
+      },
+      "cats": {
+        "title": "Gatti",
+        "space": "Organizza zone per il riposo, il cibo e i bisogni. Tieni acqua e cibo lontani dalla lettiera. Offri nascondigli e punti sopraelevati in cui il tuo gatto possa sentirsi al sicuro.",
+        "setup": "Aggiungi un tiragraffi stabile su cui possa stirarsi, una cuccia e dei giochi. Lascia le sue risorse accessibili, senza costringerlo ad avvicinarsi a un altro animale o a una situazione che lo spaventa.",
+        "care": "Tieni pulita la lettiera e lascia sempre a disposizione acqua pulita. Proponi regolarmente giochi e attività, soprattutto se il gatto vive in casa. Lascialo dormire e nascondersi senza disturbarlo.",
+        "equipment": {
+          "e0": "Cuccia e nascondigli",
+          "e1": "Tiragraffi stabile",
+          "e2": "Lettiera e materiale per la pulizia",
+          "e3": "Ciotole separate dalla lettiera",
+          "e4": "Ripiani sopraelevati e giochi"
+        }
+      },
+      "rodents": {
+        "title": "Roditori",
+        "space": "Scegli prima la specie: criceti, ratti, cincillà e cavie hanno esigenze di habitat diverse. Verifica dimensioni, spazio per muoversi e condizioni di vita prima di scegliere una gabbia o un recinto.",
+        "setup": "Prepara nascondigli, lettiera adatta e attività specifiche per la specie. Per un criceto, la lettiera deve permettere di scavare. Per una cavia, tunnel e oggetti di legno non trattato possono incoraggiare l’esplorazione e il rosicchiamento.",
+        "care": "Rimuovi lo sporco e mantieni asciutta la lettiera. Consulta la scheda della specie per le esigenze sociali: le indicazioni per le cavie non valgono per tutti i criceti. Adatta l’ambiente all’animale, senza riempire la gabbia di accessori.",
+        "equipment": {
+          "e0": "Gabbia o recinto adatto alla specie",
+          "e1": "Lettiera e materiali per il nido adatti",
+          "e2": "Nascondigli e tunnel adatti",
+          "e3": "Attività e oggetti da rosicchiare secondo la specie",
+          "e4": "Materiale per la pulizia"
+        }
+      },
+      "rabbits": {
+        "title": "Conigli",
+        "space": "Abbina un rifugio a uno spazio accessibile per l’attività fisica. Prevedi zone distinte per mangiare, riposare e fare i bisogni. Uno spazio interno deve essere sicuro; uno spazio esterno va protetto dai predatori e dalle intemperie. Per due conigli di taglia media, la RSPCA raccomanda almeno 3 m × 2 m di superficie e 1 m di altezza, includendo rifugio e area per l’attività fisica.",
+        "setup": "Scegli un pavimento antiscivolo, un rifugio asciutto e ventilato, nascondigli e occasioni per scavare. Lascia abbastanza spazio perché possano muoversi liberamente. La lettiera deve essere adatta e priva di polvere.",
+        "care": "Rimuovi lo sporco e pulisci regolarmente tutto l’allestimento. Usa prodotti non tossici e lasciali asciugare prima di rimettere i conigli. Conserva una piccola quantità di lettiera pulita già usata per mantenere un odore familiare.",
+        "equipment": {
+          "e0": "Recinto sicuro per l’attività fisica",
+          "e1": "Rifugio asciutto e ventilato",
+          "e2": "Nascondigli e tunnel",
+          "e3": "Lettiera adatta e priva di polvere",
+          "e4": "Prodotti per la pulizia non tossici"
+        }
+      },
+      "mammals": {
+        "title": "Altri mammiferi",
+        "space": "Scegli la specie prima di allestire il suo spazio. Furetti, ricci, cavalli e pecore hanno esigenze diverse. Consulta nella scheda i dati sull’habitat e l’attrezzatura consigliata.",
+        "setup": "Per un cavallo, prepara uno spazio esterno per l’attività fisica e un riparo da sole, vento e temperature estreme. Il box deve essere pulito e ventilato, senza correnti d’aria. Per le altre specie, segui le indicazioni specifiche.",
+        "care": "Se il cavallo vive in box, mantieni pulita una lettiera di buona qualità e priva di polvere. Per gli altri mammiferi, consulta nella scheda le esigenze di riposo, arricchimento e manutenzione prima di stabilire una routine.",
+        "equipment": {
+          "e0": "Allestimento con dimensioni adatte alla specie",
+          "e1": "Riparo o zona di riposo secondo la specie",
+          "e2": "Attrezzatura indicata nella scheda della specie",
+          "e3": "Attrezzature adatte per attività fisica o arricchimento",
+          "e4": "Materiale per la manutenzione adatto all’allestimento"
+        }
+      },
+      "birds": {
+        "title": "Uccelli",
+        "space": "Scegli gabbia o voliera in base alle esigenze della specie. Verifica nella scheda le dimensioni e la distanza tra le sbarre. Considera anche lo spazio per le attività e la disposizione degli accessori.",
+        "setup": "Prepara posatoi di diversi diametri con rami di legno sicuro e non trattato. Proponi attività di ricerca del cibo: un tubo di cartone con carta e cibo nascosto può offrire stimoli.",
+        "care": "Verifica che rami, giochi e accessori siano sicuri prima di sistemarli. Scegli legni adatti, non trattati né irrorati. Adatta le attività e l’ambiente alle esigenze documentate del tuo uccello.",
+        "equipment": {
+          "e0": "Gabbia o voliera adatta alla specie",
+          "e1": "Posatoi di diversi diametri",
+          "e2": "Rami di legno sicuro e non trattato",
+          "e3": "Accessori per la ricerca del cibo",
+          "e4": "Attrezzatura specifica indicata nella scheda della specie"
+        }
+      },
+      "reptiles": {
+        "title": "Rettili",
+        "space": "Adatta il terrario al modo di vita della specie: terrestre, arboricolo o acquatico. Consulta le dimensioni e i dati documentati su temperatura, umidità e illuminazione. Un rettile arboricolo e una tartaruga terrestre hanno bisogno di spazi diversi.",
+        "setup": "Posiziona il riscaldatore a un’estremità per creare un gradiente termico. Regolalo con un termostato e impedisci il contatto diretto con l’animale. Scegli illuminazione e UVB in base alla specie, oltre a substrato e rifugi adatti.",
+        "care": "Controlla temperatura e umidità con strumenti adatti. Mantieni una buona ventilazione: ridurla per trattenere calore o umidità può causare problemi. Verifica il funzionamento di riscaldamento e illuminazione e segui le indicazioni di manutenzione della specie.",
+        "equipment": {
+          "e0": "Terrario adatto al modo di vita",
+          "e1": "Riscaldamento protetto e termostato",
+          "e2": "Termometro e igrometro",
+          "e3": "Illuminazione e UVB secondo la specie",
+          "e4": "Substrato, rifugi e supporti adatti"
+        }
+      },
+      "amphibians": {
+        "title": "Anfibi",
+        "space": "Individua l’ambiente adatto alla specie: terrestre, acquatico o misto. Le sue esigenze di temperatura non sono quelle di tutti i rettili. Usa i parametri riportati nella scheda per scegliere tra terrario, paludario e acquario.",
+        "setup": "Prepara acqua di buona qualità, rifugi e un substrato adatto. Le specie terrestri hanno bisogno di un recipiente d’acqua poco profondo. In un ambiente acquatico, una filtrazione adeguata aiuta a mantenere la qualità dell’acqua. Controlla umidità e ventilazione.",
+        "care": "Controlla la temperatura e i parametri dell’acqua specifici della specie. Evita substrati di cedro o pino, che contengono oli tossici. Mantieni rifugi e umidità adeguati senza ridurre la ventilazione.",
+        "equipment": {
+          "e0": "Terrario, paludario o acquario secondo la specie",
+          "e1": "Rifugi e substrato adatto",
+          "e2": "Termometro e controllo dell’umidità",
+          "e3": "Recipiente per l’acqua o filtrazione secondo l’ambiente",
+          "e4": "Test per la qualità dell’acqua"
+        }
+      },
+      "freshwater": {
+        "title": "Acquario d'acqua dolce",
+        "space": "Scegli volume e dimensioni in base alle specie, alla taglia adulta e alle loro esigenze. Non stabilire quanti pesci ospitare con una semplice regola basata sui litri per pesce. Controlla anche i parametri dell’acqua e la compatibilità tra gli ospiti.",
+        "setup": "Installa un filtro e completa il ciclo biologico senza pesci prima di introdurre gli animali. Tratta l’acqua nuova con un prodotto adatto a neutralizzare il cloro. Se serve il riscaldamento, regolalo con un termostato e controllalo con un termometro.",
+        "care": "Misura i composti azotati nell’acqua. Mantieni il filtro ed effettua i cambi d’acqua in base alle esigenze dell’allestimento. Prepara l’acqua nuova a una temperatura compatibile con quella dell’acquario, per evitare sbalzi.",
+        "equipment": {
+          "e0": "Acquario e filtrazione adatti",
+          "e1": "Termometro e riscaldatore con termostato, se necessario",
+          "e2": "Test per ammoniaca, nitriti e nitrati",
+          "e3": "Trattamento adatto per l’acqua",
+          "e4": "Attrezzatura per il cambio dell’acqua e la manutenzione del filtro"
+        }
+      },
+      "marine": {
+        "title": "Acquario di acqua di mare",
+        "space": "Definisci le specie e il tipo di acquario: solo pesci oppure anche invertebrati. Verifica le esigenze di volume, temperatura, salinità e luce di tutti gli ospiti. L’acqua ottenuta per osmosi inversa è consigliata per gli acquari marini ed è essenziale per invertebrati come i coralli.",
+        "setup": "Prepara la filtrazione biologica e completa il ciclo prima di introdurre gli animali. Controlla ammoniaca e nitriti: devono restare a zero prima di proseguire con l’inserimento graduale degli ospiti. Usa sale per acquari marini, misura la salinità con un densimetro o un rifrattometro e mantieni un buon movimento dell’acqua, senza zone stagnanti, soprattutto con rocce vive o coralli.",
+        "care": "Misura ammoniaca, nitriti, nitrati e pH. Se ospiti coralli, controlla anche fosfati, dKH, calcio e magnesio. Prepara l’acqua per i cambi parziali in un recipiente separato, dove puoi miscelarla e riscaldarla. Adatta frequenza e volume dei cambi agli ospiti e al funzionamento dell’acquario.",
+        "equipment": {
+          "e0": "Acquario e filtrazione biologica",
+          "e1": "Sale marino per acquario e acqua da osmosi inversa adatta",
+          "e2": "Densimetro o rifrattometro e termometro",
+          "e3": "Test per ammoniaca, nitriti, nitrati e pH; test per acquario di barriera in presenza di coralli",
+          "e4": "Movimento dell’acqua e illuminazione adatti agli ospiti"
+        }
+      },
+      "insects": {
+        "title": "insetti",
+        "space": "Identifica la specie prima di scegliere il recinto: insetti stecco, mantidi e blatte hanno esigenze diverse. Gli insetti stecco hanno bisogno di spazio sufficiente per la muta; l’umidità necessaria varia secondo la specie.",
+        "setup": "Per gli insetti stecco, prepara supporti e piante adatte come alimento e lascia a disposizione cibo fresco. Regola ventilazione, temperatura e apporto d’acqua secondo le indicazioni della specie. Per gli altri insetti, segui le loro esigenze specifiche.",
+        "care": "Controlla lo stato delle piante e la pulizia del recinto. Evita il sovraffollamento e lascia spazio per le mute. Scegli e prepara le piante destinate agli insetti stecco in modo da evitare contaminanti.",
+        "equipment": {
+          "e0": "Recinto adatto alla specie",
+          "e1": "Supporti adatti agli spostamenti e alla muta",
+          "e2": "Alimenti o piante specifici per la specie",
+          "e3": "Controllo di temperatura e umidità",
+          "e4": "Materiale per la manutenzione e apporto d’acqua adeguato"
+        }
+      },
+      "arachnids": {
+        "title": "Aracnidi",
+        "space": "Scegli l’allestimento in base alla specie e al suo modo di vita: una tarantola arboricola e una specie scavatrice hanno esigenze diverse. Verifica substrato, rifugi, temperatura e umidità prima di ospitarla.",
+        "setup": "Per le tarantole, prepara un rifugio, un substrato adatto, un recipiente d’acqua e una chiusura sicura. Segui le indicazioni specifiche per la specie. Per gli scorpioni, informati sulle loro esigenze prima di definire le condizioni di allevamento.",
+        "care": "Controlla temperatura e umidità specifiche della specie e lascia acqua a disposizione secondo le sue esigenze. Verifica rifugi e chiusura. Segui le indicazioni specifiche per la muta e la manutenzione dell’allestimento.",
+        "equipment": {
+          "e0": "Terrario sicuro e adatto alla specie",
+          "e1": "Substrato adatto al modo di vita",
+          "e2": "Rifugi e supporti secondo la specie",
+          "e3": "Recipiente per l’acqua adatto",
+          "e4": "Controllo di temperatura e umidità"
+        }
+      }
+    },
+    "planEquipment": "Posiziona il materiale sulla tua pianta",
+    "planPositions": {
+      "none": "Non posizionato",
+      "left": "A sinistra",
+      "centre": "Al centro",
+      "right": "A destra"
+    }
   }
 }

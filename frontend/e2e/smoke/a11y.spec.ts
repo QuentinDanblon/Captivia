@@ -11,6 +11,9 @@ const PUBLIC_PAGES = [
   '/verifier-email',
   '/species/2435099',
   '/especes',
+  '/guides',
+  '/guides?category=reptiles',
+  '/guides?category=marine',
   '/mentions-legales',
   '/confidentialite',
   '/cgu',
@@ -101,7 +104,7 @@ test.describe('Accessibilité (axe-core)', () => {
   test.describe('sombre', () => {
     test.use({ colorScheme: 'dark' });
 
-    for (const path of ['/', '/login', '/species/2435099', '/mentions-legales', '/animal-public/kaa-e2e']) {
+    for (const path of ['/', '/login', '/species/2435099', '/mentions-legales', '/animal-public/kaa-e2e', '/guides?category=reptiles', '/guides?category=marine']) {
       test(`${path} (sombre) : aucune violation sérieuse`, async ({ page }) => {
         await page.goto(path);
         await waitForContent(page);

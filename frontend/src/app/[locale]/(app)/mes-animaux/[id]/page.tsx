@@ -1,5 +1,7 @@
 'use client';
 
+import { guidePath } from '@/lib/guides';
+
 import { useState, useEffect, useRef, useCallback, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
@@ -824,6 +826,7 @@ export default function AnimalDetailPage({
                     <li>{t('animals.defaultCareTips.illness')}</li>
                   </ul>
                 )}
+                <Link href={guidePath(animal.speciesId)} className={buttonClasses({ variant: 'secondary', className: 'justify-self-start' })}>{t('guides.open')}</Link>
                 <Link href={speciesPath(animal.speciesId)} className={buttonClasses({ variant: 'quiet', size: 'sm', className: 'justify-self-start' })}>
                   {t('species.viewFullGuide')}
                 </Link>

@@ -77,3 +77,11 @@ describe('ui/Button', () => {
     expect(link.className).toContain('mt-4');
   });
 });
+
+
+it('autorise un libellé long sans conserver la classe qui empêche le retour à la ligne', () => {
+  render(<Button wrap>Une longue catégorie</Button>);
+  expect(screen.getByRole('button')).toHaveClass('whitespace-normal', 'wrap-anywhere');
+  expect(screen.getByRole('button')).not.toHaveClass('whitespace-nowrap');
+  expect(screen.getByRole('button')).not.toHaveAttribute('wrap');
+});

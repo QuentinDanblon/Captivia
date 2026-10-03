@@ -30,6 +30,12 @@ describe('ui/Figure', () => {
     expect(container.querySelector('figcaption')).toBeNull();
   });
 
+  it('schéma : conserve son ratio dans le cadre avec contain', () => {
+    const { container } = render(<Figure src="/images/guides/aquarium-filter-800.webp" alt="Filtre extérieur d’aquarium" fit="contain" credit={credit} />);
+    expect(container.querySelector('.cv-photo')).toHaveAttribute('data-fit', 'contain');
+    expect(screen.getByRole('img', { name: 'Filtre extérieur d’aquarium' })).toBeInTheDocument();
+  });
+
   it('erreur de chargement : repli en silhouette', () => {
     const { container } = render(<Figure src="/images/absente.jpg" alt="Gecko" fallbackKind="reptile" credit={credit} />);
     fireEvent.error(screen.getByRole('img', { name: 'Gecko' }));

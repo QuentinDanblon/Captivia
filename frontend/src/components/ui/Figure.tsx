@@ -36,6 +36,8 @@ interface FigureBase {
   priority?: boolean;
   /** Cadrage dans le ratio (`object-position`), ex. `70% 40%` pour garder une tête dans le cadre. */
   objectPosition?: string;
+  /** Ajustement de l'image dans le cadre (`cover` par défaut, `contain` pour les schémas). */
+  fit?: 'cover' | 'contain';
   /**
    * Où afficher le crédit : `caption` (défaut, sous la photo), `overlay` (cartouche discret posé
    * dans un coin de la photo, toujours lisible et cliquable — grandes photos de landing) ou
@@ -144,6 +146,7 @@ export default function Figure(props: FigureProps) {
     sizes,
     priority = false,
     objectPosition,
+    fit = 'cover',
     creditPlacement = 'caption',
     creditCorner = 'bottom',
     className,
@@ -158,7 +161,7 @@ export default function Figure(props: FigureProps) {
 
   return (
     <figure className={cx('m-0 grid gap-2', className)}>
-      <div className={cx('cv-photo', RATIO_CLASS[ratio])} data-treatment={showPhoto ? treatment : 'none'}>
+      <div className={cx('cv-photo', RATIO_CLASS[ratio])} data-treatment={showPhoto ? treatment : 'none'} data-fit={fit}>
         {showPhoto && props.src && responsive ? (
           <picture>
             {props.sources?.map((source) => (

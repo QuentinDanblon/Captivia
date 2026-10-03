@@ -526,7 +526,8 @@
     "guest": "Invité",
     "createAccount": "Créer un compte",
     "community": "Communauté",
-    "soon": "Bientôt"
+    "soon": "Bientôt",
+    "guides": "Guides"
   },
   "grade": {
     "bronze": "Bronze",
@@ -2496,5 +2497,212 @@
     "notFound": "Cet élément est introuvable. Il a peut-être été supprimé.",
     "tooManyRequests": "Trop de tentatives d'affilée. Patientez une minute avant de réessayer.",
     "generic": "Une erreur est survenue. Réessayez dans un instant."
+  },
+  "guides": {
+    "title": "Guides d’aménagement",
+    "intro": "Préparez un lieu de vie adapté à votre animal : espace, matériel, installation et entretien, avec des sources pour aller plus loin.",
+    "open": "Guide d’aménagement",
+    "chooseSpecies": "Un guide pour votre espèce",
+    "myAnimals": "Mes animaux",
+    "chooseAnimal": "Choisir un de mes animaux",
+    "animalsError": "Vos animaux n’ont pas pu être chargés.",
+    "searchSpecies": "Rechercher une espèce",
+    "searchHint": "Saisissez au moins deux caractères, en français ou avec le nom scientifique.",
+    "search": "Rechercher",
+    "loadError": "Le guide de cette espèce n’a pas pu être chargé.",
+    "noResults": "Aucune espèce trouvée. Essayez son nom scientifique.",
+    "categoriesTitle": "Choisir une catégorie",
+    "chooseWater": "Pour ce poisson, choisissez eau douce ou eau de mer selon son milieu de vie.",
+    "speciesIntro": "Les paramètres ci-dessous viennent de la fiche de l’espèce sélectionnée. Ils permettent de préciser le guide de sa catégorie.",
+    "noHabitat": "Les besoins d’habitat de cette espèce ne sont pas encore documentés avec une source.",
+    "noDimensions": "Dimensions minimales non renseignées pour cette espèce. Faites-les confirmer avant d’acheter son habitat.",
+    "noEquipment": "La liste de matériel de cette espèce est momentanément indisponible.",
+    "fullSpecies": "Voir la fiche complète de l’espèce",
+    "categoryScope": "Ces repères concernent la catégorie. Sélectionnez votre espèce pour connaître ses dimensions et ses paramètres propres.",
+    "installation": "Installer et entretenir",
+    "checklist": "Matériel à préparer",
+    "checklistHint": "Cochez ce que vous avez préparé. Cette liste reste disponible tant que ce guide est ouvert.",
+    "sources": "Sources du guide",
+    "start": "Choisissez une catégorie ou une espèce pour ouvrir son guide.",
+    "unknownCategory": "Choisissez la catégorie qui correspond à cette espèce.",
+    "planTitle": "Votre plan coté",
+    "planIntro": "Reportez les dimensions de votre installation et choisissez les emplacements du matériel. Ce plan représente vos choix, pas une dimension minimale ni un aménagement validé pour l’espèce.",
+    "length": "Longueur (cm)",
+    "width": "Largeur (cm)",
+    "height": "Hauteur (cm)",
+    "planHint": "Saisissez trois mesures positives pour afficher le plan et son volume géométrique.",
+    "planTop": "Vue de dessus",
+    "planFront": "Vue de face",
+    "planVolume": "Volume géométrique : {litres} L",
+    "planVolumeHint": "Le volume d’eau réel sera inférieur avec le substrat, les décors et la marge sous le bord. Ce calcul ne détermine pas le nombre d’animaux à accueillir.",
+    "planAlt": "Plan coté de votre installation : {length} cm de long, {width} cm de large et {height} cm de haut.",
+    "diagramsTitle": "Comprendre l’aquarium",
+    "filterDiagram": "Un exemple de circulation de l’eau avec un filtre extérieur. Les flèches indiquent le trajet de l’eau ; le dessin n’impose ni dimensions ni débit.",
+    "cycleDiagram": "Cycle de l’azote : les déchets produisent de l’ammoniac, transformé par les bactéries en nitrites puis en nitrates. Le schéma original comporte des légendes en anglais.",
+    "categories": {
+      "dogs": {
+        "title": "Chiens",
+        "space": "Prévoyez un endroit calme, sec et sans courant d’air pour le repos. Votre chien doit pouvoir s’y déplacer et s’allonger confortablement. Séparez cet espace de l’endroit où il fait ses besoins.",
+        "setup": "Installez un panier ou un couchage confortable, de l’eau et des gamelles accessibles. Gardez un refuge où votre chien peut se retirer des situations qui l’effraient. Choisissez des jouets sûrs et adaptés.",
+        "care": "Maintenez le couchage et les gamelles propres. Prévoyez des possibilités d’exercice et d’interaction selon l’âge, la santé et les besoins de votre chien. Observez ses habitudes pour adapter les activités et le repos.",
+        "equipment": {
+          "e0": "Panier ou couchage confortable",
+          "e1": "Gamelles pour la nourriture et l’eau",
+          "e2": "Jouets sûrs et adaptés au chien",
+          "e3": "Espace de repos calme et refuge",
+          "e4": "Matériel de nettoyage du couchage et des gamelles"
+        }
+      },
+      "cats": {
+        "title": "Chats",
+        "space": "Organisez des zones pour le repos, l’alimentation et les besoins. Placez l’eau et la nourriture à distance de la litière. Offrez des cachettes et des emplacements en hauteur où votre chat se sent en sécurité.",
+        "setup": "Ajoutez un griffoir stable permettant au chat de s’étirer, un couchage et des jouets. Les ressources doivent rester accessibles sans devoir s’approcher d’un animal ou d’une situation qui lui fait peur.",
+        "care": "Entretenez la litière et gardez de l’eau propre disponible. Proposez régulièrement du jeu et des activités, notamment si votre chat reste à l’intérieur. Laissez-le dormir et se cacher sans le déranger.",
+        "equipment": {
+          "e0": "Couchage et cachettes",
+          "e1": "Griffoir stable",
+          "e2": "Litière et matériel de nettoyage",
+          "e3": "Gamelles séparées de la litière",
+          "e4": "Supports en hauteur et jouets"
+        }
+      },
+      "rodents": {
+        "title": "Rongeurs",
+        "space": "Choisissez d’abord l’espèce : un hamster, un rat, un chinchilla et un cobaye n’ont pas le même habitat. Vérifiez ses dimensions, ses besoins de déplacement et ses conditions de vie avant de choisir la cage ou l’enclos.",
+        "setup": "Préparez des cachettes, une litière adaptée et des activités propres à l’espèce. Pour un hamster, la litière doit permettre de creuser. Pour un cobaye, des tunnels et des objets en bois non traité peuvent encourager l’exploration et le rongement.",
+        "care": "Retirez les éléments souillés et gardez la litière sèche. Vérifiez les besoins sociaux dans la fiche de l’espèce : les recommandations du cobaye ne s’appliquent pas à tous les hamsters. Adaptez l’aménagement à l’animal plutôt que de remplir la cage d’accessoires.",
+        "equipment": {
+          "e0": "Cage ou enclos adapté à l’espèce",
+          "e1": "Litière et matériaux de nidification adaptés",
+          "e2": "Cachettes et tunnels adaptés",
+          "e3": "Activités et objets à ronger selon l’espèce",
+          "e4": "Matériel de nettoyage"
+        }
+      },
+      "rabbits": {
+        "title": "Lapins",
+        "space": "Associez un abri et un espace d’exercice accessibles. Prévoyez des zones distinctes pour manger, se reposer et faire les besoins. Un espace intérieur doit être sécurisé, et un espace extérieur protégé des prédateurs et des intempéries. Pour deux lapins de taille moyenne, la RSPCA recommande au moins 3 m × 2 m au sol et 1 m de hauteur, abri et espace d’exercice compris.",
+        "setup": "Choisissez un sol non glissant, un abri sec et ventilé, des cachettes et des occasions de fouiller. Laissez assez de place pour bouger librement. La litière doit être adaptée et sans poussière.",
+        "care": "Retirez les souillures et nettoyez l’ensemble de l’installation régulièrement. Utilisez des produits non toxiques et laissez sécher avant de réinstaller les lapins. Gardez une petite quantité de litière propre déjà utilisée pour conserver une odeur familière.",
+        "equipment": {
+          "e0": "Enclos d’exercice sécurisé",
+          "e1": "Abri sec et ventilé",
+          "e2": "Cachettes et tunnels",
+          "e3": "Litière adaptée sans poussière",
+          "e4": "Produits de nettoyage non toxiques"
+        }
+      },
+      "mammals": {
+        "title": "Autres mammifères",
+        "space": "Sélectionnez votre espèce avant de choisir son installation. Les besoins d’un furet, d’un hérisson, d’un cheval ou d’un mouton demandent des aménagements différents. Consultez les données d’habitat et la liste de matériel de sa fiche.",
+        "setup": "Pour un cheval, prévoyez un espace extérieur pour l’exercice et un abri contre le soleil, le vent et les températures extrêmes. Un box doit être propre, ventilé et sans courant d’air. Pour une autre espèce, suivez ses recommandations propres.",
+        "care": "Pour un cheval en box, maintenez une litière de bonne qualité, sans poussière et propre. Pour les autres mammifères, vérifiez les besoins de repos, d’enrichissement et d’entretien de leur fiche avant de définir une routine.",
+        "equipment": {
+          "e0": "Installation dimensionnée pour l’espèce",
+          "e1": "Abri ou zone de repos selon l’espèce",
+          "e2": "Matériel indiqué dans la fiche espèce",
+          "e3": "Équipements d’exercice ou d’enrichissement adaptés",
+          "e4": "Matériel d’entretien adapté à l’installation"
+        }
+      },
+      "birds": {
+        "title": "Oiseaux",
+        "space": "Choisissez la cage ou la volière à partir des besoins de votre espèce. Vérifiez les dimensions et l’espacement des barreaux dans sa fiche. Pensez aussi à l’espace consacré aux activités et à l’emplacement des accessoires.",
+        "setup": "Préparez des perchoirs de différents diamètres avec des branches de bois sûrs, non traités. Ajoutez des activités de recherche de nourriture : un tube en carton rempli de papier avec de la nourriture cachée peut servir d’enrichissement.",
+        "care": "Vérifiez la sécurité des branches, des jouets et des accessoires avant de les installer. Choisissez des bois adaptés, sans traitement ni pulvérisation. Ajustez les activités et les conditions de l’installation aux besoins documentés de votre oiseau.",
+        "equipment": {
+          "e0": "Cage ou volière adaptée à l’espèce",
+          "e1": "Perchoirs de différents diamètres",
+          "e2": "Branches de bois sûr non traité",
+          "e3": "Accessoires de recherche de nourriture",
+          "e4": "Matériel spécifique indiqué dans la fiche espèce"
+        }
+      },
+      "reptiles": {
+        "title": "Reptiles",
+        "space": "Adaptez le vivarium au mode de vie : terrestre, arboricole ou aquatique. Consultez les dimensions, la température, l’humidité et l’éclairage documentés de l’espèce. Un reptile arboricole et une tortue terrestre demandent des espaces différents.",
+        "setup": "Placez le chauffage adapté à une extrémité pour créer un gradient thermique. Contrôlez-le par thermostat et protégez l’animal du contact direct. Choisissez l’éclairage et les UVB selon les besoins de l’espèce, ainsi que le substrat et les refuges.",
+        "care": "Contrôlez les températures et l’humidité avec des instruments adaptés. Gardez une ventilation suffisante : la réduire pour retenir la chaleur ou l’humidité peut provoquer des problèmes. Vérifiez le fonctionnement du chauffage et de l’éclairage et suivez les consignes d’entretien de l’espèce.",
+        "equipment": {
+          "e0": "Vivarium adapté au mode de vie",
+          "e1": "Chauffage protégé et thermostat",
+          "e2": "Thermomètre et hygromètre",
+          "e3": "Éclairage et UVB selon l’espèce",
+          "e4": "Substrat, refuges et supports adaptés"
+        }
+      },
+      "amphibians": {
+        "title": "Amphibiens",
+        "space": "Identifiez le milieu adapté à l’espèce : terrestre, aquatique ou mixte. Les besoins de température ne sont pas ceux de tous les reptiles. Utilisez les paramètres de sa fiche pour choisir le terrarium, le paludarium ou l’aquarium.",
+        "setup": "Prévoyez une eau de qualité, des refuges et un substrat adapté. Les espèces terrestres ont besoin d’un récipient d’eau peu profond. Pour un milieu aquatique, une filtration adaptée aide à maintenir la qualité de l’eau. Vérifiez l’humidité et la ventilation.",
+        "care": "Contrôlez la température et les paramètres d’eau propres à l’espèce. Évitez les substrats de cèdre ou de pin qui contiennent des huiles toxiques. Gardez des cachettes et un milieu humide adaptés sans supprimer l’aération.",
+        "equipment": {
+          "e0": "Terrarium, paludarium ou aquarium selon l’espèce",
+          "e1": "Refuges et substrat adapté",
+          "e2": "Thermomètre et contrôle de l’humidité",
+          "e3": "Récipient d’eau ou filtration selon le milieu",
+          "e4": "Tests de qualité de l’eau"
+        }
+      },
+      "freshwater": {
+        "title": "Aquarium d’eau douce",
+        "space": "Choisissez le volume et les dimensions selon les espèces, leur taille adulte et leurs besoins. Ne déduisez pas la population d’une simple règle de litres par poisson. Vérifiez aussi les paramètres de l’eau et la compatibilité des habitants.",
+        "setup": "Installez une filtration et effectuez un cyclage sans poissons avant l’arrivée des animaux. Traitez l’eau neuve avec un produit adapté au chlore. Si un chauffage est nécessaire, il doit être contrôlé par thermostat et vérifié avec un thermomètre.",
+        "care": "Testez l’eau pour suivre les déchets azotés. Entretenez le filtre et effectuez les changements d’eau adaptés à votre installation. Préparez l’eau neuve à une température compatible avec celle du bac pour éviter un changement brutal.",
+        "equipment": {
+          "e0": "Aquarium et filtration adaptée",
+          "e1": "Thermomètre et chauffage thermostaté si nécessaire",
+          "e2": "Tests d’ammoniac, nitrites et nitrates",
+          "e3": "Traitement de l’eau adapté",
+          "e4": "Matériel de changement d’eau et entretien du filtre"
+        }
+      },
+      "marine": {
+        "title": "Aquarium d’eau de mer",
+        "space": "Définissez les espèces et le type de bac : poissons seuls ou installation avec invertébrés. Vérifiez les besoins de volume, de température, de salinité et de lumière de chacun. L’eau osmosée est recommandée pour les installations marines et essentielle pour les invertébrés comme les coraux.",
+        "setup": "Préparez la filtration biologique et faites le cyclage avant l’arrivée des animaux. Suivez l’ammoniac et les nitrites : ils doivent rester à zéro avant de poursuivre le peuplement progressivement. Utilisez du sel pour aquarium marin, mesurez la salinité avec un densimètre ou un réfractomètre et organisez le brassage sans zones d’eau stagnante, surtout avec des pierres vivantes ou des coraux.",
+        "care": "Testez l’ammoniac, les nitrites, les nitrates et le pH. Avec des coraux, contrôlez aussi les phosphates, le dKH, le calcium et le magnésium. Préparez l’eau des changements partiels dans un récipient séparé, où elle est mélangée et chauffée. Adaptez leur fréquence et leur volume à la population et au fonctionnement du bac.",
+        "equipment": {
+          "e0": "Aquarium et filtration biologique",
+          "e1": "Sel marin pour aquarium et eau osmosée adaptée",
+          "e2": "Densimètre ou réfractomètre et thermomètre",
+          "e3": "Tests d’ammoniac, nitrites, nitrates et pH ; tests récifaux si coraux",
+          "e4": "Brassage et éclairage adaptés aux habitants"
+        }
+      },
+      "insects": {
+        "title": "Insectes",
+        "space": "Identifiez l’espèce avant de choisir son enceinte : phasmes, mantes et blattes ne demandent pas le même aménagement. Pour les phasmes, gardez suffisamment d’espace pour la mue ; l’humidité nécessaire varie selon l’espèce.",
+        "setup": "Pour les phasmes, préparez des supports et des plantes alimentaires adaptées, avec de la nourriture fraîche disponible. Ajustez la ventilation, la température et l’apport d’eau aux recommandations de l’espèce. Pour les autres insectes, utilisez leurs besoins propres.",
+        "care": "Surveillez l’état des végétaux et la propreté de l’enceinte. Évitez le surpeuplement et laissez de la place pendant les mues. Les plantes destinées aux phasmes doivent être choisies et préparées pour éviter les contaminants.",
+        "equipment": {
+          "e0": "Enceinte adaptée à l’espèce",
+          "e1": "Supports adaptés pour les déplacements et la mue",
+          "e2": "Nourriture ou plantes alimentaires propres à l’espèce",
+          "e3": "Contrôle de la température et de l’humidité",
+          "e4": "Matériel d’entretien et apport d’eau adapté"
+        }
+      },
+      "arachnids": {
+        "title": "Arachnides",
+        "space": "Choisissez l’installation selon l’espèce et son mode de vie : une mygale arboricole et une espèce fouisseuse ont des besoins différents. Vérifiez le substrat, les refuges et les conditions de température et d’humidité avant de l’accueillir.",
+        "setup": "Pour les mygales, prévoyez un refuge et un substrat adaptés, un récipient d’eau et une fermeture sûre. Adaptez l’aménagement aux recommandations de l’espèce. Pour les scorpions, consultez leurs besoins propres avant de choisir les conditions de maintien.",
+        "care": "Suivez l’humidité et la température propres à l’espèce et gardez de l’eau disponible selon ses besoins. Vérifiez les refuges et la fermeture. Consultez les consignes spécifiques pour la mue et l’entretien de l’installation.",
+        "equipment": {
+          "e0": "Terrarium sécurisé adapté à l’espèce",
+          "e1": "Substrat adapté au mode de vie",
+          "e2": "Refuges et supports selon l’espèce",
+          "e3": "Récipient d’eau adapté",
+          "e4": "Contrôle de température et d’humidité"
+        }
+      }
+    },
+    "planEquipment": "Placer le matériel sur votre plan",
+    "planPositions": {
+      "none": "Non placé",
+      "left": "À gauche",
+      "centre": "Au centre",
+      "right": "À droite"
+    }
   }
 }

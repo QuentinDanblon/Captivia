@@ -18,11 +18,13 @@ export interface ButtonStyleOptions {
   variant?: ButtonVariant | 'ghost';
   size?: ButtonSize;
   fullWidth?: boolean;
+  /** Autorise les libellés longs à passer sur plusieurs lignes. */
+  wrap?: boolean;
   className?: string;
 }
 
 const BASE =
-  'inline-flex items-center justify-center gap-2 rounded-control border font-medium whitespace-nowrap no-underline select-none ' +
+  'inline-flex items-center justify-center gap-2 rounded-control border font-medium no-underline select-none ' +
   'transition-[background-color,border-color,color] duration-150 ease-out ' +
   'disabled:cursor-not-allowed disabled:opacity-55 aria-busy:cursor-progress';
 
@@ -41,9 +43,9 @@ const VARIANTS: Record<ButtonVariant, string> = {
 };
 
 /** Classes d'un bouton, réutilisables sur un `<Link>` ou un `<a>`. */
-export function buttonClasses({ variant = 'primary', size = 'md', fullWidth = false, className }: ButtonStyleOptions = {}) {
+export function buttonClasses({ variant = 'primary', size = 'md', fullWidth = false, wrap = false, className }: ButtonStyleOptions = {}) {
   const intent: ButtonVariant = variant === 'ghost' ? 'quiet' : variant;
-  return cx(BASE, SIZES[size], VARIANTS[intent], fullWidth && 'w-full', className);
+  return cx(BASE, SIZES[size], VARIANTS[intent], wrap ? 'min-w-0 whitespace-normal wrap-anywhere' : 'whitespace-nowrap', fullWidth && 'w-full', className);
 }
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, Omit<ButtonStyleOptions, 'className'> {
@@ -68,6 +70,7 @@ export default function Button({
   variant = 'primary',
   size = 'md',
   fullWidth = false,
+  wrap = false,
   loading = false,
   disabled,
   iconStart,
@@ -84,7 +87,7 @@ export default function Button({
       type={type}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      className={buttonClasses({ variant, size, fullWidth, className })}
+      className={buttonClasses({ variant, size, fullWidth, wrap, className })}
       {...props}
     >
       {loading ? <Spinner /> : iconStart ? <span aria-hidden="true" className="inline-flex shrink-0">{iconStart}</span> : null}

@@ -66,7 +66,7 @@ function SpeciesOption({ species, onSelect }: { species: SpeciesResult; onSelect
     if (near || !ref.current) return;
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) setNear(true);
-    }, { rootMargin: '100px' });
+    }, { rootMargin: '300px' });
     observer.observe(ref.current);
     return () => observer.disconnect();
   }, [near]);

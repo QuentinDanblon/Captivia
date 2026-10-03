@@ -1,6 +1,6 @@
 /**
  * Photothèque du catalogue et de la landing : photos Wikimedia Commons sous licence libre vérifiée (API Commons,
- * champ `LicenseShortName`), recadrées et exportées en AVIF + WebP sans métadonnées
+ * champ `LicenseShortName`), préparées et exportées en AVIF + WebP sans métadonnées
  * (`public/images/<dossier>/<slug>-<largeur>.<format>`, plus grande variante ≤ 150 Ko).
  *
  * Chaque entrée est aussi inscrite dans `public/images/CREDITS.md` et listée dans la page
@@ -62,6 +62,8 @@ export type PhotoKey =
   | 'sheep'
   | 'donkey'
   | 'africanHedgehog'
+  | 'guideAquariumFilter'
+  | 'guideNitrogenCycle'
   | 'mossForest'
   | 'grassDroplets'
   | 'lemonBalm';
@@ -77,7 +79,7 @@ export interface Photo {
   commonsTitle: string;
   credit: PhotoCredit;
   /** Modifications apportées (exigées par CC BY / CC BY-SA) : voir `PHOTO_CHANGES`. */
-  changes: 'crop' | 'soften';
+  changes: 'crop' | 'soften' | 'resize';
 }
 
 /** Libellé des modifications, par langue de rédaction des pages légales (fr, sinon en). */
@@ -85,10 +87,12 @@ export const PHOTO_CHANGES: Record<'fr' | 'en', Record<Photo['changes'], string>
   fr: {
     crop: 'recadrée, redimensionnée, convertie en AVIF/WebP, métadonnées retirées',
     soften: 'recadrée, légèrement adoucie (texture de fond), redimensionnée, convertie en AVIF/WebP, métadonnées retirées',
+    resize: 'redimensionnée, convertie en AVIF/WebP, fond blanc ajouté, métadonnées retirées',
   },
   en: {
     crop: 'cropped, resized, converted to AVIF/WebP, metadata removed',
     soften: 'cropped, slightly softened (background texture), resized, converted to AVIF/WebP, metadata removed',
+    resize: 'resized, converted to AVIF/WebP, white background added, metadata removed',
   },
 };
 
@@ -377,6 +381,14 @@ export const PHOTOS: Record<PhotoKey, Photo> = {
     base: '/images/animals/african-hedgehog', widths: [480, 800], ratio: 4 / 3,
     file: 'Atelerix albiventris in Spain.jpg',
     author: 'Nacaru', license: 'CC BY-SA 4.0',
+  }),
+  guideAquariumFilter: photo({
+    base: '/images/guides/aquarium-filter', widths: [480, 800, 1200], ratio: 370 / 236,
+    file: 'Aquarium-Au enfilter.svg', author: 'Fred the Oyster', license: 'CC BY-SA 4.0', changes: 'resize',
+  }),
+  guideNitrogenCycle: photo({
+    base: '/images/guides/nitrogen-cycle', widths: [480, 800, 1200], ratio: 601 / 383,
+    file: 'Aquarium Nitrogen Cycle.svg', author: 'Ilmari Karonen', license: 'Domaine public', changes: 'resize',
   }),
   mossForest: photo({
     base: '/images/nature/moss-forest', widths: [640, 960, 1280], ratio: 16 / 9,

@@ -1,5 +1,7 @@
 'use client';
 
+import { guidePath } from '@/lib/guides';
+
 import { use, useEffect, useState, type ReactNode } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Plus } from 'lucide-react';
@@ -267,10 +269,13 @@ export default function SpeciesDetailPage({ params }: { params: Promise<{ locale
             marginLabel={t('species.gbifLabel')}
             description={species.profile?.description || undefined}
             actions={
-              <Link href={addHref} className={buttonClasses()} data-testid="add-species-animal">
-                <Plus size={18} strokeWidth={1.75} aria-hidden="true" />
-                {t('species.addAnimal')}
-              </Link>
+              <div className="flex flex-wrap gap-2">
+                <Link href={guidePath(id)} className={buttonClasses({ variant: 'secondary' })}>{t('guides.open')}</Link>
+                <Link href={addHref} className={buttonClasses()} data-testid="add-species-animal">
+                  <Plus size={18} strokeWidth={1.75} aria-hidden="true" />
+                  {t('species.addAnimal')}
+                </Link>
+              </div>
             }
           />
 

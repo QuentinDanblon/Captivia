@@ -526,7 +526,8 @@
     "guest": "Guest",
     "createAccount": "Create an account",
     "community": "Community",
-    "soon": "Soon"
+    "soon": "Soon",
+    "guides": "Habitat guides"
   },
   "grade": {
     "bronze": "Bronze",
@@ -2496,5 +2497,212 @@
     "notFound": "We couldn't find this item. It may have been deleted.",
     "tooManyRequests": "Too many attempts in a row. Wait a minute before trying again.",
     "generic": "Something went wrong. Please try again in a moment."
+  },
+  "guides": {
+    "title": "Habitat guides",
+    "intro": "Set up a home that suits your animal: space, equipment, setup and care, with sources for further reading.",
+    "open": "Habitat guide",
+    "chooseSpecies": "A guide for your species",
+    "myAnimals": "My animals",
+    "chooseAnimal": "Choose one of my animals",
+    "animalsError": "Could not load your animals.",
+    "searchSpecies": "Search species",
+    "searchHint": "Enter at least two characters, in English or using the scientific name.",
+    "search": "Search",
+    "loadError": "Could not load this species guide.",
+    "noResults": "No species found. Try its scientific name.",
+    "categoriesTitle": "Choose a category",
+    "chooseWater": "For this fish, choose freshwater or marine according to its habitat.",
+    "speciesIntro": "The details below come from the selected species profile. They help tailor the guide for its category.",
+    "noHabitat": "Habitat needs for this species have not yet been documented with a source.",
+    "noDimensions": "Minimum dimensions are not listed for this species. Have them confirmed before buying its habitat.",
+    "noEquipment": "Equipment for this species is temporarily unavailable.",
+    "fullSpecies": "View the full species profile",
+    "categoryScope": "These guidelines apply to the category. Select your species to see its own dimensions and parameters.",
+    "installation": "Set up and care",
+    "checklist": "Equipment checklist",
+    "checklistHint": "Check off what you have prepared. This list stays available while this guide is open.",
+    "sources": "Guide sources",
+    "start": "Choose a category or species to open its guide.",
+    "unknownCategory": "Choose the category that matches this species.",
+    "planTitle": "Your measured plan",
+    "planIntro": "Enter your installation dimensions and choose where to place equipment. This plan shows your choices, rather than certifying a minimum size or a layout for the species.",
+    "length": "Length (cm)",
+    "width": "Width (cm)",
+    "height": "Height (cm)",
+    "planHint": "Enter three positive measurements to show the plan and its geometric volume.",
+    "planTop": "Top view",
+    "planFront": "Front view",
+    "planVolume": "Geometric volume: {litres} L",
+    "planVolumeHint": "The actual water volume will be lower once substrate, decorations and space below the rim are accounted for. This calculation does not determine how many animals the setup can house.",
+    "planAlt": "Measured plan of your setup: {length} cm long, {width} cm wide and {height} cm high.",
+    "diagramsTitle": "Understanding the aquarium",
+    "filterDiagram": "An example of water circulation with an external filter. The arrows show the flow; the drawing does not prescribe dimensions or flow rate.",
+    "cycleDiagram": "Nitrogen cycle: waste produces ammonia, which bacteria convert to nitrite and then nitrate. The original diagram has labels in English.",
+    "categories": {
+      "dogs": {
+        "title": "Dogs",
+        "space": "Set aside a quiet, dry place without drafts for rest. Your dog should be able to move around and lie down comfortably. Keep this space separate from its toilet area.",
+        "setup": "Set up a comfortable bed, accessible water and food bowls. Provide a retreat where your dog can get away from situations that frighten them. Choose safe, suitable toys.",
+        "care": "Keep the bed and bowls clean. Make time for exercise and interaction based on your dog’s age, health and needs. Observe their habits and adjust activity and rest accordingly.",
+        "equipment": {
+          "e0": "Comfortable bed",
+          "e1": "Food and water bowls",
+          "e2": "Safe, suitable dog toys",
+          "e3": "Quiet resting place and retreat",
+          "e4": "Cleaning supplies for the bed and bowls"
+        }
+      },
+      "cats": {
+        "title": "Cats",
+        "space": "Set up separate areas for resting, eating and toileting. Keep food and water away from the litter tray. Provide hiding places and elevated spots where your cat feels safe.",
+        "setup": "Add a sturdy scratching post that lets your cat stretch, a bed and toys. Keep resources accessible without requiring your cat to approach an animal or situation that frightens them.",
+        "care": "Keep the litter tray clean and provide fresh water. Offer regular play and activities, especially if your cat stays indoors. Let them sleep and hide undisturbed.",
+        "equipment": {
+          "e0": "Bed and hiding places",
+          "e1": "Sturdy scratching post",
+          "e2": "Litter tray and cleaning supplies",
+          "e3": "Bowls placed away from the litter tray",
+          "e4": "Elevated perches and toys"
+        }
+      },
+      "rodents": {
+        "title": "Rodents",
+        "space": "Choose the species first: hamsters, rats, chinchillas and guinea pigs need different habitats. Check its dimensions, activity needs and living conditions before choosing a cage or pen.",
+        "setup": "Provide hiding places, suitable bedding and activities for the species. Hamsters need bedding deep enough to burrow in. For guinea pigs, tunnels and untreated wooden items can encourage exploring and chewing.",
+        "care": "Remove soiled bedding and keep it dry. Check the species profile for social needs: guidance for guinea pigs does not apply to every hamster. Tailor the setup to the animal instead of filling the cage with accessories.",
+        "equipment": {
+          "e0": "Cage or pen suited to the species",
+          "e1": "Suitable bedding and nesting material",
+          "e2": "Suitable hiding places and tunnels",
+          "e3": "Activities and chew items for the species",
+          "e4": "Cleaning supplies"
+        }
+      },
+      "rabbits": {
+        "title": "Rabbits",
+        "space": "Combine a shelter with an accessible exercise area. Set aside distinct areas for eating, resting and toileting. Secure indoor spaces, and protect outdoor areas from predators and bad weather. For two medium-sized rabbits, the RSPCA recommends at least 3 m × 2 m of floor space and 1 m in height, including shelter and exercise area.",
+        "setup": "Choose non-slip flooring, a dry and ventilated shelter, hiding places and opportunities to forage. Leave enough room to move freely. Use suitable, dust-free bedding.",
+        "care": "Remove soiled areas and clean the whole setup regularly. Use non-toxic products and let everything dry before returning the rabbits. Keep a small amount of clean, previously used bedding to retain a familiar scent.",
+        "equipment": {
+          "e0": "Secure exercise pen",
+          "e1": "Dry, ventilated shelter",
+          "e2": "Hiding places and tunnels",
+          "e3": "Suitable dust-free bedding",
+          "e4": "Non-toxic cleaning products"
+        }
+      },
+      "mammals": {
+        "title": "Other mammals",
+        "space": "Select the species before choosing its setup. Ferrets, hedgehogs, horses and sheep need very different arrangements. Check the habitat details and equipment list in the species profile.",
+        "setup": "For a horse, provide outdoor exercise space and shelter from sun, wind and extreme temperatures. A stall should be clean, ventilated and free of drafts. For other species, follow their specific guidance.",
+        "care": "For a horse kept in a stall, use clean, good-quality, dust-free bedding. For other mammals, check their profile for rest, enrichment and care needs before setting a routine.",
+        "equipment": {
+          "e0": "Setup sized for the species",
+          "e1": "Shelter or resting area for the species",
+          "e2": "Equipment listed in the species profile",
+          "e3": "Suitable exercise or enrichment equipment",
+          "e4": "Care supplies suited to the setup"
+        }
+      },
+      "birds": {
+        "title": "Birds",
+        "space": "Choose a cage or aviary based on your species’ needs. Check the dimensions and bar spacing in its profile. Also consider activity space and where accessories will go.",
+        "setup": "Provide perches of different diameters made from safe, untreated branches. Add foraging activities: a cardboard tube filled with paper and hidden food can provide enrichment.",
+        "care": "Check branches, toys and accessories for safety before use. Choose suitable wood without treatments or sprays. Match activities and setup conditions to your bird’s documented needs.",
+        "equipment": {
+          "e0": "Cage or aviary suited to the species",
+          "e1": "Perches of different diameters",
+          "e2": "Safe, untreated wooden branches",
+          "e3": "Foraging accessories",
+          "e4": "Equipment listed in the species profile"
+        }
+      },
+      "reptiles": {
+        "title": "Reptiles",
+        "space": "Match the vivarium to the animal’s lifestyle: terrestrial, arboreal or aquatic. Check the species’ documented dimensions, temperature, humidity and lighting. An arboreal reptile and a tortoise need different spaces.",
+        "setup": "Place suitable heating at one end to create a temperature gradient. Control it with a thermostat and prevent direct contact with the animal. Choose lighting and UVB for the species, along with suitable substrate and hides.",
+        "care": "Monitor temperature and humidity with suitable instruments. Maintain adequate ventilation: reducing it to retain heat or humidity can cause problems. Check that heating and lighting work, and follow species-specific care guidance.",
+        "equipment": {
+          "e0": "Vivarium suited to the lifestyle",
+          "e1": "Protected heater and thermostat",
+          "e2": "Thermometer and hygrometer",
+          "e3": "Lighting and UVB for the species",
+          "e4": "Suitable substrate, hides and perches"
+        }
+      },
+      "amphibians": {
+        "title": "Amphibians",
+        "space": "Identify the species’ habitat first: terrestrial, aquatic or mixed. Temperature needs vary and are not the same as those of all reptiles. Use its profile parameters to choose a terrarium, paludarium or aquarium.",
+        "setup": "Provide suitable water, hides and substrate. Terrestrial species need a shallow water dish. In an aquatic habitat, suitable filtration helps maintain water quality. Check humidity and ventilation.",
+        "care": "Monitor temperature and species-specific water parameters. Avoid cedar or pine substrates, which contain toxic oils. Provide suitable hides and moisture without restricting airflow.",
+        "equipment": {
+          "e0": "Terrarium, paludarium or aquarium for the species",
+          "e1": "Hides and suitable substrate",
+          "e2": "Thermometer and humidity monitor",
+          "e3": "Water dish or filtration for the habitat",
+          "e4": "Water quality test kits"
+        }
+      },
+      "freshwater": {
+        "title": "Freshwater aquarium",
+        "space": "Choose volume and dimensions for the species, adult size and needs. Do not estimate stocking from a simple litres-per-fish rule. Check water parameters and compatibility between inhabitants too.",
+        "setup": "Install filtration and cycle the tank without fish before introducing animals. Treat new water with a product suitable for chlorine. If heating is needed, control it with a thermostat and check it with a thermometer.",
+        "care": "Test water to monitor nitrogen waste. Maintain the filter and change water as appropriate for your setup. Prepare replacement water at a temperature compatible with the tank to avoid sudden changes.",
+        "equipment": {
+          "e0": "Aquarium and suitable filtration",
+          "e1": "Thermometer and thermostatic heater if needed",
+          "e2": "Ammonia, nitrite and nitrate tests",
+          "e3": "Suitable water treatment",
+          "e4": "Water-changing and filter-care supplies"
+        }
+      },
+      "marine": {
+        "title": "Marine aquarium",
+        "space": "Choose the species and tank type: fish-only or a setup with invertebrates. Check each inhabitant’s needs for volume, temperature, salinity and light. Reverse osmosis water is recommended for marine setups and essential for invertebrates such as corals.",
+        "setup": "Set up biological filtration and cycle the tank before adding animals. Monitor ammonia and nitrite: both must remain at zero before gradually adding more inhabitants. Use marine aquarium salt, measure salinity with a hydrometer or refractometer, and arrange water flow to avoid stagnant areas, especially with live rock or corals.",
+        "care": "Test ammonia, nitrite, nitrate and pH. With corals, also monitor phosphate, dKH, calcium and magnesium. Prepare water for partial changes in a separate container, where it can be mixed and heated. Adjust the frequency and volume to the inhabitants and how the tank is running.",
+        "equipment": {
+          "e0": "Aquarium and biological filtration",
+          "e1": "Marine aquarium salt and suitable reverse osmosis water",
+          "e2": "Hydrometer or refractometer and thermometer",
+          "e3": "Ammonia, nitrite, nitrate and pH tests; reef tests if keeping corals",
+          "e4": "Water flow and lighting suited to inhabitants"
+        }
+      },
+      "insects": {
+        "title": "Insects",
+        "space": "Identify the species before choosing an enclosure: stick insects, mantises and cockroaches need different setups. Stick insects need enough room to moult; humidity needs vary by species.",
+        "setup": "For stick insects, provide suitable supports and food plants, with fresh food available. Adjust ventilation, temperature and water according to the species guidance. For other insects, follow their specific needs.",
+        "care": "Check plant condition and keep the enclosure clean. Avoid overcrowding and leave room for moulting. Select and prepare food plants for stick insects to avoid contaminants.",
+        "equipment": {
+          "e0": "Enclosure suited to the species",
+          "e1": "Suitable supports for climbing and moulting",
+          "e2": "Food or food plants for the species",
+          "e3": "Temperature and humidity monitor",
+          "e4": "Care supplies and suitable water source"
+        }
+      },
+      "arachnids": {
+        "title": "Arachnids",
+        "space": "Choose a setup for the species and its lifestyle: an arboreal tarantula and a burrowing species need different conditions. Check substrate, hides, temperature and humidity before bringing it home.",
+        "setup": "For tarantulas, provide a suitable hide and substrate, a water dish and a secure closure. Follow the species guidance. For scorpions, check their specific needs before setting up their habitat.",
+        "care": "Monitor species-specific humidity and temperature, and provide water as needed. Check hides and secure closures. Follow specific guidance for moulting and habitat care.",
+        "equipment": {
+          "e0": "Secure terrarium suited to the species",
+          "e1": "Substrate suited to its lifestyle",
+          "e2": "Hides and perches for the species",
+          "e3": "Suitable water dish",
+          "e4": "Temperature and humidity monitor"
+        }
+      }
+    },
+    "planEquipment": "Place equipment on your plan",
+    "planPositions": {
+      "none": "Not placed",
+      "left": "Left",
+      "centre": "Centre",
+      "right": "Right"
+    }
   }
 }

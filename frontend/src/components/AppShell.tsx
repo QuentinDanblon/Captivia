@@ -41,6 +41,8 @@ export const APP_DESTINATIONS: AppDestination[] = [
   { href: '/parametres', labelKey: 'nav.account', icon: CircleUserRound, match: ['/parametres'] },
 ];
 
+export const GUIDE_DESTINATION: AppDestination = { href: '/guides', labelKey: 'nav.guides', icon: BookOpen, match: ['/guides'] };
+
 const isActive = (path: string, prefixes: string[]) =>
   prefixes.some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
 
@@ -133,7 +135,7 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
         </Link>
         <nav aria-label={t('home.mainNavigation')}>
           <ul className="app-shell__rail-list">
-            {items.map((item) => (
+            {[...items.slice(0, 3), GUIDE_DESTINATION, ...items.slice(3)].map((item) => (
               <li key={item.href}>{renderItem(item, 'app-shell__rail-link', 18)}</li>
             ))}
           </ul>
@@ -153,6 +155,7 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
             {t('nav.createAccount')}
           </Link>
         ) : null}
+        <div className="app-shell__guide">{renderItem(GUIDE_DESTINATION, 'app-shell__guide-link', 18)}</div>
       </header>
 
       <main id="main-content" tabIndex={-1} className="app-shell__content">

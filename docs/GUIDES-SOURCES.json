@@ -1,0 +1,655 @@
+{
+  "description": "Sources et citations exactes préparées à partir des pages et PDF consultés. Chaque citation soutient uniquement le champ indiqué; les contraintes propres à une espèce ne doivent pas être généralisées à toute la catégorie.",
+  "categories": {
+    "dogs": [
+      {
+        "field": "repos",
+        "quote": "Your dog needs a safe, comfortable place to rest, situated in a dry, draught-free area.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac78152ed915d76a04b2da6/pb13333-cop-dogs-091204.pdf"
+      },
+      {
+        "field": "équipement",
+        "quote": "e.g. toys, beds, food and water bowls",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac78152ed915d76a04b2da6/pb13333-cop-dogs-091204.pdf"
+      },
+      {
+        "field": "espace/repos",
+        "quote": "Provide your dog with a comfortable, clean, dry, quiet, draught-free rest area, which has appropriate ventilation and is lit either naturally or artificially.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac78152ed915d76a04b2da6/pb13333-cop-dogs-091204.pdf"
+      },
+      {
+        "field": "sécurité/refuge",
+        "quote": "All dogs must be able to avoid things that frighten them and need a place to hide where they feel safe.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac78152ed915d76a04b2da6/pb13333-cop-dogs-091204.pdf"
+      },
+      {
+        "field": "toilettes",
+        "quote": "A dog is naturally disinclined to soil its living area and needs regular opportunities to use a toilet area, or it will become distressed.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac78152ed915d76a04b2da6/pb13333-cop-dogs-091204.pdf"
+      },
+      {
+        "field": "exercice",
+        "quote": "A dog needs regular exercise and regular opportunities to walk, run, explore, play, sniff and investigate.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac78152ed915d76a04b2da6/pb13333-cop-dogs-091204.pdf"
+      },
+      {
+        "field": "exercice selon l’individu",
+        "quote": "exercise a dog needs varies with age, breed and health.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac78152ed915d76a04b2da6/pb13333-cop-dogs-091204.pdf"
+      },
+      {
+        "field": "propreté",
+        "quote": "Provide your dog with a safe, clean, quiet environment.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac78152ed915d76a04b2da6/pb13333-cop-dogs-091204.pdf"
+      },
+      {
+        "field": "hygiène des gamelles",
+        "quote": "Pet bowls: Clean after every use for wet food and every day for dry food and water.",
+        "url": "https://www.cdc.gov/healthy-pets/about/cleaning-and-disinfecting-pet-supplies.html"
+      },
+      {
+        "field": "hygiène du couchage",
+        "quote": "Pet beds, blankets, and habitats: Clean every week.",
+        "url": "https://www.cdc.gov/healthy-pets/about/cleaning-and-disinfecting-pet-supplies.html"
+      }
+    ],
+    "cats": [
+      {
+        "field": "griffoir",
+        "quote": "Provide your cat with somewhere to scratch, such as a sturdy scratching post.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "accès aux ressources",
+        "quote": "Make sure that your cat can reach all the things that it needs (e.g. bed, food, water, litter or outdoors)",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "repos",
+        "quote": "All cats need a safe, comfortable place to rest undisturbed.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "cachettes",
+        "quote": "Make sure your cat has constant access to a variety of safe hiding places including elevated resting places, where it can feel safe.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "litière",
+        "quote": "Your cat should be provided with a suitable toilet area, that is quiet, easily accessible and kept clean.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "jeu et exercice",
+        "quote": "Play with people and toys is a valuable source of interaction and cats should have regular opportunities to carry out this behaviour.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "activité à l’intérieur",
+        "quote": "Cats that do not go outside may need extra opportunities to play and exercise indoors.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "griffades",
+        "quote": "Additionally, all cats need an appropriate scratching place, high enough to allow them to stretch out fully, to scent mark their territory and condition their claws.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "hygiène",
+        "quote": "All cats, including those that live predominantly outdoors, need a safe and clean environment and protection from hazards.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "eau éloignée de la nourriture",
+        "quote": "away from their food source.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "nourriture et eau éloignées de la litière",
+        "quote": "Position your cat’s food and water well away from the litter tray, or things that they find frightening.",
+        "url": "https://assets.publishing.service.gov.uk/media/5ac77fa4ed915d76a313cd4e/pb13332-cop-cats-091204.pdf"
+      },
+      {
+        "field": "hygiène des gamelles",
+        "quote": "Pet bowls: Clean after every use for wet food and every day for dry food and water.",
+        "url": "https://www.cdc.gov/healthy-pets/about/cleaning-and-disinfecting-pet-supplies.html"
+      }
+    ],
+    "rodents": [
+      {
+        "field": "cobayes: abri et espace",
+        "quote": "a secure space that’s large enough for them to exercise and high enough to stand up fully on their back legs.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/guineapigs/environment"
+      },
+      {
+        "field": "cobayes: hygiène",
+        "quote": "on average guinea pig accommodation should be deep cleaned at least once a week, and spot cleaning should be carried out daily.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/guineapigs/environment"
+      },
+      {
+        "field": "hamsters: nature sociale",
+        "quote": "Hamsters are generally solitary animals, and can be aggressive towards other hamsters.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/hamsters/environment"
+      },
+      {
+        "field": "hamsters: cachettes et litière",
+        "quote": "Wild hamsters live in deep burrows and naturally build nests.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/hamsters/environment"
+      },
+      {
+        "field": "cobayes: groupe social",
+        "quote": "Guinea pigs are social animals and shouldn’t live by themselves.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/guineapigs/environment"
+      },
+      {
+        "field": "cobayes: ventilation",
+        "quote": "indoor accommodation that’s well-ventilated, dry and away from direct heat sources (such as radiators or sunny windows) and draughts.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/guineapigs/environment"
+      },
+      {
+        "field": "cobayes: activités",
+        "quote": "give them tunnels and untreated wooden toys to chew.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/guineapigs/environment"
+      },
+      {
+        "field": "cobayes: litière",
+        "quote": "litter material on the floor - the best type is dry, dust-free, absorbent wood shavings supplemented with hay to allow animals to tunnel and hide.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/guineapigs/environment"
+      },
+      {
+        "field": "hamsters: solitude",
+        "quote": "Hamsters are generally solitary animals, and can be aggressive towards other hamsters.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/hamsters/environment"
+      },
+      {
+        "field": "hamsters: nidification",
+        "quote": "wild hamsters live in deep burrows and naturally build nests.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rodents/hamsters/environment"
+      }
+    ],
+    "rabbits": [
+      {
+        "field": "espace",
+        "quote": "The ideal rabbit setup should always include: space: at least a minimum of 3m x 2m x 1m (but the bigger the better!)",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      },
+      {
+        "field": "cachettes et enrichissement",
+        "quote": "security: to prevent rabbits escaping and predators getting in. shelter: with shade from the sun. enrichment: with plenty of room and toys to play with. safety: with hiding places for your rabbits to retreat to.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      },
+      {
+        "field": "compagnie",
+        "quote": "Rabbits need the company of another suitable rabbit.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      },
+      {
+        "field": "sol",
+        "quote": "a suitable floor surface: flooring should be comfortable, non-slip, and protect their feet.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      },
+      {
+        "field": "litière",
+        "quote": "warm and dry bedding rabbit bedding should be comfortable, warm and also safe to eat, such as: dust-free straw dust-free hay shredded paper",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      },
+      {
+        "field": "nettoyage",
+        "quote": "only use non-toxic cleaning products or natural diy cleaners. make sure the housing is dry before the rabbits go back inside.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      },
+      {
+        "field": "odeur familière",
+        "quote": "this is a rabbit’s way of marking their territory and making it smell familiar and reassuring to them.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      },
+      {
+        "field": "eau et foin",
+        "quote": "rabbits need constant access to hay or grass and fresh water.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      },
+      {
+        "field": "espace et sécurité",
+        "quote": "a suitable floor surface: flooring should be comfortable, non-slip, and protect their feet.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      },
+      {
+        "field": "espace minimum de deux lapins moyens, abri et exercice compris",
+        "quote": "a living space for two medium-sized rabbits should be no smaller than 3m x 2m x 1m, including their main shelter and exercise area.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/rabbits/environment"
+      }
+    ],
+    "mammals": [
+      {
+        "field": "chevaux: abri et exercice (exemple propre à l’espèce)",
+        "quote": "Horses need plenty of room to exercise outside as well as access to shelter.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment"
+      },
+      {
+        "field": "chevaux: écurie (exemple propre à l’espèce)",
+        "quote": "If your horse is stabled, ensure all areas are well-ventilated, clean and draught-free.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment"
+      },
+      {
+        "field": "mammifères exotiques: besoins spécialisés",
+        "quote": "The majority of exotics, including reptiles, need a carefully controlled environment requiring access to specialised equipment for lighting and 24-hour heating.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/other"
+      },
+      {
+        "field": "chevaux: repos et abri",
+        "quote": "horses need plenty of room to exercise outside as well as access to shelter.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment"
+      },
+      {
+        "field": "chevaux: litière",
+        "quote": "they need good quality, dust-free bedding to lie on, which should be kept clean.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment"
+      },
+      {
+        "field": "chevaux: entretien du box",
+        "quote": "if your horse is stabled, ensure all areas are well-ventilated, clean and draught-free.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/horses/environment"
+      },
+      {
+        "field": "mammifères exotiques: matériel spécialisé",
+        "quote": "the majority of exotics, including reptiles, need a carefully controlled environment requiring access to specialised equipment for lighting and 24-hour heating.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/other"
+      }
+    ],
+    "birds": [
+      {
+        "field": "perchoirs",
+        "quote": "Instead of buying new perches or stands for your cage or aviary, create some using natural branches using different types of wood and thickness.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/other"
+      },
+      {
+        "field": "choix de branches",
+        "quote": "Use twigs from safe fruit or nut trees, with the bark left on, and don’t treat or spray them with anything before you give them to the birds.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/other"
+      },
+      {
+        "field": "enrichissement",
+        "quote": "Pet birds need lots of enrichment, but this doesn’t have to mean buying expensive toys - you can make your own.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/other"
+      },
+      {
+        "field": "perchoirs: essences et épaisseurs",
+        "quote": "instead of buying new perches or stands for your cage or aviary, create some using natural branches using different types of wood and thickness.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/other"
+      },
+      {
+        "field": "branches non traitées",
+        "quote": "use twigs from safe fruit or nut trees, with the bark left on, and don’t treat or spray them with anything before you give them to the birds.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/other"
+      },
+      {
+        "field": "recherche alimentaire",
+        "quote": "something as simple as a cardboard tube stuffed with newspaper, with pieces of food hidden inside, can encourage them to forage for their food.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/other"
+      },
+      {
+        "field": "enrichissement",
+        "quote": "pet birds need lots of enrichment, but this doesn’t have to mean buying expensive toys - you can make your own.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/other"
+      }
+    ],
+    "reptiles": [
+      {
+        "field": "chauffage et thermostat",
+        "quote": "Heaters of an appropriate size should be thermostat controlled, screened from the animals, and positioned toward one end of the enclosure to provide a thermal gradient.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/reptiles/management-of-reptiles"
+      },
+      {
+        "field": "UVB (exigence espèce-dépendante)",
+        "quote": "broad-spectrum lighting (UVB 290-300 nm) essential",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/reptiles/management-of-reptiles"
+      },
+      {
+        "field": "enclos et ventilation",
+        "quote": "even if the entire top of the enclosure is covered by mesh, ventilation may be severely hampered.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/reptiles/management-of-reptiles"
+      },
+      {
+        "field": "chauffage",
+        "quote": "heaters of an appropriate size should be thermostat controlled, screened from the animals, and positioned toward one end of the enclosure to provide a thermal gradient.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/reptiles/management-of-reptiles"
+      },
+      {
+        "field": "gradient thermique",
+        "quote": "in general, basking temperatures should be 5°c warmer, whereas at night these temperatures should fall by 5°c.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/reptiles/management-of-reptiles"
+      },
+      {
+        "field": "substrats",
+        "quote": "several different types of substrate may be used in reptile enclosures.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/reptiles/management-of-reptiles"
+      },
+      {
+        "field": "refuges",
+        "quote": "other essential items include a water bowl (large enough for the reptile to bathe in) and various retreats (eg, cardboard boxes, cork bark, shredded paper).",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/reptiles/management-of-reptiles"
+      },
+      {
+        "field": "aération",
+        "quote": "even if the entire top of the enclosure is covered by mesh, ventilation may be severely hampered.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/reptiles/management-of-reptiles"
+      },
+      {
+        "field": "éclairage UVB spécifique",
+        "quote": "broad-spectrum lighting (uvb 290-300 nm) essential; ns, no special lighting requirements, although broad-spectrum lighting is still recommended because it is likely to have health benefits.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/reptiles/management-of-reptiles"
+      }
+    ],
+    "amphibians": [
+      {
+        "field": "propreté de l’eau",
+        "quote": "Water must be clean and free of toxins such as chlorine, ammonia, nitrite, pesticides, and heavy metals.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/amphibians/environment-and-husbandry-for-amphibians"
+      },
+      {
+        "field": "ventilation",
+        "quote": "adequate ventilation (1-2 fresh air changes per hour) is needed to prevent disease.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/amphibians/environment-and-husbandry-for-amphibians"
+      },
+      {
+        "field": "brumisation et humidité",
+        "quote": "Moisture may also be provided by incorporating small streams, waterfalls, or ultrasonic humidifiers into enclosures, or by misting frequently with a spray bottle.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/amphibians/environment-and-husbandry-for-amphibians"
+      },
+      {
+        "field": "milieux d’espèces",
+        "quote": "aquatic amphibians may be accommodated in aquariums with areas for swimming. terrestrial amphibians need a shallow container of water in the enclosure.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/amphibians/environment-and-husbandry-for-amphibians"
+      },
+      {
+        "field": "filtres en milieu aquatique",
+        "quote": "external canister filters or under-gravel filters help maintain water quality in tank waterfalls, streams, and ponds.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/amphibians/environment-and-husbandry-for-amphibians"
+      },
+      {
+        "field": "substrat: cèdre et pin",
+        "quote": "untreated hardwood mulches and leaf litter can be used as substrate; however, cedar and pine mulches have toxic oils and should not be used.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/amphibians/environment-and-husbandry-for-amphibians"
+      },
+      {
+        "field": "refuges et humidité",
+        "quote": "organic substrates and refugia that limit water loss can also help provide humidity within microhabitats.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/amphibians/environment-and-husbandry-for-amphibians"
+      },
+      {
+        "field": "plantes/refuges",
+        "quote": "live plants are beneficial because they purify the air, remove organic wastes in the soil, filter light, generate humidity, and provide hiding and perching places.",
+        "url": "https://www.msdvetmanual.com/exotic-and-laboratory-animals/amphibians/environment-and-husbandry-for-amphibians"
+      }
+    ],
+    "freshwater": [
+      {
+        "field": "filtration",
+        "quote": "aquarium filters filters are vital for removing waste from the tank, keeping your tank clean.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "renouvellement d’eau",
+        "quote": "This is why you need to carry out weekly 30% water changes to dilute the waste products your biological filter cannot break down.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "dimensionnement",
+        "quote": "larger volumes have more stable temperatures and water conditions.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "filtration",
+        "quote": "aquarium filters filters are vital for removing waste from the tank, keeping your tank clean.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "cycle biologique",
+        "quote": "ammonia is converted to nitrite, which is also toxic, and then eventually to nitrate, which is safer.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "démarrage sans poissons",
+        "quote": "it's therefore strongly advised that new owners use 'fishless cycling' when starting up an aquarium.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "chlore",
+        "quote": "chlorine present in tap water is dangerous to both fish and bacteria.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "conditionnement de l’eau",
+        "quote": "it’s vital to add a dechlorinating product to the new water or leave it standing for 24 hours for the chlorine to leave the water.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "chauffage",
+        "quote": "all heaters must be controlled by a thermostat.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "thermomètre indépendant",
+        "quote": "so use a digital thermometer and check the temperature every day.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "renouvellement d’eau",
+        "quote": "this is why you need to carry out weekly 30% water changes to dilute the waste products your biological filter cannot break down.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "tests d’eau",
+        "quote": "instead, buy testing kits and check the water quality once a fortnight. kits for ammonia and nitrite are essential - not optional extras.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      },
+      {
+        "field": "cycle de l’azote pour le schéma général",
+        "quote": "fish release ammonia into the water, which is toxic and must be dealt with. a working biological filter allows beneficial bacteria to grow, which break down waste naturally. ammonia is converted to nitrite, which is also toxic, and then eventually to nitrate, which is safer.",
+        "url": "https://www.rspca.org.uk/adviceandwelfare/pets/fish/environment"
+      }
+    ],
+    "marine": [
+      {
+        "field": "eau osmosée et sel",
+        "quote": "If mixing at home, specialised aquarium salt (NOT table salt) will need to be dissolved into the fresh RO water according to manufacturer’s instructions.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "suivi de salinité et qualité d’eau",
+        "quote": "One of the most important pieces of equipment you will need is either a hydrometer or a refractometer which will help you to monitor the salinity of your aquarium. You will also need test kits to regularly measure the water quality to ensure it is suitable for fish.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "maturation du filtre",
+        "quote": "Your aquarium filter then needs to ‘mature’. Waste products from your fish and any leftover uneaten food contribute to ammonia (NH 3 ) levels, which together with nitrites (NO 2 – ) are highly toxic to fish.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "grand bac plus stable",
+        "quote": "larger aquariums contain more water, they will be more stable and less susceptible to variations in temperature, ph etc than small aquariums.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "eau et sel",
+        "quote": "if mixing at home, specialised aquarium salt (not table salt) will need to be dissolved into the fresh ro water according to manufacturer’s instructions.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "instrument de salinité",
+        "quote": "one of the most important pieces of equipment you will need is either a hydrometer or a refractometer which will help you to monitor the salinity of your aquarium.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "contrôle d’eau",
+        "quote": "you will also need test kits to regularly measure the water quality to ensure it is suitable for fish.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "maturation filtre",
+        "quote": "your aquarium filter then needs to ‘mature’.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "délai de dissolution/contrôle",
+        "quote": "it is then advisable to leave the aquarium for between 24 to 48 hours to settle and for any salt to fully dissolve. it also ensures that the correct temperature is reached and that the equipment is working correctly.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "équipement; mise en route écumeur",
+        "quote": "Some manufacturers/retailers have different recommendations as to when to start skimming a new aquarium, please ask your OATA retailer for guidance.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "équipement; tests initiaux et pour coraux",
+        "quote": "Initially, these should test for ammonia, nitrite, nitrate and pH and, if you plan on keeping corals, phosphate, dKH, calcium, and magnesium.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "mise en eau avant ajout d’animaux",
+        "quote": "Water should be tested to ensure that all parameters are correct before any livestock is added.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "maturation et ajout progressif",
+        "quote": "Once the levels of ammonia and nitrite have dropped to zero and stay at zero continually, your aquarium filter is mature, and stocking can continue slowly.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "eau de remplacement; préparer hors du bac",
+        "quote": "water for future water changes will need to be mixed and heated in a sperate vessel.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "changements partiels",
+        "quote": "Regular partial water changes will be required as will regular water testing to monitor for any changes and to take action as necessary. Frequency and volume of water changes will depend on stocking levels and other factors: ask your OATA retailer for advice.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "brassage; courants et zones mortes",
+        "quote": "if you are putting together your own set-up, then ensure that there is enough flow in the tank to mimic the currents of the sea and that there are no 'dead spots' in the aquarium where there is poor water circulation. this is particularly important if you have live rock or corals.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "équipement; circulation",
+        "quote": "Additional useful equipment: Protein skimmer Circulation pumps Live rock UV steriliser Reverse osmosis unit Chemical filter media Calcium reactor/dosing pump Water test kits",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      },
+      {
+        "field": "éclairage propre au bac",
+        "quote": "lighting will vary drastically depending on the species you wish to keep. fish-only aquariums won’t need much light, however, ask your oata retailer for advice if you are planning to keep any corals or other photosynthetic invertebrates.",
+        "url": "https://ornamentalfish.org/what-we-do/advice-information/care-sheets/caresheets-marine-fish/how-to-set-up-and-look-after-a-marine-tank-aquarium/"
+      }
+    ],
+    "insects": [
+      {
+        "field": "espace pour la mue (phasmes)",
+        "quote": "It is therefore most important that the cage has sufficient depth to allow this.",
+        "url": "https://www.amentsoc.org/insects/caresheets/stick-insects.html"
+      },
+      {
+        "field": "humidité (varie selon espèce)",
+        "quote": "Not all sticks insects share a common need for humidity.",
+        "url": "https://www.amentsoc.org/insects/caresheets/stick-insects.html"
+      },
+      {
+        "field": "eau (phasmes)",
+        "quote": "all sticks insects need water and it is a good idea to thoroughly mist the inside of the cage including all the food plant material each evening.",
+        "url": "https://www.amentsoc.org/insects/caresheets/stick-insects.html"
+      },
+      {
+        "field": "mue",
+        "quote": "your stick insects should have plenty of room in their cage and this is especially important when they’re moulting.",
+        "url": "https://www.amentsoc.org/insects/caresheets/stick-insects.html"
+      },
+      {
+        "field": "plantes fraîches",
+        "quote": "it is important to make sure that your stick insects always have plenty of fresh food.",
+        "url": "https://www.amentsoc.org/insects/caresheets/stick-insects.html"
+      },
+      {
+        "field": "choix et contaminants des plantes",
+        "quote": "it is often wise to take from sites away from major road ways to avoid the poisoning effects of the traffic fumes.",
+        "url": "https://www.amentsoc.org/insects/caresheets/stick-insects.html"
+      },
+      {
+        "field": "eau/brumisation des phasmes",
+        "quote": "regardless of this, all sticks insects need water and it is a good idea to thoroughly mist the inside of the cage including all the food plant material each evening.",
+        "url": "https://www.amentsoc.org/insects/caresheets/stick-insects.html"
+      },
+      {
+        "field": "humidité propre à l’espèce",
+        "quote": "not all sticks insects share a common need for humidity.",
+        "url": "https://www.amentsoc.org/insects/caresheets/stick-insects.html"
+      }
+    ],
+    "arachnids": [
+      {
+        "field": "tarentules: enclos et dimensions (espèce/taille ciblée)",
+        "quote": "the size should not be less than about 25cm by 20cm by 20cm high.",
+        "url": "https://www.amentsoc.org/insects/caresheets/tarantula.html"
+      },
+      {
+        "field": "tarentules: température (espèces débutants visées)",
+        "quote": "a temperature of 21-24°C is required for most of the tarantulas that you should buy as a beginner.",
+        "url": "https://www.amentsoc.org/insects/caresheets/tarantula.html"
+      },
+      {
+        "field": "scorpions: sécurité et habitat",
+        "quote": "scorpions are best kept in a glass aquarium with a good escape proof preferably lockable lid.",
+        "url": "https://www.amentsoc.org/insects/caresheets/scorpions.html"
+      },
+      {
+        "field": "contenants de mygales",
+        "quote": "pet shops will sell suitable tanks in glass or plastic.",
+        "url": "https://www.amentsoc.org/insects/caresheets/tarantula.html"
+      },
+      {
+        "field": "substrat tarentule terrestre",
+        "quote": "if your tarantula is a terrestrial species that likes to dig then you may need up to 15cm of substrate and a larger tank.",
+        "url": "https://www.amentsoc.org/insects/caresheets/tarantula.html"
+      },
+      {
+        "field": "mue tarentule",
+        "quote": "as your tarantula grows it will moult (shed its skin in a process called ecdysis) regularly.",
+        "url": "https://www.amentsoc.org/insects/caresheets/tarantula.html"
+      },
+      {
+        "field": "eau/humidité tarentule",
+        "quote": "misting the tank using a plant mister can also help, especially for arboreal species, but be aware that the water droplets can evaporate quickly.",
+        "url": "https://www.amentsoc.org/insects/caresheets/tarantula.html"
+      },
+      {
+        "field": "terrarium scorpion",
+        "quote": "scorpions are best kept in a glass aquarium with a good escape proof preferably lockable lid.",
+        "url": "https://www.amentsoc.org/insects/caresheets/scorpions.html"
+      },
+      {
+        "field": "substrat scorpion par espèce",
+        "quote": "the type of substrate used in your terrarium depends on the particular species of scorpion you own, these fall in to two very basic types: forest species and desert species.",
+        "url": "https://www.amentsoc.org/insects/caresheets/scorpions.html"
+      }
+    ]
+  },
+  "limitations": {
+    "dogs": "DEFRA welfare code; equipment suggestions are limited to cited wording.",
+    "cats": "DEFRA welfare code; equipment suggestions are limited to cited wording.",
+    "rodents": "Deux profils documentés séparément: cobayes et hamsters. Ne pas propager la socialité du cobaye au hamster ni recommander une roue sans source dédiée.",
+    "rabbits": "La taille et le besoin de compagnie sont des prescriptions RSPCA; les appliquer en gardant leur contexte de lapins domestiques.",
+    "mammals": "Sources spécifiques au cheval et animaux exotiques au sens RSPCA; elles ne justifient pas des recommandations universelles à tous les mammifères (notamment furets).",
+    "birds": "RSPCA, conseils pour oiseaux de compagnie; ne pas utiliser les procédures d’hospitalisation, les contraintes cliniques ou les recommandations pour oiseaux malades du MSD pour le matériel d’oiseaux sains.",
+    "reptiles": "Le besoin de chauffage/UVB varie selon les espèces et les matériaux; ne pas transformer les exemples de plage ou types d’éclairage en réglages universels.",
+    "amphibians": "La qualité de l’eau, les températures et l’humidité varient selon taxon et habitat; aucun chiffre universel ne doit en être déduit.",
+    "freshwater": "Fiche générale RSPCA sur poissons d’aquarium d’eau douce; le choix d’espèce détermine volume et température.",
+    "marine": "Fiche OATA marine consultée sur setup, tests, maturation et changements. Besoin d’un écumeur à faire confirmer par revendeur selon les recommandations du fabricant; tests Ca/Mg/phosphate/dKH uniquement si coraux/hard corals selon le passage. Page consultée ne donne pas de consigne de compensation d’évaporation; aucune ajoutée.",
+    "insects": "Source pour phasmes uniquement; température, humidité et installation ne sont pas généralisables à tous les insectes.",
+    "arachnids": "Sources couvrant des tarentules débutantes et des scorpions; paramètres propres aux taxons et aux modes de vie."
+  },
+  "checkedAt": "2026-10-04",
+  "validation": {
+    "checker": "backend/prisma/enrichment/check_quotes.py (norm/score)",
+    "command": "python3 frontend/scripts/check-guide-sources.py --refresh",
+    "lastRun": "2026-10-03: 121/121 citations scored 1.0 against 15 exact source URLs; 0 URL errors. PDF sources downloaded and checked after pdftotext extraction.",
+    "method": "Exact quote scoring via the repository’s norm/score functions; HTML pages normalized in place, PDF sources are extracted with pdftotext -raw and normalized the same way. The checker deduplicates fetches by exact URL; each quote is scored only against its own URL."
+  }
+}
