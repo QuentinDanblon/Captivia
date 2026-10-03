@@ -13,8 +13,6 @@ import { CommonModule } from './common/common.module';
 import { CacheModule } from './cache/cache.module';
 import { TransformerModule } from './transformers/transformer.module';
 import { FilterModule } from './filters/filter.module';
-import { ExceptionsModule } from './common/exceptions/exceptions.module';
-import { InterceptorsModule } from './common/interceptors/interceptors.module';
 import { MonitoringModule } from './monitoring/monitoring.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { DatabaseOptimizationModule } from './database/database-optimization.module';
@@ -59,8 +57,8 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
       ? [
           RedisModule.forRootAsync({
             useFactory: (config: ConfigService) => {
-              const host = config.get('REDIS_HOST', 'localhost');
-              const port = config.get('REDIS_PORT', '6379');
+              const host = config.get<string>('REDIS_HOST', 'localhost');
+              const port = config.get<string>('REDIS_PORT', '6379');
               return {
                 type: 'single',
                 url: `redis://${host}:${port}`,
@@ -98,12 +96,12 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     CacheModule.registerAsync(),
     TransformerModule,
     FilterModule,
-    ExceptionsModule,
-    InterceptorsModule,
     SpeciesModule,
     HealthModule,
     CommonModule,
-    ...(redisEnabled ? [MonitoringModule, AnalyticsModule, DatabaseOptimizationModule] : []),
+    ...(redisEnabled
+      ? [MonitoringModule, AnalyticsModule, DatabaseOptimizationModule]
+      : []),
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

@@ -1,5 +1,5 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, RecommendedEquipment } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   PaginationQueryDto,
@@ -13,10 +13,10 @@ export class EquipmentService {
 
   // Mapping of GBIF class to template species ID for fallback
   private readonly classTemplateMapping: Record<string, number> = {
-    'Reptilia': 2448340, // Boa constrictor as reptile template
-    'Aves': 0, // No bird template yet
-    'Mammalia': 0, // No mammal template yet
-    'Amphibia': 0, // No amphibian template yet
+    Reptilia: 2448340, // Boa constrictor as reptile template
+    Aves: 0, // No bird template yet
+    Mammalia: 0, // No mammal template yet
+    Amphibia: 0, // No amphibian template yet
   };
 
   constructor(private readonly prisma: PrismaService) {}
@@ -27,7 +27,7 @@ export class EquipmentService {
     size?: string,
     page?: PaginationQueryDto,
   ): Promise<unknown> {
-    const where: any = {};
+    const where: Prisma.RecommendedEquipmentWhereInput = {};
 
     if (speciesId) {
       where.OR = [{ speciesId }, { speciesId: null }]; // Include general items
@@ -49,8 +49,14 @@ export class EquipmentService {
 
     // If no species-specific equipment found (only general), try fallback by class
     if (speciesId && recommendations.length === 0) {
-      this.logger.debug(`No specific equipment found for species ${speciesId}, attempting class fallback`);
-      recommendations = await this.getEquipmentFallbackByClass(speciesId, category, size);
+      this.logger.debug(
+        `No specific equipment found for species ${speciesId}, attempting class fallback`,
+      );
+      recommendations = await this.getEquipmentFallbackByClass(
+        speciesId,
+        category,
+        size,
+      );
     }
 
     // Recommandations éditoriales uniquement (taxonomie locale). L'intégration produits
@@ -82,11 +88,11 @@ export class EquipmentService {
     speciesId: number,
     category?: string,
     size?: string,
-  ): Promise<any[]> {
+  ): Promise<RecommendedEquipment[]> {
     try {
       // Try to fetch species data to get its class
       // Note: This is a simple implementation; in production, you'd want to cache this
-      const where: any = {
+      const where: Prisma.RecommendedEquipmentWhereInput = {
         OR: [{ speciesId: null }], // Get general items first
       };
 
@@ -109,10 +115,14 @@ export class EquipmentService {
         take: PAGINATION_MAX_LIMIT,
       });
 
-      this.logger.debug(`Returning ${generalEquipment.length} general equipment as fallback`);
+      this.logger.debug(
+        `Returning ${generalEquipment.length} general equipment as fallback`,
+      );
       return generalEquipment;
     } catch (error) {
-      this.logger.error(`Error in equipment fallback: ${error.message}`);
+      this.logger.error(
+        `Error in equipment fallback: ${(error as Error).message}`,
+      );
       return [];
     }
   }
@@ -163,9 +173,7 @@ export class EquipmentService {
         error instanceof Prisma.PrismaClientKnownRequestError &&
         error.code === 'P2025'
       ) {
-        throw new NotFoundException(
-          `Equipment recommendation ${id} not found`,
-        );
+        throw new NotFoundException(`Equipment recommendation ${id} not found`);
       }
       throw error;
     }

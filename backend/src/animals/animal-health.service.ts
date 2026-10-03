@@ -1,12 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AnimalsService } from './animals.service';
-import { CreateHealthRecordDto, UpdateHealthRecordDto } from './dto/health-record.dto';
 import {
-  PaginationQueryDto,
-  toPage,
-} from '../common/dto/pagination-query.dto';
-
+  CreateHealthRecordDto,
+  UpdateHealthRecordDto,
+} from './dto/health-record.dto';
+import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class AnimalHealthService {

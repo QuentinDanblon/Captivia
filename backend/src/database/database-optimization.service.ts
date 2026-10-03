@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRedis } from '@nestjs-modules/ioredis';
 import Redis from 'ioredis';
-import { promisify } from 'util';
 
 export interface QueryPerformance {
   query: string;
@@ -41,8 +40,15 @@ export class DatabaseOptimizationService {
   private readonly setAsync: (key: string, value: string) => Promise<'OK'>;
   private readonly incrAsync: (key: string) => Promise<number>;
   private readonly delAsync: (key: string) => Promise<number>;
-  private readonly expireAsync: (key: string, seconds: number) => Promise<'OK'>;
-  private readonly lrangeAsync: (key: string, start: number, stop: number) => Promise<string[]>;
+  private readonly expireAsync: (
+    key: string,
+    seconds: number,
+  ) => Promise<number>;
+  private readonly lrangeAsync: (
+    key: string,
+    start: number,
+    stop: number,
+  ) => Promise<string[]>;
   private readonly llenAsync: (key: string) => Promise<number>;
 
   // Configuration
@@ -51,13 +57,14 @@ export class DatabaseOptimizationService {
   private readonly MAX_SLOW_QUERIES = 50;
 
   constructor(@InjectRedis() private readonly redis: Redis) {
-    this.getAsync = promisify(this.redis.get).bind(this.redis);
-    this.setAsync = promisify(this.redis.set).bind(this.redis);
-    this.incrAsync = promisify(this.redis.incr).bind(this.redis);
-    this.delAsync = promisify(this.redis.del).bind(this.redis);
-    this.expireAsync = promisify(this.redis.expire).bind(this.redis);
-    this.lrangeAsync = promisify(this.redis.lrange).bind(this.redis);
-    this.llenAsync = promisify(this.redis.llen).bind(this.redis);
+    this.getAsync = (key) => this.redis.get(key);
+    this.setAsync = (key, value) => this.redis.set(key, value);
+    this.incrAsync = (key) => this.redis.incr(key);
+    this.delAsync = (key) => this.redis.del(key);
+    this.expireAsync = (key, seconds) => this.redis.expire(key, seconds);
+    this.lrangeAsync = (key, start, stop) =>
+      this.redis.lrange(key, start, stop);
+    this.llenAsync = (key) => this.redis.llen(key);
   }
 
   async trackQuery(
@@ -67,16 +74,19 @@ export class DatabaseOptimizationService {
     cacheHit: boolean = false,
   ): Promise<void> {
     const timestamp = new Date().toISOString();
-    
+
     // Track query performance
-    await this.setAsync(`query:perf:${timestamp}`, JSON.stringify({
-      query,
-      executionTime,
-      rowCount,
-      cacheHit,
-      timestamp,
-    }));
-    
+    await this.setAsync(
+      `query:perf:${timestamp}`,
+      JSON.stringify({
+        query,
+        executionTime,
+        rowCount,
+        cacheHit,
+        timestamp,
+      }),
+    );
+
     // Keep only recent query performance data
     await this.expireAsync('query:perf', 60 * 60 * 24 * 7); // 7 days
 
@@ -98,17 +108,28 @@ export class DatabaseOptimizationService {
     // Limit cache size
     const cacheSize = await this.llenAsync('query:perf');
     if (cacheSize > this.MAX_QUERY_CACHE_SIZE) {
-      await this.ltrimAsync('query:perf', cacheSize - this.MAX_QUERY_CACHE_SIZE, -1);
+      await this.ltrimAsync(
+        'query:perf',
+        cacheSize - this.MAX_QUERY_CACHE_SIZE,
+        -1,
+      );
     }
   }
 
   async getDatabaseStats(): Promise<DatabaseStats> {
-    const totalQueries = parseInt(await this.getAsync('db:queries:total') || '0');
-    const cacheHits = parseInt(await this.getAsync('db:cache:hits') || '0');
-    const cacheMisses = parseInt(await this.getAsync('db:cache:misses') || '0');
-    
-    const hitRate = (cacheHits + cacheMisses) > 0 ? cacheHits / (cacheHits + cacheMisses) : 0;
-    const slowQueryCount = parseInt(await this.getAsync('slow:query:count') || '0');
+    const totalQueries = parseInt(
+      (await this.getAsync('db:queries:total')) || '0',
+    );
+    const cacheHits = parseInt((await this.getAsync('db:cache:hits')) || '0');
+    const cacheMisses = parseInt(
+      (await this.getAsync('db:cache:misses')) || '0',
+    );
+
+    const hitRate =
+      cacheHits + cacheMisses > 0 ? cacheHits / (cacheHits + cacheMisses) : 0;
+    const slowQueryCount = parseInt(
+      (await this.getAsync('slow:query:count')) || '0',
+    );
 
     // Get recent queries
     const recentQueries = await this.getRecentQueries(20);
@@ -149,17 +170,19 @@ export class DatabaseOptimizationService {
 
   async getRecentQueries(limit: number = 20): Promise<QueryPerformance[]> {
     const queries = await this.lrangeAsync('query:perf', 0, limit - 1);
-    return queries.map(q => JSON.parse(q)).reverse();
+    return queries.map((q) => JSON.parse(q) as QueryPerformance).reverse();
   }
 
-  async getSlowQueries(): Promise<Array<{
-    query: string;
-    executionTime: number;
-    timestamp: string;
-    calls: number;
-  }>> {
-    const keys = await this.getAsync('slow:query:keys') || '{}';
-    const queryKeys = Object.keys(JSON.parse(keys));
+  async getSlowQueries(): Promise<
+    Array<{
+      query: string;
+      executionTime: number;
+      timestamp: string;
+      calls: number;
+    }>
+  > {
+    const keys = (await this.getAsync('slow:query:keys')) || '{}';
+    const queryKeys = Object.keys(JSON.parse(keys) as Record<string, unknown>);
 
     const slowQueries: Array<{
       query: string;
@@ -169,12 +192,14 @@ export class DatabaseOptimizationService {
     }> = [];
 
     for (const key of queryKeys) {
-      const calls = parseInt(await this.getAsync(`slow:query:${key}`) || '0');
+      const calls = parseInt((await this.getAsync(`slow:query:${key}`)) || '0');
       if (calls > 0) {
         slowQueries.push({
           query: key,
           executionTime: this.SLOW_QUERY_THRESHOLD,
-          timestamp: await this.getAsync('slow:query:last') || new Date().toISOString(),
+          timestamp:
+            (await this.getAsync('slow:query:last')) ||
+            new Date().toISOString(),
           calls,
         });
       }
@@ -202,22 +227,10 @@ export class DatabaseOptimizationService {
     ];
 
     const pipeline = this.redis.pipeline();
-    keys.forEach(key => pipeline.del(key));
+    keys.forEach((key) => pipeline.del(key));
     await pipeline.exec();
-    
-    this.logger.log('Database stats have been reset');
-  }
 
-  async getQueryExplain(query: string): Promise<any> {
-    // In a real implementation, this would use database-specific EXPLAIN functionality
-    // For now, return a mock response
-    return {
-      query,
-      timestamp: new Date().toISOString(),
-      message: 'Query explanation would be provided by the database driver',
-      estimatedCost: Math.floor(Math.random() * 1000),
-      estimatedRows: Math.floor(Math.random() * 1000),
-    };
+    this.logger.log('Database stats have been reset');
   }
 
   private generateRecommendations(stats: {
@@ -230,15 +243,21 @@ export class DatabaseOptimizationService {
     const recommendations: string[] = [];
 
     if (stats.hitRate < 0.5) {
-      recommendations.push('Cache hit rate is below 50%. Consider adding more queries to cache.');
+      recommendations.push(
+        'Cache hit rate is below 50%. Consider adding more queries to cache.',
+      );
     }
 
     if (stats.slowQueryCount > 10) {
-      recommendations.push('High number of slow queries detected. Review and optimize them.');
+      recommendations.push(
+        'High number of slow queries detected. Review and optimize them.',
+      );
     }
 
     if (stats.totalQueries > 1000 && stats.hitRate < 0.7) {
-      recommendations.push('Consider implementing query result caching for frequently accessed data.');
+      recommendations.push(
+        'Consider implementing query result caching for frequently accessed data.',
+      );
     }
 
     if (stats.hitRate > 0.8) {
@@ -246,17 +265,25 @@ export class DatabaseOptimizationService {
     }
 
     if (stats.slowQueryCount === 0 && stats.totalQueries > 100) {
-      recommendations.push('All queries are performing well. Monitor for future issues.');
+      recommendations.push(
+        'All queries are performing well. Monitor for future issues.',
+      );
     }
 
     if (recommendations.length === 0) {
-      recommendations.push('Database performance looks good. Continue monitoring.');
+      recommendations.push(
+        'Database performance looks good. Continue monitoring.',
+      );
     }
 
     return recommendations;
   }
 
-  private async ltrimAsync(key: string, start: number, stop: number): Promise<'OK'> {
+  private async ltrimAsync(
+    key: string,
+    _start: number,
+    _stop: number,
+  ): Promise<'OK'> {
     return this.setAsync(`${key}:len`, '0');
   }
 }

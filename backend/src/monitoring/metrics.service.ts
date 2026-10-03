@@ -1,7 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { InjectRedis } from '@nestjs-modules/ioredis';
 import Redis from 'ioredis';
-import { promisify } from 'util';
 
 export interface Metrics {
   totalRequests: number;
@@ -21,25 +20,36 @@ export class MetricsService implements OnModuleInit {
   private readonly getAsync: (key: string) => Promise<string | null>;
   private readonly setAsync: (key: string, value: string) => Promise<'OK'>;
   private readonly incrAsync: (key: string) => Promise<number>;
-  private readonly expireAsync: (key: string, seconds: number) => Promise<'OK'>;
+  private readonly expireAsync: (
+    key: string,
+    seconds: number,
+  ) => Promise<number>;
   private readonly delAsync: (key: string) => Promise<number>;
 
   constructor(@InjectRedis() private readonly redis: Redis) {
-    this.getAsync = promisify(this.redis.get).bind(this.redis);
-    this.setAsync = promisify(this.redis.set).bind(this.redis);
-    this.incrAsync = promisify(this.redis.incr).bind(this.redis);
-    this.expireAsync = promisify(this.redis.expire).bind(this.redis);
-    this.delAsync = promisify(this.redis.del).bind(this.redis);
+    this.getAsync = (key) => this.redis.get(key);
+    this.setAsync = (key, value) => this.redis.set(key, value);
+    this.incrAsync = (key) => this.redis.incr(key);
+    this.expireAsync = (key, seconds) => this.redis.expire(key, seconds);
+    this.delAsync = (key) => this.redis.del(key);
   }
 
-  async onModuleInit() {
-    this.initializeMetrics();
+  onModuleInit(): void {
+    // Volontairement non attendu : le préchauffage ne doit pas retarder le démarrage
+    // (et `initializeMetrics` absorbe déjà les erreurs de chaque lecture).
+    void this.initializeMetrics();
   }
 
   private async initializeMetrics() {
-    const keys = ['metrics:total', 'metrics:successful', 'metrics:failed', 
-                  'metrics:responseTime', 'metrics:cacheHits', 'metrics:cacheMisses'];
-    
+    const keys = [
+      'metrics:total',
+      'metrics:successful',
+      'metrics:failed',
+      'metrics:responseTime',
+      'metrics:cacheHits',
+      'metrics:cacheMisses',
+    ];
+
     for (const key of keys) {
       await this.getAsync(key).catch(() => {});
     }
@@ -61,13 +71,16 @@ export class MetricsService implements OnModuleInit {
   }
 
   async recordResponseTime(duration: number): Promise<void> {
-    const current = await this.getAsync('metrics:responseTime') || '0';
+    const current = (await this.getAsync('metrics:responseTime')) || '0';
     const sum = parseInt(current) + duration;
-    const count = await this.getAsync('metrics:responseTimeCount') || '0';
+    const count = (await this.getAsync('metrics:responseTimeCount')) || '0';
     const avg = Math.round(sum / (parseInt(count) + 1));
-    
+
     await this.setAsync('metrics:responseTime', avg.toString());
-    await this.setAsync('metrics:responseTimeCount', (parseInt(count) + 1).toString());
+    await this.setAsync(
+      'metrics:responseTimeCount',
+      (parseInt(count) + 1).toString(),
+    );
   }
 
   async recordCacheHit(): Promise<void> {
@@ -79,20 +92,21 @@ export class MetricsService implements OnModuleInit {
   }
 
   async getMetrics(): Promise<Metrics> {
-    const total = await this.getAsync('metrics:total') || '0';
-    const successful = await this.getAsync('metrics:successful') || '0';
-    const failed = await this.getAsync('metrics:failed') || '0';
-    const avgResponseTime = await this.getAsync('metrics:responseTime') || '0';
-    const cacheHits = await this.getAsync('metrics:cacheHits') || '0';
-    const cacheMisses = await this.getAsync('metrics:cacheMisses') || '0';
-    
+    const total = (await this.getAsync('metrics:total')) || '0';
+    const successful = (await this.getAsync('metrics:successful')) || '0';
+    const failed = (await this.getAsync('metrics:failed')) || '0';
+    const avgResponseTime =
+      (await this.getAsync('metrics:responseTime')) || '0';
+    const cacheHits = (await this.getAsync('metrics:cacheHits')) || '0';
+    const cacheMisses = (await this.getAsync('metrics:cacheMisses')) || '0';
+
     // Get endpoints
-    const endpoints = await this.getAsync('metrics:endpoints') || '{}';
-    const requestsByEndpoint = JSON.parse(endpoints);
+    const endpoints = (await this.getAsync('metrics:endpoints')) || '{}';
+    const requestsByEndpoint = JSON.parse(endpoints) as Record<string, number>;
 
     // Get errors by type
-    const errors = await this.getAsync('metrics:errors') || '{}';
-    const errorsByType = JSON.parse(errors);
+    const errors = (await this.getAsync('metrics:errors')) || '{}';
+    const errorsByType = JSON.parse(errors) as Record<string, number>;
 
     return {
       totalRequests: parseInt(total),
@@ -108,14 +122,22 @@ export class MetricsService implements OnModuleInit {
   }
 
   async resetMetrics(): Promise<void> {
-    const keys = ['metrics:total', 'metrics:successful', 'metrics:failed', 
-                  'metrics:responseTime', 'metrics:responseTimeCount', 
-                  'metrics:cacheHits', 'metrics:cacheMisses', 'metrics:endpoints', 'metrics:errors'];
-    
+    const keys = [
+      'metrics:total',
+      'metrics:successful',
+      'metrics:failed',
+      'metrics:responseTime',
+      'metrics:responseTimeCount',
+      'metrics:cacheHits',
+      'metrics:cacheMisses',
+      'metrics:endpoints',
+      'metrics:errors',
+    ];
+
     const pipeline = this.redis.pipeline();
-    keys.forEach(key => pipeline.del(key));
+    keys.forEach((key) => pipeline.del(key));
     await pipeline.exec();
-    
+
     this.logger.log('Metrics have been reset');
   }
 
@@ -128,14 +150,16 @@ export class MetricsService implements OnModuleInit {
   }> {
     const metrics = await this.getMetrics();
     const redisConnected = this.redis.status === 'ready';
-    
-    const errorRate = metrics.totalRequests > 0 
-      ? metrics.failedRequests / metrics.totalRequests 
-      : 0;
-    
-    const cacheHitRate = (metrics.cacheHits + metrics.cacheMisses) > 0
-      ? metrics.cacheHits / (metrics.cacheHits + metrics.cacheMisses)
-      : 0;
+
+    const errorRate =
+      metrics.totalRequests > 0
+        ? metrics.failedRequests / metrics.totalRequests
+        : 0;
+
+    const cacheHitRate =
+      metrics.cacheHits + metrics.cacheMisses > 0
+        ? metrics.cacheHits / (metrics.cacheHits + metrics.cacheMisses)
+        : 0;
 
     let status: 'healthy' | 'degraded' | 'unhealthy';
     if (errorRate > 0.1 || !redisConnected) {

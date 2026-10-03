@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks du client HTTP typés any */
 import { WikidataService } from './wikidata.service';
 
 describe('WikidataService (validation des entrées interpolées)', () => {
   const get = jest.fn();
   const buildService = () => new WikidataService({ get } as never);
+  const callAt = (index: number) =>
+    get.mock.calls[index] as [string, string, { params: { query: string } }];
 
   beforeEach(() => {
     get
@@ -37,8 +38,8 @@ describe('WikidataService (validation des entrées interpolées)', () => {
     const service = buildService();
     await service.getConservationStatus('Q140');
     expect(get).toHaveBeenCalledTimes(1);
-    expect(get.mock.calls[0][0]).toBe('wikidata-sparql');
-    expect(get.mock.calls[0][2].params.query).toContain('wd:Q140');
+    expect(callAt(0)[0]).toBe('wikidata-sparql');
+    expect(callAt(0)[2].params.query).toContain('wd:Q140');
   });
 
   it.each([
@@ -59,8 +60,8 @@ describe('WikidataService (validation des entrées interpolées)', () => {
   );
 
   it('accepte un nom scientifique valide', async () => {
-    await buildService().getSpeciesByScientificName("Boa constrictor");
+    await buildService().getSpeciesByScientificName('Boa constrictor');
     expect(get).toHaveBeenCalledTimes(1);
-    expect(get.mock.calls[0][2].params.query).toContain('"Boa constrictor"');
+    expect(callAt(0)[2].params.query).toContain('"Boa constrictor"');
   });
 });

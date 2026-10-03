@@ -23,7 +23,8 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
   });
 
   afterAll(async () => {
-    if (savedToken !== undefined) process.env.SPECIESPLUS_API_TOKEN = savedToken;
+    if (savedToken !== undefined)
+      process.env.SPECIESPLUS_API_TOKEN = savedToken;
     if (app) await app.close();
   });
 
@@ -37,7 +38,11 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
 
     it('GET /species/:id lit la taxonomie GBIF simulée et GET /species/999999 → 404', async () => {
       const ok = await request(url).get('/species/1').expect(200);
-      expect(ok.body).toMatchObject({ key: 1, kingdom: 'Animalia', source: 'gbif' });
+      expect(ok.body).toMatchObject({
+        key: 1,
+        kingdom: 'Animalia',
+        source: 'gbif',
+      });
       await request(url).get('/species/999999').expect(404);
     });
 
@@ -54,43 +59,61 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
     it.each(['12345', 'abcdefgh', '1234567890123456', '3017620422003x'])(
       'GET /food/product/%s → 400 (barcode ^\\d{8,14}$)',
       async (barcode) => {
-        const res = await request(url).get(`/food/product/${barcode}`).expect(400);
-        expect(JSON.stringify(res.body)).toContain('barcode must be 8 to 14 digits');
+        const res = await request(url)
+          .get(`/food/product/${barcode}`)
+          .expect(400);
+        expect(JSON.stringify(res.body)).toContain(
+          'barcode must be 8 to 14 digits',
+        );
       },
     );
 
     it('GET /food/product/<barcode valide> → 200 ; inconnu → 404', async () => {
-      const res = await request(url).get('/food/product/3017620422003').expect(200);
+      const res = await request(url)
+        .get('/food/product/3017620422003')
+        .expect(200);
       expect(res.body.code).toBe('3017620422003');
       await request(url).get('/food/product/99999999').expect(404);
     });
 
     it('GET /food/search : requête > 100 caractères → 400, sans q → 400', async () => {
-      await request(url).get(`/food/search?q=${'a'.repeat(101)}`).expect(400);
+      await request(url)
+        .get(`/food/search?q=${'a'.repeat(101)}`)
+        .expect(400);
       await request(url).get('/food/search').expect(400);
       await request(url).get('/food/search?q=dog&pageSize=101').expect(400);
     });
 
     it('GET /species/search : q > 100 caractères → 400', async () => {
-      await request(url).get(`/species/search?q=${'a'.repeat(101)}`).expect(400);
+      await request(url)
+        .get(`/species/search?q=${'a'.repeat(101)}`)
+        .expect(400);
     });
 
     it('GET /pubmed/search : q manquant, trop court ou trop long → 400', async () => {
       await request(url).get('/pubmed/search').expect(400);
       await request(url).get('/pubmed/search?q=a').expect(400);
-      await request(url).get(`/pubmed/search?q=${'a'.repeat(201)}`).expect(400);
+      await request(url)
+        .get(`/pubmed/search?q=${'a'.repeat(201)}`)
+        .expect(400);
       await request(url).get('/pubmed/search?q=boa&limit=500').expect(400);
     });
 
     it('GET /pubmed/search?q=boa → 200 (PubMed est publique, sans clé)', async () => {
-      const res = await request(url).get('/pubmed/search?q=boa+constrictor').expect(200);
+      const res = await request(url)
+        .get('/pubmed/search?q=boa+constrictor')
+        .expect(200);
       expect(res.body).toEqual([]);
     });
 
     it('GET /wikidata/entity : QID invalide → 400 ; /open-data/* : taxonId invalide → 400', async () => {
       await request(url).get('/wikidata/entity?qid=Q1}').expect(400);
-      await request(url).get('/api/open-data/eol/taxon?taxonId=abc').expect(400);
-      await request(url).get(`/api/open-data/wikipedia?title=${'a'.repeat(201)}`).expect(400);
+      await request(url)
+        .get('/api/open-data/eol/taxon?taxonId=abc')
+        .expect(400);
+      await request(url)
+        .get(`/api/open-data/wikipedia?title=${'a'.repeat(201)}`)
+        .expect(400);
     });
   });
 
@@ -117,8 +140,14 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
     });
 
     it('GET /species/:id/legislation : speciesPlus.status = disabled, aucune donnée CITES inventée', async () => {
-      const res = await request(url).get('/species/123/legislation').expect(200);
-      expect(res.body.speciesPlus).toEqual({ status: 'disabled', cites: null, eu: null });
+      const res = await request(url)
+        .get('/species/123/legislation')
+        .expect(200);
+      expect(res.body.speciesPlus).toEqual({
+        status: 'disabled',
+        cites: null,
+        eu: null,
+      });
     });
 
     it('GET /equipment : aucune liste de produits Amazon inventée', async () => {
@@ -181,7 +210,9 @@ describe('API externes — pannes des fournisseurs (aucun 500, cache non pollué
     const species = await request(url).get('/food/species/boa').expect(200);
     expect(species.body.degraded).toBe(true);
 
-    const product = await request(url).get('/food/product/3017620422003').expect(503);
+    const product = await request(url)
+      .get('/food/product/3017620422003')
+      .expect(503);
     expect(product.body.statusCode).toBe(503);
     outage.opff = false;
   });
@@ -190,13 +221,19 @@ describe('API externes — pannes des fournisseurs (aucun 500, cache non pollué
     outage.gbif = true;
 
     // Recherche sans résultat local → fallback GBIF en échec : 200, pas de 500
-    const search = await request(url).get('/species/search?q=zzfallback').expect(200);
+    const search = await request(url)
+      .get('/species/search?q=zzfallback')
+      .expect(200);
     expect(search.body.results).toEqual([]);
     expect(search.body.degraded).toBe(true);
 
     // Fiche d'une espèce du seed : 200 depuis le profil local, taxonomie absente
     const detail = await request(url).get('/species/5221172').expect(200);
-    expect(detail.body).toMatchObject({ key: 5221172, source: 'profile', degraded: true });
+    expect(detail.body).toMatchObject({
+      key: 5221172,
+      source: 'profile',
+      degraded: true,
+    });
     expect(detail.body.name).toBeTruthy();
 
     // Espèce absente du seed : on ne ment pas par un 404, c'est un 503 explicite
@@ -211,7 +248,9 @@ describe('API externes — pannes des fournisseurs (aucun 500, cache non pollué
     }
     const before = fakeExternalCalls.length;
 
-    const res = await request(url).get('/species/search?q=zzbreaker').expect(200);
+    const res = await request(url)
+      .get('/species/search?q=zzbreaker')
+      .expect(200);
     expect(res.body.degraded).toBe(true);
     const gbifCallsWhileOpen = fakeExternalCalls
       .slice(before)
@@ -219,7 +258,10 @@ describe('API externes — pannes des fournisseurs (aucun 500, cache non pollué
     expect(gbifCallsWhileOpen).toHaveLength(0);
 
     const health = await request(url).get('/gateway/health').expect(200);
-    expect(health.body.services.gbif).toMatchObject({ status: 'unhealthy', circuit: 'open' });
+    expect(health.body.services.gbif).toMatchObject({
+      status: 'unhealthy',
+      circuit: 'open',
+    });
     expect(health.body.status).toBe('degraded');
   });
 });

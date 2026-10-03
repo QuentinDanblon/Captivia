@@ -1,10 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : adaptateur axios simulé typé any */
 import { Logger } from '@nestjs/common';
-import {
-  AxiosError,
-  AxiosHeaders,
-  InternalAxiosRequestConfig,
-} from 'axios';
+import { AxiosError, AxiosHeaders, InternalAxiosRequestConfig } from 'axios';
 import {
   EXTERNAL_MAX_CONTENT_LENGTH,
   EXTERNAL_MAX_REDIRECTS,
@@ -33,7 +28,8 @@ function setup(steps: Step[], random = 0.5) {
   const configs: InternalAxiosRequestConfig[] = [];
   let index = 0;
 
-  const adapter = jest.fn(async (config: InternalAxiosRequestConfig) => {
+  // Adaptateur scripté : l'exécuteur de la promesse transforme tout `throw` en rejet.
+  const respond = (config: InternalAxiosRequestConfig) => {
     configs.push(config);
     const step = steps[Math.min(index, steps.length - 1)];
     index += 1;
@@ -51,7 +47,9 @@ function setup(steps: Step[], random = 0.5) {
     if ('status' in step) {
       throw new AxiosError(
         `Request failed with status code ${step.status}`,
-        step.status >= 500 ? AxiosError.ERR_BAD_RESPONSE : AxiosError.ERR_BAD_REQUEST,
+        step.status >= 500
+          ? AxiosError.ERR_BAD_RESPONSE
+          : AxiosError.ERR_BAD_REQUEST,
         config,
         {},
         {
@@ -73,14 +71,19 @@ function setup(steps: Step[], random = 0.5) {
       );
     }
     throw new AxiosError(step.network, AxiosError.ERR_NETWORK, config);
-  });
+  };
+  const adapter = jest.fn(
+    (config: InternalAxiosRequestConfig) =>
+      new Promise((resolve) => resolve(respond(config))),
+  );
 
   const http = new ExternalHttpService({
     adapter: adapter as never,
     now: () => clock,
-    sleep: async (ms) => {
+    sleep: (ms) => {
       sleeps.push(ms);
       clock += ms;
+      return Promise.resolve();
     },
     random: () => random,
   });
@@ -139,9 +142,15 @@ describe('ExternalHttpService', () => {
 
   describe('retry GBIF (erreur réseau, 5xx, 429 uniquement)', () => {
     it('réessaie après 503 puis réussit : 3 tentatives, backoff + jitter croissants', async () => {
-      const t = setup([{ status: 503 }, { status: 502 }, { ok: { key: 1 } }], 0.5);
+      const t = setup(
+        [{ status: 503 }, { status: 502 }, { ok: { key: 1 } }],
+        0.5,
+      );
 
-      const response = await t.http.get('gbif', 'https://api.gbif.org/v1/species/1');
+      const response = await t.http.get(
+        'gbif',
+        'https://api.gbif.org/v1/species/1',
+      );
 
       expect(response.data).toEqual({ key: 1 });
       expect(t.adapter).toHaveBeenCalledTimes(3);
@@ -164,7 +173,10 @@ describe('ExternalHttpService', () => {
     });
 
     it('réessaie sur erreur réseau (sans réponse HTTP)', async () => {
-      const t = setup([{ network: 'getaddrinfo EAI_AGAIN' }, { ok: { ok: true } }]);
+      const t = setup([
+        { network: 'getaddrinfo EAI_AGAIN' },
+        { ok: { ok: true } },
+      ]);
 
       await expect(
         t.http.get('gbif', 'https://api.gbif.org/v1/x'),
@@ -259,9 +271,11 @@ describe('ExternalHttpService', () => {
       const url = 'https://world.openpetfoodfacts.org/x';
 
       for (let i = 0; i < 5; i++) {
-        await expect(t.http.get('openpetfoodfacts', url)).rejects.toMatchObject({
-          response: { status: 503 },
-        });
+        await expect(t.http.get('openpetfoodfacts', url)).rejects.toMatchObject(
+          {
+            response: { status: 503 },
+          },
+        );
       }
       expect(t.http.isCircuitOpen('openpetfoodfacts')).toBe(true);
       expect(t.adapter).toHaveBeenCalledTimes(5);
@@ -275,7 +289,9 @@ describe('ExternalHttpService', () => {
     it('est isolé par fournisseur (GBIF ouvert, Wikipedia intact)', async () => {
       const t = setup([{ status: 503 }]);
       for (let i = 0; i < 5; i++) {
-        await t.http.get('gbif', 'https://api.gbif.org/v1/x', { retry: false }).catch(() => undefined);
+        await t.http
+          .get('gbif', 'https://api.gbif.org/v1/x', { retry: false })
+          .catch(() => undefined);
       }
       expect(t.http.isCircuitOpen('gbif')).toBe(true);
       expect(t.http.isCircuitOpen('wikipedia')).toBe(false);
@@ -285,16 +301,24 @@ describe('ExternalHttpService', () => {
     it('un 404 (réponse valide) ne compte pas comme un échec', async () => {
       const t = setup([{ status: 404 }]);
       for (let i = 0; i < 12; i++) {
-        await t.http.get('gbif', 'https://api.gbif.org/v1/x').catch(() => undefined);
+        await t.http
+          .get('gbif', 'https://api.gbif.org/v1/x')
+          .catch(() => undefined);
       }
       expect(t.http.isCircuitOpen('gbif')).toBe(false);
     });
 
     it('un succès remet le compteur d’échecs à zéro', async () => {
       const t = setup([
-        { status: 503 }, { status: 503 }, { status: 503 }, { status: 503 },
+        { status: 503 },
+        { status: 503 },
+        { status: 503 },
+        { status: 503 },
         { ok: {} },
-        { status: 503 }, { status: 503 }, { status: 503 }, { status: 503 },
+        { status: 503 },
+        { status: 503 },
+        { status: 503 },
+        { status: 503 },
       ]);
       const url = 'https://world.openpetfoodfacts.org/x';
       for (let i = 0; i < 9; i++) {
@@ -347,13 +371,19 @@ describe('ExternalHttpService', () => {
   describe('isTransientError', () => {
     const cfg = {} as InternalAxiosRequestConfig;
     const withStatus = (status: number) =>
-      new AxiosError('x', AxiosError.ERR_BAD_RESPONSE, cfg, {}, {
-        status,
-        statusText: '',
-        data: {},
-        headers: {},
-        config: cfg,
-      });
+      new AxiosError(
+        'x',
+        AxiosError.ERR_BAD_RESPONSE,
+        cfg,
+        {},
+        {
+          status,
+          statusText: '',
+          data: {},
+          headers: {},
+          config: cfg,
+        },
+      );
 
     it.each([500, 502, 503, 504, 429])('%i est transitoire', (status) => {
       expect(isTransientError(withStatus(status))).toBe(true);
@@ -362,11 +392,19 @@ describe('ExternalHttpService', () => {
       expect(isTransientError(withStatus(status))).toBe(false);
     });
     it('réseau / timeout : oui ; dépassement de taille ou de redirections : non', () => {
-      expect(isTransientError(new AxiosError('x', AxiosError.ERR_NETWORK))).toBe(true);
-      expect(isTransientError(new AxiosError('x', AxiosError.ECONNABORTED))).toBe(true);
+      expect(
+        isTransientError(new AxiosError('x', AxiosError.ERR_NETWORK)),
+      ).toBe(true);
+      expect(
+        isTransientError(new AxiosError('x', AxiosError.ECONNABORTED)),
+      ).toBe(true);
       expect(isTransientError(new AxiosError('x', 'ECONNRESET'))).toBe(true);
-      expect(isTransientError(new AxiosError('x', AxiosError.ERR_BAD_RESPONSE))).toBe(false);
-      expect(isTransientError(new AxiosError('x', 'ERR_FR_TOO_MANY_REDIRECTS'))).toBe(false);
+      expect(
+        isTransientError(new AxiosError('x', AxiosError.ERR_BAD_RESPONSE)),
+      ).toBe(false);
+      expect(
+        isTransientError(new AxiosError('x', 'ERR_FR_TOO_MANY_REDIRECTS')),
+      ).toBe(false);
       expect(isTransientError(new Error('bug applicatif'))).toBe(false);
     });
   });
@@ -374,7 +412,11 @@ describe('ExternalHttpService', () => {
   describe('assertSafeRedirect', () => {
     it('accepte une redirection https vers un hôte public', () => {
       expect(() =>
-        assertSafeRedirect({ protocol: 'https:', hostname: 'en.wikipedia.org', headers: {} }),
+        assertSafeRedirect({
+          protocol: 'https:',
+          hostname: 'en.wikipedia.org',
+          headers: {},
+        }),
       ).not.toThrow();
     });
 
@@ -396,7 +438,11 @@ describe('ExternalHttpService', () => {
       const options = {
         protocol: 'https:',
         hostname: 'other.example.org',
-        headers: { 'X-Authentication-Token': 'secret', Authorization: 'Bearer x', Accept: 'a' },
+        headers: {
+          'X-Authentication-Token': 'secret',
+          Authorization: 'Bearer x',
+          Accept: 'a',
+        },
       };
       assertSafeRedirect(options);
       expect(options.headers).toEqual({ Accept: 'a' });

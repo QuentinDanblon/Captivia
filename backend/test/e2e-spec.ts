@@ -29,7 +29,7 @@ describe('API E2E Tests', () => {
       }),
     );
     await app.init();
-    
+
     prisma = app.get(PrismaService);
   });
 
@@ -67,9 +67,7 @@ describe('API E2E Tests', () => {
     });
 
     it('/species/search with empty query should return 400', () => {
-      return request(app.getHttpServer())
-        .get('/species/search')
-        .expect(400);
+      return request(app.getHttpServer()).get('/species/search').expect(400);
     });
 
     it('/species/search with negative limit should return 400', () => {
@@ -98,9 +96,7 @@ describe('API E2E Tests', () => {
     });
 
     it('/species/:id with invalid ID should return 404', () => {
-      return request(app.getHttpServer())
-        .get('/species/999999')
-        .expect(404);
+      return request(app.getHttpServer()).get('/species/999999').expect(404);
     });
   });
 
@@ -122,9 +118,7 @@ describe('API E2E Tests', () => {
     });
 
     it('/invalid-endpoint should return 404', () => {
-      return request(app.getHttpServer())
-        .get('/invalid')
-        .expect(404);
+      return request(app.getHttpServer()).get('/invalid').expect(404);
     });
   });
 
@@ -148,7 +142,7 @@ describe('API E2E Tests', () => {
       expect(response.body).toHaveProperty('user');
       expect(response.body.user).toHaveProperty('email', testEmail);
       expect(response.body.user).toHaveProperty('locale', 'fr');
-      
+
       authToken = response.body.accessToken;
       userId = response.body.user.id;
     });
@@ -199,9 +193,7 @@ describe('API E2E Tests', () => {
     });
 
     it('GET /auth/me without token should return 401', () => {
-      return request(app.getHttpServer())
-        .get('/auth/me')
-        .expect(401);
+      return request(app.getHttpServer()).get('/auth/me').expect(401);
     });
   });
 
@@ -220,7 +212,7 @@ describe('API E2E Tests', () => {
       expect(response.body).toHaveProperty('id');
       expect(response.body).toHaveProperty('name', 'Test Animal');
       expect(response.body).toHaveProperty('speciesId', 5221172);
-      
+
       animalId = response.body.id;
     });
 
@@ -274,9 +266,7 @@ describe('API E2E Tests', () => {
     });
 
     it('GET /users/me/animals without auth should return 401', () => {
-      return request(app.getHttpServer())
-        .get('/users/me/animals')
-        .expect(401);
+      return request(app.getHttpServer()).get('/users/me/animals').expect(401);
     });
   });
 
@@ -297,7 +287,7 @@ describe('API E2E Tests', () => {
       expect(response.body).toHaveProperty('id');
       expect(response.body).toHaveProperty('type', 'nourrissage');
       expect(response.body).toHaveProperty('frequency', 'daily');
-      
+
       routineId = response.body.id;
     });
 
@@ -347,7 +337,7 @@ describe('API E2E Tests', () => {
 
       expect(response.body).toHaveProperty('id');
       expect(response.body).toHaveProperty('type', 'nourrissage');
-      
+
       logId = response.body.id;
     });
 

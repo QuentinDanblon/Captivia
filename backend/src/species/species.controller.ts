@@ -17,6 +17,7 @@ import {
   ApiResponse,
 } from '@nestjs/swagger';
 import { SpeciesService } from './species.service';
+import { SpeciesFilter } from '../filters/species-filter.interface';
 import { SearchSpeciesDto, GetSpeciesDto } from '../dto/species.dto';
 import {
   isUpstreamNotFound,
@@ -86,7 +87,7 @@ export class SpeciesController {
         Object.entries(filters).filter(
           ([, v]) => v !== undefined && v !== null && v !== '',
         ),
-      ) as any,
+      ) as SpeciesFilter,
     );
     return results;
   }
@@ -106,10 +107,7 @@ export class SpeciesController {
       return response;
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch species details');
@@ -126,14 +124,10 @@ export class SpeciesController {
       const response = await this.speciesService.getVernacularNames(
         getSpeciesDto.id,
       );
-      // GBIF returns empty array directly, not wrapped in results
-      return Array.isArray(response) ? response : response.results || [];
+      return response.results || [];
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch vernacular names');
@@ -150,10 +144,7 @@ export class SpeciesController {
       return await this.speciesService.getIucn(getSpeciesDto.id);
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException(
           'IUCN status not available for this species',
         );
@@ -166,7 +157,10 @@ export class SpeciesController {
   @ApiOperation({ summary: 'Get reproduction factsheet for a species' })
   @ApiParam({ name: 'id', description: 'Species ID' })
   @ApiResponse({ status: 200, description: 'Reproduction factsheet' })
-  @ApiResponse({ status: 404, description: 'Reproduction data not available for this species' })
+  @ApiResponse({
+    status: 404,
+    description: 'Reproduction data not available for this species',
+  })
   async getReproduction(@Param() getSpeciesDto: GetSpeciesDto) {
     try {
       return await this.speciesService.getReproduction(getSpeciesDto.id);
@@ -192,14 +186,10 @@ export class SpeciesController {
       const response = await this.speciesService.getDistributions(
         getSpeciesDto.id,
       );
-      // GBIF returns empty array directly, not wrapped in results
-      return Array.isArray(response) ? response : response.results || [];
+      return response;
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch distribution data');
@@ -214,14 +204,10 @@ export class SpeciesController {
   async getMedia(@Param() getSpeciesDto: GetSpeciesDto) {
     try {
       const response = await this.speciesService.getMedia(getSpeciesDto.id);
-      // GBIF returns empty array directly, not wrapped in results
-      return Array.isArray(response) ? response : response.results || [];
+      return response.results || [];
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch media data');
@@ -238,10 +224,7 @@ export class SpeciesController {
       return await this.speciesService.getMetrics(getSpeciesDto.id);
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch metrics');
@@ -258,10 +241,7 @@ export class SpeciesController {
       return await this.speciesService.countOccurrences(getSpeciesDto.id);
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch occurrence count');

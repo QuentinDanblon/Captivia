@@ -26,18 +26,18 @@ describe('Security Tests', () => {
     // Create two test users
     const user1Email = `security-test-1-${Date.now()}@captivia.com`;
     const user2Email = `security-test-2-${Date.now()}@captivia.com`;
-    
+
     const user1Response = await request(url)
       .post('/auth/register')
       .send({ email: user1Email, password: 'password123', ...TERMS });
-    
+
     user1Token = user1Response.body.accessToken;
     user1Id = user1Response.body.user.id;
-    
+
     const user2Response = await request(url)
       .post('/auth/register')
       .send({ email: user2Email, password: 'password123', ...TERMS });
-    
+
     user2Token = user2Response.body.accessToken;
     user2Id = user2Response.body.user.id;
 
@@ -49,7 +49,7 @@ describe('Security Tests', () => {
         speciesId: 5221172,
         name: 'Security Test Animal',
       });
-    
+
     user1AnimalId = animalResponse.body.id;
   });
 
@@ -68,9 +68,7 @@ describe('Security Tests', () => {
 
   describe('JWT Authentication', () => {
     it('should reject requests without token', () => {
-      return request(url)
-        .get('/users/me/animals')
-        .expect(401);
+      return request(url).get('/users/me/animals').expect(401);
     });
 
     it('should reject requests with invalid token', () => {
@@ -103,14 +101,14 @@ describe('Security Tests', () => {
         .expect(200);
     });
 
-    it('should prevent user from accessing another user\'s animal', () => {
+    it("should prevent user from accessing another user's animal", () => {
       return request(url)
         .get(`/users/me/animals/${user1AnimalId}`)
         .set('Authorization', `Bearer ${user2Token}`)
         .expect(403);
     });
 
-    it('should prevent user from updating another user\'s animal', () => {
+    it("should prevent user from updating another user's animal", () => {
       return request(url)
         .patch(`/users/me/animals/${user1AnimalId}`)
         .set('Authorization', `Bearer ${user2Token}`)
@@ -118,7 +116,7 @@ describe('Security Tests', () => {
         .expect(403);
     });
 
-    it('should prevent user from deleting another user\'s animal', () => {
+    it("should prevent user from deleting another user's animal", () => {
       return request(url)
         .delete(`/users/me/animals/${user1AnimalId}`)
         .set('Authorization', `Bearer ${user2Token}`)
@@ -221,9 +219,7 @@ describe('Security Tests', () => {
 
     it('should handle SQL injection in ID parameter', () => {
       // DTO durci : id doit être numérique strict → 400 (validation, plus 404)
-      return request(url)
-        .get("/species/1' OR '1'='1")
-        .expect(400);
+      return request(url).get("/species/1' OR '1'='1").expect(400);
     });
   });
 
@@ -244,20 +240,21 @@ describe('Security Tests', () => {
   describe('Rate Limiting', () => {
     it('should handle burst requests', async () => {
       const requests: request.Test[] = [];
-      
+
       for (let i = 0; i < 10; i++) {
-        requests.push(
-          request(url)
-            .get('/species/search?q=test')
-        );
+        requests.push(request(url).get('/species/search?q=test'));
       }
 
       const responses = await Promise.all(requests);
-      
+
       // Some should succeed, rate limiter might kick in
-      const successCount = responses.filter((r: any) => r.status === 200).length;
-      const rateLimitCount = responses.filter((r: any) => r.status === 429).length;
-      
+      const successCount = responses.filter(
+        (r: any) => r.status === 200,
+      ).length;
+      const rateLimitCount = responses.filter(
+        (r: any) => r.status === 429,
+      ).length;
+
       expect(successCount + rateLimitCount).toBe(10);
     });
   });
@@ -266,7 +263,7 @@ describe('Security Tests', () => {
     it('should hash passwords (not store plaintext)', async () => {
       const testEmail = `pwd-test-${Date.now()}@captivia.com`;
       const password = 'test-password-123';
-      
+
       await request(url)
         .post('/auth/register')
         .send({
@@ -285,7 +282,7 @@ describe('Security Tests', () => {
       // Password should not be stored as plaintext
       expect(user?.passwordHash).not.toEqual(password);
       expect(user?.passwordHash).toMatch(/^\$2[aby]\$.{56}$/); // bcrypt format
-      
+
       // Cleanup
       if (user) {
         await prisma.user.delete({ where: { id: user.id } });
@@ -304,7 +301,7 @@ describe('Security Tests', () => {
       expect(response.body).not.toHaveProperty('password');
     });
 
-    it('should not expose other users\' data', async () => {
+    it("should not expose other users' data", async () => {
       const response = await request(url)
         .get('/users/me/animals')
         .set('Authorization', `Bearer ${user1Token}`)

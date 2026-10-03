@@ -48,15 +48,15 @@ export class HttpExceptionFilter implements ExceptionFilter {
       const path = (request.originalUrl ?? request.url ?? '').split('?')[0];
       const detail =
         exception instanceof Error ? exception.message : String(exception);
-      const reqId = (request as Request & { id?: unknown }).id;
+      const reqId = (request as Request & { id?: string }).id;
       this.logger.error(
-        `${request.method} ${path} -> ${status}: ${detail}${reqId ? ` (reqId=${String(reqId)})` : ''}`,
+        `${request.method} ${path} -> ${status}: ${detail}${reqId ? ` (reqId=${reqId})` : ''}`,
         exception instanceof Error ? exception.stack : undefined,
       );
       // Remontée à Sentry des erreurs serveur (>= 500 ou non-HTTP) si initialisé.
       if (Sentry.isInitialized()) {
         Sentry.captureException(exception, {
-          tags: reqId ? { request_id: String(reqId) } : undefined,
+          tags: reqId ? { request_id: reqId } : undefined,
         });
       }
     }

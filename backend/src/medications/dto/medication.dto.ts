@@ -13,17 +13,25 @@ import {
 import { Transform } from 'class-transformer';
 import { IsValidDate } from '../../animals/dto/is-valid-date.decorator';
 
-export const MEDICATION_FREQUENCIES = ['daily', 'every_x_hours', 'weekly'] as const;
+export const MEDICATION_FREQUENCIES = [
+  'daily',
+  'every_x_hours',
+  'weekly',
+] as const;
 export type MedicationFrequency = (typeof MEDICATION_FREQUENCIES)[number];
 
 export class CreateMedicationDto {
-  @Transform(({ value }: { value: unknown }) => (typeof value === 'string' ? value.trim() : value))
+  @Transform(({ value }: { value: unknown }) =>
+    typeof value === 'string' ? value.trim() : value,
+  )
   @IsString()
   @IsNotEmpty()
   @MaxLength(100)
   name: string;
 
-  @Transform(({ value }: { value: unknown }) => (typeof value === 'string' ? value.trim() : value))
+  @Transform(({ value }: { value: unknown }) =>
+    typeof value === 'string' ? value.trim() : value,
+  )
   @IsString()
   @IsNotEmpty()
   @MaxLength(50)

@@ -1,3 +1,4 @@
+import { EventEmitter } from 'events';
 import { Injectable, Logger } from '@nestjs/common';
 import Memcached = require('memcached');
 
@@ -19,7 +20,9 @@ export class MemcachedCacheService {
 
       this.client = new Memcached(`${host}:${port}`);
 
-      this.client.on('error', (err) => {
+      // Comportement historique : le client Memcached n'émet pas d'événement « error »
+      // (ses événements sont « issue », « failure »…), d'où le typage EventEmitter.
+      (this.client as EventEmitter).on('error', (err: unknown) => {
         this.logger.warn('Memcached connection error:', err);
       });
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks du client HTTP typés any */
 import { NotFoundException } from '@nestjs/common';
 import { GbifService } from './gbif.service';
 
@@ -103,7 +102,10 @@ describe('GbifService', () => {
       });
       expect(http.get).toHaveBeenCalledWith('gbif', `${BASE}/species/1/iucn`);
       await service.getMetrics('1');
-      expect(http.get).toHaveBeenCalledWith('gbif', `${BASE}/species/1/metrics`);
+      expect(http.get).toHaveBeenCalledWith(
+        'gbif',
+        `${BASE}/species/1/metrics`,
+      );
     });
 
     it('getDistributions et getMedia renvoient results', async () => {

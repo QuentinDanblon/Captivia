@@ -19,7 +19,9 @@ export class HealthQueryDto {
   /** Code langue à 2 lettres (fr, en…). */
   @IsOptional()
   @IsString()
-  @Matches(/^[A-Za-z]{2}$/, { message: 'locale must be a 2-letter language code' })
+  @Matches(/^[A-Za-z]{2}$/, {
+    message: 'locale must be a 2-letter language code',
+  })
   locale?: string;
 
   @IsOptional()

@@ -3,28 +3,24 @@ import {
   TransformedSpecies,
   TransformedSearchResult,
   TransformedVernacularResult,
-  TransformedMediaResult,
-  TransformedDistributionResult,
-  TransformedMetricsResult,
   TransformedOccurrenceCountResult,
   Distribution,
   Media,
   Metrics,
-  WikipediaData,
-  WikidataData,
-  ConservationStatus,
-  Classification,
-  Description,
-  Image,
-  RelatedSpecies,
-  MultiSourceResult,
 } from './data-transformer.interface';
+import type {
+  GbifDistribution,
+  GbifMedia,
+  GbifMetrics,
+  GbifSpecies,
+  GbifVernacularName,
+} from '../external/gbif.types';
 
 @Injectable()
 export class SpeciesTransformerService {
   private readonly logger = new Logger(SpeciesTransformerService.name);
 
-  transformSearchResults(gbifResults: any[]): TransformedSearchResult {
+  transformSearchResults(gbifResults: GbifSpecies[]): TransformedSearchResult {
     this.logger.debug(`Transforming ${gbifResults.length} search results`);
 
     return {
@@ -35,7 +31,7 @@ export class SpeciesTransformerService {
     };
   }
 
-  transformSpecies(gbifSpecies: any): TransformedSpecies {
+  transformSpecies(gbifSpecies: GbifSpecies): TransformedSpecies {
     const canonicalName = gbifSpecies.canonicalName || gbifSpecies.name;
     return {
       key: gbifSpecies.key,
@@ -52,7 +48,9 @@ export class SpeciesTransformerService {
       status: gbifSpecies.status || 'UNKNOWN',
       vernacularNames: this.extractVernacularNames(gbifSpecies),
       iucnStatus: gbifSpecies.iucn?.status,
-      distributions: this.transformDistributions(gbifSpecies.distributions || []),
+      distributions: this.transformDistributions(
+        gbifSpecies.distributions || [],
+      ),
       media: this.transformMedia(gbifSpecies.media || []),
       metrics: this.transformMetrics(gbifSpecies.metrics),
       occurrenceCount: gbifSpecies.occurrenceCount,
@@ -61,7 +59,9 @@ export class SpeciesTransformerService {
     };
   }
 
-  transformVernacularNames(gbifResults: any[]): TransformedVernacularResult {
+  transformVernacularNames(
+    gbifResults: GbifVernacularName[],
+  ): TransformedVernacularResult {
     const items = gbifResults ?? [];
     this.logger.debug(`Transforming ${items.length} vernacular names`);
 
@@ -74,7 +74,7 @@ export class SpeciesTransformerService {
     };
   }
 
-  transformMedia(gbifResults: any[]): Media[] {
+  transformMedia(gbifResults: GbifMedia[]): Media[] {
     const items = gbifResults ?? [];
     this.logger.debug(`Transforming ${items.length} media items`);
 
@@ -91,7 +91,7 @@ export class SpeciesTransformerService {
     }));
   }
 
-  transformDistributions(gbifResults: any[]): Distribution[] {
+  transformDistributions(gbifResults: GbifDistribution[]): Distribution[] {
     const items = gbifResults ?? [];
     this.logger.debug(`Transforming ${items.length} distribution items`);
 
@@ -102,7 +102,7 @@ export class SpeciesTransformerService {
     }));
   }
 
-  transformMetrics(gbifMetrics: any): Metrics {
+  transformMetrics(gbifMetrics: GbifMetrics | null | undefined): Metrics {
     this.logger.debug('Transforming metrics');
 
     return {
@@ -113,7 +113,10 @@ export class SpeciesTransformerService {
   }
 
   transformOccurrenceCount(
-    gbifResult: any,
+    gbifResult:
+      | { count?: string | number; limit?: unknown; offset?: unknown }
+      | null
+      | undefined,
   ): TransformedOccurrenceCountResult {
     this.logger.debug('Transforming occurrence count');
     const count = parseInt(String(gbifResult?.count ?? ''), 10);
@@ -129,198 +132,11 @@ export class SpeciesTransformerService {
     };
   }
 
-  /**
-   * Transform Wikipedia data
-   */
-  transformWikipediaData(wikipediaData: any): WikipediaData | null {
-    if (!wikipediaData) {
-      return null;
-    }
-
-    return {
-      title: wikipediaData.title,
-      pageid: wikipediaData.pageid,
-      url: wikipediaData.content_urls?.desktop?.page || wikipediaData.url,
-      thumbnail: wikipediaData.thumbnail?.source,
-      extract: wikipediaData.extract,
-      extractHtml: wikipediaData.extract_html,
-      originalimage: wikipediaData.originalimage?.source,
-      terms: wikipediaData.terms || {},
-      source: 'wikipedia',
-      timestamp: new Date(),
-    };
-  }
-
-  /**
-   * Transform Wikidata data
-   */
-  transformWikidataData(wikidataData: any): WikidataData | null {
-    if (!wikidataData) {
-      return null;
-    }
-
-    return {
-      id: wikidataData.id,
-      labels: wikidataData.labels,
-      descriptions: wikidataData.descriptions,
-      aliases: wikidataData.aliases,
-      claims: wikidataData.claims,
-      sitelinks: wikidataData.sitelinks,
-      source: 'wikidata',
-      timestamp: new Date(),
-    };
-  }
-
-  /**
-   * Transform conservation status data
-   */
-  transformConservationStatus(conservationData: any): ConservationStatus | null {
-    if (!conservationData) {
-      return null;
-    }
-
-    return {
-      iucnStatus: conservationData.iucnStatus?.value,
-      citesStatus: conservationData.citesStatus?.value,
-      berneStatus: conservationData.berneStatus?.value,
-      cmsStatus: conservationData.cmsStatus?.value,
-      statusDescription: conservationData.statusDescription?.value,
-      source: 'wikidata',
-    };
-  }
-
-  /**
-   * Transform classification data
-   */
-  transformClassification(classificationData: any): Classification | null {
-    if (!classificationData) {
-      return null;
-    }
-
-    return {
-      family: classificationData.family?.value,
-      genus: classificationData.genus?.value,
-      order: classificationData.order?.value,
-      phylum: classificationData.phylum?.value,
-      class: classificationData.class?.value,
-      kingdom: classificationData.kingdom?.value,
-      scientificName: classificationData.scientificName?.value,
-      commonName: classificationData.commonName?.value,
-      image: classificationData.image?.value,
-      source: 'wikidata',
-    };
-  }
-
-  /**
-   * Transform description data
-   */
-  transformDescriptions(descriptionData: any): Description | null {
-    if (!descriptionData) {
-      return null;
-    }
-
-    return {
-      description: descriptionData.description?.value,
-      shortDescription: descriptionData.shortDescription?.value,
-      alias: descriptionData.alias?.value,
-      source: 'wikidata',
-    };
-  }
-
-  /**
-   * Transform image data
-   */
-  transformImages(imagesData: any[]): Image[] {
-    if (!imagesData || !Array.isArray(imagesData)) {
-      return [];
-    }
-
-    return imagesData.map((img) => ({
-      image: img.image?.value,
-      license: img.license?.value,
-      caption: img.caption?.value,
-      source: 'wikidata',
-    }));
-  }
-
-  /**
-   * Transform related species data
-   */
-  transformRelatedSpecies(relatedData: any[]): RelatedSpecies[] {
-    if (!relatedData || !Array.isArray(relatedData)) {
-      return [];
-    }
-
-    return relatedData.map((related) => ({
-      related: related.related?.value,
-      relatedLabel: related.relatedLabel?.value,
-      relatedDescription: related.relatedDescription?.value,
-      source: 'wikidata',
-    }));
-  }
-
-  /**
-   * Transform multi-source data
-   */
-  transformMultiSourceData(multiData: MultiSourceResult): TransformedSpecies | null {
-    if (!multiData) {
-      return null;
-    }
-
-    const gbifSpecies = multiData.gbif;
-    const canonicalName = gbifSpecies?.canonicalName || gbifSpecies?.name;
-    const wikipediaData = this.transformWikipediaData(multiData.wikipedia);
-    const wikidataData = this.transformWikidataData(multiData.wikidata);
-
-    return {
-      key: gbifSpecies?.key,
-      name: canonicalName,
-      canonicalName,
-      scientificName: gbifSpecies?.scientificName || canonicalName,
-      rank: gbifSpecies?.rank,
-      kingdom: gbifSpecies?.kingdom,
-      phylum: gbifSpecies?.phylum,
-      class: gbifSpecies?.class,
-      order: gbifSpecies?.order,
-      family: gbifSpecies?.family,
-      genus: gbifSpecies?.genus,
-      status: gbifSpecies?.status || 'UNKNOWN',
-      vernacularNames: this.extractVernacularNames(gbifSpecies),
-      iucnStatus: gbifSpecies?.iucn?.status,
-      distributions: this.transformDistributions(gbifSpecies?.distributions || []),
-      media: this.transformMedia(gbifSpecies?.media || []),
-      metrics: this.transformMetrics(gbifSpecies?.metrics),
-      occurrenceCount: gbifSpecies?.occurrenceCount,
-      wikipedia: wikipediaData,
-      wikidata: wikidataData,
-      source: 'multi',
-      cachedAt: new Date(),
-    };
-  }
-
-  /**
-   * Combine multi-source data into a unified result
-   */
-  transformMultiSourceResult(multiData: MultiSourceResult): MultiSourceResult {
-    return {
-      gbif: multiData.gbif,
-      wikipedia: this.transformWikipediaData(multiData.wikipedia),
-      wikidata: this.transformWikidataData(multiData.wikidata),
-      conservation: this.transformConservationStatus(multiData.conservation),
-      classification: this.transformClassification(multiData.classification),
-      description: this.transformDescriptions(multiData.description),
-      images: this.transformImages(multiData.images),
-      related: this.transformRelatedSpecies(multiData.related),
-      source: 'multi',
-      timestamp: new Date(),
-    };
-  }
-
-  private extractVernacularNames(gbifSpecies: any): string[] {
+  private extractVernacularNames(gbifSpecies: GbifSpecies): string[] {
     return (
       gbifSpecies?.vernacularNames
-        ?.filter((vn: any) => vn.language === 'french')
-        .map((vn: any) => vn.name) || []
+        ?.filter((vn) => vn.language === 'french')
+        .map((vn) => vn.name) || []
     );
   }
 }

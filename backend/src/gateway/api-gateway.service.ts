@@ -7,15 +7,53 @@ import { SpeciesFilterService } from '../filters/species-filter.service';
 import { CacheService } from '../cache/cache.service';
 import {
   WikipediaData,
-  WikidataData,
   TransformedSpecies,
 } from '../transformers/data-transformer.interface';
+import type { GbifSpecies } from '../external/gbif.types';
 import { mapWithConcurrency } from './concurrency.util';
 import {
   GATEWAY_LIMIT_DEFAULT,
   GATEWAY_LIMIT_MAX,
   GATEWAY_LIMIT_MIN,
 } from './dto/gateway-search.dto';
+
+/** Champs Wikipedia repris à la fusion (la source peut être un résumé ou un résultat de recherche). */
+export type WikipediaMergeInput = Partial<
+  Omit<WikipediaData, 'source' | 'timestamp'>
+>;
+/** Champs Wikidata repris à la fusion (entité ou résultat de recherche : formes libres). */
+export interface WikidataMergeInput {
+  id?: string;
+  labels?: unknown;
+  descriptions?: unknown;
+  aliases?: unknown;
+  claims?: unknown;
+  sitelinks?: unknown;
+}
+
+/** Données brutes collectées auprès des sources avant fusion. */
+export interface SourceResults {
+  gbif?: GbifSpecies | null;
+  wikipedia?: WikipediaMergeInput | null;
+  wikidata?: WikidataMergeInput | null;
+}
+
+/** Résultat fusionné d'une espèce (réponses `enriched` et `complete`). */
+export interface MergedSpecies {
+  key?: string;
+  query?: string;
+  sources: string[];
+  timestamp: string;
+  gbif?: TransformedSpecies;
+  wikipedia?: WikipediaMergeInput | null;
+  wikidata?: WikidataMergeInput | null;
+}
+
+/** Réponse de `searchSpecies` : résultats GBIF transformés + enrichissement. */
+export interface GatewaySearchResult {
+  results: Array<TransformedSpecies & { enriched: MergedSpecies | null }>;
+  total: number;
+}
 
 /** Nombre maximal de résultats de recherche enrichis via Wikipedia/Wikidata. */
 export const MAX_ENRICHED_RESULTS = 5;
@@ -54,14 +92,14 @@ export class ApiGatewayService {
     ],
   ) {
     const cacheKey = `enriched:${query}:${sources.join(',')}`;
-    const cached = await this.cacheService.get(cacheKey);
+    const cached = this.cacheService.get(cacheKey);
 
     if (cached) {
       this.logger.debug(`Cache hit for enriched species: ${query}`);
-      return cached;
+      return cached as MergedSpecies;
     }
 
-    const results: any = {
+    const results: SourceResults = {
       gbif: null,
       wikipedia: null,
       wikidata: null,
@@ -72,7 +110,10 @@ export class ApiGatewayService {
       try {
         results.gbif = await this.fetchGbifData(query);
       } catch (error) {
-        this.logger.warn(`GBIF fetch failed for ${query}:`, error.message);
+        this.logger.warn(
+          `GBIF fetch failed for ${query}:`,
+          (error as Error).message,
+        );
       }
     }
 
@@ -81,7 +122,10 @@ export class ApiGatewayService {
       try {
         results.wikipedia = await this.fetchWikipediaData(query);
       } catch (error) {
-        this.logger.warn(`Wikipedia fetch failed for ${query}:`, error.message);
+        this.logger.warn(
+          `Wikipedia fetch failed for ${query}:`,
+          (error as Error).message,
+        );
       }
     }
 
@@ -90,14 +134,17 @@ export class ApiGatewayService {
       try {
         results.wikidata = await this.fetchWikidataData(query);
       } catch (error) {
-        this.logger.warn(`Wikidata fetch failed for ${query}:`, error.message);
+        this.logger.warn(
+          `Wikidata fetch failed for ${query}:`,
+          (error as Error).message,
+        );
       }
     }
 
     const enriched = this.mergeEnrichedData(query, results);
 
     // Cache enriched data for 24 hours
-    await this.cacheService.set(cacheKey, enriched, 86400);
+    this.cacheService.set(cacheKey, enriched, 86400);
 
     return enriched;
   }
@@ -109,10 +156,10 @@ export class ApiGatewayService {
    */
   async getCompleteSpecies(speciesKey: string) {
     const cacheKey = `complete:${speciesKey}`;
-    const cached = await this.cacheService.get(cacheKey);
+    const cached = this.cacheService.get(cacheKey);
 
     if (cached) {
-      return cached;
+      return cached as MergedSpecies;
     }
 
     const [gbifData, wikipediaData, wikidataData] = await Promise.allSettled([
@@ -121,7 +168,7 @@ export class ApiGatewayService {
       this.fetchWikidataDataById(speciesKey),
     ]);
 
-    const results = {
+    const results: SourceResults = {
       gbif: gbifData.status === 'fulfilled' ? gbifData.value : null,
       wikipedia:
         wikipediaData.status === 'fulfilled' ? wikipediaData.value : null,
@@ -130,7 +177,7 @@ export class ApiGatewayService {
 
     const complete = this.mergeCompleteSpecies(speciesKey, results);
 
-    await this.cacheService.set(cacheKey, complete, 86400);
+    this.cacheService.set(cacheKey, complete, 86400);
 
     return complete;
   }
@@ -153,13 +200,13 @@ export class ApiGatewayService {
   ) {
     const safeLimit = this.clampLimit(limit);
     const cacheKey = `search:${query}:${safeLimit}`;
-    const cached = await this.cacheService.get(cacheKey);
+    const cached = this.cacheService.get(cacheKey);
 
     if (cached) {
-      return cached;
+      return cached as GatewaySearchResult;
     }
 
-    let gbifResults: any[] = [];
+    let gbifResults: GbifSpecies[] = [];
 
     if (sources.includes('gbif')) {
       try {
@@ -170,7 +217,7 @@ export class ApiGatewayService {
         );
         gbifResults = (response?.results ?? []).slice(0, safeLimit);
       } catch (error) {
-        this.logger.warn(`GBIF search failed: ${error?.message}`);
+        this.logger.warn(`GBIF search failed: ${(error as Error)?.message}`);
       }
     }
 
@@ -178,25 +225,25 @@ export class ApiGatewayService {
     const enrichments = await mapWithConcurrency(
       toEnrich,
       ENRICH_CONCURRENCY,
-      async (gbifSpecies: any) => {
+      async (gbifSpecies) => {
         const name = gbifSpecies.canonicalName || gbifSpecies.name;
         try {
           return await this.getEnrichedSpecies(name, ['wikipedia', 'wikidata']);
         } catch (error) {
-          this.logger.warn(`Enrichment failed for ${name}: ${error?.message}`);
+          this.logger.warn(
+            `Enrichment failed for ${name}: ${(error as Error)?.message}`,
+          );
           return null;
         }
       },
     );
 
-    const enrichedResults = gbifResults.map(
-      (gbifSpecies: any, index: number) => ({
-        ...this.transformerService.transformSpecies(gbifSpecies),
-        enriched: index < enrichments.length ? enrichments[index] : null,
-      }),
-    );
+    const enrichedResults = gbifResults.map((gbifSpecies, index) => ({
+      ...this.transformerService.transformSpecies(gbifSpecies),
+      enriched: index < enrichments.length ? enrichments[index] : null,
+    }));
 
-    await this.cacheService.set(
+    this.cacheService.set(
       cacheKey,
       { results: enrichedResults, total: enrichedResults.length },
       86400,
@@ -219,7 +266,7 @@ export class ApiGatewayService {
    */
   async getConservationStatus(speciesKey: string) {
     const cacheKey = `conservation:${speciesKey}`;
-    const cached = await this.cacheService.get(cacheKey);
+    const cached = this.cacheService.get(cacheKey);
 
     if (cached) {
       return cached;
@@ -235,7 +282,7 @@ export class ApiGatewayService {
       wikidata: wikidataData.status === 'fulfilled' ? wikidataData.value : null,
     };
 
-    await this.cacheService.set(cacheKey, result, 86400);
+    this.cacheService.set(cacheKey, result, 86400);
 
     return result;
   }
@@ -247,7 +294,7 @@ export class ApiGatewayService {
    */
   async getClassification(speciesKey: string) {
     const cacheKey = `classification:${speciesKey}`;
-    const cached = await this.cacheService.get(cacheKey);
+    const cached = this.cacheService.get(cacheKey);
 
     if (cached) {
       return cached;
@@ -263,7 +310,7 @@ export class ApiGatewayService {
       wikidata: wikidataData.status === 'fulfilled' ? wikidataData.value : null,
     };
 
-    await this.cacheService.set(cacheKey, result, 86400);
+    this.cacheService.set(cacheKey, result, 86400);
 
     return result;
   }
@@ -275,7 +322,7 @@ export class ApiGatewayService {
    */
   async getDistributions(speciesKey: string) {
     const cacheKey = `distributions:${speciesKey}`;
-    const cached = await this.cacheService.get(cacheKey);
+    const cached = this.cacheService.get(cacheKey);
 
     if (cached) {
       return cached;
@@ -291,7 +338,7 @@ export class ApiGatewayService {
       wikidata: wikidataData.status === 'fulfilled' ? wikidataData.value : null,
     };
 
-    await this.cacheService.set(cacheKey, result, 86400);
+    this.cacheService.set(cacheKey, result, 86400);
 
     return result;
   }
@@ -303,7 +350,7 @@ export class ApiGatewayService {
    */
   async getMedia(speciesKey: string) {
     const cacheKey = `media:${speciesKey}`;
-    const cached = await this.cacheService.get(cacheKey);
+    const cached = this.cacheService.get(cacheKey);
 
     if (cached) {
       return cached;
@@ -319,7 +366,7 @@ export class ApiGatewayService {
       wikidata: wikidataData.status === 'fulfilled' ? wikidataData.value : null,
     };
 
-    await this.cacheService.set(cacheKey, result, 86400);
+    this.cacheService.set(cacheKey, result, 86400);
 
     return result;
   }
@@ -329,7 +376,7 @@ export class ApiGatewayService {
    */
   private async fetchGbifData(query: string) {
     const response = await this.gbifService.searchSpecies(query, 1, 0);
-    return response.results[0];
+    return response.results?.[0];
   }
 
   /**
@@ -384,8 +431,11 @@ export class ApiGatewayService {
   /**
    * Merge enriched data from multiple sources
    */
-  private mergeEnrichedData(query: string, results: any) {
-    const enriched: any = {
+  private mergeEnrichedData(
+    query: string,
+    results: SourceResults,
+  ): MergedSpecies {
+    const enriched: MergedSpecies = {
       query,
       sources: [],
       timestamp: new Date().toISOString(),
@@ -415,8 +465,11 @@ export class ApiGatewayService {
   /**
    * Merge complete species data
    */
-  private mergeCompleteSpecies(speciesKey: string, results: any) {
-    const complete: any = {
+  private mergeCompleteSpecies(
+    speciesKey: string,
+    results: SourceResults,
+  ): MergedSpecies {
+    const complete: MergedSpecies = {
       key: speciesKey,
       sources: [],
       timestamp: new Date().toISOString(),
@@ -443,7 +496,7 @@ export class ApiGatewayService {
   /**
    * Transform Wikipedia data for merging
    */
-  private transformWikipediaData(data: WikipediaData) {
+  private transformWikipediaData(data: WikipediaMergeInput | null | undefined) {
     if (!data) return null;
     return {
       title: data.title,
@@ -460,7 +513,7 @@ export class ApiGatewayService {
   /**
    * Transform Wikidata data for merging
    */
-  private transformWikidataData(data: WikidataData) {
+  private transformWikidataData(data: WikidataMergeInput | null | undefined) {
     if (!data) return null;
     return {
       id: data.id,
@@ -526,7 +579,7 @@ export class ApiGatewayService {
   /**
    * Clear cache for a species
    */
-  async clearSpeciesCache(speciesKey: string) {
+  clearSpeciesCache(speciesKey: string): void {
     const keys = [
       `enriched:${speciesKey}`,
       `complete:${speciesKey}`,

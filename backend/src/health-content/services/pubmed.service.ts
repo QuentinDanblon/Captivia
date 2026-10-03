@@ -14,6 +14,25 @@ export interface PubMedArticle {
   url: string;
 }
 
+/** Réponse de `esearch.fcgi` (champs lus uniquement). */
+interface PubmedSearchResponse {
+  esearchresult?: { idlist?: unknown[] };
+}
+
+/** Réponse de `esummary.fcgi` : `result` est indexé par PMID. */
+interface PubmedSummaryResponse {
+  result?: Record<
+    string,
+    | {
+        title?: string;
+        authors?: Array<{ name: string }>;
+        source?: string;
+        pubdate?: string;
+      }
+    | undefined
+  >;
+}
+
 /** Les PMID renvoyés par PubMed sont numériques ; on ne réinjecte rien d'autre dans l'URL. */
 const PMID_REGEX = /^\d{1,10}$/;
 
@@ -56,12 +75,12 @@ export class PubmedService {
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as PubMedArticle[];
     }
 
     try {
       // Step 1: Search for PMIDs
-      const searchResponse = await this.http.get(
+      const searchResponse = await this.http.get<PubmedSearchResponse>(
         'pubmed',
         `${this.baseUrl}/esearch.fcgi`,
         {
@@ -74,18 +93,18 @@ export class PubmedService {
           },
         },
       );
-      const pmids: string[] = (
-        searchResponse.data?.esearchresult?.idlist || []
-      ).filter((id: unknown) => typeof id === 'string' && PMID_REGEX.test(id));
+      const pmids = (searchResponse.data?.esearchresult?.idlist || []).filter(
+        (id): id is string => typeof id === 'string' && PMID_REGEX.test(id),
+      );
 
       // Réponse valide « aucun article » : mise en cache (1 h, plus court qu'un résultat).
       if (pmids.length === 0) {
-        await this.cacheService.set(cacheKey, JSON.stringify([]), 3600);
+        this.cacheService.set(cacheKey, JSON.stringify([]), 3600);
         return [];
       }
 
       // Step 2: Fetch article details
-      const fetchResponse = await this.http.get(
+      const fetchResponse = await this.http.get<PubmedSummaryResponse>(
         'pubmed',
         `${this.baseUrl}/esummary.fcgi`,
         {
@@ -105,7 +124,7 @@ export class PubmedService {
           articles.push({
             pmid,
             title: article.title || '',
-            authors: article.authors?.map((a: any) => a.name) || [],
+            authors: article.authors?.map((a) => a.name) || [],
             journal: article.source || '',
             pubDate: article.pubdate || '',
             url: `https://pubmed.ncbi.nlm.nih.gov/${pmid}/`,
@@ -114,7 +133,7 @@ export class PubmedService {
       }
 
       // Cache for 24 hours
-      await this.cacheService.set(cacheKey, JSON.stringify(articles), 86400);
+      this.cacheService.set(cacheKey, JSON.stringify(articles), 86400);
 
       return articles;
     } catch (error) {
@@ -122,7 +141,7 @@ export class PubmedService {
       const stale = this.cacheService.getStale(cacheKey);
       if (typeof stale === 'string' && stale) {
         try {
-          return JSON.parse(stale);
+          return JSON.parse(stale) as PubMedArticle[];
         } catch {
           /* entrée illisible : 503 ci-dessous */
         }
@@ -164,7 +183,7 @@ export class PubmedService {
 
       if (abstract) {
         // Cache for 7 days
-        await this.cacheService.set(cacheKey, abstract, 604800);
+        this.cacheService.set(cacheKey, abstract, 604800);
       }
 
       return abstract;
@@ -189,7 +208,8 @@ export class PubmedService {
     }
 
     // Add filters for veterinary/animal health
-    query += ' AND (veterinary[Title/Abstract] OR animal[Title/Abstract] OR reptile[Title/Abstract])';
+    query +=
+      ' AND (veterinary[Title/Abstract] OR animal[Title/Abstract] OR reptile[Title/Abstract])';
 
     return this.searchArticles(query, 5);
   }

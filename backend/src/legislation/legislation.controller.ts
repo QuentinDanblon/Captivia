@@ -38,18 +38,29 @@ export class LegislationController {
     description:
       'Returns legislation status including CITES, EU Wildlife Trade Regulation, and country-specific rules',
   })
-  @ApiParam({ name: 'speciesId', description: 'GBIF species key', type: Number })
+  @ApiParam({
+    name: 'speciesId',
+    description: 'GBIF species key',
+    type: Number,
+  })
   @ApiQuery({
     name: 'country',
     required: false,
     description: 'ISO country code (FR, US, GB, etc.)',
   })
-  @ApiResponse({ status: 200, description: 'Legislation information retrieved' })
+  @ApiResponse({
+    status: 200,
+    description: 'Legislation information retrieved',
+  })
   async getSpeciesLegislation(
     @Param('speciesId', ParseIntPipe) speciesId: number,
     @Query() query: LegislationQueryDto,
   ) {
-    return this.legislationService.getSpeciesLegislation(speciesId, query.country, query);
+    return this.legislationService.getSpeciesLegislation(
+      speciesId,
+      query.country,
+      query,
+    );
   }
 
   @Post()
@@ -59,8 +70,15 @@ export class LegislationController {
     summary: 'Create or update legislation content (admin only)',
     description: 'Add or update editorial legislation content for a species',
   })
-  @ApiParam({ name: 'speciesId', description: 'GBIF species key', type: Number })
-  @ApiResponse({ status: 201, description: 'Legislation content created/updated' })
+  @ApiParam({
+    name: 'speciesId',
+    description: 'GBIF species key',
+    type: Number,
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Legislation content created/updated',
+  })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async createOrUpdateLegislation(
     @Param('speciesId', ParseIntPipe) speciesId: number,
@@ -112,7 +130,8 @@ export class SpeciesPlusController {
   @Get('taxon/:taxonId/eu')
   @ApiOperation({
     summary: 'Get EU legislation for a taxon',
-    description: 'Returns EU Wildlife Trade Regulation annexes for a Species+ taxon',
+    description:
+      'Returns EU Wildlife Trade Regulation annexes for a Species+ taxon',
   })
   @ApiParam({ name: 'taxonId', description: 'Species+ taxon ID' })
   @ApiResponse({ status: 200, description: 'EU legislation' })

@@ -19,8 +19,11 @@ import { Transform, Type } from 'class-transformer';
 const trim = ({ value }: { value: unknown }) =>
   typeof value === 'string' ? value.trim() : value;
 const toBool = ({ value }: { value: unknown }) =>
-  value === 'true' || value === true ? true : value === 'false' || value === false ? false : value;
-
+  value === 'true' || value === true
+    ? true
+    : value === 'false' || value === false
+      ? false
+      : value;
 
 export class AdvancedSearchDto {
   @ApiProperty({ required: true, description: 'Recherche textuelle' })
@@ -36,7 +39,11 @@ export class AdvancedSearchDto {
   @MaxLength(200)
   q?: string;
 
-  @ApiProperty({ required: false, default: 50, description: 'Nombre maximum de résultats (1-100)' })
+  @ApiProperty({
+    required: false,
+    default: 50,
+    description: 'Nombre maximum de résultats (1-100)',
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()
@@ -44,7 +51,11 @@ export class AdvancedSearchDto {
   @Max(100)
   limit?: number;
 
-  @ApiProperty({ required: false, default: 0, description: 'Offset pour la pagination' })
+  @ApiProperty({
+    required: false,
+    default: 0,
+    description: 'Offset pour la pagination',
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()
@@ -122,7 +133,10 @@ export class AdvancedSearchDto {
   @MaxLength(100)
   iucnStatus?: string;
 
-  @ApiProperty({ required: false, description: 'Filtre par pays de distribution' })
+  @ApiProperty({
+    required: false,
+    description: 'Filtre par pays de distribution',
+  })
   @IsOptional()
   @Transform(trim)
   @IsString()
@@ -136,19 +150,31 @@ export class AdvancedSearchDto {
   @MaxLength(100)
   language?: string;
 
-  @ApiProperty({ required: false, description: 'Filtre par nombre minimum d\'occurrences' })
+  @ApiProperty({
+    required: false,
+    description: "Filtre par nombre minimum d'occurrences",
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(0)
   minOccurrences?: number;
 
-  @ApiProperty({ required: false, enum: ['relevance', 'popularity', 'occurrences'], description: 'Critère de tri' })
+  @ApiProperty({
+    required: false,
+    enum: ['relevance', 'popularity', 'occurrences'],
+    description: 'Critère de tri',
+  })
   @IsOptional()
   @IsIn(['relevance', 'popularity', 'occurrences'])
   sortBy?: 'relevance' | 'popularity' | 'occurrences';
 
-  @ApiProperty({ required: false, enum: ['asc', 'desc'], description: 'Ordre du tri', default: 'desc' })
+  @ApiProperty({
+    required: false,
+    enum: ['asc', 'desc'],
+    description: 'Ordre du tri',
+    default: 'desc',
+  })
   @IsOptional()
   @IsIn(['asc', 'desc'])
   sortOrder?: 'asc' | 'desc';
@@ -156,7 +182,7 @@ export class AdvancedSearchDto {
 
 export class AdvancedSearchResults {
   @ApiProperty({ description: 'Résultats de recherche' })
-  results: any[];
+  results: unknown[];
 
   @ApiProperty({ description: 'Nombre total de résultats' })
   total: number;
@@ -178,10 +204,18 @@ export class SearchSuggestionsDto {
   @ApiProperty({ required: true, description: 'Recherche partielle' })
   query: string;
 
-  @ApiProperty({ required: false, default: 10, description: 'Nombre de suggestions' })
+  @ApiProperty({
+    required: false,
+    default: 10,
+    description: 'Nombre de suggestions',
+  })
   limit?: number;
 
-  @ApiProperty({ required: false, default: 'french', description: 'Langue des suggestions' })
+  @ApiProperty({
+    required: false,
+    default: 'french',
+    description: 'Langue des suggestions',
+  })
   language?: string;
 }
 
@@ -257,7 +291,10 @@ export class SpeciesFilterDto {
   @MaxLength(100)
   iucnStatus?: string;
 
-  @ApiProperty({ required: false, description: 'Filtre par pays de distribution' })
+  @ApiProperty({
+    required: false,
+    description: 'Filtre par pays de distribution',
+  })
   @IsOptional()
   @Transform(trim)
   @IsString()
@@ -292,13 +329,16 @@ export class SpeciesFilterDto {
   @MaxLength(100)
   taxonomic?: string;
 
-  @ApiProperty({ required: false, description: 'Filtre par présence de médias' })
+  @ApiProperty({
+    required: false,
+    description: 'Filtre par présence de médias',
+  })
   @IsOptional()
   @Transform(toBool)
   @IsBoolean()
   hasMedia?: boolean;
 
-  @ApiProperty({ required: false, description: 'Filtre par présence d\'IUCN' })
+  @ApiProperty({ required: false, description: "Filtre par présence d'IUCN" })
   @IsOptional()
   @Transform(toBool)
   @IsBoolean()

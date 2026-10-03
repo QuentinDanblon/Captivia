@@ -26,7 +26,9 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
   const createdEmails: string[] = [];
 
   /** Crée un compte jetable et retourne son token + id. */
-  async function registerUser(email: string): Promise<{ email: string; token: string; userId: string }> {
+  async function registerUser(
+    email: string,
+  ): Promise<{ email: string; token: string; userId: string }> {
     const res = await request(app.getHttpServer())
       .post('/auth/register')
       .send({ email, password: PASSWORD, locale: 'fr', ...TERMS })
@@ -280,9 +282,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
   // ============================================================
   describe('6. Gateway', () => {
     it('GET /gateway/enriched sans query → 400', () => {
-      return request(app.getHttpServer())
-        .get('/gateway/enriched')
-        .expect(400);
+      return request(app.getHttpServer()).get('/gateway/enriched').expect(400);
     });
 
     it('POST /gateway/clear-cache/5212 sans token → 401', () => {

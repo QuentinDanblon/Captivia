@@ -2,6 +2,13 @@ import { Injectable, Logger } from '@nestjs/common';
 import { describeHttpError, isValidQid } from '../http-safety';
 import { ExternalHttpService } from '../http/external-http.service';
 import { isUpstreamNotFound } from '../http/external-errors';
+import type {
+  SparqlBinding,
+  SparqlResponse,
+  WikidataEntityRaw,
+  WikidataEntityResponse,
+  WikidataSearchResponse,
+} from './wikidata.types';
 
 /** Nom scientifique accepté dans la requête SPARQL (lettres, espaces, . ' - ×). */
 const SCIENTIFIC_NAME_REGEX = /^[\p{L}\p{M}][\p{L}\p{M} .'×-]{1,99}$/u;
@@ -15,7 +22,8 @@ const SPARQL_HEADERS = { Accept: 'application/json' };
 @Injectable()
 export class WikidataService {
   private readonly logger = new Logger(WikidataService.name);
-  private readonly wikidataBaseUrl = 'https://www.wikidata.org/wiki/Special:EntityData';
+  private readonly wikidataBaseUrl =
+    'https://www.wikidata.org/wiki/Special:EntityData';
   private readonly wikidataQueryUrl = 'https://query.wikidata.org/sparql';
   private readonly wikidataSearchUrl = 'https://www.wikidata.org/w/api.php';
 
@@ -28,15 +36,19 @@ export class WikidataService {
    */
   async searchSpecies(query: string) {
     try {
-      const response = await this.http.get('wikidata', this.wikidataSearchUrl, {
-        params: {
-          action: 'wbsearchentities',
-          search: query,
-          language: 'en',
-          format: 'json',
-          limit: 10,
+      const response = await this.http.get<WikidataSearchResponse>(
+        'wikidata',
+        this.wikidataSearchUrl,
+        {
+          params: {
+            action: 'wbsearchentities',
+            search: query,
+            language: 'en',
+            format: 'json',
+            limit: 10,
+          },
         },
-      });
+      );
 
       return this.transformSearchResults(response.data);
     } catch (error) {
@@ -53,9 +65,16 @@ export class WikidataService {
   async getEntity(qid: string) {
     if (!isValidQid(qid)) return null;
     try {
-      const response = await this.http.get('wikidata', `${this.wikidataBaseUrl}/${qid}.json`);
+      const response = await this.http.get<WikidataEntityResponse>(
+        'wikidata',
+        `${this.wikidataBaseUrl}/${qid}.json`,
+      );
 
-      if (!response.data || !response.data.entities || !response.data.entities[qid]) {
+      if (
+        !response.data ||
+        !response.data.entities ||
+        !response.data.entities[qid]
+      ) {
         return null;
       }
 
@@ -64,7 +83,9 @@ export class WikidataService {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikidata entity fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikidata entity fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -103,24 +124,38 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
-        headers: SPARQL_HEADERS,
-        params: {
-          query: sparqlQuery,
-          format: 'json',
+      const response = await this.http.get<SparqlResponse>(
+        'wikidata-sparql',
+        this.wikidataQueryUrl,
+        {
+          headers: SPARQL_HEADERS,
+          params: {
+            query: sparqlQuery,
+            format: 'json',
+          },
         },
-      });
+      );
 
-      if (!response.data.results || !response.data.results.bindings || response.data.results.bindings.length === 0) {
+      if (
+        !response.data.results ||
+        !response.data.results.bindings ||
+        response.data.results.bindings.length === 0
+      ) {
         return null;
       }
 
-      return this.transformEntity(response.data.results.bindings[0]);
+      // Comportement historique conservé : une ligne SPARQL n'a pas la forme d'une
+      // entité (les champs lus ci-dessous restent donc `undefined`).
+      return this.transformEntity(
+        response.data.results.bindings[0] as Partial<WikidataEntityRaw>,
+      );
     } catch (error) {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikidata species fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikidata species fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -147,24 +182,36 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
-        headers: SPARQL_HEADERS,
-        params: {
-          query: sparqlQuery,
-          format: 'json',
+      const response = await this.http.get<SparqlResponse>(
+        'wikidata-sparql',
+        this.wikidataQueryUrl,
+        {
+          headers: SPARQL_HEADERS,
+          params: {
+            query: sparqlQuery,
+            format: 'json',
+          },
         },
-      });
+      );
 
-      if (!response.data.results || !response.data.results.bindings || response.data.results.bindings.length === 0) {
+      if (
+        !response.data.results ||
+        !response.data.results.bindings ||
+        response.data.results.bindings.length === 0
+      ) {
         return null;
       }
 
-      return this.transformConservationStatus(response.data.results.bindings[0]);
+      return this.transformConservationStatus(
+        response.data.results.bindings[0],
+      );
     } catch (error) {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikidata conservation status fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikidata conservation status fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -195,15 +242,23 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
-        headers: SPARQL_HEADERS,
-        params: {
-          query: sparqlQuery,
-          format: 'json',
+      const response = await this.http.get<SparqlResponse>(
+        'wikidata-sparql',
+        this.wikidataQueryUrl,
+        {
+          headers: SPARQL_HEADERS,
+          params: {
+            query: sparqlQuery,
+            format: 'json',
+          },
         },
-      });
+      );
 
-      if (!response.data.results || !response.data.results.bindings || response.data.results.bindings.length === 0) {
+      if (
+        !response.data.results ||
+        !response.data.results.bindings ||
+        response.data.results.bindings.length === 0
+      ) {
         return null;
       }
 
@@ -212,7 +267,9 @@ export class WikidataService {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikidata classification fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikidata classification fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -237,15 +294,23 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
-        headers: SPARQL_HEADERS,
-        params: {
-          query: sparqlQuery,
-          format: 'json',
+      const response = await this.http.get<SparqlResponse>(
+        'wikidata-sparql',
+        this.wikidataQueryUrl,
+        {
+          headers: SPARQL_HEADERS,
+          params: {
+            query: sparqlQuery,
+            format: 'json',
+          },
         },
-      });
+      );
 
-      if (!response.data.results || !response.data.results.bindings || response.data.results.bindings.length === 0) {
+      if (
+        !response.data.results ||
+        !response.data.results.bindings ||
+        response.data.results.bindings.length === 0
+      ) {
         return null;
       }
 
@@ -254,7 +319,9 @@ export class WikidataService {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikidata descriptions fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikidata descriptions fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -279,15 +346,23 @@ export class WikidataService {
         LIMIT 5
       `;
 
-      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
-        headers: SPARQL_HEADERS,
-        params: {
-          query: sparqlQuery,
-          format: 'json',
+      const response = await this.http.get<SparqlResponse>(
+        'wikidata-sparql',
+        this.wikidataQueryUrl,
+        {
+          headers: SPARQL_HEADERS,
+          params: {
+            query: sparqlQuery,
+            format: 'json',
+          },
         },
-      });
+      );
 
-      if (!response.data.results || !response.data.results.bindings || response.data.results.bindings.length === 0) {
+      if (
+        !response.data.results ||
+        !response.data.results.bindings ||
+        response.data.results.bindings.length === 0
+      ) {
         return null;
       }
 
@@ -296,7 +371,9 @@ export class WikidataService {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikidata images fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikidata images fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -322,15 +399,23 @@ export class WikidataService {
         LIMIT 10
       `;
 
-      const response = await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
-        headers: SPARQL_HEADERS,
-        params: {
-          query: sparqlQuery,
-          format: 'json',
+      const response = await this.http.get<SparqlResponse>(
+        'wikidata-sparql',
+        this.wikidataQueryUrl,
+        {
+          headers: SPARQL_HEADERS,
+          params: {
+            query: sparqlQuery,
+            format: 'json',
+          },
         },
-      });
+      );
 
-      if (!response.data.results || !response.data.results.bindings || response.data.results.bindings.length === 0) {
+      if (
+        !response.data.results ||
+        !response.data.results.bindings ||
+        response.data.results.bindings.length === 0
+      ) {
         return null;
       }
 
@@ -339,7 +424,9 @@ export class WikidataService {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikidata related species fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikidata related species fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -351,7 +438,8 @@ export class WikidataService {
   async checkApiHealth() {
     const started = Date.now();
     try {
-      const sparqlQuery = 'SELECT ?item WHERE { ?item wdt:P225 "Panthera leo" } LIMIT 1';
+      const sparqlQuery =
+        'SELECT ?item WHERE { ?item wdt:P225 "Panthera leo" } LIMIT 1';
       await this.http.get('wikidata-sparql', this.wikidataQueryUrl, {
         headers: SPARQL_HEADERS,
         params: {
@@ -366,7 +454,9 @@ export class WikidataService {
         circuit: this.http.circuitState('wikidata-sparql'),
       };
     } catch (error) {
-      this.logger.warn(`Wikidata API health check failed: ${describeHttpError(error)}`);
+      this.logger.warn(
+        `Wikidata API health check failed: ${describeHttpError(error)}`,
+      );
       return {
         status: 'unhealthy',
         error: error instanceof Error ? error.message : 'unknown error',
@@ -378,13 +468,13 @@ export class WikidataService {
   /**
    * Transform Wikidata entity search results
    */
-  private transformSearchResults(data: any) {
+  private transformSearchResults(data: WikidataSearchResponse | undefined) {
     if (!data || !Array.isArray(data.search)) {
       return { results: [], source: 'wikidata' };
     }
 
     return {
-      results: data.search.map((item: any) => ({
+      results: data.search.map((item) => ({
         item: item.concepturi || `https://www.wikidata.org/wiki/${item.id}`,
         id: item.id,
         itemLabel: item.label,
@@ -400,7 +490,7 @@ export class WikidataService {
   /**
    * Transform Wikidata entity data
    */
-  private transformEntity(data: any) {
+  private transformEntity(data: Partial<WikidataEntityRaw>) {
     return {
       id: data.id,
       labels: data.labels,
@@ -416,7 +506,7 @@ export class WikidataService {
   /**
    * Transform conservation status data
    */
-  private transformConservationStatus(data: any) {
+  private transformConservationStatus(data: SparqlBinding) {
     return {
       iucnStatus: data.iucnStatus?.value,
       citesStatus: data.citesStatus?.value,
@@ -430,7 +520,7 @@ export class WikidataService {
   /**
    * Transform classification data
    */
-  private transformClassification(data: any) {
+  private transformClassification(data: SparqlBinding) {
     return {
       family: data.family?.value,
       genus: data.genus?.value,
@@ -448,7 +538,7 @@ export class WikidataService {
   /**
    * Transform description data
    */
-  private transformDescriptions(data: any) {
+  private transformDescriptions(data: SparqlBinding) {
     return {
       description: data.description?.value,
       shortDescription: data.shortDescription?.value,
@@ -460,8 +550,8 @@ export class WikidataService {
   /**
    * Transform image data
    */
-  private transformImages(bindings: any[]) {
-    return bindings.map((binding: any) => ({
+  private transformImages(bindings: SparqlBinding[]) {
+    return bindings.map((binding) => ({
       image: binding.image?.value,
       license: binding.license?.value,
       caption: binding.caption?.value,
@@ -472,8 +562,8 @@ export class WikidataService {
   /**
    * Transform related species data
    */
-  private transformRelatedSpecies(bindings: any[]) {
-    return bindings.map((binding: any) => ({
+  private transformRelatedSpecies(bindings: SparqlBinding[]) {
+    return bindings.map((binding) => ({
       related: binding.related?.value,
       relatedLabel: binding.relatedLabel?.value,
       relatedDescription: binding.relatedDescription?.value,

@@ -13,11 +13,17 @@ import {
 import { Transform } from 'class-transformer';
 import { IsValidDate } from '../../animals/dto/is-valid-date.decorator';
 
-export const VET_APPOINTMENT_STATUSES = ['scheduled', 'done', 'cancelled'] as const;
+export const VET_APPOINTMENT_STATUSES = [
+  'scheduled',
+  'done',
+  'cancelled',
+] as const;
 export type VetAppointmentStatus = (typeof VET_APPOINTMENT_STATUSES)[number];
 
 export class CreateVetAppointmentDto {
-  @Transform(({ value }: { value: unknown }) => (typeof value === 'string' ? value.trim() : value))
+  @Transform(({ value }: { value: unknown }) =>
+    typeof value === 'string' ? value.trim() : value,
+  )
   @IsString()
   @IsNotEmpty()
   @MaxLength(100)

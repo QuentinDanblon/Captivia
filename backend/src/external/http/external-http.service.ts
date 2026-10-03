@@ -34,7 +34,11 @@ export const EXTERNAL_MAX_REDIRECTS = 3;
 export const EXTERNAL_MAX_CONTENT_LENGTH = 5 * 1024 * 1024;
 export const EXTERNAL_USER_AGENT = 'Captivia/1.0 (+https://captivia.com)';
 /** En-têtes jamais retransmis lors d'une redirection (secrets de fournisseur). */
-const SENSITIVE_HEADERS = ['x-authentication-token', 'authorization', 'x-api-key'];
+const SENSITIVE_HEADERS = [
+  'x-authentication-token',
+  'authorization',
+  'x-api-key',
+];
 /** Durée minimale utile d'une nouvelle tentative : en deçà, on abandonne. */
 const MIN_ATTEMPT_MS = 500;
 
@@ -63,7 +67,12 @@ export const DEFAULT_PROVIDER_POLICIES: Partial<
   Record<ExternalProvider, ProviderPolicy>
 > = {
   gbif: {
-    retry: { maxAttempts: 3, baseDelayMs: 250, maxDelayMs: 1500, budgetMs: 7500 },
+    retry: {
+      maxAttempts: 3,
+      baseDelayMs: 250,
+      maxDelayMs: 1500,
+      budgetMs: 7500,
+    },
     breaker: DEFAULT_BREAKER,
   },
 };
@@ -105,17 +114,26 @@ export function isTransientError(error: unknown): boolean {
   );
 }
 
+/** Options de redirection transmises par follow-redirects (champs lus uniquement). */
+interface RedirectOptions {
+  protocol?: string;
+  hostname?: string;
+  host?: string;
+  headers?: Record<string, unknown>;
+}
+
 /**
  * Contrôle d'une redirection (appelé par axios/follow-redirects avant de la suivre) :
  * https uniquement, jamais vers localhost/une IP littérale (SSRF), et aucun secret
  * de fournisseur retransmis.
  */
-export function assertSafeRedirect(options: Record<string, any>): void {
+export function assertSafeRedirect(options: RedirectOptions): void {
   const protocol = String(options.protocol ?? '');
   const hostname = String(options.hostname ?? options.host ?? '')
     .replace(/^\[|\]$/g, '')
     .toLowerCase();
-  const isIpLiteral = /^\d{1,3}(\.\d{1,3}){3}$/.test(hostname) || hostname.includes(':');
+  const isIpLiteral =
+    /^\d{1,3}(\.\d{1,3}){3}$/.test(hostname) || hostname.includes(':');
   if (
     protocol !== 'https:' ||
     !hostname ||
@@ -166,7 +184,8 @@ export class ExternalHttpService {
   ) {
     this.now = options.now ?? Date.now;
     this.sleep =
-      options.sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
+      options.sleep ??
+      ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
     this.random = options.random ?? Math.random;
     this.policies = options.policies ?? DEFAULT_PROVIDER_POLICIES;
 
@@ -182,7 +201,7 @@ export class ExternalHttpService {
   }
 
   /** GET résilient vers un fournisseur externe. */
-  async get<T = any>(
+  async get<T = unknown>(
     provider: ExternalProvider,
     url: string,
     config: ExternalRequestConfig = {},
@@ -192,7 +211,8 @@ export class ExternalHttpService {
     const breaker = this.breakerFor(provider);
     const timeout = axiosConfig.timeout ?? EXTERNAL_TIMEOUT_MS;
     const maxAttempts = retryEnabled ? (policy?.retry?.maxAttempts ?? 1) : 1;
-    const budgetMs = policy?.retry && retryEnabled ? policy.retry.budgetMs : timeout;
+    const budgetMs =
+      policy?.retry && retryEnabled ? policy.retry.budgetMs : timeout;
     const started = this.now();
 
     for (let attempt = 1; ; attempt++) {
@@ -249,7 +269,11 @@ export class ExternalHttpService {
     return states;
   }
 
-  private retryDelay(error: unknown, attempt: number, retry: RetryPolicy): number {
+  private retryDelay(
+    error: unknown,
+    attempt: number,
+    retry: RetryPolicy,
+  ): number {
     let delay = computeBackoffDelay(
       attempt,
       retry.baseDelayMs,

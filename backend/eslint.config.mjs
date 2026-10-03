@@ -26,9 +26,33 @@ export default tseslint.config(
   },
   {
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn'
+      // Convention du projet : un paramètre ou une variable préfixé par « _ » est
+      // volontairement inutilisé (signature imposée par un contrat, un décorateur ou
+      // une interface).
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+        },
+      ],
+      // `import x = require('pkg')` est la forme TypeScript des modules CommonJS à
+      // `export =` (ex. memcached) : le projet compile en CommonJS sans esModuleInterop.
+      '@typescript-eslint/no-require-imports': [
+        'error',
+        { allowAsImport: true },
+      ],
+    },
+  },
+  {
+    files: ['**/*.spec.ts', 'test/**/*.ts'],
+    rules: {
+      // Les matchers asymétriques de Jest (expect.any, expect.objectContaining,
+      // expect.stringMatching…) sont typés `any` par @types/jest : les placer dans un
+      // objet attendu déclenche no-unsafe-assignment sans aucun risque réel de typage.
+      '@typescript-eslint/no-unsafe-assignment': 'off',
     },
   },
 );

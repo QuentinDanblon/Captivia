@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import { envValidationSchema, isExampleJwtSecret } from './env.validation';
 
 const STRONG_SECRET = 'k3Jf9sLq2Zx8Vb7Nm1Pw4Rt6Yu0Io5Ae3Dg7Hh9Jk2L';
 
 function validate(env: Record<string, unknown>) {
-  return envValidationSchema.validate(env, {
+  const result = envValidationSchema.validate(env, {
     allowUnknown: true,
     abortEarly: false,
   });
+  return { ...result, value: result.value as Record<string, unknown> };
 }
 
 const baseProd = {

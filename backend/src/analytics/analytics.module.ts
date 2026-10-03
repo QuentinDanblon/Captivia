@@ -9,8 +9,8 @@ import { AnalyticsController } from './analytics.controller';
     ConfigModule,
     RedisModule.forRootAsync({
       useFactory: (config: ConfigService) => {
-        const host = config.get('REDIS_HOST', 'localhost');
-        const port = config.get('REDIS_PORT', '6379');
+        const host = config.get<string>('REDIS_HOST', 'localhost');
+        const port = config.get<string>('REDIS_PORT', '6379');
         return {
           type: 'single',
           url: `redis://${host}:${port}`,

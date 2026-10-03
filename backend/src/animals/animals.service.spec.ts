@@ -7,7 +7,6 @@ import { CreateAnimalDto, UpdateAnimalDto } from './dto/animal.dto';
 
 describe('AnimalsService', () => {
   let service: AnimalsService;
-  let prismaService: PrismaService;
 
   const mockUserId = 'user-id-123';
   const mockAnimalId = 'animal-id-456';
@@ -79,7 +78,6 @@ describe('AnimalsService', () => {
     }).compile();
 
     service = module.get<AnimalsService>(AnimalsService);
-    prismaService = module.get<PrismaService>(PrismaService);
 
     jest.clearAllMocks();
   });
@@ -165,7 +163,7 @@ describe('AnimalsService', () => {
       await service.create(mockUserId, createDto);
 
       expect(mockTx.$queryRaw).toHaveBeenCalledTimes(1);
-      const strings = mockTx.$queryRaw.mock.calls[0][0] as string[];
+      const [strings] = mockTx.$queryRaw.mock.calls[0] as [string[]];
       expect(strings.join('?')).toContain('FOR UPDATE');
       expect(mockTx.$queryRaw.mock.invocationCallOrder[0]).toBeLessThan(
         mockTx.user.findUnique.mock.invocationCallOrder[0],

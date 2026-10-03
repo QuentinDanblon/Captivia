@@ -10,7 +10,12 @@ import {
   Req,
   Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { MedicationsService } from './medications.service';
 import { CreateMedicationDto, UpdateMedicationDto } from './dto/medication.dto';
@@ -25,7 +30,9 @@ export class MedicationsController {
   constructor(private readonly medicationsService: MedicationsService) {}
 
   @Get()
-  @ApiOperation({ summary: 'List medications for an animal (sorted by startDate desc)' })
+  @ApiOperation({
+    summary: 'List medications for an animal (sorted by startDate desc)',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async findAll(
     @Req() req: { user: { id: string } },
@@ -47,7 +54,9 @@ export class MedicationsController {
   }
 
   @Patch(':medicationId')
-  @ApiOperation({ summary: 'Update a medication (including active:false to stop)' })
+  @ApiOperation({
+    summary: 'Update a medication (including active:false to stop)',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   @ApiParam({ name: 'medicationId', description: 'Medication ID' })
   async update(
@@ -56,7 +65,12 @@ export class MedicationsController {
     @Param('medicationId') medicationId: string,
     @Body() dto: UpdateMedicationDto,
   ) {
-    return this.medicationsService.update(animalId, medicationId, req.user.id, dto);
+    return this.medicationsService.update(
+      animalId,
+      medicationId,
+      req.user.id,
+      dto,
+    );
   }
 
   @Delete(':medicationId')

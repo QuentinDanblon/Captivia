@@ -1,7 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks du client HTTP typés any */
 import { HttpException, Logger } from '@nestjs/common';
 import { PubmedService } from './pubmed.service';
 import { ExternalUnavailableError } from '../../external/http/external-errors';
+
+type HttpGetCall = [
+  string,
+  string,
+  { params: Record<string, unknown> & { id?: string } },
+];
 
 function buildService(stale: unknown = null) {
   const cache = {
@@ -38,10 +43,14 @@ describe('PubmedService (résilience)', () => {
     await service.getArticleAbstract('1');
 
     expect(articles).toEqual([
-      expect.objectContaining({ pmid: '1', title: 't', url: 'https://pubmed.ncbi.nlm.nih.gov/1/' }),
+      expect.objectContaining({
+        pmid: '1',
+        title: 't',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/1/',
+      }),
     ]);
     expect(http.get).toHaveBeenCalledTimes(3);
-    for (const call of http.get.mock.calls) {
+    for (const call of http.get.mock.calls as unknown[][]) {
       expect(call[0]).toBe('pubmed');
     }
   });
@@ -51,16 +60,21 @@ describe('PubmedService (résilience)', () => {
     http.get.mockResolvedValue({ data: { esearchresult: { idlist: [] } } });
 
     await service.searchArticles('sans-cle');
-    expect(http.get.mock.calls[0][2].params).toEqual(
+    expect((http.get.mock.calls[0] as HttpGetCall)[2].params).toEqual(
       expect.objectContaining({ tool: 'captivia' }),
     );
-    expect(http.get.mock.calls[0][2].params).not.toHaveProperty('api_key');
+    expect(
+      (http.get.mock.calls[0] as HttpGetCall)[2].params,
+    ).not.toHaveProperty('api_key');
 
     process.env.NCBI_API_KEY = 'cle-ncbi';
     process.env.NCBI_EMAIL = 'contact@example.test';
     await service.searchArticles('avec-cle');
-    expect(http.get.mock.calls[1][2].params).toEqual(
-      expect.objectContaining({ api_key: 'cle-ncbi', email: 'contact@example.test' }),
+    expect((http.get.mock.calls[1] as HttpGetCall)[2].params).toEqual(
+      expect.objectContaining({
+        api_key: 'cle-ncbi',
+        email: 'contact@example.test',
+      }),
     );
   });
 
@@ -74,14 +88,16 @@ describe('PubmedService (résilience)', () => {
 
     await service.searchArticles('boa');
 
-    expect(http.get.mock.calls[1][2].params.id).toBe('123');
+    expect((http.get.mock.calls[1] as HttpGetCall)[2].params.id).toBe('123');
   });
 
   it('panne : 503 explicite et AUCUNE écriture en cache (pas de liste vide empoisonnée)', async () => {
     const { service, http, cache } = buildService();
     http.get.mockRejectedValue(new Error('timeout of 5000ms exceeded'));
 
-    const error = await service.searchArticles('boa').catch((e) => e);
+    const error = (await service
+      .searchArticles('boa')
+      .catch((e: unknown) => e)) as HttpException;
 
     expect(error).toBeInstanceOf(HttpException);
     expect(error.getStatus()).toBe(503);

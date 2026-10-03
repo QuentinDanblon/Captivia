@@ -1,15 +1,15 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AnimalsService } from '../animals/animals.service';
 import {
   CreateAnimalMeasurementDto,
   UpdateAnimalMeasurementDto,
 } from './dto/measurement.dto';
-import {
-  PaginationQueryDto,
-  toPage,
-} from '../common/dto/pagination-query.dto';
-
+import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class AnimalMeasurementsService {
@@ -38,7 +38,11 @@ export class AnimalMeasurementsService {
     return measurement;
   }
 
-  async create(animalId: string, userId: string, dto: CreateAnimalMeasurementDto) {
+  async create(
+    animalId: string,
+    userId: string,
+    dto: CreateAnimalMeasurementDto,
+  ) {
     await this.animalsService.findOne(animalId, userId);
     if (dto.weightKg === undefined && dto.heightCm === undefined) {
       throw new BadRequestException(
@@ -66,7 +70,8 @@ export class AnimalMeasurementsService {
     const data: Record<string, unknown> = {};
     if (dto.weightKg !== undefined) data.weightKg = dto.weightKg;
     if (dto.heightCm !== undefined) data.heightCm = dto.heightCm;
-    if (dto.measuredAt !== undefined) data.measuredAt = new Date(dto.measuredAt);
+    if (dto.measuredAt !== undefined)
+      data.measuredAt = new Date(dto.measuredAt);
     if (dto.notes !== undefined) data.notes = dto.notes;
     return this.prisma.animalMeasurement.update({
       where: { id: measurementId },

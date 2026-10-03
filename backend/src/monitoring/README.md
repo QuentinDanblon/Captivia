@@ -5,6 +5,7 @@ This module provides comprehensive monitoring, analytics, and error tracking cap
 ## Overview
 
 The monitoring system includes:
+
 - **Performance Metrics**: Track request counts, response times, cache hits/misses
 - **API Analytics**: Monitor usage patterns, traffic trends, and performance metrics
 - **Error Tracking**: Log and analyze errors with detailed context
@@ -17,11 +18,13 @@ The monitoring system includes:
 Tracks system-level performance metrics.
 
 **Endpoints:**
+
 - `GET /monitoring/metrics` - Get system metrics
 - `GET /monitoring/health` - Get health status
 - `DELETE /monitoring/reset` - Reset all metrics
 
 **Metrics tracked:**
+
 - Total requests
 - Successful/failed requests
 - Average response time
@@ -34,6 +37,7 @@ Tracks system-level performance metrics.
 Analyzes API usage patterns and traffic.
 
 **Endpoints:**
+
 - `GET /analytics` - Get API usage analytics
 - `GET /analytics/daily/:date` - Get daily report
 - `GET /analytics/traffic-trend` - Get traffic trend
@@ -42,6 +46,7 @@ Analyzes API usage patterns and traffic.
 - `DELETE /analytics/reset` - Reset analytics data
 
 **Features:**
+
 - Daily request tracking
 - User activity monitoring
 - Response time analysis
@@ -54,6 +59,7 @@ Analyzes API usage patterns and traffic.
 Logs and analyzes application errors.
 
 **Endpoints:**
+
 - `GET /errors/stats` - Get error statistics
 - `GET /errors/recent` - Get recent errors
 - `GET /errors/:id` - Get error by ID
@@ -62,6 +68,7 @@ Logs and analyzes application errors.
 - `DELETE /errors/reset` - Reset error tracking
 
 **Features:**
+
 - Error logging with context
 - Error type categorization
 - Endpoint-specific error tracking
@@ -74,12 +81,13 @@ Logs and analyzes application errors.
 Monitors database query performance.
 
 **Endpoints:**
+
 - `GET /database/stats` - Get database stats
-- `GET /database/query-explain` - Get query explanation
 - `POST /database/optimize-cache` - Optimize query cache
 - `DELETE /database/stats/reset` - Reset database stats
 
 **Features:**
+
 - Query execution time tracking
 - Slow query detection
 - Cache hit/miss tracking
@@ -89,6 +97,7 @@ Monitors database query performance.
 ## Redis Keys Used
 
 ### Metrics
+
 - `metrics:total` - Total requests
 - `metrics:successful` - Successful requests
 - `metrics:failed` - Failed requests
@@ -99,6 +108,7 @@ Monitors database query performance.
 - `metrics:endpoints:*` - Requests by endpoint
 
 ### Analytics
+
 - `analytics:totalRequests` - Total API requests
 - `analytics:avgResponseTime` - Average response time
 - `analytics:responseTimeCount` - Response time samples
@@ -109,6 +119,7 @@ Monitors database query performance.
 - `analytics:endpoints:*` - Requests by endpoint
 
 ### Error Tracking
+
 - `errors:total` - Total errors
 - `errors:types:*` - Errors by type
 - `errors:endpoints:*` - Errors by endpoint
@@ -116,6 +127,7 @@ Monitors database query performance.
 - `errors:logs` - Error log list
 
 ### Database
+
 - `db:queries:total` - Total queries
 - `db:cache:hits` - Cache hits
 - `db:cache:misses` - Cache misses
@@ -141,7 +153,9 @@ const analytics = await analyticsService.getAnalytics();
 ### Log an Error
 
 ```typescript
-await errorTrackingService.logErrorMethod('Service unavailable', stack, { userId: 'user123' });
+await errorTrackingService.logErrorMethod('Service unavailable', stack, {
+  userId: 'user123',
+});
 ```
 
 ### Get Database Stats
@@ -175,7 +189,10 @@ export class MyService {
       // ... your code
       await this.metricsService.incrementSuccessfulRequest();
     } catch (error) {
-      await this.errorTrackingService.logErrorMethod(error.message, error.stack);
+      await this.errorTrackingService.logErrorMethod(
+        error.message,
+        error.stack,
+      );
       await this.metricsService.incrementFailedRequest();
     } finally {
       await this.metricsService.recordResponseTime(Date.now() - start);
@@ -198,11 +215,13 @@ REDIS_DB=0
 ## Health Status
 
 The system health status is determined by:
+
 - Error rate (threshold: 10%)
 - Cache hit rate (threshold: 50%)
 - Redis connection status
 
 Health status levels:
+
 - **Healthy** - Error rate < 5%, cache hit rate > 50%, Redis connected
 - **Degraded** - Error rate < 10% or cache hit rate < 50%
 - **Unhealthy** - Error rate > 10% or Redis disconnected

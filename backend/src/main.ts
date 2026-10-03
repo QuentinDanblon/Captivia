@@ -2,11 +2,7 @@
 import './instrument';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import {
-  BadRequestException,
-  Logger,
-  ValidationPipe,
-} from '@nestjs/common';
+import { BadRequestException, Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { PrismaService } from './prisma/prisma.service';
@@ -82,7 +78,10 @@ async function bootstrap() {
   // (où '::' fait planter le listen). Pour du dual-stack en dev local (localhost -> ::1),
   // définir HOST=::.
   const host = process.env.HOST || '0.0.0.0';
-  const cacheTtl = parseInt(configService.get<string>('CACHE_TTL') || '3600', 10);
+  const cacheTtl = parseInt(
+    configService.get<string>('CACHE_TTL') || '3600',
+    10,
+  );
 
   await app.listen(port, host);
   logger.log(`Application is running on: http://localhost:${port}`);

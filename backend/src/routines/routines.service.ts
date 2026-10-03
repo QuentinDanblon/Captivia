@@ -1,12 +1,16 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { CreateRoutineDto, UpdateRoutineDto, CreateActionLogDto } from './dto/routine.dto';
-import { ensureAnimalOwnership } from '../common/helpers/ownership.helper';
 import {
-  PaginationQueryDto,
-  toPage,
-} from '../common/dto/pagination-query.dto';
-
+  Injectable,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import {
+  CreateRoutineDto,
+  UpdateRoutineDto,
+  CreateActionLogDto,
+} from './dto/routine.dto';
+import { ensureAnimalOwnership } from '../common/helpers/ownership.helper';
+import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class RoutinesService {
@@ -26,12 +30,19 @@ export class RoutinesService {
         type: createRoutineDto.type,
         frequency: createRoutineDto.frequency,
         schedule: createRoutineDto.schedule,
-        active: createRoutineDto.active !== undefined ? createRoutineDto.active : true,
+        active:
+          createRoutineDto.active !== undefined
+            ? createRoutineDto.active
+            : true,
       },
     });
   }
 
-  async findAllRoutines(userId: string, animalId: string, page?: PaginationQueryDto) {
+  async findAllRoutines(
+    userId: string,
+    animalId: string,
+    page?: PaginationQueryDto,
+  ) {
     await ensureAnimalOwnership(this.prisma, animalId, userId);
 
     return this.prisma.routine.findMany({
@@ -107,11 +118,7 @@ export class RoutinesService {
     });
   }
 
-  async deleteHistoryEntry(
-    userId: string,
-    animalId: string,
-    logId: string,
-  ) {
+  async deleteHistoryEntry(userId: string, animalId: string, logId: string) {
     const log = await this.prisma.actionLog.findUnique({
       where: { id: logId },
       include: { animal: true },

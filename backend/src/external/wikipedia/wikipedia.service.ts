@@ -2,6 +2,13 @@ import { Injectable, Logger } from '@nestjs/common';
 import { describeHttpError } from '../http-safety';
 import { ExternalHttpService } from '../http/external-http.service';
 import { isUpstreamNotFound } from '../http/external-errors';
+import type {
+  WikipediaCoordinatesResponse,
+  WikipediaExtractResponse,
+  WikipediaParseResponse,
+  WikipediaSearchResponse,
+  WikipediaSummary,
+} from './wikipedia.types';
 
 /**
  * Wikipedia API Service for fetching species information from Wikipedia
@@ -22,15 +29,19 @@ export class WikipediaService {
    */
   async searchSpecies(query: string) {
     try {
-      const response = await this.http.get('wikipedia', this.wikipediaSearchUrl, {
-        params: {
-          action: 'query',
-          list: 'search',
-          srsearch: query,
-          srlimit: 5,
-          format: 'json',
+      const response = await this.http.get<WikipediaSearchResponse>(
+        'wikipedia',
+        this.wikipediaSearchUrl,
+        {
+          params: {
+            action: 'query',
+            list: 'search',
+            srsearch: query,
+            srlimit: 5,
+            format: 'json',
+          },
         },
-      });
+      );
 
       return this.transformSearchResult(response.data);
     } catch (error) {
@@ -49,7 +60,7 @@ export class WikipediaService {
    */
   async getArticle(title: string) {
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<WikipediaSummary>(
         'wikipedia',
         `${this.wikipediaBaseUrl}/page/summary/${encodeURIComponent(title)}`,
       );
@@ -63,7 +74,9 @@ export class WikipediaService {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikipedia article fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikipedia article fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -75,17 +88,21 @@ export class WikipediaService {
    */
   async getExtract(title: string) {
     try {
-      const response = await this.http.get('wikipedia', this.wikipediaSearchUrl, {
-        params: {
-          action: 'query',
-          prop: 'extracts',
-          titles: title,
-          exintro: true,
-          explaintext: true,
-          redirects: true,
-          format: 'json',
+      const response = await this.http.get<WikipediaExtractResponse>(
+        'wikipedia',
+        this.wikipediaSearchUrl,
+        {
+          params: {
+            action: 'query',
+            prop: 'extracts',
+            titles: title,
+            exintro: true,
+            explaintext: true,
+            redirects: true,
+            format: 'json',
+          },
         },
-      });
+      );
 
       const pages = response.data?.query?.pages;
       if (!pages) {
@@ -107,7 +124,9 @@ export class WikipediaService {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikipedia extract fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikipedia extract fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -119,15 +138,19 @@ export class WikipediaService {
    */
   async getPage(title: string) {
     try {
-      const response = await this.http.get('wikipedia', this.wikipediaSearchUrl, {
-        params: {
-          action: 'parse',
-          page: title,
-          prop: 'text',
-          redirects: true,
-          format: 'json',
+      const response = await this.http.get<WikipediaParseResponse>(
+        'wikipedia',
+        this.wikipediaSearchUrl,
+        {
+          params: {
+            action: 'parse',
+            page: title,
+            prop: 'text',
+            redirects: true,
+            format: 'json',
+          },
         },
-      });
+      );
 
       if (!response.data || !response.data.parse || !response.data.parse.text) {
         return null;
@@ -143,7 +166,9 @@ export class WikipediaService {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikipedia page fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikipedia page fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -155,12 +180,16 @@ export class WikipediaService {
    */
   async getImages(title: string) {
     try {
-      const response = await this.http.get('wikipedia', `${this.wikipediaBaseUrl}/page/coordinates`, {
-        params: {
-          titles: title,
-          format: 'json',
+      const response = await this.http.get<WikipediaCoordinatesResponse>(
+        'wikipedia',
+        `${this.wikipediaBaseUrl}/page/coordinates`,
+        {
+          params: {
+            titles: title,
+            format: 'json',
+          },
         },
-      });
+      );
 
       if (!response.data || !response.data.query?.pages) {
         return null;
@@ -178,7 +207,9 @@ export class WikipediaService {
       if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error(`Wikipedia images fetch failed: ${describeHttpError(error)}`);
+      this.logger.error(
+        `Wikipedia images fetch failed: ${describeHttpError(error)}`,
+      );
       throw error;
     }
   }
@@ -202,7 +233,9 @@ export class WikipediaService {
         circuit: this.http.circuitState('wikipedia'),
       };
     } catch (error) {
-      this.logger.warn(`Wikipedia API health check failed: ${describeHttpError(error)}`);
+      this.logger.warn(
+        `Wikipedia API health check failed: ${describeHttpError(error)}`,
+      );
       return {
         status: 'unhealthy',
         error: error instanceof Error ? error.message : 'unknown error',
@@ -214,8 +247,13 @@ export class WikipediaService {
   /**
    * Transform Wikipedia search result (top match)
    */
-  private transformSearchResult(data: any) {
-    if (!data || !data.query || !Array.isArray(data.query.search) || data.query.search.length === 0) {
+  private transformSearchResult(data: WikipediaSearchResponse | undefined) {
+    if (
+      !data ||
+      !data.query ||
+      !Array.isArray(data.query.search) ||
+      data.query.search.length === 0
+    ) {
       return null;
     }
 
@@ -225,7 +263,9 @@ export class WikipediaService {
       title: result.title,
       pageid: result.pageid,
       thumbnail: undefined,
-      extract: result.snippet ? result.snippet.replace(/<[^>]*>/g, '') : undefined,
+      extract: result.snippet
+        ? result.snippet.replace(/<[^>]*>/g, '')
+        : undefined,
       source: 'wikipedia',
       timestamp: new Date(),
     };
@@ -234,7 +274,7 @@ export class WikipediaService {
   /**
    * Transform Wikipedia article data
    */
-  private transformArticle(data: any) {
+  private transformArticle(data: WikipediaSummary | undefined) {
     if (!data || data.error) {
       return null;
     }

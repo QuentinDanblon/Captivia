@@ -1,9 +1,5 @@
 import { AxiosError, AxiosHeaders } from 'axios';
-import {
-  describeHttpError,
-  isValidBarcode,
-  isValidQid,
-} from './http-safety';
+import { describeHttpError, isValidBarcode, isValidQid } from './http-safety';
 
 describe('http-safety', () => {
   describe('describeHttpError', () => {

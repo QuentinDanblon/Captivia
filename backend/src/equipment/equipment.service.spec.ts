@@ -4,7 +4,6 @@ import { PrismaService } from '../prisma/prisma.service';
 
 describe('EquipmentService', () => {
   let service: EquipmentService;
-  let prismaService: PrismaService;
 
   const mockEquipment = {
     id: 'equip-id-123',
@@ -39,7 +38,6 @@ describe('EquipmentService', () => {
     }).compile();
 
     service = module.get<EquipmentService>(EquipmentService);
-    prismaService = module.get<PrismaService>(PrismaService);
 
     jest.clearAllMocks();
   });
@@ -155,11 +153,11 @@ describe('EquipmentService', () => {
       const result = await service.createRecommendation(createData);
 
       expect(result).toEqual(mockEquipment);
-      expect(mockPrismaService.recommendedEquipment.create).toHaveBeenCalledWith(
-        {
-          data: createData,
-        },
-      );
+      expect(
+        mockPrismaService.recommendedEquipment.create,
+      ).toHaveBeenCalledWith({
+        data: createData,
+      });
     });
 
     it('should default order to 0 if not provided', async () => {
@@ -175,13 +173,13 @@ describe('EquipmentService', () => {
 
       await service.createRecommendation(createData);
 
-      expect(mockPrismaService.recommendedEquipment.create).toHaveBeenCalledWith(
-        {
-          data: expect.objectContaining({
-            order: 0,
-          }),
-        },
-      );
+      expect(
+        mockPrismaService.recommendedEquipment.create,
+      ).toHaveBeenCalledWith({
+        data: expect.objectContaining({
+          order: 0,
+        }),
+      });
     });
   });
 
@@ -197,15 +195,18 @@ describe('EquipmentService', () => {
         ...updateData,
       });
 
-      const result = await service.updateRecommendation('equip-123', updateData);
+      const result = await service.updateRecommendation(
+        'equip-123',
+        updateData,
+      );
 
       expect(result.label).toEqual('Updated Label');
-      expect(mockPrismaService.recommendedEquipment.update).toHaveBeenCalledWith(
-        {
-          where: { id: 'equip-123' },
-          data: updateData,
-        },
-      );
+      expect(
+        mockPrismaService.recommendedEquipment.update,
+      ).toHaveBeenCalledWith({
+        where: { id: 'equip-123' },
+        data: updateData,
+      });
     });
   });
 
@@ -218,11 +219,11 @@ describe('EquipmentService', () => {
       const result = await service.deleteRecommendation('equip-123');
 
       expect(result).toEqual(mockEquipment);
-      expect(mockPrismaService.recommendedEquipment.delete).toHaveBeenCalledWith(
-        {
-          where: { id: 'equip-123' },
-        },
-      );
+      expect(
+        mockPrismaService.recommendedEquipment.delete,
+      ).toHaveBeenCalledWith({
+        where: { id: 'equip-123' },
+      });
     });
   });
 

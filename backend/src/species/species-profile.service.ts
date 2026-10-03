@@ -1,17 +1,44 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import {
+  Prisma,
+  SpeciesBehavior,
+  SpeciesFeeding,
+  SpeciesHabitat,
+  SpeciesProfile,
+  SpeciesReproduction,
+} from '@prisma/client';
 
 interface SpeciesFilterProfile {
   category?: string;
   domesticationType?: string;
 }
 
-interface SpeciesProfileDetail {
-  profile: any;
-  feeding?: any;
-  habitat?: any;
-  behavior?: any;
+export interface SpeciesProfileDetail {
+  profile: SpeciesProfile | null;
+  feeding?: SpeciesFeeding | null;
+  habitat?: SpeciesHabitat | null;
+  behavior?: SpeciesBehavior | null;
+}
+
+/** Résultat de recherche construit à partir d'une fiche espèce locale. */
+export interface ProfileSearchItem {
+  key: number;
+  name: string;
+  canonicalName: string;
+  scientificName: string;
+  vernacularName: string;
+  category: string;
+  subcategory: string | null;
+  domesticationType: string;
+  description: string | null;
+  lastReviewedAt: Date | null;
+}
+
+export interface ProfileSearchResult {
+  results: ProfileSearchItem[];
+  total: number;
+  source: 'profile';
 }
 
 @Injectable()
@@ -25,7 +52,7 @@ export class SpeciesProfileService {
     limit: number = 20,
     offset: number = 0,
     filters?: SpeciesFilterProfile,
-  ): Promise<any> {
+  ): Promise<ProfileSearchResult> {
     this.logger.log(
       `Searching profiles: query="${query}", limit=${limit}, offset=${offset}, filters=${JSON.stringify(filters)}`,
     );
@@ -33,9 +60,24 @@ export class SpeciesProfileService {
     const whereConditions: Prisma.SpeciesProfileWhereInput[] = [
       {
         OR: [
-          { commonNameFr: { contains: query, mode: Prisma.QueryMode.insensitive } },
-          { scientificName: { contains: query, mode: Prisma.QueryMode.insensitive } },
-          { description: { contains: query, mode: Prisma.QueryMode.insensitive } },
+          {
+            commonNameFr: {
+              contains: query,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          },
+          {
+            scientificName: {
+              contains: query,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          },
+          {
+            description: {
+              contains: query,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          },
         ],
       },
     ];
@@ -63,8 +105,8 @@ export class SpeciesProfileService {
       this.prisma.speciesProfile.count({ where }),
     ]);
 
-    const results = profiles.map(
-      (profile) => this.transformProfileToSearchResult(profile),
+    const results = profiles.map((profile) =>
+      this.transformProfileToSearchResult(profile),
     );
 
     return {
@@ -125,7 +167,9 @@ export class SpeciesProfileService {
    * speciesId, locale 'fr' en priorité, fallback sur n'importe quelle autre
    * locale si la fiche fr n'existe pas encore.
    */
-  async getReproduction(speciesId: number): Promise<any> {
+  async getReproduction(
+    speciesId: number,
+  ): Promise<SpeciesReproduction | null> {
     const fr = await this.prisma.speciesReproduction.findUnique({
       where: {
         speciesId_locale: {
@@ -143,7 +187,9 @@ export class SpeciesProfileService {
     });
   }
 
-  private transformProfileToSearchResult(profile: any): any {
+  private transformProfileToSearchResult(
+    profile: SpeciesProfile,
+  ): ProfileSearchItem {
     return {
       key: profile.speciesId,
       name: profile.commonNameFr || profile.scientificName,

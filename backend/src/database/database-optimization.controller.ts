@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Delete, Query, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  UseGuards,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { DatabaseOptimizationService } from './database-optimization.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -8,7 +16,9 @@ import { OperatorGuard } from '../common/guards/operator.guard';
 @Controller('database')
 @UseGuards(JwtAuthGuard, OperatorGuard)
 export class DatabaseOptimizationController {
-  constructor(private readonly optimizationService: DatabaseOptimizationService) {}
+  constructor(
+    private readonly optimizationService: DatabaseOptimizationService,
+  ) {}
 
   @Get('stats')
   @ApiOperation({ summary: 'Get database optimization stats' })
@@ -16,14 +26,6 @@ export class DatabaseOptimizationController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async getDatabaseStats() {
     return await this.optimizationService.getDatabaseStats();
-  }
-
-  @Get('query-explain')
-  @ApiOperation({ summary: 'Get query explanation' })
-  @ApiResponse({ status: 200, description: 'Returns query explanation' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getQueryExplain(@Query('query') query: string) {
-    return await this.optimizationService.getQueryExplain(query);
   }
 
   @Post('optimize-cache')

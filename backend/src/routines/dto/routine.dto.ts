@@ -7,6 +7,7 @@ import {
   MinLength,
   MaxLength,
 } from 'class-validator';
+import type { Prisma } from '@prisma/client';
 
 const routineTypes = ['nourrissage', 'entretien', 'uvb', 'controle'] as const;
 const frequencies = [
@@ -36,7 +37,7 @@ export class CreateRoutineDto {
   frequency: string;
 
   @IsObject()
-  schedule: any; // JSON object with horaires, saison, params personnalisés
+  schedule: Prisma.InputJsonObject; // JSON object with horaires, saison, params personnalisés
 
   @IsOptional()
   @IsBoolean()
@@ -62,7 +63,7 @@ export class UpdateRoutineDto {
 
   @IsOptional()
   @IsObject()
-  schedule?: any;
+  schedule?: Prisma.InputJsonObject;
 
   @IsOptional()
   @IsBoolean()

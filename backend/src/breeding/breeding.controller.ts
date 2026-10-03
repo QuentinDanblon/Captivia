@@ -11,7 +11,12 @@ import {
   ForbiddenException,
   Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { BreedingService } from './breeding.service';
 import {
@@ -36,7 +41,9 @@ export class BreedingController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List breeding records for an animal (sorted by date desc)' })
+  @ApiOperation({
+    summary: 'List breeding records for an animal (sorted by date desc)',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async findAll(
     @Req() req: { user: { id: string; isPremium?: boolean } },
@@ -48,7 +55,9 @@ export class BreedingController {
   }
 
   @Post()
-  @ApiOperation({ summary: 'Add a breeding record (heat, mating, pregnancy, birth, weaning)' })
+  @ApiOperation({
+    summary: 'Add a breeding record (heat, mating, pregnancy, birth, weaning)',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async create(
     @Req() req: { user: { id: string; isPremium?: boolean } },

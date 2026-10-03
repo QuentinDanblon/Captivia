@@ -8,15 +8,13 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { RateLimitGuard } from '../../common/guards/rate-limit.guard';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiQuery,
-  ApiResponse,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { WikipediaService } from './wikipedia.service';
 import { toUpstreamHttpException } from '../http/external-errors';
-import { ExternalSearchQDto, ExternalTitleDto } from '../dto/external-query.dto';
+import {
+  ExternalSearchQDto,
+  ExternalTitleDto,
+} from '../dto/external-query.dto';
 
 @UseGuards(RateLimitGuard)
 @ApiTags('wikipedia')

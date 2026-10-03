@@ -4,12 +4,12 @@
  */
 
 export interface CacheConfig {
-  species: number;      // 24h = 86400 secondes
-  media: number;         // 1h = 3600 secondes
+  species: number; // 24h = 86400 secondes
+  media: number; // 1h = 3600 secondes
   distributions: number; // 24h = 86400 secondes
-  vernacular: number;    // 12h = 43200 secondes
-  metrics: number;       // 7j = 604800 secondes
-  search: number;        // 1h = 3600 secondes
+  vernacular: number; // 12h = 43200 secondes
+  metrics: number; // 7j = 604800 secondes
+  search: number; // 1h = 3600 secondes
 }
 
 export const CACHE_CONFIG: CacheConfig = {

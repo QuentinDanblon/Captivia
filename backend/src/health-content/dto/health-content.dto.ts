@@ -5,6 +5,7 @@ import {
   IsString,
   Length,
 } from 'class-validator';
+import type { Prisma } from '@prisma/client';
 
 export class CreateHealthContentDto {
   @IsString()
@@ -13,10 +14,10 @@ export class CreateHealthContentDto {
 
   @IsArray()
   @IsObject({ each: true })
-  diseases: any[];
+  diseases: Prisma.InputJsonObject[];
 
   @IsOptional()
   @IsArray()
   @IsObject({ each: true })
-  sources?: any[];
+  sources?: Prisma.InputJsonObject[];
 }

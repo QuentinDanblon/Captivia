@@ -51,7 +51,9 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
     return { email, token, userId: user.id };
   }
 
-  function registerPremium(email: string): Promise<{ email: string; token: string; userId: string }> {
+  function registerPremium(
+    email: string,
+  ): Promise<{ email: string; token: string; userId: string }> {
     return createUser(email, true);
   }
 
@@ -110,7 +112,11 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
       const res = await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/measurements`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ weightKg: 12.5, measuredAt: todayStr(), notes: 'pesée mensuelle' })
+        .send({
+          weightKg: 12.5,
+          measuredAt: todayStr(),
+          notes: 'pesée mensuelle',
+        })
         .expect(201);
 
       expect(res.body).toHaveProperty('id');
@@ -153,7 +159,9 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
 
       expect(Array.isArray(res.body)).toBe(true);
       expect(res.body.length).toBeGreaterThanOrEqual(3);
-      const dates = res.body.map((m: { measuredAt: string }) => new Date(m.measuredAt).getTime());
+      const dates = res.body.map((m: { measuredAt: string }) =>
+        new Date(m.measuredAt).getTime(),
+      );
       const sorted = [...dates].sort((a, b) => b - a);
       expect(dates).toEqual(sorted);
     });
@@ -178,12 +186,16 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
         .get(`/users/me/animals/${animalId}/measurements`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      expect(res.body.some((m: { id: string }) => m.id === measurementId)).toBe(false);
+      expect(res.body.some((m: { id: string }) => m.id === measurementId)).toBe(
+        false,
+      );
     });
 
     it('DELETE id inexistant → 404', () => {
       return request(app.getHttpServer())
-        .delete(`/users/me/animals/${animalId}/measurements/${crypto.randomUUID()}`)
+        .delete(
+          `/users/me/animals/${animalId}/measurements/${crypto.randomUUID()}`,
+        )
         .set('Authorization', `Bearer ${token}`)
         .expect(404);
     });
@@ -240,7 +252,9 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
 
       expect(Array.isArray(res.body)).toBe(true);
       expect(res.body.length).toBeGreaterThanOrEqual(2);
-      const dates = res.body.map((v: { date: string }) => new Date(v.date).getTime());
+      const dates = res.body.map((v: { date: string }) =>
+        new Date(v.date).getTime(),
+      );
       const sorted = [...dates].sort((a, b) => b - a);
       expect(dates).toEqual(sorted);
     });
@@ -265,12 +279,16 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
         .get(`/users/me/animals/${animalId}/vaccinations`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      expect(res.body.some((v: { id: string }) => v.id === vaccinationId)).toBe(false);
+      expect(res.body.some((v: { id: string }) => v.id === vaccinationId)).toBe(
+        false,
+      );
     });
 
     it('DELETE id inexistant → 404', () => {
       return request(app.getHttpServer())
-        .delete(`/users/me/animals/${animalId}/vaccinations/${crypto.randomUUID()}`)
+        .delete(
+          `/users/me/animals/${animalId}/vaccinations/${crypto.randomUUID()}`,
+        )
         .set('Authorization', `Bearer ${token}`)
         .expect(404);
     });
@@ -355,7 +373,11 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
       return request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/vaccinations`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: 'Rage', date: todayStr(), nextDueDate: dayOffsetStr(-30) })
+        .send({
+          name: 'Rage',
+          date: todayStr(),
+          nextDueDate: dayOffsetStr(-30),
+        })
         .expect(400);
     });
 
@@ -468,7 +490,11 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
       const vac = await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/vaccinations`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: 'Rage', date: dayOffsetStr(-365), nextDueDate: todayStr() })
+        .send({
+          name: 'Rage',
+          date: dayOffsetStr(-365),
+          nextDueDate: todayStr(),
+        })
         .expect(201);
       vaccinationId = vac.body.id;
 
@@ -478,7 +504,8 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
         .expect(200);
 
       const vacEvents = res.body.filter(
-        (e: { type: string; vaccinationId?: string }) => e.type === 'vaccination',
+        (e: { type: string; vaccinationId?: string }) =>
+          e.type === 'vaccination',
       );
       expect(vacEvents.length).toBe(1);
       expect(vacEvents[0]).toMatchObject({
@@ -523,7 +550,11 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
       await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/vaccinations`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: 'Hépatite', date: todayStr(), nextDueDate: dayOffsetStr(30) })
+        .send({
+          name: 'Hépatite',
+          date: todayStr(),
+          nextDueDate: dayOffsetStr(30),
+        })
         .expect(201);
 
       // Le vaccin Rage (rappel aujourd'hui) est supprimé : plus aucun rappel dû aujourd'hui
@@ -577,7 +608,12 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
       await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: 'Calcium', dose: '1', frequency: 'daily', startDate: todayStr() })
+        .send({
+          name: 'Calcium',
+          dose: '1',
+          frequency: 'daily',
+          startDate: todayStr(),
+        })
         .expect(201);
       await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/vet-appointments`)
@@ -587,7 +623,11 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
       await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/routines`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ type: 'nourrissage', frequency: 'daily', schedule: { time: '08:00', recurrence: 'daily' } })
+        .send({
+          type: 'nourrissage',
+          frequency: 'daily',
+          schedule: { time: '08:00', recurrence: 'daily' },
+        })
         .expect(201);
       await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/history`)

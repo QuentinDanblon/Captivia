@@ -9,11 +9,7 @@ import {
   CreateBreedingRecordDto,
   UpdateBreedingRecordDto,
 } from './dto/breeding-record.dto';
-import {
-  PaginationQueryDto,
-  toPage,
-} from '../common/dto/pagination-query.dto';
-
+import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class BreedingService {

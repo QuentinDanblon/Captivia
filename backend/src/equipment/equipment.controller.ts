@@ -34,8 +34,7 @@ export class EquipmentController {
   @Get()
   @ApiOperation({
     summary: 'Get recommended equipment',
-    description:
-      'Get the recommended equipment list (editorial taxonomy)',
+    description: 'Get the recommended equipment list (editorial taxonomy)',
   })
   @ApiQuery({
     name: 'speciesId',
@@ -53,7 +52,9 @@ export class EquipmentController {
     description: 'Filter by animal size (small, medium, large)',
   })
   @ApiResponse({ status: 200, description: 'Equipment recommendations' })
-  async getRecommendedEquipment(@Query() query: EquipmentQueryDto): Promise<unknown> {
+  async getRecommendedEquipment(
+    @Query() query: EquipmentQueryDto,
+  ): Promise<unknown> {
     return this.equipmentService.getRecommendedEquipment(
       query.speciesId,
       query.category,

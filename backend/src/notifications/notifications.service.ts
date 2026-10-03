@@ -4,6 +4,7 @@ import {
   Injectable,
   Logger,
 } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { UpdateNotificationPreferencesDto } from './dto/notification-preferences.dto';
 import { PushReminderPayload, WebPushSender } from './push-sender';
@@ -157,11 +158,13 @@ export class NotificationsService {
   ) {
     const existing = await this.getNotificationPreferences(userId);
 
-    const updateData: Record<string, any> = {};
+    const updateData: Prisma.NotificationPreferenceUpdateInput = {};
     if (data.types !== undefined) updateData.types = data.types;
+    // DTO validés (objets simples) : stockés tels quels dans les colonnes JSON.
     if (data.typeSchedules !== undefined)
-      updateData.typeSchedules = data.typeSchedules;
-    if (data.schedule !== undefined) updateData.schedule = data.schedule;
+      updateData.typeSchedules = data.typeSchedules as Prisma.InputJsonValue;
+    if (data.schedule !== undefined)
+      updateData.schedule = data.schedule as Prisma.InputJsonValue;
     if (data.snooze !== undefined) updateData.snooze = data.snooze;
     if (data.deliveryChannel !== undefined) {
       const valid = ['push', 'email', 'both'].includes(data.deliveryChannel)

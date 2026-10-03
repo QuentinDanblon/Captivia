@@ -926,3 +926,8 @@ export class AuthService implements OnModuleInit {
     }
   }
 }
+
+/** Utilisateur authentifié tel que posé sur `req.user` par la stratégie JWT. */
+export type AuthenticatedUser = NonNullable<
+  Awaited<ReturnType<AuthService['validateUser']>>
+>;
