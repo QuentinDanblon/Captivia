@@ -17,6 +17,7 @@ import {
   ApiResponse,
 } from '@nestjs/swagger';
 import { SpeciesService } from './species.service';
+import { SpeciesFilter } from '../filters/species-filter.interface';
 import { SearchSpeciesDto, GetSpeciesDto } from '../dto/species.dto';
 import {
   isUpstreamNotFound,
@@ -86,7 +87,7 @@ export class SpeciesController {
         Object.entries(filters).filter(
           ([, v]) => v !== undefined && v !== null && v !== '',
         ),
-      ) as any,
+      ) as SpeciesFilter,
     );
     return results;
   }
@@ -123,8 +124,7 @@ export class SpeciesController {
       const response = await this.speciesService.getVernacularNames(
         getSpeciesDto.id,
       );
-      // GBIF returns empty array directly, not wrapped in results
-      return Array.isArray(response) ? response : response.results || [];
+      return response.results || [];
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
@@ -186,8 +186,7 @@ export class SpeciesController {
       const response = await this.speciesService.getDistributions(
         getSpeciesDto.id,
       );
-      // GBIF returns empty array directly, not wrapped in results
-      return Array.isArray(response) ? response : response.results || [];
+      return response;
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
@@ -205,8 +204,7 @@ export class SpeciesController {
   async getMedia(@Param() getSpeciesDto: GetSpeciesDto) {
     try {
       const response = await this.speciesService.getMedia(getSpeciesDto.id);
-      // GBIF returns empty array directly, not wrapped in results
-      return Array.isArray(response) ? response : response.results || [];
+      return response.results || [];
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
       if (isUpstreamNotFound(error) || error instanceof NotFoundException) {

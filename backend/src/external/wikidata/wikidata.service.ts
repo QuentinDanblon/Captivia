@@ -2,6 +2,13 @@ import { Injectable, Logger } from '@nestjs/common';
 import { describeHttpError, isValidQid } from '../http-safety';
 import { ExternalHttpService } from '../http/external-http.service';
 import { isUpstreamNotFound } from '../http/external-errors';
+import type {
+  SparqlBinding,
+  SparqlResponse,
+  WikidataEntityRaw,
+  WikidataEntityResponse,
+  WikidataSearchResponse,
+} from './wikidata.types';
 
 /** Nom scientifique accepté dans la requête SPARQL (lettres, espaces, . ' - ×). */
 const SCIENTIFIC_NAME_REGEX = /^[\p{L}\p{M}][\p{L}\p{M} .'×-]{1,99}$/u;
@@ -29,15 +36,19 @@ export class WikidataService {
    */
   async searchSpecies(query: string) {
     try {
-      const response = await this.http.get('wikidata', this.wikidataSearchUrl, {
-        params: {
-          action: 'wbsearchentities',
-          search: query,
-          language: 'en',
-          format: 'json',
-          limit: 10,
+      const response = await this.http.get<WikidataSearchResponse>(
+        'wikidata',
+        this.wikidataSearchUrl,
+        {
+          params: {
+            action: 'wbsearchentities',
+            search: query,
+            language: 'en',
+            format: 'json',
+            limit: 10,
+          },
         },
-      });
+      );
 
       return this.transformSearchResults(response.data);
     } catch (error) {
@@ -54,7 +65,7 @@ export class WikidataService {
   async getEntity(qid: string) {
     if (!isValidQid(qid)) return null;
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<WikidataEntityResponse>(
         'wikidata',
         `${this.wikidataBaseUrl}/${qid}.json`,
       );
@@ -113,7 +124,7 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.http.get(
+      const response = await this.http.get<SparqlResponse>(
         'wikidata-sparql',
         this.wikidataQueryUrl,
         {
@@ -133,7 +144,11 @@ export class WikidataService {
         return null;
       }
 
-      return this.transformEntity(response.data.results.bindings[0]);
+      // Comportement historique conservé : une ligne SPARQL n'a pas la forme d'une
+      // entité (les champs lus ci-dessous restent donc `undefined`).
+      return this.transformEntity(
+        response.data.results.bindings[0] as Partial<WikidataEntityRaw>,
+      );
     } catch (error) {
       if (isUpstreamNotFound(error)) {
         return null;
@@ -167,7 +182,7 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.http.get(
+      const response = await this.http.get<SparqlResponse>(
         'wikidata-sparql',
         this.wikidataQueryUrl,
         {
@@ -227,7 +242,7 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.http.get(
+      const response = await this.http.get<SparqlResponse>(
         'wikidata-sparql',
         this.wikidataQueryUrl,
         {
@@ -279,7 +294,7 @@ export class WikidataService {
         LIMIT 1
       `;
 
-      const response = await this.http.get(
+      const response = await this.http.get<SparqlResponse>(
         'wikidata-sparql',
         this.wikidataQueryUrl,
         {
@@ -331,7 +346,7 @@ export class WikidataService {
         LIMIT 5
       `;
 
-      const response = await this.http.get(
+      const response = await this.http.get<SparqlResponse>(
         'wikidata-sparql',
         this.wikidataQueryUrl,
         {
@@ -384,7 +399,7 @@ export class WikidataService {
         LIMIT 10
       `;
 
-      const response = await this.http.get(
+      const response = await this.http.get<SparqlResponse>(
         'wikidata-sparql',
         this.wikidataQueryUrl,
         {
@@ -453,13 +468,13 @@ export class WikidataService {
   /**
    * Transform Wikidata entity search results
    */
-  private transformSearchResults(data: any) {
+  private transformSearchResults(data: WikidataSearchResponse | undefined) {
     if (!data || !Array.isArray(data.search)) {
       return { results: [], source: 'wikidata' };
     }
 
     return {
-      results: data.search.map((item: any) => ({
+      results: data.search.map((item) => ({
         item: item.concepturi || `https://www.wikidata.org/wiki/${item.id}`,
         id: item.id,
         itemLabel: item.label,
@@ -475,7 +490,7 @@ export class WikidataService {
   /**
    * Transform Wikidata entity data
    */
-  private transformEntity(data: any) {
+  private transformEntity(data: Partial<WikidataEntityRaw>) {
     return {
       id: data.id,
       labels: data.labels,
@@ -491,7 +506,7 @@ export class WikidataService {
   /**
    * Transform conservation status data
    */
-  private transformConservationStatus(data: any) {
+  private transformConservationStatus(data: SparqlBinding) {
     return {
       iucnStatus: data.iucnStatus?.value,
       citesStatus: data.citesStatus?.value,
@@ -505,7 +520,7 @@ export class WikidataService {
   /**
    * Transform classification data
    */
-  private transformClassification(data: any) {
+  private transformClassification(data: SparqlBinding) {
     return {
       family: data.family?.value,
       genus: data.genus?.value,
@@ -523,7 +538,7 @@ export class WikidataService {
   /**
    * Transform description data
    */
-  private transformDescriptions(data: any) {
+  private transformDescriptions(data: SparqlBinding) {
     return {
       description: data.description?.value,
       shortDescription: data.shortDescription?.value,
@@ -535,8 +550,8 @@ export class WikidataService {
   /**
    * Transform image data
    */
-  private transformImages(bindings: any[]) {
-    return bindings.map((binding: any) => ({
+  private transformImages(bindings: SparqlBinding[]) {
+    return bindings.map((binding) => ({
       image: binding.image?.value,
       license: binding.license?.value,
       caption: binding.caption?.value,
@@ -547,8 +562,8 @@ export class WikidataService {
   /**
    * Transform related species data
    */
-  private transformRelatedSpecies(bindings: any[]) {
-    return bindings.map((binding: any) => ({
+  private transformRelatedSpecies(bindings: SparqlBinding[]) {
+    return bindings.map((binding) => ({
       related: binding.related?.value,
       relatedLabel: binding.relatedLabel?.value,
       relatedDescription: binding.relatedDescription?.value,

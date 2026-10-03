@@ -1,4 +1,5 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { PubmedService } from './services/pubmed.service';
 import { describeHttpError } from '../external/http-safety';
@@ -66,8 +67,8 @@ export class HealthContentService {
   async createOrUpdateHealthContent(
     speciesId: number,
     locale: string,
-    diseases: any,
-    sources: any,
+    diseases: Prisma.InputJsonValue,
+    sources: Prisma.InputJsonValue,
   ) {
     try {
       return await this.prisma.speciesHealthContent.upsert({

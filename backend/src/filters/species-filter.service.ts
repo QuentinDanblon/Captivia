@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
+import type { GbifSpecies } from '../external/gbif.types';
 import {
   SpeciesFilter,
-  FilteredSpecies,
   FilteredSearchResult,
 } from './species-filter.interface';
 import { SpeciesTransformerService } from '../transformers/species-transformer.service';
@@ -12,10 +12,10 @@ export class SpeciesFilterService {
 
   constructor(private transformer: SpeciesTransformerService) {}
 
-  applyFilters(
-    gbifResults: any[],
+  applyFilters<T extends Partial<GbifSpecies>>(
+    gbifResults: T[],
     filters: SpeciesFilter,
-  ): FilteredSearchResult {
+  ): FilteredSearchResult<T> {
     let results = [...gbifResults];
     const appliedFilters: string[] = [];
 
@@ -70,7 +70,7 @@ export class SpeciesFilterService {
     // Filtrer par pays de distribution
     if (filters.country) {
       results = results.filter((s) =>
-        s.distributions?.some((d: any) => d.country === filters.country),
+        s.distributions?.some((d) => d.country === filters.country),
       );
       appliedFilters.push(`country:${filters.country}`);
     }
@@ -88,8 +88,8 @@ export class SpeciesFilterService {
     };
   }
 
-  buildGbifQuery(filters: SpeciesFilter): Record<string, any> {
-    const query: Record<string, any> = {};
+  buildGbifQuery(filters: SpeciesFilter): Record<string, string | number> {
+    const query: Record<string, string | number> = {};
 
     if (filters.query) {
       query.q = filters.query;

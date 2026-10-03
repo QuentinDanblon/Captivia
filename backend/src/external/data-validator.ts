@@ -5,11 +5,11 @@
 
 export interface ValidationRule<T> {
   field: keyof T;
-  validator: (value: any) => boolean;
+  validator: (value: unknown) => boolean;
   errorMessage: string;
 }
 
-export interface ValidationResult<T> {
+export interface ValidationResult {
   valid: boolean;
   errors: Array<{ field: string; message: string }>;
   warnings: Array<{ field: string; message: string }>;
@@ -81,6 +81,7 @@ const SPECIES_VALIDATION_RULES: ValidationRule<SpeciesData>[] = [
   {
     field: 'rank',
     validator: (value) =>
+      typeof value === 'string' &&
       [
         'SPECIES',
         'GENUS',
@@ -95,6 +96,7 @@ const SPECIES_VALIDATION_RULES: ValidationRule<SpeciesData>[] = [
   {
     field: 'kingdom',
     validator: (value) =>
+      typeof value === 'string' &&
       ['Animalia', 'Plantae', 'Fungi', 'Protista', 'Monera'].includes(value),
     errorMessage: 'Invalid kingdom',
   },
@@ -102,7 +104,10 @@ const SPECIES_VALIDATION_RULES: ValidationRule<SpeciesData>[] = [
     field: 'status',
     validator: (value) =>
       !value ||
-      ['EXTINCT', 'ENDANGERED', 'VULNERABLE', 'LC', 'DD', 'NT'].includes(value),
+      (typeof value === 'string' &&
+        ['EXTINCT', 'ENDANGERED', 'VULNERABLE', 'LC', 'DD', 'NT'].includes(
+          value,
+        )),
     errorMessage: 'Invalid conservation status',
   },
 ];
@@ -122,6 +127,7 @@ const DISTRIBUTION_VALIDATION_RULES: ValidationRule<DistributionData>[] = [
   {
     field: 'status',
     validator: (value) =>
+      typeof value === 'string' &&
       ['PRESENT', 'ABSENT', 'POSSIBLE', 'CULTIVATED'].includes(value),
     errorMessage: 'Invalid distribution status',
   },
@@ -174,7 +180,7 @@ export class DataValidatorService {
   /**
    * Valide les données d'une espèce
    */
-  validateSpecies(data: SpeciesData): ValidationResult<SpeciesData> {
+  validateSpecies(data: Partial<SpeciesData>): ValidationResult {
     const errors: Array<{ field: string; message: string }> = [];
     const warnings: Array<{ field: string; message: string }> = [];
 
@@ -250,9 +256,7 @@ export class DataValidatorService {
   /**
    * Valide les données d'une distribution
    */
-  validateDistribution(
-    data: DistributionData,
-  ): ValidationResult<DistributionData> {
+  validateDistribution(data: DistributionData): ValidationResult {
     const errors: Array<{ field: string; message: string }> = [];
     const warnings: Array<{ field: string; message: string }> = [];
 
@@ -273,7 +277,7 @@ export class DataValidatorService {
   /**
    * Valide les données d'un média
    */
-  validateMedia(data: MediaData): ValidationResult<MediaData> {
+  validateMedia(data: MediaData): ValidationResult {
     const errors: Array<{ field: string; message: string }> = [];
     const warnings: Array<{ field: string; message: string }> = [];
 
@@ -294,7 +298,7 @@ export class DataValidatorService {
   /**
    * Valide les données de métriques
    */
-  validateMetrics(data: MetricsData): ValidationResult<MetricsData> {
+  validateMetrics(data: MetricsData): ValidationResult {
     const errors: Array<{ field: string; message: string }> = [];
     const warnings: Array<{ field: string; message: string }> = [];
 
@@ -346,9 +350,7 @@ export class DataValidatorService {
   /**
    * Calcule un score de qualité basé sur la validation
    */
-  calculateQualityScore(
-    validationResult: ValidationResult<SpeciesData>,
-  ): number {
+  calculateQualityScore(validationResult: ValidationResult): number {
     if (validationResult.valid) {
       return 100;
     }
@@ -362,7 +364,7 @@ export class DataValidatorService {
   /**
    * Vérifie si les données sont complètes
    */
-  isComplete(data: SpeciesData): boolean {
+  isComplete(data: Partial<SpeciesData>): boolean {
     const requiredFields: (keyof SpeciesData)[] = [
       'key',
       'name',
@@ -386,7 +388,7 @@ export class DataValidatorService {
   /**
    * Obtient les statistiques de validation
    */
-  getValidationStats(data: SpeciesData): {
+  getValidationStats(data: Partial<SpeciesData>): {
     totalFields: number;
     completeFields: number;
     qualityScore: number;

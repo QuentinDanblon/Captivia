@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRedis } from '@nestjs-modules/ioredis';
 import Redis from 'ioredis';
-import { promisify } from 'util';
 import { createHash } from 'crypto';
 
 /** Durée de vie des compteurs journaliers et des ensembles d'utilisateurs (W2-08) : 90 jours. */
@@ -57,13 +56,14 @@ export class ApiAnalyticsService {
   ) => Promise<string[]>;
 
   constructor(@InjectRedis() private readonly redis: Redis) {
-    this.getAsync = promisify(this.redis.get).bind(this.redis);
-    this.setAsync = promisify(this.redis.set).bind(this.redis);
-    this.incrAsync = promisify(this.redis.incr).bind(this.redis);
-    this.incrByAsync = promisify(this.redis.incrby).bind(this.redis);
-    this.delAsync = promisify(this.redis.del).bind(this.redis);
-    this.lpushAsync = promisify(this.redis.lpush).bind(this.redis);
-    this.lrangeAsync = promisify(this.redis.lrange).bind(this.redis);
+    this.getAsync = (key) => this.redis.get(key);
+    this.setAsync = (key, value) => this.redis.set(key, value);
+    this.incrAsync = (key) => this.redis.incr(key);
+    this.incrByAsync = (key, increment) => this.redis.incrby(key, increment);
+    this.delAsync = (key) => this.redis.del(key);
+    this.lpushAsync = (key, ...values) => this.redis.lpush(key, ...values);
+    this.lrangeAsync = (key, start, stop) =>
+      this.redis.lrange(key, start, stop);
   }
 
   /**

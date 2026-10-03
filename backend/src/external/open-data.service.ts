@@ -10,21 +10,21 @@ import { ExternalHttpService } from './http/external-http.service';
 
 export interface OpenDataResult {
   source: string;
-  data: any;
+  data: unknown;
   timestamp: number;
 }
 
 export interface WikipediaData {
   title: string;
   extract: string;
-  url: string;
+  url?: string;
   thumbnail?: { source: string; width: number; height: number };
 }
 
 export interface WikidataData {
-  label: string;
-  description: string;
-  claims: Record<string, any[]>;
+  label?: string;
+  description?: string;
+  claims?: Record<string, unknown[]>;
 }
 
 export interface INaturalistObservation {
@@ -43,7 +43,44 @@ export interface EOLData {
   title: string;
   description: string;
   urls: string[];
-  images: any[];
+  images: unknown[];
+}
+
+/** Réponses brutes des fournisseurs (champs lus uniquement). */
+interface WikipediaSummaryResponse {
+  title: string;
+  extract: string;
+  content_urls?: {
+    desktop?: { page?: string };
+    mobile?: { page?: string };
+  };
+  thumbnail?: { source: string; width: number; height: number };
+}
+
+interface WikidataSearchResponse {
+  search?: Array<{ id: string }>;
+}
+
+type WikidataLocalized = Record<string, { value?: string } | undefined>;
+
+interface WikidataEntitiesResponse {
+  entities: Record<
+    string,
+    | {
+        labels?: WikidataLocalized;
+        descriptions?: WikidataLocalized;
+        claims?: Record<string, unknown[]>;
+      }
+    | undefined
+  >;
+}
+
+interface INaturalistResponse {
+  results: INaturalistObservation[];
+}
+
+interface EolResponse {
+  results: EOLData[];
 }
 
 export interface WikipediaResult extends OpenDataResult {
@@ -84,18 +121,22 @@ export class OpenDataService {
   constructor(private readonly http: ExternalHttpService) {}
 
   private iNaturalistObservations(params: Record<string, unknown>) {
-    return this.http.get('inaturalist', `${this.iNaturalistUrl}/observations`, {
-      params: {
-        per_page: 20,
-        order: 'desc',
-        order_by: 'created_at',
-        ...params,
+    return this.http.get<INaturalistResponse>(
+      'inaturalist',
+      `${this.iNaturalistUrl}/observations`,
+      {
+        params: {
+          per_page: 20,
+          order: 'desc',
+          order_by: 'created_at',
+          ...params,
+        },
       },
-    });
+    );
   }
 
   private eolPages(params: Record<string, unknown>) {
-    return this.http.get('eol', `${this.eolUrl}/pages`, {
+    return this.http.get<EolResponse>('eol', `${this.eolUrl}/pages`, {
       params: { per_page: 20, sort: 'relevance', ...params },
     });
   }
@@ -107,7 +148,7 @@ export class OpenDataService {
     this.logger.log(`Searching Wikipedia for: ${title}`);
 
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<WikipediaSummaryResponse>(
         'wikipedia',
         `${this.wikipediaUrl}/page/summary/${encodeURIComponent(title)}`,
       );
@@ -144,15 +185,19 @@ export class OpenDataService {
 
     try {
       // D'abord chercher l'entité par titre
-      const searchResponse = await this.http.get('wikidata', this.wikidataUrl, {
-        params: {
-          action: 'wbsearchentities',
-          search: title,
-          language: 'fr',
-          format: 'json',
-          limit: 1,
+      const searchResponse = await this.http.get<WikidataSearchResponse>(
+        'wikidata',
+        this.wikidataUrl,
+        {
+          params: {
+            action: 'wbsearchentities',
+            search: title,
+            language: 'fr',
+            format: 'json',
+            limit: 1,
+          },
         },
-      });
+      );
 
       const results = searchResponse.data.search;
       if (!results || results.length === 0) {
@@ -162,16 +207,20 @@ export class OpenDataService {
       const entityId = results[0].id;
 
       // Récupérer les données de l'entité
-      const dataResponse = await this.http.get('wikidata', this.wikidataUrl, {
-        params: {
-          action: 'wbgetentities',
-          format: 'json',
-          language: 'fr',
-          ids: entityId,
-          props: 'labels|descriptions|claims',
-          languages: 'fr',
+      const dataResponse = await this.http.get<WikidataEntitiesResponse>(
+        'wikidata',
+        this.wikidataUrl,
+        {
+          params: {
+            action: 'wbgetentities',
+            format: 'json',
+            language: 'fr',
+            ids: entityId,
+            props: 'labels|descriptions|claims',
+            languages: 'fr',
+          },
         },
-      });
+      );
 
       const entities = dataResponse.data.entities;
       const entity = entities[entityId];

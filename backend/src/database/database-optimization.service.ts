@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRedis } from '@nestjs-modules/ioredis';
 import Redis from 'ioredis';
-import { promisify } from 'util';
 
 export interface QueryPerformance {
   query: string;
@@ -41,7 +40,10 @@ export class DatabaseOptimizationService {
   private readonly setAsync: (key: string, value: string) => Promise<'OK'>;
   private readonly incrAsync: (key: string) => Promise<number>;
   private readonly delAsync: (key: string) => Promise<number>;
-  private readonly expireAsync: (key: string, seconds: number) => Promise<'OK'>;
+  private readonly expireAsync: (
+    key: string,
+    seconds: number,
+  ) => Promise<number>;
   private readonly lrangeAsync: (
     key: string,
     start: number,
@@ -55,13 +57,14 @@ export class DatabaseOptimizationService {
   private readonly MAX_SLOW_QUERIES = 50;
 
   constructor(@InjectRedis() private readonly redis: Redis) {
-    this.getAsync = promisify(this.redis.get).bind(this.redis);
-    this.setAsync = promisify(this.redis.set).bind(this.redis);
-    this.incrAsync = promisify(this.redis.incr).bind(this.redis);
-    this.delAsync = promisify(this.redis.del).bind(this.redis);
-    this.expireAsync = promisify(this.redis.expire).bind(this.redis);
-    this.lrangeAsync = promisify(this.redis.lrange).bind(this.redis);
-    this.llenAsync = promisify(this.redis.llen).bind(this.redis);
+    this.getAsync = (key) => this.redis.get(key);
+    this.setAsync = (key, value) => this.redis.set(key, value);
+    this.incrAsync = (key) => this.redis.incr(key);
+    this.delAsync = (key) => this.redis.del(key);
+    this.expireAsync = (key, seconds) => this.redis.expire(key, seconds);
+    this.lrangeAsync = (key, start, stop) =>
+      this.redis.lrange(key, start, stop);
+    this.llenAsync = (key) => this.redis.llen(key);
   }
 
   async trackQuery(

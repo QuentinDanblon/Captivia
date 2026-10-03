@@ -193,7 +193,7 @@ export class ExternalHttpService {
   }
 
   /** GET résilient vers un fournisseur externe. */
-  async get<T = any>(
+  async get<T = unknown>(
     provider: ExternalProvider,
     url: string,
     config: ExternalRequestConfig = {},

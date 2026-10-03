@@ -17,6 +17,24 @@ export interface PetFoodSearchResult {
   degraded?: boolean;
 }
 
+/** Réponse de `cgi/search.pl` (champs lus uniquement). */
+interface OpffSearchResponse {
+  products?: PetFoodProduct[];
+  count?: number;
+  page?: number;
+}
+
+/** Réponse de `/product/{code}` (champs lus uniquement). */
+interface OpffProductResponse {
+  status?: number;
+  product?: PetFoodProduct;
+}
+
+/** Réponse de `categories.json` (champs lus uniquement). */
+interface OpffCategoriesResponse {
+  tags?: Array<{ name: string }>;
+}
+
 interface PetFoodProduct {
   code: string;
   product_name: string;
@@ -380,14 +398,14 @@ export class OpenPetFoodFactsService {
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as PetFoodSearchResult;
     }
 
     try {
       // NB : world.openpetfoodfacts.org/api/v2/search IGNORE search_terms
       // (renvoie toujours le catalogue complet ~15k produits -> nourriture pour
       // chat partout). L'endpoint legacy cgi/search.pl?json=1 filtre correctement.
-      const params: any = {
+      const params: Record<string, string | number> = {
         search_terms: query,
         json: 1,
         page,
@@ -402,7 +420,7 @@ export class OpenPetFoodFactsService {
         params.tag_0 = category;
       }
 
-      const response = await this.http.get(
+      const response = await this.http.get<OpffSearchResponse>(
         'openpetfoodfacts',
         'https://world.openpetfoodfacts.org/cgi/search.pl',
         { params },
@@ -415,7 +433,7 @@ export class OpenPetFoodFactsService {
       };
 
       // Réponse valide du fournisseur (même « aucun produit ») : cache 24 h.
-      await this.cacheService.set(cacheKey, JSON.stringify(result), 86400);
+      this.cacheService.set(cacheKey, JSON.stringify(result), 86400);
 
       return result;
     } catch (error) {
@@ -443,11 +461,11 @@ export class OpenPetFoodFactsService {
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as PetFoodProduct;
     }
 
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<OpffProductResponse>(
         'openpetfoodfacts',
         `${this.baseUrl}/product/${barcode}`,
         {
@@ -462,7 +480,7 @@ export class OpenPetFoodFactsService {
         const product = response.data.product;
 
         // Cache for 7 days
-        await this.cacheService.set(cacheKey, JSON.stringify(product), 604800);
+        this.cacheService.set(cacheKey, JSON.stringify(product), 604800);
 
         return product;
       }
@@ -483,7 +501,10 @@ export class OpenPetFoodFactsService {
     }
   }
 
-  async searchBySpecies(species: string, type?: string): Promise<any> {
+  async searchBySpecies(
+    species: string,
+    type?: string,
+  ): Promise<PetFoodSearchResult> {
     // Get appropriate search terms for this species
     let searchTerms = this.getSearchTermsForSpecies(species);
 
@@ -511,19 +532,19 @@ export class OpenPetFoodFactsService {
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as string[];
     }
 
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<OpffCategoriesResponse>(
         'openpetfoodfacts',
         'https://world.openpetfoodfacts.org/categories.json',
       );
 
-      const categories = response.data.tags?.map((tag: any) => tag.name) || [];
+      const categories = response.data.tags?.map((tag) => tag.name) || [];
 
       // Cache for 7 days
-      await this.cacheService.set(cacheKey, JSON.stringify(categories), 604800);
+      this.cacheService.set(cacheKey, JSON.stringify(categories), 604800);
 
       return categories;
     } catch (error) {

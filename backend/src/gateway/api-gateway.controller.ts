@@ -26,10 +26,6 @@ import { OperatorGuard } from '../common/guards/operator.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { isValidQid } from '../external/http-safety';
 import { GatewayEnrichedDto, GatewaySearchDto } from './dto/gateway-search.dto';
-import {
-  WikipediaData,
-  WikidataData,
-} from '../transformers/data-transformer.interface';
 
 const VALID_SOURCES = ['gbif', 'wikipedia', 'wikidata'];
 
@@ -253,9 +249,9 @@ export class ApiGatewayController {
   @ApiResponse({ status: 200, description: 'Cache cleared' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Réservé aux opérateurs' })
-  async clearCache(@Param('speciesKey') speciesKey: string) {
+  clearCache(@Param('speciesKey') speciesKey: string) {
     this.validateSpeciesKey(speciesKey);
-    await this.apiGatewayService.clearSpeciesCache(speciesKey);
+    this.apiGatewayService.clearSpeciesCache(speciesKey);
     return { message: 'Cache cleared successfully' };
   }
 

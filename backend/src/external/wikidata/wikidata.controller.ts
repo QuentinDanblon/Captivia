@@ -26,7 +26,7 @@ function assertValidQid(qid: unknown): void {
     );
   }
 }
-import { GetWikidataDto, ConservationStatusDto } from '../../dto/species.dto';
+import { ConservationStatusDto } from '../../dto/species.dto';
 
 @UseGuards(RateLimitGuard)
 @ApiTags('wikidata')

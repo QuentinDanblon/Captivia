@@ -2,6 +2,13 @@ import { Injectable, Logger } from '@nestjs/common';
 import { describeHttpError } from '../http-safety';
 import { ExternalHttpService } from '../http/external-http.service';
 import { isUpstreamNotFound } from '../http/external-errors';
+import type {
+  WikipediaCoordinatesResponse,
+  WikipediaExtractResponse,
+  WikipediaParseResponse,
+  WikipediaSearchResponse,
+  WikipediaSummary,
+} from './wikipedia.types';
 
 /**
  * Wikipedia API Service for fetching species information from Wikipedia
@@ -22,7 +29,7 @@ export class WikipediaService {
    */
   async searchSpecies(query: string) {
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<WikipediaSearchResponse>(
         'wikipedia',
         this.wikipediaSearchUrl,
         {
@@ -53,7 +60,7 @@ export class WikipediaService {
    */
   async getArticle(title: string) {
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<WikipediaSummary>(
         'wikipedia',
         `${this.wikipediaBaseUrl}/page/summary/${encodeURIComponent(title)}`,
       );
@@ -81,7 +88,7 @@ export class WikipediaService {
    */
   async getExtract(title: string) {
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<WikipediaExtractResponse>(
         'wikipedia',
         this.wikipediaSearchUrl,
         {
@@ -131,7 +138,7 @@ export class WikipediaService {
    */
   async getPage(title: string) {
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<WikipediaParseResponse>(
         'wikipedia',
         this.wikipediaSearchUrl,
         {
@@ -173,7 +180,7 @@ export class WikipediaService {
    */
   async getImages(title: string) {
     try {
-      const response = await this.http.get(
+      const response = await this.http.get<WikipediaCoordinatesResponse>(
         'wikipedia',
         `${this.wikipediaBaseUrl}/page/coordinates`,
         {
@@ -240,7 +247,7 @@ export class WikipediaService {
   /**
    * Transform Wikipedia search result (top match)
    */
-  private transformSearchResult(data: any) {
+  private transformSearchResult(data: WikipediaSearchResponse | undefined) {
     if (
       !data ||
       !data.query ||
@@ -267,7 +274,7 @@ export class WikipediaService {
   /**
    * Transform Wikipedia article data
    */
-  private transformArticle(data: any) {
+  private transformArticle(data: WikipediaSummary | undefined) {
     if (!data || data.error) {
       return null;
     }
