@@ -129,4 +129,80 @@ export const envValidationSchema = Joi.object({
   SPECIESPLUS_API_TOKEN: Joi.string().trim().allow('').optional(),
   NCBI_API_KEY: Joi.string().trim().allow('').optional(),
   NCBI_EMAIL: Joi.string().trim().allow('').optional(),
+  /**
+   * Communauté (volet social, phase 1). Désactivée par défaut : toutes les routes /community/*
+   * répondent 404. En production, l'activer exige le pilote de médias `s3` (disque Render
+   * éphémère) et une URL publique des médias en https.
+   */
+  COMMUNITY_ENABLED: Joi.string().valid('true', 'false').default('false'),
+  /** Signalements distincts déclenchant le masquage automatique d'un contenu. */
+  COMMUNITY_HIDE_THRESHOLD: Joi.number().integer().min(1).max(100).default(3),
+  COMMUNITY_POSTS_PER_HOUR: Joi.number().integer().min(1).max(1000).default(5),
+  COMMUNITY_COMMENTS_PER_MINUTE: Joi.number()
+    .integer()
+    .min(1)
+    .max(100)
+    .default(5),
+  COMMUNITY_UPLOADS_PER_HOUR: Joi.number()
+    .integer()
+    .min(1)
+    .max(1000)
+    .default(30),
+  /** Point de contact DSA cité dans les notifications de modération. */
+  COMMUNITY_CONTACT_EMAIL: Joi.string().trim().email().allow('').optional(),
+  /** Stockage des médias : `local` (dev/tests, MEDIA_LOCAL_DIR) ou `s3` (Cloudflare R2, S3…). */
+  MEDIA_DRIVER: Joi.when('NODE_ENV', {
+    is: isProduction,
+    then: Joi.when('COMMUNITY_ENABLED', {
+      is: 'true',
+      then: Joi.string().valid('s3').required().messages({
+        'any.only':
+          '"MEDIA_DRIVER" doit valoir "s3" en production quand COMMUNITY_ENABLED=true (disque éphémère)',
+        'any.required':
+          '"MEDIA_DRIVER" doit valoir "s3" en production quand COMMUNITY_ENABLED=true (disque éphémère)',
+      }),
+      otherwise: Joi.string().valid('local', 's3').default('local'),
+    }),
+    otherwise: Joi.string().valid('local', 's3').default('local'),
+  }),
+  MEDIA_LOCAL_DIR: Joi.string().trim().allow('').optional(),
+  /** Taille maximale d'une image téléversée (octets, défaut 8 Mo). */
+  MEDIA_MAX_BYTES: Joi.number()
+    .integer()
+    .min(1024)
+    .max(20 * 1024 * 1024)
+    .default(8 * 1024 * 1024),
+  /** Base des URL publiques des images (domaine public du bucket R2, ou l'API en local). */
+  MEDIA_PUBLIC_BASE_URL: Joi.when('MEDIA_DRIVER', {
+    is: 's3',
+    then: Joi.string()
+      .uri({ scheme: ['https', 'http'] })
+      .required(),
+    otherwise: Joi.string()
+      .uri({ scheme: ['https', 'http'] })
+      .allow('')
+      .optional(),
+  }),
+  MEDIA_BUCKET: Joi.when('MEDIA_DRIVER', {
+    is: 's3',
+    then: Joi.string().trim().min(3).required(),
+    otherwise: Joi.string().allow('').optional(),
+  }),
+  /** Point d'accès S3 (R2 : https://<ACCOUNT_ID>.r2.cloudflarestorage.com ; vide pour AWS). */
+  S3_ENDPOINT: Joi.string()
+    .uri({ scheme: ['https', 'http'] })
+    .allow('')
+    .optional(),
+  S3_REGION: Joi.string().trim().default('auto'),
+  S3_ACCESS_KEY_ID: Joi.when('MEDIA_DRIVER', {
+    is: 's3',
+    then: Joi.string().trim().min(1).required(),
+    otherwise: Joi.string().allow('').optional(),
+  }),
+  S3_SECRET_ACCESS_KEY: Joi.when('MEDIA_DRIVER', {
+    is: 's3',
+    then: Joi.string().trim().min(1).required(),
+    otherwise: Joi.string().allow('').optional(),
+  }),
+  S3_FORCE_PATH_STYLE: Joi.string().valid('true', 'false').default('false'),
 });
