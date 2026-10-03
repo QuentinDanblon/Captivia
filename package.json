@@ -12,7 +12,7 @@
     "vercel:open": "node scripts/vercel-open.js"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2",
+    "concurrently": "^10.0.5",
     "cross-env": "^7.0.3"
   },
   "engines": {
