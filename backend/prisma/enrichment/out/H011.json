@@ -1,0 +1,476 @@
+[
+ {
+  "speciesId": 104093507,
+  "health": {
+   "diseases": [
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Mue incomplète (dysecdysis)",
+     "symptoms": "Lunettes (écailles oculaires) ou bandes de peau autour de la queue ou des doigts non muées et retenues.",
+     "prevention": "Maintenir un bon taux d'humidité, une alimentation adaptée, un animal sans maladie ni parasites et des surfaces abrasives pour aider la mue.",
+     "whenToConsult": "Ne jamais forcer le retrait d'une lunette retenue (risque de blesser la nouvelle) : demander conseil au vétérinaire."
+    },
+    {
+     "name": "Dermatite ulcéreuse (« scale rot »)",
+     "symptoms": "Rougeur de la peau, zones de peau morte, plaies et écoulements cutanés.",
+     "prevention": "L'humidité excessive et la saleté en sont les principaux facteurs : litière propre et sèche.",
+     "whenToConsult": "Un traitement antibiotique et une hygiène excellente sont indispensables."
+    },
+    {
+     "name": "Vers parasites digestifs (ankylostomes, ascarides)",
+     "symptoms": "Régurgitation d'aliments partiellement digérés ou de vers adultes, perte d'appétit.",
+     "prevention": null,
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": null
+ },
+ {
+  "speciesId": 104094514,
+  "health": {
+   "diseases": [
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Mue incomplète (dysecdysis)",
+     "symptoms": "Lunettes (écailles oculaires) ou bandes de peau autour de la queue ou des doigts non muées et retenues.",
+     "prevention": "Maintenir un bon taux d'humidité, une alimentation adaptée, un animal sans maladie ni parasites et des surfaces abrasives pour aider la mue.",
+     "whenToConsult": "Ne jamais forcer le retrait d'une lunette retenue (risque de blesser la nouvelle) : demander conseil au vétérinaire."
+    },
+    {
+     "name": "Dermatite ulcéreuse (« scale rot »)",
+     "symptoms": "Rougeur de la peau, zones de peau morte, plaies et écoulements cutanés.",
+     "prevention": "L'humidité excessive et la saleté en sont les principaux facteurs : litière propre et sèche.",
+     "whenToConsult": "Un traitement antibiotique et une hygiène excellente sont indispensables."
+    },
+    {
+     "name": "Vers parasites digestifs (ankylostomes, ascarides)",
+     "symptoms": "Régurgitation d'aliments partiellement digérés ou de vers adultes, perte d'appétit.",
+     "prevention": null,
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 22,
+   "tempMax": 32,
+   "humidityMin": 50,
+   "humidityMax": 75,
+   "minSpaceSize": "Au minimum 18\" × 18\" × 36\" (≈ 45 × 45 × 90 cm) pour un seul serpent ; terrarium arboricole à ouverture frontale, plus grand si possible.",
+   "lightNeeds": "UVB indispensable (contrairement à la plupart des serpents) ; lumières allumées environ 13 h par jour en été et 11 h en hiver.",
+   "activityEnrichment": "Au minimum une branche d'escalade et du feuillage vivant ou artificiel pour se cacher ; idéalement branches, brindilles, lianes, tubes en liège, rebords.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet",
+     "title": "Rough Green Snake Care Sheet - Dubia.com"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104101618,
+  "health": {
+   "diseases": [
+    {
+     "name": "Infections bactériennes (surtout respiratoires)",
+     "symptoms": null,
+     "prevention": "Ne jamais utiliser de copeaux de pin ou de séquoia : les fines particules provoquent des problèmes respiratoires.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Maladie à corps d'inclusion (« stargazing »)",
+     "symptoms": "Perte d'appétit ou de poids, infections bactériennes secondaires, mauvaise cicatrisation, régurgitations (boïdés).",
+     "prevention": null,
+     "whenToConsult": "Maladie non curable : les serpents peuvent être isolés et recevoir des soins de soutien."
+    },
+    {
+     "name": "Rétention de ponte (dystocie)",
+     "symptoms": null,
+     "prevention": null,
+     "whenToConsult": null
+    },
+    {
+     "name": "Mue difficile",
+     "symptoms": null,
+     "prevention": "Proposer un « sauna humide » pour ramollir la peau avant la mue.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/indian-sand-boa/",
+     "title": "Indian Sand Boa - ReptileTalk"
+    },
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104101654,
+  "health": {
+   "diseases": [
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Mue incomplète (dysecdysis)",
+     "symptoms": "Lunettes (écailles oculaires) ou bandes de peau autour de la queue ou des doigts non muées et retenues.",
+     "prevention": "Maintenir un bon taux d'humidité, une alimentation adaptée, un animal sans maladie ni parasites et des surfaces abrasives pour aider la mue.",
+     "whenToConsult": "Ne jamais forcer le retrait d'une lunette retenue (risque de blesser la nouvelle) : demander conseil au vétérinaire."
+    },
+    {
+     "name": "Dermatite ulcéreuse (« scale rot »)",
+     "symptoms": "Rougeur de la peau, zones de peau morte, plaies et écoulements cutanés.",
+     "prevention": "L'humidité excessive et la saleté en sont les principaux facteurs : litière propre et sèche.",
+     "whenToConsult": "Un traitement antibiotique et une hygiène excellente sont indispensables."
+    },
+    {
+     "name": "Vers parasites digestifs (ankylostomes, ascarides)",
+     "symptoms": "Régurgitation d'aliments partiellement digérés ou de vers adultes, perte d'appétit.",
+     "prevention": null,
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": null
+ },
+ {
+  "speciesId": 104101859,
+  "health": {
+   "diseases": [
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Mue incomplète (dysecdysis)",
+     "symptoms": "Lunettes (écailles oculaires) ou bandes de peau autour de la queue ou des doigts non muées et retenues.",
+     "prevention": "Maintenir un bon taux d'humidité, une alimentation adaptée, un animal sans maladie ni parasites et des surfaces abrasives pour aider la mue.",
+     "whenToConsult": "Ne jamais forcer le retrait d'une lunette retenue (risque de blesser la nouvelle) : demander conseil au vétérinaire."
+    },
+    {
+     "name": "Dermatite ulcéreuse (« scale rot »)",
+     "symptoms": "Rougeur de la peau, zones de peau morte, plaies et écoulements cutanés.",
+     "prevention": "L'humidité excessive et la saleté en sont les principaux facteurs : litière propre et sèche.",
+     "whenToConsult": "Un traitement antibiotique et une hygiène excellente sont indispensables."
+    },
+    {
+     "name": "Maladie à corps d'inclusion (boïdés et pythons)",
+     "symptoms": "Perte d'appétit ou de poids, infections bactériennes secondaires, mauvaise cicatrisation, régurgitations ; signes neurologiques (tics du visage, « stargazing », convulsions).",
+     "prevention": null,
+     "whenToConsult": "Maladie non curable : les serpents peuvent être isolés et recevoir des soins de soutien."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 26,
+   "tempMax": 34,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Au minimum 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m), de préférence plus grand ; taille minimale selon la longueur adulte : longueur = longueur du serpent, largeur = la moitié, hauteur maximale.",
+   "lightNeeds": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil), tube couvrant la moitié de l'enclos côté chaud.",
+   "activityEnrichment": "Rondins creux, branches solides, plateformes, lianes, grandes plantes robustes, caisses en plastique pour se cacher ; au minimum deux branches solides et du feuillage.",
+   "hygieneNotes": null,
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/burmese-python-care-sheet",
+     "title": "Burmese Python Care Sheet - ReptiFiles"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104104828,
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, os de la mâchoire ou des pattes gonflés ou déformés, fractures.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée).",
+     "whenToConsult": "Le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Croissance anormale du bec",
+     "symptoms": "Gêne pour s'alimenter ; lié à une mauvaise alimentation et/ou une carence en calcium.",
+     "prevention": "Fournir des aliments abrasifs permettant une usure naturelle du bec.",
+     "whenToConsult": "Le traitement consiste à tailler ou limer le bec ; la répétition est souvent nécessaire."
+    },
+    {
+     "name": "Infection à herpèsvirus (tortues terrestres)",
+     "symptoms": "Chez les tortues terrestres : lésions de la bouche, perte d'appétit, régurgitations, écoulements de la bouche et des yeux.",
+     "prevention": null,
+     "whenToConsult": "Isoler l'animal, soins de soutien et traitement antiviral des lésions."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 26,
+   "tempMax": 48,
+   "humidityMin": 60,
+   "humidityMax": 70,
+   "minSpaceSize": "Enclos de 1,5 × 0,6 m (jeunes), 2,1 × 1,2 m (juvéniles) et 2,7 × 1,5 m (adultes), d'environ 0,45 m de haut ; enclos extérieurs en été.",
+   "lightNeeds": "Lampes à vapeur de mercure (UV et chaleur) de 160 W environ à 30 cm au-dessus des tortues ; lumière naturelle en été.",
+   "activityEnrichment": "Cachettes pour les jeunes (bacs retournés avec ouverture) ; grands parcs extérieurs pour brouter et se chauffer ; bains réguliers.",
+   "hygieneNotes": null,
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/radiated-tortoise/",
+     "title": "Radiated Tortoise - ReptileTalk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104105088,
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, os de la mâchoire ou des pattes gonflés ou déformés, fractures.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée).",
+     "whenToConsult": "Le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Croissance anormale du bec",
+     "symptoms": "Gêne pour s'alimenter ; lié à une mauvaise alimentation et/ou une carence en calcium.",
+     "prevention": "Fournir des aliments abrasifs permettant une usure naturelle du bec.",
+     "whenToConsult": "Le traitement consiste à tailler ou limer le bec ; la répétition est souvent nécessaire."
+    },
+    {
+     "name": "Infection à herpèsvirus (tortues terrestres)",
+     "symptoms": "Chez les tortues terrestres : lésions de la bouche, perte d'appétit, régurgitations, écoulements de la bouche et des yeux.",
+     "prevention": null,
+     "whenToConsult": "Isoler l'animal, soins de soutien et traitement antiviral des lésions."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 21,
+   "tempMax": 38,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Vivarium en bois bien ventilé d'au moins 1150 mm (46\") ; table à tortues d'au moins 900 mm (35\") possible dans une maison naturellement chaude.",
+   "lightNeeds": "Espèce qui se chauffe beaucoup au soleil : tube UVB d'au moins 10 % (espèces désertiques) avec réflecteur ; lampe chauffante 10-12 h par jour.",
+   "activityEnrichment": "Ne grimpe pas mais aime creuser : morceaux de bois ou décors pour creuser ; grotte-refuge pour les jeunes ; plantes artificielles (désertiques).",
+   "hygieneNotes": "Garder un substrat sec pour ne pas trop augmenter l'humidité de l'enclos.",
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet",
+     "title": "Indian Star Tortoise Care Sheet - Reptile Centre"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104106412,
+  "health": {
+   "diseases": [
+    {
+     "name": "Parasites (pentastomes pulmonaires, nématodes gastriques, helminthes intestinaux)",
+     "symptoms": "Dans une étude texane de 2016, 100 % des alligators étaient infectés, par au moins 20 espèces de parasites.",
+     "prevention": null,
+     "whenToConsult": null
+    },
+    {
+     "name": "Adénovirus",
+     "symptoms": "Maladies du foie ou du tube digestif pouvant être mortelles (crocodiliens concernés).",
+     "prevention": null,
+     "whenToConsult": null
+    },
+    {
+     "name": "Sangsues",
+     "symptoms": "Quelques sangsues sont peu nocives, mais un grand nombre peut abîmer la peau et transmettre d'autres maladies.",
+     "prevention": null,
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/American_alligator",
+     "title": "American alligator - Wikipedia"
+    },
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": null
+ },
+ {
+  "speciesId": 144096299,
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+     "whenToConsult": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Parasites intestinaux et vers de l'estomac",
+     "symptoms": "Ulcères de l'estomac en cas d'infestation importante.",
+     "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 24,
+   "tempMax": 35,
+   "humidityMin": 60,
+   "humidityMax": 70,
+   "minSpaceSize": "Au minimum 6 × 2 × 4 pieds (≈ 180 × 60 × 120 cm) pour un seul basilic ; grand enclos avec possibilités de grimper et de nager ; un seul individu par enclos.",
+   "lightNeeds": "UVB indispensable à sa survie ; branche de bain de soleil à 13-15\" sous la lampe si montée au-dessus d'un grillage (17-18\" si montée à l'intérieur).",
+   "activityEnrichment": "Au minimum une grosse branche solide pour se chauffer, du feuillage pour se cacher et un bassin assez grand pour nager.",
+   "hygieneNotes": null,
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet",
+     "title": "Green Basilisk Care Sheet - Dubia.com"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 156256182,
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+     "whenToConsult": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Parasites intestinaux et vers de l'estomac",
+     "symptoms": "Ulcères de l'estomac en cas d'infestation importante.",
+     "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "feeding": null,
+  "behavior": null,
+  "reproduction": null,
+  "habitat": null
+ }
+]

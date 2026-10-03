@@ -1,0 +1,751 @@
+[
+ {
+  "speciesId": 104008238,
+  "evidence": []
+ },
+ {
+  "speciesId": 156261518,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Probably a predator feeding on small invertebrates and zooplankton in nature.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Petits aliments vivants ou surgelés (nauplii d'artémia, Moina, vers grindal)",
+    "quote": "should also be offered daily meals of small live and frozen fare such as Artemia nauplii, Moina , grindal worm , etc.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Flocons ou granulés pour poissons tropicaux",
+    "quote": "A tropical fish flake or pelleted food should be offered at least once or twice a day.",
+    "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish"
+   },
+   {
+    "field": "feeding.recommendedFoods[2]",
+    "value": "Vers de vase, artémias, daphnies",
+    "quote": "Some high protein sources such as bloodworms , brine shrimp, and daphnia are all great additions as well.",
+    "url": "https://www.aquariumsource.com/glass-catfish"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Suralimentation (ou sous-alimentation)",
+    "quote": "Always keep an eye out for the possibility of over or underfeeding.",
+    "url": "https://www.aquariumsource.com/glass-catfish"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Flocons comme base unique du régime",
+    "quote": "Even if your fish does accept flake food, meatier foods should still be the basis for the diet.",
+    "url": "https://aquariadise.com/glass-catfish/"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "daily",
+    "quote": "should also be offered daily meals of small live and frozen fare such as Artemia nauplii, Moina , grindal worm , etc.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Régime proche de la nature : petits invertébrés et zooplancton.",
+    "quote": "Probably a predator feeding on small invertebrates and zooplankton in nature.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "health.prevention",
+    "value": "Maintenir une bonne qualité d'eau et limiter le stress.",
+    "quote": "If their proper conditions are not met, Glass Catfish are susceptible to serious health problems caused by poor water quality and stress.",
+    "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish"
+   },
+   {
+    "field": "health.diseases[3].prevention",
+    "value": "Les taux d'ammoniac et de nitrite ne doivent jamais dépasser zéro.",
+    "quote": "The ammonia and nitrite levels in the water should never fluctuate past zero.",
+    "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish"
+   },
+   {
+    "field": "health.diseases[0]",
+    "value": "Ich (maladie des points blancs)",
+    "quote": "Serious Conditions: Ammonia toxicity Ich or white spot disease Bacterial diseases Fungal diseases Nitrite toxicity",
+    "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Agir dès les premiers signes : de nombreux poissons meurent avant d'avoir pu être traités.",
+    "quote": "Unfortunately, many Glass Catfish die before you get a chance to treat them for a specific health problem.",
+    "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Maladies bactériennes",
+    "quote": "Serious Conditions: Ammonia toxicity Ich or white spot disease Bacterial diseases Fungal diseases Nitrite toxicity",
+    "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Maladies fongiques",
+    "quote": "Serious Conditions: Ammonia toxicity Ich or white spot disease Bacterial diseases Fungal diseases Nitrite toxicity",
+    "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish"
+   },
+   {
+    "field": "health.diseases[3]",
+    "value": "Intoxication à l'ammoniac et aux nitrites",
+    "quote": "Serious Conditions: Ammonia toxicity Ich or white spot disease Bacterial diseases Fungal diseases Nitrite toxicity",
+    "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish"
+   },
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "avance",
+    "quote": "Breeding Glass Catfish in captivity is challenging, even expert fishkeepers struggle.",
+    "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "Reproduction quasi jamais obtenue en aquarium.",
+    "quote": "For the most part, breeding glass catfish within a tank setting is unheard of.",
+    "url": "https://aquariadise.com/glass-catfish/"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 20,
+    "quote": "Temperature 20-26 °C 68-79 °F",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 26,
+    "quote": "Temperature 20-26 °C 68-79 °F",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Aquarium d'au moins 90 × 30 cm (~81 litres), pour un groupe d'au moins 6 individus.",
+    "quote": "An aquarium with base dimensions of 90 ∗ 30 cm 36 ∗ 12 in or equivalent should be the smallest considered.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Préfère une lumière tamisée, avec de la végétation de surface ou flottante.",
+    "quote": "Best kept in a well-decorated set-up with some surface or floating vegetation since it appears to prefer relatively dim conditions.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Décor dense, végétation flottante, feuilles mortes séchées et/ou cônes d'aulne.",
+    "quote": "The addition of dried leaf litter and/or alder cones would further emphasise the natural feel",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Ne pas introduire ce poisson dans un aquarium non mûr biologiquement : sensible aux variations de chimie de l'eau.",
+    "quote": "Do not add this fish to a biologically immature aquarium as it can be susceptible to swings in water chemistry.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "Volume ~81 litres ~21 US gal",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   },
+   {
+    "field": "habitat.minSpaceSize.group",
+    "value": "groupe de 6 ou plus",
+    "quote": "K. vitreolus is highly gregarious and tends to form quite tight schools meaning a group of 6 or more specimens is the minimum recommended.",
+    "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+   }
+  ]
+ },
+ {
+  "speciesId": 2441454,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "enclos",
+    "quote": "Hermann's tortoises, like many tortoise species, do best outdoors.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": "24 °C (converti depuis la citation)",
+    "quote": "The ambient temperature inside the enclosure should be 75 to 85 degrees, and basking hotspots should be 95 to 100 degrees, in combination with 60 to 70-percent relative humidity.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "38 °C (converti depuis la citation)",
+    "quote": "The ambient temperature inside the enclosure should be 75 to 85 degrees, and basking hotspots should be 95 to 100 degrees, in combination with 60 to 70-percent relative humidity.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos extérieur d'au moins 16 × 8 pieds (≈ 4,9 × 2,4 m) pour 8 à 10 tortues ; en intérieur, « table à tortues » de 8 × 4 pieds (≈ 2,4 × 1,2 m) pour une paire ou un trio d'adultes.",
+    "quote": "An outdoor enclosure measuring at least 16 by 8 feet and 2 feet tall will house a small breeding group of eight to 10 tortoises.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos extérieur d'au moins 16 × 8 pieds (≈ 4,9 × 2,4 m) pour 8 à 10 tortues ; en intérieur, « table à tortues » de 8 × 4 pieds (≈ 2,4 × 1,2 m) pour une paire ou un trio d'adultes.",
+    "quote": "Juveniles and adult tortoises can also be housed inside using the \"tortoise table\" method, in which an 8 by 4-foot, 2-foot-tall rectangular enclosure is constructed of plywood.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos extérieur d'au moins 16 × 8 pieds (≈ 4,9 × 2,4 m) pour 8 à 10 tortues ; en intérieur, « table à tortues » de 8 × 4 pieds (≈ 2,4 × 1,2 m) pour une paire ou un trio d'adultes.",
+    "quote": "An enclosure this size will house a pair or trio of adults, but as always, going as big as possible is best.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Tube fluorescent UVB 10.0 sur le dessus de l'enclos et lampe chauffante de 100 W à une extrémité (point chaud d'environ 95 °F ≈ 35 °C).",
+    "quote": "For lighting, a 10.0 UVB-emitting fluorescent bulb should be across the top of the enclosure, and a 100-watt basking light should be placed at one end to provide a basking site of around 95 degrees Fahrenheit.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Relief et terrain inégal (sites de bain de soleil ou de ponte, incitation à l'exercice) ; gros morceaux d'écorce de liège ou de bois flotté comme abris.",
+    "quote": "Sloping areas and uneven terrain will offer Hermann's tortoises a variety of basking or nesting sites, and will force them to exercise, as well.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Relief et terrain inégal (sites de bain de soleil ou de ponte, incitation à l'exercice) ; gros morceaux d'écorce de liège ou de bois flotté comme abris.",
+    "quote": "Large pieces of cork bark or driftwood can also be placed inside the enclosure for additional cover.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "An enclosure this size will house a pair or trio of adults, but as always, going as big as possible is best.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 60,
+    "quote": "The ambient temperature inside the enclosure should be 75 to 85 degrees, and basking hotspots should be 95 to 100 degrees, in combination with 60 to 70-percent relative humidity.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 70,
+    "quote": "The ambient temperature inside the enclosure should be 75 to 85 degrees, and basking hotspots should be 95 to 100 degrees, in combination with 60 to 70-percent relative humidity.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Ne pas laisser le substrat se dessécher : garder un vaporisateur à portée pour brumiser l'enclos.",
+    "quote": "So do not let the substrate dry out; keep a spray bottle filled with water on hand to mist the enclosure.",
+    "url": "https://reptilesmagazine.com/Hermanns-Tortoise/"
+   }
+  ]
+ },
+ {
+  "speciesId": 2441502,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 21,
+    "quote": "Ambient room temperature should hover around 26-29 oC (80-85 oF) during the day and can be allowed to drop around 21-23 oC (71-73 oF) at night.",
+    "url": "https://www.reptiletalk.net/marginated-tortoise/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 35,
+    "quote": "A 100 watt basking light should also be placed at one end only to offer the tortoises a basking site of around 35 oC (95 oF).",
+    "url": "https://www.reptiletalk.net/marginated-tortoise/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Grand enclos d'au moins 5 × 5 m et 0,6 m de haut pour une paire ou un trio ; en intérieur, « table à tortues » de 2,4 × 1,2 m.",
+    "quote": "A larger enclosure at least 5 x 5 meters (16 x 16 feet) and 0.6 meters (2 feet) high will house a pair or trio.",
+    "url": "https://www.reptiletalk.net/marginated-tortoise/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Grand enclos d'au moins 5 × 5 m et 0,6 m de haut pour une paire ou un trio ; en intérieur, « table à tortues » de 2,4 × 1,2 m.",
+    "quote": "By using the \"tortoise table\" method, an 2.4 x 1.2 meters (8 x 4 feet) rectangular enclosure out of ply wood can easily be constructed.",
+    "url": "https://www.reptiletalk.net/marginated-tortoise/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Tube fluorescent UVB 10.0 fixé en travers du dessus de l'enclos et lampe chauffante de 100 W à une seule extrémité.",
+    "quote": "For lighting, a 10.0 UVB emitting fluorescent bulb should be fixed across the top of the enclosure.",
+    "url": "https://www.reptiletalk.net/marginated-tortoise/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Tube fluorescent UVB 10.0 fixé en travers du dessus de l'enclos et lampe chauffante de 100 W à une seule extrémité.",
+    "quote": "A 100 watt basking light should also be placed at one end only to offer the tortoises a basking site of around 35 oC (95 oF).",
+    "url": "https://www.reptiletalk.net/marginated-tortoise/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Zones en pente et terrain inégal (sites de bain de soleil ou de ponte, incitation à l'exercice) ; abris : demi-bûches, tupperware retourné avec ouverture, bois flotté, écorce de liège.",
+    "quote": "Sloping areas and uneven terrain offer the tortoises a variety of basking or nesting sites and force them to exercise.",
+    "url": "https://www.reptiletalk.net/marginated-tortoise/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Zones en pente et terrain inégal (sites de bain de soleil ou de ponte, incitation à l'exercice) ; abris : demi-bûches, tupperware retourné avec ouverture, bois flotté, écorce de liège.",
+    "quote": "Half logs, upside down tupperware with an entrance hole cut in, drift wood and cork bark make for excellent hide aways.",
+    "url": "https://www.reptiletalk.net/marginated-tortoise/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "A larger enclosure at least 5 x 5 meters (16 x 16 feet) and 0.6 meters (2 feet) high will house a pair or trio.",
+    "url": "https://www.reptiletalk.net/marginated-tortoise/"
+   }
+  ]
+ },
+ {
+  "speciesId": 2443074,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": "22 °C (converti depuis la citation)",
+    "quote": "Juvenile water temperature should be between 78-80°F, while adults need 72-76°F.",
+    "url": "https://dubiaroaches.com/blogs/turtle-care/common-map-turtle-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "27 °C (converti depuis la citation)",
+    "quote": "Juvenile water temperature should be between 78-80°F, while adults need 72-76°F.",
+    "url": "https://dubiaroaches.com/blogs/turtle-care/common-map-turtle-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au moins 10 gallons US (≈ 38 L) d'eau par pouce de longueur adulte prévue, soit 65 gal (≈ 250 L) pour un mâle et 105 gal (≈ 400 L) pour une femelle.",
+    "quote": "The minimum size enclosure for housing one common map turtle requires at least 10 US gallons of water per inch of the turtle's anticipated adult length.",
+    "url": "https://dubiaroaches.com/blogs/turtle-care/common-map-turtle-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au moins 10 gallons US (≈ 38 L) d'eau par pouce de longueur adulte prévue, soit 65 gal (≈ 250 L) pour un mâle et 105 gal (≈ 400 L) pour une femelle.",
+    "quote": "This means that the minimum requirement is 65 or 105 gallons, depending on whether you have a male or female.",
+    "url": "https://dubiaroaches.com/blogs/turtle-care/common-map-turtle-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB nécessaire pour la santé de la tortue ; surface de bain de soleil à environ 100-110 °F (≈ 38-43 °C).",
+    "quote": "Map turtles require exposure to appropriate amounts of UVB in order to maintain good health and wellbeing.",
+    "url": "https://dubiaroaches.com/blogs/turtle-care/common-map-turtle-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB nécessaire pour la santé de la tortue ; surface de bain de soleil à environ 100-110 °F (≈ 38-43 °C).",
+    "quote": "For common map turtles, the basking surface should be around 100-110°F.",
+    "url": "https://dubiaroaches.com/blogs/turtle-care/common-map-turtle-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Plantes vivantes ou artificielles pour l'abri, rampe d'accès et grande plateforme de bain de soleil.",
+    "quote": "To create a natural feel for the enclosure and to provide some cover for your turtle, adding some live or artificial aquarium plants is always a good idea.",
+    "url": "https://www.allturtles.com/northern-map-turtle/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Plantes vivantes ou artificielles pour l'abri, rampe d'accès et grande plateforme de bain de soleil.",
+    "quote": "One of the most important things for a Northern Map turtle tank is to provide a good-sized basking platform.",
+    "url": "https://www.allturtles.com/northern-map-turtle/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "This means that the minimum requirement is 65 or 105 gallons, depending on whether you have a male or female.",
+    "url": "https://dubiaroaches.com/blogs/turtle-care/common-map-turtle-care-sheet"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Presque tout l'enclos doit être de l'eau : il s'agit d'entretenir un bassin ou aquarium avec une zone sèche accessible.",
+    "quote": "This means that most of the enclosure should be water - in other words, you'll be essentially maintaining a pond or aquarium with an accessible land area.",
+    "url": "https://dubiaroaches.com/blogs/turtle-care/common-map-turtle-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 2446584,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 19,
+    "quote": "Basking area temperature: 86-88°F (30-31°C) Ambient temperature: 72-78°F (22-26°C) Nighttime temperature: 66-72°F (19-22°C)",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 31,
+    "quote": "Basking area temperature: 86-88°F (30-31°C) Ambient temperature: 72-78°F (22-26°C) Nighttime temperature: 66-72°F (19-22°C)",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Terrarium arboricole d'au moins 120 × 60 × 120 cm pour R. l. leachianus, 90 × 45 × 90 cm pour R. l. henkeli.",
+    "quote": "leachianus is 48\"L x 24\"W x 48\"H / 120 x 60 x 120 cm or equivalent.",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Terrarium arboricole d'au moins 120 × 60 × 120 cm pour R. l. leachianus, 90 × 45 × 90 cm pour R. l. henkeli.",
+    "quote": "henkeli is 36\"L x 18\"W x 36\"H / 90 x 45 x 90 cm or equivalent.",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce nocturne ; UVB recommandé (UVI de 2,0-3,0 dans la zone de bain de soleil en haut de l'enclos).",
+    "quote": "Leachie geckos are nocturnal, which means that they are primarily active at night.",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce nocturne ; UVB recommandé (UVI de 2,0-3,0 dans la zone de bain de soleil en haut de l'enclos).",
+    "quote": "to achieve a UVI of 2.0-3.0 in the basking area at the top of the enclosure",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Branches, lianes tressées, rebords magnétiques, abris en liège, feuillage vivant ou artificiel, disposés pour inciter à grimper.",
+    "quote": "Enrichment options for leachie geckos: branches braided vines magnetic ledges cork hollows live or artificial foliage",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "leachianus is 48\"L x 24\"W x 48\"H / 120 x 60 x 120 cm or equivalent.",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 60,
+    "quote": "Leachie geckos do best in a high-humidity environment, with an average humidity of 60-80%",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 80,
+    "quote": "Leachie geckos do best in a high-humidity environment, with an average humidity of 60-80%",
+    "url": "https://reptifiles.com/leachie-gecko-care-sheet/"
+   }
+  ]
+ },
+ {
+  "speciesId": 2448847,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 13,
+    "quote": "Ambient day time temperatures from the 24-29 °C (75-85 °F) with night temperatures in the 13-18 °C (55-65 °F) is a good range to try to achieve with spot basking between 26-29°C (80-85 °F).",
+    "url": "https://www.reptiletalk.net/parsons-chameleon/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 29,
+    "quote": "Ambient day time temperatures from the 24-29 °C (75-85 °F) with night temperatures in the 13-18 °C (55-65 °F) is a good range to try to achieve with spot basking between 26-29°C (80-85 °F).",
+    "url": "https://www.reptiletalk.net/parsons-chameleon/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Cage grillagée ou à parois pleines et bien ventilée d'au moins 1,2 × 0,6 × 1,2 m pour un adulte (0,6 × 0,6 × 1,2 m pour de jeunes adultes) ; plus grand si possible.",
+    "quote": "0.6 x 0.6 x 1.2 meters (2 x 2 x 4 feet) screen or solid sided cage with adequate ventilation will work fine for young adults, 1.2 x 0.6 x 1.2 meters (4 x 2 x 4 feet) should be considered adequate minimum size for an adult with larger cages being best.",
+    "url": "https://www.reptiletalk.net/parsons-chameleon/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Tubes UVB (Reptisun 5.0 ou 10.0, Arcadia 6 %) et spot de faible puissance de 25 à 40 W.",
+    "quote": "A low watt spot light is used which is generally 25 to 40 watts.",
+    "url": "https://www.reptiletalk.net/parsons-chameleon/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Tubes UVB (Reptisun 5.0 ou 10.0, Arcadia 6 %) et spot de faible puissance de 25 à 40 W.",
+    "quote": "I also use these lights on adult cages as well as T5 and T8 Reptisun 10.0 and and T5 Arcadia 6% bulbs.",
+    "url": "https://www.reptiletalk.net/parsons-chameleon/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Canopée de plantes entre les perchoirs et les lampes pour que l'animal puisse s'éloigner de la lumière ; système de brumisation automatique.",
+    "quote": "It's important to provide a canopy with planting between the perches and the lights so they are able to escape the lights as needed.",
+    "url": "https://www.reptiletalk.net/parsons-chameleon/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Canopée de plantes entre les perchoirs et les lampes pour que l'animal puisse s'éloigner de la lumière ; système de brumisation automatique.",
+    "quote": "Parson's Chameleon are big drinkers and an automatic misting system is very important.",
+    "url": "https://www.reptiletalk.net/parsons-chameleon/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "0.6 x 0.6 x 1.2 meters (2 x 2 x 4 feet) screen or solid sided cage with adequate ventilation will work fine for young adults, 1.2 x 0.6 x 1.2 meters (4 x 2 x 4 feet) should be considered adequate minimum size for an adult with larger cages being best.",
+    "url": "https://www.reptiletalk.net/parsons-chameleon/"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 70,
+    "quote": "These rainforest specialists require very high humidity (70-85%) with extended misting sessions and excellent drainage systems.",
+    "url": "https://www.furrycritter.com/pages/descriptions/reptiles/parson_s_chameleon.htm"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 85,
+    "quote": "These rainforest specialists require very high humidity (70-85%) with extended misting sessions and excellent drainage systems.",
+    "url": "https://www.furrycritter.com/pages/descriptions/reptiles/parson_s_chameleon.htm"
+   }
+  ]
+ },
+ {
+  "speciesId": 2455676,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Black ratsnakes are carnivores, which means that they need a diet of whole animal prey in order to get the nutrition that their bodies need.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Souris et rats (de préférence décongelés)",
+    "quote": "Although mice are the most common feeders, snakes need to eat more than just rats and mice to truly thrive.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0].frequency",
+    "value": "tous les 5-7 jours (jeunes), tous les 7-14 jours (adultes)",
+    "quote": "Hatchlings - every 5-7 days Juveniles - every 5-7 days Adults - every 7-14 days",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Proies variées : hamsters, gerbilles, jeunes cailles, œufs de caille, poussins, œufs de poule",
+    "quote": "Prey ideas for black ratsnakes: mice rats African soft-furred rats hamsters gerbils young quail quail eggs chicks chicken eggs",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Proies vivantes",
+    "quote": "It's best to offer frozen-thawed prey rather than live to your pet snake.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Proies trop grosses",
+    "quote": "The size of your snake's prey should be no more than 1.5x the width of the snake at its widest point",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[2]",
+    "value": "Suralimentation",
+    "quote": "If the snake seems to be getting fat, reduce the frequency of feedings or the size of the feeders.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "weekly",
+    "quote": "Hatchlings - every 5-7 days Juveniles - every 5-7 days Adults - every 7-14 days",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Saupoudrer de temps en temps la proie d'un mélange 50/50 de calcium et de multivitamines avant décongélation.",
+    "quote": "Every once in a while, lightly dust the prey item with a 50/50 mix of calcium and multivitamin before thawing.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 22,
+    "quote": "Basking area: 85-90°F (29-32°C) Cool side: 72-77°F (22-25°C)",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 32,
+    "quote": "Basking area: 85-90°F (29-32°C) Cool side: 72-77°F (22-25°C)",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 6'L × 3'l × 3'H (≈ 180 × 90 × 90 cm) pour un serpent adulte moyen ; plus grand fortement recommandé, surtout en hauteur.",
+    "quote": "the minimum enclosure size for one average black ratsnake is going to be 6'L x 3'W x 3'H",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage vif pendant la journée (espèce active de jour comme de nuit).",
+    "quote": "to achieve a UVI of 2.0-3.0 in the basking area",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage vif pendant la journée (espèce active de jour comme de nuit).",
+    "quote": "providing bright illumination during the day is likely to be beneficial in stimulating activity and natural behaviors",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondelles et plaques de liège, bois, rebords magnétiques, hamacs, plantes artificielles ou vivantes solides ; plus il y a de cachettes, plus le serpent se montre.",
+    "quote": "Environmental enrichment ideas for black ratsnakes: cork rounds cork flats grape wood ghost wood magnetic ledges hammocks artificial plants sturdy live plants",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondelles et plaques de liège, bois, rebords magnétiques, hamacs, plantes artificielles ou vivantes solides ; plus il y a de cachettes, plus le serpent se montre.",
+    "quote": "The more hiding places your snake has access to, the more likely it will be comfortable hanging out in the open where you can see it.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "the minimum enclosure size for one average black ratsnake is going to be 6'L x 3'W x 3'H",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 50,
+    "quote": "Black ratsnakes need an average humidity of 50-70%",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 70,
+    "quote": "Black ratsnakes need an average humidity of 50-70%",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 2457884,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": "22 °C (converti depuis la citation)",
+    "quote": "Nighttime temperatures can drop to 72 to 75 degrees.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "31 °C (converti depuis la citation)",
+    "quote": "The warm side should reach 82 to 88 degrees Fahrenheit with an ambient temperature of 78 to 82 degrees and a cool zone around 75 degrees.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos vertical d'au moins 3 pieds (≈ 90 cm) de haut, 2 pieds de profondeur et 2 à 3 pieds de large pour un adulte (guide du genre Boiga) ; plus haut si possible.",
+    "quote": "An adult cat snake enclosure should be at least three feet tall, with two feet of depth and two to three feet of width as minimum dimensions.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce strictement nocturne ; chauffage par panneaux radiants ou émetteurs céramiques plutôt que par lampes (aucune donnée UVB citée).",
+    "quote": "Cat snakes are strictly nocturnal and will be inactive during daylight hours.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce strictement nocturne ; chauffage par panneaux radiants ou émetteurs céramiques plutôt que par lampes (aucune donnée UVB citée).",
+    "quote": "radiant heat panels or ceramic heat emitters work well without the drying effect of basking bulbs.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Branches grimpantes, tubes d'écorce de liège, plantes vivantes ou artificielles à plusieurs hauteurs ; cachette humide surélevée.",
+    "quote": "The interior of a cat snake enclosure should be densely furnished with climbing branches, cork bark tubes, and live or artificial plants that provide visual barriers and resting spots at multiple heights.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Branches grimpantes, tubes d'écorce de liège, plantes vivantes ou artificielles à plusieurs hauteurs ; cachette humide surélevée.",
+    "quote": "A humid hide positioned off the ground helps support clean shedding.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "An adult cat snake enclosure should be at least three feet tall, with two feet of depth and two to three feet of width as minimum dimensions.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 60,
+    "quote": "Humidity should stay between 60 and 80 percent for most species, which requires careful attention to ventilation to prevent stagnant, excessively damp conditions that promote respiratory infections.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 80,
+    "quote": "Humidity should stay between 60 and 80 percent for most species, which requires careful attention to ventilation to prevent stagnant, excessively damp conditions that promote respiratory infections.",
+    "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm"
+   }
+  ]
+ },
+ {
+  "speciesId": 2466939,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 18,
+    "quote": "Basking area temperature: 90°F (32°C) Cool side temperature: 70-77°F (21-25°C) Nighttime temperature: 65-75°F (18-24°C)",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 32,
+    "quote": "Basking area temperature: 90°F (32°C) Cool side temperature: 70-77°F (21-25°C) Nighttime temperature: 65-75°F (18-24°C)",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Terrarium à ouverture frontale d'au moins 60 × 60 × 60 cm pour un anole ; plus grand de préférence.",
+    "quote": "The minimum recommended enclosure size for housing a single green anole is 24′′L x 24′′W x 24′′H, or 60 x 60 x 60cm.",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB (UVI d'environ 3,0-4,0 dans la zone de bain de soleil) ; un tube UVB seul n'est pas assez lumineux, un éclairage général est nécessaire.",
+    "quote": "to achieve a UVI of around 3.0 - 4.0 in the basking area",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB (UVI d'environ 3,0-4,0 dans la zone de bain de soleil) ; un tube UVB seul n'est pas assez lumineux, un éclairage général est nécessaire.",
+    "quote": "A UVB bulb alone isn't bright enough to meet a green anole's light needs.",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Matériaux d'escalade à tous les niveaux, cachettes, feuillage (de préférence vivant) : ces éléments offrent des occasions de grimper, favorisent l'exercice et le bien-être.",
+    "quote": "These items provide climbing opportunities, hiding places, encourage exercise, stimulate your pet's natural instincts, and help promote overall wellbeing.",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Matériaux d'escalade à tous les niveaux, cachettes, feuillage (de préférence vivant) : ces éléments offrent des occasions de grimper, favorisent l'exercice et le bien-être.",
+    "quote": "You will need to place climbing material at all levels of the enclosure to allow for proper thermoregulation.",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "The minimum recommended enclosure size for housing a single green anole is 24′′L x 24′′W x 24′′H, or 60 x 60 x 60cm.",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 60,
+    "quote": "Green anoles do best in a high-humidity environment, with a daytime average humidity between 60-70%",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 70,
+    "quote": "Green anoles do best in a high-humidity environment, with a daytime average humidity between 60-70%",
+    "url": "https://reptifiles.com/green-anole-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 2468095,
+  "evidence": []
+ }
+]

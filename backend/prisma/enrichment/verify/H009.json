@@ -1,0 +1,1159 @@
+[
+ {
+  "speciesId": 2468542,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "For the meat part of this carnivorous diet we would recommend brown crickets.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Grillons bruns",
+    "quote": "For the meat part of this carnivorous diet we would recommend brown crickets.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Grillons noirs et criquets (alternative)",
+    "quote": "If your lizard will not take them, black crickets and locust are also a brilliant alternative.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[2]",
+    "value": "Friandises : vers de cire, calciworms, blattes, vers de farine, larves de scarabée",
+    "quote": "Every now and again you might want to provide your lizard a treat, for this purpose you could feed: waxworms, calciworms, cockroaches, mealworms or beetle grubs.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Vers et larves gras en excès",
+    "quote": "The grubs and worms tend to be quite fatty so we normally offer these a maximum of once or twice a week.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Vers de farine, vers morio et blattes pour les jeunes",
+    "quote": "Mealworms, morio worms and cockroaches can be difficult to digest so we would normally only provide these to mature lizards (18 months or older) and only once or twice a week.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Le régime fournit l'essentiel, mais certaines vitamines et minéraux sont requis en concentration plus élevée (supplémentation).",
+    "quote": "Eyed lizards will get most of what they need from their diet but there are some vitamins and minerals that they require in higher concentrations.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "Touche en particulier les lézards insectivores/herbivores en croissance rapide",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms2",
+    "value": "suite des symptômes",
+    "quote": "Diseased tissue develops along the rows of teeth as the condition worsens.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parasites intestinaux et vers de l'estomac",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Ulcères de l'estomac en cas d'infestation importante.",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+    "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": "24 °C (converti depuis la citation)",
+    "quote": "we try to provide this heat over 1/3 of the enclosure while letting the rest of the enclosure cool to 75of on the opposite side.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "35 °C (converti depuis la citation)",
+    "quote": "As such they require a warm basking area of 90 to 95°f during the day.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Vivarium en bois bien ventilé, aussi proche que possible de 4 × 2 × 2 pieds (≈ 120 × 60 × 60 cm).",
+    "quote": "Due to the temperature gradient required we would normally select an enclosure as close to 4 x 2 x 2ft as possible with large vents and glass sliding front doors.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce qui se chauffe en permanence : forte source UVB (tube de 10-12 % sur au moins les 2/3 de la longueur) ; lampe chauffante 10-12 h par jour, noir complet la nuit.",
+    "quote": "We recommend a strong 10-12% UV tube running at least 2/3 of the length of the enclosure.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce qui se chauffe en permanence : forte source UVB (tube de 10-12 % sur au moins les 2/3 de la longueur) ; lampe chauffante 10-12 h par jour, noir complet la nuit.",
+    "quote": "The basking lamp is left on for 10-12 hours per day.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Décors durs à escalader et sur lesquels se chauffer, pierres chauffantes naturelles, abris pleins (grottes, liège) et partiels (plantes).",
+    "quote": "Eyed lizards thrive in a low humidity environment with hard decorations to climb over and bask on.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Décors durs à escalader et sur lesquels se chauffer, pierres chauffantes naturelles, abris pleins (grottes, liège) et partiels (plantes).",
+    "quote": "Examples of full cover decorations would be caves, flat cork pieces or any other ornament that provides a shady spot to rest.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "Due to the temperature gradient required we would normally select an enclosure as close to 4 x 2 x 2ft as possible with large vents and glass sliding front doors.",
+    "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 2469188,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "Touche en particulier les lézards insectivores/herbivores en croissance rapide",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms2",
+    "value": "suite des symptômes",
+    "quote": "Diseased tissue develops along the rows of teeth as the condition worsens.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parasites intestinaux et vers de l'estomac",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Ulcères de l'estomac en cas d'infestation importante.",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+    "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   }
+  ]
+ },
+ {
+  "speciesId": 2470656,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Nile monitors are carnivorous , which means that they require a whole animal-based diet to get the nutrition that they need.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Insectes (jeunes) : vers de farine, superworms, blattes dubia/discoïdes, sauterelles, vers à tabac, vers de terre",
+    "quote": "When they're young and small, they primarily eat insects like: mealworms superworms dubia roaches discoid roaches hissing cockroaches grasshoppers hornworms earthworms",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Proies entières (adultes) : rats, souris, lapins, cobayes, poulets, cailles, écrevisses, crevettes, poissons entiers, œufs",
+    "quote": "Here are some ideas to maintain variety: rats mice rabbits guinea pigs chickens quail crawfish shrimp whole fish (tilapia, salmon, pollock) eggs",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Suralimentation (repas trop gros ou trop fréquents)",
+    "quote": "Offer food every 1-2 days, and beware of feeding too much or too often, as this leads to obesity.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Proies plus grosses que le crâne",
+    "quote": "Each meal should be slightly smaller than the lizard's skull.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "every_2_days",
+    "quote": "Offer food every 1-2 days, and beware of feeding too much or too often, as this leads to obesity.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Suppléments de calcium et de vitamines nécessaires ; saupoudrage occasionnel chez l'adulte.",
+    "quote": "You will also need calcium and vitamin supplements to help keep your Nile monitor healthy.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "Touche en particulier les lézards insectivores/herbivores en croissance rapide",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms2",
+    "value": "suite des symptômes",
+    "quote": "Diseased tissue develops along the rows of teeth as the condition worsens.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parasites intestinaux et vers de l'estomac",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Ulcères de l'estomac en cas d'infestation importante.",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+    "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": "21 °C (converti depuis la citation)",
+    "quote": "The air temperature around the basking area should be between 88-92°F, and between 70-80°F on the cool side, as measured by a wall-mounted digital thermometer.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "33 °C (converti depuis la citation)",
+    "quote": "The air temperature around the basking area should be between 88-92°F, and between 70-80°F on the cool side, as measured by a wall-mounted digital thermometer.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 12 × 12 × 8 pieds (≈ 3,7 × 3,7 × 2,4 m) pour un seul varan : l'équivalent d'une petite pièce ; bassin d'au moins 12\" (≈ 30 cm) de profondeur.",
+    "quote": "The absolute minimum enclosure size for a single Nile monitor is 12'L x 12'W x 8'H.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 12 × 12 × 8 pieds (≈ 3,7 × 3,7 × 2,4 m) pour un seul varan : l'équivalent d'une petite pièce ; bassin d'au moins 12\" (≈ 30 cm) de profondeur.",
+    "quote": "they also require a pool of water at least 12\" deep, and large enough for the monitor's entire body.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB indispensable (UVI de 3,0-4,0 au niveau du dos dans la zone de bain de soleil) ; surface de bain de soleil à 110-130 °F (≈ 43-54 °C).",
+    "quote": "You will need a Solarmeter 6.5 to help position the UVB array correctly so you achieve a UVI of 3.0-4.0 at the height of the monitor's back in the basking area.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB indispensable (UVI de 3,0-4,0 au niveau du dos dans la zone de bain de soleil) ; surface de bain de soleil à 110-130 °F (≈ 43-54 °C).",
+    "quote": "Nile monitors should have a basking surface temperature of 110-130°F, as measured by an infrared thermometer.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Cachettes/grottes, branches ancrées, rebords, rochers, feuillage vivant ou artificiel : un enclos vide ennuie le varan.",
+    "quote": "Here are some ideas: hideouts/caves more branches ledges boulders live or artificial foliage",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Cachettes/grottes, branches ancrées, rebords, rochers, feuillage vivant ou artificiel : un enclos vide ennuie le varan.",
+    "quote": "An empty enclosure makes for a bored Nile monitor, reducing its quality of life.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "The absolute minimum enclosure size for a single Nile monitor is 12'L x 12'W x 8'H.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 50,
+    "quote": "Nile monitors are a tropical species, so the humidity inside their enclosure should be moderately high: 50-75%.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 75,
+    "quote": "Nile monitors are a tropical species, so the humidity inside their enclosure should be moderately high: 50-75%.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Changer l'eau du bassin une fois par semaine ou dès qu'elle est souillée.",
+    "quote": "Your Nile monitor's pool water will need to be changed once weekly or whenever it gets soiled.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor"
+   }
+  ]
+ },
+ {
+  "speciesId": 2470685,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "It is important to remember that water monitors are opportunistic feeders and will rarely refuse a meal.",
+    "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Grillons gavés et blattes (jeunes)",
+    "quote": "Baby monitors tend to be highly insectivorous and their captive diets should reflect this; a diet comprised primarily of gut loaded crickets and varying species of roaches are a good choice.",
+    "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/"
+   },
+   {
+    "field": "feeding.recommendedFoods[0].frequency",
+    "value": "quotidienne à tous les deux jours la première année",
+    "quote": "It's recommended that hatchling water monitors are fed daily to every other day for their first year of life.",
+    "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Proies entières : rongeurs, poissons, volaille",
+    "quote": "Growing monitors can gradually be transitioned to whole prey items, such as appropriately sized rodents, fish, and poultry.",
+    "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/"
+   },
+   {
+    "field": "feeding.recommendedFoods[1].frequency",
+    "value": "2 à 3 fois par semaine pour les adultes",
+    "quote": "Yearling monitors can be fed whole prey items about three to four times weekly, while full size adults over two years old can be fed less frequently, typically two to three times weekly.",
+    "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Suralimentation",
+    "quote": "This voracious appetite means adult water monitors are prone to obesity in captivity and that can result in a host of health issues, ultimately resulting in a shortened life expectancy.",
+    "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Insectes non gavés ni saupoudrés de calcium/vitamine D3",
+    "quote": "In addition to gut loading, it is also important that insects are dusted with a calcium/Vitamin D3 supplement before being offered to the lizard.",
+    "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Les varans ont besoin de carapaces d'insectes, d'os, de fourrure et de plumes pour un bon fonctionnement digestif.",
+    "quote": "Monitors need insect shells, animal bones, fur and feathers to help keep their digestive tracts working properly as well as the nutrients that they supply while being digested.",
+    "url": "https://www.reptiletalk.net/water-monitor/"
+   },
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "Touche en particulier les lézards insectivores/herbivores en croissance rapide",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms2",
+    "value": "suite des symptômes",
+    "quote": "Diseased tissue develops along the rows of teeth as the condition worsens.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parasites intestinaux et vers de l'estomac",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Ulcères de l'estomac en cas d'infestation importante.",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+    "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 21,
+    "quote": "You also need a \"cool\" area that the animal can retreat to when is desires lower temps, this area should be 21-22 oC (71-73 oF).",
+    "url": "https://www.reptiletalk.net/water-monitor/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 32,
+    "quote": "In your enclosure you want to provide ambient temps (air) on the hot side of the enclosure or near the higher parts of the enclosure of the 29-32 oC (85-90 oF).",
+    "url": "https://www.reptiletalk.net/water-monitor/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos d'adulte d'au moins 1,2 m de profondeur × 2,5 m de long × 1,8 à 2,5 m de haut ; bassin permettant l'immersion complète.",
+    "quote": "A minimum size for an adult Salvator should be 1.2 meters (4 feet) deep by 2.5 meters (8 feet) wide/long and 1.8 or 2.5 meters (6 or 8 feet) tall.",
+    "url": "https://www.reptiletalk.net/water-monitor/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos d'adulte d'au moins 1,2 m de profondeur × 2,5 m de long × 1,8 à 2,5 m de haut ; bassin permettant l'immersion complète.",
+    "quote": "Captive water monitors require a water reservoir large enough for them to fully submerge in.",
+    "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Selon l'éleveur, les varans n'auraient pas besoin d'UVA/UVB (alimentation de proies entières) ; points chauds de 48-65 °C utilisés avec de nombreuses espèces de varans.",
+    "quote": "It is believed that due to the diet of whole prey items, monitors receive much or all of the proper vitamins/nutrients needed for proper growth and development without the assistance of UVA or UVB.",
+    "url": "https://www.reptiletalk.net/water-monitor/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Selon l'éleveur, les varans n'auraient pas besoin d'UVA/UVB (alimentation de proies entières) ; points chauds de 48-65 °C utilisés avec de nombreuses espèces de varans.",
+    "quote": "With the new advances in monitor husbandry, basking temps of 48-65 oC (120-150 oF) are used successfully with many monitor species.",
+    "url": "https://www.reptiletalk.net/water-monitor/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Nombreuses cachettes côté chaud et côté froid ; espace vertical (branches, étagères, rondins) ; vaste zone d'eau.",
+    "quote": "These hide areas should be provided on both the warm side of the enclosure as well as the cool side, to allow your monitor to choose which one it will use depending on its situation.",
+    "url": "https://www.reptiletalk.net/water-monitor/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Nombreuses cachettes côté chaud et côté froid ; espace vertical (branches, étagères, rondins) ; vaste zone d'eau.",
+    "quote": "Vertical space however can be created by including items such as branches, shelves, and logs as basking areas.",
+    "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "A minimum size for an adult Salvator should be 1.2 meters (4 feet) deep by 2.5 meters (8 feet) wide/long and 1.8 or 2.5 meters (6 or 8 feet) tall.",
+    "url": "https://www.reptiletalk.net/water-monitor/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Le varan déféquant dans l'eau, changer l'eau sale au moins tous les deux jours.",
+    "quote": "this also means you will also be required to change the dirty water to fresh water at least every other day",
+    "url": "https://www.reptiletalk.net/water-monitor/"
+   }
+  ]
+ },
+ {
+  "speciesId": 2470711,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "In their natural habitat they hunt for insects, spiders, small geckos.",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Insectes variés : blattes, grillons, vers de farine, araignées",
+    "quote": "We offer our animals a variety of feed items, woodies, crickets, mealworms, spiders, pink mice, meat (including kangaroo, beef and chicken) with the insects being dusted every third feed with calcium and multivitamin powder.",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Souriceaux nouveau-nés (pinkies) et viande (kangourou, bœuf, poulet)",
+    "quote": "We offer our animals a variety of feed items, woodies, crickets, mealworms, spiders, pink mice, meat (including kangaroo, beef and chicken) with the insects being dusted every third feed with calcium and multivitamin powder.",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Suralimentation des adultes",
+    "quote": "not fussy eaters and will readily take any commercially available insect types but be careful not to overfeed adults as they are prone to obesity",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Insectes non saupoudrés de calcium et multivitamines",
+    "quote": "with the insects being dusted every third feed with calcium and multivitamin powder",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "Touche en particulier les lézards insectivores/herbivores en croissance rapide",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms2",
+    "value": "suite des symptômes",
+    "quote": "Diseased tissue develops along the rows of teeth as the condition worsens.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parasites intestinaux et vers de l'estomac",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Ulcères de l'estomac en cas d'infestation importante.",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+    "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 18,
+    "quote": "at night all lighting is turned off and no extra heat is provided allowing to drop to 18-20 °C (65-68 °F) at night.",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 30,
+    "quote": "The rest of the enclosure should be 25-30 °C (77-86 °F) during the day",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Environ 0,5 × 0,5 × 0,9 m (hauteur pour grimper), suffisant pour une paire ou un trio d'adultes.",
+    "quote": "Our enclosures are around 0.5 x 0.5 x 0.9 meters (1.6 x 1.6 x 3 feet)high this gives extra height to climb and has adequate room for a pair/trio of adult animals.",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Point chaud d'au moins 45 °C (de préférence 50-60 °C) sous un spot de 100 W ; pas d'éclairage UV fourni par l'éleveur (les varans n'en semblent pas bénéficier).",
+    "quote": "It is an absolute imperative requirement to have a hot basking spot of least 45 °C (115 °F) and preferably 50-60°C (120-140 °F)",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Point chaud d'au moins 45 °C (de préférence 50-60 °C) sous un spot de 100 W ; pas d'éclairage UV fourni par l'éleveur (les varans n'en semblent pas bénéficier).",
+    "quote": "We do not provide any UV lighting for any of our monitors, they do not seem to benefit from it.",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Nombreuses branches pour grimper, branches creuses à écorce décollée comme abris, tuyaux agricoles ondulés.",
+    "quote": "Provide plenty of climbing opportunities with many branches and include some hollow tree branches with loose bark (if possible) for the lizards to hide in.",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "Our enclosures are around 0.5 x 0.5 x 0.9 meters (1.6 x 1.6 x 3 feet)high this gives extra height to climb and has adequate room for a pair/trio of adult animals.",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Nettoyage hebdomadaire de l'enclos au vinaigre et à l'eau tiède.",
+    "quote": "We clean our enclosures weekly with vinegar and warm water which is natural and non-toxic so it will not harm your animals.",
+    "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/"
+   }
+  ]
+ },
+ {
+  "speciesId": 2470729,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": "24 °C (converti depuis la citation)",
+    "quote": "The cool side should be between 75-85°F, as measured by a digital probe thermometer .",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-savannah-monitor"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "29 °C (converti depuis la citation)",
+    "quote": "The cool side should be between 75-85°F, as measured by a digital probe thermometer .",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-savannah-monitor"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m) pour un seul varan ; plus grand si possible.",
+    "quote": "The absolute minimum enclosure size for a single savannah monitor is 8'L x 4'W x 4'H.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-savannah-monitor"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB recommandé (dos du varan à 14-16\" sous la lampe) ; surface de bain de soleil à 140-150 °F (≈ 60-66 °C) ; côté frais de 75 à 85 °F.",
+    "quote": "The UVB lamp should be mounted inside the enclosure, with the basking platform placed so the lizard's back will be 14-16\" below the lamp.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-savannah-monitor"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB recommandé (dos du varan à 14-16\" sous la lampe) ; surface de bain de soleil à 140-150 °F (≈ 60-66 °C) ; côté frais de 75 à 85 °F.",
+    "quote": "Savannah monitors should have a basking surface temperature of 140-150°F, as measured by an infrared thermometer.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-savannah-monitor"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Cachettes/grottes, branches solides, grandes bûches creuses, feuillage vivant ou artificiel (graminées).",
+    "quote": "Here are some ideas to get your started: hideouts/caves sturdy branches large hollow logs live or artificial foliage (ex: grasses)",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-savannah-monitor"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "The absolute minimum enclosure size for a single savannah monitor is 8'L x 4'W x 4'H.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-savannah-monitor"
+   },
+   {
+    "field": "habitat.humidity.note",
+    "value": "humidité modérée, environ 50 %",
+    "quote": "Air humidity should be around 50%, and measured by a digital hygrometer on the wall of the enclosure.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-savannah-monitor"
+   }
+  ]
+ },
+ {
+  "speciesId": 2470854,
+  "evidence": []
+ },
+ {
+  "speciesId": 5220266,
+  "evidence": []
+ },
+ {
+  "speciesId": 5225659,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Carpet pythons are carnivores , which means that they need a diet of whole animal prey in order to get the nutrition that their bodies need.",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Souris et rats (de préférence congelés-décongelés)",
+    "quote": "Although rats and mice are the most common feeders, carpet pythons should eat more than just rats and mice to truly thrive.",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0].frequency",
+    "value": "jeunes : toutes les 1-2 semaines ; adultes : toutes les 2-4 semaines",
+    "quote": "Juveniles should be fed every 1-2 weeks, and adults should be fed every 2-4 weeks.",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Proies variées : hamsters, gerbilles, cobayes, cailles, poussins",
+    "quote": "Prey ideas for carpet pythons: mice African soft-furred rats domestic rats hamsters gerbils guinea pigs quail chicks",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Proies vivantes",
+    "quote": "It's best to offer frozen-thawed prey rather than live to your pet snake.",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Proies trop grosses",
+    "quote": "Each item should be no more than 1.5x larger than the snake at its widest point.",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Ration totale d'environ 10 % du poids du serpent (si non obèse).",
+    "quote": "A good rule of thumb is to provide a prey item(s) which totals around 10% of your snake's weight, assuming that the snake is not obese.",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 22,
+    "quote": "Basking surface: 95-100°F (35-38°C) Cool end: 75-80°F (24-26°C) Nighttime temps: 72-78°F (22-25°C)",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 38,
+    "quote": "Basking surface: 95-100°F (35-38°C) Cool end: 75-80°F (24-26°C) Nighttime temps: 72-78°F (22-25°C)",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos à toit grillagé de 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m), de préférence plus grand, surtout en hauteur ; espace terrestre et arboricole.",
+    "quote": "8'L x 4'W x 4'H mesh top reptile enclosure, preferably larger",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos à toit grillagé de 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m), de préférence plus grand, surtout en hauteur ; espace terrestre et arboricole.",
+    "quote": "Using an enclosure larger than the minimum is strongly recommended, particularly taller.",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage supplémentaire pour simuler le jour.",
+    "quote": "to achieve a UVI of 2.0-3.0 in the basking area",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage supplémentaire pour simuler le jour.",
+    "quote": "In such a large enclosure, halogen and UVB lamps aren't enough to create the kind of bright light that simulates daytime.",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondins de liège, branches solides, grandes plantes vivantes ou artificielles robustes, cachettes supplémentaires ; au minimum une branche, du feuillage et deux cachettes.",
+    "quote": "Décor ideas: cork logs sturdy branches large, sturdy live plants (ex: ficus, dracaena, schefflera) sturdy artificial plants additional hides At minimum, you will need a sturdy climbing branch, foliage for cover, and two hiding places.",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "8'L x 4'W x 4'H mesh top reptile enclosure, preferably larger",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 40,
+    "quote": "Carpet pythons are not picky about humidity, but they seem to do best between 40-60%",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 60,
+    "quote": "Carpet pythons are not picky about humidity, but they seem to do best between 40-60%",
+    "url": "https://reptifiles.com/carpet-python-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 5226308,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "The Red-Headed Agama is a natural carnivore.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Grillons, vers de farine et superworms",
+    "quote": "Crickets, mealworms, and superworms all make superb food selections.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "feeding.recommendedFoods[0].frequency",
+    "value": "2 à 3 fois par semaine",
+    "quote": "Feed your lizard about two to three times per week.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Souriceau (pinkie) décongelé ou congelé",
+    "quote": "You can give your Red-Headed Agama a thawed or frozen pinkie mouse as an occasional treat.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Fruits",
+    "quote": "Fruits 0% of diet Insects 95% of diet Meat 5% of diet, pinkie mice",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Insectes non consommés laissés dans l'enclos",
+    "quote": "remove all uneaten insects in the evening before going to bed",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": "28 °C (converti depuis la citation)",
+    "quote": "The Red-Headed Agama requires ambient temperatures ranging between 83 and 86 degrees Fahrenheit.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "30 °C (converti depuis la citation)",
+    "quote": "The Red-Headed Agama requires ambient temperatures ranging between 83 and 86 degrees Fahrenheit.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Terrarium de 2 × 3 pieds (≈ 60 × 90 cm) pour un seul lézard, 100 gallons (≈ 380 L) pour un couple ; ne jamais loger deux mâles ensemble.",
+    "quote": "A 2 x 3-foot tank is the appropriate size for only one lizard, while a 100-gallon tank is good for a pair.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Lampe chauffante, ampoule pour reptiles et lumière UVB ; lumière 12 h par jour, éteinte 12 h la nuit.",
+    "quote": "Your lizard needs several types of lighting, including a basking light, a reptile bulb, and a UVB light.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Lampe chauffante, ampoule pour reptiles et lumière UVB ; lumière 12 h par jour, éteinte 12 h la nuit.",
+    "quote": "This means leaving the lizard's lights on for 12 hours and keeping them off for 12 hours during the evening and nighttime.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Abris (cartons, abris en argile ou pierre), fausses branches, pierres pour grimper et explorer.",
+    "quote": "Also, add fake branches, rocks, and other items to the cage that enable your agama to climb and explore.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Abris (cartons, abris en argile ou pierre), fausses branches, pierres pour grimper et explorer.",
+    "quote": "You can also purchase clay or rock hides.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "A 2 x 3-foot tank is the appropriate size for only one lizard, while a 100-gallon tank is good for a pair.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 40,
+    "quote": "Humidity levels should be kept between 40% and 60%.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 60,
+    "quote": "Humidity levels should be kept between 40% and 60%.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Nettoyer l'enclos et changer l'eau chaque jour ; remplacer le substrat meuble tous les 4 mois.",
+    "quote": "Be sure to spot clean the enclosure and change the water daily",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Nettoyer l'enclos et changer l'eau chaque jour ; remplacer le substrat meuble tous les 4 mois.",
+    "quote": "Fully change out and replace the loose substrate every 4 months.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/"
+   }
+  ]
+ },
+ {
+  "speciesId": 5227370,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": "24 °C (converti depuis la citation)",
+    "quote": "The cool side should be between 75-85°F, as measured by a digital probe thermometer .",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "29 °C (converti depuis la citation)",
+    "quote": "The cool side should be between 75-85°F, as measured by a digital probe thermometer .",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m) pour un seul téju ; plus grand si possible.",
+    "quote": "The minimum recommended enclosure size for a single Argentine tegu is 8'L x 4'W x 4'H.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB nécessaire (plateforme de bain de soleil à 13-15\" sous la lampe si montée au-dessus d'un grillage, 17-18\" si montée à l'intérieur) ; surface de bain de soleil à 125-135 °F (≈ 52-57 °C).",
+    "quote": "Argentine tegus require UVB lighting to thrive in captivity.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB nécessaire (plateforme de bain de soleil à 13-15\" sous la lampe si montée au-dessus d'un grillage, 17-18\" si montée à l'intérieur) ; surface de bain de soleil à 125-135 °F (≈ 52-57 °C).",
+    "quote": "If the UVB is mounted over mesh, it is recommended to place the basking platform 13-15\" below the lamp.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB nécessaire (plateforme de bain de soleil à 13-15\" sous la lampe si montée au-dessus d'un grillage, 17-18\" si montée à l'intérieur) ; surface de bain de soleil à 125-135 °F (≈ 52-57 °C).",
+    "quote": "Argentine tegus do best with a basking surface temperature of 125-135°F, as measured by an infrared temperature gun .",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Cachettes/grottes, branches, rebords, feuillage vivant ou artificiel ; un enclos vide ennuie le téju.",
+    "quote": "Here are some ideas to get your started: hideouts/caves more branches ledges live or artificial foliage",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Cachettes/grottes, branches, rebords, feuillage vivant ou artificiel ; un enclos vide ennuie le téju.",
+    "quote": "An empty enclosure makes for a bored tegu.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "The minimum recommended enclosure size for a single Argentine tegu is 8'L x 4'W x 4'H.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 70,
+    "quote": "Argentine tegus prefer a high-humidity environment, so the humidity inside their enclosure is best when its fairly high: about 70-80%.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 80,
+    "quote": "Argentine tegus prefer a high-humidity environment, so the humidity inside their enclosure is best when its fairly high: about 70-80%.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet"
+   }
+  ]
+ }
+]

@@ -1,0 +1,1083 @@
+[
+ {
+  "speciesId": 7387949,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Black ratsnakes are carnivores, which means that they need a diet of whole animal prey in order to get the nutrition that their bodies need.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Souris et rats (de préférence décongelés)",
+    "quote": "Although mice are the most common feeders, snakes need to eat more than just rats and mice to truly thrive.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0].frequency",
+    "value": "tous les 5-7 jours (jeunes), tous les 7-14 jours (adultes)",
+    "quote": "Hatchlings - every 5-7 days Juveniles - every 5-7 days Adults - every 7-14 days",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Proies variées : hamsters, gerbilles, jeunes cailles, œufs de caille, poussins, œufs de poule",
+    "quote": "Prey ideas for black ratsnakes: mice rats African soft-furred rats hamsters gerbils young quail quail eggs chicks chicken eggs",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Proies vivantes",
+    "quote": "It's best to offer frozen-thawed prey rather than live to your pet snake.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Proies trop grosses",
+    "quote": "The size of your snake's prey should be no more than 1.5x the width of the snake at its widest point",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[2]",
+    "value": "Suralimentation",
+    "quote": "If the snake seems to be getting fat, reduce the frequency of feedings or the size of the feeders.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "weekly",
+    "quote": "Hatchlings - every 5-7 days Juveniles - every 5-7 days Adults - every 7-14 days",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Saupoudrer de temps en temps la proie d'un mélange 50/50 de calcium et de multivitamines avant décongélation.",
+    "quote": "Every once in a while, lightly dust the prey item with a 50/50 mix of calcium and multivitamin before thawing.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "Couleuvre diurne et semi-arboricole, excellente grimpeuse et nageuse, à la nature vive ; elle peut faire un bon animal pour le bon propriétaire.",
+    "quote": "Black ratsnakes are not particularly common in captivity, but due to their lively nature and diurnal activity pattern, they can make good pets for the right keeper.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "solitaire",
+    "quote": "Black ratsnakes are not social animals, and there is no significant benefit to the animal that would justify keeping two or more in the same enclosure.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "behavior.difficultyLevel",
+    "value": "intermédiaire",
+    "quote": "Black Ratsnake ( Pantherophis obsoletus ) Difficulty: Moderate",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "behavior.generalBehavior.2",
+    "value": "diurne, semi-arboricole",
+    "quote": "Black ratsnakes are diurnal, semiarboreal, and native to the central eastern United States.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "behavior.generalBehavior.3",
+    "value": "grimpeuse et nageuse",
+    "quote": "This species is highly capable at both climbing and swimming, and often found in trees, particularly oak trees.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 22,
+    "quote": "Basking area: 85-90°F (29-32°C) Cool side: 72-77°F (22-25°C)",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 32,
+    "quote": "Basking area: 85-90°F (29-32°C) Cool side: 72-77°F (22-25°C)",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 6'L × 3'l × 3'H (≈ 180 × 90 × 90 cm) pour un serpent adulte moyen ; plus grand fortement recommandé, surtout en hauteur.",
+    "quote": "the minimum enclosure size for one average black ratsnake is going to be 6'L x 3'W x 3'H",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage vif pendant la journée (espèce active de jour comme de nuit).",
+    "quote": "to achieve a UVI of 2.0-3.0 in the basking area",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage vif pendant la journée (espèce active de jour comme de nuit).",
+    "quote": "providing bright illumination during the day is likely to be beneficial in stimulating activity and natural behaviors",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondelles et plaques de liège, bois, rebords magnétiques, hamacs, plantes artificielles ou vivantes solides ; plus il y a de cachettes, plus le serpent se montre.",
+    "quote": "Environmental enrichment ideas for black ratsnakes: cork rounds cork flats grape wood ghost wood magnetic ledges hammocks artificial plants sturdy live plants",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondelles et plaques de liège, bois, rebords magnétiques, hamacs, plantes artificielles ou vivantes solides ; plus il y a de cachettes, plus le serpent se montre.",
+    "quote": "The more hiding places your snake has access to, the more likely it will be comfortable hanging out in the open where you can see it.",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "the minimum enclosure size for one average black ratsnake is going to be 6'L x 3'W x 3'H",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 50,
+    "quote": "Black ratsnakes need an average humidity of 50-70%",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 70,
+    "quote": "Black ratsnakes need an average humidity of 50-70%",
+    "url": "https://reptifiles.com/black-ratsnake-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 8170369,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Kingsnakes are carnivores, which means that they need a diet of whole animal prey in order to get the nutrition that their bodies need.",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Souris et jeunes rats (de préférence congelés-décongelés)",
+    "quote": "Prey ideas for kingsnakes: mice young rats African soft-furred rats hamsters gerbils young quail quail eggs chicks reptile eggs green anoles house geckos small snakes",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0].frequency",
+    "value": "jeunes : tous les 5-10 jours ; adultes : tous les 10-14 jours",
+    "quote": "Hatchlings - every 5-7 days Juveniles - every 7-10 days Adults - every 10-14 days",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Autres proies : hamsters, gerbilles, cailles, œufs de caille, poussins",
+    "quote": "Prey ideas for kingsnakes: mice young rats African soft-furred rats hamsters gerbils young quail quail eggs chicks reptile eggs green anoles house geckos small snakes",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Proies vivantes",
+    "quote": "It's best to offer frozen-thawed prey rather than live to your pet snake.",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Proies trop grosses",
+    "quote": "The size of your snake's prey should be no more than 1.5x the width of your kingsnake at its widest point, or roughly 10% of its body weight.",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[2]",
+    "value": "Suralimentation",
+    "quote": "If the snake seems to be getting fat, reduce the frequency of feedings or the size of the feeders.",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "weekly",
+    "quote": "Hatchlings - every 5-7 days Juveniles - every 7-10 days Adults - every 10-14 days",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "feeding.note.cal",
+    "value": "Serpent roi de Californie = L. californiae, sous-espèce traitée par la fiche genre Lampropeltis",
+    "quote": "Kingsnakes come in many different varieties (there are around 45 recognized subspecies!), so they can be found in a wide array of habitats, from tropical and subtropical broadleaf forests to deserts and xeric shrublands.",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 8583926,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "insectivore",
+    "quote": "In the wild, Cuban Knight Anoles are opportunistic predators - primarily insectivorous but known to eat small vertebrates (smaller lizards, small mice), invertebrates, and occasional fruit.",
+    "url": "https://reptiledirect.com/cuban-knight-anole-care-sheet/"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Blattes dubia, grillons gavés, blattes discoïdes, vers à soie",
+    "quote": "Good staple feeder insects include: Dubia roaches - excellent nutritional profile, low chitin, easy to maintain in a colony Crickets - widely available and stimulate natural hunting behaviour; gut-load before offering",
+    "url": "https://reptiledirect.com/cuban-knight-anole-care-sheet/"
+   },
+   {
+    "field": "feeding.recommendedFoods[0].frequency",
+    "value": "jeunes : tous les jours ; adultes : un jour sur deux",
+    "quote": "Adults: Feed every other day",
+    "url": "https://reptiledirect.com/cuban-knight-anole-care-sheet/"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Fruits mous (papaye, mangue, banane), en friandise occasionnelle",
+    "quote": "Occasional treats of soft fruit (papaya, mango, banana) can be offered to adults",
+    "url": "https://reptiledirect.com/cuban-knight-anole-care-sheet/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Superworms comme aliment de base",
+    "quote": "Superworms - high fat; good occasional treat for adults, not a staple",
+    "url": "https://reptiledirect.com/cuban-knight-anole-care-sheet/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Fruits fréquents ou laissés dans l'enclos",
+    "quote": "Keep fruit offerings infrequent (once every 2-3 weeks) and remove uneaten fruit promptly to prevent mould and bacterial growth.",
+    "url": "https://reptiledirect.com/cuban-knight-anole-care-sheet/"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "every_2_days",
+    "quote": "Adults: Feed every other day",
+    "url": "https://reptiledirect.com/cuban-knight-anole-care-sheet/"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Saupoudrer les insectes de carbonate de calcium (sans D3) à chaque repas et les gaver 24-48 h avant.",
+    "quote": "Dust all feeder insects with calcium carbonate powder (without D3) at every meal.",
+    "url": "https://reptiledirect.com/cuban-knight-anole-care-sheet/"
+   },
+   {
+    "field": "reproduction.season",
+    "value": "Été (reproduction saisonnière, une fois par an)",
+    "quote": "Breeding occurs during the summer months.",
+    "url": "https://animaldiversity.org/accounts/Anolis_equestris/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "Espèce ovipare ; un seul cycle de reproduction par an.",
+    "quote": "Anoles breed once yearly.",
+    "url": "https://animaldiversity.org/accounts/Anolis_equestris/"
+   },
+   {
+    "field": "reproduction.notes.2",
+    "value": "ovipare",
+    "quote": "These anoles are egg-layers (Pope 1966).",
+    "url": "https://animaldiversity.org/accounts/Anolis_equestris/"
+   }
+  ]
+ },
+ {
+  "speciesId": 8909809,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "omnivore",
+    "quote": "Emys orbicularis are omnivorous, with juveniles initially feeding upon insect larvae and small earthworms.",
+    "url": "https://www.tortoisetrust.org/articles/orbicularis.htm"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Bâtonnets Reptomin, truite séchée réhydratée, plantes de bassin flottantes ou salade",
+    "quote": "We provide our standard aquatic turtle fare of mixed Reptomin sticks, rehydrated dried trout chow, rehydrated low fat dried cat food (in limited quantities) and free access to floating pond plants or salad.",
+    "url": "https://www.tortoisetrust.org/articles/orbicularis.htm"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Poissons, crevettes, escargots, limaces, vers de terre, têtards, grenouilles entières",
+    "quote": "we feed the following items: fish, shrimp, beef heart, beef liver, chicken gizzards and hearts, chicken breast, ground turkey meat, tadpoles, whole frogs, earthworms, superworms, wax worms, pinkies, whole skinned mice, commercial pellets, fresh pet wet dog food, snails and slugs",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Suralimentation",
+    "quote": "They can certainly become obese so be careful not to over-feed.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Croquettes pour chat en grande quantité",
+    "quote": "rehydrated low fat dried cat food (in limited quantities)",
+    "url": "https://www.tortoisetrust.org/articles/orbicularis.htm"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Fournir régulièrement des morceaux d'os de seiche à ronger.",
+    "quote": "also regularly provide chunks of cuttlefish bone for the turtles to gnaw upon.",
+    "url": "https://www.tortoisetrust.org/articles/orbicularis.htm"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "Très vorace et agressive au moment des repas ; de nature craintive, la manipulation n'est pas recommandée.",
+    "quote": "This species is incredibly aggressive at feeding time.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "semi-grégaire",
+    "quote": "A 9 x 9 meters (30 x 30 feet) pen with a 4.5 x 4.5 meters (15 x 15 feet) water area in it will suffice for a small group of adults (1.3 or 2.6).",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "behavior.difficultyLevel",
+    "value": "débutant",
+    "quote": "Difficulty : Beginner",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "behavior.generalBehavior.2",
+    "value": "craintive",
+    "quote": "Due to their skittish nature, handling isn't recommended for this species.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 24,
+    "quote": "We recommend 35-38 oC (95-100 oF) basking temp and 24-29 oC (75-85 oF) ambient room temperature.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 38,
+    "quote": "We recommend 35-38 oC (95-100 oF) basking temp and 24-29 oC (75-85 oF) ambient room temperature.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Bassin extérieur en pleine terre ; enclos de 9 × 9 m avec une zone d'eau de 4,5 × 4,5 m pour un petit groupe d'adultes (profondeur d'eau de plus de 0,45 m) ; en intérieur, uniquement pour les jeunes (20 à 40 gallons).",
+    "quote": "A 9 x 9 meters (30 x 30 feet) pen with a 4.5 x 4.5 meters (15 x 15 feet) water area in it will suffice for a small group of adults (1.3 or 2.6).",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Bassin extérieur en pleine terre ; enclos de 9 × 9 m avec une zone d'eau de 4,5 × 4,5 m pour un petit groupe d'adultes (profondeur d'eau de plus de 0,45 m) ; en intérieur, uniquement pour les jeunes (20 à 40 gallons).",
+    "quote": "The water area should be made of 45 to 65 mil fish friendly, pond liner and must be more than 0.45 meters (1.5 feet) deep.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Bassin extérieur en pleine terre ; enclos de 9 × 9 m avec une zone d'eau de 4,5 × 4,5 m pour un petit groupe d'adultes (profondeur d'eau de plus de 0,45 m) ; en intérieur, uniquement pour les jeunes (20 à 40 gallons).",
+    "quote": "A 20 gallon long aquarium will suffice for 1 to 3 hatchlings.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Lumière naturelle idéale ; en intérieur, lampes à vapeur de mercure de 100-150 W (UVA et UVB) au-dessus d'une zone de bain de soleil sèche, allumées 12 à 14 h par jour.",
+    "quote": "We prefer Mercury vapor bulbs which provide both UVA and UVB to the turtles.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Lumière naturelle idéale ; en intérieur, lampes à vapeur de mercure de 100-150 W (UVA et UVB) au-dessus d'une zone de bain de soleil sèche, allumées 12 à 14 h par jour.",
+    "quote": "100-150 watt bulbs over a dry basking area of drift wood or cork bark do the trick.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Lumière naturelle idéale ; en intérieur, lampes à vapeur de mercure de 100-150 W (UVA et UVB) au-dessus d'une zone de bain de soleil sèche, allumées 12 à 14 h par jour.",
+    "quote": "The lights should be turned on in the morning and left on for 12 to 14 hours.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondins, bois flotté ou planches comme plateformes de bain de soleil ; végétation aquatique et terrestre indispensable ; zone de gravier ou de sable pour la ponte.",
+    "quote": "Logs, drift wood or planking can be added to the water area as basking platforms.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondins, bois flotté ou planches comme plateformes de bain de soleil ; végétation aquatique et terrestre indispensable ; zone de gravier ou de sable pour la ponte.",
+    "quote": "Aquatic and land vegetation is an absolute must.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondins, bois flotté ou planches comme plateformes de bain de soleil ; végétation aquatique et terrestre indispensable ; zone de gravier ou de sable pour la ponte.",
+    "quote": "A gravel or sandy area should also be provided for the females to lay their eggs.",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "A 9 x 9 meters (30 x 30 feet) pen with a 4.5 x 4.5 meters (15 x 15 feet) water area in it will suffice for a small group of adults (1.3 or 2.6).",
+    "url": "https://www.reptiletalk.net/european-pond-turtle/"
+   }
+  ]
+ },
+ {
+  "speciesId": 8953936,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Caimans are carnivores with appetites that scale with their body size",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Poissons, crevettes, grillons et petits rongeurs de taille adaptée (jeunes)",
+    "quote": "Hatchlings and juveniles do well on a diet of appropriately sized fish, shrimp, crickets, and small rodents.",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   },
+   {
+    "field": "feeding.recommendedFoods[0].frequency",
+    "value": "nouveau-nés : chaque jour ou un jour sur deux ; juvéniles : tous les 2-3 jours",
+    "quote": "Hatchlings eat daily or every other day.",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Proies entières plus grosses : poissons, rats, poussins, petits lapins (adultes)",
+    "quote": "As they grow, the diet shifts toward larger whole prey items including fish, rats, chicks, and eventually small rabbits for large adults.",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   },
+   {
+    "field": "feeding.recommendedFoods[1].frequency",
+    "value": "adultes : une à deux fois par semaine",
+    "quote": "Adults can be fed once or twice a week depending on prey size and the individual animal's body condition.",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   },
+   {
+    "field": "feeding.recommendedFoods[1].notes",
+    "value": "Les proies entières apportent calcium (os) et vitamines (organes).",
+    "quote": "Whole prey is essential because it provides the complete nutritional package - bones for calcium, organs for vitamins, and the physical act of processing whole food items keeps the jaw and digestive system functioning properly.",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Suralimentation",
+    "quote": "Overfeeding is a genuine concern with captive caimans because they will eat as much as you offer, and an obese crocodilian develops fatty liver disease and other metabolic problems that shorten its life significantly.",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Alimentation uniquement à base de poissons (thiaminase)",
+    "quote": "many common feeder fish contain thiaminase, an enzyme that breaks down vitamin B1",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1].reason",
+    "value": "Varier les espèces de poissons et inclure des proies non piscicoles.",
+    "quote": "Varying the fish species offered and including non-fish prey items helps mitigate this concern.",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Saupoudrer les proies de calcium, surtout pour les juvéniles nourris de poisson ; multivitamines toutes les une à deux semaines.",
+    "quote": "Dusting prey items with calcium powder helps ensure proper bone development, particularly for juveniles fed primarily on fish",
+    "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm"
+   }
+  ]
+ },
+ {
+  "speciesId": 9032472,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "insectivore",
+    "quote": "Schneider's skinks are insectivorous , which means that they eat mostly insects and other invertebrates.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Blattes dubia et discoïdes, grillons, larves de mouche soldat noire, vers de farine, superworms, vers à tabac, vers à soie",
+    "quote": "Feeder insect options for Schneider's skinks: dubias , discoids, crickets, black soldier fly larvae , mealworms , superworms , hornworms , silkworms, and darkling beetles.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0].frequency",
+    "value": "jeunes : tous les jours ; adultes : 2-3 fois par semaine",
+    "quote": "Juveniles - daily Adults - 2-3x/week",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Fruits et légumes",
+    "quote": "They should also be fed fruit and vegetables once a week to stay healthy.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Souriceaux (pinkies) en grande quantité",
+    "quote": "They also can eat thawed frozen pinkie mice in moderation.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Œuf dur en gros morceaux",
+    "quote": "You can try feeding your skink a boiled egg, but you must cut it into small pieces.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Saupoudrer légèrement tous les insectes d'un supplément de calcium.",
+    "quote": "We recommend Repashy Calcium Plus LoD , lightly dusted on all feeder insects.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "reproduction.season",
+    "value": "Une seule ponte par an (espèce monoestrus)",
+    "quote": "Schneider's skinks are also monoestrous , meaning they only have one clutch of eggs every year.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/"
+   },
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "avance",
+    "quote": "Breeding Schneider's Skinks can present a difficult challenge, as they are not prone to mating in captivity, hence why most skinks are captured in the wild.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "Les œufs fécondés sont portés 6 à 7 semaines, puis incubés 7 à 10 semaines supplémentaires ; l'accouplement est assez agressif et les femelles peuvent être blessées.",
+    "quote": "Fertilized eggs are then carried for 6 to 7 weeks.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/"
+   },
+   {
+    "field": "reproduction.notes.2",
+    "value": "incubation 7 à 10 semaines",
+    "quote": "After that, you should incubate the eggs for an additional 7 to 10 weeks.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/"
+   },
+   {
+    "field": "reproduction.notes.3",
+    "value": "accouplement agressif",
+    "quote": "Their mating behavior is quite aggressive, and females can often be injured as a result.",
+    "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": "24 °C (converti depuis la citation)",
+    "quote": "Schneider's skinks should have a basking surface temperature of 105-115°F and cool side temperature between 75-85°F.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "29 °C (converti depuis la citation)",
+    "quote": "Schneider's skinks should have a basking surface temperature of 105-115°F and cool side temperature between 75-85°F.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 36\" × 18\" × 18\" (≈ 90 × 45 × 45 cm) pour un petit scinque de moins de 14\" ; plus grand pour les adultes.",
+    "quote": "The minimum terrarium size we recommend for a small Schneider's skink under 14\" long is 36\"x18\"x18\"",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce diurne qui bénéficie d'un UVB de qualité ; surface de bain de soleil à 105-115 °F (≈ 41-46 °C), côté frais à 75-85 °F.",
+    "quote": "Schneider's skinks are diurnal, so they do benefit from high-quality UVB lighting as part of their setup.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce diurne qui bénéficie d'un UVB de qualité ; surface de bain de soleil à 105-115 °F (≈ 41-46 °C), côté frais à 75-85 °F.",
+    "quote": "Schneider's skinks should have a basking surface temperature of 105-115°F and cool side temperature between 75-85°F.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Bûches et branches solides, rebords, piles de pierres plates (fixées), abris supplémentaires, plantes ; couvrir trois côtés du terrarium pour que le scinque se sente en sécurité.",
+    "quote": "Here are some ideas: sturdy logs and branches ledges stacks of flat rocks (secured) additional hides live or artificial plants It's also best practice to cover three sides of the enclosure to help the skink feel more secure in its environment!",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "The minimum terrarium size we recommend for a small Schneider's skink under 14\" long is 36\"x18\"x18\"",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 50,
+    "quote": "Schneider's skinks need low humidity levels - under 50% on average.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 9268496,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "Tortue en grande partie vivant au fond de l'eau, qui sort parfois se chauffer au soleil ; elle libère un musc nauséabond pour dissuader les prédateurs.",
+    "quote": "In aquatic environments, they are primarily bottom dwelling, but occasionally leave the water to bask in the sun.",
+    "url": "https://animaldiversity.org/accounts/Chelodina_longicollis/"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "solitaire",
+    "quote": "Although many individuals can live in the same wetland, they are generally thought of as solitary and move independently of one another.",
+    "url": "https://animaldiversity.org/accounts/Chelodina_longicollis/"
+   },
+   {
+    "field": "behavior.difficultyLevel",
+    "value": "intermédiaire",
+    "quote": "Difficulty : Intermediate",
+    "url": "https://www.reptiletalk.net/eastern-long-necked-turtle/"
+   },
+   {
+    "field": "behavior.compatibilityWithOtherAnimals",
+    "value": "Animal non social : en aquarium, l'agressivité entre deux tortues est fréquente, la dominante grandissant souvent plus vite.",
+    "quote": "In fact, in the confines of a tank, aggression between two turtles is common, especially as the dominant turtle often grows faster and larger than the other.",
+    "url": "https://kb.rspca.org.au/knowledge-base/how-should-i-care-for-my-turtles/"
+   },
+   {
+    "field": "behavior.generalBehavior.2",
+    "value": "musc",
+    "quote": "To deter predators, common snake-necked turtles emit a foul-smelling musk, or yellow fluid from their musk glands.",
+    "url": "https://animaldiversity.org/accounts/Chelodina_longicollis/"
+   }
+  ]
+ },
+ {
+  "speciesId": 9799308,
+  "evidence": [
+   {
+    "field": "habitat.tempMin",
+    "value": 21,
+    "quote": "Basking surface: 85-90°F (29-32°C) Cool side: 70-78°F (21-26°C)",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 32,
+    "quote": "Basking surface: 85-90°F (29-32°C) Cool side: 70-78°F (21-26°C)",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 48\" × 24\" × 24\" (≈ 120 × 60 × 60 cm) pour un kingsnake adulte moyen (guide du genre Lampropeltis) ; plus grand fortement recommandé.",
+    "quote": "As a generalization, the minimum enclosure size for one average kingsnake is going to be 48\"L x 24\"W x 24\"H",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 48\" × 24\" × 24\" (≈ 120 × 60 × 60 cm) pour un kingsnake adulte moyen (guide du genre Lampropeltis) ; plus grand fortement recommandé.",
+    "quote": "ReptiFiles strongly recommends going larger than the minimum recommended enclosure for your snake.",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage vif le jour (activité diurne et nocturne).",
+    "quote": "to achieve a UVI of 2.0-3.0 in the basking area",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage vif le jour (activité diurne et nocturne).",
+    "quote": "Kingsnakes are known to be active during both day and night, which means that providing bright illumination during the day is likely to be beneficial in stimulating activity and natural behaviors.",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondelles et plaques de liège, bois, rebords magnétiques, plantes artificielles ou vivantes solides ; multiplier les cachettes.",
+    "quote": "Environmental enrichment ideas for kingsnakes: cork rounds cork flats grape wood ghost wood magnetic ledges artificial plants sturdy live plants",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondelles et plaques de liège, bois, rebords magnétiques, plantes artificielles ou vivantes solides ; multiplier les cachettes.",
+    "quote": "The more hiding places your snake has access to, the more likely it will be comfortable hanging out in the open where you can see it.",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "As a generalization, the minimum enclosure size for one average kingsnake is going to be 48\"L x 24\"W x 24\"H",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 40,
+    "quote": "Kingsnakes generally need an average humidity of 40-60%",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 60,
+    "quote": "Kingsnakes generally need an average humidity of 40-60%",
+    "url": "https://reptifiles.com/kingsnake-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 104076753,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "Touche en particulier les lézards insectivores/herbivores en croissance rapide",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms2",
+    "value": "suite des symptômes",
+    "quote": "Diseased tissue develops along the rows of teeth as the condition worsens.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parasites intestinaux et vers de l'estomac",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Ulcères de l'estomac en cas d'infestation importante.",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+    "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   }
+  ]
+ },
+ {
+  "speciesId": 104085484,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "Touche en particulier les lézards insectivores/herbivores en croissance rapide",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms2",
+    "value": "suite des symptômes",
+    "quote": "Diseased tissue develops along the rows of teeth as the condition worsens.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parasites intestinaux et vers de l'estomac",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Ulcères de l'estomac en cas d'infestation importante.",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+    "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 21,
+    "quote": "For heat/temperature you want to have a basking spot of 48-55 °C +/- 2 (120-135 °F +/- 5), the warm side around 32 °C (90 °F) and a cool side of about 21 °C (70 °F).",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 32,
+    "quote": "For heat/temperature you want to have a basking spot of 48-55 °C +/- 2 (120-135 °F +/- 5), the warm side around 32 °C (90 °F) and a cool side of about 21 °C (70 °F).",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Adultes logés dans des enclos de 2,4 × 1,2 × 1,2 m (8 × 4 × 4 pieds) ; jeunes dans 1,8 × 0,6 × 0,6 m ; les enclos tout en verre sont déconseillés.",
+    "quote": "I keep hatchling/juvenile tegus in 1.8 x 0.6 x 0.6 meters (6x2x2 feet) and my adult tegus in 2.4 x 1.2 x 1.2 meters (8x4x4 feet) homes.",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Adultes logés dans des enclos de 2,4 × 1,2 × 1,2 m (8 × 4 × 4 pieds) ; jeunes dans 1,8 × 0,6 × 0,6 m ; les enclos tout en verre sont déconseillés.",
+    "quote": "I strongly suggest staying away from all glass tanks as they are very poor at keeping proper humidity levels and temperature.",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce diurne qui profite d'une lumière à spectre complet et d'UVB ; point chaud de 48-55 °C (±2) obtenu avec plusieurs lampes de faible puissance.",
+    "quote": "Tegus are diurnal (active during the day) and benefit from full spectrum light to replicate the sun's natural light.",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce diurne qui profite d'une lumière à spectre complet et d'UVB ; point chaud de 48-55 °C (±2) obtenu avec plusieurs lampes de faible puissance.",
+    "quote": "If housing your tegu outside is not an option you can find UVB bulbs at most pet stores that have reptile supplies.",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce diurne qui profite d'une lumière à spectre complet et d'UVB ; point chaud de 48-55 °C (±2) obtenu avec plusieurs lampes de faible puissance.",
+    "quote": "a basking spot of 48-55 °C +/- 2 (120-135 °F +/- 5)",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Le téju creuse ses propres abris si on lui en donne la possibilité ; étagères intégrées, boîtes humides ou bacs en plastique retournés ; bassin permettant de s'immerger.",
+    "quote": "Tegus burrow to create their own hides, if given the opportunity.",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Le téju creuse ses propres abris si on lui en donne la possibilité ; étagères intégrées, boîtes humides ou bacs en plastique retournés ; bassin permettant de s'immerger.",
+    "quote": "Other options are: built in shelves, humid boxes, or even plastic totes with holes cut into them and turned upside down.",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Le téju creuse ses propres abris si on lui en donne la possibilité ; étagères intégrées, boîtes humides ou bacs en plastique retournés ; bassin permettant de s'immerger.",
+    "quote": "large enough for your tegu to immerse themselves in allows your tegu to help regulate their comfort level",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "I keep hatchling/juvenile tegus in 1.8 x 0.6 x 0.6 meters (6x2x2 feet) and my adult tegus in 2.4 x 1.2 x 1.2 meters (8x4x4 feet) homes.",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 70,
+    "quote": "Tegus do best with 70-95% humidity.",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 95,
+    "quote": "Tegus do best with 70-95% humidity.",
+    "url": "https://www.reptiletalk.net/red-tegu/"
+   }
+  ]
+ },
+ {
+  "speciesId": 104087619,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "Grand lézard arboricole ; les mâles sont très territoriaux et agressifs pendant la saison de reproduction.",
+    "quote": "is a large arboreal lizard endemic to the Lesser Antilles",
+    "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "semi-grégaire",
+    "quote": "Breeding in smaller, younger males is unlikely because larger, dominant males outcompete them for territories.",
+    "url": "https://animaldiversity.org/accounts/Iguana_delicatissima/"
+   },
+   {
+    "field": "behavior.difficultyLevel",
+    "value": "expert",
+    "quote": "Maintaining and breeding the species in captivity is difficult.",
+    "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana"
+   },
+   {
+    "field": "behavior.compatibilityWithOtherAnimals",
+    "value": "Les femelles peuvent se montrer défensives et violentes envers les autres femelles, surtout en période de nidification.",
+    "quote": "They can become defensive when threatened by other females and are more prone to violence during nesting season.",
+    "url": "https://animaldiversity.org/accounts/Iguana_delicatissima/"
+   },
+   {
+    "field": "behavior.generalBehavior.2",
+    "value": "mâles territoriaux",
+    "quote": "Male lesser Antillean iguanas are very territorial and aggressive during mating season, leaving mating marks such as bites and scratches on female iguanas.",
+    "url": "https://animaldiversity.org/accounts/Iguana_delicatissima/"
+   },
+   {
+    "field": "health.whenToConsult",
+    "value": "Toute déviation par rapport à la normale justifie une évaluation immédiate par un vétérinaire.",
+    "quote": "Any deviation from normal is cause for concern and your iguana requires immediate evaluation by your veterinarian.",
+    "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases"
+   },
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (MBD)",
+    "quote": "Metabolic bone disease (MBD) is a complex disease and probably the most common medical problem of pet iguanas.",
+    "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Gonflement de la mâchoire inférieure, ramollissement des os de la mâchoire et du visage (« rubber jaw »), gonflement des membres postérieurs.",
+    "quote": "Common signs include swelling of the lower jaw, softening of the jaw and facial bones (rubber jaw), and/or swelling of the hind limbs.",
+    "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par une alimentation trop riche en phosphore et pauvre en calcium et/ou vitamine D3, ou par un manque d'UV-B ou de lumière naturelle : corriger l'alimentation et fournir des UV-B.",
+    "quote": "It is typically caused by feeding an improper diet that is high in phosphorus and low in calcium and/or vitamin D3 (from a nutritional deficiency), or from a lack of UV-B lighting or a lack of exposure to natural daylight.",
+    "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis (mouth rot) is a bacterial infection that shows up as pinpoint hemorrhages on the gums, swollen gums, or an excess production of thick mucus in the mouth that often looks like cottage cheese.",
+    "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Mycose cutanée CANV (« maladie du champignon jaune »)",
+    "quote": "A common fungal skin infection that infects mostly young iguanas is CANV, which stands for chrysosporium anamorph of Nannizziopsis vriesii .",
+    "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Lésions cutanées croûteuses beige à jaune sur n'importe quelle partie du corps.",
+    "quote": "The disease causes tan to yellow crusty skin lesions anywhere on the body.",
+    "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases"
+   },
+   {
+    "field": "health.diseases[3]",
+    "value": "Infections respiratoires et pneumonie",
+    "quote": "Respiratory infections or pneumonia can occur in animals that are stressed, improperly fed, or kept in poor, cold, or dirty conditions.",
+    "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases"
+   },
+   {
+    "field": "health.diseases[3].symptoms",
+    "value": "Éternuements, écoulements nasaux ou oculaires, bulles dans la bouche, respiration rapide ou superficielle, léthargie.",
+    "quote": "You may see sneezing, nasal or ocular discharge, bubbles in the mouth, unnaturally rapid or shallow breathing, gasping for breath, and lethargy (lack of energy).",
+    "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases"
+   },
+   {
+    "field": "reproduction.season",
+    "value": "Accouplement pendant la saison des pluies, d'avril à juin",
+    "quote": "Lesser Antillean iguanas are iteroparous and they mate during the wet season from April through June.",
+    "url": "https://animaldiversity.org/accounts/Iguana_delicatissima/"
+   },
+   {
+    "field": "reproduction.incubationDays",
+    "value": "environ 3 mois (≈ 90 jours)",
+    "quote": "The incubation period for lesser Antillean iguana eggs lasts approximately 3 months.",
+    "url": "https://animaldiversity.org/accounts/Iguana_delicatissima/"
+   },
+   {
+    "field": "reproduction.litterSizeMin",
+    "value": 4,
+    "quote": "laying clutches of 4 - 26 eggs (average: 12.5) at a time",
+    "url": "https://animaldiversity.org/accounts/Iguana_delicatissima/"
+   },
+   {
+    "field": "reproduction.litterSizeMax",
+    "value": 26,
+    "quote": "laying clutches of 4 - 26 eggs (average: 12.5) at a time",
+    "url": "https://animaldiversity.org/accounts/Iguana_delicatissima/"
+   },
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "avance",
+    "quote": "Maintaining and breeding the species in captivity is difficult.",
+    "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "Espèce ovipare ; la reproduction en captivité est rare (la plupart des œufs pondus sont infertiles).",
+    "quote": "Mating and egg laying have occurred at each institution, but most eggs have been infertile.",
+    "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana"
+   }
+  ]
+ }
+]

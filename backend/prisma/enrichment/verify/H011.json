@@ -1,0 +1,1102 @@
+[
+ {
+  "speciesId": 104093507,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Mue incomplète (dysecdysis)",
+    "quote": "Dysecdysis refers to incomplete or abnormal shedding of the skin.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Lunettes (écailles oculaires) ou bandes de peau autour de la queue ou des doigts non muées et retenues.",
+    "quote": "Spectacles (eyecaps), which are the clear protective layer over the eyes, or bands of skin encircling the tail or toes, may not shed properly and may be retained.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "Maintenir un bon taux d'humidité, une alimentation adaptée, un animal sans maladie ni parasites et des surfaces abrasives pour aider la mue.",
+    "quote": "It is easier to prevent than to treat an abnormal shed, so make sure that your reptile is free of disease and parasites, eats a diet appropriate for its species, is kept at the correct humidity level, and has abrasive surfaces available to help it shed.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Ne jamais forcer le retrait d'une lunette retenue (risque de blesser la nouvelle) : demander conseil au vétérinaire.",
+    "quote": "Be patient; eyecaps should never be forced off because of the possibility of damaging the new one underneath.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Dermatite ulcéreuse (« scale rot »)",
+    "quote": "Scale rot (ulcerative or necrotic dermatitis) is seen in snakes and lizards.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Rougeur de la peau, zones de peau morte, plaies et écoulements cutanés.",
+    "quote": "Reddening of the skin, areas of dead skin, skin sores, and skin discharge are common signs.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "L'humidité excessive et la saleté en sont les principaux facteurs : litière propre et sèche.",
+    "quote": "Humidity and unclean environments appear to be the main factors that cause this condition.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Un traitement antibiotique et une hygiène excellente sont indispensables.",
+    "quote": "Treatment with antibiotics and excellent hygiene are essential.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3]",
+    "value": "Vers parasites digestifs (ankylostomes, ascarides)",
+    "quote": "Numerous snakes are infected by a hookworm that lives in the upper gastrointestinal tract and causes wounds at sites of attachment.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].symptoms",
+    "value": "Régurgitation d'aliments partiellement digérés ou de vers adultes, perte d'appétit.",
+    "quote": "Snakes infected with ascarids may regurgitate partially digested food or adult worms and may have no appetite.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   }
+  ]
+ },
+ {
+  "speciesId": 104094514,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Mue incomplète (dysecdysis)",
+    "quote": "Dysecdysis refers to incomplete or abnormal shedding of the skin.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Lunettes (écailles oculaires) ou bandes de peau autour de la queue ou des doigts non muées et retenues.",
+    "quote": "Spectacles (eyecaps), which are the clear protective layer over the eyes, or bands of skin encircling the tail or toes, may not shed properly and may be retained.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "Maintenir un bon taux d'humidité, une alimentation adaptée, un animal sans maladie ni parasites et des surfaces abrasives pour aider la mue.",
+    "quote": "It is easier to prevent than to treat an abnormal shed, so make sure that your reptile is free of disease and parasites, eats a diet appropriate for its species, is kept at the correct humidity level, and has abrasive surfaces available to help it shed.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Ne jamais forcer le retrait d'une lunette retenue (risque de blesser la nouvelle) : demander conseil au vétérinaire.",
+    "quote": "Be patient; eyecaps should never be forced off because of the possibility of damaging the new one underneath.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Dermatite ulcéreuse (« scale rot »)",
+    "quote": "Scale rot (ulcerative or necrotic dermatitis) is seen in snakes and lizards.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Rougeur de la peau, zones de peau morte, plaies et écoulements cutanés.",
+    "quote": "Reddening of the skin, areas of dead skin, skin sores, and skin discharge are common signs.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "L'humidité excessive et la saleté en sont les principaux facteurs : litière propre et sèche.",
+    "quote": "Humidity and unclean environments appear to be the main factors that cause this condition.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Un traitement antibiotique et une hygiène excellente sont indispensables.",
+    "quote": "Treatment with antibiotics and excellent hygiene are essential.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3]",
+    "value": "Vers parasites digestifs (ankylostomes, ascarides)",
+    "quote": "Numerous snakes are infected by a hookworm that lives in the upper gastrointestinal tract and causes wounds at sites of attachment.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].symptoms",
+    "value": "Régurgitation d'aliments partiellement digérés ou de vers adultes, perte d'appétit.",
+    "quote": "Snakes infected with ascarids may regurgitate partially digested food or adult worms and may have no appetite.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": "22 °C (converti depuis la citation)",
+    "quote": "On the other side of the enclosure, the temperature should be between 72-80°F.",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "32 °C (converti depuis la citation)",
+    "quote": "Specifically speaking, rough green snakes should have a basking area temperature of 90°F.",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 18\" × 18\" × 36\" (≈ 45 × 45 × 90 cm) pour un seul serpent ; terrarium arboricole à ouverture frontale, plus grand si possible.",
+    "quote": "The absolute minimum terrarium size for a single rough green snake is 18\"L x 18\"W x 36\"H.",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB indispensable (contrairement à la plupart des serpents) ; lumières allumées environ 13 h par jour en été et 11 h en hiver.",
+    "quote": "Most snakes can usually survive without UVB, but rough green snakes are an exception, and must have UVB lighting as part of their setup.",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB indispensable (contrairement à la plupart des serpents) ; lumières allumées environ 13 h par jour en été et 11 h en hiver.",
+    "quote": "Lights should be on for about 13 hours/day during summer and 11 hours/day during winter in order to encourage natural hormonal cycling.",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Au minimum une branche d'escalade et du feuillage vivant ou artificiel pour se cacher ; idéalement branches, brindilles, lianes, tubes en liège, rebords.",
+    "quote": "Since rough green snakes are arboreal, at bare minimum you will need at least one climbing branch and some live or artificial foliage for the snake to hide in.",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Au minimum une branche d'escalade et du feuillage vivant ou artificiel pour se cacher ; idéalement branches, brindilles, lianes, tubes en liège, rebords.",
+    "quote": "However, it's best to include other items such as: branches twigs vines cork tubes ledges live or artificial plants",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "The absolute minimum terrarium size for a single rough green snake is 18\"L x 18\"W x 36\"H.",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 50,
+    "quote": "Rough green snakes need an average humidity of 50-75%.",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 75,
+    "quote": "Rough green snakes need an average humidity of 50-75%.",
+    "url": "https://dubiaroaches.com/blogs/snake-care/rough-green-snake-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 104101618,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Infections bactériennes (surtout respiratoires)",
+    "quote": "Health problems are about the same as the rest of the sandboa group; bacterial infections (mostly RI), viruses like stargazing (Inclusion body syndrome), and retentions from giving birth are the ones that come to mind.",
+    "url": "https://www.reptiletalk.net/indian-sand-boa/"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Ne jamais utiliser de copeaux de pin ou de séquoia : les fines particules provoquent des problèmes respiratoires.",
+    "quote": "NEVER use any kind of pine or redwood wood shavings: the fine particles will cause respiratory problems.",
+    "url": "https://www.reptiletalk.net/indian-sand-boa/"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Maladie à corps d'inclusion (« stargazing »)",
+    "quote": "Health problems are about the same as the rest of the sandboa group; bacterial infections (mostly RI), viruses like stargazing (Inclusion body syndrome), and retentions from giving birth are the ones that come to mind.",
+    "url": "https://www.reptiletalk.net/indian-sand-boa/"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Perte d'appétit ou de poids, infections bactériennes secondaires, mauvaise cicatrisation, régurgitations (boïdés).",
+    "quote": "Signs of inclusion body disease can be related to any factor affecting the immune system and include loss of appetite or weight, secondary bacterial infections, poor wound healing, and regurgitation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Maladie non curable : les serpents peuvent être isolés et recevoir des soins de soutien.",
+    "quote": "Inclusion body disease is not curable, and many pet owners may choose to euthanize affected snakes.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Rétention de ponte (dystocie)",
+    "quote": "Health problems are about the same as the rest of the sandboa group; bacterial infections (mostly RI), viruses like stargazing (Inclusion body syndrome), and retentions from giving birth are the ones that come to mind.",
+    "url": "https://www.reptiletalk.net/indian-sand-boa/"
+   },
+   {
+    "field": "health.diseases[3]",
+    "value": "Mue difficile",
+    "quote": "Difficulties with shedding can be avoided by offering your snake a moist sauna in which to soften its skin.",
+    "url": "https://www.reptiletalk.net/indian-sand-boa/"
+   },
+   {
+    "field": "health.diseases[3].prevention",
+    "value": "Proposer un « sauna humide » pour ramollir la peau avant la mue.",
+    "quote": "Cut one or two access holes on the bottom of the side of a plastic container (with lid) and line it with a moist paper towel for humidity.",
+    "url": "https://www.reptiletalk.net/indian-sand-boa/"
+   }
+  ]
+ },
+ {
+  "speciesId": 104101654,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Mue incomplète (dysecdysis)",
+    "quote": "Dysecdysis refers to incomplete or abnormal shedding of the skin.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Lunettes (écailles oculaires) ou bandes de peau autour de la queue ou des doigts non muées et retenues.",
+    "quote": "Spectacles (eyecaps), which are the clear protective layer over the eyes, or bands of skin encircling the tail or toes, may not shed properly and may be retained.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "Maintenir un bon taux d'humidité, une alimentation adaptée, un animal sans maladie ni parasites et des surfaces abrasives pour aider la mue.",
+    "quote": "It is easier to prevent than to treat an abnormal shed, so make sure that your reptile is free of disease and parasites, eats a diet appropriate for its species, is kept at the correct humidity level, and has abrasive surfaces available to help it shed.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Ne jamais forcer le retrait d'une lunette retenue (risque de blesser la nouvelle) : demander conseil au vétérinaire.",
+    "quote": "Be patient; eyecaps should never be forced off because of the possibility of damaging the new one underneath.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Dermatite ulcéreuse (« scale rot »)",
+    "quote": "Scale rot (ulcerative or necrotic dermatitis) is seen in snakes and lizards.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Rougeur de la peau, zones de peau morte, plaies et écoulements cutanés.",
+    "quote": "Reddening of the skin, areas of dead skin, skin sores, and skin discharge are common signs.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "L'humidité excessive et la saleté en sont les principaux facteurs : litière propre et sèche.",
+    "quote": "Humidity and unclean environments appear to be the main factors that cause this condition.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Un traitement antibiotique et une hygiène excellente sont indispensables.",
+    "quote": "Treatment with antibiotics and excellent hygiene are essential.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3]",
+    "value": "Vers parasites digestifs (ankylostomes, ascarides)",
+    "quote": "Numerous snakes are infected by a hookworm that lives in the upper gastrointestinal tract and causes wounds at sites of attachment.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].symptoms",
+    "value": "Régurgitation d'aliments partiellement digérés ou de vers adultes, perte d'appétit.",
+    "quote": "Snakes infected with ascarids may regurgitate partially digested food or adult worms and may have no appetite.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   }
+  ]
+ },
+ {
+  "speciesId": 104101859,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Mue incomplète (dysecdysis)",
+    "quote": "Dysecdysis refers to incomplete or abnormal shedding of the skin.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Lunettes (écailles oculaires) ou bandes de peau autour de la queue ou des doigts non muées et retenues.",
+    "quote": "Spectacles (eyecaps), which are the clear protective layer over the eyes, or bands of skin encircling the tail or toes, may not shed properly and may be retained.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "Maintenir un bon taux d'humidité, une alimentation adaptée, un animal sans maladie ni parasites et des surfaces abrasives pour aider la mue.",
+    "quote": "It is easier to prevent than to treat an abnormal shed, so make sure that your reptile is free of disease and parasites, eats a diet appropriate for its species, is kept at the correct humidity level, and has abrasive surfaces available to help it shed.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Ne jamais forcer le retrait d'une lunette retenue (risque de blesser la nouvelle) : demander conseil au vétérinaire.",
+    "quote": "Be patient; eyecaps should never be forced off because of the possibility of damaging the new one underneath.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Dermatite ulcéreuse (« scale rot »)",
+    "quote": "Scale rot (ulcerative or necrotic dermatitis) is seen in snakes and lizards.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Rougeur de la peau, zones de peau morte, plaies et écoulements cutanés.",
+    "quote": "Reddening of the skin, areas of dead skin, skin sores, and skin discharge are common signs.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "L'humidité excessive et la saleté en sont les principaux facteurs : litière propre et sèche.",
+    "quote": "Humidity and unclean environments appear to be the main factors that cause this condition.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Un traitement antibiotique et une hygiène excellente sont indispensables.",
+    "quote": "Treatment with antibiotics and excellent hygiene are essential.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3]",
+    "value": "Maladie à corps d'inclusion (boïdés et pythons)",
+    "quote": "Boa constrictors and several species of pythons are most commonly affected by inclusion body disease, which is caused by a retrovirus or arenavirus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].symptoms",
+    "value": "Perte d'appétit ou de poids, infections bactériennes secondaires, mauvaise cicatrisation, régurgitations ; signes neurologiques (tics du visage, « stargazing », convulsions).",
+    "quote": "Signs of inclusion body disease can be related to any factor affecting the immune system and include loss of appetite or weight, secondary bacterial infections, poor wound healing, and regurgitation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].whenToConsult",
+    "value": "Maladie non curable : les serpents peuvent être isolés et recevoir des soins de soutien.",
+    "quote": "Inclusion body disease is not curable, and many pet owners may choose to euthanize affected snakes.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 26,
+    "quote": "Basking: 90-92°F (32-34°C) Cool end: 80-88°F (27-31°C) Nighttime: 78-82°F (26-27°C)",
+    "url": "https://reptifiles.com/burmese-python-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 34,
+    "quote": "Basking: 90-92°F (32-34°C) Cool end: 80-88°F (27-31°C) Nighttime: 78-82°F (26-27°C)",
+    "url": "https://reptifiles.com/burmese-python-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m), de préférence plus grand ; taille minimale selon la longueur adulte : longueur = longueur du serpent, largeur = la moitié, hauteur maximale.",
+    "quote": "8'L x 4'W x 4'H mesh-top reptile enclosure (preferably larger)",
+    "url": "https://reptifiles.com/burmese-python-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m), de préférence plus grand ; taille minimale selon la longueur adulte : longueur = longueur du serpent, largeur = la moitié, hauteur maximale.",
+    "quote": "here is a formula for calculating the appropriate minimum enclosure size according to the snake's projected adult length: Length = snake length Width = half snake length Height = as tall as possible",
+    "url": "https://reptifiles.com/burmese-python-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil), tube couvrant la moitié de l'enclos côté chaud.",
+    "quote": "to achieve a UVI of 2.0-3.0 in the basking area",
+    "url": "https://reptifiles.com/burmese-python-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil), tube couvrant la moitié de l'enclos côté chaud.",
+    "quote": "Your UVB bulb must be long enough to span half of the enclosure and placed on the warm side of the setup.",
+    "url": "https://reptifiles.com/burmese-python-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Rondins creux, branches solides, plateformes, lianes, grandes plantes robustes, caisses en plastique pour se cacher ; au minimum deux branches solides et du feuillage.",
+    "quote": "hollow logs sturdy branches ledges/platforms thick and/or braided vines large, sturdy live plants (ex: ficus, dracaena, schefflera) large, sturdy artificial plants plastic dog kennels (for hiding) At minimum, you will need a couple of sturdy branches and foliage for cover.",
+    "url": "https://reptifiles.com/burmese-python-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "8'L x 4'W x 4'H mesh-top reptile enclosure (preferably larger)",
+    "url": "https://reptifiles.com/burmese-python-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 104104828,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, os de la mâchoire ou des pattes gonflés ou déformés, fractures.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée).",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "tortues et tortues terrestres concernées",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Croissance anormale du bec",
+    "quote": "Abnormal beak growth occurs in turtles and tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Gêne pour s'alimenter ; lié à une mauvaise alimentation et/ou une carence en calcium.",
+    "quote": "This condition, which interferes with feeding, is often associated with poor nutrition, a deficiency of calcium, or both.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Fournir des aliments abrasifs permettant une usure naturelle du bec.",
+    "quote": "Abrasive foods that allow for some natural beak shaping during feeding should be provided to turtles and tortoises in captivity.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le traitement consiste à tailler ou limer le bec ; la répétition est souvent nécessaire.",
+    "quote": "Treatment consists of trimming or grinding the beak into a more normal shape.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3]",
+    "value": "Infection à herpèsvirus (tortues terrestres)",
+    "quote": "Herpesviruses have been found in freshwater turtles, tortoises, and green sea turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].symptoms",
+    "value": "Chez les tortues terrestres : lésions de la bouche, perte d'appétit, régurgitations, écoulements de la bouche et des yeux.",
+    "quote": "In tortoises, infection may damage tissue in the mouth and cause loss of appetite, regurgitation, and discharge from the mouth and eyes.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].whenToConsult",
+    "value": "Isoler l'animal, soins de soutien et traitement antiviral des lésions.",
+    "quote": "Treatment in tortoises includes isolating the animal, providing supportive care, and applying antiviral medication to lesions.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 26,
+    "quote": "Our temp gradient ranges from approximately 26 oC (80 oF) on the cool end to approximately 48oC (120 oF) directly beneath the basking bulbs.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 48,
+    "quote": "Our temp gradient ranges from approximately 26 oC (80 oF) on the cool end to approximately 48oC (120 oF) directly beneath the basking bulbs.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos de 1,5 × 0,6 m (jeunes), 2,1 × 1,2 m (juvéniles) et 2,7 × 1,5 m (adultes), d'environ 0,45 m de haut ; enclos extérieurs en été.",
+    "quote": "1.5 x 0.6 meters (5 x 2 feet) for babies, 2.1 x 1.2 meters (7 x 4 feet) for juveniles and 2.7 x 1.5 meters (9 x 5 feet) for adults.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Enclos de 1,5 × 0,6 m (jeunes), 2,1 × 1,2 m (juvéniles) et 2,7 × 1,5 m (adultes), d'environ 0,45 m de haut ; enclos extérieurs en été.",
+    "quote": "Our enclosures are around 0.45 meters tall (1.5 feet).",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Lampes à vapeur de mercure (UV et chaleur) de 160 W environ à 30 cm au-dessus des tortues ; lumière naturelle en été.",
+    "quote": "We use mercury vapour bulbs to provide UV and heat during the day.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Lampes à vapeur de mercure (UV et chaleur) de 160 W environ à 30 cm au-dessus des tortues ; lumière naturelle en été.",
+    "quote": "We hang several 160-watt bulbs into their enclosures, approximately 12\" above the tortoises.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Cachettes pour les jeunes (bacs retournés avec ouverture) ; grands parcs extérieurs pour brouter et se chauffer ; bains réguliers.",
+    "quote": "For our baby and young radiata, we used upside-down Tupperware or Rubbermaid bins with a hole cut into a side for an opening.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Cachettes pour les jeunes (bacs retournés avec ouverture) ; grands parcs extérieurs pour brouter et se chauffer ; bains réguliers.",
+    "quote": "We use bottomless, stainless steel dog runs that we connect together to create a huge area for grazing and basking.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "1.5 x 0.6 meters (5 x 2 feet) for babies, 2.1 x 1.2 meters (7 x 4 feet) for juveniles and 2.7 x 1.5 meters (9 x 5 feet) for adults.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 60,
+    "quote": "Humidity in our reptile room fluctuates between 60-70%.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 70,
+    "quote": "Humidity in our reptile room fluctuates between 60-70%.",
+    "url": "https://www.reptiletalk.net/radiated-tortoise/"
+   }
+  ]
+ },
+ {
+  "speciesId": 104105088,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, os de la mâchoire ou des pattes gonflés ou déformés, fractures.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée).",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "tortues et tortues terrestres concernées",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Croissance anormale du bec",
+    "quote": "Abnormal beak growth occurs in turtles and tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Gêne pour s'alimenter ; lié à une mauvaise alimentation et/ou une carence en calcium.",
+    "quote": "This condition, which interferes with feeding, is often associated with poor nutrition, a deficiency of calcium, or both.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Fournir des aliments abrasifs permettant une usure naturelle du bec.",
+    "quote": "Abrasive foods that allow for some natural beak shaping during feeding should be provided to turtles and tortoises in captivity.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le traitement consiste à tailler ou limer le bec ; la répétition est souvent nécessaire.",
+    "quote": "Treatment consists of trimming or grinding the beak into a more normal shape.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3]",
+    "value": "Infection à herpèsvirus (tortues terrestres)",
+    "quote": "Herpesviruses have been found in freshwater turtles, tortoises, and green sea turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].symptoms",
+    "value": "Chez les tortues terrestres : lésions de la bouche, perte d'appétit, régurgitations, écoulements de la bouche et des yeux.",
+    "quote": "In tortoises, infection may damage tissue in the mouth and cause loss of appetite, regurgitation, and discharge from the mouth and eyes.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[3].whenToConsult",
+    "value": "Isoler l'animal, soins de soutien et traitement antiviral des lésions.",
+    "quote": "Treatment in tortoises includes isolating the animal, providing supportive care, and applying antiviral medication to lesions.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": "21 °C (converti depuis la citation)",
+    "quote": "The nighttime temperature of 70°F is created by using a ceramic night bulb.",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "38 °C (converti depuis la citation)",
+    "quote": "To accomplish the required basking temperature of 90oF- 100°F, we use a basking bulb (100w in a 46\" vivarium).",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Vivarium en bois bien ventilé d'au moins 1150 mm (46\") ; table à tortues d'au moins 900 mm (35\") possible dans une maison naturellement chaude.",
+    "quote": "The vivarium should be at least 1150mm (46\").",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Vivarium en bois bien ventilé d'au moins 1150 mm (46\") ; table à tortues d'au moins 900 mm (35\") possible dans une maison naturellement chaude.",
+    "quote": "The table should be at least 900mm (35\") long.",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce qui se chauffe beaucoup au soleil : tube UVB d'au moins 10 % (espèces désertiques) avec réflecteur ; lampe chauffante 10-12 h par jour.",
+    "quote": "Indian star tortoises actively bask in hot climates and so naturally receive a high dose of UVB from the sun.",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce qui se chauffe beaucoup au soleil : tube UVB d'au moins 10 % (espèces désertiques) avec réflecteur ; lampe chauffante 10-12 h par jour.",
+    "quote": "The tube should be at least 10% UVB for desert species.",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Espèce qui se chauffe beaucoup au soleil : tube UVB d'au moins 10 % (espèces désertiques) avec réflecteur ; lampe chauffante 10-12 h par jour.",
+    "quote": "Basking bulbs should be on for 10- 12 hours per day and must be controlled by a dimming thermostat.",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Ne grimpe pas mais aime creuser : morceaux de bois ou décors pour creuser ; grotte-refuge pour les jeunes ; plantes artificielles (désertiques).",
+    "quote": "Tortoises do not climb, but they do like to dig and burrow.",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Ne grimpe pas mais aime creuser : morceaux de bois ou décors pour creuser ; grotte-refuge pour les jeunes ; plantes artificielles (désertiques).",
+    "quote": "Younger tortoises will appreciate a cave that they can take refuge in.",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "The vivarium should be at least 1150mm (46\").",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Garder un substrat sec pour ne pas trop augmenter l'humidité de l'enclos.",
+    "quote": "Indian star tortoises should always be kept on a dry substrate so not to increase the humidity inside their enclosure too much.",
+    "url": "https://www.reptilecentre.com/info-indian-star-tortoise-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 104106412,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Parasites (pentastomes pulmonaires, nématodes gastriques, helminthes intestinaux)",
+    "quote": "American alligators are commonly infected with parasites.",
+    "url": "https://en.wikipedia.org/wiki/American_alligator"
+   },
+   {
+    "field": "health.diseases[0].detail",
+    "value": "Dans une étude texane de 2016, 100 % des alligators étaient infectés, par au moins 20 espèces de parasites.",
+    "quote": "In a 2016 Texas study, 100% of the specimens collected were infected with parasites, and by at least 20 different species of parasites, including lung pentastomids , gastric nematodes , and intestinal helminths .",
+    "url": "https://en.wikipedia.org/wiki/American_alligator"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Adénovirus",
+    "quote": "Adenoviruses may cause fatal liver or digestive tract diseases in certain snakes (Gaboon vipers, ball pythons, boa constrictors, rosy boas, and rat snakes), lizards (Jackson's chameleons, savannah monitors, and bearded dragons), and crocodilians.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Sangsues",
+    "quote": "Leeches have been found on the legs, head, neck, and in the mouth of a variety of turtles and crocodilians.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Quelques sangsues sont peu nocives, mais un grand nombre peut abîmer la peau et transmettre d'autres maladies.",
+    "quote": "A few leeches may not be harmful, but many may cause skin damage and transmit other diseases.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   }
+  ]
+ },
+ {
+  "speciesId": 144096299,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "Touche en particulier les lézards insectivores/herbivores en croissance rapide",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms2",
+    "value": "suite des symptômes",
+    "quote": "Diseased tissue develops along the rows of teeth as the condition worsens.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parasites intestinaux et vers de l'estomac",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Ulcères de l'estomac en cas d'infestation importante.",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+    "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": "24 °C (converti depuis la citation)",
+    "quote": "Green basilisks need a basking area temperature between 90-95°F, and between 75-80°F on the cool side, as measured by digital probe thermometers",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": "35 °C (converti depuis la citation)",
+    "quote": "Green basilisks need a basking area temperature between 90-95°F, and between 75-80°F on the cool side, as measured by digital probe thermometers",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 6 × 2 × 4 pieds (≈ 180 × 60 × 120 cm) pour un seul basilic ; grand enclos avec possibilités de grimper et de nager ; un seul individu par enclos.",
+    "quote": "The absolute minimum enclosure size for a single green basilisk is 6'L x 2'W x 4'H.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au minimum 6 × 2 × 4 pieds (≈ 180 × 60 × 120 cm) pour un seul basilic ; grand enclos avec possibilités de grimper et de nager ; un seul individu par enclos.",
+    "quote": "Housing multiple green basilisks in the same enclosure is not recommended.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB indispensable à sa survie ; branche de bain de soleil à 13-15\" sous la lampe si montée au-dessus d'un grillage (17-18\" si montée à l'intérieur).",
+    "quote": "Green basilisks require UVB lighting for their survival.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB indispensable à sa survie ; branche de bain de soleil à 13-15\" sous la lampe si montée au-dessus d'un grillage (17-18\" si montée à l'intérieur).",
+    "quote": "If the UVB is mounted over mesh, place the basking branch so the lizard's back is 13-15\" below the lamp.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Au minimum une grosse branche solide pour se chauffer, du feuillage pour se cacher et un bassin assez grand pour nager.",
+    "quote": "Since green basilisks prefer to spend their time either in the trees or in the water, at bare minimum you will need a large, sturdy branch for them to bask on, foliage to hide in, and a sufficiently large pool for swimming.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "élevé",
+    "quote": "The absolute minimum enclosure size for a single green basilisk is 6'L x 2'W x 4'H.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 60,
+    "quote": "Green basilisks are a tropical species, so the humidity inside their enclosure should be fairly high: 60-70%.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 70,
+    "quote": "Green basilisks are a tropical species, so the humidity inside their enclosure should be fairly high: 60-70%.",
+    "url": "https://dubiaroaches.com/blogs/lizard-care/green-basilisk-care-sheet"
+   }
+  ]
+ },
+ {
+  "speciesId": 156256182,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+    "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].group",
+    "value": "Touche en particulier les lézards insectivores/herbivores en croissance rapide",
+    "quote": "Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+    "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+    "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire.",
+    "quote": "Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Stomatite infectieuse (« mouth rot »)",
+    "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+    "quote": "Early signs include tiny, purplish red spots in the mouth.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître.",
+    "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[1].symptoms2",
+    "value": "suite des symptômes",
+    "quote": "Diseased tissue develops along the rows of teeth as the condition worsens.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parasites intestinaux et vers de l'estomac",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Ulcères de l'estomac en cas d'infestation importante.",
+    "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+    "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   },
+   {
+    "field": "health.diseases[2].whenToConsult",
+    "value": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux.",
+    "quote": "Your veterinarian can test your reptile's feces for gastrointestinal parasites.",
+    "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+   }
+  ]
+ }
+]
