@@ -34,14 +34,7 @@ export function valueLabel(t: T, group: string, value: string | null | undefined
   return raw.charAt(0).toUpperCase() + raw.slice(1);
 }
 
-/** Plage chiffrée « 28–32 °C » (une seule valeur si min = max ou si l'une manque). */
-export function formatRange(locale: string, min: number | null | undefined, max: number | null | undefined, unit: string): string | null {
-  const nf = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
-  const has = (v: number | null | undefined): v is number => typeof v === 'number' && Number.isFinite(v);
-  if (!has(min) && !has(max)) return null;
-  const body = has(min) && has(max) && min !== max ? `${nf.format(min)}–${nf.format(max)}` : nf.format((has(min) ? min : max) as number);
-  return `${body} ${unit}`;
-}
+export { formatRange } from '@/lib/units';
 
 /** Section ancrée de la fiche : carte titrée, cible du sommaire. */
 export function SheetSection({

@@ -4,7 +4,7 @@
  *
  * La même feuille accompagne le fichier HTML autonome partagé depuis l'app mobile : la planche
  * ne dépend donc d'aucun jeton de l'app. Ses couleurs reprennent la palette « papier / encre »
- * (DESIGN.md § 3) en valeurs fixes ; les polices de l'app sont utilisées si elles sont chargées,
+ * (DESIGN.md § 3.1) en valeurs fixes ; les polices de l'app sont utilisées si elles sont chargées,
  * sinon leurs équivalents système. La feuille reste claire en mode sombre : c'est un document.
  */
 export const CARNET_CSS = `

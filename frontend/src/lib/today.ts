@@ -7,6 +7,7 @@ import type { AnimalMeasurement, Medication, Vaccination, VetAppointment } from 
 import { currentMedications } from './carnet';
 import { displayDay, type AgendaItem } from './agenda';
 import { localDayKey } from './dates';
+import { formatRange } from './units';
 import type { CareStatus } from '@/components/ui/CareTimeline';
 
 const DAY_MS = 86_400_000;
@@ -243,7 +244,8 @@ export interface SpeciesSheet {
   vernacularName?: string;
   class?: string;
   profile?: { commonNameFr?: string | null; category?: string | null; description?: string | null } | null;
-  habitat?: { temperature?: string | null; humidity?: string | null } | null;
+  /** Ligne SpeciesHabitat de l'API : plages chiffrées (°C, %), pas de texte libre. */
+  habitat?: { tempMin?: number | null; tempMax?: number | null; humidityMin?: number | null; humidityMax?: number | null } | null;
 }
 
 export interface SpeciesHealthSheet {
@@ -272,13 +274,20 @@ export type SpeciesTip =
 
 /**
  * Conseil « Bon à savoir » tiré de la fiche espèce : la prévention de la première affection
- * décrite, sinon les repères d'ambiance (température, hygrométrie). Null s'il n'y a rien de sourcé.
+ * décrite (GET /species/:id/health, `editorial.diseases[].prevention`), sinon les repères
+ * d'ambiance de l'habitat (GET /species/:id, `habitat.tempMin/tempMax/humidityMin/humidityMax`),
+ * mis en forme dans la locale (« 26–32 °C »). Null s'il n'y a rien de sourcé.
  */
-export function speciesTip(species: SpeciesSheet | null | undefined, health: SpeciesHealthSheet | null | undefined): SpeciesTip | null {
+export function speciesTip(
+  species: SpeciesSheet | null | undefined,
+  health: SpeciesHealthSheet | null | undefined,
+  locale = 'fr',
+): SpeciesTip | null {
   const disease = health?.editorial?.diseases?.find((d) => d.prevention?.trim());
   if (disease?.prevention) return { kind: 'prevention', text: disease.prevention.trim(), topic: disease.name };
-  const temperature = species?.habitat?.temperature?.trim() || undefined;
-  const humidity = species?.habitat?.humidity?.trim() || undefined;
+  const habitat = species?.habitat;
+  const temperature = formatRange(locale, habitat?.tempMin, habitat?.tempMax, '°C') ?? undefined;
+  const humidity = formatRange(locale, habitat?.humidityMin, habitat?.humidityMax, '%') ?? undefined;
   if (temperature || humidity) return { kind: 'habitat', temperature, humidity };
   return null;
 }

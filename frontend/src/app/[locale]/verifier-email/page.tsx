@@ -66,7 +66,7 @@ function VerifyEmailContent() {
     status === 'success' ? t('headingSuccess') : status === 'verifying' ? t('pageTitle') : t('headingFailed');
 
   return (
-    <AuthFrame title={heading} lead={status === 'success' ? t('leadSuccess') : undefined}>
+    <AuthFrame title={heading} lead={status === 'success' ? t('leadSuccess') : undefined} photo="cockatiels">
       <div className="grid gap-6">
         {status === 'verifying' ? (
           <p role="status" className="m-0 text-body text-ink-2">

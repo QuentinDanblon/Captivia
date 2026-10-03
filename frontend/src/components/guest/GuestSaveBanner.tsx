@@ -16,7 +16,7 @@ export interface GuestSaveBannerProps {
 }
 
 /**
- * Bandeau invité « Sauvegardez vos données » (DESIGN.md § 5.1) : rendu seulement pour une session
+ * Bandeau invité « Sauvegardez vos données » (DESIGN.md § 5.11) : rendu seulement pour une session
  * invité, en tête du contenu, discret et masquable. Mène à la création de compte sans perte.
  */
 export function GuestSaveBanner({ animalName, dismissible = true, className }: GuestSaveBannerProps) {

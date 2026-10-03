@@ -453,14 +453,6 @@ export const api = {
     );
   },
 
-  searchAmazon: async (query: string, category?: string, limit = 10) => {
-    const params = new URLSearchParams();
-    params.set('q', query);
-    if (category) params.set('category', category);
-    params.set('limit', limit.toString());
-    return request(`${API_URL}/amazon/search?${params.toString()}`);
-  },
-
   // Animals endpoints
   getMyAnimals: async (token: string) => {
     return request(`${API_URL}/users/me/animals`, {
@@ -1144,11 +1136,8 @@ export const api = {
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-      throw new Error(
-        (data as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`
-      );
+      // ApiError : l'écran de connexion traduit lui-même un 401 (identifiants refusés).
+      throw new ApiError(response.status, errorMessage(data, response));
     }
     return data;
   },

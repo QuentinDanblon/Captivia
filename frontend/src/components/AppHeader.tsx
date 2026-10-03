@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Menu, X } from 'lucide-react';
+import { CircleUserRound, Menu, X } from 'lucide-react';
 import { Link, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { LanguageSelector } from '@/components/LanguageSelector';
@@ -106,7 +106,8 @@ export function AppHeader() {
   ];
 
   const settingsActive = startsWithSegment(pathname, '/parametres');
-  const initials = user?.email?.slice(0, 2).toUpperCase() || '··';
+  // Invité (sans e-mail) : pictogramme de profil au trait plutôt que des initiales factices.
+  const initials = user?.email ? user.email.slice(0, 2).toUpperCase() : <CircleUserRound className="size-4" strokeWidth={1.5} />;
   const authState = user ? 'user' : 'guest';
   // Session invité : pas de déconnexion (elle ferait perdre l'accès aux données), mais l'invitation
   // à créer un compte, qui conserve l'animal et son carnet.

@@ -2,7 +2,7 @@
  * Couche plateforme web / natif (W6-02 à W6-05, D-11).
  *
  * - `isNative()` : vrai seulement dans l'app Capacitor (iOS / Android).
- * - `openExternal(url)` : ouvre un lien dans le navigateur système (liens Amazon : jamais dans la WebView).
+ * - `openExternal(url)` : ouvre un lien dans le navigateur système (boutiques, sources : jamais dans la WebView).
  * - `tokenStorage` : stockage de session, Preferences sur natif + miroir localStorage, localStorage seul sur le web.
  * - `animalDetailPath` / `speciesPath` / `publicAnimalPath` : chemins des fiches selon la cible
  *   (routes dynamiques sur le web, routes à query `?id=` dans l'export statique mobile).
@@ -31,7 +31,7 @@ export function getPlatform(): 'ios' | 'android' | 'web' {
 /**
  * Ouvre `url` (http/https uniquement) hors de l'application.
  * Sur natif, Capacitor délègue toute navigation vers un hôte externe au système
- * (Safari / navigateur par défaut, ou l'app Amazon si installée) : la WebView n'affiche jamais la page.
+ * (Safari / navigateur par défaut, ou l'app du site si installée) : la WebView n'affiche jamais la page.
  * Sur le web, nouvel onglet sans `window.opener`.
  * @returns false si l'URL est refusée (schéma non http(s), URL invalide).
  */

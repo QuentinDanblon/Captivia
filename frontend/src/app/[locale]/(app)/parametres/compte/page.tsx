@@ -237,18 +237,12 @@ export default function ComptePage() {
     }
   };
 
-  const formatDate = (dateString?: string): string => {
-    if (!dateString) return '-';
-    try {
-      return new Date(dateString).toLocaleDateString(locale, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      });
-    } catch {
-      return dateString;
-    }
-  };
+  /** Date d'inscription (absente des anciens profils : la ligne est alors masquée, jamais « - »). */
+  const createdAt = (user as { createdAt?: string } | null)?.createdAt;
+  const memberSince =
+    createdAt && !Number.isNaN(new Date(createdAt).getTime())
+      ? new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(createdAt))
+      : null;
 
   if (authLoading) {
     return (
@@ -289,10 +283,12 @@ export default function ComptePage() {
                 <dt className="text-ink-2">{t('common.email')}</dt>
                 <dd className="m-0 break-all text-body text-ink">{user?.email ?? t('guest.accountNoEmail')}</dd>
               </div>
-              <div className="grid gap-1 py-4 sm:py-0">
-                <dt className="text-ink-2">{t('common.memberSince')}</dt>
-                <dd className="m-0 font-mono text-body text-ink">{formatDate((user as { createdAt?: string })?.createdAt)}</dd>
-              </div>
+              {memberSince ? (
+                <div className="grid gap-1 py-4 sm:py-0">
+                  <dt className="text-ink-2">{t('common.memberSince')}</dt>
+                  <dd className="m-0 font-mono text-body text-ink">{memberSince}</dd>
+                </div>
+              ) : null}
             </dl>
             <div className="mt-2 border-t border-line pt-5 sm:mt-6">
               <Field label={t('common.language')} hint={t('account.languageHint')} id="account-locale" className="max-w-xs">

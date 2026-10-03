@@ -5,7 +5,8 @@ import { BrandMark } from '@/components/ui/BrandMark';
 
 /**
  * Pied de page global (Server Component) : colophon du carnet — marque et une ligne de
- * description, liens légaux en colonnes, mention d'affiliation Amazon et copyright en mono.
+ * description, liens légaux en colonnes et copyright en mono. Aucune mention d'affiliation : aucun lien
+ * affilié n'est affiché (elle accompagne les liens eux-mêmes, cf. magasin).
  */
 export async function SiteFooter() {
   const t = await getTranslations('footer');
@@ -56,7 +57,6 @@ export async function SiteFooter() {
         </div>
 
         <div className="site-footer__colophon">
-          <p>{t('amazonAssociate')}</p>
           <p className="site-footer__legal">
             © {new Date().getFullYear()} {LEGAL.serviceName} · {t('tagline')}
           </p>

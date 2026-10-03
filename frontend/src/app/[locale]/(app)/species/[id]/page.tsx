@@ -30,6 +30,7 @@ import {
 } from '@/components/ui';
 import { SpeciesPhotoFigure } from '@/components/species/SpeciesPhotoFigure';
 import { useSpeciesPhoto } from '@/components/species/useSpeciesPhoto';
+import { ReviewedNote } from './_components/ReviewedNote';
 import {
   BehaviorSection,
   EquipmentSection,
@@ -291,6 +292,7 @@ export default function SpeciesDetailPage({ params }: { params: Promise<{ locale
               {classification.join(' › ')}
             </p>
           ) : null}
+          <ReviewedNote value={species.lastReviewedAt} />
         </div>
       </header>
 
@@ -305,7 +307,7 @@ export default function SpeciesDetailPage({ params }: { params: Promise<{ locale
           {showReproduction && reproduction ? <ReproductionSection reproduction={reproduction} /> : null}
           <LegislationSection legislation={legislation} />
           {showEquipment && equipment ? <EquipmentSection equipment={equipment} /> : null}
-          <SourcesSection species={species} speciesId={speciesId} sectionSources={sectionSources} photo={readyPhoto} />
+          <SourcesSection species={species} speciesId={speciesId} sectionSources={sectionSources} photo={readyPhoto} pubmedCount={(health?.pubmed ?? []).filter((a) => a?.title).length} />
         </div>
 
         <aside className="hidden lg:block">

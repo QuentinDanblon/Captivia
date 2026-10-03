@@ -156,7 +156,19 @@ jobs:
         working-directory: frontend
         # NB : pas de `--format compact` (formateur retiré du cœur d'ESLint 9, il faisait
         # échouer la commande, ce que l'ancien `|| true` masquait).
-        run: npx eslint "src/**/*.{ts,tsx}" --no-fix
+        run: npx eslint "src/**/*.{ts,tsx}" "e2e/**/*.ts" "mobile/**/*.tsx" --no-fix
+      # Garde-fou du système visuel (frontend/docs/DESIGN.md § 9) : aucun reste de l'ancien
+      # style (variante sombre, couleurs Tailwind brutes, dégradés, grands rayons, ombres
+      # floues, verre dépoli, capitales espacées, anciennes variables) hors tests.
+      - name: Garde — motifs de style interdits
+        working-directory: frontend
+        run: |
+          pattern='dark:|\b(bg|text|border|ring|outline|fill|stroke|from|via|to|divide|decoration|placeholder|shadow)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-[0-9]{2,3}\b|\b(bg|text|border)-(white|black)\b|bg-gradient-|\brounded-(lg|xl|2xl|3xl)\b|\bshadow-(sm|md|lg|xl|2xl)\b|backdrop-blur|\buppercase\b|tracking-(wider|widest)|var\(--captivia-'
+          if grep -rnE --include='*.ts' --include='*.tsx' --include='*.css' --exclude-dir=__tests__ --exclude='*.test.*' "$pattern" src mobile; then
+            echo "::error title=Style interdit::Motifs hors système visuel trouvés ci-dessus (voir frontend/docs/DESIGN.md § 9)."
+            exit 1
+          fi
+          echo "Aucun motif interdit."
 
   # Lint backend : NON BLOQUANT (continue-on-error) tant que la dette historique n'est
   # pas résorbée (~2 083 erreurs ESLint, surtout des no-unsafe-*). À rendre bloquant

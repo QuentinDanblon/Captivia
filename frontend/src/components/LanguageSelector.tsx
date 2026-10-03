@@ -40,7 +40,7 @@ export function LanguageSelector() {
     <select
       value={locale}
       onChange={(e) => handleChange(e.target.value)}
-      className="captivia-language-select"
+      className="cv-language-select"
       aria-label={t('language')}
     >
       {locales.map((loc) => (

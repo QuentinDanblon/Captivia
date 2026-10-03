@@ -1,11 +1,26 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { LEGAL } from '@/lib/legal';
+import { SectionHeader, buttonClasses } from '@/components/ui';
+import { Field } from '@/content/legal/ui';
+import { LEGAL, contactMailto } from '@/lib/legal';
 
-// Contact unique défini dans lib/legal.ts (à compléter par le propriétaire).
-const CONTACT_EMAIL = LEGAL.contactEmail;
+/** Section numérotée, même lecture que les documents légaux (`content/legal`). */
+function Section({ id, index, title, children }: { id: string; index: number; title: string; children: ReactNode }) {
+  return (
+    <section aria-labelledby={id} className="grid gap-3">
+      <h2 id={id} className="m-0 flex items-baseline gap-3 text-h3 text-ink">
+        <span aria-hidden="true" className="font-mono text-meta font-normal text-ink-2">
+          {String(index).padStart(2, '0')}
+        </span>
+        <span>{title}</span>
+      </h2>
+      {children}
+    </section>
+  );
+}
 
 /**
  * Page publique (sans authentification) expliquant comment supprimer son compte.
@@ -14,103 +29,66 @@ const CONTACT_EMAIL = LEGAL.contactEmail;
 export default function SuppressionComptePage() {
   const t = useTranslations('account');
   const subject = t('emailSubject');
-  const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`;
+  const base = contactMailto();
+  const mailto = base ? `${base}?subject=${encodeURIComponent(subject)}` : null;
+  const linkClass = 'font-medium text-accent-text underline decoration-1 underline-offset-[0.18em] transition-colors hover:text-ink';
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12 min-w-0">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
-          {t('publicTitle')}
-        </h1>
-        <p className="text-gray-700 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed">
-          {t('publicIntro')}
-        </p>
+    <div className="cv-container py-8 sm:py-12">
+      <div className="grid lg:grid-cols-12">
+        <article className="min-w-0 break-words lg:col-span-8">
+          <SectionHeader title={t('publicTitle')} description={t('publicIntro')} />
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-8 space-y-8 break-words">
-          <section aria-labelledby="delete-in-app">
-            <h2
-              id="delete-in-app"
-              className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mb-3"
-            >
-              {t('inAppTitle')}
-            </h2>
-            <ol className="list-decimal pl-6 space-y-1 text-gray-700 dark:text-gray-300">
-              <li>{t('inAppStep1')}</li>
-              <li>{t('inAppStep2')}</li>
-              <li>{t('inAppStep3')}</li>
-              <li>{t('inAppStep4')}</li>
-            </ol>
-            <Link
-              href="/parametres/compte"
-              className="inline-block mt-4 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
-            >
-              {t('sectionTitle')}
-            </Link>
-          </section>
+          <div className="mt-10 grid gap-10 text-body leading-relaxed text-ink">
+            <Section id="delete-in-app" index={1} title={t('inAppTitle')}>
+              <ol className="m-0 grid list-none gap-0 border-t border-line p-0">
+                {[1, 2, 3, 4].map((n) => (
+                  <li key={n} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-x-2 border-b border-line py-2">
+                    <span className="font-mono text-meta leading-7 text-ink-2">{n}.</span>
+                    <span>{t(`inAppStep${n}`)}</span>
+                  </li>
+                ))}
+              </ol>
+              <p className="m-0 mt-2">
+                <Link href="/parametres/compte" className={buttonClasses({ variant: 'secondary' })}>
+                  {t('sectionTitle')}
+                </Link>
+              </p>
+            </Section>
 
-          <section aria-labelledby="delete-by-email">
-            <h2
-              id="delete-by-email"
-              className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mb-3"
-            >
-              {t('emailTitle')}
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              {t('emailBody', { email: CONTACT_EMAIL, subject })}
-            </p>
-            <a
-              href={mailto}
-              className="inline-block mt-4 text-emerald-600 dark:text-emerald-400 underline hover:text-emerald-700"
-            >
-              {CONTACT_EMAIL}
-            </a>
-          </section>
+            <Section id="delete-by-email" index={2} title={t('emailTitle')}>
+              <p className="m-0 max-w-prose">{t('emailBody', { email: LEGAL.contactEmail, subject })}</p>
+              <p className="m-0">
+                {mailto ? (
+                  <a href={mailto} className={linkClass}>
+                    {LEGAL.contactEmail}
+                  </a>
+                ) : (
+                  <span lang="fr">
+                    <Field value={LEGAL.contactEmail} />
+                  </span>
+                )}
+              </p>
+            </Section>
 
-          <section aria-labelledby="delete-what">
-            <h2
-              id="delete-what"
-              className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mb-3"
-            >
-              {t('whatTitle')}
-            </h2>
-            <ul className="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-300">
-              <li>{t('whatItem1')}</li>
-              <li>{t('whatItem2')}</li>
-              <li>{t('whatItem3')}</li>
-              <li>{t('whatItem4')}</li>
-            </ul>
-          </section>
+            <Section id="delete-what" index={3} title={t('whatTitle')}>
+              <ul className="m-0 grid max-w-prose list-disc gap-2 pl-5 marker:text-ink-3">
+                <li>{t('whatItem1')}</li>
+                <li>{t('whatItem2')}</li>
+                <li>{t('whatItem3')}</li>
+                <li>{t('whatItem4')}</li>
+              </ul>
+            </Section>
 
-          <section aria-labelledby="delete-backups">
-            <h2
-              id="delete-backups"
-              className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mb-3"
-            >
-              {t('backupTitle')}
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              {t('backupBody')}
-            </p>
-          </section>
+            <Section id="delete-backups" index={4} title={t('backupTitle')}>
+              <p className="m-0 max-w-prose">{t('backupBody')}</p>
+            </Section>
 
-          <section aria-labelledby="delete-export">
-            <h2
-              id="delete-export"
-              className="text-xl font-bold text-emerald-600 dark:text-emerald-400 mb-3"
-            >
-              {t('exportInfoTitle')}
-            </h2>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              {t('exportInfoBody')}
-            </p>
-          </section>
-        </div>
-
-        <div className="mt-8">
-          <Link href="/" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700">
-            &larr; {t('backHome')}
-          </Link>
-        </div>
+            <Section id="delete-export" index={5} title={t('exportInfoTitle')}>
+              <p className="m-0 max-w-prose">{t('exportInfoBody')}</p>
+            </Section>
+          </div>
+        </article>
       </div>
     </div>
   );

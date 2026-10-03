@@ -289,7 +289,7 @@
     "list": {
       "count": "{count, plural, =0 {Nessun animale} one {# animale} other {# animali}}",
       "description": "Ogni animale ha il suo libretto, i suoi promemoria e la scheda della sua specie.",
-      "emptyBenefit": "Aggiunga il suo primo animale: libretto, promemoria e riferimenti della specie sono pronti in tre passaggi.",
+      "emptyBenefit": "Aggiungi il tuo primo animale: libretto, promemoria e riferimenti della specie sono pronti in tre passaggi.",
       "routines": "{count, plural, one {# routine} other {# routine}}"
     },
     "sheet": {
@@ -332,7 +332,7 @@
       "measurementsList": "Storico delle pesate",
       "weightHint": "In chilogrammi: 250 g = 0,25.",
       "vaccinationsBenefit": "Annoti la data e il prossimo richiamo: Captivia glielo segnala con un mese di anticipo.",
-      "vetBenefit": "Aggiunga la data e il veterinario: un promemoria arriva 7 giorni prima e poi il giorno prima.",
+      "vetBenefit": "Aggiungi la data e il veterinario: un promemoria arriva 7 giorni prima e poi il giorno prima.",
       "healthBenefit": "Interventi, anamnesi, alimentazione particolare: lo storico che il veterinario le chiederà.",
       "routinesBenefit": "Pasti, pulizia, UVB: imposti l'ora una volta, poi ci pensa Captivia a ricordarglielo.",
       "breedingBenefit": "Calori, accoppiamenti, nascite: conservi le date esatte di ogni ciclo.",
@@ -492,7 +492,6 @@
     "terms": "Termini di utilizzo",
     "transparency": "Trasparenza e affiliazione",
     "accountDeletion": "Elimina il mio account",
-    "amazonAssociate": "In qualità di Affiliato Amazon, Captivia riceve un guadagno dagli acquisti idonei.",
     "legalNotice": "Note legali",
     "navLabel": "Informazioni legali",
     "sources": "Fonti e licenze",
@@ -530,7 +529,7 @@
     "progressBarLabel": "Progresso verso il prossimo grado",
     "progressToNext": "verso il prossimo grado",
     "remindersToday": "Promemoria di oggi",
-    "routinesCreateReminders": "Questi promemoria derivano dalle tue routine (animali) e dai tuoi tipi di notifiche. Puoi riceverli sul telefono o via email: Impostazioni → Notifiche.",
+    "routinesCreateReminders": "Questi promemoria arrivano dalle routine dei tuoi animali e dai tuoi promemoria personali. Li ricevi sul telefono o via e-mail, secondo le impostazioni di «Promemoria e notifiche».",
     "silver": "Argento",
     "skipped": "Rinviato",
     "title": "Il tuo grado",
@@ -1125,7 +1124,8 @@
       "taxonomy": "Classificazione",
       "photo": "Foto",
       "viaGbif": "tramite GBIF",
-      "references": "Riferimenti"
+      "references": "Riferimenti",
+      "pubmed": "Letteratura scientifica"
     },
     "values": {
       "diet": {
@@ -1192,7 +1192,9 @@
         "pulverisateur": "Nebulizzatore",
         "filtration": "Filtrazione"
       }
-    }
+    },
+    "pubmedNote": "Articoli da PubMed (NCBI), in inglese",
+    "reviewedOn": "Scheda verificata il {date}"
   },
   "store": {
     "allCategories": "Tutti i tipi",
@@ -1209,7 +1211,6 @@
     "categoryInsect": "Insetti",
     "categoryMammal": "Mammiferi",
     "categoryReptile": "Rettili",
-    "productLinksNotice": "I link ai prodotti possono essere link di affiliazione.",
     "pageTitle": "Negozi partner",
     "lead": "Negozi scelti per l’alimentazione e l’attrezzatura dei tuoi animali.",
     "loadError": "Non è stato possibile caricare i negozi.",
@@ -1253,10 +1254,10 @@
   },
   "transparency": {
     "affiliateIndependence": "I consigli su accessori e alimentazione dipendono dalle esigenze della specie, non dall'importo delle commissioni.",
-    "affiliateLabelled": "I link di affiliazione sono indicati dalla dicitura «Link di affiliazione» o da un avviso posto nelle vicinanze.",
-    "affiliatePartners": "Partner al lancio: Amazon (amazon.fr). I siti partner sono elencati nel <link>Negozio</link>.",
+    "affiliateLabelled": "Se vengono proposti link di affiliazione, sono indicati dalla dicitura «Link di affiliazione» o da un avviso vicino, e il programma interessato è indicato.",
+    "affiliatePartners": "Oggi non viene mostrato alcun link di affiliazione. I negozi partner, se presenti, sono elencati nel <link>Negozio</link>.",
     "affiliateSamePrice": "Il prezzo è lo stesso, che tu usi il nostro link o no.",
-    "affiliateTitle": "I nostri link di affiliazione",
+    "affiliateTitle": "Link dei partner",
     "backHome": "Torna alla home",
     "contactBody": "Una domanda sul nostro modello economico, sull'affiliazione o sui tuoi dati? Scrivici:",
     "contactTitle": "Contatti",
@@ -1267,14 +1268,14 @@
     "dataNoTrackers": "Nessun cookie pubblicitario né strumento di misurazione del pubblico di terze parti: si usano solo strumenti strettamente necessari (accesso, lingua).",
     "dataPrivate": "Le schede dei tuoi animali sono private per impostazione predefinita. La condivisione pubblica di un animale è facoltativa: la attivi tu e puoi disattivarla in qualsiasi momento.",
     "dataTitle": "I tuoi dati",
-    "intro": "Come viene finanziato Captivia, come funzionano i nostri link di affiliazione e cosa facciamo — e non facciamo — dei tuoi dati.",
+    "intro": "Come viene finanziato Captivia, come verrebbero indicati eventuali link dei partner e cosa facciamo — e non facciamo — dei tuoi dati.",
     "metaDescription": "Come viene finanziato Captivia, come funzionano i suoi link di affiliazione e cosa fa dei tuoi dati.",
     "missionBody": "Captivia aiuta i proprietari di animali, compresi gli animali esotici, a conoscere e curare meglio i propri animali grazie a informazioni provenienti da fonti aperte. Queste informazioni non sostituiscono il parere di un veterinario.",
     "missionTitle": "La nostra missione",
-    "modelAffiliation": "l'affiliazione: alcuni link verso siti di vendita, principalmente Amazon, ci fanno guadagnare una commissione quando acquisti tramite essi, senza costi aggiuntivi per te;",
+    "modelAffiliation": "se del caso, l'affiliazione: se vengono proposti link verso siti di vendita, possono farci guadagnare una commissione quando acquisti tramite essi, senza costi aggiuntivi per te;",
     "modelAlwaysFree": "L'esportazione dei tuoi dati e l'eliminazione del tuo account sono e resteranno gratuite.",
     "modelIntro": "La consultazione delle schede delle specie è gratuita. Il servizio è finanziato da:",
-    "modelSubscription": "un abbonamento facoltativo, in arrivo: non è ancora in vendita. Prezzo e condizioni (rinnovo, disdetta, diritto di recesso) saranno mostrati prima di qualsiasi pagamento.",
+    "modelSubscription": "l'abbonamento Premium, facoltativo, per seguire più animali: si sottoscrive nell'app mobile, e prezzo e condizioni (rinnovo, disdetta, diritto di recesso) sono mostrati prima di qualsiasi pagamento.",
     "modelTitle": "Il nostro modello economico",
     "openDataBody": "Le schede si basano su GBIF, Wikipedia, Wikidata, Species+ (CITES), PubMed, Open Pet Food Facts, iNaturalist ed Encyclopedia of Life. Queste fonti non ricevono da noi alcun dato personale.",
     "openDataMore": "Vedi fonti e licenze",
@@ -1392,7 +1393,7 @@
     "bannerDismiss": "Nascondi",
     "pageTitle": "Verifica del tuo indirizzo e-mail",
     "verifying": "Verifica in corso…",
-    "success": "Il tuo indirizzo e-mail è verificato. Grazie!",
+    "success": "Il tuo indirizzo e-mail è verificato.",
     "invalid": "Questo link di verifica non è valido o è scaduto. Accedi per riceverne uno nuovo.",
     "missingToken": "Link di verifica incompleto.",
     "goToApp": "Vai ai miei animali",
@@ -1458,7 +1459,7 @@
     "allDayShort": "In giornata",
     "dateLabel": "Data di oggi",
     "loading": "Stiamo preparando la sua giornata…",
-    "loadError": "Non è stato possibile caricare i suoi animali. Controlli la connessione e riprovi.",
+    "loadError": "Non è stato possibile caricare i tuoi animali. Controlla la connessione e riprova.",
     "pillDue": "{count, plural, one {cura oggi} other {cure oggi}}",
     "pillOverdue": "{count, plural, one {in ritardo} other {in ritardo}}",
     "pillAppointments": "{count, plural, one {appuntamento questa settimana} other {appuntamenti questa settimana}}",
@@ -1517,14 +1518,14 @@
     "tipLabel": "Buono a sapersi",
     "tipSource": "Scheda {species}",
     "tipPrevention": "{topic}: {text}",
-    "tipHabitat": "Mantenga il suo ambiente tra {temperature}, con un'umidità del {humidity}.",
+    "tipHabitat": "Mantieni il suo ambiente a {temperature}, con un'umidità del {humidity}.",
     "tipTemperature": "Temperatura consigliata per il suo ambiente: {temperature}.",
     "tipHumidity": "Umidità consigliata per il suo ambiente: {humidity}.",
     "routinesAdded": "{count, plural, one {# cura aggiunta al suo libretto} other {# cure aggiunte al suo libretto}}"
   },
   "onboarding": {
     "title": "Il suo libretto, pronto in tre passaggi",
-    "text": "Scelga la specie e gli dia un nome: Captivia prepara le cure di base, i promemoria e i riferimenti della scheda della sua specie.",
+    "text": "Scegli la specie e dagli un nome: Captivia prepara le cure di base, i promemoria e i riferimenti della scheda della sua specie.",
     "stepSpecies": "Specie",
     "stepIdentity": "Nome e nascita",
     "stepCare": "Prime cure",
@@ -1540,7 +1541,7 @@
     "identityText": "Potrà modificare tutto in seguito. Specie:",
     "photoHint": "Oppure l'indirizzo di una foto già online.",
     "careTitle": "Le cure di base di {name}",
-    "careText": "Le routine consigliate per la sua specie, già impostate. Selezioni quelle da seguire: Captivia gliele ricorda all'ora giusta.",
+    "careText": "Le routine consigliate per la sua specie, già impostate. Seleziona quelle da seguire: Captivia te le ricorda all'ora giusta.",
     "careCount": "{checked} su {total} selezionate",
     "careLater": "Più tardi",
     "perksTitle": "Cosa la aspetta",

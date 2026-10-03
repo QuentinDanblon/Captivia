@@ -152,11 +152,19 @@ describe('mesures, âge, espèce', () => {
   it('conseil : la prévention sourcée, sinon les repères d’ambiance, sinon rien', () => {
     const health = { editorial: { diseases: [{ name: 'Stomatite', prevention: ' Hygiène du terrarium. ' }] } };
     expect(speciesTip(null, health)).toEqual({ kind: 'prevention', topic: 'Stomatite', text: 'Hygiène du terrarium.' });
-    expect(speciesTip({ habitat: { temperature: '28-32 °C', humidity: '60-70 %' } }, { editorial: { diseases: [] } })).toEqual({
+    // Champs réels de l'API (ligne SpeciesHabitat) : plages numériques, mises en forme dans la locale.
+    const habitat = { tempMin: 26, tempMax: 32.5, humidityMin: 60, humidityMax: 70 };
+    expect(speciesTip({ habitat }, { editorial: { diseases: [] } }, 'fr')).toEqual({
       kind: 'habitat',
-      temperature: '28-32 °C',
-      humidity: '60-70 %',
+      temperature: '26–32,5\u00a0°C',
+      humidity: '60–70\u00a0%',
     });
+    expect(speciesTip({ habitat: { tempMin: 24, tempMax: 24, humidityMin: null, humidityMax: null } }, null, 'en')).toEqual({
+      kind: 'habitat',
+      temperature: '24\u00a0°C',
+      humidity: undefined,
+    });
+    expect(speciesTip({ habitat: { tempMin: null, tempMax: null } }, null)).toBeNull();
     expect(speciesTip({}, null)).toBeNull();
   });
 });

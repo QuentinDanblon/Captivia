@@ -5,7 +5,7 @@ import Image from 'next/image';
 import AnimalSilhouette, { type SilhouetteKind } from './AnimalSilhouette';
 import { cx } from './cx';
 
-/** Crédit obligatoire de toute photo (cf. public/images/CREDITS.md et DESIGN.md § Imagerie). */
+/** Crédit obligatoire de toute photo (cf. public/images/CREDITS.md et DESIGN.md § 7). */
 export interface PhotoCredit {
   /** Auteur tel que demandé par la licence (« Jane Doe », « USFWS »). */
   author: string;
@@ -70,7 +70,7 @@ interface FigureWithPhoto extends FigureBase {
 
 /**
  * Photo prise par l'utilisateur (son animal) : pas de licence à citer, mais un `alt` obligatoire.
- * Seule exception au crédit obligatoire (DESIGN.md § 9, lot 3).
+ * Seule exception au crédit obligatoire (DESIGN.md § 10.3).
  */
 interface FigureUserPhoto extends FigureBase {
   src: string;

@@ -69,7 +69,7 @@ function ResetPasswordForm() {
 
   if (!token) {
     return (
-      <AuthFrame title={t('auth.resetInvalidHeading')}>
+      <AuthFrame title={t('auth.resetInvalidHeading')} photo="rabbitStraw">
         <div className="grid gap-6">
           <Alert severity="urgent" title={t('auth.resetPasswordInvalidLink')} />
           <Link href="/forgot-password" className={buttonClasses({ size: 'lg', fullWidth: true })}>
@@ -81,7 +81,7 @@ function ResetPasswordForm() {
   }
 
   return (
-    <AuthFrame title={t('auth.resetHeading')} lead={t('auth.resetPasswordDescription')}>
+    <AuthFrame title={t('auth.resetHeading')} lead={t('auth.resetPasswordDescription')} photo="rabbitStraw">
       <div className="grid gap-8">
         <form onSubmit={handleSubmit} className="grid gap-5">
           <Field label={t('auth.newPasswordLabel')} id="password">

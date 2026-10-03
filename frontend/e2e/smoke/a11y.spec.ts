@@ -1,4 +1,4 @@
-import { expect, runAxe, signIn, test, fixture, type MockAnimal } from '../support/test';
+import { expect, runAxe, signIn, signInAsGuest, test, fixture, type MockAnimal } from '../support/test';
 
 /** Parcours publics : accessibles sans session. */
 const PUBLIC_PAGES = [
@@ -18,6 +18,7 @@ const PUBLIC_PAGES = [
   '/transparency',
   '/suppression-compte',
   '/page-introuvable-axe',
+  '/animal-public/kaa-e2e',
 ];
 
 /** Parcours authentifiés. */
@@ -32,33 +33,37 @@ const PRIVATE_PAGES = [
   '/parametres/grade',
   '/parametres/abonnement',
   '/magasin',
+  '/mes-animaux/animal-e2e-1/carnet',
 ];
+
+/** Parcours invité (essai sans compte) : premier animal, puis sauvegarde des données. */
+const GUEST_PAGES = ['/mes-animaux', '/sauvegarder'];
 
 /** Rendu stable : le contenu principal de chaque page est présent avant l'analyse. */
 async function waitForContent(page: import('@playwright/test').Page) {
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 }
 
-async function expectNoCriticalViolations(page: import('@playwright/test').Page, label: string) {
+/** Échec sur toute violation « serious » ou « critical » ; les mineures restent annotées dans le rapport. */
+async function expectNoSeriousViolations(page: import('@playwright/test').Page, label: string) {
   const violations = await runAxe(page);
-  const critical = violations.filter((v) => v.impact === 'critical');
-  // Les violations moins graves restent visibles dans le rapport sans faire échouer le smoke.
-  const others = violations.filter((v) => v.impact !== 'critical');
+  const blocking = violations.filter((v) => v.impact === 'critical' || v.impact === 'serious');
+  const others = violations.filter((v) => v.impact !== 'critical' && v.impact !== 'serious');
   if (others.length > 0) {
     test.info().annotations.push({
       type: 'axe',
       description: `${label} : ${others.map((v) => `${v.id} (${v.impact})`).join(', ')}`,
     });
   }
-  expect(critical, `${label} : violations axe critiques`).toEqual([]);
+  expect(blocking, `${label} : violations axe sérieuses ou critiques`).toEqual([]);
 }
 
 test.describe('Accessibilité (axe-core)', () => {
   for (const path of PUBLIC_PAGES) {
-    test(`${path} : aucune violation critique`, async ({ page }) => {
+    test(`${path} : aucune violation sérieuse`, async ({ page }) => {
       await page.goto(path);
       await waitForContent(page);
-      await expectNoCriticalViolations(page, path);
+      await expectNoSeriousViolations(page, path);
     });
   }
 
@@ -69,10 +74,48 @@ test.describe('Accessibilité (axe-core)', () => {
     });
 
     for (const path of PRIVATE_PAGES) {
-      test(`${path} : aucune violation critique`, async ({ page }) => {
+      test(`${path} : aucune violation sérieuse`, async ({ page }) => {
         await page.goto(path);
         await waitForContent(page);
-        await expectNoCriticalViolations(page, path);
+        await expectNoSeriousViolations(page, path);
+      });
+    }
+  });
+
+  test.describe('invité', () => {
+    test.beforeEach(async ({ page, api }) => {
+      await signInAsGuest(page);
+      api.animals = [];
+    });
+
+    for (const path of GUEST_PAGES) {
+      test(`${path} (invité) : aucune violation sérieuse`, async ({ page }) => {
+        await page.goto(path);
+        await waitForContent(page);
+        await expectNoSeriousViolations(page, `${path} (invité)`);
+      });
+    }
+  });
+
+  // Contrastes en sombre : les jetons sont redéfinis sous prefers-color-scheme, on vérifie l'encre.
+  test.describe('sombre', () => {
+    test.use({ colorScheme: 'dark' });
+
+    for (const path of ['/', '/login', '/species/2435099', '/mentions-legales', '/animal-public/kaa-e2e']) {
+      test(`${path} (sombre) : aucune violation sérieuse`, async ({ page }) => {
+        await page.goto(path);
+        await waitForContent(page);
+        await expectNoSeriousViolations(page, `${path} (sombre)`);
+      });
+    }
+
+    for (const path of ['/mes-animaux', '/mes-animaux/animal-e2e-1', '/agenda', '/parametres/abonnement']) {
+      test(`${path} (sombre, connecté) : aucune violation sérieuse`, async ({ page, api }) => {
+        await signIn(page);
+        api.animals = [fixture<MockAnimal>('animal')];
+        await page.goto(path);
+        await waitForContent(page);
+        await expectNoSeriousViolations(page, `${path} (sombre)`);
       });
     }
   });

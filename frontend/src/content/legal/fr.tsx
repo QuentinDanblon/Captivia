@@ -106,8 +106,9 @@ export function buildFrContent(locale: string): LegalContent {
           title: 'Affiliation',
           body: (
             <P>
-              En tant que Partenaire Amazon, {LEGAL.serviceName} réalise un bénéfice sur les achats remplissant les
-              conditions requises. Les liens d&apos;affiliation sont signalés comme tels ; voir la page{' '}
+              {LEGAL.serviceName} n&apos;affiche aujourd&apos;hui aucun lien d&apos;affiliation. Si des liens
+              partenaires vers des sites marchands sont proposés, ils sont signalés comme tels, et le programme
+              d&apos;affiliation concerné est nommé à côté ; voir la page{' '}
               {L(LEGAL_ROUTES.transparency, 'Transparence et affiliation')}.
             </P>
           ),
@@ -274,8 +275,8 @@ export function buildFrContent(locale: string): LegalContent {
                 leur communique alors votre adresse IP.
               </P>
               <P>
-                Lorsque vous suivez un lien d&apos;affiliation, vous quittez {LEGAL.serviceName} : le site du
-                marchand (par exemple Amazon) applique sa propre politique de confidentialité et de cookies. Nous ne
+                Si vous suivez un lien vers un site marchand partenaire, vous quittez {LEGAL.serviceName} : ce site
+                applique sa propre politique de confidentialité et de cookies. Nous ne
                 lui transmettons aucune donnée vous concernant ; le lien contient seulement notre identifiant de
                 partenaire.
               </P>
@@ -430,7 +431,10 @@ export function buildFrContent(locale: string): LegalContent {
               <li>
                 Avec un compte : enregistrement de vos animaux, carnet de santé, routines, rappels et notifications.
               </li>
-              <li>Un magasin présentant des liens vers des sites marchands partenaires (liens d&apos;affiliation).</li>
+              <li>
+                Un magasin pouvant présenter des liens vers des sites marchands partenaires (liens d&apos;affiliation,
+                signalés comme tels).
+              </li>
               <li>Le partage public facultatif de la fiche d&apos;un animal.</li>
             </UL>
           ),
@@ -513,8 +517,8 @@ export function buildFrContent(locale: string): LegalContent {
           title: '8. Liens d’affiliation et sites tiers',
           body: (
             <P>
-              En tant que Partenaire Amazon, {LEGAL.serviceName} réalise un bénéfice sur les achats remplissant les
-              conditions requises. Le prix payé reste identique pour vous. Les achats sont conclus directement avec
+              Si des liens partenaires vers des sites marchands sont proposés, ils sont signalés comme tels et
+              peuvent rapporter une commission à {LEGAL.serviceName} ; le prix payé reste identique pour vous. Les achats sont conclus directement avec
               le marchand, selon ses propres conditions ; {LEGAL.serviceName} n&apos;est pas partie à cette vente.
               Voir la page {L(LEGAL_ROUTES.transparency, 'Transparence et affiliation')}.
             </P>

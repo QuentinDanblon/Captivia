@@ -57,7 +57,8 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
   const pathname = usePathname() ?? '/';
   const { user, isLoading, logout } = useAuth();
   const items = destinations.slice(0, 5);
-  const initials = user?.email?.slice(0, 2).toUpperCase() || '··';
+  // Invité (sans e-mail) : pictogramme de profil au trait plutôt que des initiales factices.
+  const initials = user?.email ? user.email.slice(0, 2).toUpperCase() : <CircleUserRound className="size-4" strokeWidth={1.5} />;
   // Session invité (sans e-mail) : même emplacement que sans session, mais l'invitation mène à la
   // conversion sans perte de données, et aucune déconnexion n'est proposée (elle les perdrait).
   const guestSession = user?.isGuest === true;

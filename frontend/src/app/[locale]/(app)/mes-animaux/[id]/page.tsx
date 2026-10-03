@@ -167,6 +167,9 @@ export default function AnimalDetailPage({
     if (user && token && resolvedParams) {
       fetchAnimalData();
     }
+    // Chargement à l'ouverture et au changement de session ou d'animal seulement : fetchAnimalData
+    // est recréée à chaque rendu (pas de useCallback), l'ajouter relancerait la requête en boucle.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, token, resolvedParams]);
 
   // Garde « cancelled » : chaque chargement porte un numéro ; un chargement dépassé (autre animal,
@@ -525,7 +528,7 @@ export default function AnimalDetailPage({
     },
     now,
   ).filter((a) => a.level !== 'info' || a.kind === 'treatment');
-  const tip = speciesTip(sheet, speciesHealth);
+  const tip = speciesTip(sheet, speciesHealth, resolvedParams.locale);
   const locale = resolvedParams.locale;
   const timeline = sheetTimeline({ vetAppointments, vaccinations, measurements, healthRecords, medications }, now, (kg) => formatWeight(kg, locale));
   const dateFormat = new Intl.DateTimeFormat(resolvedParams.locale, { day: 'numeric', month: 'short', year: 'numeric' });

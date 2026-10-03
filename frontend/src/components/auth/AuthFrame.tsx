@@ -2,7 +2,9 @@
 
 import { useId, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
-import { AnimalSilhouette, cx, type SilhouetteKind } from '@/components/ui';
+import { cx } from '@/components/ui';
+import { CommonsPhoto } from '@/components/CommonsPhoto';
+import type { PhotoKey } from '@/content/photos';
 
 export interface AuthFrameProps {
   /** Titre de la page (h1, Fraunces). */
@@ -11,18 +13,20 @@ export interface AuthFrameProps {
   lead?: ReactNode;
   /** Formulaire, messages, liens. */
   children: ReactNode;
-  /** Panneau de droite (bureau) ; défaut : la planche Captivia (`AuthPlate`). */
+  /** Panneau de droite (bureau) ; défaut : la planche Captivia (`AuthPlate`) ouverte par `photo`. */
   aside?: ReactNode;
+  /** Photo Commons de la planche par défaut (`content/photos.ts`) : une par écran de compte. */
+  photo?: PhotoKey;
   className?: string;
 }
 
 /**
  * Habillage des écrans de compte (connexion, inscription, mot de passe, vérification d'e-mail,
  * passage invité → compte) : le formulaire sur le papier, à gauche ; à partir de 1024 px, une
- * planche texturée à droite (pas de photo : aucune n'est encore sous licence dans
- * `public/images/`, et jamais d'image générée — DESIGN.md § 6). En mobile, le formulaire seul.
+ * planche texturée à droite, ouverte par une vraie photo Wikimedia Commons créditée (`Figure`,
+ * crédit en légende — DESIGN.md § 6.6 et § 7). En mobile, le formulaire seul.
  */
-export function AuthFrame({ title, lead, children, aside, className }: AuthFrameProps) {
+export function AuthFrame({ title, lead, children, aside, photo = 'catStraw', className }: AuthFrameProps) {
   const headingId = useId();
   return (
     <div className={cx('cv-container py-8 sm:py-12 lg:py-16', className)}>
@@ -36,25 +40,18 @@ export function AuthFrame({ title, lead, children, aside, className }: AuthFrame
           </header>
           {children}
         </section>
-        <div className="hidden min-w-0 lg:col-span-6 lg:col-start-7 lg:flex">{aside ?? <AuthPlate />}</div>
+        <div className="hidden min-w-0 lg:col-span-6 lg:col-start-7 lg:flex">{aside ?? <AuthPlate photo={photo} />}</div>
       </div>
     </div>
   );
 }
-
-const PLATE: { kind: SilhouetteKind; labelKey: string }[] = [
-  { kind: 'reptile', labelKey: 'store.categoryReptile' },
-  { kind: 'bird', labelKey: 'store.categoryBird' },
-  { kind: 'mammal', labelKey: 'store.categoryMammal' },
-  { kind: 'amphibian', labelKey: 'store.categoryAmphibian' },
-];
 
 /** Cadre commun aux panneaux de droite : papier creusé, grain, filet. */
 export function AuthPanel({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <aside
       className={cx(
-        'cv-texture flex w-full flex-col justify-between gap-10 overflow-hidden rounded-card border border-line bg-sunken p-10 text-ink',
+        'cv-texture flex w-full flex-col gap-8 overflow-hidden rounded-card border border-line bg-sunken p-8 text-ink xl:p-10',
         className,
       )}
     >
@@ -64,31 +61,15 @@ export function AuthPanel({ children, className }: { children: ReactNode; classN
 }
 
 /**
- * Planche « naturaliste » : quatre silhouettes au trait légendées comme des figures, puis trois
- * raisons de tenir le carnet. Purement illustrative ; les textes restent lisibles (pas d'aria-hidden).
+ * Planche de droite : une photo d'animal (Commons, créditée), puis trois raisons de tenir le
+ * carnet, numérotées en mono. Les textes restent lisibles (pas d'aria-hidden).
  */
-export function AuthPlate() {
+export function AuthPlate({ photo = 'catStraw' }: { photo?: PhotoKey }) {
   const t = useTranslations();
   return (
     <AuthPanel>
-      <div className="flex items-baseline justify-between border-b border-line-strong pb-3 font-mono text-meta text-ink-2" aria-hidden="true">
-        <span>Pl. I</span>
-        <span>{t('common.appName')}</span>
-      </div>
-
-      <ul className="m-0 grid list-none grid-cols-2 gap-x-8 gap-y-10 p-0" aria-label={t('authFrame.plateLabel')}>
-        {PLATE.map(({ kind, labelKey }, index) => (
-          <li key={kind} className="grid justify-items-center gap-3">
-            <AnimalSilhouette kind={kind} size={104} className="text-ink-3" />
-            <span className="font-mono text-meta text-ink-2">
-              <span aria-hidden="true">fig. {index + 1} · </span>
-              {t(labelKey)}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      <div className="grid gap-5">
+      <CommonsPhoto photo={photo} />
+      <div className="mt-auto grid gap-5">
         <p className="m-0 font-display text-h3 text-ink">{t('authFrame.title')}</p>
         <ol className="m-0 grid list-none gap-0 p-0">
           {[1, 2, 3].map((n) => (

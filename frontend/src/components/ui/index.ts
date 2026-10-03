@@ -1,6 +1,6 @@
 /*
  * Bibliothèque d'interface Captivia (« carnet de terrain »). Contrat : frontend/docs/DESIGN.md.
- * Les composants n'emploient que les jetons sémantiques (bg-paper, text-ink…) : pas de `dark:`.
+ * Les composants n'emploient que les jetons sémantiques (bg-paper, text-ink…) : pas de variante sombre Tailwind.
  */
 export { default as Button, buttonClasses } from './Button';
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonStyleOptions } from './Button';

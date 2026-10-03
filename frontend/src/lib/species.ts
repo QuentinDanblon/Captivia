@@ -40,7 +40,7 @@ export interface SpeciesPhoto {
 const CC_VERSION = /\b([1-4]\.0)\b/;
 
 /**
- * Reconnaît une licence libre compatible avec l'affichage et le recadrage (DESIGN.md § 6) :
+ * Reconnaît une licence libre compatible avec l'affichage et le recadrage (DESIGN.md § 7) :
  * CC0, marque du domaine public, CC BY et CC BY-SA. Refuse NC, ND, « tous droits réservés » et
  * toute valeur inconnue. Accepte les URL Creative Commons (forme habituelle chez GBIF) comme les
  * libellés courts (« CC-BY-SA 4.0 », « CC0 »).

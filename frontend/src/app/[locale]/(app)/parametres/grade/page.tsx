@@ -52,7 +52,7 @@ type NotificationEvent = {
 
 /**
  * Sceau de grade au trait : deux cercles et cinq losanges, pleins jusqu'au rang atteint.
- * Remplace les médailles en dégradé (pas de doré ni de dégradé, DESIGN.md § 7).
+ * Remplace les médailles en dégradé (pas de doré ni de dégradé, DESIGN.md § 8).
  */
 function GradeSeal({ level, size = 88, className }: { level: number; size?: number; className?: string }) {
   return (

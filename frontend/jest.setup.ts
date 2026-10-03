@@ -28,6 +28,9 @@ jest.mock('next/navigation', () => ({
 jest.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
   useLocale: () => 'fr',
+  useFormatter: () => ({
+    dateTime: (date: Date, options?: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat('fr', options).format(date),
+  }),
   NextIntlClientProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
 

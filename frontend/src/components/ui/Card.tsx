@@ -38,7 +38,7 @@ const TONE = {
 
 /**
  * Carte du carnet : surface, filet fin, rayon 10 px, aucune ombre.
- * Remplace `bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6` des pages historiques.
+ * Remplace les anciennes cartes « fond blanc, grand rayon, ombre portée » des pages historiques.
  *
  * @example
  * <Card as="section" title="Traitements" titleId="traitements" actions={<Button variant="quiet" size="sm">Ajouter</Button>}>

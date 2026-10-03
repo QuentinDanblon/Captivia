@@ -8,7 +8,7 @@ import ErrorBoundary from '@/components/ui/ErrorBoundary';
 type Props = { children: ReactNode; params: Promise<{ locale: string }> };
 
 /**
- * Couche marketing (DESIGN.md § 8.1) : landing et pages légales. En-tête et pied du site,
+ * Couche marketing (DESIGN.md § 6.1) : landing et pages légales. En-tête et pied du site,
  * contenu dans `<main id="main-content">` (cible du lien d'évitement de l'en-tête).
  * Les pages de l'app n'utilisent pas ce cadre.
  */

@@ -67,7 +67,7 @@ test.describe('Mode invité', () => {
     await expect(page.getByText('Kaa et son carnet seront rattachés à votre compte.')).toBeVisible();
 
     const fill = async (email: string) => {
-      await page.getByRole('textbox', { name: 'Email' }).fill(email);
+      await page.getByRole('textbox', { name: 'E-mail' }).fill(email);
       await page.getByRole('textbox', { name: 'Mot de passe', exact: true }).fill(VALID_PASSWORD);
       await page.getByRole('textbox', { name: 'Confirmer le mot de passe' }).fill(VALID_PASSWORD);
     };
@@ -75,7 +75,7 @@ test.describe('Mode invité', () => {
     // Consentements obligatoires : aucun appel sans eux.
     await fill('kaa@captivia.test');
     await page.getByRole('button', { name: 'Créer mon compte' }).click();
-    await expect(page.getByText(/accepter les conditions d'utilisation/)).toBeVisible();
+    await expect(page.getByText(/acceptez les conditions d'utilisation/)).toBeVisible();
     expect(api.callsTo('POST', '/auth/upgrade')).toHaveLength(0);
 
     await page.getByRole('checkbox', { name: /conditions générales d'utilisation/ }).check();

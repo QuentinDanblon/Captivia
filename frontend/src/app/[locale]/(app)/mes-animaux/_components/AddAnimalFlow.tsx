@@ -46,7 +46,7 @@ const ROUTINE_TYPE_KEYS: Record<string, string> = {
 const FREQUENCIES = ['daily', 'every_2_days', 'every_3_days', 'weekly', 'monthly', 'once', 'hourly', 'custom'];
 
 /**
- * Ajout d'un animal en trois étapes (DESIGN.md § 5.1, `Steps`) : l'espèce, puis le nom et la
+ * Ajout d'un animal en trois étapes (DESIGN.md § 5.11, `Steps`) : l'espèce, puis le nom et la
  * naissance, puis le premier soin (routines recommandées pour l'espèce, à cocher). Utilisé en
  * modale (« Ajouter un animal ») et en page, pour le premier animal d'un nouvel utilisateur.
  * Appels API inchangés : recherche d'espèce, création, modèles de routines, création de routines.

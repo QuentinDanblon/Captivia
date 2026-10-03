@@ -111,12 +111,19 @@ test.describe('Fiche espèce', () => {
     );
 
     // Sections, chiffres et avertissements.
-    await expect(page.getByRole('region', { name: 'Habitat' })).toContainText('28-32 °C');
+    await expect(page.getByText('Fiche vérifiée le 2 oct. 2026')).toBeVisible();
+    await expect(page.getByRole('region', { name: 'Habitat' })).toContainText('28–32 °C');
     await expect(page.getByRole('region', { name: 'Alimentation' })).toContainText('Tous les 7 à 10 jours');
     await expect(page.getByRole('region', { name: 'Comportement' })).toContainText('Solitaire : à garder seul');
     const health = page.getByRole('region', { name: 'Santé' });
     await expect(health).toContainText('ne remplacent pas un avis vétérinaire');
     await expect(health.getByRole('heading', { name: 'Stomatite infectieuse' })).toBeVisible();
+    // Références PubMed : signalées « en anglais », titre en lang="en", lien externe sans opener.
+    await expect(health).toContainText('Articles de PubMed (NCBI), en anglais');
+    const article = health.getByRole('link', { name: /Stomatitis in captive boid snakes/ });
+    await expect(article).toHaveAttribute('lang', 'en');
+    await expect(article).toHaveAttribute('rel', 'noopener noreferrer');
+    await expect(page.getByRole('region', { name: 'Sources' }).getByRole('link', { name: 'Articles de PubMed (NCBI), en anglais' })).toHaveAttribute('href', '#sante');
     const legal = page.getByRole('region', { name: 'Législation' });
     await expect(legal).toContainText('Vérifiez toujours la réglementation locale');
     await expect(legal).toContainText('Certificat de capacité requis (fixture)');

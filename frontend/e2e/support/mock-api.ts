@@ -176,6 +176,18 @@ export async function installMockApi(page: Page): Promise<MockApi> {
     if (method === 'GET' && pathname === '/equipment') return json(route, 200, fixture('equipment'));
     if (method === 'GET' && pathname.startsWith('/food/species/')) return json(route, 200, { products: [] });
 
+    // --- Page publique d'un animal (lien ou QR code partagé) ---
+    if (method === 'GET' && pathname.startsWith('/public/animal/')) {
+      return json(route, 200, {
+        name: 'Kaa',
+        species: { commonName: 'Boa constricteur', scientificName: 'Boa constrictor' },
+        sex: 'male',
+        birthYear: 2023,
+        photo: null,
+        vaccinations: [{ name: 'Vermifuge', date: '2026-07-07T00:00:00.000Z' }],
+      });
+    }
+
     // --- Authentification ---
     if (method === 'POST' && pathname === '/auth/register') {
       const { email } = (body ?? {}) as { email?: string };
@@ -238,6 +250,23 @@ export async function installMockApi(page: Page): Promise<MockApi> {
     // Agenda agrégé (tableau de bord « Aujourd'hui », page Agenda).
     if (method === 'GET' && pathname === '/users/me/agenda') {
       return json(route, 200, { from: url.searchParams.get('from'), to: url.searchParams.get('to'), items: api.agenda, truncated: false });
+    }
+    // Carnet imprimable : l'export reprend l'animal et ses sous-collections simulées.
+    const carnetMatch = /^\/users\/me\/animals\/([^/]+)\/carnet\/export$/.exec(pathname);
+    if (method === 'GET' && carnetMatch) {
+      const found = api.animals.find((a) => a.id === carnetMatch[1]);
+      if (!found) return json(route, 404, { statusCode: 404, message: 'Animal introuvable' });
+      return json(route, 200, {
+        exportedAt: new Date().toISOString(),
+        animal: found,
+        sections: {
+          healthRecords: api.collections['health-records'] ?? [],
+          measurements: api.collections.measurements ?? [],
+          vaccinations: api.collections.vaccinations ?? [],
+          medications: api.collections.medications ?? [],
+          vetAppointments: api.collections['vet-appointments'] ?? [],
+        },
+      });
     }
     if (method === 'GET' && /^\/users\/me\/animals\/[^/]+\/public-link$/.test(pathname)) {
       return json(route, 200, { enabled: false, showHealth: false, slug: null, url: null });
