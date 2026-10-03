@@ -266,13 +266,17 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
       at: at8,
       sourceUpdatedAt: routine.updatedAt,
     });
-    expect(byTitle('💊 Vermifuge (1)')?.localReminder).toEqual({
+    expect(byTitle('Vermifuge (1)')?.localReminder).toEqual({
       at: at8,
       sourceUpdatedAt: medication.updatedAt,
     });
     // L'app ne programme qu'une notification à l'heure du RDV : J-3 et 08:00 du jour partent.
-    expect(byTitle('🔔 Dr Loin (J-3)')).not.toHaveProperty('localReminder');
-    expect(byTitle('🏥 RDV Dr Jour')).not.toHaveProperty('localReminder');
+    expect(
+      byTitle('Rendez-vous vétérinaire dans 3 jours : Dr Loin'),
+    ).not.toHaveProperty('localReminder');
+    expect(
+      byTitle("Rendez-vous vétérinaire aujourd'hui : Dr Jour"),
+    ).not.toHaveProperty('localReminder');
     expect(byTitle('Bain')).not.toHaveProperty('localReminder');
 
     // Échéance du canal natif posée pour toute l'exécution.

@@ -691,7 +691,7 @@ export const api = {
   updateAnimalHealthRecord: async (
     animalId: string,
     recordId: string,
-    data: { type?: string; title?: string; date?: string; notes?: string; details?: object },
+    data: { type?: string; title?: string; date?: string; notes?: string | null; details?: object },
     token: string
   ) => {
     return request(
@@ -1124,11 +1124,8 @@ export const api = {
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-      throw new Error(
-        (data as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`
-      );
+      // ApiError : l'écran d'inscription traduit lui-même le statut (409 = adresse déjà utilisée).
+      throw new ApiError(response.status, errorMessage(data, response));
     }
     return data;
   },
@@ -1258,13 +1255,10 @@ export const api = {
   /** État du partage public d'un animal. L'URL est construite par le backend (W0-06). */
   getAnimalPublicLink: async (animalId: string, token: string, locale?: string): Promise<PublicLinkState> => {
     const qs = locale ? `?locale=${encodeURIComponent(locale)}` : '';
-    const response = await safeFetch(
+    return request<PublicLinkState>(
       `${API_URL}/users/me/animals/${animalId}/public-link${qs}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
-    return data as PublicLinkState;
   },
 
   updateAnimalPublicLink: async (
@@ -1274,7 +1268,7 @@ export const api = {
     locale?: string,
   ): Promise<PublicLinkState> => {
     const qs = locale ? `?locale=${encodeURIComponent(locale)}` : '';
-    const response = await safeFetch(
+    return request<PublicLinkState>(
       `${API_URL}/users/me/animals/${animalId}/public-link${qs}`,
       {
         method: 'PATCH',
@@ -1282,30 +1276,17 @@ export const api = {
         body: JSON.stringify(body),
       }
     );
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
-    return data as PublicLinkState;
   },
 
   regenerateAnimalPublicLink: async (animalId: string, token: string, locale?: string): Promise<PublicLinkState> => {
     const qs = locale ? `?locale=${encodeURIComponent(locale)}` : '';
-    const response = await safeFetch(
+    return request<PublicLinkState>(
       `${API_URL}/users/me/animals/${animalId}/public-link/regenerate${qs}`,
       { method: 'POST', headers: { Authorization: `Bearer ${token}` } }
     );
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error((data as { message?: string })?.message || response.statusText);
-    return data as PublicLinkState;
   },
 
   getPublicAnimal: async (slug: string): Promise<PublicAnimalProfile> => {
-    const response = await safeFetch(`${API_URL}/public/animal/${encodeURIComponent(slug)}`);
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      const err = new Error((data as { message?: string })?.message || response.statusText) as Error & { status?: number };
-      err.status = response.status;
-      throw err;
-    }
-    return data as PublicAnimalProfile;
+    return request<PublicAnimalProfile>(`${API_URL}/public/animal/${encodeURIComponent(slug)}`);
   },
 };

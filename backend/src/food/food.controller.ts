@@ -1,5 +1,8 @@
 import { Throttle } from '@nestjs/throttler';
-import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
+import {
+  EXTERNAL_API_THROTTLE,
+  SPECIES_PAGE_THROTTLE,
+} from '../config/throttle.config';
 import {
   Controller,
   Get,
@@ -95,6 +98,9 @@ export class FoodController {
   }
 
   @Get('species/:species')
+  // Onglet Alimentation de chaque fiche : limite d'une route de lecture (réponses en cache),
+  // pas celle des recherches libres (20 / min).
+  @Throttle(SPECIES_PAGE_THROTTLE)
   @ApiOperation({
     summary: 'Get food products for a species',
     description:

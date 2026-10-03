@@ -6,6 +6,7 @@ import { api, type Animal } from '@/lib/api';
 import { Button, Card, EmptyState, Field, cx } from '@/components/ui';
 import { ConfirmDelete, DeleteAction, EditAction, FormDialog, Mono, RecordItem, RecordList } from './parts';
 import { sectionErrorKey } from './sectionErrors';
+import { optionalText } from './formValues';
 import { useFormatters } from './useFormatters';
 import type { HealthRecord } from './types';
 import { localDayKey } from '@/lib/dates';
@@ -72,7 +73,8 @@ export default function HealthRecordsSection({ animal, token, healthRecords, onR
             type: healthFormType,
             title: healthFormTitle.trim(),
             date: healthFormDate,
-            notes: healthFormNotes.trim() || undefined,
+            // Notes vidées en modification : effacées (null), pas ignorées.
+            notes: optionalText(healthFormNotes, true),
           },
           token
         );
@@ -205,13 +207,13 @@ export default function HealthRecordsSection({ animal, token, healthRecords, onR
           </div>
         </fieldset>
         <Field label={t('animals.healthRecordTitle')} hint={t('animals.healthRecordTitleHelp')} required id="health-title">
-          <input type="text" value={healthFormTitle} onChange={(e) => setHealthFormTitle(e.target.value)} autoComplete="off" />
+          <input type="text" value={healthFormTitle} onChange={(e) => setHealthFormTitle(e.target.value)} autoComplete="off" maxLength={200} />
         </Field>
         <Field label={t('animals.healthRecordDate')} hint={t('animals.healthRecordDateHelp')} required id="health-date">
           <input type="date" className="font-mono" value={healthFormDate} onChange={(e) => setHealthFormDate(e.target.value)} />
         </Field>
         <Field label={t('animals.healthRecordNotes')} hint={t('animals.healthRecordNotesHelp')} id="health-notes">
-          <textarea value={healthFormNotes} onChange={(e) => setHealthFormNotes(e.target.value)} rows={3} placeholder={t('animals.healthRecordPlaceholderNotes')} />
+          <textarea value={healthFormNotes} onChange={(e) => setHealthFormNotes(e.target.value)} rows={3} placeholder={t('animals.healthRecordPlaceholderNotes')} maxLength={5000} />
         </Field>
       </FormDialog>
 

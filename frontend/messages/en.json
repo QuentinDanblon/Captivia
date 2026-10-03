@@ -68,10 +68,11 @@
     "updateError": "Could not update the public link.",
     "disabledHint": "Enable the public link to get a QR code.",
     "pageNotFound": "This page is not available or the link has been disabled.",
-    "bornIn": "Born in {year}",
+    "bornIn": "{sex, select, male {Born in {year}} female {Born in {year}} other {Born in {year}}}",
     "vaccinations": "Vaccinations",
     "noVaccinations": "No vaccinations recorded",
-    "readOnly": "public page (read-only)"
+    "readOnly": "public page (read-only)",
+    "emailNotVerified": "To share your animal's public page, first confirm your email address using the link we sent you."
   },
   "animals": {
     "addAnimal": "Add animal",
@@ -101,7 +102,9 @@
       "pregnancy": "Pregnancy",
       "premiumRequired": "Breeding tracking is available with the Premium subscription",
       "title": "Breeding",
-      "weaning": "Weaning"
+      "weaning": "Weaning",
+      "offspringRequired": "For a birth, enter the number of young.",
+      "offspringInvalid": "The number of young must be a whole number from 0 to {max}."
     },
     "carnet": {
       "export": "Export health record (JSON)",
@@ -117,7 +120,8 @@
     "edit": {
       "father": "Father",
       "group": "Group / Enclosure",
-      "mother": "Mother"
+      "mother": "Mother",
+      "saveError": "Your changes couldn't be saved. Please try again."
     },
     "editAnimal": "Edit animal",
     "editAnimalFormIntro": "Update your animal's information. All fields marked with an asterisk are required.",
@@ -169,13 +173,15 @@
       "deleteConfirm": "Delete this measurement?",
       "edit": "Edit measurement",
       "heightCm": "Height (cm)",
-      "heightInvalid": "Invalid height",
+      "heightInvalid": "Enter a height greater than zero, for example 32.5.",
       "noData": "No measurements recorded.",
       "notes": "Notes",
       "premiumRequired": "Weight and measurement tracking is available with the Premium subscription",
       "title": "Weight & measurements",
-      "weightInvalid": "Invalid weight",
-      "weightKg": "Weight (kg)"
+      "weightInvalid": "Enter a weight greater than zero, for example 4.25.",
+      "weightKg": "Weight (kg)",
+      "valueRequired": "Enter at least a weight or a height.",
+      "confirmWeight": "This weight ({next}) is very different from the last weigh-in ({previous}). Check the unit (kilograms), then save again to confirm."
     },
     "medications": {
       "active": "Active",
@@ -196,7 +202,9 @@
       "startDate": "Start date",
       "stop": "Stop",
       "title": "Treatments",
-      "unit": "Unit"
+      "unit": "Unit",
+      "intervalInvalid": "Enter an interval from 1 to 24 hours.",
+      "endBeforeStart": "The end date can't be before the start date."
     },
     "myAnimals": "My Animals",
     "nameHelp": "The name you give your animal.",
@@ -208,7 +216,9 @@
     "notes": "Notes",
     "notesHelp": "Free-form notes: temperament, specifics, reminders…",
     "notesPlaceholder": "Notes about your animal...",
-    "photoTooLarge": "The photo is larger than 10 MB. Please choose a smaller image.",
+    "photoTooLarge": "The photo is larger than 30 MB. Please choose a smaller image.",
+    "photoUnsupported": "This photo format can't be read here. Please choose a JPEG, PNG or WebP photo (on iPhone: Settings › Camera › Formats › “Most Compatible”).",
+    "photoSizeHint": "JPEG, PNG or WebP. The photo is automatically shrunk on your device before it's sent.",
     "photos": "Photos",
     "premiumMessage": "You have reached the free limit of 1 animal. Upgrade to Premium for unlimited animals and advanced features.",
     "premiumRequired": "Premium required",
@@ -246,7 +256,8 @@
       "overdue": "Booster of",
       "premiumRequired": "Vaccination record is available with the Premium subscription",
       "title": "Vaccinations",
-      "vetName": "Veterinarian"
+      "vetName": "Veterinarian",
+      "nextDueBeforeDate": "The booster date can't be before the vaccination date."
     },
     "vetAppointments": {
       "add": "Add appointment",
@@ -265,7 +276,8 @@
       "statusDone": "Done",
       "statusScheduled": "Upcoming",
       "title": "Vet appointments",
-      "vetName": "Veterinarian"
+      "vetName": "Veterinarian",
+      "statusToConfirm": "To confirm"
     },
     "viewHistory": "View history",
     "weightChartLabel": "Weight chart",
@@ -340,8 +352,14 @@
       "vaccineDue": "Booster {when}",
       "routineName": "Routine name (optional)",
       "dayOfMonth": "Day of the month (1-31)",
-      "everyHours": "Every X hours (1-24)"
-    }
+      "everyHours": "Every X hours (1-24)",
+      "everyNHours": "{count, plural, one {Every hour} other {Every # hours}}"
+    },
+    "photoUrlInsecure": "This image address isn't secure. Use an address starting with https://, or choose a file.",
+    "photoUrlInvalid": "This image address isn't valid. Paste the full address (https://…) or choose a file.",
+    "photoUpdateError": "The photo couldn't be saved. Please try again.",
+    "speciesUnavailable": "This species can't be added. Please choose another one from the list.",
+    "speciesLookupUnavailable": "We can't check this species right now. Please try again in a few minutes."
   },
   "attribution": {
     "wikipediaPrefix": "Source:",
@@ -399,7 +417,8 @@
     "rememberedPassword": "Remembered it?",
     "resetInvalidHeading": "This link is no longer valid",
     "resetRequestNew": "Get a new link",
-    "resetHeading": "Choose a new password"
+    "resetHeading": "Choose a new password",
+    "emailAlreadyUsed": "An account already exists with this email address. Log in or use a different address."
   },
   "carnetPrint": {
     "title": "Health record",
@@ -936,7 +955,12 @@
     "pushOnText": "This device receives your reminders, even when Captivia is closed.",
     "deliveryTitle": "How to reach you",
     "loadError": "Your settings could not be loaded. Reload the page to try again.",
-    "autoSaveHint": "Every change is saved automatically."
+    "autoSaveHint": "Every change is saved automatically.",
+    "timeRequired": "Set a time for each reminder: this change hasn't been saved.",
+    "dateRequired": "Choose a date for each one-time reminder: this change hasn't been saved.",
+    "labelTooLong": "A reminder name can be up to 60 characters long.",
+    "snoozeInvalid": "Enter a delay between 5 and 120 minutes.",
+    "saveInvalid": "Some settings aren't valid. Check the times and dates of your reminders."
   },
   "premiumLock": {
     "goPremium": "View Premium subscription",
@@ -944,7 +968,7 @@
     "qrCode": "Animal QR code",
     "qrCodeButton": "Create / Show QR code",
     "qrCodeError": "Unable to generate the QR code. Check your connection.",
-    "qrCodeHelp": "Scanning this QR code lets anyone view this animal's info and health record (read-only).",
+    "qrCodeHelp": "Anyone who scans this QR code sees a read-only page: the animal's name, species, sex, birth year and photo, plus its vaccinations if you choose to show them. Your notes and the rest of the health record are never shared.",
     "qrCodePremiumOnly": "Premium subscribers only.",
     "upgrade": "Upgrade to Premium to unlock the health record and save vaccines, surgeries and medical history."
   },
@@ -983,7 +1007,8 @@
     },
     "paused": "Paused",
     "toggleActive": "Toggle active/paused",
-    "namePlaceholder": "e.g. Morning meal"
+    "namePlaceholder": "e.g. Morning meal",
+    "dateRequired": "Choose the date for this one-time care task."
   },
   "settings": {
     "account": "Account",
@@ -2403,5 +2428,12 @@
         "reverse": "Decision reversed, member notified"
       }
     }
+  },
+  "apiErrors": {
+    "unavailable": "The service is temporarily unavailable. Please try again in a moment.",
+    "invalid": "Some details aren't valid. Please check the form.",
+    "notFound": "We couldn't find this item. It may have been deleted.",
+    "tooManyRequests": "Too many attempts in a row. Wait a minute before trying again.",
+    "generic": "Something went wrong. Please try again in a moment."
   }
 }

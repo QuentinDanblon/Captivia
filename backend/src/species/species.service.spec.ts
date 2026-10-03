@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SpeciesService } from './species.service';
+import { isConsistentTaxon, SpeciesService } from './species.service';
 import { SpeciesProfileService } from './species-profile.service';
 import { HttpException, NotFoundException } from '@nestjs/common';
 import { AxiosError } from 'axios';
@@ -78,6 +78,9 @@ describe('SpeciesService', () => {
       habitat: null,
       behavior: null,
     });
+    // Pas de fiche locale pour les sous-ressources ; rapprochement par nom sans résultat.
+    mockSpeciesProfileService.getScientificName.mockResolvedValue(null);
+    mockGbifService.matchSpecies.mockResolvedValue({ matchType: 'NONE' });
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         SpeciesService,
@@ -162,6 +165,35 @@ describe('SpeciesService', () => {
       );
     });
 
+    it('repli GBIF : écarte les plantes et les rangs supérieurs à l’espèce (« instrument »)', async () => {
+      mockGbifService.searchSpecies.mockResolvedValue({
+        results: [
+          {
+            key: 165689944,
+            canonicalName: 'Lagenaria siceraria',
+            kingdom: 'Plantae',
+            rank: 'SPECIES',
+          },
+          {
+            key: 9,
+            canonicalName: 'Instrumentidae',
+            kingdom: 'Animalia',
+            rank: 'FAMILY',
+          },
+          {
+            key: 9710074,
+            canonicalName: 'Niphargus cymbalus',
+            kingdom: 'Animalia',
+            rank: 'SPECIES',
+          },
+        ],
+      });
+
+      const result = await service.searchSpecies('instrument', 20, 0);
+
+      expect(result.results.map((r) => r.key)).toEqual([9710074]);
+    });
+
     it('should handle empty GBIF results', async () => {
       mockCacheService.get.mockReturnValue(null);
       mockGbifService.searchSpecies.mockResolvedValue({
@@ -219,6 +251,7 @@ describe('SpeciesService', () => {
         key: 5221172,
         kingdom: 'Animalia',
         class: 'Reptilia',
+        genus: 'Eublepharis',
         rank: 'SPECIES',
       });
 
@@ -235,7 +268,7 @@ describe('SpeciesService', () => {
         class: 'Reptilia',
         order: '',
         family: '',
-        genus: '',
+        genus: 'Eublepharis',
         status: 'UNKNOWN',
         vernacularNames: ['Gecko léopard'],
         iucnStatus: undefined,
@@ -249,8 +282,11 @@ describe('SpeciesService', () => {
         feeding: { food: 'insectes' },
         habitat: { setup: 'terrarium' },
         behavior: { activity: 'nocturne' },
+        inheritedFrom: null,
+        gbifKey: 5221172,
       });
       expect(mockGbifService.getSpecies).toHaveBeenCalledWith('5221172');
+      expect(mockGbifService.matchSpecies).not.toHaveBeenCalled();
       expect(mockCacheService.set).toHaveBeenCalledWith(
         'species:5221172',
         expect.any(Object),
@@ -551,6 +587,160 @@ describe('SpeciesService', () => {
       expect(mockCacheService.clearKey).toHaveBeenCalledWith('distributions:1');
       expect(mockCacheService.clearKey).toHaveBeenCalledWith('metrics:1');
       expect(mockCacheService.clearKey).toHaveBeenCalledWith('occurrences:1');
+    });
+  });
+
+  describe('M11 — classification GBIF cohérente avec le nom scientifique local', () => {
+    const chien = {
+      speciesId: 5287871,
+      commonNameFr: 'Chien',
+      scientificName: 'Canis familiaris',
+    };
+    const puya = {
+      key: 5287871,
+      kingdom: 'Plantae',
+      class: 'Liliopsida',
+      family: 'Bromeliaceae',
+      genus: 'Puya',
+      canonicalName: 'Puya ferruginea',
+      rank: 'SPECIES',
+      iucnRedListCategory: 'VU',
+    };
+    const canisMatch = {
+      usageKey: 6164210,
+      canonicalName: 'Canis lupus familiaris',
+      rank: 'SUBSPECIES',
+      matchType: 'EXACT',
+      kingdom: 'Animalia',
+      phylum: 'Chordata',
+      class: 'Mammalia',
+      order: 'Carnivora',
+      family: 'Canidae',
+      genus: 'Canis',
+    };
+
+    beforeEach(() => {
+      mockSpeciesProfileService.getBySpeciesId.mockResolvedValue({
+        profile: chien,
+        feeding: null,
+        habitat: null,
+        behavior: null,
+      });
+    });
+
+    it('isConsistentTaxon : règne Animalia et même genre (synonymes tolérés)', () => {
+      expect(isConsistentTaxon(puya, 'Canis familiaris')).toBe(false);
+      expect(isConsistentTaxon(canisMatch, 'Canis familiaris')).toBe(true);
+      expect(
+        isConsistentTaxon(
+          {
+            kingdom: 'Animalia',
+            genus: 'Pantherophis',
+            canonicalName: 'Elaphe obsoleta',
+          },
+          'Elaphe obsoleta',
+        ),
+      ).toBe(true);
+      expect(
+        isConsistentTaxon(
+          { kingdom: 'Animalia', genus: 'Pachydactylus' },
+          'Eublepharis macularius',
+        ),
+      ).toBe(false);
+    });
+
+    it('« Chien » : la plante de la clé locale est écartée, la classification vient du nom', async () => {
+      mockGbifService.getSpecies.mockResolvedValue(puya);
+      mockGbifService.matchSpecies.mockResolvedValue(canisMatch);
+
+      const result = await service.getSpecies('5287871');
+
+      expect(mockGbifService.matchSpecies).toHaveBeenCalledWith(
+        'Canis familiaris',
+      );
+      expect(result).toMatchObject({
+        key: 5287871,
+        kingdom: 'Animalia',
+        class: 'Mammalia',
+        family: 'Canidae',
+        genus: 'Canis',
+        gbifKey: 6164210,
+        iucnStatus: undefined,
+      });
+      expect(mockCacheService.set).toHaveBeenCalledWith(
+        'gbif-taxon:5287871',
+        { taxon: expect.objectContaining({ key: 6164210 }) },
+        expect.any(Number),
+      );
+    });
+
+    it('aucun taxon cohérent : aucune classification plutôt qu’une classification fausse', async () => {
+      mockGbifService.getSpecies.mockResolvedValue(puya);
+      mockGbifService.matchSpecies.mockResolvedValue({
+        ...canisMatch,
+        kingdom: 'Plantae',
+      });
+
+      const result = await service.getSpecies('5287871');
+
+      expect(result).toMatchObject({
+        kingdom: '',
+        class: '',
+        family: '',
+        genus: '',
+        gbifKey: null,
+      });
+    });
+
+    it('race (identifiant artificiel) : pas d’appel par clé, rapprochement par nom', async () => {
+      mockSpeciesProfileService.getBySpeciesId.mockResolvedValue({
+        profile: {
+          speciesId: 2000000110,
+          commonNameFr: 'Persan',
+          scientificName: 'Felis catus',
+        },
+        feeding: null,
+        habitat: null,
+        behavior: null,
+      });
+      mockGbifService.matchSpecies.mockResolvedValue({
+        ...canisMatch,
+        usageKey: 2435035,
+        canonicalName: 'Felis catus',
+        rank: 'SPECIES',
+        family: 'Felidae',
+        genus: 'Felis',
+      });
+
+      const result = await service.getSpecies('2000000110');
+
+      expect(mockGbifService.getSpecies).not.toHaveBeenCalled();
+      expect(result).toMatchObject({ family: 'Felidae', gbifKey: 2435035 });
+    });
+
+    it('sous-ressources (médias) : interrogées avec la clé résolue, jamais celle de la plante', async () => {
+      mockSpeciesProfileService.getScientificName.mockResolvedValue(
+        'Canis familiaris',
+      );
+      mockGbifService.getSpecies.mockResolvedValue(puya);
+      mockGbifService.matchSpecies.mockResolvedValue(canisMatch);
+      mockGbifService.getMedia.mockResolvedValue([]);
+
+      await service.getMedia('5287871');
+
+      expect(mockGbifService.getMedia).toHaveBeenCalledWith('6164210');
+    });
+
+    it('sous-ressources d’une fiche sans taxon cohérent : 404', async () => {
+      mockSpeciesProfileService.getScientificName.mockResolvedValue(
+        'Canis familiaris',
+      );
+      mockGbifService.getSpecies.mockResolvedValue(puya);
+
+      await expect(service.getMedia('5287871')).rejects.toThrow(
+        NotFoundException,
+      );
+      expect(mockGbifService.getMedia).not.toHaveBeenCalled();
     });
   });
 

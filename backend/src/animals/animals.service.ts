@@ -15,6 +15,7 @@ import {
 import { EntitlementService } from '../entitlement/entitlement.service';
 import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 import { ensureNotGuest } from '../common/guest';
+import { SpeciesCatalogService } from '../species/species-catalog.service';
 
 /**
  * D-16 : le carnet de santé est complet pour tous ; la seule limite de l'offre gratuite est le
@@ -82,100 +83,128 @@ const PARENT_SELECT = {
   photos: true,
 } as const;
 
+/** Code de la 400 « référence inconnue » (espèce ou parent supprimé entre-temps). */
+export const ANIMAL_REFERENCE_CODE = 'SPECIES_NOT_FOUND';
+
+/**
+ * Échec de clé étrangère Prisma (P2003) → 400 explicite avec un `code` (jamais une 500) :
+ * l'espèce (ou un parent) a disparu entre la vérification et l'écriture.
+ */
+function rethrowForeignKeyError(error: unknown): never {
+  if ((error as { code?: string })?.code === 'P2003') {
+    const raw = (error as { meta?: { field_name?: unknown } }).meta?.field_name;
+    const field = typeof raw === 'string' ? raw : '';
+    throw new BadRequestException({
+      statusCode: 400,
+      code: field.includes('speciesId')
+        ? ANIMAL_REFERENCE_CODE
+        : 'INVALID_REFERENCE',
+      message: 'Unknown reference.',
+    });
+  }
+  throw error;
+}
+
 @Injectable()
 export class AnimalsService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly entitlement: EntitlementService,
+    private readonly speciesCatalog: SpeciesCatalogService,
   ) {}
 
   async create(userId: string, createAnimalDto: CreateAnimalDto) {
-    return this.prisma.$transaction(async (tx) => {
-      // Verrou de ligne sur l'utilisateur : sérialise les créations concurrentes du même
-      // compte, pour que la limite « 1 animal gratuit » ne puisse pas être contournée
-      // par des requêtes parallèles (lecture du compteur + insertion non atomiques).
-      const locked = await tx.$queryRaw<{ id: string }[]>`
+    // Espèce absente du catalogue (choisie dans le repli GBIF) : fiche minimale créée depuis
+    // GBIF, ou 400 explicite avec un `code` — jamais une 500 de clé étrangère (audit 5).
+    await this.speciesCatalog.ensureSpecies(createAnimalDto.speciesId);
+    return this.prisma
+      .$transaction(async (tx) => {
+        // Verrou de ligne sur l'utilisateur : sérialise les créations concurrentes du même
+        // compte, pour que la limite « 1 animal gratuit » ne puisse pas être contournée
+        // par des requêtes parallèles (lecture du compteur + insertion non atomiques).
+        const locked = await tx.$queryRaw<{ id: string }[]>`
         SELECT "id" FROM "User" WHERE "id" = ${userId} FOR UPDATE
       `;
-      if (!locked || locked.length === 0) {
-        throw new NotFoundException('User not found');
-      }
+        if (!locked || locked.length === 0) {
+          throw new NotFoundException('User not found');
+        }
 
-      const user = await tx.user.findUnique({
-        where: { id: userId },
-        include: { _count: { select: { animals: true } } },
-      });
-
-      if (!user) {
-        throw new NotFoundException('User not found');
-      }
-
-      // Plusieurs animaux = compte ET Premium : un invité reste à 1 animal quoi qu'il arrive.
-      if (
-        user._count.animals >= FREE_ANIMAL_LIMIT &&
-        (user.isGuest ||
-          (!isEffectivelyPremium(user) &&
-            // Abonnement store (W6-08) : requête unique dans la transaction verrouillée.
-            !(await this.entitlement.isPremium(userId, tx))))
-      ) {
-        throw new ForbiddenException({
-          statusCode: 403,
-          code: ANIMAL_LIMIT_CODE,
-          message: user.isGuest
-            ? 'Free users can only have 1 animal. Create an account, then subscribe to Premium for more animals.'
-            : 'Free users can only have 1 animal. Upgrade to premium for unlimited animals.',
+        const user = await tx.user.findUnique({
+          where: { id: userId },
+          include: { _count: { select: { animals: true } } },
         });
-      }
 
-      // Module F — validation parenté (existence, même propriétaire, sexe)
-      if (
-        createAnimalDto.fatherId !== undefined &&
-        createAnimalDto.fatherId !== null
-      ) {
-        await this.validateParent(
-          tx,
-          createAnimalDto.fatherId,
-          userId,
-          null,
-          'male',
-          'father',
-        );
-      }
-      if (
-        createAnimalDto.motherId !== undefined &&
-        createAnimalDto.motherId !== null
-      ) {
-        await this.validateParent(
-          tx,
-          createAnimalDto.motherId,
-          userId,
-          null,
-          'female',
-          'mother',
-        );
-      }
+        if (!user) {
+          throw new NotFoundException('User not found');
+        }
 
-      return tx.animal.create({
-        data: {
-          userId,
-          speciesId: createAnimalDto.speciesId,
-          name: createAnimalDto.name,
-          birthDate: createAnimalDto.birthDate
-            ? new Date(createAnimalDto.birthDate)
-            : null,
-          sex: createAnimalDto.sex || null,
-          photos: createAnimalDto.photos || [],
-          notes: createAnimalDto.notes || null,
-          fatherId: createAnimalDto.fatherId ?? null,
-          motherId: createAnimalDto.motherId ?? null,
-          groupName: createAnimalDto.groupName ?? null,
-        },
-        include: {
-          father: { select: PARENT_SELECT },
-          mother: { select: PARENT_SELECT },
-        },
-      });
-    });
+        // Plusieurs animaux = compte ET Premium : un invité reste à 1 animal quoi qu'il arrive.
+        if (
+          user._count.animals >= FREE_ANIMAL_LIMIT &&
+          (user.isGuest ||
+            (!isEffectivelyPremium(user) &&
+              // Abonnement store (W6-08) : requête unique dans la transaction verrouillée.
+              !(await this.entitlement.isPremium(userId, tx))))
+        ) {
+          throw new ForbiddenException({
+            statusCode: 403,
+            code: ANIMAL_LIMIT_CODE,
+            message: user.isGuest
+              ? 'Free users can only have 1 animal. Create an account, then subscribe to Premium for more animals.'
+              : 'Free users can only have 1 animal. Upgrade to premium for unlimited animals.',
+          });
+        }
+
+        // Module F — validation parenté (existence, même propriétaire, sexe)
+        if (
+          createAnimalDto.fatherId !== undefined &&
+          createAnimalDto.fatherId !== null
+        ) {
+          await this.validateParent(
+            tx,
+            createAnimalDto.fatherId,
+            userId,
+            null,
+            'male',
+            'father',
+          );
+        }
+        if (
+          createAnimalDto.motherId !== undefined &&
+          createAnimalDto.motherId !== null
+        ) {
+          await this.validateParent(
+            tx,
+            createAnimalDto.motherId,
+            userId,
+            null,
+            'female',
+            'mother',
+          );
+        }
+
+        return tx.animal.create({
+          data: {
+            userId,
+            speciesId: createAnimalDto.speciesId,
+            name: createAnimalDto.name,
+            birthDate: createAnimalDto.birthDate
+              ? new Date(createAnimalDto.birthDate)
+              : null,
+            sex: createAnimalDto.sex || null,
+            photos: createAnimalDto.photos || [],
+            notes: createAnimalDto.notes || null,
+            fatherId: createAnimalDto.fatherId ?? null,
+            motherId: createAnimalDto.motherId ?? null,
+            groupName: createAnimalDto.groupName ?? null,
+          },
+          include: {
+            father: { select: PARENT_SELECT },
+            mother: { select: PARENT_SELECT },
+          },
+        });
+      })
+      .catch(rethrowForeignKeyError);
   }
 
   async findAll(userId: string, page?: PaginationQueryDto) {
@@ -243,6 +272,7 @@ export class AnimalsService {
     }> = {};
 
     if (updateAnimalDto.speciesId !== undefined) {
+      await this.speciesCatalog.ensureSpecies(updateAnimalDto.speciesId);
       updateData.speciesId = updateAnimalDto.speciesId;
     }
     if (updateAnimalDto.name !== undefined) {
@@ -294,14 +324,16 @@ export class AnimalsService {
       updateData.groupName = updateAnimalDto.groupName ?? null;
     }
 
-    return this.prisma.animal.update({
-      where: { id },
-      data: updateData,
-      include: {
-        father: { select: PARENT_SELECT },
-        mother: { select: PARENT_SELECT },
-      },
-    });
+    return this.prisma.animal
+      .update({
+        where: { id },
+        data: updateData,
+        include: {
+          father: { select: PARENT_SELECT },
+          mother: { select: PARENT_SELECT },
+        },
+      })
+      .catch(rethrowForeignKeyError);
   }
 
   /** Module F — portée : animaux dont fatherId ou motherId == id. */

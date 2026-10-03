@@ -102,13 +102,13 @@ describe('processImage', () => {
     expect(out.data.includes(GPS_LATITUDE)).toBe(false);
   });
 
-  it('redimensionne à 1 600 px de large au plus en gardant les proportions', async () => {
+  it('redimensionne à 1 080 px de large au plus en gardant les proportions', async () => {
     const out = await processImage(
       await jpegWithGps(2400, 1200),
       10 * 1024 * 1024,
     );
     expect(out.width).toBe(MEDIA_MAX_WIDTH);
-    expect(out.height).toBe(800);
+    expect(out.height).toBe(540);
     const meta = await sharp(out.data).metadata();
     expect(meta.width).toBe(MEDIA_MAX_WIDTH);
   });

@@ -363,6 +363,20 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
         .expect(400);
     });
 
+    it('POST medication endDate < startDate → 400 (vérifié dans le service)', () => {
+      return request(httpServer(app))
+        .post(`/users/me/animals/${animalId}/medications`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          name: 'X',
+          dose: '1',
+          frequency: 'daily',
+          startDate: todayStr(),
+          endDate: '2020-01-01',
+        })
+        .expect(400);
+    });
+
     it('POST medication name vide → 400', () => {
       return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
@@ -559,11 +573,15 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       const vetEvents = bodyOf<EventBody[]>(res).filter(
         (e) => e.type === 'vet_appointment',
       );
-      // 🏥 RDV Dr Jour (jour même) + 🔔 Dr Demain (J-1)
+      // Jour même (Dr Jour) + rappel J-1 (Dr Demain) : libellés lisibles, sans émoji.
       expect(vetEvents.length).toBe(2);
       const labels = vetEvents.map((e: { label: string }) => e.label);
-      expect(labels.some((l) => l.includes('🏥 RDV Dr Jour'))).toBe(true);
-      expect(labels.some((l) => l.includes('🔔 Dr Demain (J-1)'))).toBe(true);
+      expect(labels).toEqual(
+        expect.arrayContaining([
+          "Rendez-vous vétérinaire aujourd'hui : Dr Jour",
+          'Rendez-vous vétérinaire demain : Dr Demain',
+        ]),
+      );
       for (const ev of vetEvents) {
         expect(ev).toMatchObject({ status: 'pending', pointsAwarded: 0 });
       }

@@ -9,6 +9,7 @@ import { ConfirmDelete, DeleteAction, EditAction, FormDialog, LockedNote, Mono, 
 import { isPremiumLocked, sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
 import { localDayKey } from '@/lib/dates';
+import { optionalText } from './formValues';
 
 interface Props {
   animal: Animal;
@@ -71,17 +72,23 @@ export default function VaccinationsSection({ animal, token, vaccinations, loadi
     e.preventDefault();
     if (!animal || !token) return;
     if (!vaccinationName.trim() || !vaccinationDate) return;
+    if (vaccinationNextDue && vaccinationNextDue < vaccinationDate) {
+      setVaccinationFormError(t('animals.vaccinations.nextDueBeforeDate'));
+      return;
+    }
 
     setVaccinationSubmitting(true);
     setVaccinationFormError('');
     try {
+      // En modification, un champ vidé est effacé (null : rappel supprimé…) ; à la création, omis.
+      const editing = editingVaccinationId !== null;
       const payload = {
         name: vaccinationName.trim(),
         date: vaccinationDate,
-        nextDueDate: vaccinationNextDue || undefined,
-        batchNumber: vaccinationBatch.trim() || undefined,
-        vetName: vaccinationVet.trim() || undefined,
-        notes: vaccinationNotes.trim() || undefined,
+        nextDueDate: optionalText(vaccinationNextDue, editing),
+        batchNumber: optionalText(vaccinationBatch, editing),
+        vetName: optionalText(vaccinationVet, editing),
+        notes: optionalText(vaccinationNotes, editing),
       };
       if (editingVaccinationId) {
         await api.updateVaccination(animal.id, editingVaccinationId, payload, token);
@@ -221,26 +228,26 @@ export default function VaccinationsSection({ animal, token, vaccinations, loadi
         error={vaccinationFormError}
       >
         <Field label={t('animals.vaccinations.name')} required id="vaccination-name">
-          <input type="text" value={vaccinationName} onChange={(e) => setVaccinationName(e.target.value)} autoComplete="off" />
+          <input type="text" value={vaccinationName} onChange={(e) => setVaccinationName(e.target.value)} autoComplete="off" maxLength={100} />
         </Field>
         <div className="grid grid-cols-2 gap-4">
           <Field label={t('animals.vaccinations.date')} required id="vaccination-date">
             <input type="date" className="font-mono" value={vaccinationDate} onChange={(e) => setVaccinationDate(e.target.value)} />
           </Field>
           <Field label={t('animals.vaccinations.nextDue')} id="vaccination-next-due">
-            <input type="date" className="font-mono" value={vaccinationNextDue} onChange={(e) => setVaccinationNextDue(e.target.value)} />
+            <input type="date" className="font-mono" value={vaccinationNextDue} min={vaccinationDate || undefined} onChange={(e) => setVaccinationNextDue(e.target.value)} />
           </Field>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <Field label={t('animals.vaccinations.batchNumber')} id="vaccination-batch">
-            <input type="text" className="font-mono" value={vaccinationBatch} onChange={(e) => setVaccinationBatch(e.target.value)} autoComplete="off" />
+            <input type="text" className="font-mono" value={vaccinationBatch} onChange={(e) => setVaccinationBatch(e.target.value)} autoComplete="off" maxLength={100} />
           </Field>
           <Field label={t('animals.vaccinations.vetName')} id="vaccination-vet">
-            <input type="text" value={vaccinationVet} onChange={(e) => setVaccinationVet(e.target.value)} autoComplete="off" />
+            <input type="text" value={vaccinationVet} onChange={(e) => setVaccinationVet(e.target.value)} autoComplete="off" maxLength={100} />
           </Field>
         </div>
         <Field label={t('animals.vaccinations.notes')} id="vaccination-notes">
-          <textarea value={vaccinationNotes} onChange={(e) => setVaccinationNotes(e.target.value)} rows={3} />
+          <textarea value={vaccinationNotes} onChange={(e) => setVaccinationNotes(e.target.value)} rows={3} maxLength={500} />
         </Field>
       </FormDialog>
 

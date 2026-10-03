@@ -19,6 +19,14 @@ import {
   routinePlan,
   scheduleOccurrences,
 } from '../common/care-occurrences';
+import {
+  medicationLabel,
+  reminderTypeLabel,
+  routineLabel,
+  vaccineDueLabel,
+  vetAppointmentLabel,
+  vetReminderLabel,
+} from '../notifications/reminder-labels';
 
 /** Seules les routines (rappels liés à une routine) donnent des points. 2 pts par routine effectuée. */
 const POINTS_PER_ROUTINE_DONE = 2;
@@ -80,13 +88,6 @@ function getProgress(points: number): {
   };
 }
 
-const ROUTINE_TYPE_LABELS: Record<string, string> = {
-  nourrissage: 'Nourrissage',
-  entretien: 'Nettoyage',
-  uvb: 'UVB / éclairage',
-  controle: 'Santé',
-};
-
 /** Événement à créer (avant insertion groupée). `sourceKey` = clé d'idempotence (unique par user + date). */
 type NewEvent = Prisma.NotificationEventCreateManyInput & {
   sourceKey: string;
@@ -124,13 +125,18 @@ export class GradeService {
     };
   }
 
-  /** Fuseau IANA de l'utilisateur (repli Europe/Paris). */
-  private async userTimeZone(userId: string): Promise<string> {
+  /** Fuseau IANA (repli Europe/Paris) et langue de l'utilisateur (libellés des rappels). */
+  private async userSettings(
+    userId: string,
+  ): Promise<{ timeZone: string; locale: string }> {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
-      select: { timezone: true },
+      select: { timezone: true, locale: true },
     });
-    return resolveTimeZone(user?.timezone);
+    return {
+      timeZone: resolveTimeZone(user?.timezone),
+      locale: user?.locale ?? 'fr',
+    };
   }
 
   /**
@@ -152,7 +158,7 @@ export class GradeService {
       pointsAwarded: number;
     }[]
   > {
-    const timeZone = await this.userTimeZone(userId);
+    const { timeZone, locale } = await this.userSettings(userId);
     const day = dateStr ?? localDay(new Date(), timeZone);
     const { start, end } = localDayBounds(day, timeZone);
     const dayWhere = { userId, scheduledAt: { gte: start, lte: end } };
@@ -182,6 +188,7 @@ export class GradeService {
           userId,
           day,
           timeZone,
+          locale,
         );
         if (candidates.length > 0) {
           await this.prisma.notificationEvent.createMany({
@@ -219,12 +226,14 @@ export class GradeService {
    * RDV vétérinaires, rappels de vaccin, médicaments, routines, préférences. Dédoublonnée par
    * (sourceKey, scheduledAt) et plafonnée à MAX_EVENTS_PER_DAY. Heures murales converties dans
    * `timeZone`. Médicaments et routines : instants calculés par `common/care-occurrences` (source
-   * unique partagée avec l'Agenda et la couverture locale).
+   * unique partagée avec l'Agenda et la couverture locale). Libellés dans la langue du compte
+   * (`notifications/reminder-labels`) : envoyés tels quels en push et par e-mail.
    */
   private async buildCandidateEvents(
     userId: string,
     day: string,
     timeZone: string,
+    locale = 'fr',
   ): Promise<NewEvent[]> {
     const resolve = makeLocalTimeResolver(timeZone);
 
@@ -254,7 +263,7 @@ export class GradeService {
         push({
           userId,
           type: 'vet_appointment',
-          label: `🏥 RDV ${appt.vetName}`,
+          label: vetAppointmentLabel(appt.vetName, locale),
           scheduledAt: at8(),
           status: 'pending',
           pointsAwarded: 0,
@@ -271,7 +280,7 @@ export class GradeService {
         push({
           userId,
           type: 'vet_appointment',
-          label: `🔔 ${appt.vetName} (J-${n})`,
+          label: vetReminderLabel(appt.vetName, n, locale),
           scheduledAt: at8(),
           status: 'pending',
           pointsAwarded: 0,
@@ -295,7 +304,7 @@ export class GradeService {
       push({
         userId,
         type: 'vaccination',
-        label: `💉 Rappel vaccin ${vac.name}`,
+        label: vaccineDueLabel(vac.name, locale),
         scheduledAt: at8(),
         status: 'pending',
         pointsAwarded: 0,
@@ -318,7 +327,7 @@ export class GradeService {
         push({
           userId,
           type: 'medication',
-          label: `💊 ${med.name} (${med.dose})`,
+          label: medicationLabel(med),
           scheduledAt,
           status: 'pending',
           pointsAwarded: 0,
@@ -336,8 +345,7 @@ export class GradeService {
     for (const routine of activeRoutines) {
       const plan = routinePlan(routine, timeZone);
       if (!plan) continue; // sans heure : aucun rappel (ni dans l'Agenda)
-      const typeLabel =
-        routine.name || ROUTINE_TYPE_LABELS[routine.type] || routine.type;
+      const typeLabel = routineLabel(routine, locale);
       for (const scheduledAt of routineOccurrencesOn(plan, day, resolve)) {
         push({
           userId,
@@ -396,7 +404,8 @@ export class GradeService {
           push({
             userId,
             type,
-            label: type,
+            // Clé connue (« uvb », « Santé »…) → libellé lisible dans la langue du compte.
+            label: reminderTypeLabel(type, locale),
             scheduledAt,
             status: 'pending',
             sourceKey: `pref:${type}`,

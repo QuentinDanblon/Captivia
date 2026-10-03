@@ -44,11 +44,11 @@ export const CARNET_CSS = `
 .carnet-contacts{margin:0;padding-left:1.1rem;font-size:.875rem}
 .carnet-disclaimer{margin:2rem 0 0;padding-top:.6rem;border-top:1px solid var(--c-line-strong);font-size:.75rem;color:var(--c-ink-2)}
 
-@page{size:A4;margin:14mm 14mm 20mm 14mm}
+@page{size:A4;margin:14mm}
 @media print{
   html,body{background:#fff!important;color:#000!important;min-height:0!important;height:auto!important}
   body{display:block!important;font-size:10pt}
-  body>header,body>footer,body>a[href="#main-content"],.carnet-noprint,.noprint{display:none!important}
+  body>header,body>footer,a[href="#main-content"],.skip-link,.carnet-noprint,.noprint{display:none!important}
   .app-shell{display:block!important;min-height:0!important}
   main,.app-shell__content{display:block!important;flex:none!important;padding:0!important}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -61,6 +61,6 @@ export const CARNET_CSS = `
   .carnet-table{font-size:9pt}
   .carnet-table thead{display:table-header-group}
   .carnet-table tr{break-inside:avoid}
-  .carnet-disclaimer{position:fixed;left:0;right:0;bottom:-14mm;margin:0;color:#333;font-size:8pt}
+  .carnet-disclaimer{margin:6mm 0 0;color:#333;font-size:8pt;break-inside:avoid}
 }
 `;

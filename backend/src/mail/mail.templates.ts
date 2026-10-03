@@ -12,7 +12,7 @@ export interface RenderedMail {
 }
 
 export interface CareReminderData {
-  /** Libellé de l'événement (ex. « Nourrissage », « 💊 Vermifuge (1 ml) »). */
+  /** Libellé de l'événement, déjà dans la langue du compte (ex. « Nourrissage », « Vermifuge (1 ml) »). */
   label: string;
   animalName?: string | null;
   scheduledAt: Date;

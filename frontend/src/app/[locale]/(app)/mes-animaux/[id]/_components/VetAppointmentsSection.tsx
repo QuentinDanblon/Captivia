@@ -45,6 +45,9 @@ export default function VetAppointmentsSection({ animal, token, vetAppointments,
     return statuses[status] || status;
   };
 
+  const isPastScheduled = (appt: VetAppointment): boolean =>
+    appt.status === 'scheduled' && new Date(appt.date).getTime() < Date.now();
+
   const openVetModalForCreate = () => {
     setVetName('');
     setVetReason('');
@@ -181,9 +184,16 @@ export default function VetAppointmentsSection({ animal, token, vetAppointments,
                 muted={appt.status === 'cancelled'}
                 title={appt.vetName}
                 badges={
-                  <Badge tone={appt.status === 'done' ? 'ok' : appt.status === 'cancelled' ? 'neutral' : 'info'} dot={appt.status === 'scheduled'}>
-                    {getVetStatusName(appt.status)}
-                  </Badge>
+                  // Rendez-vous prévu mais date passée : ni « à venir » ni « fait » tant qu'il n'est pas confirmé.
+                  isPastScheduled(appt) ? (
+                    <Badge tone="warn" dot>
+                      {t('animals.vetAppointments.statusToConfirm')}
+                    </Badge>
+                  ) : (
+                    <Badge tone={appt.status === 'done' ? 'ok' : appt.status === 'cancelled' ? 'neutral' : 'info'} dot={appt.status === 'scheduled'}>
+                      {getVetStatusName(appt.status)}
+                    </Badge>
+                  )
                 }
                 meta={
                   <>
@@ -241,17 +251,17 @@ export default function VetAppointmentsSection({ animal, token, vetAppointments,
         error={vetFormError}
       >
         <Field label={t('animals.vetAppointments.vetName')} required id="vet-name">
-          <input type="text" value={vetName} onChange={(e) => setVetName(e.target.value)} autoComplete="off" />
+          <input type="text" value={vetName} onChange={(e) => setVetName(e.target.value)} autoComplete="off" maxLength={100} />
         </Field>
         <Field label={t('animals.vetAppointments.reason')} id="vet-reason">
-          <input type="text" value={vetReason} onChange={(e) => setVetReason(e.target.value)} autoComplete="off" />
+          <input type="text" value={vetReason} onChange={(e) => setVetReason(e.target.value)} autoComplete="off" maxLength={200} />
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label={t('animals.vetAppointments.date')} required id="vet-date">
             <input type="datetime-local" className="font-mono" value={vetDate} onChange={(e) => setVetDate(e.target.value)} />
           </Field>
           <Field label={t('animals.vetAppointments.location')} id="vet-location">
-            <input type="text" value={vetLocation} onChange={(e) => setVetLocation(e.target.value)} autoComplete="off" />
+            <input type="text" value={vetLocation} onChange={(e) => setVetLocation(e.target.value)} autoComplete="off" maxLength={200} />
           </Field>
         </div>
         <fieldset className="m-0 grid gap-2 border-0 p-0">
@@ -268,7 +278,7 @@ export default function VetAppointmentsSection({ animal, token, vetAppointments,
           </div>
         </fieldset>
         <Field label={t('animals.vetAppointments.notes')} id="vet-notes">
-          <textarea value={vetNotes} onChange={(e) => setVetNotes(e.target.value)} rows={3} />
+          <textarea value={vetNotes} onChange={(e) => setVetNotes(e.target.value)} rows={3} maxLength={1000} />
         </Field>
       </FormDialog>
 

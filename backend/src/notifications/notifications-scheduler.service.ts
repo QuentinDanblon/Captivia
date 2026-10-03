@@ -8,6 +8,7 @@ import { PUSH_SENDER, PushSender } from './push-sender';
 import { isStillScheduled, localReminderFor } from './local-coverage';
 import { NATIVE_PUSH_RUN_BUDGET_MS } from './native-push-sender';
 import { localDay } from '../common/timezone';
+import { reminderTypeLabel } from './reminder-labels';
 
 /** Clé du verrou consultatif Postgres du job de rappels (constante arbitraire, propre au job). */
 export const REMINDERS_LOCK_KEY = 4_731_202_610;
@@ -377,7 +378,9 @@ export class NotificationsSchedulerService {
       ev.user.notificationPreferences[0]?.deliveryChannel,
       recipient,
     );
-    const label = ev.label || ev.type;
+    // Anciens rappels enregistrés avec une clé brute (« uvb », « sante ») : libellé lisible,
+    // dans la langue du compte, avant l'envoi en push ou par e-mail.
+    const label = reminderTypeLabel(ev.label || ev.type, ev.user.locale);
     let emailed = false;
     let pushed = false;
 

@@ -439,7 +439,8 @@
 
 /* Impression : seul le contenu sort (en-tête, pied, bandeaux marqués `noprint` exclus). */
 @media print {
-  .noprint {
+  .noprint,
+  .skip-link {
     display: none !important;
   }
   html,

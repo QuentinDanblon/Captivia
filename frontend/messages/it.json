@@ -68,10 +68,11 @@
     "updateError": "Impossibile aggiornare il link pubblico.",
     "disabledHint": "Attiva il link pubblico per ottenere un codice QR.",
     "pageNotFound": "Questa pagina non è disponibile o il link è stato disattivato.",
-    "bornIn": "Nato/a nel {year}",
+    "bornIn": "{sex, select, male {Nato nel {year}} female {Nata nel {year}} other {Nato/a nel {year}}}",
     "vaccinations": "Vaccinazioni",
     "noVaccinations": "Nessuna vaccinazione registrata",
-    "readOnly": "pagina pubblica (sola lettura)"
+    "readOnly": "pagina pubblica (sola lettura)",
+    "emailNotVerified": "Per condividere la pagina pubblica del tuo animale, conferma prima il tuo indirizzo e-mail con il link che ti abbiamo inviato."
   },
   "animals": {
     "addAnimal": "Aggiungi animale",
@@ -101,7 +102,9 @@
       "pregnancy": "Gestazione",
       "premiumRequired": "Il monitoraggio della riproduzione è disponibile con l'abbonamento Premium",
       "title": "Riproduzione",
-      "weaning": "Svezzamento"
+      "weaning": "Svezzamento",
+      "offspringRequired": "Per una nascita, indica il numero di piccoli.",
+      "offspringInvalid": "Il numero di piccoli deve essere un numero intero da 0 a {max}."
     },
     "carnet": {
       "export": "Esporta il libretto (JSON)",
@@ -117,7 +120,8 @@
     "edit": {
       "father": "Padre",
       "group": "Gruppo / Recinto",
-      "mother": "Madre"
+      "mother": "Madre",
+      "saveError": "Non è stato possibile salvare le modifiche. Riprova."
     },
     "editAnimal": "Modifica animale",
     "editAnimalFormIntro": "Modifica le informazioni del tuo animale. Tutti i campi contrassegnati da un asterisco sono obbligatori.",
@@ -169,13 +173,15 @@
       "deleteConfirm": "Eliminare questa misurazione?",
       "edit": "Modifica misurazione",
       "heightCm": "Altezza (cm)",
-      "heightInvalid": "Altezza non valida",
+      "heightInvalid": "Indica un'altezza maggiore di zero, per esempio 32,5.",
       "noData": "Nessuna misurazione registrata.",
       "notes": "Note",
       "premiumRequired": "Il monitoraggio di peso e misure è disponibile con l'abbonamento Premium",
       "title": "Peso e misure",
-      "weightInvalid": "Peso non valido",
-      "weightKg": "Peso (kg)"
+      "weightInvalid": "Indica un peso maggiore di zero, per esempio 4,25.",
+      "weightKg": "Peso (kg)",
+      "valueRequired": "Indica almeno un peso o un'altezza.",
+      "confirmWeight": "Questo peso ({next}) è molto diverso dall'ultima pesata ({previous}). Controlla l'unità (chilogrammi), poi salva di nuovo per confermare."
     },
     "medications": {
       "active": "Attivo",
@@ -196,7 +202,9 @@
       "startDate": "Data di inizio",
       "stop": "Interrompi",
       "title": "Trattamenti",
-      "unit": "Unità"
+      "unit": "Unità",
+      "intervalInvalid": "Indica un intervallo da 1 a 24 ore.",
+      "endBeforeStart": "La data di fine non può precedere quella di inizio."
     },
     "myAnimals": "I miei animali",
     "nameHelp": "Il nome che dai al tuo animale.",
@@ -208,7 +216,9 @@
     "notes": "Note",
     "notesHelp": "Note libere: carattere, particolarità, promemoria…",
     "notesPlaceholder": "Note sul tuo animale...",
-    "photoTooLarge": "La foto supera i 10 MB. Scegli un'immagine più leggera.",
+    "photoTooLarge": "La foto supera i 30 MB. Scegli un'immagine più leggera.",
+    "photoUnsupported": "Questo formato di foto non può essere letto qui. Scegli una foto JPEG, PNG o WebP (su iPhone: Impostazioni › Fotocamera › Formati › «Più compatibile»).",
+    "photoSizeHint": "JPEG, PNG o WebP. La foto viene ridotta automaticamente sul tuo dispositivo prima dell'invio.",
     "photos": "Foto",
     "premiumMessage": "Hai raggiunto il limite gratuito di 1 animale. Passa a Premium per animali illimitati.",
     "premiumRequired": "Premium richiesto",
@@ -246,7 +256,8 @@
       "overdue": "Richiamo del",
       "premiumRequired": "Il libretto delle vaccinazioni è disponibile con l'abbonamento Premium",
       "title": "Vaccinazioni",
-      "vetName": "Veterinario"
+      "vetName": "Veterinario",
+      "nextDueBeforeDate": "Il richiamo non può precedere la data del vaccino."
     },
     "vetAppointments": {
       "add": "Aggiungi appuntamento",
@@ -265,7 +276,8 @@
       "statusDone": "Eseguito",
       "statusScheduled": "In programma",
       "title": "Appuntamenti veterinari",
-      "vetName": "Veterinario"
+      "vetName": "Veterinario",
+      "statusToConfirm": "Da confermare"
     },
     "viewHistory": "Vedi cronologia",
     "weightChartLabel": "Grafico del peso",
@@ -340,8 +352,14 @@
       "vaccineDue": "Richiamo {when}",
       "routineName": "Nome della routine (facoltativo)",
       "dayOfMonth": "Giorno del mese (1-31)",
-      "everyHours": "Ogni X ore (1-24)"
-    }
+      "everyHours": "Ogni X ore (1-24)",
+      "everyNHours": "{count, plural, one {Ogni ora} other {Ogni # ore}}"
+    },
+    "photoUrlInsecure": "Questo indirizzo dell'immagine non è sicuro. Usa un indirizzo che inizia con https:// oppure scegli un file.",
+    "photoUrlInvalid": "Questo indirizzo dell'immagine non è valido. Incolla l'indirizzo completo (https://…) oppure scegli un file.",
+    "photoUpdateError": "Non è stato possibile salvare la foto. Riprova.",
+    "speciesUnavailable": "Non è possibile aggiungere questa specie. Scegline un'altra dall’elenco.",
+    "speciesLookupUnavailable": "Al momento non possiamo verificare questa specie. Riprova tra qualche minuto."
   },
   "attribution": {
     "wikipediaPrefix": "Fonte:",
@@ -399,7 +417,8 @@
     "rememberedPassword": "Ti è tornata in mente?",
     "resetInvalidHeading": "Questo link non è più valido",
     "resetRequestNew": "Ricevi un nuovo link",
-    "resetHeading": "Scegli una nuova password"
+    "resetHeading": "Scegli una nuova password",
+    "emailAlreadyUsed": "Esiste già un account con questo indirizzo e-mail. Accedi oppure usa un altro indirizzo."
   },
   "carnetPrint": {
     "title": "Libretto sanitario",
@@ -929,7 +948,12 @@
     "pushOnText": "Questo dispositivo riceve i tuoi promemoria, anche quando Captivia è chiusa.",
     "deliveryTitle": "Come avvisarti",
     "loadError": "Non è stato possibile caricare le tue impostazioni. Ricarica la pagina per riprovare.",
-    "autoSaveHint": "Ogni modifica viene salvata automaticamente."
+    "autoSaveHint": "Ogni modifica viene salvata automaticamente.",
+    "timeRequired": "Indica un orario per ogni promemoria: la modifica non è stata salvata.",
+    "dateRequired": "Scegli una data per ogni promemoria singolo: la modifica non è stata salvata.",
+    "labelTooLong": "Il nome di un promemoria può avere al massimo 60 caratteri.",
+    "snoozeInvalid": "Indica un intervallo tra 5 e 120 minuti.",
+    "saveInvalid": "Alcune impostazioni non sono valide. Controlla orari e date dei tuoi promemoria."
   },
   "premiumLock": {
     "goPremium": "Scopri l'abbonamento Premium",
@@ -937,7 +961,7 @@
     "qrCode": "Codice QR dell'animale",
     "qrCodeButton": "Crea / Mostra il codice QR",
     "qrCodeError": "Impossibile generare il codice QR. Controlla la connessione.",
-    "qrCodeHelp": "Scansionando questo codice QR, chiunque può vedere le informazioni e il libretto sanitario di questo animale (sola lettura).",
+    "qrCodeHelp": "Chi scansiona questo codice QR vede una pagina di sola lettura: nome, specie, sesso, anno di nascita e foto dell'animale, più le vaccinazioni se scegli di mostrarle. Le tue note e il resto del libretto non vengono mai condivisi.",
     "qrCodePremiumOnly": "Riservato agli abbonati Premium.",
     "upgrade": "Passa a Premium per sbloccare il libretto sanitario e registrare vaccini, operazioni e anamnesi."
   },
@@ -976,7 +1000,8 @@
     },
     "paused": "In pausa",
     "toggleActive": "Attiva/metti in pausa",
-    "namePlaceholder": "es. Pasto del mattino"
+    "namePlaceholder": "es. Pasto del mattino",
+    "dateRequired": "Scegli la data di questa cura singola."
   },
   "settings": {
     "account": "Account",
@@ -2403,5 +2428,12 @@
         "reverse": "Decisione annullata, membro avvisato"
       }
     }
+  },
+  "apiErrors": {
+    "unavailable": "Il servizio non è momentaneamente disponibile. Riprova tra qualche istante.",
+    "invalid": "Alcuni dati non sono validi. Controlla il modulo.",
+    "notFound": "Elemento non trovato. Potrebbe essere stato eliminato.",
+    "tooManyRequests": "Troppi tentativi di fila. Attendi un minuto prima di riprovare.",
+    "generic": "Qualcosa non ha funzionato. Riprova tra un istante."
   }
 }

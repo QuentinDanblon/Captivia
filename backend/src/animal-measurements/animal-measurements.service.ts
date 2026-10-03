@@ -44,7 +44,7 @@ export class AnimalMeasurementsService {
     dto: CreateAnimalMeasurementDto,
   ) {
     await this.animalsService.findOne(animalId, userId);
-    if (dto.weightKg === undefined && dto.heightCm === undefined) {
+    if (dto.weightKg == null && dto.heightCm == null) {
       throw new BadRequestException(
         'At least one of weightKg or heightCm is required for a measurement.',
       );
@@ -66,7 +66,17 @@ export class AnimalMeasurementsService {
     userId: string,
     dto: UpdateAnimalMeasurementDto,
   ) {
-    await this.findOne(animalId, measurementId, userId);
+    const existing = await this.findOne(animalId, measurementId, userId);
+    // Champ vidé (null) : effacé ; mais une mesure garde toujours un poids ou une taille.
+    const weightKg =
+      dto.weightKg !== undefined ? dto.weightKg : existing.weightKg;
+    const heightCm =
+      dto.heightCm !== undefined ? dto.heightCm : existing.heightCm;
+    if (weightKg == null && heightCm == null) {
+      throw new BadRequestException(
+        'At least one of weightKg or heightCm is required for a measurement.',
+      );
+    }
     const data: Record<string, unknown> = {};
     if (dto.weightKg !== undefined) data.weightKg = dto.weightKg;
     if (dto.heightCm !== undefined) data.heightCm = dto.heightCm;

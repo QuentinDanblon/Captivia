@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { api, type PublicAnimalProfile } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
 import { Link } from '@/i18n/navigation';
 import { Card, EmptyState, Figure, SectionHeader, Skeleton, SkeletonGroup, SkeletonText, buttonClasses } from '@/components/ui';
 
@@ -36,9 +37,10 @@ export default function AnimalPublicPage({
     api
       .getPublicAnimal(slug)
       .then(setData)
-      .catch((e: Error & { status?: number }) =>
-        // 404 : lien inexistant, désactivé ou régénéré — message générique, sans détail
-        setError(e.status === 404 ? t('publicLink.pageNotFound') : e.message || t('publicLink.pageNotFound')),
+      .catch((e: unknown) =>
+        // 404 : lien inexistant, désactivé ou régénéré — message générique, sans détail ;
+        // jamais le message brut de l'API.
+        setError(t(errorKey(e, { statuses: { 404: 'publicLink.pageNotFound', 400: 'publicLink.pageNotFound' } }))),
       )
       .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,7 +90,16 @@ export default function AnimalPublicPage({
   const facts = [
     data.species?.commonName ? { label: t('animals.species'), value: data.species.commonName } : null,
     sex ? { label: t('animals.sex'), value: sex } : null,
-    data.birthYear ? { label: t('animals.birthDate'), value: t('publicLink.bornIn', { year: data.birthYear }) } : null,
+    // « Né en » / « Née en » selon le sexe connu ; forme neutre sinon.
+    data.birthYear
+      ? {
+          label: t('animals.birthDate'),
+          value: t('publicLink.bornIn', {
+            year: data.birthYear,
+            sex: data.sex === 'male' || data.sex === 'female' ? data.sex : 'other',
+          }),
+        }
+      : null,
   ].filter((fact): fact is { label: string; value: string; mono?: boolean } => fact !== null);
 
   return (

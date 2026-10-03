@@ -37,7 +37,19 @@ describe('GbifService', () => {
           offset: 0,
           rank: 'SPECIES',
           highertaxonRank: 'SPECIES',
+          // Règne Animalia uniquement (repli GBIF : jamais de plante).
+          highertaxonKey: 1,
         },
+      });
+    });
+
+    it('matchSpecies : /species/match dans le règne Animalia (M11)', async () => {
+      http.get.mockResolvedValue({ data: { usageKey: 2435035 } });
+
+      await service.matchSpecies('Felis catus');
+
+      expect(http.get).toHaveBeenCalledWith('gbif', `${BASE}/species/match`, {
+        params: { name: 'Felis catus', kingdom: 'Animalia' },
       });
     });
 

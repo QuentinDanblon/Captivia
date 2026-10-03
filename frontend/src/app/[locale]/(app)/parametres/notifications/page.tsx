@@ -77,24 +77,31 @@ const RECURRENCE_OPTIONS: { value: RecurrenceKind; labelKey: string }[] = [
 
 /**
  * Sujets suggérés pour guider l'utilisateur (il peut aussi créer les siens).
- * Les clés ci-dessous sont les identifiants stockés côté API (inchangés) ;
- * seul l'affichage est traduit via notifications.suggested.<id>.
+ * Ces libellés sont les identifiants stockés côté API (inchangés) ;
+ * seul l'affichage est traduit via notifications.suggested.<id> (`lib/reminder-labels`).
  */
-const SUGGESTED_TYPE_LABEL_IDS: Record<string, string> = {
-  'Nourrissage': 'feeding',
-  'Nettoyage': 'cleaning',
-  'UVB / éclairage': 'uvb',
-  'Santé': 'health',
-  'Rappel vétérinaire': 'vet',
-  'Mue': 'shedding',
-  'Pondération': 'weighing',
-  'Bain': 'bath',
-  'Température': 'temperature',
-  'Humidité': 'humidity',
-};
-const SUGGESTED_NOTIFICATION_TYPES = Object.keys(SUGGESTED_TYPE_LABEL_IDS);
+const SUGGESTED_NOTIFICATION_TYPES = [
+  'Nourrissage',
+  'Nettoyage',
+  'UVB / éclairage',
+  'Santé',
+  'Rappel vétérinaire',
+  'Mue',
+  'Pondération',
+  'Bain',
+  'Température',
+  'Humidité',
+];
 
 import { authFetch } from '@/lib/api';
+import { reminderLabelKey } from '@/lib/reminder-labels';
+import {
+  MAX_REMINDER_LABEL_LENGTH,
+  SNOOZE_MAX,
+  SNOOZE_MIN,
+  parseSnooze,
+  preferencesErrorKey,
+} from '@/lib/notification-preferences';
 import { API_URL } from '@/lib/config';
 import { localDayKey } from '@/lib/dates';
 import {
@@ -110,8 +117,8 @@ const getApiBase = () => API_URL;
 export default function NotificationsPreferencesPage() {
   const t = useTranslations();
   const typeLabel = (type: string): string => {
-    const id = SUGGESTED_TYPE_LABEL_IDS[type];
-    return id ? t(`notifications.suggested.${id}`) : type;
+    const key = reminderLabelKey(type);
+    return key ? t(key) : type;
   };
   const router = useRouter();
   const { user, token, isLoading: authLoading } = useAuth();
@@ -131,6 +138,9 @@ export default function NotificationsPreferencesPage() {
   const [newTypeLabel, setNewTypeLabel] = useState('');
   /** Édition du libellé : type en cours d’édition => valeur du champ */
   const [editingType, setEditingType] = useState<{ key: string; value: string } | null>(null);
+  /** Délai de report tel que saisi (chaîne : le champ peut être vidé pendant la frappe). */
+  const [snoozeInput, setSnoozeInput] = useState<string | null>(null);
+  const [snoozeError, setSnoozeError] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -178,9 +188,11 @@ export default function NotificationsPreferencesPage() {
       if (v && typeof v === 'object' && typeof v.time === 'string') {
         const rec = validRecurrence(String(v.recurrence));
         normalizedSchedules[key] = {
-          time: v.time || '08:00',
+          // Ancien format « 8:00 » : complété en « 08:00 » (seul format accepté par l'API).
+          time: /^\d:[0-5]\d$/.test(v.time) ? `0${v.time}` : v.time || '08:00',
           recurrence: rec,
-          date: rec === 'once' && v.date ? String(v.date) : undefined,
+          // « Une seule fois » sans date : aujourd'hui (la date est obligatoire côté API).
+          date: rec === 'once' ? (v.date ? String(v.date) : localDayKey(new Date())) : undefined,
           weekDay: rec === 'weekly' && typeof v.weekDay === 'number' ? v.weekDay : undefined,
           dayOfMonth: rec === 'monthly' && typeof v.dayOfMonth === 'number' ? v.dayOfMonth : undefined,
           intervalHours: rec === 'hourly' && typeof v.intervalHours === 'number' ? Math.max(1, Math.min(24, v.intervalHours)) : undefined,
@@ -289,6 +301,12 @@ export default function NotificationsPreferencesPage() {
       return;
     }
 
+    const invalid = preferencesErrorKey(preferences);
+    if (invalid) {
+      setSaveMessage(t(invalid));
+      return;
+    }
+
     setSaving(true);
     setSaveMessage(null);
 
@@ -296,7 +314,7 @@ export default function NotificationsPreferencesPage() {
       types: preferences.types ?? {},
       typeSchedules: preferences.typeSchedules ?? {},
       schedule: preferences.schedule ?? { start: '08:00', end: '22:00' },
-      snooze: typeof preferences.snooze === 'number' ? preferences.snooze : 15,
+      snooze: Number.isInteger(preferences.snooze) ? preferences.snooze : 15,
     };
 
     try {
@@ -312,15 +330,14 @@ export default function NotificationsPreferencesPage() {
         },
       );
 
-      const data = await response.json().catch(() => ({}));
-
       if (response.ok) {
-        setSaveMessage(`${t('notifications.saved')} ✓`);
+        setSaveMessage(t('notifications.saved'));
         setTimeout(() => setSaveMessage(null), 3000);
       } else if (response.status === 401) {
         setSaveMessage(t('common.sessionExpired'));
       } else {
-        setSaveMessage((data as { message?: string }).message || t('notifications.saveError'));
+        // Jamais le message brut de l'API.
+        setSaveMessage(t(response.status === 400 ? 'notifications.saveInvalid' : 'notifications.saveError'));
       }
     } catch (error) {
       console.error('Error saving preferences:', error);
@@ -349,12 +366,18 @@ export default function NotificationsPreferencesPage() {
   const handleSavePreferencesBackend = async (prefsToSave: NotificationPreferences) => {
     const authToken = (token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null))?.trim();
     if (!authToken) return;
+    // Réglage incomplet (heure effacée, date manquante…) : message traduit, rien n'est envoyé.
+    const invalid = preferencesErrorKey(prefsToSave);
+    if (invalid) {
+      setSaveMessage(t(invalid));
+      return;
+    }
 
     const payload = {
       types: prefsToSave?.types ?? {},
       typeSchedules: prefsToSave?.typeSchedules ?? {},
       schedule: prefsToSave?.schedule ?? { start: '08:00', end: '22:00' },
-      snooze: typeof prefsToSave?.snooze === 'number' ? prefsToSave.snooze : 15,
+      snooze: Number.isInteger(prefsToSave?.snooze) ? prefsToSave.snooze : 15,
       deliveryChannel: prefsToSave?.deliveryChannel ?? 'push',
     };
 
@@ -371,14 +394,14 @@ export default function NotificationsPreferencesPage() {
         },
       );
 
-      const data = await response.json().catch(() => ({}));
       if (response.ok) {
-        setSaveMessage(`${t('notifications.saved')} ✓`);
+        setSaveMessage(t('notifications.saved'));
         setTimeout(() => setSaveMessage(null), 3000);
       } else if (response.status === 401) {
         setSaveMessage(t('common.sessionExpired'));
       } else {
-        setSaveMessage((data as { message?: string }).message || t('notifications.saveError'));
+        // Jamais le message brut de l'API.
+        setSaveMessage(t(response.status === 400 ? 'notifications.saveInvalid' : 'notifications.saveError'));
       }
     } catch (error) {
       console.error('Error saving preferences:', error);
@@ -406,6 +429,10 @@ export default function NotificationsPreferencesPage() {
   const addType = (label: string) => {
     const trimmed = label.trim();
     if (!trimmed || (preferences?.types ?? {})[trimmed] !== undefined) return;
+    if (trimmed.length > MAX_REMINDER_LABEL_LENGTH) {
+      setSaveMessage(t('notifications.labelTooLong'));
+      return;
+    }
     const schedules = { ...(preferences?.typeSchedules ?? {}) };
     schedules[trimmed] = { ...DEFAULT_TYPE_SCHEDULE };
     const newPreferences = {
@@ -451,6 +478,10 @@ export default function NotificationsPreferencesPage() {
     const typeSchedules = { ...(preferences?.typeSchedules ?? {}) };
     if (!newKey || newKey === editingType.key) {
       setEditingType(null);
+      return;
+    }
+    if (newKey.length > MAX_REMINDER_LABEL_LENGTH) {
+      setSaveMessage(t('notifications.labelTooLong'));
       return;
     }
     if (types[newKey] !== undefined && newKey !== editingType.key) {
@@ -542,6 +573,8 @@ export default function NotificationsPreferencesPage() {
                                 type="text"
                                 value={editingType.value}
                                 onChange={(e) => setEditingType((prev) => prev && { ...prev, value: e.target.value })}
+                                maxLength={MAX_REMINDER_LABEL_LENGTH}
+                                required
                                 onKeyDown={(e) => {
                                   if (e.key === 'Enter') saveEditType();
                                   if (e.key === 'Escape') setEditingType(null);
@@ -605,6 +638,8 @@ export default function NotificationsPreferencesPage() {
                                 type="time"
                                 value={schedule.time}
                                 onChange={(e) => updateTypeSchedule(type, { time: e.target.value })}
+                                required
+                                aria-invalid={!schedule.time || undefined}
                                 className="font-mono"
                               />
                             </Field>
@@ -633,8 +668,10 @@ export default function NotificationsPreferencesPage() {
                               <Field label={t('notifications.date')} id={`${idBase}-date`}>
                                 <input
                                   type="date"
-                                  value={schedule.date ?? localDayKey(new Date())}
+                                  value={schedule.date ?? ''}
                                   onChange={(e) => updateTypeSchedule(type, { date: e.target.value })}
+                                  required
+                                  aria-invalid={!schedule.date || undefined}
                                   className="font-mono"
                                 />
                               </Field>
@@ -729,6 +766,7 @@ export default function NotificationsPreferencesPage() {
                     type="text"
                     value={newTypeLabel}
                     onChange={(e) => setNewTypeLabel(e.target.value)}
+                    maxLength={MAX_REMINDER_LABEL_LENGTH}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') addType(newTypeLabel);
                     }}
@@ -747,17 +785,27 @@ export default function NotificationsPreferencesPage() {
           {/* Report */}
           {preferences ? (
             <Card as="section" title={t('notifications.snoozeTitle')} titleId="snooze-title">
-              <Field label={t('notifications.snooze')} hint={t('notifications.snoozeHint')} id="snooze-minutes" className="max-w-xs">
+              <Field
+                label={t('notifications.snooze')}
+                hint={t('notifications.snoozeHint')}
+                error={snoozeError ? t('notifications.snoozeInvalid') : undefined}
+                id="snooze-minutes"
+                className="max-w-xs"
+              >
                 <input
                   type="number"
-                  min="5"
-                  max="120"
+                  min={SNOOZE_MIN}
+                  max={SNOOZE_MAX}
                   step="5"
                   inputMode="numeric"
-                  value={preferences.snooze ?? 15}
+                  required
+                  value={snoozeInput ?? String(preferences.snooze ?? 15)}
                   onChange={(e) => {
-                    const snooze = parseInt(e.target.value);
-                    autoSavePreferences({ ...preferences, snooze });
+                    // Saisie gardée en chaîne : un champ vidé (NaN) n'est jamais envoyé à l'API.
+                    setSnoozeInput(e.target.value);
+                    const snooze = parseSnooze(e.target.value);
+                    setSnoozeError(snooze === null);
+                    if (snooze !== null) autoSavePreferences({ ...preferences, snooze });
                   }}
                   className="font-mono"
                 />

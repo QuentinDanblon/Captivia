@@ -3,6 +3,12 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { PubmedService } from './services/pubmed.service';
 import { describeHttpError } from '../external/http-safety';
+import {
+  findParentSpecies,
+  InheritedFrom,
+  isBreedId,
+  toInheritedFrom,
+} from '../species/species-parent';
 
 @Injectable()
 export class HealthContentService {
@@ -15,7 +21,7 @@ export class HealthContentService {
 
   async getSpeciesHealth(speciesId: number, disease?: string, locale = 'fr') {
     // Try to get editorial content from database
-    const editorialContent = await this.prisma.speciesHealthContent.findUnique({
+    let editorialContent = await this.prisma.speciesHealthContent.findUnique({
       where: {
         speciesId_locale: {
           speciesId,
@@ -23,6 +29,19 @@ export class HealthContentService {
         },
       },
     });
+    // Race sans fiche santé : celle de son espèce parente (sourcée), jamais un modèle générique.
+    let inheritedFrom: InheritedFrom | null = null;
+    if (!editorialContent && isBreedId(speciesId)) {
+      const parent = await findParentSpecies(this.prisma, speciesId);
+      if (parent) {
+        editorialContent = await this.prisma.speciesHealthContent.findUnique({
+          where: {
+            speciesId_locale: { speciesId: parent.speciesId, locale },
+          },
+        });
+        if (editorialContent) inheritedFrom = toInheritedFrom(parent);
+      }
+    }
 
     // Références PubMed : recherche par nom scientifique (profil local de l'espèce).
     // Pas de profil → aucun appel PubMed. Panne PubMed → fiche servie sans références,
@@ -57,6 +76,7 @@ export class HealthContentService {
             updatedAt: editorialContent.updatedAt,
           }
         : null,
+      inheritedFrom,
       pubmed: pubmedArticles,
       pubmedAvailable,
       disclaimer:

@@ -10,10 +10,17 @@
  *    encore vide ;
  *  - relançable à volonté (clés uniques speciesId / locale / country).
  * Pour forcer la mise à jour de fiches existantes : `npm run seed:breeds`.
+ *
+ * B1 — les sections (alimentation, santé…) d'une race sont facultatives : null = la race hérite,
+ * dans l'API, des sections sourcées de son espèce parente. Une section présente doit passer
+ * `validation.ts` (sources non génériques, catégorie et régime compatibles avec l'espèce
+ * parente) ; sinon l'import échoue (le seed s'arrête), plutôt que d'écrire une donnée fausse.
  */
 import { Prisma, PrismaClient } from '@prisma/client';
 import * as fs from 'fs';
 import * as path from 'path';
+import { BREED_ID_MIN, scientificNameVariants } from '../src/species/species-parent';
+import { BreedEntryLike, ParentInfo, validateBreedEntry } from './validation';
 
 const VALID_CATEGORIES = ['mammifère', 'reptile', 'amphibien', 'oiseau', 'poisson', 'insecte', 'arachnide'];
 const VALID_DOMESTICATION = ['domestique', 'semi-domestique', 'NAC'];
@@ -37,6 +44,32 @@ export interface BreedsBulkResult {
   errors: string[];
 }
 
+/**
+ * Espèces parentes possibles (fiches non-races) : nom scientifique normalisé → catégorie et
+ * régime alimentaire en base.
+ */
+async function loadParents(prisma: PrismaClient): Promise<Map<string, ParentInfo>> {
+  const species = await prisma.speciesProfile.findMany({
+    where: { speciesId: { lt: BREED_ID_MIN } },
+    select: { scientificName: true, category: true, feedings: { where: { locale: 'fr' }, select: { dietType: true } } },
+    orderBy: { speciesId: 'asc' },
+  });
+  const parents = new Map<string, ParentInfo>();
+  for (const s of species) {
+    const key = s.scientificName.trim().replace(/\s+/g, ' ').toLowerCase();
+    if (!parents.has(key)) parents.set(key, { category: s.category, dietType: s.feedings[0]?.dietType ?? null });
+  }
+  return parents;
+}
+
+function parentOf(parents: Map<string, ParentInfo>, scientificName: string): ParentInfo | null {
+  for (const v of scientificNameVariants(scientificName)) {
+    const p = parents.get(v);
+    if (p) return p;
+  }
+  return null;
+}
+
 export async function importBreedsBulk(prisma: PrismaClient): Promise<BreedsBulkResult> {
   const dataPath = path.resolve(__dirname, 'breeds-data.json');
   const all: Breed[] = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
@@ -52,11 +85,21 @@ export async function importBreedsBulk(prisma: PrismaClient): Promise<BreedsBulk
     if (!VALID_CATEGORIES.includes(b.category)) errors.push(`${label}: catégorie invalide "${b.category}"`);
     else if (!VALID_DOMESTICATION.includes(b.domesticationType))
       errors.push(`${label}: domesticationType invalide "${b.domesticationType}"`);
-    else if (!b.feeding?.recommendedFoods?.length || !b.feeding?.foodsToAvoid?.length)
+    else if (b.feeding && (!b.feeding.recommendedFoods?.length || !b.feeding.foodsToAvoid?.length))
       errors.push(`${label}: feeding incomplet`);
     else return true;
     return false;
   });
+
+  // Sections : sourcées (sources non génériques) et compatibles avec l'espèce parente.
+  const parents = await loadParents(prisma);
+  for (const b of breeds) {
+    if (b.speciesId < BREED_ID_MIN) continue;
+    errors.push(...validateBreedEntry(b as BreedEntryLike, parentOf(parents, b.scientificName)));
+  }
+  if (errors.length > 0) {
+    return { total: all.length, valid: 0, profilesCreated: 0, errors };
+  }
 
   let profilesCreated = 0;
   for (const batch of chunk(breeds, BATCH_SIZE)) {
@@ -77,7 +120,7 @@ export async function importBreedsBulk(prisma: PrismaClient): Promise<BreedsBulk
 
     await prisma.speciesFeeding.createMany({
       skipDuplicates: true,
-      data: batch.map((b) => ({
+      data: batch.filter((b) => b.feeding).map((b) => ({
         speciesId: b.speciesId,
         locale: 'fr',
         dietType: b.feeding.dietType,
@@ -91,7 +134,7 @@ export async function importBreedsBulk(prisma: PrismaClient): Promise<BreedsBulk
 
     await prisma.speciesHabitat.createMany({
       skipDuplicates: true,
-      data: batch.map((b) => ({
+      data: batch.filter((b) => b.habitat).map((b) => ({
         speciesId: b.speciesId,
         locale: 'fr',
         habitatType: b.habitat.habitatType,
@@ -110,7 +153,7 @@ export async function importBreedsBulk(prisma: PrismaClient): Promise<BreedsBulk
 
     await prisma.speciesBehavior.createMany({
       skipDuplicates: true,
-      data: batch.map((b) => ({
+      data: batch.filter((b) => b.behavior).map((b) => ({
         speciesId: b.speciesId,
         locale: 'fr',
         generalBehavior: b.behavior.generalBehavior,
@@ -124,7 +167,7 @@ export async function importBreedsBulk(prisma: PrismaClient): Promise<BreedsBulk
 
     await prisma.speciesHealthContent.createMany({
       skipDuplicates: true,
-      data: batch.map((b) => ({
+      data: batch.filter((b) => b.health).map((b) => ({
         speciesId: b.speciesId,
         locale: 'fr',
         diseases: json(b.health.diseases),
@@ -134,7 +177,7 @@ export async function importBreedsBulk(prisma: PrismaClient): Promise<BreedsBulk
 
     await prisma.speciesLegislation.createMany({
       skipDuplicates: true,
-      data: batch.map((b) => ({
+      data: batch.filter((b) => b.legislation).map((b) => ({
         speciesId: b.speciesId,
         country: b.legislation.country,
         status: b.legislation.status,
@@ -145,7 +188,7 @@ export async function importBreedsBulk(prisma: PrismaClient): Promise<BreedsBulk
 
     await prisma.speciesReproduction.createMany({
       skipDuplicates: true,
-      data: batch.map((b) => ({
+      data: batch.filter((b) => b.reproduction).map((b) => ({
         speciesId: b.speciesId,
         locale: 'fr',
         season: b.reproduction.season,

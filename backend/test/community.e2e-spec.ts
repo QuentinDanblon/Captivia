@@ -508,11 +508,11 @@ describe('Communauté (E2E)', () => {
       expect(bodyOf<ErrorBody>(res).code).toBe('EMAIL_NOT_VERIFIED');
     });
 
-    it('redimensionne à 1 600 px, ré-encode en WebP et supprime EXIF et GPS', async () => {
+    it('redimensionne à 1 080 px, ré-encode en WebP et supprime EXIF et GPS', async () => {
       const input = await gpsJpeg();
       expect((await sharp(input).metadata()).exif).toBeDefined();
       const res = await upload(alice, input).expect(201);
-      expect(res.body).toMatchObject({ width: 1600, height: 800 });
+      expect(res.body).toMatchObject({ width: 1080, height: 540 });
       expect(bodyOf<UrlBody>(res).url).toMatch(
         /\/community\/media\/[0-9a-f-]{36}\.webp$/,
       );
@@ -530,7 +530,7 @@ describe('Communauté (E2E)', () => {
       expect(file.headers['cross-origin-resource-policy']).toBe('cross-origin');
       const data = file.body as Buffer;
       const meta = await sharp(data).metadata();
-      expect(meta).toMatchObject({ format: 'webp', width: 1600, height: 800 });
+      expect(meta).toMatchObject({ format: 'webp', width: 1080, height: 540 });
       expect(meta.exif).toBeUndefined();
       expect(data.includes('LeakyCam')).toBe(false);
       expect(data.includes(GPS_LATITUDE)).toBe(false);
@@ -573,6 +573,35 @@ describe('Communauté (E2E)', () => {
         .set(bearer(bob))
         .send({ avatarMediaId: bodyOf<IdBody>(foreign).id })
         .expect(400);
+    });
+
+    it('avatar retiré (null) : fichier effacé du stockage et ligne supprimée', async () => {
+      const media = await upload(bob, await gpsJpeg()).expect(201);
+      const key = keyOf(bodyOf<UrlBody>(media).url);
+      await http()
+        .patch('/community/profile')
+        .set(bearer(bob))
+        .send({ avatarMediaId: bodyOf<IdBody>(media).id })
+        .expect(200);
+      expect(existsSync(path.join(mediaDir, key))).toBe(true);
+
+      const res = await http()
+        .patch('/community/profile')
+        .set(bearer(bob))
+        .send({ avatarMediaId: null })
+        .expect(200);
+
+      expect(bodyOf<ProfilePage>(res).avatarUrl).toBeNull();
+      expect(existsSync(path.join(mediaDir, key))).toBe(false);
+      expect(await prisma.communityMedia.count({ where: { key } })).toBe(0);
+
+      // Les suites suivantes (export RGPD, maintenance) attendent un avatar à bob.
+      const again = await upload(bob, await gpsJpeg()).expect(201);
+      await http()
+        .patch('/community/profile')
+        .set(bearer(bob))
+        .send({ avatarMediaId: bodyOf<IdBody>(again).id })
+        .expect(200);
     });
   });
 

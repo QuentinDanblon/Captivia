@@ -7,7 +7,7 @@ import { Camera, FileText, Pencil, Scale, Trash2 } from 'lucide-react';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, ApiError, type Animal, type Medication, type VetAppointment, type AnimalMeasurement, type Vaccination, type BreedingRecord } from '@/lib/api';
-import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
+import { compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
 import { usePhotoPicker } from '@/components/usePhotoPicker';
 import { Link } from '@/i18n/navigation';
 import { currentMedications } from '@/lib/carnet';
@@ -58,6 +58,7 @@ import type {
 } from './_components/types';
 import { animalCarnetPath, speciesPath } from '@/lib/platform';
 import { isGuestUser } from '@/lib/guest';
+import { isGbifKey, sameName } from '@/lib/species';
 import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
 
 // W4-07 — chaque section (et sa/ses modale(s)) est un chunk séparé, chargé à la demande.
@@ -441,15 +442,18 @@ export default function AnimalDetailPage({
     if (!animal || !token) return;
     setAvatarPhotoUploading(true);
     try {
-      // W4-07 : redimensionnement (1600 px max) + JPEG 0.82 côté client, refus > 10 Mo
+      // W4-07 : réduction sur l'appareil (600 px max, ~100 Ko, WebP ou JPEG), refus > 30 Mo
       const dataUrl = await compressImageToDataUrl(file);
       await api.updateAnimal(animal.id, { photos: [dataUrl] }, token);
       await fetchAnimalData();
     } catch (err) {
       if (isImageTooLargeError(err)) {
         setToast(t('animals.photoTooLarge'));
+      } else if (isUnsupportedImageError(err)) {
+        setToast(t('animals.photoUnsupported'));
       } else {
         console.error('Error updating avatar photo:', err);
+        setToast(t('animals.errorAdding'));
       }
     } finally {
       setAvatarPhotoUploading(false);
@@ -640,9 +644,10 @@ export default function AnimalDetailPage({
           <SectionHeader
             title={animal.name}
             latin={latin ? <Link href={speciesPath(animal.speciesId)} className="text-ink-2 no-underline hover:underline">{latin}</Link> : undefined}
-            marginNote={`GBIF ${animal.speciesId}`}
+            // Race : identifiant interne (hors GBIF), aucun « GBIF n° » ; nom courant non répété.
+            marginNote={isGbifKey(animal.speciesId) ? `GBIF ${animal.speciesId}` : undefined}
             marginLabel={t('animals.sheet.gbifLabel')}
-            description={[common, getSexName(animal.sex)].filter(Boolean).join(' · ')}
+            description={[sameName(common, latin) ? undefined : common, getSexName(animal.sex)].filter(Boolean).join(' · ')}
             actions={
               <div className="hidden flex-wrap gap-2 lg:flex">
                 <Link href={animalCarnetPath(animal.id)} className={buttonClasses({ variant: 'secondary' })}>

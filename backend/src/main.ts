@@ -10,6 +10,7 @@ import { Logger as PinoLogger } from 'nestjs-pino';
 import { ConfigService } from '@nestjs/config';
 import helmet from 'helmet';
 import { resolveTrustProxy } from './config/trust-proxy';
+import { applyBodyLimits } from './config/body-limits';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -25,6 +26,9 @@ async function bootstrap() {
   // TRUST_PROXY : 'true' (= 1 saut), un entier N (nombre de proxies de confiance devant l'app),
   // ou absent/'false' (désactivé).
   app.set('trust proxy', resolveTrustProxy(process.env.TRUST_PROXY));
+
+  // Corps JSON jusqu'à 3 Mo (photos d'animal en data URL) au lieu des 100 Ko par défaut.
+  applyBodyLimits(app);
 
   // Headers de sécurité (HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy…)
   app.use(helmet());

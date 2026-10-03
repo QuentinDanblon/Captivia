@@ -59,27 +59,55 @@ describe('Seed complet (comptages minimaux)', () => {
     expect(races).toBeGreaterThanOrEqual(1211);
   });
 
-  it('a un contenu satellite pour chaque race (alimentation, habitat, comportement, santé, législation, reproduction)', async () => {
-    const where = { speciesId: { gte: 2_000_000_001 } };
-    const [feeding, habitat, behavior, health, legislation, reproduction] =
-      await Promise.all([
-        prisma.speciesFeeding.count({ where }),
-        prisma.speciesHabitat.count({ where }),
-        prisma.speciesBehavior.count({ where }),
-        prisma.speciesHealthContent.count({ where }),
-        prisma.speciesLegislation.count({ where }),
-        prisma.speciesReproduction.count({ where }),
-      ]);
-    for (const n of [
-      feeding,
-      habitat,
-      behavior,
-      health,
-      legislation,
-      reproduction,
-    ]) {
-      expect(n).toBeGreaterThanOrEqual(1211);
+  it('aucune race ne porte de section générée par modèle (B1 : sources génériques des modèles)', async () => {
+    // Titres des sources des modèles éditoriaux par espèce (prisma/templates/*.json).
+    const templatesDir = path.resolve(__dirname, '..', 'prisma', 'templates');
+    const titles = new Set<string>();
+    for (const file of fs.readdirSync(templatesDir)) {
+      if (!file.startsWith('template-')) continue;
+      const t = JSON.parse(
+        fs.readFileSync(path.join(templatesDir, file), 'utf-8'),
+      ) as Record<string, { sources?: Array<{ title?: string }> } | null>;
+      for (const section of Object.values(t)) {
+        if (section && typeof section === 'object' && 'sources' in section) {
+          for (const src of section.sources ?? []) {
+            if (src.title) titles.add(src.title);
+          }
+        }
+      }
     }
+    expect(titles.size).toBeGreaterThan(20);
+    const [row] = await prisma.$queryRaw<Array<{ n: bigint }>>`
+      SELECT count(*) AS n FROM (
+        SELECT "speciesId", "sources" FROM "SpeciesFeeding"
+        UNION ALL SELECT "speciesId", "sources" FROM "SpeciesHabitat"
+        UNION ALL SELECT "speciesId", "sources" FROM "SpeciesBehavior"
+        UNION ALL SELECT "speciesId", "sources" FROM "SpeciesHealthContent"
+        UNION ALL SELECT "speciesId", "sources" FROM "SpeciesReproduction"
+      ) s
+      WHERE s."speciesId" >= 2000000001
+        AND jsonb_typeof(s."sources") = 'array'
+        AND EXISTS (
+          SELECT 1 FROM jsonb_array_elements(s."sources") src
+          WHERE src->>'title' = ANY(${[...titles]}::text[])
+        )`;
+    expect(Number(row.n)).toBe(0);
+    // Aucun chat, chien ou cheval classé « Rongeur ».
+    expect(
+      await prisma.speciesProfile.count({
+        where: {
+          speciesId: { gte: 2_000_000_001 },
+          subcategory: 'Rongeur',
+          scientificName: {
+            in: [
+              'Felis catus',
+              'Canis lupus familiaris',
+              'Equus ferus caballus',
+            ],
+          },
+        },
+      }),
+    ).toBe(0);
   });
 
   it('persiste sourceUrl pour les profils qui en fournissent une', async () => {

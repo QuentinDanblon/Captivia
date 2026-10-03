@@ -169,6 +169,19 @@ export class RateLimitGuard extends BaseRateLimitGuard {
 }
 
 /**
+ * Catalogue des espèces (`/species/*`) : 300 requêtes / 60 s par IP. Une fiche lit sa
+ * description, ses noms, ses médias, son statut UICN… (une dizaine de requêtes) : la limite
+ * par défaut (100) bloquait la consultation de quelques fiches par minute derrière une IP
+ * partagée.
+ */
+@Injectable()
+export class CatalogRateLimitGuard extends BaseRateLimitGuard {
+  constructor() {
+    super('catalog', 300, 60);
+  }
+}
+
+/**
  * Rate limiting strict pour les routes sensibles (auth : login, register, forgot-password) :
  * 10 requêtes / 60 s par IP.
  */

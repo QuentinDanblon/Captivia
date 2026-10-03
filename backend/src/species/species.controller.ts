@@ -8,7 +8,7 @@ import {
   BadRequestException,
   UseGuards,
 } from '@nestjs/common';
-import { RateLimitGuard } from '../common/guards/rate-limit.guard';
+import { CatalogRateLimitGuard } from '../common/guards/rate-limit.guard';
 import {
   ApiTags,
   ApiOperation,
@@ -24,7 +24,7 @@ import {
   toUpstreamHttpException,
 } from '../external/http/external-errors';
 
-@UseGuards(RateLimitGuard)
+@UseGuards(CatalogRateLimitGuard)
 @ApiTags('species')
 @Controller('species')
 export class SpeciesController {

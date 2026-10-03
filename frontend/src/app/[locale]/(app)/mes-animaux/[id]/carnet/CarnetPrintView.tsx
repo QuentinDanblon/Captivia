@@ -191,12 +191,14 @@ export default function CarnetPrintView({ id }: { id: string }) {
     ['vaccine', 'surgery', 'specific_food', 'medical_history'].includes(type)
       ? t(`animals.healthRecordTypes.${type}`)
       : type;
-  const appointmentStatusLabel = (value: string) =>
+  const appointmentStatusLabel = (value: string, date: string) =>
     value === 'done'
       ? t('animals.vetAppointments.statusDone')
       : value === 'cancelled'
         ? t('animals.vetAppointments.statusCancelled')
-        : t('animals.vetAppointments.statusScheduled');
+        : new Date(date).getTime() < Date.now()
+          ? t('animals.vetAppointments.statusToConfirm')
+          : t('animals.vetAppointments.statusScheduled');
 
   // App native : `window.print()` est inopérant dans la WebView → fichier HTML autonome partagé.
   const handleShare = async () => {
@@ -415,7 +417,7 @@ export default function CarnetPrintView({ id }: { id: string }) {
                   a.vetName,
                   text(a.reason),
                   text(a.location),
-                  appointmentStatusLabel(a.status),
+                  appointmentStatusLabel(a.status, a.date),
                 ])}
               />
             )}

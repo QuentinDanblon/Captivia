@@ -9,6 +9,7 @@ import {
   authorityOf,
   iucnCategoryOf,
   isGbifKey,
+  sameName,
   speciesDisplayName,
   speciesGroupOf,
   speciesRankOf,
@@ -162,7 +163,12 @@ export default function SpeciesDetailPage({ params }: { params: Promise<{ locale
   const speciesId = Number(species.profile?.speciesId ?? species.key ?? id);
   const latin = species.profile?.scientificName || species.canonicalName || species.scientificName;
   const authority = authorityOf(species.scientificName, latin);
-  const { name, isLatin } = speciesDisplayName(locale, species.profile?.commonNameFr, latin);
+  const display = speciesDisplayName(locale, species.profile?.commonNameFr, latin);
+  const name = display.name;
+  // Race (identifiant Captivia, hors GBIF) : son « nom scientifique » est son nom courant, ni en
+  // italique ni répété sous le titre (« Abyssin » une seule fois).
+  const isLatin = display.isLatin && isGbifKey(speciesId);
+  const showLatin = !isLatin && !sameName(name, latin);
   const group = speciesGroupOf({ class: species.class, category: species.profile?.category });
   const groupLabel = group ? t(`home.taxonomy.${group.gbifClass}`) : null;
   const rank = speciesRankOf(species.rank, speciesId);
@@ -250,8 +256,8 @@ export default function SpeciesDetailPage({ params }: { params: Promise<{ locale
                 name
               )
             }
-            latin={isLatin ? undefined : latin}
-            authority={isLatin ? undefined : authority}
+            latin={showLatin ? latin : undefined}
+            authority={showLatin ? authority : undefined}
             marginNote={isGbifKey(speciesId) ? `GBIF ${speciesId}` : undefined}
             marginLabel={t('species.gbifLabel')}
             description={species.profile?.description || undefined}

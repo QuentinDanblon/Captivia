@@ -131,17 +131,14 @@ export class NotificationsService {
       where: { userId },
     });
 
-    // Create default preferences if none exist
+    // Préférences par défaut à la première lecture : AUCUN rappel générique imposé (un « UVB »
+    // quotidien n'a pas de sens pour un chat). L'utilisateur choisit ses sujets ; les comptes
+    // existants gardent les leurs (libellés traduits à l'affichage, `reminder-labels`).
     if (!prefs) {
       prefs = await this.prisma.notificationPreference.create({
         data: {
           userId,
-          types: {
-            nourrissage: true,
-            nettoyage: true,
-            uvb: true,
-            sante: true,
-          },
+          types: {},
           schedule: {
             start: '08:00',
             end: '22:00',
@@ -168,7 +165,9 @@ export class NotificationsService {
       updateData.typeSchedules = data.typeSchedules as Prisma.InputJsonValue;
     if (data.schedule !== undefined)
       updateData.schedule = data.schedule as Prisma.InputJsonValue;
-    if (data.snooze !== undefined) updateData.snooze = data.snooze;
+    // Le DTO refuse null / NaN ; garde défensive : jamais d'entier invalide en base (500).
+    if (typeof data.snooze === 'number' && Number.isInteger(data.snooze))
+      updateData.snooze = data.snooze;
     if (data.deliveryChannel !== undefined) {
       const valid = ['push', 'email', 'both'].includes(data.deliveryChannel)
         ? data.deliveryChannel

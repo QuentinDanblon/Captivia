@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AnimalsService } from '../animals/animals.service';
 import { CreateMedicationDto, UpdateMedicationDto } from './dto/medication.dto';
@@ -31,8 +35,18 @@ export class MedicationsService {
     return medication;
   }
 
+  /** La date de fin ne peut pas précéder la date de début (même règle que les rappels de vaccin). */
+  private assertEndDateValid(startDate: Date, endDate?: string | Date | null) {
+    if (endDate && new Date(endDate).getTime() < startDate.getTime()) {
+      throw new BadRequestException(
+        'endDate must be greater than or equal to startDate.',
+      );
+    }
+  }
+
   async create(animalId: string, userId: string, dto: CreateMedicationDto) {
     await this.animalsService.findOne(animalId, userId);
+    this.assertEndDateValid(new Date(dto.startDate), dto.endDate);
     return this.prisma.medication.create({
       data: {
         animalId,
@@ -54,7 +68,17 @@ export class MedicationsService {
     userId: string,
     dto: UpdateMedicationDto,
   ) {
-    await this.findOne(animalId, medicationId, userId);
+    const existing = await this.findOne(animalId, medicationId, userId);
+    // Contrôle sur les valeurs finales (champ modifié, sinon valeur enregistrée ; null = effacée),
+    // seulement si une date change : arrêter un traitement ancien reste toujours possible.
+    if (dto.startDate !== undefined || dto.endDate !== undefined) {
+      this.assertEndDateValid(
+        dto.startDate !== undefined
+          ? new Date(dto.startDate)
+          : existing.startDate,
+        dto.endDate !== undefined ? dto.endDate : existing.endDate,
+      );
+    }
     const data: Record<string, unknown> = {};
     if (dto.name !== undefined) data.name = dto.name;
     if (dto.dose !== undefined) data.dose = dto.dose;

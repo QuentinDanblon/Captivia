@@ -14,10 +14,13 @@ import { Media } from '../transformers/data-transformer.interface';
 import type {
   GbifDistribution,
   GbifIucn,
+  GbifMatch,
   GbifMetrics,
   GbifOccurrenceCount,
   GbifSpecies,
 } from '../external/gbif.types';
+import { isBreedId } from './species-parent';
+import type { SectionsInheritedFrom } from './species-profile.service';
 import type {
   SpeciesBehavior,
   SpeciesFeeding,
@@ -87,10 +90,81 @@ export interface SpeciesDetail {
   feeding: SpeciesFeeding | null | undefined;
   habitat: SpeciesHabitat | null | undefined;
   behavior: SpeciesBehavior | null | undefined;
+  /** Race : sections reprises de l'espèce parente (null : aucune). */
+  inheritedFrom: SectionsInheritedFrom | null;
+  /** Clé GBIF du taxon dont la classification est affichée (null : aucune classification fiable). */
+  gbifKey: number | null;
   /** Fiche renvoyée sans taxonomie (GBIF indisponible), non mise en cache. */
   degraded?: boolean;
   /** Fiche servie depuis le cache périmé. */
   stale?: boolean;
+}
+
+/** Classification GBIF retenue pour une fiche locale (cohérente avec son nom scientifique). */
+interface ResolvedTaxon {
+  key: number;
+  rank: string;
+  kingdom: string;
+  phylum: string;
+  class: string;
+  order: string;
+  family: string;
+  genus: string;
+  iucnStatus?: string;
+}
+
+/** Durée de cache de la clé GBIF résolue d'une fiche locale (7 jours). */
+const TAXON_CACHE_TTL = 7 * 24 * 3600;
+
+/** Rangs acceptés pour un rapprochement par nom (pas de genre ni de famille). */
+const MATCH_RANKS = new Set(['SPECIES', 'SUBSPECIES', 'VARIETY', 'FORM']);
+
+function genusOf(name: string | undefined): string {
+  return (name ?? '').trim().split(/\s+/)[0]?.toLowerCase() ?? '';
+}
+
+/**
+ * M11 — une classification GBIF n'est fusionnée avec une fiche locale que si elle décrit bien
+ * le même animal : règne Animalia et même genre que le nom scientifique local (genre du nom
+ * rapproché ou genre accepté, pour tolérer les synonymes). Plusieurs identifiants historiques du
+ * catalogue ne sont pas des clés GBIF de leur taxon (« Chien » → une broméliacée) : leur
+ * classification est alors recherchée par le nom scientifique.
+ */
+export function isConsistentTaxon(
+  taxon: {
+    kingdom?: string;
+    genus?: string;
+    canonicalName?: string;
+    scientificName?: string;
+  },
+  localScientificName: string,
+): boolean {
+  if (taxon.kingdom !== 'Animalia') return false;
+  const local = genusOf(localScientificName);
+  if (!local) return false;
+  return [
+    genusOf(taxon.genus),
+    genusOf(taxon.canonicalName),
+    genusOf(taxon.scientificName),
+  ].includes(local);
+}
+
+function taxonFromGbif(
+  key: number,
+  t: GbifSpecies | GbifMatch,
+  iucnStatus?: string,
+): ResolvedTaxon {
+  return {
+    key,
+    rank: t.rank || 'SPECIES',
+    kingdom: t.kingdom ?? '',
+    phylum: t.phylum ?? '',
+    class: t.class ?? '',
+    order: t.order ?? '',
+    family: t.family ?? '',
+    genus: t.genus ?? '',
+    iucnStatus,
+  };
 }
 
 interface VernacularResult {
@@ -160,7 +234,13 @@ export class SpeciesService {
           gbifLimit,
           offset,
         );
-        let gbifResults = gbifResponse.results || [];
+        // Animaux uniquement, au rang espèce ou inférieur : la requête GBIF filtre déjà le règne
+        // (highertaxonKey), ce filtre écarte en plus les résultats d'un autre règne déclaré.
+        let gbifResults = (gbifResponse.results || []).filter(
+          (item) =>
+            (!item.kingdom || item.kingdom === 'Animalia') &&
+            (!item.rank || MATCH_RANKS.has(String(item.rank))),
+        );
         if (filters?.class) {
           gbifResults = gbifResults.filter(
             (item) =>
@@ -168,7 +248,9 @@ export class SpeciesService {
               String(item.class).toLowerCase() === filters.class!.toLowerCase(),
           );
           if (gbifResults.length === 0) {
-            gbifResults = (gbifResponse.results || []).slice(0, limit);
+            gbifResults = (gbifResponse.results || [])
+              .filter((item) => !item.kingdom || item.kingdom === 'Animalia')
+              .slice(0, limit);
           }
         }
         const sliced = gbifResults.slice(0, limit);
@@ -231,31 +313,28 @@ export class SpeciesService {
       'fr',
     );
 
-    // Fetch classification from GBIF (speciesId is the GBIF key)
-    let kingdom = '';
-    let phylum = '';
-    let taxClass = '';
-    let order = '';
-    let family = '';
-    let genus = '';
-    let rank: string = 'SPECIES';
-    let iucnStatus: string | undefined;
+    // Classification GBIF : fiche locale → taxon cohérent avec son nom scientifique (M11) ;
+    // sans fiche locale → le speciesId est une clé GBIF (espèce choisie dans le repli GBIF).
+    let taxon: ResolvedTaxon | null = null;
     let gbifSpecies: GbifSpecies | null = null;
     // Panne GBIF (réseau, 5xx, disjoncteur ouvert) : distincte d'un 404 (espèce inconnue
     // de GBIF, normal pour les races au speciesId artificiel).
     let gbifUnavailable = false;
     try {
-      gbifSpecies = await this.gbifService.getSpecies(id);
-      if (gbifSpecies) {
-        kingdom = gbifSpecies.kingdom ?? '';
-        phylum = gbifSpecies.phylum ?? '';
-        taxClass = gbifSpecies.class ?? '';
-        order = gbifSpecies.order ?? '';
-        family = gbifSpecies.family ?? '';
-        genus = gbifSpecies.genus ?? '';
-        if (gbifSpecies.rank) rank = gbifSpecies.rank;
-        if (gbifSpecies.iucnRedListCategory)
-          iucnStatus = gbifSpecies.iucnRedListCategory;
+      if (profileDetail.profile) {
+        taxon = await this.resolveTaxon(
+          speciesId,
+          profileDetail.profile.scientificName,
+        );
+      } else {
+        gbifSpecies = await this.gbifService.getSpecies(id);
+        if (gbifSpecies) {
+          taxon = taxonFromGbif(
+            gbifSpecies.key ?? speciesId,
+            gbifSpecies,
+            gbifSpecies.iucnRedListCategory,
+          );
+        }
       }
     } catch (err) {
       this.logger.warn(
@@ -263,6 +342,14 @@ export class SpeciesService {
       );
       gbifUnavailable = isUpstreamError(err) && !isUpstreamNotFound(err);
     }
+    const kingdom = taxon?.kingdom ?? '';
+    const phylum = taxon?.phylum ?? '';
+    const taxClass = taxon?.class ?? '';
+    const order = taxon?.order ?? '';
+    const family = taxon?.family ?? '';
+    const genus = taxon?.genus ?? '';
+    const rank = taxon?.rank ?? 'SPECIES';
+    const iucnStatus = taxon?.iucnStatus;
 
     if (gbifUnavailable) {
       // Dernière fiche complète connue (même périmée) : meilleure qu'une fiche sans taxonomie.
@@ -315,6 +402,8 @@ export class SpeciesService {
         feeding: profileDetail.feeding,
         habitat: profileDetail.habitat,
         behavior: profileDetail.behavior,
+        inheritedFrom: profileDetail.inheritedFrom ?? null,
+        gbifKey: taxon?.key ?? null,
       };
     } else {
       // Fallback: build response from GBIF data only (no local editorial content).
@@ -347,6 +436,8 @@ export class SpeciesService {
         feeding: null,
         habitat: null,
         behavior: null,
+        inheritedFrom: null,
+        gbifKey: taxon?.key ?? null,
       };
     }
 
@@ -360,6 +451,81 @@ export class SpeciesService {
     this.cacheService.set(cacheKey, response, 86400);
 
     return response;
+  }
+
+  /**
+   * Taxon GBIF d'une fiche locale (M11), mis en cache 7 jours :
+   *  1. l'identifiant local, s'il s'agit d'une clé GBIF dont le taxon est cohérent avec le nom
+   *     scientifique local (règne Animalia, même genre) ;
+   *  2. sinon le rapprochement par nom (`/species/match`, règne Animalia) ;
+   *  3. sinon null : aucune classification affichée plutôt qu'une classification fausse.
+   * Une panne GBIF est propagée (non mise en cache) : l'appelant choisit son repli.
+   */
+  private async resolveTaxon(
+    speciesId: number,
+    scientificName: string,
+  ): Promise<ResolvedTaxon | null> {
+    const cacheKey = `gbif-taxon:${speciesId}`;
+    const cached = this.cacheService.get(cacheKey) as
+      | { taxon: ResolvedTaxon | null }
+      | undefined;
+    if (cached) return cached.taxon;
+
+    let taxon: ResolvedTaxon | null = null;
+    if (!isBreedId(speciesId)) {
+      try {
+        const byKey = await this.gbifService.getSpecies(String(speciesId));
+        if (byKey && isConsistentTaxon(byKey, scientificName)) {
+          taxon = taxonFromGbif(
+            byKey.key ?? speciesId,
+            byKey,
+            byKey.iucnRedListCategory,
+          );
+        }
+      } catch (err) {
+        if (!isUpstreamNotFound(err) && !(err instanceof NotFoundException)) {
+          throw err;
+        }
+      }
+    }
+    if (!taxon && scientificName.trim()) {
+      const match = await this.gbifService.matchSpecies(scientificName);
+      const key = match?.acceptedUsageKey ?? match?.usageKey;
+      if (
+        key &&
+        match.matchType !== 'NONE' &&
+        match.matchType !== 'HIGHERRANK' &&
+        MATCH_RANKS.has(String(match.rank)) &&
+        isConsistentTaxon(match, scientificName)
+      ) {
+        taxon = taxonFromGbif(key, match);
+      }
+    }
+    if (!taxon) {
+      this.logger.warn(
+        `Aucune classification GBIF cohérente pour la fiche ${speciesId} (${scientificName})`,
+      );
+    }
+    this.cacheService.set(cacheKey, { taxon }, TAXON_CACHE_TTL);
+    return taxon;
+  }
+
+  /**
+   * Clé GBIF à interroger pour l'identifiant demandé : celle du taxon résolu pour une fiche
+   * locale (M11 : jamais les photos ou les noms d'une plante pour « Chien »), l'identifiant
+   * lui-même sinon. Fiche locale sans taxon cohérent → 404.
+   */
+  private async gbifKeyFor(id: string): Promise<string> {
+    if (!/^[1-9]\d{0,14}$/.test(id)) return id;
+    const speciesId = Number(id);
+    const scientificName =
+      await this.speciesProfileService.getScientificName(speciesId);
+    if (scientificName === null) return id;
+    const taxon = await this.resolveTaxon(speciesId, scientificName);
+    if (!taxon) {
+      throw new NotFoundException('Species not found');
+    }
+    return String(taxon.key);
   }
 
   private mapGbifClassToCategory(gbifClass: string): string {
@@ -394,7 +560,9 @@ export class SpeciesService {
 
     // If not in cache, fetch from GBIF
     try {
-      const gbifNames = await this.gbifService.getVernacularNames(id);
+      const gbifNames = await this.gbifService.getVernacularNames(
+        await this.gbifKeyFor(id),
+      );
 
       // Transform the vernacular names using the transformer service
       const transformedNames =
@@ -428,7 +596,9 @@ export class SpeciesService {
       return cachedIucn as GbifIucn;
     }
     try {
-      const gbifIucn = await this.gbifService.getIucn(id);
+      const gbifIucn = await this.gbifService.getIucn(
+        await this.gbifKeyFor(id),
+      );
       // Mise en cache 24 h d'une réponse valide uniquement (jamais d'un échec).
       if (gbifIucn) this.cacheService.set(cacheKey, gbifIucn, 86400);
       return gbifIucn;
@@ -477,7 +647,9 @@ export class SpeciesService {
 
     // If not in cache, fetch from GBIF
     try {
-      const gbifDistributions = await this.gbifService.getDistributions(id);
+      const gbifDistributions = await this.gbifService.getDistributions(
+        await this.gbifKeyFor(id),
+      );
 
       // Cache the results with distributions-specific TTL (24h)
       this.cacheService.set(cacheKey, gbifDistributions, 86400);
@@ -513,7 +685,9 @@ export class SpeciesService {
 
     // If not in cache, fetch from GBIF
     try {
-      const gbifMedia = await this.gbifService.getMedia(id);
+      const gbifMedia = await this.gbifService.getMedia(
+        await this.gbifKeyFor(id),
+      );
 
       // Transform the media using the transformer service
       const transformedMedia =
@@ -555,7 +729,9 @@ export class SpeciesService {
 
     // If not in cache, fetch from GBIF
     try {
-      const gbifMetrics = await this.gbifService.getMetrics(id);
+      const gbifMetrics = await this.gbifService.getMetrics(
+        await this.gbifKeyFor(id),
+      );
 
       // Cache the results with metrics-specific TTL (7d)
       this.cacheService.set(cacheKey, gbifMetrics, 604800);
@@ -585,7 +761,9 @@ export class SpeciesService {
 
     // If not in cache, fetch from GBIF
     try {
-      const gbifCount = await this.gbifService.countOccurrences(id);
+      const gbifCount = await this.gbifService.countOccurrences(
+        await this.gbifKeyFor(id),
+      );
 
       // Cache the results with occurrences-specific TTL (7d)
       this.cacheService.set(cacheKey, gbifCount, 604800);

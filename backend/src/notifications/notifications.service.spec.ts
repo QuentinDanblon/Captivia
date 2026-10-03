@@ -327,12 +327,8 @@ describe('NotificationsService', () => {
       ).toHaveBeenCalledWith({
         data: {
           userId: mockUserId,
-          types: {
-            nourrissage: true,
-            nettoyage: true,
-            uvb: true,
-            sante: true,
-          },
+          // Aucun rappel générique imposé (pas d'« UVB » quotidien chez un chat).
+          types: {},
           schedule: {
             start: '08:00',
             end: '22:00',
@@ -369,6 +365,33 @@ describe('NotificationsService', () => {
         data: updateData,
       });
     });
+
+    it.each([
+      ['null (NaN sérialisé)', null],
+      ['NaN', Number.NaN],
+      ['décimal', 7.5],
+    ])(
+      "snooze %s : jamais écrit en base (pas d'erreur 500)",
+      async (_label, snooze) => {
+        mockPrismaService.notificationPreference.findUnique.mockResolvedValue(
+          mockPreferences,
+        );
+        mockPrismaService.notificationPreference.update.mockResolvedValue(
+          mockPreferences,
+        );
+
+        await service.updateNotificationPreferences(mockUserId, {
+          snooze: snooze as number,
+        });
+
+        expect(
+          mockPrismaService.notificationPreference.update,
+        ).toHaveBeenCalledWith({
+          where: { id: mockPreferences.id },
+          data: {},
+        });
+      },
+    );
 
     it('should create preferences if not exist before updating', async () => {
       mockPrismaService.notificationPreference.findUnique

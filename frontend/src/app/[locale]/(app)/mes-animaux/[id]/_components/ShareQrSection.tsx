@@ -3,8 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { QrCode } from 'lucide-react';
-import { api, type Animal } from '@/lib/api';
-import { Button, Card, Modal, Skeleton, SkeletonGroup } from '@/components/ui';
+import { api, ApiError, type Animal } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
+import { GUEST_ACCOUNT_CODE } from '@/lib/guest';
+import { Alert, Button, Card, Modal, Skeleton, SkeletonGroup } from '@/components/ui';
 import { FormError, SectionError } from './parts';
 
 interface Props {
@@ -24,6 +26,9 @@ export default function ShareQrSection({ animal, token, locale }: Props) {
   const [publicLink, setPublicLink] = useState<Awaited<ReturnType<typeof api.getAnimalPublicLink>> | null>(null);
   const [publicLinkBusy, setPublicLinkBusy] = useState(false);
   const [publicLinkError, setPublicLinkError] = useState('');
+  /** 403 EMAIL_NOT_VERIFIED : explication + renvoi du lien de vérification. */
+  const [emailNotVerified, setEmailNotVerified] = useState(false);
+  const [resendState, setResendState] = useState<'idle' | 'sending' | 'sent' | 'tooSoon' | 'error'>('idle');
 
   // W0-06 — charge l'état du partage public (désactivé par défaut)
   const publicLinkAnimalId = animal?.id;
@@ -44,20 +49,44 @@ export default function ShareQrSection({ animal, token, locale }: Props) {
     };
   }, [publicLinkAnimalId, token, publicLinkLocale]);
 
+  /** Erreur du partage public : jamais le message brut de l'API. */
+  const showPublicLinkError = (e: unknown) => {
+    if (e instanceof ApiError && e.code === 'EMAIL_NOT_VERIFIED') {
+      setEmailNotVerified(true);
+      return;
+    }
+    setPublicLinkError(
+      t(
+        errorKey(e, {
+          codes: { [GUEST_ACCOUNT_CODE]: 'guest.publicLinkNote' },
+          statuses: { 403: 'publicLink.premiumRequired' },
+          fallback: 'publicLink.updateError',
+        }),
+      ),
+    );
+  };
+
+  const resendVerification = async () => {
+    if (!token) return;
+    setResendState('sending');
+    try {
+      await api.resendVerification(token);
+      setResendState('sent');
+    } catch (err) {
+      setResendState(err instanceof ApiError && err.status === 429 ? 'tooSoon' : 'error');
+    }
+  };
+
   const updatePublicLink = async (body: { enabled?: boolean; showHealth?: boolean }) => {
     if (!animal || !token || !locale || publicLinkBusy) return;
     setPublicLinkBusy(true);
     setPublicLinkError('');
+    setEmailNotVerified(false);
     try {
       const state = await api.updateAnimalPublicLink(animal.id, token, body, locale);
       setPublicLink(state);
     } catch (e) {
-      const msg = e instanceof Error ? e.message.toLowerCase() : '';
-      setPublicLinkError(
-        msg.includes('premium') || msg.includes('403') || msg.includes('forbidden')
-          ? t('publicLink.premiumRequired')
-          : t('publicLink.updateError'),
-      );
+      showPublicLinkError(e);
     } finally {
       setPublicLinkBusy(false);
     }
@@ -68,18 +97,14 @@ export default function ShareQrSection({ animal, token, locale }: Props) {
     if (typeof window !== 'undefined' && !window.confirm(t('publicLink.regenerateConfirm'))) return;
     setPublicLinkBusy(true);
     setPublicLinkError('');
+    setEmailNotVerified(false);
     try {
       const state = await api.regenerateAnimalPublicLink(animal.id, token, locale);
       setPublicLink(state);
       setQrDataUrl('');
       setQrUrl('');
     } catch (e) {
-      const msg = e instanceof Error ? e.message.toLowerCase() : '';
-      setPublicLinkError(
-        msg.includes('premium') || msg.includes('403') || msg.includes('forbidden')
-          ? t('publicLink.premiumRequired')
-          : t('publicLink.updateError'),
-      );
+      showPublicLinkError(e);
     } finally {
       setPublicLinkBusy(false);
     }
@@ -101,7 +126,7 @@ export default function ShareQrSection({ animal, token, locale }: Props) {
       setQrUrl(url);
     } catch (e) {
       console.error('QR error:', e);
-      setQrError(e instanceof Error ? e.message : t('premiumLock.qrCodeError'));
+      setQrError(t('premiumLock.qrCodeError'));
     } finally {
       setQrLoading(false);
     }
@@ -155,6 +180,27 @@ export default function ShareQrSection({ animal, token, locale }: Props) {
             <p className="m-0 text-meta text-ink-2">{t('publicLink.disabledHint')}</p>
           )}
           <FormError>{publicLinkError}</FormError>
+          {emailNotVerified ? (
+            <Alert
+              severity="warning"
+              title={
+                resendState === 'sent'
+                  ? t('emailVerification.bannerSent')
+                  : resendState === 'tooSoon'
+                    ? t('emailVerification.bannerTooSoon')
+                    : resendState === 'error'
+                      ? t('emailVerification.bannerError')
+                      : t('publicLink.emailNotVerified')
+              }
+              action={
+                resendState !== 'sent' ? (
+                  <Button variant="secondary" size="sm" onClick={resendVerification} loading={resendState === 'sending'}>
+                    {resendState === 'sending' ? t('emailVerification.bannerSending') : t('emailVerification.bannerResend')}
+                  </Button>
+                ) : undefined
+              }
+            />
+          ) : null}
           <div className="border-t border-line pt-4">
             <Button
               variant="secondary"
