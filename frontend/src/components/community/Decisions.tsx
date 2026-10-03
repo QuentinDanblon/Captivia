@@ -145,7 +145,8 @@ export function MyReports() {
         <ul className="m-0 grid list-none divide-y divide-line p-0">
           {state.items.map((r) => {
             const status = r.status && ['OPEN', 'ACTIONED', 'DISMISSED'].includes(r.status) ? r.status : 'OPEN';
-            const postId = r.postId ?? (r.targetType === 'POST' ? r.targetId : null);
+            const postId = r.targetType === 'POST' ? r.targetId : null;
+            const decision = r.decision;
             return (
               <li key={r.id} className="grid gap-1 py-3">
                 <span className="flex flex-wrap items-center gap-2">
@@ -154,7 +155,14 @@ export function MyReports() {
                     {t(`reports.status.${status}`)}
                   </Badge>
                 </span>
-                {r.excerpt ? <PlainText text={r.excerpt} clamp className="text-ui text-ink-2" /> : null}
+                {decision ? (
+                  <span className="text-ui text-ink-2">
+                    {decision.contentRemoved ? t('reports.removed') : t('reports.kept')}
+                    {decision.reason ? ` · ${reasonOf(decision.reason)}` : null}
+                    {' · '}
+                    <span className="font-mono text-meta">{t('reports.decidedOn', { date: formatLongDate(decision.decidedAt, locale) })}</span>
+                  </span>
+                ) : null}
                 <span className="flex flex-wrap items-center gap-3">
                   {r.createdAt ? <span className="font-mono text-meta text-ink-2">{formatLongDate(r.createdAt, locale)}</span> : null}
                   {postId && status === 'OPEN' ? (

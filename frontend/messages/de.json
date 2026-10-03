@@ -1787,7 +1787,8 @@
       "suspended": {
         "title": "Posten ausgesetzt",
         "body": "Sie können weiterhin lesen und Beiträge mögen, aber vorerst nicht posten oder antworten. Entscheidung und Widerspruch sind einsehbar.",
-        "bodyUntil": "Sie können weiterhin lesen und Beiträge mögen, aber bis zum {date} nicht posten oder antworten. Entscheidung und Widerspruch sind einsehbar."
+        "bodyUntil": "Sie können weiterhin lesen und Beiträge mögen, aber bis zum {date} nicht posten oder antworten. Entscheidung und Widerspruch sind einsehbar.",
+        "bodyNoDate": "Das Posten ist für Ihr Konto ausgesetzt, auch nach dem Verlassen der Community. Entscheidung und Widerspruch sind einsehbar."
       },
       "rateLimited": {
         "title": "Limit vorerst erreicht",
@@ -1803,11 +1804,11 @@
       },
       "handleReserved": {
         "title": "Benutzername reserviert",
-        "body": "Dieser Name (oder eine ähnliche Variante) ist reserviert, etwa weil er an das Team erinnert oder kürzlich vergeben war. Wählen Sie einen anderen."
+        "body": "Dieser Benutzername ist reserviert oder einem geschützten Namen zu ähnlich (zum Beispiel Buchstaben durch Ziffern ersetzt). Wählen Sie einen anderen."
       },
       "handleTaken": {
         "title": "Benutzername bereits vergeben",
-        "body": "Ein anderes Mitglied nutzt diesen Namen schon. Ergänzen Sie eine Zahl oder ein Wort: „kaa_und_ich“, „gecko.lea“."
+        "body": "Dieser Benutzername ist vergeben oder wurde kürzlich von einem anderen Mitglied aufgegeben (er bleibt 60 Tage reserviert). Ergänzen Sie eine Zahl oder ein Wort: „kaa_und_ich“, „gecko.lea“."
       },
       "mediaType": {
         "title": "Fotoformat nicht akzeptiert",
@@ -1815,15 +1816,19 @@
       },
       "mediaTooLarge": {
         "title": "Foto zu groß",
-        "body": "Wählen Sie ein kleineres Foto (höchstens 8 MB nach dem Verkleinern)."
+        "body": "Wählen Sie ein kleineres Foto: höchstens 8 MB, 10.000 px pro Seite und 24 Megapixel."
       },
       "mediaInvalid": {
         "title": "Foto nicht lesbar",
-        "body": "Dieses Foto konnte nicht gelesen werden. Wählen Sie ein anderes."
+        "body": "Dieses Foto konnte nicht gelesen werden oder ist zu lang gezogen (Panorama, sehr langer Screenshot). Wählen Sie ein anderes oder schneiden Sie es zu."
       },
       "mediaDimensions": {
         "title": "Ungewöhnliches Fotoformat",
         "body": "Dieses Foto ist zu lang gezogen oder zu groß. Schneiden Sie es zu und versuchen Sie es erneut."
+      },
+      "mediaBusy": {
+        "title": "Hochladen gerade nicht möglich",
+        "body": "Gerade kommen viele Fotos gleichzeitig an. Versuchen Sie es gleich noch einmal."
       },
       "cannotReportOwn": {
         "title": "Das ist Ihr Beitrag",
@@ -2223,7 +2228,10 @@
         "OPEN": "Wird geprüft",
         "ACTIONED": "Maßnahme ergriffen",
         "DISMISSED": "Geprüft, ohne Maßnahme"
-      }
+      },
+      "decidedOn": "Entscheidung vom {date}",
+      "removed": "Inhalt entfernt",
+      "kept": "Inhalt bleibt"
     },
     "rules": {
       "title": "Regeln der Community",

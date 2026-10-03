@@ -1787,7 +1787,8 @@
       "suspended": {
         "title": "Posting suspended",
         "body": "You can still read and like, but not post or reply for now. The decision and how to appeal are available.",
-        "bodyUntil": "You can still read and like, but not post or reply until {date}. The decision and how to appeal are available."
+        "bodyUntil": "You can still read and like, but not post or reply until {date}. The decision and how to appeal are available.",
+        "bodyNoDate": "Posting is suspended on your account, even after leaving the community. The decision and how to appeal are available."
       },
       "rateLimited": {
         "title": "Limit reached for now",
@@ -1803,11 +1804,11 @@
       },
       "handleReserved": {
         "title": "Username reserved",
-        "body": "This username (or a close variant) is reserved, for example because it sounds like the team or was used recently. Choose another one."
+        "body": "This username is reserved or looks too much like a protected one (letters swapped for digits, for example). Choose another one."
       },
       "handleTaken": {
         "title": "Username already taken",
-        "body": "Another member already uses this username. Add a number or a word: “kaa_and_me”, “gecko.lea”."
+        "body": "This username is taken, or another member gave it up recently (it stays reserved for 60 days). Add a number or a word: “kaa_and_me”, “gecko.lea”."
       },
       "mediaType": {
         "title": "Photo format not accepted",
@@ -1815,15 +1816,19 @@
       },
       "mediaTooLarge": {
         "title": "Photo too heavy",
-        "body": "Choose a lighter photo (8 MB at most after resizing)."
+        "body": "Choose a lighter or smaller photo: 8 MB at most, 10,000 px per side and 24 megapixels at most."
       },
       "mediaInvalid": {
         "title": "Unreadable photo",
-        "body": "This photo could not be read. Choose another one."
+        "body": "This photo couldn't be read, or it is too stretched (panorama, very long screenshot). Choose another one or crop it."
       },
       "mediaDimensions": {
         "title": "Unusual photo size",
         "body": "This photo is too stretched or too large. Crop it, then try again."
+      },
+      "mediaBusy": {
+        "title": "Can't upload right now",
+        "body": "Lots of photos are arriving at once. Try again in a moment."
       },
       "cannotReportOwn": {
         "title": "This is your post",
@@ -2223,7 +2228,10 @@
         "OPEN": "Under review",
         "ACTIONED": "Action taken",
         "DISMISSED": "Reviewed, no action"
-      }
+      },
+      "decidedOn": "Decision of {date}",
+      "removed": "Content removed",
+      "kept": "Content kept"
     },
     "rules": {
       "title": "Community rules",

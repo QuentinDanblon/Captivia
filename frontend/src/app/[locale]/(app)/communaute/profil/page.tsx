@@ -46,6 +46,7 @@ function ActivationForm() {
   const [avatarError, setAvatarError] = useState<string | null>(null);
   const [errors, setErrors] = useState<{ handle?: string; rules?: string; age?: string }>({});
   const [submitError, setSubmitError] = useState<CommunityErrorKey | null>(null);
+  const [rawError, setRawError] = useState<unknown>(null);
   const [busy, setBusy] = useState(false);
   const [avatarWarning, setAvatarWarning] = useState(false);
 
@@ -96,7 +97,10 @@ function ActivationForm() {
     } catch (err) {
       const key = communityErrorKey(err);
       if (HANDLE_ERRORS.includes(key)) setErrors({ handle: t(`errors.${key}.body`) });
-      else setSubmitError(key);
+      else {
+        setSubmitError(key);
+        setRawError(err);
+      }
     } finally {
       setBusy(false);
     }
@@ -195,7 +199,7 @@ function ActivationForm() {
             </div>
           ) : null}
 
-          {submitError ? <CommunityNotice errorKey={submitError} severity="urgent" token={token} /> : null}
+          {submitError ? <CommunityNotice errorKey={submitError} severity="urgent" token={token} error={rawError} accountWide /> : null}
           {avatarWarning ? <Alert severity="warning" title={t('profile.avatarLater')} /> : null}
 
           <div>
@@ -435,6 +439,8 @@ function ProfileView() {
   const { me, isGuest, token } = useCommunity();
   if (isGuest) return <CommunityNotice errorKey="guest" severity="info" />;
   if (me.reasons.includes('EMAIL_NOT_VERIFIED')) return <CommunityNotice errorKey="emailNotVerified" severity="info" token={token} />;
+  // Suspension portée par le compte : quitter puis revenir ne la lève pas, l'activation attendra.
+  if (!me.profile && me.reasons.includes('COMMUNITY_SUSPENDED')) return <CommunityNotice errorKey="suspended" accountWide />;
   return (
     <>
       {me.profile ? <ProfileSettings /> : <ActivationForm />}

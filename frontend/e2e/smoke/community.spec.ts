@@ -216,6 +216,23 @@ test.describe('Communauté', () => {
     // « Mes signalements » : route absente (404) tolérée, la section n'apparaît pas.
     await expect.poll(() => api.callsTo('GET', '/community/me/reports').length).toBeGreaterThan(0);
     await expect(page.getByRole('heading', { name: 'Mes signalements' })).toHaveCount(0);
+    // Route présente : statut et décision prise.
+    api.community.reports = [
+      {
+        id: 'r1',
+        targetType: 'POST',
+        targetId: PHOTO_ID,
+        reason: 'SPAM',
+        status: 'ACTIONED',
+        createdAt: '2026-10-01T09:00:00.000Z',
+        resolvedAt: '2026-10-02T09:00:00.000Z',
+        decision: { action: 'HIDE', contentRemoved: true, reason: 'SPAM', decidedAt: '2026-10-02T09:00:00.000Z' },
+      },
+    ];
+    await page.reload();
+    const reports = page.getByRole('region', { name: 'Mes signalements' });
+    await expect(reports).toContainText('Mesure prise');
+    await expect(reports).toContainText('Contenu retiré');
     await page.goto('/communaute/regles');
     await expect(page.getByRole('heading', { level: 1, name: 'Règles de la communauté' })).toBeVisible();
     await expectNoSeriousA11y(page);

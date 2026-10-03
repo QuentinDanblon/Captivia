@@ -20,7 +20,7 @@ import {
   type QueueItem,
 } from '@/lib/community';
 import { communityPostPath } from '@/lib/platform';
-import { Badge, Button, Card, EmptyState, Field, Modal, SectionHeader, Skeleton, SkeletonGroup, Toast, cx } from '@/components/ui';
+import { Badge, Button, Card, EmptyState, Field, Figure, Modal, SectionHeader, Skeleton, SkeletonGroup, Toast, cx } from '@/components/ui';
 import CommunityGate, { CommunityNotice, CommunityPage, useCommunity } from '@/components/community/CommunityGate';
 import { AppealBadge, useDecisionTitle, useReasonLabel } from '@/components/community/Decisions';
 import { BackLink, CharCount, PlainText } from '@/components/community/primitives';
@@ -195,14 +195,16 @@ function ContentBlock({ content }: { content: ModerationContent }) {
       {content.body ? <PlainText text={content.body} className="rounded-control bg-sunken px-3 py-2 text-body text-ink" as="blockquote" /> : null}
       {content.media.length > 0 ? (
         <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
-          {content.media.map((m, i) =>
-            isAllowedMediaUrl(m.url) ? (
-              <li key={m.id} className="cv-photo size-24">
-                {/* eslint-disable-next-line @next/next/no-img-element -- vignette de contrôle */}
-                <img src={m.url} alt={t('moderation.imageAlt', { n: i + 1 })} className="absolute inset-0 size-full object-cover" loading="lazy" />
-              </li>
-            ) : null,
-          )}
+          {content.media.map((m, i) => (
+            <li key={m.id} className="size-24">
+              {/* Image d'un contenu masqué : 404 sans en-tête d'authentification → silhouette. */}
+              {isAllowedMediaUrl(m.url) ? (
+                <Figure userPhoto src={m.url} alt={t('moderation.imageAlt', { n: i + 1 })} ratio="1/1" fallbackKind="other" sizes="96px" />
+              ) : (
+                <Figure alt={t('moderation.imageAlt', { n: i + 1 })} ratio="1/1" fallbackKind="other" />
+              )}
+            </li>
+          ))}
         </ul>
       ) : null}
       {content.status === 'VISIBLE' && content.postId ? (

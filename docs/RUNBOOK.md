@@ -543,6 +543,8 @@ Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `RED
 | `NODE_VERSION`, `NEXT_TELEMETRY_DISABLED` | `netlify.toml` | |
 | `NEXT_PUBLIC_API_URL` | Netlify → *Site configuration* → *Environment variables* | URL de l'API Render ; lue au build |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify → *Environment variables* | Facultative ; lue au build |
+| `NEXT_PUBLIC_COMMUNITY_ENABLED` | Netlify → *Environment variables* | `false` : communauté coupée au build ; `true` : lien depuis la landing ; absente : détection par l'API (404 = fermée). Lue au build |
+| `NEXT_PUBLIC_MEDIA_BASE_URL` | Netlify → *Environment variables* | Domaine public des images de la communauté (= `MEDIA_PUBLIC_BASE_URL`), ajouté à la CSP `img-src`. Lue au build |
 
 ### GitHub (Actions)
 

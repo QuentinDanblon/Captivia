@@ -9,6 +9,7 @@ import {
   photoAlt,
   probeCommunity,
   reasonToErrorKey,
+  suspendedUntilFromError,
 } from '../community';
 
 describe('drapeau de build NEXT_PUBLIC_COMMUNITY_ENABLED', () => {
@@ -75,6 +76,8 @@ describe('codes d’erreur → messages', () => {
     [400, 'MEDIA_INVALID_IMAGE', 'mediaInvalid'],
     [400, 'COMMUNITY_CANNOT_REPORT_OWN', 'cannotReportOwn'],
     [400, 'COMMUNITY_APPEAL_NOT_ALLOWED', 'appealNotAllowed'],
+    [503, 'MEDIA_BUSY', 'mediaBusy'],
+    [403, 'GUEST_ACCOUNT', 'guest'],
   ] as const)('%i %s → %s', (status, code, key) => {
     expect(communityErrorKey(err(status, code))).toBe(key);
   });
@@ -96,6 +99,13 @@ describe('codes d’erreur → messages', () => {
     expect(communityErrorKey(err(400, 'constructor'))).toBe('generic');
     expect(communityErrorKey(new Error(BACKEND_UNAVAILABLE_MESSAGE))).toBe('network');
     expect(communityErrorKey('oops')).toBe('generic');
+  });
+
+  it('date de fin lue dans un refus 403 COMMUNITY_SUSPENDED (activation après un départ)', () => {
+    const refusal = new ApiError(403, 'Publishing is suspended until 2026-11-02T10:00:00.000Z.', 'COMMUNITY_SUSPENDED');
+    expect(suspendedUntilFromError(refusal)).toBe('2026-11-02T10:00:00.000Z');
+    expect(suspendedUntilFromError(new ApiError(403, 'Publishing is suspended.', 'COMMUNITY_SUSPENDED'))).toBeNull();
+    expect(suspendedUntilFromError(new ApiError(403, 'until 2026-11-02T10:00:00.000Z', 'OTHER'))).toBeNull();
   });
 
   it('motifs d’inéligibilité du profil', () => {

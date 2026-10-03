@@ -184,19 +184,24 @@ export interface LogItem extends ModerationDecision {
 }
 
 /**
- * Signalement que j'ai émis (`GET /community/me/reports`, route ajoutée par la revue de sécurité du
- * backend) : lecture tolérante, chaque champ peut manquer.
+ * Signalement que j'ai émis (`GET /community/me/reports`) : statut et décision prise. Lecture
+ * tolérante (une API antérieure répond 404 : la section est alors masquée).
  */
 export interface MyReport {
   id: string;
-  targetType?: 'POST' | 'COMMENT' | string;
-  targetId?: string | null;
-  postId?: string | null;
-  reason?: CommunityReason | string | null;
-  status?: 'OPEN' | 'ACTIONED' | 'DISMISSED' | string;
-  createdAt?: string;
-  resolvedAt?: string | null;
-  excerpt?: string | null;
+  targetType: 'POST' | 'COMMENT';
+  targetId: string;
+  reason: CommunityReason | null;
+  status: 'OPEN' | 'ACTIONED' | 'DISMISSED';
+  createdAt: string;
+  resolvedAt: string | null;
+  decision: {
+    action: ModerationActionType;
+    /** Contenu retiré (masqué ou supprimé). */
+    contentRemoved: boolean;
+    reason: CommunityReason | null;
+    decidedAt: string;
+  } | null;
 }
 
 export interface AppealItem extends ModerationDecision {
@@ -450,6 +455,7 @@ export type CommunityErrorKey =
   | 'mediaTooLarge'
   | 'mediaInvalid'
   | 'mediaDimensions'
+  | 'mediaBusy'
   | 'cannotReportOwn'
   | 'cannotBlockSelf'
   | 'appealNotAllowed'
@@ -477,6 +483,7 @@ const CODE_TO_KEY: Record<string, CommunityErrorKey> = {
   MEDIA_UNSUPPORTED_TYPE: 'mediaType',
   MEDIA_TOO_LARGE: 'mediaTooLarge',
   MEDIA_INVALID_IMAGE: 'mediaInvalid',
+  MEDIA_BUSY: 'mediaBusy',
   COMMUNITY_INVALID_MEDIA: 'mediaInvalid',
   COMMUNITY_CANNOT_REPORT_OWN: 'cannotReportOwn',
   COMMUNITY_CANNOT_BLOCK_SELF: 'cannotBlockSelf',
@@ -505,6 +512,16 @@ export function communityErrorKey(err: unknown): CommunityErrorKey {
   if (err.status === 404) return 'notFound';
   if (err.status === 403) return 'forbidden';
   return 'generic';
+}
+
+/**
+ * Fin de suspension annoncée par un refus 403 `COMMUNITY_SUSPENDED` (« … suspended until <ISO> »),
+ * pour l'afficher quand le profil n'existe pas (la suspension est portée par le compte).
+ */
+export function suspendedUntilFromError(err: unknown): string | null {
+  if (!(err instanceof ApiError) || err.code !== 'COMMUNITY_SUSPENDED') return null;
+  const match = /\d{4}-\d{2}-\d{2}T[\d:.]+Z/.exec(err.message);
+  return match && !Number.isNaN(new Date(match[0]).getTime()) ? match[0] : null;
 }
 
 /** Raisons d'inéligibilité → clé d'erreur (même texte qu'un refus de l'API). */
@@ -605,7 +622,10 @@ export const communityApi = {
   myReports: async (token: string, cursor?: string | null): Promise<Page<MyReport>> => {
     const data = await call<unknown>(token, `/community/me/reports${query({ cursor })}`);
     const raw = Array.isArray(data) ? data : ((data as { items?: unknown })?.items ?? []);
-    const items = (Array.isArray(raw) ? raw : []).filter((r): r is MyReport => typeof (r as MyReport)?.id === 'string');
+    const items = (Array.isArray(raw) ? raw : [])
+      .filter((r): r is MyReport => typeof (r as MyReport)?.id === 'string')
+      // `decision` absente = pas encore de décision.
+      .map((r) => ({ ...r, decision: r.decision ?? null }));
     const next = Array.isArray(data) ? null : (data as { nextCursor?: unknown })?.nextCursor;
     return { items, nextCursor: typeof next === 'string' ? next : null };
   },

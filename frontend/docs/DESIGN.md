@@ -331,7 +331,8 @@ valeurs fixes (il remplace tout le document).
 - **App** (`AppShell`, groupe `(app)`) : mes animaux, agenda, espèces, fiche espèce, paramètres,
   abonnement, magasin. < 1024 px : barre haute + **onglets en bas** (Mes animaux, Agenda,
   Espèces, Communauté « Bientôt » sans lien, Compte), 60 px + `safe-area-inset-bottom`. ≥ 1024 px :
-  **rail** 240 px. Pied du rail : profil ou « Invité · Créer un compte » (lien discret, jamais
+  **rail** 240 px. « Communauté » ne devient un lien que si l'API répond (§ 6.9), sinon « Bientôt »
+  sans lien. Pied du rail : profil ou « Invité · Créer un compte » (lien discret, jamais
   de modale). `AppShell` rend `<main id="main-content">` et le lien d'évitement.
 
 ### 6.2 Tableau de bord « Aujourd'hui » (`/mes-animaux`)
@@ -408,6 +409,27 @@ composants et les données fixes de `landing/sample.ts` dans `PreviewFrame` (ill
 - **Page publique d'un animal** : `Figure` (photo du propriétaire ou silhouette), binôme latin,
   faits en filets, vaccins datés en mono, lien discret vers l'essai sans compte.
 - **404** : page de carnet en pointillés, silhouette d'oiseau « fig. 404 », un bouton.
+
+### 6.9 Communauté (`(app)/communaute`, `src/components/community/`)
+
+- **Ouverture** : drapeau de build `NEXT_PUBLIC_COMMUNITY_ENABLED` + sonde `GET /community/rules`
+  (404 = fermée). Fermée : « Bientôt » dans la coquille et page d'annonce, jamais de lien mort.
+- **Fil** : `SectionHeader` + un seul bouton plein « Publier » ; filtres type (contrôle segmenté
+  `aria-pressed`) et espèce (`Field`), reflétés dans l'URL ; colonne latérale (profil, règles en
+  bref, pages personnelles). Pagination : bouton « Voir plus » toujours présent, chargement
+  automatique en option (case mémorisée), annonce du nombre d'éléments.
+- **Carte de publication** : surface + filet + rayon 10 comme `MediaCard` ; avatar rond (photo ou
+  patte au trait, jamais d'initiales), pseudo, date relative en mono ; photos en `Figure userPhoto`
+  (sans crédit, `alt` composé à partir de la légende, de l'animal ou de l'auteur) ; texte en
+  `PlainText` (texte brut, aucun lien cliquable) ; question en Fraunces ; animal montré : nom,
+  espèce, binôme latin, rien d'autre. Pied : « j'aime » (`aria-pressed`, cœur qui se remplit en
+  180 ms, coupé sous mouvement réduit), réponses, signalement.
+- **États** : squelettes à la forme des cartes ; états vides avec un bénéfice et une action ; refus
+  de l'API traduits par code (`CommunityNotice` : invité, e-mail à vérifier, âge, profil, règles,
+  suspension datée, limite atteinte, image refusée…), jamais le message brut.
+- **Signalement** : `Modal`, liste fermée des motifs en cartes radio (libellé + exemple).
+- **Modération** : onglets Radix (signalements, masqués, recours, journal), chaque décision dans
+  une modale avec motif et exposé obligatoires ; bouton `danger` pour masquer, supprimer, suspendre.
 
 ## 7. Imagerie
 
@@ -532,6 +554,17 @@ Avant de fusionner un lot visuel : captures 1440 et 390, clair et sombre, aucun 
 - **PubMed** présenté dans la section santé (« en anglais », `lang="en"`) et cité dans Sources.
 - **Invité** : pictogramme de profil au lieu de « ·· » ; lien de la page publique vers l'essai.
 - **axe** bloquant dès « serious », toutes pages, clair et sombre.
+
+### 10.6 Communauté, phase 2 (octobre 2026)
+
+- **Destination conditionnelle** : « Communauté » reste « Bientôt » tant que l'API ne répond pas
+  (`feature: 'community'` dans `APP_DESTINATIONS`).
+- **Texte brut** pour tout contenu de membre (`PlainText`) : ni HTML ni lien cliquable, même une
+  URL écrite en clair ; aucun `dangerouslySetInnerHTML` dans le volet.
+- **Photos des membres** : `Figure userPhoto`, origine limitée à `NEXT_PUBLIC_MEDIA_BASE_URL` (ou
+  l'API) ; image refusée ou masquée (404) → silhouette au trait.
+- **Avatar** : photo ronde ou patte au trait sur papier creusé (`rounded-full` autorisé, § 3.3).
+- **`cv-pop`** : seule animation ajoutée (« j'aime », 180 ms, échelle, sans déplacement).
 
 **Reste à faire** (hors design) : regrouper connexion, inscription, mot de passe, vérification,
 `/sauvegarder` et `animal-public` dans `(marketing)` puis supprimer `SiteChrome` (le layout

@@ -4,6 +4,7 @@ import { PlainText } from '../primitives';
 import PostCard from '../PostCard';
 import { CommunityNotice } from '../CommunityGate';
 import type { CommunityErrorKey, CommunityPost } from '@/lib/community';
+import { ApiError } from '@/lib/api';
 
 jest.mock('@/i18n/navigation', () => ({
   Link: ({ href, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement> & { href: string; children: ReactNode }) => (
@@ -106,6 +107,7 @@ describe('états et refus : un texte propre par code', () => {
     'rateLimited',
     'linksNotAllowed',
     'mediaDimensions',
+    'mediaBusy',
     'handleReserved',
     'network',
     'session',
@@ -132,6 +134,20 @@ describe('états et refus : un texte propre par code', () => {
     render(<CommunityNotice errorKey="suspended" suspendedUntil="12 oct. 2026" decisionId="abc" />);
     expect(screen.getByText('errors.suspended.bodyUntil')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'actions.seeDecision' })).toHaveAttribute('href', '/communaute/decisions/abc');
+  });
+
+  it('suspension portée par le compte (sans profil) : texte dédié ; date lue dans le refus', () => {
+    const { unmount } = render(<CommunityNotice errorKey="suspended" accountWide />);
+    expect(screen.getByText('errors.suspended.bodyNoDate')).toBeInTheDocument();
+    unmount();
+    render(
+      <CommunityNotice
+        errorKey="suspended"
+        accountWide
+        error={new ApiError(403, 'Publishing is suspended until 2026-11-02T10:00:00.000Z.', 'COMMUNITY_SUSPENDED')}
+      />,
+    );
+    expect(screen.getByText('errors.suspended.bodyUntil')).toBeInTheDocument();
   });
 
   it('e-mail non vérifié → renvoi du lien depuis le message', async () => {

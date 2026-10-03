@@ -100,6 +100,9 @@ La navigation côté client (RSC `*.txt` exportés, qui ont une extension) n'est
 | `/mes-animaux/<id>` | `/mes-animaux/detail?id=<id>` |
 | `/species/<id>` | `/species?id=<id>` |
 | `/animal-public/<slug>` | `/animal-public?slug=<slug>` |
+| `/communaute/publication/<id>` | `/communaute/publication?id=<id>` |
+| `/communaute/u/<pseudo>` | `/communaute/u?handle=<pseudo>` |
+| `/communaute/decisions/<id>` | `/communaute/decisions?id=<id>` (la page liste lit le paramètre) |
 
 Pourquoi : les identifiants (animaux privés, 1 500+ espèces) ne sont pas connus au build ; le pré-rendu
 exhaustif est impossible (animaux) ou coûteux et fragile (espèces × 6 locales, API requise au build).

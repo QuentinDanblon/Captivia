@@ -257,7 +257,7 @@ export default function PostCard({ post, token, variant = 'feed', headingLevel =
             aria-label={t('card.report')}
           >
             <Flag size={16} strokeWidth={1.75} aria-hidden="true" />
-            <span className={feed ? 'sr-only sm:not-sr-only' : undefined}>{t('card.reportShort')}</span>
+            <span className="sr-only sm:not-sr-only">{t('card.reportShort')}</span>
           </button>
         ) : null}
       </footer>

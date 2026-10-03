@@ -122,6 +122,8 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `NEXT_PUBLIC_REVENUECAT_ENTITLEMENT_ID` | Build mobile | `premium` (défaut) : identique à `REVENUECAT_ENTITLEMENT_ID` | Non |
 | `NEXT_PUBLIC_APP_STORE_URL`, `NEXT_PUBLIC_PLAY_STORE_URL` | Netlify | `[À COMPLÉTER]` : URL https des fiches App Store et Google Play | À la publication (sinon la page abonnement du web affiche le marqueur) |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
+| `NEXT_PUBLIC_COMMUNITY_ENABLED` | Netlify (et build mobile) | `false` tant que la communauté est fermée (aucune requête de détection) ; `true` à l'ouverture (lien depuis la landing) | Non : absent, l'app interroge `GET /community/rules` et n'affiche la communauté que si l'API répond (404 = fermée) |
+| `NEXT_PUBLIC_MEDIA_BASE_URL` | Netlify (et build mobile) | même valeur que `MEDIA_PUBLIC_BASE_URL` côté API (`https://media.<domaine>`) | Oui dès `COMMUNITY_ENABLED=true` avec `MEDIA_DRIVER=s3` : origine ajoutée à la CSP `img-src` ; absente, seule l'API (pilote local) est autorisée |
 | `APPLE_TEAM_ID` | Netlify | Team ID Apple (10 caractères, developer.apple.com → Membership) | Pour les Universal Links iOS (W6-09) : sans elle, `/.well-known/apple-app-site-association` → 404 |
 | `IOS_BUNDLE_ID` | Netlify | `app.captivia` (défaut, = `appId` de `capacitor.config.ts`) | Non |
 | `ANDROID_PACKAGE_NAME` | Netlify | `app.captivia` (défaut) | Non |
@@ -213,6 +215,7 @@ frame-ancestors 'none'; upgrade-insecure-requests
 - `connect-src` : le site, l'origine de l'API et, seulement si un DSN est défini, l'origine d'ingestion Sentry. Le backend local (`localhost:3001`) n'y figure qu'en développement.
 - `img-src` : photos locales (`/images`), `data:` (photo compressée, QR code), `blob:` (aperçus) et les seuls hôtes de photos d'espèces (`SPECIES_IMAGE_HOSTS`). `pickSpeciesPhoto` ignore les médias GBIF servis ailleurs (la fiche prend la photo suivante ou la silhouette), donc la CSP ne bloque jamais une photo affichée. Ajouter un hébergeur = l'ajouter à `SPECIES_IMAGE_HOSTS`. Une URL de photo saisie à la main par un utilisateur et hébergée ailleurs n'est pas affichée (silhouette).
 - Polices : auto-hébergées par `next/font` (`font-src 'self'`). Service worker Web Push : `worker-src 'self'` (la souscription push ne passe pas par `connect-src`). `/.well-known/*` et le manifeste sont servis par le site.
+- `img-src` (communauté) : l'origine de `NEXT_PUBLIC_MEDIA_BASE_URL` (bucket public des images des membres), sinon celle de l'API (pilote `local`, `GET /community/media/:key`). `isAllowedMediaUrl` (`src/lib/community.ts`) n'affiche que ces images ; toute autre adresse est remplacée par une silhouette.
 - `upgrade-insecure-requests` est omis en développement et face à une API en `http` (smoke E2E local).
 - `'unsafe-eval'` n'est présent qu'en `next dev` (React s'en sert pour les piles d'erreur) ; jamais en production.
 

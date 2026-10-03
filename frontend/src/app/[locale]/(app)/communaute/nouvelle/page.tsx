@@ -56,6 +56,7 @@ function Composer() {
   const [category, setCategory] = useState<CommunityCategory | ''>('');
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [submitError, setSubmitError] = useState<CommunityErrorKey | null>(null);
+  const [rawError, setRawError] = useState<unknown>(null);
   const [fieldError, setFieldError] = useState<'photos' | 'body' | null>(null);
   const photosRef = useRef<Photo[]>([]);
   useEffect(() => {
@@ -175,6 +176,7 @@ function Composer() {
       router.replace(communityPostPath(created.id));
     } catch (err) {
       setSubmitError(communityErrorKey(err));
+      setRawError(err);
       setProgress(null);
     }
   };
@@ -333,7 +335,7 @@ function Composer() {
             </div>
           ) : null}
 
-          {submitError ? <CommunityNotice errorKey={submitError} severity="urgent" token={token} /> : null}
+          {submitError ? <CommunityNotice errorKey={submitError} severity="urgent" token={token} error={rawError} /> : null}
 
           <div className="flex flex-wrap items-center gap-4">
             <Button type="submit" size="lg" loading={busy} disabled={preparing > 0}>

@@ -118,6 +118,8 @@ export interface MockCommunity {
   posts: MockCommunityPost[];
   comments: Record<string, MockCommunityComment[]>;
   blocks: { handle: string; avatarUrl: string | null; blockedAt: string }[];
+  /** `GET /community/me/reports` ; null = route absente (API antérieure au contrat F3) → 404. */
+  reports: Record<string, unknown>[] | null;
 }
 
 /** Profil communautaire actif par défaut (compte du fixture, e-mail vérifié). */
@@ -209,6 +211,7 @@ export async function installMockApi(page: Page): Promise<MockApi> {
       posts: [],
       comments: {},
       blocks: [],
+      reports: null,
     },
     callsTo: (method, pathname) => api.calls.filter((c) => c.method === method && c.path === pathname),
   };
@@ -347,8 +350,10 @@ export async function installMockApi(page: Page): Promise<MockApi> {
         }
       }
       if (method === 'GET' && pathname === '/community/me/decisions') return json(route, 200, { items: [], nextCursor: null, contactEmail: null });
-      // Route annoncée par la revue de sécurité du backend : absente ici, l'interface doit le tolérer.
-      if (method === 'GET' && pathname === '/community/me/reports') return notFound();
+      // Mes signalements (contrat F3) ; absente (null) : l'interface doit tolérer le 404.
+      if (method === 'GET' && pathname === '/community/me/reports') {
+        return c.reports ? json(route, 200, { items: c.reports, nextCursor: null, contactEmail: null }) : notFound();
+      }
       if (method === 'GET' && pathname === '/community/blocks') return json(route, 200, { items: c.blocks });
 
       if (pathname === '/community/media' && method === 'POST') {

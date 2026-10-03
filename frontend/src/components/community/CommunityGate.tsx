@@ -10,6 +10,7 @@ import {
   communityErrorKey,
   formatLongDate,
   markCommunityAvailable,
+  suspendedUntilFromError,
   markCommunityUnavailable,
   type CommunityErrorKey,
   type CommunityMe,
@@ -110,6 +111,8 @@ export function CommunityNotice({
   severity = 'warning',
   onRetry,
   suspendedUntil,
+  accountWide = false,
+  error,
   decisionId,
   className,
   token,
@@ -119,12 +122,19 @@ export function CommunityNotice({
   onRetry?: () => void;
   /** Suspension : date de fin (déjà mise en forme). */
   suspendedUntil?: string | null;
+  /** Suspension portée par le compte alors qu'aucun profil n'existe (départ puis retour). */
+  accountWide?: boolean;
+  /** Refus d'origine : la date de fin de suspension peut s'y lire (403 COMMUNITY_SUSPENDED). */
+  error?: unknown;
   decisionId?: string | null;
   className?: string;
   /** Jeton : permet de renvoyer l'e-mail de vérification depuis le message. */
   token?: string | null;
 }) {
   const t = useTranslations('community');
+  const locale = useLocale();
+  const errorUntil = suspendedUntilFromError(error);
+  const until = suspendedUntil ?? (errorUntil ? formatLongDate(errorUntil, locale) : null);
   const [resend, setResend] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   const sendVerification = async () => {
@@ -197,7 +207,11 @@ export function CommunityNotice({
 
   return (
     <Alert severity={severity} className={className} title={t(`errors.${errorKey}.title`)} action={action}>
-      {errorKey === 'suspended' && suspendedUntil ? t('errors.suspended.bodyUntil', { date: suspendedUntil }) : t(`errors.${errorKey}.body`)}
+      {errorKey === 'suspended' && until
+        ? t('errors.suspended.bodyUntil', { date: until })
+        : errorKey === 'suspended' && accountWide
+          ? t('errors.suspended.bodyNoDate')
+          : t(`errors.${errorKey}.body`)}
       {resend === 'error' ? <span className="mt-1 block text-danger">{t('actions.verificationError')}</span> : null}
     </Alert>
   );
@@ -310,6 +324,7 @@ export function EligibilityNotice({ className }: { className?: string }) {
       token={token}
       className={className}
       suspendedUntil={until ? formatLongDate(until, locale) : null}
+      accountWide={key === 'suspended' && !me.profile}
     />
   );
 }

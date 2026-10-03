@@ -46,6 +46,18 @@ frontend/
 | `NEXT_PUBLIC_API_URL` | ✓ | ✓ | `https://api.captivia.local` |
 | `NEXT_PUBLIC_SITE_URL` |  | ✓ | `https://captivia.local` |
 | `NEXT_PUBLIC_SENTRY_DSN` |  |  | `https://...@sentry.io/...` |
+| `NEXT_PUBLIC_COMMUNITY_ENABLED` |  |  | `false` (coupé), `true` (lien depuis la landing) ; absent : détection par l'API |
+| `NEXT_PUBLIC_MEDIA_BASE_URL` |  | dès l'ouverture de la communauté | `https://media.captivia.app` (domaine public du bucket R2, ajouté à la CSP `img-src`) |
+
+**Communauté** (`src/lib/community.ts`, `src/lib/community-flag.ts`) : la destination « Communauté »
+de l'app ne devient un lien que si l'API répond. Une sonde `GET /community/rules` **sans jeton**
+interprète la réponse : `404` = volet fermé côté serveur (`COMMUNITY_ENABLED=false`), `200` / `401` /
+`403` = volet ouvert, autre (réseau, 5xx) = inconnu (« Bientôt », sans lien). Le résultat est gardé
+pour la session (`sessionStorage`). `NEXT_PUBLIC_COMMUNITY_ENABLED=false` coupe tout au build (aucune
+requête) ; `true` ajoute seulement le lien de la landing (qui reste « Bientôt » sinon). Les images
+des membres ne sont affichées que si elles viennent de `NEXT_PUBLIC_MEDIA_BASE_URL` (sinon de l'API,
+pilote local du backend) : la même origine est ajoutée à `img-src`. Ces variables sont lues au
+build.
 
 ### Fichiers clés
 

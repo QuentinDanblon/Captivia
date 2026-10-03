@@ -1787,7 +1787,8 @@
       "suspended": {
         "title": "Pubblicazione sospesa",
         "body": "Puoi ancora leggere e mettere mi piace, ma per ora non puoi pubblicare né rispondere. Puoi consultare la decisione e come fare ricorso.",
-        "bodyUntil": "Puoi ancora leggere e mettere mi piace, ma non pubblicare né rispondere fino al {date}. Puoi consultare la decisione e come fare ricorso."
+        "bodyUntil": "Puoi ancora leggere e mettere mi piace, ma non pubblicare né rispondere fino al {date}. Puoi consultare la decisione e come fare ricorso.",
+        "bodyNoDate": "La pubblicazione è sospesa sul tuo account, anche se lasci la community. Puoi consultare la decisione e come fare ricorso."
       },
       "rateLimited": {
         "title": "Limite raggiunto per ora",
@@ -1803,11 +1804,11 @@
       },
       "handleReserved": {
         "title": "Nome utente riservato",
-        "body": "Questo nome (o una variante simile) è riservato, per esempio perché ricorda il team o è stato usato di recente. Scegline un altro."
+        "body": "Questo nome è riservato o somiglia troppo a un nome protetto (lettere sostituite da cifre, per esempio). Scegline un altro."
       },
       "handleTaken": {
         "title": "Nome utente già in uso",
-        "body": "Un altro membro usa già questo nome. Aggiungi un numero o una parola: «kaa_e_io», «gecko.lea»."
+        "body": "Questo nome è già in uso, oppure un altro membro lo ha lasciato da poco (resta riservato per 60 giorni). Aggiungi un numero o una parola: «kaa_e_io», «gecko.lea»."
       },
       "mediaType": {
         "title": "Formato della foto non accettato",
@@ -1815,15 +1816,19 @@
       },
       "mediaTooLarge": {
         "title": "Foto troppo pesante",
-        "body": "Scegli una foto più leggera (al massimo 8 MB dopo la riduzione)."
+        "body": "Scegli una foto più leggera o più piccola: al massimo 8 MB, 10.000 px per lato e 24 megapixel."
       },
       "mediaInvalid": {
         "title": "Foto illeggibile",
-        "body": "Non è stato possibile leggere questa foto. Scegline un'altra."
+        "body": "Non è stato possibile leggere questa foto, oppure è troppo allungata (panorama, screenshot molto lungo). Scegline un'altra o ritagliala."
       },
       "mediaDimensions": {
         "title": "Formato della foto insolito",
         "body": "Questa foto è troppo allungata o troppo grande. Ritagliala e riprova."
+      },
+      "mediaBusy": {
+        "title": "Invio non possibile al momento",
+        "body": "Stanno arrivando molte foto insieme. Riprova tra un attimo."
       },
       "cannotReportOwn": {
         "title": "È un tuo post",
@@ -2223,7 +2228,10 @@
         "OPEN": "In esame",
         "ACTIONED": "Provvedimento preso",
         "DISMISSED": "Esaminata, senza seguito"
-      }
+      },
+      "decidedOn": "Decisione del {date}",
+      "removed": "Contenuto rimosso",
+      "kept": "Contenuto mantenuto"
     },
     "rules": {
       "title": "Regole della community",

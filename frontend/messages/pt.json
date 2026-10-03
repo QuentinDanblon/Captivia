@@ -1787,7 +1787,8 @@
       "suspended": {
         "title": "Publicação suspensa",
         "body": "Você ainda pode ler e gostar, mas por agora não pode publicar nem responder. A decisão e o recurso estão disponíveis.",
-        "bodyUntil": "Você ainda pode ler e gostar, mas não pode publicar nem responder até {date}. A decisão e o recurso estão disponíveis."
+        "bodyUntil": "Você ainda pode ler e gostar, mas não pode publicar nem responder até {date}. A decisão e o recurso estão disponíveis.",
+        "bodyNoDate": "A publicação está suspensa na sua conta, mesmo depois de sair da comunidade. A decisão e o recurso estão disponíveis."
       },
       "rateLimited": {
         "title": "Limite atingido por agora",
@@ -1803,11 +1804,11 @@
       },
       "handleReserved": {
         "title": "Nome de utilizador reservado",
-        "body": "Este nome (ou uma variante parecida) está reservado, por exemplo porque lembra a equipa ou foi usado há pouco tempo. Escolha outro."
+        "body": "Este nome está reservado ou parece-se demasiado com um nome protegido (letras trocadas por algarismos, por exemplo). Escolha outro."
       },
       "handleTaken": {
         "title": "Nome de utilizador já em uso",
-        "body": "Outro membro já usa este nome. Acrescente um número ou uma palavra: «kaa_e_eu», «gecko.lea»."
+        "body": "Este nome já está em uso, ou outro membro deixou-o há pouco tempo (fica reservado durante 60 dias). Acrescente um número ou uma palavra: «kaa_e_eu», «gecko.lea»."
       },
       "mediaType": {
         "title": "Formato de foto não aceite",
@@ -1815,15 +1816,19 @@
       },
       "mediaTooLarge": {
         "title": "Foto pesada demais",
-        "body": "Escolha uma foto mais leve (no máximo 8 MB após a redução)."
+        "body": "Escolha uma foto mais leve ou mais pequena: no máximo 8 MB, 10 000 px por lado e 24 megapíxeis."
       },
       "mediaInvalid": {
         "title": "Foto ilegível",
-        "body": "Não foi possível ler esta foto. Escolha outra."
+        "body": "Não foi possível ler esta foto, ou ela é alongada demais (panorama, captura de ecrã muito longa). Escolha outra ou recorte-a."
       },
       "mediaDimensions": {
         "title": "Formato de foto fora do comum",
         "body": "Esta foto é alongada ou grande demais. Recorte-a e tente novamente."
+      },
+      "mediaBusy": {
+        "title": "Não é possível enviar agora",
+        "body": "Estão a chegar muitas fotos ao mesmo tempo. Tente novamente daqui a pouco."
       },
       "cannotReportOwn": {
         "title": "Esta publicação é sua",
@@ -2223,7 +2228,10 @@
         "OPEN": "Em análise",
         "ACTIONED": "Medida tomada",
         "DISMISSED": "Analisada, sem seguimento"
-      }
+      },
+      "decidedOn": "Decisão de {date}",
+      "removed": "Conteúdo retirado",
+      "kept": "Conteúdo mantido"
     },
     "rules": {
       "title": "Regras da comunidade",
