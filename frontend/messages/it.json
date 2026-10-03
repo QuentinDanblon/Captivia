@@ -275,6 +275,62 @@
       "invalid": "Alcuni dati non sono validi. Controlla il modulo.",
       "notFound": "Questo elemento non esiste più. Ricarica la pagina.",
       "unavailable": "Il servizio è momentaneamente non disponibile. Riprova tra qualche istante."
+    },
+    "list": {
+      "count": "{count, plural, =0 {Nessun animale} one {# animale} other {# animali}}",
+      "description": "Ogni animale ha il suo libretto, i suoi promemoria e la scheda della sua specie.",
+      "emptyBenefit": "Aggiunga il suo primo animale: libretto, promemoria e riferimenti della specie sono pronti in tre passaggi.",
+      "routines": "{count, plural, one {# routine} other {# routine}}"
+    },
+    "sheet": {
+      "loading": "Apertura della scheda…",
+      "back": "Torna ai miei animali",
+      "errorBenefit": "La scheda potrebbe essere stata eliminata, oppure la connessione si è interrotta.",
+      "breadcrumb": "Percorso di navigazione",
+      "gbifLabel": "Identificativo GBIF della specie",
+      "summaryTitle": "In breve",
+      "unknownValue": "Non indicato",
+      "bornOn": "Nascita: {date}",
+      "treatments": "Trattamento in corso",
+      "noTreatment": "Nessuno",
+      "until": "fino al {date}",
+      "nextVaccine": "Prossimo richiamo",
+      "noVaccine": "Nessuno",
+      "sectionsNav": "In questa scheda",
+      "speciesTitle": "Riferimenti della specie",
+      "timelineTitle": "Ultime cure, prossime scadenze",
+      "timelineLabel": "Linea del tempo delle cure di {name}",
+      "timelineEmpty": "La linea del tempo si riempie con le pesate, i vaccini e gli appuntamenti che aggiunge qui sotto.",
+      "kinds": {
+        "visit": "Visita veterinaria",
+        "vaccine": "Vaccino",
+        "vaccineDue": "Richiamo del vaccino",
+        "weighing": "Pesata",
+        "health": "Libretto sanitario",
+        "treatmentStart": "Inizio del trattamento",
+        "treatmentEnd": "Fine del trattamento"
+      },
+      "actionsLabel": "Azioni per {name}",
+      "weigh": "Pesare",
+      "carnetShort": "Libretto",
+      "carnetTitle": "Il libretto da portare con sé",
+      "carnetText": "Identità, vaccini, trattamenti, pesate e appuntamenti su una pagina A4: da stampare o salvare in PDF per il veterinario.",
+      "openCarnet": "Apri il libretto stampabile",
+      "qrAlt": "Codice QR della pagina pubblica di {name}",
+      "medicationsBenefit": "Dose, frequenza, data di fine: Captivia le ricorda ogni somministrazione all'ora prevista.",
+      "measurementsBenefit": "Una pesata al mese basta per notare un calo di peso prima dei primi sintomi.",
+      "measurementsList": "Storico delle pesate",
+      "weightHint": "In chilogrammi: 250 g = 0,25.",
+      "vaccinationsBenefit": "Annoti la data e il prossimo richiamo: Captivia glielo segnala con un mese di anticipo.",
+      "vetBenefit": "Aggiunga la data e il veterinario: un promemoria arriva 7 giorni prima e poi il giorno prima.",
+      "healthBenefit": "Interventi, anamnesi, alimentazione particolare: lo storico che il veterinario le chiederà.",
+      "routinesBenefit": "Pasti, pulizia, UVB: imposti l'ora una volta, poi ci pensa Captivia a ricordarglielo.",
+      "breedingBenefit": "Calori, accoppiamenti, nascite: conservi le date esatte di ogni ciclo.",
+      "vaccineOverdue": "Richiamo scaduto ({when})",
+      "vaccineDue": "Richiamo {when}",
+      "routineName": "Nome della routine (facoltativo)",
+      "dayOfMonth": "Giorno del mese (1-31)",
+      "everyHours": "Ogni X ore (1-24)"
     }
   },
   "attribution": {
@@ -968,5 +1024,103 @@
     "welcomeTitle": "Benvenuto in Captivia",
     "welcomeText": "Inizia subito, senza e-mail né password: 1 animale, il suo libretto sanitario, i promemoria e l'agenda.",
     "welcomeLater": "Più tardi"
+  },
+  "today": {
+    "title": "Oggi",
+    "allDayShort": "In giornata",
+    "dateLabel": "Data di oggi",
+    "loading": "Stiamo preparando la sua giornata…",
+    "loadError": "Non è stato possibile caricare i suoi animali. Controlli la connessione e riprovi.",
+    "pillDue": "{count, plural, one {cura oggi} other {cure oggi}}",
+    "pillOverdue": "{count, plural, one {in ritardo} other {in ritardo}}",
+    "pillAppointments": "{count, plural, one {appuntamento questa settimana} other {appuntamenti questa settimana}}",
+    "alertsTitle": "Da tenere d'occhio",
+    "urgent": "Urgente",
+    "openSheet": "Apri la scheda di {name}",
+    "moreAlerts": "{count, plural, one {# altro punto da tenere d'occhio} other {# altri punti da tenere d'occhio}} nelle schede.",
+    "alerts": {
+      "vaccineOverdue": {
+        "title": "Richiamo del vaccino scaduto: {subject}",
+        "body": "{name} — il richiamo era previsto {when}. Basta una telefonata al veterinario per riprogrammarlo."
+      },
+      "vaccineSoon": {
+        "title": "Richiamo del vaccino {when}: {subject}",
+        "body": "{name} — il {date}. È il momento giusto per prendere appuntamento."
+      },
+      "treatment": {
+        "title": "Trattamento in corso: {subject}",
+        "body": "{name} — fino al {date}. Ogni somministrazione compare nella linea del tempo."
+      },
+      "treatmentOpen": {
+        "title": "Trattamento in corso: {subject}",
+        "body": "{name} — senza data di fine. Ricordi di interromperlo nella scheda una volta concluso."
+      },
+      "weighingOld": {
+        "title": "Ultima pesata di {name} {when}",
+        "body": "Una pesata al mese basta per notare un calo di peso prima dei primi sintomi."
+      },
+      "weighingNone": {
+        "title": "Ancora nessuna pesata per {name}",
+        "body": "Una prima pesata fa da riferimento per seguirne la crescita."
+      }
+    },
+    "timelineTitle": "I prossimi 7 giorni",
+    "timelineLabel": "Cure di oggi e dei prossimi 7 giorni",
+    "fullAgenda": "Tutta l'agenda",
+    "timelineEmptyTitle": "Una settimana senza cure in programma",
+    "timelineEmptyBenefit": "Programmi un pasto, una nebulizzazione o un trattamento: Captivia glielo ricorda il giorno stesso, all'ora prevista.",
+    "timelineEmptyAction": "Programmare una cura",
+    "agendaError": "Non è stato possibile caricare le cure della settimana.",
+    "status": {
+      "done": "Fatto",
+      "due": "Da fare",
+      "overdue": "In ritardo",
+      "planned": "Previsto",
+      "skipped": "Annullato"
+    },
+    "animalsTitle": "I suoi animali",
+    "allAnimals": "Tutti i suoi animali",
+    "photoAlt": "{name}, foto del profilo",
+    "factWeight": "Ultima pesata",
+    "factNoWeight": "Non ancora pesato",
+    "factNextVisit": "Prossimo appuntamento",
+    "factNoVisit": "Nessuno in programma",
+    "factAge": "Età",
+    "tipLabel": "Buono a sapersi",
+    "tipSource": "Scheda {species}",
+    "tipPrevention": "{topic}: {text}",
+    "tipHabitat": "Mantenga il suo ambiente tra {temperature}, con un'umidità del {humidity}.",
+    "tipTemperature": "Temperatura consigliata per il suo ambiente: {temperature}.",
+    "tipHumidity": "Umidità consigliata per il suo ambiente: {humidity}.",
+    "routinesAdded": "{count, plural, one {# cura aggiunta al suo libretto} other {# cure aggiunte al suo libretto}}"
+  },
+  "onboarding": {
+    "title": "Il suo libretto, pronto in tre passaggi",
+    "text": "Scelga la specie e gli dia un nome: Captivia prepara le cure di base, i promemoria e i riferimenti della scheda della sua specie.",
+    "stepSpecies": "Specie",
+    "stepIdentity": "Nome e nascita",
+    "stepCare": "Prime cure",
+    "stepsLabel": "Aggiungere il suo animale",
+    "progress": "Passaggio {current} di {total}",
+    "speciesTitle": "Di che specie è?",
+    "speciesText": "Il nome comune o scientifico: «boa», «Pogona», «calopsite»…",
+    "speciesHint": "La ricerca parte da 2 lettere.",
+    "searching": "Ricerca…",
+    "resultsLabel": "Specie trovate",
+    "speciesChosen": "Specie scelta:",
+    "identityTitle": "Come si chiama?",
+    "identityText": "Potrà modificare tutto in seguito. Specie:",
+    "photoHint": "Oppure l'indirizzo di una foto già online.",
+    "careTitle": "Le cure di base di {name}",
+    "careText": "Le routine consigliate per la sua specie, già impostate. Selezioni quelle da seguire: Captivia gliele ricorda all'ora giusta.",
+    "careCount": "{checked} su {total} selezionate",
+    "careLater": "Più tardi",
+    "perksTitle": "Cosa la aspetta",
+    "perk1Title": "Ogni cura, all'ora giusta",
+    "perk1": "Pasti, nebulizzazione, trattamenti: un promemoria al momento giusto e la settimana a colpo d'occhio.",
+    "perk2Title": "Un libretto sanitario completo",
+    "perk2": "Pesate, vaccini, visite: tutto è datato e il libretto si stampa in PDF per il veterinario.",
+    "perk3Title": "I riferimenti giusti",
+    "perk3": "Temperatura, alimentazione, segnali da tenere d'occhio: la scheda della sua specie, con le fonti."
   }
 }

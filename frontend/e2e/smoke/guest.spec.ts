@@ -25,7 +25,7 @@ test.describe('Mode invité', () => {
     await expect(page.getByRole('link', { name: "J'ai déjà un compte" })).toHaveAttribute('href', /\/login$/);
     await page.getByRole('button', { name: 'Essayer sans compte' }).click();
 
-    await expect(page.getByRole('heading', { level: 1, name: 'Mes animaux' })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: "Aujourd'hui" })).toBeVisible();
     await expect(page).toHaveURL(/\/mes-animaux$/);
     expect(api.callsTo('POST', '/auth/guest')[0].body).toEqual({ locale: 'fr' });
     // Même stockage de session qu'une connexion (access + refresh token).
@@ -33,15 +33,16 @@ test.describe('Mode invité', () => {
     expect(await page.evaluate(() => localStorage.getItem('refreshToken'))).toBe('e2e-guest-refresh');
     await expect(page.getByRole('region', { name: 'Sauvegardez vos données' })).toBeVisible();
 
-    // Premier animal : formulaire habituel.
-    await page.getByRole('button', { name: /Ajouter un animal/ }).first().click();
-    await page.locator('#animal-name').fill('Kaa');
+    // Premier animal : le parcours en étapes, directement sur la page (espèce, puis nom).
+    await expect(page.getByText('Étape 1 sur 3')).toBeVisible();
     await page.locator('#animal-species').fill('boa');
     await page.getByRole('button', { name: /Boa constrictor/ }).click();
+    await page.getByRole('button', { name: 'Suivant' }).click();
+    await page.locator('#animal-name').fill('Kaa');
     await page.getByRole('button', { name: 'Enregistrer' }).click();
 
     await expect(page.getByText('Kaa a été ajouté')).toBeVisible();
-    await expect(page.getByRole('link', { name: /Kaa/ })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Kaa/ }).first()).toBeVisible();
     const [create] = api.callsTo('POST', '/users/me/animals');
     expect(create.headers['authorization']).toBe(`Bearer ${GUEST_TOKEN}`);
 
@@ -109,7 +110,7 @@ test.describe('Mode invité', () => {
 
     // Les données suivent : Mes animaux liste toujours Kaa, sans bandeau invité.
     await page.getByRole('link', { name: 'Retour à mes animaux' }).click();
-    await expect(page.getByRole('link', { name: /Kaa/ })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Kaa/ }).first()).toBeVisible();
     await expect(page.getByRole('region', { name: 'Sauvegardez vos données' })).toHaveCount(0);
     // Compte gratuit : le 2e animal mène désormais à Premium.
     await expect(page.getByRole('link', { name: 'Découvrir Premium' })).toHaveAttribute('href', /\/parametres\/abonnement$/);

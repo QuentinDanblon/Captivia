@@ -50,9 +50,28 @@ export interface RecordedCall {
   body: unknown;
 }
 
+/** Soin de l'agenda agrégé (GET /users/me/agenda), cf. src/lib/agenda.ts. */
+export interface MockAgendaItem {
+  id: string;
+  date: string;
+  day: string;
+  allDay: boolean;
+  type: 'routine' | 'medication' | 'vaccination' | 'vet_appointment';
+  animalId: string;
+  animalName: string;
+  title: string;
+  detail: string | null;
+  status: 'pending' | 'done' | 'skipped' | 'cancelled';
+  sourceId: string;
+}
+
 export interface MockApi {
   /** Animaux de l'utilisateur (modifiable avant la navigation). */
   animals: MockAnimal[];
+  /** Soins renvoyés par l'agenda (vide par défaut ; modifiable avant la navigation). */
+  agenda: MockAgendaItem[];
+  /** Sous-collections d'un animal (`measurements`, `vaccinations`…), vides par défaut. */
+  collections: Record<string, unknown[]>;
   /** Toutes les requêtes reçues, dans l'ordre. */
   calls: RecordedCall[];
   /** Requêtes sans route simulée (doit rester vide). */
@@ -84,6 +103,8 @@ const EMPTY_ANIMAL_COLLECTIONS =
 export async function installMockApi(page: Page): Promise<MockApi> {
   const api: MockApi = {
     animals: [],
+    agenda: [],
+    collections: {},
     calls: [],
     unmocked: [],
     upgradedUser: null,
@@ -193,7 +214,14 @@ export async function installMockApi(page: Page): Promise<MockApi> {
       const found = api.animals.find((a) => a.id === animalMatch[1]);
       return found ? json(route, 200, found) : json(route, 404, { statusCode: 404, message: 'Animal introuvable' });
     }
-    if (method === 'GET' && EMPTY_ANIMAL_COLLECTIONS.test(pathname)) return json(route, 200, []);
+    if (method === 'GET' && EMPTY_ANIMAL_COLLECTIONS.test(pathname)) {
+      const collection = pathname.split('/').pop() ?? '';
+      return json(route, 200, api.collections[collection] ?? []);
+    }
+    // Agenda agrégé (tableau de bord « Aujourd'hui », page Agenda).
+    if (method === 'GET' && pathname === '/users/me/agenda') {
+      return json(route, 200, { from: url.searchParams.get('from'), to: url.searchParams.get('to'), items: api.agenda, truncated: false });
+    }
     if (method === 'GET' && /^\/users\/me\/animals\/[^/]+\/public-link$/.test(pathname)) {
       return json(route, 200, { enabled: false, showHealth: false, slug: null, url: null });
     }

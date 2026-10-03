@@ -61,6 +61,7 @@ const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {
     'Dose', 'Email', 'Grade', 'Habitat', 'Identification', 'Notes', 'Notifications',
     'Photos', 'Points', 'Restrictions', 'Routines', 'Type', 'Vaccinations',
     'Reptile', 'Bivalve', 'Animal', 'Biome', 'Sources', 'Tropical / Subtropical',
+    'Urgent',
   ]),
   es: new Set(['Email', 'Reptiles', 'Animal', 'Tropical / Subtropical']),
   de: new Set(['Bronze', 'Diamant', 'Profil']),

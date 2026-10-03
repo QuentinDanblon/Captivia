@@ -40,6 +40,18 @@ interface FigureWithPhoto extends FigureBase {
   src: string;
   alt: string;
   credit: PhotoCredit;
+  userPhoto?: false;
+}
+
+/**
+ * Photo prise par l'utilisateur (son animal) : pas de licence à citer, mais un `alt` obligatoire.
+ * Seule exception au crédit obligatoire (DESIGN.md § 9, lot 3).
+ */
+interface FigureUserPhoto extends FigureBase {
+  src: string;
+  alt: string;
+  credit?: undefined;
+  userPhoto: true;
 }
 
 /** Sans photo : silhouette au trait, pas de crédit. */
@@ -47,9 +59,10 @@ interface FigureWithoutPhoto extends FigureBase {
   src?: undefined;
   alt?: string;
   credit?: undefined;
+  userPhoto?: undefined;
 }
 
-export type FigureProps = FigureWithPhoto | FigureWithoutPhoto;
+export type FigureProps = FigureWithPhoto | FigureUserPhoto | FigureWithoutPhoto;
 
 const RATIO_CLASS: Record<FigureRatio, string> = {
   '1/1': 'aspect-square',
