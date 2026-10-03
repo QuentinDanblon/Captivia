@@ -5,7 +5,7 @@ import { AppShell } from '@/components/AppShell';
 import { EmailVerificationBanner } from '@/components/EmailVerificationBanner';
 
 /**
- * Couche « application » (DESIGN.md § 8.1, point 2) : mes animaux, agenda, paramètres, magasin.
+ * Couche « application » (DESIGN.md § 6.1) : mes animaux, agenda, paramètres, magasin.
  * `AppShell` rend le rail (bureau), la barre d'onglets (mobile) et le `<main>` ; le bandeau de
  * vérification d'e-mail se place en tête du contenu, sous la barre haute.
  */

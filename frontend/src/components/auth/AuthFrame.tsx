@@ -24,7 +24,7 @@ export interface AuthFrameProps {
  * Habillage des écrans de compte (connexion, inscription, mot de passe, vérification d'e-mail,
  * passage invité → compte) : le formulaire sur le papier, à gauche ; à partir de 1024 px, une
  * planche texturée à droite, ouverte par une vraie photo Wikimedia Commons créditée (`Figure`,
- * crédit en légende — DESIGN.md § 6). En mobile, le formulaire seul.
+ * crédit en légende — DESIGN.md § 6.6 et § 7). En mobile, le formulaire seul.
  */
 export function AuthFrame({ title, lead, children, aside, photo = 'catStraw', className }: AuthFrameProps) {
   const headingId = useId();

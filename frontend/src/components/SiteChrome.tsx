@@ -29,7 +29,7 @@ export interface SiteChromeProps {
  * Les pages du groupe `(marketing)` (landing, pages légales) reçoivent de même leur cadre de
  * `(marketing)/layout.tsx`.
  *
- * Transitoire (DESIGN.md § 8.1, point 3) : quand les dernières pages hors groupe (connexion,
+ * Transitoire (DESIGN.md § 10.5, « Reste à faire ») : quand les dernières pages hors groupe (connexion,
  * inscription…) auront rejoint un groupe, ce composant disparaît et le layout racine ne garde que `<html>`, les polices, les
  * fournisseurs et `ErrorBoundary`.
  */
