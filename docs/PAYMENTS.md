@@ -49,6 +49,19 @@ vers la gestion App Store ou Google Play selon la source.
 | `REVENUECAT_ENTITLEMENT_ID` | entitlement qui ouvre le premium (défaut `premium`) |
 | `GOOGLE_PLAY_PACKAGE_NAME` | package Android, pour le lien « Gérer mon abonnement » |
 
+### Variables de l'app (build mobile, inlinées : clés **publiques** RevenueCat)
+
+À fournir à `npm run build:mobile` (GitHub Variables `REVENUECAT_IOS_KEY`, `REVENUECAT_ANDROID_KEY`
+pour le workflow `mobile.yml`). Sans clé, la plateforme concernée affiche « Abonnement indisponible pour
+le moment » et aucun achat n'est possible ; le web n'en a pas besoin.
+
+| Variable | Rôle |
+|---|---|
+| `NEXT_PUBLIC_REVENUECAT_IOS_KEY` | clé publique iOS (`appl_…`, RevenueCat > Project settings > API keys) |
+| `NEXT_PUBLIC_REVENUECAT_ANDROID_KEY` | clé publique Android (`goog_…`) |
+| `NEXT_PUBLIC_REVENUECAT_ENTITLEMENT_ID` | facultatif, défaut `premium` : **identique** à `REVENUECAT_ENTITLEMENT_ID` (backend) |
+| `NEXT_PUBLIC_APP_STORE_URL`, `NEXT_PUBLIC_PLAY_STORE_URL` | Netlify : fiches stores affichées sur la page abonnement du web (`[À COMPLÉTER]` tant qu'elles n'existent pas) |
+
 ### App Store Connect
 
 1. Accords, taxes et coordonnées bancaires signés (contrat « Paid Apps »).
@@ -80,23 +93,38 @@ vers la gestion App Store ou Google Play selon la source.
 
 ## Checklist de conformité stores
 
-- [ ] Bouton **Restaurer les achats** (`Purchases.restorePurchases()`).
-- [ ] Prix, durée et **renouvellement automatique** affichés avant l'achat (texte du store).
-- [ ] Liens **CGU** et **Politique de confidentialité** sur le paywall et dans la fiche store.
-- [ ] Aucun lien ni mention de paiement externe dans l'app (le web n'en propose pas).
-- [ ] Gestion / résiliation : lien `manageUrl` (« Gérer mon abonnement »).
-- [ ] **Suppression de compte** dans l'app (déjà disponible) ; rappeler qu'elle ne résilie
-      pas l'abonnement store.
+- [x] Bouton **Restaurer mes achats** (`Purchases.restorePurchases()`), toujours visible sur le paywall.
+- [x] Prix, durée et **renouvellement automatique** affichés avant l'achat (prix et période lus dans
+      l'offering ; texte de renouvellement propre à l'App Store — résiliation 24 h avant — et à Google Play).
+- [x] Liens **CGU** et **Politique de confidentialité** sur le paywall (navigateur du système) ;
+      à reporter aussi dans la fiche store (champ EULA / Conditions d'utilisation).
+- [x] Aucun lien ni mention de paiement externe dans l'app (le web n'en propose pas).
+- [x] Gestion / résiliation : « Gérer mon abonnement » (`manageUrl` de l'API, sinon page d'abonnements du store).
+- [x] **Suppression de compte** dans l'app ; le paywall rappelle qu'elle ne résilie pas l'abonnement store.
 - [ ] Achats testés en Sandbox (iOS) et avec testeurs de licence (Android).
 
-## Reste à faire côté app (W6-08)
+## Côté app (W6-08, livré)
 
-- Installer `@revenuecat/purchases-capacitor` ; `Purchases.configure({ apiKey, appUserID: user.id })`
-  après connexion, `Purchases.logOut()` à la déconnexion.
-- Paywall natif à partir de l'offering (prix localisés fournis par le SDK), bouton Restaurer.
-- Après achat / restauration : rafraîchir `GET /users/me/subscription` (le webhook peut
-  arriver quelques secondes après ; prévoir un nouvel essai).
-- Sur le web, aucune offre d'achat (déjà en place : message « disponible dans l'application »).
+- **`frontend/src/lib/purchases.ts`** (plugin importé à la demande, sans effet sur le web) :
+  - identité : `Purchases.configure({ apiKey, appUserID: user.id })` à la connexion d'un **compte**
+    (jamais d'un invité), `logIn` si un autre compte se connecte, `logOut` à la déconnexion ou au retour
+    en invité (`NativeBridge`, `syncPurchasesUser`) ; appels enchaînés, idempotents ;
+  - offering courante : packages `$rc_monthly` puis `$rc_annual` (sinon tout abonnement dont le store
+    donne la durée) ; prix (`priceString`), période ISO 8601 et offre d'introduction lus dans le store ;
+  - achat (`purchasePackage`), restauration (`restorePurchases`), état client (`getCustomerInfo`) ;
+    erreurs classées : annulation (silencieuse), réseau / hors ligne, produit indisponible, achats
+    interdits, paiement en attente, déjà abonné, store ;
+  - **le backend reste la source de vérité** : après un achat ou une restauration, `waitForBackendPremium`
+    relit `GET /auth/me` (1 s, 1,5 s, 2,5 s, 4 s puis toutes les 6 s) jusqu'à `isPremium: true`, 30 s au
+    plus ; au-delà, « Activation en cours… » avec un bouton « Vérifier ». L'entitlement vu par le SDK
+    n'ouvre jamais le Premium à lui seul.
+- **Paywall** (`src/components/purchases/NativePaywall.tsx`) : page *Paramètres > Abonnement* dans l'app,
+  et modale ouverte par l'emplacement verrouillé « Ajouter un animal » (compte gratuit, app native).
+  Invité : création de compte d'abord. Web : aucune offre d'achat, explication et liens stores.
+- Tests : `src/lib/__tests__/purchases.test.ts`, `src/components/__tests__/NativePaywall.test.tsx`,
+  `AddAnimalLockedSlot.test.tsx`, `NativeBridge.test.tsx`.
+- Natif (à la création des projets) : capacité **In-App Purchase** dans Xcode ; côté Android, la
+  permission `com.android.vending.BILLING` est apportée par le plugin.
 
 ## Évolution possible sans RevenueCat (non implémentée)
 
