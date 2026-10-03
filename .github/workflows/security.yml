@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
   schedule:
     - cron: "0 6 * * 1"
@@ -15,6 +16,8 @@ jobs:
   # `npm audit` BLOQUANT sur les dépendances de production (vulnérabilités high et critical).
   # Les devDependencies sont exclues : elles ne sont pas livrées dans les images.
   audit:
+    # Rien sur une PR en brouillon (économie de minutes) : l'audit tourne au passage à « prête ».
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft != true
     runs-on: ubuntu-latest
     timeout-minutes: 10
     strategy:

@@ -41,7 +41,7 @@ Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (
 | **Vague 0 — Urgences sécurité** | | | |
 | W0-01 | Rôles et e-mails normalisés | ✅ | `User.role`, e-mails en minuscules, index unique, CLI `operator:set`. Après la migration, **aucun compte n'est opérateur** (§0.5). |
 | W0-02 | URL d'API unique | ✅ | `frontend/src/lib/config.ts`, plus de branche LAN dans le bundle de production. |
-| W0-03 | Dépendances vulnérables | ✅ | `npm audit` à 0 au dernier relevé ; Dependabot actif (`.github/dependabot.yml`). À rejouer avant la mise en ligne. |
+| W0-03 | Dépendances vulnérables | ✅ | `npm audit` à 0 au dernier relevé ; Dependabot actif (`.github/dependabot.yml`), une PR groupée par mois et par écosystème. À rejouer avant la mise en ligne. |
 | W0-04 | Secrets et valeurs par défaut de prod | 🟡 | Joi de production (`JWT_SECRET`, `CORS_ORIGIN`, `FRONTEND_URL`), jeton de reset haché, compose durci : fait. **`MAIL_HOST` n'est pas obligatoire en production** : sans SMTP, aucun e-mail ne part (reset, vérification, rappels par e-mail). À rendre obligatoire une fois le prestataire choisi (D-06). |
 | W0-05 | Seed de prod propre | ✅ | Magasins factices retirés, gardes `NODE_ENV=production` sur les scripts de dev. Base déjà seedée avec les anciens magasins : requête de purge dans [RUNBOOK.md § 6.6](RUNBOOK.md#66-seed-du-catalogue--idempotence-et-nettoyage-dune-base-ancienne). |
 | W0-06 | Page QR publique sûre | ✅ | Opt-in (`publicEnabled`, `publicFields`), lien révocable, URL construite côté backend. |
@@ -53,7 +53,7 @@ Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (
 | W1-03 | Observabilité | ✅ | Logs pino JSON expurgés, `x-request-id`, Sentry (backend et navigateur, release, scrub), `/health` + `/health/ready`, `HEALTHCHECK` Docker. Pas de tunnel Sentry (`withSentryConfig` non utilisé). DSN à fournir : 👤. |
 | W1-04 | Résilience des API externes | ✅ | Client HTTP unique, retry GBIF, disjoncteur par fournisseur (implémentation interne), replis locaux. |
 | W1-05 | Pagination et tri stable | 🟡 | Backend : `limit` ≤ 100 et tri stable. **Le frontend ne pagine pas** : au-delà de 100 éléments d'une liste, les suivants ne s'affichent pas. |
-| W1-06 | Tests stables et CI bloquante | ✅ | `ci.yml` : tests backend (e2e inclus), `tsc`, build, Docker, ESLint frontend, garde-fou des styles, smoke Playwright, audit ; CodeQL (`codeql.yml`) et Dependabot. **La CI ne démarre plus** (quota Actions) : 👤. Protection de la branche `main` : à activer (non vérifiable depuis le dépôt) : 👤. |
+| W1-06 | Tests stables et CI bloquante | ✅ | `ci.yml` : tests backend (e2e inclus), `tsc`, build, Docker, ESLint frontend, garde-fou des styles, smoke Playwright, audit ; CodeQL (`codeql.yml`) et Dependabot. CI ciblée depuis le 2026-10-03 (job `changes` : jobs backend ou frontend seulement si concernés, rien sur une PR en brouillon) pour économiser les minutes Actions. Protection de la branche `main` : à activer (non vérifiable depuis le dépôt) : 👤. |
 | W1-07 | Dette lint et code mort | ✅ | Lint backend (`src/` + `test/`, `npm run lint:check`) à 0 erreur, **bloquant en CI** (`lint-backend`) ; lint frontend bloquant. Code mort retiré le 2026-10-03 : `frontend/src/i18n.ts` et `frontend/src/i18n/request.ts` (réexports dépréciés, aucun import), module backend `database-optimization` (statistiques jamais alimentées, chargé seulement avec Redis), dépendance frontend `axios` (aucun import). |
 | W1-08 | Corrections backend diverses | ✅ | Limite d'animaux sans course, abonnement push sûr, anti-énumération. |
 | W1-09 | Durcissement du schéma | 🟡 | CHECK, FK, index trigram (migration `20261003010000_schema_hardening`). La migration vers `prisma.config.ts` n'est pas faite (le bloc `prisma` de `backend/package.json` subsiste). |
@@ -109,7 +109,7 @@ Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (
 | DEP-04 | Supervision | 👤 | `/health/ready` existe. Monitor UptimeRobot et alertes Sentry à créer à la main (`docs/RUNBOOK.md` §1.2). |
 | DEP-05 | Staging | ⏳ | Aucune branche Neon `staging` ni API de staging. |
 | DEP-06 | Docker et compose | 🟡 | `HEALTHCHECK` backend, compose durci. Pas de `docker-compose.prod.yml` (P2). |
-| DEP-07 | Versionnage | ✅ | `release-please` (`release.yml`, manifeste). Réglage « Allow GitHub Actions to create and approve pull requests » : 👤. |
+| DEP-07 | Versionnage | ✅ | `release-please` (`release.yml`, manifeste), lancé **à la main** depuis le 2026-10-03 (Actions → Release) pour ne plus relancer la CI à chaque fusion. Réglage « Allow GitHub Actions to create and approve pull requests » : 👤. |
 | DEP-08 | Runbooks | ✅ | `docs/DEPLOY.md`, `docs/RUNBOOK.md`. |
 | DEP-09 | Test de charge | ⏳ | Dépend du staging. |
 | DEP-10 | Scalabilité | ⏳ | P2, après le lancement. |

@@ -8,6 +8,9 @@
   base = "frontend"
   command = "npm run build"
   publish = ".next"
+  # Économie de minutes de build : Netlify ne reconstruit que si frontend/ ou ce fichier a
+  # changé depuis le dernier build du même contexte (code de sortie 0 = build ignoré).
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ../netlify.toml"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

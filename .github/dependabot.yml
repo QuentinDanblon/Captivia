@@ -1,44 +1,25 @@
 version: 2
 
-# Mises à jour hebdomadaires, regroupées en une seule PR par écosystème pour
-# limiter le bruit. Les montées de version majeure restent des PR séparées
-# (non groupées) afin d'être relues individuellement.
+# Économie de minutes Actions : chaque PR de Dependabot relance toute la CI et un aperçu
+# Netlify. Donc : une fois par mois, toutes les mises à jour d'un écosystème regroupées en une
+# seule PR (versions majeures comprises, à relire avant fusion), une seule PR ouverte à la fois.
+# Les correctifs de sécurité (Dependabot security updates, réglage du dépôt) ne sont pas
+# concernés et restent immédiats.
 updates:
   - package-ecosystem: npm
-    directory: /backend
+    directories: ["/", "/backend", "/frontend"]
     schedule:
-      interval: weekly
-      day: monday
-    open-pull-requests-limit: 5
+      interval: monthly
+    open-pull-requests-limit: 1
     groups:
-      backend-minor-patch:
-        update-types: [minor, patch]
-
-  - package-ecosystem: npm
-    directory: /frontend
-    schedule:
-      interval: weekly
-      day: monday
-    open-pull-requests-limit: 5
-    groups:
-      frontend-minor-patch:
-        update-types: [minor, patch]
-
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: weekly
-      day: monday
-    open-pull-requests-limit: 3
-    groups:
-      root-minor-patch:
-        update-types: [minor, patch]
+      npm-mensuel:
+        patterns: ["*"]
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-      day: monday
+      interval: monthly
+    open-pull-requests-limit: 1
     groups:
-      github-actions:
+      github-actions-mensuel:
         patterns: ["*"]
