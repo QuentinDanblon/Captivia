@@ -297,8 +297,20 @@ export function buildFrContent(locale: string): LegalContent {
                 d&apos;un compte, leur suppression, ou après 90 jours sans utilisation de l&apos;application ; ils sont
                 alors effacés.
               </li>
-              <li>Jeton de réinitialisation du mot de passe : une heure au plus, puis il devient inutilisable.</li>
-              <li>Jeton de connexion conservé dans votre navigateur : valable 7 jours, effacé à la déconnexion.</li>
+              <li>
+                Historique des rappels (rappels générés, faits ou non faits) : 90 jours après la date prévue du
+                rappel, puis effacé automatiquement.
+              </li>
+              <li>
+                Jetons de réinitialisation du mot de passe (valables une heure) et de vérification de l&apos;adresse
+                e-mail (valables 24 heures) : effacés automatiquement après leur expiration (purge quotidienne).
+              </li>
+              <li>
+                Jetons de connexion : jeton d&apos;accès valable 30 minutes et jeton de renouvellement valable 30 jours
+                (90 jours en mode invité), renouvelé à chaque utilisation et effacé de votre appareil à la
+                déconnexion. Nos serveurs n&apos;en conservent qu&apos;une empreinte, effacée 30 jours après son
+                expiration ou sa révocation.
+              </li>
               <li>Journaux techniques et de sécurité (dont l&apos;adresse IP) : 12 mois au plus.</li>
               <li>Rapports d&apos;erreurs (si le suivi est activé) : 90 jours au plus.</li>
             </UL>

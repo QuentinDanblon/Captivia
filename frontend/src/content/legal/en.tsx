@@ -286,8 +286,19 @@ export function buildEnContent(locale: string): LegalContent {
                 Use without an account (guest): your animal and its health record are kept until you create an
                 account, delete them, or after 90 days without using the app; they are then erased.
               </li>
-              <li>Password reset token: one hour at most, after which it can no longer be used.</li>
-              <li>Login token stored in your browser: valid for 7 days, erased on logout.</li>
+              <li>
+                Reminder history (generated reminders, done or not done): 90 days after the reminder&apos;s scheduled
+                date, then erased automatically.
+              </li>
+              <li>
+                Password reset tokens (valid for one hour) and email verification tokens (valid for 24 hours): erased
+                automatically once expired (daily purge).
+              </li>
+              <li>
+                Login tokens: access token valid for 30 minutes and renewal token valid for 30 days (90 days in guest
+                mode), renewed on each use and erased from your device on logout. Our servers only keep a fingerprint
+                of it, erased 30 days after it expires or is revoked.
+              </li>
               <li>Technical and security logs (including IP address): 12 months at most.</li>
               <li>Error reports (if tracking is enabled): 90 days at most.</li>
             </UL>
