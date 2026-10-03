@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { api, ApiError, type SpeciesRoutineTemplate } from '@/lib/api';
 import { ANIMAL_LIMIT_CODE } from '@/lib/guest';
-import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
+import { compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
 import { Button, Field, Steps, cx } from '@/components/ui';
 import { usePhotoPicker } from '@/components/usePhotoPicker';
 
@@ -140,7 +140,11 @@ export default function AddAnimalFlow({
       setPhotoUrl(await compressImageToDataUrl(file));
       setFormError('');
     } catch (err) {
-      setFormError(isImageTooLargeError(err) ? t('animals.photoTooLarge') : t('animals.errorAdding'));
+      setFormError(isImageTooLargeError(err)
+          ? t('animals.photoTooLarge')
+          : isUnsupportedImageError(err)
+            ? t('animals.photoUnsupported')
+            : t('animals.errorAdding'));
     }
   };
   // Web : sélecteur de fichier ; app native : appareil photo ou galerie (W6-05).
@@ -395,6 +399,7 @@ export default function AddAnimalFlow({
                 {t('animals.choosePhotoFile')}
               </Button>
             </div>
+            <p className="m-0 text-meta text-ink-2">{t('animals.photoSizeHint')}</p>
             <Field label={t('animals.profilePhotoUrl')} hint={t('onboarding.photoHint')} id="animal-profile-photo">
               <input type="url" value={photoUrl.startsWith('data:') ? '' : photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} placeholder={t('animals.profilePhotoPlaceholder')} />
             </Field>

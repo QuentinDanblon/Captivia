@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { api, type Animal } from '@/lib/api';
-import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
+import { compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
 import { usePhotoPicker } from '@/components/usePhotoPicker';
 import { Button, Field, Modal, cx } from '@/components/ui';
 import { FormError } from './parts';
@@ -54,7 +54,11 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
       setEditAnimalProfilePhotoUrl(await compressImageToDataUrl(file));
       setEditAnimalError('');
     } catch (err) {
-      setEditAnimalError(isImageTooLargeError(err) ? t('animals.photoTooLarge') : t('animals.errorAdding'));
+      setEditAnimalError(isImageTooLargeError(err)
+          ? t('animals.photoTooLarge')
+          : isUnsupportedImageError(err)
+            ? t('animals.photoUnsupported')
+            : t('animals.errorAdding'));
     }
   };
   // Web : sélecteur de fichier ; app native : appareil photo ou galerie (W6-05).
@@ -173,6 +177,7 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
               {t('animals.choosePhotoFile')}
             </Button>
           </div>
+          <p className="m-0 text-meta text-ink-2">{t('animals.photoSizeHint')}</p>
           <Field label={t('animals.profilePhotoUrl')} hint={t('animals.profilePhotoHelp')} id="edit-animal-profile-photo">
             <input
               type="url"

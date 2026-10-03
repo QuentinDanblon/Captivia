@@ -2,13 +2,29 @@
  * Compression côté client des photos avant envoi à l'API (W4-07).
  *
  * - redimensionne (côté le plus long <= 1600 px, sans agrandir) via un canvas ;
- * - ré-encode en JPEG (qualité 0.82) ;
- * - refuse les fichiers de plus de 10 Mo (`ImageTooLargeError`).
+ * - ré-encode en JPEG, en baissant la qualité puis la taille jusqu'à passer sous
+ *   `ANIMAL_PHOTO_TARGET_BYTES` : l'envoi reste toujours sous la limite de l'API (2 Mo décodés) ;
+ * - refuse les fichiers de plus de 30 Mo (`ImageTooLargeError`) et les formats que le navigateur
+ *   ne sait pas lire (HEIC hors Safari… : `UnsupportedImageError`), au lieu d'envoyer le fichier
+ *   brut que l'API refuserait.
  */
 
 export const MAX_IMAGE_DIMENSION = 1600;
 export const IMAGE_JPEG_QUALITY = 0.82;
-export const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+/** Taille maximale de la photo d'origine (photos de téléphone récentes : souvent 10 à 20 Mo). */
+export const MAX_IMAGE_BYTES = 30 * 1024 * 1024;
+/** Taille visée après compression (décodée) ; l'API accepte 2 Mo, on garde une marge. */
+export const ANIMAL_PHOTO_TARGET_BYTES = 1_200_000;
+/** Plafond accepté par l'API pour une photo en data URL (`IsPhotoSource`, 2 Mo décodés). */
+const API_PHOTO_MAX_BYTES = 2 * 1024 * 1024;
+/** Paliers successifs (côté le plus long, qualité JPEG) tant que la cible n'est pas atteinte. */
+const COMPRESSION_STEPS: ReadonlyArray<readonly [number, number]> = [
+  [MAX_IMAGE_DIMENSION, IMAGE_JPEG_QUALITY],
+  [MAX_IMAGE_DIMENSION, 0.7],
+  [1280, 0.7],
+  [1024, 0.65],
+  [800, 0.6],
+];
 
 /** Levée quand le fichier source dépasse `MAX_IMAGE_BYTES` (à traduire côté UI). */
 export class ImageTooLargeError extends Error {
@@ -38,6 +54,14 @@ export function computeTargetSize(
   };
 }
 
+/** Taille décodée approchée d'une data URL base64 (3 octets pour 4 caractères). */
+export function dataUrlBytes(dataUrl: string): number {
+  const comma = dataUrl.indexOf(',');
+  const b64 = comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl;
+  const padding = b64.endsWith('==') ? 2 : b64.endsWith('=') ? 1 : 0;
+  return Math.floor((b64.length * 3) / 4) - padding;
+}
+
 function readAsDataUrl(file: Blob): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
@@ -64,9 +88,24 @@ function loadImage(file: Blob): Promise<HTMLImageElement> {
 }
 
 /**
- * Retourne un data URL JPEG compressé. Si l'image ne peut pas être décodée ou si le canvas
- * n'est pas disponible, retourne le data URL d'origine (comportement antérieur).
+ * Sans décodage possible (canvas absent, image illisible) : le fichier n'est envoyé tel quel que
+ * s'il est dans un format et une taille que l'API accepte ; sinon, erreur explicite.
+ */
+async function originalIfAcceptable(file: Blob): Promise<string> {
+  const type = await sniffImageType(file);
+  if (type === 'heic') throw new UnsupportedImageError('heic');
+  if (type !== 'jpeg' && type !== 'png' && type !== 'webp' && type !== 'gif') {
+    throw new UnsupportedImageError('type');
+  }
+  if (file.size > API_PHOTO_MAX_BYTES) throw new ImageTooLargeError();
+  return readAsDataUrl(file);
+}
+
+/**
+ * Retourne un data URL JPEG compressé, toujours sous `ANIMAL_PHOTO_TARGET_BYTES` quand le
+ * navigateur sait décoder l'image (sinon : original s'il est acceptable, erreur sinon).
  * @throws ImageTooLargeError si `file.size > MAX_IMAGE_BYTES`
+ * @throws UnsupportedImageError si le format n'est pas lisible ici (ex. HEIC hors Safari)
  */
 export async function compressImageToDataUrl(file: File | Blob): Promise<string> {
   if (file.size > MAX_IMAGE_BYTES) throw new ImageTooLargeError();
@@ -75,28 +114,32 @@ export async function compressImageToDataUrl(file: File | Blob): Promise<string>
   try {
     img = await loadImage(file);
   } catch {
-    return readAsDataUrl(file);
+    return originalIfAcceptable(file);
   }
 
   const srcWidth = img.naturalWidth || img.width;
   const srcHeight = img.naturalHeight || img.height;
-  const { width, height } = computeTargetSize(srcWidth, srcHeight);
-
   const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
   const ctx = canvas.getContext('2d');
-  if (!ctx) return readAsDataUrl(file);
+  if (!ctx) return originalIfAcceptable(file);
 
-  // Fond blanc : le JPEG n'a pas de transparence (PNG/GIF/WebP transparents).
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0, 0, width, height);
-  ctx.drawImage(img, 0, 0, width, height);
-
-  const compressed = canvas.toDataURL('image/jpeg', IMAGE_JPEG_QUALITY);
-  // toDataURL renvoie « data:, » (ou autre format) si l'encodage JPEG échoue.
-  if (!compressed.startsWith('data:image/jpeg')) return readAsDataUrl(file);
-  return compressed;
+  let smallest: string | null = null;
+  for (const [maxSide, quality] of COMPRESSION_STEPS) {
+    const { width, height } = computeTargetSize(srcWidth, srcHeight, maxSide);
+    canvas.width = width;
+    canvas.height = height;
+    // Fond blanc : le JPEG n'a pas de transparence (PNG/GIF/WebP transparents).
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, width, height);
+    ctx.drawImage(img, 0, 0, width, height);
+    const encoded = canvas.toDataURL('image/jpeg', quality);
+    // toDataURL renvoie « data:, » (ou autre format) si l'encodage JPEG échoue.
+    if (!encoded.startsWith('data:image/jpeg')) return originalIfAcceptable(file);
+    if (smallest === null || dataUrlBytes(encoded) < dataUrlBytes(smallest)) smallest = encoded;
+    if (dataUrlBytes(encoded) <= ANIMAL_PHOTO_TARGET_BYTES) return encoded;
+  }
+  if (smallest && dataUrlBytes(smallest) <= API_PHOTO_MAX_BYTES) return smallest;
+  throw new ImageTooLargeError();
 }
 
 // ---------------------------------------------------------------------------------------------
