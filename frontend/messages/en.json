@@ -1200,7 +1200,8 @@
         "filtration": "Filtration"
       }
     },
-    "pubmedNote": "Articles from PubMed (NCBI), in English"
+    "pubmedNote": "Articles from PubMed (NCBI), in English",
+    "reviewedOn": "Profile checked on {date}"
   },
   "store": {
     "allCategories": "All types",

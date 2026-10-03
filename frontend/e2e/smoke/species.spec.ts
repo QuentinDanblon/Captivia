@@ -111,6 +111,7 @@ test.describe('Fiche espèce', () => {
     );
 
     // Sections, chiffres et avertissements.
+    await expect(page.getByText('Fiche vérifiée le 2 oct. 2026')).toBeVisible();
     await expect(page.getByRole('region', { name: 'Habitat' })).toContainText('28–32 °C');
     await expect(page.getByRole('region', { name: 'Alimentation' })).toContainText('Tous les 7 à 10 jours');
     await expect(page.getByRole('region', { name: 'Comportement' })).toContainText('Solitaire : à garder seul');

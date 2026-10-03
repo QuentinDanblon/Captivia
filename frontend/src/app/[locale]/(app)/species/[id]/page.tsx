@@ -30,6 +30,7 @@ import {
 } from '@/components/ui';
 import { SpeciesPhotoFigure } from '@/components/species/SpeciesPhotoFigure';
 import { useSpeciesPhoto } from '@/components/species/useSpeciesPhoto';
+import { ReviewedNote } from './_components/ReviewedNote';
 import {
   BehaviorSection,
   EquipmentSection,
@@ -291,6 +292,7 @@ export default function SpeciesDetailPage({ params }: { params: Promise<{ locale
               {classification.join(' › ')}
             </p>
           ) : null}
+          <ReviewedNote value={species.lastReviewedAt} />
         </div>
       </header>
 

@@ -361,6 +361,8 @@ groupe dans l'URL, cartes illustrées (photo GBIF sous licence libre ou silhouet
 `species/[id]` : planche (photo créditée, binôme, autorité, n° GBIF), sections ancrées en cartes
 (alimentation, habitat, comportement, santé, reproduction, législation, matériel, sources),
 sommaire collant en bureau, une seule action principale (« Ajouter un animal de cette espèce »).
+Sous l'en-tête, en mono discret : « Fiche vérifiée le 2 oct. 2026 » (`lastReviewedAt`, date
+localisée par `useFormatter`), rien si la fiche n'a pas été relue (`null`).
 Santé : références **PubMed** sous « Articles de PubMed (NCBI), en anglais », titres en
 `lang="en"`, liens externes `rel="noopener noreferrer"` avec mention « nouvel onglet », renvoi
 depuis la section Sources. Matériel : liste sans lien marchand.
@@ -525,6 +527,8 @@ Avant de fusionner un lot visuel : captures 1440 et 390, clair et sombre, aucun 
 - **Affiliation** : Amazon retiré du backend (W3-05) ; plus aucune mention « Partenaire Amazon »,
   `api.searchAmazon` supprimé ; transparence et documents légaux formulés au conditionnel (« si
   des liens partenaires sont proposés, ils sont signalés… »), marqueurs « À COMPLÉTER » conservés.
+- **Date de vérification** des fiches (`lastReviewedAt`, backend W5-04) sous l'en-tête planche,
+  absente si `null` (`ReviewedNote`, testé).
 - **PubMed** présenté dans la section santé (« en anglais », `lang="en"`) et cité dans Sources.
 - **Invité** : pictogramme de profil au lieu de « ·· » ; lien de la page publique vers l'essai.
 - **axe** bloquant dès « serious », toutes pages, clair et sombre.

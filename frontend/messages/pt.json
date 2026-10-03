@@ -1193,7 +1193,8 @@
         "filtration": "Filtração"
       }
     },
-    "pubmedNote": "Artigos do PubMed (NCBI), em inglês"
+    "pubmedNote": "Artigos do PubMed (NCBI), em inglês",
+    "reviewedOn": "Ficha verificada em {date}"
   },
   "store": {
     "allCategories": "Todos os tipos",

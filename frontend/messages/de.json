@@ -1193,7 +1193,8 @@
         "filtration": "Filterung"
       }
     },
-    "pubmedNote": "Artikel aus PubMed (NCBI), auf Englisch"
+    "pubmedNote": "Artikel aus PubMed (NCBI), auf Englisch",
+    "reviewedOn": "Steckbrief geprüft am {date}"
   },
   "store": {
     "allCategories": "Alle Tierarten",

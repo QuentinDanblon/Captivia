@@ -73,6 +73,8 @@ export interface SpeciesData {
   family?: string;
   genus?: string;
   distribution?: string | string[];
+  /** Date de la dernière relecture éditoriale de la fiche (ISO), `null` si elle n'a pas été vérifiée. */
+  lastReviewedAt?: string | null;
   profile?: {
     speciesId?: number;
     sourceUrl?: string | null;
