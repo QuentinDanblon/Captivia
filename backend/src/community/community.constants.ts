@@ -44,6 +44,17 @@ export const REPLIES_PER_COMMENT = 50;
 /** Signalements émis par compte et par heure (anti-abus des signalements). */
 export const REPORTS_PER_HOUR = 30;
 
+/**
+ * Pseudo libéré (changement, départ, suppression du compte) : réservé à son ancien titulaire
+ * pendant ce nombre de jours (anti-usurpation).
+ */
+export const HANDLE_HOLD_DAYS = 60;
+
+/** Notifications de modération en échec : relancées par la maintenance pendant ce délai (jours). */
+export const NOTIFICATION_RETRY_DAYS = 7;
+/** Notifications relancées au plus par exécution du job de maintenance (par catégorie). */
+export const NOTIFICATION_RETRY_MAX_PER_RUN = 200;
+
 /** Délai de recours interne contre une décision (DSA art. 20 : au moins 6 mois). */
 export const APPEAL_WINDOW_DAYS = 183;
 
@@ -53,10 +64,23 @@ export const SUSPENSION_MAX_DAYS = 365;
 /** Médias : largeur maximale après redimensionnement, hauteur maximale (bandes très hautes). */
 export const MEDIA_MAX_WIDTH = 1600;
 export const MEDIA_MAX_HEIGHT = 4000;
-/** Pixels décodés au plus (anti « bombe de décompression »). */
-export const MEDIA_MAX_INPUT_PIXELS = 50_000_000;
-/** Plafond dur du flux multipart (mémoire), au-delà du contrôle applicatif MEDIA_MAX_BYTES. */
-export const MEDIA_UPLOAD_HARD_LIMIT_BYTES = 25 * 1024 * 1024;
+/**
+ * Anti « bombe de décompression » : les dimensions sont lues dans l'en-tête (`metadata()`, sans
+ * décodage) et refusées au-delà de ces bornes AVANT tout décodage. Un PNG de 10 000 000 × 5 px ne
+ * pèse que 146 Ko mais se décode en plusieurs Go.
+ */
+export const MEDIA_MAX_INPUT_PIXELS = 24_000_000;
+/** Largeur ou hauteur source maximale (px). */
+export const MEDIA_MAX_INPUT_DIMENSION = 10_000;
+/** Rapport maximal entre le grand et le petit côté de l'image source. */
+export const MEDIA_MAX_ASPECT_RATIO = 20;
+/** Traitements d'image simultanés dans le processus (sémaphore global). */
+export const MEDIA_PROCESSING_CONCURRENCY = 2;
+/** Téléversements en attente d'un créneau de traitement au plus (au-delà : 503). */
+export const MEDIA_PROCESSING_MAX_QUEUE = 16;
+/** Durée maximale d'un traitement (s) et de l'attente d'un créneau (ms). */
+export const MEDIA_PROCESSING_TIMEOUT_SECONDS = 10;
+export const MEDIA_PROCESSING_QUEUE_TIMEOUT_MS = 30_000;
 /** Qualité WebP de ré-encodage. */
 export const MEDIA_WEBP_QUALITY = 82;
 /** Délai de grâce avant qu'une image téléversée et jamais rattachée soit purgée (heures). */
@@ -111,4 +135,5 @@ export const CommunityErrorCode = {
   CANNOT_BLOCK_SELF: 'COMMUNITY_CANNOT_BLOCK_SELF',
   BLOCKED: 'COMMUNITY_BLOCKED',
   APPEAL_NOT_ALLOWED: 'COMMUNITY_APPEAL_NOT_ALLOWED',
+  MEDIA_BUSY: 'MEDIA_BUSY',
 } as const;

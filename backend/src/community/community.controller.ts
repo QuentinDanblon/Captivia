@@ -270,6 +270,17 @@ export class CommunityController {
     return this.moderation.report(req.user.id, 'COMMENT', id, dto);
   }
 
+  // ------------------------------------------- Mes signalements (DSA art. 16(5))
+
+  @Get('me/reports')
+  @ApiOperation({
+    summary:
+      'Reports I filed: status (OPEN, ACTIONED, DISMISSED) and the decision taken',
+  })
+  myReports(@Request() req: AuthedRequest, @Query() q: CursorQueryDto) {
+    return this.moderation.myReports(req.user.id, q.cursor, q.limit);
+  }
+
   // ------------------------------------------- Décisions me concernant, recours
 
   @Get('me/decisions')

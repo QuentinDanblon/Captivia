@@ -16,10 +16,14 @@ export interface CommunityActor {
   /** Case « 15 ans ou plus » cochée à l'inscription (enregistrée avec l'acceptation des CGU). */
   termsAccepted: boolean;
   createdAt: Date;
+  /**
+   * Suspension de publication en cours ou passée (portée par le compte : survit au départ de la
+   * communauté et à la réactivation du profil). NULL = jamais suspendu ou suspension levée.
+   */
+  suspendedUntil: Date | null;
   profile: {
     handle: string;
     rulesVersion: string;
-    suspendedUntil: Date | null;
   } | null;
 }
 
@@ -52,9 +56,8 @@ export class CommunityAccessService {
         emailVerifiedAt: true,
         termsAcceptedAt: true,
         createdAt: true,
-        communityProfile: {
-          select: { handle: true, rulesVersion: true, suspendedUntil: true },
-        },
+        communitySuspendedUntil: true,
+        communityProfile: { select: { handle: true, rulesVersion: true } },
       },
     });
     if (!user) throw new UnauthorizedException();
@@ -64,6 +67,7 @@ export class CommunityAccessService {
       emailVerified: user.emailVerifiedAt !== null,
       termsAccepted: user.termsAcceptedAt !== null,
       createdAt: user.createdAt,
+      suspendedUntil: user.communitySuspendedUntil,
       profile: user.communityProfile,
     };
   }
@@ -78,12 +82,10 @@ export class CommunityAccessService {
     if (!actor.isGuest && !actor.emailVerified)
       reasons.push('EMAIL_NOT_VERIFIED');
     if (!actor.profile) reasons.push('COMMUNITY_PROFILE_REQUIRED');
-    else {
-      if (actor.profile.rulesVersion !== COMMUNITY_RULES_VERSION)
-        reasons.push('COMMUNITY_RULES_NOT_ACCEPTED');
-      if (isSuspended(actor.profile.suspendedUntil, now))
-        reasons.push('COMMUNITY_SUSPENDED');
-    }
+    else if (actor.profile.rulesVersion !== COMMUNITY_RULES_VERSION)
+      reasons.push('COMMUNITY_RULES_NOT_ACCEPTED');
+    if (isSuspended(actor.suspendedUntil, now))
+      reasons.push('COMMUNITY_SUSPENDED');
     return reasons;
   }
 
@@ -120,14 +122,48 @@ export class CommunityAccessService {
   /** Auteur : membre non suspendu. */
   async requirePublisher(userId: string): Promise<CommunityActor> {
     const actor = await this.requireMember(userId);
-    const until = actor.profile?.suspendedUntil ?? null;
-    if (isSuspended(until)) {
+    this.assertNotSuspended(actor);
+    return actor;
+  }
+
+  /** 403 COMMUNITY_SUSPENDED tant qu'une suspension est en cours (profil actif ou non). */
+  assertNotSuspended(actor: CommunityActor): void {
+    const until = actor.suspendedUntil;
+    if (until && isSuspended(until)) {
       throw forbidden(
         CommunityErrorCode.SUSPENDED,
-        `Publishing is suspended until ${until!.toISOString()}.`,
+        `Publishing is suspended until ${until.toISOString()}.`,
       );
     }
-    return actor;
+  }
+
+  /**
+   * Limite par compte appliquée de façon atomique : dans une transaction, verrou consultatif
+   * propre au compte et à la limite (`pg_advisory_xact_lock`), comptage sur la fenêtre glissante,
+   * puis `work` (l'insertion qui sera comptée par les requêtes suivantes). Des requêtes
+   * parallèles d'un même compte sont ainsi sérialisées : la limite est respectée strictement,
+   * sur plusieurs instances, sans Redis.
+   */
+  async withRateLimit<T>(
+    userId: string,
+    scope: 'posts' | 'comments' | 'uploads',
+    count: (tx: Prisma.TransactionClient, since: Date) => Promise<number>,
+    limit: number,
+    windowMs: number,
+    work: (tx: Prisma.TransactionClient) => Promise<T>,
+  ): Promise<T> {
+    return this.prisma.$transaction(
+      async (tx) => {
+        await tx.$executeRaw(
+          Prisma.sql`SELECT pg_advisory_xact_lock(hashtextextended(${`community-rate:${scope}:${userId}`}, 0))`,
+        );
+        const since = new Date(Date.now() - windowMs);
+        if ((await count(tx, since)) >= limit)
+          throw rateLimited(scope, limit, windowMs);
+        return work(tx);
+      },
+      { maxWait: 15_000, timeout: 20_000 },
+    );
   }
 
   /**
@@ -142,10 +178,7 @@ export class CommunityAccessService {
   ): Promise<void> {
     const since = new Date(Date.now() - windowMs);
     if ((await count(since)) >= limit) {
-      throw tooMany(
-        CommunityErrorCode.RATE_LIMITED,
-        `Too many ${what}: at most ${limit} per ${Math.round(windowMs / 60000)} min. Try again later.`,
-      );
+      throw rateLimited(what, limit, windowMs);
     }
   }
 
@@ -174,6 +207,13 @@ export class CommunityAccessService {
     });
     return n > 0;
   }
+}
+
+function rateLimited(what: string, limit: number, windowMs: number) {
+  return tooMany(
+    CommunityErrorCode.RATE_LIMITED,
+    `Too many ${what}: at most ${limit} per ${Math.round(windowMs / 60000)} min. Try again later.`,
+  );
 }
 
 export function isSuspended(

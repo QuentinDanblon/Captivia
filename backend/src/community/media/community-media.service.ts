@@ -2,6 +2,7 @@ import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { randomUUID } from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service';
+import { isOperator } from '../../common/operators';
 import { CommunityAccessService } from '../community-access.service';
 import { mediaMaxBytes, uploadsPerHour } from '../community.config';
 import {
@@ -18,6 +19,13 @@ export interface MediaView {
   url: string;
   width: number;
   height: number;
+}
+
+/** Lecteur authentifié (facultatif) d'une image : `req.user` de la stratégie JWT. */
+export interface MediaViewer {
+  id: string;
+  role?: string | null;
+  emailVerified?: boolean;
 }
 
 /** Fichier reçu par multer (stockage mémoire). */
@@ -68,20 +76,54 @@ export class CommunityMediaService {
   }
 
   /**
+   * Image lisible par `viewer` (pilote local) :
+   * - aucune ligne `CommunityMedia` (fichier résiduel) : null ;
+   * - image d'une publication masquée : seulement son auteur ou un opérateur (e-mail vérifié),
+   *   `isPublic: false` (jamais mise en cache) ; sinon null (404) ;
+   * - image d'une publication visible, avatar, image pas encore rattachée (clé aléatoire,
+   *   connue de son seul auteur) : `isPublic: true`.
+   */
+  async readFor(
+    key: string,
+    viewer?: MediaViewer,
+  ): Promise<{ data: Buffer; isPublic: boolean } | null> {
+    const row = await this.prisma.communityMedia.findUnique({
+      where: { key },
+      select: { post: { select: { status: true, authorId: true } } },
+    });
+    if (!row) return null;
+    let isPublic = true;
+    if (row.post && row.post.status !== 'VISIBLE') {
+      const allowed =
+        !!viewer &&
+        (viewer.id === row.post.authorId ||
+          (isOperator(viewer) && viewer.emailVerified === true));
+      if (!allowed) return null;
+      isPublic = false;
+    }
+    const data = await this.storage.read(key);
+    return data ? { data, isPublic } : null;
+  }
+
+  /**
    * Téléversement d'une image par un auteur (membre vérifié non suspendu), limité à
-   * COMMUNITY_UPLOADS_PER_HOUR par compte. L'image n'est rattachée à rien : elle le sera par la
-   * création d'une publication ou le choix d'un avatar, sinon purgée après 24 h.
+   * COMMUNITY_UPLOADS_PER_HOUR tentatives par compte : la tentative est consommée (sous verrou
+   * consultatif du compte) AVANT le traitement, échecs compris — des envois invalides ou
+   * parallèles ne contournent pas la limite. L'image n'est rattachée à rien : elle le sera par
+   * la création d'une publication ou le choix d'un avatar, sinon purgée après 24 h.
    */
   async upload(userId: string, file: UploadedImage): Promise<MediaView> {
     await this.access.requirePublisher(userId);
-    await this.access.enforceRate(
-      (since) =>
-        this.prisma.communityMedia.count({
-          where: { ownerId: userId, createdAt: { gt: since } },
+    await this.access.withRateLimit(
+      userId,
+      'uploads',
+      (tx, since) =>
+        tx.communityUploadAttempt.count({
+          where: { userId, createdAt: { gt: since } },
         }),
       uploadsPerHour(),
       HOUR_MS,
-      'uploads',
+      (tx) => tx.communityUploadAttempt.create({ data: { userId } }),
     );
     const image = await processImage(file.buffer, mediaMaxBytes());
     const key = `${randomUUID()}.webp`;

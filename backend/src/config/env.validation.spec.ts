@@ -103,6 +103,7 @@ describe('envValidationSchema', () => {
       expect(ok.value).toMatchObject({
         S3_REGION: 'auto',
         COMMUNITY_HIDE_THRESHOLD: 3,
+        COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS: 7,
         COMMUNITY_POSTS_PER_HOUR: 5,
         COMMUNITY_COMMENTS_PER_MINUTE: 5,
         MEDIA_MAX_BYTES: 8 * 1024 * 1024,
@@ -113,6 +114,10 @@ describe('envValidationSchema', () => {
       expect(
         validate({ ...baseProd, COMMUNITY_HIDE_THRESHOLD: 0 }).error?.message,
       ).toContain('COMMUNITY_HIDE_THRESHOLD');
+      expect(
+        validate({ ...baseProd, COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS: -1 })
+          .error?.message,
+      ).toContain('COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS');
       expect(
         validate({ ...baseProd, MEDIA_MAX_BYTES: 50 * 1024 * 1024 }).error
           ?.message,

@@ -233,3 +233,111 @@ export function renderModerationDecision(
     html,
   };
 }
+
+/** Locales du frontend (`frontend/i18n/routing.ts`) ; « fr » (défaut) n'a pas de préfixe. */
+const FRONTEND_LOCALES: readonly string[] = [
+  'fr',
+  'en',
+  'es',
+  'de',
+  'it',
+  'pt',
+];
+const FRONTEND_DEFAULT_LOCALE = 'fr';
+
+/**
+ * Préfixe de locale d'un lien vers le frontend (next-intl, `localePrefix: 'as-needed'`) : aucun
+ * pour le français (locale par défaut), `/<locale>` pour les autres locales prises en charge.
+ */
+export function frontendLocalePrefix(
+  locale: string | null | undefined,
+): string {
+  const lang = (locale ?? '').trim().toLowerCase().slice(0, 2);
+  return FRONTEND_LOCALES.includes(lang) && lang !== FRONTEND_DEFAULT_LOCALE
+    ? `/${lang}`
+    : '';
+}
+
+/**
+ * Notification à l'auteur d'un signalement de la décision prise (DSA art. 16(5)) : type du
+ * contenu visé (ni extrait ni pseudo de l'auteur), motif du signalement, décision, voies de
+ * recours et point de contact.
+ */
+export interface ReportDecisionMailData {
+  targetType: 'POST' | 'COMMENT';
+  reportReason: CommunityReason;
+  reportedAt: Date;
+  /** HIDE / DELETE : contenu retiré ; RESTORE / DISMISS : aucun manquement retenu. */
+  action: CommunityModerationActionType;
+  contactEmail: string | null;
+}
+
+const R = {
+  fr: {
+    subject: 'Captivia : suite donnée à votre signalement',
+    hello: 'Bonjour,',
+    target: { POST: 'une publication', COMMENT: 'un commentaire' },
+    reported: (target: string, date: string, reason: string) =>
+      `Vous avez signalé ${target} le ${date} (motif : ${reason}).`,
+    hidden: "Après examen, l'équipe de modération a masqué ce contenu.",
+    removed: "Après examen, l'équipe de modération a supprimé ce contenu.",
+    kept: "Après examen, l'équipe de modération n'a pas retenu de manquement aux règles de la communauté : le contenu reste visible.",
+    follow:
+      "Le suivi de vos signalements est disponible dans l'application (Communauté, « Mes signalements »).",
+    other:
+      'Si vous contestez cette décision, vous pouvez écrire au point de contact, recourir à un organe de règlement extrajudiciaire des litiges certifié (règlement européen sur les services numériques, art. 21) ou saisir la juridiction compétente.',
+    contact: (email: string) => `Point de contact : ${email}`,
+    sign: "L'équipe Captivia",
+  },
+  en: {
+    subject: 'Captivia: outcome of your report',
+    hello: 'Hello,',
+    target: { POST: 'a post', COMMENT: 'a comment' },
+    reported: (target: string, date: string, reason: string) =>
+      `You reported ${target} on ${date} (reason: ${reason}).`,
+    hidden: 'After review, the moderation team hid this content.',
+    removed: 'After review, the moderation team removed this content.',
+    kept: 'After review, the moderation team found no breach of the community rules: the content remains visible.',
+    follow: 'You can follow your reports in the app (Community, “My reports”).',
+    other:
+      'If you disagree with this decision, you may write to the point of contact, use a certified out-of-court dispute settlement body (EU Digital Services Act, art. 21) or bring the matter before the competent court.',
+    contact: (email: string) => `Point of contact: ${email}`,
+    sign: 'The Captivia team',
+  },
+} as const;
+
+export function renderReportDecision(
+  locale: string | null | undefined,
+  d: ReportDecisionMailData,
+): RenderedMail {
+  const lang = resolveMailLocale(locale);
+  const t = R[lang];
+  const outcome =
+    d.action === 'DELETE'
+      ? t.removed
+      : d.action === 'HIDE' || d.action === 'AUTO_HIDE'
+        ? t.hidden
+        : t.kept;
+  const lines = [
+    t.reported(
+      t.target[d.targetType],
+      day(d.reportedAt, lang) ?? '',
+      reasonLabel(d.reportReason, lang) ?? '',
+    ),
+    outcome,
+    t.follow,
+  ];
+  const after = [
+    t.other,
+    ...(d.contactEmail ? [t.contact(d.contactEmail)] : []),
+  ];
+  const text = [t.hello, '', ...lines, '', ...after, '', t.sign].join('\n');
+  const html =
+    `<!doctype html><html lang="${lang}"><head><meta charset="utf-8"></head>` +
+    `<body style="font-family:Arial,Helvetica,sans-serif;color:#1f2933;line-height:1.5">` +
+    `<p>${t.hello}</p>` +
+    lines.map((l) => `<p>${escapeHtml(l)}</p>`).join('') +
+    after.map((l) => `<p style="color:#6b7280">${escapeHtml(l)}</p>`).join('') +
+    `<p>${t.sign}</p><p style="color:#6b7280;font-size:12px">Captivia</p></body></html>`;
+  return { subject: t.subject, text, html };
+}

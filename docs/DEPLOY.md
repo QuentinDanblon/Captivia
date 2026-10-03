@@ -112,7 +112,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `NCBI_API_KEY`, `NCBI_EMAIL` | Render (`sync: false`) | clé NCBI et e-mail de contact | Non : PubMed est public (3 req/s), la clé porte le quota à 10 req/s |
 | `COMMUNITY_ENABLED` | Render (`sync: false`) | `false` tant que la communauté n'est pas ouverte | Non (défaut `false` : routes `/community/*` en 404) |
 | `COMMUNITY_CONTACT_EMAIL` | Render (`sync: false`) | adresse du point de contact DSA (modération) | Recommandé dès `COMMUNITY_ENABLED=true` |
-| `COMMUNITY_HIDE_THRESHOLD`, `COMMUNITY_POSTS_PER_HOUR`, `COMMUNITY_COMMENTS_PER_MINUTE`, `COMMUNITY_UPLOADS_PER_HOUR` | Render (`sync: false`) | défauts 3, 5, 5, 30 | Non |
+| `COMMUNITY_HIDE_THRESHOLD`, `COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS`, `COMMUNITY_POSTS_PER_HOUR`, `COMMUNITY_COMMENTS_PER_MINUTE`, `COMMUNITY_UPLOADS_PER_HOUR` | Render (`sync: false`) | défauts 3, 7, 5, 5, 30 | Non |
 | `MEDIA_DRIVER` | Render (`sync: false`) | `s3` | Oui si `COMMUNITY_ENABLED=true` (refusé au démarrage sinon : disque éphémère) |
 | `MEDIA_BUCKET`, `MEDIA_PUBLIC_BASE_URL` | Render (`sync: false`) | bucket R2 et son domaine public (`https://media.<domaine>` ou `https://pub-….r2.dev`) | Oui si `MEDIA_DRIVER=s3` |
 | `S3_ENDPOINT`, `S3_REGION`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_FORCE_PATH_STYLE` | Render (`sync: false`) | R2 : `https://<ACCOUNT_ID>.r2.cloudflarestorage.com`, `auto`, jeton API R2 (lecture/écriture limité au bucket), `false` | Clés : oui si `MEDIA_DRIVER=s3` |

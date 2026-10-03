@@ -38,7 +38,8 @@ export function s3OptionsFromEnv(): S3MediaStorageOptions {
 /**
  * Pilote S3 (Cloudflare R2, AWS S3, MinIO…). Les objets sont publics en lecture via le domaine
  * public du bucket (`MEDIA_PUBLIC_BASE_URL`, ex. domaine personnalisé R2) ; l'API n'expose jamais
- * les identifiants. Cache long et immuable : une clé n'est jamais réécrite avec un autre contenu.
+ * les identifiants. Cache de 24 h au plus (`public, max-age=86400`) : le masquage d'un contenu ne
+ * retire pas l'objet du bucket (procédure de purge : docs/RUNBOOK.md) ; sa suppression, si.
  */
 export class S3MediaStorage implements MediaStorage {
   readonly driver = 's3' as const;
@@ -72,7 +73,9 @@ export class S3MediaStorage implements MediaStorage {
         Key: key,
         Body: body,
         ContentType: contentType,
-        CacheControl: 'public, max-age=31536000, immutable',
+        // 24 h au plus : un contenu masqué ou supprimé ne reste pas des mois dans les caches
+        // (navigateurs, CDN). Purge immédiate du CDN : docs/RUNBOOK.md, « Modération ».
+        CacheControl: 'public, max-age=86400',
       }),
     );
   }

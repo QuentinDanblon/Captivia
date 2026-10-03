@@ -12,14 +12,15 @@ import {
 import { badRequest, conflict, forbidden, notFound } from './community.errors';
 import { CommunityDataService } from './community-data.service';
 import { checkHandle, handleKey } from './handle';
+import { claimHandle, holdHandle } from './handle-hold';
 import { CommunityMediaService } from './media/community-media.service';
 import { ActivateProfileDto, UpdateProfileDto } from './dto/community.dto';
 
 const profileSelect = {
   handle: true,
+  handleKey: true,
   rulesVersion: true,
   rulesAcceptedAt: true,
-  suspendedUntil: true,
   createdAt: true,
   avatar: { select: { key: true } },
 } satisfies Prisma.CommunityProfileSelect;
@@ -48,13 +49,14 @@ export class CommunityProfileService {
     private readonly data: CommunityDataService,
   ) {}
 
-  private view(p: ProfileRow) {
+  /** `suspendedUntil` : suspension portée par le compte (User.communitySuspendedUntil). */
+  private view(p: ProfileRow, suspendedUntil: Date | null) {
     return {
       handle: p.handle,
       avatarUrl: p.avatar ? this.media.url(p.avatar.key) : null,
       rulesVersion: p.rulesVersion,
       rulesAcceptedAt: p.rulesAcceptedAt,
-      suspendedUntil: isSuspended(p.suspendedUntil) ? p.suspendedUntil : null,
+      suspendedUntil: isSuspended(suspendedUntil) ? suspendedUntil : null,
       createdAt: p.createdAt,
     };
   }
@@ -68,7 +70,7 @@ export class CommunityProfileService {
     });
     const reasons = this.access.ineligibility(actor);
     return {
-      profile: profile ? this.view(profile) : null,
+      profile: profile ? this.view(profile, actor.suspendedUntil) : null,
       currentRulesVersion: COMMUNITY_RULES_VERSION,
       canPublish: reasons.length === 0,
       reasons,
@@ -77,6 +79,11 @@ export class CommunityProfileService {
     };
   }
 
+  /**
+   * Activation du profil. Refusée (403 COMMUNITY_SUSPENDED) tant qu'une suspension de publication
+   * est en cours : la suspension est portée par le compte, quitter la communauté puis revenir ne
+   * la lève pas. Un pseudo réservé à un autre compte (libéré depuis moins de 60 jours) : 409.
+   */
   async activate(userId: string, dto: ActivateProfileDto) {
     const actor = await this.access.loadActor(userId);
     this.access.assertVerifiedAccount(actor);
@@ -86,6 +93,7 @@ export class CommunityProfileService {
         'Your community profile is already active.',
       );
     }
+    this.access.assertNotSuspended(actor);
     if (dto.rulesVersion !== COMMUNITY_RULES_VERSION) {
       throw badRequest(
         CommunityErrorCode.RULES_VERSION_MISMATCH,
@@ -107,18 +115,21 @@ export class CommunityProfileService {
     const handle = this.checkedHandle(dto.handle);
     const now = new Date();
     try {
-      const profile = await this.prisma.communityProfile.create({
-        data: {
-          userId,
-          handle: handle.handle,
-          handleKey: handle.key,
-          rulesVersion: COMMUNITY_RULES_VERSION,
-          rulesAcceptedAt: now,
-          ageConfirmedAt: user?.termsAcceptedAt ?? now,
-        },
-        select: profileSelect,
+      const profile = await this.prisma.$transaction(async (tx) => {
+        await claimHandle(tx, handle.key, userId, now);
+        return tx.communityProfile.create({
+          data: {
+            userId,
+            handle: handle.handle,
+            handleKey: handle.key,
+            rulesVersion: COMMUNITY_RULES_VERSION,
+            rulesAcceptedAt: now,
+            ageConfirmedAt: user?.termsAcceptedAt ?? now,
+          },
+          select: profileSelect,
+        });
       });
-      return this.view(profile);
+      return this.view(profile, actor.suspendedUntil);
     } catch (error) {
       if (isUniqueViolation(error)) this.handleTaken(error);
       throw error;
@@ -155,7 +166,7 @@ export class CommunityProfileService {
         'Accept the updated community rules to continue.',
       );
     }
-    if (changesIdentity && isSuspended(actor.profile.suspendedUntil)) {
+    if (changesIdentity && isSuspended(actor.suspendedUntil)) {
       throw forbidden(
         CommunityErrorCode.SUSPENDED,
         'Your profile cannot be changed while publishing is suspended.',
@@ -169,7 +180,7 @@ export class CommunityProfileService {
 
     const current = await this.prisma.communityProfile.findUnique({
       where: { userId },
-      select: { avatar: { select: { id: true, key: true } } },
+      select: { handleKey: true, avatar: { select: { id: true, key: true } } },
     });
     let oldAvatarKey: string | null = null;
     if (dto.avatarMediaId !== undefined) {
@@ -197,20 +208,37 @@ export class CommunityProfileService {
     }
 
     try {
-      const profile = await this.prisma.communityProfile.update({
-        where: { userId },
-        data,
-        select: profileSelect,
+      const now = new Date();
+      const newKey = typeof data.handleKey === 'string' ? data.handleKey : null;
+      const oldKey = current?.handleKey ?? null;
+      const profile = await this.prisma.$transaction(async (tx) => {
+        if (newKey && newKey !== oldKey) {
+          await claimHandle(tx, newKey, userId, now);
+        }
+        const updated = await tx.communityProfile.update({
+          where: { userId },
+          data,
+          select: profileSelect,
+        });
+        // L'ancien pseudo reste réservé 60 jours à son titulaire (anti-usurpation).
+        if (newKey && oldKey && newKey !== oldKey) {
+          await holdHandle(tx, oldKey, userId, now);
+        }
+        return updated;
       });
       if (oldAvatarKey) await this.media.purgeKeys([oldAvatarKey]);
-      return this.view(profile);
+      return this.view(profile, actor.suspendedUntil);
     } catch (error) {
       if (isUniqueViolation(error)) this.handleTaken(error);
       throw error;
     }
   }
 
-  /** Départ de la communauté : profil, publications, commentaires, réactions, images supprimés. */
+  /**
+   * Départ de la communauté : profil, publications, commentaires, réactions, images supprimés.
+   * Toujours permis (droit de partir), y compris pendant une suspension, qui reste attachée au
+   * compte et s'appliquera à une éventuelle réactivation. Le pseudo reste réservé 60 jours.
+   */
   async deactivate(userId: string): Promise<void> {
     const actor = await this.access.loadActor(userId);
     if (!actor.profile) throw notFound();

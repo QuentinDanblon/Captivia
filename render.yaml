@@ -118,6 +118,8 @@ services:
         sync: false
       - key: COMMUNITY_HIDE_THRESHOLD
         sync: false
+      - key: COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS
+        sync: false
       - key: COMMUNITY_POSTS_PER_HOUR
         sync: false
       - key: COMMUNITY_COMMENTS_PER_MINUTE

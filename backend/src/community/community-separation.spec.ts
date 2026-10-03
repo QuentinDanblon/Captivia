@@ -89,12 +89,13 @@ describe('Séparation communauté / carnet de santé', () => {
     );
   });
 
-  it("aucune réponse publique ne sélectionne l'e-mail (seule la notification de modération le lit)", () => {
+  it("aucune réponse publique ne sélectionne l'e-mail (seules les notifications de modération le lisent)", () => {
     for (const file of files) {
       const code = readFileSync(file, 'utf8');
       const hits = code.match(/\bemail\s*:\s*true/g) ?? [];
       const allowed =
-        path.basename(file) === 'community-moderation.service.ts' ? 1 : 0;
+        // Notification de l'auteur du contenu (art. 17) et de l'auteur du signalement (art. 16(5)).
+        path.basename(file) === 'community-moderation.service.ts' ? 2 : 0;
       expect({ file, hits: hits.length }).toEqual({ file, hits: allowed });
     }
   });

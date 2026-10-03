@@ -93,7 +93,7 @@ describe('S3MediaStorage (client simulé)', () => {
       Bucket: 'captivia-media',
       Key: KEY,
       ContentType: 'image/webp',
-      CacheControl: 'public, max-age=31536000, immutable',
+      CacheControl: 'public, max-age=86400',
     });
     const del = send.mock.calls[1][0] as DeleteObjectCommand;
     expect(del).toBeInstanceOf(DeleteObjectCommand);

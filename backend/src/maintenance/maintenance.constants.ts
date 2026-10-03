@@ -4,7 +4,8 @@
  * `docs/RUNBOOK.md` (§ « Purge et rétention ») et la politique de confidentialité.
  */
 
-const DAY_MS = 24 * 60 * 60 * 1000;
+const HOUR_MS = 60 * 60 * 1000;
+const DAY_MS = 24 * HOUR_MS;
 
 /** Clé du verrou consultatif Postgres du job de maintenance (constante propre au job). */
 export const MAINTENANCE_LOCK_KEY = 4_731_202_612;
@@ -31,6 +32,9 @@ export const REFRESH_TOKEN_GRACE_DAYS = 30;
  */
 export const COMMUNITY_MODERATION_RETENTION_DAYS = 365;
 
+/** Communauté : tentatives de téléversement conservées 24 h (limite horaire par compte). */
+export const UPLOAD_ATTEMPT_RETENTION_HOURS = 24;
+
 /** Seuil d'inactivité au-delà duquel un COMPTE est signalé (aucune suppression automatique). */
 export const INACTIVE_ACCOUNT_MONTHS = 36;
 
@@ -43,6 +47,8 @@ export interface MaintenanceCutoffs {
   notificationEventsBefore: Date;
   /** Journal de modération et signalements traités antérieurs à cette date. */
   moderationBefore: Date;
+  /** Tentatives de téléversement communautaires antérieures à cette date (24 h). */
+  uploadAttemptsBefore: Date;
 }
 
 /** Calcule les dates limites de purge pour un instant donné (fonction pure, testable). */
@@ -56,6 +62,9 @@ export function maintenanceCutoffs(now: Date): MaintenanceCutoffs {
     ),
     moderationBefore: new Date(
       t - COMMUNITY_MODERATION_RETENTION_DAYS * DAY_MS,
+    ),
+    uploadAttemptsBefore: new Date(
+      t - UPLOAD_ATTEMPT_RETENTION_HOURS * HOUR_MS,
     ),
   };
 }

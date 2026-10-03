@@ -1,7 +1,15 @@
 import { HttpException } from '@nestjs/common';
 import sharpModule = require('sharp');
-import { MEDIA_MAX_WIDTH } from '../community.constants';
-import { detectImageKind, processImage } from './image-processing';
+import {
+  MEDIA_MAX_INPUT_PIXELS,
+  MEDIA_MAX_WIDTH,
+} from '../community.constants';
+import {
+  Semaphore,
+  assertSafeDimensions,
+  detectImageKind,
+  processImage,
+} from './image-processing';
 
 const sharp = sharpModule as unknown as typeof sharpModule.default;
 
@@ -149,5 +157,110 @@ describe('processImage', () => {
       400,
       'MEDIA_INVALID_IMAGE',
     ]);
+  });
+});
+
+describe('bombe de décompression', () => {
+  /** PNG uni de grandes dimensions : quelques Ko compressés, des Go une fois décodé. */
+  function hugePng(width: number, height: number): Promise<Buffer> {
+    return sharp({
+      create: { width, height, channels: 3, background: '#000' },
+      limitInputPixels: false,
+    })
+      .png({ compressionLevel: 9 })
+      .toBuffer();
+  }
+
+  it('PNG de 10 000 000 × 5 px : refusé en 413 d’après l’en-tête, sans décodage', async () => {
+    const input = await hugePng(10_000_000, 5);
+    expect(input.length).toBeLessThan(200 * 1024);
+    const rss = process.memoryUsage().rss;
+    let peak = rss;
+    const timer = setInterval(() => {
+      peak = Math.max(peak, process.memoryUsage().rss);
+    }, 2);
+    try {
+      expect(await codeOf(processImage(input, 8 * 1024 * 1024))).toEqual([
+        413,
+        'MEDIA_TOO_LARGE',
+      ]);
+    } finally {
+      clearInterval(timer);
+    }
+    // Avant correctif : plus de 1,4 Go (jusqu'à 4 Go) ; après : rien n'est décodé.
+    expect((peak - rss) / 1e6).toBeLessThan(150);
+  });
+
+  it('bornes : 10 000 px par côté, 24 M pixels, rapport 20:1', () => {
+    const status = (w: number, h: number) => {
+      try {
+        assertSafeDimensions(w, h);
+        return 'ok';
+      } catch (e) {
+        return (e as HttpException).getStatus();
+      }
+    };
+    expect(MEDIA_MAX_INPUT_PIXELS).toBe(24_000_000);
+    expect(status(1600, 1200)).toBe('ok');
+    expect(status(4000, 200)).toBe('ok');
+    expect(status(10_001, 1000)).toBe(413);
+    expect(status(1000, 10_001)).toBe(413);
+    expect(status(6000, 6000)).toBe(413);
+    expect(status(4200, 200)).toBe(400);
+    expect(status(0, 10)).toBe(400);
+  });
+
+  it('PNG trop allongé : refusé en 400 avant décodage', async () => {
+    expect(
+      await codeOf(processImage(await hugePng(9000, 400), 8 * 1024 * 1024)),
+    ).toEqual([400, 'MEDIA_INVALID_IMAGE']);
+  });
+});
+
+describe('Semaphore (traitements simultanés)', () => {
+  const tick = () => new Promise((r) => setTimeout(r, 5));
+
+  it('ne lance jamais plus de `limit` tâches à la fois', async () => {
+    const sem = new Semaphore(2, 10, 5000);
+    let running = 0;
+    let max = 0;
+    await Promise.all(
+      Array.from({ length: 8 }, () =>
+        sem.run(async () => {
+          running++;
+          max = Math.max(max, running);
+          await tick();
+          running--;
+        }),
+      ),
+    );
+    expect(max).toBe(2);
+    expect(sem.running).toBe(0);
+    expect(sem.waiting).toBe(0);
+  });
+
+  it('file pleine ou attente trop longue : 503 MEDIA_BUSY', async () => {
+    const sem = new Semaphore(1, 1, 50);
+    let release!: () => void;
+    const blocker = sem.run(() => new Promise<void>((r) => (release = r)));
+    const queued = sem.run(() => Promise.resolve('late'));
+    expect(await codeOf(sem.run(() => Promise.resolve()))).toEqual([
+      503,
+      'MEDIA_BUSY',
+    ]);
+    // L'attente dépasse 50 ms : la tâche en file est refusée à son tour.
+    expect(await codeOf(queued)).toEqual([503, 'MEDIA_BUSY']);
+    release();
+    await blocker;
+    expect(await sem.run(() => Promise.resolve('ok'))).toBe('ok');
+    expect(sem.running).toBe(0);
+  });
+
+  it('une tâche en échec libère son créneau', async () => {
+    const sem = new Semaphore(1, 5, 5000);
+    await expect(
+      sem.run(() => Promise.reject(new Error('boom'))),
+    ).rejects.toThrow('boom');
+    expect(await sem.run(() => Promise.resolve(1))).toBe(1);
   });
 });
