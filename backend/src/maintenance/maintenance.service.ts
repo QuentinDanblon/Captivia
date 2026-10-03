@@ -20,6 +20,8 @@ export interface MaintenanceCounts {
   emailVerificationTokens: number;
   refreshTokens: number;
   notificationEvents: number;
+  /** Jetons de push natif non réenregistrés depuis 270 jours (W6-07). */
+  deviceTokens: number;
   /** Communauté : décisions de modération de plus de 365 jours. */
   communityModerationActions: number;
   /** Communauté : signalements traités de plus de 365 jours. */
@@ -48,6 +50,7 @@ const EMPTY_COUNTS: MaintenanceCounts = {
   emailVerificationTokens: 0,
   refreshTokens: 0,
   notificationEvents: 0,
+  deviceTokens: 0,
   communityModerationActions: 0,
   communityReports: 0,
   communityMedia: 0,
@@ -65,6 +68,7 @@ const NO_RETRY: NotificationRetryCounts = { decisions: 0, reports: 0 };
  * - les jetons de vérification d'e-mail expirés ou invalidés (durée de vie 24 h) ;
  * - les refresh tokens expirés ou révoqués depuis plus de 30 jours (tous les comptes) ;
  * - les `NotificationEvent` dont la date prévue remonte à plus de 90 jours ;
+ * - les jetons de push natif (`DeviceToken`) que l'app n'a pas réenregistrés depuis 270 jours ;
  * - communauté : décisions de modération (sauf recours en attente) et signalements traités de plus
  *   de 365 jours, images orphelines (ni publication ni avatar ; propriétaire supprimé ou
  *   téléversées depuis plus de 24 h), fichier compris (1 000 au plus par exécution), réservations
@@ -116,6 +120,7 @@ export class MaintenanceService {
         `Maintenance : ${d.passwordResetTokens} jeton(s) de réinitialisation, ` +
           `${d.emailVerificationTokens} jeton(s) de vérification d'e-mail, ` +
           `${d.refreshTokens} refresh token(s), ${d.notificationEvents} événement(s) de rappel, ` +
+          `${d.deviceTokens} jeton(s) de push natif inactif(s), ` +
           `${d.communityModerationActions} décision(s) de modération, ${d.communityReports} signalement(s) ` +
           `traité(s), ${d.communityMedia} image(s) orpheline(s), ${d.communityHandleHolds} réservation(s) de pseudo, ` +
           `${d.communityUploadAttempts} tentative(s) de téléversement supprimé(s) ; ` +
@@ -160,6 +165,11 @@ export class MaintenanceService {
             tx,
             Prisma.sql`"NotificationEvent"`,
             Prisma.sql`"scheduledAt" < ${cutoffs.notificationEventsBefore}`,
+          ),
+          deviceTokens: await this.deleteInBatches(
+            tx,
+            Prisma.sql`"DeviceToken"`,
+            Prisma.sql`"lastSeenAt" < ${cutoffs.deviceTokensBefore}`,
           ),
           // Une décision dont le recours est en attente n'est jamais purgée (DSA art. 20).
           communityModerationActions: await this.deleteInBatches(

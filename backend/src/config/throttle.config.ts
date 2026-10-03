@@ -21,3 +21,12 @@ export const GLOBAL_THROTTLE = { ttl: WINDOW_MS, limit: GLOBAL_THROTTLE_LIMIT };
 export const EXTERNAL_API_THROTTLE = {
   default: { ttl: WINDOW_MS, limit: EXTERNAL_API_THROTTLE_LIMIT },
 };
+
+/**
+ * Enregistrement / retrait d'un jeton de push natif (W6-07) : l'app l'envoie au lancement et à
+ * chaque retour au premier plan ; 30 requêtes / min / IP suffisent largement.
+ */
+export const DEVICE_TOKEN_THROTTLE_LIMIT = IS_TEST ? TEST_LIMIT : 30;
+export const DEVICE_TOKEN_THROTTLE = {
+  default: { ttl: WINDOW_MS, limit: DEVICE_TOKEN_THROTTLE_LIMIT },
+};

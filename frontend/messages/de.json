@@ -1663,7 +1663,11 @@
     "offText": "Fütterung, Behandlungen, Impfungen und Termine: Dieses Telefon erinnert Sie pünktlich daran, auch ohne Verbindung.",
     "enable": "Erinnerungen auf diesem Telefon aktivieren",
     "disable": "Erinnerungen auf diesem Telefon ausschalten",
-    "syncError": "Ihre Pflegetermine können gerade nicht geladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
+    "syncError": "Ihre Pflegetermine können gerade nicht geladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "primerTitle": "Zur Pflegezeit erinnert werden?",
+    "primerBody": "Captivia kann Sie benachrichtigen, wenn eine Fütterung, eine Behandlung, eine Impfung oder ein Tierarzttermin ansteht, auch wenn die App geschlossen ist. Sie können diese Erinnerungen jederzeit in den Einstellungen ausschalten.",
+    "primerAccept": "Erinnerungen aktivieren",
+    "primerLater": "Später"
   },
   "paywall": {
     "modalTitle": "Alle Ihre Tiere im Blick",

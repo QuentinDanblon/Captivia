@@ -107,6 +107,8 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `SENTRY_DSN` | Render | projet Sentry UE | Recommandé |
 | `OPERATOR_EMAILS` | Render | remplacé par `User.role` (W0-01) | — |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Render (`sync: false` ; clé publique servie par `GET /notifications/vapid-public-key`, rien côté Netlify) | `npm run vapid:generate` (backend/) | Dès W3-03 |
+| `FCM_SERVICE_ACCOUNT_JSON` | Render (`sync: false`, secret) | clé JSON du compte de service Firebase **encodée en base64** (`base64 -w0 captivia-firebase-adminsdk-xxxx.json` ; Firebase → Paramètres du projet → Comptes de service → Générer une nouvelle clé privée). Push natif de l'app (W6-07) : Android via FCM, iOS via le relais APNs de FCM | Non : sans elle, push natif désactivé (journal info au démarrage), rappels locaux et Web Push inchangés. Dès la publication des apps |
+| `FCM_PROJECT_ID` | Render (`sync: false`) | identifiant du projet Firebase (ex. `captivia-app`) | Non : `project_id` du JSON par défaut |
 | `IAP_ENABLED`, `REVENUECAT_WEBHOOK_SECRET`, `REVENUECAT_ENTITLEMENT_ID`, `GOOGLE_PLAY_PACKAGE_NAME` | Render (`sync: false`) | RevenueCat (achats in-app, pas de Stripe — voir `docs/PAYMENTS.md`) | Dès la publication sur les stores |
 | `SPECIESPLUS_API_TOKEN` | Render (`sync: false`) | jeton Species+ (api.speciesplus.net) | Non : sans jeton, `/speciesplus/*` → 503 `INTEGRATION_DISABLED` et `speciesPlus.status = "disabled"` sur la fiche législation |
 | `NCBI_API_KEY`, `NCBI_EMAIL` | Render (`sync: false`) | clé NCBI et e-mail de contact | Non : PubMed est public (3 req/s), la clé porte le quota à 10 req/s |
@@ -120,6 +122,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
 | `NEXT_PUBLIC_REVENUECAT_IOS_KEY`, `NEXT_PUBLIC_REVENUECAT_ANDROID_KEY` | Build mobile (GitHub Variables `REVENUECAT_IOS_KEY`, `REVENUECAT_ANDROID_KEY` → `mobile.yml`) ; inutiles sur Netlify | clés **publiques** RevenueCat (`appl_…`, `goog_…`) | Pour l'achat in-app : sans clé, l'app affiche « Abonnement indisponible » sur la plateforme concernée (voir `docs/PAYMENTS.md`) |
 | `NEXT_PUBLIC_REVENUECAT_ENTITLEMENT_ID` | Build mobile | `premium` (défaut) : identique à `REVENUECAT_ENTITLEMENT_ID` | Non |
+| `NEXT_PUBLIC_NATIVE_PUSH` | Build mobile (GitHub Variable `NATIVE_PUSH` → `mobile.yml`) ; inutile sur Netlify | `1` quand les projets natifs ont la configuration Firebase (secret `GOOGLE_SERVICES_JSON_BASE64`, `GoogleService-Info.plist`) | Non : sans elle, l'app n'enregistre aucun jeton push (rappels locaux seulement) ; ne **jamais** la poser sans Firebase (plantage Android, `docs/MOBILE.md` § 7.3) |
 | `NEXT_PUBLIC_APP_STORE_URL`, `NEXT_PUBLIC_PLAY_STORE_URL` | Netlify | `[À COMPLÉTER]` : URL https des fiches App Store et Google Play | À la publication (sinon la page abonnement du web affiche le marqueur) |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
 | `NEXT_PUBLIC_COMMUNITY_ENABLED` | Netlify (et build mobile) | `false` tant que la communauté est fermée (aucune requête de détection) ; `true` à l'ouverture (lien depuis la landing) | Non : absent, l'app interroge `GET /community/rules` et n'affiche la communauté que si l'API répond (404 = fermée) |

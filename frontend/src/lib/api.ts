@@ -1,6 +1,7 @@
 import { API_URL } from './config';
 import type { CarnetExport } from './carnet';
 import { refreshAccessToken } from './session';
+import { notifyCareScheduled } from './care-events';
 
 const NETWORK_ERROR_MESSAGES = ['Failed to fetch', 'Load failed', 'NetworkError when attempting to fetch resource'];
 
@@ -344,6 +345,12 @@ export interface SubscriptionStatusView {
   manageUrl?: string | null;
 }
 
+/** Soin à rappeler créé : prévient l'app native (rappels de l'appareil, proposition des notifications). */
+function careCreated<T>(value: T): T {
+  notifyCareScheduled();
+  return value;
+}
+
 export const api = {
   // Species endpoints
   searchSpecies: async (
@@ -614,7 +621,7 @@ export const api = {
         },
         body: JSON.stringify(data),
       }
-    );
+    ).then(careCreated);
   },
 
   updateRoutine: async (
@@ -742,7 +749,7 @@ export const api = {
         },
         body: JSON.stringify(data),
       }
-    );
+    ).then(careCreated);
   },
 
   updateMedication: async (
@@ -806,7 +813,7 @@ export const api = {
         },
         body: JSON.stringify(data),
       }
-    );
+    ).then(careCreated);
   },
 
   updateVetAppointment: async (
@@ -934,7 +941,7 @@ export const api = {
         },
         body: JSON.stringify(data),
       }
-    );
+    ).then(careCreated);
   },
 
   updateVaccination: async (

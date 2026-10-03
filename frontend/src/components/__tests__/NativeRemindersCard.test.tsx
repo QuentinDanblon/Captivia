@@ -18,6 +18,12 @@ jest.mock('@/lib/local-reminders', () => ({
   syncLocalReminders: (...args: unknown[]) => mockSync(...(args as [])),
 }));
 jest.mock('@/contexts/AuthContext', () => ({ useAuth: () => ({ user: { id: 'u1' }, token: 'jwt' }) }));
+const mockSyncPush = jest.fn(async () => undefined);
+const mockUnregisterPush = jest.fn(async () => undefined);
+jest.mock('@/lib/native-push', () => ({
+  syncNativePush: (...args: unknown[]) => mockSyncPush(...(args as [])),
+  unregisterNativePush: (...args: unknown[]) => mockUnregisterPush(...(args as [])),
+}));
 
 import { NativeRemindersCard } from '../native/NativeRemindersCard';
 
@@ -42,6 +48,11 @@ describe('NativeRemindersCard', () => {
     expect(mockSync).toHaveBeenCalledWith(expect.objectContaining({ token: 'jwt', userId: 'u1', prompt: 'always' }));
     expect(screen.getByText('nativeReminders.onText')).toBeInTheDocument();
     expect(screen.getByText('notifications.pushOn')).toBeInTheDocument();
+    // W6-07 : le téléphone est aussi enregistré pour le push natif.
+    expect(mockSyncPush).toHaveBeenCalledWith(expect.objectContaining({ outcome: 'scheduled' }), {
+      authToken: 'jwt',
+      locale: 'fr',
+    });
   });
 
   it('couper : annule tout et ne programme plus rien', async () => {
@@ -52,6 +63,8 @@ describe('NativeRemindersCard', () => {
     await flush();
     expect(mockSetEnabled).toHaveBeenCalledWith(false);
     expect(mockSync).not.toHaveBeenCalled();
+    // W6-07 : plus de push distant non plus.
+    expect(mockUnregisterPush).toHaveBeenCalledWith('jwt');
     expect(screen.getByRole('button', { name: 'nativeReminders.enable' })).toBeInTheDocument();
   });
 

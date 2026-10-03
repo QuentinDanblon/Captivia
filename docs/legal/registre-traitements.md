@@ -48,7 +48,7 @@ Les données saisies sur les **animaux** (carnet de santé, médicaments, vaccin
 ### T2 — Mode invité
 
 - **Finalité** : permettre d'essayer le service sans compte (un animal), puis de convertir l'essai en compte sans perte (`POST /auth/upgrade`).
-- **Données** : celles de T3 pour un animal, jetons de session (empreintes), agent utilisateur, abonnements push. Aucune donnée d'identification directe (ni e-mail ni mot de passe).
+- **Données** : celles de T3 pour un animal, jetons de session (empreintes), agent utilisateur, abonnements push (Web Push et jetons de push natif de l’app). Aucune donnée d'identification directe (ni e-mail ni mot de passe).
 - **Base légale** : exécution du service demandé.
 - **Conservation** : jusqu'à la conversion en compte, la suppression par l'utilisateur, ou **90 jours sans activité** (`GUEST_RETENTION_DAYS`, `GuestPurgeService`, chaque jour à 03:17 UTC) : suppression en cascade de toutes les données de l'invité.
 
@@ -64,10 +64,10 @@ Les données saisies sur les **animaux** (carnet de santé, médicaments, vaccin
 ### T4 — Rappels de soins (e-mail et push)
 
 - **Finalité** : rappeler à l'utilisateur les soins à effectuer (routines, médicaments, vaccins, rendez-vous), suivre les rappels faits ou non faits et attribuer les points.
-- **Données** : préférences de notification (`NotificationPreference` : types, horaires, canal), événements de rappel (`NotificationEvent` : type, libellé, date prévue, statut, points, date d'envoi), abonnements Web Push (`PushSubscription` : adresse du service push du navigateur, clés de chiffrement).
-- **Base légale** : exécution du contrat ; notifications push : consentement donné par l'autorisation du navigateur, retirable à tout moment.
-- **Destinataires** : prestataire e-mail (Brevo) pour les rappels par e-mail ; service push de l'éditeur du navigateur (Google FCM, Mozilla autopush, Apple…) qui achemine un message chiffré (VAPID, `web-push`).
-- **Conservation** : `NotificationEvent` : **90 jours après la date prévue** (job de maintenance, §4). Préférences : durée du compte. Abonnements push : jusqu'à la désinscription, la déconnexion de l'appareil, un refus du service push (404/410, supprimé aussitôt) ou la suppression du compte.
+- **Données** : préférences de notification (`NotificationPreference` : types, horaires, canal), événements de rappel (`NotificationEvent` : type, libellé, date prévue, statut, points, date d'envoi), abonnements Web Push (`PushSubscription` : adresse du service push du navigateur, clés de chiffrement), jetons de push natif de l'app (`DeviceToken`, W6-07 : jeton d'enregistrement Firebase Cloud Messaging de l'installation, plateforme Android / iOS, langue, fin de la couverture des rappels déjà programmés sur l'appareil, dates de création et de dernier enregistrement). Contenu d'une notification : libellé du soin et nom de l'animal, identifiants techniques (rappel, animal) pour ouvrir la bonne page.
+- **Base légale** : exécution du contrat ; notifications push : consentement donné par l'autorisation du navigateur ou du système du téléphone (demandée après une explication, jamais au lancement), retirable à tout moment (réglages du téléphone, « Couper les rappels sur ce téléphone », déconnexion).
+- **Destinataires** : prestataire e-mail (Brevo) pour les rappels par e-mail ; service push de l'éditeur du navigateur (Google FCM, Mozilla autopush, Apple…) qui achemine un message chiffré (VAPID, `web-push`) ; app native : **Google Firebase Cloud Messaging** (sous-traitant, §3), qui relaie vers **Apple Push Notification service** pour iOS. Le message transite en clair chez ces services (TLS en transit) : il ne contient ni e-mail ni donnée de santé détaillée au-delà du libellé du soin.
+- **Conservation** : `NotificationEvent` : **90 jours après la date prévue** (job de maintenance, §4). Préférences : durée du compte. Abonnements push : jusqu'à la désinscription, la déconnexion de l'appareil, un refus du service push (404/410, supprimé aussitôt) ou la suppression du compte. Jetons de push natif : jusqu'à la déconnexion, la coupure des rappels sur l'appareil, le retrait de la permission, un refus de FCM (`UNREGISTERED`, jeton invalide : supprimé aussitôt), la suppression du compte ou la purge de l'invité, et au plus **270 jours** sans réenregistrement par l'app (job de maintenance). Export RGPD : section `appInstallations` (sans le jeton).
 
 ### T5 — Agenda des soins (flux ICS)
 
@@ -167,6 +167,7 @@ Les données saisies sur les **animaux** (carnet de santé, médicaments, vaccin
 | Cloudflare, Inc. (R2) — si `MEDIA_DRIVER=s3` (T13) | Stockage et diffusion des images de la communauté | Images ré-encodées sans métadonnées (clés aléatoires) | Juridiction UE du bucket si choisie `[À COMPLÉTER]` ; société aux États-Unis | CCT / DPF | À signer avant `COMMUNITY_ENABLED=true` |
 | GitHub, Inc. (Microsoft) | CI/CD, stockage des sauvegardes **chiffrées** | Dumps chiffrés (illisibles sans la clé privée), code | États-Unis | CCT / DPF | À accepter (DPA intégré aux conditions GitHub) |
 | Apple Inc., Google LLC | Vente des achats intégrés ; services push | Achat (identité du payeur chez le store) ; messages push chiffrés | Monde | Responsables distincts (stores) / éditeurs de navigateur | Sans objet (conditions des stores) |
+| Google LLC — Firebase Cloud Messaging, si `FCM_SERVICE_ACCOUNT_JSON` configuré (W6-07) | Acheminement des notifications de l'app (Android ; iOS via APNs d'Apple) | Jeton d'enregistrement de l'installation, titre et texte de la notification (libellé du soin, nom de l'animal), identifiants techniques | Monde ; société aux États-Unis | CCT / DPF (Firebase Data Processing and Security Terms) | À accepter dans la console Firebase (*Paramètres du projet → Confidentialité*) |
 | Applications d'agenda de l'utilisateur | Lecture du flux ICS | Contenu du flux | Selon l'application | À l'initiative de l'utilisateur | Sans objet |
 | GBIF, NCBI PubMed, Species+ (PNUE-WCMC) | Sources de contenu | Aucune donnée personnelle | — | — | Sans objet |
 
@@ -184,6 +185,7 @@ Aucune donnée n'est vendue, louée ni utilisée à des fins publicitaires. Pas 
 | Refresh tokens (empreintes) | Validité 30 jours (≥ 90 jours pour un invité), rotatifs ; supprimés **30 jours après expiration ou révocation** | `MaintenanceService` (tous comptes) + purge opportuniste des jetons expirés du compte à chaque rotation | Quotidienne, 03:41 UTC |
 | Événements de rappel (`NotificationEvent`) | **90 jours** après la date prévue | `MaintenanceService` | Quotidienne, 03:41 UTC |
 | Abonnements push | Jusqu'à désinscription, échec 404/410 ou suppression du compte | `WebPushSender`, cascade | À l'événement |
+| Jetons de push natif (`DeviceToken`, W6-07) | Jusqu'à déconnexion, coupure des rappels, refus FCM ou suppression du compte / de l'invité ; **270 jours** sans réenregistrement au plus | `DeviceTokensService`, `NativePushSender` (purge `UNREGISTERED`), cascade, `MaintenanceService` | À l'événement ; quotidienne, 03:41 UTC |
 | Jeton du flux ICS | Jusqu'à régénération, désactivation ou suppression du compte | Remplacement de `User.calendarToken` | À l'événement |
 | Communauté : contenus, profil, réactions, blocages (T13) | Jusqu'à suppression par l'utilisateur, départ de la communauté, décision d'un opérateur ou suppression du compte | `CommunityDataService` (départ, suppression du compte : fichiers compris), cascade SQL | Immédiate |
 | Communauté : images orphelines | 24 h (jamais rattachées) ; immédiat si le propriétaire est supprimé | `MaintenanceService` → `CommunityMediaService.purgeOrphans` (fichier puis ligne, 1 000 par exécution) | Quotidienne, 03:41 UTC |

@@ -7,7 +7,8 @@ import {
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { UpdateNotificationPreferencesDto } from './dto/notification-preferences.dto';
-import { PushReminderPayload, WebPushSender } from './push-sender';
+import { PushReminderPayload } from './push-sender';
+import { PushDispatcher } from './push-dispatcher';
 import { isAllowedPushEndpoint } from './push-endpoint';
 
 /** Nombre maximal d'abonnements push par compte : au-delà, le plus ancien est remplacé. */
@@ -19,7 +20,8 @@ export class NotificationsService {
 
   constructor(
     private readonly prisma: PrismaService,
-    private readonly pushSender: WebPushSender,
+    /** Web Push + push natif (W6-07). */
+    private readonly pushSender: PushDispatcher,
   ) {}
 
   async subscribeToPush(
@@ -111,7 +113,8 @@ export class NotificationsService {
   }
 
   /**
-   * Envoi immédiat vers tous les appareils de l'utilisateur (notification de test).
+   * Envoi immédiat vers tous les appareils de l'utilisateur (notification de test) : navigateurs
+   * abonnés et installations de l'app.
    * Ne renvoie QUE « au moins un envoi a réussi » : le détail (échecs, purges) servait d'oracle
    * pour sonder des adresses (revue de sécurité, constat 2).
    */

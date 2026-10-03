@@ -1663,7 +1663,11 @@
     "offText": "Pasti, trattamenti, vaccini e visite: questo telefono te li ricorda all’ora giusta, anche senza connessione.",
     "enable": "Attiva i promemoria su questo telefono",
     "disable": "Disattiva i promemoria su questo telefono",
-    "syncError": "Impossibile caricare le tue cure in questo momento. Controlla la connessione e riprova."
+    "syncError": "Impossibile caricare le tue cure in questo momento. Controlla la connessione e riprova.",
+    "primerTitle": "Vuoi un promemoria all’ora delle cure?",
+    "primerBody": "Captivia può inviarti una notifica quando si avvicina un pasto, un trattamento, una vaccinazione o una visita veterinaria, anche con l’app chiusa. Puoi disattivare questi promemoria in qualsiasi momento nelle impostazioni.",
+    "primerAccept": "Attiva i promemoria",
+    "primerLater": "Più tardi"
   },
   "paywall": {
     "modalTitle": "Segui tutti i tuoi animali",

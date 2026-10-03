@@ -26,6 +26,12 @@ const config: CapacitorConfig = {
       smallIcon: 'ic_stat_captivia',
       iconColor: '#0aa678',
     },
+    // Push natif (W6-07, FCM / APNs) : notification affichée aussi quand l'app est au premier plan.
+    // Icône et couleur Android : meta-data `com.google.firebase.messaging.default_notification_*`
+    // (docs/MOBILE.md § 7.3) et options envoyées par l'API.
+    PushNotifications: {
+      presentationOptions: ['badge', 'sound', 'alert'],
+    },
   },
 };
 

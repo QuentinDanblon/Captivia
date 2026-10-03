@@ -266,6 +266,20 @@ Voir §3.5.
 2. Render → *Environment* : remplacer `S3_ACCESS_KEY_ID` et `S3_SECRET_ACCESS_KEY`, enregistrer (redéploiement).
 3. Publier une image de test, puis révoquer l'ancien jeton. Les URL publiques des images ne changent pas.
 
+### 4.7 Clé du compte de service Firebase (push natif FCM / APNs, W6-07)
+
+`FCM_SERVICE_ACCOUNT_JSON` (Render) est la clé JSON, encodée en base64, d'un compte de service du projet Firebase. Rotation annuelle conseillée, immédiate en cas de fuite (fichier partagé, poste perdu) :
+
+1. Firebase → *Paramètres du projet* → *Comptes de service* → **Générer une nouvelle clé privée** (le même compte peut porter deux clés en parallèle : pas d'interruption).
+2. `base64 -w0 captivia-firebase-adminsdk-xxxx.json`, puis Render → *Environment* : remplacer `FCM_SERVICE_ACCOUNT_JSON`, enregistrer (redéploiement). Supprimer le fichier local.
+3. Vérifier le journal de démarrage `Push natif actif (FCM HTTP v1, projet …)` puis envoyer une notification de test depuis *Paramètres → Notifications* de l'app.
+4. Révoquer l'ancienne clé : Google Cloud Console → *IAM et administration → Comptes de service* → le compte `firebase-adminsdk-…` → *Clés* → supprimer l'ancien identifiant de clé.
+5. Conséquence : aucune pour les utilisateurs. Les jetons des appareils (`DeviceToken`) restent valables ; le jeton d'accès OAuth mis en cache par l'API expire de lui-même (≤ 1 h) et une réponse 401 de FCM force son renouvellement.
+
+Journal `Push natif indisponible : Jeton d'accès Google refusé (HTTP 400, erreur invalid_grant)` : clé révoquée ou horloge du serveur décalée → refaire les étapes 1 à 3. `Configuration FCM invalide, push natif désactivé : …` : variable tronquée ou pas en base64. `Push iOS refusé par APNs` : clé APNs `.p8` absente, révoquée ou mauvais Team ID dans Firebase (*Cloud Messaging → Configuration de l'application Apple*) ; la clé `.p8` se renouvelle sur developer.apple.com (*Keys*), puis se téléverse à nouveau dans Firebase.
+
+**Couper le push natif** en urgence : vider `FCM_SERVICE_ACCOUNT_JSON` sur Render (les rappels locaux de l'app et le Web Push continuent).
+
 ---
 
 ## 5. Opérateurs (rôle `OPERATOR`)
@@ -355,6 +369,7 @@ Les durées ci-dessous sont celles du registre des traitements ([`docs/legal/reg
 | `EmailVerificationToken` | expirées ou invalidées par un nouvel envoi (validité 24 h) |
 | `RefreshToken` | expirées **ou** révoquées depuis plus de **30 jours**, tous comptes confondus |
 | `NotificationEvent` | date prévue (`scheduledAt`) antérieure à **90 jours** |
+| `DeviceToken` | jetons de push natif que l'app n'a pas réenregistrés (`lastSeenAt`) depuis **270 jours** (W6-07) |
 | `CommunityModerationAction` | décisions de modération de plus de **365 jours** (journal DSA) |
 | `CommunityReport` | signalements **traités** (`ACTIONED` / `DISMISSED`) de plus de **365 jours** ; jamais les signalements ouverts |
 | `CommunityMedia` | images orphelines (ni publication ni avatar) dont le propriétaire est supprimé ou téléversées depuis plus de **24 h** : **fichier effacé du stockage** puis ligne supprimée (1 000 au plus par exécution ; un échec de suppression du fichier garde la ligne, reprise le lendemain) |
@@ -526,6 +541,7 @@ Aucune valeur secrète n'est notée ici. Sources : `render.yaml`, `netlify.toml`
 | `GUEST_RETENTION_DAYS` | Dashboard (`sync: false`) | Jours d'inactivité avant purge d'un invité (défaut 90) ; `GUEST_PURGE_ENABLED=false` (schéma Joi) suspend cette purge |
 | `MAINTENANCE_ENABLED` | Dashboard (`sync: false`) | `false` suspend le job de maintenance quotidien (§6.5) |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Dashboard (`sync: false`) | Web Push ; sans elles, l'envoi push est désactivé (journalisé) |
+| `FCM_SERVICE_ACCOUNT_JSON`, `FCM_PROJECT_ID` | Dashboard (`sync: false`) | Push natif de l'app (FCM, iOS via APNs) : clé du compte de service Firebase en base64 ; sans elle, push natif désactivé (journal info). Rotation : §4.7 |
 | `COMMUNITY_ENABLED` | Dashboard (`sync: false`) | Défaut `false` : routes `/community/*` en 404 ; `true` exige `MEDIA_DRIVER=s3` en production (§9) |
 | `COMMUNITY_CONTACT_EMAIL` | Dashboard (`sync: false`) | Point de contact DSA cité dans les notifications de modération |
 | `COMMUNITY_HIDE_THRESHOLD`, `COMMUNITY_POSTS_PER_HOUR`, `COMMUNITY_COMMENTS_PER_MINUTE`, `COMMUNITY_UPLOADS_PER_HOUR` | Dashboard (`sync: false`) | Défauts 3, 5, 5, 30 (ne pas baisser le seuil de masquage : §9.3) |
@@ -553,6 +569,8 @@ Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `RED
 | `NEON_DATABASE_URL_DIRECT` | Secret | URL Neon directe : migrations, seed, sauvegarde |
 | `BACKUP_AGE_RECIPIENT` | Secret | Clé publique age (`age1…`) : chiffrement des sauvegardes |
 | `API_URL` | Variable | `keep-warm.yml` (déclenchement manuel) |
+| `GOOGLE_SERVICES_JSON_BASE64` | Secret (facultatif) | `mobile.yml` : `google-services.json` de l'app Android (push natif, W6-07) ; sans lui, APK / AAB sans push |
+| `NATIVE_PUSH` | Variable (facultative) | `1` → `NEXT_PUBLIC_NATIVE_PUSH` : l'app enregistre son jeton push ; exige le secret ci-dessus (sinon `mobile.yml` échoue) |
 
 ---
 

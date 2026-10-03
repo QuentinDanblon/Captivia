@@ -5,7 +5,7 @@ import {
   NotificationsService,
 } from './notifications.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { WebPushSender } from './push-sender';
+import { PushDispatcher } from './push-dispatcher';
 
 describe('NotificationsService', () => {
   let service: NotificationsService;
@@ -70,7 +70,7 @@ describe('NotificationsService', () => {
           provide: PrismaService,
           useValue: mockPrismaService,
         },
-        { provide: WebPushSender, useValue: mockPushSender },
+        { provide: PushDispatcher, useValue: mockPushSender },
       ],
     }).compile();
 

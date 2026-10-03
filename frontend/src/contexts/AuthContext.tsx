@@ -16,6 +16,7 @@ import {
   writeStorage,
 } from '@/lib/session';
 import { unsubscribeFromPush } from '@/lib/web-push';
+import { PUSH_TOKEN_KEY, currentNativePushToken, unregisterNativePush } from '@/lib/native-push';
 
 interface User {
   id: string;
@@ -60,14 +61,17 @@ function clearStoredSession() {
   removeStorage(USER_KEY);
 }
 
-/** Révocation serveur best effort du refresh token (n'échoue jamais, ne bloque pas l'UI). */
-function revokeRefreshToken(refreshToken: string | null) {
+/**
+ * Révocation serveur best effort du refresh token (n'échoue jamais, ne bloque pas l'UI). Dans
+ * l'app, le jeton de push natif de l'appareil est retiré du compte dans la même requête (W6-07).
+ */
+function revokeRefreshToken(refreshToken: string | null, deviceToken: string | null = null) {
   if (!refreshToken) return;
   try {
     void fetch(`${API_URL}/auth/logout`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ refreshToken }),
+      body: JSON.stringify(deviceToken ? { refreshToken, deviceToken } : { refreshToken }),
       keepalive: true,
     }).catch(() => undefined);
   } catch {
@@ -145,7 +149,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Natif : la session persistée (Preferences) est recopiée dans localStorage avant la lecture.
     if (isNative() && !nativeHydrated) {
       let cancelled = false;
-      tokenStorage.hydrate([TOKEN_KEY, REFRESH_TOKEN_KEY, USER_KEY]).finally(() => {
+      tokenStorage.hydrate([TOKEN_KEY, REFRESH_TOKEN_KEY, USER_KEY, PUSH_TOKEN_KEY]).finally(() => {
         if (!cancelled) setNativeHydrated(true);
       });
       return () => {
@@ -275,18 +279,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Libère l'abonnement push de CE navigateur (serveur puis navigateur), en best effort et
     // sans attendre : sinon les rappels du compte continuaient d'arriver après la déconnexion.
     const accessToken = readStorage(TOKEN_KEY) ?? token;
+    // App native (W6-07) : jeton de push de l'appareil, retiré du compte (logout + DELETE).
+    const deviceToken = isNative() ? currentNativePushToken() : null;
     if (accessToken) {
       void unsubscribeFromPush(accessToken).catch(() => false);
     }
-    revokeRefreshToken(readStorage(REFRESH_TOKEN_KEY));
+    if (deviceToken) void unregisterNativePush(accessToken).catch(() => undefined);
+    revokeRefreshToken(readStorage(REFRESH_TOKEN_KEY), deviceToken);
     clearSession();
   };
 
   const logoutAll = async () => {
     const current = readStorage(TOKEN_KEY) ?? token;
     if (current) {
-      // Libère d'abord l'abonnement push de ce navigateur, tant que la session est valide.
+      // Libère d'abord l'abonnement push de ce navigateur, tant que la session est valide
+      // (logout-all supprime de toute façon tous les jetons natifs côté serveur).
       await unsubscribeFromPush(current).catch(() => false);
+      if (isNative()) await unregisterNativePush(current).catch(() => undefined);
       // Le refresh token est lu AVANT l'appel : un refresh révoqué le retire du stockage.
       const refreshToken = readStorage(REFRESH_TOKEN_KEY);
       try {
