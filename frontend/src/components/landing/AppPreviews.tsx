@@ -109,7 +109,12 @@ export async function HealthRecordPreview({ locale }: Props) {
   const dateFormat = new Intl.DateTimeFormat(locale, { day: '2-digit', month: 'short', year: 'numeric', timeZone: SAMPLE_TIME_ZONE });
 
   return (
-    <PreviewFrame note={t('tour.previewNote')} description={`${t('tour.record.title')} ${t('sample.weightChart')}.`} credits={[PHOTOS.catStraw.credit]}>
+    <PreviewFrame
+      note={t('tour.previewNote')}
+      description={`${t('tour.record.title')} ${t('sample.weightChart')}.`}
+      credits={[PHOTOS.catStraw.credit]}
+      deferred="min-h-[54rem] sm:min-h-[27.5rem]"
+    >
       <div className="grid gap-4 sm:grid-cols-2">
         <AnimalCard
           name={SAMPLE_ANIMALS.cat}
@@ -152,7 +157,11 @@ export async function HealthRecordPreview({ locale }: Props) {
 export async function RemindersPreview({ locale }: Props) {
   const { t, statusLabels, toItems } = await loadSample(locale);
   return (
-    <PreviewFrame note={t('tour.previewNote')} description={`${t('sample.appointmentTitle')}. ${t('tour.reminders.title')}`}>
+    <PreviewFrame
+      note={t('tour.previewNote')}
+      description={`${t('sample.appointmentTitle')}. ${t('tour.reminders.title')}`}
+      deferred="min-h-[41rem] sm:min-h-[32rem]"
+    >
       <div className="grid gap-4">
         <Alert
           severity="info"
@@ -187,7 +196,12 @@ export async function SpeciesPreview({ locale }: Props) {
     [t('sample.geckoFacts.lifespan'), t('sample.geckoFacts.lifespanValue')],
   ];
   return (
-    <PreviewFrame note={t('tour.previewNote')} description={`${t('sample.geckoName')}, ${GECKO.latin}. ${t('tour.species.title')}`} credits={[PHOTOS.leopardGecko.credit]}>
+    <PreviewFrame
+      note={t('tour.previewNote')}
+      description={`${t('sample.geckoName')}, ${GECKO.latin}. ${t('tour.species.title')}`}
+      credits={[PHOTOS.leopardGecko.credit]}
+      deferred="min-h-[39.5rem] sm:min-h-[25rem]"
+    >
       <div className="grid gap-4">
         <SectionHeader level={3} title={t('sample.geckoName')} latin={GECKO.latin} authority={GECKO.authority} />
         <div className="grid gap-4 sm:grid-cols-2">
@@ -242,7 +256,12 @@ export async function CommunityPreview({ locale }: Props) {
   );
 
   return (
-    <PreviewFrame note={t('tour.previewNote')} description={t('tour.community.title')} credits={[PHOTOS.cockatiels.credit]}>
+    <PreviewFrame
+      note={t('tour.previewNote')}
+      description={t('tour.community.title')}
+      credits={[PHOTOS.cockatiels.credit]}
+      deferred="min-h-[43rem] sm:min-h-[25.5rem]"
+    >
       <div className="grid gap-4 sm:grid-cols-2">
         <MediaCard
           media={<Figure {...cockatiels} alt="" ratio="4/3" creditPlacement="external" fallbackKind="bird" sizes="(min-width: 1024px) 260px, 90vw" />}

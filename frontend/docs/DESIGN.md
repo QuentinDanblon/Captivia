@@ -419,7 +419,9 @@ fiche espèce, communauté « Bientôt ») → espèces en photos → trois éta
 Sans compte / Gratuit / Premium) → confiance → recherche de fiches → FAQ → dernier appel.
 Les aperçus sont composés avec les vrais composants `ui/` et les données fixes de
 `landing/sample.ts`, dans `PreviewFrame` (illustration `aria-hidden` sans élément focusable,
-description et crédits dans la légende). Textes : `docs/MESSAGING.md`, namespace `landing`.
+description et crédits dans la légende). Sous la ligne de flottaison, leur contenu est monté à
+l'approche du viewport (`DeferredMount`, hauteur réservée) et les sections sont en
+`content-visibility: auto` (`.cv-deferred`) : le HTML initial et l'hydratation restent légers. Textes : `docs/MESSAGING.md`, namespace `landing`.
 Bouton principal → `/mes-animaux` (l'app propose l'essai sans compte).
 
 ## 7. À ne pas faire

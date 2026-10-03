@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { BrandMark, cx, type PhotoCredit } from '@/components/ui';
+import { DeferredMount } from './DeferredMount';
 
 export interface PreviewFrameProps {
   /** Ce que montre l'aperçu, lu par les lecteurs d'écran à la place du contenu décoratif. */
@@ -9,6 +10,11 @@ export interface PreviewFrameProps {
   /** Crédits des photos affichées dans l'aperçu (liens accessibles, hors de la zone masquée). */
   credits?: PhotoCredit[];
   children: ReactNode;
+  /**
+   * Aperçu sous la ligne de flottaison : contenu monté à l'approche du viewport (`DeferredMount`),
+   * la valeur réserve sa hauteur (classes `min-h-*`). Absent : rendu immédiat (haut de page).
+   */
+  deferred?: string;
   className?: string;
 }
 
@@ -18,7 +24,7 @@ export interface PreviewFrameProps {
  * crédits photo sont portés par la légende, elle accessible. Pas de faux téléphone : une simple
  * fenêtre papier à filet, comme une page du carnet posée sur la table.
  */
-export function PreviewFrame({ description, note, credits = [], children, className }: PreviewFrameProps) {
+export function PreviewFrame({ description, note, credits = [], children, deferred, className }: PreviewFrameProps) {
   return (
     <figure className={cx('m-0 grid min-w-0 gap-2', className)}>
       <div className="overflow-hidden rounded-card border border-line-strong bg-paper">
@@ -27,7 +33,7 @@ export function PreviewFrame({ description, note, credits = [], children, classN
           <span className="font-display text-ui font-semibold text-ink">Captivia</span>
         </div>
         <div aria-hidden="true" className="p-4 sm:p-6">
-          {children}
+          {deferred ? <DeferredMount placeholderClassName={deferred}>{children}</DeferredMount> : children}
         </div>
       </div>
       <figcaption className="text-meta text-ink-2">
