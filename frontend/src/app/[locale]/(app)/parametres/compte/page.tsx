@@ -7,6 +7,7 @@ import { Link, useRouter, usePathname } from '@/i18n/navigation';
 import type { Locale } from '../../../../../../i18n/routing';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
 import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '@/lib/config';
 import {
   AccountApiError,
@@ -182,8 +183,9 @@ export default function ComptePage() {
       setShowPasswordForm(false);
       setToast(t('common.passwordChanged'));
     } catch (err: unknown) {
+      // 400 / 401 : mot de passe actuel refusé ; jamais le message brut de l'API.
       setPasswordError(
-        (err instanceof Error && err.message) || t('profile.changePasswordError'),
+        t(errorKey(err, { statuses: { 400: 'profile.changePasswordError', 401: 'profile.changePasswordError' }, fallback: 'profile.changePasswordError' })),
       );
     } finally {
       setPasswordLoading(false);

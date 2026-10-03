@@ -9,6 +9,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { isPremiumLocked, sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
 import { localDayKey } from '@/lib/dates';
+import { MAX_OFFSPRING_COUNT, optionalText, parseOffspringCount } from './formValues';
 
 interface Props {
   animal: Animal;
@@ -76,17 +77,27 @@ export default function BreedingSection({ animal, token, breedingRecords, loadin
   const handleSaveBreedingRecord = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!animal || !token || !breedingDate) return;
+    // Nombre de petits : entier de 0 à 100 (DTO), obligatoire pour une naissance.
+    const offspringEmpty = breedingOffspringCount.trim() === '';
+    const offspringCount = parseOffspringCount(breedingOffspringCount);
+    if ((!offspringEmpty || breedingEventType === 'birth') && offspringCount === null) {
+      setBreedingFormError(
+        t(offspringEmpty ? 'animals.breeding.offspringRequired' : 'animals.breeding.offspringInvalid', { max: MAX_OFFSPRING_COUNT }),
+      );
+      return;
+    }
 
     setBreedingSubmitting(true);
     setBreedingFormError('');
     try {
+      // En modification, un champ facultatif vidé est effacé (null) ; à la création, il est omis.
+      const editing = editingBreedingId !== null;
       const payload: Partial<BreedingRecord> = {
         eventType: breedingEventType,
         date: breedingDate,
-        partnerName: breedingPartnerName.trim() || undefined,
-        offspringCount:
-          breedingOffspringCount.trim() !== '' ? Number(breedingOffspringCount) : undefined,
-        notes: breedingNotes.trim() || undefined,
+        partnerName: optionalText(breedingPartnerName, editing),
+        offspringCount: offspringCount ?? (editing ? null : undefined),
+        notes: optionalText(breedingNotes, editing),
       };
       if (editingBreedingId) {
         await api.updateBreedingRecord(animal.id, editingBreedingId, payload, token);
@@ -229,15 +240,24 @@ export default function BreedingSection({ animal, token, breedingRecords, loadin
           <Field label={t('animals.breeding.date')} required id="breeding-date">
             <input type="date" className="font-mono" value={breedingDate} onChange={(e) => setBreedingDate(e.target.value)} />
           </Field>
-          <Field label={t('animals.breeding.offspringCount')} id="breeding-offspring">
-            <input type="number" min={1} className="font-mono" value={breedingOffspringCount} onChange={(e) => setBreedingOffspringCount(e.target.value)} />
+          <Field label={t('animals.breeding.offspringCount')} required={breedingEventType === 'birth'} id="breeding-offspring">
+            <input
+              type="number"
+              min={0}
+              max={MAX_OFFSPRING_COUNT}
+              step={1}
+              inputMode="numeric"
+              className="font-mono"
+              value={breedingOffspringCount}
+              onChange={(e) => setBreedingOffspringCount(e.target.value)}
+            />
           </Field>
         </div>
         <Field label={t('animals.breeding.partnerName')} id="breeding-partner">
-          <input type="text" value={breedingPartnerName} onChange={(e) => setBreedingPartnerName(e.target.value)} placeholder={t('animals.breeding.partnerNamePlaceholder')} autoComplete="off" />
+          <input type="text" value={breedingPartnerName} onChange={(e) => setBreedingPartnerName(e.target.value)} placeholder={t('animals.breeding.partnerNamePlaceholder')} autoComplete="off" maxLength={100} />
         </Field>
         <Field label={t('animals.breeding.notes')} id="breeding-notes">
-          <textarea value={breedingNotes} onChange={(e) => setBreedingNotes(e.target.value)} rows={3} />
+          <textarea value={breedingNotes} onChange={(e) => setBreedingNotes(e.target.value)} rows={3} maxLength={1000} />
         </Field>
       </FormDialog>
 

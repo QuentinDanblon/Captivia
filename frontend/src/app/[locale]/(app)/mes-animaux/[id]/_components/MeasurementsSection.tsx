@@ -10,6 +10,7 @@ import { isPremiumLocked, sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
 import WeightChart from '@/components/WeightChart';
 import { localDayKey } from '@/lib/dates';
+import { isSuspiciousChange, parseDecimal } from './formValues';
 
 interface Props {
   animal: Animal;
@@ -36,6 +37,8 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
   const [measurementNotes, setMeasurementNotes] = useState('');
   const [measurementSubmitting, setMeasurementSubmitting] = useState(false);
   const [measurementFormError, setMeasurementFormError] = useState('');
+  /** Poids très éloigné de la pesée précédente : valeur à confirmer par un second envoi. */
+  const [weightToConfirm, setWeightToConfirm] = useState<number | null>(null);
   const [measurementToDelete, setMeasurementToDelete] = useState<string | null>(null);
   const [showDeleteMeasurementConfirm, setShowDeleteMeasurementConfirm] = useState(false);
   const [measurementDeletingId, setMeasurementDeletingId] = useState<string | null>(null);
@@ -49,6 +52,7 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
     setMeasurementHeight('');
     setMeasurementNotes('');
     setMeasurementFormError('');
+    setWeightToConfirm(null);
     setShowMeasurementModal(true);
   };
 
@@ -61,6 +65,7 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
     setMeasurementHeight(typeof measurement.heightCm === 'number' ? String(measurement.heightCm) : '');
     setMeasurementNotes(measurement.notes || '');
     setMeasurementFormError('');
+    setWeightToConfirm(null);
     setShowMeasurementModal(true);
   };
 
@@ -69,24 +74,44 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
     if (!animal || !token) return;
     if (!measurementDate) return;
 
+    // Virgule ou point décimal acceptés (« 4,25 ») ; valeurs strictement positives.
+    const weightNum = parseDecimal(measurementWeight);
+    const heightNum = parseDecimal(measurementHeight);
+    if (weightNum !== null && !(weightNum > 0 && weightNum <= 10000)) {
+      setMeasurementFormError(t('animals.measurements.weightInvalid'));
+      return;
+    }
+    if (heightNum !== null && !(heightNum > 0 && heightNum <= 10000)) {
+      setMeasurementFormError(t('animals.measurements.heightInvalid'));
+      return;
+    }
+    if (weightNum === null && heightNum === null) {
+      setMeasurementFormError(t('animals.measurements.valueRequired'));
+      return;
+    }
+    // Écart d'un facteur 10 avec la pesée précédente (kg saisis en g ?) : confirmation demandée.
+    const previousWeight = sortedByDate(measurements).find((m) => m.id !== editingMeasurementId && m.weightKg != null)?.weightKg;
+    if (weightNum !== null && weightNum !== weightToConfirm && isSuspiciousChange(previousWeight, weightNum)) {
+      setWeightToConfirm(weightNum);
+      setMeasurementFormError(
+        t('animals.measurements.confirmWeight', {
+          previous: formatWeight(previousWeight as number, locale),
+          next: formatWeight(weightNum, locale),
+        }),
+      );
+      return;
+    }
+
     setMeasurementSubmitting(true);
     setMeasurementFormError('');
     try {
-      const weightNum = measurementWeight.trim() === '' ? undefined : Number(measurementWeight);
-      const heightNum = measurementHeight.trim() === '' ? undefined : Number(measurementHeight);
-      if (measurementWeight.trim() !== '' && Number.isNaN(weightNum)) {
-        setMeasurementFormError(t('animals.measurements.weightInvalid'));
-        return;
-      }
-      if (measurementHeight.trim() !== '' && Number.isNaN(heightNum)) {
-        setMeasurementFormError(t('animals.measurements.heightInvalid'));
-        return;
-      }
+      // En modification, un champ vidé est effacé (null) ; à la création, il est omis.
+      const editing = editingMeasurementId !== null;
       const payload = {
         measuredAt: measurementDate,
-        weightKg: weightNum,
-        heightCm: heightNum,
-        notes: measurementNotes.trim() || undefined,
+        weightKg: weightNum ?? (editing ? null : undefined),
+        heightCm: heightNum ?? (editing ? null : undefined),
+        notes: measurementNotes.trim() || (editing ? null : undefined),
       };
       if (editingMeasurementId) {
         await api.updateMeasurement(animal.id, editingMeasurementId, payload, token);
@@ -137,7 +162,7 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
     setShowMeasurementModal(false);
     setMeasurementFormError('');
   };
-  const sorted = [...measurements].sort((a, b) => new Date(b.measuredAt).getTime() - new Date(a.measuredAt).getTime());
+  const sorted = sortedByDate(measurements);
 
   return (
     <>
@@ -223,31 +248,32 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
         <div className="grid grid-cols-2 gap-4">
           <Field label={t('animals.measurements.weightKg')} hint={t('animals.sheet.weightHint')} id="measurement-weight">
             <input
-              type="number"
-              step="0.001"
-              min="0"
+              type="text"
               inputMode="decimal"
               className="font-mono"
               value={measurementWeight}
-              onChange={(e) => setMeasurementWeight(e.target.value)}
+              onChange={(e) => {
+                setMeasurementWeight(e.target.value);
+                setWeightToConfirm(null);
+              }}
               autoComplete="off"
+              maxLength={12}
             />
           </Field>
           <Field label={t('animals.measurements.heightCm')} id="measurement-height">
             <input
-              type="number"
-              step="0.1"
-              min="0"
+              type="text"
               inputMode="decimal"
               className="font-mono"
               value={measurementHeight}
               onChange={(e) => setMeasurementHeight(e.target.value)}
               autoComplete="off"
+              maxLength={12}
             />
           </Field>
         </div>
         <Field label={t('animals.measurements.notes')} id="measurement-notes">
-          <textarea value={measurementNotes} onChange={(e) => setMeasurementNotes(e.target.value)} rows={3} />
+          <textarea value={measurementNotes} onChange={(e) => setMeasurementNotes(e.target.value)} rows={3} maxLength={500} />
         </Field>
       </FormDialog>
 
@@ -264,4 +290,9 @@ export default function MeasurementsSection({ animal, token, measurements, loadi
       />
     </>
   );
+}
+
+/** Mesures de la plus récente à la plus ancienne. */
+function sortedByDate(list: AnimalMeasurement[]): AnimalMeasurement[] {
+  return [...list].sort((a, b) => new Date(b.measuredAt).getTime() - new Date(a.measuredAt).getTime());
 }

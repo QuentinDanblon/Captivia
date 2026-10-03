@@ -574,6 +574,27 @@ describe('Communauté (E2E)', () => {
         .send({ avatarMediaId: bodyOf<IdBody>(foreign).id })
         .expect(400);
     });
+
+    it('avatar retiré (null) : fichier effacé du stockage et ligne supprimée', async () => {
+      const media = await upload(bob, await gpsJpeg()).expect(201);
+      const key = keyOf(bodyOf<UrlBody>(media).url);
+      await http()
+        .patch('/community/profile')
+        .set(bearer(bob))
+        .send({ avatarMediaId: bodyOf<IdBody>(media).id })
+        .expect(200);
+      expect(existsSync(path.join(mediaDir, key))).toBe(true);
+
+      const res = await http()
+        .patch('/community/profile')
+        .set(bearer(bob))
+        .send({ avatarMediaId: null })
+        .expect(200);
+
+      expect(bodyOf<ProfilePage>(res).avatarUrl).toBeNull();
+      expect(existsSync(path.join(mediaDir, key))).toBe(false);
+      expect(await prisma.communityMedia.count({ where: { key } })).toBe(0);
+    });
   });
 
   // ---------------------------------------------------------------------------

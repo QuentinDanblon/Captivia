@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { api, type Animal } from '@/lib/api';
-import { compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
+import { errorKey } from '@/lib/api-errors';
+import { checkPhotoUrl, compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
 import { usePhotoPicker } from '@/components/usePhotoPicker';
 import { Button, Field, Modal, cx } from '@/components/ui';
 import { FormError } from './parts';
+import { buildAnimalUpdate, parentCandidates } from './animalEdit';
 
 interface Props {
   animal: Animal;
@@ -29,7 +31,8 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
   const [editFatherId, setEditFatherId] = useState('');
   const [editMotherId, setEditMotherId] = useState('');
   const [editGroupName, setEditGroupName] = useState('');
-  const [candidateAnimals, setCandidateAnimals] = useState<Animal[]>([]);
+  /** Animaux du compte (parents possibles) ; `null` tant que la liste n'est pas chargée. */
+  const [candidateAnimals, setCandidateAnimals] = useState<Animal[] | null>(null);
 
   useEffect(() => {
     setEditAnimalName(animal.name);
@@ -41,6 +44,7 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
     setEditMotherId(animal.motherId || '');
     setEditGroupName(animal.groupName || '');
     setEditAnimalError('');
+    setCandidateAnimals(null);
     if (token) {
       api
         .getMyAnimals(token)
@@ -67,38 +71,39 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
   const handleSaveEditAnimal = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!animal || !token || !editAnimalName.trim()) return;
+    const photoCheck = checkPhotoUrl(editAnimalProfilePhotoUrl);
+    if (photoCheck !== 'ok') {
+      setEditAnimalError(t(photoCheck === 'insecure' ? 'animals.photoUrlInsecure' : 'animals.photoUrlInvalid'));
+      return;
+    }
     setEditAnimalSubmitting(true);
     setEditAnimalError('');
     try {
-      await api.updateAnimal(
-        animal.id,
-        {
-          name: editAnimalName.trim(),
-          birthDate: editAnimalBirthDate || undefined,
-          sex: editAnimalSex || undefined,
-          notes: editAnimalNotes.trim() || undefined,
-          photos: editAnimalProfilePhotoUrl.trim() ? [editAnimalProfilePhotoUrl.trim()] : [],
-          fatherId: editFatherId || null,
-          motherId: editMotherId || null,
-          groupName: editGroupName.trim() || null,
-        },
-        token
-      );
+      await api.updateAnimal(animal.id, buildAnimalUpdate(animal, {
+        name: editAnimalName,
+        birthDate: editAnimalBirthDate,
+        sex: editAnimalSex,
+        notes: editAnimalNotes,
+        photoUrl: editAnimalProfilePhotoUrl,
+        fatherId: editFatherId,
+        motherId: editMotherId,
+        groupName: editGroupName,
+      }), token);
       await onRefresh();
       onClose();
     } catch (err) {
       console.error('Error updating animal:', err);
-      setEditAnimalError(err instanceof Error ? err.message : t('animals.errorAdding'));
+      setEditAnimalError(t(errorKey(err, { fallback: 'animals.edit.saveError' })));
     } finally {
       setEditAnimalSubmitting(false);
     }
   };
 
-  const others = candidateAnimals.filter((a) => a.id !== animal.id);
-  const bySpecies = (list: Animal[]) =>
-    [...list].sort((a, b) => (a.speciesId === animal.speciesId ? 0 : 1) - (b.speciesId === animal.speciesId ? 0 : 1));
-  const fatherCandidates = bySpecies(others.filter((a) => !a.sex || a.sex === 'male' || a.sex === 'unknown'));
-  const motherCandidates = bySpecies(others.filter((a) => !a.sex || a.sex === 'female' || a.sex === 'unknown'));
+  // Parents possibles : même espèce, sexe compatible. Le parent actuel reste proposé (même s'il
+  // ne correspond plus) pour ne jamais être retiré à l'insu de l'utilisateur.
+  const candidatesLoaded = candidateAnimals !== null;
+  const fatherCandidates = parentCandidates(animal, candidateAnimals, 'father');
+  const motherCandidates = parentCandidates(animal, candidateAnimals, 'mother');
 
   return (
     <Modal
@@ -112,7 +117,7 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
     >
       <form onSubmit={handleSaveEditAnimal} className="grid gap-4">
         <Field label={t('animals.animalName')} hint={t('animals.nameHelp')} required id="edit-animal-name">
-          <input type="text" value={editAnimalName} onChange={(e) => setEditAnimalName(e.target.value)} placeholder={t('animals.namePlaceholder')} autoComplete="off" />
+          <input type="text" value={editAnimalName} onChange={(e) => setEditAnimalName(e.target.value)} placeholder={t('animals.namePlaceholder')} autoComplete="off" maxLength={100} />
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label={t('animals.birthDate')} hint={t('animals.birthDateHelp')} id="edit-animal-birthdate">
@@ -138,10 +143,10 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
           </fieldset>
         </div>
 
-        {/* Père / Mère (module F) : animaux de la même espèce en tête de liste. */}
+        {/* Père / Mère (module F) : animaux de la même espèce uniquement. */}
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label={t('animals.edit.father')} id="edit-animal-father">
-            <select value={editFatherId} onChange={(e) => setEditFatherId(e.target.value)}>
+            <select value={editFatherId} onChange={(e) => setEditFatherId(e.target.value)} disabled={!candidatesLoaded} aria-busy={!candidatesLoaded}>
               <option value="">{t('animals.family.none')}</option>
               {fatherCandidates.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -151,7 +156,7 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
             </select>
           </Field>
           <Field label={t('animals.edit.mother')} id="edit-animal-mother">
-            <select value={editMotherId} onChange={(e) => setEditMotherId(e.target.value)}>
+            <select value={editMotherId} onChange={(e) => setEditMotherId(e.target.value)} disabled={!candidatesLoaded} aria-busy={!candidatesLoaded}>
               <option value="">{t('animals.family.none')}</option>
               {motherCandidates.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -162,7 +167,7 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
           </Field>
         </div>
         <Field label={t('animals.edit.group')} id="edit-animal-group">
-          <input type="text" value={editGroupName} onChange={(e) => setEditGroupName(e.target.value)} placeholder={t('animals.family.groupPlaceholder')} autoComplete="off" />
+          <input type="text" value={editGroupName} onChange={(e) => setEditGroupName(e.target.value)} placeholder={t('animals.family.groupPlaceholder')} autoComplete="off" maxLength={100} />
         </Field>
 
         <div className="grid gap-1.5">
@@ -184,12 +189,13 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
               value={editAnimalProfilePhotoUrl.startsWith('data:') ? '' : editAnimalProfilePhotoUrl}
               onChange={(e) => setEditAnimalProfilePhotoUrl(e.target.value)}
               placeholder={t('animals.profilePhotoPlaceholder')}
+              maxLength={2048}
             />
           </Field>
         </div>
 
         <Field label={t('animals.notes')} hint={t('animals.notesHelp')} id="edit-animal-notes">
-          <textarea value={editAnimalNotes} onChange={(e) => setEditAnimalNotes(e.target.value)} placeholder={t('animals.notesPlaceholder')} rows={3} />
+          <textarea value={editAnimalNotes} onChange={(e) => setEditAnimalNotes(e.target.value)} placeholder={t('animals.notesPlaceholder')} rows={3} maxLength={2000} />
         </Field>
 
         <FormError>{editAnimalError}</FormError>

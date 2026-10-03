@@ -290,6 +290,17 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
       expect(res.body).toHaveProperty('vetName', 'Dr Petit');
     });
 
+    it('PATCH champs vidés (null) → rappel, lot et notes effacés', async () => {
+      const res = await request(httpServer(app))
+        .patch(`/users/me/animals/${animalId}/vaccinations/${vaccinationId}`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ nextDueDate: null, batchNumber: null, notes: null })
+        .expect(200);
+      expect(res.body).toHaveProperty('nextDueDate', null);
+      expect(res.body).toHaveProperty('batchNumber', null);
+      expect(res.body).toHaveProperty('notes', null);
+    });
+
     it('DELETE → 200 puis GET → disparu', async () => {
       await request(httpServer(app))
         .delete(`/users/me/animals/${animalId}/vaccinations/${vaccinationId}`)
@@ -321,6 +332,18 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
   describe('3. Validation DTOs', () => {
     let token: string;
     let animalId: string;
+
+    it('POST measurement poids ou taille à 0 → 400', async () => {
+      const acc = await registerPremium(makeEmail('val-zero'));
+      const zeroAnimalId = await createAnimal(acc.token, 'Zero');
+      for (const body of [{ weightKg: 0 }, { heightCm: 0 }]) {
+        await request(httpServer(app))
+          .post(`/users/me/animals/${zeroAnimalId}/measurements`)
+          .set('Authorization', `Bearer ${acc.token}`)
+          .send({ measuredAt: todayStr(), ...body })
+          .expect(400);
+      }
+    });
 
     it('POST measurement poids négatif → 400', async () => {
       const acc = await registerPremium(makeEmail('dto-meas'));
@@ -533,7 +556,7 @@ describe('Module C E2E — carnet de santé enrichi (mesures, vaccinations, expo
         status: 'pending',
         pointsAwarded: 0,
       });
-      expect(vacEvents[0].label).toBe('💉 Rappel vaccin Rage');
+      expect(vacEvents[0].label).toBe('Rappel de vaccin : Rage');
       eventId = vacEvents[0].id;
     });
 

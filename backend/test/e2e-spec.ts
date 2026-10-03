@@ -296,6 +296,18 @@ describe('API E2E Tests', () => {
       routineId = bodyOf<IdBody>(response).id;
     });
 
+    it('POST « une seule fois » sans date → 400 (le rappel ne se déclencherait jamais)', () => {
+      return request(httpServer(app))
+        .post(`/users/me/animals/${animalId}/routines`)
+        .set('Authorization', `Bearer ${authToken}`)
+        .send({
+          type: 'nourrissage',
+          frequency: 'once',
+          schedule: { time: '08:00', recurrence: 'once' },
+        })
+        .expect(400);
+    });
+
     it('GET /users/me/animals/:animalId/routines should return routines', async () => {
       const response = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/routines`)

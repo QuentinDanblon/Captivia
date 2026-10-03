@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { api } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
 import { AuthFrame } from '@/components/auth/AuthFrame';
 import { Alert, Button, Field } from '@/components/ui';
 
@@ -21,10 +22,11 @@ export default function ForgotPasswordPage() {
     setLoading(true);
 
     try {
-      const res = await api.forgotPassword(email);
-      setMessage(res?.message || t('auth.forgotPasswordSuccess'));
+      await api.forgotPassword(email);
+      // Toujours le même message traduit (l'API ne dit pas si le compte existe).
+      setMessage(t('auth.forgotPasswordSuccess'));
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : t('auth.forgotPasswordError'));
+      setError(t(errorKey(err, { fallback: 'auth.forgotPasswordError' })));
     } finally {
       setLoading(false);
     }

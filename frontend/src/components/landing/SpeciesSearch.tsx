@@ -47,6 +47,8 @@ export function SpeciesSearch() {
   const [results, setResults] = useState<SpeciesSearchResult[]>([]);
   const [total, setTotal] = useState(0);
   const [offset, setOffset] = useState(0);
+  /** Requête des résultats affichés (« Voir plus » la reprend, même si le champ a changé). */
+  const [searchedQuery, setSearchedQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [suggestions, setSuggestions] = useState<SpeciesSearchResult[] | null>(null);
@@ -58,17 +60,22 @@ export function SpeciesSearch() {
     return t.has(key) ? t(key) : value;
   };
 
-  const runSearch = async (nextOffset: number, nextGroup: string | null = group) => {
+  /**
+   * La requête est passée en paramètre : un clic sur un groupe vide le champ et doit chercher
+   * sans l'ancienne requête (l'état `query` n'est pas encore à jour dans ce rendu).
+   */
+  const runSearch = async (nextOffset: number, nextGroup: string | null = group, nextQuery: string = query) => {
     setSuggestions(null);
     setLoading(true);
     setError(null);
     try {
       const filters: SearchSpeciesFilters = nextGroup ? { class: nextGroup } : {};
-      const data = await api.searchSpecies(query.trim(), PAGE_SIZE, nextOffset, filters);
+      const data = await api.searchSpecies(nextQuery.trim(), PAGE_SIZE, nextOffset, filters);
       const found = normalize(data.results);
       setResults((prev) => (nextOffset === 0 ? found : [...prev, ...found]));
       setTotal(data.total ?? found.length);
       setOffset(nextOffset);
+      setSearchedQuery(nextQuery);
     } catch {
       setResults([]);
       setTotal(0);
@@ -107,7 +114,8 @@ export function SpeciesSearch() {
     setGroup(next);
     if (next) {
       setQuery('');
-      await runSearch(0, next);
+      if (suggestTimer.current) clearTimeout(suggestTimer.current);
+      await runSearch(0, next, '');
     } else {
       setResults([]);
       setTotal(0);
@@ -225,7 +233,7 @@ export function SpeciesSearch() {
             </ul>
             {results.length < total ? (
               <div>
-                <Button variant="secondary" loading={loading} onClick={() => runSearch(offset + PAGE_SIZE)}>
+                <Button variant="secondary" loading={loading} onClick={() => runSearch(offset + PAGE_SIZE, group, searchedQuery)}>
                   {t('common.loadMore')}
                 </Button>
               </div>

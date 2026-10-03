@@ -1,6 +1,10 @@
 import { ApiError, BACKEND_UNAVAILABLE_MESSAGE } from '../api';
 import {
+  AVAILABILITY_CACHE_TTL_MS,
   availabilityFromStatus,
+  ensureCommunityProbe,
+  getCommunityAvailability,
+  resetCommunityAvailabilityForTests,
   communityErrorKey,
   formatPostTime,
   isAllowedMediaUrl,
@@ -161,3 +165,40 @@ describe('dates relatives', () => {
     expect(formatPostTime('pas une date', 'fr', '', now)).toBe('—');
   });
 });
+
+describe('sonde du volet : résultat gardé 12 h dans le navigateur', () => {
+  const KEY = 'captivia.community';
+  let fetchSpy: jest.Mock;
+
+  beforeEach(() => {
+    localStorage.clear();
+    resetCommunityAvailabilityForTests();
+    fetchSpy = jest.fn().mockResolvedValue({ status: 404 });
+    global.fetch = fetchSpy as unknown as typeof fetch;
+  });
+
+  it('résultat récent : aucune nouvelle requête (pas d’erreur console à chaque visite)', () => {
+    localStorage.setItem(KEY, JSON.stringify({ value: 'unavailable', at: Date.now() - 3_600_000 }));
+    expect(getCommunityAvailability()).toBe('unavailable');
+    ensureCommunityProbe();
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('résultat expiré ou illisible : nouvelle sonde, puis mémorisée', async () => {
+    localStorage.setItem(KEY, JSON.stringify({ value: 'unavailable', at: Date.now() - AVAILABILITY_CACHE_TTL_MS - 1 }));
+    ensureCommunityProbe();
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    await waitForProbe();
+    expect(JSON.parse(localStorage.getItem(KEY) as string)).toMatchObject({ value: 'unavailable' });
+
+    resetCommunityAvailabilityForTests();
+    localStorage.setItem(KEY, 'pas du JSON');
+    ensureCommunityProbe();
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+  });
+});
+
+/** Laisse la promesse de la sonde se résoudre. */
+async function waitForProbe() {
+  for (let i = 0; i < 5; i++) await Promise.resolve();
+}

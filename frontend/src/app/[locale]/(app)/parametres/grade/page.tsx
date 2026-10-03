@@ -5,6 +5,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
+import { reminderLabelKey } from '@/lib/reminder-labels';
 import {
   Alert,
   Button,
@@ -141,6 +143,12 @@ export default function GradePage() {
     }
   };
 
+  /** Libellé affiché : clé de type connue (« uvb »…) traduite, sinon le libellé de l'API. */
+  const eventTitle = (ev: NotificationEvent): string => {
+    const key = reminderLabelKey(ev.label || ev.type);
+    return key ? t(key) : ev.label || ev.type;
+  };
+
   const handleDeleteReminder = async (eventId: string) => {
     const authToken = token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null);
     if (!authToken) return;
@@ -155,7 +163,7 @@ export default function GradePage() {
       }
     } catch (e) {
       console.error(e);
-      setGradeError(e instanceof Error ? e.message : (t('grade.deleteError')));
+      setGradeError(t(errorKey(e, { fallback: 'grade.deleteError' })));
     } finally {
       setDeletingId(null);
     }
@@ -281,7 +289,7 @@ export default function GradePage() {
               items={events.map((ev) => ({
                 id: ev.id,
                 date: ev.scheduledAt,
-                title: ev.label || ev.type,
+                title: eventTitle(ev),
                 status: STATUS_OF[ev.status] ?? 'planned',
                 kind:
                   ev.status === 'done' && ev.pointsAwarded
@@ -306,7 +314,7 @@ export default function GradePage() {
                       variant="quiet"
                       loading={deletingId === ev.id}
                       onClick={() => handleDeleteReminder(ev.id)}
-                      aria-label={`${t('grade.deleteReminder')} — ${ev.label || ev.type}`}
+                      aria-label={`${t('grade.deleteReminder')} — ${eventTitle(ev)}`}
                     >
                       {t('common.delete')}
                     </Button>

@@ -58,6 +58,7 @@ import type {
 } from './_components/types';
 import { animalCarnetPath, speciesPath } from '@/lib/platform';
 import { isGuestUser } from '@/lib/guest';
+import { isGbifKey, sameName } from '@/lib/species';
 import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
 
 // W4-07 — chaque section (et sa/ses modale(s)) est un chunk séparé, chargé à la demande.
@@ -643,9 +644,10 @@ export default function AnimalDetailPage({
           <SectionHeader
             title={animal.name}
             latin={latin ? <Link href={speciesPath(animal.speciesId)} className="text-ink-2 no-underline hover:underline">{latin}</Link> : undefined}
-            marginNote={`GBIF ${animal.speciesId}`}
+            // Race : identifiant interne (hors GBIF), aucun « GBIF n° » ; nom courant non répété.
+            marginNote={isGbifKey(animal.speciesId) ? `GBIF ${animal.speciesId}` : undefined}
             marginLabel={t('animals.sheet.gbifLabel')}
-            description={[common, getSexName(animal.sex)].filter(Boolean).join(' · ')}
+            description={[sameName(common, latin) ? undefined : common, getSexName(animal.sex)].filter(Boolean).join(' · ')}
             actions={
               <div className="hidden flex-wrap gap-2 lg:flex">
                 <Link href={animalCarnetPath(animal.id)} className={buttonClasses({ variant: 'secondary' })}>

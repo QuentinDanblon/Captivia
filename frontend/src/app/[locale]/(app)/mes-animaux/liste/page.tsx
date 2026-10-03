@@ -6,6 +6,7 @@ import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { animalCarnetPath, animalDetailPath } from '@/lib/platform';
 import { api, ApiError, type Animal as ApiAnimal } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
 import { isGuestUser } from '@/lib/guest';
 import { compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
 import { usePhotoPicker } from '@/components/usePhotoPicker';
@@ -51,7 +52,10 @@ export default function AnimalsListPage() {
   const [loading, setLoading] = useState(true);
   const [addOpen, setAddOpen] = useState(false);
   const [addBusy, setAddBusy] = useState(false);
-  const [toast, setToast] = useState<string | null>(null);
+  /** Message éphémère : succès (vert) ou erreur (rouge), jamais une erreur affichée en succès. */
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const showSuccess = useCallback((message: string) => setToast({ message, type: 'success' }), []);
+  const showError = useCallback((message: string) => setToast({ message, type: 'error' }), []);
   const [now] = useState(() => new Date());
 
   // Changement de photo depuis la carte
@@ -103,29 +107,29 @@ export default function AnimalsListPage() {
       const dataUrl = await compressImageToDataUrl(file);
       await api.updateAnimal(id, { photos: [dataUrl] }, token);
       await fetchAnimals();
-      setToast(t('animals.animalUpdated'));
+      showSuccess(t('animals.animalUpdated'));
     } catch (err) {
       // Session perdue : lib/api a déjà tenté le refresh et émis `auth:logout` si elle est
       // révoquée (la page redirige alors). Jamais de logout() ici : ni sur 403, ni sur un
       // échec passager du backend.
       if (err instanceof ApiError && err.status === 401) return;
       if (isImageTooLargeError(err)) {
-        setToast(t('animals.photoTooLarge'));
+        showError(t('animals.photoTooLarge'));
         return;
       }
       if (isUnsupportedImageError(err)) {
-        setToast(t('animals.photoUnsupported'));
+        showError(t('animals.photoUnsupported'));
         return;
       }
       console.error('Error updating photo:', err);
-      setToast(t('animals.errorAdding'));
+      showError(t(errorKey(err, { fallback: 'animals.photoUpdateError' })));
     } finally {
       setPhotoUploading(false);
       setPhotoAnimalId(null);
     }
   };
   // Web : sélecteur de fichier ; app native : appareil photo ou galerie (W6-05).
-  const { inputRef: cardPhotoInputRef, open: openCardPhotoPicker, onChange: onCardPhotoInputChange } = usePhotoPicker<string>({ onFile: handleCardPhotoFile, onError: setToast });
+  const { inputRef: cardPhotoInputRef, open: openCardPhotoPicker, onChange: onCardPhotoInputChange } = usePhotoPicker<string>({ onFile: handleCardPhotoFile, onError: showError });
 
   const closeToast = useCallback(() => setToast(null), []);
 
@@ -250,17 +254,17 @@ export default function AnimalsListPage() {
             token={token}
             isGuest={guest}
             onCreated={(name) => {
-              setToast(`${name} ${t('animals.animalAdded')}`);
+              showSuccess(`${name} ${t('animals.animalAdded')}`);
               void fetchAnimals();
             }}
-            onRoutinesAdded={(count) => setToast(t('today.routinesAdded', { count }))}
+            onRoutinesAdded={(count) => showSuccess(t('today.routinesAdded', { count }))}
             onClose={() => setAddOpen(false)}
             onBusyChange={setAddBusy}
           />
         ) : null}
       </Modal>
 
-      {toast ? <Toast message={toast} type="success" onClose={closeToast} /> : null}
+      {toast ? <Toast message={toast.message} type={toast.type} onClose={closeToast} /> : null}
     </div>
   );
 }

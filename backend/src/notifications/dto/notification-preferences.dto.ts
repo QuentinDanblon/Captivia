@@ -7,6 +7,7 @@ import {
   Matches,
   Max,
   Min,
+  ValidateIf,
   ValidateNested,
   registerDecorator,
   validateSync,
@@ -176,7 +177,8 @@ export class UpdateNotificationPreferencesDto {
   @IsIn(['push', 'email', 'both'])
   deliveryChannel?: 'push' | 'email' | 'both';
 
-  @IsOptional()
+  // `null` (NaN sérialisé par JSON) est refusé en 400 : `@IsOptional` ne laisse passer que l'absence.
+  @ValidateIf((_, value) => value !== undefined)
   @IsInt()
   @Min(0)
   @Max(1440)

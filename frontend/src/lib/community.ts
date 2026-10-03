@@ -296,6 +296,14 @@ export function availabilityFromStatus(status: number): CommunityAvailability {
 
 const PROBE_TIMEOUT_MS = 8_000;
 const AVAILABILITY_CACHE_KEY = 'captivia.community';
+/**
+ * Durée de validité du résultat de la sonde. Le navigateur journalise toujours la réponse 404
+ * (volet fermé) ou 401 (sans session) dans la console : le résultat est gardé 12 h dans ce
+ * navigateur (et non plus le temps d'un onglet) pour ne pas sonder à chaque visite. Une page de
+ * la communauté qui reçoit une réponse le corrige aussitôt (`markCommunity*`). En production,
+ * `NEXT_PUBLIC_COMMUNITY_ENABLED=false` supprime toute sonde tant que le volet est fermé.
+ */
+export const AVAILABILITY_CACHE_TTL_MS = 12 * 3_600_000;
 
 /** Sonde l'API (une requête, sans jeton : jamais de déconnexion ni de rafraîchissement). */
 export async function probeCommunity(fetchImpl: typeof fetch = fetch, apiUrl: string = API_URL): Promise<CommunityAvailability> {
@@ -309,10 +317,14 @@ export async function probeCommunity(fetchImpl: typeof fetch = fetch, apiUrl: st
   }
 }
 
-function readCachedAvailability(): CommunityAvailability {
+function readCachedAvailability(now: number = Date.now()): CommunityAvailability {
   try {
-    const value = sessionStorage.getItem(AVAILABILITY_CACHE_KEY);
-    return value === 'available' || value === 'unavailable' ? value : 'unknown';
+    const raw = localStorage.getItem(AVAILABILITY_CACHE_KEY);
+    const cached = raw ? (JSON.parse(raw) as { value?: unknown; at?: unknown }) : null;
+    if (!cached || typeof cached.at !== 'number' || now - cached.at > AVAILABILITY_CACHE_TTL_MS || cached.at > now) {
+      return 'unknown';
+    }
+    return cached.value === 'available' || cached.value === 'unavailable' ? cached.value : 'unknown';
   } catch {
     return 'unknown';
   }
@@ -320,14 +332,14 @@ function readCachedAvailability(): CommunityAvailability {
 
 function writeCachedAvailability(value: CommunityAvailability) {
   try {
-    if (value === 'unknown') sessionStorage.removeItem(AVAILABILITY_CACHE_KEY);
-    else sessionStorage.setItem(AVAILABILITY_CACHE_KEY, value);
+    if (value === 'unknown') localStorage.removeItem(AVAILABILITY_CACHE_KEY);
+    else localStorage.setItem(AVAILABILITY_CACHE_KEY, JSON.stringify({ value, at: Date.now() }));
   } catch {
     // stockage indisponible : la sonde sera relancée au prochain chargement
   }
 }
 
-/** Magasin de la disponibilité (une seule sonde par chargement, résultat gardé pour la session). */
+/** Magasin de la disponibilité (une seule sonde par chargement, résultat gardé 12 h). */
 let availability: CommunityAvailability | null = null;
 let probing: Promise<void> | null = null;
 const listeners = new Set<() => void>();

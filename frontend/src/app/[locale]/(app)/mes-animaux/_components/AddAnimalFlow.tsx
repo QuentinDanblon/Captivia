@@ -3,8 +3,9 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { api, ApiError, type SpeciesRoutineTemplate } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
 import { ANIMAL_LIMIT_CODE } from '@/lib/guest';
-import { compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
+import { checkPhotoUrl, compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
 import { Button, Field, Steps, cx } from '@/components/ui';
 import { usePhotoPicker } from '@/components/usePhotoPicker';
 
@@ -161,6 +162,11 @@ export default function AddAnimalFlow({
       setStep(0);
       return;
     }
+    const photoCheck = checkPhotoUrl(photoUrl);
+    if (photoCheck !== 'ok') {
+      setFormError(t(photoCheck === 'insecure' ? 'animals.photoUrlInsecure' : 'animals.photoUrlInvalid'));
+      return;
+    }
     setSubmitting(true);
     setFormError('');
     try {
@@ -204,7 +210,7 @@ export default function AddAnimalFlow({
       // révoquée (la page redirige alors). Jamais de logout() ici.
       if (error instanceof ApiError && error.status === 401) return;
       console.error('Error creating animal:', error);
-      setFormError(error instanceof Error ? error.message : t('animals.errorAdding'));
+      setFormError(t(errorKey(error, { fallback: 'animals.errorAdding' })));
     } finally {
       setSubmitting(false);
     }
@@ -234,7 +240,7 @@ export default function AddAnimalFlow({
     } catch (error) {
       if (error instanceof ApiError && error.status === 401) return;
       console.error('Error adding routine templates:', error);
-      setTemplatesError(error instanceof Error ? error.message : t('animals.errorAdding'));
+      setTemplatesError(t(errorKey(error, { fallback: 'animals.errorAdding' })));
     } finally {
       setAdding(false);
     }
@@ -362,7 +368,7 @@ export default function AddAnimalFlow({
             </p>
           </div>
           <Field label={t('animals.animalName')} required id="animal-name">
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t('animals.namePlaceholder')} autoComplete="off" />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={t('animals.namePlaceholder')} autoComplete="off" maxLength={100} />
           </Field>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label={t('animals.birthDate')} hint={t('animals.birthDateHelp')} id="animal-birthdate">
@@ -401,11 +407,11 @@ export default function AddAnimalFlow({
             </div>
             <p className="m-0 text-meta text-ink-2">{t('animals.photoSizeHint')}</p>
             <Field label={t('animals.profilePhotoUrl')} hint={t('onboarding.photoHint')} id="animal-profile-photo">
-              <input type="url" value={photoUrl.startsWith('data:') ? '' : photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} placeholder={t('animals.profilePhotoPlaceholder')} />
+              <input type="url" value={photoUrl.startsWith('data:') ? '' : photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} placeholder={t('animals.profilePhotoPlaceholder')} maxLength={2048} />
             </Field>
           </div>
           <Field label={t('animals.notes')} id="animal-notes">
-            <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder={t('animals.notesPlaceholder')} rows={3} />
+            <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder={t('animals.notesPlaceholder')} rows={3} maxLength={2000} />
           </Field>
           {formError ? (
             <p role="alert" className="m-0 text-ui font-medium text-danger">

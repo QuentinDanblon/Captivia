@@ -68,10 +68,11 @@
     "updateError": "No se pudo actualizar el enlace público.",
     "disabledHint": "Activa el enlace público para obtener un código QR.",
     "pageNotFound": "Esta página no está disponible o el enlace se ha desactivado.",
-    "bornIn": "Nacido/a en {year}",
+    "bornIn": "{sex, select, male {Nacido en {year}} female {Nacida en {year}} other {Nacido/a en {year}}}",
     "vaccinations": "Vacunas",
     "noVaccinations": "Ninguna vacuna registrada",
-    "readOnly": "página pública (solo lectura)"
+    "readOnly": "página pública (solo lectura)",
+    "emailNotVerified": "Para compartir la página pública de tu animal, confirma primero tu correo electrónico con el enlace que te hemos enviado."
   },
   "animals": {
     "addAnimal": "Añadir animal",
@@ -101,7 +102,9 @@
       "pregnancy": "Gestación",
       "premiumRequired": "El seguimiento de la reproducción está disponible con la suscripción Premium",
       "title": "Reproducción",
-      "weaning": "Destete"
+      "weaning": "Destete",
+      "offspringRequired": "Para un nacimiento, indica el número de crías.",
+      "offspringInvalid": "El número de crías debe ser un número entero de 0 a {max}."
     },
     "carnet": {
       "export": "Exportar la cartilla (JSON)",
@@ -117,7 +120,8 @@
     "edit": {
       "father": "Padre",
       "group": "Grupo / Recinto",
-      "mother": "Madre"
+      "mother": "Madre",
+      "saveError": "No se han podido guardar los cambios. Vuelve a intentarlo."
     },
     "editAnimal": "Editar animal",
     "editAnimalFormIntro": "Modifica la información de tu animal. Todos los campos marcados con un asterisco son obligatorios.",
@@ -169,13 +173,15 @@
       "deleteConfirm": "¿Eliminar esta medición?",
       "edit": "Editar medición",
       "heightCm": "Altura (cm)",
-      "heightInvalid": "Altura no válida",
+      "heightInvalid": "Indica una talla mayor que cero, por ejemplo 32,5.",
       "noData": "No hay mediciones registradas.",
       "notes": "Notas",
       "premiumRequired": "El seguimiento del peso y las medidas está disponible con la suscripción Premium",
       "title": "Peso y medidas",
-      "weightInvalid": "Peso no válido",
-      "weightKg": "Peso (kg)"
+      "weightInvalid": "Indica un peso mayor que cero, por ejemplo 4,25.",
+      "weightKg": "Peso (kg)",
+      "valueRequired": "Indica al menos un peso o una talla.",
+      "confirmWeight": "Este peso ({next}) es muy distinto del último pesaje ({previous}). Comprueba la unidad (kilogramos) y vuelve a guardar para confirmar."
     },
     "medications": {
       "active": "Activo",
@@ -196,7 +202,9 @@
       "startDate": "Fecha de inicio",
       "stop": "Suspender",
       "title": "Tratamientos",
-      "unit": "Unidad"
+      "unit": "Unidad",
+      "intervalInvalid": "Indica un intervalo de 1 a 24 horas.",
+      "endBeforeStart": "La fecha de fin no puede ser anterior a la de inicio."
     },
     "myAnimals": "Mis animales",
     "nameHelp": "El nombre que le das a tu animal.",
@@ -248,7 +256,8 @@
       "overdue": "Refuerzo del",
       "premiumRequired": "El registro de vacunaciones está disponible con la suscripción Premium",
       "title": "Vacunaciones",
-      "vetName": "Veterinario"
+      "vetName": "Veterinario",
+      "nextDueBeforeDate": "El recordatorio no puede ser anterior a la fecha de la vacuna."
     },
     "vetAppointments": {
       "add": "Añadir cita",
@@ -267,7 +276,8 @@
       "statusDone": "Realizada",
       "statusScheduled": "Próxima",
       "title": "Citas veterinarias",
-      "vetName": "Veterinario"
+      "vetName": "Veterinario",
+      "statusToConfirm": "Por confirmar"
     },
     "viewHistory": "Ver historial",
     "weightChartLabel": "Gráfico de peso",
@@ -342,8 +352,12 @@
       "vaccineDue": "Refuerzo {when}",
       "routineName": "Nombre de la rutina (opcional)",
       "dayOfMonth": "Día del mes (1-31)",
-      "everyHours": "Cada X horas (1-24)"
-    }
+      "everyHours": "Cada X horas (1-24)",
+      "everyNHours": "{count, plural, one {Cada hora} other {Cada # horas}}"
+    },
+    "photoUrlInsecure": "Esta dirección de imagen no es segura. Usa una dirección que empiece por https:// o elige un archivo.",
+    "photoUrlInvalid": "Esta dirección de imagen no es válida. Pega la dirección completa (https://…) o elige un archivo.",
+    "photoUpdateError": "No se ha podido guardar la foto. Vuelve a intentarlo."
   },
   "attribution": {
     "wikipediaPrefix": "Fuente:",
@@ -401,7 +415,8 @@
     "rememberedPassword": "¿Ya la recuerdas?",
     "resetInvalidHeading": "Este enlace ya no es válido",
     "resetRequestNew": "Recibir un nuevo enlace",
-    "resetHeading": "Elige una nueva contraseña"
+    "resetHeading": "Elige una nueva contraseña",
+    "emailAlreadyUsed": "Ya existe una cuenta con este correo electrónico. Inicia sesión o usa otra dirección."
   },
   "carnetPrint": {
     "title": "Cartilla de salud",
@@ -931,7 +946,12 @@
     "pushOnText": "Este dispositivo recibe tus recordatorios, incluso con Captivia cerrada.",
     "deliveryTitle": "Cómo avisarte",
     "loadError": "No se ha podido cargar tu configuración. Recarga la página para volver a intentarlo.",
-    "autoSaveHint": "Cada cambio se guarda automáticamente."
+    "autoSaveHint": "Cada cambio se guarda automáticamente.",
+    "timeRequired": "Indica una hora para cada recordatorio: el cambio no se ha guardado.",
+    "dateRequired": "Elige una fecha para cada recordatorio puntual: el cambio no se ha guardado.",
+    "labelTooLong": "El nombre de un recordatorio puede tener 60 caracteres como máximo.",
+    "snoozeInvalid": "Indica un tiempo de entre 5 y 120 minutos.",
+    "saveInvalid": "Algunos ajustes no son válidos. Revisa las horas y fechas de tus recordatorios."
   },
   "premiumLock": {
     "goPremium": "Ver la suscripción Premium",
@@ -939,7 +959,7 @@
     "qrCode": "Código QR del animal",
     "qrCodeButton": "Crear / Mostrar el código QR",
     "qrCodeError": "No se pudo generar el código QR. Comprueba tu conexión.",
-    "qrCodeHelp": "Al escanear este código QR, cualquier persona puede ver la información y la cartilla de salud de este animal (solo lectura).",
+    "qrCodeHelp": "Quien escanee este código QR verá una página de solo lectura: nombre, especie, sexo, año de nacimiento y foto del animal, además de sus vacunas si decides mostrarlas. Tus notas y el resto de la cartilla nunca se comparten.",
     "qrCodePremiumOnly": "Reservado a los suscriptores Premium.",
     "upgrade": "Pasa a Premium para desbloquear la cartilla de salud y registrar vacunas, operaciones y antecedentes."
   },
@@ -978,7 +998,8 @@
     },
     "paused": "En pausa",
     "toggleActive": "Activar/pausar",
-    "namePlaceholder": "p. ej. Comida de la mañana"
+    "namePlaceholder": "p. ej. Comida de la mañana",
+    "dateRequired": "Elige la fecha de este cuidado puntual."
   },
   "settings": {
     "account": "Cuenta",
@@ -2405,5 +2426,12 @@
         "reverse": "Decisión anulada, miembro avisado"
       }
     }
+  },
+  "apiErrors": {
+    "unavailable": "El servicio no está disponible en este momento. Vuelve a intentarlo en unos instantes.",
+    "invalid": "Algunos datos no son válidos. Revisa el formulario.",
+    "notFound": "No encontramos este elemento. Puede que se haya eliminado.",
+    "tooManyRequests": "Demasiados intentos seguidos. Espera un minuto antes de volver a intentarlo.",
+    "generic": "Algo ha fallado. Vuelve a intentarlo en un momento."
   }
 }

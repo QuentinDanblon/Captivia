@@ -1,5 +1,6 @@
 import {
   ANIMAL_PHOTO_MAX_DIMENSION,
+  checkPhotoUrl,
   ANIMAL_PHOTO_TARGET_BYTES,
   compressImageToDataUrl,
   computeTargetSize,
@@ -207,5 +208,23 @@ describe('dataUrlBytes', () => {
     expect(dataUrlBytes('data:image/jpeg;base64,QUJD')).toBe(3);
     expect(dataUrlBytes('data:image/jpeg;base64,QUI=')).toBe(2);
     expect(dataUrlBytes('data:image/jpeg;base64,QQ==')).toBe(1);
+  });
+});
+
+describe('checkPhotoUrl (adresse de photo saisie à la main)', () => {
+  it('accepte une adresse https, une data URL ou un champ vide', () => {
+    expect(checkPhotoUrl('https://example.org/chat.jpg')).toBe('ok');
+    expect(checkPhotoUrl('  ')).toBe('ok');
+    expect(checkPhotoUrl(fakeJpeg(10))).toBe('ok');
+  });
+
+  it('refuse une adresse http:// (refusée en 400 par l’API)', () => {
+    expect(checkPhotoUrl('http://example.org/chat.jpg')).toBe('insecure');
+  });
+
+  it('refuse une adresse illisible, un autre protocole ou une adresse trop longue', () => {
+    expect(checkPhotoUrl('chat.jpg')).toBe('invalid');
+    expect(checkPhotoUrl('ftp://example.org/chat.jpg')).toBe('invalid');
+    expect(checkPhotoUrl(`https://example.org/${'a'.repeat(2100)}`)).toBe('invalid');
   });
 });

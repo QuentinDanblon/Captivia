@@ -2,7 +2,7 @@ import {
   IsOptional,
   IsNumber,
   IsString,
-  Min,
+  IsPositive,
   Max,
   IsDateString,
   MaxLength,
@@ -10,18 +10,19 @@ import {
 import { Type } from 'class-transformer';
 import { IsValidDate } from '../../animals/dto/is-valid-date.decorator';
 
+/** Poids et taille : strictement positifs (un poids de 0 ou négatif est une erreur de saisie). */
 export class CreateAnimalMeasurementDto {
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
-  @Min(0)
+  @IsPositive()
   @Max(10000)
   weightKg?: number;
 
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
-  @Min(0)
+  @IsPositive()
   @Max(10000)
   heightCm?: number;
 
@@ -39,14 +40,14 @@ export class UpdateAnimalMeasurementDto {
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
-  @Min(0)
+  @IsPositive()
   @Max(10000)
   weightKg?: number;
 
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
-  @Min(0)
+  @IsPositive()
   @Max(10000)
   heightCm?: number;
 

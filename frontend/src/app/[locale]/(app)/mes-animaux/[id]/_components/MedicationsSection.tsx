@@ -9,6 +9,7 @@ import { ConfirmDelete, DeleteAction, FormDialog, IconAction, LockedNote, Mono, 
 import { isPremiumLocked, sectionErrorKey } from './sectionErrors';
 import { useFormatters } from './useFormatters';
 import { localDayKey } from '@/lib/dates';
+import { parseIntervalHours } from './formValues';
 
 interface Props {
   animal: Animal;
@@ -29,7 +30,8 @@ export default function MedicationsSection({ animal, token, medications, loading
   const [medicationDose, setMedicationDose] = useState('');
   const [medicationUnit, setMedicationUnit] = useState('');
   const [medicationFrequency, setMedicationFrequency] = useState<'daily' | 'every_x_hours' | 'weekly'>('daily');
-  const [medicationIntervalHours, setMedicationIntervalHours] = useState(8);
+  /** Intervalle saisi, gardé en chaîne (validé de 1 à 24 à l'enregistrement, pas à chaque frappe). */
+  const [medicationIntervalHours, setMedicationIntervalHours] = useState('8');
   const [medicationStartDate, setMedicationStartDate] = useState('');
   const [medicationEndDate, setMedicationEndDate] = useState('');
   const [medicationNotes, setMedicationNotes] = useState('');
@@ -56,7 +58,7 @@ export default function MedicationsSection({ animal, token, medications, loading
     setMedicationDose('');
     setMedicationUnit('');
     setMedicationFrequency('daily');
-    setMedicationIntervalHours(8);
+    setMedicationIntervalHours('8');
     setMedicationStartDate(localDayKey(new Date()));
     setMedicationEndDate('');
     setMedicationNotes('');
@@ -68,6 +70,15 @@ export default function MedicationsSection({ animal, token, medications, loading
     e.preventDefault();
     if (!animal || !token) return;
     if (!medicationName.trim() || !medicationDose.trim() || !medicationStartDate) return;
+    const intervalHours = parseIntervalHours(medicationIntervalHours);
+    if (medicationFrequency === 'every_x_hours' && intervalHours === null) {
+      setMedicationFormError(t('animals.medications.intervalInvalid'));
+      return;
+    }
+    if (medicationEndDate && medicationEndDate < medicationStartDate) {
+      setMedicationFormError(t('animals.medications.endBeforeStart'));
+      return;
+    }
 
     setMedicationSubmitting(true);
     setMedicationFormError('');
@@ -77,7 +88,7 @@ export default function MedicationsSection({ animal, token, medications, loading
         dose: medicationDose.trim(),
         unit: medicationUnit.trim() || undefined,
         frequency: medicationFrequency,
-        intervalHours: medicationFrequency === 'every_x_hours' ? medicationIntervalHours : undefined,
+        intervalHours: medicationFrequency === 'every_x_hours' ? (intervalHours ?? undefined) : undefined,
         startDate: medicationStartDate,
         endDate: medicationEndDate || undefined,
         notes: medicationNotes.trim() || undefined,
@@ -181,13 +192,9 @@ export default function MedicationsSection({ animal, token, medications, loading
                       {med.unit ? ` ${med.unit}` : ''}
                     </Mono>
                     {' · '}
-                    {getMedicationFrequencyName(med.frequency)}
-                    {med.frequency === 'every_x_hours' && med.intervalHours ? (
-                      <>
-                        {' '}
-                        (<Mono>{med.intervalHours} h</Mono>)
-                      </>
-                    ) : null}
+                    {med.frequency === 'every_x_hours' && med.intervalHours
+                      ? t('animals.sheet.everyNHours', { count: med.intervalHours })
+                      : getMedicationFrequencyName(med.frequency)}
                     <br />
                     <Mono>{formatDate(med.startDate)}</Mono>
                     {med.endDate ? (
@@ -234,14 +241,14 @@ export default function MedicationsSection({ animal, token, medications, loading
         error={medicationFormError}
       >
         <Field label={t('animals.medications.name')} required id="medication-name">
-          <input type="text" value={medicationName} onChange={(e) => setMedicationName(e.target.value)} autoComplete="off" />
+          <input type="text" value={medicationName} onChange={(e) => setMedicationName(e.target.value)} autoComplete="off" maxLength={100} />
         </Field>
         <div className="grid grid-cols-2 gap-4">
           <Field label={t('animals.medications.dose')} required id="medication-dose">
-            <input type="text" inputMode="decimal" className="font-mono" value={medicationDose} onChange={(e) => setMedicationDose(e.target.value)} autoComplete="off" />
+            <input type="text" inputMode="decimal" className="font-mono" value={medicationDose} onChange={(e) => setMedicationDose(e.target.value)} autoComplete="off" maxLength={50} />
           </Field>
           <Field label={t('animals.medications.unit')} id="medication-unit">
-            <input type="text" value={medicationUnit} onChange={(e) => setMedicationUnit(e.target.value)} placeholder={t('animals.medicationUnitPlaceholder')} autoComplete="off" />
+            <input type="text" value={medicationUnit} onChange={(e) => setMedicationUnit(e.target.value)} placeholder={t('animals.medicationUnitPlaceholder')} autoComplete="off" maxLength={20} />
           </Field>
         </div>
         <Field label={t('animals.medications.frequency')} required id="medication-frequency">
@@ -252,14 +259,16 @@ export default function MedicationsSection({ animal, token, medications, loading
           </select>
         </Field>
         {medicationFrequency === 'every_x_hours' ? (
-          <Field label={t('animals.medications.intervalHours')} id="medication-interval">
+          <Field label={t('animals.medications.intervalHours')} hint={t('notifications.intervalHint')} required id="medication-interval">
             <input
               type="number"
               min={1}
               max={24}
+              step={1}
+              inputMode="numeric"
               className="font-mono"
               value={medicationIntervalHours}
-              onChange={(e) => setMedicationIntervalHours(Math.max(1, Math.min(24, parseInt(e.target.value, 10) || 8)))}
+              onChange={(e) => setMedicationIntervalHours(e.target.value)}
             />
           </Field>
         ) : null}
@@ -268,11 +277,11 @@ export default function MedicationsSection({ animal, token, medications, loading
             <input type="date" className="font-mono" value={medicationStartDate} onChange={(e) => setMedicationStartDate(e.target.value)} />
           </Field>
           <Field label={t('animals.medications.endDate')} id="medication-end">
-            <input type="date" className="font-mono" value={medicationEndDate} onChange={(e) => setMedicationEndDate(e.target.value)} />
+            <input type="date" className="font-mono" value={medicationEndDate} min={medicationStartDate || undefined} onChange={(e) => setMedicationEndDate(e.target.value)} />
           </Field>
         </div>
         <Field label={t('animals.medications.notes')} id="medication-notes">
-          <textarea value={medicationNotes} onChange={(e) => setMedicationNotes(e.target.value)} rows={3} />
+          <textarea value={medicationNotes} onChange={(e) => setMedicationNotes(e.target.value)} rows={3} maxLength={1000} />
         </Field>
       </FormDialog>
 

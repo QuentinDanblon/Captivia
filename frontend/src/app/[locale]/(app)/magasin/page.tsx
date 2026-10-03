@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { api } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
 import { Link } from '@/i18n/navigation';
 import {
   Alert,
@@ -71,7 +72,8 @@ export default function MagasinPage() {
       })
       .catch((err) => {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : t('common.error'));
+          // Détail traduit selon l'erreur, jamais le message brut de l'API.
+          setError(t(errorKey(err)));
           setStores([]);
         }
       })

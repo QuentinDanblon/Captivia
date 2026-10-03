@@ -66,7 +66,7 @@ export function UpgradeGuestForm({ onUpgraded }: UpgradeGuestFormProps) {
       if (err instanceof ApiError && err.status === 409) {
         setErrors({ email: t('guest.upgradeEmailTaken') });
       } else if (err instanceof ApiError && err.status === 400) {
-        setErrors({ form: err.message });
+        setErrors({ form: t('apiErrors.invalid') });
       } else {
         setErrors({ form: t('guest.upgradeError') });
       }

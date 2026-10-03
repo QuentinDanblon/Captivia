@@ -315,3 +315,24 @@ export async function prepareCommunityImage(file: Blob): Promise<PreparedImage> 
   if (jpeg.size > COMMUNITY_UPLOAD_MAX_BYTES) throw new ImageTooLargeError();
   return { blob: jpeg, filename: 'photo.jpg', width, height, converted: type === 'heic' };
 }
+
+/** Longueur maximale d'une adresse de photo acceptée par l'API (`IsPhotoSource`). */
+const MAX_PHOTO_URL_LENGTH = 2048;
+
+/**
+ * Vérifie une adresse de photo saisie à la main, avant envoi : l'API n'accepte qu'une URL https
+ * (ou une data URL produite par `compressImageToDataUrl`). `'insecure'` = adresse en http://,
+ * `'invalid'` = adresse illisible ou trop longue ; une chaîne vide est acceptée (pas de photo).
+ */
+export function checkPhotoUrl(value: string): 'ok' | 'insecure' | 'invalid' {
+  const url = value.trim();
+  if (!url || url.startsWith('data:image/')) return 'ok';
+  if (url.length > MAX_PHOTO_URL_LENGTH) return 'invalid';
+  try {
+    const { protocol } = new URL(url);
+    if (protocol === 'https:') return 'ok';
+    return protocol === 'http:' ? 'insecure' : 'invalid';
+  } catch {
+    return 'invalid';
+  }
+}

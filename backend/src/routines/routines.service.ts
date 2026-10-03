@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
   ForbiddenException,
@@ -11,6 +12,21 @@ import {
 } from './dto/routine.dto';
 import { ensureAnimalOwnership } from '../common/helpers/ownership.helper';
 import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
+import { normalizeSchedule } from '../common/care-occurrences';
+
+/**
+ * « Une seule fois » sans date valide (YYYY-MM-DD) ne se déclencherait jamais
+ * (`matchesSchedule`) : refusé en 400 plutôt qu'enregistré silencieusement.
+ */
+function assertOnceHasDate(frequency: string, schedule: unknown): void {
+  const sch = normalizeSchedule(schedule);
+  const recurrence = sch.recurrence ?? frequency;
+  if ((recurrence === 'once' || frequency === 'once') && !sch.date) {
+    throw new BadRequestException(
+      'schedule.date (YYYY-MM-DD) is required for a one-time routine.',
+    );
+  }
+}
 
 @Injectable()
 export class RoutinesService {
@@ -22,6 +38,7 @@ export class RoutinesService {
     createRoutineDto: CreateRoutineDto,
   ) {
     await ensureAnimalOwnership(this.prisma, animalId, userId);
+    assertOnceHasDate(createRoutineDto.frequency, createRoutineDto.schedule);
 
     return this.prisma.routine.create({
       data: {
@@ -75,7 +92,18 @@ export class RoutinesService {
     routineId: string,
     updateRoutineDto: UpdateRoutineDto,
   ) {
-    await this.findOneRoutine(userId, animalId, routineId);
+    const existing = await this.findOneRoutine(userId, animalId, routineId);
+    // Contrôle sur la fréquence et le planning finaux, seulement s'ils changent (une pause
+    // reste possible pour une ancienne routine).
+    if (
+      updateRoutineDto.frequency !== undefined ||
+      updateRoutineDto.schedule !== undefined
+    ) {
+      assertOnceHasDate(
+        updateRoutineDto.frequency ?? existing.frequency,
+        updateRoutineDto.schedule ?? existing.schedule,
+      );
+    }
 
     return this.prisma.routine.update({
       where: { id: routineId },

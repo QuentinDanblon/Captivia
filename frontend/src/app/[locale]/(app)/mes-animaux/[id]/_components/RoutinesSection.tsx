@@ -8,6 +8,9 @@ import { Badge, Button, Card, EmptyState, Field, Modal } from '@/components/ui';
 import { ConfirmDelete, DeleteAction, EditAction, FormDialog, IconAction, Mono, RecordItem, RecordList, SectionError, SectionLoading } from './parts';
 
 import type { Routine, HistoryEntry } from './types';
+import { optionalText, parseIntervalHours } from './formValues';
+import { localDayKey } from '@/lib/dates';
+import { errorKey } from '@/lib/api-errors';
 
 interface Props {
   animal: Animal;
@@ -29,7 +32,8 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
   const [routineDate, setRoutineDate] = useState('');
   const [routineWeekDay, setRoutineWeekDay] = useState(1);
   const [routineDayOfMonth, setRoutineDayOfMonth] = useState(1);
-  const [routineIntervalHours, setRoutineIntervalHours] = useState(2);
+  /** Intervalle saisi, gardé en chaîne (validé de 1 à 24 à l'enregistrement). */
+  const [routineIntervalHours, setRoutineIntervalHours] = useState('2');
   const [routineActive, setRoutineActive] = useState(true);
   const [isCreatingRoutine, setIsCreatingRoutine] = useState(false);
   const [routineError, setRoutineError] = useState('');
@@ -80,7 +84,7 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
     setRoutineDate('');
     setRoutineWeekDay(1);
     setRoutineDayOfMonth(1);
-    setRoutineIntervalHours(2);
+    setRoutineIntervalHours('2');
     setRoutineActive(true);
     setRoutineError('');
     setShowRoutineModal(true);
@@ -122,10 +126,10 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
     const freq = sch?.recurrence ?? template.frequency ?? 'daily';
     setRoutineFrequency(freq);
     setRoutineTime(typeof sch?.time === 'string' && sch.time ? sch.time : '08:00');
-    setRoutineDate(sch?.date ?? '');
+    setRoutineDate(sch?.date ?? (freq === 'once' ? localDayKey(new Date()) : ''));
     setRoutineWeekDay(typeof sch?.weekDay === 'number' ? sch.weekDay : 1);
     setRoutineDayOfMonth(typeof sch?.dayOfMonth === 'number' ? sch.dayOfMonth : 1);
-    setRoutineIntervalHours(typeof sch?.intervalHours === 'number' ? sch.intervalHours : 2);
+    setRoutineIntervalHours(String(typeof sch?.intervalHours === 'number' ? sch.intervalHours : 2));
     setRoutineActive(true);
     setShowRoutineTemplates(false);
   };
@@ -139,10 +143,10 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
     setRoutineFrequency(freq);
     const time = sch?.time ?? routine.schedule?.time ?? '08:00';
     setRoutineTime(typeof time === 'string' ? time : '08:00');
-    setRoutineDate(sch?.date ?? '');
+    setRoutineDate(sch?.date ?? (freq === 'once' ? localDayKey(new Date()) : ''));
     setRoutineWeekDay(typeof sch?.weekDay === 'number' ? sch.weekDay : 1);
     setRoutineDayOfMonth(typeof sch?.dayOfMonth === 'number' ? sch.dayOfMonth : 1);
-    setRoutineIntervalHours(typeof sch?.intervalHours === 'number' ? sch.intervalHours : 2);
+    setRoutineIntervalHours(String(typeof sch?.intervalHours === 'number' ? sch.intervalHours : 2));
     setRoutineActive(routine.active);
     setRoutineError('');
     setShowRoutineModal(true);
@@ -152,6 +156,17 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
     e.preventDefault();
     if (!animal || !token) return;
 
+    // « Une seule fois » : la date est obligatoire (sans elle, le rappel ne se déclencherait jamais).
+    if (routineFrequency === 'once' && !routineDate) {
+      setRoutineError(t('routines.dateRequired'));
+      return;
+    }
+    const intervalHours = parseIntervalHours(routineIntervalHours);
+    if (routineFrequency === 'hourly' && intervalHours === null) {
+      setRoutineError(t('animals.medications.intervalInvalid'));
+      return;
+    }
+
     setRoutineError('');
     setIsCreatingRoutine(true);
 
@@ -159,13 +174,14 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
       time: routineTime,
       recurrence: routineFrequency,
     };
-    if (routineFrequency === 'once' && routineDate) schedule.date = routineDate;
+    if (routineFrequency === 'once') schedule.date = routineDate;
     if (routineFrequency === 'weekly') schedule.weekDay = routineWeekDay;
     if (routineFrequency === 'monthly') schedule.dayOfMonth = routineDayOfMonth;
-    if (routineFrequency === 'hourly') schedule.intervalHours = routineIntervalHours;
+    if (routineFrequency === 'hourly') schedule.intervalHours = intervalHours;
 
     const payload = {
-      name: routineName || undefined,
+      // Nom vidé en modification : effacé (null) ; omis à la création.
+      name: optionalText(routineName, editingRoutineId !== null),
       type: routineType,
       frequency: routineFrequency,
       schedule,
@@ -187,15 +203,13 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
       setRoutineDate('');
       setRoutineWeekDay(1);
       setRoutineDayOfMonth(1);
-      setRoutineIntervalHours(2);
+      setRoutineIntervalHours('2');
       setRoutineActive(true);
       await onRefresh();
     } catch (err) {
       console.error('Error saving routine:', err);
       setRoutineError(
-        editingRoutineId
-          ? t('animals.errorUpdatingRoutine')
-          : t('animals.errorCreatingRoutine')
+        t(errorKey(err, { fallback: editingRoutineId ? 'animals.errorUpdatingRoutine' : 'animals.errorCreatingRoutine' })),
       );
     } finally {
       setIsCreatingRoutine(false);
@@ -329,7 +343,9 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
                     {routine.name ? `${getRoutineTypeName(routine.type)} · ` : null}
                     <Mono>{(routine.schedule as { time?: string })?.time ?? '—'}</Mono>
                     {' · '}
-                    {getFrequencyName(routine.frequency)}
+                    {routine.frequency === 'hourly' && typeof routine.schedule?.intervalHours === 'number'
+                      ? t('animals.sheet.everyNHours', { count: routine.schedule.intervalHours })
+                      : getFrequencyName(routine.frequency)}
                   </>
                 }
                 actions={
@@ -366,7 +382,7 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
         error={routineError}
       >
         <Field label={t('animals.sheet.routineName')} id="routine-name">
-          <input type="text" value={routineName} onChange={(e) => setRoutineName(e.target.value)} placeholder={t('routines.namePlaceholder')} autoComplete="off" />
+          <input type="text" value={routineName} onChange={(e) => setRoutineName(e.target.value)} placeholder={t('routines.namePlaceholder')} autoComplete="off" maxLength={100} />
         </Field>
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label={t('routines.type')} required id="routine-type">
@@ -378,7 +394,14 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
             </select>
           </Field>
           <Field label={t('routines.frequency')} required id="routine-frequency">
-            <select value={routineFrequency} onChange={(e) => setRoutineFrequency(e.target.value)}>
+            <select
+              value={routineFrequency}
+              onChange={(e) => {
+                setRoutineFrequency(e.target.value);
+                // « Une seule fois » : aujourd'hui par défaut.
+                if (e.target.value === 'once' && !routineDate) setRoutineDate(localDayKey(new Date()));
+              }}
+            >
               <option value="daily">{t('routines.frequencies.daily')}</option>
               <option value="every_2_days">{t('routines.frequencies.every_2_days')}</option>
               <option value="every_3_days">{t('routines.frequencies.every_3_days')}</option>
@@ -386,7 +409,9 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
               <option value="monthly">{t('routines.frequencies.monthly')}</option>
               <option value="once">{t('routines.frequencies.once')}</option>
               <option value="hourly">{t('routines.frequencies.hourly')}</option>
-              <option value="custom">{t('routines.frequencies.custom')}</option>
+              {/* « Personnalisé » n'a aucun réglage et ne déclenche aucun rappel : proposé
+                  seulement pour une ancienne routine qui l'utilise déjà. */}
+              {routineFrequency === 'custom' ? <option value="custom">{t('routines.frequencies.custom')}</option> : null}
             </select>
           </Field>
         </div>
@@ -395,8 +420,8 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
             <input type="time" className="font-mono" value={routineTime} onChange={(e) => setRoutineTime(e.target.value)} />
           </Field>
           {routineFrequency === 'once' ? (
-            <Field label={t('notifications.date')} id="routine-date">
-              <input type="date" className="font-mono" value={routineDate} onChange={(e) => setRoutineDate(e.target.value)} />
+            <Field label={t('notifications.date')} required id="routine-date">
+              <input type="date" className="font-mono" value={routineDate} onChange={(e) => setRoutineDate(e.target.value)} required />
             </Field>
           ) : null}
           {routineFrequency === 'weekly' ? (
@@ -423,14 +448,16 @@ export default function RoutinesSection({ animal, token, routines, onRefresh, on
             </Field>
           ) : null}
           {routineFrequency === 'hourly' ? (
-            <Field label={t('animals.sheet.everyHours')} id="routine-interval">
+            <Field label={t('animals.sheet.everyHours')} hint={t('notifications.intervalHint')} required id="routine-interval">
               <input
                 type="number"
                 min={1}
                 max={24}
+                step={1}
+                inputMode="numeric"
                 className="font-mono"
                 value={routineIntervalHours}
-                onChange={(e) => setRoutineIntervalHours(Math.max(1, Math.min(24, parseInt(e.target.value, 10) || 2)))}
+                onChange={(e) => setRoutineIntervalHours(e.target.value)}
               />
             </Field>
           ) : null}

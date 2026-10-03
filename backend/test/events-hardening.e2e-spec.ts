@@ -105,6 +105,27 @@ describe('Notification events hardening (W0-07)', () => {
   });
 
   describe('notification preferences DTO', () => {
+    it('première lecture : aucun rappel générique imposé (types vides)', async () => {
+      const res = await request(httpServer(app))
+        .get('/users/me/notification-preferences')
+        .set(auth())
+        .expect(200);
+      expect(bodyOf<{ types: unknown }>(res).types).toEqual({});
+    });
+
+    it('snooze null (NaN côté client) ou décimal : 400, jamais 500', async () => {
+      await patchPrefs({ snooze: null }).expect(400);
+      await patchPrefs({ snooze: 7.5 }).expect(400);
+      await patchPrefs({ snooze: 20 }).expect(200);
+    });
+
+    it('heure vide : 400', async () => {
+      await patchPrefs({
+        types: { Bain: true },
+        typeSchedules: { Bain: { time: '', recurrence: 'daily' } },
+      }).expect(400);
+    });
+
     it('rejects an out-of-range time ("-100000000:00") with 400', async () => {
       await patchPrefs({
         types: { Nourrissage: true },

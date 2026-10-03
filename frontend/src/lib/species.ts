@@ -203,6 +203,12 @@ export function speciesDisplayName(locale: string, commonNameFr: string | undefi
   return locale === 'fr' && commonNameFr ? { name: commonNameFr, isLatin: false } : { name: latin, isLatin: true };
 }
 
+/** Deux noms identiques à la casse et aux espaces près (« Abyssin » / « abyssin ») : à n'afficher qu'une fois. */
+export function sameName(a: string | null | undefined, b: string | null | undefined): boolean {
+  const norm = (v: string | null | undefined) => (v ?? '').trim().replace(/\s+/g, ' ').toLocaleLowerCase();
+  return norm(a) !== '' && norm(a) === norm(b);
+}
+
 /** Sépare l'autorité taxonomique du nom scientifique : « Boa constrictor Linnaeus, 1758 » → « Linnaeus, 1758 ». */
 export function authorityOf(scientificName: string | null | undefined, latin: string): string | undefined {
   const full = scientificName?.trim();

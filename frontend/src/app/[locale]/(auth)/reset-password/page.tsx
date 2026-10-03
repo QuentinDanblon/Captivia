@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import { Link, useRouter } from '@/i18n/navigation';
 import { api } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
 import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '@/lib/config';
 import { AuthFrame } from '@/components/auth/AuthFrame';
 import { Alert, Button, Field, Skeleton, SkeletonGroup, buttonClasses } from '@/components/ui';
@@ -57,11 +58,12 @@ function ResetPasswordForm() {
 
     setLoading(true);
     try {
-      const res = await api.resetPassword(token, password);
-      setMessage(res?.message || t('auth.resetPasswordSuccess'));
+      await api.resetPassword(token, password);
+      setMessage(t('auth.resetPasswordSuccess'));
       setTimeout(() => router.push('/login'), 3000);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : t('auth.resetPasswordError'));
+      // 400 = lien invalide ou expiré ; jamais le message brut de l'API.
+      setError(t(errorKey(err, { statuses: { 400: 'auth.resetPasswordError', 401: 'auth.resetPasswordError' }, fallback: 'auth.resetPasswordError' })));
     } finally {
       setLoading(false);
     }

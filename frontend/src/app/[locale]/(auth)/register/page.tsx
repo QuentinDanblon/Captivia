@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
+import { errorKey } from '@/lib/api-errors';
 import { GUEST_UPGRADE_PATH, isGuestUser } from '@/lib/guest';
 import { useStartGuest } from '@/components/guest/useStartGuest';
 import { AuthFrame, OrDivider } from '@/components/auth/AuthFrame';
@@ -57,10 +58,11 @@ export default function RegisterPage() {
         login(response.accessToken, response.user, response.refreshToken);
         router.push('/mes-animaux');
       } else {
-        setError(response.message || t('auth.registerError'));
+        setError(t('auth.registerError'));
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : t('auth.registerError'));
+      // Jamais le message brut de l'API : 409 = adresse déjà utilisée, le reste est traduit.
+      setError(t(errorKey(err, { statuses: { 409: 'auth.emailAlreadyUsed' }, fallback: 'auth.registerError' })));
     } finally {
       setLoading(false);
     }
