@@ -1,5 +1,10 @@
 import { SpeciesTransformerService } from './species-transformer.service';
-import { TransformedSpecies, Distribution, Media, Metrics } from './data-transformer.interface';
+import {
+  TransformedSpecies,
+  Distribution,
+  Media,
+  Metrics,
+} from './data-transformer.interface';
 
 describe('SpeciesTransformerService', () => {
   let service: SpeciesTransformerService;

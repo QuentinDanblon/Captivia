@@ -57,7 +57,9 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
   }
 
   /** Crée un compte jetable PREMIUM et retourne token + userId. */
-  function registerPremium(email: string): Promise<{ email: string; token: string; userId: string }> {
+  function registerPremium(
+    email: string,
+  ): Promise<{ email: string; token: string; userId: string }> {
     return createUser(email, true);
   }
 
@@ -167,7 +169,9 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
 
       expect(Array.isArray(res.body)).toBe(true);
       expect(res.body.length).toBeGreaterThanOrEqual(3);
-      const dates = res.body.map((r: { date: string }) => new Date(r.date).getTime());
+      const dates = res.body.map((r: { date: string }) =>
+        new Date(r.date).getTime(),
+      );
       const sorted = [...dates].sort((a, b) => b - a);
       expect(dates).toEqual(sorted);
     });
@@ -201,7 +205,9 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
         .get(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      expect(res.body.some((r: { id: string }) => r.id === recordId)).toBe(false);
+      expect(res.body.some((r: { id: string }) => r.id === recordId)).toBe(
+        false,
+      );
     });
 
     it('DELETE id inexistant → 404', () => {
@@ -275,7 +281,11 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
       return request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ eventType: 'heat', date: todayStr(), partnerName: 'x'.repeat(101) })
+        .send({
+          eventType: 'heat',
+          date: todayStr(),
+          partnerName: 'x'.repeat(101),
+        })
         .expect(400);
     });
 

@@ -87,10 +87,11 @@ const routes: FakeRoute[] = [
 
     if (path === '/species/search') {
       const q = String(params.q ?? '').toLowerCase();
-      const results = GBIF_SEARCH_RESULTS.filter((t) =>
-        String(t.canonicalName).toLowerCase().includes(q) ||
-        (q.includes('boa') && t.genus === 'Boa') ||
-        (q.includes('gecko') && t.genus === 'Eublepharis'),
+      const results = GBIF_SEARCH_RESULTS.filter(
+        (t) =>
+          String(t.canonicalName).toLowerCase().includes(q) ||
+          (q.includes('boa') && t.genus === 'Boa') ||
+          (q.includes('gecko') && t.genus === 'Eublepharis'),
       );
       return {
         status: 200,
@@ -107,7 +108,13 @@ const routes: FakeRoute[] = [
     if (path === '/occurrence/search') {
       return {
         status: 200,
-        data: { offset: 0, limit: 1, endOfRecords: true, count: 42, results: [] },
+        data: {
+          offset: 0,
+          limit: 1,
+          endOfRecords: true,
+          count: 42,
+          results: [],
+        },
       };
     }
 
@@ -140,7 +147,10 @@ const routes: FakeRoute[] = [
     if (product) {
       return product[1] === OPFF_PRODUCT.code
         ? { status: 200, data: { status: 1, product: OPFF_PRODUCT } }
-        : { status: 404, data: { status: 0, status_verbose: 'product not found' } };
+        : {
+            status: 404,
+            data: { status: 0, status_verbose: 'product not found' },
+          };
     }
     return { status: 404, data: {} };
   },
@@ -165,7 +175,10 @@ const routes: FakeRoute[] = [
   (url) => {
     if (url.hostname !== 'eutils.ncbi.nlm.nih.gov') return undefined;
     if (url.pathname.endsWith('/esearch.fcgi')) {
-      return { status: 200, data: { esearchresult: { count: '0', idlist: [] } } };
+      return {
+        status: 200,
+        data: { esearchresult: { count: '0', idlist: [] } },
+      };
     }
     if (url.pathname.endsWith('/esummary.fcgi')) {
       return { status: 200, data: { result: { uids: [] } } };

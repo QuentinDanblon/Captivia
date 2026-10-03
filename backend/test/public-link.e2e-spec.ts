@@ -28,7 +28,12 @@ describe('Public animal link (W0-06)', () => {
   const register = async (email: string) => {
     const res = await request(app.getHttpServer())
       .post('/auth/register')
-      .send({ email, password: 'password123', acceptTerms: true, ageConfirmed: true })
+      .send({
+        email,
+        password: 'password123',
+        acceptTerms: true,
+        ageConfirmed: true,
+      })
       .expect(201);
     return {
       token: res.body.accessToken as string,

@@ -86,7 +86,9 @@ describe('LegislationService', () => {
         disclaimer: expect.any(String),
         sources: expect.any(Array),
       });
-      expect(mockSpeciesPlusService.searchByScientificName).not.toHaveBeenCalled();
+      expect(
+        mockSpeciesPlusService.searchByScientificName,
+      ).not.toHaveBeenCalled();
     });
 
     describe('Species+ configuré', () => {
@@ -103,12 +105,18 @@ describe('LegislationService', () => {
           { id: 99, full_name: 'Boa constrictor imperator' },
           { id: 7, full_name: 'Boa constrictor' },
         ]);
-        mockSpeciesPlusService.getCitesLegislation.mockResolvedValue([{ appendix: 'II' }]);
-        mockSpeciesPlusService.getEULegislation.mockResolvedValue([{ annex: 'B' }]);
+        mockSpeciesPlusService.getCitesLegislation.mockResolvedValue([
+          { appendix: 'II' },
+        ]);
+        mockSpeciesPlusService.getEULegislation.mockResolvedValue([
+          { annex: 'B' },
+        ]);
 
         const result = await service.getSpeciesLegislation(2448340);
 
-        expect(mockSpeciesPlusService.getCitesLegislation).toHaveBeenCalledWith(7);
+        expect(mockSpeciesPlusService.getCitesLegislation).toHaveBeenCalledWith(
+          7,
+        );
         expect(result.speciesPlus).toEqual({
           status: 'ok',
           taxonId: 7,
@@ -120,8 +128,14 @@ describe('LegislationService', () => {
       it('pas de profil local : not_found, aucun appel Species+', async () => {
         const result = await service.getSpeciesLegislation(123);
 
-        expect(result.speciesPlus).toEqual({ status: 'not_found', cites: null, eu: null });
-        expect(mockSpeciesPlusService.searchByScientificName).not.toHaveBeenCalled();
+        expect(result.speciesPlus).toEqual({
+          status: 'not_found',
+          cites: null,
+          eu: null,
+        });
+        expect(
+          mockSpeciesPlusService.searchByScientificName,
+        ).not.toHaveBeenCalled();
       });
 
       it('Species+ en panne : fiche servie, statut unavailable (jamais de 500)', async () => {
@@ -134,7 +148,11 @@ describe('LegislationService', () => {
 
         const result = await service.getSpeciesLegislation(2448340);
 
-        expect(result.speciesPlus).toEqual({ status: 'unavailable', cites: null, eu: null });
+        expect(result.speciesPlus).toEqual({
+          status: 'unavailable',
+          cites: null,
+          eu: null,
+        });
         expect(result.editorial).toEqual([]);
       });
     });
@@ -198,28 +216,26 @@ describe('LegislationService', () => {
       );
 
       expect(result).toEqual(mockLegislation);
-      expect(mockPrismaService.speciesLegislation.upsert).toHaveBeenCalledWith(
-        {
-          where: {
-            speciesId_country: {
-              speciesId: 123,
-              country: 'FR',
-            },
-          },
-          create: {
+      expect(mockPrismaService.speciesLegislation.upsert).toHaveBeenCalledWith({
+        where: {
+          speciesId_country: {
             speciesId: 123,
             country: 'FR',
-            status: 'allowed',
-            details,
-            sources,
-          },
-          update: {
-            status: 'allowed',
-            details,
-            sources,
           },
         },
-      );
+        create: {
+          speciesId: 123,
+          country: 'FR',
+          status: 'allowed',
+          details,
+          sources,
+        },
+        update: {
+          status: 'allowed',
+          details,
+          sources,
+        },
+      });
     });
 
     it('should convert country to uppercase', async () => {
@@ -259,7 +275,9 @@ describe('LegislationService', () => {
     });
 
     it('laisse passer les autres erreurs', async () => {
-      mockPrismaService.speciesLegislation.upsert.mockRejectedValue(new Error('boom'));
+      mockPrismaService.speciesLegislation.upsert.mockRejectedValue(
+        new Error('boom'),
+      );
       await expect(
         service.createOrUpdateLegislation(1, 'FR', 'allowed', {}, []),
       ).rejects.toThrow('boom');

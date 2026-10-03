@@ -85,7 +85,12 @@ export class OpenDataService {
 
   private iNaturalistObservations(params: Record<string, unknown>) {
     return this.http.get('inaturalist', `${this.iNaturalistUrl}/observations`, {
-      params: { per_page: 20, order: 'desc', order_by: 'created_at', ...params },
+      params: {
+        per_page: 20,
+        order: 'desc',
+        order_by: 'created_at',
+        ...params,
+      },
     });
   }
 
@@ -113,13 +118,16 @@ export class OpenDataService {
         data: {
           title: data.title,
           extract: data.extract,
-          url: data.content_urls?.desktop?.page || data.content_urls?.mobile?.page,
+          url:
+            data.content_urls?.desktop?.page || data.content_urls?.mobile?.page,
           thumbnail: data.thumbnail,
         },
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`Wikipedia search failed for: ${title}: ${describeHttpError(error)}`);
+      this.logger.warn(
+        `Wikipedia search failed for: ${title}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'wikipedia',
         data: null,
@@ -175,14 +183,20 @@ export class OpenDataService {
       return {
         source: 'wikidata',
         data: {
-          label: entity.labels?.fr?.value || entity.labels?.en?.value || entity.labels?.fr?.value,
-          description: entity.descriptions?.fr?.value || entity.descriptions?.en?.value,
+          label:
+            entity.labels?.fr?.value ||
+            entity.labels?.en?.value ||
+            entity.labels?.fr?.value,
+          description:
+            entity.descriptions?.fr?.value || entity.descriptions?.en?.value,
           claims: entity.claims,
         },
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`Wikidata search failed for: ${title}: ${describeHttpError(error)}`);
+      this.logger.warn(
+        `Wikidata search failed for: ${title}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'wikidata',
         data: null,
@@ -199,8 +213,8 @@ export class OpenDataService {
 
     try {
       const response = await this.iNaturalistObservations({
-          q: query,
-          taxon_name: query,
+        q: query,
+        taxon_name: query,
       });
 
       const results = response.data.results;
@@ -211,7 +225,9 @@ export class OpenDataService {
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`iNaturalist search failed for: ${query}: ${describeHttpError(error)}`);
+      this.logger.warn(
+        `iNaturalist search failed for: ${query}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'inaturalist',
         data: [],
@@ -228,8 +244,8 @@ export class OpenDataService {
 
     try {
       const response = await this.eolPages({
-          q: query,
-          type: 'taxon',
+        q: query,
+        type: 'taxon',
       });
 
       const results = response.data.results;
@@ -240,7 +256,9 @@ export class OpenDataService {
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`EOL search failed for: ${query}: ${describeHttpError(error)}`);
+      this.logger.warn(
+        `EOL search failed for: ${query}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'eol',
         data: [],
@@ -265,7 +283,8 @@ export class OpenDataService {
     const results = {
       wikipedia: wikipedia.status === 'fulfilled' ? wikipedia.value : null,
       wikidata: wikidata.status === 'fulfilled' ? wikidata.value : null,
-      iNaturalist: iNaturalist.status === 'fulfilled' ? iNaturalist.value : null,
+      iNaturalist:
+        iNaturalist.status === 'fulfilled' ? iNaturalist.value : null,
       eol: eol.status === 'fulfilled' ? eol.value : null,
     };
 
@@ -284,8 +303,8 @@ export class OpenDataService {
 
     try {
       const response = await this.iNaturalistObservations({
-          taxon_id: taxonId,
-          per_page: limit,
+        taxon_id: taxonId,
+        per_page: limit,
       });
 
       return {
@@ -294,7 +313,9 @@ export class OpenDataService {
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`iNaturalist search by taxon failed: ${taxonId}: ${describeHttpError(error)}`);
+      this.logger.warn(
+        `iNaturalist search by taxon failed: ${taxonId}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'inaturalist',
         data: [],
@@ -311,8 +332,8 @@ export class OpenDataService {
 
     try {
       const response = await this.eolPages({
-          id: taxonId,
-          per_page: limit,
+        id: taxonId,
+        per_page: limit,
       });
 
       return {
@@ -321,7 +342,9 @@ export class OpenDataService {
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`EOL search by taxon failed: ${taxonId}: ${describeHttpError(error)}`);
+      this.logger.warn(
+        `EOL search by taxon failed: ${taxonId}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'eol',
         data: [],

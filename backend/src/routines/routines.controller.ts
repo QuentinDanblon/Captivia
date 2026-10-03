@@ -21,7 +21,11 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { RoutinesService } from './routines.service';
-import { CreateRoutineDto, UpdateRoutineDto, CreateActionLogDto } from './dto/routine.dto';
+import {
+  CreateRoutineDto,
+  UpdateRoutineDto,
+  CreateActionLogDto,
+} from './dto/routine.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
@@ -88,7 +92,11 @@ export class RoutinesController {
     @Param('animalId') animalId: string,
     @Param('routineId') routineId: string,
   ) {
-    return this.routinesService.findOneRoutine(req.user.id, animalId, routineId);
+    return this.routinesService.findOneRoutine(
+      req.user.id,
+      animalId,
+      routineId,
+    );
   }
 
   @Patch(':routineId')
@@ -158,7 +166,11 @@ export class HistoryController {
     @Param('animalId') animalId: string,
     @Body() createActionLogDto: CreateActionLogDto,
   ) {
-    return this.routinesService.logAction(req.user.id, animalId, createActionLogDto);
+    return this.routinesService.logAction(
+      req.user.id,
+      animalId,
+      createActionLogDto,
+    );
   }
 
   @Get()
@@ -167,7 +179,11 @@ export class HistoryController {
     description: 'Retrieve action history for an animal',
   })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
-  @ApiQuery({ name: 'limit', required: false, description: 'Max entries (default: 100)' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Max entries (default: 100)',
+  })
   @ApiResponse({ status: 200, description: 'Action history' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Not your animal' })
@@ -184,7 +200,12 @@ export class HistoryController {
     if (offset !== undefined && offset < 0) {
       throw new BadRequestException('offset must be >= 0');
     }
-    return this.routinesService.getHistory(req.user.id, animalId, limit ?? 100, offset ?? 0);
+    return this.routinesService.getHistory(
+      req.user.id,
+      animalId,
+      limit ?? 100,
+      offset ?? 0,
+    );
   }
 
   @Delete(':logId')
@@ -203,6 +224,10 @@ export class HistoryController {
     @Param('animalId') animalId: string,
     @Param('logId') logId: string,
   ) {
-    return this.routinesService.deleteHistoryEntry(req.user.id, animalId, logId);
+    return this.routinesService.deleteHistoryEntry(
+      req.user.id,
+      animalId,
+      logId,
+    );
   }
 }

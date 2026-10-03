@@ -56,7 +56,8 @@ export class CircuitBreaker {
     if (this.state === 'closed') return true;
 
     if (this.state === 'open') {
-      if (this.now() - this.openedAt < this.options.resetTimeoutMs) return false;
+      if (this.now() - this.openedAt < this.options.resetTimeoutMs)
+        return false;
       this.transition('half-open');
     }
 

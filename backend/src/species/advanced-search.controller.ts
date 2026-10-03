@@ -5,7 +5,14 @@
 
 import { Throttle } from '@nestjs/throttler';
 import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
-import { Controller, Get, Query, HttpCode, HttpStatus, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  HttpCode,
+  HttpStatus,
+  Param,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { AdvancedSearchService } from './advanced-search.service';
 import { AdvancedSearchDto } from '../dto/advanced-search.dto';
@@ -22,7 +29,7 @@ export class AdvancedSearchController {
    */
   @Get('search/advanced')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Recherche avancée d\'espèces avec filtres' })
+  @ApiOperation({ summary: "Recherche avancée d'espèces avec filtres" })
   @ApiResponse({ status: 200, description: 'Résultats de recherche' })
   async advancedSearch(@Query() params: AdvancedSearchDto) {
     const { q, take, skip, ...rest } = params;
@@ -41,9 +48,23 @@ export class AdvancedSearchController {
   @Get('search/suggestions')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Suggestions de recherche' })
-  @ApiQuery({ name: 'query', required: true, description: 'Recherche partielle' })
-  @ApiQuery({ name: 'limit', required: false, default: 10, description: 'Nombre de suggestions' })
-  @ApiQuery({ name: 'language', required: false, default: 'french', description: 'Langue' })
+  @ApiQuery({
+    name: 'query',
+    required: true,
+    description: 'Recherche partielle',
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    default: 10,
+    description: 'Nombre de suggestions',
+  })
+  @ApiQuery({
+    name: 'language',
+    required: false,
+    default: 'french',
+    description: 'Langue',
+  })
   @ApiResponse({ status: 200, description: 'Suggestions' })
   async searchSuggestions(
     @Query('query') query: string,
@@ -74,13 +95,21 @@ export class AdvancedSearchController {
   @Get('search/conservation/:status')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche par statut de conservation' })
-  @ApiQuery({ name: 'limit', required: false, default: 20, description: 'Nombre de résultats' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    default: 20,
+    description: 'Nombre de résultats',
+  })
   @ApiResponse({ status: 200, description: 'Résultats de recherche' })
   async searchByConservation(
     @Param('status') status: string,
     @Query('limit') limit?: string,
   ) {
-    return this.advancedSearchService.searchByConservation(status, limit ? parseInt(limit, 10) : 20);
+    return this.advancedSearchService.searchByConservation(
+      status,
+      limit ? parseInt(limit, 10) : 20,
+    );
   }
 
   /**
@@ -89,13 +118,21 @@ export class AdvancedSearchController {
   @Get('search/region/:region')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche par région' })
-  @ApiQuery({ name: 'limit', required: false, default: 20, description: 'Nombre de résultats' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    default: 20,
+    description: 'Nombre de résultats',
+  })
   @ApiResponse({ status: 200, description: 'Résultats de recherche' })
   async searchByRegion(
     @Param('region') region: string,
     @Query('limit') limit?: string,
   ) {
-    return this.advancedSearchService.searchByRegion(region, limit ? parseInt(limit, 10) : 20);
+    return this.advancedSearchService.searchByRegion(
+      region,
+      limit ? parseInt(limit, 10) : 20,
+    );
   }
 
   /**
@@ -104,13 +141,21 @@ export class AdvancedSearchController {
   @Get('search/taxonomy/:taxonomic')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche par taxonomie' })
-  @ApiQuery({ name: 'limit', required: false, default: 20, description: 'Nombre de résultats' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    default: 20,
+    description: 'Nombre de résultats',
+  })
   @ApiResponse({ status: 200, description: 'Résultats de recherche' })
   async searchByTaxonomy(
     @Param('taxonomic') taxonomic: string,
     @Query('limit') limit?: string,
   ) {
-    return this.advancedSearchService.searchByTaxonomy(taxonomic, limit ? parseInt(limit, 10) : 20);
+    return this.advancedSearchService.searchByTaxonomy(
+      taxonomic,
+      limit ? parseInt(limit, 10) : 20,
+    );
   }
 
   /**
@@ -119,13 +164,21 @@ export class AdvancedSearchController {
   @Get('search/media/:hasMedia')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche avec présence de médias' })
-  @ApiQuery({ name: 'limit', required: false, default: 20, description: 'Nombre de résultats' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    default: 20,
+    description: 'Nombre de résultats',
+  })
   @ApiResponse({ status: 200, description: 'Résultats de recherche' })
   async searchWithMedia(
     @Param('hasMedia') hasMedia: string,
     @Query('limit') limit?: string,
   ) {
-    return this.advancedSearchService.searchWithMedia(hasMedia === 'true', limit ? parseInt(limit, 10) : 20);
+    return this.advancedSearchService.searchWithMedia(
+      hasMedia === 'true',
+      limit ? parseInt(limit, 10) : 20,
+    );
   }
 
   /**
@@ -133,13 +186,21 @@ export class AdvancedSearchController {
    */
   @Get('search/iucn/:hasIucn')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Recherche avec présence d\'IUCN' })
-  @ApiQuery({ name: 'limit', required: false, default: 20, description: 'Nombre de résultats' })
+  @ApiOperation({ summary: "Recherche avec présence d'IUCN" })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    default: 20,
+    description: 'Nombre de résultats',
+  })
   @ApiResponse({ status: 200, description: 'Résultats de recherche' })
   async searchWithIucn(
     @Param('hasIucn') hasIucn: string,
     @Query('limit') limit?: string,
   ) {
-    return this.advancedSearchService.searchWithIucn(hasIucn === 'true', limit ? parseInt(limit, 10) : 20);
+    return this.advancedSearchService.searchWithIucn(
+      hasIucn === 'true',
+      limit ? parseInt(limit, 10) : 20,
+    );
   }
 }

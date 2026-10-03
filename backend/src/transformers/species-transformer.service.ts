@@ -52,7 +52,9 @@ export class SpeciesTransformerService {
       status: gbifSpecies.status || 'UNKNOWN',
       vernacularNames: this.extractVernacularNames(gbifSpecies),
       iucnStatus: gbifSpecies.iucn?.status,
-      distributions: this.transformDistributions(gbifSpecies.distributions || []),
+      distributions: this.transformDistributions(
+        gbifSpecies.distributions || [],
+      ),
       media: this.transformMedia(gbifSpecies.media || []),
       metrics: this.transformMetrics(gbifSpecies.metrics),
       occurrenceCount: gbifSpecies.occurrenceCount,
@@ -112,9 +114,7 @@ export class SpeciesTransformerService {
     };
   }
 
-  transformOccurrenceCount(
-    gbifResult: any,
-  ): TransformedOccurrenceCountResult {
+  transformOccurrenceCount(gbifResult: any): TransformedOccurrenceCountResult {
     this.logger.debug('Transforming occurrence count');
     const count = parseInt(String(gbifResult?.count ?? ''), 10);
     const limit = Number(gbifResult?.limit) || 0;
@@ -174,7 +174,9 @@ export class SpeciesTransformerService {
   /**
    * Transform conservation status data
    */
-  transformConservationStatus(conservationData: any): ConservationStatus | null {
+  transformConservationStatus(
+    conservationData: any,
+  ): ConservationStatus | null {
     if (!conservationData) {
       return null;
     }
@@ -262,7 +264,9 @@ export class SpeciesTransformerService {
   /**
    * Transform multi-source data
    */
-  transformMultiSourceData(multiData: MultiSourceResult): TransformedSpecies | null {
+  transformMultiSourceData(
+    multiData: MultiSourceResult,
+  ): TransformedSpecies | null {
     if (!multiData) {
       return null;
     }
@@ -287,7 +291,9 @@ export class SpeciesTransformerService {
       status: gbifSpecies?.status || 'UNKNOWN',
       vernacularNames: this.extractVernacularNames(gbifSpecies),
       iucnStatus: gbifSpecies?.iucn?.status,
-      distributions: this.transformDistributions(gbifSpecies?.distributions || []),
+      distributions: this.transformDistributions(
+        gbifSpecies?.distributions || [],
+      ),
       media: this.transformMedia(gbifSpecies?.media || []),
       metrics: this.transformMetrics(gbifSpecies?.metrics),
       occurrenceCount: gbifSpecies?.occurrenceCount,

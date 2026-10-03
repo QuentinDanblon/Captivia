@@ -146,7 +146,7 @@ describe('CacheService', () => {
       expect(service.get('k')).toBeNull();
     });
 
-    it('une clé absente ou supprimée (clearKey) n\'a pas de valeur périmée', () => {
+    it("une clé absente ou supprimée (clearKey) n'a pas de valeur périmée", () => {
       expect(service.getStale('absent')).toBeNull();
       service.set('k', { v: 1 }, 60);
       service.clearKey('k');

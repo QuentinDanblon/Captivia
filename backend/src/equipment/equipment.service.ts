@@ -13,10 +13,10 @@ export class EquipmentService {
 
   // Mapping of GBIF class to template species ID for fallback
   private readonly classTemplateMapping: Record<string, number> = {
-    'Reptilia': 2448340, // Boa constrictor as reptile template
-    'Aves': 0, // No bird template yet
-    'Mammalia': 0, // No mammal template yet
-    'Amphibia': 0, // No amphibian template yet
+    Reptilia: 2448340, // Boa constrictor as reptile template
+    Aves: 0, // No bird template yet
+    Mammalia: 0, // No mammal template yet
+    Amphibia: 0, // No amphibian template yet
   };
 
   constructor(private readonly prisma: PrismaService) {}
@@ -49,8 +49,14 @@ export class EquipmentService {
 
     // If no species-specific equipment found (only general), try fallback by class
     if (speciesId && recommendations.length === 0) {
-      this.logger.debug(`No specific equipment found for species ${speciesId}, attempting class fallback`);
-      recommendations = await this.getEquipmentFallbackByClass(speciesId, category, size);
+      this.logger.debug(
+        `No specific equipment found for species ${speciesId}, attempting class fallback`,
+      );
+      recommendations = await this.getEquipmentFallbackByClass(
+        speciesId,
+        category,
+        size,
+      );
     }
 
     // Recommandations éditoriales uniquement (taxonomie locale). L'intégration produits
@@ -109,7 +115,9 @@ export class EquipmentService {
         take: PAGINATION_MAX_LIMIT,
       });
 
-      this.logger.debug(`Returning ${generalEquipment.length} general equipment as fallback`);
+      this.logger.debug(
+        `Returning ${generalEquipment.length} general equipment as fallback`,
+      );
       return generalEquipment;
     } catch (error) {
       this.logger.error(`Error in equipment fallback: ${error.message}`);
@@ -163,9 +171,7 @@ export class EquipmentService {
         error instanceof Prisma.PrismaClientKnownRequestError &&
         error.code === 'P2025'
       ) {
-        throw new NotFoundException(
-          `Equipment recommendation ${id} not found`,
-        );
+        throw new NotFoundException(`Equipment recommendation ${id} not found`);
       }
       throw error;
     }

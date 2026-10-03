@@ -1,10 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Request,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Param, Request, UseGuards } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -20,7 +14,9 @@ import { SpeciesRoutinesService } from './species-routines.service';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class SpeciesRoutinesController {
-  constructor(private readonly speciesRoutinesService: SpeciesRoutinesService) {}
+  constructor(
+    private readonly speciesRoutinesService: SpeciesRoutinesService,
+  ) {}
 
   @Get()
   @ApiOperation({
@@ -35,7 +31,13 @@ export class SpeciesRoutinesController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
-  async getRoutineTemplates(@Request() req, @Param('animalId') animalId: string) {
-    return this.speciesRoutinesService.findTemplatesForAnimal(req.user.id, animalId);
+  async getRoutineTemplates(
+    @Request() req,
+    @Param('animalId') animalId: string,
+  ) {
+    return this.speciesRoutinesService.findTemplatesForAnimal(
+      req.user.id,
+      animalId,
+    );
   }
 }

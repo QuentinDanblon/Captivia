@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access -- tests : mocks axios/supertest typés any */
 import { envValidationSchema, isExampleJwtSecret } from './env.validation';
 
 const STRONG_SECRET = 'k3Jf9sLq2Zx8Vb7Nm1Pw4Rt6Yu0Io5Ae3Dg7Hh9Jk2L';

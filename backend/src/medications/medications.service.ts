@@ -2,11 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AnimalsService } from '../animals/animals.service';
 import { CreateMedicationDto, UpdateMedicationDto } from './dto/medication.dto';
-import {
-  PaginationQueryDto,
-  toPage,
-} from '../common/dto/pagination-query.dto';
-
+import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class MedicationsService {
@@ -66,7 +62,8 @@ export class MedicationsService {
     if (dto.frequency !== undefined) data.frequency = dto.frequency;
     if (dto.intervalHours !== undefined) data.intervalHours = dto.intervalHours;
     if (dto.startDate !== undefined) data.startDate = new Date(dto.startDate);
-    if (dto.endDate !== undefined) data.endDate = dto.endDate ? new Date(dto.endDate) : null;
+    if (dto.endDate !== undefined)
+      data.endDate = dto.endDate ? new Date(dto.endDate) : null;
     if (dto.notes !== undefined) data.notes = dto.notes;
     if (dto.active !== undefined) data.active = dto.active;
     return this.prisma.medication.update({

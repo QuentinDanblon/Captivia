@@ -10,7 +10,12 @@ import {
   Req,
   Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { AnimalMeasurementsService } from './animal-measurements.service';
 import {
@@ -25,10 +30,15 @@ import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class AnimalMeasurementsController {
-  constructor(private readonly measurementsService: AnimalMeasurementsService) {}
+  constructor(
+    private readonly measurementsService: AnimalMeasurementsService,
+  ) {}
 
   @Get()
-  @ApiOperation({ summary: 'List weight/height measurements for an animal (sorted by measuredAt desc)' })
+  @ApiOperation({
+    summary:
+      'List weight/height measurements for an animal (sorted by measuredAt desc)',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async findAll(
     @Req() req: { user: { id: string } },
@@ -39,7 +49,10 @@ export class AnimalMeasurementsController {
   }
 
   @Post()
-  @ApiOperation({ summary: 'Add a weight/height measurement (at least one of weightKg/heightCm required)' })
+  @ApiOperation({
+    summary:
+      'Add a weight/height measurement (at least one of weightKg/heightCm required)',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async create(
     @Req() req: { user: { id: string } },
@@ -59,7 +72,12 @@ export class AnimalMeasurementsController {
     @Param('measurementId') measurementId: string,
     @Body() dto: UpdateAnimalMeasurementDto,
   ) {
-    return this.measurementsService.update(animalId, measurementId, req.user.id, dto);
+    return this.measurementsService.update(
+      animalId,
+      measurementId,
+      req.user.id,
+      dto,
+    );
   }
 
   @Delete(':measurementId')
@@ -71,6 +89,10 @@ export class AnimalMeasurementsController {
     @Param('animalId') animalId: string,
     @Param('measurementId') measurementId: string,
   ) {
-    return this.measurementsService.remove(animalId, measurementId, req.user.id);
+    return this.measurementsService.remove(
+      animalId,
+      measurementId,
+      req.user.id,
+    );
   }
 }

@@ -30,8 +30,15 @@ export class ErrorTrackingService {
   private readonly logger = new Logger(ErrorTrackingService.name);
   private readonly getAsync: (key: string) => Promise<string | null>;
   private readonly setAsync: (key: string, value: string) => Promise<'OK'>;
-  private readonly lpushAsync: (key: string, ...values: string[]) => Promise<number>;
-  private readonly lrangeAsync: (key: string, start: number, stop: number) => Promise<string[]>;
+  private readonly lpushAsync: (
+    key: string,
+    ...values: string[]
+  ) => Promise<number>;
+  private readonly lrangeAsync: (
+    key: string,
+    start: number,
+    stop: number,
+  ) => Promise<string[]>;
   private readonly llenAsync: (key: string) => Promise<number>;
   private readonly incrAsync: (key: string) => Promise<number>;
   private readonly delAsync: (key: string) => Promise<number>;
@@ -48,10 +55,12 @@ export class ErrorTrackingService {
     this.expireAsync = promisify(this.redis.expire).bind(this.redis);
   }
 
-  async logError(errorData: Omit<ErrorLog, 'id' | 'timestamp'>): Promise<string> {
+  async logError(
+    errorData: Omit<ErrorLog, 'id' | 'timestamp'>,
+  ): Promise<string> {
     const errorId = this.generateErrorId();
     const timestamp = new Date().toISOString();
-    
+
     const errorLog: ErrorLog = {
       ...errorData,
       id: errorId,
@@ -81,15 +90,16 @@ export class ErrorTrackingService {
   }
 
   async getErrorStats(): Promise<ErrorStats> {
-    const totalErrors = parseInt(await this.getAsync('errors:total') || '0');
-    const lastError = await this.getAsync('errors:lastError') || new Date().toISOString();
+    const totalErrors = parseInt((await this.getAsync('errors:total')) || '0');
+    const lastError =
+      (await this.getAsync('errors:lastError')) || new Date().toISOString();
 
     // Get errors by type
-    const types = await this.getAsync('errors:types') || '{}';
+    const types = (await this.getAsync('errors:types')) || '{}';
     const errorsByType = JSON.parse(types);
 
     // Get errors by endpoint
-    const endpoints = await this.getAsync('errors:endpoints') || '{}';
+    const endpoints = (await this.getAsync('errors:endpoints')) || '{}';
     const errorsByEndpoint = JSON.parse(endpoints);
 
     // Get top errors
@@ -120,12 +130,12 @@ export class ErrorTrackingService {
 
   async getRecentErrors(limit: number = 50): Promise<ErrorLog[]> {
     const errors = await this.lrangeAsync('errors:logs', 0, limit - 1);
-    return errors.map(err => JSON.parse(err)).reverse();
+    return errors.map((err) => JSON.parse(err)).reverse();
   }
 
   async getErrorById(id: string): Promise<ErrorLog | null> {
     const errors = await this.getRecentErrors(1000);
-    return errors.find(e => e.id === id) || null;
+    return errors.find((e) => e.id === id) || null;
   }
 
   async clearOldErrors(days: number = 7): Promise<void> {
@@ -133,33 +143,49 @@ export class ErrorTrackingService {
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - days);
 
-    const filteredErrors = errors.filter(e => new Date(e.timestamp) > cutoffDate);
-    
+    const filteredErrors = errors.filter(
+      (e) => new Date(e.timestamp) > cutoffDate,
+    );
+
     // Rebuild the error log list
     const pipeline = this.redis.pipeline();
     pipeline.del('errors:logs');
-    
-    filteredErrors.forEach(error => {
+
+    filteredErrors.forEach((error) => {
       pipeline.lpush('errors:logs', JSON.stringify(error));
     });
-    
+
     await pipeline.exec();
     this.logger.log(`Cleared errors older than ${days} days`);
   }
 
-  async exportErrors(format: 'json' | 'csv' = 'json', days: number = 7): Promise<string> {
+  async exportErrors(
+    format: 'json' | 'csv' = 'json',
+    days: number = 7,
+  ): Promise<string> {
     const errors = await this.getRecentErrors(1000);
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - days);
-    const filteredErrors = errors.filter(e => new Date(e.timestamp) > cutoffDate);
+    const filteredErrors = errors.filter(
+      (e) => new Date(e.timestamp) > cutoffDate,
+    );
 
     if (format === 'json') {
       return JSON.stringify(filteredErrors, null, 2);
     }
 
     // CSV format
-    const headers = ['ID', 'Timestamp', 'Level', 'Type', 'Message', 'Endpoint', 'User ID', 'Context'];
-    const rows = filteredErrors.map(e => [
+    const headers = [
+      'ID',
+      'Timestamp',
+      'Level',
+      'Type',
+      'Message',
+      'Endpoint',
+      'User ID',
+      'Context',
+    ];
+    const rows = filteredErrors.map((e) => [
       e.id,
       e.timestamp,
       e.level,
@@ -169,17 +195,23 @@ export class ErrorTrackingService {
       e.userId || '',
       e.context ? JSON.stringify(e.context).replace(/"/g, '""') : '',
     ]);
-    
-    return [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+
+    return [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
   }
 
   async resetErrorTracking(): Promise<void> {
-    const keys = ['errors:total', 'errors:types', 'errors:endpoints', 'errors:lastError', 'errors:logs'];
-    
+    const keys = [
+      'errors:total',
+      'errors:types',
+      'errors:endpoints',
+      'errors:lastError',
+      'errors:logs',
+    ];
+
     const pipeline = this.redis.pipeline();
-    keys.forEach(key => pipeline.del(key));
+    keys.forEach((key) => pipeline.del(key));
     await pipeline.exec();
-    
+
     this.logger.log('Error tracking data has been reset');
   }
 
@@ -188,15 +220,25 @@ export class ErrorTrackingService {
   }
 
   // Convenience methods for logging different error levels
-  async logInfo(message: string, context?: Record<string, any>): Promise<string> {
+  async logInfo(
+    message: string,
+    context?: Record<string, any>,
+  ): Promise<string> {
     return this.logError({ level: 'info', message, context });
   }
 
-  async logWarning(message: string, context?: Record<string, any>): Promise<string> {
+  async logWarning(
+    message: string,
+    context?: Record<string, any>,
+  ): Promise<string> {
     return this.logError({ level: 'warning', message, context });
   }
 
-  async logErrorMethod(message: string, stack?: string, context?: Record<string, any>): Promise<string> {
+  async logErrorMethod(
+    message: string,
+    stack?: string,
+    context?: Record<string, any>,
+  ): Promise<string> {
     return this.logError({ level: 'error', message, stack, context });
   }
 }

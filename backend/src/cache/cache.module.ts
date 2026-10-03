@@ -41,7 +41,8 @@ export class CacheModule {
         ConfigService,
         {
           provide: 'CACHE_SERVICE',
-          useFactory: (configService: ConfigService) => new CacheService(configService),
+          useFactory: (configService: ConfigService) =>
+            new CacheService(configService),
         },
         { provide: CacheService, useExisting: 'CACHE_SERVICE' },
       ],

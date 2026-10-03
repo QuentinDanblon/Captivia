@@ -43,8 +43,15 @@ export class SpeciesService {
     private speciesProfileService: SpeciesProfileService,
   ) {}
 
-  async searchSpecies(query: string, limit: number = 20, offset: number = 0, filters?: SpeciesFilter): Promise<any> {
-    this.logger.log(`Searching for species: ${query}, filters=${JSON.stringify(filters)}`);
+  async searchSpecies(
+    query: string,
+    limit: number = 20,
+    offset: number = 0,
+    filters?: SpeciesFilter,
+  ): Promise<any> {
+    this.logger.log(
+      `Searching for species: ${query}, filters=${JSON.stringify(filters)}`,
+    );
 
     const profileFilters: any = {};
     if (filters?.class) {
@@ -70,7 +77,9 @@ export class SpeciesService {
       if (cached) {
         return cached;
       }
-      this.logger.log(`Profile empty, falling back to GBIF with query="${searchQuery}"`);
+      this.logger.log(
+        `Profile empty, falling back to GBIF with query="${searchQuery}"`,
+      );
       try {
         const gbifResponse = await this.gbifService.searchSpecies(
           searchQuery,
@@ -81,7 +90,8 @@ export class SpeciesService {
         if (filters?.class) {
           gbifResults = gbifResults.filter(
             (item: any) =>
-              item.class && String(item.class).toLowerCase() === filters.class!.toLowerCase(),
+              item.class &&
+              String(item.class).toLowerCase() === filters.class!.toLowerCase(),
           );
           if (gbifResults.length === 0) {
             gbifResults = (gbifResponse.results || []).slice(0, limit);
@@ -140,7 +150,10 @@ export class SpeciesService {
     }
 
     // Get from profile database
-    const profileDetail = await this.speciesProfileService.getBySpeciesId(speciesId, 'fr');
+    const profileDetail = await this.speciesProfileService.getBySpeciesId(
+      speciesId,
+      'fr',
+    );
 
     // Fetch classification from GBIF (speciesId is the GBIF key)
     let kingdom = '';
@@ -165,10 +178,13 @@ export class SpeciesService {
         family = gbifSpecies.family ?? '';
         genus = gbifSpecies.genus ?? '';
         if (gbifSpecies.rank) rank = gbifSpecies.rank;
-        if (gbifSpecies.iucnRedListCategory) iucnStatus = gbifSpecies.iucnRedListCategory;
+        if (gbifSpecies.iucnRedListCategory)
+          iucnStatus = gbifSpecies.iucnRedListCategory;
       }
     } catch (err) {
-      this.logger.warn(`GBIF taxonomy for species ${id} failed: ${(err as Error).message}`);
+      this.logger.warn(
+        `GBIF taxonomy for species ${id} failed: ${(err as Error).message}`,
+      );
       gbifUnavailable = isUpstreamError(err) && !isUpstreamNotFound(err);
     }
 
@@ -195,8 +211,12 @@ export class SpeciesService {
       // Build response with local profile data + GBIF classification
       response = {
         key: profileDetail.profile.speciesId,
-        name: profileDetail.profile.commonNameFr || profileDetail.profile.scientificName,
-        canonicalName: profileDetail.profile.commonNameFr || profileDetail.profile.scientificName,
+        name:
+          profileDetail.profile.commonNameFr ||
+          profileDetail.profile.scientificName,
+        canonicalName:
+          profileDetail.profile.commonNameFr ||
+          profileDetail.profile.scientificName,
         scientificName: profileDetail.profile.scientificName,
         rank,
         kingdom,
@@ -222,7 +242,10 @@ export class SpeciesService {
       };
     } else {
       // Fallback: build response from GBIF data only (no local editorial content)
-      const vernacularName = gbifSpecies.vernacularName || gbifSpecies.canonicalName || gbifSpecies.scientificName;
+      const vernacularName =
+        gbifSpecies.vernacularName ||
+        gbifSpecies.canonicalName ||
+        gbifSpecies.scientificName;
       response = {
         key: gbifSpecies.key ?? speciesId,
         name: vernacularName,
@@ -296,7 +319,8 @@ export class SpeciesService {
       const gbifNames = await this.gbifService.getVernacularNames(id);
 
       // Transform the vernacular names using the transformer service
-      const transformedNames = this.transformerService.transformVernacularNames(gbifNames);
+      const transformedNames =
+        this.transformerService.transformVernacularNames(gbifNames);
 
       // Cache the results with vernacular-specific TTL (12h)
       this.cacheService.set(cacheKey, transformedNames, 43200);
@@ -306,7 +330,12 @@ export class SpeciesService {
         source: 'gbif',
       };
     } catch (error) {
-      return this.onGbifFailure(error, 'Species not found', `vernacular:${id}`, (stale: any) => ({ results: stale.results, source: 'stale-cache' }));
+      return this.onGbifFailure(
+        error,
+        'Species not found',
+        `vernacular:${id}`,
+        (stale: any) => ({ results: stale.results, source: 'stale-cache' }),
+      );
     }
   }
 
@@ -323,7 +352,12 @@ export class SpeciesService {
       if (gbifIucn) this.cacheService.set(cacheKey, gbifIucn, 86400);
       return gbifIucn;
     } catch (error) {
-      return this.onGbifFailure(error, 'IUCN status not available for this species', `iucn:${id}`, (stale: any) => stale);
+      return this.onGbifFailure(
+        error,
+        'IUCN status not available for this species',
+        `iucn:${id}`,
+        (stale: any) => stale,
+      );
     }
   }
 
@@ -369,7 +403,12 @@ export class SpeciesService {
 
       return gbifDistributions;
     } catch (error) {
-      return this.onGbifFailure(error, 'Species not found', `distributions:${id}`, (stale: any) => stale);
+      return this.onGbifFailure(
+        error,
+        'Species not found',
+        `distributions:${id}`,
+        (stale: any) => stale,
+      );
     }
   }
 
@@ -396,7 +435,8 @@ export class SpeciesService {
       const gbifMedia = await this.gbifService.getMedia(id);
 
       // Transform the media using the transformer service
-      const transformedMedia = this.transformerService.transformMedia(gbifMedia);
+      const transformedMedia =
+        this.transformerService.transformMedia(gbifMedia);
 
       // Cache the results with media-specific TTL (1h)
       this.cacheService.set(cacheKey, { results: transformedMedia }, 3600);
@@ -406,7 +446,15 @@ export class SpeciesService {
         source: 'gbif',
       };
     } catch (error) {
-      return this.onGbifFailure(error, 'Species not found', `media:${id}`, (stale: any) => ({ results: Array.isArray(stale) ? stale : (stale.results ?? []), source: 'stale-cache' }));
+      return this.onGbifFailure(
+        error,
+        'Species not found',
+        `media:${id}`,
+        (stale: any) => ({
+          results: Array.isArray(stale) ? stale : (stale.results ?? []),
+          source: 'stale-cache',
+        }),
+      );
     }
   }
 
@@ -431,7 +479,12 @@ export class SpeciesService {
 
       return gbifMetrics;
     } catch (error) {
-      return this.onGbifFailure(error, 'Species not found', `metrics:${id}`, (stale: any) => stale);
+      return this.onGbifFailure(
+        error,
+        'Species not found',
+        `metrics:${id}`,
+        (stale: any) => stale,
+      );
     }
   }
 
@@ -456,7 +509,12 @@ export class SpeciesService {
 
       return gbifCount;
     } catch (error) {
-      return this.onGbifFailure(error, 'Species not found', `occurrences:${id}`, (stale: any) => stale);
+      return this.onGbifFailure(
+        error,
+        'Species not found',
+        `occurrences:${id}`,
+        (stale: any) => stale,
+      );
     }
   }
 
@@ -479,7 +537,9 @@ export class SpeciesService {
     }
     const stale = this.cacheService.getStale(staleKey);
     if (stale) {
-      this.logger.warn(`GBIF indisponible, réponse périmée servie pour ${staleKey}`);
+      this.logger.warn(
+        `GBIF indisponible, réponse périmée servie pour ${staleKey}`,
+      );
       return fromStale(stale);
     }
     throw toUpstreamHttpException(

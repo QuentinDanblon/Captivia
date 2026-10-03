@@ -103,7 +103,9 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     SpeciesModule,
     HealthModule,
     CommonModule,
-    ...(redisEnabled ? [MonitoringModule, AnalyticsModule, DatabaseOptimizationModule] : []),
+    ...(redisEnabled
+      ? [MonitoringModule, AnalyticsModule, DatabaseOptimizationModule]
+      : []),
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

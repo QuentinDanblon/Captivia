@@ -1,9 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { CacheService } from '../../cache/cache.service';
-import {
-  describeHttpError,
-  isValidBarcode,
-} from '../../external/http-safety';
+import { describeHttpError, isValidBarcode } from '../../external/http-safety';
 import { ExternalHttpService } from '../../external/http/external-http.service';
 import {
   isUpstreamNotFound,
@@ -162,31 +159,197 @@ export class OpenPetFoodFactsService {
     // 3) Mots-clés de races : si le nom contient une race de chien/chat
     //    connue, on cible l'espèce de base (les races n'existent pas dans OPFF).
     const breedMappings: Array<{ keywords: string[]; terms: string[] }> = [
-      { keywords: ['labrador', 'golden', 'berger', 'beagle', 'caniche', 'bulldog', 'boxer', 'husky', 'dobermann', 'chihuahua', 'carlin', 'rottweiler', 'teckel', 'shih', 'bichon', 'bouledogue', 'cocker', 'dalmatien', 'dogue', 'épagneul', 'terrier', 'retriever', 'colley', 'mastiff', 'pinscher', 'schnauzer', 'shiba', 'spitz', 'yorkshire', 'canis', 'chien'], terms: ['dog food', 'dog'] },
-      { keywords: ['persan', 'siamois', 'maine coon', 'bengal', 'british', 'scottish', 'sphynx', 'abyssin', 'birman', 'chartreux', 'ragdoll', 'sibérien', 'siberian', 'norvégien', 'felis', 'chat'], terms: ['cat food', 'cat'] },
-      { keywords: ['bélier', 'angora', 'rex', 'géant des flandres', 'nain'], terms: ['rabbit food', 'hay', 'pellets'] },
-      { keywords: ['perruche', 'calopsitte', 'perroquet', 'amazone', 'ara ', 'conure', 'inséparable', 'youyou', 'cacatoès', 'lori'], terms: ['parrot food', 'bird', 'seed mix'] },
-      { keywords: ['canari', 'diamant mandarin', 'moineau', 'padda', 'bengali', 'astrild'], terms: ['canary food', 'bird seed'] },
-      { keywords: ['hamster', 'gerbille', 'souris', 'rat ', 'octodon', 'chinchilla'], terms: ['rodent food', 'hamster food', 'seed mix'] },
-      { keywords: ['cochon d', 'cobaye', 'guinea'], terms: ['guinea pig food', 'hay', 'pellets'] },
+      {
+        keywords: [
+          'labrador',
+          'golden',
+          'berger',
+          'beagle',
+          'caniche',
+          'bulldog',
+          'boxer',
+          'husky',
+          'dobermann',
+          'chihuahua',
+          'carlin',
+          'rottweiler',
+          'teckel',
+          'shih',
+          'bichon',
+          'bouledogue',
+          'cocker',
+          'dalmatien',
+          'dogue',
+          'épagneul',
+          'terrier',
+          'retriever',
+          'colley',
+          'mastiff',
+          'pinscher',
+          'schnauzer',
+          'shiba',
+          'spitz',
+          'yorkshire',
+          'canis',
+          'chien',
+        ],
+        terms: ['dog food', 'dog'],
+      },
+      {
+        keywords: [
+          'persan',
+          'siamois',
+          'maine coon',
+          'bengal',
+          'british',
+          'scottish',
+          'sphynx',
+          'abyssin',
+          'birman',
+          'chartreux',
+          'ragdoll',
+          'sibérien',
+          'siberian',
+          'norvégien',
+          'felis',
+          'chat',
+        ],
+        terms: ['cat food', 'cat'],
+      },
+      {
+        keywords: ['bélier', 'angora', 'rex', 'géant des flandres', 'nain'],
+        terms: ['rabbit food', 'hay', 'pellets'],
+      },
+      {
+        keywords: [
+          'perruche',
+          'calopsitte',
+          'perroquet',
+          'amazone',
+          'ara ',
+          'conure',
+          'inséparable',
+          'youyou',
+          'cacatoès',
+          'lori',
+        ],
+        terms: ['parrot food', 'bird', 'seed mix'],
+      },
+      {
+        keywords: [
+          'canari',
+          'diamant mandarin',
+          'moineau',
+          'padda',
+          'bengali',
+          'astrild',
+        ],
+        terms: ['canary food', 'bird seed'],
+      },
+      {
+        keywords: [
+          'hamster',
+          'gerbille',
+          'souris',
+          'rat ',
+          'octodon',
+          'chinchilla',
+        ],
+        terms: ['rodent food', 'hamster food', 'seed mix'],
+      },
+      {
+        keywords: ['cochon d', 'cobaye', 'guinea'],
+        terms: ['guinea pig food', 'hay', 'pellets'],
+      },
       { keywords: ['furet'], terms: ['ferret food', 'meat'] },
-      { keywords: ['gecko', 'caméléon', 'agame', 'scinque', 'anolis'], terms: ['gecko food', 'insect food', 'crickets'] },
-      { keywords: ['iguane', 'varan', 'tégou'], terms: ['reptile food', 'iguana food'] },
-      { keywords: ['python', 'boa', 'serpent', 'couleuvre'], terms: ['reptile food', 'frozen rodent'] },
-      { keywords: ['tortue'], terms: ['tortoise food', 'turtle food', 'reptile'] },
-      { keywords: ['grenouille', 'rainette', 'dendrobate', 'axolotl', 'triton', 'crapaud'], terms: ['amphibian food', 'insect food', 'crickets'] },
-      { keywords: ['guppy', 'néon', 'tétra', 'betta', 'combattant', 'poisson rouge', 'corydoras', 'scalaire', 'discus', 'gourami', 'barbus', 'danio', 'molly', 'platy', 'xipho', 'ancistrus', 'otocinclus', 'crevette'], terms: ['fish food', 'aquarium', 'flakes'] },
-      { keywords: ['phasme', 'mante', 'blatte'], terms: ['insect food', 'crickets'] },
-      { keywords: ['mygale', 'scorpion', 'tarentule'], terms: ['insect food', 'crickets'] },
-      { keywords: ['poule', 'coq', 'poussin', 'gallus'], terms: ['chicken food', 'poultry'] },
-      { keywords: ['cheval', 'poney', 'âne', 'equus'], terms: ['horse food', 'equine'] },
-      { keywords: ['bovin', 'vache', 'taureau', 'veau', 'bos'], terms: ['cattle food', 'farm animal'] },
-      { keywords: ['mouton', 'brebis', 'agneau', 'ovis'], terms: ['sheep food', 'farm animal'] },
-      { keywords: ['chèvre', 'chevre', 'capra'], terms: ['goat food', 'farm animal'] },
-      { keywords: ['porc', 'cochon', 'sus'], terms: ['pig food', 'farm animal'] },
+      {
+        keywords: ['gecko', 'caméléon', 'agame', 'scinque', 'anolis'],
+        terms: ['gecko food', 'insect food', 'crickets'],
+      },
+      {
+        keywords: ['iguane', 'varan', 'tégou'],
+        terms: ['reptile food', 'iguana food'],
+      },
+      {
+        keywords: ['python', 'boa', 'serpent', 'couleuvre'],
+        terms: ['reptile food', 'frozen rodent'],
+      },
+      {
+        keywords: ['tortue'],
+        terms: ['tortoise food', 'turtle food', 'reptile'],
+      },
+      {
+        keywords: [
+          'grenouille',
+          'rainette',
+          'dendrobate',
+          'axolotl',
+          'triton',
+          'crapaud',
+        ],
+        terms: ['amphibian food', 'insect food', 'crickets'],
+      },
+      {
+        keywords: [
+          'guppy',
+          'néon',
+          'tétra',
+          'betta',
+          'combattant',
+          'poisson rouge',
+          'corydoras',
+          'scalaire',
+          'discus',
+          'gourami',
+          'barbus',
+          'danio',
+          'molly',
+          'platy',
+          'xipho',
+          'ancistrus',
+          'otocinclus',
+          'crevette',
+        ],
+        terms: ['fish food', 'aquarium', 'flakes'],
+      },
+      {
+        keywords: ['phasme', 'mante', 'blatte'],
+        terms: ['insect food', 'crickets'],
+      },
+      {
+        keywords: ['mygale', 'scorpion', 'tarentule'],
+        terms: ['insect food', 'crickets'],
+      },
+      {
+        keywords: ['poule', 'coq', 'poussin', 'gallus'],
+        terms: ['chicken food', 'poultry'],
+      },
+      {
+        keywords: ['cheval', 'poney', 'âne', 'equus'],
+        terms: ['horse food', 'equine'],
+      },
+      {
+        keywords: ['bovin', 'vache', 'taureau', 'veau', 'bos'],
+        terms: ['cattle food', 'farm animal'],
+      },
+      {
+        keywords: ['mouton', 'brebis', 'agneau', 'ovis'],
+        terms: ['sheep food', 'farm animal'],
+      },
+      {
+        keywords: ['chèvre', 'chevre', 'capra'],
+        terms: ['goat food', 'farm animal'],
+      },
+      {
+        keywords: ['porc', 'cochon', 'sus'],
+        terms: ['pig food', 'farm animal'],
+      },
       { keywords: ['canard'], terms: ['duck food', 'poultry'] },
       { keywords: ['pigeon'], terms: ['pigeon food', 'bird seed'] },
-      { keywords: ['dindon', 'dinde'], terms: ['poultry food', 'chicken food'] },
+      {
+        keywords: ['dindon', 'dinde'],
+        terms: ['poultry food', 'chicken food'],
+      },
     ];
 
     for (const mapping of breedMappings) {
@@ -276,7 +439,7 @@ export class OpenPetFoodFactsService {
     }
 
     const cacheKey = `${this.cachePrefix}product:${barcode}`;
-    
+
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
@@ -323,7 +486,7 @@ export class OpenPetFoodFactsService {
   async searchBySpecies(species: string, type?: string): Promise<any> {
     // Get appropriate search terms for this species
     let searchTerms = this.getSearchTermsForSpecies(species);
-    
+
     // If a specific type is provided, prepend it
     if (type) {
       searchTerms = [`${type} ${searchTerms[0]}`, ...searchTerms];
@@ -344,7 +507,7 @@ export class OpenPetFoodFactsService {
 
   async getCategories(): Promise<string[]> {
     const cacheKey = `${this.cachePrefix}categories`;
-    
+
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
@@ -357,8 +520,7 @@ export class OpenPetFoodFactsService {
         'https://world.openpetfoodfacts.org/categories.json',
       );
 
-      const categories =
-        response.data.tags?.map((tag: any) => tag.name) || [];
+      const categories = response.data.tags?.map((tag: any) => tag.name) || [];
 
       // Cache for 7 days
       await this.cacheService.set(cacheKey, JSON.stringify(categories), 604800);

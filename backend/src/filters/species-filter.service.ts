@@ -1,5 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { SpeciesFilter, FilteredSpecies, FilteredSearchResult } from './species-filter.interface';
+import {
+  SpeciesFilter,
+  FilteredSpecies,
+  FilteredSearchResult,
+} from './species-filter.interface';
 import { SpeciesTransformerService } from '../transformers/species-transformer.service';
 
 @Injectable()
@@ -35,7 +39,7 @@ export class SpeciesFilterService {
 
     // Filtrer par classe (GBIF uses "class" key)
     if (filters.class) {
-      results = results.filter((s) => (s as any).class === filters.class);
+      results = results.filter((s) => s.class === filters.class);
       appliedFilters.push(`class:${filters.class}`);
     }
 

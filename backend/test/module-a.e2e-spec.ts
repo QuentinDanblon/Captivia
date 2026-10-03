@@ -57,7 +57,9 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
   }
 
   /** Crée un compte jetable PREMIUM et retourne token + userId. */
-  function registerPremium(email: string): Promise<{ email: string; token: string; userId: string }> {
+  function registerPremium(
+    email: string,
+  ): Promise<{ email: string; token: string; userId: string }> {
     return createUser(email, true);
   }
 
@@ -171,7 +173,9 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
 
       expect(Array.isArray(res.body)).toBe(true);
       expect(res.body.length).toBeGreaterThanOrEqual(3);
-      const dates = res.body.map((m: { startDate: string }) => new Date(m.startDate).getTime());
+      const dates = res.body.map((m: { startDate: string }) =>
+        new Date(m.startDate).getTime(),
+      );
       const sorted = [...dates].sort((a, b) => b - a);
       expect(dates).toEqual(sorted);
     });
@@ -197,12 +201,16 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
         .get(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      expect(res.body.some((m: { id: string }) => m.id === medicationId)).toBe(false);
+      expect(res.body.some((m: { id: string }) => m.id === medicationId)).toBe(
+        false,
+      );
     });
 
     it('DELETE id inexistant → 404', () => {
       return request(app.getHttpServer())
-        .delete(`/users/me/animals/${animalId}/medications/${crypto.randomUUID()}`)
+        .delete(
+          `/users/me/animals/${animalId}/medications/${crypto.randomUUID()}`,
+        )
         .set('Authorization', `Bearer ${token}`)
         .expect(404);
     });
@@ -259,14 +267,18 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
 
       expect(Array.isArray(res.body)).toBe(true);
       expect(res.body.length).toBeGreaterThanOrEqual(2);
-      const dates = res.body.map((a: { date: string }) => new Date(a.date).getTime());
+      const dates = res.body.map((a: { date: string }) =>
+        new Date(a.date).getTime(),
+      );
       const sorted = [...dates].sort((a, b) => b - a);
       expect(dates).toEqual(sorted);
     });
 
     it('PATCH status → 200 (scheduled → done)', async () => {
       const res = await request(app.getHttpServer())
-        .patch(`/users/me/animals/${animalId}/vet-appointments/${appointmentId}`)
+        .patch(
+          `/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
+        )
         .set('Authorization', `Bearer ${token}`)
         .send({ status: 'done' })
         .expect(200);
@@ -275,7 +287,9 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
 
     it('PATCH status invalide → 400', () => {
       return request(app.getHttpServer())
-        .patch(`/users/me/animals/${animalId}/vet-appointments/${appointmentId}`)
+        .patch(
+          `/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
+        )
         .set('Authorization', `Bearer ${token}`)
         .send({ status: 'nope' })
         .expect(400);
@@ -283,7 +297,9 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
 
     it('DELETE → 200', async () => {
       await request(app.getHttpServer())
-        .delete(`/users/me/animals/${animalId}/vet-appointments/${appointmentId}`)
+        .delete(
+          `/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
+        )
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
@@ -291,7 +307,9 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
         .get(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      expect(res.body.some((a: { id: string }) => a.id === appointmentId)).toBe(false);
+      expect(res.body.some((a: { id: string }) => a.id === appointmentId)).toBe(
+        false,
+      );
     });
   });
 
@@ -310,7 +328,12 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: 'X', dose: '1', frequency: 'hourly', startDate: todayStr() })
+        .send({
+          name: 'X',
+          dose: '1',
+          frequency: 'hourly',
+          startDate: todayStr(),
+        })
         .expect(400);
     });
 
@@ -318,7 +341,12 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       return request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: 'X', dose: '1', frequency: 'daily', startDate: '2026-13-45' })
+        .send({
+          name: 'X',
+          dose: '1',
+          frequency: 'daily',
+          startDate: '2026-13-45',
+        })
         .expect(400);
     });
 
@@ -326,7 +354,12 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       return request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: '   ', dose: '1', frequency: 'daily', startDate: todayStr() })
+        .send({
+          name: '   ',
+          dose: '1',
+          frequency: 'daily',
+          startDate: todayStr(),
+        })
         .expect(400);
     });
 
@@ -393,7 +426,12 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       await request(app.getHttpServer())
         .post(`/users/me/animals/${freeAnimalId}/medications`)
         .set('Authorization', `Bearer ${freeToken}`)
-        .send({ name: 'X', dose: '1', frequency: 'daily', startDate: todayStr() })
+        .send({
+          name: 'X',
+          dose: '1',
+          frequency: 'daily',
+          startDate: todayStr(),
+        })
         .expect(201);
       await request(app.getHttpServer())
         .get(`/users/me/animals/${freeAnimalId}/vet-appointments`)
@@ -465,7 +503,12 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       const med = await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: 'Calcium', dose: '2ml', frequency: 'weekly', startDate: todayStr() })
+        .send({
+          name: 'Calcium',
+          dose: '2ml',
+          frequency: 'weekly',
+          startDate: todayStr(),
+        })
         .expect(201);
       medicationId = med.body.id;
 
@@ -478,7 +521,11 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ vetName: 'Dr Demain', date: dayOffsetStr(1), reminderDays: [1] })
+        .send({
+          vetName: 'Dr Demain',
+          date: dayOffsetStr(1),
+          reminderDays: [1],
+        })
         .expect(201);
 
       const res = await request(app.getHttpServer())
@@ -499,13 +546,18 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       medEventId = medEvents[0].id;
 
       const vetEvents = res.body.filter(
-        (e: { type: string; appointmentId?: string }) => e.type === 'vet_appointment',
+        (e: { type: string; appointmentId?: string }) =>
+          e.type === 'vet_appointment',
       );
       // 🏥 RDV Dr Jour (jour même) + 🔔 Dr Demain (J-1)
       expect(vetEvents.length).toBe(2);
       const labels = vetEvents.map((e: { label: string }) => e.label);
-      expect(labels.some((l: string) => l.includes('🏥 RDV Dr Jour'))).toBe(true);
-      expect(labels.some((l: string) => l.includes('🔔 Dr Demain (J-1)'))).toBe(true);
+      expect(labels.some((l: string) => l.includes('🏥 RDV Dr Jour'))).toBe(
+        true,
+      );
+      expect(labels.some((l: string) => l.includes('🔔 Dr Demain (J-1)'))).toBe(
+        true,
+      );
       for (const ev of vetEvents) {
         expect(ev).toMatchObject({ status: 'pending', pointsAwarded: 0 });
       }
@@ -528,7 +580,12 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: 'Futur', dose: '1', frequency: 'daily', startDate: dayOffsetStr(5) })
+        .send({
+          name: 'Futur',
+          dose: '1',
+          frequency: 'daily',
+          startDate: dayOffsetStr(5),
+        })
         .expect(201);
 
       // Désactive le médicament actif
@@ -556,7 +613,11 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       const appt = await request(app.getHttpServer())
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ vetName: 'Dr Annulé', date: dayOffsetStr(2), reminderDays: [2] })
+        .send({
+          vetName: 'Dr Annulé',
+          date: dayOffsetStr(2),
+          reminderDays: [2],
+        })
         .expect(201);
 
       const before = await request(app.getHttpServer())

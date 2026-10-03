@@ -133,7 +133,9 @@ describe('Module F E2E — parenté (père/mère) & groupement', () => {
         .set('Authorization', `Bearer ${token}`)
         .send({ fatherId: otherMaleId })
         .expect(400);
-      expect(res.body.message).toContain('Parent must belong to the same owner');
+      expect(res.body.message).toContain(
+        'Parent must belong to the same owner',
+      );
     });
 
     it('PATCH fatherId inexistant → 400 (same owner)', async () => {
@@ -142,7 +144,9 @@ describe('Module F E2E — parenté (père/mère) & groupement', () => {
         .set('Authorization', `Bearer ${token}`)
         .send({ fatherId: crypto.randomUUID() })
         .expect(400);
-      expect(res.body.message).toContain('Parent must belong to the same owner');
+      expect(res.body.message).toContain(
+        'Parent must belong to the same owner',
+      );
     });
 
     it('PATCH fatherId non-UUID → 400 (DTO)', () => {
@@ -198,9 +202,17 @@ describe('Module F E2E — parenté (père/mère) & groupement', () => {
 
       expect(res.body.fatherId).toBe(maleId);
       expect(res.body.motherId).toBe(femaleId);
-      expect(res.body.father).toMatchObject({ id: maleId, name: 'F-Pere', sex: 'male' });
+      expect(res.body.father).toMatchObject({
+        id: maleId,
+        name: 'F-Pere',
+        sex: 'male',
+      });
       expect(res.body.father.photos).toEqual([]);
-      expect(res.body.mother).toMatchObject({ id: femaleId, name: 'F-Mere', sex: 'female' });
+      expect(res.body.mother).toMatchObject({
+        id: femaleId,
+        name: 'F-Mere',
+        sex: 'female',
+      });
     });
 
     it('findOne retourne les parents (id, name, sex, photos)', async () => {
@@ -209,9 +221,17 @@ describe('Module F E2E — parenté (père/mère) & groupement', () => {
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
-      expect(res.body.father).toMatchObject({ id: maleId, name: 'F-Pere', sex: 'male' });
+      expect(res.body.father).toMatchObject({
+        id: maleId,
+        name: 'F-Pere',
+        sex: 'male',
+      });
       expect(res.body.father.photos).toEqual([]);
-      expect(res.body.mother).toMatchObject({ id: femaleId, name: 'F-Mere', sex: 'female' });
+      expect(res.body.mother).toMatchObject({
+        id: femaleId,
+        name: 'F-Mere',
+        sex: 'female',
+      });
       expect(res.body.mother.photos).toEqual([]);
     });
 
@@ -341,7 +361,12 @@ describe('Module F E2E — parenté (père/mère) & groupement', () => {
       const res = await request(app.getHttpServer())
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${token}`)
-        .send({ speciesId: 5221172, name: 'C-BebeX', sex: 'unknown', fatherId: femaleId })
+        .send({
+          speciesId: 5221172,
+          name: 'C-BebeX',
+          sex: 'unknown',
+          fatherId: femaleId,
+        })
         .expect(400);
       expect(res.body.message).toContain('Father must be a male animal');
     });

@@ -1,6 +1,12 @@
 import { Throttle } from '@nestjs/throttler';
 import { EXTERNAL_API_THROTTLE } from '../config/throttle.config';
-import { Controller, Get, Query, Param, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -27,13 +33,16 @@ export class FoodController {
   @Get('search')
   @ApiOperation({
     summary: 'Search pet food products',
-    description:
-      'Search for pet food products in Open Pet Food Facts database',
+    description: 'Search for pet food products in Open Pet Food Facts database',
   })
   @ApiQuery({ name: 'q', description: 'Search query' })
   @ApiQuery({ name: 'category', required: false, description: 'Food category' })
   @ApiQuery({ name: 'species', required: false, description: 'Animal species' })
-  @ApiQuery({ name: 'page', required: false, description: 'Page number (default: 1)' })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    description: 'Page number (default: 1)',
+  })
   @ApiQuery({
     name: 'pageSize',
     required: false,
@@ -58,10 +67,15 @@ export class FoodController {
   @ApiResponse({ status: 200, description: 'Product found' })
   @ApiResponse({ status: 404, description: 'Product not found' })
   @ApiResponse({ status: 400, description: 'Barcode must be 8 to 14 digits' })
-  @ApiResponse({ status: 503, description: 'Food database temporarily unavailable' })
+  @ApiResponse({
+    status: 503,
+    description: 'Food database temporarily unavailable',
+  })
   async getProduct(@Param() params: BarcodeParamDto): Promise<unknown> {
     // Le format du code-barres (^\d{8,14}$) est validé par BarcodeParamDto.
-    const product = await this.openPetFoodFactsService.getProduct(params.barcode);
+    const product = await this.openPetFoodFactsService.getProduct(
+      params.barcode,
+    );
 
     if (!product) {
       throw new NotFoundException('Product not found');
@@ -83,10 +97,18 @@ export class FoodController {
   @Get('species/:species')
   @ApiOperation({
     summary: 'Get food products for a species',
-    description: 'Get recommended food products for a specific animal species (uses mapping by species name + Open Pet Food Facts)',
+    description:
+      'Get recommended food products for a specific animal species (uses mapping by species name + Open Pet Food Facts)',
   })
-  @ApiParam({ name: 'species', description: 'Animal species (e.g., dog, cat, Boa constrictor)' })
-  @ApiQuery({ name: 'type', required: false, description: 'Food type (dry, wet, treats)' })
+  @ApiParam({
+    name: 'species',
+    description: 'Animal species (e.g., dog, cat, Boa constrictor)',
+  })
+  @ApiQuery({
+    name: 'type',
+    required: false,
+    description: 'Food type (dry, wet, treats)',
+  })
   @ApiResponse({ status: 200, description: 'Food products for species' })
   async getFoodBySpecies(
     @Param() params: FoodSpeciesParamDto,

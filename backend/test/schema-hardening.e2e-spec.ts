@@ -29,16 +29,24 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
   let animalId: string;
 
   beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({ imports: [AppModule] })
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    })
       .overrideModule(CacheModule)
       .useModule(TestCacheModule)
       .compile();
     app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    app.useGlobalPipes(
+      new ValidationPipe({ whitelist: true, transform: true }),
+    );
     await app.init();
     prisma = app.get(PrismaService);
 
-    const profile = (speciesId: number, name: string, lastReviewedAt: Date | null) => ({
+    const profile = (
+      speciesId: number,
+      name: string,
+      lastReviewedAt: Date | null,
+    ) => ({
       speciesId,
       commonNameFr: name,
       scientificName: `Testus ${name}`,
@@ -46,8 +54,12 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
       domesticationType: 'NAC',
       lastReviewedAt,
     });
-    await prisma.speciesProfile.create({ data: profile(REVIEWED_ID, `Verifie ${tag}`, REVIEWED_AT) });
-    await prisma.speciesProfile.create({ data: profile(UNREVIEWED_ID, `NonVerifie ${tag}`, null) });
+    await prisma.speciesProfile.create({
+      data: profile(REVIEWED_ID, `Verifie ${tag}`, REVIEWED_AT),
+    });
+    await prisma.speciesProfile.create({
+      data: profile(UNREVIEWED_ID, `NonVerifie ${tag}`, null),
+    });
 
     const user = await prisma.user.create({
       data: { email: `schema-${tag}@captivia.local`, passwordHash: 'x' },
@@ -62,7 +74,9 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
   afterAll(async () => {
     if (prisma) {
       await prisma.user.deleteMany({ where: { id: userId } });
-      await prisma.speciesProfile.deleteMany({ where: { speciesId: { in: [REVIEWED_ID, UNREVIEWED_ID] } } });
+      await prisma.speciesProfile.deleteMany({
+        where: { speciesId: { in: [REVIEWED_ID, UNREVIEWED_ID] } },
+      });
     }
     if (app) await app.close();
   });
@@ -70,10 +84,14 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
   describe('CHECK', () => {
     it('Animal.sex hors liste est rejeté ; les valeurs valides et NULL passent', async () => {
       await expect(
-        prisma.animal.create({ data: { userId, speciesId: REVIEWED_ID, name: 'X', sex: 'chimère' } }),
+        prisma.animal.create({
+          data: { userId, speciesId: REVIEWED_ID, name: 'X', sex: 'chimère' },
+        }),
       ).rejects.toThrow(/Animal_sex_check|constraint/i);
       for (const sex of ['male', 'female', 'unknown', null]) {
-        await prisma.animal.create({ data: { userId, speciesId: REVIEWED_ID, name: `S-${sex}`, sex } });
+        await prisma.animal.create({
+          data: { userId, speciesId: REVIEWED_ID, name: `S-${sex}`, sex },
+        });
       }
     });
 
@@ -91,18 +109,36 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
     it('SpeciesLegislation.status hors liste est rejeté', async () => {
       await expect(
         prisma.speciesLegislation.create({
-          data: { speciesId: REVIEWED_ID, country: 'FR', status: 'maybe', details: {}, sources: [] },
+          data: {
+            speciesId: REVIEWED_ID,
+            country: 'FR',
+            status: 'maybe',
+            details: {},
+            sources: [],
+          },
         }),
       ).rejects.toThrow(/SpeciesLegislation_status_check|constraint/i);
       await prisma.speciesLegislation.create({
-        data: { speciesId: REVIEWED_ID, country: 'FR', status: 'permit_required', details: {}, sources: [] },
+        data: {
+          speciesId: REVIEWED_ID,
+          country: 'FR',
+          status: 'permit_required',
+          details: {},
+          sources: [],
+        },
       });
     });
 
     it('Medication.frequency et VetAppointment.status hors liste sont rejetés', async () => {
       await expect(
         prisma.medication.create({
-          data: { animalId, name: 'm', dose: '1', frequency: 'hourly', startDate: new Date() },
+          data: {
+            animalId,
+            name: 'm',
+            dose: '1',
+            frequency: 'hourly',
+            startDate: new Date(),
+          },
         }),
       ).rejects.toThrow(/Medication_frequency_check|constraint/i);
       await expect(
@@ -126,7 +162,12 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
       ).rejects.toThrow(/SpeciesProfile_category_check|constraint/i);
       await expect(
         prisma.speciesBehavior.create({
-          data: { speciesId: REVIEWED_ID, generalBehavior: 'x', sociability: 'zzz', difficultyLevel: 'expert' },
+          data: {
+            speciesId: REVIEWED_ID,
+            generalBehavior: 'x',
+            sociability: 'zzz',
+            difficultyLevel: 'expert',
+          },
         }),
       ).rejects.toThrow(/SpeciesBehavior_sociability_check|constraint/i);
     });
@@ -150,17 +191,39 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
     it('supprimer une fiche supprime ses sections (ON DELETE CASCADE)', async () => {
       const id = base + 7;
       await prisma.speciesProfile.create({
-        data: { speciesId: id, commonNameFr: `Casc ${tag}`, scientificName: 'Casc casc', category: 'oiseau', domesticationType: 'NAC' },
+        data: {
+          speciesId: id,
+          commonNameFr: `Casc ${tag}`,
+          scientificName: 'Casc casc',
+          category: 'oiseau',
+          domesticationType: 'NAC',
+        },
       });
       await prisma.speciesFeeding.create({
-        data: { speciesId: id, dietType: 'omnivore', recommendedFoods: [], foodsToAvoid: [], mealFrequency: 'daily' },
+        data: {
+          speciesId: id,
+          dietType: 'omnivore',
+          recommendedFoods: [],
+          foodsToAvoid: [],
+          mealFrequency: 'daily',
+        },
       });
       await prisma.speciesRoutineTemplate.create({
-        data: { speciesId: id, type: 'nourrissage', frequency: 'daily', schedule: {}, order: 0 },
+        data: {
+          speciesId: id,
+          type: 'nourrissage',
+          frequency: 'daily',
+          schedule: {},
+          order: 0,
+        },
       });
       await prisma.speciesProfile.delete({ where: { speciesId: id } });
-      expect(await prisma.speciesFeeding.count({ where: { speciesId: id } })).toBe(0);
-      expect(await prisma.speciesRoutineTemplate.count({ where: { speciesId: id } })).toBe(0);
+      expect(
+        await prisma.speciesFeeding.count({ where: { speciesId: id } }),
+      ).toBe(0);
+      expect(
+        await prisma.speciesRoutineTemplate.count({ where: { speciesId: id } }),
+      ).toBe(0);
     });
   });
 
@@ -173,13 +236,17 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
         sourceKey: `routine:${crypto.randomUUID()}`,
       };
       await prisma.notificationEvent.create({ data });
-      await expect(prisma.notificationEvent.create({ data })).rejects.toMatchObject({ code: 'P2002' });
+      await expect(
+        prisma.notificationEvent.create({ data }),
+      ).rejects.toMatchObject({ code: 'P2002' });
     });
   });
 
   describe('Index trigram', () => {
     it('existent sur SpeciesProfile.commonNameFr et scientificName (GIN gin_trgm_ops)', async () => {
-      const rows = await prisma.$queryRaw<{ indexname: string; indexdef: string }[]>`
+      const rows = await prisma.$queryRaw<
+        { indexname: string; indexdef: string }[]
+      >`
         SELECT indexname, indexdef FROM pg_indexes
         WHERE tablename = 'SpeciesProfile' AND indexname LIKE '%trgm_idx'`;
       expect(rows.map((r) => r.indexname).sort()).toEqual([
@@ -195,23 +262,32 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
 
   describe('lastReviewedAt (W5-04)', () => {
     it('GET /species/:id expose lastReviewedAt (ISO) pour une fiche vérifiée', async () => {
-      const res = await request(app.getHttpServer()).get(`/species/${REVIEWED_ID}`).expect(200);
+      const res = await request(app.getHttpServer())
+        .get(`/species/${REVIEWED_ID}`)
+        .expect(200);
       expect(res.body.lastReviewedAt).toBe(REVIEWED_AT.toISOString());
       expect(res.body.profile.lastReviewedAt).toBe(REVIEWED_AT.toISOString());
     });
 
     it('GET /species/:id renvoie lastReviewedAt = null pour une fiche jamais vérifiée', async () => {
-      const res = await request(app.getHttpServer()).get(`/species/${UNREVIEWED_ID}`).expect(200);
+      const res = await request(app.getHttpServer())
+        .get(`/species/${UNREVIEWED_ID}`)
+        .expect(200);
       expect(res.body).toHaveProperty('lastReviewedAt', null);
     });
 
     it('GET /species/search expose lastReviewedAt dans chaque résultat', async () => {
       const res = await request(app.getHttpServer())
-        .get(`/species/search?q=${encodeURIComponent(`Verifie ${tag}`)}&limit=5`)
+        .get(
+          `/species/search?q=${encodeURIComponent(`Verifie ${tag}`)}&limit=5`,
+        )
         .expect(200);
-      const hit = (res.body.results as Array<{ key: number; lastReviewedAt: string | null }>).find(
-        (r) => r.key === REVIEWED_ID,
-      );
+      const hit = (
+        res.body.results as Array<{
+          key: number;
+          lastReviewedAt: string | null;
+        }>
+      ).find((r) => r.key === REVIEWED_ID);
       expect(hit).toBeDefined();
       expect(hit?.lastReviewedAt).toBe(REVIEWED_AT.toISOString());
     });

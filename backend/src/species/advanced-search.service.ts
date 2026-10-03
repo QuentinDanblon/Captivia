@@ -56,16 +56,26 @@ export class AdvancedSearchService {
   /**
    * Recherche avec suggestions
    */
-  async searchSuggestions(query: string, limit: number = 10, language: string = 'french') {
+  async searchSuggestions(
+    query: string,
+    limit: number = 10,
+    language: string = 'french',
+  ) {
     this.logger.log(`Search suggestions for: ${query}`);
 
     // Recherche GBIF
-    const gbifResults = await this.speciesService.searchSpecies(query, limit * 5, 0);
+    const gbifResults = await this.speciesService.searchSpecies(
+      query,
+      limit * 5,
+      0,
+    );
 
     // Extraire les noms vernaculaires en français
     const suggestions = (gbifResults.results as any[])
       .map((species) => {
-        const vernacular = species.vernacularNames?.find((vn: any) => vn.language === language);
+        const vernacular = species.vernacularNames?.find(
+          (vn: any) => vn.language === language,
+        );
         return vernacular?.name || species.canonicalName;
       })
       .filter((name) => name && name.trim().length > 0);
@@ -97,7 +107,9 @@ export class AdvancedSearchService {
     return {
       results: results.results,
       total: results.total,
-      filtersApplied: Object.keys(filters).filter((k) => filters[k as keyof SpeciesFilter] !== undefined),
+      filtersApplied: Object.keys(filters).filter(
+        (k) => filters[k as keyof SpeciesFilter] !== undefined,
+      ),
       source: results.source,
     };
   }
@@ -113,7 +125,12 @@ export class AdvancedSearchService {
       limit,
     };
 
-    const results = await this.speciesService.searchSpecies('', limit, 0, filters);
+    const results = await this.speciesService.searchSpecies(
+      '',
+      limit,
+      0,
+      filters,
+    );
 
     return {
       results: results.results,
@@ -144,7 +161,12 @@ export class AdvancedSearchService {
       limit,
     };
 
-    const results = await this.speciesService.searchSpecies('', limit, 0, filters);
+    const results = await this.speciesService.searchSpecies(
+      '',
+      limit,
+      0,
+      filters,
+    );
 
     return {
       results: results.results,
@@ -173,7 +195,12 @@ export class AdvancedSearchService {
 
     const filters = taxonomyMap[taxonomic.toLowerCase()] || {};
 
-    const results = await this.speciesService.searchSpecies('', limit, 0, filters);
+    const results = await this.speciesService.searchSpecies(
+      '',
+      limit,
+      0,
+      filters,
+    );
 
     return {
       results: results.results,
@@ -193,12 +220,21 @@ export class AdvancedSearchService {
       limit,
     };
 
-    const results = await this.speciesService.searchSpecies('', limit, 0, filters);
+    const results = await this.speciesService.searchSpecies(
+      '',
+      limit,
+      0,
+      filters,
+    );
 
     // Filtrer les espèces avec médias
-    const filteredResults = (results.results as any[]).filter((species: any) => {
-      return hasMedia ? (species.media && species.media.length > 0) : !species.media || species.media.length === 0;
-    });
+    const filteredResults = (results.results as any[]).filter(
+      (species: any) => {
+        return hasMedia
+          ? species.media && species.media.length > 0
+          : !species.media || species.media.length === 0;
+      },
+    );
 
     return {
       results: filteredResults,
@@ -218,12 +254,21 @@ export class AdvancedSearchService {
       limit,
     };
 
-    const results = await this.speciesService.searchSpecies('', limit, 0, filters);
+    const results = await this.speciesService.searchSpecies(
+      '',
+      limit,
+      0,
+      filters,
+    );
 
     // Filtrer les espèces avec IUCN
-    const filteredResults = (results.results as any[]).filter((species: any) => {
-      return hasIucn ? (species.iucnStatus && species.iucnStatus !== 'UNKNOWN') : !species.iucnStatus || species.iucnStatus === 'UNKNOWN';
-    });
+    const filteredResults = (results.results as any[]).filter(
+      (species: any) => {
+        return hasIucn
+          ? species.iucnStatus && species.iucnStatus !== 'UNKNOWN'
+          : !species.iucnStatus || species.iucnStatus === 'UNKNOWN';
+      },
+    );
 
     return {
       results: filteredResults,
@@ -255,7 +300,9 @@ export class AdvancedSearchService {
 
     // Filtrer les valeurs undefined
     return Object.fromEntries(
-      Object.entries(filters).filter(([, v]) => v !== undefined && v !== null && v !== ''),
+      Object.entries(filters).filter(
+        ([, v]) => v !== undefined && v !== null && v !== '',
+      ),
     ) as SpeciesFilter;
   }
 
@@ -279,7 +326,9 @@ export class AdvancedSearchService {
 
     // Filtrer les valeurs undefined
     return Object.fromEntries(
-      Object.entries(filters).filter(([, v]) => v !== undefined && v !== null && v !== ''),
+      Object.entries(filters).filter(
+        ([, v]) => v !== undefined && v !== null && v !== '',
+      ),
     ) as SpeciesFilter;
   }
 
@@ -304,7 +353,11 @@ export class AdvancedSearchService {
   /**
    * Trie les résultats selon le critère spécifié
    */
-  private sortResults(results: any[], sortBy: string, sortOrder: string): any[] {
+  private sortResults(
+    results: any[],
+    sortBy: string,
+    sortOrder: string,
+  ): any[] {
     if (!sortBy) return results;
 
     const sorted = [...results];

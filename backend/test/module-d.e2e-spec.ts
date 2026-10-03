@@ -54,7 +54,11 @@ describe('Module D E2E — modèles de routines par défaut par espèce', () => 
     return { email, token, userId: user.id };
   }
 
-  async function createAnimal(token: string, name: string, speciesId = SPECIES_GECKO): Promise<string> {
+  async function createAnimal(
+    token: string,
+    name: string,
+    speciesId = SPECIES_GECKO,
+  ): Promise<string> {
     const res = await request(app.getHttpServer())
       .post('/users/me/animals')
       .set('Authorization', `Bearer ${token}`)
@@ -146,7 +150,10 @@ describe('Module D E2E — modèles de routines par défaut par espèce', () => 
 
     it('animal d’un autre utilisateur → 403', async () => {
       const other = await createUser(makeEmail('other'));
-      const otherAnimalId = await createAnimal(other.token, 'Animal de l’autre');
+      const otherAnimalId = await createAnimal(
+        other.token,
+        'Animal de l’autre',
+      );
 
       await request(app.getHttpServer())
         .get(`/users/me/animals/${otherAnimalId}/routine-templates`)

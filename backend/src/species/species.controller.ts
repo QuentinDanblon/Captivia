@@ -106,10 +106,7 @@ export class SpeciesController {
       return response;
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch species details');
@@ -130,10 +127,7 @@ export class SpeciesController {
       return Array.isArray(response) ? response : response.results || [];
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch vernacular names');
@@ -150,10 +144,7 @@ export class SpeciesController {
       return await this.speciesService.getIucn(getSpeciesDto.id);
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException(
           'IUCN status not available for this species',
         );
@@ -166,7 +157,10 @@ export class SpeciesController {
   @ApiOperation({ summary: 'Get reproduction factsheet for a species' })
   @ApiParam({ name: 'id', description: 'Species ID' })
   @ApiResponse({ status: 200, description: 'Reproduction factsheet' })
-  @ApiResponse({ status: 404, description: 'Reproduction data not available for this species' })
+  @ApiResponse({
+    status: 404,
+    description: 'Reproduction data not available for this species',
+  })
   async getReproduction(@Param() getSpeciesDto: GetSpeciesDto) {
     try {
       return await this.speciesService.getReproduction(getSpeciesDto.id);
@@ -196,10 +190,7 @@ export class SpeciesController {
       return Array.isArray(response) ? response : response.results || [];
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch distribution data');
@@ -218,10 +209,7 @@ export class SpeciesController {
       return Array.isArray(response) ? response : response.results || [];
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch media data');
@@ -238,10 +226,7 @@ export class SpeciesController {
       return await this.speciesService.getMetrics(getSpeciesDto.id);
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch metrics');
@@ -258,10 +243,7 @@ export class SpeciesController {
       return await this.speciesService.countOccurrences(getSpeciesDto.id);
     } catch (error) {
       // Check if error is a 404 (not found) - either from axios or NotFoundException
-      if (
-        isUpstreamNotFound(error) ||
-        error instanceof NotFoundException
-      ) {
+      if (isUpstreamNotFound(error) || error instanceof NotFoundException) {
         throw new NotFoundException('Species not found');
       }
       throw toUpstreamHttpException(error, 'Failed to fetch occurrence count');

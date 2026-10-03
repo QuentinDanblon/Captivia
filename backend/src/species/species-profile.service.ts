@@ -33,9 +33,24 @@ export class SpeciesProfileService {
     const whereConditions: Prisma.SpeciesProfileWhereInput[] = [
       {
         OR: [
-          { commonNameFr: { contains: query, mode: Prisma.QueryMode.insensitive } },
-          { scientificName: { contains: query, mode: Prisma.QueryMode.insensitive } },
-          { description: { contains: query, mode: Prisma.QueryMode.insensitive } },
+          {
+            commonNameFr: {
+              contains: query,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          },
+          {
+            scientificName: {
+              contains: query,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          },
+          {
+            description: {
+              contains: query,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          },
         ],
       },
     ];
@@ -63,8 +78,8 @@ export class SpeciesProfileService {
       this.prisma.speciesProfile.count({ where }),
     ]);
 
-    const results = profiles.map(
-      (profile) => this.transformProfileToSearchResult(profile),
+    const results = profiles.map((profile) =>
+      this.transformProfileToSearchResult(profile),
     );
 
     return {

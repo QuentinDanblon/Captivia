@@ -189,7 +189,8 @@ export class PubmedService {
     }
 
     // Add filters for veterinary/animal health
-    query += ' AND (veterinary[Title/Abstract] OR animal[Title/Abstract] OR reptile[Title/Abstract])';
+    query +=
+      ' AND (veterinary[Title/Abstract] OR animal[Title/Abstract] OR reptile[Title/Abstract])';
 
     return this.searchArticles(query, 5);
   }

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks du client HTTP typés any */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call -- tests : mocks du client HTTP typés any */
 import { HttpException, Logger } from '@nestjs/common';
 import { PubmedService } from './pubmed.service';
 import { ExternalUnavailableError } from '../../external/http/external-errors';
@@ -38,7 +38,11 @@ describe('PubmedService (résilience)', () => {
     await service.getArticleAbstract('1');
 
     expect(articles).toEqual([
-      expect.objectContaining({ pmid: '1', title: 't', url: 'https://pubmed.ncbi.nlm.nih.gov/1/' }),
+      expect.objectContaining({
+        pmid: '1',
+        title: 't',
+        url: 'https://pubmed.ncbi.nlm.nih.gov/1/',
+      }),
     ]);
     expect(http.get).toHaveBeenCalledTimes(3);
     for (const call of http.get.mock.calls) {
@@ -60,7 +64,10 @@ describe('PubmedService (résilience)', () => {
     process.env.NCBI_EMAIL = 'contact@example.test';
     await service.searchArticles('avec-cle');
     expect(http.get.mock.calls[1][2].params).toEqual(
-      expect.objectContaining({ api_key: 'cle-ncbi', email: 'contact@example.test' }),
+      expect.objectContaining({
+        api_key: 'cle-ncbi',
+        email: 'contact@example.test',
+      }),
     );
   });
 

@@ -1,9 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import {
-  PaginationQueryDto,
-  toPage,
-} from '../common/dto/pagination-query.dto';
+import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 import { SpeciesPlusService } from './services/speciesplus.service';
 import { describeHttpError } from '../external/http-safety';
 
@@ -16,9 +13,15 @@ export class LegislationService {
     private readonly speciesPlusService: SpeciesPlusService,
   ) {}
 
-  async getSpeciesLegislation(speciesId: number, country?: string, page?: PaginationQueryDto) {
+  async getSpeciesLegislation(
+    speciesId: number,
+    country?: string,
+    page?: PaginationQueryDto,
+  ) {
     // Try to get editorial content from database
-    let legislations: Awaited<ReturnType<typeof this.prisma.speciesLegislation.findUnique>>[];
+    let legislations: Awaited<
+      ReturnType<typeof this.prisma.speciesLegislation.findUnique>
+    >[];
 
     if (country) {
       const item = await this.prisma.speciesLegislation.findUnique({
@@ -87,8 +90,9 @@ export class LegislationService {
       );
       const wanted = profile.scientificName.trim().toLowerCase();
       const taxon =
-        taxa.find((t: any) => String(t?.full_name ?? '').toLowerCase() === wanted) ??
-        taxa[0];
+        taxa.find(
+          (t: any) => String(t?.full_name ?? '').toLowerCase() === wanted,
+        ) ?? taxa[0];
       if (!taxon || typeof taxon.id !== 'number') {
         return { status: 'not_found', cites: null, eu: null };
       }

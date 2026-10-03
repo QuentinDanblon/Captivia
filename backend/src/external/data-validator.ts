@@ -29,7 +29,11 @@ export interface SpeciesData {
   status?: string;
   vernacularNames?: Array<{ name: string; language: string }>;
   iucn?: { status: string };
-  distributions?: Array<{ country: string; countryIsoCode: string; status: string }>;
+  distributions?: Array<{
+    country: string;
+    countryIsoCode: string;
+    status: string;
+  }>;
   media?: Array<{ type: string; identifier: string; url: string }>;
   metrics?: { usage: number; issues: number; extensions: string[] };
   occurrenceCount?: number;
@@ -60,7 +64,8 @@ export interface MetricsData {
 const SPECIES_VALIDATION_RULES: ValidationRule<SpeciesData>[] = [
   {
     field: 'key',
-    validator: (value) => typeof value === 'number' && !isNaN(value) && value > 0,
+    validator: (value) =>
+      typeof value === 'number' && !isNaN(value) && value > 0,
     errorMessage: 'Species key must be a positive number',
   },
   {
@@ -75,17 +80,29 @@ const SPECIES_VALIDATION_RULES: ValidationRule<SpeciesData>[] = [
   },
   {
     field: 'rank',
-    validator: (value) => ['SPECIES', 'GENUS', 'FAMILY', 'ORDER', 'CLASS', 'KINGDOM', 'PHYLUM'].includes(value),
+    validator: (value) =>
+      [
+        'SPECIES',
+        'GENUS',
+        'FAMILY',
+        'ORDER',
+        'CLASS',
+        'KINGDOM',
+        'PHYLUM',
+      ].includes(value),
     errorMessage: 'Invalid species rank',
   },
   {
     field: 'kingdom',
-    validator: (value) => ['Animalia', 'Plantae', 'Fungi', 'Protista', 'Monera'].includes(value),
+    validator: (value) =>
+      ['Animalia', 'Plantae', 'Fungi', 'Protista', 'Monera'].includes(value),
     errorMessage: 'Invalid kingdom',
   },
   {
     field: 'status',
-    validator: (value) => !value || ['EXTINCT', 'ENDANGERED', 'VULNERABLE', 'LC', 'DD', 'NT'].includes(value),
+    validator: (value) =>
+      !value ||
+      ['EXTINCT', 'ENDANGERED', 'VULNERABLE', 'LC', 'DD', 'NT'].includes(value),
     errorMessage: 'Invalid conservation status',
   },
 ];
@@ -104,7 +121,8 @@ const DISTRIBUTION_VALIDATION_RULES: ValidationRule<DistributionData>[] = [
   },
   {
     field: 'status',
-    validator: (value) => ['PRESENT', 'ABSENT', 'POSSIBLE', 'CULTIVATED'].includes(value),
+    validator: (value) =>
+      ['PRESENT', 'ABSENT', 'POSSIBLE', 'CULTIVATED'].includes(value),
     errorMessage: 'Invalid distribution status',
   },
 ];
@@ -123,7 +141,8 @@ const MEDIA_VALIDATION_RULES: ValidationRule<MediaData>[] = [
   },
   {
     field: 'url',
-    validator: (value) => !value || typeof value === 'string' && value.startsWith('http'),
+    validator: (value) =>
+      !value || (typeof value === 'string' && value.startsWith('http')),
     errorMessage: 'Media URL must be a valid URL',
   },
 ];
@@ -142,7 +161,8 @@ const METRICS_VALIDATION_RULES: ValidationRule<MetricsData>[] = [
   },
   {
     field: 'extensions',
-    validator: (value) => Array.isArray(value) && value.every((ext) => typeof ext === 'string'),
+    validator: (value) =>
+      Array.isArray(value) && value.every((ext) => typeof ext === 'string'),
     errorMessage: 'Extensions must be an array of strings',
   },
 ];
@@ -230,7 +250,9 @@ export class DataValidatorService {
   /**
    * Valide les données d'une distribution
    */
-  validateDistribution(data: DistributionData): ValidationResult<DistributionData> {
+  validateDistribution(
+    data: DistributionData,
+  ): ValidationResult<DistributionData> {
     const errors: Array<{ field: string; message: string }> = [];
     const warnings: Array<{ field: string; message: string }> = [];
 
@@ -315,7 +337,8 @@ export class DataValidatorService {
     if (data.distributions) sanitized.distributions = data.distributions;
     if (data.media) sanitized.media = data.media;
     if (data.metrics) sanitized.metrics = data.metrics;
-    if (data.occurrenceCount !== undefined) sanitized.occurrenceCount = data.occurrenceCount;
+    if (data.occurrenceCount !== undefined)
+      sanitized.occurrenceCount = data.occurrenceCount;
 
     return sanitized;
   }
@@ -323,14 +346,17 @@ export class DataValidatorService {
   /**
    * Calcule un score de qualité basé sur la validation
    */
-  calculateQualityScore(validationResult: ValidationResult<SpeciesData>): number {
+  calculateQualityScore(
+    validationResult: ValidationResult<SpeciesData>,
+  ): number {
     if (validationResult.valid) {
       return 100;
     }
 
     // Score basé sur le nombre d'erreurs et d'avertissements
-    const totalIssues = validationResult.errors.length + validationResult.warnings.length;
-    return Math.max(0, 100 - (totalIssues * 5));
+    const totalIssues =
+      validationResult.errors.length + validationResult.warnings.length;
+    return Math.max(0, 100 - totalIssues * 5);
   }
 
   /**

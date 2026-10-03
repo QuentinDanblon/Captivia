@@ -12,22 +12,16 @@ export class HealthContentService {
     private readonly pubmedService: PubmedService,
   ) {}
 
-  async getSpeciesHealth(
-    speciesId: number,
-    disease?: string,
-    locale = 'fr',
-  ) {
+  async getSpeciesHealth(speciesId: number, disease?: string, locale = 'fr') {
     // Try to get editorial content from database
-    const editorialContent = await this.prisma.speciesHealthContent.findUnique(
-      {
-        where: {
-          speciesId_locale: {
-            speciesId,
-            locale,
-          },
+    const editorialContent = await this.prisma.speciesHealthContent.findUnique({
+      where: {
+        speciesId_locale: {
+          speciesId,
+          locale,
         },
       },
-    );
+    });
 
     // Références PubMed : recherche par nom scientifique (profil local de l'espèce).
     // Pas de profil → aucun appel PubMed. Panne PubMed → fiche servie sans références,
@@ -55,14 +49,17 @@ export class HealthContentService {
     return {
       speciesId,
       locale,
-      editorial: editorialContent ? {
-        diseases: editorialContent.diseases,
-        sources: editorialContent.sources,
-        updatedAt: editorialContent.updatedAt,
-      } : null,
+      editorial: editorialContent
+        ? {
+            diseases: editorialContent.diseases,
+            sources: editorialContent.sources,
+            updatedAt: editorialContent.updatedAt,
+          }
+        : null,
       pubmed: pubmedArticles,
       pubmedAvailable,
-      disclaimer: 'Cette information ne remplace pas un avis vétérinaire. Consultez toujours un professionnel en cas de doute.',
+      disclaimer:
+        'Cette information ne remplace pas un avis vétérinaire. Consultez toujours un professionnel en cas de doute.',
     };
   }
 

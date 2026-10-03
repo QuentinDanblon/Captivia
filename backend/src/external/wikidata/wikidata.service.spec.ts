@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks du client HTTP typés any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access -- tests : mocks du client HTTP typés any */
 import { WikidataService } from './wikidata.service';
 
 describe('WikidataService (validation des entrées interpolées)', () => {
@@ -59,7 +59,7 @@ describe('WikidataService (validation des entrées interpolées)', () => {
   );
 
   it('accepte un nom scientifique valide', async () => {
-    await buildService().getSpeciesByScientificName("Boa constrictor");
+    await buildService().getSpeciesByScientificName('Boa constrictor');
     expect(get).toHaveBeenCalledTimes(1);
     expect(get.mock.calls[0][2].params.query).toContain('"Boa constrictor"');
   });

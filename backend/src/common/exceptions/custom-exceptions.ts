@@ -12,11 +12,7 @@ export class GbifApiException extends HttpException {
 
 export class GbifRateLimitException extends GbifApiException {
   constructor() {
-    super(
-      'Trop de requêtes. Veuillez réessayer plus tard.',
-      429,
-      'RATE_LIMIT',
-    );
+    super('Trop de requêtes. Veuillez réessayer plus tard.', 429, 'RATE_LIMIT');
   }
 }
 
@@ -28,7 +24,7 @@ export class GbifNotFoundException extends GbifApiException {
 
 export class GbifTimeoutException extends GbifApiException {
   constructor() {
-    super('Délai d\'attente dépassé pour GBIF', 504, 'TIMEOUT');
+    super("Délai d'attente dépassé pour GBIF", 504, 'TIMEOUT');
   }
 }
 

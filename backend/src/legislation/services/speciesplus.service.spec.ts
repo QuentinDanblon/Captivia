@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks du client HTTP typés any */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call -- tests : mocks du client HTTP typés any */
 import { HttpException, Logger } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { SpeciesPlusService } from './speciesplus.service';
@@ -62,7 +62,9 @@ describe('SpeciesPlusService', () => {
         const error = await call().catch((e) => e);
         expect(error).toBeInstanceOf(HttpException);
         expect(error.getStatus()).toBe(503);
-        expect(error.getResponse()).toMatchObject({ code: 'INTEGRATION_DISABLED' });
+        expect(error.getResponse()).toMatchObject({
+          code: 'INTEGRATION_DISABLED',
+        });
       }
       expect(http.get).not.toHaveBeenCalled();
       expect(cache.set).not.toHaveBeenCalled();
@@ -78,9 +80,9 @@ describe('SpeciesPlusService', () => {
       const { service, http } = buildService();
       http.get.mockResolvedValue({ data: { taxon_concepts: [{ id: 7 }] } });
 
-      await expect(service.searchByScientificName('Boa constrictor')).resolves.toEqual([
-        { id: 7 },
-      ]);
+      await expect(
+        service.searchByScientificName('Boa constrictor'),
+      ).resolves.toEqual([{ id: 7 }]);
       expect(http.get).toHaveBeenCalledWith(
         'speciesplus',
         'https://api.speciesplus.net/api/v1/taxon_concepts',
@@ -93,7 +95,9 @@ describe('SpeciesPlusService', () => {
 
     it('met en cache une réponse valide', async () => {
       const { service, http, cache } = buildService();
-      http.get.mockResolvedValue({ data: { cites_listings: [{ appendix: 'II' }] } });
+      http.get.mockResolvedValue({
+        data: { cites_listings: [{ appendix: 'II' }] },
+      });
 
       await service.getCitesLegislation(7);
 
@@ -111,7 +115,9 @@ describe('SpeciesPlusService', () => {
       const error = await service.getEULegislation(7).catch((e) => e);
       expect(error).toBeInstanceOf(HttpException);
       expect(error.getStatus()).toBe(503);
-      expect(error.getResponse()).toMatchObject({ code: 'UPSTREAM_UNAVAILABLE' });
+      expect(error.getResponse()).toMatchObject({
+        code: 'UPSTREAM_UNAVAILABLE',
+      });
       expect(cache.set).not.toHaveBeenCalled();
     });
 
@@ -141,7 +147,9 @@ describe('SpeciesPlusService', () => {
         new Error('Request failed with status code 401'),
         {
           response: { status: 401 },
-          config: { headers: { 'X-Authentication-Token': 'super-secret-token' } },
+          config: {
+            headers: { 'X-Authentication-Token': 'super-secret-token' },
+          },
         },
       );
       const { service, http } = buildService();

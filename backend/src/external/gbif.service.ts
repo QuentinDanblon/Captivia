@@ -26,15 +26,19 @@ export class GbifService {
   }
 
   async searchSpecies(query: string, limit: number = 20, offset: number = 0) {
-    const response = await this.http.get('gbif', `${this.gbifBaseUrl}/species/search`, {
-      params: {
-        q: query,
-        limit,
-        offset,
-        rank: 'SPECIES',
-        highertaxonRank: 'SPECIES',
+    const response = await this.http.get(
+      'gbif',
+      `${this.gbifBaseUrl}/species/search`,
+      {
+        params: {
+          q: query,
+          limit,
+          offset,
+          rank: 'SPECIES',
+          highertaxonRank: 'SPECIES',
+        },
       },
-    });
+    );
     return response.data;
   }
 
@@ -44,27 +48,42 @@ export class GbifService {
   }
 
   async getVernacularNames(key: string) {
-    const response = await this.http.get('gbif', this.speciesPath(key, '/vernacularNames'));
+    const response = await this.http.get(
+      'gbif',
+      this.speciesPath(key, '/vernacularNames'),
+    );
     return response.data?.results || [];
   }
 
   async getIucn(key: string) {
-    const response = await this.http.get('gbif', this.speciesPath(key, '/iucn'));
+    const response = await this.http.get(
+      'gbif',
+      this.speciesPath(key, '/iucn'),
+    );
     return response.data;
   }
 
   async getDistributions(key: string) {
-    const response = await this.http.get('gbif', this.speciesPath(key, '/distributions'));
+    const response = await this.http.get(
+      'gbif',
+      this.speciesPath(key, '/distributions'),
+    );
     return response.data?.results || [];
   }
 
   async getMedia(key: string) {
-    const response = await this.http.get('gbif', this.speciesPath(key, '/media'));
+    const response = await this.http.get(
+      'gbif',
+      this.speciesPath(key, '/media'),
+    );
     return response.data?.results || [];
   }
 
   async getMetrics(key: string) {
-    const response = await this.http.get('gbif', this.speciesPath(key, '/metrics'));
+    const response = await this.http.get(
+      'gbif',
+      this.speciesPath(key, '/metrics'),
+    );
     return response.data;
   }
 
@@ -72,9 +91,13 @@ export class GbifService {
     if (!GBIF_KEY_REGEX.test(String(key))) {
       throw new NotFoundException('Species not found');
     }
-    const response = await this.http.get('gbif', `${this.gbifBaseUrl}/occurrence/search`, {
-      params: { speciesKey: key, limit: 1 },
-    });
+    const response = await this.http.get(
+      'gbif',
+      `${this.gbifBaseUrl}/occurrence/search`,
+      {
+        params: { speciesKey: key, limit: 1 },
+      },
+    );
     return {
       count: parseInt(response.data.count, 10),
       limit: response.data.limit,
@@ -96,7 +119,9 @@ export class GbifService {
         circuit: this.http.circuitState('gbif'),
       };
     } catch (error) {
-      this.logger.warn(`GBIF API health check failed: ${describeHttpError(error)}`);
+      this.logger.warn(
+        `GBIF API health check failed: ${describeHttpError(error)}`,
+      );
       return {
         status: 'unhealthy',
         error: error instanceof Error ? error.message : 'unknown error',

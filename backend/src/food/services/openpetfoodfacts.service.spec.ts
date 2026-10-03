@@ -1,17 +1,26 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks du client HTTP typés any */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call -- tests : mocks du client HTTP typés any */
 import { HttpException, Logger } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { OpenPetFoodFactsService } from './openpetfoodfacts.service';
 import { ExternalUnavailableError } from '../../external/http/external-errors';
 
-function httpError(status: number, message = `Request failed with status code ${status}`) {
-  return new AxiosError(message, AxiosError.ERR_BAD_RESPONSE, undefined, {}, {
-    status,
-    data: {},
-    statusText: '',
-    headers: {},
-    config: {} as never,
-  });
+function httpError(
+  status: number,
+  message = `Request failed with status code ${status}`,
+) {
+  return new AxiosError(
+    message,
+    AxiosError.ERR_BAD_RESPONSE,
+    undefined,
+    {},
+    {
+      status,
+      data: {},
+      statusText: '',
+      headers: {},
+      config: {} as never,
+    },
+  );
 }
 
 function buildService(overrides: { stale?: unknown; cached?: unknown } = {}) {
@@ -81,9 +90,14 @@ describe('OpenPetFoodFactsService (résilience)', () => {
 
     it('panne avec cache périmé → sert la dernière fiche connue', async () => {
       const { service, http } = buildService({
-        stale: JSON.stringify({ code: '3017620422003', product_name: 'Ancien' }),
+        stale: JSON.stringify({
+          code: '3017620422003',
+          product_name: 'Ancien',
+        }),
       });
-      http.get.mockRejectedValue(new ExternalUnavailableError('openpetfoodfacts'));
+      http.get.mockRejectedValue(
+        new ExternalUnavailableError('openpetfoodfacts'),
+      );
 
       await expect(service.getProduct('3017620422003')).resolves.toEqual({
         code: '3017620422003',
@@ -121,7 +135,9 @@ describe('OpenPetFoodFactsService (résilience)', () => {
       const { service, http, cache } = buildService({
         stale: JSON.stringify(stale),
       });
-      http.get.mockRejectedValue(new ExternalUnavailableError('openpetfoodfacts'));
+      http.get.mockRejectedValue(
+        new ExternalUnavailableError('openpetfoodfacts'),
+      );
 
       await expect(service.searchProducts('dog')).resolves.toEqual({
         ...stale,

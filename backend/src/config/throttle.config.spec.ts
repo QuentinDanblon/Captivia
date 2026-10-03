@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
+/* eslint-disable @typescript-eslint/unbound-method -- tests : mocks axios/supertest typés any */
 import 'reflect-metadata';
 import { AdvancedSearchController } from '../species/advanced-search.controller';
 import { ApiGatewayController } from '../gateway/api-gateway.controller';

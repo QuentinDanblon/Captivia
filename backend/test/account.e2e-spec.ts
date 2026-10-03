@@ -27,7 +27,13 @@ describe('Account E2E — suppression et export RGPD', () => {
     const email = makeEmail(tag);
     const res = await request(app.getHttpServer())
       .post('/auth/register')
-      .send({ email, password: PASSWORD, locale: 'fr', acceptTerms: true, ageConfirmed: true })
+      .send({
+        email,
+        password: PASSWORD,
+        locale: 'fr',
+        acceptTerms: true,
+        ageConfirmed: true,
+      })
       .expect(201);
     createdEmails.push(email);
     return {

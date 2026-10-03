@@ -93,10 +93,12 @@ describe('HealthContentService', () => {
 
       await service.getSpeciesHealth(999);
 
-      expect(mockPubmedService.searchBySpeciesAndDisease).not.toHaveBeenCalled();
+      expect(
+        mockPubmedService.searchBySpeciesAndDisease,
+      ).not.toHaveBeenCalled();
     });
 
-    it('renvoie les références PubMed réelles de l\'espèce (nom scientifique du profil)', async () => {
+    it("renvoie les références PubMed réelles de l'espèce (nom scientifique du profil)", async () => {
       mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
       mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
         scientificName: 'Boa constrictor',
@@ -133,9 +135,7 @@ describe('HealthContentService', () => {
     });
 
     it('should return null editorial if no content found', async () => {
-      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(
-        null,
-      );
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
 
       const result = await service.getSpeciesHealth(999, undefined, 'fr');
 
@@ -143,9 +143,7 @@ describe('HealthContentService', () => {
     });
 
     it('should use default locale "fr" if not provided', async () => {
-      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(
-        null,
-      );
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
 
       const result = await service.getSpeciesHealth(123);
 
@@ -163,9 +161,7 @@ describe('HealthContentService', () => {
     });
 
     it('should include disclaimer in response', async () => {
-      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(
-        null,
-      );
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
 
       const result = await service.getSpeciesHealth(123);
 
@@ -227,9 +223,7 @@ describe('HealthContentService', () => {
 
   describe('searchPubMed', () => {
     it('should search PubMed with default maxResults', async () => {
-      const mockArticles = [
-        { pmid: '123', title: 'Test article' },
-      ];
+      const mockArticles = [{ pmid: '123', title: 'Test article' }];
       mockPubmedService.searchArticles.mockResolvedValue(mockArticles);
 
       const result = await service.searchPubMed('reptile disease');

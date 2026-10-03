@@ -9,7 +9,14 @@ import { TransformerModule } from '../transformers/transformer.module';
 import { FilterModule } from '../filters/filter.module';
 
 @Module({
-  imports: [WikipediaModule, WikidataModule, ExternalModule, CacheModule, TransformerModule, FilterModule],
+  imports: [
+    WikipediaModule,
+    WikidataModule,
+    ExternalModule,
+    CacheModule,
+    TransformerModule,
+    FilterModule,
+  ],
   controllers: [ApiGatewayController],
   providers: [ApiGatewayService],
   exports: [ApiGatewayService],

@@ -10,10 +10,18 @@ import {
   Req,
   Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { AnimalHealthService } from './animal-health.service';
-import { CreateHealthRecordDto, UpdateHealthRecordDto } from './dto/health-record.dto';
+import {
+  CreateHealthRecordDto,
+  UpdateHealthRecordDto,
+} from './dto/health-record.dto';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @ApiTags('animals')
@@ -25,7 +33,9 @@ export class AnimalHealthController {
   constructor(private readonly healthService: AnimalHealthService) {}
 
   @Get()
-  @ApiOperation({ summary: 'List health records (carnet de santé) for an animal' })
+  @ApiOperation({
+    summary: 'List health records (carnet de santé) for an animal',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async findAll(
     @Req() req: { user: { id: string } },

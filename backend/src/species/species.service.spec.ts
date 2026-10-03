@@ -8,7 +8,13 @@ import { CacheService } from '../cache/cache.service';
 import { GbifService } from '../external/gbif.service';
 import { SpeciesTransformerService } from '../transformers/species-transformer.service';
 import { SpeciesFilterService } from '../filters/species-filter.service';
-import { mockCacheService, mockGbifService, mockTransformerService, mockFilterService, mockSpeciesProfileService } from '../../test/test-mocks';
+import {
+  mockCacheService,
+  mockGbifService,
+  mockTransformerService,
+  mockFilterService,
+  mockSpeciesProfileService,
+} from '../../test/test-mocks';
 
 function upstreamHttpError(status: number) {
   return new AxiosError(
@@ -28,26 +34,42 @@ describe('SpeciesService', () => {
     // Isolation : ni cache frais ni cache périmé par défaut
     mockCacheService.get.mockReset().mockReturnValue(null);
     mockCacheService.getStale.mockReset().mockReturnValue(null);
-    mockTransformerService.transformSearchResults.mockImplementation((results: any[]) => ({
-      results: results ?? [],
-      total: results?.length ?? 0,
-      source: 'gbif',
-      cachedAt: new Date(),
+    mockTransformerService.transformSearchResults.mockImplementation(
+      (results: any[]) => ({
+        results: results ?? [],
+        total: results?.length ?? 0,
+        source: 'gbif',
+        cachedAt: new Date(),
+      }),
+    );
+    mockTransformerService.transformSpecies.mockImplementation((item: any) => ({
+      ...item,
     }));
-    mockTransformerService.transformSpecies.mockImplementation((item: any) => ({ ...item }));
-    mockTransformerService.transformVernacularNames.mockImplementation((arr: any[]) => ({
-      results: (arr ?? []).filter((v: any) => v.language === 'french').map((v: any) => v.name),
-      source: 'gbif',
-      cachedAt: new Date(),
-    }));
-    mockTransformerService.transformMedia.mockImplementation((arr: any[]) => arr ?? []);
-    mockFilterService.applyFilters.mockImplementation((results: any[], _filters: any) => ({
-      results: results ?? [],
-      total: results?.length ?? 0,
-      filtersApplied: [] as string[],
-    }));
+    mockTransformerService.transformVernacularNames.mockImplementation(
+      (arr: any[]) => ({
+        results: (arr ?? [])
+          .filter((v: any) => v.language === 'french')
+          .map((v: any) => v.name),
+        source: 'gbif',
+        cachedAt: new Date(),
+      }),
+    );
+    mockTransformerService.transformMedia.mockImplementation(
+      (arr: any[]) => arr ?? [],
+    );
+    mockFilterService.applyFilters.mockImplementation(
+      (results: any[], _filters: any) => ({
+        results: results ?? [],
+        total: results?.length ?? 0,
+        filtersApplied: [] as string[],
+      }),
+    );
     // Profile DB vide par défaut → fallback GBIF ; détail sans profil local
-    mockSpeciesProfileService.searchFromProfile.mockResolvedValue({ results: [], total: 0, source: 'profile' });
+    mockSpeciesProfileService.searchFromProfile.mockResolvedValue({
+      results: [],
+      total: 0,
+      source: 'profile',
+    });
     mockSpeciesProfileService.getBySpeciesId.mockResolvedValue({
       profile: null,
       feeding: null,
@@ -59,7 +81,10 @@ describe('SpeciesService', () => {
         SpeciesService,
         { provide: CacheService, useValue: mockCacheService },
         { provide: GbifService, useValue: mockGbifService },
-        { provide: SpeciesTransformerService, useValue: mockTransformerService },
+        {
+          provide: SpeciesTransformerService,
+          useValue: mockTransformerService,
+        },
         { provide: SpeciesFilterService, useValue: mockFilterService },
         { provide: SpeciesProfileService, useValue: mockSpeciesProfileService },
       ],
@@ -158,7 +183,9 @@ describe('SpeciesService', () => {
         total: 2,
       });
 
-      const result = await service.searchSpecies('boa', 10, 0, { class: 'Reptilia' } as any);
+      const result = await service.searchSpecies('boa', 10, 0, {
+        class: 'Reptilia',
+      } as any);
 
       expect(mockSpeciesProfileService.searchFromProfile).toHaveBeenCalledWith(
         'boa',
@@ -222,7 +249,11 @@ describe('SpeciesService', () => {
         behavior: { activity: 'nocturne' },
       });
       expect(mockGbifService.getSpecies).toHaveBeenCalledWith('5221172');
-      expect(mockCacheService.set).toHaveBeenCalledWith('species:5221172', expect.any(Object), 86400);
+      expect(mockCacheService.set).toHaveBeenCalledWith(
+        'species:5221172',
+        expect.any(Object),
+        86400,
+      );
     });
 
     it('expose lastReviewedAt de la fiche (W5-04)', async () => {
@@ -234,7 +265,11 @@ describe('SpeciesService', () => {
         habitat: null,
         behavior: null,
       });
-      mockGbifService.getSpecies.mockResolvedValue({ key: 5221172, class: 'Reptilia', rank: 'SPECIES' });
+      mockGbifService.getSpecies.mockResolvedValue({
+        key: 5221172,
+        class: 'Reptilia',
+        rank: 'SPECIES',
+      });
 
       const result = await service.getSpecies('5221172');
 
@@ -289,11 +324,19 @@ describe('SpeciesService', () => {
         source: 'gbif',
       });
       expect(mockGbifService.getVernacularNames).toHaveBeenCalledWith('1');
-      expect(mockCacheService.set).toHaveBeenCalledWith('vernacular:1', expect.any(Object), 43200);
+      expect(mockCacheService.set).toHaveBeenCalledWith(
+        'vernacular:1',
+        expect.any(Object),
+        43200,
+      );
     });
 
     it('should return cached vernacular names when available', async () => {
-      const cachedResult = { results: ['Boa constrictor'], source: 'cache', cachedAt: new Date() };
+      const cachedResult = {
+        results: ['Boa constrictor'],
+        source: 'cache',
+        cachedAt: new Date(),
+      };
 
       mockCacheService.get.mockReturnValue(cachedResult);
 
@@ -319,7 +362,11 @@ describe('SpeciesService', () => {
 
       expect(result).toEqual(mockIucn);
       expect(mockGbifService.getIucn).toHaveBeenCalledWith('1');
-      expect(mockCacheService.set).toHaveBeenCalledWith('iucn:1', mockIucn, 86400);
+      expect(mockCacheService.set).toHaveBeenCalledWith(
+        'iucn:1',
+        mockIucn,
+        86400,
+      );
     });
   });
 
@@ -339,7 +386,11 @@ describe('SpeciesService', () => {
 
       expect(result).toEqual(mockDistributions);
       expect(mockGbifService.getDistributions).toHaveBeenCalledWith('1');
-      expect(mockCacheService.set).toHaveBeenCalledWith('distributions:1', mockDistributions, 86400);
+      expect(mockCacheService.set).toHaveBeenCalledWith(
+        'distributions:1',
+        mockDistributions,
+        86400,
+      );
     });
 
     it('should return cached distributions when available', async () => {
@@ -379,7 +430,11 @@ describe('SpeciesService', () => {
         source: 'gbif',
       });
       expect(mockGbifService.getMedia).toHaveBeenCalledWith('1');
-      expect(mockCacheService.set).toHaveBeenCalledWith('media:1', { results: mockMedia }, 3600);
+      expect(mockCacheService.set).toHaveBeenCalledWith(
+        'media:1',
+        { results: mockMedia },
+        3600,
+      );
     });
 
     it('should return cached media when available', async () => {
@@ -419,7 +474,11 @@ describe('SpeciesService', () => {
 
       expect(result).toEqual(mockMetrics);
       expect(mockGbifService.getMetrics).toHaveBeenCalledWith('1');
-      expect(mockCacheService.set).toHaveBeenCalledWith('metrics:1', mockMetrics, 604800);
+      expect(mockCacheService.set).toHaveBeenCalledWith(
+        'metrics:1',
+        mockMetrics,
+        604800,
+      );
     });
 
     it('should return cached metrics when available', async () => {
@@ -453,7 +512,11 @@ describe('SpeciesService', () => {
 
       expect(result).toEqual(mockCount);
       expect(mockGbifService.countOccurrences).toHaveBeenCalledWith('1');
-      expect(mockCacheService.set).toHaveBeenCalledWith('occurrences:1', mockCount, 604800);
+      expect(mockCacheService.set).toHaveBeenCalledWith(
+        'occurrences:1',
+        mockCount,
+        604800,
+      );
     });
 
     it('should return cached count when available', async () => {
@@ -508,9 +571,13 @@ describe('SpeciesService', () => {
       });
 
       it('disjoncteur ouvert : même repli, sans appel réseau supplémentaire ni 500', async () => {
-        mockGbifService.searchSpecies.mockRejectedValue(new ExternalUnavailableError('gbif'));
+        mockGbifService.searchSpecies.mockRejectedValue(
+          new ExternalUnavailableError('gbif'),
+        );
 
-        await expect(service.searchSpecies('boa', 20, 0)).resolves.toMatchObject({
+        await expect(
+          service.searchSpecies('boa', 20, 0),
+        ).resolves.toMatchObject({
           results: [],
           degraded: true,
         });
@@ -520,7 +587,9 @@ describe('SpeciesService', () => {
       it('disjoncteur ouvert avec résultat périmé en cache : il est servi (stale: true)', async () => {
         const stale = { results: [{ key: 1 }], total: 1, source: 'gbif' };
         mockCacheService.getStale.mockReturnValue(stale);
-        mockGbifService.searchSpecies.mockRejectedValue(new ExternalUnavailableError('gbif'));
+        mockGbifService.searchSpecies.mockRejectedValue(
+          new ExternalUnavailableError('gbif'),
+        );
 
         const result = await service.searchSpecies('boa', 20, 0);
 
@@ -529,7 +598,10 @@ describe('SpeciesService', () => {
       });
 
       it('réponse GBIF valide : mise en cache (1 h) ; un second appel est servi par le cache', async () => {
-        mockGbifService.searchSpecies.mockResolvedValue({ results: [{ key: 1 }], total: 1 });
+        mockGbifService.searchSpecies.mockResolvedValue({
+          results: [{ key: 1 }],
+          total: 1,
+        });
 
         await service.searchSpecies('boa', 20, 0);
         expect(mockCacheService.set).toHaveBeenCalledWith(
@@ -557,7 +629,9 @@ describe('SpeciesService', () => {
       });
 
       it('disjoncteur ouvert + profil local : fiche locale servie, degraded, NON mise en cache', async () => {
-        mockGbifService.getSpecies.mockRejectedValue(new ExternalUnavailableError('gbif'));
+        mockGbifService.getSpecies.mockRejectedValue(
+          new ExternalUnavailableError('gbif'),
+        );
 
         const result = await service.getSpecies('5221172');
 
@@ -583,7 +657,9 @@ describe('SpeciesService', () => {
       it('panne GBIF + fiche périmée en cache : la fiche complète périmée est servie', async () => {
         const stale = { key: 5221172, class: 'Reptilia', source: 'profile' };
         mockCacheService.getStale.mockReturnValue(stale);
-        mockGbifService.getSpecies.mockRejectedValue(new ExternalUnavailableError('gbif'));
+        mockGbifService.getSpecies.mockRejectedValue(
+          new ExternalUnavailableError('gbif'),
+        );
 
         await expect(service.getSpecies('5221172')).resolves.toEqual({
           ...stale,
@@ -612,7 +688,9 @@ describe('SpeciesService', () => {
           habitat: null,
           behavior: null,
         });
-        mockGbifService.getSpecies.mockRejectedValue(new ExternalUnavailableError('gbif'));
+        mockGbifService.getSpecies.mockRejectedValue(
+          new ExternalUnavailableError('gbif'),
+        );
 
         const error = await service.getSpecies('999').catch((e) => e);
 
@@ -625,11 +703,15 @@ describe('SpeciesService', () => {
     describe('sous-ressources GBIF', () => {
       it('404 → NotFoundException', async () => {
         mockGbifService.getMedia.mockRejectedValue(upstreamHttpError(404));
-        await expect(service.getMedia('1')).rejects.toBeInstanceOf(NotFoundException);
+        await expect(service.getMedia('1')).rejects.toBeInstanceOf(
+          NotFoundException,
+        );
       });
 
       it('panne sans cache → 503 (jamais 500) et rien en cache', async () => {
-        mockGbifService.getDistributions.mockRejectedValue(upstreamHttpError(502));
+        mockGbifService.getDistributions.mockRejectedValue(
+          upstreamHttpError(502),
+        );
 
         const error = await service.getDistributions('1').catch((e) => e);
 
@@ -639,7 +721,9 @@ describe('SpeciesService', () => {
       });
 
       it('disjoncteur ouvert + cache périmé → valeurs périmées servies', async () => {
-        mockGbifService.getVernacularNames.mockRejectedValue(new ExternalUnavailableError('gbif'));
+        mockGbifService.getVernacularNames.mockRejectedValue(
+          new ExternalUnavailableError('gbif'),
+        );
         mockCacheService.getStale.mockReturnValue({ results: ['Boa'] });
 
         await expect(service.getVernacularNames('1')).resolves.toEqual({
@@ -647,13 +731,21 @@ describe('SpeciesService', () => {
           source: 'stale-cache',
         });
 
-        mockGbifService.getMetrics.mockRejectedValue(new ExternalUnavailableError('gbif'));
+        mockGbifService.getMetrics.mockRejectedValue(
+          new ExternalUnavailableError('gbif'),
+        );
         mockCacheService.getStale.mockReturnValue({ usage: 1 });
         await expect(service.getMetrics('1')).resolves.toEqual({ usage: 1 });
 
-        mockGbifService.getIucn.mockRejectedValue(new ExternalUnavailableError('gbif'));
-        mockCacheService.getStale.mockReturnValue({ iucnRedListCategory: 'LC' });
-        await expect(service.getIucn('1')).resolves.toEqual({ iucnRedListCategory: 'LC' });
+        mockGbifService.getIucn.mockRejectedValue(
+          new ExternalUnavailableError('gbif'),
+        );
+        mockCacheService.getStale.mockReturnValue({
+          iucnRedListCategory: 'LC',
+        });
+        await expect(service.getIucn('1')).resolves.toEqual({
+          iucnRedListCategory: 'LC',
+        });
 
         expect(mockCacheService.set).not.toHaveBeenCalled();
       });

@@ -9,12 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { RateLimitGuard } from '../../common/guards/rate-limit.guard';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiQuery,
-  ApiResponse,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { WikidataService } from './wikidata.service';
 import { isValidQid } from '../http-safety';
 import { toUpstreamHttpException } from '../http/external-errors';
@@ -103,7 +98,10 @@ export class WikidataController {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw toUpstreamHttpException(error, 'Failed to fetch conservation status');
+      throw toUpstreamHttpException(
+        error,
+        'Failed to fetch conservation status',
+      );
     }
   }
 

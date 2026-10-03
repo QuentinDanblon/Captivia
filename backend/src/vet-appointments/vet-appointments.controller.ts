@@ -10,7 +10,12 @@ import {
   Req,
   Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { VetAppointmentsService } from './vet-appointments.service';
 import {
@@ -25,10 +30,14 @@ import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class VetAppointmentsController {
-  constructor(private readonly vetAppointmentsService: VetAppointmentsService) {}
+  constructor(
+    private readonly vetAppointmentsService: VetAppointmentsService,
+  ) {}
 
   @Get()
-  @ApiOperation({ summary: 'List vet appointments for an animal (sorted by date desc)' })
+  @ApiOperation({
+    summary: 'List vet appointments for an animal (sorted by date desc)',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async findAll(
     @Req() req: { user: { id: string } },
@@ -59,7 +68,12 @@ export class VetAppointmentsController {
     @Param('appointmentId') appointmentId: string,
     @Body() dto: UpdateVetAppointmentDto,
   ) {
-    return this.vetAppointmentsService.update(animalId, appointmentId, req.user.id, dto);
+    return this.vetAppointmentsService.update(
+      animalId,
+      appointmentId,
+      req.user.id,
+      dto,
+    );
   }
 
   @Delete(':appointmentId')
@@ -71,6 +85,10 @@ export class VetAppointmentsController {
     @Param('animalId') animalId: string,
     @Param('appointmentId') appointmentId: string,
   ) {
-    return this.vetAppointmentsService.remove(animalId, appointmentId, req.user.id);
+    return this.vetAppointmentsService.remove(
+      animalId,
+      appointmentId,
+      req.user.id,
+    );
   }
 }

@@ -27,7 +27,11 @@ export class OpenDataController {
   @Get('wikipedia')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche sur Wikipedia' })
-  @ApiQuery({ name: 'title', required: true, description: 'Titre de l\'article' })
+  @ApiQuery({
+    name: 'title',
+    required: true,
+    description: "Titre de l'article",
+  })
   @ApiResponse({ status: 200, description: 'Données Wikipedia' })
   async searchWikipedia(@Query() query: ExternalTitleDto) {
     return this.openDataService.searchWikipedia(query.title);
@@ -39,7 +43,7 @@ export class OpenDataController {
   @Get('wikidata')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche sur Wikidata' })
-  @ApiQuery({ name: 'title', required: true, description: 'Titre de l\'entité' })
+  @ApiQuery({ name: 'title', required: true, description: "Titre de l'entité" })
   @ApiResponse({ status: 200, description: 'Données Wikidata' })
   async searchWikidata(@Query() query: ExternalTitleDto) {
     return this.openDataService.searchWikidata(query.title);
@@ -88,10 +92,18 @@ export class OpenDataController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche iNaturalist par taxon ID' })
   @ApiQuery({ name: 'taxonId', required: true, description: 'ID du taxon' })
-  @ApiQuery({ name: 'limit', required: false, default: 20, description: 'Nombre de résultats' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    default: 20,
+    description: 'Nombre de résultats',
+  })
   @ApiResponse({ status: 200, description: 'Observations iNaturalist' })
   async searchINaturalistByTaxon(@Query() query: ExternalTaxonQueryDto) {
-    return this.openDataService.searchINaturalistByTaxon(query.taxonId, query.limit ?? 20);
+    return this.openDataService.searchINaturalistByTaxon(
+      query.taxonId,
+      query.limit ?? 20,
+    );
   }
 
   /**
@@ -101,9 +113,17 @@ export class OpenDataController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Recherche EOL par taxon ID' })
   @ApiQuery({ name: 'taxonId', required: true, description: 'ID du taxon' })
-  @ApiQuery({ name: 'limit', required: false, default: 20, description: 'Nombre de résultats' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    default: 20,
+    description: 'Nombre de résultats',
+  })
   @ApiResponse({ status: 200, description: 'Données EOL' })
   async searchEOLByTaxon(@Query() query: ExternalTaxonQueryDto) {
-    return this.openDataService.searchEOLByTaxon(query.taxonId, query.limit ?? 20);
+    return this.openDataService.searchEOLByTaxon(
+      query.taxonId,
+      query.limit ?? 20,
+    );
   }
 }

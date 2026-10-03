@@ -150,11 +150,7 @@ describe('RoutinesService', () => {
       mockPrismaService.animal.findUnique.mockResolvedValue(mockAnimal);
       mockPrismaService.routine.create.mockResolvedValue(mockRoutine);
 
-      await service.createRoutine(
-        mockUserId,
-        mockAnimalId,
-        dtoWithoutActive,
-      );
+      await service.createRoutine(mockUserId, mockAnimalId, dtoWithoutActive);
 
       expect(mockPrismaService.routine.create).toHaveBeenCalledWith({
         data: expect.objectContaining({
