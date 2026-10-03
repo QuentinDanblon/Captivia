@@ -36,4 +36,32 @@ describe('ui/Figure', () => {
     expect(container.querySelector('svg[data-kind="reptile"]')).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: 'Jane Doe' })).not.toBeInTheDocument();
   });
+
+  it('variantes responsives : <picture> AVIF + WebP, chargement prioritaire, crédit en cartouche', () => {
+    const { container } = render(
+      <Figure
+        src="/images/boa-800.webp"
+        srcSet="/images/boa-480.webp 480w, /images/boa-800.webp 800w"
+        sources={[{ type: 'image/avif', srcSet: '/images/boa-480.avif 480w, /images/boa-800.avif 800w' }]}
+        sizes="50vw"
+        alt="Boa"
+        priority
+        objectPosition="70% 40%"
+        creditPlacement="overlay"
+        credit={credit}
+      />,
+    );
+    const source = container.querySelector('picture > source')!;
+    expect(source).toHaveAttribute('type', 'image/avif');
+    expect(source).toHaveAttribute('sizes', '50vw');
+    const img = screen.getByRole('img', { name: 'Boa' });
+    expect(img).toHaveAttribute('srcset', expect.stringContaining('boa-800.webp 800w'));
+    expect(img).toHaveAttribute('loading', 'eager');
+    expect(img).toHaveAttribute('fetchpriority', 'high');
+    expect(img).toHaveStyle({ objectPosition: '70% 40%' });
+    // Crédit posé sur la photo, pas en légende, toujours lié à la source et à la licence.
+    expect(container.querySelector('figcaption')).toBeNull();
+    expect(container.querySelector('.cv-photo .cv-photo__credit')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Jane Doe' })).toHaveAttribute('href', credit.sourceUrl);
+  });
 });

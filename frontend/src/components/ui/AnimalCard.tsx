@@ -1,5 +1,5 @@
 import type { ElementType, ReactNode } from 'react';
-import Figure, { type PhotoCredit } from './Figure';
+import Figure, { type FigureSource, type PhotoCredit } from './Figure';
 import MediaCard from './MediaCard';
 import type { SilhouetteKind } from './AnimalSilhouette';
 
@@ -15,7 +15,16 @@ export interface AnimalCardProps {
   /** Binôme latin de l'espèce. */
   latin?: string;
   /** Photo de l'animal (crédit requis s'il ne s'agit pas d'une photo de l'utilisateur). */
-  photo?: { src: string; alt: string; credit: PhotoCredit };
+  photo?: {
+    src: string;
+    alt: string;
+    credit: PhotoCredit;
+    /** Variantes responsives et placement du crédit, transmis à `Figure`. */
+    srcSet?: string;
+    sources?: FigureSource[];
+    sizes?: string;
+    creditPlacement?: 'caption' | 'overlay' | 'external';
+  };
   /** Silhouette de repli (classe animale). */
   kind?: SilhouetteKind;
   /** Pastilles d'état (`TaskPill`, `Badge`, `PremiumBadge`). */
@@ -55,7 +64,17 @@ export default function AnimalCard({
   className,
 }: AnimalCardProps) {
   const media = photo ? (
-    <Figure src={photo.src} alt={photo.alt} credit={photo.credit} ratio="4/3" fallbackKind={kind} />
+    <Figure
+      src={photo.src}
+      alt={photo.alt}
+      credit={photo.credit}
+      srcSet={photo.srcSet}
+      sources={photo.sources}
+      sizes={photo.sizes}
+      creditPlacement={photo.creditPlacement}
+      ratio="4/3"
+      fallbackKind={kind}
+    />
   ) : (
     <Figure ratio="4/3" fallbackKind={kind} />
   );

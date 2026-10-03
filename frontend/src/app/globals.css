@@ -1297,6 +1297,22 @@
     place-items: center;
     color: var(--ink-3);
   }
+  /* Crédit en cartouche (Figure creditPlacement="overlay") : papier presque opaque, au-dessus du grain. */
+  .cv-photo__credit {
+    position: absolute;
+    z-index: 1;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    max-width: calc(100% - 1rem);
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-control);
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    color: var(--ink);
+  }
+  .cv-photo__credit[data-corner='top'] {
+    top: 0.5rem;
+    bottom: auto;
+  }
 
   /* ---------------------------------------------------------------------- */
   /* Pied de page                                                             */

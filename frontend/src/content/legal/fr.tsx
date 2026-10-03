@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { HOSTS, LEGAL, LEGAL_ROUTES } from '@/lib/legal';
 import { A, Field, ILink, P, Table, UL, type LegalContent } from './ui';
+import { PhotoCreditsTable } from './photos';
 
 /**
  * Contenu des documents légaux — version française (version de référence).
@@ -711,11 +712,27 @@ export function buildFrContent(locale: string): LegalContent {
           ),
         },
         {
+          id: 'photographies',
+          title: 'Photographies',
+          body: (
+            <>
+              <P>
+                Les photographies d&apos;animaux et de nature du site proviennent de{' '}
+                <A href="https://commons.wikimedia.org">Wikimedia Commons</A>. Leur licence a été vérifiée sur la
+                page de chaque fichier ; aucune n&apos;est générée par une intelligence artificielle. Chaque photo
+                est créditée là où elle s&apos;affiche ; les adaptations des photos sous licence CC BY-SA sont
+                diffusées sous la même licence.
+              </P>
+              <PhotoCreditsTable lang="fr" />
+            </>
+          ),
+        },
+        {
           id: 'logiciels',
           title: 'Polices et icônes',
           body: (
             <UL>
-              <li>Polices Inter et JetBrains Mono : SIL Open Font License 1.1.</li>
+              <li>Polices Fraunces, IBM Plex Sans et IBM Plex Mono : SIL Open Font License 1.1.</li>
               <li>Icônes Lucide : licence ISC.</li>
             </UL>
           ),
