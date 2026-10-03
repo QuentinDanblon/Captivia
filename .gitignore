@@ -41,3 +41,7 @@ frontend/test-results/
 # Misc artifacts
 frontend/frontend@0.1.0
 frontend/next
+
+# Python
+__pycache__/
+*.pyc
