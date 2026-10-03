@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
 import { envValidationSchema, isExampleJwtSecret } from './env.validation';
 
 const STRONG_SECRET = 'k3Jf9sLq2Zx8Vb7Nm1Pw4Rt6Yu0Io5Ae3Dg7Hh9Jk2L';
 
 function validate(env: Record<string, unknown>) {
-  return envValidationSchema.validate(env, {
+  const result = envValidationSchema.validate(env, {
     allowUnknown: true,
     abortEarly: false,
   });
+  return { ...result, value: result.value as Record<string, unknown> };
 }
 
 const baseProd = {
@@ -61,6 +61,71 @@ describe('envValidationSchema', () => {
           REVENUECAT_WEBHOOK_SECRET: STRONG_SECRET,
         }).error,
       ).toBeUndefined();
+    });
+
+    it('communauté : désactivée par défaut ; activée, elle exige le pilote s3 complet', () => {
+      expect(validate(baseProd).value.COMMUNITY_ENABLED).toBe('false');
+      expect(validate(baseProd).value.MEDIA_DRIVER).toBe('local');
+      expect(
+        validate({ ...baseProd, COMMUNITY_ENABLED: 'true' }).error?.message,
+      ).toContain('MEDIA_DRIVER');
+      expect(
+        validate({
+          ...baseProd,
+          COMMUNITY_ENABLED: 'true',
+          MEDIA_DRIVER: 'local',
+        }).error?.message,
+      ).toContain('MEDIA_DRIVER');
+      const missing = validate({
+        ...baseProd,
+        COMMUNITY_ENABLED: 'true',
+        MEDIA_DRIVER: 's3',
+      }).error?.message;
+      for (const name of [
+        'MEDIA_PUBLIC_BASE_URL',
+        'MEDIA_BUCKET',
+        'S3_ACCESS_KEY_ID',
+        'S3_SECRET_ACCESS_KEY',
+      ]) {
+        expect(missing).toContain(name);
+      }
+      const ok = validate({
+        ...baseProd,
+        COMMUNITY_ENABLED: 'true',
+        MEDIA_DRIVER: 's3',
+        MEDIA_BUCKET: 'captivia-media',
+        MEDIA_PUBLIC_BASE_URL: 'https://media.captivia.example',
+        S3_ENDPOINT: 'https://acc.r2.cloudflarestorage.com',
+        S3_ACCESS_KEY_ID: 'key',
+        S3_SECRET_ACCESS_KEY: 'secret',
+      });
+      expect(ok.error).toBeUndefined();
+      expect(ok.value).toMatchObject({
+        S3_REGION: 'auto',
+        COMMUNITY_HIDE_THRESHOLD: 3,
+        COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS: 7,
+        COMMUNITY_POSTS_PER_HOUR: 5,
+        COMMUNITY_COMMENTS_PER_MINUTE: 5,
+        MEDIA_MAX_BYTES: 8 * 1024 * 1024,
+      });
+    });
+
+    it('communauté : bornes des réglages anti-abus', () => {
+      expect(
+        validate({ ...baseProd, COMMUNITY_HIDE_THRESHOLD: 0 }).error?.message,
+      ).toContain('COMMUNITY_HIDE_THRESHOLD');
+      expect(
+        validate({ ...baseProd, COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS: -1 })
+          .error?.message,
+      ).toContain('COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS');
+      expect(
+        validate({ ...baseProd, MEDIA_MAX_BYTES: 50 * 1024 * 1024 }).error
+          ?.message,
+      ).toContain('MEDIA_MAX_BYTES');
+      expect(
+        validate({ ...baseProd, COMMUNITY_CONTACT_EMAIL: 'pas-un-email' }).error
+          ?.message,
+      ).toContain('COMMUNITY_CONTACT_EMAIL');
     });
 
     it('accepte un JWT_SECRET de 32 caractères', () => {
@@ -165,6 +230,30 @@ describe('envValidationSchema', () => {
     it.each(['0', '-1', '1.5', 'abc', '4000'])('refuse %s', (value) => {
       const { error } = validate({ ...baseProd, GUEST_RETENTION_DAYS: value });
       expect(error?.message).toContain('GUEST_RETENTION_DAYS');
+    });
+  });
+
+  describe('intégrations externes (W3-05) : variables optionnelles', () => {
+    it('SPECIESPLUS_API_TOKEN, NCBI_API_KEY et NCBI_EMAIL sont facultatifs (absents ou vides)', () => {
+      expect(validate(baseProd).error).toBeUndefined();
+      const empty = validate({
+        ...baseProd,
+        SPECIESPLUS_API_TOKEN: '',
+        NCBI_API_KEY: '',
+        NCBI_EMAIL: '',
+      });
+      expect(empty.error).toBeUndefined();
+    });
+
+    it('accepte des valeurs renseignées', () => {
+      const { error, value } = validate({
+        ...baseProd,
+        SPECIESPLUS_API_TOKEN: 'jeton',
+        NCBI_API_KEY: 'cle',
+        NCBI_EMAIL: 'contact@example.test',
+      });
+      expect(error).toBeUndefined();
+      expect(value.SPECIESPLUS_API_TOKEN).toBe('jeton');
     });
   });
 

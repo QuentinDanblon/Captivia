@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as request from 'supertest';
+import { IdBody, bodyOf, httpServer } from './utils/http';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcryptjs';
 import { AppModule } from '../src/app.module';
@@ -16,6 +17,13 @@ const PASSWORD = 'ModuleD123!';
 
 // Gecko léopard (Eublepharis macularius) — catégorie reptile → 3 modèles seedés
 const SPECIES_GECKO = 5221172;
+
+interface RoutineTemplateBody {
+  type: string;
+  frequency: string;
+  order: number;
+  active: boolean;
+}
 
 const VALID_TYPES = ['nourrissage', 'entretien', 'uvb', 'controle'];
 const VALID_FREQUENCIES = [
@@ -54,13 +62,17 @@ describe('Module D E2E — modèles de routines par défaut par espèce', () => 
     return { email, token, userId: user.id };
   }
 
-  async function createAnimal(token: string, name: string, speciesId = SPECIES_GECKO): Promise<string> {
-    const res = await request(app.getHttpServer())
+  async function createAnimal(
+    token: string,
+    name: string,
+    speciesId = SPECIES_GECKO,
+  ): Promise<string> {
+    const res = await request(httpServer(app))
       .post('/users/me/animals')
       .set('Authorization', `Bearer ${token}`)
       .send({ speciesId, name, sex: 'male' })
       .expect(201);
-    return res.body.id as string;
+    return bodyOf<IdBody>(res).id;
   }
 
   beforeAll(async () => {
@@ -101,16 +113,17 @@ describe('Module D E2E — modèles de routines par défaut par espèce', () => 
       token = acc.token;
       animalId = await createAnimal(token, 'Rango Gecko');
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/routine-templates`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
       expect(Array.isArray(res.body)).toBe(true);
-      expect(res.body.length).toBeGreaterThanOrEqual(1);
+      const templates = bodyOf<RoutineTemplateBody[]>(res);
+      expect(templates.length).toBeGreaterThanOrEqual(1);
 
       // Champs du modèle présents
-      for (const tpl of res.body) {
+      for (const tpl of templates) {
         expect(tpl).toHaveProperty('id');
         expect(tpl).toHaveProperty('speciesId', SPECIES_GECKO);
         expect(VALID_TYPES).toContain(tpl.type);
@@ -121,24 +134,24 @@ describe('Module D E2E — modèles de routines par défaut par espèce', () => 
       }
 
       // Tri par order ascendant
-      const orders = res.body.map((t: { order: number }) => t.order);
+      const orders = templates.map((t) => t.order);
       expect(orders).toEqual([...orders].sort((a, b) => a - b));
 
       // Reptile → nourrissage + UVB + entretien (les 3 types attendus)
-      const types = res.body.map((t: { type: string }) => t.type);
+      const types = templates.map((t) => t.type);
       expect(types).toContain('nourrissage');
       expect(types).toContain('uvb');
       expect(types).toContain('entretien');
     });
 
     it('sans token → 401', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get(`/users/me/animals/${animalId}/routine-templates`)
         .expect(401);
     });
 
     it('animal inconnu → 404', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get(`/users/me/animals/${crypto.randomUUID()}/routine-templates`)
         .set('Authorization', `Bearer ${token}`)
         .expect(404);
@@ -146,9 +159,12 @@ describe('Module D E2E — modèles de routines par défaut par espèce', () => 
 
     it('animal d’un autre utilisateur → 403', async () => {
       const other = await createUser(makeEmail('other'));
-      const otherAnimalId = await createAnimal(other.token, 'Animal de l’autre');
+      const otherAnimalId = await createAnimal(
+        other.token,
+        'Animal de l’autre',
+      );
 
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get(`/users/me/animals/${otherAnimalId}/routine-templates`)
         .set('Authorization', `Bearer ${token}`)
         .expect(403);

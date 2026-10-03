@@ -2,6 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { createTestApp } from './utils/create-app';
 import { PrismaService } from '../src/prisma/prisma.service';
+import { bodyOf, AuthBody } from './utils/http';
 
 jest.setTimeout(60000);
 
@@ -15,6 +16,28 @@ const dayOffset = (n: number): string => {
 };
 const at = (day: string, hhmm = '08:00'): Date =>
   new Date(`${day}T${hhmm}:00.000Z`);
+
+/** Forme (partielle) de la réponse de l'agenda et du flux calendrier consultée par ces tests. */
+interface AgendaItem {
+  date: string;
+  day: string;
+  type: string;
+  sourceId: string;
+  animalId: string;
+  animalName: string;
+  title: string;
+  detail?: string;
+  status: string;
+}
+interface AgendaBody {
+  from: string;
+  to: string;
+  truncated: boolean;
+  items: AgendaItem[];
+  feedPath: string;
+  token: string;
+  active: boolean;
+}
 
 describe('Agenda des soins E2E', () => {
   let app: INestApplication;
@@ -40,17 +63,17 @@ describe('Agenda des soins E2E', () => {
         ...TERMS,
       })
       .expect(201);
-    userIds.push(res.body.user.id);
+    userIds.push(bodyOf<AuthBody>(res).user.id);
     return {
-      token: res.body.accessToken as string,
-      id: res.body.user.id as string,
+      token: bodyOf<AuthBody>(res).accessToken,
+      id: bodyOf<AuthBody>(res).user.id,
     };
   };
   const auth = (t: string) => ({ Authorization: `Bearer ${t}` });
   const get = (path: string, t = tokenA) => request(url).get(path).set(auth(t));
 
   beforeAll(async () => {
-    ({ app, url } = await createTestApp({ offlineGbif: true }));
+    ({ app, url } = await createTestApp());
     prisma = app.get(PrismaService);
 
     ({ token: tokenA, id: userA } = await register('a'));
@@ -191,10 +214,10 @@ describe('Agenda des soins E2E', () => {
       const res = await get(
         `/users/me/agenda?from=${dayOffset(0)}&to=${dayOffset(12)}`,
       ).expect(200);
-      const { items } = res.body;
-      expect(res.body.from).toBe(dayOffset(0));
-      expect(res.body.to).toBe(dayOffset(12));
-      expect(res.body.truncated).toBe(false);
+      const { items } = bodyOf<AgendaBody>(res);
+      expect(bodyOf<AgendaBody>(res).from).toBe(dayOffset(0));
+      expect(bodyOf<AgendaBody>(res).to).toBe(dayOffset(12));
+      expect(bodyOf<AgendaBody>(res).truncated).toBe(false);
 
       const types = new Set(items.map((i: { type: string }) => i.type));
       expect(types).toEqual(
@@ -305,16 +328,16 @@ describe('Agenda des soins E2E', () => {
       const res = await get(
         `/users/me/agenda?from=${dayOffset(1)}&to=${dayOffset(1)}`,
       ).expect(200);
-      const r = res.body.items.find(
+      const r = bodyOf<AgendaBody>(res).items.find(
         (i: { sourceId: string }) => i.sourceId === rexRoutineId,
       );
-      expect(r.status).toBe('done');
+      expect(r!.status).toBe('done');
     });
 
     it("applique des valeurs par défaut (30 jours à partir d'aujourd'hui)", async () => {
       const res = await get('/users/me/agenda').expect(200);
-      expect(res.body.from).toBe(dayOffset(0));
-      expect(res.body.to).toBe(dayOffset(29));
+      expect(bodyOf<AgendaBody>(res).from).toBe(dayOffset(0));
+      expect(bodyOf<AgendaBody>(res).to).toBe(dayOffset(29));
     });
 
     it("ne renvoie JAMAIS les données d'un autre utilisateur (isolation stricte)", async () => {
@@ -324,7 +347,7 @@ describe('Agenda des soins E2E', () => {
       ).expect(200);
       expect(JSON.stringify(a.body)).not.toMatch(/SECRET|Secret/);
       expect(
-        a.body.items.every((i: { animalId: string }) =>
+        bodyOf<AgendaBody>(a).items.every((i: { animalId: string }) =>
           [rexId, miloId].includes(i.animalId),
         ),
       ).toBe(true);
@@ -333,9 +356,9 @@ describe('Agenda des soins E2E', () => {
         `/users/me/agenda?from=${dayOffset(0)}&to=${dayOffset(12)}`,
         tokenB,
       ).expect(200);
-      expect(b.body.items.length).toBeGreaterThan(0);
+      expect(bodyOf<AgendaBody>(b).items.length).toBeGreaterThan(0);
       expect(
-        b.body.items.every(
+        bodyOf<AgendaBody>(b).items.every(
           (i: { animalId: string }) => i.animalId === secretAnimalId,
         ),
       ).toBe(true);
@@ -385,10 +408,12 @@ describe('Agenda des soins E2E', () => {
         .post('/users/me/agenda/calendar-token')
         .set(auth(tokenA))
         .expect(201);
-      feedToken = res.body.token;
+      feedToken = bodyOf<AgendaBody>(res).token;
       expect(feedToken).toMatch(/^[A-Za-z0-9_-]{43}$/);
-      expect(res.body.feedPath).toBe(`/users/me/agenda.ics?token=${feedToken}`);
-      expect(res.body.active).toBe(true);
+      expect(bodyOf<AgendaBody>(res).feedPath).toBe(
+        `/users/me/agenda.ics?token=${feedToken}`,
+      );
+      expect(bodyOf<AgendaBody>(res).active).toBe(true);
 
       const stored = await prisma.user.findUnique({
         where: { id: userA },
@@ -401,7 +426,9 @@ describe('Agenda des soins E2E', () => {
         (await get('/users/me/agenda/calendar-token').expect(200)).body,
       ).toEqual({ active: true });
 
-      const ics = await request(url).get(res.body.feedPath).expect(200);
+      const ics = await request(url)
+        .get(bodyOf<AgendaBody>(res).feedPath)
+        .expect(200);
       expect(ics.headers['content-type']).toMatch(
         /^text\/calendar; charset=utf-8/,
       );
@@ -428,7 +455,9 @@ describe('Agenda des soins E2E', () => {
         .post('/users/me/agenda/calendar-token')
         .set(auth(tokenB))
         .expect(201);
-      const ics = await request(url).get(resB.body.feedPath).expect(200);
+      const ics = await request(url)
+        .get(bodyOf<AgendaBody>(resB).feedPath)
+        .expect(200);
       expect(ics.text).toContain('Secret');
       expect(ics.text).not.toMatch(/Rex|Milo|Dr Martin/);
     });
@@ -438,12 +467,12 @@ describe('Agenda des soins E2E', () => {
         .post('/users/me/agenda/calendar-token')
         .set(auth(tokenA))
         .expect(201);
-      expect(res.body.token).not.toBe(feedToken);
+      expect(bodyOf<AgendaBody>(res).token).not.toBe(feedToken);
       await request(url)
         .get(`/users/me/agenda.ics?token=${feedToken}`)
         .expect(401);
-      await request(url).get(res.body.feedPath).expect(200);
-      feedToken = res.body.token;
+      await request(url).get(bodyOf<AgendaBody>(res).feedPath).expect(200);
+      feedToken = bodyOf<AgendaBody>(res).token;
     });
 
     it('révoquer désactive le flux', async () => {
@@ -551,13 +580,9 @@ describe('Agenda des soins E2E', () => {
     });
 
     const itemsOf = async (from: string, to: string, sourceId: string) =>
-      (
-        (
-          await get(`/users/me/agenda?from=${from}&to=${to}`, tokenP).expect(
-            200,
-          )
-        ).body.items as { sourceId: string; date: string; day: string }[]
-      ).filter((i) => i.sourceId === sourceId);
+      bodyOf<AgendaBody>(
+        await get(`/users/me/agenda?from=${from}&to=${to}`, tokenP).expect(200),
+      ).items.filter((i) => i.sourceId === sourceId);
 
     it('« 08:00 » à Paris = 06:00Z en été et 07:00Z en hiver ; « 23:30 » reste sur le jour J local', async () => {
       expect(await itemsOf('2026-07-15', '2026-07-15', matinId)).toEqual([
@@ -640,9 +665,12 @@ describe('Agenda des soins E2E', () => {
         tokenP,
       ).expect(200);
       expect(
-        (after.body.items as { sourceId: string; status: string }[]).find(
-          (i) => i.sourceId === matinId,
-        )?.status,
+        (
+          bodyOf<AgendaBody>(after).items as {
+            sourceId: string;
+            status: string;
+          }[]
+        ).find((i) => i.sourceId === matinId)?.status,
       ).toBe('skipped');
     });
 
@@ -651,7 +679,9 @@ describe('Agenda des soins E2E', () => {
         .post('/users/me/agenda/calendar-token')
         .set(auth(tokenP))
         .expect(201);
-      const ics = (await request(url).get(res.body.feedPath).expect(200)).text;
+      const ics = (
+        await request(url).get(bodyOf<AgendaBody>(res).feedPath).expect(200)
+      ).text;
       const matins = icsEvents(ics).filter((e) =>
         e.summary.startsWith('Matin - Rex'),
       );
@@ -729,12 +759,12 @@ describe('Agenda des soins E2E', () => {
         `/users/me/agenda?from=${dayOffset(0)}&to=${dayOffset(91)}`,
         tokenQ,
       ).expect(200);
-      const items = res.body.items as {
+      const items = bodyOf<AgendaBody>(res).items as {
         type: string;
         title: string;
         date: string;
       }[];
-      expect(res.body.truncated).toBe(true);
+      expect(bodyOf<AgendaBody>(res).truncated).toBe(true);
       expect(items.length).toBeLessThanOrEqual(2500);
       const titles = new Set(items.map((i) => i.title));
       expect(titles.has('Dr Proche')).toBe(true);
@@ -754,7 +784,9 @@ describe('Agenda des soins E2E', () => {
         .post('/users/me/agenda/calendar-token')
         .set(auth(tokenQ))
         .expect(201);
-      const ics = (await request(url).get(res.body.feedPath).expect(200)).text;
+      const ics = (
+        await request(url).get(bodyOf<AgendaBody>(res).feedPath).expect(200)
+      ).text;
       const summaries = icsEvents(ics).map((e) => e.summary);
       expect(summaries.some((s) => s.includes('Dr Proche'))).toBe(true);
       expect(summaries.some((s) => s.includes('Dr Lointain'))).toBe(true);

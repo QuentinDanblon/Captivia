@@ -7,6 +7,7 @@ import { Link, usePathname } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { BrandMark } from '@/components/ui/BrandMark';
 import { GUEST_UPGRADE_PATH } from '@/lib/guest';
+import { useCommunityAvailability } from '@/components/community/useCommunityAvailability';
 
 export interface AppDestination {
   href: string;
@@ -17,20 +18,25 @@ export interface AppDestination {
   match: string[];
   /** Destination annoncée mais pas encore ouverte : affichée « bientôt », sans lien (pas de lien mort). */
   soon?: boolean;
+  /**
+   * Volet ouvert seulement si l'API le confirme (`community` : drapeau de build + sonde de
+   * `/community/rules`, src/lib/community.ts) ; « bientôt » tant que la réponse n'est pas venue.
+   */
+  feature?: 'community';
 }
 
 /**
  * Destinations de l'app : 5 au maximum (barre d'onglets mobile). L'animal est le centre :
  * « Mes animaux » ouvre le tableau de bord du jour. L'abonnement et les notifications vivent
- * sous « Compte » (/parametres/*), la recherche sous « Espèces ». « Communauté » est réservée
- * (volet à venir, cf. docs/PRODUCT.md) : il suffira de retirer `soon` et de donner sa route.
+ * sous « Compte » (/parametres/*), la recherche sous « Espèces ». « Communauté » ne devient un lien
+ * que si l'API répond (route `/community/*` présente) : sinon « Bientôt », sans lien mort.
  */
 export const APP_DESTINATIONS: AppDestination[] = [
   { href: '/mes-animaux', labelKey: 'common.myAnimals', icon: PawPrint, match: ['/mes-animaux'] },
   { href: '/agenda', labelKey: 'nav.agenda', icon: CalendarDays, match: ['/agenda'] },
-  // Recherche d'espèces : aujourd'hui sur l'accueil ; à repointer vers la page de recherche de l'app (lot 2).
-  { href: '/', labelKey: 'nav.species', icon: BookOpen, match: ['/species'] },
-  { href: '/communaute', labelKey: 'nav.community', icon: MessagesSquare, match: ['/communaute'], soon: true },
+  // Recherche d'espèces de l'app ; l'onglet reste actif sur les fiches (/species/<id>).
+  { href: '/especes', labelKey: 'nav.species', icon: BookOpen, match: ['/especes', '/species'] },
+  { href: '/communaute', labelKey: 'nav.community', icon: MessagesSquare, match: ['/communaute'], feature: 'community' },
   { href: '/parametres', labelKey: 'nav.account', icon: CircleUserRound, match: ['/parametres'] },
 ];
 
@@ -57,7 +63,9 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
   const pathname = usePathname() ?? '/';
   const { user, isLoading, logout } = useAuth();
   const items = destinations.slice(0, 5);
-  const initials = user?.email?.slice(0, 2).toUpperCase() || '··';
+  const communityOpen = useCommunityAvailability() === 'available';
+  // Invité (sans e-mail) : pictogramme de profil au trait plutôt que des initiales factices.
+  const initials = user?.email ? user.email.slice(0, 2).toUpperCase() : <CircleUserRound className="size-4" strokeWidth={1.5} />;
   // Session invité (sans e-mail) : même emplacement que sans session, mais l'invitation mène à la
   // conversion sans perte de données, et aucune déconnexion n'est proposée (elle les perdrait).
   const guestSession = user?.isGuest === true;
@@ -87,7 +95,8 @@ export function AppShell({ children, destinations = APP_DESTINATIONS }: AppShell
   );
 
   // Destination « bientôt » : pas de lien (aucun lien mort), marquée désactivée et annoncée.
-  const renderItem = ({ href, labelKey, icon: Icon, match, soon }: AppDestination, className: string, size: number) => {
+  const renderItem = ({ href, labelKey, icon: Icon, match, soon: announced, feature }: AppDestination, className: string, size: number) => {
+    const soon = announced || (feature === 'community' && !communityOpen);
     const content = (
       <>
         <Icon size={size} strokeWidth={1.75} aria-hidden="true" />

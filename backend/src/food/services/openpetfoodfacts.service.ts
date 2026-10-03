@@ -1,11 +1,39 @@
 import { Injectable, Logger } from '@nestjs/common';
-import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
+import { describeHttpError, isValidBarcode } from '../../external/http-safety';
+import { ExternalHttpService } from '../../external/http/external-http.service';
 import {
-  EXTERNAL_REQUEST_DEFAULTS,
-  describeHttpError,
-  isValidBarcode,
-} from '../../external/http-safety';
+  isUpstreamNotFound,
+  upstreamUnavailable,
+} from '../../external/http/external-errors';
+
+export interface PetFoodSearchResult {
+  products: PetFoodProduct[];
+  count: number;
+  page: number;
+  /** Réponse servie depuis un cache périmé (fournisseur indisponible). */
+  stale?: boolean;
+  /** Fournisseur indisponible et aucune donnée connue : résultat vide NON mis en cache. */
+  degraded?: boolean;
+}
+
+/** Réponse de `cgi/search.pl` (champs lus uniquement). */
+interface OpffSearchResponse {
+  products?: PetFoodProduct[];
+  count?: number;
+  page?: number;
+}
+
+/** Réponse de `/product/{code}` (champs lus uniquement). */
+interface OpffProductResponse {
+  status?: number;
+  product?: PetFoodProduct;
+}
+
+/** Réponse de `categories.json` (champs lus uniquement). */
+interface OpffCategoriesResponse {
+  tags?: Array<{ name: string }>;
+}
 
 interface PetFoodProduct {
   code: string;
@@ -114,7 +142,20 @@ export class OpenPetFoodFactsService {
     'ambystoma mexicanum': ['amphibian food', 'insect food'],
   };
 
-  constructor(private readonly cacheService: CacheService) {}
+  constructor(
+    private readonly cacheService: CacheService,
+    private readonly http: ExternalHttpService,
+  ) {}
+
+  /** Entrée de cache (JSON sérialisé) → objet ; null si absente ou illisible. */
+  private parseCached<T>(raw: unknown): T | null {
+    if (typeof raw !== 'string' || !raw) return null;
+    try {
+      return JSON.parse(raw) as T;
+    } catch {
+      return null;
+    }
+  }
 
   /**
    * Get appropriate search terms for a species
@@ -136,31 +177,197 @@ export class OpenPetFoodFactsService {
     // 3) Mots-clés de races : si le nom contient une race de chien/chat
     //    connue, on cible l'espèce de base (les races n'existent pas dans OPFF).
     const breedMappings: Array<{ keywords: string[]; terms: string[] }> = [
-      { keywords: ['labrador', 'golden', 'berger', 'beagle', 'caniche', 'bulldog', 'boxer', 'husky', 'dobermann', 'chihuahua', 'carlin', 'rottweiler', 'teckel', 'shih', 'bichon', 'bouledogue', 'cocker', 'dalmatien', 'dogue', 'épagneul', 'terrier', 'retriever', 'colley', 'mastiff', 'pinscher', 'schnauzer', 'shiba', 'spitz', 'yorkshire', 'canis', 'chien'], terms: ['dog food', 'dog'] },
-      { keywords: ['persan', 'siamois', 'maine coon', 'bengal', 'british', 'scottish', 'sphynx', 'abyssin', 'birman', 'chartreux', 'ragdoll', 'sibérien', 'siberian', 'norvégien', 'felis', 'chat'], terms: ['cat food', 'cat'] },
-      { keywords: ['bélier', 'angora', 'rex', 'géant des flandres', 'nain'], terms: ['rabbit food', 'hay', 'pellets'] },
-      { keywords: ['perruche', 'calopsitte', 'perroquet', 'amazone', 'ara ', 'conure', 'inséparable', 'youyou', 'cacatoès', 'lori'], terms: ['parrot food', 'bird', 'seed mix'] },
-      { keywords: ['canari', 'diamant mandarin', 'moineau', 'padda', 'bengali', 'astrild'], terms: ['canary food', 'bird seed'] },
-      { keywords: ['hamster', 'gerbille', 'souris', 'rat ', 'octodon', 'chinchilla'], terms: ['rodent food', 'hamster food', 'seed mix'] },
-      { keywords: ['cochon d', 'cobaye', 'guinea'], terms: ['guinea pig food', 'hay', 'pellets'] },
+      {
+        keywords: [
+          'labrador',
+          'golden',
+          'berger',
+          'beagle',
+          'caniche',
+          'bulldog',
+          'boxer',
+          'husky',
+          'dobermann',
+          'chihuahua',
+          'carlin',
+          'rottweiler',
+          'teckel',
+          'shih',
+          'bichon',
+          'bouledogue',
+          'cocker',
+          'dalmatien',
+          'dogue',
+          'épagneul',
+          'terrier',
+          'retriever',
+          'colley',
+          'mastiff',
+          'pinscher',
+          'schnauzer',
+          'shiba',
+          'spitz',
+          'yorkshire',
+          'canis',
+          'chien',
+        ],
+        terms: ['dog food', 'dog'],
+      },
+      {
+        keywords: [
+          'persan',
+          'siamois',
+          'maine coon',
+          'bengal',
+          'british',
+          'scottish',
+          'sphynx',
+          'abyssin',
+          'birman',
+          'chartreux',
+          'ragdoll',
+          'sibérien',
+          'siberian',
+          'norvégien',
+          'felis',
+          'chat',
+        ],
+        terms: ['cat food', 'cat'],
+      },
+      {
+        keywords: ['bélier', 'angora', 'rex', 'géant des flandres', 'nain'],
+        terms: ['rabbit food', 'hay', 'pellets'],
+      },
+      {
+        keywords: [
+          'perruche',
+          'calopsitte',
+          'perroquet',
+          'amazone',
+          'ara ',
+          'conure',
+          'inséparable',
+          'youyou',
+          'cacatoès',
+          'lori',
+        ],
+        terms: ['parrot food', 'bird', 'seed mix'],
+      },
+      {
+        keywords: [
+          'canari',
+          'diamant mandarin',
+          'moineau',
+          'padda',
+          'bengali',
+          'astrild',
+        ],
+        terms: ['canary food', 'bird seed'],
+      },
+      {
+        keywords: [
+          'hamster',
+          'gerbille',
+          'souris',
+          'rat ',
+          'octodon',
+          'chinchilla',
+        ],
+        terms: ['rodent food', 'hamster food', 'seed mix'],
+      },
+      {
+        keywords: ['cochon d', 'cobaye', 'guinea'],
+        terms: ['guinea pig food', 'hay', 'pellets'],
+      },
       { keywords: ['furet'], terms: ['ferret food', 'meat'] },
-      { keywords: ['gecko', 'caméléon', 'agame', 'scinque', 'anolis'], terms: ['gecko food', 'insect food', 'crickets'] },
-      { keywords: ['iguane', 'varan', 'tégou'], terms: ['reptile food', 'iguana food'] },
-      { keywords: ['python', 'boa', 'serpent', 'couleuvre'], terms: ['reptile food', 'frozen rodent'] },
-      { keywords: ['tortue'], terms: ['tortoise food', 'turtle food', 'reptile'] },
-      { keywords: ['grenouille', 'rainette', 'dendrobate', 'axolotl', 'triton', 'crapaud'], terms: ['amphibian food', 'insect food', 'crickets'] },
-      { keywords: ['guppy', 'néon', 'tétra', 'betta', 'combattant', 'poisson rouge', 'corydoras', 'scalaire', 'discus', 'gourami', 'barbus', 'danio', 'molly', 'platy', 'xipho', 'ancistrus', 'otocinclus', 'crevette'], terms: ['fish food', 'aquarium', 'flakes'] },
-      { keywords: ['phasme', 'mante', 'blatte'], terms: ['insect food', 'crickets'] },
-      { keywords: ['mygale', 'scorpion', 'tarentule'], terms: ['insect food', 'crickets'] },
-      { keywords: ['poule', 'coq', 'poussin', 'gallus'], terms: ['chicken food', 'poultry'] },
-      { keywords: ['cheval', 'poney', 'âne', 'equus'], terms: ['horse food', 'equine'] },
-      { keywords: ['bovin', 'vache', 'taureau', 'veau', 'bos'], terms: ['cattle food', 'farm animal'] },
-      { keywords: ['mouton', 'brebis', 'agneau', 'ovis'], terms: ['sheep food', 'farm animal'] },
-      { keywords: ['chèvre', 'chevre', 'capra'], terms: ['goat food', 'farm animal'] },
-      { keywords: ['porc', 'cochon', 'sus'], terms: ['pig food', 'farm animal'] },
+      {
+        keywords: ['gecko', 'caméléon', 'agame', 'scinque', 'anolis'],
+        terms: ['gecko food', 'insect food', 'crickets'],
+      },
+      {
+        keywords: ['iguane', 'varan', 'tégou'],
+        terms: ['reptile food', 'iguana food'],
+      },
+      {
+        keywords: ['python', 'boa', 'serpent', 'couleuvre'],
+        terms: ['reptile food', 'frozen rodent'],
+      },
+      {
+        keywords: ['tortue'],
+        terms: ['tortoise food', 'turtle food', 'reptile'],
+      },
+      {
+        keywords: [
+          'grenouille',
+          'rainette',
+          'dendrobate',
+          'axolotl',
+          'triton',
+          'crapaud',
+        ],
+        terms: ['amphibian food', 'insect food', 'crickets'],
+      },
+      {
+        keywords: [
+          'guppy',
+          'néon',
+          'tétra',
+          'betta',
+          'combattant',
+          'poisson rouge',
+          'corydoras',
+          'scalaire',
+          'discus',
+          'gourami',
+          'barbus',
+          'danio',
+          'molly',
+          'platy',
+          'xipho',
+          'ancistrus',
+          'otocinclus',
+          'crevette',
+        ],
+        terms: ['fish food', 'aquarium', 'flakes'],
+      },
+      {
+        keywords: ['phasme', 'mante', 'blatte'],
+        terms: ['insect food', 'crickets'],
+      },
+      {
+        keywords: ['mygale', 'scorpion', 'tarentule'],
+        terms: ['insect food', 'crickets'],
+      },
+      {
+        keywords: ['poule', 'coq', 'poussin', 'gallus'],
+        terms: ['chicken food', 'poultry'],
+      },
+      {
+        keywords: ['cheval', 'poney', 'âne', 'equus'],
+        terms: ['horse food', 'equine'],
+      },
+      {
+        keywords: ['bovin', 'vache', 'taureau', 'veau', 'bos'],
+        terms: ['cattle food', 'farm animal'],
+      },
+      {
+        keywords: ['mouton', 'brebis', 'agneau', 'ovis'],
+        terms: ['sheep food', 'farm animal'],
+      },
+      {
+        keywords: ['chèvre', 'chevre', 'capra'],
+        terms: ['goat food', 'farm animal'],
+      },
+      {
+        keywords: ['porc', 'cochon', 'sus'],
+        terms: ['pig food', 'farm animal'],
+      },
       { keywords: ['canard'], terms: ['duck food', 'poultry'] },
       { keywords: ['pigeon'], terms: ['pigeon food', 'bird seed'] },
-      { keywords: ['dindon', 'dinde'], terms: ['poultry food', 'chicken food'] },
+      {
+        keywords: ['dindon', 'dinde'],
+        terms: ['poultry food', 'chicken food'],
+      },
     ];
 
     for (const mapping of breedMappings) {
@@ -185,20 +392,20 @@ export class OpenPetFoodFactsService {
     category?: string,
     page = 1,
     pageSize = 20,
-  ): Promise<{ products: PetFoodProduct[]; count: number; page: number }> {
+  ): Promise<PetFoodSearchResult> {
     const cacheKey = `${this.cachePrefix}search:${query}:${category || 'all'}:${page}:${pageSize}`;
-    
+
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as PetFoodSearchResult;
     }
 
     try {
       // NB : world.openpetfoodfacts.org/api/v2/search IGNORE search_terms
       // (renvoie toujours le catalogue complet ~15k produits -> nourriture pour
       // chat partout). L'endpoint legacy cgi/search.pl?json=1 filtre correctement.
-      const params: any = {
+      const params: Record<string, string | number> = {
         search_terms: query,
         json: 1,
         page,
@@ -213,26 +420,33 @@ export class OpenPetFoodFactsService {
         params.tag_0 = category;
       }
 
-      const response = await axios.get(
+      const response = await this.http.get<OpffSearchResponse>(
+        'openpetfoodfacts',
         'https://world.openpetfoodfacts.org/cgi/search.pl',
-        { params, ...EXTERNAL_REQUEST_DEFAULTS },
+        { params },
       );
 
-      const result = {
+      const result: PetFoodSearchResult = {
         products: response.data.products || [],
         count: response.data.count || 0,
         page: response.data.page || 1,
       };
 
-      // Cache for 24 hours
-      await this.cacheService.set(cacheKey, JSON.stringify(result), 86400);
+      // Réponse valide du fournisseur (même « aucun produit ») : cache 24 h.
+      this.cacheService.set(cacheKey, JSON.stringify(result), 86400);
 
       return result;
     } catch (error) {
       this.logger.error(
         `Open Pet Food Facts search error: ${describeHttpError(error)}`,
       );
-      return { products: [], count: 0, page: 1 };
+      // Panne : dernière réponse connue (même périmée), sinon résultat vide signalé
+      // `degraded` — dans les deux cas, RIEN n'est écrit en cache.
+      const stale = this.parseCached<PetFoodSearchResult>(
+        this.cacheService.getStale(cacheKey),
+      );
+      if (stale) return { ...stale, stale: true };
+      return { products: [], count: 0, page: 1, degraded: true };
     }
   }
 
@@ -243,44 +457,57 @@ export class OpenPetFoodFactsService {
     }
 
     const cacheKey = `${this.cachePrefix}product:${barcode}`;
-    
+
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as PetFoodProduct;
     }
 
     try {
-      const response = await axios.get(`${this.baseUrl}/product/${barcode}`, {
-        params: {
-          fields:
-            'code,product_name,brands,categories,image_url,ingredients_text,nutrition_grades,allergens,labels,quantity',
+      const response = await this.http.get<OpffProductResponse>(
+        'openpetfoodfacts',
+        `${this.baseUrl}/product/${barcode}`,
+        {
+          params: {
+            fields:
+              'code,product_name,brands,categories,image_url,ingredients_text,nutrition_grades,allergens,labels,quantity',
+          },
         },
-        ...EXTERNAL_REQUEST_DEFAULTS,
-      });
+      );
 
       if (response.data.status === 1 && response.data.product) {
         const product = response.data.product;
 
         // Cache for 7 days
-        await this.cacheService.set(cacheKey, JSON.stringify(product), 604800);
+        this.cacheService.set(cacheKey, JSON.stringify(product), 604800);
 
         return product;
       }
 
       return null;
     } catch (error) {
+      // Produit inconnu (404) : réponse valide, pas une panne.
+      if (isUpstreamNotFound(error)) return null;
       this.logger.error(
         `Open Pet Food Facts product fetch error: ${describeHttpError(error)}`,
       );
-      return null;
+      const stale = this.parseCached<PetFoodProduct>(
+        this.cacheService.getStale(cacheKey),
+      );
+      if (stale) return stale;
+      // Ne pas faire passer une panne pour « produit introuvable » (404).
+      throw upstreamUnavailable('Food database temporarily unavailable');
     }
   }
 
-  async searchBySpecies(species: string, type?: string): Promise<any> {
+  async searchBySpecies(
+    species: string,
+    type?: string,
+  ): Promise<PetFoodSearchResult> {
     // Get appropriate search terms for this species
     let searchTerms = this.getSearchTermsForSpecies(species);
-    
+
     // If a specific type is provided, prepend it
     if (type) {
       searchTerms = [`${type} ${searchTerms[0]}`, ...searchTerms];
@@ -289,7 +516,8 @@ export class OpenPetFoodFactsService {
     // Try searching with the first search term, fallback to others if needed
     for (const searchTerm of searchTerms) {
       const result = await this.searchProducts(searchTerm);
-      if (result.products.length > 0) {
+      if (result.products.length > 0 || result.degraded) {
+        // Résultat, ou fournisseur en panne : inutile d'enchaîner d'autres appels.
         return result;
       }
     }
@@ -300,31 +528,33 @@ export class OpenPetFoodFactsService {
 
   async getCategories(): Promise<string[]> {
     const cacheKey = `${this.cachePrefix}categories`;
-    
+
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as string[];
     }
 
     try {
-      const response = await axios.get(
+      const response = await this.http.get<OpffCategoriesResponse>(
+        'openpetfoodfacts',
         'https://world.openpetfoodfacts.org/categories.json',
-        { ...EXTERNAL_REQUEST_DEFAULTS },
       );
 
-      const categories =
-        response.data.tags?.map((tag: any) => tag.name) || [];
+      const categories = response.data.tags?.map((tag) => tag.name) || [];
 
       // Cache for 7 days
-      await this.cacheService.set(cacheKey, JSON.stringify(categories), 604800);
+      this.cacheService.set(cacheKey, JSON.stringify(categories), 604800);
 
       return categories;
     } catch (error) {
       this.logger.error(
         `Open Pet Food Facts categories error: ${describeHttpError(error)}`,
       );
-      return [];
+      // Repli sur la dernière liste connue ; sinon liste vide NON mise en cache.
+      return (
+        this.parseCached<string[]>(this.cacheService.getStale(cacheKey)) ?? []
+      );
     }
   }
 }

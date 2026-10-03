@@ -1,10 +1,15 @@
-import { Injectable, Logger } from '@nestjs/common';
-import axios from 'axios';
-import { CacheService } from '../../cache/cache.service';
 import {
-  EXTERNAL_REQUEST_DEFAULTS,
-  describeHttpError,
-} from '../../external/http-safety';
+  Injectable,
+  Logger,
+  ServiceUnavailableException,
+} from '@nestjs/common';
+import { CacheService } from '../../cache/cache.service';
+import { describeHttpError } from '../../external/http-safety';
+import { ExternalHttpService } from '../../external/http/external-http.service';
+import {
+  isUpstreamNotFound,
+  upstreamUnavailable,
+} from '../../external/http/external-errors';
 
 interface SpeciesPlusResponse {
   id: number;
@@ -20,182 +25,202 @@ interface SpeciesPlusResponse {
   }>;
 }
 
+/** Résumé d'un taxon (résultat de recherche) ; les autres champs sont transmis tels quels. */
+export interface SpeciesPlusTaxonSummary {
+  id: number;
+  full_name?: string;
+  [field: string]: unknown;
+}
+
+/** Entrée de législation ou de distribution (structure libre, transmise telle quelle). */
+type SpeciesPlusEntry = Record<string, unknown>;
+
+type TaxonList = SpeciesPlusEntry[];
+
+interface TaxonSearchResponse {
+  taxon_concepts?: SpeciesPlusTaxonSummary[];
+}
+interface TaxonDetailsResponse {
+  taxon_concept?: SpeciesPlusResponse;
+}
+interface CitesListingsResponse {
+  cites_listings?: SpeciesPlusEntry[];
+}
+interface EuListingsResponse {
+  eu_listings?: SpeciesPlusEntry[];
+}
+interface DistributionsResponse {
+  distributions?: SpeciesPlusEntry[];
+}
+
+/**
+ * Species+ (CITES / UE) — API qui EXIGE un jeton (`SPECIESPLUS_API_TOKEN`).
+ * Sans jeton, l'intégration est désactivée proprement : `isConfigured()` est faux, les
+ * routes `/speciesplus/*` répondent 503 `INTEGRATION_DISABLED` et la fiche législation
+ * indique `speciesPlus.status = 'disabled'` — aucune donnée n'est inventée.
+ *
+ * Configurée, un échec (réseau, 5xx, disjoncteur ouvert) lève un 503 (ou sert la dernière
+ * réponse connue, même périmée) : plus de liste vide « silencieuse », rien n'est mis en
+ * cache après une erreur.
+ */
 @Injectable()
 export class SpeciesPlusService {
   private readonly logger = new Logger(SpeciesPlusService.name);
   private readonly baseUrl = 'https://api.speciesplus.net/api/v1';
-  private readonly apiToken = process.env.SPECIESPLUS_API_TOKEN || '';
   private readonly cachePrefix = 'speciesplus:';
 
-  constructor(private readonly cacheService: CacheService) {}
+  constructor(
+    private readonly cacheService: CacheService,
+    private readonly http: ExternalHttpService,
+  ) {}
 
-  async searchByScientificName(scientificName: string): Promise<any> {
-    const cacheKey = `${this.cachePrefix}search:${scientificName}`;
-    
-    // Check cache
+  /** Jeton lu à l'appel (et non à l'import) : testable, et pris en compte après chargement du .env. */
+  private get apiToken(): string {
+    return process.env.SPECIESPLUS_API_TOKEN?.trim() || '';
+  }
+
+  isConfigured(): boolean {
+    return this.apiToken.length > 0;
+  }
+
+  /** 503 explicite quand l'intégration n'est pas configurée (aucune donnée inventée). */
+  assertConfigured(): void {
+    if (!this.isConfigured()) {
+      throw new ServiceUnavailableException({
+        message: 'Species+ integration is not configured',
+        code: 'INTEGRATION_DISABLED',
+      });
+    }
+  }
+
+  private async fetchTaxon<T>(
+    path: string,
+    params: Record<string, unknown> | undefined,
+  ) {
+    return this.http.get<T>('speciesplus', `${this.baseUrl}${path}`, {
+      params,
+      headers: { 'X-Authentication-Token': this.apiToken },
+    });
+  }
+
+  /**
+   * Lecture avec cache : réponse valide → cache 7 j ; erreur → dernière valeur connue,
+   * sinon 503 (jamais mise en cache). 404 du fournisseur : `notFound` (valeur « inconnu »).
+   */
+  private async cached<T>(
+    cacheKey: string,
+    label: string,
+    load: () => Promise<T>,
+    notFound: T,
+  ): Promise<T> {
+    this.assertConfigured();
+
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as T;
     }
 
     try {
-      const response = await axios.get(`${this.baseUrl}/taxon_concepts`, {
-        params: {
-          name: scientificName,
-        },
-        headers: {
-          'X-Authentication-Token': this.apiToken,
-        },
-        ...EXTERNAL_REQUEST_DEFAULTS,
-      });
-
-      const data = response.data?.taxon_concepts || [];
-
-      // Cache for 7 days
-      await this.cacheService.set(cacheKey, JSON.stringify(data), 604800);
-
+      const data = await load();
+      // Réponse valide uniquement (une liste vide valide est mise en cache ; `null` = rien).
+      if (data !== null && data !== undefined) {
+        this.cacheService.set(cacheKey, JSON.stringify(data), 604800);
+      }
       return data;
     } catch (error) {
-      this.logger.error(`Species+ search error: ${describeHttpError(error)}`);
-      return [];
+      if (isUpstreamNotFound(error)) {
+        // Réponse valide « taxon inconnu » : pas une panne, pas de cache.
+        return notFound;
+      }
+      this.logger.error(`Species+ ${label} error: ${describeHttpError(error)}`);
+      const stale = this.cacheService.getStale(cacheKey);
+      if (typeof stale === 'string' && stale) {
+        try {
+          return JSON.parse(stale) as T;
+        } catch {
+          /* illisible : 503 ci-dessous */
+        }
+      }
+      throw upstreamUnavailable('Species+ temporarily unavailable');
     }
+  }
+
+  async searchByScientificName(
+    scientificName: string,
+  ): Promise<SpeciesPlusTaxonSummary[]> {
+    return this.cached<SpeciesPlusTaxonSummary[]>(
+      `${this.cachePrefix}search:${scientificName}`,
+      'search',
+      async () => {
+        const response = await this.fetchTaxon<TaxonSearchResponse>(
+          '/taxon_concepts',
+          {
+            name: scientificName,
+          },
+        );
+        return response.data?.taxon_concepts || [];
+      },
+      [],
+    );
   }
 
   async getTaxonDetails(taxonId: number): Promise<SpeciesPlusResponse | null> {
-    const cacheKey = `${this.cachePrefix}taxon:${taxonId}`;
-    
-    // Check cache
-    const cached = await this.cacheService.get(cacheKey);
-    if (cached) {
-      return JSON.parse(cached as string);
-    }
-
-    try {
-      const response = await axios.get(
-        `${this.baseUrl}/taxon_concepts/${taxonId}`,
-        {
-          headers: {
-            'X-Authentication-Token': this.apiToken,
-          },
-          ...EXTERNAL_REQUEST_DEFAULTS,
-        },
-      );
-
-      const data = response.data?.taxon_concept || null;
-
-      if (data) {
-        // Cache for 7 days
-        await this.cacheService.set(cacheKey, JSON.stringify(data), 604800);
-      }
-
-      return data;
-    } catch (error) {
-      this.logger.error(
-        `Species+ taxon details error: ${describeHttpError(error)}`,
-      );
-      return null;
-    }
+    return this.cached<SpeciesPlusResponse | null>(
+      `${this.cachePrefix}taxon:${taxonId}`,
+      'taxon details',
+      async () => {
+        const response = await this.fetchTaxon<TaxonDetailsResponse>(
+          `/taxon_concepts/${taxonId}`,
+          undefined,
+        );
+        return response.data?.taxon_concept ?? null;
+      },
+      null,
+    );
   }
 
-  async getCitesLegislation(taxonId: number): Promise<any> {
-    const cacheKey = `${this.cachePrefix}cites:${taxonId}`;
-    
-    // Check cache
-    const cached = await this.cacheService.get(cacheKey);
-    if (cached) {
-      return JSON.parse(cached as string);
-    }
-
-    try {
-      const response = await axios.get(
-        `${this.baseUrl}/taxon_concepts/${taxonId}/cites_legislation`,
-        {
-          headers: {
-            'X-Authentication-Token': this.apiToken,
-          },
-          ...EXTERNAL_REQUEST_DEFAULTS,
-        },
-      );
-
-      const data = response.data?.cites_listings || [];
-
-      // Cache for 7 days
-      await this.cacheService.set(cacheKey, JSON.stringify(data), 604800);
-
-      return data;
-    } catch (error) {
-      this.logger.error(
-        `Species+ CITES legislation error: ${describeHttpError(error)}`,
-      );
-      return [];
-    }
+  async getCitesLegislation(taxonId: number): Promise<TaxonList> {
+    return this.cached<TaxonList>(
+      `${this.cachePrefix}cites:${taxonId}`,
+      'CITES legislation',
+      async () => {
+        const response = await this.fetchTaxon<CitesListingsResponse>(
+          `/taxon_concepts/${taxonId}/cites_legislation`,
+          undefined,
+        );
+        return response.data?.cites_listings || [];
+      },
+      [],
+    );
   }
 
-  async getEULegislation(taxonId: number): Promise<any> {
-    const cacheKey = `${this.cachePrefix}eu:${taxonId}`;
-    
-    // Check cache
-    const cached = await this.cacheService.get(cacheKey);
-    if (cached) {
-      return JSON.parse(cached as string);
-    }
-
-    try {
-      const response = await axios.get(
-        `${this.baseUrl}/taxon_concepts/${taxonId}/eu_legislation`,
-        {
-          headers: {
-            'X-Authentication-Token': this.apiToken,
-          },
-          ...EXTERNAL_REQUEST_DEFAULTS,
-        },
-      );
-
-      const data = response.data?.eu_listings || [];
-
-      // Cache for 7 days
-      await this.cacheService.set(cacheKey, JSON.stringify(data), 604800);
-
-      return data;
-    } catch (error) {
-      this.logger.error(
-        `Species+ EU legislation error: ${describeHttpError(error)}`,
-      );
-      return [];
-    }
+  async getEULegislation(taxonId: number): Promise<TaxonList> {
+    return this.cached<TaxonList>(
+      `${this.cachePrefix}eu:${taxonId}`,
+      'EU legislation',
+      async () => {
+        const response = await this.fetchTaxon<EuListingsResponse>(
+          `/taxon_concepts/${taxonId}/eu_legislation`,
+          undefined,
+        );
+        return response.data?.eu_listings || [];
+      },
+      [],
+    );
   }
 
-  async getDistributions(taxonId: number): Promise<any[]> {
-    const cacheKey = `${this.cachePrefix}distribution:${taxonId}`;
-    
-    // Check cache
-    const cached = await this.cacheService.get(cacheKey);
-    if (cached) {
-      return JSON.parse(cached as string);
-    }
-
-    try {
-      const response = await axios.get(
-        `${this.baseUrl}/taxon_concepts/${taxonId}/distributions`,
-        {
-          headers: {
-            'X-Authentication-Token': this.apiToken,
-          },
-          ...EXTERNAL_REQUEST_DEFAULTS,
-        },
-      );
-
-      const data = response.data?.distributions || [];
-
-      // Cache for 7 days
-      await this.cacheService.set(cacheKey, JSON.stringify(data), 604800);
-
-      return data;
-    } catch (error) {
-      this.logger.error(
-        `Species+ distributions error: ${describeHttpError(error)}`,
-      );
-      return [];
-    }
+  async getDistributions(taxonId: number): Promise<TaxonList> {
+    return this.cached<TaxonList>(
+      `${this.cachePrefix}distribution:${taxonId}`,
+      'distributions',
+      async () => {
+        const response = await this.fetchTaxon<DistributionsResponse>(
+          `/taxon_concepts/${taxonId}/distributions`,
+          undefined,
+        );
+        return response.data?.distributions || [];
+      },
+      [],
+    );
   }
 }

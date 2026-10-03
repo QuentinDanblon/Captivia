@@ -2,12 +2,12 @@
  * Couche plateforme web / natif (W6-02 à W6-05, D-11).
  *
  * - `isNative()` : vrai seulement dans l'app Capacitor (iOS / Android).
- * - `openExternal(url)` : ouvre un lien dans le navigateur système (liens Amazon : jamais dans la WebView).
+ * - `openExternal(url)` : ouvre un lien dans le navigateur système (boutiques, sources : jamais dans la WebView).
  * - `tokenStorage` : stockage de session, Preferences sur natif + miroir localStorage, localStorage seul sur le web.
- * - `animalDetailPath` / `speciesPath` / `publicAnimalPath` : chemins des fiches selon la cible
+ * - `animalDetailPath` / `speciesPath` / `publicAnimalPath` / `communityPostPath`… : chemins des fiches selon la cible
  *   (routes dynamiques sur le web, routes à query `?id=` dans l'export statique mobile).
  */
-import { useMemo } from 'react';
+import { useMemo, useSyncExternalStore } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { Capacitor } from '@capacitor/core';
@@ -23,6 +23,13 @@ export function isNative(): boolean {
   }
 }
 
+const noopSubscribe = () => () => {};
+
+/** `isNative()` lu après l'hydratation (le HTML exporté est celui du web : faux au premier rendu). */
+export function useIsNative(): boolean {
+  return useSyncExternalStore(noopSubscribe, isNative, () => false);
+}
+
 export function getPlatform(): 'ios' | 'android' | 'web' {
   const p = isNative() ? Capacitor.getPlatform() : 'web';
   return p === 'ios' || p === 'android' ? p : 'web';
@@ -31,7 +38,7 @@ export function getPlatform(): 'ios' | 'android' | 'web' {
 /**
  * Ouvre `url` (http/https uniquement) hors de l'application.
  * Sur natif, Capacitor délègue toute navigation vers un hôte externe au système
- * (Safari / navigateur par défaut, ou l'app Amazon si installée) : la WebView n'affiche jamais la page.
+ * (Safari / navigateur par défaut, ou l'app du site si installée) : la WebView n'affiche jamais la page.
  * Sur le web, nouvel onglet sans `window.opener`.
  * @returns false si l'URL est refusée (schéma non http(s), URL invalide).
  */
@@ -131,6 +138,24 @@ export function speciesPath(id: string | number): string {
 /** Page publique (QR) : `/animal-public/<slug>` (web) ou `/animal-public?slug=<slug>` (app). */
 export function publicAnimalPath(slug: string): string {
   return IS_MOBILE_BUILD ? `/animal-public?slug=${enc(slug)}` : `/animal-public/${enc(slug)}`;
+}
+
+/** Publication de la communauté : `/communaute/publication/<id>` (web) ou `/communaute/publication?id=<id>` (app). */
+export function communityPostPath(id: string): string {
+  return IS_MOBILE_BUILD ? `/communaute/publication?id=${enc(id)}` : `/communaute/publication/${enc(id)}`;
+}
+
+/** Profil public d'un membre : `/communaute/u/<pseudo>` (web) ou `/communaute/u?handle=<pseudo>` (app). */
+export function communityProfilePath(handle: string): string {
+  return IS_MOBILE_BUILD ? `/communaute/u?handle=${enc(handle)}` : `/communaute/u/${enc(handle)}`;
+}
+
+/**
+ * Décision de modération me concernant (lien envoyé par e-mail) : `/communaute/decisions/<id>` (web)
+ * ou `/communaute/decisions?id=<id>` (app ; la page liste aussi les décisions sans `id`).
+ */
+export function communityDecisionPath(id: string): string {
+  return IS_MOBILE_BUILD ? `/communaute/decisions?id=${enc(id)}` : `/communaute/decisions/${enc(id)}`;
 }
 
 /**

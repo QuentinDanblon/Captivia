@@ -1,0 +1,555 @@
+[
+ {
+  "speciesId": 2468542,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Grillons bruns",
+     "frequency": null,
+     "notes": "Très nutritifs, assez faciles à chasser et facilement disponibles."
+    },
+    {
+     "name": "Grillons noirs et criquets (alternative)",
+     "frequency": null,
+     "notes": null
+    },
+    {
+     "name": "Friandises : vers de cire, calciworms, blattes, vers de farine, larves de scarabée",
+     "frequency": "occasionnelle",
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Vers et larves gras en excès",
+     "reason": "Ils sont assez gras : au maximum une à deux fois par semaine."
+    },
+    {
+     "name": "Vers de farine, vers morio et blattes pour les jeunes",
+     "reason": "Difficiles à digérer : réservés aux lézards matures (18 mois ou plus), une à deux fois par semaine."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": "Le régime fournit l'essentiel, mais certaines vitamines et minéraux sont requis en concentration plus élevée (supplémentation).",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet",
+     "title": "Eyed Lizard Care Sheet - Reptile Centre"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+     "whenToConsult": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Parasites intestinaux et vers de l'estomac",
+     "symptoms": "Ulcères de l'estomac en cas d'infestation importante.",
+     "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 24,
+   "tempMax": 35,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Vivarium en bois bien ventilé, aussi proche que possible de 4 × 2 × 2 pieds (≈ 120 × 60 × 60 cm).",
+   "lightNeeds": "Espèce qui se chauffe en permanence : forte source UVB (tube de 10-12 % sur au moins les 2/3 de la longueur) ; lampe chauffante 10-12 h par jour, noir complet la nuit.",
+   "activityEnrichment": "Décors durs à escalader et sur lesquels se chauffer, pierres chauffantes naturelles, abris pleins (grottes, liège) et partiels (plantes).",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptilecentre.com/info-eyed-lizard-care-sheet",
+     "title": "Eyed Lizard Care Sheet - Reptile Centre"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2469188,
+  "feeding": null,
+  "habitat": null,
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+     "whenToConsult": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Parasites intestinaux et vers de l'estomac",
+     "symptoms": "Ulcères de l'estomac en cas d'infestation importante.",
+     "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2470656,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Insectes (jeunes) : vers de farine, superworms, blattes dubia/discoïdes, sauterelles, vers à tabac, vers de terre",
+     "frequency": "tous les 1 à 2 jours",
+     "notes": null
+    },
+    {
+     "name": "Proies entières (adultes) : rats, souris, lapins, cobayes, poulets, cailles, écrevisses, crevettes, poissons entiers, œufs",
+     "frequency": "tous les 1 à 2 jours",
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Suralimentation (repas trop gros ou trop fréquents)",
+     "reason": "Conduit à l'obésité."
+    },
+    {
+     "name": "Proies plus grosses que le crâne",
+     "reason": "Chaque repas doit être un peu plus petit que le crâne du varan."
+    }
+   ],
+   "mealFrequency": "every_2_days",
+   "specificNeeds": "Suppléments de calcium et de vitamines nécessaires ; saupoudrage occasionnel chez l'adulte.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor",
+     "title": "How to Care for Your Nile Monitor - Dubia.com"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+     "whenToConsult": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Parasites intestinaux et vers de l'estomac",
+     "symptoms": "Ulcères de l'estomac en cas d'infestation importante.",
+     "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 21,
+   "tempMax": 33,
+   "humidityMin": 50,
+   "humidityMax": 75,
+   "minSpaceSize": "Au minimum 12 × 12 × 8 pieds (≈ 3,7 × 3,7 × 2,4 m) pour un seul varan : l'équivalent d'une petite pièce ; bassin d'au moins 12\" (≈ 30 cm) de profondeur.",
+   "lightNeeds": "UVB indispensable (UVI de 3,0-4,0 au niveau du dos dans la zone de bain de soleil) ; surface de bain de soleil à 110-130 °F (≈ 43-54 °C).",
+   "activityEnrichment": "Cachettes/grottes, branches ancrées, rebords, rochers, feuillage vivant ou artificiel : un enclos vide ennuie le varan.",
+   "hygieneNotes": "Changer l'eau du bassin une fois par semaine ou dès qu'elle est souillée.",
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-nile-monitor",
+     "title": "How to Care for Your Nile Monitor - Dubia.com"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2470685,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Grillons gavés et blattes (jeunes)",
+     "frequency": "quotidienne à tous les deux jours la première année",
+     "notes": null
+    },
+    {
+     "name": "Proies entières : rongeurs, poissons, volaille",
+     "frequency": "2 à 3 fois par semaine pour les adultes",
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Suralimentation",
+     "reason": "Les adultes sont sujets à l'obésité en captivité, source de nombreux problèmes de santé."
+    },
+    {
+     "name": "Insectes non gavés ni saupoudrés de calcium/vitamine D3",
+     "reason": "Les insectes doivent être gavés et saupoudrés de calcium/vitamine D3 avant d'être proposés."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": "Les varans ont besoin de carapaces d'insectes, d'os, de fourrure et de plumes pour un bon fonctionnement digestif.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/",
+     "title": "Asian Water Monitor Breeding And Care Tips - Reptiles Magazine"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/water-monitor/",
+     "title": "Water Monitor - ReptileTalk"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+     "whenToConsult": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Parasites intestinaux et vers de l'estomac",
+     "symptoms": "Ulcères de l'estomac en cas d'infestation importante.",
+     "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 21,
+   "tempMax": 32,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Enclos d'adulte d'au moins 1,2 m de profondeur × 2,5 m de long × 1,8 à 2,5 m de haut ; bassin permettant l'immersion complète.",
+   "lightNeeds": "Selon l'éleveur, les varans n'auraient pas besoin d'UVA/UVB (alimentation de proies entières) ; points chauds de 48-65 °C utilisés avec de nombreuses espèces de varans.",
+   "activityEnrichment": "Nombreuses cachettes côté chaud et côté froid ; espace vertical (branches, étagères, rondins) ; vaste zone d'eau.",
+   "hygieneNotes": "Le varan déféquant dans l'eau, changer l'eau sale au moins tous les deux jours.",
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/water-monitor/",
+     "title": "Water Monitor - ReptileTalk"
+    },
+    {
+     "type": "guide",
+     "url": "https://reptilesmagazine.com/asian-water-monitor-breeding-and-care-tips/",
+     "title": "Asian Water Monitor Breeding And Care Tips - Reptiles Magazine"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2470711,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Insectes variés : blattes, grillons, vers de farine, araignées",
+     "frequency": null,
+     "notes": "Insectes saupoudrés de calcium et multivitamines un repas sur trois."
+    },
+    {
+     "name": "Souriceaux nouveau-nés (pinkies) et viande (kangourou, bœuf, poulet)",
+     "frequency": null,
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Suralimentation des adultes",
+     "reason": "Les adultes sont sujets à l'obésité."
+    },
+    {
+     "name": "Insectes non saupoudrés de calcium et multivitamines",
+     "reason": "Saupoudrer les insectes tous les trois repas."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/",
+     "title": "Varanus gilleni - ReptileTalk"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+     "whenToConsult": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Parasites intestinaux et vers de l'estomac",
+     "symptoms": "Ulcères de l'estomac en cas d'infestation importante.",
+     "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 18,
+   "tempMax": 30,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Environ 0,5 × 0,5 × 0,9 m (hauteur pour grimper), suffisant pour une paire ou un trio d'adultes.",
+   "lightNeeds": "Point chaud d'au moins 45 °C (de préférence 50-60 °C) sous un spot de 100 W ; pas d'éclairage UV fourni par l'éleveur (les varans n'en semblent pas bénéficier).",
+   "activityEnrichment": "Nombreuses branches pour grimper, branches creuses à écorce décollée comme abris, tuyaux agricoles ondulés.",
+   "hygieneNotes": "Nettoyage hebdomadaire de l'enclos au vinaigre et à l'eau tiède.",
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/pygmy-mulga-monitor/",
+     "title": "Varanus gilleni - ReptileTalk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2470729,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 24,
+   "tempMax": 29,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Au minimum 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m) pour un seul varan ; plus grand si possible.",
+   "lightNeeds": "UVB recommandé (dos du varan à 14-16\" sous la lampe) ; surface de bain de soleil à 140-150 °F (≈ 60-66 °C) ; côté frais de 75 à 85 °F.",
+   "activityEnrichment": "Cachettes/grottes, branches solides, grandes bûches creuses, feuillage vivant ou artificiel (graminées).",
+   "hygieneNotes": null,
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/lizard-care/how-to-care-for-your-savannah-monitor",
+     "title": "How to Care for Your Savannah Monitor - Dubia.com"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2470854,
+  "habitat": null
+ },
+ {
+  "speciesId": 5220266,
+  "habitat": null
+ },
+ {
+  "speciesId": 5225659,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Souris et rats (de préférence congelés-décongelés)",
+     "frequency": "jeunes : toutes les 1-2 semaines ; adultes : toutes les 2-4 semaines",
+     "notes": null
+    },
+    {
+     "name": "Proies variées : hamsters, gerbilles, cobayes, cailles, poussins",
+     "frequency": "en alternance",
+     "notes": "La variété est la clé d'un régime équilibré."
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Proies vivantes",
+     "reason": "Il vaut mieux proposer des proies congelées-décongelées plutôt que vivantes."
+    },
+    {
+     "name": "Proies trop grosses",
+     "reason": "Chaque proie ne doit pas dépasser 1,5 fois la largeur maximale du serpent."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": "Ration totale d'environ 10 % du poids du serpent (si non obèse).",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/carpet-python-care-sheet",
+     "title": "Carpet Python Care Sheet - ReptiFiles"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 22,
+   "tempMax": 38,
+   "humidityMin": 40,
+   "humidityMax": 60,
+   "minSpaceSize": "Enclos à toit grillagé de 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m), de préférence plus grand, surtout en hauteur ; espace terrestre et arboricole.",
+   "lightNeeds": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage supplémentaire pour simuler le jour.",
+   "activityEnrichment": "Rondins de liège, branches solides, grandes plantes vivantes ou artificielles robustes, cachettes supplémentaires ; au minimum une branche, du feuillage et deux cachettes.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/carpet-python-care-sheet",
+     "title": "Carpet Python Care Sheet - ReptiFiles"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5226308,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Grillons, vers de farine et superworms",
+     "frequency": "2 à 3 fois par semaine",
+     "notes": null
+    },
+    {
+     "name": "Souriceau (pinkie) décongelé ou congelé",
+     "frequency": "occasionnelle",
+     "notes": "Friandise occasionnelle."
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Fruits",
+     "reason": "0 % du régime : 95 % d'insectes et 5 % de viande (souriceaux)."
+    },
+    {
+     "name": "Insectes non consommés laissés dans l'enclos",
+     "reason": "Retirer les insectes restants le soir."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/",
+     "title": "Red-Headed Agama - The Vet Desk"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 28,
+   "tempMax": 30,
+   "humidityMin": 40,
+   "humidityMax": 60,
+   "minSpaceSize": "Terrarium de 2 × 3 pieds (≈ 60 × 90 cm) pour un seul lézard, 100 gallons (≈ 380 L) pour un couple ; ne jamais loger deux mâles ensemble.",
+   "lightNeeds": "Lampe chauffante, ampoule pour reptiles et lumière UVB ; lumière 12 h par jour, éteinte 12 h la nuit.",
+   "activityEnrichment": "Abris (cartons, abris en argile ou pierre), fausses branches, pierres pour grimper et explorer.",
+   "hygieneNotes": "Nettoyer l'enclos et changer l'eau chaque jour ; remplacer le substrat meuble tous les 4 mois.",
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://thevetdesk.com/pet-breeds/reptiles/red-headed-agama/",
+     "title": "Red-Headed Agama - The Vet Desk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5227370,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 24,
+   "tempMax": 29,
+   "humidityMin": 70,
+   "humidityMax": 80,
+   "minSpaceSize": "Au minimum 8 × 4 × 4 pieds (≈ 2,4 × 1,2 × 1,2 m) pour un seul téju ; plus grand si possible.",
+   "lightNeeds": "UVB nécessaire (plateforme de bain de soleil à 13-15\" sous la lampe si montée au-dessus d'un grillage, 17-18\" si montée à l'intérieur) ; surface de bain de soleil à 125-135 °F (≈ 52-57 °C).",
+   "activityEnrichment": "Cachettes/grottes, branches, rebords, feuillage vivant ou artificiel ; un enclos vide ennuie le téju.",
+   "hygieneNotes": null,
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/lizard-care/argentine-tegu-care-sheet",
+     "title": "Argentine Tegu Care Sheet - Dubia.com"
+    }
+   ]
+  }
+ }
+]

@@ -28,9 +28,7 @@ describe('SpeciesFilterService', () => {
         family: 'Boidae',
         genus: 'Boa',
         status: 'LC',
-        vernacularNames: [
-          { language: 'french', name: 'Boa constrictor' },
-        ],
+        vernacularNames: [{ language: 'french', name: 'Boa constrictor' }],
         iucn: { status: 'Least Concern' },
         distributions: [
           {
@@ -64,9 +62,7 @@ describe('SpeciesFilterService', () => {
         family: 'Pythonidae',
         genus: 'Python',
         status: 'LC',
-        vernacularNames: [
-          { language: 'french', name: 'Python regius' },
-        ],
+        vernacularNames: [{ language: 'french', name: 'Python regius' }],
         iucn: { status: 'Least Concern' },
         distributions: [
           {

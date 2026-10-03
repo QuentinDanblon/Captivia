@@ -1,0 +1,369 @@
+[
+ {
+  "speciesId": 104008238,
+  "reproduction": null
+ },
+ {
+  "speciesId": 156261518,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Petits aliments vivants ou surgelés (nauplii d'artémia, Moina, vers grindal)",
+     "frequency": "quotidienne",
+     "notes": "Repas quotidiens de petites proies vivantes ou surgelées, en complément des aliments secs."
+    },
+    {
+     "name": "Flocons ou granulés pour poissons tropicaux",
+     "frequency": "1 à 2 fois par jour",
+     "notes": "Aliments secs de taille adaptée (le poisson les accepte en aquarium)."
+    },
+    {
+     "name": "Vers de vase, artémias, daphnies",
+     "frequency": "quelques fois par semaine",
+     "notes": "Aliments riches en protéines, frais/surgelés ou vivants, en complément."
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Suralimentation (ou sous-alimentation)",
+     "reason": "Surveiller attentivement que le poisson mange suffisamment sans excès."
+    },
+    {
+     "name": "Flocons comme base unique du régime",
+     "reason": "Les aliments carnés (vers, artémias, larves de moustique) doivent rester la base de l'alimentation."
+    }
+   ],
+   "mealFrequency": "daily",
+   "specificNeeds": "Régime proche de la nature : petits invertébrés et zooplancton.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/",
+     "title": "Kryptopterus vitreolus (Glass Catfish) - Seriously Fish"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.aquariumsource.com/glass-catfish",
+     "title": "Glass Catfish - Aquarium Source"
+    },
+    {
+     "type": "guide",
+     "url": "https://aquariadise.com/glass-catfish/",
+     "title": "Glass Catfish - Aquariadise"
+    },
+    {
+     "type": "vet",
+     "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish",
+     "title": "Glass Catfish: Info, Pictures, Care Guide & Tank Setup - The Vet Desk"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Ich (maladie des points blancs)",
+     "symptoms": null,
+     "prevention": "Maintenir une bonne qualité d'eau et limiter le stress.",
+     "whenToConsult": "Agir dès les premiers signes : de nombreux poissons meurent avant d'avoir pu être traités."
+    },
+    {
+     "name": "Maladies bactériennes",
+     "symptoms": null,
+     "prevention": "Maintenir une bonne qualité d'eau et limiter le stress.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Maladies fongiques",
+     "symptoms": null,
+     "prevention": "Maintenir une bonne qualité d'eau et limiter le stress.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Intoxication à l'ammoniac et aux nitrites",
+     "symptoms": null,
+     "prevention": "Les taux d'ammoniac et de nitrite ne doivent jamais dépasser zéro.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish",
+     "title": "Glass Catfish: Info, Pictures, Care Guide & Tank Setup - The Vet Desk"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": "avance",
+   "notes": "Reproduction quasi jamais obtenue en aquarium.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://aquariadise.com/glass-catfish/",
+     "title": "Glass Catfish - Aquariadise"
+    },
+    {
+     "type": "vet",
+     "url": "https://resources.pangovet.com/pet-breeds/fish/glass-catfish",
+     "title": "Glass Catfish - The Vet Desk"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 20,
+   "tempMax": 26,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Aquarium d'au moins 90 × 30 cm (~81 litres), pour un groupe d'au moins 6 individus.",
+   "lightNeeds": "Préfère une lumière tamisée, avec de la végétation de surface ou flottante.",
+   "activityEnrichment": "Décor dense, végétation flottante, feuilles mortes séchées et/ou cônes d'aulne.",
+   "hygieneNotes": "Ne pas introduire ce poisson dans un aquarium non mûr biologiquement : sensible aux variations de chimie de l'eau.",
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/",
+     "title": "Kryptopterus vitreolus (Glass Catfish) - Seriously Fish"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2441454,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 24,
+   "tempMax": 38,
+   "humidityMin": 60,
+   "humidityMax": 70,
+   "minSpaceSize": "Enclos extérieur d'au moins 16 × 8 pieds (≈ 4,9 × 2,4 m) pour 8 à 10 tortues ; en intérieur, « table à tortues » de 8 × 4 pieds (≈ 2,4 × 1,2 m) pour une paire ou un trio d'adultes.",
+   "lightNeeds": "Tube fluorescent UVB 10.0 sur le dessus de l'enclos et lampe chauffante de 100 W à une extrémité (point chaud d'environ 95 °F ≈ 35 °C).",
+   "activityEnrichment": "Relief et terrain inégal (sites de bain de soleil ou de ponte, incitation à l'exercice) ; gros morceaux d'écorce de liège ou de bois flotté comme abris.",
+   "hygieneNotes": "Ne pas laisser le substrat se dessécher : garder un vaporisateur à portée pour brumiser l'enclos.",
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptilesmagazine.com/Hermanns-Tortoise/",
+     "title": "Hermann's Tortoise Care And Information - Reptiles Magazine"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2441502,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 21,
+   "tempMax": 35,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Grand enclos d'au moins 5 × 5 m et 0,6 m de haut pour une paire ou un trio ; en intérieur, « table à tortues » de 2,4 × 1,2 m.",
+   "lightNeeds": "Tube fluorescent UVB 10.0 fixé en travers du dessus de l'enclos et lampe chauffante de 100 W à une seule extrémité.",
+   "activityEnrichment": "Zones en pente et terrain inégal (sites de bain de soleil ou de ponte, incitation à l'exercice) ; abris : demi-bûches, tupperware retourné avec ouverture, bois flotté, écorce de liège.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/marginated-tortoise/",
+     "title": "Marginated Tortoise - ReptileTalk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2443074,
+  "habitat": {
+   "habitatType": "aquarium",
+   "tempMin": 22,
+   "tempMax": 27,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Au moins 10 gallons US (≈ 38 L) d'eau par pouce de longueur adulte prévue, soit 65 gal (≈ 250 L) pour un mâle et 105 gal (≈ 400 L) pour une femelle.",
+   "lightNeeds": "UVB nécessaire pour la santé de la tortue ; surface de bain de soleil à environ 100-110 °F (≈ 38-43 °C).",
+   "activityEnrichment": "Plantes vivantes ou artificielles pour l'abri, rampe d'accès et grande plateforme de bain de soleil.",
+   "hygieneNotes": "Presque tout l'enclos doit être de l'eau : il s'agit d'entretenir un bassin ou aquarium avec une zone sèche accessible.",
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/turtle-care/common-map-turtle-care-sheet",
+     "title": "Common Map Turtle Care Sheet - Dubia Roaches"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.allturtles.com/northern-map-turtle/",
+     "title": "Northern Map Turtle Care Guide - All Turtles"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2446584,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 19,
+   "tempMax": 31,
+   "humidityMin": 60,
+   "humidityMax": 80,
+   "minSpaceSize": "Terrarium arboricole d'au moins 120 × 60 × 120 cm pour R. l. leachianus, 90 × 45 × 90 cm pour R. l. henkeli.",
+   "lightNeeds": "Espèce nocturne ; UVB recommandé (UVI de 2,0-3,0 dans la zone de bain de soleil en haut de l'enclos).",
+   "activityEnrichment": "Branches, lianes tressées, rebords magnétiques, abris en liège, feuillage vivant ou artificiel, disposés pour inciter à grimper.",
+   "hygieneNotes": null,
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/leachie-gecko-care-sheet/",
+     "title": "Leachie Gecko Care Sheet - ReptiFiles"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2448847,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 13,
+   "tempMax": 29,
+   "humidityMin": 70,
+   "humidityMax": 85,
+   "minSpaceSize": "Cage grillagée ou à parois pleines et bien ventilée d'au moins 1,2 × 0,6 × 1,2 m pour un adulte (0,6 × 0,6 × 1,2 m pour de jeunes adultes) ; plus grand si possible.",
+   "lightNeeds": "Tubes UVB (Reptisun 5.0 ou 10.0, Arcadia 6 %) et spot de faible puissance de 25 à 40 W.",
+   "activityEnrichment": "Canopée de plantes entre les perchoirs et les lampes pour que l'animal puisse s'éloigner de la lumière ; système de brumisation automatique.",
+   "hygieneNotes": null,
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/parsons-chameleon/",
+     "title": "Parson's Chameleon - ReptileTalk"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.furrycritter.com/pages/descriptions/reptiles/parson_s_chameleon.htm",
+     "title": "Parson's Chameleon Species Guide - Furry Critter Network"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2455676,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Souris et rats (de préférence décongelés)",
+     "frequency": "tous les 5-7 jours (jeunes), tous les 7-14 jours (adultes)",
+     "notes": "Proposer de préférence des proies congelées-décongelées."
+    },
+    {
+     "name": "Proies variées : hamsters, gerbilles, jeunes cailles, œufs de caille, poussins, œufs de poule",
+     "frequency": "en alternance avec les souris et rats",
+     "notes": "Les serpents ont besoin de plus que des rats et des souris pour s'épanouir."
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Proies vivantes",
+     "reason": "Il vaut mieux proposer des proies congelées-décongelées plutôt que vivantes."
+    },
+    {
+     "name": "Proies trop grosses",
+     "reason": "La proie ne doit pas dépasser 1,5 fois la largeur maximale du serpent."
+    },
+    {
+     "name": "Suralimentation",
+     "reason": "Si le serpent grossit, réduire la fréquence des repas ou la taille des proies."
+    }
+   ],
+   "mealFrequency": "weekly",
+   "specificNeeds": "Saupoudrer de temps en temps la proie d'un mélange 50/50 de calcium et de multivitamines avant décongélation.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/black-ratsnake-care-sheet",
+     "title": "Black Ratsnake Care Sheet - ReptiFiles"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 22,
+   "tempMax": 32,
+   "humidityMin": 50,
+   "humidityMax": 70,
+   "minSpaceSize": "Au minimum 6'L × 3'l × 3'H (≈ 180 × 90 × 90 cm) pour un serpent adulte moyen ; plus grand fortement recommandé, surtout en hauteur.",
+   "lightNeeds": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage vif pendant la journée (espèce active de jour comme de nuit).",
+   "activityEnrichment": "Rondelles et plaques de liège, bois, rebords magnétiques, hamacs, plantes artificielles ou vivantes solides ; plus il y a de cachettes, plus le serpent se montre.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/black-ratsnake-care-sheet",
+     "title": "Black Ratsnake Care Sheet - ReptiFiles"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2457884,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 22,
+   "tempMax": 31,
+   "humidityMin": 60,
+   "humidityMax": 80,
+   "minSpaceSize": "Enclos vertical d'au moins 3 pieds (≈ 90 cm) de haut, 2 pieds de profondeur et 2 à 3 pieds de large pour un adulte (guide du genre Boiga) ; plus haut si possible.",
+   "lightNeeds": "Espèce strictement nocturne ; chauffage par panneaux radiants ou émetteurs céramiques plutôt que par lampes (aucune donnée UVB citée).",
+   "activityEnrichment": "Branches grimpantes, tubes d'écorce de liège, plantes vivantes ou artificielles à plusieurs hauteurs ; cachette humide surélevée.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.furrycritter.com/pages/articles/snakes/cat_snake_guide.htm",
+     "title": "Cat Snake (Boiga) guide - Furry Critter Network"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2466939,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 18,
+   "tempMax": 32,
+   "humidityMin": 60,
+   "humidityMax": 70,
+   "minSpaceSize": "Terrarium à ouverture frontale d'au moins 60 × 60 × 60 cm pour un anole ; plus grand de préférence.",
+   "lightNeeds": "UVB (UVI d'environ 3,0-4,0 dans la zone de bain de soleil) ; un tube UVB seul n'est pas assez lumineux, un éclairage général est nécessaire.",
+   "activityEnrichment": "Matériaux d'escalade à tous les niveaux, cachettes, feuillage (de préférence vivant) : ces éléments offrent des occasions de grimper, favorisent l'exercice et le bien-être.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/green-anole-care-sheet",
+     "title": "Green Anole Care Sheet - ReptiFiles"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2468095,
+  "feeding": null,
+  "health": null,
+  "habitat": null
+ }
+]

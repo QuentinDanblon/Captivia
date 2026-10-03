@@ -1,0 +1,572 @@
+[
+ {
+  "speciesId": 7387949,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Souris et rats (de préférence décongelés)",
+     "frequency": "tous les 5-7 jours (jeunes), tous les 7-14 jours (adultes)",
+     "notes": "Proposer de préférence des proies congelées-décongelées."
+    },
+    {
+     "name": "Proies variées : hamsters, gerbilles, jeunes cailles, œufs de caille, poussins, œufs de poule",
+     "frequency": "en alternance avec les souris et rats",
+     "notes": "Les serpents ont besoin de plus que des rats et des souris pour s'épanouir."
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Proies vivantes",
+     "reason": "Il vaut mieux proposer des proies congelées-décongelées plutôt que vivantes."
+    },
+    {
+     "name": "Proies trop grosses",
+     "reason": "La proie ne doit pas dépasser 1,5 fois la largeur maximale du serpent."
+    },
+    {
+     "name": "Suralimentation",
+     "reason": "Si le serpent grossit, réduire la fréquence des repas ou la taille des proies."
+    }
+   ],
+   "mealFrequency": "weekly",
+   "specificNeeds": "Saupoudrer de temps en temps la proie d'un mélange 50/50 de calcium et de multivitamines avant décongélation.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/black-ratsnake-care-sheet",
+     "title": "Black Ratsnake Care Sheet - ReptiFiles"
+    }
+   ]
+  },
+  "behavior": {
+   "generalBehavior": "Couleuvre diurne et semi-arboricole, excellente grimpeuse et nageuse, à la nature vive ; elle peut faire un bon animal pour le bon propriétaire.",
+   "sociability": "solitaire",
+   "difficultyLevel": "intermédiaire",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": "Pas d'intérêt à garder plusieurs individus dans le même enclos : ce ne sont pas des animaux sociaux.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/black-ratsnake-care-sheet",
+     "title": "Black Ratsnake Care Sheet - ReptiFiles"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 22,
+   "tempMax": 32,
+   "humidityMin": 50,
+   "humidityMax": 70,
+   "minSpaceSize": "Au minimum 6'L × 3'l × 3'H (≈ 180 × 90 × 90 cm) pour un serpent adulte moyen ; plus grand fortement recommandé, surtout en hauteur.",
+   "lightNeeds": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage vif pendant la journée (espèce active de jour comme de nuit).",
+   "activityEnrichment": "Rondelles et plaques de liège, bois, rebords magnétiques, hamacs, plantes artificielles ou vivantes solides ; plus il y a de cachettes, plus le serpent se montre.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/black-ratsnake-care-sheet",
+     "title": "Black Ratsnake Care Sheet - ReptiFiles"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 8170369,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Souris et jeunes rats (de préférence congelés-décongelés)",
+     "frequency": "jeunes : tous les 5-10 jours ; adultes : tous les 10-14 jours",
+     "notes": null
+    },
+    {
+     "name": "Autres proies : hamsters, gerbilles, cailles, œufs de caille, poussins",
+     "frequency": "en alternance",
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Proies vivantes",
+     "reason": "Il vaut mieux proposer des proies congelées-décongelées plutôt que vivantes."
+    },
+    {
+     "name": "Proies trop grosses",
+     "reason": "La proie ne doit pas dépasser 1,5 fois la largeur maximale du serpent (environ 10 % de son poids)."
+    },
+    {
+     "name": "Suralimentation",
+     "reason": "Si le serpent grossit, réduire la fréquence des repas ou la taille des proies."
+    }
+   ],
+   "mealFrequency": "weekly",
+   "specificNeeds": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/kingsnake-care-sheet",
+     "title": "Kingsnake Care Sheet - ReptiFiles"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 8583926,
+  "feeding": {
+   "dietType": "insectivore",
+   "recommendedFoods": [
+    {
+     "name": "Blattes dubia, grillons gavés, blattes discoïdes, vers à soie",
+     "frequency": "jeunes : tous les jours ; adultes : un jour sur deux",
+     "notes": "Insectes gavés 24-48 h avant et saupoudrés de calcium."
+    },
+    {
+     "name": "Fruits mous (papaye, mangue, banane), en friandise occasionnelle",
+     "frequency": "occasionnelle",
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Superworms comme aliment de base",
+     "reason": "Très gras : friandise occasionnelle pour les adultes, pas un aliment de base."
+    },
+    {
+     "name": "Fruits fréquents ou laissés dans l'enclos",
+     "reason": "Fruits au maximum une fois toutes les 2-3 semaines ; retirer rapidement les restes (moisissures, bactéries)."
+    }
+   ],
+   "mealFrequency": "every_2_days",
+   "specificNeeds": "Saupoudrer les insectes de carbonate de calcium (sans D3) à chaque repas et les gaver 24-48 h avant.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptiledirect.com/cuban-knight-anole-care-sheet/",
+     "title": "Cuban Knight Anole Care Sheet - Reptile Direct"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": "Été (reproduction saisonnière, une fois par an)",
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": "Espèce ovipare ; un seul cycle de reproduction par an.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://animaldiversity.org/accounts/Anolis_equestris/",
+     "title": "Anolis equestris - Animal Diversity Web"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 8909809,
+  "feeding": {
+   "dietType": "omnivore",
+   "recommendedFoods": [
+    {
+     "name": "Bâtonnets Reptomin, truite séchée réhydratée, plantes de bassin flottantes ou salade",
+     "frequency": null,
+     "notes": "Aliments secs saupoudrés de calcium et D3 sans phosphore avant réhydratation."
+    },
+    {
+     "name": "Poissons, crevettes, escargots, limaces, vers de terre, têtards, grenouilles entières",
+     "frequency": null,
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Suralimentation",
+     "reason": "Ces tortues peuvent devenir obèses."
+    },
+    {
+     "name": "Croquettes pour chat en grande quantité",
+     "reason": "Croquettes pauvres en graisse, réhydratées, en quantité limitée seulement."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": "Fournir régulièrement des morceaux d'os de seiche à ronger.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.tortoisetrust.org/articles/orbicularis.htm",
+     "title": "Emys orbicularis - Tortoise Trust"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/european-pond-turtle/",
+     "title": "Emys orbicularis - ReptileTalk"
+    }
+   ]
+  },
+  "behavior": {
+   "generalBehavior": "Très vorace et agressive au moment des repas ; de nature craintive, la manipulation n'est pas recommandée.",
+   "sociability": "semi-grégaire",
+   "difficultyLevel": "débutant",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/european-pond-turtle/",
+     "title": "Emys orbicularis - ReptileTalk"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": 24,
+   "tempMax": 38,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Bassin extérieur en pleine terre ; enclos de 9 × 9 m avec une zone d'eau de 4,5 × 4,5 m pour un petit groupe d'adultes (profondeur d'eau de plus de 0,45 m) ; en intérieur, uniquement pour les jeunes (20 à 40 gallons).",
+   "lightNeeds": "Lumière naturelle idéale ; en intérieur, lampes à vapeur de mercure de 100-150 W (UVA et UVB) au-dessus d'une zone de bain de soleil sèche, allumées 12 à 14 h par jour.",
+   "activityEnrichment": "Rondins, bois flotté ou planches comme plateformes de bain de soleil ; végétation aquatique et terrestre indispensable ; zone de gravier ou de sable pour la ponte.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/european-pond-turtle/",
+     "title": "Emys orbicularis - ReptileTalk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 8953936,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Poissons, crevettes, grillons et petits rongeurs de taille adaptée (jeunes)",
+     "frequency": "nouveau-nés : chaque jour ou un jour sur deux ; juvéniles : tous les 2-3 jours",
+     "notes": null
+    },
+    {
+     "name": "Proies entières plus grosses : poissons, rats, poussins, petits lapins (adultes)",
+     "frequency": "adultes : une à deux fois par semaine",
+     "notes": "Les proies entières apportent calcium (os) et vitamines (organes)."
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Suralimentation",
+     "reason": "Un caïman obèse développe une stéatose hépatique et d'autres troubles métaboliques."
+    },
+    {
+     "name": "Alimentation uniquement à base de poissons (thiaminase)",
+     "reason": "Varier les espèces de poissons et inclure des proies non piscicoles."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": "Saupoudrer les proies de calcium, surtout pour les juvéniles nourris de poisson ; multivitamines toutes les une à deux semaines.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.furrycritter.com/pages/articles/reptiles/caiman_keeping.htm",
+     "title": "Caiman keeping guide - Furry Critter Network"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 9032472,
+  "feeding": {
+   "dietType": "insectivore",
+   "recommendedFoods": [
+    {
+     "name": "Blattes dubia et discoïdes, grillons, larves de mouche soldat noire, vers de farine, superworms, vers à tabac, vers à soie",
+     "frequency": "jeunes : tous les jours ; adultes : 2-3 fois par semaine",
+     "notes": null
+    },
+    {
+     "name": "Fruits et légumes",
+     "frequency": "hebdomadaire",
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Souriceaux (pinkies) en grande quantité",
+     "reason": "À réserver à une consommation modérée."
+    },
+    {
+     "name": "Œuf dur en gros morceaux",
+     "reason": "L'œuf dur doit être coupé en petits morceaux."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": "Saupoudrer légèrement tous les insectes d'un supplément de calcium.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet",
+     "title": "Schneider's Skink Care Sheet - Dubia.com"
+    },
+    {
+     "type": "guide",
+     "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/",
+     "title": "Schneider's Skink - The Vet Desk"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": "Une seule ponte par an (espèce monoestrus)",
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": "avance",
+   "notes": "Les œufs fécondés sont portés 6 à 7 semaines, puis incubés 7 à 10 semaines supplémentaires ; l'accouplement est assez agressif et les femelles peuvent être blessées.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://thevetdesk.com/pet-breeds/reptiles/schneiders-skink/",
+     "title": "Schneider's Skink - The Vet Desk"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 24,
+   "tempMax": 29,
+   "humidityMin": null,
+   "humidityMax": 50,
+   "minSpaceSize": "Au minimum 36\" × 18\" × 18\" (≈ 90 × 45 × 45 cm) pour un petit scinque de moins de 14\" ; plus grand pour les adultes.",
+   "lightNeeds": "Espèce diurne qui bénéficie d'un UVB de qualité ; surface de bain de soleil à 105-115 °F (≈ 41-46 °C), côté frais à 75-85 °F.",
+   "activityEnrichment": "Bûches et branches solides, rebords, piles de pierres plates (fixées), abris supplémentaires, plantes ; couvrir trois côtés du terrarium pour que le scinque se sente en sécurité.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://dubiaroaches.com/blogs/lizard-care/schneider-s-skink-care-sheet",
+     "title": "Schneider's Skink Care Sheet - Dubia.com"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 9268496,
+  "behavior": {
+   "generalBehavior": "Tortue en grande partie vivant au fond de l'eau, qui sort parfois se chauffer au soleil ; elle libère un musc nauséabond pour dissuader les prédateurs.",
+   "sociability": "solitaire",
+   "difficultyLevel": "intermédiaire",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": "Animal non social : en aquarium, l'agressivité entre deux tortues est fréquente, la dominante grandissant souvent plus vite.",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://animaldiversity.org/accounts/Chelodina_longicollis/",
+     "title": "Chelodina longicollis - Animal Diversity Web"
+    },
+    {
+     "type": "guide",
+     "url": "https://kb.rspca.org.au/knowledge-base/how-should-i-care-for-my-turtles/",
+     "title": "How should I care for my turtles? - RSPCA Australia"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/eastern-long-necked-turtle/",
+     "title": "Eastern Long-necked Turtle - ReptileTalk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 9799308,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 21,
+   "tempMax": 32,
+   "humidityMin": 40,
+   "humidityMax": 60,
+   "minSpaceSize": "Au minimum 48\" × 24\" × 24\" (≈ 120 × 60 × 60 cm) pour un kingsnake adulte moyen (guide du genre Lampropeltis) ; plus grand fortement recommandé.",
+   "lightNeeds": "UVB à faible niveau (UVI de 2,0-3,0 dans la zone de bain de soleil) et éclairage vif le jour (activité diurne et nocturne).",
+   "activityEnrichment": "Rondelles et plaques de liège, bois, rebords magnétiques, plantes artificielles ou vivantes solides ; multiplier les cachettes.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://reptifiles.com/kingsnake-care-sheet",
+     "title": "Kingsnake Care Sheet - ReptiFiles"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104076753,
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+     "whenToConsult": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Parasites intestinaux et vers de l'estomac",
+     "symptoms": "Ulcères de l'estomac en cas d'infestation importante.",
+     "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104085484,
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (hyperparathyroïdie secondaire nutritionnelle)",
+     "symptoms": "Mauvais appétit, faiblesse, difficulté à marcher, mâchoire ou os des pattes gonflés ou déformés, fractures de la colonne ou des pattes.",
+     "prevention": "Causée par un mauvais rapport calcium/phosphore, un manque de vitamine D3 ou de mauvaises conditions (pas d'UVB, température mal contrôlée) : fournir une alimentation équilibrée, des UVB et une bonne température.",
+     "whenToConsult": "Dès les premiers signes : le diagnostic nécessite des radiographies et des analyses de sang chez le vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites taches rouge violacé dans la bouche au début ; le tissu malade progresse le long des rangées de dents.",
+     "prevention": null,
+     "whenToConsult": "Consulter rapidement : sans traitement, une infection respiratoire ou digestive peut apparaître."
+    },
+    {
+     "name": "Parasites intestinaux et vers de l'estomac",
+     "symptoms": "Ulcères de l'estomac en cas d'infestation importante.",
+     "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer la nourriture non consommée.",
+     "whenToConsult": "Le vétérinaire peut analyser les selles pour rechercher des parasites gastro-intestinaux."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+     "title": "Disorders and Diseases of Reptiles - Merck Veterinary Manual"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 21,
+   "tempMax": 32,
+   "humidityMin": 70,
+   "humidityMax": 95,
+   "minSpaceSize": "Adultes logés dans des enclos de 2,4 × 1,2 × 1,2 m (8 × 4 × 4 pieds) ; jeunes dans 1,8 × 0,6 × 0,6 m ; les enclos tout en verre sont déconseillés.",
+   "lightNeeds": "Espèce diurne qui profite d'une lumière à spectre complet et d'UVB ; point chaud de 48-55 °C (±2) obtenu avec plusieurs lampes de faible puissance.",
+   "activityEnrichment": "Le téju creuse ses propres abris si on lui en donne la possibilité ; étagères intégrées, boîtes humides ou bacs en plastique retournés ; bassin permettant de s'immerger.",
+   "hygieneNotes": null,
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptiletalk.net/red-tegu/",
+     "title": "Red Tegu - ReptileTalk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104087619,
+  "behavior": {
+   "generalBehavior": "Grand lézard arboricole ; les mâles sont très territoriaux et agressifs pendant la saison de reproduction.",
+   "sociability": "semi-grégaire",
+   "difficultyLevel": "expert",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": "Les femelles peuvent se montrer défensives et violentes envers les autres femelles, surtout en période de nidification.",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana",
+     "title": "Lesser Antillean iguana - Wikipedia"
+    },
+    {
+     "type": "wikipedia",
+     "url": "https://animaldiversity.org/accounts/Iguana_delicatissima/",
+     "title": "Iguana delicatissima - Animal Diversity Web"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Maladie osseuse métabolique (MBD)",
+     "symptoms": "Gonflement de la mâchoire inférieure, ramollissement des os de la mâchoire et du visage (« rubber jaw »), gonflement des membres postérieurs.",
+     "prevention": "Causée par une alimentation trop riche en phosphore et pauvre en calcium et/ou vitamine D3, ou par un manque d'UV-B ou de lumière naturelle : corriger l'alimentation et fournir des UV-B.",
+     "whenToConsult": "Toute déviation par rapport à la normale justifie une évaluation immédiate par un vétérinaire."
+    },
+    {
+     "name": "Stomatite infectieuse (« mouth rot »)",
+     "symptoms": "Petites hémorragies ponctuelles sur les gencives, gencives gonflées ou excès de mucus épais dans la bouche.",
+     "prevention": null,
+     "whenToConsult": "Toute déviation par rapport à la normale justifie une évaluation immédiate par un vétérinaire."
+    },
+    {
+     "name": "Mycose cutanée CANV (« maladie du champignon jaune »)",
+     "symptoms": "Lésions cutanées croûteuses beige à jaune sur n'importe quelle partie du corps.",
+     "prevention": null,
+     "whenToConsult": "Toute déviation par rapport à la normale justifie une évaluation immédiate par un vétérinaire."
+    },
+    {
+     "name": "Infections respiratoires et pneumonie",
+     "symptoms": "Éternuements, écoulements nasaux ou oculaires, bulles dans la bouche, respiration rapide ou superficielle, léthargie.",
+     "prevention": "Éviter le stress, une mauvaise alimentation et des conditions froides ou sales.",
+     "whenToConsult": "Toute déviation par rapport à la normale justifie une évaluation immédiate par un vétérinaire."
+    }
+   ],
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://vcahospitals.com/know-your-pet/iguanas-diseases",
+     "title": "Common diseases of pet iguanas - VCA Animal Hospitals"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": "Accouplement pendant la saison des pluies, d'avril à juin",
+   "gestationDays": null,
+   "incubationDays": 90,
+   "litterSizeMin": 4,
+   "litterSizeMax": 26,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": "avance",
+   "notes": "Espèce ovipare ; la reproduction en captivité est rare (la plupart des œufs pondus sont infertiles).",
+   "sources": [
+    {
+     "type": "wikipedia",
+     "url": "https://animaldiversity.org/accounts/Iguana_delicatissima/",
+     "title": "Iguana delicatissima - Animal Diversity Web"
+    },
+    {
+     "type": "wikipedia",
+     "url": "https://en.wikipedia.org/wiki/Lesser_Antillean_iguana",
+     "title": "Lesser Antillean iguana - Wikipedia"
+    }
+   ]
+  }
+ }
+]

@@ -1,65 +1,173 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method, @typescript-eslint/require-await -- tests : mocks axios/supertest typés any */
-import axios from 'axios';
-import { Logger } from '@nestjs/common';
+import { HttpException, Logger } from '@nestjs/common';
+import { AxiosError } from 'axios';
 import { SpeciesPlusService } from './speciesplus.service';
+import { ExternalUnavailableError } from '../../external/http/external-errors';
 
-jest.mock('axios');
-const mockedGet = axios.get as jest.Mock;
-
-function buildService() {
-  const cache = { get: jest.fn().mockResolvedValue(null), set: jest.fn() };
-  return new SpeciesPlusService(cache as never);
+function httpError(status: number) {
+  return new AxiosError(
+    `Request failed with status code ${status}`,
+    AxiosError.ERR_BAD_RESPONSE,
+    undefined,
+    {},
+    { status, data: {}, statusText: '', headers: {}, config: {} as never },
+  );
 }
 
-describe('SpeciesPlusService (résilience et fuite de token)', () => {
+function buildService(stale: unknown = null) {
+  const cache = {
+    get: jest.fn().mockResolvedValue(null),
+    getStale: jest.fn().mockReturnValue(stale),
+    set: jest.fn(),
+  };
+  const http = { get: jest.fn() };
+  return {
+    service: new SpeciesPlusService(cache as never, http as never),
+    cache,
+    http,
+  };
+}
+
+describe('SpeciesPlusService', () => {
+  const originalToken = process.env.SPECIESPLUS_API_TOKEN;
+
   beforeEach(() => {
-    mockedGet.mockReset();
     jest.spyOn(Logger.prototype, 'error').mockImplementation(() => undefined);
   });
-  afterEach(() => jest.restoreAllMocks());
-
-  it('applique timeout 8 s et maxRedirects 0 à chaque appel', async () => {
-    mockedGet.mockResolvedValue({ data: {} });
-    const service = buildService();
-    await service.searchByScientificName('Boa constrictor');
-    await service.getTaxonDetails(1);
-    await service.getCitesLegislation(1);
-    await service.getEULegislation(1);
-    await service.getDistributions(1);
-
-    expect(mockedGet).toHaveBeenCalledTimes(5);
-    for (const call of mockedGet.mock.calls) {
-      expect(call[1]).toEqual(
-        expect.objectContaining({ timeout: 8000, maxRedirects: 0 }),
-      );
-    }
+  afterEach(() => {
+    jest.restoreAllMocks();
+    if (originalToken === undefined) delete process.env.SPECIESPLUS_API_TOKEN;
+    else process.env.SPECIESPLUS_API_TOKEN = originalToken;
   });
 
-  it('ne logge jamais le header X-Authentication-Token (message + statut seulement)', async () => {
-    const axiosError = Object.assign(
-      new Error('Request failed with status code 401'),
-      {
-        response: { status: 401 },
-        config: { headers: { 'X-Authentication-Token': 'super-secret-token' } },
-      },
-    );
-    mockedGet.mockRejectedValue(axiosError);
-    const errorSpy = jest.spyOn(Logger.prototype, 'error');
-    const service = buildService();
+  describe('sans jeton (intégration désactivée)', () => {
+    beforeEach(() => {
+      delete process.env.SPECIESPLUS_API_TOKEN;
+    });
 
-    await expect(service.searchByScientificName('x')).resolves.toEqual([]);
-    await expect(service.getTaxonDetails(1)).resolves.toBeNull();
-    await expect(service.getCitesLegislation(1)).resolves.toEqual([]);
-    await expect(service.getEULegislation(1)).resolves.toEqual([]);
-    await expect(service.getDistributions(1)).resolves.toEqual([]);
+    it('isConfigured() est faux', () => {
+      expect(buildService().service.isConfigured()).toBe(false);
+    });
 
-    expect(errorSpy).toHaveBeenCalledTimes(5);
-    for (const call of errorSpy.mock.calls) {
-      expect(call).toHaveLength(1);
-      expect(String(call[0])).toContain('(HTTP 401)');
-    }
-    expect(JSON.stringify(errorSpy.mock.calls)).not.toContain(
-      'super-secret-token',
-    );
+    it('chaque méthode répond 503 INTEGRATION_DISABLED sans aucun appel réseau ni cache', async () => {
+      const { service, http, cache } = buildService();
+      const calls = [
+        () => service.searchByScientificName('Boa constrictor'),
+        () => service.getTaxonDetails(1),
+        () => service.getCitesLegislation(1),
+        () => service.getEULegislation(1),
+        () => service.getDistributions(1),
+      ];
+      for (const call of calls) {
+        const error = (await call().catch((e: unknown) => e)) as HttpException;
+        expect(error).toBeInstanceOf(HttpException);
+        expect(error.getStatus()).toBe(503);
+        expect(error.getResponse()).toMatchObject({
+          code: 'INTEGRATION_DISABLED',
+        });
+      }
+      expect(http.get).not.toHaveBeenCalled();
+      expect(cache.set).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('avec jeton', () => {
+    beforeEach(() => {
+      process.env.SPECIESPLUS_API_TOKEN = 'super-secret-token';
+    });
+
+    it('appelle Species+ via le client partagé avec le header du jeton', async () => {
+      const { service, http } = buildService();
+      http.get.mockResolvedValue({ data: { taxon_concepts: [{ id: 7 }] } });
+
+      await expect(
+        service.searchByScientificName('Boa constrictor'),
+      ).resolves.toEqual([{ id: 7 }]);
+      expect(http.get).toHaveBeenCalledWith(
+        'speciesplus',
+        'https://api.speciesplus.net/api/v1/taxon_concepts',
+        expect.objectContaining({
+          params: { name: 'Boa constrictor' },
+          headers: { 'X-Authentication-Token': 'super-secret-token' },
+        }),
+      );
+    });
+
+    it('met en cache une réponse valide', async () => {
+      const { service, http, cache } = buildService();
+      http.get.mockResolvedValue({
+        data: { cites_listings: [{ appendix: 'II' }] },
+      });
+
+      await service.getCitesLegislation(7);
+
+      expect(cache.set).toHaveBeenCalledWith(
+        'speciesplus:cites:7',
+        JSON.stringify([{ appendix: 'II' }]),
+        604800,
+      );
+    });
+
+    it('panne sans cache : 503 explicite (plus de liste vide silencieuse), rien en cache', async () => {
+      const { service, http, cache } = buildService();
+      http.get.mockRejectedValue(httpError(500));
+
+      const error = (await service
+        .getEULegislation(7)
+        .catch((e: unknown) => e)) as HttpException;
+      expect(error).toBeInstanceOf(HttpException);
+      expect(error.getStatus()).toBe(503);
+      expect(error.getResponse()).toMatchObject({
+        code: 'UPSTREAM_UNAVAILABLE',
+      });
+      expect(cache.set).not.toHaveBeenCalled();
+    });
+
+    it('disjoncteur ouvert : repli sur la dernière réponse connue (périmée)', async () => {
+      const { service, http, cache } = buildService(
+        JSON.stringify([{ appendix: 'II' }]),
+      );
+      http.get.mockRejectedValue(new ExternalUnavailableError('speciesplus'));
+
+      await expect(service.getCitesLegislation(7)).resolves.toEqual([
+        { appendix: 'II' },
+      ]);
+      expect(cache.set).not.toHaveBeenCalled();
+    });
+
+    it('404 du fournisseur (taxon inconnu) : valeur « vide » légitime, pas de cache', async () => {
+      const { service, http, cache } = buildService();
+      http.get.mockRejectedValue(httpError(404));
+
+      await expect(service.getTaxonDetails(999)).resolves.toBeNull();
+      await expect(service.getDistributions(999)).resolves.toEqual([]);
+      expect(cache.set).not.toHaveBeenCalled();
+    });
+
+    it('ne logge jamais le header X-Authentication-Token (message + statut seulement)', async () => {
+      const axiosError = Object.assign(
+        new Error('Request failed with status code 401'),
+        {
+          response: { status: 401 },
+          config: {
+            headers: { 'X-Authentication-Token': 'super-secret-token' },
+          },
+        },
+      );
+      const { service, http } = buildService();
+      http.get.mockRejectedValue(axiosError);
+      const errorSpy = jest.spyOn(Logger.prototype, 'error');
+
+      await service.searchByScientificName('x').catch(() => undefined);
+      await service.getTaxonDetails(1).catch(() => undefined);
+
+      expect(errorSpy).toHaveBeenCalledTimes(2);
+      for (const call of errorSpy.mock.calls) {
+        expect(call).toHaveLength(1);
+        expect(String(call[0])).toContain('(HTTP 401)');
+      }
+      expect(JSON.stringify(errorSpy.mock.calls)).not.toContain(
+        'super-secret-token',
+      );
+    });
   });
 });

@@ -488,7 +488,8 @@ export class AuthService implements OnModuleInit {
   /**
    * Révoque tous les accès d'un compte, dans la transaction `tx` qui DOIT détenir le verrou User
    * (`lockUserRow`) : tokenVersion++ (access tokens), refresh tokens, lien du flux calendrier
-   * et abonnements push (accès persistants qui survivaient à un reset / logout-all).
+   * et abonnements push, Web Push et natifs (accès persistants qui survivaient à un reset /
+   * logout-all).
    */
   private async revokeEveryAccess(
     tx: Prisma.TransactionClient,
@@ -500,6 +501,8 @@ export class AuthService implements OnModuleInit {
       data: { revokedAt: new Date() },
     });
     await tx.pushSubscription.deleteMany({ where: { userId } });
+    // W6-07 : jetons de push natif (installations de l'app) — même logique que le Web Push.
+    await tx.deviceToken.deleteMany({ where: { userId } });
     return tx.user.update({
       where: { id: userId },
       data: { ...data, tokenVersion: { increment: 1 }, calendarToken: null },
@@ -636,7 +639,8 @@ export class AuthService implements OnModuleInit {
   /**
    * Purge best effort des refresh tokens expirés du compte (la table grossissait sans limite :
    * une ligne par rotation). Lancée sans attendre : hors du chemin critique du refresh, et un
-   * échec est sans conséquence. Une purge globale est prévue dans un autre chantier.
+   * échec est sans conséquence. La purge globale (tous comptes, jetons révoqués) relève de
+   * MaintenanceService (W2-08).
    */
   private purgeExpiredRefreshTokens(userId: string): void {
     void this.prisma.refreshToken
@@ -647,10 +651,12 @@ export class AuthService implements OnModuleInit {
   /**
    * Révoque la session (famille) du refresh token présenté. Idempotent, ne révèle rien.
    * `endpoint` (facultatif) : abonnement push de cet appareil, supprimé s'il appartient au compte.
+   * `deviceToken` (facultatif, W6-07) : jeton de push natif de l'app, idem.
    */
   async logout(
     rawRefreshToken: string,
     endpoint?: string,
+    deviceToken?: string,
   ): Promise<{ message: string }> {
     const record = await this.prisma.refreshToken.findUnique({
       where: { tokenHash: hashOpaqueToken(rawRefreshToken) },
@@ -666,6 +672,11 @@ export class AuthService implements OnModuleInit {
         if (endpoint) {
           await tx.pushSubscription.deleteMany({
             where: { userId: record.userId, endpoint },
+          });
+        }
+        if (deviceToken) {
+          await tx.deviceToken.deleteMany({
+            where: { userId: record.userId, token: deviceToken },
           });
         }
       });
@@ -925,3 +936,8 @@ export class AuthService implements OnModuleInit {
     }
   }
 }
+
+/** Utilisateur authentifié tel que posé sur `req.user` par la stratégie JWT. */
+export type AuthenticatedUser = NonNullable<
+  Awaited<ReturnType<AuthService['validateUser']>>
+>;

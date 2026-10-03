@@ -1,9 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BadRequestException, INestApplication, ValidationPipe } from '@nestjs/common';
+import {
+  BadRequestException,
+  INestApplication,
+  Provider,
+  Type,
+  ValidationPipe,
+} from '@nestjs/common';
 import helmet from 'helmet';
 import { AppModule } from '../../src/app.module';
 import { CacheModule } from '../../src/cache/cache.module';
-import { GbifService } from '../../src/external/gbif.service';
 import { HttpExceptionFilter } from '../../src/common/filters/http-exception.filter';
 import { TestCacheModule } from '../test-cache.module';
 
@@ -12,28 +17,6 @@ export interface TestApp {
   /** URL de base (http://127.0.0.1:<port>) du serveur déjà à l'écoute. */
   url: string;
 }
-
-export interface CreateTestAppOptions {
-  /**
-   * Remplace GbifService par un stub hors-ligne. À utiliser dans les suites qui
-   * mesurent des temps de réponse ou des rafales : sans cela, chaque détail/recherche
-   * d'espèce interroge l'API GBIF réelle (latence et pannes réseau → tests instables).
-   */
-  offlineGbif?: boolean;
-}
-
-/** GBIF « indisponible » : réponses vides immédiates, aucun appel réseau. */
-const offlineGbifStub = {
-  searchSpecies: async () => ({ results: [], count: 0, offset: 0, limit: 0, endOfRecords: true }),
-  getSpecies: async () => null,
-  getVernacularNames: async () => ({ results: [] }),
-  getIucn: async () => null,
-  getDistributions: async () => ({ results: [] }),
-  getMedia: async () => ({ results: [] }),
-  getMetrics: async () => null,
-  countOccurrences: async () => 0,
-  checkApiHealth: async () => ({ status: 'offline-stub' }),
-};
 
 /**
  * Fabrique de l'application pour les tests e2e, alignée sur `src/main.ts` :
@@ -48,20 +31,28 @@ const offlineGbifStub = {
  *   await request(url).get('/health').expect(200);
  *
  * Penser à `await app.close()` dans `afterAll`.
- * Option `offlineGbif: true` pour des tests sans dépendance réseau.
+ *
+ * Aucun accès réseau : `test/setup.ts` branche un transport HTTP hors-ligne (fixtures GBIF,
+ * Open Pet Food Facts…) sous le client externe partagé. Pour simuler une panne, appeler
+ * `setExternalHttpAdapterOverride(createFakeExternalAdapter([routePanne]))` AVANT cette fabrique.
  */
-export async function createTestApp(options: CreateTestAppOptions = {}): Promise<TestApp> {
-  let builder = Test.createTestingModule({
+export interface TestAppExtras {
+  /** Contrôleurs à monter en plus d'AppModule (ex. module non chargé sans Redis). */
+  controllers?: Type<unknown>[];
+  providers?: Provider[];
+}
+
+export async function createTestApp(
+  extras: TestAppExtras = {},
+): Promise<TestApp> {
+  const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [AppModule],
+    controllers: extras.controllers ?? [],
+    providers: extras.providers ?? [],
   })
     .overrideModule(CacheModule)
-    .useModule(TestCacheModule);
-
-  if (options.offlineGbif) {
-    builder = builder.overrideProvider(GbifService).useValue(offlineGbifStub);
-  }
-
-  const moduleFixture: TestingModule = await builder.compile();
+    .useModule(TestCacheModule)
+    .compile();
 
   const app = moduleFixture.createNestApplication();
 

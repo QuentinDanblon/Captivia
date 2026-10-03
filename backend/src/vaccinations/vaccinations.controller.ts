@@ -10,10 +10,18 @@ import {
   Req,
   Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { VaccinationsService } from './vaccinations.service';
-import { CreateVaccinationDto, UpdateVaccinationDto } from './dto/vaccination.dto';
+import {
+  CreateVaccinationDto,
+  UpdateVaccinationDto,
+} from './dto/vaccination.dto';
 import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 
 @ApiTags('animals')
@@ -25,7 +33,9 @@ export class VaccinationsController {
   constructor(private readonly vaccinationsService: VaccinationsService) {}
 
   @Get()
-  @ApiOperation({ summary: 'List vaccinations for an animal (sorted by date desc)' })
+  @ApiOperation({
+    summary: 'List vaccinations for an animal (sorted by date desc)',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async findAll(
     @Req() req: { user: { id: string } },
@@ -36,7 +46,10 @@ export class VaccinationsController {
   }
 
   @Post()
-  @ApiOperation({ summary: 'Add a vaccination (nextDueDate generates a reminder event on the due day)' })
+  @ApiOperation({
+    summary:
+      'Add a vaccination (nextDueDate generates a reminder event on the due day)',
+  })
   @ApiParam({ name: 'animalId', description: 'Animal ID' })
   async create(
     @Req() req: { user: { id: string } },
@@ -56,7 +69,12 @@ export class VaccinationsController {
     @Param('vaccinationId') vaccinationId: string,
     @Body() dto: UpdateVaccinationDto,
   ) {
-    return this.vaccinationsService.update(animalId, vaccinationId, req.user.id, dto);
+    return this.vaccinationsService.update(
+      animalId,
+      vaccinationId,
+      req.user.id,
+      dto,
+    );
   }
 
   @Delete(':vaccinationId')
@@ -68,6 +86,10 @@ export class VaccinationsController {
     @Param('animalId') animalId: string,
     @Param('vaccinationId') vaccinationId: string,
   ) {
-    return this.vaccinationsService.remove(animalId, vaccinationId, req.user.id);
+    return this.vaccinationsService.remove(
+      animalId,
+      vaccinationId,
+      req.user.id,
+    );
   }
 }

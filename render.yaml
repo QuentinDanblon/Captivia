@@ -34,11 +34,10 @@ services:
         generateValue: true
       # Origines autorisées (CORS) et URL publique du site. À ajuster si le nom du site
       # Netlify diffère de « captivia ». Obligatoires en production (voir docs/DEPLOY.md).
-      # Apps mobiles Capacitor (vague 6, docs/MOBILE.md) : ajouter les origines de la WebView,
-      #   https://captivia-app.netlify.app,capacitor://localhost,https://localhost
-      # (capacitor://localhost = iOS, https://localhost = Android).
+      # Inclut les origines de la WebView des apps mobiles Capacitor (docs/MOBILE.md § 5) :
+      # capacitor://localhost = iOS, https://localhost = Android.
       - key: CORS_ORIGIN
-        value: https://captivia-app.netlify.app
+        value: https://captivia-app.netlify.app,capacitor://localhost,https://localhost
       - key: FRONTEND_URL
         value: https://captivia-app.netlify.app
       # URL publique du site web, utilisée pour les liens des e-mails et des pages publiques.
@@ -64,6 +63,12 @@ services:
         sync: false
       - key: VAPID_SUBJECT
         sync: false
+      # Push natif de l'app (W6-07, docs/MOBILE.md § 7.3) : clé JSON du compte de service Firebase,
+      # encodée en base64. Sans elle, le push natif est désactivé (journal info au démarrage).
+      - key: FCM_SERVICE_ACCOUNT_JSON
+        sync: false
+      - key: FCM_PROJECT_ID
+        sync: false
       # Achats intégrés (W6-08, docs/PAYMENTS.md) : IAP_ENABLED=true rend
       # REVENUECAT_WEBHOOK_SECRET obligatoire (≥ 32 caractères) au démarrage.
       - key: IAP_ENABLED
@@ -78,7 +83,21 @@ services:
       # docs/RUNBOOK.md). Laisser vide pour garder le défaut.
       - key: GUEST_RETENTION_DAYS
         sync: false
+      # Maintenance quotidienne (W2-08, 03:41 UTC) : purge des jetons expirés, des refresh
+      # tokens périmés et des événements de rappel de plus de 90 jours. « false » la suspend
+      # (incident, enquête) ; laisser vide pour la garder active (docs/RUNBOOK.md).
+      - key: MAINTENANCE_ENABLED
+        sync: false
       - key: SENTRY_TRACES_SAMPLE_RATE
+        sync: false
+      # Intégrations externes (W3-05) — facultatives, à saisir dans le Dashboard.
+      # Species+ (CITES/UE) : sans jeton, /speciesplus/* répond 503 INTEGRATION_DISABLED.
+      - key: SPECIESPLUS_API_TOKEN
+        sync: false
+      # PubMed (NCBI) est public : la clé et l'e-mail relèvent seulement le quota.
+      - key: NCBI_API_KEY
+        sync: false
+      - key: NCBI_EMAIL
         sync: false
       - key: MAIL_HOST
         sync: false
@@ -93,6 +112,42 @@ services:
       - key: MAIL_FROM
         sync: false
       - key: REMINDERS_ENABLED
+        sync: false
+      # Communauté (volet social) — désactivée par défaut : toutes les routes /community/*
+      # répondent 404. COMMUNITY_ENABLED=true en production EXIGE le pilote s3 (le disque du
+      # service gratuit est éphémère) : MEDIA_DRIVER=s3, MEDIA_BUCKET, MEDIA_PUBLIC_BASE_URL,
+      # S3_ENDPOINT, S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY (Cloudflare R2, docs/DEPLOY.md).
+      - key: COMMUNITY_ENABLED
+        sync: false
+      - key: COMMUNITY_CONTACT_EMAIL
+        sync: false
+      - key: COMMUNITY_HIDE_THRESHOLD
+        sync: false
+      - key: COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS
+        sync: false
+      - key: COMMUNITY_POSTS_PER_HOUR
+        sync: false
+      - key: COMMUNITY_COMMENTS_PER_MINUTE
+        sync: false
+      - key: COMMUNITY_UPLOADS_PER_HOUR
+        sync: false
+      - key: MEDIA_DRIVER
+        sync: false
+      - key: MEDIA_MAX_BYTES
+        sync: false
+      - key: MEDIA_BUCKET
+        sync: false
+      - key: MEDIA_PUBLIC_BASE_URL
+        sync: false
+      - key: S3_ENDPOINT
+        sync: false
+      - key: S3_REGION
+        sync: false
+      - key: S3_ACCESS_KEY_ID
+        sync: false
+      - key: S3_SECRET_ACCESS_KEY
+        sync: false
+      - key: S3_FORCE_PATH_STYLE
         sync: false
       # Les opérateurs ne sont plus définis par variable d'environnement (W0-01) :
       # promouvoir un compte existant depuis un poste de dev :

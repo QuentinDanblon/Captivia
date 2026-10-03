@@ -4,6 +4,7 @@ import * as webPush from 'web-push';
 import { Test } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { httpServer } from './utils/http';
 import { App } from 'supertest/types';
 import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
@@ -34,7 +35,7 @@ describe('Web Push — SSRF et oracle (constat 2)', () => {
     priv: process.env.VAPID_PRIVATE_KEY,
   };
   const tag = `${Date.now()}-${Math.floor(Math.random() * 1e5)}`;
-  const server = (): App => app.getHttpServer() as App;
+  const server = (): App => httpServer(app) as App;
   const keys = {
     // Clé publique P-256 valide (65 octets) : le chiffrement web-push réussirait.
     p256dh: crypto

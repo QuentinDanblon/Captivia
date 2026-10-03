@@ -15,7 +15,7 @@ import {
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { AuthService } from './auth.service';
+import { AuthService, AuthenticatedUser } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
@@ -129,11 +129,15 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary:
-      'Revoke the session (refresh token family) of the given refresh token; optionally remove this device push subscription (endpoint)',
+      'Revoke the session (refresh token family) of the given refresh token; optionally remove this device push subscription (endpoint) and native push token (deviceToken)',
   })
   @ApiResponse({ status: 200, description: 'Logged out (idempotent)' })
   async logout(@Body() dto: LogoutDto) {
-    return this.authService.logout(dto.refreshToken, dto.endpoint);
+    return this.authService.logout(
+      dto.refreshToken,
+      dto.endpoint,
+      dto.deviceToken,
+    );
   }
 
   @Post('logout-all')
@@ -221,7 +225,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Get current user profile' })
   @ApiResponse({ status: 200, description: 'User profile' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getProfile(@Request() req) {
+  getProfile(@Request() req: { user: AuthenticatedUser }) {
     return req.user;
   }
 }

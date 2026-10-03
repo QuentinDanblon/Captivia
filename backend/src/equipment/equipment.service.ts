@@ -1,7 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { Prisma, RecommendedEquipment } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
-import { AmazonPAService } from './services/amazon-pa.service';
 import {
   PaginationQueryDto,
   PAGINATION_MAX_LIMIT,
@@ -14,16 +13,13 @@ export class EquipmentService {
 
   // Mapping of GBIF class to template species ID for fallback
   private readonly classTemplateMapping: Record<string, number> = {
-    'Reptilia': 2448340, // Boa constrictor as reptile template
-    'Aves': 0, // No bird template yet
-    'Mammalia': 0, // No mammal template yet
-    'Amphibia': 0, // No amphibian template yet
+    Reptilia: 2448340, // Boa constrictor as reptile template
+    Aves: 0, // No bird template yet
+    Mammalia: 0, // No mammal template yet
+    Amphibia: 0, // No amphibian template yet
   };
 
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly amazonService: AmazonPAService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async getRecommendedEquipment(
     speciesId?: number,
@@ -31,7 +27,7 @@ export class EquipmentService {
     size?: string,
     page?: PaginationQueryDto,
   ): Promise<unknown> {
-    const where: any = {};
+    const where: Prisma.RecommendedEquipmentWhereInput = {};
 
     if (speciesId) {
       where.OR = [{ speciesId }, { speciesId: null }]; // Include general items
@@ -53,39 +49,33 @@ export class EquipmentService {
 
     // If no species-specific equipment found (only general), try fallback by class
     if (speciesId && recommendations.length === 0) {
-      this.logger.debug(`No specific equipment found for species ${speciesId}, attempting class fallback`);
-      recommendations = await this.getEquipmentFallbackByClass(speciesId, category, size);
+      this.logger.debug(
+        `No specific equipment found for species ${speciesId}, attempting class fallback`,
+      );
+      recommendations = await this.getEquipmentFallbackByClass(
+        speciesId,
+        category,
+        size,
+      );
     }
 
-    // For each recommendation, fetch products from Amazon
-    const recommendationsWithProducts = await Promise.all(
-      recommendations.map(async (rec) => {
-        const searchTerms = rec.searchTerms.join(' ');
-        const products = await this.amazonService.searchProducts(
-          searchTerms,
-          rec.category,
-          5,
-        );
-
-        return {
-          id: rec.id,
-          label: rec.label,
-          category: rec.category,
-          size: rec.size,
-          speciesId: rec.speciesId,
-          products,
-        };
-      }),
-    );
-
+    // Recommandations éditoriales uniquement (taxonomie locale). L'intégration produits
+    // Amazon (PA-API / Creators API) n'est pas branchée : aucune liste de produits n'est
+    // renvoyée, donc aucune donnée inventée (décision D-09, tâche W3-05).
     return {
       speciesId,
       category,
       size,
-      recommendations: recommendationsWithProducts,
+      recommendations: recommendations.map((rec) => ({
+        id: rec.id,
+        label: rec.label,
+        category: rec.category,
+        size: rec.size,
+        speciesId: rec.speciesId,
+      })),
       affiliate: {
         disclaimer:
-          'Les liens vers Amazon sont des liens affiliés. En achetant via ces liens, vous soutenez Captivia sans coût supplémentaire.',
+          'Certains liens de la boutique Captivia sont des liens affiliés. En achetant via ces liens, vous soutenez Captivia sans coût supplémentaire.',
         transparencyUrl: '/transparency',
       },
     };
@@ -98,11 +88,11 @@ export class EquipmentService {
     speciesId: number,
     category?: string,
     size?: string,
-  ): Promise<any[]> {
+  ): Promise<RecommendedEquipment[]> {
     try {
       // Try to fetch species data to get its class
       // Note: This is a simple implementation; in production, you'd want to cache this
-      const where: any = {
+      const where: Prisma.RecommendedEquipmentWhereInput = {
         OR: [{ speciesId: null }], // Get general items first
       };
 
@@ -125,10 +115,14 @@ export class EquipmentService {
         take: PAGINATION_MAX_LIMIT,
       });
 
-      this.logger.debug(`Returning ${generalEquipment.length} general equipment as fallback`);
+      this.logger.debug(
+        `Returning ${generalEquipment.length} general equipment as fallback`,
+      );
       return generalEquipment;
     } catch (error) {
-      this.logger.error(`Error in equipment fallback: ${error.message}`);
+      this.logger.error(
+        `Error in equipment fallback: ${(error as Error).message}`,
+      );
       return [];
     }
   }
@@ -179,9 +173,7 @@ export class EquipmentService {
         error instanceof Prisma.PrismaClientKnownRequestError &&
         error.code === 'P2025'
       ) {
-        throw new NotFoundException(
-          `Equipment recommendation ${id} not found`,
-        );
+        throw new NotFoundException(`Equipment recommendation ${id} not found`);
       }
       throw error;
     }
@@ -194,9 +186,5 @@ export class EquipmentService {
     });
 
     return categories.map((c) => c.category);
-  }
-
-  async searchAmazonProducts(query: string, category?: string, limit = 10): Promise<unknown> {
-    return this.amazonService.searchProducts(query, category, limit);
   }
 }

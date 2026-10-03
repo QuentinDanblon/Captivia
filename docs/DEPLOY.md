@@ -47,7 +47,7 @@ Dépôt → *Settings → Secrets and variables → Actions* :
 |---|---|---|---|
 | Secret | `NEON_DATABASE_URL_DIRECT` | URL Neon **directe** | Jobs `migrate-production`, « Seed production » et « Database Backup » |
 | Secret | `BACKUP_AGE_RECIPIENT` | clé **publique** age (`age1…`) | Chiffrement des sauvegardes (workflow « Database Backup », voir `docs/RUNBOOK.md` §3) |
-| Variable | `API_URL` | ex. `https://captivia-api.onrender.com` | `keep-warm.yml` (manuel) |
+| Variable | `API_URL` | ex. `https://captiviacaptivia-api.onrender.com` | `keep-warm.yml` (manuel) |
 
 Puis *Settings → Environments → New environment* : **`production`** (les jobs de migration et de seed y sont rattachés). Option : ajouter des « Required reviewers » ; dans ce cas la migration attend une approbation manuelle, et Render attend donc aussi (le check reste « en attente »).
 
@@ -64,13 +64,21 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
    - Facultatifs : `SENTRY_DSN`, `MAIL_HOST` (+ autres `MAIL_*`).
 3. Vérifier `CORS_ORIGIN`, `FRONTEND_URL` et `PUBLIC_WEB_URL` dans `render.yaml` : ils valent `https://captivia-app.netlify.app`. Si le nom du site Netlify est différent, corriger le fichier et committer.
 4. Le déploiement est piloté par `autoDeployTrigger: checksPass` : aucun Deploy Hook n'est nécessaire. Dans *Settings* du service, vérifier que le déclencheur est bien « After CI checks pass ».
-5. Noter l'URL du service (`https://captivia-api.onrender.com`) et la saisir dans la variable GitHub `API_URL` (§3.2).
+5. Noter l'URL du service (`https://captiviacaptivia-api.onrender.com`) et la saisir dans la variable GitHub `API_URL` (§3.2).
 
 ### 3.4 Netlify (frontend)
 1. *Add new project → Import an existing project → GitHub* → choisir le dépôt. Le `netlify.toml` est détecté (base `frontend`, commande `npm run build`, Node 22). Nom du site : `captivia` s'il est libre (supprimer l'ancien site homonyme sur l'ancien compte pour libérer le nom).
 2. *Site configuration → Environment variables* : créer `NEXT_PUBLIC_API_URL` = URL de l'API Render, avec une valeur pour les contextes **Production** et **Deploy Previews**. Cette variable est lue **au build** : après modification, relancer un déploiement.
 3. Activer les **Deploy Previews** (par défaut pour les PR). L'origine d'une preview (`https://deploy-preview-N--captivia-app.netlify.app`) n'est pas dans `CORS_ORIGIN` : les appels API des previews échoueront tant que l'API de staging (DEP-05) n'autorise pas ce motif, ou que l'origine n'est pas ajoutée à la main.
 4. Les workflows GitHub ne déploient plus le front : `NETLIFY_AUTH_TOKEN` et `NETLIFY_SITE_ID` ne sont plus nécessaires.
+5. **Apps mobiles (W6-09)** : créer aussi `APPLE_TEAM_ID` et `ANDROID_SHA256_CERT_FINGERPRINTS` (contexte **Production** ; `IOS_BUNDLE_ID` et `ANDROID_PACKAGE_NAME` seulement si l'identifiant diffère de `app.captivia`). Ces variables sont lues **au build** pour générer `/.well-known/apple-app-site-association` et `/.well-known/assetlinks.json` ; une valeur absente ou mal formée donne une 404 (jamais de fichier invalide). Après modification, relancer un déploiement, puis vérifier :
+
+   ```bash
+   curl -sI https://captivia-app.netlify.app/.well-known/apple-app-site-association   # 200, content-type: application/json, sans redirection
+   curl -s  https://captivia-app.netlify.app/.well-known/assetlinks.json
+   ```
+
+   Le domaine des liens est celui de `NEXT_PUBLIC_SITE_URL` : en cas de domaine définitif, le reporter aussi dans *Associated Domains* (iOS) et l'`intent-filter` (Android), voir `docs/MOBILE.md` § 8.
 
 ### 3.5 Protection de `main`
 *Settings → Branches → Add rule* sur `main` : PR obligatoire, checks requis (`test-backend`, `build-frontend`, `docker-build`, `quality`), branche à jour. Ne pas exiger `migrate-production` (il ne tourne que sur `push`).
@@ -89,7 +97,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `DATABASE_URL` | Render | Neon **pooled** + `pgbouncer=true&connect_timeout=15` | Oui |
 | `JWT_SECRET` | Render | généré par Render (≥ 32 caractères) | Oui |
 | `NODE_ENV` | Render | `production` | Oui |
-| `CORS_ORIGIN` | Render | URL Netlify (+ `capacitor://localhost,https://localhost` en vague 6) | Oui (*) |
+| `CORS_ORIGIN` | Render | URL Netlify + `capacitor://localhost,https://localhost` (app mobile, déjà dans `render.yaml`) | Oui (*) |
 | `FRONTEND_URL` | Render | URL publique du site | Oui (*) |
 | `PUBLIC_WEB_URL` | Render | URL publique du site (liens e-mails, pages publiques) | Oui (*) |
 | `TRUST_PROXY` | Render | `true` | Oui |
@@ -99,14 +107,55 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `SENTRY_DSN` | Render | projet Sentry UE | Recommandé |
 | `OPERATOR_EMAILS` | Render | remplacé par `User.role` (W0-01) | — |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Render (`sync: false` ; clé publique servie par `GET /notifications/vapid-public-key`, rien côté Netlify) | `npm run vapid:generate` (backend/) | Dès W3-03 |
+| `FCM_SERVICE_ACCOUNT_JSON` | Render (`sync: false`, secret) | clé JSON du compte de service Firebase **encodée en base64** (`base64 -w0 captivia-firebase-adminsdk-xxxx.json` ; Firebase → Paramètres du projet → Comptes de service → Générer une nouvelle clé privée). Push natif de l'app (W6-07) : Android via FCM, iOS via le relais APNs de FCM | Non : sans elle, push natif désactivé (journal info au démarrage), rappels locaux et Web Push inchangés. Dès la publication des apps |
+| `FCM_PROJECT_ID` | Render (`sync: false`) | identifiant du projet Firebase (ex. `captivia-app`) | Non : `project_id` du JSON par défaut |
 | `IAP_ENABLED`, `REVENUECAT_WEBHOOK_SECRET`, `REVENUECAT_ENTITLEMENT_ID`, `GOOGLE_PLAY_PACKAGE_NAME` | Render (`sync: false`) | RevenueCat (achats in-app, pas de Stripe — voir `docs/PAYMENTS.md`) | Dès la publication sur les stores |
+| `SPECIESPLUS_API_TOKEN` | Render (`sync: false`) | jeton Species+ (api.speciesplus.net) | Non : sans jeton, `/speciesplus/*` → 503 `INTEGRATION_DISABLED` et `speciesPlus.status = "disabled"` sur la fiche législation |
+| `NCBI_API_KEY`, `NCBI_EMAIL` | Render (`sync: false`) | clé NCBI et e-mail de contact | Non : PubMed est public (3 req/s), la clé porte le quota à 10 req/s |
+| `COMMUNITY_ENABLED` | Render (`sync: false`) | `false` tant que la communauté n'est pas ouverte | Non (défaut `false` : routes `/community/*` en 404) |
+| `COMMUNITY_CONTACT_EMAIL` | Render (`sync: false`) | adresse du point de contact DSA (modération) | Recommandé dès `COMMUNITY_ENABLED=true` |
+| `COMMUNITY_HIDE_THRESHOLD`, `COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS`, `COMMUNITY_POSTS_PER_HOUR`, `COMMUNITY_COMMENTS_PER_MINUTE`, `COMMUNITY_UPLOADS_PER_HOUR` | Render (`sync: false`) | défauts 3, 7, 5, 5, 30 | Non |
+| `MEDIA_DRIVER` | Render (`sync: false`) | `s3` | Oui si `COMMUNITY_ENABLED=true` (refusé au démarrage sinon : disque éphémère) |
+| `MEDIA_BUCKET`, `MEDIA_PUBLIC_BASE_URL` | Render (`sync: false`) | bucket R2 et son domaine public (`https://media.<domaine>` ou `https://pub-….r2.dev`) | Oui si `MEDIA_DRIVER=s3` |
+| `S3_ENDPOINT`, `S3_REGION`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_FORCE_PATH_STYLE` | Render (`sync: false`) | R2 : `https://<ACCOUNT_ID>.r2.cloudflarestorage.com`, `auto`, jeton API R2 (lecture/écriture limité au bucket), `false` | Clés : oui si `MEDIA_DRIVER=s3` |
+| `MEDIA_MAX_BYTES` | Render (`sync: false`) | défaut 8 Mo (plafond 20 Mo) | Non |
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
+| `NEXT_PUBLIC_REVENUECAT_IOS_KEY`, `NEXT_PUBLIC_REVENUECAT_ANDROID_KEY` | Build mobile (GitHub Variables `REVENUECAT_IOS_KEY`, `REVENUECAT_ANDROID_KEY` → `mobile.yml`) ; inutiles sur Netlify | clés **publiques** RevenueCat (`appl_…`, `goog_…`) | Pour l'achat in-app : sans clé, l'app affiche « Abonnement indisponible » sur la plateforme concernée (voir `docs/PAYMENTS.md`) |
+| `NEXT_PUBLIC_REVENUECAT_ENTITLEMENT_ID` | Build mobile | `premium` (défaut) : identique à `REVENUECAT_ENTITLEMENT_ID` | Non |
+| `NEXT_PUBLIC_NATIVE_PUSH` | Build mobile (GitHub Variable `NATIVE_PUSH` → `mobile.yml`) ; inutile sur Netlify | `1` quand les projets natifs ont la configuration Firebase (secret `GOOGLE_SERVICES_JSON_BASE64`, `GoogleService-Info.plist`) | Non : sans elle, l'app n'enregistre aucun jeton push (rappels locaux seulement) ; ne **jamais** la poser sans Firebase (plantage Android, `docs/MOBILE.md` § 7.3) |
+| `NEXT_PUBLIC_APP_STORE_URL`, `NEXT_PUBLIC_PLAY_STORE_URL` | Netlify | `[À COMPLÉTER]` : URL https des fiches App Store et Google Play | À la publication (sinon la page abonnement du web affiche le marqueur) |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
+| `NEXT_PUBLIC_COMMUNITY_ENABLED` | Netlify (et build mobile) | `false` tant que la communauté est fermée (aucune requête de détection) ; `true` à l'ouverture (lien depuis la landing) | Non : absent, l'app interroge `GET /community/rules` et n'affiche la communauté que si l'API répond (404 = fermée) |
+| `NEXT_PUBLIC_MEDIA_BASE_URL` | Netlify (et build mobile) | même valeur que `MEDIA_PUBLIC_BASE_URL` côté API (`https://media.<domaine>`) | Oui dès `COMMUNITY_ENABLED=true` avec `MEDIA_DRIVER=s3` : origine ajoutée à la CSP `img-src` ; absente, seule l'API (pilote local) est autorisée |
+| `APPLE_TEAM_ID` | Netlify | Team ID Apple (10 caractères, developer.apple.com → Membership) | Pour les Universal Links iOS (W6-09) : sans elle, `/.well-known/apple-app-site-association` → 404 |
+| `IOS_BUNDLE_ID` | Netlify | `app.captivia` (défaut, = `appId` de `capacitor.config.ts`) | Non |
+| `ANDROID_PACKAGE_NAME` | Netlify | `app.captivia` (défaut) | Non |
+| `ANDROID_SHA256_CERT_FINGERPRINTS` | Netlify | empreintes SHA-256 de la clé **Play App Signing** et de la clé d'**upload**, séparées par des virgules (`AA:BB:…`, voir `docs/MOBILE.md` § 8.4) | Pour les App Links Android (W6-09) : sans elle, `/.well-known/assetlinks.json` → 404 |
 | `NEON_DATABASE_URL_DIRECT` | GitHub Secrets | Neon **directe** | Oui |
 | `BACKUP_AGE_RECIPIENT` | GitHub Secrets | clé publique age (`age1…`) | Pour « Database Backup » (sans lui, aucune sauvegarde) |
 | `API_URL` | GitHub Variables | URL de l'API Render | Pour `keep-warm.yml` (diagnostic manuel) |
 
+### API externes : résilience et intégrations (W1-04, W3-05)
+
+- **Client HTTP unique** (`backend/src/external/http/`) : timeout 5 s, 3 redirections max (https, hôtes publics), réponse ≤ 5 Mo, User-Agent `Captivia/1.0`. GBIF : 3 tentatives max (erreur réseau, 5xx ou 429) avec backoff + jitter, budget total 7,5 s.
+- **Disjoncteur par fournisseur** (GBIF, Wikipedia, Wikidata, Open Pet Food Facts, PubMed, Species+, iNaturalist, EOL) : 5 échecs consécutifs ouvrent le circuit 30 s ; les appels échouent alors sans toucher le réseau et l'API se replie sur les `SpeciesProfile` locaux ou le cache périmé (conservé 7 jours). Une recherche ne renvoie jamais 500 ; un échec n'est jamais mis en cache. L'état des disjoncteurs de GBIF / Wikipedia / Wikidata est visible dans `GET /gateway/health` (`status: "degraded"` si un fournisseur est en panne).
+- **Species+** : intégration réelle, active uniquement si `SPECIESPLUS_API_TOKEN` est défini.
+- **PubMed** : intégration réelle, sans clé obligatoire (références affichées sur la fiche santé d'une espèce).
+- **Amazon** : aucune intégration (décision D-09 : la PA-API 5 est remplacée par la Creators API, qui exige un compte Associates actif). La route `/amazon/*` est retirée (404) ; les liens d'affiliation viennent de la table `AffiliateStore`. À rouvrir quand le compte Associates est validé.
+
 (*) D'autres tâches du plan (vague 0 et 1, durcissement de la configuration) rendent `CORS_ORIGIN` et `FRONTEND_URL` **obligatoires en production** : l'API pourra refuser de démarrer si elles sont absentes. Elles sont déjà fournies par `render.yaml` ; ne pas les supprimer du Blueprint ni du Dashboard.
+
+### Communauté : stockage des médias (Cloudflare R2)
+
+Le volet communauté reste **désactivé** (`COMMUNITY_ENABLED=false`) tant que la modération n'est pas prête (`docs/RUNBOOK.md`, « Modération de la communauté »). Pour l'ouvrir :
+
+1. **Cloudflare → R2** : créer le bucket `captivia-media` (juridiction **UE** si proposée). Offre gratuite : 10 Go de stockage, sortie gratuite.
+2. **Accès public en lecture** : *Settings → Public access* : brancher un domaine personnalisé (`media.<domaine>`, recommandé) ou activer l'URL `r2.dev` (limitée en débit, pour essai). Cette URL devient `MEDIA_PUBLIC_BASE_URL`. Les clés sont aléatoires (`<uuid>.webp`), les objets servis avec `Cache-Control: public, max-age=31536000, immutable`.
+3. **Jeton API** : *R2 → Manage API tokens → Create* : permission *Object Read & Write*, restreinte au bucket. Reporter l'Access Key ID et le Secret dans Render (`S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`), l'endpoint S3 du compte dans `S3_ENDPOINT`, `S3_REGION=auto`.
+4. Render : `MEDIA_DRIVER=s3`, `MEDIA_BUCKET=captivia-media`, `COMMUNITY_CONTACT_EMAIL`, puis `COMMUNITY_ENABLED=true`. L'API refuse de démarrer si une variable du pilote manque.
+5. Contrôle : publier une photo depuis un compte de test vérifié, ouvrir l'URL de l'image (format WebP, aucune métadonnée), la supprimer et vérifier qu'elle disparaît du bucket.
+
+Tout stockage compatible S3 convient (AWS S3 : `S3_ENDPOINT` vide et région réelle ; MinIO : `S3_FORCE_PATH_STYLE=true`). Le pilote `local` (`MEDIA_LOCAL_DIR`, défaut `var/media`, images servies par `GET /community/media/:key`) est réservé au développement et aux tests. Le site affiche les images d'un autre domaine : penser à l'autoriser dans la CSP (`img-src`) côté frontend lors de la phase 2.
 
 ## 6. Premier déploiement et seed
 
@@ -151,3 +200,37 @@ Passer en payant **dès qu'il y a des utilisateurs réels** ou que l'un de ces s
 - Neon Free : stockage ou heures de calcul proches du plafond, besoin d'un PITR plus long (RPO du plan : 24 h) → **Neon Launch**.
 - Netlify : builds ou bande passante épuisés en cours de mois → plan Pro.
 - Obligations légales et d'exploitation (sauvegardes, SLA, journaux) : voir DEP-03 (sauvegardes) et la checklist go-live du plan §7.
+
+## 10. Sécurité : CSP et en-têtes HTTP (W4-08)
+
+Source unique : `frontend/src/lib/csp.ts` (module pur, testé dans `src/lib/__tests__/csp.test.ts`), utilisé par `frontend/next.config.ts` (en-têtes du site, toutes les routes) et par `frontend/scripts/build-mobile.mjs` (balise `<meta>` de l'app Capacitor). Les valeurs dépendent de `NEXT_PUBLIC_API_URL` et `NEXT_PUBLIC_SENTRY_DSN`, **lues au build** : un changement de ces variables impose un nouveau build Netlify.
+
+**CSP de production du site** (exemple avec l'API Render et Sentry UE) :
+
+```
+default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';
+img-src 'self' data: blob: https://upload.wikimedia.org https://inaturalist-open-data.s3.amazonaws.com https://static.inaturalist.org https://api.gbif.org;
+font-src 'self'; connect-src 'self' https://captiviacaptivia-api.onrender.com https://o….ingest.de.sentry.io;
+worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';
+frame-ancestors 'none'; upgrade-insecure-requests
+```
+
+- `connect-src` : le site, l'origine de l'API et, seulement si un DSN est défini, l'origine d'ingestion Sentry. Le backend local (`localhost:3001`) n'y figure qu'en développement.
+- `img-src` : photos locales (`/images`), `data:` (photo compressée, QR code), `blob:` (aperçus) et les seuls hôtes de photos d'espèces (`SPECIES_IMAGE_HOSTS`). `pickSpeciesPhoto` ignore les médias GBIF servis ailleurs (la fiche prend la photo suivante ou la silhouette), donc la CSP ne bloque jamais une photo affichée. Ajouter un hébergeur = l'ajouter à `SPECIES_IMAGE_HOSTS`. Une URL de photo saisie à la main par un utilisateur et hébergée ailleurs n'est pas affichée (silhouette).
+- Polices : auto-hébergées par `next/font` (`font-src 'self'`). Service worker Web Push : `worker-src 'self'` (la souscription push ne passe pas par `connect-src`). `/.well-known/*` et le manifeste sont servis par le site.
+- `img-src` (communauté) : l'origine de `NEXT_PUBLIC_MEDIA_BASE_URL` (bucket public des images des membres), sinon celle de l'API (pilote `local`, `GET /community/media/:key`). `isAllowedMediaUrl` (`src/lib/community.ts`) n'affiche que ces images ; toute autre adresse est remplacée par une silhouette.
+- `upgrade-insecure-requests` est omis en développement et face à une API en `http` (smoke E2E local).
+- `'unsafe-eval'` n'est présent qu'en `next dev` (React s'en sert pour les piles d'erreur) ; jamais en production.
+
+**Autres en-têtes** : `Strict-Transport-Security: max-age=63072000; includeSubDomains` (production ; **sans** `preload`, inscription difficilement réversible à décider une fois le domaine définitif en place), `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY` (doublon de `frame-ancestors`), `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()` (le site n'utilise pas la caméra : l'import de photo passe par un sélecteur de fichier ; dans l'app native, la caméra passe par le plugin Capacitor).
+
+**Pourquoi `'unsafe-inline'` reste dans `script-src` du site (compromis nonce / hachages)** — mesure sur le build Next 16.3 : chaque page HTML contient plusieurs scripts inline (4 sur l'accueil `/fr`), dont les charges RSC propres à la page (`self.__next_f.push([1,"…"])`, jusqu'à ~100 Ko) ; le contenu varie selon la page et la locale.
+- *Nonce* (`proxy.ts`) : Next ne pose le nonce qu'au rendu serveur, ce qui impose le rendu **dynamique** de toutes les pages (149 pages aujourd'hui pré-rendues). Plus de cache CDN Netlify, une exécution de fonction par vue, réveils plus lents : trop coûteux sur l'offre gratuite, pour un site sans contenu tiers ni script externe.
+- *Hachages* : ils devraient figurer dans l'en-tête, or `headers()` est figé avant le build et commun à toutes les pages. L'option expérimentale `experimental.sri` n'ajoute que des attributs `integrity` aux fichiers `/_next/static` (même origine) et ne couvre pas les scripts inline.
+- Retenu : pages statiques, `script-src 'self' 'unsafe-inline'` **sans** `'unsafe-eval'`, sans aucune origine de script externe ; le reste de la politique (`object-src 'none'`, `base-uri`, `form-action`, `frame-ancestors`, `connect-src` minimal) limite l'exploitation d'une éventuelle injection. Le rendu de React échappe le contenu, et aucun `dangerouslySetInnerHTML` ne sert hors JSON-LD (échappé). À réévaluer si Next sait un jour poser des hachages sur les pages statiques.
+
+**App mobile** : l'export statique est entièrement connu après le build, donc `build-mobile.mjs` calcule les hachages SHA-256 des scripts inline de **chaque** page et les place dans sa `<meta>` : `script-src` sans `'unsafe-inline'` ni `'unsafe-eval'`. Mêmes directives que le site, plus les origines de la WebView (`capacitor://localhost`, `https://localhost`), sans `frame-ancestors` (ignorée en `<meta>`). Le pont natif de Capacitor est injecté hors CSP (script de démarrage de document, ou inséré avant la balise `<meta>`).
+
+**Vérifier en production** : `curl -sI https://<site>/ | grep -iE 'content-security|strict-transport|permissions-policy'`. Les tests E2E smoke échouent sur toute violation CSP (console ou événement `securitypolicyviolation`, voir `frontend/e2e/support/test.ts`).
+
+**API (NestJS)** : `helmet()` pose ses propres en-têtes (CSP par défaut `default-src 'self'`…, HSTS un an) sur des réponses JSON ; ils n'interviennent pas dans le chargement du site et ne sont pas modifiés.

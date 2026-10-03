@@ -1,13 +1,11 @@
-import {
-  Controller,
-  Get,
-  Param,
-  UseGuards,
-  Req,
-  Res,
-} from '@nestjs/common';
+import { Controller, Get, Param, UseGuards, Req, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBearerAuth,
+  ApiParam,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CarnetExportService } from './carnet-export.service';
 
@@ -34,7 +32,10 @@ export class CarnetExportController {
     @Param('animalId') animalId: string,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const result = await this.carnetExportService.exportCarnet(animalId, req.user.id);
+    const result = await this.carnetExportService.exportCarnet(
+      animalId,
+      req.user.id,
+    );
     res.setHeader(
       'Content-Disposition',
       `attachment; filename="${result.filename}"`,

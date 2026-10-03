@@ -16,7 +16,14 @@ import { GatewayModule } from '../gateway/gateway.module';
 import { PrismaModule } from '../prisma/prisma.module';
 
 @Module({
-  imports: [CacheModule, TransformerModule, FilterModule, ExternalModule, GatewayModule, PrismaModule],
+  imports: [
+    CacheModule,
+    TransformerModule,
+    FilterModule,
+    ExternalModule,
+    GatewayModule,
+    PrismaModule,
+  ],
   controllers: [SpeciesController, AdvancedSearchController],
   providers: [
     SpeciesService,

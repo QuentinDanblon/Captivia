@@ -1,118 +1,48 @@
-# Captivia Backend API
+# Backend Captivia (API)
 
-API RESTful pour le projet Captivia - une application de gestion et de découverte d'espèces animales.
+API REST NestJS 11 de Captivia : comptes (dont le mode invité), animaux et carnet de santé,
+rappels (e-mail, Web Push, push natif), agenda et flux calendrier, fiches espèces sourcées,
+abonnement Premium par achats intégrés (RevenueCat), communauté (fermée par défaut).
+Prisma 6 sur PostgreSQL. Règles du dépôt et commandes de vérification :
+[`../AGENTS.md`](../AGENTS.md).
 
-## Architecture
-
-Le backend est construit avec NestJS et suit une architecture modulaire propre avec séparation des responsabilités :
-
-```
-src/
-├── dto/                 # Data Transfer Objects pour la validation
-│   └── species.dto.ts
-├── external/            # Services d'intégration API externes
-│   └── gbif.service.ts
-├── prisma/              # Module Prisma pour l'accès base de données
-│   ├── prisma.module.ts
-│   └── prisma.service.ts
-├── repositories/        # Repositories pour l'accès aux données
-│   └── species.repository.ts
-├── species/             # Module principal pour les espèces
-│   ├── species.controller.ts
-│   ├── species.module.ts
-│   └── species.service.ts
-└── app.module.ts        # Module racine
-```
-
-## Caractéristiques
-
-- **Caching intelligent** : Données stockées localement via PostgreSQL pour réduire les appels API externes
-- **Architecture Repository** : Séparation claire entre les données et la logique métier
-- **Validation des données** : Utilisation de DTOs avec class-validator
-- **Intégration GBIF** : Appels API avec gestion des erreurs et retry automatique
-- **Modulaire** : Code organisé et maintenable
-
-## Installation
+## Démarrer en local
 
 ```bash
-npm install
+cp .env.example .env      # renseigner JWT_SECRET (16 caractères minimum hors production)
+npm ci
+npx prisma migrate deploy # applique les migrations sur DATABASE_URL
+npx prisma db seed        # catalogue (espèces, races, modèles de routines), idempotent
+npm run start:dev         # http://localhost:3001, sonde : /health
 ```
 
-## Configuration
+`npm run seed:dev` ajoute un compte et un animal de démonstration (refusé en production).
 
-Créez un fichier `.env` basé sur `.env.example` :
+## Organisation (`src/`)
+
+| Dossier | Rôle |
+|---|---|
+| `auth/`, `account/` | inscription, connexion, refresh tokens, invité → compte, vérification d'e-mail ; export et suppression RGPD |
+| `animals/`, `routines/`, `medications/`, `vaccinations/`, `vet-appointments/`, `animal-measurements/`, `breeding/` | animaux et carnet de santé |
+| `notifications/` | scheduler des rappels, Web Push, push natif FCM / APNs, jetons d'appareil |
+| `agenda/` | agenda des soins et flux ICS |
+| `subscription/`, `entitlement/` | webhook RevenueCat, droit Premium (`docs/PAYMENTS.md`) |
+| `community/` | profils, publications, modération DSA (`COMMUNITY_ENABLED`) |
+| `species/`, `external/`, `gateway/`, `health-content/`, `legislation/`, `food/`, `equipment/`, `species-routines/` | catalogue et API externes (GBIF, Wikipédia, Wikidata, PubMed, Species+) |
+| `maintenance/` | purges quotidiennes (rétention RGPD, `docs/RUNBOOK.md` § 6.5) |
+| `config/` | validation des variables d'environnement (Joi) ; l'API refuse de démarrer en production sans les obligatoires |
+| `common/`, `health/`, `mail/`, `cache/`, `prisma/` | gardes, rôles, sondes `/health`, e-mails, cache, client Prisma |
+| `monitoring/`, `analytics/` | chargés seulement si `REDIS_ENABLED=true` (désactivé en production) |
+
+Base de données : `prisma/schema.prisma`, migrations dans `prisma/migrations/`. Enrichissement
+éditorial des fiches : `prisma/enrichment/` (contrat : `prisma/enrichment/CONTRACT.md`).
+
+## Scripts utiles
 
 ```bash
-cp .env.example .env
+npm test -- --runInBand   # unitaires + e2e (Postgres et JWT_SECRET requis)
+npm run lint:check        # ESLint sans correction (bloquant en CI)
+npm run build             # prisma generate + nest build
+npm run operator:set -- <email>   # promouvoir un opérateur (e-mail vérifié requis)
+npm run vapid:generate    # paire de clés Web Push
 ```
-
-Configuration requise :
-- DATABASE_URL : URL de connexion PostgreSQL
-- PORT : Port du serveur (défaut : 3000)
-
-## Base de données
-
-Utilisez Prisma pour gérer la base de données :
-
-```bash
-# Génération du client Prisma
-npx prisma generate
-
-# Création des tables
-npx prisma db push
-
-# Mise à jour des migrations
-npx prisma migrate dev
-```
-
-## Exécution
-
-```bash
-# Développement (watch mode)
-npm run start:dev
-
-# Production
-npm run start:prod
-
-# Tests
-npm run test
-npm run test:e2e
-npm run test:cov
-```
-
-## API Endpoints
-
-### Espèces
-
-- `GET /species/search?q=query&limit=20&offset=0` - Recherche d'espèces
-- `GET /species/:id` - Détails de l'espèce
-- `GET /species/:id/vernacular` - Noms vernaculaires
-- `GET /species/:id/iucn` - Statut IUCN
-- `GET /species/:id/distributions` - Données de distribution
-- `GET /species/:id/media` - Médias (photos)
-- `GET /species/:id/metrics` - Métriques
-- `GET /species/:id/occurrences/count` - Comptage des occurrences
-
-## Modules
-
-### SpeciesModule
-Gère les opérations sur les espèces, incluant la recherche, les détails, les médias, etc.
-
-### PrismaModule
-Module global pour l'accès à la base de données PostgreSQL via Prisma.
-
-### GbifService
-Service pour l'intégration avec l'API GBIF (Global Biodiversity Information Facility).
-
-## Technologies
-
-- NestJS
-- Prisma ORM
-- PostgreSQL
-- Axios
-- class-validator
-- Swagger/OpenAPI
-
-## Développement
-
-Voir [DEVELOPMENT.md](../DEVELOPMENT.md) pour plus de détails sur le développement.

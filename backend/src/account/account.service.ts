@@ -1,6 +1,7 @@
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import * as bcryptjs from 'bcryptjs';
 import { PrismaService } from '../prisma/prisma.service';
+import { CommunityDataService } from '../community/community-data.service';
 
 // bcryptjs 2.x est livré sans types : on type localement la seule fonction utilisée.
 const bcrypt = bcryptjs as unknown as {
@@ -11,14 +12,21 @@ const bcrypt = bcryptjs as unknown as {
  * Version du format d'export (à incrémenter si la structure change).
  * v2 : emailVerifiedAt, sessions, état du flux calendrier, nombre d'abonnements push actifs.
  * v3 : profile.isGuest et profile.lastActiveAt (mode invité ; `email` vaut null pour un invité).
+ * v4 : section `community` (profil public, publications, commentaires, réactions, signalements
+ *      émis, blocages, décisions de modération, images).
+ *      Ajout rétrocompatible (W6-07) : section `appInstallations` (installations de l'app inscrites
+ *      au push natif — plateforme, langue, dates ; jamais le jeton FCM). Les lecteurs v4 l'ignorent.
  */
-export const EXPORT_FORMAT_VERSION = 3;
+export const EXPORT_FORMAT_VERSION = 4;
 
 @Injectable()
 export class AccountService {
   private readonly logger = new Logger(AccountService.name);
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly community: CommunityDataService,
+  ) {}
 
   /**
    * Suppression définitive du compte (RGPD art. 17).
@@ -30,6 +38,11 @@ export class AccountService {
    * PasswordResetToken). Les suppressions explicites ci-dessous, dans la même
    * transaction, rendent l'opération indépendante de ces cascades (défense en
    * profondeur) et atomique : tout ou rien.
+   *
+   * Communauté : profil, publications, commentaires, réactions, signalements émis et blocages sont
+   * supprimés dans la même transaction ; les fichiers des images sont effacés juste après (un
+   * échec est repris par le job de maintenance, la ligne restant orpheline). Le journal de
+   * modération est conservé sans lien vers le compte (subjectId → NULL).
    */
   async deleteAccount(
     userId: string,
@@ -53,7 +66,9 @@ export class AccountService {
       }
     }
 
+    const mediaKeys = await this.community.mediaKeysOf(userId);
     await this.prisma.$transaction(async (tx) => {
+      await this.community.deleteRows(tx, userId, true);
       const animalFilter = { animal: { userId } };
       await tx.notificationEvent.deleteMany({ where: { userId } });
       await tx.routine.deleteMany({ where: animalFilter });
@@ -66,10 +81,12 @@ export class AccountService {
       await tx.breedingRecord.deleteMany({ where: animalFilter });
       await tx.animal.deleteMany({ where: { userId } });
       await tx.pushSubscription.deleteMany({ where: { userId } });
+      await tx.deviceToken.deleteMany({ where: { userId } });
       await tx.notificationPreference.deleteMany({ where: { userId } });
       await tx.passwordResetToken.deleteMany({ where: { userId } });
       await tx.user.delete({ where: { id: userId } });
     });
+    await this.community.purgeMedia(mediaKeys);
 
     // Pas d'e-mail dans les logs : donnée personnelle.
     this.logger.log(`Compte supprimé (userId=${userId})`);
@@ -78,7 +95,8 @@ export class AccountService {
   /**
    * Export complet des données de l'utilisateur (RGPD art. 20), gratuit pour tous.
    * Exclut passwordHash, tokens de réinitialisation, empreintes des refresh tokens, jeton du flux
-   * calendrier (seul son état actif / inactif est exporté) et clés cryptographiques push.
+   * calendrier (seul son état actif / inactif est exporté), clés cryptographiques push et jetons
+   * FCM des installations de l'app.
    */
   async exportData(userId: string) {
     const user = await this.prisma.user.findUnique({
@@ -120,6 +138,17 @@ export class AccountService {
           // `keys` (p256dh/auth) sont des secrets techniques, non exportés.
           select: { id: true, endpoint: true, createdAt: true },
         },
+        // W6-07 : installations de l'app (le jeton FCM, secret technique, n'est pas exporté).
+        deviceTokens: {
+          orderBy: { createdAt: 'asc' },
+          select: {
+            id: true,
+            platform: true,
+            locale: true,
+            createdAt: true,
+            lastSeenAt: true,
+          },
+        },
         // Sessions (refresh tokens) : métadonnées seulement, JAMAIS l'empreinte du jeton.
         refreshTokens: {
           orderBy: { createdAt: 'asc' },
@@ -141,12 +170,15 @@ export class AccountService {
       notificationPreferences,
       notificationEvents,
       pushSubscriptions,
+      deviceTokens,
       refreshTokens,
       calendarToken,
       points,
       grade,
       ...profile
     } = user;
+
+    const community = await this.community.exportFor(userId);
 
     return {
       exportVersion: EXPORT_FORMAT_VERSION,
@@ -163,6 +195,8 @@ export class AccountService {
       notificationPreferences,
       notificationEvents,
       pushSubscriptions,
+      appInstallations: deviceTokens,
+      community,
     };
   }
 }

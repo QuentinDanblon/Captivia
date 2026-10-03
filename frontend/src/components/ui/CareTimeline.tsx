@@ -1,5 +1,3 @@
-'use client';
-
 import type { ReactNode } from 'react';
 import { useLocale } from 'next-intl';
 import { cx } from './cx';
@@ -88,6 +86,9 @@ function StatusMark({ status }: { status: CareStatus }) {
 const toDate = (value: string | Date) => (value instanceof Date ? value : new Date(value));
 
 /**
+ * Composant partagé (sans état ni effet, `useLocale` fonctionne côté serveur) : rendu en
+ * Server Component quand il est importé depuis le serveur, sans coût d'hydratation.
+ *
  * Signature n° 2 — frise de soins « à l'encre » : un trait vertical continu, une pastille par
  * soin, la date en mono dans la colonne de gauche (le jour n'est répété qu'au changement de
  * jour). Liste ordonnée (`<ol>`) : l'ordre chronologique est porté par la structure.
@@ -138,13 +139,13 @@ export default function CareTimeline({
           <li
             key={item.id}
             data-status={item.status}
-            className="relative grid grid-cols-[4.75rem_1rem_minmax(0,1fr)] gap-x-3 sm:grid-cols-[6rem_1rem_minmax(0,1fr)] sm:gap-x-4"
+            className="relative grid grid-cols-[4.75rem_1rem_minmax(0,1fr)] gap-x-3 sm:grid-cols-[7.25rem_1rem_minmax(0,1fr)] sm:gap-x-4"
           >
             {/* Colonne date (mono, chiffres tabulaires) */}
             <div className={cx('pb-6 text-right font-mono text-meta leading-5', newDay ? 'text-ink' : 'text-ink-2')}>
               <time dateTime={date.toISOString()} className="block">
                 {newDay ? (
-                  <span className="block">
+                  <span className="block whitespace-nowrap">
                     <span className="hidden text-ink-2 sm:inline">{weekdayFormat.format(date)} </span>
                     {dayFormat.format(date)}
                   </span>

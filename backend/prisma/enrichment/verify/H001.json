@@ -1,0 +1,544 @@
+[
+ {
+  "speciesId": 2422905,
+  "evidence": []
+ },
+ {
+  "speciesId": 2424454,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "As stated, Pacman Frogs are opportunistic carnivores. Crickets, earthworms, and roaches comprise their primary diet.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/pacman-frog"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Grillons, vers de terre et blattes",
+    "quote": "Crickets, earthworms, and roaches comprise their primary diet. They can also occasionally eat mealworms, ants, mites, and larger prey such as snakes, baby mice, and other frogs. If you primarily feed insects to your Pacman Frog, they should eat every day.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/pacman-frog"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Souriceaux (pinkies)",
+    "quote": "Although adult Pacman Frogs can fit a pinkie in their cavernous mouths, only offer these small mice as treats, since they are high in fat and can cause your pet to quickly pack on excess weight.",
+    "url": "https://reptile.guide/pacman-frog/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Souriceaux (pinkies) en aliment régulier",
+    "quote": "only offer these small mice as treats, since they are high in fat and can cause your pet to quickly pack on excess weight.",
+    "url": "https://reptile.guide/pacman-frog/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Animaux plus petits que la grenouille (y compris d'autres grenouilles) hébergés avec elle",
+    "quote": "In particular, you should never try to house a Pacman Frog with a smaller pet—even another frog—because they will likely try to eat it.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/pacman-frog"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "daily",
+    "quote": "If you primarily feed insects to your Pacman Frog, they should eat every day.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/pacman-frog"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Compléter l'alimentation avec un supplément de calcium et un multivitamine adaptés aux grenouilles.",
+    "quote": "A calcium supplement and a multivitamin will help keep your frog's diet healthy and balanced.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/pacman-frog"
+   }
+  ]
+ },
+ {
+  "speciesId": 2424499,
+  "evidence": []
+ },
+ {
+  "speciesId": 2427573,
+  "evidence": []
+ },
+ {
+  "speciesId": 2429295,
+  "evidence": []
+ },
+ {
+  "speciesId": 2431776,
+  "evidence": []
+ },
+ {
+  "speciesId": 2431886,
+  "evidence": [
+   {
+    "field": "health.diseases[0].name",
+    "value": "Chytridiomycose",
+    "quote": "Chytridiomycosis is caused by the fungal organisms Batrachochytrium dendrobatidis (Bd) and Batrachochytrium salamandrivorans (Bsal).",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+    "quote": "Clinical signs include brown to red discoloration of the skin, excessive shedding and mucus production, muscle incoordination, and acute death.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+    "quote": "Real-time PCR assay performed on swabs of the integument or pieces of skin is diagnostic and provides rapid assessment of presence and quantity of zoospores. This is useful in screening and management of amphibian populations at risk, such as those undergoing transport or quarantine.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].name",
+    "value": "Saprolegniose",
+    "quote": "Saprolegniasis refers to disease caused by several genera of opportunistic fungi or water molds that infect the gills and skin of aquatic and larval amphibians.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Croissance blanchâtre, cotonneuse sur la peau, typiquement sur une ancienne lésion ; léthargie, détresse respiratoire, anorexie.",
+    "quote": "Affected animals have a whitish, cotton-like growth on their skin, typically at the site of previous trauma such as abarasions.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "La perte du mucus protecteur causée par des irritants chimiques (désinfectants, savons, détergents), des pics d'ammoniaque et la malnutrition (surtout la carence en vitamine A) peut favoriser la maladie.",
+    "quote": "Removal of the slime layer due to chemical irritants such as disinfectants, soaps, detergents, or ammonia spikes and malnutrition, especially hypovitaminosis A, may also contribute to formation.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].name",
+    "value": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+    "quote": "Red-leg syndrome, also known as bacterial dermatosepticemia, refers to hyperemia of the ventral skin that accompanies systemic infection in amphibians.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+    "quote": "Clinical signs include lethargy, emaciation, ulcerations of the skin, and characteristic cutaneous pinpoint hemorrhages of the legs and abdomen.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+    "quote": "Malnourished, newly acquired amphibians that are maintained in poor-quality water or other inappropriate environmental conditions are particularly susceptible.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "aquarium",
+    "quote": "According to how the animals are raised, they can be hosted in a terraquarium or an aquarium (with rocks or roots above water level).",
+    "url": "https://salamanderland.com/articles/articles-caresheets/triturus-marmoratus"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 5,
+    "quote": "The optimal temperature range goes between a minimum of 5-6°C in winter and a maximum of 25°C in summer",
+    "url": "https://salamanderland.com/articles/articles-caresheets/triturus-marmoratus"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 25,
+    "quote": "The optimal temperature range goes between a minimum of 5-6°C in winter and a maximum of 25°C in summer",
+    "url": "https://salamanderland.com/articles/articles-caresheets/triturus-marmoratus"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "À titre indicatif, un aquarium de 120 x 40 x 30 cm convient pour 3 couples ; la taille dépend du nombre d'animaux.",
+    "quote": "The size of the tank depends on the number of animals held, but indicatively a 120x40x30cm aquarium can be used for 3 couples.",
+    "url": "https://salamanderland.com/articles/articles-caresheets/triturus-marmoratus"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Pas d'éclairage fort nécessaire : mousses et plantes qui n'exigent pas une forte lumière conviennent dans l'aquarium.",
+    "quote": "(moss and plants that do not need strong light are also possible)",
+    "url": "https://salamanderland.com/articles/articles-caresheets/triturus-marmoratus"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Caches en pierres et en bois, qui servent aussi à sortir de l'eau.",
+    "quote": "The newts also love hides created with rocks and wood, which can also been used by the animal to surface above water.",
+    "url": "https://salamanderland.com/articles/articles-caresheets/triturus-marmoratus"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "faible",
+    "quote": "Price: Rated 2 out of 5",
+    "url": "https://salamanderland.com/articles/articles-caresheets/triturus-marmoratus"
+   }
+  ]
+ },
+ {
+  "speciesId": 5216573,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "Grenouille terrestre et nocturne qui chasse à l'affût ; elle passe l'essentiel de son temps enterrée dans son substrat en attendant une proie.",
+    "quote": "Tomato Frogs are terrestrial, nocturnal ambush hunters. They spend most of their time burrowed in their substrate, waiting for unsuspecting prey to cross their path.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "semi-grégaire",
+    "quote": "You can house multiple Tomato Frogs together, but we recommend that you provide a minimum of 10 gallons of aquarium space for each Tomato Frog that you’re housing .",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "behavior.difficultyLevel",
+    "value": "débutant",
+    "quote": "Tomato Frogs are relatively popular as pets thanks to their bright coloration, confident demeanor, cute faces, small space requirements, and simple husbandry.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "behavior.compatibilityWithOtherAnimals",
+    "value": "Plusieurs grenouilles tomates peuvent cohabiter (au moins 10 gallons par individu) ; les mâles peuvent se battre en période de reproduction.",
+    "quote": "You can house multiple Tomato Frogs together, but we recommend that you provide a minimum of 10 gallons of aquarium space for each Tomato Frog that you’re housing . Males may engage in combat if mating season conditions are present",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[0].name",
+    "value": "Maladie osseuse métabolique",
+    "quote": "MBD, or metabolic bone disease , is caused by an improper dietary calcium: phosphorus ratio .",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Os fins et fragiles, léthargie, perte d'appétit, déformations de croissance.",
+    "quote": "Common symptoms of MBD include (but aren’t limited to)… Thinning, brittle bone structure Lethargy Lack of appetite Various growth deformities",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Donner des insectes riches en calcium (gavés) ou saupoudrer les proies de poudre de calcium.",
+    "quote": "one of the easiest way to avoid MBD is to feed calcium-rich, gut-loaded insects or dust feeder insects with calcium powder.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[1].name",
+    "value": "Déshydratation",
+    "quote": "Having permeable skin, amphibians are extremely prone to dehydration.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Si l'habitat se dessèche, la grenouille se déshydrate très vite, en quelques heures.",
+    "quote": "If their habitat is allowed to dry out, they will become dehydrated quite fast – within hours.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "Vérifier chaque jour l'humidité et l'humidité du substrat.",
+    "quote": "It’s essential to check the humidity and substrate moisture daily to prevent dehydration in your Tomato Frog.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[2].name",
+    "value": "Exposition aux produits chimiques",
+    "quote": "Again, due to their permeable skin, Tomato Frogs are quite sensitive to pollutants and chemicals.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Se laver les mains avant de manipuler la grenouille et remplir sa gamelle d'eau déchlorée ; ne pas donner d'insectes sauvages (risque d'insecticides).",
+    "quote": "You should always wash your hands if you need to handle your Tomato Frog and be sure that you are filling its dish with dechlorinated water. Another common source of poisoning is wild insects from outside, which could already be poisoned by insecticides.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[3].name",
+    "value": "Infections fongiques",
+    "quote": "Moisture and warmth create a breeding ground for fungi, unfortunately, including harmful strains that can cause infections.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "health.diseases[3].prevention",
+    "value": "Changer le substrat et nettoyer l'enclos chaque mois ; éviter que la litière devienne marécageuse.",
+    "quote": "You can help to prevent fungal infections by changing the substrate and cleaning the enclosure every month . Be sure to prevent the bedding from becoming ‘swampy,’ as well.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "terrarium",
+    "quote": "if you plan on putting together a bioactive terrarium with live plants, you will want 5-6″ of substrate",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 18.3,
+    "quote": "Tomato Frogs can thrive in any temperature ranging from 65°F to 80°F , meaning that they likely won’t need a heat source inside your home!",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 26.7,
+    "quote": "Tomato Frogs can thrive in any temperature ranging from 65°F to 80°F , meaning that they likely won’t need a heat source inside your home!",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": "65",
+    "quote": "Aim to keep the relative humidity in your Tomato Frog’s enclosure in the 65-80% range.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": "80",
+    "quote": "Aim to keep the relative humidity in your Tomato Frog’s enclosure in the 65-80% range.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Terrarium de 10 gallons minimum par grenouille (20 x 10 x 12 pouces).",
+    "quote": "Minimum Enclosure Size: 20” x 10” 12” (10-Gallon Aquarium or equivalent)",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Éclairage complémentaire non obligatoire ; un éclairage UVB est probablement bénéfique.",
+    "quote": "Just like supplemental heating, supplemental lighting is not required for Tomato Frogs. Still, recent studies prove time and again that UVB lighting has positive impacts on blood serum Vitamin D3 levels in reptiles, and the same is likely true for amphibians.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Cachettes variées : demi-bûches, rochers, grottes, liège, litière de feuilles, fausses plantes et autres décors bas adaptés aux amphibiens.",
+    "quote": "You can enrich your pet’s life by recreating these opportunities in captivity with half-log hides, rocks, caves, cork bark, leaf litter, fake plants, and other low-lying, amphibian-safe decorations.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Utiliser de l'eau déchlorée, car les amphibiens absorbent l'eau par la peau.",
+    "quote": "It’s also vital that you use dechlorinated water because amphibians absorb water through their skin – and that includes any harmful chemicals in the water.",
+    "url": "https://reptile.guide/tomato-frog/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "faible",
+    "quote": "Price $25 to $30",
+    "url": "https://reptile.guide/tomato-frog/"
+   }
+  ]
+ },
+ {
+  "speciesId": 5216933,
+  "evidence": [
+   {
+    "field": "health.diseases[0].name",
+    "value": "Chytridiomycose",
+    "quote": "Chytridiomycosis is caused by the fungal organisms Batrachochytrium dendrobatidis (Bd) and Batrachochytrium salamandrivorans (Bsal).",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+    "quote": "Clinical signs include brown to red discoloration of the skin, excessive shedding and mucus production, muscle incoordination, and acute death.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+    "quote": "Real-time PCR assay performed on swabs of the integument or pieces of skin is diagnostic and provides rapid assessment of presence and quantity of zoospores. This is useful in screening and management of amphibian populations at risk, such as those undergoing transport or quarantine.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].name",
+    "value": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+    "quote": "Red-leg syndrome, also known as bacterial dermatosepticemia, refers to hyperemia of the ventral skin that accompanies systemic infection in amphibians.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+    "quote": "Clinical signs include lethargy, emaciation, ulcerations of the skin, and characteristic cutaneous pinpoint hemorrhages of the legs and abdomen.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+    "quote": "Malnourished, newly acquired amphibians that are maintained in poor-quality water or other inappropriate environmental conditions are particularly susceptible.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].name",
+    "value": "Mycobactériose",
+    "quote": "Mycobacteriosis, are caused by non-tuberculous acid-fast bacilli, including Mycobacterium fortuitum , M marinum , M chelonea , M abscessus , M avium , M szulgai , M xenopi , and M liflandii .",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Nodules gris ou ulcérations de la peau et des organes ; l'animal peut bien manger tout en maigrissant.",
+    "quote": "Affected amphibians may have gray nodules or ulcerations in the skin, liver, kidneys, spleen, lungs, and other coelomic organs. Infected amphibians may eat well but still lose weight.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Les amphibiens captifs affaiblis, gardés en surpopulation ou dans des conditions insalubres sont les plus sensibles.",
+    "quote": "Captive amphibians that are debilitated or kept in crowded or unsanitary conditions are most susceptible.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "terrarium",
+    "quote": "The recommended minimum terrarium size for a cane toad is 36”L x 18”W x 18”H (50 gallons).",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/cane-toad-care-sheet"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 15.6,
+    "quote": "Temperatures should never exceed 82°F or drop below 60°F.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/cane-toad-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 27.8,
+    "quote": "Temperatures should never exceed 82°F or drop below 60°F.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/cane-toad-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Terrarium d'au moins 36 x 18 x 18 pouces (50 gallons) pour un crapaud.",
+    "quote": "The recommended minimum terrarium size for a cane toad is 36”L x 18”W x 18”H (50 gallons).",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/cane-toad-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB non indispensable à sa survie mais recommandé.",
+    "quote": "Cane toads seem to be able to survive without it, but we still recommend providing appropriate UVB lighting as part of the setup.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/cane-toad-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Litière de feuilles, bois de mopani, écorce de liège, roches, plantes vivantes ou artificielles, cachettes et grottes préfabriquées, ornements artificiels.",
+    "quote": "Décor options for cane toads include: leaf litter mopani wood cork bark rocks live or artificial plants pre-made hides/caves artificial ornaments",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/cane-toad-care-sheet"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Prévoir un bac d'eau assez grand pour que le crapaud puisse s'y asseoir.",
+    "quote": "You want to provide a water dish or tub large enough for your toad to sit in.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/cane-toad-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "faible",
+    "quote": "Toads are generally inexpensive to acquire, running between $10 and $30.",
+    "url": "https://thevetdesk.com/pet-health-wellness/amphibians/how-to-take-care-of-a-toad/"
+   }
+  ]
+ },
+ {
+  "speciesId": 5217160,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "terrarium",
+    "quote": "A glass or plastic terrarium of at least 90 cm (3 feet) in length is recommended for one adult toad.",
+    "url": "https://vetverified.com/articles/keeping-common-toads-as-pets-a-comprehensive-guide"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 10,
+    "quote": "They thrive best in temperatures between 10°C and 22°C (50°F to 72°F).",
+    "url": "https://vetverified.com/articles/keeping-common-toads-as-pets-a-comprehensive-guide"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 22,
+    "quote": "They thrive best in temperatures between 10°C and 22°C (50°F to 72°F).",
+    "url": "https://vetverified.com/articles/keeping-common-toads-as-pets-a-comprehensive-guide"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 50,
+    "quote": "Humidity should be kept at around 50-70%, with a light misting of dechlorinated water every few days to maintain moisture levels.",
+    "url": "https://vetverified.com/articles/keeping-common-toads-as-pets-a-comprehensive-guide"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 70,
+    "quote": "Humidity should be kept at around 50-70%, with a light misting of dechlorinated water every few days to maintain moisture levels.",
+    "url": "https://vetverified.com/articles/keeping-common-toads-as-pets-a-comprehensive-guide"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Terrarium en verre ou en plastique d'au moins 90 cm de long pour un crapaud adulte.",
+    "quote": "A glass or plastic terrarium of at least 90 cm (3 feet) in length is recommended for one adult toad.",
+    "url": "https://vetverified.com/articles/keeping-common-toads-as-pets-a-comprehensive-guide"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Pas d'UVB indispensable (espèce nocturne), mais une ampoule UVB de faible puissance peut être bénéfique.",
+    "quote": "Toads are nocturnal and do not require UVB lighting, though a low-output UVB bulb can be beneficial for their overall health.",
+    "url": "https://vetverified.com/articles/keeping-common-toads-as-pets-a-comprehensive-guide"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Écorce, rondelles de liège, roches et plantes vivantes ou artificielles pour recréer un milieu naturel.",
+    "quote": "Provide bark, cork rounds, rocks, and live or artificial plants to create a natural environment.",
+    "url": "https://vetverified.com/articles/keeping-common-toads-as-pets-a-comprehensive-guide"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "faible",
+    "quote": "Toads are generally inexpensive to acquire, running between $10 and $30.",
+    "url": "https://thevetdesk.com/pet-health-wellness/amphibians/how-to-take-care-of-a-toad/"
+   }
+  ]
+ },
+ {
+  "speciesId": 5217264,
+  "evidence": [
+   {
+    "field": "health.diseases[0].name",
+    "value": "Chytridiomycose",
+    "quote": "Chytridiomycosis is caused by the fungal organisms Batrachochytrium dendrobatidis (Bd) and Batrachochytrium salamandrivorans (Bsal).",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+    "quote": "Clinical signs include brown to red discoloration of the skin, excessive shedding and mucus production, muscle incoordination, and acute death.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+    "quote": "Real-time PCR assay performed on swabs of the integument or pieces of skin is diagnostic and provides rapid assessment of presence and quantity of zoospores. This is useful in screening and management of amphibian populations at risk, such as those undergoing transport or quarantine.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].name",
+    "value": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+    "quote": "Red-leg syndrome, also known as bacterial dermatosepticemia, refers to hyperemia of the ventral skin that accompanies systemic infection in amphibians.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+    "quote": "Clinical signs include lethargy, emaciation, ulcerations of the skin, and characteristic cutaneous pinpoint hemorrhages of the legs and abdomen.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+    "quote": "Malnourished, newly acquired amphibians that are maintained in poor-quality water or other inappropriate environmental conditions are particularly susceptible.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].name",
+    "value": "Rhabdiase (vers pulmonaires Rhabdias)",
+    "quote": "Rhabdiasis, caused by the lungworm Rhabdias spp, is a common cause of pulmonary damage and secondary infections in captive amphibians.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Animal anorexique, maigre et affaibli ; la mort brutale n'est pas rare.",
+    "quote": "Affected animals may appear anorectic, thin, and generally debilitated. Acute death is not uncommon.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Une excellente hygiène est essentielle : retirer régulièrement les mues, les fèces, les restes de nourriture et les cadavres de l'enclos.",
+    "quote": "Excellent hygiene is essential for parasite control and includes the routine removal of sloughed skin, fecal material, uneaten food, and carcasses from animal enclosures.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   }
+  ]
+ }
+]

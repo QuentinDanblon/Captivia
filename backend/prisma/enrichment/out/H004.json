@@ -1,0 +1,426 @@
+[
+  {
+    "speciesId": 104260760,
+    "reproduction": {
+      "season": "Reproduction après la mue de la femelle (pas de saison précisée)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 4,
+      "breedingDifficulty": "avance",
+      "notes": "Maturité sexuelle à 4-5 mois. La femelle porte les oeufs sous l'abdomen 3 à 5 semaines. Les larves doivent se développer en eau salée jusqu'à la métamorphose ; l'espèce est l'une des plus difficiles à reproduire en aquarium d'eau douce.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.theshrimpfarm.com/posts/breeding-amano-shrimp/",
+          "title": "Breeding Amano Shrimp - The Shrimp Farm"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Amano_shrimp",
+          "title": "Amano shrimp - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104276062,
+    "reproduction": {
+      "season": "Toute l'année (reproduction non saisonnière)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": 7,
+      "breedingDifficulty": "facile",
+      "notes": "En laboratoire, la femelle se reproduit pour la première fois vers 7 mois et peut pondre jusqu'à 7 fois dans sa vie, avec environ 7,7 semaines entre deux couvées. Espèce décrite comme facile et très prolifique par les éleveurs.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://marineinfo.org/doc/publication/8587",
+          "title": "Non-seasonal breeding in a porcellionid isopod (Warburg et al.) - MarineInfo"
+        },
+        {
+          "type": "guide",
+          "url": "https://exuvium.net/porcellio-laevis-white",
+          "title": "Porcellio laevis White - Exuvium Isopods"
+        }
+      ]
+    },
+    "habitat": null
+  },
+  {
+    "speciesId": 165504395,
+    "behavior": {
+      "generalBehavior": "Escargot plutôt calme et docile, non agressif : il se rétracte dans sa coquille quand il est dérangé. Il est actif la nuit. C'est un animal sauvage qu'il ne faut pas trop manipuler.",
+      "sociability": "solitaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "Peut cohabiter dans un terrarium avec des isopodes, des collemboles et d'autres escargots.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://bantam.earth/burgundy-snail-helix-pomatia",
+          "title": "Burgundy Snail (Helix pomatia) - Bantam.earth"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Coquille endommagée (carence en calcium)",
+          "symptoms": "Coquille fissurée ou cassée, inactivité.",
+          "prevention": "Fournir en permanence une source de calcium et éviter les manipulations brusques.",
+          "whenToConsult": "Si l'escargot a la coquille fissurée ou reste inactif : évaluer les conditions d'élevage et consulter un vétérinaire connaissant les invertébrés."
+        },
+        {
+          "name": "Déshydratation",
+          "symptoms": null,
+          "prevention": "Vaporiser régulièrement et surveiller les conditions dans le terrarium.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Acariens",
+          "symptoms": "Petits acariens blancs ou rouges qui infestent le terrarium.",
+          "prevention": "Un nettoyage régulier aide à prévenir les infestations.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Parasites",
+          "symptoms": null,
+          "prevention": "Rares chez les escargots captifs ; peuvent être introduits par de la terre contaminée ou des spécimens capturés dans la nature.",
+          "whenToConsult": null
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://vetverified.com/articles/the-ultimate-guide-to-keeping-land-snails-as-pets",
+          "title": "The ultimate guide to keeping land snails as pets - Vet Verified (escargots terrestres)"
+        }
+      ]
+    },
+    "habitat": null
+  },
+  {
+    "speciesId": 2441108,
+    "health": {
+      "diseases": [
+        {
+          "name": "Ecthyme contagieux (orf)",
+          "symptoms": "Dermatite proliférative sur le museau et les boulets.",
+          "prevention": null,
+          "whenToConsult": null
+        },
+        {
+          "name": "Strongylose pulmonaire (vers pulmonaires, pneumonie vermineuse)",
+          "symptoms": null,
+          "prevention": null,
+          "whenToConsult": null
+        },
+        {
+          "name": "Brucellose rangiférine (Brucella suis biovar 4)",
+          "symptoms": "Abcès osseux avec fistule observé chez un animal infecté.",
+          "prevention": null,
+          "whenToConsult": null
+        },
+        {
+          "name": "Bronchopneumonie bactérienne",
+          "symptoms": null,
+          "prevention": null,
+          "whenToConsult": null
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://complete.bioone.org/journals/journal-of-wildlife-diseases/volume-52/issue-3/2015-12-327/Contagious-Ecthyma-Rangiferine-Brucellosis-and-Lungworm-Infection-in-a-Muskox/10.7589/2015-12-327.full",
+          "title": "Contagious Ecthyma, Rangiferine Brucellosis, and Lungworm Infection in a Muskox - Journal of Wildlife Diseases"
+        },
+        {
+          "type": "guide",
+          "url": "https://bioone.org/journals/journal-of-wildlife-diseases/volume-53/issue-2/2016-02-035/DISEASE-COMPLEXITY-IN-A-DECLINING-ALASKAN-MUSKOX-iOVIBOS-MOSCHATUS-i/10.7589/2016-02-035.full",
+          "title": "Disease complexity in a declining Alaskan muskox population - Journal of Wildlife Diseases"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5219362,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Proies entières (souris, rats, poussins d'un jour, cailles)",
+          "frequency": "2 à 4 fois par semaine",
+          "notes": "Base de l'alimentation ; fournissent os, organes et poils/plumes."
+        },
+        {
+          "name": "Viande crue (poulet, dinde, lapin, parfois bœuf)",
+          "frequency": "en complément",
+          "notes": "Ne doit pas constituer l'alimentation exclusive ; la viande musculaire seule manque de nutriments essentiels."
+        },
+        {
+          "name": "Insectes (grillons, vers de farine, superworms, blattes dubia, criquets migrateurs)",
+          "frequency": "2 à 3 fois par semaine",
+          "notes": "Variété et enrichissement ; saupoudrer de calcium et de vitamines."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Chocolat, raisins et raisins secs, oignons et ail, avocat",
+          "reason": "Toxiques ou potentiellement toxiques pour les carnivores."
+        },
+        {
+          "name": "Aliments humains transformés, additifs artificiels et produits laitiers",
+          "reason": "À éviter absolument ; la plupart des carnivores ne digèrent pas bien les produits laitiers."
+        },
+        {
+          "name": "Os cuits",
+          "reason": "Ils se brisent en éclats dangereux."
+        },
+        {
+          "name": "Nourriture pour chien",
+          "reason": "Les formulations ne couvrent pas les besoins d'un carnivore."
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Aucun aliment commercial complet pour genettes n'existe ; saupoudrer les insectes de calcium et de vitamines.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm",
+          "title": "Genet Species Guide - Furry Critter Network"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5285167,
+    "health": {
+      "diseases": [
+        {
+          "name": "Dents trop longues et malocclusion (données du chinchilla, même famille)",
+          "symptoms": "Difficulté à manger, baisse d'appétit, perte de poids, salivation, problèmes oculaires, grattage du visage.",
+          "prevention": "Le foin doit être le composant principal de l'alimentation.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Stase gastro-intestinale (données du chinchilla)",
+          "symptoms": "Arrêt de l'alimentation.",
+          "prevention": null,
+          "whenToConsult": "Dès que l'animal cesse de manger : urgence vétérinaire."
+        },
+        {
+          "name": "Coup de chaleur (données du chinchilla)",
+          "symptoms": "Halètement, température corporelle élevée, respiration bouche ouverte, réticence à bouger.",
+          "prevention": null,
+          "whenToConsult": "Urgence nécessitant un traitement vétérinaire immédiat."
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://vcahospitals.com/know-your-pet/chinchillas-diseases",
+          "title": "Chinchillas - Health Conditions - VCA Animal Hospitals (famille des Chinchillidés)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5285942,
+    "health": null
+  },
+  {
+    "speciesId": 5289145,
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladie osseuse métabolique (carence en calcium)",
+          "symptoms": "Instabilité, réticence à sauter ou planer, léthargie ; cas avancés : convulsions et fractures lors de mouvements banals.",
+          "prevention": "Alimentation équilibrée en calcium ; supplémentation en calcium sous contrôle vétérinaire dans les cas débutants.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Infections respiratoires",
+          "symptoms": "Éternuements, respiration sifflante, écoulement nasal, difficulté à respirer.",
+          "prevention": "Éviter les litières poussiéreuses, les copeaux de cèdre ou de pin et les courants d'air.",
+          "whenToConsult": "Dès les premiers signes, chez un vétérinaire pour NAC."
+        },
+        {
+          "name": "Typhus sylvatique (zoonose)",
+          "symptoms": null,
+          "prevention": null,
+          "whenToConsult": null
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm",
+          "title": "Flying Squirrel Guide - Furry Critter Network (écureuils volants, à titre éditorial)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Southern_flying_squirrel",
+          "title": "Southern flying squirrel - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104048045,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Granulés secs du commerce pour ouistitis",
+          "frequency": "quotidienne",
+          "notes": "Base de la ration, à compléter par d'autres aliments."
+        },
+        {
+          "name": "Fruits frais et secs, légumes, graines et noix",
+          "frequency": "quotidienne",
+          "notes": "En complément des granulés ; quantités à rester dans la ration quotidienne normale."
+        },
+        {
+          "name": "Protéines animales (insectes, vers de farine, poulet bouilli, oeufs durs)",
+          "frequency": "en complément",
+          "notes": null
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Nourriture d'enrichissement supplémentaire hors ration normale",
+          "reason": "Utiliser de la nourriture en plus peut conduire à l'obésité."
+        },
+        {
+          "name": "Aliments non lavés (pesticides)",
+          "reason": "La nourriture doit d'abord être lavée soigneusement pour éliminer les pesticides."
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Compléments alimentaires nécessaires pour éviter la maladie osseuse métabolique ; vitamine D3 en supplément car le ouistiti ne peut pas la fabriquer lui-même. Régime naturel : exsudats (gomme, sève) et insectes.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://marmosetcare.stir.ac.uk/care-in-captivity/feeding.html",
+          "title": "Common Marmoset Care - Feeding - University of Stirling"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Common_marmoset",
+          "title": "Common marmoset - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104052770,
+    "feeding": {
+      "dietType": "herbivore",
+      "recommendedFoods": [
+        {
+          "name": "Plantes vertes, jeunes rameaux, baies et graines (régime estival naturel)",
+          "frequency": "saison estivale",
+          "notes": "Régime naturel de l'espèce dans la nature."
+        },
+        {
+          "name": "Noix, chatons, cônes et aiguilles de pin (régime hivernal naturel)",
+          "frequency": "saison hivernale",
+          "notes": "Régime naturel de l'espèce dans la nature."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Noix et graines en base de l'alimentation",
+          "reason": "Riches en graisses et déséquilibrées en calcium : risque d'obésité et de carence en calcium (consigne donnée pour les écureuils volants en captivité)."
+        },
+        {
+          "name": "Graines de tournesol en excès",
+          "reason": "À offrir avec parcimonie et séparément de la ration de base (consigne donnée pour les écureuils volants en captivité)."
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Carence en calcium = principale cause de maladie osseuse métabolique chez les écureuils volants captifs ; nourrir le soir, au réveil de l'animal.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Pteromys_volans/",
+          "title": "Pteromys volans - Animal Diversity Web"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm",
+          "title": "Flying Squirrel Guide - Furry Critter Network (écureuils volants en général)"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Espèce nocturne qui passe peu de temps au sol et plane d'arbre en arbre pour chercher sa nourriture ; elle niche dans des trous d'arbre.",
+      "sociability": "grégaire",
+      "difficultyLevel": "expert",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Pteromys_volans/",
+          "title": "Pteromys volans - Animal Diversity Web"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm",
+          "title": "Flying Squirrel Guide - Furry Critter Network (niveau de difficulté pour les écureuils volants en général)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104052822,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Légumes frais (carotte, patate douce, légumes feuilles)",
+          "frequency": "quotidienne",
+          "notes": "Base du régime captif, à côté de blocs spécifiques pour écureuils."
+        },
+        {
+          "name": "Fruits en quantité limitée (pomme, raisin, banane)",
+          "frequency": "occasionnelle",
+          "notes": "À limiter."
+        },
+        {
+          "name": "Protéines : vers de farine ou grillons séchés",
+          "frequency": "en complément",
+          "notes": null
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments transformés",
+          "reason": "À éviter."
+        },
+        {
+          "name": "Agrumes",
+          "reason": "À éviter."
+        },
+        {
+          "name": "Aliments très sucrés ou très salés",
+          "reason": "À éviter."
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Le régime captif doit refléter la diversité du régime naturel (noix, graines, bourgeons, champignons, fruits, écorce, parfois oeufs d'oiseaux ou insectes) tout en restant constant.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information",
+          "title": "Grey Squirrel Information - Exotic Nutrition"
+        }
+      ]
+    }
+  }
+]

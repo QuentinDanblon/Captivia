@@ -1,3 +1,4 @@
+import type { Prisma } from '@prisma/client';
 import {
   ArrayMaxSize,
   IsArray,
@@ -7,6 +8,7 @@ import {
   IsString,
   Length,
   MaxLength,
+  MinLength,
 } from 'class-validator';
 import { PaginationQueryDto } from '../../common/dto/pagination-query.dto';
 
@@ -27,7 +29,7 @@ export class CreateLegislationDto {
 
   @IsOptional()
   @IsObject()
-  details?: any;
+  details?: Prisma.InputJsonObject;
 
   @IsOptional()
   @IsArray()
@@ -35,4 +37,12 @@ export class CreateLegislationDto {
   @IsString({ each: true })
   @MaxLength(500, { each: true })
   sources?: string[];
+}
+
+/** GET /speciesplus/search — nom scientifique transmis à Species+. */
+export class SpeciesPlusSearchDto {
+  @IsString()
+  @MinLength(2)
+  @MaxLength(150)
+  name: string;
 }

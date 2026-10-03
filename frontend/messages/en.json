@@ -38,7 +38,17 @@
     "backupBody": "Technical backups that still contain your data are purged within 30 days at most after deletion.",
     "exportInfoTitle": "Get your data before you go",
     "exportInfoBody": "Before deleting your account, you can download a complete export of your data (JSON format) free of charge from Settings, Account, \"My data\".",
-    "backHome": "Back to home"
+    "backHome": "Back to home",
+    "pageTitle": "Your account",
+    "pageLead": "Your details, your security and your data, under your control.",
+    "profileTitle": "Profile",
+    "languageHint": "The app and your e-mails switch to this language.",
+    "passwordIntro": "For your security, your password is never displayed.",
+    "passwordRule": "Between 10 and 128 characters.",
+    "thisDeviceTitle": "On this device",
+    "thisDeviceText": "You are signed in as {email}.",
+    "privacyLink": "Privacy policy",
+    "deletionHelpLink": "How to delete your account"
   },
   "animalPublic": {
     "date": "Date",
@@ -275,6 +285,62 @@
       "invalid": "Some information is invalid. Please check the form.",
       "notFound": "This item no longer exists. Please reload the page.",
       "unavailable": "The service is temporarily unavailable. Please try again in a moment."
+    },
+    "list": {
+      "count": "{count, plural, =0 {No animals} one {# animal} other {# animals}}",
+      "description": "Each animal has its own care log, reminders and species profile.",
+      "emptyBenefit": "Add your first animal: their care log, reminders and species benchmarks are ready in three steps.",
+      "routines": "{count, plural, one {# care routine} other {# care routines}}"
+    },
+    "sheet": {
+      "loading": "Opening the profile…",
+      "back": "Back to my animals",
+      "errorBenefit": "The profile may have been deleted, or the connection was interrupted.",
+      "breadcrumb": "Breadcrumb",
+      "gbifLabel": "GBIF species identifier",
+      "summaryTitle": "At a glance",
+      "unknownValue": "Not specified",
+      "bornOn": "Born: {date}",
+      "treatments": "Ongoing treatment",
+      "noTreatment": "None",
+      "until": "until {date}",
+      "nextVaccine": "Next booster",
+      "noVaccine": "None",
+      "sectionsNav": "On this profile",
+      "speciesTitle": "Species benchmarks",
+      "timelineTitle": "Recent care, upcoming dates",
+      "timelineLabel": "{name}'s care timeline",
+      "timelineEmpty": "The timeline fills up with the weigh-ins, vaccines and appointments you add below.",
+      "kinds": {
+        "visit": "Vet appointment",
+        "vaccine": "Vaccine",
+        "vaccineDue": "Vaccine booster",
+        "weighing": "Weigh-in",
+        "health": "Health record",
+        "treatmentStart": "Treatment start",
+        "treatmentEnd": "Treatment end"
+      },
+      "actionsLabel": "Actions for {name}",
+      "weigh": "Weigh",
+      "carnetShort": "Record",
+      "carnetTitle": "A record to take along",
+      "carnetText": "Identity, vaccines, treatments, weigh-ins and appointments on one A4 page: print it or save it as a PDF for your vet.",
+      "openCarnet": "Open the printable record",
+      "qrAlt": "QR code for {name}'s public page",
+      "medicationsBenefit": "Dose, frequency, end date: Captivia reminds you of every dose at the scheduled time.",
+      "measurementsBenefit": "Weighing once a month is enough to spot weight loss before the first symptoms.",
+      "measurementsList": "Weigh-in history",
+      "weightHint": "In kilograms: 250 g = 0.25.",
+      "vaccinationsBenefit": "Log the date and the next booster: Captivia flags it a month ahead.",
+      "vetBenefit": "Add the date and the vet: a reminder arrives 7 days before, then the day before.",
+      "healthBenefit": "Surgery, medical history, special diet: the history your vet will ask for.",
+      "routinesBenefit": "Feeding, cleaning, UVB: set the time once and Captivia reminds you from then on.",
+      "breedingBenefit": "Heat, mating, births: keep the exact dates of every cycle.",
+      "vaccineOverdue": "Booster overdue ({when})",
+      "vaccineDue": "Booster {when}",
+      "routineName": "Routine name (optional)",
+      "dayOfMonth": "Day of the month (1-31)",
+      "everyHours": "Every X hours (1-24)"
     }
   },
   "attribution": {
@@ -317,7 +383,23 @@
     "resetPasswordSubmit": "Reset password",
     "resetPasswordSuccess": "Password updated. Redirecting to login…",
     "resetPasswordTitle": "New password",
-    "registerError": "Registration failed"
+    "registerError": "Registration failed",
+    "loginHeading": "Good to see you again",
+    "loginLead": "Your animals, their records and their reminders are waiting for you.",
+    "guestTitle": "Rather try it first?",
+    "guestLead": "Start without an e-mail or password: 1 animal, its full record and its reminders. Create an account whenever you like, nothing is lost.",
+    "createAccountLink": "Create an account",
+    "registerHeading": "An account so you never forget a thing",
+    "registerLead": "Your record backed up and available on all your devices. Free for one animal.",
+    "consentLegend": "Terms and age",
+    "registerSubmit": "Create my account",
+    "forgotHeading": "Forgot your password?",
+    "forgotLead": "Enter your address and we’ll send you a link to choose a new one.",
+    "forgotSpamHint": "The link is valid for one hour. Take a quick look in your spam folder too.",
+    "rememberedPassword": "Remembered it?",
+    "resetInvalidHeading": "This link is no longer valid",
+    "resetRequestNew": "Get a new link",
+    "resetHeading": "Choose a new password"
   },
   "carnetPrint": {
     "title": "Health record",
@@ -406,13 +488,12 @@
   "footer": {
     "about": "About",
     "accountDeletion": "Delete my account",
-    "amazonAssociate": "As an Amazon Associate, Captivia earns from qualifying purchases.",
     "contact": "Contact",
     "legalNotice": "Legal notice",
     "navLabel": "Legal information",
     "privacy": "Privacy",
     "sources": "Sources and licences",
-    "tagline": "Caring, made simple.",
+    "tagline": "You love them, we remember the rest.",
     "terms": "Terms of use",
     "transparency": "Transparency & affiliation",
     "description": "Your animals' health record, care reminders and sourced species profiles, in one place."
@@ -434,13 +515,13 @@
     "diamond": "Diamond",
     "done": "Done",
     "gold": "Gold",
-    "markDone": "Done",
+    "markDone": "Done it",
     "markDoneNotification": "Done",
     "markDoneRoutine": "Done (+2 pts)",
     "markSkipped": "Postpone",
     "maxGrade": "Max grade reached",
     "nextGrade": "Next grade",
-    "noReminders": "No reminders today. Set up notifications in Settings.",
+    "noReminders": "Schedule a meal, a misting or a clean-up: it will show up here on the day.",
     "platinum": "Platinum",
     "points": "Points",
     "pointsEarned": "+100 pts",
@@ -448,41 +529,29 @@
     "progressBarLabel": "Progress to next grade",
     "progressToNext": "to next grade",
     "remindersToday": "Today's reminders",
-    "routinesCreateReminders": "These reminders come from your routines (animals) and notification types. You can receive them on your phone or by email: Settings → Notifications.",
+    "routinesCreateReminders": "These reminders come from your pets' routines and your own reminders. They reach you on your phone or by email, depending on your “Reminders and notifications” settings.",
     "silver": "Silver",
     "skipped": "Postponed",
-    "title": "My grade",
-    "yourStatus": "Your status"
+    "title": "Your grade",
+    "yourStatus": "Your status",
+    "lead": "Every routine task marked as done earns you 2 points: from Bronze to Diamond, your consistency shows.",
+    "pointsCount": "{count, plural, one {# point} other {# points}}",
+    "towards": "Towards {grade}",
+    "remaining": "{count, plural, one {# more point to {grade}} other {# more points to {grade}}}",
+    "scaleLabel": "The five grades",
+    "remindersIntro": "Today’s reminders come from your animals’ routines and your personal reminders.",
+    "noRemindersTitle": "No reminders today",
+    "setUpReminders": "Set up my reminders",
+    "pointsAwarded": "{count, plural, one {+# point} other {+# points}}",
+    "routineWorth": "Routine · worth 2 points"
   },
   "home": {
     "closeMenu": "Close menu",
-    "featured": "Featured",
     "mainNavigation": "Main navigation",
     "mobileNavigation": "Mobile navigation",
     "openMenu": "Open menu",
-    "popular": "Most viewed",
-    "recent": "Recent",
-    "searchPlaceholder": "Search for a species...",
     "skipToContent": "Skip to content",
-    "subtitle": "Discover and care for your animals",
-    "title": "The Wildlife Guide",
-    "searchUnavailable": "The search server is unavailable. Start the backend or try again later.",
-    "eyebrow": "WILDLIFE GUIDE",
-    "heroLine": "Know the living world.",
-    "pillarsLabel": "The pillars of Captivia",
-    "pillarExplore": "Explore",
-    "pillarUnderstand": "Understand",
-    "pillarCare": "Care",
-    "explorerKicker": "EXPLORE",
-    "explorerTitle": "A species in mind?",
-    "speciesProfiles": "Species profiles",
-    "instantSearch": "Instant search",
     "noResults": "No results",
-    "discoverKicker": "DISCOVER",
-    "resultsKicker": "RESULTS",
-    "resultsTitle": "Species found",
-    "profileCount": "{count, plural, one {# profile} other {# profiles}}",
-    "profileBadge": "Profile",
     "taxonomy": {
       "Reptilia": "Reptile",
       "Aves": "Bird",
@@ -502,6 +571,267 @@
       "Archaea": "Archaeon"
     }
   },
+  "landing": {
+    "meta": {
+      "title": "Captivia — your pets' health record and reminders",
+      "description": "Vaccines, treatments, weigh-ins, vet appointments: log them once and Captivia reminds you right on time. Free for one pet, no account needed to start.",
+      "ogAlt": "A golden retriever in profile, with the headline: You love them. Captivia remembers the rest.",
+      "ogCredit": "Photo: Dietmar Rabich, CC BY-SA 4.0"
+    },
+    "hero": {
+      "titleLead": "You love them.",
+      "titleRest": "Captivia remembers the rest.",
+      "lead": "Vaccines, dewormers, weigh-ins, vet visits: log them once and Captivia reminds you when they're due. For a cat, a dog, a rabbit… or a leopard gecko.",
+      "ctaPrimary": "Start for free",
+      "ctaSecondary": "I already have an account",
+      "reassurance": "No account, no credit card. Free for one pet.",
+      "species": "Dogs · cats · rabbits · birds · reptiles · fish",
+      "photoAlt": "Tan dog up to its neck in water, looking at the camera in the evening light",
+      "previewCaption": "Captivia's “Today” screen, with sample pets."
+    },
+    "sample": {
+      "today": "Today",
+      "dueToday": "{count, plural, one {task today} other {tasks today}}",
+      "overdue": "{count, plural, one {overdue} other {overdue}}",
+      "alertAction": "Book an appointment",
+      "markDone": "Mark as done",
+      "timelineLabel": "Today's care",
+      "weekLabel": "Coming up",
+      "allDay": "All day",
+      "status": {
+        "done": "Done",
+        "due": "To do",
+        "overdue": "Overdue",
+        "planned": "Planned",
+        "skipped": "Skipped"
+      },
+      "kind": {
+        "medication": "Medication",
+        "feeding": "Feeding",
+        "cleaning": "Upkeep",
+        "weighing": "Weigh-in",
+        "vet": "Vet"
+      },
+      "care": {
+        "dewormTitle": "Dewormer",
+        "dewormDetail": "Moka · 1 tablet",
+        "feedTitle": "Feeding",
+        "feedDetail": "Pixel · 5 calcium-dusted crickets",
+        "terrariumTitle": "Terrarium clean-out",
+        "terrariumDetail": "Pixel · due yesterday",
+        "weighTitle": "Weigh-in",
+        "weighDetail": "Fleur · before her meal",
+        "hayTitle": "Fresh hay and greens",
+        "hayDetail": "Fleur · 1 bundle, 3 endive leaves",
+        "vetTitle": "Vet visit",
+        "vetDetail": "Moka · Dr Lambert · check-up and vaccine",
+        "moltTitle": "Shed check",
+        "moltDetail": "Pixel · moisten the humid hide"
+      },
+      "lastWeighing": "Last weigh-in",
+      "lastWeighingValue": "4.5 kg · 12 days ago",
+      "nextVaccine": "Next vaccine",
+      "nextVaccineValue": "in 6 days",
+      "vaccinesTitle": "Vaccines",
+      "vaccineFeline": "Panleukopenia and cat flu",
+      "vaccineRabies": "Rabies",
+      "vaccineDueSoon": "Booster in 6 days",
+      "vaccineUpToDate": "Up to date",
+      "weightTitle": "Weight",
+      "weightChart": "Moka's weight curve: from 4.1 kg to 4.5 kg over a year",
+      "appointmentTitle": "Fleur's yearly check-up is due",
+      "appointmentBody": "Last visit 11 months ago.",
+      "geckoName": "Leopard gecko",
+      "geckoFacts": {
+        "hotSpot": "Basking spot",
+        "activity": "Active at",
+        "activityValue": "dusk and dawn",
+        "diet": "Diet",
+        "dietValue": "live insects",
+        "lifespan": "Lifespan in captivity",
+        "lifespanValue": "15–20 years"
+      },
+      "geckoStatus": "IUCN status",
+      "geckoLc": "Least Concern",
+      "geckoTipLabel": "Good to know",
+      "geckoTip": "A thinning tail is often the first sign of weight loss: worth mentioning to your vet.",
+      "geckoSources": "Sources: Wikipedia (CC BY-SA 4.0) · GBIF · IUCN Red List",
+      "postCockatielsTime": "2 h ago",
+      "postCockatielsTitle": "Our three cockatiels finally moved into the new aviary",
+      "postQuestionTime": "5 h ago",
+      "postQuestionTitle": "My bearded dragon eats less now the days are getting shorter. Anyone else?",
+      "reactions": "{count, plural, one {# reaction} other {# reactions}}",
+      "replies": "{count, plural, one {# reply} other {# replies}}",
+      "postQuestionBody": "Basking spot is at 34 °C, he drinks normally, but he's been ignoring crickets for a week."
+    },
+    "tour": {
+      "title": "Every treatment logged. Every date kept.",
+      "intro": "Moka, Pixel and Fleur are sample pets. Their screens, though, are the real app.",
+      "previewNote": "App preview, sample data",
+      "soon": "Coming soon",
+      "record": {
+        "label": "Health record",
+        "title": "Everything your vet will ask for, already written down.",
+        "body": "Vaccines, treatments, weigh-ins and visit notes, dated and in order. The weight curve updates with every weigh-in, and the record prints or shares before the appointment."
+      },
+      "reminders": {
+        "label": "Reminders and calendar",
+        "title": "The right reminder, right on time.",
+        "body": "Dewormer every three months, feeding every other day, vaccines once a year: Captivia keeps the schedule and reminds you by notification or email. Your appointments show up in your phone's calendar too."
+      },
+      "species": {
+        "label": "Species guides",
+        "title": "Sourced answers, not hearsay.",
+        "body": "Temperature, diet, behaviour, health, regulations: every guide says what your pet needs, and where the information comes from."
+      },
+      "community": {
+        "label": "Community",
+        "title": "Coming soon: fellow pet people.",
+        "body": "Share photos of your pets, ask your questions, answer other people's. Your pet's health record stays private.",
+        "cta": "Join the community"
+      }
+    },
+    "gallery": {
+      "title": "From the sofa cat to the terrarium gecko.",
+      "body": "Dogs, cats, rabbits, birds, reptiles, fish, horses or hens: every species has its guide, every pet has its record."
+    },
+    "photos": {
+      "dogGoldenRetriever": "Golden retriever in profile, looking up, in the woods",
+      "catTabby": "Young tabby cat sitting, facing the camera",
+      "rabbitStraw": "Black and white rabbit drinking from a wooden bowl on straw",
+      "budgerigars": "Two green and yellow budgerigars facing each other",
+      "beardedDragon": "Head of a bearded dragon, scales in relief, resting on a branch",
+      "neonTetra": "Blue and red neon tetra swimming among aquarium plants",
+      "horse": "Head of a light grey horse in a halter, with a long mane",
+      "hen": "Russet hen with a red comb, in profile",
+      "catStraw": "Ginger and white cat lying on straw in the sun",
+      "leopardGecko": "Spotted leopard gecko on sand",
+      "cockatiels": "Three cockatiels lined up on a branch"
+    },
+    "galleryNames": {
+      "dogGoldenRetriever": "Dog",
+      "catTabby": "Cat",
+      "rabbitStraw": "Rabbit",
+      "budgerigars": "Budgerigars",
+      "beardedDragon": "Bearded dragon",
+      "neonTetra": "Neon tetra",
+      "horse": "Horse",
+      "hen": "Hen"
+    },
+    "steps": {
+      "title": "Three steps and you're set.",
+      "one": {
+        "title": "Introduce your pet",
+        "body": "Species, name, date of birth. A photo if you like."
+      },
+      "two": {
+        "title": "Log what matters",
+        "body": "The last vaccine, the current treatment, today's weight. The rest will follow week by week."
+      },
+      "three": {
+        "title": "Let us remind you",
+        "body": "A notification or an email before every due date, and appointments in your calendar."
+      },
+      "cta": "Add my first pet"
+    },
+    "offer": {
+      "title": "Free for one pet. Premium when the family grows.",
+      "intro": "Start without an account. Create one to back up your data, and switch to Premium the day a second pet arrives.",
+      "caption": "What each plan includes",
+      "feature": "What you get",
+      "guest": "No account",
+      "guestPrice": "Free",
+      "guestHint": "On this device",
+      "free": "Free account",
+      "freePrice": "Free",
+      "freeHint": "Backed up and synced",
+      "premium": "Premium",
+      "premiumPrice": "Monthly or yearly subscription",
+      "premiumHint": "Price shown in the app before any purchase",
+      "rows": {
+        "animals": "Pets",
+        "record": "Full health record: vaccines, treatments, weigh-ins",
+        "reminders": "Reminders and care calendar",
+        "species": "Sourced species guides",
+        "sync": "Backup and access from several devices",
+        "qr": "Pet QR code (read-only record)"
+      },
+      "several": "Several",
+      "included": "Included",
+      "notIncluded": "Not included",
+      "keepData": "Starting without an account? The day you create one, your pet and its whole record come with you.",
+      "cta": "Start for free"
+    },
+    "trust": {
+      "title": "Your pet's record is nobody's business but yours.",
+      "private": {
+        "title": "Private by default",
+        "body": "Nobody but you sees the record. Nothing is published without your consent, even once the community opens."
+      },
+      "europe": {
+        "title": "Hosted in Europe",
+        "body": "Captivia's server and database are in Frankfurt, Germany."
+      },
+      "sources": {
+        "title": "Sources, not rumours",
+        "body": "Wikipedia, GBIF, the IUCN Red List, CITES: every guide cites its own."
+      },
+      "noAds": {
+        "title": "No advertising cookies",
+        "body": "Your data is never sold or rented. You can delete your account and everything in it at any time."
+      },
+      "privacyLink": "Read the privacy policy"
+    },
+    "search": {
+      "title": "Got a species in mind?",
+      "body": "Open a guide before you even start your record: boa, leopard gecko, cockatiel, lop rabbit…",
+      "label": "Search for a species",
+      "placeholder": "e.g. leopard gecko",
+      "submit": "Search",
+      "browse": "Browse by group",
+      "suggestions": "Suggested species",
+      "results": "{count, plural, one {# guide found} other {# guides found}}",
+      "resultsTitle": "Results",
+      "unavailable": "Search is unavailable right now. Please try again in a moment."
+    },
+    "faq": {
+      "title": "Questions people ask us",
+      "free": {
+        "q": "Is it really free?",
+        "a": "Yes, for one pet: health record, reminders, calendar and species guides included. Premium is for when you look after several pets; you subscribe in the mobile app, and the price is shown there before any purchase."
+      },
+      "account": {
+        "q": "Do I need an account?",
+        "a": "No. You can start right away, without an account. A free account backs up your data so you can find it on another device."
+      },
+      "upgrade": {
+        "q": "If I create an account later, will I lose what I've logged?",
+        "a": "No. Your pet and its record are attached to your new account, with nothing to re-enter."
+      },
+      "animals": {
+        "q": "Which animals can I keep track of?",
+        "a": "Dogs, cats, rabbits and rodents, birds, reptiles, amphibians, fish, horses, poultry… The guides draw on GBIF, the global biodiversity database, and keep growing."
+      },
+      "vet": {
+        "q": "Does Captivia replace my vet?",
+        "a": "No, and that's not its job. Captivia helps you forget nothing and arrive at the appointment with a complete history. The health guides tell you what should prompt a visit."
+      },
+      "data": {
+        "q": "Where is my pet's data stored?",
+        "a": "On a server and a database located in Frankfurt, Germany. It is never sold or rented, and you can delete it at any time."
+      },
+      "devices": {
+        "q": "Which devices does Captivia work on?",
+        "a": "Computers, tablets and phones, in the browser. The Android and iOS apps use the same account."
+      }
+    },
+    "final": {
+      "title": "Start with the one asleep on the sofa.",
+      "body": "A name, a species, and the record is open. The reminders will follow.",
+      "cta": "Add my first pet",
+      "secondary": "I already have an account"
+    }
+  },
   "legal": {
     "englishFallback": "The English version is authoritative pending translation.",
     "lastUpdated": "Last updated: {date}",
@@ -510,7 +840,7 @@
     "tableOfContents": "Contents"
   },
   "notifications": {
-    "addCustom": "Add topic",
+    "addCustom": "Add reminder",
     "addCustomPlaceholder": "e.g. Vaccination reminder, Weight…",
     "allSuggestedAdded": "All suggested topics have been added.",
     "cleaning": "Cleaning",
@@ -518,13 +848,13 @@
     "dayOfMonth": "Day of month",
     "deliveryBoth": "Phone and email",
     "deliveryChannel": "Receive reminders by",
-    "deliveryDescription": "Routines and your notification types create today's reminders. Choose how to receive them: on your phone (push) or by email.",
+    "deliveryDescription": "Your daily reminders reach you through this channel.",
     "deliveryEmail": "Email",
     "deliveryPush": "Phone (push notifications)",
     "description": "Receive reminders to care for your animals",
     "disabled": "Disabled",
     "enable": "Enable notifications",
-    "enableBrowser": "Enable notifications to receive reminders",
+    "enableBrowser": "Allow notifications to be alerted on this device, even when Captivia is closed.",
     "enableButton": "Enable notifications",
     "disableButton": "Disable notifications",
     "enabling": "Enabling…",
@@ -540,7 +870,7 @@
     "intervalHours": "Every",
     "myNotificationsDescription": "View and edit your saved reminders.",
     "myTypes": "My custom topics",
-    "myTypesHint": "Add suggested topics above or create your own below.",
+    "myTypesHint": "Start from an idea below or create your own: Captivia will let you know at the time you choose.",
     "nettoyage": "Cleaning",
     "noNotificationsSaved": "No notifications saved. Use the Configure tab to add some.",
     "nourrissage": "Feeding",
@@ -558,8 +888,8 @@
     "sante": "Health",
     "saved": "Preferences saved",
     "schedule": "Time window",
-    "snooze": "Snooze (minutes)",
-    "suggestedTypes": "Suggested topics",
+    "snooze": "Snooze delay (minutes)",
+    "suggestedTypes": "Reminder ideas",
     "tabConfig": "Configure",
     "tabMyNotifications": "My notifications",
     "time": "Time",
@@ -576,7 +906,7 @@
     "weekDay6": "Saturday",
     "saveError": "Error while saving",
     "notificationsEnabled": "Notifications enabled",
-    "snoozeHint": "Snooze duration in minutes (5-120)",
+    "snoozeHint": "When you snooze a reminder, it comes back after this delay (5 to 120 minutes).",
     "suggested": {
       "feeding": "Feeding",
       "cleaning": "Cleaning",
@@ -584,11 +914,29 @@
       "health": "Health",
       "vet": "Vet reminder",
       "shedding": "Shedding",
-      "weighing": "Weighing",
+      "weighing": "Weigh-in",
       "bath": "Bath",
       "temperature": "Temperature",
       "humidity": "Humidity"
-    }
+    },
+    "pageTitle": "Reminders and notifications",
+    "pageLead": "Choose what Captivia reminds you of, at what time, and how to let you know.",
+    "remindersTitle": "Your reminders",
+    "remindersIntro": "These reminders come on top of your animals’ routines. Each keeps its own time and rhythm.",
+    "emptyTitle": "No personal reminders yet",
+    "addCustomLabel": "New reminder",
+    "everyHours": "{count, plural, one {every hour} other {every # hours}}",
+    "onDay": "on day {day}",
+    "intervalLabel": "Interval (hours)",
+    "intervalHint": "From 1 to 24 hours.",
+    "snoozeTitle": "Snooze",
+    "deviceTitle": "On this device",
+    "pushOn": "On",
+    "pushOff": "Off",
+    "pushOnText": "This device receives your reminders, even when Captivia is closed.",
+    "deliveryTitle": "How to reach you",
+    "loadError": "Your settings could not be loaded. Reload the page to try again.",
+    "autoSaveHint": "Every change is saved automatically."
   },
   "premiumLock": {
     "goPremium": "View Premium subscription",
@@ -639,44 +987,43 @@
   },
   "settings": {
     "account": "Account",
-    "accountDescription": "Email, password, language",
+    "accountDescription": "E-mail address, language, password, connected devices and your data.",
     "grade": "Grade",
-    "gradeDescription": "Points and badges",
+    "gradeDescription": "Every routine task marked as done earns you points.",
     "notifications": "Notifications",
-    "notificationsDescription": "Reminders and schedules",
+    "notificationsDescription": "What Captivia reminds you of, at what time, and how it lets you know.",
     "subscription": "Premium subscription",
-    "subscriptionDescription": "Unlimited animals, health record, QR code",
-    "title": "Settings"
+    "subscriptionDescription": "Free for one animal. Premium to follow several.",
+    "title": "Settings",
+    "lead": "Your profile, your reminders and your plan, set once and for all.",
+    "breadcrumbLabel": "Back to settings",
+    "sectionsLabel": "Settings sections",
+    "profileLabel": "Your profile",
+    "accountTitle": "Profile and security",
+    "notificationsTitle": "Reminders and notifications",
+    "subscriptionTitle": "Plan and subscription",
+    "subscriptionDescriptionPremium": "Premium: all your animals, each with its own record.",
+    "gradeTitle": "Grade and points",
+    "planFree": "Free",
+    "planFreeShort": "Free",
+    "planLabel": "Plan",
+    "guestProfile": "No account, on this device",
+    "memberSince": "Member since {date}"
   },
   "species": {
-    "addToMyAnimals": "Add to My Animals",
     "allowed": "Allowed",
-    "care": "Care & Maintenance",
     "careAdvice": "Care advice",
-    "characteristics": "Characteristics",
     "citesStatus": "CITES Status",
     "classification": "Classification",
     "commonDiseases": "Common diseases",
-    "commonNames": "Common names",
-    "conservation": "Conservation status",
-    "description": "Description",
     "distribution": "Distribution",
-    "environment": "Environment",
     "equipment": "Equipment",
     "euRegulation": "EU Regulation",
     "food": "Food",
-    "foodRecommendations": "Recommended food",
-    "foodSource": "Data from Open Pet Food Facts",
-    "habitat": "Habitat",
     "health": "Health",
-    "identification": "Identification",
     "legal": "Legislation",
-    "noEquipmentData": "Recommendations coming soon",
-    "noFoodData": "No food products referenced for this species",
     "noHealthData": "No health data available at this time",
     "noLegalData": "No legislation data available at this time",
-    "notFound": "Species not found",
-    "overview": "Overview",
     "permitRequired": "Permit required",
     "permits": "Required permits",
     "prevention": "Prevention",
@@ -685,63 +1032,177 @@
       "advanced": "Advanced",
       "difficulty": "Breeding difficulty",
       "easy": "Easy",
-      "gestationDays": "Gestation (days)",
-      "incubationDays": "Incubation (days)",
       "litterSize": "Litter size",
       "moderate": "Moderate",
-      "months": "months",
-      "noData": "No breeding data available.",
       "notes": "Notes",
       "season": "Breeding season",
       "sexualMaturity": "Sexual maturity",
-      "title": "Breeding"
+      "gestation": "Gestation period",
+      "incubation": "Incubation period"
     },
     "restrictions": "Restrictions",
-    "scientificName": "Scientific name",
     "scientificReferences": "Scientific references",
-    "shop": "Shop",
-    "status": "Status",
     "symptoms": "Symptoms",
     "viewFullGuide": "View full guide",
     "whenToConsult": "When to consult",
-    "noPartnerStores": "No partner store for this category at the moment. See the Store tab from the home page.",
-    "profileLabel": "Profile",
-    "commonNameFr": "Common name (FR):",
-    "category": "Category:",
-    "subcategory": "Subcategory:",
-    "domesticationType": "Domestication type:",
-    "kingdom": "Kingdom:",
-    "phylum": "Phylum:",
-    "class": "Class:",
-    "order": "Order:",
-    "family": "Family:",
-    "genus": "Genus:",
-    "habitatEditorial": "Editorial habitat",
     "habitatType": "Habitat type",
     "temperature": "Temperature",
     "humidity": "Humidity",
     "spaceRequirements": "Space required",
     "lighting": "Lighting",
     "enrichment": "Enrichment",
-    "behavior": "Behavior",
-    "generalBehavior": "General behavior",
     "sociability": "Sociability",
     "difficultyLevel": "Difficulty level",
-    "compatibility": "Compatibility",
-    "biome": "Biome",
-    "defaultBiome": "Tropical / Subtropical",
-    "environmentDataMissing": "Environmental data to be completed",
     "sources": "Sources",
-    "feedingTitle": "Diet suited to the species",
     "dietType": "Diet type",
     "mealFrequency": "Meal frequency",
     "recommendedFoods": "Recommended foods",
     "foodsToAvoid": "Foods to avoid",
     "specificNeeds": "Specific needs",
-    "foodReferenceNote": "The recommendations above (species database) remain the reference.",
-    "unnamedProduct": "Unnamed product",
     "annex": "Annex {value}",
-    "euAnnexLabel": "EU Annex:"
+    "euAnnexLabel": "EU Annex:",
+    "loading": "Opening the guide…",
+    "notFoundTitle": "We can't find this guide",
+    "notFoundBenefit": "The link may be incomplete, or the guide has been removed. Search for the species by its common or Latin name.",
+    "errorTitle": "The guide didn't load",
+    "errorBenefit": "Your connection may have dropped. Check it, then try again.",
+    "searchAnother": "Find a species",
+    "breadcrumb": "Breadcrumb",
+    "gbifLabel": "GBIF identifier",
+    "photoAlt": "{name}, photograph",
+    "addAnimal": "Add a pet of this species",
+    "tocLabel": "In this guide",
+    "updatedOn": "Updated {date}",
+    "hygiene": "Cleaning and care",
+    "cost": "Budget",
+    "withChildren": "With children",
+    "withOtherAnimals": "With other animals",
+    "facts": {
+      "title": "At a glance",
+      "rank": "Rank",
+      "group": "Group",
+      "family": "Family",
+      "iucn": "IUCN Red List"
+    },
+    "rank": {
+      "KINGDOM": "Kingdom",
+      "PHYLUM": "Phylum",
+      "CLASS": "Class",
+      "ORDER": "Order",
+      "FAMILY": "Family",
+      "GENUS": "Genus",
+      "SPECIES": "Species",
+      "SUBSPECIES": "Subspecies",
+      "VARIETY": "Variety",
+      "BREED": "Breed"
+    },
+    "iucn": {
+      "EX": "Extinct",
+      "EW": "Extinct in the wild",
+      "CR": "Critically endangered",
+      "EN": "Endangered",
+      "VU": "Vulnerable",
+      "NT": "Near threatened",
+      "LC": "Least concern",
+      "DD": "Data deficient",
+      "NE": "Not evaluated"
+    },
+    "sections": {
+      "feeding": "Diet",
+      "habitat": "Housing",
+      "behavior": "Behaviour",
+      "health": "Health",
+      "reproduction": "Breeding",
+      "legislation": "Regulations",
+      "equipment": "Recommended equipment",
+      "sources": "References"
+    },
+    "review": {
+      "badge": "To be confirmed",
+      "hint": "Not yet reviewed by our team",
+      "health": "These health notes haven't been reviewed by our team yet. If in any doubt, go by your vet's advice.",
+      "legislation": "Our team hasn't checked this status yet: confirm it with the authorities in your country before acquiring an animal."
+    },
+    "units": {
+      "days": "{count, plural, one {# day} other {# days}}",
+      "months": "{count, plural, one {# month} other {# months}}"
+    },
+    "sourceLabels": {
+      "description": "Summary",
+      "taxonomy": "Taxonomy",
+      "photo": "Photo",
+      "viaGbif": "via GBIF",
+      "references": "Further reading",
+      "pubmed": "Scientific literature"
+    },
+    "values": {
+      "diet": {
+        "herbivore": "Herbivore",
+        "omnivore": "Omnivore",
+        "carnivore": "Carnivore",
+        "carnivore_strict": "Obligate carnivore",
+        "insectivore": "Insectivore",
+        "granivore": "Seed eater",
+        "frugivore": "Fruit eater",
+        "granivore_frugivore": "Seeds and fruit",
+        "piscivore": "Fish eater"
+      },
+      "frequency": {
+        "daily": "Every day",
+        "every_2_days": "Every other day",
+        "every_3_to_4_days": "Every 3 to 4 days",
+        "every_5_7_days": "Every 5 to 7 days",
+        "every_7_10_days": "Every 7 to 10 days",
+        "weekly": "Once a week",
+        "weekly_biweekly": "Once or twice a week",
+        "daily_juvenile": "Every day for juveniles",
+        "continuous": "Food always available",
+        "variable": "Depends on age and season"
+      },
+      "habitat": {
+        "enclos": "Enclosure",
+        "libre": "Free-roaming",
+        "cage": "Cage",
+        "terrarium": "Terrarium",
+        "aquarium": "Aquarium",
+        "aquaterrarium": "Aquaterrarium",
+        "voliere": "Aviary"
+      },
+      "cost": {
+        "faible": "Low",
+        "moyen": "Medium",
+        "eleve": "High"
+      },
+      "sociability": {
+        "solitaire": "Solitary: keep on its own",
+        "gregaire": "Social: lives in groups",
+        "semi_gregaire": "Semi-social: tolerates a few companions"
+      },
+      "difficulty": {
+        "debutant": "Suits beginners",
+        "intermediaire": "Needs some experience",
+        "avance": "Needs experience",
+        "expert": "For experienced keepers"
+      },
+      "equipment": {
+        "chauffage": "Heating",
+        "heating": "Heating",
+        "lighting": "Lighting",
+        "uvb": "UVB lighting",
+        "substrat": "Substrate",
+        "cage": "Cage",
+        "cachette": "Hides",
+        "terrarium": "Terrarium",
+        "gamelle": "Bowls",
+        "pince": "Feeding tongs",
+        "thermostat": "Thermostat",
+        "thermometre": "Thermometer",
+        "pulverisateur": "Mister",
+        "filtration": "Filtration"
+      }
+    },
+    "pubmedNote": "Articles from PubMed (NCBI), in English",
+    "reviewedOn": "Profile checked on {date}"
   },
   "store": {
     "allCategories": "All types",
@@ -755,31 +1216,30 @@
     "disclaimer": "Affiliate links: purchasing via these links supports Captivia. Prices remain the same for you.",
     "filterByCategory": "Filter by animal type",
     "forSpecies": "Stores suited to this species",
-    "productLinksNotice": "Product links may be affiliate links.",
     "subtitle": "Partner links for food and equipment suited to your pet.",
     "title": "Shop",
-    "visitStore": "Visit site"
+    "visitStore": "Visit site",
+    "pageTitle": "Partner shops",
+    "lead": "Shops chosen for your animals’ food and equipment.",
+    "loadError": "The shops could not be loaded.",
+    "emptyTitle": "No partner shops yet",
+    "emptyBenefit": "In the meantime, each species guide details the food and equipment that suit it.",
+    "emptyAction": "Browse species guides",
+    "noMatchTitle": "No shops for this type of animal",
+    "noMatchBenefit": "Choose “All types” to see every shop."
   },
   "subscription": {
     "benefitAnimals": "Unlimited animals in « My animals »",
     "benefitHealth": "Full health record for each animal",
     "benefitQR": "QR code per animal: when scanned, shows info and health record",
     "benefits": "With Premium you get:",
-    "chooseMonthly": "Choose monthly",
-    "chooseYearly": "Choose yearly",
     "currentPlan": "You are already Premium.",
     "monthly": "Monthly",
-    "perMonth": "/month",
-    "perYear": "/year",
-    "priceMonthly": "€5.99",
-    "priceYearly": "€29.99",
     "subscribeError": "Could not activate subscription. Please try again.",
     "subscribeSuccess": "Subscription activated. You now have access to all Premium features.",
     "subtitle": "Unlock all Captivia benefits",
     "title": "Premium subscription",
     "yearly": "Yearly",
-    "yearlyEquivalent": "≈ €2.50 / month",
-    "yearlyDiscount": "−17%",
     "inAppOnly": "Subscription available in the Captivia mobile app",
     "inAppOnlyHint": "Download the app from the App Store or Google Play to subscribe. No payment is offered on the website.",
     "statusTitle": "Your subscription",
@@ -795,10 +1255,10 @@
   },
   "transparency": {
     "affiliateIndependence": "Equipment and food recommendations depend on the needs of the species, not on commission rates.",
-    "affiliateLabelled": "Affiliate links are marked “Affiliate link” or accompanied by a nearby notice.",
-    "affiliatePartners": "Partner at launch: Amazon (amazon.fr). Partner sites are listed in the <link>Shop</link>.",
+    "affiliateLabelled": "If affiliate links are offered, they are marked “Affiliate link” or accompanied by a nearby notice, and the programme concerned is named.",
+    "affiliatePartners": "No affiliate links are shown today. Partner shops, if any, are listed in the <link>Shop</link>.",
     "affiliateSamePrice": "The price is the same whether or not you use our link.",
-    "affiliateTitle": "Our affiliate links",
+    "affiliateTitle": "Partner links",
     "backHome": "Back to home",
     "contactBody": "A question about our business model, affiliation or your data? Write to us:",
     "contactTitle": "Contact",
@@ -809,14 +1269,14 @@
     "dataNoTrackers": "No advertising cookies and no third-party audience measurement: only strictly necessary trackers (login, language) are used.",
     "dataPrivate": "Your animals’ profiles are private by default. Public sharing of an animal is optional: you turn it on yourself and can turn it off at any time.",
     "dataTitle": "Your data",
-    "intro": "How Captivia is funded, how our affiliate links work and what we do — and do not do — with your data.",
+    "intro": "How Captivia is funded, how any partner links would be labelled and what we do — and do not do — with your data.",
     "metaDescription": "How Captivia is funded, how its affiliate links work and what it does with your data.",
-    "missionBody": "Captivia helps pet owners, including owners of exotic pets, understand and care for their animals using information from open sources. This information does not replace a veterinarian’s advice.",
+    "missionBody": "Captivia helps pet owners, from cats and dogs to exotic pets, keep track of their care and get to know them better, using information from open sources. This information does not replace a veterinarian’s advice.",
     "missionTitle": "Our mission",
-    "modelAffiliation": "affiliate links: some links to merchant websites, mainly Amazon, earn us a commission when you buy through them, at no extra cost to you;",
+    "modelAffiliation": "where applicable, affiliate links: if links to merchant websites are offered, they may earn us a commission when you buy through them, at no extra cost to you;",
     "modelAlwaysFree": "Exporting your data and deleting your account are, and will remain, free.",
     "modelIntro": "Browsing species profiles is free. The service is funded by:",
-    "modelSubscription": "an optional subscription, coming later: it is not on sale yet. Its price and terms (renewal, cancellation, right of withdrawal) will be shown before any payment.",
+    "modelSubscription": "the optional Premium subscription, for following several pets: it is taken out in the mobile app, and its price and terms (renewal, cancellation, right of withdrawal) are shown before any payment.",
     "modelTitle": "Our business model",
     "openDataBody": "Profiles rely on GBIF, Wikipedia, Wikidata, Species+ (CITES), PubMed, Open Pet Food Facts, iNaturalist and Encyclopedia of Life. These sources receive no personal data from us.",
     "openDataMore": "See sources and licences",
@@ -828,8 +1288,8 @@
     "accountDeletionTitle": "Delete your account",
     "animalsTitle": "My animals",
     "carnetTitle": "Health record",
-    "defaultTitle": "Captivia – The animal care guide",
-    "description": "Captivia supports owners of pets and exotic animals every day: sourced species guides, health, feeding, housing and tracking of your animals.",
+    "defaultTitle": "Captivia — health record and reminders for your pets",
+    "description": "Vaccines, treatments, weigh-ins, vet appointments: Captivia remembers them for you and reminds you right on time. Sourced species guides, free for one pet.",
     "forgotPasswordTitle": "Forgot password",
     "loginTitle": "Log in",
     "registerTitle": "Sign up",
@@ -841,11 +1301,14 @@
     "storeDescription": "Equipment, food and accessories recommended for the needs of each species, with clearly labelled affiliate links.",
     "storeTitle": "Store",
     "agendaTitle": "Care agenda",
-    "verifyEmailTitle": "Email address verification"
+    "verifyEmailTitle": "Email address verification",
+    "speciesSearchTitle": "Species guides",
+    "speciesSearchDescription": "Look up a species and open its guide: diet, habitat, behaviour, health and regulations, with sources.",
+    "communityTitle": "Community"
   },
   "agenda": {
     "title": "Care agenda",
-    "subtitle": "All upcoming care for your animals in one place: routines, medications, vaccines and vet appointments.",
+    "subtitle": "Meals, treatments, vaccines and vet visits: everything coming up for your animals, day after day.",
     "loading": "Loading agenda...",
     "error": "Unable to load the agenda.",
     "retry": "Try again",
@@ -864,9 +1327,9 @@
     "listLabel": "Upcoming care by day",
     "count": "{count, plural, one {# item shown} other {# items shown}}",
     "truncated": "Too many items in this period: the list is truncated. Choose a shorter period.",
-    "emptyTitle": "No upcoming care",
-    "emptyHint": "Add routines, medications, vaccines or vet appointments to your animals to see them here.",
-    "emptyAction": "View my animals",
+    "emptyTitle": "Nothing planned yet",
+    "emptyHint": "Add a routine, a treatment or an appointment from your animal’s page: it will appear here, and Captivia will remind you.",
+    "emptyAction": "Open my animals",
     "noMatch": "No care matches these filters.",
     "types": {
       "routine": "Care routine",
@@ -881,9 +1344,9 @@
       "cancelled": "Cancelled"
     },
     "sub": {
-      "title": "External calendar",
-      "description": "Subscribe Google Calendar, Apple Calendar or Outlook to your care schedule with a personal link (read-only, updated automatically).",
-      "button": "Subscribe in my calendar",
+      "title": "In your calendar",
+      "description": "Google Calendar, Apple Calendar or Outlook show your care next to your other appointments, and update on their own.",
+      "button": "Create my link and copy it",
       "regenerate": "Regenerate link",
       "revoke": "Disable link",
       "regenerateConfirm": "The old link will stop working. Regenerate the link?",
@@ -897,8 +1360,22 @@
       "inactive": "No active subscription link.",
       "urlLabel": "Subscription link (keep it secret)",
       "secret": "Anyone with this link can see your care schedule. Regenerate it if it leaks.",
-      "error": "Operation unavailable right now. Please try again."
-    }
+      "error": "Operation unavailable right now. Please try again.",
+      "step1": "Copy your personal link.",
+      "step2": "In your calendar, choose “Add calendar from URL”.",
+      "step3": "Paste the link: your care appears, read-only.",
+      "buttonCopy": "Copy the link",
+      "buttonNew": "Get a new link",
+      "activeBadge": "Link active",
+      "inactiveBadge": "No link"
+    },
+    "rangeShown": "Period shown",
+    "timelineTitle7": "The next 7 days",
+    "timelineTitle30": "The next 30 days",
+    "timelineTitle90": "The next 3 months",
+    "countShort": "{count, plural, one {# item} other {# items}}",
+    "noMatchBenefit": "Widen the period or show every type of care.",
+    "pillAppointments": "{count, plural, one {vet appointment} other {vet appointments}}"
   },
   "sessions": {
     "title": "Connected devices",
@@ -918,11 +1395,14 @@
     "bannerDismiss": "Dismiss",
     "pageTitle": "Verifying your email address",
     "verifying": "Verifying…",
-    "success": "Your email address is verified. Thank you!",
+    "success": "Your email address is verified.",
     "invalid": "This verification link is invalid or has expired. Sign in to receive a new one.",
     "missingToken": "Incomplete verification link.",
     "goToApp": "Go to my animals",
-    "goToLogin": "Sign in"
+    "goToLogin": "Sign in",
+    "headingSuccess": "Address confirmed",
+    "headingFailed": "This link didn’t work",
+    "leadSuccess": "Thank you: your e-mail reminders can now reach you."
   },
   "guest": {
     "entryTitle": "Start your animal's health record",
@@ -944,7 +1424,7 @@
     "lockedActionGuest": "Create an account",
     "lockedActionFree": "See Premium",
     "premium": "Premium",
-    "upgradeTitle": "Create your account",
+    "upgradeTitle": "Keep your record for good",
     "upgradeIntroNamed": "{name} and its record will be attached to your account.",
     "upgradeIntro": "Your animal and its record will be attached to your account.",
     "upgradeGains": "With an account: log in from all your devices, e-mail reminders, public page and calendar subscription.",
@@ -967,6 +1447,961 @@
     "loginGuestUpgrade": "Create an account with this data",
     "welcomeTitle": "Welcome to Captivia",
     "welcomeText": "Start now, no e-mail or password: 1 animal, its health record, reminders and care calendar.",
-    "welcomeLater": "Later"
+    "welcomeLater": "Later",
+    "upgradeDoneTitle": "Your record is safe",
+    "keptLabel": "What comes with you",
+    "keptTitle": "Your animal comes with you, with its whole record",
+    "keptTitleNamed": "{name} comes with you, with its whole record",
+    "keptRecord": "Its health record: vaccines, treatments, weigh-ins, visits and notes.",
+    "keptReminders": "Its reminders and care agenda, just as you set them.",
+    "keptSettings": "Your notification and language preferences."
+  },
+  "today": {
+    "title": "Today",
+    "allDayShort": "All day",
+    "dateLabel": "Today's date",
+    "loading": "Getting your day ready…",
+    "loadError": "We couldn't load your animals. Check your connection, then try again.",
+    "pillDue": "{count, plural, one {task today} other {tasks today}}",
+    "pillOverdue": "{count, plural, one {overdue} other {overdue}}",
+    "pillAppointments": "{count, plural, one {appointment this week} other {appointments this week}}",
+    "alertsTitle": "Keep an eye on",
+    "urgent": "Urgent",
+    "openSheet": "Open {name}'s profile",
+    "moreAlerts": "{count, plural, one {# more thing to keep an eye on} other {# more things to keep an eye on}} in the profiles.",
+    "alerts": {
+      "vaccineOverdue": {
+        "title": "Vaccine booster overdue: {subject}",
+        "body": "{name} — the booster was due {when}. One call to the vet is enough to reschedule it."
+      },
+      "vaccineSoon": {
+        "title": "Vaccine booster {when}: {subject}",
+        "body": "{name} — on {date}. Now is a good time to book the appointment."
+      },
+      "treatment": {
+        "title": "Ongoing treatment: {subject}",
+        "body": "{name} — until {date}. Every dose shows up on the timeline."
+      },
+      "treatmentOpen": {
+        "title": "Ongoing treatment: {subject}",
+        "body": "{name} — no end date. Remember to stop it in the profile once it's finished."
+      },
+      "weighingOld": {
+        "title": "{name} was last weighed {when}",
+        "body": "Weighing once a month is enough to spot weight loss before the first symptoms."
+      },
+      "weighingNone": {
+        "title": "No weigh-in yet for {name}",
+        "body": "A first weigh-in gives you a baseline to follow their growth."
+      }
+    },
+    "timelineTitle": "The next 7 days",
+    "timelineLabel": "Care for today and the next 7 days",
+    "fullAgenda": "Full schedule",
+    "timelineEmptyTitle": "Nothing scheduled this week",
+    "timelineEmptyBenefit": "Schedule a feeding, a misting or a treatment: Captivia reminds you on the day, at the right time.",
+    "timelineEmptyAction": "Schedule a task",
+    "agendaError": "This week's care couldn't be loaded.",
+    "status": {
+      "done": "Done",
+      "due": "To do",
+      "overdue": "Overdue",
+      "planned": "Planned",
+      "skipped": "Cancelled"
+    },
+    "animalsTitle": "Your animals",
+    "allAnimals": "All your animals",
+    "photoAlt": "{name}, profile photo",
+    "factWeight": "Last weigh-in",
+    "factNoWeight": "Not weighed yet",
+    "factNextVisit": "Next appointment",
+    "factNoVisit": "None scheduled",
+    "factAge": "Age",
+    "tipLabel": "Good to know",
+    "tipSource": "{species} profile",
+    "tipPrevention": "{topic}: {text}",
+    "tipHabitat": "Keep their enclosure at {temperature}, with {humidity} humidity.",
+    "tipTemperature": "Recommended enclosure temperature: {temperature}.",
+    "tipHumidity": "Recommended enclosure humidity: {humidity}.",
+    "routinesAdded": "{count, plural, one {# routine added to their log} other {# routines added to their log}}"
+  },
+  "onboarding": {
+    "title": "Their care log, ready in three steps",
+    "text": "Pick their species and give them a name: Captivia sets up their basic care, their reminders and the key facts from their species profile.",
+    "stepSpecies": "Species",
+    "stepIdentity": "Name and birth",
+    "stepCare": "First care",
+    "stepsLabel": "Add your animal",
+    "progress": "Step {current} of {total}",
+    "speciesTitle": "What species are they?",
+    "speciesText": "Common or scientific name: “boa”, “Pogona”, “cockatiel”…",
+    "speciesHint": "Search starts after 2 letters.",
+    "searching": "Searching…",
+    "resultsLabel": "Matching species",
+    "speciesChosen": "Species:",
+    "identityTitle": "What's their name?",
+    "identityText": "You can change everything later. Species:",
+    "photoHint": "Or the address of a photo that's already online.",
+    "careTitle": "{name}'s basic care",
+    "careText": "The routines recommended for their species, already set up. Tick the ones to follow: Captivia reminds you on time.",
+    "careCount": "{checked} of {total} selected",
+    "careLater": "Later",
+    "perksTitle": "What you get",
+    "perk1Title": "Every task, on time",
+    "perk1": "Feeding, misting, treatments: a reminder at the right moment, and the whole week at a glance.",
+    "perk2Title": "A complete health record",
+    "perk2": "Weigh-ins, vaccines, vet visits: everything is dated, and the record prints as a PDF for your vet.",
+    "perk3Title": "The right benchmarks",
+    "perk3": "Temperature, diet, warning signs: their species profile, with its sources."
+  },
+  "authFrame": {
+    "plateLabel": "The animals people follow in Captivia",
+    "title": "Everything that matters to them, in one place",
+    "point1": "Vaccines, treatments, weigh-ins and vet visits: their health fits on a single page, ready for the vet.",
+    "point2": "A reminder arrives at the right moment, for every care task and every appointment.",
+    "point3": "Sourced species guides to better understand the animals you share your life with."
+  },
+  "plans": {
+    "title": "A record for each of your animals",
+    "lead": "Captivia is free for one animal, full health record included. Premium lets you follow as many as you like.",
+    "currentPlanLabel": "Your plan",
+    "yourPlan": "Your plan",
+    "freeFooter": "This is your current plan: nothing to pay, no time limit.",
+    "newTab": "(new tab)",
+    "whereTitle": "Subscribe from the mobile app",
+    "whereText": "Premium is purchased in the Captivia app, through the App Store or Google Play. The website takes no payments.",
+    "statusPlan": "Plan",
+    "renewsLabel": "Renews on",
+    "endsLabel": "Access until",
+    "choiceTitle": "Two plans, the same care",
+    "freeName": "Free",
+    "freeAudience": "For one animal",
+    "freePrice": "€0",
+    "freePriceNote": "No time limit, no credit card.",
+    "freePoint1": "Your animal’s full health record",
+    "freePoint2": "Reminders, the care agenda and calendar subscription",
+    "freePoint3": "A printable record to hand to your vet",
+    "premiumTag": "Several animals",
+    "premiumAudience": "For all your animals",
+    "premiumPrice": "Monthly or yearly subscription",
+    "premiumPriceNote": "Price shown in the app before any purchase.",
+    "premiumPoint1": "As many animals as you like, each with its own record and reminders",
+    "premiumPoint2": "A public page and a QR code for each animal",
+    "premiumPoint3": "Breeding records",
+    "compareTitle": "What’s included",
+    "featureColumn": "Feature",
+    "features": {
+      "animals": "Animals followed",
+      "record": "Health record: vaccines, treatments, weigh-ins, visits",
+      "reminders": "Reminders, care agenda and calendar subscription",
+      "print": "Printable record for the vet",
+      "species": "Sourced species guides",
+      "export": "Export of all your data",
+      "publicPage": "Public animal page and QR code",
+      "breeding": "Breeding records"
+    },
+    "included": "Included",
+    "notIncluded": "Not included",
+    "unlimited": "Unlimited",
+    "faqTitle": "Good to know",
+    "faq1Q": "Where do I subscribe?",
+    "faq1A": "In the Captivia mobile app, with your App Store or Google Play account. The website shows your subscription but sells nothing.",
+    "faq2Q": "How do I stop?",
+    "faq2A": "Any time, from your store’s subscription settings. Premium stays active until the end of the period already paid.",
+    "faq3Q": "What about without an account?",
+    "faq3A": "Trying without an account covers one animal. For Premium, create an account first: your animal and its record are kept.",
+    "storeLinksLabel": "Get the app"
+  },
+  "speciesSearch": {
+    "title": "Species",
+    "intro": "Diet, habitat, health, regulations: what each species needs day to day, with sources.",
+    "label": "Search for a species",
+    "placeholder": "e.g. leopard gecko",
+    "submit": "Search",
+    "groupsLabel": "Group",
+    "groups": {
+      "all": "All",
+      "mammals": "Mammals",
+      "birds": "Birds",
+      "reptiles": "Reptiles",
+      "amphibians": "Amphibians",
+      "fish": "Fish",
+      "insects": "Insects",
+      "arachnids": "Arachnids"
+    },
+    "resultsAll": "All guides",
+    "resultsFor": "Results for “{query}”",
+    "count": "{count, plural, =0 {No guides} one {# guide} other {# guides}}",
+    "loading": "Searching the guides…",
+    "emptyTitle": "No guide for “{query}”",
+    "emptyGroupTitle": "No guides in this group yet",
+    "emptyBenefit": "Try the Latin name, or something shorter: “python” rather than “albino ball python”.",
+    "emptyGroupBenefit": "The species may sit in another group: search again across all groups.",
+    "clear": "Clear search",
+    "allGroups": "Search all groups",
+    "errorTitle": "Search isn't responding right now",
+    "errorBody": "Check your connection, then try again.",
+    "photoAlt": "{name}, photograph",
+    "photoBy": "Photo",
+    "more": "{count, plural, one {Show the last guide} other {Show # more guides}}",
+    "moreFailed": "The next results couldn't be loaded. Try again."
+  },
+  "photoPicker": {
+    "header": "Your animal’s photo",
+    "camera": "Take a photo",
+    "library": "Choose from gallery",
+    "cancel": "Cancel",
+    "accessDenied": "Captivia can’t access the camera or your photos. Allow access in your phone’s settings, then try again.",
+    "error": "This photo couldn’t be loaded. Try another image."
+  },
+  "nativeReminders": {
+    "body": "{type}: {title}",
+    "channelName": "Care reminders",
+    "channelDescription": "Meals, treatments, vaccines and vet appointments for your animals, right on time.",
+    "blocked": "Notifications are blocked for Captivia. Allow them in your phone’s settings: your reminders will be scheduled as soon as you come back to the app.",
+    "onText": "{count, plural, =0 {Nothing to remind you of in the next 30 days. As soon as care is planned, this phone lets you know, even offline.} one {# reminder scheduled on this phone for the next 30 days. It will go off even offline.} other {# reminders scheduled on this phone for the next 30 days. They will go off even offline.}}",
+    "offText": "Meals, treatments, vaccines and appointments: this phone reminds you right on time, even offline.",
+    "enable": "Turn on reminders on this phone",
+    "disable": "Turn off reminders on this phone",
+    "syncError": "Your care schedule can’t be loaded right now. Check your connection and try again.",
+    "primerTitle": "Get reminded when care is due?",
+    "primerBody": "Captivia can notify you when a meal, treatment, vaccination or vet appointment is coming up, even when the app is closed. You can turn these reminders off at any time in the settings.",
+    "primerAccept": "Turn on reminders",
+    "primerLater": "Not now"
+  },
+  "paywall": {
+    "modalTitle": "Keep track of all your animals",
+    "modalLead": "With Premium, add as many animals as you like, each with its own record and reminders.",
+    "loading": "Loading plans…",
+    "choosePlan": "Choose your plan",
+    "priceLine": "{price} {per}",
+    "subscribe": "Subscribe for {price} {per}",
+    "per": {
+      "day": "{count, plural, one {per day} other {every # days}}",
+      "week": "{count, plural, one {per week} other {every # weeks}}",
+      "month": "{count, plural, one {per month} other {every # months}}",
+      "year": "{count, plural, one {per year} other {every # years}}"
+    },
+    "planName": {
+      "day": "{count, plural, one {Daily} other {# days}}",
+      "week": "{count, plural, one {Weekly} other {# weeks}}",
+      "month": "{count, plural, one {Monthly} other {# months}}",
+      "year": "{count, plural, one {Yearly} other {# years}}"
+    },
+    "duration": {
+      "day": "{count, plural, one {# day} other {# days}}",
+      "week": "{count, plural, one {# week} other {# weeks}}",
+      "month": "{count, plural, one {# month} other {# months}}",
+      "year": "{count, plural, one {# year} other {# years}}"
+    },
+    "introFree": "Free {duration} trial, then {price} {per}.",
+    "introPaid": "{introPrice} {introPer} for {duration}, then {price} {per}.",
+    "termsIos": "Auto-renewing subscription. Payment is charged to your Apple Account when you confirm the purchase. The subscription renews at the same price unless cancelled at least 24 hours before the end of the current period. Manage or cancel it at any time in your App Store account settings.",
+    "termsAndroid": "Auto-renewing subscription. Payment is charged to your Google Play account when you confirm the purchase. The subscription renews at the same price until you cancel, which you can do at any time in Google Play under Subscriptions. Premium stays active until the end of the paid period.",
+    "deletionNote": "Deleting your Captivia account does not cancel the subscription: cancel it in the store as well.",
+    "restore": "Restore purchases",
+    "terms": "Terms of use",
+    "privacy": "Privacy",
+    "manage": "Manage my subscription",
+    "unavailableTitle": "Subscription not available yet",
+    "unavailableText": "Premium cannot be purchased in this version of the app yet. Your animal and its record stay available.",
+    "loadErrorTitle": "Plans could not be shown",
+    "retry": "Try again",
+    "emptyTitle": "No plan available right now",
+    "emptyText": "The store does not offer Premium on this device yet. Try again a little later.",
+    "errors": {
+      "network": "Could not reach the store. Check your connection, then try again.",
+      "unavailable": "This plan is not available on this device or in your country.",
+      "notAllowed": "Purchases are turned off on this device (store settings or parental controls).",
+      "pending": "Payment awaiting approval. Premium will turn on as soon as the store confirms it.",
+      "alreadyOwned": "This subscription is already active on your store account. Tap “Restore purchases”.",
+      "store": "The store could not process the purchase. Try again in a moment.",
+      "notConfigured": "The purchase could not start. Close the app, reopen it, then try again.",
+      "unknown": "The purchase did not go through. Try again in a moment."
+    },
+    "activatingTitle": "Activating…",
+    "activatingText": "The store confirmed your purchase. Premium is being turned on for your account: allow a few seconds.",
+    "pendingText": "Your purchase is recorded, but your account is not up to date yet. This can take a few minutes: tap “Check again” or come back later, with nothing to pay again.",
+    "checkAgain": "Check again",
+    "activeTitle": "Premium is active",
+    "activeText": "Add as many animals as you like, each with its own record.",
+    "restoreNothing": "No Premium subscription to restore on this store account."
+  },
+  "community": {
+    "loading": "Loading the community…",
+    "time": {
+      "justNow": "just now"
+    },
+    "soon": {
+      "title": "The community opens soon",
+      "body": "Photos of your pets, questions for fellow enthusiasts, answers that actually help: everything is ready, we just need to open the doors. Your pets' health record stays private.",
+      "action": "Back to my pets"
+    },
+    "join": {
+      "title": "Fellow pet people are waiting",
+      "body": "Show your pets, ask your questions and answer other people's. A free account is all you need to join the community.",
+      "register": "Create a free account",
+      "login": "I already have an account",
+      "privacy": "Your pets' health record is never published: you choose what you share, one post at a time."
+    },
+    "actions": {
+      "createAccount": "Create my account",
+      "createProfile": "Create my profile",
+      "reviewRules": "Review the rules",
+      "seeDecision": "See the decision",
+      "login": "Sign in again",
+      "retry": "Try again",
+      "resendVerification": "Resend the e-mail",
+      "verificationSent": "E-mail sent: open the link inside.",
+      "verificationError": "The e-mail could not be sent. Try again in a minute."
+    },
+    "errors": {
+      "network": {
+        "title": "Can't connect",
+        "body": "Check your internet connection, then try again."
+      },
+      "session": {
+        "title": "Your session has expired",
+        "body": "Sign in again to get back to the community."
+      },
+      "guest": {
+        "title": "An account to take part",
+        "body": "While trying Captivia without an account you can read the feed. To post, reply or like, create an account: your pet and its record come with you."
+      },
+      "emailNotVerified": {
+        "title": "Verify your e-mail address",
+        "body": "Open the link we e-mailed you to post in the community. Nothing arrived? We can send it again."
+      },
+      "ageRequired": {
+        "title": "Confirm your age",
+        "body": "The community is open from age 15. Confirm it when you create your profile."
+      },
+      "profileRequired": {
+        "title": "Choose your username",
+        "body": "Create your public profile (a username, and an avatar if you like) to post, reply and like."
+      },
+      "profileExists": {
+        "title": "Your profile already exists",
+        "body": "You can change your username and avatar from your profile."
+      },
+      "rulesNotAccepted": {
+        "title": "The rules have changed",
+        "body": "Read and accept the new version of the rules to keep posting."
+      },
+      "suspended": {
+        "title": "Posting suspended",
+        "body": "You can still read and like, but not post or reply for now. The decision and how to appeal are available.",
+        "bodyUntil": "You can still read and like, but not post or reply until {date}. The decision and how to appeal are available.",
+        "bodyNoDate": "Posting is suspended on your account, even after leaving the community. The decision and how to appeal are available."
+      },
+      "rateLimited": {
+        "title": "Limit reached for now",
+        "body": "You've posted a lot in a short time. Try again in a while: this limit protects the community from spam."
+      },
+      "linksNotAllowed": {
+        "title": "No links just yet",
+        "body": "Links are allowed once an account is 7 days old, to keep spam out. Remove the address and try again."
+      },
+      "handleInvalid": {
+        "title": "Invalid username",
+        "body": "3 to 30 characters: unaccented letters, digits, “_” or “.” (not at the start or end)."
+      },
+      "handleReserved": {
+        "title": "Username reserved",
+        "body": "This username is reserved or looks too much like a protected one (letters swapped for digits, for example). Choose another one."
+      },
+      "handleTaken": {
+        "title": "Username already taken",
+        "body": "This username is taken, or another member gave it up recently (it stays reserved for 60 days). Add a number or a word: “kaa_and_me”, “gecko.lea”."
+      },
+      "mediaType": {
+        "title": "Photo format not accepted",
+        "body": "Send a JPEG, PNG or WebP photo."
+      },
+      "mediaTooLarge": {
+        "title": "Photo too heavy",
+        "body": "Choose a lighter or smaller photo: 8 MB at most, 10,000 px per side and 24 megapixels at most."
+      },
+      "mediaInvalid": {
+        "title": "Unreadable photo",
+        "body": "This photo couldn't be read, or it is too stretched (panorama, very long screenshot). Choose another one or crop it."
+      },
+      "mediaDimensions": {
+        "title": "Unusual photo size",
+        "body": "This photo is too stretched or too large. Crop it, then try again."
+      },
+      "mediaBusy": {
+        "title": "Can't upload right now",
+        "body": "Lots of photos are arriving at once. Try again in a moment."
+      },
+      "cannotReportOwn": {
+        "title": "This is your post",
+        "body": "You can delete it yourself."
+      },
+      "cannotBlockSelf": {
+        "title": "You can't block yourself",
+        "body": "This profile is yours."
+      },
+      "appealNotAllowed": {
+        "title": "Appeal not possible",
+        "body": "This decision has already been appealed, or the 6-month deadline has passed."
+      },
+      "bodyRequired": {
+        "title": "Some text is needed",
+        "body": "Write a few words before sending."
+      },
+      "invalidParent": {
+        "title": "Can't reply",
+        "body": "This comment is no longer visible."
+      },
+      "notAuthor": {
+        "title": "For the question's author only",
+        "body": "Only the person who asked the question picks the helpful answer."
+      },
+      "notFound": {
+        "title": "Not found",
+        "body": "This content was deleted or hidden, or its author is no longer visible to you."
+      },
+      "forbidden": {
+        "title": "Action not allowed",
+        "body": "Your account can't do this."
+      },
+      "generic": {
+        "title": "Something went wrong",
+        "body": "Try again in a moment. If it keeps happening, contact us."
+      }
+    },
+    "type": {
+      "PHOTO": "Photo",
+      "QUESTION": "Question",
+      "plural": {
+        "PHOTO": "Photos",
+        "QUESTION": "Questions"
+      }
+    },
+    "categories": {
+      "MAMMAL": "Mammals",
+      "BIRD": "Birds",
+      "REPTILE": "Reptiles",
+      "FISH": "Fish",
+      "AMPHIBIAN": "Amphibians",
+      "ARACHNID": "Arachnids",
+      "INSECT": "Insects",
+      "OTHER": "Other animals"
+    },
+    "reasons": {
+      "SPAM": {
+        "label": "Spam or advertising",
+        "hint": "Selling, promotion, repeated messages."
+      },
+      "HARASSMENT": {
+        "label": "Harassment or bullying",
+        "hint": "Targeted mockery, insults, hounding."
+      },
+      "HATE": {
+        "label": "Hate speech",
+        "hint": "Attacks someone for who they are."
+      },
+      "VIOLENCE": {
+        "label": "Violence or threats",
+        "hint": "Threats, encouraging harm."
+      },
+      "ANIMAL_WELFARE": {
+        "label": "Animal cruelty",
+        "hint": "An animal in distress, dangerous living conditions."
+      },
+      "ILLEGAL_TRADE": {
+        "label": "Illegal animal trade",
+        "hint": "Protected species, unauthorised sales."
+      },
+      "DANGEROUS_ADVICE": {
+        "label": "Dangerous advice",
+        "hint": "Could put an animal's health at risk."
+      },
+      "NUDITY": {
+        "label": "Sexual content or nudity",
+        "hint": "Sexual images or language."
+      },
+      "PERSONAL_DATA": {
+        "label": "Personal data",
+        "hint": "Someone's address, phone number or full name."
+      },
+      "IMPERSONATION": {
+        "label": "Impersonation",
+        "hint": "Pretends to be someone else or the team."
+      },
+      "OTHER": {
+        "label": "Other breach of the rules",
+        "hint": "Explain what's wrong below."
+      }
+    },
+    "form": {
+      "charCount": "{count} / {max} characters"
+    },
+    "list": {
+      "more": "See more",
+      "auto": "Load more as I scroll",
+      "end": "You're all caught up.",
+      "shown": "{count, plural, one {# item shown} other {# items shown}}"
+    },
+    "photo": {
+      "position": "Photo {n} of {total}",
+      "byAuthor": "Photo posted by @{handle}",
+      "fallback": "A member's photo"
+    },
+    "card": {
+      "open": "open the post",
+      "formerMember": "Former member",
+      "hidden": "Hidden",
+      "likeLabel": "Like ({count})",
+      "repliesLabel": "{count, plural, one {# reply} other {# replies}}",
+      "answered": "Helpful answer found",
+      "report": "Report this post",
+      "reportShort": "Report"
+    },
+    "feed": {
+      "title": "Community",
+      "lead": "Members' latest photos and questions. Everyone's health records stay private.",
+      "publish": "Post",
+      "filtersLabel": "Filter the feed",
+      "typeLabel": "Show",
+      "allTypes": "All",
+      "categoryLabel": "Species",
+      "allCategories": "All species",
+      "listLabel": "Recent posts",
+      "loading": "Loading the feed…",
+      "emptyTitle": "The feed is waiting for its first photo",
+      "emptyBody": "Show your pet or ask the question that's on your mind: members answer here.",
+      "emptyAction": "Post a photo",
+      "emptyFilteredTitle": "Nothing here yet",
+      "emptyFilteredBody": "No post matches these filters. Widen your search or be the first to post.",
+      "resetFilters": "See the whole feed"
+    },
+    "aside": {
+      "label": "My community space",
+      "linksLabel": "Community pages",
+      "myProfile": "My community profile",
+      "seePublicProfile": "See my public profile",
+      "blocks": "Blocked people",
+      "decisions": "Decisions and reports",
+      "moderation": "Moderation queue",
+      "joinTitle": "Pick a username and you're in",
+      "joinBody": "A username and agreeing to the rules is all it takes to post. Your e-mail is never shown.",
+      "rulesTitle": "The rules in short",
+      "rule": {
+        "one": "Kindness first: answer the question, not the person.",
+        "two": "Health: advice never replaces a vet. When in doubt, point people to one.",
+        "three": "No selling animals, no personal data, no advertising."
+      },
+      "rulesLink": "Read the community rules"
+    },
+    "post": {
+      "loading": "Loading the post…",
+      "backToFeed": "Back to the feed",
+      "notFoundTitle": "Post not found",
+      "notFoundBody": "Its author deleted it, it was hidden after review, or its author is no longer visible to you.",
+      "hiddenTitle": "Post hidden",
+      "hiddenBody": "Only you and the moderation team can see it. The decision explains why and how to challenge it.",
+      "delete": "Delete the post",
+      "deleteTitle": "Delete this post?",
+      "deleteBody": "Its photos, replies and likes go with it. This can't be undone."
+    },
+    "comments": {
+      "title": "{count, plural, one {# reply} other {# replies}}",
+      "answersTitle": "{count, plural, one {# answer to the question} other {# answers to the question}}",
+      "empty": "No replies yet. A kind word always goes down well.",
+      "emptyQuestion": "Nobody has answered yet. If you know, share what you've been through.",
+      "label": "Your reply",
+      "answerLabel": "Your answer to the question",
+      "send": "Reply",
+      "sendReply": "Send reply",
+      "reply": "Reply",
+      "replyTo": "Reply to @{handle}",
+      "repliesTo": "Replies to @{handle}",
+      "more": "See more replies",
+      "helpful": "Helpful answer",
+      "helpfulHint": "Did an answer help you? Mark it as helpful: it will be highlighted for the next people.",
+      "markHelpful": "Mark as helpful",
+      "unmarkHelpful": "Remove “helpful”",
+      "report": "Report",
+      "delete": "Delete",
+      "deleteTitle": "Delete this reply?",
+      "deleteBody": "Replies made to it are deleted too. This can't be undone.",
+      "deleted": "Reply deleted"
+    },
+    "report": {
+      "titlePost": "Report this post",
+      "titleComment": "Report this reply",
+      "intro": "A person on the team reviews your report. The author doesn't know who reported it.",
+      "reasonLabel": "What's going on?",
+      "reasonMissing": "Choose the closest reason.",
+      "detailsLabel": "Details (optional)",
+      "submit": "Send the report",
+      "sent": "Report sent, we're on it.",
+      "already": "You've already reported this content: it's being reviewed.",
+      "next": "After several reports, the content is hidden until the team decides. You can also block its author from their profile."
+    },
+    "compose": {
+      "title": "New post",
+      "lead": "A photo of your pet, or a question for fellow enthusiasts.",
+      "typeLegend": "What would you like to share?",
+      "type": {
+        "PHOTO": {
+          "title": "A photo",
+          "hint": "1 to 4 photos, with a caption if you like."
+        },
+        "QUESTION": {
+          "title": "A question",
+          "hint": "Some text, and a photo to show what puzzles you."
+        }
+      },
+      "photosLabel": "Photos (up to {max})",
+      "questionPhotoLabel": "Photo (optional)",
+      "addPhoto": "Add a photo",
+      "removePhoto": "Remove photo {n}",
+      "previewAlt": "Preview of photo {n}",
+      "photoHint": "JPEG, PNG or WebP. Photos are resized to 1,600 px and their location data removed before upload.",
+      "converted": "Converted from HEIC",
+      "preparing": "Preparing the photo…",
+      "photosRequired": "Add at least one photo, or choose “A question”.",
+      "tooManyPhotos": "{max, plural, one {Only one photo here.} other {# photos at most: the extra ones were not added.}}",
+      "unnamedPhoto": "This photo",
+      "photoError": {
+        "heic": "{name}: this HEIC format can't be read on this device. On iPhone, choose “Most Compatible” in Settings › Camera › Formats, or share the photo as JPEG.",
+        "type": "{name}: format not accepted. Choose a JPEG, PNG or WebP photo.",
+        "dimensions": "{name}: photo too stretched (panorama, very long screenshot). Crop it, then try again.",
+        "tooLarge": "{name}: photo too heavy (20 MB at most).",
+        "unreadable": "{name}: the photo could not be read. Choose another one."
+      },
+      "captionLabel": "Caption",
+      "captionHint": "Optional: their name, their mood, the story behind the photo.",
+      "altLabel": "Describe the photo",
+      "altLabelN": "Describe photo {n}",
+      "altHint": "Optional, but it matters: screen readers read it aloud for blind and low-vision people.",
+      "altPlaceholder": "An orange leopard gecko on a warm rock",
+      "questionLabel": "Your question",
+      "questionHint": "Give the species, age and what you noticed: the answers will be more precise.",
+      "bodyRequired": "Write your question before posting.",
+      "bodyTooLong": "The text is over 2,000 characters.",
+      "animalLabel": "Show one of my pets",
+      "animalHint": "Optional. Only its name and species will be visible.",
+      "noAnimal": "No pet",
+      "animalVisible": "Visible to members: {name}",
+      "animalPrivate": "Its health record, care and appointments stay private.",
+      "categoryLabel": "Category",
+      "categoryHint": "Optional: helps others find your post.",
+      "categoryFromAnimal": "Optional: otherwise taken from your pet's species.",
+      "noCategory": "No category",
+      "submit": "Post",
+      "uploading": "Uploading photo {n} of {total}…",
+      "publishing": "Posting…",
+      "privacy": "Your posts are visible to signed-in members. You can delete them at any time, photos included."
+    },
+    "profile": {
+      "title": "My community profile",
+      "lead": "Your public identity: a username and, if you like, an avatar. Never your e-mail.",
+      "back": "Back to my profile",
+      "activateTitle": "Create my public profile",
+      "activateLead": "Choose how other members will see you. You can change your username and avatar later.",
+      "handleLabel": "Username",
+      "handleHint": "3 to 30 characters: unaccented letters, digits, “_” or “.”.",
+      "avatarLabel": "Avatar (optional)",
+      "avatarHint": "A photo of your pet works perfectly.",
+      "avatarChoose": "Choose a photo",
+      "avatarChange": "Change avatar",
+      "avatarRemove": "Remove avatar",
+      "avatarPreview": "Avatar preview",
+      "avatarSaved": "Avatar saved",
+      "avatarRemoved": "Avatar removed",
+      "avatarLater": "Profile created. The avatar could not be uploaded: add it from your profile.",
+      "acceptRules": "I have read and accept the community rules",
+      "rulesVersion": "rules version {version}",
+      "readRules": "Read the rules",
+      "rulesRequired": "Accept the rules to create your profile.",
+      "confirmAge": "I am 15 or older",
+      "ageRequired": "The community is open from age 15.",
+      "activate": "Create my profile",
+      "visibleTitle": "What members will see",
+      "visibleHandle": "Your username and when you joined",
+      "visibleAvatar": "Your avatar, if you choose one",
+      "visiblePosts": "Your posts and replies",
+      "neverVisible": "Never your e-mail or your pets' health record.",
+      "identityTitle": "Public identity",
+      "saveHandle": "Save username",
+      "handleSaved": "Username saved",
+      "memberSince": "Member since",
+      "rulesAcceptedOn": "Rules accepted on",
+      "rulesUpdatedTitle": "New version of the rules ({version})",
+      "rulesUpdatedBody": "Accept it to keep posting, replying and liking.",
+      "acceptNewRules": "Accept the rules",
+      "rulesAccepted": "Rules accepted",
+      "seePublic": "See my public profile",
+      "leaveTitle": "Leave the community",
+      "leaveBody": "Your profile, posts, replies, likes and photos are deleted. Your account and your pets' records stay untouched.",
+      "leave": "Leave the community",
+      "leaveConfirmTitle": "Leave the community?",
+      "leaveConfirmBody": "Everything you've posted disappears, photos included. This can't be undone.",
+      "dataNote": "Community data is described in our privacy policy.",
+      "privacyLink": "Privacy"
+    },
+    "member": {
+      "loading": "Loading the profile…",
+      "notFoundTitle": "Profile not found",
+      "notFoundBody": "This username doesn't exist, has changed, or this member is no longer visible to you.",
+      "posts": "{count, plural, one {# post} other {# posts}}",
+      "postsLabel": "Number of posts",
+      "since": "Member since {date}",
+      "edit": "Edit my profile",
+      "listLabel": "Posts by @{handle}",
+      "emptyTitle": "No posts yet",
+      "emptyBody": "This member hasn't posted anything yet.",
+      "emptyMineTitle": "Your first post is waiting",
+      "emptyMineBody": "A photo, a question: members will discover your pets here."
+    },
+    "blocks": {
+      "title": "Blocked people",
+      "lead": "You no longer see their posts or replies, and they no longer see yours. They aren't notified.",
+      "loading": "Loading…",
+      "emptyTitle": "You haven't blocked anyone",
+      "emptyBody": "Is a member bothering you? Block them from their profile or one of their posts: neither of you will see the other.",
+      "since": "Blocked on {date}",
+      "unblock": "Unblock",
+      "unblockHandle": "Unblock @{handle}",
+      "unblocked": "@{handle} is unblocked.",
+      "block": "Block",
+      "blockHandle": "Block @{handle}",
+      "confirmTitle": "Block @{handle}?",
+      "confirmBody": "You won't see their posts or replies any more, and they won't see yours. They aren't notified, and you can undo it at any time."
+    },
+    "decisions": {
+      "title": "Decisions and reports",
+      "lead": "Moderation decisions about your content or account, with their reasons and the option to challenge them.",
+      "loading": "Loading decisions…",
+      "emptyTitle": "No decisions about you",
+      "emptyBody": "If one of your posts is ever hidden or deleted, you'll find the reason here and how to challenge it.",
+      "appealOpen": "Appeal possible",
+      "backToList": "All decisions",
+      "notFoundTitle": "Decision not found",
+      "notFoundBody": "This link doesn't match any decision on your account. Check that you're signed in to the right account.",
+      "detailLead": "What was decided, why, and how to challenge it.",
+      "statementTitle": "Statement of reasons",
+      "seeContent": "See the content concerned",
+      "facts": {
+        "date": "Decision date",
+        "reason": "Reason",
+        "target": "Content concerned",
+        "automated": "Automated decision",
+        "until": "Suspended until",
+        "deadline": "Appeal possible until"
+      },
+      "target": {
+        "POST": "Post",
+        "COMMENT": "Reply",
+        "USER": "Your profile",
+        "gone": "Content deleted. It is no longer shown."
+      },
+      "automatedYes": "Yes: hidden after several reports, pending review by a person",
+      "automatedNo": "No: decided by a person on the team",
+      "appealTitle": "Your appeal",
+      "appealPendingBody": "Your appeal is in the hands of a person on the team. You'll get their answer by e-mail.",
+      "appealFormTitle": "Challenge this decision",
+      "appealIntro": "Appeals are free and reviewed by someone who didn't take the original decision. Explain what the team may have misunderstood.",
+      "appealLabel": "Your explanation",
+      "appealTooShort": "Write at least {min} characters.",
+      "appealSubmit": "Send my appeal",
+      "appealSent": "Appeal sent",
+      "appealSentBody": "We'll answer by e-mail. The answer will also appear here.",
+      "appealClosed": "This decision can no longer be challenged in the app (already appealed or 6-month deadline passed).",
+      "remediesTitle": "Your other options",
+      "remediesBody": "You can also turn to a certified out-of-court dispute settlement body, or to the courts. These options remain open whatever the outcome of your appeal.",
+      "contact": "Moderation contact: {email}",
+      "titles": {
+        "AUTO_HIDE_POST": "Post hidden after reports",
+        "AUTO_HIDE_COMMENT": "Reply hidden after reports",
+        "HIDE_POST": "Post hidden",
+        "HIDE_COMMENT": "Reply hidden",
+        "RESTORE_POST": "Post restored",
+        "RESTORE_COMMENT": "Reply restored",
+        "DELETE_POST": "Post deleted",
+        "DELETE_COMMENT": "Reply deleted",
+        "SUSPEND_USER": "Posting suspended",
+        "UNSUSPEND_USER": "Suspension lifted",
+        "OTHER": "Moderation decision"
+      },
+      "appealStatus": {
+        "PENDING": "Appeal under review",
+        "UPHELD": "Decision upheld",
+        "REVERSED": "Decision reversed"
+      }
+    },
+    "reports": {
+      "title": "My reports",
+      "empty": "You haven't reported anything. Thanks for keeping an eye out.",
+      "error": "Your reports can't be shown right now.",
+      "seeContent": "See the content",
+      "status": {
+        "OPEN": "Under review",
+        "ACTIONED": "Action taken",
+        "DISMISSED": "Reviewed, no action"
+      },
+      "decidedOn": "Decision of {date}",
+      "removed": "Content removed",
+      "kept": "Content kept"
+    },
+    "rules": {
+      "title": "Community rules",
+      "versionLabel": "Rules version",
+      "lead": "A place to share our love for our animals and help each other. These rules keep it pleasant for everyone.",
+      "items": {
+        "kind": {
+          "title": "Kindness first",
+          "body": "Answer the question, not the person. No insults, targeted mockery, harassment or hateful language."
+        },
+        "animals": {
+          "title": "Animal welfare above all",
+          "body": "No images or advice that trivialise an animal's suffering. Worried about living conditions? Report it rather than arguing about it."
+        },
+        "health": {
+          "title": "Advice doesn't replace a vet",
+          "body": "Share your experience, cite your sources, and point to a vet at the slightest worrying sign. Dangerous advice is removed."
+        },
+        "trade": {
+          "title": "No selling or swapping animals",
+          "body": "The community isn't a marketplace. Trading protected species is illegal and reported to the authorities."
+        },
+        "privacy": {
+          "title": "Everyone's privacy",
+          "body": "No addresses, phone numbers or full names, neither yours nor anyone else's. Check that no photo shows your address."
+        },
+        "spam": {
+          "title": "No advertising",
+          "body": "No promotion and no repeated messages. Links are allowed once an account is 7 days old."
+        },
+        "honest": {
+          "title": "Be yourself",
+          "body": "A username of your own, photos you have the right to share, and nobody but you behind the profile."
+        }
+      },
+      "processTitle": "When a rule is broken",
+      "process": {
+        "report": "Any member can report content. After several reports, it is hidden until a person on the team reviews it.",
+        "decision": "Every decision (hiding, deletion, suspension) is explained to you by e-mail and in the app, with its reason.",
+        "appeal": "You can challenge it for free for 6 months: a person reviews your case and answers you."
+      }
+    },
+    "moderation": {
+      "title": "Moderation",
+      "lead": "Reports, hidden content, appeals and log. Every decision needs a reason and an explanation, sent to the author.",
+      "loading": "Loading the queue…",
+      "forbiddenTitle": "For the moderation team only",
+      "forbiddenBody": "This page is open to operators whose e-mail address is verified.",
+      "tabsLabel": "Moderation queues",
+      "tabs": {
+        "queue": "Reports",
+        "hidden": "Hidden",
+        "appeals": "Appeals",
+        "log": "Log"
+      },
+      "target": {
+        "POST": "Post",
+        "COMMENT": "Reply"
+      },
+      "status": {
+        "VISIBLE": "Visible",
+        "HIDDEN_AUTO": "Hidden automatically",
+        "HIDDEN_MODERATOR": "Hidden by the team"
+      },
+      "openReports": "{count, plural, one {# open report} other {# open reports}}",
+      "firstReport": "First report on {date}",
+      "reasonsLabel": "Report reasons",
+      "details": "{count, plural, one {See the reporter's details} other {See the # reporters' details}}",
+      "imageAlt": "Image {n} of the reported content",
+      "openPost": "Open the post",
+      "appealText": "Appeal text",
+      "automated": "Automated",
+      "by": "by @{handle}",
+      "byAutomation": "by automatic hiding",
+      "byTeam": "by the team",
+      "notNotified": "Notification not sent",
+      "queueEmptyTitle": "No pending reports",
+      "queueEmptyBody": "The queue is empty. New reports will appear here, oldest first.",
+      "hiddenEmptyTitle": "No hidden content",
+      "hiddenEmptyBody": "Content hidden automatically or by the team will appear here.",
+      "appealsEmptyTitle": "No pending appeals",
+      "appealsEmptyBody": "Members' appeals will appear here, oldest first.",
+      "logEmptyTitle": "Empty log",
+      "logEmptyBody": "Every decision, even automated ones, will be recorded here.",
+      "form": {
+        "reason": "Reason",
+        "chooseReason": "Choose a reason",
+        "reasonRequired": "Choose the reason for the decision.",
+        "statement": "Statement of reasons",
+        "statementHint": "Sent to the author: what exactly is wrong.",
+        "statementTooShort": "Write at least {min} characters.",
+        "days": "Suspension length (days)",
+        "daysHint": "From 1 to {max} days.",
+        "daysRange": "Enter a number of days between 1 and {max}."
+      },
+      "actions": {
+        "hide": {
+          "short": "Hide",
+          "title": "Hide this content",
+          "body": "Only its author can still see it. Reports are closed and the author receives your explanation.",
+          "confirm": "Hide"
+        },
+        "delete": {
+          "short": "Delete",
+          "title": "Delete permanently",
+          "body": "The content and its images are erased. An appeal can't bring it back: keep this for clearly illegal or serious content.",
+          "confirm": "Delete"
+        },
+        "restore": {
+          "short": "Restore",
+          "title": "Restore this content",
+          "body": "The content becomes visible again and won't be hidden automatically any more. The author is notified.",
+          "confirm": "Restore"
+        },
+        "dismiss": {
+          "short": "Dismiss",
+          "title": "Dismiss the reports",
+          "body": "The content stays visible and won't be hidden automatically any more. The author isn't notified.",
+          "confirm": "Dismiss"
+        },
+        "suspend": {
+          "short": "Suspend the author",
+          "title": "Suspend @{handle}",
+          "body": "The member can still read and like, but can no longer post, reply, or change username or avatar.",
+          "confirm": "Suspend"
+        },
+        "unsuspend": {
+          "short": "Lift the suspension",
+          "title": "Lift @{handle}'s suspension",
+          "body": "The member can post again. They are notified.",
+          "confirm": "Lift the suspension"
+        },
+        "uphold": {
+          "short": "Uphold the decision",
+          "title": "Uphold the decision",
+          "body": "The decision stays in place. The member receives your answer.",
+          "confirm": "Uphold"
+        },
+        "reverse": {
+          "short": "Reverse the decision",
+          "title": "Reverse the decision",
+          "body": "The hidden content is restored or the suspension lifted. The member receives your answer.",
+          "confirm": "Reverse the decision"
+        }
+      },
+      "done": {
+        "hide": "Content hidden, author notified",
+        "delete": "Content deleted, author notified",
+        "restore": "Content restored",
+        "dismiss": "Reports dismissed",
+        "suspend": "Member suspended, notified by e-mail",
+        "unsuspend": "Suspension lifted",
+        "uphold": "Decision upheld, member notified",
+        "reverse": "Decision reversed, member notified"
+      }
+    }
   }
 }

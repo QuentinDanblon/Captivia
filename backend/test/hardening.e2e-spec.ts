@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { AuthBody, IdBody, bodyOf, httpServer } from './utils/http';
 import * as crypto from 'crypto';
 import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
@@ -26,16 +27,18 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
   const createdEmails: string[] = [];
 
   /** Crée un compte jetable et retourne son token + id. */
-  async function registerUser(email: string): Promise<{ email: string; token: string; userId: string }> {
-    const res = await request(app.getHttpServer())
+  async function registerUser(
+    email: string,
+  ): Promise<{ email: string; token: string; userId: string }> {
+    const res = await request(httpServer(app))
       .post('/auth/register')
       .send({ email, password: PASSWORD, locale: 'fr', ...TERMS })
       .expect(201);
     createdEmails.push(email);
     return {
       email,
-      token: res.body.accessToken as string,
-      userId: res.body.user.id as string,
+      token: bodyOf<AuthBody>(res).accessToken,
+      userId: bodyOf<AuthBody>(res).user.id,
     };
   }
 
@@ -80,7 +83,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
       token = acc.token;
       userId = acc.userId;
 
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post('/users/me/subscription')
         .set('Authorization', `Bearer ${token}`)
         .send({ plan: 'monthly' })
@@ -88,7 +91,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
     });
 
     it('POST /admin/users/:id/premium sans token → 401', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/admin/users/${crypto.randomUUID()}/premium`)
         .send({})
         .expect(401);
@@ -96,7 +99,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
 
     it('POST /admin/users/:id/premium avec token non-opérateur → 403', () => {
       // Le compte jetable a le rôle USER (défaut) → 403
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/admin/users/${userId}/premium`)
         .set('Authorization', `Bearer ${token}`)
         .send({})
@@ -108,13 +111,10 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
   // 2. Codes HTTP — login et forgot-password en 200 (plus 201)
   // ============================================================
   describe('2. Codes HTTP', () => {
-    let token: string;
-
     it('POST /auth/login → 200 (plus 201)', async () => {
       const acc = await registerUser(makeEmail('login'));
-      token = acc.token;
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .post('/auth/login')
         .send({ email: acc.email, password: PASSWORD })
         .expect(200);
@@ -125,7 +125,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
 
     it('POST /auth/forgot-password → 200', () => {
       // Email inconnu : réponse 200 générique (anti-énumération), aucun email envoyé
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post('/auth/forgot-password')
         .send({ email: makeEmail('forgot') })
         .expect(200);
@@ -142,7 +142,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
       const acc = await registerUser(makeEmail('rbac'));
       token = acc.token;
 
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post('/equipment')
         .set('Authorization', `Bearer ${token}`)
         .send({ category: 'chauffage', label: 'Test', searchTerms: ['test'] })
@@ -150,7 +150,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
     });
 
     it('DELETE /equipment/{uuid inexistant} non-opérateur → 403 (pas 404)', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete(`/equipment/${crypto.randomUUID()}`)
         .set('Authorization', `Bearer ${token}`)
         .expect(403);
@@ -167,7 +167,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
       const acc = await registerUser(makeEmail('dto'));
       token = acc.token;
 
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${token}`)
         .send({ speciesId: 0, name: 'Zero' })
@@ -175,7 +175,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
     });
 
     it('POST /users/me/animals name:"   " → 400 (trim puis MinLength)', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${token}`)
         .send({ speciesId: 5221172, name: '   ' })
@@ -183,7 +183,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
     });
 
     it('POST /users/me/animals birthDate:"2026-13-45" → 400 (date impossible)', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${token}`)
         .send({ speciesId: 5221172, name: 'Bad Date', birthDate: '2026-13-45' })
@@ -191,7 +191,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
     });
 
     it('POST /users/me/animals valide (speciesId 5221172 seed) → 201', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -222,14 +222,14 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
       token = acc.token;
       userId = acc.userId;
 
-      const animal = await request(app.getHttpServer())
+      const animal = await request(httpServer(app))
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${token}`)
         .send({ speciesId: 5221172, name: 'Pipeline Gecko', sex: 'male' })
         .expect(201);
-      animalId = animal.body.id;
+      animalId = bodyOf<IdBody>(animal).id;
 
-      const routine = await request(app.getHttpServer())
+      const routine = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/routines`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -250,28 +250,30 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
       expect(prefs).toBeNull();
 
       const today = new Date().toISOString().slice(0, 10);
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/notification-events?date=${today}`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
       expect(Array.isArray(res.body)).toBe(true);
-      expect(res.body.length).toBeGreaterThanOrEqual(1);
-      expect(res.body[0]).toHaveProperty('status', 'pending');
-      expect(res.body[0]).toHaveProperty('routineId');
-      eventId = res.body[0].id;
+      const events = bodyOf<IdBody[]>(res);
+      expect(events.length).toBeGreaterThanOrEqual(1);
+      expect(events[0]).toHaveProperty('status', 'pending');
+      expect(events[0]).toHaveProperty('routineId');
+      eventId = events[0].id;
     });
 
     it('PATCH event done → grade.points >= 2', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .patch(`/users/me/notification-events/${eventId}`)
         .set('Authorization', `Bearer ${token}`)
         .send({ status: 'done' })
         .expect(200);
 
-      expect(res.body.event).toHaveProperty('status', 'done');
-      expect(res.body.grade).toHaveProperty('points');
-      expect(res.body.grade.points).toBeGreaterThanOrEqual(2);
+      const done = bodyOf<{ event: unknown; grade: { points: number } }>(res);
+      expect(done.event).toHaveProperty('status', 'done');
+      expect(done.grade).toHaveProperty('points');
+      expect(done.grade.points).toBeGreaterThanOrEqual(2);
     });
   });
 
@@ -280,13 +282,11 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
   // ============================================================
   describe('6. Gateway', () => {
     it('GET /gateway/enriched sans query → 400', () => {
-      return request(app.getHttpServer())
-        .get('/gateway/enriched')
-        .expect(400);
+      return request(httpServer(app)).get('/gateway/enriched').expect(400);
     });
 
     it('POST /gateway/clear-cache/5212 sans token → 401', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post('/gateway/clear-cache/5212')
         .expect(401);
     });
@@ -303,7 +303,7 @@ describe('Hardening E2E — verrouillage des corrections sécurité/fonctionnell
       const statuses: number[] = [];
 
       for (let i = 0; i < 12; i++) {
-        const res = await request(app.getHttpServer())
+        const res = await request(httpServer(app))
           .post('/auth/login')
           .send({ email, password: 'WrongPass123!' });
         statuses.push(res.status);

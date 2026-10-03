@@ -5,11 +5,11 @@
 
 export interface ValidationRule<T> {
   field: keyof T;
-  validator: (value: any) => boolean;
+  validator: (value: unknown) => boolean;
   errorMessage: string;
 }
 
-export interface ValidationResult<T> {
+export interface ValidationResult {
   valid: boolean;
   errors: Array<{ field: string; message: string }>;
   warnings: Array<{ field: string; message: string }>;
@@ -29,7 +29,11 @@ export interface SpeciesData {
   status?: string;
   vernacularNames?: Array<{ name: string; language: string }>;
   iucn?: { status: string };
-  distributions?: Array<{ country: string; countryIsoCode: string; status: string }>;
+  distributions?: Array<{
+    country: string;
+    countryIsoCode: string;
+    status: string;
+  }>;
   media?: Array<{ type: string; identifier: string; url: string }>;
   metrics?: { usage: number; issues: number; extensions: string[] };
   occurrenceCount?: number;
@@ -60,7 +64,8 @@ export interface MetricsData {
 const SPECIES_VALIDATION_RULES: ValidationRule<SpeciesData>[] = [
   {
     field: 'key',
-    validator: (value) => typeof value === 'number' && !isNaN(value) && value > 0,
+    validator: (value) =>
+      typeof value === 'number' && !isNaN(value) && value > 0,
     errorMessage: 'Species key must be a positive number',
   },
   {
@@ -75,17 +80,34 @@ const SPECIES_VALIDATION_RULES: ValidationRule<SpeciesData>[] = [
   },
   {
     field: 'rank',
-    validator: (value) => ['SPECIES', 'GENUS', 'FAMILY', 'ORDER', 'CLASS', 'KINGDOM', 'PHYLUM'].includes(value),
+    validator: (value) =>
+      typeof value === 'string' &&
+      [
+        'SPECIES',
+        'GENUS',
+        'FAMILY',
+        'ORDER',
+        'CLASS',
+        'KINGDOM',
+        'PHYLUM',
+      ].includes(value),
     errorMessage: 'Invalid species rank',
   },
   {
     field: 'kingdom',
-    validator: (value) => ['Animalia', 'Plantae', 'Fungi', 'Protista', 'Monera'].includes(value),
+    validator: (value) =>
+      typeof value === 'string' &&
+      ['Animalia', 'Plantae', 'Fungi', 'Protista', 'Monera'].includes(value),
     errorMessage: 'Invalid kingdom',
   },
   {
     field: 'status',
-    validator: (value) => !value || ['EXTINCT', 'ENDANGERED', 'VULNERABLE', 'LC', 'DD', 'NT'].includes(value),
+    validator: (value) =>
+      !value ||
+      (typeof value === 'string' &&
+        ['EXTINCT', 'ENDANGERED', 'VULNERABLE', 'LC', 'DD', 'NT'].includes(
+          value,
+        )),
     errorMessage: 'Invalid conservation status',
   },
 ];
@@ -104,7 +126,9 @@ const DISTRIBUTION_VALIDATION_RULES: ValidationRule<DistributionData>[] = [
   },
   {
     field: 'status',
-    validator: (value) => ['PRESENT', 'ABSENT', 'POSSIBLE', 'CULTIVATED'].includes(value),
+    validator: (value) =>
+      typeof value === 'string' &&
+      ['PRESENT', 'ABSENT', 'POSSIBLE', 'CULTIVATED'].includes(value),
     errorMessage: 'Invalid distribution status',
   },
 ];
@@ -123,7 +147,8 @@ const MEDIA_VALIDATION_RULES: ValidationRule<MediaData>[] = [
   },
   {
     field: 'url',
-    validator: (value) => !value || typeof value === 'string' && value.startsWith('http'),
+    validator: (value) =>
+      !value || (typeof value === 'string' && value.startsWith('http')),
     errorMessage: 'Media URL must be a valid URL',
   },
 ];
@@ -142,7 +167,8 @@ const METRICS_VALIDATION_RULES: ValidationRule<MetricsData>[] = [
   },
   {
     field: 'extensions',
-    validator: (value) => Array.isArray(value) && value.every((ext) => typeof ext === 'string'),
+    validator: (value) =>
+      Array.isArray(value) && value.every((ext) => typeof ext === 'string'),
     errorMessage: 'Extensions must be an array of strings',
   },
 ];
@@ -154,7 +180,7 @@ export class DataValidatorService {
   /**
    * Valide les données d'une espèce
    */
-  validateSpecies(data: SpeciesData): ValidationResult<SpeciesData> {
+  validateSpecies(data: Partial<SpeciesData>): ValidationResult {
     const errors: Array<{ field: string; message: string }> = [];
     const warnings: Array<{ field: string; message: string }> = [];
 
@@ -230,7 +256,7 @@ export class DataValidatorService {
   /**
    * Valide les données d'une distribution
    */
-  validateDistribution(data: DistributionData): ValidationResult<DistributionData> {
+  validateDistribution(data: DistributionData): ValidationResult {
     const errors: Array<{ field: string; message: string }> = [];
     const warnings: Array<{ field: string; message: string }> = [];
 
@@ -251,7 +277,7 @@ export class DataValidatorService {
   /**
    * Valide les données d'un média
    */
-  validateMedia(data: MediaData): ValidationResult<MediaData> {
+  validateMedia(data: MediaData): ValidationResult {
     const errors: Array<{ field: string; message: string }> = [];
     const warnings: Array<{ field: string; message: string }> = [];
 
@@ -272,7 +298,7 @@ export class DataValidatorService {
   /**
    * Valide les données de métriques
    */
-  validateMetrics(data: MetricsData): ValidationResult<MetricsData> {
+  validateMetrics(data: MetricsData): ValidationResult {
     const errors: Array<{ field: string; message: string }> = [];
     const warnings: Array<{ field: string; message: string }> = [];
 
@@ -315,7 +341,8 @@ export class DataValidatorService {
     if (data.distributions) sanitized.distributions = data.distributions;
     if (data.media) sanitized.media = data.media;
     if (data.metrics) sanitized.metrics = data.metrics;
-    if (data.occurrenceCount !== undefined) sanitized.occurrenceCount = data.occurrenceCount;
+    if (data.occurrenceCount !== undefined)
+      sanitized.occurrenceCount = data.occurrenceCount;
 
     return sanitized;
   }
@@ -323,20 +350,21 @@ export class DataValidatorService {
   /**
    * Calcule un score de qualité basé sur la validation
    */
-  calculateQualityScore(validationResult: ValidationResult<SpeciesData>): number {
+  calculateQualityScore(validationResult: ValidationResult): number {
     if (validationResult.valid) {
       return 100;
     }
 
     // Score basé sur le nombre d'erreurs et d'avertissements
-    const totalIssues = validationResult.errors.length + validationResult.warnings.length;
-    return Math.max(0, 100 - (totalIssues * 5));
+    const totalIssues =
+      validationResult.errors.length + validationResult.warnings.length;
+    return Math.max(0, 100 - totalIssues * 5);
   }
 
   /**
    * Vérifie si les données sont complètes
    */
-  isComplete(data: SpeciesData): boolean {
+  isComplete(data: Partial<SpeciesData>): boolean {
     const requiredFields: (keyof SpeciesData)[] = [
       'key',
       'name',
@@ -360,7 +388,7 @@ export class DataValidatorService {
   /**
    * Obtient les statistiques de validation
    */
-  getValidationStats(data: SpeciesData): {
+  getValidationStats(data: Partial<SpeciesData>): {
     totalFields: number;
     completeFields: number;
     qualityScore: number;

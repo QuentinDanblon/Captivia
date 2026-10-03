@@ -38,6 +38,8 @@ export interface AgendaResponse {
   to: string;
   items: AgendaItem[];
   truncated: boolean;
+  /** Instant serveur (ISO 8601) pris avant la lecture des soins (W6-07, couverture locale). */
+  generatedAt?: string;
 }
 
 export class AgendaApiError extends Error {

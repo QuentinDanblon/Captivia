@@ -6,18 +6,17 @@ import {
   Query,
   BadRequestException,
   NotFoundException,
-  InternalServerErrorException,
   UseGuards,
 } from '@nestjs/common';
 import { RateLimitGuard } from '../../common/guards/rate-limit.guard';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiQuery,
-  ApiResponse,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger';
 import { WikidataService } from './wikidata.service';
 import { isValidQid } from '../http-safety';
+import { toUpstreamHttpException } from '../http/external-errors';
+import {
+  ExternalScientificNameDto,
+  ExternalSearchQDto,
+} from '../dto/external-query.dto';
 
 /** Le QID est interpolé dans des requêtes SPARQL / URLs : format strict Q\d+. */
 function assertValidQid(qid: unknown): void {
@@ -27,7 +26,7 @@ function assertValidQid(qid: unknown): void {
     );
   }
 }
-import { GetWikidataDto, ConservationStatusDto } from '../../dto/species.dto';
+import { ConservationStatusDto } from '../../dto/species.dto';
 
 @UseGuards(RateLimitGuard)
 @ApiTags('wikidata')
@@ -41,11 +40,11 @@ export class WikidataController {
   @ApiQuery({ name: 'q', description: 'Search query' })
   @ApiResponse({ status: 200, description: 'Search results' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async search(@Query('q') q: string) {
+  async search(@Query() query: ExternalSearchQDto) {
     try {
-      return await this.wikidataService.searchSpecies(q);
+      return await this.wikidataService.searchSpecies(query.q);
     } catch (error) {
-      throw new InternalServerErrorException('Failed to search Wikidata');
+      throw toUpstreamHttpException(error, 'Failed to search Wikidata');
     }
   }
 
@@ -62,7 +61,7 @@ export class WikidataController {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new InternalServerErrorException('Failed to fetch Wikidata entity');
+      throw toUpstreamHttpException(error, 'Failed to fetch Wikidata entity');
     }
   }
 
@@ -71,16 +70,16 @@ export class WikidataController {
   @ApiQuery({ name: 'scientificName', description: 'Scientific name' })
   @ApiResponse({ status: 200, description: 'Species data' })
   @ApiResponse({ status: 404, description: 'Not found' })
-  async getSpecies(@Query('scientificName') scientificName: string) {
+  async getSpecies(@Query() query: ExternalScientificNameDto) {
     try {
       return await this.wikidataService.getSpeciesByScientificName(
-        scientificName,
+        query.scientificName,
       );
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new InternalServerErrorException('Failed to fetch species data');
+      throw toUpstreamHttpException(error, 'Failed to fetch species data');
     }
   }
 
@@ -99,7 +98,8 @@ export class WikidataController {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new InternalServerErrorException(
+      throw toUpstreamHttpException(
+        error,
         'Failed to fetch conservation status',
       );
     }
@@ -118,7 +118,7 @@ export class WikidataController {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new InternalServerErrorException('Failed to fetch classification');
+      throw toUpstreamHttpException(error, 'Failed to fetch classification');
     }
   }
 
@@ -135,7 +135,7 @@ export class WikidataController {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new InternalServerErrorException('Failed to fetch descriptions');
+      throw toUpstreamHttpException(error, 'Failed to fetch descriptions');
     }
   }
 
@@ -152,7 +152,7 @@ export class WikidataController {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new InternalServerErrorException('Failed to fetch images');
+      throw toUpstreamHttpException(error, 'Failed to fetch images');
     }
   }
 
@@ -169,7 +169,7 @@ export class WikidataController {
       if (error instanceof NotFoundException) {
         throw error;
       }
-      throw new InternalServerErrorException('Failed to fetch related species');
+      throw toUpstreamHttpException(error, 'Failed to fetch related species');
     }
   }
 

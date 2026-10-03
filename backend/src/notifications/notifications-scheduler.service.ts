@@ -5,6 +5,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { GradeService } from '../grade/grade.service';
 import { MailService } from '../mail/mail.service';
 import { PUSH_SENDER, PushSender } from './push-sender';
+import { isStillScheduled, localReminderFor } from './local-coverage';
+import { NATIVE_PUSH_RUN_BUDGET_MS } from './native-push-sender';
 import { localDay } from '../common/timezone';
 
 /** Clé du verrou consultatif Postgres du job de rappels (constante arbitraire, propre au job). */
@@ -38,9 +40,32 @@ const DUE_REMINDER_SELECT = {
   type: true,
   label: true,
   scheduledAt: true,
+  sourceKey: true,
   userId: true,
   animalId: true,
   animal: { select: { name: true } },
+  // État ACTUEL de la source : le rappel est-il aussi programmé en local par l'app (W6-07) ?
+  routine: {
+    select: {
+      id: true,
+      active: true,
+      schedule: true,
+      frequency: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  },
+  medication: {
+    select: {
+      id: true,
+      active: true,
+      startDate: true,
+      endDate: true,
+      frequency: true,
+      intervalHours: true,
+      updatedAt: true,
+    },
+  },
   user: {
     select: {
       email: true,
@@ -87,7 +112,8 @@ export function effectiveChannel(
  *  3. réserve les événements `pending` dus dans (now − 10 min ; now] et pas encore notifiés :
  *     `notifiedAt` passe de NULL à `now` (UPDATE … RETURNING, atomique) — jamais de doublon ;
  *  4. APRÈS la transaction (verrou et connexion libérés), envoie les rappels réservés par lots
- *     de `DISPATCH_CONCURRENCY` (`Promise.allSettled`), selon `deliveryChannel`. Un service push
+ *     de `DISPATCH_CONCURRENCY` (`Promise.allSettled`), selon `deliveryChannel` (« push » = tous
+ *     les canaux push actifs : Web Push et app native FCM / APNs, via `PushDispatcher`). Un service push
  *     ou SMTP lent ne bloque plus le verrou ni la transaction (revue de sécurité, constat 2).
  *     Un rappel dont aucun canal n'a abouti est libéré (`notifiedAt` remis à NULL) pour être
  *     retenté au tick suivant.
@@ -239,12 +265,17 @@ export class NotificationsSchedulerService {
    * (`notifiedAt` : NULL → `now`, UPDATE … RETURNING). Seuls les rappels effectivement réservés
    * seront envoyés : un rappel passé à « fait » entre-temps, ou réservé par une exécution qui
    * se chevauche, est exclu. Aucun appel réseau ici.
+   *
+   * Un rappel de médicament ou de routine qui ne correspond plus à une occurrence de sa source
+   * (état actuel, même calcul que l'Agenda : source désactivée, supprimée ou modifiée depuis la
+   * génération, ou rappel généré à tort) n'est pas envoyé : il est supprimé (`pending` et non
+   * notifié uniquement).
    */
   private async claimDue(
     tx: Prisma.TransactionClient,
     now: Date,
   ): Promise<{ found: number; claimed: DueReminder[] }> {
-    const due = await tx.notificationEvent.findMany({
+    const candidates = await tx.notificationEvent.findMany({
       where: {
         status: 'pending',
         notifiedAt: null,
@@ -257,6 +288,22 @@ export class NotificationsSchedulerService {
       take: MAX_DISPATCH_PER_RUN,
       select: DUE_REMINDER_SELECT,
     });
+    const due = candidates.filter((ev) =>
+      isStillScheduled(ev, ev.user.timezone),
+    );
+    const stale = candidates.filter((ev) => !due.includes(ev));
+    if (stale.length > 0) {
+      await tx.notificationEvent.deleteMany({
+        where: {
+          id: { in: stale.map((e) => e.id) },
+          status: 'pending',
+          notifiedAt: null,
+        },
+      });
+      this.logger.debug(
+        `${stale.length} rappel(s) obsolète(s) (source modifiée ou désactivée) supprimé(s).`,
+      );
+    }
     if (due.length === 0) return { found: 0, claimed: [] };
 
     const rows = await tx.$queryRaw<{ id: string }[]>(
@@ -283,11 +330,14 @@ export class NotificationsSchedulerService {
   ): Promise<Pick<ReminderRunResult, 'emailed' | 'pushed' | 'failed'>> {
     const result = { emailed: 0, pushed: 0, failed: 0 };
     const appUrl = (process.env.FRONTEND_URL || '').replace(/\/+$/, '') || null;
+    // Budget du canal natif pour toute l'exécution (horloge réelle) : FCM / Google lents ne
+    // retiennent jamais le job ; e-mail et Web Push ne sont pas concernés.
+    const nativeDeadline = Date.now() + NATIVE_PUSH_RUN_BUDGET_MS;
 
     for (let i = 0; i < claimed.length; i += DISPATCH_CONCURRENCY) {
       const batch = claimed.slice(i, i + DISPATCH_CONCURRENCY);
       const outcomes = await Promise.allSettled(
-        batch.map((ev) => this.deliverOne(ev, appUrl)),
+        batch.map((ev) => this.deliverOne(ev, appUrl, nativeDeadline)),
       );
       for (const [k, outcome] of outcomes.entries()) {
         const delivered =
@@ -320,6 +370,7 @@ export class NotificationsSchedulerService {
   private async deliverOne(
     ev: DueReminder,
     appUrl: string | null,
+    nativeDeadline: number,
   ): Promise<{ emailed: boolean; pushed: boolean }> {
     const recipient = ev.user.email;
     const channel = effectiveChannel(
@@ -344,6 +395,7 @@ export class NotificationsSchedulerService {
     }
 
     if (channel === 'push' || channel === 'both') {
+      const localReminder = localReminderFor(ev, ev.user.timezone);
       pushed = await this.pushSender
         .sendToUser(ev.userId, {
           title: label,
@@ -355,6 +407,10 @@ export class NotificationsSchedulerService {
             // Préfixe de locale pour l'URL ouverte au clic (sw.js : notificationclick).
             locale: ev.user.locale,
           },
+          // Push natif : pas d'envoi à un téléphone qui a déjà programmé CE rappel, à CET
+          // instant, en local (W6-07) ; jamais pour un RDV (J-N, 08:00) ni un vaccin.
+          ...(localReminder ? { localReminder } : {}),
+          nativeDeadline,
         })
         .catch(() => false);
     }

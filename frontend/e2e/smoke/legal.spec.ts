@@ -23,10 +23,11 @@ test.describe('Pages légales', () => {
     });
   }
 
-  test('le pied de page rappelle la mention d’affiliation Amazon', async ({ page }) => {
+  test('aucun lien affilié affiché : le pied de page ne revendique aucun partenariat marchand', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.getByRole('contentinfo')).toContainText('Partenaire Amazon');
+    await expect(page.getByRole('contentinfo')).toBeVisible();
+    await expect(page.getByRole('contentinfo')).not.toContainText(/Amazon/i);
   });
 });
 
@@ -40,7 +41,7 @@ test.describe('Page 404', () => {
 
     await page.getByRole('link', { name: "Retour à l'accueil" }).click();
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Connaître le vivant.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Vous les aimez.');
   });
 
   test('404 localisée en anglais', async ({ page }) => {

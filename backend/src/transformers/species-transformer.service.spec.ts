@@ -1,5 +1,5 @@
 import { SpeciesTransformerService } from './species-transformer.service';
-import { TransformedSpecies, Distribution, Media, Metrics } from './data-transformer.interface';
+import type { GbifMedia, GbifSpecies } from '../external/gbif.types';
 
 describe('SpeciesTransformerService', () => {
   let service: SpeciesTransformerService;
@@ -57,7 +57,9 @@ describe('SpeciesTransformerService', () => {
         },
       ];
 
-      const result = service.transformSearchResults(gbifResults);
+      const result = service.transformSearchResults(
+        gbifResults as GbifSpecies[],
+      );
 
       expect(result).toEqual({
         results: [
@@ -164,7 +166,7 @@ describe('SpeciesTransformerService', () => {
         occurrenceCount: 1000,
       };
 
-      const result = service.transformSpecies(gbifSpecies);
+      const result = service.transformSpecies(gbifSpecies as GbifSpecies);
 
       expect(result).toEqual({
         key: 1,
@@ -216,7 +218,7 @@ describe('SpeciesTransformerService', () => {
         rank: 'SPECIES',
       };
 
-      const result = service.transformSpecies(gbifSpecies);
+      const result = service.transformSpecies(gbifSpecies as GbifSpecies);
 
       expect(result.canonicalName).toBe('Boa Constrictor');
     });
@@ -228,7 +230,7 @@ describe('SpeciesTransformerService', () => {
         rank: 'SPECIES',
       };
 
-      const result = service.transformSpecies(gbifSpecies);
+      const result = service.transformSpecies(gbifSpecies as GbifSpecies);
 
       expect(result.status).toBe('UNKNOWN');
     });
@@ -327,6 +329,25 @@ describe('SpeciesTransformerService', () => {
           url: 'https://example.com/video.mp4',
         },
       ]);
+    });
+
+    it('keeps the source page and MIME type when GBIF provides them (photo credit)', () => {
+      const [media] = service.transformMedia([
+        {
+          type: 'StillImage',
+          format: 'image/jpeg',
+          creator: 'Ana Martínez',
+          identifier: 'https://example.com/photo.jpg',
+          references: 'https://www.inaturalist.org/photos/1',
+          license: 'http://creativecommons.org/licenses/by/4.0/',
+        },
+      ] as GbifMedia[]);
+
+      expect(media).toMatchObject({
+        url: 'https://example.com/photo.jpg',
+        references: 'https://www.inaturalist.org/photos/1',
+        format: 'image/jpeg',
+      });
     });
 
     it('should handle empty results', () => {

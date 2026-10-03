@@ -1,6 +1,22 @@
-# Build mobile (W6-02 / W6-03, D-11) : export statique Next.js + `npx cap sync`, SANS signature.
-# Déclenchement manuel uniquement. Signature et publication (bundleRelease, fastlane beta) : W6-12.
-# Voir docs/MOBILE.md.
+# Build mobile (W6-02 / W6-03 / W6-12, D-11) : export statique Next.js, puis Capacitor 7.
+# DÉCLENCHEMENT MANUEL UNIQUEMENT (workflow_dispatch) : le quota GitHub Actions est limité. Ne pas
+# ajouter de `push` / `pull_request` / `schedule` avant déblocage du quota (voir docs/RUNBOOK.md).
+# Voir docs/MOBILE.md § 10.
+#
+# Jobs :
+#   export           npm ci, tests, `npm run build:mobile`, artefact `out/`.
+#   android          projet natif (versionné, sinon créé à la volée si `create_missing`), `cap sync`,
+#                    `assembleDebug` : artefact APK de debug (non signé pour le store, installable en test).
+#   android-release  `bundleRelease` + signature : DÉSACTIVÉ tant que `android_bundle` est faux ou que les
+#                    secrets de keystore sont absents ; il se termine alors en succès sans rien construire.
+#   ios              optionnel (`ios`), macOS, limité à `cap sync` : aucun build ni signature.
+#
+# Secrets pour android-release (Settings > Secrets and variables > Actions) :
+#   ANDROID_KEYSTORE_BASE64    keystore d'UPLOAD encodé : `base64 -w0 upload-keystore.jks`
+#   ANDROID_KEYSTORE_PASSWORD  mot de passe du keystore
+#   ANDROID_KEY_ALIAS          alias de la clé d'upload
+#   ANDROID_KEY_PASSWORD       mot de passe de la clé
+# Jamais de keystore ni de mot de passe dans le dépôt (Play App Signing garde la clé de signature).
 name: Mobile
 
 on:
@@ -9,9 +25,17 @@ on:
       api_url:
         description: "NEXT_PUBLIC_API_URL inliné dans l'app"
         required: true
-        default: https://captivia-api.onrender.com
+        default: https://captiviacaptivia-api.onrender.com
+      create_missing:
+        description: "Créer le projet natif (cap add) quand mobile/android ou mobile/ios n'est pas versionné : build jetable"
+        type: boolean
+        default: true
+      android_bundle:
+        description: 'Construire aussi l''AAB signé (bundleRelease) : exige les 4 secrets ANDROID_KEY*'
+        type: boolean
+        default: false
       ios:
-        description: 'Synchroniser aussi le projet iOS (runner macOS)'
+        description: 'Synchroniser aussi le projet iOS (runner macOS, cap sync seulement)'
         type: boolean
         default: false
 
@@ -31,6 +55,12 @@ jobs:
         working-directory: frontend
     env:
       NEXT_PUBLIC_API_URL: ${{ inputs.api_url }}
+      # Clés publiques RevenueCat (achat intégré, docs/PAYMENTS.md) ; absentes → achat désactivé dans l'app.
+      NEXT_PUBLIC_REVENUECAT_IOS_KEY: ${{ vars.REVENUECAT_IOS_KEY }}
+      NEXT_PUBLIC_REVENUECAT_ANDROID_KEY: ${{ vars.REVENUECAT_ANDROID_KEY }}
+      # Push natif (W6-07, docs/MOBILE.md § 7.3) : `1` seulement quand les fichiers Firebase sont
+      # fournis aux projets natifs (secret GOOGLE_SERVICES_JSON_BASE64 côté Android).
+      NEXT_PUBLIC_NATIVE_PUSH: ${{ vars.NATIVE_PUSH }}
       NEXT_TELEMETRY_DISABLED: '1'
     steps:
       - uses: actions/checkout@v4
@@ -56,7 +86,7 @@ jobs:
   android:
     needs: export
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     defaults:
       run:
         working-directory: frontend
@@ -67,15 +97,196 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
       - run: npm ci
       - uses: actions/download-artifact@v4
         with:
           name: mobile-web-bundle
           path: frontend/out
-      - name: Projet Android (créé s'il n'est pas encore versionné)
-        run: test -d mobile/android || npx cap add android
+
+      - name: Projet Android versionné ?
+        id: native
+        run: |
+          if [ -d mobile/android ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "Projet natif versionné : cap add ignoré."
+          elif [ "${{ inputs.create_missing }}" = "true" ]; then
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::mobile/android absent et create_missing désactivé : étapes natives ignorées."
+          fi
+
+      - name: cap add android (projet absent, build jetable)
+        if: steps.native.outputs.exists == 'false' && steps.native.outputs.ready == 'true'
+        run: npx cap add android
+
+      - name: Gabarit natif Captivia (icône de notification, SDK 36, icônes et splash)
+        if: steps.native.outputs.exists == 'false' && steps.native.outputs.ready == 'true'
+        run: |
+          cp -R mobile/android-template/res/. mobile/android/app/src/main/res/
+          sed -i -E 's/compileSdkVersion *= *[0-9]+/compileSdkVersion = 36/; s/targetSdkVersion *= *[0-9]+/targetSdkVersion = 36/' mobile/android/variables.gradle
+          npm run assets:mobile -- --android
+
+      - name: SDK Android 36
+        if: steps.native.outputs.ready == 'true'
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" > /dev/null
+
       - name: cap sync android
+        if: steps.native.outputs.ready == 'true'
         run: npx cap sync android
+
+      # Push natif (W6-07) : google-services.json n'est jamais versionné. Sans le secret, l'APK se
+      # construit quand même (push inactif, rappels locaux intacts).
+      - name: Firebase (google-services.json, facultatif)
+        if: steps.native.outputs.ready == 'true'
+        env:
+          GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}
+          NATIVE_PUSH: ${{ vars.NATIVE_PUSH }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_JSON_BASE64" ]; then
+            echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 -d > mobile/android/app/google-services.json
+            echo "google-services.json écrit : push natif actif dans ce build."
+          elif [ "$NATIVE_PUSH" = "1" ]; then
+            # Sans Firebase, PushNotifications.register() fait planter l'app Android.
+            echo "::error::NATIVE_PUSH=1 sans secret GOOGLE_SERVICES_JSON_BASE64 : l'app planterait à l'enregistrement du push."
+            exit 1
+          else
+            echo "::notice::Secret GOOGLE_SERVICES_JSON_BASE64 absent : build sans push natif."
+          fi
+
+      - uses: gradle/actions/setup-gradle@v4
+        if: steps.native.outputs.ready == 'true'
+
+      - name: assembleDebug
+        if: steps.native.outputs.ready == 'true'
+        working-directory: frontend/mobile/android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: APK de debug (artefact)
+        if: steps.native.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: captivia-android-debug-apk
+          path: frontend/mobile/android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7
+
+  android-release:
+    # Désactivé par défaut. Même sans secrets, le job réussit : il constate et s'arrête.
+    if: ${{ inputs.android_bundle }}
+    needs: export
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: frontend
+    env:
+      KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+      KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+    steps:
+      - name: Secrets de signature présents ?
+        id: gate
+        working-directory: .
+        run: |
+          if [ -n "$KEYSTORE_B64" ] && [ -n "$KEYSTORE_PASSWORD" ] && [ -n "$KEY_ALIAS" ] && [ -n "$KEY_PASSWORD" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=bundleRelease ignoré::Secrets ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS et ANDROID_KEY_PASSWORD absents : aucun AAB construit (voir docs/MOBILE.md § 10)."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.ready == 'true'
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.ready == 'true'
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-java@v4
+        if: steps.gate.outputs.ready == 'true'
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Install
+        if: steps.gate.outputs.ready == 'true'
+        run: npm ci
+      - uses: actions/download-artifact@v4
+        if: steps.gate.outputs.ready == 'true'
+        with:
+          name: mobile-web-bundle
+          path: frontend/out
+
+      - name: Projet Android requis (versionné)
+        id: native
+        if: steps.gate.outputs.ready == 'true'
+        run: |
+          if [ -d mobile/android ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::error::mobile/android n'est pas versionné : un AAB de publication doit venir du projet natif du dépôt (versionCode, applicationId, intent-filters). Lancez npx cap add android localement et commitez-le."
+            exit 1
+          fi
+
+      - name: cap sync android
+        if: steps.native.outputs.ready == 'true'
+        run: npx cap sync android
+
+      - name: Firebase (google-services.json, push natif W6-07)
+        if: steps.native.outputs.ready == 'true'
+        env:
+          GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}
+          NATIVE_PUSH: ${{ vars.NATIVE_PUSH }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_JSON_BASE64" ]; then
+            echo "$GOOGLE_SERVICES_JSON_BASE64" | base64 -d > mobile/android/app/google-services.json
+          elif [ "$NATIVE_PUSH" = "1" ]; then
+            echo "::error::NATIVE_PUSH=1 sans secret GOOGLE_SERVICES_JSON_BASE64 : l'app planterait à l'enregistrement du push."
+            exit 1
+          else
+            echo "::warning::Secret GOOGLE_SERVICES_JSON_BASE64 absent : AAB de publication SANS push natif."
+          fi
+
+      - uses: gradle/actions/setup-gradle@v4
+        if: steps.native.outputs.ready == 'true'
+
+      - name: bundleRelease
+        if: steps.native.outputs.ready == 'true'
+        working-directory: frontend/mobile/android
+        run: ./gradlew bundleRelease --no-daemon
+
+      - name: Signature de l'AAB (clé d'upload)
+        if: steps.native.outputs.ready == 'true'
+        run: |
+          echo "::add-mask::$KEYSTORE_PASSWORD"
+          echo "::add-mask::$KEY_PASSWORD"
+          KS="$RUNNER_TEMP/upload-keystore.jks"
+          echo "$KEYSTORE_B64" | base64 -d > "$KS"
+          AAB="$(ls mobile/android/app/build/outputs/bundle/release/*.aab | head -n 1)"
+          jarsigner -sigalg SHA256withRSA -digestalg SHA-256 \
+            -keystore "$KS" -storepass:env KEYSTORE_PASSWORD -keypass:env KEY_PASSWORD \
+            "$AAB" "$KEY_ALIAS"
+          jarsigner -verify "$AAB"
+          rm -f "$KS"
+
+      - name: AAB signé (artefact)
+        if: steps.native.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: captivia-android-release-aab
+          path: frontend/mobile/android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
+          retention-days: 7
 
   ios:
     if: ${{ inputs.ios }}
@@ -97,7 +308,25 @@ jobs:
         with:
           name: mobile-web-bundle
           path: frontend/out
-      - name: Projet iOS (créé s'il n'est pas encore versionné)
-        run: test -d mobile/ios || npx cap add ios
+
+      - name: Projet iOS versionné ?
+        id: native
+        run: |
+          if [ -d mobile/ios ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          elif [ "${{ inputs.create_missing }}" = "true" ]; then
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::mobile/ios absent et create_missing désactivé : étapes natives ignorées."
+          fi
+
+      - name: cap add ios (projet absent, build jetable)
+        if: steps.native.outputs.exists == 'false' && steps.native.outputs.ready == 'true'
+        run: npx cap add ios
+
       - name: cap sync ios
+        if: steps.native.outputs.ready == 'true'
         run: npx cap sync ios

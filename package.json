@@ -8,8 +8,7 @@
     "dev:frontend": "cd frontend && cross-env NEXT_PUBLIC_API_URL=http://localhost:3001 npm run dev",
     "start": "npm run dev",
     "lint": "cd backend && npm run lint && cd ../frontend && npm run lint",
-    "format": "cd backend && npm run format && cd ../frontend && npm run format",
-    "vercel:open": "node scripts/vercel-open.js"
+    "format": "cd backend && npm run format"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",

@@ -1,0 +1,715 @@
+[
+ {
+  "speciesId": 5218022,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "insectivore",
+    "quote": "Poison dart frogs are strictly insectivores, and will only eat small, live insects.",
+    "url": "https://reptilesmagazine.com/?p=982"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Drosophiles aptères (mouches des fruits)",
+    "quote": "I strongly recommend flightless fruit flies as the primary food source for your poison dart frogs.",
+    "url": "https://reptilesmagazine.com/?p=982"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Petits grillons",
+    "quote": "Crickets are also a good food source, but challenges can make them impractical. For example, very few pet stores carry crickets that are small enough for poison dart frogs.",
+    "url": "https://reptilesmagazine.com/?p=982"
+   },
+   {
+    "field": "feeding.recommendedFoods[2]",
+    "value": "Autres petites proies : grillons « pinhead », bruches, collemboles, cloportes, pucerons, tribolium, larves de fausse teigne, vers « phoenix »",
+    "quote": "Other common prey items include pinhead crickets , bean beetles, springtails , isopods , aphids, rice flour beetles , lesser wax moth larvae, and phoenix worms . It is important to dust each prey item with a vitamin/mineral supplement .",
+    "url": "https://joshsfrogs.com/care-sheet/dendrobates-auratus-costa-rican-green-and-black"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Grillons devenus trop gros",
+    "quote": "Crickets also grow rapidly, and thus quickly become too large for poison dart frogs.",
+    "url": "https://reptilesmagazine.com/?p=982"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Proies de plus de 1/8 de pouce de long",
+    "quote": "Poison Dart Frogs , auratus prefer smaller foods less than 1/8” long.",
+    "url": "https://joshsfrogs.com/care-sheet/dendrobates-auratus-costa-rican-green-and-black"
+   },
+   {
+    "field": "feeding.foodsToAvoid[2]",
+    "value": "Insectes morts ou immobiles",
+    "quote": "Poison dart frogs are strictly insectivores, and will only eat small, live insects.",
+    "url": "https://reptilesmagazine.com/?p=982"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "variable",
+    "quote": "Feed juveniles every day, whenever possible, and provide about twenty or thirty fruit flies per feeding. A young-adult poison dart frog is capable of eating 50 to 75 fruit flies in a day, and it should be fed this amount four or five days a week.",
+    "url": "https://reptilesmagazine.com/?p=982"
+   },
+   {
+    "field": "health.diseases[0].name",
+    "value": "Chytridiomycose",
+    "quote": "Chytridiomycosis is caused by the fungal organisms Batrachochytrium dendrobatidis (Bd) and Batrachochytrium salamandrivorans (Bsal).",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+    "quote": "Clinical signs include brown to red discoloration of the skin, excessive shedding and mucus production, muscle incoordination, and acute death.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+    "quote": "Real-time PCR assay performed on swabs of the integument or pieces of skin is diagnostic and provides rapid assessment of presence and quantity of zoospores. This is useful in screening and management of amphibian populations at risk, such as those undergoing transport or quarantine.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].name",
+    "value": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+    "quote": "Red-leg syndrome, also known as bacterial dermatosepticemia, refers to hyperemia of the ventral skin that accompanies systemic infection in amphibians.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+    "quote": "Clinical signs include lethargy, emaciation, ulcerations of the skin, and characteristic cutaneous pinpoint hemorrhages of the legs and abdomen.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+    "quote": "Malnourished, newly acquired amphibians that are maintained in poor-quality water or other inappropriate environmental conditions are particularly susceptible.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].name",
+    "value": "Rhabdiase (vers pulmonaires Rhabdias)",
+    "quote": "Rhabdiasis, caused by the lungworm Rhabdias spp, is a common cause of pulmonary damage and secondary infections in captive amphibians.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Animal anorexique, maigre et affaibli ; la mort brutale n'est pas rare.",
+    "quote": "Affected animals may appear anorectic, thin, and generally debilitated. Acute death is not uncommon.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Une excellente hygiène est essentielle : retirer régulièrement les mues, les fèces, les restes de nourriture et les cadavres de l'enclos.",
+    "quote": "Excellent hygiene is essential for parasite control and includes the routine removal of sloughed skin, fecal material, uneaten food, and carcasses from animal enclosures.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "terrarium",
+    "quote": "House one to four frogs in a heavily planted 20-gallon (75-L) terrarium.",
+    "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 22,
+    "quote": "Provide a temperature gradient of 72-80°F (22-27°C) during the day.",
+    "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 27,
+    "quote": "Provide a temperature gradient of 72-80°F (22-27°C) during the day.",
+    "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 80,
+    "quote": "Strive for a relative humidity of 80-100%.",
+    "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 100,
+    "quote": "Strive for a relative humidity of 80-100%.",
+    "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Terrarium de 20 gallons (75 L) très planté pour une à quatre grenouilles.",
+    "quote": "House one to four frogs in a heavily planted 20-gallon (75-L) terrarium.",
+    "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Éclairage de faible intensité, à spectre complet, pour une bonne absorption du calcium alimentaire.",
+    "quote": "Provide low-intensity full-spectrum lighting for optimal absorption of dietary calcium.",
+    "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Plantes et barrières visuelles, une ou deux branches disposées en diagonale.",
+    "quote": "Provide plants and other visual barriers, as well as one or two tree limbs arranged diagonally.",
+    "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Laisser reposer l'eau chlorée 24 à 48 heures en récipient ouvert pour que le chlore se dissipe.",
+    "quote": "Aged water: Allow chlorinated water to sit in an open container for 24-48 hours so chlorine can dissipate",
+    "url": "https://lafeber.com/vet/basic-information-poison-dart-frogs/"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "Add to Cart - $39.99",
+    "url": "https://joshsfrogs.com/sp/dendrobates-auratus-nicaraguan-green-black-green-and-black-poison-dart-frog-captive-bred-5-8-dart007"
+   }
+  ]
+ },
+ {
+  "speciesId": 5784980,
+  "evidence": []
+ },
+ {
+  "speciesId": 104013399,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "The Chacoan horned frog feeds on a wide variety of food items in captivity including: crickets, mealworms, cockroaches, goldfish, pink mice and even other frogs, including other C. cranwelli .",
+    "url": "https://reptilesmagazine.com/listings/frog-amphibians-information-news/chacoan-horned-frog/"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Grillons gavés",
+    "quote": "Crickets make a very good staple diet. Younger frogs need to be fed several times weekly; adult frogs will survive on one meal per week.",
+    "url": "https://reptilesmagazine.com/listings/frog-amphibians-information-news/chacoan-horned-frog/"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Crevettes, poisson, rongeurs adaptés, vers de terre, vers de cire, vers à soie",
+    "quote": "Shrimps, chopped fish, appropriately sized rodents, earthworms, waxworms, silkworms, etc will all be readily accepted. Of course, these foods are generally high in fat, so ensuring they are spaced out through an appropriate feeding schedule is important.",
+    "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Congénères hébergés ensemble",
+    "quote": "Because of their propensity to feed on anything that moves, it is best to house Chacoan horned frogs separately.",
+    "url": "https://reptilesmagazine.com/listings/frog-amphibians-information-news/chacoan-horned-frog/"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Aliments gras en excès (crevettes, poisson, rongeurs, vers de cire...)",
+    "quote": "Of course, these foods are generally high in fat, so ensuring they are spaced out through an appropriate feeding schedule is important.",
+    "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "variable",
+    "quote": "Younger frogs need to be fed several times weekly; adult frogs will survive on one meal per week.",
+    "url": "https://reptilesmagazine.com/listings/frog-amphibians-information-news/chacoan-horned-frog/"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "Gaver les grillons avec des légumes frais et un aliment du commerce, et saupoudrer les proies d'un supplément vitamines/minéraux, surtout chez les jeunes.",
+    "quote": "Crickets should be gut-loaded with fresh vegetables and a commercial cricket diet prior to offering them to the frog. It is important to dust the food item with a vitamin/mineral supplement, especially in young frogs that are growing rapidly.",
+    "url": "https://reptilesmagazine.com/listings/frog-amphibians-information-news/chacoan-horned-frog/"
+   },
+   {
+    "field": "reproduction.season",
+    "value": "En milieu naturel, la reproduction a lieu après de fortes pluies.",
+    "quote": "They generally experience mass-breeding events in the wild, waiting for heavy rainfall before bursting into a breeding frenzy to make the most of the newly formed pools of water across the Chaco.",
+    "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/"
+   },
+   {
+    "field": "reproduction.litterSizeMin",
+    "value": 1000,
+    "quote": "Due to the nature of their breeding habits, the frogs will typically spawn between 1000 and 2000 eggs each which usually hatch in less than 4 days.",
+    "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/"
+   },
+   {
+    "field": "reproduction.litterSizeMax",
+    "value": 2000,
+    "quote": "Due to the nature of their breeding habits, the frogs will typically spawn between 1000 and 2000 eggs each which usually hatch in less than 4 days.",
+    "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/"
+   },
+   {
+    "field": "reproduction.sexualMaturityMonths",
+    "value": 24,
+    "quote": "These frogs generally reach sexual maturity at around two years old.",
+    "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/"
+   },
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "avance",
+    "quote": "Despite their abundance in the hobby, horned frogs are notoriously difficult to breed.",
+    "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "Les œufs éclosent généralement en moins de 4 jours ; les adultes mangent la ponte (à isoler immédiatement) et les têtards sont très cannibales.",
+    "quote": "Due to the nature of their breeding habits, the frogs will typically spawn between 1000 and 2000 eggs each which usually hatch in less than 4 days. Not only will adult frogs eat the spawn, meaning they must be isolated immediately, but the tadpoles are also highly cannibalistic.",
+    "url": "https://exoticskeeper.com/blog/new-high-score-perfecting-pacman-frog-care/"
+   }
+  ]
+ },
+ {
+  "speciesId": 104015330,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "terrarium",
+    "quote": "Use a mostly glass terrarium with a secure lid to maintain high humidity.",
+    "url": "https://frogdaddy.net/blogs/dendroknow/dendrobates-tinctorius-care-sheet"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 20,
+    "quote": "Keep temperatures between 68-80°F (20-27°C) during the day and a slight drop at night.",
+    "url": "https://frogdaddy.net/blogs/dendroknow/dendrobates-tinctorius-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 27,
+    "quote": "Keep temperatures between 68-80°F (20-27°C) during the day and a slight drop at night.",
+    "url": "https://frogdaddy.net/blogs/dendroknow/dendrobates-tinctorius-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 80,
+    "quote": "Maintain humidity levels at 80-90% to replicate their rainforest habitat.",
+    "url": "https://frogdaddy.net/blogs/dendroknow/dendrobates-tinctorius-care-sheet"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 90,
+    "quote": "Maintain humidity levels at 80-90% to replicate their rainforest habitat.",
+    "url": "https://frogdaddy.net/blogs/dendroknow/dendrobates-tinctorius-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au moins 10 gallons d'espace par grenouille.",
+    "quote": "We recommend a bare minimum of 10 gallons of space per frog.",
+    "url": "https://www.neherpetoculture.com/tinctoriuscaresheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Cycle lumineux naturel 12 h/12 h avec une LED à spectre complet.",
+    "quote": "Provide a natural light cycle with 12/12 on and off and use a full-spectrum LED to promote their well-being.",
+    "url": "https://frogdaddy.net/blogs/dendroknow/dendrobates-tinctorius-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Sol couvert surtout de litière de feuilles stérilisée, avec un peu de mousse vivante par endroits.",
+    "quote": "Ground cover above the substrate should be comprised mostly of sterilized leaf litter, with live moss filling in spots only for aesthetics.",
+    "url": "https://www.neherpetoculture.com/tinctoriuscaresheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "Sold Out $74.99",
+    "url": "https://joshsfrogs.com/sp/dendrobates-tinctorius-regina-dart041"
+   }
+  ]
+ },
+ {
+  "speciesId": 104020622,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "terrarium",
+    "quote": "Tall terrarium with bark substrate and plants to climb",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/red-eyed-tree-frog"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 21.1,
+    "quote": "Put a digital thermometer in the tank to keep daytime temperatures between 75°F and 80°F and nighttime temperatures around 70°F.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/red-eyed-tree-frog"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 26.7,
+    "quote": "Put a digital thermometer in the tank to keep daytime temperatures between 75°F and 80°F and nighttime temperatures around 70°F.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/red-eyed-tree-frog"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Terrarium de 15 à 20 gallons, même pour une seule rainette.",
+    "quote": "Even with one tree frog, you’ll need a 15 to 20-gallon terrarium.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/red-eyed-tree-frog"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Éclairage UVB nécessaire pour absorber la vitamine D et le calcium.",
+    "quote": "Lighting is crucial to the overall health of your frogs because they require UVB lights to assist in absorbing vitamin D and calcium.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/red-eyed-tree-frog"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Plantes à larges feuilles, branches et substrat pour grimper et se reposer.",
+    "quote": "Their habitats must have broadleaf plants, sticks, and substrate for them to climb and rest on.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/red-eyed-tree-frog"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "moyen",
+    "quote": "A Red-eyed tree frog costs anywhere from $40 to $200.",
+    "url": "https://resources.pangovet.com/pet-breeds/frogs/red-eyed-tree-frog"
+   }
+  ]
+ },
+ {
+  "speciesId": 104040409,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "African clawed frogs are carnivorous , which means that they need to eat whole animal prey in order to get the right nutrition.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Vers de terre",
+    "quote": "Food options for African clawed frogs: Black soldier fly larvae Bloodworms Earthworms Fish (avoid fish with thiaminase)",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Larves de mouche soldat noire et vers de vase (bloodworms)",
+    "quote": "Food options for African clawed frogs: Black soldier fly larvae Bloodworms Earthworms Fish (avoid fish with thiaminase)",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "feeding.recommendedFoods[2]",
+    "value": "Aliment commercial adapté (type Tetra ReptoMin)",
+    "quote": "Regularly offer appropriate commercial diets like Tetra Reptomin as part of the rotation.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Poissons contenant de la thiaminase",
+    "quote": "Fish (avoid fish with thiaminase)",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Foie de bœuf et autres aliments « naturels » de ce type",
+    "quote": "Natural food items (e.g., beef liver) will not be provided to frogs due to risk of bacterial contamination and hypervitaminosis A.",
+    "url": "https://wiki.xenbase.org/xenwiki/index.php/Xenopus_tropicalis_and_Xenopus_laevis_environmental_parameter_standard_operating_procedure_(Kroll_lab)"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "variable",
+    "quote": "Juveniles: daily, as much as they will eat within ~10 minutes Adults 3-4x/week, as much as they will eat within ~10 minutes",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "Grenouille aquatique surtout nocturne : l'alimentation et l'essentiel de l'activité de reproduction ont lieu après la tombée de la nuit.",
+    "quote": "Clawed frogs are nocturnal, and most reproductive activity and feeding occurs after dark.",
+    "url": "https://en.wikipedia.org/wiki/African_clawed_frog"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "solitaire",
+    "quote": "We do not recommend cohabitating African clawed frogs, as this species is known to have cannibalistic tendencies.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "behavior.difficultyLevel",
+    "value": "débutant",
+    "quote": "African clawed frogs are quite hardy as far as amphibians go, which makes them a beginner-level pet amphibian.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "behavior.compatibilityWithOtherAnimals",
+    "value": "Cohabitation déconseillée : l'espèce est cannibale.",
+    "quote": "We do not recommend cohabitating African clawed frogs, as this species is known to have cannibalistic tendencies.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "aquarium",
+    "quote": "The minimum recommended aquarium size for a single African clawed frog is 20”L x 10”W x 10”H (10 gallons).",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 20,
+    "quote": "African clawed frogs do well with water temps around 68-72°F.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 22.2,
+    "quote": "African clawed frogs do well with water temps around 68-72°F.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Aquarium de 10 gallons minimum pour une grenouille (20 x 10 x 10 pouces), eau pas plus profonde d'environ 12 pouces.",
+    "quote": "The minimum recommended aquarium size for a single African clawed frog is 20”L x 10”W x 10”H (10 gallons). Of course, larger is always better! Just make sure that the water is no deeper than about 12”.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "UVB non indispensable à la survie, mais recommandé.",
+    "quote": "They are able to survive without it, but we still recommend providing appropriate UVB lighting as part of the setup.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Bois de mopani, plantes vivantes ou artificielles, cachettes/grottes, ornements artificiels ; éviter tout objet en métal (toxique) et prévoir des zones couvertes pour se retirer.",
+    "quote": "Décor options for African clawed frogs include: mopani wood live or artificial plants pre-made hides/caves artificial ornaments Avoid anything made of metal, as metal is toxic to African clawed frogs! Make sure your frog has covered areas to retreat to when it wants privacy.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "Traiter toute eau ajoutée avec un déchlorant pour ne pas introduire de produits chimiques nocifs.",
+    "quote": "Any water added to the aquarium should be treated with de-chlorinator like Zoo Med Reptisafe to prevent harmful chemicals from being introduced to your frog’s habitat.",
+    "url": "https://dubiaroaches.com/blogs/amphibian-care/african-clawed-frog-care-sheet"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "faible",
+    "quote": "Breeders tend to sell their frogs for anywhere from $10 to $50 (sometimes even more) because they do all the work of actually producing and caring for the frogs until they are ready to go to new homes.",
+    "url": "https://thevetdesk.com/pet-lifestyle/frogs/pet-frog-cost/"
+   }
+  ]
+ },
+ {
+  "speciesId": 104040736,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "Amphibien docile qui se garde au mieux en petits groupes de 4 à 8 animaux.",
+    "quote": "Fire-Bellied Toads have a docile nature and can best be housed in small groups of 4-8 animals.",
+    "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "grégaire",
+    "quote": "Fire-Bellied Toads are a fairly social species and are best enjoyed when kept in small groups of 4 to 8 animals.",
+    "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis"
+   },
+   {
+    "field": "behavior.difficultyLevel",
+    "value": "débutant",
+    "quote": "Fire-Bellied Toads are hardy, long-lived and “easy-to-care-for”.",
+    "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis"
+   },
+   {
+    "field": "behavior.compatibilityWithOtherAnimals",
+    "value": "Se garde en petits groupes de 4 à 8 individus de la même espèce.",
+    "quote": "Fire-Bellied Toads are a fairly social species and are best enjoyed when kept in small groups of 4 to 8 animals.",
+    "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis"
+   },
+   {
+    "field": "habitat.habitatType",
+    "value": "terrarium",
+    "quote": "A semi-aquatic terrarium is ideally half water (about 2 to 3 inches deep) and half land.",
+    "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad"
+   },
+   {
+    "field": "habitat.tempMin",
+    "value": 22,
+    "quote": "During their most active period, the temperature of the terrarium should be maintained between 72°F to 78°F (22°C to 26°C).",
+    "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad"
+   },
+   {
+    "field": "habitat.tempMax",
+    "value": 26,
+    "quote": "During their most active period, the temperature of the terrarium should be maintained between 72°F to 78°F (22°C to 26°C).",
+    "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad"
+   },
+   {
+    "field": "habitat.humidityMin",
+    "value": 50,
+    "quote": "It should stay within the correct range of 50 to 70%.",
+    "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad"
+   },
+   {
+    "field": "habitat.humidityMax",
+    "value": 70,
+    "quote": "It should stay within the correct range of 50 to 70%.",
+    "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "Au moins 10 gallons pour un seul crapaud.",
+    "quote": "A 10-gallon tank is a bare minimum for the enclosure of a single oriental fire-bellied toad.",
+    "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad"
+   },
+   {
+    "field": "habitat.lightNeeds",
+    "value": "Pas d'UVB spécifique indispensable, mais une bonne source de lumière pour encourager le comportement diurne.",
+    "quote": "Fire-bellied toads do not require specific UVB lighting, but be sure to place their tanks near a good light source to encourage their normal daytime behavior.",
+    "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "Plantes aquatiques, mousse humide et éventuellement une petite île flottante pour se reposer.",
+    "quote": "Add aquatic plants, wet moss, and maybe a small floating island to rest.",
+    "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad"
+   },
+   {
+    "field": "habitat.costEstimate",
+    "value": "faible",
+    "quote": "In the US, their price ranges from $10 to $25 .",
+    "url": "https://resources.pangovet.com/pet-breeds/amphibians/oriental-fire-bellied-toad"
+   }
+  ]
+ },
+ {
+  "speciesId": 104041498,
+  "evidence": []
+ },
+ {
+  "speciesId": 104044141,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "Vie en alternant une phase aquatique (l'essentiel du temps chez l'adulte) et une phase terrestre (juvéniles ou hors période de reproduction).",
+    "quote": "Their setup should include both an aquatic phase, where they spend most of their time as adults, and a terrestrial phase, for juveniles or when they are out of breeding season.",
+    "url": "https://vetverified.com/articles/the-complete-guide-to-caring-for-an-alpine-newt"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "solitaire",
+    "quote": "They are not social pets but can be kept in groups if provided with enough space.",
+    "url": "https://vetverified.com/articles/the-complete-guide-to-caring-for-an-alpine-newt"
+   },
+   {
+    "field": "behavior.difficultyLevel",
+    "value": "intermédiaire",
+    "quote": "These hardy newts are known for their striking colouration, adaptability, and relatively simple care requirements, making them a great choice for intermediate amphibian keepers.",
+    "url": "https://vetverified.com/articles/the-complete-guide-to-caring-for-an-alpine-newt"
+   },
+   {
+    "field": "behavior.compatibilityWithOtherAnimals",
+    "value": "Ce ne sont pas des animaux sociaux, mais ils peuvent être gardés en groupe si l'espace est suffisant.",
+    "quote": "They are not social pets but can be kept in groups if provided with enough space.",
+    "url": "https://vetverified.com/articles/the-complete-guide-to-caring-for-an-alpine-newt"
+   },
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Food for the adults can consist of maggots, earthworms, strips of raw lean meat (removed immediately if not eaten) and anything else that can enter their mouths.",
+    "url": "https://caudata.org/cc/species/Triturus/T_alpestris.shtml"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "Asticots et vers de terre",
+    "quote": "Food for the adults can consist of maggots, earthworms, strips of raw lean meat (removed immediately if not eaten) and anything else that can enter their mouths.",
+    "url": "https://caudata.org/cc/species/Triturus/T_alpestris.shtml"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "Artemia, tubifex, larves de chironome (vers de vase), daphnies, cyclops, vers blancs (juvéniles et larves)",
+    "quote": "Juveniles and larvae can be fed Artemia (brine shrimp), tubifex, chyronomid larvae (bloodworms), daphnia, cyclops and Enchytraeus (white worms).",
+    "url": "https://caudata.org/cc/species/Triturus/T_alpestris.shtml"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "Lanières de viande crue maigre non mangées",
+    "quote": "strips of raw lean meat (removed immediately if not eaten)",
+    "url": "https://caudata.org/cc/species/Triturus/T_alpestris.shtml"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "Vers blancs comme seul aliment des jeunes",
+    "quote": "Keep in mind that the redder the food color, the redder the bellies will be. If you feed the young only white worms, the color of their bellies will be pale yellow.",
+    "url": "https://caudata.org/cc/species/Triturus/T_alpestris.shtml"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "variable",
+    "quote": "Food for the adults can consist of maggots, earthworms, strips of raw lean meat (removed immediately if not eaten) and anything else that can enter their mouths.",
+    "url": "https://caudata.org/cc/species/Triturus/T_alpestris.shtml"
+   }
+  ]
+ },
+ {
+  "speciesId": 165617687,
+  "evidence": [
+   {
+    "field": "health.diseases[0].name",
+    "value": "Chytridiomycose",
+    "quote": "Chytridiomycosis is caused by the fungal organisms Batrachochytrium dendrobatidis (Bd) and Batrachochytrium salamandrivorans (Bsal).",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].symptoms",
+    "value": "Peau décolorée (brun à rouge), mue excessive et production excessive de mucus, incoordination musculaire, mort brutale.",
+    "quote": "Clinical signs include brown to red discoloration of the skin, excessive shedding and mucus production, muscle incoordination, and acute death.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "Dépistage par PCR (écouvillon cutané) des animaux à risque, notamment lors du transport ou de la quarantaine.",
+    "quote": "Real-time PCR assay performed on swabs of the integument or pieces of skin is diagnostic and provides rapid assessment of presence and quantity of zoospores. This is useful in screening and management of amphibian populations at risk, such as those undergoing transport or quarantine.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].name",
+    "value": "Saprolegniose",
+    "quote": "Saprolegniasis refers to disease caused by several genera of opportunistic fungi or water molds that infect the gills and skin of aquatic and larval amphibians.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "Croissance blanchâtre, cotonneuse sur la peau, typiquement sur une ancienne lésion ; léthargie, détresse respiratoire, anorexie.",
+    "quote": "Affected animals have a whitish, cotton-like growth on their skin, typically at the site of previous trauma such as abarasions.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "La perte du mucus protecteur causée par des irritants chimiques (désinfectants, savons, détergents), des pics d'ammoniaque et la malnutrition (surtout la carence en vitamine A) peut favoriser la maladie.",
+    "quote": "Removal of the slime layer due to chemical irritants such as disinfectants, soaps, detergents, or ammonia spikes and malnutrition, especially hypovitaminosis A, may also contribute to formation.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].name",
+    "value": "Syndrome de la patte rouge (dermatosepticémie bactérienne)",
+    "quote": "Red-leg syndrome, also known as bacterial dermatosepticemia, refers to hyperemia of the ventral skin that accompanies systemic infection in amphibians.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "Léthargie, amaigrissement, ulcères cutanés, petites hémorragies ponctuelles sur les pattes et l'abdomen.",
+    "quote": "Clinical signs include lethargy, emaciation, ulcerations of the skin, and characteristic cutaneous pinpoint hemorrhages of the legs and abdomen.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "Sont particulièrement sensibles : les amphibiens dénutris ou récemment acquis, gardés dans une eau de mauvaise qualité ou dans des conditions inadaptées.",
+    "quote": "Malnourished, newly acquired amphibians that are maintained in poor-quality water or other inappropriate environmental conditions are particularly susceptible.",
+    "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/amphibians/infectious-diseases-of-amphibians"
+   }
+  ]
+ },
+ {
+  "speciesId": 2153441,
+  "evidence": [
+   {
+    "field": "reproduction.litterSizeMin",
+    "value": 400,
+    "quote": "The egg sac typically contains 400–800 eggs, though numbers can vary.",
+    "url": "https://www.thetarantulacollective.com/caresheets/brachypelmaauratum"
+   },
+   {
+    "field": "reproduction.litterSizeMax",
+    "value": 800,
+    "quote": "The egg sac typically contains 400–800 eggs, though numbers can vary.",
+    "url": "https://www.thetarantulacollective.com/caresheets/brachypelmaauratum"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "Maturité très lente : mâles en 4 à 7 ans, femelles en 8 à 12 ans.",
+    "quote": "Male Maturity: Males typically mature within 4–7 years, developing tibial hooks and enlarged pedipalps for sperm transfer. Female Maturity: Females take significantly longer, often 8–12 years, before reaching full reproductive maturity.",
+    "url": "https://www.thetarantulacollective.com/caresheets/brachypelmaauratum"
+   }
+  ]
+ }
+]

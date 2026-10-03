@@ -1,12 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
-import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
-import {
-  EXTERNAL_REQUEST_DEFAULTS,
-  describeHttpError,
-} from '../../external/http-safety';
+import { describeHttpError } from '../../external/http-safety';
+import { ExternalHttpService } from '../../external/http/external-http.service';
+import { upstreamUnavailable } from '../../external/http/external-errors';
 
-interface PubMedArticle {
+export interface PubMedArticle {
   pmid: string;
   title: string;
   abstract?: string;
@@ -16,68 +14,117 @@ interface PubMedArticle {
   url: string;
 }
 
+/** Réponse de `esearch.fcgi` (champs lus uniquement). */
+interface PubmedSearchResponse {
+  esearchresult?: { idlist?: unknown[] };
+}
+
+/** Réponse de `esummary.fcgi` : `result` est indexé par PMID. */
+interface PubmedSummaryResponse {
+  result?: Record<
+    string,
+    | {
+        title?: string;
+        authors?: Array<{ name: string }>;
+        source?: string;
+        pubdate?: string;
+      }
+    | undefined
+  >;
+}
+
+/** Les PMID renvoyés par PubMed sont numériques ; on ne réinjecte rien d'autre dans l'URL. */
+const PMID_REGEX = /^\d{1,10}$/;
+
+/**
+ * PubMed (NCBI E-utilities) — API publique, SANS clé obligatoire (3 requêtes/s).
+ * Clés optionnelles : `NCBI_API_KEY` (10 requêtes/s) et `NCBI_EMAIL` (contact recommandé
+ * par NCBI). Sans clé, l'intégration reste active avec le quota public.
+ *
+ * Un échec (réseau, 5xx, disjoncteur ouvert) lève un 503 explicite : jamais de liste
+ * vide « inventée » ni mise en cache à la suite d'une erreur. Les appelants qui
+ * préfèrent dégrader (fiche santé) attrapent l'erreur.
+ */
 @Injectable()
 export class PubmedService {
   private readonly logger = new Logger(PubmedService.name);
   private readonly baseUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils';
   private readonly cachePrefix = 'pubmed:';
 
-  constructor(private readonly cacheService: CacheService) {}
+  constructor(
+    private readonly cacheService: CacheService,
+    private readonly http: ExternalHttpService,
+  ) {}
+
+  /** Paramètres d'identification NCBI (outil, e-mail et clé optionnels). */
+  private ncbiParams(): Record<string, string> {
+    const params: Record<string, string> = { tool: 'captivia' };
+    const email = process.env.NCBI_EMAIL?.trim();
+    const apiKey = process.env.NCBI_API_KEY?.trim();
+    if (email) params.email = email;
+    if (apiKey) params.api_key = apiKey;
+    return params;
+  }
 
   async searchArticles(
     query: string,
     maxResults = 10,
   ): Promise<PubMedArticle[]> {
     const cacheKey = `${this.cachePrefix}search:${query}:${maxResults}`;
-    
+
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
-      return JSON.parse(cached as string);
+      return JSON.parse(cached as string) as PubMedArticle[];
     }
 
     try {
       // Step 1: Search for PMIDs
-      const searchUrl = `${this.baseUrl}/esearch.fcgi`;
-      const searchParams = {
-        db: 'pubmed',
-        term: query,
-        retmax: maxResults,
-        retmode: 'json',
-        usehistory: 'y',
-      };
+      const searchResponse = await this.http.get<PubmedSearchResponse>(
+        'pubmed',
+        `${this.baseUrl}/esearch.fcgi`,
+        {
+          params: {
+            db: 'pubmed',
+            term: query,
+            retmax: maxResults,
+            retmode: 'json',
+            ...this.ncbiParams(),
+          },
+        },
+      );
+      const pmids = (searchResponse.data?.esearchresult?.idlist || []).filter(
+        (id): id is string => typeof id === 'string' && PMID_REGEX.test(id),
+      );
 
-      const searchResponse = await axios.get(searchUrl, {
-        params: searchParams,
-        ...EXTERNAL_REQUEST_DEFAULTS,
-      });
-      const pmids = searchResponse.data.esearchresult?.idlist || [];
-
+      // Réponse valide « aucun article » : mise en cache (1 h, plus court qu'un résultat).
       if (pmids.length === 0) {
+        this.cacheService.set(cacheKey, JSON.stringify([]), 3600);
         return [];
       }
 
       // Step 2: Fetch article details
-      const fetchUrl = `${this.baseUrl}/esummary.fcgi`;
-      const fetchParams = {
-        db: 'pubmed',
-        id: pmids.join(','),
-        retmode: 'json',
-      };
-
-      const fetchResponse = await axios.get(fetchUrl, {
-        params: fetchParams,
-        ...EXTERNAL_REQUEST_DEFAULTS,
-      });
+      const fetchResponse = await this.http.get<PubmedSummaryResponse>(
+        'pubmed',
+        `${this.baseUrl}/esummary.fcgi`,
+        {
+          params: {
+            db: 'pubmed',
+            id: pmids.join(','),
+            retmode: 'json',
+            ...this.ncbiParams(),
+          },
+        },
+      );
       const articles: PubMedArticle[] = [];
 
       for (const pmid of pmids) {
-        const article = fetchResponse.data.result?.[pmid];
+        const article = fetchResponse.data?.result?.[pmid];
         if (article) {
           articles.push({
             pmid,
             title: article.title || '',
-            authors: article.authors?.map((a: any) => a.name) || [],
+            authors: article.authors?.map((a) => a.name) || [],
             journal: article.source || '',
             pubDate: article.pubdate || '',
             url: `https://pubmed.ncbi.nlm.nih.gov/${pmid}/`,
@@ -86,18 +133,28 @@ export class PubmedService {
       }
 
       // Cache for 24 hours
-      await this.cacheService.set(cacheKey, JSON.stringify(articles), 86400);
+      this.cacheService.set(cacheKey, JSON.stringify(articles), 86400);
 
       return articles;
     } catch (error) {
       this.logger.error(`PubMed search error: ${describeHttpError(error)}`);
-      return [];
+      const stale = this.cacheService.getStale(cacheKey);
+      if (typeof stale === 'string' && stale) {
+        try {
+          return JSON.parse(stale) as PubMedArticle[];
+        } catch {
+          /* entrée illisible : 503 ci-dessous */
+        }
+      }
+      // Rien n'est écrit en cache après une erreur.
+      throw upstreamUnavailable('PubMed temporarily unavailable');
     }
   }
 
   async getArticleAbstract(pmid: string): Promise<string | null> {
+    if (!PMID_REGEX.test(pmid)) return null;
     const cacheKey = `${this.cachePrefix}abstract:${pmid}`;
-    
+
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
@@ -105,27 +162,28 @@ export class PubmedService {
     }
 
     try {
-      const fetchUrl = `${this.baseUrl}/efetch.fcgi`;
-      const params = {
-        db: 'pubmed',
-        id: pmid,
-        retmode: 'xml',
-      };
+      const response = await this.http.get(
+        'pubmed',
+        `${this.baseUrl}/efetch.fcgi`,
+        {
+          params: {
+            db: 'pubmed',
+            id: pmid,
+            retmode: 'xml',
+            ...this.ncbiParams(),
+          },
+        },
+      );
 
-      const response = await axios.get(fetchUrl, {
-        params,
-        ...EXTERNAL_REQUEST_DEFAULTS,
-      });
-      
       // Basic XML parsing (in production, use a proper XML parser)
-      const abstractMatch = response.data.match(
+      const abstractMatch = String(response.data).match(
         /<AbstractText[^>]*>(.*?)<\/AbstractText>/s,
       );
       const abstract = abstractMatch ? abstractMatch[1] : null;
 
       if (abstract) {
         // Cache for 7 days
-        await this.cacheService.set(cacheKey, abstract, 604800);
+        this.cacheService.set(cacheKey, abstract, 604800);
       }
 
       return abstract;
@@ -142,7 +200,7 @@ export class PubmedService {
     disease?: string,
   ): Promise<PubMedArticle[]> {
     let query = `${scientificName}[Title/Abstract]`;
-    
+
     if (disease) {
       query += ` AND (${disease}[Title/Abstract] OR disease[Title/Abstract] OR health[Title/Abstract])`;
     } else {
@@ -150,7 +208,8 @@ export class PubmedService {
     }
 
     // Add filters for veterinary/animal health
-    query += ' AND (veterinary[Title/Abstract] OR animal[Title/Abstract] OR reptile[Title/Abstract])';
+    query +=
+      ' AND (veterinary[Title/Abstract] OR animal[Title/Abstract] OR reptile[Title/Abstract])';
 
     return this.searchArticles(query, 5);
   }

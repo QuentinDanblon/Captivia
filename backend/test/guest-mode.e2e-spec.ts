@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { httpServer } from './utils/http';
 import { App } from 'supertest/types';
 import * as crypto from 'crypto';
 import { AppModule } from '../src/app.module';
@@ -73,7 +74,7 @@ describe('Mode invité (E2E)', () => {
   const tag = `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
   const emailFor = (name: string) => `guest-${name}-${tag}@captivia.local`;
   const guestIds: string[] = [];
-  const server = (): App => app.getHttpServer() as App;
+  const server = (): App => httpServer(app) as App;
   const bearer = (token: string) => ({ Authorization: `Bearer ${token}` });
 
   async function createGuest(): Promise<AuthBody> {
@@ -145,14 +146,19 @@ describe('Mode invité (E2E)', () => {
         where: { tokenHash: sha256(guest.refreshToken) },
       });
       expect(rt.userAgent).toBe('jest-guest');
-      const ttlDays = (rt.expiresAt.getTime() - rt.createdAt.getTime()) / DAY_MS;
+      const ttlDays =
+        (rt.expiresAt.getTime() - rt.createdAt.getTime()) / DAY_MS;
       expect(ttlDays).toBeGreaterThan(89.9);
 
       const me = await request(server())
         .get('/auth/me')
         .set(bearer(guest.accessToken))
         .expect(200);
-      expect(me.body).toMatchObject({ id: guest.user.id, isGuest: true, email: null });
+      expect(me.body).toMatchObject({
+        id: guest.user.id,
+        isGuest: true,
+        email: null,
+      });
 
       // Aucun e-mail n'est envoyé à la création d'un invité.
       expect(sendVerification).not.toHaveBeenCalled();
@@ -199,9 +205,16 @@ describe('Mode invité (E2E)', () => {
       const first = await createAnimal(guest.accessToken, 'Kaa').expect(201);
       animalId = (first.body as { id: string }).id;
 
-      const second = await createAnimal(guest.accessToken, 'Nagini').expect(403);
-      expect(second.body).toMatchObject({ statusCode: 403, code: 'ANIMAL_LIMIT' });
-      expect(await prisma.animal.count({ where: { userId: guest.user.id } })).toBe(1);
+      const second = await createAnimal(guest.accessToken, 'Nagini').expect(
+        403,
+      );
+      expect(second.body).toMatchObject({
+        statusCode: 403,
+        code: 'ANIMAL_LIMIT',
+      });
+      expect(
+        await prisma.animal.count({ where: { userId: guest.user.id } }),
+      ).toBe(1);
     });
 
     it('carnet complet accessible sans Premium (soins, vaccins, pesées, médicaments, RDV, export, agenda)', async () => {
@@ -225,7 +238,12 @@ describe('Mode invité (E2E)', () => {
       await request(server())
         .post(`${base}/medications`)
         .set(h)
-        .send({ name: 'Vermifuge', dose: '0,2 ml', frequency: 'daily', startDate: todayStr() })
+        .send({
+          name: 'Vermifuge',
+          dose: '0,2 ml',
+          frequency: 'daily',
+          startDate: todayStr(),
+        })
         .expect(201);
       await request(server())
         .post(`${base}/vet-appointments`)
@@ -280,7 +298,10 @@ describe('Mode invité (E2E)', () => {
         await request(server())
           .post('/auth/change-password')
           .set(h)
-          .send({ currentPassword: 'x'.repeat(10), newPassword: 'y'.repeat(12) }),
+          .send({
+            currentPassword: 'x'.repeat(10),
+            newPassword: 'y'.repeat(12),
+          }),
         'password',
       );
       expectGuest(
@@ -288,10 +309,14 @@ describe('Mode invité (E2E)', () => {
         'email_verification',
       );
 
-      const row = await prisma.animal.findUniqueOrThrow({ where: { id: animalId } });
+      const row = await prisma.animal.findUniqueOrThrow({
+        where: { id: animalId },
+      });
       expect(row.publicEnabled).toBe(false);
       expect(row.publicSlug).toBeNull();
-      const user = await prisma.user.findUniqueOrThrow({ where: { id: guest.user.id } });
+      const user = await prisma.user.findUniqueOrThrow({
+        where: { id: guest.user.id },
+      });
       expect(user.calendarToken).toBeNull();
     });
 
@@ -310,7 +335,12 @@ describe('Mode invité (E2E)', () => {
     it('exige une session', async () => {
       await request(server())
         .post('/auth/upgrade')
-        .send({ email: emailFor('anon'), password: PASSWORD, acceptTerms: true, ageConfirmed: true })
+        .send({
+          email: emailFor('anon'),
+          password: PASSWORD,
+          acceptTerms: true,
+          ageConfirmed: true,
+        })
         .expect(401);
     });
 
@@ -319,12 +349,21 @@ describe('Mode invité (E2E)', () => {
       await request(server())
         .post('/auth/upgrade')
         .set(bearer(guest.accessToken))
-        .send({ email: emailFor('noterms'), password: PASSWORD, acceptTerms: false, ageConfirmed: true })
+        .send({
+          email: emailFor('noterms'),
+          password: PASSWORD,
+          acceptTerms: false,
+          ageConfirmed: true,
+        })
         .expect(400);
       await request(server())
         .post('/auth/upgrade')
         .set(bearer(guest.accessToken))
-        .send({ email: emailFor('noage'), password: PASSWORD, acceptTerms: true })
+        .send({
+          email: emailFor('noage'),
+          password: PASSWORD,
+          acceptTerms: true,
+        })
         .expect(400);
     });
 
@@ -332,7 +371,12 @@ describe('Mode invité (E2E)', () => {
       const taken = emailFor('taken');
       await request(server())
         .post('/auth/register')
-        .send({ email: taken, password: PASSWORD, acceptTerms: true, ageConfirmed: true })
+        .send({
+          email: taken,
+          password: PASSWORD,
+          acceptTerms: true,
+          ageConfirmed: true,
+        })
         .expect(201);
 
       const guest = await createGuest();
@@ -340,16 +384,32 @@ describe('Mode invité (E2E)', () => {
       await request(server())
         .post('/auth/upgrade')
         .set(bearer(guest.accessToken))
-        .send({ email: taken.toUpperCase(), password: PASSWORD, acceptTerms: true, ageConfirmed: true })
+        .send({
+          email: taken.toUpperCase(),
+          password: PASSWORD,
+          acceptTerms: true,
+          ageConfirmed: true,
+        })
         .expect(409);
 
-      const row = await prisma.user.findUniqueOrThrow({ where: { id: guest.user.id } });
+      const row = await prisma.user.findUniqueOrThrow({
+        where: { id: guest.user.id },
+      });
       expect(row).toMatchObject({ isGuest: true, email: null });
-      expect(await prisma.animal.count({ where: { userId: guest.user.id } })).toBe(1);
-      const other = await prisma.user.findUniqueOrThrow({ where: { email: taken } });
-      expect(await prisma.animal.count({ where: { userId: other.id } })).toBe(0);
+      expect(
+        await prisma.animal.count({ where: { userId: guest.user.id } }),
+      ).toBe(1);
+      const other = await prisma.user.findUniqueOrThrow({
+        where: { email: taken },
+      });
+      expect(await prisma.animal.count({ where: { userId: other.id } })).toBe(
+        0,
+      );
       // La session invité reste valide.
-      await request(server()).get('/auth/me').set(bearer(guest.accessToken)).expect(200);
+      await request(server())
+        .get('/auth/me')
+        .set(bearer(guest.accessToken))
+        .expect(200);
     });
 
     it('convertit le MÊME utilisateur : animaux et carnet conservés, jetons renouvelés, vérification envoyée', async () => {
@@ -373,7 +433,13 @@ describe('Mode invité (E2E)', () => {
         .post('/auth/upgrade')
         .set(bearer(guest.accessToken))
         .set('User-Agent', 'jest-upgrade')
-        .send({ email: `  ${email.toUpperCase()} `, password: PASSWORD, acceptTerms: true, ageConfirmed: true, locale: 'fr' })
+        .send({
+          email: `  ${email.toUpperCase()} `,
+          password: PASSWORD,
+          acceptTerms: true,
+          ageConfirmed: true,
+          locale: 'fr',
+        })
         .expect(201);
       const upgraded = auth(res);
       expect(upgraded.user).toMatchObject({
@@ -384,8 +450,15 @@ describe('Mode invité (E2E)', () => {
       });
       expect(upgraded.refreshToken).not.toBe(guest.refreshToken);
 
-      const row = await prisma.user.findUniqueOrThrow({ where: { id: guest.user.id } });
-      expect(row).toMatchObject({ isGuest: false, email, locale: 'fr', termsVersion: expect.any(String) });
+      const row = await prisma.user.findUniqueOrThrow({
+        where: { id: guest.user.id },
+      });
+      expect(row).toMatchObject({
+        isGuest: false,
+        email,
+        locale: 'fr',
+        termsVersion: expect.any(String),
+      });
       expect(row.passwordHash).toEqual(expect.any(String));
       expect(row.termsAcceptedAt).not.toBeNull();
 
@@ -394,17 +467,24 @@ describe('Mode invité (E2E)', () => {
         .get('/users/me/animals')
         .set(bearer(upgraded.accessToken))
         .expect(200);
-      const ids = (list.body as { data?: { id: string }[] }).data ?? (list.body as { id: string }[]);
+      const ids =
+        (list.body as { data?: { id: string }[] }).data ??
+        (list.body as { id: string }[]);
       expect(ids.map((a) => a.id)).toEqual([animalId]);
       const vacc = await request(server())
         .get(`/users/me/animals/${animalId}/vaccinations`)
         .set(bearer(upgraded.accessToken))
         .expect(200);
       expect(JSON.stringify(vacc.body)).toContain('Rage');
-      expect(await prisma.animalMeasurement.count({ where: { animalId } })).toBe(1);
+      expect(
+        await prisma.animalMeasurement.count({ where: { animalId } }),
+      ).toBe(1);
 
       // Anciens jetons invalidés.
-      await request(server()).get('/auth/me').set(bearer(guest.accessToken)).expect(401);
+      await request(server())
+        .get('/auth/me')
+        .set(bearer(guest.accessToken))
+        .expect(401);
       await request(server())
         .post('/auth/refresh')
         .send({ refreshToken: guest.refreshToken })
@@ -418,7 +498,11 @@ describe('Mode invité (E2E)', () => {
 
       // E-mail de vérification envoyé à la nouvelle adresse.
       await new Promise((r) => setTimeout(r, 200));
-      expect(sendVerification).toHaveBeenCalledWith(email, 'fr', expect.stringContaining('/verifier-email?token='));
+      expect(sendVerification).toHaveBeenCalledWith(
+        email,
+        'fr',
+        expect.stringContaining('/verifier-email?token='),
+      );
 
       // Plus un invité : le lien public relève désormais du Premium (pas de GUEST_ACCOUNT).
       const pub = await request(server())
@@ -432,12 +516,19 @@ describe('Mode invité (E2E)', () => {
       const again = await request(server())
         .post('/auth/upgrade')
         .set(bearer(upgraded.accessToken))
-        .send({ email: emailFor('again'), password: PASSWORD, acceptTerms: true, ageConfirmed: true })
+        .send({
+          email: emailFor('again'),
+          password: PASSWORD,
+          acceptTerms: true,
+          ageConfirmed: true,
+        })
         .expect(403);
       expect(again.body).toMatchObject({ code: 'NOT_A_GUEST' });
 
       // Compte gratuit : toujours 1 animal (le 2e exige Premium).
-      const second = await createAnimal(upgraded.accessToken, 'Nagini').expect(403);
+      const second = await createAnimal(upgraded.accessToken, 'Nagini').expect(
+        403,
+      );
       expect(second.body).toMatchObject({ code: 'ANIMAL_LIMIT' });
     });
 
@@ -449,12 +540,19 @@ describe('Mode invité (E2E)', () => {
         .set(bearer(guest.accessToken))
         .send({})
         .expect(204);
-      expect(await prisma.user.findUnique({ where: { id: guest.user.id } })).toBeNull();
+      expect(
+        await prisma.user.findUnique({ where: { id: guest.user.id } }),
+      ).toBeNull();
 
       const email = emailFor('delete-nopwd');
       const reg = await request(server())
         .post('/auth/register')
-        .send({ email, password: PASSWORD, acceptTerms: true, ageConfirmed: true })
+        .send({
+          email,
+          password: PASSWORD,
+          acceptTerms: true,
+          ageConfirmed: true,
+        })
         .expect(201);
       await request(server())
         .delete('/users/me')
@@ -472,7 +570,9 @@ describe('Mode invité (E2E)', () => {
       const recent = new Date(now.getTime() - 89 * DAY_MS);
 
       const stale = await createGuest();
-      const staleAnimal = await createAnimal(stale.accessToken, 'Stale').expect(201);
+      const staleAnimal = await createAnimal(stale.accessToken, 'Stale').expect(
+        201,
+      );
       const staleAnimalId = (staleAnimal.body as { id: string }).id;
       await request(server())
         .post(`/users/me/animals/${staleAnimalId}/vaccinations`)
@@ -491,41 +591,70 @@ describe('Mode invité (E2E)', () => {
         },
       });
       const account = await prisma.user.create({
-        data: { email: emailFor('old-account'), passwordHash: 'x', lastActiveAt: old },
+        data: {
+          email: emailFor('old-account'),
+          passwordHash: 'x',
+          lastActiveAt: old,
+        },
       });
 
       await prisma.user.updateMany({
         where: { id: { in: [stale.user.id, subscribed.user.id] } },
         data: { lastActiveAt: old },
       });
-      await prisma.user.update({ where: { id: fresh.user.id }, data: { lastActiveAt: recent } });
+      await prisma.user.update({
+        where: { id: fresh.user.id },
+        data: { lastActiveAt: recent },
+      });
 
       const res = await purge.runOnce(now, 90);
       expect(res.locked).toBe(true);
       expect(res.deleted).toBeGreaterThanOrEqual(1);
 
-      expect(await prisma.user.findUnique({ where: { id: stale.user.id } })).toBeNull();
-      expect(await prisma.animal.findUnique({ where: { id: staleAnimalId } })).toBeNull();
-      expect(await prisma.vaccination.count({ where: { animalId: staleAnimalId } })).toBe(0);
+      expect(
+        await prisma.user.findUnique({ where: { id: stale.user.id } }),
+      ).toBeNull();
+      expect(
+        await prisma.animal.findUnique({ where: { id: staleAnimalId } }),
+      ).toBeNull();
+      expect(
+        await prisma.vaccination.count({ where: { animalId: staleAnimalId } }),
+      ).toBe(0);
       expect(
         await prisma.refreshToken.count({ where: { userId: stale.user.id } }),
       ).toBe(0);
-      expect(await prisma.user.findUnique({ where: { id: fresh.user.id } })).not.toBeNull();
-      expect(await prisma.user.findUnique({ where: { id: subscribed.user.id } })).not.toBeNull();
-      expect(await prisma.user.findUnique({ where: { id: account.id } })).not.toBeNull();
+      expect(
+        await prisma.user.findUnique({ where: { id: fresh.user.id } }),
+      ).not.toBeNull();
+      expect(
+        await prisma.user.findUnique({ where: { id: subscribed.user.id } }),
+      ).not.toBeNull();
+      expect(
+        await prisma.user.findUnique({ where: { id: account.id } }),
+      ).not.toBeNull();
 
       // Durée paramétrable (GUEST_RETENTION_DAYS) : 30 jours → l'invité de 89 jours part aussi.
       await purge.runOnce(now, 30);
-      expect(await prisma.user.findUnique({ where: { id: fresh.user.id } })).toBeNull();
+      expect(
+        await prisma.user.findUnique({ where: { id: fresh.user.id } }),
+      ).toBeNull();
     });
 
     it('une requête authentifiée rafraîchit lastActiveAt (au plus une écriture par heure)', async () => {
       const guest = await createGuest();
       const old = new Date(Date.now() - 10 * DAY_MS);
-      await prisma.user.update({ where: { id: guest.user.id }, data: { lastActiveAt: old } });
-      await request(server()).get('/auth/me').set(bearer(guest.accessToken)).expect(200);
+      await prisma.user.update({
+        where: { id: guest.user.id },
+        data: { lastActiveAt: old },
+      });
+      await request(server())
+        .get('/auth/me')
+        .set(bearer(guest.accessToken))
+        .expect(200);
       await new Promise((r) => setTimeout(r, 200));
-      const row = await prisma.user.findUniqueOrThrow({ where: { id: guest.user.id } });
+      const row = await prisma.user.findUniqueOrThrow({
+        where: { id: guest.user.id },
+      });
       expect(Date.now() - row.lastActiveAt.getTime()).toBeLessThan(60_000);
     });
   });
@@ -541,12 +670,15 @@ describe('Mode invité (E2E)', () => {
     });
 
     it(`au-delà de ${GUEST_CREATION_LIMIT} invités par heure et par IP → 429`, async () => {
-      const srv = throttledApp.getHttpServer() as App;
+      const srv = httpServer(throttledApp) as App;
       for (let i = 0; i < GUEST_CREATION_LIMIT; i++) {
         const res = await request(srv).post('/auth/guest').send({}).expect(201);
         guestIds.push(auth(res).user.id);
       }
-      const denied = await request(srv).post('/auth/guest').send({}).expect(429);
+      const denied = await request(srv)
+        .post('/auth/guest')
+        .send({})
+        .expect(429);
       expect(denied.headers['retry-after']).toEqual(expect.any(String));
     });
   });

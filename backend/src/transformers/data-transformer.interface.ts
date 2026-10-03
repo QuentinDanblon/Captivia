@@ -33,63 +33,20 @@ export interface WikipediaData {
   extract?: string;
   extractHtml?: string;
   originalimage?: string;
-  terms?: Record<string, any>;
+  terms?: Record<string, unknown>;
   source: 'wikipedia';
   timestamp?: Date;
 }
 
 export interface WikidataData {
   id: string;
-  labels?: Record<string, any>;
-  descriptions?: Record<string, any>;
-  aliases?: Record<string, any>;
-  claims?: Record<string, any>;
-  sitelinks?: Record<string, any>;
+  labels?: Record<string, unknown>;
+  descriptions?: Record<string, unknown>;
+  aliases?: Record<string, unknown>;
+  claims?: Record<string, unknown>;
+  sitelinks?: Record<string, unknown>;
   source: 'wikidata';
   timestamp?: Date;
-}
-
-export interface ConservationStatus {
-  iucnStatus?: string;
-  citesStatus?: string;
-  berneStatus?: string;
-  cmsStatus?: string;
-  statusDescription?: string;
-  source: string;
-}
-
-export interface Classification {
-  family?: string;
-  genus?: string;
-  order?: string;
-  phylum?: string;
-  class?: string;
-  kingdom?: string;
-  scientificName?: string;
-  commonName?: string;
-  image?: string;
-  source: string;
-}
-
-export interface Description {
-  description?: string;
-  shortDescription?: string;
-  alias?: string;
-  source: string;
-}
-
-export interface Image {
-  image?: string;
-  license?: string;
-  caption?: string;
-  source: string;
-}
-
-export interface RelatedSpecies {
-  related?: string;
-  relatedLabel?: string;
-  relatedDescription?: string;
-  source: string;
 }
 
 export interface Distribution {
@@ -105,6 +62,10 @@ export interface Media {
   title: string;
   license: string;
   url: string;
+  /** Page source du média (fiche iNaturalist, Wikimedia Commons…). */
+  references?: string;
+  /** Type MIME (« image/jpeg »). */
+  format?: string;
 }
 
 export interface Metrics {
@@ -126,41 +87,10 @@ export interface TransformedVernacularResult {
   cachedAt?: Date;
 }
 
-export interface TransformedMediaResult {
-  results: Media[];
-  source: 'gbif' | 'cache' | 'multi';
-  cachedAt?: Date;
-}
-
-export interface TransformedDistributionResult {
-  results: Distribution[];
-  source: 'gbif' | 'cache' | 'multi';
-  cachedAt?: Date;
-}
-
-export interface TransformedMetricsResult {
-  data: Metrics;
-  source: 'gbif' | 'cache' | 'multi';
-  cachedAt?: Date;
-}
-
 export interface TransformedOccurrenceCountResult {
   count: number;
   limit: number;
   offset: number;
   source: 'gbif' | 'cache' | 'multi';
   cachedAt?: Date;
-}
-
-export interface MultiSourceResult {
-  gbif?: any;
-  wikipedia?: any;
-  wikidata?: any;
-  conservation?: any;
-  classification?: any;
-  description?: any;
-  images?: any;
-  related?: any;
-  source: 'multi';
-  timestamp: Date;
 }

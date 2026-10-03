@@ -1,15 +1,19 @@
 import { Link } from '@/i18n/navigation';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 import { LEGAL, LEGAL_ROUTES, contactMailto } from '@/lib/legal';
 import { BrandMark } from '@/components/ui/BrandMark';
 
 /**
- * Pied de page global (Server Component) : colophon du carnet — marque et une ligne de
- * description, liens légaux en colonnes, mention d'affiliation Amazon et copyright en mono.
+ * Pied de page global : colophon du carnet — marque et une ligne de
+ * description, liens légaux en colonnes et copyright en mono. Aucune mention d'affiliation : aucun lien
+ * affilié n'est affiché (elle accompagne les liens eux-mêmes, cf. magasin).
+ *
+ * Sans `'use client'` ni `async` : rendu côté serveur dans le layout `(marketing)`, mais aussi
+ * importable depuis `error.tsx` (composant client), d'où `useTranslations` plutôt que `getTranslations`.
  */
-export async function SiteFooter() {
-  const t = await getTranslations('footer');
-  const tc = await getTranslations('common');
+export function SiteFooter() {
+  const t = useTranslations('footer');
+  const tc = useTranslations('common');
   const mailto = contactMailto();
 
   const links: { label: string; path: string }[] = [
@@ -56,7 +60,6 @@ export async function SiteFooter() {
         </div>
 
         <div className="site-footer__colophon">
-          <p>{t('amazonAssociate')}</p>
           <p className="site-footer__legal">
             © {new Date().getFullYear()} {LEGAL.serviceName} · {t('tagline')}
           </p>
@@ -66,5 +69,5 @@ export async function SiteFooter() {
   );
 }
 
-/** Pied de page de la couche marketing (landing, pages légales). L'app n'en a pas. */
+/** Pied de page de la couche marketing (landing, pages légales, 404, erreurs). L'app n'en a pas. */
 export { SiteFooter as MarketingFooter };

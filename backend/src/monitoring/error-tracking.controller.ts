@@ -1,4 +1,13 @@
-import { Controller, Get, Delete, Query, Param, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Delete,
+  Query,
+  Param,
+  UseGuards,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ErrorTrackingService } from './error-tracking.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -49,15 +58,21 @@ export class ErrorTrackingController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async exportErrors(
     @Query('format') format: string = 'json',
-    @Query('days') days: string = '7'
+    @Query('days') days: string = '7',
   ) {
-    return await this.errorTrackingService.exportErrors(format as 'json' | 'csv', parseInt(days));
+    return await this.errorTrackingService.exportErrors(
+      format as 'json' | 'csv',
+      parseInt(days),
+    );
   }
 
   @Delete('reset')
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Reset error tracking' })
-  @ApiResponse({ status: 204, description: 'Error tracking reset successfully' })
+  @ApiResponse({
+    status: 204,
+    description: 'Error tracking reset successfully',
+  })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async resetErrorTracking() {
     await this.errorTrackingService.resetErrorTracking();

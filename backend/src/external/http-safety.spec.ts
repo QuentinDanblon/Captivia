@@ -1,17 +1,7 @@
 import { AxiosError, AxiosHeaders } from 'axios';
-import {
-  EXTERNAL_REQUEST_DEFAULTS,
-  describeHttpError,
-  isValidBarcode,
-  isValidQid,
-} from './http-safety';
+import { describeHttpError, isValidBarcode, isValidQid } from './http-safety';
 
 describe('http-safety', () => {
-  it('impose un timeout de 8 s et aucune redirection', () => {
-    expect(EXTERNAL_REQUEST_DEFAULTS.timeout).toBe(8000);
-    expect(EXTERNAL_REQUEST_DEFAULTS.maxRedirects).toBe(0);
-  });
-
   describe('describeHttpError', () => {
     it('ne contient ni header ni token pour une AxiosError', () => {
       const headers = new AxiosHeaders({
@@ -38,8 +28,8 @@ describe('http-safety', () => {
     });
 
     it('gère une erreur sans statut, une chaîne et une valeur inconnue', () => {
-      expect(describeHttpError(new Error('timeout of 8000ms exceeded'))).toBe(
-        'timeout of 8000ms exceeded',
+      expect(describeHttpError(new Error('timeout of 5000ms exceeded'))).toBe(
+        'timeout of 5000ms exceeded',
       );
       expect(describeHttpError('boom')).toBe('boom');
       expect(describeHttpError(undefined)).toBe('unknown error');

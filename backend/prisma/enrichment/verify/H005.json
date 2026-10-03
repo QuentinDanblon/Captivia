@@ -1,0 +1,1218 @@
+[
+  {
+    "speciesId": 104060633,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "omnivore",
+        "quote": "It is omnivorous but primarily eats fruit , invertebrates , other small animals, and bird eggs.",
+        "url": "https://en.wikipedia.org/wiki/South_American_coati"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "granulés/aliment sec chien + légumes",
+        "quote": "Feeding a good-quality dry dog food or omnivore pellet, supplemented with vegetables, helps minimize obesity problems that commonly result when frozen or canned diets are fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "régime à base de viande",
+        "quote": "Procyonids can be fed diets similar to those offered to small canids, or an adequate meat diet can be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "fruits, invertébrés, oeufs",
+        "quote": "It is omnivorous but primarily eats fruit , invertebrates , other small animals, and bird eggs.",
+        "url": "https://en.wikipedia.org/wiki/South_American_coati"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "régimes surgelés ou en conserve comme base",
+        "quote": "Feeding a good-quality dry dog food or omnivore pellet, supplemented with vegetables, helps minimize obesity problems that commonly result when frozen or canned diets are fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.dietType",
+        "value": "omnivore",
+        "quote": "It is omnivorous but primarily eats fruit , invertebrates , other small animals, and bird eggs.",
+        "url": "https://en.wikipedia.org/wiki/South_American_coati"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "granulés/aliment sec chien + légumes",
+        "quote": "Feeding a good-quality dry dog food or omnivore pellet, supplemented with vegetables, helps minimize obesity problems that commonly result when frozen or canned diets are fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "régime à base de viande",
+        "quote": "Procyonids can be fed diets similar to those offered to small canids, or an adequate meat diet can be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "fruits, invertébrés, oeufs",
+        "quote": "It is omnivorous but primarily eats fruit , invertebrates , other small animals, and bird eggs.",
+        "url": "https://en.wikipedia.org/wiki/South_American_coati"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "régimes surgelés ou en conserve comme base",
+        "quote": "Feeding a good-quality dry dog food or omnivore pellet, supplemented with vegetables, helps minimize obesity problems that commonly result when frozen or canned diets are fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      }
+    ]
+  },
+  {
+    "speciesId": 104060805,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Felid features are primarily those associated with eating and digestion , including tooth shape and facial portions of the skull, the tongue, and the digestive tract , typical of its exclusively carnivorous diet.",
+        "url": "https://en.wikipedia.org/wiki/Fossa_(animal)"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "lémuriens",
+        "quote": "Over 50% of its diet consists of lemurs , the endemic primates found on the island; tenrecs , rodents , lizards, birds, and other animals are also documented as prey.",
+        "url": "https://en.wikipedia.org/wiki/Fossa_(animal)"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "rongeurs, oiseaux, lézards",
+        "quote": "Over 50% of its diet consists of lemurs , the endemic primates found on the island; tenrecs , rodents , lizards, birds, and other animals are also documented as prey.",
+        "url": "https://en.wikipedia.org/wiki/Fossa_(animal)"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Felid features are primarily those associated with eating and digestion , including tooth shape and facial portions of the skull, the tongue, and the digestive tract , typical of its exclusively carnivorous diet.",
+        "url": "https://en.wikipedia.org/wiki/Fossa_(animal)"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "lémuriens",
+        "quote": "Over 50% of its diet consists of lemurs , the endemic primates found on the island; tenrecs , rodents , lizards, birds, and other animals are also documented as prey.",
+        "url": "https://en.wikipedia.org/wiki/Fossa_(animal)"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "rongeurs, oiseaux, lézards",
+        "quote": "Over 50% of its diet consists of lemurs , the endemic primates found on the island; tenrecs , rodents , lizards, birds, and other animals are also documented as prey.",
+        "url": "https://en.wikipedia.org/wiki/Fossa_(animal)"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      }
+    ]
+  },
+  {
+    "speciesId": 104060854,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Because wild felids are obligate carnivores, captive exotic felids are typically fed an exclusively carnivorous diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "régime complet du commerce",
+        "quote": "Most zoos in the US use nutritionally complete commercial diets to feed exotic felids, canids, mustelids, and viverrids rather than attempt to prepare diets in-house.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0].notes",
+        "value": "surgelé ou en conserve",
+        "quote": "Frozen and canned cat foods usually are more palatable than dry ones to exotic cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "souris, rats, poussins",
+        "quote": "Mice, rats, and chicks are frequently included in the diets of smaller cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "os avec viande 2x/semaine",
+        "quote": "All cats fed a soft diet should receive bones with some meat intact twice weekly.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "régime exclusivement mou",
+        "quote": "The soft, hamburger-like consistency of commercial diets can result in excessive calculus deposition on teeth and periodontal disease if hard or unprocessed items are not also provided.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "régime naturel",
+        "quote": "The caracal is a carnivore that typically preys upon birds, rodents , and other small mammals .",
+        "url": "https://en.wikipedia.org/wiki/Caracal"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Panleucopénie féline",
+        "quote": "FPLV is known to infect all wild and domestic members of the felid (cat) family worldwide.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "fièvre, déshydratation, douleurs abdominales",
+        "quote": "Other signs include: fever, loss of skin elasticity due to dehydration, abdominal pain, sternal recumbency",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "vomissements",
+        "quote": "vomiting (most common in cats )",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "chats non vaccinés",
+        "quote": "The infection is highly contagious among unvaccinated cats.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Rhinotrachéite virale féline",
+        "quote": "All members of the family Felidae are susceptible to FVR; in fact, FHV-1 has caused a fatal encephalitis in lions in Germany .",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].symptoms",
+        "value": "toux, éternuements, conjonctivite",
+        "quote": "Initial signs of FVR include coughing , sneezing , nasal discharge, conjunctivitis , and sometimes fever (up to 106 °F (41 °C) ) and loss of appetite.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "vaccin",
+        "quote": "There is a vaccine for FHV-1 available ( ATCvet code: QI06AA08 ( WHO ) , plus various combination vaccines), but although it limits or weakens the severity of the viral shedding , it does not prevent infection with FVR.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Leucose féline",
+        "quote": "In addition to domestic cats, some other members of Felidae are now threatened by FeLV",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "symptômes variés",
+        "quote": "The signs and symptoms of infection with feline leukemia virus are quite varied and include loss of appetite , poor coat condition, anisocoria (uneven pupils), infections of the skin, bladder, and respiratory tract",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "test ELISA",
+        "quote": "Testing for FeLV is possible with ELISA tests that look for viral antigens",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Panleucopénie féline chez le caracal captif",
+        "quote": "Subsequent to this disease outbreak, 12 cases of FPLV diagnosed on histology were confirmed by PCR in captive African black-footed cat, caracal, cheetah, lion, ocelot and serval.",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6238724"
+      },
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Because wild felids are obligate carnivores, captive exotic felids are typically fed an exclusively carnivorous diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "régime complet du commerce",
+        "quote": "Most zoos in the US use nutritionally complete commercial diets to feed exotic felids, canids, mustelids, and viverrids rather than attempt to prepare diets in-house.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0].notes",
+        "value": "surgelé ou en conserve",
+        "quote": "Frozen and canned cat foods usually are more palatable than dry ones to exotic cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "souris, rats, poussins",
+        "quote": "Mice, rats, and chicks are frequently included in the diets of smaller cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "os avec viande 2x/semaine",
+        "quote": "All cats fed a soft diet should receive bones with some meat intact twice weekly.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "régime exclusivement mou",
+        "quote": "The soft, hamburger-like consistency of commercial diets can result in excessive calculus deposition on teeth and periodontal disease if hard or unprocessed items are not also provided.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "régime naturel",
+        "quote": "The caracal is a carnivore that typically preys upon birds, rodents , and other small mammals .",
+        "url": "https://en.wikipedia.org/wiki/Caracal"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Panleucopénie féline",
+        "quote": "FPLV is known to infect all wild and domestic members of the felid (cat) family worldwide.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "fièvre, déshydratation, douleurs abdominales",
+        "quote": "Other signs include: fever, loss of skin elasticity due to dehydration, abdominal pain, sternal recumbency",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "vomissements",
+        "quote": "vomiting (most common in cats )",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "chats non vaccinés",
+        "quote": "The infection is highly contagious among unvaccinated cats.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Rhinotrachéite virale féline",
+        "quote": "All members of the family Felidae are susceptible to FVR; in fact, FHV-1 has caused a fatal encephalitis in lions in Germany .",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].symptoms",
+        "value": "toux, éternuements, conjonctivite",
+        "quote": "Initial signs of FVR include coughing , sneezing , nasal discharge, conjunctivitis , and sometimes fever (up to 106 °F (41 °C) ) and loss of appetite.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "vaccin",
+        "quote": "There is a vaccine for FHV-1 available ( ATCvet code: QI06AA08 ( WHO ) , plus various combination vaccines), but although it limits or weakens the severity of the viral shedding , it does not prevent infection with FVR.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Leucose féline",
+        "quote": "In addition to domestic cats, some other members of Felidae are now threatened by FeLV",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "symptômes variés",
+        "quote": "The signs and symptoms of infection with feline leukemia virus are quite varied and include loss of appetite , poor coat condition, anisocoria (uneven pupils), infections of the skin, bladder, and respiratory tract",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "test ELISA",
+        "quote": "Testing for FeLV is possible with ELISA tests that look for viral antigens",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Panleucopénie féline chez le caracal captif",
+        "quote": "Subsequent to this disease outbreak, 12 cases of FPLV diagnosed on histology were confirmed by PCR in captive African black-footed cat, caracal, cheetah, lion, ocelot and serval.",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6238724"
+      }
+    ]
+  },
+  {
+    "speciesId": 104060891,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Because wild felids are obligate carnivores, captive exotic felids are typically fed an exclusively carnivorous diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "régime complet du commerce",
+        "quote": "Most zoos in the US use nutritionally complete commercial diets to feed exotic felids, canids, mustelids, and viverrids rather than attempt to prepare diets in-house.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0].notes",
+        "value": "surgelé ou en conserve",
+        "quote": "Frozen and canned cat foods usually are more palatable than dry ones to exotic cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "souris, rats, poussins",
+        "quote": "Mice, rats, and chicks are frequently included in the diets of smaller cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "os avec viande 2x/semaine",
+        "quote": "All cats fed a soft diet should receive bones with some meat intact twice weekly.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "régime exclusivement mou",
+        "quote": "The soft, hamburger-like consistency of commercial diets can result in excessive calculus deposition on teeth and periodontal disease if hard or unprocessed items are not also provided.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "régime naturel",
+        "quote": "The jungle cat is unusual in that it is partially omnivorous: it eats fruits , especially in winter.",
+        "url": "https://en.wikipedia.org/wiki/Jungle_cat"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Panleucopénie féline",
+        "quote": "FPLV is known to infect all wild and domestic members of the felid (cat) family worldwide.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "fièvre, déshydratation, douleurs abdominales",
+        "quote": "Other signs include: fever, loss of skin elasticity due to dehydration, abdominal pain, sternal recumbency",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "vomissements",
+        "quote": "vomiting (most common in cats )",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "chats non vaccinés",
+        "quote": "The infection is highly contagious among unvaccinated cats.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Rhinotrachéite virale féline",
+        "quote": "All members of the family Felidae are susceptible to FVR; in fact, FHV-1 has caused a fatal encephalitis in lions in Germany .",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].symptoms",
+        "value": "toux, éternuements, conjonctivite",
+        "quote": "Initial signs of FVR include coughing , sneezing , nasal discharge, conjunctivitis , and sometimes fever (up to 106 °F (41 °C) ) and loss of appetite.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "vaccin",
+        "quote": "There is a vaccine for FHV-1 available ( ATCvet code: QI06AA08 ( WHO ) , plus various combination vaccines), but although it limits or weakens the severity of the viral shedding , it does not prevent infection with FVR.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Leucose féline",
+        "quote": "In addition to domestic cats, some other members of Felidae are now threatened by FeLV",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "symptômes variés",
+        "quote": "The signs and symptoms of infection with feline leukemia virus are quite varied and include loss of appetite , poor coat condition, anisocoria (uneven pupils), infections of the skin, bladder, and respiratory tract",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "test ELISA",
+        "quote": "Testing for FeLV is possible with ELISA tests that look for viral antigens",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Because wild felids are obligate carnivores, captive exotic felids are typically fed an exclusively carnivorous diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "régime complet du commerce",
+        "quote": "Most zoos in the US use nutritionally complete commercial diets to feed exotic felids, canids, mustelids, and viverrids rather than attempt to prepare diets in-house.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0].notes",
+        "value": "surgelé ou en conserve",
+        "quote": "Frozen and canned cat foods usually are more palatable than dry ones to exotic cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "souris, rats, poussins",
+        "quote": "Mice, rats, and chicks are frequently included in the diets of smaller cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "os avec viande 2x/semaine",
+        "quote": "All cats fed a soft diet should receive bones with some meat intact twice weekly.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "régime exclusivement mou",
+        "quote": "The soft, hamburger-like consistency of commercial diets can result in excessive calculus deposition on teeth and periodontal disease if hard or unprocessed items are not also provided.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "régime naturel",
+        "quote": "The jungle cat is unusual in that it is partially omnivorous: it eats fruits , especially in winter.",
+        "url": "https://en.wikipedia.org/wiki/Jungle_cat"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Panleucopénie féline",
+        "quote": "FPLV is known to infect all wild and domestic members of the felid (cat) family worldwide.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "fièvre, déshydratation, douleurs abdominales",
+        "quote": "Other signs include: fever, loss of skin elasticity due to dehydration, abdominal pain, sternal recumbency",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "vomissements",
+        "quote": "vomiting (most common in cats )",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "chats non vaccinés",
+        "quote": "The infection is highly contagious among unvaccinated cats.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Rhinotrachéite virale féline",
+        "quote": "All members of the family Felidae are susceptible to FVR; in fact, FHV-1 has caused a fatal encephalitis in lions in Germany .",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].symptoms",
+        "value": "toux, éternuements, conjonctivite",
+        "quote": "Initial signs of FVR include coughing , sneezing , nasal discharge, conjunctivitis , and sometimes fever (up to 106 °F (41 °C) ) and loss of appetite.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "vaccin",
+        "quote": "There is a vaccine for FHV-1 available ( ATCvet code: QI06AA08 ( WHO ) , plus various combination vaccines), but although it limits or weakens the severity of the viral shedding , it does not prevent infection with FVR.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Leucose féline",
+        "quote": "In addition to domestic cats, some other members of Felidae are now threatened by FeLV",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "symptômes variés",
+        "quote": "The signs and symptoms of infection with feline leukemia virus are quite varied and include loss of appetite , poor coat condition, anisocoria (uneven pupils), infections of the skin, bladder, and respiratory tract",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "test ELISA",
+        "quote": "Testing for FeLV is possible with ELISA tests that look for viral antigens",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      }
+    ]
+  },
+  {
+    "speciesId": 104060941,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Because wild felids are obligate carnivores, captive exotic felids are typically fed an exclusively carnivorous diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "régime complet du commerce",
+        "quote": "Most zoos in the US use nutritionally complete commercial diets to feed exotic felids, canids, mustelids, and viverrids rather than attempt to prepare diets in-house.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0].notes",
+        "value": "surgelé ou en conserve",
+        "quote": "Frozen and canned cat foods usually are more palatable than dry ones to exotic cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "souris, rats, poussins",
+        "quote": "Mice, rats, and chicks are frequently included in the diets of smaller cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "os avec viande 2x/semaine",
+        "quote": "All cats fed a soft diet should receive bones with some meat intact twice weekly.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "régime exclusivement mou",
+        "quote": "The soft, hamburger-like consistency of commercial diets can result in excessive calculus deposition on teeth and periodontal disease if hard or unprocessed items are not also provided.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "régime naturel",
+        "quote": "It preys primarily on rodents , hares , other small mammals , birds , snakes , small lizards , insects , and occasionally frogs and fish .",
+        "url": "https://en.wikipedia.org/wiki/Geoffroy%27s_cat"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Panleucopénie féline",
+        "quote": "FPLV is known to infect all wild and domestic members of the felid (cat) family worldwide.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "fièvre, déshydratation, douleurs abdominales",
+        "quote": "Other signs include: fever, loss of skin elasticity due to dehydration, abdominal pain, sternal recumbency",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "vomissements",
+        "quote": "vomiting (most common in cats )",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "chats non vaccinés",
+        "quote": "The infection is highly contagious among unvaccinated cats.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Rhinotrachéite virale féline",
+        "quote": "All members of the family Felidae are susceptible to FVR; in fact, FHV-1 has caused a fatal encephalitis in lions in Germany .",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].symptoms",
+        "value": "toux, éternuements, conjonctivite",
+        "quote": "Initial signs of FVR include coughing , sneezing , nasal discharge, conjunctivitis , and sometimes fever (up to 106 °F (41 °C) ) and loss of appetite.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "vaccin",
+        "quote": "There is a vaccine for FHV-1 available ( ATCvet code: QI06AA08 ( WHO ) , plus various combination vaccines), but although it limits or weakens the severity of the viral shedding , it does not prevent infection with FVR.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Leucose féline",
+        "quote": "In addition to domestic cats, some other members of Felidae are now threatened by FeLV",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "symptômes variés",
+        "quote": "The signs and symptoms of infection with feline leukemia virus are quite varied and include loss of appetite , poor coat condition, anisocoria (uneven pupils), infections of the skin, bladder, and respiratory tract",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "test ELISA",
+        "quote": "Testing for FeLV is possible with ELISA tests that look for viral antigens",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Because wild felids are obligate carnivores, captive exotic felids are typically fed an exclusively carnivorous diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "régime complet du commerce",
+        "quote": "Most zoos in the US use nutritionally complete commercial diets to feed exotic felids, canids, mustelids, and viverrids rather than attempt to prepare diets in-house.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[0].notes",
+        "value": "surgelé ou en conserve",
+        "quote": "Frozen and canned cat foods usually are more palatable than dry ones to exotic cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "souris, rats, poussins",
+        "quote": "Mice, rats, and chicks are frequently included in the diets of smaller cats.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "os avec viande 2x/semaine",
+        "quote": "All cats fed a soft diet should receive bones with some meat intact twice weekly.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "porc cru",
+        "quote": "Fresh and thawed pig meat may contain a virus that can cause pseudorabies (Aujeszky disease) when it is fed raw.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "viande contaminée",
+        "quote": "Contaminated meat or meat adulterated with medicines or other drugs and bacteria should not be fed.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "régime exclusivement mou",
+        "quote": "The soft, hamburger-like consistency of commercial diets can result in excessive calculus deposition on teeth and periodontal disease if hard or unprocessed items are not also provided.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Some of the differences in feeding strategies include (number of) fasting days, whole prey versus carcass versus processed meat feedings,",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "suppléments",
+        "quote": "A supplement containing, at a minimum, calcium, vitamin A, iodine, taurine, and some B vitamins should be added to the meat diet.",
+        "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "régime naturel",
+        "quote": "It preys primarily on rodents , hares , other small mammals , birds , snakes , small lizards , insects , and occasionally frogs and fish .",
+        "url": "https://en.wikipedia.org/wiki/Geoffroy%27s_cat"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Panleucopénie féline",
+        "quote": "FPLV is known to infect all wild and domestic members of the felid (cat) family worldwide.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "fièvre, déshydratation, douleurs abdominales",
+        "quote": "Other signs include: fever, loss of skin elasticity due to dehydration, abdominal pain, sternal recumbency",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "vomissements",
+        "quote": "vomiting (most common in cats )",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "chats non vaccinés",
+        "quote": "The infection is highly contagious among unvaccinated cats.",
+        "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Rhinotrachéite virale féline",
+        "quote": "All members of the family Felidae are susceptible to FVR; in fact, FHV-1 has caused a fatal encephalitis in lions in Germany .",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].symptoms",
+        "value": "toux, éternuements, conjonctivite",
+        "quote": "Initial signs of FVR include coughing , sneezing , nasal discharge, conjunctivitis , and sometimes fever (up to 106 °F (41 °C) ) and loss of appetite.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "vaccin",
+        "quote": "There is a vaccine for FHV-1 available ( ATCvet code: QI06AA08 ( WHO ) , plus various combination vaccines), but although it limits or weakens the severity of the viral shedding , it does not prevent infection with FVR.",
+        "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Leucose féline",
+        "quote": "In addition to domestic cats, some other members of Felidae are now threatened by FeLV",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "symptômes variés",
+        "quote": "The signs and symptoms of infection with feline leukemia virus are quite varied and include loss of appetite , poor coat condition, anisocoria (uneven pupils), infections of the skin, bladder, and respiratory tract",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "test ELISA",
+        "quote": "Testing for FeLV is possible with ELISA tests that look for viral antigens",
+        "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus"
+      }
+    ]
+  },
+  {
+    "speciesId": 104061079,
+    "evidence": [
+      {
+        "field": "health.diseases[0]",
+        "value": "Parvovirose",
+        "quote": "Fishing cats are susceptible to carnivore protoparvovirus , a disease known to kill them. This disease significantly damages the kidney , spleen and gastrointestinal tract of the body.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "reins, rate, tube digestif",
+        "quote": "Fishing cats are susceptible to carnivore protoparvovirus , a disease known to kill them. This disease significantly damages the kidney , spleen and gastrointestinal tract of the body.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Toxocara cati",
+        "quote": "Additionally, in a 2012 case study, Toxocara cati was reported as the cause of death of young captive fishing cats.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Maladie de Carré",
+        "quote": "The fishing cat is also vulnerable to diseases and medical conditions such as feline hemoplasmas , transitional cell carcinoma and canine distemper virus.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      },
+      {
+        "field": "health.diseases[3]",
+        "value": "Hémoplasmoses",
+        "quote": "The fishing cat is also vulnerable to diseases and medical conditions such as feline hemoplasmas , transitional cell carcinoma and canine distemper virus.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Parvovirose",
+        "quote": "Fishing cats are susceptible to carnivore protoparvovirus , a disease known to kill them. This disease significantly damages the kidney , spleen and gastrointestinal tract of the body.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "reins, rate, tube digestif",
+        "quote": "Fishing cats are susceptible to carnivore protoparvovirus , a disease known to kill them. This disease significantly damages the kidney , spleen and gastrointestinal tract of the body.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Toxocara cati",
+        "quote": "Additionally, in a 2012 case study, Toxocara cati was reported as the cause of death of young captive fishing cats.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Maladie de Carré",
+        "quote": "The fishing cat is also vulnerable to diseases and medical conditions such as feline hemoplasmas , transitional cell carcinoma and canine distemper virus.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      },
+      {
+        "field": "health.diseases[3]",
+        "value": "Hémoplasmoses",
+        "quote": "The fishing cat is also vulnerable to diseases and medical conditions such as feline hemoplasmas , transitional cell carcinoma and canine distemper virus.",
+        "url": "https://en.wikipedia.org/wiki/Fishing_cat"
+      }
+    ]
+  },
+  {
+    "speciesId": 104069250,
+    "evidence": [
+      {
+        "field": "health.diseases[0]",
+        "value": "Tuberculose",
+        "quote": "Mammalian tuberculosis remains a disease of major concern in zoos because of the zoonotic nature of the pathogen. It is most often found on routine screening rather than as clinical cases in primates, hoofstock, and elephants.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "test intradermique à la tuberculine chez les bovidés",
+        "quote": "Intradermal tuberculin testing is the basis of testing for hoofstock of the family Bovidae (and Giraffidae, if they are tested) and primates.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Excès de croissance des sabots",
+        "quote": "The hooves of exotic hoofstock are designed for movement and substrate that may not always be perfectly mimicked in a captive setting; therefore, hoof overgrowth may occur.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "parage régulier",
+        "quote": "The skills of an equine farrier may prove useful in management of hoof-related issues, and establishment of routine trimming schedules are recommended to avoid excessive overgrowth.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Ostéomyélite mandibulaire",
+        "quote": "Mandibular osteomyelitis ( lumpy jaw ) is a common problem of small ruminants and macropods (wallabies and kangaroos).",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "gonflement facial, odeur",
+        "quote": "It can occur secondarily to coarse feed, oral trauma, or dental disease. Animals generally present with localized facial swelling and a foul oral odor or discharge.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "aliments grossiers, traumatismes, maladie dentaire",
+        "quote": "It can occur secondarily to coarse feed, oral trauma, or dental disease. Animals generally present with localized facial swelling and a foul oral odor or discharge.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Tuberculose",
+        "quote": "Mammalian tuberculosis remains a disease of major concern in zoos because of the zoonotic nature of the pathogen. It is most often found on routine screening rather than as clinical cases in primates, hoofstock, and elephants.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "test intradermique à la tuberculine chez les bovidés",
+        "quote": "Intradermal tuberculin testing is the basis of testing for hoofstock of the family Bovidae (and Giraffidae, if they are tested) and primates.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Excès de croissance des sabots",
+        "quote": "The hooves of exotic hoofstock are designed for movement and substrate that may not always be perfectly mimicked in a captive setting; therefore, hoof overgrowth may occur.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "parage régulier",
+        "quote": "The skills of an equine farrier may prove useful in management of hoof-related issues, and establishment of routine trimming schedules are recommended to avoid excessive overgrowth.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Ostéomyélite mandibulaire",
+        "quote": "Mandibular osteomyelitis ( lumpy jaw ) is a common problem of small ruminants and macropods (wallabies and kangaroos).",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "gonflement facial, odeur",
+        "quote": "It can occur secondarily to coarse feed, oral trauma, or dental disease. Animals generally present with localized facial swelling and a foul oral odor or discharge.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "aliments grossiers, traumatismes, maladie dentaire",
+        "quote": "It can occur secondarily to coarse feed, oral trauma, or dental disease. Animals generally present with localized facial swelling and a foul oral odor or discharge.",
+        "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000108,
+    "evidence": []
+  },
+  {
+    "speciesId": 2000000151,
+    "evidence": []
+  },
+  {
+    "speciesId": 2000000152,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "origine région du fleuve Amour, Russie",
+        "quote": "These rare cats originate in the Amur River region of Russia, which is situated in the Amur Forest.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      },
+      {
+        "field": "description",
+        "value": "croisement possible avec chats domestiques",
+        "quote": "It is possible that Ussuri cats are the result of an Amur leopard or an Amur Forest cat mating with domestic cats.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      },
+      {
+        "field": "description",
+        "value": "non reconnue",
+        "quote": "As one of the world's rarest cat breeds, The Ussuri is not formally recognized by any cat Association.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      },
+      {
+        "field": "description",
+        "value": "poids 11-15 livres",
+        "quote": "A fully grown Ussuri cat might weigh between 11-15 pounds or more and range in height anywhere from about 9\"- 11\" inches tall.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      },
+      {
+        "field": "description",
+        "value": "très rare",
+        "quote": "Ussuri cats are rare indeed - in fact, this unusual cat is among the rarest breeds on the planet.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      },
+      {
+        "field": "description",
+        "value": "origine région du fleuve Amour, Russie",
+        "quote": "These rare cats originate in the Amur River region of Russia, which is situated in the Amur Forest.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      },
+      {
+        "field": "description",
+        "value": "croisement possible avec chats domestiques",
+        "quote": "It is possible that Ussuri cats are the result of an Amur leopard or an Amur Forest cat mating with domestic cats.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      },
+      {
+        "field": "description",
+        "value": "non reconnue",
+        "quote": "As one of the world's rarest cat breeds, The Ussuri is not formally recognized by any cat Association.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      },
+      {
+        "field": "description",
+        "value": "poids 11-15 livres",
+        "quote": "A fully grown Ussuri cat might weigh between 11-15 pounds or more and range in height anywhere from about 9\"- 11\" inches tall.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      },
+      {
+        "field": "description",
+        "value": "très rare",
+        "quote": "Ussuri cats are rare indeed - in fact, this unusual cat is among the rarest breeds on the planet.",
+        "url": "https://cats.com/cat-breeds/ussuri"
+      }
+    ]
+  },
+  {
+    "speciesId": 2000000162,
+    "evidence": []
+  }
+]

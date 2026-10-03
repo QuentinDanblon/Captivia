@@ -19,7 +19,7 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { HealthContentService } from './health-content.service';
-import { HealthQueryDto } from './dto/health-query.dto';
+import { HealthQueryDto, PubMedSearchDto } from './dto/health-query.dto';
 import { CreateHealthContentDto } from './dto/health-content.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { OperatorGuard } from '../common/guards/operator.guard';
@@ -35,9 +35,21 @@ export class HealthContentController {
     description:
       'Returns health information including diseases, symptoms, prevention, and PubMed references',
   })
-  @ApiParam({ name: 'speciesId', description: 'GBIF species key', type: Number })
-  @ApiQuery({ name: 'disease', required: false, description: 'Filter by specific disease' })
-  @ApiQuery({ name: 'locale', required: false, description: 'Language code (fr, en, etc.)' })
+  @ApiParam({
+    name: 'speciesId',
+    description: 'GBIF species key',
+    type: Number,
+  })
+  @ApiQuery({
+    name: 'disease',
+    required: false,
+    description: 'Filter by specific disease',
+  })
+  @ApiQuery({
+    name: 'locale',
+    required: false,
+    description: 'Language code (fr, en, etc.)',
+  })
   @ApiResponse({ status: 200, description: 'Health information retrieved' })
   async getSpeciesHealth(
     @Param('speciesId', ParseIntPipe) speciesId: number,
@@ -57,7 +69,11 @@ export class HealthContentController {
     summary: 'Create or update health content (admin only)',
     description: 'Add or update editorial health content for a species',
   })
-  @ApiParam({ name: 'speciesId', description: 'GBIF species key', type: Number })
+  @ApiParam({
+    name: 'speciesId',
+    description: 'GBIF species key',
+    type: Number,
+  })
   @ApiResponse({ status: 201, description: 'Health content created/updated' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async createOrUpdateHealthContent(
@@ -85,12 +101,14 @@ export class PubMedController {
     description: 'Search for veterinary and animal health articles in PubMed',
   })
   @ApiQuery({ name: 'q', description: 'Search query' })
-  @ApiQuery({ name: 'limit', required: false, description: 'Maximum results (default: 10)' })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Maximum results (default: 10)',
+  })
   @ApiResponse({ status: 200, description: 'PubMed search results' })
-  async searchPubMed(
-    @Query('q') query: string,
-    @Query('limit') limit?: number,
-  ): Promise<unknown[]> {
-    return this.healthContentService.searchPubMed(query, limit || 10);
+  @ApiResponse({ status: 503, description: 'PubMed temporarily unavailable' })
+  async searchPubMed(@Query() query: PubMedSearchDto): Promise<unknown[]> {
+    return this.healthContentService.searchPubMed(query.q, query.limit || 10);
   }
 }

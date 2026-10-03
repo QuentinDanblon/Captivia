@@ -44,7 +44,10 @@ export class AnimalsController {
     status: 403,
     description: 'Animal limit reached (premium required)',
   })
-  async create(@Request() req, @Body() createAnimalDto: CreateAnimalDto) {
+  async create(
+    @Request() req: { user: { id: string } },
+    @Body() createAnimalDto: CreateAnimalDto,
+  ) {
     return this.animalsService.create(req.user.id, createAnimalDto);
   }
 
@@ -55,7 +58,10 @@ export class AnimalsController {
   })
   @ApiResponse({ status: 200, description: 'Animals list' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async findAll(@Request() req, @Query() page: PaginationQueryDto) {
+  async findAll(
+    @Request() req: { user: { id: string } },
+    @Query() page: PaginationQueryDto,
+  ) {
     return this.animalsService.findAll(req.user.id, page);
   }
 
@@ -127,7 +133,7 @@ export class AnimalsController {
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
   async getOffspring(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('id') id: string,
     @Query() page: PaginationQueryDto,
   ) {
@@ -144,7 +150,10 @@ export class AnimalsController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
-  async findOne(@Request() req, @Param('id') id: string) {
+  async findOne(
+    @Request() req: { user: { id: string } },
+    @Param('id') id: string,
+  ) {
     return this.animalsService.findOne(id, req.user.id);
   }
 
@@ -159,7 +168,7 @@ export class AnimalsController {
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
   async update(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Param('id') id: string,
     @Body() updateAnimalDto: UpdateAnimalDto,
   ) {
@@ -176,7 +185,10 @@ export class AnimalsController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Not your animal' })
   @ApiResponse({ status: 404, description: 'Animal not found' })
-  async remove(@Request() req, @Param('id') id: string) {
+  async remove(
+    @Request() req: { user: { id: string } },
+    @Param('id') id: string,
+  ) {
     return this.animalsService.remove(id, req.user.id);
   }
 }

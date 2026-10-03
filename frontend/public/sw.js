@@ -19,7 +19,7 @@ function readPayload(event) {
 }
 
 // URL ouverte au clic : préfixe de locale si fourni dans la charge utile (data.locale,
-// ex. "fr", "pt-BR"), sinon sans préfixe ; fiche de l'animal si animalId est présent.
+// ex. "fr", "pt"), sinon sans préfixe ; fiche de l'animal si animalId est présent.
 function targetUrl(data) {
   const prefix = /^[a-z]{2}(-[A-Za-z]{2})?$/.test((data && data.locale) || '') ? '/' + data.locale : '';
   return data && data.animalId

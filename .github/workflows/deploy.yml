@@ -39,6 +39,20 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          # Normalisation tolérante d'un copier-coller depuis la console Neon (sans jamais
+          # afficher la valeur) : espaces/retours à la ligne, préfixe « psql », guillemets.
+          url="$(printf '%s' "$DATABASE_URL" | tr -d '\r\n' | sed -E "s/^[[:space:]]+|[[:space:]]+$//g; s/^psql[[:space:]]+//; s/^['\"]+|['\"]+$//g")"
+          echo "::add-mask::$url"
+          case "$url" in
+            postgresql://*|postgres://*) ;;
+            *)
+              echo "::error title=NEON_DATABASE_URL_DIRECT invalide::La valeur du secret doit commencer par postgresql:// (longueur ${#url} caractères, contient 'postgresql://' : $(case "$url" in *postgresql://*) echo oui;; *) echo non;; esac)). Dans Neon → Connect, copiez la chaîne de connexion seule (pas la commande psql), sans guillemets."
+              exit 1;;
+          esac
+          case "$url" in
+            *-pooler.*) echo "::warning title=URL poolée::NEON_DATABASE_URL_DIRECT pointe vers l'hôte « -pooler » : utilisez l'URL DIRECTE (Connection pooling désactivé) pour les migrations.";;
+          esac
+          echo "NEON_URL=$url" >> "$GITHUB_ENV"
           echo "skip=false" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
         if: steps.guard.outputs.skip != 'true'
@@ -55,8 +69,8 @@ jobs:
       - name: Prisma migrate deploy
         if: steps.guard.outputs.skip != 'true'
         working-directory: backend
-        run: npx prisma migrate deploy
+        run: DATABASE_URL="$NEON_URL" npx prisma migrate deploy
       - name: Seed production (idempotent)
         if: steps.guard.outputs.skip != 'true'
         working-directory: backend
-        run: npx prisma db seed
+        run: DATABASE_URL="$NEON_URL" npx prisma db seed

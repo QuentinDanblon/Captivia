@@ -827,7 +827,7 @@ export async function main() {
   // Ne crée que les sections manquantes, validées et sourcées (jamais d'écrasement).
   console.log('📚 Seeding enrichment (sections manquantes sourcées)...');
   const enrichment = await importEnrichment(prisma);
-  console.log(`✅ Enrichment: ${enrichment.files} lots, ${enrichment.entries} fiches,`, enrichment.created);
+  console.log(`✅ Enrichment: ${enrichment.files} lots, ${enrichment.entries} fiches, ${enrichment.reviewed} datées (lastReviewedAt),`, enrichment.created);
   if (enrichment.skipped.length) {
     console.log(`  ⚠️  ${enrichment.skipped.length} section(s) ignorée(s) (invalides ou non sourcées)`);
   }

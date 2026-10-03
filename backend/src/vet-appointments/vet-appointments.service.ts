@@ -5,11 +5,7 @@ import {
   CreateVetAppointmentDto,
   UpdateVetAppointmentDto,
 } from './dto/vet-appointment.dto';
-import {
-  PaginationQueryDto,
-  toPage,
-} from '../common/dto/pagination-query.dto';
-
+import { PaginationQueryDto, toPage } from '../common/dto/pagination-query.dto';
 
 @Injectable()
 export class VetAppointmentsService {

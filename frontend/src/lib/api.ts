@@ -1,6 +1,7 @@
 import { API_URL } from './config';
 import type { CarnetExport } from './carnet';
 import { refreshAccessToken } from './session';
+import { notifyCareScheduled } from './care-events';
 
 const NETWORK_ERROR_MESSAGES = ['Failed to fetch', 'Load failed', 'NetworkError when attempting to fetch resource'];
 
@@ -344,6 +345,12 @@ export interface SubscriptionStatusView {
   manageUrl?: string | null;
 }
 
+/** Soin à rappeler créé : prévient l'app native (rappels de l'appareil, proposition des notifications). */
+function careCreated<T>(value: T): T {
+  notifyCareScheduled();
+  return value;
+}
+
 export const api = {
   // Species endpoints
   searchSpecies: async (
@@ -451,14 +458,6 @@ export const api = {
     return request<{ id: string; name: string; url: string; description?: string; categories: string[]; types: string[] }[]>(
       `${API_URL}/affiliate-stores${qs ? `?${qs}` : ''}`
     );
-  },
-
-  searchAmazon: async (query: string, category?: string, limit = 10) => {
-    const params = new URLSearchParams();
-    params.set('q', query);
-    if (category) params.set('category', category);
-    params.set('limit', limit.toString());
-    return request(`${API_URL}/amazon/search?${params.toString()}`);
   },
 
   // Animals endpoints
@@ -622,7 +621,7 @@ export const api = {
         },
         body: JSON.stringify(data),
       }
-    );
+    ).then(careCreated);
   },
 
   updateRoutine: async (
@@ -750,7 +749,7 @@ export const api = {
         },
         body: JSON.stringify(data),
       }
-    );
+    ).then(careCreated);
   },
 
   updateMedication: async (
@@ -814,7 +813,7 @@ export const api = {
         },
         body: JSON.stringify(data),
       }
-    );
+    ).then(careCreated);
   },
 
   updateVetAppointment: async (
@@ -942,7 +941,7 @@ export const api = {
         },
         body: JSON.stringify(data),
       }
-    );
+    ).then(careCreated);
   },
 
   updateVaccination: async (
@@ -1144,11 +1143,8 @@ export const api = {
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-      throw new Error(
-        (data as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`
-      );
+      // ApiError : l'écran de connexion traduit lui-même un 401 (identifiants refusés).
+      throw new ApiError(response.status, errorMessage(data, response));
     }
     return data;
   },

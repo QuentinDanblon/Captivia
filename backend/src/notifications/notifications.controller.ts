@@ -36,7 +36,10 @@ export class NotificationsController {
   })
   @ApiResponse({ status: 201, description: 'Subscription created' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async subscribe(@Request() req, @Body() dto: PushSubscriptionDto) {
+  async subscribe(
+    @Request() req: { user: { id: string } },
+    @Body() dto: PushSubscriptionDto,
+  ) {
     return this.notificationsService.subscribeToPush(req.user.id, dto);
   }
 
@@ -47,7 +50,10 @@ export class NotificationsController {
   })
   @ApiResponse({ status: 200, description: 'Subscription removed' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async unsubscribe(@Request() req, @Body() dto: UnsubscribePushDto) {
+  async unsubscribe(
+    @Request() req: { user: { id: string } },
+    @Body() dto: UnsubscribePushDto,
+  ) {
     return this.notificationsService.unsubscribeFromPush(
       req.user.id,
       dto.endpoint,
@@ -61,7 +67,7 @@ export class NotificationsController {
   })
   @ApiResponse({ status: 200, description: 'Subscriptions list' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getSubscriptions(@Request() req) {
+  async getSubscriptions(@Request() req: { user: { id: string } }) {
     return this.notificationsService.getUserSubscriptions(req.user.id);
   }
 
@@ -72,7 +78,7 @@ export class NotificationsController {
   })
   @ApiResponse({ status: 200, description: 'Notification preferences' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getPreferences(@Request() req) {
+  async getPreferences(@Request() req: { user: { id: string } }) {
     return this.notificationsService.getNotificationPreferences(req.user.id);
   }
 
@@ -84,7 +90,7 @@ export class NotificationsController {
   @ApiResponse({ status: 200, description: 'Preferences updated' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async updatePreferences(
-    @Request() req,
+    @Request() req: { user: { id: string } },
     @Body() dto: UpdateNotificationPreferencesDto,
   ) {
     return this.notificationsService.updateNotificationPreferences(
@@ -101,7 +107,7 @@ export class NotificationsController {
   })
   @ApiResponse({ status: 201, description: '{ sent: boolean }' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async sendTestNotification(@Request() req) {
+  async sendTestNotification(@Request() req: { user: { id: string } }) {
     return this.notificationsService.sendNotification(req.user.id, {
       title: 'Test Captivia',
       body: 'Ceci est une notification de test',

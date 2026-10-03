@@ -1,0 +1,629 @@
+[
+ {
+  "speciesId": 2000000169,
+  "evidence": []
+ },
+ {
+  "speciesId": 2000000188,
+  "evidence": []
+ },
+ {
+  "speciesId": 2493661,
+  "evidence": [
+   {
+    "field": "reproduction.incubationDays",
+    "value": 12,
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.litterSizeMin",
+    "value": 4,
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.litterSizeMax",
+    "value": 6,
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "couvaison par les deux adultes",
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "nid avec tube d'entrée",
+    "quote": "The lavender variety builds nests with a downward facing entrance tube and even a “cock’s nest” on top decorated with feathers and droppings to deter predators.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "agressivité en période de reproduction",
+    "quote": "During breeding season, waxbills can become aggressive and territorial around their nest site.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.incubationDays",
+    "value": 12,
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.litterSizeMin",
+    "value": 4,
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.litterSizeMax",
+    "value": 6,
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "couvaison par les deux adultes",
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "nid avec tube d'entrée",
+    "quote": "The lavender variety builds nests with a downward facing entrance tube and even a “cock’s nest” on top decorated with feathers and droppings to deter predators.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "agressivité en période de reproduction",
+    "quote": "During breeding season, waxbills can become aggressive and territorial around their nest site.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.incubationDays",
+    "value": 12,
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.litterSizeMin",
+    "value": 4,
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.litterSizeMax",
+    "value": 6,
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "couvaison par les deux adultes",
+    "quote": "Both adults incubate the 4 to 6 eggs for 12 to 15 days while dining on insects like waxmoth larvae, aphids, and spiders.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "nid avec tube d'entrée",
+    "quote": "The lavender variety builds nests with a downward facing entrance tube and even a “cock’s nest” on top decorated with feathers and droppings to deter predators.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "agressivité en période de reproduction",
+    "quote": "During breeding season, waxbills can become aggressive and territorial around their nest site.",
+    "url": "https://animals.sandiegozoo.org/node/291"
+   }
+  ]
+ },
+ {
+  "speciesId": 2495134,
+  "evidence": [],
+  "nullNotes": {
+   "feeding": "retiré par le coordinateur : aliments à éviter extrapolés d'une liste pour oiseaux de compagnie, non spécifique aux ratites"
+  }
+ },
+ {
+  "speciesId": 2498387,
+  "evidence": []
+ },
+ {
+  "speciesId": 5959092,
+  "evidence": [
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Most medium to large raptors consume whole vertebrate prey.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "souris et rats adultes",
+    "quote": "The best foods for birds of prey are mature mice and rats, because they contain a more complete nutrient profile than many other prey items; however, day-old chicks and other whole birds or mammal species also are adequate.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "poussins d'un jour",
+    "quote": "Owls should be fed day-old chicks, rats, or mice daily.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[1].notes",
+    "value": "ne pas retirer le jaune",
+    "quote": "Although breeders regularly remove the egg yolk sac before feeding because it can cause hygienic problems when it breaks, the egg yolk of day-old chicks should not be removed when fed.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[2]",
+    "value": "cailles et pigeons",
+    "quote": "Commonly fed items include mice, rats, day-old chicks, quail, and pigeons, depending on the raptor species.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "animaux sauvages",
+    "quote": "Feeding animals from the wild (eg, rats, pigeons, rabbits) is not advised, because these animals carry potential diseases, toxins, and poisons.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "proies à gros os",
+    "quote": "Prey with relatively large bones must be avoided because of the potential to cause obstruction in the gizzard, which prevents casting (regurgitation of the undigestible parts of prey).",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.foodsToAvoid[2]",
+    "value": "poussins sans jaune",
+    "quote": "Although breeders regularly remove the egg yolk sac before feeding because it can cause hygienic problems when it breaks, the egg yolk of day-old chicks should not be removed when fed.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "daily",
+    "quote": "Owls should be fed day-old chicks, rats, or mice daily.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "supplément vitamines/minéraux",
+    "quote": "Although whole prey, including organs, should be a complete, nutrient-sufficient feed, adding a small amount of a balanced vitamin and mineral supplement is advised, especially when birds are under stress.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "décongélation",
+    "quote": "Food items should not be thawed in warm water or they may grow undesirable bacteria; instead, food items should be thawed slowly in a refrigerator.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Most medium to large raptors consume whole vertebrate prey.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "souris et rats adultes",
+    "quote": "The best foods for birds of prey are mature mice and rats, because they contain a more complete nutrient profile than many other prey items; however, day-old chicks and other whole birds or mammal species also are adequate.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "poussins d'un jour",
+    "quote": "Owls should be fed day-old chicks, rats, or mice daily.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[1].notes",
+    "value": "ne pas retirer le jaune",
+    "quote": "Although breeders regularly remove the egg yolk sac before feeding because it can cause hygienic problems when it breaks, the egg yolk of day-old chicks should not be removed when fed.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[2]",
+    "value": "cailles et pigeons",
+    "quote": "Commonly fed items include mice, rats, day-old chicks, quail, and pigeons, depending on the raptor species.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "animaux sauvages",
+    "quote": "Feeding animals from the wild (eg, rats, pigeons, rabbits) is not advised, because these animals carry potential diseases, toxins, and poisons.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "proies à gros os",
+    "quote": "Prey with relatively large bones must be avoided because of the potential to cause obstruction in the gizzard, which prevents casting (regurgitation of the undigestible parts of prey).",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.foodsToAvoid[2]",
+    "value": "poussins sans jaune",
+    "quote": "Although breeders regularly remove the egg yolk sac before feeding because it can cause hygienic problems when it breaks, the egg yolk of day-old chicks should not be removed when fed.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "daily",
+    "quote": "Owls should be fed day-old chicks, rats, or mice daily.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "supplément vitamines/minéraux",
+    "quote": "Although whole prey, including organs, should be a complete, nutrient-sufficient feed, adding a small amount of a balanced vitamin and mineral supplement is advised, especially when birds are under stress.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "décongélation",
+    "quote": "Food items should not be thawed in warm water or they may grow undesirable bacteria; instead, food items should be thawed slowly in a refrigerator.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.dietType",
+    "value": "carnivore",
+    "quote": "Most medium to large raptors consume whole vertebrate prey.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[0]",
+    "value": "souris et rats adultes",
+    "quote": "The best foods for birds of prey are mature mice and rats, because they contain a more complete nutrient profile than many other prey items; however, day-old chicks and other whole birds or mammal species also are adequate.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[1]",
+    "value": "poussins d'un jour",
+    "quote": "Owls should be fed day-old chicks, rats, or mice daily.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[1].notes",
+    "value": "ne pas retirer le jaune",
+    "quote": "Although breeders regularly remove the egg yolk sac before feeding because it can cause hygienic problems when it breaks, the egg yolk of day-old chicks should not be removed when fed.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.recommendedFoods[2]",
+    "value": "cailles et pigeons",
+    "quote": "Commonly fed items include mice, rats, day-old chicks, quail, and pigeons, depending on the raptor species.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.foodsToAvoid[0]",
+    "value": "animaux sauvages",
+    "quote": "Feeding animals from the wild (eg, rats, pigeons, rabbits) is not advised, because these animals carry potential diseases, toxins, and poisons.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.foodsToAvoid[1]",
+    "value": "proies à gros os",
+    "quote": "Prey with relatively large bones must be avoided because of the potential to cause obstruction in the gizzard, which prevents casting (regurgitation of the undigestible parts of prey).",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.foodsToAvoid[2]",
+    "value": "poussins sans jaune",
+    "quote": "Although breeders regularly remove the egg yolk sac before feeding because it can cause hygienic problems when it breaks, the egg yolk of day-old chicks should not be removed when fed.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.mealFrequency",
+    "value": "daily",
+    "quote": "Owls should be fed day-old chicks, rats, or mice daily.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "supplément vitamines/minéraux",
+    "quote": "Although whole prey, including organs, should be a complete, nutrient-sufficient feed, adding a small amount of a balanced vitamin and mineral supplement is advised, especially when birds are under stress.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   },
+   {
+    "field": "feeding.specificNeeds",
+    "value": "décongélation",
+    "quote": "Food items should not be thawed in warm water or they may grow undesirable bacteria; instead, food items should be thawed slowly in a refrigerator.",
+    "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors"
+   }
+  ]
+ },
+ {
+  "speciesId": 104128782,
+  "evidence": []
+ },
+ {
+  "speciesId": 308455619,
+  "evidence": [
+   {
+    "field": "health.diseases[0]",
+    "value": "Aile d'ange",
+    "quote": "The term “angel wing” refers to carpal valgus deformity, a not uncommon condition where a bird’s wing (or wings) droops and then rotates outward.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "excès protéines/glucides",
+    "quote": "While there are a number of factors that may contribute to the development of angel wing, nutritional factors, namely high levels of protein and carbohydrates, are a common cause.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "vétérinaire dès les premiers signes",
+    "quote": "If a resident starts showing signs of angel wing, be sure to consult with your veterinarian immediately, both to determine if the condition is correctable and also to determine the underlying cause.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Aspergillose",
+    "quote": "Aspergillosis is a non-contagious fungal disease that typically manifests as respiratory illness in birds.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "signes respiratoires",
+    "quote": "Signs of aspergillosis include open-mouth breathing, labored breathing, tail bobbing, gasping, and an elevated respiratory rate.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "ventilation, litière, nourriture moisie",
+    "quote": "Poor ventilation, unsanitary conditions, wet bedding, moldy food, and warm, humid conditions increase the risk of aspergillosis.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "contacter le vétérinaire",
+    "quote": "Be sure to contact your veterinarian if you suspect aspergillosis.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parvovirose de l'oie",
+    "quote": "Parvovirus of waterfowl is an infectious disease causing oculonasal exudates, watery diarrhea, and high mortality in young goslings and stunted growth and feather abnormalities in older goslings.",
+    "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "écoulements oculo-nasaux, diarrhée",
+    "quote": "Parvovirus of waterfowl is an infectious disease causing oculonasal exudates, watery diarrhea, and high mortality in young goslings and stunted growth and feather abnormalities in older goslings.",
+    "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "vaccination",
+    "quote": "No treatment is effective. Vaccination may prevent overt disease.",
+    "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl"
+   },
+   {
+    "field": "health.diseases[0]",
+    "value": "Aile d'ange",
+    "quote": "The term “angel wing” refers to carpal valgus deformity, a not uncommon condition where a bird’s wing (or wings) droops and then rotates outward.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "excès protéines/glucides",
+    "quote": "While there are a number of factors that may contribute to the development of angel wing, nutritional factors, namely high levels of protein and carbohydrates, are a common cause.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "vétérinaire dès les premiers signes",
+    "quote": "If a resident starts showing signs of angel wing, be sure to consult with your veterinarian immediately, both to determine if the condition is correctable and also to determine the underlying cause.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Aspergillose",
+    "quote": "Aspergillosis is a non-contagious fungal disease that typically manifests as respiratory illness in birds.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "signes respiratoires",
+    "quote": "Signs of aspergillosis include open-mouth breathing, labored breathing, tail bobbing, gasping, and an elevated respiratory rate.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "ventilation, litière, nourriture moisie",
+    "quote": "Poor ventilation, unsanitary conditions, wet bedding, moldy food, and warm, humid conditions increase the risk of aspergillosis.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "contacter le vétérinaire",
+    "quote": "Be sure to contact your veterinarian if you suspect aspergillosis.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parvovirose de l'oie",
+    "quote": "Parvovirus of waterfowl is an infectious disease causing oculonasal exudates, watery diarrhea, and high mortality in young goslings and stunted growth and feather abnormalities in older goslings.",
+    "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "écoulements oculo-nasaux, diarrhée",
+    "quote": "Parvovirus of waterfowl is an infectious disease causing oculonasal exudates, watery diarrhea, and high mortality in young goslings and stunted growth and feather abnormalities in older goslings.",
+    "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "vaccination",
+    "quote": "No treatment is effective. Vaccination may prevent overt disease.",
+    "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl"
+   },
+   {
+    "field": "health.diseases[0]",
+    "value": "Aile d'ange",
+    "quote": "The term “angel wing” refers to carpal valgus deformity, a not uncommon condition where a bird’s wing (or wings) droops and then rotates outward.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[0].prevention",
+    "value": "excès protéines/glucides",
+    "quote": "While there are a number of factors that may contribute to the development of angel wing, nutritional factors, namely high levels of protein and carbohydrates, are a common cause.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[0].whenToConsult",
+    "value": "vétérinaire dès les premiers signes",
+    "quote": "If a resident starts showing signs of angel wing, be sure to consult with your veterinarian immediately, both to determine if the condition is correctable and also to determine the underlying cause.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1]",
+    "value": "Aspergillose",
+    "quote": "Aspergillosis is a non-contagious fungal disease that typically manifests as respiratory illness in birds.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1].symptoms",
+    "value": "signes respiratoires",
+    "quote": "Signs of aspergillosis include open-mouth breathing, labored breathing, tail bobbing, gasping, and an elevated respiratory rate.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1].prevention",
+    "value": "ventilation, litière, nourriture moisie",
+    "quote": "Poor ventilation, unsanitary conditions, wet bedding, moldy food, and warm, humid conditions increase the risk of aspergillosis.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[1].whenToConsult",
+    "value": "contacter le vétérinaire",
+    "quote": "Be sure to contact your veterinarian if you suspect aspergillosis.",
+    "url": "https://opensanctuary.org/common-goose-health-issues/"
+   },
+   {
+    "field": "health.diseases[2]",
+    "value": "Parvovirose de l'oie",
+    "quote": "Parvovirus of waterfowl is an infectious disease causing oculonasal exudates, watery diarrhea, and high mortality in young goslings and stunted growth and feather abnormalities in older goslings.",
+    "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl"
+   },
+   {
+    "field": "health.diseases[2].symptoms",
+    "value": "écoulements oculo-nasaux, diarrhée",
+    "quote": "Parvovirus of waterfowl is an infectious disease causing oculonasal exudates, watery diarrhea, and high mortality in young goslings and stunted growth and feather abnormalities in older goslings.",
+    "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl"
+   },
+   {
+    "field": "health.diseases[2].prevention",
+    "value": "vaccination",
+    "quote": "No treatment is effective. Vaccination may prevent overt disease.",
+    "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl"
+   }
+  ]
+ },
+ {
+  "speciesId": 2000001265,
+  "evidence": []
+ },
+ {
+  "speciesId": 2339870,
+  "evidence": []
+ },
+ {
+  "speciesId": 2354003,
+  "evidence": [
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "facile",
+    "quote": "Not a difficult species to breed.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.season",
+    "value": "ponte le lendemain matin",
+    "quote": "They should spawn the following morning. Only a few eggs are released at a time, so the event can often continue for several hours.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "eau acide 24-26,5 °C",
+    "quote": "The water should be soft and acidic in the range pH 6.0-7.0, gH 1-10, with a temperature of around 24 – 26.5 °C 75 – 80 °F .",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "retirer les adultes, éclosion 24-36 h",
+    "quote": "The adults will often eat their spawn given the chance and should be removed as soon as eggs are noticed. These will hatch in 24-36 hours, with the fry becoming free swimming 4-5 days later.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "bac de ponte peu éclairé",
+    "quote": "This should be very dimly lit and contain clumps of fine-leaved plants such as java moss or spawning mops, to give the fish somewhere to deposit their eggs.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "facile",
+    "quote": "Not a difficult species to breed.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.season",
+    "value": "ponte le lendemain matin",
+    "quote": "They should spawn the following morning. Only a few eggs are released at a time, so the event can often continue for several hours.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "eau acide 24-26,5 °C",
+    "quote": "The water should be soft and acidic in the range pH 6.0-7.0, gH 1-10, with a temperature of around 24 – 26.5 °C 75 – 80 °F .",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "retirer les adultes, éclosion 24-36 h",
+    "quote": "The adults will often eat their spawn given the chance and should be removed as soon as eggs are noticed. These will hatch in 24-36 hours, with the fry becoming free swimming 4-5 days later.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "bac de ponte peu éclairé",
+    "quote": "This should be very dimly lit and contain clumps of fine-leaved plants such as java moss or spawning mops, to give the fish somewhere to deposit their eggs.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.breedingDifficulty",
+    "value": "facile",
+    "quote": "Not a difficult species to breed.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.season",
+    "value": "ponte le lendemain matin",
+    "quote": "They should spawn the following morning. Only a few eggs are released at a time, so the event can often continue for several hours.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "eau acide 24-26,5 °C",
+    "quote": "The water should be soft and acidic in the range pH 6.0-7.0, gH 1-10, with a temperature of around 24 – 26.5 °C 75 – 80 °F .",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "retirer les adultes, éclosion 24-36 h",
+    "quote": "The adults will often eat their spawn given the chance and should be removed as soon as eggs are noticed. These will hatch in 24-36 hours, with the fry becoming free swimming 4-5 days later.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   },
+   {
+    "field": "reproduction.notes",
+    "value": "bac de ponte peu éclairé",
+    "quote": "This should be very dimly lit and contain clumps of fine-leaved plants such as java moss or spawning mops, to give the fish somewhere to deposit their eggs.",
+    "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/"
+   }
+  ]
+ }
+]

@@ -40,13 +40,13 @@ jest.mock('@/i18n/navigation', () => ({
 
 // Sections chargées à la demande : hors sujet ici.
 jest.mock('next/dynamic', () => ({ __esModule: true, default: () => () => null }));
-jest.mock('@/app/[locale]/mes-animaux/[id]/_components/FamilySection', () => ({
+jest.mock('@/app/[locale]/(app)/mes-animaux/[id]/_components/FamilySection', () => ({
   __esModule: true,
   default: () => null,
 }));
 
 import { ApiError } from '@/lib/api';
-import AnimalDetailPage from '../[locale]/mes-animaux/[id]/page';
+import AnimalDetailPage from '../[locale]/(app)/mes-animaux/[id]/page';
 
 const animal = (id: string, name: string, speciesId: number) => ({ id, name, speciesId, photos: [] });
 const params = (id: string) => Promise.resolve({ locale: 'fr', id });

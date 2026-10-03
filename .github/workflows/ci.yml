@@ -1,9 +1,13 @@
 name: CI
 
+# Économie de minutes Actions (dépôt privé, quota gratuit) : les changements purement
+# documentaires ne relancent pas la CI.
 on:
   push:
     branches: [main]
+    paths-ignore: ['docs/**', '**/*.md', 'backend/prisma/enrichment/in/**']
   pull_request:
+    paths-ignore: ['docs/**', '**/*.md', 'backend/prisma/enrichment/in/**']
   # Déclenchement manuel : relance toute la CI à la demande.
   workflow_dispatch:
 
@@ -104,7 +108,11 @@ jobs:
         run: npm run build
 
   # Images Docker de production : on vérifie seulement qu'elles se construisent (pas de push).
+  # Image Docker (≈ 7 min) : construite sur main et en manuel seulement ; Render la
+  # reconstruit de toute façon au déploiement. Sur les PR, le build TypeScript du backend
+  # (test-backend) et du frontend (build-frontend) couvrent l'essentiel.
   docker-build:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -148,11 +156,25 @@ jobs:
         working-directory: frontend
         # NB : pas de `--format compact` (formateur retiré du cœur d'ESLint 9, il faisait
         # échouer la commande, ce que l'ancien `|| true` masquait).
-        run: npx eslint "src/**/*.{ts,tsx}" --no-fix
+        run: npx eslint "src/**/*.{ts,tsx}" "e2e/**/*.ts" "mobile/**/*.tsx" --no-fix
+      # Garde-fou du système visuel (frontend/docs/DESIGN.md § 9) : aucun reste de l'ancien
+      # style (variante sombre, couleurs Tailwind brutes, dégradés, grands rayons, ombres
+      # floues, verre dépoli, capitales espacées, anciennes variables) hors tests.
+      - name: Garde — motifs de style interdits
+        working-directory: frontend
+        run: |
+          pattern='dark:|\b(bg|text|border|ring|outline|fill|stroke|from|via|to|divide|decoration|placeholder|shadow)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-[0-9]{2,3}\b|\b(bg|text|border)-(white|black)\b|bg-gradient-|\brounded-(lg|xl|2xl|3xl)\b|\bshadow-(sm|md|lg|xl|2xl)\b|backdrop-blur|\buppercase\b|tracking-(wider|widest)|var\(--captivia-'
+          if grep -rnE --include='*.ts' --include='*.tsx' --include='*.css' --exclude-dir=__tests__ --exclude='*.test.*' "$pattern" src mobile; then
+            echo "::error title=Style interdit::Motifs hors système visuel trouvés ci-dessus (voir frontend/docs/DESIGN.md § 9)."
+            exit 1
+          fi
+          echo "Aucun motif interdit."
 
-  # Lint backend : NON BLOQUANT (continue-on-error) tant que la dette historique n'est
-  # pas résorbée (~2 083 erreurs ESLint, surtout des no-unsafe-*). À rendre bloquant
-  # (retirer continue-on-error) à la fin de la tâche W1-07 « Dette lint et code mort ».
+  # Lint backend : BLOQUANT (0 erreur ESLint, règles typées de typescript-eslint incluses).
+  # Couvre src/ ET test/ (e2e, utilitaires, mocks) : `npm run lint:check` = eslint sur
+  # {src,apps,libs,test}/**/*.ts sans --fix. La dette historique a été résorbée par W1-07 ;
+  # toute nouvelle erreur fait échouer le job.
+  # Render (autoDeployTrigger: checksPass) attend que TOUS les checks soient verts.
   lint-backend:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -166,18 +188,9 @@ jobs:
       - name: Install
         working-directory: backend
         run: npm ci
-      # Informatif tant que la dette historique (W1-07) n'est pas résorbée : le
-      # continue-on-error est posé sur l'étape et non sur le job, pour que le check reste
-      # vert. Render (autoDeployTrigger: checksPass) attend que TOUS les checks soient
-      # verts. Le nombre d'erreurs est publié dans le résumé du job.
-      - name: ESLint backend (informatif, W1-07)
-        id: eslint
+      - name: ESLint backend (src + test)
         working-directory: backend
-        continue-on-error: true
-        run: npx eslint "src/**/*.ts" --no-fix
-      - name: Résumé lint
-        if: steps.eslint.outcome == 'failure'
-        run: echo "::warning title=Lint backend::ESLint backend signale des erreurs (dette W1-07, non bloquant) — voir l'étape ESLint."
+        run: npm run lint:check
 
   # Applique les migrations Prisma sur Neon AVANT le déploiement de Render.
   # Render est configuré en `autoDeployTrigger: checksPass` : il attend que tous les
@@ -209,6 +222,20 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          # Normalisation tolérante d'un copier-coller depuis la console Neon (sans jamais
+          # afficher la valeur) : espaces/retours à la ligne, préfixe « psql », guillemets.
+          url="$(printf '%s' "$DATABASE_URL" | tr -d '\r\n' | sed -E "s/^[[:space:]]+|[[:space:]]+$//g; s/^psql[[:space:]]+//; s/^['\"]+|['\"]+$//g")"
+          echo "::add-mask::$url"
+          case "$url" in
+            postgresql://*|postgres://*) ;;
+            *)
+              echo "::error title=NEON_DATABASE_URL_DIRECT invalide::La valeur du secret doit commencer par postgresql:// (longueur ${#url} caractères, contient 'postgresql://' : $(case "$url" in *postgresql://*) echo oui;; *) echo non;; esac)). Dans Neon → Connect, copiez la chaîne de connexion seule (pas la commande psql), sans guillemets."
+              exit 1;;
+          esac
+          case "$url" in
+            *-pooler.*) echo "::warning title=URL poolée::NEON_DATABASE_URL_DIRECT pointe vers l'hôte « -pooler » : utilisez l'URL DIRECTE (Connection pooling désactivé) pour les migrations.";;
+          esac
+          echo "NEON_URL=$url" >> "$GITHUB_ENV"
           echo "skip=false" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
         if: steps.guard.outputs.skip != 'true'
@@ -225,7 +252,7 @@ jobs:
       - name: Prisma migrate deploy
         if: steps.guard.outputs.skip != 'true'
         working-directory: backend
-        run: npx prisma migrate deploy
+        run: DATABASE_URL="$NEON_URL" npx prisma migrate deploy
 
   # Smoke Playwright (bloquant, sur pull_request et push) : frontend de production + API SIMULÉE
   # (page.route + frontend/e2e/fixtures). Aucun backend ni base de données.

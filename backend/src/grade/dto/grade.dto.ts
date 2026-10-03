@@ -52,7 +52,8 @@ function IsDayWithinOneYear(options?: ValidationOptions) {
       target: object.constructor,
       propertyName,
       options: {
-        message: 'date must be a valid YYYY-MM-DD between yesterday and one year ahead',
+        message:
+          'date must be a valid YYYY-MM-DD between yesterday and one year ahead',
         ...options,
       },
       validator: { validate: (value: unknown) => isDayWithinOneYear(value) },

@@ -13,14 +13,13 @@ import {
   localDayBounds,
   makeLocalTimeResolver,
   resolveTimeZone,
-  weekdayOf,
 } from '../common/timezone';
 import {
   REMINDER_ANCHOR_HOUR,
-  matchesSchedule,
-  normalizeSchedule,
-  scheduleOccurrences,
-} from '../grade/grade.service';
+  medicationOccurrencesOn,
+  routineOccurrencesOn,
+  routinePlan,
+} from '../common/care-occurrences';
 import { agendaLabels } from './agenda.labels';
 import { buildIcs } from './ics';
 import type {
@@ -30,7 +29,6 @@ import type {
 } from './agenda.types';
 
 const DAY_MS = 86_400_000;
-const HOUR_MS = 3_600_000;
 /** Amplitude maximale d'une requête (jours, bornes incluses) : un trimestre civil. */
 export const MAX_AGENDA_DAYS = 92;
 /** Période par défaut quand `to` est omis (jours, bornes incluses). */
@@ -155,8 +153,9 @@ function collectByDay(
 /**
  * Agenda des soins : vue unique des soins à venir pour TOUS les animaux de l'utilisateur.
  *
- * Les occurrences de routines sont calculées avec les mêmes fonctions que le générateur de rappels
- * (`GradeService`) et dans le même fuseau (`User.timezone`) : l'agenda montre exactement ce qui
+ * Les occurrences de médicaments et de routines sont calculées avec les mêmes fonctions que le
+ * générateur de rappels (`common/care-occurrences`, utilisé aussi par `GradeService`) et dans le
+ * même fuseau (`User.timezone`) : l'agenda montre exactement ce qui
  * sera notifié. Le statut (`done` / `skipped`) est repris des `NotificationEvent` déjà générés ;
  * sans événement, l'occurrence est `pending`. Toutes les requêtes sont filtrées par
  * `animal.userId` : isolation stricte entre utilisateurs.
@@ -189,7 +188,15 @@ export class AgendaService {
       range,
       timeZone,
     );
-    return { from: range.fromDay, to: range.toDay, items, truncated };
+    return {
+      from: range.fromDay,
+      to: range.toDay,
+      items,
+      truncated,
+      // Instant serveur pris AVANT la lecture des soins (W6-07) : l'app le renvoie avec sa
+      // couverture locale ; une source modifiée après lui n'est pas réputée programmée.
+      generatedAt: now.toISOString(),
+    };
   }
 
   // ---------------------------------------------------------------------------
@@ -426,16 +433,13 @@ export class AgendaService {
     //    heure locale (comme le rappel généré), ou toutes les N heures depuis 08:00 du 1er jour.
     const meds = medications.map((m) => ({
       m,
-      startDay: m.startDate.toISOString().slice(0, 10),
-      endDay: m.endDate ? m.endDate.toISOString().slice(0, 10) : null,
       title: `${m.name} (${m.dose}${m.unit ? ` ${m.unit}` : ''})`,
     }));
     take(
       collectByDay(days, MAX_AGENDA_ITEMS - out.length, (day) => {
         const items: AgendaItem[] = [];
-        for (const { m, startDay, endDay, title } of meds) {
-          if (day < startDay || (endDay && day > endDay)) continue;
-          const emit = (at: Date): void => {
+        for (const { m, title } of meds) {
+          for (const at of medicationOccurrencesOn(m, day, resolve)) {
             items.push(
               makeItem(
                 {
@@ -452,27 +456,6 @@ export class AgendaService {
                 day,
               ),
             );
-          };
-          if (
-            m.frequency === 'every_x_hours' &&
-            m.intervalHours &&
-            m.intervalHours > 0
-          ) {
-            const step = m.intervalHours * HOUR_MS;
-            const anchor = resolve(startDay, REMINDER_ANCHOR_HOUR, 0).getTime();
-            const dayStart = resolve(day, 0, 0).getTime();
-            const nextDayStart = resolve(addDays(day, 1), 0, 0).getTime();
-            const k0 = Math.max(0, Math.ceil((dayStart - anchor) / step));
-            for (let ms = anchor + k0 * step; ms < nextDayStart; ms += step) {
-              emit(new Date(ms));
-            }
-          } else {
-            if (
-              m.frequency === 'weekly' &&
-              weekdayOf(day) !== weekdayOf(startDay)
-            )
-              continue;
-            emit(resolve(day, REMINDER_ANCHOR_HOUR, 0));
           }
         }
         return items;
@@ -481,29 +464,17 @@ export class AgendaService {
 
     // 4. Routines — mêmes règles de récurrence ET même fuseau que le générateur de rappels.
     const plans = routines.flatMap((r) => {
-      const sch = normalizeSchedule(r.schedule);
-      if (!sch.time) return []; // sans heure : aucun rappel généré non plus
+      const plan = routinePlan(r, timeZone);
+      if (!plan) return []; // sans heure : aucun rappel généré non plus
       return [
-        {
-          r,
-          sch,
-          time: sch.time,
-          rec: sch.recurrence || r.frequency || 'daily',
-          createdDay: localDay(r.createdAt, timeZone),
-          title: r.name || labels.routineTypes[r.type] || r.type,
-        },
+        { r, plan, title: r.name || labels.routineTypes[r.type] || r.type },
       ];
     });
     take(
       collectByDay(days, MAX_AGENDA_ITEMS - out.length, (day) => {
         const items: AgendaItem[] = [];
-        for (const { r, sch, time, rec, createdDay, title } of plans) {
-          if (day < createdDay) continue;
-          if (
-            !matchesSchedule({ ...sch, time, recurrence: rec }, day, createdDay)
-          )
-            continue;
-          for (const at of scheduleOccurrences(sch, rec, time, day, resolve)) {
+        for (const { r, plan, title } of plans) {
+          for (const at of routineOccurrencesOn(plan, day, resolve)) {
             items.push(
               makeItem(
                 {

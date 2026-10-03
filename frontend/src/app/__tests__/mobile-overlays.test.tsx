@@ -23,18 +23,22 @@ function makePage(label: string) {
     return null;
   };
 }
-jest.mock('@/app/[locale]/mes-animaux/[id]/page', () => ({ __esModule: true, default: makePage('animal') }));
-jest.mock('@/app/[locale]/species/[id]/page', () => ({ __esModule: true, default: makePage('species') }));
-jest.mock('@/app/[locale]/animal-public/[slug]/page', () => ({ __esModule: true, default: makePage('public') }));
-jest.mock('@/app/[locale]/mes-animaux/[id]/carnet/CarnetPrintView', () => ({
+jest.mock('@/app/[locale]/(app)/mes-animaux/[id]/page', () => ({ __esModule: true, default: makePage('animal') }));
+jest.mock('@/app/[locale]/(app)/species/[id]/page', () => ({ __esModule: true, default: makePage('species') }));
+jest.mock('@/app/[locale]/(marketing)/animal-public/[slug]/page', () => ({ __esModule: true, default: makePage('public') }));
+jest.mock('@/app/[locale]/(app)/communaute/publication/[id]/page', () => ({ __esModule: true, default: makePage('post') }));
+jest.mock('@/app/[locale]/(app)/communaute/u/[handle]/page', () => ({ __esModule: true, default: makePage('member') }));
+jest.mock('@/app/[locale]/(app)/mes-animaux/[id]/carnet/CarnetPrintView', () => ({
   __esModule: true,
   default: makePage('carnet'),
 }));
 
-import MobileAnimalDetailPage from '../../../mobile/app/[locale]/mes-animaux/detail/page';
-import MobileSpeciesPage from '../../../mobile/app/[locale]/species/page';
-import MobilePublicAnimalPage from '../../../mobile/app/[locale]/animal-public/page';
-import MobileCarnetPage from '../../../mobile/app/[locale]/mes-animaux/carnet/page';
+import MobileAnimalDetailPage from '../../../mobile/app/[locale]/(app)/mes-animaux/detail/page';
+import MobileSpeciesPage from '../../../mobile/app/[locale]/(app)/species/page';
+import MobilePublicAnimalPage from '../../../mobile/app/[locale]/(marketing)/animal-public/page';
+import MobileCarnetPage from '../../../mobile/app/[locale]/(app)/mes-animaux/carnet/page';
+import MobileCommunityPostPage from '../../../mobile/app/[locale]/(app)/communaute/publication/page';
+import MobileCommunityMemberPage from '../../../mobile/app/[locale]/(app)/communaute/u/page';
 
 describe('overlays mobile : une fiche par id', () => {
   beforeEach(() => {
@@ -46,6 +50,8 @@ describe('overlays mobile : une fiche par id', () => {
     ['species', MobileSpeciesPage, 'id'],
     ['public', MobilePublicAnimalPage, 'slug'],
     ['carnet', MobileCarnetPage, 'id'],
+    ['post', MobileCommunityPostPage, 'id'],
+    ['member', MobileCommunityMemberPage, 'handle'],
   ] as const)('%s : changer de %s remonte la page', (label, Page, param) => {
     mockQuery = `${param}=a1`;
     const { rerender } = render(<Page />);

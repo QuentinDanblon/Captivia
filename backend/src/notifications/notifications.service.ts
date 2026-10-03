@@ -4,9 +4,11 @@ import {
   Injectable,
   Logger,
 } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { UpdateNotificationPreferencesDto } from './dto/notification-preferences.dto';
-import { PushReminderPayload, WebPushSender } from './push-sender';
+import { PushReminderPayload } from './push-sender';
+import { PushDispatcher } from './push-dispatcher';
 import { isAllowedPushEndpoint } from './push-endpoint';
 
 /** Nombre maximal d'abonnements push par compte : au-delà, le plus ancien est remplacé. */
@@ -18,7 +20,8 @@ export class NotificationsService {
 
   constructor(
     private readonly prisma: PrismaService,
-    private readonly pushSender: WebPushSender,
+    /** Web Push + push natif (W6-07). */
+    private readonly pushSender: PushDispatcher,
   ) {}
 
   async subscribeToPush(
@@ -110,7 +113,8 @@ export class NotificationsService {
   }
 
   /**
-   * Envoi immédiat vers tous les appareils de l'utilisateur (notification de test).
+   * Envoi immédiat vers tous les appareils de l'utilisateur (notification de test) : navigateurs
+   * abonnés et installations de l'app.
    * Ne renvoie QUE « au moins un envoi a réussi » : le détail (échecs, purges) servait d'oracle
    * pour sonder des adresses (revue de sécurité, constat 2).
    */
@@ -157,11 +161,13 @@ export class NotificationsService {
   ) {
     const existing = await this.getNotificationPreferences(userId);
 
-    const updateData: Record<string, any> = {};
+    const updateData: Prisma.NotificationPreferenceUpdateInput = {};
     if (data.types !== undefined) updateData.types = data.types;
+    // DTO validés (objets simples) : stockés tels quels dans les colonnes JSON.
     if (data.typeSchedules !== undefined)
-      updateData.typeSchedules = data.typeSchedules;
-    if (data.schedule !== undefined) updateData.schedule = data.schedule;
+      updateData.typeSchedules = data.typeSchedules as Prisma.InputJsonValue;
+    if (data.schedule !== undefined)
+      updateData.schedule = data.schedule as Prisma.InputJsonValue;
     if (data.snooze !== undefined) updateData.snooze = data.snooze;
     if (data.deliveryChannel !== undefined) {
       const valid = ['push', 'email', 'both'].includes(data.deliveryChannel)

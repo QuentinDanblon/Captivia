@@ -5,10 +5,10 @@ This module provides comprehensive monitoring, analytics, and error tracking cap
 ## Overview
 
 The monitoring system includes:
+
 - **Performance Metrics**: Track request counts, response times, cache hits/misses
 - **API Analytics**: Monitor usage patterns, traffic trends, and performance metrics
 - **Error Tracking**: Log and analyze errors with detailed context
-- **Database Optimization**: Query performance tracking and recommendations
 
 ## Modules
 
@@ -17,11 +17,13 @@ The monitoring system includes:
 Tracks system-level performance metrics.
 
 **Endpoints:**
+
 - `GET /monitoring/metrics` - Get system metrics
 - `GET /monitoring/health` - Get health status
 - `DELETE /monitoring/reset` - Reset all metrics
 
 **Metrics tracked:**
+
 - Total requests
 - Successful/failed requests
 - Average response time
@@ -34,6 +36,7 @@ Tracks system-level performance metrics.
 Analyzes API usage patterns and traffic.
 
 **Endpoints:**
+
 - `GET /analytics` - Get API usage analytics
 - `GET /analytics/daily/:date` - Get daily report
 - `GET /analytics/traffic-trend` - Get traffic trend
@@ -42,6 +45,7 @@ Analyzes API usage patterns and traffic.
 - `DELETE /analytics/reset` - Reset analytics data
 
 **Features:**
+
 - Daily request tracking
 - User activity monitoring
 - Response time analysis
@@ -54,6 +58,7 @@ Analyzes API usage patterns and traffic.
 Logs and analyzes application errors.
 
 **Endpoints:**
+
 - `GET /errors/stats` - Get error statistics
 - `GET /errors/recent` - Get recent errors
 - `GET /errors/:id` - Get error by ID
@@ -62,6 +67,7 @@ Logs and analyzes application errors.
 - `DELETE /errors/reset` - Reset error tracking
 
 **Features:**
+
 - Error logging with context
 - Error type categorization
 - Endpoint-specific error tracking
@@ -69,26 +75,10 @@ Logs and analyzes application errors.
 - Error export (JSON/CSV)
 - Automatic cleanup
 
-### 4. Database Optimization Service (`database-optimization.service.ts`)
-
-Monitors database query performance.
-
-**Endpoints:**
-- `GET /database/stats` - Get database stats
-- `GET /database/query-explain` - Get query explanation
-- `POST /database/optimize-cache` - Optimize query cache
-- `DELETE /database/stats/reset` - Reset database stats
-
-**Features:**
-- Query execution time tracking
-- Slow query detection
-- Cache hit/miss tracking
-- Optimization recommendations
-- Connection pool monitoring
-
 ## Redis Keys Used
 
 ### Metrics
+
 - `metrics:total` - Total requests
 - `metrics:successful` - Successful requests
 - `metrics:failed` - Failed requests
@@ -99,6 +89,7 @@ Monitors database query performance.
 - `metrics:endpoints:*` - Requests by endpoint
 
 ### Analytics
+
 - `analytics:totalRequests` - Total API requests
 - `analytics:avgResponseTime` - Average response time
 - `analytics:responseTimeCount` - Response time samples
@@ -109,20 +100,12 @@ Monitors database query performance.
 - `analytics:endpoints:*` - Requests by endpoint
 
 ### Error Tracking
+
 - `errors:total` - Total errors
 - `errors:types:*` - Errors by type
 - `errors:endpoints:*` - Errors by endpoint
 - `errors:lastError` - Timestamp of last error
 - `errors:logs` - Error log list
-
-### Database
-- `db:queries:total` - Total queries
-- `db:cache:hits` - Cache hits
-- `db:cache:misses` - Cache misses
-- `slow:query:*` - Slow query counts
-- `slow:query:count` - Total slow queries
-- `slow:query:last` - Last slow query timestamp
-- `query:perf:*` - Query performance data
 
 ## Usage Examples
 
@@ -141,24 +124,19 @@ const analytics = await analyticsService.getAnalytics();
 ### Log an Error
 
 ```typescript
-await errorTrackingService.logErrorMethod('Service unavailable', stack, { userId: 'user123' });
-```
-
-### Get Database Stats
-
-```typescript
-const dbStats = await optimizationService.getDatabaseStats();
+await errorTrackingService.logErrorMethod('Service unavailable', stack, {
+  userId: 'user123',
+});
 ```
 
 ## Integration
 
-The monitoring modules are automatically imported in `AppModule`. To use the services:
+The monitoring and analytics modules are imported by `AppModule` **only when `REDIS_ENABLED=true`** (disabled in production, see `render.yaml`): their routes answer 404 otherwise. To use the services:
 
 ```typescript
 import { MetricsService } from './monitoring/metrics.service';
 import { ApiAnalyticsService } from './analytics/api-analytics.service';
 import { ErrorTrackingService } from './monitoring/error-tracking.service';
-import { DatabaseOptimizationService } from './database/database-optimization.service';
 
 @Injectable()
 export class MyService {
@@ -166,7 +144,6 @@ export class MyService {
     private readonly metricsService: MetricsService,
     private readonly analyticsService: ApiAnalyticsService,
     private readonly errorTrackingService: ErrorTrackingService,
-    private readonly optimizationService: DatabaseOptimizationService,
   ) {}
 
   async doSomething() {
@@ -175,7 +152,10 @@ export class MyService {
       // ... your code
       await this.metricsService.incrementSuccessfulRequest();
     } catch (error) {
-      await this.errorTrackingService.logErrorMethod(error.message, error.stack);
+      await this.errorTrackingService.logErrorMethod(
+        error.message,
+        error.stack,
+      );
       await this.metricsService.incrementFailedRequest();
     } finally {
       await this.metricsService.recordResponseTime(Date.now() - start);
@@ -198,11 +178,13 @@ REDIS_DB=0
 ## Health Status
 
 The system health status is determined by:
+
 - Error rate (threshold: 10%)
 - Cache hit rate (threshold: 50%)
 - Redis connection status
 
 Health status levels:
+
 - **Healthy** - Error rate < 5%, cache hit rate > 50%, Redis connected
 - **Degraded** - Error rate < 10% or cache hit rate < 50%
 - **Unhealthy** - Error rate > 10% or Redis disconnected
@@ -211,7 +193,6 @@ Health status levels:
 
 1. **Regular Monitoring**: Check health status and metrics regularly
 2. **Error Analysis**: Review error logs to identify and fix issues
-3. **Performance Tuning**: Use database optimization recommendations
-4. **Cache Optimization**: Monitor cache hit rates and adjust cache strategy
-5. **Alerting**: Set up alerts for unhealthy status
-6. **Data Retention**: Periodically clear old data to manage Redis memory
+3. **Cache Optimization**: Monitor cache hit rates and adjust cache strategy
+4. **Alerting**: Set up alerts for unhealthy status
+5. **Data Retention**: Periodically clear old data to manage Redis memory

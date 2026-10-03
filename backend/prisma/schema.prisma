@@ -50,6 +50,9 @@ model User {
   termsVersion    String?
   /// Date de vérification de l'adresse e-mail (W2-04) ; null = non vérifiée.
   emailVerifiedAt DateTime? @db.Timestamptz(3)
+  /// Communauté : suspension de publication décidée par un opérateur (NULL = aucune). Portée par
+  /// le compte, pas par le profil : quitter la communauté puis réactiver le profil ne la lève pas.
+  communitySuspendedUntil DateTime? @db.Timestamptz(3)
   points       Int      @default(0)   // Points pour le système de grade
   grade        String   @default("bronze") // bronze | silver | gold | platinum | diamond
   createdAt    DateTime @default(now()) @db.Timestamptz(3)
@@ -58,6 +61,7 @@ model User {
   // Relations
   animals                 Animal[]
   pushSubscriptions       PushSubscription[]
+  deviceTokens            DeviceToken[]
   notificationPreferences NotificationPreference[]
   notificationEvents      NotificationEvent[]
   passwordResetTokens     PasswordResetToken[]
@@ -65,6 +69,20 @@ model User {
   emailVerificationTokens EmailVerificationToken[]
   subscriptions           Subscription[]
   paymentEvents           PaymentEvent[]
+
+  // Communauté (volet social, phase 1) — rien n'est créé sans activation explicite du profil.
+  communityProfile           CommunityProfile?
+  communityPosts             CommunityPost[]
+  communityComments          CommunityComment[]
+  communityReactions         CommunityReaction[]
+  communityMedia             CommunityMedia[]
+  communityReports           CommunityReport[]
+  communityBlocksMade        CommunityBlock[]            @relation("CommunityBlocker")
+  communityBlocksReceived    CommunityBlock[]            @relation("CommunityBlocked")
+  communityModerationSubject CommunityModerationAction[] @relation("CommunityModerationSubject")
+  communityModerationTaken   CommunityModerationAction[] @relation("CommunityModerationOperator")
+  communityHandleHolds       CommunityHandleHold[]
+  communityUploadAttempts    CommunityUploadAttempt[]
 
   /// Purge des invités inactifs (GuestPurgeService).
   @@index([isGuest, lastActiveAt])
@@ -204,7 +222,7 @@ model Animal {
   speciesId  Int // GBIF key
   name       String
   birthDate  DateTime? @db.Timestamptz(3)
-  sex        String?
+  sex        String?   // male | female | unknown — CHECK SQL "Animal_sex_check" (W1-09)
   photos     String[] // URLs
   notes      String?
   publicSlug String?   @unique // slug pour page publique / QR (Premium)
@@ -230,6 +248,9 @@ model Animal {
   vaccinations       Vaccination[]
   breedingRecords    BreedingRecord[]
   notificationEvents NotificationEvent[]
+  /// Publications communautaires qui montrent cet animal (choix explicite de l'auteur ; seuls le
+  /// nom et l'espèce sont exposés, jamais le carnet de santé).
+  communityPosts     CommunityPost[]
   // Module F — auto-relations parenté
   father         Animal?  @relation("Father", fields: [fatherId], references: [id], onDelete: SetNull)
   mother         Animal?  @relation("Mother", fields: [motherId], references: [id], onDelete: SetNull)
@@ -247,7 +268,7 @@ model Animal {
 model AnimalHealthRecord {
   id        String   @id @default(uuid())
   animalId  String
-  type      String   // vaccine | surgery | specific_food | medical_history
+  type      String   // vaccine | surgery | specific_food | medical_history — CHECK SQL "AnimalHealthRecord_type_check" (W1-09)
   title     String   // ex. "Vaccin rage", "Stérilisation"
   date      DateTime @db.Timestamptz(3) // date de l'événement
   notes     String?  // description libre
@@ -366,7 +387,7 @@ model Vaccination {
 }
 
 // Module D — Modèles de routines par défaut par espèce (proposés à la création d'un animal)
-// Pas de FK : cohérence par speciesId (GBIF key), comme les autres tables Species*.
+// FK vers SpeciesProfile.speciesId (W1-09, ON DELETE CASCADE).
 model SpeciesRoutineTemplate {
   id        String   @id @default(uuid())
   speciesId Int // GBIF key
@@ -379,6 +400,8 @@ model SpeciesRoutineTemplate {
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, type, order])
   @@index([speciesId])
 }
@@ -433,6 +456,33 @@ model PushSubscription {
 
   @@index([userId])
   @@index([userId, endpoint])
+}
+
+/// W6-07 — Jeton de push natif (FCM : Android, et iOS via APNs relayé par FCM) d'une installation
+/// de l'app. Le jeton est unique : il appartient au dernier compte qui l'a enregistré.
+model DeviceToken {
+  id                  String    @id @default(uuid())
+  userId              String
+  /// "android" | "ios" (CHECK SQL "DeviceToken_platform_check")
+  platform            String
+  /// Jeton d'enregistrement FCM (secret technique : jamais exporté ni journalisé ; ≤ 512 caractères, CHECK SQL).
+  token               String    @unique
+  /// Langue de l'app au dernier enregistrement (fr, en, es, de, it, pt).
+  locale              String    @default("fr")
+  /// Les rappels de soins prévus avant cet instant sont déjà programmés en notifications locales
+  /// sur l'appareil (W6-06) : pas de push distant pour eux (anti-doublon). NULL = aucun.
+  localRemindersUntil DateTime? @db.Timestamptz(3)
+  /// Instant serveur (`generatedAt` de l'Agenda) de l'état des soins programmés sur l'appareil : une
+  /// routine / un médicament modifié depuis n'est pas réputé couvert. NULL = aucune couverture.
+  localRemindersAsOf  DateTime? @db.Timestamptz(3)
+  createdAt           DateTime  @default(now()) @db.Timestamptz(3)
+  /// Dernier enregistrement par l'app (lancement, retour au premier plan) : purge après 270 jours.
+  lastSeenAt          DateTime  @default(now()) @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([lastSeenAt])
 }
 
 model NotificationPreference {
@@ -512,11 +562,25 @@ model SpeciesProfile {
   createdAt           DateTime  @default(now()) @db.Timestamptz(3)
   updatedAt           DateTime  @updatedAt @db.Timestamptz(3)
 
+  /// W5-04 — date de la dernière vérification éditoriale de la fiche (rapport verify/<LOT>.json).
+  /// NULL = jamais vérifiée (fiche historique). Posée par import-enrichment.ts.
+  lastReviewedAt      DateTime? @db.Timestamptz(3)
+
   // Relations
-  animals Animal[]
+  animals          Animal[]
+  feedings         SpeciesFeeding[]
+  habitats         SpeciesHabitat[]
+  behaviors        SpeciesBehavior[]
+  healthContents   SpeciesHealthContent[]
+  legislations     SpeciesLegislation[]
+  reproductions    SpeciesReproduction[]
+  routineTemplates SpeciesRoutineTemplate[]
 
   @@index([category])
   @@index([domesticationType])
+  /// W1-09 — recherche « contient » insensible à la casse (ILIKE '%x%') : index trigram (extension pg_trgm).
+  @@index([commonNameFr(ops: raw("gin_trgm_ops"))], type: Gin, map: "SpeciesProfile_commonNameFr_trgm_idx")
+  @@index([scientificName(ops: raw("gin_trgm_ops"))], type: Gin, map: "SpeciesProfile_scientificName_trgm_idx")
 }
 
 model SpeciesFeeding {
@@ -532,6 +596,8 @@ model SpeciesFeeding {
   createdAt          DateTime @default(now()) @db.Timestamptz(3)
   updatedAt          DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
   @@index([dietType])
@@ -555,6 +621,8 @@ model SpeciesHabitat {
   createdAt            DateTime @default(now()) @db.Timestamptz(3)
   updatedAt            DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
   @@index([habitatType])
@@ -573,6 +641,8 @@ model SpeciesBehavior {
   createdAt                    DateTime @default(now()) @db.Timestamptz(3)
   updatedAt                    DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
   @@index([difficultyLevel])
@@ -587,6 +657,8 @@ model SpeciesHealthContent {
   createdAt   DateTime @default(now()) @db.Timestamptz(3)
   updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
 }
@@ -595,12 +667,14 @@ model SpeciesLegislation {
   id          String   @id @default(uuid())
   speciesId   Int // GBIF key
   country     String // ISO code (FR, US, GB, etc.)
-  status      String // allowed, prohibited, permit_required
+  status      String // allowed, prohibited, permit_required — CHECK SQL "SpeciesLegislation_status_check" (W1-09)
   details     Json // { citesAppendix, euAnnex, permits, restrictions }
   sources     String[] // URLs to official sources
   createdAt   DateTime @default(now()) @db.Timestamptz(3)
   updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, country])
   @@index([speciesId])
   @@index([country])
@@ -623,6 +697,8 @@ model SpeciesReproduction {
   createdAt            DateTime @default(now()) @db.Timestamptz(3)
   updatedAt            DateTime @updatedAt @db.Timestamptz(3)
 
+  /// W1-09 — FK vers la fiche espèce : supprimer une fiche supprime ses sections.
+  profile   SpeciesProfile @relation(fields: [speciesId], references: [speciesId], onDelete: Cascade)
   @@unique([speciesId, locale])
   @@index([speciesId])
 }
@@ -654,7 +730,326 @@ model AffiliateStore {
   createdAt   DateTime @default(now()) @db.Timestamptz(3)
   updatedAt   DateTime @updatedAt @db.Timestamptz(3)
 
-  @@index([categories])
   @@index([categories], type: Gin, map: "AffiliateStore_categories_gin_idx")
   @@index([types], type: Gin, map: "AffiliateStore_types_gin_idx")
+}
+
+// ============================================
+// Communauté (volet social, phase 1 — backend)
+// ============================================
+// Séparation stricte : aucune de ces tables ne référence le carnet de santé. Une publication peut
+// montrer un animal (nom + espèce) UNIQUEMENT si l'auteur le choisit (CommunityPost.animalId).
+// Longueurs et formats : CHECK SQL (migration 20261003050000_community).
+
+enum CommunityPostType {
+  /// 1 à 4 images, légende facultative.
+  PHOTO
+  /// Texte obligatoire, image facultative (0 ou 1).
+  QUESTION
+}
+
+/// Catégorie d'espèce (filtre des fils). Déduite de SpeciesProfile.category si un animal est lié.
+enum CommunitySpeciesCategory {
+  MAMMAL
+  BIRD
+  REPTILE
+  FISH
+  AMPHIBIAN
+  ARACHNID
+  INSECT
+  OTHER
+}
+
+enum CommunityContentStatus {
+  VISIBLE
+  /// Masqué automatiquement : seuil de signalements distincts atteint (COMMUNITY_HIDE_THRESHOLD).
+  HIDDEN_AUTO
+  /// Masqué par un opérateur (décision motivée, notifiée à l'auteur).
+  HIDDEN_MODERATOR
+}
+
+/// Motifs de signalement et de décision de modération (liste fermée, DSA art. 16 et 17).
+enum CommunityReason {
+  SPAM
+  HARASSMENT
+  HATE
+  VIOLENCE
+  ANIMAL_WELFARE
+  ILLEGAL_TRADE
+  DANGEROUS_ADVICE
+  NUDITY
+  PERSONAL_DATA
+  IMPERSONATION
+  OTHER
+}
+
+enum CommunityReportStatus {
+  OPEN
+  /// Une décision a été prise (masquage, suppression…).
+  ACTIONED
+  /// Examiné sans suite.
+  DISMISSED
+}
+
+enum CommunityModerationTarget {
+  POST
+  COMMENT
+  USER
+}
+
+enum CommunityModerationActionType {
+  AUTO_HIDE
+  HIDE
+  RESTORE
+  DELETE
+  DISMISS
+  SUSPEND
+  UNSUSPEND
+}
+
+enum CommunityAppealStatus {
+  NONE
+  PENDING
+  UPHELD
+  REVERSED
+}
+
+/// Profil public : pseudo + avatar, JAMAIS l'e-mail. Créé uniquement par activation explicite
+/// (acceptation des règles de communauté versionnées). Supprimer le profil supprime les contenus.
+model CommunityProfile {
+  userId          String    @id
+  /// Pseudo affiché (3-30 caractères : lettres ASCII, chiffres, « _ », « . »).
+  handle          String
+  /// Clé d'unicité : pseudo en minuscules (CHECK SQL "CommunityProfile_handle_check").
+  handleKey       String    @unique
+  avatarMediaId   String?   @unique
+  /// Version des règles de communauté acceptée (COMMUNITY_RULES_VERSION) et date d'acceptation.
+  rulesVersion    String
+  rulesAcceptedAt DateTime  @db.Timestamptz(3)
+  /// Âge minimal (CGU) : date de la confirmation (case de l'inscription, ou confirmation à
+  /// l'activation pour un compte antérieur à cette case).
+  ageConfirmedAt  DateTime  @db.Timestamptz(3)
+  /// Copie d'affichage de User.communitySuspendedUntil (source de vérité : le compte).
+  suspendedUntil  DateTime? @db.Timestamptz(3)
+  createdAt       DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime  @updatedAt @db.Timestamptz(3)
+
+  user   User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  avatar CommunityMedia? @relation("CommunityAvatar", fields: [avatarMediaId], references: [id], onDelete: SetNull)
+}
+
+/// Image traitée (WebP, ≤ 1 600 px, sans métadonnées) stockée par MediaStorage sous `key`.
+/// Orpheline (ni publication ni avatar) : purgée par le job de maintenance, fichier compris.
+model CommunityMedia {
+  id        String   @id @default(uuid())
+  /// NULL après suppression du compte : le fichier reste à effacer (maintenance).
+  ownerId   String?
+  /// NULL tant que l'image n'est rattachée à aucune publication (ou après sa suppression).
+  postId    String?
+  position  Int      @default(0)
+  /// Texte alternatif saisi par l'auteur (300 caractères au plus, facultatif) : décrit l'image aux
+  /// personnes malvoyantes. Posé à la publication, soumis aux mêmes règles que la légende.
+  alt       String?
+  /// Clé de stockage aléatoire, sans donnée personnelle : "<uuid>.webp".
+  key       String   @unique
+  mimeType  String   @default("image/webp")
+  width     Int
+  height    Int
+  bytes     Int
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  owner    User?             @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  post     CommunityPost?    @relation(fields: [postId], references: [id], onDelete: SetNull)
+  avatarOf CommunityProfile? @relation("CommunityAvatar")
+
+  @@index([ownerId, createdAt])
+  @@index([postId, position])
+  @@index([createdAt])
+}
+
+model CommunityPost {
+  id               String                    @id @default(uuid())
+  authorId         String
+  type             CommunityPostType
+  /// Texte (≤ 2 000 caractères ; non vide pour une question).
+  body             String                    @default("")
+  speciesCategory  CommunitySpeciesCategory?
+  /// Animal montré volontairement (nom + espèce uniquement) ; SetNull si l'animal est supprimé.
+  animalId         String?
+  status           CommunityContentStatus    @default(VISIBLE)
+  hiddenAt         DateTime?                 @db.Timestamptz(3)
+  /// Posé quand un opérateur rétablit le contenu : le masquage automatique ne s'applique plus.
+  reviewedAt       DateTime?                 @db.Timestamptz(3)
+  /// Question : commentaire marqué « réponse utile » par l'auteur.
+  helpfulCommentId String?                   @unique
+  createdAt        DateTime                  @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime                  @updatedAt @db.Timestamptz(3)
+
+  author         User                @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  animal         Animal?             @relation(fields: [animalId], references: [id], onDelete: SetNull)
+  helpfulComment CommunityComment?   @relation("CommunityHelpful", fields: [helpfulCommentId], references: [id], onDelete: SetNull)
+  media          CommunityMedia[]
+  comments       CommunityComment[]
+  reactions      CommunityReaction[]
+  reports        CommunityReport[]
+
+  @@index([status, createdAt, id])
+  @@index([speciesCategory, status, createdAt])
+  @@index([authorId, createdAt])
+  @@index([animalId])
+}
+
+/// Commentaire ; un seul niveau de réponse (parentId pointe toujours vers un commentaire racine).
+model CommunityComment {
+  id         String                 @id @default(uuid())
+  postId     String
+  authorId   String
+  parentId   String?
+  /// 1 à 1 000 caractères.
+  body       String
+  status     CommunityContentStatus @default(VISIBLE)
+  hiddenAt   DateTime?              @db.Timestamptz(3)
+  reviewedAt DateTime?              @db.Timestamptz(3)
+  createdAt  DateTime               @default(now()) @db.Timestamptz(3)
+  updatedAt  DateTime               @updatedAt @db.Timestamptz(3)
+
+  post       CommunityPost      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author     User               @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  parent     CommunityComment?  @relation("CommunityReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies    CommunityComment[] @relation("CommunityReplies")
+  helpfulFor CommunityPost?     @relation("CommunityHelpful")
+  reports    CommunityReport[]
+
+  @@index([postId, createdAt])
+  @@index([authorId, createdAt])
+  @@index([parentId])
+}
+
+/// « J'aime » (type unique) : clé primaire (postId, userId), donc idempotent.
+model CommunityReaction {
+  postId    String
+  userId    String
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  post CommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([postId, userId])
+  @@index([userId])
+}
+
+/// Signalement (DSA art. 16) : un par compte et par contenu (postId XOR commentId, CHECK SQL).
+model CommunityReport {
+  id         String                @id @default(uuid())
+  reporterId String
+  postId     String?
+  commentId  String?
+  reason     CommunityReason
+  /// Précisions facultatives (≤ 500 caractères).
+  details    String?
+  status     CommunityReportStatus @default(OPEN)
+  resolvedAt DateTime?             @db.Timestamptz(3)
+  /// Décision qui a clos le signalement (DSA art. 16(5) : notifiée à l'auteur du signalement).
+  decisionId String?
+  /// Date d'envoi de la notification de la décision à l'auteur du signalement (e-mail).
+  notifiedAt DateTime?             @db.Timestamptz(3)
+  createdAt  DateTime              @default(now()) @db.Timestamptz(3)
+
+  reporter User                       @relation(fields: [reporterId], references: [id], onDelete: Cascade)
+  post     CommunityPost?             @relation(fields: [postId], references: [id], onDelete: Cascade)
+  comment  CommunityComment?          @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  decision CommunityModerationAction? @relation(fields: [decisionId], references: [id], onDelete: SetNull)
+
+  @@unique([reporterId, postId])
+  @@unique([reporterId, commentId])
+  @@index([status, createdAt])
+  @@index([postId, status])
+  @@index([commentId, status])
+  @@index([decisionId])
+  @@index([reporterId, createdAt])
+}
+
+/// Blocage : les contenus sont masqués dans les deux sens.
+model CommunityBlock {
+  blockerId String
+  blockedId String
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  blocker User @relation("CommunityBlocker", fields: [blockerId], references: [id], onDelete: Cascade)
+  blocked User @relation("CommunityBlocked", fields: [blockedId], references: [id], onDelete: Cascade)
+
+  @@id([blockerId, blockedId])
+  @@index([blockedId])
+}
+
+/// Journal des décisions de modération (DSA art. 17 : exposé des motifs ; art. 20 : recours).
+/// Conservé après suppression du contenu ou du compte (subjectId / operatorId passent à NULL),
+/// purgé après COMMUNITY_MODERATION_LOG_RETENTION_DAYS (maintenance).
+model CommunityModerationAction {
+  id               String                        @id @default(uuid())
+  action           CommunityModerationActionType
+  targetType       CommunityModerationTarget
+  /// Identifiant du contenu ou du compte visé (sans clé étrangère : le contenu peut avoir disparu).
+  targetId         String
+  /// Compte concerné par la décision (auteur du contenu ou compte suspendu).
+  subjectId        String?
+  /// Opérateur ; NULL = décision automatisée (seuil de signalements) ou opérateur supprimé.
+  operatorId       String?
+  automated        Boolean                       @default(false)
+  reason           CommunityReason?
+  /// Exposé des motifs communiqué à l'auteur (≤ 2 000 caractères).
+  statement        String
+  /// Nombre de signalements distincts au moment de la décision.
+  reportCount      Int                           @default(0)
+  /// Fin de suspension (action SUSPEND).
+  suspendedUntil   DateTime?                     @db.Timestamptz(3)
+  /// Date d'envoi de la notification à l'auteur (e-mail) ; la décision reste lisible dans l'app.
+  notifiedAt       DateTime?                     @db.Timestamptz(3)
+  /// Notification à l'auteur due mais pas encore envoyée : relancée par le job de maintenance.
+  notificationPending Boolean                    @default(false)
+  appealStatus     CommunityAppealStatus         @default(NONE)
+  appealText       String?
+  appealedAt       DateTime?                     @db.Timestamptz(3)
+  appealResolvedAt DateTime?                     @db.Timestamptz(3)
+  appealStatement  String?
+  createdAt        DateTime                      @default(now()) @db.Timestamptz(3)
+
+  subject  User? @relation("CommunityModerationSubject", fields: [subjectId], references: [id], onDelete: SetNull)
+  operator User? @relation("CommunityModerationOperator", fields: [operatorId], references: [id], onDelete: SetNull)
+  reports  CommunityReport[]
+
+  @@index([subjectId, createdAt])
+  @@index([targetType, targetId])
+  @@index([appealStatus, appealedAt])
+  @@index([createdAt])
+  @@index([notificationPending, createdAt])
+}
+
+/// Pseudo libéré (changement de pseudo, départ de la communauté, suppression du compte) : réservé
+/// à son ancien titulaire pendant COMMUNITY_HANDLE_HOLD_DAYS jours (anti-usurpation). `userId` NULL
+/// après suppression du compte : plus personne ne peut le reprendre avant l'expiration.
+model CommunityHandleHold {
+  id         String   @id @default(uuid())
+  handleKey  String   @unique
+  userId     String?
+  releasedAt DateTime @default(now()) @db.Timestamptz(3)
+  expiresAt  DateTime @db.Timestamptz(3)
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+/// Tentatives de téléversement (réussies ou non), consommées AVANT le traitement de l'image :
+/// support de la limite COMMUNITY_UPLOADS_PER_HOUR. Purgées après 24 h par la maintenance.
+model CommunityUploadAttempt {
+  id        String   @id @default(uuid())
+  userId    String
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([createdAt])
 }

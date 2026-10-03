@@ -1,0 +1,497 @@
+[
+ {
+  "speciesId": 2153949,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Grillons ou blatte Dubia (adulte)",
+     "frequency": "toutes les 2 à 3 semaines (ou selon les besoins)",
+     "notes": "4-5 gros grillons ou une grosse blatte Dubia"
+    },
+    {
+     "name": "Insectes variés (bébés grillons, locustes, mouches des fruits, vers de farine, sauterelles, papillons de nuit) ou bébés souris",
+     "frequency": "selon l'âge de la mygale",
+     "notes": null
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Proies non mangées laissées dans l'enclos",
+     "reason": "À retirer après 24 heures."
+    },
+    {
+     "name": "Proies vivantes de plus des deux tiers de la taille d'un juvénile",
+     "reason": "Elles doivent être tuées avant d'être proposées."
+    },
+    {
+     "name": "Suralimentation",
+     "reason": "Évite l'obésité, source de problèmes de mue et de rupture de l'abdomen lors d'une chute."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": "Pas besoin de saupoudrer les proies de calcium.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://thetarantulacollective.com/caresheets/lasiodora-parahybana",
+     "title": "Lasiodora parahybana Care Guide - The Tarantula Collective"
+    },
+    {
+     "type": "vet",
+     "url": "https://thevetdesk.com/pet-breeds/spiders/salmon-pink-birdeater-tarantula/",
+     "title": "Salmon Pink Birdeater Tarantula - The Vet Desk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5170451,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Mouches des fruits aptères, ténébrions « confused flour beetles » ou petits grillons/blattes pré-tués (juvéniles)",
+     "frequency": "2 fois par semaine",
+     "notes": null
+    },
+    {
+     "name": "Grillons ou blatte Dubia (adulte)",
+     "frequency": "toutes les 2 à 3 semaines (ou selon les besoins)",
+     "notes": "4-5 gros grillons ou une grosse blatte Dubia"
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Suralimentation",
+     "reason": "Elle provoque des problèmes de mobilité, de mauvaises mues et augmente le risque lié aux chutes."
+    },
+    {
+     "name": "Proies non mangées laissées dans l'enclos",
+     "reason": "À retirer dans les 24 heures."
+    },
+    {
+     "name": "Suppléments de calcium ou de vitamines",
+     "reason": "Les mygales n'en ont pas besoin."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": "Gaver les insectes proies avec des fruits et légumes frais pendant au moins 24 heures avant de les donner.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.thebiodude.com/blogs/arachnid-caresheets/the-care-and-maintenance-of-the-goliath-birdeater",
+     "title": "The Care and Maintenance of the Goliath Birdeater - The Bio Dude"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Déshydratation",
+     "symptoms": "Abdomen ratatiné, ridé et nettement trop petit.",
+     "prevention": "Réduire la ventilation, vaporiser régulièrement pour garder le substrat humide et laisser une coupelle d'eau ouverte en permanence.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Problèmes de mue",
+     "symptoms": "Dans la plupart des cas, la mygale reste simplement coincée dans son ancienne peau (exuvie).",
+     "prevention": "Ne pas laisser de proies non mangées (grillons) avec une mygale en mue : elles peuvent la mordre et la tuer.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Moisissures (infection fongique)",
+     "symptoms": "Plumet blanc ou jaune sur l'animal, surtout sur la carapace, sous l'abdomen ou au bout des pattes.",
+     "prevention": "Fournir les conditions idéales à l'espèce et une ventilation adéquate, surtout pour les espèces qui demandent plus d'humidité.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Nématodes parasites",
+     "symptoms": "Agitation, production de soie inhabituelle, longs séjours près de la coupelle d'eau, odeur douceâtre, sternum très mouillé, masse blanche collante autour de la bouche.",
+     "prevention": null,
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.giantspiders.com/captive-care/common-ailments",
+     "title": "Common Ailments - giantspiders.com"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 20,
+   "tempMax": 24,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Grand terrarium terrestre à large surface au sol, idéalement d'au moins 36 x 18 x 18 pouces.",
+   "lightNeeds": "Éclairage facultatif, utile surtout pour les plantes vivantes ; utiliser des LED qui ne chauffent pas trop l'enclos.",
+   "activityEnrichment": "Plusieurs cachettes (grandes pièces de liège), litière de feuilles, mousse vivante, plantes tropicales robustes",
+   "hygieneNotes": "Garder la coupelle d'eau propre et pleine.",
+   "costEstimate": "élevé",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.thebiodude.com/blogs/arachnid-caresheets/the-care-and-maintenance-of-the-goliath-birdeater",
+     "title": "The Care and Maintenance of the Goliath Birdeater - The Bio Dude"
+    },
+    {
+     "type": "guide",
+     "url": "https://thetarantulacollective.com/caresheets/goliath-birdeater",
+     "title": "Goliath Birdeater Tarantula Care - The Tarantula Collective"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104221549,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 21,
+   "tempMax": 27,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Terrarium en verre d'au moins 300 mm de long et 450 mm de haut : espèce arboricole, plus de hauteur que de surface au sol.",
+   "lightNeeds": "Les UVA/UVB ne sont pas indispensables à sa survie.",
+   "activityEnrichment": "Morceau de liège vertical (demi-rond de préférence) fixé dans le substrat, plantes factices ou vivantes et cachette sûre.",
+   "hygieneNotes": null,
+   "costEstimate": "faible",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.reptilecentre.com/pages/info-pinktoe-tarantula-care-sheet",
+     "title": "Pinktoe Tarantula Care Sheet - Reptile Centre"
+    },
+    {
+     "type": "guide",
+     "url": "https://thetarantulacollective.com/caresheets/avicularia-avicularia",
+     "title": "Guyana Pinktoe Tarantula Care Sheet - The Tarantula Collective"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.zillarules.com/information/care-sheets/pink-toe-tarantula",
+     "title": "Pink Toe Tarantula - Zilla"
+    },
+    {
+     "type": "guide",
+     "url": "https://thevetdesk.com/pet-lifestyle/spiders/tarantula-cost/",
+     "title": "How Much Does a Tarantula Cost? - The Vet Desk"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104221620,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 21,
+   "tempMax": 25,
+   "humidityMin": 65.0,
+   "humidityMax": 75.0,
+   "minSpaceSize": "Enclos de 10 gallons minimum (20 gallons si possible), avec couvercle verrouillable et sans aucune ouverture permettant de s'échapper.",
+   "lightNeeds": "Pas d'éclairage supplémentaire nécessaire ; elle le tolère et peut même apprécier de se chauffer.",
+   "activityEnrichment": "Coupelle d'eau, cachette au niveau du sol et éventuellement quelques plantes en plastique.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://thevetdesk.com/pet-breeds/spiders/mexican-redknee-tarantula/",
+     "title": "Mexican Redknee Tarantula - The Vet Desk"
+    },
+    {
+     "type": "guide",
+     "url": "https://thetarantulacollective.com/caresheets/brachypelma-hamorii",
+     "title": "Brachypelma hamorii (formerly B. smithi) Care - The Tarantula Collective"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104232708,
+  "feeding": null,
+  "behavior": null,
+  "health": null,
+  "reproduction": {
+   "season": null,
+   "gestationDays": 300,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": "Gestation très longue, pouvant atteindre 10 mois (maximum connu chez les Buthidae).",
+   "sources": [
+    {
+     "type": "paper",
+     "url": "https://threatenedtaxa.org/index.php/JoTT/article/download/354/560/630?inline=1",
+     "title": "Notes on the breeding of Hottentotta pachyurus Pocock, 1897 - Journal of Threatened Taxa"
+    }
+   ]
+  },
+  "habitat": null
+ },
+ {
+  "speciesId": 156315727,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Petits grillons (pinhead), mouches des fruits aptères ou petites blattes (jeunes)",
+     "frequency": "toutes les 3 à 4 jours (jeunes)",
+     "notes": null
+    },
+    {
+     "name": "Grillons ou blatte Dubia (adulte)",
+     "frequency": "toutes les 2 à 3 semaines (ou selon les besoins)",
+     "notes": "4-5 gros grillons ou une grosse blatte Dubia"
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Proies non mangées laissées dans l'enclos",
+     "reason": "À retirer après 24 heures."
+    },
+    {
+     "name": "Proies vivantes de plus des deux tiers de la taille d'un juvénile",
+     "reason": "Elles doivent être tuées avant d'être proposées."
+    },
+    {
+     "name": "Suralimentation",
+     "reason": "Évite l'obésité, source de problèmes de mue et de rupture de l'abdomen lors d'une chute."
+    }
+   ],
+   "mealFrequency": "variable",
+   "specificNeeds": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.thetarantulacollective.com/caresheets/cyriopagopus-lividus",
+     "title": "Cobalt Blue Tarantula Care - The Tarantula Collective"
+    }
+   ]
+  },
+  "health": {
+   "diseases": [
+    {
+     "name": "Déshydratation",
+     "symptoms": "Abdomen ratatiné, ridé et nettement trop petit.",
+     "prevention": "Réduire la ventilation, vaporiser régulièrement pour garder le substrat humide et laisser une coupelle d'eau ouverte en permanence.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Problèmes de mue",
+     "symptoms": "Dans la plupart des cas, la mygale reste simplement coincée dans son ancienne peau (exuvie).",
+     "prevention": "Ne pas laisser de proies non mangées (grillons) avec une mygale en mue : elles peuvent la mordre et la tuer.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Moisissures (infection fongique)",
+     "symptoms": "Plumet blanc ou jaune sur l'animal, surtout sur la carapace, sous l'abdomen ou au bout des pattes.",
+     "prevention": "Fournir les conditions idéales à l'espèce et une ventilation adéquate, surtout pour les espèces qui demandent plus d'humidité.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Nématodes parasites",
+     "symptoms": "Agitation, production de soie inhabituelle, longs séjours près de la coupelle d'eau, odeur douceâtre, sternum très mouillé, masse blanche collante autour de la bouche.",
+     "prevention": null,
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.giantspiders.com/captive-care/common-ailments",
+     "title": "Common Ailments - giantspiders.com"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": 100,
+   "litterSizeMax": 300,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": "avance",
+   "notes": "Si la femelle est fécondée, elle produit un sac d'œufs 6 à 8 semaines après l'accouplement.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.thetarantulacollective.com/caresheets/cyriopagopus-lividus",
+     "title": "Cobalt Blue Tarantula Care - The Tarantula Collective"
+    }
+   ]
+  },
+  "habitat": null
+ },
+ {
+  "speciesId": 1025719,
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": 90,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": "Le mâle s'enroule autour de la femelle et dépose du sperme sur son corps ; la femelle pond des centaines d'œufs dans un trou du sol, qui éclosent après environ trois mois, sans soin parental. Il faut plusieurs années pour atteindre la maturité.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://cosleyzoo.org/?p=2220",
+     "title": "Giant African Millipede - Cosley Zoo"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 1406471,
+  "reproduction": null
+ },
+ {
+  "speciesId": 1415423,
+  "behavior": {
+   "generalBehavior": "Très calme le jour, active la nuit ; elle marche par saccades, comme balancée par le vent.",
+   "sociability": "semi-grégaire",
+   "difficultyLevel": "débutant",
+   "compatibilityWithChildren": null,
+   "compatibilityWithOtherAnimals": "Ne pas l'héberger avec des phasmes : ils peuvent manger le corps des phyllies en cas de manque de nourriture.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://keepinginsects.com/stick-insect/species/leaf-insect-psg-278/",
+     "title": "Leaf Insect Phyllium philippinicum - Keeping Insects"
+    },
+    {
+     "type": "guide",
+     "url": "https://monsieurinsecte.fr/en/products/phasme-feuille",
+     "title": "Phyllium philippinicum - Monsieur Insecte"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.furrycritter.com/pages/descriptions/invertebrates/leaf_insect.htm",
+     "title": "Leaf Insect Species Guide - Furry Critter Network"
+    }
+   ]
+  },
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": 120,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": "facile",
+   "notes": "Reproduction possible par parthénogenèse : la femelle peut pondre sans fécondation.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://keepinginsects.com/stick-insect/species/leaf-insect-psg-278/",
+     "title": "Leaf Insect Phyllium philippinicum - Keeping Insects"
+    },
+    {
+     "type": "guide",
+     "url": "https://monsieurinsecte.fr/en/products/phasme-feuille",
+     "title": "Phyllium philippinicum - Monsieur Insecte"
+    }
+   ]
+  },
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 22,
+   "tempMax": 26,
+   "humidityMin": 70.0,
+   "humidityMax": 80.0,
+   "minSpaceSize": "Cage d'au moins 3 fois la longueur de l'insecte en hauteur : pour une femelle adulte, au moins 18 cm de haut et 12 cm de large, idéalement environ 30 x 30 x 30 cm.",
+   "lightNeeds": "Pas de supplément UVB ; lumière ambiante modérée suivant un cycle jour/nuit naturel.",
+   "activityEnrichment": "Reste souvent sur sa plante hôte, mais demande une humidité adaptée.",
+   "hygieneNotes": "Faire attention à éviter les moisissures.",
+   "costEstimate": "faible",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://keepinginsects.com/stick-insect/species/leaf-insect-psg-278/",
+     "title": "Leaf Insect Phyllium philippinicum - Keeping Insects"
+    },
+    {
+     "type": "guide",
+     "url": "https://monsieurinsecte.fr/en/products/phasme-feuille",
+     "title": "Phyllium philippinicum - Monsieur Insecte"
+    },
+    {
+     "type": "guide",
+     "url": "https://www.furrycritter.com/pages/descriptions/invertebrates/leaf_insect.htm",
+     "title": "Leaf Insect Species Guide - Furry Critter Network"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 5296842,
+  "health": {
+   "diseases": [
+    {
+     "name": "Échec de mue",
+     "symptoms": "Des restes de l'ancien exosquelette peuvent rester attachés et étrangler les membres ou des segments du corps.",
+     "prevention": "Prévoir une hauteur d'enclos d'au moins trois fois la longueur du corps pour permettre une mue sans risque.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Infection fongique",
+     "symptoms": "Plaques duveteuses blanches ou grises sur l'insecte, les œufs ou les matières végétales en décomposition.",
+     "prevention": "Bonne ventilation et retrait rapide des matières végétales en décomposition.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Infection bactérienne",
+     "symptoms": "Segments du corps assombris ou décolorés, crottes anormales, léthargie et perte d'appétit.",
+     "prevention": "Nettoyer régulièrement l'enclos et ne fournir que du feuillage frais et non contaminé.",
+     "whenToConsult": null
+    },
+    {
+     "name": "Dessiccation",
+     "symptoms": "Segments du corps ratatinés, activité alimentaire réduite et léthargie.",
+     "prevention": "Vaporiser régulièrement et surveiller l'humidité avec un hygromètre.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.furrycritter.com/pages/descriptions/invertebrates/indian_stick_insect.htm",
+     "title": "Indian Stick Insect Species Guide - Furry Critter Network (phasmes)"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104247531,
+  "habitat": {
+   "habitatType": "terrarium",
+   "tempMin": 23.9,
+   "tempMax": 29.4,
+   "humidityMin": 70.0,
+   "humidityMax": 80.0,
+   "minSpaceSize": "Au moins 10 gallons d'espace par crabe adulte ; un terrarium de 20 gallons convient à 2-4 petits crabes.",
+   "lightNeeds": "Lampes de nuit noires pour les observer après la tombée de la nuit ; cycle jour/nuit idéal de 12 heures chacun.",
+   "activityEnrichment": "Bois flotté, coraux, roches, bois de cholla, grottes et autres éléments pour grimper.",
+   "hygieneNotes": null,
+   "costEstimate": "moyen",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.thatpetplace.com/articles/hermit-crab-article",
+     "title": "Hermit Crab Care - That Pet Place"
+    },
+    {
+     "type": "guide",
+     "url": "https://joshsfrogs.com/sp/captive-bred-hermit-crab-cbphercrab",
+     "title": "Purple Pincher Hermit Crab - Josh's Frogs"
+    }
+   ]
+  }
+ }
+]

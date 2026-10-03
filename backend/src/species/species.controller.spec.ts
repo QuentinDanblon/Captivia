@@ -5,7 +5,6 @@ import { NotFoundException } from '@nestjs/common';
 
 describe('SpeciesController', () => {
   let controller: SpeciesController;
-  let service: SpeciesService;
 
   const mockSpeciesService = {
     searchSpecies: jest.fn(),
@@ -31,8 +30,6 @@ describe('SpeciesController', () => {
     }).compile();
 
     controller = module.get<SpeciesController>(SpeciesController);
-
-    service = module.get<SpeciesService>(SpeciesService);
   });
 
   it('should be defined', () => {

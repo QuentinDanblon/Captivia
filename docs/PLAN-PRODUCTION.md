@@ -1,21 +1,23 @@
 # Captivia — Plan de mise en production « 10/10 » (web · Android · iOS)
 
-> Établi le 2026-10-02 sur `claude/zen-mendel-xq6nkb` (HEAD `a850f15` + pipeline de déploiement). Avancement à jour ci-dessous (HEAD `d27ca0c`).
-> Source : 6 audits parallèles réalisés le même jour (sécurité, backend/données, frontend, mobile, infra/légal, hygiène), qui **remplacent** `AUDIT-2026-08-09.md` et `RAPPORT-FINAL-2026-08-09.md`. Ces deux rapports affirmaient « 0 vulnérabilité » et « production ready » : c'est faux aujourd'hui (voir §2).
+> Plan établi le 2026-10-02 à partir de 6 audits parallèles (sécurité, backend/données, frontend, mobile, infra/légal, hygiène), qui **remplacent** `docs/archive/AUDIT-2026-08-09.md` et `docs/archive/RAPPORT-FINAL-2026-08-09.md` (ces deux rapports affirmaient « 0 vulnérabilité » et « production ready » : c'était faux).
+> **État réel relevé le 2026-10-03 sur `claude/zen-mendel-xq6nkb` (HEAD `898cf26`), à partir du code et de l'historique, pas des déclarations.** Le tableau du [§0.2](#02-état-davancement-source-unique) est la **seule** source de vérité sur l'avancement ; le reste du document décrit les tâches (§4), les décisions (§3) et le déploiement (§5).
 
 ---
 
-## 0. Résumé exécutif
+## 0. Situation au 2026-10-03
 
-**Verdict : l'application n'est pas prête pour la production.** Le socle est sain : architecture modulaire, BOLA correctement géré, migrations sans drift, 421/422 tests backend et 30/30 frontend, build OK. En revanche :
+### 0.1 Résumé
 
-1. **Une faille critique** permet à n'importe qui de devenir opérateur (admin), via une variante de casse de l'e-mail opérateur.
-2. **Le site déployé ne fonctionnerait pas** : le frontend appelle `http://<hôte>:3001` en dur.
-3. **Le cœur de valeur est simulé** : aucun scheduler de rappels, push en `console.log`, aucun e-mail de rappel, paiement en 501.
-4. **La conformité légale est absente** : pas de suppression ou d'export de compte, pas de pages légales.
-5. **Il n'existe aucune application mobile** : pas de Capacitor, d'Expo, ni de manifest PWA.
+Les cinq constats bloquants de l'audit initial sont traités dans le code : l'élévation en opérateur est corrigée, l'URL d'API est unique, les rappels (scheduler, e-mail, Web Push, push natif, notifications locales) existent réellement, la conformité RGPD est en place (export, suppression, registre, purge, consentement) et l'application mobile existe sous forme de socle Capacitor 7 (projets natifs à générer). S'y ajoutent des chantiers hors plan initial : mode invité, refonte du design, agenda et abonnement calendrier, achats intégrés RevenueCat, communauté (fermée par défaut) et enrichissement de ≈ 1 500 fiches.
 
-| Domaine | Note actuelle (estimation) | Cible |
+**Ce qui sépare l'application d'une mise en ligne publique n'est plus du code mais des actions du propriétaire** ([§0.3](#03-actions-du-propriétaire)) : la CI GitHub ne démarre plus (quota Actions du dépôt privé), le secret de migration Neon, les services Render et Netlify, un prestataire d'e-mail, les textes légaux (`[À COMPLÉTER]`, relecture juridique) et, pour les stores, les comptes développeurs, les produits RevenueCat, Firebase et APNs.
+
+Dernier relevé des contrôles (exécutés localement, la CI étant bloquée ; non rejoués pour cette mise à jour documentaire) : backend 1 093/1 093 tests (commit `93e5bc9`), lint backend à 0 erreur sur `src/` **et** `test/` (bloquant en CI), lint frontend à 0 erreur, 480/480 tests jest frontend, smoke Playwright 172/172 avec axe bloquant, `npm audit` à 0 vulnérabilité, migrations sans drift.
+
+Notes de l'audit initial, conservées comme historique (elles ne sont plus à jour) :
+
+| Domaine | Note à l'audit du 2026-10-02 | Cible |
 |---|---|---|
 | Sécurité | 4/10 | 10 |
 | Backend (fiabilité, fonctionnalités réelles) | 5/10 | 10 |
@@ -27,62 +29,167 @@
 | Tests / CI | 5/10 | 10 |
 
 **Deux jalons :**
-- **Jalon 1 : Web public v1.0.** Vagues 0 à 5 et 7. Environ 30 à 40 j-h, soit 2 à 3 semaines calendaires avec des agents en parallèle.
-- **Jalon 2 : Stores v1.1 (Android + iOS).** Vague 6. Environ 4 à 6 semaines de développement, plus 2 semaines de tests et relecture des stores. Les comptes développeurs (délais administratifs) sont à lancer **dès J1**.
+- **Jalon 1 : Web public v1.0.** Vagues 0 à 5 et 7 (code essentiellement livré ; reste la mise en ligne et le légal).
+- **Jalon 2 : Stores v1.1 (Android + iOS).** Vague 6. Les comptes développeurs (délais administratifs) sont sur le chemin critique.
 
----
+### 0.2 État d'avancement (source unique)
 
-## Avancement — vague « niveau complet » (soir du 2026-10-02, 9 agents fonctionnels + 17 lots de contenu)
+Légende : ✅ fait (code présent, vérifié dans le dépôt) · 🟡 partiel (le manque est indiqué) · ⏳ à faire · ✖ abandonné (raison indiquée) · 👤 action du propriétaire requise (voir §0.3). Un ✅ ne dit rien de la mise en service : tout ce qui touche Render, Netlify, Neon, les stores et les prestataires est à vérifier côté propriétaire. Aucun test sur appareil n'a eu lieu : les projets natifs n'existent pas encore.
 
-**Fusionné sur `claude/zen-mendel-xq6nkb` et vérifié sur base vierge** (HEAD `d27ca0c`) :
-- Backend : migrations + seed OK, `migrate diff` sans drift, `tsc`/build OK, **777/777 tests (56 suites)**, `npm audit` 0 vulnérabilité.
-- Frontend : `tsc` OK, ESLint 0 erreur, **167/167 tests jest (17 suites)**, build web OK, `build:mobile` OK, **E2E smoke 94/94 sans retry** (chromium + Mobile Chrome, API mockée), `npm audit` 0.
+| ID | Item | État | Détail, ce qui manque |
+|---|---|---|---|
+| **Vague 0 — Urgences sécurité** | | | |
+| W0-01 | Rôles et e-mails normalisés | ✅ | `User.role`, e-mails en minuscules, index unique, CLI `operator:set`. Après la migration, **aucun compte n'est opérateur** (§0.5). |
+| W0-02 | URL d'API unique | ✅ | `frontend/src/lib/config.ts`, plus de branche LAN dans le bundle de production. |
+| W0-03 | Dépendances vulnérables | ✅ | `npm audit` à 0 au dernier relevé ; Dependabot actif (`.github/dependabot.yml`). À rejouer avant la mise en ligne. |
+| W0-04 | Secrets et valeurs par défaut de prod | 🟡 | Joi de production (`JWT_SECRET`, `CORS_ORIGIN`, `FRONTEND_URL`), jeton de reset haché, compose durci : fait. **`MAIL_HOST` n'est pas obligatoire en production** : sans SMTP, aucun e-mail ne part (reset, vérification, rappels par e-mail). À rendre obligatoire une fois le prestataire choisi (D-06). |
+| W0-05 | Seed de prod propre | ✅ | Magasins factices retirés, gardes `NODE_ENV=production` sur les scripts de dev. Base déjà seedée avec les anciens magasins : requête de purge dans [RUNBOOK.md § 6.6](RUNBOOK.md#66-seed-du-catalogue--idempotence-et-nettoyage-dune-base-ancienne). |
+| W0-06 | Page QR publique sûre | ✅ | Opt-in (`publicEnabled`, `publicFields`), lien révocable, URL construite côté backend. |
+| W0-07 | DoS des notifications, farming de points | ✅ | DTO bornés, plafond d'événements, crédit atomique. |
+| W0-08 | Amplification, rate limiting, cache | ✅ | Throttler global, limites `/gateway/search`, cache LRU borné. |
+| **Vague 1 — Fondations** | | | |
+| W1-01 | Sessions robustes | ✅ | Refresh tokens opaques rotatifs (familles, détection de réutilisation), access token de 30 min, `logout` / `logout-all`, `tokenVersion`. |
+| W1-02 | Client API frontend unique | 🟡 | `request<T>()` avec timeout, `ApiError`, refresh automatique : fait. `login` et `register` passent encore par `safeFetch`, hors de `request()`. |
+| W1-03 | Observabilité | ✅ | Logs pino JSON expurgés, `x-request-id`, Sentry (backend et navigateur, release, scrub), `/health` + `/health/ready`, `HEALTHCHECK` Docker. Pas de tunnel Sentry (`withSentryConfig` non utilisé). DSN à fournir : 👤. |
+| W1-04 | Résilience des API externes | ✅ | Client HTTP unique, retry GBIF, disjoncteur par fournisseur (implémentation interne), replis locaux. |
+| W1-05 | Pagination et tri stable | 🟡 | Backend : `limit` ≤ 100 et tri stable. **Le frontend ne pagine pas** : au-delà de 100 éléments d'une liste, les suivants ne s'affichent pas. |
+| W1-06 | Tests stables et CI bloquante | ✅ | `ci.yml` : tests backend (e2e inclus), `tsc`, build, Docker, ESLint frontend, garde-fou des styles, smoke Playwright, audit ; CodeQL (`codeql.yml`) et Dependabot. **La CI ne démarre plus** (quota Actions) : 👤. Protection de la branche `main` : à activer (non vérifiable depuis le dépôt) : 👤. |
+| W1-07 | Dette lint et code mort | ✅ | Lint backend (`src/` + `test/`, `npm run lint:check`) à 0 erreur, **bloquant en CI** (`lint-backend`) ; lint frontend bloquant. Code mort retiré le 2026-10-03 : `frontend/src/i18n.ts` et `frontend/src/i18n/request.ts` (réexports dépréciés, aucun import), module backend `database-optimization` (statistiques jamais alimentées, chargé seulement avec Redis), dépendance frontend `axios` (aucun import). |
+| W1-08 | Corrections backend diverses | ✅ | Limite d'animaux sans course, abonnement push sûr, anti-énumération. |
+| W1-09 | Durcissement du schéma | 🟡 | CHECK, FK, index trigram (migration `20261003010000_schema_hardening`). La migration vers `prisma.config.ts` n'est pas faite (le bloc `prisma` de `backend/package.json` subsiste). |
+| **Vague 2 — Légal et compte** | | | |
+| W2-01 | Suppression et export de compte | ✅ | `DELETE /users/me`, `GET /users/me/export`, boutons dans les paramètres, page publique `/suppression-compte`. |
+| W2-02 | Pages légales et footer | 🟡 | Mentions, confidentialité, CGU, sources et licences, transparence, footer global : faits en **FR et EN** ; les quatre autres langues reçoivent la version anglaise. **9 champs `[À COMPLÉTER]`** dans `frontend/src/lib/legal.ts`, relecture juridique à faire : 👤. La politique et les CGU ne mentionnent pas encore les achats intégrés (RevenueCat), le push natif (Firebase) ni la communauté. CGV : sans objet (pas de vente sur le web). |
+| W2-03 | Consentement à l'inscription | 🟡 | Cases CGU et âge ≥ 15 ans, `termsAcceptedAt` et `termsVersion` enregistrés. Pas de re-consentement quand la version change. |
+| W2-04 | Vérification d'e-mail | ✅ | Jeton haché, renvoi limité, bandeau, page `verifier-email` ; opérateur, lien public et modération réservés aux comptes vérifiés. L'envoi dépend d'un SMTP configuré (W0-04). |
+| W2-05 | Affiliation conforme | ✅ | `rel="sponsored"` sur les liens des magasins. La mention « Partenaire Amazon » est sans objet : Amazon est retiré (W3-05). |
+| W2-06 | Attributions et licences | 🟡 | Attribution Wikipédia (CC BY-SA 4.0), GBIF, ODbL (Open Food Facts) affichées. Le bloc Wikipédia ne s'affiche que si `sourceUrl` pointe vers wikipedia.org (Wikidata pour une part des fiches) : origine réelle des extraits à vérifier ; audit des licences GBIF à l'import non retrouvé. |
+| W2-07 | Page transparence véridique | ✅ | Alignée sur les fonctions réelles, traduite. |
+| W2-08 | Registre, rétention, purge | 🟡 | `docs/legal/registre-traitements.md` (T1 à T13), purge quotidienne (jetons, événements de rappel, invités, jetons d'appareil, journal de modération), analytics sans `userId` en query. Comptes inactifs de plus de 36 mois : procédure **manuelle** (`docs/RUNBOOK.md` §6.4). DPA non signés, durée de `PaymentEvent` non fixée : 👤. |
+| **Vague 3 — Fonctions cœur** | | | |
+| W3-01 | E-mails transactionnels | 🟡 | `MailService` (nodemailer, retry en ligne), gabarits **fr/en** seulement (les autres langues reçoivent l'anglais), pas de file. Aucun prestataire configuré, SPF/DKIM/DMARC à poser : 👤. |
+| W3-02 | Scheduler de rappels | ✅ | Cron 5 min, verrou consultatif Postgres, `User.timezone`, anti-doublon, `deliveryChannel`, fréquences ancrées sur la date de départ. |
+| W3-03 | Web Push réel | ✅ | `web-push` + VAPID, purge 404/410, clé publique servie par l'API, `sw.js`. Sans clés VAPID, le push est désactivé : 👤. |
+| W3-04 | Paiement web Stripe | ✖ | Abandonné : le premium est vendu **uniquement par achats intégrés** (RevenueCat, voir W6-08 et `docs/PAYMENTS.md`). `POST /users/me/subscription` répond 501 ; aucune CGV. Décisions D-04 et D-05 révisées. |
+| W3-05 | Stubs externes | ✅ | Amazon retiré (route `/amazon/*` en 404) ; Species+ réel mais désactivé sans `SPECIESPLUS_API_TOKEN` ; PubMed réel. |
+| **Vague 4 — Frontend** | | | |
+| W4-01 | Navigation i18n | ✅ | Navigation `next-intl`, sélecteur de langue (retour EN → FR corrigé). |
+| W4-02 | Erreurs, 404, rendu statique | ✅ | `error.tsx`, `global-error.tsx`, `not-found.tsx`, rendu statique par locale. |
+| W4-03 | i18n complète | ✅ | 6 langues, test de parité (`i18n-parity.test.ts`) ; **pt = portugais européen (pt-PT, AO90)**. Hors documents légaux (voir W2-02). |
+| W4-04 | SEO | 🟡 | Métadonnées traduites, hreflang, canonical, image OpenGraph par langue, JSON-LD, `sitemap.ts`, `robots.ts`. **Le sitemap ne liste pas les fiches espèces** (TODO dans `sitemap.ts`, endpoint d'identifiants à créer). |
+| W4-05 | Accessibilité | 🟡 | Modales Radix (`ui/Modal`, plus de modale écrite à la main), lien d'évitement, contrastes, axe bloquant (« serious ») en CI. Déclaration d'accessibilité non rédigée. |
+| W4-06 | PWA et ergonomie mobile | 🟡 | Manifeste, icônes 192/512/maskable, `viewport`, safe-area, `dvh`. Page hors ligne et cache du shell (Serwist) non faits ; logo et icônes **provisoires** (D-15). |
+| W4-07 | Performance | 🟡 | Page animal découpée (4 699 → 719 lignes, sections chargées à la demande), compression des photos ; `public/` nettoyé (`themes/`, `badges/` et images du gabarit Next, sans référence, retirés le 2026-10-03). Budget JS ≤ 170 Ko et Lighthouse mobile ≥ 90 **non mesurés**. |
+| W4-08 | CSP stricte | ✅ | Sans `unsafe-eval`, `object-src 'none'`, `frame-ancestors 'none'`, HSTS ; hachages SHA-256 par page en export mobile ; `vercel.json` supprimé. Écart assumé et documenté : pas de nonce, `'unsafe-inline'` reste dans `script-src` du web (`docs/DEPLOY.md` §10). |
+| W4-09 | E2E Playwright fiables | 🟡 | Smoke déterministe (API mockée, axe), projets bureau et mobile, bloquant en CI. Scripts `frontend/e2e-*.js` supprimés (2026-10-03). Reste : suites héritées `e2e/integration/` (20 `waitForTimeout`, projets `chromium` / `Mobile Chrome` de `playwright.config.ts`, hors CI, backend réel) et `e2e/manual-modals-flow.spec.ts` (`npm run test:modals`) : à réécrire sur le modèle du smoke ou à supprimer. |
+| **Vague 5 — Contenu** | | | |
+| W5-01 | Seed complet et vérifiable | ✅ | Races dans le seed, `seed:breeds`, test de comptages, `semi-solitaire` corrigé. |
+| W5-02 | Curation des fiches | 🟡 | Enrichissement sourcé, contre-vérifié (`VERIFY.md`) et contrôlé mécaniquement (`backend/prisma/enrichment/check_quotes.py` : citations retrouvées dans les pages sources). Dernier relevé (commit `93e5bc9`) : **1 401 fiches complètes sur 1 510**, soit ≈ 109 incomplètes. Sections législation marquées `needsReview` : relecture humaine (vétérinaire / juriste) à faire : 👤. |
+| W5-03 | Reproduction par espèce | 🟡 | L'import de la reproduction existe (`import-enrichment.ts`) ; couverture non mesurée, nombreuses fiches sans (`enrichment/gaps.json`). P2. |
+| W5-04 | Date de vérification | ✅ | `lastReviewedAt` posé à l'import, « Fiche vérifiée le… » affiché. |
+| **Vague 6 — Mobile (Capacitor 7)** | | | |
+| W6-01 | Comptes développeurs | 👤 | Apple Developer + Google Play en organisation (D-U-N-S), contrats et fiscalité. Chemin critique. |
+| W6-02 | Export statique `MOBILE_BUILD` | ✅ | `npm run build:mobile`, routes à query, `localePrefix: 'always'`, CSP en `<meta>`. |
+| W6-03 | Initialisation de Capacitor | 🟡 | Capacitor 7, `capacitor.config.ts`, plugins installés. **Projets natifs non générés** (`npx cap add android` / `ios` à faire, puis à versionner) . Origines `capacitor://localhost` et `https://localhost` ajoutées à `CORS_ORIGIN` dans `render.yaml` (à reporter à la main si le service Render n'a pas été créé par le Blueprint). |
+| W6-04 | Stockage sécurisé des jetons | ✅ | `tokenStorage` : Preferences sur natif, `localStorage` sur le web. |
+| W6-05 | Couche plateforme | 🟡 | `openExternal`, caméra / galerie, partage du carnet : code et tests jest. Non testé sur appareil ([MOBILE.md § 9](MOBILE.md#9-checklist-stores)). |
+| W6-06 | Rappels en notifications locales | 🟡 | `local-reminders.ts`, explication préalable, hors ligne. Non testé sur appareil ; `appRestoredResult` Android non géré (photo perdue si l'app est tuée pendant la prise de vue). |
+| W6-07 | Push distant FCM / APNs | 🟡 | **Code livré le 2026-10-03** : `DeviceToken` (migration `20261003120000_device_tokens`), `POST/DELETE /users/me/device-tokens`, FCM HTTP v1 sans SDK, `PushDispatcher` (Web Push + natif) branché sur le scheduler avec anti-doublon des rappels locaux, purges (jeton invalide, déconnexion, suppression de compte, 270 jours), export RGPD, app (`native-push.ts`, `NotificationPrimer`, deep link). **Reste au propriétaire** : projet Firebase, `google-services.json`, `GoogleService-Info.plist`, clé APNs, capacités Xcode et `AppDelegate`, `FCM_SERVICE_ACCOUNT_JSON` sur Render, puis `NATIVE_PUSH=1` ; test sur appareil ([MOBILE.md § 7.3](MOBILE.md#73-push-natif-fcm--apns-w6-07)) : 👤. |
+| W6-08 | Achats intégrés (RevenueCat) | 🟡 | Backend : webhook idempotent `/webhooks/revenuecat`, `Subscription` / `PaymentEvent`, `EntitlementService` ; app : paywall conforme (restauration, prix lus dans le store), activation confirmée par le backend ; page abonnement web sans achat. **À faire** : produits et prix dans les stores et RevenueCat, clés, `IAP_ENABLED`, test Sandbox : 👤 ([PAYMENTS.md](PAYMENTS.md)). |
+| W6-09 | Universal Links / App Links | 🟡 | Routes `/.well-known/apple-app-site-association` et `assetlinks.json`, `deep-links.ts`. **À faire** : `APPLE_TEAM_ID` et `ANDROID_SHA256_CERT_FINGERPRINTS` sur Netlify, Associated Domains, `intent-filter` : 👤 ([MOBILE.md § 8](MOBILE.md#8-universal-links--app-links-w6-09)). |
+| W6-10 | Icônes, splash, fiches store | 🟡 | Sources d'icônes et de splash, fiches FR/EN, script de captures (`docs/store/`). Logo définitif (D-15) et graphique Play 1 024 × 500 manquants ; `npm run assets:mobile` à lancer après `cap add`. |
+| W6-11 | Déclarations de confidentialité et d'âge | 🟡 | Réponses rédigées (App Privacy, Data Safety, classification d'âge, `PrivacyInfo.xcprivacy`) dans `docs/store/`. Saisie dans les consoles : 👤. |
+| W6-12 | CI mobile et crash reporting | 🟡 | `mobile.yml` (manuel) : export, APK de debug, AAB signé optionnel, iOS limité à `cap sync`. fastlane et `@sentry/capacitor` **non installés** ([MOBILE.md § 13](MOBILE.md#13-à-venir-non-installé--fastlane-et-sentrycapacitor)). |
+| W6-13 | Préparation de la relecture | ⏳ | Compte de démo, sandbox IAP, TestFlight, test fermé Play. |
+| W6-14 | Soumission aux stores | ⏳ | Dépend de W6-01, W6-08, W6-10, W6-11, W6-13. |
+| **Vague 7 — Infra et mise en ligne** | | | |
+| DEP-01 | Pipeline à build automatique | 🟡 | Dépôt prêt : `render.yaml` (`autoDeployTrigger: checksPass`), job `migrate-production` dans `ci.yml` (garde sur le secret), `deploy.yml` réduit au seed manuel, `netlify.toml`. **Liaison Render / Netlify, secret `NEON_DATABASE_URL_DIRECT` et CI : 👤** (non vérifiables depuis le dépôt). |
+| DEP-02 | Domaine et HTTPS | 👤 | Domaine non choisi (D-03) ; le site est prévu sur `https://captivia-app.netlify.app`. |
+| DEP-03 | Sauvegardes et PRA | 🟡 | `backup.yml` hebdomadaire (pg_dump chiffré `age`, artefact GitHub de 30 jours), scripts, `docs/RUNBOOK.md` §3. Pas de stockage externe (R2) ; secret `BACKUP_AGE_RECIPIENT` à créer ; test de restauration jamais fait : 👤. |
+| DEP-04 | Supervision | 👤 | `/health/ready` existe. Monitor UptimeRobot et alertes Sentry à créer à la main (`docs/RUNBOOK.md` §1.2). |
+| DEP-05 | Staging | ⏳ | Aucune branche Neon `staging` ni API de staging. |
+| DEP-06 | Docker et compose | 🟡 | `HEALTHCHECK` backend, compose durci. Pas de `docker-compose.prod.yml` (P2). |
+| DEP-07 | Versionnage | ✅ | `release-please` (`release.yml`, manifeste). Réglage « Allow GitHub Actions to create and approve pull requests » : 👤. |
+| DEP-08 | Runbooks | ✅ | `docs/DEPLOY.md`, `docs/RUNBOOK.md`. |
+| DEP-09 | Test de charge | ⏳ | Dépend du staging. |
+| DEP-10 | Scalabilité | ⏳ | P2, après le lancement. |
+| **Vague H — Hygiène** | | | |
+| WH-01 | README et guide des agents | ✅ | `README.md` réécrit (produit, démarrage local, liens, statut) ; `AGENTS.md` (guide canonique : règles, carte, commandes de vérification) et `CLAUDE.md` (renvoi) ajoutés le 2026-10-03 ; `backend/README.md` et `frontend/README.md` remis à jour. |
+| WH-02 | Archivage des audits | ✅ | `docs/archive/` : audits du 2026-08-09, `plan-api.md` et `DEPLOY-NOTES-seed.md` (archivés le 2026-10-03, contenu utile repris dans `docs/RUNBOOK.md` § 6.6). |
+| WH-03 | README frontend | ✅ | `frontend/README.md` réécrit. |
+| WH-04 | Fichiers inutiles, ports | ✅ | `start.bat` et `.cursorindexingignore` supprimés, ports alignés. Le 2026-10-03 : `scripts/vercel-open.js` (et le script `vercel:open`), `scripts/start.js`, `start-db.sh`, `stop-db.sh`, `verify-implementation.js`, `api-functional-test.py`, `i18n_propagate.py`, `frontend/scripts/i18n_module_{a,c}.py` et `frontend/e2e-*.js` supprimés (aucune référence, obsolètes). |
+| WH-05 | `.nvmrc` et `engines` | ✅ | Node 22 ; `engines` dans les trois `package.json`. |
+| WH-06 | Fichier `LICENSE` | ⏳ | Absent (D-13) ; `backend/package.json` déclare `UNLICENSED`. À trancher avant tout passage du dépôt en public. |
+| WH-07 | Issues du backlog | ⏳ | Aucune issue ouverte dans le dépôt GitHub. |
+| **Hors plan initial** | | | |
+| PRD-01 | Vision produit et message | ✅ | `docs/PRODUCT.md`, `docs/MESSAGING.md` ; **D-16 validée** (carnet complet pour l'animal unique de l'invité et du compte gratuit). |
+| GST-01 | Mode invité | ✅ | `POST /auth/guest`, `POST /auth/upgrade` (conversion sans perte), 1 animal, bandeau, emplacement verrouillé, purge à 90 jours. |
+| DES-01 | Refonte du design | ✅ | Direction « carnet de terrain » (`frontend/docs/DESIGN.md`), `AppShell` (onglets mobile / barre latérale PC), tableau de bord « Aujourd'hui », fiches « planche », landing en entonnoir avec 15 photos Commons créditées, garde-fou CI des motifs de style interdits. |
+| DES-02 | Fin de `SiteChrome` | ✅ | Composant supprimé ; un cadre par groupe de routes : `(app)`, `(marketing)`, `(auth)`. |
+| AGD-01 | Agenda des soins et carnet | ✅ | Agenda multi-animaux, abonnement calendrier ICS (jeton révocable), carnet de santé imprimable / partageable. |
+| COM-01 | Communauté (volet social) | 👤 | **Code livré, fermée par défaut** (`COMMUNITY_ENABLED=false`, routes en 404) : profils, publications, commentaires, réactions, signalements, modération DSA (seuil de masquage réservé aux membres établis, signalants informés, recours atomique), médias WebP sans EXIF sur stockage S3 / R2, RGPD, correctifs issus de la revue de sécurité ; interface du fil, de la modération et des recours ; règles de communauté dans l'app. **À faire avant ouverture** : §0.3, bloc E. |
+| CNT-01 | Contenu des espèces | 🟡 | Voir W5-02 et W5-03. |
 
-| Tâche | Livré |
-|---|---|
-| W1-01 ✅ | Refresh tokens opaques rotatifs (familles, détection de réutilisation), access token 30 min, `logout` / `logout-all`, refresh automatique côté client (`src/lib/session.ts`). |
-| W2-04 ✅ | Vérification d'e-mail (jeton haché, renvoi limité), bandeau, page `verifier-email` ; rôle opérateur et lien public réservés aux comptes vérifiés. |
-| W3-03 ✅ | Web Push réel (VAPID, `web-push`, purge 404/410, clé publique servie par l'API, `sw.js`). |
-| W4-05 ✅ | Modales `ui/Modal` (Radix) : focus, Échap, retour du focus ; contrastes `--captivia-muted` ≥ 4,5:1. |
-| W4-07 ✅ | Page animal découpée (4 699 → 719 lignes, sections chargées à la demande, −16 % de JS initial), compression des photos. |
-| W4-09 ✅ | E2E Playwright déterministes (API mockée, axe), job smoke bloquant en CI ; correctif du retour EN → FR du sélecteur de langue. |
-| W6-02/03/04 ✅ (socle) | Export statique `build:mobile`, Capacitor 7, routes à query, stockage des jetons via Preferences, `openExternal`, workflow `mobile.yml` (manuel). Projets natifs non générés (`cap add` à faire). |
-| Nouveau ✅ | **Agenda des soins** multi-animaux + abonnement calendrier **ICS** par jeton révocable. **Carnet de santé imprimable** (web) / accessible dans l'app. |
-| DEP-03 ✅ | Sauvegarde hebdomadaire chiffrée (`age`, pg_dump 17, artefact 30 j), scripts de sauvegarde/restauration, `docs/RUNBOOK.md`. |
-| DEP-07 ✅ | release-please (manifeste backend/frontend). |
-| W5-02 ✅ | Lots G (Sonnet) avec preuve par citation, **672 citations contrôlées mécaniquement** contre les pages sources (`enrichment/check_quotes.py`) ; base : 1 340 fiches complètes sur 1 510. Lots H (120 fiches) préparés. |
+### 0.3 Actions du propriétaire
 
-**Restent ouverts** : W1-04, W1-07 (lint backend), W1-09, W2-02 (textes légaux `[À COMPLÉTER]` + juriste), W2-08, W3-05, W4-03, W4-08, W5-03, W5-04, W6-05 à W6-14, DEP-02, DEP-04 à DEP-06, DEP-09/10 ; relecture humaine législation/santé ; mise en ligne sur les nouveaux comptes Neon/Render/Netlify.
+Dans l'ordre. Les blocs A à C conditionnent la mise en ligne du web ; D conditionne les stores ; E l'ouverture de la communauté.
 
-## Avancement — sprint du 2026-10-02 (3 vagues, 20 agents + 1 revue Opus, tout fusionné sur `claude/zen-mendel-xq6nkb`)
+**A. Débloquer la CI (bloquant)**
+1. **Quota ou facturation GitHub Actions** : la CI ne démarre plus (quota des 2 000 min/mois du dépôt privé). Soit régler la facturation ou relever le quota, soit passer le dépôt en **public** (minutes gratuites). Avant un passage en public : trancher la licence (D-13, `LICENSE` absent) et relire le dépôt (secrets, documents internes).
+2. Activer la **protection de `main`** (PR obligatoire, checks requis : [DEPLOY.md § 3.5](DEPLOY.md#35-protection-de-main)) et le réglage « Allow GitHub Actions to create and approve pull requests » (release-please).
 
-**Vérifications d'intégration finales** (toutes les branches fusionnées, PostgreSQL vierge) :
-- `prisma migrate deploy` : 10 migrations OK, `migrate diff` : aucun drift ; seed de production idempotent → **1 595 profils** (299 espèces + 1 296 races), 0 magasin factice.
-- Backend : `tsc` et build OK, **699/699 tests (48 suites)**.
-- Frontend : `tsc` OK, **ESLint 0 erreur**, **87/87 tests (9 suites)** dont parité i18n, build de production OK.
-- `npm audit --omit=dev` : **0 vulnérabilité** (racine, backend, frontend). `docker compose config` et workflows YAML valides.
-- Revue de code Opus (effort élevé) sur le diff cumulé : 11 constats, **tous corrigés** (migration CI après tous les checks, anti-antidatage des points, token après changement de mot de passe, scrub Sentry du token de reset, export RGPD complet, statut premium opérateur, chemins `breeding`, dédup de migration sans perte, ping hors GitHub Actions car dépôt privé).
+**B. Mise en ligne (Neon, Render, Netlify)** — pas à pas dans [DEPLOY.md § 3](DEPLOY.md#3-mise-en-place-pas-à-pas)
+3. Secret GitHub **`NEON_DATABASE_URL_DIRECT`** : l'URL **directe, non poolée** (hôte sans `-pooler`), valeur seule sans `psql` ni guillemets. Sans lui, `migrate-production` s'arrête avec un avertissement et **aucune migration n'est appliquée**. Créer aussi l'environnement GitHub `production`.
+4. **Render** : Blueprint `render.yaml`, `DATABASE_URL` = URL Neon **poolée** + `pgbouncer=true`, déclencheur « After CI checks pass ». **Netlify** : projet relié au dépôt (site `https://captivia-app.netlify.app`), variable `NEXT_PUBLIC_API_URL` = URL de l'API Render pour les contextes Production et Deploy Previews. Puis lancer « Seed production » (Actions) et promouvoir le premier opérateur (§0.5).
+5. **E-mail** (aujourd'hui aucun e-mail ne part) : choisir et configurer le prestataire (D-06, Brevo recommandé), variables `MAIL_*` sur Render, SPF / DKIM / DMARC sur le domaine d'envoi.
+6. **Web Push** : `npm run vapid:generate` (dossier `backend/`), puis `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` sur Render.
+7. **Observabilité et supervision (DEP-04)** : projets Sentry en région UE (`SENTRY_DSN` sur Render, `NEXT_PUBLIC_SENTRY_DSN` sur Netlify) et règles d'alerte ; monitor **UptimeRobot** sur `<API>/health` toutes les 5 minutes (alerte et maintien en éveil de Render Free) ; suivi des quotas Render, Neon et Netlify.
+8. **Sauvegardes** : générer la paire de clés `age`, secret `BACKUP_AGE_RECIPIENT`, conserver la clé privée hors du dépôt, puis faire un test de restauration ([RUNBOOK.md § 3.4](RUNBOOK.md#34-test-de-restauration-sur-une-branche-neon-jetable)).
+9. **Domaine (D-03)** : à choisir ; mettre à jour `CORS_ORIGIN`, `FRONTEND_URL`, `PUBLIC_WEB_URL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_API_URL`.
 
-| Statut | Tâches |
-|---|---|
-| ✅ Fait | **V0** : W0-01, W0-02, W0-03, W0-05, W0-06, W0-07, W0-08 · **V1** : W1-03 (pino JSON expurgé, request-id, Sentry `instrument.ts` + release, `/health/ready`, version), W1-05, W1-06, W1-08 · **V2** : W2-01, W2-03, W2-05, W2-06, W2-07 · **V3** : W3-01 (MailService fr/en), W3-02 (cron 5 min, verrou transactionnel, `notifiedAt`, `User.timezone`) · **V4** : W4-01, W4-02, W4-04, W4-06 · **V5** : W5-01 · **V7** : DEP-01, DEP-08 · **WH** : 01, 02, 03, 04, 05 |
-| 🟡 Partiel | W0-04 (rendre `MAIL_HOST` obligatoire en prod dès le choix du prestataire), W1-01 (`tokenVersion` sans refresh token), W1-02 (`login`/`register` hors `request()`), W1-04 (circuit breaker, retry GBIF), W1-07 (backend : ~2 000 erreurs de lint historiques, job non bloquant), W2-02 (pages FR/EN rédigées — **marqueurs `[À COMPLÉTER]` dans `frontend/src/lib/legal.ts`** + relecture juriste), W4-03 (restes mineurs listés dans le commit), W4-05 (modales manuelles à migrer vers Radix, contrastes `--captivia-muted`) |
-| ⏳ À faire | W1-09, W2-04 (vérification d'e-mail), W2-08, W3-03 (Web Push : brancher `PushSender`), W3-04 (Stripe — ou laisser l'offre masquée, D-04), W3-05, W4-07, W4-08, W4-09, W5-02 à W5-04, **Vague 6 (mobile)**, DEP-02 à DEP-07, DEP-09/10, WH-06, WH-07 |
+**C. Légal et données**
+10. **Identité de l'éditeur (D-01)** : renseigner les 9 champs `[À COMPLÉTER]` de `frontend/src/lib/legal.ts` (raison sociale, forme et capital, SIREN, TVA, adresse, téléphone, directeur de publication, e-mail de contact, prestataire e-mail).
+11. **Relecture par un juriste** des pages légales (FR et EN ; les quatre autres langues affichent l'anglais) ; compléter la politique de confidentialité (achats intégrés RevenueCat / Apple / Google, push natif Firebase, communauté T13) et les CGU.
+12. **DPA des sous-traitants** ([registre § 7](legal/registre-traitements.md#7-accords-de-sous-traitance-dpa-à-signer)) : Neon, Render, Netlify, Brevo, Sentry, GitHub, RevenueCat (avant `IAP_ENABLED=true`), Cloudflare (avant la communauté) ; vérifier aussi la ligne Google (FCM) du registre.
+13. **Durée de conservation de `PaymentEvent`** (avec l'expert-comptable) ; confirmer les 36 mois d'inactivité, le préavis et la fréquence de revue ([registre § 8](legal/registre-traitements.md#8-points-à-décider-ou-compléter-par-le-propriétaire)).
+14. **Relecture humaine** (vétérinaire, juriste) des sections législation et santé des fiches avant mise en avant.
 
-**Enrichissement de la base (W5-02, soirée du 2026-10-02)** : ~70 agents Haiku ont rédigé les sections manquantes de 216 espèces et les descriptions de 376 races (`backend/prisma/enrichment/`). **Contre-vérification obligatoire par des agents Sonnet** (VERIFY.md) : chaque lot est relu contre les sources (WebFetch), les erreurs corrigées, les faits non confirmés supprimés. Les vérificateurs ont trouvé de nombreuses hallucinations (statuts légaux et annexes UE inventés, espèces protégées ou envahissantes présentées comme « sans restriction », chiffres de reproduction faux, maladies inexistantes, sources génériques) — tout cela est corrigé ou retiré. **Garde-fous** : seuls les lots ayant un rapport `verify/<LOT>.json` sont importés ; sources https obligatoires ; 8 liens morts écartés ; législation marquée `needsReview: true`. 85 entrées non animales (outils, objets, Q-ids Wikidata) du catalogue de races sont exclues. **À faire** : relecture humaine (vétérinaire / juriste) des sections législation et santé avant mise en avant, et compléter les sections remises à `null`.
+**D. Stores et mobile** (Jalon 2)
+15. **Comptes Apple Developer et Google Play en organisation** (D-12, D-U-N-S), contrats « Paid Apps » et fiscalité (W6-01).
+16. **RevenueCat et produits** ([PAYMENTS.md](PAYMENTS.md)) : abonnements mensuel et annuel dans App Store Connect et la Play Console, **prix à fixer par le propriétaire**, projet RevenueCat, entitlement `premium`, webhook ; variables Render `IAP_ENABLED`, `REVENUECAT_WEBHOOK_SECRET`, `REVENUECAT_ENTITLEMENT_ID`, `GOOGLE_PLAY_PACKAGE_NAME` ; variables GitHub `REVENUECAT_IOS_KEY`, `REVENUECAT_ANDROID_KEY` ; test Sandbox.
+17. **Firebase et APNs** ([MOBILE.md § 7.3](MOBILE.md#73-push-natif-fcm--apns-w6-07)) : projet Firebase, `google-services.json` (secret `GOOGLE_SERVICES_JSON_BASE64`), `GoogleService-Info.plist`, clé APNs `.p8`, capacités Xcode, `AppDelegate`, `FCM_SERVICE_ACCOUNT_JSON` sur Render ; poser `NATIVE_PUSH` seulement ensuite.
+18. **Projets natifs** : `npx cap add android` / `ios`, versionner, vérifier que `CORS_ORIGIN` sur Render contient `capacitor://localhost` et `https://localhost` ([MOBILE.md § 5](MOBILE.md#5-cors-backend)), `APPLE_TEAM_ID` et `ANDROID_SHA256_CERT_FINGERPRINTS` sur Netlify, Associated Domains et `intent-filter`.
+19. **Logo définitif (D-15)** et graphique de présentation Play ; saisie des fiches et des déclarations dans les consoles ([store/README.md](store/README.md)) ; URL des fiches (`NEXT_PUBLIC_APP_STORE_URL`, `NEXT_PUBLIC_PLAY_STORE_URL`) ; compte de démo ; TestFlight et test fermé Play.
 
-**Points d'attention relevés pendant le sprint (à traiter) :**
-- `grade.service` : heures des événements posées en UTC sans fuseau, et `every_2_days`/`every_3_days` encore calculés sur la parité epoch (lié à W3-02).
-- Listes API bornées à 100 éléments par défaut (W1-05) : le frontend ne pagine pas encore → au-delà de 100 animaux/entrées, prévoir la pagination UI.
-- `SpeciesProfile.sourceUrl` pointe vers Wikidata (CC0) : le bloc d'attribution Wikipédia ne s'affiche que pour une URL wikipedia.org ; vérifier l'origine réelle des extraits (W2-06).
-- Logo et icônes **provisoires** (`frontend/public/brand/`, décision D-15) ; pas encore d'image OpenGraph.
+**E. Ouverture de la communauté** (`COMMUNITY_ENABLED`, seulement une fois la modération prête)
+20. Publier les CGU complétées et la politique (T13) ; désigner le point de contact DSA (`COMMUNITY_CONTACT_EMAIL`) et le délai cible de traitement des signalements et des recours ; valider les 365 jours du journal de modération ; prévoir la procédure de signalement aux autorités ([RUNBOOK.md § 9](RUNBOOK.md#9-modération-de-la-communauté)) ; identifier les opérateurs (e-mail vérifié).
+21. Créer le bucket **Cloudflare R2** (juridiction UE), signer le DPA Cloudflare, renseigner `MEDIA_DRIVER=s3` et les variables `S3_*` / `MEDIA_*` ([DEPLOY.md](DEPLOY.md#communauté--stockage-des-médias-cloudflare-r2)), puis `COMMUNITY_ENABLED=true` (Render) et `NEXT_PUBLIC_COMMUNITY_ENABLED=true` + `NEXT_PUBLIC_MEDIA_BASE_URL` (Netlify).
 
-**Changements de contrat à connaître avant le premier déploiement :**
-- Après la migration `20261002100000_auth_roles_sessions`, **aucun compte n'est opérateur** : `cd backend && DATABASE_URL=<URL Neon directe> npm run operator:set -- <email>` (depuis un poste de dev ; l'image runtime n'a pas les scripts).
+**Décisions encore ouvertes** : D-01, D-03, D-06, D-12, D-13, D-14, D-15 (§3).
+
+### 0.4 Historique condensé
+
+- **2026-10-02, sprint initial** (20 agents + 1 revue Opus) : vagues 0 à 2 et socle des vagues 3 à 5 ; 11 constats de revue corrigés (migration CI après tous les checks, anti-antidatage des points, jeton après changement de mot de passe, scrub Sentry, export RGPD complet…). Seed de production vérifié sur base vierge.
+- **Soirée du 2026-10-02, vague « niveau complet »** : refresh tokens, vérification d'e-mail, Web Push, modales Radix, découpe de la page animal, E2E fiables, socle Capacitor, agenda ICS, sauvegardes chiffrées, release-please. Enrichissement des fiches : ~70 agents rédacteurs, contre-vérification obligatoire par des agents Sonnet (nombreuses hallucinations corrigées ou retirées : statuts légaux inventés, espèces protégées présentées « sans restriction », maladies inexistantes, sources génériques) ; seuls les lots ayant un rapport `verify/<LOT>.json` sont importés, sources https obligatoires, législation marquée `needsReview`.
+- **Nuit du 2-3 octobre, vague « produit et design »** : revues Opus backend (12 constats) et frontend (15 constats) corrigées, produit (D-16), mode invité, refonte design, résilience des API externes, durcissement du schéma, purge RGPD, CSP stricte, rappels locaux et deep links, lots d'enrichissement H001-H011 (citations contrôlées mécaniquement).
+- **2026-10-03** : lint backend résorbé (1 908 → 0 erreur, bloquant, `test/` inclus), préparation des stores, achats intégrés RevenueCat (Stripe abandonné), communauté (backend, interface, modération DSA, correctifs de sécurité), pt-PT, suppression de `SiteChrome`, push natif FCM / APNs (W6-07) ; guide `AGENTS.md`, README réécrit, documents périmés archivés et code mort retiré (W1-07, WH-01, WH-04).
+
+### 0.5 Points d'attention et changements de contrat
+
+**À traiter**
+- Listes API bornées à 100 éléments (W1-05) sans pagination côté interface.
+- Logo et icônes **provisoires** (`frontend/public/brand/`, D-15).
+- `SpeciesProfile.sourceUrl` pointe vers Wikidata (CC0) pour une part des fiches : vérifier l'origine des extraits (W2-06).
+- Sans SMTP, aucun e-mail (reset de mot de passe, vérification, rappels) ne part ; la vérification d'e-mail bloque alors l'accès aux fonctions réservées.
+
+**À connaître avant le premier déploiement**
+- Après la migration `20261002100000_auth_roles_sessions`, **aucun compte n'est opérateur** : `cd backend && DATABASE_URL=<URL Neon directe> npm run operator:set -- <email>` depuis un poste de développement (l'image runtime n'a pas les scripts). Le compte doit avoir un e-mail vérifié.
 - `/auth/register` exige `acceptTerms: true` et `ageConfirmed: true` ; mots de passe de 10 à 128 caractères ; `change-password` renvoie un nouvel `accessToken`.
-- En production, l'API **refuse de démarrer** sans `JWT_SECRET` (≥ 32 caractères, non-exemple), `CORS_ORIGIN` et `FRONTEND_URL` (https). Variables nouvelles : `PUBLIC_WEB_URL`, `MAIL_*`, `REMINDERS_ENABLED`, `SENTRY_TRACES_SAMPLE_RATE` (backend) ; `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SENTRY_DSN` (frontend). Voir `docs/DEPLOY.md`.
+- En production, l'API **refuse de démarrer** sans `JWT_SECRET` (≥ 32 caractères, non-exemple), `CORS_ORIGIN` et `FRONTEND_URL` (https) ; avec `IAP_ENABLED=true` sans `REVENUECAT_WEBHOOK_SECRET` ; avec `COMMUNITY_ENABLED=true` sans stockage S3. Variables : [DEPLOY.md § 5](DEPLOY.md#5-matrice-des-variables-denvironnement).
 - Le lien public d'un animal est en opt-in (les liens existants restent actifs, sans données de santé).
 - Maintien en éveil de l'API Render : monitor **UptimeRobot** (le dépôt étant privé, pas de cron GitHub Actions).
+
+---
 
 ## 1. Conventions d'exécution
 
@@ -123,7 +230,9 @@
 
 ---
 
-## 2. État des lieux consolidé (2026-10-02)
+## 2. État des lieux de l'audit initial (2026-10-02, historique)
+
+> Photographie prise avant les travaux : **ces mesures ne sont plus à jour** (voir [§0](#0-situation-au-2026-10-03) pour l'état réel). Elle est conservée pour la traçabilité des constats cités dans les tâches et l'annexe A.
 
 ### 2.1 Résultats mesurés
 
@@ -160,31 +269,34 @@
 
 ---
 
-## 3. Décisions du propriétaire (à trancher avant ou pendant la vague 0)
+## 3. Décisions du propriétaire
 
-| ID | Décision | Recommandation par défaut | Bloque |
-|---|---|---|---|
-| D-01 | Structure juridique : raison sociale, SIREN, directeur de publication, TVA | — (à fournir) | W2-02 |
-| D-02 | Hébergement | **Netlify (front) + Render Free Frankfurt (API) + Neon Free Frankfurt (DB)**. Passer Render en Starter dès que le trafic le justifie (fin de la mise en veille) | §5 |
-| D-03 | Nom de domaine | `captivia.<tld>` (front) + `api.captivia.<tld>` | DEP-02 |
-| D-04 | Monétisation au lancement web | **Lancer v1.0 sans premium payant** (page abonnement en « bientôt »), puis Stripe en v1.0.x. Évite CGV, rétractation et TVA au J0 | W3-04 |
-| D-05 | Prestataire de paiement | Stripe Billing (web) + RevenueCat (stores), ou Paddle / Lemon Squeezy comme *merchant of record* pour la TVA UE | W3-04, W6-08 |
-| D-06 | Prestataire e-mail | Brevo (UE, offre gratuite de 300 mails/jour) avec SPF, DKIM et DMARC | W3-01 |
-| D-07 | Âge minimum | 15 ans (consentement numérique en France) | W2-03 |
-| D-08 | Partage public des animaux (QR) | Garder, en **opt-in** avec champs choisis et lien révocable | W0-06 |
-| D-09 | Affiliation | Amazon.fr seul au lancement. Vérifier la migration PA-API 5 vers Creators API | W2-05, W3-05 |
-| D-10 | Textes Wikipédia | Garder avec attribution CC BY-SA visible (ou réécrire à terme) | W2-06 |
-| D-11 | Stratégie mobile | **PWA + Capacitor 7** (export statique embarqué, sans `server.url`). Expo est écarté (coût ×4) | Vague 6 |
-| D-12 | Comptes stores | Apple Developer (99 $/an) et Google Play (25 $) en **Organisation** (D-U-N-S) pour éviter la règle des 12 testeurs pendant 14 jours | W6-01 |
-| D-13 | Licence du code | Propriétaire (`UNLICENSED`) : ajouter un fichier `LICENSE` explicite | WH-06 |
-| D-14 | Staging | Oui : branche Neon `staging` + previews Netlify | DEP-05 |
-| D-15 | Logo maître 1024×1024 et charte | À fournir (designer) | W4-06, W6-10 |
+| ID | Décision | Recommandation par défaut | Bloque | Statut au 2026-10-03 |
+|---|---|---|---|---|
+| D-01 | Structure juridique : raison sociale, SIREN, directeur de publication, TVA | — (à fournir) | W2-02 | Ouverte 👤 : les champs `[À COMPLÉTER]` de `legal.ts` attendent ces informations |
+| D-02 | Hébergement | **Netlify (front) + Render Free Frankfurt (API) + Neon Free Frankfurt (DB)**. Passer Render en Starter dès que le trafic le justifie (fin de la mise en veille) | §5 | Retenue : `render.yaml`, `netlify.toml`, jobs de migration (mise en service à vérifier côté propriétaire) |
+| D-03 | Nom de domaine | `captivia.<tld>` (front) + `api.captivia.<tld>` | DEP-02 | Ouverte 👤 : site prévu sur `https://captivia-app.netlify.app` |
+| D-04 | Monétisation au lancement web | **Lancer v1.0 sans premium payant** (page abonnement en « bientôt »), puis Stripe en v1.0.x. Évite CGV, rétractation et TVA au J0 | W3-04 | **Révisée** : pas de Stripe ; le premium passe par les achats intégrés des stores (voir D-05) ; le web n'a aucun achat |
+| D-05 | Prestataire de paiement | Stripe Billing (web) + RevenueCat (stores), ou Paddle / Lemon Squeezy comme *merchant of record* pour la TVA UE | W3-04, W6-08 | **Tranchée** : RevenueCat seul (achats intégrés Apple et Google), Stripe abandonné (W3-04 ✖) ; `docs/PAYMENTS.md` |
+| D-06 | Prestataire e-mail | Brevo (UE, offre gratuite de 300 mails/jour) avec SPF, DKIM et DMARC | W3-01 | Ouverte 👤 : aucun prestataire configuré, donc aucun e-mail envoyé |
+| D-07 | Âge minimum | 15 ans (consentement numérique en France) | W2-03 | Appliquée : 15 ans, case à l'inscription |
+| D-08 | Partage public des animaux (QR) | Garder, en **opt-in** avec champs choisis et lien révocable | W0-06 | Appliquée : opt-in, lien révocable |
+| D-09 | Affiliation | Amazon.fr seul au lancement. Vérifier la migration PA-API 5 vers Creators API | W2-05, W3-05 | **Révisée** : Amazon retiré (W3-05) ; liens d'affiliation via `AffiliateStore` ; à rouvrir quand un compte Associates est validé |
+| D-10 | Textes Wikipédia | Garder avec attribution CC BY-SA visible (ou réécrire à terme) | W2-06 | Appliquée : attribution CC BY-SA affichée (réserve : W2-06) |
+| D-11 | Stratégie mobile | **PWA + Capacitor 7** (export statique embarqué, sans `server.url`). Expo est écarté (coût ×4) | Vague 6 | Appliquée (Capacitor 7, export statique embarqué) |
+| D-12 | Comptes stores | Apple Developer (99 $/an) et Google Play (25 $) en **Organisation** (D-U-N-S) pour éviter la règle des 12 testeurs pendant 14 jours | W6-01 | Ouverte 👤 |
+| D-13 | Licence du code | Propriétaire (`UNLICENSED`) : ajouter un fichier `LICENSE` explicite | WH-06 | Ouverte : pas de `LICENSE` (WH-06) |
+| D-14 | Staging | Oui : branche Neon `staging` + previews Netlify | DEP-05 | Ouverte : pas de staging (DEP-05) |
+| D-15 | Logo maître 1024×1024 et charte | À fournir (designer) | W4-06, W6-10 | Ouverte 👤 : logo et icônes provisoires |
+| D-16 | Carnet de santé complet pour l'animal unique (invité et compte gratuit) ; le Premium débloque plusieurs animaux | Validée le 2026-10-02 | Mode invité, offre | Appliquée (`docs/PRODUCT.md`) |
 
 ---
 
 ## 4. Feuille de route par vagues
 
 Format des tâches : **ID · Tâche** — fichiers — action et critères d'acceptation — Prio · Effort · Modèle/effort · Dépendances. Les identifiants entre crochets renvoient aux constats d'audit.
+
+> Les tableaux ci-dessous décrivent les tâches **telles qu'elles étaient spécifiées**. Leur avancement n'y figure pas : il est uniquement au [§0.2](#02-état-davancement-source-unique), où sont aussi consignés les écarts entre la spécification et le code livré.
 
 ### Vague 0 — Urgences sécurité et déblocage du déploiement (P0, ~3 j)
 
@@ -194,7 +306,7 @@ Format des tâches : **ID · Tâche** — fichiers — action et critères d'acc
 | **W0-02** | URL d'API unique [SEC-02, FE-01, MOB-10, MOB-11, MOB-19] | Créer `frontend/src/lib/config.ts` (`API_URL` = `NEXT_PUBLIC_API_URL`, obligatoire en prod ; fallback LAN **seulement** si `NODE_ENV==='development'`). L'utiliser dans `api.ts`, `AuthContext.tsx:30`, `parametres/notifications/page.tsx:59`. Remplacer le message « npm run start:dev » par un message i18n avec bouton Réessayer. `/api/mobile-link` limité au dev. Test jest : hôte non local + env définie → l'URL d'env est utilisée. | P0 · S · sonnet medium | — |
 | **W0-03** | Dépendances vulnérables [SEC-03, FE-02, BE-13] | Front : `next ≥ 16.3.6`, `axios` à jour (ou supprimer axios avec `api-client.ts`, code mort). Back : `nodemailer ≥ 10.0.6`, `axios ≥ 1.19.1`, joi, prisma, `@nestjs/*`. Retirer `memcached` et les dépendances front inutilisées (`leaflet`, `react-leaflet`, `qrcode`, `framer-motion`, `react-hook-form`, `zod`, `@hookform/resolvers`, `@tanstack/react-query`, `@radix-ui/react-select`) après vérification. `images.unoptimized: true` (aucun `next/image` utilisé). **Acceptation** : `npm audit --omit=dev --audit-level=high` = 0 des deux côtés, build et tests verts. | P0 · M · sonnet medium | — |
 | **W0-04** | Secrets et valeurs par défaut de prod [SEC-11, SEC-12, OPS-02, OPS-03, OPS-14, BE-03, BE-05, BE-16] | Joi conditionnel `NODE_ENV=production` : `JWT_SECRET` ≥ 32 caractères avec liste noire des valeurs d'exemple ; `CORS_ORIGIN`, `FRONTEND_URL` (https), `PUBLIC_WEB_URL` obligatoires ; `MAIL_HOST` obligatoire dès W3-01. Ne **jamais** logger le lien de reset en prod ; `sendMail` dans un try/catch avec réponse générique ; stocker `sha256(token)` de reset et purger les expirés. Remplacer `console.error(AxiosError)` par message + statut (fuite du token Species+). Défaut `FRONTEND_URL` → `:3000`. Corriger `api.config.ts:35` (WIKIPEDIA_RATE_WINDOW). Compose : `${JWT_SECRET:?}`, `${POSTGRES_PASSWORD:?}`, Postgres sur `127.0.0.1`. Défaut `HOST` à `0.0.0.0` [BE-19]. `.env.example` racine et backend complets et cohérents. | P0 · M · sonnet medium | — |
-| **W0-05** | Seed de prod et identifiants propres [BE-02, BE-21, HYG-03, HYG-04] | Supprimer les 9 magasins `example-*.fr` de `seed-prod.ts:774-850` (et prévoir la requête SQL de purge). Garde `NODE_ENV==='production' → throw` dans `seed-dev.ts` et `scripts/reset-dev-password.ts`. Retirer l'e-mail réel et `Captivia2025` de ce script. Expurger `test@captivia.local / Test1234!` des docs. | P0 · S · haiku low | — |
+| **W0-05** | Seed de prod et identifiants propres [BE-02, BE-21, HYG-03, HYG-04] | Supprimer les 9 magasins `example-*.fr` de `seed-prod.ts:774-850` (et prévoir la requête SQL de purge). Garde `NODE_ENV==='production' → throw` dans `seed-dev.ts` et `backend/scripts/reset-dev-password.ts`. Retirer l'e-mail réel et `Captivia2025` de ce script. Expurger `test@captivia.local / Test1234!` des docs. | P0 · S · haiku low | — |
 | **W0-06** 🔒 | Page QR publique sûre [SEC-10, BE-08, LEG-07, MOB-20, MOB-22, SEC-21] | `Animal.publicEnabled` (opt-in) + `publicFields`. Liste blanche par défaut : nom, espèce, sexe, photo, contact volontaire. Jamais `notes`, `details` ni l'`id` interne. Endpoints révoquer / regénérer. URL du QR construite **côté backend** depuis `PUBLIC_WEB_URL` + locale (ignorer `baseUrl`). RateLimitGuard, `X-Robots-Tag: noindex`, lien « Signaler ». Désactivation à l'expiration du premium. | P0 · M · sonnet medium | W0-01 (verrou Prisma) |
 | **W0-07** | DoS des notifications et farming de points [SEC-04, BE-06] | DTO imbriqués : `time` `^([01]\d|2[0-3]):[0-5]\d$`, `intervalHours` entre 1 et 24, `types` limité aux clés connues, `date` bornée. Plafond de 200 événements par jour avec `createMany`. `refresh` ne supprime que les `pending`. Crédit de points atomique (`updateMany where status=pending` + `increment` en transaction). Contrainte unique `userId+routineId+scheduledAt`. DTO pour `grade.controller.ts:46`. | P0 · M · sonnet high | 🔒 après W0-06 |
 | **W0-08** | Amplification, rate limiting et cache [SEC-07, SEC-08, SEC-09, SEC-18] | `/gateway/search` : `limit` entre 1 et 20, enrichissement de 5 résultats maximum avec concurrence 3, `query` ≤ 100 caractères, 10 requêtes/min. `@nestjs/throttler` global à 60/min. Auth : 5/min par IP **et** par e-mail, avec backoff ; reset-password 10/h ; endpoints qui appellent des API externes 20/min. Préfixe Redis distinct par guard. Cache : `lru-cache` (max + ttl), clés hachées, TTL en secondes respecté [BE-18]. `POST /gateway/clear-cache` réservé aux opérateurs. | P0 · M · sonnet medium | — |
@@ -233,7 +345,7 @@ Format des tâches : **ID · Tâche** — fichiers — action et critères d'acc
 | **W3-01** | E-mails transactionnels [OPS-12] | `MailService` partagé (Brevo SMTP ou API), gabarits i18n selon `user.locale` (reset, vérification, rappels, suppression de compte), file avec retry, SPF/DKIM/DMARC sur le domaine. | **P0** · M · sonnet medium | D-03, D-06 |
 | **W3-02** 🔒 | Scheduler de rappels [BE-01] | `@nestjs/schedule` avec cron toutes les 5 min. Job unifié routines + médicaments + vaccins + RDV vétérinaires. `User.timezone`. Contrainte d'unicité anti-doublon. Verrou consultatif Postgres (multi-instance). Respect de `deliveryChannel` (e-mail / push / les deux). Fréquences `every_2_days` / `every_3_days` calculées depuis la date de départ (et non la parité epoch). Tests unitaires ≥ 90 %. | **P0** · L · **opus high** (conception) → sonnet high (impl.) | W3-01, W0-07 |
 | **W3-03** | Web Push réel [BE-01, FE-13, LEG-14] | `web-push` + VAPID (variables lues), suppression des abonnements en 404/410. Côté front : enregistrement du SW (web uniquement), permission demandée sur action utilisateur, `pushManager.subscribe`, désinscription. `notificationclick` avec préfixe de locale. Retirer « bientôt disponible ». | P1 · L · sonnet medium | W3-02 |
-| **W3-04** 🔒 | Paiement web Stripe [BE-04, LEG-05, FE-03] | Modèle `Subscription` (`status`, `currentPeriodEnd`, `source: stripe|apple|google|manual`). Checkout + Customer Portal. Webhook signé et idempotent. `isPremium` dérivé de `currentPeriodEnd`. Politique de rétrogradation (au-delà de 1 animal : lecture seule). Paywall conforme : prix TTC, renouvellement, rétractation de 14 j avec renonciation expresse, résiliation en 2 clics. **Si D-04 = lancement gratuit** : masquer l'achat (P1 post-lancement). | P1 · XL · **opus high** | D-04, D-05, W2-02 |
+| **W3-04** 🔒 | Paiement web Stripe [BE-04, LEG-05, FE-03] — **abandonné** (remplacé par W6-08, voir §0.2). Spécification d'origine : | Modèle `Subscription` (`status`, `currentPeriodEnd`, `source: stripe|apple|google|manual`). Checkout + Customer Portal. Webhook signé et idempotent. `isPremium` dérivé de `currentPeriodEnd`. Politique de rétrogradation (au-delà de 1 animal : lecture seule). Paywall conforme : prix TTC, renouvellement, rétractation de 14 j avec renonciation expresse, résiliation en 2 clics. **Si D-04 = lancement gratuit** : masquer l'achat (P1 post-lancement). | P1 · XL · **opus high** | D-04, D-05, W2-02 |
 | **W3-05** | Stubs externes [BE-17, HYG-11] | Amazon PA / Creators API, Species+ et PubMed : implémenter (avec clés) **ou** retirer routes, modules et UI. Ne plus mettre en cache des résultats vides. `/amazon/*` désactivé tant qu'il n'est pas configuré. | P1 · M · sonnet medium | D-09 |
 
 ### Vague 4 — Frontend web « 10/10 » (P1, ~8 j)
@@ -271,8 +383,8 @@ Format des tâches : **ID · Tâche** — fichiers — action et critères d'acc
 | **W6-04** | Stockage sécurisé des tokens [MOB-12] | Abstraction `tokenStorage` : Preferences/Keychain sur natif, localStorage sur le web. | P1 · M · sonnet medium | W6-03, W1-01 |
 | **W6-05** | Couche plateforme [MOB-17, MOB-18, MOB-36] | `openExternal` (liens Amazon dans le navigateur système, **jamais** dans une WebView). `@capacitor/camera` avec compression. Export du carnet via Filesystem + Share. Chaînes `NSCameraUsageDescription` / `NSPhotoLibraryUsageDescription`. | P1 · M · sonnet medium | W6-03 |
 | **W6-06** | Rappels en notifications locales [MOB-35 (1)] | `@capacitor/local-notifications`, synchronisés avec les routines, médicaments, vaccins et RDV. Fonctionne hors ligne. | P1 · L · sonnet high | W6-03, W3-02 |
-| **W6-07** 🔒 | Push distant FCM / APNs [MOB-35 (2)] | Modèle `DeviceToken`, firebase-admin (FCM + clé APNs .p8), branché sur le scheduler W3-02. | P1 · L · opus medium → sonnet medium | W3-02 |
-| **W6-08** 🔒 | Achats intégrés [MOB-30] | RevenueCat (produits mensuel et annuel), webhook vers `Subscription` (source apple/google), paywall conforme (prix, durée, renouvellement auto, Restaurer, liens CGU et Confidentialité). Sandbox testée. Option MVP : masquer l'offre sur natif. | P0 (si premium) · XL · **opus high** | W3-04, W6-01 |
+| **W6-07** | Push distant FCM / APNs [MOB-35 (2)] | Jetons d'appareil (`DeviceToken`), enregistrement et retrait côté API, envoi FCM HTTP v1 (iOS par le relais APNs de FCM), branchement sur le scheduler W3-02 avec anti-doublon des rappels locaux, purges, export RGPD ; côté app, `@capacitor/push-notifications`, explication préalable et deep link au toucher. Configuration Firebase / Apple : `docs/MOBILE.md` § 7.3. | P1 · L · opus medium → sonnet medium | W3-02 |
+| **W6-08** 🔒 | Achats intégrés [MOB-30] — seul canal de paiement depuis l'abandon de W3-04 (`docs/PAYMENTS.md`) | RevenueCat (produits mensuel et annuel), webhook vers `Subscription` (source apple/google), paywall conforme (prix, durée, renouvellement auto, Restaurer, liens CGU et Confidentialité). Sandbox testée. Option MVP : masquer l'offre sur natif. | P0 (si premium) · XL · **opus high** | W3-04, W6-01 |
 | **W6-09** | Universal Links / App Links [MOB-04, MOB-21, MOB-23] | `/.well-known/apple-app-site-association` + `assetlinks.json` (empreintes upload + Play App Signing). Associated Domains, intent-filter `autoVerify`, `appUrlOpen` vers le routeur (QR, reset-password). | P1 · M · sonnet medium | W4-06, W6-03 |
 | **W6-10** | Icônes, splash et fiches store [MOB-02, MOB-38] | `@capacitor/assets` depuis le logo maître. Captures 6,9" / 6,5" et Play via Playwright. Fiches FR et EN. | P0 · M · sonnet medium | D-15 |
 | **W6-11** | Déclarations de confidentialité et d'âge [MOB-33, MOB-37] | App Privacy, Data Safety, `PrivacyInfo.xcprivacy`, nouveau questionnaire d'âge Apple, IARC, déclaration de l'app dans Amazon Associates Central. | P0 · M · sonnet medium | W6-05 à W6-08 |
@@ -331,52 +443,23 @@ GitHub ─ push main ─► CI (tests + migrate) ─ checks verts ─► Render 
 
 **Passage en payant recommandé** dès qu'il y a des utilisateurs réels : Render Starter (pas de veille, commande pre-deploy) et Neon Launch (PITR plus long).
 
-### 5.2 Déjà en place sur la branche
-- `render.yaml` : Blueprint du service `captivia-api` (Docker, Francfort, `/health`, `JWT_SECRET` généré, variables listées).
-- `netlify.toml` : base `frontend/`, Node 22, runtime Next.js détecté automatiquement.
-- `.github/workflows/deploy.yml` : après un CI vert sur `main`, enchaîne migrations Neon, deploy hook Render, `netlify deploy --prod`, puis un smoke test. Seed manuel en option.
-- `.github/workflows/keep-warm.yml` : ping manuel de `/health` (diagnostic) ; le maintien en éveil passe par UptimeRobot.
+### 5.2 Ce que contient le dépôt
+- `render.yaml` : Blueprint du service `captivia-api` (Docker, Francfort, `/health`, `JWT_SECRET` généré, `autoDeployTrigger: checksPass`, variables listées).
+- `netlify.toml` : base `frontend/`, Node 22, runtime Next.js détecté automatiquement, `NEXT_PUBLIC_SITE_URL`.
+- `.github/workflows/ci.yml` : tests, build, Docker, lint, smoke Playwright et, sur `main`, job `migrate-production` (`prisma migrate deploy` sur Neon avec `NEON_DATABASE_URL_DIRECT`, ignoré avec un avertissement si le secret est absent). Comme c'est un check du commit, Render ne déploie qu'une fois la migration appliquée : les migrations restent **expand/contract**, compatibles avec la version N-1.
+- `.github/workflows/deploy.yml` : seed de production manuel (`workflow_dispatch`) ; `keep-warm.yml` : ping manuel de diagnostic (le maintien en éveil passe par UptimeRobot) ; `backup.yml` : sauvegarde hebdomadaire chiffrée ; `codeql.yml`, `security.yml`, `release.yml`, `mobile.yml` (manuel).
 
-### 5.3 Adaptation au « build automatique relié à GitHub » (DEP-01)
-1. **Netlify** relié au dépôt : base `frontend`, commande `npm run build`, previews de PR activées. `NEXT_PUBLIC_API_URL` dans Site configuration → Environment variables (contextes production et deploy-preview).
-2. **Render** relié au dépôt via le Blueprint. Dans `render.yaml`, remplacer `autoDeploy: false` par `autoDeployTrigger: checksPass` : Render attend que les checks GitHub soient verts.
-3. **Migrations avant déploiement** : ajouter dans `ci.yml` un job `migrate-production` (uniquement sur `push` vers `main`, `needs: [test-backend, build-frontend]`, `environment: production`) qui lance `prisma migrate deploy` avec `NEON_DATABASE_URL_DIRECT`. Comme c'est un check, Render ne déploie qu'une fois la migration appliquée. Garder des migrations **expand/contract**, compatibles avec la version N-1.
-4. Réduire `deploy.yml` à un `workflow_dispatch` « seed production » (premier chargement du catalogue et des races).
-5. Activer la protection de `main` (PR obligatoires, checks requis).
+### 5.3 Mise en place par le propriétaire
+Les étapes (comptes Neon, Render, Netlify, secrets et variables GitHub, protection de `main`, premier déploiement, seed) sont décrites une seule fois dans [DEPLOY.md § 3 et § 6](DEPLOY.md#3-mise-en-place-pas-à-pas) ; la liste ordonnée des actions est au [§0.3](#03-actions-du-propriétaire). Le site Netlify est `https://captivia-app.netlify.app` (nom repris dans `render.yaml`, `netlify.toml` et la CSP).
 
-### 5.4 Mise en place des comptes (propriétaire)
-1. **Neon** : projet `captivia`, région *AWS Europe Central 1 (Frankfurt)*, base `captivia`. Récupérer l'URL **pooled** (`…-pooler…`) et l'URL **direct**.
-2. **Render** (connexion GitHub) : New → Blueprint → dépôt. `DATABASE_URL` = URL pooled + `&pgbouncer=true&connect_timeout=15`.
-3. **Netlify** (connexion GitHub) : Add new project → dépôt (le `netlify.toml` est détecté). Nom : `captivia` s'il est libre. Le site `captivia` créé sur l'ancien compte doit être supprimé pour libérer le nom.
-4. **GitHub** → Settings → Secrets and variables → Actions :
-   - Secrets : `NEON_DATABASE_URL_DIRECT` (et `RENDER_DEPLOY_HOOK_URL`, `NETLIFY_AUTH_TOKEN`, `NETLIFY_SITE_ID` si on conserve `deploy.yml`).
-   - Variables : `API_URL`, `WEB_URL`.
-   - Créer l'environnement `production` (relecteur requis, facultatif).
-5. Premier déploiement : merge sur `main`, puis Actions → seed production.
-
-### 5.5 Matrice des variables d'environnement
-
-| Variable | Où | Valeur prod | Obligatoire |
-|---|---|---|---|
-| `DATABASE_URL` | Render | Neon pooled + `pgbouncer=true` | Oui |
-| `JWT_SECRET` | Render | généré (≥ 32 caractères) | Oui |
-| `NODE_ENV` | Render | `production` | Oui |
-| `CORS_ORIGIN` | Render | URL Netlify (+ `capacitor://localhost,https://localhost` en vague 6) | Oui |
-| `FRONTEND_URL` / `PUBLIC_WEB_URL` | Render | URL publique du site | Oui |
-| `TRUST_PROXY` | Render | `true` | Oui |
-| `HOST` | Render | `0.0.0.0` | Oui |
-| `MAIL_HOST`, `MAIL_PORT`, `MAIL_USER`, `MAIL_PASS`, `MAIL_FROM` | Render | Brevo | Oui dès W3-01 |
-| `SENTRY_DSN` | Render | projet Sentry UE | Recommandé |
-| `OPERATOR_EMAILS` → remplacé par `User.role` (W0-01) | — | — | — |
-| `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Render (+ clé publique côté Netlify) | générées | Dès W3-03 |
-| `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | Render | Stripe | Dès W3-04 |
-| `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
-| `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
-| `NEON_DATABASE_URL_DIRECT` | GitHub Secrets | Neon direct | Oui |
+### 5.4 Variables d'environnement
+La matrice complète et à jour (Render, Netlify, build mobile, GitHub) est dans [DEPLOY.md § 5](DEPLOY.md#5-matrice-des-variables-denvironnement). `OPERATOR_EMAILS` est remplacé par `User.role` (W0-01) ; il n'y a pas de variable Stripe (W3-04 abandonné) : les achats passent par RevenueCat (`docs/PAYMENTS.md`).
 
 ---
 
 ## 6. Ordonnancement et parallélisation
+
+> Séquencement de la planification initiale (historique). L'état réel est au [§0.2](#02-état-davancement-source-unique) ; Stripe (W3-04) a été abandonné, la chaîne du couloir A s'arrête donc à W2-04.
 
 ```
 J1 ──────────────────────────────────────────────────────────────────────────►
@@ -419,40 +502,42 @@ puis PR. Ne touche à aucun secret. Effort : <low|medium|high>.
 
 ## 7. Définition de « prêt pour la production 10/10 » (checklist go-live)
 
+Cases cochées = critère satisfait dans le code au 2026-10-03 (items ✅ du [§0.2](#02-état-davancement-source-unique)). Une case vide indique ce qui manque ; aucune ne vaut mise en service vérifiée.
+
 **Sécurité**
-- [ ] 0 vulnérabilité high/critical (`npm audit --omit=dev`), Dependabot actif.
-- [ ] Aucune élévation possible (tests e2e rôles et casse des e-mails), sessions révocables, refresh tokens.
-- [ ] Rate limiting global et par endpoint sensible, cache borné, appels externes avec timeout et circuit breaker.
-- [ ] CSP à nonce, HSTS, aucun secret dans les logs (vérifié par grep des logs de staging).
-- [ ] Valeurs par défaut dangereuses refusées au démarrage en production.
+- [x] 0 vulnérabilité high/critical (`npm audit --omit=dev`) au dernier relevé, Dependabot actif (à rejouer avant la mise en ligne).
+- [x] Aucune élévation possible (tests e2e rôles et casse des e-mails), sessions révocables, refresh tokens.
+- [x] Rate limiting global et par endpoint sensible, cache borné, appels externes avec timeout et circuit breaker.
+- [ ] CSP stricte et HSTS en place (pas de nonce : écart documenté, `docs/DEPLOY.md` §10) ; « aucun secret dans les logs » : redaction pino en place, vérification par grep des logs de staging non faite (pas de staging).
+- [x] Valeurs par défaut dangereuses refusées au démarrage en production (hors `MAIL_HOST`, voir W0-04).
 
 **Fonctionnel**
-- [ ] Rappels envoyés réellement (e-mail + push web ; local et push natif sur mobile), sans doublon, au bon fuseau horaire.
-- [ ] Paiement opérationnel **ou** offre premium masquée (D-04).
-- [ ] Aucun stub visible (« bientôt disponible », magasins factices, endpoints vides).
-- [ ] Catalogue : 296 espèces + 1 379 races, 100 % des fiches avec alimentation, habitat et comportement sourcés.
+- [ ] Rappels envoyés réellement (e-mail + push web ; local et push natif sur mobile), sans doublon, au bon fuseau horaire : code complet, mais SMTP, VAPID et Firebase non configurés et aucun essai en conditions réelles.
+- [x] Paiement : aucun achat sur le web (offre vendue par achats intégrés uniquement, D-04 / D-05 révisées).
+- [x] Aucun stub visible : la seule mention « Bientôt » est l'annonce volontaire de la communauté fermée ; plus de magasins factices ; Amazon retiré.
+- [ ] Catalogue : 100 % des fiches avec alimentation, habitat et comportement sourcés (1 401 fiches complètes sur 1 510 au dernier relevé ; relecture humaine législation et santé à faire).
 
 **Qualité**
-- [ ] CI bloquante : lint 0 erreur, `tsc` 0, tests backend et frontend verts et stables (3 runs consécutifs), e2e Playwright (desktop + mobile), axe 0 violation, build Docker.
-- [ ] Couverture backend ≥ 75 % lignes, ≥ 60 % branches ; scheduler, auth et paiement ≥ 90 %.
-- [ ] Lighthouse mobile ≥ 90 (Performance, Accessibilité, Bonnes pratiques, SEO) sur home, fiche espèce et connexion.
-- [ ] i18n : 6 locales complètes, aucun texte en dur, test de parité.
+- [ ] CI bloquante verte en conditions réelles : configurée (lint, `tsc`, tests, e2e, axe, Docker) mais la CI ne démarre plus (quota) ; contrôles passés localement seulement ; 3 runs consécutifs non constatés.
+- [ ] Couverture backend ≥ 75 % lignes, ≥ 60 % branches ; scheduler, auth et paiement ≥ 90 % : non mesurée.
+- [ ] Lighthouse mobile ≥ 90 sur home, fiche espèce et connexion : non mesuré.
+- [ ] i18n : 6 locales complètes, aucun texte en dur, test de parité : fait pour l'application, mais documents légaux en FR et EN seulement.
 
 **Exploitation**
-- [ ] Déploiement automatique depuis `main`, migrations avant déploiement, rollback documenté et testé.
-- [ ] `/health/ready` supervisé, Sentry front et back avec releases, logs JSON expurgés.
-- [ ] Sauvegarde hebdomadaire hors site chiffrée + restauration testée.
+- [ ] Déploiement automatique depuis `main`, migrations avant déploiement, rollback documenté et testé : configuré et documenté ; mise en service (secret Neon, Render, Netlify) et test de rollback non constatés.
+- [ ] `/health/ready` supervisé (monitor et alertes à créer), Sentry front et back avec releases (DSN à fournir), logs JSON expurgés (fait).
+- [ ] Sauvegarde hebdomadaire chiffrée en place (`backup.yml`) ; clé `age`, stockage hors GitHub et restauration testée : à faire.
 - [ ] Staging opérationnel, test de charge passé.
 
 **Légal**
-- [ ] Mentions légales, confidentialité, CGU (et CGV si payant), sources et licences, footer global.
-- [ ] Suppression et export de compte gratuits, consentement et âge à l'inscription, vérification d'e-mail.
-- [ ] Mentions affiliation Amazon et `rel="sponsored"`, attributions CC BY-SA / ODbL / GBIF affichées.
-- [ ] Registre des traitements, DPA signés, durées de conservation appliquées par un job.
+- [ ] Mentions légales, confidentialité, CGU, sources et licences, footer global : pages livrées, `[À COMPLÉTER]` et relecture juridique à faire (CGV sans objet : pas de vente sur le web).
+- [x] Suppression et export de compte gratuits, consentement et âge à l'inscription, vérification d'e-mail.
+- [x] `rel="sponsored"` sur les liens d'affiliation (la mention Amazon est sans objet), attributions CC BY-SA / ODbL / GBIF affichées.
+- [ ] Registre des traitements fait ; DPA signés et durées de conservation entièrement appliquées par un job (comptes inactifs et `PaymentEvent` restent manuels ou à décider) : à faire.
 
 **Mobile (Jalon 2)**
-- [ ] Builds signés iOS et Android en CI, Universal Links / App Links vérifiés.
-- [ ] IAP (ou offre masquée), suppression de compte dans l'app, déclarations de confidentialité et d'âge remplies.
+- [ ] Builds signés iOS et Android en CI, Universal Links / App Links vérifiés : projets natifs non générés, rien de signé.
+- [ ] Achats intégrés (produits, Sandbox), suppression de compte dans l'app (faite), déclarations de confidentialité et d'âge saisies dans les consoles.
 - [ ] TestFlight + test fermé Play validés, compte de démo fourni, soumission acceptée.
 
 ---

@@ -8,6 +8,7 @@ import {
   IsArray,
   IsEnum,
   Matches,
+  MaxLength,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -27,6 +28,7 @@ export enum IucnStatus {
 export class SearchSpeciesDto {
   @IsOptional()
   @IsString()
+  @MaxLength(100)
   q?: string;
 
   @IsOptional()
@@ -44,30 +46,37 @@ export class SearchSpeciesDto {
 
   @IsOptional()
   @IsString()
+  @MaxLength(100)
   kingdom?: string;
 
   @IsOptional()
   @IsString()
+  @MaxLength(100)
   phylum?: string;
 
   @IsOptional()
   @IsString()
+  @MaxLength(100)
   class?: string;
 
   @IsOptional()
   @IsString()
+  @MaxLength(100)
   order?: string;
 
   @IsOptional()
   @IsString()
+  @MaxLength(100)
   family?: string;
 
   @IsOptional()
   @IsString()
+  @MaxLength(100)
   genus?: string;
 
   @IsOptional()
   @IsString()
+  @MaxLength(100)
   rank?: string;
 
   @IsOptional()
@@ -76,6 +85,7 @@ export class SearchSpeciesDto {
 
   @IsOptional()
   @IsString()
+  @MaxLength(100)
   country?: string;
 
   @IsOptional()

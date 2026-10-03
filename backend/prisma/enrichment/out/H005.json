@@ -1,0 +1,460 @@
+[
+  {
+    "speciesId": 104060633,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Aliment sec de qualité pour chien ou granulés pour omnivores, complétés de légumes",
+          "frequency": "quotidienne",
+          "notes": "Aide à limiter l'obésité fréquente avec les régimes surgelés ou en conserve (consigne pour les procyonidés en zoo)."
+        },
+        {
+          "name": "Régime à base de viande adéquat",
+          "frequency": "quotidienne",
+          "notes": "Alternative pour les procyonidés ; compléter en vitamines et minéraux."
+        },
+        {
+          "name": "Fruits, invertébrés, petits animaux et oeufs d'oiseaux (régime naturel)",
+          "frequency": "variable",
+          "notes": "Régime de l'espèce dans la nature."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Régimes surgelés ou en conserve comme base",
+          "reason": "Sont à l'origine de problèmes d'obésité fréquents chez les procyonidés."
+        },
+        {
+          "name": "Viande de porc fraîche ou décongelée, crue",
+          "reason": "Peut contenir le virus responsable de la pseudorage (maladie d'Aujeszky)."
+        },
+        {
+          "name": "Viande contaminée ou additionnée de médicaments, drogues ou bactéries",
+          "reason": "Ne doit pas être donnée."
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Compléter un régime à base de viande avec au minimum calcium, vitamine A, iode, taurine et vitamines B.",
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores",
+          "title": "Nutrition in Zoo Carnivores - Merck Veterinary Manual (procyonidés)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/South_American_coati",
+          "title": "South American coati - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104060805,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Lémuriens (proie principale dans la nature)",
+          "frequency": "variable",
+          "notes": "Plus de 50 % du régime naturel ; aliment de référence du régime sauvage, non applicable tel quel en captivité."
+        },
+        {
+          "name": "Rongeurs, oiseaux et lézards (proies documentées dans la nature)",
+          "frequency": "variable",
+          "notes": "Proies du régime naturel."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Viande de porc fraîche ou décongelée, crue",
+          "reason": "Peut contenir le virus responsable de la pseudorage (maladie d'Aujeszky) (consigne pour les carnivores de zoo)."
+        },
+        {
+          "name": "Viande contaminée ou additionnée de médicaments, drogues ou bactéries",
+          "reason": "Ne doit pas être donnée ; la viande doit avoir la qualité d'une viande de consommation humaine (consigne pour les carnivores de zoo)."
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Compléter un régime carné avec au minimum calcium, vitamine A, iode, taurine et vitamines B (consigne pour les carnivores de zoo).",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fossa_(animal)",
+          "title": "Fossa (animal) - Wikipedia"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores",
+          "title": "Nutrition in Zoo Carnivores - Merck Veterinary Manual"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104060854,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Régime complet du commerce pour félins exotiques (surgelé ou en conserve)",
+          "frequency": "quotidienne",
+          "notes": "Les félins exotiques le préfèrent surgelé ou en conserve plutôt que sec ; régime utilisé par la plupart des zoos américains."
+        },
+        {
+          "name": "Souris, rats et poussins",
+          "frequency": "régulière",
+          "notes": "Fréquemment inclus dans le régime des petits félins."
+        },
+        {
+          "name": "Os avec un peu de viande",
+          "frequency": "2 fois par semaine",
+          "notes": "À donner à tout félin nourri avec un régime mou."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Viande de porc fraîche ou décongelée, crue",
+          "reason": "Peut contenir le virus responsable de la pseudorage (maladie d'Aujeszky)."
+        },
+        {
+          "name": "Viande contaminée ou additionnée de médicaments, drogues ou bactéries",
+          "reason": "Ne doit pas être donnée ; la viande doit avoir la qualité d'une viande de consommation humaine."
+        },
+        {
+          "name": "Régime exclusivement mou (type hachis)",
+          "reason": "Dépôts de tartre excessifs et maladie parodontale si aucun élément dur n'est proposé."
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Compléter la viande avec au minimum calcium, vitamine A, iode, taurine et vitamines B. Dans la nature : oiseaux, rongeurs et autres petits mammifères.",
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores",
+          "title": "Nutrition in Zoo Carnivores - Merck Veterinary Manual (félins exotiques)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Caracal",
+          "title": "Caracal - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Panleucopénie féline (parvovirose, FPLV)",
+          "symptoms": "Vomissements, fièvre, déshydratation, douleurs abdominales.",
+          "prevention": "Vaccination ; l'infection est très contagieuse chez les chats non vaccinés (des cas ont toutefois été signalés chez des félins captifs vaccinés).",
+          "whenToConsult": null
+        },
+        {
+          "name": "Rhinotrachéite virale féline (herpèsvirus FHV-1)",
+          "symptoms": "Toux, éternuements, écoulement nasal, conjonctivite, parfois fièvre et perte d'appétit.",
+          "prevention": "Un vaccin existe : il limite la gravité mais n'empêche pas l'infection.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Leucose féline (FeLV)",
+          "symptoms": "Variés : perte d'appétit, mauvais état du pelage, inégalité des pupilles, infections de la peau, de la vessie et des voies respiratoires.",
+          "prevention": "Dépistage possible par test ELISA.",
+          "whenToConsult": null
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia",
+          "title": "Feline panleukopenia - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis",
+          "title": "Feline viral rhinotracheitis - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus",
+          "title": "Feline leukemia virus - Wikipedia"
+        },
+        {
+          "type": "vet",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6238724",
+          "title": "Feline panleukopaenia virus in captive non-domestic felids in South Africa - Onderstepoort J Vet Res"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104060891,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Régime complet du commerce pour félins exotiques (surgelé ou en conserve)",
+          "frequency": "quotidienne",
+          "notes": "Les félins exotiques le préfèrent surgelé ou en conserve plutôt que sec ; régime utilisé par la plupart des zoos américains."
+        },
+        {
+          "name": "Souris, rats et poussins",
+          "frequency": "régulière",
+          "notes": "Fréquemment inclus dans le régime des petits félins."
+        },
+        {
+          "name": "Os avec un peu de viande",
+          "frequency": "2 fois par semaine",
+          "notes": "À donner à tout félin nourri avec un régime mou."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Viande de porc fraîche ou décongelée, crue",
+          "reason": "Peut contenir le virus responsable de la pseudorage (maladie d'Aujeszky)."
+        },
+        {
+          "name": "Viande contaminée ou additionnée de médicaments, drogues ou bactéries",
+          "reason": "Ne doit pas être donnée ; la viande doit avoir la qualité d'une viande de consommation humaine."
+        },
+        {
+          "name": "Régime exclusivement mou (type hachis)",
+          "reason": "Dépôts de tartre excessifs et maladie parodontale si aucun élément dur n'est proposé."
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Compléter la viande avec au minimum calcium, vitamine A, iode, taurine et vitamines B. Dans la nature : essentiellement des rongeurs ; mange aussi des fruits, surtout en hiver.",
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores",
+          "title": "Nutrition in Zoo Carnivores - Merck Veterinary Manual (félins exotiques)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Jungle_cat",
+          "title": "Jungle cat - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Panleucopénie féline (parvovirose, FPLV)",
+          "symptoms": "Vomissements, fièvre, déshydratation, douleurs abdominales.",
+          "prevention": "Vaccination ; l'infection est très contagieuse chez les chats non vaccinés (des cas ont toutefois été signalés chez des félins captifs vaccinés).",
+          "whenToConsult": null
+        },
+        {
+          "name": "Rhinotrachéite virale féline (herpèsvirus FHV-1)",
+          "symptoms": "Toux, éternuements, écoulement nasal, conjonctivite, parfois fièvre et perte d'appétit.",
+          "prevention": "Un vaccin existe : il limite la gravité mais n'empêche pas l'infection.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Leucose féline (FeLV)",
+          "symptoms": "Variés : perte d'appétit, mauvais état du pelage, inégalité des pupilles, infections de la peau, de la vessie et des voies respiratoires.",
+          "prevention": "Dépistage possible par test ELISA.",
+          "whenToConsult": null
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia",
+          "title": "Feline panleukopenia - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis",
+          "title": "Feline viral rhinotracheitis - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus",
+          "title": "Feline leukemia virus - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104060941,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Régime complet du commerce pour félins exotiques (surgelé ou en conserve)",
+          "frequency": "quotidienne",
+          "notes": "Les félins exotiques le préfèrent surgelé ou en conserve plutôt que sec ; régime utilisé par la plupart des zoos américains."
+        },
+        {
+          "name": "Souris, rats et poussins",
+          "frequency": "régulière",
+          "notes": "Fréquemment inclus dans le régime des petits félins."
+        },
+        {
+          "name": "Os avec un peu de viande",
+          "frequency": "2 fois par semaine",
+          "notes": "À donner à tout félin nourri avec un régime mou."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Viande de porc fraîche ou décongelée, crue",
+          "reason": "Peut contenir le virus responsable de la pseudorage (maladie d'Aujeszky)."
+        },
+        {
+          "name": "Viande contaminée ou additionnée de médicaments, drogues ou bactéries",
+          "reason": "Ne doit pas être donnée ; la viande doit avoir la qualité d'une viande de consommation humaine."
+        },
+        {
+          "name": "Régime exclusivement mou (type hachis)",
+          "reason": "Dépôts de tartre excessifs et maladie parodontale si aucun élément dur n'est proposé."
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Compléter la viande avec au minimum calcium, vitamine A, iode, taurine et vitamines B. Dans la nature : rongeurs, lièvres, autres petits mammifères, oiseaux, serpents, petits lézards, insectes, occasionnellement grenouilles et poissons.",
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-zoo-carnivores",
+          "title": "Nutrition in Zoo Carnivores - Merck Veterinary Manual (félins exotiques)"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Geoffroy%27s_cat",
+          "title": "Geoffroy's cat - Wikipedia"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Panleucopénie féline (parvovirose, FPLV)",
+          "symptoms": "Vomissements, fièvre, déshydratation, douleurs abdominales.",
+          "prevention": "Vaccination ; l'infection est très contagieuse chez les chats non vaccinés (des cas ont toutefois été signalés chez des félins captifs vaccinés).",
+          "whenToConsult": null
+        },
+        {
+          "name": "Rhinotrachéite virale féline (herpèsvirus FHV-1)",
+          "symptoms": "Toux, éternuements, écoulement nasal, conjonctivite, parfois fièvre et perte d'appétit.",
+          "prevention": "Un vaccin existe : il limite la gravité mais n'empêche pas l'infection.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Leucose féline (FeLV)",
+          "symptoms": "Variés : perte d'appétit, mauvais état du pelage, inégalité des pupilles, infections de la peau, de la vessie et des voies respiratoires.",
+          "prevention": "Dépistage possible par test ELISA.",
+          "whenToConsult": null
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Feline_panleukopenia",
+          "title": "Feline panleukopenia - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Feline_viral_rhinotracheitis",
+          "title": "Feline viral rhinotracheitis - Wikipedia"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Feline_leukemia_virus",
+          "title": "Feline leukemia virus - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104061079,
+    "health": {
+      "diseases": [
+        {
+          "name": "Parvovirose (carnivore protoparvovirus, proche de la panleucopénie féline)",
+          "symptoms": "Atteinte grave des reins, de la rate et du tube digestif ; maladie pouvant être mortelle.",
+          "prevention": null,
+          "whenToConsult": null
+        },
+        {
+          "name": "Toxocarose (Toxocara cati)",
+          "symptoms": null,
+          "prevention": null,
+          "whenToConsult": null
+        },
+        {
+          "name": "Maladie de Carré (canine distemper virus)",
+          "symptoms": null,
+          "prevention": null,
+          "whenToConsult": null
+        },
+        {
+          "name": "Hémoplasmoses félines",
+          "symptoms": null,
+          "prevention": null,
+          "whenToConsult": null
+        }
+      ],
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Fishing_cat",
+          "title": "Fishing cat - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104069250,
+    "health": {
+      "diseases": [
+        {
+          "name": "Tuberculose (ongulés de zoo, famille des bovidés)",
+          "symptoms": "Le plus souvent découverte lors du dépistage systématique plutôt que sous forme de cas cliniques.",
+          "prevention": "Dépistage par test intradermique à la tuberculine chez les bovidés.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Excès de croissance des sabots",
+          "symptoms": null,
+          "prevention": "Mettre en place un programme régulier de parage des sabots pour éviter un excès de croissance.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Ostéomyélite mandibulaire (« lumpy jaw », données des petits ruminants)",
+          "symptoms": "Gonflement localisé du visage, mauvaise odeur ou écoulement buccal.",
+          "prevention": "Peut survenir à la suite d'aliments grossiers, de traumatismes buccaux ou de maladie dentaire.",
+          "whenToConsult": null
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/zoo-animals/common-disorders-and-procedures-of-zoo-animals",
+          "title": "Common Disorders and Procedures of Zoo Animals - Merck Veterinary Manual (ongulés de zoo)"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2000000108,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000151,
+    "description": null,
+    "sourceUrl": null
+  },
+  {
+    "speciesId": 2000000152,
+    "description": "Race de chat très rare, originaire de la région du fleuve Amour, en Russie. Elle pourrait être issue de croisements entre un léopard de l'Amour ou un chat de la forêt de l'Amour et des chats domestiques. Elle n'est reconnue par aucune association féline ; adulte, elle pèserait de 11 à 15 livres.",
+    "sourceUrl": "https://cats.com/cat-breeds/ussuri"
+  },
+  {
+    "speciesId": 2000000162,
+    "description": null,
+    "sourceUrl": null
+  }
+]

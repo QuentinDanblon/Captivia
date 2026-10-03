@@ -15,6 +15,29 @@ export interface PushReminderPayload {
   ttlSeconds?: number;
   /** Urgence Web Push (RFC 8030). Défaut : `normal`. */
   urgency?: PushUrgency;
+  /**
+   * W6-07 — Présent seulement quand l'app programme CE rappel-là, à CET instant, en notification
+   * locale (routine ou médicament de l'Agenda, instant vérifié : `localReminderFor`). Un appareil
+   * natif dont la couverture locale l'inclut ne reçoit pas de push distant (anti-doublon). Ignoré
+   * par le Web Push.
+   */
+  localReminder?: LocalReminderRef;
+  /**
+   * W6-07 — Échéance (ms depuis l'epoch) du canal natif pour l'exécution en cours du scheduler :
+   * au-delà, aucun envoi FCM n'est tenté ni attendu. Ignorée par le Web Push.
+   */
+  nativeDeadline?: number;
+}
+
+/** Rappel programmé aussi en local par l'app (cf. `PushReminderPayload.localReminder`). */
+export interface LocalReminderRef {
+  /** Instant du rappel (identique à celui de la notification locale). */
+  at: Date;
+  /**
+   * Dernière modification de la source (routine, médicament) : l'appareil ne l'a programmée que
+   * si son état des soins (`DeviceToken.localRemindersAsOf`) est postérieur.
+   */
+  sourceUpdatedAt: Date;
 }
 
 /** Envoi de notifications push pour un utilisateur. Renvoie true si au moins un envoi a abouti. */
@@ -32,7 +55,20 @@ export interface PushDeliveryResult {
   failed: number;
   /** Abonnements expirés (404/410) supprimés de la base. */
   removed: number;
+  /**
+   * W6-07 — Appareils natifs non sollicités car le rappel y est déjà programmé en notification
+   * locale : comptés comme atteints par le dispatcher (le téléphone sonnera).
+   */
+  covered?: number;
 }
+
+/** Bilan vide (canal désactivé, aucun appareil). */
+export const emptyDelivery = (): PushDeliveryResult => ({
+  sent: 0,
+  failed: 0,
+  removed: 0,
+  covered: 0,
+});
 
 /** Un rappel périmé n'a plus d'intérêt : 1 h de rétention max chez le service push. */
 export const DEFAULT_PUSH_TTL_SECONDS = 60 * 60;

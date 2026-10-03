@@ -2,8 +2,8 @@ import type { AnchorHTMLAttributes, ReactNode } from 'react';
 import { render, screen, within } from '@testing-library/react';
 import { SiteFooter } from '../SiteFooter';
 
-jest.mock('next-intl/server', () => ({
-  getTranslations: jest.fn(async (namespace: string) => (key: string) => `${namespace}.${key}`),
+jest.mock('next-intl', () => ({
+  useTranslations: (namespace: string) => (key: string) => `${namespace}.${key}`,
 }));
 
 jest.mock('@/i18n/navigation', () => ({
@@ -27,18 +27,18 @@ jest.mock('@/lib/legal', () => ({
   contactMailto: () => 'mailto:contact@captivia.test',
 }));
 
-async function renderFooter() {
-  render(await SiteFooter());
+function renderFooter() {
+  render(<SiteFooter />);
 }
 
 describe('SiteFooter', () => {
-  it('landmark contentinfo, exclu de l’impression', async () => {
-    await renderFooter();
+  it('landmark contentinfo, exclu de l’impression', () => {
+    renderFooter();
     expect(screen.getByRole('contentinfo')).toHaveClass('noprint');
   });
 
-  it('navigation légale nommée par son titre visible, 6 pages + contact', async () => {
-    await renderFooter();
+  it('navigation légale nommée par son titre visible, 6 pages + contact', () => {
+    renderFooter();
     const nav = screen.getByRole('navigation', { name: 'footer.navLabel' });
     expect(within(nav).getByRole('heading', { level: 2, name: 'footer.navLabel' })).toBeInTheDocument();
     const links = within(nav).getAllByRole('link');
@@ -53,12 +53,12 @@ describe('SiteFooter', () => {
     ]);
   });
 
-  it('marque, description, mention d’affiliation Amazon et copyright de l’année', async () => {
-    await renderFooter();
+  it('marque, description et copyright de l’année, sans mention d’affiliation (aucun lien affilié affiché)', () => {
+    renderFooter();
     const footer = screen.getByRole('contentinfo');
     expect(within(footer).getByRole('link', { name: 'common.appName' })).toHaveAttribute('href', '/');
     expect(within(footer).getByText('footer.description')).toBeInTheDocument();
-    expect(within(footer).getByText('footer.amazonAssociate')).toBeInTheDocument();
+    expect(footer).not.toHaveTextContent(/amazon/i);
     expect(footer).toHaveTextContent(`© ${new Date().getFullYear()} Captivia · footer.tagline`);
   });
 });

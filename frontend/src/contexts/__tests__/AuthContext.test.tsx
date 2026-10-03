@@ -476,4 +476,46 @@ describe('AuthContext — revue frontend', () => {
     expect(result.current.token).toBeNull();
     expect(result.current.user).toBeNull();
   });
+
+  it('reloadUser relit /auth/me et met à jour la session (Premium activé par le webhook)', async () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    act(() => result.current.login('T1', user, 'refresh-1'));
+    fetchMock().mockImplementation(async (url: string) =>
+      url.endsWith('/auth/me') ? json(200, { ...user, isPremium: true }) : json(404, {}),
+    );
+    let fresh: unknown;
+    await act(async () => {
+      fresh = await result.current.reloadUser();
+    });
+    expect(fresh).toEqual({ ...user, isPremium: true });
+    expect(result.current.user?.isPremium).toBe(true);
+    expect(JSON.parse(localStorage.getItem('user') ?? '{}').isPremium).toBe(true);
+  });
+
+  it('reloadUser : sans session ou en cas d’erreur, null sans déconnecter', async () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    await expect(result.current.reloadUser()).resolves.toBeNull();
+    expect(fetchMock()).not.toHaveBeenCalled();
+    act(() => result.current.login('T1', user, 'refresh-1'));
+    fetchMock().mockResolvedValue(json(500, { message: 'boom' }));
+    let fresh: unknown = 'unset';
+    await act(async () => {
+      fresh = await result.current.reloadUser();
+    });
+    expect(fresh).toBeNull();
+    expect(result.current.user).toEqual(user);
+    expect(result.current.token).toBe('T1');
+  });
+
+  it('reloadUser ignore la réponse d’un autre compte (session changée entre-temps)', async () => {
+    const { result } = renderHook(() => useAuth(), { wrapper });
+    act(() => result.current.login('T1', user, 'refresh-1'));
+    fetchMock().mockResolvedValue(json(200, { ...user, id: 'u2', isPremium: true }));
+    let fresh: unknown = 'unset';
+    await act(async () => {
+      fresh = await result.current.reloadUser();
+    });
+    expect(fresh).toBeNull();
+    expect(result.current.user).toEqual(user);
+  });
 });

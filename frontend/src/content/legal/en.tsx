@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { HOSTS, LEGAL, LEGAL_ROUTES } from '@/lib/legal';
 import { A, Field, ILink, P, Table, UL, type LegalContent } from './ui';
+import { PhotoCreditsTable } from './photos';
 
 const EU_REGION = 'Frankfurt (Germany, European Union)';
 
@@ -104,8 +105,9 @@ export function buildEnContent(locale: string): LegalContent {
           title: 'Affiliate links',
           body: (
             <P>
-              As an Amazon Associate, {LEGAL.serviceName} earns from qualifying purchases. Affiliate links are
-              labelled as such; see the {L(LEGAL_ROUTES.transparency, 'Transparency and affiliation')} page.
+              {LEGAL.serviceName} does not currently show any affiliate links. If partner links to merchant
+              websites are offered, they are labelled as such and the affiliate programme concerned is named next to
+              them; see the {L(LEGAL_ROUTES.transparency, 'Transparency and affiliation')} page.
             </P>
           ),
         },
@@ -264,8 +266,8 @@ export function buildEnContent(locale: string): LegalContent {
                 servers: as with any web resource, your browser then sends them your IP address.
               </P>
               <P>
-                When you follow an affiliate link, you leave {LEGAL.serviceName}: the merchant&apos;s website (for
-                example Amazon) applies its own privacy and cookie policy. We do not send it any data about you; the
+                If you follow a link to a partner merchant website, you leave {LEGAL.serviceName}: that website
+                applies its own privacy and cookie policy. We do not send it any data about you; the
                 link only contains our partner identifier.
               </P>
             </>
@@ -285,8 +287,19 @@ export function buildEnContent(locale: string): LegalContent {
                 Use without an account (guest): your animal and its health record are kept until you create an
                 account, delete them, or after 90 days without using the app; they are then erased.
               </li>
-              <li>Password reset token: one hour at most, after which it can no longer be used.</li>
-              <li>Login token stored in your browser: valid for 7 days, erased on logout.</li>
+              <li>
+                Reminder history (generated reminders, done or not done): 90 days after the reminder&apos;s scheduled
+                date, then erased automatically.
+              </li>
+              <li>
+                Password reset tokens (valid for one hour) and email verification tokens (valid for 24 hours): erased
+                automatically once expired (daily purge).
+              </li>
+              <li>
+                Login tokens: access token valid for 30 minutes and renewal token valid for 30 days (90 days in guest
+                mode), renewed on each use and erased from your device on logout. Our servers only keep a fingerprint
+                of it, erased 30 days after it expires or is revoked.
+              </li>
               <li>Technical and security logs (including IP address): 12 months at most.</li>
               <li>Error reports (if tracking is enabled): 90 days at most.</li>
             </UL>
@@ -413,7 +426,7 @@ export function buildEnContent(locale: string): LegalContent {
             <UL>
               <li>Free access to species profiles (taxonomy, care, feeding, equipment, regulations).</li>
               <li>With an account: record your animals, health record, routines, reminders and notifications.</li>
-              <li>A shop listing links to partner merchant websites (affiliate links).</li>
+              <li>A shop that may list links to partner merchant websites (affiliate links, labelled as such).</li>
               <li>Optional public sharing of an animal&apos;s profile.</li>
             </UL>
           ),
@@ -491,8 +504,8 @@ export function buildEnContent(locale: string): LegalContent {
           title: '8. Affiliate links and third-party sites',
           body: (
             <P>
-              As an Amazon Associate, {LEGAL.serviceName} earns from qualifying purchases. The price you pay is the
-              same. Purchases are made directly with the merchant, under its own terms; {LEGAL.serviceName} is not a
+              If partner links to merchant websites are offered, they are labelled as such and may earn
+              {LEGAL.serviceName} a commission; the price you pay is the same. Purchases are made directly with the merchant, under its own terms; {LEGAL.serviceName} is not a
               party to the sale. See the {L(LEGAL_ROUTES.transparency, 'Transparency and affiliation')} page.
             </P>
           ),
@@ -685,11 +698,26 @@ export function buildEnContent(locale: string): LegalContent {
           ),
         },
         {
+          id: 'photographs',
+          title: 'Photographs',
+          body: (
+            <>
+              <P>
+                The animal and nature photographs on this site come from{' '}
+                <A href="https://commons.wikimedia.org">Wikimedia Commons</A>. Each licence was checked on the file&apos;s
+                own page; none is AI-generated. Every photo is credited where it appears; adaptations of CC BY-SA photos
+                are shared under the same licence.
+              </P>
+              <PhotoCreditsTable lang="en" />
+            </>
+          ),
+        },
+        {
           id: 'software',
           title: 'Fonts and icons',
           body: (
             <UL>
-              <li>Inter and JetBrains Mono fonts: SIL Open Font License 1.1.</li>
+              <li>Fraunces, IBM Plex Sans and IBM Plex Mono fonts: SIL Open Font License 1.1.</li>
               <li>Lucide icons: ISC licence.</li>
             </UL>
           ),

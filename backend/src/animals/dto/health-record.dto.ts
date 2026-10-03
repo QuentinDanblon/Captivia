@@ -1,6 +1,19 @@
-import { IsString, IsOptional, IsDateString, IsIn, IsObject, MinLength, MaxLength } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  IsDateString,
+  IsIn,
+  IsObject,
+  MinLength,
+  MaxLength,
+} from 'class-validator';
 
-export const HEALTH_RECORD_TYPES = ['vaccine', 'surgery', 'specific_food', 'medical_history'] as const;
+export const HEALTH_RECORD_TYPES = [
+  'vaccine',
+  'surgery',
+  'specific_food',
+  'medical_history',
+] as const;
 export type HealthRecordType = (typeof HEALTH_RECORD_TYPES)[number];
 
 export class CreateHealthRecordDto {

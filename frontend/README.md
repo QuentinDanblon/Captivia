@@ -1,91 +1,81 @@
 # Frontend Captivia
 
-Interface utilisateur de la plateforme Captivia — gestion participative du patrimoine génétique animal.
+Application web et mobile de Captivia (carnet de santé, rappels et fiches espèces pour les
+particuliers qui ont un ou plusieurs animaux). Règles du dépôt et commandes de vérification :
+[`../AGENTS.md`](../AGENTS.md). Système visuel : [`docs/DESIGN.md`](docs/DESIGN.md).
 
-## Stack technique
+## Stack
 
-- **Framework** : Next.js 16 avec App Router
-- **Internationalisation** : next-intl 4.8.1 — 6 langues (FR par défaut, EN, ES, DE, IT, PT) avec préfixe `as-needed`
-- **Styles** : Tailwind CSS 4
-- **Composants UI** : Radix UI (@radix-ui/react-dialog, @radix-ui/react-tabs)
-- **Icônes** : lucide-react
-- **Client HTTP** : axios
-- **Monitoring** : Sentry optionnel via @sentry/nextjs
-- **Tests** : Jest + Playwright (e2e)
-- **Lint** : ESLint bloquant en CI
-- **Node.js** : ≥22
+- Next.js 16 (App Router, React 19, compilateur React), Node ≥ 22
+- next-intl : 6 langues (`fr` par défaut, `en`, `es`, `de`, `it`, `pt` = portugais européen) ;
+  préfixe `as-needed` sur le web, `always` dans l'app mobile
+- Tailwind CSS 4 limité aux jetons du système visuel, Radix UI (modales, onglets), lucide-react
+- Capacitor 7 (Android / iOS) sur l'export statique (`npm run build:mobile`)
+- Sentry facultatif (`@sentry/nextjs`), RevenueCat pour l'achat intégré (app uniquement)
+- Tests : Jest (unitaires, parité i18n) et Playwright (smoke sur API simulée, axe)
 
 ## Arborescence
 
 ```
 frontend/
 ├── src/
-│   ├── app/[locale]/        # Routes par langue (parametres/, animal-public/, etc.)
-│   ├── components/          # Composants React réutilisables
-│   ├── lib/
-│   │   ├── config.ts        # Configuration (URL d'API, etc.)
-│   │   ├── api.ts           # Fonctions d'appel API
-│   │   ├── legal.ts         # Données légales à compléter
-│   │   └── seo.ts           # Métadonnées SEO
-│   └── content/legal/       # Pages légales statiques
-├── messages/                # Fichiers de traduction (de.json, en.json, es.json, fr.json, it.json, pt.json)
-├── i18n/
-│   ├── routing.ts           # Configuration next-intl (locales, défaut, préfixe)
-│   └── request.ts           # Context API i18n
-├── e2e/                     # Tests Playwright
-├── public/                  # Assets statiques
-└── scripts/                 # Scripts utilitaires
+│   ├── app/[locale]/
+│   │   ├── (marketing)/   # landing, pages légales, transparence, page publique d'un animal
+│   │   ├── (auth)/        # connexion, inscription, mots de passe, vérification d'e-mail, /sauvegarder
+│   │   └── (app)/         # mes-animaux, agenda, especes, species, parametres, magasin, communaute
+│   ├── components/        # ui/ (composants du système), frames/ (cadres), landing/, community/,
+│   │                      # native/ (pont Capacitor), guest/, purchases/, species/, auth/
+│   ├── lib/               # api.ts (client API), config.ts, platform.ts, csp.ts, seo.ts, legal.ts…
+│   ├── i18n/navigation.ts # Link, useRouter… localisés (à utiliser à la place de next/link)
+│   ├── content/           # pages légales, photothèque (photos.ts)
+│   └── contexts/          # AuthContext
+├── i18n/                  # routing.ts (locales, préfixe), request.ts (chargement des messages)
+├── messages/              # textes de l'interface, un fichier par langue
+├── mobile/                # overlays de routes de l'app (mobile/app/**), sources d'icônes, gabarits natifs
+├── e2e/                   # smoke/ (CI), integration/ (hors CI, backend réel), fixtures/, support/
+├── public/                # images (crédits : public/images/CREDITS.md), icônes, sw.js
+└── scripts/               # build-mobile.mjs, génération d'icônes, captures et textes des stores
 ```
 
-## Configuration
+## Variables d'environnement (lues au build)
 
-### Variables d'environnement (`.env.local`)
+| Variable | Obligatoire | Exemple |
+|---|---|---|
+| `NEXT_PUBLIC_API_URL` | oui | `http://localhost:3001` (local), URL de l'API Render en production |
+| `NEXT_PUBLIC_SITE_URL` | en production | `https://captivia-app.netlify.app` (fixé dans `netlify.toml`) |
+| `NEXT_PUBLIC_SENTRY_DSN` | non | projet Sentry UE |
+| `NEXT_PUBLIC_COMMUNITY_ENABLED` | non | `false` (coupé, aucune requête), `true` (lien depuis la landing) ; absent : détection par l'API |
+| `NEXT_PUBLIC_MEDIA_BASE_URL` | dès l'ouverture de la communauté | domaine public du bucket R2, ajouté à la CSP `img-src` |
 
-| Variable | Obligatoire | Production | Exemple |
-|---|---|---|---|
-| `NEXT_PUBLIC_API_URL` | ✓ | ✓ | `https://api.captivia.local` |
-| `NEXT_PUBLIC_SITE_URL` |  | ✓ | `https://captivia.local` |
-| `NEXT_PUBLIC_SENTRY_DSN` |  |  | `https://...@sentry.io/...` |
+Liste complète (dont les variables du build mobile) : [`../docs/DEPLOY.md`](../docs/DEPLOY.md) § 5.
 
-### Fichiers clés
-
-- **`src/lib/config.ts`** : Configuration frontale (origine API, site URL)
-- **`src/lib/api.ts`** : Appels API centralisés
-- **`src/i18n/navigation.ts`** : Helpers de navigation multilingue
-- **`src/lib/legal.ts`** : Mentions légales, RGPD, etc. — **À compléter**
-- **`messages/*.json`** : Texte UI par langue (6 fichiers)
+**Communauté** (`src/lib/community.ts`, `src/lib/community-flag.ts`) : la destination « Communauté »
+ne devient un lien que si l'API répond. Une sonde `GET /community/rules` sans jeton interprète la
+réponse : `404` = volet fermé côté serveur (`COMMUNITY_ENABLED=false`), `200` / `401` / `403` = ouvert,
+autre (réseau, 5xx) = inconnu (« Bientôt », sans lien). Le résultat est gardé pour la session
+(`sessionStorage`). Les images des membres ne sont affichées que si elles viennent de
+`NEXT_PUBLIC_MEDIA_BASE_URL` (sinon de l'API, pilote local du backend).
 
 ## Scripts npm
 
 ```bash
-npm run dev              # Développement (port 3000)
-npm run build           # Build production
-npm run start           # Serveur production
-npm run lint            # ESLint (bloquant)
-npm run test            # Jest
-npm run test:modals     # E2E Playwright (dialogues)
+npm run dev            # serveur de développement (port 3000)
+npm run build          # build de production (output standalone)
+npm run start          # sert le build de production
+npm run lint           # ESLint
+npm test               # Jest (dont la parité des six fichiers de messages)
+npm run build:mobile   # export statique pour Capacitor (out/), voir docs/MOBILE.md
+npm run test:modals    # parcours Playwright des modales (frontend + backend réels déjà lancés)
 ```
+
+Smoke Playwright et garde-fou de style : commandes exactes dans [`../AGENTS.md`](../AGENTS.md).
 
 ## Conventions
 
-### Texte UI
-
-Tous les textes utilisateur résident dans **`messages/{fr,en,es,de,it,pt}.json`** — vérifier la parité entre 6 fichiers. Pas de texte codé en dur.
-
-### Navigation
-
-Utiliser `@/i18n/navigation` pour les liens multilingues.
-
-### Code
-
-- Pas de `any` TypeScript (lint bloquant)
-- ESLint obligatoire (`npm run lint` doit passer en CI)
-- Tests Jest pour la logique métier
-
-## Déploiement
-
-Voir **[`../docs/DEPLOY.md`](../docs/DEPLOY.md)** pour déploiement Netlify, variables d'environnement de production et hôte personnalisé.
-
----
-
-*Documentation générée pour Captivia — version frontend 0.1.0*
+- Aucun texte en dur : tout passe par `messages/<locale>.json`, dans les six langues (le test de
+  parité échoue sinon). Le ton et les mots publiés suivent `../docs/MESSAGING.md`.
+- Liens et navigation : `@/i18n/navigation` ; chemins vers des routes dynamiques par les helpers de
+  `src/lib/platform.ts` (`animalDetailPath`, `speciesPath`…) pour rester compatibles avec l'app.
+- Couleurs, rayons, typographie : uniquement les jetons de `docs/DESIGN.md` (garde-fou en CI).
+- Appels API : `src/lib/api.ts` (timeout, `ApiError`, rafraîchissement de session) ; jamais de
+  message brut de l'API à l'écran.

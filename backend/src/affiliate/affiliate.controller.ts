@@ -9,19 +9,20 @@ export class AffiliateController {
 
   @Get()
   @ApiOperation({
-    summary: 'Liste des magasins / liens d\'affiliation',
+    summary: "Liste des magasins / liens d'affiliation",
     description:
-      'Retourne les magasins adaptés par catégorie d\'espèce (mammifère, reptile, oiseau, etc.). Utilisé pour l\'onglet Magasin sur l\'accueil et sur la fiche espèce.',
+      "Retourne les magasins adaptés par catégorie d'espèce (mammifère, reptile, oiseau, etc.). Utilisé pour l'onglet Magasin sur l'accueil et sur la fiche espèce.",
   })
   @ApiQuery({
     name: 'category',
     required: false,
-    description: 'Filtrer par catégorie d\'espèce (mammifère, reptile, oiseau, poisson, amphibien, insecte, arachnide)',
+    description:
+      "Filtrer par catégorie d'espèce (mammifère, reptile, oiseau, poisson, amphibien, insecte, arachnide)",
   })
   @ApiQuery({
     name: 'type',
     required: false,
-    description: 'Filtrer par type d\'offre (alimentation, materiel, general)',
+    description: "Filtrer par type d'offre (alimentation, materiel, general)",
   })
   @ApiResponse({ status: 200, description: 'Liste des magasins' })
   async getStores(

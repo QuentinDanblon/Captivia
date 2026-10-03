@@ -15,6 +15,12 @@ jest.mock('@/i18n/navigation', () => ({
   ),
 }));
 
+// Le cadre (en-tête, session, pied) est couvert ailleurs : ces tests portent sur le contenu des pages.
+jest.mock('@/components/frames/MarketingFrame', () => ({
+  __esModule: true,
+  MarketingFrame: ({ children }: { children: React.ReactNode }) => <div data-testid="frame">{children}</div>,
+}));
+
 import LocaleNotFound from '../[locale]/not-found';
 import LocaleError from '../[locale]/error';
 import GlobalError from '../global-error';

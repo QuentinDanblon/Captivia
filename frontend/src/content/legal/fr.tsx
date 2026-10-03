@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { HOSTS, LEGAL, LEGAL_ROUTES } from '@/lib/legal';
 import { A, Field, ILink, P, Table, UL, type LegalContent } from './ui';
+import { PhotoCreditsTable } from './photos';
 
 /**
  * Contenu des documents légaux — version française (version de référence).
@@ -105,8 +106,9 @@ export function buildFrContent(locale: string): LegalContent {
           title: 'Affiliation',
           body: (
             <P>
-              En tant que Partenaire Amazon, {LEGAL.serviceName} réalise un bénéfice sur les achats remplissant les
-              conditions requises. Les liens d&apos;affiliation sont signalés comme tels ; voir la page{' '}
+              {LEGAL.serviceName} n&apos;affiche aujourd&apos;hui aucun lien d&apos;affiliation. Si des liens
+              partenaires vers des sites marchands sont proposés, ils sont signalés comme tels, et le programme
+              d&apos;affiliation concerné est nommé à côté ; voir la page{' '}
               {L(LEGAL_ROUTES.transparency, 'Transparence et affiliation')}.
             </P>
           ),
@@ -273,8 +275,8 @@ export function buildFrContent(locale: string): LegalContent {
                 leur communique alors votre adresse IP.
               </P>
               <P>
-                Lorsque vous suivez un lien d&apos;affiliation, vous quittez {LEGAL.serviceName} : le site du
-                marchand (par exemple Amazon) applique sa propre politique de confidentialité et de cookies. Nous ne
+                Si vous suivez un lien vers un site marchand partenaire, vous quittez {LEGAL.serviceName} : ce site
+                applique sa propre politique de confidentialité et de cookies. Nous ne
                 lui transmettons aucune donnée vous concernant ; le lien contient seulement notre identifiant de
                 partenaire.
               </P>
@@ -296,8 +298,20 @@ export function buildFrContent(locale: string): LegalContent {
                 d&apos;un compte, leur suppression, ou après 90 jours sans utilisation de l&apos;application ; ils sont
                 alors effacés.
               </li>
-              <li>Jeton de réinitialisation du mot de passe : une heure au plus, puis il devient inutilisable.</li>
-              <li>Jeton de connexion conservé dans votre navigateur : valable 7 jours, effacé à la déconnexion.</li>
+              <li>
+                Historique des rappels (rappels générés, faits ou non faits) : 90 jours après la date prévue du
+                rappel, puis effacé automatiquement.
+              </li>
+              <li>
+                Jetons de réinitialisation du mot de passe (valables une heure) et de vérification de l&apos;adresse
+                e-mail (valables 24 heures) : effacés automatiquement après leur expiration (purge quotidienne).
+              </li>
+              <li>
+                Jetons de connexion : jeton d&apos;accès valable 30 minutes et jeton de renouvellement valable 30 jours
+                (90 jours en mode invité), renouvelé à chaque utilisation et effacé de votre appareil à la
+                déconnexion. Nos serveurs n&apos;en conservent qu&apos;une empreinte, effacée 30 jours après son
+                expiration ou sa révocation.
+              </li>
               <li>Journaux techniques et de sécurité (dont l&apos;adresse IP) : 12 mois au plus.</li>
               <li>Rapports d&apos;erreurs (si le suivi est activé) : 90 jours au plus.</li>
             </UL>
@@ -429,7 +443,10 @@ export function buildFrContent(locale: string): LegalContent {
               <li>
                 Avec un compte : enregistrement de vos animaux, carnet de santé, routines, rappels et notifications.
               </li>
-              <li>Un magasin présentant des liens vers des sites marchands partenaires (liens d&apos;affiliation).</li>
+              <li>
+                Un magasin pouvant présenter des liens vers des sites marchands partenaires (liens d&apos;affiliation,
+                signalés comme tels).
+              </li>
               <li>Le partage public facultatif de la fiche d&apos;un animal.</li>
             </UL>
           ),
@@ -512,8 +529,8 @@ export function buildFrContent(locale: string): LegalContent {
           title: '8. Liens d’affiliation et sites tiers',
           body: (
             <P>
-              En tant que Partenaire Amazon, {LEGAL.serviceName} réalise un bénéfice sur les achats remplissant les
-              conditions requises. Le prix payé reste identique pour vous. Les achats sont conclus directement avec
+              Si des liens partenaires vers des sites marchands sont proposés, ils sont signalés comme tels et
+              peuvent rapporter une commission à {LEGAL.serviceName} ; le prix payé reste identique pour vous. Les achats sont conclus directement avec
               le marchand, selon ses propres conditions ; {LEGAL.serviceName} n&apos;est pas partie à cette vente.
               Voir la page {L(LEGAL_ROUTES.transparency, 'Transparence et affiliation')}.
             </P>
@@ -716,11 +733,27 @@ export function buildFrContent(locale: string): LegalContent {
           ),
         },
         {
+          id: 'photographies',
+          title: 'Photographies',
+          body: (
+            <>
+              <P>
+                Les photographies d&apos;animaux et de nature du site proviennent de{' '}
+                <A href="https://commons.wikimedia.org">Wikimedia Commons</A>. Leur licence a été vérifiée sur la
+                page de chaque fichier ; aucune n&apos;est générée par une intelligence artificielle. Chaque photo
+                est créditée là où elle s&apos;affiche ; les adaptations des photos sous licence CC BY-SA sont
+                diffusées sous la même licence.
+              </P>
+              <PhotoCreditsTable lang="fr" />
+            </>
+          ),
+        },
+        {
           id: 'logiciels',
           title: 'Polices et icônes',
           body: (
             <UL>
-              <li>Polices Inter et JetBrains Mono : SIL Open Font License 1.1.</li>
+              <li>Polices Fraunces, IBM Plex Sans et IBM Plex Mono : SIL Open Font License 1.1.</li>
               <li>Icônes Lucide : licence ISC.</li>
             </UL>
           ),

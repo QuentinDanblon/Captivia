@@ -1,15 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { AuthBody, bodyOf, httpServer } from './utils/http';
 import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
 import { TestCacheModule } from './test-cache.module';
 import { PrismaService } from '../src/prisma/prisma.service';
 
 jest.setTimeout(60000);
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-assignment */
-// (supertest renvoie des corps `any` ; fichier de test.)
 
 const PASSWORD = 'PaginationTest123!';
 const SPECIES_ID = 5221172;
@@ -23,7 +21,8 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
   const email = `pagination-${Date.now()}-${Math.floor(Math.random() * 100000)}@captivia.local`;
 
   const auth = () => ({ Authorization: `Bearer ${token}` });
-  const ids = (body: Array<{ id: string }>) => body.map((x) => x.id);
+  const ids = (body: unknown) =>
+    (body as Array<{ id: string }>).map((x) => x.id);
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -44,7 +43,7 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
     await app.init();
     prisma = app.get(PrismaService);
 
-    const res = await request(app.getHttpServer())
+    const res = await request(httpServer(app))
       .post('/auth/register')
       .send({
         email,
@@ -54,8 +53,8 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
         ageConfirmed: true,
       })
       .expect(201);
-    token = res.body.accessToken;
-    userId = res.body.user.id;
+    token = bodyOf<AuthBody>(res).accessToken;
+    userId = bodyOf<AuthBody>(res).user.id;
     await prisma.user.update({
       where: { id: userId },
       data: { isPremium: true },
@@ -89,7 +88,7 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
 
   describe('GET /users/me/animals', () => {
     it('sans paramètre : tableau complet (comportement inchangé)', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get('/users/me/animals')
         .set(auth())
         .expect(200);
@@ -98,7 +97,7 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
     });
 
     it('limit=101 → 400', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get('/users/me/animals?limit=101')
         .set(auth())
         .expect(400);
@@ -106,7 +105,7 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
 
     it('limit=0, limit=abc, offset=-1 → 400', async () => {
       for (const q of ['limit=0', 'limit=abc', 'offset=-1']) {
-        await request(app.getHttpServer())
+        await request(httpServer(app))
           .get(`/users/me/animals?${q}`)
           .set(auth())
           .expect(400);
@@ -114,19 +113,19 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
     });
 
     it('limit=2 → 2 éléments, et offset=2 → les suivants sans doublon', async () => {
-      const first = await request(app.getHttpServer())
+      const first = await request(httpServer(app))
         .get('/users/me/animals?limit=2')
         .set(auth())
         .expect(200);
       expect(first.body).toHaveLength(2);
 
-      const second = await request(app.getHttpServer())
+      const second = await request(httpServer(app))
         .get('/users/me/animals?limit=2&offset=2')
         .set(auth())
         .expect(200);
       expect(second.body).toHaveLength(2);
 
-      const all = await request(app.getHttpServer())
+      const all = await request(httpServer(app))
         .get('/users/me/animals')
         .set(auth())
         .expect(200);
@@ -134,11 +133,11 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
     });
 
     it('ordre stable entre deux appels (createdAt identiques)', async () => {
-      const a = await request(app.getHttpServer())
+      const a = await request(httpServer(app))
         .get('/users/me/animals')
         .set(auth())
         .expect(200);
-      const b = await request(app.getHttpServer())
+      const b = await request(httpServer(app))
         .get('/users/me/animals')
         .set(auth())
         .expect(200);
@@ -151,7 +150,7 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
     const url = () => `/users/me/animals/${animalId}/vaccinations`;
 
     it('sans paramètre : tableau complet', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(url())
         .set(auth())
         .expect(200);
@@ -160,18 +159,18 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
     });
 
     it('limit=101 → 400', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get(`${url()}?limit=101`)
         .set(auth())
         .expect(400);
     });
 
     it('limit=2 → 2 éléments ; ordre stable entre deux appels', async () => {
-      const a = await request(app.getHttpServer())
+      const a = await request(httpServer(app))
         .get(`${url()}?limit=2`)
         .set(auth())
         .expect(200);
-      const b = await request(app.getHttpServer())
+      const b = await request(httpServer(app))
         .get(`${url()}?limit=2`)
         .set(auth())
         .expect(200);
@@ -182,13 +181,13 @@ describe('Pagination et tri stable E2E (W1-05)', () => {
 
   describe('GET /species/search/advanced (DTO validé)', () => {
     it('limit=101 → 400', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get('/species/search/advanced?query=chat&limit=101')
         .expect(400);
     });
 
     it('paramètre inconnu → 400', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get('/species/search/advanced?query=chat&evil=1')
         .expect(400);
     });

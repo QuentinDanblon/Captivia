@@ -26,10 +26,6 @@ import { OperatorGuard } from '../common/guards/operator.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { isValidQid } from '../external/http-safety';
 import { GatewayEnrichedDto, GatewaySearchDto } from './dto/gateway-search.dto';
-import {
-  WikipediaData,
-  WikidataData,
-} from '../transformers/data-transformer.interface';
 
 const VALID_SOURCES = ['gbif', 'wikipedia', 'wikidata'];
 
@@ -253,9 +249,9 @@ export class ApiGatewayController {
   @ApiResponse({ status: 200, description: 'Cache cleared' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @ApiResponse({ status: 403, description: 'Réservé aux opérateurs' })
-  async clearCache(@Param('speciesKey') speciesKey: string) {
+  clearCache(@Param('speciesKey') speciesKey: string) {
     this.validateSpeciesKey(speciesKey);
-    await this.apiGatewayService.clearSpeciesCache(speciesKey);
+    this.apiGatewayService.clearSpeciesCache(speciesKey);
     return { message: 'Cache cleared successfully' };
   }
 
@@ -268,14 +264,21 @@ export class ApiGatewayController {
   @ApiOperation({ summary: 'Get API gateway health status' })
   @ApiResponse({ status: 200, description: 'Health status' })
   async getHealth() {
+    const [gbif, wikipedia, wikidata] = await Promise.all([
+      this.apiGatewayService.checkGbifHealth(),
+      this.apiGatewayService.checkWikipediaHealth(),
+      this.apiGatewayService.checkWikidataHealth(),
+    ]);
+    const services = { gbif, wikipedia, wikidata };
+    const allHealthy = Object.values(services).every(
+      (service) => service?.status === 'healthy',
+    );
     return {
-      status: 'healthy',
+      // « degraded » dès qu'un fournisseur ne répond pas : l'API reste utilisable
+      // (repli sur les profils locaux / le cache), mais l'état n'est plus « healthy ».
+      status: allHealthy ? 'healthy' : 'degraded',
       timestamp: new Date().toISOString(),
-      services: {
-        gbif: await this.apiGatewayService.checkGbifHealth(),
-        wikipedia: await this.apiGatewayService.checkWikipediaHealth(),
-        wikidata: await this.apiGatewayService.checkWikidataHealth(),
-      },
+      services,
     };
   }
 

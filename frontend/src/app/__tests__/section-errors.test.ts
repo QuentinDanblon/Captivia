@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { ApiError, BACKEND_UNAVAILABLE_MESSAGE } from '@/lib/api';
-import { isPremiumLocked, sectionErrorKey } from '@/app/[locale]/mes-animaux/[id]/_components/sectionErrors';
+import { isPremiumLocked, sectionErrorKey } from '@/app/[locale]/(app)/mes-animaux/[id]/_components/sectionErrors';
 
 /** Revue frontend, constat 15 : erreurs des sections traduites, jamais le message brut du backend. */
 describe('sectionErrors', () => {
@@ -37,7 +37,7 @@ describe('sectionErrors', () => {
   });
 
   it('les sections n’affichent plus de message backend brut ni « Erreur » en dur', () => {
-    const dir = path.join(__dirname, '..', '[locale]', 'mes-animaux', '[id]', '_components');
+    const dir = path.join(__dirname, '..', '[locale]', '(app)', 'mes-animaux', '[id]', '_components');
     for (const file of [
       'BreedingSection.tsx',
       'HealthRecordsSection.tsx',

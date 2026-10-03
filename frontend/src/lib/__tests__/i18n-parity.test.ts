@@ -43,15 +43,23 @@ const ALLOWED_EVERYWHERE = new Set([
   'Captivia',
   'UVB',
   '+100 pts',
-  '5,99 €',
-  '29,99 €',
+  // Formule gratuite ; aucun prix d'abonnement codé en dur (tarif des stores, via RevenueCat).
+  '0 €',
   'CC BY-SA 4.0',
   'GBIF.org',
   // Noms de stores (W6-08)
   'App Store',
   'Google Play',
-  // Nom de l'offre (mention PremiumBadge du mode invité)
+  // Paywall natif : prix du store suivi de la période traduite (« 2,49 € par mois »)
+  '{price} {per}',
+  // Nom de l'offre payante (mention PremiumBadge du mode invité, tableau des formules de la landing)
   'Premium',
+  // Fiches espèces : installations et matériel au nom international, crédit des photos GBIF
+  'Terrarium',
+  'Aquarium',
+  'Aquaterrarium',
+  'Thermostat',
+  'via GBIF',
 ]);
 
 const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {
@@ -61,13 +69,21 @@ const ALLOWED_PER_LOCALE: Record<(typeof LOCALES)[number], Set<string>> = {
     'Dose', 'Email', 'Grade', 'Habitat', 'Identification', 'Notes', 'Notifications',
     'Photos', 'Points', 'Restrictions', 'Routines', 'Type', 'Vaccinations',
     'Reptile', 'Bivalve', 'Animal', 'Biome', 'Sources', 'Tropical / Subtropical',
+    'Urgent',
+    // Communauté : statut d'un contenu en modération, type de publication
+    'Visible', 'Question', 'Questions',
+    // « point(s) » s'écrit de même en anglais (grade).
+    '{count, plural, one {# point} other {# points}}',
+    '{count, plural, one {+# point} other {+# points}}',
+    // Fiches espèces (régime, matériel, crédit photo)
+    'Carnivore', 'Herbivore', 'Insectivore', 'Omnivore', 'Cage', 'Filtration', 'Photo', 'Budget',
   ]),
-  es: new Set(['Email', 'Reptiles', 'Animal', 'Tropical / Subtropical']),
-  de: new Set(['Bronze', 'Diamant', 'Profil']),
-  it: new Set(['Dose', 'Email', 'Facile', 'Habitat', 'Bivalve']),
+  es: new Set(['Email', 'Reptiles', 'Animal', 'Tropical / Subtropical', 'Visible']),
+  de: new Set(['Bronze', 'Diamant', 'Profil', 'Rang']),
+  it: new Set(['Dose', 'Email', 'Facile', 'Habitat', 'Bivalve', 'Budget', 'Classe']),
   pt: new Set([
     'Bronze', 'Dose', 'Email', 'Habitat', 'ex. Rango', 'ou', 'Wikipédia',
-    'Bivalve', 'Animal', 'Tropical / Subtropical',
+    'Bivalve', 'Animal', 'Tropical / Subtropical', 'Classe',
   ]),
 };
 

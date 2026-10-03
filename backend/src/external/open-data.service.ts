@@ -5,25 +5,26 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import axios, { AxiosInstance } from 'axios';
+import { describeHttpError } from './http-safety';
+import { ExternalHttpService } from './http/external-http.service';
 
 export interface OpenDataResult {
   source: string;
-  data: any;
+  data: unknown;
   timestamp: number;
 }
 
 export interface WikipediaData {
   title: string;
   extract: string;
-  url: string;
+  url?: string;
   thumbnail?: { source: string; width: number; height: number };
 }
 
 export interface WikidataData {
-  label: string;
-  description: string;
-  claims: Record<string, any[]>;
+  label?: string;
+  description?: string;
+  claims?: Record<string, unknown[]>;
 }
 
 export interface INaturalistObservation {
@@ -42,7 +43,44 @@ export interface EOLData {
   title: string;
   description: string;
   urls: string[];
-  images: any[];
+  images: unknown[];
+}
+
+/** Réponses brutes des fournisseurs (champs lus uniquement). */
+interface WikipediaSummaryResponse {
+  title: string;
+  extract: string;
+  content_urls?: {
+    desktop?: { page?: string };
+    mobile?: { page?: string };
+  };
+  thumbnail?: { source: string; width: number; height: number };
+}
+
+interface WikidataSearchResponse {
+  search?: Array<{ id: string }>;
+}
+
+type WikidataLocalized = Record<string, { value?: string } | undefined>;
+
+interface WikidataEntitiesResponse {
+  entities: Record<
+    string,
+    | {
+        labels?: WikidataLocalized;
+        descriptions?: WikidataLocalized;
+        claims?: Record<string, unknown[]>;
+      }
+    | undefined
+  >;
+}
+
+interface INaturalistResponse {
+  results: INaturalistObservation[];
+}
+
+interface EolResponse {
+  results: EOLData[];
 }
 
 export interface WikipediaResult extends OpenDataResult {
@@ -74,50 +112,33 @@ export interface MultiSourceResult extends OpenDataResult {
 export class OpenDataService {
   private readonly logger = new Logger(OpenDataService.name);
 
-  // APIs sans clé API
-  private readonly wikipediaApi = axios.create({
-    baseURL: 'https://fr.wikipedia.org/api/rest_v1',
-    timeout: 10000,
-    headers: {
-      'User-Agent': 'Captivia/1.0 (https://captivia.com)',
-    },
-  });
+  // APIs sans clé API (appels via le client HTTP partagé : timeout 5 s, disjoncteur par fournisseur)
+  private readonly wikipediaUrl = 'https://fr.wikipedia.org/api/rest_v1';
+  private readonly wikidataUrl = 'https://www.wikidata.org/w/api.php';
+  private readonly iNaturalistUrl = 'https://api.inaturalist.org/v2';
+  private readonly eolUrl = 'https://eol.org/api';
 
-  private readonly wikidataApi = axios.create({
-    baseURL: 'https://www.wikidata.org/w/api.php',
-    timeout: 10000,
-    headers: {
-      'User-Agent': 'Captivia/1.0 (https://captivia.com)',
-    },
-    params: {
-      action: 'wbgetentities',
-      format: 'json',
-      language: 'fr',
-    },
-  });
+  constructor(private readonly http: ExternalHttpService) {}
 
-  private readonly iNaturalistApi = axios.create({
-    baseURL: 'https://api.inaturalist.org/v2',
-    timeout: 10000,
-    params: {
-      per_page: 20,
-      order: 'desc',
-      order_by: 'created_at',
-    },
-  });
+  private iNaturalistObservations(params: Record<string, unknown>) {
+    return this.http.get<INaturalistResponse>(
+      'inaturalist',
+      `${this.iNaturalistUrl}/observations`,
+      {
+        params: {
+          per_page: 20,
+          order: 'desc',
+          order_by: 'created_at',
+          ...params,
+        },
+      },
+    );
+  }
 
-  private readonly eolApi = axios.create({
-    baseURL: 'https://eol.org/api',
-    timeout: 10000,
-    params: {
-      per_page: 20,
-      sort: 'relevance',
-    },
-  });
-
-  constructor() {
-    this.setupWikipediaInterceptors();
-    this.setupWikidataInterceptors();
+  private eolPages(params: Record<string, unknown>) {
+    return this.http.get<EolResponse>('eol', `${this.eolUrl}/pages`, {
+      params: { per_page: 20, sort: 'relevance', ...params },
+    });
   }
 
   /**
@@ -127,7 +148,10 @@ export class OpenDataService {
     this.logger.log(`Searching Wikipedia for: ${title}`);
 
     try {
-      const response = await this.wikipediaApi.get(`/page/summary/${encodeURIComponent(title)}`);
+      const response = await this.http.get<WikipediaSummaryResponse>(
+        'wikipedia',
+        `${this.wikipediaUrl}/page/summary/${encodeURIComponent(title)}`,
+      );
 
       const data = response.data;
       return {
@@ -135,13 +159,16 @@ export class OpenDataService {
         data: {
           title: data.title,
           extract: data.extract,
-          url: data.content_urls?.desktop?.page || data.content_urls?.mobile?.page,
+          url:
+            data.content_urls?.desktop?.page || data.content_urls?.mobile?.page,
           thumbnail: data.thumbnail,
         },
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`Wikipedia search failed for: ${title}`, error.message);
+      this.logger.warn(
+        `Wikipedia search failed for: ${title}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'wikipedia',
         data: null,
@@ -158,15 +185,19 @@ export class OpenDataService {
 
     try {
       // D'abord chercher l'entité par titre
-      const searchResponse = await axios.get('https://www.wikidata.org/w/api.php', {
-        params: {
-          action: 'wbsearchentities',
-          search: title,
-          language: 'fr',
-          format: 'json',
-          limit: 1,
+      const searchResponse = await this.http.get<WikidataSearchResponse>(
+        'wikidata',
+        this.wikidataUrl,
+        {
+          params: {
+            action: 'wbsearchentities',
+            search: title,
+            language: 'fr',
+            format: 'json',
+            limit: 1,
+          },
         },
-      });
+      );
 
       const results = searchResponse.data.search;
       if (!results || results.length === 0) {
@@ -176,13 +207,20 @@ export class OpenDataService {
       const entityId = results[0].id;
 
       // Récupérer les données de l'entité
-      const dataResponse = await this.wikidataApi.get('', {
-        params: {
-          ids: entityId,
-          props: 'labels|descriptions|claims',
-          languages: 'fr',
+      const dataResponse = await this.http.get<WikidataEntitiesResponse>(
+        'wikidata',
+        this.wikidataUrl,
+        {
+          params: {
+            action: 'wbgetentities',
+            format: 'json',
+            language: 'fr',
+            ids: entityId,
+            props: 'labels|descriptions|claims',
+            languages: 'fr',
+          },
         },
-      });
+      );
 
       const entities = dataResponse.data.entities;
       const entity = entities[entityId];
@@ -194,14 +232,20 @@ export class OpenDataService {
       return {
         source: 'wikidata',
         data: {
-          label: entity.labels?.fr?.value || entity.labels?.en?.value || entity.labels?.fr?.value,
-          description: entity.descriptions?.fr?.value || entity.descriptions?.en?.value,
+          label:
+            entity.labels?.fr?.value ||
+            entity.labels?.en?.value ||
+            entity.labels?.fr?.value,
+          description:
+            entity.descriptions?.fr?.value || entity.descriptions?.en?.value,
           claims: entity.claims,
         },
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`Wikidata search failed for: ${title}`, error.message);
+      this.logger.warn(
+        `Wikidata search failed for: ${title}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'wikidata',
         data: null,
@@ -217,11 +261,9 @@ export class OpenDataService {
     this.logger.log(`Searching iNaturalist for: ${query}`);
 
     try {
-      const response = await this.iNaturalistApi.get('/observations', {
-        params: {
-          q: query,
-          taxon_name: query,
-        },
+      const response = await this.iNaturalistObservations({
+        q: query,
+        taxon_name: query,
       });
 
       const results = response.data.results;
@@ -232,7 +274,9 @@ export class OpenDataService {
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`iNaturalist search failed for: ${query}`, error.message);
+      this.logger.warn(
+        `iNaturalist search failed for: ${query}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'inaturalist',
         data: [],
@@ -248,11 +292,9 @@ export class OpenDataService {
     this.logger.log(`Searching EOL for: ${query}`);
 
     try {
-      const response = await this.eolApi.get('/pages', {
-        params: {
-          q: query,
-          type: 'taxon',
-        },
+      const response = await this.eolPages({
+        q: query,
+        type: 'taxon',
       });
 
       const results = response.data.results;
@@ -263,7 +305,9 @@ export class OpenDataService {
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`EOL search failed for: ${query}`, error.message);
+      this.logger.warn(
+        `EOL search failed for: ${query}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'eol',
         data: [],
@@ -288,7 +332,8 @@ export class OpenDataService {
     const results = {
       wikipedia: wikipedia.status === 'fulfilled' ? wikipedia.value : null,
       wikidata: wikidata.status === 'fulfilled' ? wikidata.value : null,
-      iNaturalist: iNaturalist.status === 'fulfilled' ? iNaturalist.value : null,
+      iNaturalist:
+        iNaturalist.status === 'fulfilled' ? iNaturalist.value : null,
       eol: eol.status === 'fulfilled' ? eol.value : null,
     };
 
@@ -306,11 +351,9 @@ export class OpenDataService {
     this.logger.log(`Searching iNaturalist by taxon: ${taxonId}`);
 
     try {
-      const response = await this.iNaturalistApi.get('/observations', {
-        params: {
-          taxon_id: taxonId,
-          per_page: limit,
-        },
+      const response = await this.iNaturalistObservations({
+        taxon_id: taxonId,
+        per_page: limit,
       });
 
       return {
@@ -319,7 +362,9 @@ export class OpenDataService {
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`iNaturalist search by taxon failed: ${taxonId}`, error.message);
+      this.logger.warn(
+        `iNaturalist search by taxon failed: ${taxonId}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'inaturalist',
         data: [],
@@ -335,11 +380,9 @@ export class OpenDataService {
     this.logger.log(`Searching EOL by taxon: ${taxonId}`);
 
     try {
-      const response = await this.eolApi.get('/pages', {
-        params: {
-          id: taxonId,
-          per_page: limit,
-        },
+      const response = await this.eolPages({
+        id: taxonId,
+        per_page: limit,
       });
 
       return {
@@ -348,42 +391,14 @@ export class OpenDataService {
         timestamp: Date.now(),
       };
     } catch (error) {
-      this.logger.warn(`EOL search by taxon failed: ${taxonId}`, error.message);
+      this.logger.warn(
+        `EOL search by taxon failed: ${taxonId}: ${describeHttpError(error)}`,
+      );
       return {
         source: 'eol',
         data: [],
         timestamp: Date.now(),
       };
     }
-  }
-
-  /**
-   * Setup interceptors pour Wikipedia
-   */
-  private setupWikipediaInterceptors() {
-    this.wikipediaApi.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response?.status === 404) {
-          return { data: null };
-        }
-        return Promise.reject(error);
-      },
-    );
-  }
-
-  /**
-   * Setup interceptors for Wikidata
-   */
-  private setupWikidataInterceptors() {
-    this.wikidataApi.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        if (error.response?.status === 404) {
-          return { data: { entities: {} } };
-        }
-        return Promise.reject(error);
-      },
-    );
   }
 }

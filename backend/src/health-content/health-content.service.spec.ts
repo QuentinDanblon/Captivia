@@ -5,8 +5,6 @@ import { PubmedService } from './services/pubmed.service';
 
 describe('HealthContentService', () => {
   let service: HealthContentService;
-  let prismaService: PrismaService;
-  let pubmedService: PubmedService;
 
   const mockHealthContent = {
     id: 'health-id-123',
@@ -29,10 +27,14 @@ describe('HealthContentService', () => {
       findUnique: jest.fn(),
       upsert: jest.fn(),
     },
+    speciesProfile: {
+      findUnique: jest.fn(),
+    },
   };
 
   const mockPubmedService = {
     searchArticles: jest.fn(),
+    searchBySpeciesAndDisease: jest.fn(),
   };
 
   beforeEach(async () => {
@@ -51,10 +53,9 @@ describe('HealthContentService', () => {
     }).compile();
 
     service = module.get<HealthContentService>(HealthContentService);
-    prismaService = module.get<PrismaService>(PrismaService);
-    pubmedService = module.get<PubmedService>(PubmedService);
 
     jest.clearAllMocks();
+    mockPrismaService.speciesProfile.findUnique.mockResolvedValue(null);
   });
 
   it('should be defined', () => {
@@ -78,14 +79,59 @@ describe('HealthContentService', () => {
           updatedAt: mockHealthContent.updatedAt,
         },
         pubmed: [],
+        pubmedAvailable: true,
         disclaimer: expect.any(String),
       });
     });
 
-    it('should return null editorial if no content found', async () => {
-      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(
-        null,
+    it("n'appelle pas PubMed sans profil local (pas de nom scientifique)", async () => {
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
+
+      await service.getSpeciesHealth(999);
+
+      expect(
+        mockPubmedService.searchBySpeciesAndDisease,
+      ).not.toHaveBeenCalled();
+    });
+
+    it("renvoie les références PubMed réelles de l'espèce (nom scientifique du profil)", async () => {
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+        scientificName: 'Boa constrictor',
+      });
+      const articles = [{ pmid: '1', title: 'Boa health' }];
+      mockPubmedService.searchBySpeciesAndDisease.mockResolvedValue(articles);
+
+      const result = await service.getSpeciesHealth(2448340, 'mites');
+
+      expect(mockPubmedService.searchBySpeciesAndDisease).toHaveBeenCalledWith(
+        'Boa constrictor',
+        'mites',
       );
+      expect(result.pubmed).toEqual(articles);
+      expect(result.pubmedAvailable).toBe(true);
+    });
+
+    it('PubMed en panne : la fiche est servie (pas de 500), pubmedAvailable=false', async () => {
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(
+        mockHealthContent,
+      );
+      mockPrismaService.speciesProfile.findUnique.mockResolvedValue({
+        scientificName: 'Boa constrictor',
+      });
+      mockPubmedService.searchBySpeciesAndDisease.mockRejectedValue(
+        new Error('PubMed temporarily unavailable'),
+      );
+
+      const result = await service.getSpeciesHealth(2448340);
+
+      expect(result.pubmed).toEqual([]);
+      expect(result.pubmedAvailable).toBe(false);
+      expect(result.editorial).not.toBeNull();
+    });
+
+    it('should return null editorial if no content found', async () => {
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
 
       const result = await service.getSpeciesHealth(999, undefined, 'fr');
 
@@ -93,9 +139,7 @@ describe('HealthContentService', () => {
     });
 
     it('should use default locale "fr" if not provided', async () => {
-      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(
-        null,
-      );
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
 
       const result = await service.getSpeciesHealth(123);
 
@@ -113,9 +157,7 @@ describe('HealthContentService', () => {
     });
 
     it('should include disclaimer in response', async () => {
-      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(
-        null,
-      );
+      mockPrismaService.speciesHealthContent.findUnique.mockResolvedValue(null);
 
       const result = await service.getSpeciesHealth(123);
 
@@ -164,11 +206,20 @@ describe('HealthContentService', () => {
     });
   });
 
+  describe('createOrUpdateHealthContent — fiche inexistante (W1-09)', () => {
+    it('convertit la violation de FK (P2003) en 404', async () => {
+      mockPrismaService.speciesHealthContent.upsert.mockRejectedValue(
+        Object.assign(new Error('FK'), { code: 'P2003' }),
+      );
+      await expect(
+        service.createOrUpdateHealthContent(999, 'fr', [], []),
+      ).rejects.toMatchObject({ status: 404 });
+    });
+  });
+
   describe('searchPubMed', () => {
     it('should search PubMed with default maxResults', async () => {
-      const mockArticles = [
-        { pmid: '123', title: 'Test article' },
-      ];
+      const mockArticles = [{ pmid: '123', title: 'Test article' }];
       mockPubmedService.searchArticles.mockResolvedValue(mockArticles);
 
       const result = await service.searchPubMed('reptile disease');

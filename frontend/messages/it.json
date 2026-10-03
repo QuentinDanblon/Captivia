@@ -38,7 +38,17 @@
     "backupBody": "I backup tecnici che contengono ancora i tuoi dati vengono eliminati entro un massimo di 30 giorni dalla cancellazione.",
     "exportInfoTitle": "Recupera i tuoi dati prima di andare via",
     "exportInfoBody": "Prima di eliminare il tuo account, puoi scaricare gratuitamente un'esportazione completa dei tuoi dati (formato JSON) da Impostazioni, Account, «I miei dati».",
-    "backHome": "Torna alla home"
+    "backHome": "Torna alla home",
+    "pageTitle": "Il tuo account",
+    "pageLead": "I tuoi dati, la tua sicurezza e le tue informazioni, sotto il tuo controllo.",
+    "profileTitle": "Profilo",
+    "languageHint": "L’app e le tue e-mail passano a questa lingua.",
+    "passwordIntro": "Per la tua sicurezza, la password non viene mai mostrata.",
+    "passwordRule": "Tra 10 e 128 caratteri.",
+    "thisDeviceTitle": "Su questo dispositivo",
+    "thisDeviceText": "Hai effettuato l’accesso come {email}.",
+    "privacyLink": "Informativa sulla privacy",
+    "deletionHelpLink": "Come eliminare il tuo account"
   },
   "animalPublic": {
     "date": "Data",
@@ -275,6 +285,62 @@
       "invalid": "Alcuni dati non sono validi. Controlla il modulo.",
       "notFound": "Questo elemento non esiste più. Ricarica la pagina.",
       "unavailable": "Il servizio è momentaneamente non disponibile. Riprova tra qualche istante."
+    },
+    "list": {
+      "count": "{count, plural, =0 {Nessun animale} one {# animale} other {# animali}}",
+      "description": "Ogni animale ha il suo libretto, i suoi promemoria e la scheda della sua specie.",
+      "emptyBenefit": "Aggiungi il tuo primo animale: libretto, promemoria e riferimenti della specie sono pronti in tre passaggi.",
+      "routines": "{count, plural, one {# routine} other {# routine}}"
+    },
+    "sheet": {
+      "loading": "Apertura della scheda…",
+      "back": "Torna ai miei animali",
+      "errorBenefit": "La scheda potrebbe essere stata eliminata, oppure la connessione si è interrotta.",
+      "breadcrumb": "Percorso di navigazione",
+      "gbifLabel": "Identificativo GBIF della specie",
+      "summaryTitle": "In breve",
+      "unknownValue": "Non indicato",
+      "bornOn": "Nascita: {date}",
+      "treatments": "Trattamento in corso",
+      "noTreatment": "Nessuno",
+      "until": "fino al {date}",
+      "nextVaccine": "Prossimo richiamo",
+      "noVaccine": "Nessuno",
+      "sectionsNav": "In questa scheda",
+      "speciesTitle": "Riferimenti della specie",
+      "timelineTitle": "Ultime cure, prossime scadenze",
+      "timelineLabel": "Linea del tempo delle cure di {name}",
+      "timelineEmpty": "La linea del tempo si riempie con le pesate, i vaccini e gli appuntamenti che aggiunge qui sotto.",
+      "kinds": {
+        "visit": "Visita veterinaria",
+        "vaccine": "Vaccino",
+        "vaccineDue": "Richiamo del vaccino",
+        "weighing": "Pesata",
+        "health": "Libretto sanitario",
+        "treatmentStart": "Inizio del trattamento",
+        "treatmentEnd": "Fine del trattamento"
+      },
+      "actionsLabel": "Azioni per {name}",
+      "weigh": "Pesare",
+      "carnetShort": "Libretto",
+      "carnetTitle": "Il libretto da portare con sé",
+      "carnetText": "Identità, vaccini, trattamenti, pesate e appuntamenti su una pagina A4: da stampare o salvare in PDF per il veterinario.",
+      "openCarnet": "Apri il libretto stampabile",
+      "qrAlt": "Codice QR della pagina pubblica di {name}",
+      "medicationsBenefit": "Dose, frequenza, data di fine: Captivia le ricorda ogni somministrazione all'ora prevista.",
+      "measurementsBenefit": "Una pesata al mese basta per notare un calo di peso prima dei primi sintomi.",
+      "measurementsList": "Storico delle pesate",
+      "weightHint": "In chilogrammi: 250 g = 0,25.",
+      "vaccinationsBenefit": "Annoti la data e il prossimo richiamo: Captivia glielo segnala con un mese di anticipo.",
+      "vetBenefit": "Aggiungi la data e il veterinario: un promemoria arriva 7 giorni prima e poi il giorno prima.",
+      "healthBenefit": "Interventi, anamnesi, alimentazione particolare: lo storico che il veterinario le chiederà.",
+      "routinesBenefit": "Pasti, pulizia, UVB: imposti l'ora una volta, poi ci pensa Captivia a ricordarglielo.",
+      "breedingBenefit": "Calori, accoppiamenti, nascite: conservi le date esatte di ogni ciclo.",
+      "vaccineOverdue": "Richiamo scaduto ({when})",
+      "vaccineDue": "Richiamo {when}",
+      "routineName": "Nome della routine (facoltativo)",
+      "dayOfMonth": "Giorno del mese (1-31)",
+      "everyHours": "Ogni X ore (1-24)"
     }
   },
   "attribution": {
@@ -317,7 +383,23 @@
     "acceptTermsLabel": "Accetto le <terms>condizioni d'uso</terms> e la <privacy>politica sulla privacy</privacy>",
     "ageConfirmLabel": "Confermo di avere almeno 15 anni",
     "consentRequired": "Per creare un account devi accettare le condizioni d'uso e confermare di avere almeno 15 anni.",
-    "registerError": "Registrazione non riuscita"
+    "registerError": "Registrazione non riuscita",
+    "loginHeading": "Che piacere rivederti",
+    "loginLead": "I tuoi animali, i loro libretti e i loro promemoria ti aspettano.",
+    "guestTitle": "Preferisci provare prima?",
+    "guestLead": "Inizia senza e-mail né password: 1 animale, il suo libretto completo e i suoi promemoria. Crea un account quando vuoi, non si perde nulla.",
+    "createAccountLink": "Crea un account",
+    "registerHeading": "Un account per non dimenticare più nulla",
+    "registerLead": "Il tuo libretto salvato e disponibile su tutti i tuoi dispositivi. Gratis per un animale.",
+    "consentLegend": "Condizioni ed età",
+    "registerSubmit": "Crea il mio account",
+    "forgotHeading": "Password dimenticata?",
+    "forgotLead": "Indica il tuo indirizzo: ti inviamo un link per sceglierne una nuova.",
+    "forgotSpamHint": "Il link è valido per un’ora. Dai un’occhiata anche alla posta indesiderata.",
+    "rememberedPassword": "Ti è tornata in mente?",
+    "resetInvalidHeading": "Questo link non è più valido",
+    "resetRequestNew": "Ricevi un nuovo link",
+    "resetHeading": "Scegli una nuova password"
   },
   "carnetPrint": {
     "title": "Libretto sanitario",
@@ -410,11 +492,10 @@
     "terms": "Termini di utilizzo",
     "transparency": "Trasparenza e affiliazione",
     "accountDeletion": "Elimina il mio account",
-    "amazonAssociate": "In qualità di Affiliato Amazon, Captivia riceve un guadagno dagli acquisti idonei.",
     "legalNotice": "Note legali",
     "navLabel": "Informazioni legali",
     "sources": "Fonti e licenze",
-    "tagline": "Prendersi cura, semplicemente.",
+    "tagline": "Tu li ami, noi ricordiamo il resto.",
     "description": "Il libretto sanitario, i promemoria delle cure e le schede di specie con fonti dei vostri animali, in un unico posto."
   },
   "nav": {
@@ -440,7 +521,7 @@
     "markSkipped": "Rinvia",
     "maxGrade": "Grado massimo raggiunto",
     "nextGrade": "Prossimo grado",
-    "noReminders": "Nessun promemoria oggi. Configura le notifiche in Impostazioni.",
+    "noReminders": "Programma un pasto, una nebulizzazione o una pulizia: apparirà qui il giorno stesso.",
     "platinum": "Platino",
     "points": "Punti",
     "pointsEarned": "+100 pts",
@@ -448,41 +529,29 @@
     "progressBarLabel": "Progresso verso il prossimo grado",
     "progressToNext": "verso il prossimo grado",
     "remindersToday": "Promemoria di oggi",
-    "routinesCreateReminders": "Questi promemoria derivano dalle tue routine (animali) e dai tuoi tipi di notifiche. Puoi riceverli sul telefono o via email: Impostazioni → Notifiche.",
+    "routinesCreateReminders": "Questi promemoria arrivano dalle routine dei tuoi animali e dai tuoi promemoria personali. Li ricevi sul telefono o via e-mail, secondo le impostazioni di «Promemoria e notifiche».",
     "silver": "Argento",
     "skipped": "Rinviato",
-    "title": "Il mio grado",
-    "yourStatus": "Il tuo stato"
+    "title": "Il tuo grado",
+    "yourStatus": "Il tuo stato",
+    "lead": "Ogni cura di routine segnata come fatta ti fa guadagnare 2 punti: da Bronzo a Diamante, la tua costanza si vede.",
+    "pointsCount": "{count, plural, one {# punto} other {# punti}}",
+    "towards": "Verso {grade}",
+    "remaining": "{count, plural, one {Ancora # punto per {grade}} other {Ancora # punti per {grade}}}",
+    "scaleLabel": "I cinque gradi",
+    "remindersIntro": "I promemoria del giorno vengono dalle routine dei tuoi animali e dai tuoi promemoria personali.",
+    "noRemindersTitle": "Nessun promemoria oggi",
+    "setUpReminders": "Imposta i miei promemoria",
+    "pointsAwarded": "{count, plural, one {+# punto} other {+# punti}}",
+    "routineWorth": "Routine · 2 punti"
   },
   "home": {
-    "featured": "In evidenza",
-    "popular": "Più visti",
-    "recent": "Novità",
-    "searchPlaceholder": "Cerca una specie...",
-    "subtitle": "Scopri e prenditi cura dei tuoi animali",
-    "title": "La Guida della Fauna",
     "closeMenu": "Chiudi il menu",
     "mainNavigation": "Navigazione principale",
     "mobileNavigation": "Navigazione mobile",
     "openMenu": "Apri il menu",
     "skipToContent": "Vai al contenuto",
-    "searchUnavailable": "Il server di ricerca non è disponibile. Avvia il backend o riprova più tardi.",
-    "eyebrow": "GUIDA ALLA FAUNA",
-    "heroLine": "Conoscere il vivente.",
-    "pillarsLabel": "I pilastri di Captivia",
-    "pillarExplore": "Esplorare",
-    "pillarUnderstand": "Capire",
-    "pillarCare": "Prendersi cura",
-    "explorerKicker": "ESPLORA",
-    "explorerTitle": "Hai una specie in mente?",
-    "speciesProfiles": "Schede delle specie",
-    "instantSearch": "Ricerca istantanea",
     "noResults": "Nessun risultato",
-    "discoverKicker": "SCOPRI",
-    "resultsKicker": "RISULTATI",
-    "resultsTitle": "Specie trovate",
-    "profileCount": "{count, plural, one {# scheda} other {# schede}}",
-    "profileBadge": "Scheda",
     "taxonomy": {
       "Reptilia": "Rettile",
       "Aves": "Uccello",
@@ -502,8 +571,269 @@
       "Archaea": "Archeobatterio"
     }
   },
+  "landing": {
+    "meta": {
+      "title": "Captivia — il libretto sanitario e i promemoria dei tuoi animali",
+      "description": "Vaccini, trattamenti, pesate, visite dal veterinario: annotali una volta e Captivia ti avvisa al momento giusto. Gratis per un animale, senza account per iniziare.",
+      "ogAlt": "Un golden retriever di profilo, con il titolo: Tu li ami. Captivia ricorda il resto.",
+      "ogCredit": "Foto: Dietmar Rabich, CC BY-SA 4.0"
+    },
+    "hero": {
+      "titleLead": "Tu li ami.",
+      "titleRest": "Captivia ricorda il resto.",
+      "lead": "Vaccini, sverminazioni, pesate, visite dal veterinario: annotali una volta e Captivia ti avvisa quando è il momento. Per un gatto, un cane, un coniglio… o un geco leopardino.",
+      "ctaPrimary": "Inizia gratis",
+      "ctaSecondary": "Ho già un account",
+      "reassurance": "Senza account né carta di credito. Gratis per un animale.",
+      "species": "Cani · gatti · conigli · uccelli · rettili · pesci",
+      "photoAlt": "Cane dal pelo fulvo immerso nell'acqua fino al collo, che guarda l'obiettivo nella luce della sera",
+      "previewCaption": "La schermata «Oggi» di Captivia, con animali di esempio."
+    },
+    "sample": {
+      "today": "Oggi",
+      "dueToday": "{count, plural, one {cura oggi} other {cure oggi}}",
+      "overdue": "{count, plural, one {in ritardo} other {in ritardo}}",
+      "alertAction": "Prenota una visita",
+      "markDone": "Segna come fatto",
+      "timelineLabel": "Cure di oggi",
+      "weekLabel": "Prossime cure",
+      "allDay": "Tutto il giorno",
+      "status": {
+        "done": "Fatto",
+        "due": "Da fare",
+        "overdue": "In ritardo",
+        "planned": "Previsto",
+        "skipped": "Saltato"
+      },
+      "kind": {
+        "medication": "Farmaco",
+        "feeding": "Pasto",
+        "cleaning": "Manutenzione",
+        "weighing": "Pesata",
+        "vet": "Veterinario"
+      },
+      "care": {
+        "dewormTitle": "Sverminazione",
+        "dewormDetail": "Moka · 1 compressa",
+        "feedTitle": "Pasto",
+        "feedDetail": "Pixel · 5 grilli spolverati di calcio",
+        "terrariumTitle": "Pulizia del terrario",
+        "terrariumDetail": "Pixel · previsto ieri",
+        "weighTitle": "Pesata",
+        "weighDetail": "Fleur · prima del pasto",
+        "hayTitle": "Fieno fresco e verdure",
+        "hayDetail": "Fleur · 1 mazzo, 3 foglie di indivia",
+        "vetTitle": "Visita dal veterinario",
+        "vetDetail": "Moka · Dott.ssa Lambert · controllo e vaccino",
+        "moltTitle": "Controllo della muta",
+        "moltDetail": "Pixel · inumidire il rifugio umido"
+      },
+      "lastWeighing": "Ultima pesata",
+      "lastWeighingValue": "4,5 kg · 12 giorni fa",
+      "nextVaccine": "Prossimo vaccino",
+      "nextVaccineValue": "tra 6 giorni",
+      "vaccinesTitle": "Vaccini",
+      "vaccineFeline": "Panleucopenia e rinotracheite",
+      "vaccineRabies": "Rabbia",
+      "vaccineDueSoon": "Richiamo tra 6 giorni",
+      "vaccineUpToDate": "In regola",
+      "weightTitle": "Peso",
+      "weightChart": "Curva del peso di Moka: da 4,1 kg a 4,5 kg in un anno",
+      "appointmentTitle": "Controllo annuale di Fleur da prenotare",
+      "appointmentBody": "Ultima visita 11 mesi fa.",
+      "geckoName": "Geco leopardino",
+      "geckoFacts": {
+        "hotSpot": "Punto caldo",
+        "activity": "Attività",
+        "activityValue": "crepuscolare",
+        "diet": "Alimentazione",
+        "dietValue": "insetti vivi",
+        "lifespan": "Longevità in cattività",
+        "lifespanValue": "15-20 anni"
+      },
+      "geckoStatus": "Stato IUCN",
+      "geckoLc": "Minor preoccupazione",
+      "geckoTipLabel": "Buono a sapersi",
+      "geckoTip": "Una coda che si assottiglia è spesso il primo segno di un calo di peso: da segnalare al veterinario.",
+      "geckoSources": "Fonti: Wikipedia (CC BY-SA 4.0) · GBIF · Lista rossa IUCN",
+      "postCockatielsTime": "2 h fa",
+      "postCockatielsTitle": "Le nostre tre calopsiti hanno finalmente preso possesso della nuova voliera",
+      "postQuestionTime": "5 h fa",
+      "postQuestionTitle": "Il mio drago barbuto mangia meno da quando le giornate si accorciano. Vi è capitato?",
+      "reactions": "{count, plural, one {# reazione} other {# reazioni}}",
+      "replies": "{count, plural, one {# risposta} other {# risposte}}",
+      "postQuestionBody": "Il punto caldo è a 34 °C, beve normalmente, ma da una settimana ignora i grilli."
+    },
+    "tour": {
+      "title": "Ogni cura annotata. Ogni scadenza rispettata.",
+      "intro": "Moka, Pixel e Fleur sono animali di esempio. Le loro schermate, invece, sono proprio quelle dell'app.",
+      "previewNote": "Anteprima dell'app, dati di esempio",
+      "soon": "Presto",
+      "record": {
+        "label": "Libretto sanitario",
+        "title": "Tutto quello che il veterinario ti chiederà, già annotato.",
+        "body": "Vaccini, trattamenti, pesate e referti delle visite, datati e in ordine. La curva del peso si aggiorna a ogni pesata, e il libretto si stampa o si condivide prima della visita."
+      },
+      "reminders": {
+        "label": "Promemoria e agenda",
+        "title": "Il promemoria giusto, al momento giusto.",
+        "body": "Sverminazione ogni tre mesi, pasto ogni due giorni, vaccino ogni anno: Captivia tiene il calendario e ti avvisa con una notifica o un'e-mail. I tuoi appuntamenti compaiono anche nell'agenda del telefono."
+      },
+      "species": {
+        "label": "Schede delle specie",
+        "title": "Risposte con le fonti, non sentito dire.",
+        "body": "Temperatura, alimentazione, comportamento, salute, normativa: ogni scheda dice di cosa ha bisogno il tuo animale e da dove viene l'informazione."
+      },
+      "community": {
+        "label": "Comunità",
+        "title": "Presto: gli altri appassionati.",
+        "body": "Condividi le foto dei tuoi animali, fai le tue domande, rispondi a quelle degli altri. Il libretto sanitario resta privato.",
+        "cta": "Entra nella community"
+      }
+    },
+    "gallery": {
+      "title": "Dal gatto sul divano al geco nel terrario.",
+      "body": "Cani, gatti, conigli, uccelli, rettili, pesci, cavalli o galline: ogni specie ha la sua scheda, ogni animale il suo libretto."
+    },
+    "photos": {
+      "dogGoldenRetriever": "Golden retriever di profilo, con lo sguardo in alto, nel bosco",
+      "catTabby": "Giovane gatto tigrato seduto, rivolto all'obiettivo",
+      "rabbitStraw": "Coniglio bianco e nero che beve da una ciotola di legno sulla paglia",
+      "budgerigars": "Due pappagallini ondulati verdi e gialli, uno di fronte all'altro",
+      "beardedDragon": "Testa di un drago barbuto, squame in rilievo, su un ramo",
+      "neonTetra": "Neon blu e rosso che nuota tra le piante di un acquario",
+      "horse": "Testa di un cavallo grigio chiaro con la cavezza, dalla lunga criniera",
+      "hen": "Gallina rossiccia con cresta rossa, di profilo",
+      "catStraw": "Gatto rosso e bianco sdraiato al sole sulla paglia",
+      "leopardGecko": "Geco leopardino maculato sulla sabbia",
+      "cockatiels": "Tre calopsiti in fila su un ramo"
+    },
+    "galleryNames": {
+      "dogGoldenRetriever": "Cane",
+      "catTabby": "Gatto",
+      "rabbitStraw": "Coniglio",
+      "budgerigars": "Pappagallini ondulati",
+      "beardedDragon": "Drago barbuto",
+      "neonTetra": "Neon",
+      "horse": "Cavallo",
+      "hen": "Gallina"
+    },
+    "steps": {
+      "title": "Tre passi e ci sei.",
+      "one": {
+        "title": "Presentaci il tuo animale",
+        "body": "Specie, nome, data di nascita. Una foto, se ti va."
+      },
+      "two": {
+        "title": "Annota quello che conta",
+        "body": "L'ultimo vaccino, la terapia in corso, il peso di oggi. Il resto arriverà settimana dopo settimana."
+      },
+      "three": {
+        "title": "Lasciati avvisare",
+        "body": "Una notifica o un'e-mail prima di ogni scadenza, e gli appuntamenti nella tua agenda."
+      },
+      "cta": "Aggiungi il mio primo animale"
+    },
+    "offer": {
+      "title": "Gratis per un animale. Premium quando la famiglia cresce.",
+      "intro": "Inizia senza account. Creane uno per salvare i tuoi dati e passa a Premium il giorno in cui arriva un secondo animale.",
+      "caption": "Cosa include ogni formula",
+      "feature": "Cosa include",
+      "guest": "Senza account",
+      "guestPrice": "Gratis",
+      "guestHint": "Su questo dispositivo",
+      "free": "Account gratuito",
+      "freePrice": "Gratis",
+      "freeHint": "Salvato e sincronizzato",
+      "premium": "Premium",
+      "premiumPrice": "Abbonamento mensile o annuale",
+      "premiumHint": "Prezzo indicato nell'app prima di ogni acquisto",
+      "rows": {
+        "animals": "Animali",
+        "record": "Libretto sanitario completo: vaccini, trattamenti, pesate",
+        "reminders": "Promemoria e agenda delle cure",
+        "species": "Schede delle specie con fonti",
+        "sync": "Backup e accesso da più dispositivi",
+        "qr": "Codice QR dell'animale (libretto in sola lettura)"
+      },
+      "several": "Più di uno",
+      "included": "Incluso",
+      "notIncluded": "Non incluso",
+      "keepData": "Inizi senza account? Il giorno in cui ne crei uno, il tuo animale e tutto il suo libretto vengono con te.",
+      "cta": "Inizia gratis"
+    },
+    "trust": {
+      "title": "Il libretto del tuo animale riguarda solo te.",
+      "private": {
+        "title": "Privato per impostazione",
+        "body": "Nessuno oltre a te vede il libretto. Non si pubblica nulla senza il tuo consenso, nemmeno quando aprirà la comunità."
+      },
+      "europe": {
+        "title": "Ospitato in Europa",
+        "body": "Il server e il database di Captivia si trovano a Francoforte, in Germania."
+      },
+      "sources": {
+        "title": "Fonti, non voci",
+        "body": "Wikipedia, GBIF, Lista rossa IUCN, CITES: ogni scheda cita le proprie."
+      },
+      "noAds": {
+        "title": "Nessun cookie pubblicitario",
+        "body": "I tuoi dati non vengono né venduti né affittati. Puoi eliminare il tuo account e tutto il suo contenuto in qualsiasi momento."
+      },
+      "privacyLink": "Leggi l'informativa sulla privacy"
+    },
+    "search": {
+      "title": "Hai in mente una specie?",
+      "body": "Apri una scheda ancora prima di creare il libretto: boa, geco leopardino, calopsite, coniglio ariete…",
+      "label": "Cerca una specie",
+      "placeholder": "Es. geco leopardino",
+      "submit": "Cerca",
+      "browse": "Sfoglia per gruppo",
+      "suggestions": "Suggerimenti",
+      "results": "{count, plural, one {# scheda trovata} other {# schede trovate}}",
+      "resultsTitle": "Risultati",
+      "unavailable": "La ricerca non è disponibile al momento. Riprova tra qualche istante."
+    },
+    "faq": {
+      "title": "Le domande che ci fanno",
+      "free": {
+        "q": "È davvero gratis?",
+        "a": "Sì, per un animale: libretto sanitario, promemoria, agenda e schede delle specie inclusi. Premium serve quando segui più animali; si attiva nell'app mobile, dove il prezzo è indicato prima di ogni acquisto."
+      },
+      "account": {
+        "q": "Serve un account?",
+        "a": "No. Inizi subito, senza account. Un account gratuito serve a salvare i tuoi dati e a ritrovarli su un altro dispositivo."
+      },
+      "upgrade": {
+        "q": "Se creo un account più avanti, perdo quello che ho annotato?",
+        "a": "No. Il tuo animale e il suo libretto vengono collegati al nuovo account, senza dover riscrivere nulla."
+      },
+      "animals": {
+        "q": "Quali animali posso seguire?",
+        "a": "Cani, gatti, conigli e roditori, uccelli, rettili, anfibi, pesci, cavalli, pollame… Le schede si basano su GBIF, il database mondiale della biodiversità, e si arricchiscono regolarmente."
+      },
+      "vet": {
+        "q": "Captivia sostituisce il mio veterinario?",
+        "a": "No, e non è il suo ruolo. Captivia ti aiuta a non dimenticare nulla e ad arrivare alla visita con una storia clinica completa. Le schede sulla salute indicano quando è il caso di consultarlo."
+      },
+      "data": {
+        "q": "Dove sono conservati i dati del mio animale?",
+        "a": "Su un server e un database situati a Francoforte, in Germania. Non vengono né venduti né affittati, e puoi eliminarli in qualsiasi momento."
+      },
+      "devices": {
+        "q": "Su quali dispositivi funziona Captivia?",
+        "a": "Su computer, tablet e telefono, nel browser. Le app per Android e iOS usano lo stesso account."
+      }
+    },
+    "final": {
+      "title": "Comincia da quello che dorme sul divano.",
+      "body": "Un nome, una specie, e il suo libretto è aperto. I promemoria arriveranno da soli.",
+      "cta": "Aggiungi il mio primo animale",
+      "secondary": "Ho già un account"
+    }
+  },
   "notifications": {
-    "addCustom": "Aggiungi un argomento",
+    "addCustom": "Aggiungi promemoria",
     "addCustomPlaceholder": "Es. Promemoria vaccino, Peso…",
     "allSuggestedAdded": "Tutti gli argomenti suggeriti sono stati aggiunti.",
     "cleaning": "Pulizia",
@@ -511,13 +841,13 @@
     "dayOfMonth": "Giorno del mese",
     "deliveryBoth": "Telefono ed email",
     "deliveryChannel": "Ricevi i promemoria tramite",
-    "deliveryDescription": "Le routine e i tuoi tipi di notifiche creano i promemoria del giorno. Scegli come riceverli: sul telefono (notifiche push) o via email.",
+    "deliveryDescription": "I promemoria del giorno ti arrivano tramite questo canale.",
     "deliveryEmail": "Email",
     "deliveryPush": "Telefono (notifiche push)",
     "description": "Ricevi promemoria per prenderti cura dei tuoi animali",
     "disabled": "Disattivato",
     "enable": "Attiva notifiche",
-    "enableBrowser": "Attiva le notifiche per ricevere promemoria",
+    "enableBrowser": "Consenti le notifiche per essere avvisato su questo dispositivo, anche quando Captivia è chiusa.",
     "enableButton": "Attiva notifiche",
     "disableButton": "Disattiva notifiche",
     "enabling": "Attivazione…",
@@ -533,7 +863,7 @@
     "intervalHours": "Ogni",
     "myNotificationsDescription": "Consulta e modifica i tuoi promemoria salvati.",
     "myTypes": "La mia personalizzazione",
-    "myTypesHint": "Aggiungi gli argomenti suggeriti qui sopra o creane di tuoi qui sotto.",
+    "myTypesHint": "Parti da un’idea qui sotto o crea il tuo: Captivia ti avviserà all’ora scelta.",
     "nettoyage": "Pulizia",
     "noNotificationsSaved": "Nessuna notifica salvata. Usa la scheda Configura per aggiungerne.",
     "nourrissage": "Alimentazione",
@@ -551,8 +881,8 @@
     "sante": "Salute",
     "saved": "Preferenze salvate",
     "schedule": "Fascia oraria",
-    "snooze": "Posticipa (minuti)",
-    "suggestedTypes": "Argomenti suggeriti",
+    "snooze": "Durata del posticipo (minuti)",
+    "suggestedTypes": "Idee di promemoria",
     "tabConfig": "Configura",
     "tabMyNotifications": "Le mie notifiche",
     "time": "Ora",
@@ -569,7 +899,7 @@
     "weekDay6": "Sabato",
     "saveError": "Errore durante il salvataggio",
     "notificationsEnabled": "Notifiche attivate",
-    "snoozeHint": "Durata del rinvio in minuti (5-120)",
+    "snoozeHint": "Quando posticipi un promemoria, torna dopo questo tempo (da 5 a 120 minuti).",
     "suggested": {
       "feeding": "Alimentazione",
       "cleaning": "Pulizia",
@@ -577,11 +907,29 @@
       "health": "Salute",
       "vet": "Promemoria veterinario",
       "shedding": "Muta",
-      "weighing": "Pesatura",
+      "weighing": "Pesata",
       "bath": "Bagno",
       "temperature": "Temperatura",
       "humidity": "Umidità"
-    }
+    },
+    "pageTitle": "Promemoria e notifiche",
+    "pageLead": "Scegli cosa ti ricorda Captivia, a che ora e come avvisarti.",
+    "remindersTitle": "I tuoi promemoria",
+    "remindersIntro": "Questi promemoria si aggiungono a quelli delle routine dei tuoi animali. Ognuno mantiene il suo orario e il suo ritmo.",
+    "emptyTitle": "Ancora nessun promemoria personale",
+    "addCustomLabel": "Nuovo promemoria",
+    "everyHours": "{count, plural, one {ogni ora} other {ogni # ore}}",
+    "onDay": "il giorno {day}",
+    "intervalLabel": "Intervallo (ore)",
+    "intervalHint": "Da 1 a 24 ore.",
+    "snoozeTitle": "Posticipo",
+    "deviceTitle": "Su questo dispositivo",
+    "pushOn": "Attive",
+    "pushOff": "Disattivate",
+    "pushOnText": "Questo dispositivo riceve i tuoi promemoria, anche quando Captivia è chiusa.",
+    "deliveryTitle": "Come avvisarti",
+    "loadError": "Non è stato possibile caricare le tue impostazioni. Ricarica la pagina per riprovare.",
+    "autoSaveHint": "Ogni modifica viene salvata automaticamente."
   },
   "premiumLock": {
     "goPremium": "Scopri l'abbonamento Premium",
@@ -632,44 +980,43 @@
   },
   "settings": {
     "account": "Account",
-    "accountDescription": "Email, password, lingua",
+    "accountDescription": "Indirizzo e-mail, lingua, password, dispositivi collegati e i tuoi dati.",
     "grade": "Grado",
-    "gradeDescription": "Punti e distintivi",
+    "gradeDescription": "Ogni cura di routine segnata come fatta ti fa guadagnare punti.",
     "notifications": "Notifiche",
-    "notificationsDescription": "Promemoria e orari",
+    "notificationsDescription": "Cosa ti ricorda Captivia, a che ora e come ti avvisa.",
     "subscription": "Abbonamento Premium",
-    "subscriptionDescription": "Animali illimitati, libretto sanitario, codice QR",
-    "title": "Impostazioni"
+    "subscriptionDescription": "Gratis per un animale. Premium per seguirne diversi.",
+    "title": "Impostazioni",
+    "lead": "Il tuo profilo, i tuoi promemoria e il tuo piano, impostati una volta per tutte.",
+    "breadcrumbLabel": "Torna alle impostazioni",
+    "sectionsLabel": "Sezioni delle impostazioni",
+    "profileLabel": "Il tuo profilo",
+    "accountTitle": "Profilo e sicurezza",
+    "notificationsTitle": "Promemoria e notifiche",
+    "subscriptionTitle": "Piano e abbonamento",
+    "subscriptionDescriptionPremium": "Premium: tutti i tuoi animali, ognuno con il suo libretto.",
+    "gradeTitle": "Grado e punti",
+    "planFree": "Gratis",
+    "planFreeShort": "Gratis",
+    "planLabel": "Piano",
+    "guestProfile": "Senza account, su questo dispositivo",
+    "memberSince": "Iscritto da {date}"
   },
   "species": {
-    "addToMyAnimals": "Aggiungi ai Miei animali",
     "allowed": "Consentito",
-    "care": "Cura e Manutenzione",
     "careAdvice": "Consigli per la cura",
-    "characteristics": "Caratteristiche",
     "citesStatus": "Stato CITES",
     "classification": "Classificazione",
     "commonDiseases": "Malattie comuni",
-    "commonNames": "Nomi comuni",
-    "conservation": "Stato di conservazione",
-    "description": "Descrizione",
     "distribution": "Distribuzione",
-    "environment": "Ambiente",
     "equipment": "Attrezzatura",
     "euRegulation": "Regolamento UE",
     "food": "Alimentazione",
-    "foodRecommendations": "Alimentazione consigliata",
-    "foodSource": "Dati da Open Pet Food Facts",
-    "habitat": "Habitat",
     "health": "Salute",
-    "identification": "Identificazione",
     "legal": "Legislazione",
-    "noEquipmentData": "Raccomandazioni in arrivo",
-    "noFoodData": "Nessun prodotto alimentare per questa specie",
     "noHealthData": "Nessun dato sulla salute disponibile",
     "noLegalData": "Nessun dato sulla legislazione disponibile",
-    "notFound": "Specie non trovata",
-    "overview": "Panoramica",
     "permitRequired": "Permesso richiesto",
     "permits": "Permessi richiesti",
     "prevention": "Prevenzione",
@@ -678,63 +1025,177 @@
       "advanced": "Avanzata",
       "difficulty": "Difficoltà di allevamento",
       "easy": "Facile",
-      "gestationDays": "Gestazione (giorni)",
-      "incubationDays": "Incubazione (giorni)",
       "litterSize": "Dimensione della cucciolata",
       "moderate": "Moderata",
-      "months": "mesi",
-      "noData": "Nessun dato di riproduzione disponibile.",
       "notes": "Note",
       "season": "Stagione riproduttiva",
       "sexualMaturity": "Maturità sessuale",
-      "title": "Riproduzione"
+      "gestation": "Gestazione",
+      "incubation": "Incubazione"
     },
     "restrictions": "Restrizioni",
-    "scientificName": "Nome scientifico",
     "scientificReferences": "Riferimenti scientifici",
-    "shop": "Negozio",
-    "status": "Stato",
     "symptoms": "Sintomi",
     "viewFullGuide": "Vedi guida completa",
     "whenToConsult": "Quando consultare",
-    "noPartnerStores": "Al momento non ci sono negozi partner per questa categoria. Consulta la scheda Negozio dalla home.",
-    "profileLabel": "Profilo",
-    "commonNameFr": "Nome comune (FR):",
-    "category": "Categoria:",
-    "subcategory": "Sottocategoria:",
-    "domesticationType": "Tipo di domesticazione:",
-    "kingdom": "Regno:",
-    "phylum": "Phylum:",
-    "class": "Classe:",
-    "order": "Ordine:",
-    "family": "Famiglia:",
-    "genus": "Genere:",
-    "habitatEditorial": "Habitat editoriale",
     "habitatType": "Tipo di habitat",
     "temperature": "Temperatura",
     "humidity": "Umidità",
     "spaceRequirements": "Spazio richiesto",
     "lighting": "Illuminazione",
     "enrichment": "Arricchimento ambientale",
-    "behavior": "Comportamento",
-    "generalBehavior": "Comportamento generale",
     "sociability": "Socialità",
     "difficultyLevel": "Livello di difficoltà",
-    "compatibility": "Compatibilità",
-    "biome": "Bioma",
-    "defaultBiome": "Tropicale / Subtropicale",
-    "environmentDataMissing": "Dati ambientali da completare",
     "sources": "Fonti",
-    "feedingTitle": "Alimentazione adatta alla specie",
     "dietType": "Tipo di dieta",
     "mealFrequency": "Frequenza dei pasti",
     "recommendedFoods": "Alimenti consigliati",
     "foodsToAvoid": "Alimenti da evitare",
     "specificNeeds": "Esigenze specifiche",
-    "foodReferenceNote": "Le raccomandazioni qui sopra (database della specie) restano il riferimento.",
-    "unnamedProduct": "Prodotto senza nome",
     "annex": "Allegato {value}",
-    "euAnnexLabel": "Allegato UE:"
+    "euAnnexLabel": "Allegato UE:",
+    "loading": "Apertura della scheda…",
+    "notFoundTitle": "Questa scheda non è stata trovata",
+    "notFoundBenefit": "Forse il link è incompleto, oppure la scheda è stata rimossa. Cerca la specie con il nome comune o con il nome latino.",
+    "errorTitle": "La scheda non si è caricata",
+    "errorBenefit": "Forse la connessione si è interrotta. Controllala e riprova.",
+    "searchAnother": "Cerca una specie",
+    "breadcrumb": "Percorso di navigazione",
+    "gbifLabel": "Identificativo GBIF",
+    "photoAlt": "{name}, fotografia",
+    "addAnimal": "Aggiungi un animale di questa specie",
+    "tocLabel": "In questa scheda",
+    "updatedOn": "Aggiornato il {date}",
+    "hygiene": "Pulizia e manutenzione",
+    "cost": "Budget",
+    "withChildren": "Con i bambini",
+    "withOtherAnimals": "Con altri animali",
+    "facts": {
+      "title": "In breve",
+      "rank": "Rango",
+      "group": "Gruppo",
+      "family": "Famiglia",
+      "iucn": "Lista rossa IUCN"
+    },
+    "rank": {
+      "KINGDOM": "Regno",
+      "PHYLUM": "Phylum",
+      "CLASS": "Classe",
+      "ORDER": "Ordine",
+      "FAMILY": "Famiglia",
+      "GENUS": "Genere",
+      "SPECIES": "Specie",
+      "SUBSPECIES": "Sottospecie",
+      "VARIETY": "Varietà",
+      "BREED": "Razza"
+    },
+    "iucn": {
+      "EX": "Estinta",
+      "EW": "Estinta in natura",
+      "CR": "In pericolo critico",
+      "EN": "In pericolo",
+      "VU": "Vulnerabile",
+      "NT": "Quasi minacciata",
+      "LC": "Minor preoccupazione",
+      "DD": "Dati insufficienti",
+      "NE": "Non valutata"
+    },
+    "sections": {
+      "feeding": "Alimentazione",
+      "habitat": "Sistemazione",
+      "behavior": "Comportamento",
+      "health": "Salute",
+      "reproduction": "Riproduzione",
+      "legislation": "Normativa",
+      "equipment": "Attrezzatura consigliata",
+      "sources": "Fonti"
+    },
+    "review": {
+      "badge": "Da confermare",
+      "hint": "Non ancora verificato dal nostro team",
+      "health": "Queste indicazioni non sono ancora state verificate dal nostro team. Al minimo dubbio, segui il parere del tuo veterinario.",
+      "legislation": "Il nostro team non ha ancora verificato questo stato: confermalo presso le autorità del tuo paese prima di qualsiasi acquisto."
+    },
+    "units": {
+      "days": "{count, plural, one {# giorno} other {# giorni}}",
+      "months": "{count, plural, one {# mese} other {# mesi}}"
+    },
+    "sourceLabels": {
+      "description": "Descrizione",
+      "taxonomy": "Classificazione",
+      "photo": "Foto",
+      "viaGbif": "tramite GBIF",
+      "references": "Riferimenti",
+      "pubmed": "Letteratura scientifica"
+    },
+    "values": {
+      "diet": {
+        "herbivore": "Erbivoro",
+        "omnivore": "Onnivoro",
+        "carnivore": "Carnivoro",
+        "carnivore_strict": "Carnivoro stretto",
+        "insectivore": "Insettivoro",
+        "granivore": "Granivoro",
+        "frugivore": "Frugivoro",
+        "granivore_frugivore": "Semi e frutta",
+        "piscivore": "Piscivoro"
+      },
+      "frequency": {
+        "daily": "Ogni giorno",
+        "every_2_days": "Un giorno sì e uno no",
+        "every_3_to_4_days": "Ogni 3-4 giorni",
+        "every_5_7_days": "Ogni 5-7 giorni",
+        "every_7_10_days": "Ogni 7-10 giorni",
+        "weekly": "Una volta a settimana",
+        "weekly_biweekly": "Una o due volte a settimana",
+        "daily_juvenile": "Ogni giorno per i giovani",
+        "continuous": "Cibo sempre a disposizione",
+        "variable": "Secondo l'età e la stagione"
+      },
+      "habitat": {
+        "enclos": "Recinto",
+        "libre": "In libertà",
+        "cage": "Gabbia",
+        "terrarium": "Terrario",
+        "aquarium": "Acquario",
+        "aquaterrarium": "Acquaterrario",
+        "voliere": "Voliera"
+      },
+      "cost": {
+        "faible": "Basso",
+        "moyen": "Medio",
+        "eleve": "Alto"
+      },
+      "sociability": {
+        "solitaire": "Solitario: da tenere da solo",
+        "gregaire": "Gregario: vive in gruppo",
+        "semi_gregaire": "Semigregario: tollera alcuni simili"
+      },
+      "difficulty": {
+        "debutant": "Adatto ai principianti",
+        "intermediaire": "Richiede un po' di esperienza",
+        "avance": "Richiede esperienza",
+        "expert": "Per allevatori esperti"
+      },
+      "equipment": {
+        "chauffage": "Riscaldamento",
+        "heating": "Riscaldamento",
+        "lighting": "Illuminazione",
+        "uvb": "Illuminazione UVB",
+        "substrat": "Substrato",
+        "cage": "Gabbia",
+        "cachette": "Nascondigli",
+        "terrarium": "Terrario",
+        "gamelle": "Ciotole",
+        "pince": "Pinzette",
+        "thermostat": "Termostato",
+        "thermometre": "Termometro",
+        "pulverisateur": "Nebulizzatore",
+        "filtration": "Filtrazione"
+      }
+    },
+    "pubmedNote": "Articoli da PubMed (NCBI), in inglese",
+    "reviewedOn": "Scheda verificata il {date}"
   },
   "store": {
     "allCategories": "Tutti i tipi",
@@ -751,28 +1212,27 @@
     "categoryInsect": "Insetti",
     "categoryMammal": "Mammiferi",
     "categoryReptile": "Rettili",
-    "productLinksNotice": "I link ai prodotti possono essere link di affiliazione."
+    "pageTitle": "Negozi partner",
+    "lead": "Negozi scelti per l’alimentazione e l’attrezzatura dei tuoi animali.",
+    "loadError": "Non è stato possibile caricare i negozi.",
+    "emptyTitle": "Ancora nessun negozio partner",
+    "emptyBenefit": "Nel frattempo, la scheda di ogni specie descrive l’alimentazione e l’attrezzatura adatte.",
+    "emptyAction": "Sfoglia le schede delle specie",
+    "noMatchTitle": "Nessun negozio per questo tipo di animale",
+    "noMatchBenefit": "Scegli «Tutti i tipi» per vedere tutti i negozi."
   },
   "subscription": {
     "benefitAnimals": "Animali illimitati in «I miei animali»",
     "benefitHealth": "Libretto sanitario completo per ogni animale",
     "benefitQR": "Codice QR per animale: scansionandolo si visualizzano le informazioni e il libretto sanitario",
     "benefits": "Con Premium hai accesso a:",
-    "chooseMonthly": "Scegli il mensile",
-    "chooseYearly": "Scegli l'annuale",
     "currentPlan": "Sei già Premium.",
     "monthly": "Mensile",
-    "perMonth": "/mese",
-    "perYear": "/anno",
-    "priceMonthly": "5,99 €",
-    "priceYearly": "29,99 €",
     "subscribeError": "Impossibile attivare l'abbonamento. Riprova più tardi.",
     "subscribeSuccess": "Abbonamento attivato. Ora hai accesso a tutte le funzionalità Premium.",
     "subtitle": "Sblocca tutti i vantaggi di Captivia",
     "title": "Abbonamento Premium",
     "yearly": "Annuale",
-    "yearlyEquivalent": "≈ 2,50 € / mese",
-    "yearlyDiscount": "−17%",
     "inAppOnly": "Abbonamento disponibile nell'app mobile Captivia",
     "inAppOnlyHint": "Scarica l'app dall'App Store o da Google Play per abbonarti. Sul sito non è previsto alcun pagamento.",
     "statusTitle": "Il tuo abbonamento",
@@ -795,10 +1255,10 @@
   },
   "transparency": {
     "affiliateIndependence": "I consigli su accessori e alimentazione dipendono dalle esigenze della specie, non dall'importo delle commissioni.",
-    "affiliateLabelled": "I link di affiliazione sono indicati dalla dicitura «Link di affiliazione» o da un avviso posto nelle vicinanze.",
-    "affiliatePartners": "Partner al lancio: Amazon (amazon.fr). I siti partner sono elencati nel <link>Negozio</link>.",
+    "affiliateLabelled": "Se vengono proposti link di affiliazione, sono indicati dalla dicitura «Link di affiliazione» o da un avviso vicino, e il programma interessato è indicato.",
+    "affiliatePartners": "Oggi non viene mostrato alcun link di affiliazione. I negozi partner, se presenti, sono elencati nel <link>Negozio</link>.",
     "affiliateSamePrice": "Il prezzo è lo stesso, che tu usi il nostro link o no.",
-    "affiliateTitle": "I nostri link di affiliazione",
+    "affiliateTitle": "Link dei partner",
     "backHome": "Torna alla home",
     "contactBody": "Una domanda sul nostro modello economico, sull'affiliazione o sui tuoi dati? Scrivici:",
     "contactTitle": "Contatti",
@@ -809,14 +1269,14 @@
     "dataNoTrackers": "Nessun cookie pubblicitario né strumento di misurazione del pubblico di terze parti: si usano solo strumenti strettamente necessari (accesso, lingua).",
     "dataPrivate": "Le schede dei tuoi animali sono private per impostazione predefinita. La condivisione pubblica di un animale è facoltativa: la attivi tu e puoi disattivarla in qualsiasi momento.",
     "dataTitle": "I tuoi dati",
-    "intro": "Come viene finanziato Captivia, come funzionano i nostri link di affiliazione e cosa facciamo — e non facciamo — dei tuoi dati.",
+    "intro": "Come viene finanziato Captivia, come verrebbero indicati eventuali link dei partner e cosa facciamo — e non facciamo — dei tuoi dati.",
     "metaDescription": "Come viene finanziato Captivia, come funzionano i suoi link di affiliazione e cosa fa dei tuoi dati.",
     "missionBody": "Captivia aiuta i proprietari di animali, compresi gli animali esotici, a conoscere e curare meglio i propri animali grazie a informazioni provenienti da fonti aperte. Queste informazioni non sostituiscono il parere di un veterinario.",
     "missionTitle": "La nostra missione",
-    "modelAffiliation": "l'affiliazione: alcuni link verso siti di vendita, principalmente Amazon, ci fanno guadagnare una commissione quando acquisti tramite essi, senza costi aggiuntivi per te;",
+    "modelAffiliation": "se del caso, l'affiliazione: se vengono proposti link verso siti di vendita, possono farci guadagnare una commissione quando acquisti tramite essi, senza costi aggiuntivi per te;",
     "modelAlwaysFree": "L'esportazione dei tuoi dati e l'eliminazione del tuo account sono e resteranno gratuite.",
     "modelIntro": "La consultazione delle schede delle specie è gratuita. Il servizio è finanziato da:",
-    "modelSubscription": "un abbonamento facoltativo, in arrivo: non è ancora in vendita. Prezzo e condizioni (rinnovo, disdetta, diritto di recesso) saranno mostrati prima di qualsiasi pagamento.",
+    "modelSubscription": "l'abbonamento Premium, facoltativo, per seguire più animali: si sottoscrive nell'app mobile, e prezzo e condizioni (rinnovo, disdetta, diritto di recesso) sono mostrati prima di qualsiasi pagamento.",
     "modelTitle": "Il nostro modello economico",
     "openDataBody": "Le schede si basano su GBIF, Wikipedia, Wikidata, Species+ (CITES), PubMed, Open Pet Food Facts, iNaturalist ed Encyclopedia of Life. Queste fonti non ricevono da noi alcun dato personale.",
     "openDataMore": "Vedi fonti e licenze",
@@ -828,8 +1288,8 @@
     "accountDeletionTitle": "Elimina il tuo account",
     "animalsTitle": "I miei animali",
     "carnetTitle": "Libretto sanitario",
-    "defaultTitle": "Captivia – La guida alla fauna",
-    "description": "Captivia accompagna ogni giorno chi vive con animali domestici ed esotici: schede delle specie con fonti, salute, alimentazione, habitat e gestione dei tuoi animali.",
+    "defaultTitle": "Captivia — libretto sanitario e promemoria per i tuoi animali",
+    "description": "Vaccini, trattamenti, pesate, visite dal veterinario: Captivia li ricorda per te e ti avvisa al momento giusto. Schede delle specie con fonti, gratis per un animale.",
     "forgotPasswordTitle": "Password dimenticata",
     "loginTitle": "Accedi",
     "registerTitle": "Registrati",
@@ -841,11 +1301,14 @@
     "storeDescription": "Attrezzatura, alimenti e accessori consigliati in base alle esigenze di ogni specie, con link di affiliazione chiaramente indicati.",
     "storeTitle": "Negozio",
     "agendaTitle": "Agenda delle cure",
-    "verifyEmailTitle": "Verifica dell'indirizzo e-mail"
+    "verifyEmailTitle": "Verifica dell'indirizzo e-mail",
+    "speciesSearchTitle": "Schede delle specie",
+    "speciesSearchDescription": "Cerca una specie e apri la sua scheda: alimentazione, habitat, comportamento, salute e normativa, con le fonti.",
+    "communityTitle": "Community"
   },
   "agenda": {
     "title": "Agenda delle cure",
-    "subtitle": "Tutte le prossime cure dei tuoi animali in un unico posto: routine, farmaci, vaccini e appuntamenti veterinari.",
+    "subtitle": "Pasti, trattamenti, vaccini e visite dal veterinario: tutto ciò che arriva per i tuoi animali, giorno dopo giorno.",
     "loading": "Caricamento dell'agenda...",
     "error": "Impossibile caricare l'agenda.",
     "retry": "Riprova",
@@ -864,9 +1327,9 @@
     "listLabel": "Prossime cure per giorno",
     "count": "{count, plural, one {# cura mostrata} other {# cure mostrate}}",
     "truncated": "Troppe cure in questo periodo: l'elenco è troncato. Scegli un periodo più breve.",
-    "emptyTitle": "Nessuna cura in programma",
-    "emptyHint": "Aggiungi routine, farmaci, vaccini o appuntamenti veterinari ai tuoi animali per vederli qui.",
-    "emptyAction": "Vedi i miei animali",
+    "emptyTitle": "Ancora niente in programma",
+    "emptyHint": "Aggiungi una routine, un trattamento o un appuntamento dalla scheda del tuo animale: comparirà qui e Captivia te lo ricorderà.",
+    "emptyAction": "Apri i miei animali",
     "noMatch": "Nessuna cura corrisponde a questi filtri.",
     "types": {
       "routine": "Routine di cura",
@@ -881,9 +1344,9 @@
       "cancelled": "Annullato"
     },
     "sub": {
-      "title": "Calendario esterno",
-      "description": "Iscrivi Google Calendar, Calendario Apple o Outlook alle tue cure con un link personale (sola lettura, aggiornato automaticamente).",
-      "button": "Iscriviti nel mio calendario",
+      "title": "Nel tuo calendario",
+      "description": "Google Calendar, Apple Calendario o Outlook mostrano le tue cure accanto agli altri appuntamenti e si aggiornano da soli.",
+      "button": "Crea il mio link e copialo",
       "regenerate": "Rigenera il link",
       "revoke": "Disattiva il link",
       "regenerateConfirm": "Il vecchio link smetterà di funzionare. Rigenerare il link?",
@@ -897,8 +1360,22 @@
       "inactive": "Nessun link di iscrizione attivo.",
       "urlLabel": "Link di iscrizione (tienilo segreto)",
       "secret": "Chiunque abbia questo link può vedere le tue cure. Rigeneralo se è stato diffuso.",
-      "error": "Operazione non disponibile al momento. Riprova."
-    }
+      "error": "Operazione non disponibile al momento. Riprova.",
+      "step1": "Copia il tuo link personale.",
+      "step2": "Nel tuo calendario, scegli «Aggiungi calendario da URL».",
+      "step3": "Incolla il link: le tue cure compaiono, in sola lettura.",
+      "buttonCopy": "Copia il link",
+      "buttonNew": "Ottieni un nuovo link",
+      "activeBadge": "Link attivo",
+      "inactiveBadge": "Nessun link"
+    },
+    "rangeShown": "Periodo visualizzato",
+    "timelineTitle7": "I prossimi 7 giorni",
+    "timelineTitle30": "I prossimi 30 giorni",
+    "timelineTitle90": "I prossimi 3 mesi",
+    "countShort": "{count, plural, one {# cura} other {# cure}}",
+    "noMatchBenefit": "Allarga il periodo o mostra tutti i tipi di cura.",
+    "pillAppointments": "{count, plural, one {appuntamento veterinario} other {appuntamenti veterinari}}"
   },
   "sessions": {
     "title": "Dispositivi connessi",
@@ -918,11 +1395,14 @@
     "bannerDismiss": "Nascondi",
     "pageTitle": "Verifica del tuo indirizzo e-mail",
     "verifying": "Verifica in corso…",
-    "success": "Il tuo indirizzo e-mail è verificato. Grazie!",
+    "success": "Il tuo indirizzo e-mail è verificato.",
     "invalid": "Questo link di verifica non è valido o è scaduto. Accedi per riceverne uno nuovo.",
     "missingToken": "Link di verifica incompleto.",
     "goToApp": "Vai ai miei animali",
-    "goToLogin": "Accedi"
+    "goToLogin": "Accedi",
+    "headingSuccess": "Indirizzo confermato",
+    "headingFailed": "Questo link non ha funzionato",
+    "leadSuccess": "Grazie: ora i promemoria via e-mail possono raggiungerti."
   },
   "guest": {
     "entryTitle": "Inizia il libretto del tuo animale",
@@ -944,7 +1424,7 @@
     "lockedActionGuest": "Crea un account",
     "lockedActionFree": "Scopri Premium",
     "premium": "Premium",
-    "upgradeTitle": "Crea il tuo account",
+    "upgradeTitle": "Conserva il tuo libretto per sempre",
     "upgradeIntroNamed": "{name} e il suo libretto saranno collegati al tuo account.",
     "upgradeIntro": "Il tuo animale e il suo libretto saranno collegati al tuo account.",
     "upgradeGains": "Con un account: accesso da tutti i tuoi dispositivi, promemoria via e-mail, pagina pubblica e abbonamento al calendario.",
@@ -967,6 +1447,961 @@
     "loginGuestUpgrade": "Crea un account con questi dati",
     "welcomeTitle": "Benvenuto in Captivia",
     "welcomeText": "Inizia subito, senza e-mail né password: 1 animale, il suo libretto sanitario, i promemoria e l'agenda.",
-    "welcomeLater": "Più tardi"
+    "welcomeLater": "Più tardi",
+    "upgradeDoneTitle": "Il tuo libretto è al sicuro",
+    "keptLabel": "Cosa ti segue",
+    "keptTitle": "Il tuo animale ti segue, con tutto il suo libretto",
+    "keptTitleNamed": "{name} ti segue, con tutto il suo libretto",
+    "keptRecord": "Il suo libretto sanitario: vaccini, trattamenti, pesate, visite e note.",
+    "keptReminders": "I suoi promemoria e la sua agenda delle cure, così come li hai impostati.",
+    "keptSettings": "Le tue preferenze di notifica e di lingua."
+  },
+  "today": {
+    "title": "Oggi",
+    "allDayShort": "In giornata",
+    "dateLabel": "Data di oggi",
+    "loading": "Stiamo preparando la sua giornata…",
+    "loadError": "Non è stato possibile caricare i tuoi animali. Controlla la connessione e riprova.",
+    "pillDue": "{count, plural, one {cura oggi} other {cure oggi}}",
+    "pillOverdue": "{count, plural, one {in ritardo} other {in ritardo}}",
+    "pillAppointments": "{count, plural, one {appuntamento questa settimana} other {appuntamenti questa settimana}}",
+    "alertsTitle": "Da tenere d'occhio",
+    "urgent": "Urgente",
+    "openSheet": "Apri la scheda di {name}",
+    "moreAlerts": "{count, plural, one {# altro punto da tenere d'occhio} other {# altri punti da tenere d'occhio}} nelle schede.",
+    "alerts": {
+      "vaccineOverdue": {
+        "title": "Richiamo del vaccino scaduto: {subject}",
+        "body": "{name} — il richiamo era previsto {when}. Basta una telefonata al veterinario per riprogrammarlo."
+      },
+      "vaccineSoon": {
+        "title": "Richiamo del vaccino {when}: {subject}",
+        "body": "{name} — il {date}. È il momento giusto per prendere appuntamento."
+      },
+      "treatment": {
+        "title": "Trattamento in corso: {subject}",
+        "body": "{name} — fino al {date}. Ogni somministrazione compare nella linea del tempo."
+      },
+      "treatmentOpen": {
+        "title": "Trattamento in corso: {subject}",
+        "body": "{name} — senza data di fine. Ricordi di interromperlo nella scheda una volta concluso."
+      },
+      "weighingOld": {
+        "title": "Ultima pesata di {name} {when}",
+        "body": "Una pesata al mese basta per notare un calo di peso prima dei primi sintomi."
+      },
+      "weighingNone": {
+        "title": "Ancora nessuna pesata per {name}",
+        "body": "Una prima pesata fa da riferimento per seguirne la crescita."
+      }
+    },
+    "timelineTitle": "I prossimi 7 giorni",
+    "timelineLabel": "Cure di oggi e dei prossimi 7 giorni",
+    "fullAgenda": "Tutta l'agenda",
+    "timelineEmptyTitle": "Una settimana senza cure in programma",
+    "timelineEmptyBenefit": "Programmi un pasto, una nebulizzazione o un trattamento: Captivia glielo ricorda il giorno stesso, all'ora prevista.",
+    "timelineEmptyAction": "Programmare una cura",
+    "agendaError": "Non è stato possibile caricare le cure della settimana.",
+    "status": {
+      "done": "Fatto",
+      "due": "Da fare",
+      "overdue": "In ritardo",
+      "planned": "Previsto",
+      "skipped": "Annullato"
+    },
+    "animalsTitle": "I suoi animali",
+    "allAnimals": "Tutti i suoi animali",
+    "photoAlt": "{name}, foto del profilo",
+    "factWeight": "Ultima pesata",
+    "factNoWeight": "Non ancora pesato",
+    "factNextVisit": "Prossimo appuntamento",
+    "factNoVisit": "Nessuno in programma",
+    "factAge": "Età",
+    "tipLabel": "Buono a sapersi",
+    "tipSource": "Scheda {species}",
+    "tipPrevention": "{topic}: {text}",
+    "tipHabitat": "Mantieni il suo ambiente a {temperature}, con un'umidità del {humidity}.",
+    "tipTemperature": "Temperatura consigliata per il suo ambiente: {temperature}.",
+    "tipHumidity": "Umidità consigliata per il suo ambiente: {humidity}.",
+    "routinesAdded": "{count, plural, one {# cura aggiunta al suo libretto} other {# cure aggiunte al suo libretto}}"
+  },
+  "onboarding": {
+    "title": "Il suo libretto, pronto in tre passaggi",
+    "text": "Scegli la specie e dagli un nome: Captivia prepara le cure di base, i promemoria e i riferimenti della scheda della sua specie.",
+    "stepSpecies": "Specie",
+    "stepIdentity": "Nome e nascita",
+    "stepCare": "Prime cure",
+    "stepsLabel": "Aggiungere il suo animale",
+    "progress": "Passaggio {current} di {total}",
+    "speciesTitle": "Di che specie è?",
+    "speciesText": "Il nome comune o scientifico: «boa», «Pogona», «calopsite»…",
+    "speciesHint": "La ricerca parte da 2 lettere.",
+    "searching": "Ricerca…",
+    "resultsLabel": "Specie trovate",
+    "speciesChosen": "Specie scelta:",
+    "identityTitle": "Come si chiama?",
+    "identityText": "Potrà modificare tutto in seguito. Specie:",
+    "photoHint": "Oppure l'indirizzo di una foto già online.",
+    "careTitle": "Le cure di base di {name}",
+    "careText": "Le routine consigliate per la sua specie, già impostate. Seleziona quelle da seguire: Captivia te le ricorda all'ora giusta.",
+    "careCount": "{checked} su {total} selezionate",
+    "careLater": "Più tardi",
+    "perksTitle": "Cosa la aspetta",
+    "perk1Title": "Ogni cura, all'ora giusta",
+    "perk1": "Pasti, nebulizzazione, trattamenti: un promemoria al momento giusto e la settimana a colpo d'occhio.",
+    "perk2Title": "Un libretto sanitario completo",
+    "perk2": "Pesate, vaccini, visite: tutto è datato e il libretto si stampa in PDF per il veterinario.",
+    "perk3Title": "I riferimenti giusti",
+    "perk3": "Temperatura, alimentazione, segnali da tenere d'occhio: la scheda della sua specie, con le fonti."
+  },
+  "authFrame": {
+    "plateLabel": "Gli animali che si seguono su Captivia",
+    "title": "Tutto ciò che conta per loro, in un solo posto",
+    "point1": "Vaccini, trattamenti, pesate e visite: la loro salute sta in una sola pagina, pronta per il veterinario.",
+    "point2": "Un promemoria arriva al momento giusto, per ogni cura e ogni appuntamento.",
+    "point3": "Schede delle specie con fonti, per capire meglio chi condivide la tua vita."
+  },
+  "plans": {
+    "title": "Un libretto per ciascuno dei tuoi animali",
+    "lead": "Captivia è gratis per un animale, libretto sanitario completo incluso. Premium ti permette di seguirne quanti ne vuoi.",
+    "currentPlanLabel": "Il tuo piano",
+    "yourPlan": "Il tuo piano",
+    "freeFooter": "È il tuo piano attuale: niente da pagare, senza limiti di tempo.",
+    "newTab": "(nuova scheda)",
+    "whereTitle": "Abbonamento dall’app mobile",
+    "whereText": "Premium si sottoscrive nell’app Captivia, tramite App Store o Google Play. Il sito non accetta pagamenti.",
+    "statusPlan": "Piano",
+    "renewsLabel": "Rinnovo il",
+    "endsLabel": "Accesso fino al",
+    "choiceTitle": "Due piani, la stessa cura",
+    "freeName": "Gratis",
+    "freeAudience": "Per un animale",
+    "freePrice": "0 €",
+    "freePriceNote": "Senza limiti di tempo, senza carta di credito.",
+    "freePoint1": "Il libretto sanitario completo del tuo animale",
+    "freePoint2": "I promemoria, l’agenda delle cure e l’abbonamento al calendario",
+    "freePoint3": "Il libretto stampabile da consegnare al veterinario",
+    "premiumTag": "Più animali",
+    "premiumAudience": "Per tutti i tuoi animali",
+    "premiumPrice": "Abbonamento mensile o annuale",
+    "premiumPriceNote": "Prezzo mostrato nell’app prima di ogni acquisto.",
+    "premiumPoint1": "Tutti gli animali che vuoi, ognuno con il suo libretto e i suoi promemoria",
+    "premiumPoint2": "Una pagina pubblica e un codice QR per ogni animale",
+    "premiumPoint3": "Il monitoraggio della riproduzione",
+    "compareTitle": "Cosa è incluso",
+    "featureColumn": "Funzione",
+    "features": {
+      "animals": "Animali seguiti",
+      "record": "Libretto sanitario: vaccini, trattamenti, pesate, visite",
+      "reminders": "Promemoria, agenda delle cure e abbonamento al calendario",
+      "print": "Libretto stampabile per il veterinario",
+      "species": "Schede delle specie con fonti",
+      "export": "Esportazione di tutti i tuoi dati",
+      "publicPage": "Pagina pubblica dell’animale e codice QR",
+      "breeding": "Monitoraggio della riproduzione"
+    },
+    "included": "Incluso",
+    "notIncluded": "Non incluso",
+    "unlimited": "Illimitato",
+    "faqTitle": "Buono a sapersi",
+    "faq1Q": "Dove ci si abbona?",
+    "faq1A": "Nell’app mobile Captivia, con il tuo account App Store o Google Play. Il sito mostra il tuo abbonamento, ma non vende nulla.",
+    "faq2Q": "Come si disdice?",
+    "faq2A": "In qualsiasi momento, dalla gestione degli abbonamenti del tuo store. Premium resta attivo fino alla fine del periodo già pagato.",
+    "faq3Q": "E senza account?",
+    "faq3A": "La prova senza account copre un animale. Per Premium, crea prima un account: il tuo animale e il suo libretto vengono conservati.",
+    "storeLinksLabel": "Scarica l’app"
+  },
+  "speciesSearch": {
+    "title": "Specie",
+    "intro": "Alimentazione, habitat, salute, normativa: ciò di cui ogni specie ha bisogno ogni giorno, con le fonti.",
+    "label": "Cerca una specie",
+    "placeholder": "Es. geco leopardino",
+    "submit": "Cerca",
+    "groupsLabel": "Gruppo",
+    "groups": {
+      "all": "Tutte",
+      "mammals": "Mammiferi",
+      "birds": "Uccelli",
+      "reptiles": "Rettili",
+      "amphibians": "Anfibi",
+      "fish": "Pesci",
+      "insects": "Insetti",
+      "arachnids": "Aracnidi"
+    },
+    "resultsAll": "Tutte le schede",
+    "resultsFor": "Risultati per «{query}»",
+    "count": "{count, plural, =0 {Nessuna scheda} one {# scheda} other {# schede}}",
+    "loading": "Ricerca delle schede…",
+    "emptyTitle": "Nessuna scheda per «{query}»",
+    "emptyGroupTitle": "Ancora nessuna scheda in questo gruppo",
+    "emptyBenefit": "Prova con il nome latino o con un nome più breve: «pitone» anziché «pitone reale albino».",
+    "emptyGroupBenefit": "Forse la specie è in un altro gruppo: ripeti la ricerca in tutti i gruppi.",
+    "clear": "Cancella la ricerca",
+    "allGroups": "Cerca in tutti i gruppi",
+    "errorTitle": "La ricerca non risponde in questo momento",
+    "errorBody": "Controlla la connessione e riprova.",
+    "photoAlt": "{name}, fotografia",
+    "photoBy": "Foto",
+    "more": "{count, plural, one {Mostra l'ultima scheda} other {Mostra altre # schede}}",
+    "moreFailed": "Impossibile caricare altri risultati. Riprova."
+  },
+  "photoPicker": {
+    "header": "Foto del tuo animale",
+    "camera": "Scatta una foto",
+    "library": "Scegli dalla galleria",
+    "cancel": "Annulla",
+    "accessDenied": "Captivia non ha accesso alla fotocamera o alle tue foto. Consenti l’accesso nelle impostazioni del telefono, poi riprova.",
+    "error": "Impossibile caricare questa foto. Prova con un’altra immagine."
+  },
+  "nativeReminders": {
+    "body": "{type}: {title}",
+    "channelName": "Promemoria delle cure",
+    "channelDescription": "Pasti, trattamenti, vaccini e visite veterinarie dei tuoi animali, all’ora giusta.",
+    "blocked": "Le notifiche sono bloccate per Captivia. Consentile nelle impostazioni del telefono: i tuoi promemoria verranno programmati appena torni nell’app.",
+    "onText": "{count, plural, =0 {Niente da ricordare nei prossimi 30 giorni. Appena è prevista una cura, questo telefono ti avvisa, anche senza connessione.} one {# promemoria programmato su questo telefono per i prossimi 30 giorni. Suonerà anche senza connessione.} other {# promemoria programmati su questo telefono per i prossimi 30 giorni. Suoneranno anche senza connessione.}}",
+    "offText": "Pasti, trattamenti, vaccini e visite: questo telefono te li ricorda all’ora giusta, anche senza connessione.",
+    "enable": "Attiva i promemoria su questo telefono",
+    "disable": "Disattiva i promemoria su questo telefono",
+    "syncError": "Impossibile caricare le tue cure in questo momento. Controlla la connessione e riprova.",
+    "primerTitle": "Vuoi un promemoria all’ora delle cure?",
+    "primerBody": "Captivia può inviarti una notifica quando si avvicina un pasto, un trattamento, una vaccinazione o una visita veterinaria, anche con l’app chiusa. Puoi disattivare questi promemoria in qualsiasi momento nelle impostazioni.",
+    "primerAccept": "Attiva i promemoria",
+    "primerLater": "Più tardi"
+  },
+  "paywall": {
+    "modalTitle": "Segui tutti i tuoi animali",
+    "modalLead": "Con Premium aggiungi tutti gli animali che vuoi, ognuno con il suo libretto e i suoi promemoria.",
+    "loading": "Caricamento dei piani…",
+    "choosePlan": "Scegli il tuo piano",
+    "priceLine": "{price} {per}",
+    "subscribe": "Abbonati per {price} {per}",
+    "per": {
+      "day": "{count, plural, one {al giorno} other {ogni # giorni}}",
+      "week": "{count, plural, one {a settimana} other {ogni # settimane}}",
+      "month": "{count, plural, one {al mese} other {ogni # mesi}}",
+      "year": "{count, plural, one {all’anno} other {ogni # anni}}"
+    },
+    "planName": {
+      "day": "{count, plural, one {Giornaliero} other {# giorni}}",
+      "week": "{count, plural, one {Settimanale} other {# settimane}}",
+      "month": "{count, plural, one {Mensile} other {# mesi}}",
+      "year": "{count, plural, one {Annuale} other {# anni}}"
+    },
+    "duration": {
+      "day": "{count, plural, one {# giorno} other {# giorni}}",
+      "week": "{count, plural, one {# settimana} other {# settimane}}",
+      "month": "{count, plural, one {# mese} other {# mesi}}",
+      "year": "{count, plural, one {# anno} other {# anni}}"
+    },
+    "introFree": "Prova gratuita di {duration}, poi {price} {per}.",
+    "introPaid": "{introPrice} {introPer} per {duration}, poi {price} {per}.",
+    "termsIos": "Abbonamento a rinnovo automatico. Il pagamento viene addebitato sul tuo account Apple alla conferma dell’acquisto. L’abbonamento si rinnova allo stesso prezzo, salvo disdetta almeno 24 ore prima della fine del periodo in corso. Gestiscilo o disdicilo quando vuoi nelle impostazioni del tuo account App Store.",
+    "termsAndroid": "Abbonamento a rinnovo automatico. Il pagamento viene addebitato sul tuo account Google Play alla conferma dell’acquisto. L’abbonamento si rinnova allo stesso prezzo fino alla disdetta, che puoi fare in qualsiasi momento in Google Play, sezione Abbonamenti. Premium resta attivo fino alla fine del periodo pagato.",
+    "deletionNote": "Eliminare il tuo account Captivia non disdice l’abbonamento: disdicilo anche nello store.",
+    "restore": "Ripristina acquisti",
+    "terms": "Condizioni d’uso",
+    "privacy": "Privacy",
+    "manage": "Gestisci il mio abbonamento",
+    "unavailableTitle": "Abbonamento non ancora disponibile",
+    "unavailableText": "In questa versione dell’app non puoi ancora sottoscrivere Premium. Il tuo animale e il suo libretto restano disponibili.",
+    "loadErrorTitle": "Impossibile mostrare i piani",
+    "retry": "Riprova",
+    "emptyTitle": "Nessun piano disponibile al momento",
+    "emptyText": "Lo store non offre ancora Premium su questo dispositivo. Riprova un po’ più tardi.",
+    "errors": {
+      "network": "Impossibile raggiungere lo store. Controlla la connessione e riprova.",
+      "unavailable": "Questo piano non è disponibile su questo dispositivo o nel tuo paese.",
+      "notAllowed": "Gli acquisti sono disattivati su questo dispositivo (impostazioni dello store o controllo parentale).",
+      "pending": "Pagamento in attesa di approvazione. Premium si attiverà appena lo store lo conferma.",
+      "alreadyOwned": "Questo abbonamento è già attivo sul tuo account dello store. Tocca «Ripristina acquisti».",
+      "store": "Lo store non è riuscito a elaborare l’acquisto. Riprova tra un attimo.",
+      "notConfigured": "Impossibile avviare l’acquisto. Chiudi l’app, riaprila e riprova.",
+      "unknown": "L’acquisto non è andato a buon fine. Riprova tra un attimo."
+    },
+    "activatingTitle": "Attivazione in corso…",
+    "activatingText": "Lo store ha confermato l’acquisto. Premium si sta attivando sul tuo account: servono pochi secondi.",
+    "pendingText": "Il tuo acquisto è registrato, ma il tuo account non è ancora aggiornato. Può richiedere qualche minuto: tocca «Verifica» o torna più tardi, senza pagare di nuovo.",
+    "checkAgain": "Verifica",
+    "activeTitle": "Premium è attivo",
+    "activeText": "Aggiungi tutti gli animali che vuoi, ognuno con il suo libretto.",
+    "restoreNothing": "Nessun abbonamento Premium da ripristinare su questo account dello store."
+  },
+  "community": {
+    "loading": "Caricamento della community…",
+    "time": {
+      "justNow": "adesso"
+    },
+    "soon": {
+      "title": "La community apre presto",
+      "body": "Foto dei tuoi animali, domande ad altri appassionati, risposte che aiutano davvero: è tutto pronto, manca solo l'apertura. Il libretto dei tuoi animali resta privato.",
+      "action": "Torna ai miei animali"
+    },
+    "join": {
+      "title": "Altri appassionati ti aspettano",
+      "body": "Mostra i tuoi animali, fai le tue domande e rispondi a quelle degli altri. Basta un account gratuito per entrare nella community.",
+      "register": "Crea un account gratuito",
+      "login": "Ho già un account",
+      "privacy": "Il libretto sanitario dei tuoi animali non viene mai pubblicato: scegli tu cosa condividere, un post alla volta."
+    },
+    "actions": {
+      "createAccount": "Crea il mio account",
+      "createProfile": "Crea il mio profilo",
+      "reviewRules": "Rileggi le regole",
+      "seeDecision": "Vedi la decisione",
+      "login": "Accedi di nuovo",
+      "retry": "Riprova",
+      "resendVerification": "Invia di nuovo l'e-mail",
+      "verificationSent": "E-mail inviata: apri il link che contiene.",
+      "verificationError": "Non è stato possibile inviare l'e-mail. Riprova tra un minuto."
+    },
+    "errors": {
+      "network": {
+        "title": "Connessione non riuscita",
+        "body": "Controlla la connessione internet e riprova."
+      },
+      "session": {
+        "title": "La sessione è scaduta",
+        "body": "Accedi di nuovo per tornare alla community."
+      },
+      "guest": {
+        "title": "Un account per partecipare",
+        "body": "Provando senza account puoi leggere il feed. Per pubblicare, rispondere o mettere mi piace, crea un account: il tuo animale e il suo libretto ti seguono."
+      },
+      "emailNotVerified": {
+        "title": "Verifica il tuo indirizzo e-mail",
+        "body": "Apri il link che ti abbiamo inviato per e-mail per pubblicare nella community. Non è arrivato nulla? Possiamo inviarlo di nuovo."
+      },
+      "ageRequired": {
+        "title": "Conferma la tua età",
+        "body": "La community è aperta dai 15 anni. Confermalo quando crei il tuo profilo."
+      },
+      "profileRequired": {
+        "title": "Scegli il tuo nome utente",
+        "body": "Crea il tuo profilo pubblico (un nome utente e, se vuoi, un avatar) per pubblicare, rispondere e mettere mi piace."
+      },
+      "profileExists": {
+        "title": "Il tuo profilo esiste già",
+        "body": "Puoi cambiare nome utente e avatar dal tuo profilo."
+      },
+      "rulesNotAccepted": {
+        "title": "Le regole sono cambiate",
+        "body": "Leggi e accetta la nuova versione delle regole per continuare a pubblicare."
+      },
+      "suspended": {
+        "title": "Pubblicazione sospesa",
+        "body": "Puoi ancora leggere e mettere mi piace, ma per ora non puoi pubblicare né rispondere. Puoi consultare la decisione e come fare ricorso.",
+        "bodyUntil": "Puoi ancora leggere e mettere mi piace, ma non pubblicare né rispondere fino al {date}. Puoi consultare la decisione e come fare ricorso.",
+        "bodyNoDate": "La pubblicazione è sospesa sul tuo account, anche se lasci la community. Puoi consultare la decisione e come fare ricorso."
+      },
+      "rateLimited": {
+        "title": "Limite raggiunto per ora",
+        "body": "Hai pubblicato molto in poco tempo. Riprova tra un po': questo limite protegge la community dallo spam."
+      },
+      "linksNotAllowed": {
+        "title": "Ancora niente link",
+        "body": "I link sono ammessi quando l'account ha 7 giorni, per frenare lo spam. Togli l'indirizzo e riprova."
+      },
+      "handleInvalid": {
+        "title": "Nome utente non valido",
+        "body": "Da 3 a 30 caratteri: lettere senza accenti, cifre, «_» o «.» (non all'inizio né alla fine)."
+      },
+      "handleReserved": {
+        "title": "Nome utente riservato",
+        "body": "Questo nome è riservato o somiglia troppo a un nome protetto (lettere sostituite da cifre, per esempio). Scegline un altro."
+      },
+      "handleTaken": {
+        "title": "Nome utente già in uso",
+        "body": "Questo nome è già in uso, oppure un altro membro lo ha lasciato da poco (resta riservato per 60 giorni). Aggiungi un numero o una parola: «kaa_e_io», «gecko.lea»."
+      },
+      "mediaType": {
+        "title": "Formato della foto non accettato",
+        "body": "Invia una foto JPEG, PNG o WebP."
+      },
+      "mediaTooLarge": {
+        "title": "Foto troppo pesante",
+        "body": "Scegli una foto più leggera o più piccola: al massimo 8 MB, 10.000 px per lato e 24 megapixel."
+      },
+      "mediaInvalid": {
+        "title": "Foto illeggibile",
+        "body": "Non è stato possibile leggere questa foto, oppure è troppo allungata (panorama, screenshot molto lungo). Scegline un'altra o ritagliala."
+      },
+      "mediaDimensions": {
+        "title": "Formato della foto insolito",
+        "body": "Questa foto è troppo allungata o troppo grande. Ritagliala e riprova."
+      },
+      "mediaBusy": {
+        "title": "Invio non possibile al momento",
+        "body": "Stanno arrivando molte foto insieme. Riprova tra un attimo."
+      },
+      "cannotReportOwn": {
+        "title": "È un tuo post",
+        "body": "Puoi eliminarlo tu stesso."
+      },
+      "cannotBlockSelf": {
+        "title": "Non puoi bloccare te stesso",
+        "body": "Questo profilo è il tuo."
+      },
+      "appealNotAllowed": {
+        "title": "Ricorso non possibile",
+        "body": "Per questa decisione è già stato fatto ricorso, oppure il termine di 6 mesi è scaduto."
+      },
+      "bodyRequired": {
+        "title": "Serve un testo",
+        "body": "Scrivi qualche parola prima di inviare."
+      },
+      "invalidParent": {
+        "title": "Impossibile rispondere",
+        "body": "Questo commento non è più visibile."
+      },
+      "notAuthor": {
+        "title": "Solo per chi ha fatto la domanda",
+        "body": "Solo chi ha fatto la domanda sceglie la risposta utile."
+      },
+      "notFound": {
+        "title": "Non trovato",
+        "body": "Questo contenuto è stato eliminato o nascosto, oppure il suo autore non è più visibile per te."
+      },
+      "forbidden": {
+        "title": "Azione non consentita",
+        "body": "Il tuo account non consente questa azione."
+      },
+      "generic": {
+        "title": "Si è verificato un problema",
+        "body": "Riprova tra un attimo. Se continua, scrivici."
+      }
+    },
+    "type": {
+      "PHOTO": "Foto",
+      "QUESTION": "Domanda",
+      "plural": {
+        "PHOTO": "Foto",
+        "QUESTION": "Domande"
+      }
+    },
+    "categories": {
+      "MAMMAL": "Mammiferi",
+      "BIRD": "Uccelli",
+      "REPTILE": "Rettili",
+      "FISH": "Pesci",
+      "AMPHIBIAN": "Anfibi",
+      "ARACHNID": "Aracnidi",
+      "INSECT": "Insetti",
+      "OTHER": "Altri animali"
+    },
+    "reasons": {
+      "SPAM": {
+        "label": "Spam o pubblicità",
+        "hint": "Vendita, promozione, messaggi ripetuti."
+      },
+      "HARASSMENT": {
+        "label": "Molestie o intimidazioni",
+        "hint": "Prese in giro mirate, insulti, accanimento."
+      },
+      "HATE": {
+        "label": "Incitamento all'odio",
+        "hint": "Attacca qualcuno per ciò che è."
+      },
+      "VIOLENCE": {
+        "label": "Violenza o minacce",
+        "hint": "Minacce, incitamento a fare del male."
+      },
+      "ANIMAL_WELFARE": {
+        "label": "Maltrattamento di animali",
+        "hint": "Animale sofferente, condizioni di vita pericolose."
+      },
+      "ILLEGAL_TRADE": {
+        "label": "Commercio illegale di animali",
+        "hint": "Specie protette, vendita senza autorizzazione."
+      },
+      "DANGEROUS_ADVICE": {
+        "label": "Consiglio pericoloso",
+        "hint": "Può mettere a rischio la salute di un animale."
+      },
+      "NUDITY": {
+        "label": "Contenuti sessuali o nudità",
+        "hint": "Immagini o frasi a sfondo sessuale."
+      },
+      "PERSONAL_DATA": {
+        "label": "Dati personali",
+        "hint": "Indirizzo, telefono o nome completo di una persona."
+      },
+      "IMPERSONATION": {
+        "label": "Furto d'identità",
+        "hint": "Si spaccia per qualcun altro o per il team."
+      },
+      "OTHER": {
+        "label": "Altra violazione delle regole",
+        "hint": "Spiega qui sotto qual è il problema."
+      }
+    },
+    "form": {
+      "charCount": "{count} / {max} caratteri"
+    },
+    "list": {
+      "more": "Mostra altro",
+      "auto": "Carica altro mentre scorro",
+      "end": "Sei in pari.",
+      "shown": "{count, plural, one {# elemento mostrato} other {# elementi mostrati}}"
+    },
+    "photo": {
+      "position": "Foto {n} di {total}",
+      "byAuthor": "Foto pubblicata da @{handle}",
+      "fallback": "Foto di un membro"
+    },
+    "card": {
+      "open": "apri il post",
+      "formerMember": "Ex membro",
+      "hidden": "Nascosto",
+      "likeLabel": "Mi piace ({count})",
+      "repliesLabel": "{count, plural, one {# risposta} other {# risposte}}",
+      "answered": "Risposta utile trovata",
+      "report": "Segnala questo post",
+      "reportShort": "Segnala"
+    },
+    "feed": {
+      "title": "Community",
+      "lead": "Le ultime foto e domande dei membri. Il libretto sanitario di ognuno resta privato.",
+      "publish": "Pubblica",
+      "filtersLabel": "Filtra il feed",
+      "typeLabel": "Mostra",
+      "allTypes": "Tutto",
+      "categoryLabel": "Specie",
+      "allCategories": "Tutte le specie",
+      "listLabel": "Post recenti",
+      "loading": "Caricamento del feed…",
+      "emptyTitle": "Il feed aspetta la sua prima foto",
+      "emptyBody": "Mostra il tuo animale o fai la domanda che ti frulla in testa: i membri rispondono qui.",
+      "emptyAction": "Pubblica una foto",
+      "emptyFilteredTitle": "Ancora niente qui",
+      "emptyFilteredBody": "Nessun post corrisponde a questi filtri. Allarga la ricerca o pubblica per primo.",
+      "resetFilters": "Vedi tutto il feed"
+    },
+    "aside": {
+      "label": "Il mio spazio nella community",
+      "linksLabel": "Pagine della community",
+      "myProfile": "Il mio profilo nella community",
+      "seePublicProfile": "Vedi il mio profilo pubblico",
+      "blocks": "Persone bloccate",
+      "decisions": "Decisioni e segnalazioni",
+      "moderation": "Coda di moderazione",
+      "joinTitle": "Scegli un nome utente e ci sei",
+      "joinBody": "Per pubblicare bastano un nome utente e l'accettazione delle regole. La tua e-mail non viene mai mostrata.",
+      "rulesTitle": "Le regole in breve",
+      "rule": {
+        "one": "Prima la gentilezza: si risponde alla domanda, non alla persona.",
+        "two": "Salute: un consiglio non sostituisce il veterinario. Nel dubbio, si indirizza da lui.",
+        "three": "Niente vendita di animali, niente dati personali, niente pubblicità."
+      },
+      "rulesLink": "Leggi le regole della community"
+    },
+    "post": {
+      "loading": "Caricamento del post…",
+      "backToFeed": "Torna al feed",
+      "notFoundTitle": "Post non trovato",
+      "notFoundBody": "È stato eliminato dal suo autore, nascosto dopo una verifica, oppure il suo autore non è più visibile per te.",
+      "hiddenTitle": "Post nascosto",
+      "hiddenBody": "Lo vedete solo tu e il team di moderazione. La decisione spiega il motivo e come contestarla.",
+      "delete": "Elimina il post",
+      "deleteTitle": "Eliminare questo post?",
+      "deleteBody": "Foto, risposte e mi piace spariscono con lui. L'operazione è definitiva."
+    },
+    "comments": {
+      "title": "{count, plural, one {# risposta} other {# risposte}}",
+      "answersTitle": "{count, plural, one {# risposta alla domanda} other {# risposte alla domanda}}",
+      "empty": "Ancora nessuna risposta. Una parola gentile fa sempre piacere.",
+      "emptyQuestion": "Nessuno ha ancora risposto. Se lo sai, condividi la tua esperienza.",
+      "label": "La tua risposta",
+      "answerLabel": "La tua risposta alla domanda",
+      "send": "Rispondi",
+      "sendReply": "Invia la risposta",
+      "reply": "Rispondi",
+      "replyTo": "Rispondi a @{handle}",
+      "repliesTo": "Risposte a @{handle}",
+      "more": "Mostra altre risposte",
+      "helpful": "Risposta utile",
+      "helpfulHint": "Una risposta ti è stata utile? Segnala che è utile: verrà messa in evidenza per chi arriva dopo.",
+      "markHelpful": "Segna come utile",
+      "unmarkHelpful": "Togli «utile»",
+      "report": "Segnala",
+      "delete": "Elimina",
+      "deleteTitle": "Eliminare questa risposta?",
+      "deleteBody": "Anche le risposte ricevute verranno eliminate. L'operazione è definitiva.",
+      "deleted": "Risposta eliminata"
+    },
+    "report": {
+      "titlePost": "Segnala questo post",
+      "titleComment": "Segnala questa risposta",
+      "intro": "Una persona del team esamina la tua segnalazione. L'autore non sa chi l'ha fatta.",
+      "reasonLabel": "Che cosa succede?",
+      "reasonMissing": "Scegli il motivo più vicino.",
+      "detailsLabel": "Dettagli (facoltativo)",
+      "submit": "Invia la segnalazione",
+      "sent": "Segnalazione inviata, ce ne occupiamo.",
+      "already": "Hai già segnalato questo contenuto: è in fase di verifica.",
+      "next": "Dopo diverse segnalazioni, il contenuto viene nascosto in attesa della decisione del team. Puoi anche bloccare l'autore dal suo profilo."
+    },
+    "compose": {
+      "title": "Nuovo post",
+      "lead": "Una foto del tuo animale o una domanda per altri appassionati.",
+      "typeLegend": "Che cosa vuoi condividere?",
+      "type": {
+        "PHOTO": {
+          "title": "Una foto",
+          "hint": "Da 1 a 4 foto, con una didascalia se vuoi."
+        },
+        "QUESTION": {
+          "title": "Una domanda",
+          "hint": "Un testo e una foto per mostrare cosa ti incuriosisce."
+        }
+      },
+      "photosLabel": "Foto (fino a {max})",
+      "questionPhotoLabel": "Foto (facoltativa)",
+      "addPhoto": "Aggiungi una foto",
+      "removePhoto": "Togli la foto {n}",
+      "previewAlt": "Anteprima della foto {n}",
+      "photoHint": "JPEG, PNG o WebP. Le foto vengono ridotte a 1600 px e private dei dati di posizione prima dell'invio.",
+      "converted": "Convertita da HEIC",
+      "preparing": "Preparazione della foto…",
+      "photosRequired": "Aggiungi almeno una foto, oppure scegli «Una domanda».",
+      "tooManyPhotos": "{max, plural, one {Qui è possibile una sola foto.} other {Al massimo # foto: le altre non sono state aggiunte.}}",
+      "unnamedPhoto": "Questa foto",
+      "photoError": {
+        "heic": "{name}: questo formato HEIC non può essere letto su questo dispositivo. Su iPhone scegli «Più compatibile» in Impostazioni › Fotocamera › Formati, oppure condividi la foto in JPEG.",
+        "type": "{name}: formato non accettato. Scegli una foto JPEG, PNG o WebP.",
+        "dimensions": "{name}: foto troppo allungata (panorama, screenshot molto lungo). Ritagliala e riprova.",
+        "tooLarge": "{name}: foto troppo pesante (al massimo 20 MB).",
+        "unreadable": "{name}: non è stato possibile leggere la foto. Scegline un'altra."
+      },
+      "captionLabel": "Didascalia",
+      "captionHint": "Facoltativa: il suo nome, il suo umore, la storia della foto.",
+      "altLabel": "Descrivi la foto",
+      "altLabelN": "Descrivi la foto {n}",
+      "altHint": "Facoltativo, ma prezioso: gli screen reader lo leggono alle persone cieche o ipovedenti.",
+      "altPlaceholder": "Un geco leopardino arancione su una pietra calda",
+      "questionLabel": "La tua domanda",
+      "questionHint": "Indica specie, età e cosa hai notato: le risposte saranno più precise.",
+      "bodyRequired": "Scrivi la tua domanda prima di pubblicare.",
+      "bodyTooLong": "Il testo supera i 2000 caratteri.",
+      "animalLabel": "Mostra uno dei miei animali",
+      "animalHint": "Facoltativo. Saranno visibili solo il nome e la specie.",
+      "noAnimal": "Nessun animale",
+      "animalVisible": "Visibile ai membri: {name}",
+      "animalPrivate": "Il suo libretto sanitario, le cure e gli appuntamenti restano privati.",
+      "categoryLabel": "Categoria",
+      "categoryHint": "Facoltativa: aiuta gli altri a trovare il tuo post.",
+      "categoryFromAnimal": "Facoltativa: altrimenti ricavata dalla specie del tuo animale.",
+      "noCategory": "Nessuna categoria",
+      "submit": "Pubblica",
+      "uploading": "Invio della foto {n} di {total}…",
+      "publishing": "Pubblicazione…",
+      "privacy": "I tuoi post sono visibili ai membri connessi. Puoi eliminarli quando vuoi, foto comprese."
+    },
+    "profile": {
+      "title": "Il mio profilo nella community",
+      "lead": "La tua identità pubblica: un nome utente e, se vuoi, un avatar. Mai la tua e-mail.",
+      "back": "Torna al mio profilo",
+      "activateTitle": "Crea il mio profilo pubblico",
+      "activateLead": "Scegli come ti vedranno gli altri membri. Potrai cambiare nome utente e avatar in seguito.",
+      "handleLabel": "Nome utente",
+      "handleHint": "Da 3 a 30 caratteri: lettere senza accenti, cifre, «_» o «.».",
+      "avatarLabel": "Avatar (facoltativo)",
+      "avatarHint": "Una foto del tuo animale va benissimo.",
+      "avatarChoose": "Scegli una foto",
+      "avatarChange": "Cambia avatar",
+      "avatarRemove": "Togli l'avatar",
+      "avatarPreview": "Anteprima dell'avatar",
+      "avatarSaved": "Avatar salvato",
+      "avatarRemoved": "Avatar tolto",
+      "avatarLater": "Profilo creato. Non è stato possibile inviare l'avatar: aggiungilo dal tuo profilo.",
+      "acceptRules": "Ho letto e accetto le regole della community",
+      "rulesVersion": "versione {version}",
+      "readRules": "Leggi le regole",
+      "rulesRequired": "Accetta le regole per creare il tuo profilo.",
+      "confirmAge": "Ho almeno 15 anni",
+      "ageRequired": "La community è aperta dai 15 anni.",
+      "activate": "Crea il mio profilo",
+      "visibleTitle": "Cosa vedranno i membri",
+      "visibleHandle": "Il tuo nome utente e la data di arrivo",
+      "visibleAvatar": "Il tuo avatar, se ne scegli uno",
+      "visiblePosts": "I tuoi post e le tue risposte",
+      "neverVisible": "Mai la tua e-mail né il libretto sanitario dei tuoi animali.",
+      "identityTitle": "Identità pubblica",
+      "saveHandle": "Salva il nome utente",
+      "handleSaved": "Nome utente salvato",
+      "memberSince": "Membro dal",
+      "rulesAcceptedOn": "Regole accettate il",
+      "rulesUpdatedTitle": "Nuova versione delle regole ({version})",
+      "rulesUpdatedBody": "Accettala per continuare a pubblicare, rispondere e mettere mi piace.",
+      "acceptNewRules": "Accetta le regole",
+      "rulesAccepted": "Regole accettate",
+      "seePublic": "Vedi il mio profilo pubblico",
+      "leaveTitle": "Lascia la community",
+      "leaveBody": "Il tuo profilo, i tuoi post, le risposte, i mi piace e le foto vengono eliminati. Il tuo account e i libretti dei tuoi animali restano intatti.",
+      "leave": "Lascia la community",
+      "leaveConfirmTitle": "Lasciare la community?",
+      "leaveConfirmBody": "Tutto ciò che hai pubblicato sparisce, foto comprese. L'operazione è definitiva.",
+      "dataNote": "I dati della community sono descritti nella nostra informativa sulla privacy.",
+      "privacyLink": "Privacy"
+    },
+    "member": {
+      "loading": "Caricamento del profilo…",
+      "notFoundTitle": "Profilo non trovato",
+      "notFoundBody": "Questo nome utente non esiste, è cambiato, oppure questo membro non è più visibile per te.",
+      "posts": "{count, plural, one {# post} other {# post}}",
+      "postsLabel": "Numero di post",
+      "since": "Membro dal {date}",
+      "edit": "Modifica il mio profilo",
+      "listLabel": "Post di @{handle}",
+      "emptyTitle": "Ancora nessun post",
+      "emptyBody": "Questo membro non ha ancora pubblicato nulla.",
+      "emptyMineTitle": "Il tuo primo post ti aspetta",
+      "emptyMineBody": "Una foto, una domanda: qui i membri conosceranno i tuoi animali."
+    },
+    "blocks": {
+      "title": "Persone bloccate",
+      "lead": "Non vedi più i loro post né le loro risposte, e loro non vedono più i tuoi. Non ricevono alcun avviso.",
+      "loading": "Caricamento…",
+      "emptyTitle": "Non hai bloccato nessuno",
+      "emptyBody": "Un membro ti infastidisce? Bloccalo dal suo profilo o da uno dei suoi post: non vi vedrete più a vicenda.",
+      "since": "Bloccato il {date}",
+      "unblock": "Sblocca",
+      "unblockHandle": "Sblocca @{handle}",
+      "unblocked": "@{handle} è stato sbloccato.",
+      "block": "Blocca",
+      "blockHandle": "Blocca @{handle}",
+      "confirmTitle": "Bloccare @{handle}?",
+      "confirmBody": "Non vedrai più i suoi post né le sue risposte, e lui non vedrà più i tuoi. Non riceve alcun avviso e puoi tornare indietro quando vuoi."
+    },
+    "decisions": {
+      "title": "Decisioni e segnalazioni",
+      "lead": "Le decisioni di moderazione sui tuoi contenuti o sul tuo account, con i motivi e la possibilità di contestarle.",
+      "loading": "Caricamento delle decisioni…",
+      "emptyTitle": "Nessuna decisione ti riguarda",
+      "emptyBody": "Se un tuo contenuto venisse nascosto o eliminato, qui troverai il motivo e come contestarlo.",
+      "appealOpen": "Ricorso possibile",
+      "backToList": "Tutte le decisioni",
+      "notFoundTitle": "Decisione non trovata",
+      "notFoundBody": "Questo link non corrisponde a nessuna decisione del tuo account. Controlla di aver effettuato l'accesso con l'account giusto.",
+      "detailLead": "Cosa è stato deciso, perché e come contestarlo.",
+      "statementTitle": "Motivazione",
+      "seeContent": "Vedi il contenuto interessato",
+      "facts": {
+        "date": "Data della decisione",
+        "reason": "Motivo",
+        "target": "Contenuto interessato",
+        "automated": "Decisione automatica",
+        "until": "Sospensione fino al",
+        "deadline": "Ricorso possibile fino al"
+      },
+      "target": {
+        "POST": "Post",
+        "COMMENT": "Risposta",
+        "USER": "Il tuo profilo",
+        "gone": "Contenuto eliminato. Non viene più mostrato."
+      },
+      "automatedYes": "Sì: nascosto dopo diverse segnalazioni, in attesa della verifica di una persona",
+      "automatedNo": "No: decisione presa da una persona del team",
+      "appealTitle": "Il tuo ricorso",
+      "appealPendingBody": "Il tuo ricorso è nelle mani di una persona del team. Riceverai la risposta per e-mail.",
+      "appealFormTitle": "Contesta questa decisione",
+      "appealIntro": "Il ricorso è gratuito ed esaminato da una persona che non ha preso la decisione iniziale. Spiega cosa il team potrebbe aver frainteso.",
+      "appealLabel": "La tua spiegazione",
+      "appealTooShort": "Scrivi almeno {min} caratteri.",
+      "appealSubmit": "Invia il mio ricorso",
+      "appealSent": "Ricorso inviato",
+      "appealSentBody": "Ti risponderemo per e-mail. La risposta comparirà anche qui.",
+      "appealClosed": "Questa decisione non può più essere contestata nell'app (ricorso già fatto o termine di 6 mesi scaduto).",
+      "remediesTitle": "Le altre tue possibilità",
+      "remediesBody": "Puoi anche rivolgerti a un organismo certificato di risoluzione extragiudiziale delle controversie o al tribunale. Queste strade restano aperte qualunque sia l'esito del tuo ricorso.",
+      "contact": "Contatto della moderazione: {email}",
+      "titles": {
+        "AUTO_HIDE_POST": "Post nascosto dopo segnalazioni",
+        "AUTO_HIDE_COMMENT": "Risposta nascosta dopo segnalazioni",
+        "HIDE_POST": "Post nascosto",
+        "HIDE_COMMENT": "Risposta nascosta",
+        "RESTORE_POST": "Post ripristinato",
+        "RESTORE_COMMENT": "Risposta ripristinata",
+        "DELETE_POST": "Post eliminato",
+        "DELETE_COMMENT": "Risposta eliminata",
+        "SUSPEND_USER": "Pubblicazione sospesa",
+        "UNSUSPEND_USER": "Sospensione revocata",
+        "OTHER": "Decisione di moderazione"
+      },
+      "appealStatus": {
+        "PENDING": "Ricorso in esame",
+        "UPHELD": "Decisione confermata",
+        "REVERSED": "Decisione annullata"
+      }
+    },
+    "reports": {
+      "title": "Le mie segnalazioni",
+      "empty": "Non hai segnalato nulla. Grazie per tenere gli occhi aperti.",
+      "error": "Al momento non è possibile mostrare le tue segnalazioni.",
+      "seeContent": "Vedi il contenuto",
+      "status": {
+        "OPEN": "In esame",
+        "ACTIONED": "Provvedimento preso",
+        "DISMISSED": "Esaminata, senza seguito"
+      },
+      "decidedOn": "Decisione del {date}",
+      "removed": "Contenuto rimosso",
+      "kept": "Contenuto mantenuto"
+    },
+    "rules": {
+      "title": "Regole della community",
+      "versionLabel": "Versione delle regole",
+      "lead": "Uno spazio per condividere l'amore per i nostri animali e aiutarci a vicenda. Queste regole lo mantengono piacevole per tutti.",
+      "items": {
+        "kind": {
+          "title": "Prima la gentilezza",
+          "body": "Si risponde alla domanda, non alla persona. Niente insulti, prese in giro mirate, molestie né discorsi d'odio."
+        },
+        "animals": {
+          "title": "Il benessere animale prima di tutto",
+          "body": "Nessuna immagine né consiglio che banalizzi la sofferenza di un animale. Dubbi sulle condizioni di vita? Segnalalo invece di discuterne."
+        },
+        "health": {
+          "title": "Un consiglio non sostituisce il veterinario",
+          "body": "Condividi la tua esperienza, cita le fonti e indirizza dal veterinario al minimo segnale preoccupante. I consigli pericolosi vengono rimossi."
+        },
+        "trade": {
+          "title": "Niente vendita né scambio di animali",
+          "body": "La community non è un mercato. Il commercio di specie protette è illegale e viene segnalato alle autorità."
+        },
+        "privacy": {
+          "title": "La privacy di ognuno",
+          "body": "Niente indirizzi, telefoni o nomi completi, né i tuoi né quelli degli altri. Controlla che nessuna foto mostri il tuo indirizzo."
+        },
+        "spam": {
+          "title": "Niente pubblicità",
+          "body": "Né promozioni né messaggi ripetuti. I link sono ammessi quando l'account ha 7 giorni."
+        },
+        "honest": {
+          "title": "Sii te stesso",
+          "body": "Un nome utente tuo, foto che hai il diritto di condividere e nessun altro dietro il profilo."
+        }
+      },
+      "processTitle": "Quando una regola non viene rispettata",
+      "process": {
+        "report": "Ogni membro può segnalare un contenuto. Dopo diverse segnalazioni viene nascosto, in attesa della verifica di una persona del team.",
+        "decision": "Ogni decisione (nascondere, eliminare, sospendere) ti viene spiegata per e-mail e nell'app, con il suo motivo.",
+        "appeal": "Puoi contestarla gratuitamente per 6 mesi: una persona riesamina il tuo caso e ti risponde."
+      }
+    },
+    "moderation": {
+      "title": "Moderazione",
+      "lead": "Segnalazioni, contenuti nascosti, ricorsi e registro. Ogni decisione richiede un motivo e una spiegazione, inviati all'autore.",
+      "loading": "Caricamento della coda…",
+      "forbiddenTitle": "Riservato al team di moderazione",
+      "forbiddenBody": "Questa pagina è aperta agli operatori con indirizzo e-mail verificato.",
+      "tabsLabel": "Code di moderazione",
+      "tabs": {
+        "queue": "Segnalazioni",
+        "hidden": "Nascosti",
+        "appeals": "Ricorsi",
+        "log": "Registro"
+      },
+      "target": {
+        "POST": "Post",
+        "COMMENT": "Risposta"
+      },
+      "status": {
+        "VISIBLE": "Visibile",
+        "HIDDEN_AUTO": "Nascosto automaticamente",
+        "HIDDEN_MODERATOR": "Nascosto dal team"
+      },
+      "openReports": "{count, plural, one {# segnalazione aperta} other {# segnalazioni aperte}}",
+      "firstReport": "Prima segnalazione il {date}",
+      "reasonsLabel": "Motivi delle segnalazioni",
+      "details": "{count, plural, one {Vedi il dettaglio di chi ha segnalato} other {Vedi i # dettagli di chi ha segnalato}}",
+      "imageAlt": "Immagine {n} del contenuto segnalato",
+      "openPost": "Apri il post",
+      "appealText": "Testo del ricorso",
+      "automated": "Automatica",
+      "by": "da @{handle}",
+      "byAutomation": "dall'oscuramento automatico",
+      "byTeam": "dal team",
+      "notNotified": "Notifica non inviata",
+      "queueEmptyTitle": "Nessuna segnalazione in attesa",
+      "queueEmptyBody": "La coda è vuota. Le nuove segnalazioni compariranno qui, dalla più vecchia alla più recente.",
+      "hiddenEmptyTitle": "Nessun contenuto nascosto",
+      "hiddenEmptyBody": "Qui compariranno i contenuti nascosti automaticamente o dal team.",
+      "appealsEmptyTitle": "Nessun ricorso in attesa",
+      "appealsEmptyBody": "I ricorsi dei membri compariranno qui, dal più vecchio al più recente.",
+      "logEmptyTitle": "Registro vuoto",
+      "logEmptyBody": "Ogni decisione, anche automatica, verrà registrata qui.",
+      "form": {
+        "reason": "Motivo",
+        "chooseReason": "Scegli un motivo",
+        "reasonRequired": "Scegli il motivo della decisione.",
+        "statement": "Motivazione",
+        "statementHint": "Inviata all'autore: qual è esattamente il problema.",
+        "statementTooShort": "Scrivi almeno {min} caratteri.",
+        "days": "Durata della sospensione (giorni)",
+        "daysHint": "Da 1 a {max} giorni.",
+        "daysRange": "Indica un numero di giorni tra 1 e {max}."
+      },
+      "actions": {
+        "hide": {
+          "short": "Nascondi",
+          "title": "Nascondi questo contenuto",
+          "body": "Solo il suo autore potrà vederlo. Le segnalazioni vengono chiuse e l'autore riceve la tua spiegazione.",
+          "confirm": "Nascondi"
+        },
+        "delete": {
+          "short": "Elimina",
+          "title": "Elimina definitivamente",
+          "body": "Il contenuto e le sue immagini vengono cancellati. Un ricorso non potrà ripristinarlo: riservalo ai contenuti chiaramente illeciti o gravi.",
+          "confirm": "Elimina"
+        },
+        "restore": {
+          "short": "Ripristina",
+          "title": "Ripristina questo contenuto",
+          "body": "Il contenuto torna visibile e non verrà più nascosto automaticamente. L'autore viene avvisato.",
+          "confirm": "Ripristina"
+        },
+        "dismiss": {
+          "short": "Archivia senza seguito",
+          "title": "Archivia le segnalazioni senza seguito",
+          "body": "Il contenuto resta visibile e non verrà più nascosto automaticamente. L'autore non viene avvisato.",
+          "confirm": "Archivia senza seguito"
+        },
+        "suspend": {
+          "short": "Sospendi l'autore",
+          "title": "Sospendi @{handle}",
+          "body": "Il membro può ancora leggere e mettere mi piace, ma non può più pubblicare, rispondere né cambiare nome utente o avatar.",
+          "confirm": "Sospendi"
+        },
+        "unsuspend": {
+          "short": "Revoca la sospensione",
+          "title": "Revoca la sospensione di @{handle}",
+          "body": "Il membro può di nuovo pubblicare. Viene avvisato.",
+          "confirm": "Revoca la sospensione"
+        },
+        "uphold": {
+          "short": "Conferma la decisione",
+          "title": "Conferma la decisione",
+          "body": "La decisione resta valida. Il membro riceve la tua risposta.",
+          "confirm": "Conferma"
+        },
+        "reverse": {
+          "short": "Annulla la decisione",
+          "title": "Annulla la decisione",
+          "body": "Il contenuto nascosto viene ripristinato o la sospensione revocata. Il membro riceve la tua risposta.",
+          "confirm": "Annulla la decisione"
+        }
+      },
+      "done": {
+        "hide": "Contenuto nascosto, autore avvisato",
+        "delete": "Contenuto eliminato, autore avvisato",
+        "restore": "Contenuto ripristinato",
+        "dismiss": "Segnalazioni archiviate",
+        "suspend": "Membro sospeso, avvisato per e-mail",
+        "unsuspend": "Sospensione revocata",
+        "uphold": "Decisione confermata, membro avvisato",
+        "reverse": "Decisione annullata, membro avvisato"
+      }
+    }
   }
 }

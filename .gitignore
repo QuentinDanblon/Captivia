@@ -41,3 +41,18 @@ frontend/test-results/
 # Misc artifacts
 frontend/frontend@0.1.0
 frontend/next
+
+# Python
+__pycache__/
+*.pyc
+
+# Push natif (W6-07) et signature mobile : fichiers Firebase, clés APNs, comptes de service,
+# keystores. Jamais dans le dépôt (secrets CI / Render, voir docs/MOBILE.md § 7.3).
+google-services.json
+GoogleService-Info.plist
+AuthKey_*.p8
+*.p8
+*-firebase-adminsdk-*.json
+*service-account*.json
+*.jks
+*.keystore

@@ -17,7 +17,7 @@ jest.mock('@/i18n/navigation', () => ({
   Link: ({ href, children }: { href: string; children: React.ReactNode }) => <a href={href}>{children}</a>,
 }));
 
-import ResetPasswordPage from '../[locale]/reset-password/page';
+import ResetPasswordPage from '../[locale]/(auth)/reset-password/page';
 
 describe('reset-password page', () => {
   beforeEach(() => {

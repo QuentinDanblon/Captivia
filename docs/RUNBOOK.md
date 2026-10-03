@@ -7,10 +7,10 @@ Procédures d'exploitation de Captivia : supervision, incidents, restauration, r
 | Brique | Rôle | Adresse |
 |---|---|---|
 | Netlify | Frontend Next.js (`frontend/`) | `https://captivia-app.netlify.app` (`NEXT_PUBLIC_SITE_URL` dans `netlify.toml`) |
-| Render (offre Free, Francfort) | API NestJS, service `captivia-api` | `https://captivia-api.onrender.com` (nom du service dans `render.yaml` ; l'URL exacte est affichée dans le Dashboard Render) |
+| Render (offre Free, Francfort) | API NestJS, service `captivia-api` | `https://captiviacaptivia-api.onrender.com` (service `captivia-api` dans `render.yaml` ; Render a préfixé le sous-domaine, l’URL exacte est affichée dans le Dashboard) |
 | Neon (offre Free) | PostgreSQL | URL pooled dans Render (`DATABASE_URL`), URL directe dans le secret GitHub `NEON_DATABASE_URL_DIRECT` |
 
-Dans les commandes ci-dessous : `API=https://captivia-api.onrender.com`.
+Dans les commandes ci-dessous : `API=https://captiviacaptivia-api.onrender.com`.
 
 ---
 
@@ -51,7 +51,7 @@ Le moniteur externe n'est pas défini dans le dépôt : à créer à la main (vo
 ### 1.6 Tests manuels
 
 ```bash
-API=https://captivia-api.onrender.com
+API=https://captiviacaptivia-api.onrender.com
 
 # Liveness (le premier appel après une veille peut durer 30 à 60 s)
 curl -sS -m 90 "$API/health"
@@ -260,6 +260,30 @@ Voir §3.5.
 3. Rien à changer côté Netlify : le navigateur lit la clé publique via `GET /notifications/vapid-public-key`.
 4. Conséquence : les abonnements push existants deviennent invalides. Les envois vers ces abonnements échouent (404/410) et l'API les purge ; chaque utilisateur doit réactiver les notifications dans *Paramètres → Notifications*.
 
+### 4.6 Jeton R2 des médias communautaires
+
+1. Cloudflare → *R2 → Manage API tokens* : créer un nouveau jeton *Object Read & Write* limité au bucket des médias.
+2. Render → *Environment* : remplacer `S3_ACCESS_KEY_ID` et `S3_SECRET_ACCESS_KEY`, enregistrer (redéploiement).
+3. Publier une image de test, puis révoquer l'ancien jeton. Les URL publiques des images ne changent pas.
+
+### 4.7 Clé du compte de service Firebase (push natif FCM / APNs, W6-07)
+
+`FCM_SERVICE_ACCOUNT_JSON` (Render) est la clé JSON, encodée en base64, d'un compte de service du projet Firebase. Rotation annuelle conseillée, immédiate en cas de fuite (fichier partagé, poste perdu) :
+
+1. Firebase → *Paramètres du projet* → *Comptes de service* → **Générer une nouvelle clé privée** (le même compte peut porter deux clés en parallèle : pas d'interruption).
+2. `base64 -w0 captivia-firebase-adminsdk-xxxx.json`, puis Render → *Environment* : remplacer `FCM_SERVICE_ACCOUNT_JSON`, enregistrer (redéploiement). Supprimer le fichier local.
+3. Vérifier le journal de démarrage `Push natif actif (FCM HTTP v1, projet …)` puis envoyer une notification de test depuis *Paramètres → Notifications* de l'app.
+4. Révoquer l'ancienne clé : Google Cloud Console → *IAM et administration → Comptes de service* → le compte `firebase-adminsdk-…` → *Clés* → supprimer l'ancien identifiant de clé.
+5. Conséquence : aucune pour les utilisateurs. Les jetons des appareils (`DeviceToken`) restent valables ; le jeton d'accès OAuth mis en cache par l'API expire de lui-même (≤ 1 h) et une réponse 401 de FCM force son renouvellement.
+
+Journal `Push natif indisponible : Jeton d'accès Google refusé (HTTP 400, erreur invalid_grant)` : clé révoquée ou horloge du serveur décalée → refaire les étapes 1 à 3. Après un échec, l'API n'appelle plus Google pendant 60 s (`Jeton d'accès Google indisponible (échec récent…)`) et chaque erreur de configuration n'est journalisée qu'une fois par minute.
+
+Journal `Push natif refusé par FCM (SENDER_ID_MISMATCH)` (au plus une fois par minute) : la clé `FCM_SERVICE_ACCOUNT_JSON` appartient à un **autre projet Firebase** que celui de l'app (`google-services.json` / `GoogleService-Info.plist`), typiquement après une rotation faite dans le mauvais projet. Les jetons des appareils sont **conservés** (ils restent valables pour le bon projet) ; aucun push natif ne part tant que la clé n'est pas corrigée. Action : comparer `project_id` de la clé (journal de démarrage `Push natif actif (FCM HTTP v1, projet …)`) avec celui de l'app, générer une clé dans le bon projet (étapes 1 à 3). Les rappels locaux et le Web Push continuent entre-temps.
+
+Journal `Budget du push natif épuisé pour cette exécution (60 s)` : FCM ou Google répondent trop lentement ; les envois natifs restants sont sautés jusqu'au tick suivant (e-mail et Web Push partent normalement, un rappel sans aucun canal abouti est retenté dans sa fenêtre de 10 min). Vérifier <https://status.firebase.google.com> ; rien à faire côté Captivia si l'incident est chez Google. `Configuration FCM invalide, push natif désactivé : …` : variable tronquée ou pas en base64. `Push iOS refusé par APNs` : clé APNs `.p8` absente, révoquée ou mauvais Team ID dans Firebase (*Cloud Messaging → Configuration de l'application Apple*) ; la clé `.p8` se renouvelle sur developer.apple.com (*Keys*), puis se téléverse à nouveau dans Firebase.
+
+**Couper le push natif** en urgence : vider `FCM_SERVICE_ACCOUNT_JSON` sur Render (les rappels locaux de l'app et le Web Push continuent).
+
 ---
 
 ## 5. Opérateurs (rôle `OPERATOR`)
@@ -324,7 +348,7 @@ Voir §3.4.
 
 ### 6.4 Comptes inactifs
 
-**Comptes (avec e-mail)** : aucune purge automatique. Une durée de conservation reste à décider (et à inscrire dans la politique de confidentialité). La suppression de compte est une action de l'utilisateur dans l'application.
+**Comptes (avec e-mail)** : aucune purge automatique. La suppression de compte est une action de l'utilisateur dans l'application ; les comptes inactifs depuis plus de 36 mois suivent la procédure manuelle avec préavis du §6.5.
 
 **Invités (mode « Essayer sans compte »)** : purge automatique.
 
@@ -335,7 +359,95 @@ Voir §3.4.
 - Contrôle : `SELECT count(*) FILTER (WHERE "isGuest") AS invites, count(*) FILTER (WHERE "isGuest" AND "lastActiveAt" < now() - interval '90 days') AS a_purger FROM "User";`
 - Création d'invités limitée à 5 par heure et par IP (`GuestCreationRateLimitGuard`). Une hausse anormale du nombre d'invités se voit avec la requête ci-dessus ; la purge borne leur durée de vie.
 
-Registre des traitements (à reporter dans `docs/legal/registre-traitements.md` quand il existera, cf. W2-08) : traitement « mode invité » — données : animaux et carnet saisis, jetons de session (empreintes), agent utilisateur, abonnements push ; aucune donnée d'identification directe ; base légale : exécution du service demandé ; conservation : jusqu'à la conversion en compte, la suppression par l'utilisateur ou `GUEST_RETENTION_DAYS` jours d'inactivité.
+Registre des traitements : traitement T2 « mode invité » de [`docs/legal/registre-traitements.md`](legal/registre-traitements.md).
+
+### 6.5 Purge et rétention
+
+Les durées ci-dessous sont celles du registre des traitements ([`docs/legal/registre-traitements.md`](legal/registre-traitements.md), §4) et de la politique de confidentialité. Toute modification se reporte aux trois endroits.
+
+**Job de maintenance** (`backend/src/maintenance/`, `MaintenanceService`) : tous les jours à **03:41 UTC**, sous verrou consultatif de transaction `4731202612` (une seule instance travaille ; compatible PgBouncer). Il supprime, par lots de 1 000 lignes et au plus 50 000 lignes par table et par exécution (le reste part le lendemain) :
+
+| Table | Lignes supprimées |
+|---|---|
+| `PasswordResetToken` | expirées (validité 1 h) |
+| `EmailVerificationToken` | expirées ou invalidées par un nouvel envoi (validité 24 h) |
+| `RefreshToken` | expirées **ou** révoquées depuis plus de **30 jours**, tous comptes confondus |
+| `NotificationEvent` | date prévue (`scheduledAt`) antérieure à **90 jours** |
+| `DeviceToken` | jetons de push natif que l'app n'a pas réenregistrés (`lastSeenAt`) depuis **270 jours** (W6-07) |
+| `CommunityModerationAction` | décisions de modération de plus de **365 jours** (journal DSA) |
+| `CommunityReport` | signalements **traités** (`ACTIONED` / `DISMISSED`) de plus de **365 jours** ; jamais les signalements ouverts |
+| `CommunityMedia` | images orphelines (ni publication ni avatar) dont le propriétaire est supprimé ou téléversées depuis plus de **24 h** : **fichier effacé du stockage** puis ligne supprimée (1 000 au plus par exécution ; un échec de suppression du fichier garde la ligne, reprise le lendemain) |
+
+- **Jamais purgé** : `PaymentEvent` (journal des notifications de paiement RevenueCat : obligations comptables et preuve des transactions ; `userId` passe à NULL à la suppression du compte). Sa durée de conservation reste à fixer par le propriétaire (registre, T6).
+- Aucun compte n'est supprimé par ce job. Les invités relèvent de `GuestPurgeService` (§6.4, 03:17 UTC).
+- `User.calendarToken` (flux ICS) n'expire pas : rien à purger (il est remplacé à la régénération).
+- Journal : une ligne par exécution, par exemple `Maintenance : 3 jeton(s) de réinitialisation, 1 jeton(s) de vérification d'e-mail, 42 refresh token(s), 812 événement(s) de rappel supprimé(s) en 95 ms.` Si une autre instance détient le verrou : `Maintenance : verrou détenu par une autre instance, exécution ignorée.` ; en cas d'erreur : `Maintenance en échec : …` (rien n'est supprimé, la transaction est annulée).
+- **Suspendre** : `MAINTENANCE_ENABLED=false` dans Render (incident, enquête sur des sessions : conserver les refresh tokens révoqués), puis redéployer. Remettre la variable à vide ou `true` ensuite. Le job est toujours inactif sous `NODE_ENV=test`.
+- **Contrôle** (lecture seule) :
+
+```sql
+SELECT
+  (SELECT count(*) FROM "PasswordResetToken"     WHERE "expiresAt" < now())                       AS reset_a_purger,
+  (SELECT count(*) FROM "EmailVerificationToken" WHERE "expiresAt" < now())                       AS verif_a_purger,
+  (SELECT count(*) FROM "RefreshToken"
+     WHERE "expiresAt" < now() - interval '30 days' OR "revokedAt" < now() - interval '30 days')  AS refresh_a_purger,
+  (SELECT count(*) FROM "NotificationEvent"      WHERE "scheduledAt" < now() - interval '90 days') AS rappels_a_purger;
+```
+
+Après une exécution, ces compteurs doivent être nuls (sauf arriéré de plus de 50 000 lignes, résorbé les jours suivants). Des compteurs qui grossissent de jour en jour signalent un job suspendu ou en échec : chercher `Maintenance` dans les journaux Render.
+
+**Mesure d'usage de l'API** (`/analytics`, opérateurs, chargée seulement si `REDIS_ENABLED=true`) : `POST /analytics/track` n'accepte plus de `userId` en query (400) ; l'utilisateur est celui du JWT et n'est stocké que sous forme de pseudonyme ; les clés journalières Redis expirent après 90 jours.
+
+**Comptes inactifs depuis plus de 36 mois** : aucune suppression automatique. Procédure manuelle, au plus une fois par an `[À COMPLÉTER : fréquence]` :
+
+1. Lister (lecture seule) :
+
+   ```sql
+   SELECT u.id, u.email, u."lastActiveAt"
+     FROM "User" u
+    WHERE NOT u."isGuest"
+      AND u.role = 'USER'
+      AND u."lastActiveAt" < now() - interval '36 months'
+      AND NOT EXISTS (
+        SELECT 1 FROM "Subscription" s
+         WHERE s."userId" = u.id AND s."currentPeriodEnd" > now()
+      )
+    ORDER BY u."lastActiveAt";
+   ```
+
+2. Envoyer à chaque adresse un **préavis** par e-mail : suppression dans `[À COMPLÉTER : 30]` jours sauf connexion, avec le lien de connexion et le rappel de l'export des données (page `/parametres/compte`). Conserver la liste des destinataires et la date d'envoi.
+3. À l'échéance, relancer la requête : seuls les comptes **toujours** inactifs (une connexion met à jour `lastActiveAt`) sont supprimés, un par un, dans une transaction :
+
+   ```sql
+   BEGIN;
+   DELETE FROM "User" WHERE id = '<id>' AND "lastActiveAt" < now() - interval '36 months';
+   COMMIT;
+   ```
+
+   Les clés étrangères suppriment en cascade animaux, carnet, rappels, sessions, abonnements et contenus communautaires ; `PaymentEvent.userId` et `CommunityModerationAction.subjectId` passent à NULL. Les images communautaires du compte deviennent orphelines (`ownerId` NULL) : le job de maintenance efface leurs fichiers à l'exécution suivante.
+4. Consigner la date et le nombre de comptes supprimés (sans les adresses). Les données disparaissent des sauvegardes au bout de 30 jours.
+
+### 6.6 Seed du catalogue : idempotence et nettoyage d'une base ancienne
+
+Le seed de production (`backend/prisma/seed-prod.ts`, `npx prisma db seed`, workflow « Seed production ») peut être relancé sans créer de doublons : données éditoriales (`SpeciesProfile`, `SpeciesFeeding`…) en upsert par clés naturelles, magasins d'affiliation (`AffiliateStore`) en upsert par nom, aucun `deleteMany` (les données ajoutées à la main sont préservées). Il ne nettoie donc pas ce qu'un ancien seed a laissé ; pour une base seedée **avant le 2026-10-02**, à exécuter une fois (URL directe, après contrôle par un `SELECT count(*)` équivalent) :
+
+- **Magasins factices** (URL `example-*`, retirés du seed, W0-05) :
+
+  ```sql
+  DELETE FROM "AffiliateStore" WHERE url LIKE '%example-%';
+  ```
+
+- **Entrées non animales du catalogue de races** : 85 entrées de `breeds-data.json` (identifiants 2000000451 à 2000000533, plus 2000000608 et 2000001172 : outils, objets et identifiants Wikidata non résolus, classés « Chat » par erreur). Elles sont listées dans `backend/prisma/enrichment/excluded-breed-ids.json` et ne sont plus importées. À supprimer seulement si aucun animal d'utilisateur ne les référence :
+
+  ```sql
+  DELETE FROM "SpeciesFeeding"       WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesHabitat"       WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesBehavior"      WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesHealthContent" WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesLegislation"   WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesReproduction"  WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  DELETE FROM "SpeciesProfile"       WHERE "speciesId" BETWEEN 2000000451 AND 2000000533 OR "speciesId" IN (2000000608, 2000001172);
+  ```
 
 ---
 
@@ -377,6 +489,54 @@ Pas de délai de réponse garanti connu pour les offres gratuites : voir les con
 
 ---
 
+## 9. Modération de la communauté
+
+Volet désactivé tant que `COMMUNITY_ENABLED` n'est pas à `true` (toutes les routes `/community/*` répondent 404). Avant l'ouverture : point de contact (`COMMUNITY_CONTACT_EMAIL`), règles de communauté publiées (version `COMMUNITY_RULES_VERSION`, `backend/src/community/community.constants.ts`), au moins un opérateur (§5) et le stockage R2 (`docs/DEPLOY.md`).
+
+### 9.1 Principes (règlement européen sur les services numériques, DSA)
+
+- **Signalement** (art. 16) : tout compte connecté, invité compris, motif dans une liste fermée (`SPAM`, `HARASSMENT`, `HATE`, `VIOLENCE`, `ANIMAL_WELFARE`, `ILLEGAL_TRADE`, `DANGEROUS_ADVICE`, `NUDITY`, `PERSONAL_DATA`, `IMPERSONATION`, `OTHER`), précisions facultatives ; un signalement par compte et par contenu. Chaque signalement entre dans la file des opérateurs.
+- **Masquage automatique** : au-delà de `COMMUNITY_HIDE_THRESHOLD` signalements distincts ouverts (défaut 3) **émis par des membres établis** — compte non invité, e-mail vérifié, profil communautaire actif, compte d'au moins `COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS` jours (défaut 7) —, le contenu passe en `HIDDEN_AUTO` et l'auteur est notifié (décision automatisée signalée comme telle). Les signalements des invités et des comptes récents ne masquent jamais rien : ils attendent un opérateur. Un contenu déjà examiné par un opérateur (rétabli ou classé) n'est plus masqué automatiquement : seuls les opérateurs décident.
+- **Information des auteurs de signalements** (art. 16(5)) : à la clôture d'un signalement (masquage, suppression, rétablissement, classement), son auteur reçoit un e-mail (compte avec adresse) et retrouve le statut et la décision dans l'application (`GET /community/me/reports`, invités compris).
+- **Exposé des motifs** (art. 17) : toute décision défavorable (masquage, suppression, suspension) porte un motif de la liste et une explication rédigée ; l'auteur la reçoit par e-mail et la retrouve dans l'application (`GET /community/me/decisions`), avec le point de contact, le recours interne et la mention du règlement extrajudiciaire (art. 21) et de la voie judiciaire.
+- **Recours interne** (art. 20) : gratuit, pendant 6 mois, une fois par décision ; il est toujours tranché par un opérateur (jamais automatiquement). Une décision dont le recours est en attente n'est jamais purgée.
+- **Journal** : chaque décision (y compris automatique, classement, rétablissement, issue d'un recours) est consignée dans `CommunityModerationAction`, conservée 365 jours (§6.5), sans lien vers un compte supprimé.
+- **Suspension** : portée par le compte (`User.communitySuspendedUntil`), pas par le profil. Un membre suspendu peut quitter la communauté (droit de partir) ; il ne peut pas réactiver de profil avant la fin de la suspension (403 `COMMUNITY_SUSPENDED`).
+- **Pseudos** : un pseudo abandonné (changement, départ, suppression du compte) reste réservé 60 jours à son ancien titulaire (`CommunityHandleHold`, anti-usurpation) ; les sosies des mots réservés (« adm1n », « m0derateur », « Captlvia ») sont refusés.
+
+### 9.2 Traiter la file (opérateur, e-mail vérifié)
+
+Toutes les routes sont sous `/community/moderation` (jeton d'un compte `OPERATOR`) :
+
+1. **Lire la file** : `GET queue` (contenus avec signalements ouverts, du plus ancien au plus récent : motifs, nombre, précisions, pseudo de l'auteur — jamais son e-mail), `GET hidden` (contenus masqués), `GET appeals` (recours en attente), `GET log` (journal).
+2. **Décider**, pour une publication (`posts/:id`) ou un commentaire (`comments/:id`) :
+   - `POST …/hide` `{ "reason": "<MOTIF>", "statement": "<explication ≥ 10 caractères>" }` : masque, clôt les signalements, notifie l'auteur ;
+   - `POST …/delete` (même corps) : supprime définitivement (images effacées du stockage), notifie l'auteur. Réserver aux contenus manifestement illicites ou graves : une suppression ne peut pas être annulée par un recours ;
+   - `POST …/restore` `{ "statement": "…" }` : rétablit un contenu masqué (notifie l'auteur) et le protège du masquage automatique ;
+   - `POST …/dismiss` `{ "statement": "…" }` : classe les signalements sans suite (aucune notification à l'auteur).
+3. **Suspendre** un membre qui récidive : `POST users/:pseudo/suspend` `{ "reason", "statement", "days": 1-365 }` ; il garde la lecture et les « j'aime » mais ne peut plus publier, commenter ni changer de pseudo ou d'avatar. Lever : `POST users/:pseudo/unsuspend` `{ "statement" }`.
+4. **Recours** : `POST appeals/:id/resolve` `{ "outcome": "UPHELD" | "REVERSED", "statement" }`. `REVERSED` rétablit le contenu masqué ou lève la suspension ; l'auteur reçoit la réponse.
+5. **Contenus manifestement illicites** (maltraitance, trafic d'espèces protégées, menaces) : supprimer, suspendre, puis conserver hors ligne les éléments utiles et signaler aux autorités (PHAROS en France) `[À COMPLÉTER : procédure et contact du propriétaire]`.
+
+Délai cible de traitement : `[À COMPLÉTER : par ex. 48 h ouvrées pour la file, 7 jours pour un recours]`. Contrôle rapide (lecture seule) :
+
+```sql
+SELECT count(*) FILTER (WHERE status = 'OPEN') AS signalements_ouverts,
+       min("createdAt") FILTER (WHERE status = 'OPEN') AS plus_ancien
+  FROM "CommunityReport";
+SELECT count(*) AS recours_en_attente FROM "CommunityModerationAction" WHERE "appealStatus" = 'PENDING';
+```
+
+### 9.3 Incidents
+
+- **Vague de spam** : baisser `COMMUNITY_POSTS_PER_HOUR` / `COMMUNITY_COMMENTS_PER_MINUTE` (Render, redéploiement), traiter la file, suspendre les comptes concernés. **Ne pas baisser `COMMUNITY_HIDE_THRESHOLD`** : un seuil bas permet à quelques comptes coordonnés de masquer n'importe quel contenu (abus des signalements) ; le seuil ne se relève qu'avec `COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS` (plus d'ancienneté exigée), jamais l'inverse. En dernier recours, `COMMUNITY_ENABLED=false` ferme tout le volet (404) sans perte de données.
+- **Campagne de signalements abusifs** (un contenu légitime masqué automatiquement) : `POST …/restore` (le contenu est protégé du masquage automatique), puis examiner les comptes signalants dans `GET queue` (précisions) et les suspendre si besoin.
+- **Image illicite** : `POST posts/:id/delete` efface le fichier du stockage ; l'URL publique répond ensuite 404. Les images sont servies avec `Cache-Control: public, max-age=86400` (24 h au plus dans les caches) : **purger l'URL dans le cache CDN Cloudflare** (Caching → Configuration → Custom Purge → URL) pour un retrait immédiat.
+- **Contenu masqué (pilote `s3`)** : le masquage retire le contenu des fils et de l'API, et l'image ne s'affiche plus dans l'application, mais l'objet reste dans le bucket sous sa clé aléatoire (non devinable, connue des seuls lecteurs antérieurs) et dans les caches jusqu'à 24 h. Pour un contenu illicite ou sensible, préférer `POST …/delete` (objet supprimé) puis purger l'URL dans Cloudflare. Avec le pilote `local`, l'image d'un contenu masqué répond 404 (sauf à son auteur et aux opérateurs authentifiés).
+- **Notification non reçue** (e-mail) : la décision reste consultable dans l'application (`GET /community/me/decisions`, `GET /community/me/reports`). Un envoi en échec est relancé chaque nuit par le job de maintenance pendant 7 jours (`notificationPending` vrai dans `CommunityModerationAction`, `notifiedAt` vide dans `CommunityReport`).
+
+---
+
 ## Annexe : variables d'environnement
 
 Aucune valeur secrète n'est notée ici. Sources : `render.yaml`, `netlify.toml` et le schéma Joi (`backend/src/config/env.validation.ts`).
@@ -404,9 +564,18 @@ Aucune valeur secrète n'est notée ici. Sources : `render.yaml`, `netlify.toml`
 | `GOOGLE_PLAY_PACKAGE_NAME` | Dashboard (`sync: false`) | Lien « Gérer mon abonnement » Google Play |
 | `MAIL_HOST`, `MAIL_PORT`, `MAIL_SECURE`, `MAIL_USER`, `MAIL_PASS`, `MAIL_FROM` | Dashboard (`sync: false`) | SMTP ; sans `MAIL_HOST`, aucun e-mail n'est envoyé |
 | `REMINDERS_ENABLED` | Dashboard (`sync: false`) | `false` désactive le scheduler de rappels |
+| `GUEST_RETENTION_DAYS` | Dashboard (`sync: false`) | Jours d'inactivité avant purge d'un invité (défaut 90) ; `GUEST_PURGE_ENABLED=false` (schéma Joi) suspend cette purge |
+| `MAINTENANCE_ENABLED` | Dashboard (`sync: false`) | `false` suspend le job de maintenance quotidien (§6.5) |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Dashboard (`sync: false`) | Web Push ; sans elles, l'envoi push est désactivé (journalisé) |
+| `FCM_SERVICE_ACCOUNT_JSON`, `FCM_PROJECT_ID` | Dashboard (`sync: false`) | Push natif de l'app (FCM, iOS via APNs) : clé du compte de service Firebase en base64 ; sans elle, push natif désactivé (journal info). Rotation : §4.7 |
+| `COMMUNITY_ENABLED` | Dashboard (`sync: false`) | Défaut `false` : routes `/community/*` en 404 ; `true` exige `MEDIA_DRIVER=s3` en production (§9) |
+| `COMMUNITY_CONTACT_EMAIL` | Dashboard (`sync: false`) | Point de contact DSA cité dans les notifications de modération |
+| `COMMUNITY_HIDE_THRESHOLD`, `COMMUNITY_POSTS_PER_HOUR`, `COMMUNITY_COMMENTS_PER_MINUTE`, `COMMUNITY_UPLOADS_PER_HOUR` | Dashboard (`sync: false`) | Défauts 3, 5, 5, 30 (ne pas baisser le seuil de masquage : §9.3) |
+| `COMMUNITY_REPORT_MIN_ACCOUNT_AGE_DAYS` | Dashboard (`sync: false`) | Défaut 7 : ancienneté minimale du compte pour qu'un signalement compte dans le seuil de masquage |
+| `MEDIA_DRIVER`, `MEDIA_MAX_BYTES`, `MEDIA_BUCKET`, `MEDIA_PUBLIC_BASE_URL` | Dashboard (`sync: false`) | Stockage des images (R2) : `docs/DEPLOY.md` |
+| `S3_ENDPOINT`, `S3_REGION`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_FORCE_PATH_STYLE` | Dashboard (`sync: false`) | Identifiants R2 (secret : jeton limité au bucket) |
 
-Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `REDIS_HOST` (défaut `localhost`), `REDIS_PORT` (défaut 6379).
+Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `REDIS_HOST` (défaut `localhost`), `REDIS_PORT` (défaut 6379), `MEDIA_LOCAL_DIR` (pilote local, développement).
 
 ### Frontend (Netlify)
 
@@ -416,6 +585,8 @@ Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `RED
 | `NODE_VERSION`, `NEXT_TELEMETRY_DISABLED` | `netlify.toml` | |
 | `NEXT_PUBLIC_API_URL` | Netlify → *Site configuration* → *Environment variables* | URL de l'API Render ; lue au build |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify → *Environment variables* | Facultative ; lue au build |
+| `NEXT_PUBLIC_COMMUNITY_ENABLED` | Netlify → *Environment variables* | `false` : communauté coupée au build ; `true` : lien depuis la landing ; absente : détection par l'API (404 = fermée). Lue au build |
+| `NEXT_PUBLIC_MEDIA_BASE_URL` | Netlify → *Environment variables* | Domaine public des images de la communauté (= `MEDIA_PUBLIC_BASE_URL`), ajouté à la CSP `img-src`. Lue au build |
 
 ### GitHub (Actions)
 
@@ -424,7 +595,9 @@ Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `RED
 | `NEON_DATABASE_URL_DIRECT` | Secret | URL Neon directe : migrations, seed, sauvegarde |
 | `BACKUP_AGE_RECIPIENT` | Secret | Clé publique age (`age1…`) : chiffrement des sauvegardes |
 | `API_URL` | Variable | `keep-warm.yml` (déclenchement manuel) |
+| `GOOGLE_SERVICES_JSON_BASE64` | Secret (facultatif) | `mobile.yml` : `google-services.json` de l'app Android (push natif, W6-07) ; sans lui, APK / AAB sans push |
+| `NATIVE_PUSH` | Variable (facultative) | `1` → `NEXT_PUBLIC_NATIVE_PUSH` : l'app enregistre son jeton push ; exige le secret ci-dessus (sinon `mobile.yml` échoue) |
 
 ---
 
-*Mis à jour : 2026-10-02*
+*Mis à jour : 2026-10-03*

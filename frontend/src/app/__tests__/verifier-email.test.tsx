@@ -24,7 +24,7 @@ jest.mock('@/contexts/AuthContext', () => ({
   useAuth: () => ({ user: sessionUser, token: 'access-1', setUser }),
 }));
 
-import VerifyEmailPage from '../[locale]/verifier-email/page';
+import VerifyEmailPage from '../[locale]/(auth)/verifier-email/page';
 
 /** Revue frontend, constat 12 : le profil est rechargé, `emailVerified` n'est jamais forcé. */
 describe('verifier-email page', () => {
