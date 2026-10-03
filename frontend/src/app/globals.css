@@ -9,8 +9,8 @@
  *   2. Pont Tailwind 4 — jetons sémantiques exposés en utilitaires (bg-paper, text-ink…)
  *   3. Palette héritée — gray / emerald / red… remappées sur la palette du carnet
  *   4. @layer base — typographie, champs de formulaire, focus, liens, impression
- *   5. @layer components — en-tête, pied de page, classes `captivia-*` de la vitrine et des écrans d'auth
- *   6. @layer utilities (fin) — pont « mode sombre » pour les pages pas encore migrées
+ *   5. @layer components — en-tête, pied de page, classes `captivia-*` de la vitrine, texture papier (`cv-texture`)
+ *   6. @layer utilities (fin) — pont « mode sombre » résiduel (fiche espèce, cf. § 6)
  *   7. @layer fields — plancher de contraste des bordures de champ (≥ 3:1), après les utilitaires
  */
 
@@ -2072,55 +2072,21 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* 6. Pont « mode sombre » des pages pas encore migrées (à supprimer au lot 4). */
-/*    Une classe de texte prévue pour un fond clair (`text-gray-700`, `text-emerald-600`…) */
-/*    sans variante `dark:text-*` et posée sur un fond sombre devient illisible en sombre. */
-/*    On lui substitue l'encre sombre équivalente, sauf si l'élément porte son propre fond */
-/*    clair (`bg-*` sans `dark:bg-*`). Spécificité : celle de la classe d'origine, donc les */
-/*    variantes `hover:` gardent la main. Les nouveaux composants n'en dépendent pas.        */
+/* 6. Pont « mode sombre » résiduel (réduit au lot 4).                          */
+/*    Agenda, paramètres, abonnement, magasin et écrans de compte sont migrés :  */
+/*    il ne reste qu'une classe de texte prévue pour un fond clair et posée sans */
+/*    `dark:text-*` : `text-emerald-600`, sur les liens de la fiche espèce       */
+/*    (`species/[id]`, hors lot 4). On lui substitue l'accent sombre, sauf si    */
+/*    l'élément porte son propre fond clair (`bg-*` sans `dark:bg-*`).           */
+/*    À supprimer avec la migration de la fiche espèce (DESIGN.md § 8 et § 11).  */
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
   @media (prefers-color-scheme: dark) {
-    :is(.text-gray-500, .text-gray-600):where(
-        :not([class*='dark:text-'], [class^='bg-']:not([class*='dark:bg-']), [class*=' bg-']:not([class*='dark:bg-']))
-      ) {
-      color: var(--color-gray-400);
-    }
-    :is(.text-gray-700):where(
-        :not([class*='dark:text-'], [class^='bg-']:not([class*='dark:bg-']), [class*=' bg-']:not([class*='dark:bg-']))
-      ) {
-      color: var(--color-gray-300);
-    }
-    :is(.text-gray-800, .text-gray-900, .text-black):where(
-        :not([class*='dark:text-'], [class^='bg-']:not([class*='dark:bg-']), [class*=' bg-']:not([class*='dark:bg-']))
-      ) {
-      color: var(--ink);
-    }
-    :is(.text-emerald-600, .text-emerald-700, .text-emerald-800, .text-teal-600, .text-teal-700):where(
+    :is(.text-emerald-600):where(
         :not([class*='dark:text-'], [class^='bg-']:not([class*='dark:bg-']), [class*=' bg-']:not([class*='dark:bg-']))
       ) {
       color: var(--accent-text);
-    }
-    :is(.text-green-600, .text-green-700, .text-green-800):where(
-        :not([class*='dark:text-'], [class^='bg-']:not([class*='dark:bg-']), [class*=' bg-']:not([class*='dark:bg-']))
-      ) {
-      color: var(--ok);
-    }
-    :is(.text-red-500, .text-red-600, .text-red-700, .text-red-800):where(
-        :not([class*='dark:text-'], [class^='bg-']:not([class*='dark:bg-']), [class*=' bg-']:not([class*='dark:bg-']))
-      ) {
-      color: var(--danger);
-    }
-    :is(.text-amber-600, .text-amber-700, .text-amber-800, .text-yellow-700, .text-yellow-800, .text-orange-600, .text-orange-700):where(
-        :not([class*='dark:text-'], [class^='bg-']:not([class*='dark:bg-']), [class*=' bg-']:not([class*='dark:bg-']))
-      ) {
-      color: var(--warn);
-    }
-    :is(.text-blue-600, .text-blue-700, .text-blue-800, .text-sky-700):where(
-        :not([class*='dark:text-'], [class^='bg-']:not([class*='dark:bg-']), [class*=' bg-']:not([class*='dark:bg-']))
-      ) {
-      color: var(--info);
     }
   }
 
