@@ -1,5 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
-import axios, { AxiosInstance } from 'axios';
+import { describeHttpError } from '../http-safety';
+import { ExternalHttpService } from '../http/external-http.service';
+import { isUpstreamNotFound } from '../http/external-errors';
 
 /**
  * Wikipedia API Service for fetching species information from Wikipedia
@@ -8,27 +10,10 @@ import axios, { AxiosInstance } from 'axios';
 @Injectable()
 export class WikipediaService {
   private readonly logger = new Logger(WikipediaService.name);
-  private readonly wikipediaApi: AxiosInstance;
-  private readonly wikipediaSearchApi: AxiosInstance;
   private readonly wikipediaBaseUrl = 'https://en.wikipedia.org/api/rest_v1';
+  private readonly wikipediaSearchUrl = 'https://en.wikipedia.org/w/api.php';
 
-  constructor() {
-    this.wikipediaApi = axios.create({
-      baseURL: this.wikipediaBaseUrl,
-      headers: {
-        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
-      },
-      timeout: 10000,
-    });
-
-    this.wikipediaSearchApi = axios.create({
-      baseURL: 'https://en.wikipedia.org/w/api.php',
-      headers: {
-        'User-Agent': 'Captivia/1.0 (https://captivia.com)',
-      },
-      timeout: 10000,
-    });
-  }
+  constructor(private readonly http: ExternalHttpService) {}
 
   /**
    * Search Wikipedia for a species by name
@@ -37,7 +22,7 @@ export class WikipediaService {
    */
   async searchSpecies(query: string) {
     try {
-      const response = await this.wikipediaSearchApi.get('', {
+      const response = await this.http.get('wikipedia', this.wikipediaSearchUrl, {
         params: {
           action: 'query',
           list: 'search',
@@ -49,10 +34,10 @@ export class WikipediaService {
 
       return this.transformSearchResult(response.data);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikipedia search failed', error);
+      this.logger.error(`Wikipedia search failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -64,7 +49,10 @@ export class WikipediaService {
    */
   async getArticle(title: string) {
     try {
-      const response = await this.wikipediaApi.get(`/page/summary/${encodeURIComponent(title)}`);
+      const response = await this.http.get(
+        'wikipedia',
+        `${this.wikipediaBaseUrl}/page/summary/${encodeURIComponent(title)}`,
+      );
 
       if (!response.data) {
         return null;
@@ -72,10 +60,10 @@ export class WikipediaService {
 
       return this.transformArticle(response.data);
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikipedia article fetch failed', error);
+      this.logger.error(`Wikipedia article fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -87,7 +75,7 @@ export class WikipediaService {
    */
   async getExtract(title: string) {
     try {
-      const response = await this.wikipediaSearchApi.get('', {
+      const response = await this.http.get('wikipedia', this.wikipediaSearchUrl, {
         params: {
           action: 'query',
           prop: 'extracts',
@@ -116,10 +104,10 @@ export class WikipediaService {
         source: 'wikipedia',
       };
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikipedia extract fetch failed', error);
+      this.logger.error(`Wikipedia extract fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -131,7 +119,7 @@ export class WikipediaService {
    */
   async getPage(title: string) {
     try {
-      const response = await this.wikipediaSearchApi.get('', {
+      const response = await this.http.get('wikipedia', this.wikipediaSearchUrl, {
         params: {
           action: 'parse',
           page: title,
@@ -152,10 +140,10 @@ export class WikipediaService {
         source: 'wikipedia',
       };
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikipedia page fetch failed', error);
+      this.logger.error(`Wikipedia page fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -167,7 +155,7 @@ export class WikipediaService {
    */
   async getImages(title: string) {
     try {
-      const response = await this.wikipediaApi.get('/page/coordinates', {
+      const response = await this.http.get('wikipedia', `${this.wikipediaBaseUrl}/page/coordinates`, {
         params: {
           titles: title,
           format: 'json',
@@ -187,10 +175,10 @@ export class WikipediaService {
         source: 'wikipedia',
       };
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (isUpstreamNotFound(error)) {
         return null;
       }
-      this.logger.error('Wikipedia images fetch failed', error);
+      this.logger.error(`Wikipedia images fetch failed: ${describeHttpError(error)}`);
       throw error;
     }
   }
@@ -200,23 +188,25 @@ export class WikipediaService {
    * @returns Health status
    */
   async checkApiHealth() {
+    const started = Date.now();
     try {
-      const response = await this.wikipediaApi.get('/page/summary', {
-        params: {
-          titles: 'Panthera leo',
-          format: 'json',
-        },
-        timeout: 5000,
-      });
+      // Titre réel : « /page/summary » sans titre renvoie toujours 404 (faux « unhealthy »).
+      await this.http.get(
+        'wikipedia',
+        `${this.wikipediaBaseUrl}/page/summary/Panthera_leo`,
+        { retry: false },
+      );
       return {
         status: 'healthy',
-        responseTime: response.headers['request-duration'] || 'unknown',
+        responseTime: `${Date.now() - started}ms`,
+        circuit: this.http.circuitState('wikipedia'),
       };
     } catch (error) {
-      this.logger.error('Wikipedia API health check failed', error);
+      this.logger.warn(`Wikipedia API health check failed: ${describeHttpError(error)}`);
       return {
         status: 'unhealthy',
-        error: error.message,
+        error: error instanceof Error ? error.message : 'unknown error',
+        circuit: this.http.circuitState('wikipedia'),
       };
     }
   }

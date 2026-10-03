@@ -1,5 +1,6 @@
 export const mockCacheService = {
   get: jest.fn(),
+  getStale: jest.fn(),
   set: jest.fn(),
   has: jest.fn(),
   clear: jest.fn(),

@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import {
   CACHE_MAX_ENTRIES,
+  CACHE_STALE_GRACE_SECONDS,
   CACHE_MAX_KEY_LENGTH,
   CacheService,
   normalizeCacheKey,
@@ -115,6 +116,41 @@ describe('CacheService', () => {
 
       const result = service.has('test-key');
       expect(result).toBe(false);
+    });
+  });
+
+  describe('getStale (repli quand un fournisseur externe est en panne)', () => {
+    it('renvoie la valeur fraîche comme `get`', () => {
+      service.set('k', { v: 1 }, 60);
+      expect(service.getStale('k')).toEqual({ v: 1 });
+    });
+
+    it('renvoie la valeur EXPIRÉE pendant la période de grâce, alors que `get` renvoie null', () => {
+      service.set('k', { v: 1 }, 60);
+      const base = Date.now();
+      jest.spyOn(Date, 'now').mockReturnValue(base + 3600 * 1000); // TTL dépassé de 59 min
+
+      expect(service.get('k')).toBeNull();
+      expect(service.has('k')).toBe(false);
+      expect(service.getStale('k')).toEqual({ v: 1 });
+    });
+
+    it('ne renvoie plus rien après la période de grâce (7 jours)', () => {
+      service.set('k', { v: 1 }, 60);
+      const base = Date.now();
+      jest
+        .spyOn(Date, 'now')
+        .mockReturnValue(base + (CACHE_STALE_GRACE_SECONDS + 61) * 1000);
+
+      expect(service.getStale('k')).toBeNull();
+      expect(service.get('k')).toBeNull();
+    });
+
+    it('une clé absente ou supprimée (clearKey) n\'a pas de valeur périmée', () => {
+      expect(service.getStale('absent')).toBeNull();
+      service.set('k', { v: 1 }, 60);
+      service.clearKey('k');
+      expect(service.getStale('k')).toBeNull();
     });
   });
 

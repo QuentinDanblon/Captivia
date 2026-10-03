@@ -8,7 +8,7 @@ describe('Performance Tests', () => {
 
   beforeAll(async () => {
     // Serveur à l'écoute sur un port éphémère (cf. test/utils/create-app.ts, BE-10).
-    ({ app, url } = await createTestApp({ offlineGbif: true }));
+    ({ app, url } = await createTestApp());
   });
 
   afterAll(async () => {

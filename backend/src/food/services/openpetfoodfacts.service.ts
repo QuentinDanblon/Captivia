@@ -1,11 +1,24 @@
 import { Injectable, Logger } from '@nestjs/common';
-import axios from 'axios';
 import { CacheService } from '../../cache/cache.service';
 import {
-  EXTERNAL_REQUEST_DEFAULTS,
   describeHttpError,
   isValidBarcode,
 } from '../../external/http-safety';
+import { ExternalHttpService } from '../../external/http/external-http.service';
+import {
+  isUpstreamNotFound,
+  upstreamUnavailable,
+} from '../../external/http/external-errors';
+
+export interface PetFoodSearchResult {
+  products: PetFoodProduct[];
+  count: number;
+  page: number;
+  /** Réponse servie depuis un cache périmé (fournisseur indisponible). */
+  stale?: boolean;
+  /** Fournisseur indisponible et aucune donnée connue : résultat vide NON mis en cache. */
+  degraded?: boolean;
+}
 
 interface PetFoodProduct {
   code: string;
@@ -114,7 +127,20 @@ export class OpenPetFoodFactsService {
     'ambystoma mexicanum': ['amphibian food', 'insect food'],
   };
 
-  constructor(private readonly cacheService: CacheService) {}
+  constructor(
+    private readonly cacheService: CacheService,
+    private readonly http: ExternalHttpService,
+  ) {}
+
+  /** Entrée de cache (JSON sérialisé) → objet ; null si absente ou illisible. */
+  private parseCached<T>(raw: unknown): T | null {
+    if (typeof raw !== 'string' || !raw) return null;
+    try {
+      return JSON.parse(raw) as T;
+    } catch {
+      return null;
+    }
+  }
 
   /**
    * Get appropriate search terms for a species
@@ -185,9 +211,9 @@ export class OpenPetFoodFactsService {
     category?: string,
     page = 1,
     pageSize = 20,
-  ): Promise<{ products: PetFoodProduct[]; count: number; page: number }> {
+  ): Promise<PetFoodSearchResult> {
     const cacheKey = `${this.cachePrefix}search:${query}:${category || 'all'}:${page}:${pageSize}`;
-    
+
     // Check cache
     const cached = await this.cacheService.get(cacheKey);
     if (cached) {
@@ -213,18 +239,19 @@ export class OpenPetFoodFactsService {
         params.tag_0 = category;
       }
 
-      const response = await axios.get(
+      const response = await this.http.get(
+        'openpetfoodfacts',
         'https://world.openpetfoodfacts.org/cgi/search.pl',
-        { params, ...EXTERNAL_REQUEST_DEFAULTS },
+        { params },
       );
 
-      const result = {
+      const result: PetFoodSearchResult = {
         products: response.data.products || [],
         count: response.data.count || 0,
         page: response.data.page || 1,
       };
 
-      // Cache for 24 hours
+      // Réponse valide du fournisseur (même « aucun produit ») : cache 24 h.
       await this.cacheService.set(cacheKey, JSON.stringify(result), 86400);
 
       return result;
@@ -232,7 +259,13 @@ export class OpenPetFoodFactsService {
       this.logger.error(
         `Open Pet Food Facts search error: ${describeHttpError(error)}`,
       );
-      return { products: [], count: 0, page: 1 };
+      // Panne : dernière réponse connue (même périmée), sinon résultat vide signalé
+      // `degraded` — dans les deux cas, RIEN n'est écrit en cache.
+      const stale = this.parseCached<PetFoodSearchResult>(
+        this.cacheService.getStale(cacheKey),
+      );
+      if (stale) return { ...stale, stale: true };
+      return { products: [], count: 0, page: 1, degraded: true };
     }
   }
 
@@ -251,13 +284,16 @@ export class OpenPetFoodFactsService {
     }
 
     try {
-      const response = await axios.get(`${this.baseUrl}/product/${barcode}`, {
-        params: {
-          fields:
-            'code,product_name,brands,categories,image_url,ingredients_text,nutrition_grades,allergens,labels,quantity',
+      const response = await this.http.get(
+        'openpetfoodfacts',
+        `${this.baseUrl}/product/${barcode}`,
+        {
+          params: {
+            fields:
+              'code,product_name,brands,categories,image_url,ingredients_text,nutrition_grades,allergens,labels,quantity',
+          },
         },
-        ...EXTERNAL_REQUEST_DEFAULTS,
-      });
+      );
 
       if (response.data.status === 1 && response.data.product) {
         const product = response.data.product;
@@ -270,10 +306,17 @@ export class OpenPetFoodFactsService {
 
       return null;
     } catch (error) {
+      // Produit inconnu (404) : réponse valide, pas une panne.
+      if (isUpstreamNotFound(error)) return null;
       this.logger.error(
         `Open Pet Food Facts product fetch error: ${describeHttpError(error)}`,
       );
-      return null;
+      const stale = this.parseCached<PetFoodProduct>(
+        this.cacheService.getStale(cacheKey),
+      );
+      if (stale) return stale;
+      // Ne pas faire passer une panne pour « produit introuvable » (404).
+      throw upstreamUnavailable('Food database temporarily unavailable');
     }
   }
 
@@ -289,7 +332,8 @@ export class OpenPetFoodFactsService {
     // Try searching with the first search term, fallback to others if needed
     for (const searchTerm of searchTerms) {
       const result = await this.searchProducts(searchTerm);
-      if (result.products.length > 0) {
+      if (result.products.length > 0 || result.degraded) {
+        // Résultat, ou fournisseur en panne : inutile d'enchaîner d'autres appels.
         return result;
       }
     }
@@ -308,9 +352,9 @@ export class OpenPetFoodFactsService {
     }
 
     try {
-      const response = await axios.get(
+      const response = await this.http.get(
+        'openpetfoodfacts',
         'https://world.openpetfoodfacts.org/categories.json',
-        { ...EXTERNAL_REQUEST_DEFAULTS },
       );
 
       const categories =
@@ -324,7 +368,10 @@ export class OpenPetFoodFactsService {
       this.logger.error(
         `Open Pet Food Facts categories error: ${describeHttpError(error)}`,
       );
-      return [];
+      // Repli sur la dernière liste connue ; sinon liste vide NON mise en cache.
+      return (
+        this.parseCached<string[]>(this.cacheService.getStale(cacheKey)) ?? []
+      );
     }
   }
 }

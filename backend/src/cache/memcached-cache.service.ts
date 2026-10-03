@@ -52,6 +52,11 @@ export class MemcachedCacheService {
     });
   }
 
+  /** Pas d'étagère « périmé » avec Memcached (les clés expirées sont supprimées). */
+  getStale(_key: string): unknown {
+    return null;
+  }
+
   set(key: string, data: unknown, ttl: number = this.defaultTTL): void {
     this.connect();
 
