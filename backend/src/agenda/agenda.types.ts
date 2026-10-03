@@ -34,4 +34,9 @@ export interface AgendaResult {
   items: AgendaItem[];
   /** Vrai si la liste a été tronquée à `MAX_AGENDA_ITEMS` (réduire la période). */
   truncated: boolean;
+  /**
+   * Instant (ISO 8601, horloge serveur) pris avant la lecture des sources : l'état des soins
+   * renvoyé est au moins aussi récent. Repris par l'app native comme `localRemindersAsOf`.
+   */
+  generatedAt: string;
 }

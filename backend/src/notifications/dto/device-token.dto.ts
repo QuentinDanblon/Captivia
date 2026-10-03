@@ -14,13 +14,16 @@ import { GUEST_LOCALES } from '../../auth/dto/guest.dto';
 export const DEVICE_PLATFORMS = ['android', 'ios'] as const;
 export type DevicePlatform = (typeof DEVICE_PLATFORMS)[number];
 
-/** Longueur maximale d'un jeton (FCM : ~160 caractères aujourd'hui, marge pour l'évolution). */
-export const DEVICE_TOKEN_MAX_LENGTH = 4096;
+/**
+ * Longueur maximale d'un jeton (FCM : ~160 caractères aujourd'hui, marge ×3 pour l'évolution) :
+ * borne la taille des lignes et des index (CHECK SQL identique). Aussi pour POST /auth/logout.
+ */
+export const DEVICE_TOKEN_MAX_LENGTH = 512;
 /**
  * Jeton d'enregistrement FCM : caractères base64url plus « : » (format `<instance>:<jeton>`),
  * au moins 32 caractères. Refuse espaces, contrôles, chemins et URL.
  */
-export const DEVICE_TOKEN_REGEX = /^[A-Za-z0-9_:-]{32,4096}$/;
+export const DEVICE_TOKEN_REGEX = /^[A-Za-z0-9_:-]{32,512}$/;
 
 export class RegisterDeviceTokenDto {
   @ApiProperty({
@@ -52,6 +55,15 @@ export class RegisterDeviceTokenDto {
   @IsISO8601({ strict: true })
   @MaxLength(40)
   localRemindersUntil?: string | null;
+
+  @ApiPropertyOptional({
+    description:
+      "Instant serveur (`generatedAt` de l'Agenda) de l'état des soins programmés en local. Obligatoire pour qu'une couverture soit retenue : sans lui, `localRemindersUntil` est ignoré (aucune couverture).",
+  })
+  @IsOptional()
+  @IsISO8601({ strict: true })
+  @MaxLength(40)
+  localRemindersAsOf?: string;
 
   @ApiPropertyOptional({
     description:

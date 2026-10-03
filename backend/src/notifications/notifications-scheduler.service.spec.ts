@@ -11,11 +11,11 @@ import {
   NotificationsSchedulerService,
   REMINDERS_LOCK_KEY,
   effectiveChannel,
-  isAgendaSource,
   localDay,
   normalizeChannel,
 } from './notifications-scheduler.service';
 import { PUSH_SENDER, PushReminderPayload } from './push-sender';
+import { NATIVE_PUSH_RUN_BUDGET_MS } from './native-push-sender';
 
 describe('reminder helpers', () => {
   it('computes the local day in the user timezone', () => {
@@ -30,20 +30,6 @@ describe('reminder helpers', () => {
     expect(normalizeChannel('both')).toBe('both');
     expect(normalizeChannel('sms')).toBe('push');
     expect(normalizeChannel(undefined)).toBe('push');
-  });
-
-  it('recognizes the agenda sources also scheduled locally by the app (W6-07)', () => {
-    for (const key of [
-      'routine:1',
-      'medication:2',
-      'appointment:3',
-      'vaccination:4',
-    ]) {
-      expect(isAgendaSource(key)).toBe(true);
-    }
-    for (const key of ['pref:Bain', 'test:1', null, undefined, '']) {
-      expect(isAgendaSource(key)).toBe(false);
-    }
   });
 
   it('falls back to push for an account without e-mail (guest)', () => {
@@ -218,38 +204,86 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
     expect(mailsTo(user.email)).toHaveLength(1);
   });
 
-  it('W6-07 : un rappel d’agenda porte son instant (anti-doublon local), un type personnalisé non', async () => {
-    const user = await createUser('push');
-    const at = new Date(NOW.getTime() - 60_000);
-    await prisma.notificationEvent.createMany({
-      data: [
-        {
-          userId: user.id,
-          type: 'routine',
-          label: 'Brumisation',
-          scheduledAt: at,
-          status: 'pending',
-          sourceKey: `routine:${randomUUID()}`,
-        },
-        {
-          userId: user.id,
-          type: 'Bain',
-          label: 'Bain',
-          scheduledAt: at,
-          status: 'pending',
-          sourceKey: 'pref:Bain',
-        },
-      ],
+  it('W6-07 : seuls les rappels que l’app programme au même instant portent `localReminder` (RDV J-N et 08:00 du jour : jamais)', async () => {
+    const user = await createUser('push', { timezone: 'UTC' });
+    const animal = await prisma.animal.create({
+      data: { userId: user.id, speciesId: 5221172, name: 'Kaa' },
+    });
+    // Tous générés à 08:00 (UTC) le 10/03/2031 ; NOW = 08:03 : tous dus.
+    const routine = await prisma.routine.create({
+      data: {
+        animalId: animal.id,
+        name: 'Brumisation',
+        type: 'entretien',
+        frequency: 'daily',
+        schedule: { time: '08:00', recurrence: 'daily' },
+        createdAt: new Date('2031-03-01T00:00:00Z'),
+      },
+    });
+    const medication = await prisma.medication.create({
+      data: {
+        animalId: animal.id,
+        name: 'Vermifuge',
+        dose: '1',
+        frequency: 'daily',
+        startDate: new Date('2031-03-01T00:00:00Z'),
+      },
+    });
+    // RDV le 13 à 14:00 avec rappel J-3 (aujourd'hui 08:00) ; RDV du jour à 15:00 (08:00).
+    await prisma.vetAppointment.create({
+      data: {
+        animalId: animal.id,
+        vetName: 'Dr Loin',
+        date: new Date('2031-03-13T14:00:00Z'),
+        reminderDays: [3],
+      },
+    });
+    await prisma.vetAppointment.create({
+      data: {
+        animalId: animal.id,
+        vetName: 'Dr Jour',
+        date: new Date('2031-03-10T15:00:00Z'),
+        reminderDays: [],
+      },
+    });
+    // Type personnalisé (préférences) « Bain » à 08:00 : absent de l'Agenda.
+    await prisma.notificationPreference.update({
+      where: { userId: user.id },
+      data: {
+        types: { Bain: true },
+        schedule: { start: '08:00', end: '23:59' },
+      },
     });
 
+    const before = Date.now();
     await scheduler.runOnce(NOW);
     const payloads = pushesTo(user.id).map((c) => c[1]);
-    expect(payloads).toHaveLength(2);
-    const routine = payloads.find((p) => p.title === 'Brumisation');
-    const custom = payloads.find((p) => p.title === 'Bain');
-    expect(routine?.localReminderAt).toEqual(at);
-    expect(custom).toBeDefined();
-    expect(custom).not.toHaveProperty('localReminderAt');
+    const byTitle = (title: string) => payloads.find((p) => p.title === title);
+    expect(payloads).toHaveLength(5);
+
+    const at8 = new Date('2031-03-10T08:00:00Z');
+    expect(byTitle('Brumisation')?.localReminder).toEqual({
+      at: at8,
+      sourceUpdatedAt: routine.updatedAt,
+    });
+    expect(byTitle('💊 Vermifuge (1)')?.localReminder).toEqual({
+      at: at8,
+      sourceUpdatedAt: medication.updatedAt,
+    });
+    // L'app ne programme qu'une notification à l'heure du RDV : J-3 et 08:00 du jour partent.
+    expect(byTitle('🔔 Dr Loin (J-3)')).not.toHaveProperty('localReminder');
+    expect(byTitle('🏥 RDV Dr Jour')).not.toHaveProperty('localReminder');
+    expect(byTitle('Bain')).not.toHaveProperty('localReminder');
+
+    // Échéance du canal natif posée pour toute l'exécution.
+    for (const p of payloads) {
+      expect(p.nativeDeadline).toBeGreaterThanOrEqual(
+        before + NATIVE_PUSH_RUN_BUDGET_MS,
+      );
+      expect(p.nativeDeadline).toBeLessThanOrEqual(
+        Date.now() + NATIVE_PUSH_RUN_BUDGET_MS,
+      );
+    }
   });
 
   it('guest (no e-mail) with channel "both": push only, never an e-mail', async () => {

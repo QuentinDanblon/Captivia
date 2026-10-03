@@ -4,6 +4,7 @@ import type { PrismaService } from '../prisma/prisma.service';
 import { FetchLike, GOOGLE_OAUTH_TOKEN_URL } from './fcm-client';
 import {
   ANDROID_CHANNEL_ID,
+  CONFIG_ERROR_LOG_INTERVAL_MS,
   MAX_TITLE_LENGTH,
   NATIVE_PUSH_KIND,
   NativePushSender,
@@ -33,12 +34,17 @@ type Device = {
   token: string;
   platform: string;
   localRemindersUntil: Date | null;
+  localRemindersAsOf?: Date | null;
 };
 
 function prismaWith(devices: Device[]) {
   const prisma = {
     deviceToken: {
-      findMany: jest.fn().mockResolvedValue(devices),
+      findMany: jest
+        .fn()
+        .mockResolvedValue(
+          devices.map((d) => ({ localRemindersAsOf: null, ...d })),
+        ),
       deleteMany: jest.fn().mockResolvedValue({ count: 1 }),
     },
   };
@@ -181,13 +187,15 @@ describe('NativePushSender', () => {
   it('anti-doublon : un rappel déjà programmé en local sur l’appareil ne lui est pas envoyé', async () => {
     jest.spyOn(Logger.prototype, 'log').mockImplementation();
     const at = new Date(NOW + 60_000);
+    const asOf = new Date(NOW - 3_600_000);
     const { service } = prismaWith([
-      // Rappels programmés jusqu'à dans 30 jours : couvert.
+      // Rappels programmés jusqu'à dans 30 jours, source inchangée depuis : couvert.
       {
         id: 'd1',
         token: 'tok-local',
         platform: 'ios',
         localRemindersUntil: new Date(NOW + 30 * 86_400_000),
+        localRemindersAsOf: asOf,
       },
       // Couverture qui s'arrête avant le soin (limite des 64 rappels) : push envoyé.
       {
@@ -195,6 +203,7 @@ describe('NativePushSender', () => {
         token: 'tok-short',
         platform: 'android',
         localRemindersUntil: new Date(NOW),
+        localRemindersAsOf: asOf,
       },
       // Rappels locaux coupés / inconnus : push envoyé.
       {
@@ -202,6 +211,14 @@ describe('NativePushSender', () => {
         token: 'tok-none',
         platform: 'android',
         localRemindersUntil: null,
+      },
+      // Couverture sans état des soins connu : push envoyé.
+      {
+        id: 'd4',
+        token: 'tok-nostate',
+        platform: 'android',
+        localRemindersUntil: new Date(NOW + 30 * 86_400_000),
+        localRemindersAsOf: null,
       },
     ]);
     const { impl, sent } = fcm({});
@@ -211,16 +228,26 @@ describe('NativePushSender', () => {
       now: () => NOW,
     });
 
-    const res = await sender.deliver('u1', { ...payload, localReminderAt: at });
-    expect(res).toEqual({ sent: 2, failed: 0, removed: 0, covered: 1 });
+    const localReminder = { at, sourceUpdatedAt: new Date(asOf.getTime()) };
+    const res = await sender.deliver('u1', { ...payload, localReminder });
+    expect(res).toEqual({ sent: 3, failed: 0, removed: 0, covered: 1 });
     expect(sent.map((s) => s.message.token).sort()).toEqual([
       'tok-none',
+      'tok-nostate',
       'tok-short',
     ]);
 
-    // Sans `localReminderAt` (type personnalisé, notification de test) : tous les appareils.
+    // Routine modifiée (site web) APRÈS la dernière synchronisation de l'app : push envoyé.
     sent.length = 0;
-    expect((await sender.deliver('u1', payload)).sent).toBe(3);
+    const stale = await sender.deliver('u1', {
+      ...payload,
+      localReminder: { at, sourceUpdatedAt: new Date(asOf.getTime() + 1) },
+    });
+    expect(stale).toEqual({ sent: 4, failed: 0, removed: 0, covered: 0 });
+
+    // Sans `localReminder` (RDV, vaccin, type personnalisé, test) : tous les appareils.
+    sent.length = 0;
+    expect((await sender.deliver('u1', payload)).sent).toBe(4);
   });
 
   it('jeton d’accès refusé : un seul journal d’erreur, rien n’est purgé', async () => {
@@ -246,6 +273,144 @@ describe('NativePushSender', () => {
     });
     expect(error).toHaveBeenCalledTimes(1);
     expect(prisma.deviceToken.deleteMany).not.toHaveBeenCalled();
+  });
+
+  it('SENDER_ID_MISMATCH : erreur de configuration, aucun jeton purgé, journal limité à 1/min', async () => {
+    jest.spyOn(Logger.prototype, 'log').mockImplementation();
+    const error = jest.spyOn(Logger.prototype, 'error').mockImplementation();
+    const mismatch = {
+      status: 403,
+      body: {
+        error: {
+          status: 'PERMISSION_DENIED',
+          details: [
+            {
+              '@type': 'type.googleapis.com/google.firebase.fcm.v1.FcmError',
+              errorCode: 'SENDER_ID_MISMATCH',
+            },
+          ],
+        },
+      },
+    };
+    const { prisma, service } = prismaWith([
+      { id: 'd1', token: 'a', platform: 'android', localRemindersUntil: null },
+      { id: 'd2', token: 'b', platform: 'ios', localRemindersUntil: null },
+    ]);
+    const { impl } = fcm({ a: mismatch, b: mismatch });
+    let clock = NOW;
+    const sender = new NativePushSender(service, {
+      env: ENV,
+      fetch: impl,
+      now: () => clock,
+    });
+
+    expect(await sender.deliver('u1', payload)).toEqual({
+      sent: 0,
+      failed: 2,
+      removed: 0,
+      covered: 0,
+    });
+    await sender.deliver('u1', payload);
+    expect(prisma.deviceToken.deleteMany).not.toHaveBeenCalled();
+    expect(error).toHaveBeenCalledTimes(1);
+    expect(error.mock.calls[0][0]).toContain('SENDER_ID_MISMATCH');
+
+    clock += CONFIG_ERROR_LOG_INTERVAL_MS;
+    await sender.deliver('u1', payload);
+    expect(error).toHaveBeenCalledTimes(2);
+  });
+
+  it('jeton d’accès indisponible : coupe-circuit 60 s (aucun appel à Google) et journal limité à 1/min', async () => {
+    jest.spyOn(Logger.prototype, 'log').mockImplementation();
+    const error = jest.spyOn(Logger.prototype, 'error').mockImplementation();
+    const { service } = prismaWith([
+      { id: 'd1', token: 'a', platform: 'android', localRemindersUntil: null },
+    ]);
+    const impl: FetchLike = jest.fn(() =>
+      Promise.resolve({
+        ok: false,
+        status: 503,
+        json: () => Promise.resolve({ error: 'backend_error' }),
+      }),
+    );
+    let clock = NOW;
+    const sender = new NativePushSender(service, {
+      env: ENV,
+      fetch: impl,
+      now: () => clock,
+    });
+
+    expect((await sender.deliver('u1', payload)).failed).toBe(1);
+    expect(impl).toHaveBeenCalledTimes(1);
+    clock += 30_000;
+    expect((await sender.deliver('u1', payload)).failed).toBe(1);
+    // Échec immédiat pendant le coupe-circuit : Google n'est pas rappelé.
+    expect(impl).toHaveBeenCalledTimes(1);
+    expect(error).toHaveBeenCalledTimes(1);
+
+    clock += 30_000;
+    await sender.deliver('u1', payload);
+    expect(impl).toHaveBeenCalledTimes(2);
+    expect(error).toHaveBeenCalledTimes(2);
+  });
+
+  it('échéance de l’exécution dépassée : canal natif sauté, sans requête', async () => {
+    jest.spyOn(Logger.prototype, 'log').mockImplementation();
+    const warn = jest.spyOn(Logger.prototype, 'warn').mockImplementation();
+    const { prisma, service } = prismaWith([
+      { id: 'd1', token: 'a', platform: 'android', localRemindersUntil: null },
+    ]);
+    const { impl } = fcm({});
+    const sender = new NativePushSender(service, {
+      env: ENV,
+      fetch: impl,
+      now: () => NOW,
+    });
+    expect(
+      await sender.deliver('u1', { ...payload, nativeDeadline: NOW }),
+    ).toEqual({ sent: 0, failed: 0, removed: 0, covered: 0 });
+    expect(prisma.deviceToken.findMany).not.toHaveBeenCalled();
+    expect(impl).not.toHaveBeenCalled();
+    expect(warn).toHaveBeenCalledTimes(1);
+  });
+
+  it('échéance atteinte pendant un envoi lent : abandonné et compté en échec, sans attendre FCM', async () => {
+    jest.spyOn(Logger.prototype, 'log').mockImplementation();
+    jest.spyOn(Logger.prototype, 'warn').mockImplementation();
+    const { service } = prismaWith([
+      { id: 'd1', token: 'ok', platform: 'android', localRemindersUntil: null },
+      { id: 'd2', token: 'slow', platform: 'ios', localRemindersUntil: null },
+    ]);
+    const impl: FetchLike = (url, init) => {
+      if (url === GOOGLE_OAUTH_TOKEN_URL) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: () => Promise.resolve({ access_token: 'at', expires_in: 3600 }),
+        });
+      }
+      const { message } = JSON.parse(init.body) as {
+        message: { token: string };
+      };
+      if (message.token === 'slow') return new Promise(() => undefined);
+      return Promise.resolve({
+        ok: true,
+        status: 200,
+        json: () => Promise.resolve({}),
+      });
+    };
+    const sender = new NativePushSender(service, {
+      env: ENV,
+      fetch: impl,
+      now: () => NOW,
+    });
+    const started = Date.now();
+    const res = await sender.deliver('u1', {
+      ...payload,
+      nativeDeadline: NOW + 50,
+    });
+    expect(res).toEqual({ sent: 1, failed: 1, removed: 0, covered: 0 });
+    expect(Date.now() - started).toBeLessThan(2_000);
   });
 
   it('aucun appareil : aucune requête', async () => {
@@ -319,27 +484,34 @@ describe('buildFcmMessage', () => {
 
 describe('coveredLocally', () => {
   const at = new Date(NOW);
-  it('vrai seulement si le soin précède la fin de la couverture locale', () => {
+  const asOf = new Date(NOW - 1000);
+  const localReminder = { at, sourceUpdatedAt: asOf };
+  const device = (until: Date | null, state: Date | null = asOf) => ({
+    localRemindersUntil: until,
+    localRemindersAsOf: state,
+  });
+  it('vrai seulement si le soin précède la fin de la couverture et que la source n’a pas changé depuis', () => {
     expect(
-      coveredLocally(
-        { localRemindersUntil: new Date(NOW + 1) },
-        { ...payload, localReminderAt: at },
-      ),
+      coveredLocally(device(new Date(NOW + 1)), { ...payload, localReminder }),
     ).toBe(true);
     expect(
-      coveredLocally(
-        { localRemindersUntil: new Date(NOW) },
-        { ...payload, localReminderAt: at },
-      ),
+      coveredLocally(device(new Date(NOW)), { ...payload, localReminder }),
+    ).toBe(false);
+    expect(coveredLocally(device(null), { ...payload, localReminder })).toBe(
+      false,
+    );
+    expect(
+      coveredLocally(device(new Date(NOW + 1), null), {
+        ...payload,
+        localReminder,
+      }),
     ).toBe(false);
     expect(
-      coveredLocally(
-        { localRemindersUntil: null },
-        { ...payload, localReminderAt: at },
-      ),
+      coveredLocally(device(new Date(NOW + 1), new Date(NOW - 1001)), {
+        ...payload,
+        localReminder,
+      }),
     ).toBe(false);
-    expect(
-      coveredLocally({ localRemindersUntil: new Date(NOW + 1) }, payload),
-    ).toBe(false);
+    expect(coveredLocally(device(new Date(NOW + 1)), payload)).toBe(false);
   });
 });

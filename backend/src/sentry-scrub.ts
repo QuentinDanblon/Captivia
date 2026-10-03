@@ -45,6 +45,16 @@ const SENSITIVE_KEYS = new Set(
 );
 /** Dans le corps et la query d'une requête, `code` est aussi masqué. */
 const SENSITIVE_REQUEST_KEYS = new Set([...SENSITIVE_KEYS, 'code']);
+
+/**
+ * Toute clé d'objet dont le nom SE TERMINE par « token » (casse ignorée) est aussi masquée :
+ * `deviceToken`, `previousToken`, `fcmToken`… (jetons de push natif W6-07, revue de sécurité,
+ * constat 4), en plus des listes ci-dessus. Les paramètres d'URL gardent la liste exacte.
+ */
+const isSensitiveKey = (key: string, keys: Set<string>): boolean => {
+  const lower = key.toLowerCase();
+  return keys.has(lower) || lower.endsWith('token');
+};
 const SENSITIVE_HEADERS = [
   'authorization',
   'cookie',
@@ -55,9 +65,12 @@ const SENSITIVE_HEADERS = [
 const names = SENSITIVE_PARAMS.join('|');
 /** `token=…` dans une URL, une query string ou un texte libre (début, `?`, `&`, `;`, `#`, espace). */
 const PARAM_RE = new RegExp(`(^|[?&;#\\s])(${names})=([^&#;\\s"'<>]*)`, 'gi');
-/** `"password":"…"` dans un corps JSON resté sous forme de texte. */
+/**
+ * `"password":"…"` dans un corps JSON resté sous forme de texte ; aussi toute clé finissant par
+ * « token » (`"deviceToken":"…"`, `"previousToken":"…"`).
+ */
 const JSON_FIELD_RE = new RegExp(
-  `("(?:${names})"\\s*:\\s*")((?:[^"\\\\]|\\\\.)*)(")`,
+  `("(?:${names}|[A-Za-z0-9_$-]*token)"\\s*:\\s*")((?:[^"\\\\]|\\\\.)*)(")`,
   'gi',
 );
 
@@ -99,7 +112,7 @@ function scrubDeep<T>(value: T, keys: Set<string>, depth = 0): T {
     if (
       value.length === 2 &&
       typeof value[0] === 'string' &&
-      keys.has(value[0].toLowerCase())
+      isSensitiveKey(value[0], keys)
     ) {
       return [value[0], FILTERED] as T;
     }
@@ -108,7 +121,7 @@ function scrubDeep<T>(value: T, keys: Set<string>, depth = 0): T {
   if (!isPlainObject(value)) return value;
   const out: Record<string, unknown> = {};
   for (const [key, v] of Object.entries(value)) {
-    out[key] = keys.has(key.toLowerCase())
+    out[key] = isSensitiveKey(key, keys)
       ? FILTERED
       : scrubDeep(v, keys, depth + 1);
   }

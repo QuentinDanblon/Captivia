@@ -5,6 +5,8 @@ import { PrismaService } from '../prisma/prisma.service';
 import { GradeService } from '../grade/grade.service';
 import { MailService } from '../mail/mail.service';
 import { PUSH_SENDER, PushSender } from './push-sender';
+import { localReminderFor } from './local-coverage';
+import { NATIVE_PUSH_RUN_BUDGET_MS } from './native-push-sender';
 import { localDay } from '../common/timezone';
 
 /** Clé du verrou consultatif Postgres du job de rappels (constante arbitraire, propre au job). */
@@ -42,6 +44,28 @@ const DUE_REMINDER_SELECT = {
   userId: true,
   animalId: true,
   animal: { select: { name: true } },
+  // État ACTUEL de la source : le rappel est-il aussi programmé en local par l'app (W6-07) ?
+  routine: {
+    select: {
+      id: true,
+      active: true,
+      schedule: true,
+      frequency: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  },
+  medication: {
+    select: {
+      id: true,
+      active: true,
+      startDate: true,
+      endDate: true,
+      frequency: true,
+      intervalHours: true,
+      updatedAt: true,
+    },
+  },
   user: {
     select: {
       email: true,
@@ -61,24 +85,6 @@ type DueReminder = Prisma.NotificationEventGetPayload<{
 
 /** `YYYY-MM-DD` de `now` dans le fuseau IANA donné (repli Europe/Paris si invalide). */
 export { localDay };
-
-/**
- * Sources de rappel que l'app programme aussi en notifications locales (agenda W6-06 : routines,
- * médicaments, RDV, vaccins). Les rappels de « types » personnalisés (`pref:`) n'y figurent pas.
- */
-const AGENDA_SOURCE_PREFIXES = [
-  'routine:',
-  'medication:',
-  'appointment:',
-  'vaccination:',
-];
-
-export function isAgendaSource(sourceKey: string | null | undefined): boolean {
-  return (
-    typeof sourceKey === 'string' &&
-    AGENDA_SOURCE_PREFIXES.some((p) => sourceKey.startsWith(p))
-  );
-}
 
 export function normalizeChannel(value: unknown): DeliveryChannel {
   return value === 'email' || value === 'both' ? value : 'push';
@@ -303,11 +309,14 @@ export class NotificationsSchedulerService {
   ): Promise<Pick<ReminderRunResult, 'emailed' | 'pushed' | 'failed'>> {
     const result = { emailed: 0, pushed: 0, failed: 0 };
     const appUrl = (process.env.FRONTEND_URL || '').replace(/\/+$/, '') || null;
+    // Budget du canal natif pour toute l'exécution (horloge réelle) : FCM / Google lents ne
+    // retiennent jamais le job ; e-mail et Web Push ne sont pas concernés.
+    const nativeDeadline = Date.now() + NATIVE_PUSH_RUN_BUDGET_MS;
 
     for (let i = 0; i < claimed.length; i += DISPATCH_CONCURRENCY) {
       const batch = claimed.slice(i, i + DISPATCH_CONCURRENCY);
       const outcomes = await Promise.allSettled(
-        batch.map((ev) => this.deliverOne(ev, appUrl)),
+        batch.map((ev) => this.deliverOne(ev, appUrl, nativeDeadline)),
       );
       for (const [k, outcome] of outcomes.entries()) {
         const delivered =
@@ -340,6 +349,7 @@ export class NotificationsSchedulerService {
   private async deliverOne(
     ev: DueReminder,
     appUrl: string | null,
+    nativeDeadline: number,
   ): Promise<{ emailed: boolean; pushed: boolean }> {
     const recipient = ev.user.email;
     const channel = effectiveChannel(
@@ -364,6 +374,7 @@ export class NotificationsSchedulerService {
     }
 
     if (channel === 'push' || channel === 'both') {
+      const localReminder = localReminderFor(ev, ev.user.timezone);
       pushed = await this.pushSender
         .sendToUser(ev.userId, {
           title: label,
@@ -375,10 +386,10 @@ export class NotificationsSchedulerService {
             // Préfixe de locale pour l'URL ouverte au clic (sw.js : notificationclick).
             locale: ev.user.locale,
           },
-          // Push natif : pas d'envoi à un téléphone qui a déjà programmé ce soin en local (W6-07).
-          ...(isAgendaSource(ev.sourceKey)
-            ? { localReminderAt: ev.scheduledAt }
-            : {}),
+          // Push natif : pas d'envoi à un téléphone qui a déjà programmé CE rappel, à CET
+          // instant, en local (W6-07) ; jamais pour un RDV (J-N, 08:00) ni un vaccin.
+          ...(localReminder ? { localReminder } : {}),
+          nativeDeadline,
         })
         .catch(() => false);
     }

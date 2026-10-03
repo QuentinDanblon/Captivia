@@ -45,13 +45,19 @@ export class DeviceTokensService {
     const coverage =
       dto.localRemindersUntil === undefined
         ? undefined
-        : this.coverage(dto.localRemindersUntil, now);
+        : this.coverage(dto.localRemindersUntil, dto.localRemindersAsOf, now);
     const data = {
       userId,
       platform: dto.platform,
       locale: dto.locale ?? 'fr',
       lastSeenAt: now,
-      ...(coverage !== undefined ? { localRemindersUntil: coverage } : {}),
+      ...(coverage ?? {}),
+    };
+    /** Ligne reprise d'un autre compte : la couverture locale de l'ancien compte ne vaut plus. */
+    const transferred = {
+      localRemindersUntil: null,
+      localRemindersAsOf: null,
+      ...data,
     };
 
     const upsert = async (tx: Prisma.TransactionClient) => {
@@ -66,16 +72,12 @@ export class DeviceTokensService {
         where: { token: dto.token },
         select: { id: true, userId: true },
       });
-      if (existing) {
-        return tx.deviceToken.update({
-          where: { id: existing.id },
-          // Changement de compte : la couverture locale de l'ancien compte ne vaut plus.
-          data:
-            existing.userId === userId
-              ? data
-              : { localRemindersUntil: null, ...data },
-        });
+      if (existing && existing.userId === userId) {
+        return tx.deviceToken.update({ where: { id: existing.id }, data });
       }
+      // Nouvelle installation du compte, ou jeton repris d'un autre compte (revue de sécurité,
+      // constat 6) : dans les deux cas le compte gagne une ligne, le plafond s'applique (les
+      // moins récemment vues partent ; la ligne transférée n'est pas encore au compte).
       const current = await tx.deviceToken.findMany({
         where: { userId },
         orderBy: [{ lastSeenAt: 'asc' }, { id: 'asc' }],
@@ -87,6 +89,12 @@ export class DeviceTokensService {
           where: { id: { in: current.slice(0, excess).map((c) => c.id) } },
         });
       }
+      if (existing) {
+        return tx.deviceToken.update({
+          where: { id: existing.id },
+          data: transferred,
+        });
+      }
       return tx.deviceToken.create({ data: { ...data, token: dto.token } });
     };
 
@@ -94,12 +102,10 @@ export class DeviceTokensService {
     try {
       row = await this.prisma.$transaction(upsert);
     } catch (e) {
-      // Création concurrente du même jeton : la ligne existe désormais, on la met à jour.
+      // Création concurrente du même jeton : la ligne existe désormais. On rejoue tout
+      // (suppression de `previousToken`, transfert avec couverture remise à zéro, plafond).
       if (!isUniqueViolation(e)) throw e;
-      row = await this.prisma.deviceToken.update({
-        where: { token: dto.token },
-        data,
-      });
+      row = await this.prisma.$transaction(upsert);
     }
     return {
       enabled: this.nativePush.enabled,
@@ -114,11 +120,29 @@ export class DeviceTokensService {
     return { success: true };
   }
 
-  private coverage(value: string | null | undefined, now: Date): Date | null {
-    if (!value) return null;
-    const at = new Date(value);
-    if (Number.isNaN(at.getTime())) return null;
+  /**
+   * Couverture locale déclarée. Elle n'est retenue qu'avec l'état des soins qui l'a produite
+   * (`localRemindersAsOf`, instant serveur de l'Agenda, ramené à `now` au plus) : sans lui, on ne
+   * peut pas savoir quelles routines / quels médicaments l'appareil a programmés → aucune.
+   */
+  private coverage(
+    until: string | null,
+    asOf: string | undefined,
+    now: Date,
+  ): {
+    localRemindersUntil: Date | null;
+    localRemindersAsOf: Date | null;
+  } {
+    const none = { localRemindersUntil: null, localRemindersAsOf: null };
+    const at = until ? new Date(until) : null;
+    const state = asOf ? new Date(asOf) : null;
+    if (!at || Number.isNaN(at.getTime())) return none;
+    if (!state || Number.isNaN(state.getTime())) return none;
     const max = now.getTime() + MAX_LOCAL_COVERAGE_MS;
-    return at.getTime() > max ? new Date(max) : at;
+    return {
+      localRemindersUntil: at.getTime() > max ? new Date(max) : at,
+      localRemindersAsOf:
+        state.getTime() > now.getTime() ? new Date(now.getTime()) : state,
+    };
   }
 }
