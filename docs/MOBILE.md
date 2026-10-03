@@ -12,7 +12,9 @@ contenu distant (`server.url` interdit : rejet Apple 4.2). Elle parle à l'API p
 | Routes propres à l'app | `frontend/mobile/app/**` (overlays copiés dans `src/app` pendant le build) |
 | Projets natifs | `frontend/mobile/android`, `frontend/mobile/ios` (créés par `npx cap add`) |
 | Couche plateforme | `frontend/src/lib/platform.ts` |
-| CI | `.github/workflows/mobile.yml` (manuel, sans signature) |
+| Icônes, splash, icône de notification | `frontend/mobile/assets/` (sources), `frontend/mobile/android-template/res/` (notification), script `frontend/scripts/make-mobile-assets.mjs` (§ 11) |
+| Fiches store, déclarations, âge | `docs/store/` (§ 12) ; `frontend/mobile/ios-template/PrivacyInfo.xcprivacy` |
+| CI | `.github/workflows/mobile.yml` (manuel ; APK de debug, AAB signé optionnel) (§ 10) |
 
 ## 1. Prérequis
 
@@ -207,8 +209,8 @@ paiement web dans l'app (règle 3.1.1).
 ## 7. Notifications locales
 
 `@capacitor/local-notifications` (W6-06) : rappels de routines, médicaments, vaccins et RDV programmés
-sur l'appareil, fonctionnent hors ligne. Icône Android `ic_stat_captivia` (monochrome, à générer dans
-`mobile/android/app/src/main/res/drawable*`), couleur `#0aa678` (`capacitor.config.ts`). Android 13+ :
+sur l'appareil, fonctionnent hors ligne. Icône Android `ic_stat_captivia` (silhouette blanche sur fond transparent, versionnée dans
+`mobile/android-template/res/drawable-*/` : à copier après `cap add android`, § 11.2), couleur `#0aa678` (`capacitor.config.ts`). Android 13+ :
 demander `POST_NOTIFICATIONS` ; Android 14+ : `SCHEDULE_EXACT_ALARM` seulement si nécessaire. Le push
 distant (FCM/APNs) relève de W6-07.
 
@@ -380,19 +382,19 @@ la barre finale de l'export statique (`trailingSlash`).
 
 - [ ] Comptes organisation Apple / Google actifs, contrats et fiscalité (W6-01).
 - [ ] `NEXT_PUBLIC_API_URL` de production au build ; `CORS_ORIGIN` mis à jour.
-- [ ] Icônes et splash (`@capacitor/assets`), captures 6,9" / 6,5" et Play, fiches FR/EN (W6-10).
+- [ ] Icônes et splash (`npm run assets:mobile`, § 11), captures 6,9" / 6,5" et Play (`npm run screenshots:store`), fiches FR/EN (`docs/store/`, `npm run store:check`) (W6-10) : sources prêtes ; logo définitif (D-15) à substituer.
 - [ ] `NSCameraUsageDescription`, `NSPhotoLibraryUsageDescription`, `NSPhotoLibraryAddUsageDescription`
       (Info.plist) ; permissions Android minimales (W6-05).
-- [ ] `PrivacyInfo.xcprivacy`, App Privacy, Data Safety, questionnaire d'âge Apple, IARC (W6-11).
+- [ ] `PrivacyInfo.xcprivacy` (§ 12), App Privacy, Data Safety, questionnaire d'âge Apple, IARC (`docs/store/`) (W6-11) : réponses rédigées, saisie dans les consoles à faire.
 - [ ] Suppression de compte dans l'app **et** page web publique (`/suppression-compte`).
 - [ ] Liens Amazon via `openExternal`, mention d'affiliation, app déclarée dans Associates Central.
 - [ ] Paywall conforme ou offre masquée sur natif ; sandbox IAP testée (W6-08).
 - [ ] Compte de démo rempli pour la relecture, aucun « bientôt disponible » (W6-13).
 - [ ] TestFlight + test fermé Play.
-- [ ] Signature : keystore et certificats en secrets CI (fastlane match), jamais dans le dépôt (W6-12).
+- [ ] Signature : keystore (secrets `ANDROID_KEY*`, § 10) et certificats iOS (fastlane match, § 13) en secrets CI, jamais dans le dépôt (W6-12).
 - [ ] Universal / App Links : `APPLE_TEAM_ID` et `ANDROID_SHA256_CERT_FINGERPRINTS` (Play App Signing +
       upload) sur Netlify, *Associated Domains* et `intent-filter autoVerify` en place (§ 8).
-- [ ] Icône de notification `ic_stat_captivia` ; aucune `SCHEDULE_EXACT_ALARM` / `USE_EXACT_ALARM` (§ 7.2).
+- [ ] Icône de notification `ic_stat_captivia` (copier `mobile/android-template/res/`, § 11.2) ; aucune `SCHEDULE_EXACT_ALARM` / `USE_EXACT_ALARM` (§ 7.2).
 
 ### À vérifier sur appareil réel (non couvert par jest / Playwright)
 
@@ -408,9 +410,130 @@ la barre finale de l'export statique (`trailingSlash`).
   photo, à froid et app ouverte ; lien d'un autre domaine ignoré.
 - Bouton retour Android : modale fermée, puis historique, puis sortie de l'app.
 
-## 10. CI
+## 10. CI (W6-12)
 
-`.github/workflows/mobile.yml` (déclenchement manuel `workflow_dispatch`) : `npm ci`, tests,
-`npm run build:mobile`, puis `npx cap add` (si le projet natif n'est pas versionné) et `npx cap sync`
-pour Android (Ubuntu) et, en option, iOS (macOS). Aucune signature : l'export `out/` est publié en
-artefact. La signature et la publication (`bundleRelease`, fastlane `beta`) relèvent de W6-12.
+`.github/workflows/mobile.yml` : **`workflow_dispatch` uniquement** (quota GitHub Actions limité : ne pas ajouter
+`push` / `pull_request` / `schedule` avant son déblocage).
+
+| Job | Rôle | Condition |
+| --- | --- | --- |
+| `export` | `npm ci`, tests, `npm run build:mobile`, contrôle de l'arborescence web, artefact `mobile-web-bundle` (`out/`) | toujours |
+| `android` | `cap add android` **seulement si `mobile/android` n'est pas versionné** (et `create_missing`), gabarit Captivia (icône de notification, SDK 36, `@capacitor/assets`), `cap sync android`, `./gradlew assembleDebug` → artefact **`captivia-android-debug-apk`** | toujours ; étapes natives ignorées si le projet est absent et `create_missing` est décoché |
+| `android-release` | `bundleRelease`, signature `jarsigner` avec la clé d'upload → artefact `captivia-android-release-aab` | **désactivé par défaut** : entrée `android_bundle` ; sans les 4 secrets, le job réussit en annonçant qu'il s'arrête (aucun échec) ; exige un `mobile/android` versionné |
+| `ios` | `cap add ios` si absent, puis **`cap sync ios` seulement** (aucun build ni signature) | entrée `ios`, runner macOS |
+
+Entrées : `api_url` (`NEXT_PUBLIC_API_URL`), `create_missing` (défaut `true` : build jetable tant que les projets
+natifs ne sont pas versionnés), `android_bundle` (défaut `false`), `ios` (défaut `false`).
+
+**Secrets du job `android-release`** (Settings, Secrets and variables, Actions) :
+
+| Secret | Contenu |
+| --- | --- |
+| `ANDROID_KEYSTORE_BASE64` | keystore d'**upload** : `base64 -w0 upload-keystore.jks` |
+| `ANDROID_KEYSTORE_PASSWORD` | mot de passe du keystore |
+| `ANDROID_KEY_ALIAS` | alias de la clé d'upload |
+| `ANDROID_KEY_PASSWORD` | mot de passe de la clé |
+
+Avec Play App Signing, Google garde la clé de signature : la clé d'upload peut être remplacée en cas de perte
+(Play Console, Intégrité de l'application). Le `versionCode` est celui de `mobile/android/app/build.gradle` : à
+incrémenter à la main (ou par fastlane, § 13) avant chaque envoi.
+
+Lancer un build : onglet *Actions*, workflow *Mobile*, *Run workflow*. L'APK de debug se télécharge dans les
+artefacts du run (7 jours) et s'installe par `adb install`.
+
+## 11. Icônes, splash et icône de notification (W6-10)
+
+### 11.1 Sources et génération
+
+Les sources sont versionnées dans `frontend/mobile/assets/` ; elles viennent du **logo provisoire** (D-15,
+`public/brand/captivia-mark.svg`) recoloré avec les jetons de la direction artistique (mousse `#2F5D46`, papier
+`#F6F3EC`, encre sombre `#121714`).
+
+| Fichier | Taille | Usage |
+| --- | --- | --- |
+| `icon-only.png` | 1024², opaque, plein cadre | iOS, icône « classique » Android |
+| `icon-foreground.png` / `icon-background.png` | 1024² | icône adaptative Android (motif réduit dans la zone sûre de 66 %) |
+| `splash.png` / `splash-dark.png` | 2732² | écran de lancement clair / sombre |
+| `store/play-icon-512.png` | 512² | icône haute résolution de la Play Console |
+
+```bash
+cd frontend
+npm run assets:mobile:sources   # (re)génère ces PNG avec sharp, de façon reproductible
+# plus tard, APRÈS `npx cap add android` et `npx cap add ios` :
+npm run assets:mobile           # @capacitor/assets : icônes et splash natifs
+```
+
+`assets:mobile` lance `npx @capacitor/assets generate --assetPath mobile/assets --iosProject mobile/ios/App
+--androidProject mobile/android` (les projets natifs sont sous `mobile/`, pas aux emplacements par défaut de
+l'outil). Il télécharge `@capacitor/assets` à la volée ; rien n'est ajouté aux dépendances. Relancer après chaque
+changement du logo, puis commiter les ressources générées dans `mobile/android` et `mobile/ios`.
+
+**Logo maître (D-15)** : quand le designer livre le logo définitif, remplacer le motif dans
+`scripts/make-mobile-assets.mjs` (constantes `LEAF_*`) **ou** déposer ses PNG dans `mobile/assets/` sans relancer
+le script ; régénérer ensuite les icônes web (`src/app/icon.png`, `apple-icon.png`, `public/icons/*`,
+`public/badge.png`, voir `public/brand/README.md`).
+
+### 11.2 Icône de notification Android
+
+`mobile/android-template/res/drawable-{mdpi,hdpi,xhdpi,xxhdpi,xxxhdpi}/ic_stat_captivia.png` (24, 36, 48, 72 et
+96 px) : silhouette blanche, nervures évidées, fond transparent (Android ne retient que le canal alpha et la teinte
+avec `iconColor`, `capacitor.config.ts`). Après `npx cap add android` :
+
+```bash
+cp -R mobile/android-template/res/. mobile/android/app/src/main/res/
+```
+
+Le nom `ic_stat_captivia` correspond à `plugins.LocalNotifications.smallIcon`. `@capacitor/assets` ne le touche pas
+(il écrit les `mipmap-*` et les `drawable-*/splash.png`).
+
+### 11.3 Fiches store et captures
+
+Voir `docs/store/` (`README.md` pour l'ordre des opérations). `npm run store:check` contrôle les longueurs
+(titre et sous-titre 30, description courte 80, mots-clés 100, description 4 000, notes de version 500) et la règle
+d'écriture ; `npm run screenshots:store` produit les captures (API simulée, rien dans le dépôt).
+
+## 12. Déclarations de confidentialité et d'âge (W6-11)
+
+- `docs/store/declarations-confidentialite.md` : tableau des données réellement collectées (code et registre),
+  saisie pas à pas de **App Privacy** (Apple) et de **Sécurité des données** (Google), suppression de compte, points
+  de vigilance.
+- `docs/store/classification-age.md` : questionnaire d'âge Apple, IARC Google, public cible, et ce que change le volet
+  social à venir.
+- `frontend/mobile/ios-template/PrivacyInfo.xcprivacy` : à copier après `npx cap add ios` :
+
+```bash
+cp mobile/ios-template/PrivacyInfo.xcprivacy mobile/ios/App/App/PrivacyInfo.xcprivacy
+# Xcode : clic droit sur le groupe « App », Add Files to "App"…, PrivacyInfo.xcprivacy, cible « App » cochée
+```
+
+  Il déclare `UserDefaults` (`CA92.1`, Preferences) et `FileTimestamp` (`C617.1`, Filesystem), l'absence de suivi,
+  et les types de données de la fiche App Privacy. Après le premier archivage, contrôler *Generate Privacy Report*
+  (les SDK embarquent leurs propres manifestes).
+- Android, après `cap add android` : passer `android:allowBackup` à `false` dans `AndroidManifest.xml` (la sauvegarde
+  automatique de Google pourrait copier la session).
+
+## 13. À venir (non installé) : fastlane et `@sentry/capacitor`
+
+Rien de ce qui suit n'est dans les dépendances ni dans le workflow aujourd'hui.
+
+**fastlane** (distribution, W6-12 puis W6-13) :
+
+- `frontend/fastlane/Fastfile` avec deux couloirs `beta` : `android` (`gradle` `bundleRelease`, puis `upload_to_play_store`
+  vers la piste *interne*, avec un compte de service Google : secret `PLAY_SERVICE_ACCOUNT_JSON`) et `ios` (`match`
+  pour les certificats et profils, `build_app`, `upload_to_testflight`).
+- iOS : **`fastlane match`** (dépôt privé chiffré pour les certificats, secret `MATCH_PASSWORD`) plus une clé d'API App
+  Store Connect (secrets `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_BASE64`), jamais d'identifiants Apple personnels en CI.
+  Runner macOS (minutes facturées dix fois plus cher) : à lancer à la demande seulement.
+- Numéro de build : `versionCode` / `CURRENT_PROJECT_VERSION` dérivés de `github.run_number` dans le couloir.
+- Les fiches `docs/store/` pourront alimenter `fastlane/metadata` (`deliver` / `supply`) ; d'ici là, copier-coller.
+- Il remplacerait alors le job `android-release` (signature `jarsigner`) ; le garde « secrets absents » reste valable.
+
+**`@sentry/capacitor`** (rapports de plantage natifs, MOB-43) :
+
+- `npm i @sentry/capacitor`, puis initialisation dans le pont natif, avec le même DSN et les mêmes filtres que le web
+  (`sendDefaultPii: false`, `scrubSentryEvent` de `src/lib/sentry-scrub.ts`, traces à 10 %), projet **région UE**,
+  « ne pas stocker les adresses IP » activé.
+- Source maps du bundle exporté (`out/`) et symboles natifs (dSYM iOS, mapping R8 Android) envoyés par `sentry-cli`
+  dans le workflow (`SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` en secrets), puis `cap sync`.
+- Déjà couvert par les déclarations (`CrashData`, `PerformanceData`, journaux de plantage et diagnostics Google) :
+  pas de changement de fiche, mais vérifier le rapport de confidentialité Xcode après l'ajout du SDK.
