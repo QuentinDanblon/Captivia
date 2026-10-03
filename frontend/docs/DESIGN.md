@@ -10,7 +10,7 @@ le journal des décisions (§ 10), avant d'être codée.
 | Mots publiés (landing, stores, boutons) | `docs/MESSAGING.md` |
 | Jetons, styles de base, en-tête, pied, coquille de l'app | `src/app/globals.css` |
 | Polices | `src/app/[locale]/layout.tsx` (`next/font/google`) |
-| Composants | `src/components/ui/*` (barrel `@/components/ui`), `src/components/AppShell.tsx` |
+| Composants | `src/components/ui/*` (barrel `@/components/ui`), `src/components/AppShell.tsx`, cadres `src/components/frames/*` |
 | Photothèque et crédits | `src/content/photos.ts`, `public/images/CREDITS.md` |
 | Garde-fous | § 9 (grep des motifs interdits, axe, CI) |
 
@@ -313,27 +313,51 @@ dont les textes alternatifs (`landing.photos.*`) sont transmis au navigateur par
 ### 5.12 Modal, Toast, erreurs
 
 `Modal` (Radix, focus piégé, `alertdialog` pour les suppressions) : surface, filet, rayon 10, fond
-`--scrim` sans flou, titre Fraunces `text-h3`. Erreurs de rendu (`[locale]/error.tsx`,
-`ErrorBoundary`) : page de carnet en pointillés avec filet brique, constat + « Réessayer », jamais
+`--scrim` sans flou, titre Fraunces `text-h3`. Erreurs de rendu (`[locale]/error.tsx` dans
+`MarketingFrame`, `ErrorBoundary`) : page de carnet en pointillés avec filet brique, constat + « Réessayer », jamais
 le message technique (seul le `digest` est montré). `global-error.tsx` reprend la palette en
 valeurs fixes (il remplace tout le document).
 
 ## 6. Mises en page de référence
 
-### 6.1 Deux coquilles
+### 6.1 Trois cadres, un par groupe de routes
 
-- **Marketing** (`MarketingHeader` = `AppHeader`, `MarketingFooter` = `SiteFooter`) : landing,
-  pages légales, écrans de compte, page publique, 404. En-tête papier plein, filet, page active
-  soulignée ; navigation complète dès 1024 px (invité) et 1200 px (connecté), menu en feuille
-  modale en dessous. Un invité y voit un pictogramme de profil au trait, jamais d'initiales
-  factices. Pied : marque, liens légaux en colonnes, copyright en mono, **aucune mention
-  d'affiliation** (aucun lien affilié affiché).
+Le layout `src/app/[locale]/layout.tsx` ne pose aucun cadre : polices, fournisseurs (`AuthProvider`,
+next-intl), `ErrorBoundary`, `NativeWelcome` et `NativeBridge` seulement. Chaque groupe de routes
+apporte le sien (les groupes ne changent pas les URL) :
+
+| Groupe | Cadre | Pages |
+| --- | --- | --- |
+| `(marketing)` | `MarketingFrame` (`components/frames`) | landing, pages légales, transparence, suppression de compte, **page publique d'un animal** |
+| `(auth)` | `AccountFrame` (`components/frames`) | connexion, inscription, mot de passe oublié / nouveau, vérification d'e-mail, `/sauvegarder` |
+| `(app)` | `AppShell` | mes animaux, agenda, espèces, fiche espèce, paramètres, abonnement, magasin, communauté |
+| (hors groupe) | `MarketingFrame` apporté par le fichier | `error.tsx`, `not-found.tsx` (et `[...rest]`, qui déclenche la 404) |
+
+`error.tsx` et `not-found.tsx` de `[locale]` remplacent le layout du groupe où l'erreur survient et
+sont rendus directement dans le layout `[locale]` : ils importent donc eux-mêmes `MarketingFrame`
+(en-tête, `<main>`, pied : l'internaute garde les chemins de retour). Chaque cadre porte son
+`<main id="main-content">`, le lien d'évitement et le bandeau de vérification d'e-mail
+(`EmailVerificationBanner`, masqué sur `/verifier-email`) ; il n'y a plus de composant qui devine le
+cadre d'après le segment.
+
+- **Marketing** (`MarketingHeader` = `AppHeader`, `MarketingFooter` = `SiteFooter`) : en-tête papier
+  plein, filet, page active soulignée ; navigation complète dès 1024 px (invité) et 1200 px
+  (connecté), menu en feuille modale en dessous. Un invité y voit un pictogramme de profil au trait,
+  jamais d'initiales factices. Pied : marque, liens légaux en colonnes, copyright en mono,
+  **aucune mention d'affiliation** (aucun lien affilié affiché). `SiteFooter` n'est ni `async` ni
+  `'use client'` (`useTranslations`) pour servir aussi `error.tsx`, composant client.
+- **Compte** (`AccountFrame`) : cadre **sobre**. En-tête : marque, « Retour à l'accueil » (dès
+  640 px ; en dessous la marque suffit) et sélecteur de langue ; ni navigation du site ni boutons
+  « Connexion / S'inscrire », qui doubleraient le formulaire. Pied : trois liens légaux (mentions,
+  confidentialité, conditions) et le copyright en mono, sur une ligne. Le formulaire et sa planche
+  (`AuthFrame`, § 6.6) occupent la page.
 - **App** (`AppShell`, groupe `(app)`) : mes animaux, agenda, espèces, fiche espèce, paramètres,
   abonnement, magasin. < 1024 px : barre haute + **onglets en bas** (Mes animaux, Agenda,
   Espèces, Communauté « Bientôt » sans lien, Compte), 60 px + `safe-area-inset-bottom`. ≥ 1024 px :
   **rail** 240 px. « Communauté » ne devient un lien que si l'API répond (§ 6.9), sinon « Bientôt »
   sans lien. Pied du rail : profil ou « Invité · Créer un compte » (lien discret, jamais
-  de modale). `AppShell` rend `<main id="main-content">` et le lien d'évitement.
+  de modale). `AppShell` rend `<main id="main-content">` et le lien d'évitement ; le layout `(app)`
+  place le bandeau de vérification d'e-mail en tête du contenu.
 
 ### 6.2 Tableau de bord « Aujourd'hui » (`/mes-animaux`)
 
@@ -381,9 +405,9 @@ depuis la section Sources. Matériel : liste sans lien marchand.
 - **Magasin** : sans boutique, un `EmptyState` renvoie aux fiches ; la mention d'affiliation
   n'apparaît qu'à côté de liens réels.
 
-### 6.6 Écrans de compte (`AuthFrame`)
+### 6.6 Écrans de compte (`(auth)`, `AuthFrame`)
 
-Connexion, inscription, mot de passe oublié / nouveau, vérification d'e-mail, `/sauvegarder` :
+Cadre `AccountFrame` (§ 6.1), puis, dans la page, `AuthFrame`. Connexion, inscription, mot de passe oublié / nouveau, vérification d'e-mail, `/sauvegarder` :
 formulaire sur le papier à gauche (`Field`, `Button`, `Alert`) ; dès 1024 px, une **planche**
 (`AuthPanel` : papier creusé + grain) ouverte par une **photo Commons créditée** — chat
 (connexion), perruches (inscription), lapin (mot de passe), calopsittes (vérification), gecko
@@ -406,9 +430,11 @@ composants et les données fixes de `landing/sample.ts` dans `PreviewFrame` (ill
   (date de mise à jour en description), avertissements en `Alert`, sections numérotées en mono
   (`01 Éditeur du service`), sommaire en colonne collante dès 1024 px, texte limité à
   `max-w-prose`. Marqueurs « [À COMPLÉTER : …] » surlignés `bg-warn-soft` + filet ocre.
-- **Page publique d'un animal** : `Figure` (photo du propriétaire ou silhouette), binôme latin,
-  faits en filets, vaccins datés en mono, lien discret vers l'essai sans compte.
-- **404** : page de carnet en pointillés, silhouette d'oiseau « fig. 404 », un bouton.
+- **Page publique d'un animal** (`(marketing)/animal-public`, jamais indexée) : `Figure` (photo du
+  propriétaire ou silhouette), binôme latin, faits en filets, vaccins datés en mono, lien discret vers
+  l'essai sans compte. Cadre marketing : la personne qui reçoit un lien découvre le site.
+- **404** : page de carnet en pointillés, silhouette d'oiseau « fig. 404 », un bouton, dans
+  `MarketingFrame`.
 
 ### 6.9 Communauté (`(app)/communaute`, `src/components/community/`)
 
@@ -566,10 +592,29 @@ Avant de fusionner un lot visuel : captures 1440 et 390, clair et sombre, aucun 
 - **Avatar** : photo ronde ou patte au trait sur papier creusé (`rounded-full` autorisé, § 3.3).
 - **`cv-pop`** : seule animation ajoutée (« j'aime », 180 ms, échelle, sans déplacement).
 
-**Reste à faire** (hors design) : regrouper connexion, inscription, mot de passe, vérification,
-`/sauvegarder` et `animal-public` dans `(marketing)` puis supprimer `SiteChrome` (le layout
-racine ne garderait que `<html>`, polices, fournisseurs, `ErrorBoundary`) ; dater les aperçus de la
-landing (`SAMPLE_TODAY`, fixe) si l'on veut qu'ils suivent le jour courant. La locale `pt` est du
+### 10.7 Fin de `SiteChrome` (octobre 2026)
+
+- **`SiteChrome` supprimé**, ainsi que `APP_ROUTE_GROUP` / `MARKETING_ROUTE_GROUP` : plus de cadre
+  deviné d'après le segment actif. Le layout racine ne garde que `<html>`, polices, fournisseurs,
+  `ErrorBoundary`, `NativeWelcome` et `NativeBridge` ; chaque groupe pose son cadre (§ 6.1).
+- **Groupe `(auth)` plutôt que `(marketing)`** pour les six écrans de compte. Le cadre marketing
+  affichait « Connexion » et « S'inscrire » au-dessus d'un formulaire de connexion ou d'inscription,
+  une navigation complète qui détourne d'une tâche à une seule issue, et un pied de six liens plus une
+  description, qui pèse plus que le formulaire sur mobile. `AccountFrame` garde la marque, le
+  retour et la langue, et un pied d'une ligne ; la planche à photo de `AuthFrame` porte déjà
+  l'ambiance, elle n'a pas besoin d'un en-tête chargé. Aucun texte nouveau : « Retour à l'accueil »
+  (`errors.backHome`) et les libellés `footer.*` existent dans les six langues.
+- **Page publique d'un animal dans `(marketing)`** : le lien arrive par QR ou par partage ; la
+  personne ne connaît pas Captivia, l'en-tête complet et le pied légal sont à leur place. Rendu
+  identique à l'ancien (captures avant / après).
+- **`error.tsx` et `not-found.tsx` importent `MarketingFrame`** : rendus dans le layout `[locale]`
+  sans layout de groupe, ils portent leur cadre ; `SiteFooter` devient isomorphe (`useTranslations`)
+  pour être importable depuis le composant client `error.tsx`.
+- **Export mobile** : les routes miroir de `mobile/app/` suivent les groupes
+  (`mobile/app/[locale]/(marketing)/animal-public/`) ; `[...rest]` reste écarté du build.
+
+**Reste à faire** (hors design) : dater les aperçus de la landing (`SAMPLE_TODAY`, fixe) si l'on
+veut qu'ils suivent le jour courant. La locale `pt` est du
 **portugais européen (pt-PT, AO90)** : « palavra-passe », « eliminar », « guardar », « subscrição »,
 « ficheiro », « telemóvel », « ecrã », « boletim de saúde » ; adresse en « o seu », impératif à la
 3e personne, enclise (« Inscreva-se »), jamais de gérondif (« a fazer », pas « fazendo »).

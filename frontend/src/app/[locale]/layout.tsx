@@ -6,13 +6,9 @@ import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server
 import { routing } from '../../../i18n/routing';
 import { buildPageMetadata, getSiteUrl, SITE_NAME } from '@/lib/seo';
 import { AuthProvider } from '@/contexts/AuthContext';
-import { AppHeader } from '@/components/AppHeader';
-import { EmailVerificationBanner } from '@/components/EmailVerificationBanner';
 import { NativeWelcome } from '@/components/guest/NativeWelcome';
 import { NativeBridge } from '@/components/native/NativeBridge';
-import { SiteChrome } from '@/components/SiteChrome';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
-import { SiteFooter } from '@/components/SiteFooter';
 import '../globals.css';
 
 /*
@@ -111,20 +107,9 @@ export default async function LocaleLayout({
       <body className="min-h-screen flex flex-col w-full bg-paper text-ink font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
-            {/* En-tête, <main> et pied pour les pages hors groupe ; (app) et (marketing) ont leur propre cadre. */}
-            <SiteChrome
-              header={
-                <>
-                  <AppHeader />
-                  <EmailVerificationBanner />
-                </>
-              }
-              footer={<SiteFooter />}
-            >
-              <ErrorBoundary>
-                {children}
-              </ErrorBoundary>
-            </SiteChrome>
+            {/* Aucun cadre ici : chaque groupe de routes apporte le sien — (app) AppShell, (marketing)
+                MarketingFrame, (auth) AccountFrame — ; error.tsx et not-found.tsx portent MarketingFrame. */}
+            <ErrorBoundary>{children}</ErrorBoundary>
             {/* App mobile : premier lancement sans session → essai sans compte proposé. */}
             <NativeWelcome />
             {/* App mobile : liens universels, rappels locaux, bouton retour Android (rien sur le web). */}

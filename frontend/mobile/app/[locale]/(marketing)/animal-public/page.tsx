@@ -2,7 +2,7 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import PublicAnimalPage from '@/app/[locale]/animal-public/[slug]/page';
+import PublicAnimalPage from '@/app/[locale]/(marketing)/animal-public/[slug]/page';
 import { useQueryRouteParams } from '@/lib/platform';
 
 function PublicAnimalFromQuery() {

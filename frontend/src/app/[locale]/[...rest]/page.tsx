@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 
 /**
  * Catch-all : toute URL inconnue sous /<locale>/... déclenche la page 404 de
- * app/[locale]/not-found.tsx, rendue dans le layout (en-tête et traductions).
+ * app/[locale]/not-found.tsx, rendue dans le layout [locale] avec son propre cadre (MarketingFrame).
  *
  * - `force-dynamic` : sans cela la route est mise en cache comme une page « normale » et
  *   répond 200 ; ici notFound() est évalué à chaque requête et renvoie un vrai statut 404.

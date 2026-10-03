@@ -113,8 +113,8 @@ check('RoutinesService existe', fileExists('backend/src/routines/routines.servic
 check('RoutinesController existe', fileExists('backend/src/routines/routines.controller.ts'));
 
 check('AuthContext existe', fileExists('frontend/src/contexts/AuthContext.tsx'));
-check('Page Login existe', fileExists('frontend/src/app/[locale]/login/page.tsx'));
-check('Page Register existe', fileExists('frontend/src/app/[locale]/register/page.tsx'));
+check('Page Login existe', fileExists('frontend/src/app/[locale]/(auth)/login/page.tsx'));
+check('Page Register existe', fileExists('frontend/src/app/[locale]/(auth)/register/page.tsx'));
 check('Page Mes Animaux existe', fileExists('frontend/src/app/[locale]/mes-animaux/page.tsx'));
 
 // ============================================
