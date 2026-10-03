@@ -26,7 +26,7 @@ export interface FakeResult {
 
 export type FakeRoute = (
   url: URL,
-  params: Record<string, any>,
+  params: Record<string, string | number | undefined>,
 ) => FakeResult | undefined;
 
 /** Taxons GBIF connus des fixtures (clé → fiche) ; toute autre clé → 404. */
@@ -211,9 +211,13 @@ export const fakeExternalCalls: string[] = [];
 export function createFakeExternalAdapter(
   extraRoutes: FakeRoute[] = [],
 ): AxiosAdapter {
-  return async (config: InternalAxiosRequestConfig) => {
+  // Adaptateur synchrone sous le capot : `new Promise` convertit les `throw` en rejets.
+  const handle = (config: InternalAxiosRequestConfig) => {
     const url = new URL(String(config.url), config.baseURL);
-    const params = (config.params ?? {}) as Record<string, any>;
+    const params = (config.params ?? {}) as Record<
+      string,
+      string | number | undefined
+    >;
     fakeExternalCalls.push(`${url.hostname}${url.pathname}`);
 
     for (const route of [...extraRoutes, ...routes]) {
@@ -241,4 +245,5 @@ export function createFakeExternalAdapter(
       config,
     );
   };
+  return (config) => new Promise((resolve) => resolve(handle(config)));
 }

@@ -21,9 +21,15 @@ import {
 import { MailService } from '../src/mail/mail.service';
 import { MaintenanceService } from '../src/maintenance/maintenance.service';
 import { COMMUNITY_RULES_VERSION } from '../src/community/community.constants';
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any */
-// (supertest renvoie des corps `any` ; fichier de test.)
+import {
+  bodyOf,
+  AuthBody,
+  CommunityPostBody,
+  ErrorBody,
+  IdBody,
+  Page,
+  UrlBody,
+} from './utils/http';
 
 jest.setTimeout(120000);
 
@@ -40,6 +46,56 @@ interface Account {
   email: string;
   token: string;
   userId: string;
+}
+
+/** Élément (partiel) des listes : fil, décisions, file de modération, blocages, journal. */
+interface ListedItem {
+  id: string;
+  type: string;
+  targetId: string;
+  action: string;
+  handle: string;
+}
+
+/** `GET /community/me` : droits de publication. */
+interface MeBody {
+  canPublish: boolean;
+  reasons: string[];
+  ageConfirmationRequired: boolean;
+  profile: unknown;
+}
+
+/** Détail d'une publication avec ses commentaires. */
+interface PostDetail {
+  helpfulCommentId: string;
+  commentCount: number;
+  comments: { items: unknown[] };
+}
+
+/** Page de publications d'un profil (`nextCursor`, `avatarUrl` du profil). */
+interface ProfilePage extends Page<ListedItem> {
+  avatarUrl: string;
+}
+
+/** Section communauté de l'export RGPD. */
+interface CommunityExport {
+  exportVersion: number;
+  community: {
+    profile: { avatarUrl: string };
+    posts: unknown[];
+    comments: unknown[];
+    reactions: unknown[];
+    blocks: { handle: string }[];
+    reportsFiled: unknown[];
+    moderationDecisions: { action: string }[];
+  };
+}
+
+/** Courriel capturé via l'espion sur `MailService.send`. */
+interface MailMessage {
+  to: string;
+  subject: string;
+  text: string;
 }
 
 /** JPEG 2400 × 1200 avec EXIF (appareil + coordonnées GPS). */
@@ -108,7 +164,11 @@ describe('Communauté (E2E)', () => {
       })
       .expect(201);
     emails.push(email);
-    return { email, token: res.body.accessToken, userId: res.body.user.id };
+    return {
+      email,
+      token: bodyOf<AuthBody>(res).accessToken,
+      userId: bodyOf<AuthBody>(res).user.id,
+    };
   }
 
   async function verified(name: string, ageDays = 30): Promise<Account> {
@@ -151,16 +211,16 @@ describe('Communauté (E2E)', () => {
       .send({
         type: 'PHOTO',
         body,
-        mediaIds: [media.body.id],
+        mediaIds: [bodyOf<IdBody>(media).id],
         speciesCategory: 'REPTILE',
       })
       .expect(201);
-    return res.body;
+    return bodyOf<CommunityPostBody>(res);
   }
 
   function mailsTo(email: string, subject?: RegExp) {
-    return send.mock.calls
-      .map((c) => c[0] as { to: string; subject: string; text: string })
+    return (send.mock.calls as Array<[MailMessage]>)
+      .map((c) => c[0])
       .filter((m) => m.to === email && (!subject || subject.test(m.subject)));
   }
 
@@ -220,7 +280,10 @@ describe('Communauté (E2E)', () => {
       data: { role: 'OPERATOR' },
     });
     const g = await http().post('/auth/guest').send({}).expect(201);
-    guest = { token: g.body.accessToken, userId: g.body.user.id };
+    guest = {
+      token: bodyOf<AuthBody>(g).accessToken,
+      userId: bodyOf<AuthBody>(g).user.id,
+    };
     guestIds.push(guest.userId);
   });
 
@@ -269,27 +332,28 @@ describe('Communauté (E2E)', () => {
       const res = await activate(guest as Account, handle('guesty')).expect(
         403,
       );
-      expect(res.body.code).toBe('GUEST_ACCOUNT');
+      expect(bodyOf<ErrorBody>(res).code).toBe('GUEST_ACCOUNT');
       const me = await http()
         .get('/community/profile')
         .set(bearer(guest))
         .expect(200);
-      expect(me.body.canPublish).toBe(false);
-      expect(me.body.reasons).toContain('GUEST_ACCOUNT');
+      expect(bodyOf<MeBody>(me).canPublish).toBe(false);
+      expect(bodyOf<MeBody>(me).reasons).toContain('GUEST_ACCOUNT');
     });
 
     it('compte non vérifié : 403 EMAIL_NOT_VERIFIED (activation, publication, upload)', async () => {
       expect(
-        (await activate(unverified, handle('unv')).expect(403)).body.code,
+        bodyOf<ErrorBody>(await activate(unverified, handle('unv')).expect(403))
+          .code,
       ).toBe('EMAIL_NOT_VERIFIED');
       const post = await http()
         .post('/community/posts')
         .set(bearer(unverified))
         .send({ type: 'QUESTION', body: 'Bonjour ?' })
         .expect(403);
-      expect(post.body.code).toBe('EMAIL_NOT_VERIFIED');
+      expect(bodyOf<ErrorBody>(post).code).toBe('EMAIL_NOT_VERIFIED');
       const up = await upload(unverified, await gpsJpeg()).expect(403);
-      expect(up.body.code).toBe('EMAIL_NOT_VERIFIED');
+      expect(bodyOf<ErrorBody>(up).code).toBe('EMAIL_NOT_VERIFIED');
     });
 
     it('vérifié sans profil : 403 COMMUNITY_PROFILE_REQUIRED', async () => {
@@ -298,7 +362,7 @@ describe('Communauté (E2E)', () => {
         .set(bearer(alice))
         .send({ type: 'QUESTION', body: 'Bonjour ?' })
         .expect(403);
-      expect(res.body.code).toBe('COMMUNITY_PROFILE_REQUIRED');
+      expect(bodyOf<ErrorBody>(res).code).toBe('COMMUNITY_PROFILE_REQUIRED');
     });
 
     it('activation explicite : règles versionnées obligatoires', async () => {
@@ -320,7 +384,9 @@ describe('Communauté (E2E)', () => {
           rulesVersion: '1999-01',
         })
         .expect(400);
-      expect(wrong.body.code).toBe('COMMUNITY_RULES_VERSION_MISMATCH');
+      expect(bodyOf<ErrorBody>(wrong).code).toBe(
+        'COMMUNITY_RULES_VERSION_MISMATCH',
+      );
 
       const ok = await activate(alice, handle('Alice')).expect(201);
       expect(ok.body).toMatchObject({
@@ -330,7 +396,8 @@ describe('Communauté (E2E)', () => {
       });
       expect(ok.body).not.toHaveProperty('email');
       expect(
-        (await activate(alice, handle('other')).expect(409)).body.code,
+        bodyOf<ErrorBody>(await activate(alice, handle('other')).expect(409))
+          .code,
       ).toBe('COMMUNITY_PROFILE_EXISTS');
       const me = await http()
         .get('/community/profile')
@@ -345,14 +412,15 @@ describe('Communauté (E2E)', () => {
 
     it('pseudo unique (insensible à la casse), format et mots réservés', async () => {
       const taken = await activate(bob, handle('alice')).expect(409);
-      expect(taken.body.code).toBe('HANDLE_TAKEN');
-      expect((await activate(bob, 'Captivia_Team').expect(400)).body.code).toBe(
-        'HANDLE_RESERVED',
-      );
-      expect((await activate(bob, 'a b').expect(400)).body.code).toBe(
-        'HANDLE_INVALID',
-      );
-      expect((await activate(bob, 'x').expect(400)).body.code).toBe(
+      expect(bodyOf<ErrorBody>(taken).code).toBe('HANDLE_TAKEN');
+      expect(
+        bodyOf<ErrorBody>(await activate(bob, 'Captivia_Team').expect(400))
+          .code,
+      ).toBe('HANDLE_RESERVED');
+      expect(
+        bodyOf<ErrorBody>(await activate(bob, 'a b').expect(400)).code,
+      ).toBe('HANDLE_INVALID');
+      expect(bodyOf<ErrorBody>(await activate(bob, 'x').expect(400)).code).toBe(
         'HANDLE_INVALID',
       );
       await activate(bob, handle('bob')).expect(201);
@@ -370,9 +438,9 @@ describe('Communauté (E2E)', () => {
         .get('/community/profile')
         .set(bearer(legacy))
         .expect(200);
-      expect(me.body.ageConfirmationRequired).toBe(true);
+      expect(bodyOf<MeBody>(me).ageConfirmationRequired).toBe(true);
       const res = await activate(legacy, handle('legacy')).expect(403);
-      expect(res.body.code).toBe('AGE_CONFIRMATION_REQUIRED');
+      expect(bodyOf<ErrorBody>(res).code).toBe('AGE_CONFIRMATION_REQUIRED');
       await http()
         .post('/community/profile')
         .set(bearer(legacy))
@@ -411,14 +479,14 @@ describe('Communauté (E2E)', () => {
         'evil.png',
         'image/png',
       ).expect(415);
-      expect(res.body.code).toBe('MEDIA_UNSUPPORTED_TYPE');
+      expect(bodyOf<ErrorBody>(res).code).toBe('MEDIA_UNSUPPORTED_TYPE');
     });
 
     it('rejette une image trop lourde en 413 (MEDIA_MAX_BYTES)', async () => {
       process.env.MEDIA_MAX_BYTES = '2048';
       try {
         const res = await upload(alice, await gpsJpeg()).expect(413);
-        expect(res.body.code).toBe('MEDIA_TOO_LARGE');
+        expect(bodyOf<ErrorBody>(res).code).toBe('MEDIA_TOO_LARGE');
       } finally {
         delete process.env.MEDIA_MAX_BYTES;
       }
@@ -427,7 +495,7 @@ describe('Communauté (E2E)', () => {
     it('sans fichier : 400 ; sans profil : 403', async () => {
       await http().post('/community/media').set(bearer(alice)).expect(400);
       const res = await upload(unverified, await gpsJpeg()).expect(403);
-      expect(res.body.code).toBe('EMAIL_NOT_VERIFIED');
+      expect(bodyOf<ErrorBody>(res).code).toBe('EMAIL_NOT_VERIFIED');
     });
 
     it('redimensionne à 1 600 px, ré-encode en WebP et supprime EXIF et GPS', async () => {
@@ -435,10 +503,12 @@ describe('Communauté (E2E)', () => {
       expect((await sharp(input).metadata()).exif).toBeDefined();
       const res = await upload(alice, input).expect(201);
       expect(res.body).toMatchObject({ width: 1600, height: 800 });
-      expect(res.body.url).toMatch(/\/community\/media\/[0-9a-f-]{36}\.webp$/);
+      expect(bodyOf<UrlBody>(res).url).toMatch(
+        /\/community\/media\/[0-9a-f-]{36}\.webp$/,
+      );
 
       const file = await http()
-        .get(`/community/media/${keyOf(res.body.url)}`)
+        .get(`/community/media/${keyOf(bodyOf<UrlBody>(res).url)}`)
         .buffer(true)
         .parse((r, cb) => {
           const chunks: Buffer[] = [];
@@ -469,35 +539,37 @@ describe('Communauté (E2E)', () => {
       const p1 = await http()
         .patch('/community/profile')
         .set(bearer(bob))
-        .send({ avatarMediaId: first.body.id })
+        .send({ avatarMediaId: bodyOf<IdBody>(first).id })
         .expect(200);
-      expect(p1.body.avatarUrl).toBe(first.body.url);
+      expect(bodyOf<ProfilePage>(p1).avatarUrl).toBe(
+        bodyOf<UrlBody>(first).url,
+      );
       const second = await upload(bob, await gpsJpeg()).expect(201);
       await http()
         .patch('/community/profile')
         .set(bearer(bob))
-        .send({ avatarMediaId: second.body.id })
+        .send({ avatarMediaId: bodyOf<IdBody>(second).id })
         .expect(200);
-      expect(existsSync(path.join(mediaDir, keyOf(first.body.url)))).toBe(
-        false,
-      );
-      expect(existsSync(path.join(mediaDir, keyOf(second.body.url)))).toBe(
-        true,
-      );
+      expect(
+        existsSync(path.join(mediaDir, keyOf(bodyOf<UrlBody>(first).url))),
+      ).toBe(false);
+      expect(
+        existsSync(path.join(mediaDir, keyOf(bodyOf<UrlBody>(second).url))),
+      ).toBe(true);
       // Le média d'un autre compte ne peut pas servir d'avatar.
       const foreign = await upload(alice, await gpsJpeg()).expect(201);
       await http()
         .patch('/community/profile')
         .set(bearer(bob))
-        .send({ avatarMediaId: foreign.body.id })
+        .send({ avatarMediaId: bodyOf<IdBody>(foreign).id })
         .expect(400);
     });
   });
 
   // ---------------------------------------------------------------------------
   describe('publications, commentaires, j’aime', () => {
-    let photo: any;
-    let question: any;
+    let photo: CommunityPostBody;
+    let question: CommunityPostBody;
     let animalId: string;
 
     it('PHOTO : 1 à 4 images, déjà téléversées par l’auteur', async () => {
@@ -506,12 +578,12 @@ describe('Communauté (E2E)', () => {
         .set(bearer(alice))
         .send({ type: 'PHOTO', body: 'Sans image' })
         .expect(400);
-      expect(none.body.code).toBe('COMMUNITY_INVALID_MEDIA');
+      expect(bodyOf<ErrorBody>(none).code).toBe('COMMUNITY_INVALID_MEDIA');
       const foreign = await upload(bob, await gpsJpeg()).expect(201);
       await http()
         .post('/community/posts')
         .set(bearer(alice))
-        .send({ type: 'PHOTO', mediaIds: [foreign.body.id] })
+        .send({ type: 'PHOTO', mediaIds: [bodyOf<IdBody>(foreign).id] })
         .expect(400);
 
       photo = await photoPost(alice);
@@ -536,13 +608,13 @@ describe('Communauté (E2E)', () => {
 
     it('QUESTION : texte obligatoire, 2 000 caractères au plus', async () => {
       expect(
-        (
+        bodyOf<ErrorBody>(
           await http()
             .post('/community/posts')
             .set(bearer(alice))
             .send({ type: 'QUESTION', body: '   ' })
-            .expect(400)
-        ).body.code,
+            .expect(400),
+        ).code,
       ).toBe('COMMUNITY_BODY_REQUIRED');
       await http()
         .post('/community/posts')
@@ -566,7 +638,7 @@ describe('Communauté (E2E)', () => {
           notes: `${SECRET} notes`,
         })
         .expect(201);
-      animalId = animal.body.id;
+      animalId = bodyOf<IdBody>(animal).id;
       await prisma.animalHealthRecord.create({
         data: {
           animalId,
@@ -619,7 +691,7 @@ describe('Communauté (E2E)', () => {
         .get('/community/posts?limit=50')
         .set(bearer(carol))
         .expect(200);
-      const ids = feed.body.items.map((p: any) => p.id);
+      const ids = bodyOf<Page<ListedItem>>(feed).items.map((p) => p.id);
       expect(ids).toEqual(expect.arrayContaining([photo.id, question.id]));
       expect(ids.indexOf(question.id)).toBeLessThan(ids.indexOf(photo.id)); // plus récent d'abord
 
@@ -627,28 +699,34 @@ describe('Communauté (E2E)', () => {
         .get('/community/posts?category=FISH')
         .set(bearer(carol))
         .expect(200);
-      expect(fish.body.items.map((p: any) => p.id)).not.toContain(photo.id);
+      expect(
+        bodyOf<Page<ListedItem>>(fish).items.map((p) => p.id),
+      ).not.toContain(photo.id);
       const questions = await http()
         .get('/community/posts?type=QUESTION&limit=50')
         .set(bearer(carol))
         .expect(200);
       expect(
-        questions.body.items.every((p: any) => p.type === 'QUESTION'),
+        bodyOf<Page<ListedItem>>(questions).items.every(
+          (p) => p.type === 'QUESTION',
+        ),
       ).toBe(true);
 
       const p1 = await http()
         .get(`/community/users/${handle('alice')}/posts?limit=1`)
         .set(bearer(carol))
         .expect(200);
-      expect(p1.body.items).toHaveLength(1);
-      expect(p1.body.nextCursor).toEqual(expect.any(String));
+      expect(bodyOf<Page<ListedItem>>(p1).items).toHaveLength(1);
+      expect(bodyOf<ProfilePage>(p1).nextCursor).toEqual(expect.any(String));
       const p2 = await http()
         .get(
-          `/community/users/${handle('alice')}/posts?limit=1&cursor=${p1.body.nextCursor}`,
+          `/community/users/${handle('alice')}/posts?limit=1&cursor=${bodyOf<ProfilePage>(p1).nextCursor}`,
         )
         .set(bearer(carol))
         .expect(200);
-      expect(p2.body.items[0].id).not.toBe(p1.body.items[0].id);
+      expect(bodyOf<Page<ListedItem>>(p2).items[0].id).not.toBe(
+        bodyOf<Page<ListedItem>>(p1).items[0].id,
+      );
       await http()
         .get('/community/posts?cursor=garbage')
         .set(bearer(carol))
@@ -664,14 +742,17 @@ describe('Communauté (E2E)', () => {
       const reply = await http()
         .post(`/community/posts/${question.id}/comments`)
         .set(bearer(carol))
-        .send({ body: 'Oui, et une boîte de mue.', parentId: c1.body.id })
+        .send({
+          body: 'Oui, et une boîte de mue.',
+          parentId: bodyOf<IdBody>(c1).id,
+        })
         .expect(201);
       const nested = await http()
         .post(`/community/posts/${question.id}/comments`)
         .set(bearer(alice))
-        .send({ body: 'Trop profond', parentId: reply.body.id })
+        .send({ body: 'Trop profond', parentId: bodyOf<IdBody>(reply).id })
         .expect(400);
-      expect(nested.body.code).toBe('COMMUNITY_INVALID_PARENT');
+      expect(bodyOf<ErrorBody>(nested).code).toBe('COMMUNITY_INVALID_PARENT');
       await http()
         .post(`/community/posts/${question.id}/comments`)
         .set(bearer(bob))
@@ -679,12 +760,14 @@ describe('Communauté (E2E)', () => {
         .expect(400);
 
       const notAuthor = await http()
-        .put(`/community/comments/${c1.body.id}/helpful`)
+        .put(`/community/comments/${bodyOf<IdBody>(c1).id}/helpful`)
         .set(bearer(bob))
         .expect(403);
-      expect(notAuthor.body.code).toBe('COMMUNITY_NOT_POST_AUTHOR');
+      expect(bodyOf<ErrorBody>(notAuthor).code).toBe(
+        'COMMUNITY_NOT_POST_AUTHOR',
+      );
       await http()
-        .put(`/community/comments/${c1.body.id}/helpful`)
+        .put(`/community/comments/${bodyOf<IdBody>(c1).id}/helpful`)
         .set(bearer(alice))
         .expect(200);
 
@@ -692,14 +775,18 @@ describe('Communauté (E2E)', () => {
         .get(`/community/posts/${question.id}`)
         .set(bearer(carol))
         .expect(200);
-      expect(detail.body.helpfulCommentId).toBe(c1.body.id);
-      expect(detail.body.commentCount).toBe(2);
-      expect(detail.body.comments.items).toHaveLength(1);
-      expect(detail.body.comments.items[0]).toMatchObject({
-        id: c1.body.id,
+      expect(bodyOf<PostDetail>(detail).helpfulCommentId).toBe(
+        bodyOf<IdBody>(c1).id,
+      );
+      expect(bodyOf<PostDetail>(detail).commentCount).toBe(2);
+      expect(bodyOf<PostDetail>(detail).comments.items).toHaveLength(1);
+      expect(bodyOf<PostDetail>(detail).comments.items[0]).toMatchObject({
+        id: bodyOf<IdBody>(c1).id,
         isHelpful: true,
         author: { handle: handle('bob') },
-        replies: [{ id: reply.body.id, parentId: c1.body.id }],
+        replies: [
+          { id: bodyOf<IdBody>(reply).id, parentId: bodyOf<IdBody>(c1).id },
+        ],
       });
       // Une photo n'a pas de réponse utile.
       const onPhoto = await http()
@@ -708,12 +795,12 @@ describe('Communauté (E2E)', () => {
         .send({ body: 'Superbe' })
         .expect(201);
       expect(
-        (
+        bodyOf<ErrorBody>(
           await http()
-            .put(`/community/comments/${onPhoto.body.id}/helpful`)
+            .put(`/community/comments/${bodyOf<IdBody>(onPhoto).id}/helpful`)
             .set(bearer(alice))
-            .expect(400)
-        ).body.code,
+            .expect(400),
+        ).code,
       ).toBe('COMMUNITY_NOT_A_QUESTION');
     });
 
@@ -748,12 +835,12 @@ describe('Communauté (E2E)', () => {
       expect(c.body).toEqual({ liked: false, likeCount: 1 });
       // Un invité ne peut pas aimer (compte requis).
       expect(
-        (
+        bodyOf<ErrorBody>(
           await http()
             .put(`/community/posts/${photo.id}/like`)
             .set(bearer(guest))
-            .expect(403)
-        ).body.code,
+            .expect(403),
+        ).code,
       ).toBe('GUEST_ACCOUNT');
     });
 
@@ -841,7 +928,7 @@ describe('Communauté (E2E)', () => {
           .set(bearer(carol))
           .send({ type: 'QUESTION', body: 'Deuxième' })
           .expect(429);
-        expect(res.body.code).toBe('COMMUNITY_RATE_LIMITED');
+        expect(bodyOf<ErrorBody>(res).code).toBe('COMMUNITY_RATE_LIMITED');
       } finally {
         process.env.COMMUNITY_POSTS_PER_HOUR = '1000';
       }
@@ -859,17 +946,17 @@ describe('Communauté (E2E)', () => {
       try {
         for (const body of ['Trois', 'Quatre']) {
           await http()
-            .post(`/community/posts/${target.body.id}/comments`)
+            .post(`/community/posts/${bodyOf<IdBody>(target).id}/comments`)
             .set(bearer(dave))
             .send({ body })
             .expect(201);
         }
         const res = await http()
-          .post(`/community/posts/${target.body.id}/comments`)
+          .post(`/community/posts/${bodyOf<IdBody>(target).id}/comments`)
           .set(bearer(dave))
           .send({ body: 'Cinq' })
           .expect(429);
-        expect(res.body.code).toBe('COMMUNITY_RATE_LIMITED');
+        expect(bodyOf<ErrorBody>(res).code).toBe('COMMUNITY_RATE_LIMITED');
       } finally {
         process.env.COMMUNITY_COMMENTS_PER_MINUTE = '1000';
       }
@@ -884,7 +971,7 @@ describe('Communauté (E2E)', () => {
           body: 'Promo sur www.reptiles-discount.com !',
         })
         .expect(400);
-      expect(res.body.code).toBe('COMMUNITY_LINKS_NOT_ALLOWED');
+      expect(bodyOf<ErrorBody>(res).code).toBe('COMMUNITY_LINKS_NOT_ALLOWED');
       const target = await http()
         .post('/community/posts')
         .set(bearer(alice))
@@ -894,17 +981,19 @@ describe('Communauté (E2E)', () => {
         })
         .expect(201);
       const comment = await http()
-        .post(`/community/posts/${target.body.id}/comments`)
+        .post(`/community/posts/${bodyOf<IdBody>(target).id}/comments`)
         .set(bearer(bob))
         .send({ body: 'Voir https://spam.example' })
         .expect(400);
-      expect(comment.body.code).toBe('COMMUNITY_LINKS_NOT_ALLOWED');
+      expect(bodyOf<ErrorBody>(comment).code).toBe(
+        'COMMUNITY_LINKS_NOT_ALLOWED',
+      );
     });
   });
 
   // ---------------------------------------------------------------------------
   describe('signalements, masquage automatique, modération', () => {
-    let post: any;
+    let post: CommunityPostBody;
     let decisionId: string;
 
     it('signalement : motif fermé, un par compte, pas sur son propre contenu', async () => {
@@ -925,13 +1014,15 @@ describe('Communauté (E2E)', () => {
         .set(bearer(bob))
         .send({ reason: 'HATE' })
         .expect(200);
-      expect(again.body.alreadyReported).toBe(true);
+      expect(bodyOf<{ alreadyReported: boolean }>(again).alreadyReported).toBe(
+        true,
+      );
       const own = await http()
         .post(`/community/posts/${post.id}/report`)
         .set(bearer(alice))
         .send({ reason: 'SPAM' })
         .expect(400);
-      expect(own.body.code).toBe('COMMUNITY_CANNOT_REPORT_OWN');
+      expect(bodyOf<ErrorBody>(own).code).toBe('COMMUNITY_CANNOT_REPORT_OWN');
       // Toujours visible : un seul signalement distinct (seuil 2).
       await http()
         .get(`/community/posts/${post.id}`)
@@ -970,12 +1061,14 @@ describe('Communauté (E2E)', () => {
         .get('/community/posts?limit=50')
         .set(bearer(carol))
         .expect(200);
-      expect(feed.body.items.map((p: any) => p.id)).not.toContain(post.id);
+      expect(
+        bodyOf<Page<ListedItem>>(feed).items.map((p) => p.id),
+      ).not.toContain(post.id);
       const own = await http()
         .get(`/community/posts/${post.id}`)
         .set(bearer(alice))
         .expect(200);
-      expect(own.body.status).toBe('HIDDEN_AUTO');
+      expect(bodyOf<{ status: string }>(own).status).toBe('HIDDEN_AUTO');
 
       const mails = mailsTo(alice.email, /modération/);
       expect(mails).toHaveLength(1);
@@ -994,8 +1087,8 @@ describe('Communauté (E2E)', () => {
         .get('/community/me/decisions')
         .set(bearer(alice))
         .expect(200);
-      const auto = decisions.body.items.find(
-        (d: any) => d.targetId === post.id,
+      const auto = bodyOf<Page<ListedItem>>(decisions).items.find(
+        (d) => d.targetId === post.id,
       );
       expect(auto).toMatchObject({
         action: 'AUTO_HIDE',
@@ -1005,7 +1098,7 @@ describe('Communauté (E2E)', () => {
         appealStatus: 'NONE',
       });
       expect(auto).not.toHaveProperty('operatorId');
-      decisionId = auto.id;
+      decisionId = auto!.id;
       const log = await prisma.communityModerationAction.findUnique({
         where: { id: decisionId },
       });
@@ -1043,7 +1136,9 @@ describe('Communauté (E2E)', () => {
         .set(bearer(alice))
         .send({ text: 'Encore une fois, merci de revoir.' })
         .expect(400);
-      expect(twice.body.code).toBe('COMMUNITY_APPEAL_NOT_ALLOWED');
+      expect(bodyOf<ErrorBody>(twice).code).toBe(
+        'COMMUNITY_APPEAL_NOT_ALLOWED',
+      );
     });
 
     it('file de modération réservée aux opérateurs', async () => {
@@ -1059,7 +1154,9 @@ describe('Communauté (E2E)', () => {
         .get('/community/moderation/queue')
         .set(bearer(operator))
         .expect(200);
-      const item = queue.body.items.find((i: any) => i.targetId === post.id);
+      const item = bodyOf<Page<ListedItem>>(queue).items.find(
+        (i) => i.targetId === post.id,
+      );
       expect(item).toMatchObject({
         targetType: 'POST',
         status: 'HIDDEN_AUTO',
@@ -1072,12 +1169,16 @@ describe('Communauté (E2E)', () => {
         .get('/community/moderation/hidden')
         .set(bearer(operator))
         .expect(200);
-      expect(hidden.body.items.map((i: any) => i.targetId)).toContain(post.id);
+      expect(
+        bodyOf<Page<ListedItem>>(hidden).items.map((i) => i.targetId),
+      ).toContain(post.id);
       const appeals = await http()
         .get('/community/moderation/appeals')
         .set(bearer(operator))
         .expect(200);
-      expect(appeals.body.items.map((a: any) => a.id)).toContain(decisionId);
+      expect(
+        bodyOf<Page<ListedItem>>(appeals).items.map((a) => a.id),
+      ).toContain(decisionId);
     });
 
     it('recours accueilli : contenu rétabli, auteur notifié', async () => {
@@ -1098,7 +1199,9 @@ describe('Communauté (E2E)', () => {
           statement: 'Photo d’animal conforme aux règles.',
         })
         .expect(200);
-      expect(res.body.appealStatus).toBe('REVERSED');
+      expect(bodyOf<{ appealStatus: string }>(res).appealStatus).toBe(
+        'REVERSED',
+      );
       await http()
         .get(`/community/posts/${post.id}`)
         .set(bearer(carol))
@@ -1120,7 +1223,7 @@ describe('Communauté (E2E)', () => {
         .set(bearer(operator))
         .send({ reason: 'HATE' })
         .expect(400);
-      expect(missing.body.message).toContain('statement');
+      expect(bodyOf<ErrorBody>(missing).message).toContain('statement');
       await http()
         .post(`/community/moderation/posts/${post.id}/hide`)
         .set(bearer(operator))
@@ -1156,7 +1259,9 @@ describe('Communauté (E2E)', () => {
         .send({ body: 'Commentaire déplacé' })
         .expect(201);
       await http()
-        .post(`/community/moderation/comments/${comment.body.id}/delete`)
+        .post(
+          `/community/moderation/comments/${bodyOf<IdBody>(comment).id}/delete`,
+        )
         .set(bearer(operator))
         .send({
           reason: 'HARASSMENT',
@@ -1164,7 +1269,9 @@ describe('Communauté (E2E)', () => {
         })
         .expect(200);
       expect(
-        await prisma.communityComment.count({ where: { id: comment.body.id } }),
+        await prisma.communityComment.count({
+          where: { id: bodyOf<IdBody>(comment).id },
+        }),
       ).toBe(0);
       mails = mailsTo(bob.email, /modération/);
       expect(mails.at(-1)!.text).toContain(
@@ -1196,9 +1303,9 @@ describe('Communauté (E2E)', () => {
         .get('/community/moderation/log?limit=50')
         .set(bearer(operator))
         .expect(200);
-      const actions = log.body.items
-        .filter((a: any) => a.targetId === post.id)
-        .map((a: any) => a.action);
+      const actions = bodyOf<Page<ListedItem>>(log)
+        .items.filter((a) => a.targetId === post.id)
+        .map((a) => a.action);
       expect(actions).toEqual(
         expect.arrayContaining(['AUTO_HIDE', 'RESTORE', 'HIDE', 'DELETE']),
       );
@@ -1248,7 +1355,7 @@ describe('Communauté (E2E)', () => {
         .set(bearer(bob))
         .send({ type: 'QUESTION', body: 'Encore moi' })
         .expect(403);
-      expect(res.body.code).toBe('COMMUNITY_SUSPENDED');
+      expect(bodyOf<ErrorBody>(res).code).toBe('COMMUNITY_SUSPENDED');
       expect(mailsTo(bob.email, /modération/)[0].text).toContain(
         'suspendue pour votre compte',
       );
@@ -1256,7 +1363,7 @@ describe('Communauté (E2E)', () => {
         .get('/community/profile')
         .set(bearer(bob))
         .expect(200);
-      expect(me.body.reasons).toContain('COMMUNITY_SUSPENDED');
+      expect(bodyOf<MeBody>(me).reasons).toContain('COMMUNITY_SUSPENDED');
       await http()
         .post(`/community/moderation/users/${handle('bob')}/unsuspend`)
         .set(bearer(operator))
@@ -1296,30 +1403,30 @@ describe('Communauté (E2E)', () => {
         .get('/community/blocks')
         .set(bearer(carol))
         .expect(200);
-      expect(blocks.body.items.map((b: any) => b.handle)).toEqual([
-        handle('Alice'),
-      ]);
+      expect(
+        bodyOf<Page<ListedItem>>(blocks).items.map((b) => b.handle),
+      ).toEqual([handle('Alice')]);
 
       const carolFeed = await http()
         .get('/community/posts?limit=50')
         .set(bearer(carol))
         .expect(200);
-      expect(carolFeed.body.items.map((p: any) => p.id)).not.toContain(
-        alicePost.id,
-      );
+      expect(
+        bodyOf<Page<ListedItem>>(carolFeed).items.map((p) => p.id),
+      ).not.toContain(alicePost.id);
       const aliceFeed = await http()
         .get('/community/posts?limit=50')
         .set(bearer(alice))
         .expect(200);
-      expect(aliceFeed.body.items.map((p: any) => p.id)).not.toContain(
-        carolPost.body.id,
-      );
+      expect(
+        bodyOf<Page<ListedItem>>(aliceFeed).items.map((p) => p.id),
+      ).not.toContain(bodyOf<IdBody>(carolPost).id);
       await http()
         .get(`/community/posts/${alicePost.id}`)
         .set(bearer(carol))
         .expect(404);
       await http()
-        .get(`/community/posts/${carolPost.body.id}`)
+        .get(`/community/posts/${bodyOf<IdBody>(carolPost).id}`)
         .set(bearer(alice))
         .expect(404);
       await http()
@@ -1331,12 +1438,12 @@ describe('Communauté (E2E)', () => {
         .set(bearer(alice))
         .expect(404);
       await http()
-        .post(`/community/posts/${carolPost.body.id}/comments`)
+        .post(`/community/posts/${bodyOf<IdBody>(carolPost).id}/comments`)
         .set(bearer(alice))
         .send({ body: 'Coucou' })
         .expect(404);
       await http()
-        .put(`/community/posts/${carolPost.body.id}/like`)
+        .put(`/community/posts/${bodyOf<IdBody>(carolPost).id}/like`)
         .set(bearer(alice))
         .expect(404);
 
@@ -1362,8 +1469,8 @@ describe('Communauté (E2E)', () => {
         .get('/users/me/export')
         .set(bearer(carol))
         .expect(200);
-      expect(carolExport.body.exportVersion).toBe(4);
-      const c = carolExport.body.community;
+      expect(bodyOf<CommunityExport>(carolExport).exportVersion).toBe(4);
+      const c = bodyOf<CommunityExport>(carolExport).community;
       expect(c.profile).toMatchObject({
         handle: handle('carol'),
         rulesVersion: COMMUNITY_RULES_VERSION,
@@ -1371,22 +1478,28 @@ describe('Communauté (E2E)', () => {
       expect(c.posts.length).toBeGreaterThan(0);
       expect(c.comments.length).toBeGreaterThan(0);
       expect(c.reactions).toHaveLength(1);
-      expect(c.blocks.map((b: any) => b.handle)).toEqual([handle('bob')]);
+      expect(c.blocks.map((b) => b.handle)).toEqual([handle('bob')]);
 
       const bobExport = await http()
         .get('/users/me/export')
         .set(bearer(bob))
         .expect(200);
-      expect(bobExport.body.community.reportsFiled.length).toBeGreaterThan(0);
-      expect(bobExport.body.community.reportsFiled[0]).toMatchObject({
+      expect(
+        bodyOf<CommunityExport>(bobExport).community.reportsFiled.length,
+      ).toBeGreaterThan(0);
+      expect(
+        bodyOf<CommunityExport>(bobExport).community.reportsFiled[0],
+      ).toMatchObject({
         reason: expect.any(String),
       });
       expect(
-        bobExport.body.community.moderationDecisions.map((d: any) => d.action),
+        bodyOf<CommunityExport>(bobExport).community.moderationDecisions.map(
+          (d) => d.action,
+        ),
       ).toEqual(expect.arrayContaining(['SUSPEND', 'UNSUSPEND', 'DELETE']));
-      expect(bobExport.body.community.profile.avatarUrl).toEqual(
-        expect.any(String),
-      );
+      expect(
+        bodyOf<CommunityExport>(bobExport).community.profile.avatarUrl,
+      ).toEqual(expect.any(String));
     });
 
     it('quitter la communauté : profil, contenus et images supprimés', async () => {
@@ -1403,7 +1516,7 @@ describe('Communauté (E2E)', () => {
         .get('/community/profile')
         .set(bearer(erin))
         .expect(200);
-      expect(me.body.profile).toBeNull();
+      expect(bodyOf<MeBody>(me).profile).toBeNull();
       await http()
         .get(`/community/users/${handle('erin')}`)
         .set(bearer(carol))
@@ -1476,20 +1589,24 @@ describe('Communauté (E2E)', () => {
       const orphan = await upload(carol, await gpsJpeg()).expect(201);
       const fresh = await upload(carol, await gpsJpeg()).expect(201);
       await prisma.communityMedia.update({
-        where: { id: orphan.body.id },
+        where: { id: bodyOf<IdBody>(orphan).id },
         data: { createdAt: new Date(Date.now() - 2 * DAY_MS) },
       });
       const res = await app.get(MaintenanceService).runOnce();
       expect(res.locked).toBe(true);
       expect(res.deleted.communityMedia).toBeGreaterThanOrEqual(1);
-      expect(existsSync(path.join(mediaDir, keyOf(orphan.body.url)))).toBe(
-        false,
-      );
       expect(
-        await prisma.communityMedia.count({ where: { id: orphan.body.id } }),
+        existsSync(path.join(mediaDir, keyOf(bodyOf<UrlBody>(orphan).url))),
+      ).toBe(false);
+      expect(
+        await prisma.communityMedia.count({
+          where: { id: bodyOf<IdBody>(orphan).id },
+        }),
       ).toBe(0);
       // Téléversée il y a moins de 24 h : conservée (publication en cours de rédaction).
-      expect(existsSync(path.join(mediaDir, keyOf(fresh.body.url)))).toBe(true);
+      expect(
+        existsSync(path.join(mediaDir, keyOf(bodyOf<UrlBody>(fresh).url))),
+      ).toBe(true);
       // L'avatar de Bob n'est pas orphelin.
       const bobAvatar = await prisma.communityProfile.findUnique({
         where: { userId: bob.userId },

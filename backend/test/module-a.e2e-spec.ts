@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as request from 'supertest';
+import { IdBody, bodyOf, httpServer } from './utils/http';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcryptjs';
 import { AppModule } from '../src/app.module';
@@ -29,6 +30,14 @@ function dayOffsetStr(n: number): string {
   const d = new Date();
   d.setUTCDate(d.getUTCDate() + n);
   return d.toISOString().slice(0, 10);
+}
+
+/** Événement de notification (partiel) consulté par ces tests. */
+interface EventBody {
+  id: string;
+  type: string;
+  status: string;
+  label: string;
 }
 
 describe('Module A E2E — médicaments & RDV vétérinaires', () => {
@@ -65,12 +74,12 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
 
   /** Crée un animal pour le compte et retourne son id. */
   async function createAnimal(token: string, name: string): Promise<string> {
-    const res = await request(app.getHttpServer())
+    const res = await request(httpServer(app))
       .post('/users/me/animals')
       .set('Authorization', `Bearer ${token}`)
       .send({ speciesId: 5221172, name, sex: 'male' })
       .expect(201);
-    return res.body.id as string;
+    return bodyOf<IdBody>(res).id;
   }
 
   beforeAll(async () => {
@@ -116,7 +125,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       token = acc.token;
       animalId = await createAnimal(token, 'Med Gecko');
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -134,11 +143,11 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       expect(res.body).toHaveProperty('active', true);
       expect(res.body).toHaveProperty('name', 'Vitamine D3');
       expect(res.body).toHaveProperty('frequency', 'daily');
-      medicationId = res.body.id;
+      medicationId = bodyOf<IdBody>(res).id;
     });
 
     it('POST every_x_hours avec intervalHours → 201', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -155,7 +164,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
 
     it('GET → 200, tri par startDate desc', async () => {
       // Deux médicaments avec des startDate différentes
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -166,14 +175,14 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
         })
         .expect(201);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
       expect(Array.isArray(res.body)).toBe(true);
-      expect(res.body.length).toBeGreaterThanOrEqual(3);
-      const dates = res.body.map((m: { startDate: string }) =>
+      expect(bodyOf<unknown[]>(res).length).toBeGreaterThanOrEqual(3);
+      const dates = bodyOf<{ startDate: string }[]>(res).map((m) =>
         new Date(m.startDate).getTime(),
       );
       const sorted = [...dates].sort((a, b) => b - a);
@@ -181,7 +190,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('PATCH → 200 (dose + active:false pour arrêter)', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .patch(`/users/me/animals/${animalId}/medications/${medicationId}`)
         .set('Authorization', `Bearer ${token}`)
         .send({ dose: '2', active: false })
@@ -192,22 +201,22 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('DELETE → 200 puis GET → disparu', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete(`/users/me/animals/${animalId}/medications/${medicationId}`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      expect(res.body.some((m: { id: string }) => m.id === medicationId)).toBe(
-        false,
-      );
+      expect(
+        bodyOf<{ id: string }[]>(res).some((m) => m.id === medicationId),
+      ).toBe(false);
     });
 
     it('DELETE id inexistant → 404', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .delete(
           `/users/me/animals/${animalId}/medications/${crypto.randomUUID()}`,
         )
@@ -229,7 +238,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       token = acc.token;
       animalId = await createAnimal(token, 'Vet Gecko');
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -242,12 +251,14 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
 
       expect(res.body).toHaveProperty('id');
       expect(res.body).toHaveProperty('status', 'scheduled');
-      expect(res.body.reminderDays).toEqual([7, 1]);
-      appointmentId = res.body.id;
+      expect(bodyOf<{ reminderDays: number[] }>(res).reminderDays).toEqual([
+        7, 1,
+      ]);
+      appointmentId = bodyOf<IdBody>(res).id;
     });
 
     it('POST reminderDays personnalisés → 201', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -256,18 +267,20 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
           reminderDays: [2, 0],
         })
         .expect(201);
-      expect(res.body.reminderDays).toEqual([2, 0]);
+      expect(bodyOf<{ reminderDays: number[] }>(res).reminderDays).toEqual([
+        2, 0,
+      ]);
     });
 
     it('GET → 200, tri par date desc', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
       expect(Array.isArray(res.body)).toBe(true);
-      expect(res.body.length).toBeGreaterThanOrEqual(2);
-      const dates = res.body.map((a: { date: string }) =>
+      expect(bodyOf<unknown[]>(res).length).toBeGreaterThanOrEqual(2);
+      const dates = bodyOf<{ date: string }[]>(res).map((a) =>
         new Date(a.date).getTime(),
       );
       const sorted = [...dates].sort((a, b) => b - a);
@@ -275,7 +288,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('PATCH status → 200 (scheduled → done)', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .patch(
           `/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
         )
@@ -286,7 +299,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('PATCH status invalide → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .patch(
           `/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
         )
@@ -296,20 +309,20 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('DELETE → 200', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete(
           `/users/me/animals/${animalId}/vet-appointments/${appointmentId}`,
         )
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      expect(res.body.some((a: { id: string }) => a.id === appointmentId)).toBe(
-        false,
-      );
+      expect(
+        bodyOf<{ id: string }[]>(res).some((a) => a.id === appointmentId),
+      ).toBe(false);
     });
   });
 
@@ -325,7 +338,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       token = acc.token;
       animalId = await createAnimal(token, 'Dto Gecko');
 
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -338,7 +351,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('POST medication startDate impossible → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -351,7 +364,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('POST medication name vide → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -364,7 +377,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('POST medication intervalHours > 24 → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -378,7 +391,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('POST vet-appointment date impossible → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .send({ vetName: 'Dr X', date: '2026-02-30' })
@@ -386,7 +399,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('POST vet-appointment reminderDays hors bornes → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .send({ vetName: 'Dr X', date: todayStr(), reminderDays: [31] })
@@ -394,7 +407,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('POST vet-appointment vetName vide → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .send({ vetName: '', date: todayStr() })
@@ -419,11 +432,11 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       freeToken = free.token;
       const freeAnimalId = await createAnimal(freeToken, 'Free Gecko');
 
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get(`/users/me/animals/${freeAnimalId}/medications`)
         .set('Authorization', `Bearer ${freeToken}`)
         .expect(200);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${freeAnimalId}/medications`)
         .set('Authorization', `Bearer ${freeToken}`)
         .send({
@@ -433,11 +446,11 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
           startDate: todayStr(),
         })
         .expect(201);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get(`/users/me/animals/${freeAnimalId}/vet-appointments`)
         .set('Authorization', `Bearer ${freeToken}`)
         .expect(200);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${freeAnimalId}/vet-appointments`)
         .set('Authorization', `Bearer ${freeToken}`)
         .send({ vetName: 'Dr X', date: todayStr() })
@@ -445,11 +458,11 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('compte gratuit → 403 sur le carnet d’un animal d’autrui (ownership)', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${freeToken}`)
         .expect(403);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${freeToken}`)
         .send({ vetName: 'Dr X', date: todayStr() })
@@ -457,18 +470,18 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('sans token → 401', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get(`/users/me/animals/${animalId}/medications`)
         .expect(401);
     });
 
     it('animal d’autrui (autre compte premium) → 403', async () => {
       const other = await registerPremium(makeEmail('other'));
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${other.token}`)
         .expect(403);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${other.token}`)
         .send({ vetName: 'Dr X', date: todayStr() })
@@ -476,7 +489,7 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     });
 
     it('animal inexistant → 404', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get(`/users/me/animals/${crypto.randomUUID()}/medications`)
         .set('Authorization', `Bearer ${premiumToken}`)
         .expect(404);
@@ -488,7 +501,6 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
   // ============================================================
   describe('5. Pipeline events module A', () => {
     let token: string;
-    let userId: string;
     let animalId: string;
     let medicationId: string;
     let medEventId: string;
@@ -496,11 +508,10 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
     it('medication active + RDV (jour même + rappel J-1) → events générés', async () => {
       const acc = await registerPremium(makeEmail('events'));
       token = acc.token;
-      userId = acc.userId;
       animalId = await createAnimal(token, 'Events Gecko');
 
       // Médicament actif démarré aujourd'hui
-      const med = await request(app.getHttpServer())
+      const med = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -510,15 +521,15 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
           startDate: todayStr(),
         })
         .expect(201);
-      medicationId = med.body.id;
+      medicationId = bodyOf<IdBody>(med).id;
 
       // RDV aujourd'hui (événement du jour) + RDV demain avec rappel J-1
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .send({ vetName: 'Dr Jour', date: todayStr(), reminderDays: [1] })
         .expect(201);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -528,13 +539,13 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
         })
         .expect(201);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/notification-events?date=${todayStr()}`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
-      const medEvents = res.body.filter(
-        (e: { type: string; medicationId?: string }) => e.type === 'medication',
+      const medEvents = bodyOf<EventBody[]>(res).filter(
+        (e) => e.type === 'medication',
       );
       expect(medEvents.length).toBe(1);
       expect(medEvents[0]).toMatchObject({
@@ -545,39 +556,35 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       expect(medEvents[0].label).toContain('Calcium');
       medEventId = medEvents[0].id;
 
-      const vetEvents = res.body.filter(
-        (e: { type: string; appointmentId?: string }) =>
-          e.type === 'vet_appointment',
+      const vetEvents = bodyOf<EventBody[]>(res).filter(
+        (e) => e.type === 'vet_appointment',
       );
       // 🏥 RDV Dr Jour (jour même) + 🔔 Dr Demain (J-1)
       expect(vetEvents.length).toBe(2);
       const labels = vetEvents.map((e: { label: string }) => e.label);
-      expect(labels.some((l: string) => l.includes('🏥 RDV Dr Jour'))).toBe(
-        true,
-      );
-      expect(labels.some((l: string) => l.includes('🔔 Dr Demain (J-1)'))).toBe(
-        true,
-      );
+      expect(labels.some((l) => l.includes('🏥 RDV Dr Jour'))).toBe(true);
+      expect(labels.some((l) => l.includes('🔔 Dr Demain (J-1)'))).toBe(true);
       for (const ev of vetEvents) {
         expect(ev).toMatchObject({ status: 'pending', pointsAwarded: 0 });
       }
     });
 
     it('PATCH event medication done → pointsAwarded 0, grade.points 0', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .patch(`/users/me/notification-events/${medEventId}`)
         .set('Authorization', `Bearer ${token}`)
         .send({ status: 'done' })
         .expect(200);
 
-      expect(res.body.event).toHaveProperty('status', 'done');
-      expect(res.body.event).toHaveProperty('pointsAwarded', 0);
-      expect(res.body.grade).toHaveProperty('points', 0);
+      const marked = bodyOf<{ event: object; grade: object }>(res);
+      expect(marked.event).toHaveProperty('status', 'done');
+      expect(marked.event).toHaveProperty('pointsAwarded', 0);
+      expect(marked.grade).toHaveProperty('points', 0);
     });
 
     it('médicament désactivé ou futur → plus d’event (refresh)', async () => {
       // Médicament futur : ne doit jamais générer d'event
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/medications`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -589,28 +596,27 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
         .expect(201);
 
       // Désactive le médicament actif
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .patch(`/users/me/animals/${animalId}/medications/${medicationId}`)
         .set('Authorization', `Bearer ${token}`)
         .send({ active: false })
         .expect(200);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/notification-events?date=${todayStr()}&refresh=1`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
       // W0-07 : refresh ne supprime que les événements `pending` ; l'événement déjà
       // traité (done, ci-dessus) est conservé et ne doit pas être recréé.
-      const medEvents = res.body.filter(
-        (e: { type: string; status: string }) =>
-          e.type === 'medication' && e.status === 'pending',
+      const medEvents = bodyOf<EventBody[]>(res).filter(
+        (e) => e.type === 'medication' && e.status === 'pending',
       );
       expect(medEvents.length).toBe(0);
     });
 
     it('RDV annulé → plus d’event (refresh)', async () => {
-      const appt = await request(app.getHttpServer())
+      const appt = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/vet-appointments`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -620,41 +626,41 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
         })
         .expect(201);
 
-      const before = await request(app.getHttpServer())
+      const before = await request(httpServer(app))
         .get(`/users/me/notification-events?date=${todayStr()}&refresh=1`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      const reminderBefore = before.body.filter(
-        (e: { type: string; label: string }) =>
-          e.type === 'vet_appointment' && e.label.includes('Dr Annulé'),
+      const reminderBefore = bodyOf<EventBody[]>(before).filter(
+        (e) => e.type === 'vet_appointment' && e.label.includes('Dr Annulé'),
       );
       expect(reminderBefore.length).toBe(1);
 
       // Annulation du RDV (le rappel J-2 d'hier existe déjà, mais le refresh
       // régénère : plus rien pour ce RDV)
-      await request(app.getHttpServer())
-        .patch(`/users/me/animals/${animalId}/vet-appointments/${appt.body.id}`)
+      await request(httpServer(app))
+        .patch(
+          `/users/me/animals/${animalId}/vet-appointments/${bodyOf<IdBody>(appt).id}`,
+        )
         .set('Authorization', `Bearer ${token}`)
         .send({ status: 'cancelled' })
         .expect(200);
 
-      const after = await request(app.getHttpServer())
+      const after = await request(httpServer(app))
         .get(`/users/me/notification-events?date=${todayStr()}&refresh=1`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      const reminderAfter = after.body.filter(
-        (e: { type: string; label: string }) =>
-          e.type === 'vet_appointment' && e.label.includes('Dr Annulé'),
+      const reminderAfter = bodyOf<EventBody[]>(after).filter(
+        (e) => e.type === 'vet_appointment' && e.label.includes('Dr Annulé'),
       );
       expect(reminderAfter.length).toBe(0);
     });
 
     it('events medication/vet ne donnent jamais de points (grade intact)', async () => {
-      const grade = await request(app.getHttpServer())
+      const grade = await request(httpServer(app))
         .get('/users/me/grade')
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      expect(grade.body.points).toBe(0);
+      expect(bodyOf<{ points: number }>(grade).points).toBe(0);
     });
   });
 });

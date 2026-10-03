@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { AuthBody, IdBody, bodyOf, httpServer } from './utils/http';
 import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
 import { TestCacheModule } from './test-cache.module';
@@ -11,8 +12,39 @@ jest.setTimeout(60000);
 const PASSWORD = 'AccountTest123!';
 const SPECIES_ID = 5221172;
 
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-assignment */
-// (supertest renvoie des corps `any` ; fichier de test.)
+/** Forme (partielle) de l'export RGPD `GET /users/me/export` consultée par ces tests. */
+interface ExportAnimal {
+  id: string;
+  name: string;
+  routines: unknown[];
+  healthRecords: unknown[];
+  vaccinations: unknown[];
+  measurements: unknown[];
+  actionLogs: unknown[];
+  medications: unknown[];
+  vetAppointments: unknown[];
+  breedingRecords: unknown[];
+}
+interface ExportBody {
+  profile: {
+    id: string;
+    email: string;
+    role: string;
+    termsAcceptedAt: string;
+    termsVersion: string;
+    timezone: string;
+  };
+  gamification: unknown;
+  animals: ExportAnimal[];
+  notificationPreferences: { types: unknown }[];
+  notificationEvents: unknown[];
+  pushSubscriptions: unknown[];
+  exportVersion: number;
+  community: unknown;
+  pushSubscriptionsActive: number;
+  calendarFeed: unknown;
+  sessions: object[];
+}
 
 function makeEmail(tag: string): string {
   return `account-${tag}-${Date.now()}-${Math.floor(Math.random() * 100000)}@captivia.local`;
@@ -25,7 +57,7 @@ describe('Account E2E — suppression et export RGPD', () => {
 
   async function registerUser(tag: string) {
     const email = makeEmail(tag);
-    const res = await request(app.getHttpServer())
+    const res = await request(httpServer(app))
       .post('/auth/register')
       .send({
         email,
@@ -38,21 +70,21 @@ describe('Account E2E — suppression et export RGPD', () => {
     createdEmails.push(email);
     return {
       email,
-      token: res.body.accessToken as string,
-      userId: res.body.user.id as string,
+      token: bodyOf<AuthBody>(res).accessToken,
+      userId: bodyOf<AuthBody>(res).user.id,
     };
   }
 
   /** Crée un animal (API) + routine (API) + sous-entités (Prisma) + données notif. */
   async function seedUserData(token: string, userId: string) {
-    const animal = await request(app.getHttpServer())
+    const animal = await request(httpServer(app))
       .post('/users/me/animals')
       .set('Authorization', `Bearer ${token}`)
       .send({ speciesId: SPECIES_ID, name: 'Export Gecko', sex: 'male' })
       .expect(201);
-    const animalId = animal.body.id as string;
+    const animalId = bodyOf<IdBody>(animal).id;
 
-    await request(app.getHttpServer())
+    await request(httpServer(app))
       .post(`/users/me/animals/${animalId}/routines`)
       .set('Authorization', `Bearer ${token}`)
       .send({
@@ -129,7 +161,7 @@ describe('Account E2E — suppression et export RGPD', () => {
 
   describe('DELETE /users/me', () => {
     it('sans token → 401', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete('/users/me')
         .send({ password: PASSWORD })
         .expect(401);
@@ -137,7 +169,7 @@ describe('Account E2E — suppression et export RGPD', () => {
 
     it('mauvais mot de passe → 401 et le compte existe toujours', async () => {
       const acc = await registerUser('wrongpw');
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete('/users/me')
         .set('Authorization', `Bearer ${acc.token}`)
         .send({ password: 'not-the-password' })
@@ -145,7 +177,7 @@ describe('Account E2E — suppression et export RGPD', () => {
       expect(
         await prisma.user.findUnique({ where: { id: acc.userId } }),
       ).not.toBeNull();
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get('/auth/me')
         .set('Authorization', `Bearer ${acc.token}`)
         .expect(200);
@@ -153,7 +185,7 @@ describe('Account E2E — suppression et export RGPD', () => {
 
     it('mot de passe absent → 401 (facultatif seulement pour un invité)', async () => {
       const acc = await registerUser('nopw');
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete('/users/me')
         .set('Authorization', `Bearer ${acc.token}`)
         .send({})
@@ -169,14 +201,14 @@ describe('Account E2E — suppression et export RGPD', () => {
       );
       expect(await prisma.routine.count({ where: { animalId } })).toBe(1);
 
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete('/users/me')
         .set('Authorization', `Bearer ${acc.token}`)
         .send({ password: PASSWORD })
         .expect(204);
 
       // Le JWT (encore non expiré) n'est plus utilisable : l'utilisateur n'existe plus.
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get('/auth/me')
         .set('Authorization', `Bearer ${acc.token}`)
         .expect(401);
@@ -197,7 +229,7 @@ describe('Account E2E — suppression et export RGPD', () => {
       expect(await prisma.passwordResetToken.count(byUser)).toBe(0);
 
       // Le login n'est plus possible non plus.
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post('/auth/login')
         .send({ email: acc.email, password: PASSWORD })
         .expect(401);
@@ -209,7 +241,7 @@ describe('Account E2E — suppression et export RGPD', () => {
       const animalB = await seedUserData(b.token, b.userId);
 
       // A supprime son compte avec son token : B n'est pas touché.
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete('/users/me')
         .set('Authorization', `Bearer ${a.token}`)
         .send({ password: PASSWORD })
@@ -226,14 +258,14 @@ describe('Account E2E — suppression et export RGPD', () => {
 
   describe('GET /users/me/export', () => {
     it('sans token → 401', async () => {
-      await request(app.getHttpServer()).get('/users/me/export').expect(401);
+      await request(httpServer(app)).get('/users/me/export').expect(401);
     });
 
     it('contient toutes les données, sans passwordHash ni tokens, en pièce jointe', async () => {
       const acc = await registerUser('export');
       const animalId = await seedUserData(acc.token, acc.userId);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get('/users/me/export')
         .set('Authorization', `Bearer ${acc.token}`)
         .expect(200);
@@ -242,7 +274,7 @@ describe('Account E2E — suppression et export RGPD', () => {
         /^attachment; filename="captivia-export-\d{4}-\d{2}-\d{2}\.json"$/,
       );
 
-      const body = res.body;
+      const body = bodyOf<ExportBody>(res);
       expect(body.profile.email).toBe(acc.email);
       expect(body.profile.id).toBe(acc.userId);
       expect(body.profile.role).toBe('USER');
@@ -303,21 +335,21 @@ describe('Account E2E — suppression et export RGPD', () => {
       expect(raw).not.toContain('reset-token-');
 
       // Flux calendrier activé : l'export l'indique, sans jamais contenir le jeton (ni son hash).
-      const gen = await request(app.getHttpServer())
+      const gen = await request(httpServer(app))
         .post('/users/me/agenda/calendar-token')
         .set('Authorization', `Bearer ${acc.token}`)
         .expect(201);
-      const again = await request(app.getHttpServer())
+      const again = await request(httpServer(app))
         .get('/users/me/export')
         .set('Authorization', `Bearer ${acc.token}`)
         .expect(200);
-      expect(again.body.calendarFeed).toEqual({ enabled: true });
+      expect(bodyOf<ExportBody>(again).calendarFeed).toEqual({ enabled: true });
       const stored = await prisma.user.findUniqueOrThrow({
         where: { id: acc.userId },
         select: { calendarToken: true },
       });
       const raw2 = JSON.stringify(again.body);
-      expect(raw2).not.toContain(gen.body.token as string);
+      expect(raw2).not.toContain(bodyOf<{ token: string }>(gen).token);
       expect(raw2).not.toContain(stored.calendarToken as string);
     });
 
@@ -326,13 +358,14 @@ describe('Account E2E — suppression et export RGPD', () => {
       const b = await registerUser('exp-b');
       await seedUserData(a.token, a.userId);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get('/users/me/export')
         .set('Authorization', `Bearer ${b.token}`)
         .expect(200);
 
-      expect(res.body.profile.id).toBe(b.userId);
-      expect(res.body.animals).toEqual([]);
+      const exported = bodyOf<ExportBody>(res);
+      expect(exported.profile.id).toBe(b.userId);
+      expect(exported.animals).toEqual([]);
       expect(JSON.stringify(res.body)).not.toContain(a.email);
     });
 
@@ -340,7 +373,7 @@ describe('Account E2E — suppression et export RGPD', () => {
       const acc = await registerUser('free');
       const user = await prisma.user.findUnique({ where: { id: acc.userId } });
       expect(user?.isPremium).toBe(false);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get('/users/me/export')
         .set('Authorization', `Bearer ${acc.token}`)
         .expect(200);

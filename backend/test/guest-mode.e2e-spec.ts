@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { httpServer } from './utils/http';
 import { App } from 'supertest/types';
 import * as crypto from 'crypto';
 import { AppModule } from '../src/app.module';
@@ -73,7 +74,7 @@ describe('Mode invité (E2E)', () => {
   const tag = `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
   const emailFor = (name: string) => `guest-${name}-${tag}@captivia.local`;
   const guestIds: string[] = [];
-  const server = (): App => app.getHttpServer() as App;
+  const server = (): App => httpServer(app) as App;
   const bearer = (token: string) => ({ Authorization: `Bearer ${token}` });
 
   async function createGuest(): Promise<AuthBody> {
@@ -669,7 +670,7 @@ describe('Mode invité (E2E)', () => {
     });
 
     it(`au-delà de ${GUEST_CREATION_LIMIT} invités par heure et par IP → 429`, async () => {
-      const srv = throttledApp.getHttpServer() as App;
+      const srv = httpServer(throttledApp) as App;
       for (let i = 0; i < GUEST_CREATION_LIMIT; i++) {
         const res = await request(srv).post('/auth/guest').send({}).expect(201);
         guestIds.push(auth(res).user.id);

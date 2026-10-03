@@ -2,6 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { createTestApp } from './utils/create-app';
 import { PrismaService } from '../src/prisma/prisma.service';
+import { bodyOf, AuthBody, IdBody } from './utils/http';
 
 /** Champs de consentement désormais obligatoires à l'inscription (W2-03). */
 const TERMS = { acceptTerms: true, ageConfirmed: true };
@@ -31,15 +32,15 @@ describe('Security Tests', () => {
       .post('/auth/register')
       .send({ email: user1Email, password: 'password123', ...TERMS });
 
-    user1Token = user1Response.body.accessToken;
-    user1Id = user1Response.body.user.id;
+    user1Token = bodyOf<AuthBody>(user1Response).accessToken;
+    user1Id = bodyOf<AuthBody>(user1Response).user.id;
 
     const user2Response = await request(url)
       .post('/auth/register')
       .send({ email: user2Email, password: 'password123', ...TERMS });
 
-    user2Token = user2Response.body.accessToken;
-    user2Id = user2Response.body.user.id;
+    user2Token = bodyOf<AuthBody>(user2Response).accessToken;
+    user2Id = bodyOf<AuthBody>(user2Response).user.id;
 
     // Create an animal for user1
     const animalResponse = await request(url)
@@ -50,7 +51,7 @@ describe('Security Tests', () => {
         name: 'Security Test Animal',
       });
 
-    user1AnimalId = animalResponse.body.id;
+    user1AnimalId = bodyOf<IdBody>(animalResponse).id;
   });
 
   afterAll(async () => {
@@ -248,12 +249,8 @@ describe('Security Tests', () => {
       const responses = await Promise.all(requests);
 
       // Some should succeed, rate limiter might kick in
-      const successCount = responses.filter(
-        (r: any) => r.status === 200,
-      ).length;
-      const rateLimitCount = responses.filter(
-        (r: any) => r.status === 429,
-      ).length;
+      const successCount = responses.filter((r) => r.status === 200).length;
+      const rateLimitCount = responses.filter((r) => r.status === 429).length;
 
       expect(successCount + rateLimitCount).toBe(10);
     });
@@ -309,7 +306,7 @@ describe('Security Tests', () => {
 
       // Should only contain user1's animals
       expect(Array.isArray(response.body)).toBe(true);
-      response.body.forEach((animal: any) => {
+      bodyOf<Array<{ userId: string }>>(response).forEach((animal) => {
         expect(animal.userId).toBe(user1Id);
       });
     });

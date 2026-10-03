@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as request from 'supertest';
+import { ErrorBody, IdBody, bodyOf, httpServer } from './utils/http';
 import * as crypto from 'crypto';
 import * as bcrypt from 'bcryptjs';
 import { AppModule } from '../src/app.module';
@@ -65,12 +66,12 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
 
   /** Crée un animal pour le compte et retourne son id. */
   async function createAnimal(token: string, name: string): Promise<string> {
-    const res = await request(app.getHttpServer())
+    const res = await request(httpServer(app))
       .post('/users/me/animals')
       .set('Authorization', `Bearer ${token}`)
       .send({ speciesId: 5221172, name, sex: 'female' })
       .expect(201);
-    return res.body.id as string;
+    return bodyOf<IdBody>(res).id;
   }
 
   beforeAll(async () => {
@@ -121,7 +122,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
       token = acc.token;
       animalId = await createAnimal(token, 'Breeding Gecko');
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -136,11 +137,11 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
       expect(res.body).toHaveProperty('eventType', 'heat');
       expect(res.body).toHaveProperty('partnerName', 'Romeo');
       expect(res.body).toHaveProperty('offspringCount', null);
-      recordId = res.body.id;
+      recordId = bodyOf<IdBody>(res).id;
     });
 
     it('POST birth avec offspringCount → 201', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -156,28 +157,27 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
 
     it('GET → 200, tri par date desc', async () => {
       // Un événement plus ancien que le birth (-30j) : le heat (aujourd'hui)
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'mating', date: dayOffsetStr(-40) })
         .expect(201);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
       expect(Array.isArray(res.body)).toBe(true);
-      expect(res.body.length).toBeGreaterThanOrEqual(3);
-      const dates = res.body.map((r: { date: string }) =>
-        new Date(r.date).getTime(),
-      );
+      const records = bodyOf<{ date: string }[]>(res);
+      expect(records.length).toBeGreaterThanOrEqual(3);
+      const dates = records.map((r) => new Date(r.date).getTime());
       const sorted = [...dates].sort((a, b) => b - a);
       expect(dates).toEqual(sorted);
     });
 
     it('PATCH → 200 (eventType + offspringCount)', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .patch(`/users/me/animals/${animalId}/breeding/${recordId}`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'pregnancy', partnerName: 'Juliette' })
@@ -188,7 +188,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('PATCH date invalide → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .patch(`/users/me/animals/${animalId}/breeding/${recordId}`)
         .set('Authorization', `Bearer ${token}`)
         .send({ date: '2026-13-45' })
@@ -196,22 +196,20 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('DELETE → 200 puis GET → disparu', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete(`/users/me/animals/${animalId}/breeding/${recordId}`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .expect(200);
-      expect(res.body.some((r: { id: string }) => r.id === recordId)).toBe(
-        false,
-      );
+      expect(bodyOf<IdBody[]>(res).some((r) => r.id === recordId)).toBe(false);
     });
 
     it('DELETE id inexistant → 404', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .delete(`/users/me/animals/${animalId}/breeding/${crypto.randomUUID()}`)
         .set('Authorization', `Bearer ${token}`)
         .expect(404);
@@ -230,7 +228,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
       token = acc.token;
       animalId = await createAnimal(token, 'Dto Gecko');
 
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'divorce', date: todayStr() })
@@ -238,7 +236,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('POST eventType manquant → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ date: todayStr() })
@@ -246,7 +244,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('POST date impossible → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'heat', date: '2026-02-30' })
@@ -254,7 +252,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('POST birth sans offspringCount → 400 (check service)', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'birth', date: todayStr() })
@@ -262,7 +260,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('POST offspringCount négatif → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'birth', date: todayStr(), offspringCount: -1 })
@@ -270,7 +268,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('POST offspringCount > 100 → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'birth', date: todayStr(), offspringCount: 101 })
@@ -278,7 +276,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('POST partnerName > 100 chars → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -290,7 +288,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('POST notes > 1000 chars → 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'heat', date: todayStr(), notes: 'x'.repeat(1001) })
@@ -299,28 +297,32 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
 
     it('PATCH vers birth sans offspringCount → 400', async () => {
       // Enregistrement sans offspringCount (mating), puis PATCH eventType=birth
-      const rec = await request(app.getHttpServer())
+      const rec = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'mating', date: todayStr() })
         .expect(201);
 
-      await request(app.getHttpServer())
-        .patch(`/users/me/animals/${animalId}/breeding/${rec.body.id}`)
+      await request(httpServer(app))
+        .patch(
+          `/users/me/animals/${animalId}/breeding/${bodyOf<IdBody>(rec).id}`,
+        )
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'birth' })
         .expect(400);
     });
 
     it('PATCH birth avec offspringCount 0 → 200 (borne basse acceptée)', async () => {
-      const rec = await request(app.getHttpServer())
+      const rec = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'pregnancy', date: todayStr() })
         .expect(201);
 
-      const res = await request(app.getHttpServer())
-        .patch(`/users/me/animals/${animalId}/breeding/${rec.body.id}`)
+      const res = await request(httpServer(app))
+        .patch(
+          `/users/me/animals/${animalId}/breeding/${bodyOf<IdBody>(rec).id}`,
+        )
         .set('Authorization', `Bearer ${token}`)
         .send({ eventType: 'birth', offspringCount: 0 })
         .expect(200);
@@ -342,48 +344,48 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
       animalId = await createAnimal(premiumToken, 'Guard Gecko');
 
       // Un record existe (pour tester le BOLA ensuite)
-      const rec = await request(app.getHttpServer())
+      const rec = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${premiumToken}`)
         .send({ eventType: 'heat', date: todayStr() })
         .expect(201);
-      recordId = rec.body.id;
+      recordId = bodyOf<IdBody>(rec).id;
 
       const free = await createUser(makeEmail('guard-free'), false);
 
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${free.token}`)
         .expect(403);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${free.token}`)
         .send({ eventType: 'heat', date: todayStr() })
         .expect(403);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .patch(`/users/me/animals/${animalId}/breeding/${recordId}`)
         .set('Authorization', `Bearer ${free.token}`)
         .send({ eventType: 'mating' })
         .expect(403);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete(`/users/me/animals/${animalId}/breeding/${recordId}`)
         .set('Authorization', `Bearer ${free.token}`)
         .expect(403);
     });
 
     it('sans token → 401', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get(`/users/me/animals/${animalId}/breeding`)
         .expect(401);
     });
 
     it('animal d’autrui (autre compte premium) → 403', async () => {
       const other = await registerPremium(makeEmail('guard-other'));
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${other.token}`)
         .expect(403);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/breeding`)
         .set('Authorization', `Bearer ${other.token}`)
         .send({ eventType: 'heat', date: todayStr() })
@@ -392,19 +394,19 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
 
     it('BOLA : record d’un animal d’autrui → 403 (PATCH/DELETE)', async () => {
       const other = await registerPremium(makeEmail('guard-bola'));
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .patch(`/users/me/animals/${animalId}/breeding/${recordId}`)
         .set('Authorization', `Bearer ${other.token}`)
         .send({ eventType: 'mating' })
         .expect(403);
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .delete(`/users/me/animals/${animalId}/breeding/${recordId}`)
         .set('Authorization', `Bearer ${other.token}`)
         .expect(403);
     });
 
     it('animal inexistant → 404', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get(`/users/me/animals/${crypto.randomUUID()}/breeding`)
         .set('Authorization', `Bearer ${premiumToken}`)
         .expect(404);
@@ -445,10 +447,12 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     it('GET espèce inexistante → 404 propre (message clair)', async () => {
       // 5221172 (Gecko léopard) possède désormais une fiche reproduction complète
       // (pipeline races 2026-08-09) — le 404 doit être testé sur un ID inconnu.
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get('/species/999999999/reproduction')
         .expect(404);
-      expect(res.body.message).toContain('Reproduction data not available');
+      expect(bodyOf<ErrorBody>(res).message).toContain(
+        'Reproduction data not available',
+      );
     });
 
     it('GET fiche fr → 200 avec les champs éditoriaux', async () => {
@@ -467,7 +471,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
       });
       createdReproductionIds.push(row.id);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/species/${SPECIES_WITH_FR}/reproduction`)
         .expect(200);
 
@@ -489,7 +493,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
       });
       createdReproductionIds.push(row.id);
 
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/species/${SPECIES_WITH_FALLBACK}/reproduction`)
         .expect(200);
 
@@ -498,7 +502,7 @@ describe('Module B E2E — suivi reproduction & fiche espèce', () => {
     });
 
     it('GET id non numérique → 404 propre', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/species/abc/reproduction')
         .expect((res) => {
           // 400 = rejet par le DTO GetSpeciesDto (id doit être numérique),

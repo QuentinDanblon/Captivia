@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument */
-// supertest renvoie des corps `any` : règles unsafe-* désactivées pour ce fichier de test.
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { AuthBody, bodyOf, httpServer } from './utils/http';
 import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
 import { TestCacheModule } from './test-cache.module';
@@ -19,7 +18,7 @@ describe('Free animal limit and push subscriptions (W1-08)', () => {
   const users: { token: string; id: string }[] = [];
 
   const register = async (label: string) => {
-    const res = await request(app.getHttpServer())
+    const res = await request(httpServer(app))
       .post('/auth/register')
       .send({
         email: `w108-${label}-${stamp}@captivia.com`,
@@ -29,8 +28,8 @@ describe('Free animal limit and push subscriptions (W1-08)', () => {
       })
       .expect(201);
     const u = {
-      token: res.body.accessToken as string,
-      id: res.body.user.id as string,
+      token: bodyOf<AuthBody>(res).accessToken,
+      id: bodyOf<AuthBody>(res).user.id,
     };
     users.push(u);
     return u;
@@ -69,7 +68,7 @@ describe('Free animal limit and push subscriptions (W1-08)', () => {
       const u = await register('race');
       const results = await Promise.all(
         Array.from({ length: 8 }, (_, i) =>
-          request(app.getHttpServer())
+          request(httpServer(app))
             .post('/users/me/animals')
             .set('Authorization', `Bearer ${u.token}`)
             .send({ speciesId: 5221172, name: `Racer ${i}` }),
@@ -89,7 +88,7 @@ describe('Free animal limit and push subscriptions (W1-08)', () => {
       });
       const results = await Promise.all(
         Array.from({ length: 3 }, (_, i) =>
-          request(app.getHttpServer())
+          request(httpServer(app))
             .post('/users/me/animals')
             .set('Authorization', `Bearer ${u.token}`)
             .send({ speciesId: 5221172, name: `Premium ${i}` }),
@@ -112,7 +111,7 @@ describe('Free animal limit and push subscriptions (W1-08)', () => {
     });
 
     const subscribe = (token: string, body: object) =>
-      request(app.getHttpServer())
+      request(httpServer(app))
         .post('/users/me/push-subscriptions')
         .set('Authorization', `Bearer ${token}`)
         .send(body);

@@ -7,6 +7,19 @@ import {
   createFakeExternalAdapter,
   fakeExternalCalls,
 } from './utils/fake-external-adapter';
+import { bodyOf, ErrorBody } from './utils/http';
+
+/** Forme (partielle) des réponses consultées par ces tests. */
+interface Payload {
+  products: { code: string }[];
+  degraded?: boolean;
+  speciesPlus: unknown;
+  recommendations: object[];
+  services: Record<string, { status: string }>;
+  status: string;
+  results: unknown[];
+  name: string;
+}
 
 /**
  * API externes (W1-04 / W3-05) : déterminisme (transport simulé, jamais de réseau),
@@ -31,9 +44,9 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
   describe('déterminisme (aucun appel réel)', () => {
     it('GET /food/search sert les fixtures Open Pet Food Facts', async () => {
       const res = await request(url).get('/food/search?q=dog+food').expect(200);
-      expect(res.body.products).toHaveLength(1);
-      expect(res.body.products[0].code).toBe('3017620422003');
-      expect(res.body.degraded).toBeUndefined();
+      expect(bodyOf<Payload>(res).products).toHaveLength(1);
+      expect(bodyOf<Payload>(res).products[0].code).toBe('3017620422003');
+      expect(bodyOf<Payload>(res).degraded).toBeUndefined();
     });
 
     it('GET /species/:id lit la taxonomie GBIF simulée et GET /species/999999 → 404', async () => {
@@ -72,7 +85,7 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
       const res = await request(url)
         .get('/food/product/3017620422003')
         .expect(200);
-      expect(res.body.code).toBe('3017620422003');
+      expect(bodyOf<ErrorBody>(res).code).toBe('3017620422003');
       await request(url).get('/food/product/99999999').expect(404);
     });
 
@@ -130,8 +143,8 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
         '/speciesplus/taxon/1/eu',
       ]) {
         const res = await request(url).get(path).expect(503);
-        expect(res.body.code).toBe('INTEGRATION_DISABLED');
-        expect(res.body.message).toContain('not configured');
+        expect(bodyOf<ErrorBody>(res).code).toBe('INTEGRATION_DISABLED');
+        expect(bodyOf<ErrorBody>(res).message).toContain('not configured');
       }
     });
 
@@ -143,7 +156,7 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
       const res = await request(url)
         .get('/species/123/legislation')
         .expect(200);
-      expect(res.body.speciesPlus).toEqual({
+      expect(bodyOf<Payload>(res).speciesPlus).toEqual({
         status: 'disabled',
         cites: null,
         eu: null,
@@ -152,7 +165,7 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
 
     it('GET /equipment : aucune liste de produits Amazon inventée', async () => {
       const res = await request(url).get('/equipment').expect(200);
-      for (const rec of res.body.recommendations) {
+      for (const rec of bodyOf<Payload>(res).recommendations) {
         expect(rec).not.toHaveProperty('products');
       }
     });
@@ -161,10 +174,10 @@ describe('API externes — fixtures, validation, intégrations désactivées', (
   describe('GET /gateway/health', () => {
     it('Wikipedia n’est plus « unhealthy » à tort ; statut global cohérent', async () => {
       const res = await request(url).get('/gateway/health').expect(200);
-      expect(res.body.services.wikipedia.status).toBe('healthy');
-      expect(res.body.services.gbif.status).toBe('healthy');
-      expect(res.body.services.wikidata.status).toBe('healthy');
-      expect(res.body.status).toBe('healthy');
+      expect(bodyOf<Payload>(res).services.wikipedia.status).toBe('healthy');
+      expect(bodyOf<Payload>(res).services.gbif.status).toBe('healthy');
+      expect(bodyOf<Payload>(res).services.wikidata.status).toBe('healthy');
+      expect(bodyOf<Payload>(res).status).toBe('healthy');
     });
   });
 });
@@ -201,19 +214,19 @@ describe('API externes — pannes des fournisseurs (aucun 500, cache non pollué
 
     outage.opff = false;
     const up = await request(url).get('/food/search?q=dog+food').expect(200);
-    expect(up.body.products).toHaveLength(1);
-    expect(up.body.degraded).toBeUndefined();
+    expect(bodyOf<Payload>(up).products).toHaveLength(1);
+    expect(bodyOf<Payload>(up).degraded).toBeUndefined();
   });
 
   it('Open Pet Food Facts en panne : /food/species/:species → 200 (jamais 500), /food/product → 503 (pas un faux 404)', async () => {
     outage.opff = true;
     const species = await request(url).get('/food/species/boa').expect(200);
-    expect(species.body.degraded).toBe(true);
+    expect(bodyOf<Payload>(species).degraded).toBe(true);
 
     const product = await request(url)
       .get('/food/product/3017620422003')
       .expect(503);
-    expect(product.body.statusCode).toBe(503);
+    expect(bodyOf<ErrorBody>(product).statusCode).toBe(503);
     outage.opff = false;
   });
 
@@ -224,8 +237,8 @@ describe('API externes — pannes des fournisseurs (aucun 500, cache non pollué
     const search = await request(url)
       .get('/species/search?q=zzfallback')
       .expect(200);
-    expect(search.body.results).toEqual([]);
-    expect(search.body.degraded).toBe(true);
+    expect(bodyOf<Payload>(search).results).toEqual([]);
+    expect(bodyOf<Payload>(search).degraded).toBe(true);
 
     // Fiche d'une espèce du seed : 200 depuis le profil local, taxonomie absente
     const detail = await request(url).get('/species/5221172').expect(200);
@@ -234,7 +247,7 @@ describe('API externes — pannes des fournisseurs (aucun 500, cache non pollué
       source: 'profile',
       degraded: true,
     });
-    expect(detail.body.name).toBeTruthy();
+    expect(bodyOf<Payload>(detail).name).toBeTruthy();
 
     // Espèce absente du seed : on ne ment pas par un 404, c'est un 503 explicite
     await request(url).get('/species/1').expect(503);
@@ -251,17 +264,17 @@ describe('API externes — pannes des fournisseurs (aucun 500, cache non pollué
     const res = await request(url)
       .get('/species/search?q=zzbreaker')
       .expect(200);
-    expect(res.body.degraded).toBe(true);
+    expect(bodyOf<Payload>(res).degraded).toBe(true);
     const gbifCallsWhileOpen = fakeExternalCalls
       .slice(before)
       .filter((call) => call.startsWith('api.gbif.org'));
     expect(gbifCallsWhileOpen).toHaveLength(0);
 
     const health = await request(url).get('/gateway/health').expect(200);
-    expect(health.body.services.gbif).toMatchObject({
+    expect(bodyOf<Payload>(health).services.gbif).toMatchObject({
       status: 'unhealthy',
       circuit: 'open',
     });
-    expect(health.body.status).toBe('degraded');
+    expect(bodyOf<Payload>(health).status).toBe('degraded');
   });
 });
