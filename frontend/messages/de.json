@@ -1650,5 +1650,16 @@
     "cancel": "Abbrechen",
     "accessDenied": "Captivia hat keinen Zugriff auf die Kamera oder Ihre Fotos. Erlauben Sie den Zugriff in den Einstellungen Ihres Telefons und versuchen Sie es erneut.",
     "error": "Dieses Foto konnte nicht geladen werden. Versuchen Sie es mit einem anderen Bild."
+  },
+  "nativeReminders": {
+    "body": "{type}: {title}",
+    "channelName": "Pflegeerinnerungen",
+    "channelDescription": "Fütterung, Behandlungen, Impfungen und Tierarzttermine Ihrer Tiere – pünktlich.",
+    "blocked": "Benachrichtigungen sind für Captivia blockiert. Erlauben Sie sie in den Einstellungen Ihres Telefons: Ihre Erinnerungen werden geplant, sobald Sie zur App zurückkehren.",
+    "onText": "{count, plural, =0 {In den nächsten 30 Tagen steht nichts an. Sobald eine Pflege geplant ist, erinnert Sie dieses Telefon daran – auch ohne Verbindung.} one {# Erinnerung für die nächsten 30 Tage auf diesem Telefon geplant. Sie kommt auch ohne Verbindung.} other {# Erinnerungen für die nächsten 30 Tage auf diesem Telefon geplant. Sie kommen auch ohne Verbindung.}}",
+    "offText": "Fütterung, Behandlungen, Impfungen und Termine: Dieses Telefon erinnert Sie pünktlich daran, auch ohne Verbindung.",
+    "enable": "Erinnerungen auf diesem Telefon aktivieren",
+    "disable": "Erinnerungen auf diesem Telefon ausschalten",
+    "syncError": "Ihre Pflegetermine können gerade nicht geladen werden. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
   }
 }

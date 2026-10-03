@@ -1650,5 +1650,16 @@
     "cancel": "Cancelar",
     "accessDenied": "Captivia no tiene acceso a la cámara ni a tus fotos. Permítelo en los ajustes del teléfono y vuelve a intentarlo.",
     "error": "No se ha podido cargar esta foto. Prueba con otra imagen."
+  },
+  "nativeReminders": {
+    "body": "{type}: {title}",
+    "channelName": "Recordatorios de cuidados",
+    "channelDescription": "Comidas, tratamientos, vacunas y citas con el veterinario de tus animales, a su hora.",
+    "blocked": "Las notificaciones están bloqueadas para Captivia. Permítelas en los ajustes del teléfono: tus recordatorios se programarán en cuanto vuelvas a la app.",
+    "onText": "{count, plural, =0 {Nada que recordar en los próximos 30 días. En cuanto haya un cuidado previsto, este teléfono te avisará, incluso sin conexión.} one {# recordatorio programado en este teléfono para los próximos 30 días. Sonará incluso sin conexión.} other {# recordatorios programados en este teléfono para los próximos 30 días. Sonarán incluso sin conexión.}}",
+    "offText": "Comidas, tratamientos, vacunas y citas: este teléfono te los recuerda a su hora, incluso sin conexión.",
+    "enable": "Activar los recordatorios en este teléfono",
+    "disable": "Desactivar los recordatorios en este teléfono",
+    "syncError": "No se pueden cargar tus cuidados ahora mismo. Comprueba la conexión y vuelve a intentarlo."
   }
 }

@@ -1650,5 +1650,16 @@
     "cancel": "Cancel",
     "accessDenied": "Captivia can’t access the camera or your photos. Allow access in your phone’s settings, then try again.",
     "error": "This photo couldn’t be loaded. Try another image."
+  },
+  "nativeReminders": {
+    "body": "{type}: {title}",
+    "channelName": "Care reminders",
+    "channelDescription": "Meals, treatments, vaccines and vet appointments for your animals, right on time.",
+    "blocked": "Notifications are blocked for Captivia. Allow them in your phone’s settings: your reminders will be scheduled as soon as you come back to the app.",
+    "onText": "{count, plural, =0 {Nothing to remind you of in the next 30 days. As soon as care is planned, this phone lets you know, even offline.} one {# reminder scheduled on this phone for the next 30 days. It will go off even offline.} other {# reminders scheduled on this phone for the next 30 days. They will go off even offline.}}",
+    "offText": "Meals, treatments, vaccines and appointments: this phone reminds you right on time, even offline.",
+    "enable": "Turn on reminders on this phone",
+    "disable": "Turn off reminders on this phone",
+    "syncError": "Your care schedule can’t be loaded right now. Check your connection and try again."
   }
 }

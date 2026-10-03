@@ -7,7 +7,7 @@
  * - `animalDetailPath` / `speciesPath` / `publicAnimalPath` : chemins des fiches selon la cible
  *   (routes dynamiques sur le web, routes à query `?id=` dans l'export statique mobile).
  */
-import { useMemo } from 'react';
+import { useMemo, useSyncExternalStore } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { Capacitor } from '@capacitor/core';
@@ -21,6 +21,13 @@ export function isNative(): boolean {
   } catch {
     return false;
   }
+}
+
+const noopSubscribe = () => () => {};
+
+/** `isNative()` lu après l'hydratation (le HTML exporté est celui du web : faux au premier rendu). */
+export function useIsNative(): boolean {
+  return useSyncExternalStore(noopSubscribe, isNative, () => false);
 }
 
 export function getPlatform(): 'ios' | 'android' | 'web' {

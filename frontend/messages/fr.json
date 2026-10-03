@@ -1650,5 +1650,16 @@
     "cancel": "Annuler",
     "accessDenied": "Captivia n’a pas accès à l’appareil photo ou à vos photos. Autorisez-le dans les réglages du téléphone, puis réessayez.",
     "error": "Impossible de récupérer cette photo. Réessayez avec une autre image."
+  },
+  "nativeReminders": {
+    "body": "{type} : {title}",
+    "channelName": "Rappels de soins",
+    "channelDescription": "Repas, traitements, vaccins et rendez-vous vétérinaires de vos animaux, à l’heure prévue.",
+    "blocked": "Les notifications sont bloquées pour Captivia. Autorisez-les dans les réglages du téléphone : vos rappels seront programmés dès votre retour dans l’app.",
+    "onText": "{count, plural, =0 {Rien à rappeler sur les 30 prochains jours. Dès qu’un soin est prévu, ce téléphone vous prévient, même sans connexion.} one {# rappel programmé sur ce téléphone pour les 30 prochains jours. Il sonnera même sans connexion.} other {# rappels programmés sur ce téléphone pour les 30 prochains jours. Ils sonneront même sans connexion.}}",
+    "offText": "Repas, traitements, vaccins et rendez-vous : ce téléphone vous les rappelle à l’heure prévue, même sans connexion.",
+    "enable": "Activer les rappels sur ce téléphone",
+    "disable": "Couper les rappels sur ce téléphone",
+    "syncError": "Impossible de récupérer vos soins pour le moment. Vérifiez votre connexion et réessayez."
   }
 }

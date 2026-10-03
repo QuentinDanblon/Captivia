@@ -1650,5 +1650,16 @@
     "cancel": "Cancelar",
     "accessDenied": "O Captivia não tem acesso à câmera nem às suas fotos. Permita o acesso nas configurações do telefone e tente novamente.",
     "error": "Não foi possível carregar esta foto. Tente com outra imagem."
+  },
+  "nativeReminders": {
+    "body": "{type}: {title}",
+    "channelName": "Lembretes de cuidados",
+    "channelDescription": "Refeições, tratamentos, vacinas e consultas veterinárias dos seus animais, na hora certa.",
+    "blocked": "As notificações estão bloqueadas para o Captivia. Permita-as nas configurações do telefone: seus lembretes serão programados assim que você voltar ao app.",
+    "onText": "{count, plural, =0 {Nada para lembrar nos próximos 30 dias. Assim que um cuidado for previsto, este telefone avisa você, mesmo sem conexão.} one {# lembrete programado neste telefone para os próximos 30 dias. Ele tocará mesmo sem conexão.} other {# lembretes programados neste telefone para os próximos 30 dias. Eles tocarão mesmo sem conexão.}}",
+    "offText": "Refeições, tratamentos, vacinas e consultas: este telefone lembra você na hora certa, mesmo sem conexão.",
+    "enable": "Ativar os lembretes neste telefone",
+    "disable": "Desativar os lembretes neste telefone",
+    "syncError": "Não foi possível carregar seus cuidados agora. Verifique a conexão e tente novamente."
   }
 }
