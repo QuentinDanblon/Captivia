@@ -78,6 +78,7 @@ describe('HealthContentService', () => {
           sources: mockHealthContent.sources,
           updatedAt: mockHealthContent.updatedAt,
         },
+        inheritedFrom: null,
         pubmed: [],
         pubmedAvailable: true,
         disclaimer: expect.any(String),

@@ -60,6 +60,25 @@ export interface GbifSpecies {
   occurrenceCount?: number;
 }
 
+/** Réponse de `/species/match` (rapprochement d'un nom avec la taxonomie de référence). */
+export interface GbifMatch {
+  usageKey?: number;
+  acceptedUsageKey?: number;
+  scientificName?: string;
+  canonicalName?: string;
+  rank?: string;
+  status?: string;
+  /** EXACT | FUZZY | HIGHERRANK | NONE */
+  matchType?: string;
+  confidence?: number;
+  kingdom?: string;
+  phylum?: string;
+  class?: string;
+  order?: string;
+  family?: string;
+  genus?: string;
+}
+
 /** Réponse paginée de `/species/search`. */
 export interface GbifSearchResponse {
   results?: GbifSpecies[];

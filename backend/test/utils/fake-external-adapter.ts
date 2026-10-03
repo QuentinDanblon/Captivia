@@ -65,6 +65,103 @@ export const GBIF_TAXA: Record<string, Record<string, unknown>> = {
     family: 'Boidae',
     genus: 'Boa',
   },
+  // M11 — clé locale historique de « Chat domestique » : une mousse dans GBIF.
+  '5281802': {
+    key: 5281802,
+    scientificName: 'Grimmia arcuatifolia Kindb.',
+    canonicalName: 'Grimmia arcuatifolia',
+    rank: 'SPECIES',
+    taxonomicStatus: 'ACCEPTED',
+    kingdom: 'Plantae',
+    phylum: 'Bryophyta',
+    class: 'Bryopsida',
+    order: 'Grimmiales',
+    family: 'Grimmiaceae',
+    genus: 'Grimmia',
+  },
+  // Audit 5 — espèce animale absente du catalogue (choisie dans le repli GBIF).
+  '9001001': {
+    key: 9001001,
+    scientificName: 'Fixturosaurus exemplaris Test, 2026',
+    canonicalName: 'Fixturosaurus exemplaris',
+    rank: 'SPECIES',
+    taxonomicStatus: 'ACCEPTED',
+    kingdom: 'Animalia',
+    phylum: 'Chordata',
+    class: 'Squamata',
+    order: 'Squamata',
+    family: 'Fixturidae',
+    genus: 'Fixturosaurus',
+  },
+  // Plante (repli GBIF « instrument ») et mollusque (groupe non classé par le catalogue).
+  '165689944': {
+    key: 165689944,
+    scientificName: 'Lagenaria siceraria (Molina) Standl.',
+    canonicalName: 'Lagenaria siceraria',
+    rank: 'SPECIES',
+    taxonomicStatus: 'ACCEPTED',
+    kingdom: 'Plantae',
+    phylum: 'Tracheophyta',
+    class: 'Magnoliopsida',
+    order: 'Cucurbitales',
+    family: 'Cucurbitaceae',
+    genus: 'Lagenaria',
+  },
+  '2291582': {
+    key: 2291582,
+    scientificName: 'Lissachatina fulica (Bowdich, 1822)',
+    canonicalName: 'Lissachatina fulica',
+    rank: 'SPECIES',
+    taxonomicStatus: 'ACCEPTED',
+    kingdom: 'Animalia',
+    phylum: 'Mollusca',
+    class: 'Gastropoda',
+    order: 'Stylommatophora',
+    family: 'Achatinidae',
+    genus: 'Lissachatina',
+  },
+};
+
+/** Noms vernaculaires des fixtures (clé → noms) ; toute autre clé connue → liste vide. */
+const GBIF_VERNACULAR: Record<
+  string,
+  Array<{ name: string; language: string }>
+> = {
+  '9001001': [
+    { name: 'test lizard', language: 'eng' },
+    { name: 'lézard de démonstration', language: 'fra' },
+  ],
+};
+
+/** `/species/match` : nom scientifique (minuscules) → rapprochement dans la taxonomie. */
+const GBIF_MATCHES: Record<string, Record<string, unknown>> = {
+  'felis catus': {
+    usageKey: 2435035,
+    scientificName: 'Felis catus Linnaeus, 1758',
+    canonicalName: 'Felis catus',
+    rank: 'SPECIES',
+    status: 'ACCEPTED',
+    matchType: 'EXACT',
+    kingdom: 'Animalia',
+    phylum: 'Chordata',
+    class: 'Mammalia',
+    order: 'Carnivora',
+    family: 'Felidae',
+    genus: 'Felis',
+  },
+  'eublepharis macularius': {
+    usageKey: 5221172,
+    canonicalName: 'Eublepharis macularius',
+    rank: 'SPECIES',
+    status: 'ACCEPTED',
+    matchType: 'EXACT',
+    kingdom: 'Animalia',
+    phylum: 'Chordata',
+    class: 'Reptilia',
+    order: 'Squamata',
+    family: 'Eublepharidae',
+    genus: 'Eublepharis',
+  },
 };
 
 const OPFF_PRODUCT = {
@@ -105,6 +202,16 @@ const routes: FakeRoute[] = [
       };
     }
 
+    if (path === '/species/match') {
+      const name = String(params.name ?? '')
+        .trim()
+        .toLowerCase();
+      return {
+        status: 200,
+        data: GBIF_MATCHES[name] ?? { matchType: 'NONE', confidence: 100 },
+      };
+    }
+
     if (path === '/occurrence/search') {
       return {
         status: 200,
@@ -123,7 +230,13 @@ const routes: FakeRoute[] = [
     const [, key, sub] = match;
     if (!GBIF_TAXA[key]) return { status: 404, data: {} };
     if (!sub) return { status: 200, data: GBIF_TAXA[key] };
-    if (['vernacularNames', 'distributions', 'media'].includes(sub)) {
+    if (sub === 'vernacularNames') {
+      return {
+        status: 200,
+        data: { results: GBIF_VERNACULAR[key] ?? [], endOfRecords: true },
+      };
+    }
+    if (['distributions', 'media'].includes(sub)) {
       return { status: 200, data: { results: [], endOfRecords: true } };
     }
     return { status: 200, data: {} }; // iucn, metrics

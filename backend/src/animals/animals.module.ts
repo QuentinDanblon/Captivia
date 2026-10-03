@@ -6,8 +6,11 @@ import { AnimalHealthService } from './animal-health.service';
 import { PublicAnimalController } from './public-animal.controller';
 import { CarnetExportController } from './carnet-export.controller';
 import { CarnetExportService } from './carnet-export.service';
+import { SpeciesModule } from '../species/species.module';
 
 @Module({
+  // Fiche espèce garantie avant la création / le changement d'espèce d'un animal (audit 5).
+  imports: [SpeciesModule],
   controllers: [
     AnimalsController,
     AnimalHealthController,

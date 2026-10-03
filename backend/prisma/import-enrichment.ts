@@ -20,6 +20,8 @@
 import { PrismaClient } from '@prisma/client';
 import * as fs from 'fs';
 import * as path from 'path';
+import { BREED_ID_MIN, findParentSpecies } from '../src/species/species-parent';
+import { checkDietCompatibility } from './validation';
 
 type Source = { type?: string; url?: string; title?: string };
 type Json = Record<string, unknown>;
@@ -198,7 +200,15 @@ export async function importEnrichment(
         const sources = cleanSources(f.sources);
         const dietType = str(f.dietType, 40);
         const meal = str(f.mealFrequency, 20);
-        if (dietType && foods.length >= 2 && avoid.length >= 1 && sources.length && meal && MEAL_FREQ.includes(meal)) {
+        // B1 — race : régime compatible avec l'espèce parente (jamais un modèle d'un autre animal).
+        let dietError: string | null = null;
+        if (dietType && speciesId >= BREED_ID_MIN) {
+          const parent = await findParentSpecies(prisma, speciesId);
+          const parentFeeding = parent ? await prisma.speciesFeeding.findUnique({ where: { speciesId_locale: { speciesId: parent.speciesId, locale: 'fr' } } }) : null;
+          dietError = checkDietCompatibility(parent?.scientificName ?? '', dietType, parentFeeding?.dietType);
+        }
+        if (dietError) skip(speciesId, dietError);
+        else if (dietType && foods.length >= 2 && avoid.length >= 1 && sources.length && meal && MEAL_FREQ.includes(meal)) {
           await prisma.speciesFeeding.create({
             data: { speciesId, locale: 'fr', dietType, recommendedFoods: foods as never, foodsToAvoid: avoid as never, mealFrequency: meal, specificNeeds: str(f.specificNeeds), sources: sources as never },
           });

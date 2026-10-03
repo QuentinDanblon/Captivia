@@ -210,7 +210,19 @@ export default function AddAnimalFlow({
       // révoquée (la page redirige alors). Jamais de logout() ici.
       if (error instanceof ApiError && error.status === 401) return;
       console.error('Error creating animal:', error);
-      setFormError(t(errorKey(error, { fallback: 'animals.errorAdding' })));
+      setFormError(
+        t(
+          errorKey(error, {
+            codes: {
+              SPECIES_NOT_FOUND: 'animals.speciesUnavailable',
+              SPECIES_NOT_ANIMAL: 'animals.speciesUnavailable',
+              SPECIES_UNSUPPORTED_GROUP: 'animals.speciesUnavailable',
+              SPECIES_LOOKUP_UNAVAILABLE: 'animals.speciesLookupUnavailable',
+            },
+            fallback: 'animals.errorAdding',
+          }),
+        ),
+      );
     } finally {
       setSubmitting(false);
     }

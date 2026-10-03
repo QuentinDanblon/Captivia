@@ -4,6 +4,7 @@ import { ExternalHttpService } from './http/external-http.service';
 import type {
   GbifDistribution,
   GbifIucn,
+  GbifMatch,
   GbifMedia,
   GbifMetrics,
   GbifOccurrenceCount,
@@ -13,6 +14,9 @@ import type {
   GbifSpecies,
   GbifVernacularName,
 } from './gbif.types';
+
+/** Clé GBIF du règne Animalia (taxonomie de référence). */
+export const GBIF_ANIMALIA_KEY = 1;
 
 /** Clé GBIF : entier positif — elle est interpolée dans l'URL, donc validée ici aussi. */
 const GBIF_KEY_REGEX = /^[1-9]\d{0,14}$/;
@@ -52,8 +56,24 @@ export class GbifService {
           offset,
           rank: 'SPECIES',
           highertaxonRank: 'SPECIES',
+          // Règne animal uniquement (clé GBIF 1 = Animalia) : jamais de plante ni de champignon.
+          highertaxonKey: GBIF_ANIMALIA_KEY,
         },
       },
+    );
+    return response.data;
+  }
+
+  /**
+   * Rapproche un nom scientifique de la taxonomie de référence GBIF, dans le règne indiqué
+   * (`/species/match`). Sert à retrouver la bonne clé quand l'identifiant local d'une fiche
+   * n'est pas une clé GBIF valide pour ce taxon (races, anciens identifiants).
+   */
+  async matchSpecies(name: string, kingdom = 'Animalia'): Promise<GbifMatch> {
+    const response = await this.http.get<GbifMatch>(
+      'gbif',
+      `${this.gbifBaseUrl}/species/match`,
+      { params: { name: name.slice(0, 200), kingdom } },
     );
     return response.data;
   }

@@ -594,6 +594,14 @@ describe('Communauté (E2E)', () => {
       expect(bodyOf<ProfilePage>(res).avatarUrl).toBeNull();
       expect(existsSync(path.join(mediaDir, key))).toBe(false);
       expect(await prisma.communityMedia.count({ where: { key } })).toBe(0);
+
+      // Les suites suivantes (export RGPD, maintenance) attendent un avatar à bob.
+      const again = await upload(bob, await gpsJpeg()).expect(201);
+      await http()
+        .patch('/community/profile')
+        .set(bearer(bob))
+        .send({ avatarMediaId: bodyOf<IdBody>(again).id })
+        .expect(200);
     });
   });
 

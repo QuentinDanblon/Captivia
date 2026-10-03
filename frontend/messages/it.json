@@ -357,7 +357,9 @@
     },
     "photoUrlInsecure": "Questo indirizzo dell'immagine non è sicuro. Usa un indirizzo che inizia con https:// oppure scegli un file.",
     "photoUrlInvalid": "Questo indirizzo dell'immagine non è valido. Incolla l'indirizzo completo (https://…) oppure scegli un file.",
-    "photoUpdateError": "Non è stato possibile salvare la foto. Riprova."
+    "photoUpdateError": "Non è stato possibile salvare la foto. Riprova.",
+    "speciesUnavailable": "Non è possibile aggiungere questa specie. Scegline un'altra dall’elenco.",
+    "speciesLookupUnavailable": "Al momento non possiamo verificare questa specie. Riprova tra qualche minuto."
   },
   "attribution": {
     "wikipediaPrefix": "Fonte:",
