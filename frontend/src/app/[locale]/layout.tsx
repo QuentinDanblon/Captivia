@@ -9,7 +9,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { AppHeader } from '@/components/AppHeader';
 import { EmailVerificationBanner } from '@/components/EmailVerificationBanner';
 import { SiteFooter } from '@/components/SiteFooter';
-import ErrorBoundary from '@/components/ui/ErrorBoundary';
+import { SiteChrome } from '@/components/SiteChrome';
 import '../globals.css';
 
 /*
@@ -99,14 +99,10 @@ export default async function LocaleLayout({
       <body className="min-h-screen flex flex-col w-full bg-paper text-ink font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
           <AuthProvider>
-            <AppHeader />
-            <EmailVerificationBanner />
-            <main id="main-content" tabIndex={-1} className="flex-1 w-full">
-              <ErrorBoundary>
-                {children}
-              </ErrorBoundary>
-            </main>
-            <SiteFooter />
+            {/* Le groupe (marketing) a son propre cadre ; les autres pages gardent celui-ci (§ 8.1). */}
+            <SiteChrome header={<AppHeader />} banner={<EmailVerificationBanner />} footer={<SiteFooter />}>
+              {children}
+            </SiteChrome>
           </AuthProvider>
         </NextIntlClientProvider>
       </body>

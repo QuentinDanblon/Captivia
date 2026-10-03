@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
-import { routing } from '../../../../i18n/routing';
+import { routing } from '../../../../../i18n/routing';
 import { buildPageMetadata } from '@/lib/seo';
 
 type Props = { children: ReactNode; params: Promise<{ locale: string }> };
