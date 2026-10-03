@@ -25,7 +25,7 @@ on:
       api_url:
         description: "NEXT_PUBLIC_API_URL inliné dans l'app"
         required: true
-        default: https://captivia-api.onrender.com
+        default: https://captiviacaptivia-api.onrender.com
       create_missing:
         description: "Créer le projet natif (cap add) quand mobile/android ou mobile/ios n'est pas versionné : build jetable"
         type: boolean
