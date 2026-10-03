@@ -324,7 +324,7 @@ Voir §3.4.
 
 ### 6.4 Comptes inactifs
 
-**Comptes (avec e-mail)** : aucune purge automatique. Une durée de conservation reste à décider (et à inscrire dans la politique de confidentialité). La suppression de compte est une action de l'utilisateur dans l'application.
+**Comptes (avec e-mail)** : aucune purge automatique. La suppression de compte est une action de l'utilisateur dans l'application ; les comptes inactifs depuis plus de 36 mois suivent la procédure manuelle avec préavis du §6.5.
 
 **Invités (mode « Essayer sans compte »)** : purge automatique.
 
@@ -335,7 +335,69 @@ Voir §3.4.
 - Contrôle : `SELECT count(*) FILTER (WHERE "isGuest") AS invites, count(*) FILTER (WHERE "isGuest" AND "lastActiveAt" < now() - interval '90 days') AS a_purger FROM "User";`
 - Création d'invités limitée à 5 par heure et par IP (`GuestCreationRateLimitGuard`). Une hausse anormale du nombre d'invités se voit avec la requête ci-dessus ; la purge borne leur durée de vie.
 
-Registre des traitements (à reporter dans `docs/legal/registre-traitements.md` quand il existera, cf. W2-08) : traitement « mode invité » — données : animaux et carnet saisis, jetons de session (empreintes), agent utilisateur, abonnements push ; aucune donnée d'identification directe ; base légale : exécution du service demandé ; conservation : jusqu'à la conversion en compte, la suppression par l'utilisateur ou `GUEST_RETENTION_DAYS` jours d'inactivité.
+Registre des traitements : traitement T2 « mode invité » de [`docs/legal/registre-traitements.md`](legal/registre-traitements.md).
+
+### 6.5 Purge et rétention
+
+Les durées ci-dessous sont celles du registre des traitements ([`docs/legal/registre-traitements.md`](legal/registre-traitements.md), §4) et de la politique de confidentialité. Toute modification se reporte aux trois endroits.
+
+**Job de maintenance** (`backend/src/maintenance/`, `MaintenanceService`) : tous les jours à **03:41 UTC**, sous verrou consultatif de transaction `4731202612` (une seule instance travaille ; compatible PgBouncer). Il supprime, par lots de 1 000 lignes et au plus 50 000 lignes par table et par exécution (le reste part le lendemain) :
+
+| Table | Lignes supprimées |
+|---|---|
+| `PasswordResetToken` | expirées (validité 1 h) |
+| `EmailVerificationToken` | expirées ou invalidées par un nouvel envoi (validité 24 h) |
+| `RefreshToken` | expirées **ou** révoquées depuis plus de **30 jours**, tous comptes confondus |
+| `NotificationEvent` | date prévue (`scheduledAt`) antérieure à **90 jours** |
+
+- **Jamais purgé** : `PaymentEvent` (journal des notifications de paiement RevenueCat : obligations comptables et preuve des transactions ; `userId` passe à NULL à la suppression du compte). Sa durée de conservation reste à fixer par le propriétaire (registre, T6).
+- Aucun compte n'est supprimé par ce job. Les invités relèvent de `GuestPurgeService` (§6.4, 03:17 UTC).
+- `User.calendarToken` (flux ICS) n'expire pas : rien à purger (il est remplacé à la régénération).
+- Journal : une ligne par exécution, par exemple `Maintenance : 3 jeton(s) de réinitialisation, 1 jeton(s) de vérification d'e-mail, 42 refresh token(s), 812 événement(s) de rappel supprimé(s) en 95 ms.` Si une autre instance détient le verrou : `Maintenance : verrou détenu par une autre instance, exécution ignorée.` ; en cas d'erreur : `Maintenance en échec : …` (rien n'est supprimé, la transaction est annulée).
+- **Suspendre** : `MAINTENANCE_ENABLED=false` dans Render (incident, enquête sur des sessions : conserver les refresh tokens révoqués), puis redéployer. Remettre la variable à vide ou `true` ensuite. Le job est toujours inactif sous `NODE_ENV=test`.
+- **Contrôle** (lecture seule) :
+
+```sql
+SELECT
+  (SELECT count(*) FROM "PasswordResetToken"     WHERE "expiresAt" < now())                       AS reset_a_purger,
+  (SELECT count(*) FROM "EmailVerificationToken" WHERE "expiresAt" < now())                       AS verif_a_purger,
+  (SELECT count(*) FROM "RefreshToken"
+     WHERE "expiresAt" < now() - interval '30 days' OR "revokedAt" < now() - interval '30 days')  AS refresh_a_purger,
+  (SELECT count(*) FROM "NotificationEvent"      WHERE "scheduledAt" < now() - interval '90 days') AS rappels_a_purger;
+```
+
+Après une exécution, ces compteurs doivent être nuls (sauf arriéré de plus de 50 000 lignes, résorbé les jours suivants). Des compteurs qui grossissent de jour en jour signalent un job suspendu ou en échec : chercher `Maintenance` dans les journaux Render.
+
+**Mesure d'usage de l'API** (`/analytics`, opérateurs, chargée seulement si `REDIS_ENABLED=true`) : `POST /analytics/track` n'accepte plus de `userId` en query (400) ; l'utilisateur est celui du JWT et n'est stocké que sous forme de pseudonyme ; les clés journalières Redis expirent après 90 jours.
+
+**Comptes inactifs depuis plus de 36 mois** : aucune suppression automatique. Procédure manuelle, au plus une fois par an `[À COMPLÉTER : fréquence]` :
+
+1. Lister (lecture seule) :
+
+   ```sql
+   SELECT u.id, u.email, u."lastActiveAt"
+     FROM "User" u
+    WHERE NOT u."isGuest"
+      AND u.role = 'USER'
+      AND u."lastActiveAt" < now() - interval '36 months'
+      AND NOT EXISTS (
+        SELECT 1 FROM "Subscription" s
+         WHERE s."userId" = u.id AND s."currentPeriodEnd" > now()
+      )
+    ORDER BY u."lastActiveAt";
+   ```
+
+2. Envoyer à chaque adresse un **préavis** par e-mail : suppression dans `[À COMPLÉTER : 30]` jours sauf connexion, avec le lien de connexion et le rappel de l'export des données (page `/parametres/compte`). Conserver la liste des destinataires et la date d'envoi.
+3. À l'échéance, relancer la requête : seuls les comptes **toujours** inactifs (une connexion met à jour `lastActiveAt`) sont supprimés, un par un, dans une transaction :
+
+   ```sql
+   BEGIN;
+   DELETE FROM "User" WHERE id = '<id>' AND "lastActiveAt" < now() - interval '36 months';
+   COMMIT;
+   ```
+
+   Les clés étrangères suppriment en cascade animaux, carnet, rappels, sessions et abonnements ; `PaymentEvent.userId` passe à NULL.
+4. Consigner la date et le nombre de comptes supprimés (sans les adresses). Les données disparaissent des sauvegardes au bout de 30 jours.
 
 ---
 
@@ -404,6 +466,8 @@ Aucune valeur secrète n'est notée ici. Sources : `render.yaml`, `netlify.toml`
 | `GOOGLE_PLAY_PACKAGE_NAME` | Dashboard (`sync: false`) | Lien « Gérer mon abonnement » Google Play |
 | `MAIL_HOST`, `MAIL_PORT`, `MAIL_SECURE`, `MAIL_USER`, `MAIL_PASS`, `MAIL_FROM` | Dashboard (`sync: false`) | SMTP ; sans `MAIL_HOST`, aucun e-mail n'est envoyé |
 | `REMINDERS_ENABLED` | Dashboard (`sync: false`) | `false` désactive le scheduler de rappels |
+| `GUEST_RETENTION_DAYS` | Dashboard (`sync: false`) | Jours d'inactivité avant purge d'un invité (défaut 90) ; `GUEST_PURGE_ENABLED=false` (schéma Joi) suspend cette purge |
+| `MAINTENANCE_ENABLED` | Dashboard (`sync: false`) | `false` suspend le job de maintenance quotidien (§6.5) |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | Dashboard (`sync: false`) | Web Push ; sans elles, l'envoi push est désactivé (journalisé) |
 
 Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `REDIS_HOST` (défaut `localhost`), `REDIS_PORT` (défaut 6379).
@@ -427,4 +491,4 @@ Variables du schéma Joi absentes de `render.yaml` : `PORT` (défaut 3001), `RED
 
 ---
 
-*Mis à jour : 2026-10-02*
+*Mis à jour : 2026-10-03*

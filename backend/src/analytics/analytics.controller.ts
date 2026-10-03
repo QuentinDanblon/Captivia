@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Delete, Query, Param, UseGuards, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Query, Param, UseGuards, HttpCode, HttpStatus, Req } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ApiAnalyticsService } from './api-analytics.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { OperatorGuard } from '../common/guards/operator.guard';
+import { TrackRequestQueryDto } from './dto/track-request.dto';
 
 @ApiTags('analytics')
 @Controller('analytics')
@@ -38,13 +39,14 @@ export class AnalyticsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Track API request' })
   @ApiResponse({ status: 204, description: 'Request tracked successfully' })
+  @ApiResponse({ status: 400, description: 'Query invalide (dont `userId`, refusé : LEG-06)' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async trackRequest(
-    @Query('endpoint') endpoint: string,
-    @Query('userId') userId: string,
-    @Query('duration') duration: string
+    @Query() query: TrackRequestQueryDto,
+    @Req() req: { user?: { id?: string } },
   ) {
-    await this.analyticsService.trackRequest(endpoint, userId, parseInt(duration));
+    // LEG-06 : l'utilisateur vient du JWT (jamais de la query) ; sans utilisateur, appel anonyme.
+    await this.analyticsService.trackRequest(query.endpoint, req.user?.id ?? null, query.duration);
   }
 
   @Get('export/:date')

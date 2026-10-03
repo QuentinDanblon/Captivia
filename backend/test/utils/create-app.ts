@@ -1,5 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BadRequestException, INestApplication, ValidationPipe } from '@nestjs/common';
+import {
+  BadRequestException,
+  INestApplication,
+  Provider,
+  Type,
+  ValidationPipe,
+} from '@nestjs/common';
 import helmet from 'helmet';
 import { AppModule } from '../../src/app.module';
 import { CacheModule } from '../../src/cache/cache.module';
@@ -30,9 +36,19 @@ export interface TestApp {
  * Open Pet Food Facts…) sous le client externe partagé. Pour simuler une panne, appeler
  * `setExternalHttpAdapterOverride(createFakeExternalAdapter([routePanne]))` AVANT cette fabrique.
  */
-export async function createTestApp(): Promise<TestApp> {
+export interface TestAppExtras {
+  /** Contrôleurs à monter en plus d'AppModule (ex. module non chargé sans Redis). */
+  controllers?: Type<unknown>[];
+  providers?: Provider[];
+}
+
+export async function createTestApp(
+  extras: TestAppExtras = {},
+): Promise<TestApp> {
   const moduleFixture: TestingModule = await Test.createTestingModule({
     imports: [AppModule],
+    controllers: extras.controllers ?? [],
+    providers: extras.providers ?? [],
   })
     .overrideModule(CacheModule)
     .useModule(TestCacheModule)

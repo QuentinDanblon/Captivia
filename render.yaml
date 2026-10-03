@@ -78,6 +78,11 @@ services:
       # docs/RUNBOOK.md). Laisser vide pour garder le défaut.
       - key: GUEST_RETENTION_DAYS
         sync: false
+      # Maintenance quotidienne (W2-08, 03:41 UTC) : purge des jetons expirés, des refresh
+      # tokens périmés et des événements de rappel de plus de 90 jours. « false » la suspend
+      # (incident, enquête) ; laisser vide pour la garder active (docs/RUNBOOK.md).
+      - key: MAINTENANCE_ENABLED
+        sync: false
       - key: SENTRY_TRACES_SAMPLE_RATE
         sync: false
       # Intégrations externes (W3-05) — facultatives, à saisir dans le Dashboard.

@@ -636,7 +636,8 @@ export class AuthService implements OnModuleInit {
   /**
    * Purge best effort des refresh tokens expirés du compte (la table grossissait sans limite :
    * une ligne par rotation). Lancée sans attendre : hors du chemin critique du refresh, et un
-   * échec est sans conséquence. Une purge globale est prévue dans un autre chantier.
+   * échec est sans conséquence. La purge globale (tous comptes, jetons révoqués) relève de
+   * MaintenanceService (W2-08).
    */
   private purgeExpiredRefreshTokens(userId: string): void {
     void this.prisma.refreshToken

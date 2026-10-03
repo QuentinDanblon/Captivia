@@ -2,6 +2,15 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRedis } from '@nestjs-modules/ioredis';
 import Redis from 'ioredis';
 import { promisify } from 'util';
+import { createHash } from 'crypto';
+
+/** Durée de vie des compteurs journaliers et des ensembles d'utilisateurs (W2-08) : 90 jours. */
+export const ANALYTICS_DAILY_TTL_SECONDS = 90 * 24 * 60 * 60;
+
+/** Pseudonyme stable d'un utilisateur pour le comptage des visiteurs uniques (jamais l'id brut). */
+export function analyticsUserKey(userId: string): string {
+  return createHash('sha256').update(`analytics:${userId}`).digest('hex').slice(0, 32);
+}
 
 export interface ApiUsage {
   totalRequests: number;
@@ -33,7 +42,6 @@ export class ApiAnalyticsService {
   private readonly delAsync: (key: string) => Promise<number>;
   private readonly lpushAsync: (key: string, ...values: string[]) => Promise<number>;
   private readonly lrangeAsync: (key: string, start: number, stop: number) => Promise<string[]>;
-  private readonly llenAsync: (key: string) => Promise<number>;
 
   constructor(@InjectRedis() private readonly redis: Redis) {
     this.getAsync = promisify(this.redis.get).bind(this.redis);
@@ -43,10 +51,13 @@ export class ApiAnalyticsService {
     this.delAsync = promisify(this.redis.del).bind(this.redis);
     this.lpushAsync = promisify(this.redis.lpush).bind(this.redis);
     this.lrangeAsync = promisify(this.redis.lrange).bind(this.redis);
-    this.llenAsync = promisify(this.redis.llen).bind(this.redis);
   }
 
-  async trackRequest(endpoint: string, userId: string, duration: number): Promise<void> {
+  /**
+   * `userId` provient du JWT (null = appel anonyme, non compté dans les visiteurs uniques).
+   * Seul un pseudonyme (sha256 tronqué) est stocké ; les clés journalières expirent après 90 jours.
+   */
+  async trackRequest(endpoint: string, userId: string | null, duration: number): Promise<void> {
     const pipeline = this.redis.pipeline();
     
     // Track total requests
@@ -58,6 +69,7 @@ export class ApiAnalyticsService {
     // Track requests by day
     const today = new Date().toISOString().split('T')[0];
     pipeline.incr(`analytics:daily:${today}:${endpoint}`);
+    pipeline.expire(`analytics:daily:${today}:${endpoint}`, ANALYTICS_DAILY_TTL_SECONDS);
     
     // Track response time
     const currentAvg = await this.getAsync(`analytics:avgResponseTime:${endpoint}`) || '0';
@@ -67,8 +79,11 @@ export class ApiAnalyticsService {
     pipeline.set(`analytics:avgResponseTime:${endpoint}`, avg.toString());
     pipeline.set(`analytics:responseTimeCount:${endpoint}`, (parseInt(count) + 1).toString());
     
-    // Track unique users
-    pipeline.sadd(`analytics:users:${today}`, userId);
+    // Track unique users (pseudonymisés ; les appels anonymes ne sont pas comptés)
+    if (userId) {
+      pipeline.sadd(`analytics:users:${today}`, analyticsUserKey(userId));
+      pipeline.expire(`analytics:users:${today}`, ANALYTICS_DAILY_TTL_SECONDS);
+    }
     
     // Track error if duration is too high (threshold: 5 seconds)
     if (duration > 5000) {
@@ -88,7 +103,7 @@ export class ApiAnalyticsService {
     const totalRequests = parseInt(await this.getAsync('analytics:totalRequests') || '0');
     
     // Get unique users for the period
-    const uniqueUsers = await this.llenAsync(`analytics:users:${endDate}`);
+    const uniqueUsers = await this.redis.scard(`analytics:users:${endDate}`);
 
     // Get requests by day
     const requestsByDay: Record<string, number> = {};
@@ -168,7 +183,7 @@ export class ApiAnalyticsService {
     topEndpoints: Array<{ endpoint: string; count: number }>;
   }> {
     const requests = parseInt(await this.getAsync(`analytics:daily:${date}`) || '0');
-    const uniqueUsers = await this.llenAsync(`analytics:users:${date}`);
+    const uniqueUsers = await this.redis.scard(`analytics:users:${date}`);
     const avgResponseTime = parseInt(await this.getAsync(`analytics:avgResponseTime:${date}`) || '0');
     const errors = parseInt(await this.getAsync(`analytics:errors:${date}`) || '0');
     
@@ -258,7 +273,7 @@ export class ApiAnalyticsService {
       const dateStr = date.toISOString().split('T')[0];
 
       const requests = parseInt(await this.getAsync(`analytics:daily:${dateStr}`) || '0');
-      const uniqueUsers = await this.llenAsync(`analytics:users:${dateStr}`);
+      const uniqueUsers = await this.redis.scard(`analytics:users:${dateStr}`);
       const avgResponseTime = parseInt(await this.getAsync(`analytics:avgResponseTime:${dateStr}`) || '0');
 
       trend.push({

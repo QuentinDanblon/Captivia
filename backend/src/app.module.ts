@@ -39,6 +39,7 @@ import { EntitlementModule } from './entitlement/entitlement.module';
 import { SpeciesRoutinesModule } from './species-routines/species-routines.module';
 import { AccountModule } from './account/account.module';
 import { AgendaModule } from './agenda/agenda.module';
+import { MaintenanceModule } from './maintenance/maintenance.module';
 import { ExternalHttpModule } from './external/http/external-http.module';
 
 const redisEnabled = process.env.REDIS_ENABLED === 'true';
@@ -93,6 +94,7 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     GradeModule,
     AccountModule,
     AgendaModule,
+    MaintenanceModule,
     CacheModule.registerAsync(),
     TransformerModule,
     FilterModule,
