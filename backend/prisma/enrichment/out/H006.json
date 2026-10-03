@@ -1,0 +1,156 @@
+[
+ {
+  "speciesId": 2000000169,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2000000188,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2493661,
+  "reproduction": {
+   "season": null,
+   "gestationDays": null,
+   "incubationDays": 12,
+   "litterSizeMin": 4,
+   "litterSizeMax": 6,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": null,
+   "notes": "Les deux adultes couvent 4 à 6 oeufs pendant 12 à 15 jours. Le nid comporte un tube d'entrée orienté vers le bas, surmonté d'un faux nid. En période de reproduction, les astrilds peuvent devenir agressifs et territoriaux autour du nid.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://animals.sandiegozoo.org/node/291",
+     "title": "Waxbills - San Diego Zoo Wildlife Alliance"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2495134,
+  "feeding": null
+ },
+ {
+  "speciesId": 2498387,
+  "behavior": null
+ },
+ {
+  "speciesId": 5959092,
+  "feeding": {
+   "dietType": "carnivore",
+   "recommendedFoods": [
+    {
+     "name": "Souris et rats adultes",
+     "frequency": "quotidienne",
+     "notes": "Meilleurs aliments pour les rapaces : profil nutritionnel plus complet."
+    },
+    {
+     "name": "Poussins d'un jour",
+     "frequency": "quotidienne",
+     "notes": "Ne pas retirer le jaune d'oeuf, riche en vitamines et minéraux."
+    },
+    {
+     "name": "Cailles et pigeons (proies entières)",
+     "frequency": "selon la taille",
+     "notes": "Proies couramment données aux rapaces selon l'espèce ; utiliser des proies d'élevage."
+    }
+   ],
+   "foodsToAvoid": [
+    {
+     "name": "Animaux capturés dans la nature (rats, pigeons, lapins)",
+     "reason": "Peuvent porter des maladies, des toxines et des poisons."
+    },
+    {
+     "name": "Proies avec de gros os",
+     "reason": "Risque d'obstruction du gésier, qui empêche la régurgitation des parties indigestes (pelote)."
+    },
+    {
+     "name": "Poussins dont le jaune d'oeuf a été retiré",
+     "reason": "Perte des vitamines A et E, déséquilibre du rapport calcium/phosphore et appauvrissement en protéines et en énergie."
+    }
+   ],
+   "mealFrequency": "daily",
+   "specificNeeds": "Ajouter une petite quantité de complément vitaminique et minéral équilibré, surtout en période de stress ; décongeler les proies lentement au réfrigérateur, pas dans l'eau chaude.",
+   "sources": [
+    {
+     "type": "vet",
+     "url": "https://www.merckvetmanual.com/management-and-nutrition/nutrition-exotic-and-zoo-animals/nutrition-in-raptors",
+     "title": "Nutrition in Raptors - Merck Veterinary Manual"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 104128782,
+  "health": null
+ },
+ {
+  "speciesId": 308455619,
+  "health": {
+   "diseases": [
+    {
+     "name": "Aile d'ange (déformation en valgus du carpe)",
+     "symptoms": "L'aile pend puis pivote vers l'extérieur ; touche surtout les oisons en croissance.",
+     "prevention": "Éviter les excès de protéines et de glucides dans l'alimentation, cause fréquente.",
+     "whenToConsult": "Dès les premiers signes, chez un vétérinaire (correction possible si prise en charge précoce)."
+    },
+    {
+     "name": "Aspergillose",
+     "symptoms": "Respiration bouche ouverte, respiration difficile, balancement de la queue, halètement, fréquence respiratoire élevée.",
+     "prevention": "Une mauvaise ventilation, un manque d'hygiène, une litière humide, une nourriture moisie et une ambiance chaude et humide augmentent le risque.",
+     "whenToConsult": "Contacter un vétérinaire en cas de suspicion."
+    },
+    {
+     "name": "Parvovirose de l'oie (maladie de Derzsy)",
+     "symptoms": "Écoulements oculo-nasaux, diarrhée aqueuse et forte mortalité chez les jeunes oisons ; retard de croissance et anomalies des plumes chez les plus âgés.",
+     "prevention": "Aucun traitement efficace ; la vaccination peut prévenir la maladie déclarée.",
+     "whenToConsult": null
+    }
+   ],
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://opensanctuary.org/common-goose-health-issues/",
+     "title": "Common Goose Health Issues - Open Sanctuary"
+    },
+    {
+     "type": "vet",
+     "url": "https://www.msdvetmanual.com/poultry/parvovirus-infection-of-waterfowl/parvovirus-infection-of-waterfowl",
+     "title": "Parvovirus Infection of Waterfowl - MSD Veterinary Manual"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2000001265,
+  "description": null,
+  "sourceUrl": null
+ },
+ {
+  "speciesId": 2339870,
+  "reproduction": null
+ },
+ {
+  "speciesId": 2354003,
+  "reproduction": {
+   "season": "Ponte le matin suivant l'introduction du couple dans le bac de ponte (pas de saison précisée)",
+   "gestationDays": null,
+   "incubationDays": null,
+   "litterSizeMin": null,
+   "litterSizeMax": null,
+   "sexualMaturityMonths": null,
+   "breedingDifficulty": "facile",
+   "notes": "Bac de ponte séparé très peu éclairé, avec mousse de Java ou balais de ponte ; eau douce et acide (pH 6,0-7,0), 24 à 26,5 °C. Les adultes mangent volontiers les oeufs : les retirer dès la ponte. Éclosion en 24 à 36 heures ; les alevins nagent librement 4 à 5 jours plus tard.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.seriouslyfish.com/species/nematobrycon-palmeri/",
+     "title": "Nematobrycon palmeri (Emperor Tetra) - Seriously Fish"
+    }
+   ]
+  }
+ }
+]

@@ -1,0 +1,548 @@
+[
+  {
+    "speciesId": 104260760,
+    "evidence": [
+      {
+        "field": "reproduction.breedingDifficulty",
+        "value": "avance",
+        "quote": "Amano shrimp are one of the hardest shrimp species to breed in the freshwater aquarium hobby.",
+        "url": "https://www.theshrimpfarm.com/posts/breeding-amano-shrimp/"
+      },
+      {
+        "field": "reproduction.sexualMaturityMonths",
+        "value": 4,
+        "quote": "Once your Amano shrimp are sexually mature (4-5 months), if the above-mentioned requirements are met, they'll breed.",
+        "url": "https://www.theshrimpfarm.com/posts/breeding-amano-shrimp/"
+      },
+      {
+        "field": "reproduction.season",
+        "value": "après la mue de la femelle",
+        "quote": "Amano shrimp breed after the female molts.",
+        "url": "https://www.theshrimpfarm.com/posts/breeding-amano-shrimp/"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "oeufs portés 3-5 semaines",
+        "quote": "After the shrimp have bred, the female will keep the eggs in her pleopods/swimmerets for 3-5 weeks while they develop.",
+        "url": "https://www.theshrimpfarm.com/posts/breeding-amano-shrimp/"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "larves en eau salée jusqu'à la métamorphose",
+        "quote": "They need to be in saltwater until they metamorphose.",
+        "url": "https://www.theshrimpfarm.com/posts/breeding-amano-shrimp/"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "larves en eau salée après éclosion",
+        "quote": "Oviposition and hatching occurs in freshwater, and newly hatched larvae drift to saltwater and develop as juveniles, returning to freshwater in their adult forms.",
+        "url": "https://en.wikipedia.org/wiki/Amano_shrimp"
+      }
+    ]
+  },
+  {
+    "speciesId": 104276062,
+    "evidence": [
+      {
+        "field": "reproduction.season",
+        "value": "toute l'année",
+        "quote": "Female Porcellio laevis (Latreille) raised in the laboratory first reproduced when 7 months old and can breed up to 7 times during their life time irrespective of season.",
+        "url": "https://marineinfo.org/doc/publication/8587"
+      },
+      {
+        "field": "reproduction.sexualMaturityMonths",
+        "value": 7,
+        "quote": "Female Porcellio laevis (Latreille) raised in the laboratory first reproduced when 7 months old and can breed up to 7 times during their life time irrespective of season.",
+        "url": "https://marineinfo.org/doc/publication/8587"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "7,7 semaines entre couvées",
+        "quote": "The average time intervals between consecutive broods is 7.7 weeks.",
+        "url": "https://marineinfo.org/doc/publication/8587"
+      },
+      {
+        "field": "reproduction.breedingDifficulty",
+        "value": "facile",
+        "quote": "Difficulty : easy",
+        "url": "https://exuvium.net/porcellio-laevis-white"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "très prolifique",
+        "quote": "Reproduction rate : extremely prolific with large broods; reproduction age starts early.",
+        "url": "https://exuvium.net/porcellio-laevis-white"
+      }
+    ]
+  },
+  {
+    "speciesId": 165504395,
+    "evidence": [
+      {
+        "field": "behavior.generalBehavior",
+        "value": "docile, non agressif",
+        "quote": "They are generally very laid-back and docile animals, breeding every few years, and are considered a tasty appetizer to many people.",
+        "url": "https://bantam.earth/burgundy-snail-helix-pomatia"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "se rétracte quand dérangé",
+        "quote": "The Burgundy snail is not an aggressive species and generally tends to withdraw when startled or disturbed.",
+        "url": "https://bantam.earth/burgundy-snail-helix-pomatia"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "actif la nuit",
+        "quote": "Additionally, they are active during the night, and as such, provide a great and interesting addition to any nocturnal reptile or amphibian tank.",
+        "url": "https://bantam.earth/burgundy-snail-helix-pomatia"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "ne pas trop manipuler",
+        "quote": "While Helix pomatia won’t attack or bite, it is important to note that it is still a wild creature and should not be handled too much.",
+        "url": "https://bantam.earth/burgundy-snail-helix-pomatia"
+      },
+      {
+        "field": "behavior.sociability",
+        "value": "solitaire",
+        "quote": "As a solitary species, this snail may avoid other animals and people.",
+        "url": "https://bantam.earth/burgundy-snail-helix-pomatia"
+      },
+      {
+        "field": "behavior.difficultyLevel",
+        "value": "débutant",
+        "quote": "With some patience, those looking for an easy pet with a unique appearance should consider the Burgundy Snail.",
+        "url": "https://bantam.earth/burgundy-snail-helix-pomatia"
+      },
+      {
+        "field": "behavior.compatibilityWithOtherAnimals",
+        "value": "isopodes, collemboles, escargots",
+        "quote": "Burgundy snails are excellent tank mates and can thrive in tanks with other animals such as isopods , springtails , and other snails.",
+        "url": "https://bantam.earth/burgundy-snail-helix-pomatia"
+      },
+      {
+        "field": "health.diseases[0]",
+        "value": "Coquille endommagée",
+        "quote": "Shell damage: Often due to lack of calcium or poor substrate. Supplement calcium and avoid rough handling.",
+        "url": "https://vetverified.com/articles/the-ultimate-guide-to-keeping-land-snails-as-pets"
+      },
+      {
+        "field": "health.diseases[0].whenToConsult",
+        "value": "vétérinaire invertébrés",
+        "quote": "A snail with a cracked shell or showing inactivity may be stressed or unwell. Assess conditions and consult a vet familiar with invertebrates if needed.",
+        "url": "https://vetverified.com/articles/the-ultimate-guide-to-keeping-land-snails-as-pets"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Déshydratation",
+        "quote": "Dehydration: Caused by low humidity. Mist regularly and monitor tank conditions.",
+        "url": "https://vetverified.com/articles/the-ultimate-guide-to-keeping-land-snails-as-pets"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Acariens",
+        "quote": "Mites: Tiny white or red mites can infest tanks. Regular cleaning helps prevent infestations.",
+        "url": "https://vetverified.com/articles/the-ultimate-guide-to-keeping-land-snails-as-pets"
+      },
+      {
+        "field": "health.diseases[3]",
+        "value": "Parasites",
+        "quote": "Parasites: Rare in captive snails but can be introduced through contaminated soil or wild-caught specimens.",
+        "url": "https://vetverified.com/articles/the-ultimate-guide-to-keeping-land-snails-as-pets"
+      }
+    ]
+  },
+  {
+    "speciesId": 2441108,
+    "evidence": [
+      {
+        "field": "health.diseases[0]",
+        "value": "Ecthyme contagieux",
+        "quote": "An adult male muskox ( Ovibos moschatus ), harvested on 26 August 2014 on Victoria Island, Nunavut, in the Canadian Arctic, had proliferative dermatitis on the muzzle and fetlocks suggestive of contagious ecthyma or orf ( Parapoxvirus ).",
+        "url": "https://complete.bioone.org/journals/journal-of-wildlife-diseases/volume-52/issue-3/2015-12-327/Contagious-Ecthyma-Rangiferine-Brucellosis-and-Lungworm-Infection-in-a-Muskox/10.7589/2015-12-327.full"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "dermatite proliférative museau et boulets",
+        "quote": "An adult male muskox ( Ovibos moschatus ), harvested on 26 August 2014 on Victoria Island, Nunavut, in the Canadian Arctic, had proliferative dermatitis on the muzzle and fetlocks suggestive of contagious ecthyma or orf ( Parapoxvirus ).",
+        "url": "https://complete.bioone.org/journals/journal-of-wildlife-diseases/volume-52/issue-3/2015-12-327/Contagious-Ecthyma-Rangiferine-Brucellosis-and-Lungworm-Infection-in-a-Muskox/10.7589/2015-12-327.full"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "vers pulmonaires",
+        "quote": "Fecal analysis and lung examination demonstrated co-infection with the lungworms Umingmakstrongylus pallikuukensis and Varestrongylus eleguneniensis .",
+        "url": "https://complete.bioone.org/journals/journal-of-wildlife-diseases/volume-52/issue-3/2015-12-327/Contagious-Ecthyma-Rangiferine-Brucellosis-and-Lungworm-Infection-in-a-Muskox/10.7589/2015-12-327.full"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "pneumonie vermineuse",
+        "quote": "Pathologic investigations identified several comorbid conditions, including predation, polyarthritis caused by or consistent with Chlamydophila spp. infection, hoof lesions, copper deficiency, contagious ecthyma, verminous pneumonia, hepatic lipidosis suggestive of negative energy balance, and bacterial bronchopneumonia due to Trueperella pyogenes and Bibersteinia trehalosi .",
+        "url": "https://bioone.org/journals/journal-of-wildlife-diseases/volume-53/issue-2/2016-02-035/DISEASE-COMPLEXITY-IN-A-DECLINING-ALASKAN-MUSKOX-iOVIBOS-MOSCHATUS-i/10.7589/2016-02-035.full"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Brucellose",
+        "quote": "Additionally, there was a metaphyseal abscess with a cortical fistula in the right metacarpus from which Brucella suis biovar 4 was isolated and identification supported by PCR.",
+        "url": "https://complete.bioone.org/journals/journal-of-wildlife-diseases/volume-52/issue-3/2015-12-327/Contagious-Ecthyma-Rangiferine-Brucellosis-and-Lungworm-Infection-in-a-Muskox/10.7589/2015-12-327.full"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Brucellose rangiférine",
+        "quote": "Other conditions of concern that may affect muskox populations include rangiferine brucellosis because it occurs in sympatric arctic caribou",
+        "url": "https://bioone.org/journals/journal-of-wildlife-diseases/volume-53/issue-2/2016-02-035/DISEASE-COMPLEXITY-IN-A-DECLINING-ALASKAN-MUSKOX-iOVIBOS-MOSCHATUS-i/10.7589/2016-02-035.full"
+      },
+      {
+        "field": "health.diseases[3]",
+        "value": "Bronchopneumonie bactérienne",
+        "quote": "Pathologic investigations identified several comorbid conditions, including predation, polyarthritis caused by or consistent with Chlamydophila spp. infection, hoof lesions, copper deficiency, contagious ecthyma, verminous pneumonia, hepatic lipidosis suggestive of negative energy balance, and bacterial bronchopneumonia due to Trueperella pyogenes and Bibersteinia trehalosi .",
+        "url": "https://bioone.org/journals/journal-of-wildlife-diseases/volume-53/issue-2/2016-02-035/DISEASE-COMPLEXITY-IN-A-DECLINING-ALASKAN-MUSKOX-iOVIBOS-MOSCHATUS-i/10.7589/2016-02-035.full"
+      }
+    ]
+  },
+  {
+    "speciesId": 5219362,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Feeding genets properly requires replicating their specialized carnivorous diet of whole prey, raw meat, and insects",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "proies entières",
+        "quote": "The ideal foundation involves whole prey items including mice, rats, day-old chicks, and quail providing complete nutrition with bones, organs, and fur/feathers offering dietary components impossible to replicate with muscle meat alone. Feed appropriately sized whole prey items 2-4 times weekly depending on genet's size and body condition.",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable (2-4 fois par semaine)",
+        "quote": "The ideal foundation involves whole prey items including mice, rats, day-old chicks, and quail providing complete nutrition with bones, organs, and fur/feathers offering dietary components impossible to replicate with muscle meat alone. Feed appropriately sized whole prey items 2-4 times weekly depending on genet's size and body condition.",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "viande crue",
+        "quote": "Raw meat including chicken, turkey, rabbit, and occasionally beef can supplement whole prey but shouldn't be sole diet as muscle meat alone lacks essential nutrients.",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "insectes",
+        "quote": "Insects including crickets, mealworms, superworms, dubia roaches, and locusts should supplement diet 2-3 times weekly providing variety and enrichment through hunting behaviors.",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "chocolat, raisins, oignons, avocat",
+        "quote": "Foods to absolutely avoid include processed human foods, anything with artificial additives, chocolate (toxic), grapes and raisins (potentially toxic to some carnivores), onions and garlic (toxic), avocado, and dairy products most carnivores can't digest properly.",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "aliments transformés, additifs, produits laitiers",
+        "quote": "Foods to absolutely avoid include processed human foods, anything with artificial additives, chocolate (toxic), grapes and raisins (potentially toxic to some carnivores), onions and garlic (toxic), avocado, and dairy products most carnivores can't digest properly.",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "os cuits",
+        "quote": "Never feed cooked bones as these splinter dangerously.",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      },
+      {
+        "field": "feeding.foodsToAvoid[3]",
+        "value": "nourriture pour chien",
+        "quote": "Don't feed dog food as formulations don't meet carnivore needs.",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "calcium et vitamines",
+        "quote": "Dust with calcium and vitamin supplements.",
+        "url": "https://www.furrycritter.com/pages/descriptions/small_mammals/genet.htm"
+      }
+    ]
+  },
+  {
+    "speciesId": 5285167,
+    "evidence": [
+      {
+        "field": "health.diseases[0]",
+        "value": "Dents trop longues",
+        "quote": "Common conditions of pet chinchillas include bite wounds, respiratory diseases, overgrown and impacted teeth, gastrointestinal stasis, bloat, diarrhea, skin problems, reproductive/genital issues, and heat stroke.",
+        "url": "https://vcahospitals.com/know-your-pet/chinchillas-diseases"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "symptômes dentaires",
+        "quote": "These overgrown teeth may start to cut into the tongue, cheek, or lips, leading to difficulty eating, decreased appetite, weight loss, drooling, eye problems, and pawing at the face.",
+        "url": "https://vcahospitals.com/know-your-pet/chinchillas-diseases"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "foin",
+        "quote": "Dental overgrowth commonly occurs in chinchillas that do not eat hay as the main component of their diet.",
+        "url": "https://vcahospitals.com/know-your-pet/chinchillas-diseases"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Stase gastro-intestinale",
+        "quote": "Gastrointestinal (GI) stasis refers to a slowing down of the passage of food through the stomach and intestines when chinchillas stop eating for several reasons, including dental disease, inappropriate diet, overheating, or other stressors.",
+        "url": "https://vcahospitals.com/know-your-pet/chinchillas-diseases"
+      },
+      {
+        "field": "health.diseases[1].whenToConsult",
+        "value": "vétérinaire dès que possible",
+        "quote": "Regardless of why the pet stopped eating, GI stasis is a potentially life-threatening condition that must be treated by a veterinarian as soon as possible.",
+        "url": "https://vcahospitals.com/know-your-pet/chinchillas-diseases"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Coup de chaleur",
+        "quote": "Signs of heat stroke include panting, high body temperature, open-mouthed breathing, and reluctance to move.",
+        "url": "https://vcahospitals.com/know-your-pet/chinchillas-diseases"
+      },
+      {
+        "field": "health.diseases[2].whenToConsult",
+        "value": "urgence",
+        "quote": "Heat stroke is an emergency condition requiring immediate veterinary treatment.",
+        "url": "https://vcahospitals.com/know-your-pet/chinchillas-diseases"
+      }
+    ]
+  },
+  {
+    "speciesId": 5285942,
+    "evidence": []
+  },
+  {
+    "speciesId": 5289145,
+    "evidence": [
+      {
+        "field": "health.diseases[0]",
+        "value": "Maladie osseuse métabolique",
+        "quote": "Metabolic bone disease tops the list of health concerns for captive flying squirrels, and it comes down to calcium almost every time. Early signs include wobbliness, reluctance to jump or glide, and general lethargy. Advanced cases involve seizures and fractures from minor activity.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "calcium",
+        "quote": "The good news is that it is almost completely preventable through proper diet, and early cases respond well to dietary correction and calcium supplementation under veterinary guidance.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      },
+      {
+        "field": "health.diseases[1]",
+        "value": "Infections respiratoires",
+        "quote": "Respiratory infections are the next most common issue, usually caused by dusty bedding, cedar or pine shavings, drafty cage placement, or bacterial exposure. Symptoms include sneezing, wheezing, nasal discharge, and labored breathing.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "pas de copeaux de cèdre/pin",
+        "quote": "Cedar and pine shavings are off the table entirely because the aromatic oils cause respiratory problems.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      },
+      {
+        "field": "health.diseases[1].whenToConsult",
+        "value": "dès les premiers signes",
+        "quote": "Flying squirrels are small enough that respiratory infections can become serious quickly, so get to your exotic vet at the first signs rather than waiting to see if it resolves on its own.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      },
+      {
+        "field": "health.diseases[2]",
+        "value": "Typhus sylvatique",
+        "quote": "Exposure to southern flying squirrels has been linked to cases of epidemic typhus in humans.",
+        "url": "https://en.wikipedia.org/wiki/Southern_flying_squirrel"
+      }
+    ]
+  },
+  {
+    "speciesId": 104048045,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "omnivore",
+        "quote": "Marmosets also eat fruits, seeds, flowers, fungi, nectar, snails, lizards, tree frogs, bird eggs, nestlings, and infant mammals.",
+        "url": "https://en.wikipedia.org/wiki/Common_marmoset"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "granulés secs",
+        "quote": "Commercially available dry pellets containing the necessary nutritional components of their diet should be supplemented with a variety of other foods:",
+        "url": "https://marmosetcare.stir.ac.uk/care-in-captivity/feeding.html"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "fruits, légumes, graines, noix",
+        "quote": "fresh and dried fruit vegetables seeds and nuts",
+        "url": "https://marmosetcare.stir.ac.uk/care-in-captivity/feeding.html"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "protéines animales",
+        "quote": "animal protein (e.g. insects, mealworms, boiled chicken and hard boiled eggs)",
+        "url": "https://marmosetcare.stir.ac.uk/care-in-captivity/feeding.html"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "nourriture supplémentaire",
+        "quote": "Importantly, food used for enrichment should be restricted to the types and quantities within the normal daily diet. Using extra food can lead to obesity.",
+        "url": "https://marmosetcare.stir.ac.uk/care-in-captivity/feeding.html"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "aliments non lavés",
+        "quote": "Food should first be washed thoroughly to remove any pesticides",
+        "url": "https://marmosetcare.stir.ac.uk/care-in-captivity/feeding.html"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "daily",
+        "quote": "Feed marmosets several times a day to match their natural eating times",
+        "url": "https://marmosetcare.stir.ac.uk/care-in-captivity/feeding.html"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "maladie osseuse métabolique",
+        "quote": "They need dietary supplements to avoid metabolic bone disease",
+        "url": "https://marmosetcare.stir.ac.uk/care-in-captivity/feeding.html"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "vitamine D3",
+        "quote": "Vitamin D3 should be given as a supplement as the marmosets cannot make it in their own body",
+        "url": "https://marmosetcare.stir.ac.uk/care-in-captivity/feeding.html"
+      }
+    ]
+  },
+  {
+    "speciesId": 104052770,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "herbivore",
+        "quote": "are basically herbivores. In the summer, they feed on green plants, young branches, berries and seeds.",
+        "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "plantes vertes, jeunes rameaux, baies, graines",
+        "quote": "are basically herbivores. In the summer, they feed on green plants, young branches, berries and seeds.",
+        "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "noix, chatons, cônes, aiguilles de pin",
+        "quote": "During the winter months, P. volans consume nuts, catkins, pine cones, and pine needles.",
+        "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "noix et graines en base de l'alimentation",
+        "quote": "Making them the bulk of the diet is a recipe for obesity and calcium deficiency.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "graines de tournesol en excès",
+        "quote": "The same goes for sunflower seeds - squirrels will pick them out of any mix and ignore healthier options if given the chance, so offer them sparingly and separately from the base diet.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "daily",
+        "quote": "Offer food in the evening when your squirrel wakes up, and remove uneaten fresh items the next morning.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "calcium / MBD",
+        "quote": "Calcium deserves its own conversation because metabolic bone disease is the most common serious health problem in captive flying squirrels, and inadequate calcium is the direct cause.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "nocturne",
+        "quote": "are nocturnal. In the summer, they are active from a half hour to an hour after sunset until dawn.",
+        "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "plane d'arbre en arbre",
+        "quote": "They glide from tree to tree collecting and consuming food.",
+        "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+      },
+      {
+        "field": "behavior.sociability",
+        "value": "grégaire",
+        "quote": "are a social species; many can be found together in a single tree. They build nests in vacant tree holes or in the junction of a branch and the trunk. Nests are often inhabited by pairs.",
+        "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+      },
+      {
+        "field": "behavior.difficultyLevel",
+        "value": "expert",
+        "quote": "Flying squirrels are firmly in the advanced keeper category, and that assessment is not meant to discourage anyone - it is meant to prepare you.",
+        "url": "https://www.furrycritter.com/pages/articles/small_mammals/flying_squirrel_guide.htm"
+      }
+    ]
+  },
+  {
+    "speciesId": 104052822,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "omnivore",
+        "quote": "In the wild, squirrels are opportunistic omnivores.",
+        "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "légumes frais",
+        "quote": "Garden Fresh Re-Hydrate or Fresh vegetables (carrot, sweet potato, leafy greens)",
+        "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "fruits limités",
+        "quote": "Limited fruit (apple, grape, banana)",
+        "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information"
+      },
+      {
+        "field": "feeding.recommendedFoods[2]",
+        "value": "vers de farine / grillons séchés",
+        "quote": "Protein sources like dried mealworms or dried crickets",
+        "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "aliments transformés",
+        "quote": "Avoid processed foods, citrus fruits, and anything high in sugar or salt.",
+        "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "agrumes",
+        "quote": "Avoid processed foods, citrus fruits, and anything high in sugar or salt.",
+        "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "très sucrés ou salés",
+        "quote": "Avoid processed foods, citrus fruits, and anything high in sugar or salt.",
+        "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "daily",
+        "quote": "Gray squirrels are non-hibernating, highly active animals that rely on daily foraging and movement to survive.",
+        "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "régime diversifié",
+        "quote": "Their captive diet should reflect that diversity while offering consistent nutrition.",
+        "url": "https://exoticnutrition.com/blogs/blog/grey-squirrel-information"
+      }
+    ]
+  }
+]

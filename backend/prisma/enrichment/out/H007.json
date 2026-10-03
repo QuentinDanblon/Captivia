@@ -1,0 +1,214 @@
+[
+  {
+    "speciesId": 2354646,
+    "reproduction": {
+      "season": "Les adultes en bonne condition pondent souvent ; ponte généralement le matin suivant l'introduction dans le bac de ponte",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": null,
+      "notes": "Poisson pondant ses oeufs en vrac, sans soins parentaux. Pour augmenter le rendement, utiliser un petit bac de ponte très peu éclairé dont le fond est couvert d'un maillage laissant tomber les oeufs. Première nourriture des alevins : paramécies ou aliment sec très fin, puis nauplii d'artémia et microvers.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/hyphessobrycon-megalopterus/",
+          "title": "Hyphessobrycon megalopterus (Black Phantom Tetra) - Seriously Fish"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2371275,
+    "behavior": {
+      "generalBehavior": "Petit cichlidé dont le mâle est très territorial et agressif envers ses congénères ; la femelle s'occupe seule des oeufs pendant que le mâle garde le territoire. Dans un petit aquarium, la femelle peut devenir hyper-agressive et le mâle devoir être retiré.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "intermédiaire",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": "À maintenir en couple, trio ou harem avec des voisins paisibles comme les tétras. Les poissons nés en captivité conviennent à l'aquarium d'ensemble ; les poissons sauvages sont à garder seuls ou avec de petits poissons « dither », sans autres Apistogramma.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/apistogramma-cacatuoides/",
+          "title": "Apistogramma cacatuoides (Cockatoo Dwarf Cichlid) - Seriously Fish"
+        },
+        {
+          "type": "wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Cockatoo_dwarf_cichlid",
+          "title": "Cockatoo dwarf cichlid - Wikipedia"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 5202178,
+    "reproduction": null
+  },
+  {
+    "speciesId": 5301256,
+    "health": {
+      "diseases": [
+        {
+          "name": "Maladie des points blancs marine (Cryptocaryon irritans)",
+          "symptoms": "Petits points blancs, nodules ou plaques sur les nageoires, la peau ou les branchies ; poisson qui se gratte, nage anormalement, reste en surface ou au fond, léthargique, respiration accélérée.",
+          "prevention": "Quarantaine des nouveaux poissons, d'au moins 3 à 6 semaines à 24-27 °C (parfois 7 à 11 semaines).",
+          "whenToConsult": null
+        },
+        {
+          "name": "Brooklynellose (maladie du poisson-clown, Brooklynella hostilis)",
+          "symptoms": "Nageoires légèrement repliées et léthargie, puis augmentation du mucus cutané et de la fréquence respiratoire.",
+          "prevention": "Elle touche très souvent les poissons-clowns capturés dans la nature ; plus facile à gérer en aquarium de quarantaine.",
+          "whenToConsult": null
+        },
+        {
+          "name": "Oodiniose marine (Amyloodinium)",
+          "symptoms": "Mortalité, léthargie, respiration en surface (« piping »), petits points dorés sur la peau.",
+          "prevention": "En cas de réinfestation, revoir les pratiques de désinfection et de quarantaine.",
+          "whenToConsult": null
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://edis.ifas.ufl.edu/publication/FA164",
+          "title": "Cryptocaryon irritans Infections (Marine White Spot Disease) in Fish - UF/IFAS EDIS"
+        },
+        {
+          "type": "guide",
+          "url": "https://reefbuilders.com/2015/06/05/brooklynellosis-clownfish-disease-a-subtle-fast-moving-killer",
+          "title": "Brooklynellosis (Clownfish Disease) - Reef Builders"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/aquarium-fishes/parasitic-diseases-of-fish",
+          "title": "Parasitic Diseases of Fish - Merck Veterinary Manual"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 7572096,
+    "reproduction": {
+      "season": "Ponte le matin suivant l'introduction d'une ou deux paires en bac de ponte (pas de saison précisée)",
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": null,
+      "litterSizeMax": null,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "Poisson pondant ses oeufs en vrac, sans soins parentaux. Les adultes mangent probablement les oeufs : les retirer dès qu'ils sont repérés. Éclosion en 24 à 48 heures, alevins nageant librement environ 24 heures plus tard ; première nourriture de type infusoires, puis microvers ou nauplii d'artémia.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/pethia-conchonius/",
+          "title": "Pethia conchonius (Rosy Barb) - Seriously Fish"
+        },
+        {
+          "type": "guide",
+          "url": "https://www.fishbase.se/summary/Pethia-conchonius.html",
+          "title": "Pethia conchonius - FishBase"
+        }
+      ]
+    },
+    "habitat": null
+  },
+  {
+    "speciesId": 103899345,
+    "habitat": null
+  },
+  {
+    "speciesId": 103951502,
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 24,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Aquarium d'au moins 90 × 30 cm de base pour un couple (nettement plus grand pour plusieurs couples ou d'autres cichlidés)",
+      "lightNeeds": "Éclairage plutôt faible : un aquarium planté avec des plantes flottantes qui tamisent la lumière.",
+      "activityEnrichment": "Rochers, bois de tourbière et racines pour créer de nombreuses cachettes et sites de ponte ; pots d'argile couchés comme cavernes supplémentaires. Les plantes peuvent être déterrées.",
+      "hygieneNotes": null,
+      "costEstimate": "faible",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/amatitlania-nigrofasciata/",
+          "title": "Amatitlania nigrofasciata (Convict Cichlid) - Seriously Fish"
+        },
+        {
+          "type": "guide",
+          "url": "https://aquariadise.com/convict-cichlid/",
+          "title": "Convict Cichlid - Aquariadise"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103952549,
+    "habitat": null
+  },
+  {
+    "speciesId": 103953586,
+    "habitat": null
+  },
+  {
+    "speciesId": 103973942,
+    "habitat": null
+  },
+  {
+    "speciesId": 103997157,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Aliment sec de bonne qualité (base de la ration)",
+          "frequency": "quotidienne",
+          "notes": "À compléter par des repas réguliers de proies vivantes ou surgelées."
+        },
+        {
+          "name": "Vers de vase (bloodworm), daphnies et artémias vivants ou surgelés",
+          "frequency": "régulière",
+          "notes": "Pour une meilleure coloration et une bonne condition."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Aliments secs rances ou moisis",
+          "reason": "Forte humidité et forte température dégradent l'aliment (moisissures, mycotoxines, rancissement)."
+        },
+        {
+          "name": "Aliment sec ouvert depuis plus de 2 mois à température ambiante",
+          "reason": "À jeter après 2 mois d'ouverture."
+        },
+        {
+          "name": "Aliments surgelés conservés plus d'un an ou recongelés",
+          "reason": "Les aliments surgelés du commerce (artémia, vers de vase, etc.) doivent être jetés après 1 an ; ne pas recongeler un aliment décongelé."
+        },
+        {
+          "name": "Nourriture non consommée laissée dans l'aquarium",
+          "reason": "Il faut retirer chaque jour la nourriture non mangée."
+        }
+      ],
+      "mealFrequency": "daily",
+      "specificNeeds": "Dans la nature, le contenu digestif est composé surtout d'insectes, le reste de matière végétale.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/devario-aequipinnatus/",
+          "title": "Devario aequipinnatus (Giant Danio) - Seriously Fish"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/exotic-and-laboratory-animals/aquarium-fish/nutritional-diseases-of-fish",
+          "title": "Nutritional Diseases of Fish - Merck Veterinary Manual"
+        },
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/all-other-pets/fish/routine-health-care-of-fish",
+          "title": "Routine Health Care of Fish - Merck Veterinary Manual"
+        }
+      ]
+    }
+  }
+]
