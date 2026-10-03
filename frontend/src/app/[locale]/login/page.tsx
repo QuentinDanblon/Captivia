@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { api } from '@/lib/api';
+import { api, ApiError } from '@/lib/api';
 import { GUEST_UPGRADE_PATH, isGuestUser } from '@/lib/guest';
 import { useStartGuest } from '@/components/guest/useStartGuest';
 import { AuthFrame, OrDivider } from '@/components/auth/AuthFrame';
@@ -48,7 +48,8 @@ export default function LoginPage() {
         setError(t('auth.invalidCredentials'));
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : t('auth.invalidCredentials'));
+      // Identifiants refusés : message traduit, jamais le texte brut de l'API.
+      setError(err instanceof ApiError && (err.status === 401 || err.status === 400) ? t('auth.invalidCredentials') : err instanceof Error ? err.message : t('auth.invalidCredentials'));
     } finally {
       setLoading(false);
     }

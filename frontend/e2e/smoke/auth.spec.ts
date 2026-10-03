@@ -14,7 +14,7 @@ test.describe('Inscription', () => {
     await expect(terms).not.toBeChecked();
     await expect(age).not.toBeChecked();
 
-    await page.getByLabel('Email').fill(EMAIL);
+    await page.getByLabel('E-mail').fill(EMAIL);
     await page.getByLabel('Mot de passe', { exact: true }).fill(VALID_PASSWORD);
     await page.getByLabel('Confirmer le mot de passe').fill(VALID_PASSWORD);
     await page.getByRole('button', { name: 'Créer mon compte' }).click();
@@ -28,7 +28,7 @@ test.describe('Inscription', () => {
   test('mots de passe différents : message d’erreur, aucun appel API', async ({ page, api }) => {
     await page.goto('/register');
 
-    await page.getByLabel('Email').fill(EMAIL);
+    await page.getByLabel('E-mail').fill(EMAIL);
     await page.getByLabel('Mot de passe', { exact: true }).fill(VALID_PASSWORD);
     await page.getByLabel('Confirmer le mot de passe').fill('Autre-mot-de-passe-1');
     await page.getByRole('checkbox', { name: /conditions générales d'utilisation/ }).check();
@@ -42,7 +42,7 @@ test.describe('Inscription', () => {
   test('inscription réussie : consentements envoyés puis redirection vers Mes animaux', async ({ page, api }) => {
     await page.goto('/register');
 
-    await page.getByLabel('Email').fill(EMAIL);
+    await page.getByLabel('E-mail').fill(EMAIL);
     await page.getByLabel('Mot de passe', { exact: true }).fill(VALID_PASSWORD);
     await page.getByLabel('Confirmer le mot de passe').fill(VALID_PASSWORD);
     await page.getByRole('checkbox', { name: /conditions générales d'utilisation/ }).check();
@@ -68,11 +68,11 @@ test.describe('Connexion', () => {
   test('identifiants incorrects : message d’erreur et session non ouverte', async ({ page }) => {
     await page.goto('/login');
 
-    await page.getByLabel('Email').fill('inconnu@captivia.test');
+    await page.getByLabel('E-mail').fill('inconnu@captivia.test');
     await page.getByLabel('Mot de passe').fill('mauvais-mot-de-passe');
     await page.getByRole('button', { name: 'Se connecter' }).click();
 
-    await expect(page.getByRole('alert').filter({ hasText: 'Email ou mot de passe incorrect' })).toBeVisible();
+    await expect(page.getByRole('alert').filter({ hasText: 'E-mail ou mot de passe incorrect' })).toBeVisible();
     await expect(page).toHaveURL(/\/login$/);
     expect(await page.evaluate(() => localStorage.getItem('token'))).toBeNull();
   });
@@ -81,7 +81,7 @@ test.describe('Connexion', () => {
     await page.goto('/login');
     await expect(page.getByRole('heading', { level: 1, name: 'Content de vous revoir' })).toBeVisible();
 
-    await page.getByLabel('Email').fill('smoke@captivia.test');
+    await page.getByLabel('E-mail').fill('smoke@captivia.test');
     await page.getByLabel('Mot de passe').fill(VALID_PASSWORD);
     await page.getByRole('button', { name: 'Se connecter' }).click();
 

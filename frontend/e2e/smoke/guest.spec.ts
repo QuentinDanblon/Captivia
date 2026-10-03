@@ -67,7 +67,7 @@ test.describe('Mode invité', () => {
     await expect(page.getByText('Kaa et son carnet seront rattachés à votre compte.')).toBeVisible();
 
     const fill = async (email: string) => {
-      await page.getByRole('textbox', { name: 'Email' }).fill(email);
+      await page.getByRole('textbox', { name: 'E-mail' }).fill(email);
       await page.getByRole('textbox', { name: 'Mot de passe', exact: true }).fill(VALID_PASSWORD);
       await page.getByRole('textbox', { name: 'Confirmer le mot de passe' }).fill(VALID_PASSWORD);
     };

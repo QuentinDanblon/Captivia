@@ -1144,11 +1144,8 @@ export const api = {
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-      throw new Error(
-        (data as { message?: string })?.message ||
-        response.statusText ||
-        `Erreur ${response.status}`
-      );
+      // ApiError : l'écran de connexion traduit lui-même un 401 (identifiants refusés).
+      throw new ApiError(response.status, errorMessage(data, response));
     }
     return data;
   },
