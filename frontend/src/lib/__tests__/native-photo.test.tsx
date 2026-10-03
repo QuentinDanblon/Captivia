@@ -36,8 +36,8 @@ describe('pickNativePhoto', () => {
       expect.objectContaining({
         source: 'PROMPT',
         resultType: 'uri',
-        width: 1600,
-        height: 1600,
+        width: 1080,
+        height: 1080,
         correctOrientation: true,
         saveToGallery: false,
         promptLabelHeader: 'H',

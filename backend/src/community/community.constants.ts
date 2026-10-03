@@ -64,9 +64,12 @@ export const APPEAL_WINDOW_DAYS = 183;
 /** Durée maximale d'une suspension de publication (jours). */
 export const SUSPENSION_MAX_DAYS = 365;
 
-/** Médias : largeur maximale après redimensionnement, hauteur maximale (bandes très hautes). */
-export const MEDIA_MAX_WIDTH = 1600;
-export const MEDIA_MAX_HEIGHT = 4000;
+/**
+ * Médias : boîte maximale après redimensionnement (format portrait de téléphone 9:16). Affichage
+ * dans un fil sur téléphone, sans zoom : au-delà, chaque octet coûte du stockage R2 (10 Go gratuits).
+ */
+export const MEDIA_MAX_WIDTH = 1080;
+export const MEDIA_MAX_HEIGHT = 1920;
 /**
  * Anti « bombe de décompression » : les dimensions sont lues dans l'en-tête (`metadata()`, sans
  * décodage) et refusées au-delà de ces bornes AVANT tout décodage. Un PNG de 10 000 000 × 5 px ne
@@ -84,8 +87,8 @@ export const MEDIA_PROCESSING_MAX_QUEUE = 16;
 /** Durée maximale d'un traitement (s) et de l'attente d'un créneau (ms). */
 export const MEDIA_PROCESSING_TIMEOUT_SECONDS = 10;
 export const MEDIA_PROCESSING_QUEUE_TIMEOUT_MS = 30_000;
-/** Qualité WebP de ré-encodage. */
-export const MEDIA_WEBP_QUALITY = 82;
+/** Qualité WebP de ré-encodage (~100 à 200 Ko par photo en 1080 px). */
+export const MEDIA_WEBP_QUALITY = 72;
 /** Délai de grâce avant qu'une image téléversée et jamais rattachée soit purgée (heures). */
 export const ORPHAN_MEDIA_GRACE_HOURS = 24;
 /** Images orphelines purgées au plus par exécution du job de maintenance. */

@@ -1,29 +1,35 @@
 /**
  * Compression côté client des photos avant envoi à l'API (W4-07).
  *
- * - redimensionne (côté le plus long <= 1600 px, sans agrandir) via un canvas ;
- * - ré-encode en JPEG, en baissant la qualité puis la taille jusqu'à passer sous
- *   `ANIMAL_PHOTO_TARGET_BYTES` : l'envoi reste toujours sous la limite de l'API (2 Mo décodés) ;
+ * - redimensionne (côté le plus long <= 600 px, sans agrandir) via un canvas ;
+ * - ré-encode en WebP (JPEG si le navigateur ne sait pas produire de WebP), en baissant la
+ *   qualité puis la taille jusqu'à passer sous `ANIMAL_PHOTO_TARGET_BYTES` (~100 Ko) : l'envoi
+ *   reste toujours sous la limite de l'API (2 Mo décodés) ;
  * - refuse les fichiers de plus de 30 Mo (`ImageTooLargeError`) et les formats que le navigateur
  *   ne sait pas lire (HEIC hors Safari… : `UnsupportedImageError`), au lieu d'envoyer le fichier
  *   brut que l'API refuserait.
  */
 
-export const MAX_IMAGE_DIMENSION = 1600;
-export const IMAGE_JPEG_QUALITY = 0.82;
+/** Côté le plus long par défaut (`computeTargetSize`) : celui des photos de la communauté. */
+export const MAX_IMAGE_DIMENSION = 1080;
+/** Photo de profil d'un animal : affichée en vignette ou en en-tête, jamais zoomée. */
+export const ANIMAL_PHOTO_MAX_DIMENSION = 600;
+export const IMAGE_JPEG_QUALITY = 0.75;
 /** Taille maximale de la photo d'origine (photos de téléphone récentes : souvent 10 à 20 Mo). */
 export const MAX_IMAGE_BYTES = 30 * 1024 * 1024;
-/** Taille visée après compression (décodée) ; l'API accepte 2 Mo, on garde une marge. */
-export const ANIMAL_PHOTO_TARGET_BYTES = 1_200_000;
+/**
+ * Taille visée après compression (décodée). Les photos d'animaux sont stockées dans la base
+ * (data URL) : rester petit préserve le quota de la base et allège les listes d'animaux.
+ */
+export const ANIMAL_PHOTO_TARGET_BYTES = 100_000;
 /** Plafond accepté par l'API pour une photo en data URL (`IsPhotoSource`, 2 Mo décodés). */
 const API_PHOTO_MAX_BYTES = 2 * 1024 * 1024;
-/** Paliers successifs (côté le plus long, qualité JPEG) tant que la cible n'est pas atteinte. */
+/** Paliers successifs (côté le plus long, qualité) tant que la cible n'est pas atteinte. */
 const COMPRESSION_STEPS: ReadonlyArray<readonly [number, number]> = [
-  [MAX_IMAGE_DIMENSION, IMAGE_JPEG_QUALITY],
-  [MAX_IMAGE_DIMENSION, 0.7],
-  [1280, 0.7],
-  [1024, 0.65],
-  [800, 0.6],
+  [ANIMAL_PHOTO_MAX_DIMENSION, IMAGE_JPEG_QUALITY],
+  [ANIMAL_PHOTO_MAX_DIMENSION, 0.6],
+  [480, 0.6],
+  [400, 0.5],
 ];
 
 /** Levée quand le fichier source dépasse `MAX_IMAGE_BYTES` (à traduire côté UI). */
@@ -102,7 +108,23 @@ async function originalIfAcceptable(file: Blob): Promise<string> {
 }
 
 /**
- * Retourne un data URL JPEG compressé, toujours sous `ANIMAL_PHOTO_TARGET_BYTES` quand le
+ * Encode le canvas en WebP (plus léger à qualité égale) et en JPEG, et garde le plus petit.
+ * `toDataURL` renvoie un autre format (PNG) ou « data:, » quand l'encodage demandé n'est pas
+ * pris en charge : ce résultat est alors ignoré. `null` si aucun des deux n'est disponible.
+ */
+function encodeSmallest(canvas: HTMLCanvasElement, quality: number): string | null {
+  const candidates = (['image/webp', 'image/jpeg'] as const)
+    .map((type) => {
+      const url = canvas.toDataURL(type, quality);
+      return url.startsWith(`data:${type}`) ? url : null;
+    })
+    .filter((url): url is string => url !== null);
+  if (candidates.length === 0) return null;
+  return candidates.reduce((a, b) => (dataUrlBytes(b) < dataUrlBytes(a) ? b : a));
+}
+
+/**
+ * Retourne un data URL compressé (WebP ou JPEG), toujours sous `ANIMAL_PHOTO_TARGET_BYTES` quand le
  * navigateur sait décoder l'image (sinon : original s'il est acceptable, erreur sinon).
  * @throws ImageTooLargeError si `file.size > MAX_IMAGE_BYTES`
  * @throws UnsupportedImageError si le format n'est pas lisible ici (ex. HEIC hors Safari)
@@ -132,9 +154,8 @@ export async function compressImageToDataUrl(file: File | Blob): Promise<string>
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, width, height);
     ctx.drawImage(img, 0, 0, width, height);
-    const encoded = canvas.toDataURL('image/jpeg', quality);
-    // toDataURL renvoie « data:, » (ou autre format) si l'encodage JPEG échoue.
-    if (!encoded.startsWith('data:image/jpeg')) return originalIfAcceptable(file);
+    const encoded = encodeSmallest(canvas, quality);
+    if (!encoded) return originalIfAcceptable(file);
     if (smallest === null || dataUrlBytes(encoded) < dataUrlBytes(smallest)) smallest = encoded;
     if (dataUrlBytes(encoded) <= ANIMAL_PHOTO_TARGET_BYTES) return encoded;
   }
@@ -248,7 +269,7 @@ function asIs(file: Blob, type: SniffedImageType, width = 0, height = 0): Prepar
 
 /**
  * Prépare une photo pour la communauté : vérifie le type réel, convertit HEIC → JPEG si possible,
- * redimensionne (1 600 px au plus) et ré-encode en JPEG 0,82. Les métadonnées (EXIF, GPS) ne
+ * redimensionne (1 080 px au plus) et ré-encode en JPEG 0,75. Les métadonnées (EXIF, GPS) ne
  * survivent pas au passage par le canvas ; le serveur les retire de toute façon.
  * @throws ImageTooLargeError photo d'origine > 20 Mo, ou > 8 Mo après traitement
  * @throws UnsupportedImageError HEIC non décodable, ou type non accepté
@@ -269,7 +290,7 @@ export async function prepareCommunityImage(file: Blob): Promise<PreparedImage> 
 
   const sourceWidth = img.naturalWidth || img.width;
   const sourceHeight = img.naturalHeight || img.height;
-  // Une très grande photo est ramenée à 1 600 px ici ; mais le rapport des côtés est conservé :
+  // Une très grande photo est ramenée à 1 080 px ici ; mais le rapport des côtés est conservé :
   // une bande extrême (> 20) serait refusée par l'API, on le dit avant l'envoi.
   if (sourceWidth > 0 && sourceHeight > 0 && Math.max(sourceWidth, sourceHeight) / Math.min(sourceWidth, sourceHeight) > COMMUNITY_MAX_ASPECT_RATIO) {
     throw new UnsupportedImageError('dimensions');

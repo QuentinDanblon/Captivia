@@ -7,7 +7,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { animalCarnetPath, animalDetailPath } from '@/lib/platform';
 import { api, ApiError, type Animal as ApiAnimal } from '@/lib/api';
 import { isGuestUser } from '@/lib/guest';
-import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
+import { compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
 import { usePhotoPicker } from '@/components/usePhotoPicker';
 import { ageOf, formatAge, latinName, type SpeciesSheet } from '@/lib/today';
 import {
@@ -99,7 +99,7 @@ export default function AnimalsListPage() {
     setPhotoAnimalId(id);
     setPhotoUploading(true);
     try {
-      // W4-07 : redimensionnement (1600 px max) + JPEG 0.82 côté client, refus > 10 Mo
+      // W4-07 : réduction sur l'appareil (600 px max, ~100 Ko, WebP ou JPEG), refus > 30 Mo
       const dataUrl = await compressImageToDataUrl(file);
       await api.updateAnimal(id, { photos: [dataUrl] }, token);
       await fetchAnimals();
@@ -111,6 +111,10 @@ export default function AnimalsListPage() {
       if (err instanceof ApiError && err.status === 401) return;
       if (isImageTooLargeError(err)) {
         setToast(t('animals.photoTooLarge'));
+        return;
+      }
+      if (isUnsupportedImageError(err)) {
+        setToast(t('animals.photoUnsupported'));
         return;
       }
       console.error('Error updating photo:', err);

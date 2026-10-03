@@ -508,11 +508,11 @@ describe('Communauté (E2E)', () => {
       expect(bodyOf<ErrorBody>(res).code).toBe('EMAIL_NOT_VERIFIED');
     });
 
-    it('redimensionne à 1 600 px, ré-encode en WebP et supprime EXIF et GPS', async () => {
+    it('redimensionne à 1 080 px, ré-encode en WebP et supprime EXIF et GPS', async () => {
       const input = await gpsJpeg();
       expect((await sharp(input).metadata()).exif).toBeDefined();
       const res = await upload(alice, input).expect(201);
-      expect(res.body).toMatchObject({ width: 1600, height: 800 });
+      expect(res.body).toMatchObject({ width: 1080, height: 540 });
       expect(bodyOf<UrlBody>(res).url).toMatch(
         /\/community\/media\/[0-9a-f-]{36}\.webp$/,
       );
@@ -530,7 +530,7 @@ describe('Communauté (E2E)', () => {
       expect(file.headers['cross-origin-resource-policy']).toBe('cross-origin');
       const data = file.body as Buffer;
       const meta = await sharp(data).metadata();
-      expect(meta).toMatchObject({ format: 'webp', width: 1600, height: 800 });
+      expect(meta).toMatchObject({ format: 'webp', width: 1080, height: 540 });
       expect(meta.exif).toBeUndefined();
       expect(data.includes('LeakyCam')).toBe(false);
       expect(data.includes(GPS_LATITUDE)).toBe(false);

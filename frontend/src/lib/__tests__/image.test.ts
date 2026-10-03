@@ -1,4 +1,5 @@
 import {
+  ANIMAL_PHOTO_MAX_DIMENSION,
   ANIMAL_PHOTO_TARGET_BYTES,
   compressImageToDataUrl,
   computeTargetSize,
@@ -8,7 +9,6 @@ import {
   isUnsupportedImageError,
   IMAGE_JPEG_QUALITY,
   MAX_IMAGE_BYTES,
-  MAX_IMAGE_DIMENSION,
   UnsupportedImageError,
 } from '../image';
 
@@ -23,19 +23,19 @@ const HEIC_HEAD = new Uint8Array([0, 0, 0, 0x18, ...Array.from('ftypheic').map((
 describe('computeTargetSize', () => {
   it('ne modifie pas une image déjà assez petite', () => {
     expect(computeTargetSize(800, 600)).toEqual({ width: 800, height: 600 });
-    expect(computeTargetSize(1600, 1600)).toEqual({ width: 1600, height: 1600 });
+    expect(computeTargetSize(1080, 1080)).toEqual({ width: 1080, height: 1080 });
   });
 
-  it('ramène le côté le plus long à 1600 px en conservant le ratio (paysage)', () => {
-    expect(computeTargetSize(4000, 3000)).toEqual({ width: 1600, height: 1200 });
+  it('ramène le côté le plus long au maximum par défaut en conservant le ratio (paysage)', () => {
+    expect(computeTargetSize(4000, 3000)).toEqual({ width: 1080, height: 810 });
   });
 
-  it('ramène le côté le plus long à 1600 px en conservant le ratio (portrait)', () => {
-    expect(computeTargetSize(3000, 4500)).toEqual({ width: 1067, height: 1600 });
+  it('ramène le côté le plus long au maximum par défaut en conservant le ratio (portrait)', () => {
+    expect(computeTargetSize(3000, 4500)).toEqual({ width: 720, height: 1080 });
   });
 
   it('ne produit jamais une dimension nulle', () => {
-    expect(computeTargetSize(100000, 1)).toEqual({ width: 1600, height: 1 });
+    expect(computeTargetSize(100000, 1)).toEqual({ width: 1080, height: 1 });
   });
 
   it('accepte un maximum personnalisé', () => {
@@ -111,27 +111,36 @@ describe('compressImageToDataUrl', () => {
     await expect(compressImageToDataUrl(edge)).resolves.toBe('data:image/jpeg;base64,COMPRESSED');
   });
 
-  it('redimensionne à 1600 px max et encode en JPEG 0.82', async () => {
+  it('photo d’animal : ramène à 600 px max et encode en JPEG 0.75 si le WebP est indisponible', async () => {
     mockImage(4000, 3000);
     const file = new File(['x'], 'photo.png', { type: 'image/png' });
     const result = await compressImageToDataUrl(file);
 
     expect(result).toBe('data:image/jpeg;base64,COMPRESSED');
-    expect(canvasRef.width).toBe(MAX_IMAGE_DIMENSION);
-    expect(canvasRef.height).toBe(1200);
-    expect(drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0, 1600, 1200);
+    expect(canvasRef.width).toBe(ANIMAL_PHOTO_MAX_DIMENSION);
+    expect(canvasRef.height).toBe(450);
+    expect(drawImage).toHaveBeenCalledWith(expect.anything(), 0, 0, 600, 450);
+    expect(toDataURL).toHaveBeenCalledWith('image/webp', IMAGE_JPEG_QUALITY);
     expect(toDataURL).toHaveBeenCalledWith('image/jpeg', IMAGE_JPEG_QUALITY);
-    expect(IMAGE_JPEG_QUALITY).toBe(0.82);
     // fond blanc pour les images transparentes
-    expect(fillRect).toHaveBeenCalledWith(0, 0, 1600, 1200);
+    expect(fillRect).toHaveBeenCalledWith(0, 0, 600, 450);
+  });
+
+  it('garde le WebP quand il est plus léger que le JPEG', async () => {
+    mockImage(4000, 3000);
+    toDataURL.mockImplementation((type: string) =>
+      type === 'image/webp' ? 'data:image/webp;base64,SMALL' : 'data:image/jpeg;base64,MUCHBIGGER',
+    );
+    const result = await compressImageToDataUrl(new File(['x'], 'p.jpg', { type: 'image/jpeg' }));
+    expect(result).toBe('data:image/webp;base64,SMALL');
   });
 
   it("n'agrandit pas une petite image", async () => {
-    mockImage(640, 480);
+    mockImage(400, 300);
     const file = new File(['x'], 'small.jpg', { type: 'image/jpeg' });
     await compressImageToDataUrl(file);
-    expect(canvasRef.width).toBe(640);
-    expect(canvasRef.height).toBe(480);
+    expect(canvasRef.width).toBe(400);
+    expect(canvasRef.height).toBe(300);
   });
 
   it("HEIC illisible ici : refus explicite (UnsupportedImageError 'heic'), jamais le fichier brut", async () => {
@@ -169,17 +178,19 @@ describe('compressImageToDataUrl', () => {
 
   it('baisse la qualité puis la taille jusqu’à passer sous la cible', async () => {
     mockImage(4000, 3000);
-    toDataURL
-      .mockReturnValueOnce(fakeJpeg(ANIMAL_PHOTO_TARGET_BYTES * 2))
-      .mockReturnValueOnce(fakeJpeg(ANIMAL_PHOTO_TARGET_BYTES + 10_000))
-      .mockReturnValueOnce(fakeJpeg(ANIMAL_PHOTO_TARGET_BYTES - 10_000));
+    const sizes = [ANIMAL_PHOTO_TARGET_BYTES * 3, ANIMAL_PHOTO_TARGET_BYTES + 5_000, ANIMAL_PHOTO_TARGET_BYTES - 5_000];
+    const jpegQualities: number[] = [];
+    // WebP indisponible (Safari ancien) : seul le JPEG compte.
+    toDataURL.mockImplementation((type: string, quality: number) => {
+      if (type !== 'image/jpeg') return 'data:image/png;base64,X';
+      jpegQualities.push(quality);
+      return fakeJpeg(sizes.shift() ?? 1);
+    });
     const result = await compressImageToDataUrl(new File(['x'], 'p.jpg', { type: 'image/jpeg' }));
     expect(dataUrlBytes(result)).toBeLessThanOrEqual(ANIMAL_PHOTO_TARGET_BYTES);
-    expect(toDataURL).toHaveBeenNthCalledWith(1, 'image/jpeg', 0.82);
-    expect(toDataURL).toHaveBeenNthCalledWith(2, 'image/jpeg', 0.7);
-    expect(toDataURL).toHaveBeenNthCalledWith(3, 'image/jpeg', 0.7);
-    // 3e palier : côté le plus long ramené à 1280 px
-    expect(canvasRef.width).toBe(1280);
+    expect(jpegQualities).toEqual([0.75, 0.6, 0.6]);
+    // 3e palier : côté le plus long ramené à 480 px
+    expect(canvasRef.width).toBe(480);
   });
 
   it('jamais sous la limite de l’API (2 Mo) même au dernier palier : ImageTooLargeError', async () => {

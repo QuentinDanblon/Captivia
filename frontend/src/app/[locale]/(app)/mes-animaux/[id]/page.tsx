@@ -7,7 +7,7 @@ import { Camera, FileText, Pencil, Scale, Trash2 } from 'lucide-react';
 import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, ApiError, type Animal, type Medication, type VetAppointment, type AnimalMeasurement, type Vaccination, type BreedingRecord } from '@/lib/api';
-import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
+import { compressImageToDataUrl, isImageTooLargeError, isUnsupportedImageError } from '@/lib/image';
 import { usePhotoPicker } from '@/components/usePhotoPicker';
 import { Link } from '@/i18n/navigation';
 import { currentMedications } from '@/lib/carnet';
@@ -441,15 +441,18 @@ export default function AnimalDetailPage({
     if (!animal || !token) return;
     setAvatarPhotoUploading(true);
     try {
-      // W4-07 : redimensionnement (1600 px max) + JPEG 0.82 côté client, refus > 10 Mo
+      // W4-07 : réduction sur l'appareil (600 px max, ~100 Ko, WebP ou JPEG), refus > 30 Mo
       const dataUrl = await compressImageToDataUrl(file);
       await api.updateAnimal(animal.id, { photos: [dataUrl] }, token);
       await fetchAnimalData();
     } catch (err) {
       if (isImageTooLargeError(err)) {
         setToast(t('animals.photoTooLarge'));
+      } else if (isUnsupportedImageError(err)) {
+        setToast(t('animals.photoUnsupported'));
       } else {
         console.error('Error updating avatar photo:', err);
+        setToast(t('animals.errorAdding'));
       }
     } finally {
       setAvatarPhotoUploading(false);

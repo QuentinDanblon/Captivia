@@ -98,13 +98,13 @@ describe('prepareCommunityImage', () => {
     jest.restoreAllMocks();
   });
 
-  it('compresse un JPEG : 1 600 px au plus, ré-encodé en JPEG', async () => {
+  it('compresse un JPEG : 1 080 px au plus, ré-encodé en JPEG', async () => {
     mockDecoder(4000, 3000);
     const out = await prepareCommunityImage(file(JPEG, 'chat.jpg', 'image/jpeg'));
-    expect(canvasSize).toEqual({ width: 1600, height: 1200 });
+    expect(canvasSize).toEqual({ width: 1080, height: 810 });
     expect(drawImage).toHaveBeenCalled();
-    expect(toBlob).toHaveBeenCalledWith(expect.any(Function), 'image/jpeg', 0.82);
-    expect(out).toMatchObject({ filename: 'photo.jpg', width: 1600, height: 1200, converted: false });
+    expect(toBlob).toHaveBeenCalledWith(expect.any(Function), 'image/jpeg', 0.75);
+    expect(out).toMatchObject({ filename: 'photo.jpg', width: 1080, height: 810, converted: false });
     expect(out.blob.type).toBe('image/jpeg');
   });
 
