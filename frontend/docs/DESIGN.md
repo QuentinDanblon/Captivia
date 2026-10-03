@@ -617,7 +617,7 @@ palette héritée de `@theme`, les classes `captivia-*` inutilisées et `tailwin
   événements et boutiques ; axe passe sur ces pages ; `e2e/smoke/tools.spec.ts` vérifie la frise
   et ses filtres, l'absence de prix et de bouton d'achat, et l'état vide du magasin.
 
-## 11. Décisions (lot 2 — fiches et recherche d'espèces)
+## 12. Décisions (lot 2 — fiches et recherche d'espèces)
 
 - **Recherche de l'app sur `/especes`** (`(app)/especes`) : URL française comme les autres pages de
   l'app (`/mes-animaux`, `/agenda`) ; `/species` reste réservé aux fiches, et l'export mobile
