@@ -81,7 +81,6 @@ export default function MedicationsSection({ animal, token, medications, loading
         startDate: medicationStartDate,
         endDate: medicationEndDate || undefined,
         notes: medicationNotes.trim() || undefined,
-        active: true,
       };
       await api.createMedication(animal.id, payload, token);
       setShowMedicationModal(false);

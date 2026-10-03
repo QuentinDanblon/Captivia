@@ -25,7 +25,19 @@ export class HttpExceptionFilter implements ExceptionFilter {
     let code: string | undefined;
     let action: string | undefined;
 
-    if (exception instanceof HttpException) {
+    // Erreurs « client » levées avant Nest par l'analyseur de corps (body-parser / http-errors) :
+    // corps trop gros (413), JSON invalide (400)… Elles portent un statut 4xx et `expose: true`.
+    // Sans ce cas, elles tombaient en 500 « Internal server error ».
+    const clientError = clientHttpError(exception);
+
+    if (clientError) {
+      status = clientError.status;
+      message =
+        status === HttpStatus.PAYLOAD_TOO_LARGE
+          ? 'Payload too large'
+          : clientError.message;
+      if (status === HttpStatus.PAYLOAD_TOO_LARGE) code = 'PAYLOAD_TOO_LARGE';
+    } else if (exception instanceof HttpException) {
       status = exception.getStatus();
       message = exception.message;
       const body = exception.getResponse();
@@ -42,7 +54,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     // au client (la réponse ci-dessous ne contient que statut, message générique, chemin).
     if (
       status >= HttpStatus.INTERNAL_SERVER_ERROR ||
-      !(exception instanceof HttpException)
+      (!(exception instanceof HttpException) && !clientError)
     ) {
       // Chemin sans query string (peut contenir des tokens) ni corps de requête.
       const path = (request.originalUrl ?? request.url ?? '').split('?')[0];
@@ -70,4 +82,25 @@ export class HttpExceptionFilter implements ExceptionFilter {
       path: request.url,
     });
   }
+}
+
+/** Erreur http-errors exposable (4xx) levée par body-parser, sinon null. */
+function clientHttpError(
+  exception: unknown,
+): { status: number; message: string } | null {
+  if (exception instanceof HttpException) return null;
+  if (!exception || typeof exception !== 'object') return null;
+  const { status, statusCode, expose, message } = exception as {
+    status?: unknown;
+    statusCode?: unknown;
+    expose?: unknown;
+    message?: unknown;
+  };
+  const code = typeof status === 'number' ? status : statusCode;
+  if (typeof code !== 'number' || code < 400 || code > 499 || expose !== true)
+    return null;
+  return {
+    status: code,
+    message: typeof message === 'string' ? message : 'Bad request',
+  };
 }
