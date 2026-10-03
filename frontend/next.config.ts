@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
+import path from 'node:path';
+import { apiOrigin, securityHeaders } from './src/lib/csp';
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
@@ -12,53 +14,37 @@ const isProd = process.env.NODE_ENV === 'production';
  */
 const isMobileBuild = process.env.MOBILE_BUILD === '1';
 
-/**
- * Origine du backend, calculée au build à partir de NEXT_PUBLIC_API_URL (la même
- * valeur est inlinée dans le bundle navigateur par src/lib/config.ts).
- */
-function apiOrigin(): string | null {
-  const raw = (process.env.NEXT_PUBLIC_API_URL || '').trim();
-  if (!raw) return null;
-  try {
-    const { protocol, origin } = new URL(raw);
-    return protocol === 'http:' || protocol === 'https:' ? origin : null;
-  } catch {
-    return null;
-  }
-}
-
-const API_ORIGIN = apiOrigin();
-if (isProd && !API_ORIGIN) {
+/** URL du backend, lue au build (la même valeur est inlinée dans le bundle par src/lib/config.ts). */
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+if (isProd && !apiOrigin(API_URL)) {
   console.warn(
     '[next.config] NEXT_PUBLIC_API_URL est absent ou invalide : la CSP (connect-src) ' +
       "n'autorisera pas le backend. Définissez-le avant `next build`.",
   );
 }
 
-/** Origine d'ingestion Sentry (DSN navigateur), autorisée en connect-src seulement si un DSN est défini. */
-function sentryOrigin(): string | null {
-  const dsn = (process.env.NEXT_PUBLIC_SENTRY_DSN || '').trim();
-  if (!dsn) return null;
-  try {
-    const { protocol, origin } = new URL(dsn);
-    return protocol === 'https:' ? origin : null;
-  } catch {
-    return null;
-  }
-}
+/**
+ * En-têtes de sécurité et CSP (W4-08), construits par le module pur src/lib/csp.ts (testé) :
+ * pas de nonce (les pages restent statiques, cf. docs/DEPLOY.md § Sécurité), pas de
+ * 'unsafe-eval' en production, connect-src limité à l'API et à Sentry (NEXT_PUBLIC_SENTRY_DSN).
+ */
+const SECURITY_HEADERS = securityHeaders({
+  dev: !isProd,
+  apiUrl: API_URL,
+  sentryDsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+});
 
-const SENTRY_ORIGIN = sentryOrigin();
-
-const connectSrc = [
-  "'self'",
-  ...(API_ORIGIN ? [API_ORIGIN] : []),
-  ...(SENTRY_ORIGIN ? [SENTRY_ORIGIN] : []),
-  // Backend local / LAN (développement uniquement, jamais en production).
-  ...(isProd ? [] : ['http://localhost:3001', 'http://127.0.0.1:3001', 'http://*:3001']),
-].join(' ');
+/**
+ * Racine du projet : le dépôt contient plusieurs package-lock.json (racine, frontend/, backend/)
+ * sans workspaces. On la fixe au lieu de la laisser deviner (avertissement au build), ce qui
+ * place aussi server.js à la racine de .next/standalone, comme l'attend le Dockerfile.
+ */
+const PROJECT_ROOT = path.resolve(__dirname);
 
 const webConfig: NextConfig = {
   output: 'standalone',
+  turbopack: { root: PROJECT_ROOT },
+  outputFileTracingRoot: PROJECT_ROOT,
   reactCompiler: true,
   // Aucun composant next/image n'est utilisé : on évite l'optimiseur (sharp, remotePatterns).
   images: { unoptimized: true },
@@ -66,34 +52,7 @@ const webConfig: NextConfig = {
     return [
       {
         source: '/(.*)',
-        headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
-          },
-          {
-            key: 'Content-Security-Policy',
-            // 'unsafe-inline' est requis par Next pour les styles inline et les
-            // scripts de preload en production. À durcir (nonces) en P2.
-            // connect-src : 'self' + origine de NEXT_PUBLIC_API_URL (calculée au build) ;
-            // localhost:3001 n'est ajouté qu'en développement.
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-              "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob: https:",
-              "font-src 'self' data:",
-              `connect-src ${connectSrc}`,
-              "object-src 'none'",
-              "frame-ancestors 'none'",
-              "base-uri 'self'",
-              "form-action 'self'",
-            ].join('; '),
-          },
-        ],
+        headers: SECURITY_HEADERS,
       },
       {
         // Service worker Web Push (W3-03) : toujours revalidé pour qu'une mise à jour soit
@@ -109,11 +68,14 @@ const webConfig: NextConfig = {
 };
 
 /**
- * Export statique pour Capacitor : pas de serveur, donc ni headers() (la CSP est injectée en
- * <meta> par scripts/build-mobile.mjs), ni rewrites, ni middleware. Voir docs/MOBILE.md.
+ * Export statique pour Capacitor : pas de serveur, donc ni headers() (la CSP, avec les hachages
+ * des scripts inline de chaque page, est injectée en <meta> par scripts/build-mobile.mjs), ni
+ * rewrites, ni middleware. Voir docs/MOBILE.md.
  */
 const mobileConfig: NextConfig = {
   output: 'export',
+  turbopack: { root: PROJECT_ROOT },
+  outputFileTracingRoot: PROJECT_ROOT,
   trailingSlash: true,
   reactCompiler: true,
   images: { unoptimized: true },

@@ -37,17 +37,17 @@ describe('parseFreeLicense', () => {
 });
 
 describe('pickSpeciesPhoto', () => {
-  const base = { type: 'StillImage', format: 'image/jpeg', identifier: 'https://img.example/a.jpg' };
+  const base = { type: 'StillImage', format: 'image/jpeg', identifier: 'https://upload.wikimedia.org/a.jpg' };
 
   it('prend la première image sous licence libre avec un auteur', () => {
     const photo = pickSpeciesPhoto([
       { ...base, creator: 'Sans licence libre', license: 'CC BY-NC 4.0' },
       { ...base, creator: '', license: 'CC BY 4.0' },
       { ...base, type: 'MovingImage', format: 'video/mp4', creator: 'Vidéo', license: 'CC0' },
-      { ...base, identifier: 'http://img.example/b.jpg', creator: ' Ana Martínez ', license: 'http://creativecommons.org/licenses/by/4.0/', references: 'https://www.inaturalist.org/photos/1' },
+      { ...base, identifier: 'http://upload.wikimedia.org/b.jpg', creator: ' Ana Martínez ', license: 'http://creativecommons.org/licenses/by/4.0/', references: 'https://www.inaturalist.org/photos/1' },
     ]);
     expect(photo).toEqual({
-      src: 'https://img.example/b.jpg',
+      src: 'https://upload.wikimedia.org/b.jpg',
       author: 'Ana Martínez',
       license: { label: 'CC BY 4.0', url: 'https://creativecommons.org/licenses/by/4.0/' },
       sourceUrl: 'https://www.inaturalist.org/photos/1',
@@ -56,7 +56,16 @@ describe('pickSpeciesPhoto', () => {
 
   it('sans page source, le crédit renvoie au fichier ; accepte la forme { results }', () => {
     const photo = pickSpeciesPhoto({ results: [{ ...base, creator: 'X', license: 'CC0' }] });
-    expect(photo?.sourceUrl).toBe('https://img.example/a.jpg');
+    expect(photo?.sourceUrl).toBe('https://upload.wikimedia.org/a.jpg');
+  });
+
+  it('écarte les photos servies par un hôte hors CSP (img-src) au profit de la suivante', () => {
+    const photo = pickSpeciesPhoto([
+      { ...base, identifier: 'https://photos.example.org/a.jpg', creator: 'Hors CSP', license: 'CC0' },
+      { ...base, identifier: 'https://inaturalist-open-data.s3.amazonaws.com/photos/1/medium.jpg', creator: 'iNat', license: 'CC0' },
+    ]);
+    expect(photo?.src).toBe('https://inaturalist-open-data.s3.amazonaws.com/photos/1/medium.jpg');
+    expect(pickSpeciesPhoto([{ ...base, identifier: 'https://photos.example.org/a.jpg', creator: 'X', license: 'CC0' }])).toBeNull();
   });
 
   it('aucune photo acceptable → null (silhouette)', () => {

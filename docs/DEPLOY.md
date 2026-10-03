@@ -173,3 +173,36 @@ Passer en payant **dès qu'il y a des utilisateurs réels** ou que l'un de ces s
 - Neon Free : stockage ou heures de calcul proches du plafond, besoin d'un PITR plus long (RPO du plan : 24 h) → **Neon Launch**.
 - Netlify : builds ou bande passante épuisés en cours de mois → plan Pro.
 - Obligations légales et d'exploitation (sauvegardes, SLA, journaux) : voir DEP-03 (sauvegardes) et la checklist go-live du plan §7.
+
+## 10. Sécurité : CSP et en-têtes HTTP (W4-08)
+
+Source unique : `frontend/src/lib/csp.ts` (module pur, testé dans `src/lib/__tests__/csp.test.ts`), utilisé par `frontend/next.config.ts` (en-têtes du site, toutes les routes) et par `frontend/scripts/build-mobile.mjs` (balise `<meta>` de l'app Capacitor). Les valeurs dépendent de `NEXT_PUBLIC_API_URL` et `NEXT_PUBLIC_SENTRY_DSN`, **lues au build** : un changement de ces variables impose un nouveau build Netlify.
+
+**CSP de production du site** (exemple avec l'API Render et Sentry UE) :
+
+```
+default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';
+img-src 'self' data: blob: https://upload.wikimedia.org https://inaturalist-open-data.s3.amazonaws.com https://static.inaturalist.org https://api.gbif.org;
+font-src 'self'; connect-src 'self' https://captivia-api.onrender.com https://o….ingest.de.sentry.io;
+worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';
+frame-ancestors 'none'; upgrade-insecure-requests
+```
+
+- `connect-src` : le site, l'origine de l'API et, seulement si un DSN est défini, l'origine d'ingestion Sentry. Le backend local (`localhost:3001`) n'y figure qu'en développement.
+- `img-src` : photos locales (`/images`), `data:` (photo compressée, QR code), `blob:` (aperçus) et les seuls hôtes de photos d'espèces (`SPECIES_IMAGE_HOSTS`). `pickSpeciesPhoto` ignore les médias GBIF servis ailleurs (la fiche prend la photo suivante ou la silhouette), donc la CSP ne bloque jamais une photo affichée. Ajouter un hébergeur = l'ajouter à `SPECIES_IMAGE_HOSTS`. Une URL de photo saisie à la main par un utilisateur et hébergée ailleurs n'est pas affichée (silhouette).
+- Polices : auto-hébergées par `next/font` (`font-src 'self'`). Service worker Web Push : `worker-src 'self'` (la souscription push ne passe pas par `connect-src`). `/.well-known/*` et le manifeste sont servis par le site.
+- `upgrade-insecure-requests` est omis en développement et face à une API en `http` (smoke E2E local).
+- `'unsafe-eval'` n'est présent qu'en `next dev` (React s'en sert pour les piles d'erreur) ; jamais en production.
+
+**Autres en-têtes** : `Strict-Transport-Security: max-age=63072000; includeSubDomains` (production ; **sans** `preload`, inscription difficilement réversible à décider une fois le domaine définitif en place), `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY` (doublon de `frame-ancestors`), `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()` (le site n'utilise pas la caméra : l'import de photo passe par un sélecteur de fichier ; dans l'app native, la caméra passe par le plugin Capacitor).
+
+**Pourquoi `'unsafe-inline'` reste dans `script-src` du site (compromis nonce / hachages)** — mesure sur le build Next 16.3 : chaque page HTML contient plusieurs scripts inline (4 sur l'accueil `/fr`), dont les charges RSC propres à la page (`self.__next_f.push([1,"…"])`, jusqu'à ~100 Ko) ; le contenu varie selon la page et la locale.
+- *Nonce* (`proxy.ts`) : Next ne pose le nonce qu'au rendu serveur, ce qui impose le rendu **dynamique** de toutes les pages (149 pages aujourd'hui pré-rendues). Plus de cache CDN Netlify, une exécution de fonction par vue, réveils plus lents : trop coûteux sur l'offre gratuite, pour un site sans contenu tiers ni script externe.
+- *Hachages* : ils devraient figurer dans l'en-tête, or `headers()` est figé avant le build et commun à toutes les pages. L'option expérimentale `experimental.sri` n'ajoute que des attributs `integrity` aux fichiers `/_next/static` (même origine) et ne couvre pas les scripts inline.
+- Retenu : pages statiques, `script-src 'self' 'unsafe-inline'` **sans** `'unsafe-eval'`, sans aucune origine de script externe ; le reste de la politique (`object-src 'none'`, `base-uri`, `form-action`, `frame-ancestors`, `connect-src` minimal) limite l'exploitation d'une éventuelle injection. Le rendu de React échappe le contenu, et aucun `dangerouslySetInnerHTML` ne sert hors JSON-LD (échappé). À réévaluer si Next sait un jour poser des hachages sur les pages statiques.
+
+**App mobile** : l'export statique est entièrement connu après le build, donc `build-mobile.mjs` calcule les hachages SHA-256 des scripts inline de **chaque** page et les place dans sa `<meta>` : `script-src` sans `'unsafe-inline'` ni `'unsafe-eval'`. Mêmes directives que le site, plus les origines de la WebView (`capacitor://localhost`, `https://localhost`), sans `frame-ancestors` (ignorée en `<meta>`). Le pont natif de Capacitor est injecté hors CSP (script de démarrage de document, ou inséré avant la balise `<meta>`).
+
+**Vérifier en production** : `curl -sI https://<site>/ | grep -iE 'content-security|strict-transport|permissions-policy'`. Les tests E2E smoke échouent sur toute violation CSP (console ou événement `securitypolicyviolation`, voir `frontend/e2e/support/test.ts`).
+
+**API (NestJS)** : `helmet()` pose ses propres en-têtes (CSP par défaut `default-src 'self'`…, HSTS un an) sur des réponses JSON ; ils n'interviennent pas dans le chargement du site et ne sont pas modifiés.

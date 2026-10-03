@@ -12,14 +12,17 @@
  *  3. `next build` avec MOBILE_BUILD=1 (next.config.ts → output: 'export', trailingSlash…).
  *  4. Restaure TOUJOURS l'arborescence (finally + signaux ; journal de reprise si le process est tué).
  *  5. Post-traitement de `out/` : `index.html` racine (amorce : redirection vers la locale, repli SPA
- *     de Capacitor), CSP en <meta> (MOB-16) et normalisation d'URL injectées dans chaque page.
+ *     de Capacitor), CSP en <meta> (MOB-16, W4-08 : hachages des scripts inline de CHAQUE page, sans
+ *     'unsafe-inline' ni 'unsafe-eval') et normalisation d'URL injectées dans chaque page.
  *
  *   node scripts/build-mobile.mjs --restore   # restaure après un build interrompu (kill -9…)
  */
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import ts from 'typescript';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'out');
@@ -151,31 +154,49 @@ function prepare() {
 
 // --- 5 : post-traitement de out/ ---------------------------------------------------------------
 
-function originOf(raw, protocols) {
-  try {
-    const u = new URL((raw || '').trim());
-    return protocols.includes(u.protocol) ? u.origin : null;
-  } catch {
-    return null;
-  }
+/**
+ * Charge le module pur src/lib/csp.ts (source unique de la CSP, partagée avec next.config.ts et
+ * testée) : transpilé à la volée par TypeScript, sans dépendre du support .ts de Node.
+ */
+async function loadCspModule() {
+  const source = fs.readFileSync(path.join(ROOT, 'src', 'lib', 'csp.ts'), 'utf8');
+  const { outputText } = ts.transpileModule(source, {
+    compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+  });
+  return import(`data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`);
 }
 
-/** CSP de l'app (MOB-16), alignée sur headers() de next.config.ts ; frame-ancestors est sans effet en <meta>. */
-function buildCsp() {
-  const api = originOf(process.env.NEXT_PUBLIC_API_URL, ['http:', 'https:']);
-  const sentry = originOf(process.env.NEXT_PUBLIC_SENTRY_DSN, ['https:']);
-  if (!api) log('AVERTISSEMENT : NEXT_PUBLIC_API_URL absent ou invalide, connect-src limité à self');
-  return [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob: https:",
-    "font-src 'self' data:",
-    `connect-src ${["'self'", api, sentry].filter(Boolean).join(' ')}`,
-    "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-  ].join('; ');
+/** Hachage CSP (`sha256-…`) du contenu exact d'un script inline. */
+function scriptHash(content) {
+  return `sha256-${createHash('sha256').update(content, 'utf8').digest('base64')}`;
+}
+
+/** Types de <script> exécutés par le navigateur (les blocs de données, ex. JSON-LD, ne le sont pas). */
+const EXECUTABLE_SCRIPT_TYPES = new Set(['', 'text/javascript', 'application/javascript', 'module']);
+
+/** Hachages de tous les scripts inline exécutables d'une page (charge RSC `self.__next_f`…). */
+function inlineScriptHashes(html) {
+  const hashes = new Set();
+  for (const [, attrs, content] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+    if (/\bsrc\s*=/i.test(attrs)) continue;
+    const type = (attrs.match(/\btype\s*=\s*["']?([^"'\s>]+)/i)?.[1] ?? '').toLowerCase();
+    if (!EXECUTABLE_SCRIPT_TYPES.has(type)) continue;
+    hashes.add(scriptHash(content));
+  }
+  return [...hashes];
+}
+
+/**
+ * CSP de l'app (MOB-16, W4-08) : mêmes directives que l'en-tête du site (src/lib/csp.ts, cible
+ * `mobile` : origines Capacitor, pas de frame-ancestors, sans effet en <meta>), mais script-src
+ * sans 'unsafe-inline' — chaque page reçoit les hachages de SES scripts inline, calculés ici
+ * puisque l'export est entièrement statique.
+ */
+function cspFactory({ buildCsp, apiOrigin }) {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const sentryDsn = process.env.NEXT_PUBLIC_SENTRY_DSN;
+  if (!apiOrigin(apiUrl)) log('AVERTISSEMENT : NEXT_PUBLIC_API_URL absent ou invalide, connect-src limité à self');
+  return (scriptHashes) => buildCsp({ target: 'mobile', apiUrl, sentryDsn, scriptHashes });
 }
 
 /**
@@ -188,7 +209,7 @@ const PAGE_SHIM =
   "history.replaceState(history.state,'',p+l.search+l.hash)}var m=/^\\/([a-z]{2})(\\/|$)/.exec(p);" +
   "if(m)localStorage.setItem('captivia.locale',m[1])}catch(e){}})();";
 
-function bootstrapHtml({ locales, defaultLocale, routes, csp }) {
+function bootstrapHtml({ locales, defaultLocale, routes, cspFor }) {
   const script = `(function(){
 var LOCALES=${JSON.stringify(locales)},DEF=${JSON.stringify(defaultLocale)},ROUTES=${JSON.stringify(routes)},DYN=${JSON.stringify(DYNAMIC_ROUTES)};
 function pick(){try{var s=localStorage.getItem('captivia.locale');if(LOCALES.indexOf(s)>=0)return s}catch(e){}
@@ -202,7 +223,7 @@ if(ROUTES.indexOf(rest)<0)rest='/';var s=q.toString();l.replace('/'+loc+rest+'in
 <html lang="${defaultLocale}">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="${csp}">
+<meta http-equiv="Content-Security-Policy" content="${cspFor([scriptHash(script)])}">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Captivia</title>
@@ -215,17 +236,19 @@ if(ROUTES.indexOf(rest)<0)rest='/';var s=q.toString();l.replace('/'+loc+rest+'in
 `;
 }
 
-function postProcess() {
+async function postProcess() {
   const { locales, defaultLocale } = readLocales();
   const missing = locales.filter((l) => !fs.existsSync(path.join(OUT, l, 'index.html')));
   if (missing.length) throw new Error(`Export incomplet : out/<locale>/index.html manquant pour ${missing.join(', ')}`);
   if (fs.existsSync(path.join(OUT, 'index.html'))) throw new Error('out/index.html existe déjà (route racine inattendue)');
 
-  const csp = buildCsp();
-  const head = `<meta http-equiv="Content-Security-Policy" content="${csp}"/><script>${PAGE_SHIM}</script>`;
+  const cspFor = cspFactory(await loadCspModule());
+  const shimHash = scriptHash(PAGE_SHIM);
   const htmlFiles = listFiles(OUT).filter((f) => f.endsWith('.html'));
   for (const file of htmlFiles) {
     const html = fs.readFileSync(file, 'utf8');
+    const csp = cspFor([shimHash, ...inlineScriptHashes(html)]);
+    const head = `<meta http-equiv="Content-Security-Policy" content="${csp}"/><script>${PAGE_SHIM}</script>`;
     // Après la déclaration de charset (qui doit rester dans les 1 024 premiers octets), sinon après <head>.
     const anchor = html.match(/<meta charset="utf-8"\s*\/?>/i) ?? html.match(/<head>/i);
     if (!anchor) throw new Error(`<head> introuvable dans ${path.relative(ROOT, file)}`);
@@ -239,13 +262,13 @@ function postProcess() {
     .map((f) => `/${path.relative(localeRoot, path.dirname(f)).split(path.sep).join('/')}/`.replace(/^\/\/$/, '/'))
     .filter((r) => !r.includes(PLACEHOLDER_SEGMENT))
     .sort();
-  fs.writeFileSync(path.join(OUT, 'index.html'), bootstrapHtml({ locales, defaultLocale, routes, csp }));
+  fs.writeFileSync(path.join(OUT, 'index.html'), bootstrapHtml({ locales, defaultLocale, routes, cspFor }));
   log(`${htmlFiles.length} page(s) HTML traitées, ${routes.length} route(s) par locale, amorce out/index.html écrite`);
 }
 
 // --- main ----------------------------------------------------------------------------------------
 
-function main() {
+async function main() {
   if (process.argv.includes('--restore')) {
     if (!restore()) log('rien à restaurer');
     return;
@@ -280,8 +303,8 @@ function main() {
     console.error(`[build:mobile] échec de next build (code ${status})`);
     process.exit(status);
   }
-  postProcess();
+  await postProcess();
   log('terminé : lancez `npx cap sync` pour copier out/ dans les projets natifs');
 }
 
-main();
+await main();

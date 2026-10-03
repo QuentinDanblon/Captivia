@@ -4,6 +4,7 @@
  */
 import { toIucnCategory, type IucnCategory } from '@/components/ui/Badge';
 import type { SilhouetteKind } from '@/components/ui/AnimalSilhouette';
+import { isAllowedRemoteImage } from '@/lib/csp';
 
 /* -------------------------------------------------------------------------- */
 /* Photo d'espèce (GET /species/:id/media, médias GBIF)                        */
@@ -91,8 +92,9 @@ function isStillImage(item: SpeciesMediaItem): boolean {
 }
 
 /**
- * Première photo affichable d'une réponse /species/:id/media : image fixe, URL https, auteur
- * renseigné et licence libre reconnue. Sans tout cela, `null` : la fiche montre la silhouette.
+ * Première photo affichable d'une réponse /species/:id/media : image fixe, URL https servie par
+ * un hôte autorisé en img-src (SPECIES_IMAGE_HOSTS, src/lib/csp.ts), auteur renseigné et licence
+ * libre reconnue. Sans tout cela, `null` : la fiche montre la silhouette.
  */
 export function pickSpeciesPhoto(media: unknown): SpeciesPhoto | null {
   const items = Array.isArray(media)
@@ -107,7 +109,7 @@ export function pickSpeciesPhoto(media: unknown): SpeciesPhoto | null {
     const author = typeof item.creator === 'string' ? item.creator.trim() : '';
     const license = parseFreeLicense(item.license);
     const src = httpsUrl(item.identifier ?? item.url);
-    if (!author || !license || !src) continue;
+    if (!author || !license || !src || !isAllowedRemoteImage(src)) continue;
     return { src, author, license, sourceUrl: httpsUrl(item.references) ?? src };
   }
   return null;

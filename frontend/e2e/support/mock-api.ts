@@ -32,7 +32,7 @@ export const GUEST_USER = {
 const FIXTURES_DIR = path.join(__dirname, '..', 'fixtures');
 
 /** Origine des photos d'espèces des fixtures (species-media.json), servies par `page.route`. */
-export const PHOTO_ORIGIN = 'https://photos.example.org';
+export const PHOTO_ORIGIN = 'https://inaturalist-open-data.s3.amazonaws.com';
 /** Image servie pour toute photo d'espèce simulée (fichier du dépôt, aucune requête externe). */
 const SAMPLE_PHOTO = path.join(__dirname, '..', '..', 'public', 'images', 'animals', 'bearded-dragon-480.webp');
 
