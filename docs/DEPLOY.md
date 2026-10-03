@@ -110,6 +110,13 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 | `IAP_ENABLED`, `REVENUECAT_WEBHOOK_SECRET`, `REVENUECAT_ENTITLEMENT_ID`, `GOOGLE_PLAY_PACKAGE_NAME` | Render (`sync: false`) | RevenueCat (achats in-app, pas de Stripe — voir `docs/PAYMENTS.md`) | Dès la publication sur les stores |
 | `SPECIESPLUS_API_TOKEN` | Render (`sync: false`) | jeton Species+ (api.speciesplus.net) | Non : sans jeton, `/speciesplus/*` → 503 `INTEGRATION_DISABLED` et `speciesPlus.status = "disabled"` sur la fiche législation |
 | `NCBI_API_KEY`, `NCBI_EMAIL` | Render (`sync: false`) | clé NCBI et e-mail de contact | Non : PubMed est public (3 req/s), la clé porte le quota à 10 req/s |
+| `COMMUNITY_ENABLED` | Render (`sync: false`) | `false` tant que la communauté n'est pas ouverte | Non (défaut `false` : routes `/community/*` en 404) |
+| `COMMUNITY_CONTACT_EMAIL` | Render (`sync: false`) | adresse du point de contact DSA (modération) | Recommandé dès `COMMUNITY_ENABLED=true` |
+| `COMMUNITY_HIDE_THRESHOLD`, `COMMUNITY_POSTS_PER_HOUR`, `COMMUNITY_COMMENTS_PER_MINUTE`, `COMMUNITY_UPLOADS_PER_HOUR` | Render (`sync: false`) | défauts 3, 5, 5, 30 | Non |
+| `MEDIA_DRIVER` | Render (`sync: false`) | `s3` | Oui si `COMMUNITY_ENABLED=true` (refusé au démarrage sinon : disque éphémère) |
+| `MEDIA_BUCKET`, `MEDIA_PUBLIC_BASE_URL` | Render (`sync: false`) | bucket R2 et son domaine public (`https://media.<domaine>` ou `https://pub-….r2.dev`) | Oui si `MEDIA_DRIVER=s3` |
+| `S3_ENDPOINT`, `S3_REGION`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_FORCE_PATH_STYLE` | Render (`sync: false`) | R2 : `https://<ACCOUNT_ID>.r2.cloudflarestorage.com`, `auto`, jeton API R2 (lecture/écriture limité au bucket), `false` | Clés : oui si `MEDIA_DRIVER=s3` |
+| `MEDIA_MAX_BYTES` | Render (`sync: false`) | défaut 8 Mo (plafond 20 Mo) | Non |
 | `NEXT_PUBLIC_API_URL` | Netlify | URL de l'API Render | Oui |
 | `NEXT_PUBLIC_SENTRY_DSN` | Netlify | projet Sentry UE | Recommandé |
 | `APPLE_TEAM_ID` | Netlify | Team ID Apple (10 caractères, developer.apple.com → Membership) | Pour les Universal Links iOS (W6-09) : sans elle, `/.well-known/apple-app-site-association` → 404 |
@@ -129,6 +136,18 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
 - **Amazon** : aucune intégration (décision D-09 : la PA-API 5 est remplacée par la Creators API, qui exige un compte Associates actif). La route `/amazon/*` est retirée (404) ; les liens d'affiliation viennent de la table `AffiliateStore`. À rouvrir quand le compte Associates est validé.
 
 (*) D'autres tâches du plan (vague 0 et 1, durcissement de la configuration) rendent `CORS_ORIGIN` et `FRONTEND_URL` **obligatoires en production** : l'API pourra refuser de démarrer si elles sont absentes. Elles sont déjà fournies par `render.yaml` ; ne pas les supprimer du Blueprint ni du Dashboard.
+
+### Communauté : stockage des médias (Cloudflare R2)
+
+Le volet communauté reste **désactivé** (`COMMUNITY_ENABLED=false`) tant que la modération n'est pas prête (`docs/RUNBOOK.md`, « Modération de la communauté »). Pour l'ouvrir :
+
+1. **Cloudflare → R2** : créer le bucket `captivia-media` (juridiction **UE** si proposée). Offre gratuite : 10 Go de stockage, sortie gratuite.
+2. **Accès public en lecture** : *Settings → Public access* : brancher un domaine personnalisé (`media.<domaine>`, recommandé) ou activer l'URL `r2.dev` (limitée en débit, pour essai). Cette URL devient `MEDIA_PUBLIC_BASE_URL`. Les clés sont aléatoires (`<uuid>.webp`), les objets servis avec `Cache-Control: public, max-age=31536000, immutable`.
+3. **Jeton API** : *R2 → Manage API tokens → Create* : permission *Object Read & Write*, restreinte au bucket. Reporter l'Access Key ID et le Secret dans Render (`S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`), l'endpoint S3 du compte dans `S3_ENDPOINT`, `S3_REGION=auto`.
+4. Render : `MEDIA_DRIVER=s3`, `MEDIA_BUCKET=captivia-media`, `COMMUNITY_CONTACT_EMAIL`, puis `COMMUNITY_ENABLED=true`. L'API refuse de démarrer si une variable du pilote manque.
+5. Contrôle : publier une photo depuis un compte de test vérifié, ouvrir l'URL de l'image (format WebP, aucune métadonnée), la supprimer et vérifier qu'elle disparaît du bucket.
+
+Tout stockage compatible S3 convient (AWS S3 : `S3_ENDPOINT` vide et région réelle ; MinIO : `S3_FORCE_PATH_STYLE=true`). Le pilote `local` (`MEDIA_LOCAL_DIR`, défaut `var/media`, images servies par `GET /community/media/:key`) est réservé au développement et aux tests. Le site affiche les images d'un autre domaine : penser à l'autoriser dans la CSP (`img-src`) côté frontend lors de la phase 2.
 
 ## 6. Premier déploiement et seed
 
