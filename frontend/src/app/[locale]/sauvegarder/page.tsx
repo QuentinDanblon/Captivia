@@ -6,8 +6,9 @@ import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
 import { isGuestUser } from '@/lib/guest';
-import { Alert, AnimalSilhouette, SkeletonGroup, Skeleton, buttonClasses } from '@/components/ui';
+import { Alert, SkeletonGroup, Skeleton, buttonClasses } from '@/components/ui';
 import { AuthFrame, AuthPanel } from '@/components/auth/AuthFrame';
+import { CommonsPhoto } from '@/components/CommonsPhoto';
 import { GuestEntry } from '@/components/guest/GuestEntry';
 import { UpgradeGuestForm } from '@/components/guest/UpgradeGuestForm';
 
@@ -17,16 +18,11 @@ function KeptPanel({ animalName }: { animalName?: string }) {
   const items = [t('keptRecord'), t('keptReminders'), t('keptSettings')];
   return (
     <AuthPanel>
-      <div className="flex items-baseline justify-between border-b border-line-strong pb-3 font-mono text-meta text-ink-2">
-        <span>{t('keptLabel')}</span>
-      </div>
-      <div className="grid justify-items-start gap-6">
-        <AnimalSilhouette kind="other" size={96} className="text-ink-3" />
-        <p className="m-0 font-display text-h2 text-ink">
-          {animalName ? t('keptTitleNamed', { name: animalName }) : t('keptTitle')}
-        </p>
-      </div>
-      <ul className="m-0 grid list-none p-0">
+      <CommonsPhoto photo="leopardGecko" />
+      <p className="m-0 mt-auto font-display text-h3 text-ink">
+        {animalName ? t('keptTitleNamed', { name: animalName }) : t('keptTitle')}
+      </p>
+      <ul className="m-0 -mt-4 grid list-none p-0" aria-label={t('keptLabel')}>
         {items.map((item) => (
           <li key={item} className="flex items-start gap-3 border-t border-line py-3 text-ui text-ink-2">
             <svg viewBox="0 0 16 16" className="mt-1 size-4 shrink-0 text-ok" fill="none" aria-hidden="true">

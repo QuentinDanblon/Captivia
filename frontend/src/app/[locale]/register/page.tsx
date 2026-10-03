@@ -75,7 +75,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <AuthFrame title={t('auth.registerHeading')} lead={t('auth.registerLead')}>
+    <AuthFrame title={t('auth.registerHeading')} lead={t('auth.registerLead')} photo="budgerigars">
       <div className="grid gap-8">
         <form onSubmit={handleSubmit} className="grid gap-5">
           <Field label={t('auth.emailLabel')} id="email">

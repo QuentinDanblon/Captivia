@@ -31,7 +31,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <AuthFrame title={t('auth.forgotHeading')} lead={t('auth.forgotLead')}>
+    <AuthFrame title={t('auth.forgotHeading')} lead={t('auth.forgotLead')} photo="rabbitStraw">
       <div className="grid gap-8">
         <form onSubmit={handleSubmit} className="grid gap-5">
           <Field label={t('auth.emailLabel')} id="email">

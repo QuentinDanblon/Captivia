@@ -28,7 +28,6 @@ import {
 import {
   Alert,
   AnimalCard,
-  AnimalSilhouette,
   Button,
   Card,
   CareTimeline,
@@ -48,6 +47,7 @@ import { GuestSaveBanner } from '@/components/guest/GuestSaveBanner';
 import { AddAnimalLockedSlot } from '@/components/guest/AddAnimalLockedSlot';
 import AddAnimalFlow from './_components/AddAnimalFlow';
 import { useTodayData } from './_components/useTodayData';
+import { CommonsPhoto } from '@/components/CommonsPhoto';
 
 /** Alertes affichées en tête ; les suivantes restent dans les fiches. */
 const MAX_ALERTS = 4;
@@ -144,7 +144,7 @@ function TodayPageContent() {
       }),
     );
     const tips = animals
-      .map((animal) => ({ animal, tip: speciesTip(data.species[animal.speciesId], data.speciesHealth[animal.speciesId]) }))
+      .map((animal) => ({ animal, tip: speciesTip(data.species[animal.speciesId], data.speciesHealth[animal.speciesId], locale) }))
       .filter((entry) => entry.tip !== null);
     // Un conseil par jour, à tour de rôle entre les animaux qui en ont un.
     const dayIndex = Math.floor(now.getTime() / 86_400_000);
@@ -155,7 +155,7 @@ function TodayPageContent() {
       tip: tips.length > 0 ? tips[dayIndex % tips.length] : null,
       timeline: timelineItems(data.agenda, now),
     };
-  }, [data.agenda, data.details, data.species, data.speciesHealth, animals, now]);
+  }, [data.agenda, data.details, data.species, data.speciesHealth, animals, now, locale]);
 
   // Sans session : « Essayer sans compte » ou connexion (jamais de redirection forcée).
   if (!authLoading && !user) return <GuestEntry />;
@@ -247,7 +247,8 @@ function TodayPageContent() {
             ) : null}
           </Card>
           <div className="grid content-start gap-5 md:col-span-5 md:pt-4">
-            <AnimalSilhouette kind="reptile" size={96} className="text-ink-3" />
+            {/* Une vraie photo plutôt qu'une silhouette : l'essai prolonge la landing. */}
+            <CommonsPhoto photo="dogGoldenRetriever" ratio="4/3" />
             <h2 id="perks-title" className="m-0 font-display text-h3 text-ink">
               {t('onboarding.perksTitle')}
             </h2>
