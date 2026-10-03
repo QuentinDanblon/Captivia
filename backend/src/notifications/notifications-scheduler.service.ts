@@ -5,7 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { GradeService } from '../grade/grade.service';
 import { MailService } from '../mail/mail.service';
 import { PUSH_SENDER, PushSender } from './push-sender';
-import { localReminderFor } from './local-coverage';
+import { isStillScheduled, localReminderFor } from './local-coverage';
 import { NATIVE_PUSH_RUN_BUDGET_MS } from './native-push-sender';
 import { localDay } from '../common/timezone';
 
@@ -265,12 +265,17 @@ export class NotificationsSchedulerService {
    * (`notifiedAt` : NULL → `now`, UPDATE … RETURNING). Seuls les rappels effectivement réservés
    * seront envoyés : un rappel passé à « fait » entre-temps, ou réservé par une exécution qui
    * se chevauche, est exclu. Aucun appel réseau ici.
+   *
+   * Un rappel de médicament ou de routine qui ne correspond plus à une occurrence de sa source
+   * (état actuel, même calcul que l'Agenda : source désactivée, supprimée ou modifiée depuis la
+   * génération, ou rappel généré à tort) n'est pas envoyé : il est supprimé (`pending` et non
+   * notifié uniquement).
    */
   private async claimDue(
     tx: Prisma.TransactionClient,
     now: Date,
   ): Promise<{ found: number; claimed: DueReminder[] }> {
-    const due = await tx.notificationEvent.findMany({
+    const candidates = await tx.notificationEvent.findMany({
       where: {
         status: 'pending',
         notifiedAt: null,
@@ -283,6 +288,22 @@ export class NotificationsSchedulerService {
       take: MAX_DISPATCH_PER_RUN,
       select: DUE_REMINDER_SELECT,
     });
+    const due = candidates.filter((ev) =>
+      isStillScheduled(ev, ev.user.timezone),
+    );
+    const stale = candidates.filter((ev) => !due.includes(ev));
+    if (stale.length > 0) {
+      await tx.notificationEvent.deleteMany({
+        where: {
+          id: { in: stale.map((e) => e.id) },
+          status: 'pending',
+          notifiedAt: null,
+        },
+      });
+      this.logger.debug(
+        `${stale.length} rappel(s) obsolète(s) (source modifiée ou désactivée) supprimé(s).`,
+      );
+    }
     if (due.length === 0) return { found: 0, claimed: [] };
 
     const rows = await tx.$queryRaw<{ id: string }[]>(

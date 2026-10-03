@@ -582,6 +582,35 @@ describe('Module A E2E — médicaments & RDV vétérinaires', () => {
       expect(marked.grade).toHaveProperty('points', 0);
     });
 
+    it('médicament hebdomadaire : aucun rappel les 6 jours suivants, un rappel à J+7 (comme l’Agenda)', async () => {
+      const medEventsOn = async (day: string) => {
+        const res = await request(httpServer(app))
+          .get(`/users/me/notification-events?date=${day}`)
+          .set('Authorization', `Bearer ${token}`)
+          .expect(200);
+        return bodyOf<
+          (EventBody & { medicationId?: string; scheduledAt: string })[]
+        >(res).filter((e) => e.medicationId === medicationId);
+      };
+      for (let n = 1; n <= 6; n++) {
+        expect(await medEventsOn(dayOffsetStr(n))).toHaveLength(0);
+      }
+      expect(await medEventsOn(dayOffsetStr(7))).toHaveLength(1);
+
+      // Même jour dans l'Agenda : une seule prise, au même instant que le rappel.
+      const agenda = await request(httpServer(app))
+        .get(`/users/me/agenda?from=${dayOffsetStr(1)}&to=${dayOffsetStr(7)}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(200);
+      const items = bodyOf<{
+        items: { type: string; sourceId: string; date: string }[];
+      }>(agenda).items.filter(
+        (i) => i.type === 'medication' && i.sourceId === medicationId,
+      );
+      const [reminder] = await medEventsOn(dayOffsetStr(7));
+      expect(items.map((i) => i.date)).toEqual([reminder.scheduledAt]);
+    });
+
     it('médicament désactivé ou futur → plus d’event (refresh)', async () => {
       // Médicament futur : ne doit jamais générer d'event
       await request(httpServer(app))

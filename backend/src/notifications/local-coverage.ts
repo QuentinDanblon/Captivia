@@ -4,7 +4,7 @@ import {
   medicationOccurrencesOn,
   routineOccurrencesOn,
   routinePlan,
-} from '../agenda/agenda-occurrences';
+} from '../common/care-occurrences';
 import {
   localDay,
   makeLocalTimeResolver,
@@ -30,6 +30,41 @@ export interface LocalCoverageCandidate {
         updatedAt: Date;
       })
     | null;
+}
+
+/**
+ * Le rappel serveur `ev` d'un médicament ou d'une routine correspond-il ENCORE à une occurrence
+ * de sa source, dans son état ACTUEL (même calcul que l'Agenda) ? Faux si la source a été
+ * désactivée, supprimée, ou modifiée depuis la génération (fréquence, dates, heure) — ou si le
+ * rappel a été généré à tort (ex. ancien rappel quotidien d'un médicament hebdomadaire). Le
+ * scheduler n'envoie pas un tel rappel et le supprime (nettoyage au moment de l'envoi).
+ * Les autres sources (RDV, vaccins, types personnalisés) ne sont pas vérifiées ici : `true`.
+ */
+export function isStillScheduled(
+  ev: LocalCoverageCandidate,
+  timeZone: string | null | undefined,
+): boolean {
+  const key = ev.sourceKey ?? '';
+  const isMedication = key.startsWith('medication:');
+  const isRoutine = key.startsWith('routine:');
+  if (!isMedication && !isRoutine) return true;
+  const at = ev.scheduledAt;
+  if (!(at instanceof Date) || Number.isNaN(at.getTime())) return true;
+  const tz = resolveTimeZone(timeZone);
+  const day = localDay(at, tz);
+  const resolve = makeLocalTimeResolver(tz);
+  const includesAt = (instants: Date[]) =>
+    instants.some((d) => d.getTime() === at.getTime());
+
+  if (isMedication) {
+    const m = ev.medication;
+    if (!m || key !== `medication:${m.id}`) return false; // source supprimée
+    return includesAt(medicationOccurrencesOn(m, day, resolve));
+  }
+  const r = ev.routine;
+  if (!r || key !== `routine:${r.id}`) return false; // source supprimée
+  const plan = routinePlan(r, tz);
+  return !!plan && includesAt(routineOccurrencesOn(plan, day, resolve));
 }
 
 /**

@@ -286,6 +286,68 @@ describeDb('NotificationsSchedulerService (Prisma réel)', () => {
     }
   });
 
+  it('rappel de médicament qui ne correspond plus à sa source (hebdomadaire un autre jour, désactivé) : pas envoyé, supprimé', async () => {
+    const user = await createUser('push', { timezone: 'UTC' });
+    const animal = await prisma.animal.create({
+      data: { userId: user.id, speciesId: 5221172, name: 'Kaa' },
+    });
+    // Début le mercredi 05/03/2031 ; NOW = lundi 10/03 08:03 UTC.
+    const weekly = await prisma.medication.create({
+      data: {
+        animalId: animal.id,
+        name: 'Hebdo',
+        dose: '1',
+        frequency: 'weekly',
+        startDate: new Date('2031-03-05T00:00:00Z'),
+      },
+    });
+    const inactive = await prisma.medication.create({
+      data: {
+        animalId: animal.id,
+        name: 'Stoppé',
+        dose: '1',
+        frequency: 'daily',
+        startDate: new Date('2031-03-01T00:00:00Z'),
+        active: false,
+      },
+    });
+    const daily = await prisma.medication.create({
+      data: {
+        animalId: animal.id,
+        name: 'Quotidien',
+        dose: '1',
+        frequency: 'daily',
+        startDate: new Date('2031-03-01T00:00:00Z'),
+      },
+    });
+    // Rappels de 08:00 déjà en base (ancien générateur : un par jour pour chaque médicament).
+    const at8 = new Date('2031-03-10T08:00:00Z');
+    const stale = (medicationId: string, label: string) =>
+      prisma.notificationEvent.create({
+        data: {
+          userId: user.id,
+          type: 'medication',
+          label,
+          scheduledAt: at8,
+          status: 'pending',
+          medicationId,
+          animalId: animal.id,
+          sourceKey: `medication:${medicationId}`,
+        },
+      });
+    const wrongDay = await stale(weekly.id, 'Hebdo');
+    const stopped = await stale(inactive.id, 'Stoppé');
+    const valid = await stale(daily.id, 'Quotidien');
+
+    await scheduler.runOnce(NOW);
+    expect(pushesTo(user.id).map((c) => c[1].title)).toEqual(['Quotidien']);
+    const left = await prisma.notificationEvent.findMany({
+      where: { id: { in: [wrongDay.id, stopped.id, valid.id] } },
+      select: { id: true },
+    });
+    expect(left.map((e) => e.id)).toEqual([valid.id]);
+  });
+
   it('guest (no e-mail) with channel "both": push only, never an e-mail', async () => {
     const guest = await prisma.user.create({
       data: { isGuest: true, email: null, passwordHash: null },

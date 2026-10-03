@@ -14,12 +14,12 @@ import {
   makeLocalTimeResolver,
   resolveTimeZone,
 } from '../common/timezone';
-import { REMINDER_ANCHOR_HOUR } from '../grade/grade.service';
 import {
+  REMINDER_ANCHOR_HOUR,
   medicationOccurrencesOn,
   routineOccurrencesOn,
   routinePlan,
-} from './agenda-occurrences';
+} from '../common/care-occurrences';
 import { agendaLabels } from './agenda.labels';
 import { buildIcs } from './ics';
 import type {
@@ -153,8 +153,9 @@ function collectByDay(
 /**
  * Agenda des soins : vue unique des soins à venir pour TOUS les animaux de l'utilisateur.
  *
- * Les occurrences de routines sont calculées avec les mêmes fonctions que le générateur de rappels
- * (`GradeService`) et dans le même fuseau (`User.timezone`) : l'agenda montre exactement ce qui
+ * Les occurrences de médicaments et de routines sont calculées avec les mêmes fonctions que le
+ * générateur de rappels (`common/care-occurrences`, utilisé aussi par `GradeService`) et dans le
+ * même fuseau (`User.timezone`) : l'agenda montre exactement ce qui
  * sera notifié. Le statut (`done` / `skipped`) est repris des `NotificationEvent` déjà générés ;
  * sans événement, l'occurrence est `pending`. Toutes les requêtes sont filtrées par
  * `animal.userId` : isolation stricte entre utilisateurs.

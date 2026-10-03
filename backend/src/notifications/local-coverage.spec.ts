@@ -1,4 +1,8 @@
-import { LocalCoverageCandidate, localReminderFor } from './local-coverage';
+import {
+  LocalCoverageCandidate,
+  isStillScheduled,
+  localReminderFor,
+} from './local-coverage';
 
 /**
  * Non-régression (revue de sécurité W6-07, constat 1) : un rappel serveur n'est réputé couvert
@@ -107,6 +111,39 @@ describe('localReminderFor', () => {
     ).toEqual({ at: AT_8, sourceUpdatedAt: UPDATED });
   });
 
+  it('médicament hebdomadaire : couvert SEULEMENT le jour de la semaine du début, à 08:00 locale', () => {
+    // Début le lundi 03/03/2031 ; le 10/03 est un lundi (08:00 CET = 07:00Z). Passage à l'heure
+    // d'été le 30/03 : le lundi 31/03, 08:00 CEST = 06:00Z.
+    const weekly = {
+      ...medication,
+      frequency: 'weekly',
+      startDate: new Date('2031-03-03T00:00:00Z'),
+    };
+    const at = (iso: string) =>
+      localReminderFor(
+        ev({
+          sourceKey: 'medication:m1',
+          medication: weekly,
+          scheduledAt: new Date(iso),
+        }),
+        TZ,
+      );
+    expect(at('2031-03-10T07:00:00Z')).toEqual({
+      at: new Date('2031-03-10T07:00:00Z'),
+      sourceUpdatedAt: UPDATED,
+    });
+    expect(at('2031-03-31T06:00:00Z')).toEqual({
+      at: new Date('2031-03-31T06:00:00Z'),
+      sourceUpdatedAt: UPDATED,
+    });
+    // Ancien rappel quotidien erroné (les 6 autres jours) : jamais couvert → le push part.
+    for (let d = 11; d <= 16; d++) {
+      expect(at(`2031-03-${d}T07:00:00Z`)).toBeUndefined();
+    }
+    // Bon jour, mauvaise heure (07:00 CEST le 31/03 = 05:00Z) : non couvert.
+    expect(at('2031-03-31T05:00:00Z')).toBeUndefined();
+  });
+
   it('médicament hebdomadaire un autre jour, ou toutes les 5 h sans prise à 08:00 : non couvert', () => {
     // Début un mercredi (05/03) ; le 10/03 est un lundi : l'Agenda n'a aucune prise ce jour-là.
     expect(
@@ -163,5 +200,62 @@ describe('localReminderFor', () => {
         TZ,
       ),
     ).toBeUndefined();
+  });
+});
+
+describe('isStillScheduled (rappel serveur encore valide pour sa source actuelle)', () => {
+  it('médicament hebdomadaire : vrai le jour de la semaine du début, faux les autres jours', () => {
+    const weekly = {
+      ...medication,
+      frequency: 'weekly',
+      startDate: new Date('2031-03-03T00:00:00Z'), // lundi
+    };
+    const at = (iso: string) =>
+      isStillScheduled(
+        ev({
+          sourceKey: 'medication:m1',
+          medication: weekly,
+          scheduledAt: new Date(iso),
+        }),
+        TZ,
+      );
+    expect(at('2031-03-10T07:00:00Z')).toBe(true);
+    expect(at('2031-03-11T07:00:00Z')).toBe(false); // ancien rappel quotidien erroné
+  });
+
+  it('source désactivée, supprimée ou modifiée : faux ; autres sources : vrai', () => {
+    expect(
+      isStillScheduled(ev({ sourceKey: 'medication:m1', medication }), TZ),
+    ).toBe(true);
+    expect(
+      isStillScheduled(
+        ev({
+          sourceKey: 'medication:m1',
+          medication: { ...medication, active: false },
+        }),
+        TZ,
+      ),
+    ).toBe(false);
+    // Source supprimée (clé étrangère remise à NULL).
+    expect(isStillScheduled(ev({ sourceKey: 'medication:m1' }), TZ)).toBe(
+      false,
+    );
+    // Heure de la routine modifiée (08:00 → 09:00) après la génération du rappel de 08:00.
+    expect(
+      isStillScheduled(
+        ev({
+          sourceKey: 'routine:r1',
+          routine: { ...routine, schedule: { time: '09:00' } },
+        }),
+        TZ,
+      ),
+    ).toBe(false);
+    expect(isStillScheduled(ev({ sourceKey: 'routine:r1', routine }), TZ)).toBe(
+      true,
+    );
+    for (const sourceKey of ['appointment:a1', 'vaccination:v1', 'pref:Bain']) {
+      expect(isStillScheduled(ev({ sourceKey }), TZ)).toBe(true);
+    }
+    expect(isStillScheduled(ev({}), TZ)).toBe(true);
   });
 });

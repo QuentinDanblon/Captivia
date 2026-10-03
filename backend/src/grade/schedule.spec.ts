@@ -2,7 +2,7 @@ import {
   matchesSchedule,
   normalizeSchedule,
   scheduleOccurrences,
-} from './grade.service';
+} from '../common/care-occurrences';
 import { addDays, makeLocalTimeResolver } from '../common/timezone';
 
 /** Revue de sécurité, constat 4 : récurrences sur le jour LOCAL, ancrées, et heures locales. */
