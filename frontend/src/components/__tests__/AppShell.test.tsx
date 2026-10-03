@@ -60,6 +60,18 @@ describe('AppShell', () => {
     current.forEach((link) => expect(link).toHaveAttribute('href', '/agenda'));
   });
 
+  it('Espèces : mène à la recherche de l\'app et reste active sur une fiche', () => {
+    mockedAuth.mockReturnValue({ user: null, isLoading: false, logout });
+    (usePathname as jest.Mock).mockReturnValue('/species/2435099');
+    render(<AppShell>…</AppShell>);
+    const current = screen.getAllByRole('link', { current: 'page' });
+    expect(current).toHaveLength(2);
+    current.forEach((link) => {
+      expect(link).toHaveAttribute('href', '/especes');
+      expect(link).toHaveTextContent('nav.species');
+    });
+  });
+
   it('connecté : profil (e-mail) et déconnexion', () => {
     mockedAuth.mockReturnValue({ user: { email: 'smoke@captivia.test' }, isLoading: false, logout });
     render(<AppShell>…</AppShell>);

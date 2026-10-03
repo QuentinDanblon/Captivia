@@ -23,6 +23,53 @@
   "habitat": {
     "habitatType": "Terrarium",
     "temperature": "28-32 °C",
-    "humidity": "60-70 %"
+    "humidity": "60-70 %",
+    "minSpaceSize": "180 × 60 × 60 cm",
+    "lightNeeds": "Cycle jour/nuit de 12 h, UVB faible recommandé.",
+    "sources": [
+      {
+        "type": "guide",
+        "title": "Guide d'élevage de test",
+        "url": "https://example.com/guide-boa"
+      }
+    ]
+  },
+  "feeding": {
+    "dietType": "carnivore",
+    "mealFrequency": "every_7_10_days",
+    "recommendedFoods": [
+      {
+        "name": "Rongeurs décongelés",
+        "frequency": "adaptés au diamètre du corps"
+      }
+    ],
+    "foodsToAvoid": [
+      {
+        "name": "Proies vivantes",
+        "reason": "risque de morsure"
+      }
+    ],
+    "specificNeeds": null,
+    "sources": [
+      {
+        "type": "vet",
+        "title": "Fiche vétérinaire de test",
+        "url": "https://example.com/vet"
+      }
+    ]
+  },
+  "behavior": {
+    "generalBehavior": "Plutôt calme, actif au crépuscule.",
+    "sociability": "solitaire",
+    "difficultyLevel": "intermédiaire",
+    "compatibilityWithChildren": null,
+    "compatibilityWithOtherAnimals": "À maintenir seul.",
+    "sources": [
+      {
+        "type": "guide",
+        "title": "Guide d'élevage de test",
+        "url": "https://example.com/guide-boa"
+      }
+    ]
   }
 }

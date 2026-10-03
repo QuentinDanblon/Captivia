@@ -28,8 +28,8 @@ export interface AppDestination {
 export const APP_DESTINATIONS: AppDestination[] = [
   { href: '/mes-animaux', labelKey: 'common.myAnimals', icon: PawPrint, match: ['/mes-animaux'] },
   { href: '/agenda', labelKey: 'nav.agenda', icon: CalendarDays, match: ['/agenda'] },
-  // Recherche d'espèces : aujourd'hui sur l'accueil ; à repointer vers la page de recherche de l'app (lot 2).
-  { href: '/', labelKey: 'nav.species', icon: BookOpen, match: ['/species'] },
+  // Recherche d'espèces de l'app ; l'onglet reste actif sur les fiches (/species/<id>).
+  { href: '/especes', labelKey: 'nav.species', icon: BookOpen, match: ['/especes', '/species'] },
   { href: '/communaute', labelKey: 'nav.community', icon: MessagesSquare, match: ['/communaute'], soon: true },
   { href: '/parametres', labelKey: 'nav.account', icon: CircleUserRound, match: ['/parametres'] },
 ];

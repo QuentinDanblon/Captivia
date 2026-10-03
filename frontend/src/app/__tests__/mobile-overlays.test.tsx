@@ -24,7 +24,7 @@ function makePage(label: string) {
   };
 }
 jest.mock('@/app/[locale]/(app)/mes-animaux/[id]/page', () => ({ __esModule: true, default: makePage('animal') }));
-jest.mock('@/app/[locale]/species/[id]/page', () => ({ __esModule: true, default: makePage('species') }));
+jest.mock('@/app/[locale]/(app)/species/[id]/page', () => ({ __esModule: true, default: makePage('species') }));
 jest.mock('@/app/[locale]/animal-public/[slug]/page', () => ({ __esModule: true, default: makePage('public') }));
 jest.mock('@/app/[locale]/(app)/mes-animaux/[id]/carnet/CarnetPrintView', () => ({
   __esModule: true,
@@ -32,7 +32,7 @@ jest.mock('@/app/[locale]/(app)/mes-animaux/[id]/carnet/CarnetPrintView', () => 
 }));
 
 import MobileAnimalDetailPage from '../../../mobile/app/[locale]/(app)/mes-animaux/detail/page';
-import MobileSpeciesPage from '../../../mobile/app/[locale]/species/page';
+import MobileSpeciesPage from '../../../mobile/app/[locale]/(app)/species/page';
 import MobilePublicAnimalPage from '../../../mobile/app/[locale]/animal-public/page';
 import MobileCarnetPage from '../../../mobile/app/[locale]/(app)/mes-animaux/carnet/page';
 

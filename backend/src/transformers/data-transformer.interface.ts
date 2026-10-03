@@ -105,6 +105,10 @@ export interface Media {
   title: string;
   license: string;
   url: string;
+  /** Page source du média (fiche iNaturalist, Wikimedia Commons…). */
+  references?: string;
+  /** Type MIME (« image/jpeg »). */
+  format?: string;
 }
 
 export interface Metrics {

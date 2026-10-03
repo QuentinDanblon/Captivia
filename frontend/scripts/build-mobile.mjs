@@ -37,7 +37,7 @@ const EXCLUDED = [
   'src/proxy.ts', // middleware next-intl : aucun serveur dans l'app (localePrefix 'always' + amorce)
   'src/app/api', // route handlers (dev uniquement)
   'src/app/[locale]/[...rest]', // catch-all 404 en force-dynamic
-  'src/app/[locale]/species/[id]/layout.tsx', // métadonnées SEO via l'API → remplacé par l'overlay
+  'src/app/[locale]/(app)/species/[id]/layout.tsx', // métadonnées SEO via l'API → remplacé par l'overlay
   // Routes de métadonnées web (SEO / PWA) : sans objet dans l'app, et refusées par l'export
   // tant qu'elles ne déclarent pas `dynamic = 'force-static'`.
   'src/app/manifest.ts',

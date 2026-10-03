@@ -10,6 +10,7 @@ const PUBLIC_PAGES = [
   '/reset-password?token=e2e',
   '/verifier-email',
   '/species/2435099',
+  '/especes',
   '/mentions-legales',
   '/confidentialite',
   '/cgu',

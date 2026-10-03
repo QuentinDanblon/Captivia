@@ -1,0 +1,22 @@
+[
+  {
+    "type": "StillImage",
+    "format": "image/jpeg",
+    "creator": "Photographe NC",
+    "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+    "identifier": "https://photos.example.org/boa/nc.jpg",
+    "url": "https://photos.example.org/boa/nc.jpg",
+    "references": "https://photos.example.org/boa/nc",
+    "title": "Boa constrictor (NC)"
+  },
+  {
+    "type": "StillImage",
+    "format": "image/jpeg",
+    "creator": "Ana Martínez",
+    "license": "http://creativecommons.org/licenses/by/4.0/",
+    "identifier": "https://photos.example.org/boa/by.jpg",
+    "url": "https://photos.example.org/boa/by.jpg",
+    "references": "https://photos.example.org/boa/by",
+    "title": "Boa constrictor"
+  }
+]

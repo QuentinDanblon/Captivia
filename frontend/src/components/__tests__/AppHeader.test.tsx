@@ -105,6 +105,7 @@ describe('AppHeader', () => {
     render(<AppHeader />);
     const nav = screen.getByRole('navigation', { name: 'home.mainNavigation' });
     expect(within(nav).getByRole('link', { name: 'nav.species' })).toHaveAttribute('aria-current', 'page');
+    expect(within(nav).getByRole('link', { name: 'nav.species' })).toHaveAttribute('href', '/especes');
   });
 
   it('menu : ouverture en feuille modale, focus sur la première entrée, Échap referme et rend le focus', () => {

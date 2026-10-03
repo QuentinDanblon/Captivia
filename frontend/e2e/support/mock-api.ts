@@ -31,6 +31,11 @@ export const GUEST_USER = {
 
 const FIXTURES_DIR = path.join(__dirname, '..', 'fixtures');
 
+/** Origine des photos d'espèces des fixtures (species-media.json), servies par `page.route`. */
+export const PHOTO_ORIGIN = 'https://photos.example.org';
+/** Image servie pour toute photo d'espèce simulée (fichier du dépôt, aucune requête externe). */
+const SAMPLE_PHOTO = path.join(__dirname, '..', '..', 'public', 'images', 'animals', 'bearded-dragon-480.webp');
+
 export function fixture<T = unknown>(name: string): T {
   return JSON.parse(readFileSync(path.join(FIXTURES_DIR, `${name}.json`), 'utf8')) as T;
 }
@@ -112,6 +117,11 @@ export async function installMockApi(page: Page): Promise<MockApi> {
   };
   const user = fixture<Record<string, unknown>>('user');
 
+  // Hébergeur des photos d'espèces (URL des médias GBIF simulés) : servi localement, hors réseau.
+  await page.route(`${PHOTO_ORIGIN}/**`, (route) =>
+    route.fulfill({ status: 200, contentType: 'image/webp', body: readFileSync(SAMPLE_PHOTO) }),
+  );
+
   await page.route(`${API_ORIGIN}/**`, async (route) => {
     const request = route.request();
     const url = new URL(request.url());
@@ -147,6 +157,13 @@ export async function installMockApi(page: Page): Promise<MockApi> {
     if (method === 'GET' && pathname === '/species/2435099/legislation') {
       return json(route, 200, fixture('species-legislation'));
     }
+    // Photos (GET /species/:id/media) : 2435099 a une photo NC (refusée) puis une photo CC BY créditée ;
+    // 2435100 n'a qu'une photo NC (repli silhouette) ; les autres espèces, aucune.
+    if (method === 'GET' && pathname === '/species/2435099/media') return json(route, 200, fixture('species-media'));
+    if (method === 'GET' && pathname === '/species/2435100/media') {
+      return json(route, 200, fixture<unknown[]>('species-media').slice(0, 1));
+    }
+    if (method === 'GET' && /^\/species\/\d+\/media$/.test(pathname)) return json(route, 200, []);
     if (method === 'GET' && pathname === '/species/2435099/reproduction') {
       return json(route, 404, { statusCode: 404, message: 'Not found' });
     }
