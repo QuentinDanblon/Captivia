@@ -7,10 +7,10 @@ Procédures d'exploitation de Captivia : supervision, incidents, restauration, r
 | Brique | Rôle | Adresse |
 |---|---|---|
 | Netlify | Frontend Next.js (`frontend/`) | `https://captivia-app.netlify.app` (`NEXT_PUBLIC_SITE_URL` dans `netlify.toml`) |
-| Render (offre Free, Francfort) | API NestJS, service `captivia-api` | `https://captivia-api.onrender.com` (nom du service dans `render.yaml` ; l'URL exacte est affichée dans le Dashboard Render) |
+| Render (offre Free, Francfort) | API NestJS, service `captivia-api` | `https://captiviacaptivia-api.onrender.com` (service `captivia-api` dans `render.yaml` ; Render a préfixé le sous-domaine, l’URL exacte est affichée dans le Dashboard) |
 | Neon (offre Free) | PostgreSQL | URL pooled dans Render (`DATABASE_URL`), URL directe dans le secret GitHub `NEON_DATABASE_URL_DIRECT` |
 
-Dans les commandes ci-dessous : `API=https://captivia-api.onrender.com`.
+Dans les commandes ci-dessous : `API=https://captiviacaptivia-api.onrender.com`.
 
 ---
 
@@ -51,7 +51,7 @@ Le moniteur externe n'est pas défini dans le dépôt : à créer à la main (vo
 ### 1.6 Tests manuels
 
 ```bash
-API=https://captivia-api.onrender.com
+API=https://captiviacaptivia-api.onrender.com
 
 # Liveness (le premier appel après une veille peut durer 30 à 60 s)
 curl -sS -m 90 "$API/health"

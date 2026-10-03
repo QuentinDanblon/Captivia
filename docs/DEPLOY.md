@@ -47,7 +47,7 @@ Dépôt → *Settings → Secrets and variables → Actions* :
 |---|---|---|---|
 | Secret | `NEON_DATABASE_URL_DIRECT` | URL Neon **directe** | Jobs `migrate-production`, « Seed production » et « Database Backup » |
 | Secret | `BACKUP_AGE_RECIPIENT` | clé **publique** age (`age1…`) | Chiffrement des sauvegardes (workflow « Database Backup », voir `docs/RUNBOOK.md` §3) |
-| Variable | `API_URL` | ex. `https://captivia-api.onrender.com` | `keep-warm.yml` (manuel) |
+| Variable | `API_URL` | ex. `https://captiviacaptivia-api.onrender.com` | `keep-warm.yml` (manuel) |
 
 Puis *Settings → Environments → New environment* : **`production`** (les jobs de migration et de seed y sont rattachés). Option : ajouter des « Required reviewers » ; dans ce cas la migration attend une approbation manuelle, et Render attend donc aussi (le check reste « en attente »).
 
@@ -64,7 +64,7 @@ Si `NEON_DATABASE_URL_DIRECT` est absent, `migrate-production` et « Seed produc
    - Facultatifs : `SENTRY_DSN`, `MAIL_HOST` (+ autres `MAIL_*`).
 3. Vérifier `CORS_ORIGIN`, `FRONTEND_URL` et `PUBLIC_WEB_URL` dans `render.yaml` : ils valent `https://captivia-app.netlify.app`. Si le nom du site Netlify est différent, corriger le fichier et committer.
 4. Le déploiement est piloté par `autoDeployTrigger: checksPass` : aucun Deploy Hook n'est nécessaire. Dans *Settings* du service, vérifier que le déclencheur est bien « After CI checks pass ».
-5. Noter l'URL du service (`https://captivia-api.onrender.com`) et la saisir dans la variable GitHub `API_URL` (§3.2).
+5. Noter l'URL du service (`https://captiviacaptivia-api.onrender.com`) et la saisir dans la variable GitHub `API_URL` (§3.2).
 
 ### 3.4 Netlify (frontend)
 1. *Add new project → Import an existing project → GitHub* → choisir le dépôt. Le `netlify.toml` est détecté (base `frontend`, commande `npm run build`, Node 22). Nom du site : `captivia` s'il est libre (supprimer l'ancien site homonyme sur l'ancien compte pour libérer le nom).
@@ -210,7 +210,7 @@ Source unique : `frontend/src/lib/csp.ts` (module pur, testé dans `src/lib/__te
 ```
 default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';
 img-src 'self' data: blob: https://upload.wikimedia.org https://inaturalist-open-data.s3.amazonaws.com https://static.inaturalist.org https://api.gbif.org;
-font-src 'self'; connect-src 'self' https://captivia-api.onrender.com https://o….ingest.de.sentry.io;
+font-src 'self'; connect-src 'self' https://captiviacaptivia-api.onrender.com https://o….ingest.de.sentry.io;
 worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';
 frame-ancestors 'none'; upgrade-insecure-requests
 ```
