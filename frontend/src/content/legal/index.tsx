@@ -29,8 +29,8 @@ export function legalMetadata(locale: string, key: LegalDocKey): Metadata {
 
 /**
  * Rendu commun d'un document légal (Server Component, aucun état) : en-tête « planche »
- * (`SectionHeader`), avertissements en `Alert`, sections numérotées en mono et sommaire en
- * colonne collante à partir de 1024 px (même lecture que la fiche espèce).
+ * (`SectionHeader`), avertissements en `Alert`, sections numérotées en mono, sommaire replié
+ * sous le titre en mobile et en colonne collante à partir de 1024 px (comme la fiche espèce).
  */
 export async function LegalDocument({ locale, docKey }: { locale: string; docKey: LegalDocKey }) {
   const t = await getTranslations({ locale, namespace: 'legal' });
@@ -42,6 +42,21 @@ export async function LegalDocument({ locale, docKey }: { locale: string; docKey
     new Date(`${LEGAL.lastUpdated}T00:00:00Z`),
   );
   const number = (index: number) => String(index + 1).padStart(2, '0');
+  // Les titres rédigés « 1. Objet » perdent leur numéro : la numérotation mono le porte déjà.
+  const titleOf = (title: string) => title.replace(/^\d+\.\s+/, '');
+  const tocItems = doc.sections.map((section, index) => (
+    <li key={section.id} className="border-b border-line">
+      <a
+        href={`#${section.id}`}
+        className="grid min-h-11 grid-cols-[2rem_minmax(0,1fr)] items-center gap-x-2 py-2 text-ui text-ink no-underline transition-colors hover:text-accent-text"
+      >
+        <span aria-hidden="true" className="font-mono text-meta text-ink-2">
+          {number(index)}
+        </span>
+        <span>{titleOf(section.title)}</span>
+      </a>
+    </li>
+  ));
 
   return (
     <div className="cv-container py-8 sm:py-12">
@@ -62,6 +77,23 @@ export async function LegalDocument({ locale, docKey }: { locale: string; docKey
             </div>
           ) : null}
 
+          {/* Sommaire replié sous le titre en dessous de 1024 px (colonne collante au-delà). */}
+          <details className="group mt-6 border-y border-line lg:hidden" lang={locale}>
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 text-ui font-medium text-ink [&::-webkit-details-marker]:hidden">
+              <span>
+                {t('tableOfContents')} <span className="font-mono text-meta font-normal text-ink-2">· {doc.sections.length}</span>
+              </span>
+              <span aria-hidden="true" className="font-mono text-ink-2 transition-transform group-open:rotate-90">
+                ›
+              </span>
+            </summary>
+            <nav aria-label={t('tableOfContents')}>
+              <ol className="m-0 mb-3 grid list-none border-t border-line p-0" lang={contentLang}>
+                {tocItems}
+              </ol>
+            </nav>
+          </details>
+
           <div className="mt-10 grid gap-10 text-body text-ink">
             {doc.sections.map((section, index) => (
               <section key={section.id} id={section.id} aria-labelledby={`${section.id}-title`} className="grid scroll-mt-24 gap-3">
@@ -69,7 +101,7 @@ export async function LegalDocument({ locale, docKey }: { locale: string; docKey
                   <span aria-hidden="true" className="font-mono text-meta font-normal text-ink-2">
                     {number(index)}
                   </span>
-                  <span>{section.title}</span>
+                  <span>{titleOf(section.title)}</span>
                 </h2>
                 {section.body}
               </section>
@@ -77,24 +109,12 @@ export async function LegalDocument({ locale, docKey }: { locale: string; docKey
           </div>
         </article>
 
-        {/* Sommaire : au-dessus du texte en mobile, colonne collante en bureau. */}
-        <nav aria-label={t('tableOfContents')} lang={locale} className="-order-1 min-w-0 lg:order-none lg:col-span-4">
-          <div className="lg:sticky lg:top-24">
+        {/* Sommaire en colonne collante à partir de 1024 px. */}
+        <nav aria-label={t('tableOfContents')} lang={locale} className="hidden min-w-0 lg:col-span-4 lg:block">
+          <div className="sticky top-24">
             <p className="m-0 mb-2 text-meta text-ink-2">{t('tableOfContents')}</p>
             <ol className="m-0 grid list-none border-t border-line p-0" lang={contentLang}>
-              {doc.sections.map((section, index) => (
-                <li key={section.id} className="border-b border-line">
-                  <a
-                    href={`#${section.id}`}
-                    className="grid min-h-11 grid-cols-[2rem_minmax(0,1fr)] items-center gap-x-2 py-2 text-ui text-ink no-underline transition-colors hover:text-accent-text"
-                  >
-                    <span aria-hidden="true" className="font-mono text-meta text-ink-2">
-                      {number(index)}
-                    </span>
-                    <span>{section.title}</span>
-                  </a>
-                </li>
-              ))}
+              {tocItems}
             </ol>
           </div>
         </nav>
