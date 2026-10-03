@@ -15,7 +15,6 @@ import { TransformerModule } from './transformers/transformer.module';
 import { FilterModule } from './filters/filter.module';
 import { MonitoringModule } from './monitoring/monitoring.module';
 import { AnalyticsModule } from './analytics/analytics.module';
-import { DatabaseOptimizationModule } from './database/database-optimization.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { HealthContentModule } from './health-content/health-content.module';
@@ -102,9 +101,7 @@ const redisEnabled = process.env.REDIS_ENABLED === 'true';
     SpeciesModule,
     HealthModule,
     CommonModule,
-    ...(redisEnabled
-      ? [MonitoringModule, AnalyticsModule, DatabaseOptimizationModule]
-      : []),
+    ...(redisEnabled ? [MonitoringModule, AnalyticsModule] : []),
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

@@ -7,7 +7,7 @@ const intlMiddleware = createMiddleware(routing);
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip static files (public/, favicon, sw.js, badges/*.svg, ...) so they are
+  // Skip static files (public/, favicon, sw.js, images/*, ...) so they are
   // served as-is instead of being rewritten to /<locale>/... (404 otherwise).
   // Note: the extension exclusion cannot live in the matcher regex (crashes
   // Next.js build with "The string did not match the expected pattern"), so we
