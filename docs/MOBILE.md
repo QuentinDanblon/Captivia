@@ -59,8 +59,10 @@ CSP. `NEXT_PUBLIC_SENTRY_DSN` est facultatif (même rôle que sur le web).
 4. Restaure **toujours** l'arborescence (bloc `finally`, SIGINT/SIGTERM, journal
    `mobile/.build-journal.json`). Après un `kill -9` : `node scripts/build-mobile.mjs --restore`
    (le build suivant restaure aussi automatiquement). Ne pas lancer `next dev` en même temps.
-5. Post-traite `out/` : écrit `out/index.html` (amorce), injecte la CSP en `<meta>` (MOB-16) et un
-   script de normalisation d'URL en tête de chaque page, vérifie la présence des 6 locales.
+5. Post-traite `out/` : écrit `out/index.html` (amorce), injecte la CSP en `<meta>` (MOB-16, W4-08 :
+   construite par `src/lib/csp.ts`, avec les hachages SHA-256 des scripts inline de chaque page, sans
+   `'unsafe-inline'` ni `'unsafe-eval'` pour les scripts ; voir `docs/DEPLOY.md` § 10) et un script de
+   normalisation d'URL en tête de chaque page, vérifie la présence des 6 locales.
 
 Le build web (`npm run build`, sans `MOBILE_BUILD`) est **inchangé** : même `output: 'standalone'`,
 mêmes en-têtes de sécurité, mêmes routes.

@@ -438,9 +438,9 @@ Ce script vérifie que le frontend Docker joint bien le backend (absence de bann
 « Backend non connecté ») et qu'une recherche renvoie des suggestions.
 
 > **Piège connu** : si le frontend affiche « Backend non connecté » alors que
-> `curl http://localhost:3001/health` répond, vérifier la CSP dans
-> `frontend/next.config.ts` — `connect-src` doit autoriser le backend local
-> (`http://localhost:3001`). C'est le premier endroit à regarder quand l'UI
+> `curl http://localhost:3001/health` répond, vérifier la CSP (construite par
+> `frontend/src/lib/csp.ts`, lue au build) — `connect-src` doit autoriser l'origine de
+> `NEXT_PUBLIC_API_URL` (ici `http://localhost:3001`). C'est le premier endroit à regarder quand l'UI
 > perd le backend sans raison réseau apparente.
 
 Les images sont multi-stage : l'image backend runtime ne contient ni sources TypeScript ni CLI de développement, et l'image frontend utilise le serveur Next.js standalone.

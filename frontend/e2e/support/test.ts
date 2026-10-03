@@ -16,9 +16,21 @@ export const test = base.extend<{ api: MockApi }>({
 
     page.on('pageerror', (error) => pageErrors.push(error.message));
     page.on('console', (message) => {
-      if (message.type() === 'error' && /content security policy/i.test(message.text())) {
-        cspViolations.push(message.text());
+      if (/content security policy|securitypolicyviolation/i.test(message.text())) {
+        cspViolations.push(`[console.${message.type()}] ${message.text()}`);
       }
+    });
+    // Toute violation CSP (y compris celles que le navigateur ne journalise pas en console, ex. un
+    // `img-src` bloqué puis remplacé par la silhouette) remonte via l'événement DOM, écouté dans
+    // chaque document avant ses propres scripts (script d'init injecté hors CSP par Playwright).
+    await page.exposeFunction('__captiviaCspViolation', (detail: string) => {
+      cspViolations.push(`[securitypolicyviolation] ${detail}`);
+    });
+    await page.addInitScript(() => {
+      document.addEventListener('securitypolicyviolation', (event) => {
+        const report = (window as unknown as { __captiviaCspViolation?: (detail: string) => void }).__captiviaCspViolation;
+        report?.(`${event.effectiveDirective} bloque ${event.blockedURI || 'inline'} (${event.documentURI})`);
+      });
     });
 
     // Hermétique : polices, analytics, etc. ne doivent jamais sortir (ni ralentir) les tests.
