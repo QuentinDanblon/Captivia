@@ -6,6 +6,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { bodyOf, httpServer } from './utils/http';
 import * as crypto from 'crypto';
 import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
@@ -262,32 +263,33 @@ describe('Schema hardening E2E (W1-09 / W5-04)', () => {
 
   describe('lastReviewedAt (W5-04)', () => {
     it('GET /species/:id expose lastReviewedAt (ISO) pour une fiche vérifiée', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/species/${REVIEWED_ID}`)
         .expect(200);
-      expect(res.body.lastReviewedAt).toBe(REVIEWED_AT.toISOString());
-      expect(res.body.profile.lastReviewedAt).toBe(REVIEWED_AT.toISOString());
+      const species = bodyOf<{
+        lastReviewedAt: string;
+        profile: { lastReviewedAt: string };
+      }>(res);
+      expect(species.lastReviewedAt).toBe(REVIEWED_AT.toISOString());
+      expect(species.profile.lastReviewedAt).toBe(REVIEWED_AT.toISOString());
     });
 
     it('GET /species/:id renvoie lastReviewedAt = null pour une fiche jamais vérifiée', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(`/species/${UNREVIEWED_ID}`)
         .expect(200);
       expect(res.body).toHaveProperty('lastReviewedAt', null);
     });
 
     it('GET /species/search expose lastReviewedAt dans chaque résultat', async () => {
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .get(
           `/species/search?q=${encodeURIComponent(`Verifie ${tag}`)}&limit=5`,
         )
         .expect(200);
-      const hit = (
-        res.body.results as Array<{
-          key: number;
-          lastReviewedAt: string | null;
-        }>
-      ).find((r) => r.key === REVIEWED_ID);
+      const hit = bodyOf<{
+        results: Array<{ key: number; lastReviewedAt: string | null }>;
+      }>(res).results.find((r) => r.key === REVIEWED_ID);
       expect(hit).toBeDefined();
       expect(hit?.lastReviewedAt).toBe(REVIEWED_AT.toISOString());
     });

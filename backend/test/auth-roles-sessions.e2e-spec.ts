@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { httpServer } from './utils/http';
 import { App } from 'supertest/types';
 import * as crypto from 'crypto';
 import { UserRole } from '@prisma/client';
@@ -39,7 +40,7 @@ describe('Auth E2E — rôles, emails normalisés, sessions, consentement', () =
   const OPERATOR_EMAIL = emailFor('op');
   const prevOperatorEmails = process.env.OPERATOR_EMAILS;
 
-  const server = (): App => app.getHttpServer() as App;
+  const server = (): App => httpServer(app) as App;
 
   function register(email: string, extra: Record<string, unknown> = {}) {
     return request(server())

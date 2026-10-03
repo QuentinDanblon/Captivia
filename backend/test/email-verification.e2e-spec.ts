@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { httpServer } from './utils/http';
 import { App } from 'supertest/types';
 import * as crypto from 'crypto';
 import { AppModule } from '../src/app.module';
@@ -32,7 +33,7 @@ describe('Auth E2E — vérification d’e-mail (W2-04)', () => {
   const PASSWORD = 'RefreshTok123!';
   const tag = `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
   const emailFor = (name: string) => `ev-${name}-${tag}@captivia.local`;
-  const server = (): App => app.getHttpServer() as App;
+  const server = (): App => httpServer(app) as App;
 
   function register(email: string) {
     return request(server())

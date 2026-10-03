@@ -7,11 +7,9 @@ import { MAINTENANCE_LOCK_KEY } from '../src/maintenance/maintenance.constants';
 import { AnalyticsController } from '../src/analytics/analytics.controller';
 import { ApiAnalyticsService } from '../src/analytics/api-analytics.service';
 import { createTestApp } from './utils/create-app';
+import { bodyOf, AuthBody } from './utils/http';
 
 jest.setTimeout(90000);
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
-// (supertest renvoie des corps `any` ; fichier de test.)
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const HOUR_MS = 60 * 60 * 1000;
@@ -282,8 +280,8 @@ describe('Maintenance — registre, rétention et purge (W2-08)', () => {
           ageConfirmed: true,
         })
         .expect(201);
-      operatorToken = res.body.accessToken;
-      operatorId = res.body.user.id;
+      operatorToken = bodyOf<AuthBody>(res).accessToken;
+      operatorId = bodyOf<AuthBody>(res).user.id;
       userIds.push(operatorId);
       await prisma.user.update({
         where: { id: operatorId },

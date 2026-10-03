@@ -1,13 +1,28 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument */
-// supertest renvoie des corps `any` : règles unsafe-* désactivées pour ce fichier de test.
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
+import { AuthBody, IdBody, bodyOf, httpServer } from './utils/http';
 import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
 import { TestCacheModule } from './test-cache.module';
 import { PrismaService } from '../src/prisma/prisma.service';
 import { MAX_EVENTS_PER_DAY } from '../src/grade/grade.service';
+
+/** Formes (partielles) des réponses consultées par ces tests. */
+interface PrefsBody {
+  typeSchedules: Record<string, { time: string }>;
+  schedule: unknown;
+}
+interface EventBody {
+  id: string;
+  type: string;
+  status: string;
+  routineId?: string;
+  pointsAwarded?: number;
+}
+interface MarkDoneBody {
+  event: { status: string; pointsAwarded: number };
+}
 
 /**
  * W0-07 — DoS des notifications et farming de points :
@@ -24,12 +39,12 @@ describe('Notification events hardening (W0-07)', () => {
 
   const auth = () => ({ Authorization: `Bearer ${token}` });
   const patchPrefs = (body: unknown) =>
-    request(app.getHttpServer())
+    request(httpServer(app))
       .patch('/users/me/notification-preferences')
       .set(auth())
       .send(body as object);
   const getEvents = (qs = '') =>
-    request(app.getHttpServer())
+    request(httpServer(app))
       .get(`/users/me/notification-events${qs}`)
       .set(auth());
 
@@ -52,7 +67,7 @@ describe('Notification events hardening (W0-07)', () => {
     await app.init();
     prisma = app.get(PrismaService);
 
-    const reg = await request(app.getHttpServer())
+    const reg = await request(httpServer(app))
       .post('/auth/register')
       .send({
         email: `evt-hardening-${stamp}@captivia.com`,
@@ -61,8 +76,8 @@ describe('Notification events hardening (W0-07)', () => {
         ageConfirmed: true,
       })
       .expect(201);
-    token = reg.body.accessToken;
-    userId = reg.body.user.id;
+    token = bodyOf<AuthBody>(reg).accessToken;
+    userId = bodyOf<AuthBody>(reg).user.id;
     // Jours et heures interprétés dans le fuseau de l'utilisateur : UTC ici, pour que `today`
     // (jour UTC) soit aussi son jour local quelle que soit l'heure d'exécution.
     await prisma.user.update({
@@ -70,12 +85,12 @@ describe('Notification events hardening (W0-07)', () => {
       data: { timezone: 'UTC' },
     });
 
-    const animal = await request(app.getHttpServer())
+    const animal = await request(httpServer(app))
       .post('/users/me/animals')
       .set(auth())
       .send({ speciesId: 5221172, name: 'Eventful' })
       .expect(201);
-    animalId = animal.body.id;
+    animalId = bodyOf<IdBody>(animal).id;
   });
 
   afterAll(async () => {
@@ -131,7 +146,9 @@ describe('Notification events hardening (W0-07)', () => {
       });
       if (_label === 'unknown property') {
         expect(res.status).toBe(200);
-        expect(JSON.stringify(res.body.typeSchedules)).not.toContain('evil');
+        expect(
+          JSON.stringify(bodyOf<PrefsBody>(res).typeSchedules),
+        ).not.toContain('evil');
       } else {
         expect(res.status).toBe(400);
       }
@@ -168,8 +185,9 @@ describe('Notification events hardening (W0-07)', () => {
         snooze: 15,
         deliveryChannel: 'push',
       }).expect(200);
-      expect(res.body.typeSchedules.Nourrissage.time).toBe('08:00');
-      expect(res.body.schedule).toEqual({ start: '08:00', end: '22:00' });
+      const prefs = bodyOf<PrefsBody>(res);
+      expect(prefs.typeSchedules.Nourrissage.time).toBe('08:00');
+      expect(prefs.schedule).toEqual({ start: '08:00', end: '22:00' });
     });
   });
 
@@ -192,7 +210,7 @@ describe('Notification events hardening (W0-07)', () => {
     });
 
     it('rejects an invalid status body', async () => {
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .patch('/users/me/notification-events/some-id')
         .set(auth())
         .send({ status: 'hacked' })
@@ -217,8 +235,8 @@ describe('Notification events hardening (W0-07)', () => {
         },
       }).expect(200);
       const first = await getEvents(`?date=${today}`).expect(200);
-      const hydr = first.body.filter(
-        (e: { type: string }) => e.type === 'Hydratation',
+      const hydr = bodyOf<EventBody[]>(first).filter(
+        (e) => e.type === 'Hydratation',
       );
       expect(hydr).toHaveLength(24);
 
@@ -247,7 +265,9 @@ describe('Notification events hardening (W0-07)', () => {
       }
       await patchPrefs({ types, typeSchedules }).expect(200); // 50 × 24 = 1200 candidats
       const res = await getEvents(`?date=${today}&refresh=true`).expect(200);
-      expect(res.body.length).toBeLessThanOrEqual(MAX_EVENTS_PER_DAY);
+      expect(bodyOf<EventBody[]>(res).length).toBeLessThanOrEqual(
+        MAX_EVENTS_PER_DAY,
+      );
       const count = await prisma.notificationEvent.count({ where: { userId } });
       expect(count).toBeLessThanOrEqual(MAX_EVENTS_PER_DAY);
     });
@@ -267,7 +287,9 @@ describe('Notification events hardening (W0-07)', () => {
         },
       });
       const res = await getEvents(`?date=${today}`).expect(200);
-      expect(res.body.length).toBeLessThanOrEqual(MAX_EVENTS_PER_DAY);
+      expect(bodyOf<EventBody[]>(res).length).toBeLessThanOrEqual(
+        MAX_EVENTS_PER_DAY,
+      );
       await prisma.routine.deleteMany({ where: { animalId } });
     });
   });
@@ -292,16 +314,16 @@ describe('Notification events hardening (W0-07)', () => {
 
     it('credits points once when "done" is sent twice in parallel', async () => {
       const list = await getEvents(`?date=${today}`).expect(200);
-      const ev = list.body.find(
-        (e: { routineId?: string }) => e.routineId === routineId,
+      const ev = bodyOf<EventBody[]>(list).find(
+        (e) => e.routineId === routineId,
       );
       expect(ev).toBeDefined();
 
       const before = await prisma.user.findUnique({ where: { id: userId } });
       const results = await Promise.all(
         Array.from({ length: 5 }, () =>
-          request(app.getHttpServer())
-            .patch(`/users/me/notification-events/${ev.id}`)
+          request(httpServer(app))
+            .patch(`/users/me/notification-events/${ev!.id}`)
             .set(auth())
             .send({ status: 'done' }),
         ),
@@ -320,15 +342,15 @@ describe('Notification events hardening (W0-07)', () => {
       }))!.points;
 
       const res = await getEvents(`?date=${today}&refresh=true`).expect(200);
-      const mine = res.body.filter(
-        (e: { routineId?: string }) => e.routineId === routineId,
+      const mine = bodyOf<EventBody[]>(res).filter(
+        (e) => e.routineId === routineId,
       );
       expect(mine).toHaveLength(1);
       expect(mine[0].status).toBe('done');
       expect(mine[0].pointsAwarded).toBe(2);
 
       // impossible de le refaire
-      await request(app.getHttpServer())
+      await request(httpServer(app))
         .patch(`/users/me/notification-events/${mine[0].id}`)
         .set(auth())
         .send({ status: 'done' })
@@ -341,12 +363,10 @@ describe('Notification events hardening (W0-07)', () => {
 
     it('a done event cannot be deleted then regenerated to farm points', async () => {
       const list = await getEvents(`?date=${today}`).expect(200);
-      const done = list.body.find(
-        (e: { status: string }) => e.status === 'done',
-      );
+      const done = bodyOf<EventBody[]>(list).find((e) => e.status === 'done');
       expect(done).toBeDefined();
-      await request(app.getHttpServer())
-        .delete(`/users/me/notification-events/${done.id}`)
+      await request(httpServer(app))
+        .delete(`/users/me/notification-events/${done!.id}`)
         .set(auth())
         .expect(404);
     });
@@ -354,13 +374,13 @@ describe('Notification events hardening (W0-07)', () => {
     it('refresh still removes and regenerates pending events', async () => {
       await prisma.notificationEvent.deleteMany({ where: { userId } });
       const first = await getEvents(`?date=${today}`).expect(200);
-      const pendingId = first.body.find(
-        (e: { routineId?: string }) => e.routineId === routineId,
-      ).id;
+      const pendingId = bodyOf<EventBody[]>(first).find(
+        (e) => e.routineId === routineId,
+      )!.id;
       const second = await getEvents(`?date=${today}&refresh=true`).expect(200);
-      const regenerated = second.body.find(
-        (e: { routineId?: string }) => e.routineId === routineId,
-      );
+      const regenerated = bodyOf<EventBody[]>(second).find(
+        (e) => e.routineId === routineId,
+      )!;
       expect(regenerated.status).toBe('pending');
       expect(regenerated.id).not.toBe(pendingId);
     });
@@ -378,13 +398,14 @@ describe('Notification events hardening (W0-07)', () => {
       });
       const before = (await prisma.user.findUnique({ where: { id: userId } }))!
         .points;
-      const res = await request(app.getHttpServer())
+      const res = await request(httpServer(app))
         .patch(`/users/me/notification-events/${created.id}`)
         .set(auth())
         .send({ status: 'done' })
         .expect(200);
-      expect(res.body.event.status).toBe('done');
-      expect(res.body.event.pointsAwarded).toBe(0);
+      const marked = bodyOf<MarkDoneBody>(res);
+      expect(marked.event.status).toBe('done');
+      expect(marked.event.pointsAwarded).toBe(0);
       expect(
         (await prisma.user.findUnique({ where: { id: userId } }))!.points,
       ).toBe(before);
@@ -395,17 +416,17 @@ describe('Notification events hardening (W0-07)', () => {
         .toISOString()
         .slice(0, 10);
       const list = await getEvents(`?date=${future}`).expect(200);
-      const ev = list.body.find(
-        (e: { routineId?: string }) => e.routineId === routineId,
+      const ev = bodyOf<EventBody[]>(list).find(
+        (e) => e.routineId === routineId,
       );
       const before = (await prisma.user.findUnique({ where: { id: userId } }))!
         .points;
-      const res = await request(app.getHttpServer())
-        .patch(`/users/me/notification-events/${ev.id}`)
+      const res = await request(httpServer(app))
+        .patch(`/users/me/notification-events/${ev!.id}`)
         .set(auth())
         .send({ status: 'done' })
         .expect(200);
-      expect(res.body.event.pointsAwarded).toBe(0);
+      expect(bodyOf<MarkDoneBody>(res).event.pointsAwarded).toBe(0);
       expect(
         (await prisma.user.findUnique({ where: { id: userId } }))!.points,
       ).toBe(before);

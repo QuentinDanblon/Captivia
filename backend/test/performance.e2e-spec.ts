@@ -95,7 +95,7 @@ describe('Performance Tests', () => {
       const duration = Date.now() - start;
 
       // All should succeed
-      responses.forEach((r: any) => {
+      responses.forEach((r) => {
         expect(r.status).toBe(200);
       });
 

@@ -4,6 +4,7 @@ import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
 import { TestCacheModule } from './test-cache.module';
 import * as request from 'supertest';
+import { AuthBody, IdBody, bodyOf, httpServer } from './utils/http';
 import { PrismaService } from '../src/prisma/prisma.service';
 
 describe('API E2E Tests', () => {
@@ -44,7 +45,7 @@ describe('API E2E Tests', () => {
 
   describe('Health Check', () => {
     it('/health (GET)', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/health')
         .expect(200)
         .expect((res) => {
@@ -56,7 +57,7 @@ describe('API E2E Tests', () => {
 
   describe('Species Search', () => {
     it('/species/search with valid query', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/species/search?q=boa&limit=20')
         .expect(200)
         .expect((res) => {
@@ -67,17 +68,17 @@ describe('API E2E Tests', () => {
     });
 
     it('/species/search with empty query should return 400', () => {
-      return request(app.getHttpServer()).get('/species/search').expect(400);
+      return request(httpServer(app)).get('/species/search').expect(400);
     });
 
     it('/species/search with negative limit should return 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/species/search?q=test&limit=-1')
         .expect(400);
     });
 
     it('/species/search with negative offset should return 400', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/species/search?q=test&offset=-1')
         .expect(400);
     });
@@ -85,7 +86,7 @@ describe('API E2E Tests', () => {
 
   describe('Species Details', () => {
     it('/species/:id should return species details', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/species/1')
         .expect(200)
         .expect((res) => {
@@ -96,13 +97,13 @@ describe('API E2E Tests', () => {
     });
 
     it('/species/:id with invalid ID should return 404', () => {
-      return request(app.getHttpServer()).get('/species/999999').expect(404);
+      return request(httpServer(app)).get('/species/999999').expect(404);
     });
   });
 
   describe('Rate Limiting', () => {
     it('/species/search should return 200 or 429 under load', async () => {
-      const agent = request.agent(app.getHttpServer());
+      const agent = request.agent(httpServer(app));
       for (let i = 0; i < 6; i++) {
         const res = await agent.get('/species/search?q=test');
         expect([200, 429]).toContain(res.status);
@@ -112,13 +113,11 @@ describe('API E2E Tests', () => {
 
   describe('Error Handling', () => {
     it('/species/:id with non-numeric id should return 400 (DTO validation)', () => {
-      return request(app.getHttpServer())
-        .get('/species/invalid-path')
-        .expect(400);
+      return request(httpServer(app)).get('/species/invalid-path').expect(400);
     });
 
     it('/invalid-endpoint should return 404', () => {
-      return request(app.getHttpServer()).get('/invalid').expect(404);
+      return request(httpServer(app)).get('/invalid').expect(404);
     });
   });
 
@@ -127,7 +126,7 @@ describe('API E2E Tests', () => {
     const testPassword = 'password123';
 
     it('POST /auth/register should create a new user', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(httpServer(app))
         .post('/auth/register')
         .send({
           email: testEmail,
@@ -140,15 +139,18 @@ describe('API E2E Tests', () => {
 
       expect(response.body).toHaveProperty('accessToken');
       expect(response.body).toHaveProperty('user');
-      expect(response.body.user).toHaveProperty('email', testEmail);
-      expect(response.body.user).toHaveProperty('locale', 'fr');
+      expect(bodyOf<AuthBody>(response).user).toHaveProperty(
+        'email',
+        testEmail,
+      );
+      expect(bodyOf<AuthBody>(response).user).toHaveProperty('locale', 'fr');
 
-      authToken = response.body.accessToken;
-      userId = response.body.user.id;
+      authToken = bodyOf<AuthBody>(response).accessToken;
+      userId = bodyOf<AuthBody>(response).user.id;
     });
 
     it('POST /auth/register with existing email should return 409', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post('/auth/register')
         .send({
           email: testEmail,
@@ -160,7 +162,7 @@ describe('API E2E Tests', () => {
     });
 
     it('POST /auth/login with valid credentials', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(httpServer(app))
         .post('/auth/login')
         .send({
           email: testEmail,
@@ -173,7 +175,7 @@ describe('API E2E Tests', () => {
     });
 
     it('POST /auth/login with invalid credentials should return 401', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post('/auth/login')
         .send({
           email: testEmail,
@@ -183,7 +185,7 @@ describe('API E2E Tests', () => {
     });
 
     it('GET /auth/me with valid token', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/auth/me')
         .set('Authorization', `Bearer ${authToken}`)
         .expect(200)
@@ -193,13 +195,13 @@ describe('API E2E Tests', () => {
     });
 
     it('GET /auth/me without token should return 401', () => {
-      return request(app.getHttpServer()).get('/auth/me').expect(401);
+      return request(httpServer(app)).get('/auth/me').expect(401);
     });
   });
 
   describe('Animals Flow', () => {
     it('POST /users/me/animals should create first animal (free)', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(httpServer(app))
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${authToken}`)
         .send({
@@ -213,11 +215,11 @@ describe('API E2E Tests', () => {
       expect(response.body).toHaveProperty('name', 'Test Animal');
       expect(response.body).toHaveProperty('speciesId', 5221172);
 
-      animalId = response.body.id;
+      animalId = bodyOf<IdBody>(response).id;
     });
 
     it('POST /users/me/animals should reject second animal (not premium)', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${authToken}`)
         .send({
@@ -228,18 +230,21 @@ describe('API E2E Tests', () => {
     });
 
     it('GET /users/me/animals should return user animals', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(httpServer(app))
         .get('/users/me/animals')
         .set('Authorization', `Bearer ${authToken}`)
         .expect(200);
 
       expect(Array.isArray(response.body)).toBe(true);
       expect(response.body).toHaveLength(1);
-      expect(response.body[0]).toHaveProperty('name', 'Test Animal');
+      expect(bodyOf<unknown[]>(response)[0]).toHaveProperty(
+        'name',
+        'Test Animal',
+      );
     });
 
     it('GET /users/me/animals/:id should return animal details', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get(`/users/me/animals/${animalId}`)
         .set('Authorization', `Bearer ${authToken}`)
         .expect(200)
@@ -251,7 +256,7 @@ describe('API E2E Tests', () => {
     });
 
     it('PATCH /users/me/animals/:id should update animal', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .patch(`/users/me/animals/${animalId}`)
         .set('Authorization', `Bearer ${authToken}`)
         .send({
@@ -266,7 +271,7 @@ describe('API E2E Tests', () => {
     });
 
     it('GET /users/me/animals without auth should return 401', () => {
-      return request(app.getHttpServer()).get('/users/me/animals').expect(401);
+      return request(httpServer(app)).get('/users/me/animals').expect(401);
     });
   });
 
@@ -274,7 +279,7 @@ describe('API E2E Tests', () => {
     let routineId: string;
 
     it('POST /users/me/animals/:animalId/routines should create routine', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/routines`)
         .set('Authorization', `Bearer ${authToken}`)
         .send({
@@ -288,21 +293,21 @@ describe('API E2E Tests', () => {
       expect(response.body).toHaveProperty('type', 'nourrissage');
       expect(response.body).toHaveProperty('frequency', 'daily');
 
-      routineId = response.body.id;
+      routineId = bodyOf<IdBody>(response).id;
     });
 
     it('GET /users/me/animals/:animalId/routines should return routines', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/routines`)
         .set('Authorization', `Bearer ${authToken}`)
         .expect(200);
 
       expect(Array.isArray(response.body)).toBe(true);
-      expect(response.body.length).toBeGreaterThan(0);
+      expect(bodyOf<unknown[]>(response).length).toBeGreaterThan(0);
     });
 
     it('PATCH /users/me/animals/:animalId/routines/:id should update routine', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .patch(`/users/me/animals/${animalId}/routines/${routineId}`)
         .set('Authorization', `Bearer ${authToken}`)
         .send({
@@ -315,7 +320,7 @@ describe('API E2E Tests', () => {
     });
 
     it('DELETE /users/me/animals/:animalId/routines/:id should delete routine', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .delete(`/users/me/animals/${animalId}/routines/${routineId}`)
         .set('Authorization', `Bearer ${authToken}`)
         .expect(200);
@@ -326,7 +331,7 @@ describe('API E2E Tests', () => {
     let logId: string;
 
     it('POST /users/me/animals/:animalId/history should log action', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(httpServer(app))
         .post(`/users/me/animals/${animalId}/history`)
         .set('Authorization', `Bearer ${authToken}`)
         .send({
@@ -338,21 +343,21 @@ describe('API E2E Tests', () => {
       expect(response.body).toHaveProperty('id');
       expect(response.body).toHaveProperty('type', 'nourrissage');
 
-      logId = response.body.id;
+      logId = bodyOf<IdBody>(response).id;
     });
 
     it('GET /users/me/animals/:animalId/history should return history', async () => {
-      const response = await request(app.getHttpServer())
+      const response = await request(httpServer(app))
         .get(`/users/me/animals/${animalId}/history`)
         .set('Authorization', `Bearer ${authToken}`)
         .expect(200);
 
       expect(Array.isArray(response.body)).toBe(true);
-      expect(response.body.length).toBeGreaterThan(0);
+      expect(bodyOf<unknown[]>(response).length).toBeGreaterThan(0);
     });
 
     it('DELETE /users/me/animals/:animalId/history/:id should delete log', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .delete(`/users/me/animals/${animalId}/history/${logId}`)
         .set('Authorization', `Bearer ${authToken}`)
         .expect(200);
@@ -361,7 +366,7 @@ describe('API E2E Tests', () => {
 
   describe('Public Endpoints', () => {
     it('GET /species/:id/health should return health info', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/species/123/health')
         .expect(200)
         .expect((res) => {
@@ -371,7 +376,7 @@ describe('API E2E Tests', () => {
     });
 
     it('GET /species/:id/legislation should return legislation', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/species/123/legislation')
         .expect(200)
         .expect((res) => {
@@ -381,13 +386,13 @@ describe('API E2E Tests', () => {
     });
 
     it('GET /food/search should search food products', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/food/search?q=dog+food')
         .expect(200);
     });
 
     it('GET /equipment should return equipment', () => {
-      return request(app.getHttpServer())
+      return request(httpServer(app))
         .get('/equipment')
         .expect(200)
         .expect((res) => {

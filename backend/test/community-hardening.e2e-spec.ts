@@ -19,9 +19,15 @@ import { MailService } from '../src/mail/mail.service';
 import { MaintenanceService } from '../src/maintenance/maintenance.service';
 import { CommunityMediaService } from '../src/community/media/community-media.service';
 import { COMMUNITY_RULES_VERSION } from '../src/community/community.constants';
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any */
-// (supertest renvoie des corps `any` ; fichier de test.)
+import {
+  bodyOf,
+  AuthBody,
+  CommunityPostBody,
+  ErrorBody,
+  IdBody,
+  Page,
+  UrlBody,
+} from './utils/http';
 
 jest.setTimeout(180000);
 
@@ -34,6 +40,19 @@ interface Account {
   token: string;
   userId: string;
   handle?: string;
+}
+
+/** Courriel capturé via l'espion sur `MailService.send`. */
+interface MailMessage {
+  to: string;
+  subject: string;
+  text: string;
+}
+
+/** Élément (partiel) de `GET /community/me/reports` et de la file de modération. */
+interface ReportItem {
+  targetId: string;
+  resolvedAt: string | null;
 }
 
 /** JPEG 64 × 64 avec EXIF (appareil + GPS). */
@@ -90,7 +109,11 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
       })
       .expect(201);
     emails.push(email);
-    return { email, token: res.body.accessToken, userId: res.body.user.id };
+    return {
+      email,
+      token: bodyOf<AuthBody>(res).accessToken,
+      userId: bodyOf<AuthBody>(res).user.id,
+    };
   }
 
   /** Membre vérifié, profil activé ; `ageDays` : ancienneté du compte. */
@@ -122,8 +145,12 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
 
   async function guest(): Promise<Account> {
     const g = await http().post('/auth/guest').send({}).expect(201);
-    guestIds.push(g.body.user.id);
-    return { email: '', token: g.body.accessToken, userId: g.body.user.id };
+    guestIds.push(bodyOf<AuthBody>(g).user.id);
+    return {
+      email: '',
+      token: bodyOf<AuthBody>(g).accessToken,
+      userId: bodyOf<AuthBody>(g).user.id,
+    };
   }
 
   function activate(a: Account, handle: string) {
@@ -151,9 +178,9 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
     const p = await http()
       .post('/community/posts')
       .set(bearer(a))
-      .send({ type: 'PHOTO', body, mediaIds: [m.body.id] })
+      .send({ type: 'PHOTO', body, mediaIds: [bodyOf<IdBody>(m).id] })
       .expect(201);
-    return p.body;
+    return bodyOf<CommunityPostBody>(p);
   }
 
   function report(a: Account, postId: string, reason = 'SPAM') {
@@ -166,8 +193,8 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
   const keyOf = (u: string) => u.split('/').pop()!;
 
   function mailsTo(email: string, subject?: RegExp) {
-    return send.mock.calls
-      .map((c) => c[0] as { to: string; subject: string; text: string })
+    return (send.mock.calls as Array<[MailMessage]>)
+      .map((c) => c[0])
       .filter((m) => m.to === email && (!subject || subject.test(m.subject)));
   }
 
@@ -272,7 +299,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
       );
       for (const r of result) {
         expect([400, 413]).toContain(r.status);
-        expect(r.body.code).toBe('MEDIA_TOO_LARGE');
+        expect(bodyOf<ErrorBody>(r).code).toBe('MEDIA_TOO_LARGE');
       }
       // Avant correctif : RSS de 1,4 à 4 Go. Après : quelques Mo.
       expect(deltaMb).toBeLessThan(150);
@@ -289,14 +316,14 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .png()
         .toBuffer();
       const r1 = await upload(a, tooTall, 'x.png', 'image/png').expect(413);
-      expect(r1.body.code).toBe('MEDIA_TOO_LARGE');
+      expect(bodyOf<ErrorBody>(r1).code).toBe('MEDIA_TOO_LARGE');
       const strip = await sharp({
         create: { width: 4200, height: 200, channels: 3, background: '#000' },
       })
         .png()
         .toBuffer();
       const r2 = await upload(a, strip, 'x.png', 'image/png').expect(400);
-      expect(r2.body.code).toBe('MEDIA_INVALID_IMAGE');
+      expect(bodyOf<ErrorBody>(r2).code).toBe('MEDIA_INVALID_IMAGE');
     });
   });
 
@@ -331,7 +358,9 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .get('/community/moderation/queue?limit=50')
         .set(bearer(op))
         .expect(200);
-      const item = queue.body.items.find((i: any) => i.targetId === post.id);
+      const item = bodyOf<Page<ReportItem>>(queue).items.find(
+        (i) => i.targetId === post.id,
+      );
       expect(item).toMatchObject({ status: 'VISIBLE', openReports: 6 });
 
       // Trois membres établis : masquage automatique.
@@ -399,7 +428,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .set(bearer(bad))
         .send({ type: 'QUESTION', body: 'x?' })
         .expect(403);
-      expect(blocked.body.code).toBe('COMMUNITY_SUSPENDED');
+      expect(bodyOf<ErrorBody>(blocked).code).toBe('COMMUNITY_SUSPENDED');
 
       // Droit de partir : toujours permis pendant une suspension.
       await http().delete('/community/profile').set(bearer(bad)).expect(204);
@@ -407,11 +436,13 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .get('/community/profile')
         .set(bearer(bad))
         .expect(200);
-      expect(me.body.reasons).toContain('COMMUNITY_SUSPENDED');
+      expect(bodyOf<{ reasons: string[] }>(me).reasons).toContain(
+        'COMMUNITY_SUSPENDED',
+      );
       const again = await activate(bad, bad.handle!).expect(403);
-      expect(again.body.code).toBe('COMMUNITY_SUSPENDED');
+      expect(bodyOf<ErrorBody>(again).code).toBe('COMMUNITY_SUSPENDED');
       const other = await activate(bad, `${bad.handle!}x`).expect(403);
-      expect(other.body.code).toBe('COMMUNITY_SUSPENDED');
+      expect(bodyOf<ErrorBody>(other).code).toBe('COMMUNITY_SUSPENDED');
       expect(
         await prisma.communityProfile.count({ where: { userId: bad.userId } }),
       ).toBe(0);
@@ -444,12 +475,14 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
       const user = await prisma.user.findUnique({ where: { id: bad.userId } });
       expect(user!.communitySuspendedUntil).not.toBeNull();
       await http()
-        .post(`/community/me/decisions/${decision.body.id}/appeal`)
+        .post(`/community/me/decisions/${bodyOf<IdBody>(decision).id}/appeal`)
         .set(bearer(bad))
         .send({ text: 'This was not spam, please review.' })
         .expect(201);
       await http()
-        .post(`/community/moderation/appeals/${decision.body.id}/resolve`)
+        .post(
+          `/community/moderation/appeals/${bodyOf<IdBody>(decision).id}/resolve`,
+        )
         .set(bearer(op))
         .send({
           outcome: 'REVERSED',
@@ -488,9 +521,9 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
       const uploadSpy = jest.spyOn(app.get(CommunityMediaService), 'upload');
       const small = await exifJpeg();
       const r1 = await upload(g, small).expect(403);
-      expect(r1.body.code).toBe('GUEST_ACCOUNT');
+      expect(bodyOf<ErrorBody>(r1).code).toBe('GUEST_ACCOUNT');
       const r2 = await upload(unverified, small).expect(403);
-      expect(r2.body.code).toBe('EMAIL_NOT_VERIFIED');
+      expect(bodyOf<ErrorBody>(r2).code).toBe('EMAIL_NOT_VERIFIED');
 
       const big = Buffer.alloc(20 * 1024 * 1024, 1);
       const { result, deltaMb } = await peakRssDeltaMb(() =>
@@ -515,11 +548,13 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
           Buffer.alloc(64 * 1024, 7),
         ]);
         const res = await upload(a, big).expect(413);
-        expect(res.body.code).toBe('MEDIA_TOO_LARGE');
+        expect(bodyOf<ErrorBody>(res).code).toBe('MEDIA_TOO_LARGE');
         // Même un corps qui n'est pas une image : coupé au plafond, avant toute analyse.
         const html = Buffer.alloc(64 * 1024, 0x3c);
         expect(
-          (await upload(a, html, 'x.png', 'image/png').expect(413)).body.code,
+          bodyOf<ErrorBody>(
+            await upload(a, html, 'x.png', 'image/png').expect(413),
+          ).code,
         ).toBe('MEDIA_TOO_LARGE');
       } finally {
         delete process.env.MEDIA_MAX_BYTES;
@@ -633,7 +668,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
       expect(visible.headers['cache-control']).toBe('public, max-age=86400');
       expect(visible.headers['x-content-type-options']).toBe('nosniff');
       // J. métadonnées supprimées.
-      const meta = await sharp(visible.body).metadata();
+      const meta = await sharp(bodyOf<Buffer>(visible)).metadata();
       expect(meta.format).toBe('webp');
       expect(meta.exif).toBeUndefined();
 
@@ -697,16 +732,16 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
       ]);
       const r = await upload(a, poly).expect(201);
       const m = await http()
-        .get(`/community/media/${keyOf(r.body.url)}`)
+        .get(`/community/media/${keyOf(bodyOf<UrlBody>(r).url)}`)
         .expect(200);
-      expect(m.body.includes(Buffer.from('<script>'))).toBe(false);
+      expect(bodyOf<Buffer>(m).includes(Buffer.from('<script>'))).toBe(false);
       const svg = await upload(
         a,
         Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"/>'),
         'x.svg',
         'image/svg+xml',
       ).expect(415);
-      expect(svg.body.code).toBe('MEDIA_UNSUPPORTED_TYPE');
+      expect(bodyOf<ErrorBody>(svg).code).toBe('MEDIA_UNSUPPORTED_TYPE');
       await http().get('/community/media/..%2f..%2fpackage.json').expect(404);
     });
   });
@@ -731,9 +766,11 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .get('/community/me/reports')
         .set(bearer(reporter))
         .expect(200);
-      expect(mine.body.items).toHaveLength(2);
+      expect(bodyOf<Page<ReportItem>>(mine).items).toHaveLength(2);
       expect(
-        mine.body.items.find((i: any) => i.targetId === post.id),
+        bodyOf<Page<ReportItem>>(mine).items.find(
+          (i) => i.targetId === post.id,
+        ),
       ).toMatchObject({
         targetType: 'POST',
         reason: 'HATE',
@@ -757,13 +794,17 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .get('/community/me/reports')
         .set(bearer(reporter))
         .expect(200);
-      const hidden = mine.body.items.find((i: any) => i.targetId === post.id);
+      const hidden = bodyOf<Page<ReportItem>>(mine).items.find(
+        (i) => i.targetId === post.id,
+      );
       expect(hidden).toMatchObject({
         status: 'ACTIONED',
         decision: { action: 'HIDE', contentRemoved: true, reason: 'HATE' },
       });
-      expect(hidden.resolvedAt).not.toBeNull();
-      const kept = mine.body.items.find((i: any) => i.targetId === other.id);
+      expect(hidden!.resolvedAt).not.toBeNull();
+      const kept = bodyOf<Page<ReportItem>>(mine).items.find(
+        (i) => i.targetId === other.id,
+      );
       expect(kept).toMatchObject({
         status: 'DISMISSED',
         decision: { action: 'DISMISS', contentRemoved: false },
@@ -790,7 +831,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .get('/community/me/reports')
         .set(bearer(g))
         .expect(200);
-      expect(guestReports.body.items[0]).toMatchObject({
+      expect(bodyOf<Page<ReportItem>>(guestReports).items[0]).toMatchObject({
         status: 'ACTIONED',
         decision: { action: 'HIDE' },
       });
@@ -849,7 +890,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
           .set(bearer(op))
           .send({ reason: 'SPAM', statement: 'Statement of reasons' })
           .expect(200);
-        decisionId = res.body.id;
+        decisionId = bodyOf<IdBody>(res).id;
       } finally {
         send.mockResolvedValue({ sent: true, simulated: true, attempts: 1 });
       }
@@ -905,7 +946,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .send({ reason: 'SPAM', statement: 'Statement of reasons' })
         .expect(200);
       await http()
-        .post(`/community/me/decisions/${hide.body.id}/appeal`)
+        .post(`/community/me/decisions/${bodyOf<IdBody>(hide).id}/appeal`)
         .set(bearer(au))
         .send({ text: 'Please review my post' })
         .expect(201);
@@ -913,7 +954,9 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
       const res = await Promise.all(
         [0, 1, 2, 3].map(() =>
           http()
-            .post(`/community/moderation/appeals/${hide.body.id}/resolve`)
+            .post(
+              `/community/moderation/appeals/${bodyOf<IdBody>(hide).id}/resolve`,
+            )
             .set(bearer(op))
             .send({ outcome: 'REVERSED', statement: 'Reversed after review' }),
         ),
@@ -936,7 +979,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
       const ap = await Promise.all(
         [0, 1, 2].map(() =>
           http()
-            .post(`/community/me/decisions/${hide2.body.id}/appeal`)
+            .post(`/community/me/decisions/${bodyOf<IdBody>(hide2).id}/appeal`)
             .set(bearer(au))
             .send({ text: 'Please review again' }),
         ),
@@ -994,7 +1037,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
           data: { emailVerifiedAt: new Date() },
         });
         const res = await activate(a, h).expect(400);
-        expect(res.body.code).toBe('HANDLE_RESERVED');
+        expect(bodyOf<ErrorBody>(res).code).toBe('HANDLE_RESERVED');
       },
     );
 
@@ -1012,13 +1055,13 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .set(bearer(b))
         .send({ handle: old.toUpperCase() })
         .expect(409);
-      expect(take.body.code).toBe('HANDLE_TAKEN');
+      expect(bodyOf<ErrorBody>(take).code).toBe('HANDLE_TAKEN');
       const c = await register('hnc');
       await prisma.user.update({
         where: { id: c.userId },
         data: { emailVerifiedAt: new Date() },
       });
-      expect((await activate(c, old).expect(409)).body.code).toBe(
+      expect(bodyOf<ErrorBody>(await activate(c, old).expect(409)).code).toBe(
         'HANDLE_TAKEN',
       );
 
@@ -1036,7 +1079,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
 
       // Départ de la communauté : réservé aussi ; expiré : libre.
       await http().delete('/community/profile').set(bearer(a)).expect(204);
-      expect((await activate(c, old).expect(409)).body.code).toBe(
+      expect(bodyOf<ErrorBody>(await activate(c, old).expect(409)).code).toBe(
         'HANDLE_TAKEN',
       );
       await prisma.communityHandleHold.update({
@@ -1066,7 +1109,7 @@ describe('Communauté : durcissement (revue de sécurité)', () => {
         .set(bearer(b))
         .send({ handle: a.handle })
         .expect(409);
-      expect(res.body.code).toBe('HANDLE_TAKEN');
+      expect(bodyOf<ErrorBody>(res).code).toBe('HANDLE_TAKEN');
       await prisma.communityHandleHold.deleteMany({
         where: { handleKey: a.handle!.toLowerCase() },
       });

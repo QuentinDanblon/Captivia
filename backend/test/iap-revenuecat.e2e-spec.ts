@@ -1,15 +1,25 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return */
-// supertest renvoie des corps `any` : règles unsafe-* désactivées pour ce fichier de test.
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import * as request from 'supertest';
+import { AuthBody, ErrorBody, bodyOf, httpServer } from './utils/http';
 import { AppModule } from '../src/app.module';
 import { CacheModule } from '../src/cache/cache.module';
 import { TestCacheModule } from './test-cache.module';
 import { PrismaService } from '../src/prisma/prisma.service';
 
 /** W6-08 — Webhook RevenueCat (achats intégrés App Store / Google Play). */
+/** Réponse (partielle) de `GET /users/me/subscription` consultée par ces tests. */
+interface SubscriptionStatus {
+  premium: boolean;
+  status?: string;
+  manageUrl?: string | null;
+}
+/** Réponse du webhook RevenueCat. */
+interface WebhookOutcome {
+  outcome: string;
+}
+
 describe('IAP RevenueCat webhook (W6-08)', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -19,7 +29,7 @@ describe('IAP RevenueCat webhook (W6-08)', () => {
   const DAY = 24 * 3600 * 1000;
 
   const register = async (email: string) => {
-    const res = await request(app.getHttpServer())
+    const res = await request(httpServer(app))
       .post('/auth/register')
       .send({
         email,
@@ -29,13 +39,13 @@ describe('IAP RevenueCat webhook (W6-08)', () => {
       })
       .expect(201);
     return {
-      token: res.body.accessToken as string,
-      id: res.body.user.id as string,
+      token: bodyOf<AuthBody>(res).accessToken,
+      id: bodyOf<AuthBody>(res).user.id,
     };
   };
 
   const send = (event: Record<string, unknown>, auth = `Bearer ${SECRET}`) =>
-    request(app.getHttpServer())
+    request(httpServer(app))
       .post('/webhooks/revenuecat')
       .set('Authorization', auth)
       .send({ api_version: '1.0', event });
@@ -61,12 +71,12 @@ describe('IAP RevenueCat webhook (W6-08)', () => {
   });
 
   const status = async (token: string) =>
-    (
-      await request(app.getHttpServer())
+    bodyOf<SubscriptionStatus>(
+      await request(httpServer(app))
         .get('/users/me/subscription')
         .set('Authorization', `Bearer ${token}`)
-        .expect(200)
-    ).body;
+        .expect(200),
+    );
 
   beforeAll(async () => {
     process.env.REVENUECAT_WEBHOOK_SECRET = SECRET;
@@ -97,7 +107,7 @@ describe('IAP RevenueCat webhook (W6-08)', () => {
 
   it('401 sans secret ou avec un mauvais secret', async () => {
     const u = await register(`iap-auth-${stamp}@captivia.com`);
-    await request(app.getHttpServer())
+    await request(httpServer(app))
       .post('/webhooks/revenuecat')
       .send({ event: rcEvent(u.id, 'INITIAL_PURCHASE') })
       .expect(401);
@@ -118,7 +128,7 @@ describe('IAP RevenueCat webhook (W6-08)', () => {
 
     const purchase = rcEvent(u.id, 'INITIAL_PURCHASE');
     const r1 = await send(purchase).expect(200);
-    expect(r1.body.outcome).toBe('applied');
+    expect(bodyOf<WebhookOutcome>(r1).outcome).toBe('applied');
     const s1 = await status(u.token);
     expect(s1).toMatchObject({
       premium: true,
@@ -129,14 +139,14 @@ describe('IAP RevenueCat webhook (W6-08)', () => {
       willRenew: true,
       manageUrl: 'https://apps.apple.com/account/subscriptions',
     });
-    const me = await request(app.getHttpServer())
+    const me = await request(httpServer(app))
       .get('/auth/me')
       .set('Authorization', `Bearer ${u.token}`)
       .expect(200);
-    expect(me.body.isPremium).toBe(true);
+    expect(bodyOf<{ isPremium: boolean }>(me).isPremium).toBe(true);
 
     const r2 = await send(purchase).expect(200);
-    expect(r2.body.outcome).toBe('duplicate');
+    expect(bodyOf<WebhookOutcome>(r2).outcome).toBe('duplicate');
     expect(
       await prisma.paymentEvent.count({
         where: { eventId: purchase.id as string },
@@ -193,14 +203,14 @@ describe('IAP RevenueCat webhook (W6-08)', () => {
         event_timestamp_ms: Date.now() - 3600_000,
       }),
     ).expect(200);
-    expect(stale.body.outcome).toBe('ignored_stale');
+    expect(bodyOf<WebhookOutcome>(stale).outcome).toBe('ignored_stale');
     expect((await status(u.token)).premium).toBe(true);
   });
 
   it('app_user_id inconnu → 200 sans création', async () => {
     const ghost = randomUUID();
     const res = await send(rcEvent(ghost, 'INITIAL_PURCHASE')).expect(200);
-    expect(res.body.outcome).toBe('ignored_unknown_user');
+    expect(bodyOf<WebhookOutcome>(res).outcome).toBe('ignored_unknown_user');
     expect(
       await prisma.subscription.count({
         where: { originalTransactionId: `otx-${ghost}` },
@@ -226,7 +236,7 @@ describe('IAP RevenueCat webhook (W6-08)', () => {
   it('la limite « 1 animal gratuit » tombe pour un abonné store', async () => {
     const u = await register(`iap-limit-${stamp}@captivia.com`);
     const create = (name: string) =>
-      request(app.getHttpServer())
+      request(httpServer(app))
         .post('/users/me/animals')
         .set('Authorization', `Bearer ${u.token}`)
         .send({ speciesId: 5221172, name });
@@ -238,11 +248,11 @@ describe('IAP RevenueCat webhook (W6-08)', () => {
 
   it('POST /users/me/subscription reste 501 (abonnement uniquement dans l’app mobile)', async () => {
     const u = await register(`iap-web-${stamp}@captivia.com`);
-    const res = await request(app.getHttpServer())
+    const res = await request(httpServer(app))
       .post('/users/me/subscription')
       .set('Authorization', `Bearer ${u.token}`)
       .send({ plan: 'monthly' })
       .expect(501);
-    expect(res.body.message).toContain('application mobile');
+    expect(bodyOf<ErrorBody>(res).message).toContain('application mobile');
   });
 });
