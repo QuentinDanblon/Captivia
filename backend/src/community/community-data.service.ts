@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { holdHandle } from './handle-hold';
 import { CommunityMediaService } from './media/community-media.service';
 
 type Db = Prisma.TransactionClient | PrismaService;
@@ -36,6 +37,8 @@ export class CommunityDataService {
    * `includeIncomingBlocks` : supprimer aussi les blocages posés par d'autres membres sur ce compte
    * (suppression du compte : oui ; simple départ de la communauté : non, ils appartiennent à leurs
    * auteurs).
+   * Le pseudo est réservé 60 jours (anti-usurpation) : à son titulaire après un départ, à
+   * personne après la suppression du compte (`userId` passe à NULL avec le compte).
    */
   async deleteRows(
     db: Db,
@@ -51,6 +54,11 @@ export class CommunityDataService {
     });
     await db.communityComment.deleteMany({ where: { authorId: userId } });
     await db.communityPost.deleteMany({ where: { authorId: userId } });
+    const profile = await db.communityProfile.findUnique({
+      where: { userId },
+      select: { handleKey: true },
+    });
+    if (profile) await holdHandle(db, profile.handleKey, userId);
     await db.communityProfile.deleteMany({ where: { userId } });
     await db.communityMedia.updateMany({
       where: { ownerId: userId },
@@ -81,6 +89,7 @@ export class CommunityDataService {
       blocks,
       decisions,
       media,
+      suspension,
     ] = await Promise.all([
       this.prisma.communityProfile.findUnique({
         where: { userId },
@@ -89,7 +98,6 @@ export class CommunityDataService {
           rulesVersion: true,
           rulesAcceptedAt: true,
           ageConfirmedAt: true,
-          suspendedUntil: true,
           createdAt: true,
           updatedAt: true,
           avatar: { select: { key: true } },
@@ -187,6 +195,10 @@ export class CommunityDataService {
           createdAt: true,
         },
       }),
+      this.prisma.user.findUnique({
+        where: { id: userId },
+        select: { communitySuspendedUntil: true },
+      }),
     ]);
 
     const url = (key: string) => this.media.url(key);
@@ -198,7 +210,7 @@ export class CommunityDataService {
             rulesVersion: profile.rulesVersion,
             rulesAcceptedAt: profile.rulesAcceptedAt,
             ageConfirmedAt: profile.ageConfirmedAt,
-            suspendedUntil: profile.suspendedUntil,
+            suspendedUntil: suspension?.communitySuspendedUntil ?? null,
             createdAt: profile.createdAt,
             updatedAt: profile.updatedAt,
           }
@@ -214,6 +226,7 @@ export class CommunityDataService {
       comments,
       reactions,
       reportsFiled: reports,
+      suspendedUntil: suspension?.communitySuspendedUntil ?? null,
       blocks: blocks.map((b) => ({
         handle: b.blocked.communityProfile?.handle ?? null,
         createdAt: b.createdAt,

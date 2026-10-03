@@ -251,15 +251,6 @@ export class CommunityPostsService {
 
   async createPost(userId: string, dto: CreatePostDto): Promise<PostView> {
     const actor = await this.access.requirePublisher(userId);
-    await this.access.enforceRate(
-      (since) =>
-        this.prisma.communityPost.count({
-          where: { authorId: userId, createdAt: { gt: since } },
-        }),
-      postsPerHour(),
-      HOUR_MS,
-      'posts',
-    );
 
     const body = cleanText(dto.body);
     if (dto.type === CommunityPostType.QUESTION && !body) {
@@ -304,31 +295,43 @@ export class CommunityPostsService {
       speciesCategory ??= toCommunityCategory(animal.speciesProfile.category);
     }
 
-    const post = await this.prisma.$transaction(async (tx) => {
-      const created = await tx.communityPost.create({
-        data: {
-          authorId: userId,
-          type: dto.type,
-          body,
-          speciesCategory,
-          animalId: dto.animalId ?? null,
-        },
-        select: { id: true },
-      });
-      for (const [position, id] of mediaIds.entries()) {
-        const res = await tx.communityMedia.updateMany({
-          where: { id, ownerId: userId, postId: null },
-          data: { postId: created.id, position },
+    // Limite par compte : comptage et insertion sous verrou consultatif du compte (des requêtes
+    // parallèles ne la dépassent pas).
+    const post = await this.access.withRateLimit(
+      userId,
+      'posts',
+      (tx, since) =>
+        tx.communityPost.count({
+          where: { authorId: userId, createdAt: { gt: since } },
+        }),
+      postsPerHour(),
+      HOUR_MS,
+      async (tx) => {
+        const created = await tx.communityPost.create({
+          data: {
+            authorId: userId,
+            type: dto.type,
+            body,
+            speciesCategory,
+            animalId: dto.animalId ?? null,
+          },
+          select: { id: true },
         });
-        if (res.count !== 1) {
-          throw badRequest(
-            CommunityErrorCode.INVALID_MEDIA,
-            'Unknown or already used image.',
-          );
+        for (const [position, id] of mediaIds.entries()) {
+          const res = await tx.communityMedia.updateMany({
+            where: { id, ownerId: userId, postId: null },
+            data: { postId: created.id, position },
+          });
+          if (res.count !== 1) {
+            throw badRequest(
+              CommunityErrorCode.INVALID_MEDIA,
+              'Unknown or already used image.',
+            );
+          }
         }
-      }
-      return created;
-    });
+        return created;
+      },
+    );
     return this.presenter.post(
       await this.readablePost(userId, post.id),
       userId,
@@ -405,15 +408,6 @@ export class CommunityPostsService {
   ): Promise<CommentView> {
     const actor = await this.access.requirePublisher(userId);
     await this.readableVisiblePost(userId, postId);
-    await this.access.enforceRate(
-      (since) =>
-        this.prisma.communityComment.count({
-          where: { authorId: userId, createdAt: { gt: since } },
-        }),
-      commentsPerMinute(),
-      MINUTE_MS,
-      'comments',
-    );
     const body = cleanText(dto.body);
     if (!body) {
       throw badRequest('COMMUNITY_BODY_REQUIRED', 'A comment needs a text.');
@@ -437,10 +431,26 @@ export class CommunityPostsService {
         );
       }
     }
-    const comment = await this.prisma.communityComment.create({
-      data: { postId, authorId: userId, parentId: dto.parentId ?? null, body },
-      select: commentSelect,
-    });
+    const comment = await this.access.withRateLimit(
+      userId,
+      'comments',
+      (tx, since) =>
+        tx.communityComment.count({
+          where: { authorId: userId, createdAt: { gt: since } },
+        }),
+      commentsPerMinute(),
+      MINUTE_MS,
+      (tx) =>
+        tx.communityComment.create({
+          data: {
+            postId,
+            authorId: userId,
+            parentId: dto.parentId ?? null,
+            body,
+          },
+          select: commentSelect,
+        }),
+    );
     return this.presenter.comment(comment, userId, null);
   }
 
