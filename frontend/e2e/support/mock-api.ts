@@ -226,6 +226,20 @@ export async function installMockApi(page: Page): Promise<MockApi> {
       return json(route, 200, { enabled: false, showHealth: false, slug: null, url: null });
     }
 
+    // --- Outils (agenda, paramètres, abonnement, magasin) : états par défaut d'un compte gratuit ---
+    if (method === 'GET' && pathname === '/users/me/agenda/calendar-token') return json(route, 200, { active: false });
+    if (method === 'GET' && pathname === '/users/me/subscription') return json(route, 200, { premium: false, isPremium: false });
+    if (method === 'GET' && pathname === '/users/me/notification-preferences') {
+      return json(route, 200, { types: {}, typeSchedules: {}, schedule: { start: '08:00', end: '22:00' }, snooze: 15, deliveryChannel: 'push' });
+    }
+    if (method === 'GET' && pathname === '/notifications/vapid-public-key') return json(route, 200, { publicKey: '' });
+    if (method === 'GET' && pathname === '/users/me/grade') {
+      return json(route, 200, { points: 0, grade: 'bronze', nextGrade: 'silver', pointsInCurrent: 0, pointsNeededForNext: 500, progressPercent: 0 });
+    }
+    if (method === 'GET' && pathname === '/users/me/notification-events') return json(route, 200, []);
+    // Aucune boutique partenaire référencée (seed de production vide).
+    if (method === 'GET' && pathname === '/affiliate-stores') return json(route, 200, []);
+
     // --- Compte (RGPD) ---
     if (method === 'GET' && pathname === '/users/me/export') {
       return json(route, 200, fixture('account-export'), {
