@@ -1,5 +1,6 @@
 # Netlify — frontend Next.js Captivia (monorepo : l'app est dans frontend/).
-# Le runtime Next.js de Netlify (OpenNext) est détecté automatiquement.
+# Le runtime Next.js de Netlify (OpenNext) est déclaré explicitement ci-dessous : sans lui,
+# Netlify publie le dossier .next brut (fichiers statiques, aucune page servie → 404 partout).
 # Le site est relié à GitHub (DEP-01) : Netlify construit et publie la production à
 # chaque push sur main, et des « deploy previews » pour chaque pull request.
 # Aucun workflow GitHub ne déploie plus le front (voir docs/DEPLOY.md).
@@ -7,6 +8,9 @@
   base = "frontend"
   command = "npm run build"
   publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [build.environment]
   # URL publique du site (canonical, hreflang, sitemap). À remplacer par le domaine définitif.

@@ -43,8 +43,13 @@ const SECURITY_HEADERS = securityHeaders({
  */
 const PROJECT_ROOT = path.resolve(__dirname);
 
+/**
+ * `standalone` sert l'image Docker (frontend/Dockerfile). Sur Netlify (variable `NETLIFY` définie
+ * pendant le build), l'adaptateur Next.js gère lui-même la sortie : avec `standalone`, il ne
+ * s'active pas et Netlify publie le dossier .next brut (404 sur toutes les pages).
+ */
 const webConfig: NextConfig = {
-  output: 'standalone',
+  output: process.env.NETLIFY ? undefined : 'standalone',
   turbopack: { root: PROJECT_ROOT },
   outputFileTracingRoot: PROJECT_ROOT,
   reactCompiler: true,
