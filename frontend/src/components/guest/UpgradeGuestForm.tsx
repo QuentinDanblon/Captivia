@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { ApiError } from '@/lib/api';
 import { upgradeGuestAccount } from '@/lib/guest';
 import { Button, Field } from '@/components/ui';
+import { NewTabPageLink } from '@/components/NewTabPageLink';
 
 const PASSWORD_MIN = 10;
 const PASSWORD_MAX = 128;
@@ -119,14 +119,14 @@ export function UpgradeGuestForm({ onUpgraded }: UpgradeGuestFormProps) {
           <span>
             {t.rich('auth.acceptTermsLabel', {
               terms: (chunks) => (
-                <Link href="/cgu" target="_blank" rel="noopener noreferrer" className="text-accent-text underline">
+                <NewTabPageLink href="/cgu" className="text-accent-text underline">
                   {chunks}
-                </Link>
+                </NewTabPageLink>
               ),
               privacy: (chunks) => (
-                <Link href="/confidentialite" target="_blank" rel="noopener noreferrer" className="text-accent-text underline">
+                <NewTabPageLink href="/confidentialite" className="text-accent-text underline">
                   {chunks}
-                </Link>
+                </NewTabPageLink>
               ),
             })}
           </span>

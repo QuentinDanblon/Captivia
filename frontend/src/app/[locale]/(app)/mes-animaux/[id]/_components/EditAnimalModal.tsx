@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { api, type Animal } from '@/lib/api';
 import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
+import { usePhotoPicker } from '@/components/usePhotoPicker';
 import { Button, Field, Modal, cx } from '@/components/ui';
 import { FormError } from './parts';
 
@@ -29,7 +30,6 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
   const [editMotherId, setEditMotherId] = useState('');
   const [editGroupName, setEditGroupName] = useState('');
   const [candidateAnimals, setCandidateAnimals] = useState<Animal[]>([]);
-  const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setEditAnimalName(animal.name);
@@ -49,10 +49,7 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
     }
   }, [animal, token]);
 
-  const handleProfilePhotoFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    e.target.value = '';
-    if (!file) return;
+  const handleProfilePhotoFile = async (file: Blob) => {
     try {
       setEditAnimalProfilePhotoUrl(await compressImageToDataUrl(file));
       setEditAnimalError('');
@@ -60,6 +57,8 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
       setEditAnimalError(isImageTooLargeError(err) ? t('animals.photoTooLarge') : t('animals.errorAdding'));
     }
   };
+  // Web : sélecteur de fichier ; app native : appareil photo ou galerie (W6-05).
+  const { inputRef: photoInputRef, open: openPhotoPicker, onChange: onPhotoInputChange } = usePhotoPicker({ onFile: handleProfilePhotoFile, onError: setEditAnimalError });
 
   const handleSaveEditAnimal = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -169,8 +168,8 @@ export default function EditAnimalModal({ animal, token, onClose, onRefresh }: P
               // eslint-disable-next-line @next/next/no-img-element -- aperçu local (data URL ou adresse saisie)
               <img src={editAnimalProfilePhotoUrl} alt="" className="size-14 rounded-control border border-line object-cover" />
             ) : null}
-            <input ref={fileRef} type="file" accept="image/*" className="hidden" tabIndex={-1} aria-hidden onChange={handleProfilePhotoFile} />
-            <Button variant="secondary" size="sm" onClick={() => fileRef.current?.click()}>
+            <input ref={photoInputRef} type="file" accept="image/*" className="hidden" tabIndex={-1} aria-hidden onChange={onPhotoInputChange} />
+            <Button variant="secondary" size="sm" onClick={() => void openPhotoPicker()}>
               {t('animals.choosePhotoFile')}
             </Button>
           </div>

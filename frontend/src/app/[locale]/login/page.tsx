@@ -8,7 +8,7 @@ import { api, ApiError } from '@/lib/api';
 import { GUEST_UPGRADE_PATH, isGuestUser } from '@/lib/guest';
 import { useStartGuest } from '@/components/guest/useStartGuest';
 import { AuthFrame, OrDivider } from '@/components/auth/AuthFrame';
-import { Alert, Button, Field, buttonClasses } from '@/components/ui';
+import { Alert, Button, ExternalLink, Field, buttonClasses } from '@/components/ui';
 
 export default function LoginPage() {
   const t = useTranslations();
@@ -141,9 +141,9 @@ export default function LoginPage() {
         {process.env.NODE_ENV === 'development' && mobileLink && (
           <div className="grid gap-1 rounded-card border border-dashed border-line-strong p-4 text-ui text-ink-2">
             <strong className="text-ink">Lien pour tester sur votre téléphone (même Wi‑Fi)</strong>
-            <a href={mobileLink} target="_blank" rel="noopener noreferrer" className="font-mono text-meta break-all text-accent-text">
+            <ExternalLink href={mobileLink} className="font-mono text-meta break-all text-accent-text">
               {mobileLink}
-            </a>
+            </ExternalLink>
             <p className="m-0">Gardez le backend lancé sur ce PC (port 3001).</p>
           </div>
         )}

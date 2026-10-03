@@ -7,7 +7,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { api, type SubscriptionStatusView } from '@/lib/api';
 import { isGuestUser } from '@/lib/guest';
 import { GuestFeatureNote } from '@/components/guest/GuestFeatureNote';
-import { Alert, Badge, Card, PremiumBadge, Skeleton, SkeletonGroup, buttonClasses, cx } from '@/components/ui';
+import { Alert, Badge, Card, ExternalLink, PremiumBadge, Skeleton, SkeletonGroup, buttonClasses, cx } from '@/components/ui';
 import { SettingsHeader } from '../_components/SettingsHeader';
 
 /** Lignes du comparatif : ce que chaque formule comprend (API : limite d'animaux, page publique, reproduction). */
@@ -155,15 +155,13 @@ export default function AbonnementPage() {
   let premiumFooter: ReactNode;
   if (premium) {
     premiumFooter = status?.manageUrl ? (
-      <a
+      <ExternalLink
         href={status.manageUrl}
-        target="_blank"
-        rel="noopener noreferrer"
         className={buttonClasses({ variant: 'secondary', fullWidth: true })}
       >
         {t('subscription.manage')}
         <span className="sr-only"> {t('plans.newTab')}</span>
-      </a>
+      </ExternalLink>
     ) : null;
   } else if (guest) {
     // Invité : l'achat exige d'abord un compte (l'API répond 403 GUEST_ACCOUNT).

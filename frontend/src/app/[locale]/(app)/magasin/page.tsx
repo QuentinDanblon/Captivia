@@ -10,6 +10,7 @@ import {
   Badge,
   Card,
   EmptyState,
+  ExternalLink,
   Field,
   SectionHeader,
   Skeleton,
@@ -149,10 +150,9 @@ export default function MagasinPage() {
                     </div>
                   ) : null}
                   {href !== '#' ? (
-                    <a
+                    <ExternalLink
                       href={href}
-                      target="_blank"
-                      rel="sponsored noopener noreferrer"
+                      rel="sponsored"
                       className={buttonClasses({ variant: 'secondary', className: 'self-start' })}
                     >
                       {t('store.visitStore')}
@@ -160,7 +160,7 @@ export default function MagasinPage() {
                         <path d="M6.5 3.5h-3v9h9v-3M9.5 3.5h3v3M12.5 3.5 7.5 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                       <span className="sr-only">{t('plans.newTab')}</span>
-                    </a>
+                    </ExternalLink>
                   ) : null}
                 </Card>
               );

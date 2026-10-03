@@ -6,7 +6,7 @@
  */
 import type { ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
-import { Card, cx } from '@/components/ui';
+import { Card, ExternalLink, cx } from '@/components/ui';
 import type { SourceRef } from './types';
 
 type T = ReturnType<typeof useTranslations>;
@@ -113,9 +113,9 @@ export function SourceNote({ sources }: { sources: Array<SourceRef | string> | n
       <span>{t('species.sources')}</span>
       {list.map((s, i) =>
         s.url ? (
-          <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="break-all text-accent-text underline decoration-1 underline-offset-2">
+          <ExternalLink key={i} href={s.url} className="break-all text-accent-text underline decoration-1 underline-offset-2">
             {s.title || hostOf(s.url) || s.url}
-          </a>
+          </ExternalLink>
         ) : (
           <span key={i}>{s.title}</span>
         ),

@@ -1642,5 +1642,24 @@
     "photoBy": "Foto",
     "more": "{count, plural, one {Mostra l'ultima scheda} other {Mostra altre # schede}}",
     "moreFailed": "Impossibile caricare altri risultati. Riprova."
+  },
+  "photoPicker": {
+    "header": "Foto del tuo animale",
+    "camera": "Scatta una foto",
+    "library": "Scegli dalla galleria",
+    "cancel": "Annulla",
+    "accessDenied": "Captivia non ha accesso alla fotocamera o alle tue foto. Consenti l’accesso nelle impostazioni del telefono, poi riprova.",
+    "error": "Impossibile caricare questa foto. Prova con un’altra immagine."
+  },
+  "nativeReminders": {
+    "body": "{type}: {title}",
+    "channelName": "Promemoria delle cure",
+    "channelDescription": "Pasti, trattamenti, vaccini e visite veterinarie dei tuoi animali, all’ora giusta.",
+    "blocked": "Le notifiche sono bloccate per Captivia. Consentile nelle impostazioni del telefono: i tuoi promemoria verranno programmati appena torni nell’app.",
+    "onText": "{count, plural, =0 {Niente da ricordare nei prossimi 30 giorni. Appena è prevista una cura, questo telefono ti avvisa, anche senza connessione.} one {# promemoria programmato su questo telefono per i prossimi 30 giorni. Suonerà anche senza connessione.} other {# promemoria programmati su questo telefono per i prossimi 30 giorni. Suoneranno anche senza connessione.}}",
+    "offText": "Pasti, trattamenti, vaccini e visite: questo telefono te li ricorda all’ora giusta, anche senza connessione.",
+    "enable": "Attiva i promemoria su questo telefono",
+    "disable": "Disattiva i promemoria su questo telefono",
+    "syncError": "Impossibile caricare le tue cure in questo momento. Controlla la connessione e riprova."
   }
 }

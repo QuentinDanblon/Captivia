@@ -8,6 +8,7 @@ import { useRouter } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { api, ApiError, type Animal, type Medication, type VetAppointment, type AnimalMeasurement, type Vaccination, type BreedingRecord } from '@/lib/api';
 import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
+import { usePhotoPicker } from '@/components/usePhotoPicker';
 import { Link } from '@/i18n/navigation';
 import { currentMedications } from '@/lib/carnet';
 import {
@@ -126,7 +127,6 @@ export default function AnimalDetailPage({
   const [showEditAnimalModal, setShowEditAnimalModal] = useState(false);
   const [offspring, setOffspring] = useState<Animal[]>([]);
   const [avatarPhotoUploading, setAvatarPhotoUploading] = useState(false);
-  const avatarPhotoInputRef = useRef<HTMLInputElement>(null);
   // Données des sections (chargées ici, affichées/éditées par les composants dédiés)
   const [medications, setMedications] = useState<Medication[]>([]);
   const [medicationsLoading, setMedicationsLoading] = useState(true);
@@ -437,16 +437,8 @@ export default function AnimalDetailPage({
     }
   };
 
-  const handleAvatarPhotoClick = () => {
-    avatarPhotoInputRef.current?.click();
-  };
-
-  const handleAvatarPhotoFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file || !animal || !token) {
-      e.target.value = '';
-      return;
-    }
+  const handleAvatarPhotoFile = async (file: Blob) => {
+    if (!animal || !token) return;
     setAvatarPhotoUploading(true);
     try {
       // W4-07 : redimensionnement (1600 px max) + JPEG 0.82 côté client, refus > 10 Mo
@@ -461,9 +453,10 @@ export default function AnimalDetailPage({
       }
     } finally {
       setAvatarPhotoUploading(false);
-      e.target.value = '';
     }
   };
+  // Web : sélecteur de fichier ; app native : appareil photo ou galerie (W6-05).
+  const { inputRef: avatarPhotoInputRef, open: openAvatarPhotoPicker, onChange: onAvatarPhotoInputChange } = usePhotoPicker({ onFile: handleAvatarPhotoFile, onError: setToast });
 
   if (authLoading || loading || !resolvedParams) {
     return (
@@ -630,12 +623,12 @@ export default function AnimalDetailPage({
           ) : (
             <Figure ratio="4/3" fallbackKind={kind} />
           )}
-          <input ref={avatarPhotoInputRef} type="file" accept="image/*" className="hidden" tabIndex={-1} aria-hidden onChange={handleAvatarPhotoFile} />
+          <input ref={avatarPhotoInputRef} type="file" accept="image/*" className="hidden" tabIndex={-1} aria-hidden onChange={onAvatarPhotoInputChange} />
           <Button
             variant="quiet"
             size="sm"
             className="justify-self-start"
-            onClick={handleAvatarPhotoClick}
+            onClick={() => void openAvatarPhotoPicker()}
             loading={avatarPhotoUploading}
             iconStart={<Camera size={16} strokeWidth={1.75} />}
           >

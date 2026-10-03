@@ -2,7 +2,7 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { countryName } from '@/lib/country';
-import { Badge } from '@/components/ui';
+import { Badge, ExternalLink } from '@/components/ui';
 import type { SpeciesLegislationData } from './types';
 
 export default function SpeciesLegislationTab({ speciesLegislation }: { speciesLegislation: SpeciesLegislationData | null }) {
@@ -68,9 +68,9 @@ export default function SpeciesLegislationTab({ speciesLegislation }: { speciesL
               <span>{t('species.sources')}</span>
               {item.sources.slice(0, 2).map((src, idx) =>
                 src.startsWith('http') ? (
-                  <a key={idx} href={src} target="_blank" rel="noopener noreferrer" className="break-all text-accent-text underline decoration-1 underline-offset-2">
+                  <ExternalLink key={idx} href={src} className="break-all text-accent-text underline decoration-1 underline-offset-2">
                     {src}
-                  </a>
+                  </ExternalLink>
                 ) : (
                   <span key={idx} className="break-all">
                     {src}

@@ -1,12 +1,14 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { animalCarnetPath, animalDetailPath } from '@/lib/platform';
 import { api, ApiError, type Animal as ApiAnimal } from '@/lib/api';
 import { isGuestUser } from '@/lib/guest';
+import { compressImageToDataUrl, isImageTooLargeError } from '@/lib/image';
+import { usePhotoPicker } from '@/components/usePhotoPicker';
 import { ageOf, formatAge, latinName, type SpeciesSheet } from '@/lib/today';
 import {
   AnimalCard,
@@ -55,7 +57,6 @@ export default function AnimalsListPage() {
   // Changement de photo depuis la carte
   const [photoAnimalId, setPhotoAnimalId] = useState<string | null>(null);
   const [photoUploading, setPhotoUploading] = useState(false);
-  const cardPhotoInputRef = useRef<HTMLInputElement>(null);
 
   const fetchAnimals = useCallback(async () => {
     if (!token) return;
@@ -93,26 +94,13 @@ export default function AnimalsListPage() {
     };
   }, [speciesKey]);
 
-  const handleCardPhotoClick = (animalId: string) => {
-    setPhotoAnimalId(animalId);
-    cardPhotoInputRef.current?.click();
-  };
-
-  const handleCardPhotoFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    const id = photoAnimalId;
-    if (!file || !id || !token) {
-      e.target.value = '';
-      return;
-    }
+  const handleCardPhotoFile = async (file: Blob, id: string | undefined) => {
+    if (!id || !token) return;
+    setPhotoAnimalId(id);
     setPhotoUploading(true);
     try {
-      const dataUrl = await new Promise<string>((resolve, reject) => {
-        const r = new FileReader();
-        r.onload = () => resolve(r.result as string);
-        r.onerror = reject;
-        r.readAsDataURL(file);
-      });
+      // W4-07 : redimensionnement (1600 px max) + JPEG 0.82 côté client, refus > 10 Mo
+      const dataUrl = await compressImageToDataUrl(file);
       await api.updateAnimal(id, { photos: [dataUrl] }, token);
       await fetchAnimals();
       setToast(t('animals.animalUpdated'));
@@ -121,14 +109,19 @@ export default function AnimalsListPage() {
       // révoquée (la page redirige alors). Jamais de logout() ici : ni sur 403, ni sur un
       // échec passager du backend.
       if (err instanceof ApiError && err.status === 401) return;
+      if (isImageTooLargeError(err)) {
+        setToast(t('animals.photoTooLarge'));
+        return;
+      }
       console.error('Error updating photo:', err);
       setToast(t('animals.errorAdding'));
     } finally {
       setPhotoUploading(false);
       setPhotoAnimalId(null);
-      e.target.value = '';
     }
   };
+  // Web : sélecteur de fichier ; app native : appareil photo ou galerie (W6-05).
+  const { inputRef: cardPhotoInputRef, open: openCardPhotoPicker, onChange: onCardPhotoInputChange } = usePhotoPicker<string>({ onFile: handleCardPhotoFile, onError: setToast });
 
   const closeToast = useCallback(() => setToast(null), []);
 
@@ -177,7 +170,7 @@ export default function AnimalsListPage() {
         />
       ) : (
         <>
-          <input ref={cardPhotoInputRef} type="file" accept="image/*" className="hidden" tabIndex={-1} aria-hidden onChange={handleCardPhotoFile} />
+          <input ref={cardPhotoInputRef} type="file" accept="image/*" className="hidden" tabIndex={-1} aria-hidden onChange={onCardPhotoInputChange} />
           <ul className="m-0 grid list-none gap-4 p-0 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {animals.map((animal) => {
               const sheet = species[animal.speciesId];
@@ -218,7 +211,7 @@ export default function AnimalsListPage() {
                           size="sm"
                           className="relative z-10 ml-auto"
                           loading={uploading}
-                          onClick={() => handleCardPhotoClick(animal.id)}
+                          onClick={() => void openCardPhotoPicker(animal.id)}
                         >
                           {t('animals.changePhoto')}
                         </Button>

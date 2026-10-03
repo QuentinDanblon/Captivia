@@ -9,6 +9,7 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { AppHeader } from '@/components/AppHeader';
 import { EmailVerificationBanner } from '@/components/EmailVerificationBanner';
 import { NativeWelcome } from '@/components/guest/NativeWelcome';
+import { NativeBridge } from '@/components/native/NativeBridge';
 import { SiteChrome } from '@/components/SiteChrome';
 import ErrorBoundary from '@/components/ui/ErrorBoundary';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -126,6 +127,8 @@ export default async function LocaleLayout({
             </SiteChrome>
             {/* App mobile : premier lancement sans session → essai sans compte proposé. */}
             <NativeWelcome />
+            {/* App mobile : liens universels, rappels locaux, bouton retour Android (rien sur le web). */}
+            <NativeBridge />
           </AuthProvider>
         </NextIntlClientProvider>
       </body>

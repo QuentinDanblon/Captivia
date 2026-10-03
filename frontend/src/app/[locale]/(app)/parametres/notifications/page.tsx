@@ -7,6 +7,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { isGuestUser } from '@/lib/guest';
 import { Alert, Badge, Button, Card, EmptyState, Field, Skeleton, SkeletonGroup, cx } from '@/components/ui';
 import { SettingsHeader } from '../_components/SettingsHeader';
+import { NativeRemindersCard } from '@/components/native/NativeRemindersCard';
+import { useIsNative } from '@/lib/platform';
 
 /** Fréquences de répétition */
 export type RecurrenceKind =
@@ -121,6 +123,8 @@ export default function NotificationsPreferencesPage() {
   const [pushKey, setPushKey] = useState<string | null>(null);
   const [pushBusy, setPushBusy] = useState(false);
   const [pushError, setPushError] = useState(false);
+  /** App native : rappels locaux au lieu du Web Push (lu après l'hydratation). */
+  const native = useIsNative();
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout | null>(null);
   /** Nouveau sujet en cours de saisie (personnalisation) */
@@ -763,40 +767,44 @@ export default function NotificationsPreferencesPage() {
         </div>
 
         <aside className="grid min-w-0 content-start gap-6 lg:col-span-4">
-          {/* Web Push sur CET appareil */}
-          <Card as="section" title={t('notifications.deviceTitle')} titleId="device-title" actions={pushBadge}>
-            <div className="grid gap-4">
-              {pushStatus === null ? (
-                <SkeletonGroup label={t('common.loading')}>
-                  <Skeleton width="80%" />
-                </SkeletonGroup>
-              ) : null}
-              {pushStatus === 'unsupported' ? <p className="m-0 text-ui text-ink-2">{t('notifications.pushUnsupported')}</p> : null}
-              {pushStatus === 'unavailable' ? <p className="m-0 text-ui text-ink-2">{t('notifications.pushUnavailable')}</p> : null}
-              {pushStatus === 'denied' ? <Alert severity="warning" title={t('notifications.pushBlocked')} /> : null}
-              {pushStatus === 'unsubscribed' ? (
-                <>
-                  <p className="m-0 text-ui text-ink-2">{t('notifications.enableBrowser')}</p>
-                  <Button onClick={enablePush} loading={pushBusy} fullWidth>
-                    {pushBusy ? t('notifications.enabling') : t('notifications.enableButton')}
-                  </Button>
-                </>
-              ) : null}
-              {pushStatus === 'subscribed' ? (
-                <>
-                  <p className="m-0 text-ui text-ink-2">{t('notifications.pushOnText')}</p>
-                  <Button variant="secondary" onClick={disablePush} loading={pushBusy} fullWidth>
-                    {pushBusy ? t('notifications.disabling') : t('notifications.disableButton')}
-                  </Button>
-                </>
-              ) : null}
-              {pushError ? (
-                <p role="alert" className="m-0 text-ui font-medium text-danger">
-                  {t('notifications.pushError')}
-                </p>
-              ) : null}
-            </div>
-          </Card>
+          {/* App native : rappels programmés sur le téléphone (W6-06) ; navigateur : Web Push sur CET appareil. */}
+          {native ? (
+            <NativeRemindersCard />
+          ) : (
+            <Card as="section" title={t('notifications.deviceTitle')} titleId="device-title" actions={pushBadge}>
+              <div className="grid gap-4">
+                {pushStatus === null ? (
+                  <SkeletonGroup label={t('common.loading')}>
+                    <Skeleton width="80%" />
+                  </SkeletonGroup>
+                ) : null}
+                {pushStatus === 'unsupported' ? <p className="m-0 text-ui text-ink-2">{t('notifications.pushUnsupported')}</p> : null}
+                {pushStatus === 'unavailable' ? <p className="m-0 text-ui text-ink-2">{t('notifications.pushUnavailable')}</p> : null}
+                {pushStatus === 'denied' ? <Alert severity="warning" title={t('notifications.pushBlocked')} /> : null}
+                {pushStatus === 'unsubscribed' ? (
+                  <>
+                    <p className="m-0 text-ui text-ink-2">{t('notifications.enableBrowser')}</p>
+                    <Button onClick={enablePush} loading={pushBusy} fullWidth>
+                      {pushBusy ? t('notifications.enabling') : t('notifications.enableButton')}
+                    </Button>
+                  </>
+                ) : null}
+                {pushStatus === 'subscribed' ? (
+                  <>
+                    <p className="m-0 text-ui text-ink-2">{t('notifications.pushOnText')}</p>
+                    <Button variant="secondary" onClick={disablePush} loading={pushBusy} fullWidth>
+                      {pushBusy ? t('notifications.disabling') : t('notifications.disableButton')}
+                    </Button>
+                  </>
+                ) : null}
+                {pushError ? (
+                  <p role="alert" className="m-0 text-ui font-medium text-danger">
+                    {t('notifications.pushError')}
+                  </p>
+                ) : null}
+              </div>
+            </Card>
+          )}
 
           {/* Canal de réception : téléphone (push) ou e-mail */}
           {preferences ? (

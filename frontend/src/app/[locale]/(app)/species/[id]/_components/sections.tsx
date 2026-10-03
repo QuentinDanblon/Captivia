@@ -8,7 +8,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import { countryName } from '@/lib/country';
 import { isGbifKey, type SpeciesPhoto } from '@/lib/species';
-import { Alert, Badge } from '@/components/ui';
+import { Alert, Badge, ExternalLink } from '@/components/ui';
 import { FactList, InkList, SheetSection, SourceNote, formatRange, hostOf, safeUrl, valueLabel } from './parts';
 import type {
   EquipmentData,
@@ -221,10 +221,8 @@ export function HealthSection({ health }: { health: HealthData | null }) {
               return (
                 <li key={article.pmid} className="grid gap-0.5">
                   {href ? (
-                    <a
+                    <ExternalLink
                       href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       lang="en"
                       className="text-accent-text underline decoration-1 underline-offset-2"
                     >
@@ -233,7 +231,7 @@ export function HealthSection({ health }: { health: HealthData | null }) {
                         {' '}
                         {t('plans.newTab')}
                       </span>
-                    </a>
+                    </ExternalLink>
                   ) : (
                     <span lang="en" className="text-ink">
                       {article.title}
@@ -426,9 +424,9 @@ export function SourcesSection({
           <li className="grid gap-0.5">
             <span className="text-meta text-ink-2">{t('species.sourceLabels.description')}</span>
             <span>
-              <a href={description} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              <ExternalLink href={description} className={linkClass}>
                 {isWikipedia(description) ? t('attribution.wikipediaName') : hostOf(description)}
-              </a>
+              </ExternalLink>
               {isWikipedia(description) ? <span className="font-mono text-meta text-ink-2"> · {t('attribution.license')}</span> : null}
             </span>
           </li>
@@ -437,9 +435,9 @@ export function SourcesSection({
           <li className="grid gap-0.5">
             <span className="text-meta text-ink-2">{t('species.sourceLabels.taxonomy')}</span>
             <span>
-              <a href={`https://www.gbif.org/species/${speciesId}`} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              <ExternalLink href={`https://www.gbif.org/species/${speciesId}`} className={linkClass}>
                 {t('attribution.gbifName')}
-              </a>
+              </ExternalLink>
               <span className="font-mono text-meta text-ink-2"> · GBIF {speciesId}</span>
             </span>
           </li>
@@ -448,14 +446,14 @@ export function SourcesSection({
           <li className="grid gap-0.5">
             <span className="text-meta text-ink-2">{t('species.sourceLabels.photo')}</span>
             <span>
-              <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              <ExternalLink href={photo.sourceUrl} className={linkClass}>
                 {photo.author}
-              </a>
+              </ExternalLink>
               <span className="font-mono text-meta text-ink-2">
                 {' · '}
-                <a href={photo.license.url} target="_blank" rel="noopener noreferrer license" className="text-ink-2 underline decoration-1 underline-offset-2">
+                <ExternalLink href={photo.license.url} rel="license" className="text-ink-2 underline decoration-1 underline-offset-2">
                   {photo.license.label}
-                </a>
+                </ExternalLink>
                 {' · '}
                 {t('species.sourceLabels.viaGbif')}
               </span>
@@ -478,9 +476,9 @@ export function SourcesSection({
                 <li key={ref.url} className="grid grid-cols-[1.75rem_minmax(0,1fr)] items-baseline gap-2">
                   <span className="font-mono text-meta text-ink-2">{String(i + 1).padStart(2, '0')}</span>
                   <span className="min-w-0">
-                    <a href={ref.url} target="_blank" rel="noopener noreferrer" className={`${linkClass} break-words`}>
+                    <ExternalLink href={ref.url} className={`${linkClass} break-words`}>
                       {ref.title}
-                    </a>
+                    </ExternalLink>
                     <span className="font-mono text-meta text-ink-2"> · {hostOf(ref.url)}</span>
                   </span>
                 </li>

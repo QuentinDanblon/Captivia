@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import { IucnBadge } from '@/components/ui';
+import { ExternalLink, IucnBadge } from '@/components/ui';
 import { speciesPath } from '@/lib/platform';
 import { speciesDisplayName, type SpeciesSummary } from '@/lib/species';
 import { SpeciesPhotoFigure } from './SpeciesPhotoFigure';
@@ -89,13 +89,13 @@ export function SpeciesCard({ species }: { species: SpeciesSummary }) {
         {ready ? (
           <p className="relative z-10 m-0 mt-1 font-mono text-meta break-words text-ink-2">
             {t('speciesSearch.photoBy')}{' '}
-            <a href={ready.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-ink-2 underline decoration-1 underline-offset-2">
+            <ExternalLink href={ready.sourceUrl} className="text-ink-2 underline decoration-1 underline-offset-2">
               {ready.author}
-            </a>
+            </ExternalLink>
             {' · '}
-            <a href={ready.license.url} target="_blank" rel="noopener noreferrer license" className="text-ink-2 underline decoration-1 underline-offset-2">
+            <ExternalLink href={ready.license.url} rel="license" className="text-ink-2 underline decoration-1 underline-offset-2">
               {ready.license.label}
-            </a>
+            </ExternalLink>
           </p>
         ) : null}
       </div>

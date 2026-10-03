@@ -49,3 +49,5 @@ export { TaskPill, PremiumBadge } from './Pills';
 export type { TaskPillProps } from './Pills';
 export { LockedSlot, GuestBanner, Steps } from './Offer';
 export type { LockedSlotProps, GuestBannerProps, StepsProps } from './Offer';
+export { default as ExternalLink, externalRel } from './ExternalLink';
+export type { ExternalLinkProps } from './ExternalLink';
