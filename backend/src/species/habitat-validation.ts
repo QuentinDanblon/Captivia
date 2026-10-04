@@ -24,7 +24,9 @@ export function hasReproductionFacts(data: {
     data.litterSizeMin,
     data.sexualMaturityMonths,
   ].some((value) => typeof value === 'number' && Number.isFinite(value));
-  return numericFacts ||
+  return (
+    numericFacts ||
     (typeof data.season === 'string' && data.season.trim().length > 0) ||
-    (typeof data.notes === 'string' && data.notes.trim().length > 0);
+    (typeof data.notes === 'string' && data.notes.trim().length > 0)
+  );
 }

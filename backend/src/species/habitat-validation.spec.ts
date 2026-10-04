@@ -1,4 +1,7 @@
-import { hasReproductionFacts, hasValidTemperatureRange } from './habitat-validation';
+import {
+  hasReproductionFacts,
+  hasValidTemperatureRange,
+} from './habitat-validation';
 
 describe('hasValidTemperatureRange', () => {
   it('allows missing temperature facts when the source does not publish them', () => {
