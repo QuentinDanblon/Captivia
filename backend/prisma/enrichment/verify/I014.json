@@ -1,0 +1,37 @@
+[
+  {
+    "speciesId": 104232708,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Ernährung: Kleine Heimchen, Schaben, Mehlwurmlarven",
+        "url": "https://www.team-tarantula.de/artprofil/buthus-occitanus"
+      },
+      {
+        "field": "feeding.recommendedFoods",
+        "value": "Petits grillons domestiques; blattes; larves de ténébrion",
+        "quote": "Ernährung: Kleine Heimchen, Schaben, Mehlwurmlarven",
+        "url": "https://www.team-tarantula.de/artprofil/buthus-occitanus"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "weekly",
+        "quote": "Füttere wöchentlich, Jungtiere häufiger.",
+        "url": "https://www.team-tarantula.de/artprofil/buthus-occitanus"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "Les jeunes se nourrissent plus souvent que les adultes; la source ne précise pas d'intervalle pour eux.",
+        "quote": "Füttere wöchentlich, Jungtiere häufiger.",
+        "url": "https://www.team-tarantula.de/artprofil/buthus-occitanus"
+      },
+      {
+        "field": "feeding.dietType",
+        "value": "carnivore",
+        "quote": "Diet Carnivore",
+        "url": "https://atlarium.bio/en/catalog/terrestrial-invertebrates/buthus-occitanus"
+      }
+    ]
+  }
+]

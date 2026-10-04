@@ -1,8 +1,8 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { Card, Field } from '@/components/ui';
+import { Button, Card, Field } from '@/components/ui';
 
 /** Geometry only; no stocking density or husbandry minimum is inferred. */
 export function habitatVolume(length: number, width: number, height: number): number | null {
@@ -10,17 +10,66 @@ export function habitatVolume(length: number, width: number, height: number): nu
   return length * width * height / 1_000;
 }
 
-export function HabitatPlan({ equipment = [] }: { equipment?: string[] }) {
+type SavedPlan = { length: string; width: string; height: string; positions: string[] };
+
+/** Only seed a drawing from an explicit, three-axis measurement with a stated unit. */
+export function parseHabitatDimensions(value: string | null | undefined): [string, string, string] | null {
+  if (!value || value.length > 300) return null;
+  const match = value.match(/(\d+(?:[.,]\d+)?)\s*[×x]\s*(\d+(?:[.,]\d+)?)\s*[×x]\s*(\d+(?:[.,]\d+)?)\s*(cm|m|inches?|in|pouces?|")(?=$|\s|\))/i);
+  if (!match) return null;
+  const unit = match[4].toLowerCase();
+  const multiplier = unit === 'm' ? 100 : ['in', 'inch', 'inches', 'pouce', 'pouces', '"'].includes(unit) ? 2.54 : 1;
+  const dimensions = match.slice(1, 4).map((part) => Number((Number(part.replace(',', '.')) * multiplier).toFixed(1)));
+  if (!dimensions.every((part) => Number.isFinite(part) && part > 0 && part <= 50_000)) return null;
+  return dimensions.map((part) => String(part)) as [string, string, string];
+}
+
+export function HabitatPlan({ equipment = [], storageKey = 'general', suggestedDimensions = null }: { equipment?: string[]; storageKey?: string; suggestedDimensions?: [string, string, string] | null }) {
   const t = useTranslations('guides');
   const locale = useLocale();
   const figureId = useId();
-  const [length, setLength] = useState('');
-  const [width, setWidth] = useState('');
-  const [height, setHeight] = useState('');
+  const [length, setLength] = useState(suggestedDimensions?.[0] ?? '');
+  const [width, setWidth] = useState(suggestedDimensions?.[1] ?? '');
+  const [height, setHeight] = useState(suggestedDimensions?.[2] ?? '');
   const [positions, setPositions] = useState<string[]>([]);
+  const [saveState, setSaveState] = useState<'idle' | 'saved' | 'error'>('idle');
+  const [suggestedLength, suggestedWidth, suggestedHeight] = suggestedDimensions ?? ['', '', ''];
   const dimensions = [Number(length), Number(width), Number(height)];
   const volume = habitatVolume(dimensions[0], dimensions[1], dimensions[2]);
   const nf = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      try {
+        const raw = localStorage.getItem(`captivia.habitat-plan.${storageKey}`);
+        if (!raw) { setLength(suggestedLength); setWidth(suggestedWidth); setHeight(suggestedHeight); return; }
+        const saved = JSON.parse(raw) as Partial<SavedPlan>;
+        const validDimension = (value: unknown) => typeof value === 'string' && value.length <= 16 && (value === '' || (Number.isFinite(Number(value)) && Number(value) > 0 && Number(value) <= 50_000));
+        if (validDimension(saved.length) && validDimension(saved.width) && validDimension(saved.height)
+            && Array.isArray(saved.positions) && saved.positions.length <= 5
+            && saved.positions.every((position) => ['none', 'left', 'centre', 'right'].includes(position))) {
+          setLength(saved.length!); setWidth(saved.width!); setHeight(saved.height!); setPositions(saved.positions);
+        }
+      } catch { /* Unavailable storage or invalid old data: keep an empty editable plan. */ }
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [storageKey, suggestedLength, suggestedWidth, suggestedHeight]);
+
+  function savePlan() {
+    try {
+      localStorage.setItem(`captivia.habitat-plan.${storageKey}`, JSON.stringify({ length, width, height, positions } satisfies SavedPlan));
+      setSaveState('saved');
+    } catch { setSaveState('error'); }
+  }
+
+  function exportPlan() {
+    const data = { version: 1, dimensionsCm: { length, width, height }, equipment: equipment.slice(0, 5).map((name, index) => ({ name, position: positions[index] ?? 'none' })) };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url; anchor.download = `captivia-plan-${storageKey.replace(/[^a-z0-9_-]/gi, '-')}.json`;
+    anchor.click(); URL.revokeObjectURL(url);
+  }
 
   function view(vertical: number, label: string, dimension: number, topView = false) {
     const scale = Math.min(280 / dimensions[0], 140 / vertical);
@@ -50,6 +99,11 @@ export function HabitatPlan({ equipment = [] }: { equipment?: string[] }) {
 
   return <Card as="section" title={t('planTitle')} titleId={figureId}>
     <p className="mt-0 text-ink-2">{t('planIntro')}</p>
+    <div className="mb-4 flex flex-wrap items-center gap-3">
+      <Button type="button" variant="secondary" onClick={savePlan}>{t('planSave')}</Button>
+      <Button type="button" variant="quiet" onClick={exportPlan}>{t('planExport')}</Button>
+      <span role="status" className="text-meta text-ink-2">{saveState === 'saved' ? t('planSaved') : saveState === 'error' ? t('planSaveError') : ''}</span>
+    </div>
     <details className="mb-4">
       <summary className="min-h-11 cursor-pointer py-2 text-ui font-medium">{t('planEquipment')}</summary>
       <div className="grid gap-3 pt-3 sm:grid-cols-2">

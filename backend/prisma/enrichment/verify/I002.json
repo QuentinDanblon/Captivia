@@ -1,0 +1,83 @@
+[
+  {
+    "speciesId": 104041498,
+    "evidence": []
+  },
+  {
+    "speciesId": 104232708,
+    "evidence": [
+      {
+        "field": "health.diseases[0].name",
+        "value": "Infestation d'acariens",
+        "quote": "External parasites like mites can infest scorpions, often due to unsanitary enclosure conditions or contaminated food.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "Irritation et affaiblissement.",
+        "quote": "Mites can cause irritation and weaken the scorpion, leading to further health issues.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "Nettoyer régulièrement l'enclos, éviter la surpopulation et garder les aliments exempts de contaminants.",
+        "quote": "Regularly clean the enclosure, avoid overcrowding, and ensure all food is free of contaminants.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[0].whenToConsult",
+        "value": "Demander l'avis d'un vétérinaire spécialisé pour un diagnostic et un traitement adaptés.",
+        "quote": "Exotic pets like scorpions often need the expertise of a specialist vet for accurate diagnosis and treatment.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[1].name",
+        "value": "Infection bactérienne ou fongique",
+        "quote": "Bacterial or fungal infections can develop from open wounds or poor hygiene in the scorpion's habitat.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[1].symptoms",
+        "value": "Une infection peut se développer à partir d'une plaie ouverte ou d'une hygiène insuffisante de l'habitat.",
+        "quote": "Bacterial or fungal infections can develop from open wounds or poor hygiene in the scorpion's habitat.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "Éviter la cohabitation sauf pour une espèce sociale et manipuler avec prudence.",
+        "quote": "Avoid co-housing scorpions unless they are a social species and ensure safe handling practices.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[1].whenToConsult",
+        "value": "Demander l'avis d'un vétérinaire spécialisé pour un diagnostic et un traitement adaptés.",
+        "quote": "Exotic pets like scorpions often need the expertise of a specialist vet for accurate diagnosis and treatment.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[2].name",
+        "value": "Déséquilibre nutritionnel",
+        "quote": "Feeding your scorpion an inappropriate or limited diet can lead to nutritional imbalances.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "Une alimentation inadaptée ou trop limitée peut entraîner un déséquilibre nutritionnel.",
+        "quote": "Feeding your scorpion an inappropriate or limited diet can lead to nutritional imbalances.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "Proposer une alimentation variée et des proies de taille adaptée.",
+        "quote": "Offer a varied diet and ensure prey is appropriately sized for your scorpion.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      },
+      {
+        "field": "health.diseases[2].whenToConsult",
+        "value": "Demander l'avis d'un vétérinaire spécialisé pour un diagnostic et un traitement adaptés.",
+        "quote": "Exotic pets like scorpions often need the expertise of a specialist vet for accurate diagnosis and treatment.",
+        "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet"
+      }
+    ]
+  }
+]

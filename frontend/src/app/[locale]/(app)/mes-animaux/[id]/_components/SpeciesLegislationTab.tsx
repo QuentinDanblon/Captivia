@@ -4,28 +4,29 @@ import { useTranslations, useLocale } from 'next-intl';
 import { countryName } from '@/lib/country';
 import { Badge, ExternalLink } from '@/components/ui';
 import type { SpeciesLegislationData } from './types';
+import { BelgianLegalNotice } from '@/components/species/BelgianLegalNotice';
 
 export default function SpeciesLegislationTab({ speciesLegislation }: { speciesLegislation: SpeciesLegislationData | null }) {
   const t = useTranslations();
   const locale = useLocale();
   const items = speciesLegislation?.editorial ?? [];
-  if (items.length === 0) return <p className="m-0 text-body text-ink-2">{t('species.noLegalData')}</p>;
-
   return (
-    <ul className="m-0 grid list-none divide-y divide-line p-0">
+    <div className="grid gap-4">
+      <BelgianLegalNotice />
+      {items.length === 0 ? <p className="m-0 text-body text-ink-2">{t('species.noLegalData')}</p> : <ul className="m-0 grid list-none divide-y divide-line p-0">
       {items.map((item) => (
         <li key={item.country} className="grid gap-2 py-3 first:pt-0 last:pb-0">
           <div className="flex flex-wrap items-center gap-2">
             <h3 className="m-0 font-sans text-body font-semibold text-ink">{countryName(item.country, locale)}</h3>
-            <Badge tone={item.status === 'allowed' ? 'ok' : item.status === 'prohibited' ? 'danger' : 'warn'} dot>
+            {item.country === 'BE' || item.needsReview || item.details?.needsReview ? <Badge tone="warn" dot>{t('species.review.badge')}</Badge> : <Badge tone={item.status === 'allowed' ? 'ok' : item.status === 'prohibited' ? 'danger' : 'warn'} dot>
               {item.status === 'allowed'
                 ? t('species.allowed')
                 : item.status === 'prohibited'
                   ? t('species.prohibited')
                   : t('species.permitRequired')}
-            </Badge>
+            </Badge>}
           </div>
-          <dl className="m-0 grid gap-1 text-ui sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-4">
+          {item.country === 'BE' || item.needsReview || item.details?.needsReview ? <p className="m-0 text-ui text-ink-2">{t('species.review.legislation')}</p> : <dl className="m-0 grid gap-1 text-ui sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-x-4">
             {item.details?.citesAppendix ? (
               <>
                 <dt className="text-ink-2">CITES</dt>
@@ -62,7 +63,7 @@ export default function SpeciesLegislationTab({ speciesLegislation }: { speciesL
                 </dd>
               </>
             ) : null}
-          </dl>
+          </dl>}
           {item.sources && item.sources.length > 0 ? (
             <p className="m-0 grid gap-0.5 border-t border-dotted border-line pt-2 font-mono text-meta text-ink-2">
               <span>{t('species.sources')}</span>
@@ -81,6 +82,7 @@ export default function SpeciesLegislationTab({ speciesLegislation }: { speciesL
           ) : null}
         </li>
       ))}
-    </ul>
+      </ul>}
+    </div>
   );
 }

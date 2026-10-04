@@ -1,0 +1,37 @@
+[
+  {
+    "speciesId": 104232708,
+    "feeding": {
+      "dietType": "carnivore",
+      "recommendedFoods": [
+        {
+          "name": "Petits grillons domestiques",
+          "frequency": "weekly"
+        },
+        {
+          "name": "Blattes",
+          "frequency": "weekly"
+        },
+        {
+          "name": "Larves de ténébrion",
+          "frequency": "weekly"
+        }
+      ],
+      "foodsToAvoid": [],
+      "mealFrequency": "weekly",
+      "specificNeeds": "Les jeunes se nourrissent plus souvent que les adultes; la source ne précise pas d'intervalle pour eux.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.team-tarantula.de/artprofil/buthus-occitanus",
+          "title": "Buthus occitanus | Team Tarantula"
+        },
+        {
+          "type": "database",
+          "url": "https://atlarium.bio/en/catalog/terrestrial-invertebrates/buthus-occitanus",
+          "title": "Buthus occitanus | Atlarium"
+        }
+      ]
+    }
+  }
+]

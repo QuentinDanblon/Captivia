@@ -607,16 +607,16 @@ model SpeciesHabitat {
   id                   String   @id @default(uuid())
   speciesId            Int      // GBIF key (ou ID artificiel ≥ 2 000 000 001 pour les races)
   locale               String   @default("fr")
-  habitatType          String   // "cage", "terrarium", "aquarium", "enclos", "libre", etc.
-  tempMin              Float    // Température minimale (Celsius)
-  tempMax              Float    // Température maximale (Celsius)
+  habitatType          String?  // "cage", "terrarium", "aquarium", "enclos", "libre", etc.
+  tempMin              Float?   // Température minimale (Celsius), absente si non publiée par une source fiable.
+  tempMax              Float?   // Température maximale (Celsius), absente si non publiée par une source fiable.
   humidityMin          Float?   // Humidité minimale (%)
   humidityMax          Float?   // Humidité maximale (%)
-  minSpaceSize         String   // Taille minimale d'espace recommandée (ex: "60x40x40cm" ou "2m²")
-  lightNeeds           String   // Besoins en lumière (naturelle, UV, cycle jour/nuit, etc.)
-  activityEnrichment   String   // Niveau d'activité et enrichissement nécessaire (max 500 chars)
+  minSpaceSize         String?  // Taille minimale d'espace recommandée, si une source la précise.
+  lightNeeds           String?  // Besoins en lumière (naturelle, UV, cycle jour/nuit, etc.)
+  activityEnrichment   String?  // Niveau d'activité et enrichissement nécessaire (max 500 chars)
   hygieneNotes         String?  // Notes sur l'entretien et l'hygiène (max 500 chars)
-  costEstimate         String   // "faible", "moyen", "élevé"
+  costEstimate         String?  // Estimation éditoriale facultative : absente si aucune source ne l'étaye.
   sources              Json?    // Array of { type, url, title } — traçabilité
   createdAt            DateTime @default(now()) @db.Timestamptz(3)
   updatedAt            DateTime @updatedAt @db.Timestamptz(3)
@@ -634,7 +634,7 @@ model SpeciesBehavior {
   locale                       String   @default("fr")
   generalBehavior              String   // Description générale du comportement (max 500 chars)
   sociability                  String   // "solitaire", "grégaire", "semi-grégaire"
-  difficultyLevel              String   // "débutant", "intermédiaire", "expert"
+  difficultyLevel              String?  // "débutant", "intermédiaire", "expert" lorsque la source permet de conclure.
   compatibilityWithChildren    String?  // Description de la compatibilité avec enfants (max 500 chars)
   compatibilityWithOtherAnimals String? // Description de la compatibilité avec autres animaux (max 500 chars)
   sources                      Json?    // Array of { type, url, title } — traçabilité

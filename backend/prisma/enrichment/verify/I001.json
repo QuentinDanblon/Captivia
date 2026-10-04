@@ -1,0 +1,42 @@
+[
+  {"speciesId": 2465641, "evidence": [
+    {"field": "habitat.tempMin", "value": 22, "quote": "Basking side surface temperature — 108-113°F (42-45°C) Cool side surface temperature — 77-85°F (25-29°C) Air temperature gradient — 72-99°F (22-37°C) Nighttime — 55-75°F (12-24°C)", "url": "https://reptifiles.com/bearded-dragon-care/bearded-dragon-temperatures-uvb/"},
+    {"field": "habitat.tempMax", "value": 37, "quote": "Basking side surface temperature — 108-113°F (42-45°C) Cool side surface temperature — 77-85°F (25-29°C) Air temperature gradient — 72-99°F (22-37°C) Nighttime — 55-75°F (12-24°C)", "url": "https://reptifiles.com/bearded-dragon-care/bearded-dragon-temperatures-uvb/"}
+  ]},
+  {"speciesId": 104076753, "evidence": [
+    {"field": "habitat.tempMin", "value": 23, "quote": "Basking area temperature: 85-90°F (29-32°C) Cool zone temperature: 77-82°F (25-28°C) Nighttime temperature: 73-77°F (23-25°C)", "url": "https://reptifiles.com/giant-day-gecko-care-sheet/"},
+    {"field": "habitat.tempMax", "value": 32, "quote": "Basking area temperature: 85-90°F (29-32°C) Cool zone temperature: 77-82°F (25-28°C) Nighttime temperature: 73-77°F (23-25°C)", "url": "https://reptifiles.com/giant-day-gecko-care-sheet/"}
+  ]},
+  {"speciesId": 2446584, "evidence": [
+    {"field": "habitat.tempMin", "value": 19, "quote": "Basking area temperature: 86-88°F (30-31°C) Ambient temperature: 72-78°F (22-26°C) Nighttime temperature: 66-72°F (19-22°C)", "url": "https://reptifiles.com/leachie-gecko-care-sheet/"},
+    {"field": "habitat.tempMax", "value": 31, "quote": "Basking area temperature: 86-88°F (30-31°C) Ambient temperature: 72-78°F (22-26°C) Nighttime temperature: 66-72°F (19-22°C)", "url": "https://reptifiles.com/leachie-gecko-care-sheet/"}
+  ]},
+  {"speciesId": 8371864, "evidence": [
+    {"field": "habitat.tempMin", "value": 15, "quote": "Basking area (hot spot) — 83°F (28°C) Shade temperature — 68-72°F (20-23°C) Nighttime temps — 50-59°F (15°C) Temperatures are sourced from Dr", "url": "https://reptifiles.com/jacksons-chameleon-care/jacksons-chameleon-lighting-temperatures/"},
+    {"field": "habitat.tempMax", "value": 28, "quote": "Basking area (hot spot) — 83°F (28°C) Shade temperature — 68-72°F (20-23°C) Nighttime temps — 50-59°F (15°C) Temperatures are sourced from Dr", "url": "https://reptifiles.com/jacksons-chameleon-care/jacksons-chameleon-lighting-temperatures/"}
+  ]},
+  {"speciesId": 104101845, "evidence": [
+    {"field": "habitat.tempMin", "value": 20, "quote": "Basking: 80-86°F (27-30°C) Cool end: 70-80°F (21-26°C) Nighttime: 68-72°F (20-22°C)", "url": "https://reptifiles.com/green-tree-python-care-sheet/"},
+    {"field": "habitat.tempMax", "value": 30, "quote": "Basking: 80-86°F (27-30°C) Cool end: 70-80°F (21-26°C) Nighttime: 68-72°F (20-22°C)", "url": "https://reptifiles.com/green-tree-python-care-sheet/"}
+  ]},
+  {"speciesId": 5225659, "evidence": [
+    {"field": "habitat.tempMin", "value": 22, "quote": "Basking surface: 95-100°F (35-38°C) Cool end: 75-80°F (24-26°C) Nighttime temps: 72-78°F (22-25°C)", "url": "https://reptifiles.com/carpet-python-care-sheet/"},
+    {"field": "habitat.tempMax", "value": 38, "quote": "Basking surface: 95-100°F (35-38°C) Cool end: 75-80°F (24-26°C) Nighttime temps: 72-78°F (22-25°C)", "url": "https://reptifiles.com/carpet-python-care-sheet/"}
+  ]},
+  {"speciesId": 2455676, "evidence": [
+    {"field": "habitat.tempMin", "value": 22, "quote": "Basking area: 85-90°F (29-32°C) Cool side: 72-77°F (22-25°C) Heat sources should be turned off at night so the enclosure can cool down", "url": "https://reptifiles.com/black-ratsnake-care-sheet/"},
+    {"field": "habitat.tempMax", "value": 32, "quote": "Basking area: 85-90°F (29-32°C) Cool side: 72-77°F (22-25°C) Heat sources should be turned off at night so the enclosure can cool down", "url": "https://reptifiles.com/black-ratsnake-care-sheet/"}
+  ]},
+  {"speciesId": 2441533, "evidence": [
+    {"field": "habitat.tempMin", "value": 21, "quote": "Basking area temperature: 100-105°F / 38-41°C Ambient/cool zone temperature: 80-90°F / 27-32°C Nighttime temperature: 70-75°F / 21- 23°C", "url": "https://reptifiles.com/sulcata-tortoise-care-sheet/"},
+    {"field": "habitat.tempMax", "value": 41, "quote": "Basking area temperature: 100-105°F / 38-41°C Ambient/cool zone temperature: 80-90°F / 27-32°C Nighttime temperature: 70-75°F / 21- 23°C", "url": "https://reptifiles.com/sulcata-tortoise-care-sheet/"}
+  ]},
+  {"speciesId": 2447367, "evidence": [
+    {"field": "habitat.tempMin", "value": 24, "quote": "Basking area temperature: 90-100°F (32-38°C) Cool zone temperature: 80-85°F (26-29°C) Nighttime temperature: 76-80°F (24-26°C)", "url": "https://reptifiles.com/tokay-gecko-care-sheet/"},
+    {"field": "habitat.tempMax", "value": 38, "quote": "Basking area temperature: 90-100°F (32-38°C) Cool zone temperature: 80-85°F (26-29°C) Nighttime temperature: 76-80°F (24-26°C)", "url": "https://reptifiles.com/tokay-gecko-care-sheet/"}
+  ]},
+  {"speciesId": 2445755, "evidence": [
+    {"field": "habitat.tempMin", "value": 18, "quote": "phantasticus Day — 75-82°F / 24-26°C Night — 64-72°F / 18-22°C", "url": "https://reptifiles.com/uroplatus-leaf-tailed-gecko-care/leaf-tailed-gecko-temperatures-lighting/"},
+    {"field": "habitat.tempMax", "value": 26, "quote": "phantasticus Day — 75-82°F / 24-26°C Night — 64-72°F / 18-22°C", "url": "https://reptifiles.com/uroplatus-leaf-tailed-gecko-care/leaf-tailed-gecko-temperatures-lighting/"}
+  ]}
+]

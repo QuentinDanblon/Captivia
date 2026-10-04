@@ -1,0 +1,36 @@
+[
+  {
+    "speciesId": 104040736,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 27,
+      "humidityMin": 55,
+      "humidityMax": 65,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/",
+          "title": "Fire-Bellied Toad Care Guide | Exo Terra"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104015330,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 25,
+      "tempMax": 27,
+      "humidityMin": 70,
+      "humidityMax": 80,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/",
+          "title": "Dyeing Poison Dart Frog Care Guide | Exo Terra"
+        }
+      ]
+    }
+  }
+]

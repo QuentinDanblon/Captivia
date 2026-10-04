@@ -1,0 +1,34 @@
+[
+  {
+    "speciesId": 2468095,
+    "health": {
+      "diseases": [
+        {
+          "name": "Hyperparathyroïdie secondaire nutritionnelle (maladie osseuse métabolique, décrite chez les lézards insectivores)",
+          "symptoms": "Baisse d'appétit, faiblesse, démarche anormale, os de la mâchoire ou des pattes gonflés ou déformés.",
+          "prevention": "Éviter les déséquilibres calcium/phosphore, le manque de vitamine D3, le manque d'UVB et les températures inadéquates en captivité.",
+          "whenToConsult": "Consulter en cas de faiblesse, de démarche anormale ou de déformation osseuse ; le diagnostic nécessite radiographies et analyses sanguines."
+        },
+        {
+          "name": "Stomatite infectieuse (maladie décrite chez les lézards)",
+          "symptoms": "Petits points rouge violacé dans la bouche au début ; les lésions progressent le long des dents et peuvent atteindre les mâchoires dans les cas graves.",
+          "prevention": null,
+          "whenToConsult": "Consulter rapidement si des lésions buccales apparaissent, car une infection respiratoire ou gastro-intestinale peut se développer si la stomatite n'est pas traitée rapidement."
+        },
+        {
+          "name": "Nématodes gastriques (vers de l'estomac, décrits chez les lézards)",
+          "symptoms": "Une infestation sévère peut provoquer des ulcères gastriques.",
+          "prevention": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer les aliments non consommés pour aider à prévenir les infestations parasitaires.",
+          "whenToConsult": "Un vétérinaire peut rechercher les parasites gastro-intestinaux dans les selles."
+        }
+      ],
+      "sources": [
+        {
+          "type": "vet",
+          "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles",
+          "title": "Disorders and Diseases of Reptiles - All Other Pets - Merck Veterinary Manual"
+        }
+      ]
+    }
+  }
+]

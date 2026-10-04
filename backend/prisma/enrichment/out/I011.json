@@ -1,0 +1,66 @@
+[
+  {
+    "speciesId": 5218022,
+    "feeding": {
+      "dietType": "insectivore",
+      "recommendedFoods": [
+        { "name": "Drosophiles", "frequency": "variable", "notes": "La fiche les cite comme aliment de base." },
+        { "name": "Collemboles", "frequency": "variable", "notes": "La fiche les cite parmi les proies vivantes possibles." }
+      ],
+      "foodsToAvoid": [
+        { "name": "Insectes capturés dans la nature", "reason": "La fiche déconseille ces proies, qui peuvent porter des bactéries nocives." },
+        { "name": "Insectes exposés à des produits de jardinage", "reason": "La fiche indique qu'ils peuvent avoir été en contact avec des produits chimiques toxiques pour les grenouilles." }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "La fréquence dépend de l'âge : nourrissage quotidien des juvéniles; les adultes peuvent être nourris tous les deux ou trois jours.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/",
+          "title": "Black Green Poison Dart frog | Exo Terra"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 24,
+      "tempMax": 26,
+      "humidityMin": 70,
+      "humidityMax": 80,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": "La fiche indique que la température peut baisser de 2 à 4 °C la nuit et que l'humidité peut monter jusqu'à environ 100 %.",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/",
+          "title": "Black Green Poison Dart frog | Exo Terra"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 104020622,
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 20,
+      "tempMax": 29,
+      "humidityMin": 70,
+      "humidityMax": 90,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/",
+          "title": "Red-Eyed Tree Frog | Exo Terra"
+        }
+      ]
+    }
+  }
+]

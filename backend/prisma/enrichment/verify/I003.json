@@ -1,0 +1,54 @@
+[
+ {
+  "speciesId": 104052770,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "nocturne, plane entre les arbres, peu de temps au sol",
+    "quote": "Pteromys volans are nocturnal. In the summer, they are active from a half hour to an hour after sunset until dawn.",
+    "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "déplacement en planant entre les arbres",
+    "quote": "They glide from tree to tree collecting and consuming food.",
+    "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "passe peu de temps au sol pendant son activité",
+    "quote": "When active, P. volans spend little time on the ground.",
+    "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "grégaire",
+    "quote": "Pteromys volans are a social species; many can be found together in a single tree.",
+    "url": "https://animaldiversity.org/accounts/Pteromys_volans/"
+   }
+  ]
+ },
+ {
+  "speciesId": 2498387,
+  "evidence": [
+   {
+    "field": "behavior.generalBehavior",
+    "value": "diurne; marche, vole et nage",
+    "quote": "Aix sponsa moves around by walking, flying and swimming. Wood ducks are diurnal",
+    "url": "https://animaldiversity.org/accounts/Aix_sponsa/"
+   },
+   {
+    "field": "behavior.generalBehavior",
+    "value": "rassemblements du soir, couples/petits groupes migratoires",
+    "quote": "They are social animals and often congregate in the evening and migrate in pairs or small flocks.",
+    "url": "https://animaldiversity.org/accounts/Aix_sponsa/"
+   },
+   {
+    "field": "behavior.sociability",
+    "value": "grégaire",
+    "quote": "They are social animals and often congregate in the evening and migrate in pairs or small flocks.",
+    "url": "https://animaldiversity.org/accounts/Aix_sponsa/"
+   }
+  ]
+ }
+]

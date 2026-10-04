@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 import { useTranslations } from 'next-intl';
 import { api } from '@/lib/api';
 import { errorKey } from '@/lib/api-errors';
@@ -40,6 +40,19 @@ const CATEGORY_OPTIONS = [
   { value: 'arachnide', labelKey: 'store.categoryArachnid' },
 ] as const;
 
+function subscribeToLocation(callback: () => void) {
+  window.addEventListener('popstate', callback);
+  return () => window.removeEventListener('popstate', callback);
+}
+
+function getLocationSearch() {
+  return window.location.search;
+}
+
+function getServerLocationSearch() {
+  return '';
+}
+
 function safeHref(url: string): string {
   if (!url || typeof url !== 'string') return '#';
   const trimmed = url.trim();
@@ -58,23 +71,26 @@ function safeHref(url: string): string {
  */
 export default function MagasinPage() {
   const t = useTranslations();
-  const [stores, setStores] = useState<AffiliateStore[]>([]);
+  const [allStores, setAllStores] = useState<AffiliateStore[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [manualCategory, setManualCategory] = useState<string | null>(null);
+  const locationSearch = useSyncExternalStore(subscribeToLocation, getLocationSearch, getServerLocationSearch);
+  const requestedCategory = new URLSearchParams(locationSearch).get('category') ?? '';
+  const selectedCategory = manualCategory ?? (CATEGORY_OPTIONS.some((option) => option.value === requestedCategory) ? requestedCategory : '');
 
   useEffect(() => {
     let cancelled = false;
     api
-      .getAffiliateStores(selectedCategory || undefined, undefined)
+      .getAffiliateStores(undefined, undefined)
       .then((data) => {
-        if (!cancelled) setStores(Array.isArray(data) ? data : []);
+        if (!cancelled) setAllStores(Array.isArray(data) ? data : []);
       })
       .catch((err) => {
         if (!cancelled) {
           // Détail traduit selon l'erreur, jamais le message brut de l'API.
           setError(t(errorKey(err)));
-          setStores([]);
+          setAllStores([]);
         }
       })
       .finally(() => {
@@ -83,10 +99,14 @@ export default function MagasinPage() {
     return () => {
       cancelled = true;
     };
-  }, [selectedCategory, t]);
+  }, [t]);
+
+  const stores = selectedCategory
+    ? allStores.filter((store) => store.categories.includes(selectedCategory))
+    : allStores;
 
   // Aucune boutique du tout (pas seulement pour le filtre choisi) : pas de filtre à proposer.
-  const catalogEmpty = !loading && !error && stores.length === 0 && selectedCategory === '';
+  const catalogEmpty = !loading && !error && allStores.length === 0;
 
   return (
     <div className="cv-container grid gap-6 py-6 sm:py-8">
@@ -97,9 +117,7 @@ export default function MagasinPage() {
           <select
             value={selectedCategory}
             onChange={(e) => {
-              setLoading(true);
-              setError(null);
-              setSelectedCategory(e.target.value);
+              setManualCategory(e.target.value);
             }}
           >
             {CATEGORY_OPTIONS.map((opt) => (

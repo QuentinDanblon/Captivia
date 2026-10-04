@@ -1,0 +1,162 @@
+[
+  {
+    "speciesId": 2465641,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 22,
+      "tempMax": 37,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/bearded-dragon-care/bearded-dragon-temperatures-uvb/", "title": "Bearded Dragon Temperatures & UVB Requirements | ReptiFiles"}]
+    }
+  },
+  {
+    "speciesId": 104076753,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 23,
+      "tempMax": 32,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/giant-day-gecko-care-sheet/", "title": "Giant Day Gecko Care Sheet | ReptiFiles"}]
+    }
+  },
+  {
+    "speciesId": 2446584,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 19,
+      "tempMax": 31,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/leachie-gecko-care-sheet/", "title": "Leachie Gecko Care Sheet | ReptiFiles"}]
+    }
+  },
+  {
+    "speciesId": 8371864,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 15,
+      "tempMax": 28,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/jacksons-chameleon-care/jacksons-chameleon-lighting-temperatures/", "title": "Jackson's Chameleon Lighting & Heating Requirements | ReptiFiles"}]
+    }
+  },
+  {
+    "speciesId": 104101845,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 20,
+      "tempMax": 30,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/green-tree-python-care-sheet/", "title": "Green Tree Python Care Sheet | ReptiFiles"}]
+    }
+  },
+  {
+    "speciesId": 5225659,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 22,
+      "tempMax": 38,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/carpet-python-care-sheet/", "title": "Carpet Python Care Sheet | ReptiFiles"}]
+    }
+  },
+  {
+    "speciesId": 2455676,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 22,
+      "tempMax": 32,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/black-ratsnake-care-sheet/", "title": "Black Ratsnake Care Sheet | ReptiFiles"}]
+    }
+  },
+  {
+    "speciesId": 2441533,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 21,
+      "tempMax": 41,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/sulcata-tortoise-care-sheet/", "title": "Sulcata Tortoise Care Sheet | ReptiFiles"}]
+    }
+  },
+  {
+    "speciesId": 2447367,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 24,
+      "tempMax": 38,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/tokay-gecko-care-sheet/", "title": "Tokay Gecko Care Sheet | ReptiFiles"}]
+    }
+  },
+  {
+    "speciesId": 2445755,
+    "habitat": {
+      "habitatType": null,
+      "tempMin": 18,
+      "tempMax": 26,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": null,
+      "lightNeeds": null,
+      "activityEnrichment": null,
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [{"type": "guide", "url": "https://reptifiles.com/uroplatus-leaf-tailed-gecko-care/leaf-tailed-gecko-temperatures-lighting/", "title": "Leaf-Tailed Gecko Temperatures & Lighting Requirements | ReptiFiles"}]
+    }
+  }
+]

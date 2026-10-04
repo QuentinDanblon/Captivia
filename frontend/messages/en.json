@@ -1158,6 +1158,16 @@
       "equipment": "Recommended equipment",
       "sources": "References"
     },
+    "belgium": {
+      "title": "Rules to check for your region",
+      "body": "In Belgium, keeping rules vary by region, species and CITES status. The positive lists linked here cover mammals and are not enough to establish the rules for other species. Historical catalogue statuses remain hidden until checked with the competent authorities.",
+      "sources": {
+        "wallonia": "Wallonia: positive mammal list and keeping rules",
+        "flanders": "Flanders: permitted mammals",
+        "brussels": "Brussels: keeping and adoption",
+        "cites": "Belgian FPS Public Health: CITES"
+      }
+    },
     "review": {
       "badge": "To be confirmed",
       "hint": "Not yet reviewed by our team",
@@ -2527,7 +2537,7 @@
     "start": "Choose a category or species to open its guide.",
     "unknownCategory": "Choose the category that matches this species.",
     "planTitle": "Your measured plan",
-    "planIntro": "Enter your installation dimensions and choose where to place equipment. This plan shows your choices, rather than certifying a minimum size or a layout for the species.",
+    "planIntro": "Enter the dimensions and choose where to place equipment. Measurements are prefilled only when the sourced species sheet gives three explicit dimensions. The sketch records your choices; it does not certify a minimum size or validated setup for the species.",
     "length": "Length (cm)",
     "width": "Width (cm)",
     "height": "Height (cm)",
@@ -2704,6 +2714,12 @@
       "left": "Left",
       "centre": "Centre",
       "right": "Right"
-    }
+    },
+    "shopForAnimal": "Find shops for this animal",
+    "planShopHint": "The shop opens with this species category selected, when partner stores are listed for it.",
+    "planSave": "Save this sketch on this device",
+    "planExport": "Download sketch",
+    "planSaved": "Sketch saved on this device.",
+    "planSaveError": "Saving is unavailable in this browser."
   }
 }

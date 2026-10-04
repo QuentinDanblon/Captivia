@@ -69,7 +69,7 @@ interface SpeciesHabitatData {
   lightNeeds: string;
   activityEnrichment: string;
   hygieneNotes?: string;
-  costEstimate: string;
+  costEstimate?: string;
 }
 
 interface SpeciesBehaviorData {
@@ -109,12 +109,12 @@ function validateSpeciesFeeding(data: SpeciesFeedingData): boolean {
 }
 
 function validateSpeciesHabitat(data: SpeciesHabitatData): boolean {
-  if (!data.speciesId || !data.habitatType || data.tempMin === undefined || data.tempMax === undefined || !data.minSpaceSize || !data.lightNeeds || !data.activityEnrichment || !data.costEstimate) {
+  if (!data.speciesId || !data.habitatType || data.tempMin === undefined || data.tempMax === undefined || !data.minSpaceSize || !data.lightNeeds || !data.activityEnrichment) {
     console.warn(`⚠️ Invalid SpeciesHabitat: missing required fields for species ${data.speciesId}`);
     return false;
   }
   const validCosts = ['faible', 'moyen', 'élevé'];
-  if (!validCosts.includes(data.costEstimate)) {
+  if (data.costEstimate && !validCosts.includes(data.costEstimate)) {
     console.warn(`⚠️ Invalid costEstimate for species ${data.speciesId}: ${data.costEstimate}`);
     return false;
   }
@@ -313,16 +313,19 @@ export async function main() {
       const legislationList = (species as { legislation?: Array<{ country: string; status: string; details: object; sources: string[] }> }).legislation;
       if (legislationList && Array.isArray(legislationList)) {
         for (const leg of legislationList) {
+          const details = leg.country === 'BE'
+            ? { ...leg.details, needsReview: true }
+            : leg.details;
           await (prisma as any).speciesLegislation.upsert({
             where: {
               speciesId_country: { speciesId: species.speciesId, country: leg.country },
             },
-            update: { status: leg.status, details: leg.details, sources: leg.sources },
+            update: { status: leg.status, details, sources: leg.sources },
             create: {
               speciesId: species.speciesId,
               country: leg.country,
               status: leg.status,
-              details: leg.details,
+              details,
               sources: leg.sources,
             },
           });

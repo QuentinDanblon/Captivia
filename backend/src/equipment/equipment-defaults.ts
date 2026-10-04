@@ -6,9 +6,9 @@ export interface EquipmentContext {
   scientificName: string;
   category: string;
   habitats: {
-    habitatType: string;
-    activityEnrichment: string;
-    lightNeeds: string;
+    habitatType: string | null;
+    activityEnrichment: string | null;
+    lightNeeds: string | null;
     sources: Prisma.JsonValue | null;
   }[];
 }
@@ -78,20 +78,27 @@ export function equipmentDefaults(species: EquipmentContext): {
     bassin: ['Bassin adapté à l’espèce', 'pond'],
   };
   const type = habitat.habitatType
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
-  const enclosure = housing[type];
-  if (enclosure) add(type, enclosure[0], enclosure[1]);
+    ? habitat.habitatType
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+    : null;
+  const enclosure = type ? housing[type] : undefined;
+  if (enclosure && type) {
+    add(type, enclosure[0], enclosure[1]);
+  }
   // On conserve les aménagements de la fiche sourcée, sans inventer de dimensions ni d'accessoires universels.
   if (
+    habitat.activityEnrichment &&
     /perchoir|branche|cachette|plante|roue|substrat|abri/i.test(
       habitat.activityEnrichment,
     )
   ) {
     add('decoration', habitat.activityEnrichment);
   }
-  if (/uvb/i.test(habitat.lightNeeds)) add('uvb', habitat.lightNeeds);
+  if (habitat.lightNeeds && /uvb/i.test(habitat.lightNeeds)) {
+    add('uvb', habitat.lightNeeds);
+  }
   if (Array.isArray(habitat.sources)) {
     sources.push(
       ...habitat.sources.filter(

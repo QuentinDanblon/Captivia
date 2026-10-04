@@ -1,0 +1,218 @@
+[
+  {
+    "speciesId": 7572096,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": 16,
+        "quote": "Temp 16–24 °C",
+        "url": "https://www.seriouslyfish.com/species/pethia-conchonius/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 24,
+        "quote": "Temp 16–24 °C",
+        "url": "https://www.seriouslyfish.com/species/pethia-conchonius/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "Base minimale : 100 × 30 cm.",
+        "quote": "Base dimensions of at least 100 ∗ 30 cm 39 ∗ 12 in or equivalent are required.",
+        "url": "https://www.seriouslyfish.com/species/pethia-conchonius/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "The addition of some floating plants and driftwood roots or branches to diffuse the light entering the tank also seems to be appreciated and adds a more natural feel.",
+        "quote": "The addition of some floating plants and driftwood roots or branches to diffuse the light entering the tank also seems to be appreciated and adds a more natural feel.",
+        "url": "https://www.seriouslyfish.com/species/pethia-conchonius/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "The addition of some floating plants and driftwood roots or branches to diffuse the light entering the tank also seems to be appreciated and adds a more natural feel.",
+        "quote": "The addition of some floating plants and driftwood roots or branches to diffuse the light entering the tank also seems to be appreciated and adds a more natural feel.",
+        "url": "https://www.seriouslyfish.com/species/pethia-conchonius/"
+      }
+    ],
+    "reviewedAt": "2026-10-04"
+  },
+  {
+    "speciesId": 103899345,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": 25,
+        "quote": "Temp 25–30 °C",
+        "url": "https://www.seriouslyfish.com/species/toxotes-jaculatrix/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 30,
+        "quote": "Temp 25–30 °C",
+        "url": "https://www.seriouslyfish.com/species/toxotes-jaculatrix/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "Base d’aquarium indiquée : 120 × 60 cm; prévoir un bac haut et une zone émergée.",
+        "quote": "Tank base 120 × 60 cm 48 × 24 in",
+        "url": "https://www.seriouslyfish.com/species/toxotes-jaculatrix/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "Lighting should be suited to the types of plants used.",
+        "quote": "Lighting should be suited to the types of plants used.",
+        "url": "https://www.seriouslyfish.com/species/toxotes-jaculatrix/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "Another means of keeping archerfish is in a biotope setup, using a tall tank half-filled with water and an area of dry land and plants in the upper area of the tank. This has the benefit of encouraging natural feeding behaviour (see below).",
+        "quote": "Another means of keeping archerfish is in a biotope setup, using a tall tank half-filled with water and an area of dry land and plants in the upper area of the tank. This has the benefit of encouraging natural feeding behaviour (see below).",
+        "url": "https://www.seriouslyfish.com/species/toxotes-jaculatrix/"
+      }
+    ],
+    "reviewedAt": "2026-10-04"
+  },
+  {
+    "speciesId": 103952549,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": 20,
+        "quote": "Temp 20–30 °C",
+        "url": "https://www.seriouslyfish.com/species/rocio-octofasciata/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 30,
+        "quote": "Temp 20–30 °C",
+        "url": "https://www.seriouslyfish.com/species/rocio-octofasciata/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "Base minimale : 120 × 45 cm pour un couple adulte.",
+        "quote": "minimum base dimensions of 120 ∗ 45 cm 48 ∗ 18 in or equivalent is recommended for a single adult pair.",
+        "url": "https://www.seriouslyfish.com/species/rocio-octofasciata/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "the most favoured set-ups tend to feature relatively dim lighting plus some chunks of driftwood and scattered roots or branches.",
+        "quote": "the most favoured set-ups tend to feature relatively dim lighting plus some chunks of driftwood and scattered roots or branches.",
+        "url": "https://www.seriouslyfish.com/species/rocio-octofasciata/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "Ideally a soft, sandy substrate should be used though it’s not essential, and one or two flattish, water-worn rocks can also be included to provide potential spawning sites.",
+        "quote": "Ideally a soft, sandy substrate should be used though it’s not essential, and one or two flattish, water-worn rocks can also be included to provide potential spawning sites.",
+        "url": "https://www.seriouslyfish.com/species/rocio-octofasciata/"
+      }
+    ],
+    "reviewedAt": "2026-10-04"
+  },
+  {
+    "speciesId": 103953586,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": 27,
+        "quote": "Temp 27–30 °C",
+        "url": "https://www.seriouslyfish.com/species/mikrogeophagus-ramirezi/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 30,
+        "quote": "Temp 27–30 °C",
+        "url": "https://www.seriouslyfish.com/species/mikrogeophagus-ramirezi/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "Base d’aquarium indiquée : 60 × 30 cm.",
+        "quote": "Tank base 60 × 30 cm 24 × 12 in",
+        "url": "https://www.seriouslyfish.com/species/mikrogeophagus-ramirezi/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "a soft, sandy substrate with wood roots and branches placed such a way that plenty of shady spots and caves are formed",
+        "quote": "a soft, sandy substrate with wood roots and branches placed such a way that plenty of shady spots and caves are formed",
+        "url": "https://www.seriouslyfish.com/species/mikrogeophagus-ramirezi/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "Provided adequate cover and structure is available this species is unfussy with regards to décor with ceramic flowerpots, lengths of plastic piping and other artificial materials all useful additions.",
+        "quote": "Provided adequate cover and structure is available this species is unfussy with regards to décor with ceramic flowerpots, lengths of plastic piping and other artificial materials all useful additions.",
+        "url": "https://www.seriouslyfish.com/species/mikrogeophagus-ramirezi/"
+      }
+    ],
+    "reviewedAt": "2026-10-04"
+  },
+  {
+    "speciesId": 103973942,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": 23,
+        "quote": "Temp 23–29 °C",
+        "url": "https://www.seriouslyfish.com/species/paracheirodon-axelrodi/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 29,
+        "quote": "Temp 23–29 °C",
+        "url": "https://www.seriouslyfish.com/species/paracheirodon-axelrodi/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "Base d’aquarium indiquée : 60 × 30 cm.",
+        "quote": "Tank base 60 × 30 cm 24 × 12 in",
+        "url": "https://www.seriouslyfish.com/species/paracheirodon-axelrodi/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "This species seems to do best under fairly dim lighting",
+        "quote": "This species seems to do best under fairly dim lighting",
+        "url": "https://www.seriouslyfish.com/species/paracheirodon-axelrodi/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "It perhaps looks best in a heavily-planted set-up or natural-style arrangement comprising a sandy substrate plus some driftwood roots and branches.",
+        "quote": "It perhaps looks best in a heavily-planted set-up or natural-style arrangement comprising a sandy substrate plus some driftwood roots and branches.",
+        "url": "https://www.seriouslyfish.com/species/paracheirodon-axelrodi/"
+      }
+    ],
+    "reviewedAt": "2026-10-04"
+  },
+  {
+    "speciesId": 156261518,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": 20,
+        "quote": "Temp 20–26 °C",
+        "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 26,
+        "quote": "Temp 20–26 °C",
+        "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "Base d’aquarium indiquée : 90 × 30 cm; espèce grégaire à maintenir en banc.",
+        "quote": "Tank base 90 × 30 cm 36 × 12 in",
+        "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "Best kept in a well-decorated set-up with some surface or floating vegetation since it appears to prefer relatively dim conditions.",
+        "quote": "Best kept in a well-decorated set-up with some surface or floating vegetation since it appears to prefer relatively dim conditions.",
+        "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "Best kept in a well-decorated set-up with some surface or floating vegetation since it appears to prefer relatively dim conditions.",
+        "quote": "Best kept in a well-decorated set-up with some surface or floating vegetation since it appears to prefer relatively dim conditions.",
+        "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/"
+      }
+    ],
+    "reviewedAt": "2026-10-04"
+  }
+]

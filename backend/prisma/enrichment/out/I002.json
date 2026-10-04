@@ -1,0 +1,34 @@
+[
+  {
+    "speciesId": 104232708,
+    "health": {
+      "diseases": [
+        {
+          "name": "Infestation d'acariens",
+          "symptoms": "Irritation et affaiblissement.",
+          "prevention": "Nettoyer régulièrement l'enclos, éviter la surpopulation et garder les aliments exempts de contaminants.",
+          "whenToConsult": "Demander l'avis d'un vétérinaire spécialisé pour un diagnostic et un traitement adaptés."
+        },
+        {
+          "name": "Infection bactérienne ou fongique",
+          "symptoms": "Une infection peut se développer à partir d'une plaie ouverte ou d'une hygiène insuffisante de l'habitat.",
+          "prevention": "Éviter la cohabitation sauf pour une espèce sociale et manipuler avec prudence.",
+          "whenToConsult": "Demander l'avis d'un vétérinaire spécialisé pour un diagnostic et un traitement adaptés."
+        },
+        {
+          "name": "Déséquilibre nutritionnel",
+          "symptoms": "Une alimentation inadaptée ou trop limitée peut entraîner un déséquilibre nutritionnel.",
+          "prevention": "Proposer une alimentation variée et des proies de taille adaptée.",
+          "whenToConsult": "Demander l'avis d'un vétérinaire spécialisé pour un diagnostic et un traitement adaptés."
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://vetverified.com/articles/common-health-issues-in-scorpions-and-the-importance-of-using-a-specialist-vet",
+          "title": "Common Health Issues in Scorpions and the Importance of Using a Specialist Vet"
+        }
+      ]
+    }
+  }
+]

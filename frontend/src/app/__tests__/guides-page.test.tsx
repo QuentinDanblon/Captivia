@@ -9,6 +9,10 @@ const mockReplace = jest.fn();
 jest.mock('next/navigation', () => ({ useSearchParams: jest.fn() }));
 jest.mock('@/contexts/AuthContext', () => ({ useAuth: jest.fn() }));
 jest.mock('@/lib/api', () => ({ api: { getSpecies: jest.fn(), getRecommendedEquipment: jest.fn(), getMyAnimals: jest.fn(), searchSpecies: jest.fn() } }));
+jest.mock('next-intl', () => ({
+  useLocale: () => 'fr',
+  useTranslations: () => Object.assign((key: string) => key, { has: () => false }),
+}));
 jest.mock('@/i18n/navigation', () => ({
   useRouter: () => ({ replace: mockReplace }),
   Link: ({ children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement> & { children: ReactNode }) => <a {...props}>{children}</a>,
@@ -38,6 +42,17 @@ it('affiche les exigences propres à l’espèce avec leurs sources', async () =
   render(<GuidesPage />);
   expect(await screen.findByText('200 × 100 × 100 cm')).toBeInTheDocument();
   expect(screen.queryByText('guides.noDimensions')).not.toBeInTheDocument();
+});
+
+it('affiche les soins d’habitat sourcés même si la source ne donne pas de température', async () => {
+  mocked.getSpecies.mockResolvedValue({ ...species, habitat: {
+    habitatType: 'enclos', minSpaceSize: 'Accès à une pâture et à un abri sec.',
+    sources: [{ title: 'Source', url: 'https://www.rspca.org.uk/example' }],
+  } });
+  render(<GuidesPage />);
+  expect(await screen.findByText('Accès à une pâture et à un abri sec.')).toBeInTheDocument();
+  expect(screen.queryByText('species.temperature')).not.toBeInTheDocument();
+  expect(screen.queryByText('guides.noHabitat')).not.toBeInTheDocument();
 });
 
 it('une réponse périmée ne remplace pas le guide de la dernière espèce choisie', async () => {
@@ -76,4 +91,5 @@ it('une erreur d’équipement conserve l’accès aux informations de l’espè
   render(<GuidesPage />);
   expect(await screen.findByRole('heading', { name: 'Boa constricteur' })).toBeInTheDocument();
   expect(screen.getByText('guides.noEquipment')).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: 'guides.shopForAnimal' })).toHaveAttribute('href', '/magasin#store-category-filter');
 });

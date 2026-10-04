@@ -30,8 +30,9 @@ export interface SpeciesHealthData {
 export interface SpeciesLegislationItem {
   country: string;
   status: string;
-  details?: { citesAppendix?: string | null; euAnnex?: string | null; permits?: string[]; restrictions?: string[] };
+  details?: { citesAppendix?: string | null; euAnnex?: string | null; permits?: string[]; restrictions?: string[]; needsReview?: boolean };
   sources?: string[];
+  needsReview?: boolean;
 }
 
 export interface SpeciesLegislationData {
