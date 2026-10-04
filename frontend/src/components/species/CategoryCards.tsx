@@ -5,6 +5,7 @@ import { useRef, type PointerEvent } from 'react';
 import { Check } from 'lucide-react';
 import { PHOTOS, photoSources, type PhotoKey } from '@/content/photos';
 import { SPECIES_GROUPS, type SpeciesGroup } from '@/lib/species';
+import { IS_MOBILE_BUILD } from '@/lib/platform';
 import './category-cards.css';
 
 export interface CategoryCardsProps {
@@ -113,7 +114,12 @@ export function CategoryCards({ groups = SPECIES_GROUPS, selectedId, onSelect }:
     .filter((group) => DEFAULT_GROUP_ORDER.includes(group.id))
     .sort((left, right) => DEFAULT_GROUP_ORDER.indexOf(left.id) - DEFAULT_GROUP_ORDER.indexOf(right.id));
   return (
-    <div className="species-category-cards" role="group" aria-label={t('groupsLabel')}>
+    <div
+      className={`species-category-cards${IS_MOBILE_BUILD ? ' species-category-cards--vertical' : ''}`}
+      role="group"
+      aria-label={t('groupsLabel')}
+      tabIndex={IS_MOBILE_BUILD ? undefined : 0}
+    >
       {visibleGroups.map((group) => (
         <CategoryCard
           key={group.id}
