@@ -5,9 +5,12 @@ import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Search } from 'lucide-react';
 import { api, type SearchSpeciesFilters } from '@/lib/api';
-import { SPECIES_GROUPS, normalizeSpeciesResult, speciesGroupById, type SpeciesGroup, type SpeciesSummary } from '@/lib/species';
+import { normalizeSpeciesResult, speciesGroupById, type SpeciesGroup, type SpeciesSummary } from '@/lib/species';
 import { Alert, AnimalSilhouette, Button, EmptyState, SectionHeader, Skeleton, SkeletonGroup, cx } from '@/components/ui';
 import { SpeciesCard } from '@/components/species/SpeciesCard';
+import { CategoryCards } from '@/components/species/CategoryCards';
+import { CategoryBackdrop, CategoryTextureCredit } from '@/components/species/CategoryBackdrop';
+import '@/components/species/species-explorer.css';
 
 const PAGE_SIZE = 24;
 /** Délai après la dernière frappe avant de lancer la recherche. */
@@ -127,6 +130,10 @@ function SpeciesSearchView() {
   const chooseGroup = (nextGroupId: string | null) => {
     const typed = text.trim();
     commit(typed.length === 0 || typed.length >= MIN_QUERY_LENGTH ? typed : query, nextGroupId);
+    requestAnimationFrame(() => document.getElementById(resultsId)?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      block: 'start',
+    }));
   };
 
   const clearSearch = () => {
@@ -160,11 +167,13 @@ function SpeciesSearchView() {
   const heading = query ? t('speciesSearch.resultsFor', { query }) : (groupLabel ?? t('speciesSearch.resultsAll'));
 
   return (
-    <div className="cv-container grid gap-6 py-6 sm:py-8">
-      <SectionHeader level={1} title={t('speciesSearch.title')} description={t('speciesSearch.intro')} />
+    <div className="species-explorer" data-category-texture={groupId ?? 'none'}>
+      <CategoryBackdrop selectedId={groupId} />
+      <div className="cv-container grid gap-6 py-6 sm:py-8">
+      <SectionHeader level={1} title={t('speciesSearch.title')} description={t('speciesSearch.intro')} className="species-explorer__surface" />
 
       <div className="grid gap-4">
-        <form role="search" onSubmit={onSubmit} className="grid max-w-2xl gap-2">
+        <form role="search" onSubmit={onSubmit} className="species-explorer__surface grid gap-2">
           <label htmlFor={inputId} className="text-ui font-medium text-ink">
             {t('speciesSearch.label')}
           </label>
@@ -188,36 +197,22 @@ function SpeciesSearchView() {
         </form>
 
         <fieldset className="m-0 min-w-0 border-0 p-0">
-          <legend className="mb-2 p-0 text-ui font-medium text-ink">{t('speciesSearch.groupsLabel')}</legend>
-          <div className="-mx-4 overflow-x-auto px-4 pb-1 sm:mx-0 sm:overflow-visible sm:px-0">
-            <ul className="m-0 flex w-max list-none gap-2 p-0 sm:w-auto sm:flex-wrap">
-              {[null, ...SPECIES_GROUPS].map((g) => {
-                const selected = (g?.id ?? null) === groupId;
-                return (
-                  <li key={g?.id ?? 'all'}>
-                    <button
-                      type="button"
-                      aria-pressed={selected}
-                      onClick={() => chooseGroup(g?.id ?? null)}
-                      className={cx(
-                        'inline-flex min-h-11 items-center gap-2 rounded-control border px-3 text-ui whitespace-nowrap transition-colors',
-                        selected
-                          ? 'border-accent bg-accent-soft font-medium text-accent-text'
-                          : 'border-line-field bg-surface text-ink hover:bg-sunken',
-                      )}
-                    >
-                      {g ? <AnimalSilhouette kind={g.silhouette} size={22} className={selected ? 'text-accent-text' : 'text-ink-3'} /> : null}
-                      {t(`speciesSearch.groups.${g?.id ?? 'all'}`)}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+          <legend className="mb-4 rounded-control bg-surface px-4 py-3 text-ui font-medium text-ink">{t('speciesSearch.groupsLabel')}</legend>
+          <div className="species-explorer__filters mb-4">
+            {[null, speciesGroupById('arachnids')].map((item) => <Button
+              key={item?.id ?? 'all'}
+              variant={groupId === (item?.id ?? null) ? 'primary' : 'secondary'}
+              wrap
+              aria-pressed={groupId === (item?.id ?? null)}
+              onClick={() => chooseGroup(item?.id ?? null)}
+            >{t(`speciesSearch.groups.${item?.id ?? 'all'}`)}</Button>)}
           </div>
+          <CategoryCards selectedId={groupId} onSelect={chooseGroup} />
         </fieldset>
       </div>
 
-      <section id={resultsId} aria-labelledby={`${resultsId}-title`} className="grid gap-4">
+      <CategoryTextureCredit selectedId={groupId} />
+      <section id={resultsId} aria-labelledby={`${resultsId}-title`} className="species-explorer__surface species-explorer__results grid gap-4">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-line pb-2">
           <h2 id={`${resultsId}-title`} className="m-0 text-h4">
             {heading}
@@ -282,6 +277,7 @@ function SpeciesSearchView() {
           </div>
         ) : null}
       </section>
+      </div>
     </div>
   );
 }

@@ -43,6 +43,7 @@ test.describe("Recherche d'espèces dans l'app", () => {
 
     // Photo locale libre créditée ; un taxon sans photo locale et avec seulement du NC garde sa silhouette.
     const boa = cards.filter({ hasText: 'Boa constricteur' });
+    await boa.scrollIntoViewIfNeeded();
     await expect(boa.getByRole('img', { name: 'Boa constricteur, photographie' })).toBeVisible();
     await expect(boa.getByRole('link', { name: 'Arnaud Aury' })).toHaveAttribute('href', 'https://commons.wikimedia.org/wiki/File:Boa_constrictor_Gallion_Guyane.jpg');
     await expect(boa.getByRole('link', { name: 'CC BY 4.0' })).toBeVisible();

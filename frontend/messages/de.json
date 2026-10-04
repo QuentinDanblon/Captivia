@@ -1731,7 +1731,8 @@
     "photoAlt": "{name}, Fotografie",
     "photoBy": "Foto",
     "more": "{count, plural, one {Letzten Steckbrief anzeigen} other {# weitere Steckbriefe anzeigen}}",
-    "moreFailed": "Weitere Ergebnisse konnten nicht geladen werden. Bitte erneut versuchen."
+    "moreFailed": "Weitere Ergebnisse konnten nicht geladen werden. Bitte erneut versuchen.",
+    "textureCredit": "Fotografische Textur, durch Spiegelung wiederholt:"
   },
   "photoPicker": {
     "header": "Foto Ihres Tieres",

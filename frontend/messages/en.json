@@ -1731,7 +1731,8 @@
     "photoAlt": "{name}, photograph",
     "photoBy": "Photo",
     "more": "{count, plural, one {Show the last guide} other {Show # more guides}}",
-    "moreFailed": "The next results couldn't be loaded. Try again."
+    "moreFailed": "The next results couldn't be loaded. Try again.",
+    "textureCredit": "Photographic texture, repeated by reflection:"
   },
   "photoPicker": {
     "header": "Your animal’s photo",
