@@ -349,3 +349,47 @@ Quinze photos de poissons, d'amphibiens et d'invertébrés vérifiées sur leurs
 | `animals/grammostola-rosea-{480,800}.{avif,webp}` | Grammostola rosea, tarentule de Gordon | Spiders Genova - Grammostola rosea 1.jpg | Syrio | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Spiders_Genova_-_Grammostola_rosea_1.jpg |
 | `animals/caribbean-hermit-crab-{480,800}.{avif,webp}` | Coenobita clypeatus, bernard-l'ermite terrestre | Coenobita clypeatus 177457464.jpg | Dan Schofield | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Coenobita_clypeatus_177457464.jpg |
 | `animals/giant-woodlouse-{480,800}.{avif,webp}` | Porcellio laevis, cloporte géant | Porcellio laevis Rufino cropped.jpg | Stephan Kleinfelder | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Porcellio_laevis_Rufino_cropped.jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 10
+
+Quinze photos de mammifères et d'oiseaux dont le taxon a été vérifié visuellement sur les pages de fichier Commons. Les variantes locales 480/800 px sont fournies en AVIF et WebP.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/llama-{480,800}.{avif,webp}` | Lama glama, lama | Lama glama Laguna Colorada 2.jpg | kallerna | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lama_glama_Laguna_Colorada_2.jpg |
+| `animals/ring-tailed-lemur-{480,800}.{avif,webp}` | Lemur catta, maki catta | Lemur catta 001.jpg | Alex Dunkel ( Maky ) | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Lemur_catta_001.jpg |
+| `animals/bennetts-wallaby-{480,800}.{avif,webp}` | Notamacropus rufogriseus, wallaby de Bennett | Macropus rufogriseus rufogriseus Juvenile 2.jpg | JJ Harrison | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Macropus_rufogriseus_rufogriseus_Juvenile_2.jpg |
+| `animals/musk-ox-{480,800}.{avif,webp}` | Ovibos moschatus, bœuf musqué | Ovibos moschatus qtl3.jpg | Quartl | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Ovibos_moschatus_qtl3.jpg |
+| `animals/sika-deer-{480,800}.{avif,webp}` | Cervus nippon, cerf sika | Sika Deer in Nara Park, Japan.jpg | Arczi | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Sika_Deer_in_Nara_Park,_Japan.jpg |
+| `animals/fallow-deer-{480,800}.{avif,webp}` | Dama dama, daim | Persian Fallow Deer 1.jpg | Eyal Bartov | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Persian_Fallow_Deer_1.jpg |
+| `animals/bourkes-parakeet-{480,800}.{avif,webp}` | Neopsephotus bourkii, perruche de Bourke | Neophema bourkii 121274727.jpg | Kym Nicolson | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Neophema_bourkii_121274727.jpg |
+| `animals/lavender-waxbill-{480,800}.{avif,webp}` | Estrilda caerulescens, astrild à pointe | Lavender Waxbill RWD.jpg | DickDaniels | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Lavender_Waxbill_RWD.jpg |
+| `animals/japanese-bunting-{480,800}.{avif,webp}` | Emberiza cioides, bruant du Japon | Emberiza cioides male.JPG | Alpsdake | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Emberiza_cioides_male.JPG |
+| `animals/diamond-dove-{480,800}.{avif,webp}` | Geopelia cuneata, colombe diamant | Geopelia cuneata -Pilbara, Western Australia, Australia-8 (1).jpg | Jim Bendon | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Geopelia_cuneata_-Pilbara,_Western_Australia,_Australia-8_(1).jpg |
+| `animals/mallard-{480,800}.{avif,webp}` | Anas platyrhynchos, canard colvert | Anas platyrhynchos (Male) on the ground.jpg | Commonists | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_(Male)_on_the_ground.jpg |
+| `animals/wood-duck-{480,800}.{avif,webp}` | Aix sponsa, canard carolin | Wood duck druid ridge cemetery 10.10.20 DSC 6035.jpg | lwolfartist | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Wood_duck_druid_ridge_cemetery_10.10.20_DSC_6035.jpg |
+| `animals/japanese-quail-{480,800}.{avif,webp}` | Coturnix japonica, caille du Japon | Japanese Quail.jpg | Ingrid Taylar | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Japanese_Quail.jpg |
+| `animals/mute-swan-{480,800}.{avif,webp}` | Cygnus olor, cygne tuberculé | Mute Swan Emsworth2.JPG | Geni | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Mute_Swan_Emsworth2.JPG |
+| `animals/toco-toucan-{480,800}.{avif,webp}` | Ramphastos toco, toucan toco | Toco Toucan (Ramphastos toco) - 48153967707.jpg | Bernard DUPONT | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Toco_Toucan_(Ramphastos_toco)_-_48153967707.jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 11
+
+Quinze photos supplémentaires d'espèces non illustrées jusqu'ici par une photo exacte. Les fichiers Commons, auteurs, licences et cadrages ont été contrôlés; les variantes locales 480/800 px sont disponibles en AVIF et WebP.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/dendrobates-auratus-{480,800}.{avif,webp}` | Dendrobates auratus, dendrobate à ventre tacheté | Dendrobates auratus - Goldbaumsteiger 203695198.jpg | snail_hiker | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Dendrobates_auratus_-_Goldbaumsteiger_203695198.jpg |
+| `animals/dendrobates-azureus-{480,800}.{avif,webp}` | Dendrobates azureus, dendrobate bleu | Dendrobates azureus qtl1.jpg | Quartl | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Dendrobates_azureus_qtl1.jpg |
+| `animals/edible-frog-{480,800}.{avif,webp}` | Pelophylax kl. esculentus, grenouille verte | Edible frog (Pelophylax esculentus).jpg | Petar Milošević | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Edible_frog_(Pelophylax_esculentus).jpg |
+| `animals/crested-newt-{480,800}.{avif,webp}` | Triturus cristatus, triton crêté | Kammmolchmaennchen.jpg | Rainer Theuer. | Domaine public | https://commons.wikimedia.org/wiki/File:Kammmolchmaennchen.jpg |
+| `animals/alpine-newt-{480,800}.{avif,webp}` | Ichthyosaura alpestris, triton alpestre | Bergmolch Ichthyosaura alpestris.jpg | Holger Krisp | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Bergmolch_Ichthyosaura_alpestris.jpg |
+| `animals/glass-frog-{480,800}.{avif,webp}` | Hyalinobatrachium valerioi, grenouille de verre | Hyalinobatrachium valerioi 399304213.jpg | Nick Tobler (Cowturtle) | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Hyalinobatrachium_valerioi_399304213.jpg |
+| `animals/ameerega-trivittata-{480,800}.{avif,webp}` | Ameerega trivittata, grenouille venimeuse de l'Amazone | Ameerega trivittata 257603527.jpg | Kristof Zyskowski | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Ameerega_trivittata_257603527.jpg |
+| `animals/sailfin-molly-{480,800}.{avif,webp}` | Poecilia latipinna, molly voile | Poecilia latipinna 170400954.jpg | Tia Offner | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Poecilia_latipinna_170400954.jpg |
+| `animals/blue-gourami-{480,800}.{avif,webp}` | Trichogaster trichopterus, gourami bleu (Commons : Trichopodus trichopterus) | Trichopodus trichopterus (3 spot gourami, Philippines) 01.jpg | Obsidian Soul | CC0 | https://commons.wikimedia.org/wiki/File:Trichopodus_trichopterus_(3_spot_gourami,_Philippines)_01.jpg |
+| `animals/cockatoo-cichlid-{480,800}.{avif,webp}` | Apistogramma cacatuoides | Apistogramma cacatuoides.jpg | Redspider | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Apistogramma_cacatuoides.jpg |
+| `animals/buenos-aires-tetra-{480,800}.{avif,webp}` | Hyphessobrycon anisitsi, tétras de Buenos Aires (forme albinos) | Hyphessobrycon anisitsi albus.jpg | Astellar87 | Domaine public | https://commons.wikimedia.org/wiki/File:Hyphessobrycon_anisitsi_albus.jpg |
+| `animals/orange-knee-tarantula-{480,800}.{avif,webp}` | Brachypelma auratum, tarentule mexicaine à genoux oranges | Spiders Genova - Brachypelma auratum.jpg | Syrio | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Spiders_Genova_-_Brachypelma_auratum.jpg |
+| `animals/pinktoe-tarantula-{480,800}.{avif,webp}` | Avicularia avicularia, tarentule à pattes roses | Avicularia avicularia.jpg | BhaalPriestess | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Avicularia_avicularia.jpg |
+| `animals/salmon-tarantula-{480,800}.{avif,webp}` | Lasiodora parahybana, tarentule saumonée | Spiders Genova - Lasiodora parahybana.jpg | Syrio | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Spiders_Genova_-_Lasiodora_parahybana.jpg |
+| `animals/brown-snail-{480,800}.{avif,webp}` | Helix pomatia, escargot de Bourgogne | Helix pomatia 2026 G1.jpg | George Chernilevsky | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Helix_pomatia_2026_G1.jpg |

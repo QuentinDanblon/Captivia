@@ -186,6 +186,21 @@ export type PhotoKey =
   | 'butterflyfish'
   | 'archerfish'
   | 'elephantnoseFish'
+  | 'llama'
+  | 'ringTailedLemur'
+  | 'bennettsWallaby'
+  | 'muskOx'
+  | 'sikaDeer'
+  | 'fallowDeer'
+  | 'bourkesParakeet'
+  | 'lavenderWaxbill'
+  | 'japaneseBunting'
+  | 'diamondDove'
+  | 'mallard'
+  | 'woodDuck'
+  | 'japaneseQuail'
+  | 'muteSwan'
+  | 'tocoToucan'
   | 'mossForest'
   | 'grassDroplets'
   | 'lemonBalm'
@@ -216,7 +231,21 @@ export type PhotoKey =
   | 'goliathTarantula'
   | 'grammostolaRosea'
   | 'caribbeanHermitCrab'
-  | 'giantWoodlouse';
+  | 'dendrobatesAuratus'
+  | 'dendrobatesAzureus'
+  | 'edibleFrog'
+  | 'crestedNewt'
+  | 'alpineNewt'
+  | 'glassFrog'
+  | 'amazonPoisonFrog'
+  | 'sailfinMolly'
+  | 'blueGourami'
+  | 'cockatooDwarfCichlid'
+  | 'buenosAiresTetra'
+  | 'orangeKneeTarantula'
+  | 'pinktoeTarantula'
+  | 'salmonPinkTarantula'
+  | 'burgundySnail';
 
 export interface Photo {
   /** Chemin sans largeur ni extension : `/images/animals/cat-straw`. */
@@ -1157,6 +1186,36 @@ export const PHOTOS: Record<PhotoKey, Photo> = {
     base: '/images/animals/giant-woodlouse', widths: [480, 800], ratio: 2512 / 3688,
     file: 'Porcellio laevis Rufino cropped.jpg', author: 'Stephan Kleinfelder', license: 'CC BY-SA 4.0',
   }),
+  llama: photo({ base: '/images/animals/llama', widths: [480, 800], ratio: 4 / 3, file: 'Lama glama Laguna Colorada 2.jpg', author: 'kallerna', license: 'CC BY-SA 4.0' }),
+  ringTailedLemur: photo({ base: '/images/animals/ring-tailed-lemur', widths: [480, 800], ratio: 4 / 3, file: 'Lemur catta 001.jpg', author: 'Alex Dunkel ( Maky )', license: 'CC BY 3.0' }),
+  bennettsWallaby: photo({ base: '/images/animals/bennetts-wallaby', widths: [480, 800], ratio: 4 / 3, file: 'Macropus rufogriseus rufogriseus Juvenile 2.jpg', author: 'JJ Harrison (https://www.jjharrison.com.au/)', license: 'CC BY-SA 3.0' }),
+  muskOx: photo({ base: '/images/animals/musk-ox', widths: [480, 800], ratio: 4 / 3, file: 'Ovibos moschatus qtl3.jpg', author: 'Quartl', license: 'CC BY-SA 3.0' }),
+  sikaDeer: photo({ base: '/images/animals/sika-deer', widths: [480, 800], ratio: 4 / 3, file: 'Sika Deer in Nara Park, Japan.jpg', author: 'Arczi', license: 'CC BY 4.0' }),
+  fallowDeer: photo({ base: '/images/animals/fallow-deer', widths: [480, 800], ratio: 4 / 3, file: 'Persian Fallow Deer 1.jpg', author: 'Eyal Bartov', license: 'CC BY-SA 3.0' }),
+  bourkesParakeet: photo({ base: '/images/animals/bourkes-parakeet', widths: [480, 800], ratio: 4 / 3, file: 'Neophema bourkii 121274727.jpg', author: 'Kym Nicolson', license: 'CC BY 4.0' }),
+  lavenderWaxbill: photo({ base: '/images/animals/lavender-waxbill', widths: [480, 800], ratio: 4 / 3, file: 'Lavender Waxbill RWD.jpg', author: 'DickDaniels (http://carolinabirds.org/)', license: 'CC BY-SA 3.0' }),
+  japaneseBunting: photo({ base: '/images/animals/japanese-bunting', widths: [480, 800], ratio: 4 / 3, file: 'Emberiza cioides male.JPG', author: 'Alpsdake', license: 'CC BY-SA 3.0' }),
+  diamondDove: photo({ base: '/images/animals/diamond-dove', widths: [480, 800], ratio: 4 / 3, file: 'Geopelia cuneata -Pilbara, Western Australia, Australia-8 (1).jpg', author: 'Jim Bendon from Karratha, Australia', license: 'CC BY-SA 2.0' }),
+  mallard: photo({ base: '/images/animals/mallard', widths: [480, 800], ratio: 4 / 3, file: 'Anas platyrhynchos (Male) on the ground.jpg', author: 'Commonists', license: 'CC BY-SA 4.0' }),
+  woodDuck: photo({ base: '/images/animals/wood-duck', widths: [480, 800], ratio: 4 / 3, file: 'Wood duck druid ridge cemetery 10.10.20 DSC 6035.jpg', author: 'lwolfartist', license: 'CC BY 2.0' }),
+  japaneseQuail: photo({ base: '/images/animals/japanese-quail', widths: [480, 800], ratio: 4 / 3, file: 'Japanese Quail.jpg', author: 'Ingrid Taylar', license: 'CC BY 2.0' }),
+  muteSwan: photo({ base: '/images/animals/mute-swan', widths: [480, 800], ratio: 4 / 3, file: 'Mute Swan Emsworth2.JPG', author: 'Geni', license: 'CC BY-SA 4.0' }),
+  tocoToucan: photo({ base: '/images/animals/toco-toucan', widths: [480, 800], ratio: 4 / 3, file: 'Toco Toucan (Ramphastos toco) - 48153967707.jpg', author: 'Bernard DUPONT', license: 'CC BY-SA 2.0' }),
+  dendrobatesAuratus: photo({ base: '/images/animals/dendrobates-auratus', widths: [480, 800], ratio: 1.28128, file: 'Dendrobates auratus - Goldbaumsteiger 203695198.jpg', author: 'snail_hiker', license: 'CC BY 4.0' }),
+  dendrobatesAzureus: photo({ base: '/images/animals/dendrobates-azureus', widths: [480, 800], ratio: 1.45455, file: 'Dendrobates azureus qtl1.jpg', author: 'Quartl', license: 'CC BY-SA 3.0' }),
+  edibleFrog: photo({ base: '/images/animals/edible-frog', widths: [480, 800], ratio: 1.67979, file: 'Edible frog (Pelophylax esculentus).jpg', author: 'Petar Milošević', license: 'CC BY-SA 4.0' }),
+  crestedNewt: photo({ base: '/images/animals/crested-newt', widths: [480, 800], ratio: 1.56288, file: 'Kammmolchmaennchen.jpg', author: 'Rainer Theuer.', license: 'Domaine public' }),
+  alpineNewt: photo({ base: '/images/animals/alpine-newt', widths: [480, 800], ratio: 1.50059, file: 'Bergmolch Ichthyosaura alpestris.jpg', author: 'Holger Krisp', license: 'CC BY 3.0' }),
+  glassFrog: photo({ base: '/images/animals/glass-frog', widths: [480, 800], ratio: 0.74985, file: 'Hyalinobatrachium valerioi 399304213.jpg', author: 'Nick Tobler (Cowturtle)', license: 'CC BY 4.0' }),
+  amazonPoisonFrog: photo({ base: '/images/animals/ameerega-trivittata', widths: [480, 800], ratio: 1.49883, file: 'Ameerega trivittata 257603527.jpg', author: 'Kristof Zyskowski', license: 'CC BY 4.0' }),
+  sailfinMolly: photo({ base: '/images/animals/sailfin-molly', widths: [480, 800], ratio: 1.80282, file: 'Poecilia latipinna 170400954.jpg', author: 'Tia Offner', license: 'CC BY 4.0' }),
+  blueGourami: photo({ base: '/images/animals/blue-gourami', widths: [480, 800], ratio: 1.33333, file: 'Trichopodus trichopterus (3 spot gourami, Philippines) 01.jpg', author: 'Obsidian Soul', license: 'CC0' }),
+  cockatooDwarfCichlid: photo({ base: '/images/animals/cockatoo-cichlid', widths: [480, 800], ratio: 1.33333, file: 'Apistogramma cacatuoides.jpg', author: 'Redspider', license: 'CC BY-SA 3.0' }),
+  buenosAiresTetra: photo({ base: '/images/animals/buenos-aires-tetra', widths: [480, 800], ratio: 1.33333, file: 'Hyphessobrycon anisitsi albus.jpg', author: 'Astellar87', license: 'Domaine public' }),
+  orangeKneeTarantula: photo({ base: '/images/animals/orange-knee-tarantula', widths: [480, 800], ratio: 1.33333, file: 'Spiders Genova - Brachypelma auratum.jpg', author: 'Syrio', license: 'CC BY-SA 4.0' }),
+  pinktoeTarantula: photo({ base: '/images/animals/pinktoe-tarantula', widths: [480, 800], ratio: 0.74985, file: 'Avicularia avicularia.jpg', author: 'BhaalPriestess', license: 'CC BY 4.0' }),
+  salmonPinkTarantula: photo({ base: '/images/animals/salmon-tarantula', widths: [480, 800], ratio: 1.33333, file: 'Spiders Genova - Lasiodora parahybana.jpg', author: 'Syrio', license: 'CC BY-SA 4.0' }),
+  burgundySnail: photo({ base: '/images/animals/brown-snail', widths: [480, 800], ratio: 1.50059, file: 'Helix pomatia 2026 G1.jpg', author: 'George Chernilevsky', license: 'CC BY 4.0' }),
 };
 
 export const PHOTO_KEYS = Object.keys(PHOTOS) as PhotoKey[];
