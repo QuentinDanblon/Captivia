@@ -1151,6 +1151,16 @@
       "equipment": "Attrezzatura consigliata",
       "sources": "Fonti"
     },
+    "belgium": {
+      "title": "Verifichi le regole della sua regione",
+      "body": "In Belgio le regole di detenzione variano in base alla regione, alla specie e allo status CITES. Gli elenchi positivi collegati riguardano i mammiferi e non bastano a stabilire le regole applicabili alle altre specie. Gli stati storici del catalogo restano nascosti finché non vengono verificati dalle autorità competenti.",
+      "sources": {
+        "wallonia": "Vallonia: elenco positivo dei mammiferi e regole di detenzione",
+        "flanders": "Fiandre: mammiferi consentiti",
+        "brussels": "Bruxelles: detenzione e adozione",
+        "cites": "SPF Salute pubblica belga: CITES"
+      }
+    },
     "review": {
       "badge": "Da confermare",
       "hint": "Non ancora verificato dal nostro team",
@@ -2527,7 +2537,7 @@
     "start": "Scegli una categoria o una specie per aprire la guida.",
     "unknownCategory": "Scegli la categoria adatta a questa specie.",
     "planTitle": "La tua pianta quotata",
-    "planIntro": "Inserisci le dimensioni del tuo allestimento e scegli dove posizionare il materiale. La pianta rappresenta le tue misure, ma non certifica dimensioni minime o una disposizione adatta alla specie.",
+    "planIntro": "Inserisci le dimensioni e scegli dove collocare l’attrezzatura. Le misure sono precompilate solo se la scheda della specie, con fonti, riporta tre dimensioni esplicite. Il progetto rappresenta le tue scelte, non certifica una misura minima né un allestimento convalidato.",
     "length": "Lunghezza (cm)",
     "width": "Larghezza (cm)",
     "height": "Altezza (cm)",
@@ -2704,6 +2714,12 @@
       "left": "A sinistra",
       "centre": "Al centro",
       "right": "A destra"
-    }
+    },
+    "shopForAnimal": "Trova negozi per questo animale",
+    "planShopHint": "Il negozio si apre con la categoria di questa specie selezionata, se sono presenti negozi partner.",
+    "planSave": "Salva questo progetto su questo dispositivo",
+    "planExport": "Scarica il progetto",
+    "planSaved": "Progetto salvato su questo dispositivo.",
+    "planSaveError": "Il salvataggio non è disponibile in questo browser."
   }
 }

@@ -140,3 +140,168 @@ Photographies réelles de matières animales, recadrées sans agrandissement à 
 | `textures/reptiles-800.{avif,webp}` | Reptiles | Willie Luker from USA | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Eye_of_Lizard_(55203172463).jpg |
 | `textures/amphibians-800.{avif,webp}` | Amphibians | H. Zell | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Dendrobates_tinctorius_-_Wilhelma.jpg |
 | `textures/insects-800.{avif,webp}` | Insects | Franz van Duns | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:2021-08-16_-_Peacock_butterfly_(Aglais_io)_-_eyespot_on_forewing_-_colourful_scales_-_DSG3404-1_(magnif._ratio_2.2x,_HiRes_focus_stack).jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04
+
+Les douze fichiers ci-dessous ont été vérifiés sur la page Commons et visuellement avant recadrage au format 4:3, redimensionnement, conversion AVIF/WebP et suppression des métadonnées. Les fichiers dérivés gardent la licence de leur source.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/tarantula-mexican-red-knee-{480,800}.{avif,webp}` | Brachypelma smithi, tarentule mexicaine à genoux rouges | Brachypelma smithi 2009 G02.jpg | George Chernilevsky | Domaine public | https://commons.wikimedia.org/wiki/File:Brachypelma_smithi_2009_G02.jpg |
+| `animals/greek-tortoise-{480,800}.{avif,webp}` | Testudo graeca, tortue grecque | Testudo graeca at Dibbeen2.JPG | عباد ديرانية | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Testudo_graeca_at_Dibbeen2.JPG |
+| `animals/marginated-tortoise-{480,800}.{avif,webp}` | Testudo marginata, tortue bordée | Klokschildpad - Marginated tortoise - Testudo marginata 02.jpg | Bouke ten Cate | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Klokschildpad_-_Marginated_tortoise_-_Testudo_marginata_02.jpg |
+| `animals/corn-snake-{480,800}.{avif,webp}` | Pantherophis guttatus, serpent des blés | Kornnatter (Pantherophis guttatus), Seitenansicht.jpg | Peter Paplanus | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Kornnatter_(Pantherophis_guttatus),_Seitenansicht.jpg |
+| `animals/king-snake-{480,800}.{avif,webp}` | Lampropeltis getula, couleuvre royale | Lampropeltis getula Stanton 1.jpg | Riley Stanton | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lampropeltis_getula_Stanton_1.jpg |
+| `animals/savannah-monitor-{480,800}.{avif,webp}` | Varanus exanthematicus, varan des steppes | Varanus exanthematicus in the wild.jpg | Daniel Bennett | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Varanus_exanthematicus_in_the_wild.jpg |
+| `animals/panda-corydoras-{480,800}.{avif,webp}` | Corydoras panda | Corydoras panda. (46592394085).jpg | Harry Kramer from Winterswijk, The Netherlands | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Corydoras_panda._(46592394085).jpg |
+| `animals/bronze-corydoras-{480,800}.{avif,webp}` | Corydoras aeneus, corydoras bronze | Female Bronze Corydoras (Corydoras aeneus).jpg | Andrew Keller | CC0 | https://commons.wikimedia.org/wiki/File:Female_Bronze_Corydoras_(Corydoras_aeneus).jpg |
+| `animals/platy-{480,640}.{avif,webp}` | Xiphophorus maculatus, platy | Platy 011.jpg | Gourami Watcher | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Platy_011.jpg |
+| `animals/oriental-fire-bellied-toad-{480,800}.{avif,webp}` | Bombina orientalis, crapaud à ventre de feu | Bombina orientalis 35461949.jpg | Kim, Hyun-tae | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Bombina_orientalis_35461949.jpg |
+| `animals/orchid-mantis-{480,800}.{avif,webp}` | Hymenopus coronatus, mante orchidée | Mantis Hymenopus coronatus 6 Luc Viatour.jpg | Luc Viatour | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Mantis_Hymenopus_coronatus_6_Luc_Viatour.jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 2
+
+Ces dix images Commons ont été contrôlées sur leur fiche de fichier et visuellement, puis recadrées au format 4:3, redimensionnées sans agrandissement, converties en AVIF/WebP et privées de leurs métadonnées.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/curly-hair-tarantula-{480,700}.{avif,webp}` | Brachypelma albopilosum, tarentule du Curacao | Brachypelma.albopilosum.female.jpg | Sarefo | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Brachypelma.albopilosum.female.jpg |
+| `animals/rosy-faced-lovebird-{480,800}.{avif,webp}` | Agapornis roseicollis, inséparable rosâtre | Rosy-faced lovebird (Agapornis roseicollis roseicollis).jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rosy-faced_lovebird_(Agapornis_roseicollis_roseicollis).jpg |
+| `animals/zebra-finch-{480,800}.{avif,webp}` | Taeniopygia guttata, diamant mandarin | 2014-08-19 Zebra Finch, Sumba, Nusa Tenggara Timur, Indonesia 1.jpg | christoph_moning | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:2014-08-19_Zebra_Finch,_Sumba,_Nusa_Tenggara_Timur,_Indonesia_1.jpg |
+| `animals/black-molly-{480,800}.{avif,webp}` | Poecilia sphenops, molly noire | PoeciliaSphenops.jpg | Dnoerholm | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:PoeciliaSphenops.jpg |
+| `animals/green-treefrog-{480,800}.{avif,webp}` | Hyla cinerea, rainette arboricole verte | Green treefrog.jpg | Brian Gratwicke | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Green_treefrog.jpg |
+| `animals/mongolian-gerbil-{480,800}.{avif,webp}` | Meriones unguiculatus, gerbille | Meriones unguiculatus (wild).jpg | Alastair Rae from London, United Kingdom | Domaine public | https://commons.wikimedia.org/wiki/File:Meriones_unguiculatus_(wild).jpg |
+| `animals/chilean-degu-{480,720}.{avif,webp}` | Octodon degus, dègue du Chili | Octodon Degus fr.jpg | Jacek555 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Octodon_Degus_fr.jpg |
+| `animals/blue-fronted-amazon-{480,800}.{avif,webp}` | Amazona aestiva, amazone à front bleu | Amazona aestiva - Nayara - 416814215.jpeg | Nayara | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Amazona_aestiva_-_Nayara_-_416814215.jpeg |
+| `animals/white-fronted-amazon-{480,800}.{avif,webp}` | Amazona albifrons, amazone à front blanc | Amazona-albifrons.jpg | Penkinvaltaaja | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Amazona-albifrons.jpg |
+| `animals/white-cockatoo-{480,800}.{avif,webp}` | Cacatua alba, cacatoès blanc | Burung Kakatua Putih Di THKMS.jpg | Muhamad Izzul Fiqih | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Burung_Kakatua_Putih_Di_THKMS.jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 3
+
+Ces cinq photos ont été vérifiées sur Commons et visuellement, puis recadrées au format 4:3 et optimisées localement en AVIF/WebP. Les deux autres espèces du lot de recherche ne figurent pas dans le catalogue actuel.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/madagascar-giant-day-gecko-{480,800}.{avif,webp}` | Phelsuma grandis, gecko géant de Madagascar | Madagascar giant day gecko (Phelsuma grandis) Nosy Komba.jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Madagascar_giant_day_gecko_(Phelsuma_grandis)_Nosy_Komba.jpg |
+| `animals/whites-tree-frog-{480,800}.{avif,webp}` | Litoria caerulea, rainette de White | Australia green tree frog (Litoria caerulea) crop.jpg | LiquidGhoul | Domaine public | https://commons.wikimedia.org/wiki/File:Australia_green_tree_frog_(Litoria_caerulea)_crop.jpg |
+| `animals/capybara-{480,800}.{avif,webp}` | Hydrochoerus hydrochaeris, capybara | Capivara (Hydrochoerus hydrochaeris).jpg | Clodomiro Esteves Junior | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Capivara(Hydrochoerus_hydrochaeris).jpg |
+| `animals/tokay-gecko-{480,800}.{avif,webp}` | Gekko gecko, gecko tokay | Tokay Gecko (Gekko gecko) (7109782823).jpg | Bernard DUPONT | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Tokay_Gecko_(Gekko_gecko)_(7109782823).jpg |
+| `animals/meerkat-{480,800}.{avif,webp}` | Suricata suricatta, suricate | Meerkat (Suricata suricatta) Tswalu.jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Meerkat_(Suricata_suricatta)_Tswalu.jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 4
+
+Les quatorze photos suivantes ont été vérifiées sur Commons et visuellement, recadrées au format 4:3 et optimisées localement en AVIF/WebP.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/eclectus-{480,800}.{avif,webp}` | Eclectus roratus, éclectus | Eclectus roratus -National Zoo, Washington, USA -female-8a.jpg | angela n. | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Eclectus_roratus_-National_Zoo,_Washington,_USA_-female-8a.jpg |
+| `animals/emu-{480,800}.{avif,webp}` | Dromaius novaehollandiae, émeu | Emu 1 - Tidbinbilla.jpg | JJ Harrison | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Emu_1_-_Tidbinbilla.jpg |
+| `animals/blue-peafowl-{480,800}.{avif,webp}` | Pavo cristatus, paon bleu | Pfau imponierend.jpg | BS Thurner Hof | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Pfau_imponierend.jpg |
+| `animals/golden-pheasant-{480,800}.{avif,webp}` | Chrysolophus pictus, faisan doré | Golden Pheasant, Tangjiahe Nature Reserve.jpg | Jmhullot | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Golden_Pheasant,_Tangjiahe_Nature_Reserve.jpg |
+| `animals/gouldian-finch-{480,800}.{avif,webp}` | Chloebia gouldiae, gouldien | Chloebia gouldiae, Elsey, Northern Territory, Australia 1.jpg | Kym Nicolson | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Chloebia_gouldiae,_Elsey,_Northern_Territory,_Australia_1.jpg |
+| `animals/ornate-horned-frog-{480,800}.{avif,webp}` | Ceratophrys ornata, grenouille cornue | Argentine Horned Frog (Ceratophrys ornata)1.JPG | Max | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Argentine_Horned_Frog_(Ceratophrys_ornata)1.JPG |
+| `animals/japanese-giant-salamander-{480,800}.{avif,webp}` | Andrias japonicus, salamandre géante du Japon | Japanese giant salamander in Tottori Prefecture, Japan.jpg | Salamandra2021 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Japanese_giant_salamander_in_Tottori_Prefecture,_Japan.jpg |
+| `animals/leaf-insect-{480,800}.{avif,webp}` | Phyllium philippinicum, phasme feuille | Phyllium Philippinicum.jpg | Ebe.wiki | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Phyllium_Philippinicum.jpg |
+| `animals/giant-african-snail-{480,800}.{avif,webp}` | Achatina fulica, escargot géant africain | Giant African land snail (Achatina fulica) Ranomafana.jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Giant_African_land_snail_(Achatina_fulica)_Ranomafana.jpg |
+| `animals/giant-millipede-{480,800}.{avif,webp}` | Archispirostreptus gigas, mille-pattes géant | Archispirostreptus-Gigas-Amphitheatre.jpg | Bjørn Christian Tørrissen | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Archispirostreptus-Gigas-Amphitheatre.jpg |
+| `animals/fire-salamander-{480,800}.{avif,webp}` | Salamandra salamandra, salamandre tachetée | A fire salamander (Salamandra salamandra).jpg | Vasyl Krasnoshtan | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:A_fire_salamander_(Salamandra_salamandra).jpg |
+| `animals/tomato-frog-{480,800}.{avif,webp}` | Dyscophus antongilii, grenouille tomate | Dyscophus antongilii 186311549.jpg | Marius Burger | CC0 | https://commons.wikimedia.org/wiki/File:Dyscophus_antongilii_186311549.jpg |
+| `animals/bumblebee-poison-frog-{480,800}.{avif,webp}` | Dendrobates leucomelas, dendrobate lépreux | Bumblebee Poison Frog Dendrobates leucomelas.jpg | Holger Krisp | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Bumblebee_Poison_Frog_Dendrobates_leucomelas.jpg |
+| `animals/cranwells-horned-frog-{480,800}.{avif,webp}` | Ceratophrys cranwelli, grenouille cornue de Cranwell | Ceratophrys cranwell.jpg | Daiju Azuma | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Ceratophrys_cranwell.jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 5
+
+Ces quinze photos ont été vérifiées sur Commons et visuellement, puis recadrées au format 4:3 et optimisées localement en AVIF/WebP.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/phelsuma-madagascar-{480,800}.{avif,webp}` | Phelsuma madagascariensis, gecko diurne de Madagascar | Phelsuma madagascariensis vivarium Lausanne.jpg | Gzzz | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Phelsuma_madagascariensis_vivarium_Lausanne.jpg |
+| `animals/satanic-leaf-tailed-gecko-{480,800}.{avif,webp}` | Uroplatus phantasticus, gecko satanique | Satanic leaf-tailed gecko (Uroplatus phantasticus) Ranomafana 2.jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Satanic_leaf-tailed_gecko_(Uroplatus_phantasticus)_Ranomafana_2.jpg |
+| `animals/antilles-iguana-{480,800}.{avif,webp}` | Iguana delicatissima, iguane des Petites Antilles | Iguana delicatissima in Coulibistrie e04.jpg | Postdlf | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Iguana_delicatissima_in_Coulibistrie_e04.jpg |
+| `animals/green-anole-{480,800}.{avif,webp}` | Anolis carolinensis, anole vert | Anolis carolinensis mating.JPG | Cowenby | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Anolis_carolinensis_mating.JPG |
+| `animals/knight-anole-{480,800}.{avif,webp}` | Anolis equestris, anole de Cuba | Knight Anole hunting.jpg | James Powers | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Knight_Anole_hunting.jpg |
+| `animals/green-basilisk-{480,800}.{avif,webp}` | Basiliscus plumifrons, basilic vert | Plumedbasiliskcele4.jpg | Marcel Burkhard / Cele4 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Plumedbasiliskcele4.jpg |
+| `animals/jacksons-chameleon-{480,800}.{avif,webp}` | Trioceros jacksonii, caméléon de Jackson | Male Jackson's Chameleon - Big Island Hawaii June 12 2025.jpg | AMMuench | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Male_Jackson%27s_Chameleon_-_Big_Island_Hawaii_June_12_2025.jpg |
+| `animals/parsons-chameleon-{480,800}.{avif,webp}` | Calumma parsonii, caméléon de Parson | Parson's chameleon (Calumma parsonii cristifer) female Andasibe 2.jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Parson%27s_chameleon_(Calumma_parsonii_cristifer)_female_Andasibe_2.jpg |
+| `animals/komodo-dragon-{480,800}.{avif,webp}` | Varanus komodoensis, varan de Komodo | Komodo dragon (Varanus komodoensis) 2.jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Komodo_dragon_(Varanus_komodoensis)_2.jpg |
+| `animals/argentine-tegu-{480,800}.{avif,webp}` | Salvator merianae, téju noir et blanc | Argentine Black and White Tegu (Salvator merianae) male - Flickr - berniedup.jpg | Bernard DUPONT | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Argentine_Black_and_White_Tegu_(Salvator_merianae)_male_-_Flickr_-_berniedup.jpg |
+| `animals/frill-necked-lizard-{480,800}.{avif,webp}` | Chlamydosaurus kingii, lézard à collerette | Frill-necked Lizard (Chlamydosaurus kingii) (8692607976).jpg | Matt from Melbourne | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Frill-necked_Lizard_(Chlamydosaurus_kingii)_(8692607976).jpg |
+| `animals/ocellated-lizard-{480,800}.{avif,webp}` | Timon lepidus, lézard ocellé | Jewelled Lizard (Timon lepidus) female (found by Jean NICOLAS) - Flickr - berniedup (1).jpg | Bernard DUPONT | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Jewelled_Lizard_(Timon_lepidus)_female_(found_by_Jean_NICOLAS)_-_Flickr_-_berniedup_(1).jpg |
+| `animals/emerald-tree-boa-{480,800}.{avif,webp}` | Corallus caninus, boa émeraude | Emerald Tree Boa 003.jpg | Ltshears | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Emerald_Tree_Boa_003.jpg |
+| `animals/milk-snake-{480,800}.{avif,webp}` | Lampropeltis triangulum, couleuvre faux-corail | Eastern Milksnake (Lampropeltis triangulum) - Flickr - 2ndPeter (2).jpg | Peter Paplanus | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Eastern_Milksnake_(Lampropeltis_triangulum)_-_Flickr_-_2ndPeter_(2).jpg |
+| `animals/hognose-snake-{480,800}.{avif,webp}` | Heterodon nasicus, couleuvre à nez plat | Plains Hognose Snake (Heterodon nasicus) (29833441881).jpg | Peter Paplanus | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Plains_Hognose_Snake_(Heterodon_nasicus)_(29833441881).jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 6
+
+Treize photos de poissons ont été vérifiées sur Commons et visuellement, puis recadrées au format 4:3 et optimisées localement. Le poisson-clown et le cichlidé convict recherchés ne sont pas associés : le premier n'existe pas dans le catalogue actuel et la notice photo du second comporte une contradiction sur le sexe.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/black-neon-tetra-{480,800}.{avif,webp}` | Hyphessobrycon herbertaxelrodi, néon noir | Hyphessobrycon herbertaxelrodi Gratwicke.jpg | Brian Gratwicke | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Hyphessobrycon_herbertaxelrodi_Gratwicke.jpg |
+| `animals/lemon-tetra-{480,800}.{avif,webp}` | Hyphessobrycon pulchripinnis, tétra citron | Hyphessobrycon pulchripinnis.jpg | Waugsberg | CC BY 2.5 | https://commons.wikimedia.org/wiki/File:Hyphessobrycon_pulchripinnis.jpg |
+| `animals/emperor-tetra-{480,800}.{avif,webp}` | Nematobrycon palmeri, tétra empereur | Nematobrycon palmeri lateral view.jpg | AggieFish | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Nematobrycon_palmeri_lateral_view.jpg |
+| `animals/congo-tetra-{480,800}.{avif,webp}` | Phenacogrammus interruptus, tétra du Congo | Phenacogrammus interruptus 1.jpg | 7TP (Krzysztof Bartosik) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Phenacogrammus_interruptus_1.jpg |
+| `animals/black-phantom-tetra-{480,800}.{avif,webp}` | Hyphessobrycon megalopterus, tétra fantôme noir | Hyphessobrycon megalopterus (31473-B).png | D. Bork, A. Zarske, H.J. Richter | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Hyphessobrycon_megalopterus_(31473-B).png |
+| `animals/oscar-cichlid-{480,800}.{avif,webp}` | Astronotus ocellatus, Oscar | Astronotus ocellatus 2015 G1.jpg | George Chernilevsky | Domaine public | https://commons.wikimedia.org/wiki/File:Astronotus_ocellatus_2015_G1.jpg |
+| `animals/jack-dempsey-cichlid-{480,800}.{avif,webp}` | Rocio octofasciata, cichlidé de Jack Dempsey | Jack Dempsey (Rocio octofasciata) - Carwash Cenote QR.jpg | Bernard DUPONT | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Jack_Dempsey_(Rocio_octofasciata)_-_Carwash_Cenote_QR.jpg |
+| `animals/parrot-cichlid-{480,800}.{avif,webp}` | Amphilophus citrinellus, cichlidé perroquet | Amphilophus citrinellus 2015 G5.jpg | George Chernilevsky | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Amphilophus_citrinellus_2015_G5.jpg |
+| `animals/frontosa-cichlid-{480,800}.{avif,webp}` | Cyphotilapia frontosa, cichlidé frontosa | Cyphotilapia frontosa - Karlsruhe Zoo 01.jpg | H. Zell | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Cyphotilapia_frontosa_-_Karlsruhe_Zoo_01.jpg |
+| `animals/zebra-cichlid-{480,800}.{avif,webp}` | Metriaclima zebra, cichlidé zèbre | Maylandia zebra 61728832.jpg | Kai Squires | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Maylandia_zebra_61728832.jpg |
+| `animals/yellow-lab-cichlid-{480,800}.{avif,webp}` | Labidochromis caeruleus, cichlidé jaune | Female Labidochromis caeruleus light.jpg | BRKOSLAV SEVERNÍ | CC0 | https://commons.wikimedia.org/wiki/File:Female_Labidochromis_caeruleus_light.jpg |
+| `animals/cherry-barb-{480,800}.{avif,webp}` | Puntius titteya, barbu cerise | Cherry barb, Puntius titteya.jpg | Brian Gratwicke | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Cherry_barb,_Puntius_titteya.jpg |
+| `animals/tiger-barb-{480,800}.{avif,webp}` | Puntigrus tetrazona, barbu de Sumatra | Tiger barb fish.jpg | Editor General of Wiki | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Tiger_barb_fish.jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 7
+
+Quinze photos vérifiées sur Commons et visuellement, recadrées au format 4:3, converties en AVIF/WebP et optimisées localement.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/red-squirrel-{480,800}.{avif,webp}` | Sciurus vulgaris, écureuil roux européen | Red squirrel (21808).jpg | Rhododendrites | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Red_squirrel_(21808).jpg |
+| `animals/raccoon-{480,800}.{avif,webp}` | Procyon lotor, raton laveur | Raccoon in Central Park (35264).jpg | Rhododendrites | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Raccoon_in_Central_Park_(35264).jpg |
+| `animals/coati-{480,800}.{avif,webp}` | Nasua nasua, coati | Coati2.jpg | Luna04 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Coati2.jpg |
+| `animals/serval-{480,800}.{avif,webp}` | Leptailurus serval, serval | Leptailurus serval 61666728.jpg | datadan | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Leptailurus_serval_61666728.jpg |
+| `animals/genet-{480,800}.{avif,webp}` | Genetta genetta, genette | Genetta genetta felina (Wroclaw zoo).JPG | Guérin Nicolas | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Genetta_genetta_felina_(Wroclaw_zoo).JPG |
+| `animals/european-otter-{480,800}.{avif,webp}` | Lutra lutra, loutre | European otter 01.jpg | Alexander Leisser | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:European_otter_01.jpg |
+| `animals/sugar-glider-{480,800}.{avif,webp}` | Petaurus breviceps, phalanger volant | Petaurus breviceps 119464446.jpg | Greg Tasney | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Petaurus_breviceps_119464446.jpg |
+| `animals/flying-squirrel-{480,800}.{avif,webp}` | Pteromys volans, écureuil volant | Pteromys volans 292232567.jpg | Andrew Bazdyrev | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Pteromys_volans_292232567.jpg |
+| `animals/chinese-pangolin-{480,800}.{avif,webp}` | Manis pentadactyla, pangolin asiatique | Manis pentadactyla pentadactyla 462300623.jpg | Yung-Lun Lin | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Manis_pentadactyla_pentadactyla_462300623.jpg |
+| `animals/alpaca-{480,800}.{avif,webp}` | Vicugna pacos, alpaga | Dülmen, Börnste, Alpakas -- 2020 -- 5462.jpg | Dietmar Rabich | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_B%C3%B6rnste,_Alpakas_--_2020_--_5462.jpg |
+| `animals/scarlet-macaw-{480,800}.{avif,webp}` | Ara macao, ara rouge | Scarlet macaw (Ara macao cyanopterus) Copan.jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Scarlet_macaw_(Ara_macao_cyanopterus)_Copan.jpg |
+| `animals/military-macaw-{480,800}.{avif,webp}` | Ara militaris, ara militaire | Ara militaris - Maroparque 02.jpg | H. Zell | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Ara_militaris_-_Maroparque_02.jpg |
+| `animals/sulphur-crested-cockatoo-{480,800}.{avif,webp}` | Cacatua galerita, cacatoès à huppe jaune | Sulphur-crested Cockatoo - AndrewMercer - DSC20087.jpg | Andrew Mercer | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Sulphur-crested_Cockatoo_-_AndrewMercer_-_DSC20087.jpg |
+| `animals/senegal-parrot-{480,800}.{avif,webp}` | Poicephalus senegalus, perroquet youyou | Poicephalus senegalus, Fulladu West, Gambia 1.jpg | christoph_moning | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Poicephalus_senegalus,_Fulladu_West,_Gambia_1.jpg |
+| `animals/european-eagle-owl-{480,800}.{avif,webp}` | Bubo bubo, grand-duc d'Europe | Eurasian eagle-owl (44034).jpg | Rhododendrites | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Eurasian_eagle-owl_(44034).jpg |
+| `animals/cardinal-tetra-{480,800}.{avif,webp}` | Paracheirodon axelrodi, néon cardinalis | Cardinal Paracheirodon axelrodi (2).jpg | CHUCAO | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Cardinal_Paracheirodon_axelrodi_(2).jpg |
+| `animals/discus-{480,800}.{avif,webp}` | Symphysodon discus, discus | Red discus (Symphysodon discus).jpg | MichalPL | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Red_discus_(Symphysodon_discus).jpg |
+| `animals/convict-cichlid-{480,800}.{avif,webp}` | Amatitlania nigrofasciata, cichlidé convict | Convicts Cichlids.jpg | Deanpemberton | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Convicts_Cichlids.jpg |
+| `animals/rosy-barb-{480,800}.{avif,webp}` | Pethia conchonius, barbu rosé | Rosy Barbs.jpg | Kkonstan | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Rosy_Barbs.jpg |
+| `animals/giant-danio-{480,800}.{avif,webp}` | Devario aequipinnatus, danio géant | Devario aequipinnatus.JPG | Faucon | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Devario_aequipinnatus.JPG |
+| `animals/swordtail-{480,800}.{avif,webp}` | Xiphophorus hellerii, xipho | Xiphophorus hellerii red wagtail female 01.jpg | Wojciech J. Płuciennik | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Xiphophorus_hellerii_red_wagtail_female_01.jpg |
+| `animals/sterbai-corydoras-{480,800}.{avif,webp}` | Corydoras sterbai | Corydoras Sterbai.jpg | Matthew Mannell | Domaine public | https://commons.wikimedia.org/wiki/File:Corydoras_Sterbai.jpg |
+| `animals/otocinclus-{480,800}.{avif,webp}` | Otocinclus affinis (nom actuellement accepté : Macrotocinclus affinis) | Macrotocinclus affinis looking for algae.jpg | Cisamarc | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Macrotocinclus_affinis_looking_for_algae.jpg |
+| `animals/ancistrus-{480,800}.{avif,webp}` | Ancistrus cirrhosus, ancistrus | Ancistrus cirrhosus.jpg | The Last 99 | [CC BY-SA 3.0 DE](https://creativecommons.org/licenses/by-sa/3.0/de/) | https://commons.wikimedia.org/wiki/File:Ancistrus_cirrhosus.jpg |
+| `animals/butterflyfish-{480,800}.{avif,webp}` | Pantodon buchholzi, poisson-papillon | Pantodon buchholzi 53146715.jpg | John P Friel | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Pantodon_buchholzi_53146715.jpg |
+| `animals/archerfish-{480,800}.{avif,webp}` | Toxotes jaculatrix, poisson-archer | Toxotes jaculatrix - 9313.jpg | Amada44 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Toxotes_jaculatrix_-_9313.jpg |
+| `animals/elephantnose-fish-{480,800}.{avif,webp}` | Gnathonemus petersii, poisson éléphant | Gnathonemus petersii - Zoo Frankfurt.jpg | Jutta234 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Gnathonemus_petersii_-_Zoo_Frankfurt.jpg |
+
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 8
+
+Treize photos de mammifères et d'oiseaux vérifiées sur leur page de fichier Commons et visuellement. Les téléchargements originaux renvoyaient temporairement HTTP 429; les variantes officielles Commons de 1280 px ont répondu HTTP 200. Les images locales ont été recadrées au format 4:3, redimensionnées aux largeurs indiquées et converties en AVIF/WebP.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/aardvark-{480,800}.{avif,webp}` | Orycteropus afer, oryctérope du Cap | Aardvark (Orycteropus afer).jpg | Theo Kruse / Burgers' Zoo | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Aardvark_(Orycteropus_afer).jpg |
+| `animals/kinkajou-{480,800}.{avif,webp}` | Potos flavus, kinkajou | Potos flavus 181925589.jpg | desertnaturalist | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Potos_flavus_181925589.jpg |
+| `animals/grey-squirrel-{480,800}.{avif,webp}` | Sciurus carolinensis, écureuil gris | Grey Squirrel Sciurus Carolinensis Autumn Stowe Gardens 2025 01.jpg | Julian Herzog (Website) | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Grey_Squirrel_Sciurus_Carolinensis_Autumn_Stowe_Gardens_2025_01.jpg |
+| `animals/cottontop-tamarin-{480,800}.{avif,webp}` | Saguinus oedipus, tamarin | Saguinus oedipus qtl1.jpg | Quartl | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Saguinus_oedipus_qtl1.jpg |
+| `animals/caracal-{480,800}.{avif,webp}` | Caracal caracal, caracal | Caracal caracal 289309438.jpg | Dirk Froebel | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Caracal_caracal_289309438.jpg |
+| `animals/ocelot-{480,800}.{avif,webp}` | Leopardus pardalis, ocelot | 082 Ocelot in Encontro das Águas State Park Photo by Giles Laurent.jpg | Giles Laurent | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:082_Ocelot_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg |
+| `animals/binturong-{480,800}.{avif,webp}` | Arctictis binturong, binturong | Arctictis binturong Ménagerie 20250913.jpg | Marie-Lan Taÿ Pamart | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Arctictis_binturong_M%C3%A9nagerie_20250913.jpg |
+| `animals/egyptian-mongoose-{480,800}.{avif,webp}` | Herpestes ichneumon, mangouste | Mongoose - Herpestes ichneumon.jpg | Artemy Voikhansky | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Mongoose_-_Herpestes_ichneumon.jpg |
+| `animals/crested-porcupine-{480,800}.{avif,webp}` | Hystrix cristata, porc-épic | 0 Hystrix cristata - Porc-épics à crête (1).JPG | Jean-Pol GRANDMONT | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:0_Hystrix_cristata_-_Porc-%C3%A9pics_à_crête_(1).JPG |
+| `animals/paca-{480,800}.{avif,webp}` | Cuniculus paca, paca | Cuniculus paca 53854000.jpg | Matt Muir | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Cuniculus_paca_53854000.jpg |
+| `animals/turquoise-parrot-{480,800}.{avif,webp}` | Neophema pulchella, perruche turquoisine | Neophema pulchella male - Glen Davis.jpg | JJ Harrison (jjharrison.com.au) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Neophema_pulchella_male_-_Glen_Davis.jpg |
+| `animals/masked-lovebird-{480,800}.{avif,webp}` | Agapornis personatus, inséparable masqué | Agapornis personatus, TZ.jpg | Raf24~commonswiki | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Agapornis_personatus,_TZ.jpg |
+| `animals/rainbow-lorikeet-{480,800}.{avif,webp}` | Trichoglossus moluccanus, lori de Swainson | Rainbow lorikeet (Trichoglossus moluccanus) sitting in a hole in a dead tree along the Swan River, October 2023 02.jpg | Calistemon | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rainbow_lorikeet_(Trichoglossus_moluccanus)_sitting_in_a_hole_in_a_dead_tree_along_the_Swan_River,_October_2023_02.jpg |

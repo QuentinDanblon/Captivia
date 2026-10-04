@@ -1158,6 +1158,16 @@
       "equipment": "Matériel conseillé",
       "sources": "Sources"
     },
+    "belgium": {
+      "title": "Règles à vérifier selon votre région",
+      "body": "En Belgique, les règles de détention varient selon la région, l’espèce et son statut CITES. Les listes positives citées concernent les mammifères et ne suffisent pas à déterminer le régime des autres espèces. Les anciens statuts du catalogue restent masqués jusqu’à leur vérification auprès des autorités compétentes.",
+      "sources": {
+        "wallonia": "Wallonie : liste positive des mammifères et règles",
+        "flanders": "Flandre : mammifères autorisés",
+        "brussels": "Bruxelles : détention et adoption",
+        "cites": "SPF Santé publique : CITES en Belgique"
+      }
+    },
     "review": {
       "badge": "À confirmer",
       "hint": "Pas encore relu par notre équipe",
@@ -2527,7 +2537,7 @@
     "start": "Choisissez une catégorie ou une espèce pour ouvrir son guide.",
     "unknownCategory": "Choisissez la catégorie qui correspond à cette espèce.",
     "planTitle": "Votre plan coté",
-    "planIntro": "Reportez les dimensions de votre installation et choisissez les emplacements du matériel. Ce plan représente vos choix, pas une dimension minimale ni un aménagement validé pour l’espèce.",
+    "planIntro": "Reportez les dimensions et choisissez les emplacements du matériel. Une mesure est préremplie uniquement si la fiche sourcée donne trois dimensions explicites. Le croquis représente vos choix, pas une dimension minimale ni un aménagement validé pour l’espèce.",
     "length": "Longueur (cm)",
     "width": "Largeur (cm)",
     "height": "Hauteur (cm)",
@@ -2704,6 +2714,12 @@
       "left": "À gauche",
       "centre": "Au centre",
       "right": "À droite"
-    }
+    },
+    "shopForAnimal": "Voir les boutiques pour cette espèce",
+    "planShopHint": "Le magasin s’ouvre sur la catégorie de cette espèce, si des boutiques partenaires y sont référencées.",
+    "planSave": "Enregistrer ce croquis sur cet appareil",
+    "planExport": "Télécharger le croquis",
+    "planSaved": "Croquis enregistré sur cet appareil.",
+    "planSaveError": "Enregistrement indisponible dans ce navigateur."
   }
 }

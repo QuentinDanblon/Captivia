@@ -1,0 +1,96 @@
+[
+  {
+    "speciesId": 5218022,
+    "evidence": [
+      {
+        "field": "feeding.dietType",
+        "value": "insectivore",
+        "quote": "The Green-and-black Poison Dart Frogs primarily thrive on a diet of miniature live insects and other arthropods.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      },
+      {
+        "field": "feeding.recommendedFoods",
+        "value": "Drosophiles et collemboles",
+        "quote": "A staple diet can consist of fruit flies supplemented with various other live prey. This could include aphids, springtails, bean beetles, rice flour beetles, small fly larvae, and pinhead crickets.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      },
+      {
+        "field": "feeding.foodsToAvoid",
+        "value": "Insectes capturés dans la nature; insectes exposés à des produits de jardinage",
+        "quote": "We do not recommend feeding wild caught insects as these can harbor harmful bacteria. They may also have come in contact with gardening chemicals, making them poisonous for your Frogs.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      },
+      {
+        "field": "feeding.mealFrequency",
+        "value": "variable",
+        "quote": "Feeding frequency varies with the frog's age.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "La fréquence dépend de l'âge : nourrissage quotidien des juvéniles; les adultes peuvent être nourris tous les deux ou trois jours.",
+        "quote": "Juveniles require daily feeding, while adults can be fed every second or third day.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 24,
+        "quote": "During the day, an average relative humidity of 70-80% and room temperature of 75-79°F or 24-26°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 26,
+        "quote": "During the day, an average relative humidity of 70-80% and room temperature of 75-79°F or 24-26°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": 70,
+        "quote": "During the day, an average relative humidity of 70-80% and room temperature of 75-79°F or 24-26°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": 80,
+        "quote": "During the day, an average relative humidity of 70-80% and room temperature of 75-79°F or 24-26°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "La fiche indique que la température peut baisser de 2 à 4 °C la nuit et que l'humidité peut monter jusqu'à environ 100 %.",
+        "quote": "At night, humidity should rise up to about 100% and room temperature can drop with 4-8°F (2-4°C).",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-auratus/"
+      }
+    ]
+  },
+  {
+    "speciesId": 104020622,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": 20,
+        "quote": "At night, humidity should rise to about 90% while the terrarium temperature can drop to 68-75°F or 20-24°C.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 29,
+        "quote": "During the day, an average relative humidity of 70-75% and terrarium temperature of 75-85°F or 24-29°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": 70,
+        "quote": "During the day, an average relative humidity of 70-75% and terrarium temperature of 75-85°F or 24-29°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": 90,
+        "quote": "At night, humidity should rise to about 90% while the terrarium temperature can drop to 68-75°F or 20-24°C.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/agalychnis-callidryas/"
+      }
+    ]
+  }
+]

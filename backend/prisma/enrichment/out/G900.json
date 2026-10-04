@@ -1,0 +1,147 @@
+[
+  {
+    "speciesId": 104073224,
+    "feeding": {
+      "dietType": "omnivore",
+      "recommendedFoods": [
+        {
+          "name": "Aliment préparé complet pour gecko à crête",
+          "frequency": "Quotidien chez les 0–12 mois; tous les 2–3 jours après 12 mois",
+          "notes": "Choisir une préparation formulée pour les geckos à crête et la mélanger à de l’eau."
+        },
+        {
+          "name": "Insectes nourriciers adaptés",
+          "frequency": "Environ une fois par semaine",
+          "notes": "Ils complètent la ration et stimulent l’activité; ne pas donner de proies trop grosses."
+        }
+      ],
+      "foodsToAvoid": [
+        {
+          "name": "Nourriture pour bébé",
+          "reason": "Sa composition ne fournit pas les nutriments nécessaires au gecko à crête et peut provoquer une malnutrition grave."
+        },
+        {
+          "name": "Vers de farine et superworms",
+          "reason": "Ils peuvent être difficiles à digérer et entraîner une impaction."
+        },
+        {
+          "name": "Fruits frais trop fréquents",
+          "reason": "Ils peuvent détourner le gecko de son aliment préparé et exposer à une malnutrition."
+        }
+      ],
+      "mealFrequency": "variable",
+      "specificNeeds": "Saupoudrer les insectes nourriciers d’un complément de calcium. Si un éclairage UVB est utilisé, choisir du calcium sans vitamine D; sans UVB, choisir un complément avec vitamine D.",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/",
+          "title": "ReptiFiles — Crested Gecko Food Information"
+        },
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/crested-gecko-care/",
+          "title": "ReptiFiles — Crested Gecko Care"
+        }
+      ]
+    },
+    "habitat": {
+      "habitatType": "terrarium",
+      "tempMin": 18,
+      "tempMax": 29,
+      "humidityMin": 60,
+      "humidityMax": 80,
+      "minSpaceSize": "Base minimale : 18 × 18 × 36 pouces (L × l × H) pour les juvéniles et adultes de plus de 12 g; plus grand est préférable.",
+      "lightNeeds": "Prévoir un cycle jour-nuit et un éclairage UVB de faible intensité; les nouveau-nés demandent un ajustement spécifique de la distance et de la chaleur.",
+      "activityEnrichment": "Espèce arboricole : privilégier un terrarium haut avec des branches et des surfaces à explorer verticalement et horizontalement.",
+      "hygieneNotes": "Laisser l’humidité redescendre autour de 50 % ou un peu moins entre les brumisations; une humidité constamment élevée favorise moisissures et champignons.",
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-terrarium-size-cohabitation/",
+          "title": "ReptiFiles — Crested Gecko Terrarium Size & Substrate"
+        },
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-temperatures-humidity/",
+          "title": "ReptiFiles — Crested Gecko Temperatures and Humidity"
+        }
+      ]
+    },
+    "behavior": {
+      "generalBehavior": "Espèce arboricole et crépusculaire, surtout active à l’aube et au crépuscule. Le guide ne recommande pas la cohabitation, dont il estime que les risques dépassent les avantages : il avertit des combats entre mâles et rapporte que des femelles de taille similaire peuvent parfois cohabiter si elles sont introduites en même temps, sans que cela soit optimal.",
+      "sociability": "semi-grégaire",
+      "difficultyLevel": "débutant",
+      "compatibilityWithChildren": null,
+      "compatibilityWithOtherAnimals": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/crested-gecko-care/",
+          "title": "ReptiFiles — Crested Gecko Care"
+        },
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-terrarium-size-cohabitation/",
+          "title": "ReptiFiles — Crested Gecko Terrarium Size & Substrate"
+        }
+      ]
+    },
+    "health": {
+      "diseases": [
+        {
+          "name": "Déshydratation",
+          "symptoms": "Yeux enfoncés, hanches ou côtes saillantes, peau anormalement plissée ou queue ondulée.",
+          "prevention": "Éviter les facteurs signalés par la source (faible humidité, températures trop élevées, brumisation peu fréquente, nourriture sèche); elle recommande de maintenir l’humidité entre 60 et 80 % et de brumiser régulièrement.",
+          "whenToConsult": "En cas de doute, contacter un vétérinaire spécialisé en animaux exotiques."
+        },
+        {
+          "name": "Impaction digestive",
+          "symptoms": "Perte de poids, perte d’appétit et absence de selles.",
+          "prevention": "Éviter les substrats meubles susceptibles d’être avalés, les insectes à carapace dure ou trop gros, et corriger la déshydratation.",
+          "whenToConsult": "Si le gecko ne produit pas de selles, appeler un vétérinaire spécialisé en animaux exotiques."
+        },
+        {
+          "name": "Maladie osseuse métabolique",
+          "symptoms": "Queue ondulée, mâchoire molle, membres courbés, léthargie ou perte d’appétit.",
+          "prevention": "Prévoir une alimentation préparée adaptée, un éclairage UVB et un complément calcique pour les insectes nourriciers.",
+          "whenToConsult": "Une prise en charge vétérinaire est recommandée pour les cas sévères ou qui ne s’améliorent pas après quelques semaines."
+        }
+      ],
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-dehydration/",
+          "title": "ReptiFiles — Crested Gecko Dehydration"
+        },
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-impaction/",
+          "title": "ReptiFiles — Crested Gecko Impaction"
+        },
+        {
+          "type": "guide",
+          "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-metabolic-bone-disease/",
+          "title": "ReptiFiles — Crested Gecko Metabolic Bone Disease"
+        }
+      ]
+    },
+    "reproduction": {
+      "season": null,
+      "gestationDays": null,
+      "incubationDays": null,
+      "litterSizeMin": 2,
+      "litterSizeMax": 2,
+      "sexualMaturityMonths": null,
+      "breedingDifficulty": "facile",
+      "notes": "En captivité, la reproduction est décrite comme relativement facile. Une ponte compte deux œufs; l’éclosion survient en 60 à 90 jours. Les pontes sont généralement espacées d’environ quatre semaines si les réserves lipidiques et calciques de la femelle restent suffisantes.",
+      "sources": [
+        {
+          "type": "wikipedia",
+          "url": "https://fr.wikipedia.org/wiki/Correlophus_ciliatus",
+          "title": "Wikipédia — Correlophus ciliatus"
+        }
+      ]
+    }
+  }
+]

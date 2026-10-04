@@ -1151,6 +1151,16 @@
       "equipment": "Empfohlene Ausstattung",
       "sources": "Quellen"
     },
+    "belgium": {
+      "title": "Regeln für Ihre Region prüfen",
+      "body": "In Belgien unterscheiden sich die Haltungsvorschriften je nach Region, Art und CITES-Status. Die verlinkten Positivlisten betreffen Säugetiere und reichen nicht aus, um die Vorschriften für andere Arten festzustellen. Historische Katalogangaben bleiben ausgeblendet, bis sie von den zuständigen Behörden geprüft wurden.",
+      "sources": {
+        "wallonia": "Wallonien: Positivliste der Säugetiere und Haltungsvorschriften",
+        "flanders": "Flandern: erlaubte Säugetiere",
+        "brussels": "Brüssel: Haltung und Adoption",
+        "cites": "Belgisches Gesundheitsamt: CITES"
+      }
+    },
     "review": {
       "badge": "Noch zu prüfen",
       "hint": "Noch nicht von unserem Team geprüft",
@@ -2527,7 +2537,7 @@
     "start": "Wählen Sie eine Kategorie oder Tierart aus, um den Ratgeber zu öffnen.",
     "unknownCategory": "Wählen Sie die passende Kategorie für diese Tierart.",
     "planTitle": "Ihr bemaßter Plan",
-    "planIntro": "Tragen Sie die Maße Ihrer Anlage ein und wählen Sie die Positionen der Ausstattung. Der Plan zeigt Ihre Auswahl; er bestätigt weder Mindestmaße noch eine geeignete Anordnung für die Art.",
+    "planIntro": "Tragen Sie die Maße ein und wählen Sie die Positionen der Ausstattung. Maße werden nur vorausgefüllt, wenn das belegte Artenprofil drei ausdrückliche Abmessungen enthält. Die Skizze zeigt Ihre Auswahl und bestätigt weder Mindestmaße noch eine geprüfte Haltung.",
     "length": "Länge (cm)",
     "width": "Breite (cm)",
     "height": "Höhe (cm)",
@@ -2704,6 +2714,12 @@
       "left": "Links",
       "centre": "In der Mitte",
       "right": "Rechts"
-    }
+    },
+    "shopForAnimal": "Shops für dieses Tier ansehen",
+    "planShopHint": "Der Shop öffnet mit der Kategorie dieser Art, sofern dafür Partnergeschäfte eingetragen sind.",
+    "planSave": "Skizze auf diesem Gerät speichern",
+    "planExport": "Skizze herunterladen",
+    "planSaved": "Skizze auf diesem Gerät gespeichert.",
+    "planSaveError": "Speichern ist in diesem Browser nicht verfügbar."
   }
 }

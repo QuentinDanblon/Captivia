@@ -1,0 +1,301 @@
+[
+  {
+    "speciesId": 104073224,
+    "evidence": [
+      {
+        "field": "description",
+        "value": "Le gecko à crête (Correlophus ciliatus), aussi appelé gecko à cils ou à frange, appartient à la famille des Diplodactylidae et est endémique de Nouvelle-Calédonie. Arboricole, il fréquente la canopée des forêts tropicales humides et grimpe grâce aux poils microscopiques sous ses doigts et au bout de sa queue.",
+        "quote": "Correlophus ciliatus, nommé Rhacodactylus ciliatus jusqu'en 2012, est une espèce de geckos de la famille des Diplodactylidae[1]. En français il est appelé Gecko à crête, Gecko à cils ou encore Gecko à frange.",
+        "url": "https://fr.wikipedia.org/wiki/Correlophus_ciliatus"
+      },
+      {
+        "field": "description",
+        "value": "Le gecko à crête (Correlophus ciliatus), aussi appelé gecko à cils ou à frange, appartient à la famille des Diplodactylidae et est endémique de Nouvelle-Calédonie. Arboricole, il fréquente la canopée des forêts tropicales humides et grimpe grâce aux poils microscopiques sous ses doigts et au bout de sa queue.",
+        "quote": "Correlophus ciliatus est une espèce arboricole qui apprécie la canopée de la forêt tropicale humide.",
+        "url": "https://fr.wikipedia.org/wiki/Correlophus_ciliatus"
+      },
+      {
+        "field": "description",
+        "value": "Le gecko à crête (Correlophus ciliatus), aussi appelé gecko à cils ou à frange, appartient à la famille des Diplodactylidae et est endémique de Nouvelle-Calédonie. Arboricole, il fréquente la canopée des forêts tropicales humides et grimpe grâce aux poils microscopiques sous ses doigts et au bout de sa queue.",
+        "quote": "Ses doigts et l'extrémité de sa queue sont couverts de poils microscopiques appelés setae qui agissent comme des ventouses et lui permettent d'escalader la plupart des surfaces.",
+        "url": "https://fr.wikipedia.org/wiki/Correlophus_ciliatus"
+      },
+      {
+        "field": "feeding.dietType",
+        "value": "omnivore",
+        "quote": "These geckos are omnivorous, eating mostly fruit with occasional insect prey.",
+        "url": "https://reptifiles.com/crested-gecko-care/"
+      },
+      {
+        "field": "feeding.recommendedFoods[0]",
+        "value": "Aliment préparé complet pour gecko à crête",
+        "quote": "In the case of crested geckos, I make an exception. Thanks to the exhaustive efforts of some really smart people, there are nutritionally-complete prepared diets on the market ready for your gecko to chow down.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.recommendedFoods[0].frequency",
+        "value": "Quotidien chez les 0–12 mois; tous les 2–3 jours après 12 mois",
+        "quote": "Juveniles (0-12 months old): CGD daily, insects 1-2x/weekly",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.recommendedFoods[0].frequency",
+        "value": "Quotidien chez les 0–12 mois; tous les 2–3 jours après 12 mois",
+        "quote": "Adults (>12 months old): CGD every 2-3 days, insects 0-1x/weekly",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.recommendedFoods[1]",
+        "value": "Insectes nourriciers adaptés",
+        "quote": "Offer insects 1x/week for best results.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.recommendedFoods[1].notes",
+        "value": "Ne pas donner de proies trop grosses.",
+        "quote": "Take care not to offer anything too large—while worms have soft bodies that are easy to chew and digest, feeder roaches should be no wider than the space between the gecko’s eyes.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.foodsToAvoid[0]",
+        "value": "Nourriture pour bébé",
+        "quote": "No. Baby food doesn’t contain the nutrients that crested geckos need to grow and live healthily, and can cause severe malnutrition!",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.foodsToAvoid[1]",
+        "value": "Vers de farine et superworms",
+        "quote": "Avoid mealworms and superworms. These are known to be potentially difficult to digest for cresties, leading to impaction in some cases.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.foodsToAvoid[2]",
+        "value": "Fruits frais trop fréquents",
+        "quote": "Keep in mind that if you offer fruit too often, the gecko may turn up its nose at prepared diet and risk malnutrition.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "Complément calcique pour insectes nourriciers",
+        "quote": "All insects should be dusted with a calcium supplement to correct the Ca:P (calcium to phosphorous) ratio.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.specificNeeds",
+        "value": "Complément calcique pour insectes nourriciers",
+        "quote": "If you are using UVB light in your crested gecko’s enclosure, use a calcium powder without vitamin D. If you are not using UVB light in your crested gecko’s enclosure, use a calcium powder with vitamin D.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "habitat.habitatType",
+        "value": "terrarium",
+        "quote": "Here’s the baseline (MINIMUM) requirements for crested gecko terrarium size:",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-terrarium-size-cohabitation/"
+      },
+      {
+        "field": "habitat.tempMin",
+        "value": 18,
+        "quote": "Nighttime temperature — 65-72°F (18-22°C)",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-temperatures-humidity/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 29,
+        "quote": "Basking area (top of enclosure) — 82-85°F (28-29°C)",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-temperatures-humidity/"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": "60%",
+        "quote": "Crested geckos thrive between 6 0-80% humidity.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-temperatures-humidity/"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": "80%",
+        "quote": "Crested geckos thrive between 6 0-80% humidity.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-temperatures-humidity/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "Base minimale : 18 × 18 × 36 pouces (L × l × H) pour les juvéniles et adultes de plus de 12 g; plus grand est préférable.",
+        "quote": "Juveniles and adults (>12g) — 18″L x 18″W x 36″H",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-terrarium-size-cohabitation/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "Éclairage UVB recommandé de faible intensité.",
+        "quote": "ReptiFiles recommends UVB lighting for all reptiles, including crested geckos. Since cresties are crepuscular and typically hide behind leaves during the day, they are classified under Ferguson Zone 1, which means you don’t need anything particularly strong.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-temperatures-humidity/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "Espèce arboricole : privilégier un terrarium haut avec des branches et des surfaces à explorer verticalement et horizontalement.",
+        "quote": "As you choose an enclosure for your gecko, keep in mind that since cresties are arboreal, height is better than width or depth. That being said, too narrow of an enclosure isn’t a good thing, either. Crested geckos don’t just travel vertically — they also travel horizontally as they thermoregulate, photoregulate, and generally explore.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-terrarium-size-cohabitation/"
+      },
+      {
+        "field": "habitat.activityEnrichment",
+        "value": "Espèce arboricole : privilégier un terrarium haut avec des branches et des surfaces à explorer verticalement et horizontalement.",
+        "quote": "It is able to jump long distances between branches to move to new locations.",
+        "url": "https://en.wikipedia.org/w/index.php?title=Crested_gecko&action=render"
+      },
+      {
+        "field": "habitat.hygieneNotes",
+        "value": "Laisser l’humidité redescendre autour de 50 % ou un peu moins entre les brumisations; une humidité constamment élevée favorise moisissures et champignons.",
+        "quote": "Make sure to let it dry out to around 50% or even 40% before misting again—constant moisture encourages mold and mildew growth, which can make your gecko sick.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-temperatures-humidity/"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "Espèce arboricole et crépusculaire, surtout active à l’aube et au crépuscule.",
+        "quote": "These geckos are an arboreal species of gecko native to New Caledonia, a group of islands between Fiji and Australia.",
+        "url": "https://reptifiles.com/crested-gecko-care/"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "Espèce arboricole et crépusculaire, surtout active à l’aube et au crépuscule.",
+        "quote": "They are also crepuscular, meaning that they are most active during dawn and dusk.",
+        "url": "https://reptifiles.com/crested-gecko-care/"
+      },
+      {
+        "field": "behavior.sociability",
+        "value": "semi-grégaire",
+        "quote": "2+ females: This is the setup that is most likely to work (although still not optimal). Multiple females have been known to get along as long as they “move in” at the same time and are similarly sized.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-terrarium-size-cohabitation/"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "Espèce arboricole et crépusculaire, surtout active à l’aube et au crépuscule. Le guide ne recommande pas la cohabitation, dont il estime que les risques dépassent les avantages : il avertit des combats entre mâles et rapporte que des femelles de taille similaire peuvent parfois cohabiter si elles sont introduites en même temps, sans que cela soit optimal.",
+        "quote": "2+ males: Please don’t! In almost every species, males housed together **will** fight and injure/kill one another, and crested geckos are no different.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-terrarium-size-cohabitation/"
+      },
+      {
+        "field": "behavior.difficultyLevel",
+        "value": "débutant",
+        "quote": "Difficulty: Low",
+        "url": "https://reptifiles.com/crested-gecko-care/"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "Yeux enfoncés, hanches ou côtes saillantes, peau anormalement plissée ou queue ondulée.",
+        "quote": "sunken eyes protruding hips/ribs unnaturally wrinkled skin wavy tail",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-dehydration/"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "Éviter les facteurs signalés par la source (faible humidité, températures trop élevées, brumisation peu fréquente, nourriture sèche); elle recommande de maintenir l’humidité entre 60 et 80 % et de brumiser régulièrement.",
+        "quote": "low humidity temperatures too high infrequent misting dry food",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-dehydration/"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "Éviter les facteurs signalés par la source (faible humidité, températures trop élevées, brumisation peu fréquente, nourriture sèche); elle recommande de maintenir l’humidité entre 60 et 80 % et de brumiser régulièrement.",
+        "quote": "Check that the humidity is consistently between 60-80% and mist often.",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-dehydration/"
+      },
+      {
+        "field": "health.diseases[0].whenToConsult",
+        "value": "En cas de doute, contacter un vétérinaire spécialisé en animaux exotiques.",
+        "quote": "When in doubt, call an exotic vet.",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-dehydration/"
+      },
+      {
+        "field": "health.diseases[1].symptoms",
+        "value": "Perte de poids, perte d’appétit et absence de selles.",
+        "quote": "weight loss loss of appetite absence of stool",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-impaction/"
+      },
+      {
+        "field": "health.diseases[1].prevention",
+        "value": "Éviter les substrats meubles susceptibles d’être avalés, les insectes à carapace dure ou trop gros, et corriger la déshydratation.",
+        "quote": "loose substrate hard-shelled feeder insects too large feeder insects dehydration",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-impaction/"
+      },
+      {
+        "field": "health.diseases[1].whenToConsult",
+        "value": "Si le gecko ne produit pas de selles, appeler un vétérinaire spécialisé en animaux exotiques.",
+        "quote": "If no stool, call an exotic veterinarian.",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-impaction/"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "Queue ondulée, mâchoire molle, membres courbés, léthargie ou perte d’appétit.",
+        "quote": "wavy tail soft jaw curved limbs lethargy loss of appetite",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-metabolic-bone-disease/"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "Prévoir une alimentation préparée adaptée, un éclairage UVB et un complément calcique pour les insectes nourriciers.",
+        "quote": "MBD is particularly easy to prevent in crested geckos. Using a powdered diet from Pangea, Repashy, or Clark’s, providing a 5% UVB bulb, and dusting all insects with calcium powder will prevent the problem from ever surfacing.",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-metabolic-bone-disease/"
+      },
+      {
+        "field": "health.diseases[2].whenToConsult",
+        "value": "Une prise en charge vétérinaire est recommandée pour les cas sévères ou qui ne s’améliorent pas après quelques semaines.",
+        "quote": "Veterinary care is recommended for more severe cases or cases that do not improve after a couple weeks of treatment.",
+        "url": "https://reptifiles.com/crested-gecko-care/sick-crested-gecko/crested-gecko-metabolic-bone-disease/"
+      },
+      {
+        "field": "reproduction.breedingDifficulty",
+        "value": "facile",
+        "quote": "il se reproduit relativement facilement en captivité.",
+        "url": "https://fr.wikipedia.org/wiki/Correlophus_ciliatus"
+      },
+      {
+        "field": "reproduction.litterSizeMin",
+        "value": "2 œufs",
+        "quote": "La femelle pond deux œufs qui éclosent entre 60 et 90 jours plus tard.",
+        "url": "https://fr.wikipedia.org/wiki/Correlophus_ciliatus"
+      },
+      {
+        "field": "reproduction.litterSizeMax",
+        "value": "2 œufs",
+        "quote": "La femelle pond deux œufs qui éclosent entre 60 et 90 jours plus tard.",
+        "url": "https://fr.wikipedia.org/wiki/Correlophus_ciliatus"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "En captivité, la reproduction est décrite comme relativement facile. Une ponte compte deux œufs; l’éclosion survient en 60 à 90 jours. Les pontes sont généralement espacées d’environ quatre semaines si les réserves lipidiques et calciques de la femelle restent suffisantes.",
+        "quote": "La femelle pond deux œufs qui éclosent entre 60 et 90 jours plus tard.",
+        "url": "https://fr.wikipedia.org/wiki/Correlophus_ciliatus"
+      },
+      {
+        "field": "reproduction.notes",
+        "value": "En captivité, la reproduction est décrite comme relativement facile. Une ponte compte deux œufs; l’éclosion survient en 60 à 90 jours. Les pontes sont généralement espacées d’environ quatre semaines si les réserves lipidiques et calciques de la femelle restent suffisantes.",
+        "quote": "Les œufs sont généralement pondus à quatre semaines d'intervalle, tant que les réserves en gras et en calcium de la mère restent à des niveaux corrects pour sa santé.",
+        "url": "https://fr.wikipedia.org/wiki/Correlophus_ciliatus"
+      },
+      {
+        "field": "feeding.recommendedFoods[0].notes",
+        "value": "Choisir une préparation formulée pour les geckos à crête et la mélanger à de l’eau.",
+        "quote": "Mix the powdered diet with water to a ketchup or smoothie consistency and offer in a biodegradable condiment cup.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "feeding.recommendedFoods[1].notes",
+        "value": "Ils complètent la ration et stimulent l’activité; ne pas donner de proies trop grosses.",
+        "quote": "But they make good source of entertainment and exercise for the gecko, and they help juveniles grow faster, as well as fatten thin adults.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-food/"
+      },
+      {
+        "field": "habitat.minSpaceSize",
+        "value": "Base minimale : 18 × 18 × 36 pouces (L × l × H) pour les juvéniles et adultes de plus de 12 g; plus grand est préférable.",
+        "quote": "Keep in mind that larger is always better!",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-terrarium-size-cohabitation/"
+      },
+      {
+        "field": "habitat.lightNeeds",
+        "value": "Prévoir un cycle jour-nuit et un éclairage UVB de faible intensité; les nouveau-nés demandent un ajustement spécifique de la distance et de la chaleur.",
+        "quote": "If you have or are planning to get a hatchling crested gecko, there are some special accommodations you will need to make in terms of UVB lighting and heating.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-temperatures-humidity/"
+      },
+      {
+        "field": "behavior.generalBehavior",
+        "value": "Espèce arboricole et crépusculaire, surtout active à l’aube et au crépuscule. Le guide ne recommande pas la cohabitation, dont il estime que les risques dépassent les avantages : il avertit des combats entre mâles et rapporte que des femelles de taille similaire peuvent parfois cohabiter si elles sont introduites en même temps, sans que cela soit optimal.",
+        "quote": "I do not personally endorse this practice, as I believe that the risks of cohabitation outweigh the potential benefits.",
+        "url": "https://reptifiles.com/crested-gecko-care/crested-gecko-terrarium-size-cohabitation/"
+      }
+    ]
+  }
+]

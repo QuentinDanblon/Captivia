@@ -1,0 +1,30 @@
+[
+  {
+    "speciesId": 2468095,
+    "evidence": [],
+    "nullNotes": [
+      {
+        "field": "health",
+        "reason": "Aucune des sources consultées n'établit au moins trois maladies documentées pour l'espèce ou son groupe immédiat; le guide captif consulté ne donne pas de fiche médicale.",
+        "url": "https://www.thebhs.org/publications/the-herpetological-bulletin/issue-number-19-spring-1987/2266-hb019-05/file"
+      }
+    ]
+  },
+  {
+    "speciesId": 156256182,
+    "evidence": [
+      {
+        "field": "reproduction.notes",
+        "value": "Espèce ovipare.",
+        "quote": "Reproduction oviparous",
+        "url": "https://reptile-database.reptarium.cz/Cryptoblepharus/virgatus"
+      }
+    ],
+    "nullNotes": [
+      {
+        "field": "reproduction.season/incubationDays/litterSizeMin/litterSizeMax/sexualMaturityMonths/breedingDifficulty",
+        "reason": "La source consultée indique seulement le mode de reproduction; elle ne documente pas ces précisions."
+      }
+    ]
+  }
+]

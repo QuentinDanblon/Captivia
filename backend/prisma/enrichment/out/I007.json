@@ -1,0 +1,133 @@
+[
+ {
+  "speciesId": 2441110,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": null,
+   "tempMax": null,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Privilégier un champ bien géré. En hébergement temporaire, prévoir assez de place pour que chaque mouton puisse se retourner, faire quelques pas et se coucher confortablement.",
+   "lightNeeds": null,
+   "activityEnrichment": "Laisser un accès au pâturage pour le broutage et garder les femelles et jeunes en groupe stable; les moutons sont grégaires.",
+   "hygieneNotes": "Prévoir une aire de repos sèche, sur sol plein avec litière de paille ou de copeaux/sciure grossière, à renouveler régulièrement.",
+   "sources": [
+    {
+     "type": "official",
+     "url": "https://www.rspca.org.uk/adviceandwelfare/farm/sheep",
+     "title": "Sheep Welfare - Understanding Sheep Behaviour - RSPCA"
+    },
+    {
+     "type": "official",
+     "url": "https://www.rspca.org.uk/documents/1494935/9042554/Sheep%2B%282011%29%2B%28PDF%2B375KB%29.pdf/b19c82d0-34ed-2370-704c-8b5a61d6db2d?t=1557664988305",
+     "title": "Sheep: Good practice for housing and care - RSPCA"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2440891,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": null,
+   "tempMax": null,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Grand lot sec et/ou aire stabilisée; la source ne donne pas de superficie chiffrée.",
+   "lightNeeds": null,
+   "activityEnrichment": "Prévoir un compagnon équidé et un espace où bouger; proposer du fourrage et des branches sûres à explorer, ainsi que des surfaces variées.",
+   "hygieneNotes": null,
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://www.worldhorsewelfare.org/advice/donkey-and-mule-environment-essentials",
+     "title": "Donkey and mule environment essentials - World Horse Welfare"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 2474162,
+  "habitat": {
+   "habitatType": "volière",
+   "tempMin": null,
+   "tempMax": null,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Préférer un parc ou une volière permettant de marcher, courir et s’éloigner des autres; le guide RSPCA fixe une hauteur minimale de 30 cm pour l’enclos et conseille un toit souple pour limiter les blessures lors des envols verticaux.",
+   "lightNeeds": null,
+   "activityEnrichment": "Fournir une litière pour gratter et fouiller, des zones couvertes, un bain de poussière et des occasions de chercher la nourriture; prévoir des nids pour les femelles pondeuses.",
+   "hygieneNotes": "Examiner régulièrement les pattes et entretenir la litière afin d’éviter l’accumulation de nourriture et de fientes.",
+   "sources": [
+    {
+     "type": "official",
+     "url": "https://science.rspca.org.uk/documents/1494935/9042554/Quail%2B%282011%29%2B%28PDF%2B516KB%29.pdf/4388150e-87e5-fe14-6e82-0c6ab1c40ae0?t=1552922015384",
+     "title": "Quail: Good practice for housing and care - RSPCA"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 163312909,
+  "habitat": {
+   "habitatType": "volière",
+   "tempMin": null,
+   "tempMax": null,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Volière ou parc assez long pour permettre de courts vols; le guide déconseille les cages et ne fixe pas de surface minimale chiffrée.",
+   "lightNeeds": null,
+   "activityEnrichment": "Loger en groupe avec des perchoirs à plusieurs hauteurs et la possibilité de voler; des branches et du feuillage fournissent des perchoirs et des abris supplémentaires.",
+   "hygieneNotes": "Utiliser un sol plein avec une litière pour permettre la recherche de nourriture; nettoyer quotidiennement et limiter la litière pour réduire la poussière.",
+   "sources": [
+    {
+     "type": "official",
+     "url": "https://science.rspca.org.uk/documents/1494935/9042554/Pigeons%2B%282011%29%2B%28PDF%2B395KB%29.pdf/d7728207-861f-a78b-df91-5c61e76c93bf?t=1557664523069",
+     "title": "Pigeons: Good practice for housing and care - RSPCA"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 308455619,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": null,
+   "tempMax": null,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Abri intérieur: au moins 1 m² de sol par oie; prévoir en plus une grande pâture herbeuse, sans minimum extérieur chiffré dans la source.",
+   "lightNeeds": null,
+   "activityEnrichment": "Donner accès à une pâture pour brouter et à un point d’eau ouvert assez profond pour laver la tête et le corps, mais avec une sortie facile.",
+   "hygieneNotes": "Garder l’abri sec et ventilé; nettoyer régulièrement l’abri et ses équipements. Nettoyer et remplir l’eau de baignade chaque jour, avec l’eau de boisson séparée.",
+   "sources": [
+    {
+     "type": "official",
+     "url": "https://www.rspca.org.uk/adviceandwelfare/farm/farmanimals/ducksandgeese/outdoorenvironment",
+     "title": "Outdoor Areas for Pet Geese and Ducks - RSPCA"
+    }
+   ]
+  }
+ },
+ {
+  "speciesId": 9606290,
+  "habitat": {
+   "habitatType": "enclos",
+   "tempMin": null,
+   "tempMax": null,
+   "humidityMin": null,
+   "humidityMax": null,
+   "minSpaceSize": "Le guide Open Sanctuary cite 15 pieds carrés par dinde comme repère minimal, à ajuster selon la race, l’individu, la taille du groupe et le temps passé à l’intérieur.",
+   "lightNeeds": null,
+   "activityEnrichment": "Accès à un espace extérieur sécurisé pour explorer, chercher de la nourriture et prendre des bains de poussière; prévoir aussi des possibilités de se rafraîchir par temps chaud.",
+   "hygieneNotes": "L’abri intérieur doit avoir une bonne ventilation et une litière propre et sèche.",
+   "sources": [
+    {
+     "type": "guide",
+     "url": "https://opensanctuary.org/building-a-good-home-for-turkeys/",
+     "title": "Creating A Good Home For Turkeys - The Open Sanctuary Project"
+    }
+   ]
+  }
+ }
+]

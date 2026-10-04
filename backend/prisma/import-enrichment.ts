@@ -22,6 +22,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { BREED_ID_MIN, findParentSpecies } from '../src/species/species-parent';
 import { checkDietCompatibility } from './validation';
+import { hasReproductionFacts, hasValidTemperatureRange } from '../src/species/habitat-validation';
+import { hasImportableFeedingFacts } from '../src/species/feeding-validation';
 
 type Source = { type?: string; url?: string; title?: string };
 type Json = Record<string, unknown>;
@@ -208,9 +210,14 @@ export async function importEnrichment(
           dietError = checkDietCompatibility(parent?.scientificName ?? '', dietType, parentFeeding?.dietType);
         }
         if (dietError) skip(speciesId, dietError);
-        else if (dietType && foods.length >= 2 && avoid.length >= 1 && sources.length && meal && MEAL_FREQ.includes(meal)) {
+        else if (hasImportableFeedingFacts({
+          dietType: dietType ?? null,
+          recommendedFoodsCount: foods.length,
+          sourceCount: sources.length,
+          hasValidMealFrequency: !!meal && MEAL_FREQ.includes(meal),
+        })) {
           await prisma.speciesFeeding.create({
-            data: { speciesId, locale: 'fr', dietType, recommendedFoods: foods as never, foodsToAvoid: avoid as never, mealFrequency: meal, specificNeeds: str(f.specificNeeds), sources: sources as never },
+            data: { speciesId, locale: 'fr', dietType: dietType!, recommendedFoods: foods as never, foodsToAvoid: avoid as never, mealFrequency: meal!, specificNeeds: str(f.specificNeeds), sources: sources as never },
           });
           bump('feeding');
         } else skip(speciesId, 'feeding invalide ou non sourcé');
@@ -228,11 +235,11 @@ export async function importEnrichment(
         const lightNeeds = str(h.lightNeeds);
         const activityEnrichment = str(h.activityEnrichment);
         if (
-          habitatType && HABITAT_TYPES.includes(habitatType) && cost && COST.includes(cost) &&
-          tempMin !== null && tempMax !== null && tempMin <= tempMax && minSpaceSize && lightNeeds && activityEnrichment && sources.length
+          (!habitatType || HABITAT_TYPES.includes(habitatType)) && (!cost || COST.includes(cost)) &&
+          hasValidTemperatureRange(tempMin, tempMax) && sources.length
         ) {
           await prisma.speciesHabitat.create({
-            data: { speciesId, locale: 'fr', habitatType, tempMin, tempMax, humidityMin: num(h.humidityMin), humidityMax: num(h.humidityMax), minSpaceSize, lightNeeds, activityEnrichment, hygieneNotes: str(h.hygieneNotes), costEstimate: cost, sources: sources as never },
+            data: { speciesId, locale: 'fr', habitatType, tempMin, tempMax, humidityMin: num(h.humidityMin), humidityMax: num(h.humidityMax), minSpaceSize, lightNeeds, activityEnrichment, hygieneNotes: str(h.hygieneNotes), costEstimate: cost ?? null, sources: sources as never },
           });
           bump('habitat');
         } else skip(speciesId, 'habitat invalide ou non sourcé');
@@ -245,7 +252,7 @@ export async function importEnrichment(
         const general = str(b.generalBehavior);
         const soc = str(b.sociability, 20);
         const diff = normDifficulty(str(b.difficultyLevel, 20));
-        if (general && soc && SOCIABILITY.includes(soc) && diff && DIFFICULTY.includes(diff) && sources.length) {
+        if (general && soc && SOCIABILITY.includes(soc) && (!diff || DIFFICULTY.includes(diff)) && sources.length) {
           await prisma.speciesBehavior.create({
             data: { speciesId, locale: 'fr', generalBehavior: general, sociability: soc, difficultyLevel: diff, compatibilityWithChildren: str(b.compatibilityWithChildren), compatibilityWithOtherAnimals: str(b.compatibilityWithOtherAnimals), sources: sources as never },
           });
@@ -306,7 +313,7 @@ export async function importEnrichment(
         const r = e.reproduction;
         const sources = cleanSources(r.sources);
         const diff = str(r.breedingDifficulty, 20);
-        const hasData = [r.gestationDays, r.incubationDays, r.litterSizeMin, r.sexualMaturityMonths].some((v) => num(v) !== null) || !!str(r.season);
+        const hasData = hasReproductionFacts(r);
         if (hasData && sources.length && (!diff || BREEDING.includes(diff))) {
           await prisma.speciesReproduction.create({
             data: {

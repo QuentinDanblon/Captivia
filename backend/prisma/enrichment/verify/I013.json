@@ -1,0 +1,73 @@
+[
+  {
+    "speciesId": 2468095,
+    "evidence": [
+      {
+        "field": "health.diseases[0].name",
+        "value": "Hyperparathyroïdie secondaire nutritionnelle (maladie osseuse métabolique, décrite chez les lézards insectivores)",
+        "quote": "Secondary nutritional hyperparathyroidism is the most common bone disease seen in pet reptiles. Affected reptiles are generally rapidly growing plant- and insect-eating lizards, turtles, or tortoises.",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[0].symptoms",
+        "value": "Baisse d'appétit, faiblesse, démarche anormale, os de la mâchoire ou des pattes gonflés ou déformés.",
+        "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[0].prevention",
+        "value": "Éviter les déséquilibres calcium/phosphore, le manque de vitamine D3, le manque d'UVB et les températures inadéquates en captivité.",
+        "quote": "It is caused by a poor diet with the wrong ratio of calcium to phosphorus and a lack of vitamin D 3 or poor husbandry (lack of ultraviolet B light, inadequate temperature control in the cage).",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[0].whenToConsult",
+        "value": "Consulter en cas de faiblesse, de démarche anormale ou de déformation osseuse ; le diagnostic nécessite radiographies et analyses sanguines.",
+        "quote": "Signs include poor appetite, weakness, an inability to walk normally, swollen or distorted jaw or leg bones, fractures of the spine or legs, cloacal prolapse (in which the lining of the cloaca protrudes through the vent opening to outside the body), and muscle spasms. Diagnosis requires x-rays to document generalized loss of bone from the skeleton and blood tests that show low levels of vitamin D and an imbalance of calcium and phosphorus.",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[1].name",
+        "value": "Stomatite infectieuse (maladie décrite chez les lézards)",
+        "quote": "Infectious stomatitis, infection and inflammation of the tissue lining the mouth, is seen in snakes, lizards, and turtles.",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[1].symptoms",
+        "value": "Petits points rouge violacé dans la bouche au début ; les lésions progressent le long des dents et peuvent atteindre les mâchoires dans les cas graves.",
+        "quote": "Early signs include tiny, purplish red spots in the mouth. Diseased tissue develops along the rows of teeth as the condition worsens. In severe cases, the infection can extend into the upper and lower jaw bones.",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[1].whenToConsult",
+        "value": "Consulter rapidement si des lésions buccales apparaissent, car une infection respiratoire ou gastro-intestinale peut se développer si la stomatite n'est pas traitée rapidement.",
+        "quote": "Respiratory or gastrointestinal infection may develop if stomatitis is not treated promptly.",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[2].name",
+        "value": "Nématodes gastriques (vers de l'estomac, décrits chez les lézards)",
+        "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[2].symptoms",
+        "value": "Une infestation sévère peut provoquer des ulcères gastriques.",
+        "quote": "Roundworms of the stomach ( stomach worms ) are seen in lizards and can cause stomach ulcers in severe infestations.",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[2].prevention",
+        "value": "Nettoyer régulièrement l'enclos, fournir de l'eau fraîche et retirer les aliments non consommés pour aider à prévenir les infestations parasitaires.",
+        "quote": "Good sanitation practices, such as cleaning the enclosure regularly, providing fresh water, and removing uneaten food, can help prevent infection and parasite infestation.",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      },
+      {
+        "field": "health.diseases[2].whenToConsult",
+        "value": "Un vétérinaire peut rechercher les parasites gastro-intestinaux dans les selles.",
+        "quote": "Your veterinarian can test your reptile’s feces for gastrointestinal parasites.",
+        "url": "https://www.merckvetmanual.com/all-other-pets/reptiles/disorders-and-diseases-of-reptiles"
+      }
+    ]
+  }
+]

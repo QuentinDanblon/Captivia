@@ -1,0 +1,242 @@
+[
+ {
+  "speciesId": 2441110,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "enclos",
+    "quote": "The most species-appropriate ‘housing’ for sheep is a well-managed field.",
+    "url": "https://r.jina.ai/https://www.rspca.org.uk/documents/1494935/9042554/Sheep%2B%282011%29%2B%28PDF%2B375KB%29.pdf/b19c82d0-34ed-2370-704c-8b5a61d6db2d?t=1557664988305"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "champ bien géré; en espace temporaire, tourner, marcher quelques pas et se coucher",
+    "quote": "Any temporary individual housing should provide, as a minimum, enough room for the animal to turn around, take at least a few steps in any direction and lie down comfortably.",
+    "url": "https://r.jina.ai/https://www.rspca.org.uk/documents/1494935/9042554/Sheep%2B%282011%29%2B%28PDF%2B375KB%29.pdf/b19c82d0-34ed-2370-704c-8b5a61d6db2d?t=1557664988305"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "pâturage, broutage; logement social stable",
+    "quote": "Sheep are gregarious animals and separation is so stressful that individual animals show both altered physiology and stereotypic behaviours when isolated from others.",
+    "url": "https://r.jina.ai/https://www.rspca.org.uk/documents/1494935/9042554/Sheep%2B%282011%29%2B%28PDF%2B375KB%29.pdf/b19c82d0-34ed-2370-704c-8b5a61d6db2d?t=1557664988305"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "aire de repos sèche",
+    "quote": "Sheep require access to a comfortable, dry resting area with sufficient space for all animals to lie down at the same time.",
+    "url": "https://r.jina.ai/https://www.rspca.org.uk/documents/1494935/9042554/Sheep%2B%282011%29%2B%28PDF%2B375KB%29.pdf/b19c82d0-34ed-2370-704c-8b5a61d6db2d?t=1557664988305"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "sol plein avec litière de paille ou sciure/copeaux grossiers",
+    "quote": "The floor should be solid rather than slatted, and comfortable litter should be provided in the form of straw or coarse sawdust/wood shavings.",
+    "url": "https://r.jina.ai/https://www.rspca.org.uk/documents/1494935/9042554/Sheep%2B%282011%29%2B%28PDF%2B375KB%29.pdf/b19c82d0-34ed-2370-704c-8b5a61d6db2d?t=1557664988305"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "litière renouvelée régulièrement pour garder le sol sec",
+    "quote": "Litter should be topped up regularly to ensure animals remain dry",
+    "url": "https://r.jina.ai/https://www.rspca.org.uk/documents/1494935/9042554/Sheep%2B%282011%29%2B%28PDF%2B375KB%29.pdf/b19c82d0-34ed-2370-704c-8b5a61d6db2d?t=1557664988305"
+   }
+  ]
+ },
+ {
+  "speciesId": 2440891,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "enclos",
+    "quote": "Donkeys should be provided with large dry lots and/or areas of hardstanding.",
+    "url": "https://www.worldhorsewelfare.org/advice/donkey-and-mule-environment-essentials"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "grand lot sec et/ou aire stabilisée",
+    "quote": "Donkeys should be provided with large dry lots and/or areas of hardstanding.",
+    "url": "https://www.worldhorsewelfare.org/advice/donkey-and-mule-environment-essentials"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "compagnon équidé; fourrage/browse présenté de façons variées et surfaces à explorer",
+    "quote": "Donkeys require companionship and usually form strong bonds with one other donkey. They can live in small groups.",
+    "url": "https://www.worldhorsewelfare.org/advice/donkey-and-mule-environment-essentials"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "branches de saule ou noisetier, fourrage et surfaces variées à explorer",
+    "quote": "This can include providing forage and browse in interactive, interesting ways, use of different scents (e.g., safe plants and essential oils) and providing different surfaces (e.g., bark or sand).",
+    "url": "https://www.worldhorsewelfare.org/advice/donkey-and-mule-environment-essentials"
+   }
+  ]
+ },
+ {
+  "speciesId": 2474162,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "volière",
+    "quote": "the justification for housing quail in cages should always be questioned, and birds should be housed in pens or aviaries wherever possible.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Quail%2B%282011%29%2B%28PDF%2B516KB%29.pdf/4388150e-87e5-fe14-6e82-0c6ab1c40ae0?t=1552922015384"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "assez de place pour marcher, courir et se retirer; hauteur au moins 30 cm",
+    "quote": "Sufficient space should be provided to allow for all of the above resources and for a range of behaviours, including walking and running which are important for quail. Birds also need to be able to retreat from one another if necessary.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Quail%2B%282011%29%2B%28PDF%2B516KB%29.pdf/4388150e-87e5-fe14-6e82-0c6ab1c40ae0?t=1552922015384"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "hauteur au moins 30 cm; toit souple recommandé pour éviter les blessures",
+    "quote": "Cage or pen height should be at least 30 cm and it is a good idea to construct roofs from flexible material, which will not cause head injuries.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Quail%2B%282011%29%2B%28PDF%2B516KB%29.pdf/4388150e-87e5-fe14-6e82-0c6ab1c40ae0?t=1552922015384"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "litière, abri, bains de poussière, recherche de nourriture et nids pour pondeuses",
+    "quote": "Domestication does not appear to have significantly altered quail behaviour so it is important to design housing that caters for their most high priority needs which are litter for scratching, pecking and dust bathing; next boxes, and cover.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Quail%2B%282011%29%2B%28PDF%2B516KB%29.pdf/4388150e-87e5-fe14-6e82-0c6ab1c40ae0?t=1552922015384"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "possibilités de fourrager",
+    "quote": "All quail will take a variety of fruit, grains, small seeds and invertebrates and should be given a choice of foods to forage for wherever possible.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Quail%2B%282011%29%2B%28PDF%2B516KB%29.pdf/4388150e-87e5-fe14-6e82-0c6ab1c40ae0?t=1552922015384"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "contrôle régulier des pattes pour prévenir les problèmes liés au sol/litière",
+    "quote": "Birds are prone to foot problems on any kind of flooring and where solid floors with litter are used, careful and regular examination of the feet is necessary to prevent the build-up of hardened food, litter and faeces.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Quail%2B%282011%29%2B%28PDF%2B516KB%29.pdf/4388150e-87e5-fe14-6e82-0c6ab1c40ae0?t=1552922015384"
+   }
+  ]
+ },
+ {
+  "speciesId": 163312909,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "volière",
+    "quote": "Ideally, pigeons should be housed with outdoor access wherever possible or even in wholly outdoor flights, in which case they will need access to covered shelters at all times.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Pigeons%2B%282011%29%2B%28PDF%2B395KB%29.pdf/d7728207-861f-a78b-df91-5c61e76c93bf?t=1557664523069"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "parc ou volière avec espace pour voler, de préférence longue; aucune surface minimale donnée",
+    "quote": "Pigeons should be housed in pens that permit enrichment and a range of behaviours, including flight wherever possible – they have been shown to strongly prefer aviaries that allow them to fly.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Pigeons%2B%282011%29%2B%28PDF%2B395KB%29.pdf/d7728207-861f-a78b-df91-5c61e76c93bf?t=1557664523069"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "cages non adaptées au logement de pigeons",
+    "quote": "Cages are not suitable for housing pigeons and should only be used if there is compelling scientific or veterinary justification.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Pigeons%2B%282011%29%2B%28PDF%2B395KB%29.pdf/d7728207-861f-a78b-df91-5c61e76c93bf?t=1557664523069"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "logement de groupe, vol, perchoirs à différents niveaux, branches/feuillage",
+    "quote": "Each bird should have access to a perching area and perches should be sited at a range of levels, to encourage birds to establish territories and reduce competition.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Pigeons%2B%282011%29%2B%28PDF%2B395KB%29.pdf/d7728207-861f-a78b-df91-5c61e76c93bf?t=1557664523069"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "branches feuillues comme perchoirs et abris additionnels",
+    "quote": "For aviary housed birds, foliage attached to enclosure sides using thick gardening wire can provide extra perching and shelter.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Pigeons%2B%282011%29%2B%28PDF%2B395KB%29.pdf/d7728207-861f-a78b-df91-5c61e76c93bf?t=1557664523069"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "sol plein avec litière; nettoyage quotidien",
+    "quote": "Daily cleaning and the use of minimal litter will help to reduce levels of dust created by the birds.",
+    "url": "https://r.jina.ai/https://science.rspca.org.uk/documents/1494935/9042554/Pigeons%2B%282011%29%2B%28PDF%2B395KB%29.pdf/d7728207-861f-a78b-df91-5c61e76c93bf?t=1557664523069"
+   }
+  ]
+ },
+ {
+  "speciesId": 308455619,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "enclos",
+    "quote": "Pet ducks and geese need both a roomy indoor shelter and a sizable area of outdoor pasture, with their own easy access from one to the other.",
+    "url": "https://www.rspca.org.uk/adviceandwelfare/farm/farmanimals/ducksandgeese/outdoorenvironment"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "abri intérieur au moins 1 m² par oie; grande pâture supplémentaire",
+    "quote": "We recommend providing at least one square metre of floor space for every two to three ducks, or one goose.",
+    "url": "https://www.rspca.org.uk/adviceandwelfare/farm/farmanimals/ducksandgeese/outdoorenvironment"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "pâture herbeuse pour le broutage; eau ouverte pour les comportements aquatiques",
+    "quote": "Geese are grazers and need a particularly good-sized grassy area.",
+    "url": "https://www.rspca.org.uk/adviceandwelfare/farm/farmanimals/ducksandgeese/outdoorenvironment"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "point d’eau ouvert assez profond pour se laver, assez peu profond pour sortir",
+    "quote": "If there isn’t a pond available, you’ll need to give your ducks and geese access to open water sources, such as a kids’ paddling pool or trough, so they can carry out their natural water-related behaviours.",
+    "url": "https://www.rspca.org.uk/adviceandwelfare/farm/farmanimals/ducksandgeese/outdoorenvironment"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "abri à nettoyer régulièrement; bassin nettoyé chaque jour et eau de boisson séparée",
+    "quote": "Clean and refill regularly – clean the open water container at least once a day before refilling it with clean water.",
+    "url": "https://www.rspca.org.uk/adviceandwelfare/farm/farmanimals/ducksandgeese/outdoorenvironment"
+   }
+  ]
+ },
+ {
+  "speciesId": 9606290,
+  "evidence": [
+   {
+    "field": "habitat.habitatType",
+    "value": "enclos",
+    "quote": "Turkeys require access to indoor living spaces to ensure their comfort and safety.",
+    "url": "https://opensanctuary.org/building-a-good-home-for-turkeys/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "minimum de 15 pieds carrés par dinde, indiqué par le guide comme point de départ",
+    "quote": "materials recommend a minimum of 15 square feet per bird.",
+    "url": "https://opensanctuary.org/building-a-good-home-for-turkeys/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "extérieur sécurisé permettant exploration, recherche de nourriture et bains de poussière",
+    "quote": "Provide spaces that allow residents to engage in natural behaviors such as exploring, foraging, and dust bathing",
+    "url": "https://opensanctuary.org/building-a-good-home-for-turkeys/"
+   },
+   {
+    "field": "habitat.activityEnrichment",
+    "value": "prévoir des possibilités de refroidissement pendant les périodes chaudes",
+    "quote": "Provide ample opportunities for residents to cool off during warm weather",
+    "url": "https://opensanctuary.org/building-a-good-home-for-turkeys/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "litière abondante, propre et sèche; ventilation convenable",
+    "quote": "Provide lots of clean, dry bedding.",
+    "url": "https://opensanctuary.org/building-a-good-home-for-turkeys/"
+   },
+   {
+    "field": "habitat.hygieneNotes",
+    "value": "ventilation adéquate toute l’année",
+    "quote": "The indoor space must: Provide robust protection from predators; Provide enough space for normal activity and healthy social dynamics; Provide appropriate traction and be easy on the feet and joints; Be able to maintain a safe temperature and provide proper ventilation year-round; Provide opportunities to exhibit natural behaviors.",
+    "url": "https://opensanctuary.org/building-a-good-home-for-turkeys/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "adapter la surface au besoin individuel et aux dynamiques du groupe",
+    "quote": "An individual’s age, breed, health, and activity level can impact the amount of space they require, as can flock dynamics and your climate.",
+    "url": "https://opensanctuary.org/building-a-good-home-for-turkeys/"
+   },
+   {
+    "field": "habitat.minSpaceSize",
+    "value": "tenir compte du temps passé à l’intérieur",
+    "quote": "It’s also important to consider your climate and how much time you anticipate residents spending indoors.",
+    "url": "https://opensanctuary.org/building-a-good-home-for-turkeys/"
+   }
+  ]
+ }
+]

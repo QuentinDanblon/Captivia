@@ -1151,6 +1151,16 @@
       "equipment": "Material recomendado",
       "sources": "Fuentes"
     },
+    "belgium": {
+      "title": "Normas que debe comprobar en su región",
+      "body": "En Bélgica, las normas de tenencia varían según la región, la especie y su estatus CITES. Las listas positivas enlazadas se refieren a mamíferos y no bastan para determinar las normas aplicables a otras especies. Los estados antiguos del catálogo permanecen ocultos hasta que las autoridades competentes los verifiquen.",
+      "sources": {
+        "wallonia": "Valonia: lista positiva de mamíferos y normas de tenencia",
+        "flanders": "Flandes: mamíferos permitidos",
+        "brussels": "Bruselas: tenencia y adopción",
+        "cites": "SPF Salud Pública de Bélgica: CITES"
+      }
+    },
     "review": {
       "badge": "Por confirmar",
       "hint": "Aún no revisado por nuestro equipo",
@@ -2527,7 +2537,7 @@
     "start": "Elige una categoría o una especie para abrir su guía.",
     "unknownCategory": "Elige la categoría que corresponda a esta especie.",
     "planTitle": "Tu plano con medidas",
-    "planIntro": "Introduce las dimensiones de tu instalación y elige dónde colocar el material. Este plano representa tus medidas, no certifica un tamaño mínimo ni una distribución para la especie.",
+    "planIntro": "Introduce las dimensiones y elige dónde colocar el equipo. Solo se rellenan medidas si la ficha de la especie, con fuentes, indica tres dimensiones explícitas. El croquis representa tus decisiones, no certifica un tamaño mínimo ni una instalación validada.",
     "length": "Longitud (cm)",
     "width": "Ancho (cm)",
     "height": "Altura (cm)",
@@ -2704,6 +2714,12 @@
       "left": "A la izquierda",
       "centre": "En el centro",
       "right": "A la derecha"
-    }
+    },
+    "shopForAnimal": "Buscar tiendas para este animal",
+    "planShopHint": "La tienda se abre con la categoría de esta especie seleccionada, si hay tiendas colaboradoras disponibles.",
+    "planSave": "Guardar este croquis en este dispositivo",
+    "planExport": "Descargar croquis",
+    "planSaved": "Croquis guardado en este dispositivo.",
+    "planSaveError": "No se puede guardar en este navegador."
   }
 }

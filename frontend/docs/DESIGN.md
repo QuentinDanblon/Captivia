@@ -663,3 +663,7 @@ Les photos des six cartes sont exportées en 640/1200/1600 px, en 16:9 sans agra
 ### 10.14 — Carrousel du site des catégories (ESP-03, 2026-10-04)
 
 Sur le site web, les six cartes d’espèces défilent horizontalement dans un carrousel natif avec repères d’accrochage légers. Les petites largeurs montrent la carte suivante pour signaler le défilement ; les grands écrans affichent plusieurs cartes. Le rail a un focus clavier visible, chaque carte garde son focus et son appui, le balayage horizontal ne choisit pas une catégorie et le balayage vertical fait défiler la page. En compilation mobile native, la même recherche garde sa liste verticale : le mode de build sélectionne explicitement le style et retire l’arrêt de tabulation du rail. Un navigateur de téléphone garde la présentation horizontale du site.
+
+### 10.15 — Croquis et accès aux boutiques depuis Guides (GUI-02, 2026-10-04)
+
+Les plans d’aménagement s’enregistrent à la demande dans le stockage local du navigateur, séparément par catégorie et espèce. Un export JSON télécharge les mesures et emplacements choisis. Les trois dimensions ne sont préremplies que lorsque la fiche espèce sourcée fournit trois axes numériques et une unité explicite ; les températures, l’humidité et les autres conseils restent visibles dans les données sourcées de la fiche. Le croquis ne valide pas un habitat. Le bouton du magasin mène au filtre de catégorie existant ; les boutiques et leurs produits restent issus du catalogue partenaire, sans suggestions commerciales inventées.

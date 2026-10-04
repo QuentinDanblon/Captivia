@@ -1,0 +1,56 @@
+[
+  {
+    "speciesId": 5285942,
+    "evidence": [
+      {
+        "field": "health",
+        "value": "Une étude vétérinaire décrit les affections dentaires chez des oryctéropes en parc zoologique.",
+        "quote": "Oral disease involving teeth is a common cause of morbidity in aardvarks (Orycteropus afer) under managed care.",
+        "url": "https://www.mdpi.com/2076-2615/12/7/845"
+      },
+      {
+        "field": "health",
+        "value": "Le signe clinique rapporté le plus fréquent était un gonflement facial avant l’intervention.",
+        "quote": "Facial swelling prior to surgery was the most common clinical sign (3/8).",
+        "url": "https://www.mdpi.com/2076-2615/12/7/845"
+      },
+      {
+        "field": "health",
+        "value": "L’article recommande des examens dentaires préventifs et de l’imagerie dans les institutions zoologiques.",
+        "quote": "These cases highlight the importance of routine preventative dental examinations and dental imaging for the veterinary care of aardvarks housed at zoological institutions.",
+        "url": "https://www.mdpi.com/2076-2615/12/7/845"
+      },
+      {
+        "field": "health",
+        "value": "La cause des affections dentaires décrites n’est pas établie.",
+        "quote": "The etiology of oral disease involving teeth in aardvarks remains unknown.",
+        "url": "https://www.mdpi.com/2076-2615/12/7/845"
+      }
+    ],
+    "note": "health reste null : la source accessible rapporte un ensemble d’affections dentaires dans une série zoologique rétrospective et recommande l’examen vétérinaire, mais ne permet pas d’étayer trois maladies distinctes avec symptômes, prévention et conduite pour une fiche de maintien. Elle indique en outre que l’étiologie reste inconnue. Aucun autre lot consulté ne fournit de section health non nulle pour cet ID."
+  },
+  {
+    "speciesId": 104128782,
+    "evidence": [
+      {
+        "field": "health",
+        "value": "Une étude porte sur les problèmes de santé et les causes de mortalité d’une colonie captive de rossignols du Japon.",
+        "quote": "This article presents records made over a 10-yr period of a captive colony of pekin robins.",
+        "url": "https://bioone.org/journals/journal-of-zoo-and-wildlife-medicine/volume-42/issue-3/2011-0050.1/Management-Breeding-and-Health-Records-from-a-Captive-Colony-of/10.1638/2011-0050.1.short"
+      },
+      {
+        "field": "health",
+        "value": "Le résumé attribue les principales pertes à des problèmes d’élevage des jeunes et à des troubles liés à l’âge, sans détailler les diagnostics.",
+        "quote": "The main causes of bird losses included rearing management failures and age-related disorders.",
+        "url": "https://bioone.org/journals/journal-of-zoo-and-wildlife-medicine/volume-42/issue-3/2011-0050.1/Management-Breeding-and-Health-Records-from-a-Captive-Colony-of/10.1638/2011-0050.1.short"
+      },
+      {
+        "field": "health",
+        "value": "La ressource avicole consultée annonce que ses notes sur les affections et traitements sont encore en préparation.",
+        "quote": "Notes on ailments and treatment are still in preparation.",
+        "url": "https://www.nfss.org/education/breeding/pekin-robin/"
+      }
+    ],
+    "note": "health reste null : le résumé de l’étude captive ne donne pas de diagnostics ni de mesures de prévention ou de conduite, et son texte intégral n’est pas accessible dans la source consultée. La ressource d’élevage spécialisée indique que les notes sur les maladies et traitements sont encore en préparation. Les lots consultés n’apportent aucune section health non nulle pour cet ID."
+  }
+]

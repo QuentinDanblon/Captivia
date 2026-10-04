@@ -9,6 +9,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { countryName } from '@/lib/country';
 import { isGbifKey, type SpeciesPhoto } from '@/lib/species';
 import { Alert, Badge, ExternalLink } from '@/components/ui';
+import { BelgianLegalNotice } from '@/components/species/BelgianLegalNotice';
 import { FactList, InkList, SheetSection, SourceNote, formatRange, hostOf, safeUrl, valueLabel } from './parts';
 import type {
   EquipmentData,
@@ -315,20 +316,21 @@ export function LegislationSection({ legislation }: { legislation: LegislationDa
   return (
     <SheetSection id="legislation" title={t('species.sections.legislation')}>
       <Alert severity="info" title={t('disclaimers.legal')} />
+      <BelgianLegalNotice />
       {items.length === 0 ? (
         <p className="m-0 text-body text-ink-2">{t('species.noLegalData')}</p>
       ) : (
         <ul className="m-0 grid list-none divide-y divide-line p-0">
           {items.map((item) => {
             const status = item.status as keyof typeof STATUS_TONE;
-            const needsReview = Boolean(item.needsReview || item.details?.needsReview);
+            const needsReview = item.country === 'BE' || Boolean(item.needsReview || item.details?.needsReview);
             const permits = item.details?.permits ?? [];
             const restrictions = item.details?.restrictions ?? [];
             return (
               <li key={item.country} className="grid gap-3 py-4 first:pt-1 last:pb-0">
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className="m-0 font-display text-h4 font-semibold text-ink">{countryName(item.country, locale)}</h3>
-                  {STATUS_TONE[status] ? (
+                {!needsReview && STATUS_TONE[status] ? (
                     <Badge tone={STATUS_TONE[status]} dot>
                       {t(`species.${STATUS_KEY[status]}`)}
                     </Badge>
@@ -336,14 +338,14 @@ export function LegislationSection({ legislation }: { legislation: LegislationDa
                   {needsReview ? <ToConfirm /> : null}
                 </div>
                 {needsReview ? <p className="m-0 max-w-prose text-ui text-ink-2">{t('species.review.legislation')}</p> : null}
-                <FactList
+                {needsReview ? null : <FactList
                   items={[
                     item.details?.citesAppendix && { label: t('species.citesStatus'), value: t('species.annex', { value: item.details.citesAppendix }), mono: true },
                     item.details?.euAnnex && { label: t('species.euRegulation'), value: t('species.annex', { value: item.details.euAnnex }), mono: true },
                     permits.length > 0 && { label: t('species.permits'), value: <InkList items={permits} />, wide: true },
                     restrictions.length > 0 && { label: t('species.restrictions'), value: <InkList items={restrictions} marker="cross" />, wide: true },
                   ]}
-                />
+                />}
                 <SourceNote sources={item.sources} />
               </li>
             );

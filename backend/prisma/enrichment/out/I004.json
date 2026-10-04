@@ -1,0 +1,133 @@
+[
+  {
+    "speciesId": 7572096,
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 16,
+      "tempMax": 24,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Base minimale : 100 × 30 cm.",
+      "lightNeeds": "Les plantes flottantes et les racines ou branches de bois flotté peuvent tamiser la lumière et donner au bac un aspect plus naturel.",
+      "activityEnrichment": "Aménager le bac avec des plantes flottantes et des racines ou branches de bois flotté pour tamiser la lumière et enrichir le décor.",
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/pethia-conchonius/",
+          "title": "Pethia conchonius (Rosy Barb) — Seriously Fish"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103899345,
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 25,
+      "tempMax": 30,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Base d’aquarium indiquée : 120 × 60 cm; prévoir un bac haut et une zone émergée.",
+      "lightNeeds": "Adapter l’éclairage aux espèces végétales choisies.",
+      "activityEnrichment": "La source décrit un aménagement de biotope avec un aquarium haut rempli à mi-hauteur, une zone émergée et des plantes dans la partie supérieure; elle indique que cela peut encourager le comportement alimentaire naturel.",
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/toxotes-jaculatrix/",
+          "title": "Toxotes jaculatrix (Banded Archerfish) — Seriously Fish"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103952549,
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 20,
+      "tempMax": 30,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Base minimale : 120 × 45 cm pour un couple adulte.",
+      "lightNeeds": "La source décrit des installations appréciées avec un éclairage plutôt tamisé, du bois flotté et des racines ou branches espacées.",
+      "activityEnrichment": "Un substrat sableux et doux est conseillé sans être indispensable; une ou deux roches plates et arrondies peuvent aussi servir de sites de ponte.",
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/rocio-octofasciata/",
+          "title": "Rocio octofasciata (Jack Dempsey Cichlid) — Seriously Fish"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103953586,
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 27,
+      "tempMax": 30,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Base d’aquarium indiquée : 60 × 30 cm.",
+      "activityEnrichment": "Un décor structuré peut inclure des racines et branches qui créent des zones ombragées et des cavités; la source cite aussi les pots en céramique et les tuyaux en plastique parmi les éléments possibles.",
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/mikrogeophagus-ramirezi/",
+          "title": "Mikrogeophagus ramirezi (Ram) — Seriously Fish"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 103973942,
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 23,
+      "tempMax": 29,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Base d’aquarium indiquée : 60 × 30 cm.",
+      "lightNeeds": "Cette espèce semble mieux se porter sous un éclairage plutôt tamisé.",
+      "activityEnrichment": "Un bac densément planté ou un décor naturel avec substrat sableux, racines et branches de bois flotté sont proposés.",
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/paracheirodon-axelrodi/",
+          "title": "Paracheirodon axelrodi (Cardinal Tetra) — Seriously Fish"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 156261518,
+    "habitat": {
+      "habitatType": "aquarium",
+      "tempMin": 20,
+      "tempMax": 26,
+      "humidityMin": null,
+      "humidityMax": null,
+      "minSpaceSize": "Base d’aquarium indiquée : 90 × 30 cm; espèce grégaire à maintenir en banc.",
+      "lightNeeds": "La source recommande un aquarium bien aménagé avec de la végétation de surface ou flottante, car l’espèce semble préférer une lumière plutôt tamisée.",
+      "activityEnrichment": "Prévoir un aquarium bien aménagé, avec de la végétation de surface ou flottante, et maintenir cette espèce grégaire en banc.",
+      "hygieneNotes": null,
+      "costEstimate": null,
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://www.seriouslyfish.com/species/kryptopterus-vitreolus/",
+          "title": "Kryptopterus vitreolus (Glass Catfish) — Seriously Fish"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,60 @@
+[
+  {
+    "speciesId": 104040736,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": 24,
+        "quote": "During the day, an average relative humidity of 55-65% and terrarium temperature of 75-80°F or 24-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 27,
+        "quote": "During the day, an average relative humidity of 55-65% and terrarium temperature of 75-80°F or 24-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": 55,
+        "quote": "During the day, an average relative humidity of 55-65% and terrarium temperature of 75-80°F or 24-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": 65,
+        "quote": "During the day, an average relative humidity of 55-65% and terrarium temperature of 75-80°F or 24-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/bombina-orientalis/"
+      }
+    ]
+  },
+  {
+    "speciesId": 104015330,
+    "evidence": [
+      {
+        "field": "habitat.tempMin",
+        "value": 25,
+        "quote": "During the day, an average relative humidity of 70-80% and temperature of 78-81°F or 25-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.tempMax",
+        "value": 27,
+        "quote": "During the day, an average relative humidity of 70-80% and temperature of 78-81°F or 25-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.humidityMin",
+        "value": 70,
+        "quote": "During the day, an average relative humidity of 70-80% and temperature of 78-81°F or 25-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      },
+      {
+        "field": "habitat.humidityMax",
+        "value": 80,
+        "quote": "During the day, an average relative humidity of 70-80% and temperature of 78-81°F or 25-27°C should be maintained.",
+        "url": "https://exo-terra.com/explore/care-guides/frogs-toads/dendrobates-tinctorius/"
+      }
+    ]
+  }
+]

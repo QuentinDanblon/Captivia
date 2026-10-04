@@ -10,7 +10,7 @@ import { GUIDE_CATEGORIES, guideCategoryForSpecies, guidePath, isGuideCategory }
 import { normalizeSpeciesResult, speciesDisplayName, type SpeciesSummary } from '@/lib/species';
 import { speciesPath } from '@/lib/platform';
 import { photoSources } from '@/content/photos';
-import { HabitatPlan } from '@/components/guides/HabitatPlan';
+import { HabitatPlan, parseHabitatDimensions } from '@/components/guides/HabitatPlan';
 import { GUIDE_SOURCES } from '@/content/habitat-guides';
 import { Alert, Button, Card, ExternalLink, Field, Figure, LoadingPage, SectionHeader, buttonClasses } from '@/components/ui';
 import { HabitatSection, EquipmentSection, FeedingSection, BehaviorSection } from '../species/[id]/_components/sections';
@@ -152,6 +152,8 @@ function GuideView() {
         {current.species.behavior?.sources?.some((source) => source.url?.startsWith('https://')) ? <BehaviorSection behavior={current.species.behavior} /> : null}
         {current.species.feeding?.sources?.some((source) => source.url?.startsWith('https://')) ? <FeedingSection feeding={current.species.feeding} /> : null}
         {current.equipment ? <EquipmentSection equipment={current.equipment} /> : <p className="text-ink-2">{t('guides.noEquipment')}</p>}
+        <Link href={`/magasin${current.species.profile?.category ? `?category=${encodeURIComponent(current.species.profile.category)}` : ''}#store-category-filter`} className={buttonClasses({ variant: 'primary' })}>{t('guides.shopForAnimal')}</Link>
+        <p className="mt-2 text-meta text-ink-2">{t('guides.planShopHint')}</p>
         <Link href={speciesPath(current.id)} className={buttonClasses({ variant: 'secondary' })}>{t('guides.fullSpecies')}</Link>
       </Card> : null}
 
@@ -180,7 +182,7 @@ function GuideView() {
             </div>
           </div>
         </Card>
-        <HabitatPlan equipment={[0, 1, 2, 3, 4].map((index) => t(`guides.categories.${category}.equipment.e${index}`))} />
+        <HabitatPlan storageKey={`${category}${id ? `-${id}` : ''}`} suggestedDimensions={parseHabitatDimensions(documentedHabitat?.minSpaceSize)} equipment={[0, 1, 2, 3, 4].map((index) => t(`guides.categories.${category}.equipment.e${index}`))} />
         {category === 'freshwater' || category === 'marine' ? <Card as="section" title={t('guides.diagramsTitle')} titleId="guide-aquarium-diagrams">
           <div className="grid gap-6 sm:grid-cols-2">
             <Figure {...photoSources('guideAquariumFilter')} fit="contain" ratio="16/9" alt={t('guides.filterDiagram')} caption={t('guides.filterDiagram')} />

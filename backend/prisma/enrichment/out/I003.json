@@ -1,0 +1,30 @@
+[
+  {
+    "speciesId": 104052770,
+    "behavior": {
+      "generalBehavior": "Espèce nocturne, active surtout la nuit; elle se déplace en planant entre les arbres et passe peu de temps au sol.",
+      "sociability": "grégaire",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Pteromys_volans/",
+          "title": "Siberian flying squirrel - Animal Diversity Web"
+        }
+      ]
+    }
+  },
+  {
+    "speciesId": 2498387,
+    "behavior": {
+      "generalBehavior": "Canard diurne, marcheur, nageur et volant; les individus se rassemblent souvent le soir et migrent en couples ou en petits groupes.",
+      "sociability": "grégaire",
+      "sources": [
+        {
+          "type": "guide",
+          "url": "https://animaldiversity.org/accounts/Aix_sponsa/",
+          "title": "Wood duck - Animal Diversity Web"
+        }
+      ]
+    }
+  }
+]

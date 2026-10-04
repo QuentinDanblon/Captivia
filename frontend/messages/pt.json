@@ -1151,6 +1151,16 @@
       "equipment": "Equipamento recomendado",
       "sources": "Fontes"
     },
+    "belgium": {
+      "title": "Verifique as regras da sua região",
+      "body": "Na Bélgica, as regras de detenção variam consoante a região, a espécie e o estatuto CITES. As listas positivas indicadas dizem respeito a mamíferos e não bastam para determinar as regras aplicáveis às outras espécies. Os estados antigos do catálogo ficam ocultos até serem confirmados pelas autoridades competentes.",
+      "sources": {
+        "wallonia": "Valónia: lista positiva de mamíferos e regras de detenção",
+        "flanders": "Flandres: mamíferos permitidos",
+        "brussels": "Bruxelas: detenção e adoção",
+        "cites": "SPF Saúde Pública belga: CITES"
+      }
+    },
     "review": {
       "badge": "A confirmar",
       "hint": "Ainda não revisto pela nossa equipa",
@@ -2527,7 +2537,7 @@
     "start": "Escolha uma categoria ou espécie para abrir o respetivo guia.",
     "unknownCategory": "Escolha a categoria correspondente a esta espécie.",
     "planTitle": "Plano com medidas",
-    "planIntro": "Indique as dimensões da instalação e escolha onde colocar o material. Este plano representa as suas escolhas; não certifica dimensões mínimas nem uma disposição adequada à espécie.",
+    "planIntro": "Introduza as dimensões e escolha onde colocar o equipamento. As medidas só são preenchidas se a ficha da espécie, com fontes, indicar três dimensões explícitas. O esboço representa as suas escolhas; não certifica uma dimensão mínima nem uma instalação validada.",
     "length": "Comprimento (cm)",
     "width": "Largura (cm)",
     "height": "Altura (cm)",
@@ -2704,6 +2714,12 @@
       "left": "À esquerda",
       "centre": "Ao centro",
       "right": "À direita"
-    }
+    },
+    "shopForAnimal": "Ver lojas para este animal",
+    "planShopHint": "A loja abre com a categoria desta espécie selecionada, caso existam lojas parceiras disponíveis.",
+    "planSave": "Guardar este esboço neste dispositivo",
+    "planExport": "Transferir esboço",
+    "planSaved": "Esboço guardado neste dispositivo.",
+    "planSaveError": "O guardado não está disponível neste navegador."
   }
 }
