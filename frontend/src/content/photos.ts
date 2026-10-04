@@ -144,6 +144,21 @@ export type PhotoKey =
   | 'cherryBarb'
   | 'tigerBarb'
   | 'whiteCockatoo'
+  | 'smallClawedOtter'
+  | 'americanMink'
+  | 'vizcacha'
+  | 'pygmyOpossum'
+  | 'harvestMouse'
+  | 'commonMarmoset'
+  | 'agouti'
+  | 'mara'
+  | 'redShoulderedMacaw'
+  | 'greenCheekedConure'
+  | 'sunConure'
+  | 'galah'
+  | 'javaSparrow'
+  | 'northernCardinal'
+  | 'mandarinDuck'
   | 'redSquirrel'
   | 'raccoon'
   | 'coati'
@@ -186,7 +201,22 @@ export type PhotoKey =
   | 'paca'
   | 'turquoiseParrot'
   | 'maskedLovebird'
-  | 'rainbowLorikeet';
+  | 'rainbowLorikeet'
+  | 'orangeClownfish'
+  | 'koi'
+  | 'dwarfGourami'
+  | 'australeKillifish'
+  | 'glassCatfish'
+  | 'commonToad'
+  | 'xenopus'
+  | 'europeanTreefrog'
+  | 'caneToad'
+  | 'strawberryDartFrog'
+  | 'prayingMantis'
+  | 'goliathTarantula'
+  | 'grammostolaRosea'
+  | 'caribbeanHermitCrab'
+  | 'giantWoodlouse';
 
 export interface Photo {
   /** Chemin sans largeur ni extension : `/images/animals/cat-straw`. */
@@ -777,6 +807,66 @@ export const PHOTOS: Record<PhotoKey, Photo> = {
     base: '/images/animals/white-cockatoo', widths: [480, 800], ratio: 4 / 3,
     file: 'Burung Kakatua Putih Di THKMS.jpg', author: 'Muhamad Izzul Fiqih', license: 'CC BY-SA 4.0',
   }),
+  smallClawedOtter: photo({
+    base: '/images/animals/small-clawed-otter', widths: [480, 800], ratio: 4 / 3,
+    file: 'Asian small-clawed otter (Aonyx cinereus) in Zooparc de Trégomeur, 2025.jpg', author: 'Animalculum', license: 'CC BY 4.0',
+  }),
+  americanMink: photo({
+    base: '/images/animals/american-mink', widths: [480, 800], ratio: 4 / 3,
+    file: 'Mink (Neovison vison).jpg', author: 'Marton Berntsen', license: 'CC BY-SA 3.0',
+  }),
+  vizcacha: photo({
+    base: '/images/animals/vizcacha', widths: [480, 800], ratio: 4 / 3,
+    file: 'Bolivian vizcacha.jpg', author: 'Alexandre Buisse ( Nattfodd )', license: 'CC BY-SA 3.0',
+  }),
+  pygmyOpossum: photo({
+    base: '/images/animals/pygmy-opossum', widths: [480, 800], ratio: 4 / 3,
+    file: 'Monodelphis domestica 175946692.jpg', author: 'Célio Moura Neto', license: 'CC BY 4.0',
+  }),
+  harvestMouse: photo({
+    base: '/images/animals/harvest-mouse', widths: [480, 800], ratio: 4 / 3,
+    file: 'Harvest mouse and blossom.jpg', author: 'Charlie Marshall', license: 'CC BY 2.0',
+  }),
+  commonMarmoset: photo({
+    base: '/images/animals/common-marmoset', widths: [480, 800], ratio: 4 / 3,
+    file: 'Callithrix jacchus in Parque Bondinho Pão de Açúcar, Rio de Janeiro.jpg', author: 'Wilfredor', license: 'CC0',
+  }),
+  agouti: photo({
+    base: '/images/animals/agouti', widths: [480, 800], ratio: 4 / 3,
+    file: 'Dasyprocta leporina 46671643.jpg', author: 'Paul Prior', license: 'CC BY 4.0',
+  }),
+  mara: photo({
+    base: '/images/animals/mara', widths: [480, 800], ratio: 4 / 3,
+    file: 'Dolichotis patagonum 99386074.jpg', author: 'Hugo Hulsberg', license: 'CC0',
+  }),
+  redShoulderedMacaw: photo({
+    base: '/images/animals/red-shouldered-macaw', widths: [480, 800], ratio: 4 / 3,
+    file: 'Red-shouldered Macaw (Diopsittaca nobilis) (Record shot) (28696491836).jpg', author: 'Bernard DUPONT  from FRANCE', license: 'CC BY-SA 2.0',
+  }),
+  greenCheekedConure: photo({
+    base: '/images/animals/green-cheeked-conure', widths: [480, 800], ratio: 4 / 3,
+    file: 'Green-cheeked Parakeet (Pyrrhura molinae molinae), Narciso Campero, Bolivia 1.jpg', author: 'sandykeller', license: 'CC BY 4.0',
+  }),
+  sunConure: photo({
+    base: '/images/animals/sun-conure', widths: [480, 800], ratio: 4 / 3,
+    file: 'Sun parakeet (Aratinga solstitialis) at Perth Zoo, June 2023 06.jpg', author: 'Calistemon', license: 'CC BY-SA 4.0',
+  }),
+  galah: photo({
+    base: '/images/animals/galah', widths: [480, 800], ratio: 4 / 3,
+    file: 'Galah (Eolophus roseicapilla) female in flight Mount Pleasant.jpg', author: 'Charles J. Sharp', license: 'CC BY-SA 4.0',
+  }),
+  javaSparrow: photo({
+    base: '/images/animals/java-sparrow', widths: [480, 800], ratio: 4 / 3,
+    file: 'Java sparrow condo in kihei 7.10.24 DSC 7783-topaz-denoiseraw.jpg', author: 'lwolfartist', license: 'CC BY 2.0',
+  }),
+  northernCardinal: photo({
+    base: '/images/animals/northern-cardinal', widths: [480, 800], ratio: 4 / 3,
+    file: 'Male northern cardinal in Central Park (52612).jpg', author: 'Rhododendrites', license: 'CC BY-SA 4.0',
+  }),
+  mandarinDuck: photo({
+    base: '/images/animals/mandarin-duck', widths: [480, 800], ratio: 4 / 3,
+    file: 'Aix galericulata (Male), Richmond Park, UK - May 2013.jpg', author: 'Diliff', license: 'CC BY 3.0',
+  }),
   redSquirrel: photo({
     base: '/images/animals/red-squirrel', widths: [480, 800], ratio: 4 / 3,
     file: 'Red squirrel (21808).jpg', author: 'Rhododendrites', license: 'CC BY-SA 4.0',
@@ -1006,6 +1096,66 @@ export const PHOTOS: Record<PhotoKey, Photo> = {
   rainbowLorikeet: photo({
     base: '/images/animals/rainbow-lorikeet', widths: [480, 800], ratio: 4 / 3,
     file: 'Rainbow lorikeet (Trichoglossus moluccanus) sitting in a hole in a dead tree along the Swan River, October 2023 02.jpg', author: 'Calistemon', license: 'CC BY-SA 4.0',
+  }),
+  orangeClownfish: photo({
+    base: '/images/animals/orange-clownfish', widths: [480, 800], ratio: 2200 / 1499,
+    file: 'Amphiprion ocellaris (Clown anemonefish) by Nick Hobgood.jpg', author: 'Nick Hobgood', license: 'CC BY-SA 3.0',
+  }),
+  koi: photo({
+    base: '/images/animals/koi', widths: [480, 800], ratio: 3872 / 2592,
+    file: 'Loro Parque Koi3.JPG', author: 'Eistreter', license: 'CC BY-SA 3.0',
+  }),
+  dwarfGourami: photo({
+    base: '/images/animals/dwarf-gourami', widths: [480, 800], ratio: 2016 / 1352,
+    file: 'Colisa lalia - side (aka).jpg', author: 'André Karwath aka Aka', license: 'CC BY-SA 2.5',
+  }),
+  australeKillifish: photo({
+    base: '/images/animals/australe-killifish', widths: [480, 800], ratio: 1743 / 1307,
+    file: 'Aphyosemion australe gold.jpg', author: 'Alexander Prokoshev', license: 'CC BY-SA 3.0',
+  }),
+  glassCatfish: photo({
+    base: '/images/animals/glass-catfish', widths: [480, 800], ratio: 5184 / 2912,
+    file: 'Kryptopterus vitreolus.jpg', author: '-serwacy01-', license: 'CC BY-SA 4.0',
+  }),
+  commonToad: photo({
+    base: '/images/animals/common-toad', widths: [480, 800], ratio: 3232 / 2084,
+    file: 'Bufo-bufo-erdkroete-maennlich.jpg', author: 'Holger Krisp', license: 'CC BY 3.0',
+  }),
+  xenopus: photo({
+    base: '/images/animals/xenopus', widths: [480, 800], ratio: 4493 / 2889,
+    file: 'XenopusLaevis 6473.jpg', author: 'Davefoc', license: 'CC BY-SA 4.0',
+  }),
+  europeanTreefrog: photo({
+    base: '/images/animals/european-tree-frog', widths: [480, 800], ratio: 2077 / 1438,
+    file: 'Hyla arborea, juv 2.jpg', author: 'Christian Fischer', license: 'CC BY-SA 3.0',
+  }),
+  caneToad: photo({
+    base: '/images/animals/cane-toad', widths: [480, 800], ratio: 1,
+    file: 'Rhinella marina near rainwater pools 7th Brigade Park Chermside P1090820.jpg', author: 'John Robert McPherson', license: 'CC BY-SA 4.0',
+  }),
+  strawberryDartFrog: photo({
+    base: '/images/animals/strawberry-dart-frog', widths: [480, 800], ratio: 2048 / 1356,
+    file: 'Oophaga pumilio 33426838.jpg', author: 'Lara Maleen Beckmann', license: 'CC BY 4.0',
+  }),
+  prayingMantis: photo({
+    base: '/images/animals/praying-mantis', widths: [480, 800], ratio: 4606 / 2845,
+    file: 'European praying mantis (Mantis religiosa) green female Dobruja.jpg', author: 'Charles J. Sharp', license: 'CC BY-SA 4.0',
+  }),
+  goliathTarantula: photo({
+    base: '/images/animals/goliath-tarantula', widths: [480, 800], ratio: 1365 / 2048,
+    file: 'Theraphosa blondi 244519965.jpg', author: 'Guillaume Delaitre', license: 'CC BY 4.0',
+  }),
+  grammostolaRosea: photo({
+    base: '/images/animals/grammostola-rosea', widths: [480, 800], ratio: 2971 / 3961,
+    file: 'Spiders Genova - Grammostola rosea 1.jpg', author: 'Syrio', license: 'CC BY-SA 4.0',
+  }),
+  caribbeanHermitCrab: photo({
+    base: '/images/animals/caribbean-hermit-crab', widths: [480, 800], ratio: 2048 / 1537,
+    file: 'Coenobita clypeatus 177457464.jpg', author: 'Dan Schofield', license: 'CC BY 4.0',
+  }),
+  giantWoodlouse: photo({
+    base: '/images/animals/giant-woodlouse', widths: [480, 800], ratio: 2512 / 3688,
+    file: 'Porcellio laevis Rufino cropped.jpg', author: 'Stephan Kleinfelder', license: 'CC BY-SA 4.0',
   }),
 };
 

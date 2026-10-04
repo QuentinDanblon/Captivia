@@ -286,6 +286,28 @@ Quinze photos vérifiées sur Commons et visuellement, recadrées au format 4:3,
 | `animals/elephantnose-fish-{480,800}.{avif,webp}` | Gnathonemus petersii, poisson éléphant | Gnathonemus petersii - Zoo Frankfurt.jpg | Jutta234 | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Gnathonemus_petersii_-_Zoo_Frankfurt.jpg |
 
 
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 9
+
+Quinze photos de mammifères et d'oiseaux, chacune vérifiée sur sa page de fichier Commons (HTTP 200), avec auteur et licence libres contrôlés dans les métadonnées. Les sujets et cadrages ont été inspectés sur une planche-contact. Les aperçus 1280 px Commons (HTTP 200) ont été recadrés au format 4:3 et exportés en AVIF/WebP 480/800, chaque fichier restant sous 150 Ko.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/small-clawed-otter-{480,800}.{avif,webp}` | Aonyx cinereus, loutre naine asiatique | Asian small-clawed otter (Aonyx cinereus) in Zooparc de Trégomeur, 2025.jpg | Animalculum | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Asian_small-clawed_otter_(Aonyx_cinereus)_in_Zooparc_de_Tr%C3%A9gomeur,_2025.jpg |
+| `animals/american-mink-{480,800}.{avif,webp}` | Neovison vison, vison américain | Mink (Neovison vison).jpg | Marton Berntsen | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Mink_(Neovison_vison).jpg |
+| `animals/vizcacha-{480,800}.{avif,webp}` | Lagidium viscacia, viscache des Andes | Bolivian vizcacha.jpg | Alexandre Buisse ( Nattfodd ) | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Bolivian_vizcacha.jpg |
+| `animals/pygmy-opossum-{480,800}.{avif,webp}` | Monodelphis domestica, opossum pygmée | Monodelphis domestica 175946692.jpg | Célio Moura Neto | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Monodelphis_domestica_175946692.jpg |
+| `animals/harvest-mouse-{480,800}.{avif,webp}` | Micromys minutus, souris des moissons | Harvest mouse and blossom.jpg | Charlie Marshall | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Harvest_mouse_and_blossom.jpg |
+| `animals/common-marmoset-{480,800}.{avif,webp}` | Callithrix jacchus, ouistiti | Callithrix jacchus in Parque Bondinho Pão de Açúcar, Rio de Janeiro.jpg | Wilfredor | CC0 | https://commons.wikimedia.org/wiki/File:Callithrix_jacchus_in_Parque_Bondinho_P%C3%A3o_de_A%C3%A7%C3%BAcar,_Rio_de_Janeiro.jpg |
+| `animals/agouti-{480,800}.{avif,webp}` | Dasyprocta leporina, agouti | Dasyprocta leporina 46671643.jpg | Paul Prior | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Dasyprocta_leporina_46671643.jpg |
+| `animals/mara-{480,800}.{avif,webp}` | Dolichotis patagonum, mara | Dolichotis patagonum 99386074.jpg | Hugo Hulsberg | CC0 | https://commons.wikimedia.org/wiki/File:Dolichotis_patagonum_99386074.jpg |
+| `animals/red-shouldered-macaw-{480,800}.{avif,webp}` | Diopsittaca nobilis, ara noble | Red-shouldered Macaw (Diopsittaca nobilis) (Record shot) (28696491836).jpg | Bernard DUPONT  from FRANCE | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Red-shouldered_Macaw_(Diopsittaca_nobilis)_(Record_shot)_(28696491836).jpg |
+| `animals/green-cheeked-conure-{480,800}.{avif,webp}` | Pyrrhura molinae, conure à joues vertes | Green-cheeked Parakeet (Pyrrhura molinae molinae), Narciso Campero, Bolivia 1.jpg | sandykeller | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Green-cheeked_Parakeet_(Pyrrhura_molinae_molinae),_Narciso_Campero,_Bolivia_1.jpg |
+| `animals/sun-conure-{480,800}.{avif,webp}` | Aratinga solstitialis, conure soleil | Sun parakeet (Aratinga solstitialis) at Perth Zoo, June 2023 06.jpg | Calistemon | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Sun_parakeet_(Aratinga_solstitialis)_at_Perth_Zoo,_June_2023_06.jpg |
+| `animals/galah-{480,800}.{avif,webp}` | Eolophus roseicapilla, cacatoès rosalbin | Galah (Eolophus roseicapilla) female in flight Mount Pleasant.jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Galah_(Eolophus_roseicapilla)_female_in_flight_Mount_Pleasant.jpg |
+| `animals/java-sparrow-{480,800}.{avif,webp}` | Lonchura oryzivora, padda de Java | Java sparrow condo in kihei 7.10.24 DSC 7783-topaz-denoiseraw.jpg | lwolfartist | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Java_sparrow_condo_in_kihei_7.10.24_DSC_7783-topaz-denoiseraw.jpg |
+| `animals/northern-cardinal-{480,800}.{avif,webp}` | Cardinalis cardinalis, cardinal rouge | Male northern cardinal in Central Park (52612).jpg | Rhododendrites | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Male_northern_cardinal_in_Central_Park_(52612).jpg |
+| `animals/mandarin-duck-{480,800}.{avif,webp}` | Aix galericulata, canard mandarin | Aix galericulata (Male), Richmond Park, UK - May 2013.jpg | Diliff | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Aix_galericulata_(Male),_Richmond_Park,_UK_-_May_2013.jpg |
+
 ## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 8
 
 Treize photos de mammifères et d'oiseaux vérifiées sur leur page de fichier Commons et visuellement. Les téléchargements originaux renvoyaient temporairement HTTP 429; les variantes officielles Commons de 1280 px ont répondu HTTP 200. Les images locales ont été recadrées au format 4:3, redimensionnées aux largeurs indiquées et converties en AVIF/WebP.
@@ -305,3 +327,25 @@ Treize photos de mammifères et d'oiseaux vérifiées sur leur page de fichier C
 | `animals/turquoise-parrot-{480,800}.{avif,webp}` | Neophema pulchella, perruche turquoisine | Neophema pulchella male - Glen Davis.jpg | JJ Harrison (jjharrison.com.au) | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Neophema_pulchella_male_-_Glen_Davis.jpg |
 | `animals/masked-lovebird-{480,800}.{avif,webp}` | Agapornis personatus, inséparable masqué | Agapornis personatus, TZ.jpg | Raf24~commonswiki | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Agapornis_personatus,_TZ.jpg |
 | `animals/rainbow-lorikeet-{480,800}.{avif,webp}` | Trichoglossus moluccanus, lori de Swainson | Rainbow lorikeet (Trichoglossus moluccanus) sitting in a hole in a dead tree along the Swan River, October 2023 02.jpg | Calistemon | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rainbow_lorikeet_(Trichoglossus_moluccanus)_sitting_in_a_hole_in_a_dead_tree_along_the_Swan_River,_October_2023_02.jpg |
+
+## Fiches d'espèces — photos ajoutées le 2026-10-04, lot 9
+
+Quinze photos de poissons, d'amphibiens et d'invertébrés vérifiées sur leurs pages de fichier Commons et par inspection visuelle. Les miniatures Commons de 1280 px ont été redimensionnées en 480 et 800 px et converties en AVIF/WebP localement.
+
+| Fichier(s) | Espèce représentée | Titre Commons | Auteur | Licence | Source |
+| --- | --- | --- | --- | --- | --- |
+| `animals/orange-clownfish-{480,800}.{avif,webp}` | Amphiprion ocellaris, poisson-clown orange | Amphiprion ocellaris (Clown anemonefish) by Nick Hobgood.jpg | Nick Hobgood | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Amphiprion_ocellaris_(Clown_anemonefish)_by_Nick_Hobgood.jpg |
+| `animals/koi-{480,800}.{avif,webp}` | Cyprinus rubrofuscus, koi | Loro Parque Koi3.JPG | Eistreter | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Loro_Parque_Koi3.JPG |
+| `animals/dwarf-gourami-{480,800}.{avif,webp}` | Trichogaster lalius, gourami nain (Commons : synonyme Colisa lalia) | Colisa lalia - side (aka).jpg | André Karwath aka Aka | CC BY-SA 2.5 | https://commons.wikimedia.org/wiki/File:Colisa_lalia_-_side_(aka).jpg |
+| `animals/australe-killifish-{480,800}.{avif,webp}` | Aphyosemion australe, killie | Aphyosemion australe gold.jpg | Alexander Prokoshev | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Aphyosemion_australe_gold.jpg |
+| `animals/glass-catfish-{480,800}.{avif,webp}` | Kryptopterus vitreolus, poisson-chat de verre | Kryptopterus vitreolus.jpg | -serwacy01- | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Kryptopterus_vitreolus.jpg |
+| `animals/common-toad-{480,800}.{avif,webp}` | Bufo bufo, crapaud commun | Bufo-bufo-erdkroete-maennlich.jpg | Holger Krisp | CC BY 3.0 | https://commons.wikimedia.org/wiki/File:Bufo-bufo-erdkroete-maennlich.jpg |
+| `animals/xenopus-{480,800}.{avif,webp}` | Xenopus laevis, xénope lisse | XenopusLaevis 6473.jpg | Davefoc | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:XenopusLaevis_6473.jpg |
+| `animals/european-tree-frog-{480,800}.{avif,webp}` | Hyla arborea, rainette à doigts de cuivre | Hyla arborea, juv 2.jpg | Christian Fischer | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Hyla_arborea,_juv_2.jpg |
+| `animals/cane-toad-{480,800}.{avif,webp}` | Rhinella marina, crapaud buffle | Rhinella marina near rainwater pools 7th Brigade Park Chermside P1090820.jpg | John Robert McPherson | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rhinella_marina_near_rainwater_pools_7th_Brigade_Park_Chermside_P1090820.jpg |
+| `animals/strawberry-dart-frog-{480,800}.{avif,webp}` | Oophaga pumilio, grenouille de Dart | Oophaga pumilio 33426838.jpg | Lara Maleen Beckmann | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Oophaga_pumilio_33426838.jpg |
+| `animals/praying-mantis-{480,800}.{avif,webp}` | Mantis religiosa, mante religieuse | European praying mantis (Mantis religiosa) green female Dobruja.jpg | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:European_praying_mantis_(Mantis_religiosa)_green_female_Dobruja.jpg |
+| `animals/goliath-tarantula-{480,800}.{avif,webp}` | Theraphosa blondi, tarentule Goliath | Theraphosa blondi 244519965.jpg | Guillaume Delaitre | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Theraphosa_blondi_244519965.jpg |
+| `animals/grammostola-rosea-{480,800}.{avif,webp}` | Grammostola rosea, tarentule de Gordon | Spiders Genova - Grammostola rosea 1.jpg | Syrio | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Spiders_Genova_-_Grammostola_rosea_1.jpg |
+| `animals/caribbean-hermit-crab-{480,800}.{avif,webp}` | Coenobita clypeatus, bernard-l'ermite terrestre | Coenobita clypeatus 177457464.jpg | Dan Schofield | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Coenobita_clypeatus_177457464.jpg |
+| `animals/giant-woodlouse-{480,800}.{avif,webp}` | Porcellio laevis, cloporte géant | Porcellio laevis Rufino cropped.jpg | Stephan Kleinfelder | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Porcellio_laevis_Rufino_cropped.jpg |
