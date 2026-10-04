@@ -8,7 +8,7 @@ Règles complètes : `frontend/docs/DESIGN.md`, section « Imagerie ».
 - Sources : Wikimedia Commons en priorité (licence lue sur la page du fichier, pas sur un site miroir).
 - Interdit : images générées par IA, banques d'images sans licence libre, captures d'autres sites,
   licences NC/ND (incompatibles avec la redistribution et le recadrage).
-- Fichiers : `public/images/<animals|nature|guides>/<slug>-<largeur>.<avif|webp>`, plusieurs largeurs, plus
+- Fichiers : `public/images/<animals|nature|guides|categories|textures>/<slug>-<largeur>.<avif|webp>`, plusieurs largeurs, plus
   grande variante ≤ 150 Ko, métadonnées (EXIF, XMP, ICC, localisation) retirées.
 
 Le registre utilisé par le code est `src/content/photos.ts` (même liste) : `Figure` affiche le
@@ -114,3 +114,29 @@ Chaque fichier existe en `.avif` et en `.webp`. Licences : CC BY-SA 4.0
 | Fichier | Usage | Origine |
 | --- | --- | --- |
 | `src/assets/og-golden-retriever.jpg` | Fond de l'image Open Graph (1200×630) générée par `opengraph-image.tsx` | `dog-golden-retriever` ci-dessus (Dietmar Rabich, CC BY-SA 4.0), recadrée ; le crédit est écrit sur l'image |
+
+## Photos HD des catégories — vérifiées le 2026-10-04
+
+Originaux Wikimedia Commons, recadrés en 16:9 puis exportés en 640, 1200 et 1600 pixels, sans agrandissement, en AVIF et WebP sans métadonnées. Les dérivés conservent la licence de leur source.
+
+| Fichier | Auteur | Licence | Source |
+|---|---|---|---|
+| `categories/mammals-{640,1200,1600}.{avif,webp}` | Dietmar Rabich | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Hausd%C3%BClmen,_Golden_Retriever_--_2022_--_5945.jpg |
+| `categories/birds-{640,1200,1600}.{avif,webp}` | Quartl | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Ara_ararauna_qtl3.jpg |
+| `categories/fish-{640,1200,1600}.{avif,webp}` | Denise Chan | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Betta-splendens-male.jpg |
+| `categories/reptiles-{640,1200,1600}.{avif,webp}` | Charles J. Sharp | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Panther_chameleon_(Furcifer_pardalis)_male_Montagne_d%E2%80%99Ambre_2.jpg |
+| `categories/amphibians-{640,1200,1600}.{avif,webp}` | Pavel Kirillov | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Red-eyed_Leaf_Frog_(Agalychnis_callidryas)_(9362143274).jpg |
+| `categories/insects-{640,1200,1600}.{avif,webp}` | Rhododendrites | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Monarch_butterfly_in_BBG_(84685).jpg |
+
+## Textures photographiques des catégories — vérifiées le 2026-10-04
+
+Photographies réelles de matières animales, recadrées sans agrandissement à 800 × 550 pixels, AVIF/WebP sans métadonnées ; répétition par réflexion dans l’interface. Les dérivés conservent la licence de leur source.
+
+| Fichier | Matière | Auteur | Licence | Source |
+|---|---|---|---|---|
+| `textures/mammals-800.{avif,webp}` | Mammals | Scott Robinson from Rockville, MD, USA | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Greyhound_fur_brindle.jpg |
+| `textures/birds-800.{avif,webp}` | Birds | Marc-Julien-Photography | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Flamingo-feathers-layered-texture-pink-minimal.jpg |
+| `textures/fish-800.{avif,webp}` | Fish | Ryan Hagerty/USFWS | Domaine public | https://commons.wikimedia.org/wiki/File:Erwin_NFH_rainbow_trout_scales_7_March_2022.png |
+| `textures/reptiles-800.{avif,webp}` | Reptiles | Willie Luker from USA | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Eye_of_Lizard_(55203172463).jpg |
+| `textures/amphibians-800.{avif,webp}` | Amphibians | H. Zell | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Dendrobates_tinctorius_-_Wilhelma.jpg |
+| `textures/insects-800.{avif,webp}` | Insects | Franz van Duns | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:2021-08-16_-_Peacock_butterfly_(Aglais_io)_-_eyespot_on_forewing_-_colourful_scales_-_DSG3404-1_(magnif._ratio_2.2x,_HiRes_focus_stack).jpg |

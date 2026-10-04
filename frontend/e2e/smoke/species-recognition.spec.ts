@@ -21,6 +21,7 @@ test.describe('Reconnaître les espèces', () => {
     await expect(cards).toHaveCount(3);
     for (const animal of animals) {
       const card = cards.filter({ hasText: animal.vernacularName });
+      await card.scrollIntoViewIfNeeded();
       const photo = card.getByRole('img');
       await expect(photo).toBeVisible();
       await expect.poll(() => photo.evaluate((element: HTMLImageElement) => element.naturalWidth)).toBeGreaterThan(0);

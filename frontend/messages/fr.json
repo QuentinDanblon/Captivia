@@ -1731,7 +1731,8 @@
     "photoAlt": "{name}, photographie",
     "photoBy": "Photo",
     "more": "{count, plural, one {Voir la dernière fiche} other {Voir # fiches de plus}}",
-    "moreFailed": "La suite n'a pas pu être chargée. Réessayez."
+    "moreFailed": "La suite n'a pas pu être chargée. Réessayez.",
+    "textureCredit": "Texture photographique, répétée par réflexion :"
   },
   "photoPicker": {
     "header": "Photo de votre animal",

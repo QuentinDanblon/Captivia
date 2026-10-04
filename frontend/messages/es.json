@@ -1731,7 +1731,8 @@
     "photoAlt": "{name}, fotografía",
     "photoBy": "Foto",
     "more": "{count, plural, one {Ver la última ficha} other {Ver # fichas más}}",
-    "moreFailed": "No se han podido cargar más resultados. Inténtalo de nuevo."
+    "moreFailed": "No se han podido cargar más resultados. Inténtalo de nuevo.",
+    "textureCredit": "Textura fotográfica, repetida por reflexión:"
   },
   "photoPicker": {
     "header": "Foto de tu animal",

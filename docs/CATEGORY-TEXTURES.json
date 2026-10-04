@@ -1,0 +1,186 @@
+{
+  "verifiedAt": "2026-10-04",
+  "verificationMethod": "Wikimedia Commons API action=query, prop=imageinfo, iiprop=url|size|extmetadata; LicenseShortName, Artist, source page and source dimensions read from exact file records. Source originals downloaded and visually inspected; crops selected from native pixels, no generated or synthesized material.",
+  "assets": [
+    {
+      "category": "Mammals",
+      "base": "/images/textures/mammals-800",
+      "commonsTitle": "Greyhound fur brindle.jpg",
+      "artist": "Scott Robinson from Rockville, MD, USA",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Greyhound_fur_brindle.jpg",
+      "sourceDimensions": [
+        1482,
+        1713
+      ],
+      "crop": {
+        "left": 150,
+        "top": 450,
+        "width": 1160,
+        "height": 798,
+        "nativePixelsOnly": true
+      },
+      "visualReview": "Warm tan and brown brindle fur strands fill the crop; no whole-animal details remain.",
+      "outputDimensions": [
+        800,
+        550
+      ],
+      "bytes": {
+        "avif": 72460,
+        "webp": 135354
+      },
+      "changes": "cropped, resized to 800x550, converted to AVIF/WebP, metadata removed"
+    },
+    {
+      "category": "Birds",
+      "base": "/images/textures/birds-800",
+      "commonsTitle": "Flamingo-feathers-layered-texture-pink-minimal.jpg",
+      "artist": "Marc-Julien-Photography",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Flamingo-feathers-layered-texture-pink-minimal.jpg",
+      "sourceDimensions": [
+        3435,
+        5152
+      ],
+      "crop": {
+        "left": 800,
+        "top": 1300,
+        "width": 1600,
+        "height": 1100,
+        "nativePixelsOnly": true
+      },
+      "visualReview": "Layered coral-pink, peach and pale flamingo feathers fill the crop.",
+      "outputDimensions": [
+        800,
+        550
+      ],
+      "bytes": {
+        "avif": 15056,
+        "webp": 17318
+      },
+      "changes": "cropped, resized to 800x550, converted to AVIF/WebP, metadata removed"
+    },
+    {
+      "category": "Fish",
+      "base": "/images/textures/fish-800",
+      "commonsTitle": "Erwin NFH rainbow trout scales 7 March 2022.png",
+      "artist": "Ryan Hagerty/USFWS",
+      "license": "Public domain",
+      "licenseUrl": null,
+      "source": "https://commons.wikimedia.org/wiki/File:Erwin_NFH_rainbow_trout_scales_7_March_2022.png",
+      "sourceDimensions": [
+        1361,
+        904
+      ],
+      "crop": {
+        "left": 450,
+        "top": 150,
+        "width": 800,
+        "height": 550,
+        "nativePixelsOnly": true
+      },
+      "visualReview": "Close crop of actual rainbow trout flank scales, with the scale pattern filling the frame; not isolated/sculpted scales or a generated texture.",
+      "outputDimensions": [
+        800,
+        550
+      ],
+      "bytes": {
+        "avif": 53720,
+        "webp": 64008
+      },
+      "changes": "cropped, resized to 800x550, converted to AVIF/WebP, metadata removed"
+    },
+    {
+      "category": "Reptiles",
+      "base": "/images/textures/reptiles-800",
+      "commonsTitle": "Eye of Lizard (55203172463).jpg",
+      "artist": "Willie Luker from USA",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Eye_of_Lizard_(55203172463).jpg",
+      "sourceDimensions": [
+        6016,
+        4016
+      ],
+      "crop": {
+        "left": 3500,
+        "top": 0,
+        "width": 1400,
+        "height": 963,
+        "nativePixelsOnly": true
+      },
+      "visualReview": "Bright green and yellow-green lizard scales fill the crop; the eye, pale underside and background are excluded.",
+      "outputDimensions": [
+        800,
+        550
+      ],
+      "bytes": {
+        "avif": 47613,
+        "webp": 48504
+      },
+      "changes": "cropped, resized to 800x550, converted to AVIF/WebP, metadata removed"
+    },
+    {
+      "category": "Amphibians",
+      "base": "/images/textures/amphibians-800",
+      "commonsTitle": "Dendrobates tinctorius - Wilhelma.jpg",
+      "artist": "H. Zell",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:Dendrobates_tinctorius_-_Wilhelma.jpg",
+      "sourceDimensions": [
+        2804,
+        2295
+      ],
+      "crop": {
+        "left": 950,
+        "top": 930,
+        "width": 800,
+        "height": 550,
+        "nativePixelsOnly": true
+      },
+      "visualReview": "Sharp electric-blue and black spotted dyeing poison frog skin fills the crop.",
+      "outputDimensions": [
+        800,
+        550
+      ],
+      "bytes": {
+        "avif": 49719,
+        "webp": 72912
+      },
+      "changes": "cropped, resized to 800x550, converted to AVIF/WebP, metadata removed"
+    },
+    {
+      "category": "Insects",
+      "base": "/images/textures/insects-800",
+      "commonsTitle": "2021-08-16 - Peacock butterfly (Aglais io) - eyespot on forewing - colourful scales - DSG3404-1 (magnif. ratio 2.2x, HiRes focus stack).jpg",
+      "artist": "Franz van Duns",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source": "https://commons.wikimedia.org/wiki/File:2021-08-16_-_Peacock_butterfly_(Aglais_io)_-_eyespot_on_forewing_-_colourful_scales_-_DSG3404-1_(magnif._ratio_2.2x,_HiRes_focus_stack).jpg",
+      "sourceDimensions": [
+        9504,
+        6336
+      ],
+      "crop": {
+        "left": 5000,
+        "top": 2500,
+        "width": 1600,
+        "height": 1100,
+        "nativePixelsOnly": true
+      },
+      "visualReview": "Peacock butterfly forewing macro with coral, lilac, ivory and charcoal scales; wing outline and background excluded.",
+      "outputDimensions": [
+        800,
+        550
+      ],
+      "bytes": {
+        "avif": 47217,
+        "webp": 53856
+      },
+      "changes": "cropped, resized to 800x550, converted to AVIF/WebP, metadata removed"
+    }
+  ]
+}

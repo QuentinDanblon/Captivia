@@ -1,0 +1,428 @@
+{
+  "title": "Captivia six-category photo assets",
+  "verifiedAt": "2026-10-04",
+  "verification": "Each Wikimedia Commons file page was queried with the Commons API imageinfo endpoint; author, license and source dimensions recorded from returned metadata. Original photographs downloaded and manually inspected.",
+  "transform": {
+    "crop": "16:9 cover crop at center; no output exceeds source native width",
+    "metadata": "EXIF/IPTC metadata stripped from all derivatives",
+    "derivatives": "AVIF and WebP",
+    "maxVariantBytes": 153600,
+    "attribution": "Derivative photos need photographer and license credit. CC BY-SA sources require compatible share-alike licensing for derivative redistribution."
+  },
+  "categories": {
+    "mammals": {
+      "source": {
+        "file": "Dülmen, Hausdülmen, Golden Retriever -- 2022 -- 5945.jpg",
+        "filePage": "https://commons.wikimedia.org/wiki/File:D%C3%BClmen,_Hausd%C3%BClmen,_Golden_Retriever_--_2022_--_5945.jpg",
+        "downloadUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/D%C3%BClmen,_Hausd%C3%BClmen,_Golden_Retriever_--_2022_--_5945.jpg",
+        "author": "Dietmar Rabich",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "originalDimensions": {
+          "width": 4364,
+          "height": 3273
+        },
+        "downloadedOriginalBytes": 6921996,
+        "attributionText": "Dietmar Rabich / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      "crop": {
+        "aspectRatio": "16:9",
+        "position": "center",
+        "focalPoint": {
+          "x": 0.57,
+          "y": 0.52
+        },
+        "reviewNotes": "Ivory golden retriever portrait against a soft charcoal woodland background; eye and muzzle remain inside the wide crop."
+      },
+      "variants": [
+        {
+          "file": "/images/categories/mammals-640.avif",
+          "format": "avif",
+          "width": 640,
+          "height": 360,
+          "bytes": 7461
+        },
+        {
+          "file": "/images/categories/mammals-640.webp",
+          "format": "webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 14950
+        },
+        {
+          "file": "/images/categories/mammals-1200.avif",
+          "format": "avif",
+          "width": 1200,
+          "height": 675,
+          "bytes": 22541
+        },
+        {
+          "file": "/images/categories/mammals-1200.webp",
+          "format": "webp",
+          "width": 1200,
+          "height": 675,
+          "bytes": 46846
+        },
+        {
+          "file": "/images/categories/mammals-1600.avif",
+          "format": "avif",
+          "width": 1600,
+          "height": 900,
+          "bytes": 37903
+        },
+        {
+          "file": "/images/categories/mammals-1600.webp",
+          "format": "webp",
+          "width": 1600,
+          "height": 900,
+          "bytes": 81192
+        }
+      ]
+    },
+    "birds": {
+      "source": {
+        "file": "Ara ararauna qtl3.jpg",
+        "filePage": "https://commons.wikimedia.org/wiki/File:Ara_ararauna_qtl3.jpg",
+        "downloadUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Ara_ararauna_qtl3.jpg",
+        "author": "Quartl",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "originalDimensions": {
+          "width": 3824,
+          "height": 2760
+        },
+        "downloadedOriginalBytes": 6069475,
+        "attributionText": "Quartl / Wikimedia Commons / CC BY-SA 3.0"
+      },
+      "crop": {
+        "aspectRatio": "16:9",
+        "position": "center",
+        "focalPoint": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "reviewNotes": "Blue-and-yellow macaw close portrait on a pale neutral background; eye and beak fully visible."
+      },
+      "variants": [
+        {
+          "file": "/images/categories/birds-640.avif",
+          "format": "avif",
+          "width": 640,
+          "height": 360,
+          "bytes": 10685
+        },
+        {
+          "file": "/images/categories/birds-640.webp",
+          "format": "webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 22470
+        },
+        {
+          "file": "/images/categories/birds-1200.avif",
+          "format": "avif",
+          "width": 1200,
+          "height": 675,
+          "bytes": 33222
+        },
+        {
+          "file": "/images/categories/birds-1200.webp",
+          "format": "webp",
+          "width": 1200,
+          "height": 675,
+          "bytes": 81302
+        },
+        {
+          "file": "/images/categories/birds-1600.avif",
+          "format": "avif",
+          "width": 1600,
+          "height": 900,
+          "bytes": 58870
+        },
+        {
+          "file": "/images/categories/birds-1600.webp",
+          "format": "webp",
+          "width": 1600,
+          "height": 900,
+          "bytes": 149910
+        }
+      ]
+    },
+    "fish": {
+      "source": {
+        "file": "Betta-splendens-male.jpg",
+        "filePage": "https://commons.wikimedia.org/wiki/File:Betta-splendens-male.jpg",
+        "downloadUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Betta-splendens-male.jpg",
+        "author": "Denise Chan",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "originalDimensions": {
+          "width": 3456,
+          "height": 2592
+        },
+        "downloadedOriginalBytes": 5512383,
+        "attributionText": "Denise Chan / Wikimedia Commons / CC BY-SA 2.0"
+      },
+      "crop": {
+        "aspectRatio": "16:9",
+        "position": "center",
+        "focalPoint": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "reviewNotes": "Blue betta swimming among bright green aquarium plants; full fins and body visible."
+      },
+      "variants": [
+        {
+          "file": "/images/categories/fish-640.avif",
+          "format": "avif",
+          "width": 640,
+          "height": 360,
+          "bytes": 10987
+        },
+        {
+          "file": "/images/categories/fish-640.webp",
+          "format": "webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 18146
+        },
+        {
+          "file": "/images/categories/fish-1200.avif",
+          "format": "avif",
+          "width": 1200,
+          "height": 675,
+          "bytes": 24169
+        },
+        {
+          "file": "/images/categories/fish-1200.webp",
+          "format": "webp",
+          "width": 1200,
+          "height": 675,
+          "bytes": 41430
+        },
+        {
+          "file": "/images/categories/fish-1600.avif",
+          "format": "avif",
+          "width": 1600,
+          "height": 900,
+          "bytes": 34170
+        },
+        {
+          "file": "/images/categories/fish-1600.webp",
+          "format": "webp",
+          "width": 1600,
+          "height": 900,
+          "bytes": 62056
+        }
+      ]
+    },
+    "reptiles": {
+      "source": {
+        "file": "Panther chameleon (Furcifer pardalis) male Montagne d’Ambre 2.jpg",
+        "filePage": "https://commons.wikimedia.org/wiki/File:Panther_chameleon_(Furcifer_pardalis)_male_Montagne_d%E2%80%99Ambre_2.jpg",
+        "downloadUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Panther_chameleon_(Furcifer_pardalis)_male_Montagne_d%E2%80%99Ambre_2.jpg",
+        "author": "Charles J. Sharp",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "originalDimensions": {
+          "width": 4000,
+          "height": 3753
+        },
+        "downloadedOriginalBytes": 11946656,
+        "attributionText": "Charles J. Sharp / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      "crop": {
+        "aspectRatio": "16:9",
+        "position": "center",
+        "focalPoint": {
+          "x": 0.52,
+          "y": 0.48
+        },
+        "reviewNotes": "Green panther chameleon stretched along a branch against softly focused bark; eye and head visible, part of the curled tail falls outside the card crop."
+      },
+      "variants": [
+        {
+          "file": "/images/categories/reptiles-640.avif",
+          "format": "avif",
+          "width": 640,
+          "height": 360,
+          "bytes": 11486
+        },
+        {
+          "file": "/images/categories/reptiles-640.webp",
+          "format": "webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 23856
+        },
+        {
+          "file": "/images/categories/reptiles-1200.avif",
+          "format": "avif",
+          "width": 1200,
+          "height": 675,
+          "bytes": 33795
+        },
+        {
+          "file": "/images/categories/reptiles-1200.webp",
+          "format": "webp",
+          "width": 1200,
+          "height": 675,
+          "bytes": 92322
+        },
+        {
+          "file": "/images/categories/reptiles-1600.avif",
+          "format": "avif",
+          "width": 1600,
+          "height": 900,
+          "bytes": 55619
+        },
+        {
+          "file": "/images/categories/reptiles-1600.webp",
+          "format": "webp",
+          "width": 1600,
+          "height": 900,
+          "bytes": 117760
+        }
+      ]
+    },
+    "amphibians": {
+      "source": {
+        "file": "Red-eyed Leaf Frog (Agalychnis callidryas) (9362143274).jpg",
+        "filePage": "https://commons.wikimedia.org/wiki/File:Red-eyed_Leaf_Frog_(Agalychnis_callidryas)_(9362143274).jpg",
+        "downloadUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Red-eyed_Leaf_Frog_(Agalychnis_callidryas)_(9362143274).jpg",
+        "author": "Pavel Kirillov",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "originalDimensions": {
+          "width": 3725,
+          "height": 2828
+        },
+        "downloadedOriginalBytes": 1732052,
+        "attributionText": "Pavel Kirillov / Wikimedia Commons / CC BY-SA 2.0"
+      },
+      "crop": {
+        "aspectRatio": "16:9",
+        "position": "center",
+        "focalPoint": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "reviewNotes": "Bright green red-eyed leaf frog on a stem; red eye visible in wide crop."
+      },
+      "variants": [
+        {
+          "file": "/images/categories/amphibians-640.avif",
+          "format": "avif",
+          "width": 640,
+          "height": 360,
+          "bytes": 11039
+        },
+        {
+          "file": "/images/categories/amphibians-640.webp",
+          "format": "webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 27872
+        },
+        {
+          "file": "/images/categories/amphibians-1200.avif",
+          "format": "avif",
+          "width": 1200,
+          "height": 675,
+          "bytes": 33322
+        },
+        {
+          "file": "/images/categories/amphibians-1200.webp",
+          "format": "webp",
+          "width": 1200,
+          "height": 675,
+          "bytes": 81438
+        },
+        {
+          "file": "/images/categories/amphibians-1600.avif",
+          "format": "avif",
+          "width": 1600,
+          "height": 900,
+          "bytes": 49070
+        },
+        {
+          "file": "/images/categories/amphibians-1600.webp",
+          "format": "webp",
+          "width": 1600,
+          "height": 900,
+          "bytes": 126806
+        }
+      ]
+    },
+    "insects": {
+      "source": {
+        "file": "Monarch butterfly in BBG (84685).jpg",
+        "filePage": "https://commons.wikimedia.org/wiki/File:Monarch_butterfly_in_BBG_(84685).jpg",
+        "downloadUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Monarch_butterfly_in_BBG_(84685).jpg",
+        "author": "Rhododendrites",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "originalDimensions": {
+          "width": 4068,
+          "height": 2746
+        },
+        "downloadedOriginalBytes": 8758643,
+        "attributionText": "Rhododendrites / Wikimedia Commons / CC BY-SA 4.0"
+      },
+      "crop": {
+        "aspectRatio": "16:9",
+        "position": "center",
+        "focalPoint": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "reviewNotes": "Orange monarch butterfly perched on purple flowers against green foliage; both wings fully visible."
+      },
+      "variants": [
+        {
+          "file": "/images/categories/insects-640.avif",
+          "format": "avif",
+          "width": 640,
+          "height": 360,
+          "bytes": 12710
+        },
+        {
+          "file": "/images/categories/insects-640.webp",
+          "format": "webp",
+          "width": 640,
+          "height": 360,
+          "bytes": 24116
+        },
+        {
+          "file": "/images/categories/insects-1200.avif",
+          "format": "avif",
+          "width": 1200,
+          "height": 675,
+          "bytes": 30635
+        },
+        {
+          "file": "/images/categories/insects-1200.webp",
+          "format": "webp",
+          "width": 1200,
+          "height": 675,
+          "bytes": 59928
+        },
+        {
+          "file": "/images/categories/insects-1600.avif",
+          "format": "avif",
+          "width": 1600,
+          "height": 900,
+          "bytes": 48751
+        },
+        {
+          "file": "/images/categories/insects-1600.webp",
+          "format": "webp",
+          "width": 1600,
+          "height": 900,
+          "bytes": 95470
+        }
+      ]
+    }
+  }
+}

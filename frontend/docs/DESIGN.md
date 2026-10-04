@@ -644,3 +644,18 @@ une dimension minimale pour une espèce. Les accessoires peuvent être placés p
 sur la vue de dessus et sont repérés dans une légende ; aucune position n’est préremplie.
 Les recommandations numériques restent celles
 des fiches espèces sourcées, sans valeur générique de remplacement.
+
+### 10.13 — Catégories photographiques (ESP-02, 2026-10-04)
+
+À la demande du propriétaire, les six grandes catégories de l’onglet Espèces sont des cartes
+photographiques verticales. Cette évolution autorise, uniquement pour ces cartes, un dégradé
+de lisibilité sur la photo et une ombre diffuse avec légère élévation. Ces effets utilisent
+des jetons dédiés ; les polices, couleurs de navigation et deux rayons existants sont conservés.
+Les filtres « tout » et arachnides restent disponibles. Un appui affiche les résultats ; un
+glissement conserve le défilement vertical natif de la page, sans zone de défilement imbriquée.
+Les textures de fond proviennent de photographies libres de matières animales réelles,
+créditées. Une répétition par réflexion assure la continuité des bords sans dessiner de faux
+poils, plumes ou écailles. Le fond couvre le viewport ; les textes et résultats reposent sur
+des surfaces opaques. Les animations et le défilement animé respectent la réduction du mouvement.
+
+Les photos des six cartes sont exportées en 640/1200/1600 px, en 16:9 sans agrandissement. Les textures réelles sont recadrées en 800 × 550 px ; chaque variante AVIF/WebP reste sous 150 Ko. Les plumes roses, écailles vertes et peaux colorées donnent des fonds plus lumineux, dosés à 38 % en clair et 27 % en sombre.

@@ -62,6 +62,18 @@ export type PhotoKey =
   | 'sheep'
   | 'donkey'
   | 'africanHedgehog'
+  | 'categoryMammals'
+  | 'categoryBirds'
+  | 'categoryFish'
+  | 'categoryReptiles'
+  | 'categoryAmphibians'
+  | 'categoryInsects'
+  | 'textureFur'
+  | 'textureFeathers'
+  | 'textureFishScales'
+  | 'textureReptileScales'
+  | 'textureAmphibianSkin'
+  | 'textureInsectWing'
   | 'guideAquariumFilter'
   | 'guideNitrogenCycle'
   | 'mossForest'
@@ -79,17 +91,19 @@ export interface Photo {
   commonsTitle: string;
   credit: PhotoCredit;
   /** Modifications apportées (exigées par CC BY / CC BY-SA) : voir `PHOTO_CHANGES`. */
-  changes: 'crop' | 'soften' | 'resize';
+  changes: 'crop' | 'soften' | 'resize' | 'mirror';
 }
 
 /** Libellé des modifications, par langue de rédaction des pages légales (fr, sinon en). */
 export const PHOTO_CHANGES: Record<'fr' | 'en', Record<Photo['changes'], string>> = {
   fr: {
+    mirror: 'recadrée, redimensionnée, convertie en AVIF/WebP, métadonnées retirées ; répétée par réflexion pour le fond',
     crop: 'recadrée, redimensionnée, convertie en AVIF/WebP, métadonnées retirées',
     soften: 'recadrée, légèrement adoucie (texture de fond), redimensionnée, convertie en AVIF/WebP, métadonnées retirées',
     resize: 'redimensionnée, convertie en AVIF/WebP, fond blanc ajouté, métadonnées retirées',
   },
   en: {
+    mirror: 'cropped, resized, converted to AVIF/WebP, metadata removed; repeated by reflection for the background',
     crop: 'cropped, resized, converted to AVIF/WebP, metadata removed',
     soften: 'cropped, slightly softened (background texture), resized, converted to AVIF/WebP, metadata removed',
     resize: 'resized, converted to AVIF/WebP, white background added, metadata removed',
@@ -381,6 +395,54 @@ export const PHOTOS: Record<PhotoKey, Photo> = {
     base: '/images/animals/african-hedgehog', widths: [480, 800], ratio: 4 / 3,
     file: 'Atelerix albiventris in Spain.jpg',
     author: 'Nacaru', license: 'CC BY-SA 4.0',
+  }),
+  categoryMammals: photo({
+    base: '/images/categories/mammals', widths: [640, 1200, 1600], ratio: 16 / 9,
+    file: "Dülmen, Hausdülmen, Golden Retriever -- 2022 -- 5945.jpg", author: "Dietmar Rabich", license: "CC BY-SA 4.0",
+  }),
+  categoryBirds: photo({
+    base: '/images/categories/birds', widths: [640, 1200, 1600], ratio: 16 / 9,
+    file: "Ara ararauna qtl3.jpg", author: "Quartl", license: "CC BY-SA 3.0",
+  }),
+  categoryFish: photo({
+    base: '/images/categories/fish', widths: [640, 1200, 1600], ratio: 16 / 9,
+    file: "Betta-splendens-male.jpg", author: "Denise Chan", license: "CC BY-SA 2.0",
+  }),
+  categoryReptiles: photo({
+    base: '/images/categories/reptiles', widths: [640, 1200, 1600], ratio: 16 / 9,
+    file: "Panther chameleon (Furcifer pardalis) male Montagne d’Ambre 2.jpg", author: "Charles J. Sharp", license: "CC BY-SA 4.0",
+  }),
+  categoryAmphibians: photo({
+    base: '/images/categories/amphibians', widths: [640, 1200, 1600], ratio: 16 / 9,
+    file: "Red-eyed Leaf Frog (Agalychnis callidryas) (9362143274).jpg", author: "Pavel Kirillov", license: "CC BY-SA 2.0",
+  }),
+  categoryInsects: photo({
+    base: '/images/categories/insects', widths: [640, 1200, 1600], ratio: 16 / 9,
+    file: "Monarch butterfly in BBG (84685).jpg", author: "Rhododendrites", license: "CC BY-SA 4.0",
+  }),
+  textureFur: photo({
+    base: "/images/textures/mammals", widths: [800], ratio: 800 / 550,
+    file: "Greyhound fur brindle.jpg", author: "Scott Robinson from Rockville, MD, USA", license: "CC BY 2.0", changes: 'mirror',
+  }),
+  textureFeathers: photo({
+    base: "/images/textures/birds", widths: [800], ratio: 800 / 550,
+    file: "Flamingo-feathers-layered-texture-pink-minimal.jpg", author: "Marc-Julien-Photography", license: "CC BY-SA 4.0", changes: 'mirror',
+  }),
+  textureFishScales: photo({
+    base: '/images/textures/fish', widths: [800], ratio: 800 / 550,
+    file: "Erwin NFH rainbow trout scales 7 March 2022.png", author: "Ryan Hagerty/USFWS", license: 'Domaine public', changes: 'mirror',
+  }),
+  textureReptileScales: photo({
+    base: "/images/textures/reptiles", widths: [800], ratio: 800 / 550,
+    file: "Eye of Lizard (55203172463).jpg", author: "Willie Luker from USA", license: "CC BY 4.0", changes: 'mirror',
+  }),
+  textureInsectWing: photo({
+    base: "/images/textures/insects", widths: [800], ratio: 800 / 550,
+    file: "2021-08-16 - Peacock butterfly (Aglais io) - eyespot on forewing - colourful scales - DSG3404-1 (magnif. ratio 2.2x, HiRes focus stack).jpg", author: "Franz van Duns", license: "CC BY-SA 4.0", changes: 'mirror',
+  }),
+  textureAmphibianSkin: photo({
+    base: "/images/textures/amphibians", widths: [800], ratio: 800 / 550,
+    file: "Dendrobates tinctorius - Wilhelma.jpg", author: "H. Zell", license: "CC BY-SA 3.0", changes: 'mirror',
   }),
   guideAquariumFilter: photo({
     base: '/images/guides/aquarium-filter', widths: [480, 800, 1200], ratio: 370 / 236,

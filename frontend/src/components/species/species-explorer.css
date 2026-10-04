@@ -1,0 +1,42 @@
+.species-explorer {
+  position: relative;
+  isolation: isolate;
+  min-height: 100dvh;
+}
+.species-explorer__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--paper);
+}
+.species-explorer__texture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 320ms var(--ease);
+}
+.species-explorer__texture[data-active='true'] { opacity: var(--category-texture-opacity); }
+.species-explorer__surface {
+  padding: clamp(16px, 2.5vw, 24px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  min-width: 0;
+}
+.species-explorer__filters { display: flex; flex-wrap: wrap; gap: 12px; }
+.species-explorer__texture-credit {
+  margin: 0;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-radius: var(--radius-control);
+  color: var(--ink-2);
+  font-size: var(--text-meta);
+}
+.species-explorer__texture-credit a { color: var(--accent-text); text-decoration: underline; }
+.species-explorer__results { scroll-margin-top: 24px; }
+@media (prefers-reduced-motion: reduce) {
+  .species-explorer__texture { transition: none; }
+}
