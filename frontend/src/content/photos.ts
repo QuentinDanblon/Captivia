@@ -231,6 +231,7 @@ export type PhotoKey =
   | 'goliathTarantula'
   | 'grammostolaRosea'
   | 'caribbeanHermitCrab'
+  | 'giantWoodlouse'
   | 'dendrobatesAuratus'
   | 'dendrobatesAzureus'
   | 'edibleFrog'
