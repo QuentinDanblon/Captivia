@@ -659,3 +659,7 @@ poils, plumes ou écailles. Le fond couvre le viewport ; les textes et résultat
 des surfaces opaques. Les animations et le défilement animé respectent la réduction du mouvement.
 
 Les photos des six cartes sont exportées en 640/1200/1600 px, en 16:9 sans agrandissement. Les textures réelles sont recadrées en 800 × 550 px ; chaque variante AVIF/WebP reste sous 150 Ko. Les plumes roses, écailles vertes et peaux colorées donnent des fonds plus lumineux, dosés à 38 % en clair et 27 % en sombre.
+
+### 10.14 — Carrousel du site des catégories (ESP-03, 2026-10-04)
+
+Sur le site web, les six cartes d’espèces défilent horizontalement dans un carrousel natif avec repères d’accrochage légers. Les petites largeurs montrent la carte suivante pour signaler le défilement ; les grands écrans affichent plusieurs cartes. Le rail a un focus clavier visible, chaque carte garde son focus et son appui, le balayage horizontal ne choisit pas une catégorie et le balayage vertical fait défiler la page. En compilation mobile native, la même recherche garde sa liste verticale : le mode de build sélectionne explicitement le style et retire l’arrêt de tabulation du rail. Un navigateur de téléphone garde la présentation horizontale du site.

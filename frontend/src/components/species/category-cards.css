@@ -1,13 +1,48 @@
 .species-category-cards {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  padding: 1rem 0.5rem 2.25rem;
+  scroll-padding-inline: 0.5rem;
+  scroll-snap-type: x proximity;
+  scrollbar-color: var(--line-strong) transparent;
+  scrollbar-width: thin;
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.species-category-cards:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.species-category-cards--vertical {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1rem;
   width: min(100%, 34rem);
   margin-inline: auto;
+  overflow: visible;
+  padding: 0;
+  scroll-snap-type: none;
+  scrollbar-color: auto;
+  scrollbar-width: auto;
+  touch-action: auto;
 }
+
+.species-category-cards--vertical:focus-visible { outline: none; }
 
 .species-category-item {
   min-width: 0;
+  flex: 0 0 min(82%, 34rem);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 48rem) {
+  .species-category-item { flex-basis: min(46%, 34rem); }
 }
 
 .species-category-card {
@@ -25,7 +60,7 @@
   text-align: left;
   box-shadow: var(--category-photo-shadow);
   cursor: pointer;
-  touch-action: pan-y pinch-zoom;
+  touch-action: pan-x pan-y pinch-zoom;
   transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
 
