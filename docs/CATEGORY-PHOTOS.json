@@ -344,7 +344,7 @@
           "format": "avif",
           "width": 1600,
           "height": 900,
-          "bytes": 49070
+          "bytes": 52102
         },
         {
           "file": "/images/categories/amphibians-1600.webp",
@@ -385,42 +385,42 @@
           "format": "avif",
           "width": 640,
           "height": 360,
-          "bytes": 12710
+          "bytes": 13281
         },
         {
           "file": "/images/categories/insects-640.webp",
           "format": "webp",
           "width": 640,
           "height": 360,
-          "bytes": 24116
+          "bytes": 29904
         },
         {
           "file": "/images/categories/insects-1200.avif",
           "format": "avif",
           "width": 1200,
           "height": 675,
-          "bytes": 30635
+          "bytes": 32034
         },
         {
           "file": "/images/categories/insects-1200.webp",
           "format": "webp",
           "width": 1200,
           "height": 675,
-          "bytes": 59928
+          "bytes": 74714
         },
         {
           "file": "/images/categories/insects-1600.avif",
           "format": "avif",
           "width": 1600,
           "height": 900,
-          "bytes": 48751
+          "bytes": 50918
         },
         {
           "file": "/images/categories/insects-1600.webp",
           "format": "webp",
           "width": 1600,
           "height": 900,
-          "bytes": 95470
+          "bytes": 119372
         }
       ]
     }
